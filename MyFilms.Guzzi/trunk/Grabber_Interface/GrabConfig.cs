@@ -204,6 +204,12 @@ namespace Grabber_Interface
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param2;
           textboxSearchAkasRegex.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyAkasRegExp)._Value;
           break;
+        case 8: // Thumb
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndThumb)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Param2;
+          break;
 
         default:
           TextKeyStart.Text = "";
@@ -294,13 +300,20 @@ namespace Grabber_Interface
           {
             i = dataGridViewSearchResults.Rows.Add(); // add row for config
             dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
-            dataGridViewSearchResults.Rows[i].Cells[1].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Title;
-            dataGridViewSearchResults.Rows[i].Cells[2].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Year;
-            dataGridViewSearchResults.Rows[i].Cells[3].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Options;
-            dataGridViewSearchResults.Rows[i].Cells[4].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).ID;
-            dataGridViewSearchResults.Rows[i].Cells[5].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).URL;
-            dataGridViewSearchResults.Rows[i].Cells[6].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
-            dataGridViewSearchResults.Rows[i].Cells[7].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Akas;
+            // Image image = Image.FromFile(wurl.Thumb);
+            Image image = GrabUtil.GetImageFromUrl(((Grabber_URLClass.IMDBUrl)listUrl[0]).Thumb);
+            // Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+
+            //dataGridViewSearchResults.Rows[i].Cells[1].Style.Tag = "BLANK";
+            //dataGridViewSearchResults.Rows[i].Cells[1].Style.NullValue = null;
+            dataGridViewSearchResults.Rows[i].Cells[1].Value = image;
+            dataGridViewSearchResults.Rows[i].Cells[2].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Title;
+            dataGridViewSearchResults.Rows[i].Cells[3].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Year;
+            dataGridViewSearchResults.Rows[i].Cells[4].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Options;
+            dataGridViewSearchResults.Rows[i].Cells[5].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).ID;
+            dataGridViewSearchResults.Rows[i].Cells[6].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).URL;
+            dataGridViewSearchResults.Rows[i].Cells[7].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
+            dataGridViewSearchResults.Rows[i].Cells[8].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Akas;
           }
           
           if (dataGridViewSearchResults.Rows.Count > 0)
@@ -356,14 +369,15 @@ namespace Grabber_Interface
 
       textName.Text = xmlConf.find(xmlConf.listGen, TagName.DBName)._Value;
       textURLPrefix.Text = xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value;
-      try
-      {
-        textEncoding.Text = xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value;
-      }
-      catch (Exception)
-      {
-        textEncoding.Text = "";
-      }
+      try { textEncoding.Text = xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value; }
+      catch (Exception) { textEncoding.Text = ""; }
+      try { textLanguage.Text = xmlConf.find(xmlConf.listGen, TagName.Language)._Value; }
+      catch (Exception) { textLanguage.Text = ""; }
+      try { textVersion.Text = xmlConf.find(xmlConf.listGen, TagName.Version)._Value; }
+      catch (Exception) { textVersion.Text = ""; }
+      try { textType.Text = xmlConf.find(xmlConf.listGen, TagName.Type)._Value; }
+      catch (Exception) { textType.Text = ""; }
+
       TextURL.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
       textRedir.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1;
       textNextPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value;
@@ -481,14 +495,15 @@ namespace Grabber_Interface
     {
       xmlConf.find(xmlConf.listGen, TagName.DBName)._Value = textName.Text;
       xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value = textURLPrefix.Text;
-      try
-      {
-        xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value = textEncoding.Text;
-      }
-      catch (Exception)
-      {
-        
-      }
+      try { xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value = textEncoding.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Language)._Value = textLanguage.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Version)._Value = textVersion.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Type)._Value = textType.Text; }
+      catch (Exception) { }
+
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1 = textRedir.Text;
       xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value = textNextPage.Text;
@@ -664,13 +679,21 @@ namespace Grabber_Interface
         wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
         i = dataGridViewSearchResults.Rows.Add(); // add row for config
         dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
-        dataGridViewSearchResults.Rows[i].Cells[1].Value = wurl.Title;
-        dataGridViewSearchResults.Rows[i].Cells[2].Value = wurl.Year;
-        dataGridViewSearchResults.Rows[i].Cells[3].Value = wurl.Options;
-        dataGridViewSearchResults.Rows[i].Cells[4].Value = wurl.ID;
-        dataGridViewSearchResults.Rows[i].Cells[5].Value = wurl.URL;
-        dataGridViewSearchResults.Rows[i].Cells[6].Value = wurl.Director;
-        dataGridViewSearchResults.Rows[i].Cells[7].Value = wurl.Akas;
+
+        // Image image = Image.FromFile(wurl.Thumb);
+        Image image = GrabUtil.GetImageFromUrl(wurl.Thumb);
+        //Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+
+        // dataGridViewSearchResults.Rows[i].Cells[1].Style.Tag = "BLANK";
+        dataGridViewSearchResults.Rows[i].Cells[1].Style.NullValue = null;
+        dataGridViewSearchResults.Rows[i].Cells[1].Value = image;
+        dataGridViewSearchResults.Rows[i].Cells[2].Value = wurl.Title;
+        dataGridViewSearchResults.Rows[i].Cells[3].Value = wurl.Year;
+        dataGridViewSearchResults.Rows[i].Cells[4].Value = wurl.Options;
+        dataGridViewSearchResults.Rows[i].Cells[5].Value = wurl.ID;
+        dataGridViewSearchResults.Rows[i].Cells[6].Value = wurl.URL;
+        dataGridViewSearchResults.Rows[i].Cells[7].Value = wurl.Director;
+        dataGridViewSearchResults.Rows[i].Cells[8].Value = wurl.Akas;
         // dataGridViewSearchResults.Rows.Add(new object() { (i + 1).ToString(), wtitle, wyear, wmovieurl, distance });
       }
       if (dataGridViewSearchResults.Rows.Count > 0)
@@ -814,6 +837,9 @@ namespace Grabber_Interface
         case 7:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Value = TextKeyStart.Text;
           break;
+        case 8:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Value = TextKeyStart.Text;
+          break;
         default:
           TextKeyStart.Text = "";
           break;
@@ -856,6 +882,9 @@ namespace Grabber_Interface
           break;
         case 7:
           xmlConf.find(xmlConf.listSearch, TagName.KeyEndAkas)._Value = TextKeyStop.Text;
+          break;
+        case 8:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndThumb)._Value = TextKeyStop.Text;
           break;
         default:
           TextKeyStop.Text = "";
@@ -3112,6 +3141,9 @@ namespace Grabber_Interface
         case 7:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param1 = textReplace.Text;
           break;
+        case 8:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Param1 = textReplace.Text;
+          break;
         default:
           break;
 
@@ -3145,6 +3177,9 @@ namespace Grabber_Interface
           break;
         case 7:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param2 = textReplaceWith.Text;
+          break;
+        case 8:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Param2 = textReplaceWith.Text;
           break;
         default:
           break;
@@ -3672,6 +3707,9 @@ namespace Grabber_Interface
         textURLPrefix.Visible = false;
         label2.Visible = false;
         textName.Enabled = false;
+        textLanguage.Enabled = false;
+        textVersion.Enabled = false;
+        textType.Enabled = false;
         tabPageSearchPage.Enabled = false;
         tabPageDetailPage.Enabled = false;
         tabPageSearchPage.Visible = false;
@@ -3688,6 +3726,9 @@ namespace Grabber_Interface
         textURLPrefix.Visible = true;
         label2.Visible = true;
         textName.Enabled = true;
+        textLanguage.Enabled = true;
+        textVersion.Enabled = true;
+        textType.Enabled = true;
         tabPageSearchPage.Enabled = true;
         tabPageDetailPage.Enabled = true;
         tabPageSearchPage.Visible = true;

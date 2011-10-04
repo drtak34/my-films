@@ -304,7 +304,13 @@ public class TagName
   public static string DBName = "DBName";
   public static string URLPrefix = "URLPrefix";
   public static string URL = "URL";
+  public static string Language = "Language";                   // Added Language to filter grabber scripts in choice menus
+  public static string Type = "Type";                           // Added Type to filter grabber scripts in choice menus
+  public static string Version = "Version";                     // Added Version for future use
   public static string Encoding = "Encoding";                   // Added Encoding as override options for webpages not properly posting page encoding
+
+  public static string KeyStartThumb = "KeyStartThumb";         // Start / End Thumb for cover image in list result view
+  public static string KeyEndThumb = "KeyEndThumb";
   public static string KeyStartList = "KeyStartList";           // List
   public static string KeyEndList = "KeyEndList";
   public static string KeyNextPage = "KeyNextPage";             // Page
@@ -509,5 +515,63 @@ public class TagName
   public static string KeyGeneric3MaxItems = "KeyGeneric3MaxItems";
   public static string KeyGeneric3Language = "KeyGeneric3Language";
   public static string KeyGeneric3Page = "KeyGeneric3Page";
+
+// new added for extended scraping 2011-10-04
+
+      //<KeyStartLinkMultiPosters Param1="" Param2="" />
+      //<KeyEndLinkMultiPosters />
+      //<KeyLinkMultiPostersIndex />
+      //<KeyLinkMultiPostersPage />
+      //<KeyStartMultiPosters Param1="" Param2="" />
+      //<KeyEndMultiPosters />
+      //<KeyMultiPostersIndex />
+      //<KeyMultiPostersRegExp />
+      //<KeyMultiPostersMaxItems />
+      //<KeyMultiPostersLanguage />
+      //<KeyMultiPostersPage />
+      //<KeyStartLinkPhotos Param1="" Param2="" />
+      //<KeyEndLinkPhotos />
+      //<KeyLinkPhotosIndex />
+      //<KeyLinkPhotosPage />
+      //<KeyStartPhotos Param1="" Param2="" />
+      //<KeyEndPhotos />
+      //<KeyPhotosIndex />
+      //<KeyPhotosRegExp />
+      //<KeyPhotosMaxItems />
+      //<KeyPhotosLanguage />
+      //<KeyPhotosPage />
+      //<KeyStartLinkPersonImages Param1="" Param2="" />
+      //<KeyEndLinkPersonImages />
+      //<KeyLinkPersonImagesIndex />
+      //<KeyLinkPersonImagesPage />
+      //<KeyStartPersonImages Param1="" Param2="" />
+      //<KeyEndPersonImages />
+      //<KeyPersonImagesIndex />
+      //<KeyPersonImagesRegExp />
+      //<KeyPersonImagesMaxItems />
+      //<KeyPersonImagesLanguage />
+      //<KeyPersonImagesPage />
+      //<KeyStartLinkMultiFanart Param1="" Param2="" />
+      //<KeyEndLinkMultiFanart />
+      //<KeyLinkMultiFanartIndex />
+      //<KeyLinkMultiFanartPage />
+      //<KeyStartMultiFanart Param1="" Param2="" />
+      //<KeyEndMultiFanart />
+      //<KeyMultiFanartIndex />
+      //<KeyMultiFanartRegExp />
+      //<KeyMultiFanartMaxItems />
+      //<KeyMultiFanartLanguage />
+      //<KeyMultiFanartPage />
+      //<KeyStartLinkTrailer Param1="" Param2="" />
+      //<KeyEndLinkTrailer />
+      //<KeyLinkTrailerIndex />
+      //<KeyLinkTrailerPage />
+      //<KeyStartTrailer Param1="" Param2="" />
+      //<KeyEndTrailer />
+      //<KeyTrailerIndex />
+      //<KeyTrailerRegExp />
+      //<KeyTrailerMaxItems />
+      //<KeyTrailerLanguage />
+      //<KeyTrailerPage />
 }
 

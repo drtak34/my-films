@@ -30,8 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -152,14 +154,6 @@ namespace Grabber_Interface
           this.label9 = new System.Windows.Forms.Label();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.dataGridViewSearchResults = new System.Windows.Forms.DataGridView();
-          this.ResultColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn6 = new System.Windows.Forms.DataGridViewLinkColumn();
-          this.ResultColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.labelSearchAkasRegex = new System.Windows.Forms.Label();
           this.label_SearchMatches_Starttext = new System.Windows.Forms.Label();
@@ -195,6 +189,21 @@ namespace Grabber_Interface
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.Version_Label = new System.Windows.Forms.Label();
+          this.textLanguage = new System.Windows.Forms.TextBox();
+          this.textType = new System.Windows.Forms.TextBox();
+          this.textVersion = new System.Windows.Forms.TextBox();
+          this.lblLanguage = new System.Windows.Forms.Label();
+          this.lblType = new System.Windows.Forms.Label();
+          this.lblVersion = new System.Windows.Forms.Label();
+          this.ResultColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.Thumb = new System.Windows.Forms.DataGridViewImageColumn();
+          this.ResultColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn6 = new System.Windows.Forms.DataGridViewLinkColumn();
+          this.ResultColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -501,7 +510,8 @@ namespace Grabber_Interface
             resources.GetString("cb_Parameter.Items4"),
             resources.GetString("cb_Parameter.Items5"),
             resources.GetString("cb_Parameter.Items6"),
-            resources.GetString("cb_Parameter.Items7")});
+            resources.GetString("cb_Parameter.Items7"),
+            resources.GetString("cb_Parameter.Items8")});
           resources.ApplyResources(this.cb_Parameter, "cb_Parameter");
           this.cb_Parameter.Name = "cb_Parameter";
           this.toolTip1.SetToolTip(this.cb_Parameter, resources.GetString("cb_Parameter.ToolTip"));
@@ -1054,9 +1064,11 @@ namespace Grabber_Interface
           // tabPageSearchPage
           // 
           this.tabPageSearchPage.Controls.Add(this.label34);
+          this.tabPageSearchPage.Controls.Add(this.lblType);
           this.tabPageSearchPage.Controls.Add(this.textEncoding);
           this.tabPageSearchPage.Controls.Add(this.labelSearchPosition);
           this.tabPageSearchPage.Controls.Add(this.PositionSearch);
+          this.tabPageSearchPage.Controls.Add(this.textType);
           this.tabPageSearchPage.Controls.Add(this.groupBox6);
           this.tabPageSearchPage.Controls.Add(this.groupBox5);
           this.tabPageSearchPage.Controls.Add(this.buttonPrevParam1);
@@ -1186,6 +1198,7 @@ namespace Grabber_Interface
           this.dataGridViewSearchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dataGridViewSearchResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ResultColumn1,
+            this.Thumb,
             this.ResultColumn2,
             this.ResultColumn3,
             this.ResultColumn4,
@@ -1197,70 +1210,12 @@ namespace Grabber_Interface
           this.dataGridViewSearchResults.MultiSelect = false;
           this.dataGridViewSearchResults.Name = "dataGridViewSearchResults";
           this.dataGridViewSearchResults.RowHeadersVisible = false;
-          this.dataGridViewSearchResults.RowTemplate.Height = 15;
-          this.dataGridViewSearchResults.RowTemplate.ReadOnly = true;
-          this.dataGridViewSearchResults.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.dataGridViewSearchResults.RowTemplate.Height = 32;
+          this.dataGridViewSearchResults.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
           this.dataGridViewSearchResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
           this.dataGridViewSearchResults.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSearchResults_CellContentDoubleClick);
           this.dataGridViewSearchResults.SelectionChanged += new System.EventHandler(this.dataGridViewSearchResults_SelectionChanged);
           this.dataGridViewSearchResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSearchResults_CellContentClick);
-          // 
-          // ResultColumn1
-          // 
-          resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
-          this.ResultColumn1.Name = "ResultColumn1";
-          // 
-          // ResultColumn2
-          // 
-          this.ResultColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn2, "ResultColumn2");
-          this.ResultColumn2.Name = "ResultColumn2";
-          // 
-          // ResultColumn3
-          // 
-          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle1;
-          resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
-          this.ResultColumn3.Name = "ResultColumn3";
-          // 
-          // ResultColumn4
-          // 
-          this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle2;
-          resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
-          this.ResultColumn4.Name = "ResultColumn4";
-          // 
-          // ResultColumn5
-          // 
-          this.ResultColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn5, "ResultColumn5");
-          this.ResultColumn5.Name = "ResultColumn5";
-          // 
-          // ResultColumn6
-          // 
-          this.ResultColumn6.ActiveLinkColor = System.Drawing.SystemColors.Desktop;
-          this.ResultColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn6, "ResultColumn6");
-          this.ResultColumn6.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-          this.ResultColumn6.LinkColor = System.Drawing.SystemColors.AppWorkspace;
-          this.ResultColumn6.Name = "ResultColumn6";
-          this.ResultColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-          this.ResultColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-          this.ResultColumn6.TrackVisitedState = false;
-          // 
-          // ResultColumn7
-          // 
-          this.ResultColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn7, "ResultColumn7");
-          this.ResultColumn7.Name = "ResultColumn7";
-          // 
-          // ResultColumn8
-          // 
-          this.ResultColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn8, "ResultColumn8");
-          this.ResultColumn8.Name = "ResultColumn8";
-          this.ResultColumn8.ReadOnly = true;
           // 
           // groupBox1
           // 
@@ -1537,10 +1492,116 @@ namespace Grabber_Interface
           resources.ApplyResources(this.Version_Label, "Version_Label");
           this.Version_Label.Name = "Version_Label";
           // 
+          // textLanguage
+          // 
+          resources.ApplyResources(this.textLanguage, "textLanguage");
+          this.textLanguage.Name = "textLanguage";
+          this.toolTip1.SetToolTip(this.textLanguage, resources.GetString("textLanguage.ToolTip"));
+          // 
+          // textType
+          // 
+          resources.ApplyResources(this.textType, "textType");
+          this.textType.Name = "textType";
+          this.toolTip1.SetToolTip(this.textType, resources.GetString("textType.ToolTip"));
+          // 
+          // textVersion
+          // 
+          resources.ApplyResources(this.textVersion, "textVersion");
+          this.textVersion.Name = "textVersion";
+          this.toolTip1.SetToolTip(this.textVersion, resources.GetString("textVersion.ToolTip"));
+          // 
+          // lblLanguage
+          // 
+          resources.ApplyResources(this.lblLanguage, "lblLanguage");
+          this.lblLanguage.Name = "lblLanguage";
+          // 
+          // lblType
+          // 
+          resources.ApplyResources(this.lblType, "lblType");
+          this.lblType.Name = "lblType";
+          // 
+          // lblVersion
+          // 
+          resources.ApplyResources(this.lblVersion, "lblVersion");
+          this.lblVersion.Name = "lblVersion";
+          // 
+          // ResultColumn1
+          // 
+          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+          resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
+          this.ResultColumn1.Name = "ResultColumn1";
+          // 
+          // Thumb
+          // 
+          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle6.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle6.NullValue")));
+          dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle6;
+          resources.ApplyResources(this.Thumb, "Thumb");
+          this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+          this.Thumb.Name = "Thumb";
+          // 
+          // ResultColumn2
+          // 
+          this.ResultColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn2, "ResultColumn2");
+          this.ResultColumn2.Name = "ResultColumn2";
+          // 
+          // ResultColumn3
+          // 
+          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
+          resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
+          this.ResultColumn3.Name = "ResultColumn3";
+          // 
+          // ResultColumn4
+          // 
+          this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+          resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
+          this.ResultColumn4.Name = "ResultColumn4";
+          // 
+          // ResultColumn5
+          // 
+          this.ResultColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn5, "ResultColumn5");
+          this.ResultColumn5.Name = "ResultColumn5";
+          // 
+          // ResultColumn6
+          // 
+          this.ResultColumn6.ActiveLinkColor = System.Drawing.SystemColors.Desktop;
+          this.ResultColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn6, "ResultColumn6");
+          this.ResultColumn6.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+          this.ResultColumn6.LinkColor = System.Drawing.SystemColors.AppWorkspace;
+          this.ResultColumn6.Name = "ResultColumn6";
+          this.ResultColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.ResultColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          this.ResultColumn6.TrackVisitedState = false;
+          // 
+          // ResultColumn7
+          // 
+          this.ResultColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn7, "ResultColumn7");
+          this.ResultColumn7.Name = "ResultColumn7";
+          // 
+          // ResultColumn8
+          // 
+          this.ResultColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn8, "ResultColumn8");
+          this.ResultColumn8.Name = "ResultColumn8";
+          this.ResultColumn8.ReadOnly = true;
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+          this.Controls.Add(this.lblVersion);
+          this.Controls.Add(this.lblLanguage);
+          this.Controls.Add(this.textVersion);
+          this.Controls.Add(this.textLanguage);
           this.Controls.Add(this.Version_Label);
           this.Controls.Add(this.button_SaveAs);
           this.Controls.Add(this.buttonExpertMode);
@@ -1750,7 +1811,20 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridView dataGridViewSearchResults;
         private System.Windows.Forms.Label labelSearchPosition;
         private System.Windows.Forms.Label PositionSearch;
+        private System.Windows.Forms.Label Version_Label;
+        private System.Windows.Forms.Label labelSearchAkasRegex;
+        private System.Windows.Forms.TextBox textboxSearchAkasRegex;
+        private System.Windows.Forms.Button button_openMediafile;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox textEncoding;
+        private System.Windows.Forms.TextBox textLanguage;
+        private System.Windows.Forms.TextBox textType;
+        private System.Windows.Forms.TextBox textVersion;
+        private System.Windows.Forms.Label lblLanguage;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn Thumb;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn4;
@@ -1758,12 +1832,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewLinkColumn ResultColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn8;
-        private System.Windows.Forms.Label Version_Label;
-        private System.Windows.Forms.Label labelSearchAkasRegex;
-        private System.Windows.Forms.TextBox textboxSearchAkasRegex;
-        private System.Windows.Forms.Button button_openMediafile;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textEncoding;
 
     }
 }
