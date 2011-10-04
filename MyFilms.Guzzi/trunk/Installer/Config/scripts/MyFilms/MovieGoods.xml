@@ -3,8 +3,13 @@
   <Section>
     <DBName>MovieGoods</DBName>
     <URLPrefix>http://www.moviegoods.com</URLPrefix>
+    <Language />
+    <Type />
+    <Version />
     <Encoding />
     <URLSearch>
+      <KeyStartThumb Param1="" Param2="" />
+      <KeyEndThumb />
       <URL Param1="" Param2="">http:_x002F__x002F_www.moviegoods.com_x002F_search_x002F_search.asp_x003F_page_x003D__x0023_Page_x0023__x0026_keywords_x003D__x0023_Search_x0023__x0026_in_field_x003D__x0026_sort_by_field_x003D__x0026_display_type_x003D_List</URL>
       <KeyStartList Param1="" Param2="">Search_x0020_Results_x0020_for:</KeyStartList>
       <KeyEndList />
@@ -201,6 +206,61 @@
       <KeyGeneric3MaxItems />
       <KeyGeneric3Language />
       <KeyGeneric3Page />
+      <KeyStartLinkMultiPosters Param1="" Param2="" />
+      <KeyEndLinkMultiPosters />
+      <KeyLinkMultiPostersIndex />
+      <KeyLinkMultiPostersPage />
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
+      <KeyMultiPostersIndex />
+      <KeyMultiPostersRegExp />
+      <KeyMultiPostersMaxItems />
+      <KeyMultiPostersLanguage />
+      <KeyMultiPostersPage />
+      <KeyStartLinkPhotos Param1="" Param2="" />
+      <KeyEndLinkPhotos />
+      <KeyLinkPhotosIndex />
+      <KeyLinkPhotosPage />
+      <KeyStartPhotos Param1="" Param2="" />
+      <KeyEndPhotos />
+      <KeyPhotosIndex />
+      <KeyPhotosRegExp />
+      <KeyPhotosMaxItems />
+      <KeyPhotosLanguage />
+      <KeyPhotosPage />
+      <KeyStartLinkPersonImages Param1="" Param2="" />
+      <KeyEndLinkPersonImages />
+      <KeyLinkPersonImagesIndex />
+      <KeyLinkPersonImagesPage />
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
+      <KeyPersonImagesIndex />
+      <KeyPersonImagesRegExp />
+      <KeyPersonImagesMaxItems />
+      <KeyPersonImagesLanguage />
+      <KeyPersonImagesPage />
+      <KeyStartLinkMultiFanart Param1="" Param2="" />
+      <KeyEndLinkMultiFanart />
+      <KeyLinkMultiFanartIndex />
+      <KeyLinkMultiFanartPage />
+      <KeyStartMultiFanart Param1="" Param2="" />
+      <KeyEndMultiFanart />
+      <KeyMultiFanartIndex />
+      <KeyMultiFanartRegExp />
+      <KeyMultiFanartMaxItems />
+      <KeyMultiFanartLanguage />
+      <KeyMultiFanartPage />
+      <KeyStartLinkTrailer Param1="" Param2="" />
+      <KeyEndLinkTrailer />
+      <KeyLinkTrailerIndex />
+      <KeyLinkTrailerPage />
+      <KeyStartTrailer Param1="" Param2="" />
+      <KeyEndTrailer />
+      <KeyTrailerIndex />
+      <KeyTrailerRegExp />
+      <KeyTrailerMaxItems />
+      <KeyTrailerLanguage />
+      <KeyTrailerPage />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />

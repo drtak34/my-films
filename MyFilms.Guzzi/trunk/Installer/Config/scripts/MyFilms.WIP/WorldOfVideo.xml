@@ -3,7 +3,13 @@
   <Section>
     <DBName>WorldOfVideo (german)</DBName>
     <URLPrefix>http://www.world-of-video.de</URLPrefix>
+    <Language />
+    <Type />
+    <Version />
+    <Encoding />
     <URLSearch>
+      <KeyStartThumb Param1="" Param2="" />
+      <KeyEndThumb />
       <URL Param1="" Param2="">http:_x002F__x002F_www.world-of-video.de_x002F_Shop_x002F_Suchen_x003F_q_x003D__x0023_Search_x0023__x0026_kat_x003D_mt_x0025_3D1_x0026_sort_x003D_6_x0026_x_x003D_6_x0026_y_x003D_12_x0027_</URL>
       <KeyStartList Param1="" Param2="">Treffer</KeyStartList>
       <KeyEndList>Treffer_x0020_in_x0020_Schlagworte</KeyEndList>
@@ -198,6 +204,61 @@
       <KeyGeneric3MaxItems />
       <KeyGeneric3Language />
       <KeyGeneric3Page />
+      <KeyStartLinkMultiPosters Param1="" Param2="" />
+      <KeyEndLinkMultiPosters />
+      <KeyLinkMultiPostersIndex />
+      <KeyLinkMultiPostersPage />
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
+      <KeyMultiPostersIndex />
+      <KeyMultiPostersRegExp />
+      <KeyMultiPostersMaxItems />
+      <KeyMultiPostersLanguage />
+      <KeyMultiPostersPage />
+      <KeyStartLinkPhotos Param1="" Param2="" />
+      <KeyEndLinkPhotos />
+      <KeyLinkPhotosIndex />
+      <KeyLinkPhotosPage />
+      <KeyStartPhotos Param1="" Param2="" />
+      <KeyEndPhotos />
+      <KeyPhotosIndex />
+      <KeyPhotosRegExp />
+      <KeyPhotosMaxItems />
+      <KeyPhotosLanguage />
+      <KeyPhotosPage />
+      <KeyStartLinkPersonImages Param1="" Param2="" />
+      <KeyEndLinkPersonImages />
+      <KeyLinkPersonImagesIndex />
+      <KeyLinkPersonImagesPage />
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
+      <KeyPersonImagesIndex />
+      <KeyPersonImagesRegExp />
+      <KeyPersonImagesMaxItems />
+      <KeyPersonImagesLanguage />
+      <KeyPersonImagesPage />
+      <KeyStartLinkMultiFanart Param1="" Param2="" />
+      <KeyEndLinkMultiFanart />
+      <KeyLinkMultiFanartIndex />
+      <KeyLinkMultiFanartPage />
+      <KeyStartMultiFanart Param1="" Param2="" />
+      <KeyEndMultiFanart />
+      <KeyMultiFanartIndex />
+      <KeyMultiFanartRegExp />
+      <KeyMultiFanartMaxItems />
+      <KeyMultiFanartLanguage />
+      <KeyMultiFanartPage />
+      <KeyStartLinkTrailer Param1="" Param2="" />
+      <KeyEndLinkTrailer />
+      <KeyLinkTrailerIndex />
+      <KeyLinkTrailerPage />
+      <KeyStartTrailer Param1="" Param2="" />
+      <KeyEndTrailer />
+      <KeyTrailerIndex />
+      <KeyTrailerRegExp />
+      <KeyTrailerMaxItems />
+      <KeyTrailerLanguage />
+      <KeyTrailerPage />
     </Details>
   </Section>
 </Profile>

@@ -3,7 +3,13 @@
   <Section>
     <DBName>Cineol</DBName>
     <URLPrefix>http://www.cineol.net</URLPrefix>
+    <Language />
+    <Type />
+    <Version />
+    <Encoding />
     <URLSearch>
+      <KeyStartThumb Param1="" Param2="" />
+      <KeyEndThumb />
       <URL Param1="" Param2="">http:_x002F__x002F_www.cineol.net_x002F_multisearch.php_x003F_go_x003D_1_x0026_query_x003D__x0023_Search_x0023__x0026_searchby_x003D_titulo_x0026_orderby_x003D_titulo_x0026_orden_x003D_asc_x0026__x0026_page_x003D__x0023_Page_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x003C_h2_x003E_Resultados_x0020_de_x0020_la_x0020_bÃ_x00BA_squeda_x003C__x002F_h2_x003E_</KeyStartList>
       <KeyEndList>_x003C_div_x0020_class_x003D__x0022_paginacion_x0022__x0020_id_x003D__x0022_paginacion-bottom_x0022__x003E_</KeyEndList>
@@ -198,6 +204,61 @@
       <KeyGeneric3MaxItems />
       <KeyGeneric3Language />
       <KeyGeneric3Page />
+      <KeyStartLinkMultiPosters Param1="" Param2="" />
+      <KeyEndLinkMultiPosters />
+      <KeyLinkMultiPostersIndex />
+      <KeyLinkMultiPostersPage />
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
+      <KeyMultiPostersIndex />
+      <KeyMultiPostersRegExp />
+      <KeyMultiPostersMaxItems />
+      <KeyMultiPostersLanguage />
+      <KeyMultiPostersPage />
+      <KeyStartLinkPhotos Param1="" Param2="" />
+      <KeyEndLinkPhotos />
+      <KeyLinkPhotosIndex />
+      <KeyLinkPhotosPage />
+      <KeyStartPhotos Param1="" Param2="" />
+      <KeyEndPhotos />
+      <KeyPhotosIndex />
+      <KeyPhotosRegExp />
+      <KeyPhotosMaxItems />
+      <KeyPhotosLanguage />
+      <KeyPhotosPage />
+      <KeyStartLinkPersonImages Param1="" Param2="" />
+      <KeyEndLinkPersonImages />
+      <KeyLinkPersonImagesIndex />
+      <KeyLinkPersonImagesPage />
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
+      <KeyPersonImagesIndex />
+      <KeyPersonImagesRegExp />
+      <KeyPersonImagesMaxItems />
+      <KeyPersonImagesLanguage />
+      <KeyPersonImagesPage />
+      <KeyStartLinkMultiFanart Param1="" Param2="" />
+      <KeyEndLinkMultiFanart />
+      <KeyLinkMultiFanartIndex />
+      <KeyLinkMultiFanartPage />
+      <KeyStartMultiFanart Param1="" Param2="" />
+      <KeyEndMultiFanart />
+      <KeyMultiFanartIndex />
+      <KeyMultiFanartRegExp />
+      <KeyMultiFanartMaxItems />
+      <KeyMultiFanartLanguage />
+      <KeyMultiFanartPage />
+      <KeyStartLinkTrailer Param1="" Param2="" />
+      <KeyEndLinkTrailer />
+      <KeyLinkTrailerIndex />
+      <KeyLinkTrailerPage />
+      <KeyStartTrailer Param1="" Param2="" />
+      <KeyEndTrailer />
+      <KeyTrailerIndex />
+      <KeyTrailerRegExp />
+      <KeyTrailerMaxItems />
+      <KeyTrailerLanguage />
+      <KeyTrailerPage />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />

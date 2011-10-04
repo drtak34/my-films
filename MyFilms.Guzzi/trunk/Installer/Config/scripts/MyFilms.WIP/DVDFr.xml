@@ -3,8 +3,13 @@
   <Section>
     <DBName>DVDFr</DBName>
     <URLPrefix>www.dvdfr.com</URLPrefix>
+    <Language />
+    <Type />
+    <Version />
     <Encoding>windows-1252</Encoding>
     <URLSearch>
+      <KeyStartThumb Param1="" Param2="" />
+      <KeyEndThumb />
       <URL Param1="" Param2="">http:_x002F__x002F_www.dvdfr.com_x002F_search_x002F_multisearch.php_x003F_multiname_x003D__x0023_Search_x0023__x0026_amp_x003B_searchTitle_x003D_1_x0026_amp_x003B_searchPeople_x003D_1_x0026_amp_x003B_searchmode_x003D_AND_x0026_amp_x003B_x_x003D_0_x0026_amp_x003B_y_x003D_0_x0026_amp_x003B_page_x003D_1_x0026_page_x003D__x0023_Page_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x003C_div_x0020_class_x003D__x0022_pageSelector_x0022__x003E_</KeyStartList>
       <KeyEndList />
@@ -199,6 +204,61 @@
       <KeyGeneric3MaxItems />
       <KeyGeneric3Language />
       <KeyGeneric3Page />
+      <KeyStartLinkMultiPosters Param1="" Param2="" />
+      <KeyEndLinkMultiPosters />
+      <KeyLinkMultiPostersIndex />
+      <KeyLinkMultiPostersPage />
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
+      <KeyMultiPostersIndex />
+      <KeyMultiPostersRegExp />
+      <KeyMultiPostersMaxItems />
+      <KeyMultiPostersLanguage />
+      <KeyMultiPostersPage />
+      <KeyStartLinkPhotos Param1="" Param2="" />
+      <KeyEndLinkPhotos />
+      <KeyLinkPhotosIndex />
+      <KeyLinkPhotosPage />
+      <KeyStartPhotos Param1="" Param2="" />
+      <KeyEndPhotos />
+      <KeyPhotosIndex />
+      <KeyPhotosRegExp />
+      <KeyPhotosMaxItems />
+      <KeyPhotosLanguage />
+      <KeyPhotosPage />
+      <KeyStartLinkPersonImages Param1="" Param2="" />
+      <KeyEndLinkPersonImages />
+      <KeyLinkPersonImagesIndex />
+      <KeyLinkPersonImagesPage />
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
+      <KeyPersonImagesIndex />
+      <KeyPersonImagesRegExp />
+      <KeyPersonImagesMaxItems />
+      <KeyPersonImagesLanguage />
+      <KeyPersonImagesPage />
+      <KeyStartLinkMultiFanart Param1="" Param2="" />
+      <KeyEndLinkMultiFanart />
+      <KeyLinkMultiFanartIndex />
+      <KeyLinkMultiFanartPage />
+      <KeyStartMultiFanart Param1="" Param2="" />
+      <KeyEndMultiFanart />
+      <KeyMultiFanartIndex />
+      <KeyMultiFanartRegExp />
+      <KeyMultiFanartMaxItems />
+      <KeyMultiFanartLanguage />
+      <KeyMultiFanartPage />
+      <KeyStartLinkTrailer Param1="" Param2="" />
+      <KeyEndLinkTrailer />
+      <KeyLinkTrailerIndex />
+      <KeyLinkTrailerPage />
+      <KeyStartTrailer Param1="" Param2="" />
+      <KeyEndTrailer />
+      <KeyTrailerIndex />
+      <KeyTrailerRegExp />
+      <KeyTrailerMaxItems />
+      <KeyTrailerLanguage />
+      <KeyTrailerPage />
     </Details>
   </Section>
 </Profile>

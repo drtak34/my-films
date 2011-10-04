@@ -3,7 +3,13 @@
   <Section>
     <DBName>DVDEmpire</DBName>
     <URLPrefix>http://www.dvdempire.com/</URLPrefix>
+    <Language />
+    <Type />
+    <Version />
+    <Encoding />
     <URLSearch>
+      <KeyStartThumb Param1="" Param2="" />
+      <KeyEndThumb />
       <URL Param1="" Param2="">http:_x002F__x002F_www.dvdempire.com_x002F_Exec_x002F_v1_search_all.asp_x003F_string_x003D__x0023_Search_x0023__x0026_site_media_id_x003D_0_x0026_site_id_x003D_4_x0026_pp_x003D__x0026_used_x003D_0_x0026_search_refined_x003D_32</URL>
       <KeyStartList Param1="" Param2="">_x003C_table_x0020_width_x003D__x0027_100_x0025__x0027__x0020_border_x003D__x0027_0_x0027__x0020_cellspacing_x003D__x0027_0_x0027__x0020_cellpadding_x003D__x0027_0_x0027__x003E__x003C_tr_x003E__x003C_td_x0020_colspan_x003D__x0027_4_x0027__x003E_</KeyStartList>
       <KeyEndList>Next_x0020_Page</KeyEndList>
@@ -198,6 +204,61 @@
       <KeyGeneric3MaxItems />
       <KeyGeneric3Language />
       <KeyGeneric3Page />
+      <KeyStartLinkMultiPosters Param1="" Param2="" />
+      <KeyEndLinkMultiPosters />
+      <KeyLinkMultiPostersIndex />
+      <KeyLinkMultiPostersPage />
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
+      <KeyMultiPostersIndex />
+      <KeyMultiPostersRegExp />
+      <KeyMultiPostersMaxItems />
+      <KeyMultiPostersLanguage />
+      <KeyMultiPostersPage />
+      <KeyStartLinkPhotos Param1="" Param2="" />
+      <KeyEndLinkPhotos />
+      <KeyLinkPhotosIndex />
+      <KeyLinkPhotosPage />
+      <KeyStartPhotos Param1="" Param2="" />
+      <KeyEndPhotos />
+      <KeyPhotosIndex />
+      <KeyPhotosRegExp />
+      <KeyPhotosMaxItems />
+      <KeyPhotosLanguage />
+      <KeyPhotosPage />
+      <KeyStartLinkPersonImages Param1="" Param2="" />
+      <KeyEndLinkPersonImages />
+      <KeyLinkPersonImagesIndex />
+      <KeyLinkPersonImagesPage />
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
+      <KeyPersonImagesIndex />
+      <KeyPersonImagesRegExp />
+      <KeyPersonImagesMaxItems />
+      <KeyPersonImagesLanguage />
+      <KeyPersonImagesPage />
+      <KeyStartLinkMultiFanart Param1="" Param2="" />
+      <KeyEndLinkMultiFanart />
+      <KeyLinkMultiFanartIndex />
+      <KeyLinkMultiFanartPage />
+      <KeyStartMultiFanart Param1="" Param2="" />
+      <KeyEndMultiFanart />
+      <KeyMultiFanartIndex />
+      <KeyMultiFanartRegExp />
+      <KeyMultiFanartMaxItems />
+      <KeyMultiFanartLanguage />
+      <KeyMultiFanartPage />
+      <KeyStartLinkTrailer Param1="" Param2="" />
+      <KeyEndLinkTrailer />
+      <KeyLinkTrailerIndex />
+      <KeyLinkTrailerPage />
+      <KeyStartTrailer Param1="" Param2="" />
+      <KeyEndTrailer />
+      <KeyTrailerIndex />
+      <KeyTrailerRegExp />
+      <KeyTrailerMaxItems />
+      <KeyTrailerLanguage />
+      <KeyTrailerPage />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
