@@ -310,25 +310,37 @@ namespace Grabber_Interface
           listUrl.Add(new Grabber_URLClass.IMDBUrl(absoluteUri, TextSearch.Text + " (AutoRedirect)", null, null));
 
           dataGridViewSearchResults.Rows.Clear();
-
+          while (dataGridViewSearchResults.Rows.Count > 0)
+          {
+            dataGridViewSearchResults.Rows.RemoveAt(0);
+          }
           for (int i = 0; i < 1; i++) // only add 1 line ...
           {
-            i = dataGridViewSearchResults.Rows.Add(); // add row for config
-            dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
-            // Image image = Image.FromFile(wurl.Thumb);
-            Image image = GrabUtil.GetImageFromUrl(((Grabber_URLClass.IMDBUrl)listUrl[0]).Thumb);
-            // Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+            Grabber_URLClass.IMDBUrl singleUrl = (Grabber_URLClass.IMDBUrl)listUrl[i];
+            Image image = GrabUtil.GetImageFromUrl(singleUrl.Thumb); // Image image = Image.FromFile(wurl.Thumb); // Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+            dataGridViewSearchResults.Rows.Add(new object[] { (i + 1).ToString(), image, singleUrl.Title, singleUrl.Year, singleUrl.Options, singleUrl.ID, singleUrl.URL, singleUrl.Director, singleUrl.Akas });
+            
+            //row.Cells[0].Value = i;
+            //row.Cells[1].Value = image;
+            //row.Cells[2].Value = singleUrl.Title;
+            //row.Cells[3].Value = singleUrl.Year;
+            //row.Cells[4].Value = singleUrl.Options;
+            //row.Cells[5].Value = singleUrl.ID;
+            //row.Cells[6].Value = singleUrl.URL;
+            //row.Cells[7].Value = singleUrl.Director;
+            //row.Cells[8].Value = singleUrl.Akas;
 
-            //dataGridViewSearchResults.Rows[i].Cells[1].Style.Tag = "BLANK";
-            //dataGridViewSearchResults.Rows[i].Cells[1].Style.NullValue = null;
-            dataGridViewSearchResults.Rows[i].Cells[1].Value = image;
-            dataGridViewSearchResults.Rows[i].Cells[2].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Title;
-            dataGridViewSearchResults.Rows[i].Cells[3].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Year;
-            dataGridViewSearchResults.Rows[i].Cells[4].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Options;
-            dataGridViewSearchResults.Rows[i].Cells[5].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).ID;
-            dataGridViewSearchResults.Rows[i].Cells[6].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).URL;
-            dataGridViewSearchResults.Rows[i].Cells[7].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
-            dataGridViewSearchResults.Rows[i].Cells[8].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Akas;
+            //i = dataGridViewSearchResults.Rows.Add(row); // add row for config
+
+            //dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
+            //dataGridViewSearchResults.Rows[i].Cells[1].Value = image;
+            //dataGridViewSearchResults.Rows[i].Cells[2].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Title;
+            //dataGridViewSearchResults.Rows[i].Cells[3].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Year;
+            //dataGridViewSearchResults.Rows[i].Cells[4].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Options;
+            //dataGridViewSearchResults.Rows[i].Cells[5].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).ID;
+            //dataGridViewSearchResults.Rows[i].Cells[6].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).URL;
+            //dataGridViewSearchResults.Rows[i].Cells[7].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
+            //dataGridViewSearchResults.Rows[i].Cells[8].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Akas;
           }
           
           if (dataGridViewSearchResults.Rows.Count > 0)
@@ -691,25 +703,33 @@ namespace Grabber_Interface
 
       for (int i = 0; i < listUrl.Count; i++)
       {
+        //DataGridViewRow row = new DataGridViewRow();
+        //row.Cells[0].Value = i;
+        //row.Cells[1].Value = image;
+        //row.Cells[2].Value = wurl.Title;
+        //row.Cells[3].Value = wurl.Year;
+        //row.Cells[4].Value = wurl.Options;
+        //row.Cells[5].Value = wurl.ID;
+        //row.Cells[6].Value = wurl.URL;
+        //row.Cells[7].Value = wurl.Director;
+        //row.Cells[8].Value = wurl.Akas;
+        //i = dataGridViewSearchResults.Rows.Add(row); // add row for config
+
         wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
-        i = dataGridViewSearchResults.Rows.Add(); // add row for config
-        dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
+        Image image = GrabUtil.GetImageFromUrl(wurl.Thumb); // Image image = Image.FromFile(wurl.Thumb); // Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+        dataGridViewSearchResults.Rows.Add(new object[] { (i + 1).ToString(), image, wurl.Title, wurl.Year, wurl.Options, wurl.ID, wurl.URL, wurl.Director, wurl.Akas });
 
-        // Image image = Image.FromFile(wurl.Thumb);
-        Image image = GrabUtil.GetImageFromUrl(wurl.Thumb);
-        //Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
 
-        // dataGridViewSearchResults.Rows[i].Cells[1].Style.Tag = "BLANK";
-        dataGridViewSearchResults.Rows[i].Cells[1].Style.NullValue = null;
-        dataGridViewSearchResults.Rows[i].Cells[1].Value = image;
-        dataGridViewSearchResults.Rows[i].Cells[2].Value = wurl.Title;
-        dataGridViewSearchResults.Rows[i].Cells[3].Value = wurl.Year;
-        dataGridViewSearchResults.Rows[i].Cells[4].Value = wurl.Options;
-        dataGridViewSearchResults.Rows[i].Cells[5].Value = wurl.ID;
-        dataGridViewSearchResults.Rows[i].Cells[6].Value = wurl.URL;
-        dataGridViewSearchResults.Rows[i].Cells[7].Value = wurl.Director;
-        dataGridViewSearchResults.Rows[i].Cells[8].Value = wurl.Akas;
-        // dataGridViewSearchResults.Rows.Add(new object() { (i + 1).ToString(), wtitle, wyear, wmovieurl, distance });
+        //dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
+        //dataGridViewSearchResults.Rows[i].Cells[1].Style.NullValue = null;
+        //dataGridViewSearchResults.Rows[i].Cells[1].Value = image;
+        //dataGridViewSearchResults.Rows[i].Cells[2].Value = wurl.Title;
+        //dataGridViewSearchResults.Rows[i].Cells[3].Value = wurl.Year;
+        //dataGridViewSearchResults.Rows[i].Cells[4].Value = wurl.Options;
+        //dataGridViewSearchResults.Rows[i].Cells[5].Value = wurl.ID;
+        //dataGridViewSearchResults.Rows[i].Cells[6].Value = wurl.URL;
+        //dataGridViewSearchResults.Rows[i].Cells[7].Value = wurl.Director;
+        //dataGridViewSearchResults.Rows[i].Cells[8].Value = wurl.Akas;
       }
       if (dataGridViewSearchResults.Rows.Count > 0)
       {
@@ -946,7 +966,7 @@ namespace Grabber_Interface
         // i = textBody.Find(textBody.SelectedText, i + textBody.SelectedText.Length, RichTextBoxFinds.NoHighlight);
         i = GrabUtil.FindPosition(textBody.Text, textBody.SelectedText, i + iLength, ref iLength, true, false);
       }
-      label9.Text = nb.ToString() + " match found";
+      lblResultsFound.Text = nb.ToString() + " match found";
     }
 
 
