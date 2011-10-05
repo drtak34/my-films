@@ -51,18 +51,22 @@ Partial Class frmList
         Me.txtSource = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
         Me.lstOptionsExt = New System.Windows.Forms.DataGridView
-        Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Options = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
-        Me.Distance = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.btnSearchGoogle = New System.Windows.Forms.Button
         Me.ToolTipImportDialog = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnRenameAndCancel = New System.Windows.Forms.Button
         Me.txtSourceFull = New System.Windows.Forms.TextBox
         Me.txtSourceFullAllPath = New System.Windows.Forms.TextBox
+        Me.pbCoverPreview = New System.Windows.Forms.PictureBox
+        Me.Thumb = New System.Windows.Forms.DataGridViewImageColumn
+        Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Options = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.AKA = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
+        Me.Distance = New System.Windows.Forms.DataGridViewTextBoxColumn
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbCoverPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancel
@@ -273,6 +277,7 @@ Partial Class frmList
         '
         Me.lstOptionsExt.AllowUserToAddRows = False
         Me.lstOptionsExt.AllowUserToDeleteRows = False
+        Me.lstOptionsExt.AllowUserToOrderColumns = True
         Me.lstOptionsExt.AllowUserToResizeRows = False
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
@@ -280,12 +285,12 @@ Partial Class frmList
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstOptionsExt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.lstOptionsExt.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.lstOptionsExt.BackgroundColor = System.Drawing.SystemColors.Control
         Me.lstOptionsExt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lstOptionsExt.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.lstOptionsExt.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.lstOptionsExt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Title, Me.Year, Me.Options, Me.ID, Me.Weblink, Me.Distance})
+        Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Thumb, Me.Title, Me.Year, Me.Options, Me.AKA, Me.ID, Me.Weblink, Me.Distance})
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -305,73 +310,12 @@ Partial Class frmList
         Me.lstOptionsExt.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.lstOptionsExt.RowHeadersVisible = False
         Me.lstOptionsExt.RowHeadersWidth = 11
-        Me.lstOptionsExt.RowTemplate.Height = 16
+        Me.lstOptionsExt.RowTemplate.Height = 24
         Me.lstOptionsExt.RowTemplate.ReadOnly = True
         Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.lstOptionsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.lstOptionsExt.Size = New System.Drawing.Size(828, 266)
         Me.lstOptionsExt.TabIndex = 83
-        '
-        'Title
-        '
-        Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Title.FillWeight = 377.7473!
-        Me.Title.HeaderText = "Title"
-        Me.Title.Name = "Title"
-        Me.Title.ReadOnly = True
-        Me.Title.Width = 51
-        '
-        'Year
-        '
-        Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Year.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Year.HeaderText = "Year"
-        Me.Year.Name = "Year"
-        Me.Year.ReadOnly = True
-        Me.Year.Width = 53
-        '
-        'Options
-        '
-        Me.Options.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Options.HeaderText = "Options"
-        Me.Options.Name = "Options"
-        Me.Options.ReadOnly = True
-        Me.Options.Width = 67
-        '
-        'ID
-        '
-        Me.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        Me.ID.Width = 42
-        '
-        'Weblink
-        '
-        Me.Weblink.ActiveLinkColor = System.Drawing.Color.Black
-        Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray
-        Me.Weblink.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Weblink.FillWeight = 75.54945!
-        Me.Weblink.HeaderText = "Weblink"
-        Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.Weblink.LinkColor = System.Drawing.Color.Gray
-        Me.Weblink.Name = "Weblink"
-        Me.Weblink.ReadOnly = True
-        Me.Weblink.TrackVisitedState = False
-        '
-        'Distance
-        '
-        Me.Distance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Gray
-        Me.Distance.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Distance.HeaderText = "Dist"
-        Me.Distance.Name = "Distance"
-        Me.Distance.ReadOnly = True
-        Me.Distance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Distance.Width = 30
         '
         'btnSearchGoogle
         '
@@ -419,6 +363,96 @@ Partial Class frmList
         Me.txtSourceFullAllPath.TabIndex = 87
         Me.txtSourceFullAllPath.Visible = False
         '
+        'pbCoverPreview
+        '
+        Me.pbCoverPreview.ErrorImage = Global.AMCUpdater.My.Resources.Resources.film_reel_128x128
+        Me.pbCoverPreview.Location = New System.Drawing.Point(18, 6)
+        Me.pbCoverPreview.Margin = New System.Windows.Forms.Padding(2)
+        Me.pbCoverPreview.Name = "pbCoverPreview"
+        Me.pbCoverPreview.Size = New System.Drawing.Size(61, 73)
+        Me.pbCoverPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbCoverPreview.TabIndex = 88
+        Me.pbCoverPreview.TabStop = False
+        Me.pbCoverPreview.Visible = False
+        '
+        'Thumb
+        '
+        Me.Thumb.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.NullValue = Nothing
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Thumb.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Thumb.HeaderText = "Img"
+        Me.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.Thumb.MinimumWidth = 28
+        Me.Thumb.Name = "Thumb"
+        Me.Thumb.ReadOnly = True
+        Me.Thumb.Width = 28
+        '
+        'Title
+        '
+        Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Title.FillWeight = 377.7473!
+        Me.Title.HeaderText = "Title"
+        Me.Title.MinimumWidth = 150
+        Me.Title.Name = "Title"
+        Me.Title.ReadOnly = True
+        Me.Title.Width = 150
+        '
+        'Year
+        '
+        Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Year.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Year.HeaderText = "Year"
+        Me.Year.Name = "Year"
+        Me.Year.ReadOnly = True
+        Me.Year.Width = 53
+        '
+        'Options
+        '
+        Me.Options.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Options.HeaderText = "Options"
+        Me.Options.Name = "Options"
+        Me.Options.ReadOnly = True
+        Me.Options.Width = 67
+        '
+        'AKA
+        '
+        Me.AKA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.AKA.HeaderText = "AKA"
+        Me.AKA.MinimumWidth = 50
+        Me.AKA.Name = "AKA"
+        Me.AKA.ReadOnly = True
+        '
+        'ID
+        '
+        Me.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 42
+        '
+        'Weblink
+        '
+        Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Weblink.FillWeight = 50.0!
+        Me.Weblink.HeaderText = "Weblink"
+        Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.Weblink.MinimumWidth = 50
+        Me.Weblink.Name = "Weblink"
+        Me.Weblink.ReadOnly = True
+        '
+        'Distance
+        '
+        Me.Distance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Distance.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Distance.HeaderText = "Dist"
+        Me.Distance.Name = "Distance"
+        Me.Distance.ReadOnly = True
+        Me.Distance.Width = 49
+        '
         'frmList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -426,6 +460,7 @@ Partial Class frmList
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(856, 396)
         Me.ControlBox = False
+        Me.Controls.Add(Me.pbCoverPreview)
         Me.Controls.Add(Me.txtSourceFullAllPath)
         Me.Controls.Add(Me.txtSourceFull)
         Me.Controls.Add(Me.btnRenameAndCancel)
@@ -458,6 +493,7 @@ Partial Class frmList
         Me.Text = "Please select the correct entry"
         Me.ToolTipImportDialog.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbCoverPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -488,9 +524,12 @@ Partial Class frmList
     Friend WithEvents btnRenameAndCancel As System.Windows.Forms.Button
     Friend WithEvents txtSourceFull As System.Windows.Forms.TextBox
     Friend WithEvents txtSourceFullAllPath As System.Windows.Forms.TextBox
+    Friend WithEvents pbCoverPreview As System.Windows.Forms.PictureBox
+    Friend WithEvents Thumb As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Title As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Year As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Options As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AKA As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Distance As System.Windows.Forms.DataGridViewTextBoxColumn

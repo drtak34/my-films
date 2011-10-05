@@ -1,4 +1,5 @@
 Imports System.Windows.Forms
+Imports Grabber
 Imports MediaPortal.Configuration
 Imports Cornerstone.Tools
 
@@ -16,7 +17,7 @@ Public Class frmList
         btnSearchAgain.Enabled = False
         If txtSearchString.Text <> "" Then
             lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", "", "", "", ""})
+            lstOptionsExt.Rows.Add(New String() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
             'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
@@ -30,13 +31,14 @@ Public Class frmList
                     Else
                         distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
                     End If
-                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).ID, wurl.Item(i).URL, distance})
+                    Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wurl.Item(i).Thumb)
+                    lstOptionsExt.Rows.Add(New Object() {image, wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).Akas, wurl.Item(i).ID, wurl.Item(i).URL, distance})
                 Next
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
-                lstOptionsExt.Rows.Add(New String() {"No results found !", "", "", "", ""})
+                lstOptionsExt.Rows.Add(New Object() {Nothing, "No results found !", "", "", "", "", "", ""})
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
@@ -54,19 +56,21 @@ Public Class frmList
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
             lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", "", "", ""})
+            lstOptionsExt.Rows.Add(New Object() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
-                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).ID, wurl.Item(i).URL, ""})
+                    Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wurl.Item(i).Thumb)
+                    ' Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+                    lstOptionsExt.Rows.Add(New Object() {image, wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).Akas, wurl.Item(i).ID, wurl.Item(i).URL, ""})
                 Next
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
-                lstOptionsExt.Rows.Add(New String() {"No results found !", "", "", "", ""})
+                lstOptionsExt.Rows.Add(New Object() {Nothing, "No results found !", "", "", "", "", "", ""})
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
@@ -237,6 +241,42 @@ Public Class frmList
             End If
         Catch ex As Exception
         End Try
+    End Sub
+    Private Sub lstOptionsExt_CellMouseEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lstOptionsExt.CellMouseEnter
+        Try
+            'e.RowIndex, e.ColumnIndex
+            If Me.lstOptionsExt("Thumb", e.RowIndex).Value IsNot Nothing Then
+                Label3.Visible = False
+                Label4.Visible = False
+                Label5.Visible = False
+                pbCoverPreview.Visible = True
+                pbCoverPreview.Image = Me.lstOptionsExt("Thumb", e.RowIndex).Value
+            End If
+            If e.ColumnIndex = Me.lstOptionsExt.Columns("AKA").Index And Me.lstOptionsExt("AKA", e.RowIndex).Value IsNot Nothing Then
+                Dim TooltipMovieInfo As String = ""
+                Dim AkaTitles As String() = Me.lstOptionsExt("AKA", e.RowIndex).Value.Split(New Char() {"|"}, StringSplitOptions.RemoveEmptyEntries)
+                For Each AkaTitle As String In AkaTitles
+                    If TooltipMovieInfo.Length > 0 Then
+                        TooltipMovieInfo = TooltipMovieInfo + vbCrLf
+                    End If
+                    TooltipMovieInfo = TooltipMovieInfo + AkaTitle
+                Next
+                Me.lstOptionsExt("AKA", e.RowIndex).ToolTipText = TooltipMovieInfo
+                'Me.ToolTipImportDialog.ToolTipTitle = "Movie Details ..."
+                'Me.ToolTipImportDialog.Show(TooltipMovieInfo, Me.lstOptionsExt.Columns("AKA"))
+            Else
+                Me.lstOptionsExt("AKA", e.RowIndex).ToolTipText = ""
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub lstOptionsExt_CellMouseLeave(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lstOptionsExt.CellMouseLeave
+        Label3.Visible = True
+        Label4.Visible = True
+        Label5.Visible = True
+        pbCoverPreview.Visible = False
+        pbCoverPreview.Image = Nothing
+        'Me.ToolTipImportDialog.Hide(Me.lstOptionsExt.Columns("AKA"))
     End Sub
 
     Private Sub btnSearchGoogle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchGoogle.Click

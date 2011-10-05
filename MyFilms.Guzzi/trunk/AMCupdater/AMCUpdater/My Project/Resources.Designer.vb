@@ -67,6 +67,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property film_reel_128x128() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("film-reel-128x128", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property google_32() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("google_32", resourceCulture)

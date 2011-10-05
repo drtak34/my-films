@@ -295,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AMCUpdater.ico" />
+    <None Include="Resources\film-reel-128x128.png" />
     <None Include="app.config" />
     <None Include="Resources\google_32.png" />
   </ItemGroup>

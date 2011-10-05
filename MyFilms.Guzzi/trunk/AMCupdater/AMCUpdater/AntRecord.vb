@@ -530,11 +530,13 @@ Public Class AntRecord
                         End If
                         Exit While
                     Else
+                        Dim wThumb As String
                         Dim wtitle As String
                         Dim wdirector As String
                         Dim wmovieurl As String
                         Dim wyear As String
                         Dim wOptions As String
+                        Dim wAkas As String
                         Dim wID As String
                         Dim dyear As Double
                         Dim wimdb As String
@@ -651,7 +653,7 @@ Public Class AntRecord
                             frmList.txtSourceFullAllPath.Text = _AllFilesPath
                             frmList.txtSourceFull.Text = _FilePath
                             If (wurl.Count = 0) Then
-                                frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", "", "", "", ""})
+                                frmList.lstOptionsExt.Rows.Add(New String() {Nothing, "Movie not found...", "", "", "", "", "", ""})
                             Else
                                 ' index = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
                                 For i As Integer = 0 To wurl.Count - 1
@@ -660,9 +662,11 @@ Public Class AntRecord
                                     End If
                                 Next
                                 For i As Integer = 0 To wurl.Count - 1
+                                    wThumb = wurl.Item(i).Thumb.ToString
                                     wtitle = wurl.Item(i).Title.ToString
                                     wdirector = wurl.Item(i).Director.ToString
                                     wyear = wurl.Item(i).Year.ToString
+                                    wAkas = wurl.Item(i).Akas.ToString
                                     wID = wurl.Item(i).ID.ToString
                                     wOptions = wurl.Item(i).Options.ToString
                                     wmovieurl = wurl.Item(i).URL.ToString
@@ -679,10 +683,18 @@ Public Class AntRecord
                                     Else
                                         distance = FuzziDistance(SearchString, wtitle).ToString
                                     End If
+
+                                    'Dim img As DataGridViewImageColumn = New DataGridViewImageColumn()
+                                    Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wThumb)
+                                    'img.Image = image
+                                    ' Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
+                                    ' dataGridViewSearchResults.Rows[i].Cells[1].Style.Tag = "BLANK";
+                                    ' dataGridViewSearchResults.Rows[i].Cells[1].Style.NullValue = null;
+
                                     If wyear = _InternetSearchHintYear Then
-                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle & " - (+++ year match! +++)", wyear, wOptions, wID, wmovieurl, distance})
+                                        frmList.lstOptionsExt.Rows.Add(New Object() {image, wtitle & " - (+++ year match! +++)", wyear, wOptions, wAkas, wID, wmovieurl, distance})
                                     Else
-                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle, wyear, wOptions, wID, wmovieurl, distance})
+                                        frmList.lstOptionsExt.Rows.Add(New Object() {image, wtitle, wyear, wOptions, wAkas, wID, wmovieurl, distance})
                                     End If
                                 Next
                             End If
