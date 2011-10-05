@@ -2745,9 +2745,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (add)
                         {
                           string displayName = "";
-                          if (!string.IsNullOrEmpty(script.Name))
+                          if (!string.IsNullOrEmpty(script.DBName))
                           {
-                            displayName += script.Name;
+                            displayName += script.DBName;
                             if (!string.IsNullOrEmpty(script.Language))
                               displayName += " (" + script.Language + ")";
                           }
