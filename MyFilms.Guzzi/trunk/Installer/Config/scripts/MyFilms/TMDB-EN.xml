@@ -3,16 +3,16 @@
   <Section>
     <DBName>The Movie DB (en)</DBName>
     <URLPrefix />
-    <Language />
-    <Type />
-    <Version />
+    <Language>en</Language>
+    <Type>details|cover|multicovers|personimages|fanart</Type>
+    <Version>1.0</Version>
     <Encoding />
     <URLSearch>
-      <KeyStartThumb Param1="" Param2="" />
-      <KeyEndThumb />
+      <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x003C_image_x0020_type_x003D__x0022_poster_x0022__x0020_url_x003D__x0022_._x002A__x003F_cover._x002A__x003F__x003C_image_x0020_type_x003D__x0022_poster_x0022__x0020_url_x003D__x0022_</KeyStartThumb>
+      <KeyEndThumb>_x0022_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_api.themoviedb.org_x002F_2.1_x002F_Movie.search_x002F_en_x002F_xml_x002F_5b8fecd0c39786077bc5af07e56fee5e_x002F__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x003C_movies_x003E_</KeyStartList>
-      <KeyEndList />
+      <KeyEndList>_x003C__x002F_movies_x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
       <KeyNextPage />
@@ -210,12 +210,12 @@
       <KeyEndLinkMultiPosters />
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
-      <KeyStartMultiPosters Param1="" Param2="" />
-      <KeyEndMultiPosters />
+      <KeyStartMultiPosters Param1="_x0023_REGEX_x0023_" Param2="">_x003C_images_x003E_</KeyStartMultiPosters>
+      <KeyEndMultiPosters>_x003C__x002F_images_x003E_</KeyEndMultiPosters>
       <KeyMultiPostersIndex />
-      <KeyMultiPostersRegExp />
+      <KeyMultiPostersRegExp>_x003C_image_x0020_type_x003D__x0022_poster_x0022_._x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x0020_size_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
       <KeyMultiPostersMaxItems />
-      <KeyMultiPostersLanguage />
+      <KeyMultiPostersLanguage>mid</KeyMultiPostersLanguage>
       <KeyMultiPostersPage />
       <KeyStartLinkPhotos Param1="" Param2="" />
       <KeyEndLinkPhotos />
@@ -232,10 +232,10 @@
       <KeyEndLinkPersonImages />
       <KeyLinkPersonImagesIndex />
       <KeyLinkPersonImagesPage />
-      <KeyStartPersonImages Param1="" Param2="" />
-      <KeyEndPersonImages />
+      <KeyStartPersonImages Param1="_x0023_REGEX_x0023_" Param2="">_x003C_cast_x003E_</KeyStartPersonImages>
+      <KeyEndPersonImages>_x003C__x002F_cast_x003E_</KeyEndPersonImages>
       <KeyPersonImagesIndex />
-      <KeyPersonImagesRegExp />
+      <KeyPersonImagesRegExp>_x0023_MULTILINE_x0023_person_x0020_name_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_thumb_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyPersonImagesRegExp>
       <KeyPersonImagesMaxItems />
       <KeyPersonImagesLanguage />
       <KeyPersonImagesPage />
@@ -243,12 +243,12 @@
       <KeyEndLinkMultiFanart />
       <KeyLinkMultiFanartIndex />
       <KeyLinkMultiFanartPage />
-      <KeyStartMultiFanart Param1="" Param2="" />
-      <KeyEndMultiFanart />
+      <KeyStartMultiFanart Param1="_x0023_REGEX_x0023_" Param2="">_x003C_images_x003E_</KeyStartMultiFanart>
+      <KeyEndMultiFanart>_x003C__x002F_images_x003E_</KeyEndMultiFanart>
       <KeyMultiFanartIndex />
-      <KeyMultiFanartRegExp />
+      <KeyMultiFanartRegExp>_x003C_image_x0020_type_x003D__x0022_backdrop_x0022_._x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x0020_size_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiFanartRegExp>
       <KeyMultiFanartMaxItems />
-      <KeyMultiFanartLanguage />
+      <KeyMultiFanartLanguage>original</KeyMultiFanartLanguage>
       <KeyMultiFanartPage />
       <KeyStartLinkTrailer Param1="" Param2="" />
       <KeyEndLinkTrailer />
@@ -293,6 +293,16 @@
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_30 source="MultiPosters" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_31 source="Photos" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

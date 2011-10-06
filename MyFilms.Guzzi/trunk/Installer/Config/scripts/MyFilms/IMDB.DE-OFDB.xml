@@ -3,13 +3,13 @@
   <Section>
     <DBName>IMDB.DE with OFDB</DBName>
     <URLPrefix>http://www.imdb.de</URLPrefix>
-    <Language />
-    <Type />
-    <Version />
+    <Language>de</Language>
+    <Type>details|cover</Type>
+    <Version>1.0</Version>
     <Encoding />
     <URLSearch>
-      <KeyStartThumb Param1="" Param2="" />
-      <KeyEndThumb />
+      <KeyStartThumb Param1="" Param2="">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
+      <KeyEndThumb>_x0022_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.de_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_eistgesuchte.Titel_x007C_bereinstimmung</KeyStartList>
       <KeyEndList>_x0023_REGEX_x0023_Hinweise.zur</KeyEndList>
@@ -292,6 +292,16 @@
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_30 source="MultiPosters" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_31 source="Photos" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

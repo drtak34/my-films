@@ -3,20 +3,20 @@
   <Section>
     <DBName>MovieGoods</DBName>
     <URLPrefix>http://www.moviegoods.com</URLPrefix>
-    <Language />
-    <Type />
-    <Version />
+    <Language>all</Language>
+    <Type>cover|multicover</Type>
+    <Version>1.0</Version>
     <Encoding />
     <URLSearch>
-      <KeyStartThumb Param1="" Param2="" />
-      <KeyEndThumb />
+      <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023_IMG_x005C_sid._x002A__x003F_src_x003D__x0027_</KeyStartThumb>
+      <KeyEndThumb>_x0027_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_www.moviegoods.com_x002F_search_x002F_search.asp_x003F_page_x003D__x0023_Page_x0023__x0026_keywords_x003D__x0023_Search_x0023__x0026_in_field_x003D__x0026_sort_by_field_x003D__x0026_display_type_x003D_List</URL>
-      <KeyStartList Param1="" Param2="">Search_x0020_Results_x0020_for:</KeyStartList>
-      <KeyEndList />
+      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Search_x0020_Results_x0020_for:._x002A__x003F__x003C__x002F_TABLE_x003E_._x002A__x003F__x003C__x002F_TD_x003E__x003C__x002F_TR_x003E_</KeyStartList>
+      <KeyEndList>_x003C_div_x0020_class_x003D__x0022_footer_x0022__x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
       <KeyNextPage />
-      <KeyStartTitle Param1="" Param2="">_x0029__x003B__x0027__x003E__x003C_b_x003E_</KeyStartTitle>
+      <KeyStartTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0029__x003B__x0027__x003E__x003C_b_x003E_</KeyStartTitle>
       <KeyEndTitle>_x003C__x002F_b_x003E__x003C__x002F_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="" Param2="">_x003C_b_x003E_YEAR:</KeyStartYear>
@@ -25,7 +25,7 @@
       <KeyStartDirector Param1="" Param2="" />
       <KeyEndDirector />
       <KeyDirectorIndex />
-      <KeyStartLink Param1="" Param2="">_x003B__x0022__x003E__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
+      <KeyStartLink Param1="" Param2="">_x0023_REGEX_x0023__x003C_A_x0020_href_x003D__x0027_http:_x002F__x002F_www.moviegoods.com_x002F_movie_product.asp._x002A__x003F__x003B__x0022__x003E__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
       <KeyEndLink>_x0022_</KeyEndLink>
       <KeyLinkIndex />
       <KeyStartID Param1="" Param2="">_x0023_REGEX_x0023__x003B__x0022__x003E__x003C_a_x0020_href_x003D__x0022_._x002A__x003F_id_x003D_</KeyStartID>
@@ -34,8 +34,8 @@
       <KeyStartOptions Param1="" Param2="" />
       <KeyEndOptions />
       <KeyOptionsIndex />
-      <KeyStartAkas Param1="" Param2="" />
-      <KeyEndAkas />
+      <KeyStartAkas Param1="" Param2="">_x0023_REGEX_x0023__x005C__x0029__x003B__x0027__x003E__x003C_b_x003E_._x002A__x003F__x003C__x002F_b_x003E__x003C_br_x003E__x005C__x0028_</KeyStartAkas>
+      <KeyEndAkas>_x0029__x003C__x002F_b_x003E__x003C__x002F_</KeyEndAkas>
       <KeyAkasRegExp />
     </URLSearch>
     <Details>
@@ -210,12 +210,12 @@
       <KeyEndLinkMultiPosters />
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
-      <KeyStartMultiPosters Param1="" Param2="" />
-      <KeyEndMultiPosters />
+      <KeyStartMultiPosters Param1="_x0023_REGEX_x0023_1010" Param2="_x0031_020">_x0023_REGEX_x0023_alt_x003D__x0022_Browse_x0020_All_x0020_Poster._x002A__x003F__x003C__x002F_div_x003E_</KeyStartMultiPosters>
+      <KeyEndMultiPosters>_x003C__x002F_body_x003E_</KeyEndMultiPosters>
       <KeyMultiPostersIndex />
-      <KeyMultiPostersRegExp />
+      <KeyMultiPostersRegExp>_x003C_a_x0020_href_x003D__x0022__x002F_movie_product_static._x002A__x003F_src_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_alt_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
       <KeyMultiPostersMaxItems />
-      <KeyMultiPostersLanguage />
+      <KeyMultiPostersLanguage>German_x002C__x0020_11_x0020_x_x0020_17</KeyMultiPostersLanguage>
       <KeyMultiPostersPage />
       <KeyStartLinkPhotos Param1="" Param2="" />
       <KeyEndLinkPhotos />
@@ -293,6 +293,16 @@
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_30 source="MultiPosters" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_31 source="Photos" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

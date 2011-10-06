@@ -3,9 +3,9 @@
   <Section>
     <DBName>OFDB XML Gateway (german)</DBName>
     <URLPrefix>http://ofdbgw.home-of-root.de</URLPrefix>
-    <Language />
-    <Type />
-    <Version />
+    <Language>de</Language>
+    <Type>details|cover</Type>
+    <Version>1.0</Version>
     <Encoding />
     <URLSearch>
       <KeyStartThumb Param1="" Param2="" />
@@ -92,7 +92,7 @@
       <KeyWriterPage />
       <KeyWriterRegExp>name_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C_._x002A_</KeyWriterRegExp>
       <KeyWriterMaxItems>_x0039_99</KeyWriterMaxItems>
-      <KeyStartCredits Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_besetzung_x003E_</KeyStartCredits>
+      <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C_._x007B_3_x007D_" Param2="">_x003C_besetzung_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_besetzung_x003E_</KeyEndCredits>
       <KeyCreditsRegExp>name_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_name._x002A__x003F_rolle_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyCreditsRegExp>
       <KeyCreditsIndex />
@@ -293,6 +293,16 @@
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_30 source="MultiPosters" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_31 source="Photos" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

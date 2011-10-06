@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>FilmAffinity-ES</DBName>
+    <DBName>FilmAffinity</DBName>
     <URLPrefix />
-    <Language />
-    <Type />
-    <Version />
+    <Language>es</Language>
+    <Type>details|cover</Type>
+    <Version>1.0</Version>
     <Encoding />
     <URLSearch>
-      <KeyStartThumb Param1="" Param2="" />
-      <KeyEndThumb />
+      <KeyStartThumb Param1="_x002E_com" Param2="http:_x002F__x002F_pics.filmaffinity.com">src_x003D__x0022_http:_x002F__x002F_pics.filmaffinity</KeyStartThumb>
+      <KeyEndThumb>_x0022_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_www.filmaffinity.com_x002F_es_x002F_search.php_x003F_stext_x003D__x0023_Search_x0023__x0026_stype_x003D_title_x0026_from_x003D__x0023_Page_x0023_</URL>
       <KeyStartList Param1="" Param2="">resultados._x003C__x002F_b_x003E__x003C__x002F_td_x003E__x003C__x002F_tr_x003E__x000D__x000A_</KeyStartList>
       <KeyEndList>_x003C__x0021_--_x0020_Codigo_x0020_para_x0020_añadir_x0020_a_x0020_favoritos_x0020_--_x003E__x000D__x000A_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0030_</KeyStartPage>
       <KeyStepPage>_x0032_0</KeyStepPage>
       <KeyNextPage>_x003C_b_x003E_siguientes_x0020__x003E__x003E__x003C__x002F_b_x003E_</KeyNextPage>
-      <KeyStartTitle Param1="" Param2="">_x003C_table_x0020_width_x003D__x0022_100_x0025__x0022__x0020_border_x003D__x0022_0_x0022__x0020_cellpadding_x003D__x0022_1_x0022__x0020_cellspacing_x003D__x0022_0_x0022__x003E__x003C_tr_x003E__x003C_td_x003E_</KeyStartTitle>
-      <KeyEndTitle>_x003C__x002F_a_x003E__x003C__x002F_b_x003E_</KeyEndTitle>
+      <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023_src_x003D__x0022_http:_x002F__x002F_pics.filmaffinity._x002A__x003F__x003C_table_x0020_width_x003D__x0022_100_x0025__x0022__x0020_border_x003D__x0022_0_x0022__x0020_cellpadding_x003D__x0022_1_x0022__x0020_cellspacing_x003D__x0022_0_x0022__x003E__x003C_tr_x003E__x003C_td_x003E_</KeyStartTitle>
+      <KeyEndTitle>_x0023_REGEX_x0023__x005C__x0028__x007C__x003C__x002F_a_x003E__x003C__x002F_b_x003E_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="" Param2="">_x003C__x002F_a_x003E__x003C__x002F_b_x003E__x0009__x0028_</KeyStartYear>
       <KeyEndYear>_x0029_</KeyEndYear>
@@ -30,8 +30,8 @@
       <KeyLinkIndex />
       <KeyStartID Param1="" Param2="" />
       <KeyEndID />
-      <KeyStartOptions Param1="" Param2="" />
-      <KeyEndOptions />
+      <KeyStartOptions Param1="_x0023_REGEX_x0023__x005C_d" Param2="">_x0023_REGEX_x0023_src_x003D__x0022_http:_x002F__x002F_pics.filmaffinity._x002A__x003F__x005C__x0028_</KeyStartOptions>
+      <KeyEndOptions>_x0029_</KeyEndOptions>
       <KeyStartAkas Param1="" Param2="" />
       <KeyEndAkas />
       <KeyAkasRegExp />
@@ -96,7 +96,7 @@
       <KeyCreditsRegExp />
       <KeyCreditsPage />
       <KeyCreditsMaxItems />
-      <KeyCreditsGrabActorRoles />
+      <KeyCreditsGrabActorRoles>false</KeyCreditsGrabActorRoles>
       <KeyStartCountry Param1="" Param2="">title_x003D__x0022_</KeyStartCountry>
       <KeyEndCountry>_x0022_</KeyEndCountry>
       <KeyCountryIndex />
@@ -291,6 +291,16 @@
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_30 source="MultiPosters" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_31 source="Photos" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

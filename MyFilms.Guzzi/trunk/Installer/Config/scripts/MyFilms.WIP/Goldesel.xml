@@ -68,7 +68,7 @@
       <KeyRate2Index />
       <KeyRate2Page />
       <BaseRating />
-      <KeyStartSyn Param1="" Param2="">Beschreibung_x003C__x002F_div_x003E_</KeyStartSyn>
+      <KeyStartSyn Param1="_x0023_REGEX_x0023__x003C_br_x0020__x002F__x003E_" Param2="">Beschreibung_x003C__x002F_div_x003E_</KeyStartSyn>
       <KeyEndSyn>_x003C__x002F_div_x003E__x003C__x002F_div_x003E__x003C_</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
