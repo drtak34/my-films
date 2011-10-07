@@ -1171,6 +1171,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798783)); // 
                     choiceViewMenu.Add("trakt-AddToWatchedListMovies");
 
+                    dlgmenu.Add(GUILocalizeStrings.Get()); // 
+                    choiceViewMenu.Add("trakt-AddRemoveMovieInUserlist");
+
                     dlgmenu.Add(GUILocalizeStrings.Get(10798782)); // Shouts
                     choiceViewMenu.Add("trakt-Shouts");
 
@@ -1221,6 +1224,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
                 }
 
+                break;
+
+              case "trakt-AddRemoveMovieInUserlist":
+                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                {
+                  TraktAddRemoveMovieInUserlist(MyFilms.currentMovie, false);
+                }
+                else
+                {
+                  this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+                }
                 break;
 
               case "trakt-Shouts":
@@ -2053,11 +2067,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TraktAddToWatchedList(MFMovie movie)
         {
-        new Thread(delegate()
+          new Thread(delegate()
+          {
+            TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
+            TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
+          }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
+        }
+
+        private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
         {
-          TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
-          TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
-        }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
+          new Thread(delegate()
+          {
+            TraktPlugin.TraktHelper.AddRemoveMovieInUserList(movie.Title, movie.Year.ToString(), movie.IMDBNumber, remove);
+
+          }) { Name = "MyFilms-TraktAddRemoveMovieInUserlist", IsBackground = true }.Start();
         }
 
         private static MFMovie GetMovieFromRecord(DataRow sr)
