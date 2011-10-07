@@ -466,11 +466,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Boolreturn = false;
                     Boolselect = true;
                     Wselectedlabel = StrViewDfltText;
-                    //if (LoadParams != null && !string.IsNullOrEmpty(LoadParams.Layout) && (LoadParams.Layout == "0" || LoadParams.Layout == "1" || LoadParams.Layout == "2" || LoadParams.Layout == "3" || LoadParams.Layout == "4"))
-                    //{
-                    //  StrLayOut = int.Parse(LoadParams.Layout);
-                    //}
-                    //else 
+                    if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))  
                       StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
                     
                     if (wDfltSort != "(none)" && wDfltSort.Length > 0)
