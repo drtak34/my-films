@@ -259,7 +259,7 @@ Public Class frmList
                     If TooltipMovieInfo.Length > 0 Then
                         TooltipMovieInfo = TooltipMovieInfo + vbCrLf
                     End If
-                    TooltipMovieInfo = TooltipMovieInfo + AkaTitle
+                    TooltipMovieInfo = TooltipMovieInfo + AkaTitle.Trim
                 Next
                 Me.lstOptionsExt("AKA", e.RowIndex).ToolTipText = TooltipMovieInfo
                 'Me.ToolTipImportDialog.ToolTipTitle = "Movie Details ..."
