@@ -94,7 +94,15 @@ namespace MyFilmsPlugin.MyFilms
               using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                   LogMyFilms.Debug("initData()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+
+                  foreach (DataTable dataTable in data.Tables)
+                    dataTable.BeginLoadData();
+
                   data.ReadXml(fs);
+
+                  foreach (DataTable dataTable in data.Tables)
+                    dataTable.EndLoadData();
+                
                   fs.Close();
                   LogMyFilms.Debug("initData()- closing  '" + catalogfile + "' FileStream");
                 }
@@ -124,8 +132,19 @@ namespace MyFilmsPlugin.MyFilms
             using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("initData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+
+              foreach (DataTable dataTable in myfilmsdata.Tables)
+                dataTable.BeginLoadData();
               myfilmsdata.ReadXml(fs);
+              foreach (DataTable dataTable in myfilmsdata.Tables)
+                dataTable.EndLoadData();
+
+              foreach (DataTable dataTable in data.Tables)
+                dataTable.BeginLoadData();
               data.ReadXml(fs);
+              foreach (DataTable dataTable in data.Tables)
+                dataTable.EndLoadData(); 
+
               // ... change data here, if intended ...
               // fs.SetLength(0);
               // data.WriteXml(fs);
@@ -265,7 +284,15 @@ namespace MyFilmsPlugin.MyFilms
             using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("LoadMyFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+
+              foreach (DataTable dataTable in data.Tables)
+                dataTable.BeginLoadData();
+
               data.ReadXml(fs);
+
+              foreach (DataTable dataTable in data.Tables)
+                dataTable.EndLoadData(); 
+
               fs.Close();
               LogMyFilms.Debug("LoadMyFilms()- closing  '" + catalogfile + "' FileStream");
             }
@@ -295,7 +322,15 @@ namespace MyFilmsPlugin.MyFilms
             using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("LoadMyFilmsData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+
+              foreach (DataTable dataTable in myfilmsdata.Tables)
+                dataTable.BeginLoadData();
+
               myfilmsdata.ReadXml(fs);
+
+              foreach (DataTable dataTable in myfilmsdata.Tables)
+                dataTable.EndLoadData();              
+
               fs.Close();
               LogMyFilms.Debug("LoadMyFilmsData()- closing  '" + datafile + "' FileStream");
             }
@@ -483,7 +518,15 @@ namespace MyFilmsPlugin.MyFilms
                 using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                   LogMyFilms.Debug("LoadMyFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+
+                  foreach (DataTable dataTable in data.Tables)
+                    dataTable.BeginLoadData();
+
                   data.ReadXml(fs);
+
+                  foreach (DataTable dataTable in data.Tables)
+                    dataTable.EndLoadData();
+
                   fs.Close();
                   LogMyFilms.Debug("LoadMyFilms()- closing  '" + catalogfile + "' FileStream");
                 }
@@ -1524,7 +1567,12 @@ namespace MyFilmsPlugin.MyFilms
               using (FileStream fs = new FileStream(Catalog, FileMode.Open, FileAccess.Read, FileShare.Read))
               {
                 //LogMyFilms.Debug("Commit() - opening '" + Catalog + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+
+                foreach (DataTable dataTable in dataImport.Tables)
+                  dataTable.BeginLoadData();
                 dataImport.ReadXml(fs);
+                foreach (DataTable dataTable in dataImport.Tables)
+                  dataTable.EndLoadData(); 
                 fs.Close();
                 //LogMyFilms.Debug("Commit()- closing  '" + Catalog + "' FileStream");
               }
