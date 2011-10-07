@@ -1171,7 +1171,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798783)); // 
                     choiceViewMenu.Add("trakt-AddToWatchedListMovies");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get()); // 
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798785)); // 
                     choiceViewMenu.Add("trakt-AddRemoveMovieInUserlist");
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798782)); // Shouts

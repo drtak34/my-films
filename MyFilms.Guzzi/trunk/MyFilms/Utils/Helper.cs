@@ -630,6 +630,54 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
         #endregion
+
+
+        public static bool IsFileUsedbyAnotherProcess(string filename)
+        {
+          bool inUse = true;
+          try
+          {
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+              if (fs.CanRead)
+              {
+                fs.Close();
+                inUse = false;
+              }
+            }
+
+            // File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read); // this could also be used ?
+          }
+          catch (System.IO.IOException exp)
+          {
+            LogMyFilms.Debug("IsFileUsedbyAnotherProcess() - cannot open file: '" + exp.Message + "'");
+            return true;
+          }
+          return inUse;
+        }
+
+        static bool FileInUse(string path)
+        {
+          try
+          {
+            //Just opening the file as open/create
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+              //If required we can check for read/write by using fs.CanRead or fs.CanWrite
+            }
+            return false;
+          }
+          catch (IOException ex)
+          {
+            //check if message is for a File IO
+            string __message = ex.Message.ToString();
+            if (__message.Contains("The process cannot access the file"))
+              return true;
+            else
+              throw;
+          }
+        }
     }
+
 }
 

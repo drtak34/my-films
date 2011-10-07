@@ -272,6 +272,11 @@ namespace MyFilmsPlugin.MyFilms
             throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
           }
 
+          // return, if readlock already present
+          LogMyFilms.Debug("LoadMyFilms()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
+          //if (_dataLock.CurrentReadCount > 0) // might be opened by API as well, so count can be 2+
+          //  return;
+
           _dataLock.EnterReadLock();
           data = new AntMovieCatalog();
 

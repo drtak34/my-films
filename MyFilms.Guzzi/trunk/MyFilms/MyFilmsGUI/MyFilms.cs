@@ -8813,35 +8813,56 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     
       private void FSwatcherChanged(object source, FileSystemEventArgs e)
       {
+        if (FSwatcher.EnableRaisingEvents == false) // ignore event, if notification is switched off
+          return;
         FSwatcher.EnableRaisingEvents = false;
+        LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
 
         Thread.Sleep(250);
         //FileInfo objFileInfo = new FileInfo(e.FullPath);
         //if (!objFileInfo.Exists) 
         //  return; // ignore the file changed event
 
-        LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
+        bool success = false; // result of try open for read
+        int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+        int i = 0;
 
-        if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
+        while (!success && i < maxretries)
         {
-          // load dataset
-          BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
-          // (re)populate films
-          r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+          success = !Helper.IsFileUsedbyAnotherProcess(conf.StrFileXml);
+          i += 1;
+          if (!success) LogMyFilms.Info("FSwatcherChanged() - Attempt '" + i + "'to open Movie Database in read mode unsuccessful, waiting for next retry");
+          Thread.Sleep(1000);
+          }
+
+        if (success)
+        {
+          if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
+          {
+            // load dataset
+            BaseMesFilms.LoadMyFilms(conf.StrFileXml);
+            MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
+            // (re)populate films
+            r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+          }
+          else
+          {
+            // alternatively RefreshFacade() to be called to also update facade (only when main window is active)
+            Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+          }
+
+          // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
+          FSwatcher.EnableRaisingEvents = true;
+          if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+          {
+            ImportComplete();
+            LogMyFilms.Debug("FSwatcherChanged(): Fired 'ImportCompleted' event to trigger sync to trakt page after reloading database content !");
+          }
         }
         else
         {
-          // alternatively RefreshFacade() to be called to also update facade (only when main window is active)
-          Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-        }
-
-        // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
-        FSwatcher.EnableRaisingEvents = true;
-        if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
-        {
-          ImportComplete();
-          LogMyFilms.Debug("FSwatcherChanged(): Fired 'ImportCompleted' event to trigger sync to trakt page after reloading database content !");
+          LogMyFilms.Debug(
+            "FSwatcherChanged(): Reloading data not possible - cannot open file for reading ! No Update of dataset done.");
         }
       }
 
