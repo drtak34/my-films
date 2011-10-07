@@ -60,7 +60,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
 
   using Action = MediaPortal.GUI.Library.Action;
-  using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
+  // using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
 
 
