@@ -1,4 +1,4 @@
-﻿namespace MyFilmsPlugin.MyFilms
+﻿namespace MyFilmsPlugin
 {
   // using System.Data;
 
