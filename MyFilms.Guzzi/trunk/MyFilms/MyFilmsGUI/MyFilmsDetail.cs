@@ -2960,6 +2960,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         wurl = (Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
                         grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, true, grabtype);
+                        break;
                     }
                     if (dlg.SelectedLabel > listUrl.Count)
                     {
