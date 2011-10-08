@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>kino.de</DBName>
+    <DBName>Kino.de</DBName>
     <URLPrefix>http://www.kino.de</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>

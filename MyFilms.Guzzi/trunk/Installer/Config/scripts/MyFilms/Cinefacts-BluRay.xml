@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>Cinefacts (german)</DBName>
+    <DBName>Cinefacts (BD)</DBName>
     <URLPrefix />
     <Language>de</Language>
     <Type>details|cover</Type>

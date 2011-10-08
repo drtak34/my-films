@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>The Movie DB (en)</DBName>
+    <DBName>The Movie DB</DBName>
     <URLPrefix />
     <Language>en</Language>
     <Type>details|cover|multicovers|personimages|fanart</Type>

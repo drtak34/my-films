@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>The Movie DB (fr)</DBName>
+    <DBName>The Movie DB</DBName>
     <URLPrefix />
-    <Language />
-    <Type />
-    <Version />
+    <Language>fr</Language>
+    <Type>details|cover</Type>
+    <Version>1.0</Version>
     <Encoding />
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x003C_image_x0020_type_x003D__x0022_poster_x0022__x0020_url_x003D__x0022_._x002A__x003F_cover._x002A__x003F__x003C_image_x0020_type_x003D__x0022_poster_x0022__x0020_url_x003D__x0022_</KeyStartThumb>

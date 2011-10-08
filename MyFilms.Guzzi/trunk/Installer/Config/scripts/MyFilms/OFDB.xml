@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>OFDB.DE</DBName>
+    <DBName>OFDB</DBName>
     <URLPrefix>http://www.ofdb.de/</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
