@@ -251,7 +251,7 @@
     <String id="10798726">Előzetes keresése az összes filmhez (helyben)</String>
     <String id="10798727">NAS Szerver állapota</String>
     <String id="10798728">Borító készítése a filmből</String>
-    <String id="10798730">Film adatok betöltése (.nfo fájl, helyben)</String>
+    <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Személy adatai (IMDB)</String>
     <String id="10798732">Tulajdonság kijelölése frissítéshez ...</String>
     <String id="10798733">Kicseréled a jelenlegi borítót erre?</String>

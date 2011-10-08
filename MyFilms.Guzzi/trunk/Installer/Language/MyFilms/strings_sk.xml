@@ -243,7 +243,7 @@
     <String id="10798726">Hľadať Trailer - všetky filmy (miestne)</String>
     <String id="10798727">Zobraziť NAS Server status</String>
     <String id="10798728">Vytvoriť obal z filmu</String>
-    <String id="10798730">Nahrať info pre filmy (. NFO súbor, miestne)</String>
+    <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Osoba info (IMDB)</String>
     <String id="10798732">Vyberte vlastnosť pre aktualizáciu</String>
     <String id="10798733">Nahradiť existujúci obal za tento?</String>

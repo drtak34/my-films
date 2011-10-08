@@ -6242,7 +6242,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrIndex = facadeView.SelectedListItem.ItemId;
           conf.StrTIndex = facadeView.SelectedListItem.Label;
 
-          MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath);
+          MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All);
           //Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;

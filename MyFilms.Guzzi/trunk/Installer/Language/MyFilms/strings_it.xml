@@ -251,7 +251,7 @@
     <String id="10798726">Ricerca trailers - tutti i films (locale)</String>
     <String id="10798727">Mostra Stato Server NAS</String>
     <String id="10798728">Crea Copertina dal film</String>
-    <String id="10798730">Carica info films (.nfo file, locale)</String>
+    <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Informazioni Persone (IMDB)</String>
     <String id="10798732">Scegli proprietà per aggiornamento ...</String>
     <String id="10798733">Sostituire Copertina esistente con questa?</String>

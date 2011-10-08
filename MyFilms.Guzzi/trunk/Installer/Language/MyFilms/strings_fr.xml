@@ -256,7 +256,7 @@ Mise à jour des données du film par la propriété</String>
     <String id="10798726">Recherche des Bandes Annonces - tous les films (local)</String>
     <String id="10798727">Montrer le status du serveur Nas</String>
     <String id="10798728">Créer la vignette du film</String>
-    <String id="10798730">Load films info (.nfo file, local)</String>
+    <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Person info (IMDB)</String>
     <String id="10798732">Choisir les propriétés pour la mise à jour ...</String>
     <String id="10798733">Remplacer la vignette existante par celle-ci?</String>

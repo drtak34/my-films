@@ -251,7 +251,7 @@
     <String id="10798726">Search trailers - all films (local)</String>
     <String id="10798727">Show NAS Server status</String>
     <String id="10798728">Create cover from film</String>
-    <String id="10798730">Load films info (.nfo file, local)</String>
+    <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Person info (IMDB)</String>
     <String id="10798732">Choose property for update ...</String>
     <String id="10798733">Replace existing cover with this one?</String>

@@ -251,7 +251,7 @@
     <String id="10798726">Buscar trailers - Todas las películas (local)</String>
     <String id="10798727">Mostrar estado del servidor NAS</String>
     <String id="10798728">Crear carátula desde la película</String>
-    <String id="10798730">Cargar info (archivo .nfo, local)</String>
+    <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Información sobre la persona (IMDB)</String>
     <String id="10798732">Choose property for update ...</String>
     <String id="10798733">Replace existing cover with this one?</String>
