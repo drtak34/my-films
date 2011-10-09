@@ -1112,16 +1112,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("selectcover");
                     }
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798766)); // Load single Cover ...
-                    choiceViewMenu.Add("loadcover");
+                    if (ExtendedStartmode("Details context: Download Single Cover"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798766)); // Load single Cover ...
+                      choiceViewMenu.Add("loadcover");
+                    }
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798764)); // Load Covers ...
-                    choiceViewMenu.Add("loadmulticover");
+                    if (ExtendedStartmode("Details context: Download Multi Covers"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798764)); // Load Covers ...
+                      choiceViewMenu.Add("loadmulticover");
+                    }
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
                     choiceViewMenu.Add("tmdbposter");
 
-                    if (ExtendedStartmode("Details context: Thumb creator (and fanart creator?)"))
+                    if (ExtendedStartmode("Details context: Thumb creator)"))
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798728));
                       //Create Thumb from movie - if no cover available, e.g. with documentaries
