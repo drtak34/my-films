@@ -278,6 +278,10 @@
     <String id="10798755">Technikai adatok</String>
     <String id="10798761">Borító letöltése (TMDB)</String>
     <String id="10798762">Borító csere</String>
+    <String id="10798763">Choose Cover</String>
+    <String id="10798764">Load Covers ...</String>
+    <String id="10798765">*** Show All ***</String>
+    <String id="10798766">Load single Cover ...</String>
     <String id="10798770">Csak elérhető filmek megjelenítése: ({0})</String>
     <String id="10798771">Megjelenítendő mezők beállítása ...</String>
     <String id="10798772">Mező kiválasztása ...</String>
