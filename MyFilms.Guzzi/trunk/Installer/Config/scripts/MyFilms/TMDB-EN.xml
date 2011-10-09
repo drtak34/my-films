@@ -213,7 +213,7 @@
       <KeyStartMultiPosters Param1="_x0023_REGEX_x0023_" Param2="">_x003C_images_x003E_</KeyStartMultiPosters>
       <KeyEndMultiPosters>_x003C__x002F_images_x003E_</KeyEndMultiPosters>
       <KeyMultiPostersIndex />
-      <KeyMultiPostersRegExp>_x003C_image_x0020_type_x003D__x0022_poster_x0022_._x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x0020_size_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
+      <KeyMultiPostersRegExp>_x003C_image_x0020_type_x003D__x0022_poster_x0022_.url_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x0020_size_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
       <KeyMultiPostersMaxItems />
       <KeyMultiPostersLanguage>mid</KeyMultiPostersLanguage>
       <KeyMultiPostersPage />

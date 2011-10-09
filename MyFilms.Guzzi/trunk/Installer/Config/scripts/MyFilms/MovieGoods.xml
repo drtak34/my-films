@@ -4,7 +4,7 @@
     <DBName>MovieGoods</DBName>
     <URLPrefix>http://www.moviegoods.com</URLPrefix>
     <Language>all</Language>
-    <Type>cover|multicover</Type>
+    <Type>cover|multicovers</Type>
     <Version>1.0</Version>
     <Encoding />
     <URLSearch>
