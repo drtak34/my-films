@@ -7,6 +7,17 @@
 	<define>#header.background:hover_Films.png</define>
 	<animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
 	<controls>
+    <!-- MyFilms -->
+    <settings>
+      	<skininterfaceversion>
+	    <version>
+        	<major>1</major>
+          	<minor>0</minor>
+          	<build>0</build>
+          	<revision>0</revision>
+	    </version>
+	</skininterfaceversion>
+    </settings>
 		<import>common.window.background.xml</import>
     <control>
       <description>Dummy Label for Films View</description>

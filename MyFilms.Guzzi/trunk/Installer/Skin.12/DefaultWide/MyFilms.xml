@@ -6,10 +6,17 @@
 	<allowoverlay>player.hasmedia+!facadeview.filmstrip+!facadeview.coverflow</allowoverlay>
 	 <controls>
 
-    	  <!-- MyFilms -->
-    	  <settings>
-      		<skininterfaceversion>1.0</skininterfaceversion>
-    	  </settings>
+    <!-- MyFilms -->
+    <settings>
+      	<skininterfaceversion>
+	    <version>
+        	<major>1</major>
+          	<minor>0</minor>
+          	<build>0</build>
+          	<revision>0</revision>
+	    </version>
+	</skininterfaceversion>
+    </settings>
 
 	  <!-- <import>common.time.xml</import> -->
     	 <control>

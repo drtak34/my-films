@@ -10198,8 +10198,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           int VersionMajor = 0;
           int VersionMinor = 0;
+          int VersionBuild = 0;
+          int VersionRevision = 0;
           currentSkin = Skin;
-          bool success = GetSkinInterfaceVersion(ref VersionMajor, ref VersionMinor);
+          bool success = GetSkinInterfaceVersion(ref VersionMajor, ref VersionMinor, ref VersionBuild, ref VersionRevision);
           if (success)
           {
             LogMyFilms.Info("OnPageLoad(): Current Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
@@ -10219,12 +10221,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor)
+      private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor, ref int VersionBuild, ref int VersionRevision)
       {
-      string _version = "";
-      bool success = false;
+      string _versionMajor = "";
+      string _versionMinor = "";
+      string _versionBuild = "";
+      string _versionRevision = "";
+      bool success = true;
       VersionMajor = 0;
       VersionMinor = 0;
+      VersionBuild = 0;
+      VersionRevision = 0;
       string _name = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
       XmlDocument doc = new XmlDocument();
       try
@@ -10241,11 +10248,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlNode settingsNode = controlsNode.SelectSingleNode("settings");
             if (settingsNode != null)
             {
-              XmlNode versionNode = settingsNode.SelectSingleNode("skininterfaceversion");
-              if (versionNode != null)
+              XmlNode skininterfaceversionNode = settingsNode.SelectSingleNode("skininterfaceversion");
+              if (skininterfaceversionNode != null)
               {
-                _version = versionNode.InnerText;
-                success = true;
+                XmlNode versionNode = settingsNode.SelectSingleNode("version");
+                if (versionNode != null)
+                {
+                  XmlNode majorVersionNode = settingsNode.SelectSingleNode("major");
+                  if (majorVersionNode != null)
+                    _versionMajor = majorVersionNode.InnerText;
+                  XmlNode minorVersionNode = settingsNode.SelectSingleNode("minor");
+                  if (minorVersionNode != null)
+                    _versionMinor = minorVersionNode.InnerText;
+                  XmlNode buildVersionNode = settingsNode.SelectSingleNode("build");
+                  if (buildVersionNode != null)
+                    _versionBuild = buildVersionNode.InnerText;
+                  XmlNode revisionVersionNode = settingsNode.SelectSingleNode("revision");
+                  if (revisionVersionNode != null)
+                    _versionRevision = revisionVersionNode.InnerText;
+                }
               }
             }
           }
@@ -10254,19 +10275,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       catch (Exception ex)
       {
         LogMyFilms.Debug("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "' - exception: " + ex.Message + ", Stacktrace: " + ex.StackTrace);
-        _version = "";
+        _versionMajor = "";
+        _versionMinor = "";
+        _versionBuild = "";
+        _versionRevision = "";
         VersionMajor = 0;
         VersionMinor = 0;
+        VersionBuild = 0;
+        VersionRevision = 0;
+        success = false;
       }
       finally
       {
         doc = null;
       }
       if (!success) return false;
-      success = int.TryParse(_version.Substring(0, _version.IndexOf(".")).Trim(), out VersionMajor);
+      success = int.TryParse(_versionMajor.Trim(), out VersionMajor);
       if (!success) return false;
-      success = int.TryParse(_version.Substring(_version.IndexOf(".") + 1).Trim(), out VersionMinor);
+      success = int.TryParse(_versionMinor.Trim(), out VersionMinor);
       if (!success) return false;
+      success = int.TryParse(_versionBuild.Trim(), out VersionBuild);
+      success = int.TryParse(_versionRevision.Trim(), out VersionRevision);
       return true;
     }
 
