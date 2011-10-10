@@ -325,13 +325,40 @@ namespace MyFilmsPlugin.MyFilms.Utils {
 
 
         /// <summary>
+        /// Returns true, if all strings or delimited parts of checkExpressions are contained in input
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool ContainsAll(string input, string checkExpression, string delimiter)
+        {
+          if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(checkExpression)) 
+            return false;
+          if (input.ToLower().Contains(checkExpression.ToLower())) 
+            return true;
+          if (!string.IsNullOrEmpty(delimiter) && delimiter.Length > 0 && checkExpression.Contains(delimiter))
+          {
+            string[] split = checkExpression.Split(new string[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+            bool matches = true;
+            foreach (string s in split)
+            {
+              if (!input.ToLower().Contains(s.ToLower())) 
+                matches = false;
+            }
+            return matches;
+            return false;
+          }
+        }
+
+    /// <summary>
         /// Removes multiple spaces and replaces them with one space   
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string trimSpaces(string input) {
-            return Regex.Replace(input, @"\s{2,}", " ").Trim();
+        public static string trimSpaces(string input)
+        {
+          return Regex.Replace(input, @"\s{2,}", " ").Trim();
         }
+
 
         #endregion
 
@@ -866,6 +893,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
       }
       return strText;
     }
+
     #endregion
 
   }

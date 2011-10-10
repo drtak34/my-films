@@ -8016,24 +8016,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     foreach (string directoryfound in directories)
                     {
                         LogMyFilms.Debug("(TrailersearchLocal) - Directory found to check matching: '" + directoryfound + "'");
-                        if ((!string.IsNullOrEmpty(titlename) && directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
+                        // check for directories with title name
+                        // if ((!string.IsNullOrEmpty(titlename) && directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
+                        if (Utility.ContainsAll(directoryfound, titlename, ":") || Utility.ContainsAll(directoryfound, titlename2, ":"))
                         {
-                            LogMyFilms.Debug("(TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
-                            files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-                            foreach (string filefound in files)
+                          LogMyFilms.Debug("(TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
+                          files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
+                          foreach (string filefound in files)
+                          {
+                            if (MediaPortal.Util.Utils.IsVideo(filefound))
                             {
-                                if (MediaPortal.Util.Utils.IsVideo(filefound))
-                                {
-                                    wsize = new System.IO.FileInfo(filefound).Length;
-                                    result.Add(filefound);
-                                    resultsize.Add(wsize);
-                                    filesfound[filesfoundcounter] = filefound;
-                                    filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                                    filesfoundcounter = filesfoundcounter + 1;
-                                    LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
-                                }
+                              wsize = new System.IO.FileInfo(filefound).Length;
+                              result.Add(filefound);
+                              resultsize.Add(wsize);
+                              filesfound[filesfoundcounter] = filefound;
+                              filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                              filesfoundcounter = filesfoundcounter + 1;
+                              LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
                             }
-
+                          }
                         }
                         else
                         {
@@ -8041,7 +8042,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             foreach (string filefound in files)
                             {
                                 LogMyFilms.Debug("(TrailersearchLocal) - Files found in sub dir to check matching: '" + filefound + "'");
-                                if (((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
+                                // if (((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
+                                if ((Utility.ContainsAll(filefound, titlename, ":")) || (Utility.ContainsAll(filefound, titlename2, ":")) && (MediaPortal.Util.Utils.IsVideo(filefound)))
                                 {
                                     wsize = new System.IO.FileInfo(filefound).Length;
                                     result.Add(filefound);
