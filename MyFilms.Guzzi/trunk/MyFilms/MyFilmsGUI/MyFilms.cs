@@ -374,8 +374,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private const int RandomFanartDelay = 15000;
 
     // Version for Skin Interface
-    private const int SkinInterfaceVersionMajor = 1;
-    private const int SkinInterfaceVersionMinor = 0;
+    private const int SkinInterfaceVersionMajor = 2;
+    private const int SkinInterfaceVersionMinor = 5;
     // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
     private string currentSkin = null;
 
@@ -10204,7 +10204,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           bool success = GetSkinInterfaceVersion(ref VersionMajor, ref VersionMinor, ref VersionBuild, ref VersionRevision);
           if (success)
           {
-            LogMyFilms.Info("OnPageLoad(): Current Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
+            LogMyFilms.Info("OnPageLoad(): Current  Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
+            LogMyFilms.Info("OnPageLoad(): Required Skin Interface Version = 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
             if (VersionMajor < SkinInterfaceVersionMajor || VersionMajor == 0)
             {
               this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin is not compatible!", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
@@ -10251,19 +10252,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               XmlNode skininterfaceversionNode = settingsNode.SelectSingleNode("skininterfaceversion");
               if (skininterfaceversionNode != null)
               {
-                XmlNode versionNode = settingsNode.SelectSingleNode("version");
+                XmlNode versionNode = skininterfaceversionNode.SelectSingleNode("version");
                 if (versionNode != null)
                 {
-                  XmlNode majorVersionNode = settingsNode.SelectSingleNode("major");
+                  XmlNode majorVersionNode = versionNode.SelectSingleNode("major");
                   if (majorVersionNode != null)
                     _versionMajor = majorVersionNode.InnerText;
-                  XmlNode minorVersionNode = settingsNode.SelectSingleNode("minor");
+                  XmlNode minorVersionNode = versionNode.SelectSingleNode("minor");
                   if (minorVersionNode != null)
                     _versionMinor = minorVersionNode.InnerText;
-                  XmlNode buildVersionNode = settingsNode.SelectSingleNode("build");
+                  XmlNode buildVersionNode = versionNode.SelectSingleNode("build");
                   if (buildVersionNode != null)
                     _versionBuild = buildVersionNode.InnerText;
-                  XmlNode revisionVersionNode = settingsNode.SelectSingleNode("revision");
+                  XmlNode revisionVersionNode = versionNode.SelectSingleNode("revision");
                   if (revisionVersionNode != null)
                     _versionRevision = revisionVersionNode.InnerText;
                 }
