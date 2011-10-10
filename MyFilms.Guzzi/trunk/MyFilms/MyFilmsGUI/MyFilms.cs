@@ -5485,6 +5485,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.SetHeading(GUILocalizeStrings.Get(1079904)); // Context options ...
       string[] upd_choice = new string[20];
       int ichoice = 0;
+      MyFilmsDetail.Searchtitles sTitles;
 
       // Moviecontext
       if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
@@ -6241,8 +6242,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           conf.StrIndex = facadeView.SelectedListItem.ItemId;
           conf.StrTIndex = facadeView.SelectedListItem.Label;
+          sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
 
-          MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false);
+          MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false, sTitles);
           //Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
@@ -6253,19 +6255,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-            
-            string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
-            fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-            if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
+
+            string personartworkpath = string.Empty;
+            sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+            //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+            //fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+            if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
             {
-              LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - (started from main menu)");
+              LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - (started from main menu)");
               if (conf.StrPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
               {
                 personartworkpath = MyFilms.conf.StrPathArtist;
                 LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
               }
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(wtitle, wttitle, wftitle, wdirector, wyear.ToString(), true, GetID, fanartTitle, personartworkpath);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath);
             }
           }
           break;

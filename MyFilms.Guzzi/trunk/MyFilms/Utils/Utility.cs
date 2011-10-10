@@ -754,6 +754,119 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         }
         #endregion
 
+    #region AMCUpdater Utils
+
+    public static string GetDVDFolderName(string FileName)
+    {
+        //'Function to try and guess the correct movie name for a DVD image stored in a folder.
+        //'DVD files may be stored directly in a folder with the name of the movie.
+        //'DVD files may also retain their structure so .vob files will be in \VIDEO_TS\ - assume parent of that is movie name.
+
+        //'filename = DVDs\Shawshank Redemption, the\VIDEO_TS.IFO
+        //'filename = DVDs\Shawshank Redemption, the\VIDEO_TS\VIDEO_TS.IFO
+
+      string TempString = "";
+      string ReturnValue = "";
+
+      //'Get the file name itself off the end: \VIDEO_TS.IFO
+      string FileNameEnd = FileName.Substring(FileName.LastIndexOf(@"\") - 1);
+
+      //'This trims the filename and leaves DVDs\ShawshankRedemption, the"
+      FileName = FileName.Replace(FileNameEnd, "");
+
+      if (FileName.Contains(@"\")) TempString = FileName.Substring(FileName.LastIndexOf(@"\"));
+      else TempString = FileName;
+
+      if (TempString.ToLower() == "video_ts")
+      {
+        TempString = FileName.Replace(TempString, "");
+        //'Check that there isn't a trailing backslash (probably is)
+        if (TempString.EndsWith(@"\")) TempString = TempString.Substring(0, (TempString.Length) - 1);
+        //'Check to see if we've still got a nested path.  Take the next level up if so.
+        if (TempString.Contains(@"\")) ReturnValue = TempString.Substring(TempString.LastIndexOf(@"\"));
+        else ReturnValue = TempString;
+      }
+        else
+        ReturnValue = TempString;
+
+      return ReturnValue;
+    }
+
+    public static string GetBRFolderName(string FileName)
+    {
+        //'Function to try and guess the correct movie name for a BR image stored in a folder.
+        //'filename = BRs\IRON MAN\BDMV\index.bdmv
+        //'filename = BRs\IRON MAN\index.bdmv
+
+      string TempString;
+      string ReturnValue = "";
+
+      //'Get the file name itself off the end: \index.bdmv
+      string FileNameEnd = FileName.Substring(FileName.LastIndexOf(@"\") - 1);
+
+      //'This trims the filename and leaves BRs\IRON MAN"
+      FileName = FileName.Replace(FileNameEnd, "");
+
+      if (FileName.Contains(@"\"))
+        TempString = FileName.Substring(FileName.LastIndexOf(@"\"));
+      else 
+        TempString = FileName;
+
+      if (TempString.ToLower() == "bdmv")
+      {
+        TempString = FileName.Replace(TempString, "");
+        //'Check that there isn't a trailing backslash (probably is)
+        if (TempString.EndsWith(@"\")) TempString = TempString.Substring(0, (TempString.Length) - 1);
+        //'Check to see if we've still got a nested path.  Take the next level up if so.
+        if (TempString.Contains(@"\")) ReturnValue = TempString.Substring(TempString.LastIndexOf(@"\"));
+        else ReturnValue = TempString;
+      }
+        else 
+        ReturnValue = TempString;
+
+      return ReturnValue;
 
     }
+
+    public static string RemoveNastyCharacters(string strText)
+    {
+      Regex RegCheck;
+      string NewText;
+      string RegexCleanFilters = @"\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$|\s\d{4}\.";
+
+      foreach (string regexFilter in RegexCleanFilters.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
+      {
+          if (regexFilter.Length > 0)
+          {
+            if (regexFilter.Length == 1) //'Probably not a regex, due to complexity of any single character, just do a replace.
+              NewText = strText.Replace(regexFilter, " ");
+            else
+            {
+              //'This should work for any multi-character string:
+              RegCheck = new Regex(regexFilter);
+              NewText = RegCheck.Replace(strText, " ");
+            }
+            if (NewText.Trim().Length > 0) //'Check to ensure last operation didn't wipe the string out!
+              strText = NewText;
+            else //'If NewText is blank, then exit here with the previous value of strText
+              continue;
+          }
+      }
+
+      //'Tidy up the beginning and end of the string:
+      strText = strText.Trim();
+
+      //'Loop through to remove any groups of spaces left by character replacement:
+      if (strText.Contains("  "))
+      {
+          while (strText.Contains("  "))
+          {
+            strText = strText.Replace("  ", " ");
+          }
+      }
+      return strText;
+    }
+    #endregion
+
+  }
 }
