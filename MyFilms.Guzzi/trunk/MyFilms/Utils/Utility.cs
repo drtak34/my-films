@@ -345,8 +345,8 @@ namespace MyFilmsPlugin.MyFilms.Utils {
                 matches = false;
             }
             return matches;
-            return false;
           }
+          return false;
         }
 
     /// <summary>
