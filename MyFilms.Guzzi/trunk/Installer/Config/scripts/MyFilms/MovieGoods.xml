@@ -34,8 +34,8 @@
       <KeyStartOptions Param1="" Param2="" />
       <KeyEndOptions />
       <KeyOptionsIndex />
-      <KeyStartAkas Param1="" Param2="">_x0023_REGEX_x0023__x005C__x0029__x003B__x0027__x003E__x003C_b_x003E_._x002A__x003F__x003C__x002F_b_x003E__x003C_br_x003E__x005C__x0028_</KeyStartAkas>
-      <KeyEndAkas>_x0029__x003C__x002F_b_x003E__x003C__x002F_</KeyEndAkas>
+      <KeyStartAkas Param1="_x0023_REGEX_x0023_._x002A__x003F__x005C__x0028__x007C__x005C__x0029_._x002A__x003F_" Param2="">_x0029__x003B__x0027__x003E__x003C_b_x003E_</KeyStartAkas>
+      <KeyEndAkas>_x003C__x002F_b_x003E__x003C__x002F_</KeyEndAkas>
       <KeyAkasRegExp />
     </URLSearch>
     <Details>
@@ -215,7 +215,7 @@
       <KeyMultiPostersIndex />
       <KeyMultiPostersRegExp>_x003C_a_x0020_href_x003D__x0022__x002F_movie_product_static._x002A__x003F_src_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_alt_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
       <KeyMultiPostersMaxItems />
-      <KeyMultiPostersLanguage>German_x002C__x0020_11_x0020_x_x0020_17</KeyMultiPostersLanguage>
+      <KeyMultiPostersLanguage>_x0031_1_x0020_x_x0020_17</KeyMultiPostersLanguage>
       <KeyMultiPostersPage />
       <KeyStartLinkPhotos Param1="" Param2="" />
       <KeyEndLinkPhotos />
