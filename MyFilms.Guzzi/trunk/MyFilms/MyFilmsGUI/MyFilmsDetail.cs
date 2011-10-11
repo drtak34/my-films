@@ -2877,7 +2877,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 switch (grabtype)
                 {
                   case GrabType.MultiCovers:
-                    if (script.Details.ToString().ToLower().Contains("multicovers"))
+                    if (script.Type.ToString().ToLower().Contains("multicovers"))
                       displayNamePost = " - (Multi Cover)";
                     else
                       displayNamePost = " - (Single Cover)";
@@ -2968,15 +2968,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //new System.Threading.Thread(delegate()
               //  {
               //    dlgPrgrs.Percentage = 10;
-              //    Result = Grab.GetDetail(
-              //      url,
-              //      downLoadPath,
-              //      wscript,
-              //      true,
-              //      MyFilms.conf.GrabberOverrideLanguage,
-              //      MyFilms.conf.GrabberOverridePersonLimit,
-              //      MyFilms.conf.GrabberOverrideTitleLimit,
-              //      MyFilms.conf.GrabberOverrideGetRoles);
+              //    Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
               //    if (dlgPrgrs != null)
               //    {
               //      dlgPrgrs.Percentage = 100;
@@ -3525,25 +3517,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
             case GrabType.MultiCovers:
               // make difference between existing cover and new one
-              if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()))
-              {
-                string tmp = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
-                if (tmp.Contains("\\"))
-                {
-                  tmp = tmp.Substring(tmp.LastIndexOf("\\") + 1);
-                  if (tmp.Contains("["))
-                    tmpPicturename = tmp.Substring(0, tmp.LastIndexOf("[") - 1);
-                  else tmpPicturename = tmp;
-                }
-                else tmpPicturename = tmp;
-              }
+              //if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()))
+              //{
+              //  string tmp = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+              //  if (tmp.Contains("\\"))
+              //  {
+              //    tmp = tmp.Substring(tmp.LastIndexOf("\\") + 1);
+              //    if (tmp.Contains("["))
+              //      tmpPicturename = tmp.Substring(0, tmp.LastIndexOf("[") - 1);
+              //    else tmpPicturename = tmp;
+              //  }
+              //  else tmpPicturename = tmp;
+              //}
               if (string.IsNullOrEmpty(tmpPicturename))
               {
-                sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-                if (string.IsNullOrEmpty(sTitles.FanartTitle))
-                  return;
-                else
-                  tmpPicturename = sTitles.FanartTitle;
+                tmpPicturename = sTitles.FanartTitle + ".jpg";
               }
               break;
           }
@@ -3616,6 +3604,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgPrgrs.NeedRefresh();
                 dlgPrgrs.ShouldRenderLayer();
                 dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+
 
                 string filename = string.Empty;
                 string filename1 = string.Empty;
@@ -3696,7 +3685,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // updtate catalog entry in memory
           if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()))
             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
-          else if (interactive && !oldPicture.Contains(oldPictureCatalogname))
+          else if (interactive)
+            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+          else if (!oldPicture.Contains(oldPictureCatalogname))
             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
         }
 
@@ -4163,6 +4154,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Int64 wsize = 0; // Temporary Filesize detection
           string startPattern = "";
           string currentPicture = MyFilmsDetail.getGUIProperty("picture");
+          //if ((sr["Picture"].ToString().IndexOf(":\\") == -1) && (sr["Picture"].ToString().Substring(0, 2) != "\\\\"))
+          //  conf.FileImage = conf.StrPathImg + "\\" + sr["Picture"].ToString();
+          //else
+          //  conf.FileImage = sr["Picture"].ToString();
+
           if (string.IsNullOrEmpty(currentPicture)) 
             return "";
           string currentPictureName = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
