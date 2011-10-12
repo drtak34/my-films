@@ -6,17 +6,17 @@
     <Language>fr</Language>
     <Type>details|cover</Type>
     <Version>0.9</Version>
-    <Encoding>windows-1252</Encoding>
+    <Encoding />
     <URLSearch>
-      <KeyStartThumb Param1="" Param2="" />
-      <KeyEndThumb />
-      <URL Param1="" Param2="">http:_x002F__x002F_www.allocine.fr_x002F_recherche_x002F_1_x002F__x003F_p_x003D__x0023_Page_x0023__x0026_q_x003D__x0023_Search_x0023_</URL>
+      <KeyStartThumb Param1="" Param2="">src_x003D__x0027_</KeyStartThumb>
+      <KeyEndThumb>_x0027_</KeyEndThumb>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.allocine.fr_x002F_recherche_x002F_1_x002F__x003F_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_totalwidth_x0020_noborder_x0020_purehtml_x0022__x003E_</KeyStartList>
       <KeyEndList>Les_x0020_films_x0020_les_x0020_plus_x0020_attendus</KeyEndList>
-      <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
+      <KeyStartPage Param1="" Param2="" />
       <KeyStepPage>_x0031_</KeyStepPage>
       <KeyNextPage>_x002F_recherche_x002F_1_x002F__x003F_p_x003D__x0023_Page_x0023__x0026_q_x003D__x0023_Search_x0023_</KeyNextPage>
-      <KeyStartTitle Param1="" Param2="">alt_x003D__x0027_</KeyStartTitle>
+      <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0027_._x002A__x003F_alt_x003D__x0027_</KeyStartTitle>
       <KeyEndTitle>_x0027__x0020__x002F__x003E__x003C__x002F_a_x003E_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x003C_span_x0020_class_x003D__x0022_fs11_x0022__x003E_</KeyStartYear>
@@ -25,15 +25,15 @@
       <KeyStartDirector Param1="" Param2="">_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_fs11_x0022__x003E_._x002A__x003F__x003C_br_x0020__x002F__x003E_._x002A__x003F_de_x0020_</KeyStartDirector>
       <KeyEndDirector>_x003C_br_x0020__x002F__x003E_</KeyEndDirector>
       <KeyDirectorIndex />
-      <KeyStartLink Param1="_gen" Param2="_x002F_film_x002F_fichefilm_gen">_x0023_REGEX_x0023_alt_x003D_._x002A__x003F__x003C_a_x0020_href_x003D__x0027__x002F_film_x002F_fichefilm</KeyStartLink>
-      <KeyEndLink>_x0027__x003E_</KeyEndLink>
+      <KeyStartLink Param1="_gen" Param2="_x002F_film_x002F_fichefilm_gen">_x0023_REGEX_x0023__x003C_tr_x003E__x003C_td._x002A__x003F_alt_x003D_._x002A__x003F__x003C_a_x0020_href_x003D__x0027__x002F_film_x002F_fichefilm</KeyStartLink>
+      <KeyEndLink>_x0023_REGEX_x0023__x0027__x003E_._x002A__x003F__x003C__x002F_div_x003E__x003C__x002F_div_x003E__x003C__x002F_td_x003E__x003C__x002F_tr_x003E_</KeyEndLink>
       <KeyLinkIndex />
       <KeyStartID Param1="" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0027__x002F_film_x002F_fichefilm_gen._x002A__x003F__x003D_</KeyStartID>
       <KeyEndID>_x002E_</KeyEndID>
       <KeyStartOptions Param1="" Param2="" />
       <KeyEndOptions />
-      <KeyStartAkas Param1="" Param2="">_x0023_REGEX_x0023_alt_x003D_._x002A__x003F__x003C_a_x0020_href_x003D__x0027__x002F_._x002A__x003F__x003E_</KeyStartAkas>
-      <KeyEndAkas>_x003C__x002F_a_x003E_</KeyEndAkas>
+      <KeyStartAkas Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023_alt_x003D_._x002A__x003F__x003C_a_x0020_href_x003D__x0027__x002F_._x002A__x003F__x003E_</KeyStartAkas>
+      <KeyEndAkas>_x0023_REGEX_x0023__x003C_br_x0020__x002F__x003E_._x002A__x003F__x003C_span_x0020_class_x003D__x0022_fs11_x0022__x003E_</KeyEndAkas>
       <KeyAkasRegExp />
     </URLSearch>
     <Details>
