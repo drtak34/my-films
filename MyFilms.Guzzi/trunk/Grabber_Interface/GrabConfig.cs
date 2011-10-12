@@ -290,6 +290,9 @@ namespace Grabber_Interface
         int iEnd = -1;
         int iLength = 0;
 
+        // enable preview button
+        button_Preview.Enabled = true;
+
         if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
           TextURL.Text = "http://" + TextURL.Text;
         if (!TextSearch.Text.Contains("\\"))
@@ -2898,19 +2901,15 @@ namespace Grabber_Interface
             try
             {
               pictureBoxPreviewCover.ImageLocation = Result[i];
-            }
-            catch
-            {
-            }
-            try
-            {
+
               // Create new FileInfo object and get the Length.
               FileInfo f = new FileInfo(Result[i]);
               long s1 = f.Length;
               labelImageSize.Text = s1.ToString();
             }
-            catch
+            catch (Exception ex)
             {
+              MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             break;
           case 3:
