@@ -314,6 +314,7 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798800">Attention : durée longue!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">Débuter par {0} films?</String>
+    <String id="10798803">Extended search (directories) ?</String>
     <String id="10798940">Bande Annonce</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>

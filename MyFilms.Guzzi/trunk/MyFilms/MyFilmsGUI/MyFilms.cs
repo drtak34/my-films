@@ -5357,7 +5357,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
+          bool doExtendedSearch = false;
           GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+          dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798940)); // Trailer
+          dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798803)); // Include extended directories ?
+          dlgYesNo.DoModal(GetID);
+          if ((dlgYesNo.IsConfirmed)) 
+            doExtendedSearch = true;
+
+          dlgYesNo.Reset();
           dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800)); // Warning: Long runtime !
           dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801)); //should really the trailer search be started
           // dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString()))); // for <xx> movies ?
@@ -5390,7 +5398,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Register trailer for '" + title + "'");
                   if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / w_index_count;
                   //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
-                  MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), false);
+                  MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), doExtendedSearch);
                 }
                 catch (Exception ex)
                 {
