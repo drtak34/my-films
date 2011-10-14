@@ -2094,11 +2094,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
         {
-          new Thread(delegate()
-          {
-            TraktPlugin.TraktHelper.AddRemoveMovieInUserList(movie.Title, movie.Year.ToString(), movie.IMDBNumber, remove);
-
-          }) { Name = "MyFilms-TraktAddRemoveMovieInUserlist", IsBackground = true }.Start();
+          TraktPlugin.TraktHelper.AddRemoveMovieInUserList(movie.Title, movie.Year.ToString(), movie.IMDBNumber, remove);
         }
 
         private static MFMovie GetMovieFromRecord(DataRow sr)
