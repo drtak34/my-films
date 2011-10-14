@@ -203,7 +203,10 @@
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
+          this.lblFilterGrabberScripts = new System.Windows.Forms.Label();
+          this.ItemSearchGrabberScriptsFilter = new System.Windows.Forms.TextBox();
           this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
+          this.chkGrabber_Always = new System.Windows.Forms.CheckBox();
           this.btnEditScript = new System.Windows.Forms.Button();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.cbGrabberOverrideGetRoles = new System.Windows.Forms.ComboBox();
@@ -215,9 +218,8 @@
           this.cbGrabberOverridePersonLimit = new System.Windows.Forms.ComboBox();
           this.cbGrabberOverrideLanguage = new System.Windows.Forms.ComboBox();
           this.lblSearchGrabberName = new System.Windows.Forms.Label();
-          this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
           this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
-          this.chkGrabber_Always = new System.Windows.Forms.CheckBox();
+          this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
           this.btnGrabber = new System.Windows.Forms.Button();
           this.txtGrabber = new System.Windows.Forms.TextBox();
           this.label27 = new System.Windows.Forms.Label();
@@ -524,8 +526,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.ItemSearchGrabberScriptsFilter = new System.Windows.Forms.TextBox();
-          this.lblFilterGrabberScripts = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -1754,6 +1754,23 @@
           this.groupBox_GrabberOptions.Text = "MyFilms Internal Internet Grabbing";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
           // 
+          // lblFilterGrabberScripts
+          // 
+          this.lblFilterGrabberScripts.AutoSize = true;
+          this.lblFilterGrabberScripts.Location = new System.Drawing.Point(16, 51);
+          this.lblFilterGrabberScripts.Name = "lblFilterGrabberScripts";
+          this.lblFilterGrabberScripts.Size = new System.Drawing.Size(105, 13);
+          this.lblFilterGrabberScripts.TabIndex = 68;
+          this.lblFilterGrabberScripts.Text = "Filter Grabber Scripts";
+          // 
+          // ItemSearchGrabberScriptsFilter
+          // 
+          this.ItemSearchGrabberScriptsFilter.Location = new System.Drawing.Point(145, 48);
+          this.ItemSearchGrabberScriptsFilter.Name = "ItemSearchGrabberScriptsFilter";
+          this.ItemSearchGrabberScriptsFilter.Size = new System.Drawing.Size(138, 20);
+          this.ItemSearchGrabberScriptsFilter.TabIndex = 72;
+          this.ToolTip1.SetToolTip(this.ItemSearchGrabberScriptsFilter, resources.GetString("ItemSearchGrabberScriptsFilter.ToolTip"));
+          // 
           // txtGrabberDisplay
           // 
           this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 22);
@@ -1762,6 +1779,17 @@
           this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
           this.txtGrabberDisplay.TabIndex = 67;
           this.ToolTip1.SetToolTip(this.txtGrabberDisplay, resources.GetString("txtGrabberDisplay.ToolTip"));
+          // 
+          // chkGrabber_Always
+          // 
+          this.chkGrabber_Always.AutoSize = true;
+          this.chkGrabber_Always.Location = new System.Drawing.Point(19, 74);
+          this.chkGrabber_Always.Name = "chkGrabber_Always";
+          this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
+          this.chkGrabber_Always.TabIndex = 56;
+          this.chkGrabber_Always.Text = "try to find best match automatically";
+          this.ToolTip1.SetToolTip(this.chkGrabber_Always, resources.GetString("chkGrabber_Always.ToolTip"));
+          this.chkGrabber_Always.UseVisualStyleBackColor = true;
           // 
           // btnEditScript
           // 
@@ -1947,6 +1975,17 @@
           this.lblSearchGrabberName.TabIndex = 62;
           this.lblSearchGrabberName.Text = "Title for Internet Updates";
           // 
+          // chkGrabber_ChooseScript
+          // 
+          this.chkGrabber_ChooseScript.AutoSize = true;
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(226, 74);
+          this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
+          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
+          this.chkGrabber_ChooseScript.TabIndex = 60;
+          this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
+          this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
+          this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
+          // 
           // ItemSearchGrabberName
           // 
           this.ItemSearchGrabberName.FormattingEnabled = true;
@@ -1959,28 +1998,6 @@
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
           this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, resources.GetString("ItemSearchGrabberName.ToolTip"));
-          // 
-          // chkGrabber_ChooseScript
-          // 
-          this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(226, 74);
-          this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
-          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
-          this.chkGrabber_ChooseScript.TabIndex = 60;
-          this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
-          this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
-          this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
-          // 
-          // chkGrabber_Always
-          // 
-          this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(19, 74);
-          this.chkGrabber_Always.Name = "chkGrabber_Always";
-          this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
-          this.chkGrabber_Always.TabIndex = 56;
-          this.chkGrabber_Always.Text = "try to find best match automatically";
-          this.ToolTip1.SetToolTip(this.chkGrabber_Always, resources.GetString("chkGrabber_Always.ToolTip"));
-          this.chkGrabber_Always.UseVisualStyleBackColor = true;
           // 
           // btnGrabber
           // 
@@ -5322,23 +5339,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // ItemSearchGrabberScriptsFilter
-          // 
-          this.ItemSearchGrabberScriptsFilter.Location = new System.Drawing.Point(145, 48);
-          this.ItemSearchGrabberScriptsFilter.Name = "ItemSearchGrabberScriptsFilter";
-          this.ItemSearchGrabberScriptsFilter.Size = new System.Drawing.Size(138, 20);
-          this.ItemSearchGrabberScriptsFilter.TabIndex = 72;
-          this.ToolTip1.SetToolTip(this.ItemSearchGrabberScriptsFilter, resources.GetString("ItemSearchGrabberScriptsFilter.ToolTip"));
-          // 
-          // lblFilterGrabberScripts
-          // 
-          this.lblFilterGrabberScripts.AutoSize = true;
-          this.lblFilterGrabberScripts.Location = new System.Drawing.Point(16, 51);
-          this.lblFilterGrabberScripts.Name = "lblFilterGrabberScripts";
-          this.lblFilterGrabberScripts.Size = new System.Drawing.Size(105, 13);
-          this.lblFilterGrabberScripts.TabIndex = 68;
-          this.lblFilterGrabberScripts.Text = "Filter Grabber Scripts";
           // 
           // MyFilmsSetup
           // 

@@ -321,11 +321,12 @@ and it will be used as a default person image.</value>
   <data name="ItemSearchGrabberScriptsFilter.ToolTip" xml:space="preserve">
     <value>You can filter the Grabber scripts that should be displayed in the selection menu.
 Usage:
-- us "|" as separator
-- use 2-letter language codes for country/language selection
-- use "*" or "all" to display grabber scripts for multiple languages
-- use "local" to display grabbers for local use
-- leave empty to show all available grabber scripts</value>
+- use ";" or "," as separator
+- use 2-letter language codes for country/language selection (e.g. "en" for english, "de" for german)
+- use "all" to display grabber scripts for multiple languages
+- use "local" to display grabbers for local use (like nfo grabber script)
+- leave empty to show all available grabber scripts
+- if no scripts match your restriction, you might not get a selection</value>
   </data>
   <data name="txtGrabberDisplay.ToolTip" xml:space="preserve">
     <value>Set the default grabber script for updates within MyFilms.

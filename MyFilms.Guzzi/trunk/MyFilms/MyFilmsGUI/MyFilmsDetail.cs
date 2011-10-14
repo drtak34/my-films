@@ -2800,8 +2800,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               foreach (string supportedlanguage in supportedlanguages)
               {
-                if ((supportedlanguage.ToLower() == allowedlanguage.ToLower() || showallLanguages) && (supportedfunction.ToLower() == grabtype.ToString().ToLower()))
+                if ((supportedlanguage.Trim().ToLower() == allowedlanguage.Trim().ToLower() || showallLanguages)
+                  && (supportedfunction.Trim().ToLower() == grabtype.ToString().ToLower() || (supportedfunction.Trim().ToLower() == "details" && grabtype.ToString().ToLower() == "all")))
+                {
                   add = true;
+                }
               }
             }
           }

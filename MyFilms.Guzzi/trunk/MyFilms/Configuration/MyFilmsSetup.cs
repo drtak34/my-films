@@ -4953,18 +4953,31 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           switch (newCountry)
           {
             case "Germany":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\Cinefacts-Kino.xml";
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.DE-OFDB.xml";
               cbGrabberOverrideGetRoles.Text = "";
               cbGrabberOverridePersonLimit.Text = "";
               cbGrabberOverrideTitleLimit.Text = "";
+              ItemSearchGrabberScriptsFilter.Text = "de, all";
               break;
             case "Canada":
+            case "UK":
+            case "USA":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+              cbGrabberOverrideGetRoles.Text = "true";
+              cbGrabberOverridePersonLimit.Text = "10";
+              cbGrabberOverrideTitleLimit.Text = "0";
+              ItemSearchGrabberScriptsFilter.Text = "en, all";
+              break;
+
             default:
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
               cbGrabberOverrideGetRoles.Text = "true";
               cbGrabberOverridePersonLimit.Text = "10";
               cbGrabberOverrideTitleLimit.Text = "0";
+              ItemSearchGrabberScriptsFilter.Text = "";
               break;
+
+          // No country specific settings:  
           //Argentina
           //Australia
           //Austria
@@ -4978,7 +4991,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Estonia
           //Finland
           //France
-          //Germany
           //Greece
           //Hong Kong
           //Hungary
@@ -5008,9 +5020,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Sweden
           //Switzerland
           //Turkey
-          //UK
           //Uruguay
-          //USA          
           }
 
           //AMCupdater
