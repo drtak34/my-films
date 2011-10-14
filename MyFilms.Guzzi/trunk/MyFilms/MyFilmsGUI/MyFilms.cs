@@ -374,8 +374,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private const int RandomFanartDelay = 15000;
 
     // Version for Skin Interface
-    private const int SkinInterfaceVersionMajor = 2;
-    private const int SkinInterfaceVersionMinor = 5;
+    private const int SkinInterfaceVersionMajor = 1;
+    private const int SkinInterfaceVersionMinor = 0;
     // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
     private string currentSkin = null;
 
