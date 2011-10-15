@@ -3454,6 +3454,246 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //conf.StrActors = keyboard.Text;
     //getSelectFromDivx("Actors like '*" + keyboard.Text + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
 
+    public void getSelectFromPersons(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
+    {
+      Prev_ItemID = -1;
+      Prev_Label = string.Empty;
+      string champselect = "";
+      // string[] champselect_new = { "", "" };
+      string wchampselect = "";
+      ArrayList w_tableau = new ArrayList();
+      Dictionary<string, string> persons = new Dictionary<string, string>();
+      List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
+      string[] personfields = { "Actors", "Producer", "Director", "Writer" }; // "borrower" is excluded, as it is not used in movie persons context ....
+      int Wnb_enr = 0;
+
+      conf.Wstar = NewWstar;
+      BtnSrtBy.Label = GUILocalizeStrings.Get(103);
+      conf.Boolselect = true;
+      conf.Wselectedlabel = "";
+      if (ClearIndex)
+        conf.StrIndex = 0;
+      if (conf.UseListViewForGoups)
+        Change_LayOut(0);
+      else
+        Change_LayOut(MyFilms.conf.StrLayOut);
+      facadeView.Clear();
+      //GUIControl.ClearControl(GetID, facadeView.GetID); // taken from OV
+      int wi = 0;
+
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      LogMyFilms.Debug("(getSelectFromPersons) - GlobalFilterString          : '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(getSelectFromPersons) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(getSelectFromPersons) - WstrSelect                  : '" + WstrSelect + "'");
+      LogMyFilms.Debug("(getSelectFromPersons) - WStrSort                    : '" + WStrSort + "'");
+      LogMyFilms.Debug("(getSelectFromPersons) - WStrSortSens                : '" + WStrSortSens + "'");
+      LogMyFilms.Debug("(getSelectFromPersons) - NewWstar                    : '" + NewWstar + "'");
+
+      bool isperson = false;
+      if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
+        isperson = true;
+      bool isdate = false;
+      if (WStrSort == "Date" || WStrSort == "DateAdded")
+        isdate = true;
+
+      // Collect List of all attributes in w_tableau
+      LogMyFilms.Debug("(getSelectFromPersons) - Read movie DB Group Names");
+      foreach (string field in personfields)
+      {
+        foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, field, WStrSortSens))
+        {
+          if (isdate)
+            champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+          else
+            champselect = enr[WStrSort].ToString().Trim();
+          ArrayList wtab = Search_String(champselect);
+          LogMyFilms.Debug("(getSelectFromPersons) - Adding '" + wtab.Count + "' items of type '" + field + "'");
+          for (wi = 0; wi < wtab.Count; wi++)
+          {
+            w_tableau.Add(wtab[wi].ToString().Trim());
+            //persons.TryGetOrAdd(wtab[wi].ToString().Trim(), field);
+          }
+        }
+      }
+      LogMyFilms.Debug("(getSelectFromPersons) - Sort Group Names");
+      // make list unique/distinct
+      w_tableau = new ArrayList(w_tableau.ToArray().Distinct().ToList());
+      if (WStrSortSens == " ASC")
+      {
+        w_tableau.Sort(0, w_tableau.Count, null);
+      }
+      else
+      {
+        IComparer myComparer = new myReverserClass();
+        w_tableau.Sort(0, w_tableau.Count, myComparer);
+      }
+      LogMyFilms.Debug("(getSelectFromPersons) - Sorting Finished");
+
+      if (MyFilms.conf.StrViews || MyFilms.conf.StrPersons) // Check if Thumbs directories exist or create them
+      {
+        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
+      }
+
+      // setting up thumbs directory configuration
+      string strThumbDirectory;
+      // string[] strActiveFacadeImages; // image pathes for Icon and Thumb -> moved usage to background thread
+      if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
+        strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
+      else
+        strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + WStrSort.ToLower() + @"\";
+      bool getThumbs = false;
+      if (MyFilms.conf.StrViews && (MyFilms.conf.StrViewsDfltAll || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country"))))
+        getThumbs = true;
+      if (MyFilms.conf.StrPersons && isperson)
+        getThumbs = true;
+      bool createFanartDir = false;
+      if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
+        createFanartDir = true;
+      if (!System.IO.Directory.Exists(strThumbDirectory)) // Check groupview thumbs cache directories and create them
+        try { System.IO.Directory.CreateDirectory(strThumbDirectory); }
+        catch (Exception) { }
+      if (!System.IO.Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check groupview thumbs (sub)directories and create them
+        try { System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); }
+        catch (Exception) { }
+
+      if (isperson) // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
+      { AsynUpdateActors(w_tableau); }
+
+      LogMyFilms.Debug("(getSelectFromPersons) - Facadesetup Groups Started");
+      //GUIListItem item = null;
+
+      AntMovieCatalog ds = new AntMovieCatalog();
+      // Declare an object variable.
+      object sumObject;
+      
+      for (wi = 0; wi != w_tableau.Count; wi++)
+      {
+        var roles = persons
+        .Where(x => x.Key == w_tableau[wi].ToString())
+        .ToDictionary(x => x.Key, x => x.Value);
+        
+        foreach (string role in personfields)
+        {
+          champselect = w_tableau[wi].ToString();
+          
+          // Presumes a DataTable named "Orders" that has a column named "Total."
+          DataTable table;
+          table = ds.Tables["Movie"];
+          int countalternative = table.Select(role + " LIKE " + "'*" + champselect + "*'").Length;
+
+          sumObject = table.Compute("Count(" + role + ")", role + " LIKE " + "'*" + champselect + "*'");
+
+          int count = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, role, WStrSortSens).Length;
+          LogMyFilms.Debug("role: '" + role + "', count: '" + sumObject.ToString() + "'");
+
+          if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
+          {
+            if (count > 0 && (wchampselect.Length > 0))
+            {
+              GUIListItem item = new GUIListItem();
+              //item.ItemId = number;
+              item.Label = wchampselect;
+              item.Label2 = Wnb_enr.ToString();
+              //item.Label3 = WStrSort.ToLower();
+              //item.DVDLabel = WStrSort.ToLower();
+              //MediaPortal.Util.Utils.SetDefaultIcons(item);
+              item.Path = WStrSort.ToLower();
+
+              if (isperson)
+                item.TVTag = "person";
+              else
+                item.TVTag = "group";
+              item.IsFolder = true;
+              facadeDownloadItems.Add(item); // offload artwork loading in background thread - first collect items in list!
+              item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+              facadeView.Add(item);
+              if (SelItem != "" && item.Label == SelItem)
+                conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
+              item.Label2 = role + " (" + count + ")";
+            }
+            Wnb_enr = 1;
+            wchampselect = champselect;
+          }
+        }
+
+      }
+
+      LogMyFilms.Debug("(getSelectFromPersons) - Facadesetup Groups Finished");
+
+      //item.FreeMemory();
+      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+      if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(1079896) + " [*" + conf.Wstar + "*]"; // add to "Selection": Persons with Filter
+      MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+      //TxtSelect.Label = conf.StrTxtSelect;
+      conf.StrSelect = WstrSelect;
+      conf.StrFilmSelect = string.Empty;
+
+      if ((conf.StrIndex > facadeView.Count - 1) || (conf.StrIndex < 0)) //check index within bounds, will be unless xml file heavily edited
+        conf.StrIndex = 0;
+
+      // Call this async after facade is loaded - WIP
+      //if (getThumbs) this.LoadFacadeImages(WStrSort, strThumbDirectory, isperson);
+      if (getThumbs)
+      {
+        // load first image syncronously, as asyncloading might cause flicker or even let it disappear
+        string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeView[conf.StrIndex].Label, strThumbDirectory, isperson);
+        string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+        facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0].ToString();
+        facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1].ToString();
+        facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0].ToString();
+
+        // load the rest of images asynchronously!
+        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
+      }
+
+      if (facadeView.Count == 0)
+      {
+        ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
+        DisplayAllMovies();
+        GetFilmList();
+        GUIControl.ShowControl(GetID, 34);
+        SetLabelSelect("root");
+        SetLabelView("all");
+      }
+      else
+      {
+        Fanartstatus(true);
+        GUIControl.ShowControl(GetID, 34);
+
+        if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
+          MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
+        // else
+        //   MyFilmsDetail.Load_Detailed_DB(0, false);
+
+        // Disabled because replaced by SpeedLoader
+        // ImgLstFilm.SetFileName("#myfilms.picture");
+        // ImgLstGroup.SetFileName("#myfilms.picture");
+        // this.Load_Rating(0); // old method - nor more used
+      }
+      MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
+      GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
+
+      //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
+    }
+
+    /// <summary>Selects records for display grouping them as required</summary>
+    /// <param name="WstrSelect">Select this kind of records</param>
+    /// <param name="WStrSort">Sort based on this</param>
+    /// <param name="WStrSortSens">Asc/Desc. Ascending or descending sort order</param>
+    /// <param name="NewWstar">Entries must contain this string to be included</param>
+    /// <param name="ClearIndex">Reset Selected Item Index</param>
+    /// <param name="SelItem">Select entry matching this string if not empty</param>
+    /// 
+    //Example for Actors list:
+    //conf.WStrSort = "ACTORS";
+    //conf.Wselectedlabel = "";
+    //conf.WStrSortSens = " ASC";
+    //BtnSrtBy.IsAscending = true;
+    //conf.StrActors = keyboard.Text;
+    //getSelectFromDivx("Actors like '*" + keyboard.Text + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
+
     public void getSelectFromDivx(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
     {
       //GUIListItem item = new GUIListItem();
@@ -4165,7 +4405,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //}
 
         // now set views in MF ...
-        if (conf.Boolselect) // Groupviews ?
+        if (conf.Boolselect) // Groupviews ? 
         {
           // Hack to get persons in ASC order after returning from external plugins ...
           if (conf.WStrSort.ToUpper() == "ACTORS" || conf.WStrSort.ToUpper() == "PRODUCER" || conf.WStrSort.ToUpper() == "DIRECTOR" || conf.WStrSort.ToUpper() == "WRITER")
@@ -5858,7 +6098,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               BtnSrtBy.IsAscending = true;
               conf.StrActors = "*";
               currentListLevel = Listlevel.Person;
-              getSelectFromDivx("TranslatedTitle like '*" + conf.StrTIndex + "*'", conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, string.Empty);
+              getSelectFromPersons("TranslatedTitle like '*" + conf.StrTIndex + "*'", conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, string.Empty);
             }
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
             //dlg.DeInit();
@@ -10216,10 +10456,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Info("OnPageLoad(): Required Skin Interface Version = 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
             if (VersionMajor < SkinInterfaceVersionMajor || VersionMajor == 0)
             {
+              InitMainScreen(false);
               this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin is not compatible!", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
+              if (VersionMajor > 0)
+                GUIWindowManager.ShowPreviousWindow();
             }
             else if (VersionMinor < SkinInterfaceVersionMinor)
             {
+              InitMainScreen(false);
               this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
             }
           }
