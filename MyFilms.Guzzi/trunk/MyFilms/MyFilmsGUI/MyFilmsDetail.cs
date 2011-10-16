@@ -2925,7 +2925,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void grabb_Internet_Informations_Search(string FullMovieName, int GetID, string wscript, string FullMoviePath, GrabType grabtype, Searchtitles sTitles)
         {
-          LogMyFilms.Debug("grabb_Internet_Informations_Search() with title = '" + FullMovieName + "', grabberfile = '" + wscript + "'");
+            if (string.IsNullOrEmpty(wscript)) return;
+            LogMyFilms.Debug("grabb_Internet_Informations_Search() with title = '" + FullMovieName + "', grabberfile = '" + wscript + "'");
             string MovieName = FullMovieName;
             string MovieHierarchy = string.Empty;
             string MoviePath = FullMoviePath;
@@ -3028,31 +3029,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         choiceViewMenu.Add(s);
                       }
                     }
-                    // add all titles as alternative search expressions
-                    if (!string.IsNullOrEmpty(sTitles.OriginalTitle) && !choiceViewMenu.Contains(sTitles.OriginalTitle))
+                    if (grabtype != GrabType.Person)
                     {
-                      dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.OriginalTitle + "'"); //search
-                      choiceViewMenu.Add(sTitles.OriginalTitle);
-                    }
-                    if (!string.IsNullOrEmpty(sTitles.TranslatedTitle) && !choiceViewMenu.Contains(sTitles.TranslatedTitle))
-                    {
-                      dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.TranslatedTitle + "'");
-                      choiceViewMenu.Add(sTitles.TranslatedTitle);
-                    }
-                    if (!string.IsNullOrEmpty(sTitles.FormattedTitle) && !choiceViewMenu.Contains(sTitles.FormattedTitle))
-                    {
-                      dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.FormattedTitle + "'");
-                      choiceViewMenu.Add(sTitles.FormattedTitle);
-                    }
-                    if (!string.IsNullOrEmpty(sTitles.MovieDirectoryTitle) && !choiceViewMenu.Contains(sTitles.MovieDirectoryTitle))
-                    {
-                      dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieDirectoryTitle + "'");
-                      choiceViewMenu.Add(sTitles.MovieDirectoryTitle);
-                    }
-                    if (!string.IsNullOrEmpty(sTitles.MovieFileTitle) && !choiceViewMenu.Contains(sTitles.MovieFileTitle))
-                    {
-                      dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieFileTitle + "'");
-                      choiceViewMenu.Add(sTitles.MovieFileTitle);
+                      // add all titles as alternative search expressions
+                      if (!string.IsNullOrEmpty(sTitles.OriginalTitle) && !choiceViewMenu.Contains(sTitles.OriginalTitle))
+                      {
+                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.OriginalTitle + "'"); //search
+                        choiceViewMenu.Add(sTitles.OriginalTitle);
+                      }
+                      if (!string.IsNullOrEmpty(sTitles.TranslatedTitle) && !choiceViewMenu.Contains(sTitles.TranslatedTitle))
+                      {
+                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.TranslatedTitle + "'");
+                        choiceViewMenu.Add(sTitles.TranslatedTitle);
+                      }
+                      if (!string.IsNullOrEmpty(sTitles.FormattedTitle) && !choiceViewMenu.Contains(sTitles.FormattedTitle))
+                      {
+                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.FormattedTitle + "'");
+                        choiceViewMenu.Add(sTitles.FormattedTitle);
+                      }
+                      if (!string.IsNullOrEmpty(sTitles.MovieDirectoryTitle) && !choiceViewMenu.Contains(sTitles.MovieDirectoryTitle))
+                      {
+                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieDirectoryTitle + "'");
+                        choiceViewMenu.Add(sTitles.MovieDirectoryTitle);
+                      }
+                      if (!string.IsNullOrEmpty(sTitles.MovieFileTitle) && !choiceViewMenu.Contains(sTitles.MovieFileTitle))
+                      {
+                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieFileTitle + "'");
+                        choiceViewMenu.Add(sTitles.MovieFileTitle);
+                      }
                     }
 
                     if (!(dlg.SelectedLabel > -1))
@@ -3119,7 +3123,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (interactive)
               downLoadPath = Path.GetTempPath(); //downLoadPath = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms";
             else
-              downLoadPath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
+            {
+              if (grabtype == GrabType.Person)
+                downLoadPath = MyFilms.conf.StrPathArtist;
+              else
+                downLoadPath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
+            }
             LogMyFilms.Debug("Grabber - GetDetail: OverrideLanguage = '" + MyFilms.conf.GrabberOverrideLanguage + "', OverridePersonLimit = '" + MyFilms.conf.GrabberOverridePersonLimit + "', OverrideTitleLimit = '" + MyFilms.conf.GrabberOverrideTitleLimit + "', Get Roles = '" + MyFilms.conf.GrabberOverrideGetRoles + "'");
             LogMyFilms.Debug("Grabber - GetDetail: script = '" + wscript + "', url = '" + url + "', download path = '" + downLoadPath + "'");
             
@@ -3409,6 +3418,187 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[(int)Grabber_URLClass.Grabber_Output.Language];
               if (IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty) && grabtype == GrabType.All)
                 grabb_Internet_Details_Informations_Cover(Result, interactive, GetID, wscript, grabtype, sTitles);
+              #endregion
+              #endregion
+            }
+
+            if (grabtype == GrabType.Person)
+            {
+              #region Person
+              string strChoice = "all"; // defaults to "all", if no other choice
+              bool onlyselected = true;
+              bool onlymissing = false;
+              bool onlynonempty = false;
+
+              if (interactive) // Dialog only in interactive mode
+              #region interactive selection dialog
+              {
+
+                System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
+                GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                dlgmenu.Reset();
+                dlgmenu.SetHeading(GUILocalizeStrings.Get(10798732)); // Choose property to update
+                dlgmenu.Add(GUILocalizeStrings.Get(10798734));
+                choiceViewMenu.Add("all");
+                dlgmenu.Add(GUILocalizeStrings.Get(10798735));
+                choiceViewMenu.Add("missing");
+                dlgmenu.Add(GUILocalizeStrings.Get(10798730));
+                choiceViewMenu.Add("all-onlynewdata");
+                #region populate selection menu
+                string[] PropertyList = new string[] 
+              { "OriginalTitle", 
+                "TranslatedTitle", 
+                "Picture", 
+                "Description", 
+                "Rating", 
+                "Actors", 
+                "Director", 
+                "Producer", 
+                "Year", 
+                "Country", 
+                "Category", 
+                "URL", 
+                "ImageURL", 
+                "Writer", 
+                "Comments", 
+                "Languages", 
+                "TagLine", 
+                "Certification",
+                "IMDB_Id",
+                "IMDBrank",
+                "Studio",
+                "Edition",
+                "Fanart",
+                "Generic1",
+                "Generic2",
+                "Generic3",
+                "TranslatedTitleAllNames",
+                "TranslatedTitleAllValues",
+                "CertificationAllNames",
+                "CertificationAllValues",
+                "MultiPosters",
+                "Photos",
+                "PersonImages",
+                "MultiFanart",
+                "Trailer",
+                "Empty35",
+                "Empty36",
+                "Empty37",
+                "Empty38",
+                "Empty39"
+              };
+                string strOldValue = "";
+                string strNewValue = "";
+
+                int i = 0;
+                foreach (string wProperty in PropertyList)
+                {
+                  try
+                  {
+                    strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                    if (strOldValue == null)
+                      strOldValue = "";
+                    strNewValue = Result[i].ToString();
+                    if (i == 2)
+                      strNewValue = Result[12];
+                    if (strNewValue == null)
+                      strNewValue = "";
+
+                    if ( // make sure, only supported fields are offered to user for update
+                      wProperty != "ImageURL"
+                      && !wProperty.Contains("Sub")
+                      && !wProperty.Contains("All")
+                      && !wProperty.Contains("Generic")
+                      && !wProperty.Contains("Empty")
+                      && wProperty != "TagLine"
+                      && wProperty != "Certification"
+                      && wProperty != "Writer"
+                      && wProperty != "Studio"
+                      && wProperty != "Edition"
+                      && wProperty != "Fanart"
+                      && wProperty != "Aspectratio"
+                      && wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
+                      && wProperty != "Photos"
+                      && wProperty != "PersonImages"
+                      && wProperty != "MultiFanart"
+                      && wProperty != "Trailer"
+                      )
+                    {
+                      dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
+                      choiceViewMenu.Add(wProperty);
+                      LogMyFilms.Debug("GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                    }
+                    else
+                    {
+                      LogMyFilms.Debug("GrabberUpdate - Not added to menu (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                    }
+                  }
+                  catch
+                  {
+                    LogMyFilms.Debug("GrabberUpdate - Error adding Property '" + wProperty + "' to Selectionmenu");
+                  }
+                  i = i + 1;
+                }
+                #endregion
+                dlgmenu.DoModal(GetID);
+                if (dlgmenu.SelectedLabel == -1)
+                  return;
+                strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
+                LogMyFilms.Debug("GrabInternetDetails - interactive choice: '" + strChoice + "'");
+                if (strChoice == "missing")
+                {
+                  onlyselected = false;
+                  onlymissing = true;
+                  onlynonempty = false;
+                }
+                if (strChoice == "all-onlynewdata")
+                {
+                  onlyselected = false;
+                  onlymissing = false;
+                  onlynonempty = true;
+                }
+              }
+              #endregion
+
+              #region load details data
+              // ********************************** now load data, if requested ! ******************************
+              IMDBActor person = new IMDBActor();
+              if (IsUpdateRequired("OriginalTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle], grabtype, onlyselected, onlymissing, onlynonempty))
+              {
+                title = Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle];
+                person.Name = title;
+              }
+
+              if (IsUpdateRequired("TranslatedTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle], grabtype, onlyselected, onlymissing, onlynonempty))
+              {
+                ttitle = Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle];
+              }
+
+              if (IsUpdateRequired("Description", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Description], grabtype, onlyselected, onlymissing, onlynonempty))
+                person.Biography = Result[(int)Grabber_URLClass.Grabber_Output.Description];
+
+              if (IsUpdateRequired("Year", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Year], grabtype, onlyselected, onlymissing, onlynonempty))
+              {
+                try
+                {
+                  year = Convert.ToInt16(Result[(int)Grabber_URLClass.Grabber_Output.Year]);
+                }
+                catch { }
+
+              }
+              string temp = "";
+              if (IsUpdateRequired("Country", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Country], grabtype, onlyselected, onlymissing, onlynonempty))
+                temp = Result[(int)Grabber_URLClass.Grabber_Output.Country];
+              if (IsUpdateRequired("Category", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Category], grabtype, onlyselected, onlymissing, onlynonempty))
+                temp = Result[(int)Grabber_URLClass.Grabber_Output.Category];
+              if (IsUpdateRequired("URL", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.URL], grabtype, onlyselected, onlymissing, onlynonempty))
+                if (MyFilms.conf.StrStorage != "URL")
+                  temp = Result[(int)Grabber_URLClass.Grabber_Output.URL];
+              if (IsUpdateRequired("Comments", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Comments], grabtype, onlyselected, onlymissing, onlynonempty))
+                MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
+              if (IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty) && grabtype == GrabType.All) 
+                temp = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
+              // grabb_Internet_Details_Informations_Cover(Result, interactive, GetID, wscript, grabtype, sTitles);
               #endregion
               #endregion
             }
@@ -5899,11 +6089,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         public static void Load_Detailed_PersonInfo(string artistname, bool wrep)
         {
-            //Todo: Add new properties for publishing actorinfos (MiniBio, Bio, Birthdate, Image, Multiimage, etc.
-
             //clearGUIProperty("db.description.value");
             LogMyFilms.Debug("Load_Detailed_PersonInfo for '" + artistname + "'");
             ArrayList actorList = new ArrayList();
+            
             MyFilmsDetail.GetActorByName(artistname, actorList);
             if (actorList.Count < 1 || actorList.Count > 5) // Do not proceed, of none or too many results !
             {
@@ -5928,6 +6117,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
                   if (actor.Biography.Length > 0) setGUIProperty("db.description.value", actor.Biography);
+                  else if (actor.MiniBiography.Length > 0) setGUIProperty("db.description.value", actor.MiniBiography);
                   if (actor.Name.Length > 0) setGUIProperty("user.mastertitle.value", actor.Name);
                   if (actor.Name.Length > 0) setGUIProperty("user.secondarytitle.value", actor.Name);
                   if (actor.PlaceOfBirth.Length > 0) setGUIProperty("db.category.value", actor.PlaceOfBirth);
@@ -5939,29 +6129,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               }
             }
-            //foreach (string act in actorList)
-            //{
-            //  string[] strActor = act.Split(splitter);
-            //  actorID = Convert.ToInt32(strActor[0]);
-            //  actorname = strActor[1];
-            //  if (actorID.ToString().Length > 0)
-            //  {
-            //    LogMyFilms.Debug("load details for actor: '" + actorID.ToString() + "'");
-            //    try
-            //    {
-            //      IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
-            //      if (actor.Biography.Length > 0) setGUIProperty("db.description.value", actor.Biography);
-            //      if (actor.Name.Length > 0) setGUIProperty("user.mastertitle.value", actor.Name);
-            //      if (actor.Name.Length > 0) setGUIProperty("user.secondarytitle.value", actor.Name);
-            //      if (actor.PlaceOfBirth.Length > 0) setGUIProperty("db.category.value", actor.PlaceOfBirth);
-            //      if (actor.DateOfBirth.Length > 0) setGUIProperty("db.year.value", actor.DateOfBirth);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //      LogMyFilms.Debug("Exception while loading person details: " + ex.ToString());
-            //    }
-            //  }
-            //}
         }
 
         #endregion
@@ -8322,6 +8489,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void GetActorByName(string strActorName, ArrayList actors)
         {
             strActorName = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(strActorName);
+
+          IMDB actornames = new IMDB();
+          actornames.FindActor(strActorName);
+
             SQLiteClient m_db = new SQLiteClient(Config.GetFile(Config.Dir.Database, @"VideoDatabaseV5.db3"));
 
             if (m_db == null)
@@ -8358,8 +8529,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return false;
         }
 
-      public static bool IsInternetConnectionAvailable ()
-      {
+        public static bool IsInternetConnectionAvailable ()
+        {
         // Check Internet connection
         if (!Win32API.IsConnectedToInternet())
         {

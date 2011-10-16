@@ -3459,10 +3459,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
       string champselect = "";
-      // string[] champselect_new = { "", "" };
-      string wchampselect = "";
       ArrayList w_tableau = new ArrayList();
-      Dictionary<string, string> persons = new Dictionary<string, string>();
+      // Dictionary<string, string> persons = new Dictionary<string, string>();
       List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
       string[] personfields = { "Actors", "Producer", "Director", "Writer" }; // "borrower" is excluded, as it is not used in movie persons context ....
       int Wnb_enr = 0;
@@ -3511,7 +3509,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           for (wi = 0; wi < wtab.Count; wi++)
           {
             w_tableau.Add(wtab[wi].ToString().Trim());
-            //persons.TryGetOrAdd(wtab[wi].ToString().Trim(), field);
           }
         }
       }
@@ -3561,39 +3558,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       { AsynUpdateActors(w_tableau); }
 
       LogMyFilms.Debug("(getSelectFromPersons) - Facadesetup Groups Started");
-      //GUIListItem item = null;
 
-      AntMovieCatalog ds = new AntMovieCatalog();
-      // Declare an object variable.
-      object sumObject;
-      
       for (wi = 0; wi != w_tableau.Count; wi++)
       {
-        var roles = persons
-        .Where(x => x.Key == w_tableau[wi].ToString())
-        .ToDictionary(x => x.Key, x => x.Value);
-        
         foreach (string role in personfields)
         {
           champselect = w_tableau[wi].ToString();
-          
-          // Presumes a DataTable named "Orders" that has a column named "Total."
-          DataTable table;
-          table = ds.Tables["Movie"];
-          int countalternative = table.Select(role + " LIKE " + "'*" + champselect + "*'").Length;
+          int count = r.Where(x => x[role].ToString().Contains(champselect)).Count();
+          LogMyFilms.Debug("role: '" + role + "', count: '" + count + "'");
 
-          sumObject = table.Compute("Count(" + role + ")", role + " LIKE " + "'*" + champselect + "*'");
-
-          int count = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, role, WStrSortSens).Length;
-          LogMyFilms.Debug("role: '" + role + "', count: '" + sumObject.ToString() + "'");
-
-          if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
+          if (conf.Wstar == "*" || role.ToUpper() == conf.Wstar.ToUpper())
           {
-            if (count > 0 && (wchampselect.Length > 0))
+            if (count > 0 && (champselect.Length > 0))
             {
               GUIListItem item = new GUIListItem();
               //item.ItemId = number;
-              item.Label = wchampselect;
+              item.Label = champselect;
               item.Label2 = Wnb_enr.ToString();
               //item.Label3 = WStrSort.ToLower();
               //item.DVDLabel = WStrSort.ToLower();
@@ -3610,13 +3590,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               facadeView.Add(item);
               if (SelItem != "" && item.Label == SelItem)
                 conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
-              item.Label2 = role + " (" + count + ")";
+              item.Label2 = BaseMesFilms.Translate_Column(role) + " (" + count + ")";
             }
-            Wnb_enr = 1;
-            wchampselect = champselect;
           }
         }
-
       }
 
       LogMyFilms.Debug("(getSelectFromPersons) - Facadesetup Groups Finished");
@@ -5817,7 +5794,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Artistcontext
-      if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && (conf.WStrSort.ToLower().Contains("actor") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("producer")))
+      if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && (conf.WStrSort.ToLower().Contains("actor") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("producer") || conf.WStrSort.ToLower().Contains("writer")))
       {
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
         {
@@ -5849,6 +5826,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           upd_choice[ichoice] = "updateperson";
           ichoice++;
         }
+
+        if (MyFilmsDetail.ExtendedStartmode("Context Movie: Internet data update for PERSONS")) // check if specialmode is configured for disabled features
+        {
+          dlg.Add(GUILocalizeStrings.Get(1079899));        //Update Internet Person Details
+          upd_choice[ichoice] = "grabber-person";
+          ichoice++;
+        }
       }
 
       if ((MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual) && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
@@ -5870,7 +5854,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //if (MyFilmsDetail.ExtendedStartmode("Context Movie: Internet data update")) // check if specialmode is configured for disabled features
       //{
-        //Disabled due to problems of updating DB (requires debugging before reenabling...)
         if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
         {
           dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
@@ -6108,7 +6091,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "artistdetail":
           LogMyFilms.Debug("artistdetail: searching infos for '" + facadeView.SelectedListItem.Label.ToString() + "'");
           {
-            string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(facadeView.SelectedListItem.Label.ToString());
+            string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(facadeView.SelectedListItem.Label);
             PersonInfo(actorSearchname);
             break;
           }
@@ -6482,7 +6465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "grabber":
           string title = MyFilmsDetail.GetSearchTitle(r, facadeView.SelectedListItem.ItemId, "titleoption");
-          string mediapath = mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
+          string mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
           if (mediapath.Contains(";")) // take the forst source file
           {
             mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
@@ -6495,6 +6478,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false, sTitles);
           //Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          break;
+
+        case "grabber-person":
+          string personname = facadeView.SelectedListItem.Label;
+
+          conf.StrIndex = facadeView.SelectedListItem.ItemId;
+          conf.StrTIndex = facadeView.SelectedListItem.Label;
+
+          MyFilmsDetail.grabb_Internet_Informations(personname, GetID, MyFilms.conf.StrGrabber_ChooseScript, "", "", MyFilmsDetail.GrabType.Person, false, null);
+          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
         case "fanart":
@@ -6815,115 +6808,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void PersonInfo(string PersonName)
     {
       IMDBActor imdbActor = new IMDBActor();
-      IMDB imdb = new IMDB();
-      imdb.FindActor(PersonName);
-      for (int i = 0; i < imdb.Count; ++i)
+      GetAndStorePersonInfo(PersonName, ref imdbActor);
+      if (string.IsNullOrEmpty(imdbActor.Name))
       {
-        //if (_guiListItem.ItemId == Movie.DirectorID)
-        //{
-        //  imdb.GetActorDetails(imdb[i], true, out imdbActor);
-        //}
-        //else
-        //{
-        imdb.GetActorDetails(imdb[i], false, out imdbActor);
-        //}
-        //VideoDatabase.SetActorInfo(_guiListItem.ItemId, imdbActor);
-        if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
-        {
-          break;
-        }
-      }
-      if (imdbActor.ThumbnailUrl != null)
-      {
-        if (imdbActor.ThumbnailUrl.Length != 0)
-        {
-          if (imdbActor.ThumbnailUrl.Length != 0 && !string.IsNullOrEmpty(conf.StrPathArtist))
-          {
-            string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, PersonName, true, true, out filename1person);
-            LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + PersonName + "', path='" + filename1person + "'");
-            // DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, _actor); // original Deda call
-          }
-          else
-          {
-            LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
-          }
-
-        }
-        else
-        {
-          LogMyFilms.Debug("IMDBFetcher single actor fetch: url=empty for actor {0}", PersonName);
-        }
-      }
-      else
-      {
-        Log.Debug("IMDBFetcher single actor fetch: url=null for actor {0}", PersonName);
-      }
-      //_imdbActor = imdbActor;
-
-
-      // Add actor to datbbase to get infos in person facades later...
-      int actorId = VideoDatabase.AddActor(imdbActor.Name);
-      if (actorId > 0)
-      {
-        VideoDatabase.SetActorInfo(actorId, imdbActor);
-        //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-
-        //if (imdbActor.ThumbnailUrl != string.Empty)
-        //{
-        //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-        //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-        //  Utils.FileDelete(largeCoverArt);
-        //  Utils.FileDelete(coverArt);
-        //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
-        //}
+        LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + PersonName + "'");
+        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        dlgOk.SetHeading("Info");
+        dlgOk.SetLine(1, string.Empty);
+        dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
+        dlgOk.DoModal(GetID);
+        return;
       }
 
-      //// Last working Guzzi Code
-      ////ArrayList actorList = new ArrayList();
-      ////// Search with searchName parameter which contain wanted actor name, result(s) is in array
-      ////// which conatin id and name separated with char "|"
-      ////MyFilmsDetail.GetActorByName(wperson, actorList);
-
-      ////// Check result
-      ////if (actorList.Count == 0)
-      ////{
-      ////  LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + wperson + "'");
-      ////  GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      ////  dlgOk.SetHeading("Info");
-      ////  dlgOk.SetLine(1, string.Empty);
-      ////  dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
-      ////  dlgOk.DoModal(GetID);
-      ////  return;
-      ////}
-      ////LogMyFilms.Debug("(Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
-      //////int actorID;
-      ////actorID = 0;
-      ////string actorname = string.Empty;
-      ////// Define splitter for string
-      ////char[] splitter = { '|' };
-      ////// Iterate through list
-      ////foreach (string act in actorList)
-      ////{
-      ////  // Split id from actor name (two substrings, [0] is id and [1] is name)
-      ////  string[] strActor = act.Split(splitter);
-      ////  // From here we have all what we want, now we can populate datatable, gridview, listview....)
-      ////  // actorID originally is integer in the databse (it can be string in results but if we want get details from
-      ////  // IMDBActor  GetActorInfo(int idActor) we need integer)
-      ////  actorID = Convert.ToInt32(strActor[0]);
-      ////  actorname = strActor[1];
-      ////  LogMyFilms.Debug("(Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
-      ////}
-
-      ////MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
-      //////if (actor != null)
-      ////OnVideoArtistInfoGuzzi(actor);
-
+      //if (actor != null)
+      //  OnVideoArtistInfoGuzzi(actor);
       OnVideoArtistInfoGuzzi(imdbActor);
-      //OnVideoArtistInfoGuzzi(wperson);
     }
 
-    private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
+    private void OnVideoArtistInfoGuzzi(IMDBActor actor)
     {
+      // MediaPortal.GUI.Video.GUIVideoArtistInfo infoDlg = (MediaPortal.GUI.Video.GUIVideoArtistInfo)GUIWindowManager.GetWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
       MyFilmsActorInfo infoDlg = (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
       LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): Creating (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo)");
       if (infoDlg == null)
@@ -6937,7 +6841,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
       infoDlg.Actor = actor;
-      infoDlg.DoModal(GetID);
+      infoDlg.DoModal(GetID); //infoDlg.DoModal(GUIWindowManager.ActiveWindow);
+    }
+
+    private void GetAndStorePersonInfo(string PersonName, ref IMDBActor imdbActor)
+    {
+      IMDB imdb = new IMDB();
+      IMDBFetcher imdbfetcher = new IMDBFetcher(null);
+      bool fetchActors = imdbfetcher.FetchActors();
+      imdb.FindActor(PersonName);
+      for (int i = 0; i < imdb.Count; ++i)
+      {
+        imdb.GetActorDetails(imdb[i], false, out imdbActor);
+        if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+        {
+          break;
+        }
+      }
+      if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+      {
+        if (!string.IsNullOrEmpty(conf.StrPathArtist))
+        {
+          //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+          //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+          //  Utils.FileDelete(largeCoverArt);
+          //  Utils.FileDelete(coverArt);
+          //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+          string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, PersonName, true, true, out filename1person);
+          LogMyFilms.Info("Person Artwork '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + PersonName + "', path = '" + filename1person + "'");
+        }
+        else
+        {
+          LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
+        }
+      }
+      else
+      {
+        Log.Debug("IMDBFetcher single actor fetch: url=null or empty for actor {0}", PersonName);
+      }
+      // Add actor to datbbase to get infos in person facades later...
+      int actorId = VideoDatabase.AddActor(imdbActor.Name);
+      if (actorId > 0)
+      {
+        VideoDatabase.SetActorInfo(actorId, imdbActor);
+        //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+      }
+
+      //MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+    }
+
+    private IMDBActor grabb_Person_Details(string name)
+    {
+      IMDBActor person = new IMDBActor();
+      MyFilmsDetail.grabb_Internet_Informations_Search(name, GetID, conf.StrGrabber_cnf, "", MyFilmsDetail.GrabType.Person, null);
+      return person;
     }
 
     ////*****************************************************************************************
