@@ -32,6 +32,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections.Generic;
   using System.IO;
 
+  using MediaPortal.Dialogs;
   using MediaPortal.GUI.Library;
   using MediaPortal.GUI.Pictures;
   using MediaPortal.Util;
@@ -46,181 +47,110 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   /// <summary>
     /// Opens a separate Dialog to display Actor Infos - based on original IMDB actor Dialog
     /// </summary>
-    public class MyFilmsActorInfo : GUIWindow, IRenderLayer
+  public class MyFilmsActorInfo : GUIDialogWindow
     {
-        #region skin
-        [SkinControl(2)]
-        protected GUIButtonControl btnViewAs = null;
-        //[SkinControl(3)]
-        //protected GUISortButtonControl btnSortBy = null;
-        [SkinControl(3)]
-        protected GUIButtonControl btnBiography = null;
-        [SkinControl(4)]
-        protected GUIButtonControl btnMovies = null;
-        //[SkinControl(4)]
-        //protected GUIToggleButtonControl btnMovies = null;
-        [SkinControl(20)]
-        protected GUITextScrollUpControl tbPlotArea = null;
-        [SkinControl(21)]
-        protected GUIImage imgCoverArt = null;
-        [SkinControl(22)]
-        protected GUITextControl tbTextArea = null;
-        [SkinControl(50)]
-        protected GUIFacadeControl facadeView = null;
-        #endregion
+    #region skin
+    [SkinControl(2)]
+    protected GUIButtonControl btnViewAs = null;
+    //[SkinControl(3)]
+    //protected GUISortButtonControl btnSortBy = null;
+    [SkinControl(3)]
+    protected GUIButtonControl btnBiography = null;
+    [SkinControl(4)]
+    protected GUIButtonControl btnMovies = null;
+    //[SkinControl(4)]
+    //protected GUIToggleButtonControl btnMovies = null;
+    [SkinControl(20)]
+    protected GUITextScrollUpControl tbPlotArea = null;
+    [SkinControl(21)]
+    protected GUIImage imgCoverArt = null;
+    [SkinControl(22)]
+    protected GUITextControl tbTextArea = null;
+    [SkinControl(50)]
+    protected GUIFacadeControl facadeView = null;
+    #endregion
 
-        private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
-        private int selectedItemIndex = -1;
-        View currentView = View.Icons;
-        private List<string> list;
-        public int ID_MyFilmsActorsInfo = 7991;
+    private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
+    private int selectedItemIndex = -1;
+    View currentView = View.List;
+    private List<string> list;
 
-        enum View : int
-        {
-            List = 0,
-            Icons = 1,
-            LargeIcons = 2,
-        }
-
-
-        private enum ViewMode
-        {
-            Biography,
-            Movies,
-        }
-
-        #region Base Dialog Variables
-
-        private bool m_bRunning = false;
-        private int m_dwParentWindowID = 0;
-        private GUIWindow m_pParentWindow = null;
-
-        #endregion
-
-        private ViewMode viewmode = ViewMode.Biography;
-
-        private MediaPortal.Video.Database.IMDBActor currentActor = null;
-        //private bool _prevOverlay = false;
-        private string imdbCoverArtUrl = string.Empty;
-
-               
-
-        //public GUIVideoArtistInfoGuzzi()
-        public MyFilmsActorInfo()
-        {
-            GetID = (int)7991;
-        }
-
-        public override string GetModuleName()
-        {
-          return GUILocalizeStrings.Get(ID_MyFilmsActorsInfo); // return localized string for dialog's ID
-        }
-
-        public override bool Init()
-        {
-            return Load(GUIGraphicsContext.Skin + @"\MyFilmsActorsInfo.xml");
-        }
-
-        public override void PreInit() { }
-
-        public override void OnAction(MediaPortal.GUI.Library.Action action)
-        {
-            if (action.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU)
-            {
-                Close();
-                return;
-            }
-            base.OnAction(action);
-        }
-
-        public override bool OnMessage(GUIMessage message)
-        {
-            switch (message.Message)
-            {
-        case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
-          {
-            base.OnMessage(message);
-            m_pParentWindow = null;
-            m_bRunning = false;
-            Dispose();
-            DeInitControls();
-            GUILayerManager.UnRegisterLayer(this);
-            return true;
-          }
-        case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-          {
-            base.OnMessage(message);
-            GUIGraphicsContext.Overlay = base.IsOverlayAllowed;
-            m_pParentWindow = GUIWindowManager.GetWindow(m_dwParentWindowID);
-            GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
-            return true;
-          }
-      }
-      return base.OnMessage(message);
-        }
-
-        #region Base Dialog Members
-
-    private void Close()
+    enum View : int
     {
-      GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT, GetID, 0, 0, 0, 0, null);
-      OnMessage(msg);
+        List = 0,
+        Icons = 1,
+        LargeIcons = 2,
     }
 
-    public void DoModal(int dwParentId)
+
+    private enum ViewMode
     {
-      m_dwParentWindowID = dwParentId;
-      m_pParentWindow = GUIWindowManager.GetWindow(m_dwParentWindowID);
-      if (null == m_pParentWindow)
-      {
-        m_dwParentWindowID = 0;
-        return;
-      }
-      
-      GUIWindowManager.RouteToWindow(GetID);
-
-      // activate this window...
-      GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_INIT, GetID, 0, 0, 0, 0, null);
-      OnMessage(msg);
-
-      GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
-      m_bRunning = true;
-      while (m_bRunning && GUIGraphicsContext.CurrentState == GUIGraphicsContext.State.RUNNING)
-      {
-        GUIWindowManager.Process();
-      }
-      GUILayerManager.UnRegisterLayer(this);
+        Biography,
+        Movies,
     }
 
-        #endregion
+    private ViewMode viewmode = ViewMode.Biography;
 
-        protected override void OnPageLoad()
-        {
-            list = new List<string>();
+    private MediaPortal.Video.Database.IMDBActor currentActor = null;
+    //private bool _prevOverlay = false;
+    private string imdbCoverArtUrl = string.Empty;
 
-            base.OnPageLoad();
-            viewmode = ViewMode.Biography;
-            Update();
-        }
+           
+
+    public MyFilmsActorInfo()
+    {
+        GetID = MyFilms.ID_MyFilmsActorsInfo;
+    }
+
+    public override string GetModuleName()
+    {
+      return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsActorsInfo); // return localized string for dialog's ID
+    }
+
+    public override void PreInit() { }
+
+    public override bool Init()
+    {
+        return Load(GUIGraphicsContext.Skin + @"\MyFilmsActorsInfo.xml");
+    }
+
+    public override void DoModal(int ParentID)
+    {
+      AllocResources();
+      InitControls();
+
+      base.DoModal(ParentID);
+    }
+
+     public override void OnAction(Action action)
+     {
+      //if (action.wID == Action.ActionType.ACTION_PREVIOUS_MENU)
+      //{
+      //  Close();
+      //  return;
+      //}
+      base.OnAction(action);
+    }
+
+    protected override void OnPageLoad()
+    {
+      base.OnPageLoad();
+      list = new List<string>();
+      GUIControl.HideControl(GetID, 50);
+      viewmode = ViewMode.Biography;
+      Update();
+    }
 
     protected override void OnPageDestroy(int newWindowId)
     {
-      if (m_bRunning)
-      {
-        m_bRunning = false;
-        m_pParentWindow = null;
-        GUIWindowManager.UnRoute();
-      }
-
       currentActor = null;
-
+      facadeView.Clear();
       base.OnPageDestroy(newWindowId);
     }
 
 
     protected override void OnClicked(int controlId, GUIControl control, Action.ActionType actionType)
         {
-            // Original Code
             base.OnClicked(controlId, control, actionType);
 
             if (control == btnMovies)
@@ -369,7 +299,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIPropertyManager.SetProperty("#Actor.Biography", biography);
 
             string movies = "";
-            //facadeView.Dispose();
             facadeView.Clear();
             for (int i = 0; i < currentActor.Count; ++i)
             {
@@ -378,7 +307,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 movies += line;
                 GUIListItem item = new GUIListItem();
                 item.Label = line;
-                item.Label2 = "(" + currentActor[i].Role.ToString() + ")";
+                if (!string.IsNullOrEmpty(currentActor[i].Role))
+                  item.Label2 = "(" + currentActor[i].Role.ToString() + ")";
+                else 
+                  item.Label2 = "";
                 item.Label3 = "";
                 //item.Path = f;
                 
@@ -436,7 +368,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //base.OnPageLoad();
             GUIPropertyManager.SetProperty("#Actor.Movies", movies);
 
-            string largeCoverArtImage = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieActors, currentActor.Name);
+            string largeCoverArtImage = MyFilms.conf.StrPathArtist + @"\" + currentActor.Name;
+            if (!System.IO.File.Exists(largeCoverArtImage))
+              largeCoverArtImage = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieActors, currentActor.Name);
             if (imgCoverArt != null)
             {
                 imgCoverArt.Dispose();
@@ -445,22 +379,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
-        #region IRenderLayer
-
-        public bool ShouldRenderLayer()
-        {
-            return true;
-        }
-
-        public void RenderLayer(float timePassed)
-        {
-            Render(timePassed);
-        }
-
-        #endregion
-
-
-      
         //Added for ListControl
         private void OnClick(int itemIndex)
         {

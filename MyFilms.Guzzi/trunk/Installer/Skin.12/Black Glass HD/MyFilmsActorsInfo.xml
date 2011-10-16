@@ -98,7 +98,7 @@
       <layout>StackLayout</layout>
       <control>
         <description>Biography</description>
-        <type>togglebutton</type>
+        <type>button</type>
         <id>3</id>
         <label>1011</label>
         <onleft>2</onleft>
@@ -110,7 +110,7 @@
       </control>
       <control>
         <description>Movies</description>
-        <type>togglebutton</type>
+        <type>button</type>
         <id>4</id>
         <label>342</label>
         <onleft>2</onleft>
