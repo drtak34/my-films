@@ -2108,7 +2108,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if ((iCnt > 0) && (DelimCnt < DelimCnt2) && (sTitle == sPrevTitle)) // don't stack items already at lowest folder level
         {
           iCnt++;
-          item.Label2 = "(" + iCnt.ToString() + ")  " + NewString.PosRight(")  ", item.Label2);// prepend (items in folder count)
+          item.Label2 = "(" + iCnt + ")  " + NewString.PosRight(")  ", item.Label2);// prepend (items in folder count)
           if (iCnt == 2)
           {
             item.Label = sTitle; //reset to current single folder as > 1 entries
@@ -2759,10 +2759,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           currentFanartList.Clear();
 
         string[] wfanart = new string[2];
+        string groupcount = "";
 
         MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[currentItem.ItemId], "");
         string fanartTitle = sTitles.FanartTitle;
-        if (currentItem.TVTag.ToString() == "group") fanartTitle = currentItem.Label; // movie collections in film list
+        if (currentItem.TVTag.ToString() == "group")
+        {
+          fanartTitle = currentItem.Label; // movie collections in film list
+
+          Regex p = new Regex(@"\([0-9]*\)"); // count in brackets
+          MatchCollection matchList = p.Matches(currentItem.Label2); // item.Label2 = "(" + iCnt + ")  " + NewString.PosRight(")  ", item.Label2)
+          if (matchList.Count > 0)
+          {
+            Match matcher = matchList[0];
+            groupcount = matcher.Value;
+          }
+        }
+        MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", groupcount, true);
 
         //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
         //fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);

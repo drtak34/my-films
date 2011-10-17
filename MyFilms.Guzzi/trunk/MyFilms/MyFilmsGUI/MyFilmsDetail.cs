@@ -5593,6 +5593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.mastertitle.label", log);
             clearGUIProperty("user.mastertitle.value", log);
             clearGUIProperty("user.mastertitle.groupname", log);
+            clearGUIProperty("user.mastertitle.groupcount", log);
             clearGUIProperty("user.secondarytitle.label", log);
             clearGUIProperty("user.secondarytitle.value", log);
             clearGUIProperty("user.secondarytitle.groupname", log);
