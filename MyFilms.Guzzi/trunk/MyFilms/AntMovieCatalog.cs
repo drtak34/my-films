@@ -3,6 +3,10 @@
   // using System.Data;
 
   public partial class AntMovieCatalog {
+    partial class CustomFieldDataTable
+    {
+    }
+  
       partial class ContentsDataTable
       {
       }
