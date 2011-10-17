@@ -2314,6 +2314,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string strThumb = string.Empty;
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
+            if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT group views!)
+            {
+              if (System.IO.File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
+              {
+                item.IconImage = conf.StrPathImg + "\\" + item.Label + ".jpg";
+                item.IconImageBig = conf.StrPathImg + "\\" + item.Label + ".jpg";
+                item.ThumbnailImage = conf.StrPathImg + "\\" + item.Label + ".jpg";
+              }
+              else if (System.IO.File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
+              {
+                item.IconImage = conf.StrPathImg + "\\" + item.Label + ".png";
+                item.IconImageBig = conf.StrPathImg + "\\" + item.Label + ".png";
+                item.ThumbnailImage = conf.StrPathImg + "\\" + item.Label + ".png";
+              }
+            }
             if (item.ThumbnailImage == "" || !File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
               {
               //string strlabel = item.Label;
@@ -2355,7 +2370,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!System.IO.File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
             {
               Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
-              LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel.ToString() + "'");
+              LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel + "'");
             }
             if (System.IO.File.Exists(strThumb))
             {
@@ -2658,7 +2673,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Load_Lstdetail(GUIListItem currentItem, bool forceLoading)
     {
       LogMyFilms.Debug("Load_Lstdetail - Start: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
-      if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading)
+      if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading && currentItem.TVTag.ToString() != "group")
       {
         LogMyFilms.Debug("(Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
         return;
@@ -2745,8 +2760,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         string[] wfanart = new string[2];
 
-        string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
-        fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+        MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[currentItem.ItemId], "");
+        string fanartTitle = sTitles.FanartTitle;
+        if (currentItem.TVTag.ToString() == "group") fanartTitle = currentItem.Label; // movie collections in film list
+
+        //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+        //fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
         // fanartTitle = currentItem.Label;
         //if (MyFilms.conf.StrTitle1 == "FormattedTitle") // added to get fanart displayed when mastertitle is set to formattedtitle
         //{
@@ -5635,7 +5654,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }, 0, 0, null);
             }) { Name = "GlobalTrailerUpdate", IsBackground = true }.Start();
             return;
-          break;
+          // break;
 
         case "incomplete-movie-data":
           SearchIncompleteMovies(MyFilms.conf.StrSearchList);

@@ -1502,7 +1502,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                       break;
                     }
-                    break;
 
                 case "removefromdb":
                     dlgYesNo.Reset();
