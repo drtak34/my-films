@@ -2008,13 +2008,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // set online filter only, if scan is done already ...
       if (InitialIsOnlineScan) GlobalFilterString =  GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
       else GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      
-      r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-      LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
-      LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:               '" + conf.StrSorta + "'");
-      LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:            '" + conf.StrSortSens + "'");
+      LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:             '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:             '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:             '" + conf.StrFilmSelect + "'");
+      bool isHierarchyView = false;
+      if (conf.StrTitleSelect != "" && (NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1) > 0) isHierarchyView = true;
+      if (isHierarchyView)
+      {
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:     '" + conf.StrSortaInHierarchies + "'");
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
+        r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSortaInHierarchies, conf.StrSortSensInHierarchies, false);
+      }
+      else
+      {
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:                  '" + conf.StrSorta + "'");
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:               '" + conf.StrSortSens + "'");
+        r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+      }
+
       //if (r.Length == 0)
       //{
       //    //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -2043,8 +2054,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
       MyFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
 
-      BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
-      BtnSrtBy.Label = conf.CurrentSortMethod;
+      if (isHierarchyView)
+      {
+        BtnSrtBy.IsAscending = (conf.StrSortSensInHierarchies == " ASC");
+        BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
+        BtnSrtBy.Disabled = true;
+      }
+      else
+      {
+        BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
+        BtnSrtBy.Label = conf.CurrentSortMethod;
+        BtnSrtBy.Disabled = false;
+      }
 
       if (conf.StrTitleSelect != "") DelimCnt = NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1; //get num .'s in title
       facadeView.Clear();

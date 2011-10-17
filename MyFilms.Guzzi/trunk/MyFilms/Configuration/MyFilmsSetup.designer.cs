@@ -284,6 +284,11 @@
           this.AntUpdItem1 = new System.Windows.Forms.ComboBox();
           this.AntUpdText1 = new System.Windows.Forms.TextBox();
           this.Tab_Search = new System.Windows.Forms.TabPage();
+          this.groupBox4 = new System.Windows.Forms.GroupBox();
+          this.label63 = new System.Windows.Forms.Label();
+          this.label62 = new System.Windows.Forms.Label();
+          this.SortSensInHierarchies = new System.Windows.Forms.ComboBox();
+          this.SortInHierarchies = new System.Windows.Forms.ComboBox();
           this.groupBox_SortByItem = new System.Windows.Forms.GroupBox();
           this.AntSort2 = new System.Windows.Forms.ComboBox();
           this.AntTSort2 = new System.Windows.Forms.TextBox();
@@ -547,6 +552,7 @@
           this.groupBox2.SuspendLayout();
           this.groupBox_AntUpdatingItems.SuspendLayout();
           this.Tab_Search.SuspendLayout();
+          this.groupBox4.SuspendLayout();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBoxSearchByProperties.SuspendLayout();
           this.groupBox_SupplementarySearch.SuspendLayout();
@@ -2691,6 +2697,7 @@
           // 
           // Tab_Search
           // 
+          this.Tab_Search.Controls.Add(this.groupBox4);
           this.Tab_Search.Controls.Add(this.groupBox_SortByItem);
           this.Tab_Search.Controls.Add(this.groupBoxSearchByProperties);
           this.Tab_Search.Controls.Add(this.groupBox_SupplementarySearch);
@@ -2702,6 +2709,60 @@
           this.Tab_Search.Text = "Sort/Search";
           this.ToolTip1.SetToolTip(this.Tab_Search, "Setup for user defined searches \r\nand user defined sort items");
           this.Tab_Search.UseVisualStyleBackColor = true;
+          // 
+          // groupBox4
+          // 
+          this.groupBox4.Controls.Add(this.label63);
+          this.groupBox4.Controls.Add(this.label62);
+          this.groupBox4.Controls.Add(this.SortSensInHierarchies);
+          this.groupBox4.Controls.Add(this.SortInHierarchies);
+          this.groupBox4.Location = new System.Drawing.Point(377, 11);
+          this.groupBox4.Name = "groupBox4";
+          this.groupBox4.Size = new System.Drawing.Size(350, 77);
+          this.groupBox4.TabIndex = 37;
+          this.groupBox4.TabStop = false;
+          this.groupBox4.Text = "User defined Sort in movie groups (hierarchies) ...";
+          this.ToolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
+          // 
+          // label63
+          // 
+          this.label63.AutoSize = true;
+          this.label63.Location = new System.Drawing.Point(170, 26);
+          this.label63.Name = "label63";
+          this.label63.Size = new System.Drawing.Size(55, 13);
+          this.label63.TabIndex = 3;
+          this.label63.Text = "Sort Order";
+          // 
+          // label62
+          // 
+          this.label62.AutoSize = true;
+          this.label62.Location = new System.Drawing.Point(30, 26);
+          this.label62.Name = "label62";
+          this.label62.Size = new System.Drawing.Size(97, 13);
+          this.label62.TabIndex = 2;
+          this.label62.Text = "Hierarchy Sort Item";
+          this.ToolTip1.SetToolTip(this.label62, "Select an optional field to be used for hierarchy sort order.");
+          // 
+          // SortSensInHierarchies
+          // 
+          this.SortSensInHierarchies.FormattingEnabled = true;
+          this.SortSensInHierarchies.Items.AddRange(new object[] {
+            "ASC",
+            "DESC"});
+          this.SortSensInHierarchies.Location = new System.Drawing.Point(168, 45);
+          this.SortSensInHierarchies.Name = "SortSensInHierarchies";
+          this.SortSensInHierarchies.Size = new System.Drawing.Size(66, 21);
+          this.SortSensInHierarchies.TabIndex = 1;
+          this.SortSensInHierarchies.Text = "ASC";
+          this.ToolTip1.SetToolTip(this.SortSensInHierarchies, "Select, if hierarchy sort order should be ascending or descending.");
+          // 
+          // SortInHierarchies
+          // 
+          this.SortInHierarchies.FormattingEnabled = true;
+          this.SortInHierarchies.Location = new System.Drawing.Point(28, 45);
+          this.SortInHierarchies.Name = "SortInHierarchies";
+          this.SortInHierarchies.Size = new System.Drawing.Size(121, 21);
+          this.SortInHierarchies.TabIndex = 0;
           // 
           // groupBox_SortByItem
           // 
@@ -2724,6 +2785,7 @@
           this.AntSort2.Name = "AntSort2";
           this.AntSort2.Size = new System.Drawing.Size(145, 21);
           this.AntSort2.TabIndex = 38;
+          this.AntSort2.SelectedIndexChanged += new System.EventHandler(this.AntSort2_SelectedIndexChanged);
           // 
           // AntTSort2
           // 
@@ -2739,6 +2801,7 @@
           this.AntSort1.Name = "AntSort1";
           this.AntSort1.Size = new System.Drawing.Size(145, 21);
           this.AntSort1.TabIndex = 36;
+          this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
           // 
           // AntTSort1
           // 
@@ -5408,6 +5471,8 @@
           this.groupBox_AntUpdatingItems.ResumeLayout(false);
           this.groupBox_AntUpdatingItems.PerformLayout();
           this.Tab_Search.ResumeLayout(false);
+          this.groupBox4.ResumeLayout(false);
+          this.groupBox4.PerformLayout();
           this.groupBox_SortByItem.ResumeLayout(false);
           this.groupBox_SortByItem.PerformLayout();
           this.groupBoxSearchByProperties.ResumeLayout(false);
@@ -5902,5 +5967,10 @@
         private Label label61;
         private Label lblFilterGrabberScripts;
         private TextBox ItemSearchGrabberScriptsFilter;
+        private GroupBox groupBox4;
+        private Label label63;
+        private Label label62;
+        private ComboBox SortSensInHierarchies;
+        private ComboBox SortInHierarchies;
     }
 }

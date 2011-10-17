@@ -170,6 +170,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSort1.Items.Add("(none)");
             AntSort2.Items.Add("(none)");
             Sort.Items.Add("(none)");
+            SortInHierarchies.Items.Add("(none)");
             AntIdentItem.Items.Add("(none)");
             //AntFilterMinRating.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
@@ -875,6 +876,48 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     break;
                                        
             }
+
+            string wDfltSortMethodInHierarchies = string.Empty;
+            string wDfltSortInHierarchies = string.Empty;
+            switch (SortInHierarchies.Text.ToLower())
+            {
+              case "(none)":
+                break;
+              case "title":
+                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(103);
+                if (AntSTitle.Text != "(none)" && AntSTitle.Text.Length > 0)
+                  wDfltSortInHierarchies = AntSTitle.Text;
+                else
+                  wDfltSortInHierarchies = AntTitle1.Text;
+                break;
+              case "year":
+                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(366);
+                wDfltSortInHierarchies = "YEAR";
+                break;
+              case "date":
+                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(621);
+                wDfltSortInHierarchies = "DateAdded";
+                break;
+              case "rating":
+                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(367);
+                wDfltSortInHierarchies = "RATING";
+                break;
+              default:
+                wDfltSortInHierarchies = SortInHierarchies.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
+                if (SortInHierarchies.Text.ToLower() == AntSort1.Text.ToLower())
+                {
+                  wDfltSortMethodInHierarchies = AntTSort1.Text;
+                  wDfltSortInHierarchies = AntSort1.Text;
+                }
+                if (SortInHierarchies.Text.ToLower() == AntSort2.Text.ToLower())
+                {
+                  wDfltSortMethodInHierarchies = AntTSort2.Text;
+                  wDfltSortInHierarchies = AntSort2.Text;
+                }
+                break;
+
+            }
+
             // backup the XML Config before writing
             if (System.IO.File.Exists(XmlConfig.EntireFilenameConfig("MyFilms")))
                 System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilms"), XmlConfig.EntireFilenameConfig("MyFilms") + ".bak", true);
@@ -993,10 +1036,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSort", wDfltSort);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSens", SortSens.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltSortMethod", wDfltSortMethod);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortInHierarchies", wDfltSortInHierarchies); // InHierarchies
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSensInHierarchies", SortSensInHierarchies.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltSortMethodInHierarchies", wDfltSortMethodInHierarchies);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSort", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSortSens", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CurrentSortMethod", "");
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSortSens", "");
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSortInHierarchies", "");
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSortSensInHierarchies", "");
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CurrentSortMethodInHierarchies", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "IndexItem", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "TitleDelim", TitleDelim.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "LayOut", WLayOut);
@@ -1269,7 +1317,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSort2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSort2", "");
             AntTSort2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTSort2", "");
             Sort.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSort", "");
+            SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortInHierarchies", "");
             SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSens", "");
+            SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSensInHierarchies", "");
             //AntFilterMinRating.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterMinRating", "5");
             AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem1", "");
             AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign1", "#");
@@ -1674,6 +1724,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSort2.ResetText();
             AntTSort2.ResetText();
             Sort.ResetText();
+            SortInHierarchies.ResetText();
             //AntFilterMinRating.ResetText();
             AntFilterItem1.ResetText();
             AntFilterItem2.ResetText();
@@ -3548,6 +3599,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void AntSort_Change()
         {
             Sort.Items.Clear();
+            SortInHierarchies.Items.Clear();
             //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
             //    Sort.Items.Add(AntSTitle.Text);
             //else
@@ -3556,10 +3608,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Sort.Items.Add("Year");
             Sort.Items.Add("Date");
             Sort.Items.Add("Rating");
+            SortInHierarchies.Items.Add("Title");
+            SortInHierarchies.Items.Add("Year");
+            SortInHierarchies.Items.Add("Date");
+            SortInHierarchies.Items.Add("Rating");
             if (!(AntSort1.Text == "(none)") && this.AntSort1.Text.Length != 0)
-                Sort.Items.Add(AntSort1.Text);
+            {
+              Sort.Items.Add(AntSort1.Text);
+              SortInHierarchies.Items.Add(AntSort1.Text);
+            }
             if (!(AntSort2.Text == "(none)") && this.AntSort2.Text.Length != 0)
-                Sort.Items.Add(AntSort2.Text);
+            {
+              Sort.Items.Add(AntSort2.Text);
+              SortInHierarchies.Items.Add(AntSort2.Text);
+            }
 
             //Guzzi: Added to not Reset setting when localized strings present
             if (
@@ -3572,14 +3634,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 !(Sort.Text.ToLower() == AntSort1.Text.ToLower()) &&
                 !(Sort.Text.ToLower() == AntSort2.Text.ToLower())
                 )
-                    {
-                        Sort.Text = "(none)";
-                    }
+            {
+                Sort.Text = "(none)";
+            }
             
 //            if (!(Sort.Items.Contains(Sort.Text)))
 //            {
 //                Sort.Text = "(none)";
 //            }
+            if (
+                !(SortInHierarchies.Text.ToLower().Contains("title")) &&
+                !(SortInHierarchies.Text.ToLower() == "year") &&
+                !(SortInHierarchies.Text.ToLower().Contains("date")) &&
+                !(SortInHierarchies.Text.ToLower() == "rating") &&
+                !(AntSort1.Text.Length == 0) &&
+                !(AntSort2.Text.Length == 0) &&
+                !(SortInHierarchies.Text.ToLower() == AntSort1.Text.ToLower()) &&
+                !(SortInHierarchies.Text.ToLower() == AntSort2.Text.ToLower())
+                )
+            {
+              SortInHierarchies.Text = "(none)";
+            }
         }
 
 
@@ -5763,6 +5838,5 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //  // chkGlobalAvailableOnly.Checked = false;
           //}
         }
-
     }
 }
