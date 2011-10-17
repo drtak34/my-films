@@ -2011,9 +2011,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:             '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:             '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:             '" + conf.StrFilmSelect + "'");
-      bool isHierarchyView = false;
-      if (conf.StrTitleSelect != "" && (NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1) > 0) isHierarchyView = true;
-      if (isHierarchyView)
+      bool activateHierarchyView = false;
+      if (conf.StrTitleSelect != "" && (NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1) > 0 && (conf.StrSortaInHierarchies != "(none)" && conf.StrSortaInHierarchies.Length > 0)) 
+        activateHierarchyView = true;
+      if (activateHierarchyView)
       {
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:     '" + conf.StrSortaInHierarchies + "'");
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
@@ -2054,7 +2055,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
       MyFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
 
-      if (isHierarchyView)
+      if (activateHierarchyView)
       {
         BtnSrtBy.IsAscending = (conf.StrSortSensInHierarchies == " ASC");
         BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
