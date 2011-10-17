@@ -2061,18 +2061,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       foreach (DataRow sr in r)
       {
-        //if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
-        //{
-        //  string movieNumberString = Int32.Parse(sr["Number"].ToString()).ToString();
-        //  if (movieNumberString == loadParamInfo.MovieID) //if (sr["number"].ToString() == loadParamInfo.MovieID)
-        //  {
-        //    int index = 0;
-        //    bool success = int.TryParse(loadParamInfo.MovieID, out index);
-        //    conf.StrIndex = index;
-        //    conf.StrTIndex = sr[conf.StrTitle1].ToString();
-        //  }
-        //}
-
         tmpwatched = false; 
         number++;
         if (conf.Boolreturn)//in case of selection by view verify if value correspond excatly to the searched string
@@ -2772,7 +2760,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (matchList.Count > 0)
           {
             Match matcher = matchList[0];
-            groupcount = matcher.Value;
+            groupcount = matcher.Value.Trim(new Char[] { '(', ')' }).Trim();
           }
         }
         MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", groupcount, true);
