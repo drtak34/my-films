@@ -2792,18 +2792,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (supportedfunctions.Length == 0 && (grabtype == GrabType.Details || grabtype == GrabType.All)) // if there is no functions set and trying legacy menu ...
               add = true;
-          foreach (string supportedfunction in supportedfunctions)
+          else
           {
-            if (showallLanguages) add = true;
-            
-            foreach (string allowedlanguage in allowedlanguages)
+            foreach (string supportedfunction in supportedfunctions)
             {
-              foreach (string supportedlanguage in supportedlanguages)
+              if (supportedfunction.Trim().ToLower() == grabtype.ToString().ToLower() || (supportedfunction.Trim().ToLower() == "details" && grabtype.ToString().ToLower() == "all"))
               {
-                if ((supportedlanguage.Trim().ToLower() == allowedlanguage.Trim().ToLower() || showallLanguages)
-                  && (supportedfunction.Trim().ToLower() == grabtype.ToString().ToLower() || (supportedfunction.Trim().ToLower() == "details" && grabtype.ToString().ToLower() == "all")))
-                {
+                if (showallLanguages)
                   add = true;
+                else
+                {
+                  foreach (string allowedlanguage in allowedlanguages)
+                  {
+                    foreach (string supportedlanguage in supportedlanguages)
+                    {
+                      if (supportedlanguage.Trim().ToLower() == allowedlanguage.Trim().ToLower())
+                        add = true;
+                    }
+                  }
                 }
               }
             }
