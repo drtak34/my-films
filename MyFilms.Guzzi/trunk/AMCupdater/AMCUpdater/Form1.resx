@@ -659,7 +659,12 @@ Other grabber scripts require matching by name and year, that might not always a
     <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
 Normally used for film Trilogies and so on.
 The update will attempt to work out which films are grouped based on the folder structure.
-The movie title will then be saved as 'Groupname \ Movie Name'</value>
+The movie title will then be saved as 'Groupname \ Movie Name'.
+
+Note:
+The group name is depending on the setting of "Title and Search Handling":
+- "File" -&gt; the folder containing the file will be returned as group name.
+- "Folder" -&gt; the parnet folder of the movie folder will be returned as group name.</value>
   </data>
   <data name="chkReadDVDLabel.ToolTip" xml:space="preserve">
     <value>When importing movies from CD or DVD:

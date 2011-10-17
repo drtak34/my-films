@@ -956,7 +956,7 @@ Module Module1
 
 
 
-    Public Function GetGroupName(ByVal FilePath As String)
+    Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String)
         Dim ReturnValue As String = String.Empty
 
         '2001\2001 - A Space Odyssey.avi
@@ -984,7 +984,16 @@ Module Module1
             Else
                 Dim Blah As String() = FilePath.Split("\")
                 'We should now have at least 3 strings, the last of which will be the filename.  Let's use the one before that:
-                ReturnValue = Blah(Blah.Length - 2)
+                ' Todo depends on Title handling ...
+                'File(Name)
+                'Folder(Name)
+                'Relative(Name)
+
+                If Movie_Title_Handling.Contains("Folder") And Blah.Length > 2 Then ' if it's "folder handling", use parent folder of the movie folder
+                    ReturnValue = Blah(Blah.Length - 3)
+                Else
+                    ReturnValue = Blah(Blah.Length - 2) ' use movie folder itself
+                End If
             End If
 
         End If

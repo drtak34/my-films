@@ -836,6 +836,9 @@ Public Class AntProcessor
                                 Else
                                     .OverridePath = FileToScan
                                 End If
+                                'File(Name)
+                                'Folder(Name)
+                                'Relative(Name)
                                 If wtitle.Length > 0 Then
                                     If wtitle.Contains("\") = True Then
                                         .GroupName = wtitle.Substring(0, wtitle.LastIndexOf("\"))
@@ -1463,7 +1466,7 @@ Public Class AntProcessor
                 Dim IsMultiPart As Boolean = False
                 For Each row In ds.Tables("tblOrphanedMediaFiles").Rows
                     If row("FileName").ToString.Contains("\") Then
-                        CurrentFoldername = GetGroupName(row("FileName"))
+                        CurrentFoldername = GetGroupName(row("FileName"), CurrentSettings.Movie_Title_Handling)
                         'If FolderNames.ContainsValue(CurrentFoldername) Then
                         '    'Already there - this is a group name, unless it's a multi-part file:
                         '    m = SplitText.Match(row("FileName"))
@@ -1493,7 +1496,7 @@ Public Class AntProcessor
                     'Need to update the shared datatable with the group names:
                     For Each row In ds.Tables("tblOrphanedMediaFiles").Rows
                         If row("FileName").ToString.Contains("\") Then
-                            CurrentFoldername = GetGroupName(row("FileName"))
+                            CurrentFoldername = GetGroupName(row("FileName"), CurrentSettings.Movie_Title_Handling)
                             'CurrentFoldername = row("FileName").ToString
                             'CurrentFoldername = CurrentFoldername.Substring(0, CurrentFoldername.IndexOf("\"))
                             If GroupNames.ContainsValue(CurrentFoldername) Then
@@ -1510,7 +1513,7 @@ Public Class AntProcessor
             If ds.Tables("tblOrphanedNonMediaFiles") IsNot Nothing Then
                 For Each row In ds.Tables("tblOrphanedNonMediaFiles").Rows
                     If row("FileName").ToString.Contains("\") Then
-                        CurrentFoldername = GetGroupName(row("FileName"))
+                        CurrentFoldername = GetGroupName(row("FileName"), CurrentSettings.Movie_Title_Handling)
                         If FolderNames.ContainsValue(CurrentFoldername) Then
                             'Already there - this is a group name, unless it's a multi-part file:
                             m = SplitText.Match(row("FileName"))
@@ -1527,7 +1530,7 @@ Public Class AntProcessor
                 'Repeat to catch the missing ones (bad technique but it should work!)
                 For Each row In ds.Tables("tblOrphanedNonMediaFiles").Rows
                     If row("FileName").ToString.Contains("\") Then
-                        CurrentFoldername = GetGroupName(row("FileName"))
+                        CurrentFoldername = GetGroupName(row("FileName"), CurrentSettings.Movie_Title_Handling)
                         If GroupNames.ContainsValue(CurrentFoldername) Then
                             'Make sure this entry is in there too!
                             If Not GroupNames.ContainsKey(row("FileName")) Then
@@ -1540,7 +1543,7 @@ Public Class AntProcessor
                 If GroupNames.Count > 0 Then
                     For Each row In ds.Tables("tblOrphanedNonMediaFiles").Rows
                         If row("FileName").ToString.Contains("\") Then
-                            CurrentFoldername = GetGroupName(row("FileName"))
+                            CurrentFoldername = GetGroupName(row("FileName"), CurrentSettings.Movie_Title_Handling)
                             'CurrentFoldername = row("FileName").ToString
                             'CurrentFoldername = CurrentFoldername.Substring(0, CurrentFoldername.IndexOf("\"))
                             If GroupNames.ContainsValue(CurrentFoldername) Then
