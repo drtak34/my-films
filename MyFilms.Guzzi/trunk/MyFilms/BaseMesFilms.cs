@@ -211,11 +211,8 @@ namespace MyFilmsPlugin.MyFilms
           if (data == null)
           {
             initData();
-            LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
-            LogMyFilms.Debug("StrSelect          : '" + StrSelect + "'");
-            LogMyFilms.Debug("StrSort            : '" + StrSort + "'");
-            LogMyFilms.Debug("StrSortSens        : '" + StrSortSens + "'");
-            LogMyFilms.Debug("RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
+            LogMyFilms.Debug("StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "'");
+            LogMyFilms.Debug("RESULTING DS SELECT = '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
           }
           else 
             LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");

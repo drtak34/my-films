@@ -886,7 +886,7 @@ End additional Backdrops  -->
 			<width>750</width>
 			<label>#myfilms.db.year.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
 			<textcolor>90FFFFFF</textcolor>
-			<visible>!control.isvisible(34)+!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
+			<visible>!string.equals(#myfilms.user.mastertitle,)+!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -1438,7 +1438,7 @@ End additional Backdrops  -->
 				<height>40</height>
 				<colordiffuse>b0ffffff</colordiffuse>
 				<texture>MyFilms\overlaywubg.png</texture>
-				<visible>facadeview.list+!Control.HasFocus(10099)</visible>
+				<visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+facadeview.list+!Control.HasFocus(10099)</visible>
 				<animation effect="fade" time="250">visiblechange</animation>
 				<animation effect="fade" time="250">WindowClose</animation>	
 				<animation effect="fade" time="250">WindowOpen</animation>
@@ -1452,7 +1452,7 @@ End additional Backdrops  -->
 				<width>24</width>
 				<height>24</height>
 				<texture>MyFilms\overlaywatched.png</texture>
-				<visible>facadeview.list+!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
+				<visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+facadeview.list+!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
 				<animation effect="fade" time="250">visiblechange</animation>
 				<animation effect="fade" time="250">WindowClose</animation>	
 				<animation effect="fade" time="250">WindowOpen</animation>
@@ -1467,7 +1467,7 @@ End additional Backdrops  -->
 				<width>24</width>
 				<height>24</height>
 				<texture>MyFilms\overlayunwatched.png</texture>
-				<visible>facadeview.list+!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
+				<visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+facadeview.list+!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
 				<animation effect="fade" time="250">visiblechange</animation>
 				<animation effect="fade" time="250">WindowClose</animation>	
 				<animation effect="fade" time="250">WindowOpen</animation>
