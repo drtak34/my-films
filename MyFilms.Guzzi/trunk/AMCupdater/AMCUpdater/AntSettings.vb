@@ -655,6 +655,14 @@ Public Class AntSettings
             SetAttribute("Auto_Approve_Limits", value)
         End Set
     End Property
+    Public Property Group_Name_Identifier() As String
+        Get
+            Return ReadAttribute("Group_Name_Identifier")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Group_Name_Identifier", value)
+        End Set
+    End Property
 
     Public Sub New()
         Dim AppPath As String = My.Application.Info.DirectoryPath
@@ -751,6 +759,7 @@ Public Class AntSettings
         dt.Rows.Add("Only_Add_Missing_Data", "False")
         dt.Rows.Add("Only_Update_With_Nonempty_Data", "False")
         dt.Rows.Add("Auto_Approve_Limits", "")
+        dt.Rows.Add("Group_Name_Identifier", "")
 
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False

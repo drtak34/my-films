@@ -956,7 +956,7 @@ Module Module1
 
 
 
-    Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String)
+    Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String, ByVal Group_Name_Identifier As String)
         Dim ReturnValue As String = String.Empty
 
         '2001\2001 - A Space Odyssey.avi
@@ -977,7 +977,11 @@ Module Module1
         'The Matrix Trilogy\The Matrix Revisited (2of2).mkv
         'The Matrix Trilogy\The Matrix.mkv
 
-        If FilePath.Contains("\") = True Then
+        If FilePath.Contains("\") = False Then
+            Return ReturnValue
+        End If
+        ' If parts can be found...
+        If Group_Name_Identifier.Length = 0 Then ' no search expression defined - use standard rules
             If FilePath.Split("\").Length = 2 Then
                 'Just a folder and a filename it seems - use the parent.
                 ReturnValue = FilePath.Substring(0, FilePath.IndexOf("\"))
@@ -996,6 +1000,15 @@ Module Module1
                 End If
             End If
 
+        Else ' search expression found - search for last match
+            Dim Blah As String() = FilePath.Split("\")
+            'We should now have at least 3 strings, the last of which will be the filename.  Let's use the one before that:
+            For Each Part As String In Blah
+                If Part.Contains(Group_Name_Identifier) Then
+                    ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
+                End If
+            Next
+            ' finally we have the last found match, use it as ReturnValue
         End If
 
         Return ReturnValue

@@ -2114,6 +2114,11 @@ Public Class Form1
         CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailIgnoreWhenInteractive.Checked
         CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
 
+        CurrentSettings.Group_Name_Identifier = txtGroupNameIdentifier.Text
+
+
+
+
         Select Case cbPictureHandling.SelectedItem
             Case "Relative Path"
                 CurrentSettings.Store_Image_With_Relative_Path = True
@@ -2282,6 +2287,8 @@ Public Class Form1
             chkGrabberOverrideGetRoles.Text = CurrentSettings.Grabber_Override_GetRoles
             chkGrabberOverridePersonLimit.Text = CurrentSettings.Grabber_Override_PersonLimit
             chkGrabberOverrideTitleLimit.Text = CurrentSettings.Grabber_Override_TitleLimit
+
+            txtGroupNameIdentifier.Text = CurrentSettings.Group_Name_Identifier
 
             Dim DBFields() As String
             DBFields = CurrentSettings.Database_Fields_To_Import.Split(";")
