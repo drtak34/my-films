@@ -193,4 +193,7 @@
   <Values Option="Movie_Fanart_Number_Limit">
     <Value>3</Value>
   </Values>
+  <Values Option="Group_Name_Identifier">
+    <Value></Value>
+  </Values>
 </NewDataSet>
