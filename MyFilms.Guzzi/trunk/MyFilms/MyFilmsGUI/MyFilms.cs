@@ -653,8 +653,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!personcover.Active) personcover.Active = true;
 
       OnPageLoad_DoPageLoad(); // run former WindowInit synchronous
+
+      loadParamInfo = null; // all done, so "null" it to allow "normal browsing" now ...
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
       base.OnPageLoad(); // let animations run
+
       //new System.Threading.Thread(delegate()
       //{
       //  this.OnPageLoad_DoPageLoad();
@@ -2069,7 +2072,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
       MyFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
 
-      if (conf.BoolCollection)
+      if (conf.BoolCollection && !string.IsNullOrEmpty(conf.CurrentSortMethodInHierarchies))
       {
         BtnSrtBy.IsAscending = (conf.StrSortSensInHierarchies == " ASC");
         BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
@@ -2929,7 +2932,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Substring(1, 3).ToLower())
+        if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
           return;
 
         if (BtnSrtBy.IsAscending)

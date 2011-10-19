@@ -12,8 +12,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public enum ReturnMode { Locked, Root };
 
-        protected bool _ShowVKonFailedSearch = true;
-
         public string Config { get; protected set; }
         public string MovieID { get; protected set; }
         public string Play { get; protected set; }
@@ -25,7 +23,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public string Search { get; protected set; }
         
-        public bool ShowVKonFailedSearch { get { return _ShowVKonFailedSearch; } }
         public ReturnMode Return { get; protected set; }
 
         public LoadParameterInfo(string loadParam)
@@ -53,41 +50,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ViewValue = Regex.Match(loadParam, "viewvalue:([^|]*)").Groups[1].Value; // Category value, e.g. "Country" to show that category's movies directly
             Layout = Regex.Match(loadParam, "layout:([^|]*)").Groups[1].Value; // Choose Layout -> 0, 1, 2, 3, 4 for ListView, SmallThumb, BigThumb, FilmStrip, CoverFlow
             Search = Regex.Match(loadParam, "search:([^|]*)").Groups[1].Value; // Start MyFilms with GlobalSearch with that parameter
-            if (!bool.TryParse(Regex.Match(loadParam, "VKonfail:([^|]*)").Groups[1].Value, out _ShowVKonFailedSearch)) _ShowVKonFailedSearch = true;
             try { Return = (ReturnMode)Enum.Parse(typeof(ReturnMode), Regex.Match(loadParam, "return:([^|]*)").Groups[1].Value); }
             catch { Return = ReturnMode.Root; }
-
-            //try
-            //{
-            //  foreach (String currParam in loadParam.Split('|'))
-            //  {
-            //    String[] keyValue = currParam.Split(':');
-            //    String key = keyValue[0];
-            //    String value = keyValue[1];
-
-            //    try
-            //    {
-            //      switch (key)
-            //      {
-            //        case "categoryname":
-            //          Category = value;
-            //          if (Category == null) MyFilms.ShowNotifyDialog("MyFilms", "BadCategory");
-            //          break;
-            //        case "movieid":
-            //          break;
-            //      }
-            //    }
-            //    catch (FormatException)
-            //    {
-            //      LogMyFilms.Warn("Received invalid load parameter: " + currParam);
-            //      MyFilms.ShowNotifyDialog("MyFilms", "Bad Loadparameter");
-            //    }
-            //  }
-            //}
-            //catch (Exception ex)
-            //{
-            //  LogMyFilms.Debug("Unexpected error parsing paramater: " + loadParam, ex);
-            //}
         }
 
         public static string FromGuiProperties()
