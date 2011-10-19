@@ -5026,8 +5026,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           // Create country specific settings
           cbGrabberOverrideLanguage.Text = newCountry;
+
+          // set defaults first:
+          txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+          cbGrabberOverrideGetRoles.Text = "true";
+          cbGrabberOverridePersonLimit.Text = "10";
+          cbGrabberOverrideTitleLimit.Text = "0";
+          ItemSearchGrabberScriptsFilter.Text = "";
+
           switch (newCountry)
           {
+            case "Austria":
             case "Germany":
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.DE-OFDB.xml";
               cbGrabberOverrideGetRoles.Text = "";
@@ -5038,35 +5047,40 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             case "Canada":
             case "UK":
             case "USA":
+            case "Australia":
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
               cbGrabberOverrideGetRoles.Text = "true";
               cbGrabberOverridePersonLimit.Text = "10";
               cbGrabberOverrideTitleLimit.Text = "0";
               ItemSearchGrabberScriptsFilter.Text = "en, all";
               break;
-
-            default:
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
-              cbGrabberOverrideGetRoles.Text = "true";
-              cbGrabberOverridePersonLimit.Text = "10";
-              cbGrabberOverrideTitleLimit.Text = "0";
-              ItemSearchGrabberScriptsFilter.Text = "";
+            case "Argentina":
+            case "Peru":
+            case "Spain":
+            case "Chile":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.ES.xml";
+              ItemSearchGrabberScriptsFilter.Text = "es, all";
               break;
-
+            case "France":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.FR.xml";
+              ItemSearchGrabberScriptsFilter.Text = "fr, all";
+              break;
+            case "Italy":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.IT.xml";
+              ItemSearchGrabberScriptsFilter.Text = "it, all";
+              break;
+            case "Portugal":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.PT.xml";
+              ItemSearchGrabberScriptsFilter.Text = "pt, all";
+              break;
           // No country specific settings:  
-          //Argentina
-          //Australia
-          //Austria
           //Belgium
           //Brazil
-          //Canada
-          //Chile
           //Croatia
           //Czech Republic
           //Denmark
           //Estonia
           //Finland
-          //France
           //Greece
           //Hong Kong
           //Hungary
@@ -5074,17 +5088,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //India
           //Ireland
           //Israel
-          //Italy
           //Japan
           //Malaysia
           //Mexico
           //Netherlands
           //New Zealand
           //Norway
-          //Peru
           //Philippines
           //Poland
-          //Portugal
           //Romania
           //Russia
           //Singapore
@@ -5092,7 +5103,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Slovenia
           //South Africa
           //South Korea
-          //Spain
           //Sweden
           //Switzerland
           //Turkey
