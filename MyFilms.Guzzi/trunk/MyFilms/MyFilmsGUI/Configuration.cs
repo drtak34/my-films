@@ -483,14 +483,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       StrSortSens = wDfltSortSens;
                       CurrentSortMethod = wDfltSortMethod;
                     }
+                    if (wDfltSortInHierarchies != "(none)" && wDfltSortInHierarchies.Length > 0) // hierarchies sort settings
+                    {
+                      StrSortaInHierarchies = wDfltSortInHierarchies;
+                      StrSortSensInHierarchies = wDfltSortSensInHierarchies;
+                      CurrentSortMethodInHierarchies = wDfltSortMethodInHierarchies;
+                    }
                 }
 
-                if (wDfltSortInHierarchies != "(none)" && wDfltSortInHierarchies.Length > 0) // hierarchies sort settings
-                {
-                  StrSortaInHierarchies = wDfltSortInHierarchies;
-                  StrSortSensInHierarchies = wDfltSortSensInHierarchies;
-                  CurrentSortMethodInHierarchies = wDfltSortMethodInHierarchies;
-                }
                 XmlConfig.Dispose();
             } // End reading config
           
