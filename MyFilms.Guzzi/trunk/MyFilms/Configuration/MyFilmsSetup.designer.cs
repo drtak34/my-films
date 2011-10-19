@@ -461,6 +461,7 @@
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.chkSuppressManual = new System.Windows.Forms.CheckBox();
+          this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
           this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
@@ -531,7 +532,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -4657,6 +4657,17 @@
                   "");
           this.chkSuppressManual.UseVisualStyleBackColor = true;
           // 
+          // btnHyperLinkParamGen
+          // 
+          this.btnHyperLinkParamGen.Location = new System.Drawing.Point(667, 37);
+          this.btnHyperLinkParamGen.Name = "btnHyperLinkParamGen";
+          this.btnHyperLinkParamGen.Size = new System.Drawing.Size(75, 23);
+          this.btnHyperLinkParamGen.TabIndex = 82;
+          this.btnHyperLinkParamGen.Text = "StartParams";
+          this.ToolTip1.SetToolTip(this.btnHyperLinkParamGen, resources.GetString("btnHyperLinkParamGen.ToolTip"));
+          this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
+          this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
+          // 
           // AntFilterSign4
           // 
           this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
@@ -5403,17 +5414,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // btnHyperLinkParamGen
-          // 
-          this.btnHyperLinkParamGen.Location = new System.Drawing.Point(667, 37);
-          this.btnHyperLinkParamGen.Name = "btnHyperLinkParamGen";
-          this.btnHyperLinkParamGen.Size = new System.Drawing.Size(75, 23);
-          this.btnHyperLinkParamGen.TabIndex = 82;
-          this.btnHyperLinkParamGen.Text = "StartParams";
-          this.ToolTip1.SetToolTip(this.btnHyperLinkParamGen, resources.GetString("btnHyperLinkParamGen.ToolTip"));
-          this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
-          this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
           // 
           // MyFilmsSetup
           // 

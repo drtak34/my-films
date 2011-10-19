@@ -329,7 +329,6 @@ Usage:
 - use ";" or "," as separator
 - use 2-letter language codes for country/language selection (e.g. "en" for english, "de" for german)
 - use "all" to display grabber scripts for multiple languages
-- use "local" to display grabbers for local use (like nfo grabber script)
 - leave empty to show all available grabber scripts
 - if no scripts match your restriction, you might not get a selection</value>
   </data>
