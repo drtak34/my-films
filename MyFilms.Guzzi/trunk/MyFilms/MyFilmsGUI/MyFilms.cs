@@ -2151,7 +2151,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.TVTag = "film";
           if (!MyFilms.conf.OnlyTitleList)
           {
-            switch (conf.StrSorta)
+            string sortItem = conf.StrSorta;
+            if (conf.BoolCollection) 
+              sortItem = conf.StrSortaInHierarchies;
+
+
+            switch (sortItem)
             {
               case "TranslatedTitle":
               case "OriginalTitle":
@@ -2169,10 +2174,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.Label2 = sr["Rating"].ToString();
                 break;
               default:
-                if (conf.StrSorta == conf.StrSTitle)
+                if (sortItem == conf.StrSTitle)
                   item.Label2 = sr["Year"].ToString();
                 else
-                  item.Label2 = sr[conf.StrSorta].ToString();
+                  item.Label2 = sr[sortItem].ToString();
                 break;
             }
           }
@@ -2912,10 +2917,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     void SortChanged(object sender, SortEventArgs e)
     {
-      if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Substring(1, 3).ToLower())
-        return;
       if (conf.BoolCollection)
       {
+        if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInHierarchies.Trim().Substring(0, 3).ToLower())
+          return;
+
         if (BtnSrtBy.IsAscending)
           conf.StrSortSensInHierarchies = " ASC";
         else
@@ -2923,11 +2929,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
+        if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Substring(1, 3).ToLower())
+          return;
+
         if (BtnSrtBy.IsAscending)
           conf.StrSortSens = " ASC";
         else
           conf.StrSortSens = " DESC";
       }
+
       if (!conf.Boolselect)
         GetFilmList();
       else

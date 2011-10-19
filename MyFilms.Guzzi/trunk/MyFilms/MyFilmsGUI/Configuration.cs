@@ -503,7 +503,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (StrSorta == "")
                 StrSorta = StrSTitle;
             if (StrSortSens == "")
-                StrSortSens = " ASC";
+              StrSortSens = " ASC";
+            if (StrSortSensInHierarchies == "")
+              StrSortSens = " ASC";
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
                 {
