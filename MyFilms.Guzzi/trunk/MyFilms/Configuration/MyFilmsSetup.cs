@@ -38,6 +38,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
   using MediaPortal.Configuration;
 
+  using MyFilmsPlugin.Configuration;
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
   
@@ -5837,6 +5838,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //  // System.Windows.Forms.MessageBox.Show("If you don't have 'scan media on start' enabled, \nyou won't get the filtered view until you made a manual scan via options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
           //  // chkGlobalAvailableOnly.Checked = false;
           //}
+        }
+
+        private void btnHyperLinkParamGen_Click(object sender, EventArgs e)
+        {
+          HyperLinkParamGenerator input = new HyperLinkParamGenerator();
+          input.Text = "MyFilms - Hyperlink Start Parameter Creator";
+          input.ShowDialog(this);
         }
     }
 }

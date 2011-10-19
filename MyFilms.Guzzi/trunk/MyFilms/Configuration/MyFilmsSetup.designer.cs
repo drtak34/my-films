@@ -531,6 +531,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -658,9 +659,9 @@
           this.Config_Menu.AutoSize = true;
           this.Config_Menu.Location = new System.Drawing.Point(460, 41);
           this.Config_Menu.Name = "Config_Menu";
-          this.Config_Menu.Size = new System.Drawing.Size(297, 17);
+          this.Config_Menu.Size = new System.Drawing.Size(159, 17);
           this.Config_Menu.TabIndex = 74;
-          this.Config_Menu.Text = "Display Always Configuration\'s Menu (if no Default Config)";
+          this.Config_Menu.Text = "Always Display Config Menu";
           this.ToolTip1.SetToolTip(this.Config_Menu, resources.GetString("Config_Menu.ToolTip"));
           this.Config_Menu.UseVisualStyleBackColor = true;
           // 
@@ -5403,11 +5404,23 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // btnHyperLinkParamGen
+          // 
+          this.btnHyperLinkParamGen.Location = new System.Drawing.Point(667, 37);
+          this.btnHyperLinkParamGen.Name = "btnHyperLinkParamGen";
+          this.btnHyperLinkParamGen.Size = new System.Drawing.Size(75, 23);
+          this.btnHyperLinkParamGen.TabIndex = 82;
+          this.btnHyperLinkParamGen.Text = "StartParams";
+          this.ToolTip1.SetToolTip(this.btnHyperLinkParamGen, resources.GetString("btnHyperLinkParamGen.ToolTip"));
+          this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
+          this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(779, 506);
+          this.Controls.Add(this.btnHyperLinkParamGen);
           this.Controls.Add(this.lblNbConfig);
           this.Controls.Add(this.textBoxNBconfigs);
           this.Controls.Add(this.butNew);
@@ -5972,5 +5985,6 @@
         private Label label62;
         private ComboBox SortSensInHierarchies;
         private ComboBox SortInHierarchies;
+        private Button btnHyperLinkParamGen;
     }
 }
