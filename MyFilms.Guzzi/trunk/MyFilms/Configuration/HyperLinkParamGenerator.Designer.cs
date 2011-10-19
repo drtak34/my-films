@@ -218,13 +218,14 @@
       this.label2.AutoSize = true;
       this.label2.Location = new System.Drawing.Point(16, 144);
       this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(288, 26);
+      this.label2.Size = new System.Drawing.Size(376, 26);
       this.label2.TabIndex = 106;
-      this.label2.Text = "Copy the Resulting Start Parameters and use it as hyperlink \r\non any button in yo" +
-          "ur skin.";
+      this.label2.Text = "\"Create StartParameters\" will create those and copy them to your clipboard.\r\nPast" +
+          "e the \"Resulting Start Parameters\" as hyperlink on any button in your skin.";
       // 
       // btnCancel
       // 
+      this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btnCancel.Location = new System.Drawing.Point(406, 147);
       this.btnCancel.Name = "btnCancel";
       this.btnCancel.Size = new System.Drawing.Size(75, 23);

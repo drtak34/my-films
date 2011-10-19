@@ -18,6 +18,12 @@ namespace MyFilmsPlugin.Configuration
       InitializeComponent();
     }
 
+    public string StartParameters
+    {
+          get { return tbEditorStartParamsOutput.Text; }
+          set { tbEditorStartParamsOutput.Text = value; }
+    }
+
     private void btnLoadEditorValues_Click(object sender, EventArgs e)
     {
       tbEditorStartParamsOutput.Text = "";
@@ -134,7 +140,7 @@ namespace MyFilmsPlugin.Configuration
         startParamOutput += "search:" + tbEditorSearchExpression.Text;
       }
       tbEditorStartParamsOutput.Text = startParamOutput;
-
+      Clipboard.SetText(startParamOutput);
     }
 
     private void cbEditorLayout_SelectedIndexChanged(object sender, EventArgs e)
