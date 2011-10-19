@@ -568,8 +568,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool boolstorage = false;
         public bool Boolstorage
         {
-            get { return boolstorage; }
-            set { boolstorage = value; }
+          get { return boolstorage; }
+          set { boolstorage = value; }
+        }
+        private bool boolCollection; // state variable to indicate, if the current browse position is a movie collection (used for sort by actions)
+        public bool BoolCollection
+        {
+          get { return boolCollection; }
+          set { boolCollection = value; }
         }
         private bool useListViewForGoups = true;
         public bool UseListViewForGoups

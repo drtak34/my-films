@@ -1657,12 +1657,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Search dialog search
             Change_Search_Options();
           if (iControl == (int)Controls.CTRL_BtnSrtBy)
-          // Choice of Sort Method
+          // Choice of Sort Method - depending of if it is a Collection or normal filmlist (BoolCollection)
           {
             GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
             if (dlg == null) return true;
             dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(1079902)); // Sort by ...
+            if (conf.BoolCollection)
+              dlg.SetHeading(GUILocalizeStrings.Get(1079905)); // Sort by (Colletion) ...
+            else
+              dlg.SetHeading(GUILocalizeStrings.Get(1079902)); // Sort by ... 
             System.Collections.Generic.List<string> choiceSort = new System.Collections.Generic.List<string>();
             dlg.Add(GUILocalizeStrings.Get(103));//Title
             dlg.Add(GUILocalizeStrings.Get(366));//Year
@@ -1685,40 +1688,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg.SelectedLabel == -1)
               return true;
             conf.StrIndex = 0;
+            string tmpCurrentSortMethod = conf.CurrentSortMethod;
+            string tmpStrSorta = conf.StrSorta;
+            string tmpStrSortSens = conf.StrSortSens;
             switch (choiceSort[dlg.SelectedLabel])
             {
               case "title":
-                conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
-                conf.StrSorta = conf.StrSTitle;
-                conf.StrSortSens = " ASC";
+                //conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
+                //conf.StrSorta = conf.StrSTitle;
+                //conf.StrSortSens = " ASC";
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(103);
+                tmpStrSorta = conf.StrSTitle;
+                tmpStrSortSens = " ASC";
                 break;
               case "year":
-                conf.CurrentSortMethod = GUILocalizeStrings.Get(366);
-                conf.StrSorta = "YEAR";
-                conf.StrSortSens = " DESC";
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(366);
+                tmpStrSorta = "YEAR";
+                tmpStrSortSens = " DESC";
                 break;
               case "date":
-                conf.CurrentSortMethod = GUILocalizeStrings.Get(621);
-                conf.StrSorta = "DateAdded";
-                conf.StrSortSens = " DESC";
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(621);
+                tmpStrSorta = "DateAdded";
+                tmpStrSortSens = " DESC";
                 break;
               case "rating":
-                conf.CurrentSortMethod = GUILocalizeStrings.Get(367);
-                conf.StrSorta = "RATING";
-                conf.StrSortSens = " DESC";
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(367);
+                tmpStrSorta = "RATING";
+                tmpStrSortSens = " DESC";
                 break;
               case "sort0":
               case "sort1":
                 int i = 0;
                 if (choiceSort[dlg.SelectedLabel] == "sort1")
                   i = 1;
-                conf.CurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i];
-                conf.StrSorta = conf.StrSort[i];
-                conf.StrSortSens = " ASC";
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i];
+                tmpStrSorta = conf.StrSort[i];
+                tmpStrSortSens = " ASC";
                 break;
             }
             dlg.DeInit();
-            BtnSrtBy.Label = conf.CurrentSortMethod;
+            if (conf.BoolCollection)
+            {
+              conf.CurrentSortMethod = tmpCurrentSortMethod;
+              conf.StrSortaInHierarchies = tmpStrSorta;
+              conf.StrSortSensInHierarchies = tmpStrSortSens;
+              BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
+            }
+            else
+            {
+              conf.CurrentSortMethod = tmpCurrentSortMethod;
+              conf.StrSorta = tmpStrSorta;
+              conf.StrSortSens = tmpStrSortSens;
+              BtnSrtBy.Label = conf.CurrentSortMethod;
+            }
             if (!conf.Boolselect)
               GetFilmList();
             else
@@ -2011,10 +2033,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:             '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:             '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:             '" + conf.StrFilmSelect + "'");
-      bool activateHierarchyView = false;
-      if (conf.StrTitleSelect != "" && (NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1) > 0 && (conf.StrSortaInHierarchies != "(none)" && conf.StrSortaInHierarchies.Length > 0)) 
-        activateHierarchyView = true;
-      if (activateHierarchyView)
+
+      // set status of Collection for global use here ...
+      if (conf.StrTitleSelect != "" && (NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1) > 0)
+        conf.BoolCollection = true;
+      else 
+        conf.BoolCollection = false;
+      if (conf.BoolCollection && (conf.StrSortaInHierarchies != "(none)" && conf.StrSortaInHierarchies.Length > 0)) // only use Collection sort, if there is a value - otherwise use default
       {
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:     '" + conf.StrSortaInHierarchies + "'");
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
@@ -2027,17 +2052,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       }
 
-      //if (r.Length == 0)
-      //{
-      //    //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      //    //dlgOk.ClearAll();
-      //    //dlgOk.SetLine(1, GUILocalizeStrings.Get(10798620));
-      //    //dlgOk.SetLine(2, GUILocalizeStrings.Get(10798621));
-      //    //dlgOk.DoModal(GetID);
-      //    //DisplayAllMovies();
-      //    GUIControl.HideControl(GetID, 34);
-      //    InitMainScreen();
-      //}
       int iCnt = 0;
       int DelimCnt = 0, DelimCnt2;
       GUIListItem item = new GUIListItem();
@@ -2055,17 +2069,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
       MyFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
 
-      if (activateHierarchyView)
+      if (conf.BoolCollection)
       {
         BtnSrtBy.IsAscending = (conf.StrSortSensInHierarchies == " ASC");
         BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
-        BtnSrtBy.Disabled = true;
+        //BtnSrtBy.Disabled = true;
       }
       else
       {
         BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
         BtnSrtBy.Label = conf.CurrentSortMethod;
-        BtnSrtBy.Disabled = false;
+        //BtnSrtBy.Disabled = false;
       }
 
       if (conf.StrTitleSelect != "") DelimCnt = NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1; //get num .'s in title
@@ -2265,6 +2279,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (facadeView.Count == 0)
       {
+        //    //dlgOk.SetLine(1, GUILocalizeStrings.Get(10798620));
+        //    //dlgOk.SetLine(2, GUILocalizeStrings.Get(10798621));
+        //    //dlgOk.DoModal(GetID);
+        //    //DisplayAllMovies();
+        //    GUIControl.HideControl(GetID, 34);
+        //    InitMainScreen();
+        
         item = new GUIListItem();
         item.Label = GUILocalizeStrings.Get(10798639);
         item.IsRemote = true;
@@ -2893,10 +2914,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Substring(1, 3).ToLower())
         return;
-      if (BtnSrtBy.IsAscending)
-        conf.StrSortSens = " ASC";
+      if (conf.BoolCollection)
+      {
+        if (BtnSrtBy.IsAscending)
+          conf.StrSortSensInHierarchies = " ASC";
+        else
+          conf.StrSortSensInHierarchies = " DESC";
+      }
       else
-        conf.StrSortSens = " DESC";
+      {
+        if (BtnSrtBy.IsAscending)
+          conf.StrSortSens = " ASC";
+        else
+          conf.StrSortSens = " DESC";
+      }
       if (!conf.Boolselect)
         GetFilmList();
       else
@@ -4369,10 +4400,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
       //else
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
-      if (string.IsNullOrEmpty(conf.CurrentSortMethod))
-        conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
-      // else
-      BtnSrtBy.Label = conf.CurrentSortMethod;
+      
+      if (conf.BoolCollection && !string.IsNullOrEmpty(conf.CurrentSortMethodInHierarchies))
+      {
+        BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
+      }
+      else
+      {
+        if (string.IsNullOrEmpty(conf.CurrentSortMethod))
+          conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
+        // else
+        BtnSrtBy.Label = conf.CurrentSortMethod;
+      }
       string BtnSearchT = GUILocalizeStrings.Get(137);
 
       GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearchT, BtnSearchT);
