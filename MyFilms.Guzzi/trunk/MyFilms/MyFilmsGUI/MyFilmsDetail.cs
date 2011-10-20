@@ -339,6 +339,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           SettingsAccount = 87272,
           SettingsPlugins = 87273,
           SettingsGeneral = 87274,
+          Lists = 87275,
+          ListItems = 87276,
           Shouts = 87280
         }
         public enum GrabType
@@ -1212,6 +1214,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798783)); // 
                     choiceViewMenu.Add("trakt-AddToWatchedListMovies");
 
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798786)); // 
+                    choiceViewMenu.Add("trakt-Lists");
+
                     dlgmenu.Add(GUILocalizeStrings.Get(10798785)); // 
                     choiceViewMenu.Add("trakt-AddRemoveMovieInUserlist");
 
@@ -1265,6 +1270,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
                 }
 
+                break;
+
+              case "trakt-Lists":
+                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                {
+                  GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Lists, "");
+                }
+                else
+                {
+                  this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+                }
                 break;
 
               case "trakt-AddRemoveMovieInUserlist":
