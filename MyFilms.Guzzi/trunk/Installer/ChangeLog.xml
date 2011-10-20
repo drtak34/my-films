@@ -1,0 +1,821 @@
+<?xml version="1.0"?>
+<log>
+<logentry
+   revision="1596">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-20T09:14:23.359375Z</date>
+<msg>Updated version to 5.2.0</msg>
+</logentry>
+<logentry
+   revision="1595">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-20T08:23:42.687500Z</date>
+<msg>AMCupdater: Updated Tooltip for "search expression for group names"</msg>
+</logentry>
+<logentry
+   revision="1594">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-20T00:20:57.062500Z</date>
+<msg>Trakt Integration: Added "Lists ..." to Trakt Submenu - new translation: &lt;String id="10798786"&gt;Show Lists ...&lt;/String&gt;
+</msg>
+</logentry>
+<logentry
+   revision="1593">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T23:55:12.531250Z</date>
+<msg>AMCupdater - tweaks for Group Name Identifier</msg>
+</logentry>
+<logentry
+   revision="1592">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T23:54:05.156250Z</date>
+<msg>Added button to open Hyperlink Creator to MF setup</msg>
+</logentry>
+<logentry
+   revision="1591">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T23:51:51.562500Z</date>
+<msg>Added translation for "Sort by (Collection) .... -&gt; &lt;String id="1079905"&gt;Sort by (Collection) ...&lt;/String&gt;</msg>
+</logentry>
+<logentry
+   revision="1590">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T23:50:26.734375Z</date>
+<msg>Added Grabber scripts for IMDB.PL, MoviePilot, WoV
+Added default settings for several countries/languages (tnx Dadeo)</msg>
+</logentry>
+<logentry
+   revision="1589">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T21:20:04.006625Z</date>
+<msg>Collection sort: moved settings to same position as normal sort - so when selecting "Always use that view" the setup options will be applied each time the plugin is entered - otherwise last used settings will remain. Thus it is more consistant with normal sort settings</msg>
+</logentry>
+<logentry
+   revision="1588">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T21:17:48.584750Z</date>
+<msg>Fix for loadParams not being reset after being processed (thus always being applied again if returning from Details to Main) - tnx Dadeo for reporting</msg>
+</logentry>
+<logentry
+   revision="1587">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T18:34:21.241000Z</date>
+<msg>Rework Startparameter Creator as asked by Dadeo</msg>
+</logentry>
+<logentry
+   revision="1586">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T18:31:59.787875Z</date>
+<msg>Rework Startparameter Creator as asked by Dadeo</msg>
+</logentry>
+<logentry
+   revision="1585">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T13:54:56.772250Z</date>
+<msg>Fixed search order for collections (ASC/DESC)</msg>
+</logentry>
+<logentry
+   revision="1584">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T12:58:36.866000Z</date>
+<msg>Fix for Collection sort - now can be set via "sort button" if in collection "context"</msg>
+</logentry>
+<logentry
+   revision="1583">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T09:53:24.381625Z</date>
+<msg>Added StartParameters as return string from public HypereLinkStartParams form to use it in e.g. BH editors</msg>
+</logentry>
+<logentry
+   revision="1582">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-19T09:33:06.116000Z</date>
+<msg>(Resolves issue #31) : Allow userdefined startparameter creation
+Add a button in setup to allow advanced users to create their own start parameters for usage as hyperlink on any buttons in MediaPortal skin, e.g. basic home, hidden menus, etc.
+Implemented as a new window with a button in MF setup.</msg>
+</logentry>
+<logentry
+   revision="1581">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-18T10:31:50.491000Z</date>
+<msg>Tooltip typos fixed</msg>
+</logentry>
+<logentry
+   revision="1580">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-18T10:27:28.756625Z</date>
+<msg>AMCupdater: Updated default file with new option "Group Name Identifier"</msg>
+</logentry>
+<logentry
+   revision="1579">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-18T10:24:01.084750Z</date>
+<msg>AMCupdater: Added option "Group Name Identifier" to conditionally add matching folder names as group names.
+If empty, default behaviour is used.
+If enabled, only directory names with a match will be added.</msg>
+</logentry>
+<logentry
+   revision="1578">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T23:35:39.741000Z</date>
+<msg>fix for movie hierarchies sorting - to be optional and not activated, if no setting available</msg>
+</logentry>
+<logentry
+   revision="1577">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T23:03:08.569125Z</date>
+<msg>(Fixes issue #28) : Group Hierarchy Cover
+Added new setting for "sort behaviour in hierarchy groups/collections - so whenever you enter such a group, this setting will be used for sorting (instead of standard sorting).
+</msg>
+</logentry>
+<logentry
+   revision="1576">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T23:00:04.194125Z</date>
+<msg>(Fixes issue #29) : Group names in AMCupdater should depend on import type (Title and Search Handling):
+When importing "files", the containing folder should be returned as group name.
+When importing "folders" the parnet folder of the movie should be returned as group name.
+</msg>
+</logentry>
+<logentry
+   revision="1575">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T18:46:15.459750Z</date>
+<msg>Fixed AMC4 schema - removal of unallowed constraints</msg>
+</logentry>
+<logentry
+   revision="1574">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T18:45:39.412875Z</date>
+<msg>Fix for groupcount property (removed unnecessary chars)</msg>
+</logentry>
+<logentry
+   revision="1573">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T10:50:12.194125Z</date>
+<msg>Minor logging change in BaseMesFilms
+Update BG skin</msg>
+</logentry>
+<logentry
+   revision="1572">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T10:48:38.991000Z</date>
+<msg>AMC4 schema changes (WIP)</msg>
+</logentry>
+<logentry
+   revision="1571">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T06:47:25.334750Z</date>
+<msg>Added property "#myfilms.user.mastertitle.groupcount" for count of films in movie collections (hierarchies) - can be used to e.g. display as overlay on a (group) cover as hint about the number of films included - useful in views other than list view</msg>
+</logentry>
+<logentry
+   revision="1570">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T05:11:49.491000Z</date>
+<msg>fixed movie group fanart
+added movie group covers - have to be placed in cover folder with name = movie group name (jpg and png extensions supported)</msg>
+</logentry>
+<logentry
+   revision="1569">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-17T01:41:49.334750Z</date>
+<msg>Fix for grabber script filter - always take function into consideration, when showing "all" - otherwise nonworking grabber scripts will be offered</msg>
+</logentry>
+<logentry
+   revision="1568">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-16T03:27:10.584750Z</date>
+<msg>Added person scraping, (re)adding person infos for movies - WIP</msg>
+</logentry>
+<logentry
+   revision="1567">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-16T03:26:11.678500Z</date>
+<msg>fixed buttons and skin buttons for MyFilmsActorsInfo</msg>
+</logentry>
+<logentry
+   revision="1566">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-15T17:31:31.301625Z</date>
+<msg>Removed XML Node from GrabberScript() class (not used)</msg>
+</logentry>
+<logentry
+   revision="1565">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-15T17:29:26.036000Z</date>
+<msg>Added property init for skin interface version warnings
+movie actors display - WIP (testmode)</msg>
+</logentry>
+<logentry
+   revision="1564">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-14T23:35:40.989125Z</date>
+<msg>Changed required skininterface version to "1.0"</msg>
+</logentry>
+<logentry
+   revision="1563">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-14T23:35:10.223500Z</date>
+<msg>Update tooltip for fanart (hint for restrictions)</msg>
+</logentry>
+<logentry
+   revision="1562">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-14T22:02:29.942250Z</date>
+<msg>Fixed "get internet data" (="all") grabber script filter - was not displaying any supported script - tnx Dadeo for reprting
+Added default settings for grabber script filter for "en" and "de"</msg>
+</logentry>
+<logentry
+   revision="1561">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-14T21:16:21.692250Z</date>
+<msg>Fixed trakt lists handling option</msg>
+</logentry>
+<logentry
+   revision="1560">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-12T11:27:35.101750Z</date>
+<msg>Grabber scripts: search fix for allocine</msg>
+</logentry>
+<logentry
+   revision="1559">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-12T11:23:53.429875Z</date>
+<msg>Grabber Interface: added exception info fo rimage preview, fix for preview button sometimes not enabled after searching results</msg>
+</logentry>
+<logentry
+   revision="1558">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-12T02:39:22.414250Z</date>
+<msg>Add option dialog for global trailer search to choose if extended directoires should be included in search</msg>
+</logentry>
+<logentry
+   revision="1557">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-11T23:25:55.976750Z</date>
+<msg>Fix for Grabber script MovieGoods - removed filter for only german covers. (filter can be set in "language filter" of regex returns)</msg>
+</logentry>
+<logentry
+   revision="1556">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-11T23:24:43.992375Z</date>
+<msg>Fix for Trailer registration (new detection)</msg>
+</logentry>
+<logentry
+   revision="1555">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-11T23:24:06.508000Z</date>
+<msg>Multi Cover Grabbing: fix for wrong naming, fix for exception in cover selection menu (tnx Nico for reporting)</msg>
+</logentry>
+<logentry
+   revision="1554">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-10T05:26:48.633000Z</date>
+<msg>Fix for Trailersearch not registering trailers for titles containing ":" - tnx mpsam for reporting</msg>
+</logentry>
+<logentry
+   revision="1553">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-10T04:05:25.570500Z</date>
+<msg>Set skininterfaceversion requirement to V2.5 for testing
+fixed skininterfaceversion xml reader</msg>
+</logentry>
+<logentry
+   revision="1552">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-10T03:36:59.445500Z</date>
+<msg>Skin Versioncontrol: Changed format as requested by Dadeo:
+    &lt;settings&gt;
+      	&lt;skininterfaceversion&gt;
+	    &lt;version&gt;
+        	&lt;major&gt;1&lt;/major&gt;
+          	&lt;minor&gt;0&lt;/minor&gt;
+          	&lt;build&gt;0&lt;/build&gt;
+          	&lt;revision&gt;0&lt;/revision&gt;
+	    &lt;/version&gt;
+	&lt;/skininterfaceversion&gt;
+    &lt;/settings&gt;
+
+</msg>
+</logentry>
+<logentry
+   revision="1551">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-10T03:09:02.414250Z</date>
+<msg>Grabber script: fixed cinefacts-BR (wrong search display when no BR found)</msg>
+</logentry>
+<logentry
+   revision="1550">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-10T03:07:24.804875Z</date>
+<msg>Rework of MF GUI grabbing / internet updates part 3 - added cover options to normal mode; refactoring of title handling</msg>
+</logentry>
+<logentry
+   revision="1549">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-10T03:06:07.070500Z</date>
+<msg>Grabber engine: fix for temppath, fix for cover name handling</msg>
+</logentry>
+<logentry
+   revision="1548">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-09T15:39:41.445500Z</date>
+<msg>Some cleanup - moving cover (single and multi) download to extended mode</msg>
+</logentry>
+<logentry
+   revision="1547">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-09T08:32:18.918500Z</date>
+<msg>Grabber script updates kino.de, Moviegoods, TMDB-en</msg>
+</logentry>
+<logentry
+   revision="1546">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-09T08:30:49.809125Z</date>
+<msg>Rework of MF GUI grabbing / internet updates part 2</msg>
+</logentry>
+<logentry
+   revision="1545">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-08T04:48:38.263625Z</date>
+<msg>(Fixes issue #25) : Updating internet data in My FIlms GUI by property always displays virtual keyboard
+</msg>
+</logentry>
+<logentry
+   revision="1544">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-08T04:47:33.154250Z</date>
+<msg>Rework of MF GUI grabbing / internet updates - requires language file update if ID 10798730</msg>
+</logentry>
+<logentry
+   revision="1543">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-08T04:46:23.685500Z</date>
+<msg>Final Update of Grabberscripts for new Selection Handling (filtered views, proper name display, language support)</msg>
+</logentry>
+<logentry
+   revision="1542">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T22:55:05.373000Z</date>
+<msg>Fixed LoadParameter support for "layout" - tnx Nico for reporting</msg>
+</logentry>
+<logentry
+   revision="1541">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T22:20:38.060500Z</date>
+<msg>AMCupdater: fixed flyover display of AKA titles in list selection window</msg>
+</logentry>
+<logentry
+   revision="1540">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T22:19:49.029250Z</date>
+<msg>Grabber scripts: Fixed filmstarts-de (not always getting correct movie cover)</msg>
+</logentry>
+<logentry
+   revision="1539">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T22:19:07.763625Z</date>
+<msg>Updated language files and external for Trakt 1.4.1.1</msg>
+</logentry>
+<logentry
+   revision="1538">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T21:56:02.701125Z</date>
+<msg>Fix for MF crashing when updating huge XML files from external application (supe FSwatcher events) - tnx GregorV for reporting</msg>
+</logentry>
+<logentry
+   revision="1537">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T20:38:14.748000Z</date>
+<msg>Trakt integration: Added "Add to list ..." feature to menu (requires Trakt 1.4.1.1)</msg>
+</logentry>
+<logentry
+   revision="1536">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T20:15:05.607375Z</date>
+<msg>Add new Grabber Script options to MF - WIP - part 1</msg>
+</logentry>
+<logentry
+   revision="1535">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T20:12:46.716750Z</date>
+<msg>Speedup dataset loading by "BeginLoadData"/"EndLoadData"</msg>
+</logentry>
+<logentry
+   revision="1534">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-07T19:22:53.107375Z</date>
+<msg>XSD Update internal DB to reflect Person Contents and Settings</msg>
+</logentry>
+<logentry
+   revision="1533">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-06T02:09:21.369000Z</date>
+<msg>Grabber scripts: Reworked all scripts, added thumbs, where possible, added new tags</msg>
+</logentry>
+<logentry
+   revision="1532">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-05T23:39:14.994000Z</date>
+<msg>Grabber Engine: Added Class for Cover collections</msg>
+</logentry>
+<logentry
+   revision="1531">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-05T09:57:32.161875Z</date>
+<msg>Grabber Engine: fix for data format, 
+Myfilms: Fix for grabber script dialog showing proper script names</msg>
+</logentry>
+<logentry
+   revision="1530">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-05T09:53:58.865000Z</date>
+<msg>AMCupdater: Added thumbs and AKAs to result list window, added preview CoverImage
+</msg>
+</logentry>
+<logentry
+   revision="1529">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-05T07:31:27.505625Z</date>
+<msg>Frabber Interace: minor GUI redesign to better match with new parameters</msg>
+</logentry>
+<logentry
+   revision="1528">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-04T18:07:46.177500Z</date>
+<msg>(Resolves issue #16) : Option in Setup to Select which Grabbers display - added new class GabberScript and added handling for it - new MF setup option to define languages to display
+</msg>
+</logentry>
+<logentry
+   revision="1527">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-04T15:28:44.786875Z</date>
+<msg>Grabber Interface: Add "user" directory to store userdefined grabber scripts</msg>
+</logentry>
+<logentry
+   revision="1526">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-04T15:08:15.615000Z</date>
+<msg>Updated grabber scripts to match new extended handling</msg>
+</logentry>
+<logentry
+   revision="1525">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-04T14:32:11.380625Z</date>
+<msg>updated MediaInfo to V0.7.50</msg>
+</logentry>
+<logentry
+   revision="1524">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-04T13:40:16.505625Z</date>
+<msg>Extended grabber array from 30 to 40 - adapted MyFilms, grabber and AMCupdater to support it (preparation for etended key-value-fields)
+Extended Grabber Interface to support extended key-value grabbing</msg>
+</logentry>
+<logentry
+   revision="1523">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-04T09:56:57.521250Z</date>
+<msg>Grabber: fix for movie searches - regex expression length was not handled properly
+Grabber &amp; GrabberInterface: Added Global paramaters "language", "version" and "type" for use with selections/filtering on grabber scripts in GUI
+Grabber &amp; GrabberInterface: Added Thumb to movie results to allow user to check, of poster is available
+SampleGrabber script: added new fields and prepared for additional details (posters, personimages, etc.)</msg>
+</logentry>
+<logentry
+   revision="1522">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T23:14:32.302500Z</date>
+<msg>Fix for manual deletion option (issue 19) and update translation files ('warning' added)</msg>
+</logentry>
+<logentry
+   revision="1521">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T22:19:40.505625Z</date>
+<msg>AMCupdater: Added "Source" to selectable DB fields to allow to disable/enable source updates (requires recreation of AMCupdater config)</msg>
+</logentry>
+<logentry
+   revision="1520">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T22:18:38.708750Z</date>
+<msg>Fixed Installer - did not autoupdate an adding language translations
+Added missing translations</msg>
+</logentry>
+<logentry
+   revision="1519">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T22:16:16.599375Z</date>
+<msg>(Resolves issue #26) : Updated language files</msg>
+</logentry>
+<logentry
+   revision="1518">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T22:04:27.255625Z</date>
+<msg>(Resolves issue #26) : Always display 'Delete' option in context menu
+Added delete menu with 3 sub choices: remove from db, delete file(s), both</msg>
+</logentry>
+<logentry
+   revision="1517">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T01:01:32.630625Z</date>
+<msg>IMDB-Full script: added "UK" to title language/country selection</msg>
+</logentry>
+<logentry
+   revision="1516">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T01:00:25.286875Z</date>
+<msg>AMCupdater: fixed year parsing exception when grabber couldn't get year
+fexed log message "Updated: " for 'Update Movies'</msg>
+</logentry>
+<logentry
+   revision="1515">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-03T00:57:18.286875Z</date>
+<msg>Grabber engine: Changed Cover loader to use memory cache - should avoid broken images and allows to better update existing images (and confitions)</msg>
+</logentry>
+<logentry
+   revision="1514">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T19:40:35.302500Z</date>
+<msg>fix typo in hyperlink creation in editor API sample implementation</msg>
+</logentry>
+<logentry
+   revision="1513">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T19:34:01.349375Z</date>
+<msg>Added warning in MyFiolms setup, if user activates global filter "show only available movies", but did NOT activate "scan media on start" - as this would never allow to get that filtered view, unless the user launches it manually from the GUI, global options</msg>
+</logentry>
+<logentry
+   revision="1512">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T18:24:38.333750Z</date>
+<msg>Fixed that no movies were displayed, if 'only show available' is selected as atartup option. THis was caused due to required runtime of the backgroundscanner - new behaviour is: First show all, if scanner finished, activate "show only available" global filter</msg>
+</logentry>
+<logentry
+   revision="1511">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T18:22:19.740000Z</date>
+<msg>Fixed editor API sample implementation (wrong translation) on others tab</msg>
+</logentry>
+<logentry
+   revision="1510">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T16:10:00.896250Z</date>
+<msg>fixed grabber scripts IMDB and IMDB-Full rating (website change)</msg>
+</logentry>
+<logentry
+   revision="1509">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T16:08:26.365000Z</date>
+<msg>(Resolves issue #13) : Limits for fanart downloader - added GUI options to AMCupdater for resolution min/max and number limits
+implements feature to use grabber with settings accordingly
+added new settings to AMCupdater settings file
+</msg>
+</logentry>
+<logentry
+   revision="1508">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T16:06:18.036875Z</date>
+<msg>(Resolves issue #13) : Limits for fanart downloader - added resolution min/max and number limits to grabber engine
+</msg>
+</logentry>
+<logentry
+   revision="1507">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T05:11:22.426000Z</date>
+<msg>Added output field to BasicHome editor test page - so users can create and use their own hyperlinks manually for skin buttons. (test mode only)</msg>
+</logentry>
+<logentry
+   revision="1506">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T04:04:26.035375Z</date>
+<msg>Added test area on tab "others" and sample code for BasicHome editors for handling config, view and viewvalue startparams</msg>
+</logentry>
+<logentry
+   revision="1505">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T04:03:32.301000Z</date>
+<msg>fixed userdefined views on startup (loadparams or defaultconfig)</msg>
+</logentry>
+<logentry
+   revision="1504">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-02T04:02:29.629125Z</date>
+<msg>fixed API handling for GetConfigViewLists() and GetViewListValues()</msg>
+</logentry>
+<logentry
+   revision="1503">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T23:09:21.472875Z</date>
+<msg>Add sanity check for startparameter "layout"</msg>
+</logentry>
+<logentry
+   revision="1502">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T22:59:57.676000Z</date>
+<msg>Fixed startparameter "search" - usage: 'search:&lt;searchexpression&gt;' where searchexpression is the parameter used for global search</msg>
+</logentry>
+<logentry
+   revision="1501">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T22:58:05.535375Z</date>
+<msg>Fixed parsing error in startparameter "layout"</msg>
+</logentry>
+<logentry
+   revision="1500">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T21:43:05.004125Z</date>
+<msg>Fixed startparameter "layout" - usage: 'layout:x' where x is the layout type (0 = list, 1 = thumb, etc.)</msg>
+</logentry>
+<logentry
+   revision="1499">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T18:53:36.379125Z</date>
+<msg>Fixed StartParameter viewvalue to be properly set
+Fixed StartParameters not properly processed after first start</msg>
+</logentry>
+<logentry
+   revision="1498">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T15:46:01.250500Z</date>
+<msg>AMCupdater: fix for AMCupdater creating empty directories on movie root drive, if no fanart path is set - tnx foxbenw for reporting</msg>
+</logentry>
+<logentry
+   revision="1497">
+<author>Iggo Gunzelmann</author>
+<date>2011-10-01T14:36:45.969250Z</date>
+<msg>Added MovieMaze grabber script to get german covers, description, comment (works only with proper german titles, as it uses google search for searching with name only</msg>
+</logentry>
+<logentry
+   revision="1496">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-30T11:00:11.502750Z</date>
+<msg>MyFilms: fixed sanity check of User defined config filter "and/or"</msg>
+</logentry>
+<logentry
+   revision="1495">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-30T10:48:42.080875Z</date>
+<msg>Improved tooltip for 'Userdefined Config Filters'</msg>
+</logentry>
+<logentry
+   revision="1494">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-30T09:02:34.143375Z</date>
+<msg>AMCupdater: Added more sanity checks for falsely added 'ifo' and 'bdmv' extensions to media and nonmedia tapes</msg>
+</logentry>
+<logentry
+   revision="1493">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-30T05:20:29.792250Z</date>
+<msg>AMCupdater: fix: When "Item for storage file handling" was other than "Source", selecting Database fields could  select the same field for updating and thus overwriting media source info. -&gt; For button selects, the current storage field is now excluded; when manually selecting the same field a warning sign is given to the user.</msg>
+</logentry>
+<logentry
+   revision="1492">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-30T02:02:18.339875Z</date>
+<msg>MyFilms: Fixed playback of BR-folders (index.bdmv) with BDHandler
+Added check if BDHandler is installed and active</msg>
+</logentry>
+<logentry
+   revision="1491">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-30T00:23:37.527375Z</date>
+<msg>(Fixes issue #21) : AMCupdater doesn't add BR rips (folders) - also added "best guess" media info retrieval for DVD and BR folders
+</msg>
+</logentry>
+<logentry
+   revision="1490">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-29T22:45:21.521625Z</date>
+<msg>AMCupdater: Fixed proper BR-folder detection and search title retrival; remove "BACKUP" from result list</msg>
+</logentry>
+<logentry
+   revision="1489">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-29T21:07:41.709125Z</date>
+<msg>(Resolves issue #19) : Enable PlayMusic button ('p' key) in Main and Details window</msg>
+</logentry>
+<logentry
+   revision="1488">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-29T20:59:31.896625Z</date>
+<msg>(Resolves issue #19) : Enable Play button in Main and Details window
+
+</msg>
+</logentry>
+<logentry
+   revision="1487">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-29T20:39:49.896625Z</date>
+<msg>(Fixes issue #20) : Jumping from Trakt movie to MyFilms sometimes causes exception
+</msg>
+</logentry>
+<logentry
+   revision="1486">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-27T18:06:31.536375Z</date>
+<msg>MyFilms: Added tooltip for Title handling for internet data grabbing</msg>
+</logentry>
+<logentry
+   revision="1485">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-27T00:09:47.036375Z</date>
+<msg>AMCupdater: Extend DVD folder scan to also support BR folders (requires BR-handler plugin and adding bdmv to MP video file types)</msg>
+</logentry>
+<logentry
+   revision="1484">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-26T19:55:59.192625Z</date>
+<msg>AMCupdater: fixed exception/error, when originaltitle is selected, but "null" (VerifyElement()) - tnx hafblade for reporting</msg>
+</logentry>
+<logentry
+   revision="1483">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-26T19:18:39.458250Z</date>
+<msg>AMCupdater: Added "ts" to default video file types to allow scanning TV recordings</msg>
+</logentry>
+<logentry
+   revision="1482">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-25T18:20:53.348875Z</date>
+<msg>Added MoPiXML to solution build</msg>
+</logentry>
+<logentry
+   revision="1481">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-25T18:20:11.098875Z</date>
+<msg>AMCupdater standalone - fixed setup and updated scripts</msg>
+</logentry>
+<logentry
+   revision="1480">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-25T17:22:48.864500Z</date>
+<msg>AMCupdatere: fex for missing Parameter for new configs "Manual_Dont_Ask_Interactive"</msg>
+</logentry>
+<logentry
+   revision="1479">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-24T19:22:07.989500Z</date>
+<msg>Added MovingPictures to "normal mode" - as we forgot to remove it from setup wizard and using it will cause exception in main tab otherwise</msg>
+</logentry>
+<logentry
+   revision="1478">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-24T06:19:01.536375Z</date>
+<msg>(re)added MoPiXML to solution to debug user problems</msg>
+</logentry>
+<logentry
+   revision="1477">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-24T06:18:18.817625Z</date>
+<msg>Added Affinity-ES script</msg>
+</logentry>
+<logentry
+   revision="1476">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-24T03:22:14.333250Z</date>
+<msg>New Feature: Adding compatibility check for (MF) skin via SkinInterfaceVersion - current version is V1.0</msg>
+</logentry>
+<logentry
+   revision="1475">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-23T23:35:27.536375Z</date>
+<msg>Added Update button to BG main skin</msg>
+</logentry>
+<logentry
+   revision="1474">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-23T23:35:03.192625Z</date>
+<msg>Added Affinity and Affinity-ES scripts to "WIP" scripts - waiting for z3us to tweak or confirm</msg>
+</logentry>
+<logentry
+   revision="1473">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-23T22:01:10.661375Z</date>
+<msg>AMCupdater: Fixes exception in "Copy Value" option in update tab</msg>
+</logentry>
+<logentry
+   revision="1472">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-22T22:40:59.973875Z</date>
+<msg>Changed tooltip for "Reset Thumbs" to make function more understandable to user</msg>
+</logentry>
+<logentry
+   revision="1471">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-22T21:59:25.973875Z</date>
+<msg>(Resolves issue #17) : media label of HDs - also adds UNC server name when scanning network storage
+</msg>
+</logentry>
+<logentry
+   revision="1469">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-19T21:22:38.489500Z</date>
+<msg>Updates for MyFilms V5.1 for installer, update.xml and binaries</msg>
+</logentry>
+<logentry
+   revision="1468">
+<author>Iggo Gunzelmann</author>
+<date>2011-09-19T20:08:28.130125Z</date>
+<msg>tweaked tags in installer package (added EC names)</msg>
+</logentry>
+</log>

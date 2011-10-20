@@ -16,3 +16,10 @@ rem "C:\Programme\Team MediaPortal\MediaPortal\MpeMaker.exe" MyFilms-12.xmp2 /V=
 
 cd %1\Installer\MPE-Packages
 dir >>%1\solutionbuild.log
+
+cd %1\Installer
+del ChangeLog.xml >>%1\solutionbuild.log
+echo Write Changelog to Installer directory >>%1\solutionbuild.log
+rem svn log D:\Entwicklung\MyFilms\trunk -r HEAD:1468 --xml >>%1\Installer\ChangeLog-V5.2.0.xml
+svn log D:\Entwicklung\MyFilms\trunk -r HEAD:1468 --xml >>%1\Installer\ChangeLog.xml
+echo Solution Build MyFilms finished ! >>%1\solutionbuild.log
