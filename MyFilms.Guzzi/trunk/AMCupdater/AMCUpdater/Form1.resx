@@ -660,7 +660,7 @@ Other grabber scripts require matching by name and year, that might not always a
 If left empty, the standard rules apply.
 If a search expression is defined, AMCupdater will check your file path and 
 only directory names containing the search expression
-will be added as group/series name - independant of their relative position. 
+will be added as group/series name - independent of their relative position. 
 The match closest to the mediafile is used (if multiple directories match the search expression).
 
 Example: 

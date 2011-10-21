@@ -342,8 +342,8 @@ Usage:
 - use ";" or "," as separator
 - use 2-letter language codes for country/language selection (e.g. "en" for english, "de" for german)
 - use "all" to display grabber scripts for multiple languages
-- leave empty to show all available grabber scripts
-- if no scripts match your restriction, you might not get a selection</value>
+- leave empty or use "*" to show all available grabber scripts
+- if no scripts match your restriction, your list might result empty.</value>
   </data>
   <data name="txtGrabberDisplay.ToolTip" xml:space="preserve">
     <value>Set the default grabber script for updates within MyFilms.
@@ -397,18 +397,6 @@ As the dropdown only allows choosing one value, multiple values have to be enter
 If checked, the Default script will always be used.
 You can change this setting also from inside MyFilms GUI in global options.</value>
   </data>
-  <data name="ItemSearchGrabberName.ToolTip" xml:space="preserve">
-    <value>File Name + Internet Lookup
-Folder Name + Internet Lookup
-Relative Name + Internet Lookup
-
-All the same as above, but adding internet lookup, trying to get a matching movie 
-and then replacing title with the title found by the internet grabber.
-
-Example:
-So if you have named your files by movie title, select “title”. 
-If you have your movie files in folders, that have the movie title, select “folder”.</value>
-  </data>
   <data name="txtGrabber.ToolTip" xml:space="preserve">
     <value>Choose a default grabber script to be used for internet data update in MyFilms GUI.
 Grabber script files are located in the mediaportal data directory in \scripts\MyFilms after installation.
@@ -433,6 +421,23 @@ If you prefer that, you do NOT require to schedule a task via scheduler.</value>
 MyFilms will create such a file for each Configuration Name.
 You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
 However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
+  </data>
+  <data name="AmcTitleSearchHandling.ToolTip" xml:space="preserve">
+    <value>Options are:
+File Name: use file name for title field
+Folder Name: use folder name for title field
+Relative Name: use whole content of path for title
+ 
+File Name + Internet Lookup
+Folder Name + Internet Lookup
+Relative Name + Internet Lookup
+
+All the same as above, but adding internet lookup, trying to get a matching movie 
+and then replacing title with the title found by the internet grabber.
+
+Example:
+So if you have named your files by movie title, select “title”. 
+If you have your movie files in folders, that have the movie title, select “folder”.</value>
   </data>
   <data name="btnCreateAMCDefaultConfig.ToolTip" xml:space="preserve">
     <value>MyFilms will create a default configuration for AMCupdater based on your current MyFilms Configuration.
@@ -572,7 +577,7 @@ If using a mouse, this option can be enabled.</value>
     <value>In movie hierarchies, normally the same sort order is used
 as in all other views.
 If you prefer a different sort order once you entered a movie group (hierarchy, collection),
-you can defined a different sort order here.
+you can define a different sort order here.
 
 Example:
 You usually browse your movies sorted by rating, descending to alway have highest rated movies at the beginning.
@@ -581,7 +586,7 @@ Star Trek\Star Trek 1
 Star Trek\Star Trek 2
 If you enter the movie collection (here 'Star Trek') you prefer to have the movies sorted by year, ascending to have
 them in a better order.
-To achive that, choose "Year" and "ASC".
+To achieve that, choose "Year" and "ASC".
 Note: the settings apply for ALL orders whenever you enter a hierarchy group, including single movies or multiple second level hierarchies.
 
 </value>
@@ -912,7 +917,7 @@ It won't be updated, until you press button "(re)create Default Config".
 This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
   </data>
   <data name="btnHyperLinkParamGen.ToolTip" xml:space="preserve">
-    <value>You can create startparameters for use on buttons anywhere in MediaPortal.
+    <value>You can create start parameters for use on buttons anywhere in MediaPortal.
 Select the configuration, views, layout or search parameters, create the start parameters
 and copy the resulting hyperlink as hyperlink parameter to the button anywhere in your skin.</value>
   </data>

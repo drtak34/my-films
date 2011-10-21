@@ -103,19 +103,19 @@
       this.label7.AutoSize = true;
       this.label7.Location = new System.Drawing.Point(188, 30);
       this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(216, 13);
+      this.label7.Size = new System.Drawing.Size(214, 13);
       this.label7.TabIndex = 112;
-      this.label7.Text = "THen select the parameters you wish below.";
+      this.label7.Text = "Then select the parameters you wish below.";
       // 
       // label6
       // 
       this.label6.AutoSize = true;
       this.label6.Location = new System.Drawing.Point(319, 134);
       this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(306, 26);
+      this.label6.Size = new System.Drawing.Size(315, 26);
       this.label6.TabIndex = 111;
-      this.label6.Text = "\"Create StartParameters\" will create thos and copy them below \r\n and to your clip" +
-          "board";
+      this.label6.Text = "\"Create Start Parameters\" will create those and copy them below \r\n and to your cl" +
+          "ipboard";
       // 
       // label5
       // 

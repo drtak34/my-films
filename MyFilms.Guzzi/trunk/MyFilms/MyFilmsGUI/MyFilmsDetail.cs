@@ -2795,15 +2795,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
 
-          if (string.IsNullOrEmpty(currentlanguagefilter)) // if there is no filter set in config or override add script anyway...
-          {
-            showallLanguages = true;
-          }
-
           // check, if it meets filter criteria
           string[] allowedlanguages = currentlanguagefilter.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
           string[] supportedlanguages = script.Language.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
           string[] supportedfunctions = script.Type.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
+
+          if (string.IsNullOrEmpty(currentlanguagefilter) || currentlanguagefilter.Contains("*")) // if there is no filter set in config or override add script anyway...
+          {
+            showallLanguages = true;
+          }
 
           if (supportedfunctions.Length == 0 && (grabtype == GrabType.Details || grabtype == GrabType.All)) // if there is no functions set and trying legacy menu ...
               add = true;

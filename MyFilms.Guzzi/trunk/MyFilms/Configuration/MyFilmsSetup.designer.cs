@@ -106,6 +106,9 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.groupBoxExternal = new System.Windows.Forms.GroupBox();
+          this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
+          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.groupBoxTrakt = new System.Windows.Forms.GroupBox();
           this.linkLabelUsingTraktInMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.linkLabelTraktWiki = new System.Windows.Forms.LinkLabel();
@@ -515,10 +518,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.groupBoxExternal = new System.Windows.Forms.GroupBox();
-          this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
-          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
+          this.groupBoxExternal.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -572,7 +573,6 @@
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
-          this.groupBoxExternal.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -699,6 +699,40 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // groupBoxExternal
+          // 
+          this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
+          this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
+          this.groupBoxExternal.Location = new System.Drawing.Point(19, 244);
+          this.groupBoxExternal.Name = "groupBoxExternal";
+          this.groupBoxExternal.Size = new System.Drawing.Size(698, 89);
+          this.groupBoxExternal.TabIndex = 93;
+          this.groupBoxExternal.TabStop = false;
+          this.groupBoxExternal.Text = "Recentrly Added Media ...";
+          // 
+          // labelRecentlyAddedAPI
+          // 
+          this.labelRecentlyAddedAPI.AutoSize = true;
+          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(21, 47);
+          this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
+          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(279, 26);
+          this.labelRecentlyAddedAPI.TabIndex = 5;
+          this.labelRecentlyAddedAPI.Text = "You can enable or disable per config, if you want to \r\ninclude the catalog conten" +
+              "t to the recently added media...";
+          // 
+          // cbAllowRecentAddedAPI
+          // 
+          this.cbAllowRecentAddedAPI.AutoSize = true;
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 21);
+          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
+          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(179, 17);
+          this.cbAllowRecentAddedAPI.TabIndex = 4;
+          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added Media\"";
+          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config\'s media will be included when external plugins \r\nlike \"re" +
+                  "cently added media handler\" ask for \"recenty added\" movies.\r\n\r\nYou can enable th" +
+                  "is for multiple configs.");
+          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
           // groupBoxTrakt
           // 
@@ -1990,7 +2024,8 @@
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
-          this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, resources.GetString("ItemSearchGrabberName.ToolTip"));
+          this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, "The title that you want to use for internet data searches.\r\nMyFilms will offer yo" +
+                  "u the other titles for a \"re\"search too.");
           // 
           // btnGrabber
           // 
@@ -2151,6 +2186,7 @@
           this.AmcTitleSearchHandling.Name = "AmcTitleSearchHandling";
           this.AmcTitleSearchHandling.Size = new System.Drawing.Size(200, 21);
           this.AmcTitleSearchHandling.TabIndex = 85;
+          this.ToolTip1.SetToolTip(this.AmcTitleSearchHandling, resources.GetString("AmcTitleSearchHandling.ToolTip"));
           // 
           // btnCreateAMCDefaultConfig
           // 
@@ -5223,40 +5259,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // groupBoxExternal
-          // 
-          this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
-          this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
-          this.groupBoxExternal.Location = new System.Drawing.Point(19, 244);
-          this.groupBoxExternal.Name = "groupBoxExternal";
-          this.groupBoxExternal.Size = new System.Drawing.Size(698, 89);
-          this.groupBoxExternal.TabIndex = 93;
-          this.groupBoxExternal.TabStop = false;
-          this.groupBoxExternal.Text = "Recentrly Added Media ...";
-          // 
-          // labelRecentlyAddedAPI
-          // 
-          this.labelRecentlyAddedAPI.AutoSize = true;
-          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(21, 47);
-          this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
-          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(279, 26);
-          this.labelRecentlyAddedAPI.TabIndex = 5;
-          this.labelRecentlyAddedAPI.Text = "You can enable or disable per config, if you want to \r\ninclude the catalog conten" +
-              "t to the recently added media...";
-          // 
-          // cbAllowRecentAddedAPI
-          // 
-          this.cbAllowRecentAddedAPI.AutoSize = true;
-          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 21);
-          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
-          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(179, 17);
-          this.cbAllowRecentAddedAPI.TabIndex = 4;
-          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added Media\"";
-          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config\'s media will be included when external plugins \r\nlike \"re" +
-                  "cently added media handler\" ask for \"recenty added\" movies.\r\n\r\nYou can enable th" +
-                  "is for multiple configs.");
-          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5288,6 +5290,8 @@
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
           this.Tab_Trakt.ResumeLayout(false);
+          this.groupBoxExternal.ResumeLayout(false);
+          this.groupBoxExternal.PerformLayout();
           this.groupBoxTrakt.ResumeLayout(false);
           this.groupBoxTrakt.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -5381,8 +5385,6 @@
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
-          this.groupBoxExternal.ResumeLayout(false);
-          this.groupBoxExternal.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
