@@ -718,7 +718,7 @@
           // linkLabelUsingTraktInMyFilmsWiki
           // 
           this.linkLabelUsingTraktInMyFilmsWiki.AutoSize = true;
-          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 157);
+          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 133);
           this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
           this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
           this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
@@ -729,7 +729,7 @@
           // linkLabelTraktWiki
           // 
           this.linkLabelTraktWiki.AutoSize = true;
-          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 193);
+          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 169);
           this.linkLabelTraktWiki.Name = "linkLabelTraktWiki";
           this.linkLabelTraktWiki.Size = new System.Drawing.Size(56, 13);
           this.linkLabelTraktWiki.TabIndex = 4;
@@ -749,7 +749,7 @@
           // cbAllowTraktSync
           // 
           this.cbAllowTraktSync.AutoSize = true;
-          this.cbAllowTraktSync.Location = new System.Drawing.Point(15, 19);
+          this.cbAllowTraktSync.Location = new System.Drawing.Point(15, 22);
           this.cbAllowTraktSync.Name = "cbAllowTraktSync";
           this.cbAllowTraktSync.Size = new System.Drawing.Size(242, 17);
           this.cbAllowTraktSync.TabIndex = 0;
@@ -769,7 +769,7 @@
           // linkLabelTrakt
           // 
           this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(518, 122);
+          this.linkLabelTrakt.Location = new System.Drawing.Point(518, 98);
           this.linkLabelTrakt.Name = "linkLabelTrakt";
           this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
           this.linkLabelTrakt.TabIndex = 1;
@@ -5249,11 +5249,12 @@
           this.cbAllowRecentAddedAPI.AutoSize = true;
           this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 21);
           this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
-          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
+          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(179, 17);
           this.cbAllowRecentAddedAPI.TabIndex = 4;
-          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
-          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
-                  "dded\" movies.\r\nYou can enable this for multiple configs.");
+          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added Media\"";
+          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config\'s media will be included when external plugins \r\nlike \"re" +
+                  "cently added media handler\" ask for \"recenty added\" movies.\r\n\r\nYou can enable th" +
+                  "is for multiple configs.");
           this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup

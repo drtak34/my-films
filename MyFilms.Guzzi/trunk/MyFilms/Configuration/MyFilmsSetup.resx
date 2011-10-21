@@ -639,19 +639,6 @@ If a value is entered for the second parameter, only records containing that val
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
   </data>
-  <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
-    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
-In this section you can define additional views; 
-select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
-If there is no value entered, a menu will be displayed for the range of values available in the database.  
-If a value is entered, a list of the movies with that value will be displayed.
-</value>
-  </data>
-  <data name="groupBox_DetailedSupplementaryInformations.ToolTip" xml:space="preserve">
-    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
-As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
-</value>
-  </data>
   <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
     <value>"Only available" option acts as global overlayfilter for all views
 and this setting is used for start view.
@@ -670,6 +657,19 @@ So you should only activate this if you want to filter your views always when en
 
 AMC users can configure the field and value to identify unwatched films
 on "update" tab (Watched-Status Handling).</value>
+  </data>
+  <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
+    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
+In this section you can define additional views; 
+select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
+If there is no value entered, a menu will be displayed for the range of values available in the database.  
+If a value is entered, a list of the movies with that value will be displayed.
+</value>
+  </data>
+  <data name="groupBox_DetailedSupplementaryInformations.ToolTip" xml:space="preserve">
+    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
+As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
+</value>
   </data>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
@@ -739,28 +739,6 @@ passed as  parameter to the command file.
 
 Very unused...</value>
   </data>
-  <data name="CatalogType.ToolTip" xml:space="preserve">
-    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
-Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
-The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
-  </data>
-  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
-    <value>Title selection:
-You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
-
-Grouping:
-Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
-This can be used to group more than one movie together,
-e.g. for collections.
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
-  </data>
   <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
     <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
 if they are currently "reachable".
@@ -796,6 +774,28 @@ In the first field you can select the database item that can be used to locate t
 In the second field you can enter your own text message to provide additional information.
 
 </value>
+  </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>Title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
     <value>This setting is useful for non english users:
