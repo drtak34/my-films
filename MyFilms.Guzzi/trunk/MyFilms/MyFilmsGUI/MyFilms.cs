@@ -1732,7 +1732,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.DeInit();
             if (conf.BoolCollection)
             {
-              conf.CurrentSortMethod = tmpCurrentSortMethod;
+              conf.CurrentSortMethodInHierarchies = tmpCurrentSortMethod;
               conf.StrSortaInHierarchies = tmpStrSorta;
               conf.StrSortSensInHierarchies = tmpStrSortSens;
               BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
@@ -4413,16 +4413,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
       //else
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
-      
-      if (conf.BoolCollection && !string.IsNullOrEmpty(conf.CurrentSortMethodInHierarchies))
+
+      if (string.IsNullOrEmpty(conf.CurrentSortMethod))
+        conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
+      if (string.IsNullOrEmpty(conf.CurrentSortMethodInHierarchies))
+        conf.CurrentSortMethodInHierarchies = conf.CurrentSortMethod;
+      if (conf.BoolCollection)
       {
         BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
       }
       else
       {
-        if (string.IsNullOrEmpty(conf.CurrentSortMethod))
-          conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
-        // else
         BtnSrtBy.Label = conf.CurrentSortMethod;
       }
       string BtnSearchT = GUILocalizeStrings.Get(137);
