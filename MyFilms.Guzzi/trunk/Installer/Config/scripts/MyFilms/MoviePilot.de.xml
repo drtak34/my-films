@@ -6,7 +6,7 @@
     <Language>de</Language>
     <Type>details|cover</Type>
     <Version>0.1</Version>
-    <Encoding />
+    <Encoding>utf-8</Encoding>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x0022_.src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
@@ -60,24 +60,24 @@
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
-      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023_Bewertungen._x002A__x003F_title_x003D__x0027_</KeyStartRate>
-      <KeyEndRate>_x0027_</KeyEndRate>
+      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003C_div_x0020_class_x003D__x0027_criticscount_x0027__x003E_._x002A__x003F__x003E_</KeyStartRate>
+      <KeyEndRate>_x003C__x002F_</KeyEndRate>
       <KeyRateIndex />
       <KeyRatePage />
-      <KeyStartRate2 Param1="" Param2="" />
-      <KeyEndRate2 />
+      <KeyStartRate2 Param1="" Param2="">ratingvalue_x0027__x003E_</KeyStartRate2>
+      <KeyEndRate2>_x003C_</KeyEndRate2>
       <KeyRate2Index />
       <KeyRate2Page />
-      <BaseRating>_x0035_</BaseRating>
-      <KeyStartSyn Param1="_x0023_REGEX_x0023_.mehr." Param2="">Inhalt:</KeyStartSyn>
-      <KeyEndSyn>_x003C__x002F_span_x003E__x003C__x002F_p_x003E_</KeyEndSyn>
+      <BaseRating>_x0031_0</BaseRating>
+      <KeyStartSyn Param1="_x0023_REGEX_x0023_.mehr." Param2="">_x0023_REGEX_x0023__x003C_div_x0020_class_x003D__x0027_details_x0027_._x002A__x003F__x003C__x002F_p_x003E_</KeyStartSyn>
+      <KeyEndSyn>_x003C_span_x0020_content_x003D__x0027_h</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
-      <KeyStartRealise Param1="_x0023_REGEX_x0023_" Param2="">_x003C_h2_x003E_Regie_x003C__x002F_h2_x003E_</KeyStartRealise>
-      <KeyEndRealise>_x003C_h2_x003E_</KeyEndRealise>
+      <KeyStartRealise Param1="" Param2="">Regisseur_x003C__x002F_th_x003E_</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_tr_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage>URL_x0020_Redirection_x0020_Persons</KeyRealisePage>
-      <KeyRealiseRegExp>title_x003D__x0027__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0027_._x002A__x003F__x003C_p_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_p_x003E_._x002A__x003F_</KeyRealiseRegExp>
+      <KeyRealiseRegExp />
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x003C_h2_x003E_Produktion_x003C__x002F_h2_x003E_</KeyStartProduct>
       <KeyEndProduct>_x003C_h2_x003E_</KeyEndProduct>
@@ -85,40 +85,40 @@
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
       <KeyProductRegExp>_x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_a_x0020_href_x003D__x0022__x002F_personen._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyProductRegExp>
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x003C_h2_x003E_Drehbuch_x003C__x002F_h2_x003E_</KeyStartWriter>
-      <KeyEndWriter>_x003C_h2_x003E_</KeyEndWriter>
+      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023_Drehbuch_x003C__x002F_th_x003E_</KeyStartWriter>
+      <KeyEndWriter>_x003C__x002F_tbody_x003E_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
-      <KeyWriterRegExp>_x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_a_x0020_href_x003D__x0022__x002F_personen._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyWriterRegExp>
+      <KeyWriterRegExp>title_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyWriterRegExp>
       <KeyWriterMaxItems />
-      <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029__x007C_Rolle:" Param2="">_x003C_h2_x003E_Schauspieler_x0020_und_x0020_Rollen_x003C__x002F_h2_x003E_</KeyStartCredits>
-      <KeyEndCredits>_x003C_h2_x003E_</KeyEndCredits>
-      <KeyCreditsRegExp>title_x003D__x0027__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0027_._x002A__x003F__x003C_p_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_p_x003E_._x002A__x003F__x007C__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_a_x0020_href_x003D__x0022__x002F_personen._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyCreditsRegExp>
+      <KeyStartCredits Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_h2_x003E_Cast_x003C__x002F_h2_x003E_._x002A__x003F__x003C_tbody_x003E_</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_tbody_x003E_</KeyEndCredits>
+      <KeyCreditsRegExp>title_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_-role_x0022__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage>URL_x0020_Redirection_x0020_Persons</KeyCreditsPage>
       <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
-      <KeyStartCountry Param1="_x0023_REGEX_x0023_" Param2="">Produktionsland:</KeyStartCountry>
-      <KeyEndCountry>Genre</KeyEndCountry>
-      <KeyCountryRegExp>_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_sp._x002A__x003F_</KeyCountryRegExp>
+      <KeyStartCountry Param1="_x0023_REGEX_x0023__x005C_d" Param2="">_x003C_h2_x003E_</KeyStartCountry>
+      <KeyEndCountry>_x003C_br_x0020__x002F__x003E_</KeyEndCountry>
+      <KeyCountryRegExp />
       <KeyCountryIndex />
       <KeyCountryPage />
-      <KeyStartGenre Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">Genre:</KeyStartGenre>
-      <KeyEndGenre>_x003C_br_x0020__x002F__x003E_</KeyEndGenre>
+      <KeyStartGenre Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h2_x003E_._x002A__x003F__x003C_br_x0020__x002F__x003E_._x002A__x003F__x002C_</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_h2_x003E_</KeyEndGenre>
       <KeyGenreRegExp>_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyGenreRegExp>
       <KeyGenreIndex />
       <KeyGenrePage />
-      <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x0023_REGEX_x0023_Produktionsjahr:._x002A__x003F__x0022__x003E_</KeyStartYear>
+      <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x003C_h2_x003E_</KeyStartYear>
       <KeyEndYear>_x003C_br_x0020__x002F__x003E_</KeyEndYear>
       <KeyYearIndex />
       <KeyYearPage />
-      <KeyStartLinkPersons Param1="_x002F_kritiken" Param2="http:_x002F__x002F_www.filmstarts.de_x002F_kritiken">_x0023_REGEX_x0023__x0022__x003E_Übersicht_x003C_._x002A__x003F_Home._x002A__x003F__x003C_a_x0020_href_x003D__x0022_</KeyStartLinkPersons>
-      <KeyEndLinkPersons>_x0022__x003E_Besetzung</KeyEndLinkPersons>
+      <KeyStartLinkPersons Param1="_x002F_movies" Param2="http:_x002F__x002F_www.moviepilot.de_x002F_movies">_x0023_REGEX_x0023__x003C_li_x0020_id_x003D__x0027_tab_casts_x0027__x003E_._x002A__x003F__x003D__x0022_</KeyStartLinkPersons>
+      <KeyEndLinkPersons>_x0022_</KeyEndLinkPersons>
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
-      <KeyStartComment Param1="_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_fs-center_x0022__x003E_._x002A__x003F__x003C_span_x0020_class_x003D__x0022_fs-center_x0022__x003E_" Param2="">_x0023_REGEX_x0023__x003E_Filmstarts-Kritik._x002A__x003F_purehtml_x0022__x003E_</KeyStartComment>
-      <KeyEndComment>_x0023_REGEX_x0023__x003C_li_x003E__x003C_img_x0020_class_x003D__x0022_ico_x0020_icoticka_x0022__x0020_</KeyEndComment>
-      <KeyCommentRegExp />
+      <KeyStartComment Param1="_x0023_REGEX_x0023__x005B__x005C__x0028__x005D_comment_x005B__x005C__x0029__x005D_.." Param2="_x005C_n">_x0023_REGEX_x0023__x003C_h2_x003E_.Kritiken._x002A__x003F__x003C__x002F_h2_x003E_</KeyStartComment>
+      <KeyEndComment>_x003C_div_x0020_class_x003D__x0022_pagination_x0022__x003E_</KeyEndComment>
+      <KeyCommentRegExp>_x003C_div_x0020_class_x003D__x0027_comment-comment_x0027__x003E_._x002A__x003F__x003C_p_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyCommentRegExp>
       <KeyCommentIndex />
       <KeyCommentPage>URL_x0020_Redirection_x0020_Comment</KeyCommentPage>
       <KeyStartLanguage Param1="" Param2="" />
@@ -144,8 +144,8 @@
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
       <KeyLinkCertificationPage />
-      <KeyStartLinkComment Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_www.filmstarts.de_x002F_kritiken_x007C_l">_x0023_REGEX_x0023__x0022__x003E_Kritiken_x003C__x002F_span_x003E_._x002A__x003F__x003D__x0022__x0022__x003E__x003C_a_x0020_href_x003D__x0022__x002F_kritiken</KeyStartLinkComment>
-      <KeyEndLinkComment>l_x0022__x003E_Filmstarts-Kritik_x003C__x002F_a_x003E_</KeyEndLinkComment>
+      <KeyStartLinkComment Param1="_x002F_movies" Param2="http:_x002F__x002F_www.moviepilot.de_x002F_movies">_x0023_REGEX_x0023__x003C_li_x0020_id_x003D__x0027_tab_comments_x0027__x003E_._x002A__x003F__x003D__x0022_</KeyStartLinkComment>
+      <KeyEndLinkComment>_x0022_</KeyEndLinkComment>
       <KeyLinkCommentIndex />
       <KeyLinkCommentPage />
       <KeyStartDetails2 Param1="" Param2="" />
