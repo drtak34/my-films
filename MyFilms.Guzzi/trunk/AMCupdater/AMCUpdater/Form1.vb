@@ -34,7 +34,7 @@ Public Class Form1
         Label_VersionNumber.Text = "V" + asm.GetName().Version.ToString()
 
 #If CONFIG = "Release" Then
-        DebugToolStripMenuItem.Visible = False
+        ToolStripMenuItemDebug.Visible = False
 #Else
         ToolStripMenuItemDebug.Visible = True
 #End If
@@ -2712,7 +2712,6 @@ Public Class Form1
 
     Private Sub ToolStripButtonAddMissingPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonAddMissingPersons.Click
         Dim persons As String()
-        Dim addPerson As Boolean
         For Each row As MyFilmsPlugin.AntMovieCatalog.MovieRow In MovieBindingSource.DataSource
             If row.Actors IsNot Nothing Then
                 persons = row.Actors.Split(",")
@@ -2721,28 +2720,19 @@ Public Class Form1
                     If person.Contains("(") Then
                         person = person.Substring(0, person.IndexOf("(")).Trim
                     End If
-                    addPerson = True
-                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
-                        If personrow.Name = person Then
-                            personrow.IsActor = True
-                            addPerson = False
-                        End If
-                    Next
-                    If addPerson = True Then
-                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person.Trim, "", "", "", "", "", "", "", "", True, False, False, False, "", "", Nothing})
-                    End If
-                    'Dim newActor As MyFilmsPlugin.AntMovieCatalog.PersonRow = MyFilmsPlugin.AntMovieCatalog.PersonDataTable.AddPersonRow(actor, "", "", "", "", "", "", "", "", "", "", False, False, False, False)
-                    'newActor = MyFilmsPlugin.AntMovieCatalog.PersonRow(New Object() {actor, "", "", "", "", "", "", "", "", "", "", False, False, False, False})
-                    'newActor.Name = actor
-                    'PersonBindingSource.DataSource.CreateElement(newActor)
-                    'PersonBindingSource.Add(newActor)
-                    'PersonBindingSource.Add(New MyFilmsPlugin.AntMovieCatalog.PersonRow() {actor, "", "", "", "", "", "", "", "", "", "", "", 0} As MyFilmsPlugin.AntMovieCatalog.PersonRow)
-                    'newActor = New MyFilmsPlugin.AntMovieCatalog(AddNewPersonRow())
-                    'PersonBindingSource.Add(newActor)
 
-                    'Me.PersonBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem1, Me.BindingNavigatorMovePreviousItem1, Me.BindingNavigatorSeparator3, Me.BindingNavigatorPositionItem1, Me.BindingNavigatorCountItem1, Me.BindingNavigatorSeparator4, Me.BindingNavigatorMoveNextItem1, Me.BindingNavigatorMoveLastItem1, Me.BindingNavigatorSeparator5, Me.BindingNavigatorAddNewItem1, Me.BindingNavigatorDeleteItem1, Me.ToolStripSeparator2, Me.SpeichernToolStripButton, Me.ToolStripSeparator4, Me.ToolStripButtonAddMissingPersons, Me.ToolStripButtonGrabPersons, Me.ToolStripSeparator5, Me.ToolStripTextBoxSearch})
-                    'PersonBindingSource.Item(PersonBindingSource.Insert).Name = actor
-                    'newActor.Name = actor
+                    Dim personRow As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                    personRow = PersonBindingSource.DataSource.FindByName(person) ' .FindByMiniBiography()
+
+                    If personRow IsNot Nothing Then
+                        personRow.IsActor = True
+                    Else
+                        Dim newPerson As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                        newPerson = PersonBindingSource.DataSource.NewPersonRow()
+                        newPerson.Name = person
+                        newPerson.IsActor = True
+                        PersonBindingSource.DataSource.Rows.Add(newPerson)
+                    End If
                 Next
             End If
             If row.Producer IsNot Nothing Then
@@ -2752,15 +2742,18 @@ Public Class Form1
                     If person.Contains("(") Then
                         person = person.Substring(0, person.IndexOf("(")).Trim
                     End If
-                    addPerson = True
-                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
-                        If personrow.Name = person Then
-                            personrow.IsProducer = True
-                            addPerson = False
-                        End If
-                    Next
-                    If addPerson = True Then
-                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person, "", "", "", "", "", "", "", "", False, True, False, False, "", "", Nothing})
+
+                    Dim personRow As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                    personRow = PersonBindingSource.DataSource.FindByName(person) ' .FindByMiniBiography()
+
+                    If personRow IsNot Nothing Then
+                        personRow.IsProducer = True
+                    Else
+                        Dim newPerson As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                        newPerson = PersonBindingSource.DataSource.NewPersonRow()
+                        newPerson.Name = person
+                        newPerson.IsProducer = True
+                        PersonBindingSource.DataSource.Rows.Add(newPerson)
                     End If
                 Next
             End If
@@ -2771,15 +2764,18 @@ Public Class Form1
                     If person.Contains("(") Then
                         person = person.Substring(0, person.IndexOf("(")).Trim
                     End If
-                    addPerson = True
-                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
-                        If personrow.Name = person Then
-                            personrow.IsDirector = True
-                            addPerson = False
-                        End If
-                    Next
-                    If addPerson = True Then
-                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person, "", "", "", "", "", "", "", "", False, False, True, False, "", "", Nothing})
+
+                    Dim personRow As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                    personRow = PersonBindingSource.DataSource.FindByName(person) ' .FindByMiniBiography()
+
+                    If personRow IsNot Nothing Then
+                        personRow.IsDirector = True
+                    Else
+                        Dim newPerson As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                        newPerson = PersonBindingSource.DataSource.NewPersonRow()
+                        newPerson.Name = person
+                        newPerson.IsDirector = True
+                        PersonBindingSource.DataSource.Rows.Add(newPerson)
                     End If
                 Next
             End If
@@ -2790,16 +2786,20 @@ Public Class Form1
                     If person.Contains("(") Then
                         person = person.Substring(0, person.IndexOf("(")).Trim
                     End If
-                    addPerson = True
-                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
-                        If personrow.Name = person Then
-                            personrow.IsWriter = True
-                            addPerson = False
-                        End If
-                    Next
-                    If addPerson = True Then
-                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person, "", "", "", "", "", "", "", "", False, False, False, True, "", "", Nothing})
+
+                    Dim personRow As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                    personRow = PersonBindingSource.DataSource.FindByName(person) ' .FindByMiniBiography()
+
+                    If personRow IsNot Nothing Then
+                        personRow.IsWriter = True
+                    Else
+                        Dim newPerson As MyFilmsPlugin.AntMovieCatalog.PersonRow
+                        newPerson = PersonBindingSource.DataSource.NewPersonRow()
+                        newPerson.Name = person
+                        newPerson.IsWriter = True
+                        PersonBindingSource.DataSource.Rows.Add(newPerson)
                     End If
+
                 Next
             End If
         Next
