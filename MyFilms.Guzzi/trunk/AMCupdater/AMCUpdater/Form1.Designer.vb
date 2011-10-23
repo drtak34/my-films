@@ -29,13 +29,13 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -240,7 +240,7 @@ Partial Class Form1
         Me.txtExecuteProgramPath = New System.Windows.Forms.TextBox
         Me.chkExecuteProgram = New System.Windows.Forms.CheckBox
         Me.Label27 = New System.Windows.Forms.Label
-        Me.Mediainfo_Test = New System.Windows.Forms.TabPage
+        Me.Mediainfo = New System.Windows.Forms.TabPage
         Me.Label47 = New System.Windows.Forms.Label
         Me.GroupBox18 = New System.Windows.Forms.GroupBox
         Me.txtSampleTextLanguageList = New System.Windows.Forms.TextBox
@@ -279,7 +279,7 @@ Partial Class Form1
         Me.ViewCollection = New System.Windows.Forms.TabPage
         Me.GroupBoxMovieDetails = New System.Windows.Forms.GroupBox
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.VideoBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MovieBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TextBox31 = New System.Windows.Forms.TextBox
         Me.TextBox2 = New System.Windows.Forms.TextBox
         Me.Label82 = New System.Windows.Forms.Label
@@ -351,7 +351,7 @@ Partial Class Form1
         Me.TextBox12 = New System.Windows.Forms.TextBox
         Me.Label62 = New System.Windows.Forms.Label
         Me.XionPanel1 = New XionControls.XionPanel
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.DataGridViewMovie = New System.Windows.Forms.DataGridView
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -361,7 +361,7 @@ Partial Class Form1
         Me.Country = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Rating = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Label59 = New System.Windows.Forms.Label
-        Me.VidéoBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.MovieBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
@@ -373,15 +373,113 @@ Partial Class Form1
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
         Me.VidéoBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
+        Me.ViewPersons = New System.Windows.Forms.TabPage
+        Me.GroupBoxPersonInfo = New System.Windows.Forms.GroupBox
+        Me.CheckBoxWriter = New System.Windows.Forms.CheckBox
+        Me.PersonBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CheckBoxDirector = New System.Windows.Forms.CheckBox
+        Me.CheckBoxProducer = New System.Windows.Forms.CheckBox
+        Me.CheckBoxActor = New System.Windows.Forms.CheckBox
+        Me.Label99 = New System.Windows.Forms.Label
+        Me.Label98 = New System.Windows.Forms.Label
+        Me.Label97 = New System.Windows.Forms.Label
+        Me.Label96 = New System.Windows.Forms.Label
+        Me.ViewPersons_Photos = New System.Windows.Forms.TextBox
+        Me.ViewPersons_URL = New System.Windows.Forms.TextBox
+        Me.ViewPersons_TMDB_Id = New System.Windows.Forms.TextBox
+        Me.ViewPersons_IMDB_Id = New System.Windows.Forms.TextBox
+        Me.Label95 = New System.Windows.Forms.Label
+        Me.Label94 = New System.Windows.Forms.Label
+        Me.Label93 = New System.Windows.Forms.Label
+        Me.ViewPersons_Birthplace = New System.Windows.Forms.TextBox
+        Me.ViewPersons_Birthday = New System.Windows.Forms.TextBox
+        Me.ViewPersons_MiniBio = New System.Windows.Forms.RichTextBox
+        Me.ViewPersons_Name = New System.Windows.Forms.TextBox
+        Me.ViewPersons_Biography = New System.Windows.Forms.RichTextBox
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox
+        Me.Label91 = New System.Windows.Forms.Label
+        Me.Label92 = New System.Windows.Forms.Label
+        Me.Label90 = New System.Windows.Forms.Label
+        Me.ViewPersons_OtherName = New System.Windows.Forms.TextBox
+        Me.XionPanelPerson = New XionControls.XionPanel
+        Me.DataGridViewPerson = New System.Windows.Forms.DataGridView
+        Me.PersonIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.AlternateNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.BornDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.BirthPlaceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.MiniBiographyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.BiographyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.URLDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.IMDBIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TMDBIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.PictureDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.PhotosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.IsActor = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.IsProducer = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.IsDirector = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.IsWriter = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.PersonBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorAddNewItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorCountItem1 = New System.Windows.Forms.ToolStripLabel
+        Me.BindingNavigatorDeleteItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveFirstItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMovePreviousItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorSeparator3 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorPositionItem1 = New System.Windows.Forms.ToolStripTextBox
+        Me.BindingNavigatorSeparator4 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveNextItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveLastItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorSeparator5 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.SpeichernToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripButtonAddMissingPersons = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButtonGrabPersons = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripTextBoxSearch = New System.Windows.Forms.ToolStripTextBox
+        Me.ViewCatalog = New System.Windows.Forms.TabPage
+        Me.Label101 = New System.Windows.Forms.Label
+        Me.Label100 = New System.Windows.Forms.Label
+        Me.DataGridView4 = New System.Windows.Forms.DataGridView
+        Me.CustomFieldIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TagDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.NameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DefaultValueDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.MultiValuesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ExcludedInScriptsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.GUIPropertiesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CustomPropertiesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CustomFieldBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ColumnSettingsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CatalogIdDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CustomFieldsPropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.PropertiesIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.OwnerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.MailDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.SiteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CatalogIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.PropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog
         Me.mnuFile = New System.Windows.Forms.MenuStrip
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem
         Me.LoadConfigurationFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.SaveConfigFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.SaveConfigFileAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItemOptions = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItemScanPath = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItemsScanFilter = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem
         Me.InternetLinksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MyFilmsWikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.AMCUpdaterSourceforgeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -389,7 +487,7 @@ Partial Class Form1
         Me.MediaInfodllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.UserManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItemDebug = New System.Windows.Forms.ToolStripMenuItem
         Me.XMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MediaFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.NonMediaFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -412,13 +510,16 @@ Partial Class Form1
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog
         Me.epOptions = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
+        Me.AntMovieCatalogAMC = New AMCUpdater.AntMovieCatalog
         Me.ListVideos = New System.Windows.Forms.DataGridView
         Me.NumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.OriginalTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
+        Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid
+        Me.CatalogBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TabControl1.SuspendLayout()
         Me.Import_Movies.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
@@ -455,7 +556,7 @@ Partial Class Form1
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
-        Me.Mediainfo_Test.SuspendLayout()
+        Me.Mediainfo.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -463,22 +564,39 @@ Partial Class Form1
         Me.ViewCollection.SuspendLayout()
         Me.GroupBoxMovieDetails.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.VideoBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MovieBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox14.SuspendLayout()
         Me.GroupBox22.SuspendLayout()
         Me.GroupBox21.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.XionPanel1.SuspendLayout()
+        CType(Me.DataGridViewMovie, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MovieBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MovieBindingNavigator.SuspendLayout()
+        Me.ViewPersons.SuspendLayout()
+        Me.GroupBoxPersonInfo.SuspendLayout()
+        CType(Me.PersonBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XionPanelPerson.SuspendLayout()
+        CType(Me.DataGridViewPerson, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PersonBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PersonBindingNavigator.SuspendLayout()
+        Me.ViewCatalog.SuspendLayout()
+        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CustomFieldsPropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.VidéoBindingNavigator.SuspendLayout()
+        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuFile.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AntMovieCatalogAMC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CatalogBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FolderBrowserDialog1
@@ -495,8 +613,10 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.DatabaseFields)
         Me.TabControl1.Controls.Add(Me.ScanFilters)
         Me.TabControl1.Controls.Add(Me.Options)
-        Me.TabControl1.Controls.Add(Me.Mediainfo_Test)
+        Me.TabControl1.Controls.Add(Me.Mediainfo)
         Me.TabControl1.Controls.Add(Me.ViewCollection)
+        Me.TabControl1.Controls.Add(Me.ViewPersons)
+        Me.TabControl1.Controls.Add(Me.ViewCatalog)
         Me.TabControl1.Location = New System.Drawing.Point(0, 27)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -2742,24 +2862,24 @@ Partial Class Form1
         Me.Label27.TabIndex = 31
         Me.Label27.Text = "Path to executable"
         '
-        'Mediainfo_Test
+        'Mediainfo
         '
-        Me.Mediainfo_Test.Controls.Add(Me.Label47)
-        Me.Mediainfo_Test.Controls.Add(Me.GroupBox18)
-        Me.Mediainfo_Test.Controls.Add(Me.GroupBox3)
-        Me.Mediainfo_Test.Controls.Add(Me.GroupBox2)
-        Me.Mediainfo_Test.Controls.Add(Me.btnTestAnalyse)
-        Me.Mediainfo_Test.Controls.Add(Me.GroupBox1)
-        Me.Mediainfo_Test.Controls.Add(Me.Label3)
-        Me.Mediainfo_Test.Controls.Add(Me.btnGetSampleFile)
-        Me.Mediainfo_Test.Controls.Add(Me.txtSampleFile)
-        Me.Mediainfo_Test.Location = New System.Drawing.Point(4, 22)
-        Me.Mediainfo_Test.Name = "Mediainfo_Test"
-        Me.Mediainfo_Test.Padding = New System.Windows.Forms.Padding(3)
-        Me.Mediainfo_Test.Size = New System.Drawing.Size(600, 580)
-        Me.Mediainfo_Test.TabIndex = 2
-        Me.Mediainfo_Test.Text = "Mediainfo Test"
-        Me.Mediainfo_Test.UseVisualStyleBackColor = True
+        Me.Mediainfo.Controls.Add(Me.Label47)
+        Me.Mediainfo.Controls.Add(Me.GroupBox18)
+        Me.Mediainfo.Controls.Add(Me.GroupBox3)
+        Me.Mediainfo.Controls.Add(Me.GroupBox2)
+        Me.Mediainfo.Controls.Add(Me.btnTestAnalyse)
+        Me.Mediainfo.Controls.Add(Me.GroupBox1)
+        Me.Mediainfo.Controls.Add(Me.Label3)
+        Me.Mediainfo.Controls.Add(Me.btnGetSampleFile)
+        Me.Mediainfo.Controls.Add(Me.txtSampleFile)
+        Me.Mediainfo.Location = New System.Drawing.Point(4, 22)
+        Me.Mediainfo.Name = "Mediainfo"
+        Me.Mediainfo.Padding = New System.Windows.Forms.Padding(3)
+        Me.Mediainfo.Size = New System.Drawing.Size(600, 580)
+        Me.Mediainfo.TabIndex = 2
+        Me.Mediainfo.Text = "Mediainfo"
+        Me.Mediainfo.UseVisualStyleBackColor = True
         '
         'Label47
         '
@@ -3106,13 +3226,13 @@ Partial Class Form1
         Me.ViewCollection.Controls.Add(Me.GroupBoxMovieDetails)
         Me.ViewCollection.Controls.Add(Me.XionPanel1)
         Me.ViewCollection.Controls.Add(Me.Label59)
-        Me.ViewCollection.Controls.Add(Me.VidéoBindingNavigator)
+        Me.ViewCollection.Controls.Add(Me.MovieBindingNavigator)
         Me.ViewCollection.Location = New System.Drawing.Point(4, 22)
         Me.ViewCollection.Name = "ViewCollection"
         Me.ViewCollection.Padding = New System.Windows.Forms.Padding(3)
         Me.ViewCollection.Size = New System.Drawing.Size(600, 580)
         Me.ViewCollection.TabIndex = 6
-        Me.ViewCollection.Text = "View Collection"
+        Me.ViewCollection.Text = "View Movies"
         Me.ViewCollection.UseVisualStyleBackColor = True
         '
         'GroupBoxMovieDetails
@@ -3175,7 +3295,7 @@ Partial Class Form1
         '
         'PictureBox1
         '
-        Me.PictureBox1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.VideoBindingSource, "Picture", True))
+        Me.PictureBox1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.MovieBindingSource, "Picture", True))
         Me.PictureBox1.Location = New System.Drawing.Point(6, 11)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(158, 218)
@@ -3183,13 +3303,13 @@ Partial Class Form1
         Me.PictureBox1.TabIndex = 5
         Me.PictureBox1.TabStop = False
         '
-        'VideoBindingSource
+        'MovieBindingSource
         '
-        Me.VideoBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.MovieDataTable)
+        Me.MovieBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.MovieDataTable)
         '
         'TextBox31
         '
-        Me.TextBox31.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Tagline", True))
+        Me.TextBox31.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Tagline", True))
         Me.TextBox31.Location = New System.Drawing.Point(227, 213)
         Me.TextBox31.Name = "TextBox31"
         Me.TextBox31.Size = New System.Drawing.Size(93, 20)
@@ -3197,7 +3317,7 @@ Partial Class Form1
         '
         'TextBox2
         '
-        Me.TextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Number", True))
+        Me.TextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Number", True))
         Me.TextBox2.Location = New System.Drawing.Point(202, 20)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(49, 20)
@@ -3223,7 +3343,7 @@ Partial Class Form1
         '
         'TextBox30
         '
-        Me.TextBox30.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Certification", True))
+        Me.TextBox30.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Certification", True))
         Me.TextBox30.Location = New System.Drawing.Point(227, 187)
         Me.TextBox30.Name = "TextBox30"
         Me.TextBox30.Size = New System.Drawing.Size(93, 20)
@@ -3231,7 +3351,7 @@ Partial Class Form1
         '
         'TextBox5
         '
-        Me.TextBox5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Rating", True))
+        Me.TextBox5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Rating", True))
         Me.TextBox5.Location = New System.Drawing.Point(457, 20)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(40, 20)
@@ -3268,7 +3388,7 @@ Partial Class Form1
         '
         Me.RichTextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Description", True))
+        Me.RichTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Description", True))
         Me.RichTextBox1.Location = New System.Drawing.Point(187, 316)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(310, 106)
@@ -3277,7 +3397,7 @@ Partial Class Form1
         '
         'TextBox29
         '
-        Me.TextBox29.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Writer", True))
+        Me.TextBox29.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Writer", True))
         Me.TextBox29.Location = New System.Drawing.Point(376, 213)
         Me.TextBox29.Name = "TextBox29"
         Me.TextBox29.Size = New System.Drawing.Size(121, 20)
@@ -3286,7 +3406,7 @@ Partial Class Form1
         'RichTextBox2
         '
         Me.RichTextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Comments", True))
+        Me.RichTextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Comments", True))
         Me.RichTextBox2.Location = New System.Drawing.Point(187, 430)
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
@@ -3338,7 +3458,7 @@ Partial Class Form1
         '
         'TextBox7
         '
-        Me.TextBox7.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "FormattedTitle", True))
+        Me.TextBox7.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "FormattedTitle", True))
         Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox7.Location = New System.Drawing.Point(65, 60)
         Me.TextBox7.Name = "TextBox7"
@@ -3347,7 +3467,7 @@ Partial Class Form1
         '
         'TextBox6
         '
-        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "TranslatedTitle", True))
+        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "TranslatedTitle", True))
         Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox6.Location = New System.Drawing.Point(65, 36)
         Me.TextBox6.Name = "TextBox6"
@@ -3356,7 +3476,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "OriginalTitle", True))
+        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "OriginalTitle", True))
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(65, 12)
         Me.TextBox1.Name = "TextBox1"
@@ -3375,7 +3495,7 @@ Partial Class Form1
         '
         'RichTextBox3
         '
-        Me.RichTextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Actors", True))
+        Me.RichTextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Actors", True))
         Me.RichTextBox3.Location = New System.Drawing.Point(227, 251)
         Me.RichTextBox3.Name = "RichTextBox3"
         Me.RichTextBox3.Size = New System.Drawing.Size(270, 59)
@@ -3385,7 +3505,7 @@ Partial Class Form1
         'TextBox28
         '
         Me.TextBox28.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox28.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Disks", True))
+        Me.TextBox28.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Disks", True))
         Me.TextBox28.Location = New System.Drawing.Point(215, 520)
         Me.TextBox28.Name = "TextBox28"
         Me.TextBox28.Size = New System.Drawing.Size(31, 20)
@@ -3393,7 +3513,7 @@ Partial Class Form1
         '
         'TextBox3
         '
-        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "DateAdded", True))
+        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "DateAdded", True))
         Me.TextBox3.Location = New System.Drawing.Point(332, 20)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(76, 20)
@@ -3421,7 +3541,7 @@ Partial Class Form1
         'TextBox27
         '
         Me.TextBox27.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox27.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Size", True))
+        Me.TextBox27.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Size", True))
         Me.TextBox27.Location = New System.Drawing.Point(212, 494)
         Me.TextBox27.Name = "TextBox27"
         Me.TextBox27.Size = New System.Drawing.Size(34, 20)
@@ -3429,7 +3549,7 @@ Partial Class Form1
         '
         'TextBox4
         '
-        Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Year", True))
+        Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Year", True))
         Me.TextBox4.Location = New System.Drawing.Point(457, 53)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(40, 20)
@@ -3458,7 +3578,7 @@ Partial Class Form1
         'TextBox24
         '
         Me.TextBox24.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox24.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Subtitles", True))
+        Me.TextBox24.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Subtitles", True))
         Me.TextBox24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox24.Location = New System.Drawing.Point(70, 520)
         Me.TextBox24.Name = "TextBox24"
@@ -3467,7 +3587,7 @@ Partial Class Form1
         '
         'TextBox9
         '
-        Me.TextBox9.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Checked", True))
+        Me.TextBox9.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Checked", True))
         Me.TextBox9.Location = New System.Drawing.Point(457, 79)
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(40, 20)
@@ -3497,7 +3617,7 @@ Partial Class Form1
         'TextBox23
         '
         Me.TextBox23.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox23.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Languages", True))
+        Me.TextBox23.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Languages", True))
         Me.TextBox23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox23.Location = New System.Drawing.Point(70, 494)
         Me.TextBox23.Name = "TextBox23"
@@ -3506,7 +3626,7 @@ Partial Class Form1
         '
         'TextBox8
         '
-        Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Length", True))
+        Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Length", True))
         Me.TextBox8.Location = New System.Drawing.Point(457, 105)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(40, 20)
@@ -3548,7 +3668,7 @@ Partial Class Form1
         '
         'TextBox25
         '
-        Me.TextBox25.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "AudioFormat", True))
+        Me.TextBox25.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "AudioFormat", True))
         Me.TextBox25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox25.Location = New System.Drawing.Point(59, 13)
         Me.TextBox25.Name = "TextBox25"
@@ -3557,7 +3677,7 @@ Partial Class Form1
         '
         'TextBox26
         '
-        Me.TextBox26.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "AudioBitrate", True))
+        Me.TextBox26.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "AudioBitrate", True))
         Me.TextBox26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox26.Location = New System.Drawing.Point(59, 36)
         Me.TextBox26.Name = "TextBox26"
@@ -3604,7 +3724,7 @@ Partial Class Form1
         '
         'TextBox22
         '
-        Me.TextBox22.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Framerate", True))
+        Me.TextBox22.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Framerate", True))
         Me.TextBox22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox22.Location = New System.Drawing.Point(59, 82)
         Me.TextBox22.Name = "TextBox22"
@@ -3623,7 +3743,7 @@ Partial Class Form1
         '
         'TextBox21
         '
-        Me.TextBox21.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Resolution", True))
+        Me.TextBox21.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Resolution", True))
         Me.TextBox21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox21.Location = New System.Drawing.Point(59, 59)
         Me.TextBox21.Name = "TextBox21"
@@ -3652,7 +3772,7 @@ Partial Class Form1
         '
         'TextBox19
         '
-        Me.TextBox19.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "VideoFormat", True))
+        Me.TextBox19.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "VideoFormat", True))
         Me.TextBox19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox19.Location = New System.Drawing.Point(59, 13)
         Me.TextBox19.Name = "TextBox19"
@@ -3661,7 +3781,7 @@ Partial Class Form1
         '
         'TextBox20
         '
-        Me.TextBox20.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "VideoBitrate", True))
+        Me.TextBox20.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "VideoBitrate", True))
         Me.TextBox20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox20.Location = New System.Drawing.Point(59, 36)
         Me.TextBox20.Name = "TextBox20"
@@ -3711,7 +3831,7 @@ Partial Class Form1
         '
         'TextBox17
         '
-        Me.TextBox17.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "MediaLabel", True))
+        Me.TextBox17.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "MediaLabel", True))
         Me.TextBox17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox17.Location = New System.Drawing.Point(53, 12)
         Me.TextBox17.Name = "TextBox17"
@@ -3720,7 +3840,7 @@ Partial Class Form1
         '
         'TextBox18
         '
-        Me.TextBox18.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "MediaType", True))
+        Me.TextBox18.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "MediaType", True))
         Me.TextBox18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox18.Location = New System.Drawing.Point(53, 36)
         Me.TextBox18.Name = "TextBox18"
@@ -3729,7 +3849,7 @@ Partial Class Form1
         '
         'TextBox10
         '
-        Me.TextBox10.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Director", True))
+        Me.TextBox10.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Director", True))
         Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox10.Location = New System.Drawing.Point(376, 135)
         Me.TextBox10.Name = "TextBox10"
@@ -3756,7 +3876,7 @@ Partial Class Form1
         '
         'TextBox16
         '
-        Me.TextBox16.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Borrower", True))
+        Me.TextBox16.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Borrower", True))
         Me.TextBox16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox16.Location = New System.Drawing.Point(376, 187)
         Me.TextBox16.Name = "TextBox16"
@@ -3765,7 +3885,7 @@ Partial Class Form1
         '
         'TextBox11
         '
-        Me.TextBox11.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Producer", True))
+        Me.TextBox11.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Producer", True))
         Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox11.Location = New System.Drawing.Point(376, 161)
         Me.TextBox11.Name = "TextBox11"
@@ -3794,7 +3914,7 @@ Partial Class Form1
         'TextBox14
         '
         Me.TextBox14.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "URL", True))
+        Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "URL", True))
         Me.TextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox14.Location = New System.Drawing.Point(299, 520)
         Me.TextBox14.Name = "TextBox14"
@@ -3803,7 +3923,7 @@ Partial Class Form1
         '
         'TextBox13
         '
-        Me.TextBox13.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Country", True))
+        Me.TextBox13.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Country", True))
         Me.TextBox13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox13.Location = New System.Drawing.Point(227, 161)
         Me.TextBox13.Name = "TextBox13"
@@ -3832,7 +3952,7 @@ Partial Class Form1
         'TextBox15
         '
         Me.TextBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Source", True))
+        Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Source", True))
         Me.TextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox15.Location = New System.Drawing.Point(299, 494)
         Me.TextBox15.Name = "TextBox15"
@@ -3841,7 +3961,7 @@ Partial Class Form1
         '
         'TextBox12
         '
-        Me.TextBox12.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Category", True))
+        Me.TextBox12.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Category", True))
         Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox12.Location = New System.Drawing.Point(227, 135)
         Me.TextBox12.Name = "TextBox12"
@@ -3863,12 +3983,12 @@ Partial Class Form1
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.XionPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.XionPanel1.Controls.Add(Me.DataGridView1)
+        Me.XionPanel1.Controls.Add(Me.DataGridViewMovie)
         Me.XionPanel1.Location = New System.Drawing.Point(3, 31)
         Me.XionPanel1.Movable = False
         Me.XionPanel1.Name = "XionPanel1"
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
-        Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
+        Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 22, 0, 0)
         Me.XionPanel1.Sizable = True
         Me.XionPanel1.Size = New System.Drawing.Size(84, 546)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
@@ -3877,48 +3997,48 @@ Partial Class Form1
         Me.XionPanel1.Title = "Movie List"
         Me.XionPanel1.TitleBackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.XionPanel1.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XionPanel1.TitleHeight = 27
+        Me.XionPanel1.TitleHeight = 22
         '
-        'DataGridView1
+        'DataGridViewMovie
         '
-        Me.DataGridView1.AutoGenerateColumns = False
-        Me.DataGridView1.ColumnHeadersHeight = 21
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
-        Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 27)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.RowHeadersWidth = 20
-        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView1.RowTemplate.Height = 16
-        Me.DataGridView1.Size = New System.Drawing.Size(80, 515)
-        Me.DataGridView1.TabIndex = 1
+        Me.DataGridViewMovie.AutoGenerateColumns = False
+        Me.DataGridViewMovie.ColumnHeadersHeight = 21
+        Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
+        Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle11
+        Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
+        Me.DataGridViewMovie.Name = "DataGridViewMovie"
+        Me.DataGridViewMovie.ReadOnly = True
+        Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        Me.DataGridViewMovie.RowHeadersVisible = False
+        Me.DataGridViewMovie.RowHeadersWidth = 20
+        Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridViewMovie.RowTemplate.Height = 16
+        Me.DataGridViewMovie.Size = New System.Drawing.Size(80, 520)
+        Me.DataGridViewMovie.TabIndex = 1
         '
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -3927,8 +4047,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -3951,8 +4071,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -3991,34 +4111,32 @@ Partial Class Form1
         Me.Label59.TabIndex = 28
         Me.Label59.Text = "Original"
         '
-        'VidéoBindingNavigator
+        'MovieBindingNavigator
         '
-        Me.VidéoBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
-        Me.VidéoBindingNavigator.BindingSource = Me.VideoBindingSource
-        Me.VidéoBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.VidéoBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
-        Me.VidéoBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.VidéoBindingNavigatorSaveItem})
-        Me.VidéoBindingNavigator.Location = New System.Drawing.Point(3, 3)
-        Me.VidéoBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
-        Me.VidéoBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
-        Me.VidéoBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
-        Me.VidéoBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
-        Me.VidéoBindingNavigator.Name = "VidéoBindingNavigator"
-        Me.VidéoBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.VidéoBindingNavigator.Size = New System.Drawing.Size(594, 25)
-        Me.VidéoBindingNavigator.TabIndex = 3
-        Me.VidéoBindingNavigator.Text = "BindingNavigator1"
+        Me.MovieBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
+        Me.MovieBindingNavigator.BindingSource = Me.MovieBindingSource
+        Me.MovieBindingNavigator.CountItem = Me.BindingNavigatorCountItem
+        Me.MovieBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.MovieBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.ToolStripSeparator3, Me.VidéoBindingNavigatorSaveItem})
+        Me.MovieBindingNavigator.Location = New System.Drawing.Point(3, 3)
+        Me.MovieBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+        Me.MovieBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
+        Me.MovieBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
+        Me.MovieBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
+        Me.MovieBindingNavigator.Name = "MovieBindingNavigator"
+        Me.MovieBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
+        Me.MovieBindingNavigator.Size = New System.Drawing.Size(594, 25)
+        Me.MovieBindingNavigator.TabIndex = 3
+        Me.MovieBindingNavigator.Text = "BindingNavigator1"
         '
         'BindingNavigatorAddNewItem
         '
         Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem.Enabled = False
         Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
         Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorAddNewItem.Text = "Add Entry"
-        Me.BindingNavigatorAddNewItem.Visible = False
         '
         'BindingNavigatorCountItem
         '
@@ -4064,8 +4182,9 @@ Partial Class Form1
         '
         Me.BindingNavigatorPositionItem.AccessibleName = "Position"
         Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Margin = New System.Windows.Forms.Padding(1, 3, 1, 3)
         Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(70, 21)
+        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(70, 18)
         Me.BindingNavigatorPositionItem.Text = "0"
         Me.BindingNavigatorPositionItem.ToolTipText = "Current Position"
         '
@@ -4097,6 +4216,11 @@ Partial Class Form1
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
         '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
         'VidéoBindingNavigatorSaveItem
         '
         Me.VidéoBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -4105,21 +4229,787 @@ Partial Class Form1
         Me.VidéoBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.VidéoBindingNavigatorSaveItem.Text = "Save Datas"
         '
+        'ViewPersons
+        '
+        Me.ViewPersons.Controls.Add(Me.GroupBoxPersonInfo)
+        Me.ViewPersons.Controls.Add(Me.XionPanelPerson)
+        Me.ViewPersons.Controls.Add(Me.PersonBindingNavigator)
+        Me.ViewPersons.Location = New System.Drawing.Point(4, 22)
+        Me.ViewPersons.Name = "ViewPersons"
+        Me.ViewPersons.Size = New System.Drawing.Size(600, 580)
+        Me.ViewPersons.TabIndex = 7
+        Me.ViewPersons.Text = "View Persons"
+        Me.ViewPersons.UseVisualStyleBackColor = True
+        '
+        'GroupBoxPersonInfo
+        '
+        Me.GroupBoxPersonInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxWriter)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxDirector)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxProducer)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxActor)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label99)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label98)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label97)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label96)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_Photos)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_URL)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_TMDB_Id)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_IMDB_Id)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label95)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label94)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label93)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_Birthplace)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_Birthday)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_MiniBio)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_Name)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_Biography)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.PictureBox2)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label91)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label92)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.Label90)
+        Me.GroupBoxPersonInfo.Controls.Add(Me.ViewPersons_OtherName)
+        Me.GroupBoxPersonInfo.Location = New System.Drawing.Point(206, 31)
+        Me.GroupBoxPersonInfo.Name = "GroupBoxPersonInfo"
+        Me.GroupBoxPersonInfo.Size = New System.Drawing.Size(394, 546)
+        Me.GroupBoxPersonInfo.TabIndex = 9
+        Me.GroupBoxPersonInfo.TabStop = False
+        Me.GroupBoxPersonInfo.Text = "Person Info ..."
+        '
+        'CheckBoxWriter
+        '
+        Me.CheckBoxWriter.AutoSize = True
+        Me.CheckBoxWriter.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsWriter", True))
+        Me.CheckBoxWriter.Location = New System.Drawing.Point(314, 216)
+        Me.CheckBoxWriter.Name = "CheckBoxWriter"
+        Me.CheckBoxWriter.Size = New System.Drawing.Size(54, 17)
+        Me.CheckBoxWriter.TabIndex = 29
+        Me.CheckBoxWriter.Text = "Writer"
+        Me.CheckBoxWriter.UseVisualStyleBackColor = True
+        '
+        'PersonBindingSource
+        '
+        Me.PersonBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.PersonDataTable)
+        '
+        'CheckBoxDirector
+        '
+        Me.CheckBoxDirector.AutoSize = True
+        Me.CheckBoxDirector.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsDirector", True))
+        Me.CheckBoxDirector.Location = New System.Drawing.Point(314, 193)
+        Me.CheckBoxDirector.Name = "CheckBoxDirector"
+        Me.CheckBoxDirector.Size = New System.Drawing.Size(63, 17)
+        Me.CheckBoxDirector.TabIndex = 28
+        Me.CheckBoxDirector.Text = "Director"
+        Me.CheckBoxDirector.UseVisualStyleBackColor = True
+        '
+        'CheckBoxProducer
+        '
+        Me.CheckBoxProducer.AutoSize = True
+        Me.CheckBoxProducer.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsProducer", True))
+        Me.CheckBoxProducer.Location = New System.Drawing.Point(232, 216)
+        Me.CheckBoxProducer.Name = "CheckBoxProducer"
+        Me.CheckBoxProducer.Size = New System.Drawing.Size(69, 17)
+        Me.CheckBoxProducer.TabIndex = 27
+        Me.CheckBoxProducer.Text = "Producer"
+        Me.CheckBoxProducer.UseVisualStyleBackColor = True
+        '
+        'CheckBoxActor
+        '
+        Me.CheckBoxActor.AutoSize = True
+        Me.CheckBoxActor.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsActor", True))
+        Me.CheckBoxActor.Location = New System.Drawing.Point(232, 193)
+        Me.CheckBoxActor.Name = "CheckBoxActor"
+        Me.CheckBoxActor.Size = New System.Drawing.Size(51, 17)
+        Me.CheckBoxActor.TabIndex = 26
+        Me.CheckBoxActor.Text = "Actor"
+        Me.CheckBoxActor.UseVisualStyleBackColor = True
+        '
+        'Label99
+        '
+        Me.Label99.AutoSize = True
+        Me.Label99.Location = New System.Drawing.Point(6, 443)
+        Me.Label99.Name = "Label99"
+        Me.Label99.Size = New System.Drawing.Size(29, 13)
+        Me.Label99.TabIndex = 25
+        Me.Label99.Text = "URL"
+        '
+        'Label98
+        '
+        Me.Label98.AutoSize = True
+        Me.Label98.Location = New System.Drawing.Point(68, 470)
+        Me.Label98.Name = "Label98"
+        Me.Label98.Size = New System.Drawing.Size(49, 13)
+        Me.Label98.TabIndex = 24
+        Me.Label98.Text = "IMDB_Id"
+        '
+        'Label97
+        '
+        Me.Label97.AutoSize = True
+        Me.Label97.Location = New System.Drawing.Point(229, 469)
+        Me.Label97.Name = "Label97"
+        Me.Label97.Size = New System.Drawing.Size(53, 13)
+        Me.Label97.TabIndex = 23
+        Me.Label97.Text = "TMDB_Id"
+        '
+        'Label96
+        '
+        Me.Label96.AutoSize = True
+        Me.Label96.Location = New System.Drawing.Point(6, 495)
+        Me.Label96.Name = "Label96"
+        Me.Label96.Size = New System.Drawing.Size(40, 13)
+        Me.Label96.TabIndex = 22
+        Me.Label96.Text = "Photos"
+        '
+        'ViewPersons_Photos
+        '
+        Me.ViewPersons_Photos.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Photos", True))
+        Me.ViewPersons_Photos.Location = New System.Drawing.Point(66, 492)
+        Me.ViewPersons_Photos.Name = "ViewPersons_Photos"
+        Me.ViewPersons_Photos.Size = New System.Drawing.Size(322, 20)
+        Me.ViewPersons_Photos.TabIndex = 21
+        '
+        'ViewPersons_URL
+        '
+        Me.ViewPersons_URL.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "URL", True))
+        Me.ViewPersons_URL.Location = New System.Drawing.Point(66, 440)
+        Me.ViewPersons_URL.Name = "ViewPersons_URL"
+        Me.ViewPersons_URL.Size = New System.Drawing.Size(322, 20)
+        Me.ViewPersons_URL.TabIndex = 20
+        '
+        'ViewPersons_TMDB_Id
+        '
+        Me.ViewPersons_TMDB_Id.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "TMDB_Id", True))
+        Me.ViewPersons_TMDB_Id.Location = New System.Drawing.Point(288, 467)
+        Me.ViewPersons_TMDB_Id.Name = "ViewPersons_TMDB_Id"
+        Me.ViewPersons_TMDB_Id.Size = New System.Drawing.Size(100, 20)
+        Me.ViewPersons_TMDB_Id.TabIndex = 19
+        '
+        'ViewPersons_IMDB_Id
+        '
+        Me.ViewPersons_IMDB_Id.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "IMDB_Id", True))
+        Me.ViewPersons_IMDB_Id.Location = New System.Drawing.Point(123, 466)
+        Me.ViewPersons_IMDB_Id.Name = "ViewPersons_IMDB_Id"
+        Me.ViewPersons_IMDB_Id.Size = New System.Drawing.Size(100, 20)
+        Me.ViewPersons_IMDB_Id.TabIndex = 18
+        '
+        'Label95
+        '
+        Me.Label95.AutoSize = True
+        Me.Label95.Location = New System.Drawing.Point(6, 277)
+        Me.Label95.Name = "Label95"
+        Me.Label95.Size = New System.Drawing.Size(54, 26)
+        Me.Label95.TabIndex = 14
+        Me.Label95.Text = "Mini " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Biography"
+        '
+        'Label94
+        '
+        Me.Label94.AutoSize = True
+        Me.Label94.Location = New System.Drawing.Point(184, 154)
+        Me.Label94.Name = "Label94"
+        Me.Label94.Size = New System.Drawing.Size(58, 13)
+        Me.Label94.TabIndex = 13
+        Me.Label94.Text = "Birth Place"
+        '
+        'Label93
+        '
+        Me.Label93.AutoSize = True
+        Me.Label93.Location = New System.Drawing.Point(184, 100)
+        Me.Label93.Name = "Label93"
+        Me.Label93.Size = New System.Drawing.Size(54, 13)
+        Me.Label93.TabIndex = 12
+        Me.Label93.Text = "Birth Date"
+        '
+        'ViewPersons_Birthplace
+        '
+        Me.ViewPersons_Birthplace.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "BirthPlace", True))
+        Me.ViewPersons_Birthplace.Location = New System.Drawing.Point(248, 151)
+        Me.ViewPersons_Birthplace.Name = "ViewPersons_Birthplace"
+        Me.ViewPersons_Birthplace.Size = New System.Drawing.Size(138, 20)
+        Me.ViewPersons_Birthplace.TabIndex = 11
+        '
+        'ViewPersons_Birthday
+        '
+        Me.ViewPersons_Birthday.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Born", True))
+        Me.ViewPersons_Birthday.Location = New System.Drawing.Point(248, 97)
+        Me.ViewPersons_Birthday.Name = "ViewPersons_Birthday"
+        Me.ViewPersons_Birthday.Size = New System.Drawing.Size(100, 20)
+        Me.ViewPersons_Birthday.TabIndex = 10
+        '
+        'ViewPersons_MiniBio
+        '
+        Me.ViewPersons_MiniBio.Location = New System.Drawing.Point(66, 277)
+        Me.ViewPersons_MiniBio.Name = "ViewPersons_MiniBio"
+        Me.ViewPersons_MiniBio.Size = New System.Drawing.Size(320, 47)
+        Me.ViewPersons_MiniBio.TabIndex = 9
+        Me.ViewPersons_MiniBio.Text = ""
+        '
+        'ViewPersons_Name
+        '
+        Me.ViewPersons_Name.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Name", True))
+        Me.ViewPersons_Name.Location = New System.Drawing.Point(248, 24)
+        Me.ViewPersons_Name.Name = "ViewPersons_Name"
+        Me.ViewPersons_Name.Size = New System.Drawing.Size(138, 20)
+        Me.ViewPersons_Name.TabIndex = 3
+        '
+        'ViewPersons_Biography
+        '
+        Me.ViewPersons_Biography.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Biography", True))
+        Me.ViewPersons_Biography.Location = New System.Drawing.Point(66, 330)
+        Me.ViewPersons_Biography.Name = "ViewPersons_Biography"
+        Me.ViewPersons_Biography.Size = New System.Drawing.Size(320, 96)
+        Me.ViewPersons_Biography.TabIndex = 6
+        Me.ViewPersons_Biography.Text = ""
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.PersonBindingSource, "Picture", True))
+        Me.PictureBox2.Location = New System.Drawing.Point(9, 19)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(166, 220)
+        Me.PictureBox2.TabIndex = 1
+        Me.PictureBox2.TabStop = False
+        '
+        'Label91
+        '
+        Me.Label91.AutoSize = True
+        Me.Label91.Location = New System.Drawing.Point(6, 333)
+        Me.Label91.Name = "Label91"
+        Me.Label91.Size = New System.Drawing.Size(54, 13)
+        Me.Label91.TabIndex = 5
+        Me.Label91.Text = "Biography"
+        '
+        'Label92
+        '
+        Me.Label92.AutoSize = True
+        Me.Label92.Location = New System.Drawing.Point(184, 62)
+        Me.Label92.Name = "Label92"
+        Me.Label92.Size = New System.Drawing.Size(52, 26)
+        Me.Label92.TabIndex = 8
+        Me.Label92.Text = "Alternate " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name"
+        '
+        'Label90
+        '
+        Me.Label90.AutoSize = True
+        Me.Label90.Location = New System.Drawing.Point(184, 27)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(35, 13)
+        Me.Label90.TabIndex = 4
+        Me.Label90.Text = "Name"
+        '
+        'ViewPersons_OtherName
+        '
+        Me.ViewPersons_OtherName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "AlternateName", True))
+        Me.ViewPersons_OtherName.Location = New System.Drawing.Point(248, 66)
+        Me.ViewPersons_OtherName.Name = "ViewPersons_OtherName"
+        Me.ViewPersons_OtherName.Size = New System.Drawing.Size(138, 20)
+        Me.ViewPersons_OtherName.TabIndex = 7
+        '
+        'XionPanelPerson
+        '
+        Me.XionPanelPerson.Controls.Add(Me.DataGridViewPerson)
+        Me.XionPanelPerson.Location = New System.Drawing.Point(3, 31)
+        Me.XionPanelPerson.Movable = True
+        Me.XionPanelPerson.Name = "XionPanelPerson"
+        Me.XionPanelPerson.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
+        Me.XionPanelPerson.Padding = New System.Windows.Forms.Padding(0, 22, 0, 0)
+        Me.XionPanelPerson.Sizable = True
+        Me.XionPanelPerson.Size = New System.Drawing.Size(200, 546)
+        Me.XionPanelPerson.State = XionControls.XionPanel.PanelState.Expand
+        Me.XionPanelPerson.TabIndex = 2
+        Me.XionPanelPerson.Text = "Person List"
+        Me.XionPanelPerson.Title = "Person List"
+        Me.XionPanelPerson.TitleBackColor = System.Drawing.SystemColors.Control
+        Me.XionPanelPerson.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XionPanelPerson.TitleHeight = 22
+        '
+        'DataGridViewPerson
+        '
+        Me.DataGridViewPerson.AllowUserToOrderColumns = True
+        Me.DataGridViewPerson.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridViewPerson.AutoGenerateColumns = False
+        Me.DataGridViewPerson.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DataGridViewPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewPerson.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PersonIdDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.AlternateNameDataGridViewTextBoxColumn, Me.BornDataGridViewTextBoxColumn, Me.BirthPlaceDataGridViewTextBoxColumn, Me.MiniBiographyDataGridViewTextBoxColumn, Me.BiographyDataGridViewTextBoxColumn, Me.URLDataGridViewTextBoxColumn, Me.IMDBIdDataGridViewTextBoxColumn, Me.TMDBIdDataGridViewTextBoxColumn, Me.PictureDataGridViewTextBoxColumn, Me.PhotosDataGridViewTextBoxColumn, Me.IsActor, Me.IsProducer, Me.IsDirector, Me.IsWriter})
+        Me.DataGridViewPerson.DataSource = Me.PersonBindingSource
+        Me.DataGridViewPerson.Location = New System.Drawing.Point(0, 22)
+        Me.DataGridViewPerson.MultiSelect = False
+        Me.DataGridViewPerson.Name = "DataGridViewPerson"
+        Me.DataGridViewPerson.RowHeadersVisible = False
+        Me.DataGridViewPerson.RowHeadersWidth = 20
+        Me.DataGridViewPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.DataGridViewPerson.Size = New System.Drawing.Size(200, 524)
+        Me.DataGridViewPerson.TabIndex = 0
+        '
+        'PersonIdDataGridViewTextBoxColumn
+        '
+        Me.PersonIdDataGridViewTextBoxColumn.DataPropertyName = "Person_Id"
+        Me.PersonIdDataGridViewTextBoxColumn.HeaderText = "Id"
+        Me.PersonIdDataGridViewTextBoxColumn.Name = "PersonIdDataGridViewTextBoxColumn"
+        Me.PersonIdDataGridViewTextBoxColumn.Width = 25
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        Me.NameDataGridViewTextBoxColumn.Width = 150
+        '
+        'AlternateNameDataGridViewTextBoxColumn
+        '
+        Me.AlternateNameDataGridViewTextBoxColumn.DataPropertyName = "AlternateName"
+        Me.AlternateNameDataGridViewTextBoxColumn.HeaderText = "AlternateName"
+        Me.AlternateNameDataGridViewTextBoxColumn.Name = "AlternateNameDataGridViewTextBoxColumn"
+        '
+        'BornDataGridViewTextBoxColumn
+        '
+        Me.BornDataGridViewTextBoxColumn.DataPropertyName = "Born"
+        Me.BornDataGridViewTextBoxColumn.HeaderText = "Born"
+        Me.BornDataGridViewTextBoxColumn.Name = "BornDataGridViewTextBoxColumn"
+        '
+        'BirthPlaceDataGridViewTextBoxColumn
+        '
+        Me.BirthPlaceDataGridViewTextBoxColumn.DataPropertyName = "BirthPlace"
+        Me.BirthPlaceDataGridViewTextBoxColumn.HeaderText = "BirthPlace"
+        Me.BirthPlaceDataGridViewTextBoxColumn.Name = "BirthPlaceDataGridViewTextBoxColumn"
+        '
+        'MiniBiographyDataGridViewTextBoxColumn
+        '
+        Me.MiniBiographyDataGridViewTextBoxColumn.DataPropertyName = "MiniBiography"
+        Me.MiniBiographyDataGridViewTextBoxColumn.HeaderText = "MiniBiography"
+        Me.MiniBiographyDataGridViewTextBoxColumn.Name = "MiniBiographyDataGridViewTextBoxColumn"
+        '
+        'BiographyDataGridViewTextBoxColumn
+        '
+        Me.BiographyDataGridViewTextBoxColumn.DataPropertyName = "Biography"
+        Me.BiographyDataGridViewTextBoxColumn.HeaderText = "Biography"
+        Me.BiographyDataGridViewTextBoxColumn.Name = "BiographyDataGridViewTextBoxColumn"
+        '
+        'URLDataGridViewTextBoxColumn
+        '
+        Me.URLDataGridViewTextBoxColumn.DataPropertyName = "URL"
+        Me.URLDataGridViewTextBoxColumn.HeaderText = "URL"
+        Me.URLDataGridViewTextBoxColumn.Name = "URLDataGridViewTextBoxColumn"
+        '
+        'IMDBIdDataGridViewTextBoxColumn
+        '
+        Me.IMDBIdDataGridViewTextBoxColumn.DataPropertyName = "IMDB_Id"
+        Me.IMDBIdDataGridViewTextBoxColumn.HeaderText = "IMDB_Id"
+        Me.IMDBIdDataGridViewTextBoxColumn.Name = "IMDBIdDataGridViewTextBoxColumn"
+        '
+        'TMDBIdDataGridViewTextBoxColumn
+        '
+        Me.TMDBIdDataGridViewTextBoxColumn.DataPropertyName = "TMDB_Id"
+        Me.TMDBIdDataGridViewTextBoxColumn.HeaderText = "TMDB_Id"
+        Me.TMDBIdDataGridViewTextBoxColumn.Name = "TMDBIdDataGridViewTextBoxColumn"
+        '
+        'PictureDataGridViewTextBoxColumn
+        '
+        Me.PictureDataGridViewTextBoxColumn.DataPropertyName = "Picture"
+        Me.PictureDataGridViewTextBoxColumn.HeaderText = "Picture"
+        Me.PictureDataGridViewTextBoxColumn.Name = "PictureDataGridViewTextBoxColumn"
+        '
+        'PhotosDataGridViewTextBoxColumn
+        '
+        Me.PhotosDataGridViewTextBoxColumn.DataPropertyName = "Photos"
+        Me.PhotosDataGridViewTextBoxColumn.HeaderText = "Photos"
+        Me.PhotosDataGridViewTextBoxColumn.Name = "PhotosDataGridViewTextBoxColumn"
+        '
+        'IsActor
+        '
+        Me.IsActor.DataPropertyName = "IsActor"
+        Me.IsActor.HeaderText = "IsActor"
+        Me.IsActor.Name = "IsActor"
+        '
+        'IsProducer
+        '
+        Me.IsProducer.DataPropertyName = "IsProducer"
+        Me.IsProducer.HeaderText = "IsProducer"
+        Me.IsProducer.Name = "IsProducer"
+        '
+        'IsDirector
+        '
+        Me.IsDirector.DataPropertyName = "IsDirector"
+        Me.IsDirector.HeaderText = "IsDirector"
+        Me.IsDirector.Name = "IsDirector"
+        '
+        'IsWriter
+        '
+        Me.IsWriter.DataPropertyName = "IsWriter"
+        Me.IsWriter.HeaderText = "IsWriter"
+        Me.IsWriter.Name = "IsWriter"
+        '
+        'PersonBindingNavigator
+        '
+        Me.PersonBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem1
+        Me.PersonBindingNavigator.BindingSource = Me.PersonBindingSource
+        Me.PersonBindingNavigator.CountItem = Me.BindingNavigatorCountItem1
+        Me.PersonBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem1
+        Me.PersonBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
+        Me.PersonBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem1, Me.BindingNavigatorMovePreviousItem1, Me.BindingNavigatorSeparator3, Me.BindingNavigatorPositionItem1, Me.BindingNavigatorCountItem1, Me.BindingNavigatorSeparator4, Me.BindingNavigatorMoveNextItem1, Me.BindingNavigatorMoveLastItem1, Me.BindingNavigatorSeparator5, Me.BindingNavigatorAddNewItem1, Me.BindingNavigatorDeleteItem1, Me.ToolStripSeparator2, Me.SpeichernToolStripButton, Me.ToolStripSeparator4, Me.ToolStripButtonAddMissingPersons, Me.ToolStripButtonGrabPersons, Me.ToolStripSeparator5, Me.ToolStripTextBoxSearch})
+        Me.PersonBindingNavigator.Location = New System.Drawing.Point(0, 3)
+        Me.PersonBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem1
+        Me.PersonBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem1
+        Me.PersonBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem1
+        Me.PersonBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem1
+        Me.PersonBindingNavigator.Name = "PersonBindingNavigator"
+        Me.PersonBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem1
+        Me.PersonBindingNavigator.Size = New System.Drawing.Size(565, 27)
+        Me.PersonBindingNavigator.TabIndex = 0
+        Me.PersonBindingNavigator.Text = "PersonBindingNavigator"
+        '
+        'BindingNavigatorAddNewItem1
+        '
+        Me.BindingNavigatorAddNewItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItem1.Image = CType(resources.GetObject("BindingNavigatorAddNewItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorAddNewItem1.Name = "BindingNavigatorAddNewItem1"
+        Me.BindingNavigatorAddNewItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItem1.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorAddNewItem1.Text = "Neu hinzufügen"
+        '
+        'BindingNavigatorCountItem1
+        '
+        Me.BindingNavigatorCountItem1.Name = "BindingNavigatorCountItem1"
+        Me.BindingNavigatorCountItem1.Size = New System.Drawing.Size(44, 24)
+        Me.BindingNavigatorCountItem1.Text = "von {0}"
+        Me.BindingNavigatorCountItem1.ToolTipText = "Die Gesamtanzahl der Elemente."
+        '
+        'BindingNavigatorDeleteItem1
+        '
+        Me.BindingNavigatorDeleteItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorDeleteItem1.Image = CType(resources.GetObject("BindingNavigatorDeleteItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorDeleteItem1.Name = "BindingNavigatorDeleteItem1"
+        Me.BindingNavigatorDeleteItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorDeleteItem1.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorDeleteItem1.Text = "Löschen"
+        '
+        'BindingNavigatorMoveFirstItem1
+        '
+        Me.BindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem1.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem1.Name = "BindingNavigatorMoveFirstItem1"
+        Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem1.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorMoveFirstItem1.Text = "Erste verschieben"
+        '
+        'BindingNavigatorMovePreviousItem1
+        '
+        Me.BindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem1.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem1.Name = "BindingNavigatorMovePreviousItem1"
+        Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem1.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorMovePreviousItem1.Text = "Vorherige verschieben"
+        '
+        'BindingNavigatorSeparator3
+        '
+        Me.BindingNavigatorSeparator3.Name = "BindingNavigatorSeparator3"
+        Me.BindingNavigatorSeparator3.Size = New System.Drawing.Size(6, 27)
+        '
+        'BindingNavigatorPositionItem1
+        '
+        Me.BindingNavigatorPositionItem1.AccessibleName = "Position"
+        Me.BindingNavigatorPositionItem1.AutoSize = False
+        Me.BindingNavigatorPositionItem1.Margin = New System.Windows.Forms.Padding(1, 3, 1, 3)
+        Me.BindingNavigatorPositionItem1.Name = "BindingNavigatorPositionItem1"
+        Me.BindingNavigatorPositionItem1.Size = New System.Drawing.Size(50, 18)
+        Me.BindingNavigatorPositionItem1.Text = "0"
+        Me.BindingNavigatorPositionItem1.ToolTipText = "Aktuelle Position"
+        '
+        'BindingNavigatorSeparator4
+        '
+        Me.BindingNavigatorSeparator4.Name = "BindingNavigatorSeparator4"
+        Me.BindingNavigatorSeparator4.Size = New System.Drawing.Size(6, 27)
+        '
+        'BindingNavigatorMoveNextItem1
+        '
+        Me.BindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem1.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem1.Name = "BindingNavigatorMoveNextItem1"
+        Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem1.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorMoveNextItem1.Text = "Nächste verschieben"
+        '
+        'BindingNavigatorMoveLastItem1
+        '
+        Me.BindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem1.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem1.Name = "BindingNavigatorMoveLastItem1"
+        Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem1.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorMoveLastItem1.Text = "Letzte verschieben"
+        '
+        'BindingNavigatorSeparator5
+        '
+        Me.BindingNavigatorSeparator5.Name = "BindingNavigatorSeparator5"
+        Me.BindingNavigatorSeparator5.Size = New System.Drawing.Size(6, 27)
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 27)
+        '
+        'SpeichernToolStripButton
+        '
+        Me.SpeichernToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.SpeichernToolStripButton.Image = CType(resources.GetObject("SpeichernToolStripButton.Image"), System.Drawing.Image)
+        Me.SpeichernToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SpeichernToolStripButton.Name = "SpeichernToolStripButton"
+        Me.SpeichernToolStripButton.Size = New System.Drawing.Size(23, 24)
+        Me.SpeichernToolStripButton.Text = "&Speichern"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 27)
+        '
+        'ToolStripButtonAddMissingPersons
+        '
+        Me.ToolStripButtonAddMissingPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButtonAddMissingPersons.Image = CType(resources.GetObject("ToolStripButtonAddMissingPersons.Image"), System.Drawing.Image)
+        Me.ToolStripButtonAddMissingPersons.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButtonAddMissingPersons.Name = "ToolStripButtonAddMissingPersons"
+        Me.ToolStripButtonAddMissingPersons.Size = New System.Drawing.Size(108, 24)
+        Me.ToolStripButtonAddMissingPersons.Text = "Add missing Persons"
+        '
+        'ToolStripButtonGrabPersons
+        '
+        Me.ToolStripButtonGrabPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButtonGrabPersons.Image = CType(resources.GetObject("ToolStripButtonGrabPersons.Image"), System.Drawing.Image)
+        Me.ToolStripButtonGrabPersons.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButtonGrabPersons.Name = "ToolStripButtonGrabPersons"
+        Me.ToolStripButtonGrabPersons.Size = New System.Drawing.Size(60, 24)
+        Me.ToolStripButtonGrabPersons.Text = "Grab Data"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 27)
+        '
+        'ToolStripTextBoxSearch
+        '
+        Me.ToolStripTextBoxSearch.AccessibleName = "PersonSearchName"
+        Me.ToolStripTextBoxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.ToolStripTextBoxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList
+        Me.ToolStripTextBoxSearch.Margin = New System.Windows.Forms.Padding(1, 3, 1, 3)
+        Me.ToolStripTextBoxSearch.Name = "ToolStripTextBoxSearch"
+        Me.ToolStripTextBoxSearch.Size = New System.Drawing.Size(90, 21)
+        '
+        'ViewCatalog
+        '
+        Me.ViewCatalog.Controls.Add(Me.PropertyGrid1)
+        Me.ViewCatalog.Controls.Add(Me.Label101)
+        Me.ViewCatalog.Controls.Add(Me.Label100)
+        Me.ViewCatalog.Controls.Add(Me.DataGridView4)
+        Me.ViewCatalog.Controls.Add(Me.DataGridView2)
+        Me.ViewCatalog.Controls.Add(Me.DataGridView1)
+        Me.ViewCatalog.Location = New System.Drawing.Point(4, 22)
+        Me.ViewCatalog.Name = "ViewCatalog"
+        Me.ViewCatalog.Size = New System.Drawing.Size(600, 580)
+        Me.ViewCatalog.TabIndex = 8
+        Me.ViewCatalog.Text = "View Catalog"
+        Me.ViewCatalog.UseVisualStyleBackColor = True
+        '
+        'Label101
+        '
+        Me.Label101.AutoSize = True
+        Me.Label101.Location = New System.Drawing.Point(8, 130)
+        Me.Label101.Name = "Label101"
+        Me.Label101.Size = New System.Drawing.Size(122, 13)
+        Me.Label101.TabIndex = 5
+        Me.Label101.Text = "Custom Fields Properties"
+        '
+        'Label100
+        '
+        Me.Label100.AutoSize = True
+        Me.Label100.Location = New System.Drawing.Point(8, 10)
+        Me.Label100.Name = "Label100"
+        Me.Label100.Size = New System.Drawing.Size(54, 13)
+        Me.Label100.TabIndex = 4
+        Me.Label100.Text = "Properties"
+        '
+        'DataGridView4
+        '
+        Me.DataGridView4.AutoGenerateColumns = False
+        Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomFieldIdDataGridViewTextBoxColumn, Me.TagDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn1, Me.DefaultValueDataGridViewTextBoxColumn, Me.MultiValuesDataGridViewTextBoxColumn, Me.ExcludedInScriptsDataGridViewTextBoxColumn, Me.GUIPropertiesDataGridViewTextBoxColumn, Me.CustomPropertiesDataGridViewTextBoxColumn, Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1})
+        Me.DataGridView4.DataSource = Me.CustomFieldBindingSource
+        Me.DataGridView4.Location = New System.Drawing.Point(263, 146)
+        Me.DataGridView4.Name = "DataGridView4"
+        Me.DataGridView4.Size = New System.Drawing.Size(329, 219)
+        Me.DataGridView4.TabIndex = 3
+        '
+        'CustomFieldIdDataGridViewTextBoxColumn
+        '
+        Me.CustomFieldIdDataGridViewTextBoxColumn.DataPropertyName = "CustomField_Id"
+        Me.CustomFieldIdDataGridViewTextBoxColumn.HeaderText = "CustomField_Id"
+        Me.CustomFieldIdDataGridViewTextBoxColumn.Name = "CustomFieldIdDataGridViewTextBoxColumn"
+        '
+        'TagDataGridViewTextBoxColumn
+        '
+        Me.TagDataGridViewTextBoxColumn.DataPropertyName = "Tag"
+        Me.TagDataGridViewTextBoxColumn.HeaderText = "Tag"
+        Me.TagDataGridViewTextBoxColumn.Name = "TagDataGridViewTextBoxColumn"
+        '
+        'TypeDataGridViewTextBoxColumn
+        '
+        Me.TypeDataGridViewTextBoxColumn.DataPropertyName = "Type"
+        Me.TypeDataGridViewTextBoxColumn.HeaderText = "Type"
+        Me.TypeDataGridViewTextBoxColumn.Name = "TypeDataGridViewTextBoxColumn"
+        '
+        'NameDataGridViewTextBoxColumn1
+        '
+        Me.NameDataGridViewTextBoxColumn1.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn1.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn1.Name = "NameDataGridViewTextBoxColumn1"
+        '
+        'DefaultValueDataGridViewTextBoxColumn
+        '
+        Me.DefaultValueDataGridViewTextBoxColumn.DataPropertyName = "DefaultValue"
+        Me.DefaultValueDataGridViewTextBoxColumn.HeaderText = "DefaultValue"
+        Me.DefaultValueDataGridViewTextBoxColumn.Name = "DefaultValueDataGridViewTextBoxColumn"
+        '
+        'MultiValuesDataGridViewTextBoxColumn
+        '
+        Me.MultiValuesDataGridViewTextBoxColumn.DataPropertyName = "MultiValues"
+        Me.MultiValuesDataGridViewTextBoxColumn.HeaderText = "MultiValues"
+        Me.MultiValuesDataGridViewTextBoxColumn.Name = "MultiValuesDataGridViewTextBoxColumn"
+        '
+        'ExcludedInScriptsDataGridViewTextBoxColumn
+        '
+        Me.ExcludedInScriptsDataGridViewTextBoxColumn.DataPropertyName = "ExcludedInScripts"
+        Me.ExcludedInScriptsDataGridViewTextBoxColumn.HeaderText = "ExcludedInScripts"
+        Me.ExcludedInScriptsDataGridViewTextBoxColumn.Name = "ExcludedInScriptsDataGridViewTextBoxColumn"
+        '
+        'GUIPropertiesDataGridViewTextBoxColumn
+        '
+        Me.GUIPropertiesDataGridViewTextBoxColumn.DataPropertyName = "GUIProperties"
+        Me.GUIPropertiesDataGridViewTextBoxColumn.HeaderText = "GUIProperties"
+        Me.GUIPropertiesDataGridViewTextBoxColumn.Name = "GUIPropertiesDataGridViewTextBoxColumn"
+        '
+        'CustomPropertiesDataGridViewTextBoxColumn
+        '
+        Me.CustomPropertiesDataGridViewTextBoxColumn.DataPropertyName = "CustomProperties"
+        Me.CustomPropertiesDataGridViewTextBoxColumn.HeaderText = "CustomProperties"
+        Me.CustomPropertiesDataGridViewTextBoxColumn.Name = "CustomPropertiesDataGridViewTextBoxColumn"
+        '
+        'CustomFieldsPropertiesIdDataGridViewTextBoxColumn1
+        '
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1.DataPropertyName = "CustomFieldsProperties_Id"
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1.HeaderText = "CustomFieldsProperties_Id"
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1.Name = "CustomFieldsPropertiesIdDataGridViewTextBoxColumn1"
+        '
+        'CustomFieldBindingSource
+        '
+        Me.CustomFieldBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.CustomFieldDataTable)
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.AutoGenerateColumns = False
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn, Me.ColumnSettingsDataGridViewTextBoxColumn, Me.CatalogIdDataGridViewTextBoxColumn1})
+        Me.DataGridView2.DataSource = Me.CustomFieldsPropertiesBindingSource
+        Me.DataGridView2.Location = New System.Drawing.Point(8, 146)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.Size = New System.Drawing.Size(240, 219)
+        Me.DataGridView2.TabIndex = 1
+        '
+        'CustomFieldsPropertiesIdDataGridViewTextBoxColumn
+        '
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn.DataPropertyName = "CustomFieldsProperties_Id"
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn.HeaderText = "CustomFieldsProperties_Id"
+        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn.Name = "CustomFieldsPropertiesIdDataGridViewTextBoxColumn"
+        '
+        'ColumnSettingsDataGridViewTextBoxColumn
+        '
+        Me.ColumnSettingsDataGridViewTextBoxColumn.DataPropertyName = "ColumnSettings"
+        Me.ColumnSettingsDataGridViewTextBoxColumn.HeaderText = "ColumnSettings"
+        Me.ColumnSettingsDataGridViewTextBoxColumn.Name = "ColumnSettingsDataGridViewTextBoxColumn"
+        '
+        'CatalogIdDataGridViewTextBoxColumn1
+        '
+        Me.CatalogIdDataGridViewTextBoxColumn1.DataPropertyName = "Catalog_Id"
+        Me.CatalogIdDataGridViewTextBoxColumn1.HeaderText = "Catalog_Id"
+        Me.CatalogIdDataGridViewTextBoxColumn1.Name = "CatalogIdDataGridViewTextBoxColumn1"
+        '
+        'CustomFieldsPropertiesBindingSource
+        '
+        Me.CustomFieldsPropertiesBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.CustomFieldsPropertiesDataTable)
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AutoGenerateColumns = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertiesIdDataGridViewTextBoxColumn, Me.OwnerDataGridViewTextBoxColumn, Me.MailDataGridViewTextBoxColumn, Me.SiteDataGridViewTextBoxColumn, Me.DescriptionDataGridViewTextBoxColumn, Me.CatalogIdDataGridViewTextBoxColumn})
+        Me.DataGridView1.DataSource = Me.PropertiesBindingSource
+        Me.DataGridView1.Location = New System.Drawing.Point(11, 26)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(581, 92)
+        Me.DataGridView1.TabIndex = 0
+        '
+        'PropertiesIdDataGridViewTextBoxColumn
+        '
+        Me.PropertiesIdDataGridViewTextBoxColumn.DataPropertyName = "Properties_Id"
+        Me.PropertiesIdDataGridViewTextBoxColumn.HeaderText = "Properties_Id"
+        Me.PropertiesIdDataGridViewTextBoxColumn.Name = "PropertiesIdDataGridViewTextBoxColumn"
+        '
+        'OwnerDataGridViewTextBoxColumn
+        '
+        Me.OwnerDataGridViewTextBoxColumn.DataPropertyName = "Owner"
+        Me.OwnerDataGridViewTextBoxColumn.HeaderText = "Owner"
+        Me.OwnerDataGridViewTextBoxColumn.Name = "OwnerDataGridViewTextBoxColumn"
+        '
+        'MailDataGridViewTextBoxColumn
+        '
+        Me.MailDataGridViewTextBoxColumn.DataPropertyName = "Mail"
+        Me.MailDataGridViewTextBoxColumn.HeaderText = "Mail"
+        Me.MailDataGridViewTextBoxColumn.Name = "MailDataGridViewTextBoxColumn"
+        '
+        'SiteDataGridViewTextBoxColumn
+        '
+        Me.SiteDataGridViewTextBoxColumn.DataPropertyName = "Site"
+        Me.SiteDataGridViewTextBoxColumn.HeaderText = "Site"
+        Me.SiteDataGridViewTextBoxColumn.Name = "SiteDataGridViewTextBoxColumn"
+        '
+        'DescriptionDataGridViewTextBoxColumn
+        '
+        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "Description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
+        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
+        '
+        'CatalogIdDataGridViewTextBoxColumn
+        '
+        Me.CatalogIdDataGridViewTextBoxColumn.DataPropertyName = "Catalog_Id"
+        Me.CatalogIdDataGridViewTextBoxColumn.HeaderText = "Catalog_Id"
+        Me.CatalogIdDataGridViewTextBoxColumn.Name = "CatalogIdDataGridViewTextBoxColumn"
+        '
+        'PropertiesBindingSource
+        '
+        Me.PropertiesBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.PropertiesDataTable)
+        '
+        'AntMovieCatalog
+        '
+        Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
+        Me.AntMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'mnuFile
         '
-        Me.mnuFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.DebugToolStripMenuItem})
+        Me.mnuFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemOptions, Me.ToolStripMenuItemHelp, Me.ToolStripMenuItemDebug})
         Me.mnuFile.Location = New System.Drawing.Point(0, 0)
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(608, 24)
         Me.mnuFile.TabIndex = 0
         Me.mnuFile.Text = "File"
         '
-        'ToolStripMenuItem1
+        'ToolStripMenuItemFile
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadConfigurationFileToolStripMenuItem, Me.SaveConfigFileToolStripMenuItem, Me.SaveConfigFileAsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(35, 20)
-        Me.ToolStripMenuItem1.Text = "File"
+        Me.ToolStripMenuItemFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadConfigurationFileToolStripMenuItem, Me.SaveConfigFileToolStripMenuItem, Me.SaveConfigFileAsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.ToolStripMenuItemFile.Name = "ToolStripMenuItemFile"
+        Me.ToolStripMenuItemFile.Size = New System.Drawing.Size(35, 20)
+        Me.ToolStripMenuItemFile.Text = "File"
         '
         'LoadConfigurationFileToolStripMenuItem
         '
@@ -4150,12 +5040,31 @@ Partial Class Form1
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
-        'ToolStripMenuItem2
+        'ToolStripMenuItemOptions
         '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InternetLinksToolStripMenuItem, Me.UserManualToolStripMenuItem, Me.AboutToolStripMenuItem})
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(40, 20)
-        Me.ToolStripMenuItem2.Text = "Help"
+        Me.ToolStripMenuItemOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemScanPath, Me.ToolStripMenuItemsScanFilter})
+        Me.ToolStripMenuItemOptions.Name = "ToolStripMenuItemOptions"
+        Me.ToolStripMenuItemOptions.Size = New System.Drawing.Size(56, 20)
+        Me.ToolStripMenuItemOptions.Text = "Options"
+        '
+        'ToolStripMenuItemScanPath
+        '
+        Me.ToolStripMenuItemScanPath.Name = "ToolStripMenuItemScanPath"
+        Me.ToolStripMenuItemScanPath.Size = New System.Drawing.Size(150, 22)
+        Me.ToolStripMenuItemScanPath.Text = "Scan Path ..."
+        '
+        'ToolStripMenuItemsScanFilter
+        '
+        Me.ToolStripMenuItemsScanFilter.Name = "ToolStripMenuItemsScanFilter"
+        Me.ToolStripMenuItemsScanFilter.Size = New System.Drawing.Size(150, 22)
+        Me.ToolStripMenuItemsScanFilter.Text = "Scan Filter ..."
+        '
+        'ToolStripMenuItemHelp
+        '
+        Me.ToolStripMenuItemHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InternetLinksToolStripMenuItem, Me.UserManualToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.ToolStripMenuItemHelp.Name = "ToolStripMenuItemHelp"
+        Me.ToolStripMenuItemHelp.Size = New System.Drawing.Size(40, 20)
+        Me.ToolStripMenuItemHelp.Text = "Help"
         '
         'InternetLinksToolStripMenuItem
         '
@@ -4200,12 +5109,12 @@ Partial Class Form1
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
-        'DebugToolStripMenuItem
+        'ToolStripMenuItemDebug
         '
-        Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.XMLToolStripMenuItem, Me.MediaFileToolStripMenuItem, Me.NonMediaFilesToolStripMenuItem, Me.TrailerFilesToolStripMenuItem, Me.OrphanMediaToolStripMenuItem, Me.OrphanNonMediaToolStripMenuItem, Me.OrphanTrailerToolStripMenuItem, Me.MultiPartFilesToolStripMenuItem, Me.OrphanAntToolStripMenuItem, Me.MultiPartProcessedFilesToolStripMenuItem, Me.AntFieldsToolStripMenuItem, Me.NodesToProcessToolStripMenuItem, Me.ListMediaInfoParamsToolStripMenuItem})
-        Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
-        Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
-        Me.DebugToolStripMenuItem.Text = "Debug"
+        Me.ToolStripMenuItemDebug.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.XMLToolStripMenuItem, Me.MediaFileToolStripMenuItem, Me.NonMediaFilesToolStripMenuItem, Me.TrailerFilesToolStripMenuItem, Me.OrphanMediaToolStripMenuItem, Me.OrphanNonMediaToolStripMenuItem, Me.OrphanTrailerToolStripMenuItem, Me.MultiPartFilesToolStripMenuItem, Me.OrphanAntToolStripMenuItem, Me.MultiPartProcessedFilesToolStripMenuItem, Me.AntFieldsToolStripMenuItem, Me.NodesToProcessToolStripMenuItem, Me.ListMediaInfoParamsToolStripMenuItem})
+        Me.ToolStripMenuItemDebug.Name = "ToolStripMenuItemDebug"
+        Me.ToolStripMenuItemDebug.Size = New System.Drawing.Size(50, 20)
+        Me.ToolStripMenuItemDebug.Text = "Debug"
         '
         'XMLToolStripMenuItem
         '
@@ -4337,10 +5246,10 @@ Partial Class Form1
         Me.ToolTip1.ReshowDelay = 100
         Me.ToolTip1.ToolTipTitle = "MyFilms AMCupdater Help ..."
         '
-        'AntMovieCatalog
+        'AntMovieCatalogAMC
         '
-        Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
-        Me.AntMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.AntMovieCatalogAMC.DataSetName = "AntMovieCatalog"
+        Me.AntMovieCatalogAMC.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'ListVideos
         '
@@ -4348,27 +5257,27 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeight = 21
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
-        Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
+        Me.ListVideos.DataSource = Me.MovieBindingSource
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4418,6 +5327,25 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.Name = "DateAddedDataGridViewTextBoxColumn"
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
+        '
+        'ImageListViewPersons
+        '
+        Me.ImageListViewPersons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+        Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
+        Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
+        '
+        'PropertyGrid1
+        '
+        Me.PropertyGrid1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.CatalogBindingSource, "Properties", True))
+        Me.PropertyGrid1.Location = New System.Drawing.Point(11, 383)
+        Me.PropertyGrid1.Name = "PropertyGrid1"
+        Me.PropertyGrid1.Size = New System.Drawing.Size(581, 183)
+        Me.PropertyGrid1.TabIndex = 6
+        '
+        'CatalogBindingSource
+        '
+        Me.CatalogBindingSource.DataMember = "Catalog"
+        Me.CatalogBindingSource.DataSource = Me.AntMovieCatalogAMC
         '
         'Form1
         '
@@ -4495,8 +5423,8 @@ Partial Class Form1
         Me.GroupBox13.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
-        Me.Mediainfo_Test.ResumeLayout(False)
-        Me.Mediainfo_Test.PerformLayout()
+        Me.Mediainfo.ResumeLayout(False)
+        Me.Mediainfo.PerformLayout()
         Me.GroupBox18.ResumeLayout(False)
         Me.GroupBox18.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -4510,7 +5438,7 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.ResumeLayout(False)
         Me.GroupBoxMovieDetails.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.VideoBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MovieBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox14.PerformLayout()
         Me.GroupBox22.ResumeLayout(False)
@@ -4520,10 +5448,30 @@ Partial Class Form1
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox15.PerformLayout()
         Me.XionPanel1.ResumeLayout(False)
+        CType(Me.DataGridViewMovie, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MovieBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MovieBindingNavigator.ResumeLayout(False)
+        Me.MovieBindingNavigator.PerformLayout()
+        Me.ViewPersons.ResumeLayout(False)
+        Me.ViewPersons.PerformLayout()
+        Me.GroupBoxPersonInfo.ResumeLayout(False)
+        Me.GroupBoxPersonInfo.PerformLayout()
+        CType(Me.PersonBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XionPanelPerson.ResumeLayout(False)
+        CType(Me.DataGridViewPerson, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PersonBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PersonBindingNavigator.ResumeLayout(False)
+        Me.PersonBindingNavigator.PerformLayout()
+        Me.ViewCatalog.ResumeLayout(False)
+        Me.ViewCatalog.PerformLayout()
+        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CustomFieldsPropertiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.VidéoBindingNavigator.ResumeLayout(False)
-        Me.VidéoBindingNavigator.PerformLayout()
+        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuFile.ResumeLayout(False)
         Me.mnuFile.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
@@ -4531,8 +5479,9 @@ Partial Class Form1
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AntMovieCatalogAMC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CatalogBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4544,7 +5493,7 @@ Partial Class Form1
     Friend WithEvents Options As System.Windows.Forms.TabPage
     Friend WithEvents btnProcessMovieList As System.Windows.Forms.Button
     Friend WithEvents btnParseXML As System.Windows.Forms.Button
-    Friend WithEvents Mediainfo_Test As System.Windows.Forms.TabPage
+    Friend WithEvents Mediainfo As System.Windows.Forms.TabPage
     Friend WithEvents btnGetSampleFile As System.Windows.Forms.Button
     Friend WithEvents txtSampleFile As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -4572,8 +5521,8 @@ Partial Class Form1
     Friend WithEvents btnUpdateXML As System.Windows.Forms.Button
     Friend WithEvents btnJustDoIt As System.Windows.Forms.Button
     Friend WithEvents mnuFile As System.Windows.Forms.MenuStrip
-    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemFile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemHelp As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents InternetLinksToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -4609,7 +5558,7 @@ Partial Class Form1
     Friend WithEvents cbManualParameterFieldList1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents chkManualParametersUpdateAll As System.Windows.Forms.CheckBox
-    Friend WithEvents DebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemDebug As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents XMLToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MediaFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TrailerFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -4707,9 +5656,9 @@ Partial Class Form1
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents chkManualMissingFanartDownload As System.Windows.Forms.CheckBox
     Friend WithEvents ViewCollection As System.Windows.Forms.TabPage
-    Friend WithEvents AntMovieCatalog As AMCUpdater.AntMovieCatalog
+    Friend WithEvents AntMovieCatalogAMC As AMCUpdater.AntMovieCatalog
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents VidéoBindingNavigator As System.Windows.Forms.BindingNavigator
+    Friend WithEvents MovieBindingNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
     Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
@@ -4724,7 +5673,7 @@ Partial Class Form1
     Friend WithEvents VidéoBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents VideoBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents MovieBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Label50 As System.Windows.Forms.Label
     Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents Label49 As System.Windows.Forms.Label
@@ -4795,7 +5744,7 @@ Partial Class Form1
     Friend WithEvents Label77 As System.Windows.Forms.Label
     Friend WithEvents TextBox27 As System.Windows.Forms.TextBox
     Friend WithEvents XionPanel1 As XionControls.XionPanel
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewMovie As System.Windows.Forms.DataGridView
     Friend WithEvents cbMasterTitle As System.Windows.Forms.ComboBox
     Friend WithEvents lblMasterTitle As System.Windows.Forms.Label
     Friend WithEvents SaveConfigFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -4861,11 +5810,6 @@ Partial Class Form1
     Friend WithEvents btnManualExcludedMoviesFileDelete As System.Windows.Forms.Button
     Friend WithEvents chkManualUpdateRecordsOnlyMissingData As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBoxMovieDetails As System.Windows.Forms.GroupBox
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Country As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Rating As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -4921,4 +5865,111 @@ Partial Class Form1
     Friend WithEvents cbFanartLimitResolutionMin As System.Windows.Forms.ComboBox
     Friend WithEvents txtGroupNameIdentifier As System.Windows.Forms.TextBox
     Friend WithEvents Label89 As System.Windows.Forms.Label
+    Friend WithEvents ViewPersons As System.Windows.Forms.TabPage
+    Friend WithEvents PersonBindingNavigator As System.Windows.Forms.BindingNavigator
+    Friend WithEvents BindingNavigatorAddNewItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorCountItem1 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents BindingNavigatorDeleteItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorMoveFirstItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorMovePreviousItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents BindingNavigatorPositionItem1 As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents BindingNavigatorSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents BindingNavigatorMoveNextItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorMoveLastItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents PersonBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents AntMovieCatalog As MyFilmsPlugin.AntMovieCatalog
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents XionPanelPerson As XionControls.XionPanel
+    Friend WithEvents DataGridViewPerson As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ViewPersons_Biography As System.Windows.Forms.RichTextBox
+    Friend WithEvents Label91 As System.Windows.Forms.Label
+    Friend WithEvents Label90 As System.Windows.Forms.Label
+    Friend WithEvents ViewPersons_Name As System.Windows.Forms.TextBox
+    Friend WithEvents ContentsIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents SpeichernToolStripButton As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripButtonAddMissingPersons As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButtonGrabPersons As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripTextBoxSearch As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents Label92 As System.Windows.Forms.Label
+    Friend WithEvents ViewPersons_OtherName As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBoxPersonInfo As System.Windows.Forms.GroupBox
+    Friend WithEvents Label95 As System.Windows.Forms.Label
+    Friend WithEvents Label94 As System.Windows.Forms.Label
+    Friend WithEvents Label93 As System.Windows.Forms.Label
+    Friend WithEvents ViewPersons_Birthplace As System.Windows.Forms.TextBox
+    Friend WithEvents ViewPersons_Birthday As System.Windows.Forms.TextBox
+    Friend WithEvents ViewPersons_MiniBio As System.Windows.Forms.RichTextBox
+    Friend WithEvents ImageListViewPersons As System.Windows.Forms.ImageList
+    Friend WithEvents Label99 As System.Windows.Forms.Label
+    Friend WithEvents Label98 As System.Windows.Forms.Label
+    Friend WithEvents Label97 As System.Windows.Forms.Label
+    Friend WithEvents Label96 As System.Windows.Forms.Label
+    Friend WithEvents ViewPersons_Photos As System.Windows.Forms.TextBox
+    Friend WithEvents ViewPersons_URL As System.Windows.Forms.TextBox
+    Friend WithEvents ViewPersons_TMDB_Id As System.Windows.Forms.TextBox
+    Friend WithEvents ViewPersons_IMDB_Id As System.Windows.Forms.TextBox
+    Friend WithEvents ToolStripMenuItemOptions As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemScanPath As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemsScanFilter As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CheckBoxWriter As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBoxDirector As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBoxProducer As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBoxActor As System.Windows.Forms.CheckBox
+    Friend WithEvents PersonIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AlternateNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents BornDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents BirthPlaceDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MiniBiographyDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents BiographyDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents URLDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IMDBIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TMDBIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PictureDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PhotosDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IsActor As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents IsProducer As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents IsDirector As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents IsWriter As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ViewCatalog As System.Windows.Forms.TabPage
+    Friend WithEvents Label100 As System.Windows.Forms.Label
+    Friend WithEvents DataGridView4 As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents PropertiesBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents Label101 As System.Windows.Forms.Label
+    Friend WithEvents CustomFieldsPropertiesIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColumnSettingsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CatalogIdDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomFieldsPropertiesBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents PropertiesIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OwnerDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MailDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SiteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescriptionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CatalogIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomFieldIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TagDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TypeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DefaultValueDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MultiValuesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ExcludedInScriptsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GUIPropertiesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomPropertiesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomFieldsPropertiesIdDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomFieldBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents PropertyGrid1 As System.Windows.Forms.PropertyGrid
+    Friend WithEvents CatalogBindingSource As System.Windows.Forms.BindingSource
 End Class

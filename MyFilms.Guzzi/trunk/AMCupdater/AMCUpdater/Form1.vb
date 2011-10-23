@@ -5,6 +5,8 @@ Imports System.Security.Cryptography
 Imports System.Management
 Imports System.Windows.Forms
 Imports MediaPortal.Configuration
+Imports MyFilmsPlugin.MyFilms.MyFilmsGUI
+Imports MyFilmsPlugin
 
 Public Class Form1
 
@@ -13,7 +15,8 @@ Public Class Form1
     Public OrphanedMovies As New ArrayList
 
     Public AntProcessor As New AntProcessor
-    Public mydivx As AntMovieCatalog = New AntMovieCatalog()
+    ' Public mydivx As AntMovieCatalog = New AntMovieCatalog()
+    Public mydivx As MyFilmsPlugin.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog()
 
     Public OverridePath As String
     Public SourceField As String
@@ -33,7 +36,7 @@ Public Class Form1
 #If CONFIG = "Release" Then
         DebugToolStripMenuItem.Visible = False
 #Else
-        DebugToolStripMenuItem.Visible = True
+        ToolStripMenuItemDebug.Visible = True
 #End If
 
 
@@ -2470,19 +2473,35 @@ Public Class Form1
         destXml.Close()
     End Sub
 
+    Private Sub SpeichernToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SpeichernToolStripButton.Click
+        BindingNavigatorPositionItem.Focus()
+        Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
+        destXml.WriteStartDocument(False)
+        destXml.Formatting = Xml.Formatting.Indented
+        mydivx.WriteXml(destXml)
+        destXml.Close()
+    End Sub
     Private Sub BindingNavigatorAddNewItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem.Click
+        LogEvent("ERROR : ", EventLogLevel.Informational)
+    End Sub
+    Private Sub BindingNavigatorAddNewItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem1.Click
         LogEvent("ERROR : ", EventLogLevel.Informational)
     End Sub
 
     Private Sub TabControl1_Selected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TabControlEventArgs) Handles TabControl1.Selected
 
-        If TabControl1.SelectedIndex = 6 Then
-            Dim myTable As DataTable = Nothing
-            Dim myview As DataView
+        If TabControl1.SelectedIndex = 6 Or TabControl1.SelectedIndex = 7 Or TabControl1.SelectedIndex = 8 Then
+            Dim myMovieTable As DataTable = Nothing
+            'Dim mymovieview As DataView
+            Dim myPersonTable As DataTable = Nothing
+            'Dim mypersonview As DataView
+            Dim myCustomFieldsProperties As DataTable = Nothing
+            Dim myCustomField As DataTable = Nothing
+            Dim myProperties As DataTable = Nothing
             Dim wdir As String
 
             If (txtConfigFilePath.Text.Length > 0) Then
-                mydivx = New AntMovieCatalog()
+                mydivx = New MyFilmsPlugin.AntMovieCatalog()
                 Try
                     wdir = System.IO.Path.GetDirectoryName(txtConfigFilePath.Text)
                 Catch ex As Exception
@@ -2494,16 +2513,42 @@ Public Class Form1
 
                 If (System.IO.File.Exists(txtConfigFilePath.Text)) Then
                     mydivx.ReadXml(txtConfigFilePath.Text)
-                    myTable = mydivx.Tables("Movie")
-                    myview = New DataView(myTable)
-                    VideoBindingSource.DataSource = myTable
+
+                    myMovieTable = mydivx.Tables("Movie")
+                    'mymovieview = New DataView(myMovieTable)
+                    MovieBindingSource.DataSource = myMovieTable
+
+                    myPersonTable = mydivx.Tables("Person")
+                    'mypersonview = New DataView(myPersonTable)
+                    PersonBindingSource.DataSource = myPersonTable
+
+                    myCustomField = mydivx.Tables("CustomField")
+                    CustomFieldBindingSource.DataSource = myCustomField
+
+                    myCustomFieldsProperties = mydivx.Tables("CustomFieldsProperties")
+                    CustomFieldsPropertiesBindingSource.DataSource = myCustomFieldsProperties
+
+                    myProperties = mydivx.Tables("Properties")
+                    PropertiesBindingSource.DataSource = myProperties
                 Else
-                    VideoBindingSource.DataSource = myTable
+                    MovieBindingSource.DataSource = myMovieTable
+                    PersonBindingSource.DataSource = myPersonTable
+                    CustomFieldBindingSource.DataSource = myCustomField
+                    CustomFieldsPropertiesBindingSource.DataSource = myCustomFieldsProperties
+                    PropertiesBindingSource.DataSource = myProperties
                 End If
             End If
-            VideoBindingSource.ResumeBinding()
+            MovieBindingSource.ResumeBinding()
+            PersonBindingSource.ResumeBinding()
+            CustomFieldBindingSource.ResumeBinding()
+            CustomFieldsPropertiesBindingSource.ResumeBinding()
+            PropertiesBindingSource.ResumeBinding()
         Else
-            VideoBindingSource.SuspendBinding()
+            MovieBindingSource.SuspendBinding()
+            PersonBindingSource.SuspendBinding()
+            CustomFieldBindingSource.SuspendBinding()
+            CustomFieldsPropertiesBindingSource.SuspendBinding()
+            PropertiesBindingSource.SuspendBinding()
         End If
     End Sub
 
@@ -2665,5 +2710,103 @@ Public Class Form1
         System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/Updating_AMC_Data/AMC_Updater")
     End Sub
 
+    Private Sub ToolStripButtonAddMissingPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonAddMissingPersons.Click
+        Dim persons As String()
+        Dim addPerson As Boolean
+        For Each row As MyFilmsPlugin.AntMovieCatalog.MovieRow In MovieBindingSource.DataSource
+            If row.Actors IsNot Nothing Then
+                persons = row.Actors.Split(",")
+                For Each person In persons
+                    person = person.Trim
+                    If person.Contains("(") Then
+                        person = person.Substring(0, person.IndexOf("(")).Trim
+                    End If
+                    addPerson = True
+                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
+                        If personrow.Name = person Then
+                            personrow.IsActor = True
+                            addPerson = False
+                        End If
+                    Next
+                    If addPerson = True Then
+                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person.Trim, "", "", "", "", "", "", "", "", True, False, False, False, "", "", Nothing})
+                    End If
+                    'Dim newActor As MyFilmsPlugin.AntMovieCatalog.PersonRow = MyFilmsPlugin.AntMovieCatalog.PersonDataTable.AddPersonRow(actor, "", "", "", "", "", "", "", "", "", "", False, False, False, False)
+                    'newActor = MyFilmsPlugin.AntMovieCatalog.PersonRow(New Object() {actor, "", "", "", "", "", "", "", "", "", "", False, False, False, False})
+                    'newActor.Name = actor
+                    'PersonBindingSource.DataSource.CreateElement(newActor)
+                    'PersonBindingSource.Add(newActor)
+                    'PersonBindingSource.Add(New MyFilmsPlugin.AntMovieCatalog.PersonRow() {actor, "", "", "", "", "", "", "", "", "", "", "", 0} As MyFilmsPlugin.AntMovieCatalog.PersonRow)
+                    'newActor = New MyFilmsPlugin.AntMovieCatalog(AddNewPersonRow())
+                    'PersonBindingSource.Add(newActor)
+
+                    'Me.PersonBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem1, Me.BindingNavigatorMovePreviousItem1, Me.BindingNavigatorSeparator3, Me.BindingNavigatorPositionItem1, Me.BindingNavigatorCountItem1, Me.BindingNavigatorSeparator4, Me.BindingNavigatorMoveNextItem1, Me.BindingNavigatorMoveLastItem1, Me.BindingNavigatorSeparator5, Me.BindingNavigatorAddNewItem1, Me.BindingNavigatorDeleteItem1, Me.ToolStripSeparator2, Me.SpeichernToolStripButton, Me.ToolStripSeparator4, Me.ToolStripButtonAddMissingPersons, Me.ToolStripButtonGrabPersons, Me.ToolStripSeparator5, Me.ToolStripTextBoxSearch})
+                    'PersonBindingSource.Item(PersonBindingSource.Insert).Name = actor
+                    'newActor.Name = actor
+                Next
+            End If
+            If row.Producer IsNot Nothing Then
+                persons = row.Producer.Split(",")
+                For Each person In persons
+                    person = person.Trim
+                    If person.Contains("(") Then
+                        person = person.Substring(0, person.IndexOf("(")).Trim
+                    End If
+                    addPerson = True
+                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
+                        If personrow.Name = person Then
+                            personrow.IsProducer = True
+                            addPerson = False
+                        End If
+                    Next
+                    If addPerson = True Then
+                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person, "", "", "", "", "", "", "", "", False, True, False, False, "", "", Nothing})
+                    End If
+                Next
+            End If
+            If row.Director IsNot Nothing Then
+                persons = row.Director.Split(",")
+                For Each person In persons
+                    person = person.Trim
+                    If person.Contains("(") Then
+                        person = person.Substring(0, person.IndexOf("(")).Trim
+                    End If
+                    addPerson = True
+                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
+                        If personrow.Name = person Then
+                            personrow.IsDirector = True
+                            addPerson = False
+                        End If
+                    Next
+                    If addPerson = True Then
+                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person, "", "", "", "", "", "", "", "", False, False, True, False, "", "", Nothing})
+                    End If
+                Next
+            End If
+            If row.Writer IsNot Nothing Then
+                persons = row.Writer.Split(",")
+                For Each person In persons
+                    person = person.Trim
+                    If person.Contains("(") Then
+                        person = person.Substring(0, person.IndexOf("(")).Trim
+                    End If
+                    addPerson = True
+                    For Each personrow As MyFilmsPlugin.AntMovieCatalog.PersonRow In PersonBindingSource.DataSource
+                        If personrow.Name = person Then
+                            personrow.IsWriter = True
+                            addPerson = False
+                        End If
+                    Next
+                    If addPerson = True Then
+                        PersonBindingSource.DataSource.Rows.Add(New Object() {Nothing, person, "", "", "", "", "", "", "", "", False, False, False, True, "", "", Nothing})
+                    End If
+                Next
+            End If
+        Next
+    End Sub
+
+    Private Sub ToolStripButtonGrabPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonGrabPersons.Click
+
+    End Sub
 End Class
 
