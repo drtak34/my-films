@@ -4482,6 +4482,8 @@ namespace Grabber_Interface
     {
       try
       {
+        webBrowserPreview.Url = new Uri(textURLPreview.Text);
+        //webBrowserPreview.Refresh();
         Process.Start(textURLPreview.Text);
       }
       catch (Exception)
@@ -4516,7 +4518,12 @@ namespace Grabber_Interface
         string strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
-        try { Process.Start(wurl); }
+        try
+        {
+          webBrowserPreview.Url = new Uri(wurl);
+          //webBrowserPreview.Refresh();
+          Process.Start(wurl);
+        }
         catch (Exception) {throw;}
       }
     }
