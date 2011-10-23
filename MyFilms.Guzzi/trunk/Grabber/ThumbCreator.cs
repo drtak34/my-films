@@ -16,7 +16,7 @@ namespace Grabber
   using MediaPortal.Services;
   using MediaPortal.Util;
 
-  using Microsoft.WindowsAPICodePack.Shell;
+  //using Microsoft.WindowsAPICodePack.Shell;
 
   public class ThumbCreator
   {
