@@ -121,6 +121,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>subwcrev "$(SolutionDir)..\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
+    <PreBuildEvent>subwcrev "$(SolutionDir)\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
   </PropertyGroup>
 </Project>

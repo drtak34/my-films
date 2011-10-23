@@ -326,6 +326,6 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>if exist $(ProjectDir)PostBuild.bat call $(ProjectDir)PostBuild.bat $(ProjectDir) $(ConfigurationName)</PostBuildEvent>
-    <PreBuildEvent>subwcrev "$(SolutionDir)..\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
+    <PreBuildEvent>subwcrev "$(SolutionDir)\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
   </PropertyGroup>
 </Project>
