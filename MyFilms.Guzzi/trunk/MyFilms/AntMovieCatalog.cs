@@ -1,4 +1,6 @@
-﻿namespace MyFilmsPlugin
+﻿using System.Data;
+
+namespace MyFilmsPlugin
 {
   // using System.Data;
 
@@ -18,6 +20,15 @@
 
       partial class PersonDataTable
       {
+        //public PersonRow NewPerson(string name)
+        //{
+        //  // AddPersonRow(name, "", "", "", "", "", "", "", "", "", "", 0);
+        //  PersonRow newPerson;
+        //  newPerson = new PersonRow(new DataRowBuilder());
+        //  newPerson.Name = name;
+
+        //  return newPerson;
+        //}          
       }
 
       partial class WatchedDataTable
