@@ -65,7 +65,6 @@ Partial Class frmList
         Me.txtSourceFull = New System.Windows.Forms.TextBox
         Me.txtSourceFullAllPath = New System.Windows.Forms.TextBox
         Me.pbCoverPreview = New System.Windows.Forms.PictureBox
-        Me.WebBrowserPreview = New System.Windows.Forms.WebBrowser
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbCoverPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -350,7 +349,7 @@ Partial Class frmList
         Me.Year.HeaderText = "Year"
         Me.Year.Name = "Year"
         Me.Year.ReadOnly = True
-        Me.Year.Width = 54
+        Me.Year.Width = 53
         '
         'Options
         '
@@ -358,7 +357,7 @@ Partial Class frmList
         Me.Options.HeaderText = "Options"
         Me.Options.Name = "Options"
         Me.Options.ReadOnly = True
-        Me.Options.Width = 68
+        Me.Options.Width = 67
         '
         'AKA
         '
@@ -374,7 +373,7 @@ Partial Class frmList
         Me.ID.HeaderText = "ID"
         Me.ID.Name = "ID"
         Me.ID.ReadOnly = True
-        Me.ID.Width = 43
+        Me.ID.Width = 42
         '
         'Weblink
         '
@@ -394,7 +393,7 @@ Partial Class frmList
         Me.Distance.HeaderText = "Dist"
         Me.Distance.Name = "Distance"
         Me.Distance.ReadOnly = True
-        Me.Distance.Width = 50
+        Me.Distance.Width = 49
         '
         'btnSearchGoogle
         '
@@ -454,14 +453,6 @@ Partial Class frmList
         Me.pbCoverPreview.TabStop = False
         Me.pbCoverPreview.Visible = False
         '
-        'WebBrowserPreview
-        '
-        Me.WebBrowserPreview.Location = New System.Drawing.Point(418, 32)
-        Me.WebBrowserPreview.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.WebBrowserPreview.Name = "WebBrowserPreview"
-        Me.WebBrowserPreview.Size = New System.Drawing.Size(147, 47)
-        Me.WebBrowserPreview.TabIndex = 89
-        '
         'frmList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -469,7 +460,6 @@ Partial Class frmList
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(856, 396)
         Me.ControlBox = False
-        Me.Controls.Add(Me.WebBrowserPreview)
         Me.Controls.Add(Me.pbCoverPreview)
         Me.Controls.Add(Me.txtSourceFullAllPath)
         Me.Controls.Add(Me.txtSourceFull)
@@ -543,5 +533,4 @@ Partial Class frmList
     Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Distance As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents WebBrowserPreview As System.Windows.Forms.WebBrowser
 End Class

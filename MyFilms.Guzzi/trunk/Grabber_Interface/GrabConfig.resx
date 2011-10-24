@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textConfig.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>22</value>
   </data>
   <data name="button_Browse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_Browse.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>20</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="textName.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 42</value>
@@ -262,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textName.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>19</value>
   </data>
   <data name="textURLPrefix.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 66</value>
@@ -318,7 +318,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textURLPrefix.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <data name="button_New.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -351,7 +351,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_New.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="button_Save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -384,7 +384,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_Save.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="radioButtonFR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -414,7 +414,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonFR.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="radioButtonEN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -444,7 +444,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonEN.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -529,7 +529,7 @@ expert mode is not required.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonExpertMode.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="TextURLDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 10</value>
@@ -2106,7 +2106,7 @@ Most sites do not support country specific certifications.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_SaveAs.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="URLpage.Items" xml:space="preserve">
     <value />
@@ -2348,7 +2348,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textLanguage.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="textType.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 68</value>
@@ -2400,7 +2400,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textVersion.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
@@ -2436,7 +2436,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkLabelMFwiki.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2466,7 +2466,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="pictureBoxUSFlag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2496,7 +2496,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxUSFlag.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="pictureBoxFranceFlag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2542,7 +2542,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxFranceFlag.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="btnLoadDetailInWeb.Location" type="System.Drawing.Point, System.Drawing">
     <value>361, 37</value>
@@ -4985,7 +4985,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <metadata name="iMDBEnumeratorBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>113, 620</value>
@@ -5024,7 +5024,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Version_Label.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblLanguage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5051,7 +5051,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="lblVersion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5078,27 +5078,6 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="webBrowserPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>501, 44</value>
-  </data>
-  <data name="webBrowserPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 65</value>
-  </data>
-  <data name="webBrowserPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;webBrowserPreview.Name" xml:space="preserve">
-    <value>webBrowserPreview</value>
-  </data>
-  <data name="&gt;&gt;webBrowserPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.WebBrowser, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;webBrowserPreview.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;webBrowserPreview.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

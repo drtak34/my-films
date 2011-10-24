@@ -204,7 +204,6 @@ namespace Grabber_Interface
           this.Version_Label = new System.Windows.Forms.Label();
           this.lblLanguage = new System.Windows.Forms.Label();
           this.lblVersion = new System.Windows.Forms.Label();
-          this.webBrowserPreview = new System.Windows.Forms.WebBrowser();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -1610,17 +1609,10 @@ namespace Grabber_Interface
           resources.ApplyResources(this.lblVersion, "lblVersion");
           this.lblVersion.Name = "lblVersion";
           // 
-          // webBrowserPreview
-          // 
-          resources.ApplyResources(this.webBrowserPreview, "webBrowserPreview");
-          this.webBrowserPreview.MinimumSize = new System.Drawing.Size(20, 20);
-          this.webBrowserPreview.Name = "webBrowserPreview";
-          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.Controls.Add(this.webBrowserPreview);
           this.Controls.Add(this.lblVersion);
           this.Controls.Add(this.lblLanguage);
           this.Controls.Add(this.textVersion);
@@ -1855,7 +1847,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewLinkColumn ResultColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn8;
-        private System.Windows.Forms.WebBrowser webBrowserPreview;
 
     }
 }

@@ -4482,7 +4482,7 @@ namespace Grabber_Interface
     {
       try
       {
-        webBrowserPreview.Url = new Uri(textURLPreview.Text);
+        //webBrowserPreview.Url = new Uri(textURLPreview.Text);
         //webBrowserPreview.Refresh();
         Process.Start(textURLPreview.Text);
       }
@@ -4520,7 +4520,7 @@ namespace Grabber_Interface
         wurl = wurl.Replace("#Page#", textPage.Text);
         try
         {
-          webBrowserPreview.Url = new Uri(wurl);
+          //webBrowserPreview.Url = new Uri(wurl);
           //webBrowserPreview.Refresh();
           Process.Start(wurl);
         }

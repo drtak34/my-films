@@ -219,7 +219,7 @@ Public Class frmList
         Try
             If (e.ColumnIndex = Me.lstOptionsExt.Columns("Weblink").Index) Then
                 Dim Filepath As String = Me.lstOptionsExt("Weblink", e.RowIndex).Value.ToString()
-                WebBrowserPreview.Url = New System.Uri(Filepath)
+                'WebBrowserPreview.Url = New System.Uri(Filepath)
                 'WebBrowserPreview.Refresh()
 
                 System.Diagnostics.Process.Start(Filepath)
@@ -285,7 +285,7 @@ Public Class frmList
     Private Sub btnSearchGoogle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchGoogle.Click
         Dim t As String = txtSearchString.Text & " (" & txtSearchintYear.Text & ")"
         Try
-            WebBrowserPreview.Url = New System.Uri(txtSearchintYear.Text)
+            'WebBrowserPreview.Url = New System.Uri(txtSearchintYear.Text)
             'WebBrowserPreview.Refresh()
             Process.Start("http://google.com/search?q=" + t)
         Catch ex As Exception
