@@ -1,6 +1,5 @@
 Imports System.Windows.Forms
 Imports Grabber
-Imports MediaPortal.Util
 Imports Cornerstone.Tools
 
 Public Class AntRecord
@@ -1962,6 +1961,10 @@ Public Class AntRecord
     End Sub
 
     Private Sub CreateOrUpdateElement(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
+
+        ' First create new AMC4 objects - does NOT (yet) reset currentValue
+        CreateOrUpdateCustomFieldsAttribute(currentAttribute, currentValue, ProcessMode)
+
         Dim element As Xml.XmlElement
         If currentValue <> "" Then
             CleanValueForInnerXML(currentValue)
@@ -1983,6 +1986,37 @@ Public Class AntRecord
             End If
         End If
         currentValue = ""
+    End Sub
+    Private Sub CreateOrUpdateCustomFieldsAttribute(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
+        ' First check, if the CustomFields element exists or create it
+        Dim SubElementName As String = "CustomFields"
+        Dim element As Xml.XmlElement
+        If _XMLElement.Item(SubElementName) Is Nothing Then
+            element = _XMLDoc.CreateElement(SubElementName)
+        End If
+
+        'now check and update or create Attributes in the CustomFields Element
+        Dim attr As Xml.XmlAttribute
+        If currentValue <> "" Then
+            CleanValueForInnerXML(currentValue)
+        End If
+        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False And ProcessMode = Process_Mode_Names.Update) Then
+            If _XMLElement.Item(SubElementName).Attributes(currentAttribute) Is Nothing Then
+                attr = _XMLDoc.CreateAttribute(currentAttribute)
+                attr.Value = currentValue
+                _XMLElement.Item(SubElementName).Attributes.Append(attr)
+            Else
+                _XMLElement.Item(SubElementName).Attributes(currentAttribute).Value = currentValue
+            End If
+            If ProcessMode = Process_Mode_Names.Update Then
+                If Not _LastOutputMessage.Contains(" - Updated: ") Then
+                    _LastOutputMessage += " - Updated: " + currentAttribute
+                Else
+                    _LastOutputMessage += ", " + currentAttribute
+                End If
+            End If
+        End If
+        'currentValue = ""
     End Sub
 
     Private Sub CleanValueForInnerXML(ByRef currentValue)
