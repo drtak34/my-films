@@ -140,6 +140,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AMC4-CatalogSample.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMC4-CatalogSample.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AntMovieCatalog-4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntMovieCatalog-4.xsd</DependentUpon>
+    </Compile>
     <Compile Include="AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -234,6 +244,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AMC4-CatalogSample.xsc">
+      <DependentUpon>AMC4-CatalogSample.xsd</DependentUpon>
+    </None>
+    <None Include="AMC4-CatalogSample.xss">
+      <DependentUpon>AMC4-CatalogSample.xsd</DependentUpon>
+    </None>
+    <None Include="AntMovieCatalog-4.xsc">
+      <DependentUpon>AntMovieCatalog-4.xsd</DependentUpon>
+    </None>
+    <None Include="AntMovieCatalog-4.xss">
+      <DependentUpon>AntMovieCatalog-4.xsd</DependentUpon>
+    </None>
     <None Include="AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
