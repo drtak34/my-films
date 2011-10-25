@@ -174,9 +174,9 @@
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFilmsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\GUIConnector.cs" />
@@ -250,9 +250,9 @@
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </None>
     <None Include="MyFilmsData.xsd">
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>MyFilmsData.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </None>
     <None Include="MyFilmsData.xss">
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
