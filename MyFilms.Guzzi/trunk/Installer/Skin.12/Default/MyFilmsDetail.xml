@@ -200,7 +200,6 @@
 			<font>font14</font>
 			<textcolor>cca9d0f7</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<visible>!control.hasfocus(10099)</visible>
 			<label>#myfilms.config.currentconfig</label>
 		</control>
 		<control>
@@ -888,7 +887,7 @@
 		<visible>Control.HasFocus(10003)</visible>
 	</control>
 	
-<!-- Detailmenu for technical details -->
+<!-- Detail menu for technical details -->
 	<control>
 		<type>label</type>
 		<id>1</id>
@@ -1446,13 +1445,14 @@
 		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 
-<!-- Start Special View for FullColorFanart -->
+<!-- FULL FANART VIEW START -->
+	<!-- Watched/Unwatched Icon -->
 	<control>
 		<type>label</type>
-		<description>Title (FullColor Fanart View)</description>
+		<description>Title (Full Fanart View)</description>
 		<id>1</id>
 		<posX>30</posX>
-		<posY>530</posY>
+		<posY>510</posY>
 		<width>660</width>
 		<align>center</align>
 		<font>font16</font>
@@ -1465,7 +1465,7 @@
 	</control> 
 	<control>
 		<type>label</type>
-		<description>Year and Category (FullColor Fanart View)</description>
+		<description>Year and Category (Full Fanart View)</description>
 		<id>1</id>
 		<posX>30</posX>
 		<posY>550</posY>
@@ -1480,7 +1480,7 @@
 	</control> 
 	<control>
 		<type>image</type>
-		<description>thumb Logos ID 2001 (FullColor Fanart View)</description>
+		<description>thumb Logos ID 2001 (Full Fanart View)</description>
 		<id>2001</id>
 		<posX>20</posX>
 		<posY>520</posY>
@@ -1497,12 +1497,12 @@
 	<control>
 		<type>imagelist</type>
 		<id>1</id>
-		<posX>570</posX>
-		<posY>530</posY>
-		<height>13</height>
+		<posX>300</posX>
+		<posY>525</posY>
+		<height>12</height>
 		<align>left</align>
-		<textureWidth>13</textureWidth>
-		<textureHeight>13</textureHeight>
+		<textureWidth>12</textureWidth>
+		<textureHeight>12</textureHeight>
 		<colordiffuse>6fffffff</colordiffuse>
 		<subitems>
 			<subitem>greystar.png</subitem>
@@ -1516,7 +1516,155 @@
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 	</control>
-<!-- End Special View for FullColorFanart -->
+	<control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>0</id>
+		<posX>675</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<align>left</align>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<visible>Control.HasFocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>Watched Icon</description>
+		<id>0</id>
+		<posX>675</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<align>left</align>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<colordiffuse>ffffcc00</colordiffuse>
+		<visible>Control.HasFocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<!-- Movie available Icon -->
+	<control>
+		<description>Movie unavailable Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>650</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_red.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unavailable)</visible>
+	</control>
+	<control>
+		<description>Movie available Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>650</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_green.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,available)</visible>
+	</control>
+	<control>
+		<description>Movie offline Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>650</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_yellow.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,offline)</visible>
+	</control>
+	<control>
+		<description>Movie unknown Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>650</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_grey.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unknown)</visible>
+	</control>
+
+<!-- Trailer Available Icon -->
+	<control>
+		<description>Trailer unavailable Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>625</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_red.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)</visible>
+	</control>
+	<control>
+		<description>Trailer available Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>625</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_green.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,available)</visible>
+	</control>
+	<control>
+		<description>Trailer offline Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>625</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_yellow.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)</visible>
+	</control>
+	<control>
+		<description>Trailer unknown Icon</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>625</posX>
+		<posY>525</posY>
+		<width>15</width>
+		<height>15</height>
+		<texture>MyFilms\led_grey.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<colordiffuse>c0ffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
+	</control>
+<!-- END FULL FANART VIEW  -->
 
 <!-- Watched/Unwatched Icon -->
 	<control>
