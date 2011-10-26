@@ -220,8 +220,8 @@
       this.cbEditorLayout.Items.AddRange(new object[] {
             "",
             "List View",
-            "Big Thumbs",
-            "Small Thumbs",
+            "Big Icons",
+            "Small Icons",
             "Filmstrip",
             "Coverflow"});
       this.cbEditorLayout.Location = new System.Drawing.Point(572, 82);
