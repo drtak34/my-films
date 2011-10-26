@@ -140,16 +140,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AMC4-CatalogSample.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AMC4-CatalogSample.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="AntMovieCatalog-4.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AntMovieCatalog-4.xsd</DependentUpon>
-    </Compile>
     <Compile Include="AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -158,6 +148,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AntMovieCatalog4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
     </Compile>
     <Compile Include="BaseMesFilms.cs" />
     <Compile Include="CatalogConverter\DvdProfiler.cs" />
@@ -244,18 +239,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AMC4-CatalogSample.xsc">
-      <DependentUpon>AMC4-CatalogSample.xsd</DependentUpon>
-    </None>
-    <None Include="AMC4-CatalogSample.xss">
-      <DependentUpon>AMC4-CatalogSample.xsd</DependentUpon>
-    </None>
-    <None Include="AntMovieCatalog-4.xsc">
-      <DependentUpon>AntMovieCatalog-4.xsd</DependentUpon>
-    </None>
-    <None Include="AntMovieCatalog-4.xss">
-      <DependentUpon>AntMovieCatalog-4.xsd</DependentUpon>
-    </None>
     <None Include="AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
@@ -266,6 +249,17 @@
     </None>
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="AntMovieCatalog4.xsc">
+      <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
+    </None>
+    <None Include="AntMovieCatalog4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AntMovieCatalog4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AntMovieCatalog4.xss">
+      <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
     <None Include="MyFilmsData.xsc">
