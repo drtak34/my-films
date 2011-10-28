@@ -1745,6 +1745,14 @@ End additional Backdrops  -->
 					<id>7</id>
 					<onright>50</onright>
 					<onup>6</onup>
+					<ondown>8</ondown>
+				</control>
+				<control>
+					<type>button</type>
+					<description>Global Updates</description>
+					<id>8</id>
+					<onright>50</onright>
+					<onup>7</onup>
 					<ondown>10012</ondown>
 				</control>
 

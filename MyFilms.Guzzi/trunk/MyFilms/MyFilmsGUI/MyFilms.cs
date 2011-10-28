@@ -215,13 +215,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     enum Controls : int
     {
-      CTRL_BtnLayout = 2, //6
-      CTRL_BtnSrtBy = 3, //2
+      CTRL_BtnLayout = 2,
+      CTRL_BtnSrtBy = 3,
       CTRL_BtnSearchT = 4,
-      CTRL_BtnViewAs = 5, //3
-      CTRL_BtnOptions = 6, //5
+      CTRL_BtnViewAs = 5,
+      CTRL_BtnOptions = 6,
       CTRL_GlobalOverlayFilter = 7,
-      CTRL_ToggleGlobalUnwatchedStatus = 8,
+      CTRL_BtnUpdates = 8,
+      CTRL_ToggleGlobalUnwatchedStatus = 9,
       //CTRL_TxtSelect = 12,
       CTRL_Fanart = 11,
       CTRL_Fanart2 = 21,
@@ -249,6 +250,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     [SkinControlAttribute((int)Controls.CTRL_GlobalOverlayFilter)]
     protected GUIButtonControl BtnGlobalOverlayFilter;
+
+    [SkinControlAttribute((int)Controls.CTRL_BtnUpdates)]
+    protected GUIButtonControl BtnGlobalUpdates;
 
     //[SkinControlAttribute((int)Controls.CTRL_ToggleGlobalUnwatchedStatus)]
     //protected GUIButtonControl BtnToggleGlobalWatched;
@@ -649,6 +653,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.clearGUIProperty("picture");
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
+      try
+      {
+        BtnGlobalUpdates.Label = GUILocalizeStrings.Get(10798690); // Global Updates ... 
+      }
+      catch (Exception)
+      {
+        LogMyFilms.Warn("(InitMainScreen) - 'Global Updates' button label cannot be set - not defined in skin?");
+      }
+
 
       // (re)link backdrop image controls to the backdrop image swapper
       backdrop.GUIImageOne = ImgFanart;
@@ -1769,6 +1782,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Change Selected Option
           {
             Change_Option();
+            // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade // Reremoved for Doug !
+            return base.OnMessage(messageType);
+          }
+          if (iControl == (int)Controls.CTRL_BtnUpdates)
+          // Change Selected Option
+          {
+            Change_view("globalupdates");
             // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade // Reremoved for Doug !
             return base.OnMessage(messageType);
           }
@@ -8957,6 +8977,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       groupcover.Filename = String.Empty;
 
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
+      try
+      {
+        BtnGlobalUpdates.Label = GUILocalizeStrings.Get(10798690); // Global Updates ... 
+      } 
+      catch (Exception)
+      {
+        LogMyFilms.Warn("(InitMainScreen) - 'Global Updates' button label cannot be set - not defined in skin?");
+      }
 
       MyFilmsDetail.clearGUIProperty("logos_id2001", log);
       MyFilmsDetail.clearGUIProperty("logos_id2002", log);
