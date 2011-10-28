@@ -2001,6 +2001,12 @@ Public Class AntRecord
             CleanValueForInnerXML(currentValue)
         End If
         If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False And ProcessMode = Process_Mode_Names.Update) Then
+            If _XMLElement.Item(SubElementName) Is Nothing Then
+                element = _XMLDoc.CreateElement(SubElementName)
+                element.InnerText = ""
+                _XMLElement.AppendChild(element)
+            End If
+
             If _XMLElement.Item(SubElementName).Attributes(currentAttribute) Is Nothing Then
                 attr = _XMLDoc.CreateAttribute(currentAttribute)
                 attr.Value = currentValue
