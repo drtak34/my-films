@@ -1679,9 +1679,9 @@
           this.chkPersons.AutoSize = true;
           this.chkPersons.Location = new System.Drawing.Point(18, 15);
           this.chkPersons.Name = "chkPersons";
-          this.chkPersons.Size = new System.Drawing.Size(160, 17);
+          this.chkPersons.Size = new System.Drawing.Size(135, 17);
           this.chkPersons.TabIndex = 100;
-          this.chkPersons.Text = "use thumbs for person views";
+          this.chkPersons.Text = "use thumbs for persons";
           this.chkPersons.UseVisualStyleBackColor = true;
           // 
           // btnResetThumbsArtist
