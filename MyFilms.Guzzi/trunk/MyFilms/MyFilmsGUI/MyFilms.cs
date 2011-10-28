@@ -88,14 +88,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       filmcover.Delay = 125;
 
       // create Group Cover image swapper
-      groupcover = new AsyncImageResource();
-      groupcover.Property = "#myfilms.groupcoverimage";
-      groupcover.Delay = 125;
+      viewcover = new AsyncImageResource();
+      viewcover.Property = "#myfilms.viewcoverimage";
+      viewcover.Delay = 125;
 
       // create Group Cover image swapper
       personcover = new AsyncImageResource();
       personcover.Property = "#myfilms.personcoverimage";
       personcover.Delay = 125;
+
+      // create Group Cover image swapper
+      groupcover = new AsyncImageResource();
+      groupcover.Property = "#myfilms.groupcoverimage";
+      groupcover.Delay = 125;
     }
     #endregion
 
@@ -324,8 +329,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //Imageswapperdefinitions for fanart and cover
     private ImageSwapper backdrop;
     private AsyncImageResource filmcover = null;
-    private AsyncImageResource groupcover = null;
+    private AsyncImageResource viewcover = null;
     private AsyncImageResource personcover = null;
+    private AsyncImageResource groupcover = null;
 
     // Guzzi: Added from TV-Series for Fanarttoggling
 
@@ -649,8 +655,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
       if (!filmcover.Active) filmcover.Active = true;
-      if (!groupcover.Active) groupcover.Active = true;
+      if (!viewcover.Active) viewcover.Active = true;
       if (!personcover.Active) personcover.Active = true;
+      if (!groupcover.Active) groupcover.Active = true;
 
       OnPageLoad_DoPageLoad(); // run former WindowInit synchronous
 
@@ -2772,19 +2779,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
         //{
         //  if (!filmcover.Active) filmcover.Active = true;
-        //  if (!groupcover.Active) groupcover.Active = true;
+        //  if (!viewcover.Active) viewcover.Active = true;
         //  if (!personcover.Active) personcover.Active = true;
-        //  groupcover.Filename = conf.FileImage;
+        //  viewcover.Filename = conf.FileImage;
         //}
         //else
         //{
         //  if (filmcover.Active) filmcover.Active = false;
-        //  if (groupcover.Active) groupcover.Active = false;
+        //  if (viewcover.Active) viewcover.Active = false;
         //  if (personcover.Active) personcover.Active = false;
         //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
         //}
-        groupcover.Filename = conf.FileImage;
+        viewcover.Filename = conf.FileImage;
         filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
+
+        //groupcover.Filename = conf.FileImage; // to be set to group collection covers
 
         //GUIControl.ShowControl(GetID, 34);
         //Load_Rating(0); // old method - nor more used
@@ -2862,14 +2871,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
         //{
         //  if (!filmcover.Active) filmcover.Active = true;
-        //  if (!groupcover.Active) groupcover.Active = true;
+        //  if (!viewcover.Active) viewcover.Active = true;
         //  if (!personcover.Active) personcover.Active = true;
         //  filmcover.Filename = conf.FileImage;
         //}
         //else
         //{
         //  if (filmcover.Active) filmcover.Active = false;
-        //  if (groupcover.Active) groupcover.Active = false;
+        //  if (viewcover.Active) viewcover.Active = false;
         //  if (personcover.Active) personcover.Active = false;
         //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
         //}
@@ -8943,8 +8952,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       backdrop.Filename = String.Empty;
       filmcover.Filename = String.Empty;
-      groupcover.Filename = String.Empty;
+      viewcover.Filename = String.Empty;
       personcover.Filename = String.Empty;
+      groupcover.Filename = String.Empty;
 
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
 

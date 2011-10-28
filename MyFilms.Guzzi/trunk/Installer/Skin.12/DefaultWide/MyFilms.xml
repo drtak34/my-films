@@ -40,7 +40,7 @@
 		</control>
         <control>
             <type>label</type>
-            <description>Label Visible for Group Views (Category, Country, Year, etc.</description>
+            <description>Label Visible for Views (Category, Country, Year, etc.</description>
             <id>34</id>
 			<label></label>
             <posX>0</posX>
@@ -694,12 +694,12 @@
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		</control>
 		<control>
-			<description>Group/Series Label</description>
+			<description>Group Label</description>
 			<type>label</type>
 			<id>1</id>
 			<posX>45</posX>
 			<posY>557</posY>
-			<label>3019</label>
+			<label>1079908</label>
 			<font>font12</font>
 			<align>left</align>
 			<textcolor>80ffffff</textcolor>
@@ -896,7 +896,7 @@
     	</control>
 		<control>
 			<type>image</type>
-			<description>Group View Thumb (no zoom)</description>
+			<description>View Thumb (no zoom)</description>
 			<id>1</id>
 			<posX>45</posX>
 			<posY>90</posY>
@@ -1022,7 +1022,7 @@
 		</control> 
 		<control>
 			<type>label</type>
-			<description>Group/Series Name</description>
+			<description>Group Name</description>
 			<id>1</id>
 			<posX>30</posX>
 			<posY>703</posY>
@@ -1030,7 +1030,7 @@
 			<align>center</align>
 			<font>font12</font>
 			<textcolor>80ffffff</textcolor>
-			<label>3019</label>
+			<label>1079908</label>
 			<visible>string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>

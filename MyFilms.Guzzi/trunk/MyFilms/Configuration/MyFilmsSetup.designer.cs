@@ -1437,12 +1437,12 @@
           this.groupBox22.Controls.Add(this.chkDfltViews);
           this.groupBox22.Controls.Add(this.label29);
           this.groupBox22.Controls.Add(this.MesFilmsViews);
-          this.groupBox22.Location = new System.Drawing.Point(6, 141);
+          this.groupBox22.Location = new System.Drawing.Point(6, 70);
           this.groupBox22.Name = "groupBox22";
           this.groupBox22.Size = new System.Drawing.Size(735, 87);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
-          this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
+          this.groupBox22.Text = "Thumbs for Views (Genre, Year, Country, ...)";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
           // 
           // chkDfltViewsAll
@@ -1463,9 +1463,9 @@
           this.label47.AutoSize = true;
           this.label47.Location = new System.Drawing.Point(184, 44);
           this.label47.Name = "label47";
-          this.label47.Size = new System.Drawing.Size(105, 13);
+          this.label47.Size = new System.Drawing.Size(99, 13);
           this.label47.TabIndex = 79;
-          this.label47.Text = "Default Group Image";
+          this.label47.Text = "Default View Image";
           // 
           // ButDefCovViews
           // 
@@ -1500,9 +1500,9 @@
           this.chkViews.AutoSize = true;
           this.chkViews.Location = new System.Drawing.Point(18, 15);
           this.chkViews.Name = "chkViews";
-          this.chkViews.Size = new System.Drawing.Size(155, 17);
+          this.chkViews.Size = new System.Drawing.Size(125, 17);
           this.chkViews.TabIndex = 71;
-          this.chkViews.Text = "use thumbs for group views";
+          this.chkViews.Text = "use thumbs for views";
           this.chkViews.UseVisualStyleBackColor = true;
           // 
           // btnViews
@@ -1530,9 +1530,9 @@
           this.label29.AutoSize = true;
           this.label29.Location = new System.Drawing.Point(184, 18);
           this.label29.Name = "label29";
-          this.label29.Size = new System.Drawing.Size(128, 13);
+          this.label29.Size = new System.Drawing.Size(96, 13);
           this.label29.TabIndex = 73;
-          this.label29.Text = "Group Views Picture Path";
+          this.label29.Text = "Views Picture Path";
           // 
           // MesFilmsViews
           // 
@@ -1665,12 +1665,12 @@
           this.groupBox_ArtistImages.Controls.Add(this.label_DefaultArtistImage);
           this.groupBox_ArtistImages.Controls.Add(this.label_ArtistImagePath);
           this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
-          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 68);
+          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 159);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
           this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 69);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
-          this.groupBox_ArtistImages.Text = "Thumbs for Person Views (actors, directors, producer)";
+          this.groupBox_ArtistImages.Text = "Thumbs for Persons (actors, directors, producer)";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, "Use this area to define a path where artist thumbs (images for persons) should be" +
                   " stored.\r\nWorks same way as cover images for movies.");
           // 
@@ -4315,11 +4315,11 @@
           // label17
           // 
           this.label17.AutoSize = true;
-          this.label17.Location = new System.Drawing.Point(294, 14);
+          this.label17.Location = new System.Drawing.Point(308, 14);
           this.label17.Name = "label17";
-          this.label17.Size = new System.Drawing.Size(101, 26);
+          this.label17.Size = new System.Drawing.Size(84, 26);
           this.label17.TabIndex = 66;
-          this.label17.Text = "Hierarchy Separator\r\n(Grouping)";
+          this.label17.Text = "Group Hierarchy\r\nSeparator";
           this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
           this.ToolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
           // 

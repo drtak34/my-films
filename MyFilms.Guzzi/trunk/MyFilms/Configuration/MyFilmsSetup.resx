@@ -229,20 +229,6 @@ Images placed in those folders will be used for fanart display
 
 If disabled, default fanart will be displayed, if it is enabled.</value>
   </data>
-  <data name="groupBox22.ToolTip" xml:space="preserve">
-    <value>Select the “Use thumbs for group views" option if you have image files 
-to be displayed as cover image replacement in grouped views.  
-These image files must have the same name as the list item of the group, e.g. "2010.jpg" or "action.png".
-Enter the full path (or use the browse button) to your folder containing the view thumb image files.
-
-Select the option 'Use the default movie cover for missing thumbs' if you wish to use a movie cover 
-when no thumb for views is available.
-
-You can also use fanart for those views, to do so, put fanart in the subfolder 
-for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
-The setting for this path is done via the Fanart path setting automatically; 
-See "Fanart for default group views - path" below.</value>
-  </data>
   <data name="btnResetThumbs.ToolTip" xml:space="preserve">
     <value>That action will remove all generated cache thumbs for group views.
 (Your original images will not be deleted.)
@@ -256,11 +242,19 @@ you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
 You can place a "default.jpg" in the respective sub folder that will be displayed
 when no specific thumb can be matched.</value>
   </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value>Use this area to define a path where cover images are stored.
-This is mainly required, if you have only image names without full path stored in your DB.
-You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
-</value>
+  <data name="groupBox22.ToolTip" xml:space="preserve">
+    <value>Select the “Use thumbs for group views" option if you have image files 
+to be displayed as cover image replacement in grouped views.  
+These image files must have the same name as the list item of the group, e.g. "2010.jpg" or "action.png".
+Enter the full path (or use the browse button) to your folder containing the view thumb image files.
+
+Select the option 'Use the default movie cover for missing thumbs' if you wish to use a movie cover 
+when no thumb for views is available.
+
+You can also use fanart for those views, to do so, put fanart in the subfolder 
+for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
+The setting for this path is done via the Fanart path setting automatically; 
+See "Fanart for default group views - path" below.</value>
   </data>
   <data name="txtPicturePrefix.ToolTip" xml:space="preserve">
     <value>You can define a prefix for the cover images that will be 
@@ -304,6 +298,12 @@ populate or change them accordingly.
 Remark:
 If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
 set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where cover images are stored.
+This is mainly required, if you have only image names without full path stored in your DB.
+You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
+</value>
   </data>
   <data name="btnResetThumbsArtist.ToolTip" xml:space="preserve">
     <value>That action will remove all generated person image thumbs.
@@ -633,6 +633,17 @@ Alterternatively you could define a "whitelist" config for children:
 Category LIKE '*Children*' will include all movies, that have Children as part of the Category
 Category LIKE 'Children' will include all movies, that have Children as Category</value>
   </data>
+  <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
+    <value>Select from the list, the view you want to see when first entering the plugin.  
+Select the option “Display Always that view when using this config”, 
+if you always want to see this view for this configuration.  
+If you do not select the option “Display Always that view when using this config”, 
+the last view used before exiting the plugin will be shown next time.
+
+If a value is entered for the second parameter, only records containing that value will be displayed.  
+For example, you can define a view for children with ‘Category’ – ‘Animation’.
+</value>
+  </data>
   <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
     <value>"Only available" option acts as global overlayfilter for all views
 and this setting is used for start view.
@@ -651,17 +662,6 @@ So you should only activate this if you want to filter your views always when en
 
 AMC users can configure the field and value to identify unwatched films
 on "update" tab (Watched-Status Handling).</value>
-  </data>
-  <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
-    <value>Select from the list, the view you want to see when first entering the plugin.  
-Select the option “Display Always that view when using this config”, 
-if you always want to see this view for this configuration.  
-If you do not select the option “Display Always that view when using this config”, 
-the last view used before exiting the plugin will be shown next time.
-
-If a value is entered for the second parameter, only records containing that value will be displayed.  
-For example, you can define a view for children with ‘Category’ – ‘Animation’.
-</value>
   </data>
   <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
