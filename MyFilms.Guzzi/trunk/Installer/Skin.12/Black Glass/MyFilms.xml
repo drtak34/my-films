@@ -1635,7 +1635,7 @@ End additional Backdrops  -->
 			<height>720</height>
 			<dimColor>00ffffff</dimColor>
 
-			<visible>[control.hasfocus(2)|control.hasfocus(3)|control.hasfocus(4)|control.hasfocus(5)|control.hasfocus(6)|control.hasfocus(7)]</visible>
+			<visible>[control.hasfocus(2)|control.hasfocus(3)|control.hasfocus(4)|control.hasfocus(5)|control.hasfocus(6)|control.hasfocus(7)|control.hasfocus(8)|control.hasfocus(10012)|control.hasfocus(10013)|control.hasfocus(10014)|control.hasfocus(99999)]</visible>
 			<animation effect="fade" time="250" start="75" reversible="false">visible</animation>
 			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
 			<animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
@@ -1757,6 +1757,8 @@ End additional Backdrops  -->
 				</control>
 
 <!-- Additional Buttons for Links to other Plugins -->
+
+<!--
 				<control>
 					<description>Empty</description>
 					<type>button</type>
@@ -1768,16 +1770,16 @@ End additional Backdrops  -->
 					<ondown>10012</ondown>
 					<texture>bg_facade_line_nofocus.png</texture>
 				</control>
-<!--
+-->
 				<control>
 					<description>Separator</description>
 					<type>image</type>
 					<id>0</id>
 					<height>13</height>
-					<width>55</width>
+					<width>385</width>
 					<texture>bg_facade_line_nofocus.png</texture>
 				</control> 
--->
+
 				<control>
 					<description>Trailer</description>
 					<type>button</type>
@@ -1785,7 +1787,7 @@ End additional Backdrops  -->
 					<hyperlink>5900</hyperlink>
 					<label>Trailer</label>
 					<onright>50</onright>
-					<onup>7</onup>
+					<onup>8</onup>
 					<ondown>10013</ondown>
 					<visible>plugin.isenabled(My Trailers)</visible>
 				</control>
@@ -1814,10 +1816,9 @@ End additional Backdrops  -->
 					<type>button</type>
 					<id>99999</id>
 					<label>MyFilms Update Available !</label>
-					<onup>99991</onup>
+					<onup>10014</onup>
 					<ondown>2</ondown>
 					<onright>50</onright>
-					<width>310</width>            
 					<visible>string.equals(#mpei.ceddd4d1-4cac-4846-9af5-f4daee1bbddc.haveupdate,true)</visible>
 				</control>
 			</control> 
