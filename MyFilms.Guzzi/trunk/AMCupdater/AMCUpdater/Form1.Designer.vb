@@ -471,7 +471,7 @@ Partial Class Form1
         Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.CatalogIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.PropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog
+        Me.AntMovieCatalog = New AntMovieCatalog
         Me.mnuFile = New System.Windows.Forms.MenuStrip
         Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem
         Me.LoadConfigurationFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -3305,7 +3305,7 @@ Partial Class Form1
         '
         'MovieBindingSource
         '
-        Me.MovieBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.MovieDataTable)
+        Me.MovieBindingSource.DataSource = GetType(AntMovieCatalog.MovieDataTable)
         '
         'TextBox31
         '
@@ -4290,7 +4290,7 @@ Partial Class Form1
         '
         'PersonBindingSource
         '
-        Me.PersonBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.PersonDataTable)
+        Me.PersonBindingSource.DataSource = GetType(AntMovieCatalog.PersonDataTable)
         '
         'CheckBoxDirector
         '
@@ -4923,7 +4923,7 @@ Partial Class Form1
         '
         'CustomFieldBindingSource
         '
-        Me.CustomFieldBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.CustomFieldDataTable)
+        Me.CustomFieldBindingSource.DataSource = GetType(AntMovieCatalog.CustomFieldDataTable)
         '
         'DataGridView2
         '
@@ -4956,7 +4956,7 @@ Partial Class Form1
         '
         'CustomFieldsPropertiesBindingSource
         '
-        Me.CustomFieldsPropertiesBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.CustomFieldsPropertiesDataTable)
+        Me.CustomFieldsPropertiesBindingSource.DataSource = GetType(AntMovieCatalog.CustomFieldsPropertiesDataTable)
         '
         'DataGridView1
         '
@@ -5007,7 +5007,7 @@ Partial Class Form1
         '
         'PropertiesBindingSource
         '
-        Me.PropertiesBindingSource.DataSource = GetType(MyFilmsPlugin.AntMovieCatalog.PropertiesDataTable)
+        Me.PropertiesBindingSource.DataSource = GetType(AntMovieCatalog.PropertiesDataTable)
         '
         'AntMovieCatalog
         '
@@ -5880,7 +5880,7 @@ Partial Class Form1
     Friend WithEvents BindingNavigatorMoveLastItem1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorSeparator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents PersonBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents AntMovieCatalog As MyFilmsPlugin.AntMovieCatalog
+    Friend WithEvents AntMovieCatalog As AntMovieCatalog
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents XionPanelPerson As XionControls.XionPanel
     Friend WithEvents DataGridViewPerson As System.Windows.Forms.DataGridView

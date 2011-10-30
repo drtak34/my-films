@@ -5,7 +5,7 @@ Imports System.Security.Cryptography
 Imports System.Management
 Imports System.Windows.Forms
 Imports MediaPortal.Configuration
-Imports MyFilmsPlugin
+'Imports MyFilmsPlugin
 
 Public Class Form1
 
@@ -14,8 +14,8 @@ Public Class Form1
     Public OrphanedMovies As New ArrayList
 
     Public AntProcessor As New AntProcessor
-    ' Public mydivx As AntMovieCatalog = New AntMovieCatalog()
-    Public mydivx As MyFilmsPlugin.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog()
+    Public mydivx As AntMovieCatalog = New AntMovieCatalog()
+    'Public mydivx As MyFilmsPlugin.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog()
 
     Public OverridePath As String
     Public SourceField As String
@@ -2500,7 +2500,7 @@ Public Class Form1
             Dim wdir As String
 
             If (txtConfigFilePath.Text.Length > 0) Then
-                mydivx = New MyFilmsPlugin.AntMovieCatalog()
+                mydivx = New AntMovieCatalog()
                 Try
                     wdir = System.IO.Path.GetDirectoryName(txtConfigFilePath.Text)
                 Catch ex As Exception
@@ -2711,7 +2711,7 @@ Public Class Form1
 
     Private Sub ToolStripButtonAddMissingPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonAddMissingPersons.Click
         Dim Persons As String()
-        For Each row As MyFilmsPlugin.AntMovieCatalog.MovieRow In MovieBindingSource.DataSource
+        For Each row As AntMovieCatalog.MovieRow In MovieBindingSource.DataSource
             If row.Actors IsNot Nothing Then
                 Persons = row.Actors.Split(",")
                 For Each Person As String In Persons
@@ -2750,7 +2750,7 @@ Public Class Form1
         If person.Contains("(") Then
             person = person.Substring(0, person.IndexOf("(")).Trim
         End If
-        Dim personRows() As MyFilmsPlugin.AntMovieCatalog.PersonRow
+        Dim personRows() As AntMovieCatalog.PersonRow
         personRows = PersonBindingSource.DataSource.Select("Name = '" + person + "'")
 
         'Dim personRow As MyFilmsPlugin.AntMovieCatalog.PersonRow
@@ -2769,7 +2769,8 @@ Public Class Form1
                     personRows(0).IsWriter = True
             End Select
         Else
-            Dim newPerson As MyFilmsPlugin.AntMovieCatalog.PersonRow
+            'Dim newPerson As AMCUpdater.AntMovieCatalog.MovieRow
+            Dim newPerson As AMCUpdater.AntMovieCatalog.PersonRow
             newPerson = PersonBindingSource.DataSource.NewPersonRow()
             newPerson.Name = person
             Select Case type   ' Must be a primitive data type

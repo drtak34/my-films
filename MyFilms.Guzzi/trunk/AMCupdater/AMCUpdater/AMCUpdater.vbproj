@@ -134,12 +134,9 @@
     <Import Include="System.Threading" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntMovieCatalog.Designer.vb">
+    <Compile Include="AntMovieCatalog1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="AntMovieCatalog.vb">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </Compile>
     <Compile Include="AntProcessor.vb" />
@@ -198,10 +195,6 @@
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AntMovieCatalog.resx">
-      <DependentUpon>AntMovieCatalog.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="dgLogWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>dgLogWindow.vb</DependentUpon>
@@ -243,17 +236,6 @@
     <EmbeddedResource Include="Resources\Cancel.png" />
     <EmbeddedResource Include="Resources\Go.png" />
     <EmbeddedResource Include="Resources\Info.png" />
-    <None Include="AntMovieCatalog.xsc">
-      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-    </None>
-    <None Include="AntMovieCatalog.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AntMovieCatalog.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AntMovieCatalog.xss">
-      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-    </None>
     <None Include="My Project\app.manifest" />
   </ItemGroup>
   <ItemGroup>
@@ -288,20 +270,28 @@
       <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
       <Name>Grabber</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MyFilms\MyFilmsPlugin.csproj">
-      <Project>{20BCDBE0-0812-4235-9330-40B8E570DAE1}</Project>
-      <Name>MyFilmsPlugin</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AMCUpdater.ico" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog+CatalogDataTable.datasource" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog+CustomFieldDataTable.datasource" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog+CustomFieldsPropertiesDataTable.datasource" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog+MovieDataTable.datasource" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog+PersonDataTable.datasource" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog+PropertiesDataTable.datasource" />
-    <None Include="My Project\DataSources\MyFilmsPlugin.AntMovieCatalog.datasource" />
+    <None Include="AntMovieCatalog.xsc">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="AntMovieCatalog.xsd">
+      <SubType>
+      </SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AntMovieCatalog1.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="AntMovieCatalog.xss">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CatalogDataTable.datasource" />
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CustomFieldDataTable.datasource" />
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CustomFieldsPropertiesDataTable.datasource" />
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+MovieDataTable.datasource" />
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+PersonDataTable.datasource" />
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+PropertiesDataTable.datasource" />
+    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog.datasource" />
     <None Include="Resources\film-reel-128x128.png" />
     <None Include="app.config" />
     <None Include="Resources\google_32.png" />
