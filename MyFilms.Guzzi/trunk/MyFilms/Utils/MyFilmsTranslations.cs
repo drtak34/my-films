@@ -80,7 +80,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             translations = null;
             LogMyFilms.Info("Using language " + CurrentLanguage);
 
-            path = Config.GetSubFolder(Config.Dir.Language, "Trakt");
+            path = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
 
             if (!System.IO.Directory.Exists(path))
                 System.IO.Directory.CreateDirectory(path);

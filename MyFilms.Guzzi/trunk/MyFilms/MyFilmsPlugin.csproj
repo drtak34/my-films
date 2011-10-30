@@ -192,11 +192,6 @@
     <Compile Include="MyFilmsGUI\MyFilmsDetail.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsDialogSetRating.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsThumbs.cs" />
-    <Compile Include="MyFilmsLocalDataCacheDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyFilmsLocalDataCacheDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="MyFilmsSettings.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -219,6 +214,7 @@
     <Compile Include="CatalogConverter\MovieCollector.cs" />
     <Compile Include="CatalogConverter\MyMovies.cs" />
     <Compile Include="Utils\Logos.cs" />
+    <Compile Include="Utils\MyFilmsTranslations.cs" />
     <Compile Include="Utils\XmlSettings.cs" />
     <Compile Include="Utils\Utility.cs" />
     <Compile Include="Utils\WakeOnLanManager.cs" />
@@ -261,7 +257,6 @@
     <None Include="AntMovieCatalog4.xss">
       <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
     </None>
-    <None Include="app.config" />
     <None Include="MyFilmsData.xsc">
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </None>
@@ -272,17 +267,6 @@
     </None>
     <None Include="MyFilmsData.xss">
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
-    </None>
-    <None Include="MyFilmsLocalDataCacheDataSet.xsc">
-      <DependentUpon>MyFilmsLocalDataCacheDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="MyFilmsLocalDataCacheDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MyFilmsLocalDataCacheDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MyFilmsLocalDataCacheDataSet.xss">
-      <DependentUpon>MyFilmsLocalDataCacheDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -361,9 +345,6 @@
     <EmbeddedResource Include="Resources\AMCUpdaterSmall.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MyFilmsLocalDataCache.sdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\MyFilmsIcon.ico" />
     <EmbeddedResource Include="Configuration\HyperLinkParamGenerator.resx">
       <DependentUpon>HyperLinkParamGenerator.cs</DependentUpon>
