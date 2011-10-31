@@ -2892,13 +2892,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>WebLinks\Forums.url</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{d74fb487-2207-4b3e-9ead-af24746aa412}-Forums.url</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Forums.url</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>WebLinks\Home.url</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{5e4a7ca1-75e8-432b-a9d2-b0fc26815c5f}-Home.url</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Home.url</DestinationFilename>
@@ -2916,6 +2909,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>WebLinks\Wiki.url</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{63a2b427-b988-4f84-8159-914e585de732}-Wiki.url</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Wiki.url</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>WebLinks\Forum.url</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c844701a-efcb-4584-a616-2d491fa5cbdf}-Forum.url</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Forum.url</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3577,7 +3577,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1641</Revision>
+      <Revision>1642</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3589,7 +3589,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-10-31T06:32:41.994841+01:00</ReleaseDate>
+    <ReleaseDate>2011-10-31T06:50:25.2493283+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -6367,13 +6367,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>WebLinks\Forums.url</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d74fb487-2207-4b3e-9ead-af24746aa412}-Forums.url</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Forums.url</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>WebLinks\Home.url</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{5e4a7ca1-75e8-432b-a9d2-b0fc26815c5f}-Home.url</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Home.url</DestinationFilename>
@@ -6391,6 +6384,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>WebLinks\Wiki.url</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{63a2b427-b988-4f84-8159-914e585de732}-Wiki.url</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Wiki.url</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>WebLinks\Forum.url</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c844701a-efcb-4584-a616-2d491fa5cbdf}-Forum.url</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Forum.url</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
