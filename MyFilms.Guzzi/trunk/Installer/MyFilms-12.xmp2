@@ -3249,7 +3249,7 @@ public class Script
                     <Description>Description tooltip text </Description>
                   </SectionParam>
                   <SectionParam Name="Icon of the shortcut">
-                    <Value />
+                    <Value>iexplore.exe</Value>
                     <ValueType>Template</ValueType>
                     <Description>Icon of the shortcut, 
  if is empty the icon of the target will be used</Description>
@@ -3277,7 +3277,7 @@ public class Script
                     <Description>Description tooltip text </Description>
                   </SectionParam>
                   <SectionParam Name="Icon of the shortcut">
-                    <Value />
+                    <Value>iexplore.exe</Value>
                     <ValueType>Template</ValueType>
                     <Description>Icon of the shortcut, 
  if is empty the icon of the target will be used</Description>
@@ -3305,7 +3305,7 @@ public class Script
                     <Description>Description tooltip text </Description>
                   </SectionParam>
                   <SectionParam Name="Icon of the shortcut">
-                    <Value />
+                    <Value>iexplore.exe</Value>
                     <ValueType>Template</ValueType>
                     <Description>Icon of the shortcut, 
  if is empty the icon of the target will be used</Description>
@@ -3333,7 +3333,7 @@ public class Script
                     <Description>Description tooltip text </Description>
                   </SectionParam>
                   <SectionParam Name="Icon of the shortcut">
-                    <Value />
+                    <Value>iexplore.exe</Value>
                     <ValueType>Template</ValueType>
                     <Description>Icon of the shortcut, 
  if is empty the icon of the target will be used</Description>
@@ -3577,7 +3577,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1640</Revision>
+      <Revision>1641</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3589,7 +3589,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-10-31T06:13:15.7427763+01:00</ReleaseDate>
+    <ReleaseDate>2011-10-31T06:32:41.994841+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
