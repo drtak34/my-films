@@ -211,6 +211,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         // N
 
         // O
+        public static string OK = "OK";
 
         // P
 
