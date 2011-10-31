@@ -1122,8 +1122,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     //if (ExtendedStartmode("Details context: Change Local COver)"))
                     //{
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " " + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true)); // Change Cover
-                    choiceViewMenu.Add("changecover");
+                    int iCovercount = 0;
+                    bool success = int.TryParse(ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true), out iCovercount);
+                    if (iCovercount > 1)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " " + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true)); // Change Cover
+                      choiceViewMenu.Add("changecover");
+                    }
                     //}
 
                     if (ExtendedStartmode("Details context: Change Local Cover requires separate screen and is not yet implemented)"))
@@ -3227,7 +3232,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (interactive) // Dialog only in interactive mode
               #region interactive selection dialog
               {
-
+                // check out alternative select dialogs (hint Dadeo):
+                //GUIDialogSelect dlgselect = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);
+                //GUIDialogSelect2 dlgselect2 = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);
+                
                 System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
                 GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                 dlgmenu.Reset();
