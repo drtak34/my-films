@@ -2882,15 +2882,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
           </Items>
         </Files>
       </GroupItem>
-      <GroupItem Name="GrabberInterface">
-        <ParentGroup />
-        <DisplayName>Grabber Script Editor</DisplayName>
-        <DefaulChecked>true</DefaulChecked>
-        <Description>Create a Desktop Icon for the Grabber Script Editor</Description>
-        <Files>
-          <Items />
-        </Files>
-      </GroupItem>
       <GroupItem Name="WebLinks">
         <ParentGroup>Default</ParentGroup>
         <DisplayName>Online Web Links</DisplayName>
@@ -3159,29 +3150,25 @@ public class Script
               </Params>
               <ExecuteLocation>AfterPanelShow</ExecuteLocation>
             </ActionItem>
-            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="Default">
+            <ActionItem Name="CreateFolder" ActionType="CreateFolder" ConditionGroup="Default">
               <Params>
                 <Items>
-                  <SectionParam Name="ShortCut location">
-                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\Grabber Script Editor.lnk</Value>
+                  <SectionParam Name="Folder location">
+                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\WebLinks</Value>
                     <ValueType>Template</ValueType>
-                    <Description>Location of shortcut</Description>
+                    <Description>Location of folder</Description>
                   </SectionParam>
-                  <SectionParam Name="ShortCut target">
-                    <Value>%Base%\MyFilms_Grabber_Interface.exe</Value>
-                    <ValueType>Template</ValueType>
-                    <Description>Target of short cut</Description>
+                  <SectionParam Name="Remove on Uninstall">
+                    <Value>YES</Value>
+                    <ValueType>Bool</ValueType>
+                    <Description>Remove on UnInstall</Description>
                   </SectionParam>
-                  <SectionParam Name="Description">
-                    <Value>MyFilms Grabber Script Editor</Value>
+                  <SectionParam Name="Question on UnInstall">
+                    <Value />
                     <ValueType>String</ValueType>
-                    <Description>Description tooltip text </Description>
-                  </SectionParam>
-                  <SectionParam Name="Icon of the shortcut">
-                    <Value>%Plugins%\windows\myfilms.dll</Value>
-                    <ValueType>Template</ValueType>
-                    <Description>Icon of the shortcut, 
- if is empty the icon of the target will be used</Description>
+                    <Description>Quetion asked from user when UnInstall.
+ With Yes response the folder will be deleted
+ If empty no question will be asked and no folder will be deleted</Description>
                   </SectionParam>
                 </Items>
               </Params>
@@ -3219,7 +3206,35 @@ public class Script
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
-                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\Online\MyFilms Wiki.lnk</Value>
+                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\Grabber Script Editor.lnk</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Location of shortcut</Description>
+                  </SectionParam>
+                  <SectionParam Name="ShortCut target">
+                    <Value>%Base%\MyFilms_Grabber_Interface.exe</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Target of short cut</Description>
+                  </SectionParam>
+                  <SectionParam Name="Description">
+                    <Value>MyFilms Grabber Script Editor</Value>
+                    <ValueType>String</ValueType>
+                    <Description>Description tooltip text </Description>
+                  </SectionParam>
+                  <SectionParam Name="Icon of the shortcut">
+                    <Value>%Plugins%\windows\myfilms.dll</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Icon of the shortcut, 
+ if is empty the icon of the target will be used</Description>
+                  </SectionParam>
+                </Items>
+              </Params>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
+            </ActionItem>
+            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="Default">
+              <Params>
+                <Items>
+                  <SectionParam Name="ShortCut location">
+                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\WebLinks\MyFilms Wiki.lnk</Value>
                     <ValueType>Template</ValueType>
                     <Description>Location of shortcut</Description>
                   </SectionParam>
@@ -3247,7 +3262,7 @@ public class Script
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
-                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\Online\MyFilms Google.lnk</Value>
+                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\WebLinks\MyFilms Google.lnk</Value>
                     <ValueType>Template</ValueType>
                     <Description>Location of shortcut</Description>
                   </SectionParam>
@@ -3275,7 +3290,7 @@ public class Script
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
-                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\Online\MyFilms Forum.lnk</Value>
+                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\WebLinks\MyFilms Forum.lnk</Value>
                     <ValueType>Template</ValueType>
                     <Description>Location of shortcut</Description>
                   </SectionParam>
@@ -3303,7 +3318,7 @@ public class Script
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
-                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\Online\MyFilms Issue Tracker.lnk</Value>
+                    <Value>%Programs%\Team MediaPortal\MediaPortal Plugins\MyFilms\WebLinks\MyFilms Issue Tracker.lnk</Value>
                     <ValueType>Template</ValueType>
                     <Description>Location of shortcut</Description>
                   </SectionParam>
@@ -3542,9 +3557,9 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
+            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
@@ -3562,7 +3577,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1634</Revision>
+      <Revision>1640</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3574,7 +3589,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-10-30T19:50:58.3856922+01:00</ReleaseDate>
+    <ReleaseDate>2011-10-31T06:13:15.7427763+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
