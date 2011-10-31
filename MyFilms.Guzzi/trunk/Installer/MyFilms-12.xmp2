@@ -2891,6 +2891,44 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
           <Items />
         </Files>
       </GroupItem>
+      <GroupItem Name="WebLinks">
+        <ParentGroup>Default</ParentGroup>
+        <DisplayName>Online Web Links</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Online Web Links</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>WebLinks\Forums.url</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d74fb487-2207-4b3e-9ead-af24746aa412}-Forums.url</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Forums.url</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>WebLinks\Home.url</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5e4a7ca1-75e8-432b-a9d2-b0fc26815c5f}-Home.url</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Home.url</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>WebLinks\Issues.url</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b21ff131-69ec-4d53-810d-3cf5b6a83e09}-Issues.url</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Issues.url</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>WebLinks\Wiki.url</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{63a2b427-b988-4f84-8159-914e585de732}-Wiki.url</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Wiki.url</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -3073,7 +3111,7 @@ public class Script
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
-                    <Value>%Desktop%</Value>
+                    <Value>%Desktop%\MyFilms Grabber Script Editor.lnk</Value>
                     <ValueType>Template</ValueType>
                     <Description>Location of shortcut</Description>
                   </SectionParam>
@@ -3186,7 +3224,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>http://http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films</Value>
+                    <Value>%Thumbs%\MyFilms\WebLinks\Wiki.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3214,7 +3252,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>http://http://code.google.com/p/my-films/</Value>
+                    <Value>%Thumbs%\MyFilms\WebLinks\Home.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3242,7 +3280,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>http://http://forum.team-mediaportal.com/my-films-164/</Value>
+                    <Value>%Thumbs%\MyFilms\WebLinks\Forum.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3270,7 +3308,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>http://http://code.google.com/p/my-films/issues/list</Value>
+                    <Value>%Thumbs%\MyFilms\WebLinks\Issues.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -6311,6 +6349,34 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{303b1657-24e5-43d9-a124-2c89680af724}-strings_sk.xml</ZipFileName>
         <DestinationFilename>%Language%\MyFilms\strings_sk.xml</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>WebLinks\Forums.url</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d74fb487-2207-4b3e-9ead-af24746aa412}-Forums.url</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Forums.url</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>WebLinks\Home.url</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5e4a7ca1-75e8-432b-a9d2-b0fc26815c5f}-Home.url</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Home.url</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>WebLinks\Issues.url</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b21ff131-69ec-4d53-810d-3cf5b6a83e09}-Issues.url</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Issues.url</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>WebLinks\Wiki.url</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{63a2b427-b988-4f84-8159-914e585de732}-Wiki.url</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\WebLinks\Wiki.url</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -6387,6 +6453,16 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <DestinationFilename>%Language%</DestinationFilename>
         <Folder>Language</Folder>
         <Group>LanguageFiles</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{535cd7a2-48eb-4a13-aba3-53906224acf2}-</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\WebLinks</DestinationFilename>
+        <Folder>WebLinks</Folder>
+        <Group>WebLinks</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
