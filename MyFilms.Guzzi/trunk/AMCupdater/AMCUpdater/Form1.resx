@@ -127,6 +127,45 @@
     <value>Use "Import Movies" to scan your movie directories, retrieve mediainfo and internet data, add the movies to your catalog and optional remove movies you don't have anymore from catalog.
 Depending on your settings, this can be done with or without user interaction (e.g. userdialog if movie can't be identified automatically) and you can decide, if a non identified movie should be added without internet data.</value>
   </data>
+  <data name="cbTitleHandling.ToolTip" xml:space="preserve">
+    <value>Options are:
+File Name: use file name for title field
+Folder Name: use folder name for title field
+Relative Name: use whole content of path for title
+ 
+File Name + Internet Lookup
+Folder Name + Internet Lookup
+Relative Name + Internet Lookup
+
+All the same as above, but adding internet lookup, trying to get a matching movie 
+and then replacing title with the title found by the internet grabber.
+
+Example:
+So if you have named your files by movie title, select “title”. 
+If you have your movie files in folders, that have the movie title, select “folder”.</value>
+  </data>
+  <data name="txtParserFilePath.ToolTip" xml:space="preserve">
+    <value>Enter the location of an Internet Parser file.
+These files allow AMCUpdater to access Internet Movie sites to get movie information
+Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
+  </data>
+  <data name="chkManualDontAskInteractive.ToolTip" xml:space="preserve">
+    <value>Check this, if you want to update your movie data without user interaction.
+If a movie can't be identified automatically, it will NOT show the userdialog for manual selection.
+Thus the (internet) movie data cannot be retrieved and updated.
+
+Note:
+Auto matching depends very much on your database structure; 
+if you have e.g. imdb links stored in URL field and try updaating with IMDB grabber script, auto match will always work
+due to usage if IMDB id.
+Other grabber scripts require matching by name and year, that might not always allow auto matches.</value>
+  </data>
+  <metadata name="MovieBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>19, 90</value>
+  </metadata>
+  <metadata name="PersonBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>175, 91</value>
+  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>205, 5</value>
   </metadata>
@@ -154,28 +193,6 @@ It gives you the possibility to update the INternet infos interactively in MyFil
 To have this option active for silent background operation (e.g. global update from MyFilms GUI,
 but NOT active for AMCupdater interactive GUI mode, you have to select the 
 option "Don't import file in interactive mode".</value>
-  </data>
-  <data name="cbTitleHandling.ToolTip" xml:space="preserve">
-    <value>Options are:
-File Name: use file name for title field
-Folder Name: use folder name for title field
-Relative Name: use whole content of path for title
- 
-File Name + Internet Lookup
-Folder Name + Internet Lookup
-Relative Name + Internet Lookup
-
-All the same as above, but adding internet lookup, trying to get a matching movie 
-and then replacing title with the title found by the internet grabber.
-
-Example:
-So if you have named your files by movie title, select “title”. 
-If you have your movie files in folders, that have the movie title, select “folder”.</value>
-  </data>
-  <data name="txtParserFilePath.ToolTip" xml:space="preserve">
-    <value>Enter the location of an Internet Parser file.
-These files allow AMCUpdater to access Internet Movie sites to get movie information
-Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
   </data>
   <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
     <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
@@ -644,17 +661,6 @@ For example, an entry listing a Source of 'd:\Movies' will not be considered an 
         kjX+os/+D1cNRyxq14aNAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="chkManualDontAskInteractive.ToolTip" xml:space="preserve">
-    <value>Check this, if you want to update your movie data without user interaction.
-If a movie can't be identified automatically, it will NOT show the userdialog for manual selection.
-Thus the (internet) movie data cannot be retrieved and updated.
-
-Note:
-Auto matching depends very much on your database structure; 
-if you have e.g. imdb links stored in URL field and try updaating with IMDB grabber script, auto match will always work
-due to usage if IMDB id.
-Other grabber scripts require matching by name and year, that might not always allow auto matches.</value>
-  </data>
   <data name="txtGroupNameIdentifier.ToolTip" xml:space="preserve">
     <value>You can define a search expression to identify the folder to be used for "group name".
 If left empty, the standard rules apply.
@@ -722,6 +728,17 @@ Note : Can only be used when scanning a single folder structure.</value>
     <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
 </value>
   </data>
+  <data name="GroupBox26.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+
+</value>
+  </data>
   <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
     <value>Preferred Language(s) for 
 Translated Title(s) and Certification
@@ -736,17 +753,6 @@ Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
   </data>
-  <data name="GroupBox26.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-
-</value>
-  </data>
   <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
     <value>AMCUpdater can be instructed to ignore selected files.
 These files will never be scanned or imported by AMCUpdater.
@@ -760,6 +766,9 @@ These files will be scanned to determine what languages are included, if possibl
 This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
 </value>
   </data>
+  <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>21, 64</value>
+  </metadata>
   <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>21, 64</value>
   </metadata>
@@ -862,6 +871,21 @@ This does not affect the detection of external subtitle files - but may improve 
   </data>
   <metadata name="PersonBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>173, 65</value>
+  </metadata>
+  <metadata name="PersonBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>173, 65</value>
+  </metadata>
+  <metadata name="IsActor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsProducer.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsDirector.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsWriter.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="IsActor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -996,14 +1020,29 @@ This does not affect the detection of external subtitle files - but may improve 
   <metadata name="CatalogBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>23, 115</value>
   </metadata>
+  <metadata name="CatalogBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>23, 115</value>
+  </metadata>
+  <metadata name="AntMovieCatalogAMC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>479, 33</value>
+  </metadata>
   <metadata name="AntMovieCatalogAMC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>479, 33</value>
   </metadata>
   <metadata name="CustomFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>512, 95</value>
   </metadata>
+  <metadata name="CustomFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>512, 95</value>
+  </metadata>
   <metadata name="CustomFieldsPropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>503, 69</value>
+  </metadata>
+  <metadata name="CustomFieldsPropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>503, 69</value>
+  </metadata>
+  <metadata name="PropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>337, 68</value>
   </metadata>
   <metadata name="PropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>337, 68</value>
@@ -1197,6 +1236,9 @@ This does not affect the detection of external subtitle files - but may improve 
   </metadata>
   <metadata name="epOptions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>267, 32</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 5</value>
   </metadata>
   <metadata name="ImageListViewPersons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>619, 34</value>
