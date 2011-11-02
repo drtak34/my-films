@@ -501,7 +501,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (StrSort[1].Length == 0)
                 StrSort[1] = "(none)";
             if (StrSorta == "")
-                StrSorta = StrSTitle;
+              StrSorta = StrSTitle;
+            if (StrSortaInHierarchies == "")
+              StrSortaInHierarchies = StrSTitle;
             if (StrSortSens == "")
               StrSortSens = " ASC";
             if (StrSortSensInHierarchies == "")
