@@ -3907,6 +3907,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
           else if (!oldPicture.Contains(oldPictureCatalogname))
             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+          // set picture to new one (full path)
+          setGUIProperty("picture", newPicture);
+          GUIWindowManager.Process();
         }
 
         private static bool IsUpdateRequired(string currentField, string selectedField, string oldvalue, string newvalue, GrabType grabtype, bool onlyselected, bool onlymissing, bool onlynonempty)
@@ -5376,7 +5379,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             setGUIProperty("picture", file);
             MyFilms.currentMovie.Picture = file;
             // ToDo: Add for ImageSwapper Coverart (coverImage)
-            //cover.Filename = file;
+            ////cover.Filename = file;
+            //if (ImgDetFilm != null)
+            //  ImgDetFilm.FileName = file;
 
             // Logos:
             this.Load_Logos(MyFilms.r[MyFilms.conf.StrIndex]);

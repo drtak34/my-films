@@ -1574,9 +1574,13 @@ namespace MyFilmsPlugin {
                 this.columnIMDB_Id.Namespace = "";
                 this.columnTMDB_Id.Namespace = "";
                 this.columnIsActor.Namespace = "";
+                this.columnIsActor.DefaultValue = ((bool)(false));
                 this.columnIsProducer.Namespace = "";
+                this.columnIsProducer.DefaultValue = ((bool)(false));
                 this.columnIsDirector.Namespace = "";
+                this.columnIsDirector.DefaultValue = ((bool)(false));
                 this.columnIsWriter.Namespace = "";
+                this.columnIsWriter.DefaultValue = ((bool)(false));
                 this.columnPhotos.Namespace = "";
                 this.columnPicture.Namespace = "";
                 this.columnPersons_Id.Namespace = "";

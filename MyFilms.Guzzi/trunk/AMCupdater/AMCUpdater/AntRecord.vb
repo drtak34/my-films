@@ -1807,13 +1807,13 @@ Public Class AntRecord
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
-                CurrentAttribute = "Tagline"
+                CurrentAttribute = "TagLine"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Tagline)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
-                CurrentAttribute = "ImdbRank"
+                CurrentAttribute = "Imdb_Rank"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.IMDBrank)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)

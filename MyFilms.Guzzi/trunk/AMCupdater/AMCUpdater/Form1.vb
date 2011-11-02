@@ -14,8 +14,8 @@ Public Class Form1
     Public OrphanedMovies As New ArrayList
 
     Public AntProcessor As New AntProcessor
-    Public mydivx As AntMovieCatalog = New AntMovieCatalog()
-    'Public mydivx As MyFilmsPlugin.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog()
+    Public myMovieCatalog As AntMovieCatalog = New AntMovieCatalog()
+    'Public myMovieCatalog As MyFilmsPlugin.AntMovieCatalog = New MyFilmsPlugin.AntMovieCatalog()
 
     Public OverridePath As String
     Public SourceField As String
@@ -32,7 +32,7 @@ Public Class Form1
         Dim asm As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly()
         Label_VersionNumber.Text = "V" + asm.GetName().Version.ToString()
 
-#If CONFIG = "Release" Then
+#If Config = "Release" Then
         ToolStripMenuItemDebug.Visible = False
         ToolStripMenuItemOptions.Visible = False
         ViewPersons.Visible = False
@@ -2474,7 +2474,7 @@ Public Class Form1
         Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
         destXml.WriteStartDocument(False)
         destXml.Formatting = Xml.Formatting.Indented
-        mydivx.WriteXml(destXml)
+        myMovieCatalog.WriteXml(destXml)
         destXml.Close()
     End Sub
 
@@ -2483,7 +2483,7 @@ Public Class Form1
         Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
         destXml.WriteStartDocument(False)
         destXml.Formatting = Xml.Formatting.Indented
-        mydivx.WriteXml(destXml)
+        myMovieCatalog.WriteXml(destXml)
         destXml.Close()
     End Sub
     Private Sub BindingNavigatorAddNewItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem.Click
@@ -2497,43 +2497,61 @@ Public Class Form1
 
         If TabControl1.SelectedIndex = 6 Or TabControl1.SelectedIndex = 7 Or TabControl1.SelectedIndex = 8 Then
             Dim myMovieTable As DataTable = Nothing
-            'Dim mymovieview As DataView
+            Dim mymovieview As DataView
             Dim myPersonTable As DataTable = Nothing
-            'Dim mypersonview As DataView
+            Dim mypersonview As DataView
             Dim myCustomFieldsProperties As DataTable = Nothing
             Dim myCustomField As DataTable = Nothing
             Dim myProperties As DataTable = Nothing
             Dim wdir As String
 
             If (txtConfigFilePath.Text.Length > 0) Then
-                mydivx = New AntMovieCatalog()
-                Try
-                    wdir = System.IO.Path.GetDirectoryName(txtConfigFilePath.Text)
-                Catch ex As Exception
+                myMovieCatalog = New AntMovieCatalog()
+
+                If TabControl1.SelectedIndex = 6 Then
+                    Try
+                        wdir = System.IO.Path.GetDirectoryName(txtConfigFilePath.Text)
+                    Catch ex As Exception
+                        wdir = String.Empty
+                    End Try
+                ElseIf TabControl1.SelectedIndex = 7 Then
+                    Try
+                        wdir = System.IO.Path.GetDirectoryName(txtPersonArtworkFolder.Text)
+                    Catch ex As Exception
+                        wdir = String.Empty
+                    End Try
+                Else
                     wdir = String.Empty
-                End Try
+                End If
+
+                ' Set current directory to retrieve images without full pathnames
                 If (System.IO.Directory.Exists(wdir)) Then
                     Directory.SetCurrentDirectory(wdir)
                 End If
 
                 If (System.IO.File.Exists(txtConfigFilePath.Text)) Then
-                    mydivx.ReadXml(txtConfigFilePath.Text)
+                    myMovieCatalog.ReadXml(txtConfigFilePath.Text)
 
-                    myMovieTable = mydivx.Tables("Movie")
-                    'mymovieview = New DataView(myMovieTable)
+                    'myMovieTable = myMovieCatalog.Tables("Movie")
+                    myMovieTable = myMovieCatalog.Movie
+                    mymovieview = New DataView(myMovieTable)
                     MovieBindingSource.DataSource = myMovieTable
 
-                    myPersonTable = mydivx.Tables("Person")
-                    'mypersonview = New DataView(myPersonTable)
+                    'myPersonTable = myMovieCatalog.Tables("Person")
+                    myPersonTable = myMovieCatalog.Person
+                    mypersonview = New DataView(myPersonTable)
                     PersonBindingSource.DataSource = myPersonTable
 
-                    myCustomField = mydivx.Tables("CustomField")
+                    'myCustomField = myMovieCatalog.Tables("CustomField")
+                    myCustomField = myMovieCatalog.CustomField
                     CustomFieldBindingSource.DataSource = myCustomField
 
-                    myCustomFieldsProperties = mydivx.Tables("CustomFieldsProperties")
+                    'myCustomFieldsProperties = myMovieCatalog.Tables("CustomFieldsProperties")
+                    myCustomFieldsProperties = myMovieCatalog.CustomFieldsProperties
                     CustomFieldsPropertiesBindingSource.DataSource = myCustomFieldsProperties
 
-                    myProperties = mydivx.Tables("Properties")
+                    'myProperties = myMovieCatalog.Tables("Properties")
+                    myProperties = myMovieCatalog.Properties
                     PropertiesBindingSource.DataSource = myProperties
                 Else
                     MovieBindingSource.DataSource = myMovieTable
@@ -2718,30 +2736,37 @@ Public Class Form1
     Private Sub ToolStripButtonAddMissingPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonAddMissingPersons.Click
         Dim Persons As String()
         For Each row As AntMovieCatalog.MovieRow In MovieBindingSource.DataSource
-            If row.Actors IsNot Nothing Then
+            Try
                 Persons = row.Actors.Split(",")
                 For Each Person As String In Persons
                     AddOrUpdatePerson(Person, PersonType.Actor)
                 Next
-            End If
-            If row.Producer IsNot Nothing Then
+            Catch ex As Exception
+            End Try
+
+            Try
                 Persons = row.Producer.Split(",")
                 For Each Person As String In Persons
                     AddOrUpdatePerson(Person, PersonType.Producer)
                 Next
-            End If
-            If row.Director IsNot Nothing Then
+            Catch ex As Exception
+            End Try
+
+            Try
                 Persons = row.Director.Split(",")
                 For Each Person As String In Persons
                     AddOrUpdatePerson(Person, PersonType.Director)
                 Next
-            End If
-            If row.Writer IsNot Nothing Then
+            Catch ex As Exception
+            End Try
+
+            Try
                 Persons = row.Writer.Split(",")
                 For Each Person As String In Persons
                     AddOrUpdatePerson(Person, PersonType.Writer)
                 Next
-            End If
+            Catch ex As Exception
+            End Try
         Next
     End Sub
 
@@ -2764,7 +2789,11 @@ Public Class Form1
 
         If personRows.Count > 0 Then
             personRows(0).Name = person
-            Select Case type   ' Must be a primitive data type
+            'personRows(0).IsActor = False
+            'personRows(0).IsProducer = False
+            'personRows(0).IsDirector = False
+            'personRows(0).IsWriter = False
+            Select Case type
                 Case PersonType.Actor
                     personRows(0).IsActor = True
                 Case PersonType.Producer
@@ -2779,7 +2808,11 @@ Public Class Form1
             Dim newPerson As AMCUpdater.AntMovieCatalog.PersonRow
             newPerson = PersonBindingSource.DataSource.NewPersonRow()
             newPerson.Name = person
-            Select Case type   ' Must be a primitive data type
+            'newPerson.IsActor = False
+            'newPerson.IsProducer = False
+            'newPerson.IsDirector = False
+            'newPerson.IsWriter = False
+            Select Case type
                 Case PersonType.Actor
                     newPerson.IsActor = True
                 Case PersonType.Producer

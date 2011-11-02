@@ -3472,13 +3472,13 @@ Partial Public Class AntMovieCatalog
     Partial Public Class CustomFieldsDataTable
         Inherits Global.System.Data.TypedTableBase(Of CustomFieldsRow)
         
-        Private _columnWriter_Extended As Global.System.Data.DataColumn
+        Private columnWriter As Global.System.Data.DataColumn
         
-        Private _columnCertification_Extended As Global.System.Data.DataColumn
+        Private columnCertification As Global.System.Data.DataColumn
         
-        Private columnTest1 As Global.System.Data.DataColumn
+        Private columnTagLine As Global.System.Data.DataColumn
         
-        Private columnTest2 As Global.System.Data.DataColumn
+        Private columnStudio As Global.System.Data.DataColumn
         
         Private columnMovie_Id As Global.System.Data.DataColumn
         
@@ -3515,30 +3515,30 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property _Writer_ExtendedColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property WriterColumn() As Global.System.Data.DataColumn
             Get
-                Return Me._columnWriter_Extended
+                Return Me.columnWriter
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property _Certification_ExtendedColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property CertificationColumn() As Global.System.Data.DataColumn
             Get
-                Return Me._columnCertification_Extended
+                Return Me.columnCertification
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Test1Column() As Global.System.Data.DataColumn
+        Public ReadOnly Property TagLineColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnTest1
+                Return Me.columnTagLine
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Test2Column() As Global.System.Data.DataColumn
+        Public ReadOnly Property StudioColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnTest2
+                Return Me.columnStudio
             End Get
         End Property
         
@@ -3578,9 +3578,9 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddCustomFieldsRow(ByVal _Writer_Extended As String, ByVal _Certification_Extended As String, ByVal Test1 As String, ByVal Test2 As String, ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
+        Public Overloads Function AddCustomFieldsRow(ByVal Writer As String, ByVal Certification As String, ByVal TagLine As String, ByVal Studio As String, ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
             Dim rowCustomFieldsRow As CustomFieldsRow = CType(Me.NewRow,CustomFieldsRow)
-            Dim columnValuesArray() As Object = New Object() {_Writer_Extended, _Certification_Extended, Test1, Test2, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Writer, Certification, TagLine, Studio, Nothing}
             If (Not (parentMovieRowByMovie_CustomFields) Is Nothing) Then
                 columnValuesArray(4) = parentMovieRowByMovie_CustomFields(51)
             End If
@@ -3603,33 +3603,29 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Friend Sub InitVars()
-            Me._columnWriter_Extended = MyBase.Columns("Writer-Extended")
-            Me._columnCertification_Extended = MyBase.Columns("Certification-Extended")
-            Me.columnTest1 = MyBase.Columns("Test1")
-            Me.columnTest2 = MyBase.Columns("Test2")
+            Me.columnWriter = MyBase.Columns("Writer")
+            Me.columnCertification = MyBase.Columns("Certification")
+            Me.columnTagLine = MyBase.Columns("TagLine")
+            Me.columnStudio = MyBase.Columns("Studio")
             Me.columnMovie_Id = MyBase.Columns("Movie_Id")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Private Sub InitClass()
-            Me._columnWriter_Extended = New Global.System.Data.DataColumn("Writer-Extended", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            Me._columnWriter_Extended.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnWriter_Extended")
-            Me._columnWriter_Extended.ExtendedProperties.Add("Generator_UserColumnName", "Writer-Extended")
-            MyBase.Columns.Add(Me._columnWriter_Extended)
-            Me._columnCertification_Extended = New Global.System.Data.DataColumn("Certification-Extended", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            Me._columnCertification_Extended.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCertification_Extended")
-            Me._columnCertification_Extended.ExtendedProperties.Add("Generator_UserColumnName", "Certification-Extended")
-            MyBase.Columns.Add(Me._columnCertification_Extended)
-            Me.columnTest1 = New Global.System.Data.DataColumn("Test1", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnTest1)
-            Me.columnTest2 = New Global.System.Data.DataColumn("Test2", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnTest2)
+            Me.columnWriter = New Global.System.Data.DataColumn("Writer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnWriter)
+            Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCertification)
+            Me.columnTagLine = New Global.System.Data.DataColumn("TagLine", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTagLine)
+            Me.columnStudio = New Global.System.Data.DataColumn("Studio", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnStudio)
             Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnMovie_Id)
-            Me._columnWriter_Extended.Namespace = ""
-            Me._columnCertification_Extended.Namespace = ""
-            Me.columnTest1.Namespace = ""
-            Me.columnTest2.Namespace = ""
+            Me.columnWriter.Namespace = ""
+            Me.columnCertification.Namespace = ""
+            Me.columnTagLine.Namespace = ""
+            Me.columnStudio.Namespace = ""
             Me.columnMovie_Id.Namespace = ""
         End Sub
         
@@ -7298,58 +7294,58 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property _Writer_Extended() As String
+        Public Property Writer() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomFields._Writer_ExtendedColumn),String)
+                    Return CType(Me(Me.tableCustomFields.WriterColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer-Extended in Tabelle CustomFields ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle CustomFields ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableCustomFields._Writer_ExtendedColumn) = value
+                Me(Me.tableCustomFields.WriterColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property _Certification_Extended() As String
+        Public Property Certification() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomFields._Certification_ExtendedColumn),String)
+                    Return CType(Me(Me.tableCustomFields.CertificationColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Certification-Extended in Tabelle CustomFields ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Certification in Tabelle CustomFields ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableCustomFields._Certification_ExtendedColumn) = value
+                Me(Me.tableCustomFields.CertificationColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Test1() As String
+        Public Property TagLine() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomFields.Test1Column),String)
+                    Return CType(Me(Me.tableCustomFields.TagLineColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Test1 in Tabelle CustomFields ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte TagLine in Tabelle CustomFields ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableCustomFields.Test1Column) = value
+                Me(Me.tableCustomFields.TagLineColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Test2() As String
+        Public Property Studio() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomFields.Test2Column),String)
+                    Return CType(Me(Me.tableCustomFields.StudioColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Test2 in Tabelle CustomFields ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Studio in Tabelle CustomFields ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableCustomFields.Test2Column) = value
+                Me(Me.tableCustomFields.StudioColumn) = value
             End Set
         End Property
         
@@ -7378,43 +7374,43 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function Is_Writer_ExtendedNull() As Boolean
-            Return Me.IsNull(Me.tableCustomFields._Writer_ExtendedColumn)
+        Public Function IsWriterNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.WriterColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub Set_Writer_ExtendedNull()
-            Me(Me.tableCustomFields._Writer_ExtendedColumn) = Global.System.Convert.DBNull
+        Public Sub SetWriterNull()
+            Me(Me.tableCustomFields.WriterColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function Is_Certification_ExtendedNull() As Boolean
-            Return Me.IsNull(Me.tableCustomFields._Certification_ExtendedColumn)
+        Public Function IsCertificationNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CertificationColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub Set_Certification_ExtendedNull()
-            Me(Me.tableCustomFields._Certification_ExtendedColumn) = Global.System.Convert.DBNull
+        Public Sub SetCertificationNull()
+            Me(Me.tableCustomFields.CertificationColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsTest1Null() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.Test1Column)
+        Public Function IsTagLineNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.TagLineColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetTest1Null()
-            Me(Me.tableCustomFields.Test1Column) = Global.System.Convert.DBNull
+        Public Sub SetTagLineNull()
+            Me(Me.tableCustomFields.TagLineColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsTest2Null() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.Test2Column)
+        Public Function IsStudioNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.StudioColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetTest2Null()
-            Me(Me.tableCustomFields.Test2Column) = Global.System.Convert.DBNull
+        Public Sub SetStudioNull()
+            Me(Me.tableCustomFields.StudioColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _

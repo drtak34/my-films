@@ -134,9 +134,12 @@
     <Import Include="System.Threading" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntMovieCatalog1.Designer.vb">
+    <Compile Include="AntMovieCatalog.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AntMovieCatalog.vb">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </Compile>
     <Compile Include="AntProcessor.vb" />
@@ -192,6 +195,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="My Project\VersionInfo.vb" />
+    <Compile Include="My Project\_Old\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -277,15 +285,13 @@
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
     <None Include="AntMovieCatalog.xsd">
-      <SubType>
-      </SubType>
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AntMovieCatalog1.Designer.vb</LastGenOutput>
+      <LastGenOutput>AntMovieCatalog.Designer.vb</LastGenOutput>
     </None>
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CatalogDataTable.datasource" />
     <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CustomFieldDataTable.datasource" />
     <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CustomFieldsPropertiesDataTable.datasource" />
     <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+MovieDataTable.datasource" />
@@ -295,6 +301,9 @@
     <None Include="Resources\film-reel-128x128.png" />
     <None Include="app.config" />
     <None Include="Resources\google_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\_Old\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
