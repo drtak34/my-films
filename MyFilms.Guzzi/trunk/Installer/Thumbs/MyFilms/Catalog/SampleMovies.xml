@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <AntMovieCatalog>
   <Catalog>
-    <Properties />
+    <Properties Owner="SampleOwner" Mail="myfilms@gmail.com" Site="www.team-mediaportal.com" Description="Sample description" />
+    <CustomFieldsProperties />
     <Contents />
   </Catalog>
+  <Persons>
+  </Persons>
+  <MyFilmsSettings>
+   <Users>
+    <User Name="TestUser" Age="99" />
+   </Users>
+  </MyFilmsSettings>
 </AntMovieCatalog>
