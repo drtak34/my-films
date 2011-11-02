@@ -34,8 +34,14 @@ Public Class Form1
 
 #If CONFIG = "Release" Then
         ToolStripMenuItemDebug.Visible = False
+        ToolStripMenuItemOptions.Visible = False
+        ViewPersons.Visible = False
+        ViewCatalog.Visible = False
 #Else
         ToolStripMenuItemDebug.Visible = True
+        ToolStripMenuItemOptions.Visible = True
+        ViewPersons.Visible = True
+        ViewCatalog.Visible = True
 #End If
 
 
