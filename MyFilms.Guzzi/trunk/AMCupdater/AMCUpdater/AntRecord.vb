@@ -1294,8 +1294,11 @@ Public Class AntRecord
             If _InternetLookupOK = True Then
                 TempValue = _InternetData(Grabber_Output.OriginalTitle)
                 If TempValue Is Nothing Or TempValue = "" Then
-                    _InternetLookupOK = False
-                    _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : Matching the movie was successful, but grabber failed getting movie details data (title)"
+                    TempValue = _InternetData(Grabber_Output.TranslatedTitle)
+                    If TempValue Is Nothing Or TempValue = "" Then
+                        _InternetLookupOK = False
+                        _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : Matching the movie was successful, but grabber failed getting movie details data (title)"
+                    End If
                 End If
             End If
 
