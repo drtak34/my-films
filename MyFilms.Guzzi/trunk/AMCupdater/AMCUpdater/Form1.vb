@@ -2789,10 +2789,10 @@ Public Class Form1
 
         If personRows.Count > 0 Then
             personRows(0).Name = person
-            'personRows(0).IsActor = False
-            'personRows(0).IsProducer = False
-            'personRows(0).IsDirector = False
-            'personRows(0).IsWriter = False
+            personRows(0).IsActor = False
+            personRows(0).IsProducer = False
+            personRows(0).IsDirector = False
+            personRows(0).IsWriter = False
             Select Case type
                 Case PersonType.Actor
                     personRows(0).IsActor = True
@@ -2808,10 +2808,10 @@ Public Class Form1
             Dim newPerson As AMCUpdater.AntMovieCatalog.PersonRow
             newPerson = PersonBindingSource.DataSource.NewPersonRow()
             newPerson.Name = person
-            'newPerson.IsActor = False
-            'newPerson.IsProducer = False
-            'newPerson.IsDirector = False
-            'newPerson.IsWriter = False
+            newPerson.IsActor = False
+            newPerson.IsProducer = False
+            newPerson.IsDirector = False
+            newPerson.IsWriter = False
             Select Case type
                 Case PersonType.Actor
                     newPerson.IsActor = True
