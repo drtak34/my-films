@@ -3809,6 +3809,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
               LogMyFilms.Debug("GrabInternetDetails - interactive choice: '" + strChoice + "'");
 
+              //GrabberScript script = new GrabberScript(wscript);
               GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
               if (dlgPrgrs != null)
               {
@@ -3817,7 +3818,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgPrgrs.ShowWaitCursor = true;
                 dlgPrgrs.DisableCancel(true);
                 dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Internet Details Grabber"));
-                dlgPrgrs.SetLine(1, "Loading Movie Details ...");
+                dlgPrgrs.SetLine(1, "Loading Cover(s) ["+ script.DBName + "] ...");
                 dlgPrgrs.Percentage = 0;
                 dlgPrgrs.NeedRefresh();
                 dlgPrgrs.ShouldRenderLayer();
@@ -3878,6 +3879,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   setGUIProperty("picture", oldPicture);
                   GUIWindowManager.Process();
                   return;
+                }
+                else
+                {
+                  setGUIProperty("picture", "");
+                  GUIWindowManager.Process();
                 }
               }
               if (newPicture != tmpPicture)
