@@ -1359,6 +1359,12 @@ Public Class AntRecord
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
+            CurrentAttribute = "Edition" ' Get "Edition" from filename
+            If IsUpdateRequested(CurrentAttribute) = True Then
+                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+            End If
+
             CurrentAttribute = "Date"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Date")
@@ -1827,6 +1833,13 @@ Public Class AntRecord
                     TempValue = _InternetData(Grabber_Output.Studio)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
+
+                'CurrentAttribute = "Edition"
+                'If IsUpdateRequested(CurrentAttribute) = True Then
+                '    TempValue = _InternetData(Grabber_Output.Edition)
+                '    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                'End If
+
             End If
 
             'get fanart

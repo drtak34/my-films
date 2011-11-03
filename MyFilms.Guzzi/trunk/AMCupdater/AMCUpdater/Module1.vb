@@ -955,7 +955,6 @@ Module Module1
     End Function
 
 
-
     Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String, ByVal Group_Name_Identifier As String)
         Dim ReturnValue As String = String.Empty
 
@@ -1015,7 +1014,20 @@ Module Module1
 
     End Function
 
+    Public Function GetEdition(ByVal FilePath As String, ByVal Movie_Title_Handling As String)
+        Dim ReturnValue As String = "Standard Edition"
 
+        If FilePath.ToLower.Contains("extended") = True Then
+            ReturnValue = "Extended Edition"
+        ElseIf FilePath.ToLower.Contains("collector") = True Then
+            ReturnValue = "Collectors Edition"
+        ElseIf FilePath.ToLower.Contains("director") = True Then
+            ReturnValue = "Directors Cut"
+        ElseIf FilePath.ToLower.Contains("director") = True Then
+            ReturnValue = "Directors Cut"
+        End If
+        Return ReturnValue
+    End Function
 
     <STAThread()> _
     Public Sub LogEvent(ByVal EventString As String, ByVal LogLevel As EventLogLevel)
@@ -1356,5 +1368,38 @@ Module Module1
         End If
         Return Name
     End Function
+
+    '<FlagsAttribute()> Public Enum EAccessType As Integer
+    '    change = 1
+    '    insert = 2
+    '    delete = 4
+    '    move = 8
+    '    copy = 16
+    'End Enum
+
+    '' ermittelt die EmumMember Namen
+    '' Bsp: ist Value 7 (change AND insert AND delete) ist das Ergebnis {"change", "insert", "delete"}
+    'Public Function GetEnumItemNames(ByVal Value As EAccessType) As String()
+    '    Dim a As String
+    '    Dim b As String
+    '    Dim c As String()
+
+    '    a = Value.ToString
+    '    a = a.Replace(" ", "")
+    '    c = Split(a, ",")
+
+    '    a = ""
+    '    For Each b In c
+    '        If a <> "" Then a &= ","
+    '        a &= GetEnumValue(b)
+    '    Next
+    '    c = Split(a, ",")
+    '    Return c
+    'End Function
+
+    '' Ermittel den EnumMember Wert anhand dessen Namen 
+    'Private Function GetEnumValue(ByVal strName As String) As EAccessType
+    '    Enum.Parse(EAccessType.GetType(), strName) ' @_ntr_: danke ;-)
+    'End Function
 
 End Module
