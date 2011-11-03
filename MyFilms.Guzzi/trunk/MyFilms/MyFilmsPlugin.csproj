@@ -191,6 +191,7 @@
     <Compile Include="MyFilmsGUI\MyFilms.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsActors.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsActorsInfo.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsCoverManager.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsDetail.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsDialogSetRating.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsThumbs.cs" />

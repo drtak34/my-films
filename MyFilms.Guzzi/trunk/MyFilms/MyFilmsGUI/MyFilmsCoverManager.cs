@@ -33,7 +33,7 @@ using MyFilmsPlugin.MyFilms.Utils;
 
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
-    class ArtworkChooser : GUIWindow
+    class MyFilmsCoverManager : GUIWindow
     {
         [SkinControlAttribute(50)]
         protected GUIFacadeControl m_Facade = null;
@@ -105,7 +105,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bool m_bQuickSelect = false;
 
         # region DownloadWorker
-        static ArtworkChooser()
+        static MyFilmsCoverManager()
         {         
             // lets set up the downloader            
             downloadingWorker.WorkerSupportsCancellation = true;
@@ -193,17 +193,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         public static int GetWindowID
-        { get { return MyFilms.ID_MyFilmsArtwork; } }
+        { get { return MyFilms.ID_MyFilmsCoverManager; } }
         
         public override int GetID
-        { get { return MyFilms.ID_MyFilmsArtwork; } }
+        { get { return MyFilms.ID_MyFilmsCoverManager; } }
 
         public int GetWindowId()
-        { return MyFilms.ID_MyFilmsArtwork; }
+        { return MyFilms.ID_MyFilmsCoverManager; }
 
         public override bool Init()
         {
-            String xmlSkin = GUIGraphicsContext.Skin + @"\MyFilmsArtwork.xml";            
+            String xmlSkin = GUIGraphicsContext.Skin + @"\MyFilmsCoverManager.xml";            
             return Load(xmlSkin);
         }
 

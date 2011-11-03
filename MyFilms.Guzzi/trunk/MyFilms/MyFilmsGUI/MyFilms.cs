@@ -202,7 +202,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const int ID_MyFilmsActors = 7989;
     public const int ID_MyFilmsThumbs = 7990;
     public const int ID_MyFilmsActorsInfo = 7991;
-    public const int ID_MyFilmsArtwork = 7992;
+    public const int ID_MyFilmsCoverManager = 7992;
 
     public const int ID_BrowseTheWeb = 54537689;
     public const int ID_OnlineVideos = 4755;

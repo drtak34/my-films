@@ -1131,7 +1131,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     //}
 
-                    if (ExtendedStartmode("Details context: Change Local Cover requires separate screen and is not yet implemented)"))
+                    if (ExtendedStartmode("Details context: Manage Local Cover requires separate screen and is not yet implemented)"))
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Select Cover 
                       choiceViewMenu.Add("selectcover");
@@ -1907,8 +1907,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "selectcover":
-                    // ToDo: Create new screen for selection
+                    MyFilmsCoverManager cm = null;
+                    LogMyFilms.Debug("Switching to Cover Manager Window");
+                    if (cm == null)
+                    {
+                      cm = new MyFilmsCoverManager();
+                        GUIWindow cmwindow = (GUIWindow)cm;
+                        GUIWindowManager.Add(ref cmwindow);
+                        cm.Init();
+                    }
+                    cm.SeriesID = 0;
+                    cm.setPageTitle("Cover Manager");
+                    GUIWindowManager.ActivateWindow(cm.GetID, false);
                     break;
+
                 case "loadcover":
                     title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
                     mediapath = GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
