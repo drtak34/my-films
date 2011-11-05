@@ -3602,8 +3602,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string sUnWatchedFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayunwatched.png";
 
       // Not Available (Files are not Local) Images
-      string sWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlaywatched.png";
-      string sUnWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayunwatched.png";
+      string sWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAwatched.png";
+      string sUnWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAunwatched.png";
 
       if (bWatched)
       {
