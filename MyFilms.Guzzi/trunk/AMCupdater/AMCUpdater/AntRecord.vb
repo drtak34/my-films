@@ -1337,6 +1337,14 @@ Public Class AntRecord
                 End If
             End If
 
+            'Add Edition, if available and requested
+            TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+            If TempValue <> "" Then
+                If CurrentSettings.Edition_Name_Applies_To = "Original Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
+                    _XMLElement.Attributes("OriginalTitle").Value = _XMLElement.Attributes("OriginalTitle").Value & " (" & TempValue & ")"
+                End If
+            End If
+
             ' Guzzi: Original Code does remove old entries with same otitle name
             'Try to see if entry already exist with empty movie filename => delete the new entry and update existing one
             If _DatabaseFields("originaltitle") = True Or _DatabaseFields("translatedtitle") = True Then
@@ -1577,6 +1585,14 @@ Public Class AntRecord
                                 _XMLElement.Attributes("TranslatedTitle").Value = _GroupName.ToString & "\" & _XMLElement.Attributes("TranslatedTitle").Value
                             End If
                         End If
+                    End If
+                End If
+
+                'Add Edition, if available and requested
+                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                If TempValue <> "" Then
+                    If CurrentSettings.Edition_Name_Applies_To = "Translated Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
+                        _XMLElement.Attributes("TranslatedTitle").Value = _XMLElement.Attributes("TranslatedTitle").Value & " (" & TempValue & ")"
                     End If
                 End If
 

@@ -130,6 +130,9 @@
   <Values Option="Group_Name_Applies_To">
     <Value>Original Title</Value>
   </Values>
+  <Values Option="Edition_Name_Applies_To">
+    <Value></Value>
+  </Values>
   <Values Option="Parse_Playlist_Files">
     <Value>False</Value>
   </Values>

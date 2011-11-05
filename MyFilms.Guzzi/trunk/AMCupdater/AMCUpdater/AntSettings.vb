@@ -501,6 +501,14 @@ Public Class AntSettings
             SetAttribute("Group_Name_Applies_To", value)
         End Set
     End Property
+    Public Property Edition_Name_Applies_To() As String
+        Get
+            Return ReadAttribute("Edition_Name_Applies_To")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Edition_Name_Applies_To", value)
+        End Set
+    End Property
     Public Property Parse_Playlist_Files() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Parse_Playlist_Files").ToLower
@@ -739,6 +747,7 @@ Public Class AntSettings
         dt.Rows.Add("Check_Field_Handling", "True")
         dt.Rows.Add("Folder_Name_Is_Group_Name", "False")
         dt.Rows.Add("Group_Name_Applies_To", "Original Title")
+        dt.Rows.Add("Edition_Name_Applies_To", "Original Title")
         dt.Rows.Add("Parse_Playlist_Files", "False")
         dt.Rows.Add("Parse_Trailers", "False")
         dt.Rows.Add("Store_Image_With_Relative_Path", "True")

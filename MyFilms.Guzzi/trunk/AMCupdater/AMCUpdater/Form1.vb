@@ -2221,6 +2221,7 @@ Public Class Form1
         CurrentSettings.Filter_Strings = FilterString
 
         CurrentSettings.Group_Name_Applies_To = cbGroupNameAppliesTo.SelectedItem.ToString
+        CurrentSettings.Edition_Name_Applies_To = cbEditionNameAppliesTo.SelectedItem.ToString
         CurrentSettings.Master_Title = cbMasterTitle.SelectedItem.ToString
         CurrentSettings.Grabber_Override_Language = chkGrabberOverrideLanguage.Text.ToString()
         CurrentSettings.Grabber_Override_GetRoles = chkGrabberOverrideGetRoles.Text.ToString
@@ -2290,6 +2291,7 @@ Public Class Form1
             End If
 
             cbGroupNameAppliesTo.SelectedItem = CurrentSettings.Group_Name_Applies_To
+            cbEditionNameAppliesTo.SelectedItem = CurrentSettings.Edition_Name_Applies_To
             cbMasterTitle.SelectedItem = CurrentSettings.Master_Title
             chkGrabberOverrideLanguage.Text = CurrentSettings.Grabber_Override_Language
             chkGrabberOverrideGetRoles.Text = CurrentSettings.Grabber_Override_GetRoles
