@@ -1015,18 +1015,39 @@ Module Module1
     End Function
 
     Public Function GetEdition(ByVal FilePath As String, ByVal Movie_Title_Handling As String)
-        Dim ReturnValue As String = "Standard Edition"
+        Dim ReturnValue As String = ""
+
+        If FilePath.ToLower.Contains("standard") = True Then
+            ReturnValue = AddToCommaList(ReturnValue, "Standard Edition")
+        End If
 
         If FilePath.ToLower.Contains("extended") = True Then
-            ReturnValue = "Extended Edition"
-        ElseIf FilePath.ToLower.Contains("collector") = True Then
-            ReturnValue = "Collectors Edition"
-        ElseIf FilePath.ToLower.Contains("director") = True Then
-            ReturnValue = "Directors Cut"
-        ElseIf FilePath.ToLower.Contains("director") = True Then
-            ReturnValue = "Directors Cut"
+            ReturnValue = AddToCommaList(ReturnValue, "Extended Edition")
         End If
+
+        If FilePath.ToLower.Contains("collector") = True Then
+            ReturnValue = AddToCommaList(ReturnValue, "Collectors Edition")
+        End If
+
+        If FilePath.ToLower.Contains("director") = True Then
+            ReturnValue = AddToCommaList(ReturnValue, "Directors Cut")
+        End If
+
+        If FilePath.ToLower.Contains("unrated") = True Then
+            ReturnValue = AddToCommaList(ReturnValue, "Unrated")
+        End If
+
         Return ReturnValue
+    End Function
+
+    Public Function AddToCommaList(ByVal CommaList As String, ByVal Value As String) As String
+
+        If CommaList.Length = 0 Then
+            CommaList = Value
+        Else
+            CommaList = CommaList + ", " + Value
+        End If
+        Return CommaList
     End Function
 
     <STAThread()> _
