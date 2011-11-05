@@ -712,7 +712,8 @@ namespace MyFilmsPlugin {
         private void InitExpressions() {
             this.Movie.DateAddedColumn.Expression = "Convert(Date,\'System.DateTime\')";
             this.Movie.Length_NumColumn.Expression = "Convert(Length,\'System.Int32\')";
-            this.Movie.PersonsColumn.Expression = "Actors + \', \' + Producer + \', \' + Director + \', \' + Writer";
+            this.Movie.PersonsColumn.Expression = "ISNULL(Actors,\' \') + \', \' + ISNULL(Producer, \' \') + \', \' + ISNULL(Director, \' \') " +
+                "+ \', \' + ISNULL(Writer, \' \')";
         }
         
         public delegate void CatalogRowChangeEventHandler(object sender, CatalogRowChangeEvent e);
@@ -3008,7 +3009,8 @@ namespace MyFilmsPlugin {
             private void InitExpressions() {
                 this.DateAddedColumn.Expression = "Convert(Date,\'System.DateTime\')";
                 this.Length_NumColumn.Expression = "Convert(Length,\'System.Int32\')";
-                this.PersonsColumn.Expression = "Actors + \', \' + Producer + \', \' + Director + \', \' + Writer";
+                this.PersonsColumn.Expression = "ISNULL(Actors,\' \') + \', \' + ISNULL(Producer, \' \') + \', \' + ISNULL(Director, \' \') " +
+                    "+ \', \' + ISNULL(Writer, \' \')";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

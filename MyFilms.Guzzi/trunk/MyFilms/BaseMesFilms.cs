@@ -1350,6 +1350,12 @@ namespace MyFilmsPlugin.MyFilms
               case "IsOnlineTrailer":
               case "isonlinetrailer":
                 return GUILocalizeStrings.Get(10798950);
+              case "Persons":
+              case "persons":
+                return GUILocalizeStrings.Get(10798951);
+              case "CategoryTrakt":
+              case "categorytrakt":
+                return GUILocalizeStrings.Get(10798952);
 
               default:
                 return string.Empty;

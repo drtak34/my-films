@@ -200,7 +200,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" 
                 && dc.ColumnName != "Watched" && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" 
                 && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" 
-                && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio") 
+                && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio" 
+                && dc.ColumnName != "Persons"  && dc.ColumnName != "CategoryTrakt")
                 // All those fieds are currently not supported by ANT-MC - they will be added, if CatalogType changes to external catalog to the respective fields
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {

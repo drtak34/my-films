@@ -434,7 +434,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlg.Reset();
                 dlg.SetHeading("MyFilmsCoverManager");
 
-                GUIListItem pItem;
+                //GUIListItem pItem;
                 //if (DBOption.GetOptions(DBOption.cFanartRandom))
                 //{
                 //    // if random it doesnt make sense to offer an option to explicitally use an available Artwork
@@ -1111,7 +1111,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             System.IO.File.Delete(FullLocalPath);
             //LogMyFilms.Debug("Fanart Deleted: " + FullLocalPath);
           }
-          catch (Exception ex)
+          catch (Exception)
           {
             //LogMyFilms.Debug("Failed to delete file: " + FullLocalPath + " (" + ex.Message + ")");
           }
@@ -1136,7 +1136,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         List<int> seriesids = new List<int>();
 
-        string sqlQuery = "SELECT DISTINCT seriesID FROM Fanart";
+        //string sqlQuery = "SELECT DISTINCT seriesID FROM Fanart";
         //SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
 
         //if (results.Rows.Count > 0)

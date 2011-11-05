@@ -359,6 +359,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         break;
                 }
                 StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);
+                StrSelectViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelectViews", string.Empty);
                 StrActors = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrActors", string.Empty);
                 StrTitleSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrTitleSelect", string.Empty);
                 StrFilmSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrFilmSelect", string.Empty);
@@ -493,9 +494,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 XmlConfig.Dispose();
             } // End reading config
-          
+
             if (StrSelect == "")
-                StrSelect = StrTitle1.ToString() + " not like ''";
+              StrSelect = StrTitle1.ToString() + " not like ''";
+            //if (StrSelectViews == "")
+            //  StrSelectViews = StrTitle1.ToString() + " not like ''";
             if (StrSort[0].Length == 0)
                 StrSort[0] = "(none)";
             if (StrSort[1].Length == 0)
@@ -685,8 +688,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private string strSelect = string.Empty;
         public string StrSelect
         {
-            get { return strSelect; }
-            set { strSelect = value; }
+          get { return strSelect; }
+          set { strSelect = value; }
+        }
+        private string strSelectViews = string.Empty;
+        public string StrSelectViews
+        {
+          get { return strSelectViews; }
+          set { strSelectViews = value; }
         }
         private string strDirStor = string.Empty;
         public string StrDirStor
@@ -1527,6 +1536,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelectViews", MyFilms.conf.StrSelectViews);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MyFilms.conf.StrActors);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
