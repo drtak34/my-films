@@ -2142,6 +2142,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Check and create Group thumb folder ...
       if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
         System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+      bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
 
       foreach (DataRow sr in r)
       {
@@ -2297,6 +2298,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
                 item.IsRemote = true;
           }
+          // load special icons to indicate watched/available flags in listcontrol
+          if (IsPinIconsAvailable)
+            LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
+
           facadeDownloadItems.Add(item);
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
           facadeView.Add(item);
@@ -3570,6 +3575,68 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return wtab;
     }
 
+    private bool LoadWatchedFlagPossible()
+    {
+      // Available (Files are Local) Images
+      string sWatchedFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlaywatched.png";
+      string sUnWatchedFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayunwatched.png";
+
+      // Not Available (Files are not Local) Images
+      string sWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAwatched.png";
+      string sUnWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAunwatched.png";
+
+      // return if images dont exists
+      if (!(System.IO.File.Exists(sWatchedFilename) &&
+            System.IO.File.Exists(sUnWatchedFilename) &&
+            System.IO.File.Exists(sWatchedNAFilename) &&
+            System.IO.File.Exists(sUnWatchedNAFilename)))
+        return false;
+
+      return true;
+    }
+
+    private bool LoadWatchedFlag(GUIListItem item, bool bWatched, bool bAvailable)
+    {
+      // Available (Files are Local) Images
+      string sWatchedFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlaywatched.png";
+      string sUnWatchedFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayunwatched.png";
+
+      // Not Available (Files are not Local) Images
+      string sWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlaywatched.png";
+      string sUnWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayunwatched.png";
+
+      if (bWatched)
+      {
+        // Load watched flag image                                
+        if (!bAvailable)
+        {
+          // Load alternative image
+          //item.IconImage = sWatchedNAFilename;
+          item.PinImage = sWatchedNAFilename;
+        }
+        else
+        {
+          //item.IconImage = sWatchedFilename;
+          item.PinImage = sWatchedFilename;
+        }
+      }
+      else
+      {
+        // Load un-watched flag image                
+        if (!bAvailable)
+        {
+          // Load alternative image
+          //item.IconImage = sUnWatchedNAFilename;
+          item.PinImage = sUnWatchedNAFilename;
+        }
+        else
+        {
+          //item.IconImage = sUnWatchedFilename;
+          item.PinImage = sUnWatchedFilename;
+        }
+      }
+      return true;
+    }
 
     /// <summary>Selects records for display grouping them as required</summary>
     /// <param name="WstrSelect">Select this kind of records</param>

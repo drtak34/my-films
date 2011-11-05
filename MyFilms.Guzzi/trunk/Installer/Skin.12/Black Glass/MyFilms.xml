@@ -329,6 +329,8 @@ End additional Backdrops  -->
 					<IconXOff>10</IconXOff>
 					<IconYOff>10</IconYOff>
 					<height>590</height>
+					<PinIconXOff>49</PinIconXOff>
+					<PinIconYOff>36</PinIconYOff>
 				</control>
 				<control>
 					<description>Filmstrip view</description>
