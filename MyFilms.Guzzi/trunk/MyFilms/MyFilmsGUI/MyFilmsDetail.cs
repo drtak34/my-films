@@ -5637,6 +5637,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("db.calc.aspectratio.value", log);
             clearGUIProperty("db.calc.imageformat.value", log);
 
+            clearGUIProperty("db.actors.actor1.name", log);
+            clearGUIProperty("db.actors.actor1.image", log);
+            clearGUIProperty("db.actors.actor2.name", log);
+            clearGUIProperty("db.actors.actor2.image", log);
+            clearGUIProperty("db.actors.actor3.name", log);
+            clearGUIProperty("db.actors.actor3.image", log);
+            clearGUIProperty("db.actors.actor4.name", log);
+            clearGUIProperty("db.actors.actor4.image", log);
+            clearGUIProperty("db.actors.actor5.name", log);
+            clearGUIProperty("db.actors.actor5.image", log);
+
             clearGUIProperty("user.mastertitle.label", log);
             clearGUIProperty("user.mastertitle.value", log);
             clearGUIProperty("user.mastertitle.groupname", log);
@@ -5871,6 +5882,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
                                 }
                             setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                            Load_Detailed_DB_PushActorsToSkin(wstring);
                             break;
                         case "description":
                         case "comments":
@@ -6135,6 +6147,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //    }
             //  }
             //}
+        }
+
+        private static void Load_Detailed_DB_PushActorsToSkin(string actors)
+        {
+          ArrayList w_tableau = new ArrayList();
+          w_tableau = MyFilms.Search_String(actors);
+          int i = 0;
+          foreach (object t in w_tableau)
+          {
+            string actorname = t.ToString();
+            i = i + 1;
+            if (i < 6)
+            {
+              setGUIProperty("db.actors.actor" + i + ".name", actorname, true);
+              if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+              {
+                string personartworkpath = MyFilms.conf.StrPathArtist;
+                setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ",jpg", true);
+              }
+            }
+          }
         }
 
         //-------------------------------------------------------------------------------------------
