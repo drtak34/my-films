@@ -1838,6 +1838,12 @@ Public Class AntRecord
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
+                CurrentAttribute = "Imdb_Id"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.IMDB_Id)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                End If
+
                 CurrentAttribute = "Imdb_Rank"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.IMDBrank)
