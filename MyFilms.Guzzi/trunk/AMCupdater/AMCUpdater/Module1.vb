@@ -1017,25 +1017,55 @@ Module Module1
     Public Function GetEdition(ByVal FilePath As String, ByVal Movie_Title_Handling As String)
         Dim ReturnValue As String = ""
 
-        If FilePath.ToLower.Contains("standard") = True Then
-            ReturnValue = AddToCommaList(ReturnValue, "Standard Edition")
-        End If
+        Dim RegCheck As Regex
+        Dim Matches As MatchCollection
 
-        If FilePath.ToLower.Contains("extended") = True Then
-            ReturnValue = AddToCommaList(ReturnValue, "Extended Edition")
-        End If
 
-        If FilePath.ToLower.Contains("collector") = True Then
-            ReturnValue = AddToCommaList(ReturnValue, "Collectors Edition")
-        End If
+        For Each Rules In CurrentSettings.Edition_Strings.Split(";")
+            Dim Rule() As String = Rules.Split("|")
+            Dim EditionSearchExpression As String = Rule(0).ToString
+            Dim EditionReplaceExpression As String = Rule(1).ToString
+            Dim EditionFound As Boolean = False
 
-        If FilePath.ToLower.Contains("director") = True Then
-            ReturnValue = AddToCommaList(ReturnValue, "Directors Cut")
-        End If
+            If EditionSearchExpression.Length > 0 Then
+                If EditionSearchExpression.Length = 1 Then 'Probably not a regex, due to complexity of any single character, just do a replace.
+                    If FilePath.Contains(EditionSearchExpression) Then
+                        EditionFound = True
+                    End If
+                Else
+                    RegCheck = New Regex(EditionSearchExpression) 'This should work for any multi-character string:
+                    Matches = RegCheck.Matches(FilePath)
+                    If (Matches.Count > 0) Then
+                        EditionFound = True
+                    End If
+                End If
+            End If
+            If (EditionFound = True) Then
+                ReturnValue = AddToCommaList(ReturnValue, EditionReplaceExpression)
+            End If
+        Next
 
-        If FilePath.ToLower.Contains("unrated") = True Then
-            ReturnValue = AddToCommaList(ReturnValue, "Unrated")
-        End If
+
+        '[sS]tandard|Standard Edition;[eE]xtended|Extended Edition;[cC]ollector|Collectors Edition;[dD]irector|Directors Cut;[uU]nrated|Unrated
+        'If FilePath.ToLower.Contains("standard") = True Then
+        '    ReturnValue = AddToCommaList(ReturnValue, "Standard Edition")
+        'End If
+
+        'If FilePath.ToLower.Contains("extended") = True Then
+        '    ReturnValue = AddToCommaList(ReturnValue, "Extended Edition")
+        'End If
+
+        'If FilePath.ToLower.Contains("collector") = True Then
+        '    ReturnValue = AddToCommaList(ReturnValue, "Collectors Edition")
+        'End If
+
+        'If FilePath.ToLower.Contains("director") = True Then
+        '    ReturnValue = AddToCommaList(ReturnValue, "Directors Cut")
+        'End If
+
+        'If FilePath.ToLower.Contains("unrated") = True Then
+        '    ReturnValue = AddToCommaList(ReturnValue, "Unrated")
+        'End If
 
         Return ReturnValue
     End Function

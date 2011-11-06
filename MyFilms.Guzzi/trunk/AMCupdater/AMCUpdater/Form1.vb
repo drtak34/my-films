@@ -2220,6 +2220,19 @@ Public Class Form1
         End If
         CurrentSettings.Filter_Strings = FilterString
 
+        Dim EditionString As String = String.Empty
+        For Each dgRow In dgEditionStrings.Rows
+            If dgRow.Cells(0).Value IsNot Nothing And dgRow.Cells(1).Value IsNot Nothing Then
+                If dgRow.Cells(0).Value.ToString.Length > 0 And dgRow.Cells(1).Value.ToString.Length > 0 Then
+                    EditionString += dgRow.Cells(0).Value.ToString & "|" & dgRow.Cells(1).Value.ToString & ";"
+                End If
+            End If
+        Next
+        If EditionString.Length > 0 Then
+            EditionString = EditionString.Substring(0, EditionString.Length - 1) ' strip last separator
+        End If
+        CurrentSettings.Edition_Strings = EditionString
+
         CurrentSettings.Group_Name_Applies_To = cbGroupNameAppliesTo.SelectedItem.ToString
         CurrentSettings.Edition_Name_Applies_To = cbEditionNameAppliesTo.SelectedItem.ToString
         CurrentSettings.Master_Title = cbMasterTitle.SelectedItem.ToString
@@ -2366,6 +2379,18 @@ Public Class Form1
             dgFilterStrings.DataSource = dtFilterStrings
             dgFilterStrings.Columns(0).Width = dgFilterStrings.Width - dgFilterStrings.RowHeadersWidth - 20
 
+            dgEditionStrings.Rows.Clear()
+            If CurrentSettings.Edition_Strings.Length > 0 Then
+                Dim EditionStrings() As String
+                EditionStrings = CurrentSettings.Edition_Strings.Split(";")
+                If EditionStrings.Length > 0 Then
+                    For i As Integer = 0 To EditionStrings.Length - 1
+                        Dim ValueStrings() As String
+                        ValueStrings = EditionStrings(i).Split("|")
+                        dgEditionStrings.Rows.Add(ValueStrings(0), ValueStrings(1))
+                    Next
+                End If
+            End If
 
             If (CurrentSettings.Import_File_On_Internet_Lookup_Failure = "True") Then
                 chkImportOnInternetFail.Checked = True

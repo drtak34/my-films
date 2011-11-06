@@ -467,6 +467,14 @@ Public Class AntSettings
             SetAttribute("Filter_Strings", value)
         End Set
     End Property
+    Public Property Edition_Strings() As String
+        Get
+            Return ReadAttribute("Edition_Strings")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Edition_Strings", value)
+        End Set
+    End Property
     Public Property Check_Field_Handling() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Check_Field_Handling").ToLower
@@ -744,6 +752,7 @@ Public Class AntSettings
         dt.Rows.Add("Excluded_Folder_Strings", "")
         dt.Rows.Add("Excluded_File_Strings", "")
         dt.Rows.Add("Filter_Strings", "\([0-9][0-9][0-9][0-9]\)")
+        dt.Rows.Add("Edition_Strings", "[sS]tandard|Standard Edition;[eE]xtended|Extended Edition;[cC]ollector|Collectors Edition;[dD]irector|Directors Cut;[uU]nrated|Unrated")
         dt.Rows.Add("Check_Field_Handling", "True")
         dt.Rows.Add("Folder_Name_Is_Group_Name", "False")
         dt.Rows.Add("Group_Name_Applies_To", "Original Title")
