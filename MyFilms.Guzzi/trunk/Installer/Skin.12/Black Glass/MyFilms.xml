@@ -314,10 +314,11 @@ End additional Backdrops  -->
 					<remoteColor>ffF87B72</remoteColor>
 					<!-- file not present color -->
 
-					<textYOff>8</textYOff>
-					<textXOff>-10</textXOff>
 					<posX>847</posX>
 					<width>433</width>
+					<height>590</height>
+					<textYOff>8</textYOff>
+					<textXOff>-10</textXOff>
 					<textYOff>3</textYOff>
 					<textXOff>-10</textXOff>
 					<textXOff2>420</textXOff2>
@@ -328,9 +329,10 @@ End additional Backdrops  -->
 					<textureNoFocus>bg_facade_line_nofocus.png</textureNoFocus>
 					<IconXOff>10</IconXOff>
 					<IconYOff>10</IconYOff>
-					<height>590</height>
+
 					<PinIconXOff>49</PinIconXOff>
 					<PinIconYOff>36</PinIconYOff>
+
 				</control>
 				<control>
 					<description>Filmstrip view</description>
