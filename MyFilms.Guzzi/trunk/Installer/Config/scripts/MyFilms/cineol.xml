@@ -6,16 +6,16 @@
     <Language>es</Language>
     <Type>details|cover</Type>
     <Version>0.9</Version>
-    <Encoding />
+    <Encoding>UTF-8</Encoding>
     <URLSearch>
       <KeyStartThumb Param1="galeria" Param2="http:_x002F__x002F_www.cineol.net_x002F_galeria">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_www.cineol.net_x002F_multisearch.php_x003F_go_x003D_1_x0026_query_x003D__x0023_Search_x0023__x0026_searchby_x003D_titulo_x0026_orderby_x003D_titulo_x0026_orden_x003D_asc_x0026__x0026_page_x003D__x0023_Page_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023__x003C_h2_x003E_Resultad._x002A__x003F__x003C__x002F_h2_x003E_</KeyStartList>
-      <KeyEndList>_x003C_div_x0020_class_x003D__x0022_paginacion_x0022__x0020_id_x003D__x0022_paginacion-bottom_x0022__x003E_</KeyEndList>
-      <KeyStartPage Param1="" Param2="" />
-      <KeyStepPage />
-      <KeyNextPage />
+      <KeyEndList>_x003C__x0021_--_x0020_CONTENIDO_x0020_fin_x0020_--_x003E_</KeyEndList>
+      <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
+      <KeyStepPage>_x0031_</KeyStepPage>
+      <KeyNextPage>_x0031__x0026_query_x003D_de_x0026_searchby_x003D_titulo_x0026_orderby_x003D_titulo_x0026_orden_x003D_asc_x0026__x0026_page_x003D__x0023_Page_x0023__x0022__x003E_</KeyNextPage>
       <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0022_pelicula._x002A__x003F__x003C_h3_x003E_</KeyStartTitle>
       <KeyEndTitle>_x003C__x002F_a_x003E_</KeyEndTitle>
       <KeyTitleIndex />
@@ -44,7 +44,7 @@
       <KeyOTitleIndex />
       <KeyOTitlePage />
       <KeyStartTTitle Param1="" Param2="">width_x003D__x0022_100_x0022__x0020_height_x003D__x0022_150_x0022__x0020__x0020_title_x003D__x0022_</KeyStartTTitle>
-      <KeyEndTTitle>_x0022_</KeyEndTTitle>
+      <KeyEndTTitle>_x0022__x0020__x0020_alt</KeyEndTTitle>
       <KeyTTitleRegExp />
       <KeyTTitleIndex />
       <KeyTTitlePage />
