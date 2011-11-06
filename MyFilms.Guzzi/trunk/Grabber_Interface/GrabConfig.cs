@@ -2898,18 +2898,21 @@ namespace Grabber_Interface
           case 2:
           case 42:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Cover" + mapped + Environment.NewLine;
-            try
+            if (i > 39) // only show image once !
             {
-              pictureBoxPreviewCover.ImageLocation = Result[i];
+              try
+              {
+                pictureBoxPreviewCover.ImageLocation = Result[i];
 
-              // Create new FileInfo object and get the Length.
-              FileInfo f = new FileInfo(Result[i]);
-              long s1 = f.Length;
-              labelImageSize.Text = s1.ToString();
-            }
-            catch (Exception ex)
-            {
-              MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                // Create new FileInfo object and get the Length.
+                FileInfo f = new FileInfo(Result[i]);
+                long s1 = f.Length;
+                labelImageSize.Text = s1.ToString();
+              }
+              catch (Exception ex)
+              {
+                MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              }
             }
             break;
           case 3:
@@ -4574,6 +4577,45 @@ namespace Grabber_Interface
         TextSearch.Text = openFileDialog1.FileName;
         // button_Load_Click(this, e);
       }
+    }
+
+    private void textBody_TextChanged(object sender, EventArgs e)
+    {
+      try
+      {
+        // Make a DataObject.
+        DataObject data_object = new DataObject();
+
+        // Add the data in various formats.
+        data_object.SetData(DataFormats.Rtf, textBody.Rtf);
+        data_object.SetData(DataFormats.Text, textBody.Text);
+
+        // Copy data to the
+        Clipboard.SetDataObject(data_object);
+      }
+      catch (Exception)
+      {
+      }
+    }
+
+    private void textBodyDetail_TextChanged(object sender, EventArgs e)
+    {
+      try
+      {
+        // Make a DataObject.
+        DataObject data_object = new DataObject();
+
+        // Add the data in various formats.
+        data_object.SetData(DataFormats.Rtf, textBodyDetail.Rtf);
+        data_object.SetData(DataFormats.Text, textBodyDetail.Text);
+
+        // Copy data to the
+        Clipboard.SetDataObject(data_object);
+      }
+      catch (Exception)
+      {
+      }
+
     }
   }
 }
