@@ -11,7 +11,7 @@
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x0022_.src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_www.moviepilot.de_x002F_searches_x003F_q_x003D__x0023_Search_x0023__x0026_type_x003D_movies</URL>
-      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023__x003C_h1_x003E_Suche_x0020__x003C_span_x003E_._x002A__x003F__x003C_ul_x0020_class_x003D__x0027_movies_x0020_list-results_x0027__x003E_</KeyStartList>
+      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023__x003C_h1_x003E_Suche._x002A__x003F__x003C_ul_x0020_class_x003D__x0027_movies_x0020_list-results_x0027__x003E_</KeyStartList>
       <KeyEndList>_x003C_div_x0020_id_x003D__x0027_footer_x0027__x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
