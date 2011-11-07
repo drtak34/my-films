@@ -1419,6 +1419,145 @@ Module Module1
         End If
         Return Name
     End Function
+    Public Function WriteNfoFile(ByVal OutFileName As String, ByVal node As XmlNode, ByVal UpdateOnlyMissing As Boolean, ByVal mastertitle As String)
+        ' Create XmlWriterSettings.
+
+        If (System.IO.File.Exists(OutFileName) And UpdateOnlyMissing) Then
+            Return False ' Do nothing, if existing nfo files should NOT be updated/overwritten
+        End If
+
+        Dim settings As XmlWriterSettings = New XmlWriterSettings()
+        settings.Indent = True
+        settings.Encoding = System.Text.Encoding.Default
+
+        ' Delete existing nfo file, if any
+        If (System.IO.File.Exists(OutFileName)) Then
+            'Dim NewFileName As String = Replace(OutFileName, ".nfo", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".nfo")
+            Dim NewFileName As String = Replace(OutFileName, ".nfo", " - " + "mfbak" + ".nfo")
+            NewFileName = NewFileName.Replace("/", "-")
+            Try
+                If (Not System.IO.File.Exists(NewFileName)) Then
+                    My.Computer.FileSystem.CopyFile(OutFileName, NewFileName, True) ' take a backup files - can be removed later
+                End If
+                System.IO.File.Delete(OutFileName)
+            Catch ex As Exception
+            End Try
+        End If
+
+        ' Create XmlWriter.
+        Using writer As XmlWriter = XmlWriter.Create(OutFileName, settings)
+            ' Begin writing.
+            writer.WriteStartDocument()
+            writer.WriteStartElement("movie") ' Root.
+
+            writer.WriteElementString("number", GetValueFromCurrentNode(node, "Number"))
+            writer.WriteElementString("title", GetValueFromCurrentNode(node, mastertitle))
+            writer.WriteElementString("sorttitle", GetValueFromCurrentNode(node, "FormattedTitle"))
+            writer.WriteElementString("originaltitle", GetValueFromCurrentNode(node, "OriginalTitle"))
+            writer.WriteElementString("translatedtitle", GetValueFromCurrentNode(node, "TranslatedTitle"))
+            writer.WriteElementString("formattedtitle", GetValueFromCurrentNode(node, "FormattedTitle"))
+            writer.WriteElementString("edition", GetValueFromCurrentNode(node, "Edition"))
+            writer.WriteElementString("studio", GetValueFromCurrentNode(node, "Studio"))
+            writer.WriteElementString("imdb_id", GetValueFromCurrentNode(node, "IMDB_Id"))
+            writer.WriteElementString("imdb_rank", GetValueFromCurrentNode(node, "IMDB_Rank"))
+            writer.WriteElementString("tmdb_id", GetValueFromCurrentNode(node, "TMDB_Id"))
+            writer.WriteElementString("checked", GetValueFromCurrentNode(node, "Checked"))
+            writer.WriteElementString("url", GetValueFromCurrentNode(node, "URL"))
+            writer.WriteElementString("rating", GetValueFromCurrentNode(node, "Rating"))
+            writer.WriteElementString("ratinguser", GetValueFromCurrentNode(node, "RatingUser"))
+            writer.WriteElementString("plot", GetValueFromCurrentNode(node, "Description"))
+            writer.WriteElementString("comments", GetValueFromCurrentNode(node, "Comments"))
+            writer.WriteElementString("tagline", GetValueFromCurrentNode(node, "TagLine"))
+            writer.WriteElementString("tags", GetValueFromCurrentNode(node, "Tags"))
+            writer.WriteElementString("runtime", GetValueFromCurrentNode(node, "Length"))
+            writer.WriteElementString("mpaa", GetValueFromCurrentNode(node, "Certification"))
+            writer.WriteElementString("language", GetValueFromCurrentNode(node, "Languages"))
+            writer.WriteElementString("genre", GetValueFromCurrentNode(node, "Category"))
+            writer.WriteElementString("categorytrakt", GetValueFromCurrentNode(node, "CategoryTrakt"))
+
+            writer.WriteElementString("country", GetValueFromCurrentNode(node, "Country"))
+            writer.WriteElementString("year", GetValueFromCurrentNode(node, "Year"))
+            writer.WriteElementString("date", GetValueFromCurrentNode(node, "Date"))
+            writer.WriteElementString("dateadded", GetValueFromCurrentNode(node, "DateAdded"))
+
+            writer.WriteStartElement("Persons")
+            writer.WriteElementString("Borrower", GetValueFromCurrentNode(node, "Borrower"))
+            writer.WriteElementString("Director", GetValueFromCurrentNode(node, "Director"))
+            writer.WriteElementString("Producer", GetValueFromCurrentNode(node, "Producer"))
+            writer.WriteElementString("Writer", GetValueFromCurrentNode(node, "Writer"))
+            writer.WriteElementString("Actors", GetValueFromCurrentNode(node, "Actors"))
+            writer.WriteEndElement()
+
+            'writer.WriteStartElement("actor")
+            'writer.WriteElementString("name", "name1")
+            'writer.WriteElementString("role", "role1")
+            'writer.WriteEndElement()
+
+            'writer.WriteStartElement("writer")
+            'writer.WriteElementString("name", "name1")
+            'writer.WriteElementString("role", "role1")
+            'writer.WriteEndElement()
+
+            writer.WriteStartElement("MediaInfo")
+            writer.WriteElementString("MediaLabel", GetValueFromCurrentNode(node, "MediaLabel"))
+            writer.WriteElementString("MediaType", GetValueFromCurrentNode(node, "MediaType"))
+            writer.WriteElementString("Size", GetValueFromCurrentNode(node, "Size"))
+            writer.WriteElementString("Disks", GetValueFromCurrentNode(node, "Disks"))
+            writer.WriteElementString("Source", GetValueFromCurrentNode(node, "Source"))
+            writer.WriteElementString("SourceTrailer", GetValueFromCurrentNode(node, "SourceTrailer"))
+            writer.WriteElementString("VideoFormat", GetValueFromCurrentNode(node, "VideoFormat"))
+            writer.WriteElementString("VideoBitrate", GetValueFromCurrentNode(node, "VideoBitrate"))
+            writer.WriteElementString("AudioFormat", GetValueFromCurrentNode(node, "AudioFormat"))
+            writer.WriteElementString("AudioBitrate", GetValueFromCurrentNode(node, "AudioBitrate"))
+            writer.WriteElementString("Resolution", GetValueFromCurrentNode(node, "Resolution"))
+            writer.WriteElementString("Framerate", GetValueFromCurrentNode(node, "Framerate"))
+            writer.WriteElementString("Subtitles", GetValueFromCurrentNode(node, "Subtitles"))
+            writer.WriteElementString("Aspectratio", GetValueFromCurrentNode(node, "Aspectratio"))
+            writer.WriteEndElement()
+
+            writer.WriteStartElement("Artwork")
+            writer.WriteElementString("Picture", GetValueFromCurrentNode(node, "Picture"))
+            writer.WriteElementString("Fanart", GetValueFromCurrentNode(node, "Fanart"))
+            writer.WriteEndElement()
+
+            writer.WriteStartElement("Status")
+            writer.WriteElementString("IsOnline", GetValueFromCurrentNode(node, "IsOnline"))
+            writer.WriteElementString("IsOnlineTrailer", GetValueFromCurrentNode(node, "IsOnlineTrailer"))
+            writer.WriteEndElement()
+
+            ' End document.
+            writer.WriteEndElement()
+            writer.WriteEndDocument()
+        End Using
+        Return True
+    End Function
+
+    Private Function GetValueFromCurrentNode(ByVal CurrentNode As XmlNode, ByVal currentAttribute As String) As String
+        Dim attr As Xml.XmlAttribute
+        Dim element As Xml.XmlElement
+        Dim ReturnValue As String = ""
+
+        attr = CurrentNode.Attributes(currentAttribute)
+        element = CurrentNode.Item(currentAttribute)
+        If attr Is Nothing And element Is Nothing Then ' no values exist at all
+            ReturnValue = ""
+        Else
+            If Not attr Is Nothing Then ' check for standard attr value
+                If attr.Value Is Nothing Then
+                    ReturnValue = ""
+                Else
+                    ReturnValue = attr.Value
+                End If
+            ElseIf Not element Is Nothing Then  ' check for enhanced element value
+                If element.InnerText Is Nothing Then
+                    ReturnValue = ""
+                Else
+                    ReturnValue = element.InnerText
+                End If
+            End If
+        End If
+        Return ReturnValue
+    End Function
 
     '<FlagsAttribute()> Public Enum EAccessType As Integer
     '    change = 1

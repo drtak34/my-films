@@ -541,6 +541,8 @@ Public Class Form1
         End If
         AntProcessor.ManualParameterMatchAll = chkManualParametersUpdateAll.Checked
         AntProcessor.ManualMissingFanartDownload = chkManualMissingFanartDownload.Checked
+        AntProcessor.ManualNfoFileHandling = cbManualNfoFileHandling.SelectedItem.ToString
+        AntProcessor.ManualNfoFileOnlyUpdateMissing = chkManualNfoFilesOnlyAddMissing.Checked
         'AntProcessor.DateHandling = cbDateHandling.SelectedValue
         'If AntProcessor.ManualOperation = "Scan Media Data" Then
         'AntProcessor.ManualFieldValue = TxtManualPathToMovies.Text
@@ -1079,10 +1081,15 @@ Public Class Form1
             lblManualDatabaseFieldsPrompt.Visible = False
             chkManualMissingFanartDownload.Visible = False
 
+            lblManualNfoFileHandling.Visible = False
+            cbManualNfoFileHandling.Visible = False
+            chkManualNfoFilesOnlyAddMissing.Visible = False
+
             chkManualUpdateRecordsOnlyMissingData.Visible = False
             chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = False
 
             grpManualUpdatesParameters.Visible = True
+
 
             If cbManualSelectOperation.SelectedItem = "Update Value" Then
                 lblManualEnterNewValue.Visible = True
@@ -1141,6 +1148,13 @@ Public Class Form1
                 chkManualMissingFanartDownload.Visible = True
                 'grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
+            ElseIf cbManualSelectOperation.SelectedItem = "Update NFO File" Then
+                lblManualNfoFileHandling.Visible = True
+                cbManualNfoFileHandling.Visible = True
+                chkManualNfoFilesOnlyAddMissing.Visible = True
+            ElseIf cbManualSelectOperation.SelectedItem = "Delete NFO File" Then
+                lblManualNfoFileHandling.Visible = True
+                cbManualNfoFileHandling.Visible = True
             End If
         End If
         Me.ValidateChildren()
@@ -1231,6 +1245,9 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
     Private Sub cbManualSelectFieldDestination_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualSelectFieldDestination.SelectedIndexChanged
+        Me.ValidateChildren()
+    End Sub
+    Private Sub cbManualNfoFileHandling_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualNfoFileHandling.SelectedIndexChanged
         Me.ValidateChildren()
     End Sub
     Private Sub txtMovieFolder_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMovieFolder.LostFocus
@@ -1547,6 +1564,13 @@ Public Class Form1
                 If txtFanartFolder.Text = String.Empty Then
                     epManualUpdater.SetError(cbManualSelectOperation, "Please select a Path to Fanart download")
                     IsValid = False
+                End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Update NFO File" Or cbManualSelectOperation.SelectedItem = "Delete NFO File" Then
+                If cbManualNfoFileHandling.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualNfoFileHandling, "Please select NFO file handling")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(cbManualNfoFileHandling, "")
                 End If
             ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
                 If IsInternetLookupNeeded() = True Then
@@ -2856,5 +2880,6 @@ Public Class Form1
     Private Sub ToolStripButtonGrabPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonGrabPersons.Click
 
     End Sub
+
 End Class
 

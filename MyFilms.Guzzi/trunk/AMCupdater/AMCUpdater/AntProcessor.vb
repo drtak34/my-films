@@ -1,6 +1,7 @@
 Imports System.Threading
 Imports System.Xml
 Imports System.ComponentModel
+Imports System.Text
 
 Public Class FilmUpdatedEventArgs
     Inherits EventArgs
@@ -67,6 +68,9 @@ Public Class AntProcessor
     Private Shared _ManualInternetLookupAlwaysPrompt As Boolean = False
     Private Shared _ManualMissingFanartDownload As Boolean = True
     Private Shared _ManualMissingTrailer As Boolean = True
+    Private Shared _ManualNfoFileHandling As String
+    Private Shared _ManualNfoFileOnlyUpdateMissing As Boolean
+
     Private Shared _TempXMLBackupFile As String
 
     Private Shared _OperationCancelled As Boolean = False
@@ -284,6 +288,22 @@ Public Class AntProcessor
         End Get
         Set(ByVal value As String)
             _ManualParserPath = value
+        End Set
+    End Property
+    Public Property ManualNfoFileHandling() As String
+        Get
+            Return _ManualNfoFileHandling
+        End Get
+        Set(ByVal value As String)
+            _ManualNfoFileHandling = value
+        End Set
+    End Property
+    Public Property ManualNfoFileOnlyUpdateMissing() As Boolean
+        Get
+            Return _ManualNfoFileOnlyUpdateMissing
+        End Get
+        Set(ByVal value As Boolean)
+            _ManualNfoFileOnlyUpdateMissing = value
         End Set
     End Property
     Public Property ManualExcludedMoviesPath()
@@ -504,6 +524,12 @@ Public Class AntProcessor
         If (_ManualOperation.ToString = "Register Trailer") Then
             LogEvent(" - Register only Missing Trailer : " & _ManualMissingTrailer.ToString, EventLogLevel.ImportantEvent)
         End If
+        If (_ManualOperation.ToString = "Update NFO File") Then
+            LogEvent(" - Update NFO File : " & _ManualNfoFileHandling.ToString, EventLogLevel.ImportantEvent)
+        End If
+        If (_ManualOperation.ToString = "Delete NFO File") Then
+            LogEvent(" - Delete NFO File : " & _ManualNfoFileHandling.ToString, EventLogLevel.ImportantEvent)
+        End If
 
         'Dim XmlDoc As New XmlDocument
         XMLDoc = New XmlDocument
@@ -570,7 +596,6 @@ Public Class AntProcessor
                         End If
                     End If
 
-
                 End If
             End If
         End While
@@ -605,7 +630,8 @@ Public Class AntProcessor
 
             Try
                 My.Computer.FileSystem.CopyFile(CurrentSettings.Manual_XML_File, NewFileName, True)
-                LogEvent("Backing up xml file - done.", EventLogLevel.ImportantEvent)
+                Dim NewFileNameShort As String = System.IO.Path.GetFileName(NewFileName)
+                LogEvent("Backing up xml file - done. (" & NewFileNameShort & ")", EventLogLevel.ImportantEvent)
             Catch ex As Exception
                 LogEvent("ERROR : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorOrSimilar)
             End Try
@@ -658,6 +684,7 @@ Public Class AntProcessor
                     'Update Record
                     'Delete Record
                     'Download Fanart
+                    'Update NFO File
 
                     Case "Update Value"
                         If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
@@ -932,7 +959,136 @@ Public Class AntProcessor
                                 End If
                             End If
                         End If
+                    Case "Update NFO File"
+                        Dim FileToScan As String = String.Empty
+                        Dim AllFilesPath As String = String.Empty
+                        If Not IsNothing(CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field)) Then
+                            FileToScan = CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field).Value
+                        End If
 
+                        If FileToScan.IndexOf(";") > 0 Then
+                            'In case of multi-part files take the first part to internet scan; record the full list in AllFilesPath
+                            AllFilesPath = FileToScan
+                            FileToScan = FileToScan.Substring(0, FileToScan.IndexOf(";"))
+                        End If
+
+                        DoScan = True
+                        ' search Filename
+                        Dim wtitle As String = row("AntTitle").ToString
+                        If IsFileNeeded() = True Then
+                            If (CurrentSettings.Folder_Name_Is_Group_Name) Then
+                                If (CurrentSettings.Group_Name_Applies_To = "Original Title" Or CurrentSettings.Group_Name_Applies_To = "Both Titles") Then
+                                    wtitle = "OriginalTitle"
+                                Else
+                                    If (CurrentSettings.Group_Name_Applies_To = "Translated Title") Then
+                                        wtitle = "TranslatedTitle"
+                                    ElseIf (CurrentSettings.Group_Name_Applies_To = "Formatted Title") Then
+                                        wtitle = "FormattedTitle"
+                                    End If
+                                End If
+                                Try
+                                    wtitle = CurrentNode.Attributes(wtitle).Value
+                                Catch ex As Exception
+                                    wtitle = row("AntTitle").ToString
+                                End Try
+                            End If
+                            SearchFile(FileToScan, CurrentSettings.Movie_Scan_Path, CurrentNode.Attributes("Number").Value, wtitle)
+                            If Not FileToScan.Length > 0 Then
+                                DoScan = False
+                            End If
+                        End If
+
+                        If DoScan = True Then
+                            Dim NfoMyFilmsFilename As String = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(FileToScan), "MyFilms.nfo")
+                            Dim NfoMovieFilename As String = System.IO.Path.ChangeExtension(FileToScan, "nfo")
+
+                            Dim NfoMyFilmsFilenameShort As String = System.IO.Path.GetFileName(NfoMyFilmsFilename)
+                            Dim NfoMovieFilenameShort As String = System.IO.Path.GetFileName(NfoMovieFilename)
+
+
+                            Try
+                                If _ManualNfoFileHandling = "MyFilms.nfo" Then
+                                    WriteNfoFile(NfoMyFilmsFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMyFilmsFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                ElseIf _ManualNfoFileHandling = "Movie Name" Then
+                                    WriteNfoFile(NfoMovieFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMovieFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                ElseIf _ManualNfoFileHandling = "Both" Then
+                                    WriteNfoFile(NfoMyFilmsFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                    WriteNfoFile(NfoMovieFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "NFO files '" & NfoMyFilmsFilenameShort & ", " & NfoMovieFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                End If
+                            Catch ex As Exception
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Error creating/updating NFO file : " & ex.Message)
+                            End Try
+                        Else
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "NFO File(s) not created/updated (File/Path Not Found) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
+
+                    Case "Delete NFO File"
+                        Dim FileToScan As String = String.Empty
+                        Dim AllFilesPath As String = String.Empty
+                        If Not IsNothing(CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field)) Then
+                            FileToScan = CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field).Value
+                        End If
+
+                        If FileToScan.IndexOf(";") > 0 Then
+                            'In case of multi-part files take the first part to internet scan; record the full list in AllFilesPath
+                            AllFilesPath = FileToScan
+                            FileToScan = FileToScan.Substring(0, FileToScan.IndexOf(";"))
+                        End If
+
+                        DoScan = True
+                        ' search Filename
+                        Dim wtitle As String = row("AntTitle").ToString
+                        If IsFileNeeded() = True Then
+                            If (CurrentSettings.Folder_Name_Is_Group_Name) Then
+                                If (CurrentSettings.Group_Name_Applies_To = "Original Title" Or CurrentSettings.Group_Name_Applies_To = "Both Titles") Then
+                                    wtitle = "OriginalTitle"
+                                Else
+                                    If (CurrentSettings.Group_Name_Applies_To = "Translated Title") Then
+                                        wtitle = "TranslatedTitle"
+                                    ElseIf (CurrentSettings.Group_Name_Applies_To = "Formatted Title") Then
+                                        wtitle = "FormattedTitle"
+                                    End If
+                                End If
+                                Try
+                                    wtitle = CurrentNode.Attributes(wtitle).Value
+                                Catch ex As Exception
+                                    wtitle = row("AntTitle").ToString
+                                End Try
+                            End If
+                            SearchFile(FileToScan, CurrentSettings.Movie_Scan_Path, CurrentNode.Attributes("Number").Value, wtitle)
+                            If Not FileToScan.Length > 0 Then
+                                DoScan = False
+                            End If
+                        End If
+
+                        If DoScan = True Then
+                            Dim NfoMyFilmsFilename As String = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(FileToScan), "MyFilms.nfo")
+                            Dim NfoMovieFilename As String = System.IO.Path.ChangeExtension(FileToScan, "nfo")
+
+                            Dim NfoMyFilmsFilenameShort As String = System.IO.Path.GetFileName(NfoMyFilmsFilename)
+                            Dim NfoMovieFilenameShort As String = System.IO.Path.GetFileName(NfoMovieFilename)
+
+                            Try
+                                If _ManualNfoFileHandling = "MyFilms.nfo" Then
+                                    System.IO.File.Delete(NfoMyFilmsFilename)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMyFilmsFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                ElseIf _ManualNfoFileHandling = "Movie Name" Then
+                                    System.IO.File.Delete(NfoMovieFilename)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMovieFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                ElseIf _ManualNfoFileHandling = "Both" Then
+                                    System.IO.File.Delete(NfoMyFilmsFilename)
+                                    System.IO.File.Delete(NfoMovieFilename)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "NFO files '" & NfoMyFilmsFilenameShort & ", " & NfoMovieFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                End If
+                            Catch ex As Exception
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Error deleting NFO file(s) : " & ex.Message)
+                            End Try
+                        Else
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "NFO File(s) not deleted (File/Path Not Found) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
                 End Select
                 ProcessCounter += 1
             Next
@@ -2683,6 +2839,7 @@ Public Class AntProcessor
         End If
 
     End Sub
+
     Public Function ManualTestMissingFanart_IsUpdateNeeded(ByVal wtitle As String) As Boolean
 
         wtitle = Grabber.GrabUtil.CreateFilename(wtitle.ToLower().Trim()).Replace(" ", ".")
