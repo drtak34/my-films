@@ -59,8 +59,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>subwcrev "$(SolutionDir)..\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"
-subwcrev "$(SolutionDir)..\." "$(SolutionDir)Versionmpe-maker.tmpl" "$(SolutionDir)Installer\mpe-maker.bat"</PreBuildEvent>
+    <PreBuildEvent>subwcrev "$(SolutionDir)\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"
+subwcrev "$(SolutionDir)\." "$(SolutionDir)Versionmpe-maker.tmpl" "$(SolutionDir)Installer\mpe-maker.bat"</PreBuildEvent>
     <PostBuildEvent>if exist $(ProjectDir)PostBuild.bat call $(ProjectDir)PostBuild.bat $(ProjectDir) $(ConfigurationName)
 if exist $(SolutionDir)SolutionBuild.bat call $(SolutionDir)SolutionBuild.bat $(SolutionDir) $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
