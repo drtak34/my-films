@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Soulsnake"
+    targetNamespace="http://tempuri.org/Soulsnake.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Soulsnake.xsd"
+    xmlns:mstns="http://tempuri.org/Soulsnake.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+>
+    <xs:element name="AntMovieCatalog" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Catalog">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Properties" minOccurs="0" msdata:Ordinal="1">
+                  <xs:complexType>
+                    <xs:attribute name="Owner" type="xs:int" />
+                    <xs:attribute name="Mail" type="xs:string" />
+                    <xs:attribute name="Site" type="xs:string" />
+                    <xs:attribute name="Description" type="xs:string" />
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="CustomFieldsProperties" minOccurs="0" msdata:Ordinal="1">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="CustomField" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ListValue" minOccurs="0" maxOccurs="unbounded">
+                              <!-- Values for ftList -->
+                              <xs:complexType>
+                                <xs:attribute name="Text" type="xs:string" />
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="Tag" type="xs:string" />
+                          <!-- Tag name of custom field -->
+                          <xs:attribute name="Name" type="xs:string" />
+                          <!-- Field name of custom field -->
+                          <xs:attribute name="Type" type="xs:string" />
+                          <!-- Type of custom field (ftString, ftInteger, ftReal, ftDate, ftList, ftText, ftURL) -->
+                          <xs:attribute name="DefaultValue" type="xs:string" />
+                          <!-- Default value of custom field -->
+                          <xs:attribute name="MultiValues" type="xs:string" />
+                          <!-- (Boolean: True = 'True' / False = '') -->
+                          <xs:attribute name="ExcludedInScripts" type="xs:string" />
+                          <!-- (Boolean: True = 'True' / False = '') -->
+                          <xs:attribute name="GUIProperties" type="xs:string" />
+                          <!-- GUI properties of custom field -->
+                          <xs:attribute name="OtherProperties" type="xs:string" />
+                          <!-- Others properties of custom field for other programs (saved by AMC) -->
+                          </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="ColumnSettings" type="xs:string" />
+                    <!-- Column settings of custom fields used in grid mode -->
+                    <xs:attribute name="GUIProperties" type="xs:string" />
+                    <!-- GUI properties of custom fields -->
+                    <xs:attribute name="OtherPrperties" type="xs:string" />
+                    <!-- Others properties of custom fields for other programs (saved by AMC) -->
+                    </xs:complexType> 
+              </xs:element>
+                <xs:element name="Contents" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="Movie" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="CustomFields" type="xs:string" minOccurs="0" msdata:Ordinal="1">
+                              <!-- <xs:complexType> You need to read CustomFieldsProperties in first pass to generate dynamically xsd with good attributes !!! -->
+                              <!-- <xs:attribute name="FieldTag" type="xs:string" /> Read CustomFieldsProperties to replace FieldTag by good name (in same order) !!! -->
+                              <!-- ... -->
+                              <!-- <xs:attribute name="FieldTag" type="xs:string" /> Read CustomFieldsProperties to replace FieldTag by good name (in same order) !!! -->
+                              <!-- </xs:complexType> -->
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="Number" type="xs:int" />
+                          <xs:attribute name="Checked" type="xs:string" />
+                          <xs:attribute name="MediaLabel" type="xs:string" />
+                          <xs:attribute name="MediaType" type="xs:string" />
+                          <xs:attribute name="Source" type="xs:string" />
+                          <xs:attribute name="Date" type="xs:string" />
+                          <xs:attribute name="Borrower" type="xs:string" />
+                          <xs:attribute name="Rating" type="xs:decimal" />
+                          <xs:attribute name="OriginalTitle" type="xs:string" />
+                          <xs:attribute name="TranslatedTitle" type="xs:string" />
+                          <xs:attribute name="FormattedTitle" type="xs:string" />
+                          <xs:attribute name="Director" type="xs:string" />
+                          <xs:attribute name="Producer" type="xs:string" />
+                          <xs:attribute name="Country" type="xs:string" />
+                          <xs:attribute name="Category" type="xs:string" />
+                          <xs:attribute name="Year" type="xs:string" />
+                          <xs:attribute name="Length" type="xs:string" />
+                          <xs:attribute name="Actors" type="xs:string" />
+                          <xs:attribute name="URL" type="xs:string" />
+                          <xs:attribute name="Description" type="xs:string" />
+                          <xs:attribute name="Comments" type="xs:string" />
+                          <xs:attribute name="VideoFormat" type="xs:string" />
+                          <xs:attribute name="VideoBitrate" type="xs:string" />
+                          <xs:attribute name="AudioFormat" type="xs:string" />
+                          <xs:attribute name="AudioBitrate" type="xs:string" />
+                          <xs:attribute name="Resolution" type="xs:string" />
+                          <xs:attribute name="Framerate" type="xs:string" />
+                          <xs:attribute name="Languages" type="xs:string" />
+                          <xs:attribute name="Subtitles" type="xs:string" />
+                          <xs:attribute name="Size" type="xs:string" />
+                          <xs:attribute name="Disks" type="xs:string" />
+                          <xs:attribute name="Picture" type="xs:string" />
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+</xs:schema>

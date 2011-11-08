@@ -2783,13 +2783,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek - The Voyage Home (1986)\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0bc4f9ad-bbf5-411d-98ef-f1ffd01b64fa}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - The Voyage Home (1986)\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{eb839512-e232-4c44-81f5-81c477be4513}-movie.wmv</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</DestinationFilename>
@@ -2800,6 +2793,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{5aeb919b-8ea2-4413-a2e5-f0c8a07e5fb0}-movie.wmv</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2cd22f87-6a75-46d3-a606-54743a1ec9d5}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3578,8 +3578,8 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
           </Items>
@@ -3598,7 +3598,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1644</Revision>
+      <Revision>1675</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3610,7 +3610,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-11-01T23:07:33.5217841+01:00</ReleaseDate>
+    <ReleaseDate>2011-11-06T07:51:22.0563916+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -6360,13 +6360,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek - The Voyage Home (1986)\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0bc4f9ad-bbf5-411d-98ef-f1ffd01b64fa}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - The Voyage Home (1986)\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{eb839512-e232-4c44-81f5-81c477be4513}-movie.wmv</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</DestinationFilename>
@@ -6377,6 +6370,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{5aeb919b-8ea2-4413-a2e5-f0c8a07e5fb0}-movie.wmv</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2cd22f87-6a75-46d3-a606-54743a1ec9d5}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
