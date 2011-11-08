@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName>TestSite (international)</DBName>
+    <URLPrefix />
+    <URLSearch>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_suche.php_x003F_type_x003D_f_x0026_name_x003D__x0023_Search_x0023_</URL>
+      <KeyStartList Param1="" Param2="" />
+      <KeyEndList />
+      <KeyStartPage Param1="" Param2="" />
+      <KeyStepPage />
+      <KeyNextPage />
+      <KeyStartTitle Param1="" Param2="" />
+      <KeyEndTitle />
+      <KeyTitleIndex />
+      <KeyStartYear Param1="" Param2="" />
+      <KeyEndYear />
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="" />
+      <KeyEndDirector />
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="" Param2="" />
+      <KeyEndLink />
+      <KeyLinkIndex />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="" />
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="" />
+      <KeyEndOTitle />
+      <KeyOTitleIndex />
+      <KeyStartTTitle Param1="" Param2="" />
+      <KeyEndTTitle />
+      <KeyTTitleRegExp />
+      <KeyTTitleIndex />
+      <KeyTTitleMaxItems />
+      <KeyTTitleLanguage />
+      <KeyStartImg Param1="" Param2="" />
+      <KeyEndImg />
+      <KeyImgIndex />
+      <KeyStartLinkImg Param1="" Param2="" />
+      <KeyEndLinkImg />
+      <KeyLinkImgIndex />
+      <KeyStartRate Param1="" Param2="" />
+      <KeyEndRate />
+      <KeyRateIndex />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <BaseRating />
+      <KeyStartSyn Param1="" Param2="" />
+      <KeyEndSyn />
+      <KeySynIndex />
+      <KeyStartRealise Param1="" Param2="" />
+      <KeyEndRealise />
+      <KeyRealiseIndex />
+      <KeyRealiseRegExp />
+      <KeyRealiseMaxItems />
+      <KeyStartProduct Param1="" Param2="" />
+      <KeyEndProduct />
+      <KeyProductIndex />
+      <KeyProductRegExp />
+      <KeyProductMaxItems />
+      <KeyStartWriter Param1="" Param2="" />
+      <KeyEndWriter />
+      <KeyWriterIndex />
+      <KeyWriterRegExp />
+      <KeyWriterMaxItems />
+      <KeyStartCredits Param1="" Param2="" />
+      <KeyEndCredits />
+      <KeyCreditsRegExp />
+      <KeyCreditsIndex />
+      <KeyCreditsMaxItems />
+      <KeyCreditsGrabActorRoles />
+      <KeyStartCountry Param1="" Param2="" />
+      <KeyEndCountry />
+      <KeyCountryRegExp />
+      <KeyCountryIndex />
+      <KeyStartGenre Param1="" Param2="" />
+      <KeyEndGenre />
+      <KeyGenreRegExp />
+      <KeyGenreIndex />
+      <KeyStartYear Param1="" Param2="" />
+      <KeyEndYear />
+      <KeyYearIndex />
+      <KeyStartLinkPersons Param1="" Param2="" />
+      <KeyEndLinkPersons />
+      <KeyLinkPersonsIndex />
+      <KeyStartComment Param1="" Param2="" />
+      <KeyEndComment />
+      <KeyCommentRegExp />
+      <KeyCommentIndex />
+      <KeyStartLanguage Param1="" Param2="" />
+      <KeyEndLanguage />
+      <KeyLanguageIndex />
+      <KeyStartTagline Param1="" Param2="" />
+      <KeyEndTagline />
+      <KeyTaglineIndex />
+      <KeyStartCertification Param1="" Param2="" />
+      <KeyEndCertification />
+      <KeyCertificationRegExp />
+      <KeyCertificationIndex />
+      <KeyCertificationLanguage />
+      <KeyStartLinkTitles Param1="" Param2="" />
+      <KeyEndLinkTitles />
+      <KeyLinkTitlesIndex />
+      <KeyStartLinkCertification Param1="" Param2="" />
+      <KeyEndLinkCertification />
+      <KeyLinkCertificationIndex />
+    </Details>
+  </Section>
+</Profile>
