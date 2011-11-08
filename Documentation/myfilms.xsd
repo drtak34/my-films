@@ -1,0 +1,105 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="AntMovieCatalog" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="AntMovieCatalog" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Catalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Properties" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+              <xs:element name="Contents" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Movie" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="RatingUser" type="xs:decimal" minOccurs="0" msdata:Ordinal="8" />
+                          <xs:element name="Edition" type="xs:string" minOccurs="0" msdata:Ordinal="12" />
+                          <xs:element name="DateAdded" msdata:ReadOnly="true" msdata:Expression="Convert(Date,'System.DateTime')" type="xs:dateTime" minOccurs="0" msdata:Ordinal="30" />
+                          <xs:element name="Length_Num" msdata:ReadOnly="true" msdata:Expression="Convert(Length,'System.Int32')" type="xs:int" default="0" minOccurs="0" msdata:Ordinal="34" />
+                          <xs:element name="Fanart" type="xs:string" minOccurs="0" msdata:Ordinal="36" />
+                          <xs:element name="Certification" type="xs:string" minOccurs="0" msdata:Ordinal="37" />
+                          <xs:element name="Writer" type="xs:string" minOccurs="0" msdata:Ordinal="38" />
+                          <xs:element name="Watched" type="xs:string" minOccurs="0" msdata:Ordinal="39" />
+                          <xs:element name="DateWatched" type="xs:dateTime" minOccurs="0" msdata:Ordinal="40" />
+                          <xs:element name="IMDB_Id" type="xs:string" minOccurs="0" msdata:Ordinal="41" />
+                          <xs:element name="TMDB_Id" type="xs:string" minOccurs="0" msdata:Ordinal="42" />
+                          <xs:element name="SourceTrailer" type="xs:string" minOccurs="0" msdata:Ordinal="43" />
+                          <xs:element name="TagLine" type="xs:string" minOccurs="0" msdata:Ordinal="44" />
+                          <xs:element name="Tags" type="xs:string" minOccurs="0" msdata:Ordinal="45" />
+                          <xs:element name="Studio" type="xs:string" minOccurs="0" msdata:Ordinal="46" />
+                          <xs:element name="IMDB_Rank" type="xs:string" minOccurs="0" msdata:Ordinal="47" />
+                          <xs:element name="IsOnline" type="xs:string" minOccurs="0" msdata:Ordinal="48" />
+                          <xs:element name="IsOnlineTrailer" type="xs:string" minOccurs="0" msdata:Ordinal="49" />
+                          <xs:element name="Aspectratio" type="xs:string" minOccurs="0" msdata:Ordinal="50" />
+                        </xs:sequence>
+                        <xs:attribute name="Number" type="xs:int" />
+                        <xs:attribute name="Checked" type="xs:string" />
+                        <xs:attribute name="MediaLabel" type="xs:string" />
+                        <xs:attribute name="MediaType" type="xs:string" />
+                        <xs:attribute name="Source" type="xs:string" />
+                        <xs:attribute name="Date" type="xs:string" />
+                        <xs:attribute name="Borrower" type="xs:string" />
+                        <xs:attribute name="Rating" type="xs:decimal" />
+                        <xs:attribute name="OriginalTitle" type="xs:string" />
+                        <xs:attribute name="TranslatedTitle" type="xs:string" />
+                        <xs:attribute name="FormattedTitle" type="xs:string" />
+                        <xs:attribute name="Director" type="xs:string" />
+                        <xs:attribute name="Producer" type="xs:string" />
+                        <xs:attribute name="Country" type="xs:string" />
+                        <xs:attribute name="Category" type="xs:string" />
+                        <xs:attribute name="Year" type="xs:string" />
+                        <xs:attribute name="Length" type="xs:string" />
+                        <xs:attribute name="Actors" type="xs:string" />
+                        <xs:attribute name="URL" type="xs:string" />
+                        <xs:attribute name="Description" type="xs:string" />
+                        <xs:attribute name="Comments" type="xs:string" />
+                        <xs:attribute name="VideoFormat" type="xs:string" />
+                        <xs:attribute name="VideoBitrate" type="xs:string" />
+                        <xs:attribute name="AudioFormat" type="xs:string" />
+                        <xs:attribute name="AudioBitrate" type="xs:string" />
+                        <xs:attribute name="Resolution" type="xs:string" />
+                        <xs:attribute name="Framerate" type="xs:string" />
+                        <xs:attribute name="Languages" type="xs:string" />
+                        <xs:attribute name="Subtitles" type="xs:string" />
+                        <xs:attribute name="Size" type="xs:string" />
+                        <xs:attribute name="Disks" type="xs:string" />
+                        <xs:attribute name="Picture" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="AntMovieCatalog_Id" type="xs:int" use="prohibited" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Person">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ActorId" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Born" type="xs:string" minOccurs="0" />
+              <xs:element name="BirthPlace" type="xs:string" minOccurs="0" />
+              <xs:element name="MiniBiography" type="xs:string" minOccurs="0" />
+              <xs:element name="Picture" type="xs:string" minOccurs="0" />
+              <xs:element name="IMDB_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="TMDB_Id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Watched">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Contents_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Number" type="xs:string" minOccurs="0" />
+              <xs:element name="Title" type="xs:string" minOccurs="0" />
+              <xs:element name="WatchedDate" type="xs:string" minOccurs="0" />
+              <xs:element name="UserName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

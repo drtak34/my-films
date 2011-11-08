@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName>Kino.de</DBName>
+    <URLPrefix>http://www.kino.de</URLPrefix>
+    <Language>de</Language>
+    <Type>details|cover</Type>
+    <Version>1.0</Version>
+    <Encoding />
+    <URLSearch>
+      <KeyStartThumb Param1="" Param2="">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
+      <KeyEndThumb>_x0022_</KeyEndThumb>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.kino.de_x002F_suche_x002F_film_x003F_searchString_x003D__x0023_Search_x0023__x0026_hitsPerPage_x003D_50</URL>
+      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Rubrik._x002A__x003F_Filme._x002A__x003F__x003C__x002F_div_x003E_</KeyStartList>
+      <KeyEndList>_x0023_REGEX_x0023__x003C_h1_x003E_</KeyEndList>
+      <KeyStartPage Param1="" Param2="" />
+      <KeyStepPage />
+      <KeyNextPage />
+      <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0022_._x002A__x003F_alt_x003D__x0022_._x002A__x003F_title_x003D__x0022_._x002A__x003F__x003E_</KeyStartTitle>
+      <KeyEndTitle>_x0023_REGEX_x0023__x0022__x007C__x003C__x002F_a_x003E_</KeyEndTitle>
+      <KeyTitleIndex />
+      <KeyStartYear Param1="_x0023_REGEX_x0023__x005B__x005C_D_x005D__x007C__x0020__x0020_" Param2="">_x0023_REGEX_x0023__x003C_p_x003E_</KeyStartYear>
+      <KeyEndYear>_x003C_br</KeyEndYear>
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="">Regie:_x0020_</KeyStartDirector>
+      <KeyEndDirector>_x003C_br_x0020__x002F__x003E_</KeyEndDirector>
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_www.kino.de_x007C__x0020_">_x0023_REGEX_x0023__x003C_li._x002A__x003F__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
+      <KeyEndLink>_x0023_REGEX_x0023__x0022_._x002A__x003F_title</KeyEndLink>
+      <KeyLinkIndex />
+      <KeyStartID Param1="" Param2="">_x0023_REGEX_x0023__x003C_li._x002A__x003F__x003C_a_x0020_href_x003D__x0022__x002F_kinofilm_x002F_._x002A__x003F__x002F_</KeyStartID>
+      <KeyEndID>_x0022_</KeyEndID>
+      <KeyStartOptions Param1="" Param2="" />
+      <KeyEndOptions />
+      <KeyStartAkas Param1="" Param2="" />
+      <KeyEndAkas />
+      <KeyAkasRegExp />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="" />
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="">Originaltitel:</KeyStartOTitle>
+      <KeyEndOTitle>_x003C_</KeyEndOTitle>
+      <KeyOTitleIndex />
+      <KeyOTitlePage />
+      <KeyStartTTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_div_x0020_class_x003D__x0022_content_x0020_filmheader_x0022__x003E_._x002A__x003F__x003C_h1_x003E_</KeyStartTTitle>
+      <KeyEndTTitle>_x003C_</KeyEndTTitle>
+      <KeyTTitleRegExp />
+      <KeyTTitleIndex />
+      <KeyTTitlePage />
+      <KeyTTitleMaxItems />
+      <KeyTTitleLanguage />
+      <KeyTTitleLanguageAll />
+      <KeyStartImg Param1="" Param2="">_x0023_REGEX_x0023__x003C_div_x0020_class_x003D__x0022_cover-area_x0022__x003E_._x002A__x003F_img_x0020_src_x003D__x0022_</KeyStartImg>
+      <KeyEndImg>_x0022_</KeyEndImg>
+      <KeyImgIndex />
+      <KeyImgPage />
+      <KeyStartLinkImg Param1="" Param2="" />
+      <KeyEndLinkImg />
+      <KeyLinkImgIndex />
+      <KeyLinkImgPage />
+      <KeyStartRate Param1="" Param2="" />
+      <KeyEndRate />
+      <KeyRateIndex />
+      <KeyRatePage />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <KeyRate2Page />
+      <BaseRating />
+      <KeyStartSyn Param1="" Param2="">_x003C_h3_x003E_Inhalt_x003C__x002F_h3_x003E_</KeyStartSyn>
+      <KeyEndSyn>_x003C_h3_x003E_</KeyEndSyn>
+      <KeySynIndex />
+      <KeySynPage />
+      <KeyStartRealise Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_th_x003E_Regie:._x002A__x003F__x003C__x002F_th_x003E_</KeyStartRealise>
+      <KeyEndRealise>_x003C_th_x003E_Drehbuch</KeyEndRealise>
+      <KeyRealiseIndex />
+      <KeyRealisePage />
+      <KeyRealiseRegExp>_x003C_a_x0020_href_x003D__x0022_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F_</KeyRealiseRegExp>
+      <KeyRealiseMaxItems />
+      <KeyStartProduct Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_th_x003E_Produzent._x002A__x003F__x003C__x002F_th_x003E_</KeyStartProduct>
+      <KeyEndProduct>_x003C_th_x003E_Kamera</KeyEndProduct>
+      <KeyProductIndex />
+      <KeyProductPage />
+      <KeyProductRegExp>_x003C_a_x0020_href_x003D__x0022_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyProductRegExp>
+      <KeyProductMaxItems />
+      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_th_x003E_Drehbuch:._x002A__x003F__x003C__x002F_th_x003E_</KeyStartWriter>
+      <KeyEndWriter>_x003C_th_x003E_Produzent</KeyEndWriter>
+      <KeyWriterIndex />
+      <KeyWriterPage />
+      <KeyWriterRegExp>_x003C_a_x0020_href_x003D__x0022_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F_</KeyWriterRegExp>
+      <KeyWriterMaxItems />
+      <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_th_x003E_Darsteller._x002A__x003F__x003B__x003C__x002F_th_x003E_</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_tbody_x003E_</KeyEndCredits>
+      <KeyCreditsRegExp>_x003C_a_x0020_href_x003D__x0022_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F_als._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyCreditsRegExp>
+      <KeyCreditsIndex />
+      <KeyCreditsPage />
+      <KeyCreditsMaxItems />
+      <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
+      <KeyStartCountry Param1="_x0023_REGEX_x0023__x005C_d_x007C__x0020__x0020_" Param2="">_x0023_REGEX_x0023__x003C_p_x003E_Originaltitel._x002A__x003F__x003C__x002F_a_x003E_</KeyStartCountry>
+      <KeyEndCountry>_x0023_REGEX_x0023__x003C_br_x007C_Laufzeit</KeyEndCountry>
+      <KeyCountryRegExp />
+      <KeyCountryIndex />
+      <KeyCountryPage />
+      <KeyStartGenre Param1="_x0020__x002F_" Param2="_x002C_">_x0023_REGEX_x0023_Originaltitel._x002A__x003F__x003C_p_x003E_</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_p</KeyEndGenre>
+      <KeyGenreRegExp />
+      <KeyGenreIndex />
+      <KeyGenrePage />
+      <KeyStartYear Param1="_x0023_REGEX_x0023__x005B__x005C_D_x005D_" Param2="">_x0023_REGEX_x0023__x003C_p_x003E_Originaltitel._x002A__x003F__x003C__x002F_a_x003E_</KeyStartYear>
+      <KeyEndYear>_x0023_REGEX_x0023__x003C_br_x007C_Laufzeit</KeyEndYear>
+      <KeyYearIndex />
+      <KeyYearPage />
+      <KeyStartLinkPersons Param1="" Param2="" />
+      <KeyEndLinkPersons />
+      <KeyLinkPersonsIndex />
+      <KeyLinkPersonsPage />
+      <KeyStartComment Param1="" Param2="">_x003C_h3_x003E_Kritik_x003C__x002F_h3_x003E_</KeyStartComment>
+      <KeyEndComment>_x003C_h3_x003E_</KeyEndComment>
+      <KeyCommentRegExp />
+      <KeyCommentIndex />
+      <KeyCommentPage />
+      <KeyStartLanguage Param1="" Param2="" />
+      <KeyEndLanguage />
+      <KeyLanguageIndex />
+      <KeyLanguagePage />
+      <KeyStartTagline Param1="" Param2="">_x0023_REGEX_x0023__x003C_div_x0020_class_x003D__x0022_content_x0020_filmheader_x0022__x003E_._x002A__x003F__x003C__x002F_h1_x003E_._x002A__x003F__x003C_p_x003E_</KeyStartTagline>
+      <KeyEndTagline>_x003C__x002F_p_x003E_</KeyEndTagline>
+      <KeyTaglineIndex />
+      <KeyTaglinePage />
+      <KeyStartCertification Param1="ab_x0020_" Param2="">FSK:</KeyStartCertification>
+      <KeyEndCertification>_x003C_</KeyEndCertification>
+      <KeyCertificationRegExp />
+      <KeyCertificationIndex />
+      <KeyCertificationPage />
+      <KeyCertificationLanguage />
+      <KeyCertificationLanguageAll />
+      <KeyStartLinkTitles Param1="" Param2="" />
+      <KeyEndLinkTitles />
+      <KeyLinkTitlesIndex />
+      <KeyLinkTitlesPage />
+      <KeyStartLinkCertification Param1="" Param2="" />
+      <KeyEndLinkCertification />
+      <KeyLinkCertificationIndex />
+      <KeyLinkCertificationPage />
+      <KeyStartLinkComment Param1="" Param2="" />
+      <KeyEndLinkComment />
+      <KeyLinkCommentIndex />
+      <KeyLinkCommentPage />
+      <KeyStartDetails2 Param1="" Param2="" />
+      <KeyEndDetails2 />
+      <KeyDetails2Index />
+      <KeyDetails2Page />
+      <KeyStartStudio Param1="_x0023_REGEX_x0023__x0020__x0020_" Param2="">Verleih:</KeyStartStudio>
+      <KeyEndStudio>_x003C__x002F_</KeyEndStudio>
+      <KeyStudioIndex />
+      <KeyStudioPage />
+      <KeyStartEdition Param1="" Param2="" />
+      <KeyEndEdition />
+      <KeyEditionIndex />
+      <KeyEditionPage />
+      <KeyStartIMDB_Rank Param1="" Param2="" />
+      <KeyEndIMDB_Rank />
+      <KeyIMDB_RankIndex />
+      <KeyIMDB_RankPage />
+      <KeyStartIMDB_Id Param1="" Param2="" />
+      <KeyEndIMDB_Id />
+      <KeyIMDB_IdIndex />
+      <KeyIMDB_IdPage />
+      <KeyStartTMDB_Id Param1="" Param2="" />
+      <KeyEndTMDB_Id />
+      <KeyTMDB_IdIndex />
+      <KeyTMDB_IdPage />
+      <KeyStartLinkSyn Param1="" Param2="" />
+      <KeyEndLinkSyn />
+      <KeyLinkSynIndex />
+      <KeyLinkSynPage />
+      <KeyStartLinkGeneric1 Param1="" Param2="" />
+      <KeyEndLinkGeneric1 />
+      <KeyLinkGeneric1Index />
+      <KeyLinkGeneric1Page />
+      <KeyStartLinkGeneric2 Param1="" Param2="" />
+      <KeyEndLinkGeneric2 />
+      <KeyLinkGeneric2Index />
+      <KeyLinkGeneric2Page />
+      <KeyStartGeneric1 Param1="" Param2="" />
+      <KeyEndGeneric1 />
+      <KeyGeneric1Index />
+      <KeyGeneric1RegExp />
+      <KeyGeneric1MaxItems />
+      <KeyGeneric1Language />
+      <KeyGeneric1Page />
+      <KeyStartGeneric2 Param1="" Param2="" />
+      <KeyEndGeneric2 />
+      <KeyGeneric2Index />
+      <KeyGeneric2RegExp />
+      <KeyGeneric2MaxItems />
+      <KeyGeneric2Language />
+      <KeyGeneric2Page />
+      <KeyStartGeneric3 Param1="" Param2="" />
+      <KeyEndGeneric3 />
+      <KeyGeneric3Index />
+      <KeyGeneric3RegExp />
+      <KeyGeneric3MaxItems />
+      <KeyGeneric3Language />
+      <KeyGeneric3Page />
+      <KeyStartLinkMultiPosters Param1="" Param2="" />
+      <KeyEndLinkMultiPosters />
+      <KeyLinkMultiPostersIndex />
+      <KeyLinkMultiPostersPage />
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
+      <KeyMultiPostersIndex />
+      <KeyMultiPostersRegExp />
+      <KeyMultiPostersMaxItems />
+      <KeyMultiPostersLanguage />
+      <KeyMultiPostersPage />
+      <KeyStartLinkPhotos Param1="" Param2="" />
+      <KeyEndLinkPhotos />
+      <KeyLinkPhotosIndex />
+      <KeyLinkPhotosPage />
+      <KeyStartPhotos Param1="" Param2="" />
+      <KeyEndPhotos />
+      <KeyPhotosIndex />
+      <KeyPhotosRegExp />
+      <KeyPhotosMaxItems />
+      <KeyPhotosLanguage />
+      <KeyPhotosPage />
+      <KeyStartLinkPersonImages Param1="" Param2="" />
+      <KeyEndLinkPersonImages />
+      <KeyLinkPersonImagesIndex />
+      <KeyLinkPersonImagesPage />
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
+      <KeyPersonImagesIndex />
+      <KeyPersonImagesRegExp />
+      <KeyPersonImagesMaxItems />
+      <KeyPersonImagesLanguage />
+      <KeyPersonImagesPage />
+      <KeyStartLinkMultiFanart Param1="" Param2="" />
+      <KeyEndLinkMultiFanart />
+      <KeyLinkMultiFanartIndex />
+      <KeyLinkMultiFanartPage />
+      <KeyStartMultiFanart Param1="" Param2="" />
+      <KeyEndMultiFanart />
+      <KeyMultiFanartIndex />
+      <KeyMultiFanartRegExp />
+      <KeyMultiFanartMaxItems />
+      <KeyMultiFanartLanguage />
+      <KeyMultiFanartPage />
+      <KeyStartLinkTrailer Param1="" Param2="" />
+      <KeyEndLinkTrailer />
+      <KeyLinkTrailerIndex />
+      <KeyLinkTrailerPage />
+      <KeyStartTrailer Param1="" Param2="" />
+      <KeyEndTrailer />
+      <KeyTrailerIndex />
+      <KeyTrailerRegExp />
+      <KeyTrailerMaxItems />
+      <KeyTrailerLanguage />
+      <KeyTrailerPage />
+    </Details>
+    <Mapping>
+      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_5 source="Actors" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_6 source="Director" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_7 source="Producer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_8 source="Year" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_9 source="Country" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_10 source="Category" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_11 source="URL_x0020_Redirection_x0020_Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_12 source="ImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_13 source="Writer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_16 source="Tagline" destination="Comment" replace="False" addstart="True" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_18 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_19 source="IMDBrank" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_20 source="Studio" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_21 source="Edition" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_22 source="Fanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_23 source="Generic1" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_24 source="Generic2" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_25 source="Generic3" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_30 source="MultiPosters" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_31 source="Photos" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+    </Mapping>
+  </Section>
+</Profile>

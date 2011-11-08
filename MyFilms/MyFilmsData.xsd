@@ -1,0 +1,68 @@
+﻿<xs:schema id="MyFilmsData" targetNamespace="http://tempuri.org/MyFilmsData.xsd" xmlns:mstns="http://tempuri.org/MyFilmsData.xsd" xmlns="http://tempuri.org/MyFilmsData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified" msdata:schemafragmentcount="2">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MyFilmsData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="MyFilmsData" msprop:Generator_DataSetName="MyFilmsData" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Catalog" msprop:Generator_UserTableName="Catalog" msprop:Generator_RowDeletedName="CatalogRowDeleted" msprop:Generator_RowChangedName="CatalogRowChanged" msprop:Generator_RowClassName="CatalogRow" msprop:Generator_RowChangingName="CatalogRowChanging" msprop:Generator_RowEvArgName="CatalogRowChangeEvent" msprop:Generator_RowEvHandlerName="CatalogRowChangeEventHandler" msprop:Generator_TableClassName="CatalogDataTable" msprop:Generator_TableVarName="tableCatalog" msprop:Generator_RowDeletingName="CatalogRowDeleting" msprop:Generator_TablePropName="Catalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MyFilmsData_ID" msprop:Generator_UserColumnName="MyFilmsData_ID" msprop:Generator_ColumnVarNameInTable="columnMyFilmsData_ID" msprop:Generator_ColumnPropNameInRow="MyFilmsData_ID" msprop:Generator_ColumnPropNameInTable="MyFilmsData_IDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Properties" msprop:Generator_UserColumnName="Properties" msprop:Generator_ColumnVarNameInTable="columnProperties" msprop:Generator_ColumnPropNameInRow="Properties" msprop:Generator_ColumnPropNameInTable="PropertiesColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Catalog_Id" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="Catalog_Id" msprop:Generator_ColumnVarNameInTable="columnCatalog_Id" msprop:Generator_ColumnPropNameInRow="Catalog_Id" msprop:Generator_ColumnPropNameInTable="Catalog_IdColumn" type="xs:int" />
+              <xs:element name="Contents" msprop:Generator_UserTableName="Contents" msprop:Generator_RowDeletedName="ContentsRowDeleted" msprop:Generator_RowChangedName="ContentsRowChanged" msprop:Generator_RowClassName="ContentsRow" msprop:Generator_RowChangingName="ContentsRowChanging" msprop:Generator_RowEvArgName="ContentsRowChangeEvent" msprop:Generator_RowEvHandlerName="ContentsRowChangeEventHandler" msprop:Generator_TableClassName="ContentsDataTable" msprop:Generator_TableVarName="tableContents" msprop:Generator_RowDeletingName="ContentsRowDeleting" msprop:Generator_TablePropName="Contents" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <msdata:Relationship name="Catalog_Contents" msdata:parent="Catalog" msdata:child="Contents" msdata:parentkey="Catalog_Id" msdata:childkey="Catalog_Id" msprop:Generator_UserRelationName="Catalog_Contents" msprop:Generator_RelationVarName="relationCatalog_Contents" msprop:Generator_UserChildTable="Contents" msprop:Generator_UserParentTable="Catalog" msprop:Generator_ParentPropName="CatalogRow" msprop:Generator_ChildPropName="GetContentsRows" />
+                  </xs:appinfo>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Watched" msprop:Generator_UserTableName="Watched" msprop:Generator_RowDeletedName="WatchedRowDeleted" msprop:Generator_RowChangedName="WatchedRowChanged" msprop:Generator_RowClassName="WatchedRow" msprop:Generator_RowChangingName="WatchedRowChanging" msprop:Generator_RowEvArgName="WatchedRowChangeEvent" msprop:Generator_RowEvHandlerName="WatchedRowChangeEventHandler" msprop:Generator_TableClassName="WatchedDataTable" msprop:Generator_TableVarName="tableWatched" msprop:Generator_RowDeletingName="WatchedRowDeleting" msprop:Generator_TablePropName="Watched" minOccurs="0" maxOccurs="unbounded">
+                      <xs:annotation>
+                        <xs:appinfo>
+                          <msdata:Relationship name="Contents_Watched" msdata:parent="Contents" msdata:child="Watched" msdata:parentkey="Contents_Id" msdata:childkey="Contents_Id" msprop:Generator_UserRelationName="Contents_Watched" msprop:Generator_RelationVarName="relationContents_Watched" msprop:Generator_UserChildTable="Watched" msprop:Generator_UserParentTable="Contents" msprop:Generator_ParentPropName="ContentsRow" msprop:Generator_ChildPropName="GetWatchedRows" />
+                        </xs:appinfo>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Watched_Id" msdata:Caption="Contents_Id" msprop:Generator_UserColumnName="Watched_Id" msprop:Generator_ColumnPropNameInRow="Watched_Id" msprop:Generator_ColumnVarNameInTable="columnWatched_Id" msprop:Generator_ColumnPropNameInTable="Watched_IdColumn" type="xs:string" />
+                          <xs:element name="Number" msprop:Generator_UserColumnName="Number" msprop:Generator_ColumnPropNameInRow="Number" msprop:Generator_ColumnVarNameInTable="columnNumber" msprop:Generator_ColumnPropNameInTable="NumberColumn" type="xs:string" minOccurs="0" />
+                          <xs:element name="Title" msprop:Generator_UserColumnName="Title" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInTable="TitleColumn" type="xs:string" minOccurs="0" />
+                          <xs:element name="WatchedDate" msprop:Generator_UserColumnName="WatchedDate" msprop:Generator_ColumnPropNameInRow="WatchedDate" msprop:Generator_ColumnVarNameInTable="columnWatchedDate" msprop:Generator_ColumnPropNameInTable="WatchedDateColumn" type="xs:string" minOccurs="0" />
+                          <xs:element name="UserName" msprop:Generator_UserColumnName="UserName" msprop:Generator_ColumnPropNameInRow="UserName" msprop:Generator_ColumnVarNameInTable="columnUserName" msprop:Generator_ColumnPropNameInTable="UserNameColumn" type="xs:string" minOccurs="0" />
+                          <xs:element name="Contents_Id" msprop:Generator_UserColumnName="Contents_Id" msprop:Generator_ColumnPropNameInRow="Contents_Id" msprop:Generator_ColumnVarNameInTable="columnContents_Id" msprop:Generator_ColumnPropNameInTable="Contents_IdColumn" type="xs:int" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Contents_Id" form="unqualified" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="Contents_Id" msprop:Generator_ColumnPropNameInRow="Contents_Id" msprop:Generator_ColumnVarNameInTable="columnContents_Id" msprop:Generator_ColumnPropNameInTable="Contents_IdColumn" type="xs:int" use="required" />
+                  <xs:attribute name="Catalog_Id" form="unqualified" msprop:Generator_UserColumnName="Catalog_Id" msprop:Generator_ColumnPropNameInRow="Catalog_Id" msprop:Generator_ColumnVarNameInTable="columnCatalog_Id" msprop:Generator_ColumnPropNameInTable="Catalog_IdColumn" type="xs:int" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Watched_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Watched" />
+      <xs:field xpath="mstns:Watched_Id" />
+    </xs:unique>
+    <xs:unique name="Contents_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Contents" />
+      <xs:field xpath="@Contents_Id" />
+    </xs:unique>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Catalog" />
+      <xs:field xpath="mstns:Catalog_Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

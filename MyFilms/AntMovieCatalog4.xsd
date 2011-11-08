@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AntMovieCatalog-4" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="Watched">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Watched" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="Number" type="xs:string" />
+      <xs:attribute name="Date" type="xs:dateTime" />
+      <xs:attribute name="User" type="xs:string" />
+      <xs:attribute name="Config" type="xs:string" />
+      <xs:attribute name="MovieNumber" type="xs:string" />
+      <xs:attribute name="Title" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AntMovieCatalog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Catalog" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Properties" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="Owner" type="xs:string" />
+                  <xs:attribute name="Mail" type="xs:string" />
+                  <xs:attribute name="Site" type="xs:string" />
+                  <xs:attribute name="Description" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="CustomFieldsProperties" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="CustomField" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ListItem" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="Text" type="xs:string" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Tag" type="xs:string" />
+                        <xs:attribute name="Name" type="xs:string" />
+                        <xs:attribute name="Type" type="xs:string" />
+                        <xs:attribute name="DefaultValue" type="xs:string" />
+                        <xs:attribute name="MultiValues" type="xs:string" />
+                        <xs:attribute name="ExcludedInScripts" type="xs:string" />
+                        <xs:attribute name="GUIProperties" type="xs:string" />
+                        <xs:attribute name="OtherProperties" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="ColumnSettings" type="xs:string" />
+                  <xs:attribute name="GUIProperties" type="xs:string" />
+                  <xs:attribute name="OtherProperties" type="xs:string" /> <!-- Others properties of custom fields for other programs (saved by AMC) --> 
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Contents" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Movie" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="DateAdded" type="xs:dateTime" minOccurs="0" />
+                          <xs:element name="Length_Num" type="xs:int" minOccurs="0" />
+                          <xs:element name="Fanart" type="xs:string" minOccurs="0" />
+                          <xs:element name="Certification" type="xs:string" minOccurs="0" />
+                          <xs:element name="Writer" type="xs:string" minOccurs="0" />
+                          <xs:element name="Watched" type="xs:string" minOccurs="0" />
+                          <xs:element name="DateWatched" type="xs:dateTime" minOccurs="0" />
+                          <xs:element name="IMDB_Id" type="xs:string" minOccurs="0" />
+                          <xs:element name="TMDB_Id" type="xs:string" minOccurs="0" />
+                          <xs:element name="SourceTrailer" type="xs:string" minOccurs="0" />
+                          <xs:element name="TagLine" type="xs:string" minOccurs="0" />
+                          <xs:element name="Tags" type="xs:string" minOccurs="0" />
+                          <xs:element name="Studio" type="xs:string" minOccurs="0" />
+                          <xs:element name="IMDB_Rank" type="xs:string" minOccurs="0" />
+                          <xs:element name="IsOnline" type="xs:string" minOccurs="0" />
+                          <xs:element name="IsOnlineTrailer" type="xs:string" minOccurs="0" />
+                          <xs:element name="Aspectratio" type="xs:string" minOccurs="0" />
+                          <xs:element name="RatingUser" type="xs:decimal" minOccurs="0" />
+                          <xs:element name="Edition" type="xs:string" minOccurs="0" />
+                          <xs:element name="CustomFields" minOccurs="0" maxOccurs="unbounded">
+                            <!-- <xs:complexType> You need to read CustomFieldsProperties in first pass to generate dynamically xsd with good attributes !!! -->
+                              <!-- <xs:attribute name="FieldTag" type="xs:string" /> Read CustomFieldsProperties to replace FieldTag by good name (in same order) !!! -->
+                              <!-- ... -->
+                              <!-- <xs:attribute name="FieldTag" type="xs:string" /> Read CustomFieldsProperties to replace FieldTag by good name (in same order) !!! -->
+                            <!-- </xs:complexType> --> 
+                            <xs:complexType>
+                              <xs:attribute name="Writer-Extended" type="xs:string" />
+                              <xs:attribute name="Certification-Extended" type="xs:string" />
+                              <xs:attribute name="Test1" type="xs:string" />
+                              <xs:attribute name="Test2" type="xs:string" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Number" type="xs:int" />
+                        <xs:attribute name="Checked" type="xs:string" />
+                        <xs:attribute name="MediaLabel" type="xs:string" />
+                        <xs:attribute name="MediaType" type="xs:string" />
+                        <xs:attribute name="Source" type="xs:string" />
+                        <xs:attribute name="Date" type="xs:string" />
+                        <xs:attribute name="Borrower" type="xs:string" />
+                        <xs:attribute name="Rating" type="xs:decimal" />
+                        <xs:attribute name="OriginalTitle" type="xs:string" />
+                        <xs:attribute name="TranslatedTitle" type="xs:string" />
+                        <xs:attribute name="FormattedTitle" type="xs:string" />
+                        <xs:attribute name="Director" type="xs:string" />
+                        <xs:attribute name="Producer" type="xs:string" />
+                        <xs:attribute name="Country" type="xs:string" />
+                        <xs:attribute name="Category" type="xs:string" />
+                        <xs:attribute name="Year" type="xs:string" />
+                        <xs:attribute name="Length" type="xs:string" />
+                        <xs:attribute name="Actors" type="xs:string" />
+                        <xs:attribute name="URL" type="xs:string" />
+                        <xs:attribute name="Description" type="xs:string" />
+                        <xs:attribute name="Comments" type="xs:string" />
+                        <xs:attribute name="VideoFormat" type="xs:string" />
+                        <xs:attribute name="VideoBitrate" type="xs:string" />
+                        <xs:attribute name="AudioFormat" type="xs:string" />
+                        <xs:attribute name="AudioBitrate" type="xs:string" />
+                        <xs:attribute name="Resolution" type="xs:string" />
+                        <xs:attribute name="Framerate" type="xs:string" />
+                        <xs:attribute name="Languages" type="xs:string" />
+                        <xs:attribute name="Subtitles" type="xs:string" />
+                        <xs:attribute name="Size" type="xs:string" />
+                        <xs:attribute name="Disks" type="xs:string" />
+                        <xs:attribute name="Picture" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Persons" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Person" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                        <xs:attribute name="Name" type="xs:string" />
+                        <xs:attribute name="AlternateName" type="xs:string" />
+                        <xs:attribute name="Born" type="xs:string" />
+                        <xs:attribute name="BirthPlace" type="xs:string" />
+                        <xs:attribute name="MiniBiography" type="xs:string" />
+                        <xs:attribute name="Biography" type="xs:string" />
+                        <xs:attribute name="URL" type="xs:string" />
+                        <xs:attribute name="IMDB_Id" type="xs:string" />
+                        <xs:attribute name="TMDB_Id" type="xs:string" />
+                        <xs:attribute name="IsActor" type="xs:boolean" />
+                        <xs:attribute name="IsProducer" type="xs:boolean" />
+                        <xs:attribute name="IsDirector" type="xs:boolean" />
+                        <xs:attribute name="IsWriter" type="xs:boolean" />
+                        <xs:attribute name="Photos" type="xs:string" />
+                        <xs:attribute name="Picture" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MyFilmsSettings" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Users" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="User" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="Name" type="xs:string" />
+                        <xs:attribute name="Alias" type="xs:string" />
+                        <xs:attribute name="TraktName" type="xs:string" />
+                        <xs:attribute name="Age" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="History" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Watched" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Format" type="xs:string" />
+      <xs:attribute name="Version" type="xs:string" />
+      <xs:attribute name="Date" type="xs:dateTime" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Watched" />
+        <xs:element ref="AntMovieCatalog" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
