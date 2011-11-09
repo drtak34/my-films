@@ -341,6 +341,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           SettingsGeneral = 87274,
           Lists = 87275,
           ListItems = 87276,
+          RelatedMovies = 87277,
+          RelatedShows = 87278,
           Shouts = 87280
         }
         public enum GrabType
@@ -1231,6 +1233,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798784)); // Rate
                     choiceViewMenu.Add("trakt-Rate");
 
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798787)); // 
+                    choiceViewMenu.Add("trakt-RelatedMovies");
+
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
@@ -1239,7 +1244,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel]);
                     break;
-
 
               case "trakt-Main":
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Main, "");
@@ -1274,7 +1278,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
                 }
-
                 break;
 
               case "trakt-Lists":
@@ -1307,9 +1310,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "trakt-Rate":
-                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                if (Helper.IsTraktAvailableAndEnabled)
                 {
                   TraktRate(MyFilms.currentMovie);
+                }
+                else
+                {
+                  this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+                }
+                break;
+
+              case "trakt-RelatedMovies":
+                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                {
+                  TraktRelatedMovies(MyFilms.currentMovie);
                 }
                 else
                 {
@@ -2122,6 +2136,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
             TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
           }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
+        }
+
+        private void TraktRelatedMovies(MFMovie movie)
+        {
+          TraktPlugin.TraktHelper.ShowRelatedMovies(movie.IMDBNumber, movie.Title, movie.Year.ToString());
         }
 
         private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
