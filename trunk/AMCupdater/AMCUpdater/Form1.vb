@@ -541,14 +541,15 @@ Public Class Form1
         End If
         AntProcessor.ManualParameterMatchAll = chkManualParametersUpdateAll.Checked
         AntProcessor.ManualMissingFanartDownload = chkManualMissingFanartDownload.Checked
-        AntProcessor.ManualNfoFileHandling = cbManualNfoFileHandling.SelectedItem.ToString
+        If cbManualNfoFileHandling.SelectedIndex > -1 Then
+            AntProcessor.ManualNfoFileHandling = cbManualNfoFileHandling.SelectedItem.ToString
+        End If
         AntProcessor.ManualNfoFileOnlyUpdateMissing = chkManualNfoFilesOnlyAddMissing.Checked
         'AntProcessor.DateHandling = cbDateHandling.SelectedValue
         'If AntProcessor.ManualOperation = "Scan Media Data" Then
         'AntProcessor.ManualFieldValue = TxtManualPathToMovies.Text
         'End If
         AntProcessor.ManualXMLPath = txtManualXMLPath.Text
-
 
         AntProcessor.ManualTestOperation()
 
