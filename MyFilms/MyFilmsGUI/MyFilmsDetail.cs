@@ -6169,7 +6169,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
               {
                 string personartworkpath = MyFilms.conf.StrPathArtist;
-                setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ",jpg", true);
+                setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg", true);
               }
             }
           }
