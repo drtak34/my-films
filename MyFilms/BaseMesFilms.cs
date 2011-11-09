@@ -773,6 +773,8 @@ namespace MyFilmsPlugin.MyFilms
         /// <param name="unwatched">only get unwatched episodes (only used with recent added type)</param>
         public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
         {
+          string enumtype = Enum.GetName(typeof(MostRecentType), type);
+          LogMyFilms.Debug("GetMostRecent() - Called with type = '" + enumtype + "', days = '" + days + "', limit = '" + limit + "', unwatchedonly = '" + unwatchedOnly + "'");
           List<MFMovie> movielist = new List<MFMovie>();
           ArrayList allmovies = new ArrayList();
           switch (type)
@@ -781,7 +783,9 @@ namespace MyFilmsPlugin.MyFilms
               // string sqlExpression = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
               allmovies = GetMoviesGlobal("", "", limit, unwatchedOnly, days, false);
               movielist = (from MFMovie movie in allmovies select movie).ToList();
-
+              
+              //List<MFMovie> SeenList = movielist.Where(m => m.Watched == true).ToList();
+              
               //// get the movies that we have watched
               //List<MFMovie> SeenList = MovieList.Where(m => m.Watched == true).ToList();
 
@@ -794,6 +798,11 @@ namespace MyFilmsPlugin.MyFilms
               //List<MFMovie> MovieList = (from MFMovie movie in allmovies select movie).ToList();
               //movielist = MovieList.Where(m => m.Watched == true).ToList();
               break;
+          }
+          LogMyFilms.Debug("GetMostRecent() - Returning " + movielist.Count + " movies:");
+          foreach (MFMovie movie in allmovies)
+          {
+            LogMyFilms.Debug("GetMostRecent() - Returning: config = '" + movie.Config + "', title = '" + movie.Title + "', added = '" + movie.DateAdded + "', watched = '" + movie.Watched + "'");
           }
           return movielist;
         }
