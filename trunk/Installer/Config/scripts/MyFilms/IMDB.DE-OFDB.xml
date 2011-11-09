@@ -108,8 +108,8 @@
       <KeyGenreRegExp />
       <KeyGenreIndex />
       <KeyGenrePage />
-      <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x0023_REGEX_x0023__x003C_title_x003E_._x002A__x003F__x005C__x0028_</KeyStartYear>
-      <KeyEndYear>_x0029_</KeyEndYear>
+      <KeyStartYear Param1="_x0023_REVERSE_x0023__x0023_REGEX_x0023__x005C_D" Param2="">_x0023_REGEX_x0023__x003C__x002F_title_x003E_</KeyStartYear>
+      <KeyEndYear>_x0028_</KeyEndYear>
       <KeyYearIndex>Original_x0020_Title</KeyYearIndex>
       <KeyYearPage />
       <KeyStartLinkPersons Param1="_x0023_REGEX_x0023__x002F__x005B__x005C__x003F__x007C__x0022__x005D_._x002A_" Param2="_x002F_fullcredits">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_</KeyStartLinkPersons>
