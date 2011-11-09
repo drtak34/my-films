@@ -557,7 +557,7 @@ namespace MyFilmsPlugin.MyFilms
         public static void GetMovies(ref ArrayList movies)
         {
           // movies = GetMoviesGlobal("", "", -1, false, -1);
-          movies = GetMoviesGlobal("", "", -1, false, -1, true);
+          movies = GetMoviesGlobal("", "", true);
           LogMyFilms.Debug("GetMovies()- movies matched: '" + movies.Count + "'");
         }
 
@@ -777,45 +777,50 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("GetMostRecent() - Called with type = '" + enumtype + "', days = '" + days + "', limit = '" + limit + "', unwatchedonly = '" + unwatchedOnly + "'");
           List<MFMovie> movielist = new List<MFMovie>();
           ArrayList allmovies = new ArrayList();
-          switch (type)
-          {
-            case MostRecentType.Added:
-              // string sqlExpression = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-              allmovies = GetMoviesGlobal("", "", limit, unwatchedOnly, days, false);
-              movielist = (from MFMovie movie in allmovies select movie).ToList();
-              
-              //List<MFMovie> SeenList = movielist.Where(m => m.Watched == true).ToList();
-              
-              //// get the movies that we have watched
-              //List<MFMovie> SeenList = MovieList.Where(m => m.Watched == true).ToList();
 
-              break;
-
-            case MostRecentType.Watched:
-              allmovies = GetMoviesGlobal("", "", limit, false, days, false);
-              movielist = (from MFMovie movie in allmovies select movie).ToList();
-              //// get the movies that we have watched
-              //List<MFMovie> MovieList = (from MFMovie movie in allmovies select movie).ToList();
-              //movielist = MovieList.Where(m => m.Watched == true).ToList();
-              break;
-          }
-          LogMyFilms.Debug("GetMostRecent() - Returning " + movielist.Count + " movies:");
-          foreach (MFMovie movie in allmovies)
-          {
-            LogMyFilms.Debug("GetMostRecent() - Returning: config = '" + movie.Config + "', title = '" + movie.Title + "', added = '" + movie.DateAdded + "', watched = '" + movie.Watched + "'");
-          }
-          return movielist;
-        }
-        #endregion
-
-        private static ArrayList GetMoviesGlobal(string Expression, string Sort, int limit, bool unwatched, int days, bool traktOnly)
-        {
           // Create Time Span to lookup most recents
           DateTime dateCompare = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
           dateCompare = dateCompare.Subtract(new TimeSpan(days, 0, 0, 0, 0));
           string date = dateCompare.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
 
+          // get all movies
+          allmovies = GetMoviesGlobal("", "", false);
+          movielist = (from MFMovie movie in allmovies select movie).ToList();
           
+          switch (type)
+          {
+            case MostRecentType.Added:
+              // string sqlExpression = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
+              
+              // only within the specified timeframe:
+              if (unwatchedOnly)
+                movielist = movielist.Where(m => m.Watched == false).ToList();
+              movielist = movielist.Where(m => m.DateTime > dateCompare).ToList();
+              break;
+
+            case MostRecentType.Watched:
+              // get the movies that we have watched
+              movielist = movielist.Where(m => m.Watched == true).ToList();
+              break;
+          }
+
+          // sort descending by dateadded
+          movielist = movielist.OrderByDescending(x => x.DateTime).ToList();
+          //movielist.Sort((x, y) => -x.DateTime.CompareTo(y.DateTime)); // minus is for descending order... saves movielist.Reverse();
+          LogMyFilms.Debug("GetMostRecent() - Returning (nonlimited) movies: '" + movielist.Count + "'");
+
+          // now apply the result count limit
+          movielist = movielist.Take(limit).ToList();
+          foreach (MFMovie movie in movielist)
+          {
+            LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "'");
+          }
+          return movielist;
+        }
+        #endregion
+
+        private static ArrayList GetMoviesGlobal(string Expression, string Sort, bool traktOnly)
+        {
           ArrayList movies = new ArrayList();
           movies.Clear();
           AntMovieCatalog dataExport = new AntMovieCatalog();
@@ -980,17 +985,13 @@ namespace MyFilmsPlugin.MyFilms
                       try
                       {
                         wdate = Convert.ToDateTime(sr["Date"]);
+                        movie.DateTime = wdate;
                       }
                       catch { }
 
-                      // now check, if movie should be added to results
-                      if (unwatched == false || movie.Watched == false)
-                        if (limit == -1 || moviecount < limit)
-                          if (wdate >= dateCompare || days == -1)
-                        {
-                          movies.Add(movie);
-                          moviecount += 1;
-                        }
+
+                      movies.Add(movie);
+                      moviecount += 1;
                     }
                     catch (Exception mex)
                     {
@@ -1388,6 +1389,7 @@ namespace MyFilmsPlugin.MyFilms
     private float _mFRating;
     private bool _mIWatched;
     private int _mIWatchedCount = -1;
+    private DateTime _mDateTime = System.DateTime.Today;
     private string _mDateAdded = string.Empty;
     private string _mPicture = string.Empty;
     private string _mFanart = string.Empty;
@@ -1471,6 +1473,12 @@ namespace MyFilmsPlugin.MyFilms
       set { _mFRating = value; }
     }
 
+    public DateTime DateTime
+    {
+      get { return _mDateTime; }
+      set { _mDateTime = value; }
+    }
+
     public string DateAdded
     {
       get { return _mDateAdded; }
@@ -1517,6 +1525,7 @@ namespace MyFilmsPlugin.MyFilms
       _mFRating = 0.0f;
       _mIWatched = false;
       _mIWatchedCount = -1;
+      _mDateTime = System.DateTime.Today;
       _mDateAdded = string.Empty;
       _mPicture = string.Empty;
       _mFanart = string.Empty;
