@@ -555,6 +555,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
 
+        public static bool IsTraktAvailableAndEnabledAndVersion1301
+        {
+          get
+          {
+            bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 3, 0, 1), true) && IsPluginEnabled("Trakt");
+            LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
+            return status;
+          }
+        }
+
         public static bool IsBrowseTheWebAvailableAndEnabled
         {
           get

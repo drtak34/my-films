@@ -1321,7 +1321,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "trakt-RelatedMovies":
-                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                if (Helper.IsTraktAvailableAndEnabledAndVersion1301)
                 {
                   TraktRelatedMovies(MyFilms.currentMovie);
                 }
