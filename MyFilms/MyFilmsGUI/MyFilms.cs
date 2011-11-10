@@ -3963,7 +3963,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string strThumbDirectory;
       // string[] strActiveFacadeImages; // image pathes for Icon and Thumb -> moved usage to background thread
       if (isperson)
-        strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
+        strThumbDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons);
       else
         strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + WStrSort.ToLower() + @"\";
       bool getThumbs = false;
@@ -5094,7 +5094,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
                 {
                   ImportComplete();
-                  LogMyFilms.Debug("CHange_View(): Fired 'ImportCompleted' event to trigger sync to trakt page after initial DB import of external Catalog is finished !");
+                  LogMyFilms.Debug("Change_View(): Fired 'ImportCompleted' event to trigger sync to trakt page after initial DB import of external Catalog is finished !");
                 }
               }
             }
@@ -9730,33 +9730,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    static void bgUpdateActors_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+    void bgUpdateActors_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
       BackgroundWorker worker = sender as BackgroundWorker;
       Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-      string wtitle = string.Empty;
-      //foreach (string actor in actors)
-      //{
-      //  if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
-      //    wtitle = t["OriginalTitle"].ToString();
-      //  if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-      //    wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-      //  string wttitle = string.Empty;
-      //  if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
-      //    wttitle = t["TranslatedTitle"].ToString();
-      //  if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-      //    wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-      //  if (t["OriginalTitle"].ToString().Length > 0)
-      //  {
-      //    int wyear = 0;
-      //    try { wyear = System.Convert.ToInt16(t["Year"]); }
-      //    catch { }
-      //    string wdirector = string.Empty;
-      //    try { wdirector = (string)t["Director"]; }
-      //    catch { }
-      //    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, conf.StrPathFanart, true, false, conf.StrTitle1);
-      //  }
-      //}
+      ArrayList persons = e.Argument as ArrayList;
+      
+      foreach (string person in persons)
+      {
+        AddActor(person);
+      }
     }
 
     static void bgUpdateActors_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -9764,6 +9747,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("actors artwork download finished");
     }
 
+    private void AddActor(string name)
+    {
+      AntMovieCatalog ds = new AntMovieCatalog();
+
+      //List<AntMovieCatalog.PersonRow> persons = new List<AntMovieCatalog.PersonRow>();
+      //persons = (from AntMovieCatalog.PersonRow person in ds.Person select person).ToList();
+      //persons = ds.Person.Where(x => x.Name == name).ToList();
+      if (ds.Person.Where(x => x.Name == name).ToList().Count == 0)
+      {
+        AntMovieCatalog.PersonRow person = ds.Person.NewPersonRow();
+        person.Name = name;
+        //ToDo: grab data here ...
+        ds.Person.AddPersonRow(person);
+        LogMyFilms.Info("AddActor() - Added '" + name + "' to Person table");
+      }
+      else
+        LogMyFilms.Info("AddActor() - Not Added '" + name + "' already exists");
+
+    }
 
     //*****************************************************************************************
     //*  Load List movie file in batch mode                                                   *

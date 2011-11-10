@@ -2110,6 +2110,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void SetTraktShout(MFMovie movie)
         {
+          LogMyFilms.Debug("SetTraktShout(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
           TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
           TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
           TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
@@ -2117,6 +2118,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TraktRate(MFMovie movie)
         {
+          LogMyFilms.Debug("TraktRate(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
           TraktPlugin.TraktAPI.DataStructures.TraktRateMovie rateObject = new TraktPlugin.TraktAPI.DataStructures.TraktRateMovie
           {
             IMDBID = movie.IMDBNumber,
@@ -2131,6 +2133,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TraktAddToWatchedList(MFMovie movie)
         {
+          LogMyFilms.Debug("TraktAddToWatchedList(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
           new Thread(delegate()
           {
             TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
@@ -2140,11 +2143,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TraktRelatedMovies(MFMovie movie)
         {
+          LogMyFilms.Debug("TraktRelatedMovies(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
           TraktPlugin.TraktHelper.ShowRelatedMovies(movie.IMDBNumber, movie.Title, movie.Year.ToString());
         }
 
         private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
         {
+          LogMyFilms.Debug("TraktAddRemoveMovieInUserlist(): Call with 'remove = " + remove + "' - Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', file = '" + movie.File + "', path = '" + movie.Path + "'");
           TraktPlugin.TraktHelper.AddRemoveMovieInUserList(movie.Title, movie.Year.ToString(), movie.IMDBNumber, remove);
         }
 
