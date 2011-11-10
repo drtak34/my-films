@@ -1409,7 +1409,7 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = _SourceField ' Sourcefile - field depends on configuration
-            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) Then
+            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) And IsUpdateRequested(CurrentAttribute) Then
                 If (_FilePath.Length > 0) Then
                     If Not String.IsNullOrEmpty(_OverridePath) Then
                         TempValue = _OverridePath
