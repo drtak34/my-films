@@ -1304,9 +1304,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               case "trakt-Shouts":
                 movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
-                SetTraktShout(movie);
-                //SetTraktShout(MyFilms.currentMovie);
-                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
+                this.TraktShout(movie);
+                //TraktShout(MyFilms.currentMovie);
+                //GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
                 break;
 
               case "trakt-Rate":
@@ -2108,12 +2108,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        private void SetTraktShout(MFMovie movie)
+        private void TraktShout(MFMovie movie)
         {
-          LogMyFilms.Debug("SetTraktShout(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
-          TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
-          TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
-          TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
+          LogMyFilms.Debug("TraktShout(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
+          TraktPlugin.TraktHelper.ShowMovieShouts(movie.IMDBNumber, movie.Title, movie.Year.ToString(), movie.Fanart);
+          // replaced by helper call
+          //TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
+          //TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
+          //TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
         }
 
         private void TraktRate(MFMovie movie)
