@@ -122,6 +122,9 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\TaskScheduler.dll</HintPath>
@@ -158,6 +161,7 @@
     <Compile Include="CatalogConverter\DvdProfiler.cs" />
     <Compile Include="CatalogConverter\EaxMovieCatalog3.cs" />
     <Compile Include="CatalogConverter\MovingPicturesXML.cs" />
+    <Compile Include="CatalogConverter\MyMovies-4.cs" />
     <Compile Include="CatalogConverter\PersonalVideoDatabase.cs" />
     <Compile Include="CatalogConverter\XbmcDb.cs" />
     <Compile Include="Configuration\HyperLinkParamGenerator.cs">
