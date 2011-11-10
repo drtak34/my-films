@@ -5,7 +5,7 @@
     <URLPrefix>http://www.moviepilot.de</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>0.1</Version>
+    <Version>0.9</Version>
     <Encoding>utf-8</Encoding>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x0022_.src_x003D__x0022_</KeyStartThumb>
@@ -15,7 +15,7 @@
       <KeyEndList>_x003C_div_x0020_id_x003D__x0027_footer_x0027__x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
-      <KeyNextPage>http:_x002F__x002F_www.filmstarts.de_x002F_suche_x002F_1_x002F__x003F_p_x003D__x0023_Page_x0023__x002F__x003F_q_x003D__x0023_Search_x0023_</KeyNextPage>
+      <KeyNextPage />
       <KeyStartTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0022_._x002A__x003F__x003C_h3_x003E_._x002A__x003F__x003C_a_x0020_href_x003D__x0022_._x002A__x003F_title_x003D__x0022_._x002A__x003F__x003E_</KeyStartTitle>
       <KeyEndTitle>_x003C__x002F_</KeyEndTitle>
       <KeyTitleIndex />
@@ -41,7 +41,7 @@
       <KeyStartBody Param1="" Param2="">_x003C_div_x0020_class_x003D__x0027_cinemas-title_x0027__x0020_id_x003D__x0027_before_content_block_with_tabs_and_sidebar_x0027__x003E_</KeyStartBody>
       <KeyEndBody />
       <KeyStartOTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_h2_x003E_</KeyStartOTitle>
-      <KeyEndOTitle>_x0023_REGEX_x0023__x005C__x0028__x007C__x003C_span_x003E_</KeyEndOTitle>
+      <KeyEndOTitle>_x0023_REGEX_x0023__x005C__x0028__x007C__x002F__x003C_span_x003E_</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
       <KeyStartTTitle Param1="" Param2="">_x003C_h1_x003E_</KeyStartTTitle>
