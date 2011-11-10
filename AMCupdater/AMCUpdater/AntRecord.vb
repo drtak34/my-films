@@ -1280,11 +1280,11 @@ Public Class AntRecord
 
                 ' Get Internetdata with "best title possible"
                 If IsValidTitle(_XMLElement, "FormattedTitle") Then
-                    DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("FormattedTitle").Value.ToString))
+                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("FormattedTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
                 ElseIf IsValidTitle(_XMLElement, "TranslatedTitle") Then
-                    DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("TranslatedTitle").Value.ToString))
+                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
                 ElseIf IsValidTitle(_XMLElement, "OriginalTitle") Then
-                    DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("OriginalTitle").Value.ToString))
+                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("OriginalTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
                 Else
                     DoInternetLookup(GetTitleFromFilePath(_FilePath)) 'No DB title available, so use the cleaned filename instead:
                 End If
@@ -1338,10 +1338,18 @@ Public Class AntRecord
             End If
 
             'Add Edition, if available and requested
-            TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
-            If TempValue <> "" Then
-                If CurrentSettings.Edition_Name_Applies_To = "Original Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
-                    _XMLElement.Attributes("OriginalTitle").Value = _XMLElement.Attributes("OriginalTitle").Value & " (" & TempValue & ")"
+            CurrentAttribute = "Edition"
+            If IsUpdateRequested(CurrentAttribute) = True Then
+                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                'TempValue = _InternetData(Grabber_Output.Edition)
+                'CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode) ' done in separate section
+                ' now add to title, if requested by option
+                If TempValue <> "" Then
+                    If CurrentSettings.Edition_Name_Applies_To = "Original Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
+                        If Not _XMLElement.Attributes("OriginalTitle").Value.Contains(TempValue) Then
+                            _XMLElement.Attributes("OriginalTitle").Value = _XMLElement.Attributes("OriginalTitle").Value & " (" & TempValue & ")"
+                        End If
+                    End If
                 End If
             End If
 
@@ -1367,7 +1375,7 @@ Public Class AntRecord
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
-            CurrentAttribute = "Edition" ' Get "Edition" from filename
+            CurrentAttribute = "Edition" ' Get "Edition" from filename for separate field
             If IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
                 CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
@@ -1589,10 +1597,17 @@ Public Class AntRecord
                 End If
 
                 'Add Edition, if available and requested
-                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
-                If TempValue <> "" Then
-                    If CurrentSettings.Edition_Name_Applies_To = "Translated Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
-                        _XMLElement.Attributes("TranslatedTitle").Value = _XMLElement.Attributes("TranslatedTitle").Value & " (" & TempValue & ")"
+                CurrentAttribute = "Edition"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    'TempValue = _InternetData(Grabber_Output.Edition)
+                    TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                    'CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode) ' done in separate section
+                    If TempValue <> "" Then
+                        If CurrentSettings.Edition_Name_Applies_To = "Translated Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
+                            If Not _XMLElement.Attributes("TranslatedTitle").Value.Contains(TempValue) Then
+                                _XMLElement.Attributes("TranslatedTitle").Value = _XMLElement.Attributes("TranslatedTitle").Value & " (" & TempValue & ")"
+                            End If
+                        End If
                     End If
                 End If
 

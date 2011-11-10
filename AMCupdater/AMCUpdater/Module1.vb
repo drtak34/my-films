@@ -1347,14 +1347,14 @@ Module Module1
         year = 0
 
         If Not MovieRecord.Attributes("OriginalTitle") Is Nothing Then
-            title = RemoveGroupName(MovieRecord.Attributes("OriginalTitle").Value)
+            title = RemoveGroupNameAndEdition(MovieRecord.Attributes("OriginalTitle").Value, "")
             If CurrentSettings.Master_Title = "OriginalTitle" Then
                 mastertitle = title
             End If
         End If
 
         If Not MovieRecord.Attributes("TranslatedTitle") Is Nothing Then
-            ttitle = RemoveGroupName(MovieRecord.Attributes("TranslatedTitle").Value)
+            ttitle = RemoveGroupNameAndEdition(MovieRecord.Attributes("TranslatedTitle").Value, "")
             'If ttitle.Contains("(") Then
             '    ttitle = ttitle.Substring(0, ttitle.IndexOf("("))
             'End If
@@ -1364,7 +1364,7 @@ Module Module1
         End If
 
         If Not MovieRecord.Attributes("FormattedTitle") Is Nothing Then
-            ftitle = RemoveGroupName(MovieRecord.Attributes("FormattedTitle").Value)
+            ftitle = RemoveGroupNameAndEdition(MovieRecord.Attributes("FormattedTitle").Value, "")
             If CurrentSettings.Master_Title = "FormattedTitle" Then
                 mastertitle = ftitle
             End If
@@ -1409,7 +1409,7 @@ Module Module1
         End If
         Return fanartTitle
     End Function
-    Public Function RemoveGroupName(ByVal FullName As String) As String
+    Public Function RemoveGroupNameAndEdition(ByVal FullName As String, ByVal Edition As String) As String
         Dim Name As String
         If FullName.Contains("\") = True Then
             'FullName = FullName.Substring(0, FullName.IndexOf("\") - 1) ' remove rest of group name part (group fanart)
@@ -1417,6 +1417,13 @@ Module Module1
         Else
             Name = FullName
         End If
+
+        If Not String.IsNullOrEmpty(Edition) Then
+            If Name.Contains(Edition) = True Then
+                Name = Name.Replace(Edition, "") ' remove edition name part
+            End If
+        End If
+
         Return Name
     End Function
     Public Function WriteNfoFile(ByVal OutFileName As String, ByVal node As XmlNode, ByVal UpdateOnlyMissing As Boolean, ByVal mastertitle As String)
