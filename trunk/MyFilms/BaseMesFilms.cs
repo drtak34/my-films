@@ -217,15 +217,14 @@ namespace MyFilmsPlugin.MyFilms
           else 
             LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
           if (StrSelect.Length == 0)
-          {
             StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
-          }
-          movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+
+          movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           if (movies.Length == 0 && all)
           {
             StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
             LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
-            movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+            movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
           LogMyFilms.Debug("ReadDataMovies() - Finished ...");
           return movies;
@@ -235,16 +234,11 @@ namespace MyFilmsPlugin.MyFilms
         {
           if (data == null) initData();
           if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
-          persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
+          persons = data.Person.Select(StrSelect, StrSort + " " + StrSortSens);
           if (persons.Length == 0 && all)
           {
             StrSelect = "Name" + " not like ''";
-            persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
-            //Guzzi
-            LogMyFilms.Debug("Persons:  StrSelect          : '" + StrSelect + "'");
-            LogMyFilms.Debug("Persons:  StrSort            : '" + StrSort + "'");
-            LogMyFilms.Debug("Persons:  StrSortSens        : '" + StrSortSens + "'");
-            LogMyFilms.Debug("Persons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
+            persons = data.Person.Select(StrSelect, StrSort + " " + StrSortSens);
           }
           return persons;
         }
@@ -253,11 +247,11 @@ namespace MyFilmsPlugin.MyFilms
         {
           if (myfilmsdata == null) initDataMyFilms();
           if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
-          history = myfilmsdata.Tables["History"].Select(StrSelect, StrSort + " " + StrSortSens);
+          history = myfilmsdata.Watched.Select(StrSelect, StrSort + " " + StrSortSens);
           if (history.Length == 0 && all)
           {
             StrSelect = "Name" + " not like ''";
-            history = data.Tables["History"].Select(StrSelect, StrSort + " " + StrSortSens);
+            history = myfilmsdata.Watched.Select(StrSelect, StrSort + " " + StrSortSens);
           }
           return history;
         }
@@ -1195,8 +1189,6 @@ namespace MyFilmsPlugin.MyFilms
           return wtab;
         }
 
-
-
         public static string Translate_Column(string Column)
         {
             //string s = Column;
@@ -1396,6 +1388,8 @@ namespace MyFilmsPlugin.MyFilms
     private string _mConfig = string.Empty;
     private string _mUsername = string.Empty;
     private bool _mReadOnly = false;
+    private bool _mAllowTrakt = false;
+    private bool _mAllowLatestMediaAPI = false;
     #endregion
 
     public MFMovie() { }
@@ -1514,6 +1508,18 @@ namespace MyFilmsPlugin.MyFilms
       get { return _mReadOnly; }
       set { _mReadOnly = value; }
     }
+
+    public bool AllowTrakt
+    {
+      get { return _mAllowTrakt; }
+      set { _mAllowTrakt = value; }
+    }
+
+    public bool AllowLatestMediaAPI
+    {
+      get { return _mAllowLatestMediaAPI; }
+      set { _mAllowLatestMediaAPI = value; }
+    }
     #endregion
 
     public void Reset()
@@ -1532,6 +1538,8 @@ namespace MyFilmsPlugin.MyFilms
       _mConfig = string.Empty;
       _mUsername = string.Empty;
       _mReadOnly = false;
+      _mAllowTrakt = false;
+      _mAllowLatestMediaAPI = false;
     }
 
     public void Commit()

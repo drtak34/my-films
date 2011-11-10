@@ -40,6 +40,9 @@ namespace MyFilmsPlugin.MyFilms
           logBackup,
           lang,
           thumbs,
+          thumbsViews,
+          thumbsGroups,
+          thumbsPersons,
           app,
           skin
         };
@@ -57,6 +60,9 @@ namespace MyFilmsPlugin.MyFilms
         static string backupLogPath = string.Empty;
         static string langPath = string.Empty;
         static string thumbsPath = string.Empty;
+        static string thumbsPathViews = string.Empty;
+        static string thumbsPathGroups = string.Empty;
+        static string thumbsPathPersons = string.Empty;
         static string apppath = string.Empty;
         static string skinPath = string.Empty;
         #endregion
@@ -94,6 +100,9 @@ namespace MyFilmsPlugin.MyFilms
             backupLogPath = Config.GetFile(Config.Dir.Log, "MyFilms.bak");
             langPath = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
             thumbsPath = Config.GetFolder(Config.Dir.Thumbs);
+            thumbsPathViews = Config.GetFolder(Config.Dir.Thumbs);
+            thumbsPathGroups = Config.GetFolder(Config.Dir.Thumbs);
+            thumbsPathPersons = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             skinPath = Config.GetFolder(Config.Dir.Skin);
             initFolders();
         }
@@ -149,6 +158,12 @@ namespace MyFilmsPlugin.MyFilms
               return langPath;
             case Path.thumbs:
               return thumbsPath;
+            case Path.thumbsViews:
+              return thumbsPathViews;
+            case Path.thumbsGroups:
+              return thumbsPathGroups;
+            case Path.thumbsPersons:
+              return thumbsPathPersons;
             case Path.app:
               return apppath;
             case Path.skin:
