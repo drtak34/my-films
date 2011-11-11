@@ -1202,33 +1202,35 @@ Public Class AntRecord
             If (ProcessMode = Process_Mode_Names.Import) Then
                 'Second get a decent Movie Title which we can then use for Internet Lookups as well as the Original Title field.
                 'LogEvent("ProcessFile() - Import: Get search & matching hints...", EventLogLevel.InformationalWithGrabbing)
-                If _DatabaseFields("originaltitle") = True Then
-                    'add a test for manual update when no file specified => Internet lookup with OriginalTitle     
-                    If (_FilePath.Length > 0) Then
-                        TempValue = GetTitleFromFilePath(_FilePath)
-                        CurrentAttribute = "OriginalTitle"
-                        title = TempValue
+
+                CurrentAttribute = "OriginalTitle" 'add a test for manual update when no file specified => Internet lookup with OriginalTitle     
+                If (_FilePath.Length > 0) Then
+                    TempValue = GetTitleFromFilePath(_FilePath)
+                    title = TempValue
+                    'LogEvent("ProcessFile() - Import - hints - title: '" & title & "'", EventLogLevel.InformationalWithGrabbing)
+                    If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                         CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
-                        'LogEvent("ProcessFile() - Import - hints - title: '" & title & "'", EventLogLevel.InformationalWithGrabbing)
                     End If
                 End If
-                If _DatabaseFields("year") = True Then
-                    'try to get year from filepath/name 
-                    If (_FilePath.Length > 0) Then
-                        TempValue = GetYearFromFilePath(_FilePath)
-                        _InternetSearchHintYear = TempValue
-                        CurrentAttribute = "Year"
+
+                CurrentAttribute = "Year" 'try to get year from filepath/name 
+                If (_FilePath.Length > 0) Then
+                    TempValue = GetYearFromFilePath(_FilePath)
+                    _InternetSearchHintYear = TempValue
+                    'LogEvent("ProcessFile() - Import - hints - year: '" & _InternetSearchHintYear & "'", EventLogLevel.InformationalWithGrabbing)
+                    If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                         CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
-                        'LogEvent("ProcessFile() - Import - hints - year: '" & _InternetSearchHintYear & "'", EventLogLevel.InformationalWithGrabbing)
                     End If
                 End If
-                'try to get IMDB Id from filepath/name
+
+                CurrentAttribute = "IMDB_Id" 'try to get IMDB Id from filepath/name
                 If (_FilePath.Length > 0) Then
                     TempValue = GetIMDBidFromFilePath(_FilePath)
-                    CurrentAttribute = "IMDB_Id"
                     _InternetSearchHintIMDB_Id = TempValue
-                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                     'LogEvent("ProcessFile() - Import - hints - imdb_id: '" & _InternetSearchHintIMDB_Id & "'", EventLogLevel.InformationalWithGrabbing)
+                    If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                        CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                    End If
                     TempValue = ""
                 End If
             End If
@@ -1252,11 +1254,10 @@ Public Class AntRecord
                             End If
                         End If
                     End If
+
                     If _XMLElement.Attributes("Year") IsNot Nothing Then
                         _InternetSearchHintYear = _XMLElement.Attributes("Year").Value.ToString
                     End If
-                    'LogEvent("ProcessFile() - Update - _InternetSearchHint: '" & _InternetSearchHint & "'", EventLogLevel.InformationalWithGrabbing)
-
 
                     If _XMLElement.Item("IMDB_Id") IsNot Nothing Then
                         If _XMLElement.Item("IMDB_Id").InnerText.Length > 0 Then
@@ -1302,56 +1303,34 @@ Public Class AntRecord
                 End If
             End If
 
-            If _InternetLookupOK = True Then
-                'Now update the Original Title with the Internet value, if set to do so:
-                If _MovieTitleHandling.Contains("Internet Lookup") = True Then
-                    If _DatabaseFields("originaltitle") = True Then
-                        CurrentAttribute = "OriginalTitle"
+            ' Now update all requested fields ...
+
+            CurrentAttribute = "OriginalTitle" 'Now update the Original Title with the Internet value, if set to do so:
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                TempValue = GetTitleFromFilePath(_FilePath)
+                If _InternetLookupOK = True Then
+                    If _MovieTitleHandling.Contains("Internet Lookup") = True Then
                         TempValue = _InternetData(Grabber_Output.OriginalTitle)
                         title = TempValue
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                     End If
                 End If
-            Else
-                'If the Internet Lookup has failed, and the user has requested a Translated Title, use the Original Title instead:
-                CurrentAttribute = "TranslatedTitle"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                TempValue = AddGroupName(TempValue, "Original Title") 'Check to see if there's a group name attached to this, and apply it.
+                TempValue = AddEdition(TempValue, "Original Title") 'Add Edition, if available and requested
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
+            End If
+
+            CurrentAttribute = "TranslatedTitle"
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                If _InternetLookupOK = True Then
+                    TempValue = _InternetData(Grabber_Output.TranslatedTitle)
+                Else
                     TempValue = GetTitleFromFilePath(_FilePath)
-                    If _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
-                        If _XMLElement.Attributes("OriginalTitle").Value.ToString <> String.Empty Then
-                            TempValue = _XMLElement.Attributes("OriginalTitle").Value.ToString
-                        End If
-                    End If
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
+                TempValue = AddGroupName(TempValue, "Translated Title")
+                TempValue = AddEdition(TempValue, "Translated Title")
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
-            'Finally, check to see if there's a group name attached to this, and apply it.
-            If _GroupName <> "" Then
-                If CurrentSettings.Folder_Name_Is_Group_Name = True Then
-                    If CurrentSettings.Group_Name_Applies_To = "Original Title" Or CurrentSettings.Group_Name_Applies_To = "Both Titles" Then
-                        If _XMLElement.Attributes("OriginalTitle").Value <> _GroupName.ToString Then
-                            _XMLElement.Attributes("OriginalTitle").Value = _GroupName.ToString & "\" & _XMLElement.Attributes("OriginalTitle").Value
-                        End If
-                    End If
-                End If
-            End If
-
-            'Add Edition, if available and requested
-            CurrentAttribute = "Edition"
-            If IsUpdateRequested(CurrentAttribute) = True Then
-                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
-                'TempValue = _InternetData(Grabber_Output.Edition)
-                'CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode) ' done in separate section
-                ' now add to title, if requested by option
-                If TempValue <> "" Then
-                    If CurrentSettings.Edition_Name_Applies_To = "Original Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
-                        If Not _XMLElement.Attributes("OriginalTitle").Value.Contains(TempValue) Then
-                            _XMLElement.Attributes("OriginalTitle").Value = _XMLElement.Attributes("OriginalTitle").Value & " (" & TempValue & ")"
-                        End If
-                    End If
-                End If
-            End If
 
             ' Guzzi: Original Code does remove old entries with same otitle name
             'Try to see if entry already exist with empty movie filename => delete the new entry and update existing one
@@ -1364,37 +1343,33 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = "FormattedTitle"
-            If IsUpdateRequested(CurrentAttribute) = True Then
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If _XMLElement.Attributes("TranslatedTitle") IsNot Nothing Then
-                    'TempValue = _XMLElement.Attributes("TranslatedTitle").Value
-                    TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("TranslatedTitle").Value)
+                    TempValue = Grabber.GrabUtil.TitleToArchiveName(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
+                    TempValue = AddGroupName(TempValue, "Translated Title")
+                    TempValue = AddEdition(TempValue, "Translated Title")
                 ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
-                    'TempValue = _XMLElement.Attributes("OriginalTitle").Value
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("OriginalTitle").Value)
+                    TempValue = AddGroupName(TempValue, "Original Title")
+                    TempValue = AddEdition(TempValue, "Original Title")
                 End If
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
-            CurrentAttribute = "Edition" ' Get "Edition" from filename for separate field
-            If IsUpdateRequested(CurrentAttribute) = True Then
-                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
-                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
-            End If
-
             CurrentAttribute = "Date"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "Date")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Checked"
-            If IsUpdateRequested(CurrentAttribute) = True Then
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = CurrentSettings.Check_Field_Handling.ToString
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "MediaLabel"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If _Read_DVD_Label = True Then
                     Dim DriveLabel As String = String.Empty
                     DriveLabel = DrvLabel(_FilePath)
@@ -1411,13 +1386,13 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = "MediaType"
-            If Not String.IsNullOrEmpty(_MediaType) And IsUpdateRequested(CurrentAttribute) = True Then
+            If Not String.IsNullOrEmpty(_MediaType) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = _MediaType
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = _SourceField ' Sourcefile - field depends on configuration
-            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) And IsUpdateRequested(CurrentAttribute) Then
+            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) And IsUpdateRequested(CurrentAttribute, ProcessMode) Then
                 If (_FilePath.Length > 0) Then
                     If Not String.IsNullOrEmpty(_OverridePath) Then
                         TempValue = _OverridePath
@@ -1434,25 +1409,25 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = "Subtitles"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "textstreamlanguagelist")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Languages"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "audiostreamlanguagelist")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Resolution"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "Resolution")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Length"
-            If IsUpdateRequested(CurrentAttribute) = True Then
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 'TempValue = fnGetFileData(_FilePath, "Runtime")
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
@@ -1475,37 +1450,37 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = "VideoFormat"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "VideoFormat")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "VideoBitrate"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "VideoBitrate")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "AudioFormat"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "AudioFormat")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "AudioBitrate"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "AudioBitrate")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Framerate"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "Framerate")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Size"
-            If IsUpdateRequested(CurrentAttribute) = True Then
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
                         If GetFileData(wfile, "FileSize") <> "" And Not GetFileData(wfile, "FileSize").Contains("ERROR") Then
@@ -1526,7 +1501,7 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = "Disks"
-            If IsUpdateRequested(CurrentAttribute) = True Then
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 Dim Diskcount As Integer = 0
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
@@ -1539,12 +1514,18 @@ Public Class AntRecord
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
+            CurrentAttribute = "Edition" ' Get "Edition" from filename for separate field
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+            End If
+
 
             If _InternetLookupOK = False Then
 
                 'Additional attempt to load picture with folder.jpg settings, in case Internet lookup fails
                 CurrentAttribute = "Picture"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     Dim CoverFileExists As Boolean = False
                     Dim Filename As String = _FilePath ' media file
                     Dim PicturePathToSave As String = String.Empty ' the strintg to save in DB field Pictures = "..."
@@ -1579,100 +1560,68 @@ Public Class AntRecord
 
                 title = _InternetData(Grabber_Output.OriginalTitle)
 
-                CurrentAttribute = "TranslatedTitle"
-                If IsUpdateRequested(CurrentAttribute) = True Then
-                    TempValue = _InternetData(Grabber_Output.TranslatedTitle)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
-                End If
-
-                'Finally, check to see if there's a group name attached to this, and apply it.
-                If _GroupName <> "" Then
-                    If CurrentSettings.Folder_Name_Is_Group_Name = True Then
-                        If CurrentSettings.Group_Name_Applies_To = "Translated Title" Or CurrentSettings.Group_Name_Applies_To = "Both Titles" Then
-                            If _XMLElement.Attributes("TranslatedTitle").Value <> _GroupName.ToString Then
-                                _XMLElement.Attributes("TranslatedTitle").Value = _GroupName.ToString & "\" & _XMLElement.Attributes("TranslatedTitle").Value
-                            End If
-                        End If
-                    End If
-                End If
-
-                'Add Edition, if available and requested
-                CurrentAttribute = "Edition"
-                If IsUpdateRequested(CurrentAttribute) = True Then
-                    'TempValue = _InternetData(Grabber_Output.Edition)
-                    TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
-                    'CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode) ' done in separate section
-                    If TempValue <> "" Then
-                        If CurrentSettings.Edition_Name_Applies_To = "Translated Title" Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
-                            If Not _XMLElement.Attributes("TranslatedTitle").Value.Contains(TempValue) Then
-                                _XMLElement.Attributes("TranslatedTitle").Value = _XMLElement.Attributes("TranslatedTitle").Value & " (" & TempValue & ")"
-                            End If
-                        End If
-                    End If
-                End If
-
                 CurrentAttribute = "Year"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Year)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Country"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Country)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Category"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Category)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "URL"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.URL)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Rating"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Rating)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Director"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Director)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Producer"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Producer)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Actors"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Actors)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Description"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Description)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Comments"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Comments)
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Picture"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     If CurrentSettings.Use_Folder_Dot_Jpg = True Then
                         'First check to see if the file exists in a nice safe way:
                         Dim FileExists As Boolean = False
@@ -1830,58 +1779,59 @@ Public Class AntRecord
 
                 ' Guzzi: Added Languages, Writer, Certification, Tagline
                 CurrentAttribute = "Languages"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Language)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Certification"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Certification)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Writer"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Writer)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "TagLine"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Tagline)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Imdb_Id"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.IMDB_Id)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Imdb_Rank"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.IMDBrank)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Studio"
-                If IsUpdateRequested(CurrentAttribute) = True Then
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                     TempValue = _InternetData(Grabber_Output.Studio)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
-                'CurrentAttribute = "Edition"
-                'If IsUpdateRequested(CurrentAttribute) = True Then
-                '    TempValue = _InternetData(Grabber_Output.Edition)
-                '    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
-                'End If
+                CurrentAttribute = "Edition" ' Disabled, as we use edition from local media file in noninternet section abovedone in separate section
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                    'TempValue = _InternetData(Grabber_Output.Edition)
+                    'TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                    'CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode) 
+                End If
 
             End If
 
             'get fanart
             CurrentAttribute = "Fanart"
-            If IsUpdateRequested(CurrentAttribute) = True Then ' Old: If _DatabaseFields(CurrentAttribute.ToLower) = True Then
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then ' Old: If _DatabaseFields(CurrentAttribute.ToLower) = True Then
 
                 Dim fanartTitle As String = ""
                 Dim ftitle As String = ""
@@ -1952,14 +1902,14 @@ Public Class AntRecord
         End Try
     End Sub
 
-    Private Function IsUpdateRequested(ByVal currentAttribute As String) As Boolean
+    Private Function IsUpdateRequested(ByVal currentAttribute As String, ByVal ProcessMode As Process_Mode_Names) As Boolean
         Dim attr As Xml.XmlAttribute
         Dim element As Xml.XmlElement
         Dim IsUpdateRequired As Boolean = False
         If _DatabaseFields(currentAttribute.ToLower) = False Then ' Field not selected !
             Return False
         Else
-            If OnlyAddMissingData = True Then
+            If OnlyAddMissingData = True And ProcessMode = Process_Mode_Names.Update Then
                 attr = _XMLElement.Attributes(currentAttribute)
                 element = _XMLElement.Item(currentAttribute)
                 If attr Is Nothing And element Is Nothing Then ' no values exist at all
@@ -2101,12 +2051,37 @@ Public Class AntRecord
         End If
         Return ValidTitle
     End Function
+    Private Function AddEdition(ByRef Title As String, ByRef TitleField As String) As String
+        Dim TempValue = Title
 
+        Dim Edition As String = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+        If Edition <> "" Then
+            If CurrentSettings.Edition_Name_Applies_To = TitleField Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
+                If Not TempValue.EndsWith(" (" & Edition & ")") Then
+                    TempValue = TempValue & " (" & Edition & ")"
+                End If
+            End If
+        End If
+        Return TempValue
+    End Function
+    Private Function AddGroupName(ByRef Title As String, ByRef TitleField As String) As String
+        Dim TempValue = Title
+
+        If _GroupName <> "" Then
+            If CurrentSettings.Folder_Name_Is_Group_Name = True Then
+                If CurrentSettings.Group_Name_Applies_To = TitleField Or CurrentSettings.Group_Name_Applies_To = "Both Titles" Then
+                    If TempValue <> _GroupName.ToString And Not TempValue.StartsWith(_GroupName.ToString & "\") Then
+                        TempValue = _GroupName.ToString & "\" & TempValue
+                    End If
+                End If
+            End If
+        End If
+        Return TempValue
+    End Function
 
     Public Sub UpdateElement()
 
         Dim CurrentNode As Xml.XmlNode
-
         CurrentNode = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & _MovieNumber & "']")
         CurrentNode.Attributes(_SourceField).Value = _OverridePath
         _XMLElement = CurrentNode

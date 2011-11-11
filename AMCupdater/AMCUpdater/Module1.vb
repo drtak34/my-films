@@ -1413,7 +1413,7 @@ Module Module1
         Dim Name As String
         If FullName.Contains("\") = True Then
             'FullName = FullName.Substring(0, FullName.IndexOf("\") - 1) ' remove rest of group name part (group fanart)
-            Name = FullName.Substring(FullName.IndexOf("\") + 1) ' remove group name part
+            Name = FullName.Substring(FullName.LastIndexOf("\") + 1) ' remove group name part
         Else
             Name = FullName
         End If
