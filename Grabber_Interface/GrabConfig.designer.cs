@@ -106,6 +106,7 @@ namespace Grabber_Interface
           this.textLanguage = new System.Windows.Forms.TextBox();
           this.textType = new System.Windows.Forms.TextBox();
           this.textVersion = new System.Windows.Forms.TextBox();
+          this.textSearchCleanup = new System.Windows.Forms.TextBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -141,8 +142,7 @@ namespace Grabber_Interface
           this.label15 = new System.Windows.Forms.Label();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
-          this.label34 = new System.Windows.Forms.Label();
-          this.lblType = new System.Windows.Forms.Label();
+          this.label9 = new System.Windows.Forms.Label();
           this.labelSearchPosition = new System.Windows.Forms.Label();
           this.PositionSearch = new System.Windows.Forms.Label();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -181,6 +181,8 @@ namespace Grabber_Interface
           this.label6 = new System.Windows.Forms.Label();
           this.label5 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
+          this.label34 = new System.Windows.Forms.Label();
+          this.lblType = new System.Windows.Forms.Label();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
           this.label33 = new System.Windows.Forms.Label();
           this.label32 = new System.Windows.Forms.Label();
@@ -199,13 +201,11 @@ namespace Grabber_Interface
           this.label26 = new System.Windows.Forms.Label();
           this.label25 = new System.Windows.Forms.Label();
           this.tabControl1 = new System.Windows.Forms.TabControl();
-          this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.Version_Label = new System.Windows.Forms.Label();
           this.lblLanguage = new System.Windows.Forms.Label();
           this.lblVersion = new System.Windows.Forms.Label();
-          this.label9 = new System.Windows.Forms.Label();
-          this.textSearchCleanup = new System.Windows.Forms.TextBox();
+          this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -856,6 +856,12 @@ namespace Grabber_Interface
           this.textVersion.Name = "textVersion";
           this.toolTip1.SetToolTip(this.textVersion, resources.GetString("textVersion.ToolTip"));
           // 
+          // textSearchCleanup
+          // 
+          resources.ApplyResources(this.textSearchCleanup, "textSearchCleanup");
+          this.textSearchCleanup.Name = "textSearchCleanup";
+          this.toolTip1.SetToolTip(this.textSearchCleanup, resources.GetString("textSearchCleanup.ToolTip"));
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1100,12 +1106,14 @@ namespace Grabber_Interface
           // tabPageSearchPage
           // 
           this.tabPageSearchPage.Controls.Add(this.textSearchCleanup);
+          this.tabPageSearchPage.Controls.Add(this.label34);
           this.tabPageSearchPage.Controls.Add(this.label9);
           this.tabPageSearchPage.Controls.Add(this.labelSearchPosition);
           this.tabPageSearchPage.Controls.Add(this.PositionSearch);
           this.tabPageSearchPage.Controls.Add(this.groupBox6);
           this.tabPageSearchPage.Controls.Add(this.groupBox5);
           this.tabPageSearchPage.Controls.Add(this.buttonPrevParam1);
+          this.tabPageSearchPage.Controls.Add(this.textEncoding);
           this.tabPageSearchPage.Controls.Add(this.label17);
           this.tabPageSearchPage.Controls.Add(this.textRedir);
           this.tabPageSearchPage.Controls.Add(this.textBody);
@@ -1122,15 +1130,10 @@ namespace Grabber_Interface
           this.tabPageSearchPage.Name = "tabPageSearchPage";
           this.tabPageSearchPage.UseVisualStyleBackColor = true;
           // 
-          // label34
+          // label9
           // 
-          resources.ApplyResources(this.label34, "label34");
-          this.label34.Name = "label34";
-          // 
-          // lblType
-          // 
-          resources.ApplyResources(this.lblType, "lblType");
-          this.lblType.Name = "lblType";
+          resources.ApplyResources(this.label9, "label9");
+          this.label9.Name = "label9";
           // 
           // labelSearchPosition
           // 
@@ -1420,6 +1423,16 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label4, "label4");
           this.label4.Name = "label4";
           // 
+          // label34
+          // 
+          resources.ApplyResources(this.label34, "label34");
+          this.label34.Name = "label34";
+          // 
+          // lblType
+          // 
+          resources.ApplyResources(this.lblType, "lblType");
+          this.lblType.Name = "lblType";
+          // 
           // tabPageUserSettings
           // 
           this.tabPageUserSettings.Controls.Add(this.label33);
@@ -1588,14 +1601,6 @@ namespace Grabber_Interface
           this.tabControl1.Name = "tabControl1";
           this.tabControl1.SelectedIndex = 0;
           // 
-          // iMDBEnumeratorBindingSource
-          // 
-          this.iMDBEnumeratorBindingSource.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
-          // 
-          // iMDBEnumeratorBindingSource1
-          // 
-          this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
-          // 
           // Version_Label
           // 
           resources.ApplyResources(this.Version_Label, "Version_Label");
@@ -1611,29 +1616,24 @@ namespace Grabber_Interface
           resources.ApplyResources(this.lblVersion, "lblVersion");
           this.lblVersion.Name = "lblVersion";
           // 
-          // label9
+          // iMDBEnumeratorBindingSource
           // 
-          resources.ApplyResources(this.label9, "label9");
-          this.label9.Name = "label9";
+          this.iMDBEnumeratorBindingSource.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
-          // textSearchCleanup
+          // iMDBEnumeratorBindingSource1
           // 
-          resources.ApplyResources(this.textSearchCleanup, "textSearchCleanup");
-          this.textSearchCleanup.Name = "textSearchCleanup";
-          this.toolTip1.SetToolTip(this.textSearchCleanup, resources.GetString("textSearchCleanup.ToolTip"));
+          this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.Controls.Add(this.lblType);
-          this.Controls.Add(this.label34);
           this.Controls.Add(this.lblVersion);
           this.Controls.Add(this.lblLanguage);
           this.Controls.Add(this.textVersion);
           this.Controls.Add(this.textLanguage);
           this.Controls.Add(this.textType);
-          this.Controls.Add(this.textEncoding);
           this.Controls.Add(this.Version_Label);
           this.Controls.Add(this.button_SaveAs);
           this.Controls.Add(this.buttonExpertMode);

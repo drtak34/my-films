@@ -7,6 +7,7 @@
     <Type>details|cover</Type>
     <Version>0.9</Version>
     <Encoding>UTF-8</Encoding>
+    <SearchCleanup />
     <URLSearch>
       <KeyStartThumb Param1="galeria" Param2="http:_x002F__x002F_www.cineol.net_x002F_galeria">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>

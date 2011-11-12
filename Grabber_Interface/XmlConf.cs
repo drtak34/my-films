@@ -308,7 +308,7 @@ public class TagName
   public static string Type = "Type";                           // Added Type to filter grabber scripts in choice menus
   public static string Version = "Version";                     // Added Version for future use
   public static string Encoding = "Encoding";                   // Added Encoding as override options for webpages not properly posting page encoding
-  public static string SearchCleanup = "SearchCleanup ";        // Added Encoding as override options for webpages not properly posting page encoding
+  public static string SearchCleanup = "SearchCleanup";         // Added Encoding as override options for webpages not properly posting page encoding
 
   public static string KeyStartThumb = "KeyStartThumb";         // Start / End Thumb for cover image in list result view
   public static string KeyEndThumb = "KeyEndThumb";

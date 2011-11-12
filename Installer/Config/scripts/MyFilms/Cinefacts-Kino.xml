@@ -7,6 +7,7 @@
     <Type>details|cover</Type>
     <Version>1.0</Version>
     <Encoding />
+    <SearchCleanup />
     <URLSearch>
       <KeyStartThumb Param1="_x002E_php" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_bild.php">_x0023_REGEX_x0023__x003C_img_x0020_src_x003D__x0022_bild</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
