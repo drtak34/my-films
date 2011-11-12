@@ -52,10 +52,10 @@ Public Class Form1
     End Sub
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If My.Settings.MainFormSize.Height <> 0 And My.Settings.MainFormSize.Width <> 0 Then
+        If My.Settings.MainFormSize.Height > 0 And My.Settings.MainFormSize.Width > 0 Then
             Me.Size = My.Settings.MainFormSize
         End If
-        If My.Settings.MainFormLocation.X <> 0 And My.Settings.MainFormLocation.Y <> 0 Then
+        If My.Settings.MainFormLocation.X > 0 And My.Settings.MainFormLocation.Y > 0 Then
             Me.Location = My.Settings.MainFormLocation
         End If
 
@@ -65,10 +65,10 @@ Public Class Form1
         Else
             dgLogWindow.Visible = False
         End If
-        If My.Settings.LogFormSize.Height <> 0 And My.Settings.LogFormSize.Width <> 0 Then
+        If My.Settings.LogFormSize.Height > 0 And My.Settings.LogFormSize.Width > 0 Then
             dgLogWindow.Size = My.Settings.LogFormSize
         End If
-        If My.Settings.LogFormLocation.X <> 0 And My.Settings.LogFormLocation.Y <> 0 Then
+        If My.Settings.LogFormLocation.X > 0 And My.Settings.LogFormLocation.Y > 0 Then
             dgLogWindow.Location = My.Settings.LogFormLocation
         End If
 
