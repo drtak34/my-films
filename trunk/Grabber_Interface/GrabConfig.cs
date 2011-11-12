@@ -295,11 +295,13 @@ namespace Grabber_Interface
 
         if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
           TextURL.Text = "http://" + TextURL.Text;
-        if (!TextSearch.Text.Contains("\\"))
-          strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
-        else 
-          strSearch = TextSearch.Text;
-        strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text);
+
+        strSearch = TextSearch.Text;
+        strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text); // cleanup search expression
+        if (!strSearch.Contains("\\"))
+          strSearch = GrabUtil.encodeSearch(strSearch, textEncoding.Text);
+        else
+          strSearch = strSearch;
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
 
@@ -4523,8 +4525,9 @@ namespace Grabber_Interface
       if (TextURL.Text.Length > 0)
       {
         if (TextURL.Text.StartsWith("http://") == false) TextURL.Text = "http://" + TextURL.Text;
-        string strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
+        string strSearch = TextSearch.Text;
         strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text);
+        strSearch = GrabUtil.encodeSearch(strSearch, textEncoding.Text);
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
         try
