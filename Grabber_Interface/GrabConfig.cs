@@ -299,6 +299,7 @@ namespace Grabber_Interface
           strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
         else 
           strSearch = TextSearch.Text;
+        strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text);
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
 
@@ -406,6 +407,8 @@ namespace Grabber_Interface
       try { textVersion.Text = xmlConf.find(xmlConf.listGen, TagName.Version)._Value; }
       catch (Exception) { textVersion.Text = ""; }
       try { textType.Text = xmlConf.find(xmlConf.listGen, TagName.Type)._Value; }
+      catch (Exception) { textType.Text = ""; }
+      try { textSearchCleanup.Text = xmlConf.find(xmlConf.listGen, TagName.SearchCleanup)._Value; }
       catch (Exception) { textType.Text = ""; }
 
       TextURL.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
@@ -532,6 +535,8 @@ namespace Grabber_Interface
       try { xmlConf.find(xmlConf.listGen, TagName.Version)._Value = textVersion.Text; }
       catch (Exception) { }
       try { xmlConf.find(xmlConf.listGen, TagName.Type)._Value = textType.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.SearchCleanup)._Value = textSearchCleanup.Text; }
       catch (Exception) { }
 
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
@@ -4519,6 +4524,7 @@ namespace Grabber_Interface
       {
         if (TextURL.Text.StartsWith("http://") == false) TextURL.Text = "http://" + TextURL.Text;
         string strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
+        strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text);
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
         try
