@@ -7,6 +7,7 @@
     <Type>cover</Type>
     <Version>1.0</Version>
     <Encoding />
+    <SearchCleanup />
     <URLSearch>
       <KeyStartThumb Param1="" Param2="" />
       <KeyEndThumb />

@@ -7,6 +7,7 @@
     <Type>details|cover|multicovers|trailers</Type>
     <Version>1.0</Version>
     <Encoding />
+    <SearchCleanup />
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x003C_img.src_x003D__x0027_</KeyStartThumb>
       <KeyEndThumb>_x0027_</KeyEndThumb>
