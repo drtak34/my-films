@@ -7,7 +7,7 @@
     <Type>details|cover</Type>
     <Version>0.9</Version>
     <Encoding>utf-8</Encoding>
-    <SearchCleanup />
+    <SearchCleanup> -</SearchCleanup>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023__x0022_.src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
@@ -80,11 +80,11 @@
       <KeyRealisePage>URL_x0020_Redirection_x0020_Persons</KeyRealisePage>
       <KeyRealiseRegExp />
       <KeyRealiseMaxItems />
-      <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x003C_h2_x003E_Produktion_x003C__x002F_h2_x003E_</KeyStartProduct>
-      <KeyEndProduct>_x003C_h2_x003E_</KeyEndProduct>
+      <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">Produzent</KeyStartProduct>
+      <KeyEndProduct>_x003C__x002F_tr_x003E_</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
-      <KeyProductRegExp>_x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_a_x0020_href_x003D__x0022__x002F_personen._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyProductRegExp>
+      <KeyProductRegExp />
       <KeyProductMaxItems />
       <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023_Drehbuch_x003C__x002F_th_x003E_</KeyStartWriter>
       <KeyEndWriter>_x003C__x002F_tbody_x003E_</KeyEndWriter>
@@ -110,7 +110,7 @@
       <KeyGenreIndex />
       <KeyGenrePage />
       <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x003C_h2_x003E_</KeyStartYear>
-      <KeyEndYear>_x003C_br_x0020__x002F__x003E_</KeyEndYear>
+      <KeyEndYear>_x0023_REGEX_x0023__x003C_br_x0020__x002F__x003E__x007C__x003C__x002F_span_x003E_</KeyEndYear>
       <KeyYearIndex />
       <KeyYearPage />
       <KeyStartLinkPersons Param1="_x002F_movies" Param2="http:_x002F__x002F_www.moviepilot.de_x002F_movies">_x0023_REGEX_x0023__x003C_li_x0020_id_x003D__x0027_tab_casts_x0027__x003E_._x002A__x003F__x003D__x0022_</KeyStartLinkPersons>
