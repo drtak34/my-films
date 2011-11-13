@@ -139,6 +139,7 @@
     <String id="1079906">View</String>
     <String id="1079907">Persons</String>
     <String id="1079908">Group</String>
+    <String id="1079909">Select Role</String>
     <String id="10798609">Last Search ...</String>
     <String id="10798610">Films as </String>
     <String id="10798611">Function selection for</String>
@@ -323,5 +324,7 @@
     <String id="10798948">Online status</String>
     <String id="10798949">Edition</String>
     <String id="10798950">Online status Trailer</String>
+    <String id="10798951">Persons</String>
+    <String id="10798952">Trakt Categories</String>
   </Section>
 </Language>

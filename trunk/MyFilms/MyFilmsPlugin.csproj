@@ -188,6 +188,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="MyFilmsGUI\Configuration.cs" />
+    <Compile Include="MyFilmsGUI\MFView.cs" />
     <Compile Include="MyFilmsGUI\GUIConnector.cs" />
     <Compile Include="MyFilmsGUI\GUIDialogMultiSelect.cs" />
     <Compile Include="MyFilmsGUI\GUIUtils.cs" />

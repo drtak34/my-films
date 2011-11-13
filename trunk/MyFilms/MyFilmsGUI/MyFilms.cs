@@ -1710,7 +1710,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceSort.Add("rating");
             for (int i = 0; i < 2; i++)
             {
-              if (conf.StrSort[i] != "(none)" && conf.StrSort[i].Length > 0)
+              if (Helper.FieldIsSet(conf.StrSort[i]))
               {
                 dlg.Add(GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i]);//Specific sort i
                 choiceSort.Add(string.Format("sort{0}", i.ToString()));
@@ -2087,7 +2087,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.BoolCollection = true;
       else 
         conf.BoolCollection = false;
-      if (conf.BoolCollection && (conf.StrSortaInHierarchies != "(none)" && conf.StrSortaInHierarchies.Length > 0)) // only use Collection sort, if there is a value - otherwise use default
+      if (conf.BoolCollection && Helper.FieldIsSet(conf.StrSortaInHierarchies)) // only use Collection sort, if there is a value - otherwise use default
       {
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:     '" + conf.StrSortaInHierarchies + "'");
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
@@ -3096,7 +3096,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceView.Add("actors");
 
       // Commented, as we have replaced this feature with global overlay filter for "media available"
-      //if (conf.StrStorage.Length != 0 && conf.StrStorage != "(none)")
+      //if (Helper.FieldIsSet(conf.StrStorage.Length))
       //{
       //    dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
       //    choiceView.Add("storage");
@@ -3104,7 +3104,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       for (int i = 0; i < 5; i++)
       {
-        if (conf.StrViewItem[i] != null && conf.StrViewItem[i] != "(none)" && (conf.StrViewItem[i].Length > 0))
+        if (Helper.FieldIsSet(conf.StrViewItem[i]))
         {
           choiceView.Add(string.Format("view{0}", i));
           if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
@@ -3208,7 +3208,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Change global MovieFilter (Only Movies with Trailer)
-      if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+      if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
       {
         if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
         if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
@@ -3268,7 +3268,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceSearch.Add("actors");
       for (int i = 0; i < 2; i++)
       {
-        if (MyFilms.conf.StrSearchItem[i] != "(none)" && MyFilms.conf.StrSearchItem[i].Length > 0)
+        if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
         {
           if (MyFilms.conf.StrSearchText[i].Length == 0) dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
           else dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
@@ -4653,7 +4653,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else                                        // Defaultview selected
           {
-            if (string.IsNullOrEmpty(conf.StrViewDfltItem) || conf.StrViewDfltItem == "(none)" || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
+            if (!Helper.FieldIsSet(conf.StrViewDfltItem) || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
             {
               conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
               conf.Boolselect = false;
@@ -5252,7 +5252,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           // Change global MovieFilter (Only Movies with Trailer)
-          if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
           {
             if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
             if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
@@ -5359,7 +5359,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalUpdates.Add("personinfos-all");
           }
 
-          if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
           {
             dlg2.Add(GUILocalizeStrings.Get(10798694));
             // Search and register all trailers for all movies in DB
@@ -6021,7 +6021,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ichoice++;
         }
 
-        if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+        if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
         {
           string trailercount = "";
           if (string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
@@ -6174,7 +6174,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "playtrailer":
           // first check, if trailer files are available, offer options
-          //if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+          //if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer) // StrDirStorTrailer only required for extended search
           if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
           {
             MyFilmsDetail.trailerPlayed = true;
@@ -6358,7 +6358,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             //To be modified to call new class with personlist by type and call MyFilmsActors with facade
             //Temporarily disabled - will be required to create Person List later ....
-            //SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId);
             if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
             // Load Facade with movie actors 
             // ToDo: Load all artists, including producers and directors - add infos about function into facade item2 or 3
@@ -6909,7 +6908,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           // Change global MovieFilter (Only Movies with Trailer)
-          if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
           {
             if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
             if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
@@ -7035,6 +7034,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           choiceSearch.Add(t.ToString());
         }
       }
+      //if (MyFilms.r[Index]["Persons"].ToString().Length > 0)
+      //{
+      //  w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index]["Persons"].ToString())));
+      //  foreach (object t in w_tableau)
+      //  {
+      //    dlg.Add(GUILocalizeStrings.Get(10798951) + " : " + t);
+      //    choiceSearch.Add(t.ToString());
+      //  }
+      //}
       if (choiceSearch.Count == 0)
       {
         if (dlg1 == null) return;
@@ -7102,6 +7110,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
         choiceSearch.Add("Actors");
       }
+      //wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Persons like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      //if (wr.Length > 0)
+      //{
+      //  dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798951) + "  (" + wr.Length + ")");
+      //  choiceSearch.Add("Persons");
+      //}
       if (choiceSearch.Count == 0)
       {
         if (dlg1 == null) return;
@@ -7125,14 +7139,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "Actors":
           conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]"; // "Seletion"
           break;
+        case "Producer":
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+          break;
         case "Director":
           conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
           break;
         case "Writer":
           conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798684) + " [*" + wperson + @"*]";
           break;
+        case "Persons":
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
+          break;
         default:
-          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
           break;
       }
       conf.StrTitleSelect = "";
@@ -7502,12 +7522,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (conf.StrTitle1 == "OriginalTitle")
       //{
       //}
-      string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
-      string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
+      string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower", "Persons" };
+      string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656", "10798951" };
       // Former order was translated title first ...
       //string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
       //string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
-      for (int ii = 0; ii < 31; ii++)
+      for (int ii = 0; ii < 32; ii++)
       {
         if (!string.IsNullOrEmpty(MyFilms.r[Index][PropertyList[ii]].ToString()))
         {
@@ -7543,7 +7563,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         w_tableau = Search_String(MyFilms.r[Index][wproperty].ToString());
         foreach (object t in w_tableau)
         {
-          for (int ii = 0; ii < 30; ii++)
+          for (int ii = 0; ii < 32; ii++)
           {
             if (wproperty.ToLower().Equals(PropertyList[ii].ToLower()))
             {
@@ -7827,7 +7847,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (DataRow sr in r)
       {
         // if trailer present, add to list
-        if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)" && sr[MyFilms.conf.StrStorageTrailer].ToString().Trim() != "")
+        if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer) && sr[MyFilms.conf.StrStorageTrailer].ToString().Trim() != "")
         {
           try
           {
@@ -7840,7 +7860,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             movie.Title = sr["OriginalTitle"].ToString();
 
             string mediapath = string.Empty;
-            if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)")
+            if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
             {
               mediapath = sr[MyFilms.conf.StrStorageTrailer].ToString();
               if (mediapath.Contains(";")) // take the first source file
@@ -9863,13 +9883,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Check Config
       bool filmSource = true;
-      if (string.IsNullOrEmpty(conf.StrStorage) || conf.StrStorage == "(none)") // no source path set?
+      if (!Helper.FieldIsSet(conf.StrStorage)) // no source path set?
         filmSource = false;
       bool filmSearch = true;
       if (string.IsNullOrEmpty(conf.ItemSearchFile) || string.IsNullOrEmpty(MyFilms.conf.SearchFile) || conf.SearchFile == "False" || conf.SearchFile == "no")
         filmSearch = false;
       bool trailerSource = true;
-      if (string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) || MyFilms.conf.StrStorageTrailer == "(none)")
+      if (!Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
         trailerSource = false;
       bool trailerSearch = true;
       if (string.IsNullOrEmpty(conf.ItemSearchFileTrailer) || string.IsNullOrEmpty(MyFilms.conf.SearchFileTrailer) || conf.SearchFileTrailer == "False" || conf.SearchFileTrailer == "no")

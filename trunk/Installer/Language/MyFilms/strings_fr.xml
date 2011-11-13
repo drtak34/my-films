@@ -139,6 +139,7 @@
     <String id="1079906">View</String>
     <String id="1079907">Persons</String>
     <String id="1079908">Group</String>
+    <String id="1079909">Select Role</String>
     <String id="10798609">Dernière recherche ...</String>
     <String id="10798610">Films comme </String>
     <String id="10798611">Sélection de la fonction pour </String>
@@ -333,5 +334,7 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798948">Status en ligne</String>
     <String id="10798949">Edition</String>
     <String id="10798950">Status des Bandes annonces en ligne</String>
+    <String id="10798951">Persons</String>
+    <String id="10798952">Trakt Categories</String>
   </Section>
 </Language>
