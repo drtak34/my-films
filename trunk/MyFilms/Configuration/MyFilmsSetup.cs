@@ -201,13 +201,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 && dc.ColumnName != "Watched" && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" 
                 && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" 
                 && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio" 
-                && dc.ColumnName != "Persons"  && dc.ColumnName != "CategoryTrakt")
+                && dc.ColumnName != "CategoryTrakt")
                 // All those fieds are currently not supported by ANT-MC - they will be added, if CatalogType changes to external catalog to the respective fields
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {
-                if ((dc.ColumnName == "MediaLabel") || (dc.ColumnName == "MediaType") || (dc.ColumnName == "Source") ||
-                    (dc.ColumnName == "URL") || (dc.ColumnName == "Comments") || (dc.ColumnName == "Borrower") ||
-                    (dc.ColumnName == "Languages") || (dc.ColumnName == "Subtitles"))
+                if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" ||
+                    dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
+                    dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
                 {
                   AntStorage.Items.Add(dc.ColumnName);
                   AntStorageTrailer.Items.Add(dc.ColumnName);
@@ -856,6 +856,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     wDfltSort = "YEAR";
                     break;
                 case "date":
+                case "dateadded":
                     wDfltSortMethod = GUILocalizeStrings.Get(621);
                     wDfltSort = "DateAdded";
                     break;
@@ -897,6 +898,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 wDfltSortInHierarchies = "YEAR";
                 break;
               case "date":
+              case "dateadded":
                 wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(621);
                 wDfltSortInHierarchies = "DateAdded";
                 break;
