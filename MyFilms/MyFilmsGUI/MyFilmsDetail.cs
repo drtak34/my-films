@@ -1930,7 +1930,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIWindowManager.Add(ref cmwindow);
                         cm.Init();
                     }
-                    cm.SeriesID = 0;
+                    cm.MovieID = MyFilms.conf.StrIndex;
                     cm.setPageTitle("Cover Manager");
                     GUIWindowManager.ActivateWindow(cm.GetID, false);
                     break;
@@ -2780,7 +2780,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return title;
         }
 
-        private static string GetMediaPathOfFirstFile(DataRow[] r1, int index)
+        public static string GetMediaPathOfFirstFile(DataRow[] r1, int index)
         {
           string mediapath = "";
 

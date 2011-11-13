@@ -728,6 +728,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{8977c29c-5d16-46f7-92d4-e8cf4752778b}-MyFilms.png</ZipFileName>
               <DestinationFilename>%Skin%\Default\Media\MyFilms\MyFilms.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilmsCoverManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b04c3d40-d537-4546-8449-6494c1b47032}-MyFilmsCoverManager.xml</ZipFileName>
+              <DestinationFilename>%Skin%\Default\MyFilmsCoverManager.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\MyFilmsCoverManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{34f99165-8d08-4fa4-a8e4-0f0b2a959110}-MyFilmsCoverManager.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MyFilmsCoverManager.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3565,8 +3579,8 @@ Please refer to the Wiki online documentation.</Value>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
@@ -3584,7 +3598,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1693</Revision>
+      <Revision>1717</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3596,7 +3610,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-11-08T13:06:52.7648213+01:00</ReleaseDate>
+    <ReleaseDate>2011-11-13T06:33:16.301168+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -4340,6 +4354,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\Default\Media\MyFilms\MyFilms.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{8977c29c-5d16-46f7-92d4-e8cf4752778b}-MyFilms.png</ZipFileName>
         <DestinationFilename>%Skin%\Default\Media\MyFilms\MyFilms.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\MyFilmsCoverManager.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b04c3d40-d537-4546-8449-6494c1b47032}-MyFilmsCoverManager.xml</ZipFileName>
+        <DestinationFilename>%Skin%\Default\MyFilmsCoverManager.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\MyFilmsCoverManager.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{34f99165-8d08-4fa4-a8e4-0f0b2a959110}-MyFilmsCoverManager.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MyFilmsCoverManager.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />

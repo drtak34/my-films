@@ -1,5 +1,5 @@
 ﻿#region GNU license
-// MP-TVSeries - Plugin for Mediaportal
+// MyFilms - Plugin for Mediaportal
 // http://www.team-mediaportal.com
 // Copyright (C) 2006-2007
 //
@@ -29,6 +29,7 @@ using Action = MediaPortal.GUI.Library.Action;
 using System.ComponentModel;
 using System.Drawing;
 using MyFilmsPlugin.MyFilms;
+using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 using MyFilmsPlugin.MyFilms.Utils;
 
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
@@ -36,6 +37,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections;
   using System.Data;
   using System.IO;
+
+  using Grabber;
 
   class MyFilmsCoverManager : GUIWindow
     {
@@ -51,26 +54,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         [SkinControlAttribute(12)]
         protected GUIButtonControl buttonFilters = null;
 
-        [SkinControlAttribute(13)]
-        protected GUIToggleButtonControl togglebuttonRandom = null;
-
-        [SkinControlAttribute(14)]
-        protected GUILabelControl labelDisabled = null;
-
-        [SkinControlAttribute(15)]
-        protected GUILabelControl labelChosen = null;
-
         enum menuAction
         {
-            use,
-            download,
-            delete,
-            optionRandom,
-            disable,
-            enable,
-            filters,
-            interval,
-            clearcache
+          LoadSingle,
+          LoadMultiple,
+          CreateFromMovie,
+          CreateFromMovieAsMosaic,
+          LoadFromTmdb,
+          DeleteSelected,
+          DeleteAllLow,
+          DeleteAllMedium,
+          DeleteAllHigh,
+          DeleteAllExceptSelected,
+          UseAsDefault,
+          Filters,
+          ClearCache
         }
 
         enum menuFilterAction
@@ -78,15 +76,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             all,
             hd,
             fullhd
-        }
-
-        enum menuIntervalAction {
-            FiveSeconds,
-            TenSeconds,
-            FifteenSeconds,
-            ThirtySeconds,
-            FortyFiveSeconds,
-            SixtySeconds
         }
 
         public enum View
@@ -100,7 +89,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
-        int seriesID = -1;
+        int movieId = -1;
         BackgroundWorker loadingWorker = null; // to fetch list and thumbnails
         public static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the actual downloading
         static Queue<MFCover> toDownload = new Queue<MFCover>();
@@ -127,7 +116,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 m_PreviousSelectedItem = m_Facade.SelectedListItemIndex;
 
                 if (m_Facade != null) m_Facade.Clear();
-                loadingWorker.RunWorkerAsync(SeriesID);
+                loadingWorker.RunWorkerAsync(this.MovieID);
             }
         }
 
@@ -253,27 +242,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // update skin controls
             UpdateLayoutButton();
             if (labelResolution != null) labelResolution.Label = "LabelResolution";
-            if (labelChosen != null) labelChosen.Label = "LabelChosen";
-            if (labelDisabled != null) labelDisabled.Label = "LabelDisabled";            
             if (buttonFilters != null) buttonFilters.Label = "ArtworkFilter";
-            if (togglebuttonRandom != null)
-            {
-                togglebuttonRandom.Label = "ButtonRandomArtwork";
-              togglebuttonRandom.Selected = true; // DBOption.GetOptions(DBOption.cFanartRandom);
-            }
 
             ClearProperties();
             UpdateFilterProperty(false);
 
             setDownloadStatus();
-			
-            LogMyFilms.Debug("Artwork Chooser Window initializing");            
-               
-            fetchList(SeriesID);
-            loadingWorker.RunWorkerAsync(SeriesID);            
 
+            string movielabel = MyFilms.r[MovieID][MyFilms.conf.StrTitle1].ToString();
+            if (!string.IsNullOrEmpty(MyFilms.r[MovieID][MyFilms.conf.StrTitle2].ToString())) 
+              movielabel += " (" + MyFilms.r[MovieID][MyFilms.conf.StrTitle2].ToString() + ")";
+
+            MyFilmsDetail.setGUIProperty("cover.currentmoviename", movielabel);
+			
+            LogMyFilms.Debug("Cover Manager Window initializing");            
+               
+            fetchList(this.MovieID);
+            loadingWorker.RunWorkerAsync(this.MovieID);            
             downloadingWorker.ProgressChanged += new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);            
-            
         }
 
         protected bool AllowView(View view)
@@ -318,13 +304,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void ClearProperties()
         {
-            MyFilmsDetail.setGUIProperty("cover.count", " ");
-            MyFilmsDetail.setGUIProperty("cover.loadingstatus", " ");
-            MyFilmsDetail.setGUIProperty("cover.selectedartworkinfo", " ");
-            MyFilmsDetail.setGUIProperty("cover.selectedartworkresolution", " ");
-            MyFilmsDetail.setGUIProperty("cover.selectedartworkischosen", " ");
-            MyFilmsDetail.setGUIProperty("cover.selectedartworkisdisabled", " ");
-            MyFilmsDetail.setGUIProperty("cover.selectedartworkcolors", " ");            
+            MyFilmsDetail.clearGUIProperty("cover.currentmoviename");
+            MyFilmsDetail.clearGUIProperty("cover.count");
+            MyFilmsDetail.clearGUIProperty("cover.loadingstatus");
+            MyFilmsDetail.clearGUIProperty("cover.selectedcoverresolution");
+            MyFilmsDetail.clearGUIProperty("cover.selectedcoverresolutionclass");
+            MyFilmsDetail.clearGUIProperty("cover.selectedcovername");
+
+            MyFilmsDetail.clearGUIProperty("cover.selectedcoversize");
+            MyFilmsDetail.clearGUIProperty("cover.selectedcoversizenum");
+
         }
 
         private void UpdateFilterProperty(bool btnEnabled)
@@ -344,16 +333,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //else
             //    resolution = "1920x1080";
 
-            resolution = "ArtworkFilterAll";
+            resolution = "All";
             MyFilmsDetail.setGUIProperty("cover.filterresolution", resolution);            
         }
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
           MyFilmsDetail.setGUIProperty("cover.loadingstatus", string.Empty);
-          MyFilmsDetail.setGUIProperty("cover.count", totalFanart.ToString());
+          MyFilmsDetail.setGUIProperty("cover.count", m_Facade.Count.ToString());
 
-            if (totalFanart == 0)
+          totalFanart = int.Parse(m_Facade.Count.ToString());
+          if (totalFanart == 0)
             {
               MyFilmsDetail.setGUIProperty("cover.loadingstatus", "ArtworkNoneFound");
                 // Enable Filters button in case Artwork is filtered
@@ -405,18 +395,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageDestroy(int new_windowId)
         {
-            //DBOption.SetOptions(DBOption.cFanartCurrentView, (int)CurrentView);
+          //DBOption.SetOptions(DBOption.cFanartCurrentView, (int)CurrentView);
+          MFCover selectedFanart = m_Facade.SelectedListItem.TVTag as MFCover;
+          if (selectedFanart != null)
+          {
+            //setDefaultCover(selectedFanart); // ToDo: Change to update MF Catalog
+          }
 
-            if (loadingWorker.IsBusy)
-                loadingWorker.CancelAsync();
-            while (loadingWorker.IsBusy)
-              System.Windows.Forms.Application.DoEvents();
 
-            loadingWorker = null;
-            
-            Helper.enableNativeAutoplay();
-            
-            base.OnPageDestroy(new_windowId);
+          if (loadingWorker.IsBusy)
+              loadingWorker.CancelAsync();
+          while (loadingWorker.IsBusy)
+            System.Windows.Forms.Application.DoEvents();
+
+          loadingWorker = null;
+          
+          Helper.enableNativeAutoplay();
+          
+          base.OnPageDestroy(new_windowId);
         }
 
         public void setPageTitle(string Title)
@@ -429,204 +425,189 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             try
             {
+                bool bCoverSelected = true;
+                MFCover selectedCover = new MFCover();
                 GUIListItem currentitem = this.m_Facade.SelectedListItem;
-                if (currentitem == null || !(currentitem.TVTag is MFCover)) return;
-                MFCover selectedFanart = currentitem.TVTag as MFCover;
+                if (currentitem == null || !(currentitem.TVTag is MFCover))
+                  bCoverSelected = false; //return;
+                else
+                  selectedCover = currentitem.TVTag as MFCover;
 
                 IDialogbox dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                 if (dlg == null) return;
                 dlg.Reset();
-                dlg.SetHeading("MyFilmsCoverManager");
+                dlg.SetHeading("MyFilms Cover Manager");
 
                 GUIListItem pItem;
-                if (false)
+                if (bCoverSelected)
                 {
-                  // if random it doesnt make sense to offer an option to explicitally use an available Artwork
-                  if (!selectedFanart.isAvailableLocally)
-                  {
-                    pItem = new GUIListItem("ArtworkGetAndUse");
-                    dlg.Add(pItem);
-                    pItem.ItemId = (int)menuAction.download;
-                  }
-                }
-                else
-                {
-                  // if we are not random, we can choose available Artwork
-                  if (selectedFanart.isAvailableLocally)
-                  {
-                    pItem = new GUIListItem("ArtworkUse");
-                    dlg.Add(pItem);
-                    pItem.ItemId = (int)menuAction.use;
-                  }
-                  else if (!selectedFanart.isAvailableLocally)
-                  {
-                    pItem = new GUIListItem("ArtworkGet");
-                    dlg.Add(pItem);
-                    pItem.ItemId = (int)menuAction.download;
-                  }
-                }
-
-                if (selectedFanart.isAvailableLocally)
-                {
-                  if (false) //selectedFanart.DisAbled
-                  {
-                    pItem = new GUIListItem("ArtworkMenuEnable");
-                    dlg.Add(pItem);
-                    pItem.ItemId = (int)menuAction.enable;
-                  }
-                  else
-                  {
-                    pItem = new GUIListItem("ArtworkMenuDisable");
-                    dlg.Add(pItem);
-                    pItem.ItemId = (int)menuAction.disable;
-                  }
-                }
-
-                pItem = new GUIListItem("ArtworkRandom" + " (" + (false? "Translation.on" : "Translation.off") + ")");
-                dlg.Add(pItem);
-                pItem.ItemId = (int)menuAction.optionRandom;
-
-                // Dont allowing filtering until DB has all data
-                if (!loadingWorker.IsBusy)
-                {
-                  pItem = new GUIListItem(".ArtworkFilter" + " ...");
+                  pItem = new GUIListItem("Use as Default");
                   dlg.Add(pItem);
-                  pItem.ItemId = (int)menuAction.filters;
+                  pItem.ItemId = (int)menuAction.UseAsDefault;
                 }
 
-                pItem = new GUIListItem("ArtworkRandomInterval " + " ...");
+                pItem = new GUIListItem("Load Single Cover");
                 dlg.Add(pItem);
-                pItem.ItemId = (int)menuAction.interval;
+                pItem.ItemId = (int)menuAction.LoadSingle;
 
-                if (!loadingWorker.IsBusy)
+                pItem = new GUIListItem("Load multiple Cover");
+                dlg.Add(pItem);
+                pItem.ItemId = (int)menuAction.LoadMultiple;
+
+                pItem = new GUIListItem("Load multiple from TMDB");
+                dlg.Add(pItem);
+                pItem.ItemId = (int)menuAction.LoadFromTmdb;
+
+                if (MyFilmsDetail.ExtendedStartmode("CoverManager: Creation of Covers from Movie not yet supported"))
                 {
-                  pItem = new GUIListItem("ClearArtworkCache");
+                  pItem = new GUIListItem("Create From Movie");
                   dlg.Add(pItem);
-                  pItem.ItemId = (int)menuAction.clearcache;
+                  pItem.ItemId = (int)menuAction.CreateFromMovie;
+
+                  pItem = new GUIListItem("Create From Movie As Mosaic");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.CreateFromMovieAsMosaic;
+
+                }
+                if (bCoverSelected)
+                {
+                  if (!loadingWorker.IsBusy) // Dont allowing filtering until DB has all data
+                  {
+                    pItem = new GUIListItem("Filter" + " ...");
+                    dlg.Add(pItem);
+                    pItem.ItemId = (int)menuAction.Filters;
+                  }
+
+                  if (!loadingWorker.IsBusy)
+                  {
+                    pItem = new GUIListItem("Clear Artwork Cache");
+                    dlg.Add(pItem);
+                    pItem.ItemId = (int)menuAction.ClearCache;
+                  }
+                  pItem = new GUIListItem("Delete selected Cover");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.DeleteSelected;
+
+                  pItem = new GUIListItem("Delete all 'Low'");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.DeleteAllLow;
+
+                  pItem = new GUIListItem("Delete all 'Medium'");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.DeleteAllMedium;
+
+                  pItem = new GUIListItem("Delete all 'High'");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.DeleteAllHigh;
+
+                  pItem = new GUIListItem("Delete all except selected");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.DeleteAllExceptSelected;
                 }
 
                 // lets show it
                 dlg.DoModal(GUIWindowManager.ActiveWindow);
+                string title = "";
+                string mediapath = "";
+                MyFilmsDetail.Searchtitles sTitles;
                 switch (dlg.SelectedId) // what was chosen?
                 {
-                  case (int)menuAction.delete:
-                    if (selectedFanart.isAvailableLocally)
+                  case (int)menuAction.LoadSingle:
+                    //downloadFanart(selectedCover);
+                    title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
+                    mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
+                    sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
+                    MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles);
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.LoadMultiple:
+                    //downloadFanart(selectedCover);
+                    title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
+                    mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
+                    sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
+                    MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles);
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.LoadFromTmdb:
+                    //downloadFanart(selectedCover);
+                    sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+                    if (string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
+                      return;
+                    if (MyFilms.conf.StrFanart)
                     {
-                      selectedFanart.Delete();
-                      // and reinit the display to get rid of it
-                      m_Facade.Clear();
-                      loadingWorker.RunWorkerAsync(SeriesID);
+                      MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.OriginalTitle);
                     }
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
                     break;
-                  case (int)menuAction.download:
-                    if (!selectedFanart.isAvailableLocally)
-                      downloadFanart(selectedFanart);
+                  case (int)menuAction.CreateFromMovie:
+                    //downloadFanart(selectedCover);
+                    //ToDo: Add Code for single image thumbnailer
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
                     break;
-                  case (int)menuAction.use:
-                    if (selectedFanart.isAvailableLocally)
-                    {
-                      MyFilmsDetail.setGUIProperty("cover.selectedartworkischosen", "Yes");
-                      SetFacadeItemAsChosen(m_Facade.SelectedListItemIndex);
+                  case (int)menuAction.CreateFromMovieAsMosaic:
+                    //downloadFanart(selectedCover);
+                    MyFilmsDetail.CreateThumbFromMovie();
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.DeleteSelected:
+                    selectedCover.Delete();
+                    // and reinit the display to get rid of it
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.DeleteAllLow:
+                    DeleteAllFromGroup("Low");
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.DeleteAllMedium:
+                    DeleteAllFromGroup("Medium");
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.DeleteAllHigh:
+                    DeleteAllFromGroup("High");
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
+                  case (int)menuAction.DeleteAllExceptSelected:
+                    DeleteAllExceptSelected(m_Facade.SelectedListItemIndex);
+                    m_Facade.Clear();
+                    loadingWorker.RunWorkerAsync(this.MovieID);
+                    break;
 
-                      selectedFanart.Chosen = true;
-                      //Fanart.RefreshFanart(SeriesID);
-                    }
+                  case (int)menuAction.UseAsDefault:
+                    SetFacadeItemAsChosen(m_Facade.SelectedListItemIndex);
+                    selectedCover.Chosen = true;
+                    setDefaultCover(selectedCover);
+                  //Fanart.RefreshFanart(MovieID);
                     break;
-                  //case (int)menuAction.optionRandom:
-                  //  DBOption.SetOptions(DBOption.cFanartRandom, !DBOption.GetOptions(DBOption.cFanartRandom));
-                  //  if (togglebuttonRandom != null)
-                  //    togglebuttonRandom.Selected = DBOption.GetOptions(DBOption.cFanartRandom);
-                  //  break;
-                  case (int)menuAction.disable:
-                    //selectedFanart.Disabled = true;
-                    selectedFanart.Chosen = false;
-                    currentitem.Label = "FanartDisableLabel";
-                    MyFilmsDetail.setGUIProperty("cover.selectedartworkisdisabled", "Yes");
-                    MyFilmsDetail.setGUIProperty("cover.selectedartworkischosen", "No");
-                    break;
-                  case (int)menuAction.enable:
-                    //selectedFanart.Disabled = false;
-                    currentitem.Label = "FanArtLocal";
-                    MyFilmsDetail.setGUIProperty("cover.selectedArtworkIsDisabled", "No");
-                    break;
-                  case (int)menuAction.filters:
+                  case (int)menuAction.Filters:
                     dlg.Reset();
                     ShowFiltersMenu();
                     break;
-                  case (int)menuAction.interval:
+                  case (int)menuAction.ClearCache:
                     dlg.Reset();
-                    ShowIntervalMenu();
-                    break;
-                  case (int)menuAction.clearcache:
-                    dlg.Reset();
-                    //Fanart.ClearFanartCache(SeriesID);
                     m_Facade.Clear();
-                    fetchList(SeriesID);
-                    loadingWorker.RunWorkerAsync(SeriesID);
+                    fetchList(this.MovieID);
+                    loadingWorker.RunWorkerAsync(this.MovieID);
                     break;
-
                 }
             }
             catch (Exception ex)
             {
-                LogMyFilms.Debug("Exception in Artwork Chooser Context Menu: " + ex.Message);
-                return;
+              LogMyFilms.Debug("Exception in Artwork Chooser Context Menu: " + ex.Message);
+              LogMyFilms.DebugException("Exception in Artwork Chooser Context Menu: ", ex);
+              return;
             }
         }
         #endregion
 
-        #region Context Menu - Random Artwork Interval
-        private void ShowIntervalMenu() {
-            IDialogbox dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-            if (dlg == null) return;
-
-            dlg.Reset();
-            dlg.SetHeading("ArtworkRandomInterval");
-
-            GUIListItem pItem = new GUIListItem("ArtworkIntervalFiveSeconds");            
-            dlg.Add(pItem);
-            pItem.ItemId = (int)menuIntervalAction.FiveSeconds;
-
-            pItem = new GUIListItem("ArtworkIntervalTenSeconds");
-            dlg.Add(pItem);
-            pItem.ItemId = (int)menuIntervalAction.TenSeconds;
-
-            pItem = new GUIListItem("ArtworkIntervalFifteenSeconds");
-            dlg.Add(pItem);
-            pItem.ItemId = (int)menuIntervalAction.FifteenSeconds;
-
-            pItem = new GUIListItem("ArtworkIntervalThirtySeconds");
-            dlg.Add(pItem);
-            pItem.ItemId = (int)menuIntervalAction.ThirtySeconds;
-
-            pItem = new GUIListItem("ArtworkIntervalFortyFiveSeconds");
-            dlg.Add(pItem);
-            pItem.ItemId = (int)menuIntervalAction.FortyFiveSeconds;
-
-            pItem = new GUIListItem("ArtworkIntervalSixtySeconds");
-            dlg.Add(pItem);
-            pItem.ItemId = (int)menuIntervalAction.SixtySeconds;
-
-            dlg.DoModal(GUIWindowManager.ActiveWindow);
-            if (dlg.SelectedId >= 0) {
-                switch (dlg.SelectedId) {
-                    case (int)menuIntervalAction.FiveSeconds:
-                        //DBOption.SetOptions(DBOption.cRandomFanartInterval, "5000");
-                        break;
-                    case (int)menuIntervalAction.TenSeconds:
-                        break;
-                    case (int)menuIntervalAction.FifteenSeconds:
-                        break;
-                    case (int)menuIntervalAction.ThirtySeconds:
-                        break;
-                    case (int)menuIntervalAction.FortyFiveSeconds:
-                        break;
-                    case (int)menuIntervalAction.SixtySeconds:
-                        break;                    
-                }               
-            }
-        }
-        #endregion
 
         #region Context Menu - Filters
         private void ShowFiltersMenu()
@@ -665,11 +646,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         break;                  
                 }
                 m_Facade.Clear();
-                //DBFanart.ClearAll();
                 ClearProperties();
 
                 UpdateFilterProperty(false);
-                loadingWorker.RunWorkerAsync(SeriesID);                   
+                loadingWorker.RunWorkerAsync(this.MovieID);                   
             }
         }
         #endregion
@@ -705,10 +685,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             loadThumbnails((int)e.Argument);
         }
 
-        public int SeriesID
+        public int MovieID
         { 
-            get { return seriesID; }
-            set { seriesID = value; }
+            get { return this.movieId; }
+            set { this.movieId = value; }
         }
 
         public override bool OnMessage(GUIMessage message)
@@ -758,13 +738,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
             }
             
-            if (control == togglebuttonRandom)
-            {
-                //DBOption.SetOptions(DBOption.cFanartRandom, togglebuttonRandom.Selected);
-                togglebuttonRandom.Focus = false;
-                return;
-            }
-
             if (control == buttonLayouts)
             {
                 bool shouldContinue = false;
@@ -844,48 +817,79 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MFCover chosen;
               if ((chosen = this.m_Facade.SelectedListItem.TVTag as MFCover) != null)
                 {
-                    if (chosen.isAvailableLocally)
-                    {
-                      MyFilmsDetail.setGUIProperty("cover.selectedartworkischosen", "Yes");                        
-                        SetFacadeItemAsChosen(m_Facade.SelectedListItemIndex);
-                        
-                        // if we already have it, we simply set the chosen property (will itself "unchoose" all the others)
-                        chosen.Chosen = true;
-                        // ZF: be sure to update the list of downloaded data in the cache - otherwise the selected Artwork won't show up for new Artworks until restarted
-                        //Fanart.RefreshFanart(SeriesID);   
-                      // for testing, just set the skin cover (no DB update yet)
-                      MyFilmsDetail.setGUIProperty("picture", chosen.FullPath);
+                    SetFacadeItemAsChosen(m_Facade.SelectedListItemIndex);
+                    
+                    // if we already have it, we simply set the chosen property (will itself "unchoose" all the others)
+                    chosen.Chosen = true;
+                    // ZF: be sure to update the list of downloaded data in the cache - otherwise the selected Artwork won't show up for new Artworks until restarted
+                    //Fanart.RefreshFanart(MovieID);   
+                  // for testing, just set the skin cover (no DB update yet)
+                  MyFilmsDetail.setGUIProperty("picture", chosen.FullPath);
 
-                    }
-                    else if (!chosen.isAvailableLocally)
-                    {
-                        downloadFanart(chosen);
-                    }
                 }
             }
         }
 
         void SetFacadeItemAsChosen(int iSelectedItem)
         {
-            try
+          try
+          {
+            for (int i = 0; i < m_Facade.Count; i++)
             {
-                for (int i = 0; i < m_Facade.Count; i++)
-                {
-                    if (i == iSelectedItem)
-                        m_Facade[i].IsRemote = true;
-                    else
-                    {
-                        m_Facade[i].IsRemote = false;
-                        MFCover item;
-                        item = m_Facade[i].TVTag as MFCover;
-                        item.Chosen = false;
-                    }
-                }
+              if (i == iSelectedItem)
+                m_Facade[i].IsRemote = true;
+              else
+              {
+                m_Facade[i].IsRemote = false;
+                MFCover item;
+                item = m_Facade[i].TVTag as MFCover;
+                item.Chosen = false;
+              }
             }
-            catch ( Exception ex )
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("Failed to set Facade Item as chosen: " + ex.Message);
+          }
+        }
+
+        void DeleteAllFromGroup(string strQuality)
+        {
+          try
+          {
+            for (int i = 0; i < m_Facade.Count; i++)
             {
-                LogMyFilms.Debug("Failed to set Facade Item as chosen: " + ex.Message);
+                MFCover item;
+                item = m_Facade[i].TVTag as MFCover;
+                if (item != null && item.ImageResolutionClass == strQuality)
+                  item.Delete();
             }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("Failed to set Facade Item as chosen: " + ex.Message);
+          }
+        }
+
+        void DeleteAllExceptSelected(int iSelectedItem)
+        {
+          try
+          {
+            for (int i = 0; i < m_Facade.Count; i++)
+            {
+              if (i != iSelectedItem)
+              {
+                MFCover item;
+                item = m_Facade[i].TVTag as MFCover;
+                if (item != null)
+                  item.Delete();
+              }
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("Failed to set Facade Item as chosen: " + ex.Message);
+          }
         }
 
         void downloadFanart(MFCover fanart)
@@ -907,91 +911,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         void fetchList(int seriesID)
         {
             // Fetch a fresh list online and save info about them to the db 
-            //GetFanart gf = new GetFanart(seriesID);
+            //GetFanart gf = new GetFanart(MovieID);
             //foreach (DBFanart f in gf.Fanart) {
             //    f.Commit();
             //}
         }
 
-        void loadThumbnails(int seriesID)
+        void loadThumbnails(int MovieID)
         {
-            if (seriesID > -1)
+            if (MovieID > -1)
             {                
                 if (loadingWorker.CancellationPending)
                     return;
 
                 GUIListItem item = null;
-                List<DBFanart> onlineFanart = DBFanart.GetAll(seriesID, false);
-
                 List<MFCover> covers = GetLocalCover(MyFilms.r, MyFilms.conf.StrIndex);
 
-                // Filter Fanart Thumbnails to be displayed by resolution
-                //if (DBOption.GetOptions(DBOption.cFanartThumbnailResolutionFilter) != 0)
-                //{
-                //    string filteredRes = (DBOption.GetOptions(DBOption.cFanartThumbnailResolutionFilter) == "1" ? "1280x720" : "1920x1080");
-                //    for (int j = onlineFanart.Count - 1; j >= 0; j--)
-                //    {
-                //        if (onlineFanart[j][DBFanart.cResolution] != filteredRes)
-                //            onlineFanart.Remove(onlineFanart[j]);
-                //    }
-                //}
-
-                // Inform skin message how many Artworks are online
-                loadingWorker.ReportProgress(onlineFanart.Count < 100 ? onlineFanart.Count : 100);
-                
-                // let's get all the ones we have available locally (from online)
                 int i = 0;
                 foreach (MFCover f in covers)
                 {                    
-                    if(f.isAvailableLocally)
-                    {
-                        item = new GUIListItem("CoverLocal");
-                        item.IsRemote = false;
-                        
-                        if (true) 
-                            item.IsRemote = true;
-                        else 
-                            item.IsDownloading = false;
-                    }
-                    else 
-                    {
-                        item = new GUIListItem("CoverOnline");
-                        item.IsRemote = false;
-                        item.IsDownloading = true;
-                    }                    
-                    //string filename = f[DBFanart.cThumbnailPath];
-                    //filename = filename.Replace("/", @"\");
-                    //string fullURL = (DBOnlineMirror.Banners.EndsWith("/") ? DBOnlineMirror.Banners : (DBOnlineMirror.Banners + "/")) + filename;
-
-                    //bool bDownloadSuccess = true;
-                    //int nDownloadGUID = Online_Parsing_Classes.OnlineAPI.StartFileDownload(fullURL, Settings.Path.Artwork, filename);
-                    //while (Online_Parsing_Classes.OnlineAPI.CheckFileDownload(nDownloadGUID))
-                    //{
-                    //    if (loadingWorker.CancellationPending)
-                    //    {
-                    //        // ZF: Cancel, clean up pending download
-                    //        bDownloadSuccess = false;
-                    //        Online_Parsing_Classes.OnlineAPI.CancelFileDownload(nDownloadGUID);
-                    //        MPTVSeriesLog.Write("Cancelling Artwork thumbnail download: " + filename);
-                    //    }
-                    //    System.Windows.Forms.Application.DoEvents();
-                    //}
-
-                    //// ZF: should be downloaded now
-                    //filename = Helper.PathCombine(Settings.GetPath(Settings.Path.Artwork), filename);
-                    //if (bDownloadSuccess)
-                    //{
-                    //    item.IconImage = item.IconImageBig = ImageAllocator.GetOtherImage(filename, new System.Drawing.Size(0, 0), false);
-                    //}
+                    item = new GUIListItem(f.ImageResolution);
+                    item.IsRemote = false;
                     item.TVTag = f;
+                    // item.IconImage = item.IconImageBig = ImageAllocator.GetOtherImage(filename, new System.Drawing.Size(0, 0), false);
                     item.IconImage = item.IconImageBig = f.FullPath;
                     
-                    // Subscribe to Item Selected Event
                     item.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
-                    
-                    // This will need to be tweaked for more than 100 Artworks
                     loadingWorker.ReportProgress((i < 100 ? ++i: 100), item);                    
-
                     if (loadingWorker.CancellationPending)
                         return;
                 }
@@ -1000,76 +946,80 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         void setFanartPreviewBackground(MFCover cover)
         {
-            string fanartInfo = cover.isAvailableLocally ? "FanArtLocal": "FanArtOnline";
-            fanartInfo += Environment.NewLine;
+          MyFilmsDetail.setGUIProperty("cover.selectedcoverresolution", cover.ImageResolution);
+          MyFilmsDetail.setGUIProperty("cover.selectedcoverresolutionclass", cover.ImageResolutionClass);
+          MyFilmsDetail.setGUIProperty("cover.selectedcoversize", cover.ImageSizeFriendly);
+          MyFilmsDetail.setGUIProperty("cover.selectedcoversizenum", cover.ImageSize.ToString());
+          MyFilmsDetail.setGUIProperty("cover.selectedcovername", cover.FileName);
 
-            //foreach (KeyValuePair<string, DBField> kv in cover.m_fields)
-            //{
-            //    switch (kv.Key)
-            //    {
-            //        case DBFanart.cResolution:
-            //        MyFilmsDetail.setGUIProperty("Artwork.SelectedArtworkResolution", kv.Value.Value);                        
-            //            break;
+          string preview = string.Empty;
+          //if (ImageAllocator.LoadImageFastFromFile(cover.FullPath) == null) // Ensure Artwork on Disk is valid as well
+          //{
+          //  LogMyFilms.Debug("Artwork is invalid, deleting...");
+          //  cover.Delete();
+          //  cover.Chosen = false;
+          //  m_Facade.SelectedListItem.Label = "Deleted";
+          //}
 
-            //        case DBFanart.cColors:
-            //            MyFilmsDetail.setGUIProperty("Artwork.SelectedArtworkColors", kv.Value.Value);
-            //            break;
-
-            //        case DBFanart.cChosen:
-            //            MyFilmsDetail.setGUIProperty("Artwork.SelectedArtworkIsChosen", kv.Value.Value ? Translation.Yes : Translation.No);
-            //            break;
-
-            //        case DBFanart.cDisabled:
-            //            MyFilmsDetail.setGUIProperty("Artwork.SelectedArtworkIsDisabled", kv.Value.Value ? Translation.Yes : Translation.No);
-            //            break;
-                    
-            //    }
-            //    fanartInfo += kv.Key + ": " + kv.Value.Value + Environment.NewLine;
-            //}
-
-            MyFilmsDetail.setGUIProperty("cover.selectedartworkinfo", fanartInfo);
-
-            string preview = string.Empty;
-            
-            //if (cover.isAvailableLocally)
-            //{
-            //    // Ensure Artwork on Disk is valid as well
-            //    if (ImageAllocator.LoadImageFastFromFile(cover.FullLocalPath) == null)
-            //    {
-            //        MPTVSeriesLog.Write("Artwork is invalid, deleting...");
-            //        cover.Delete();
-            //        cover.Chosen = false;
-            //        m_Facade.SelectedListItem.Label = Translation.ArtworkOnline;
-            //    }                    
-                
-            //    // Should be safe to assign fullsize Artwork if available
-            //    preview = cover.isAvailableLocally ?
-            //              ImageAllocator.GetOtherImage(cover.FullLocalPath, default(System.Drawing.Size), false) :
-            //              m_Facade.SelectedListItem.IconImageBig;
-            //}
-            //else
-                preview = m_Facade.SelectedListItem.IconImageBig;
-                      
-            MyFilmsDetail.setGUIProperty("cover.selectedpreview", preview);
+          //// Should be safe to assign fullsize Artwork if available
+          //preview = ImageAllocator.GetOtherImage(cover.FullPath, default(System.Drawing.Size), false);
+          preview = m_Facade.SelectedListItem.IconImageBig;
+          MyFilmsDetail.setGUIProperty("cover.selectedpreview", preview);
         }
+
+        void setDefaultCover(MFCover cover)
+        {
+          MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+          string currentPicture = MyFilmsDetail.getGUIProperty("picture");
+          //if ((r1[Index]["Picture"].ToString().IndexOf(":\\") == -1) && (r1[Index]["Picture"].ToString().Substring(0, 2) != "\\\\"))
+          //  MyFilms.conf.FileImage = MyFilms.conf.StrPathImg + "\\" + r1[Index]["Picture"].ToString();
+          //else
+          //  MyFilms.conf.FileImage = r1[Index]["Picture"].ToString();
+          if ((MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\") == -1) && (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\"))
+            currentPicture = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+          else
+            currentPicture = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+
+          if (string.IsNullOrEmpty(currentPicture))
+            currentPicture = sTitles.FanartTitle + ".jpg";
+
+          LogMyFilms.Debug("setDefaultCover - currentPicture = '" + currentPicture + "'");
+          if (System.IO.File.Exists(currentPicture))
+          {
+            //string safeName = Grabber.GrabUtil.CreateFilename(title);
+            //filename = dirname + safeName + " [" + imageUrl.GetHashCode() + "].jpg";
+            
+            string newFile = System.IO.Path.GetFileNameWithoutExtension(currentPicture) + " [" + currentPicture.GetHashCode() + "]." + System.IO.Path.GetExtension(currentPicture);
+            LogMyFilms.Debug("setDefaultCover - newFile = '" + newFile + "'");
+            try
+            {
+              System.IO.File.Copy(currentPicture, newFile, true);
+              File.Delete(currentPicture);
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug("setDefaultCover - error renaming currentPicture: " + ex.Message + ex.StackTrace);
+            }
+          }
+          try
+          {
+            File.Copy(cover.FullPath, currentPicture, true);
+            File.Delete(cover.FullPath);
+            LogMyFilms.Debug("setDefaultCover - sucessfully set new Default Cover: '" + currentPicture + "'");
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("setDefaultCover - error renaming currentPicture: " + ex.Message + ex.StackTrace);
+          }
+        }
+
         //-------------------------------------------------------------------------------------------
-        //  Change local Cover Image
+        //  Get local Cover Image
         //-------------------------------------------------------------------------------------------        
         public static List<MFCover> GetLocalCover(DataRow[] r1, int Index)
         {
           List<MFCover> result = new List<MFCover>();
-          ArrayList resultsize = new ArrayList();
-          string[] filesfound = new string[100];
-          Int64[] filesfoundsize = new Int64[100];
-          int filesfoundcounter = 0;
-          //string file = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-          //string titlename = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-          //string titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
-          //string file = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-          //string titlename = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-          //string titlename2 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
           string directoryname = "";
-          //string movieName = "";
           string[] files = null;
           Int64 wsize = 0; // Temporary Filesize detection
           string startPattern = "";
@@ -1085,10 +1035,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (string.IsNullOrEmpty(currentPicture))
             return null;
-          string currentPictureName = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
+          //string currentPictureName = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
           string currentStorePath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
-          string newPicture = ""; // full path to new picture
-          string newPictureCatalogname = ""; // entry to be stored in catalog
+          //string newPicture = ""; // full path to new picture
+          //string newPictureCatalogname = ""; // entry to be stored in catalog
 
 
           if (!currentPicture.StartsWith(currentStorePath))
@@ -1107,11 +1057,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             patternLength = patternLength2;
           searchPattern = searchPattern.Substring(0, patternLength);
 
-          LogMyFilms.Debug("(ChangeLocalCover) - startPattern = '" + startPattern + "', searchPattern = '" + searchPattern + "', currentStorePath = '" + currentStorePath + "'");
+          LogMyFilms.Debug("CoverManager - startPattern = '" + startPattern + "', searchPattern = '" + searchPattern + "', currentStorePath = '" + currentStorePath + "'");
 
           directoryname = currentPicture.Substring(0, currentPicture.LastIndexOf("\\"));
 
-          int nCurrent = -1;
           if (!string.IsNullOrEmpty(directoryname))
           {
             files = Directory.GetFiles(directoryname, @"*" + searchPattern + @"*.jpg", SearchOption.TopDirectoryOnly);
@@ -1119,8 +1068,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               wsize = new System.IO.FileInfo(filefound).Length;
               MFCover item = new MFCover();
+              item.FileName = System.IO.Path.GetFileNameWithoutExtension(filefound);
               item.FullPath = filefound;
+
+              //if (!File.Exists(localFile) || ImageFast.FastFromFile(localFile) == null) {}
+              Image newCover = Image.FromFile(filefound);
+              item.ImageResolution = newCover.Width + " x " + newCover.Height;
+              item.ImageWith = newCover.Width;
+              item.ImageHeight = newCover.Height;
+
+              if (newCover.Height > 800) item.ImageResolutionClass = "High";
+              else if (newCover.Height > 400) item.ImageResolutionClass = "Medium";
+              else if (newCover.Height > 0) item.ImageResolutionClass = "Low";
+              else item.ImageResolutionClass = "Unknown";
+              newCover.Dispose();
+              
               item.ImageSize = new System.IO.FileInfo(filefound).Length;
+              item.ImageSizeFriendly = Helper.GetFileSize(wsize);
               result.Add(item);
             }
           }
@@ -1129,550 +1093,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
     }
 
-    public class DBFanart
-    {
-      private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
-
-      public const String cTableName = "Fanart";
-
-      public const String cIndex = "id"; // comes from online
-      public const String cSeriesID = "seriesID";
-      public const String cChosen = "Chosen";
-      public const String cLocalPath = "LocalPath";
-      public const String cBannerPath = "BannerPath"; // online
-      public const String cThumbnailPath = "ThumbnailPath"; // online
-      public const String cColors = "Colors"; // online
-      public const String cResolution = "BannerType2"; // online
-      public const String cDisabled = "Disabled";
-      public const String cSeriesName = "SeriesName"; // online
-      public const String cRating = "Rating"; // online
-      public const String cRatingCount = "RatingCount"; // online
-
-      enum FanartResolution
-      {
-        BOTH,
-        HD,
-        FULLHD
-      }
-
-      public DBFanart()
-      {
-        //InitColumns();
-        //InitValues();
-      }
-
-      public DBFanart(long ID)
-      {
-        //InitColumns();
-        //if (!ReadPrimary(ID.ToString()))
-        //  InitValues();
-      }
-
-      public static void ClearAll()
-      {
-        cache.Clear();
-      }
-
-      public static void Clear(int Index)
-      {
-        DBFanart dummy = new DBFanart(Index);
-        //Clear(dummy, new SQLCondition(dummy, DBFanart.cIndex, Index, SQLConditionType.Equal));
-        cache.Remove(Index);
-      }
-
-      public static void ClearDB(int seriesID)
-      {
-        DBFanart dummy = new DBFanart(seriesID);
-        //Clear(dummy, new SQLCondition(dummy, DBFanart.cSeriesID, seriesID, SQLConditionType.Equal));
-        ClearAll();
-      }
-
-      public void Delete()
-      {
-        // first let's delete the physical file
-        if (this.isAvailableLocally)
-        {
-          try
-          {
-            System.IO.File.Delete(FullLocalPath);
-            //LogMyFilms.Debug("Fanart Deleted: " + FullLocalPath);
-          }
-          catch (Exception)
-          {
-            //LogMyFilms.Debug("Failed to delete file: " + FullLocalPath + " (" + ex.Message + ")");
-          }
-        }
-        //Clear(this[cIndex]);
-      }
-
-      public bool Commit()
-      {
-        //lock (cache)
-        //{
-        //  if (cache.ContainsKey(this[DBFanart.cSeriesID]))
-        //    cache.Remove(this[DBFanart.cSeriesID]);
-        //}
-        //return base.Commit();
-        return true;
-      }
-
-      static Dictionary<int, List<DBFanart>> cache = new Dictionary<int, List<DBFanart>>();
-
-      public static List<int> GetSeriesWithFanart()
-      {
-        List<int> seriesids = new List<int>();
-
-        //string sqlQuery = "SELECT DISTINCT seriesID FROM Fanart";
-        //SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
-
-        //if (results.Rows.Count > 0)
-        //{
-        //  for (int index = 0; index < results.Rows.Count; index++)
-        //  {
-        //    int result = 0;
-        //    if (int.TryParse(results.Rows[index].fields[0], out result))
-        //      seriesids.Add(result);
-        //  }
-        //}
-        return seriesids;
-      }
-
-      public static List<DBFanart> GetAll(int SeriesID, bool availableOnly)
-      {
-        lock (cache)
-        {
-          if (SeriesID < 0) return new List<DBFanart>();
-
-          //if (cache == null || !cache.ContainsKey(SeriesID))
-          //{
-          //  try
-          //  {
-          //    // make sure the table is created - create a dummy object
-          //    DBFanart dummy = new DBFanart();
-
-          //    // retrieve all fields in the table
-          //    String sqlQuery = "select * from " + cTableName;
-          //    sqlQuery += " where " + cSeriesID + " = " + SeriesID.ToString();
-          //    if (availableOnly)
-          //      sqlQuery += " and " + cLocalPath + " != ''";
-          //    sqlQuery += " order by " + cIndex;
-
-          //    SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
-          //    if (results.Rows.Count > 0)
-          //    {
-          //      List<DBFanart> ourFanart = new List<DBFanart>(results.Rows.Count);
-
-          //      for (int index = 0; index < results.Rows.Count; index++)
-          //      {
-          //        ourFanart.Add(new DBFanart());
-          //        ourFanart[index].Read(ref results, index);
-          //      }
-          //      if (cache == null) cache = new Dictionary<int, List<DBFanart>>();
-          //      cache.Add(SeriesID, ourFanart);
-          //    }
-          //    MPTVSeriesLog.Write("Found " + results.Rows.Count + " Fanart from Database", MPTVSeriesLog.LogLevel.Debug);
-
-          //  }
-          //  catch (Exception ex)
-          //  {
-          //    MPTVSeriesLog.Write("Error in DBFanart.Get (" + ex.Message + ").");
-          //  }
-          //}
-          List<DBFanart> faForSeries = null;
-          if (cache != null && cache.TryGetValue(SeriesID, out faForSeries))
-            return faForSeries;
-          return new List<DBFanart>();
-        }
-      }
-
-      public List<DBFanart> FanartsToDownload(int SeriesID)
-      {
-        //// Only get a list of fanart that is available for download
-        //String sqlQuery = "select * from " + cTableName;
-        //sqlQuery += " where " + cSeriesID + " = " + SeriesID.ToString();
-
-        //// Get Preferred Resolution
-        //int res = DBOption.GetOptions(DBOption.cAutoDownloadFanartResolution);
-        //bool getSeriesNameFanart = DBOption.GetOptions(DBOption.cAutoDownloadFanartSeriesNames);
-
-        //if (res == (int)FanartResolution.HD)
-        //  sqlQuery += " and " + cResolution + " = " + "\"1280x720\"";
-        //if (res == (int)FanartResolution.FULLHD)
-        //  sqlQuery += " and " + cResolution + " = " + "\"1920x1080\"";
-        //if (!getSeriesNameFanart)
-        //  sqlQuery += " and " + cSeriesName + " != " + "\"true\"";
-
-        //SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
-
-        //if (results.Rows.Count > 0)
-        //{
-        //  int iFanartCount = 0;
-        //  List<DBFanart> AvailableFanarts = new List<DBFanart>(results.Rows.Count);
-        //  for (int index = 0; index < results.Rows.Count; index++)
-        //  {
-        //    if (results.GetField(index, (int)results.ColumnIndices[cLocalPath]).Length > 0)
-        //      iFanartCount++;
-        //    else
-        //    {
-        //      // Add 'Available to Download' fanart to list
-        //      AvailableFanarts.Add(new DBFanart());
-        //      AvailableFanarts[AvailableFanarts.Count - 1].Read(ref results, index);
-        //    }
-        //  }
-
-        //  // sort by highest rated
-        //  AvailableFanarts.Sort();
-
-        //  // Only return the fanarts that we want to download
-        //  int AutoDownloadCount = DBOption.GetOptions(DBOption.cAutoDownloadFanartCount);
-
-        //  for (int i = 0; i < AvailableFanarts.Count; i++)
-        //  {
-        //    // Dont get more than the user wants
-        //    if (iFanartCount >= AutoDownloadCount)
-        //      break;
-        //    _FanartsToDownload.Add(AvailableFanarts[i]);
-        //    iFanartCount++;
-        //  }
-        //}
-        return _FanartsToDownload;
-
-      } List<DBFanart> _FanartsToDownload = new List<DBFanart>();
-
-      /// <summary>
-      /// Checks if a Series Fanart contains a Series Name
-      /// </summary>
-      public bool HasSeriesName
-      {
-        get
-        {
-          //if (this[cSeriesName] = "true")
-          //  return true;
-          //else
-            return false;
-        }
-      }
-
-      public bool Chosen
-      {
-        get
-        {
-          //return this[cChosen];
-          return false;
-        }
-        set
-        {
-          //GlobalSet(new DBFanart(), cChosen, false, new SQLCondition(new DBFanart(), cSeriesID, this[cSeriesID], SQLConditionType.Equal));
-          //this[cChosen] = value;
-          //this.Commit();
-        }
-      }
-
-      //public bool Disabled
-      //{
-      //  get
-      //  {
-      //    if (this[cDisabled])
-      //      return true;
-      //    return false;
-      //  }
-      //  set
-      //  {
-      //    this[cDisabled] = value;
-      //    this.Commit();
-      //  }
-      //}
-
-      public bool isAvailableLocally
-      {
-        get
-        {
-          //if (String.IsNullOrEmpty(this[DBFanart.cLocalPath])) return false;
-
-          //// Check if file in path exists, remove it from database if not
-          //if (System.IO.File.Exists(Settings.GetPath(Settings.Path.fanart) + @"\" + this[DBFanart.cLocalPath])) return true;
-          //this[DBFanart.cLocalPath] = string.Empty;
-          return false;
-        }
-      }
-
-      public string FullLocalPath
-      {
-        get
-        {
-          //if (String.IsNullOrEmpty(this[cLocalPath])) return string.Empty;
-          //return Helper.PathCombine(Settings.GetPath(Settings.Path.fanart), this[cLocalPath]);
-          return "";
-        }
-      }
-
-      //public bool HasColorInfo
-      //{
-      //  get
-      //  {
-      //    return !String.IsNullOrEmpty(this[cColors]);
-      //  }
-      //}
-
-      //public System.Drawing.Color GetColor(int which)
-      //{
-      //  if (HasColorInfo && which <= 3 && which > 0)
-      //  {
-      //    string[] split = this[cColors].ToString().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-      //    if (split.Length != 3) return default(System.Drawing.Color);
-      //    string[] rgbValues = split[--which].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-      //    return System.Drawing.Color.FromArgb(100, Int32.Parse(rgbValues[0]), Int32.Parse(rgbValues[1]), Int32.Parse(rgbValues[2]));
-      //  }
-      //  else return default(System.Drawing.Color);
-      //}
-
-      //public override string ToString()
-      //{
-      //  return this[cSeriesID] + " -> " + this[cIndex];
-      //}
-
-      //#region IComparable
-      //public int CompareTo(DBFanart other)
-      //{
-      //  // Sort by:
-      //  // 1. Highest Rated
-      //  // 2. Number of Votes
-
-      //  double thisFanart = 0.0;
-      //  double otherFanart = 0.0;
-
-      //  if (this[cRating] == other[cRating])
-      //  {
-      //    thisFanart += this[cRatingCount];
-      //    otherFanart += other[cRatingCount];
-      //  }
-
-      //  thisFanart += this[cRating];
-      //  otherFanart += other[cRating];
-
-      //  return otherFanart.CompareTo(thisFanart);
-      //}
-      //#endregion
-
-    }
-
     public class MFCover
     {
       private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
       
-      public const String cTableName = "Fanart";
-
-      public const String cIndex = "id"; // comes from online
-      public const String cSeriesID = "seriesID";
-      public const String cChosen = "Chosen";
-      public const String cLocalPath = "LocalPath";
-      public const String cBannerPath = "BannerPath"; // online
-      public const String cThumbnailPath = "ThumbnailPath"; // online
-      public const String cColors = "Colors"; // online
-      public const String cResolution = "BannerType2"; // online
-      public const String cDisabled = "Disabled";
-      public const String cSeriesName = "SeriesName"; // online
-      public const String cRating = "Rating"; // online
-      public const String cRatingCount = "RatingCount"; // online
-
-      enum FanartResolution
-      {
-        BOTH,
-        HD,
-        FULLHD
-      }
-
-      public MFCover()
-      {
-        //InitColumns();
-        //InitValues();
-      }
-
-      public MFCover(long ID)
-      {
-        //InitColumns();
-        //if (!ReadPrimary(ID.ToString()))
-        //  InitValues();
-      }
-
-      public static void ClearAll()
-      {
-        cache.Clear();
-      }
-
-      public static void Clear(int Index)
-      {
-        MFCover dummy = new MFCover(Index);
-        //Clear(dummy, new SQLCondition(dummy, DBFanart.cIndex, Index, SQLConditionType.Equal));
-        cache.Remove(Index);
-      }
-
-      public static void ClearDB(int seriesID)
-      {
-        MFCover dummy = new MFCover(seriesID);
-        //Clear(dummy, new SQLCondition(dummy, DBFanart.cSeriesID, seriesID, SQLConditionType.Equal));
-        ClearAll();
-      }
+      public MFCover() {}
 
       public void Delete()
       {
-        // first let's delete the physical file
-        if (this.isAvailableLocally)
+        try
         {
-          try
-          {
-            System.IO.File.Delete(FullLocalPath);
-            //LogMyFilms.Debug("Fanart Deleted: " + FullLocalPath);
-          }
-          catch (Exception)
-          {
-            //LogMyFilms.Debug("Failed to delete file: " + FullLocalPath + " (" + ex.Message + ")");
-          }
+          System.IO.File.Delete(FullPath);
+          LogMyFilms.Debug("Artwork Deleted: " + FullPath);
         }
-        //Clear(this[cIndex]);
-      }
-
-      public bool Commit()
-      {
-        //lock (cache)
-        //{
-        //  if (cache.ContainsKey(this[DBFanart.cSeriesID]))
-        //    cache.Remove(this[DBFanart.cSeriesID]);
-        //}
-        //return base.Commit();
-        return true;
-      }
-
-      static Dictionary<int, List<MFCover>> cache = new Dictionary<int, List<MFCover>>();
-
-      public static List<MFCover> GetAll(int SeriesID, bool availableOnly)
-      {
-        lock (cache)
+        catch (Exception ex)
         {
-          if (SeriesID < 0) return new List<MFCover>();
-
-          //if (cache == null || !cache.ContainsKey(SeriesID))
-          //{
-          //  try
-          //  {
-          //    // make sure the table is created - create a dummy object
-          //    DBFanart dummy = new DBFanart();
-
-          //    // retrieve all fields in the table
-          //    String sqlQuery = "select * from " + cTableName;
-          //    sqlQuery += " where " + cSeriesID + " = " + SeriesID.ToString();
-          //    if (availableOnly)
-          //      sqlQuery += " and " + cLocalPath + " != ''";
-          //    sqlQuery += " order by " + cIndex;
-
-          //    SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
-          //    if (results.Rows.Count > 0)
-          //    {
-          //      List<DBFanart> ourFanart = new List<DBFanart>(results.Rows.Count);
-
-          //      for (int index = 0; index < results.Rows.Count; index++)
-          //      {
-          //        ourFanart.Add(new DBFanart());
-          //        ourFanart[index].Read(ref results, index);
-          //      }
-          //      if (cache == null) cache = new Dictionary<int, List<DBFanart>>();
-          //      cache.Add(SeriesID, ourFanart);
-          //    }
-          //    MPTVSeriesLog.Write("Found " + results.Rows.Count + " Fanart from Database", MPTVSeriesLog.LogLevel.Debug);
-
-          //  }
-          //  catch (Exception ex)
-          //  {
-          //    MPTVSeriesLog.Write("Error in DBFanart.Get (" + ex.Message + ").");
-          //  }
-          //}
-          List<MFCover> faForSeries = null;
-          if (cache != null && cache.TryGetValue(SeriesID, out faForSeries))
-            return faForSeries;
-          return new List<MFCover>();
+          LogMyFilms.Debug("Failed to delete file: " + FullPath + " (" + ex.Message + ")");
         }
       }
 
-      public List<MFCover> FanartsToDownload(int SeriesID)
+      enum Quality
       {
-        //// Only get a list of fanart that is available for download
-        //String sqlQuery = "select * from " + cTableName;
-        //sqlQuery += " where " + cSeriesID + " = " + SeriesID.ToString();
-
-        //// Get Preferred Resolution
-        //int res = DBOption.GetOptions(DBOption.cAutoDownloadFanartResolution);
-        //bool getSeriesNameFanart = DBOption.GetOptions(DBOption.cAutoDownloadFanartSeriesNames);
-
-        //if (res == (int)FanartResolution.HD)
-        //  sqlQuery += " and " + cResolution + " = " + "\"1280x720\"";
-        //if (res == (int)FanartResolution.FULLHD)
-        //  sqlQuery += " and " + cResolution + " = " + "\"1920x1080\"";
-        //if (!getSeriesNameFanart)
-        //  sqlQuery += " and " + cSeriesName + " != " + "\"true\"";
-
-        //SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
-
-        //if (results.Rows.Count > 0)
-        //{
-        //  int iFanartCount = 0;
-        //  List<DBFanart> AvailableFanarts = new List<DBFanart>(results.Rows.Count);
-        //  for (int index = 0; index < results.Rows.Count; index++)
-        //  {
-        //    if (results.GetField(index, (int)results.ColumnIndices[cLocalPath]).Length > 0)
-        //      iFanartCount++;
-        //    else
-        //    {
-        //      // Add 'Available to Download' fanart to list
-        //      AvailableFanarts.Add(new DBFanart());
-        //      AvailableFanarts[AvailableFanarts.Count - 1].Read(ref results, index);
-        //    }
-        //  }
-
-        //  // sort by highest rated
-        //  AvailableFanarts.Sort();
-
-        //  // Only return the fanarts that we want to download
-        //  int AutoDownloadCount = DBOption.GetOptions(DBOption.cAutoDownloadFanartCount);
-
-        //  for (int i = 0; i < AvailableFanarts.Count; i++)
-        //  {
-        //    // Dont get more than the user wants
-        //    if (iFanartCount >= AutoDownloadCount)
-        //      break;
-        //    _FanartsToDownload.Add(AvailableFanarts[i]);
-        //    iFanartCount++;
-        //  }
-        //}
-        return _FanartsToDownload;
-
-      } List<MFCover> _FanartsToDownload = new List<MFCover>();
-
-      //public bool Disabled
-      //{
-      //  get
-      //  {
-      //    if (this[cDisabled])
-      //      return true;
-      //    return false;
-      //  }
-      //  set
-      //  {
-      //    this[cDisabled] = value;
-      //    this.Commit();
-      //  }
-      //}
-
-      public bool isAvailableLocally
-      {
-        get
-        {
-          //if (String.IsNullOrEmpty(this[DBFanart.cLocalPath])) return false;
-
-          //// Check if file in path exists, remove it from database if not
-          //if (System.IO.File.Exists(Settings.GetPath(Settings.Path.fanart) + @"\" + this[DBFanart.cLocalPath])) return true;
-          //this[DBFanart.cLocalPath] = string.Empty;
-          return true;
-        }
+        Unknown,
+        Low,
+        Medium,
+        High
       }
 
       private string fullPath;
@@ -1682,11 +1127,53 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         set { fullPath = value; }
       }
 
+      private string fileName;
+      public string FileName
+      {
+        get { return fileName; }
+        set { fileName = value; }
+      }
+
       private long imageSize;
       public long ImageSize
       {
         get { return imageSize; }
         set { imageSize = value; }
+      }
+
+      private string imageSizeFriendly;
+      public string ImageSizeFriendly
+      {
+        get { return imageSizeFriendly; }
+        set { imageSizeFriendly = value; }
+      }
+
+      private int imageWith;
+      public int ImageWith
+      {
+        get { return imageWith; }
+        set { imageWith = value; }
+      }
+
+      private int imageHeight;
+      public int ImageHeight
+      {
+        get { return imageHeight; }
+        set { imageHeight = value; }
+      }
+
+      private string imageResolution;
+      public string ImageResolution
+      {
+        get { return imageResolution; }
+        set { imageResolution = value; }
+      }
+
+      private string imageResolutionClass;
+      public string ImageResolutionClass
+      {
+        get { return imageResolutionClass; }
+        set { imageResolutionClass = value; }
       }
 
       private bool chosen;
@@ -1695,64 +1182,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         get { return chosen; }
         set { chosen = value; }
       }
-
-      public string FullLocalPath
-      {
-        get
-        {
-          //if (String.IsNullOrEmpty(this[cLocalPath])) return string.Empty;
-          //return Helper.PathCombine(Settings.GetPath(Settings.Path.fanart), this[cLocalPath]);
-          return "";
-        }
-      }
-
-      //public bool HasColorInfo
-      //{
-      //  get
-      //  {
-      //    return !String.IsNullOrEmpty(this[cColors]);
-      //  }
-      //}
-
-      //public System.Drawing.Color GetColor(int which)
-      //{
-      //  if (HasColorInfo && which <= 3 && which > 0)
-      //  {
-      //    string[] split = this[cColors].ToString().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-      //    if (split.Length != 3) return default(System.Drawing.Color);
-      //    string[] rgbValues = split[--which].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-      //    return System.Drawing.Color.FromArgb(100, Int32.Parse(rgbValues[0]), Int32.Parse(rgbValues[1]), Int32.Parse(rgbValues[2]));
-      //  }
-      //  else return default(System.Drawing.Color);
-      //}
-
-      //public override string ToString()
-      //{
-      //  return this[cSeriesID] + " -> " + this[cIndex];
-      //}
-
-      //#region IComparable
-      //public int CompareTo(DBFanart other)
-      //{
-      //  // Sort by:
-      //  // 1. Highest Rated
-      //  // 2. Number of Votes
-
-      //  double thisFanart = 0.0;
-      //  double otherFanart = 0.0;
-
-      //  if (this[cRating] == other[cRating])
-      //  {
-      //    thisFanart += this[cRatingCount];
-      //    otherFanart += other[cRatingCount];
-      //  }
-
-      //  thisFanart += this[cRating];
-      //  otherFanart += other[cRating];
-
-      //  return otherFanart.CompareTo(thisFanart);
-      //}
-      //#endregion
 
     }
 
