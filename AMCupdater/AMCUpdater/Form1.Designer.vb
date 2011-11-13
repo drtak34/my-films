@@ -4919,14 +4919,14 @@ Partial Class Form1
         Me.BindingNavigatorAddNewItem1.Name = "BindingNavigatorAddNewItem1"
         Me.BindingNavigatorAddNewItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorAddNewItem1.Text = "Neu hinzufügen"
+        Me.BindingNavigatorAddNewItem1.Text = "Add Entry"
         '
         'BindingNavigatorCountItem1
         '
         Me.BindingNavigatorCountItem1.Name = "BindingNavigatorCountItem1"
         Me.BindingNavigatorCountItem1.Size = New System.Drawing.Size(44, 24)
-        Me.BindingNavigatorCountItem1.Text = "von {0}"
-        Me.BindingNavigatorCountItem1.ToolTipText = "Die Gesamtanzahl der Elemente."
+        Me.BindingNavigatorCountItem1.Text = "of {0}"
+        Me.BindingNavigatorCountItem1.ToolTipText = "Total Number of Entries."
         '
         'BindingNavigatorDeleteItem1
         '
@@ -4935,7 +4935,7 @@ Partial Class Form1
         Me.BindingNavigatorDeleteItem1.Name = "BindingNavigatorDeleteItem1"
         Me.BindingNavigatorDeleteItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorDeleteItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorDeleteItem1.Text = "Löschen"
+        Me.BindingNavigatorDeleteItem1.Text = "Delete Entry"
         '
         'BindingNavigatorMoveFirstItem1
         '
@@ -4944,7 +4944,7 @@ Partial Class Form1
         Me.BindingNavigatorMoveFirstItem1.Name = "BindingNavigatorMoveFirstItem1"
         Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveFirstItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorMoveFirstItem1.Text = "Erste verschieben"
+        Me.BindingNavigatorMoveFirstItem1.Text = "Move First"
         '
         'BindingNavigatorMovePreviousItem1
         '
@@ -4953,7 +4953,7 @@ Partial Class Form1
         Me.BindingNavigatorMovePreviousItem1.Name = "BindingNavigatorMovePreviousItem1"
         Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMovePreviousItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorMovePreviousItem1.Text = "Vorherige verschieben"
+        Me.BindingNavigatorMovePreviousItem1.Text = "Move Previous"
         '
         'BindingNavigatorSeparator3
         '
@@ -4968,7 +4968,7 @@ Partial Class Form1
         Me.BindingNavigatorPositionItem1.Name = "BindingNavigatorPositionItem1"
         Me.BindingNavigatorPositionItem1.Size = New System.Drawing.Size(50, 18)
         Me.BindingNavigatorPositionItem1.Text = "0"
-        Me.BindingNavigatorPositionItem1.ToolTipText = "Aktuelle Position"
+        Me.BindingNavigatorPositionItem1.ToolTipText = "Current Position"
         '
         'BindingNavigatorSeparator4
         '
@@ -4982,7 +4982,7 @@ Partial Class Form1
         Me.BindingNavigatorMoveNextItem1.Name = "BindingNavigatorMoveNextItem1"
         Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveNextItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorMoveNextItem1.Text = "Nächste verschieben"
+        Me.BindingNavigatorMoveNextItem1.Text = "Move Next"
         '
         'BindingNavigatorMoveLastItem1
         '
@@ -4991,7 +4991,7 @@ Partial Class Form1
         Me.BindingNavigatorMoveLastItem1.Name = "BindingNavigatorMoveLastItem1"
         Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveLastItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorMoveLastItem1.Text = "Letzte verschieben"
+        Me.BindingNavigatorMoveLastItem1.Text = "Move Last"
         '
         'BindingNavigatorSeparator5
         '
@@ -5010,7 +5010,7 @@ Partial Class Form1
         Me.SpeichernToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SpeichernToolStripButton.Name = "SpeichernToolStripButton"
         Me.SpeichernToolStripButton.Size = New System.Drawing.Size(23, 24)
-        Me.SpeichernToolStripButton.Text = "&Speichern"
+        Me.SpeichernToolStripButton.Text = "&Save Datas"
         '
         'ToolStripSeparator4
         '
