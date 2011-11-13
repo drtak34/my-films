@@ -33,6 +33,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
+  using MyFilmsPlugin.MyFilmsGUI;
 
   public class Configuration
     {
@@ -374,6 +375,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string wDfltSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
                 string wDfltSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
                 string wDfltSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
+
                 string wDfltSortInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
                 string wDfltSortSensInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
                 string wDfltSortMethodInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
@@ -478,13 +480,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))  
                       StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
 
-                    if (wDfltSort != "(none)" && wDfltSort.Length > 0)
+                    if (Helper.FieldIsSet(wDfltSort))
                     {
                       StrSorta = wDfltSort;
                       StrSortSens = wDfltSortSens;
                       CurrentSortMethod = wDfltSortMethod;
                     }
-                    if (wDfltSortInHierarchies != "(none)" && wDfltSortInHierarchies.Length > 0) // hierarchies sort settings
+                    if (Helper.FieldIsSet(wDfltSortInHierarchies)) // hierarchies sort settings
                     {
                       StrSortaInHierarchies = wDfltSortInHierarchies;
                       StrSortSensInHierarchies = wDfltSortSensInHierarchies;
@@ -503,14 +505,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrSort[0] = "(none)";
             if (StrSort[1].Length == 0)
                 StrSort[1] = "(none)";
-            if (StrSorta == "")
-              StrSorta = StrSTitle;
-            if (StrSortaInHierarchies == "")
-              StrSortaInHierarchies = StrSTitle;
-            if (StrSortSens == "")
-              StrSortSens = " ASC";
-            if (StrSortSensInHierarchies == "")
-              StrSortSens = " ASC";
+            if (StrSorta == "") StrSorta = StrSTitle;
+            if (StrSortaInHierarchies == "") StrSortaInHierarchies = StrSTitle;
+
+            if (StrSortSens == "" || StrSortSens == "ASC") StrSortSens = " ASC";
+            if (StrSortSens == "DESC") StrSortSens = " DESC";
+
+            if (StrSortSensInHierarchies == "" || StrSortSensInHierarchies == "ASC") StrSortSensInHierarchies = " ASC";
+            if (StrSortSensInHierarchies == "DESC") StrSortSensInHierarchies = " DESC";
+
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
                 {
@@ -533,6 +536,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return currentConfig; }
           set { currentConfig = value; }
+        }
+        private static MFView currentMFView;
+        public static MFView CurrentMFView
+        {
+          get { return currentMFView; }
+          set { currentMFView = value; }
         }
         private static string pluginMode = string.Empty;
         public static string PluginMode

@@ -294,20 +294,35 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (path2.Length > 0 && (path2[0] == '\\' || path2[0] == '/')) path2 = path2.Substring(1);
             return System.IO.Path.Combine(path1, path2);
         }
-        
+
         /// <summary>
         /// Cleans the path by removing invalid characters
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string cleanLocalPath(string path) {
-            foreach (char c in System.IO.Path.GetInvalidFileNameChars()) {
-                path = path.Replace(c, invalidCharReplacement);                
-            }
-            // Also remove trailing dots and spaces            
-            return path.TrimEnd(new char[] { '.' }).Trim();
+        public static string cleanLocalPath(string path)
+        {
+          foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+          {
+            path = path.Replace(c, invalidCharReplacement);
+          }
+          // Also remove trailing dots and spaces            
+          return path.TrimEnd(new char[] { '.' }).Trim();
         } const char invalidCharReplacement = '_';
-        
+
+        /// <summary>
+        /// checks for MyFilms fields being set or none/empty
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool FieldIsSet(string value)
+        {
+          if (!string.IsNullOrEmpty(value) && value != "(none)") 
+            return true;
+          else 
+            return false;
+        }
+
         /// <summary>
         /// Removes 'the' and other common words from the beginning of a series
         /// </summary>
