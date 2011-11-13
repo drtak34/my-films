@@ -4666,6 +4666,7 @@
           this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
                   "");
           this.chkSuppressManual.UseVisualStyleBackColor = true;
+          this.chkSuppressManual.CheckedChanged += new System.EventHandler(this.chkSuppressManual_CheckedChanged);
           // 
           // btnHyperLinkParamGen
           // 
