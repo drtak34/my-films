@@ -412,7 +412,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
               return string.Empty;
             }

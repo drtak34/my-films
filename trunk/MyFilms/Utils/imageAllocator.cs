@@ -402,68 +402,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
             return sTextureName;
         }
 
-        public static String GetSeriesBannerAsFilename(DBSeries series)
-        {            
-            return series.Banner;
-        }
-
-        public static String GetSeriesPosterAsFilename(DBSeries series)
-        {
-            return series.Poster;
-        }
-
-        public static String GetSeasonBanner(DBSeason season, bool createIfNotExist, bool isCoverflow)
-        {
-            Size size = isCoverflow ? reqSeasonPosterCFSize : reqSeasonPosterSize;
-
-            String sFileName = season.Banner;
-            String sTextureName = null;
-            if (sFileName.Length > 0 && System.IO.File.Exists(sFileName))
-            {
-                if (DBOption.GetOptions(DBOption.cAltImgLoading)) 
-                    sTextureName = sFileName; // bypass memoryimagebuilder
-                else
-                    sTextureName = buildMemoryImageFromFile(sFileName, size);
-            }
-            
-            if (createIfNotExist && string.IsNullOrEmpty(sTextureName))
-            {
-                // no image, use text, create our own
-                string text = (season[DBSeason.cIndex] == 0) ? Translation.specials : Translation.Season + season[DBSeason.cIndex];
-                string ident = season[DBSeason.cSeriesID] + "S" + season[DBSeason.cIndex];
-                sTextureName = buildMemoryImage(drawSimpleBanner(size, text), ident, size, true);
-            }
-            else return string.Empty;
-
-            s_SeasonsImageList.Add(sTextureName);
-            return sTextureName;
-        }
-
-        public static String GetSeasonBannerAsFilename(DBSeason season)
-        {
-            String sFileName = season.Banner;
-            return sFileName;
-        }
-
-        public static String GetEpisodeImage(DBEpisode episode)
-        {
-            bool HideEpisodeImage = true;
-            if (!localLogos.appendEpImage && (episode[DBOnlineEpisode.cWatched] || !DBOption.GetOptions(DBOption.cView_Episode_HideUnwatchedThumbnail)))
-                HideEpisodeImage = false;
-
-            // show episode image
-            if (!HideEpisodeImage && !String.IsNullOrEmpty(episode.Image) && System.IO.File.Exists(episode.Image))
-            {
-                return episode.Image;
-            }
-            else
-            {
-                // show a fanart thumb instead
-                Fanart fanart = Fanart.getFanart(episode[DBOnlineEpisode.cSeriesID]);
-                return fanart.FanartThumbFilename;
-            }
-        }
-
         public static String GetOtherImage(string sFileName, System.Drawing.Size size, bool bPersistent)
         {
             return GetOtherImage(null, sFileName, size, bPersistent);
@@ -528,7 +466,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 // We are not using ICM at all, fudge that, this should be FAAAAAST!
                 if (GdipLoadImageFromFile(filename, out image) != 0)
                 {
-                    MPTVSeriesLog.Write("Reverting to slow ImageLoading for: " + filename, MPTVSeriesLog.LogLevel.Debug);
+                    LogMyFilms.Debug("Reverting to slow ImageLoading for: " + filename, MPTVSeriesLog.LogLevel.Debug);
                     i = Image.FromFile(filename);
                 }
                 else i = (Image)imageType.InvokeMember("FromGDIplus", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, new object[] { image });
@@ -536,12 +474,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
             catch (System.IO.FileNotFoundException fe)
             {
-                MPTVSeriesLog.Write("Image does not exist: " + filename + " - " + fe.Message);
+                LogMyFilms.Debug("Image does not exist: " + filename + " - " + fe.Message);
             }
             catch (Exception e)
             {
                 // this probably means the image is bad
-                MPTVSeriesLog.Write("Unable to load Imagefile (corrupt?): " + filename + " - " + e.Message);
+                LogMyFilms.Debug("Unable to load Imagefile (corrupt?): " + filename + " - " + e.Message);
                 return null;
             }
             return i;
