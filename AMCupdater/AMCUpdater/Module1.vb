@@ -1419,8 +1419,8 @@ Module Module1
         End If
 
         If Not String.IsNullOrEmpty(Edition) Then
-            If Name.Contains(Edition) = True Then
-                Name = Name.Replace(Edition, "") ' remove edition name part
+            If Name.Contains(" (" & Edition & ")") = True Then
+                Name = Name.Replace(" (" & Edition & ")", "") ' remove edition name part
             End If
         End If
 
