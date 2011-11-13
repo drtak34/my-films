@@ -3434,7 +3434,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void chkSuppress_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkSuppress.Checked)
+          if (chkSuppressManual.Checked) chkSuppressManual.Checked = false;
+  
+          if (chkSuppress.Checked)
             {
                 gpsuppress.Enabled = true;
                 gpspfield.Enabled = true;
@@ -3448,6 +3450,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 chksupplaystop.Enabled = false;
             }
 
+        }
+
+        private void chkSuppressManual_CheckedChanged(object sender, EventArgs e)
+        {
+          if (chkSuppress.Checked) chkSuppress.Checked = false;
         }
 
         private void rbsuppress_CheckedChanged(object sender, EventArgs e)
@@ -5735,5 +5742,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           input.Text = "MyFilms - Hyperlink Start Parameter Creator";
           input.ShowDialog(this);
         }
+
     }
 }
