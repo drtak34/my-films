@@ -3266,6 +3266,20 @@ certain characters from searchtitle (e.g. MoviePilot doesn't accept
   <data name="textDReplaceWith.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
+  <data name="textDReplaceWith.ToolTip" xml:space="preserve">
+    <value>This is normally the replacement string.
+Under special conditions, there is command allowed too:
+When using regex match groups, the cleanup via "Replace" is done with hardcoded With = "" 
+and only applying to the inner matchgroup strings.
+In that case, you can define cleanup commands for the outer results here:
+Supported commands:
+#REGEX# (for cleanup of outer result)
+#REGEX##MULTI# for multiple replacements (see "Replace")
+To use a linebreak, use #LF# - this will internally be cahnged into a linebreak.
+Example:
+#REGEX##MULTI#, |#LF# 
+will replace comma separated results with linebreaked results.</value>
+  </data>
   <data name="textDReplaceWith.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -3708,6 +3722,36 @@ certain characters from searchtitle (e.g. MoviePilot doesn't accept
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label34.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 70</value>
+  </data>
+  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="label34.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="label34.Text" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="&gt;&gt;label34.Name" xml:space="preserve">
+    <value>label34</value>
+  </data>
+  <data name="&gt;&gt;label34.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label34.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label34.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
@@ -4924,36 +4968,6 @@ certain characters from searchtitle (e.g. MoviePilot doesn't accept
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>20</value>
-  </data>
-  <data name="label34.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 70</value>
-  </data>
-  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
-  </data>
-  <data name="label34.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="label34.Text" xml:space="preserve">
-    <value>Encoding</value>
-  </data>
-  <data name="&gt;&gt;label34.Name" xml:space="preserve">
-    <value>label34</value>
-  </data>
-  <data name="&gt;&gt;label34.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label34.Parent" xml:space="preserve">
-    <value>tabPageSearchPage</value>
-  </data>
-  <data name="&gt;&gt;label34.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6333,9 +6347,6 @@ If you want to create a new configuration based on the existing script, you can 
         //z9/+AAAA///P3/+AAAH//8/f/+AAD///z9///4H////P3////////8/f////////z9/////////P3/
         ///////8/Q==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

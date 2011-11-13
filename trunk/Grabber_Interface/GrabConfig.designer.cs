@@ -142,6 +142,7 @@ namespace Grabber_Interface
           this.label15 = new System.Windows.Forms.Label();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
+          this.label34 = new System.Windows.Forms.Label();
           this.label9 = new System.Windows.Forms.Label();
           this.labelSearchPosition = new System.Windows.Forms.Label();
           this.PositionSearch = new System.Windows.Forms.Label();
@@ -181,7 +182,6 @@ namespace Grabber_Interface
           this.label6 = new System.Windows.Forms.Label();
           this.label5 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
-          this.label34 = new System.Windows.Forms.Label();
           this.lblType = new System.Windows.Forms.Label();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
           this.label33 = new System.Windows.Forms.Label();
@@ -1068,6 +1068,7 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.textDReplaceWith, "textDReplaceWith");
           this.textDReplaceWith.Name = "textDReplaceWith";
+          this.toolTip1.SetToolTip(this.textDReplaceWith, resources.GetString("textDReplaceWith.ToolTip"));
           this.textDReplaceWith.Validated += new System.EventHandler(this.textDReplaceWith_TextChanged);
           // 
           // lblComplement
@@ -1129,6 +1130,11 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPageSearchPage, "tabPageSearchPage");
           this.tabPageSearchPage.Name = "tabPageSearchPage";
           this.tabPageSearchPage.UseVisualStyleBackColor = true;
+          // 
+          // label34
+          // 
+          resources.ApplyResources(this.label34, "label34");
+          this.label34.Name = "label34";
           // 
           // label9
           // 
@@ -1422,11 +1428,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.label4, "label4");
           this.label4.Name = "label4";
-          // 
-          // label34
-          // 
-          resources.ApplyResources(this.label34, "label34");
-          this.label34.Name = "label34";
           // 
           // lblType
           // 
