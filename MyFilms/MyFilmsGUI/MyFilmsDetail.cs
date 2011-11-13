@@ -728,7 +728,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
                     // Search Trailer File to play
                     {
-                      if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)")
+                      if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
                       {
                         trailerPlayed = true;
                         Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
@@ -894,7 +894,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               
                 case "playtrailer":
                     // first check, if trailer files are available, offer options
-                    //if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+                    //if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
                     if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
                     {
                       trailerPlayed = true;
@@ -1070,8 +1070,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("updproperty");
                     }
 
-                    //if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && (MyFilms.conf.WindowsFileDialog))
-                    if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)")
+                    //if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && (MyFilms.conf.WindowsFileDialog))
+                    if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798636));//filename
                       choiceViewMenu.Add("fileselect");
@@ -1337,7 +1337,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
 
-                    if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+                    if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
                     {
                       string trailercount = "";
                       if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim())) 
@@ -1363,7 +1363,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
 
 
-                    if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+                    if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
                       choiceViewMenu.Add("trailer-register");
@@ -2194,7 +2194,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
 
           string mediapath = string.Empty;
-          if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)")
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
           {
             mediapath = sr[MyFilms.conf.StrStorage].ToString();
             if (mediapath.Contains(";")) // take the first source file
@@ -2750,22 +2750,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static string GetSearchTitle(DataRow[] r1, int index, string titleoption)
         {
           string title = "";
-          if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && MyFilms.conf.ItemSearchGrabber != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.ItemSearchGrabber].ToString()))
+          if (Helper.FieldIsSet(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.ItemSearchGrabber].ToString()))
           {
             title = r1[index][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
             LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
           }
-          else if (MyFilms.conf.StrTitle1 != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle1].ToString())) // Master Title
+          else if (Helper.FieldIsSet(MyFilms.conf.StrTitle1) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle1].ToString())) // Master Title
           {
             title = r1[index][MyFilms.conf.StrTitle1].ToString();
             LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (master)title = '" + title.ToString() + "'");
           }
-          else if (MyFilms.conf.StrTitle2 != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+          else if (Helper.FieldIsSet(MyFilms.conf.StrTitle2) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle2].ToString())) // Secondary title
           {
             title = r1[index][MyFilms.conf.StrTitle2].ToString();
             LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (secondary)title = '" + title.ToString() + "'");
           }
-          else if (MyFilms.conf.StrStorage != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+          else if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
           {
             title = r1[index][MyFilms.conf.StrStorage].ToString();
             if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
@@ -2785,7 +2785,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string mediapath = "";
 
           // for catalog using "storage field"
-          if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)")
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
           {
             try
             {
@@ -5385,7 +5385,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_Title);
-            if (MyFilms.conf.StrTitle2 != "(none)")
+            if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
             {
                 if ((MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() == MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString()) || (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString().Length == 0))
                     GUIControl.HideControl(GetID, (int)Controls.CTRL_OTitle);
@@ -5490,7 +5490,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilms.currentMovie.Fanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty)[0]; 
             //MyFilms.currentMovie.Fanart = wfanart[0];  
 
-            if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && checkfileavailability)
+            if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && checkfileavailability)
             {
                 if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
                 {
@@ -6009,7 +6009,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     setGUIProperty("user.source.isonline", "available");
                                   else if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "False")
                                   {
-                                    if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)") // if there is source field set
+                                    if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
                                     {
                                       if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
                                         setGUIProperty("user.source.isonline", "offline");
@@ -6025,7 +6025,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               }
                               else
                               {
-                                if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)") // if there is source field set
+                                if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
                                 {
                                   if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
                                   {
@@ -6064,7 +6064,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     setGUIProperty("user.sourcetrailer.isonline", "available");
                                   else
                                   {
-                                    if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)")
+                                    if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
                                     {
                                       if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
                                         setGUIProperty("user.sourcetrailer.isonline", "offline");
@@ -6080,7 +6080,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               }
                               else
                               {
-                                if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)")
+                                if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
                                 {
                                   if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
                                   {
@@ -6371,7 +6371,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Run externaly Program before Playing if defined in setup
             LogMyFilms.Debug("(Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
             setProcessAnimationStatus(true, m_SearchAnimation);
-            if ((MyFilms.conf.CmdPar.Length > 0) && (MyFilms.conf.CmdPar != "(none)"))
+            if (Helper.FieldIsSet(MyFilms.conf.CmdPar))
                 RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
             if (g_Player.Playing)
                 g_Player.Stop();
@@ -6450,7 +6450,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
                 dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
                 dlgYesNo.SetLine(1, GUILocalizeStrings.Get(219));//no disc
-                if (MyFilms.conf.StrIdentItem != null && MyFilms.conf.StrIdentItem != "(none)" && MyFilms.conf.StrIdentItem != String.Empty)
+                if (Helper.FieldIsSet(MyFilms.conf.StrIdentItem))
                     if (MyFilms.conf.StrIdentLabel.Length > 0)
                         dlgYesNo.SetLine(2, MyFilms.conf.StrIdentLabel + " = " + MyFilms.r[select_item][MyFilms.conf.StrIdentItem]);//Label Identification for Media
                     else
@@ -6482,7 +6482,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Run externaly Program before Playing if defined in setup
           setProcessAnimationStatus(true, m_SearchAnimation);
           LogMyFilms.Debug("(Play Movie Trailer) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
-          if ((MyFilms.conf.CmdPar.Length > 0) && (MyFilms.conf.CmdPar != "(none)"))
+          if (Helper.FieldIsSet(MyFilms.conf.CmdPar))
             RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
           if (g_Player.Playing)
             g_Player.Stop();
@@ -6726,7 +6726,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         {  // ToDo: Add methods for Streaming - check OV for howto's...
           LogMyFilms.Debug("(Play Movie Trailer Streams) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
-          if ((MyFilms.conf.CmdPar.Length > 0) && (MyFilms.conf.CmdPar != "(none)"))
+          if (Helper.FieldIsSet(MyFilms.conf.CmdPar))
             RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
           if (g_Player.Playing)
             g_Player.Stop();
@@ -7420,7 +7420,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // retrieve filename information stored in the DB
             if (Trailer)
             {
-              if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)")
+              if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
               {
                 LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - try filename MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer]: '" + MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer].ToString().Trim() + "' - ConfStorageTrailer: '" + MyFilms.conf.StrStorageTrailer + "'"); 
                 try { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer].ToString().Trim(); }
@@ -7429,7 +7429,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)")
+              if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
               {
                 LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - try filename MyFilms.r[select_item][MyFilms.conf.StrStorage]: '" + MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim() + "' - ConfStorage: '" + MyFilms.conf.StrStorage + "'"); 
                 try { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim(); }
@@ -7452,7 +7452,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       fileName = Search_FileName(movieName, MyFilms.conf.StrDirStor).Trim();
                     }
 
-                    if ((fileName.Length > 0) && (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)"))
+                    if ((fileName.Length > 0) && Helper.FieldIsSet(MyFilms.conf.StrStorage))
                     {
                         MyFilms.r[select_item][MyFilms.conf.StrStorage] = fileName;
                         Update_XML_database();
@@ -8205,7 +8205,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void SearchTrailerLocal(DataRow[] r1, int Index, bool ExtendedSearch)
         {
             LogMyFilms.Debug("(SearchTrailerLocal) - mastertitle      : '" + MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString() + "'");
-            if (MyFilms.conf.StrTitle2 != "(none)")
+            if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
               LogMyFilms.Debug("(SearchTrailerLocal) - secondary title  : '" + MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString() + "'");
             LogMyFilms.Debug("(SearchTrailerLocal) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");            
             LogMyFilms.Debug("(SearchtrailerLocal) - Index            : '" + Index + "'");
@@ -8220,7 +8220,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string file = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
             string titlename = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
             string titlename2 = "";
-            if (MyFilms.conf.StrTitle2 != "(none)" && !string.IsNullOrEmpty(MyFilms.conf.StrTitle2))
+            if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
               titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
             string directoryname = "";
             string movieName = "";
@@ -8382,7 +8382,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
                 LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
 
-            if ((trailersourcepath.Length > 0) && (!(MyFilms.conf.StrStorageTrailer.Length == 0) && !(MyFilms.conf.StrStorageTrailer == "(none)")))
+            if ((trailersourcepath.Length > 0) && Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
             {
                 LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Old Trailersourcepath: '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
                 MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] = trailersourcepath;
