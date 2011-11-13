@@ -2148,21 +2148,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         tmpwatched = false; 
         number++;
-        if (conf.Boolreturn)//in case of selection by view verify if value correspond excatly to the searched string
+        if (conf.Boolreturn) //in case of selection by view verify if value correspond excatly to the searched string
         {
           w_tableau = Search_String(sr[conf.WStrSort].ToString());
           foreach (object t in w_tableau)
           {
-            if (isdate)
-            {
-              if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(t.ToString()).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
-                goto suite;
-            }
-            else
-            {
-              if (t.ToString().ToLower().Contains(conf.Wselectedlabel.Trim().ToLower()))
-                goto suite;
-            }
+            if (isdate && string.Format("{0:dd/MM/yyyy}", DateTime.Parse(t.ToString()).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
+              goto suite;
+            if (t.ToString().ToLower().Contains(conf.Wselectedlabel.Trim().ToLower()))
+              goto suite;
           }
           goto fin;
         }
@@ -2196,15 +2190,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           iCnt = 1;
           item = new GUIListItem();
-          item.Label = sFullTitle; // Set = full subfolders path initially
+          item.Label = (DelimCnt < DelimCnt2) ? sFullTitle.Substring(sFullTitle.LastIndexOf(conf.TitleDelim) + 1) : sFullTitle; // Set = full subfolders path initially - new: set only to last name
           item.TVTag = "film";
           if (!MyFilms.conf.OnlyTitleList)
           {
-            string sortItem = conf.StrSorta;
-            if (conf.BoolCollection) 
-              sortItem = conf.StrSortaInHierarchies;
-
-
+            string sortItem =  (conf.BoolCollection) ? conf.StrSortaInHierarchies : conf.StrSorta;
             switch (sortItem)
             {
               case "TranslatedTitle":
@@ -2230,6 +2220,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
             }
           }
+          if (DelimCnt < DelimCnt2) item.Label2 = "(" + iCnt + ")  " + NewString.PosRight(")  ", item.Label2);// prepend (items in folder count)
 
           if (conf.StrEnhancedWatchedStatusHandling)
           {
@@ -2337,25 +2328,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (facadeView.Count == 0)
       {
-        //    //dlgOk.SetLine(1, GUILocalizeStrings.Get(10798620));
-        //    //dlgOk.SetLine(2, GUILocalizeStrings.Get(10798621));
-        //    //dlgOk.DoModal(GetID);
-        //    //DisplayAllMovies();
-        //    GUIControl.HideControl(GetID, 34);
-        //    InitMainScreen();
-        
         item = new GUIListItem();
         item.Label = GUILocalizeStrings.Get(10798639);
         item.IsRemote = true;
         facadeView.Add(item);
         item.FreeMemory();
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798639));
-        //GUIWaitCursor.Show();
-        //DisplayAllMovies();
-        //InitMainScreen(false);
         GUIControl.ShowControl(GetID, 34); // hides certain GUI elements
-        //SetLabelSelect("root");
-        //SetLabelView("all");
       }
       else
       {
