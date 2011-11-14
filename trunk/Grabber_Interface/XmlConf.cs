@@ -310,6 +310,10 @@ public class TagName
   public static string Encoding = "Encoding";                   // Added Encoding as override options for webpages not properly posting page encoding
   public static string SearchCleanup = "SearchCleanup";         // Added Encoding as override options for webpages not properly posting page encoding
 
+  public static string Accept = "Accept";                       // Added Accept as override options for web requests
+  public static string UserAgent = "UserAgent";                 // Added Useragent as override options for web requests
+  public static string Headers = "Headers";                     // Added Headers as override options for web requests
+
   public static string KeyStartThumb = "KeyStartThumb";         // Start / End Thumb for cover image in list result view
   public static string KeyEndThumb = "KeyEndThumb";
   public static string KeyStartList = "KeyStartList";           // List

@@ -8,6 +8,9 @@
     <Version>1.0</Version>
     <Encoding />
     <SearchCleanup />
+    <Accept />
+    <UserAgent />
+    <Headers />
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
