@@ -4925,7 +4925,7 @@ Partial Class Form1
         '
         Me.BindingNavigatorCountItem1.Name = "BindingNavigatorCountItem1"
         Me.BindingNavigatorCountItem1.Size = New System.Drawing.Size(44, 24)
-        Me.BindingNavigatorCountItem1.Text = "of {0}"
+        Me.BindingNavigatorCountItem1.Text = "von {0}"
         Me.BindingNavigatorCountItem1.ToolTipText = "Total Number of Entries."
         '
         'BindingNavigatorDeleteItem1
