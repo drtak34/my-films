@@ -5745,5 +5745,58 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           input.ShowDialog(this);
         }
 
+
+        #region Tab Enable/Disable Helper
+        private void HideTabPage(TabPage tp)
+        {
+          if (General.TabPages.Contains(tp))
+            General.TabPages.Remove(tp);
+        }
+
+        private void ShowTabPage(TabPage tp)
+        {
+          ShowTabPage(tp, General.TabPages.Count);
+        }
+
+        private void ShowTabPage(TabPage tp, int index)
+        {
+          if (General.TabPages.Contains(tp)) return;
+          InsertTabPage(tp, index);
+        }
+
+        private void InsertTabPage(TabPage tabpage, int index)
+        {
+          if (index < 0 || index > General.TabCount)
+            throw new ArgumentException("Index out of Range.");
+          General.TabPages.Add(tabpage);
+          if (index < General.TabCount - 1)
+            do
+            {
+              SwapTabPages(tabpage, (General.TabPages[General.TabPages.IndexOf(tabpage) - 1]));
+            }
+            while (General.TabPages.IndexOf(tabpage) != index);
+          General.SelectedTab = tabpage;
+        }
+
+        private void SwapTabPages(TabPage tp1, TabPage tp2)
+        {
+          if (General.TabPages.Contains(tp1) == false || General.TabPages.Contains(tp2) == false)
+            throw new ArgumentException("TabPages must be in the TabControls TabPageCollection.");
+
+          int Index1 = General.TabPages.IndexOf(tp1);
+          int Index2 = General.TabPages.IndexOf(tp2);
+          General.TabPages[Index1] = tp2;
+          General.TabPages[Index2] = tp1;
+
+          //Uncomment the following section to overcome bugs in the Compact Framework
+          //tabControl1.SelectedIndex = tabControl1.SelectedIndex; 
+          //string tp1Text, tp2Text;
+          //tp1Text = tp1.Text;
+          //tp2Text = tp2.Text;
+          //tp1.Text=tp2Text;
+          //tp2.Text=tp1Text;
+        }
+#endregion
+
     }
 }
