@@ -2070,7 +2070,8 @@ Public Class AntRecord
         If _GroupName <> "" Then
             If CurrentSettings.Folder_Name_Is_Group_Name = True Then
                 If CurrentSettings.Group_Name_Applies_To = TitleField Or CurrentSettings.Group_Name_Applies_To = "Both Titles" Then
-                    If TempValue <> _GroupName.ToString And Not TempValue.StartsWith(_GroupName.ToString & "\") Then
+                    'If TempValue <> _GroupName.ToString And Not TempValue.StartsWith(_GroupName.ToString & "\") Then
+                    If Not TempValue.StartsWith(_GroupName.ToString & "\") Then
                         TempValue = _GroupName.ToString & "\" & TempValue
                     End If
                 End If
