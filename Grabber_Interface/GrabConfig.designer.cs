@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -107,6 +107,10 @@ namespace Grabber_Interface
           this.textType = new System.Windows.Forms.TextBox();
           this.textVersion = new System.Windows.Forms.TextBox();
           this.textSearchCleanup = new System.Windows.Forms.TextBox();
+          this.textDReplaceWith = new System.Windows.Forms.TextBox();
+          this.textAccept = new System.Windows.Forms.TextBox();
+          this.textUserAgent = new System.Windows.Forms.TextBox();
+          this.textHeaders = new System.Windows.Forms.TextBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -134,7 +138,6 @@ namespace Grabber_Interface
           this.label18 = new System.Windows.Forms.Label();
           this.labelDReplaceWith = new System.Windows.Forms.Label();
           this.labelDReplace = new System.Windows.Forms.Label();
-          this.textDReplaceWith = new System.Windows.Forms.TextBox();
           this.lblComplement = new System.Windows.Forms.Label();
           this.label12 = new System.Windows.Forms.Label();
           this.label13 = new System.Windows.Forms.Label();
@@ -142,7 +145,8 @@ namespace Grabber_Interface
           this.label15 = new System.Windows.Forms.Label();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
-          this.label34 = new System.Windows.Forms.Label();
+          this.label37 = new System.Windows.Forms.Label();
+          this.label35 = new System.Windows.Forms.Label();
           this.label9 = new System.Windows.Forms.Label();
           this.labelSearchPosition = new System.Windows.Forms.Label();
           this.PositionSearch = new System.Windows.Forms.Label();
@@ -182,6 +186,7 @@ namespace Grabber_Interface
           this.label6 = new System.Windows.Forms.Label();
           this.label5 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
+          this.label34 = new System.Windows.Forms.Label();
           this.lblType = new System.Windows.Forms.Label();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
           this.label33 = new System.Windows.Forms.Label();
@@ -206,6 +211,7 @@ namespace Grabber_Interface
           this.lblVersion = new System.Windows.Forms.Label();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+          this.label36 = new System.Windows.Forms.Label();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -862,6 +868,32 @@ namespace Grabber_Interface
           this.textSearchCleanup.Name = "textSearchCleanup";
           this.toolTip1.SetToolTip(this.textSearchCleanup, resources.GetString("textSearchCleanup.ToolTip"));
           // 
+          // textDReplaceWith
+          // 
+          resources.ApplyResources(this.textDReplaceWith, "textDReplaceWith");
+          this.textDReplaceWith.Name = "textDReplaceWith";
+          this.toolTip1.SetToolTip(this.textDReplaceWith, resources.GetString("textDReplaceWith.ToolTip"));
+          this.textDReplaceWith.Validated += new System.EventHandler(this.textDReplaceWith_TextChanged);
+          // 
+          // textAccept
+          // 
+          resources.ApplyResources(this.textAccept, "textAccept");
+          this.textAccept.Name = "textAccept";
+          this.toolTip1.SetToolTip(this.textAccept, resources.GetString("textAccept.ToolTip"));
+          // 
+          // textUserAgent
+          // 
+          resources.ApplyResources(this.textUserAgent, "textUserAgent");
+          this.textUserAgent.Name = "textUserAgent";
+          this.toolTip1.SetToolTip(this.textUserAgent, resources.GetString("textUserAgent.ToolTip"));
+          // 
+          // textHeaders
+          // 
+          this.textHeaders.AllowDrop = true;
+          resources.ApplyResources(this.textHeaders, "textHeaders");
+          this.textHeaders.Name = "textHeaders";
+          this.toolTip1.SetToolTip(this.textHeaders, resources.GetString("textHeaders.ToolTip"));
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1064,13 +1096,6 @@ namespace Grabber_Interface
           resources.ApplyResources(this.labelDReplace, "labelDReplace");
           this.labelDReplace.Name = "labelDReplace";
           // 
-          // textDReplaceWith
-          // 
-          resources.ApplyResources(this.textDReplaceWith, "textDReplaceWith");
-          this.textDReplaceWith.Name = "textDReplaceWith";
-          this.toolTip1.SetToolTip(this.textDReplaceWith, resources.GetString("textDReplaceWith.ToolTip"));
-          this.textDReplaceWith.Validated += new System.EventHandler(this.textDReplaceWith_TextChanged);
-          // 
           // lblComplement
           // 
           resources.ApplyResources(this.lblComplement, "lblComplement");
@@ -1106,15 +1131,19 @@ namespace Grabber_Interface
           // 
           // tabPageSearchPage
           // 
+          this.tabPageSearchPage.Controls.Add(this.textHeaders);
+          this.tabPageSearchPage.Controls.Add(this.textUserAgent);
+          this.tabPageSearchPage.Controls.Add(this.textAccept);
+          this.tabPageSearchPage.Controls.Add(this.label36);
+          this.tabPageSearchPage.Controls.Add(this.label37);
+          this.tabPageSearchPage.Controls.Add(this.label35);
           this.tabPageSearchPage.Controls.Add(this.textSearchCleanup);
-          this.tabPageSearchPage.Controls.Add(this.label34);
           this.tabPageSearchPage.Controls.Add(this.label9);
           this.tabPageSearchPage.Controls.Add(this.labelSearchPosition);
           this.tabPageSearchPage.Controls.Add(this.PositionSearch);
           this.tabPageSearchPage.Controls.Add(this.groupBox6);
           this.tabPageSearchPage.Controls.Add(this.groupBox5);
           this.tabPageSearchPage.Controls.Add(this.buttonPrevParam1);
-          this.tabPageSearchPage.Controls.Add(this.textEncoding);
           this.tabPageSearchPage.Controls.Add(this.label17);
           this.tabPageSearchPage.Controls.Add(this.textRedir);
           this.tabPageSearchPage.Controls.Add(this.textBody);
@@ -1131,10 +1160,15 @@ namespace Grabber_Interface
           this.tabPageSearchPage.Name = "tabPageSearchPage";
           this.tabPageSearchPage.UseVisualStyleBackColor = true;
           // 
-          // label34
+          // label37
           // 
-          resources.ApplyResources(this.label34, "label34");
-          this.label34.Name = "label34";
+          resources.ApplyResources(this.label37, "label37");
+          this.label37.Name = "label37";
+          // 
+          // label35
+          // 
+          resources.ApplyResources(this.label35, "label35");
+          this.label35.Name = "label35";
           // 
           // label9
           // 
@@ -1268,17 +1302,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+          dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle17;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle6.NullValue = null;
-          dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle6;
+          dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle18.NullValue = null;
+          dataGridViewCellStyle18.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle18;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1291,16 +1325,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
+          dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle19;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+          dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle20;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1428,6 +1462,11 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.label4, "label4");
           this.label4.Name = "label4";
+          // 
+          // label34
+          // 
+          resources.ApplyResources(this.label34, "label34");
+          this.label34.Name = "label34";
           // 
           // lblType
           // 
@@ -1625,11 +1664,17 @@ namespace Grabber_Interface
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
+          // label36
+          // 
+          resources.ApplyResources(this.label36, "label36");
+          this.label36.Name = "label36";
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.Controls.Add(this.lblType);
+          this.Controls.Add(this.label34);
           this.Controls.Add(this.lblVersion);
           this.Controls.Add(this.lblLanguage);
           this.Controls.Add(this.textVersion);
@@ -1637,6 +1682,7 @@ namespace Grabber_Interface
           this.Controls.Add(this.textType);
           this.Controls.Add(this.Version_Label);
           this.Controls.Add(this.button_SaveAs);
+          this.Controls.Add(this.textEncoding);
           this.Controls.Add(this.buttonExpertMode);
           this.Controls.Add(this.linkLabelMFwiki);
           this.Controls.Add(this.pictureBox1);
@@ -1867,6 +1913,12 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn8;
         private System.Windows.Forms.TextBox textSearchCleanup;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textUserAgent;
+        private System.Windows.Forms.TextBox textAccept;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox textHeaders;
 
     }
 }
