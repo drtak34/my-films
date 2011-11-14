@@ -179,10 +179,13 @@ Various Parser Files are provided by default - they are in the Scripts subfolder
   </data>
   <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
     <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
-If orphaned entries are found, then will be purged from the database.
+If orphaned entries are found, they will be purged from the database.
 This only affects database entries which reference the currently scanned movie folder(s).
 Override path is taken into account for this option.
-For example, an entry listing a Source of 'd:\Movies' will not be considered an orphan if you only scan 'e:\Other Movies'.</value>
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphan if you only scan 'e:\Other Movies'.
+
+Entries with sources outside the scan directories are not purged automatically - only entries with sources 
+within the active scan folders will be purged automatically.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancelProcessing.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

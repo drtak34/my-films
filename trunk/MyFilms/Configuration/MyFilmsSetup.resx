@@ -404,24 +404,6 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
   </data>
-  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
-    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
-including grabbing media info, internet movie data, cover image and fanart.
-You can use and launch AMCUpdater in batch mode from inside the MyFilms GUI or schedule a task 
-to run independently from Mediaportal / My Films.</value>
-  </data>
-  <data name="scheduleAMCUpdater.ToolTip" xml:space="preserve">
-    <value>You can use the Windows scheduler to schedule AMCupdater to run and update automatically to update your catalog.
-Make sure the configuration you choose for this matches your needs.
-Note: You can always launch AMCupdater from within MyFilms anytime you wish and let it import movies in the background.
-If you prefer that, you do NOT require to schedule a task via scheduler.</value>
-  </data>
-  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
-    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
-MyFilms will create such a file for each Configuration Name.
-You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
-However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
-  </data>
   <data name="AmcTitleSearchHandling.ToolTip" xml:space="preserve">
     <value>Options are:
 File Name: use file name for title field
@@ -448,14 +430,20 @@ In normal usage this is not required, as saving MyFilms coinfig also pushes chan
 Note: This will overwrite your existing AMC Updater settings file - so you'll lose customizations you made.</value>
   </data>
   <data name="chkAMC_Purge_Missing_Files.ToolTip" xml:space="preserve">
-    <value>If enabled, AMC Updater will remove Records from your DB, when movie file(s) cannot be found in your movie folder or subfolders!
+    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
+If enabled, AMC Updater will remove entries from your DB, when movie file(s) cannot be found in your movie folder or subfolders!
 Use with care and make sure, you really want to remove films from your DB, that are not accessible during update scan !
+
+Entries with sources outside the scan directories are not purged automatically - only entries with sources 
+within the active scan folders will be purged automatically.
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphan if you only scan 'e:\Other Movies'.
 
 Also check your AMCupdater settings, as there are options to configure how updating behaves:
 - If you update DB with AMCupdater, AMCupdater should recognize that the film moved and just update source - (adjustable in AMCupdatersetup).
 - If you moved the file, update and the movie is no longer available, the record will be removed (“purged”) from your DB and disappear.
-- There are settings in AMCupdater to PREVENT it from purging files - even when movie files are NOT available during scanning - this is mostly for DVD-drives, but can also be used for USB-attached drives.
-This makes sure records won’t be removed from DB - and if you start film in MF, it won’t find film and will ask you to insert media.</value>
+- There are settings in AMCupdater to PREVENT it from purging files - even when movie files are NOT available during scanning - this is mostly for DVD-drives, 
+but can also be used for USB-attached drives.
+This makes sure entries won’t be removed from DB - and if you start a film in MF, it won’t find film and will ask you to insert media.</value>
   </data>
   <data name="chkAMCUpd.ToolTip" xml:space="preserve">
     <value>If checked, the global update options will be available in My Films to run AMCupdater in the background, 
@@ -465,6 +453,24 @@ Loading data includes:
 - getting internet info via the selected internet grabber script
 - getting cover image via the selected internet grabber script
 - loading fanart</value>
+  </data>
+  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
+    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
+including grabbing media info, internet movie data, cover image and fanart.
+You can use and launch AMCUpdater in batch mode from inside the MyFilms GUI or schedule a task 
+to run independently from Mediaportal / My Films.</value>
+  </data>
+  <data name="scheduleAMCUpdater.ToolTip" xml:space="preserve">
+    <value>You can use the Windows scheduler to schedule AMCupdater to run and update automatically to update your catalog.
+Make sure the configuration you choose for this matches your needs.
+Note: You can always launch AMCupdater from within MyFilms anytime you wish and let it import movies in the background.
+If you prefer that, you do NOT require to schedule a task via scheduler.</value>
+  </data>
+  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
+    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
+MyFilms will create such a file for each Configuration Name.
+You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
+However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
   </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The automatic Deletion Options allow you to update and/or delete records and/or media files 
