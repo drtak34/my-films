@@ -866,10 +866,16 @@ Public Class AntProcessor
                                 'File(Name)
                                 'Folder(Name)
                                 'Relative(Name)
-                                If wtitle.Length > 0 Then
-                                    If wtitle.Contains("\") = True Then
-                                        .GroupName = wtitle.Substring(0, wtitle.LastIndexOf("\"))
-                                        'Console.WriteLine("-" & .GroupName.ToString & "-")
+                                If FileToScan.Length > 0 Then ' first try to get groupname by default rules from filename
+                                    If FileToScan.ToString.Contains("\") Then
+                                        .GroupName = GetGroupName(FileToScan, CurrentSettings.Movie_Title_Handling, CurrentSettings.Group_Name_Identifier)
+                                    End If
+                                Else
+                                    If wtitle.Length > 0 Then ' fallback to possibly existing group name
+                                        If wtitle.Contains("\") = True Then
+                                            .GroupName = wtitle.Substring(0, wtitle.LastIndexOf("\"))
+                                            'Console.WriteLine("-" & .GroupName.ToString & "-")
+                                        End If
                                     End If
                                 End If
                                 'If CurrentNode.Attributes("MovieNumber") Then
