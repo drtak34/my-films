@@ -5055,6 +5055,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               ItemSearchGrabberScriptsFilter.Text = "de, all";
               break;
             case "Canada":
+            case "China":
             case "UK":
             case "USA":
             case "Australia":
