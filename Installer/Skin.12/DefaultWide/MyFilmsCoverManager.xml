@@ -4,48 +4,179 @@
 	<defaultcontrol>50</defaultcontrol>
 	<allowoverlay>false</allowoverlay>
 	<define>#header.label:MyFilms Cover Manager</define>
-	<define>#header.background:hover_myfilms.png</define>
 	<animation effect="fade" time="250" start="100" end="0">WindowClose</animation>
 	<animation effect="fade" time="250" start="0" end="100">WindowOpen</animation>
 	<controls>
-		<import>common.window.background.xml</import>
+    	 <control>
+      	    <description>BG</description>
+      	    <type>image</type>
+      	    <id>0</id>
+      	    <width>1280</width>
+      	    <height>720</height>
+      	    <texture>background.png</texture>
+    	</control>
 		<control>
-			<description>preview in background</description>
-			<id>4560</id>
+			<description>Date Time</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>1244</posX>
+			<posY>20</posY>
+			<label>#date | #time</label>
+			<align>right</align>
+			<font>font13</font>
+			<textcolor>ffa9d0f7</textcolor>
+		</control>
+        <control>
+            <description>Cover Preview</description>
+            <type>image</type>
+            <id>4560</id>
+            <posX>0</posX>
+            <posY>0</posY>
+			<width>1280</width>
+			<height>720</height>
+			<keepaspectratio>yes</keepaspectratio>
+			<zoomfromtop>yes</zoomfromtop>
+			<texture>#myfilms.cover.selectedpreview</texture>
+            <colordiffuse>60ffffff</colordiffuse>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+        </control>
+		<control>
+			<description>Overlay for FanArt</description>
+			<id>0</id>
 			<type>image</type>
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+			<texture>backgroundtop.png</texture>
+			<colordiffuse>cc808080</colordiffuse>
+			<visible>Control.isvisible(35)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+			<animation effect="fade" time="70">visible</animation>
+			<animation effect="fade" time="70" delay="300">hidden</animation>
+		</control>
+		<control>
+			<description>Top Gradient Overlay for Filmstrip/Coverflow</description>
+			<type>image</type>
+			<id>0</id>
 			<posX>0</posX>
 			<posY>0</posY>
 			<width>1280</width>
-			<height>720</height>
-			<texture>#myfilms.cover.selectedpreview</texture>
-			<visible>true</visible>
-      			<keepaspectratio>yes</keepaspectratio>
-<!-- 
-			<centered>yes</centered>
-			<zoom>yes</zoom>
-			<align>middle</align>
-			<valign>top</valign>
- -->
-			<zoomfromtop>yes</zoomfromtop>
-			<animation effect="fade" time="1">WindowClose</animation>	
+			<height>100</height>
+			<texture>MyFilms\gradient_top.png</texture>
+			<colordiffuse>ccffffff</colordiffuse>
+			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<id>0</id>
+			<type>image</type>
+			<description>Bottom Gradient Overlay for Filmstrip/Coverflow</description>
+			<posX>0</posX>
+			<posY>420</posY>
+			<width>1280</width>
+			<height>300</height>
+			<texture>MyFilms\gradient.png</texture>
+			<colordiffuse>eeffffff</colordiffuse>
+			<visible>!control.isvisible(34)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>My Films logo</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>10</posX>
+			<posY>-10</posY>
+			<width>120</width>
+			<height>120</height>
+			<texture>hover_Films.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+		</control>
+		<control>
+			<description>Window Title</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>125</posX>
+			<posY>10</posY>
+			<label>#header.label</label>
+			<font>font18</font>
+			<align>left</align>
+			<textcolor>ffa9d0f7</textcolor>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<type>fadelabel</type>
+			<description>Movie name</description>
+			<id>0</id>
+			<posX>125</posX>
+			<posY>50</posY>
+			<width>1125</width>
+			<font>font16</font>
+			<height>24</height>
+			<textcolor>ffFFFFFF</textcolor>
+			<shadowAngle>45</shadowAngle>
+			<shadowDistance>2</shadowDistance>
+			<shadowColor>ff083556</shadowColor>
+			<label>#myfilms.cover.currentmoviename</label>
+		</control>
+		<control>
+			<type>fadelabel</type>
+			<description>Filter</description>
+			<id>0</id>
+			<posX>1250</posX>
+			<posY>90</posY>
+			<align>right</align>
+			<font>font16</font>
+			<textcolor>ffFFFFFF</textcolor>
+			<shadowAngle>45</shadowAngle>
+			<shadowDistance>2</shadowDistance>
+			<shadowColor>ff083556</shadowColor>
+			<label>#myfilms.cover.filterresolution (#selectedindex/#myfilms.cover.count)</label>
+		</control>
+		<control>
+			<description>Download Status</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>1250</posX>
+			<posY>130</posY>
+			<align>right</align>
+			<textcolor>90ffffff</textcolor>
+			<label>#myfilms.cover.downloadingstatus #myfilms.cover.loadingstatus</label>
+			<label>downloadingstatus loadingstatus</label>
+		</control>
+		<control>
+			<description>Current Cover Label</description>
+			<type>label</type>
+			<label>Current Default</label>
+			<id>0</id>
+			<posX>30</posX>
+			<posY>100</posY>
+			<width>180</width>
+			<font>font10</font>
+			<textcolor>bbffffff</textcolor>
+			<visible>Control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
-		<import>common.window.overlay.xml</import>
-
 		<control>
 			<description>current active main cover</description>
 			<id>0</id>
 			<type>image</type>
-			<posX>30</posX>
-			<posY>150</posY>
-			<width>100</width>
-			<height>150</height>
+			<posX>35</posX>
+			<posY>135</posY>
+			<width>110</width>
+			<height>165</height>
 			<visible>true</visible>
-      			<keepaspectratio>yes</keepaspectratio>
+			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
+			<texture>#myfilms.picture</texture>
+			<visible>Control.hasfocus(50)</visible>
 			<animation effect="fade" time="1">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<animation effect="fade" time="250">visiblechange</animation>
@@ -55,176 +186,41 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>25</posX>
-			<posY>145</posY>
-			<width>110</width>
-			<height>160</height>
-			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
-      			<visible>true</visible>
-      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<posY>125</posY>
+			<width>130</width>
+			<height>185</height>
+			<texture>DVD Cover.png</texture>
+			<visible>Control.hasfocus(50)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
-
 		<control>
-			<type>group</type>
-			<dimColor>ffffffff</dimColor>
-			<animation effect="fade" time="150">WindowClose</animation>	
-			<animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
-			<animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
-			<control>
-				<type>fadelabel</type>
-				<width>850</width>
-				<wrapString> : : : </wrapString>
-				<id>0</id>
-				<posX>30</posX>
-				<posY>3</posY>
-				<label>#header.label</label>
-				<font>font28</font>
-				<align>left</align>
-				<textcolor>60ffffff</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<description>Quality Label</description>
-				<type>label</type>
-				<label>Movie</label>
-				<id>0</id>
-				<posX>30</posX>
-				<posY>54</posY>
-				<width>80</width>
-				<font>font10</font>
-				<textcolor>90ffffff</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<type>label</type>
-				<description>resolution</description>
-				<id>0</id>
-				<posX>120</posX>
-				<posY>54</posY>
-				<font>font10</font>
-				<label>#myfilms.cover.currentmoviename</label>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-
-			<control>
-				<description>Default Label</description>
-				<type>label</type>
-				<label>Quality</label>
-				<id>0</id>
-				<posX>30</posX>
-				<posY>72</posY>
-				<width>80</width>
-				<font>font10</font>
-				<textcolor>90ffffff</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<description>Default Value</description>
-				<type>label</type>
-				<label>#myfilms.cover.selectedcoverresolutionclass - #myfilms.cover.selectedcoverresolution - #myfilms.cover.selectedcoversize</label>
-				<id>0</id>
-				<posX>120</posX>
-				<posY>72</posY>
-				<font>font10</font>
-				<textcolor>ffFFFFFF</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<description>Default Label</description>
-				<type>label</type>
-				<label>Filename</label>
-				<id>0</id>
-				<posX>30</posX>
-				<posY>90</posY>
-				<width>80</width>
-				<font>font10</font>
-				<textcolor>90ffffff</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<description>Default Value</description>
-				<type>label</type>
-				<label>#myfilms.cover.selectedcovername</label>
-				<id>0</id>
-				<posX>120</posX>
-				<posY>90</posY>
-				<font>font10</font>
-				<textcolor>ffFFFFFF</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<description>Default Label</description>
-				<type>label</type>
-				<label>Filter</label>
-				<id>0</id>
-				<posX>30</posX>
-				<posY>108</posY>
-				<width>80</width>
-				<font>font10</font>
-				<textcolor>90ffffff</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-			<control>
-				<description>Default Value</description>
-				<type>label</type>
-				<label>#myfilms.cover.filterresolution (#myfilms.cover.count)</label>
-				<id>0</id>
-				<posX>120</posX>
-				<posY>108</posY>
-				<font>font10</font>
-				<textcolor>ffFFFFFF</textcolor>
-				<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
-				<animation effect="fade" time="250">visiblechange</animation>
-			</control>
-
-			<control>
-				<description>Status</description>
-				<type>label</type>
-				<id>0</id>
-				<posX>1250</posX>
-				<posY>20</posY>
-				<font>font16</font>
-				<align>right</align>
-				<label>#myfilms.cover.downloadingstatus #myfilms.cover.loadingstatus</label>
-			</control>
-			<control>
-				<description>Status</description>
-				<type>textboxscrollup</type>
-				<id>0</id>
-				<posX>38</posX>
-				<posY>651</posY>
-				<width>1220</width>
-				<font>font24</font>
-				<height>45</height>
-				<textalign>center</textalign>
-				<label>#myfilms.cover.selectedcoverresolutionclass [#myfilms.cover.selectedcoverresolution] #myfilms.cover.selectedcoversize</label>
-			</control>
-		</control>
-
-
-		<control>
+			<description>Cover Filename</description>
+			<type>label</type>
+			<label>#myfilms.cover.selectedcovername</label>
 			<id>0</id>
-			<type>image</type>
-			<posX>-200</posX>
-			<posY>400</posY>
-			<width>1680</width>
-			<height>320</height>
-			<texture>gradient.png</texture>
-			<visible>[facadeview.coverflow|facadeview.filmstrip|facadeview.smallicons|facadeview.largeicons]</visible>
+			<posX>20</posX>
+			<posY>650</posY>
+			<width>1240</width>
+			<font>font10</font>
+			<textcolor>bbffffff</textcolor>
+			<align>center</align>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="150">WindowClose</animation>	
-			<animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
-			<animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+		</control>
+		<control>
+			<description>Quality</description>
+			<type>label</type>
+			<label>#myfilms.cover.selectedcoverresolutionclass [#myfilms.cover.selectedcoverresolution] #myfilms.cover.selectedcoversize</label>
+			<id>0</id>
+			<posX>20</posX>
+			<posY>680</posY>
+			<width>1240</width>
+			<align>center</align>
+			<textcolor>ffFFFFFF</textcolor>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<visible>string.equals(#myfilms.cover.selectedcoverresolution)</visible>
 		</control>
 		<control>
 			<type>group</type>
@@ -240,48 +236,42 @@
 				<control>
 					<description>Thumbnail Panel</description>
 					<type>thumbnailpanel</type>
-					<id>50</id>
-					<posX>17</posX>
-					<posY>323</posY>
-					<width>1285</width>
-					<height>410</height>
-					<scrollOffset>1</scrollOffset>
+	          		<posX>50</posX>
+	          		<posY>320</posY>
+	          		<width>1185</width>
+	          		<height>380</height>
 					<onleft>2</onleft>
-					<onright>2</onright>
-
-					<itemWidth>105</itemWidth>
-					<itemHeight>160</itemHeight>
-					<textureWidth>94</textureWidth>
-					<textureHeight>133</textureHeight>
-					<thumbWidth>85</thumbWidth>
-					<thumbHeight>136</thumbHeight>
+					<itemWidth>74</itemWidth>
+					<itemHeight>108</itemHeight>
+					<textureWidth>70</textureWidth>
+					<textureHeight>106</textureHeight>
+					<thumbWidth>62</thumbWidth>
+					<thumbHeight>96</thumbHeight>
 					<thumbPosX>3</thumbPosX>
-					<thumbPosY>2</thumbPosY>
-
-					<itemWidthBig>210</itemWidthBig>
-					<itemHeightBig>322</itemHeightBig>
-					<thumbWidthBig>190</thumbWidthBig>
-					<thumbHeightBig>292</thumbHeightBig>
-					<textureWidthBig>200</textureWidthBig>
-					<textureHeightBig>300</textureHeightBig>
-					<thumbPosXBig>5</thumbPosXBig>
-					<thumbPosYBig>4</thumbPosYBig>
-
-					<unfocusedAlpha>120</unfocusedAlpha>
-					<hideUnfocusTexture>no</hideUnfocusTexture>
-					<renderFocusText>yes</renderFocusText>
-					<renderUnfocusText>yes</renderUnfocusText>
-					<imageFolder>-</imageFolder>
-					<imageFolderFocus>-</imageFolderFocus>
+					<thumbPosY>4</thumbPosY>
+					<itemWidthBig>98</itemWidthBig>
+					<itemHeightBig>158</itemHeightBig>
+					<textureWidthBig>98</textureWidthBig>
+					<textureHeightBig>154</textureHeightBig>
+					<thumbWidthBig>90</thumbWidthBig>
+					<thumbHeightBig>146</thumbHeightBig>
+					<thumbPosXBig>3</thumbPosXBig>
+					<thumbPosYBig>3</thumbPosYBig>
+					<zoomXPixels>0</zoomXPixels>
+					<zoomYPixels>0</zoomYPixels>
+	          		<hideUnfocusTexture>no</hideUnfocusTexture>
+	          		<renderFocusText>no</renderFocusText>
+	          		<renderUnfocusText>no</renderUnfocusText>
+					<unfocusedAlpha>180</unfocusedAlpha>
 					<thumbZoom>no</thumbZoom>
 					<enableFocusZoom>no</enableFocusZoom>
-					<textXOff>2</textXOff>
-					<textYOff>2</textYOff>
-					<spinCanFocus>no</spinCanFocus>
-					<showFrame>true</showFrame>
-					<frameNoFocus>PictureCase.png</frameNoFocus> 
-					<frameFocus>PictureCase.png</frameFocus> 	
-				</control>
+					<keepaspectratio>yes</keepaspectratio>
+					<font>font13</font>
+					<dimColor>90ffffff</dimColor>
+					<animation effect="fade" time="250">WindowClose</animation>
+					<spinPosX>1150</spinPosX>
+					<spinPosY>665</spinPosY>
+	         	 </control>
 				<control>
 					<description>Filmstrip view</description>
 					<type>filmstrip</type>
@@ -289,38 +279,41 @@
 					<id>50</id>
 					<ondown>2</ondown>
 					<onup>2</onup>
-					<onleft>50</onleft>
-					<onright>50</onright>
-					<posX>28</posX>
-					<posY>385</posY>
-					<width>1270</width>
+					<posX>40</posX>
+					<posY>425</posY>
+					<width>1220</width>
 					<height>134</height>
-
-					<itemWidth>158</itemWidth>
-					<itemHeight>213</itemHeight>
-					<thumbWidth>134</thumbWidth>
-					<thumbHeight>208</thumbHeight>
-					<textureWidth>144</textureWidth>
-					<textureHeight>216</textureHeight>
-					<thumbPosX>5</thumbPosX>
-					<thumbPosY>4</thumbPosY>
-
+          			<itemWidth>134</itemWidth>
+          			<itemHeight>201</itemHeight>
+          			<textureWidth>134</textureWidth>
+          			<textureHeight>201</textureHeight>
+          			<thumbWidth>124</thumbWidth>
+          			<thumbHeight>186</thumbHeight>
+          			<thumbPosX>5</thumbPosX>
+          			<thumbPosY>5</thumbPosY>
 					<showFrame>no</showFrame>
 					<frame>-</frame>
 					<frameFocus>-</frameFocus>
 					<showFolder>yes</showFolder>
-					<imageFolder flipY="true" diffuse="Thumb_Mask.png">PictureCase.png</imageFolder>
-					<imageFolderFocus>PictureCase.png</imageFolderFocus>
-					<thumbs flipY="true" diffuse="Thumb_Mask.png"/>
+					<imageFolder>Picture_cover2.png</imageFolder>
+          			<imageFolderFocus>Picture_cover2.png</imageFolderFocus>
 					<showBackGround>no</showBackGround>
 					<background>-</background>
 					<showInfoImage>no</showInfoImage>
 					<InfoImage>-</InfoImage>
+					<dimColor>90ffffff</dimColor>
+					<keepaspectratio>yes</keepaspectratio>
 					<visible>facadeview.filmstrip</visible>
-					<thumbAnimation effect="slide" end="0,-9" time="200">focus</thumbAnimation>
-					<thumbAnimation effect="zoom" start="100,100" end="120,120" time="200">focus</thumbAnimation>
-					<scrollOffset>3</scrollOffset>
-					<scrollbarYOff>233</scrollbarYOff>
+          			<thumbAnimation effect="zoom" start="100,100" end="120,120" time="200">focus</thumbAnimation>
+          			<thumbAnimation effect="zoom" start="120,120" end="100,100" time="200">unfocus</thumbAnimation>
+					<scrollOffset>4</scrollOffset>
+					<spinPosX>1150</spinPosX>
+					<spinPosY>665</spinPosY>
+					<scrollbarBackground>bar_hor.png</scrollbarBackground>
+					<scrollbarLeft>check-box.png</scrollbarLeft>
+					<scrollbarRight></scrollbarRight>
+					<scrollbarYOff>270</scrollbarYOff>
+					<showScrollbar>yes</showScrollbar>
 				</control>
 			</control>
 		</control>
@@ -363,38 +356,9 @@
 			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">WindowOpen</animation>
 			<animation effect="fade" time="250" start="75" reversible="false">WindowOpen</animation>
 			<control>
-				<type>image</type>
-				<id>0</id>
-				<posX>0</posX>
-				<posY>0</posY>
-				<width>418</width>
-				<height>720</height>
-				<texture>bg_left.png</texture>
-				<colorDiffuse>ffffffff</colorDiffuse>
-			</control>
-			<control>
-				<id>0</id>
-				<type>label</type>
-				<posX>30</posX>
-				<posY>35</posY>
-				<label>#header.label</label><width>333</width>
-				<font>font24</font>
-				<align>left</align>
-				<textcolor>ffffffff</textcolor>
-			</control>
-			<control>
-				<type>image</type>
-				<id>0</id>
-				<posX>0</posX>
-				<posY>47</posY>
-				<width>385</width>
-				<height>53</height>
-				<texture>bg_button_nofocus.png</texture>
-			</control>
-			<control>
 				<type>group</type>
 				<layout>StackLayout(0, Vertical, true)</layout>
-				<posX>0</posX>
+				<posX>20</posX>
 				<posY>100</posY>
 				<control>
 					<description>Change Layout</description>
