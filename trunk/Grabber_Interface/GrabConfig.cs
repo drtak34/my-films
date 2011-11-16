@@ -292,6 +292,8 @@ namespace Grabber_Interface
 
         // enable preview button
         button_Preview.Enabled = true;
+        // reset preview cover
+        pictureBoxPreviewCover.ImageLocation = "";
 
         if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
           TextURL.Text = "http://" + TextURL.Text;
@@ -300,8 +302,7 @@ namespace Grabber_Interface
         strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text); // cleanup search expression
         if (!strSearch.Contains("\\"))
           strSearch = GrabUtil.encodeSearch(strSearch, textEncoding.Text);
-        else
-          strSearch = strSearch;
+
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
 
