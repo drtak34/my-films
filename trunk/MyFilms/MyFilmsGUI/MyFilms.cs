@@ -4047,7 +4047,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //item.FreeMemory();
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Finished");
 
-      if (!string.IsNullOrEmpty(conf.StrSelectViews))
+      if (string.IsNullOrEmpty(conf.StrSelectViews))
         conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
       else
         conf.StrTxtSelect = "[" + conf.StrSelectViews.Substring(conf.StrSelectViews.IndexOf("'")).Trim(new Char[] { '\'', '*' }) + "]";
