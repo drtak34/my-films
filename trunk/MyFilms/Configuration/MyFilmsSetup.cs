@@ -5054,8 +5054,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbGrabberOverrideTitleLimit.Text = "";
               ItemSearchGrabberScriptsFilter.Text = "de, all";
               break;
-            case "Canada":
             case "China":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\TMDB-ZH.xml";
+              break;
+            case "Canada":
             case "UK":
             case "USA":
             case "Australia":
