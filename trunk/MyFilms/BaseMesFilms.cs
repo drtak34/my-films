@@ -211,8 +211,7 @@ namespace MyFilmsPlugin.MyFilms
           if (data == null)
           {
             initData();
-            LogMyFilms.Debug("StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "'");
-            LogMyFilms.Debug("RESULTING DS SELECT = '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
+            LogMyFilms.Debug("StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
           }
           else 
             LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
@@ -227,7 +226,127 @@ namespace MyFilmsPlugin.MyFilms
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
           LogMyFilms.Debug("ReadDataMovies() - Finished ...");
+
+
+
           return movies;
+
+          var queryProducer =
+              from movie in data.Movie
+              group movie by movie.Producer into groupProducer
+              orderby groupProducer.Key
+              select groupProducer;
+
+          IGrouping<System.Reflection.MemberTypes, System.Reflection.MemberInfo> group =
+                          typeof(String).GetMembers().
+                          GroupBy(member => member.MemberType).
+                          First();
+
+
+
+          DataView dataView = (from movie in
+                                 data.Movie.AsEnumerable()
+                               where movie.Field<int?>("YearEstablished") < 1960
+                               orderby movie.Field<string>("Country")
+                               select movie).AsDataView();
+
+          DataRowView[] drv = dataView.FindRows("Canada");
+
+          var query8 = from movie in data.Movie.AsEnumerable()
+                       join customfields in data.CustomField.AsEnumerable()
+                       on movie.Field<string>("Country") equals
+                       customfields.Field<string>("Name")
+                       select new
+                       {
+                         ParkName = movie.Field<string>("Name"),
+                         Country = customfields.Field<string>("Name"),
+                         Continent = customfields.
+                         GetParentRow(data.CustomField.ParentRelations[0]
+                         )
+                         .Field<string>("Name")
+                       };
+
+          var query = from t1 in data.Movie.AsEnumerable()
+                      join t2 in data.CustomField.AsEnumerable()
+                        // <int> == <int?> für Null Vergleich
+                      on t1.Field<int>("id") equals t2.Field<int?>("idTabelle1")
+                      select new
+                      {
+                        t1id = t1.Field<int>("id"),
+                        t2id = t2.Field<int>("id"),
+                        t1daten = t1.Field<string>("Daten"),
+                        t2daten = t2.Field<string>("Daten"),
+                      };
+          foreach (var row in query)
+          {
+            Console.WriteLine("{0}\t{1}\t{2:d}\t{3}",
+            row.t1id, row.t2id, row.t1daten, row.t2daten);
+          }
+
+          var abfrage = from emp in data.Movie
+                        join con in data.CustomField on emp.Movie_Id
+                        equals con.CustomField_Id into ec
+                        from subEmp in ec.DefaultIfEmpty()
+                        select new
+                        {
+                          emp.Movie_Id,
+                          FirstName =
+                            (subEmp == null ? String.Empty : subEmp.Name)
+                        };
+
+          var orders = data.Tables["SalesOrderHeader"].AsEnumerable();
+          var details = data.Tables["SalesOrderDetail"].AsEnumerable();
+
+          var query0 =
+              from order in orders
+              join detail in details
+              on order.Field<int>("SalesOrderID")
+              equals detail.Field<int>("SalesOrderID") into ords
+              select new
+              {
+                CustomerID =
+                    order.Field<int>("SalesOrderID"),
+                ords = ords.Count()
+              };
+
+          foreach (var order in query)
+          {
+            // Console.WriteLine("CustomerID: {0}  Orders Count: {1}", order.CustomerID, order.ords);
+          }
+
+
+
+          DataTable dtMovies = data.Movie;
+          DataTable dtExtendedFields = data.Tables["ExtendedField"];
+          var querynew =
+              from movie in dtMovies.AsEnumerable()
+              join extendedfields in dtExtendedFields.AsEnumerable()
+              on movie.Field<Int32>("MovieID") equals
+              extendedfields.Field<Int32>("MovieID")
+              select new
+              {
+                ContactID = movie.Field<Int32>("ContactID"),
+                SalesOrderID = extendedfields.Field<Int32>("SalesOrderID"),
+                FirstName = movie.Field<string>("FirstName"),
+                Lastname = movie.Field<string>("Lastname"),
+                TotalDue = extendedfields.Field<decimal>("TotalDue")
+              };
+
+
+          foreach (var contact_order in querynew)
+          {
+            Console.WriteLine("ContactID: {0} "
+                            + "SalesOrderID: {1} "
+                            + "FirstName: {2} "
+                            + "Lastname: {3} "
+                            + "TotalDue: {4}",
+                contact_order.ContactID,
+                contact_order.SalesOrderID,
+                contact_order.FirstName,
+                contact_order.Lastname,
+                contact_order.TotalDue);
+          }
+
         }
 
         public static DataRow[] ReadDataPersons(string StrSelect, string StrSort, string StrSortSens, bool all)

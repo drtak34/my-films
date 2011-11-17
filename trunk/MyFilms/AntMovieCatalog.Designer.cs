@@ -3123,11 +3123,7 @@ namespace MyFilmsPlugin {
             
             private global::System.Data.DataColumn columnCustomFields_Id;
             
-            private global::System.Data.DataColumn columnIsOnline;
-            
-            private global::System.Data.DataColumn columnIsOnlineTrailer;
-            
-            private global::System.Data.DataColumn columnWriter;
+            private global::System.Data.DataColumn columnCustomfieldAtMovie;
             
             private global::System.Data.DataColumn columnMovie_Id;
             
@@ -3169,23 +3165,9 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn IsOnlineColumn {
+            public global::System.Data.DataColumn CustomfieldAtMovieColumn {
                 get {
-                    return this.columnIsOnline;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn IsOnlineTrailerColumn {
-                get {
-                    return this.columnIsOnlineTrailer;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn WriterColumn {
-                get {
-                    return this.columnWriter;
+                    return this.columnCustomfieldAtMovie;
                 }
             }
             
@@ -3225,16 +3207,14 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CustomFieldsRow AddCustomFieldsRow(string IsOnline, string IsOnlineTrailer, string Writer, MovieRow parentMovieRowByMovie_CustomFields) {
+            public CustomFieldsRow AddCustomFieldsRow(string CustomfieldAtMovie, MovieRow parentMovieRowByMovie_CustomFields) {
                 CustomFieldsRow rowCustomFieldsRow = ((CustomFieldsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        IsOnline,
-                        IsOnlineTrailer,
-                        Writer,
+                        CustomfieldAtMovie,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[4] = parentMovieRowByMovie_CustomFields[54];
+                    columnValuesArray[2] = parentMovieRowByMovie_CustomFields[54];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -3262,9 +3242,7 @@ namespace MyFilmsPlugin {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
                 this.columnCustomFields_Id = base.Columns["CustomFields_Id"];
-                this.columnIsOnline = base.Columns["IsOnline"];
-                this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
-                this.columnWriter = base.Columns["Writer"];
+                this.columnCustomfieldAtMovie = base.Columns["CustomfieldAtMovie"];
                 this.columnMovie_Id = base.Columns["Movie_Id"];
             }
             
@@ -3272,12 +3250,8 @@ namespace MyFilmsPlugin {
             private void InitClass() {
                 this.columnCustomFields_Id = new global::System.Data.DataColumn("CustomFields_Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomFields_Id);
-                this.columnIsOnline = new global::System.Data.DataColumn("IsOnline", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIsOnline);
-                this.columnIsOnlineTrailer = new global::System.Data.DataColumn("IsOnlineTrailer", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIsOnlineTrailer);
-                this.columnWriter = new global::System.Data.DataColumn("Writer", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWriter);
+                this.columnCustomfieldAtMovie = new global::System.Data.DataColumn("CustomfieldAtMovie", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomfieldAtMovie);
                 this.columnMovie_Id = new global::System.Data.DataColumn("Movie_Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMovie_Id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -4320,6 +4294,12 @@ namespace MyFilmsPlugin {
             
             private global::System.Data.DataColumn columnName;
             
+            private global::System.Data.DataColumn columnAlias;
+            
+            private global::System.Data.DataColumn columnTraktName;
+            
+            private global::System.Data.DataColumn columnAge;
+            
             private global::System.Data.DataColumn columnSettings_Id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4367,6 +4347,27 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AliasColumn {
+                get {
+                    return this.columnAlias;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TraktNameColumn {
+                get {
+                    return this.columnTraktName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AgeColumn {
+                get {
+                    return this.columnAge;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn Settings_IdColumn {
                 get {
                     return this.columnSettings_Id;
@@ -4402,14 +4403,17 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UserRow AddUserRow(string Name, SettingsRow parentSettingsRowBySettings_User) {
+            public UserRow AddUserRow(string Name, string Alias, string TraktName, string Age, SettingsRow parentSettingsRowBySettings_User) {
                 UserRow rowUserRow = ((UserRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Name,
+                        Alias,
+                        TraktName,
+                        Age,
                         null};
                 if ((parentSettingsRowBySettings_User != null)) {
-                    columnValuesArray[2] = parentSettingsRowBySettings_User[0];
+                    columnValuesArray[5] = parentSettingsRowBySettings_User[0];
                 }
                 rowUserRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUserRow);
@@ -4438,6 +4442,9 @@ namespace MyFilmsPlugin {
             internal void InitVars() {
                 this.columnUser_Id = base.Columns["User_Id"];
                 this.columnName = base.Columns["Name"];
+                this.columnAlias = base.Columns["Alias"];
+                this.columnTraktName = base.Columns["TraktName"];
+                this.columnAge = base.Columns["Age"];
                 this.columnSettings_Id = base.Columns["Settings_Id"];
             }
             
@@ -4447,6 +4454,12 @@ namespace MyFilmsPlugin {
                 base.Columns.Add(this.columnUser_Id);
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
+                this.columnAlias = new global::System.Data.DataColumn("Alias", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAlias);
+                this.columnTraktName = new global::System.Data.DataColumn("TraktName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTraktName);
+                this.columnAge = new global::System.Data.DataColumn("Age", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAge);
                 this.columnSettings_Id = new global::System.Data.DataColumn("Settings_Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSettings_Id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -6964,47 +6977,17 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string IsOnline {
+            public string CustomfieldAtMovie {
                 get {
                     try {
-                        return ((string)(this[this.tableCustomFields.IsOnlineColumn]));
+                        return ((string)(this[this.tableCustomFields.CustomfieldAtMovieColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte IsOnline in Tabelle CustomFields ist DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte CustomfieldAtMovie in Tabelle CustomFields ist DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCustomFields.IsOnlineColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string IsOnlineTrailer {
-                get {
-                    try {
-                        return ((string)(this[this.tableCustomFields.IsOnlineTrailerColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte IsOnlineTrailer in Tabelle CustomFields ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCustomFields.IsOnlineTrailerColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Writer {
-                get {
-                    try {
-                        return ((string)(this[this.tableCustomFields.WriterColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle CustomFields ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCustomFields.WriterColumn] = value;
+                    this[this.tableCustomFields.CustomfieldAtMovieColumn] = value;
                 }
             }
             
@@ -7034,33 +7017,13 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsIsOnlineNull() {
-                return this.IsNull(this.tableCustomFields.IsOnlineColumn);
+            public bool IsCustomfieldAtMovieNull() {
+                return this.IsNull(this.tableCustomFields.CustomfieldAtMovieColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetIsOnlineNull() {
-                this[this.tableCustomFields.IsOnlineColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsIsOnlineTrailerNull() {
-                return this.IsNull(this.tableCustomFields.IsOnlineTrailerColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetIsOnlineTrailerNull() {
-                this[this.tableCustomFields.IsOnlineTrailerColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsWriterNull() {
-                return this.IsNull(this.tableCustomFields.WriterColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetWriterNull() {
-                this[this.tableCustomFields.WriterColumn] = global::System.Convert.DBNull;
+            public void SetCustomfieldAtMovieNull() {
+                this[this.tableCustomFields.CustomfieldAtMovieColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7615,6 +7578,51 @@ namespace MyFilmsPlugin {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Alias {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.AliasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Alias in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.AliasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TraktName {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.TraktNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte TraktName in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.TraktNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Age {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.AgeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Age in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.AgeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int Settings_Id {
                 get {
                     try {
@@ -7647,6 +7655,36 @@ namespace MyFilmsPlugin {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetNameNull() {
                 this[this.tableUser.NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAliasNull() {
+                return this.IsNull(this.tableUser.AliasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAliasNull() {
+                this[this.tableUser.AliasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTraktNameNull() {
+                return this.IsNull(this.tableUser.TraktNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTraktNameNull() {
+                this[this.tableUser.TraktNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAgeNull() {
+                return this.IsNull(this.tableUser.AgeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAgeNull() {
+                this[this.tableUser.AgeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

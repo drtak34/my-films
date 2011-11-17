@@ -28,6 +28,10 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim OwnerLabel As System.Windows.Forms.Label
+        Dim MailLabel As System.Windows.Forms.Label
+        Dim SiteLabel As System.Windows.Forms.Label
+        Dim DescriptionLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
@@ -462,35 +466,12 @@ Partial Class Form1
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator
         Me.ToolStripTextBoxSearch = New System.Windows.Forms.ToolStripTextBox
         Me.ViewCatalog = New System.Windows.Forms.TabPage
-        Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid
-        Me.CatalogBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.AntMovieCatalogAMC = New AMCUpdater.AntMovieCatalog
-        Me.Label101 = New System.Windows.Forms.Label
-        Me.Label100 = New System.Windows.Forms.Label
-        Me.DataGridView4 = New System.Windows.Forms.DataGridView
-        Me.CustomFieldIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TagDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.NameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DefaultValueDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.MultiValuesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ExcludedInScriptsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.GUIPropertiesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CustomFieldBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColumnSettingsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CatalogIdDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CustomFieldsPropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.OwnerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.MailDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.SiteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CatalogIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.PropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
+        Me.OwnerTextBox = New System.Windows.Forms.TextBox
+        Me.PropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MailTextBox = New System.Windows.Forms.TextBox
+        Me.SiteTextBox = New System.Windows.Forms.TextBox
+        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
         Me.mnuFile = New System.Windows.Forms.MenuStrip
         Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem
         Me.LoadConfigurationFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -539,6 +520,10 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
+        OwnerLabel = New System.Windows.Forms.Label
+        MailLabel = New System.Windows.Forms.Label
+        SiteLabel = New System.Windows.Forms.Label
+        DescriptionLabel = New System.Windows.Forms.Label
         Me.TabControl1.SuspendLayout()
         Me.Import_Movies.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
@@ -604,15 +589,8 @@ Partial Class Form1
         CType(Me.PersonBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PersonBindingNavigator.SuspendLayout()
         Me.ViewCatalog.SuspendLayout()
-        CType(Me.CatalogBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AntMovieCatalogAMC, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CustomFieldsPropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuFile.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -620,6 +598,42 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'OwnerLabel
+        '
+        OwnerLabel.AutoSize = True
+        OwnerLabel.Location = New System.Drawing.Point(8, 13)
+        OwnerLabel.Name = "OwnerLabel"
+        OwnerLabel.Size = New System.Drawing.Size(41, 13)
+        OwnerLabel.TabIndex = 5
+        OwnerLabel.Text = "Owner:"
+        '
+        'MailLabel
+        '
+        MailLabel.AutoSize = True
+        MailLabel.Location = New System.Drawing.Point(8, 39)
+        MailLabel.Name = "MailLabel"
+        MailLabel.Size = New System.Drawing.Size(29, 13)
+        MailLabel.TabIndex = 7
+        MailLabel.Text = "Mail:"
+        '
+        'SiteLabel
+        '
+        SiteLabel.AutoSize = True
+        SiteLabel.Location = New System.Drawing.Point(303, 13)
+        SiteLabel.Name = "SiteLabel"
+        SiteLabel.Size = New System.Drawing.Size(28, 13)
+        SiteLabel.TabIndex = 9
+        SiteLabel.Text = "Site:"
+        '
+        'DescriptionLabel
+        '
+        DescriptionLabel.AutoSize = True
+        DescriptionLabel.Location = New System.Drawing.Point(303, 39)
+        DescriptionLabel.Name = "DescriptionLabel"
+        DescriptionLabel.Size = New System.Drawing.Size(63, 13)
+        DescriptionLabel.TabIndex = 11
+        DescriptionLabel.Text = "Description:"
         '
         'FolderBrowserDialog1
         '
@@ -5051,12 +5065,15 @@ Partial Class Form1
         '
         'ViewCatalog
         '
-        Me.ViewCatalog.Controls.Add(Me.PropertyGrid1)
-        Me.ViewCatalog.Controls.Add(Me.Label101)
-        Me.ViewCatalog.Controls.Add(Me.Label100)
-        Me.ViewCatalog.Controls.Add(Me.DataGridView4)
-        Me.ViewCatalog.Controls.Add(Me.DataGridView2)
-        Me.ViewCatalog.Controls.Add(Me.DataGridView1)
+        Me.ViewCatalog.AutoScroll = True
+        Me.ViewCatalog.Controls.Add(OwnerLabel)
+        Me.ViewCatalog.Controls.Add(Me.OwnerTextBox)
+        Me.ViewCatalog.Controls.Add(MailLabel)
+        Me.ViewCatalog.Controls.Add(Me.MailTextBox)
+        Me.ViewCatalog.Controls.Add(SiteLabel)
+        Me.ViewCatalog.Controls.Add(Me.SiteTextBox)
+        Me.ViewCatalog.Controls.Add(DescriptionLabel)
+        Me.ViewCatalog.Controls.Add(Me.DescriptionTextBox)
         Me.ViewCatalog.Location = New System.Drawing.Point(4, 22)
         Me.ViewCatalog.Name = "ViewCatalog"
         Me.ViewCatalog.Size = New System.Drawing.Size(600, 580)
@@ -5064,195 +5081,48 @@ Partial Class Form1
         Me.ViewCatalog.Text = "View Catalog"
         Me.ViewCatalog.UseVisualStyleBackColor = True
         '
-        'PropertyGrid1
-        '
-        Me.PropertyGrid1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.CatalogBindingSource, "Properties", True))
-        Me.PropertyGrid1.Location = New System.Drawing.Point(11, 383)
-        Me.PropertyGrid1.Name = "PropertyGrid1"
-        Me.PropertyGrid1.Size = New System.Drawing.Size(581, 183)
-        Me.PropertyGrid1.TabIndex = 6
-        '
-        'CatalogBindingSource
-        '
-        Me.CatalogBindingSource.DataMember = "Catalog"
-        Me.CatalogBindingSource.DataSource = Me.AntMovieCatalogAMC
-        '
-        'AntMovieCatalogAMC
-        '
-        Me.AntMovieCatalogAMC.DataSetName = "AntMovieCatalog"
-        Me.AntMovieCatalogAMC.Locale = New System.Globalization.CultureInfo("")
-        Me.AntMovieCatalogAMC.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'Label101
-        '
-        Me.Label101.AutoSize = True
-        Me.Label101.Location = New System.Drawing.Point(8, 130)
-        Me.Label101.Name = "Label101"
-        Me.Label101.Size = New System.Drawing.Size(122, 13)
-        Me.Label101.TabIndex = 5
-        Me.Label101.Text = "Custom Fields Properties"
-        '
-        'Label100
-        '
-        Me.Label100.AutoSize = True
-        Me.Label100.Location = New System.Drawing.Point(8, 10)
-        Me.Label100.Name = "Label100"
-        Me.Label100.Size = New System.Drawing.Size(54, 13)
-        Me.Label100.TabIndex = 4
-        Me.Label100.Text = "Properties"
-        '
-        'DataGridView4
-        '
-        Me.DataGridView4.AutoGenerateColumns = False
-        Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomFieldIdDataGridViewTextBoxColumn, Me.TagDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn1, Me.DefaultValueDataGridViewTextBoxColumn, Me.MultiValuesDataGridViewTextBoxColumn, Me.ExcludedInScriptsDataGridViewTextBoxColumn, Me.GUIPropertiesDataGridViewTextBoxColumn, Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1})
-        Me.DataGridView4.DataSource = Me.CustomFieldBindingSource
-        Me.DataGridView4.Location = New System.Drawing.Point(263, 146)
-        Me.DataGridView4.Name = "DataGridView4"
-        Me.DataGridView4.Size = New System.Drawing.Size(329, 219)
-        Me.DataGridView4.TabIndex = 3
-        '
-        'CustomFieldIdDataGridViewTextBoxColumn
-        '
-        Me.CustomFieldIdDataGridViewTextBoxColumn.DataPropertyName = "CustomField_Id"
-        Me.CustomFieldIdDataGridViewTextBoxColumn.HeaderText = "CustomField_Id"
-        Me.CustomFieldIdDataGridViewTextBoxColumn.Name = "CustomFieldIdDataGridViewTextBoxColumn"
-        '
-        'TagDataGridViewTextBoxColumn
-        '
-        Me.TagDataGridViewTextBoxColumn.DataPropertyName = "Tag"
-        Me.TagDataGridViewTextBoxColumn.HeaderText = "Tag"
-        Me.TagDataGridViewTextBoxColumn.Name = "TagDataGridViewTextBoxColumn"
-        '
-        'TypeDataGridViewTextBoxColumn
-        '
-        Me.TypeDataGridViewTextBoxColumn.DataPropertyName = "Type"
-        Me.TypeDataGridViewTextBoxColumn.HeaderText = "Type"
-        Me.TypeDataGridViewTextBoxColumn.Name = "TypeDataGridViewTextBoxColumn"
-        '
-        'NameDataGridViewTextBoxColumn1
-        '
-        Me.NameDataGridViewTextBoxColumn1.DataPropertyName = "Name"
-        Me.NameDataGridViewTextBoxColumn1.HeaderText = "Name"
-        Me.NameDataGridViewTextBoxColumn1.Name = "NameDataGridViewTextBoxColumn1"
-        '
-        'DefaultValueDataGridViewTextBoxColumn
-        '
-        Me.DefaultValueDataGridViewTextBoxColumn.DataPropertyName = "DefaultValue"
-        Me.DefaultValueDataGridViewTextBoxColumn.HeaderText = "DefaultValue"
-        Me.DefaultValueDataGridViewTextBoxColumn.Name = "DefaultValueDataGridViewTextBoxColumn"
-        '
-        'MultiValuesDataGridViewTextBoxColumn
-        '
-        Me.MultiValuesDataGridViewTextBoxColumn.DataPropertyName = "MultiValues"
-        Me.MultiValuesDataGridViewTextBoxColumn.HeaderText = "MultiValues"
-        Me.MultiValuesDataGridViewTextBoxColumn.Name = "MultiValuesDataGridViewTextBoxColumn"
-        '
-        'ExcludedInScriptsDataGridViewTextBoxColumn
-        '
-        Me.ExcludedInScriptsDataGridViewTextBoxColumn.DataPropertyName = "ExcludedInScripts"
-        Me.ExcludedInScriptsDataGridViewTextBoxColumn.HeaderText = "ExcludedInScripts"
-        Me.ExcludedInScriptsDataGridViewTextBoxColumn.Name = "ExcludedInScriptsDataGridViewTextBoxColumn"
-        '
-        'GUIPropertiesDataGridViewTextBoxColumn
-        '
-        Me.GUIPropertiesDataGridViewTextBoxColumn.DataPropertyName = "GUIProperties"
-        Me.GUIPropertiesDataGridViewTextBoxColumn.HeaderText = "GUIProperties"
-        Me.GUIPropertiesDataGridViewTextBoxColumn.Name = "GUIPropertiesDataGridViewTextBoxColumn"
-        '
-        'CustomFieldsPropertiesIdDataGridViewTextBoxColumn1
-        '
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1.DataPropertyName = "CustomFieldsProperties_Id"
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1.HeaderText = "CustomFieldsProperties_Id"
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn1.Name = "CustomFieldsPropertiesIdDataGridViewTextBoxColumn1"
-        '
-        'CustomFieldBindingSource
-        '
-        Me.CustomFieldBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.CustomFieldDataTable)
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.AutoGenerateColumns = False
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn, Me.ColumnSettingsDataGridViewTextBoxColumn, Me.CatalogIdDataGridViewTextBoxColumn1})
-        Me.DataGridView2.DataSource = Me.CustomFieldsPropertiesBindingSource
-        Me.DataGridView2.Location = New System.Drawing.Point(8, 146)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.Size = New System.Drawing.Size(240, 219)
-        Me.DataGridView2.TabIndex = 1
-        '
-        'CustomFieldsPropertiesIdDataGridViewTextBoxColumn
-        '
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn.DataPropertyName = "CustomFieldsProperties_Id"
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn.HeaderText = "CustomFieldsProperties_Id"
-        Me.CustomFieldsPropertiesIdDataGridViewTextBoxColumn.Name = "CustomFieldsPropertiesIdDataGridViewTextBoxColumn"
-        '
-        'ColumnSettingsDataGridViewTextBoxColumn
-        '
-        Me.ColumnSettingsDataGridViewTextBoxColumn.DataPropertyName = "ColumnSettings"
-        Me.ColumnSettingsDataGridViewTextBoxColumn.HeaderText = "ColumnSettings"
-        Me.ColumnSettingsDataGridViewTextBoxColumn.Name = "ColumnSettingsDataGridViewTextBoxColumn"
-        '
-        'CatalogIdDataGridViewTextBoxColumn1
-        '
-        Me.CatalogIdDataGridViewTextBoxColumn1.DataPropertyName = "Catalog_Id"
-        Me.CatalogIdDataGridViewTextBoxColumn1.HeaderText = "Catalog_Id"
-        Me.CatalogIdDataGridViewTextBoxColumn1.Name = "CatalogIdDataGridViewTextBoxColumn1"
-        '
-        'CustomFieldsPropertiesBindingSource
-        '
-        Me.CustomFieldsPropertiesBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.CustomFieldsPropertiesDataTable)
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AutoGenerateColumns = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.OwnerDataGridViewTextBoxColumn, Me.MailDataGridViewTextBoxColumn, Me.SiteDataGridViewTextBoxColumn, Me.DescriptionDataGridViewTextBoxColumn, Me.CatalogIdDataGridViewTextBoxColumn})
-        Me.DataGridView1.DataSource = Me.PropertiesBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(11, 26)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(581, 92)
-        Me.DataGridView1.TabIndex = 0
-        '
-        'OwnerDataGridViewTextBoxColumn
-        '
-        Me.OwnerDataGridViewTextBoxColumn.DataPropertyName = "Owner"
-        Me.OwnerDataGridViewTextBoxColumn.HeaderText = "Owner"
-        Me.OwnerDataGridViewTextBoxColumn.Name = "OwnerDataGridViewTextBoxColumn"
-        '
-        'MailDataGridViewTextBoxColumn
-        '
-        Me.MailDataGridViewTextBoxColumn.DataPropertyName = "Mail"
-        Me.MailDataGridViewTextBoxColumn.HeaderText = "Mail"
-        Me.MailDataGridViewTextBoxColumn.Name = "MailDataGridViewTextBoxColumn"
-        '
-        'SiteDataGridViewTextBoxColumn
-        '
-        Me.SiteDataGridViewTextBoxColumn.DataPropertyName = "Site"
-        Me.SiteDataGridViewTextBoxColumn.HeaderText = "Site"
-        Me.SiteDataGridViewTextBoxColumn.Name = "SiteDataGridViewTextBoxColumn"
-        '
-        'DescriptionDataGridViewTextBoxColumn
-        '
-        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "Description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
-        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
-        '
-        'CatalogIdDataGridViewTextBoxColumn
-        '
-        Me.CatalogIdDataGridViewTextBoxColumn.DataPropertyName = "Catalog_Id"
-        Me.CatalogIdDataGridViewTextBoxColumn.HeaderText = "Catalog_Id"
-        Me.CatalogIdDataGridViewTextBoxColumn.Name = "CatalogIdDataGridViewTextBoxColumn"
-        '
-        'PropertiesBindingSource
-        '
-        Me.PropertiesBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.PropertiesDataTable)
-        '
         'AntMovieCatalog
         '
         Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
         Me.AntMovieCatalog.Locale = New System.Globalization.CultureInfo("")
         Me.AntMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'OwnerTextBox
+        '
+        Me.OwnerTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Owner", True))
+        Me.OwnerTextBox.Location = New System.Drawing.Point(77, 10)
+        Me.OwnerTextBox.Name = "OwnerTextBox"
+        Me.OwnerTextBox.Size = New System.Drawing.Size(220, 20)
+        Me.OwnerTextBox.TabIndex = 6
+        '
+        'PropertiesBindingSource
+        '
+        Me.PropertiesBindingSource.DataMember = "Properties"
+        Me.PropertiesBindingSource.DataSource = Me.AntMovieCatalog
+        '
+        'MailTextBox
+        '
+        Me.MailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Mail", True))
+        Me.MailTextBox.Location = New System.Drawing.Point(77, 36)
+        Me.MailTextBox.Name = "MailTextBox"
+        Me.MailTextBox.Size = New System.Drawing.Size(220, 20)
+        Me.MailTextBox.TabIndex = 8
+        '
+        'SiteTextBox
+        '
+        Me.SiteTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Site", True))
+        Me.SiteTextBox.Location = New System.Drawing.Point(372, 10)
+        Me.SiteTextBox.Name = "SiteTextBox"
+        Me.SiteTextBox.Size = New System.Drawing.Size(220, 20)
+        Me.SiteTextBox.TabIndex = 10
+        '
+        'DescriptionTextBox
+        '
+        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Description", True))
+        Me.DescriptionTextBox.Location = New System.Drawing.Point(372, 36)
+        Me.DescriptionTextBox.Name = "DescriptionTextBox"
+        Me.DescriptionTextBox.Size = New System.Drawing.Size(220, 20)
+        Me.DescriptionTextBox.TabIndex = 12
         '
         'mnuFile
         '
@@ -5710,15 +5580,8 @@ Partial Class Form1
         Me.PersonBindingNavigator.PerformLayout()
         Me.ViewCatalog.ResumeLayout(False)
         Me.ViewCatalog.PerformLayout()
-        CType(Me.CatalogBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AntMovieCatalogAMC, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CustomFieldsPropertiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuFile.ResumeLayout(False)
         Me.mnuFile.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
@@ -6188,35 +6051,8 @@ Partial Class Form1
     Friend WithEvents IsWriter As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ViewCatalog As System.Windows.Forms.TabPage
-    Friend WithEvents Label100 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView4 As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents PropertiesBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents Label101 As System.Windows.Forms.Label
-    Friend WithEvents CustomFieldsPropertiesIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColumnSettingsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CatalogIdDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CustomFieldsPropertiesBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents PropertiesIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OwnerDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MailDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SiteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescriptionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CatalogIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CustomFieldIdDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TagDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TypeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DefaultValueDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MultiValuesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ExcludedInScriptsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents GUIPropertiesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CustomPropertiesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CustomFieldsPropertiesIdDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CustomFieldBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents PropertyGrid1 As System.Windows.Forms.PropertyGrid
-    Friend WithEvents CatalogBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Label103 As System.Windows.Forms.Label
     Friend WithEvents Label102 As System.Windows.Forms.Label
     Friend WithEvents TextBox33 As System.Windows.Forms.TextBox
@@ -6239,4 +6075,9 @@ Partial Class Form1
     Friend WithEvents cbManualNfoFileHandling As System.Windows.Forms.ComboBox
     Friend WithEvents lblManualNfoFileHandling As System.Windows.Forms.Label
     Friend WithEvents chkManualNfoFilesOnlyAddMissing As System.Windows.Forms.CheckBox
+    Friend WithEvents OwnerTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents PropertiesBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents MailTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents SiteTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents DescriptionTextBox As System.Windows.Forms.TextBox
 End Class

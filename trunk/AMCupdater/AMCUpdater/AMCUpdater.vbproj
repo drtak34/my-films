@@ -96,12 +96,19 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Externals\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Deployment" />
@@ -287,15 +294,12 @@
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CustomFieldDataTable.datasource" />
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+CustomFieldsPropertiesDataTable.datasource" />
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+MovieDataTable.datasource" />
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+PersonDataTable.datasource" />
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog+PropertiesDataTable.datasource" />
-    <None Include="My Project\DataSources\AMCUpdater.AntMovieCatalog.datasource" />
     <None Include="Resources\film-reel-128x128.png" />
     <None Include="app.config" />
     <None Include="Resources\google_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

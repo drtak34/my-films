@@ -4,7 +4,12 @@ Imports System.Text
 Imports System.Security.Cryptography
 Imports System.Management
 Imports System.Windows.Forms
+
 Imports MediaPortal.Configuration
+Imports NLog
+Imports NLog.Targets
+Imports MediaPortal.Services
+Imports NLog.Config
 'Imports MyFilmsPlugin
 
 Public Class Form1
@@ -21,6 +26,7 @@ Public Class Form1
     Public SourceField As String
 
     Private ValidOptions As Boolean = True
+    Private LogAMCU As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
 
     Shared MediaData As Hashtable
     Shared InternetData As Hashtable
@@ -89,10 +95,8 @@ Public Class Form1
 
     End Sub
 
-
-
     Private Sub Form1_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Enter
-
+        InitLogger()
     End Sub
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -2596,8 +2600,6 @@ Public Class Form1
             Dim mymovieview As DataView
             Dim myPersonTable As DataTable = Nothing
             Dim mypersonview As DataView
-            Dim myCustomFieldsProperties As DataTable = Nothing
-            Dim myCustomField As DataTable = Nothing
             Dim myProperties As DataTable = Nothing
             Dim wdir As String
 
@@ -2633,40 +2635,24 @@ Public Class Form1
                     mymovieview = New DataView(myMovieTable)
                     MovieBindingSource.DataSource = myMovieTable
 
-                    'myPersonTable = myMovieCatalog.Tables("Person")
                     myPersonTable = myMovieCatalog.Person
                     mypersonview = New DataView(myPersonTable)
                     PersonBindingSource.DataSource = myPersonTable
 
-                    'myCustomField = myMovieCatalog.Tables("CustomField")
-                    myCustomField = myMovieCatalog.CustomField
-                    CustomFieldBindingSource.DataSource = myCustomField
-
-                    'myCustomFieldsProperties = myMovieCatalog.Tables("CustomFieldsProperties")
-                    myCustomFieldsProperties = myMovieCatalog.CustomFieldsProperties
-                    CustomFieldsPropertiesBindingSource.DataSource = myCustomFieldsProperties
-
-                    'myProperties = myMovieCatalog.Tables("Properties")
                     myProperties = myMovieCatalog.Properties
                     PropertiesBindingSource.DataSource = myProperties
                 Else
                     MovieBindingSource.DataSource = myMovieTable
                     PersonBindingSource.DataSource = myPersonTable
-                    CustomFieldBindingSource.DataSource = myCustomField
-                    CustomFieldsPropertiesBindingSource.DataSource = myCustomFieldsProperties
                     PropertiesBindingSource.DataSource = myProperties
                 End If
             End If
             MovieBindingSource.ResumeBinding()
             PersonBindingSource.ResumeBinding()
-            CustomFieldBindingSource.ResumeBinding()
-            CustomFieldsPropertiesBindingSource.ResumeBinding()
             PropertiesBindingSource.ResumeBinding()
         Else
             MovieBindingSource.SuspendBinding()
             PersonBindingSource.SuspendBinding()
-            CustomFieldBindingSource.SuspendBinding()
-            CustomFieldsPropertiesBindingSource.SuspendBinding()
             PropertiesBindingSource.SuspendBinding()
         End If
     End Sub
@@ -2925,6 +2911,50 @@ Public Class Form1
     Private Sub ToolStripButtonGrabPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonGrabPersons.Click
 
     End Sub
+    Private Shared Sub InitLogger()
+        'Dim config As Nlog.LoggingConfiguration = LogManager.Configuration ?? new LoggingConfiguration
+        Dim conf As LoggingConfiguration
+        If Not LogManager.Configuration Is Nothing Then
+            conf = LogManager.Configuration
+        Else
+            conf = New LoggingConfiguration
+        End If
 
+        Dim LogFileName As String = "MyFilmsAMCU.log"
+        Dim OldLogFileName As String = "MyFilmsAMCU-old.log"
+        Try
+            Dim logFile As FileInfo = New FileInfo(Config.GetFile(Config.Dir.Log, LogFileName))
+            If logFile.Exists = True Then
+                If (File.Exists(Config.GetFile(Config.Dir.Log, OldLogFileName))) Then
+                    File.Delete(Config.GetFile(Config.Dir.Log, OldLogFileName))
+
+                    logFile.CopyTo(Config.GetFile(Config.Dir.Log, OldLogFileName))
+                    logFile.Delete()
+                End If
+            End If
+        Catch ex As Exception
+        End Try
+
+        Dim fileTarget As FileTarget = New FileTarget
+        fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName)
+        fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " & "${level:fixedLength=true:padding=5} " & "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " & "${exception:format=tostring}"
+
+        conf.AddTarget("file", fileTarget)
+
+        ' Get current Log Level from MediaPortal 
+        Dim logLevel As NLog.LogLevel
+
+        'logLevel = logLevel.Error
+        'logLevel = logLevel.Warn
+        'logLevel = logLevel.Info
+        logLevel = logLevel.Debug
+#If DEBUG Then
+        logLevel = logLevel.Debug
+#End If
+
+        Dim Rule As LoggingRule = New LoggingRule("*", logLevel, fileTarget)
+        conf.LoggingRules.Add(Rule)
+        LogManager.Configuration = conf
+    End Sub
 End Class
 

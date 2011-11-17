@@ -111,7 +111,6 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
@@ -151,11 +150,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="AntMovieCatalog4.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
     </Compile>
     <Compile Include="BaseMesFilms.cs" />
     <Compile Include="CatalogConverter\DvdProfiler.cs" />
@@ -253,17 +247,6 @@
     </None>
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-    </None>
-    <None Include="AntMovieCatalog4.xsc">
-      <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
-    </None>
-    <None Include="AntMovieCatalog4.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AntMovieCatalog4.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AntMovieCatalog4.xss">
-      <DependentUpon>AntMovieCatalog4.xsd</DependentUpon>
     </None>
     <None Include="MyFilmsData.xsc">
       <DependentUpon>MyFilmsData.xsd</DependentUpon>

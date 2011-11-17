@@ -518,6 +518,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.antMovieCatalog = new MyFilmsPlugin.AntMovieCatalog();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxExternal.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
@@ -573,6 +574,7 @@
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.antMovieCatalog)).BeginInit();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -4639,7 +4641,7 @@
           this.AMCConfigView.Location = new System.Drawing.Point(20, 73);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(692, 263);
+          this.AMCConfigView.Size = new System.Drawing.Size(692, 265);
           this.AMCConfigView.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -5260,6 +5262,11 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // antMovieCatalog
+          // 
+          this.antMovieCatalog.DataSetName = "AntMovieCatalog";
+          this.antMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5386,6 +5393,7 @@
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.antMovieCatalog)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -5815,5 +5823,6 @@
         private GroupBox groupBoxExternal;
         private Label labelRecentlyAddedAPI;
         private CheckBox cbAllowRecentAddedAPI;
+        private AntMovieCatalog antMovieCatalog;
     }
 }
