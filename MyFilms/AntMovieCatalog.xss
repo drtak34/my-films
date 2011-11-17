@@ -11,11 +11,11 @@
     <Shape ID="DesignTable:Person" ZOrder="20" X="782" Y="154" Height="316" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="312" />
     <Shape ID="DesignTable:Contents" ZOrder="12" X="478" Y="11" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
     <Shape ID="DesignTable:Movie" ZOrder="19" X="945" Y="-14" Height="946" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="22" SplitterPosition="942" />
-    <Shape ID="DesignTable:CustomFields" ZOrder="14" X="1278" Y="738" Height="112" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="108" />
+    <Shape ID="DesignTable:CustomFields" ZOrder="14" X="1278" Y="738" Height="78" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="74" />
     <Shape ID="DesignTable:CustomFieldsProperties" ZOrder="15" X="260" Y="293" Height="78" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="74" />
     <Shape ID="DesignTable:CustomField" ZOrder="16" X="279" Y="479" Height="215" Width="172" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="211" />
     <Shape ID="DesignTable:Settings" ZOrder="17" X="4" Y="302" Height="78" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="74" />
-    <Shape ID="DesignTable:User" ZOrder="18" X="8" Y="515" Height="78" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="74" />
+    <Shape ID="DesignTable:User" ZOrder="18" X="8" Y="515" Height="129" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="125" />
     <Shape ID="DesignTable:Properties" ZOrder="11" X="267" Y="-33" Height="129" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="125" />
   </Shapes>
   <Connectors>

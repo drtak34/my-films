@@ -12,8 +12,9 @@ namespace Cornerstone.Tools {
     public class WebGrabber {
 
         #region Private variables
+        private static NLog.Logger LogMyFilmsS = NLog.LogManager.GetCurrentClassLogger();  //log
 
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();
         private static int unsafeHeaderUserCount;
         private static object lockingObj;
         private string requestUrl;
@@ -146,14 +147,14 @@ namespace Cornerstone.Tools {
                                 // all other status codes mostly indicate problems that won't be
                                 // solved within the retry period so fail these immediatly
                                 default:
-                                    logger.Error("Connection failed: URL={0}, Status={1}, Description={2}.", requestUrl, statusCode, ((HttpWebResponse)e.Response).StatusDescription);
+                                    LogMyFilms.Error("Connection failed: URL={0}, Status={1}, Description={2}.", requestUrl, statusCode, ((HttpWebResponse)e.Response).StatusDescription);
                                     return false;
                             }
                         }
 
                         // Return when hitting maximum retries.
                         if (tryCount == maxRetries) {
-                            logger.Warn("Connection failed: Reached retry limit of " + maxRetries + ". URL=" + requestUrl);
+                            LogMyFilms.Warn("Connection failed: Reached retry limit of " + maxRetries + ". URL=" + requestUrl);
                             return false;
                         }
 
@@ -164,15 +165,15 @@ namespace Cornerstone.Tools {
                         }
                     }
                     catch (NotSupportedException e) {
-                        logger.Error("Connection failed.", e);
+                        LogMyFilms.Error("Connection failed.", e);
                         return false;
                     }
                     catch (ProtocolViolationException e) {
-                        logger.Error("Connection failed.", e);
+                        LogMyFilms.Error("Connection failed.", e);
                         return false;
                     }
                     catch (InvalidOperationException e) {
-                        logger.Error("Connection failed.", e);
+                        LogMyFilms.Error("Connection failed.", e);
                         return false;
                     }
                     finally {
@@ -185,7 +186,7 @@ namespace Cornerstone.Tools {
                 cookieHeader = request.CookieContainer.GetCookieHeader(request.RequestUri);
 
                 // Debug
-                if (_debug) logger.Debug("GetResponse: URL={0}, UserAgent={1}, CookieHeader={3}", requestUrl, userAgent, cookieHeader);
+                if (_debug) LogMyFilms.Debug("GetResponse: URL={0}, UserAgent={1}, CookieHeader={3}", requestUrl, userAgent, cookieHeader);
 
                 // disable unsafe header parsing if it was enabled
                 if (_allowUnsafeHeader) SetAllowUnsafeHeaderParsing(false);
@@ -193,7 +194,7 @@ namespace Cornerstone.Tools {
                 return true;
             }
             catch (Exception e) {
-                logger.Warn("Unexpected error getting http response from '{0}': {1}", requestUrl, e.Message);
+                LogMyFilms.Warn("Unexpected error getting http response from '{0}': {1}", requestUrl, e.Message);
                 return false;
             }
         }
@@ -210,13 +211,13 @@ namespace Cornerstone.Tools {
                 }
                 catch (Exception e) {
                     // If this fails default to the system's default encoding
-                    logger.DebugException("Encoding could not be determined, using default.", e);
+                    LogMyFilms.DebugException("Encoding could not be determined, using default.", e);
                     encoding = Encoding.Default;
                 }
             }
 
             // Debug
-            if (_debug) logger.Debug("GetString: Encoding={2}", encoding.EncodingName);
+            if (_debug) LogMyFilms.Debug("GetString: Encoding={2}", encoding.EncodingName);
 
             // Converts the stream to a string
             try {
@@ -236,7 +237,7 @@ namespace Cornerstone.Tools {
 
                 // There was an error reading the stream
                 // todo: might have to retry
-                logger.ErrorException("Error while trying to read stream data: ", e);
+                LogMyFilms.ErrorException("Error while trying to read stream data: ", e);
             }
 
             // return nothing.
@@ -261,7 +262,7 @@ namespace Cornerstone.Tools {
                 xml.LoadXml(data);
             }
             catch (XmlException e) {
-                logger.ErrorException("XML Parse error: URL=" + requestUrl, e);
+                LogMyFilms.ErrorException("XML Parse error: URL=" + requestUrl, e);
                 return null;
             }
             
@@ -336,7 +337,7 @@ namespace Cornerstone.Tools {
                 if (e.GetType() == typeof(ThreadAbortException))
                     throw e;
 
-                logger.Error("Unsafe header parsing setting change failed.");
+                LogMyFilms.Error("Unsafe header parsing setting change failed.");
                 return false;
             }
         }
@@ -346,6 +347,7 @@ namespace Cornerstone.Tools {
 
     public class AdvancedStringComparer
     {
+      private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
       // Calculates the Levenshtein Distance between two strings. The least number of 
       // changes to make one string equal to the other. Useful for finding 
