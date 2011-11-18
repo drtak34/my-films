@@ -39,6 +39,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using MediaPortal.Configuration;
 
   using MyFilmsPlugin.Configuration;
+  using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
   
@@ -1286,9 +1287,23 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void Config_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
           Config_Name_Load();
+          BindSources();
         }
 
-    private void Config_Name_Load()
+        private void BindSources()
+        {
+          propertiesBindingSource.DataSource = mydivx.Properties;
+          propertiesBindingSource.ResumeBinding();
+          customFieldsBindingSource.DataSource = mydivx.CustomFieldsProperties;
+          customFieldsBindingSource.ResumeBinding();
+          customFieldBindingSource.DataSource = mydivx.CustomField;
+          customFieldBindingSource.ResumeBinding();
+          personBindingSource.DataSource = mydivx.Person;
+          personBindingSource.ResumeBinding();
+        }
+
+        
+        private void Config_Name_Load()
         {
             Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);

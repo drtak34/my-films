@@ -38,6 +38,7 @@ namespace MyFilmsPlugin.MyFilms
 
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
   using MyFilmsPlugin.MyFilms.Utils;
+  using MyFilmsPlugin.DataBase;
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
 
@@ -46,7 +47,7 @@ namespace MyFilmsPlugin.MyFilms
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
-        private static MyFilmsData myfilmsdata;
+        private static MyFilmsData mfdata;
 
         public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         public class MFConfig
@@ -76,7 +77,6 @@ namespace MyFilmsPlugin.MyFilms
 */
         private static DataRow[] movies;
         private static DataRow[] persons;
-        private static DataRow[] history;
 
         #region ctor
         static BaseMesFilms() {}
@@ -122,7 +122,7 @@ namespace MyFilmsPlugin.MyFilms
         {
           string datafile = GetNameForMyFilmsDatafile(MyFilms.conf.StrFileXml);
 
-          myfilmsdata = new MyFilmsData();
+          mfdata = new MyFilmsData();
           LogMyFilms.Debug("MyFilmsData - Try reading datafile '" + datafile + "'");
           try
           {
@@ -133,10 +133,10 @@ namespace MyFilmsPlugin.MyFilms
             {
               LogMyFilms.Debug("initData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
 
-              foreach (DataTable dataTable in myfilmsdata.Tables)
+              foreach (DataTable dataTable in mfdata.Tables)
                 dataTable.BeginLoadData();
-              myfilmsdata.ReadXml(fs);
-              foreach (DataTable dataTable in myfilmsdata.Tables)
+              mfdata.ReadXml(fs);
+              foreach (DataTable dataTable in mfdata.Tables)
                 dataTable.EndLoadData();
 
               foreach (DataTable dataTable in data.Tables)
@@ -192,10 +192,6 @@ namespace MyFilmsPlugin.MyFilms
         public static DataRow[] PersonsSelected
         {
           get { return persons; }
-        }
-        public static DataRow[] HistorySelected
-        {
-          get { return history; }
         }
         #endregion
 
@@ -362,19 +358,6 @@ namespace MyFilmsPlugin.MyFilms
           return persons;
         }
 
-        public static DataRow[] ReadDataHistory(string StrSelect, string StrSort, string StrSortSens, bool all)
-        {
-          if (myfilmsdata == null) initDataMyFilms();
-          if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
-          history = myfilmsdata.Watched.Select(StrSelect, StrSort + " " + StrSortSens);
-          if (history.Length == 0 && all)
-          {
-            StrSelect = "Name" + " not like ''";
-            history = myfilmsdata.Watched.Select(StrSelect, StrSort + " " + StrSortSens);
-          }
-          return history;
-        }
-
         public static void LoadMyFilms(string StrFileXml)
         {
           if (!System.IO.File.Exists(StrFileXml))
@@ -431,19 +414,19 @@ namespace MyFilmsPlugin.MyFilms
             LogMyFilms.Debug("The file {0} does not exist !.", datafile);
             // throw new Exception(string.Format("The file {0} does not exist !.", datafile)); // do NOT throw an exception to upper level
           }
-          myfilmsdata = new MyFilmsData();
+          mfdata = new MyFilmsData();
           try
           {
             using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("LoadMyFilmsData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
 
-              foreach (DataTable dataTable in myfilmsdata.Tables)
+              foreach (DataTable dataTable in mfdata.Tables)
                 dataTable.BeginLoadData();
 
-              myfilmsdata.ReadXml(fs);
+              mfdata.ReadXml(fs);
 
-              foreach (DataTable dataTable in myfilmsdata.Tables)
+              foreach (DataTable dataTable in mfdata.Tables)
                 dataTable.EndLoadData();              
 
               fs.Close();
@@ -461,8 +444,8 @@ namespace MyFilmsPlugin.MyFilms
           if (data != null)
             data.Dispose();
 
-          if (myfilmsdata != null)
-            myfilmsdata.Dispose();
+          if (mfdata != null)
+            mfdata.Dispose();
         }
 
         public static bool SaveMyFilms(string catalogfile, int timeout)
@@ -522,7 +505,7 @@ namespace MyFilmsPlugin.MyFilms
 
         public static bool SaveMyFilmsData()
         {
-          if (myfilmsdata != null)
+          if (mfdata != null)
           {
             string datafile = GetNameForMyFilmsDatafile(MyFilms.conf.StrFileXml);
             try
@@ -539,11 +522,11 @@ namespace MyFilmsPlugin.MyFilms
                   LogMyFilms.Debug("SaveMyFilms()- writing '" + datafile + "' as MyXmlTextWriter in FileStream");
                   MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
                   MyXmlTextWriter.WriteStartDocument();
-                  myfilmsdata.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                  mfdata.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
                   MyXmlTextWriter.Flush();
                   MyXmlTextWriter.Close();
                 }
-                // myfilmsdata.WriteXml(fs);
+                // mfdata.WriteXml(fs);
                 fs.Flush();
                 fs.Close();
                 LogMyFilms.Debug("SaveMyFilms()- closing '" + datafile + "' FileStream and releasing file lock");
@@ -552,7 +535,7 @@ namespace MyFilmsPlugin.MyFilms
               //System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(datafile, System.Text.Encoding.Default);
               //MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
               //MyXmlTextWriter.WriteStartDocument();
-              //myfilmsdata.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+              //mfdata.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
               //MyXmlTextWriter.Close();
             }
             catch (Exception ex)
@@ -663,8 +646,8 @@ namespace MyFilmsPlugin.MyFilms
         {
           if (data != null)
             data.Clear();
-          if (myfilmsdata != null)
-            myfilmsdata.Clear();
+          if (mfdata != null)
+            mfdata.Clear();
         }
 
         public static void GetMovies(ref ArrayList movies)

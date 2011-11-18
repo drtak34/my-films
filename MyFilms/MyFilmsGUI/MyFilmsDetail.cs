@@ -51,6 +51,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.Video.Database;
 
   using MyFilmsPlugin.MyFilms;
+  using MyFilmsPlugin.DataBase;
 
   using MyFilmsPlugin.MyFilms.Utils;
 
