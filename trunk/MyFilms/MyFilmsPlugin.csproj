@@ -142,14 +142,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntMovieCatalog.cs">
+    <Compile Include="DataBase\AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AntMovieCatalog.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </Compile>
     <Compile Include="BaseMesFilms.cs" />
     <Compile Include="CatalogConverter\DvdProfiler.cs" />
@@ -176,10 +171,19 @@
     <Compile Include="Configuration\MyFilmsSetup.designer.cs">
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyFilmsData.Designer.cs">
-      <DependentUpon>MyFilmsData.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="DataBase\AntMovieCatalog.Designer.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\MyFilmsData.cs">
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataBase\MyFilmsData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </Compile>
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\MFView.cs" />
@@ -231,32 +235,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AntMovieCatalog.resx">
+    <EmbeddedResource Include="DataBase\AntMovieCatalog.resx">
       <DependentUpon>AntMovieCatalog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AntMovieCatalog.xsc">
+    <None Include="DataBase\AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
-    <None Include="AntMovieCatalog.xsd">
+    <None Include="DataBase\AntMovieCatalog.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>AntMovieCatalog.Designer.cs</LastGenOutput>
     </None>
-    <None Include="AntMovieCatalog.xss">
+    <None Include="DataBase\AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
-    <None Include="MyFilmsData.xsc">
+    <None Include="DataBase\MyFilmsData.xsc">
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </None>
-    <None Include="MyFilmsData.xsd">
-      <SubType>Designer</SubType>
+    <None Include="DataBase\MyFilmsData.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>MyFilmsData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
-    <None Include="MyFilmsData.xss">
+    <None Include="DataBase\MyFilmsData.xss">
       <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
@@ -352,7 +356,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataBase\" />
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

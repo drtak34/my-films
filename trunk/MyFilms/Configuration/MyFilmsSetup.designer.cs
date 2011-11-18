@@ -3,6 +3,7 @@
   using System.Windows.Forms;
 
   using MyFilmsPlugin.MyFilms.Configuration;
+  using MyFilmsPlugin.DataBase;
 
   using MyFilmsPlugin.MyFilms.Utils;
 
@@ -94,6 +95,10 @@
         private void InitializeComponent()
         {
           this.components = new System.ComponentModel.Container();
+          System.Windows.Forms.Label ownerLabel;
+          System.Windows.Forms.Label mailLabel;
+          System.Windows.Forms.Label siteLabel;
+          System.Windows.Forms.Label descriptionLabel;
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyFilmsSetup));
           this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.Config_Name = new System.Windows.Forms.ComboBox();
@@ -513,12 +518,50 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.personDataGridView = new System.Windows.Forms.DataGridView();
+          this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.dataGridViewCheckBoxColumn3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.antMovieCatalog = new MyFilmsPlugin.DataBase.AntMovieCatalog();
+          this.customFieldDataGridView = new System.Windows.Forms.DataGridView();
+          this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.customFieldBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.propertiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.ownerTextBox = new System.Windows.Forms.TextBox();
+          this.mailTextBox = new System.Windows.Forms.TextBox();
+          this.siteTextBox = new System.Windows.Forms.TextBox();
+          this.descriptionTextBox = new System.Windows.Forms.TextBox();
           this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.antMovieCatalog = new MyFilmsPlugin.AntMovieCatalog();
+          this.myFilmsData = new MyFilmsPlugin.DataBase.MyFilmsData();
+          this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          ownerLabel = new System.Windows.Forms.Label();
+          mailLabel = new System.Windows.Forms.Label();
+          siteLabel = new System.Windows.Forms.Label();
+          descriptionLabel = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxExternal.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
@@ -573,9 +616,52 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.antMovieCatalog)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.customFieldDataGridView)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.myFilmsData)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           this.SuspendLayout();
+          // 
+          // ownerLabel
+          // 
+          ownerLabel.AutoSize = true;
+          ownerLabel.Location = new System.Drawing.Point(14, 95);
+          ownerLabel.Name = "ownerLabel";
+          ownerLabel.Size = new System.Drawing.Size(41, 13);
+          ownerLabel.TabIndex = 91;
+          ownerLabel.Text = "Owner:";
+          // 
+          // mailLabel
+          // 
+          mailLabel.AutoSize = true;
+          mailLabel.Location = new System.Drawing.Point(14, 121);
+          mailLabel.Name = "mailLabel";
+          mailLabel.Size = new System.Drawing.Size(29, 13);
+          mailLabel.TabIndex = 93;
+          mailLabel.Text = "Mail:";
+          // 
+          // siteLabel
+          // 
+          siteLabel.AutoSize = true;
+          siteLabel.Location = new System.Drawing.Point(216, 95);
+          siteLabel.Name = "siteLabel";
+          siteLabel.Size = new System.Drawing.Size(28, 13);
+          siteLabel.TabIndex = 95;
+          siteLabel.Text = "Site:";
+          // 
+          // descriptionLabel
+          // 
+          descriptionLabel.AutoSize = true;
+          descriptionLabel.Location = new System.Drawing.Point(216, 121);
+          descriptionLabel.Name = "descriptionLabel";
+          descriptionLabel.Size = new System.Drawing.Size(63, 13);
+          descriptionLabel.TabIndex = 97;
+          descriptionLabel.Text = "Description:";
           // 
           // ToolTip1
           // 
@@ -4638,10 +4724,10 @@
           this.AMCConfigView.FullRowSelect = true;
           this.AMCConfigView.GridLines = true;
           this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(20, 73);
+          this.AMCConfigView.Location = new System.Drawing.Point(17, 27);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(692, 265);
+          this.AMCConfigView.Size = new System.Drawing.Size(692, 54);
           this.AMCConfigView.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -5203,6 +5289,17 @@
           // 
           // Tab_Other
           // 
+          this.Tab_Other.AutoScroll = true;
+          this.Tab_Other.Controls.Add(this.personDataGridView);
+          this.Tab_Other.Controls.Add(this.customFieldDataGridView);
+          this.Tab_Other.Controls.Add(ownerLabel);
+          this.Tab_Other.Controls.Add(this.ownerTextBox);
+          this.Tab_Other.Controls.Add(mailLabel);
+          this.Tab_Other.Controls.Add(this.mailTextBox);
+          this.Tab_Other.Controls.Add(siteLabel);
+          this.Tab_Other.Controls.Add(this.siteTextBox);
+          this.Tab_Other.Controls.Add(descriptionLabel);
+          this.Tab_Other.Controls.Add(this.descriptionTextBox);
           this.Tab_Other.Controls.Add(this.btnGrabberInterface);
           this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
           this.Tab_Other.Controls.Add(this.AMCConfigView);
@@ -5214,9 +5311,273 @@
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
+          // personDataGridView
+          // 
+          this.personDataGridView.AutoGenerateColumns = false;
+          this.personDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+          this.personDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.personDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewCheckBoxColumn2,
+            this.dataGridViewCheckBoxColumn3,
+            this.dataGridViewCheckBoxColumn4,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19});
+          this.personDataGridView.DataSource = this.personBindingSource;
+          this.personDataGridView.Location = new System.Drawing.Point(17, 235);
+          this.personDataGridView.Name = "personDataGridView";
+          this.personDataGridView.RowHeadersVisible = false;
+          this.personDataGridView.RowTemplate.Height = 18;
+          this.personDataGridView.Size = new System.Drawing.Size(692, 102);
+          this.personDataGridView.TabIndex = 119;
+          // 
+          // dataGridViewTextBoxColumn9
+          // 
+          this.dataGridViewTextBoxColumn9.DataPropertyName = "Name";
+          this.dataGridViewTextBoxColumn9.HeaderText = "Name";
+          this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+          this.dataGridViewTextBoxColumn9.Width = 60;
+          // 
+          // dataGridViewTextBoxColumn10
+          // 
+          this.dataGridViewTextBoxColumn10.DataPropertyName = "AlternateName";
+          this.dataGridViewTextBoxColumn10.HeaderText = "AlternateName";
+          this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+          this.dataGridViewTextBoxColumn10.Width = 102;
+          // 
+          // dataGridViewTextBoxColumn11
+          // 
+          this.dataGridViewTextBoxColumn11.DataPropertyName = "Born";
+          this.dataGridViewTextBoxColumn11.HeaderText = "Born";
+          this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+          this.dataGridViewTextBoxColumn11.Width = 54;
+          // 
+          // dataGridViewTextBoxColumn12
+          // 
+          this.dataGridViewTextBoxColumn12.DataPropertyName = "BirthPlace";
+          this.dataGridViewTextBoxColumn12.HeaderText = "BirthPlace";
+          this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+          this.dataGridViewTextBoxColumn12.Width = 80;
+          // 
+          // dataGridViewTextBoxColumn13
+          // 
+          this.dataGridViewTextBoxColumn13.DataPropertyName = "MiniBiography";
+          this.dataGridViewTextBoxColumn13.HeaderText = "MiniBiography";
+          this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+          this.dataGridViewTextBoxColumn13.Width = 98;
+          // 
+          // dataGridViewTextBoxColumn14
+          // 
+          this.dataGridViewTextBoxColumn14.DataPropertyName = "Biography";
+          this.dataGridViewTextBoxColumn14.HeaderText = "Biography";
+          this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+          this.dataGridViewTextBoxColumn14.Width = 79;
+          // 
+          // dataGridViewTextBoxColumn15
+          // 
+          this.dataGridViewTextBoxColumn15.DataPropertyName = "URL";
+          this.dataGridViewTextBoxColumn15.HeaderText = "URL";
+          this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+          this.dataGridViewTextBoxColumn15.Width = 54;
+          // 
+          // dataGridViewTextBoxColumn16
+          // 
+          this.dataGridViewTextBoxColumn16.DataPropertyName = "IMDB_Id";
+          this.dataGridViewTextBoxColumn16.HeaderText = "IMDB_Id";
+          this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+          this.dataGridViewTextBoxColumn16.Width = 74;
+          // 
+          // dataGridViewTextBoxColumn17
+          // 
+          this.dataGridViewTextBoxColumn17.DataPropertyName = "TMDB_Id";
+          this.dataGridViewTextBoxColumn17.HeaderText = "TMDB_Id";
+          this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+          this.dataGridViewTextBoxColumn17.Width = 78;
+          // 
+          // dataGridViewCheckBoxColumn1
+          // 
+          this.dataGridViewCheckBoxColumn1.DataPropertyName = "IsActor";
+          this.dataGridViewCheckBoxColumn1.HeaderText = "IsActor";
+          this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+          this.dataGridViewCheckBoxColumn1.Width = 46;
+          // 
+          // dataGridViewCheckBoxColumn2
+          // 
+          this.dataGridViewCheckBoxColumn2.DataPropertyName = "IsProducer";
+          this.dataGridViewCheckBoxColumn2.HeaderText = "IsProducer";
+          this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+          this.dataGridViewCheckBoxColumn2.Width = 64;
+          // 
+          // dataGridViewCheckBoxColumn3
+          // 
+          this.dataGridViewCheckBoxColumn3.DataPropertyName = "IsDirector";
+          this.dataGridViewCheckBoxColumn3.HeaderText = "IsDirector";
+          this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
+          this.dataGridViewCheckBoxColumn3.Width = 58;
+          // 
+          // dataGridViewCheckBoxColumn4
+          // 
+          this.dataGridViewCheckBoxColumn4.DataPropertyName = "IsWriter";
+          this.dataGridViewCheckBoxColumn4.HeaderText = "IsWriter";
+          this.dataGridViewCheckBoxColumn4.Name = "dataGridViewCheckBoxColumn4";
+          this.dataGridViewCheckBoxColumn4.Width = 49;
+          // 
+          // dataGridViewTextBoxColumn18
+          // 
+          this.dataGridViewTextBoxColumn18.DataPropertyName = "Photos";
+          this.dataGridViewTextBoxColumn18.HeaderText = "Photos";
+          this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+          this.dataGridViewTextBoxColumn18.Width = 65;
+          // 
+          // dataGridViewTextBoxColumn19
+          // 
+          this.dataGridViewTextBoxColumn19.DataPropertyName = "Picture";
+          this.dataGridViewTextBoxColumn19.HeaderText = "Picture";
+          this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+          this.dataGridViewTextBoxColumn19.Width = 65;
+          // 
+          // personBindingSource
+          // 
+          this.personBindingSource.DataMember = "Person";
+          this.personBindingSource.DataSource = this.antMovieCatalog;
+          // 
+          // antMovieCatalog
+          // 
+          this.antMovieCatalog.DataSetName = "AntMovieCatalog";
+          this.antMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
+          // customFieldDataGridView
+          // 
+          this.customFieldDataGridView.AutoGenerateColumns = false;
+          this.customFieldDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+          this.customFieldDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.customFieldDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+          this.customFieldDataGridView.DataSource = this.customFieldBindingSource;
+          this.customFieldDataGridView.Location = new System.Drawing.Point(17, 144);
+          this.customFieldDataGridView.Name = "customFieldDataGridView";
+          this.customFieldDataGridView.RowHeadersVisible = false;
+          this.customFieldDataGridView.RowTemplate.Height = 18;
+          this.customFieldDataGridView.Size = new System.Drawing.Size(692, 85);
+          this.customFieldDataGridView.TabIndex = 119;
+          // 
+          // dataGridViewTextBoxColumn1
+          // 
+          this.dataGridViewTextBoxColumn1.DataPropertyName = "Tag";
+          this.dataGridViewTextBoxColumn1.HeaderText = "Tag";
+          this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+          this.dataGridViewTextBoxColumn1.Width = 51;
+          // 
+          // dataGridViewTextBoxColumn2
+          // 
+          this.dataGridViewTextBoxColumn2.DataPropertyName = "Type";
+          this.dataGridViewTextBoxColumn2.HeaderText = "Type";
+          this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+          this.dataGridViewTextBoxColumn2.Width = 56;
+          // 
+          // dataGridViewTextBoxColumn3
+          // 
+          this.dataGridViewTextBoxColumn3.DataPropertyName = "Name";
+          this.dataGridViewTextBoxColumn3.HeaderText = "Name";
+          this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+          this.dataGridViewTextBoxColumn3.Width = 60;
+          // 
+          // dataGridViewTextBoxColumn4
+          // 
+          this.dataGridViewTextBoxColumn4.DataPropertyName = "DefaultValue";
+          this.dataGridViewTextBoxColumn4.HeaderText = "DefaultValue";
+          this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+          this.dataGridViewTextBoxColumn4.Width = 93;
+          // 
+          // dataGridViewTextBoxColumn5
+          // 
+          this.dataGridViewTextBoxColumn5.DataPropertyName = "MultiValues";
+          this.dataGridViewTextBoxColumn5.HeaderText = "MultiValues";
+          this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+          this.dataGridViewTextBoxColumn5.Width = 86;
+          // 
+          // dataGridViewTextBoxColumn6
+          // 
+          this.dataGridViewTextBoxColumn6.DataPropertyName = "ExcludedInScripts";
+          this.dataGridViewTextBoxColumn6.HeaderText = "ExcludedInScripts";
+          this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+          this.dataGridViewTextBoxColumn6.Width = 117;
+          // 
+          // dataGridViewTextBoxColumn7
+          // 
+          this.dataGridViewTextBoxColumn7.DataPropertyName = "GUIProperties";
+          this.dataGridViewTextBoxColumn7.HeaderText = "GUIProperties";
+          this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+          this.dataGridViewTextBoxColumn7.Width = 98;
+          // 
+          // dataGridViewTextBoxColumn8
+          // 
+          this.dataGridViewTextBoxColumn8.DataPropertyName = "OtherProperties";
+          this.dataGridViewTextBoxColumn8.HeaderText = "OtherProperties";
+          this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+          this.dataGridViewTextBoxColumn8.Width = 105;
+          // 
+          // customFieldBindingSource
+          // 
+          this.customFieldBindingSource.DataMember = "CustomField";
+          this.customFieldBindingSource.DataSource = this.antMovieCatalog;
+          // 
+          // propertiesBindingSource
+          // 
+          this.propertiesBindingSource.DataMember = "Properties";
+          this.propertiesBindingSource.DataSource = this.antMovieCatalog;
+          // 
+          // ownerTextBox
+          // 
+          this.ownerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Owner", true));
+          this.ownerTextBox.Location = new System.Drawing.Point(61, 92);
+          this.ownerTextBox.Name = "ownerTextBox";
+          this.ownerTextBox.Size = new System.Drawing.Size(130, 20);
+          this.ownerTextBox.TabIndex = 92;
+          // 
+          // mailTextBox
+          // 
+          this.mailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Mail", true));
+          this.mailTextBox.Location = new System.Drawing.Point(61, 118);
+          this.mailTextBox.Name = "mailTextBox";
+          this.mailTextBox.Size = new System.Drawing.Size(130, 20);
+          this.mailTextBox.TabIndex = 94;
+          // 
+          // siteTextBox
+          // 
+          this.siteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Site", true));
+          this.siteTextBox.Location = new System.Drawing.Point(285, 92);
+          this.siteTextBox.Name = "siteTextBox";
+          this.siteTextBox.Size = new System.Drawing.Size(239, 20);
+          this.siteTextBox.TabIndex = 96;
+          // 
+          // descriptionTextBox
+          // 
+          this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Description", true));
+          this.descriptionTextBox.Location = new System.Drawing.Point(285, 118);
+          this.descriptionTextBox.Name = "descriptionTextBox";
+          this.descriptionTextBox.Size = new System.Drawing.Size(239, 20);
+          this.descriptionTextBox.TabIndex = 98;
+          // 
           // btnGrabberInterface
           // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(29, 18);
+          this.btnGrabberInterface.Location = new System.Drawing.Point(557, 101);
           this.btnGrabberInterface.Name = "btnGrabberInterface";
           this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
           this.btnGrabberInterface.TabIndex = 91;
@@ -5227,7 +5588,7 @@
           // lblAMCupdaterConfigPreview
           // 
           this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(25, 57);
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(22, 11);
           this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
           this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
           this.lblAMCupdaterConfigPreview.TabIndex = 90;
@@ -5262,10 +5623,16 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // antMovieCatalog
+          // myFilmsData
           // 
-          this.antMovieCatalog.DataSetName = "AntMovieCatalog";
-          this.antMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          this.myFilmsData.DataSetName = "MyFilmsData";
+          this.myFilmsData.Locale = new System.Globalization.CultureInfo("en-US");
+          this.myFilmsData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
+          // customFieldsBindingSource
+          // 
+          this.customFieldsBindingSource.DataMember = "CustomFields";
+          this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
           // MyFilmsSetup
           // 
@@ -5392,8 +5759,15 @@
           this.General.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.antMovieCatalog)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.customFieldDataGridView)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.myFilmsData)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -5824,5 +6198,39 @@
         private Label labelRecentlyAddedAPI;
         private CheckBox cbAllowRecentAddedAPI;
         private AntMovieCatalog antMovieCatalog;
+        private MyFilmsData myFilmsData;
+        private BindingSource propertiesBindingSource;
+        private TextBox ownerTextBox;
+        private TextBox mailTextBox;
+        private TextBox siteTextBox;
+        private TextBox descriptionTextBox;
+        private BindingSource customFieldBindingSource;
+        private BindingSource customFieldsBindingSource;
+        private DataGridView customFieldDataGridView;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private DataGridView personDataGridView;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn3;
+        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private BindingSource personBindingSource;
     }
 }

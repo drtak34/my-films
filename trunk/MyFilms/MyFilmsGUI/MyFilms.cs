@@ -49,6 +49,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.Video.Database;
 
   using MyFilmsPlugin.MyFilms.Configuration;
+  using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms.Utils;
   using MyFilmsPlugin.MyFilms.Utils.Cornerstone.MP;
 

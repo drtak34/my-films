@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace MyFilmsPlugin
+namespace MyFilmsPlugin.DataBase
 {
   // using System.Data;
 
