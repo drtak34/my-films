@@ -29,6 +29,12 @@ namespace MyFilmsPlugin.DataBase {
         
         private PropertiesDataTable tableProperties;
         
+        private MyFilmsSettingsDataTable tableMyFilmsSettings;
+        
+        private UsersDataTable tableUsers;
+        
+        private UserDataTable tableUser;
+        
         private CustomFieldsPropertiesDataTable tableCustomFieldsProperties;
         
         private CustomFieldDataTable tableCustomField;
@@ -46,6 +52,12 @@ namespace MyFilmsPlugin.DataBase {
         private PersonDataTable tablePerson;
         
         private global::System.Data.DataRelation relationCatalog_Properties;
+        
+        private global::System.Data.DataRelation relationCatalog_MyFilmsSettings;
+        
+        private global::System.Data.DataRelation relationMyFilmsSettings_Users;
+        
+        private global::System.Data.DataRelation relationUsers_User;
         
         private global::System.Data.DataRelation relationCatalog_CustomFieldsProperties;
         
@@ -98,6 +110,15 @@ namespace MyFilmsPlugin.DataBase {
                 }
                 if ((ds.Tables["Properties"] != null)) {
                     base.Tables.Add(new PropertiesDataTable(ds.Tables["Properties"]));
+                }
+                if ((ds.Tables["MyFilmsSettings"] != null)) {
+                    base.Tables.Add(new MyFilmsSettingsDataTable(ds.Tables["MyFilmsSettings"]));
+                }
+                if ((ds.Tables["Users"] != null)) {
+                    base.Tables.Add(new UsersDataTable(ds.Tables["Users"]));
+                }
+                if ((ds.Tables["User"] != null)) {
+                    base.Tables.Add(new UserDataTable(ds.Tables["User"]));
                 }
                 if ((ds.Tables["CustomFieldsProperties"] != null)) {
                     base.Tables.Add(new CustomFieldsPropertiesDataTable(ds.Tables["CustomFieldsProperties"]));
@@ -157,6 +178,33 @@ namespace MyFilmsPlugin.DataBase {
         public PropertiesDataTable Properties {
             get {
                 return this.tableProperties;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MyFilmsSettingsDataTable MyFilmsSettings {
+            get {
+                return this.tableMyFilmsSettings;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public UsersDataTable Users {
+            get {
+                return this.tableUsers;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public UserDataTable User {
+            get {
+                return this.tableUser;
             }
         }
         
@@ -298,6 +346,15 @@ namespace MyFilmsPlugin.DataBase {
                 if ((ds.Tables["Properties"] != null)) {
                     base.Tables.Add(new PropertiesDataTable(ds.Tables["Properties"]));
                 }
+                if ((ds.Tables["MyFilmsSettings"] != null)) {
+                    base.Tables.Add(new MyFilmsSettingsDataTable(ds.Tables["MyFilmsSettings"]));
+                }
+                if ((ds.Tables["Users"] != null)) {
+                    base.Tables.Add(new UsersDataTable(ds.Tables["Users"]));
+                }
+                if ((ds.Tables["User"] != null)) {
+                    base.Tables.Add(new UserDataTable(ds.Tables["User"]));
+                }
                 if ((ds.Tables["CustomFieldsProperties"] != null)) {
                     base.Tables.Add(new CustomFieldsPropertiesDataTable(ds.Tables["CustomFieldsProperties"]));
                 }
@@ -364,6 +421,24 @@ namespace MyFilmsPlugin.DataBase {
                     this.tableProperties.InitVars();
                 }
             }
+            this.tableMyFilmsSettings = ((MyFilmsSettingsDataTable)(base.Tables["MyFilmsSettings"]));
+            if ((initTable == true)) {
+                if ((this.tableMyFilmsSettings != null)) {
+                    this.tableMyFilmsSettings.InitVars();
+                }
+            }
+            this.tableUsers = ((UsersDataTable)(base.Tables["Users"]));
+            if ((initTable == true)) {
+                if ((this.tableUsers != null)) {
+                    this.tableUsers.InitVars();
+                }
+            }
+            this.tableUser = ((UserDataTable)(base.Tables["User"]));
+            if ((initTable == true)) {
+                if ((this.tableUser != null)) {
+                    this.tableUser.InitVars();
+                }
+            }
             this.tableCustomFieldsProperties = ((CustomFieldsPropertiesDataTable)(base.Tables["CustomFieldsProperties"]));
             if ((initTable == true)) {
                 if ((this.tableCustomFieldsProperties != null)) {
@@ -413,6 +488,9 @@ namespace MyFilmsPlugin.DataBase {
                 }
             }
             this.relationCatalog_Properties = this.Relations["Catalog_Properties"];
+            this.relationCatalog_MyFilmsSettings = this.Relations["Catalog_MyFilmsSettings"];
+            this.relationMyFilmsSettings_Users = this.Relations["MyFilmsSettings_Users"];
+            this.relationUsers_User = this.Relations["Users_User"];
             this.relationCatalog_CustomFieldsProperties = this.Relations["Catalog_CustomFieldsProperties"];
             this.relationCustomFieldsProperties_CustomField = this.Relations["CustomFieldsProperties_CustomField"];
             this.relationCustomField_ListValue = this.Relations["CustomField_ListValue"];
@@ -433,6 +511,12 @@ namespace MyFilmsPlugin.DataBase {
             base.Tables.Add(this.tableCatalog);
             this.tableProperties = new PropertiesDataTable();
             base.Tables.Add(this.tableProperties);
+            this.tableMyFilmsSettings = new MyFilmsSettingsDataTable();
+            base.Tables.Add(this.tableMyFilmsSettings);
+            this.tableUsers = new UsersDataTable();
+            base.Tables.Add(this.tableUsers);
+            this.tableUser = new UserDataTable();
+            base.Tables.Add(this.tableUser);
             this.tableCustomFieldsProperties = new CustomFieldsPropertiesDataTable();
             base.Tables.Add(this.tableCustomFieldsProperties);
             this.tableCustomField = new CustomFieldDataTable();
@@ -454,6 +538,27 @@ namespace MyFilmsPlugin.DataBase {
                         this.tableCatalog.Catalog_IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableProperties.Catalog_IdColumn});
             this.tableProperties.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("Catalog_MyFilmsSettings", new global::System.Data.DataColumn[] {
+                        this.tableCatalog.Catalog_IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMyFilmsSettings.Catalog_IdColumn});
+            this.tableMyFilmsSettings.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("MyFilmsSettings_Users", new global::System.Data.DataColumn[] {
+                        this.tableMyFilmsSettings.MyFilmsSettings_IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUsers.MyFilmsSettings_IdColumn});
+            this.tableUsers.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("Users_User", new global::System.Data.DataColumn[] {
+                        this.tableUsers.Users_IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUser.Users_IdColumn});
+            this.tableUser.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
@@ -518,6 +623,21 @@ namespace MyFilmsPlugin.DataBase {
                         this.tableProperties.Catalog_IdColumn}, false);
             this.relationCatalog_Properties.Nested = true;
             this.Relations.Add(this.relationCatalog_Properties);
+            this.relationCatalog_MyFilmsSettings = new global::System.Data.DataRelation("Catalog_MyFilmsSettings", new global::System.Data.DataColumn[] {
+                        this.tableCatalog.Catalog_IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMyFilmsSettings.Catalog_IdColumn}, false);
+            this.relationCatalog_MyFilmsSettings.Nested = true;
+            this.Relations.Add(this.relationCatalog_MyFilmsSettings);
+            this.relationMyFilmsSettings_Users = new global::System.Data.DataRelation("MyFilmsSettings_Users", new global::System.Data.DataColumn[] {
+                        this.tableMyFilmsSettings.MyFilmsSettings_IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUsers.MyFilmsSettings_IdColumn}, false);
+            this.relationMyFilmsSettings_Users.Nested = true;
+            this.Relations.Add(this.relationMyFilmsSettings_Users);
+            this.relationUsers_User = new global::System.Data.DataRelation("Users_User", new global::System.Data.DataColumn[] {
+                        this.tableUsers.Users_IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUser.Users_IdColumn}, false);
+            this.relationUsers_User.Nested = true;
+            this.Relations.Add(this.relationUsers_User);
             this.relationCatalog_CustomFieldsProperties = new global::System.Data.DataRelation("Catalog_CustomFieldsProperties", new global::System.Data.DataColumn[] {
                         this.tableCatalog.Catalog_IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomFieldsProperties.Catalog_IdColumn}, false);
@@ -567,6 +687,21 @@ namespace MyFilmsPlugin.DataBase {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeProperties() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeMyFilmsSettings() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeUsers() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeUser() {
             return false;
         }
         
@@ -674,6 +809,12 @@ namespace MyFilmsPlugin.DataBase {
         public delegate void CatalogRowChangeEventHandler(object sender, CatalogRowChangeEvent e);
         
         public delegate void PropertiesRowChangeEventHandler(object sender, PropertiesRowChangeEvent e);
+        
+        public delegate void MyFilmsSettingsRowChangeEventHandler(object sender, MyFilmsSettingsRowChangeEvent e);
+        
+        public delegate void UsersRowChangeEventHandler(object sender, UsersRowChangeEvent e);
+        
+        public delegate void UserRowChangeEventHandler(object sender, UserRowChangeEvent e);
         
         public delegate void CustomFieldsPropertiesRowChangeEventHandler(object sender, CustomFieldsPropertiesRowChangeEvent e);
         
@@ -1177,6 +1318,783 @@ namespace MyFilmsPlugin.DataBase {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "PropertiesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MyFilmsSettingsDataTable : global::System.Data.TypedTableBase<MyFilmsSettingsRow> {
+            
+            private global::System.Data.DataColumn columnMyFilmsSettings_Id;
+            
+            private global::System.Data.DataColumn columnCatalog_Id;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsDataTable() {
+                this.TableName = "MyFilmsSettings";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal MyFilmsSettingsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected MyFilmsSettingsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MyFilmsSettings_IdColumn {
+                get {
+                    return this.columnMyFilmsSettings_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Catalog_IdColumn {
+                get {
+                    return this.columnCatalog_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRow this[int index] {
+                get {
+                    return ((MyFilmsSettingsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event MyFilmsSettingsRowChangeEventHandler MyFilmsSettingsRowChanging;
+            
+            public event MyFilmsSettingsRowChangeEventHandler MyFilmsSettingsRowChanged;
+            
+            public event MyFilmsSettingsRowChangeEventHandler MyFilmsSettingsRowDeleting;
+            
+            public event MyFilmsSettingsRowChangeEventHandler MyFilmsSettingsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddMyFilmsSettingsRow(MyFilmsSettingsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRow AddMyFilmsSettingsRow(CatalogRow parentCatalogRowByCatalog_MyFilmsSettings) {
+                MyFilmsSettingsRow rowMyFilmsSettingsRow = ((MyFilmsSettingsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null};
+                if ((parentCatalogRowByCatalog_MyFilmsSettings != null)) {
+                    columnValuesArray[1] = parentCatalogRowByCatalog_MyFilmsSettings[1];
+                }
+                rowMyFilmsSettingsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMyFilmsSettingsRow);
+                return rowMyFilmsSettingsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                MyFilmsSettingsDataTable cln = ((MyFilmsSettingsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MyFilmsSettingsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMyFilmsSettings_Id = base.Columns["MyFilmsSettings_Id"];
+                this.columnCatalog_Id = base.Columns["Catalog_Id"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMyFilmsSettings_Id = new global::System.Data.DataColumn("MyFilmsSettings_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnMyFilmsSettings_Id);
+                this.columnCatalog_Id = new global::System.Data.DataColumn("Catalog_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnCatalog_Id);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMyFilmsSettings_Id}, true));
+                this.columnMyFilmsSettings_Id.AutoIncrement = true;
+                this.columnMyFilmsSettings_Id.AllowDBNull = false;
+                this.columnMyFilmsSettings_Id.Unique = true;
+                this.columnMyFilmsSettings_Id.Namespace = "";
+                this.columnCatalog_Id.Namespace = "";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRow NewMyFilmsSettingsRow() {
+                return ((MyFilmsSettingsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MyFilmsSettingsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(MyFilmsSettingsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MyFilmsSettingsRowChanged != null)) {
+                    this.MyFilmsSettingsRowChanged(this, new MyFilmsSettingsRowChangeEvent(((MyFilmsSettingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MyFilmsSettingsRowChanging != null)) {
+                    this.MyFilmsSettingsRowChanging(this, new MyFilmsSettingsRowChangeEvent(((MyFilmsSettingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MyFilmsSettingsRowDeleted != null)) {
+                    this.MyFilmsSettingsRowDeleted(this, new MyFilmsSettingsRowChangeEvent(((MyFilmsSettingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MyFilmsSettingsRowDeleting != null)) {
+                    this.MyFilmsSettingsRowDeleting(this, new MyFilmsSettingsRowChangeEvent(((MyFilmsSettingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveMyFilmsSettingsRow(MyFilmsSettingsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                AntMovieCatalog ds = new AntMovieCatalog();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MyFilmsSettingsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class UsersDataTable : global::System.Data.TypedTableBase<UsersRow> {
+            
+            private global::System.Data.DataColumn columnUsers_Id;
+            
+            private global::System.Data.DataColumn columnMyFilmsSettings_Id;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersDataTable() {
+                this.TableName = "Users";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal UsersDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected UsersDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Users_IdColumn {
+                get {
+                    return this.columnUsers_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MyFilmsSettings_IdColumn {
+                get {
+                    return this.columnMyFilmsSettings_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRow this[int index] {
+                get {
+                    return ((UsersRow)(this.Rows[index]));
+                }
+            }
+            
+            public event UsersRowChangeEventHandler UsersRowChanging;
+            
+            public event UsersRowChangeEventHandler UsersRowChanged;
+            
+            public event UsersRowChangeEventHandler UsersRowDeleting;
+            
+            public event UsersRowChangeEventHandler UsersRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddUsersRow(UsersRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRow AddUsersRow(MyFilmsSettingsRow parentMyFilmsSettingsRowByMyFilmsSettings_Users) {
+                UsersRow rowUsersRow = ((UsersRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null};
+                if ((parentMyFilmsSettingsRowByMyFilmsSettings_Users != null)) {
+                    columnValuesArray[1] = parentMyFilmsSettingsRowByMyFilmsSettings_Users[0];
+                }
+                rowUsersRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUsersRow);
+                return rowUsersRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                UsersDataTable cln = ((UsersDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new UsersDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnUsers_Id = base.Columns["Users_Id"];
+                this.columnMyFilmsSettings_Id = base.Columns["MyFilmsSettings_Id"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnUsers_Id = new global::System.Data.DataColumn("Users_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnUsers_Id);
+                this.columnMyFilmsSettings_Id = new global::System.Data.DataColumn("MyFilmsSettings_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnMyFilmsSettings_Id);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnUsers_Id}, true));
+                this.columnUsers_Id.AutoIncrement = true;
+                this.columnUsers_Id.AllowDBNull = false;
+                this.columnUsers_Id.Unique = true;
+                this.columnUsers_Id.Namespace = "";
+                this.columnMyFilmsSettings_Id.Namespace = "";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRow NewUsersRow() {
+                return ((UsersRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new UsersRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(UsersRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.UsersRowChanged != null)) {
+                    this.UsersRowChanged(this, new UsersRowChangeEvent(((UsersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.UsersRowChanging != null)) {
+                    this.UsersRowChanging(this, new UsersRowChangeEvent(((UsersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.UsersRowDeleted != null)) {
+                    this.UsersRowDeleted(this, new UsersRowChangeEvent(((UsersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.UsersRowDeleting != null)) {
+                    this.UsersRowDeleting(this, new UsersRowChangeEvent(((UsersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveUsersRow(UsersRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                AntMovieCatalog ds = new AntMovieCatalog();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "UsersDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class UserDataTable : global::System.Data.TypedTableBase<UserRow> {
+            
+            private global::System.Data.DataColumn columnName;
+            
+            private global::System.Data.DataColumn columnAlias;
+            
+            private global::System.Data.DataColumn columnTraktName;
+            
+            private global::System.Data.DataColumn columnAge;
+            
+            private global::System.Data.DataColumn columnUsers_Id;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserDataTable() {
+                this.TableName = "User";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal UserDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected UserDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NameColumn {
+                get {
+                    return this.columnName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AliasColumn {
+                get {
+                    return this.columnAlias;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TraktNameColumn {
+                get {
+                    return this.columnTraktName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AgeColumn {
+                get {
+                    return this.columnAge;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Users_IdColumn {
+                get {
+                    return this.columnUsers_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserRow this[int index] {
+                get {
+                    return ((UserRow)(this.Rows[index]));
+                }
+            }
+            
+            public event UserRowChangeEventHandler UserRowChanging;
+            
+            public event UserRowChangeEventHandler UserRowChanged;
+            
+            public event UserRowChangeEventHandler UserRowDeleting;
+            
+            public event UserRowChangeEventHandler UserRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddUserRow(UserRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserRow AddUserRow(string Name, string _Alias, string TraktName, string Age, UsersRow parentUsersRowByUsers_User) {
+                UserRow rowUserRow = ((UserRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Name,
+                        _Alias,
+                        TraktName,
+                        Age,
+                        null};
+                if ((parentUsersRowByUsers_User != null)) {
+                    columnValuesArray[4] = parentUsersRowByUsers_User[0];
+                }
+                rowUserRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUserRow);
+                return rowUserRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                UserDataTable cln = ((UserDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new UserDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnName = base.Columns["Name"];
+                this.columnAlias = base.Columns["Alias"];
+                this.columnTraktName = base.Columns["TraktName"];
+                this.columnAge = base.Columns["Age"];
+                this.columnUsers_Id = base.Columns["Users_Id"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnName);
+                this.columnAlias = new global::System.Data.DataColumn("Alias", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnAlias.ExtendedProperties.Add("Generator_ColumnPropNameInRow", "_Alias");
+                this.columnAlias.ExtendedProperties.Add("Generator_UserColumnName", "Alias");
+                base.Columns.Add(this.columnAlias);
+                this.columnTraktName = new global::System.Data.DataColumn("TraktName", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnTraktName);
+                this.columnAge = new global::System.Data.DataColumn("Age", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnAge);
+                this.columnUsers_Id = new global::System.Data.DataColumn("Users_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnUsers_Id);
+                this.columnName.Namespace = "";
+                this.columnAlias.Namespace = "";
+                this.columnTraktName.Namespace = "";
+                this.columnAge.Namespace = "";
+                this.columnUsers_Id.Namespace = "";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserRow NewUserRow() {
+                return ((UserRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new UserRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(UserRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.UserRowChanged != null)) {
+                    this.UserRowChanged(this, new UserRowChangeEvent(((UserRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.UserRowChanging != null)) {
+                    this.UserRowChanging(this, new UserRowChangeEvent(((UserRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.UserRowDeleted != null)) {
+                    this.UserRowDeleted(this, new UserRowChangeEvent(((UserRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.UserRowDeleting != null)) {
+                    this.UserRowDeleting(this, new UserRowChangeEvent(((UserRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveUserRow(UserRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                AntMovieCatalog ds = new AntMovieCatalog();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "UserDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4874,6 +5792,16 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRow[] GetMyFilmsSettingsRows() {
+                if ((this.Table.ChildRelations["Catalog_MyFilmsSettings"] == null)) {
+                    return new MyFilmsSettingsRow[0];
+                }
+                else {
+                    return ((MyFilmsSettingsRow[])(base.GetChildRows(this.Table.ChildRelations["Catalog_MyFilmsSettings"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CustomFieldsPropertiesRow[] GetCustomFieldsPropertiesRows() {
                 if ((this.Table.ChildRelations["Catalog_CustomFieldsProperties"] == null)) {
                     return new CustomFieldsPropertiesRow[0];
@@ -5051,6 +5979,296 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetCatalog_IdNull() {
                 this[this.tableProperties.Catalog_IdColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class MyFilmsSettingsRow : global::System.Data.DataRow {
+            
+            private MyFilmsSettingsDataTable tableMyFilmsSettings;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal MyFilmsSettingsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMyFilmsSettings = ((MyFilmsSettingsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MyFilmsSettings_Id {
+                get {
+                    return ((int)(this[this.tableMyFilmsSettings.MyFilmsSettings_IdColumn]));
+                }
+                set {
+                    this[this.tableMyFilmsSettings.MyFilmsSettings_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Catalog_Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableMyFilmsSettings.Catalog_IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Catalog_Id in Tabelle MyFilmsSettings ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMyFilmsSettings.Catalog_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CatalogRow CatalogRow {
+                get {
+                    return ((CatalogRow)(this.GetParentRow(this.Table.ParentRelations["Catalog_MyFilmsSettings"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Catalog_MyFilmsSettings"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCatalog_IdNull() {
+                return this.IsNull(this.tableMyFilmsSettings.Catalog_IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCatalog_IdNull() {
+                this[this.tableMyFilmsSettings.Catalog_IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRow[] GetUsersRows() {
+                if ((this.Table.ChildRelations["MyFilmsSettings_Users"] == null)) {
+                    return new UsersRow[0];
+                }
+                else {
+                    return ((UsersRow[])(base.GetChildRows(this.Table.ChildRelations["MyFilmsSettings_Users"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class UsersRow : global::System.Data.DataRow {
+            
+            private UsersDataTable tableUsers;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal UsersRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUsers = ((UsersDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Users_Id {
+                get {
+                    return ((int)(this[this.tableUsers.Users_IdColumn]));
+                }
+                set {
+                    this[this.tableUsers.Users_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MyFilmsSettings_Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableUsers.MyFilmsSettings_IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte MyFilmsSettings_Id in Tabelle Users ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUsers.MyFilmsSettings_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRow MyFilmsSettingsRow {
+                get {
+                    return ((MyFilmsSettingsRow)(this.GetParentRow(this.Table.ParentRelations["MyFilmsSettings_Users"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MyFilmsSettings_Users"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMyFilmsSettings_IdNull() {
+                return this.IsNull(this.tableUsers.MyFilmsSettings_IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMyFilmsSettings_IdNull() {
+                this[this.tableUsers.MyFilmsSettings_IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserRow[] GetUserRows() {
+                if ((this.Table.ChildRelations["Users_User"] == null)) {
+                    return new UserRow[0];
+                }
+                else {
+                    return ((UserRow[])(base.GetChildRows(this.Table.ChildRelations["Users_User"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class UserRow : global::System.Data.DataRow {
+            
+            private UserDataTable tableUser;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal UserRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUser = ((UserDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Name in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string _Alias {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.AliasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Alias in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.AliasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TraktName {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.TraktNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte TraktName in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.TraktNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Age {
+                get {
+                    try {
+                        return ((string)(this[this.tableUser.AgeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Age in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.AgeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Users_Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableUser.Users_IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Users_Id in Tabelle User ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUser.Users_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRow UsersRow {
+                get {
+                    return ((UsersRow)(this.GetParentRow(this.Table.ParentRelations["Users_User"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Users_User"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNameNull() {
+                return this.IsNull(this.tableUser.NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNameNull() {
+                this[this.tableUser.NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Is_AliasNull() {
+                return this.IsNull(this.tableUser.AliasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Set_AliasNull() {
+                this[this.tableUser.AliasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTraktNameNull() {
+                return this.IsNull(this.tableUser.TraktNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTraktNameNull() {
+                this[this.tableUser.TraktNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAgeNull() {
+                return this.IsNull(this.tableUser.AgeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAgeNull() {
+                this[this.tableUser.AgeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUsers_IdNull() {
+                return this.IsNull(this.tableUser.Users_IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUsers_IdNull() {
+                this[this.tableUser.Users_IdColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8229,6 +9447,99 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PropertiesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class MyFilmsSettingsRowChangeEvent : global::System.EventArgs {
+            
+            private MyFilmsSettingsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRowChangeEvent(MyFilmsSettingsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MyFilmsSettingsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class UsersRowChangeEvent : global::System.EventArgs {
+            
+            private UsersRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRowChangeEvent(UsersRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UsersRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class UserRowChangeEvent : global::System.EventArgs {
+            
+            private UserRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserRowChangeEvent(UserRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UserRow Row {
                 get {
                     return this.eventRow;
                 }

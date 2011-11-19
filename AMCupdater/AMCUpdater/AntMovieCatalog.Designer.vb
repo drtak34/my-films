@@ -30,11 +30,17 @@ Partial Public Class AntMovieCatalog
     
     Private tableProperties As PropertiesDataTable
     
+    Private tableMyFilmsSettings As MyFilmsSettingsDataTable
+    
+    Private tableUsers As UsersDataTable
+    
+    Private tableUser As UserDataTable
+    
     Private tableCustomFieldsProperties As CustomFieldsPropertiesDataTable
     
     Private tableCustomField As CustomFieldDataTable
     
-    Private tableListItem As ListItemDataTable
+    Private tableListValue As ListValueDataTable
     
     Private tableContents As ContentsDataTable
     
@@ -46,19 +52,19 @@ Partial Public Class AntMovieCatalog
     
     Private tablePerson As PersonDataTable
     
-    Private tableMyFilmsSettings As MyFilmsSettingsDataTable
-    
-    Private tableUsers As UsersDataTable
-    
-    Private tableUser As UserDataTable
-    
     Private relationCatalog_Properties As Global.System.Data.DataRelation
+    
+    Private relationCatalog_MyFilmsSettings As Global.System.Data.DataRelation
+    
+    Private relationMyFilmsSettings_Users As Global.System.Data.DataRelation
+    
+    Private relationUsers_User As Global.System.Data.DataRelation
     
     Private relationCatalog_CustomFieldsProperties As Global.System.Data.DataRelation
     
     Private relationCustomFieldsProperties_CustomField As Global.System.Data.DataRelation
     
-    Private relationCustomField_ListItem As Global.System.Data.DataRelation
+    Private relationCustomField_ListValue As Global.System.Data.DataRelation
     
     Private relationCatalog_Contents As Global.System.Data.DataRelation
     
@@ -69,12 +75,6 @@ Partial Public Class AntMovieCatalog
     Private relationCatalog_Persons As Global.System.Data.DataRelation
     
     Private relationPersons_Person As Global.System.Data.DataRelation
-    
-    Private relationCatalog_MyFilmsSettings As Global.System.Data.DataRelation
-    
-    Private relationMyFilmsSettings_Users As Global.System.Data.DataRelation
-    
-    Private relationUsers_User As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -113,14 +113,23 @@ Partial Public Class AntMovieCatalog
             If (Not (ds.Tables("Properties")) Is Nothing) Then
                 MyBase.Tables.Add(New PropertiesDataTable(ds.Tables("Properties")))
             End If
+            If (Not (ds.Tables("MyFilmsSettings")) Is Nothing) Then
+                MyBase.Tables.Add(New MyFilmsSettingsDataTable(ds.Tables("MyFilmsSettings")))
+            End If
+            If (Not (ds.Tables("Users")) Is Nothing) Then
+                MyBase.Tables.Add(New UsersDataTable(ds.Tables("Users")))
+            End If
+            If (Not (ds.Tables("User")) Is Nothing) Then
+                MyBase.Tables.Add(New UserDataTable(ds.Tables("User")))
+            End If
             If (Not (ds.Tables("CustomFieldsProperties")) Is Nothing) Then
                 MyBase.Tables.Add(New CustomFieldsPropertiesDataTable(ds.Tables("CustomFieldsProperties")))
             End If
             If (Not (ds.Tables("CustomField")) Is Nothing) Then
                 MyBase.Tables.Add(New CustomFieldDataTable(ds.Tables("CustomField")))
             End If
-            If (Not (ds.Tables("ListItem")) Is Nothing) Then
-                MyBase.Tables.Add(New ListItemDataTable(ds.Tables("ListItem")))
+            If (Not (ds.Tables("ListValue")) Is Nothing) Then
+                MyBase.Tables.Add(New ListValueDataTable(ds.Tables("ListValue")))
             End If
             If (Not (ds.Tables("Contents")) Is Nothing) Then
                 MyBase.Tables.Add(New ContentsDataTable(ds.Tables("Contents")))
@@ -136,15 +145,6 @@ Partial Public Class AntMovieCatalog
             End If
             If (Not (ds.Tables("Person")) Is Nothing) Then
                 MyBase.Tables.Add(New PersonDataTable(ds.Tables("Person")))
-            End If
-            If (Not (ds.Tables("MyFilmsSettings")) Is Nothing) Then
-                MyBase.Tables.Add(New MyFilmsSettingsDataTable(ds.Tables("MyFilmsSettings")))
-            End If
-            If (Not (ds.Tables("Users")) Is Nothing) Then
-                MyBase.Tables.Add(New UsersDataTable(ds.Tables("Users")))
-            End If
-            If (Not (ds.Tables("User")) Is Nothing) Then
-                MyBase.Tables.Add(New UserDataTable(ds.Tables("User")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -185,6 +185,33 @@ Partial Public Class AntMovieCatalog
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property MyFilmsSettings() As MyFilmsSettingsDataTable
+        Get
+            Return Me.tableMyFilmsSettings
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property Users() As UsersDataTable
+        Get
+            Return Me.tableUsers
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property User() As UserDataTable
+        Get
+            Return Me.tableUser
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
     Public ReadOnly Property CustomFieldsProperties() As CustomFieldsPropertiesDataTable
         Get
             Return Me.tableCustomFieldsProperties
@@ -203,9 +230,9 @@ Partial Public Class AntMovieCatalog
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property ListItem() As ListItemDataTable
+    Public ReadOnly Property ListValue() As ListValueDataTable
         Get
-            Return Me.tableListItem
+            Return Me.tableListValue
         End Get
     End Property
     
@@ -251,33 +278,6 @@ Partial Public Class AntMovieCatalog
     Public ReadOnly Property Person() As PersonDataTable
         Get
             Return Me.tablePerson
-        End Get
-    End Property
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.ComponentModel.Browsable(false),  _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property MyFilmsSettings() As MyFilmsSettingsDataTable
-        Get
-            Return Me.tableMyFilmsSettings
-        End Get
-    End Property
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.ComponentModel.Browsable(false),  _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property Users() As UsersDataTable
-        Get
-            Return Me.tableUsers
-        End Get
-    End Property
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.ComponentModel.Browsable(false),  _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property User() As UserDataTable
-        Get
-            Return Me.tableUser
         End Get
     End Property
     
@@ -347,14 +347,23 @@ Partial Public Class AntMovieCatalog
             If (Not (ds.Tables("Properties")) Is Nothing) Then
                 MyBase.Tables.Add(New PropertiesDataTable(ds.Tables("Properties")))
             End If
+            If (Not (ds.Tables("MyFilmsSettings")) Is Nothing) Then
+                MyBase.Tables.Add(New MyFilmsSettingsDataTable(ds.Tables("MyFilmsSettings")))
+            End If
+            If (Not (ds.Tables("Users")) Is Nothing) Then
+                MyBase.Tables.Add(New UsersDataTable(ds.Tables("Users")))
+            End If
+            If (Not (ds.Tables("User")) Is Nothing) Then
+                MyBase.Tables.Add(New UserDataTable(ds.Tables("User")))
+            End If
             If (Not (ds.Tables("CustomFieldsProperties")) Is Nothing) Then
                 MyBase.Tables.Add(New CustomFieldsPropertiesDataTable(ds.Tables("CustomFieldsProperties")))
             End If
             If (Not (ds.Tables("CustomField")) Is Nothing) Then
                 MyBase.Tables.Add(New CustomFieldDataTable(ds.Tables("CustomField")))
             End If
-            If (Not (ds.Tables("ListItem")) Is Nothing) Then
-                MyBase.Tables.Add(New ListItemDataTable(ds.Tables("ListItem")))
+            If (Not (ds.Tables("ListValue")) Is Nothing) Then
+                MyBase.Tables.Add(New ListValueDataTable(ds.Tables("ListValue")))
             End If
             If (Not (ds.Tables("Contents")) Is Nothing) Then
                 MyBase.Tables.Add(New ContentsDataTable(ds.Tables("Contents")))
@@ -370,15 +379,6 @@ Partial Public Class AntMovieCatalog
             End If
             If (Not (ds.Tables("Person")) Is Nothing) Then
                 MyBase.Tables.Add(New PersonDataTable(ds.Tables("Person")))
-            End If
-            If (Not (ds.Tables("MyFilmsSettings")) Is Nothing) Then
-                MyBase.Tables.Add(New MyFilmsSettingsDataTable(ds.Tables("MyFilmsSettings")))
-            End If
-            If (Not (ds.Tables("Users")) Is Nothing) Then
-                MyBase.Tables.Add(New UsersDataTable(ds.Tables("Users")))
-            End If
-            If (Not (ds.Tables("User")) Is Nothing) Then
-                MyBase.Tables.Add(New UserDataTable(ds.Tables("User")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -421,6 +421,24 @@ Partial Public Class AntMovieCatalog
                 Me.tableProperties.InitVars
             End If
         End If
+        Me.tableMyFilmsSettings = CType(MyBase.Tables("MyFilmsSettings"),MyFilmsSettingsDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableMyFilmsSettings) Is Nothing) Then
+                Me.tableMyFilmsSettings.InitVars
+            End If
+        End If
+        Me.tableUsers = CType(MyBase.Tables("Users"),UsersDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableUsers) Is Nothing) Then
+                Me.tableUsers.InitVars
+            End If
+        End If
+        Me.tableUser = CType(MyBase.Tables("User"),UserDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableUser) Is Nothing) Then
+                Me.tableUser.InitVars
+            End If
+        End If
         Me.tableCustomFieldsProperties = CType(MyBase.Tables("CustomFieldsProperties"),CustomFieldsPropertiesDataTable)
         If (initTable = true) Then
             If (Not (Me.tableCustomFieldsProperties) Is Nothing) Then
@@ -433,10 +451,10 @@ Partial Public Class AntMovieCatalog
                 Me.tableCustomField.InitVars
             End If
         End If
-        Me.tableListItem = CType(MyBase.Tables("ListItem"),ListItemDataTable)
+        Me.tableListValue = CType(MyBase.Tables("ListValue"),ListValueDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableListItem) Is Nothing) Then
-                Me.tableListItem.InitVars
+            If (Not (Me.tableListValue) Is Nothing) Then
+                Me.tableListValue.InitVars
             End If
         End If
         Me.tableContents = CType(MyBase.Tables("Contents"),ContentsDataTable)
@@ -469,36 +487,18 @@ Partial Public Class AntMovieCatalog
                 Me.tablePerson.InitVars
             End If
         End If
-        Me.tableMyFilmsSettings = CType(MyBase.Tables("MyFilmsSettings"),MyFilmsSettingsDataTable)
-        If (initTable = true) Then
-            If (Not (Me.tableMyFilmsSettings) Is Nothing) Then
-                Me.tableMyFilmsSettings.InitVars
-            End If
-        End If
-        Me.tableUsers = CType(MyBase.Tables("Users"),UsersDataTable)
-        If (initTable = true) Then
-            If (Not (Me.tableUsers) Is Nothing) Then
-                Me.tableUsers.InitVars
-            End If
-        End If
-        Me.tableUser = CType(MyBase.Tables("User"),UserDataTable)
-        If (initTable = true) Then
-            If (Not (Me.tableUser) Is Nothing) Then
-                Me.tableUser.InitVars
-            End If
-        End If
         Me.relationCatalog_Properties = Me.Relations("Catalog_Properties")
+        Me.relationCatalog_MyFilmsSettings = Me.Relations("Catalog_MyFilmsSettings")
+        Me.relationMyFilmsSettings_Users = Me.Relations("MyFilmsSettings_Users")
+        Me.relationUsers_User = Me.Relations("Users_User")
         Me.relationCatalog_CustomFieldsProperties = Me.Relations("Catalog_CustomFieldsProperties")
         Me.relationCustomFieldsProperties_CustomField = Me.Relations("CustomFieldsProperties_CustomField")
-        Me.relationCustomField_ListItem = Me.Relations("CustomField_ListItem")
+        Me.relationCustomField_ListValue = Me.Relations("CustomField_ListValue")
         Me.relationCatalog_Contents = Me.Relations("Catalog_Contents")
         Me.relationContents_Movie = Me.Relations("Contents_Movie")
         Me.relationMovie_CustomFields = Me.Relations("Movie_CustomFields")
         Me.relationCatalog_Persons = Me.Relations("Catalog_Persons")
         Me.relationPersons_Person = Me.Relations("Persons_Person")
-        Me.relationCatalog_MyFilmsSettings = Me.Relations("Catalog_MyFilmsSettings")
-        Me.relationMyFilmsSettings_Users = Me.Relations("MyFilmsSettings_Users")
-        Me.relationUsers_User = Me.Relations("Users_User")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -511,12 +511,18 @@ Partial Public Class AntMovieCatalog
         MyBase.Tables.Add(Me.tableCatalog)
         Me.tableProperties = New PropertiesDataTable
         MyBase.Tables.Add(Me.tableProperties)
+        Me.tableMyFilmsSettings = New MyFilmsSettingsDataTable
+        MyBase.Tables.Add(Me.tableMyFilmsSettings)
+        Me.tableUsers = New UsersDataTable
+        MyBase.Tables.Add(Me.tableUsers)
+        Me.tableUser = New UserDataTable
+        MyBase.Tables.Add(Me.tableUser)
         Me.tableCustomFieldsProperties = New CustomFieldsPropertiesDataTable
         MyBase.Tables.Add(Me.tableCustomFieldsProperties)
         Me.tableCustomField = New CustomFieldDataTable
         MyBase.Tables.Add(Me.tableCustomField)
-        Me.tableListItem = New ListItemDataTable
-        MyBase.Tables.Add(Me.tableListItem)
+        Me.tableListValue = New ListValueDataTable
+        MyBase.Tables.Add(Me.tableListValue)
         Me.tableContents = New ContentsDataTable
         MyBase.Tables.Add(Me.tableContents)
         Me.tableMovie = New MovieDataTable(false)
@@ -527,15 +533,24 @@ Partial Public Class AntMovieCatalog
         MyBase.Tables.Add(Me.tablePersons)
         Me.tablePerson = New PersonDataTable
         MyBase.Tables.Add(Me.tablePerson)
-        Me.tableMyFilmsSettings = New MyFilmsSettingsDataTable
-        MyBase.Tables.Add(Me.tableMyFilmsSettings)
-        Me.tableUsers = New UsersDataTable
-        MyBase.Tables.Add(Me.tableUsers)
-        Me.tableUser = New UserDataTable
-        MyBase.Tables.Add(Me.tableUser)
         Dim fkc As Global.System.Data.ForeignKeyConstraint
         fkc = New Global.System.Data.ForeignKeyConstraint("Catalog_Properties", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableProperties.Catalog_IdColumn})
         Me.tableProperties.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
+        fkc = New Global.System.Data.ForeignKeyConstraint("Catalog_MyFilmsSettings", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.Catalog_IdColumn})
+        Me.tableMyFilmsSettings.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
+        fkc = New Global.System.Data.ForeignKeyConstraint("MyFilmsSettings_Users", New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUsers.MyFilmsSettings_IdColumn})
+        Me.tableUsers.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
+        fkc = New Global.System.Data.ForeignKeyConstraint("Users_User", New Global.System.Data.DataColumn() {Me.tableUsers.Users_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUser.Users_IdColumn})
+        Me.tableUser.Constraints.Add(fkc)
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
@@ -549,8 +564,8 @@ Partial Public Class AntMovieCatalog
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
-        fkc = New Global.System.Data.ForeignKeyConstraint("CustomField_ListItem", New Global.System.Data.DataColumn() {Me.tableCustomField.CustomField_IdColumn}, New Global.System.Data.DataColumn() {Me.tableListItem.CustomField_IdColumn})
-        Me.tableListItem.Constraints.Add(fkc)
+        fkc = New Global.System.Data.ForeignKeyConstraint("CustomField_ListValue", New Global.System.Data.DataColumn() {Me.tableCustomField.CustomField_IdColumn}, New Global.System.Data.DataColumn() {Me.tableListValue.CustomField_IdColumn})
+        Me.tableListValue.Constraints.Add(fkc)
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
@@ -579,33 +594,27 @@ Partial Public Class AntMovieCatalog
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
-        fkc = New Global.System.Data.ForeignKeyConstraint("Catalog_MyFilmsSettings", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.Catalog_IdColumn})
-        Me.tableMyFilmsSettings.Constraints.Add(fkc)
-        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
-        fkc.DeleteRule = Global.System.Data.Rule.Cascade
-        fkc.UpdateRule = Global.System.Data.Rule.Cascade
-        fkc = New Global.System.Data.ForeignKeyConstraint("MyFilmsSettings_Users", New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUsers.MyFilmsSettings_IdColumn})
-        Me.tableUsers.Constraints.Add(fkc)
-        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
-        fkc.DeleteRule = Global.System.Data.Rule.Cascade
-        fkc.UpdateRule = Global.System.Data.Rule.Cascade
-        fkc = New Global.System.Data.ForeignKeyConstraint("Users_User", New Global.System.Data.DataColumn() {Me.tableUsers.Users_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUser.Users_IdColumn})
-        Me.tableUser.Constraints.Add(fkc)
-        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
-        fkc.DeleteRule = Global.System.Data.Rule.Cascade
-        fkc.UpdateRule = Global.System.Data.Rule.Cascade
         Me.relationCatalog_Properties = New Global.System.Data.DataRelation("Catalog_Properties", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableProperties.Catalog_IdColumn}, false)
         Me.relationCatalog_Properties.Nested = true
         Me.Relations.Add(Me.relationCatalog_Properties)
+        Me.relationCatalog_MyFilmsSettings = New Global.System.Data.DataRelation("Catalog_MyFilmsSettings", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.Catalog_IdColumn}, false)
+        Me.relationCatalog_MyFilmsSettings.Nested = true
+        Me.Relations.Add(Me.relationCatalog_MyFilmsSettings)
+        Me.relationMyFilmsSettings_Users = New Global.System.Data.DataRelation("MyFilmsSettings_Users", New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUsers.MyFilmsSettings_IdColumn}, false)
+        Me.relationMyFilmsSettings_Users.Nested = true
+        Me.Relations.Add(Me.relationMyFilmsSettings_Users)
+        Me.relationUsers_User = New Global.System.Data.DataRelation("Users_User", New Global.System.Data.DataColumn() {Me.tableUsers.Users_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUser.Users_IdColumn}, false)
+        Me.relationUsers_User.Nested = true
+        Me.Relations.Add(Me.relationUsers_User)
         Me.relationCatalog_CustomFieldsProperties = New Global.System.Data.DataRelation("Catalog_CustomFieldsProperties", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableCustomFieldsProperties.Catalog_IdColumn}, false)
         Me.relationCatalog_CustomFieldsProperties.Nested = true
         Me.Relations.Add(Me.relationCatalog_CustomFieldsProperties)
         Me.relationCustomFieldsProperties_CustomField = New Global.System.Data.DataRelation("CustomFieldsProperties_CustomField", New Global.System.Data.DataColumn() {Me.tableCustomFieldsProperties.CustomFieldsProperties_IdColumn}, New Global.System.Data.DataColumn() {Me.tableCustomField.CustomFieldsProperties_IdColumn}, false)
         Me.relationCustomFieldsProperties_CustomField.Nested = true
         Me.Relations.Add(Me.relationCustomFieldsProperties_CustomField)
-        Me.relationCustomField_ListItem = New Global.System.Data.DataRelation("CustomField_ListItem", New Global.System.Data.DataColumn() {Me.tableCustomField.CustomField_IdColumn}, New Global.System.Data.DataColumn() {Me.tableListItem.CustomField_IdColumn}, false)
-        Me.relationCustomField_ListItem.Nested = true
-        Me.Relations.Add(Me.relationCustomField_ListItem)
+        Me.relationCustomField_ListValue = New Global.System.Data.DataRelation("CustomField_ListValue", New Global.System.Data.DataColumn() {Me.tableCustomField.CustomField_IdColumn}, New Global.System.Data.DataColumn() {Me.tableListValue.CustomField_IdColumn}, false)
+        Me.relationCustomField_ListValue.Nested = true
+        Me.Relations.Add(Me.relationCustomField_ListValue)
         Me.relationCatalog_Contents = New Global.System.Data.DataRelation("Catalog_Contents", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableContents.Catalog_IdColumn}, false)
         Me.relationCatalog_Contents.Nested = true
         Me.Relations.Add(Me.relationCatalog_Contents)
@@ -621,15 +630,6 @@ Partial Public Class AntMovieCatalog
         Me.relationPersons_Person = New Global.System.Data.DataRelation("Persons_Person", New Global.System.Data.DataColumn() {Me.tablePersons.Persons_IdColumn}, New Global.System.Data.DataColumn() {Me.tablePerson.Persons_IdColumn}, false)
         Me.relationPersons_Person.Nested = true
         Me.Relations.Add(Me.relationPersons_Person)
-        Me.relationCatalog_MyFilmsSettings = New Global.System.Data.DataRelation("Catalog_MyFilmsSettings", New Global.System.Data.DataColumn() {Me.tableCatalog.Catalog_IdColumn}, New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.Catalog_IdColumn}, false)
-        Me.relationCatalog_MyFilmsSettings.Nested = true
-        Me.Relations.Add(Me.relationCatalog_MyFilmsSettings)
-        Me.relationMyFilmsSettings_Users = New Global.System.Data.DataRelation("MyFilmsSettings_Users", New Global.System.Data.DataColumn() {Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUsers.MyFilmsSettings_IdColumn}, false)
-        Me.relationMyFilmsSettings_Users.Nested = true
-        Me.Relations.Add(Me.relationMyFilmsSettings_Users)
-        Me.relationUsers_User = New Global.System.Data.DataRelation("Users_User", New Global.System.Data.DataColumn() {Me.tableUsers.Users_IdColumn}, New Global.System.Data.DataColumn() {Me.tableUser.Users_IdColumn}, false)
-        Me.relationUsers_User.Nested = true
-        Me.Relations.Add(Me.relationUsers_User)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -639,6 +639,21 @@ Partial Public Class AntMovieCatalog
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Private Function ShouldSerializeProperties() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializeMyFilmsSettings() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializeUsers() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializeUser() As Boolean
         Return false
     End Function
     
@@ -653,7 +668,7 @@ Partial Public Class AntMovieCatalog
     End Function
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-    Private Function ShouldSerializeListItem() As Boolean
+    Private Function ShouldSerializeListValue() As Boolean
         Return false
     End Function
     
@@ -679,21 +694,6 @@ Partial Public Class AntMovieCatalog
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Private Function ShouldSerializePerson() As Boolean
-        Return false
-    End Function
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-    Private Function ShouldSerializeMyFilmsSettings() As Boolean
-        Return false
-    End Function
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-    Private Function ShouldSerializeUsers() As Boolean
-        Return false
-    End Function
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-    Private Function ShouldSerializeUser() As Boolean
         Return false
     End Function
     
@@ -757,17 +757,25 @@ Partial Public Class AntMovieCatalog
     Private Sub InitExpressions()
         Me.Movie.DateAddedColumn.Expression = "Convert(Date,'System.DateTime')"
         Me.Movie.Length_NumColumn.Expression = "Convert(Length,'System.Int32')"
+        Me.Movie.PersonsColumn.Expression = "ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') "& _ 
+            "+ ', ' + ISNULL(Writer, ' ')"
     End Sub
     
     Public Delegate Sub CatalogRowChangeEventHandler(ByVal sender As Object, ByVal e As CatalogRowChangeEvent)
     
     Public Delegate Sub PropertiesRowChangeEventHandler(ByVal sender As Object, ByVal e As PropertiesRowChangeEvent)
     
+    Public Delegate Sub MyFilmsSettingsRowChangeEventHandler(ByVal sender As Object, ByVal e As MyFilmsSettingsRowChangeEvent)
+    
+    Public Delegate Sub UsersRowChangeEventHandler(ByVal sender As Object, ByVal e As UsersRowChangeEvent)
+    
+    Public Delegate Sub UserRowChangeEventHandler(ByVal sender As Object, ByVal e As UserRowChangeEvent)
+    
     Public Delegate Sub CustomFieldsPropertiesRowChangeEventHandler(ByVal sender As Object, ByVal e As CustomFieldsPropertiesRowChangeEvent)
     
     Public Delegate Sub CustomFieldRowChangeEventHandler(ByVal sender As Object, ByVal e As CustomFieldRowChangeEvent)
     
-    Public Delegate Sub ListItemRowChangeEventHandler(ByVal sender As Object, ByVal e As ListItemRowChangeEvent)
+    Public Delegate Sub ListValueRowChangeEventHandler(ByVal sender As Object, ByVal e As ListValueRowChangeEvent)
     
     Public Delegate Sub ContentsRowChangeEventHandler(ByVal sender As Object, ByVal e As ContentsRowChangeEvent)
     
@@ -779,12 +787,6 @@ Partial Public Class AntMovieCatalog
     
     Public Delegate Sub PersonRowChangeEventHandler(ByVal sender As Object, ByVal e As PersonRowChangeEvent)
     
-    Public Delegate Sub MyFilmsSettingsRowChangeEventHandler(ByVal sender As Object, ByVal e As MyFilmsSettingsRowChangeEvent)
-    
-    Public Delegate Sub UsersRowChangeEventHandler(ByVal sender As Object, ByVal e As UsersRowChangeEvent)
-    
-    Public Delegate Sub UserRowChangeEventHandler(ByVal sender As Object, ByVal e As UserRowChangeEvent)
-    
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
@@ -793,6 +795,8 @@ Partial Public Class AntMovieCatalog
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class CatalogDataTable
         Inherits Global.System.Data.TypedTableBase(Of CatalogRow)
+        
+        Private columnAntMovieCatalog_Id As Global.System.Data.DataColumn
         
         Private columnCatalog_Id As Global.System.Data.DataColumn
         
@@ -827,6 +831,13 @@ Partial Public Class AntMovieCatalog
             MyBase.New(info, context)
             Me.InitVars
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AntMovieCatalog_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAntMovieCatalog_Id
+            End Get
+        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
@@ -864,9 +875,9 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddCatalogRow() As CatalogRow
+        Public Overloads Function AddCatalogRow(ByVal AntMovieCatalog_Id As Integer) As CatalogRow
             Dim rowCatalogRow As CatalogRow = CType(Me.NewRow,CatalogRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing}
+            Dim columnValuesArray() As Object = New Object() {AntMovieCatalog_Id, Nothing}
             rowCatalogRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCatalogRow)
             Return rowCatalogRow
@@ -886,14 +897,18 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Friend Sub InitVars()
+            Me.columnAntMovieCatalog_Id = MyBase.Columns("AntMovieCatalog_Id")
             Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Private Sub InitClass()
+            Me.columnAntMovieCatalog_Id = New Global.System.Data.DataColumn("AntMovieCatalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnAntMovieCatalog_Id)
             Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnCatalog_Id)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnCatalog_Id}, true))
+            Me.columnAntMovieCatalog_Id.Namespace = ""
             Me.columnCatalog_Id.AutoIncrement = true
             Me.columnCatalog_Id.AllowDBNull = false
             Me.columnCatalog_Id.Unique = true
@@ -1137,7 +1152,7 @@ Partial Public Class AntMovieCatalog
             Dim rowPropertiesRow As PropertiesRow = CType(Me.NewRow,PropertiesRow)
             Dim columnValuesArray() As Object = New Object() {Owner, Mail, Site, Description, Nothing}
             If (Not (parentCatalogRowByCatalog_Properties) Is Nothing) Then
-                columnValuesArray(4) = parentCatalogRowByCatalog_Properties(0)
+                columnValuesArray(4) = parentCatalogRowByCatalog_Properties(1)
             End If
             rowPropertiesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPropertiesRow)
@@ -1308,3142 +1323,6 @@ Partial Public Class AntMovieCatalog
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
      Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class CustomFieldsPropertiesDataTable
-        Inherits Global.System.Data.TypedTableBase(Of CustomFieldsPropertiesRow)
-        
-        Private columnColumnSettings As Global.System.Data.DataColumn
-        
-        Private columnGUIProperties As Global.System.Data.DataColumn
-        
-        Private columnOtherProperties As Global.System.Data.DataColumn
-        
-        Private columnCustomFieldsProperties_Id As Global.System.Data.DataColumn
-        
-        Private columnCatalog_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "CustomFieldsProperties"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property ColumnSettingsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnColumnSettings
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property GUIPropertiesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnGUIProperties
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property OtherPropertiesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnOtherProperties
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CustomFieldsProperties_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCustomFieldsProperties_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCatalog_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As CustomFieldsPropertiesRow
-            Get
-                Return CType(Me.Rows(index),CustomFieldsPropertiesRow)
-            End Get
-        End Property
-        
-        Public Event CustomFieldsPropertiesRowChanging As CustomFieldsPropertiesRowChangeEventHandler
-        
-        Public Event CustomFieldsPropertiesRowChanged As CustomFieldsPropertiesRowChangeEventHandler
-        
-        Public Event CustomFieldsPropertiesRowDeleting As CustomFieldsPropertiesRowChangeEventHandler
-        
-        Public Event CustomFieldsPropertiesRowDeleted As CustomFieldsPropertiesRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddCustomFieldsPropertiesRow(ByVal row As CustomFieldsPropertiesRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddCustomFieldsPropertiesRow(ByVal ColumnSettings As String, ByVal GUIProperties As String, ByVal OtherProperties As String, ByVal parentCatalogRowByCatalog_CustomFieldsProperties As CatalogRow) As CustomFieldsPropertiesRow
-            Dim rowCustomFieldsPropertiesRow As CustomFieldsPropertiesRow = CType(Me.NewRow,CustomFieldsPropertiesRow)
-            Dim columnValuesArray() As Object = New Object() {ColumnSettings, GUIProperties, OtherProperties, Nothing, Nothing}
-            If (Not (parentCatalogRowByCatalog_CustomFieldsProperties) Is Nothing) Then
-                columnValuesArray(4) = parentCatalogRowByCatalog_CustomFieldsProperties(0)
-            End If
-            rowCustomFieldsPropertiesRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowCustomFieldsPropertiesRow)
-            Return rowCustomFieldsPropertiesRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As CustomFieldsPropertiesDataTable = CType(MyBase.Clone,CustomFieldsPropertiesDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New CustomFieldsPropertiesDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnColumnSettings = MyBase.Columns("ColumnSettings")
-            Me.columnGUIProperties = MyBase.Columns("GUIProperties")
-            Me.columnOtherProperties = MyBase.Columns("OtherProperties")
-            Me.columnCustomFieldsProperties_Id = MyBase.Columns("CustomFieldsProperties_Id")
-            Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnColumnSettings = New Global.System.Data.DataColumn("ColumnSettings", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnColumnSettings)
-            Me.columnGUIProperties = New Global.System.Data.DataColumn("GUIProperties", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnGUIProperties)
-            Me.columnOtherProperties = New Global.System.Data.DataColumn("OtherProperties", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnOtherProperties)
-            Me.columnCustomFieldsProperties_Id = New Global.System.Data.DataColumn("CustomFieldsProperties_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnCustomFieldsProperties_Id)
-            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnCatalog_Id)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnCustomFieldsProperties_Id}, true))
-            Me.columnColumnSettings.Namespace = ""
-            Me.columnGUIProperties.Namespace = ""
-            Me.columnOtherProperties.Namespace = ""
-            Me.columnCustomFieldsProperties_Id.AutoIncrement = true
-            Me.columnCustomFieldsProperties_Id.AllowDBNull = false
-            Me.columnCustomFieldsProperties_Id.Unique = true
-            Me.columnCustomFieldsProperties_Id.Namespace = ""
-            Me.columnCatalog_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewCustomFieldsPropertiesRow() As CustomFieldsPropertiesRow
-            Return CType(Me.NewRow,CustomFieldsPropertiesRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New CustomFieldsPropertiesRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(CustomFieldsPropertiesRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.CustomFieldsPropertiesRowChangedEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsPropertiesRowChanged(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.CustomFieldsPropertiesRowChangingEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsPropertiesRowChanging(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.CustomFieldsPropertiesRowDeletedEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsPropertiesRowDeleted(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.CustomFieldsPropertiesRowDeletingEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsPropertiesRowDeleting(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemoveCustomFieldsPropertiesRow(ByVal row As CustomFieldsPropertiesRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "CustomFieldsPropertiesDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class CustomFieldDataTable
-        Inherits Global.System.Data.TypedTableBase(Of CustomFieldRow)
-        
-        Private columnTag As Global.System.Data.DataColumn
-        
-        Private columnName As Global.System.Data.DataColumn
-        
-        Private columnType As Global.System.Data.DataColumn
-        
-        Private columnDefaultValue As Global.System.Data.DataColumn
-        
-        Private columnMultiValues As Global.System.Data.DataColumn
-        
-        Private columnExcludedInScripts As Global.System.Data.DataColumn
-        
-        Private columnGUIProperties As Global.System.Data.DataColumn
-        
-        Private columnOtherProperties As Global.System.Data.DataColumn
-        
-        Private columnCustomField_Id As Global.System.Data.DataColumn
-        
-        Private columnCustomFieldsProperties_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "CustomField"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TagColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTag
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property NameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnName
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnType
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DefaultValueColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDefaultValue
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property MultiValuesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMultiValues
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property ExcludedInScriptsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnExcludedInScripts
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property GUIPropertiesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnGUIProperties
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property OtherPropertiesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnOtherProperties
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CustomField_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCustomField_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CustomFieldsProperties_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCustomFieldsProperties_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As CustomFieldRow
-            Get
-                Return CType(Me.Rows(index),CustomFieldRow)
-            End Get
-        End Property
-        
-        Public Event CustomFieldRowChanging As CustomFieldRowChangeEventHandler
-        
-        Public Event CustomFieldRowChanged As CustomFieldRowChangeEventHandler
-        
-        Public Event CustomFieldRowDeleting As CustomFieldRowChangeEventHandler
-        
-        Public Event CustomFieldRowDeleted As CustomFieldRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddCustomFieldRow(ByVal row As CustomFieldRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddCustomFieldRow(ByVal Tag As String, ByVal Name As String, ByVal Type As String, ByVal DefaultValue As String, ByVal MultiValues As String, ByVal ExcludedInScripts As String, ByVal GUIProperties As String, ByVal OtherProperties As String, ByVal parentCustomFieldsPropertiesRowByCustomFieldsProperties_CustomField As CustomFieldsPropertiesRow) As CustomFieldRow
-            Dim rowCustomFieldRow As CustomFieldRow = CType(Me.NewRow,CustomFieldRow)
-            Dim columnValuesArray() As Object = New Object() {Tag, Name, Type, DefaultValue, MultiValues, ExcludedInScripts, GUIProperties, OtherProperties, Nothing, Nothing}
-            If (Not (parentCustomFieldsPropertiesRowByCustomFieldsProperties_CustomField) Is Nothing) Then
-                columnValuesArray(9) = parentCustomFieldsPropertiesRowByCustomFieldsProperties_CustomField(3)
-            End If
-            rowCustomFieldRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowCustomFieldRow)
-            Return rowCustomFieldRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As CustomFieldDataTable = CType(MyBase.Clone,CustomFieldDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New CustomFieldDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnTag = MyBase.Columns("Tag")
-            Me.columnName = MyBase.Columns("Name")
-            Me.columnType = MyBase.Columns("Type")
-            Me.columnDefaultValue = MyBase.Columns("DefaultValue")
-            Me.columnMultiValues = MyBase.Columns("MultiValues")
-            Me.columnExcludedInScripts = MyBase.Columns("ExcludedInScripts")
-            Me.columnGUIProperties = MyBase.Columns("GUIProperties")
-            Me.columnOtherProperties = MyBase.Columns("OtherProperties")
-            Me.columnCustomField_Id = MyBase.Columns("CustomField_Id")
-            Me.columnCustomFieldsProperties_Id = MyBase.Columns("CustomFieldsProperties_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnTag = New Global.System.Data.DataColumn("Tag", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnTag)
-            Me.columnName = New Global.System.Data.DataColumn("Name", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnName)
-            Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnType)
-            Me.columnDefaultValue = New Global.System.Data.DataColumn("DefaultValue", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnDefaultValue)
-            Me.columnMultiValues = New Global.System.Data.DataColumn("MultiValues", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnMultiValues)
-            Me.columnExcludedInScripts = New Global.System.Data.DataColumn("ExcludedInScripts", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnExcludedInScripts)
-            Me.columnGUIProperties = New Global.System.Data.DataColumn("GUIProperties", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnGUIProperties)
-            Me.columnOtherProperties = New Global.System.Data.DataColumn("OtherProperties", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnOtherProperties)
-            Me.columnCustomField_Id = New Global.System.Data.DataColumn("CustomField_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnCustomField_Id)
-            Me.columnCustomFieldsProperties_Id = New Global.System.Data.DataColumn("CustomFieldsProperties_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnCustomFieldsProperties_Id)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnCustomField_Id}, true))
-            Me.columnTag.Namespace = ""
-            Me.columnName.Namespace = ""
-            Me.columnType.Namespace = ""
-            Me.columnDefaultValue.Namespace = ""
-            Me.columnMultiValues.Namespace = ""
-            Me.columnExcludedInScripts.Namespace = ""
-            Me.columnGUIProperties.Namespace = ""
-            Me.columnOtherProperties.Namespace = ""
-            Me.columnCustomField_Id.AutoIncrement = true
-            Me.columnCustomField_Id.AllowDBNull = false
-            Me.columnCustomField_Id.Unique = true
-            Me.columnCustomField_Id.Namespace = ""
-            Me.columnCustomFieldsProperties_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewCustomFieldRow() As CustomFieldRow
-            Return CType(Me.NewRow,CustomFieldRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New CustomFieldRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(CustomFieldRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.CustomFieldRowChangedEvent) Is Nothing) Then
-                RaiseEvent CustomFieldRowChanged(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.CustomFieldRowChangingEvent) Is Nothing) Then
-                RaiseEvent CustomFieldRowChanging(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.CustomFieldRowDeletedEvent) Is Nothing) Then
-                RaiseEvent CustomFieldRowDeleted(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.CustomFieldRowDeletingEvent) Is Nothing) Then
-                RaiseEvent CustomFieldRowDeleting(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemoveCustomFieldRow(ByVal row As CustomFieldRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "CustomFieldDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class ListItemDataTable
-        Inherits Global.System.Data.TypedTableBase(Of ListItemRow)
-        
-        Private columnText As Global.System.Data.DataColumn
-        
-        Private columnCustomField_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "ListItem"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TextColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnText
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CustomField_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCustomField_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As ListItemRow
-            Get
-                Return CType(Me.Rows(index),ListItemRow)
-            End Get
-        End Property
-        
-        Public Event ListItemRowChanging As ListItemRowChangeEventHandler
-        
-        Public Event ListItemRowChanged As ListItemRowChangeEventHandler
-        
-        Public Event ListItemRowDeleting As ListItemRowChangeEventHandler
-        
-        Public Event ListItemRowDeleted As ListItemRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddListItemRow(ByVal row As ListItemRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddListItemRow(ByVal Text As String, ByVal parentCustomFieldRowByCustomField_ListItem As CustomFieldRow) As ListItemRow
-            Dim rowListItemRow As ListItemRow = CType(Me.NewRow,ListItemRow)
-            Dim columnValuesArray() As Object = New Object() {Text, Nothing}
-            If (Not (parentCustomFieldRowByCustomField_ListItem) Is Nothing) Then
-                columnValuesArray(1) = parentCustomFieldRowByCustomField_ListItem(8)
-            End If
-            rowListItemRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowListItemRow)
-            Return rowListItemRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As ListItemDataTable = CType(MyBase.Clone,ListItemDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New ListItemDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnText = MyBase.Columns("Text")
-            Me.columnCustomField_Id = MyBase.Columns("CustomField_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnText = New Global.System.Data.DataColumn("Text", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnText)
-            Me.columnCustomField_Id = New Global.System.Data.DataColumn("CustomField_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnCustomField_Id)
-            Me.columnText.Namespace = ""
-            Me.columnCustomField_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewListItemRow() As ListItemRow
-            Return CType(Me.NewRow,ListItemRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New ListItemRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(ListItemRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.ListItemRowChangedEvent) Is Nothing) Then
-                RaiseEvent ListItemRowChanged(Me, New ListItemRowChangeEvent(CType(e.Row,ListItemRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.ListItemRowChangingEvent) Is Nothing) Then
-                RaiseEvent ListItemRowChanging(Me, New ListItemRowChangeEvent(CType(e.Row,ListItemRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.ListItemRowDeletedEvent) Is Nothing) Then
-                RaiseEvent ListItemRowDeleted(Me, New ListItemRowChangeEvent(CType(e.Row,ListItemRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.ListItemRowDeletingEvent) Is Nothing) Then
-                RaiseEvent ListItemRowDeleting(Me, New ListItemRowChangeEvent(CType(e.Row,ListItemRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemoveListItemRow(ByVal row As ListItemRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "ListItemDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class ContentsDataTable
-        Inherits Global.System.Data.TypedTableBase(Of ContentsRow)
-        
-        Private columnContents_Id As Global.System.Data.DataColumn
-        
-        Private columnCatalog_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "Contents"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Contents_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnContents_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCatalog_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As ContentsRow
-            Get
-                Return CType(Me.Rows(index),ContentsRow)
-            End Get
-        End Property
-        
-        Public Event ContentsRowChanging As ContentsRowChangeEventHandler
-        
-        Public Event ContentsRowChanged As ContentsRowChangeEventHandler
-        
-        Public Event ContentsRowDeleting As ContentsRowChangeEventHandler
-        
-        Public Event ContentsRowDeleted As ContentsRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddContentsRow(ByVal row As ContentsRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddContentsRow(ByVal parentCatalogRowByCatalog_Contents As CatalogRow) As ContentsRow
-            Dim rowContentsRow As ContentsRow = CType(Me.NewRow,ContentsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing}
-            If (Not (parentCatalogRowByCatalog_Contents) Is Nothing) Then
-                columnValuesArray(1) = parentCatalogRowByCatalog_Contents(0)
-            End If
-            rowContentsRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowContentsRow)
-            Return rowContentsRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As ContentsDataTable = CType(MyBase.Clone,ContentsDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New ContentsDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnContents_Id = MyBase.Columns("Contents_Id")
-            Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnContents_Id = New Global.System.Data.DataColumn("Contents_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnContents_Id)
-            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnCatalog_Id)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnContents_Id}, true))
-            Me.columnContents_Id.AutoIncrement = true
-            Me.columnContents_Id.AllowDBNull = false
-            Me.columnContents_Id.Unique = true
-            Me.columnContents_Id.Namespace = ""
-            Me.columnCatalog_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewContentsRow() As ContentsRow
-            Return CType(Me.NewRow,ContentsRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New ContentsRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(ContentsRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.ContentsRowChangedEvent) Is Nothing) Then
-                RaiseEvent ContentsRowChanged(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.ContentsRowChangingEvent) Is Nothing) Then
-                RaiseEvent ContentsRowChanging(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.ContentsRowDeletedEvent) Is Nothing) Then
-                RaiseEvent ContentsRowDeleted(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.ContentsRowDeletingEvent) Is Nothing) Then
-                RaiseEvent ContentsRowDeleting(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemoveContentsRow(ByVal row As ContentsRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "ContentsDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class MovieDataTable
-        Inherits Global.System.Data.TypedTableBase(Of MovieRow)
-        
-        Private columnNumber As Global.System.Data.DataColumn
-        
-        Private columnChecked As Global.System.Data.DataColumn
-        
-        Private columnMediaLabel As Global.System.Data.DataColumn
-        
-        Private columnMediaType As Global.System.Data.DataColumn
-        
-        Private columnSource As Global.System.Data.DataColumn
-        
-        Private columnDate As Global.System.Data.DataColumn
-        
-        Private columnBorrower As Global.System.Data.DataColumn
-        
-        Private columnRating As Global.System.Data.DataColumn
-        
-        Private columnOriginalTitle As Global.System.Data.DataColumn
-        
-        Private columnTranslatedTitle As Global.System.Data.DataColumn
-        
-        Private columnFormattedTitle As Global.System.Data.DataColumn
-        
-        Private columnDirector As Global.System.Data.DataColumn
-        
-        Private columnProducer As Global.System.Data.DataColumn
-        
-        Private columnCountry As Global.System.Data.DataColumn
-        
-        Private columnCategory As Global.System.Data.DataColumn
-        
-        Private columnYear As Global.System.Data.DataColumn
-        
-        Private columnLength As Global.System.Data.DataColumn
-        
-        Private columnActors As Global.System.Data.DataColumn
-        
-        Private columnURL As Global.System.Data.DataColumn
-        
-        Private columnDescription As Global.System.Data.DataColumn
-        
-        Private columnComments As Global.System.Data.DataColumn
-        
-        Private columnVideoFormat As Global.System.Data.DataColumn
-        
-        Private columnVideoBitrate As Global.System.Data.DataColumn
-        
-        Private columnAudioFormat As Global.System.Data.DataColumn
-        
-        Private columnAudioBitrate As Global.System.Data.DataColumn
-        
-        Private columnResolution As Global.System.Data.DataColumn
-        
-        Private columnFramerate As Global.System.Data.DataColumn
-        
-        Private columnLanguages As Global.System.Data.DataColumn
-        
-        Private columnSubtitles As Global.System.Data.DataColumn
-        
-        Private columnSize As Global.System.Data.DataColumn
-        
-        Private columnDisks As Global.System.Data.DataColumn
-        
-        Private columnPicture As Global.System.Data.DataColumn
-        
-        Private columnDateAdded As Global.System.Data.DataColumn
-        
-        Private columnLength_Num As Global.System.Data.DataColumn
-        
-        Private columnFanart As Global.System.Data.DataColumn
-        
-        Private columnCertification As Global.System.Data.DataColumn
-        
-        Private columnWriter As Global.System.Data.DataColumn
-        
-        Private columnWatched As Global.System.Data.DataColumn
-        
-        Private columnDateWatched As Global.System.Data.DataColumn
-        
-        Private columnIMDB_Id As Global.System.Data.DataColumn
-        
-        Private columnTMDB_Id As Global.System.Data.DataColumn
-        
-        Private columnSourceTrailer As Global.System.Data.DataColumn
-        
-        Private columnTagLine As Global.System.Data.DataColumn
-        
-        Private columnTags As Global.System.Data.DataColumn
-        
-        Private columnStudio As Global.System.Data.DataColumn
-        
-        Private columnIMDB_Rank As Global.System.Data.DataColumn
-        
-        Private columnIsOnline As Global.System.Data.DataColumn
-        
-        Private columnIsOnlineTrailer As Global.System.Data.DataColumn
-        
-        Private columnAspectratio As Global.System.Data.DataColumn
-        
-        Private columnRatingUser As Global.System.Data.DataColumn
-        
-        Private columnEdition As Global.System.Data.DataColumn
-        
-        Private columnMovie_Id As Global.System.Data.DataColumn
-        
-        Private columnContents_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            Me.New(false)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New(ByVal initExpressions As Boolean)
-            MyBase.New
-            Me.TableName = "Movie"
-            Me.BeginInit
-            Me.InitClass
-            If (initExpressions = true) Then
-                Me.InitExpressions
-            End If
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property NumberColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnNumber
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CheckedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnChecked
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property MediaLabelColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMediaLabel
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property MediaTypeColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMediaType
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property SourceColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnSource
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property BorrowerColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnBorrower
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property RatingColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnRating
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property OriginalTitleColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnOriginalTitle
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TranslatedTitleColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTranslatedTitle
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property FormattedTitleColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnFormattedTitle
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DirectorColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDirector
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property ProducerColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnProducer
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CountryColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCountry
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CategoryColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCategory
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property YearColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnYear
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property LengthColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnLength
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property ActorsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnActors
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property URLColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnURL
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDescription
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CommentsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnComments
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property VideoFormatColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnVideoFormat
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property VideoBitrateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnVideoBitrate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property AudioFormatColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnAudioFormat
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property AudioBitrateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnAudioBitrate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property ResolutionColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnResolution
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property FramerateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnFramerate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property LanguagesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnLanguages
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property SubtitlesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnSubtitles
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property SizeColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnSize
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DisksColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDisks
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property PictureColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPicture
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DateAddedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDateAdded
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Length_NumColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnLength_Num
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property FanartColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnFanart
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CertificationColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCertification
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property WriterColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnWriter
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property WatchedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnWatched
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DateWatchedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDateWatched
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IMDB_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIMDB_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TMDB_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTMDB_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property SourceTrailerColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnSourceTrailer
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TagLineColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTagLine
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TagsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTags
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property StudioColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnStudio
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IMDB_RankColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIMDB_Rank
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IsOnlineColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsOnline
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IsOnlineTrailerColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsOnlineTrailer
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property AspectratioColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnAspectratio
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property RatingUserColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnRatingUser
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property EditionColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnEdition
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Movie_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMovie_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Contents_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnContents_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As MovieRow
-            Get
-                Return CType(Me.Rows(index),MovieRow)
-            End Get
-        End Property
-        
-        Public Event MovieRowChanging As MovieRowChangeEventHandler
-        
-        Public Event MovieRowChanged As MovieRowChangeEventHandler
-        
-        Public Event MovieRowDeleting As MovieRowChangeEventHandler
-        
-        Public Event MovieRowDeleted As MovieRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddMovieRow(ByVal row As MovieRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddMovieRow( _
-                    ByVal Number As Integer,  _
-                    ByVal Checked As String,  _
-                    ByVal MediaLabel As String,  _
-                    ByVal MediaType As String,  _
-                    ByVal Source As String,  _
-                    ByVal _Date As String,  _
-                    ByVal Borrower As String,  _
-                    ByVal Rating As Decimal,  _
-                    ByVal OriginalTitle As String,  _
-                    ByVal TranslatedTitle As String,  _
-                    ByVal FormattedTitle As String,  _
-                    ByVal Director As String,  _
-                    ByVal Producer As String,  _
-                    ByVal Country As String,  _
-                    ByVal Category As String,  _
-                    ByVal Year As String,  _
-                    ByVal Length As String,  _
-                    ByVal Actors As String,  _
-                    ByVal URL As String,  _
-                    ByVal Description As String,  _
-                    ByVal Comments As String,  _
-                    ByVal VideoFormat As String,  _
-                    ByVal VideoBitrate As String,  _
-                    ByVal AudioFormat As String,  _
-                    ByVal AudioBitrate As String,  _
-                    ByVal Resolution As String,  _
-                    ByVal Framerate As String,  _
-                    ByVal Languages As String,  _
-                    ByVal Subtitles As String,  _
-                    ByVal Size As String,  _
-                    ByVal Disks As String,  _
-                    ByVal Picture As String,  _
-                    ByVal DateAdded As Date,  _
-                    ByVal Length_Num As Integer,  _
-                    ByVal Fanart As String,  _
-                    ByVal Certification As String,  _
-                    ByVal Writer As String,  _
-                    ByVal Watched As String,  _
-                    ByVal DateWatched As Date,  _
-                    ByVal IMDB_Id As String,  _
-                    ByVal TMDB_Id As String,  _
-                    ByVal SourceTrailer As String,  _
-                    ByVal TagLine As String,  _
-                    ByVal Tags As String,  _
-                    ByVal Studio As String,  _
-                    ByVal IMDB_Rank As String,  _
-                    ByVal IsOnline As String,  _
-                    ByVal IsOnlineTrailer As String,  _
-                    ByVal Aspectratio As String,  _
-                    ByVal RatingUser As Decimal,  _
-                    ByVal Edition As String,  _
-                    ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
-            Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Size, Disks, Picture, DateAdded, Length_Num, Fanart, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, RatingUser, Edition, Nothing, Nothing}
-            If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(52) = parentContentsRowByContents_Movie(0)
-            End If
-            rowMovieRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowMovieRow)
-            Return rowMovieRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddMovieRow( _
-                    ByVal Number As Integer,  _
-                    ByVal Checked As String,  _
-                    ByVal MediaLabel As String,  _
-                    ByVal MediaType As String,  _
-                    ByVal Source As String,  _
-                    ByVal _Date As String,  _
-                    ByVal Borrower As String,  _
-                    ByVal Rating As Decimal,  _
-                    ByVal OriginalTitle As String,  _
-                    ByVal TranslatedTitle As String,  _
-                    ByVal FormattedTitle As String,  _
-                    ByVal Director As String,  _
-                    ByVal Producer As String,  _
-                    ByVal Country As String,  _
-                    ByVal Category As String,  _
-                    ByVal Year As String,  _
-                    ByVal Length As String,  _
-                    ByVal Actors As String,  _
-                    ByVal URL As String,  _
-                    ByVal Description As String,  _
-                    ByVal Comments As String,  _
-                    ByVal VideoFormat As String,  _
-                    ByVal VideoBitrate As String,  _
-                    ByVal AudioFormat As String,  _
-                    ByVal AudioBitrate As String,  _
-                    ByVal Resolution As String,  _
-                    ByVal Framerate As String,  _
-                    ByVal Languages As String,  _
-                    ByVal Subtitles As String,  _
-                    ByVal Size As String,  _
-                    ByVal Disks As String,  _
-                    ByVal Picture As String,  _
-                    ByVal Fanart As String,  _
-                    ByVal Certification As String,  _
-                    ByVal Writer As String,  _
-                    ByVal Watched As String,  _
-                    ByVal DateWatched As Date,  _
-                    ByVal IMDB_Id As String,  _
-                    ByVal TMDB_Id As String,  _
-                    ByVal SourceTrailer As String,  _
-                    ByVal TagLine As String,  _
-                    ByVal Tags As String,  _
-                    ByVal Studio As String,  _
-                    ByVal IMDB_Rank As String,  _
-                    ByVal IsOnline As String,  _
-                    ByVal IsOnlineTrailer As String,  _
-                    ByVal Aspectratio As String,  _
-                    ByVal RatingUser As Decimal,  _
-                    ByVal Edition As String,  _
-                    ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
-            Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Size, Disks, Picture, Nothing, Nothing, Fanart, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, RatingUser, Edition, Nothing, Nothing}
-            If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(52) = parentContentsRowByContents_Movie(0)
-            End If
-            rowMovieRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowMovieRow)
-            Return rowMovieRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As MovieDataTable = CType(MyBase.Clone,MovieDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New MovieDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnNumber = MyBase.Columns("Number")
-            Me.columnChecked = MyBase.Columns("Checked")
-            Me.columnMediaLabel = MyBase.Columns("MediaLabel")
-            Me.columnMediaType = MyBase.Columns("MediaType")
-            Me.columnSource = MyBase.Columns("Source")
-            Me.columnDate = MyBase.Columns("Date")
-            Me.columnBorrower = MyBase.Columns("Borrower")
-            Me.columnRating = MyBase.Columns("Rating")
-            Me.columnOriginalTitle = MyBase.Columns("OriginalTitle")
-            Me.columnTranslatedTitle = MyBase.Columns("TranslatedTitle")
-            Me.columnFormattedTitle = MyBase.Columns("FormattedTitle")
-            Me.columnDirector = MyBase.Columns("Director")
-            Me.columnProducer = MyBase.Columns("Producer")
-            Me.columnCountry = MyBase.Columns("Country")
-            Me.columnCategory = MyBase.Columns("Category")
-            Me.columnYear = MyBase.Columns("Year")
-            Me.columnLength = MyBase.Columns("Length")
-            Me.columnActors = MyBase.Columns("Actors")
-            Me.columnURL = MyBase.Columns("URL")
-            Me.columnDescription = MyBase.Columns("Description")
-            Me.columnComments = MyBase.Columns("Comments")
-            Me.columnVideoFormat = MyBase.Columns("VideoFormat")
-            Me.columnVideoBitrate = MyBase.Columns("VideoBitrate")
-            Me.columnAudioFormat = MyBase.Columns("AudioFormat")
-            Me.columnAudioBitrate = MyBase.Columns("AudioBitrate")
-            Me.columnResolution = MyBase.Columns("Resolution")
-            Me.columnFramerate = MyBase.Columns("Framerate")
-            Me.columnLanguages = MyBase.Columns("Languages")
-            Me.columnSubtitles = MyBase.Columns("Subtitles")
-            Me.columnSize = MyBase.Columns("Size")
-            Me.columnDisks = MyBase.Columns("Disks")
-            Me.columnPicture = MyBase.Columns("Picture")
-            Me.columnDateAdded = MyBase.Columns("DateAdded")
-            Me.columnLength_Num = MyBase.Columns("Length_Num")
-            Me.columnFanart = MyBase.Columns("Fanart")
-            Me.columnCertification = MyBase.Columns("Certification")
-            Me.columnWriter = MyBase.Columns("Writer")
-            Me.columnWatched = MyBase.Columns("Watched")
-            Me.columnDateWatched = MyBase.Columns("DateWatched")
-            Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
-            Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
-            Me.columnSourceTrailer = MyBase.Columns("SourceTrailer")
-            Me.columnTagLine = MyBase.Columns("TagLine")
-            Me.columnTags = MyBase.Columns("Tags")
-            Me.columnStudio = MyBase.Columns("Studio")
-            Me.columnIMDB_Rank = MyBase.Columns("IMDB_Rank")
-            Me.columnIsOnline = MyBase.Columns("IsOnline")
-            Me.columnIsOnlineTrailer = MyBase.Columns("IsOnlineTrailer")
-            Me.columnAspectratio = MyBase.Columns("Aspectratio")
-            Me.columnRatingUser = MyBase.Columns("RatingUser")
-            Me.columnEdition = MyBase.Columns("Edition")
-            Me.columnMovie_Id = MyBase.Columns("Movie_Id")
-            Me.columnContents_Id = MyBase.Columns("Contents_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnNumber = New Global.System.Data.DataColumn("Number", GetType(Integer), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnNumber)
-            Me.columnChecked = New Global.System.Data.DataColumn("Checked", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnChecked)
-            Me.columnMediaLabel = New Global.System.Data.DataColumn("MediaLabel", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnMediaLabel)
-            Me.columnMediaType = New Global.System.Data.DataColumn("MediaType", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnMediaType)
-            Me.columnSource = New Global.System.Data.DataColumn("Source", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnSource)
-            Me.columnDate = New Global.System.Data.DataColumn("Date", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            Me.columnDate.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "DateColumn")
-            Me.columnDate.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnDate")
-            Me.columnDate.ExtendedProperties.Add("Generator_UserColumnName", "Date")
-            MyBase.Columns.Add(Me.columnDate)
-            Me.columnBorrower = New Global.System.Data.DataColumn("Borrower", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnBorrower)
-            Me.columnRating = New Global.System.Data.DataColumn("Rating", GetType(Decimal), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnRating)
-            Me.columnOriginalTitle = New Global.System.Data.DataColumn("OriginalTitle", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnOriginalTitle)
-            Me.columnTranslatedTitle = New Global.System.Data.DataColumn("TranslatedTitle", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnTranslatedTitle)
-            Me.columnFormattedTitle = New Global.System.Data.DataColumn("FormattedTitle", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnFormattedTitle)
-            Me.columnDirector = New Global.System.Data.DataColumn("Director", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnDirector)
-            Me.columnProducer = New Global.System.Data.DataColumn("Producer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnProducer)
-            Me.columnCountry = New Global.System.Data.DataColumn("Country", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnCountry)
-            Me.columnCategory = New Global.System.Data.DataColumn("Category", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnCategory)
-            Me.columnYear = New Global.System.Data.DataColumn("Year", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnYear)
-            Me.columnLength = New Global.System.Data.DataColumn("Length", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnLength)
-            Me.columnActors = New Global.System.Data.DataColumn("Actors", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnActors)
-            Me.columnURL = New Global.System.Data.DataColumn("URL", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnURL)
-            Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnDescription)
-            Me.columnComments = New Global.System.Data.DataColumn("Comments", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnComments)
-            Me.columnVideoFormat = New Global.System.Data.DataColumn("VideoFormat", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnVideoFormat)
-            Me.columnVideoBitrate = New Global.System.Data.DataColumn("VideoBitrate", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnVideoBitrate)
-            Me.columnAudioFormat = New Global.System.Data.DataColumn("AudioFormat", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnAudioFormat)
-            Me.columnAudioBitrate = New Global.System.Data.DataColumn("AudioBitrate", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnAudioBitrate)
-            Me.columnResolution = New Global.System.Data.DataColumn("Resolution", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnResolution)
-            Me.columnFramerate = New Global.System.Data.DataColumn("Framerate", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnFramerate)
-            Me.columnLanguages = New Global.System.Data.DataColumn("Languages", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnLanguages)
-            Me.columnSubtitles = New Global.System.Data.DataColumn("Subtitles", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnSubtitles)
-            Me.columnSize = New Global.System.Data.DataColumn("Size", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnSize)
-            Me.columnDisks = New Global.System.Data.DataColumn("Disks", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnDisks)
-            Me.columnPicture = New Global.System.Data.DataColumn("Picture", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnPicture)
-            Me.columnDateAdded = New Global.System.Data.DataColumn("DateAdded", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDateAdded)
-            Me.columnLength_Num = New Global.System.Data.DataColumn("Length_Num", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLength_Num)
-            Me.columnFanart = New Global.System.Data.DataColumn("Fanart", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnFanart)
-            Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCertification)
-            Me.columnWriter = New Global.System.Data.DataColumn("Writer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnWriter)
-            Me.columnWatched = New Global.System.Data.DataColumn("Watched", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnWatched)
-            Me.columnDateWatched = New Global.System.Data.DataColumn("DateWatched", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDateWatched)
-            Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnIMDB_Id)
-            Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTMDB_Id)
-            Me.columnSourceTrailer = New Global.System.Data.DataColumn("SourceTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnSourceTrailer)
-            Me.columnTagLine = New Global.System.Data.DataColumn("TagLine", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTagLine)
-            Me.columnTags = New Global.System.Data.DataColumn("Tags", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTags)
-            Me.columnStudio = New Global.System.Data.DataColumn("Studio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnStudio)
-            Me.columnIMDB_Rank = New Global.System.Data.DataColumn("IMDB_Rank", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnIMDB_Rank)
-            Me.columnIsOnline = New Global.System.Data.DataColumn("IsOnline", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnIsOnline)
-            Me.columnIsOnlineTrailer = New Global.System.Data.DataColumn("IsOnlineTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnIsOnlineTrailer)
-            Me.columnAspectratio = New Global.System.Data.DataColumn("Aspectratio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnAspectratio)
-            Me.columnRatingUser = New Global.System.Data.DataColumn("RatingUser", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRatingUser)
-            Me.columnEdition = New Global.System.Data.DataColumn("Edition", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnEdition)
-            Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnMovie_Id)
-            Me.columnContents_Id = New Global.System.Data.DataColumn("Contents_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnContents_Id)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnMovie_Id}, true))
-            Me.columnNumber.Namespace = ""
-            Me.columnChecked.Namespace = ""
-            Me.columnMediaLabel.Namespace = ""
-            Me.columnMediaType.Namespace = ""
-            Me.columnSource.Namespace = ""
-            Me.columnDate.Namespace = ""
-            Me.columnBorrower.Namespace = ""
-            Me.columnRating.Namespace = ""
-            Me.columnOriginalTitle.Namespace = ""
-            Me.columnTranslatedTitle.Namespace = ""
-            Me.columnFormattedTitle.Namespace = ""
-            Me.columnDirector.Namespace = ""
-            Me.columnProducer.Namespace = ""
-            Me.columnCountry.Namespace = ""
-            Me.columnCategory.Namespace = ""
-            Me.columnYear.Namespace = ""
-            Me.columnLength.Namespace = ""
-            Me.columnActors.Namespace = ""
-            Me.columnURL.Namespace = ""
-            Me.columnDescription.Namespace = ""
-            Me.columnComments.Namespace = ""
-            Me.columnVideoFormat.Namespace = ""
-            Me.columnVideoBitrate.Namespace = ""
-            Me.columnAudioFormat.Namespace = ""
-            Me.columnAudioBitrate.Namespace = ""
-            Me.columnResolution.Namespace = ""
-            Me.columnFramerate.Namespace = ""
-            Me.columnLanguages.Namespace = ""
-            Me.columnSubtitles.Namespace = ""
-            Me.columnSize.Namespace = ""
-            Me.columnDisks.Namespace = ""
-            Me.columnPicture.Namespace = ""
-            Me.columnDateAdded.ReadOnly = true
-            Me.columnLength_Num.ReadOnly = true
-            Me.columnMovie_Id.AutoIncrement = true
-            Me.columnMovie_Id.AllowDBNull = false
-            Me.columnMovie_Id.Unique = true
-            Me.columnMovie_Id.Namespace = ""
-            Me.columnContents_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewMovieRow() As MovieRow
-            Return CType(Me.NewRow,MovieRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New MovieRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(MovieRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitExpressions()
-            Me.DateAddedColumn.Expression = "Convert(Date,'System.DateTime')"
-            Me.Length_NumColumn.Expression = "Convert(Length,'System.Int32')"
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.MovieRowChangedEvent) Is Nothing) Then
-                RaiseEvent MovieRowChanged(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.MovieRowChangingEvent) Is Nothing) Then
-                RaiseEvent MovieRowChanging(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.MovieRowDeletedEvent) Is Nothing) Then
-                RaiseEvent MovieRowDeleted(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.MovieRowDeletingEvent) Is Nothing) Then
-                RaiseEvent MovieRowDeleting(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemoveMovieRow(ByVal row As MovieRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "MovieDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class CustomFieldsDataTable
-        Inherits Global.System.Data.TypedTableBase(Of CustomFieldsRow)
-        
-        Private columnWriter As Global.System.Data.DataColumn
-        
-        Private columnCertification As Global.System.Data.DataColumn
-        
-        Private columnTagLine As Global.System.Data.DataColumn
-        
-        Private columnStudio As Global.System.Data.DataColumn
-        
-        Private columnMovie_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "CustomFields"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property WriterColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnWriter
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CertificationColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCertification
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TagLineColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTagLine
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property StudioColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnStudio
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Movie_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMovie_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As CustomFieldsRow
-            Get
-                Return CType(Me.Rows(index),CustomFieldsRow)
-            End Get
-        End Property
-        
-        Public Event CustomFieldsRowChanging As CustomFieldsRowChangeEventHandler
-        
-        Public Event CustomFieldsRowChanged As CustomFieldsRowChangeEventHandler
-        
-        Public Event CustomFieldsRowDeleting As CustomFieldsRowChangeEventHandler
-        
-        Public Event CustomFieldsRowDeleted As CustomFieldsRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddCustomFieldsRow(ByVal row As CustomFieldsRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddCustomFieldsRow(ByVal Writer As String, ByVal Certification As String, ByVal TagLine As String, ByVal Studio As String, ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
-            Dim rowCustomFieldsRow As CustomFieldsRow = CType(Me.NewRow,CustomFieldsRow)
-            Dim columnValuesArray() As Object = New Object() {Writer, Certification, TagLine, Studio, Nothing}
-            If (Not (parentMovieRowByMovie_CustomFields) Is Nothing) Then
-                columnValuesArray(4) = parentMovieRowByMovie_CustomFields(51)
-            End If
-            rowCustomFieldsRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowCustomFieldsRow)
-            Return rowCustomFieldsRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As CustomFieldsDataTable = CType(MyBase.Clone,CustomFieldsDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New CustomFieldsDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnWriter = MyBase.Columns("Writer")
-            Me.columnCertification = MyBase.Columns("Certification")
-            Me.columnTagLine = MyBase.Columns("TagLine")
-            Me.columnStudio = MyBase.Columns("Studio")
-            Me.columnMovie_Id = MyBase.Columns("Movie_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnWriter = New Global.System.Data.DataColumn("Writer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnWriter)
-            Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnCertification)
-            Me.columnTagLine = New Global.System.Data.DataColumn("TagLine", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnTagLine)
-            Me.columnStudio = New Global.System.Data.DataColumn("Studio", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnStudio)
-            Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnMovie_Id)
-            Me.columnWriter.Namespace = ""
-            Me.columnCertification.Namespace = ""
-            Me.columnTagLine.Namespace = ""
-            Me.columnStudio.Namespace = ""
-            Me.columnMovie_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewCustomFieldsRow() As CustomFieldsRow
-            Return CType(Me.NewRow,CustomFieldsRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New CustomFieldsRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(CustomFieldsRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.CustomFieldsRowChangedEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsRowChanged(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.CustomFieldsRowChangingEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsRowChanging(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.CustomFieldsRowDeletedEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsRowDeleted(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.CustomFieldsRowDeletingEvent) Is Nothing) Then
-                RaiseEvent CustomFieldsRowDeleting(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemoveCustomFieldsRow(ByVal row As CustomFieldsRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "CustomFieldsDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class PersonsDataTable
-        Inherits Global.System.Data.TypedTableBase(Of PersonsRow)
-        
-        Private columnPersons_Id As Global.System.Data.DataColumn
-        
-        Private columnCatalog_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "Persons"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Persons_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPersons_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCatalog_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As PersonsRow
-            Get
-                Return CType(Me.Rows(index),PersonsRow)
-            End Get
-        End Property
-        
-        Public Event PersonsRowChanging As PersonsRowChangeEventHandler
-        
-        Public Event PersonsRowChanged As PersonsRowChangeEventHandler
-        
-        Public Event PersonsRowDeleting As PersonsRowChangeEventHandler
-        
-        Public Event PersonsRowDeleted As PersonsRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddPersonsRow(ByVal row As PersonsRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddPersonsRow(ByVal parentCatalogRowByCatalog_Persons As CatalogRow) As PersonsRow
-            Dim rowPersonsRow As PersonsRow = CType(Me.NewRow,PersonsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing}
-            If (Not (parentCatalogRowByCatalog_Persons) Is Nothing) Then
-                columnValuesArray(1) = parentCatalogRowByCatalog_Persons(0)
-            End If
-            rowPersonsRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowPersonsRow)
-            Return rowPersonsRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As PersonsDataTable = CType(MyBase.Clone,PersonsDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New PersonsDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnPersons_Id = MyBase.Columns("Persons_Id")
-            Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnPersons_Id = New Global.System.Data.DataColumn("Persons_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnPersons_Id)
-            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCatalog_Id)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnPersons_Id}, true))
-            Me.columnPersons_Id.AutoIncrement = true
-            Me.columnPersons_Id.AllowDBNull = false
-            Me.columnPersons_Id.Unique = true
-            Me.columnPersons_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewPersonsRow() As PersonsRow
-            Return CType(Me.NewRow,PersonsRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New PersonsRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(PersonsRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.PersonsRowChangedEvent) Is Nothing) Then
-                RaiseEvent PersonsRowChanged(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.PersonsRowChangingEvent) Is Nothing) Then
-                RaiseEvent PersonsRowChanging(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.PersonsRowDeletedEvent) Is Nothing) Then
-                RaiseEvent PersonsRowDeleted(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.PersonsRowDeletingEvent) Is Nothing) Then
-                RaiseEvent PersonsRowDeleting(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemovePersonsRow(ByVal row As PersonsRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "PersonsDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class PersonDataTable
-        Inherits Global.System.Data.TypedTableBase(Of PersonRow)
-        
-        Private columnName As Global.System.Data.DataColumn
-        
-        Private columnAlternateName As Global.System.Data.DataColumn
-        
-        Private columnBorn As Global.System.Data.DataColumn
-        
-        Private columnBirthPlace As Global.System.Data.DataColumn
-        
-        Private columnMiniBiography As Global.System.Data.DataColumn
-        
-        Private columnBiography As Global.System.Data.DataColumn
-        
-        Private columnURL As Global.System.Data.DataColumn
-        
-        Private columnIMDB_Id As Global.System.Data.DataColumn
-        
-        Private columnTMDB_Id As Global.System.Data.DataColumn
-        
-        Private columnIsActor As Global.System.Data.DataColumn
-        
-        Private columnIsProducer As Global.System.Data.DataColumn
-        
-        Private columnIsDirector As Global.System.Data.DataColumn
-        
-        Private columnIsWriter As Global.System.Data.DataColumn
-        
-        Private columnPhotos As Global.System.Data.DataColumn
-        
-        Private columnPicture As Global.System.Data.DataColumn
-        
-        Private columnPersons_Id As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "Person"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property NameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnName
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property AlternateNameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnAlternateName
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property BornColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnBorn
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property BirthPlaceColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnBirthPlace
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property MiniBiographyColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMiniBiography
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property BiographyColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnBiography
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property URLColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnURL
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IMDB_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIMDB_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property TMDB_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTMDB_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IsActorColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsActor
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IsProducerColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsProducer
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IsDirectorColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsDirector
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property IsWriterColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsWriter
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property PhotosColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPhotos
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property PictureColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPicture
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Persons_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPersons_Id
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As PersonRow
-            Get
-                Return CType(Me.Rows(index),PersonRow)
-            End Get
-        End Property
-        
-        Public Event PersonRowChanging As PersonRowChangeEventHandler
-        
-        Public Event PersonRowChanged As PersonRowChangeEventHandler
-        
-        Public Event PersonRowDeleting As PersonRowChangeEventHandler
-        
-        Public Event PersonRowDeleted As PersonRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Sub AddPersonRow(ByVal row As PersonRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddPersonRow( _
-                    ByVal Name As String,  _
-                    ByVal AlternateName As String,  _
-                    ByVal Born As String,  _
-                    ByVal BirthPlace As String,  _
-                    ByVal MiniBiography As String,  _
-                    ByVal Biography As String,  _
-                    ByVal URL As String,  _
-                    ByVal IMDB_Id As String,  _
-                    ByVal TMDB_Id As String,  _
-                    ByVal IsActor As Boolean,  _
-                    ByVal IsProducer As Boolean,  _
-                    ByVal IsDirector As Boolean,  _
-                    ByVal IsWriter As Boolean,  _
-                    ByVal Photos As String,  _
-                    ByVal Picture As String,  _
-                    ByVal parentPersonsRowByPersons_Person As PersonsRow) As PersonRow
-            Dim rowPersonRow As PersonRow = CType(Me.NewRow,PersonRow)
-            Dim columnValuesArray() As Object = New Object() {Name, AlternateName, Born, BirthPlace, MiniBiography, Biography, URL, IMDB_Id, TMDB_Id, IsActor, IsProducer, IsDirector, IsWriter, Photos, Picture, Nothing}
-            If (Not (parentPersonsRowByPersons_Person) Is Nothing) Then
-                columnValuesArray(15) = parentPersonsRowByPersons_Person(0)
-            End If
-            rowPersonRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowPersonRow)
-            Return rowPersonRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As PersonDataTable = CType(MyBase.Clone,PersonDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New PersonDataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub InitVars()
-            Me.columnName = MyBase.Columns("Name")
-            Me.columnAlternateName = MyBase.Columns("AlternateName")
-            Me.columnBorn = MyBase.Columns("Born")
-            Me.columnBirthPlace = MyBase.Columns("BirthPlace")
-            Me.columnMiniBiography = MyBase.Columns("MiniBiography")
-            Me.columnBiography = MyBase.Columns("Biography")
-            Me.columnURL = MyBase.Columns("URL")
-            Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
-            Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
-            Me.columnIsActor = MyBase.Columns("IsActor")
-            Me.columnIsProducer = MyBase.Columns("IsProducer")
-            Me.columnIsDirector = MyBase.Columns("IsDirector")
-            Me.columnIsWriter = MyBase.Columns("IsWriter")
-            Me.columnPhotos = MyBase.Columns("Photos")
-            Me.columnPicture = MyBase.Columns("Picture")
-            Me.columnPersons_Id = MyBase.Columns("Persons_Id")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Private Sub InitClass()
-            Me.columnName = New Global.System.Data.DataColumn("Name", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnName)
-            Me.columnAlternateName = New Global.System.Data.DataColumn("AlternateName", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnAlternateName)
-            Me.columnBorn = New Global.System.Data.DataColumn("Born", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnBorn)
-            Me.columnBirthPlace = New Global.System.Data.DataColumn("BirthPlace", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnBirthPlace)
-            Me.columnMiniBiography = New Global.System.Data.DataColumn("MiniBiography", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnMiniBiography)
-            Me.columnBiography = New Global.System.Data.DataColumn("Biography", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnBiography)
-            Me.columnURL = New Global.System.Data.DataColumn("URL", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnURL)
-            Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnIMDB_Id)
-            Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnTMDB_Id)
-            Me.columnIsActor = New Global.System.Data.DataColumn("IsActor", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnIsActor)
-            Me.columnIsProducer = New Global.System.Data.DataColumn("IsProducer", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnIsProducer)
-            Me.columnIsDirector = New Global.System.Data.DataColumn("IsDirector", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnIsDirector)
-            Me.columnIsWriter = New Global.System.Data.DataColumn("IsWriter", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnIsWriter)
-            Me.columnPhotos = New Global.System.Data.DataColumn("Photos", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnPhotos)
-            Me.columnPicture = New Global.System.Data.DataColumn("Picture", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnPicture)
-            Me.columnPersons_Id = New Global.System.Data.DataColumn("Persons_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
-            MyBase.Columns.Add(Me.columnPersons_Id)
-            Me.columnName.Namespace = ""
-            Me.columnAlternateName.Namespace = ""
-            Me.columnBorn.Namespace = ""
-            Me.columnBirthPlace.Namespace = ""
-            Me.columnMiniBiography.Namespace = ""
-            Me.columnBiography.Namespace = ""
-            Me.columnURL.Namespace = ""
-            Me.columnIMDB_Id.Namespace = ""
-            Me.columnTMDB_Id.Namespace = ""
-            Me.columnIsActor.Namespace = ""
-            Me.columnIsProducer.Namespace = ""
-            Me.columnIsDirector.Namespace = ""
-            Me.columnIsWriter.Namespace = ""
-            Me.columnPhotos.Namespace = ""
-            Me.columnPicture.Namespace = ""
-            Me.columnPersons_Id.Namespace = ""
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function NewPersonRow() As PersonRow
-            Return CType(Me.NewRow,PersonRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New PersonRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(PersonRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.PersonRowChangedEvent) Is Nothing) Then
-                RaiseEvent PersonRowChanged(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.PersonRowChangingEvent) Is Nothing) Then
-                RaiseEvent PersonRowChanging(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.PersonRowDeletedEvent) Is Nothing) Then
-                RaiseEvent PersonRowDeleted(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.PersonRowDeletingEvent) Is Nothing) Then
-                RaiseEvent PersonRowDeleting(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub RemovePersonRow(ByVal row As PersonRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
-            Dim ds As AntMovieCatalog = New AntMovieCatalog
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "PersonDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
-     Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class MyFilmsSettingsDataTable
         Inherits Global.System.Data.TypedTableBase(Of MyFilmsSettingsRow)
         
@@ -4530,7 +1409,7 @@ Partial Public Class AntMovieCatalog
             Dim rowMyFilmsSettingsRow As MyFilmsSettingsRow = CType(Me.NewRow,MyFilmsSettingsRow)
             Dim columnValuesArray() As Object = New Object() {Nothing, Nothing}
             If (Not (parentCatalogRowByCatalog_MyFilmsSettings) Is Nothing) Then
-                columnValuesArray(1) = parentCatalogRowByCatalog_MyFilmsSettings(0)
+                columnValuesArray(1) = parentCatalogRowByCatalog_MyFilmsSettings(1)
             End If
             rowMyFilmsSettingsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMyFilmsSettingsRow)
@@ -4559,13 +1438,14 @@ Partial Public Class AntMovieCatalog
         Private Sub InitClass()
             Me.columnMyFilmsSettings_Id = New Global.System.Data.DataColumn("MyFilmsSettings_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnMyFilmsSettings_Id)
-            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnCatalog_Id)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnMyFilmsSettings_Id}, true))
             Me.columnMyFilmsSettings_Id.AutoIncrement = true
             Me.columnMyFilmsSettings_Id.AllowDBNull = false
             Me.columnMyFilmsSettings_Id.Unique = true
             Me.columnMyFilmsSettings_Id.Namespace = ""
+            Me.columnCatalog_Id.Namespace = ""
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -5223,6 +2103,3475 @@ Partial Public Class AntMovieCatalog
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class CustomFieldsPropertiesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of CustomFieldsPropertiesRow)
+        
+        Private columnCustomFieldsProperties_Id As Global.System.Data.DataColumn
+        
+        Private columnColumnSettings As Global.System.Data.DataColumn
+        
+        Private columnGUIProperties As Global.System.Data.DataColumn
+        
+        Private columnOtherProperties As Global.System.Data.DataColumn
+        
+        Private columnCatalog_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "CustomFieldsProperties"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomFieldsProperties_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomFieldsProperties_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property ColumnSettingsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnColumnSettings
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property GUIPropertiesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGUIProperties
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property OtherPropertiesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOtherProperties
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCatalog_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As CustomFieldsPropertiesRow
+            Get
+                Return CType(Me.Rows(index),CustomFieldsPropertiesRow)
+            End Get
+        End Property
+        
+        Public Event CustomFieldsPropertiesRowChanging As CustomFieldsPropertiesRowChangeEventHandler
+        
+        Public Event CustomFieldsPropertiesRowChanged As CustomFieldsPropertiesRowChangeEventHandler
+        
+        Public Event CustomFieldsPropertiesRowDeleting As CustomFieldsPropertiesRowChangeEventHandler
+        
+        Public Event CustomFieldsPropertiesRowDeleted As CustomFieldsPropertiesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddCustomFieldsPropertiesRow(ByVal row As CustomFieldsPropertiesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddCustomFieldsPropertiesRow(ByVal ColumnSettings As String, ByVal GUIProperties As String, ByVal OtherProperties As String, ByVal parentCatalogRowByCatalog_CustomFieldsProperties As CatalogRow) As CustomFieldsPropertiesRow
+            Dim rowCustomFieldsPropertiesRow As CustomFieldsPropertiesRow = CType(Me.NewRow,CustomFieldsPropertiesRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, ColumnSettings, GUIProperties, OtherProperties, Nothing}
+            If (Not (parentCatalogRowByCatalog_CustomFieldsProperties) Is Nothing) Then
+                columnValuesArray(4) = parentCatalogRowByCatalog_CustomFieldsProperties(1)
+            End If
+            rowCustomFieldsPropertiesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowCustomFieldsPropertiesRow)
+            Return rowCustomFieldsPropertiesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As CustomFieldsPropertiesDataTable = CType(MyBase.Clone,CustomFieldsPropertiesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New CustomFieldsPropertiesDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnCustomFieldsProperties_Id = MyBase.Columns("CustomFieldsProperties_Id")
+            Me.columnColumnSettings = MyBase.Columns("ColumnSettings")
+            Me.columnGUIProperties = MyBase.Columns("GUIProperties")
+            Me.columnOtherProperties = MyBase.Columns("OtherProperties")
+            Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnCustomFieldsProperties_Id = New Global.System.Data.DataColumn("CustomFieldsProperties_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnCustomFieldsProperties_Id)
+            Me.columnColumnSettings = New Global.System.Data.DataColumn("ColumnSettings", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnColumnSettings)
+            Me.columnGUIProperties = New Global.System.Data.DataColumn("GUIProperties", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGUIProperties)
+            Me.columnOtherProperties = New Global.System.Data.DataColumn("OtherProperties", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnOtherProperties)
+            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCatalog_Id)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnCustomFieldsProperties_Id}, true))
+            Me.columnCustomFieldsProperties_Id.AutoIncrement = true
+            Me.columnCustomFieldsProperties_Id.AllowDBNull = false
+            Me.columnCustomFieldsProperties_Id.Unique = true
+            Me.columnCustomFieldsProperties_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewCustomFieldsPropertiesRow() As CustomFieldsPropertiesRow
+            Return CType(Me.NewRow,CustomFieldsPropertiesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New CustomFieldsPropertiesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(CustomFieldsPropertiesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.CustomFieldsPropertiesRowChangedEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsPropertiesRowChanged(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.CustomFieldsPropertiesRowChangingEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsPropertiesRowChanging(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.CustomFieldsPropertiesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsPropertiesRowDeleted(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.CustomFieldsPropertiesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsPropertiesRowDeleting(Me, New CustomFieldsPropertiesRowChangeEvent(CType(e.Row,CustomFieldsPropertiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveCustomFieldsPropertiesRow(ByVal row As CustomFieldsPropertiesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "CustomFieldsPropertiesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class CustomFieldDataTable
+        Inherits Global.System.Data.TypedTableBase(Of CustomFieldRow)
+        
+        Private columnTag As Global.System.Data.DataColumn
+        
+        Private columnName As Global.System.Data.DataColumn
+        
+        Private columnType As Global.System.Data.DataColumn
+        
+        Private columnDefaultValue As Global.System.Data.DataColumn
+        
+        Private columnMultiValues As Global.System.Data.DataColumn
+        
+        Private columnExcludedInScripts As Global.System.Data.DataColumn
+        
+        Private columnGUIProperties As Global.System.Data.DataColumn
+        
+        Private columnOtherProperties As Global.System.Data.DataColumn
+        
+        Private columnCustomField_Id As Global.System.Data.DataColumn
+        
+        Private columnCustomFieldsProperties_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "CustomField"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTag
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property NameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DefaultValueColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDefaultValue
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property MultiValuesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMultiValues
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property ExcludedInScriptsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnExcludedInScripts
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property GUIPropertiesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGUIProperties
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property OtherPropertiesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOtherProperties
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomFieldsProperties_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomFieldsProperties_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As CustomFieldRow
+            Get
+                Return CType(Me.Rows(index),CustomFieldRow)
+            End Get
+        End Property
+        
+        Public Event CustomFieldRowChanging As CustomFieldRowChangeEventHandler
+        
+        Public Event CustomFieldRowChanged As CustomFieldRowChangeEventHandler
+        
+        Public Event CustomFieldRowDeleting As CustomFieldRowChangeEventHandler
+        
+        Public Event CustomFieldRowDeleted As CustomFieldRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddCustomFieldRow(ByVal row As CustomFieldRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddCustomFieldRow(ByVal Tag As String, ByVal Name As String, ByVal Type As String, ByVal DefaultValue As String, ByVal MultiValues As String, ByVal ExcludedInScripts As String, ByVal GUIProperties As String, ByVal OtherProperties As String, ByVal parentCustomFieldsPropertiesRowByCustomFieldsProperties_CustomField As CustomFieldsPropertiesRow) As CustomFieldRow
+            Dim rowCustomFieldRow As CustomFieldRow = CType(Me.NewRow,CustomFieldRow)
+            Dim columnValuesArray() As Object = New Object() {Tag, Name, Type, DefaultValue, MultiValues, ExcludedInScripts, GUIProperties, OtherProperties, Nothing, Nothing}
+            If (Not (parentCustomFieldsPropertiesRowByCustomFieldsProperties_CustomField) Is Nothing) Then
+                columnValuesArray(9) = parentCustomFieldsPropertiesRowByCustomFieldsProperties_CustomField(0)
+            End If
+            rowCustomFieldRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowCustomFieldRow)
+            Return rowCustomFieldRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As CustomFieldDataTable = CType(MyBase.Clone,CustomFieldDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New CustomFieldDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnTag = MyBase.Columns("Tag")
+            Me.columnName = MyBase.Columns("Name")
+            Me.columnType = MyBase.Columns("Type")
+            Me.columnDefaultValue = MyBase.Columns("DefaultValue")
+            Me.columnMultiValues = MyBase.Columns("MultiValues")
+            Me.columnExcludedInScripts = MyBase.Columns("ExcludedInScripts")
+            Me.columnGUIProperties = MyBase.Columns("GUIProperties")
+            Me.columnOtherProperties = MyBase.Columns("OtherProperties")
+            Me.columnCustomField_Id = MyBase.Columns("CustomField_Id")
+            Me.columnCustomFieldsProperties_Id = MyBase.Columns("CustomFieldsProperties_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnTag = New Global.System.Data.DataColumn("Tag", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTag)
+            Me.columnName = New Global.System.Data.DataColumn("Name", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnName)
+            Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnType)
+            Me.columnDefaultValue = New Global.System.Data.DataColumn("DefaultValue", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnDefaultValue)
+            Me.columnMultiValues = New Global.System.Data.DataColumn("MultiValues", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnMultiValues)
+            Me.columnExcludedInScripts = New Global.System.Data.DataColumn("ExcludedInScripts", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnExcludedInScripts)
+            Me.columnGUIProperties = New Global.System.Data.DataColumn("GUIProperties", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnGUIProperties)
+            Me.columnOtherProperties = New Global.System.Data.DataColumn("OtherProperties", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnOtherProperties)
+            Me.columnCustomField_Id = New Global.System.Data.DataColumn("CustomField_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnCustomField_Id)
+            Me.columnCustomFieldsProperties_Id = New Global.System.Data.DataColumn("CustomFieldsProperties_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnCustomFieldsProperties_Id)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnCustomField_Id}, true))
+            Me.columnTag.Namespace = ""
+            Me.columnName.Namespace = ""
+            Me.columnType.Namespace = ""
+            Me.columnDefaultValue.Namespace = ""
+            Me.columnMultiValues.Namespace = ""
+            Me.columnExcludedInScripts.Namespace = ""
+            Me.columnGUIProperties.Namespace = ""
+            Me.columnOtherProperties.Namespace = ""
+            Me.columnCustomField_Id.AutoIncrement = true
+            Me.columnCustomField_Id.AllowDBNull = false
+            Me.columnCustomField_Id.Unique = true
+            Me.columnCustomField_Id.Namespace = ""
+            Me.columnCustomFieldsProperties_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewCustomFieldRow() As CustomFieldRow
+            Return CType(Me.NewRow,CustomFieldRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New CustomFieldRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(CustomFieldRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.CustomFieldRowChangedEvent) Is Nothing) Then
+                RaiseEvent CustomFieldRowChanged(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.CustomFieldRowChangingEvent) Is Nothing) Then
+                RaiseEvent CustomFieldRowChanging(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.CustomFieldRowDeletedEvent) Is Nothing) Then
+                RaiseEvent CustomFieldRowDeleted(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.CustomFieldRowDeletingEvent) Is Nothing) Then
+                RaiseEvent CustomFieldRowDeleting(Me, New CustomFieldRowChangeEvent(CType(e.Row,CustomFieldRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveCustomFieldRow(ByVal row As CustomFieldRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "CustomFieldDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ListValueDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ListValueRow)
+        
+        Private columnText As Global.System.Data.DataColumn
+        
+        Private columnCustomField_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "ListValue"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TextColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnText
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ListValueRow
+            Get
+                Return CType(Me.Rows(index),ListValueRow)
+            End Get
+        End Property
+        
+        Public Event ListValueRowChanging As ListValueRowChangeEventHandler
+        
+        Public Event ListValueRowChanged As ListValueRowChangeEventHandler
+        
+        Public Event ListValueRowDeleting As ListValueRowChangeEventHandler
+        
+        Public Event ListValueRowDeleted As ListValueRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddListValueRow(ByVal row As ListValueRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddListValueRow(ByVal Text As String, ByVal parentCustomFieldRowByCustomField_ListValue As CustomFieldRow) As ListValueRow
+            Dim rowListValueRow As ListValueRow = CType(Me.NewRow,ListValueRow)
+            Dim columnValuesArray() As Object = New Object() {Text, Nothing}
+            If (Not (parentCustomFieldRowByCustomField_ListValue) Is Nothing) Then
+                columnValuesArray(1) = parentCustomFieldRowByCustomField_ListValue(8)
+            End If
+            rowListValueRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowListValueRow)
+            Return rowListValueRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ListValueDataTable = CType(MyBase.Clone,ListValueDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ListValueDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnText = MyBase.Columns("Text")
+            Me.columnCustomField_Id = MyBase.Columns("CustomField_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnText = New Global.System.Data.DataColumn("Text", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnText)
+            Me.columnCustomField_Id = New Global.System.Data.DataColumn("CustomField_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnCustomField_Id)
+            Me.columnText.Namespace = ""
+            Me.columnCustomField_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewListValueRow() As ListValueRow
+            Return CType(Me.NewRow,ListValueRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ListValueRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ListValueRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ListValueRowChangedEvent) Is Nothing) Then
+                RaiseEvent ListValueRowChanged(Me, New ListValueRowChangeEvent(CType(e.Row,ListValueRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ListValueRowChangingEvent) Is Nothing) Then
+                RaiseEvent ListValueRowChanging(Me, New ListValueRowChangeEvent(CType(e.Row,ListValueRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ListValueRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ListValueRowDeleted(Me, New ListValueRowChangeEvent(CType(e.Row,ListValueRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ListValueRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ListValueRowDeleting(Me, New ListValueRowChangeEvent(CType(e.Row,ListValueRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveListValueRow(ByVal row As ListValueRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ListValueDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ContentsDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ContentsRow)
+        
+        Private columnContents_Id As Global.System.Data.DataColumn
+        
+        Private columnCatalog_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Contents"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Contents_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnContents_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCatalog_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ContentsRow
+            Get
+                Return CType(Me.Rows(index),ContentsRow)
+            End Get
+        End Property
+        
+        Public Event ContentsRowChanging As ContentsRowChangeEventHandler
+        
+        Public Event ContentsRowChanged As ContentsRowChangeEventHandler
+        
+        Public Event ContentsRowDeleting As ContentsRowChangeEventHandler
+        
+        Public Event ContentsRowDeleted As ContentsRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddContentsRow(ByVal row As ContentsRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddContentsRow(ByVal parentCatalogRowByCatalog_Contents As CatalogRow) As ContentsRow
+            Dim rowContentsRow As ContentsRow = CType(Me.NewRow,ContentsRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing}
+            If (Not (parentCatalogRowByCatalog_Contents) Is Nothing) Then
+                columnValuesArray(1) = parentCatalogRowByCatalog_Contents(1)
+            End If
+            rowContentsRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowContentsRow)
+            Return rowContentsRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ContentsDataTable = CType(MyBase.Clone,ContentsDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ContentsDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnContents_Id = MyBase.Columns("Contents_Id")
+            Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnContents_Id = New Global.System.Data.DataColumn("Contents_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnContents_Id)
+            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnCatalog_Id)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnContents_Id}, true))
+            Me.columnContents_Id.AutoIncrement = true
+            Me.columnContents_Id.AllowDBNull = false
+            Me.columnContents_Id.Unique = true
+            Me.columnContents_Id.Namespace = ""
+            Me.columnCatalog_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewContentsRow() As ContentsRow
+            Return CType(Me.NewRow,ContentsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ContentsRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ContentsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ContentsRowChangedEvent) Is Nothing) Then
+                RaiseEvent ContentsRowChanged(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ContentsRowChangingEvent) Is Nothing) Then
+                RaiseEvent ContentsRowChanging(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ContentsRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ContentsRowDeleted(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ContentsRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ContentsRowDeleting(Me, New ContentsRowChangeEvent(CType(e.Row,ContentsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveContentsRow(ByVal row As ContentsRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ContentsDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class MovieDataTable
+        Inherits Global.System.Data.TypedTableBase(Of MovieRow)
+        
+        Private columnNumber As Global.System.Data.DataColumn
+        
+        Private columnChecked As Global.System.Data.DataColumn
+        
+        Private columnMediaLabel As Global.System.Data.DataColumn
+        
+        Private columnMediaType As Global.System.Data.DataColumn
+        
+        Private columnSource As Global.System.Data.DataColumn
+        
+        Private columnDate As Global.System.Data.DataColumn
+        
+        Private columnBorrower As Global.System.Data.DataColumn
+        
+        Private columnRating As Global.System.Data.DataColumn
+        
+        Private columnRatingUser As Global.System.Data.DataColumn
+        
+        Private columnOriginalTitle As Global.System.Data.DataColumn
+        
+        Private columnTranslatedTitle As Global.System.Data.DataColumn
+        
+        Private columnFormattedTitle As Global.System.Data.DataColumn
+        
+        Private columnEdition As Global.System.Data.DataColumn
+        
+        Private columnDirector As Global.System.Data.DataColumn
+        
+        Private columnProducer As Global.System.Data.DataColumn
+        
+        Private columnCountry As Global.System.Data.DataColumn
+        
+        Private columnCategory As Global.System.Data.DataColumn
+        
+        Private columnYear As Global.System.Data.DataColumn
+        
+        Private columnLength As Global.System.Data.DataColumn
+        
+        Private columnActors As Global.System.Data.DataColumn
+        
+        Private columnURL As Global.System.Data.DataColumn
+        
+        Private columnDescription As Global.System.Data.DataColumn
+        
+        Private columnComments As Global.System.Data.DataColumn
+        
+        Private columnVideoFormat As Global.System.Data.DataColumn
+        
+        Private columnVideoBitrate As Global.System.Data.DataColumn
+        
+        Private columnAudioFormat As Global.System.Data.DataColumn
+        
+        Private columnAudioBitrate As Global.System.Data.DataColumn
+        
+        Private columnResolution As Global.System.Data.DataColumn
+        
+        Private columnFramerate As Global.System.Data.DataColumn
+        
+        Private columnLanguages As Global.System.Data.DataColumn
+        
+        Private columnDateAdded As Global.System.Data.DataColumn
+        
+        Private columnSubtitles As Global.System.Data.DataColumn
+        
+        Private columnSize As Global.System.Data.DataColumn
+        
+        Private columnDisks As Global.System.Data.DataColumn
+        
+        Private columnLength_Num As Global.System.Data.DataColumn
+        
+        Private columnPicture As Global.System.Data.DataColumn
+        
+        Private columnFanart As Global.System.Data.DataColumn
+        
+        Private columnCertification As Global.System.Data.DataColumn
+        
+        Private columnWriter As Global.System.Data.DataColumn
+        
+        Private columnWatched As Global.System.Data.DataColumn
+        
+        Private columnDateWatched As Global.System.Data.DataColumn
+        
+        Private columnIMDB_Id As Global.System.Data.DataColumn
+        
+        Private columnTMDB_Id As Global.System.Data.DataColumn
+        
+        Private columnSourceTrailer As Global.System.Data.DataColumn
+        
+        Private columnTagLine As Global.System.Data.DataColumn
+        
+        Private columnTags As Global.System.Data.DataColumn
+        
+        Private columnStudio As Global.System.Data.DataColumn
+        
+        Private columnIMDB_Rank As Global.System.Data.DataColumn
+        
+        Private columnIsOnline As Global.System.Data.DataColumn
+        
+        Private columnIsOnlineTrailer As Global.System.Data.DataColumn
+        
+        Private columnAspectratio As Global.System.Data.DataColumn
+        
+        Private columnCategoryTrakt As Global.System.Data.DataColumn
+        
+        Private columnLastPosition As Global.System.Data.DataColumn
+        
+        Private columnPersons As Global.System.Data.DataColumn
+        
+        Private columnMovie_Id As Global.System.Data.DataColumn
+        
+        Private columnContents_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            Me.New(false)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal initExpressions As Boolean)
+            MyBase.New
+            Me.TableName = "Movie"
+            Me.BeginInit
+            Me.InitClass
+            If (initExpressions = true) Then
+                Me.InitExpressions
+            End If
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property NumberColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNumber
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CheckedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChecked
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property MediaLabelColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMediaLabel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property MediaTypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMediaType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SourceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSource
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property BorrowerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBorrower
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property RatingColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRating
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property RatingUserColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRatingUser
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property OriginalTitleColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOriginalTitle
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TranslatedTitleColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTranslatedTitle
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property FormattedTitleColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFormattedTitle
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property EditionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEdition
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DirectorColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDirector
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property ProducerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProducer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CountryColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCountry
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CategoryColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCategory
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property YearColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnYear
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property LengthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLength
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property ActorsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnActors
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property URLColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnURL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDescription
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CommentsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnComments
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property VideoFormatColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVideoFormat
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property VideoBitrateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVideoBitrate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AudioFormatColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAudioFormat
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AudioBitrateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAudioBitrate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property ResolutionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnResolution
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property FramerateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFramerate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property LanguagesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLanguages
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DateAddedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateAdded
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SubtitlesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSubtitles
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SizeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSize
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DisksColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDisks
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Length_NumColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLength_Num
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property PictureColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPicture
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property FanartColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFanart
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CertificationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertification
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property WriterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWriter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property WatchedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWatched
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DateWatchedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateWatched
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMDB_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMDB_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TMDB_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTMDB_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SourceTrailerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSourceTrailer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagLineColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTagLine
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTags
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property StudioColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStudio
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMDB_RankColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMDB_Rank
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsOnlineColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsOnline
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsOnlineTrailerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsOnlineTrailer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AspectratioColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAspectratio
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CategoryTraktColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCategoryTrakt
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property LastPosition() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLastPosition
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property PersonsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPersons
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Movie_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMovie_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Contents_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnContents_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As MovieRow
+            Get
+                Return CType(Me.Rows(index),MovieRow)
+            End Get
+        End Property
+        
+        Public Event MovieRowChanging As MovieRowChangeEventHandler
+        
+        Public Event MovieRowChanged As MovieRowChangeEventHandler
+        
+        Public Event MovieRowDeleting As MovieRowChangeEventHandler
+        
+        Public Event MovieRowDeleted As MovieRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddMovieRow(ByVal row As MovieRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddMovieRow( _
+                    ByVal Number As Integer,  _
+                    ByVal Checked As String,  _
+                    ByVal MediaLabel As String,  _
+                    ByVal MediaType As String,  _
+                    ByVal Source As String,  _
+                    ByVal _Date As String,  _
+                    ByVal Borrower As String,  _
+                    ByVal Rating As Decimal,  _
+                    ByVal RatingUser As Decimal,  _
+                    ByVal OriginalTitle As String,  _
+                    ByVal TranslatedTitle As String,  _
+                    ByVal FormattedTitle As String,  _
+                    ByVal Edition As String,  _
+                    ByVal Director As String,  _
+                    ByVal Producer As String,  _
+                    ByVal Country As String,  _
+                    ByVal Category As String,  _
+                    ByVal Year As String,  _
+                    ByVal Length As String,  _
+                    ByVal Actors As String,  _
+                    ByVal URL As String,  _
+                    ByVal Description As String,  _
+                    ByVal Comments As String,  _
+                    ByVal VideoFormat As String,  _
+                    ByVal VideoBitrate As String,  _
+                    ByVal AudioFormat As String,  _
+                    ByVal AudioBitrate As String,  _
+                    ByVal Resolution As String,  _
+                    ByVal Framerate As String,  _
+                    ByVal Languages As String,  _
+                    ByVal DateAdded As Date,  _
+                    ByVal Subtitles As String,  _
+                    ByVal Size As String,  _
+                    ByVal Disks As String,  _
+                    ByVal Length_Num As Integer,  _
+                    ByVal Picture As String,  _
+                    ByVal Fanart As String,  _
+                    ByVal Certification As String,  _
+                    ByVal Writer As String,  _
+                    ByVal Watched As String,  _
+                    ByVal DateWatched As Date,  _
+                    ByVal IMDB_Id As String,  _
+                    ByVal TMDB_Id As String,  _
+                    ByVal SourceTrailer As String,  _
+                    ByVal TagLine As String,  _
+                    ByVal Tags As String,  _
+                    ByVal Studio As String,  _
+                    ByVal IMDB_Rank As String,  _
+                    ByVal IsOnline As String,  _
+                    ByVal IsOnlineTrailer As String,  _
+                    ByVal Aspectratio As String,  _
+                    ByVal CategoryTrakt As String,  _
+                    ByVal LastPosition As String,  _
+                    ByVal Persons As String,  _
+                    ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
+            Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, Subtitles, Size, Disks, Length_Num, Picture, Fanart, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, Persons, Nothing, Nothing}
+            If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
+                columnValuesArray(55) = parentContentsRowByContents_Movie(0)
+            End If
+            rowMovieRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowMovieRow)
+            Return rowMovieRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddMovieRow( _
+                    ByVal Number As Integer,  _
+                    ByVal Checked As String,  _
+                    ByVal MediaLabel As String,  _
+                    ByVal MediaType As String,  _
+                    ByVal Source As String,  _
+                    ByVal _Date As String,  _
+                    ByVal Borrower As String,  _
+                    ByVal Rating As Decimal,  _
+                    ByVal RatingUser As Decimal,  _
+                    ByVal OriginalTitle As String,  _
+                    ByVal TranslatedTitle As String,  _
+                    ByVal FormattedTitle As String,  _
+                    ByVal Edition As String,  _
+                    ByVal Director As String,  _
+                    ByVal Producer As String,  _
+                    ByVal Country As String,  _
+                    ByVal Category As String,  _
+                    ByVal Year As String,  _
+                    ByVal Length As String,  _
+                    ByVal Actors As String,  _
+                    ByVal URL As String,  _
+                    ByVal Description As String,  _
+                    ByVal Comments As String,  _
+                    ByVal VideoFormat As String,  _
+                    ByVal VideoBitrate As String,  _
+                    ByVal AudioFormat As String,  _
+                    ByVal AudioBitrate As String,  _
+                    ByVal Resolution As String,  _
+                    ByVal Framerate As String,  _
+                    ByVal Languages As String,  _
+                    ByVal Subtitles As String,  _
+                    ByVal Size As String,  _
+                    ByVal Disks As String,  _
+                    ByVal Picture As String,  _
+                    ByVal Fanart As String,  _
+                    ByVal Certification As String,  _
+                    ByVal Writer As String,  _
+                    ByVal Watched As String,  _
+                    ByVal DateWatched As Date,  _
+                    ByVal IMDB_Id As String,  _
+                    ByVal TMDB_Id As String,  _
+                    ByVal SourceTrailer As String,  _
+                    ByVal TagLine As String,  _
+                    ByVal Tags As String,  _
+                    ByVal Studio As String,  _
+                    ByVal IMDB_Rank As String,  _
+                    ByVal IsOnline As String,  _
+                    ByVal IsOnlineTrailer As String,  _
+                    ByVal Aspectratio As String,  _
+                    ByVal CategoryTrakt As String,  _
+                    ByVal LastPosition As String,  _
+                    ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
+            Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Nothing, Subtitles, Size, Disks, Nothing, Picture, Fanart, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, Nothing, Nothing, Nothing}
+            If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
+                columnValuesArray(55) = parentContentsRowByContents_Movie(0)
+            End If
+            rowMovieRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowMovieRow)
+            Return rowMovieRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As MovieDataTable = CType(MyBase.Clone,MovieDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New MovieDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnNumber = MyBase.Columns("Number")
+            Me.columnChecked = MyBase.Columns("Checked")
+            Me.columnMediaLabel = MyBase.Columns("MediaLabel")
+            Me.columnMediaType = MyBase.Columns("MediaType")
+            Me.columnSource = MyBase.Columns("Source")
+            Me.columnDate = MyBase.Columns("Date")
+            Me.columnBorrower = MyBase.Columns("Borrower")
+            Me.columnRating = MyBase.Columns("Rating")
+            Me.columnRatingUser = MyBase.Columns("RatingUser")
+            Me.columnOriginalTitle = MyBase.Columns("OriginalTitle")
+            Me.columnTranslatedTitle = MyBase.Columns("TranslatedTitle")
+            Me.columnFormattedTitle = MyBase.Columns("FormattedTitle")
+            Me.columnEdition = MyBase.Columns("Edition")
+            Me.columnDirector = MyBase.Columns("Director")
+            Me.columnProducer = MyBase.Columns("Producer")
+            Me.columnCountry = MyBase.Columns("Country")
+            Me.columnCategory = MyBase.Columns("Category")
+            Me.columnYear = MyBase.Columns("Year")
+            Me.columnLength = MyBase.Columns("Length")
+            Me.columnActors = MyBase.Columns("Actors")
+            Me.columnURL = MyBase.Columns("URL")
+            Me.columnDescription = MyBase.Columns("Description")
+            Me.columnComments = MyBase.Columns("Comments")
+            Me.columnVideoFormat = MyBase.Columns("VideoFormat")
+            Me.columnVideoBitrate = MyBase.Columns("VideoBitrate")
+            Me.columnAudioFormat = MyBase.Columns("AudioFormat")
+            Me.columnAudioBitrate = MyBase.Columns("AudioBitrate")
+            Me.columnResolution = MyBase.Columns("Resolution")
+            Me.columnFramerate = MyBase.Columns("Framerate")
+            Me.columnLanguages = MyBase.Columns("Languages")
+            Me.columnDateAdded = MyBase.Columns("DateAdded")
+            Me.columnSubtitles = MyBase.Columns("Subtitles")
+            Me.columnSize = MyBase.Columns("Size")
+            Me.columnDisks = MyBase.Columns("Disks")
+            Me.columnLength_Num = MyBase.Columns("Length_Num")
+            Me.columnPicture = MyBase.Columns("Picture")
+            Me.columnFanart = MyBase.Columns("Fanart")
+            Me.columnCertification = MyBase.Columns("Certification")
+            Me.columnWriter = MyBase.Columns("Writer")
+            Me.columnWatched = MyBase.Columns("Watched")
+            Me.columnDateWatched = MyBase.Columns("DateWatched")
+            Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
+            Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
+            Me.columnSourceTrailer = MyBase.Columns("SourceTrailer")
+            Me.columnTagLine = MyBase.Columns("TagLine")
+            Me.columnTags = MyBase.Columns("Tags")
+            Me.columnStudio = MyBase.Columns("Studio")
+            Me.columnIMDB_Rank = MyBase.Columns("IMDB_Rank")
+            Me.columnIsOnline = MyBase.Columns("IsOnline")
+            Me.columnIsOnlineTrailer = MyBase.Columns("IsOnlineTrailer")
+            Me.columnAspectratio = MyBase.Columns("Aspectratio")
+            Me.columnCategoryTrakt = MyBase.Columns("CategoryTrakt")
+            Me.columnLastPosition = MyBase.Columns("LastPosition")
+            Me.columnPersons = MyBase.Columns("Persons")
+            Me.columnMovie_Id = MyBase.Columns("Movie_Id")
+            Me.columnContents_Id = MyBase.Columns("Contents_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnNumber = New Global.System.Data.DataColumn("Number", GetType(Integer), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnNumber)
+            Me.columnChecked = New Global.System.Data.DataColumn("Checked", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnChecked)
+            Me.columnMediaLabel = New Global.System.Data.DataColumn("MediaLabel", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnMediaLabel)
+            Me.columnMediaType = New Global.System.Data.DataColumn("MediaType", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnMediaType)
+            Me.columnSource = New Global.System.Data.DataColumn("Source", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnSource)
+            Me.columnDate = New Global.System.Data.DataColumn("Date", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            Me.columnDate.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "DateColumn")
+            Me.columnDate.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnDate")
+            Me.columnDate.ExtendedProperties.Add("Generator_UserColumnName", "Date")
+            MyBase.Columns.Add(Me.columnDate)
+            Me.columnBorrower = New Global.System.Data.DataColumn("Borrower", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnBorrower)
+            Me.columnRating = New Global.System.Data.DataColumn("Rating", GetType(Decimal), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnRating)
+            Me.columnRatingUser = New Global.System.Data.DataColumn("RatingUser", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRatingUser)
+            Me.columnOriginalTitle = New Global.System.Data.DataColumn("OriginalTitle", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnOriginalTitle)
+            Me.columnTranslatedTitle = New Global.System.Data.DataColumn("TranslatedTitle", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTranslatedTitle)
+            Me.columnFormattedTitle = New Global.System.Data.DataColumn("FormattedTitle", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnFormattedTitle)
+            Me.columnEdition = New Global.System.Data.DataColumn("Edition", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEdition)
+            Me.columnDirector = New Global.System.Data.DataColumn("Director", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnDirector)
+            Me.columnProducer = New Global.System.Data.DataColumn("Producer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnProducer)
+            Me.columnCountry = New Global.System.Data.DataColumn("Country", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCountry)
+            Me.columnCategory = New Global.System.Data.DataColumn("Category", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCategory)
+            Me.columnYear = New Global.System.Data.DataColumn("Year", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnYear)
+            Me.columnLength = New Global.System.Data.DataColumn("Length", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnLength)
+            Me.columnActors = New Global.System.Data.DataColumn("Actors", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnActors)
+            Me.columnURL = New Global.System.Data.DataColumn("URL", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnURL)
+            Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnDescription)
+            Me.columnComments = New Global.System.Data.DataColumn("Comments", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnComments)
+            Me.columnVideoFormat = New Global.System.Data.DataColumn("VideoFormat", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnVideoFormat)
+            Me.columnVideoBitrate = New Global.System.Data.DataColumn("VideoBitrate", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnVideoBitrate)
+            Me.columnAudioFormat = New Global.System.Data.DataColumn("AudioFormat", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnAudioFormat)
+            Me.columnAudioBitrate = New Global.System.Data.DataColumn("AudioBitrate", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnAudioBitrate)
+            Me.columnResolution = New Global.System.Data.DataColumn("Resolution", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnResolution)
+            Me.columnFramerate = New Global.System.Data.DataColumn("Framerate", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnFramerate)
+            Me.columnLanguages = New Global.System.Data.DataColumn("Languages", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnLanguages)
+            Me.columnDateAdded = New Global.System.Data.DataColumn("DateAdded", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateAdded)
+            Me.columnSubtitles = New Global.System.Data.DataColumn("Subtitles", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnSubtitles)
+            Me.columnSize = New Global.System.Data.DataColumn("Size", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnSize)
+            Me.columnDisks = New Global.System.Data.DataColumn("Disks", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnDisks)
+            Me.columnLength_Num = New Global.System.Data.DataColumn("Length_Num", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLength_Num)
+            Me.columnPicture = New Global.System.Data.DataColumn("Picture", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnPicture)
+            Me.columnFanart = New Global.System.Data.DataColumn("Fanart", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFanart)
+            Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertification)
+            Me.columnWriter = New Global.System.Data.DataColumn("Writer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWriter)
+            Me.columnWatched = New Global.System.Data.DataColumn("Watched", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWatched)
+            Me.columnDateWatched = New Global.System.Data.DataColumn("DateWatched", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateWatched)
+            Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIMDB_Id)
+            Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTMDB_Id)
+            Me.columnSourceTrailer = New Global.System.Data.DataColumn("SourceTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSourceTrailer)
+            Me.columnTagLine = New Global.System.Data.DataColumn("TagLine", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTagLine)
+            Me.columnTags = New Global.System.Data.DataColumn("Tags", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTags)
+            Me.columnStudio = New Global.System.Data.DataColumn("Studio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnStudio)
+            Me.columnIMDB_Rank = New Global.System.Data.DataColumn("IMDB_Rank", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIMDB_Rank)
+            Me.columnIsOnline = New Global.System.Data.DataColumn("IsOnline", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsOnline)
+            Me.columnIsOnlineTrailer = New Global.System.Data.DataColumn("IsOnlineTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsOnlineTrailer)
+            Me.columnAspectratio = New Global.System.Data.DataColumn("Aspectratio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAspectratio)
+            Me.columnCategoryTrakt = New Global.System.Data.DataColumn("CategoryTrakt", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCategoryTrakt)
+            Me.columnLastPosition = New Global.System.Data.DataColumn("LastPosition", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnLastPosition.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "LastPosition")
+            Me.columnLastPosition.ExtendedProperties.Add("Generator_UserColumnName", "LastPosition")
+            MyBase.Columns.Add(Me.columnLastPosition)
+            Me.columnPersons = New Global.System.Data.DataColumn("Persons", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPersons)
+            Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnMovie_Id)
+            Me.columnContents_Id = New Global.System.Data.DataColumn("Contents_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnContents_Id)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnMovie_Id}, true))
+            Me.columnNumber.Namespace = ""
+            Me.columnChecked.Namespace = ""
+            Me.columnMediaLabel.Namespace = ""
+            Me.columnMediaType.Namespace = ""
+            Me.columnSource.Namespace = ""
+            Me.columnDate.Namespace = ""
+            Me.columnBorrower.Namespace = ""
+            Me.columnRating.Namespace = ""
+            Me.columnOriginalTitle.Namespace = ""
+            Me.columnTranslatedTitle.Namespace = ""
+            Me.columnFormattedTitle.Namespace = ""
+            Me.columnDirector.Namespace = ""
+            Me.columnProducer.Namespace = ""
+            Me.columnCountry.Namespace = ""
+            Me.columnCategory.Namespace = ""
+            Me.columnYear.Namespace = ""
+            Me.columnLength.Namespace = ""
+            Me.columnActors.Namespace = ""
+            Me.columnURL.Namespace = ""
+            Me.columnDescription.Namespace = ""
+            Me.columnComments.Namespace = ""
+            Me.columnVideoFormat.Namespace = ""
+            Me.columnVideoBitrate.Namespace = ""
+            Me.columnAudioFormat.Namespace = ""
+            Me.columnAudioBitrate.Namespace = ""
+            Me.columnResolution.Namespace = ""
+            Me.columnFramerate.Namespace = ""
+            Me.columnLanguages.Namespace = ""
+            Me.columnDateAdded.ReadOnly = true
+            Me.columnSubtitles.Namespace = ""
+            Me.columnSize.Namespace = ""
+            Me.columnDisks.Namespace = ""
+            Me.columnLength_Num.ReadOnly = true
+            Me.columnLength_Num.DefaultValue = CType(0,Integer)
+            Me.columnPicture.Namespace = ""
+            Me.columnPersons.ReadOnly = true
+            Me.columnMovie_Id.AutoIncrement = true
+            Me.columnMovie_Id.AllowDBNull = false
+            Me.columnMovie_Id.Unique = true
+            Me.columnMovie_Id.Namespace = ""
+            Me.columnContents_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewMovieRow() As MovieRow
+            Return CType(Me.NewRow,MovieRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New MovieRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(MovieRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitExpressions()
+            Me.DateAddedColumn.Expression = "Convert(Date,'System.DateTime')"
+            Me.Length_NumColumn.Expression = "Convert(Length,'System.Int32')"
+            Me.PersonsColumn.Expression = "ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') "& _ 
+                "+ ', ' + ISNULL(Writer, ' ')"
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.MovieRowChangedEvent) Is Nothing) Then
+                RaiseEvent MovieRowChanged(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.MovieRowChangingEvent) Is Nothing) Then
+                RaiseEvent MovieRowChanging(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.MovieRowDeletedEvent) Is Nothing) Then
+                RaiseEvent MovieRowDeleted(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.MovieRowDeletingEvent) Is Nothing) Then
+                RaiseEvent MovieRowDeleting(Me, New MovieRowChangeEvent(CType(e.Row,MovieRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveMovieRow(ByVal row As MovieRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "MovieDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class CustomFieldsDataTable
+        Inherits Global.System.Data.TypedTableBase(Of CustomFieldsRow)
+        
+        Private columnCustomField1 As Global.System.Data.DataColumn
+        
+        Private columnCustomField2 As Global.System.Data.DataColumn
+        
+        Private columnCustomField3 As Global.System.Data.DataColumn
+        
+        Private columnCustomField4 As Global.System.Data.DataColumn
+        
+        Private columnCustomField5 As Global.System.Data.DataColumn
+        
+        Private columnEdition As Global.System.Data.DataColumn
+        
+        Private columnStudio As Global.System.Data.DataColumn
+        
+        Private columnFanart As Global.System.Data.DataColumn
+        
+        Private columnCertification As Global.System.Data.DataColumn
+        
+        Private columnWriter As Global.System.Data.DataColumn
+        
+        Private columnTagLine As Global.System.Data.DataColumn
+        
+        Private columnTags As Global.System.Data.DataColumn
+        
+        Private columnAspectratio As Global.System.Data.DataColumn
+        
+        Private columnCategoryTrakt As Global.System.Data.DataColumn
+        
+        Private columnWatched As Global.System.Data.DataColumn
+        
+        Private columnDateWatched As Global.System.Data.DataColumn
+        
+        Private columnRatingUser As Global.System.Data.DataColumn
+        
+        Private columnIMDB_Id As Global.System.Data.DataColumn
+        
+        Private columnTMDB_Id As Global.System.Data.DataColumn
+        
+        Private columnIMDB_Rank As Global.System.Data.DataColumn
+        
+        Private columnSourceTrailer As Global.System.Data.DataColumn
+        
+        Private columnIsOnline As Global.System.Data.DataColumn
+        
+        Private columnIsOnlineTrailer As Global.System.Data.DataColumn
+        
+        Private columnLastPosition As Global.System.Data.DataColumn
+        
+        Private columnMovie_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "CustomFields"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField1Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField1
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField2Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField2
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField3Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField3
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField4Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField4
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CustomField5Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomField5
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property EditionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEdition
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property StudioColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStudio
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property FanartColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFanart
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CertificationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertification
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property WriterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWriter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagLineColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTagLine
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTags
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AspectratioColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAspectratio
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CategoryTraktColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCategoryTrakt
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property WatchedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWatched
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DateWatchedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateWatched
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property RatingUserColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRatingUser
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMDB_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMDB_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TMDB_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTMDB_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMDB_RankColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMDB_Rank
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SourceTrailerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSourceTrailer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsOnlineColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsOnline
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsOnlineTrailerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsOnlineTrailer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property LastPositionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLastPosition
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Movie_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMovie_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As CustomFieldsRow
+            Get
+                Return CType(Me.Rows(index),CustomFieldsRow)
+            End Get
+        End Property
+        
+        Public Event CustomFieldsRowChanging As CustomFieldsRowChangeEventHandler
+        
+        Public Event CustomFieldsRowChanged As CustomFieldsRowChangeEventHandler
+        
+        Public Event CustomFieldsRowDeleting As CustomFieldsRowChangeEventHandler
+        
+        Public Event CustomFieldsRowDeleted As CustomFieldsRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddCustomFieldsRow(ByVal row As CustomFieldsRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddCustomFieldsRow( _
+                    ByVal CustomField1 As String,  _
+                    ByVal CustomField2 As String,  _
+                    ByVal CustomField3 As String,  _
+                    ByVal CustomField4 As String,  _
+                    ByVal CustomField5 As String,  _
+                    ByVal Edition As String,  _
+                    ByVal Studio As String,  _
+                    ByVal Fanart As String,  _
+                    ByVal Certification As String,  _
+                    ByVal Writer As String,  _
+                    ByVal TagLine As String,  _
+                    ByVal Tags As String,  _
+                    ByVal Aspectratio As String,  _
+                    ByVal CategoryTrakt As String,  _
+                    ByVal Watched As String,  _
+                    ByVal DateWatched As String,  _
+                    ByVal RatingUser As String,  _
+                    ByVal IMDB_Id As String,  _
+                    ByVal TMDB_Id As String,  _
+                    ByVal IMDB_Rank As String,  _
+                    ByVal SourceTrailer As String,  _
+                    ByVal IsOnline As String,  _
+                    ByVal IsOnlineTrailer As String,  _
+                    ByVal LastPosition As String,  _
+                    ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
+            Dim rowCustomFieldsRow As CustomFieldsRow = CType(Me.NewRow,CustomFieldsRow)
+            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, CustomField4, CustomField5, Edition, Studio, Fanart, Certification, Writer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, DateWatched, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, Nothing}
+            If (Not (parentMovieRowByMovie_CustomFields) Is Nothing) Then
+                columnValuesArray(24) = parentMovieRowByMovie_CustomFields(54)
+            End If
+            rowCustomFieldsRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowCustomFieldsRow)
+            Return rowCustomFieldsRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As CustomFieldsDataTable = CType(MyBase.Clone,CustomFieldsDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New CustomFieldsDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnCustomField1 = MyBase.Columns("CustomField1")
+            Me.columnCustomField2 = MyBase.Columns("CustomField2")
+            Me.columnCustomField3 = MyBase.Columns("CustomField3")
+            Me.columnCustomField4 = MyBase.Columns("CustomField4")
+            Me.columnCustomField5 = MyBase.Columns("CustomField5")
+            Me.columnEdition = MyBase.Columns("Edition")
+            Me.columnStudio = MyBase.Columns("Studio")
+            Me.columnFanart = MyBase.Columns("Fanart")
+            Me.columnCertification = MyBase.Columns("Certification")
+            Me.columnWriter = MyBase.Columns("Writer")
+            Me.columnTagLine = MyBase.Columns("TagLine")
+            Me.columnTags = MyBase.Columns("Tags")
+            Me.columnAspectratio = MyBase.Columns("Aspectratio")
+            Me.columnCategoryTrakt = MyBase.Columns("CategoryTrakt")
+            Me.columnWatched = MyBase.Columns("Watched")
+            Me.columnDateWatched = MyBase.Columns("DateWatched")
+            Me.columnRatingUser = MyBase.Columns("RatingUser")
+            Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
+            Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
+            Me.columnIMDB_Rank = MyBase.Columns("IMDB_Rank")
+            Me.columnSourceTrailer = MyBase.Columns("SourceTrailer")
+            Me.columnIsOnline = MyBase.Columns("IsOnline")
+            Me.columnIsOnlineTrailer = MyBase.Columns("IsOnlineTrailer")
+            Me.columnLastPosition = MyBase.Columns("LastPosition")
+            Me.columnMovie_Id = MyBase.Columns("Movie_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnCustomField1 = New Global.System.Data.DataColumn("CustomField1", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCustomField1)
+            Me.columnCustomField2 = New Global.System.Data.DataColumn("CustomField2", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCustomField2)
+            Me.columnCustomField3 = New Global.System.Data.DataColumn("CustomField3", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCustomField3)
+            Me.columnCustomField4 = New Global.System.Data.DataColumn("CustomField4", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCustomField4)
+            Me.columnCustomField5 = New Global.System.Data.DataColumn("CustomField5", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCustomField5)
+            Me.columnEdition = New Global.System.Data.DataColumn("Edition", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnEdition)
+            Me.columnStudio = New Global.System.Data.DataColumn("Studio", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnStudio)
+            Me.columnFanart = New Global.System.Data.DataColumn("Fanart", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnFanart)
+            Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCertification)
+            Me.columnWriter = New Global.System.Data.DataColumn("Writer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnWriter)
+            Me.columnTagLine = New Global.System.Data.DataColumn("TagLine", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTagLine)
+            Me.columnTags = New Global.System.Data.DataColumn("Tags", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTags)
+            Me.columnAspectratio = New Global.System.Data.DataColumn("Aspectratio", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnAspectratio)
+            Me.columnCategoryTrakt = New Global.System.Data.DataColumn("CategoryTrakt", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnCategoryTrakt)
+            Me.columnWatched = New Global.System.Data.DataColumn("Watched", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnWatched)
+            Me.columnDateWatched = New Global.System.Data.DataColumn("DateWatched", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnDateWatched)
+            Me.columnRatingUser = New Global.System.Data.DataColumn("RatingUser", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnRatingUser)
+            Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIMDB_Id)
+            Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTMDB_Id)
+            Me.columnIMDB_Rank = New Global.System.Data.DataColumn("IMDB_Rank", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIMDB_Rank)
+            Me.columnSourceTrailer = New Global.System.Data.DataColumn("SourceTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnSourceTrailer)
+            Me.columnIsOnline = New Global.System.Data.DataColumn("IsOnline", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIsOnline)
+            Me.columnIsOnlineTrailer = New Global.System.Data.DataColumn("IsOnlineTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIsOnlineTrailer)
+            Me.columnLastPosition = New Global.System.Data.DataColumn("LastPosition", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnLastPosition)
+            Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnMovie_Id)
+            Me.columnCustomField1.Namespace = ""
+            Me.columnCustomField2.Namespace = ""
+            Me.columnCustomField3.Namespace = ""
+            Me.columnCustomField4.Namespace = ""
+            Me.columnCustomField5.Namespace = ""
+            Me.columnEdition.Namespace = ""
+            Me.columnStudio.Namespace = ""
+            Me.columnFanart.Namespace = ""
+            Me.columnCertification.Namespace = ""
+            Me.columnWriter.Namespace = ""
+            Me.columnTagLine.Namespace = ""
+            Me.columnTags.Namespace = ""
+            Me.columnAspectratio.Namespace = ""
+            Me.columnCategoryTrakt.Namespace = ""
+            Me.columnWatched.Namespace = ""
+            Me.columnDateWatched.Namespace = ""
+            Me.columnRatingUser.Namespace = ""
+            Me.columnIMDB_Id.Namespace = ""
+            Me.columnTMDB_Id.Namespace = ""
+            Me.columnIMDB_Rank.Namespace = ""
+            Me.columnSourceTrailer.Namespace = ""
+            Me.columnIsOnline.Namespace = ""
+            Me.columnIsOnlineTrailer.Namespace = ""
+            Me.columnLastPosition.Namespace = ""
+            Me.columnMovie_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewCustomFieldsRow() As CustomFieldsRow
+            Return CType(Me.NewRow,CustomFieldsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New CustomFieldsRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(CustomFieldsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.CustomFieldsRowChangedEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsRowChanged(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.CustomFieldsRowChangingEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsRowChanging(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.CustomFieldsRowDeletedEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsRowDeleted(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.CustomFieldsRowDeletingEvent) Is Nothing) Then
+                RaiseEvent CustomFieldsRowDeleting(Me, New CustomFieldsRowChangeEvent(CType(e.Row,CustomFieldsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveCustomFieldsRow(ByVal row As CustomFieldsRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "CustomFieldsDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class PersonsDataTable
+        Inherits Global.System.Data.TypedTableBase(Of PersonsRow)
+        
+        Private columnPersons_Id As Global.System.Data.DataColumn
+        
+        Private columnCatalog_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Persons"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Persons_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPersons_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Catalog_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCatalog_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As PersonsRow
+            Get
+                Return CType(Me.Rows(index),PersonsRow)
+            End Get
+        End Property
+        
+        Public Event PersonsRowChanging As PersonsRowChangeEventHandler
+        
+        Public Event PersonsRowChanged As PersonsRowChangeEventHandler
+        
+        Public Event PersonsRowDeleting As PersonsRowChangeEventHandler
+        
+        Public Event PersonsRowDeleted As PersonsRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddPersonsRow(ByVal row As PersonsRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddPersonsRow(ByVal parentCatalogRowByCatalog_Persons As CatalogRow) As PersonsRow
+            Dim rowPersonsRow As PersonsRow = CType(Me.NewRow,PersonsRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing}
+            If (Not (parentCatalogRowByCatalog_Persons) Is Nothing) Then
+                columnValuesArray(1) = parentCatalogRowByCatalog_Persons(1)
+            End If
+            rowPersonsRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowPersonsRow)
+            Return rowPersonsRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As PersonsDataTable = CType(MyBase.Clone,PersonsDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New PersonsDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnPersons_Id = MyBase.Columns("Persons_Id")
+            Me.columnCatalog_Id = MyBase.Columns("Catalog_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnPersons_Id = New Global.System.Data.DataColumn("Persons_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnPersons_Id)
+            Me.columnCatalog_Id = New Global.System.Data.DataColumn("Catalog_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnCatalog_Id)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnPersons_Id}, false))
+            Me.columnPersons_Id.AutoIncrement = true
+            Me.columnPersons_Id.AllowDBNull = false
+            Me.columnPersons_Id.Unique = true
+            Me.columnPersons_Id.Namespace = ""
+            Me.columnCatalog_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewPersonsRow() As PersonsRow
+            Return CType(Me.NewRow,PersonsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New PersonsRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(PersonsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.PersonsRowChangedEvent) Is Nothing) Then
+                RaiseEvent PersonsRowChanged(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.PersonsRowChangingEvent) Is Nothing) Then
+                RaiseEvent PersonsRowChanging(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.PersonsRowDeletedEvent) Is Nothing) Then
+                RaiseEvent PersonsRowDeleted(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.PersonsRowDeletingEvent) Is Nothing) Then
+                RaiseEvent PersonsRowDeleting(Me, New PersonsRowChangeEvent(CType(e.Row,PersonsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemovePersonsRow(ByVal row As PersonsRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "PersonsDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class PersonDataTable
+        Inherits Global.System.Data.TypedTableBase(Of PersonRow)
+        
+        Private columnName As Global.System.Data.DataColumn
+        
+        Private columnAlternateName As Global.System.Data.DataColumn
+        
+        Private columnBorn As Global.System.Data.DataColumn
+        
+        Private columnBirthPlace As Global.System.Data.DataColumn
+        
+        Private columnMiniBiography As Global.System.Data.DataColumn
+        
+        Private columnBiography As Global.System.Data.DataColumn
+        
+        Private columnURL As Global.System.Data.DataColumn
+        
+        Private columnIMDB_Id As Global.System.Data.DataColumn
+        
+        Private columnTMDB_Id As Global.System.Data.DataColumn
+        
+        Private columnIsActor As Global.System.Data.DataColumn
+        
+        Private columnIsProducer As Global.System.Data.DataColumn
+        
+        Private columnIsDirector As Global.System.Data.DataColumn
+        
+        Private columnIsWriter As Global.System.Data.DataColumn
+        
+        Private columnPhotos As Global.System.Data.DataColumn
+        
+        Private columnPicture As Global.System.Data.DataColumn
+        
+        Private columnPersons_Id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Person"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property NameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AlternateNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAlternateName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property BornColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBorn
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property BirthPlaceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBirthPlace
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property MiniBiographyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMiniBiography
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property BiographyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBiography
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property URLColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnURL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMDB_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMDB_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TMDB_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTMDB_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsActorColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsActor
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsProducerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsProducer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsDirectorColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsDirector
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IsWriterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsWriter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property PhotosColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPhotos
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property PictureColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPicture
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Persons_IdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPersons_Id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As PersonRow
+            Get
+                Return CType(Me.Rows(index),PersonRow)
+            End Get
+        End Property
+        
+        Public Event PersonRowChanging As PersonRowChangeEventHandler
+        
+        Public Event PersonRowChanged As PersonRowChangeEventHandler
+        
+        Public Event PersonRowDeleting As PersonRowChangeEventHandler
+        
+        Public Event PersonRowDeleted As PersonRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddPersonRow(ByVal row As PersonRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddPersonRow( _
+                    ByVal Name As String,  _
+                    ByVal AlternateName As String,  _
+                    ByVal Born As String,  _
+                    ByVal BirthPlace As String,  _
+                    ByVal MiniBiography As String,  _
+                    ByVal Biography As String,  _
+                    ByVal URL As String,  _
+                    ByVal IMDB_Id As String,  _
+                    ByVal TMDB_Id As String,  _
+                    ByVal IsActor As Boolean,  _
+                    ByVal IsProducer As Boolean,  _
+                    ByVal IsDirector As Boolean,  _
+                    ByVal IsWriter As Boolean,  _
+                    ByVal Photos As String,  _
+                    ByVal Picture As String,  _
+                    ByVal parentPersonsRowByPersons_Person As PersonsRow) As PersonRow
+            Dim rowPersonRow As PersonRow = CType(Me.NewRow,PersonRow)
+            Dim columnValuesArray() As Object = New Object() {Name, AlternateName, Born, BirthPlace, MiniBiography, Biography, URL, IMDB_Id, TMDB_Id, IsActor, IsProducer, IsDirector, IsWriter, Photos, Picture, Nothing}
+            If (Not (parentPersonsRowByPersons_Person) Is Nothing) Then
+                columnValuesArray(15) = parentPersonsRowByPersons_Person(0)
+            End If
+            rowPersonRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowPersonRow)
+            Return rowPersonRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As PersonDataTable = CType(MyBase.Clone,PersonDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New PersonDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnName = MyBase.Columns("Name")
+            Me.columnAlternateName = MyBase.Columns("AlternateName")
+            Me.columnBorn = MyBase.Columns("Born")
+            Me.columnBirthPlace = MyBase.Columns("BirthPlace")
+            Me.columnMiniBiography = MyBase.Columns("MiniBiography")
+            Me.columnBiography = MyBase.Columns("Biography")
+            Me.columnURL = MyBase.Columns("URL")
+            Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
+            Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
+            Me.columnIsActor = MyBase.Columns("IsActor")
+            Me.columnIsProducer = MyBase.Columns("IsProducer")
+            Me.columnIsDirector = MyBase.Columns("IsDirector")
+            Me.columnIsWriter = MyBase.Columns("IsWriter")
+            Me.columnPhotos = MyBase.Columns("Photos")
+            Me.columnPicture = MyBase.Columns("Picture")
+            Me.columnPersons_Id = MyBase.Columns("Persons_Id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnName = New Global.System.Data.DataColumn("Name", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnName)
+            Me.columnAlternateName = New Global.System.Data.DataColumn("AlternateName", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnAlternateName)
+            Me.columnBorn = New Global.System.Data.DataColumn("Born", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnBorn)
+            Me.columnBirthPlace = New Global.System.Data.DataColumn("BirthPlace", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnBirthPlace)
+            Me.columnMiniBiography = New Global.System.Data.DataColumn("MiniBiography", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnMiniBiography)
+            Me.columnBiography = New Global.System.Data.DataColumn("Biography", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnBiography)
+            Me.columnURL = New Global.System.Data.DataColumn("URL", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnURL)
+            Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIMDB_Id)
+            Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnTMDB_Id)
+            Me.columnIsActor = New Global.System.Data.DataColumn("IsActor", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIsActor)
+            Me.columnIsProducer = New Global.System.Data.DataColumn("IsProducer", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIsProducer)
+            Me.columnIsDirector = New Global.System.Data.DataColumn("IsDirector", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIsDirector)
+            Me.columnIsWriter = New Global.System.Data.DataColumn("IsWriter", GetType(Boolean), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnIsWriter)
+            Me.columnPhotos = New Global.System.Data.DataColumn("Photos", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnPhotos)
+            Me.columnPicture = New Global.System.Data.DataColumn("Picture", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnPicture)
+            Me.columnPersons_Id = New Global.System.Data.DataColumn("Persons_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
+            MyBase.Columns.Add(Me.columnPersons_Id)
+            Me.columnName.Namespace = ""
+            Me.columnAlternateName.Namespace = ""
+            Me.columnBorn.Namespace = ""
+            Me.columnBirthPlace.Namespace = ""
+            Me.columnMiniBiography.Namespace = ""
+            Me.columnBiography.Namespace = ""
+            Me.columnURL.Namespace = ""
+            Me.columnIMDB_Id.Namespace = ""
+            Me.columnTMDB_Id.Namespace = ""
+            Me.columnIsActor.Namespace = ""
+            Me.columnIsActor.DefaultValue = CType(false,Boolean)
+            Me.columnIsProducer.Namespace = ""
+            Me.columnIsProducer.DefaultValue = CType(false,Boolean)
+            Me.columnIsDirector.Namespace = ""
+            Me.columnIsDirector.DefaultValue = CType(false,Boolean)
+            Me.columnIsWriter.Namespace = ""
+            Me.columnIsWriter.DefaultValue = CType(false,Boolean)
+            Me.columnPhotos.Namespace = ""
+            Me.columnPicture.Namespace = ""
+            Me.columnPersons_Id.Namespace = ""
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewPersonRow() As PersonRow
+            Return CType(Me.NewRow,PersonRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New PersonRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(PersonRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.PersonRowChangedEvent) Is Nothing) Then
+                RaiseEvent PersonRowChanged(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.PersonRowChangingEvent) Is Nothing) Then
+                RaiseEvent PersonRowChanging(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.PersonRowDeletedEvent) Is Nothing) Then
+                RaiseEvent PersonRowDeleted(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.PersonRowDeletingEvent) Is Nothing) Then
+                RaiseEvent PersonRowDeleting(Me, New PersonRowChangeEvent(CType(e.Row,PersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemovePersonRow(ByVal row As PersonRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As AntMovieCatalog = New AntMovieCatalog
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "PersonDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
@@ -5238,6 +5587,20 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property AntMovieCatalog_Id() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCatalog.AntMovieCatalog_IdColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte AntMovieCatalog_Id in Tabelle Catalog ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCatalog.AntMovieCatalog_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Catalog_Id() As Integer
             Get
                 Return CType(Me(Me.tableCatalog.Catalog_IdColumn),Integer)
@@ -5248,11 +5611,30 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsAntMovieCatalog_IdNull() As Boolean
+            Return Me.IsNull(Me.tableCatalog.AntMovieCatalog_IdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetAntMovieCatalog_IdNull()
+            Me(Me.tableCatalog.AntMovieCatalog_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function GetPropertiesRows() As PropertiesRow()
             If (Me.Table.ChildRelations("Catalog_Properties") Is Nothing) Then
                 Return New PropertiesRow(-1) {}
             Else
                 Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Catalog_Properties")),PropertiesRow())
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function GetMyFilmsSettingsRows() As MyFilmsSettingsRow()
+            If (Me.Table.ChildRelations("Catalog_MyFilmsSettings") Is Nothing) Then
+                Return New MyFilmsSettingsRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Catalog_MyFilmsSettings")),MyFilmsSettingsRow())
             End If
         End Function
         
@@ -5280,15 +5662,6 @@ Partial Public Class AntMovieCatalog
                 Return New PersonsRow(-1) {}
             Else
                 Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Catalog_Persons")),PersonsRow())
-            End If
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function GetMyFilmsSettingsRows() As MyFilmsSettingsRow()
-            If (Me.Table.ChildRelations("Catalog_MyFilmsSettings") Is Nothing) Then
-                Return New MyFilmsSettingsRow(-1) {}
-            Else
-                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Catalog_MyFilmsSettings")),MyFilmsSettingsRow())
             End If
         End Function
     End Class
@@ -5443,6 +5816,290 @@ Partial Public Class AntMovieCatalog
     '''Represents strongly named DataRow class.
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class MyFilmsSettingsRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableMyFilmsSettings As MyFilmsSettingsDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableMyFilmsSettings = CType(Me.Table,MyFilmsSettingsDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property MyFilmsSettings_Id() As Integer
+            Get
+                Return CType(Me(Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Catalog_Id() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableMyFilmsSettings.Catalog_IdColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Catalog_Id in Tabelle MyFilmsSettings ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMyFilmsSettings.Catalog_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CatalogRow() As CatalogRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("Catalog_MyFilmsSettings")),CatalogRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("Catalog_MyFilmsSettings"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCatalog_IdNull() As Boolean
+            Return Me.IsNull(Me.tableMyFilmsSettings.Catalog_IdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCatalog_IdNull()
+            Me(Me.tableMyFilmsSettings.Catalog_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function GetUsersRows() As UsersRow()
+            If (Me.Table.ChildRelations("MyFilmsSettings_Users") Is Nothing) Then
+                Return New UsersRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("MyFilmsSettings_Users")),UsersRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class UsersRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableUsers As UsersDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableUsers = CType(Me.Table,UsersDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Users_Id() As Integer
+            Get
+                Return CType(Me(Me.tableUsers.Users_IdColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableUsers.Users_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property MyFilmsSettings_Id() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableUsers.MyFilmsSettings_IdColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte MyFilmsSettings_Id in Tabelle Users ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableUsers.MyFilmsSettings_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property MyFilmsSettingsRow() As MyFilmsSettingsRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("MyFilmsSettings_Users")),MyFilmsSettingsRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("MyFilmsSettings_Users"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsMyFilmsSettings_IdNull() As Boolean
+            Return Me.IsNull(Me.tableUsers.MyFilmsSettings_IdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetMyFilmsSettings_IdNull()
+            Me(Me.tableUsers.MyFilmsSettings_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function GetUserRows() As UserRow()
+            If (Me.Table.ChildRelations("Users_User") Is Nothing) Then
+                Return New UserRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Users_User")),UserRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class UserRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableUser As UserDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableUser = CType(Me.Table,UserDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Name() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableUser.NameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Name in Tabelle User ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableUser.NameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property _Alias() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableUser.AliasColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Alias in Tabelle User ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableUser.AliasColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TraktName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableUser.TraktNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte TraktName in Tabelle User ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableUser.TraktNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Age() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableUser.AgeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Age in Tabelle User ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableUser.AgeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Users_Id() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableUser.Users_IdColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Users_Id in Tabelle User ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableUser.Users_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property UsersRow() As UsersRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("Users_User")),UsersRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("Users_User"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsNameNull() As Boolean
+            Return Me.IsNull(Me.tableUser.NameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetNameNull()
+            Me(Me.tableUser.NameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function Is_AliasNull() As Boolean
+            Return Me.IsNull(Me.tableUser.AliasColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub Set_AliasNull()
+            Me(Me.tableUser.AliasColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTraktNameNull() As Boolean
+            Return Me.IsNull(Me.tableUser.TraktNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTraktNameNull()
+            Me(Me.tableUser.TraktNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsAgeNull() As Boolean
+            Return Me.IsNull(Me.tableUser.AgeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetAgeNull()
+            Me(Me.tableUser.AgeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsUsers_IdNull() As Boolean
+            Return Me.IsNull(Me.tableUser.Users_IdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetUsers_IdNull()
+            Me(Me.tableUser.Users_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
     Partial Public Class CustomFieldsPropertiesRow
         Inherits Global.System.Data.DataRow
         
@@ -5453,6 +6110,16 @@ Partial Public Class AntMovieCatalog
             MyBase.New(rb)
             Me.tableCustomFieldsProperties = CType(Me.Table,CustomFieldsPropertiesDataTable)
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CustomFieldsProperties_Id() As Integer
+            Get
+                Return CType(Me(Me.tableCustomFieldsProperties.CustomFieldsProperties_IdColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableCustomFieldsProperties.CustomFieldsProperties_IdColumn) = value
+            End Set
+        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property ColumnSettings() As String
@@ -5494,16 +6161,6 @@ Partial Public Class AntMovieCatalog
             End Get
             Set
                 Me(Me.tableCustomFieldsProperties.OtherPropertiesColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property CustomFieldsProperties_Id() As Integer
-            Get
-                Return CType(Me(Me.tableCustomFieldsProperties.CustomFieldsProperties_IdColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableCustomFieldsProperties.CustomFieldsProperties_IdColumn) = value
             End Set
         End Property
         
@@ -5833,11 +6490,11 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function GetListItemRows() As ListItemRow()
-            If (Me.Table.ChildRelations("CustomField_ListItem") Is Nothing) Then
-                Return New ListItemRow(-1) {}
+        Public Function GetListValueRows() As ListValueRow()
+            If (Me.Table.ChildRelations("CustomField_ListValue") Is Nothing) Then
+                Return New ListValueRow(-1) {}
             Else
-                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("CustomField_ListItem")),ListItemRow())
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("CustomField_ListValue")),ListValueRow())
             End If
         End Function
     End Class
@@ -5846,28 +6503,28 @@ Partial Public Class AntMovieCatalog
     '''Represents strongly named DataRow class.
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Partial Public Class ListItemRow
+    Partial Public Class ListValueRow
         Inherits Global.System.Data.DataRow
         
-        Private tableListItem As ListItemDataTable
+        Private tableListValue As ListValueDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableListItem = CType(Me.Table,ListItemDataTable)
+            Me.tableListValue = CType(Me.Table,ListValueDataTable)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Text() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableListItem.TextColumn),String)
+                    Return CType(Me(Me.tableListValue.TextColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Text in Tabelle ListItem ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Text in Tabelle ListValue ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableListItem.TextColumn) = value
+                Me(Me.tableListValue.TextColumn) = value
             End Set
         End Property
         
@@ -5875,44 +6532,44 @@ Partial Public Class AntMovieCatalog
         Public Property CustomField_Id() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableListItem.CustomField_IdColumn),Integer)
+                    Return CType(Me(Me.tableListValue.CustomField_IdColumn),Integer)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField_Id in Tabelle ListItem ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField_Id in Tabelle ListValue ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableListItem.CustomField_IdColumn) = value
+                Me(Me.tableListValue.CustomField_IdColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property CustomFieldRow() As CustomFieldRow
             Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("CustomField_ListItem")),CustomFieldRow)
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("CustomField_ListValue")),CustomFieldRow)
             End Get
             Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("CustomField_ListItem"))
+                Me.SetParentRow(value, Me.Table.ParentRelations("CustomField_ListValue"))
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsTextNull() As Boolean
-            Return Me.IsNull(Me.tableListItem.TextColumn)
+            Return Me.IsNull(Me.tableListValue.TextColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetTextNull()
-            Me(Me.tableListItem.TextColumn) = Global.System.Convert.DBNull
+            Me(Me.tableListValue.TextColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsCustomField_IdNull() As Boolean
-            Return Me.IsNull(Me.tableListItem.CustomField_IdColumn)
+            Return Me.IsNull(Me.tableListValue.CustomField_IdColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetCustomField_IdNull()
-            Me(Me.tableListItem.CustomField_IdColumn) = Global.System.Convert.DBNull
+            Me(Me.tableListValue.CustomField_IdColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -6087,11 +6744,11 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Borrower() As String
             Get
-                Try 
+                If Me.IsBorrowerNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.BorrowerColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Borrower in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.BorrowerColumn) = value
@@ -6109,6 +6766,20 @@ Partial Public Class AntMovieCatalog
             End Get
             Set
                 Me(Me.tableMovie.RatingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property RatingUser() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.RatingUserColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte RatingUser in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.RatingUserColumn) = value
             End Set
         End Property
         
@@ -6155,13 +6826,27 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Director() As String
+        Public Property Edition() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMovie.DirectorColumn),String)
+                    Return CType(Me(Me.tableMovie.EditionColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Director in Tabelle Movie ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Edition in Tabelle Movie ist DBNull.", e)
                 End Try
+            End Get
+            Set
+                Me(Me.tableMovie.EditionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Director() As String
+            Get
+                If Me.IsDirectorNull Then
+                    Return Nothing
+                Else
+                    Return CType(Me(Me.tableMovie.DirectorColumn),String)
+                End If
             End Get
             Set
                 Me(Me.tableMovie.DirectorColumn) = value
@@ -6171,11 +6856,11 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Producer() As String
             Get
-                Try 
+                If Me.IsProducerNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.ProducerColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Producer in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.ProducerColumn) = value
@@ -6241,11 +6926,11 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Actors() As String
             Get
-                Try 
+                If Me.IsActorsNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.ActorsColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Actors in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.ActorsColumn) = value
@@ -6393,6 +7078,20 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property DateAdded() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.DateAddedColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte DateAdded in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.DateAddedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Subtitles() As String
             Get
                 Try 
@@ -6435,34 +7134,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Picture() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableMovie.PictureColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Picture in Tabelle Movie ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMovie.PictureColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property DateAdded() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableMovie.DateAddedColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte DateAdded in Tabelle Movie ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMovie.DateAddedColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Length_Num() As Integer
             Get
                 Try 
@@ -6473,6 +7144,20 @@ Partial Public Class AntMovieCatalog
             End Get
             Set
                 Me(Me.tableMovie.Length_NumColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Picture() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.PictureColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Picture in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.PictureColumn) = value
             End Set
         End Property
         
@@ -6507,11 +7192,11 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Writer() As String
             Get
-                Try 
+                If Me.IsWriterNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.WriterColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.WriterColumn) = value
@@ -6687,30 +7372,44 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property RatingUser() As Decimal
+        Public Property CategoryTrakt() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMovie.RatingUserColumn),Decimal)
+                    Return CType(Me(Me.tableMovie.CategoryTraktColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte RatingUser in Tabelle Movie ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CategoryTrakt in Tabelle Movie ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMovie.RatingUserColumn) = value
+                Me(Me.tableMovie.CategoryTraktColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Edition() As String
+        Public Property LastPosition() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMovie.EditionColumn),String)
+                    Return CType(Me(Me.tableMovie.LastPosition),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Edition in Tabelle Movie ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte LastPosition in Tabelle Movie ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMovie.EditionColumn) = value
+                Me(Me.tableMovie.LastPosition) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Persons() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.PersonsColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Persons in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.PersonsColumn) = value
             End Set
         End Property
         
@@ -6829,6 +7528,16 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsRatingUserNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.RatingUserColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetRatingUserNull()
+            Me(Me.tableMovie.RatingUserColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsOriginalTitleNull() As Boolean
             Return Me.IsNull(Me.tableMovie.OriginalTitleColumn)
         End Function
@@ -6856,6 +7565,16 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetFormattedTitleNull()
             Me(Me.tableMovie.FormattedTitleColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsEditionNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.EditionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetEditionNull()
+            Me(Me.tableMovie.EditionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -7029,6 +7748,16 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsDateAddedNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.DateAddedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetDateAddedNull()
+            Me(Me.tableMovie.DateAddedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsSubtitlesNull() As Boolean
             Return Me.IsNull(Me.tableMovie.SubtitlesColumn)
         End Function
@@ -7059,26 +7788,6 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsPictureNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.PictureColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetPictureNull()
-            Me(Me.tableMovie.PictureColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsDateAddedNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.DateAddedColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetDateAddedNull()
-            Me(Me.tableMovie.DateAddedColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsLength_NumNull() As Boolean
             Return Me.IsNull(Me.tableMovie.Length_NumColumn)
         End Function
@@ -7086,6 +7795,16 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetLength_NumNull()
             Me(Me.tableMovie.Length_NumColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsPictureNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.PictureColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetPictureNull()
+            Me(Me.tableMovie.PictureColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -7239,23 +7958,33 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsRatingUserNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.RatingUserColumn)
+        Public Function IsCategoryTraktNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.CategoryTraktColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetRatingUserNull()
-            Me(Me.tableMovie.RatingUserColumn) = Global.System.Convert.DBNull
+        Public Sub SetCategoryTraktNull()
+            Me(Me.tableMovie.CategoryTraktColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsEditionNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.EditionColumn)
+        Public Function IsLastPositionNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.LastPosition)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetEditionNull()
-            Me(Me.tableMovie.EditionColumn) = Global.System.Convert.DBNull
+        Public Sub SetLastPositionNull()
+            Me(Me.tableMovie.LastPosition) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsPersonsNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.PersonsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetPersonsNull()
+            Me(Me.tableMovie.PersonsColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -7294,16 +8023,114 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Writer() As String
+        Public Property CustomField1() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomFields.WriterColumn),String)
+                    Return CType(Me(Me.tableCustomFields.CustomField1Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle CustomFields ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField1 in Tabelle CustomFields ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableCustomFields.WriterColumn) = value
+                Me(Me.tableCustomFields.CustomField1Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CustomField2() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.CustomField2Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField2 in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.CustomField2Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CustomField3() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.CustomField3Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField3 in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.CustomField3Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CustomField4() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.CustomField4Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField4 in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.CustomField4Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CustomField5() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.CustomField5Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField5 in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.CustomField5Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Edition() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.EditionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Edition in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.EditionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Studio() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.StudioColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Studio in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.StudioColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Fanart() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.FanartColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Fanart in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.FanartColumn) = value
             End Set
         End Property
         
@@ -7322,6 +8149,20 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Writer() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.WriterColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.WriterColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property TagLine() As String
             Get
                 Try 
@@ -7336,16 +8177,184 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Studio() As String
+        Public Property Tags() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomFields.StudioColumn),String)
+                    Return CType(Me(Me.tableCustomFields.TagsColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Studio in Tabelle CustomFields ist DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Tags in Tabelle CustomFields ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableCustomFields.StudioColumn) = value
+                Me(Me.tableCustomFields.TagsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Aspectratio() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.AspectratioColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Aspectratio in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.AspectratioColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CategoryTrakt() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.CategoryTraktColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CategoryTrakt in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.CategoryTraktColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Watched() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.WatchedColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Watched in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.WatchedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property DateWatched() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.DateWatchedColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte DateWatched in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.DateWatchedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property RatingUser() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.RatingUserColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte RatingUser in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.RatingUserColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property IMDB_Id() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.IMDB_IdColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte IMDB_Id in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.IMDB_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TMDB_Id() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.TMDB_IdColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte TMDB_Id in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.TMDB_IdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property IMDB_Rank() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.IMDB_RankColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte IMDB_Rank in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.IMDB_RankColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property SourceTrailer() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.SourceTrailerColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte SourceTrailer in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.SourceTrailerColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property IsOnline() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.IsOnlineColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte IsOnline in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.IsOnlineColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property IsOnlineTrailer() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.IsOnlineTrailerColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte IsOnlineTrailer in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.IsOnlineTrailerColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property LastPosition() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.LastPositionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte LastPosition in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.LastPositionColumn) = value
             End Set
         End Property
         
@@ -7374,13 +8383,83 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsWriterNull() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.WriterColumn)
+        Public Function IsCustomField1Null() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CustomField1Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetWriterNull()
-            Me(Me.tableCustomFields.WriterColumn) = Global.System.Convert.DBNull
+        Public Sub SetCustomField1Null()
+            Me(Me.tableCustomFields.CustomField1Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCustomField2Null() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CustomField2Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCustomField2Null()
+            Me(Me.tableCustomFields.CustomField2Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCustomField3Null() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CustomField3Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCustomField3Null()
+            Me(Me.tableCustomFields.CustomField3Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCustomField4Null() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CustomField4Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCustomField4Null()
+            Me(Me.tableCustomFields.CustomField4Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCustomField5Null() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CustomField5Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCustomField5Null()
+            Me(Me.tableCustomFields.CustomField5Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsEditionNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.EditionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetEditionNull()
+            Me(Me.tableCustomFields.EditionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsStudioNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.StudioColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetStudioNull()
+            Me(Me.tableCustomFields.StudioColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsFanartNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.FanartColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetFanartNull()
+            Me(Me.tableCustomFields.FanartColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -7394,6 +8473,16 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsWriterNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.WriterColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetWriterNull()
+            Me(Me.tableCustomFields.WriterColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsTagLineNull() As Boolean
             Return Me.IsNull(Me.tableCustomFields.TagLineColumn)
         End Function
@@ -7404,13 +8493,133 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsStudioNull() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.StudioColumn)
+        Public Function IsTagsNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.TagsColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetStudioNull()
-            Me(Me.tableCustomFields.StudioColumn) = Global.System.Convert.DBNull
+        Public Sub SetTagsNull()
+            Me(Me.tableCustomFields.TagsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsAspectratioNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.AspectratioColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetAspectratioNull()
+            Me(Me.tableCustomFields.AspectratioColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCategoryTraktNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.CategoryTraktColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCategoryTraktNull()
+            Me(Me.tableCustomFields.CategoryTraktColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsWatchedNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.WatchedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetWatchedNull()
+            Me(Me.tableCustomFields.WatchedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsDateWatchedNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.DateWatchedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetDateWatchedNull()
+            Me(Me.tableCustomFields.DateWatchedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsRatingUserNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.RatingUserColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetRatingUserNull()
+            Me(Me.tableCustomFields.RatingUserColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsIMDB_IdNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.IMDB_IdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetIMDB_IdNull()
+            Me(Me.tableCustomFields.IMDB_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTMDB_IdNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.TMDB_IdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTMDB_IdNull()
+            Me(Me.tableCustomFields.TMDB_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsIMDB_RankNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.IMDB_RankColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetIMDB_RankNull()
+            Me(Me.tableCustomFields.IMDB_RankColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsSourceTrailerNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.SourceTrailerColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetSourceTrailerNull()
+            Me(Me.tableCustomFields.SourceTrailerColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsIsOnlineNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.IsOnlineColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetIsOnlineNull()
+            Me(Me.tableCustomFields.IsOnlineColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsIsOnlineTrailerNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.IsOnlineTrailerColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetIsOnlineTrailerNull()
+            Me(Me.tableCustomFields.IsOnlineTrailerColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsLastPositionNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.LastPositionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetLastPositionNull()
+            Me(Me.tableCustomFields.LastPositionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -7904,290 +9113,6 @@ Partial Public Class AntMovieCatalog
     End Class
     
     '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Partial Public Class MyFilmsSettingsRow
-        Inherits Global.System.Data.DataRow
-        
-        Private tableMyFilmsSettings As MyFilmsSettingsDataTable
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableMyFilmsSettings = CType(Me.Table,MyFilmsSettingsDataTable)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property MyFilmsSettings_Id() As Integer
-            Get
-                Return CType(Me(Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableMyFilmsSettings.MyFilmsSettings_IdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Catalog_Id() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tableMyFilmsSettings.Catalog_IdColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Catalog_Id in Tabelle MyFilmsSettings ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMyFilmsSettings.Catalog_IdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property CatalogRow() As CatalogRow
-            Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("Catalog_MyFilmsSettings")),CatalogRow)
-            End Get
-            Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("Catalog_MyFilmsSettings"))
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsCatalog_IdNull() As Boolean
-            Return Me.IsNull(Me.tableMyFilmsSettings.Catalog_IdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetCatalog_IdNull()
-            Me(Me.tableMyFilmsSettings.Catalog_IdColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function GetUsersRows() As UsersRow()
-            If (Me.Table.ChildRelations("MyFilmsSettings_Users") Is Nothing) Then
-                Return New UsersRow(-1) {}
-            Else
-                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("MyFilmsSettings_Users")),UsersRow())
-            End If
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Partial Public Class UsersRow
-        Inherits Global.System.Data.DataRow
-        
-        Private tableUsers As UsersDataTable
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableUsers = CType(Me.Table,UsersDataTable)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Users_Id() As Integer
-            Get
-                Return CType(Me(Me.tableUsers.Users_IdColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableUsers.Users_IdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property MyFilmsSettings_Id() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tableUsers.MyFilmsSettings_IdColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte MyFilmsSettings_Id in Tabelle Users ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableUsers.MyFilmsSettings_IdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property MyFilmsSettingsRow() As MyFilmsSettingsRow
-            Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("MyFilmsSettings_Users")),MyFilmsSettingsRow)
-            End Get
-            Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("MyFilmsSettings_Users"))
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsMyFilmsSettings_IdNull() As Boolean
-            Return Me.IsNull(Me.tableUsers.MyFilmsSettings_IdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetMyFilmsSettings_IdNull()
-            Me(Me.tableUsers.MyFilmsSettings_IdColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function GetUserRows() As UserRow()
-            If (Me.Table.ChildRelations("Users_User") Is Nothing) Then
-                Return New UserRow(-1) {}
-            Else
-                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Users_User")),UserRow())
-            End If
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Partial Public Class UserRow
-        Inherits Global.System.Data.DataRow
-        
-        Private tableUser As UserDataTable
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableUser = CType(Me.Table,UserDataTable)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Name() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableUser.NameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Name in Tabelle User ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableUser.NameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property _Alias() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableUser.AliasColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Alias in Tabelle User ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableUser.AliasColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property TraktName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableUser.TraktNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte TraktName in Tabelle User ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableUser.TraktNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Age() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableUser.AgeColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Age in Tabelle User ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableUser.AgeColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Users_Id() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tableUser.Users_IdColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Users_Id in Tabelle User ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableUser.Users_IdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property UsersRow() As UsersRow
-            Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("Users_User")),UsersRow)
-            End Get
-            Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("Users_User"))
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsNameNull() As Boolean
-            Return Me.IsNull(Me.tableUser.NameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetNameNull()
-            Me(Me.tableUser.NameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function Is_AliasNull() As Boolean
-            Return Me.IsNull(Me.tableUser.AliasColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub Set_AliasNull()
-            Me(Me.tableUser.AliasColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsTraktNameNull() As Boolean
-            Return Me.IsNull(Me.tableUser.TraktNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetTraktNameNull()
-            Me(Me.tableUser.TraktNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsAgeNull() As Boolean
-            Return Me.IsNull(Me.tableUser.AgeColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetAgeNull()
-            Me(Me.tableUser.AgeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsUsers_IdNull() As Boolean
-            Return Me.IsNull(Me.tableUser.Users_IdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetUsers_IdNull()
-            Me(Me.tableUser.Users_IdColumn) = Global.System.Convert.DBNull
-        End Sub
-    End Class
-    
-    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
@@ -8240,6 +9165,105 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property Row() As PropertiesRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class MyFilmsSettingsRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As MyFilmsSettingsRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As MyFilmsSettingsRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As MyFilmsSettingsRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class UsersRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As UsersRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As UsersRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As UsersRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class UserRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As UserRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As UserRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As UserRow
             Get
                 Return Me.eventRow
             End Get
@@ -8323,22 +9347,22 @@ Partial Public Class AntMovieCatalog
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Public Class ListItemRowChangeEvent
+    Public Class ListValueRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As ListItemRow
+        Private eventRow As ListValueRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New(ByVal row As ListItemRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As ListValueRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Row() As ListItemRow
+        Public ReadOnly Property Row() As ListValueRow
             Get
                 Return Me.eventRow
             End Get
@@ -8504,105 +9528,6 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property Row() As PersonRow
-            Get
-                Return Me.eventRow
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
-            Get
-                Return Me.eventAction
-            End Get
-        End Property
-    End Class
-    
-    '''<summary>
-    '''Row event argument class
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Public Class MyFilmsSettingsRowChangeEvent
-        Inherits Global.System.EventArgs
-        
-        Private eventRow As MyFilmsSettingsRow
-        
-        Private eventAction As Global.System.Data.DataRowAction
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New(ByVal row As MyFilmsSettingsRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New
-            Me.eventRow = row
-            Me.eventAction = action
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Row() As MyFilmsSettingsRow
-            Get
-                Return Me.eventRow
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
-            Get
-                Return Me.eventAction
-            End Get
-        End Property
-    End Class
-    
-    '''<summary>
-    '''Row event argument class
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Public Class UsersRowChangeEvent
-        Inherits Global.System.EventArgs
-        
-        Private eventRow As UsersRow
-        
-        Private eventAction As Global.System.Data.DataRowAction
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New(ByVal row As UsersRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New
-            Me.eventRow = row
-            Me.eventAction = action
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Row() As UsersRow
-            Get
-                Return Me.eventRow
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
-            Get
-                Return Me.eventAction
-            End Get
-        End Property
-    End Class
-    
-    '''<summary>
-    '''Row event argument class
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
-    Public Class UserRowChangeEvent
-        Inherits Global.System.EventArgs
-        
-        Private eventRow As UserRow
-        
-        Private eventAction As Global.System.Data.DataRowAction
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub New(ByVal row As UserRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New
-            Me.eventRow = row
-            Me.eventAction = action
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Row() As UserRow
             Get
                 Return Me.eventRow
             End Get

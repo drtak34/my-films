@@ -202,6 +202,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="My Project\VersionInfo.vb" />
+    <Compile Include="MyFilmsData.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +298,17 @@
     </None>
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="MyFilmsData.xsc">
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
+    </None>
+    <None Include="MyFilmsData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MyFilmsData.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MyFilmsData.xss">
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </None>
     <None Include="Resources\film-reel-128x128.png" />
     <None Include="app.config" />
