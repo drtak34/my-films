@@ -223,8 +223,6 @@ namespace MyFilmsPlugin.MyFilms
           }
           LogMyFilms.Debug("ReadDataMovies() - Finished ...");
 
-
-
           return movies;
 
           var queryProducer =
@@ -240,27 +238,27 @@ namespace MyFilmsPlugin.MyFilms
 
 
 
-          DataView dataView = (from movie in
-                                 data.Movie.AsEnumerable()
-                               where movie.Field<int?>("YearEstablished") < 1960
-                               orderby movie.Field<string>("Country")
-                               select movie).AsDataView();
+          //DataView dataView = (from movie in
+          //                       data.Movie.AsEnumerable()
+          //                     where movie.Field<int?>("YearEstablished") < 1960
+          //                     orderby movie.Field<string>("Country")
+          //                     select movie).AsDataView();
 
-          DataRowView[] drv = dataView.FindRows("Canada");
+          //DataRowView[] drv = dataView.FindRows("Canada");
 
-          var query8 = from movie in data.Movie.AsEnumerable()
-                       join customfields in data.CustomField.AsEnumerable()
-                       on movie.Field<string>("Country") equals
-                       customfields.Field<string>("Name")
-                       select new
-                       {
-                         ParkName = movie.Field<string>("Name"),
-                         Country = customfields.Field<string>("Name"),
-                         Continent = customfields.
-                         GetParentRow(data.CustomField.ParentRelations[0]
-                         )
-                         .Field<string>("Name")
-                       };
+          //var query8 = from movie in data.Movie.AsEnumerable()
+          //             join customfields in data.CustomField.AsEnumerable()
+          //             on movie.Field<string>("Country") equals
+          //             customfields.Field<string>("Name")
+          //             select new
+          //             {
+          //               ParkName = movie.Field<string>("Name"),
+          //               Country = customfields.Field<string>("Name"),
+          //               Continent = customfields.
+          //               GetParentRow(data.CustomField.ParentRelations[0]
+          //               )
+          //               .Field<string>("Name")
+          //             };
 
           var query = from t1 in data.Movie.AsEnumerable()
                       join t2 in data.CustomField.AsEnumerable()
@@ -312,36 +310,36 @@ namespace MyFilmsPlugin.MyFilms
 
 
 
-          DataTable dtMovies = data.Movie;
-          DataTable dtExtendedFields = data.Tables["ExtendedField"];
-          var querynew =
-              from movie in dtMovies.AsEnumerable()
-              join extendedfields in dtExtendedFields.AsEnumerable()
-              on movie.Field<Int32>("MovieID") equals
-              extendedfields.Field<Int32>("MovieID")
-              select new
-              {
-                ContactID = movie.Field<Int32>("ContactID"),
-                SalesOrderID = extendedfields.Field<Int32>("SalesOrderID"),
-                FirstName = movie.Field<string>("FirstName"),
-                Lastname = movie.Field<string>("Lastname"),
-                TotalDue = extendedfields.Field<decimal>("TotalDue")
-              };
+          //DataTable dtMovies = data.Movie;
+          //DataTable dtExtendedFields = data.Tables["ExtendedField"];
+          //var querynew =
+          //    from movie in dtMovies.AsEnumerable()
+          //    join extendedfields in dtExtendedFields.AsEnumerable()
+          //    on movie.Field<Int32>("MovieID") equals
+          //    extendedfields.Field<Int32>("MovieID")
+          //    select new
+          //    {
+          //      ContactID = movie.Field<Int32>("ContactID"),
+          //      SalesOrderID = extendedfields.Field<Int32>("SalesOrderID"),
+          //      FirstName = movie.Field<string>("FirstName"),
+          //      Lastname = movie.Field<string>("Lastname"),
+          //      TotalDue = extendedfields.Field<decimal>("TotalDue")
+          //    };
 
 
-          foreach (var contact_order in querynew)
-          {
-            Console.WriteLine("ContactID: {0} "
-                            + "SalesOrderID: {1} "
-                            + "FirstName: {2} "
-                            + "Lastname: {3} "
-                            + "TotalDue: {4}",
-                contact_order.ContactID,
-                contact_order.SalesOrderID,
-                contact_order.FirstName,
-                contact_order.Lastname,
-                contact_order.TotalDue);
-          }
+          //foreach (var contact_order in querynew)
+          //{
+          //  Console.WriteLine("ContactID: {0} "
+          //                  + "SalesOrderID: {1} "
+          //                  + "FirstName: {2} "
+          //                  + "Lastname: {3} "
+          //                  + "TotalDue: {4}",
+          //      contact_order.ContactID,
+          //      contact_order.SalesOrderID,
+          //      contact_order.FirstName,
+          //      contact_order.Lastname,
+          //      contact_order.TotalDue);
+          //}
 
         }
 
