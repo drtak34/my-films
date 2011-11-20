@@ -975,6 +975,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem4", AntFilterItem4.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign4", AntFilterSign4.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText4", AntFilterText4.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterFreeText", AntFilterFreeText.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterComb", AntFilterComb.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem1", AntViewItem1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText1", AntViewText1.Text.ToString());
@@ -1352,6 +1353,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem4", "");
             AntFilterSign4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign4", "#");
             AntFilterText4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText4", "");
+            AntFilterFreeText.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterFreeText", "");
             AntFilterComb.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterComb", "and");
             AntViewItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem1", "");
             AntViewText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText1", "");
@@ -1753,6 +1755,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterText2.ResetText();
             AntFilterText3.ResetText();
             AntFilterText4.ResetText();
+            AntFilterFreeText.ResetText();
             AntFilterSign1.ResetText();
             AntFilterSign2.ResetText();
             AntFilterSign3.ResetText();
@@ -2097,6 +2100,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' or " + AntFilterItem2.Text + " is null)) AND ";
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
+            if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
+              StrDfltSelect = StrDfltSelect + " AND " + AntFilterFreeText.Text;
             Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
             LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
         }

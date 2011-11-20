@@ -223,6 +223,15 @@ namespace MyFilmsPlugin.MyFilms
           }
           LogMyFilms.Debug("ReadDataMovies() - Finished ...");
 
+          //var moviesquery = from movie in data.Movie
+          //              join extendedfields in data.CustomFields on movie.Movie_Id equals extendedfields.Movie_Id into gj
+          //              from subpet in gj.DefaultIfEmpty()
+          //              select new { movie.OriginalTitle, PetName = (subpet == null ? String.Empty : subpet.CustomField1) };
+          
+          //var q = from c in data.Movie
+          //  join o in data.CustomFields on c.Movie_Id equals o.Movie_Id into g
+          //  select new {movie = c.OriginalTitle, Extendedfields = g};
+ 
           return movies;
 
           var queryProducer =
