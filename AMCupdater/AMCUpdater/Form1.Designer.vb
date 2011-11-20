@@ -447,9 +447,9 @@ Partial Class Form1
         Me.IsDirector = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.IsWriter = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.PersonBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorAddNewItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorAddNewItemPerson = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem1 = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItem1 = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorDeleteItemPerson = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveFirstItem1 = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMovePreviousItem1 = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator3 = New System.Windows.Forms.ToolStripSeparator
@@ -466,7 +466,23 @@ Partial Class Form1
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator
         Me.ToolStripTextBoxSearch = New System.Windows.Forms.ToolStripTextBox
         Me.ViewCatalog = New System.Windows.Forms.TabPage
+        Me.UserDataGridView = New System.Windows.Forms.DataGridView
+        Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.UserBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
+        Me.CustomFieldDataGridView = New System.Windows.Forms.DataGridView
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CustomFieldBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.OwnerTextBox = New System.Windows.Forms.TextBox
         Me.PropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MailTextBox = New System.Windows.Forms.TextBox
@@ -589,7 +605,11 @@ Partial Class Form1
         CType(Me.PersonBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PersonBindingNavigator.SuspendLayout()
         Me.ViewCatalog.SuspendLayout()
+        CType(Me.UserDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UserBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CustomFieldDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuFile.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -4310,6 +4330,7 @@ Partial Class Form1
         'BindingNavigatorAddNewItem
         '
         Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItem.Enabled = False
         Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
         Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
@@ -4785,7 +4806,7 @@ Partial Class Form1
         Me.XionPanelPerson.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanelPerson.Padding = New System.Windows.Forms.Padding(0, 22, 0, 0)
         Me.XionPanelPerson.Sizable = True
-        Me.XionPanelPerson.Size = New System.Drawing.Size(200, 546)
+        Me.XionPanelPerson.Size = New System.Drawing.Size(197, 546)
         Me.XionPanelPerson.State = XionControls.XionPanel.PanelState.Expand
         Me.XionPanelPerson.TabIndex = 2
         Me.XionPanelPerson.Text = "Person List"
@@ -4801,6 +4822,7 @@ Partial Class Form1
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridViewPerson.AutoGenerateColumns = False
+        Me.DataGridViewPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridViewPerson.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridViewPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPerson.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameDataGridViewTextBoxColumn, Me.AlternateNameDataGridViewTextBoxColumn, Me.BornDataGridViewTextBoxColumn, Me.BirthPlaceDataGridViewTextBoxColumn, Me.MiniBiographyDataGridViewTextBoxColumn, Me.BiographyDataGridViewTextBoxColumn, Me.URLDataGridViewTextBoxColumn, Me.IMDBIdDataGridViewTextBoxColumn, Me.TMDBIdDataGridViewTextBoxColumn, Me.PictureDataGridViewTextBoxColumn, Me.PhotosDataGridViewTextBoxColumn, Me.IsActor, Me.IsProducer, Me.IsDirector, Me.IsWriter})
@@ -4813,7 +4835,7 @@ Partial Class Form1
         Me.DataGridViewPerson.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridViewPerson.RowTemplate.Height = 16
         Me.DataGridViewPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DataGridViewPerson.Size = New System.Drawing.Size(200, 524)
+        Me.DataGridViewPerson.Size = New System.Drawing.Size(375, 524)
         Me.DataGridViewPerson.TabIndex = 0
         '
         'NameDataGridViewTextBoxColumn
@@ -4821,100 +4843,114 @@ Partial Class Form1
         Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
         Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
         Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-        Me.NameDataGridViewTextBoxColumn.Width = 150
+        Me.NameDataGridViewTextBoxColumn.Width = 60
         '
         'AlternateNameDataGridViewTextBoxColumn
         '
         Me.AlternateNameDataGridViewTextBoxColumn.DataPropertyName = "AlternateName"
         Me.AlternateNameDataGridViewTextBoxColumn.HeaderText = "AlternateName"
         Me.AlternateNameDataGridViewTextBoxColumn.Name = "AlternateNameDataGridViewTextBoxColumn"
+        Me.AlternateNameDataGridViewTextBoxColumn.Width = 102
         '
         'BornDataGridViewTextBoxColumn
         '
         Me.BornDataGridViewTextBoxColumn.DataPropertyName = "Born"
         Me.BornDataGridViewTextBoxColumn.HeaderText = "Born"
         Me.BornDataGridViewTextBoxColumn.Name = "BornDataGridViewTextBoxColumn"
+        Me.BornDataGridViewTextBoxColumn.Width = 54
         '
         'BirthPlaceDataGridViewTextBoxColumn
         '
         Me.BirthPlaceDataGridViewTextBoxColumn.DataPropertyName = "BirthPlace"
         Me.BirthPlaceDataGridViewTextBoxColumn.HeaderText = "BirthPlace"
         Me.BirthPlaceDataGridViewTextBoxColumn.Name = "BirthPlaceDataGridViewTextBoxColumn"
+        Me.BirthPlaceDataGridViewTextBoxColumn.Width = 80
         '
         'MiniBiographyDataGridViewTextBoxColumn
         '
         Me.MiniBiographyDataGridViewTextBoxColumn.DataPropertyName = "MiniBiography"
         Me.MiniBiographyDataGridViewTextBoxColumn.HeaderText = "MiniBiography"
         Me.MiniBiographyDataGridViewTextBoxColumn.Name = "MiniBiographyDataGridViewTextBoxColumn"
+        Me.MiniBiographyDataGridViewTextBoxColumn.Width = 98
         '
         'BiographyDataGridViewTextBoxColumn
         '
         Me.BiographyDataGridViewTextBoxColumn.DataPropertyName = "Biography"
         Me.BiographyDataGridViewTextBoxColumn.HeaderText = "Biography"
         Me.BiographyDataGridViewTextBoxColumn.Name = "BiographyDataGridViewTextBoxColumn"
+        Me.BiographyDataGridViewTextBoxColumn.Width = 79
         '
         'URLDataGridViewTextBoxColumn
         '
         Me.URLDataGridViewTextBoxColumn.DataPropertyName = "URL"
         Me.URLDataGridViewTextBoxColumn.HeaderText = "URL"
         Me.URLDataGridViewTextBoxColumn.Name = "URLDataGridViewTextBoxColumn"
+        Me.URLDataGridViewTextBoxColumn.Width = 54
         '
         'IMDBIdDataGridViewTextBoxColumn
         '
         Me.IMDBIdDataGridViewTextBoxColumn.DataPropertyName = "IMDB_Id"
         Me.IMDBIdDataGridViewTextBoxColumn.HeaderText = "IMDB_Id"
         Me.IMDBIdDataGridViewTextBoxColumn.Name = "IMDBIdDataGridViewTextBoxColumn"
+        Me.IMDBIdDataGridViewTextBoxColumn.Width = 74
         '
         'TMDBIdDataGridViewTextBoxColumn
         '
         Me.TMDBIdDataGridViewTextBoxColumn.DataPropertyName = "TMDB_Id"
         Me.TMDBIdDataGridViewTextBoxColumn.HeaderText = "TMDB_Id"
         Me.TMDBIdDataGridViewTextBoxColumn.Name = "TMDBIdDataGridViewTextBoxColumn"
+        Me.TMDBIdDataGridViewTextBoxColumn.Width = 78
         '
         'PictureDataGridViewTextBoxColumn
         '
         Me.PictureDataGridViewTextBoxColumn.DataPropertyName = "Picture"
         Me.PictureDataGridViewTextBoxColumn.HeaderText = "Picture"
         Me.PictureDataGridViewTextBoxColumn.Name = "PictureDataGridViewTextBoxColumn"
+        Me.PictureDataGridViewTextBoxColumn.Width = 65
         '
         'PhotosDataGridViewTextBoxColumn
         '
         Me.PhotosDataGridViewTextBoxColumn.DataPropertyName = "Photos"
         Me.PhotosDataGridViewTextBoxColumn.HeaderText = "Photos"
         Me.PhotosDataGridViewTextBoxColumn.Name = "PhotosDataGridViewTextBoxColumn"
+        Me.PhotosDataGridViewTextBoxColumn.Width = 65
         '
         'IsActor
         '
         Me.IsActor.DataPropertyName = "IsActor"
         Me.IsActor.HeaderText = "IsActor"
         Me.IsActor.Name = "IsActor"
+        Me.IsActor.Width = 46
         '
         'IsProducer
         '
         Me.IsProducer.DataPropertyName = "IsProducer"
         Me.IsProducer.HeaderText = "IsProducer"
         Me.IsProducer.Name = "IsProducer"
+        Me.IsProducer.Width = 64
         '
         'IsDirector
         '
         Me.IsDirector.DataPropertyName = "IsDirector"
         Me.IsDirector.HeaderText = "IsDirector"
         Me.IsDirector.Name = "IsDirector"
+        Me.IsDirector.Width = 58
         '
         'IsWriter
         '
         Me.IsWriter.DataPropertyName = "IsWriter"
         Me.IsWriter.HeaderText = "IsWriter"
         Me.IsWriter.Name = "IsWriter"
+        Me.IsWriter.Width = 49
         '
         'PersonBindingNavigator
         '
-        Me.PersonBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem1
+        Me.PersonBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItemPerson
         Me.PersonBindingNavigator.BindingSource = Me.PersonBindingSource
         Me.PersonBindingNavigator.CountItem = Me.BindingNavigatorCountItem1
-        Me.PersonBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem1
+        Me.PersonBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItemPerson
         Me.PersonBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
-        Me.PersonBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem1, Me.BindingNavigatorMovePreviousItem1, Me.BindingNavigatorSeparator3, Me.BindingNavigatorPositionItem1, Me.BindingNavigatorCountItem1, Me.BindingNavigatorSeparator4, Me.BindingNavigatorMoveNextItem1, Me.BindingNavigatorMoveLastItem1, Me.BindingNavigatorSeparator5, Me.BindingNavigatorAddNewItem1, Me.BindingNavigatorDeleteItem1, Me.ToolStripSeparator2, Me.SpeichernToolStripButton, Me.ToolStripSeparator4, Me.ToolStripButtonAddMissingPersons, Me.ToolStripButtonGrabPersons, Me.ToolStripSeparator5, Me.ToolStripTextBoxSearch})
+        Me.PersonBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem1, Me.BindingNavigatorMovePreviousItem1, Me.BindingNavigatorSeparator3, Me.BindingNavigatorPositionItem1, Me.BindingNavigatorCountItem1, Me.BindingNavigatorSeparator4, Me.BindingNavigatorMoveNextItem1, Me.BindingNavigatorMoveLastItem1, Me.BindingNavigatorSeparator5, Me.BindingNavigatorAddNewItemPerson, Me.BindingNavigatorDeleteItemPerson, Me.ToolStripSeparator2, Me.SpeichernToolStripButton, Me.ToolStripSeparator4, Me.ToolStripButtonAddMissingPersons, Me.ToolStripButtonGrabPersons, Me.ToolStripSeparator5, Me.ToolStripTextBoxSearch})
         Me.PersonBindingNavigator.Location = New System.Drawing.Point(0, 3)
         Me.PersonBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem1
         Me.PersonBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem1
@@ -4922,18 +4958,18 @@ Partial Class Form1
         Me.PersonBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem1
         Me.PersonBindingNavigator.Name = "PersonBindingNavigator"
         Me.PersonBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem1
-        Me.PersonBindingNavigator.Size = New System.Drawing.Size(563, 27)
+        Me.PersonBindingNavigator.Size = New System.Drawing.Size(594, 27)
         Me.PersonBindingNavigator.TabIndex = 0
         Me.PersonBindingNavigator.Text = "PersonBindingNavigator"
         '
-        'BindingNavigatorAddNewItem1
+        'BindingNavigatorAddNewItemPerson
         '
-        Me.BindingNavigatorAddNewItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem1.Image = CType(resources.GetObject("BindingNavigatorAddNewItem1.Image"), System.Drawing.Image)
-        Me.BindingNavigatorAddNewItem1.Name = "BindingNavigatorAddNewItem1"
-        Me.BindingNavigatorAddNewItem1.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorAddNewItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorAddNewItem1.Text = "Add Entry"
+        Me.BindingNavigatorAddNewItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItemPerson.Image = CType(resources.GetObject("BindingNavigatorAddNewItemPerson.Image"), System.Drawing.Image)
+        Me.BindingNavigatorAddNewItemPerson.Name = "BindingNavigatorAddNewItemPerson"
+        Me.BindingNavigatorAddNewItemPerson.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItemPerson.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorAddNewItemPerson.Text = "Add Entry"
         '
         'BindingNavigatorCountItem1
         '
@@ -4942,14 +4978,14 @@ Partial Class Form1
         Me.BindingNavigatorCountItem1.Text = "von {0}"
         Me.BindingNavigatorCountItem1.ToolTipText = "Total Number of Entries."
         '
-        'BindingNavigatorDeleteItem1
+        'BindingNavigatorDeleteItemPerson
         '
-        Me.BindingNavigatorDeleteItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem1.Image = CType(resources.GetObject("BindingNavigatorDeleteItem1.Image"), System.Drawing.Image)
-        Me.BindingNavigatorDeleteItem1.Name = "BindingNavigatorDeleteItem1"
-        Me.BindingNavigatorDeleteItem1.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorDeleteItem1.Size = New System.Drawing.Size(23, 24)
-        Me.BindingNavigatorDeleteItem1.Text = "Delete Entry"
+        Me.BindingNavigatorDeleteItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorDeleteItemPerson.Image = CType(resources.GetObject("BindingNavigatorDeleteItemPerson.Image"), System.Drawing.Image)
+        Me.BindingNavigatorDeleteItemPerson.Name = "BindingNavigatorDeleteItemPerson"
+        Me.BindingNavigatorDeleteItemPerson.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorDeleteItemPerson.Size = New System.Drawing.Size(23, 24)
+        Me.BindingNavigatorDeleteItemPerson.Text = "Delete Entry"
         '
         'BindingNavigatorMoveFirstItem1
         '
@@ -5066,6 +5102,8 @@ Partial Class Form1
         'ViewCatalog
         '
         Me.ViewCatalog.AutoScroll = True
+        Me.ViewCatalog.Controls.Add(Me.UserDataGridView)
+        Me.ViewCatalog.Controls.Add(Me.CustomFieldDataGridView)
         Me.ViewCatalog.Controls.Add(OwnerLabel)
         Me.ViewCatalog.Controls.Add(Me.OwnerTextBox)
         Me.ViewCatalog.Controls.Add(MailLabel)
@@ -5081,11 +5119,131 @@ Partial Class Form1
         Me.ViewCatalog.Text = "View Catalog"
         Me.ViewCatalog.UseVisualStyleBackColor = True
         '
+        'UserDataGridView
+        '
+        Me.UserDataGridView.AutoGenerateColumns = False
+        Me.UserDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.UserDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.UserDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17})
+        Me.UserDataGridView.DataSource = Me.UserBindingSource
+        Me.UserDataGridView.Location = New System.Drawing.Point(11, 80)
+        Me.UserDataGridView.Name = "UserDataGridView"
+        Me.UserDataGridView.RowTemplate.Height = 18
+        Me.UserDataGridView.Size = New System.Drawing.Size(581, 145)
+        Me.UserDataGridView.TabIndex = 12
+        '
+        'DataGridViewTextBoxColumn14
+        '
+        Me.DataGridViewTextBoxColumn14.DataPropertyName = "Name"
+        Me.DataGridViewTextBoxColumn14.HeaderText = "Name"
+        Me.DataGridViewTextBoxColumn14.Name = "DataGridViewTextBoxColumn14"
+        Me.DataGridViewTextBoxColumn14.Width = 60
+        '
+        'DataGridViewTextBoxColumn15
+        '
+        Me.DataGridViewTextBoxColumn15.DataPropertyName = "Alias"
+        Me.DataGridViewTextBoxColumn15.HeaderText = "Alias"
+        Me.DataGridViewTextBoxColumn15.Name = "DataGridViewTextBoxColumn15"
+        Me.DataGridViewTextBoxColumn15.Width = 54
+        '
+        'DataGridViewTextBoxColumn16
+        '
+        Me.DataGridViewTextBoxColumn16.DataPropertyName = "TraktName"
+        Me.DataGridViewTextBoxColumn16.HeaderText = "TraktName"
+        Me.DataGridViewTextBoxColumn16.Name = "DataGridViewTextBoxColumn16"
+        Me.DataGridViewTextBoxColumn16.Width = 85
+        '
+        'DataGridViewTextBoxColumn17
+        '
+        Me.DataGridViewTextBoxColumn17.DataPropertyName = "Age"
+        Me.DataGridViewTextBoxColumn17.HeaderText = "Age"
+        Me.DataGridViewTextBoxColumn17.Name = "DataGridViewTextBoxColumn17"
+        Me.DataGridViewTextBoxColumn17.Width = 51
+        '
+        'UserBindingSource
+        '
+        Me.UserBindingSource.DataMember = "User"
+        Me.UserBindingSource.DataSource = Me.AntMovieCatalog
+        '
         'AntMovieCatalog
         '
         Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
         Me.AntMovieCatalog.Locale = New System.Globalization.CultureInfo("")
         Me.AntMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'CustomFieldDataGridView
+        '
+        Me.CustomFieldDataGridView.AutoGenerateColumns = False
+        Me.CustomFieldDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.CustomFieldDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CustomFieldDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13})
+        Me.CustomFieldDataGridView.DataSource = Me.CustomFieldBindingSource
+        Me.CustomFieldDataGridView.Location = New System.Drawing.Point(11, 253)
+        Me.CustomFieldDataGridView.Name = "CustomFieldDataGridView"
+        Me.CustomFieldDataGridView.RowTemplate.Height = 18
+        Me.CustomFieldDataGridView.Size = New System.Drawing.Size(581, 306)
+        Me.CustomFieldDataGridView.TabIndex = 12
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "Tag"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "Tag"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.Width = 51
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "Name"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "Name"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.Width = 60
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.DataPropertyName = "Type"
+        Me.DataGridViewTextBoxColumn8.HeaderText = "Type"
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.Width = 56
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.DataPropertyName = "DefaultValue"
+        Me.DataGridViewTextBoxColumn9.HeaderText = "DefaultValue"
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.Width = 93
+        '
+        'DataGridViewTextBoxColumn10
+        '
+        Me.DataGridViewTextBoxColumn10.DataPropertyName = "MultiValues"
+        Me.DataGridViewTextBoxColumn10.HeaderText = "MultiValues"
+        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+        Me.DataGridViewTextBoxColumn10.Width = 86
+        '
+        'DataGridViewTextBoxColumn11
+        '
+        Me.DataGridViewTextBoxColumn11.DataPropertyName = "ExcludedInScripts"
+        Me.DataGridViewTextBoxColumn11.HeaderText = "ExcludedInScripts"
+        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+        Me.DataGridViewTextBoxColumn11.Width = 117
+        '
+        'DataGridViewTextBoxColumn12
+        '
+        Me.DataGridViewTextBoxColumn12.DataPropertyName = "GUIProperties"
+        Me.DataGridViewTextBoxColumn12.HeaderText = "GUIProperties"
+        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
+        Me.DataGridViewTextBoxColumn12.Width = 98
+        '
+        'DataGridViewTextBoxColumn13
+        '
+        Me.DataGridViewTextBoxColumn13.DataPropertyName = "OtherProperties"
+        Me.DataGridViewTextBoxColumn13.HeaderText = "OtherProperties"
+        Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
+        Me.DataGridViewTextBoxColumn13.Width = 105
+        '
+        'CustomFieldBindingSource
+        '
+        Me.CustomFieldBindingSource.DataMember = "CustomField"
+        Me.CustomFieldBindingSource.DataSource = Me.AntMovieCatalog
         '
         'OwnerTextBox
         '
@@ -5580,7 +5738,11 @@ Partial Class Form1
         Me.PersonBindingNavigator.PerformLayout()
         Me.ViewCatalog.ResumeLayout(False)
         Me.ViewCatalog.PerformLayout()
+        CType(Me.UserDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UserBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CustomFieldDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuFile.ResumeLayout(False)
         Me.mnuFile.PerformLayout()
@@ -5975,9 +6137,9 @@ Partial Class Form1
     Friend WithEvents Label89 As System.Windows.Forms.Label
     Friend WithEvents ViewPersons As System.Windows.Forms.TabPage
     Friend WithEvents PersonBindingNavigator As System.Windows.Forms.BindingNavigator
-    Friend WithEvents BindingNavigatorAddNewItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorAddNewItemPerson As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents BindingNavigatorDeleteItem1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorDeleteItemPerson As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveFirstItem1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMovePreviousItem1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorSeparator3 As System.Windows.Forms.ToolStripSeparator
@@ -6080,4 +6242,20 @@ Partial Class Form1
     Friend WithEvents MailTextBox As System.Windows.Forms.TextBox
     Friend WithEvents SiteTextBox As System.Windows.Forms.TextBox
     Friend WithEvents DescriptionTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents CustomFieldDataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn10 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn11 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn12 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn13 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomFieldBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents UserDataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn14 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn15 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn16 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn17 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UserBindingSource As System.Windows.Forms.BindingSource
 End Class

@@ -2145,13 +2145,13 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnCustomFieldsProperties_Id;
             
+            private global::System.Data.DataColumn columnCatalog_Id;
+            
             private global::System.Data.DataColumn columnColumnSettings;
             
             private global::System.Data.DataColumn columnGUIProperties;
             
             private global::System.Data.DataColumn columnOtherProperties;
-            
-            private global::System.Data.DataColumn columnCatalog_Id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CustomFieldsPropertiesDataTable() {
@@ -2191,6 +2191,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Catalog_IdColumn {
+                get {
+                    return this.columnCatalog_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn ColumnSettingsColumn {
                 get {
                     return this.columnColumnSettings;
@@ -2208,13 +2215,6 @@ namespace MyFilmsPlugin.DataBase {
             public global::System.Data.DataColumn OtherPropertiesColumn {
                 get {
                     return this.columnOtherProperties;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Catalog_IdColumn {
-                get {
-                    return this.columnCatalog_Id;
                 }
             }
             
@@ -2247,16 +2247,16 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CustomFieldsPropertiesRow AddCustomFieldsPropertiesRow(string ColumnSettings, string GUIProperties, string OtherProperties, CatalogRow parentCatalogRowByCatalog_CustomFieldsProperties) {
+            public CustomFieldsPropertiesRow AddCustomFieldsPropertiesRow(CatalogRow parentCatalogRowByCatalog_CustomFieldsProperties, string ColumnSettings, string GUIProperties, string OtherProperties) {
                 CustomFieldsPropertiesRow rowCustomFieldsPropertiesRow = ((CustomFieldsPropertiesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
+                        null,
                         ColumnSettings,
                         GUIProperties,
-                        OtherProperties,
-                        null};
+                        OtherProperties};
                 if ((parentCatalogRowByCatalog_CustomFieldsProperties != null)) {
-                    columnValuesArray[4] = parentCatalogRowByCatalog_CustomFieldsProperties[1];
+                    columnValuesArray[1] = parentCatalogRowByCatalog_CustomFieldsProperties[1];
                 }
                 rowCustomFieldsPropertiesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsPropertiesRow);
@@ -2278,30 +2278,31 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
                 this.columnCustomFieldsProperties_Id = base.Columns["CustomFieldsProperties_Id"];
+                this.columnCatalog_Id = base.Columns["Catalog_Id"];
                 this.columnColumnSettings = base.Columns["ColumnSettings"];
                 this.columnGUIProperties = base.Columns["GUIProperties"];
                 this.columnOtherProperties = base.Columns["OtherProperties"];
-                this.columnCatalog_Id = base.Columns["Catalog_Id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
                 this.columnCustomFieldsProperties_Id = new global::System.Data.DataColumn("CustomFieldsProperties_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnCustomFieldsProperties_Id);
+                this.columnCatalog_Id = new global::System.Data.DataColumn("Catalog_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnCatalog_Id);
                 this.columnColumnSettings = new global::System.Data.DataColumn("ColumnSettings", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnColumnSettings);
                 this.columnGUIProperties = new global::System.Data.DataColumn("GUIProperties", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGUIProperties);
                 this.columnOtherProperties = new global::System.Data.DataColumn("OtherProperties", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOtherProperties);
-                this.columnCatalog_Id = new global::System.Data.DataColumn("Catalog_Id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCatalog_Id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnCustomFieldsProperties_Id}, true));
                 this.columnCustomFieldsProperties_Id.AutoIncrement = true;
                 this.columnCustomFieldsProperties_Id.AllowDBNull = false;
                 this.columnCustomFieldsProperties_Id.Unique = true;
                 this.columnCustomFieldsProperties_Id.Namespace = "";
+                this.columnCatalog_Id.Namespace = "";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3354,6 +3355,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnDateWatched;
             
+            private global::System.Data.DataColumn columnFavorite;
+            
             private global::System.Data.DataColumn columnIMDB_Id;
             
             private global::System.Data.DataColumn columnTMDB_Id;
@@ -3710,6 +3713,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FavoriteColumn {
+                get {
+                    return this.columnFavorite;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn IMDB_IdColumn {
                 get {
                     return this.columnIMDB_Id;
@@ -3885,6 +3895,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Writer, 
                         string Watched, 
                         System.DateTime DateWatched, 
+                        string Favorite, 
                         string IMDB_Id, 
                         string TMDB_Id, 
                         string SourceTrailer, 
@@ -3942,6 +3953,7 @@ namespace MyFilmsPlugin.DataBase {
                         Writer,
                         Watched,
                         DateWatched,
+                        Favorite,
                         IMDB_Id,
                         TMDB_Id,
                         SourceTrailer,
@@ -3958,7 +3970,7 @@ namespace MyFilmsPlugin.DataBase {
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[55] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[56] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4006,6 +4018,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Writer, 
                         string Watched, 
                         System.DateTime DateWatched, 
+                        string Favorite, 
                         string IMDB_Id, 
                         string TMDB_Id, 
                         string SourceTrailer, 
@@ -4062,6 +4075,7 @@ namespace MyFilmsPlugin.DataBase {
                         Writer,
                         Watched,
                         DateWatched,
+                        Favorite,
                         IMDB_Id,
                         TMDB_Id,
                         SourceTrailer,
@@ -4078,7 +4092,7 @@ namespace MyFilmsPlugin.DataBase {
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[55] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[56] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4140,6 +4154,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnWriter = base.Columns["Writer"];
                 this.columnWatched = base.Columns["Watched"];
                 this.columnDateWatched = base.Columns["DateWatched"];
+                this.columnFavorite = base.Columns["Favorite"];
                 this.columnIMDB_Id = base.Columns["IMDB_Id"];
                 this.columnTMDB_Id = base.Columns["TMDB_Id"];
                 this.columnSourceTrailer = base.Columns["SourceTrailer"];
@@ -4241,6 +4256,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnWatched);
                 this.columnDateWatched = new global::System.Data.DataColumn("DateWatched", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDateWatched);
+                this.columnFavorite = new global::System.Data.DataColumn("Favorite", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFavorite);
                 this.columnIMDB_Id = new global::System.Data.DataColumn("IMDB_Id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIMDB_Id);
                 this.columnTMDB_Id = new global::System.Data.DataColumn("TMDB_Id", typeof(string), null, global::System.Data.MappingType.Element);
@@ -4481,6 +4498,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnDateWatched;
             
+            private global::System.Data.DataColumn columnFavorite;
+            
             private global::System.Data.DataColumn columnRatingUser;
             
             private global::System.Data.DataColumn columnIMDB_Id;
@@ -4642,6 +4661,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FavoriteColumn {
+                get {
+                    return this.columnFavorite;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn RatingUserColumn {
                 get {
                     return this.columnRatingUser;
@@ -4750,6 +4776,7 @@ namespace MyFilmsPlugin.DataBase {
                         string CategoryTrakt, 
                         string Watched, 
                         string DateWatched, 
+                        string Favorite, 
                         string RatingUser, 
                         string IMDB_Id, 
                         string TMDB_Id, 
@@ -4777,6 +4804,7 @@ namespace MyFilmsPlugin.DataBase {
                         CategoryTrakt,
                         Watched,
                         DateWatched,
+                        Favorite,
                         RatingUser,
                         IMDB_Id,
                         TMDB_Id,
@@ -4787,7 +4815,7 @@ namespace MyFilmsPlugin.DataBase {
                         LastPosition,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[24] = parentMovieRowByMovie_CustomFields[54];
+                    columnValuesArray[25] = parentMovieRowByMovie_CustomFields[55];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -4824,6 +4852,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
                 this.columnWatched = base.Columns["Watched"];
                 this.columnDateWatched = base.Columns["DateWatched"];
+                this.columnFavorite = base.Columns["Favorite"];
                 this.columnRatingUser = base.Columns["RatingUser"];
                 this.columnIMDB_Id = base.Columns["IMDB_Id"];
                 this.columnTMDB_Id = base.Columns["TMDB_Id"];
@@ -4869,6 +4898,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnWatched);
                 this.columnDateWatched = new global::System.Data.DataColumn("DateWatched", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnDateWatched);
+                this.columnFavorite = new global::System.Data.DataColumn("Favorite", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnFavorite);
                 this.columnRatingUser = new global::System.Data.DataColumn("RatingUser", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnRatingUser);
                 this.columnIMDB_Id = new global::System.Data.DataColumn("IMDB_Id", typeof(string), null, global::System.Data.MappingType.Attribute);
@@ -4903,6 +4934,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnCategoryTrakt.Namespace = "";
                 this.columnWatched.Namespace = "";
                 this.columnDateWatched.Namespace = "";
+                this.columnFavorite.Namespace = "";
                 this.columnRatingUser.Namespace = "";
                 this.columnIMDB_Id.Namespace = "";
                 this.columnTMDB_Id.Namespace = "";
@@ -5152,7 +5184,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnCatalog_Id = new global::System.Data.DataColumn("Catalog_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnCatalog_Id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnPersons_Id}, false));
+                                this.columnPersons_Id}, true));
                 this.columnPersons_Id.AutoIncrement = true;
                 this.columnPersons_Id.AllowDBNull = false;
                 this.columnPersons_Id.Unique = true;
@@ -5309,6 +5341,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIsWriter;
             
+            private global::System.Data.DataColumn columnFavorite;
+            
             private global::System.Data.DataColumn columnPhotos;
             
             private global::System.Data.DataColumn columnPicture;
@@ -5437,6 +5471,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FavoriteColumn {
+                get {
+                    return this.columnFavorite;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn PhotosColumn {
                 get {
                     return this.columnPhotos;
@@ -5500,6 +5541,7 @@ namespace MyFilmsPlugin.DataBase {
                         bool IsProducer, 
                         bool IsDirector, 
                         bool IsWriter, 
+                        string Favorite, 
                         string Photos, 
                         string Picture, 
                         PersonsRow parentPersonsRowByPersons_Person) {
@@ -5518,11 +5560,12 @@ namespace MyFilmsPlugin.DataBase {
                         IsProducer,
                         IsDirector,
                         IsWriter,
+                        Favorite,
                         Photos,
                         Picture,
                         null};
                 if ((parentPersonsRowByPersons_Person != null)) {
-                    columnValuesArray[15] = parentPersonsRowByPersons_Person[0];
+                    columnValuesArray[16] = parentPersonsRowByPersons_Person[0];
                 }
                 rowPersonRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPersonRow);
@@ -5556,6 +5599,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIsProducer = base.Columns["IsProducer"];
                 this.columnIsDirector = base.Columns["IsDirector"];
                 this.columnIsWriter = base.Columns["IsWriter"];
+                this.columnFavorite = base.Columns["Favorite"];
                 this.columnPhotos = base.Columns["Photos"];
                 this.columnPicture = base.Columns["Picture"];
                 this.columnPersons_Id = base.Columns["Persons_Id"];
@@ -5589,6 +5633,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnIsDirector);
                 this.columnIsWriter = new global::System.Data.DataColumn("IsWriter", typeof(bool), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnIsWriter);
+                this.columnFavorite = new global::System.Data.DataColumn("Favorite", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnFavorite);
                 this.columnPhotos = new global::System.Data.DataColumn("Photos", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnPhotos);
                 this.columnPicture = new global::System.Data.DataColumn("Picture", typeof(string), null, global::System.Data.MappingType.Attribute);
@@ -5612,6 +5658,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIsDirector.DefaultValue = ((bool)(false));
                 this.columnIsWriter.Namespace = "";
                 this.columnIsWriter.DefaultValue = ((bool)(false));
+                this.columnFavorite.Namespace = "";
                 this.columnPhotos.Namespace = "";
                 this.columnPicture.Namespace = "";
                 this.columnPersons_Id.Namespace = "";
@@ -6297,6 +6344,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Catalog_Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableCustomFieldsProperties.Catalog_IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Catalog_Id in Tabelle CustomFieldsProperties ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCustomFieldsProperties.Catalog_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ColumnSettings {
                 get {
                     try {
@@ -6343,21 +6405,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int Catalog_Id {
-                get {
-                    try {
-                        return ((int)(this[this.tableCustomFieldsProperties.Catalog_IdColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Catalog_Id in Tabelle CustomFieldsProperties ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCustomFieldsProperties.Catalog_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CatalogRow CatalogRow {
                 get {
                     return ((CatalogRow)(this.GetParentRow(this.Table.ParentRelations["Catalog_CustomFieldsProperties"])));
@@ -6365,6 +6412,16 @@ namespace MyFilmsPlugin.DataBase {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["Catalog_CustomFieldsProperties"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCatalog_IdNull() {
+                return this.IsNull(this.tableCustomFieldsProperties.Catalog_IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCatalog_IdNull() {
+                this[this.tableCustomFieldsProperties.Catalog_IdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6395,16 +6452,6 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetOtherPropertiesNull() {
                 this[this.tableCustomFieldsProperties.OtherPropertiesColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCatalog_IdNull() {
-                return this.IsNull(this.tableCustomFieldsProperties.Catalog_IdColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCatalog_IdNull() {
-                this[this.tableCustomFieldsProperties.Catalog_IdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7463,6 +7510,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Favorite {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.FavoriteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Favorite in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.FavoriteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string IMDB_Id {
                 get {
                     try {
@@ -8103,6 +8165,16 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFavoriteNull() {
+                return this.IsNull(this.tableMovie.FavoriteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFavoriteNull() {
+                this[this.tableMovie.FavoriteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsIMDB_IdNull() {
                 return this.IsNull(this.tableMovie.IMDB_IdColumn);
             }
@@ -8508,6 +8580,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Favorite {
+                get {
+                    try {
+                        return ((string)(this[this.tableCustomFields.FavoriteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Favorite in Tabelle CustomFields ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCustomFields.FavoriteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string RatingUser {
                 get {
                     try {
@@ -8810,6 +8897,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDateWatchedNull() {
                 this[this.tableCustomFields.DateWatchedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFavoriteNull() {
+                return this.IsNull(this.tableCustomFields.FavoriteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFavoriteNull() {
+                this[this.tableCustomFields.FavoriteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9183,6 +9280,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Favorite {
+                get {
+                    try {
+                        return ((string)(this[this.tablePerson.FavoriteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Favorite in Tabelle Person ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePerson.FavoriteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Photos {
                 get {
                     try {
@@ -9365,6 +9477,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetIsWriterNull() {
                 this[this.tablePerson.IsWriterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFavoriteNull() {
+                return this.IsNull(this.tablePerson.FavoriteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFavoriteNull() {
+                this[this.tablePerson.FavoriteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
