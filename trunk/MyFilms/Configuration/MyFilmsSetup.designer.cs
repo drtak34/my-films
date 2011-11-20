@@ -333,6 +333,8 @@
           this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.Tab_Views = new System.Windows.Forms.TabPage();
           this.groupBox_AntSelectedEnreg = new System.Windows.Forms.GroupBox();
+          this.AntFreetextFilterItem = new System.Windows.Forms.Label();
+          this.AntFilterFreeText = new System.Windows.Forms.TextBox();
           this.Selected_Enreg = new System.Windows.Forms.TextBox();
           this.AntFilterComb = new System.Windows.Forms.ComboBox();
           this.AntFilterSign2 = new System.Windows.Forms.ComboBox();
@@ -469,12 +471,6 @@
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.chkSuppressManual = new System.Windows.Forms.CheckBox();
           this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
-          this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
-          this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
-          this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
-          this.AntFilterText4 = new System.Windows.Forms.TextBox();
-          this.AntFilterItem3 = new System.Windows.Forms.ComboBox();
-          this.AntFilterText3 = new System.Windows.Forms.TextBox();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -558,8 +554,6 @@
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.myFilmsData = new MyFilmsPlugin.DataBase.MyFilmsData();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.AntFilterFreeText = new System.Windows.Forms.TextBox();
-          this.AntFreetextFilterItem = new System.Windows.Forms.Label();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -3302,6 +3296,25 @@
           this.ToolTip1.SetToolTip(this.groupBox_AntSelectedEnreg, resources.GetString("groupBox_AntSelectedEnreg.ToolTip"));
           this.groupBox_AntSelectedEnreg.Leave += new System.EventHandler(this.Selected_Enreg_Changed);
           // 
+          // AntFreetextFilterItem
+          // 
+          this.AntFreetextFilterItem.AutoSize = true;
+          this.AntFreetextFilterItem.Location = new System.Drawing.Point(4, 76);
+          this.AntFreetextFilterItem.Name = "AntFreetextFilterItem";
+          this.AntFreetextFilterItem.Size = new System.Drawing.Size(50, 13);
+          this.AntFreetextFilterItem.TabIndex = 30;
+          this.AntFreetextFilterItem.Text = "FreeFilter";
+          // 
+          // AntFilterFreeText
+          // 
+          this.AntFilterFreeText.Location = new System.Drawing.Point(55, 73);
+          this.AntFilterFreeText.Name = "AntFilterFreeText";
+          this.AntFilterFreeText.Size = new System.Drawing.Size(303, 20);
+          this.AntFilterFreeText.TabIndex = 29;
+          this.ToolTip1.SetToolTip(this.AntFilterFreeText, "THis field allows you to dfine freetext conditions for your DB restrictions.\r\nIt " +
+                  "could be used e.g. to restrict the config to certain actors:\r\n(Actors like \'*Wil" +
+                  "lis*\' OR Actors like \'*Celentano*\')");
+          // 
           // Selected_Enreg
           // 
           this.Selected_Enreg.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -3368,6 +3381,7 @@
           this.AntFilterItem2.Name = "AntFilterItem2";
           this.AntFilterItem2.Size = new System.Drawing.Size(115, 21);
           this.AntFilterItem2.TabIndex = 22;
+          this.AntFilterItem2.SelectedIndexChanged += new System.EventHandler(this.AntFilterItem2_SelectedIndexChanged);
           // 
           // AntFilterText2
           // 
@@ -3383,6 +3397,7 @@
           this.AntFilterItem1.Name = "AntFilterItem1";
           this.AntFilterItem1.Size = new System.Drawing.Size(115, 21);
           this.AntFilterItem1.TabIndex = 19;
+          this.AntFilterItem1.SelectedIndexChanged += new System.EventHandler(this.AntFilterItem1_SelectedIndexChanged);
           // 
           // AntFilterText1
           // 
@@ -4771,48 +4786,6 @@
           this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
           this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
           // 
-          // AntFilterSign4
-          // 
-          this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterSign4.Name = "AntFilterSign4";
-          this.AntFilterSign4.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterSign4.TabIndex = 0;
-          // 
-          // AntFilterSign3
-          // 
-          this.AntFilterSign3.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterSign3.Name = "AntFilterSign3";
-          this.AntFilterSign3.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterSign3.TabIndex = 0;
-          // 
-          // AntFilterItem4
-          // 
-          this.AntFilterItem4.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterItem4.Name = "AntFilterItem4";
-          this.AntFilterItem4.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterItem4.TabIndex = 0;
-          // 
-          // AntFilterText4
-          // 
-          this.AntFilterText4.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterText4.Name = "AntFilterText4";
-          this.AntFilterText4.Size = new System.Drawing.Size(100, 20);
-          this.AntFilterText4.TabIndex = 0;
-          // 
-          // AntFilterItem3
-          // 
-          this.AntFilterItem3.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterItem3.Name = "AntFilterItem3";
-          this.AntFilterItem3.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterItem3.TabIndex = 0;
-          // 
-          // AntFilterText3
-          // 
-          this.AntFilterText3.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterText3.Name = "AntFilterText3";
-          this.AntFilterText3.Size = new System.Drawing.Size(100, 20);
-          this.AntFilterText3.TabIndex = 0;
-          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -5638,25 +5611,6 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
-          // AntFilterFreeText
-          // 
-          this.AntFilterFreeText.Location = new System.Drawing.Point(55, 73);
-          this.AntFilterFreeText.Name = "AntFilterFreeText";
-          this.AntFilterFreeText.Size = new System.Drawing.Size(303, 20);
-          this.AntFilterFreeText.TabIndex = 29;
-          this.ToolTip1.SetToolTip(this.AntFilterFreeText, "THis field allows you to dfine freetext conditions for your DB restrictions.\r\nIt " +
-                  "could be used e.g. to restrict the config to certain actors:\r\n(Actors like \'*Wil" +
-                  "lis*\' OR Actors like \'*Celentano*\')");
-          // 
-          // AntFreetextFilterItem
-          // 
-          this.AntFreetextFilterItem.AutoSize = true;
-          this.AntFreetextFilterItem.Location = new System.Drawing.Point(4, 76);
-          this.AntFreetextFilterItem.Name = "AntFreetextFilterItem";
-          this.AntFreetextFilterItem.Size = new System.Drawing.Size(45, 13);
-          this.AntFreetextFilterItem.TabIndex = 30;
-          this.AntFreetextFilterItem.Text = "Freetext";
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5805,13 +5759,7 @@
         private Label label12;
         private Button ButDelet;
         private Button ButQuit;
-        private ComboBox AntFilterSign4;
-        private ComboBox AntFilterSign3;
         //private ComboBox AntFilterMinRating;
-        private ComboBox AntFilterItem3;
-        private TextBox AntFilterText3;
-        private ComboBox AntFilterItem4;
-        private TextBox AntFilterText4;
         private Button ButSave;
         private CheckBox Config_Dflt;
         private CheckBox Config_Menu;
