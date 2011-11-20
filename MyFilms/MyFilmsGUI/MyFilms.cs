@@ -3377,6 +3377,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static ArrayList Search_String(string champselect)
     {
+      return Search_String(champselect, false);
+    }
+    public static ArrayList Search_String(string champselect, bool isPerson)
+    {
       Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
       System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
       foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
@@ -3412,6 +3416,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 wzone = wzone.Substring(0, wzoneIndexPosition).Trim();
               }
             }
+          }
+          if (isPerson && wzone.Contains(" "))
+          {
+            // Reverse Names
+            string lastname = wzone.Substring(wzone.LastIndexOf(" ") + 1);
+            string firstname = wzone.Substring(0, wzone.LastIndexOf(" "));
+            wzone = lastname + ", " + firstname;
           }
           if (wzone.Length > 0)
             wtab.Add(wzone);
@@ -3914,6 +3925,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
         else
           champselect = enr[WStrSort].ToString().Trim();
+
+        //ArrayList wtab = Search_String(champselect, isperson);
         ArrayList wtab = Search_String(champselect);
         for (wi = 0; wi < wtab.Count; wi++)
         {
