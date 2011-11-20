@@ -2587,20 +2587,40 @@ Public Class Form1
         destXml.Close()
     End Sub
     Private Sub BindingNavigatorAddNewItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem.Click
-        LogEvent("ERROR : ", EventLogLevel.Informational)
+        Dim newMovie As AntMovieCatalog.MovieRow
+        newMovie = myMovieCatalog.Movie.NewMovieRow()
+
+        Dim x = (From y In myMovieCatalog.Movie _
+                 Where y.Number <> Nothing _
+                 Select CType(y.Number, Integer?)).Max
+
+        newMovie.Number = x + 1
+        newMovie.OriginalTitle = "New Movie"
+        myMovieCatalog.Movie.AddMovieRow(newMovie)
+        LogEvent("Added new Movie : '" & newMovie.OriginalTitle & "', Number : '" & newMovie.Number & "'", EventLogLevel.Informational)
+        'LogEvent("ERROR : ", EventLogLevel.Informational)
     End Sub
-    Private Sub BindingNavigatorAddNewItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem1.Click
-        LogEvent("ERROR : ", EventLogLevel.Informational)
+    Private Sub BindingNavigatorAddNewItemPerson_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItemPerson.Click
+        Dim amc As AntMovieCatalog = New AntMovieCatalog()
+        Dim newPerson As AntMovieCatalog.PersonRow
+        newPerson = amc.Person.NewPersonRow()
+        newPerson.Name = "New Person"
+        newPerson.IsActor = False
+        newPerson.IsProducer = False
+        newPerson.IsDirector = False
+        newPerson.IsWriter = False
+        myMovieCatalog.Person.AddPersonRow(newPerson)
+        LogEvent("Added new Person : '" & newPerson.Name & "'", EventLogLevel.Informational)
     End Sub
 
     Private Sub TabControl1_Selected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TabControlEventArgs) Handles TabControl1.Selected
 
         If TabControl1.SelectedIndex = 6 Or TabControl1.SelectedIndex = 7 Or TabControl1.SelectedIndex = 8 Then
-            Dim myMovieTable As DataTable = Nothing
-            Dim mymovieview As DataView
-            Dim myPersonTable As DataTable = Nothing
-            Dim mypersonview As DataView
-            Dim myProperties As DataTable = Nothing
+            Dim myMovieTable As AMCUpdater.AntMovieCatalog.MovieDataTable = Nothing
+            Dim myMovieView As DataView
+            Dim myPersonTable As AMCUpdater.AntMovieCatalog.PersonDataTable = Nothing
+            Dim myPersonView As DataView
+            Dim myProperties As AMCUpdater.AntMovieCatalog.PropertiesDataTable = Nothing
             Dim wdir As String
 
             If (txtConfigFilePath.Text.Length > 0) Then
@@ -2632,11 +2652,11 @@ Public Class Form1
 
                     'myMovieTable = myMovieCatalog.Tables("Movie")
                     myMovieTable = myMovieCatalog.Movie
-                    mymovieview = New DataView(myMovieTable)
+                    myMovieView = New DataView(myMovieTable)
                     MovieBindingSource.DataSource = myMovieTable
 
                     myPersonTable = myMovieCatalog.Person
-                    mypersonview = New DataView(myPersonTable)
+                    myPersonView = New DataView(myPersonTable)
                     PersonBindingSource.DataSource = myPersonTable
 
                     myProperties = myMovieCatalog.Properties
