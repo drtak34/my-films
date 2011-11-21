@@ -2039,11 +2039,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (AntFilterItem1.Text == "DateAdded")
                     if ((AntFilterSign1.Text == "#") || (AntFilterSign1.Text == "not like"))
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# or " + AntFilterItem1.Text + " is null) ";
-                    else
+                    else if ((AntFilterSign1.Text == "in") || (AntFilterSign1.Text == "not in"))
+                      StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, true) + ")) ";
+                    else 
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# ) ";
                 else
                     if ((AntFilterSign1.Text == "#") || (AntFilterSign1.Text == "not like"))
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "' or " + AntFilterItem1.Text + " is null) ";
+                    else if ((AntFilterSign1.Text == "in") || (AntFilterSign1.Text == "not in"))
+                      StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, false) + ")) ";
                     else
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "') ";
             if ((AntFilterComb.Text == "or") && (StrDfltSelect.Length > 0))
@@ -2059,19 +2063,38 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (AntFilterItem2.Text == "DateAdded")
                     if ((AntFilterSign2.Text == "#") || (AntFilterSign2.Text == "not like"))
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# or " + AntFilterItem2.Text + " is null)) AND ";
+                    else if ((AntFilterSign2.Text == "in") || (AntFilterSign2.Text == "not in"))
+                      StrDfltSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, true) + ")) AND ";
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# )) AND ";
                 else
                     if ((AntFilterSign2.Text == "#") || (AntFilterSign2.Text == "not like"))
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' or " + AntFilterItem2.Text + " is null)) AND ";
+                    else if ((AntFilterSign2.Text == "in") || (AntFilterSign2.Text == "not in"))
+                      StrDfltSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, false) + ")) AND ";
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
             if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
-              StrDfltSelect = StrDfltSelect + " AND " + AntFilterFreeText.Text;
+              StrDfltSelect = StrDfltSelect + AntFilterFreeText.Text + " AND ";
             Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
             LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
         }
 
+        private string DBitemList(string inputstring, bool isdate)
+        {
+          string returnValue = "";
+          char[] separator = new char[','];
+          string[] split = inputstring.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+          foreach (string s in split)
+          {
+            if (returnValue.Length > 0) returnValue += ", ";
+            if (isdate)
+              returnValue += "'#" + Convert.ToDateTime(s) + "#'";
+            else
+              returnValue += "'" + s + "'";
+          }
+        }
+    
         private void Selected_Enreg_Changed(object sender, EventArgs e)
         {
             Selected_Enreg_TextChanged();
