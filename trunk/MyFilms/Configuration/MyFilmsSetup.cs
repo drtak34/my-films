@@ -2041,6 +2041,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# or " + AntFilterItem1.Text + " is null) ";
                     else if ((AntFilterSign1.Text == "in") || (AntFilterSign1.Text == "not in"))
                       StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, true) + ")) ";
+                    else if (AntFilterSign1.Text == "like in")
+                      StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem1.Text, AntFilterText1.Text, true) + ") ";
                     else 
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# ) ";
                 else
@@ -2048,6 +2050,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "' or " + AntFilterItem1.Text + " is null) ";
                     else if ((AntFilterSign1.Text == "in") || (AntFilterSign1.Text == "not in"))
                       StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, false) + ")) ";
+                    else if (AntFilterSign1.Text == "like in")
+                      StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem1.Text, AntFilterText1.Text, false) + ") ";
                     else
                         StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "') ";
             if ((AntFilterComb.Text == "or") && (StrDfltSelect.Length > 0))
@@ -2065,6 +2069,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# or " + AntFilterItem2.Text + " is null)) AND ";
                     else if ((AntFilterSign2.Text == "in") || (AntFilterSign2.Text == "not in"))
                       StrDfltSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, true) + ")) AND ";
+                    else if (AntFilterSign2.Text == "like in")
+                      StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem2.Text, AntFilterText2.Text, true) + ") AND ";
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# )) AND ";
                 else
@@ -2072,6 +2078,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' or " + AntFilterItem2.Text + " is null)) AND ";
                     else if ((AntFilterSign2.Text == "in") || (AntFilterSign2.Text == "not in"))
                       StrDfltSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, false) + ")) AND ";
+                    else if (AntFilterSign2.Text == "like in")
+                      StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem2.Text, AntFilterText2.Text, true) + ") AND ";
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
             if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
@@ -2088,13 +2096,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             if (returnValue.Length > 0) returnValue += ", ";
             if (isdate)
-              returnValue += "'#" + Convert.ToDateTime(s) + "#'";
+              returnValue += "#" + Convert.ToDateTime(s) + "#";
             else
               returnValue += "'" + s + "'";
           }
           return returnValue;
         }
-    
+
+        private string TransformedLikeIn(string dbfield, string inputstring, bool isdate)
+        {
+          string returnValue = "";
+          string[] split = inputstring.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+          foreach (string s in split)
+          {
+            if (returnValue.Length > 0) returnValue += " OR ";
+            if (isdate)
+              returnValue += "(" + dbfield + "like #" + Convert.ToDateTime(s) + "#)";
+            else
+              returnValue += "(" + dbfield + "like '*" + s + "*')";
+          }
+          return returnValue;
+        }
+
         private void Selected_Enreg_Changed(object sender, EventArgs e)
         {
             Selected_Enreg_TextChanged();
