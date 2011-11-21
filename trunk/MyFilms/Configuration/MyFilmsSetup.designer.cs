@@ -3007,9 +3007,9 @@
           this.label43.AutoSize = true;
           this.label43.Location = new System.Drawing.Point(164, 22);
           this.label43.Name = "label43";
-          this.label43.Size = new System.Drawing.Size(161, 13);
+          this.label43.Size = new System.Drawing.Size(125, 13);
           this.label43.TabIndex = 42;
-          this.label43.Text = "Search Label to display on menu";
+          this.label43.Text = "Value to display on menu";
           // 
           // label42
           // 

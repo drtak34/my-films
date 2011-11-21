@@ -3250,8 +3250,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
         {
-          if (MyFilms.conf.StrSearchText[i].Length == 0) dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
-          else dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
+          if (MyFilms.conf.StrSearchText[i].Length == 0) 
+            dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
+          else 
+            dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
           choiceSearch.Add(string.Format("search{0}", i.ToString()));
         }
       }
@@ -3356,10 +3358,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             AntMovieCatalog ds = new AntMovieCatalog();
             if (control_searchText(keyboard.Text))
             {
-              if (ds.Movie.Columns[conf.StrSearchItem[i].ToString()].DataType.Name == "string") conf.StrSelect = conf.StrSearchItem[i].ToString() + " like '*" + keyboard.Text + "*'";
-              else conf.StrSelect = conf.StrSearchItem[i].ToString() + " = '" + keyboard.Text + "'";
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text +
-                                  @"*]";
+              if (ds.Movie.Columns[conf.StrSearchItem[i].ToString()].DataType.Name == "string") 
+                conf.StrSelect = conf.StrSearchItem[i].ToString() + " like '*" + keyboard.Text + "*'";
+              else 
+                conf.StrSelect = conf.StrSearchItem[i].ToString() + " = '" + keyboard.Text + "'";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
               conf.StrTitleSelect = "";
               GetFilmList();
             }
