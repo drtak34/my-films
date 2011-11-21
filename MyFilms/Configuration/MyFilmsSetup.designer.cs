@@ -3352,7 +3352,9 @@
             ">",
             "<",
             "like",
-            "not like"});
+            "not like",
+            "in",
+            "not in"});
           this.AntFilterSign2.Location = new System.Drawing.Point(176, 46);
           this.AntFilterSign2.Name = "AntFilterSign2";
           this.AntFilterSign2.Size = new System.Drawing.Size(60, 21);
@@ -3368,11 +3370,14 @@
             ">",
             "<",
             "like",
-            "not like"});
+            "not like",
+            "in",
+            "not in"});
           this.AntFilterSign1.Location = new System.Drawing.Point(176, 19);
           this.AntFilterSign1.Name = "AntFilterSign1";
           this.AntFilterSign1.Size = new System.Drawing.Size(60, 21);
           this.AntFilterSign1.TabIndex = 20;
+          this.ToolTip1.SetToolTip(this.AntFilterSign1, resources.GetString("AntFilterSign1.ToolTip"));
           // 
           // AntFilterItem2
           // 
