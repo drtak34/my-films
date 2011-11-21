@@ -2083,8 +2083,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private string DBitemList(string inputstring, bool isdate)
         {
           string returnValue = "";
-          char[] separator = new char[','];
-          string[] split = inputstring.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+          string[] split = inputstring.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
           foreach (string s in split)
           {
             if (returnValue.Length > 0) returnValue += ", ";
@@ -2093,6 +2092,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
               returnValue += "'" + s + "'";
           }
+          return returnValue;
         }
     
         private void Selected_Enreg_Changed(object sender, EventArgs e)
