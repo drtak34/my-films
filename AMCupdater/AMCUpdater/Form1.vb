@@ -746,6 +746,7 @@ Public Class Form1
                 txtSampleAudioCodec.Text = GetFileData(txtSampleFile.Text, "AudioFormat")
                 txtSampleFileLength.Text = GetFileData(txtSampleFile.Text, "runtime")
                 txtSampleFileSize.Text = GetFileData(txtSampleFile.Text, "filesize")
+                txtSampleAudioChannelCount.Text = GetFileData(txtSampleFile.Text, "audiochannelcount")
                 txtSampleAudioStreamCount.Text = GetFileData(txtSampleFile.Text, "audiostreamcount")
                 txtSampleAudioStreamList.Text = GetFileData(txtSampleFile.Text, "audiostreamcodeclist")
                 txtSampleAudioLanguageList.Text = GetFileData(txtSampleFile.Text, "audiostreamlanguagelist")

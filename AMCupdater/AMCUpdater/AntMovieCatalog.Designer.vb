@@ -3351,6 +3351,8 @@ Partial Public Class AntMovieCatalog
         
         Private columnLastPosition As Global.System.Data.DataColumn
         
+        Private columnAudioChannelCount As Global.System.Data.DataColumn
+        
         Private columnPersons As Global.System.Data.DataColumn
         
         Private columnMovie_Id As Global.System.Data.DataColumn
@@ -3769,9 +3771,16 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property LastPosition() As Global.System.Data.DataColumn
+        Public ReadOnly Property LastPositionColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnLastPosition
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AudioChannelCountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAudioChannelCount
             End Get
         End Property
         
@@ -3880,12 +3889,13 @@ Partial Public Class AntMovieCatalog
                     ByVal Aspectratio As String,  _
                     ByVal CategoryTrakt As String,  _
                     ByVal LastPosition As String,  _
+                    ByVal AudioChannelCount As String,  _
                     ByVal Persons As String,  _
                     ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, Subtitles, Size, Disks, Length_Num, Picture, Fanart, Certification, Writer, Watched, DateWatched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, Persons, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, Subtitles, Size, Disks, Length_Num, Picture, Fanart, Certification, Writer, Watched, DateWatched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, Persons, Nothing, Nothing}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(56) = parentContentsRowByContents_Movie(0)
+                columnValuesArray(57) = parentContentsRowByContents_Movie(0)
             End If
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
@@ -3946,11 +3956,12 @@ Partial Public Class AntMovieCatalog
                     ByVal Aspectratio As String,  _
                     ByVal CategoryTrakt As String,  _
                     ByVal LastPosition As String,  _
+                    ByVal AudioChannelCount As String,  _
                     ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Nothing, Subtitles, Size, Disks, Nothing, Picture, Fanart, Certification, Writer, Watched, DateWatched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, Nothing, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Nothing, Subtitles, Size, Disks, Nothing, Picture, Fanart, Certification, Writer, Watched, DateWatched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, Nothing, Nothing, Nothing}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(56) = parentContentsRowByContents_Movie(0)
+                columnValuesArray(57) = parentContentsRowByContents_Movie(0)
             End If
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
@@ -4025,6 +4036,7 @@ Partial Public Class AntMovieCatalog
             Me.columnAspectratio = MyBase.Columns("Aspectratio")
             Me.columnCategoryTrakt = MyBase.Columns("CategoryTrakt")
             Me.columnLastPosition = MyBase.Columns("LastPosition")
+            Me.columnAudioChannelCount = MyBase.Columns("AudioChannelCount")
             Me.columnPersons = MyBase.Columns("Persons")
             Me.columnMovie_Id = MyBase.Columns("Movie_Id")
             Me.columnContents_Id = MyBase.Columns("Contents_Id")
@@ -4142,9 +4154,9 @@ Partial Public Class AntMovieCatalog
             Me.columnCategoryTrakt = New Global.System.Data.DataColumn("CategoryTrakt", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCategoryTrakt)
             Me.columnLastPosition = New Global.System.Data.DataColumn("LastPosition", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            Me.columnLastPosition.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "LastPosition")
-            Me.columnLastPosition.ExtendedProperties.Add("Generator_UserColumnName", "LastPosition")
             MyBase.Columns.Add(Me.columnLastPosition)
+            Me.columnAudioChannelCount = New Global.System.Data.DataColumn("AudioChannelCount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAudioChannelCount)
             Me.columnPersons = New Global.System.Data.DataColumn("Persons", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPersons)
             Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
@@ -4380,6 +4392,8 @@ Partial Public Class AntMovieCatalog
         
         Private columnLastPosition As Global.System.Data.DataColumn
         
+        Private columnAudioChannelCount As Global.System.Data.DataColumn
+        
         Private columnMovie_Id As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -4590,6 +4604,13 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property AudioChannelCountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAudioChannelCount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property Movie_IdColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnMovie_Id
@@ -4651,11 +4672,12 @@ Partial Public Class AntMovieCatalog
                     ByVal IsOnline As String,  _
                     ByVal IsOnlineTrailer As String,  _
                     ByVal LastPosition As String,  _
+                    ByVal AudioChannelCount As String,  _
                     ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
             Dim rowCustomFieldsRow As CustomFieldsRow = CType(Me.NewRow,CustomFieldsRow)
-            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, CustomField4, CustomField5, Edition, Studio, Fanart, Certification, Writer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, DateWatched, Favorite, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, Nothing}
+            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, CustomField4, CustomField5, Edition, Studio, Fanart, Certification, Writer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, DateWatched, Favorite, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, AudioChannelCount, Nothing}
             If (Not (parentMovieRowByMovie_CustomFields) Is Nothing) Then
-                columnValuesArray(25) = parentMovieRowByMovie_CustomFields(55)
+                columnValuesArray(26) = parentMovieRowByMovie_CustomFields(56)
             End If
             rowCustomFieldsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCustomFieldsRow)
@@ -4701,6 +4723,7 @@ Partial Public Class AntMovieCatalog
             Me.columnIsOnline = MyBase.Columns("IsOnline")
             Me.columnIsOnlineTrailer = MyBase.Columns("IsOnlineTrailer")
             Me.columnLastPosition = MyBase.Columns("LastPosition")
+            Me.columnAudioChannelCount = MyBase.Columns("AudioChannelCount")
             Me.columnMovie_Id = MyBase.Columns("Movie_Id")
         End Sub
         
@@ -4756,6 +4779,8 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnIsOnlineTrailer)
             Me.columnLastPosition = New Global.System.Data.DataColumn("LastPosition", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnLastPosition)
+            Me.columnAudioChannelCount = New Global.System.Data.DataColumn("AudioChannelCount", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnAudioChannelCount)
             Me.columnMovie_Id = New Global.System.Data.DataColumn("Movie_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnMovie_Id)
             Me.columnCustomField1.Namespace = ""
@@ -4783,6 +4808,7 @@ Partial Public Class AntMovieCatalog
             Me.columnIsOnline.Namespace = ""
             Me.columnIsOnlineTrailer.Namespace = ""
             Me.columnLastPosition.Namespace = ""
+            Me.columnAudioChannelCount.Namespace = ""
             Me.columnMovie_Id.Namespace = ""
         End Sub
         
@@ -7446,13 +7472,27 @@ Partial Public Class AntMovieCatalog
         Public Property LastPosition() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMovie.LastPosition),String)
+                    Return CType(Me(Me.tableMovie.LastPositionColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte LastPosition in Tabelle Movie ist DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMovie.LastPosition) = value
+                Me(Me.tableMovie.LastPositionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property AudioChannelCount() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.AudioChannelCountColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte AudioChannelCount in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.AudioChannelCountColumn) = value
             End Set
         End Property
         
@@ -8036,12 +8076,22 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsLastPositionNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.LastPosition)
+            Return Me.IsNull(Me.tableMovie.LastPositionColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetLastPositionNull()
-            Me(Me.tableMovie.LastPosition) = Global.System.Convert.DBNull
+            Me(Me.tableMovie.LastPositionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsAudioChannelCountNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.AudioChannelCountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetAudioChannelCountNull()
+            Me(Me.tableMovie.AudioChannelCountColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -8440,6 +8490,20 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property AudioChannelCount() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.AudioChannelCountColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte AudioChannelCount in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.AudioChannelCountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Movie_Id() As Integer
             Get
                 Try 
@@ -8711,6 +8775,16 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetLastPositionNull()
             Me(Me.tableCustomFields.LastPositionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsAudioChannelCountNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.AudioChannelCountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetAudioChannelCountNull()
+            Me(Me.tableCustomFields.AudioChannelCountColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _

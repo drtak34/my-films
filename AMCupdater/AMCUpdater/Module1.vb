@@ -641,6 +641,23 @@ Module Module1
                     LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
                     ReturnValue = ""
                 End Try
+            Case "audiochannelcount"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Audio, 0, "Channel(s)")
+                    MI.Close()
+                    Integer.TryParse(TempString, TempInteger)
+                    If TempInteger > -1 Then
+                        ReturnValue = TempInteger.ToString
+                    Else
+                        ReturnValue = ""
+                    End If
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
             Case "textstreamcodeclist"
                 Try
                     MI = New MediaInfo
@@ -1237,6 +1254,7 @@ Module Module1
             MediaData.Add("length")
             MediaData.Add("videobitrate")
             MediaData.Add("audiobitrate")
+            MediaData.Add("audiochannelcount")
             MediaData.Add("disks")
             MediaData.Add("videoformat")
             MediaData.Add("audioformat")
@@ -1516,6 +1534,7 @@ Module Module1
             writer.WriteElementString("VideoBitrate", GetValueFromCurrentNode(node, "VideoBitrate"))
             writer.WriteElementString("AudioFormat", GetValueFromCurrentNode(node, "AudioFormat"))
             writer.WriteElementString("AudioBitrate", GetValueFromCurrentNode(node, "AudioBitrate"))
+            writer.WriteElementString("AudioChannelCount", GetValueFromCurrentNode(node, "AudioChannelCount"))
             writer.WriteElementString("Resolution", GetValueFromCurrentNode(node, "Resolution"))
             writer.WriteElementString("Framerate", GetValueFromCurrentNode(node, "Framerate"))
             writer.WriteElementString("Subtitles", GetValueFromCurrentNode(node, "Subtitles"))

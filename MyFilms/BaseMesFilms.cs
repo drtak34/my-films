@@ -1467,7 +1467,9 @@ namespace MyFilmsPlugin.MyFilms
               case "CategoryTrakt":
               case "categorytrakt":
                 return GUILocalizeStrings.Get(10798952);
-
+              case "AudioChannelCount":
+              case "audiochannelcount":
+                return GUILocalizeStrings.Get(10798953);
               default:
                 return string.Empty;
             }

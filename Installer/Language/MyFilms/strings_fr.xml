@@ -336,5 +336,6 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798950">Status des Bandes annonces en ligne</String>
     <String id="10798951">Persons</String>
     <String id="10798952">Trakt Categories</String>
+    <String id="10798953">Audio Channels</String>
   </Section>
 </Language>
