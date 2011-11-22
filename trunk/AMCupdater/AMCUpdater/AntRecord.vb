@@ -1473,6 +1473,12 @@ Public Class AntRecord
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
+            CurrentAttribute = "AudioChannelCount"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                TempValue = GetFileData(_FilePath, "AudioChannelCount")
+                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+            End If
+
             CurrentAttribute = "Framerate"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "Framerate")
@@ -2021,7 +2027,7 @@ Public Class AntRecord
                 If Not _LastOutputMessage.Contains(" - Updated: ") Then
                     _LastOutputMessage += " - Updated: " + currentAttribute
                 Else
-                    _LastOutputMessage += ", " + currentAttribute
+                    _LastOutputMessage += ", " + currentAttribute + " (CustomFields)"
                 End If
             End If
         End If

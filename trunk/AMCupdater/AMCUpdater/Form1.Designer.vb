@@ -536,6 +536,8 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
+        Me.txtSampleAudioChannelCount = New System.Windows.Forms.TextBox
+        Me.Label100 = New System.Windows.Forms.Label
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -3151,6 +3153,8 @@ Partial Class Form1
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label100)
+        Me.GroupBox2.Controls.Add(Me.txtSampleAudioChannelCount)
         Me.GroupBox2.Controls.Add(Me.Label37)
         Me.GroupBox2.Controls.Add(Me.Label36)
         Me.GroupBox2.Controls.Add(Me.txtSampleAudioLanguageList)
@@ -3245,7 +3249,7 @@ Partial Class Form1
         Me.txtSampleAudioCodec.Location = New System.Drawing.Point(87, 19)
         Me.txtSampleAudioCodec.Name = "txtSampleAudioCodec"
         Me.txtSampleAudioCodec.ReadOnly = True
-        Me.txtSampleAudioCodec.Size = New System.Drawing.Size(397, 20)
+        Me.txtSampleAudioCodec.Size = New System.Drawing.Size(156, 20)
         Me.txtSampleAudioCodec.TabIndex = 8
         Me.txtSampleAudioCodec.TabStop = False
         '
@@ -4958,7 +4962,7 @@ Partial Class Form1
         Me.PersonBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem1
         Me.PersonBindingNavigator.Name = "PersonBindingNavigator"
         Me.PersonBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem1
-        Me.PersonBindingNavigator.Size = New System.Drawing.Size(594, 27)
+        Me.PersonBindingNavigator.Size = New System.Drawing.Size(563, 27)
         Me.PersonBindingNavigator.TabIndex = 0
         Me.PersonBindingNavigator.Text = "PersonBindingNavigator"
         '
@@ -5616,6 +5620,24 @@ Partial Class Form1
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
         '
+        'txtSampleAudioChannelCount
+        '
+        Me.txtSampleAudioChannelCount.Location = New System.Drawing.Point(359, 19)
+        Me.txtSampleAudioChannelCount.Name = "txtSampleAudioChannelCount"
+        Me.txtSampleAudioChannelCount.ReadOnly = True
+        Me.txtSampleAudioChannelCount.Size = New System.Drawing.Size(125, 20)
+        Me.txtSampleAudioChannelCount.TabIndex = 16
+        Me.txtSampleAudioChannelCount.TabStop = False
+        '
+        'Label100
+        '
+        Me.Label100.AutoSize = True
+        Me.Label100.Location = New System.Drawing.Point(275, 22)
+        Me.Label100.Name = "Label100"
+        Me.Label100.Size = New System.Drawing.Size(54, 13)
+        Me.Label100.TabIndex = 17
+        Me.Label100.Text = "Channels:"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6258,4 +6280,6 @@ Partial Class Form1
     Friend WithEvents DataGridViewTextBoxColumn16 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn17 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents UserBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents Label100 As System.Windows.Forms.Label
+    Friend WithEvents txtSampleAudioChannelCount As System.Windows.Forms.TextBox
 End Class
