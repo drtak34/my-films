@@ -3381,6 +3381,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnLastPosition;
             
+            private global::System.Data.DataColumn columnAudioChannelCount;
+            
             private global::System.Data.DataColumn columnPersons;
             
             private global::System.Data.DataColumn columnMovie_Id;
@@ -3797,9 +3799,16 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn LastPosition {
+            public global::System.Data.DataColumn LastPositionColumn {
                 get {
                     return this.columnLastPosition;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AudioChannelCountColumn {
+                get {
+                    return this.columnAudioChannelCount;
                 }
             }
             
@@ -3908,6 +3917,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Aspectratio, 
                         string CategoryTrakt, 
                         string LastPosition, 
+                        string AudioChannelCount, 
                         string Persons, 
                         ContentsRow parentContentsRowByContents_Movie) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
@@ -3966,11 +3976,12 @@ namespace MyFilmsPlugin.DataBase {
                         Aspectratio,
                         CategoryTrakt,
                         LastPosition,
+                        AudioChannelCount,
                         Persons,
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[56] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[57] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4031,6 +4042,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Aspectratio, 
                         string CategoryTrakt, 
                         string LastPosition, 
+                        string AudioChannelCount, 
                         ContentsRow parentContentsRowByContents_Movie) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -4088,11 +4100,12 @@ namespace MyFilmsPlugin.DataBase {
                         Aspectratio,
                         CategoryTrakt,
                         LastPosition,
+                        AudioChannelCount,
                         null,
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[56] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[57] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4167,6 +4180,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnAspectratio = base.Columns["Aspectratio"];
                 this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
                 this.columnLastPosition = base.Columns["LastPosition"];
+                this.columnAudioChannelCount = base.Columns["AudioChannelCount"];
                 this.columnPersons = base.Columns["Persons"];
                 this.columnMovie_Id = base.Columns["Movie_Id"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
@@ -4281,9 +4295,9 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnCategoryTrakt = new global::System.Data.DataColumn("CategoryTrakt", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoryTrakt);
                 this.columnLastPosition = new global::System.Data.DataColumn("LastPosition", typeof(string), null, global::System.Data.MappingType.Element);
-                this.columnLastPosition.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "LastPosition");
-                this.columnLastPosition.ExtendedProperties.Add("Generator_UserColumnName", "LastPosition");
                 base.Columns.Add(this.columnLastPosition);
+                this.columnAudioChannelCount = new global::System.Data.DataColumn("AudioChannelCount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAudioChannelCount);
                 this.columnPersons = new global::System.Data.DataColumn("Persons", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPersons);
                 this.columnMovie_Id = new global::System.Data.DataColumn("Movie_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
@@ -4516,6 +4530,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnLastPosition;
             
+            private global::System.Data.DataColumn columnAudioChannelCount;
+            
             private global::System.Data.DataColumn columnMovie_Id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4724,6 +4740,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AudioChannelCountColumn {
+                get {
+                    return this.columnAudioChannelCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn Movie_IdColumn {
                 get {
                     return this.columnMovie_Id;
@@ -4785,6 +4808,7 @@ namespace MyFilmsPlugin.DataBase {
                         string IsOnline, 
                         string IsOnlineTrailer, 
                         string LastPosition, 
+                        string AudioChannelCount, 
                         MovieRow parentMovieRowByMovie_CustomFields) {
                 CustomFieldsRow rowCustomFieldsRow = ((CustomFieldsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -4813,9 +4837,10 @@ namespace MyFilmsPlugin.DataBase {
                         IsOnline,
                         IsOnlineTrailer,
                         LastPosition,
+                        AudioChannelCount,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[25] = parentMovieRowByMovie_CustomFields[55];
+                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[56];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -4861,6 +4886,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIsOnline = base.Columns["IsOnline"];
                 this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
                 this.columnLastPosition = base.Columns["LastPosition"];
+                this.columnAudioChannelCount = base.Columns["AudioChannelCount"];
                 this.columnMovie_Id = base.Columns["Movie_Id"];
             }
             
@@ -4916,6 +4942,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnIsOnlineTrailer);
                 this.columnLastPosition = new global::System.Data.DataColumn("LastPosition", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnLastPosition);
+                this.columnAudioChannelCount = new global::System.Data.DataColumn("AudioChannelCount", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnAudioChannelCount);
                 this.columnMovie_Id = new global::System.Data.DataColumn("Movie_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnMovie_Id);
                 this.columnCustomField1.Namespace = "";
@@ -4943,6 +4971,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIsOnline.Namespace = "";
                 this.columnIsOnlineTrailer.Namespace = "";
                 this.columnLastPosition.Namespace = "";
+                this.columnAudioChannelCount.Namespace = "";
                 this.columnMovie_Id.Namespace = "";
             }
             
@@ -7693,14 +7722,29 @@ namespace MyFilmsPlugin.DataBase {
             public string LastPosition {
                 get {
                     try {
-                        return ((string)(this[this.tableMovie.LastPosition]));
+                        return ((string)(this[this.tableMovie.LastPositionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("Der Wert für Spalte LastPosition in Tabelle Movie ist DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMovie.LastPosition] = value;
+                    this[this.tableMovie.LastPositionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string AudioChannelCount {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.AudioChannelCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AudioChannelCount in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.AudioChannelCountColumn] = value;
                 }
             }
             
@@ -8286,12 +8330,22 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsLastPositionNull() {
-                return this.IsNull(this.tableMovie.LastPosition);
+                return this.IsNull(this.tableMovie.LastPositionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetLastPositionNull() {
-                this[this.tableMovie.LastPosition] = global::System.Convert.DBNull;
+                this[this.tableMovie.LastPositionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAudioChannelCountNull() {
+                return this.IsNull(this.tableMovie.AudioChannelCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAudioChannelCountNull() {
+                this[this.tableMovie.AudioChannelCountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8715,6 +8769,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string AudioChannelCount {
+                get {
+                    try {
+                        return ((string)(this[this.tableCustomFields.AudioChannelCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AudioChannelCount in Tabelle CustomFields ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCustomFields.AudioChannelCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int Movie_Id {
                 get {
                     try {
@@ -8987,6 +9056,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetLastPositionNull() {
                 this[this.tableCustomFields.LastPositionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAudioChannelCountNull() {
+                return this.IsNull(this.tableCustomFields.AudioChannelCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAudioChannelCountNull() {
+                this[this.tableCustomFields.AudioChannelCountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
