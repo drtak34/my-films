@@ -2111,9 +2111,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             if (returnValue.Length > 0) returnValue += " OR ";
             if (isdate)
-              returnValue += "(" + dbfield + "like #" + Convert.ToDateTime(s) + "#)";
+              returnValue += "(" + dbfield + " like #" + Convert.ToDateTime(s) + "#)";
             else
-              returnValue += "(" + dbfield + "like '*" + s + "*')";
+              returnValue += "(" + dbfield + " like '*" + s + "*')";
           }
           return returnValue;
         }
