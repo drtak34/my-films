@@ -3994,7 +3994,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
+          // if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
+          if (conf.Wstar == "*" || ListConditionTrue(champselect, conf.Wstar))
           {
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
             {
@@ -4124,6 +4125,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
     }
 
+    private bool ListConditionTrue(string champselect, string filterlist) // checks, if a single string or comma separated strings do a matching for the list ...
+    {
+      if (!filterlist.Contains(","))
+      {
+        if (champselect.ToUpper().Contains(filterlist.ToUpper()))
+          return true;
+        else
+          return false;
+      }
+      else
+      {
+        string[] split = filterlist.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string s in split)
+        {
+          if (champselect.ToUpper().Contains(s.Trim().ToUpper())) return true;
+        }
+      }
+      return false;
+    }
+    
     private void GetImages(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir)
     {
       StopDownload = false;
@@ -5013,7 +5034,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           SetLabelView(choiceView);
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
-          if (conf.StrViewValue[i].Length > 0)
+          if (conf.StrViewValue[i].Length > 0 && !conf.StrViewValue[i].Contains(","))
           {
             conf.Boolview = true;
             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
@@ -5040,10 +5061,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
+            string listfilter = (conf.StrViewValue[i].Length == 0) ? "*" : conf.StrViewValue[i];
+
             if (conf.WStrSort == "DateAdded")
-              getSelectFromDivx(conf.StrTitle1 + " not like ''", "Date", " DESC", "*", true, string.Empty);
+              getSelectFromDivx(conf.StrTitle1 + " not like ''", "Date", " DESC", listfilter, true, string.Empty);
             else
-              getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
+              getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, listfilter, true, string.Empty);
           }
 
           //if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
@@ -9754,7 +9777,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       
       foreach (string person in persons)
       {
-        AddActor(person);
+        // ToDo: Reenable AddActor() to scrape actor infos - make sure, it's not causing too much load...
+        // AddActor(person);
       }
     }
 
