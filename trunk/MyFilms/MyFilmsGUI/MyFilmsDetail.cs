@@ -8578,7 +8578,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void setGUIProperty(string name, string value)
         {
-          setGUIProperty(name, value, false);
+          setGUIProperty(name, value, true);
         }
 
         public static void setGUIProperty(string name, string value, bool log)
