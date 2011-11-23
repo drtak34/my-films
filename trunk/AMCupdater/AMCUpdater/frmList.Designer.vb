@@ -49,7 +49,7 @@ Partial Class frmList
         Me.Label3 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.txtSource = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
+        Me.LabelSourcePath = New System.Windows.Forms.Label
         Me.lstOptionsExt = New System.Windows.Forms.DataGridView
         Me.Thumb = New System.Windows.Forms.DataGridViewImageColumn
         Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -263,15 +263,15 @@ Partial Class frmList
         Me.txtSource.Size = New System.Drawing.Size(748, 20)
         Me.txtSource.TabIndex = 81
         '
-        'Label5
+        'LabelSourcePath
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(15, 9)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(73, 13)
-        Me.Label5.TabIndex = 82
-        Me.Label5.Text = "Media Source"
-        Me.ToolTipImportDialog.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.LabelSourcePath.AutoSize = True
+        Me.LabelSourcePath.Location = New System.Drawing.Point(15, 9)
+        Me.LabelSourcePath.Name = "LabelSourcePath"
+        Me.LabelSourcePath.Size = New System.Drawing.Size(73, 13)
+        Me.LabelSourcePath.TabIndex = 82
+        Me.LabelSourcePath.Text = "Media Source"
+        Me.ToolTipImportDialog.SetToolTip(Me.LabelSourcePath, resources.GetString("LabelSourcePath.ToolTip"))
         '
         'lstOptionsExt
         '
@@ -466,7 +466,7 @@ Partial Class frmList
         Me.Controls.Add(Me.btnRenameAndCancel)
         Me.Controls.Add(Me.btnSearchGoogle)
         Me.Controls.Add(Me.lstOptionsExt)
-        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.LabelSourcePath)
         Me.Controls.Add(Me.txtSource)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -517,7 +517,7 @@ Partial Class frmList
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtSource As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents LabelSourcePath As System.Windows.Forms.Label
     Friend WithEvents lstOptionsExt As System.Windows.Forms.DataGridView
     Friend WithEvents btnSearchGoogle As System.Windows.Forms.Button
     Friend WithEvents ToolTipImportDialog As System.Windows.Forms.ToolTip

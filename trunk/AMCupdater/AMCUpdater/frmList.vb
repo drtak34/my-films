@@ -251,7 +251,7 @@ Public Class frmList
             If Me.lstOptionsExt("Thumb", e.RowIndex).Value IsNot Nothing Then
                 Label3.Visible = False
                 Label4.Visible = False
-                Label5.Visible = False
+                LabelSourcePath.Visible = False
                 pbCoverPreview.Visible = True
                 pbCoverPreview.Image = Me.lstOptionsExt("Thumb", e.RowIndex).Value
             End If
@@ -276,7 +276,7 @@ Public Class frmList
     Private Sub lstOptionsExt_CellMouseLeave(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lstOptionsExt.CellMouseLeave
         Label3.Visible = True
         Label4.Visible = True
-        Label5.Visible = True
+        LabelSourcePath.Visible = True
         pbCoverPreview.Visible = False
         pbCoverPreview.Image = Nothing
         'Me.ToolTipImportDialog.Hide(Me.lstOptionsExt.Columns("AKA"))
@@ -356,5 +356,15 @@ Public Class frmList
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
+    End Sub
+
+    Private Sub LabelSourcePath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LabelSourcePath.Click
+        Try
+            Dim info As IO.FileInfo = My.Computer.FileSystem.GetFileInfo(txtSourceFull.Text)
+            Call Shell("explorer /select," & info.FullName, AppWinStyle.NormalFocus)
+            'Process.Start("explorer.exe", info.DirectoryName)
+        Catch ex As Exception
+            MsgBox("Path '" & txtSourceFull.Text & "' not found! - Error: " + ex.Message, MsgBoxStyle.Exclamation)
+        End Try
     End Sub
 End Class
