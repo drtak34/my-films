@@ -143,10 +143,13 @@ plus cleanup processing as configured on "scan filters" tab.
 You can modify the expression and repeat searchm if you don't get good results 
 with the auto created search title.</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
+  <data name="LabelSourcePath.ToolTip" xml:space="preserve">
     <value>Shows the "short path" of the media data - this
 includes the sub directory path "below" the searchdirectory path and the filename itself.
-Useful to check, what is the "real name" of the media and/or directory</value>
+Useful to check, what is the "real name" of the media and/or directory
+
+Note: If you click on "media Source" AMCupdater will try to open 
+the movie source directory in an explorer window.</value>
   </data>
   <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
