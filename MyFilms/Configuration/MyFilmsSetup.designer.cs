@@ -4311,9 +4311,9 @@
           this.label6.AutoSize = true;
           this.label6.Location = new System.Drawing.Point(11, 18);
           this.label6.Name = "label6";
-          this.label6.Size = new System.Drawing.Size(125, 13);
+          this.label6.Size = new System.Drawing.Size(132, 13);
           this.label6.TabIndex = 59;
-          this.label6.Text = "Item for Storage  File Info";
+          this.label6.Text = "Item for Movie Source Info";
           // 
           // AntStorage
           // 
@@ -4410,11 +4410,11 @@
           // label20
           // 
           this.label20.AutoSize = true;
-          this.label20.Location = new System.Drawing.Point(7, 72);
+          this.label20.Location = new System.Drawing.Point(12, 72);
           this.label20.Name = "label20";
-          this.label20.Size = new System.Drawing.Size(65, 13);
+          this.label20.Size = new System.Drawing.Size(46, 13);
           this.label20.TabIndex = 71;
-          this.label20.Text = "Ant SortTitle";
+          this.label20.Text = "SortTitle";
           // 
           // AntSTitle
           // 
@@ -4449,20 +4449,20 @@
           // label9
           // 
           this.label9.AutoSize = true;
-          this.label9.Location = new System.Drawing.Point(7, 46);
+          this.label9.Location = new System.Drawing.Point(12, 46);
           this.label9.Name = "label9";
-          this.label9.Size = new System.Drawing.Size(97, 13);
+          this.label9.Size = new System.Drawing.Size(78, 13);
           this.label9.TabIndex = 18;
-          this.label9.Text = "Ant SecondaryTitle";
+          this.label9.Text = "SecondaryTitle";
           // 
           // label8
           // 
           this.label8.AutoSize = true;
-          this.label8.Location = new System.Drawing.Point(7, 21);
+          this.label8.Location = new System.Drawing.Point(12, 21);
           this.label8.Name = "label8";
-          this.label8.Size = new System.Drawing.Size(81, 13);
+          this.label8.Size = new System.Drawing.Size(62, 13);
           this.label8.TabIndex = 17;
-          this.label8.Text = "Ant Master Title";
+          this.label8.Text = "Master Title";
           // 
           // AntTitle2
           // 
