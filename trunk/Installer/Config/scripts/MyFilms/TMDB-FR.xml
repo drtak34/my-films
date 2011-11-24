@@ -57,8 +57,8 @@
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
-      <KeyStartImg Param1="" Param2="">_x003C_image_x0020_type_x003D__x0022_poster_x0022__x0020_url_x003D__x0022_</KeyStartImg>
-      <KeyEndImg>_x0022_</KeyEndImg>
+      <KeyStartImg Param1="_x0023_REVERSE_x0023_" Param2="">_x0022__x0020_size_x003D__x0022_mid_x0022_</KeyStartImg>
+      <KeyEndImg>_x003C_image_x0020_type_x003D__x0022_poster_x0022__x0020_url_x003D__x0022_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage />
       <KeyStartLinkImg Param1="" Param2="" />
