@@ -455,37 +455,37 @@ Public Class AntRecord
         _XMLElement = XMLDoc.CreateElement("Movie")
     End Sub
     Public Function VerifyElement(ByVal otitle As String, ByVal currentNode As Xml.XmlNode) As Xml.XmlNode
-        ' added to avoid exception with empty otitle reported by z3us
-        If otitle Is Nothing Then
-            Return currentNode
-        End If
+        '' added to avoid exception with empty otitle reported by z3us
+        'If otitle Is Nothing Then
+        '    Return currentNode
+        'End If
 
-        Dim CurrentNode2 As Xml.XmlNode
-        Dim CurrentAttribute2 As String
-        'CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
-        CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
-        If (Not CurrentNode2 Is Nothing) Then
-            If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then 'check, if two movies with same otitle but different recordnumber exist
-                CurrentAttribute2 = _SourceField
+        'Dim CurrentNode2 As Xml.XmlNode
+        'Dim CurrentAttribute2 As String
+        ''CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
+        'CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
+        'If (Not CurrentNode2 Is Nothing) Then
+        '    If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then 'check, if two movies with same otitle but different recordnumber exist
+        '        CurrentAttribute2 = _SourceField
 
-                ' This also doesn't work, as there is not yet a source for new movie available in XML Element - might be called later?
-                'If (CurrentNode2.Attributes(_SourceField).Value = currentNode.Attributes(_SourceField).Value) Then
-                '    currentNode.Attributes.RemoveAll()
-                '    Return CurrentNode2
-                'End If
+        '        ' This also doesn't work, as there is not yet a source for new movie available in XML Element - might be called later?
+        '        'If (CurrentNode2.Attributes(_SourceField).Value = currentNode.Attributes(_SourceField).Value) Then
+        '        '    currentNode.Attributes.RemoveAll()
+        '        '    Return CurrentNode2
+        '        'End If
 
-                ' Guzzi: Removed the following stuff, as it replaced existing movies with same title, but different content (e.g. director's cut or extended versions)
-                'If _XMLElement.Attributes(CurrentAttribute2) Is Nothing Then
-                '    currentNode.Attributes.RemoveAll()
-                '    Return CurrentNode2
-                'End If
-                'If _XMLElement.Attributes(CurrentAttribute2).Value.ToString = String.Empty Then
-                '    currentNode.Attributes.RemoveAll()
-                '    Return CurrentNode2
-                'End If
+        '        ' Guzzi: Removed the following stuff, as it replaced existing movies with same title, but different content (e.g. director's cut or extended versions)
+        '        'If _XMLElement.Attributes(CurrentAttribute2) Is Nothing Then
+        '        '    currentNode.Attributes.RemoveAll()
+        '        '    Return CurrentNode2
+        '        'End If
+        '        'If _XMLElement.Attributes(CurrentAttribute2).Value.ToString = String.Empty Then
+        '        '    currentNode.Attributes.RemoveAll()
+        '        '    Return CurrentNode2
+        '        'End If
 
-            End If
-        End If
+        '    End If
+        'End If
         Return currentNode
     End Function
     Private Sub DoInternetLookup(ByVal SearchString As String, Optional ByVal Year As String = "", Optional ByVal IMDB_Id As String = "") ' Guzzi: Added year and imdb id as optional (search) parameters
