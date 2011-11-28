@@ -184,7 +184,7 @@
       <KeyEndLinkGeneric1>_x003C__x002F_ofdbid_x003E_</KeyEndLinkGeneric1>
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page>URL_x0020_Gateway</KeyLinkGeneric1Page>
-      <KeyStartLinkGeneric2 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_m.imdb.com_x002F_title_x002F__x007C__x002F_">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.de_x002F_title_x002F_</KeyStartLinkGeneric2>
+      <KeyStartLinkGeneric2 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_akas.imdb.com_x002F_title_x002F__x007C__x002F_">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.de_x002F_title_x002F_</KeyStartLinkGeneric2>
       <KeyEndLinkGeneric2>_x002F__x0022__x0020__x002F__x003E_</KeyEndLinkGeneric2>
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
