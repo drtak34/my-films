@@ -2343,7 +2343,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Fanartstatus(true);
         GUIControl.HideControl(GetID, 34);
       }
-      MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
+      //MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
+      MyFilmsDetail.setGUIProperty("nbobjects.value", r.Length.ToString());
+
       GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)wfacadewiew);
       if (facadeView.Count == 1 && item.IsFolder)
