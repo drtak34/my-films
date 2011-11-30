@@ -1014,6 +1014,7 @@ namespace MyFilmsPlugin.MyFilms
                       int year = 1900;
                       Int32.TryParse(sr["Year"].ToString(), out year);
                       movie.Year = year;
+                      movie.Length = (int)sr["Length_Num"];
 
                       movie.Title = sr["OriginalTitle"].ToString();
 
@@ -1489,6 +1490,7 @@ namespace MyFilmsPlugin.MyFilms
     private string _mStrIMDBNumber = string.Empty;
     private string _mStrTMDBNumber = string.Empty;
     private int _mIYear = 1900;
+    private int _mILength = 0;
     private float _mFRating;
     private bool _mIWatched;
     private int _mIWatchedCount = -1;
@@ -1572,6 +1574,12 @@ namespace MyFilmsPlugin.MyFilms
       set { _mIYear = value; }
     }
 
+    public int Length
+    {
+      get { return _mILength; }
+      set { _mILength = value; }
+    }
+
     public float Rating
     {
       get { return _mFRating; }
@@ -1639,6 +1647,7 @@ namespace MyFilmsPlugin.MyFilms
       _mStrIMDBNumber = string.Empty;
       _mStrTMDBNumber = string.Empty;
       _mIYear = 1900;
+      _mILength = 0;
       _mFRating = 0.0f;
       _mIWatched = false;
       _mIWatchedCount = -1;
