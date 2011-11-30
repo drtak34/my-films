@@ -40,6 +40,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Reflection;
   using System.Security.Cryptography;
 
+  using TraktPlugin;
+  using TraktPlugin.TraktAPI;
+  using TraktPlugin.TraktAPI.DataStructures;
+
   #region String Extension Methods
     public static class StringExtensions
     {        
@@ -580,6 +584,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
 
+        public static bool IsTraktAvailableAndEnabledAndVersion1311
+        {
+          get
+          {
+            bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 3, 1, 1), true) && IsPluginEnabled("Trakt");
+            LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
+            return status;
+          }
+        }
+
         public static bool IsBrowseTheWebAvailableAndEnabled
         {
           get
@@ -625,8 +639,38 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public static string GetTraktUser()
         {
           if (Helper.IsTraktAvailableAndEnabled)
-            return TraktPlugin.TraktSettings.Username;
+            return TraktSettings.Username;
           return string.Empty;
+        }
+
+        public static List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> GetTraktUserList() // only available with Trakt 1.3.1+
+        {
+          List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = new List<TraktAuthentication>();
+          if (Helper.IsTraktAvailableAndEnabled)
+          {
+            if (TraktSettings.UserLogins.Count > 0) 
+              return TraktSettings.UserLogins;
+          }
+            return null;
+        }
+
+
+        public static bool ChangeTraktUser(string newUserName)
+        {
+          if (TraktSettings.UserLogins.Count == 0) return false;
+
+          foreach (var userlogin in TraktSettings.UserLogins)
+          {
+            if (userlogin.Username == newUserName)
+            {
+              TraktSettings.AccountStatus = ConnectionState.Pending;
+              TraktSettings.Username = userlogin.Username;
+              TraktSettings.Password = userlogin.Password;
+              if (TraktSettings.AccountStatus == ConnectionState.Connected)
+              return true;
+            }
+          }
+          return false;
         }
 
         #endregion
