@@ -5557,11 +5557,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // add Trakt user, if there is any configured:
           if (Helper.IsTraktAvailableAndEnabled)
           {
-            string currentTraktuser = Helper.GetTraktUser();
-            if (!string.IsNullOrEmpty(currentTraktuser))
+            if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
             {
-              dlg4.Add(currentTraktuser + " (Trakt)");
-              choiceGlobalUserProfileName.Add(currentTraktuser);
+              List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = Helper.GetTraktUserList();
+
+              // Show List of users to login as
+
+              foreach (var userlogin in userlist)
+              {
+                dlg4.Add(userlogin.Username + " (Trakt)");
+                choiceGlobalUserProfileName.Add(userlogin.Username);
+              }
+            }
+            else
+            {
+              string currentTraktuser = Helper.GetTraktUser();
+              if (!string.IsNullOrEmpty(currentTraktuser))
+              {
+                dlg4.Add(currentTraktuser + " (Trakt)");
+                choiceGlobalUserProfileName.Add(currentTraktuser);
+              }
             }
           }
 
@@ -5602,6 +5617,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
             default:
               conf.StrUserProfileName = strUserProfileNameSelection;
+              // check, if Traktuser has to be "switched"
+              if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+              {
+                if (conf.StrUserProfileName != Helper.GetTraktUser())
+                {
+                  bool success = Helper.ChangeTraktUser(conf.StrUserProfileName);
+                  if (!success)
+                    LogMyFilms.Info("An error occurred changing current Trakt user login credentials!");
+                }
+              }
               break;
           }
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
