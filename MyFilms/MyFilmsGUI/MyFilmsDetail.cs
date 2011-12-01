@@ -5905,6 +5905,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
                                     wstring = MyFilms.r[ItemId]["Length"].ToString();
                             setGUIProperty("db.length.value", wstring);
+                            MyFilms.currentMovie.Length = (int)MyFilms.r[ItemId]["Length_Num"];
                             break;
                         case "actors":
                             if (wrep)

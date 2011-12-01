@@ -822,6 +822,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // ********************************
         // Originally Deactivated by Zebons    
       }
+
+      if (conf.StrEnhancedWatchedStatusHandling)
+      {
+        if (!string.IsNullOrEmpty(conf.StrUserProfileName))
+          MyFilmsDetail.setGUIProperty("config.currentuseronlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      }
     }
 
     protected override void OnPageDestroy(int new_windowId)
@@ -4502,6 +4508,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.StrLogos)
         confLogos = new Logos();
       MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
+      if (conf.StrEnhancedWatchedStatusHandling)
+      {
+        MyFilmsDetail.setGUIProperty("config.currentusername", conf.StrUserProfileName);
+      }
 
       if (conf.StrDfltSelect.Length > 0)
       {
@@ -10567,6 +10577,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("Fanart2");
       MyFilmsDetail.clearGUIProperty("config.currentconfig");
       MyFilmsDetail.clearGUIProperty("config.configfilter");
+      MyFilmsDetail.clearGUIProperty("config.currentusername");
+      MyFilmsDetail.clearGUIProperty("config.currentuseronlinestatus");
       MyFilmsDetail.clearGUIProperty("view");
       MyFilmsDetail.clearGUIProperty("select");
       MyFilmsDetail.clearGUIProperty("picture");

@@ -673,6 +673,24 @@ namespace MyFilmsPlugin.MyFilms.Utils
           return false;
         }
 
+
+        public static string GetUserOnlineStatus(string username)
+        {
+          string status = "local";
+          if (IsTraktAvailableAndEnabled)
+          {
+            if (TraktSettings.Username == username)
+            {
+              if (TraktSettings.AccountStatus == ConnectionState.Connected) 
+                status = "online";
+              else
+                status = "offline";
+            }
+          }
+          LogMyFilms.Debug("GetUserOnlineStatus(): connection status for '" + username + "' is '" + status + "'");
+          return status;
+        }
+
         #endregion
 
 
