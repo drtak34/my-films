@@ -885,15 +885,22 @@ Public Class AntProcessor
                                 .MovieTitleHandling = CurrentSettings.Movie_Title_Handling
                                 .MasterTitle = CurrentSettings.Master_Title
                                 .InteractiveMode = True
-                                .ImagePath = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
+                                Dim ImagePath As String = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
+                                Dim ImagePrefix As String = CurrentSettings.Image_Download_Filename_Prefix.ToString
 
-                                If (CurrentSettings.Image_Download_Filename_Prefix.Length > 0) Then
-                                    If CurrentSettings.Image_Download_Filename_Prefix.LastIndexOf("\") > -1 Then
-                                        .ImagePath = .ImagePath & "\\" & CurrentSettings.Image_Download_Filename_Prefix.Substring(0, CurrentSettings.Image_Download_Filename_Prefix.LastIndexOf("\"))
-                                    Else
-                                        .ImagePath = .ImagePath & "\\" & CurrentSettings.Image_Download_Filename_Prefix
+                                If (CurrentSettings.Use_Folder_Dot_Jpg = False And CurrentSettings.Image_Download_Filename_Prefix.Length > 0) Then
+                                    If ImagePrefix.LastIndexOf("\") > -1 Then 'Example : "foldername\" or "foldername\prefix_"
+                                        Dim PictureFolder As String = ImagePrefix.Substring(0, ImagePrefix.IndexOf("\"))
+                                        ImagePath = ImagePath & "\" & PictureFolder
+                                        If Not My.Computer.FileSystem.DirectoryExists(ImagePath) Then
+                                            My.Computer.FileSystem.CreateDirectory(ImagePath)
+                                        Else
+                                            'ImagePath = ImagePath & "\" & ImagePrefix
+                                        End If
                                     End If
                                 End If
+
+                                .ImagePath = ImagePath
 
                                 .InternetSearchHint = wDirector
                                 .InternetSearchHintYear = wYear
@@ -1976,8 +1983,8 @@ Public Class AntProcessor
             Dim XMLPath As String = objSettings.XML_File.Substring(0, objSettings.XML_File.LastIndexOf("\"))
             Dim ImagePrefix As String = objSettings.Image_Download_Filename_Prefix.ToString
             ImagePath = XMLPath
-            If objSettings.Use_Folder_Dot_Jpg = False And ImagePrefix.ToString <> String.Empty Then
-                If ImagePrefix.ToString.Contains("\") = True Then
+            If objSettings.Use_Folder_Dot_Jpg = False And ImagePrefix.Length > 0 Then
+                If ImagePrefix.Contains("\") = True Then
                     'Example : "foldername\" or "foldername\prefix_"
                     Dim PictureFolder As String = ImagePrefix.Substring(0, ImagePrefix.IndexOf("\"))
                     ImagePath = ImagePath.ToString & "\" & PictureFolder.ToString
