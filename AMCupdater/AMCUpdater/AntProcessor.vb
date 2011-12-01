@@ -566,17 +566,33 @@ Public Class AntProcessor
                         End If
                     End If
 
+                    ' get search hints for better matching from DB
+                    Dim wyear As String = ""
+                    If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
+                        wyear = CurrentNode.Attributes("Year").Value
+                    End If
+                    Dim wdirector As String = ""
+                    If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
+                        wdirector = CurrentNode.Attributes("Director").Value
+                    End If
+
+                    Dim wIMDB_Id As String = ""
+                    If (Not IsNothing(CurrentNode.Attributes("IMDB_Id"))) Then
+                        wIMDB_Id = CurrentNode.Attributes("IMDB_Id").Value
+                    ElseIf CurrentNode.Item("IMDB_Id") IsNot Nothing Then
+                        If CurrentNode.Item("IMDB_Id").InnerText.Length > 0 Then
+                            wIMDB_Id = CurrentNode.Item("IMDB_Id").InnerText.ToString
+                        ElseIf (Not IsNothing(CurrentNode.Attributes("URL"))) Then
+                            Dim wIMDBfromURL As String = GetIMDBidFromFilePath(CurrentNode.Attributes("URL").Value) ' tries to get IMDBid from URL
+                            If wIMDBfromURL.Length > 0 Then
+                                wIMDB_Id = wIMDBfromURL
+                            End If
+                        End If
+                    End If
+
                     If _ManualParameterMatchAll = True Then
                         'We're matching all records - proceed with editing
-                        Dim wyear As String = ""
-                        If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
-                            wyear = CurrentNode.Attributes("Year").Value
-                        End If
-                        If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
-                            ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, CurrentNode.Attributes("Director").Value, wyear})
-                        Else
-                            ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, "", wyear})
-                        End If
+                        ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                         LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
                     Else
                         'Parameters in use - check first then proceed
@@ -585,11 +601,11 @@ Public Class AntProcessor
                             wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
                             wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
                             If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
-                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle})
+                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                                 LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
                             Else
                                 If (_ManualParameterAndOr = "and" And wrecord = 2) Then
-                                    ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle})
+                                    ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                                     LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
                                 End If
                             End If

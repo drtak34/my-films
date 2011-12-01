@@ -507,7 +507,7 @@ Public Class AntRecord
                         If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
                             _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, _GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                             _InternetLookupOK = True
-                            _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ") with extra search for IMDB_Id."
+                            _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ")."
                             If bgwFolderScanUpdate.CancellationPending = True Then
                                 Exit Sub
                             End If
@@ -1187,7 +1187,7 @@ Public Class AntRecord
             Dim ttitle As String = ""
             Dim director As String = ""
             Dim year As Int16 = 0
-            Dim imdb_id As String = "" ' Guzzi Added for exact IMDB matching
+            Dim imdb_id As String = ""
 
             'First ensure we have a valid movie number so the record can be saved:
             CurrentAttribute = "Number"
@@ -1217,7 +1217,6 @@ Public Class AntRecord
                 If (_FilePath.Length > 0) Then
                     TempValue = GetYearFromFilePath(_FilePath)
                     _InternetSearchHintYear = TempValue
-                    'LogEvent("ProcessFile() - Import - hints - year: '" & _InternetSearchHintYear & "'", EventLogLevel.InformationalWithGrabbing)
                     If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                         CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                     End If
@@ -1227,7 +1226,6 @@ Public Class AntRecord
                 If (_FilePath.Length > 0) Then
                     TempValue = GetIMDBidFromFilePath(_FilePath)
                     _InternetSearchHintIMDB_Id = TempValue
-                    'LogEvent("ProcessFile() - Import - hints - imdb_id: '" & _InternetSearchHintIMDB_Id & "'", EventLogLevel.InformationalWithGrabbing)
                     If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                         CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                     End If
@@ -1242,15 +1240,10 @@ Public Class AntRecord
                     If _XMLElement.Attributes("Director") IsNot Nothing Then
                         If _XMLElement.Attributes("Director").Value.Length > 0 Then
                             wdirector = System.Text.RegularExpressions.Regex.Replace(_XMLElement.Attributes("Director").Value, "\b(and|und|en|et|y|&)\b", ",")
-
                             If wdirector.IndexOf(",") > 0 Then
                                 _InternetSearchHint = wdirector.Substring(0, wdirector.IndexOf(",") - 1).Trim()
                             Else
                                 _InternetSearchHint = wdirector.Trim()
-                            End If
-                        Else
-                            If _XMLElement.Attributes("Year") IsNot Nothing Then
-                                _InternetSearchHint = _XMLElement.Attributes("Year").Value.ToString
                             End If
                         End If
                     End If
