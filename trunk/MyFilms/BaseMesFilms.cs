@@ -1478,6 +1478,9 @@ namespace MyFilmsPlugin.MyFilms
         #endregion
     }
 
+  /// <summary>
+  /// Movie object
+  /// </summary>  
   public class MFMovie
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
@@ -1574,6 +1577,9 @@ namespace MyFilmsPlugin.MyFilms
       set { _mIYear = value; }
     }
 
+    /// <summary>
+    /// Runtime in minutes.
+    /// </summary>
     public int Length
     {
       get { return _mILength; }
