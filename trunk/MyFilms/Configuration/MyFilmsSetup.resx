@@ -855,7 +855,12 @@ Example: Searchname = "movie", filename = "movie divx.avi"</value>
   <data name="PathStorage.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder(s) containing the movie files.  
 You can enter several different paths separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
-You can also use the browse button to locate the correct folder(s).</value>
+You can also use the browse button to locate the correct folder(s).
+
+This setting is optional, if 'DB Item for Movie Source Info' is configured and you have populated that source field with proper data - however, 
+it CAN be configured to allow MyFilms to search for movies, if it can't find them in 'DB Item for Movie Source Info'.
+
+The setting is mandatory, if you do not use the 'DB Item for Movie Source Info' - in this case this is the way MyFilms searches for the movies to play.</value>
   </data>
   <data name="ItemSearchFileName.ToolTip" xml:space="preserve">
     <value>If the media file is not found with the 'Ant Item for Storage Info' field, you 
