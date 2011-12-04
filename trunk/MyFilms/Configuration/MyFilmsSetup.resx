@@ -806,7 +806,7 @@ e.g. USB drives or NAS servers.
 THe scan can also be launched from GUI in global options.</value>
   </data>
   <data name="AntStorage.ToolTip" xml:space="preserve">
-    <value>Select the name of the field in your AMC database that you have used for the movie’s file name / path information.  
+    <value>Select the field in your AMC database that you have used for the movie’s file name / path information.  
 
 This field in the AMC database can contain a single filename or multiple file names separated by a semi-colon.  
 If the movie comprises many files, then you could also use a playlist file (.m3u), or an image file (.iso, .bin) or a folder name (containing DVD files or .avi files).
@@ -814,12 +814,13 @@ If the movie comprises many files, then you could also use a playlist file (.m3u
 If you have configured a "Path for Movies File Search", the filename is sufficient, otherwise the field requires the fully qualified name including path to the movie file.</value>
   </data>
   <data name="AntIdentItem.ToolTip" xml:space="preserve">
-    <value>If the movie file cannot be located, 
-a popup window will advise you that the movie cannot be launched.  
-In the first field you can select the database item that can be used to locate the movie files or the DVD.  
+    <value>For offline movies - that is, if a movie file cannot be located (neither by the Movie Source Info, nor by searching) - 
+a popup window will advise you that the movie cannot be launched.
+In the first field, select the database item to be displayed containing the Media/Disc ID where the movie is stored
+(usually MediaLabel).
 In the second field you can enter your own text message to provide additional information.
 
-</value>
+This is for users using offline library content, like DVD and BR discs or USB drives.</value>
   </data>
   <data name="CatalogType.ToolTip" xml:space="preserve">
     <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
@@ -855,6 +856,13 @@ Example: Searchname = "movie", filename = "movie divx.avi"</value>
     <value>Enter the full path to the folder(s) containing the movie files.  
 You can enter several different paths separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
 You can also use the browse button to locate the correct folder(s).</value>
+  </data>
+  <data name="ItemSearchFileName.ToolTip" xml:space="preserve">
+    <value>If the media file is not found with the 'Ant Item for Storage Info' field, you 
+can search for the file with the movie name.
+Choose the title used for the search.
+Note: This setting is optional and not required, if you populate your "DB Item for Movie Source Info" 
+with fully qualified path to your media files.</value>
   </data>
   <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
     <value>This setting is useful for non english users:
