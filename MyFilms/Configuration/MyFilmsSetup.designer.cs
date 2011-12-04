@@ -4296,8 +4296,7 @@
           this.ItemSearchFileName.Name = "ItemSearchFileName";
           this.ItemSearchFileName.Size = new System.Drawing.Size(157, 21);
           this.ItemSearchFileName.TabIndex = 67;
-          this.ToolTip1.SetToolTip(this.ItemSearchFileName, "If file is not found with the \'Ant Item for Storage Info\' field, you \r\ncan search" +
-                  " the file with the movie Name.\r\nChoose the Title used for the search.");
+          this.ToolTip1.SetToolTip(this.ItemSearchFileName, resources.GetString("ItemSearchFileName.ToolTip"));
           // 
           // AntIdentLabel
           // 
@@ -4311,9 +4310,9 @@
           this.label6.AutoSize = true;
           this.label6.Location = new System.Drawing.Point(11, 18);
           this.label6.Name = "label6";
-          this.label6.Size = new System.Drawing.Size(132, 13);
+          this.label6.Size = new System.Drawing.Size(150, 13);
           this.label6.TabIndex = 59;
-          this.label6.Text = "Item for Movie Source Info";
+          this.label6.Text = "DB Item for Movie Source Info";
           // 
           // AntStorage
           // 
@@ -4330,9 +4329,9 @@
           this.label4.AutoSize = true;
           this.label4.Location = new System.Drawing.Point(11, 167);
           this.label4.Name = "label4";
-          this.label4.Size = new System.Drawing.Size(109, 13);
+          this.label4.Size = new System.Drawing.Size(155, 13);
           this.label4.TabIndex = 58;
-          this.label4.Text = "Ant Identification Item";
+          this.label4.Text = "Offline Media Identification Item";
           // 
           // AntIdentItem
           // 
