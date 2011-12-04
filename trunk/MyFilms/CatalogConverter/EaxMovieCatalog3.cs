@@ -29,8 +29,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System.Xml;
   using System.Globalization;
 
+  using NLog;
+
   class EaxMovieCatalog3
     {
+        private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
+
         public Dictionary<string, string> ProfilerDict;
 
         public EaxMovieCatalog3()
@@ -72,7 +76,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Tags", "Tags");
             //ProfilerDict.Add("Borrower", "Borrower");
             ProfilerDict.Add("TagLine", "TagLine");
-            //ProfilerDict.Add("Trailer", "SourceTrailer");
+            ProfilerDict.Add("Studio", "Studio");
+          //ProfilerDict.Add("Trailer", "SourceTrailer");
 
 
         }
@@ -99,7 +104,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                   string Tags = string.Empty;
                   string Tagline = "(no Tagline supported by this catalog)";
                   string Certification = string.Empty;
-                  
+
+                  string Studio = string.Empty;
+
                   CultureInfo ci = new CultureInfo("en-us");
                   string wfile = string.Empty;
                   string wVideoCodec = string.Empty;
@@ -230,6 +237,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       Tags = nodeDVD.Attributes["Tag"].Value;
                       //WriteAntAtribute(destXml, "Tag", Tags);
                     }
+
+                    if (nodeDVD.Attributes["Studio"] != null)
+                      Studio = nodeDVD.Attributes["Studio"].Value;
+
                     if (nodeDVD.SelectSingleNode("Cast") != null)
                       WriteAntAtribute(destXml, "Cast", nodeDVD.SelectSingleNode("Cast").InnerText);
                     if (nodeDVD.Attributes["Picture"] != null)
@@ -318,13 +329,15 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     WriteAntElement(destXml, "TagLine", Tagline);
                     WriteAntElement(destXml, "Tags", Tags);
                     WriteAntElement(destXml, "Writer", Writer);
+                    WriteAntElement(destXml, "Studio", Studio);
 
                     destXml.WriteEndElement();
                 }
 
             }
-            catch
+            catch (Exception)
             {
+              //LogMyFilms.DebugException("EAX3 Converter: Exception!", ex);
               return string.Empty;
             }
             destXml.WriteEndElement();

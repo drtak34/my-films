@@ -2397,6 +2397,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntViewItem3.Items.Add("Tags");
           AntViewItem4.Items.Add("Tags");
           AntViewItem5.Items.Add("Tags");
+          AntViewItem1.Items.Add("Studio");
+          AntViewItem2.Items.Add("Studio");
+          AntViewItem3.Items.Add("Studio");
+          AntViewItem4.Items.Add("Studio");
+          AntViewItem5.Items.Add("Studio");
 
           AntFilterItem1.Items.Add("Writer");
           AntFilterItem2.Items.Add("Writer");
@@ -2424,6 +2429,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntItem3.Items.Add("Tags");
           AntItem4.Items.Add("Tags");
           AntItem5.Items.Add("Tags");
+          AntItem1.Items.Add("Studio");
+          AntItem2.Items.Add("Studio");
+          AntItem3.Items.Add("Studio");
+          AntItem4.Items.Add("Studio");
+          AntItem5.Items.Add("Studio");
 
           AntSort1.Items.Add("Writer");
           AntSort2.Items.Add("Writer");
@@ -2438,9 +2448,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntSearchItem2.Items.Add("TagLine");
           AntSearchItem1.Items.Add("Tags");
           AntSearchItem2.Items.Add("Tags");
+          AntSearchItem1.Items.Add("Studio");
+          AntSearchItem2.Items.Add("Studio");
 
           AntSearchField.Items.Add("Writer");
           AntSearchField.Items.Add("Certification");
+          AntSearchField.Items.Add("Studio");
 
           cbWatched.Items.Add("Watched");
           //cbfdupdate.Items.Add(dc.ColumnName);
@@ -3080,7 +3093,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 int pos = reader.LinePosition;
                 reader.MoveToNextAttribute();
-                System.Windows.Forms.MessageBox.Show("Invalid Character for Movie Number " + reader.Value + " at position " + pos.ToString() + ", number of records read : " + mydivx.Movie.Count.ToString() + ". You have to correct the Movie's information with ANT Movie Catalog software !. Exception Message : " + ex.Message, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                System.Windows.Forms.MessageBox.Show("Invalid Character for Movie Number " + reader.Value + " at position " + pos.ToString() + ", number of records read : " + mydivx.Movie.Count.ToString() + ". You have to correct the Movie's information with your movie catalog software !. Exception Message : " + ex.Message, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return mydivx;
             }
             return mydivx;
