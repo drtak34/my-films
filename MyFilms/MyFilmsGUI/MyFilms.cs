@@ -9171,9 +9171,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg.SelectedLabel == -1)
         return;
       wproperty = choiceSearch[dlg.SelectedLabel];
-      LogMyFilms.Debug("(SearchIncompleteMovies) - ChosenProperty is '" + wproperty + "'"); 
+      LogMyFilms.Debug("(SearchIncompleteMovies) - ChosenProperty is '" + wproperty + "'");
 
-      conf.StrSelect = wproperty + " is NULL";
+      currentListLevel = Listlevel.Movie;
+      conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
+      conf.WStrSort = conf.StrSTitle;
+      conf.Boolselect = false;
+      conf.Boolreturn = false;
+      
+      conf.StrSelect = "(" + wproperty + " is NULL OR " + wproperty + " like '')";
       // conf.StrTxtSelect = "Selection " + wproperty + " [*empty*]";
       conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*empty*]";
       conf.StrTitleSelect = string.Empty;
