@@ -24,6 +24,7 @@
 namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
+  using System.Collections;
   using System.IO;
   using System.Collections.Generic;
   using System.Linq;
@@ -643,17 +644,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
           return string.Empty;
         }
 
-        public static List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> GetTraktUserList() // only available with Trakt 1.3.1+
+        public static List<string> GetTraktUserList() // only available with Trakt 1.3.1+
         {
-          List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = new List<TraktAuthentication>();
+          // List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = new List<TraktAuthentication>();
+          List<string> userlist = new List<string>();
           if (Helper.IsTraktAvailableAndEnabled)
           {
-            if (TraktSettings.UserLogins.Count > 0) 
-              return TraktSettings.UserLogins;
+            if (TraktSettings.UserLogins.Count > 0)
+              foreach (string user in userlist)
+              {
+                userlist.Add(user);
+              }
+              return userlist;
           }
-            return null;
+          return null;
         }
-
 
         public static bool ChangeTraktUser(string newUserName)
         {

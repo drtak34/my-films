@@ -5548,99 +5548,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
         case "userprofilename": // choose global user profile name
-          GUIDialogMenu dlg4 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-          if (dlg4 == null) return;
-          dlg4.Reset();
-          dlg4.SetHeading(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)); // Choose User Profile Name ... GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)
-          System.Collections.Generic.List<string> choiceGlobalUserProfileName = new System.Collections.Generic.List<string>();
-
-          //// Add Configured UserProfileName from Setup  
-          //if (conf.StrUserProfileName.Length > 0)
-          //{
-          //  dlg4.Add(conf.StrUserProfileName); // current Value
-          //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
-          //}
-
-          dlg4.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // New Value ...
-          choiceGlobalUserProfileName.Add("");
-
-          // add Trakt user, if there is any configured:
-          if (Helper.IsTraktAvailableAndEnabled)
-          {
-            if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
-            {
-              List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = Helper.GetTraktUserList();
-
-              // Show List of users to login as
-
-              foreach (var userlogin in userlist)
-              {
-                dlg4.Add(userlogin.Username + " (Trakt)");
-                choiceGlobalUserProfileName.Add(userlogin.Username);
-              }
-            }
-            else
-            {
-              string currentTraktuser = Helper.GetTraktUser();
-              if (!string.IsNullOrEmpty(currentTraktuser))
-              {
-                dlg4.Add(currentTraktuser + " (Trakt)");
-                choiceGlobalUserProfileName.Add(currentTraktuser);
-              }
-            }
-          }
-
-          // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
-          foreach (DataRow sr in r)
-          {
-            string strEnhancedWatchedValue = sr[conf.StrWatchedField].ToString().Trim();
-            string[] split1 = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split1)
-            {
-              if (s.Contains(":"))
-              {
-                string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
-                if (!choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != "Global")
-                {
-                  dlg4.Add(userprofilename);
-                  choiceGlobalUserProfileName.Add(userprofilename);
-                }
-              }
-            }
-          }
-          dlg4.DoModal(GetID);
-          if (dlg4.SelectedLabel == -1)
-            return;
-          string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg4.SelectedLabel];
-          switch (strUserProfileNameSelection)
-          {
-            case "": // new value
-              VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-              if (null == keyboard) return;
-              keyboard.Reset();
-              keyboard.Text = ""; // Default string is empty
-              keyboard.DoModal(GetID);
-              if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text)))
-                conf.StrUserProfileName = keyboard.Text;
-              else 
-                return;
-              break;
-            default:
-              conf.StrUserProfileName = strUserProfileNameSelection;
-              // check, if Traktuser has to be "switched"
-              if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
-              {
-                if (conf.StrUserProfileName != Helper.GetTraktUser())
-                {
-                  bool success = Helper.ChangeTraktUser(conf.StrUserProfileName);
-                  if (!success)
-                    LogMyFilms.Info("An error occurred changing current Trakt user login credentials!");
-                }
-              }
-              break;
-          }
+          Change_UserProfileName();
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
-          LogMyFilms.Debug("UserProfileName - change to '" + conf.StrUserProfileName.ToString() + "'");
+          LogMyFilms.Debug("UserProfileName - change to '" + conf.StrUserProfileName + "'");
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
           //Load_Config(Configuration.CurrentConfig, true);
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
@@ -6042,6 +5952,102 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       LogMyFilms.Debug("Change_View(" + choiceView + ") -> End");
     }
+
+
+    private void Change_UserProfileName()
+    {
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlg == null) return;
+      dlg.Reset();
+      dlg.SetHeading(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)); // Choose User Profile Name ... GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)
+      System.Collections.Generic.List<string> choiceGlobalUserProfileName = new System.Collections.Generic.List<string>();
+
+      //// Add Configured UserProfileName from Setup  
+      //if (conf.StrUserProfileName.Length > 0)
+      //{
+      //  dlg4.Add(conf.StrUserProfileName); // current Value
+      //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
+      //}
+
+      dlg.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // New Value ...
+      choiceGlobalUserProfileName.Add("");
+
+      // add Trakt user, if there is any configured:
+      if (Helper.IsTraktAvailableAndEnabled)
+      {
+        if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+        {
+          List<string> userlist = Helper.GetTraktUserList();
+
+          // Show List of users to login as
+          foreach (var userlogin in userlist)
+          {
+            dlg.Add(userlogin + " (Trakt)");
+            choiceGlobalUserProfileName.Add(userlogin);
+          }
+        }
+        else
+        {
+          string currentTraktuser = Helper.GetTraktUser();
+          if (!string.IsNullOrEmpty(currentTraktuser))
+          {
+            dlg.Add(currentTraktuser + " (Trakt)");
+            choiceGlobalUserProfileName.Add(currentTraktuser);
+          }
+        }
+      }
+
+      // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
+      foreach (DataRow sr in r)
+      {
+        string strEnhancedWatchedValue = sr[conf.StrWatchedField].ToString().Trim();
+        string[] split1 = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string s in split1)
+        {
+          if (s.Contains(":"))
+          {
+            string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
+            if (!choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != "Global")
+            {
+              dlg.Add(userprofilename);
+              choiceGlobalUserProfileName.Add(userprofilename);
+            }
+          }
+        }
+      }
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1)
+        return;
+      string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg.SelectedLabel];
+      switch (strUserProfileNameSelection)
+      {
+        case "": // new value
+          VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+          if (null == keyboard) return;
+          keyboard.Reset();
+          keyboard.Text = ""; // Default string is empty
+          keyboard.DoModal(GetID);
+          if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text)))
+            conf.StrUserProfileName = keyboard.Text;
+          else
+            return;
+          break;
+        default:
+          conf.StrUserProfileName = strUserProfileNameSelection;
+          // check, if Traktuser has to be "switched"
+          if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+          {
+            if (conf.StrUserProfileName != Helper.GetTraktUser())
+            {
+              bool success = Helper.ChangeTraktUser(conf.StrUserProfileName);
+              if (!success)
+                LogMyFilms.Info("An error occurred changing current Trakt user login credentials!");
+            }
+          }
+          break;
+      }
+    }
+
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
     //--------------------------------------------------------------------------------------------
