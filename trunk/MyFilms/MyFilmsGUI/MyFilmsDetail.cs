@@ -8071,19 +8071,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             try
             {
-                if (m_SearchAnimation != null)
-                {
-                    if (enable)
-                        m_SearchAnimation.AllocResources();
-                    else
-                        m_SearchAnimation.Dispose();
-                }
-                m_SearchAnimation.Visible = enable;
+              //if (enable)
+              //{
+              //  GUIWaitCursor.Init(); 
+              //  GUIWaitCursor.Show();
+              //}
+              //else
+              //{
+              //  GUIWaitCursor.Hide();
+              //}
+              if (m_SearchAnimation != null)
+              {
+                if (enable)
+                  m_SearchAnimation.AllocResources();
+                else
+                  m_SearchAnimation.Dispose();
+              }
+              m_SearchAnimation.Visible = enable;
 
             }
             catch (Exception ex)
             {
-              LogMyFilms.Error("setProcessAnimationStatus - Exception: " + ex.StackTrace.ToString());
+              LogMyFilms.Warn("setProcessAnimationStatus '" + enable + "' - skin control missing? : " + ex.Message);
             }
         }
 
