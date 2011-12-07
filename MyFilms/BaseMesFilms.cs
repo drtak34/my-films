@@ -661,7 +661,7 @@ namespace MyFilmsPlugin.MyFilms
         {
           // movies = GetMoviesGlobal("", "", -1, false, -1);
           movies = GetMoviesGlobal("", "", true);
-          LogMyFilms.Debug("GetMovies()- movies matched: '" + movies.Count + "'");
+          LogMyFilms.Debug("GetMovies() - movies matched: '" + movies.Count + "'");
         }
 
         #region API for Basic Home Editors
@@ -914,11 +914,21 @@ namespace MyFilmsPlugin.MyFilms
 
           // now apply the result count limit
           movielist = movielist.Take(limit).ToList();
+
+          // get artwork
+          List<MFMovie> movielistwithartwork = new List<MFMovie>();
           foreach (MFMovie movie in movielist)
           {
-            LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "'");
+            MFMovie tmpmovie = new MFMovie();
+            tmpmovie = movie;
+            GetMovieArtworkDetails(movie.MovieRow, movie.MFconfig, ref tmpmovie);
+            movielistwithartwork.Add(tmpmovie);
           }
-          return movielist;
+          foreach (MFMovie movie in movielistwithartwork)
+          {
+            LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");
+          }
+          return movielistwithartwork;
         }
         #endregion
 
@@ -938,43 +948,18 @@ namespace MyFilmsPlugin.MyFilms
 
             foreach (string config in configs)
             {
-              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
-              string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
-              string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
-              bool ReadOnly = false;
-
-              if (FileType != "0" && FileType != "10")
-              {
-                ReadOnly = true;
-                if (!string.IsNullOrEmpty(CatalogTmp))
-                  Catalog = CatalogTmp;
-                else if (!string.IsNullOrEmpty(Catalog) && Catalog.Contains("\\"))
-                {
-                  string Path = System.IO.Path.GetDirectoryName(Catalog);
-                  Catalog = Path + "\\" + Catalog.Substring(Catalog.LastIndexOf(@"\") + 1, Catalog.Length - Catalog.LastIndexOf(@"\") - 5) + "_tmp.xml";
-                }
-              }
-              
-              bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
-              bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-              string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
-              string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
-              bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
-              string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
-              string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
-              string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
-              string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
-
-              if (TraktEnabled)
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', CatalogType = '" + FileType + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
+              if (tmpconf.AllowTraktSync || tmpconf.AllowRecentlyAddedAPI)
+                LogMyFilms.Debug("GetMovies() - Trakt = '" + tmpconf.AllowTraktSync + "', RecentMedia = '" + tmpconf.AllowRecentlyAddedAPI + "', CatalogType = '" + tmpconf.StrFileType + "', Config = '" + config + "', Catalogfile = '" + tmpconf.StrFileXml + "'");
               else
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', CatalogType = '" + FileType + "', Config = '" + config + "'");
-              if (System.IO.File.Exists(Catalog) && (TraktEnabled || (!traktOnly && RecentAddedAPIEnabled)))
+                LogMyFilms.Debug("GetMovies() - Trakt = '" + tmpconf.AllowTraktSync + "', RecentMedia = '" + tmpconf.AllowRecentlyAddedAPI + "', CatalogType = '" + tmpconf.StrFileType + "', Config = '" + config + "'");
+
+              if (File.Exists(tmpconf.StrFileXml) && (tmpconf.AllowTraktSync || (!traktOnly && tmpconf.AllowRecentlyAddedAPI)))
               {
                 _dataLock.EnterReadLock();
                 try
                 {
-                  dataExport.ReadXml(Catalog);
+                  dataExport.ReadXml(tmpconf.StrFileXml);
                 }
                 catch (Exception e)
                 {
@@ -992,7 +977,7 @@ namespace MyFilmsPlugin.MyFilms
                   string sqlSort = "";
 
                   if (!string.IsNullOrEmpty(Expression)) sqlExpression = Expression;
-                  else sqlExpression = StrDfltSelect + StrTitle1 + " not like ''";
+                  else sqlExpression = tmpconf.StrDfltSelect + tmpconf.StrTitle1 + " not like ''";
 
                   if (!string.IsNullOrEmpty(Sort)) sqlSort = Sort;
                   else sqlSort = "OriginalTitle" + " " + "ASC";
@@ -1006,94 +991,13 @@ namespace MyFilmsPlugin.MyFilms
                     {
                       MFMovie movie = new MFMovie();
                       movie.Config = config; // MF config context
-                      movie.ReadOnly = ReadOnly; // is true for readonly ctalog types
-                      if (!string.IsNullOrEmpty(sr["Number"].ToString()))
-                        movie.ID = Int32.Parse(sr["Number"].ToString());
-                      else movie.ID = 0;
-
-                      int year = 1900;
-                      Int32.TryParse(sr["Year"].ToString(), out year);
-                      movie.Year = year;
-                      movie.Length = (int)sr["Length_Num"];
-
-                      movie.Title = sr["OriginalTitle"].ToString();
-
-                      bool played = false;
-                      if (EnhancedWatchedStatusHandling)
+                      GetMovieDetails(sr, tmpconf, ref movie);
+                      if (!traktOnly && tmpconf.AllowRecentlyAddedAPI)
                       {
-                        if (MyFilms.EnhancedWatched(sr[WatchedField].ToString(), UserProfileName) == true)
-                          played = true;
+                        movie.MFconfig = tmpconf;
+                        movie.MovieRow = sr;
+                        // GetMovieArtworkDetails(sr, tmpconf, ref movie); // movied to LM API as it's a lot of I/O ...
                       }
-                      else
-                      {
-                        if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
-                          if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
-                            played = true;
-                      }
-                      movie.Watched = played;
-                      movie.WatchedCount = -1; // check against it, if value returns...
-
-                      float rating = 0;
-                      bool success = float.TryParse(sr["Rating"].ToString(), out rating);
-                      if (!success) rating = 0;
-                      movie.Rating = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
-
-                      string mediapath = string.Empty;
-                      if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
-                      {
-                        mediapath = sr[Storage].ToString();
-                        if (mediapath.Contains(";")) // take the first source file
-                          mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
-                        movie.File = mediapath;
-                      }
-                      if (string.IsNullOrEmpty(mediapath)) // e.g. offline media files
-                        movie.File = movie.Title + " {offline} [" + movie.ID + "]";
-
-                      string path = "";
-                      if (!string.IsNullOrEmpty(mediapath))
-                      {
-                        try
-                        {
-                          path = System.IO.Path.GetDirectoryName(mediapath);
-                        }
-                        catch (Exception)
-                        {
-                          movie.Path = "{search}";
-                        }
-                        movie.Path = path;
-                      }
-                      else
-                      {
-                        movie.Path = "{offline}";
-                      }
-
-                      string IMDB = "";
-                      if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
-                        IMDB = sr["IMDB_Id"].ToString();
-
-                      if (!string.IsNullOrEmpty(sr["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
-                      {
-                        string CleanString = sr["URL"].ToString();
-                        Regex CutText = new Regex("" + @"tt\d{7}" + "");
-                        Match m = CutText.Match(CleanString);
-                        if (m.Success)
-                          IMDB = m.Value;
-                      }
-                      movie.IMDBNumber = IMDB;
-
-                      if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString()))
-                        movie.TMDBNumber = sr["TMDB_Id"].ToString();
-                      
-                      movie.DateAdded = sr["Date"].ToString();
-                      DateTime wdate = new DateTime(1900, 01, 01);
-                      try
-                      {
-                        wdate = Convert.ToDateTime(sr["Date"]);
-                        movie.DateTime = wdate;
-                      }
-                      catch { }
-
-
                       movies.Add(movie);
                       moviecount += 1;
                     }
@@ -1113,147 +1017,131 @@ namespace MyFilmsPlugin.MyFilms
           return movies;
         }
 
-        public static void GetMoviesOld(ref ArrayList movies)
+        private static void GetMovieDetails(DataRow row, MyFilmsGUI.Configuration tmpconf, ref MFMovie movie)
         {
-          movies.Clear();
-          AntMovieCatalog dataExport = new AntMovieCatalog();
+          //-----------------------------------------------------------------------------------------------------------------------
+          //    Load Movie Details Info
+          //-----------------------------------------------------------------------------------------------------------------------
 
-          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          movie.ReadOnly = tmpconf.ReadOnly; // is true for readonly ctalog types
+          if (!string.IsNullOrEmpty(row["Number"].ToString()))
+            movie.ID = Int32.Parse(row["Number"].ToString());
+          else movie.ID = 0;
+
+          int year = 1900;
+          Int32.TryParse(row["Year"].ToString(), out year);
+          movie.Year = year;
+          movie.Category = row["Category"].ToString();
+          movie.Length = (int)row["Length_Num"];
+
+          movie.Title = row["OriginalTitle"].ToString();
+          if (row[tmpconf.StrTitle1].ToString().Length > 0)
           {
-            int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
-            ArrayList configs = new ArrayList();
-            for (int i = 0; i < MesFilms_nb_config; i++)
-              configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
-
-            foreach (string config in configs)
-            {
-              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
-              // string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
-              bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
-              bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-              string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
-              string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
-              bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
-              string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
-              string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
-              string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
-
-              string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
-              if (TraktEnabled)
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-              else
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "'");
-              if (System.IO.File.Exists(Catalog) && TraktEnabled)
-              {
-                _dataLock.EnterReadLock();
-                try
-                {
-                  dataExport.ReadXml(Catalog);
-                }
-                catch (Exception e)
-                {
-                  LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-                  throw e;
-                }
-                finally
-                {
-                  _dataLock.ExitReadLock();
-                }
-
-                try
-                {
-                  string sqlExpression = StrDfltSelect + StrTitle1 + " not like ''";
-
-                  string sqlOrder = "OriginalTitle" + " " + "ASC";
-
-                  DataRow[] results = dataExport.Tables["Movie"].Select(sqlExpression, sqlOrder);
-                  // if (results.Length == 0) continue;
-
-                  foreach (DataRow sr in results)
-                  {
-                    try
-                    {
-                      MFMovie movie = new MFMovie();
-                      movie.Config = config; // MF config context
-                      if (!string.IsNullOrEmpty(sr["Number"].ToString()))
-                        movie.ID = Int32.Parse(sr["Number"].ToString());
-                      else movie.ID = 0;
-                      movie.Year = Int32.Parse(sr["Year"].ToString());
-                      movie.Title = sr["OriginalTitle"].ToString();
-
-                      bool played = false;
-                      if (EnhancedWatchedStatusHandling)
-                      {
-                        if (MyFilms.EnhancedWatched(sr[WatchedField].ToString(), UserProfileName) == true)
-                          played = true;
-                      }
-                      else
-                      {
-                        if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
-                          if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
-                            played = true;
-                      }
-                      movie.Watched = played;
-                      movie.WatchedCount = -1; // check against it, if value returns...
-
-                      float rating = 0;
-                      bool success = float.TryParse(sr["Rating"].ToString(), out rating);
-                      if (!success) rating = 0;
-                      movie.Rating = rating;
-                      // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
-
-                      string mediapath = string.Empty;
-                      if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
-                      {
-                        mediapath = sr[Storage].ToString();
-                        if (mediapath.Contains(";")) // take the first source file
-                          mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
-                      }
-                      movie.File = mediapath;
-
-                      string path = "";
-                      try
-                      {
-                        path = System.IO.Path.GetDirectoryName(mediapath);
-                      }
-                      catch (Exception) {}
-
-                      
-                      string IMDB = "";
-                      if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
-                        IMDB = sr["IMDB_Id"].ToString();
-
-                      if (!string.IsNullOrEmpty(sr["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
-                      {
-                        string CleanString = sr["URL"].ToString();
-                        Regex CutText = new Regex("" + @"tt\d{7}" + "");
-                        Match m = CutText.Match(CleanString);
-                        if (m.Success)
-                          IMDB = m.Value;
-                      }
-                      movie.IMDBNumber = IMDB;
-
-                      if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString()))
-                        movie.TMDBNumber = sr["TMDB_Id"].ToString();
-                      movie.DateAdded = sr["Date"].ToString();
-                      movies.Add(movie);
-                    }
-                    catch (Exception mex)
-                    {
-                      LogMyFilms.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
-                    }
-                  }
-                }
-                catch (Exception ex)
-                {
-                  LogMyFilms.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
-                }
-              }
-            }
+            int TitlePos = (tmpconf.StrTitleSelect.Length > 0) ? tmpconf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
+            movie.Title = row[tmpconf.StrTitle1].ToString().Substring(TitlePos);
           }
+          if (Helper.FieldIsSet(tmpconf.StrTitle2))
+            movie.TranslatedTitle = row[tmpconf.StrTitle2].ToString();
+
+          bool played = false;
+          if (tmpconf.StrEnhancedWatchedStatusHandling)
+          {
+            if (MyFilms.EnhancedWatched(row[tmpconf.StrWatchedField].ToString(), tmpconf.StrUserProfileName) == true)
+              played = true;
+          }
+          else
+          {
+            if (tmpconf.GlobalUnwatchedOnlyValue != null && tmpconf.StrWatchedField.Length > 0)
+              if (row[tmpconf.StrWatchedField].ToString().ToLower() != tmpconf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                played = true;
+          }
+          movie.Watched = played;
+          movie.WatchedCount = -1; // check against it, if value returns...
+
+          float rating = 0;
+          bool success = float.TryParse(row["Rating"].ToString(), out rating);
+          if (!success) rating = 0;
+          movie.Rating = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+
+          string mediapath = string.Empty;
+          if (Helper.FieldIsSet(tmpconf.StrStorage))
+          {
+            mediapath = row[tmpconf.StrStorage].ToString();
+            if (mediapath.Contains(";")) // take the first source file
+              mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+            movie.File = mediapath;
+          }
+          if (string.IsNullOrEmpty(mediapath)) // e.g. offline media files
+            movie.File = movie.Title + " {offline} [" + movie.ID + "]";
+
+          string path = "";
+          if (!string.IsNullOrEmpty(mediapath))
+          {
+            try
+            {
+              path = System.IO.Path.GetDirectoryName(mediapath);
+            }
+            catch (Exception)
+            {
+              movie.Path = "{search}";
+            }
+            movie.Path = path;
+          }
+          else
+          {
+            movie.Path = "{offline}";
+          }
+
+          string IMDB = "";
+          if (!string.IsNullOrEmpty(row["IMDB_Id"].ToString()))
+            IMDB = row["IMDB_Id"].ToString();
+
+          if (!string.IsNullOrEmpty(row["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+          {
+            string CleanString = row["URL"].ToString();
+            Regex CutText = new Regex("" + @"tt\d{7}" + "");
+            Match m = CutText.Match(CleanString);
+            if (m.Success)
+              IMDB = m.Value;
+          }
+          movie.IMDBNumber = IMDB;
+
+          if (!string.IsNullOrEmpty(row["TMDB_Id"].ToString()))
+            movie.TMDBNumber = row["TMDB_Id"].ToString();
+
+          movie.DateAdded = row["Date"].ToString();
+          DateTime wdate = new DateTime(1900, 01, 01);
+          try
+          {
+            wdate = Convert.ToDateTime(row["Date"]);
+            movie.DateTime = wdate;
+          }
+          catch { }
         }
 
-        public static ArrayList Base_Search_String(string champselect, string[] listSeparator, string[] roleSeparator)
+        private static void GetMovieArtworkDetails(DataRow row, MyFilmsGUI.Configuration tempconf, ref MFMovie movie)
+        {
+          //-----------------------------------------------------------------------------------------------------------------------
+          //    Load Artwork Info
+          //-----------------------------------------------------------------------------------------------------------------------
+          string file;
+          if (row["Picture"].ToString().Length > 0)
+          {
+            if ((row["Picture"].ToString().IndexOf(":\\") == -1) && (row["Picture"].ToString().Substring(0, 2) != "\\\\"))
+              file = tempconf.StrPathImg + "\\" + row["Picture"].ToString();
+            else
+              file = row["Picture"].ToString();
+          }
+          else
+            file = string.Empty;
+          if (!File.Exists(file) || string.IsNullOrEmpty(file))
+            file = tempconf.DefaultCover;
+          movie.Picture = file;
+
+          movie.Fanart = MyFilmsDetail.Search_Fanart(MyFilmsDetail.GetSearchTitles(row, "", tempconf).FanartTitle, false, "file", false, file, string.Empty, tempconf)[0];
+        }
+
+        private static ArrayList Base_Search_String(string champselect, string[] listSeparator, string[] roleSeparator)
         {
           Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
           System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
@@ -1488,11 +1376,13 @@ namespace MyFilmsPlugin.MyFilms
     #region private vars
     private int _mID = -1;
     private string _mStrTitle = string.Empty;
+    private string _mStrTranslatedTitle = string.Empty;
     private string _mStrFile = string.Empty;
     private string _mStrPath = string.Empty;
     private string _mStrIMDBNumber = string.Empty;
     private string _mStrTMDBNumber = string.Empty;
     private int _mIYear = 1900;
+    private string _mStrCategory = string.Empty;
     private int _mILength = 0;
     private float _mFRating;
     private bool _mIWatched;
@@ -1506,6 +1396,8 @@ namespace MyFilmsPlugin.MyFilms
     private bool _mReadOnly = false;
     private bool _mAllowTrakt = false;
     private bool _mAllowLatestMediaAPI = false;
+    private MyFilmsGUI.Configuration _MFconfig = null;
+    private DataRow _MovieRow = null;
     #endregion
 
     public MFMovie() { }
@@ -1547,6 +1439,12 @@ namespace MyFilmsPlugin.MyFilms
       set { _mStrTitle = value; }
     }
 
+    public string TranslatedTitle
+    {
+      get { return _mStrTranslatedTitle; }
+      set { _mStrTranslatedTitle = value; }
+    }
+
     public string File
     {
       get { return _mStrFile; }
@@ -1575,6 +1473,12 @@ namespace MyFilmsPlugin.MyFilms
     {
       get { return _mIYear; }
       set { _mIYear = value; }
+    }
+
+    public string Category
+    {
+      get { return _mStrCategory; }
+      set { _mStrCategory = value; }
     }
 
     /// <summary>
@@ -1645,14 +1549,26 @@ namespace MyFilmsPlugin.MyFilms
       get { return _mAllowLatestMediaAPI; }
       set { _mAllowLatestMediaAPI = value; }
     }
+    public MyFilmsGUI.Configuration MFconfig
+    {
+      get { return _MFconfig; }
+      set { _MFconfig = value; }
+    }
+    public DataRow MovieRow
+    {
+      get { return _MovieRow; }
+      set { _MovieRow = value; }
+    }
     #endregion
 
     public void Reset()
     {
       _mStrTitle = string.Empty;
+      _mStrTranslatedTitle = string.Empty;
       _mStrIMDBNumber = string.Empty;
       _mStrTMDBNumber = string.Empty;
       _mIYear = 1900;
+      _mStrCategory = string.Empty;
       _mILength = 0;
       _mFRating = 0.0f;
       _mIWatched = false;
@@ -1666,6 +1582,8 @@ namespace MyFilmsPlugin.MyFilms
       _mReadOnly = false;
       _mAllowTrakt = false;
       _mAllowLatestMediaAPI = false;
+      _MFconfig = null;
+      _MovieRow = null;
     }
 
     public void Commit()
@@ -1675,15 +1593,12 @@ namespace MyFilmsPlugin.MyFilms
       using (XmlSettings XmlConfig = new XmlSettings(MediaPortal.Configuration.Config.GetFile(MediaPortal.Configuration.Config.Dir.Config, "MyFilms.xml")))
       {
           string config = _mConfig;
-          //Configuration confimport = new Configuration(config, true);
-          //Configuration.Current_Config();
-          //MyFilms.Load_Config(Configuration.config, true);
+          MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
+
           string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
           string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
           string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
           bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
-          bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-          string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
           string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
           bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
           string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");

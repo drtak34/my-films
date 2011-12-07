@@ -4193,7 +4193,7 @@
           this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(458, 193);
           this.groupBox_PlayMovieInfos.TabIndex = 74;
           this.groupBox_PlayMovieInfos.TabStop = false;
-          this.groupBox_PlayMovieInfos.Text = "Movie Path Playback Configuration";
+          this.groupBox_PlayMovieInfos.Text = "Movie Playback Path Configuration";
           // 
           // chkScanMediaOnStart
           // 
@@ -4220,7 +4220,7 @@
           this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(446, 96);
           this.groupBoxMoviePathInfos.TabIndex = 71;
           this.groupBoxMoviePathInfos.TabStop = false;
-          this.groupBoxMoviePathInfos.Text = "Movie Search Configuration";
+          this.groupBoxMoviePathInfos.Text = "Playback Search Configuration";
           // 
           // SearchOnlyExactMatches
           // 
