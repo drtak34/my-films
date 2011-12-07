@@ -46,7 +46,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //   Load Config Parameters in MyFilms.xml file (section CurrentConfig)
             //-----------------------------------------------------------------------------------------------
 
-            LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
+            //LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
             XmlConfig XmlConfigold = new XmlConfig();
             XmlConfigold.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
             // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
@@ -121,6 +121,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number").Split(new Char[] { ',' });
                 }
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
+                StrFileXmlTemp = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                 StrFileType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0");
                 StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", string.Empty);
                 StrArtistDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistDflt", false);
@@ -187,11 +188,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     DestinationWriter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationWriter", "");
                   else DestinationWriter = "";
                 }
-                LogMyFilms.Debug("MFC: switch (StrFileType) '" + StrFileType.ToString() + "'"); 
+                // LogMyFilms.Debug("MFC: switch (StrFileType) '" + StrFileType.ToString() + "'");
+
+                ReadOnly = true;
                 switch (StrFileType)
                 {
                     case "0": // ANT Movie Catalog
                     case "10":// ANT Movie Catalog extended
+                      ReadOnly = false;
                       break;
                     case "1": // DVD Profiler
                         if (create_temp)
@@ -466,6 +470,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
                 ScanMediaOnStart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckMediaOnStart", false);
                 AllowTraktSync = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AllowTraktSync", false);
+                AllowRecentlyAddedAPI = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AllowRecentAddedAPI", false);
+
 
                 UseListViewForGoups = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseListviewForGroups", true);
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
@@ -517,8 +523,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
                 {
-                    LogMyFilms.Info("MyFilms : Fanart Path '" + StrPathFanart + "', doesn't exist. Fanart disabled ! ");
-                    StrFanart = false;
+                  LogMyFilms.Info("MyFilms : Fanart Path '" + StrPathFanart + "', doesn't exist. Fanart disabled ! ");
+                  StrFanart = false;
                 }
             if (StrArtist)
                 if (!(StrPathArtist.Length > 0 && System.IO.Directory.Exists(StrPathArtist)))
@@ -526,7 +532,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
                     StrArtist = false;
                 }
-            LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'");
+            // LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'");
         }
 
 #region Getter/Setter - static values
@@ -634,6 +640,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return allowTraktSync; }
           set { allowTraktSync = value; }
+        }
+        private bool allowRecentlyAddedAPI = false;
+        public bool AllowRecentlyAddedAPI
+        {
+          get { return allowRecentlyAddedAPI; }
+          set { allowRecentlyAddedAPI = value; }
         }
         private bool onlyTitleList = false;
         public bool OnlyTitleList
@@ -1065,14 +1077,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private string strFileXml = string.Empty;
         public string StrFileXml
         {
-            get { return strFileXml; }
-            set { strFileXml = value; }
+          get { return strFileXml; }
+          set { strFileXml = value; }
+        }
+        private string strFileXmlTemp = string.Empty;
+        public string StrFileXmlTemp
+        {
+          get { return strFileXmlTemp; }
+          set { strFileXmlTemp = value; }
         }
         private string strFileType = string.Empty;
         public string StrFileType
         {
-            get { return strFileType; }
-            set { strFileType = value; }
+          get { return strFileType; }
+          set { strFileType = value; }
+        }
+        private bool readOnly = true;
+        public bool ReadOnly
+        {
+          get { return readOnly; }
+          set { readOnly = value; }
         }
         private string strPathImg = string.Empty;
         public string StrPathImg
@@ -1574,6 +1598,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (MyFilms.conf.StrFileType)
             {
               case "0":
+              case "10":
                 break;
               case "1":
                 XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
