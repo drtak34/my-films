@@ -807,6 +807,7 @@ End additional Backdrops  -->
 			<height>766</height>
 			<texture>bg_facade.png</texture>
 			<visible>facadeview.list</visible>
+			<shouldCache>true</shouldCache>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -821,6 +822,7 @@ End additional Backdrops  -->
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
 			<visible>facadeview.list</visible>
+			<shouldCache>true</shouldCache>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -1196,6 +1198,7 @@ End additional Backdrops  -->
 			<width>948</width>
 			<height>766</height>
 			<texture>bg_facade.png</texture>
+			<shouldCache>true</shouldCache>
 			<visible>facadeview.smallicons|facadeview.largeicons</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
@@ -1208,6 +1211,7 @@ End additional Backdrops  -->
 			<height>53</height>
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
+			<shouldCache>true</shouldCache>
 			<visible>facadeview.smallicons|facadeview.largeicons</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
