@@ -327,5 +327,15 @@
     <String id="10798951">Personen</String>
     <String id="10798952">Trakt Kategorie</String>
     <String id="10798953">Audio Kanäle</String>
+    <String id="10798954">Hinzugefügt (gruppiert)</String>
+    <String id="10798960">Unbekannt</String>
+    <String id="10798961">Heute</String>
+    <String id="10798962">Gestern</String>
+    <String id="10798963">Letzte Woche</String>
+    <String id="10798964">Letzter Monat</String>
+    <String id="10798965">Letzte 3 Monate</String>
+    <String id="10798966">Letztes Jahr</String>
+    <String id="10798967">Letzte 3 Jahre</String>
+    <String id="10798968">Älter als 3 Jahre</String>
   </Section>
 </Language>
