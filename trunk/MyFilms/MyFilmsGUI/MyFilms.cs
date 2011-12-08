@@ -3074,6 +3074,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg1.Add(GUILocalizeStrings.Get(345));//year
       dlg1.Add(GUILocalizeStrings.Get(10798664));//genre -> category
       dlg1.Add(GUILocalizeStrings.Get(200026));//countries
+      dlg1.Add(GUILocalizeStrings.Get(10798954));//recentlyadded
       dlg1.Add(GUILocalizeStrings.Get(10798667));//actors 
       //dlg1.Add(GUILocalizeStrings.Get(200027));//Watched
       System.Collections.Generic.List<string> choiceView = new System.Collections.Generic.List<string>();
@@ -3081,6 +3082,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceView.Add("year");
       choiceView.Add("category");
       choiceView.Add("country");
+      choiceView.Add("recentlyadded");
       choiceView.Add("actors");
 
       // Commented, as we have replaced this feature with global overlay filter for "media available"
@@ -3386,6 +3388,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    private static string GetDayRange(int age)
+    {
+      if (age < 0) return "7" + GUILocalizeStrings.Get(10798960); //unknown
+      if (age == 0) return "0" + GUILocalizeStrings.Get(10798961); //today
+      if (age <= 1) return "1" + GUILocalizeStrings.Get(10798962); //yesterday
+      if (age <= 7) return "2" + GUILocalizeStrings.Get(10798963); //last week
+      if (age <= 30) return "3" + GUILocalizeStrings.Get(10798964); //last month
+      if (age <= 90) return "4" + GUILocalizeStrings.Get(10798965); //last 3 month
+      if (age <= 365) return "5" + GUILocalizeStrings.Get(10798966); //last year
+      if (age <= 3 * 365) return "6" + GUILocalizeStrings.Get(10798967); //last 3 years
+      return "7" + GUILocalizeStrings.Get(10798968); //older than 3 years
+    }
+    
     public static ArrayList Search_String(string champselect)
     {
       return Search_String(champselect, false);
@@ -3914,6 +3929,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
 
       bool isperson = false;
+      bool recentlyadded = false;
       if (IsPersonField(WStrSort))
       {
         isperson = true;
@@ -3928,12 +3944,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (WStrSort == "Date" || WStrSort == "DateAdded")
         isdate = true;
 
+      if (WStrSort == "RecentlyAdded") // calculate recently added fields
+        recentlyadded = true;
+
       // Collect List of all attributes in w_tableau
       LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group Names");
       foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
         if (isdate)
           champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+        else if (recentlyadded)
+        {
+          if (string.IsNullOrEmpty(enr["RecentlyAdded"].ToString()))
+          {
+            int age = -1;
+            DateTime dateAdded;
+            if (DateTime.TryParse(string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]), out dateAdded)) 
+              age = (int)DateTime.Now.Subtract(dateAdded).TotalDays;
+            enr["RecentlyAdded"] = GetDayRange(age);
+          }
+          champselect = enr["RecentlyAdded"].ToString();
+        }
         else
           champselect = enr[WStrSort].ToString().Trim();
 
@@ -3985,8 +4016,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         try { System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); }
         catch (Exception) { }
 
-    if (isperson) // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
-      {AsynUpdateActors(w_tableau);}
+      if (isperson) // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
+        {AsynUpdateActors(w_tableau);}
 
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
       DataRow[] rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, "", WStrSort, WStrSortSens);
@@ -4009,7 +4040,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               GUIListItem item = new GUIListItem(); 
               //item.ItemId = number;
-              item.Label = wchampselect;
+              if (recentlyadded) item.Label = wchampselect.Substring(1); // remove numbers we use for sorting
+              else item.Label = wchampselect;
+              
               if (countItems)
               {
                 int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
@@ -4044,7 +4077,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         GUIListItem item = new GUIListItem();
         //item.ItemId = number;
-        item.Label = wchampselect;
+        if (recentlyadded) item.Label = wchampselect.Substring(1); // remove numbers we use for sorting
+        else item.Label = wchampselect;
         if (countItems)
         {
           int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
@@ -4910,6 +4944,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           SetLabelView("category");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
+        case "recentlyadded":
+          currentListLevel = Listlevel.Group;
+          conf.WStrSort = "RecentlyAdded";
+          conf.WStrSortSens = " ASC";
+          BtnSrtBy.IsAscending = true;
+          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+          SetLabelView("recentlyadded");
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+          break;
+
         case "country":
           currentListLevel = Listlevel.Group;
           conf.WStrSort = "COUNTRY";
@@ -10363,6 +10407,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case "country":
           newViewLabel = GUILocalizeStrings.Get(200026); //country
+          break;
+        case "recentlyadded":
+          newViewLabel = GUILocalizeStrings.Get(10798954); //recentlyadded
           break;
         case "storage":
           conf.StrTxtSelect = GUILocalizeStrings.Get(10798736);

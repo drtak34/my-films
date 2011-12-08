@@ -3335,6 +3335,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnDateAdded;
             
+            private global::System.Data.DataColumn columnRecentlyAdded;
+            
             private global::System.Data.DataColumn columnSubtitles;
             
             private global::System.Data.DataColumn columnSize;
@@ -3645,6 +3647,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn RecentlyAddedColumn {
+                get {
+                    return this.columnRecentlyAdded;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn SubtitlesColumn {
                 get {
                     return this.columnSubtitles;
@@ -3894,6 +3903,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Framerate, 
                         string Languages, 
                         System.DateTime DateAdded, 
+                        string RecentlyAdded, 
                         string Subtitles, 
                         string Size, 
                         string Disks, 
@@ -3953,6 +3963,7 @@ namespace MyFilmsPlugin.DataBase {
                         Framerate,
                         Languages,
                         DateAdded,
+                        RecentlyAdded,
                         Subtitles,
                         Size,
                         Disks,
@@ -3981,7 +3992,7 @@ namespace MyFilmsPlugin.DataBase {
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[57] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[58] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4020,6 +4031,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Resolution, 
                         string Framerate, 
                         string Languages, 
+                        string RecentlyAdded, 
                         string Subtitles, 
                         string Size, 
                         string Disks, 
@@ -4077,6 +4089,7 @@ namespace MyFilmsPlugin.DataBase {
                         Framerate,
                         Languages,
                         null,
+                        RecentlyAdded,
                         Subtitles,
                         Size,
                         Disks,
@@ -4105,7 +4118,7 @@ namespace MyFilmsPlugin.DataBase {
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[57] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[58] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4157,6 +4170,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnFramerate = base.Columns["Framerate"];
                 this.columnLanguages = base.Columns["Languages"];
                 this.columnDateAdded = base.Columns["DateAdded"];
+                this.columnRecentlyAdded = base.Columns["RecentlyAdded"];
                 this.columnSubtitles = base.Columns["Subtitles"];
                 this.columnSize = base.Columns["Size"];
                 this.columnDisks = base.Columns["Disks"];
@@ -4250,6 +4264,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnLanguages);
                 this.columnDateAdded = new global::System.Data.DataColumn("DateAdded", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDateAdded);
+                this.columnRecentlyAdded = new global::System.Data.DataColumn("RecentlyAdded", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRecentlyAdded);
                 this.columnSubtitles = new global::System.Data.DataColumn("Subtitles", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnSubtitles);
                 this.columnSize = new global::System.Data.DataColumn("Size", typeof(string), null, global::System.Data.MappingType.Attribute);
@@ -4840,7 +4856,7 @@ namespace MyFilmsPlugin.DataBase {
                         AudioChannelCount,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[56];
+                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[57];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -7389,6 +7405,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string RecentlyAdded {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.RecentlyAddedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte RecentlyAdded in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.RecentlyAddedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Subtitles {
                 get {
                     try {
@@ -8106,6 +8137,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDateAddedNull() {
                 this[this.tableMovie.DateAddedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsRecentlyAddedNull() {
+                return this.IsNull(this.tableMovie.RecentlyAddedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetRecentlyAddedNull() {
+                this[this.tableMovie.RecentlyAddedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
