@@ -214,6 +214,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public const string ImdbBaseUrl = "http://www.imdb.com/";
 
+    public const bool LogGUIProperties = false;
+
     enum Controls : int
     {
       CTRL_BtnLayout = 2,
@@ -601,9 +603,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public override void DeInit()
     {
-      LogMyFilms.Debug("MyFilms.DeInit() started/ended. Calling base.DeInit()...");
       base.DeInit();
-      // Add Other Classes here, if necessary
+      BaseMesFilms.CancelMyFilms();
+      LogMyFilms.Debug("MyFilms.DeInit() - Shutdown completed...");
     }
 
     //protected override string SerializeName
@@ -1751,6 +1753,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 tmpStrSorta = "DateAdded";
                 tmpStrSortSens = " DESC";
                 break;
+              case "ageadded_num":
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(621);
+                tmpStrSorta = "AgeAdded";
+                tmpStrSortSens = " ASC";
+                break;
               case "rating":
                 tmpCurrentSortMethod = GUILocalizeStrings.Get(367);
                 tmpStrSorta = "RATING";
@@ -1979,6 +1986,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (conf.WStrSort == "DateAdded")
               getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "Date", " DESC", "*", true, SelItem);
+            else if (conf.WStrSort == "AgeAdded_Num")
+              getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "AgeAdded", " ASC", "*", true, SelItem);
             else
               getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
           }
@@ -2041,6 +2050,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = conf.Wselectedlabel;
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           conf.StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
+        else if ((conf.WStrSort == "AgeAdded") || (conf.WStrSort == "AgeAdded_Num"))
+          conf.StrSelect = "AgeAdded" + " like '*" + sLabel.Replace("'", "''") + "*'";
         else
         {
           if (sLabel == "")
@@ -2145,7 +2156,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wfacadewiew = 0;
       ArrayList w_tableau = new ArrayList();
       bool isdate = false;
+      //bool isageadded = false;
       if (conf.WStrSort == "Date" || conf.WStrSort == "DateAdded") isdate = true;
+      //if (conf.WStrSort == "AgeAdded" || conf.WStrSort == "AgeAdded_Num") isageadded = true;
       // Check and create Group thumb folder ...
       if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
         System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
@@ -2475,7 +2488,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     bool GetMoviesInGroup(ref ArrayList fanartItems)
     {
-      LogMyFilms.Debug("GetRandomFanartForGroups started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
+      LogMyFilms.Debug("GetRandomFanartForGroups started ...");
 
       string s = "";
       string StrSelect = string.Empty;
@@ -2484,6 +2497,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = facadeView.SelectedListItem.Label;
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
+        else if ((conf.WStrSort == "AgeAdded") || (conf.WStrSort == "AgeAdded_Num"))
+          StrSelect = "AgeAdded" + " like '*" + sLabel.Replace("'", "''") + "*'";
         else
         {
           if (sLabel == "")
@@ -2505,12 +2520,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
       r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-      LogMyFilms.Debug("(GetRandomFanartForGroups) - GlobalFilterString:          '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrFilmSelect:          '" + StrFilmSelect + "'");
-      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrSorta:               '" + conf.StrSorta + "'");
-      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrSortSens:            '" + conf.StrSortSens + "'");
-      LogMyFilms.Debug("(GetRandomFanartForGroups) - Count:                       '" + r.Length + "'");
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - Count: '" + r.Length + "'");
       int iCnt = 0;
       int DelimCnt = 0, DelimCnt2;
       GUIListItem item = new GUIListItem();
@@ -2628,7 +2638,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
       fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-//       fanartTitle = facadeView.SelectedListItem.Label;
       wfanart = MyFilmsDetail.Search_Fanart(fanartTitle, false, "dir", false, "false", string.Empty);
 
       if (wfanart[1] == "dir")
@@ -3930,6 +3939,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       bool isperson = false;
       bool recentlyadded = false;
+      bool isageadded = false;
       if (IsPersonField(WStrSort))
       {
         isperson = true;
@@ -3946,20 +3956,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (WStrSort == "RecentlyAdded") // calculate recently added fields
         recentlyadded = true;
+      if (WStrSort == "AgeAdded" || WStrSort == "AgeAdded_Num")
+        isageadded = true;
+
 
       // Collect List of all attributes in w_tableau
       LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group Names");
       foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
-        if (isdate)
+        if (isdate) 
           champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+        else if (isageadded) 
+          champselect = enr["AgeAdded"].ToString();
         else if (recentlyadded)
         {
           if (string.IsNullOrEmpty(enr["RecentlyAdded"].ToString()))
           {
             int age = -1;
             DateTime dateAdded;
-            if (DateTime.TryParse(string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]), out dateAdded)) 
+            if (DateTime.TryParse(string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]), out dateAdded))
               age = (int)DateTime.Now.Subtract(dateAdded).TotalDays;
             enr["RecentlyAdded"] = GetDayRange(age);
           }
@@ -4764,6 +4779,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.WStrSort = wStrViewDfltItem;
                 if (wStrViewDfltItem == "DateAdded")
                   conf.StrSelect = "Date" + " like '" + DateTime.Parse(conf.StrViewDfltText).ToShortDateString() + "'";
+                else if (wStrViewDfltItem == "AgeAdded_Num")
+                  conf.StrSelect = "AgeAdded" + " like '*" + conf.StrViewDfltText + "*'";
                 else
                   conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
                 //                            TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
@@ -5103,6 +5120,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
             if (conf.WStrSort == "DateAdded")
               conf.StrSelect = "Date";
+            else if (conf.WStrSort == "AgeAdded_Num")
+              conf.StrSelect = "AgeAdded";
             else
               conf.StrSelect = conf.WStrSort;
 
@@ -5122,6 +5141,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (conf.WStrSort == "DateAdded")
               getSelectFromDivx(conf.StrTitle1 + " not like ''", "Date", " DESC", listfilter, true, string.Empty);
+            else if (conf.WStrSort == "AgeAdded_Num")
+              getSelectFromDivx(conf.StrTitle1 + " not like ''", "AgeAdded", " ASC", listfilter, true, string.Empty);
             else
               getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, listfilter, true, string.Empty);
           }
@@ -5525,7 +5546,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if (MyFilms.conf.StrFileType != "0" || (dc.ColumnName != "DateAdded" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
                     && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags"
-                    && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"))
+                    && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"
+                    && dc.ColumnName != "AgeAdded_Num"))
                   {
                     dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
                     choiceGlobalMappings.Add(dc.ColumnName);

@@ -5116,8 +5116,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static string[] Search_Fanart(string title, bool main, string searched, bool rep, string filecover, string group, Configuration tmpconf)
         //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
-            if (MyFilms.conf == tmpconf)  
-              LogMyFilms.Debug("Search_Fanart(): Using '" + title + "'");
+            //if (MyFilms.conf == tmpconf) LogMyFilms.Debug("Search_Fanart(): Using '" + title + "'");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
@@ -5912,10 +5911,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         case "length":
                         case "length_num":
                             if (wrep)
-                                if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
-                                    wstring = MyFilms.r[ItemId]["Length"].ToString();
+                              if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
+                                wstring = MyFilms.r[ItemId]["Length"].ToString();
                             setGUIProperty("db.length.value", wstring);
                             MyFilms.currentMovie.Length = (int)MyFilms.r[ItemId]["Length_Num"];
+                            break;
+                        case "ageadded":
+                        case "ageadded_num":
+                            if (wrep)
+                              if (MyFilms.r[ItemId]["AgeAdded"].ToString().Length > 0)
+                                wstring = MyFilms.r[ItemId]["AgeAdded"].ToString();
+                            setGUIProperty("db.ageadded.value", wstring);
                             break;
                         case "actors":
                             if (wrep)
@@ -8598,7 +8604,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void setGUIProperty(string name, string value)
         {
-          setGUIProperty(name, value, true);
+          setGUIProperty(name, value, MyFilms.LogGUIProperties);
         }
 
         public static void setGUIProperty(string name, string value, bool log)
@@ -8616,7 +8622,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void clearGUIProperty(string name)
         {
-          setGUIProperty(name, string.Empty, true);
+          setGUIProperty(name, string.Empty, MyFilms.LogGUIProperties);
         }
 
         public static void clearGUIProperty(string name, bool log)

@@ -656,7 +656,8 @@ Examples:
 "Category NOT LIKE 'j*'"   // values that don't start with 'j'
 "Category # 'Action' AND Category &lt;&gt; 'Horror'"
 "Category NOT IN ('Action', 'Horror')"
-"Actors IN ('Bruce Willis', 'Adriano Celentano')</value>
+"Actors IN ('Bruce Willis', 'Adriano Celentano')"
+"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
   </data>
   <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
     <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
