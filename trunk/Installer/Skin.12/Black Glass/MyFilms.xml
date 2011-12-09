@@ -671,7 +671,7 @@ End additional Backdrops  -->
 		</control> 
 		<control>
 			<type>label</type>
-			<description>Year and Genre and Runtime (Filmstrip)</description>
+			<description>Year and Genre and Runtime (Filmstrip and CoverFlow)</description>
 			<id>1</id>
 			<posX>30</posX>
 			<posY>703</posY>
@@ -679,7 +679,7 @@ End additional Backdrops  -->
 			<align>center</align>
 			<font>font14</font>
 			<textcolor>60ffffff</textcolor>
-			<label>#myfilms.db.year.value - #myfilms.db.category.value</label>
+      			<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#myfilms.db.category.value</label>
 			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -695,7 +695,7 @@ End additional Backdrops  -->
 			<align>right</align>
 			<font>font10</font>
 			<textcolor>60ffffff</textcolor>
-			<label>#myfilms.db.length.value #myfilms.db.length.unit - #myfilms.db.rating.value</label>
+      			<label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))#(iif(neq(#myfilms.db.rating.value,'0'),' - #myfilms.db.rating.value',''))</label>
 			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -890,7 +890,7 @@ End additional Backdrops  -->
 			<posX>30</posX>
 			<posY>559</posY>
 			<width>750</width>
-			<label>#myfilms.db.year.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
+      			<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))</label>
 			<textcolor>90FFFFFF</textcolor>
 			<visible>!string.equals(#myfilms.user.mastertitle,)+!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
@@ -903,7 +903,7 @@ End additional Backdrops  -->
 			<id>1</id>
 			<posX>305</posX>
 			<posY>452</posY>
-			<label>(#myfilms.db.rating.value)</label>
+			<label>#(iif(neq(#myfilms.db.rating.value,'0'),'(#myfilms.db.rating.value)',''))</label>
 			<font>font10</font>
 			<align>right</align>
 			<textcolor>6fffffff</textcolor>
@@ -1248,8 +1248,8 @@ End additional Backdrops  -->
 			<align>center</align>
 			<font>font12</font>
 			<textcolor>60ffffff</textcolor>
-			<label>#myfilms.db.year.value - #myfilms.db.category.value - #myfilms.db.length.value #myfilms.db.length.unit - #myfilms.db.rating.value</label>
-			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)+control.hasthumb(22)]</visible>
+      			<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#(iif(neq(#myfilms.db.category.value,''),'#myfilms.db.category.value - ',''))#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))#(iif(neq(#myfilms.db.rating.value,'0'),' - #myfilms.db.rating.value',''))</label>
+			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control> 
 		<!-- <control>
