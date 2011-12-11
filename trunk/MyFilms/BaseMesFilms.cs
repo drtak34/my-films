@@ -77,6 +77,7 @@ namespace MyFilmsPlugin.MyFilms
         private static DataRow[] movies;
         private static DataRow[] persons;
         private static Stopwatch watch = new Stopwatch();
+        private static Stopwatch watchReadMovies = new Stopwatch();
 
 
         #region ctor
@@ -86,7 +87,7 @@ namespace MyFilmsPlugin.MyFilms
         #region méthodes statique sprivées
         private static void initData()
         {
-          watch.Reset();watch.Start();
+          watch.Reset(); watch.Start();
           _dataLock.EnterReadLock();
           data = new AntMovieCatalog();
           string catalogfile = MyFilms.conf.StrFileXml;
@@ -96,9 +97,9 @@ namespace MyFilmsPlugin.MyFilms
               using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
               {
                 LogMyFilms.Debug("initData()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-                foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+                //foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
                 data.ReadXml(fs);
-                foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+                //foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
                 fs.Close();
                 LogMyFilms.Debug("initData()- closing  '" + catalogfile + "' FileStream");
               }
@@ -116,21 +117,15 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("initData() - End reading catalogfile '" + catalogfile + "' (" + (watch.ElapsedMilliseconds) + " ms)");
           LogMyFilms.Debug("initData() - CalcDays Started ...");
           watch.Reset(); watch.Start();
+          DateTime now = DateTime.Now;
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           {
             if (movieRow.IsAgeAddedNull())
             {
               if (!movieRow.IsDateAddedNull())
-              {
-                movieRow.AgeAdded_Num = (int)DateTime.Now.Subtract(movieRow.DateAdded).TotalDays;
-                movieRow.AgeAdded = ((int)DateTime.Now.Subtract(movieRow.DateAdded).TotalDays).ToString();
-              }
-
+                movieRow.AgeAdded = ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString();
               else
-              {
-                movieRow.AgeAdded_Num = 9999;
                 movieRow.AgeAdded = "9999";
-              }
             }
           }
           watch.Stop();
@@ -152,17 +147,13 @@ namespace MyFilmsPlugin.MyFilms
             {
               LogMyFilms.Debug("initData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
 
-              foreach (DataTable dataTable in mfdata.Tables)
-                dataTable.BeginLoadData();
+              foreach (DataTable dataTable in mfdata.Tables) dataTable.BeginLoadData();
               mfdata.ReadXml(fs);
-              foreach (DataTable dataTable in mfdata.Tables)
-                dataTable.EndLoadData();
+              foreach (DataTable dataTable in mfdata.Tables) dataTable.EndLoadData();
 
-              foreach (DataTable dataTable in data.Tables)
-                dataTable.BeginLoadData();
-              data.ReadXml(fs);
-              foreach (DataTable dataTable in data.Tables)
-                dataTable.EndLoadData(); 
+              //foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+              //data.ReadXml(fs);
+              //foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData(); 
 
               // ... change data here, if intended ...
               // fs.SetLength(0);
@@ -223,7 +214,7 @@ namespace MyFilmsPlugin.MyFilms
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
           LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
-          watch.Reset();watch.Start();
+          watchReadMovies.Reset(); watchReadMovies.Start();
           if (data == null) 
             initData();
           else 
@@ -237,8 +228,8 @@ namespace MyFilmsPlugin.MyFilms
             LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
-          watch.Stop();
-          LogMyFilms.Debug("ReadDataMovies() - Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          watchReadMovies.Stop();
+          LogMyFilms.Debug("ReadDataMovies() - Finished ... (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
 
           return movies;
 
@@ -387,6 +378,7 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("LoadMyFilms()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
           //if (_dataLock.CurrentReadCount > 0) // might be opened by API as well, so count can be 2+
           //  return;
+          watchReadMovies.Reset(); watchReadMovies.Start();
           watch.Reset();watch.Start();
           _dataLock.EnterReadLock();
           data = new AntMovieCatalog();
@@ -397,9 +389,9 @@ namespace MyFilmsPlugin.MyFilms
             using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("LoadMyFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-              foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+              //foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
               data.ReadXml(fs);
-              foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData(); 
+              //foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
               fs.Close();
               LogMyFilms.Debug("LoadMyFilms()- closing  '" + catalogfile + "' FileStream");
             }
@@ -418,24 +410,21 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("LoadMyFilms()- Finished  (" + (watch.ElapsedMilliseconds) + " ms)");
           LogMyFilms.Debug("LoadMyFilms() - CalcDays Started ...");
           watch.Reset(); watch.Start();
+          DateTime now = DateTime.Now;
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           {
             if (movieRow.IsAgeAddedNull())
             {
               if (!movieRow.IsDateAddedNull())
-              {
-                movieRow.AgeAdded_Num = (int)DateTime.Now.Subtract(movieRow.DateAdded).TotalDays;
-                movieRow.AgeAdded = ((int)DateTime.Now.Subtract(movieRow.DateAdded).TotalDays).ToString();
-              }
+                movieRow.AgeAdded = ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString();
               else
-              {
-                movieRow.AgeAdded_Num = 9999;
                 movieRow.AgeAdded = "9999";
-              }
             }
           }
           watch.Stop();
+          watchReadMovies.Stop();
           LogMyFilms.Debug("LoadMyFilms() - CalcDays Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("LoadMyFilms() - Finished ... (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
         }
 
         public static void LoadMyFilmsData(string datafile)

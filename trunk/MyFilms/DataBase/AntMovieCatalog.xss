@@ -15,7 +15,7 @@
     <Shape ID="DesignTable:CustomField" ZOrder="22" X="293" Y="639" Height="197" Width="168" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="193" />
     <Shape ID="DesignTable:ListValue" ZOrder="10" X="667" Y="714" Height="130" Width="145" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="126" />
     <Shape ID="DesignTable:Contents" ZOrder="18" X="478" Y="11" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
-    <Shape ID="DesignTable:Movie" ZOrder="23" X="945" Y="-14" Height="231" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="22" SplitterPosition="227" />
+    <Shape ID="DesignTable:Movie" ZOrder="23" X="945" Y="-14" Height="843" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="22" SplitterPosition="840" />
     <Shape ID="DesignTable:CustomFields" ZOrder="20" X="1278" Y="417" Height="504" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="500" />
     <Shape ID="DesignTable:Persons" ZOrder="19" X="479" Y="173" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
     <Shape ID="DesignTable:Person" ZOrder="24" X="782" Y="154" Height="300" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="296" />
@@ -149,15 +149,15 @@
       <RoutePoints>
         <Point>
           <X>1078</X>
-          <Y>217</Y>
+          <Y>829</Y>
         </Point>
         <Point>
           <X>1078</X>
-          <Y>434</Y>
+          <Y>838</Y>
         </Point>
         <Point>
           <X>1278</X>
-          <Y>434</Y>
+          <Y>838</Y>
         </Point>
       </RoutePoints>
     </Connector>

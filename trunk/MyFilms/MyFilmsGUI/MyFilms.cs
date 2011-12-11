@@ -384,6 +384,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private double lastPublished = 0;
     private Timer publishTimer;
 
+    private static Stopwatch watch = new Stopwatch();
+
     private const int RandomFanartDelay = 15000;
 
     // Version for Skin Interface
@@ -1753,11 +1755,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 tmpStrSorta = "DateAdded";
                 tmpStrSortSens = " DESC";
                 break;
-              case "ageadded_num":
-                tmpCurrentSortMethod = GUILocalizeStrings.Get(621);
-                tmpStrSorta = "AgeAdded";
-                tmpStrSortSens = " ASC";
-                break;
               case "rating":
                 tmpCurrentSortMethod = GUILocalizeStrings.Get(367);
                 tmpStrSorta = "RATING";
@@ -1986,8 +1983,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (conf.WStrSort == "DateAdded")
               getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "Date", " DESC", "*", true, SelItem);
-            else if (conf.WStrSort == "AgeAdded_Num")
-              getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "AgeAdded", " ASC", "*", true, SelItem);
             else
               getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
           }
@@ -2050,8 +2045,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = conf.Wselectedlabel;
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           conf.StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-        else if ((conf.WStrSort == "AgeAdded") || (conf.WStrSort == "AgeAdded_Num"))
-          conf.StrSelect = "AgeAdded" + " like '*" + sLabel.Replace("'", "''") + "*'";
+        else if (IsSingleValueField(conf.WStrSort))
+          conf.StrSelect = conf.WStrSort + " like '" + sLabel.Replace("'", "''") + "'";
         else
         {
           if (sLabel == "")
@@ -2156,9 +2151,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wfacadewiew = 0;
       ArrayList w_tableau = new ArrayList();
       bool isdate = false;
-      //bool isageadded = false;
       if (conf.WStrSort == "Date" || conf.WStrSort == "DateAdded") isdate = true;
-      //if (conf.WStrSort == "AgeAdded" || conf.WStrSort == "AgeAdded_Num") isageadded = true;
       // Check and create Group thumb folder ...
       if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
         System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
@@ -2497,8 +2490,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = facadeView.SelectedListItem.Label;
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-        else if ((conf.WStrSort == "AgeAdded") || (conf.WStrSort == "AgeAdded_Num"))
-          StrSelect = "AgeAdded" + " like '*" + sLabel.Replace("'", "''") + "*'";
+        else if (IsSingleValueField(conf.WStrSort))
+          StrSelect = conf.WStrSort + " like '" + sLabel.Replace("'", "''") + "'";
         else
         {
           if (sLabel == "")
@@ -3409,7 +3402,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (age <= 3 * 365) return "6" + GUILocalizeStrings.Get(10798967); //last 3 years
       return "7" + GUILocalizeStrings.Get(10798968); //older than 3 years
     }
-    
+
+    private static bool IsSingleValueField(string fieldname)
+    {
+      if (fieldname == "Length_Num" || fieldname == "Length" || fieldname == "AgeAdded" || fieldname == "Size" ||
+        fieldname == "AudioBitrate" || fieldname == "VideoBitrate")
+        return true;
+      return false;
+    }
+
     public static ArrayList Search_String(string champselect)
     {
       return Search_String(champselect, false);
@@ -3461,7 +3462,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (wzone.Length > 0)
             wtab.Add(wzone);
-          wzone = string.Empty;
         }
       }
       return wtab;
@@ -3939,7 +3939,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       bool isperson = false;
       bool recentlyadded = false;
-      bool isageadded = false;
       if (IsPersonField(WStrSort))
       {
         isperson = true;
@@ -3956,18 +3955,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (WStrSort == "RecentlyAdded") // calculate recently added fields
         recentlyadded = true;
-      if (WStrSort == "AgeAdded" || WStrSort == "AgeAdded_Num")
-        isageadded = true;
-
 
       // Collect List of all attributes in w_tableau
-      LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group Names");
+      watch.Reset(); watch.Start();
       foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
         if (isdate) 
           champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
-        else if (isageadded) 
-          champselect = enr["AgeAdded"].ToString();
         else if (recentlyadded)
         {
           if (string.IsNullOrEmpty(enr["RecentlyAdded"].ToString()))
@@ -3983,23 +3977,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
           champselect = enr[WStrSort].ToString().Trim();
 
-        //ArrayList wtab = Search_String(champselect, isperson);
-        ArrayList wtab = Search_String(champselect);
+        ArrayList wtab = Search_String(champselect); //ArrayList wtab = Search_String(champselect, isperson);
         for (wi = 0; wi < wtab.Count; wi++)
         {
           w_tableau.Add(wtab[wi].ToString().Trim());
         }
       }
+      watch.Stop();
+      LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group Names Finished (" + (watch.ElapsedMilliseconds) + " ms)");
 
-      LogMyFilms.Debug("(GetSelectFromDivx) - Sort Group Names");
-      if (WStrSortSens == " ASC")
-        w_tableau.Sort(0, w_tableau.Count, null);
+      watch.Reset(); watch.Start();
+      if (IsSingleValueField(WStrSort))
+      {
+        if (WStrSortSens == " ASC")
+        {
+          IComparer myComparer = new AlphanumComparatorFast();
+          w_tableau.Sort(0, w_tableau.Count, myComparer);
+        }
+        else
+        {
+          IComparer myComparer = new AlphanumComparatorFast();
+          w_tableau.Sort(0, w_tableau.Count, myComparer);
+          w_tableau.Reverse();
+        }
+      }
       else
       {
-        IComparer myComparer = new myReverserClass();
-        w_tableau.Sort(0, w_tableau.Count, myComparer);
+        if (WStrSortSens == " ASC")
+          w_tableau.Sort(0, w_tableau.Count, null);
+        else
+        {
+          IComparer myComparer = new myReverserClass();
+          w_tableau.Sort(0, w_tableau.Count, myComparer);
+        }
       }
-      LogMyFilms.Debug("(GetSelectFromDivx) - Sorting Finished");
+      watch.Stop();
+      LogMyFilms.Debug("(GetSelectFromDivx) - Sorting Finished (" + (watch.ElapsedMilliseconds) + " ms)");
 
       if (MyFilms.conf.StrViews || MyFilms.conf.StrPersons) // Check if Thumbs directories exist or create them
       {
@@ -4055,8 +4068,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               GUIListItem item = new GUIListItem(); 
               //item.ItemId = number;
-              if (recentlyadded) item.Label = wchampselect.Substring(1); // remove numbers we use for sorting
-              else item.Label = wchampselect;
+              item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
               
               if (countItems)
               {
@@ -4092,8 +4104,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         GUIListItem item = new GUIListItem();
         //item.ItemId = number;
-        if (recentlyadded) item.Label = wchampselect.Substring(1); // remove numbers we use for sorting
-        else item.Label = wchampselect;
+        item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
         if (countItems)
         {
           int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
@@ -4545,6 +4556,101 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    //----------------------------------------------------------------------------------------------
+    //  Alphanumeric Sort
+    //----------------------------------------------------------------------------------------------
+    public class AlphanumComparatorFast : IComparer
+    {
+      public int Compare(object x, object y)
+      {
+        string s1 = x as string;
+        if (s1 == null)
+        {
+          return 0;
+        }
+        string s2 = y as string;
+        if (s2 == null)
+        {
+          return 0;
+        }
+
+        int len1 = s1.Length;
+        int len2 = s2.Length;
+        int marker1 = 0;
+        int marker2 = 0;
+
+        // Walk through two the strings with two markers.
+        while (marker1 < len1 && marker2 < len2)
+        {
+          char ch1 = s1[marker1];
+          char ch2 = s2[marker2];
+
+          // Some buffers we can build up characters in for each chunk.
+          char[] space1 = new char[len1];
+          int loc1 = 0;
+          char[] space2 = new char[len2];
+          int loc2 = 0;
+
+          // Walk through all following characters that are digits or
+          // characters in BOTH strings starting at the appropriate marker.
+          // Collect char arrays.
+          do
+          {
+            space1[loc1++] = ch1;
+            marker1++;
+
+            if (marker1 < len1)
+            {
+              ch1 = s1[marker1];
+            }
+            else
+            {
+              break;
+            }
+          } while (char.IsDigit(ch1) == char.IsDigit(space1[0]));
+
+          do
+          {
+            space2[loc2++] = ch2;
+            marker2++;
+
+            if (marker2 < len2)
+            {
+              ch2 = s2[marker2];
+            }
+            else
+            {
+              break;
+            }
+          } while (char.IsDigit(ch2) == char.IsDigit(space2[0]));
+
+          // If we have collected numbers, compare them numerically.
+          // Otherwise, if we have strings, compare them alphabetically.
+          string str1 = new string(space1);
+          string str2 = new string(space2);
+
+          int result;
+
+          if (char.IsDigit(space1[0]) && char.IsDigit(space2[0]))
+          {
+            int thisNumericChunk = int.Parse(str1);
+            int thatNumericChunk = int.Parse(str2);
+            result = thisNumericChunk.CompareTo(thatNumericChunk);
+          }
+          else
+          {
+            result = str1.CompareTo(str2);
+          }
+
+          if (result != 0)
+          {
+            return result;
+          }
+        }
+        return len1 - len2;
+      }
+    }
+
     private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
       LogMyFilms.Debug("Load_Config(): Start loading config '" + CurrentConfig + "'");
@@ -4769,7 +4875,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (conf.StrViewDfltItem == conf.StrViewText[i])
                   {
                     wStrViewDfltItem = conf.StrViewItem[i];
-                    SetLabelView("view" + i.ToString());
+                    SetLabelView("view" + i);
                     break;
                   }
                 }
@@ -4779,11 +4885,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.WStrSort = wStrViewDfltItem;
                 if (wStrViewDfltItem == "DateAdded")
                   conf.StrSelect = "Date" + " like '" + DateTime.Parse(conf.StrViewDfltText).ToShortDateString() + "'";
-                else if (wStrViewDfltItem == "AgeAdded_Num")
-                  conf.StrSelect = "AgeAdded" + " like '*" + conf.StrViewDfltText + "*'";
+                else if (IsSingleValueField(wStrViewDfltItem))
+                  conf.StrSelect = wStrViewDfltItem + " like '" + conf.StrViewDfltText + "'";
                 else
                   conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
-                //                            TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
+                // TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
                 conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
                 SetLabelSelect(conf.StrTxtSelect);
 
@@ -5051,7 +5157,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "storage":
           // Change View by "Storage":
           currentListLevel = Listlevel.Movie;
-          conf.StrSelect = "((" + conf.StrTitle1.ToString() + " not like '') and (" + conf.StrStorage.ToString() + " not like ''))";
+          conf.StrSelect = "((" + conf.StrTitle1 + " not like '') and (" + conf.StrStorage + " not like ''))";
           conf.StrTxtSelect = GUILocalizeStrings.Get(10798736);
           // TxtSelect.Label = conf.StrTxtSelect;
           MyFilmsDetail.clearGUIProperty("select");
@@ -5120,8 +5226,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
             if (conf.WStrSort == "DateAdded")
               conf.StrSelect = "Date";
-            else if (conf.WStrSort == "AgeAdded_Num")
-              conf.StrSelect = "AgeAdded";
             else
               conf.StrSelect = conf.WStrSort;
 
@@ -5141,8 +5245,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (conf.WStrSort == "DateAdded")
               getSelectFromDivx(conf.StrTitle1 + " not like ''", "Date", " DESC", listfilter, true, string.Empty);
-            else if (conf.WStrSort == "AgeAdded_Num")
-              getSelectFromDivx(conf.StrTitle1 + " not like ''", "AgeAdded", " ASC", listfilter, true, string.Empty);
             else
               getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, listfilter, true, string.Empty);
           }
@@ -5532,7 +5634,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dc.ColumnName != null && !string.IsNullOrEmpty(BaseMesFilms.Translate_Column(dc.ColumnName)))
             {
               if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "DateWatched"
-                && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer")
+                && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Length_Num")
               {
                 if (selection > 4) // title fields
                 {
@@ -5546,8 +5648,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if (MyFilms.conf.StrFileType != "0" || (dc.ColumnName != "DateAdded" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
                     && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags"
-                    && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"
-                    && dc.ColumnName != "AgeAdded_Num"))
+                    && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"))
                   {
                     dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
                     choiceGlobalMappings.Add(dc.ColumnName);

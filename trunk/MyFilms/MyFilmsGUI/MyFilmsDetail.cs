@@ -5916,13 +5916,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             setGUIProperty("db.length.value", wstring);
                             MyFilms.currentMovie.Length = (int)MyFilms.r[ItemId]["Length_Num"];
                             break;
-                        case "ageadded":
-                        case "ageadded_num":
-                            if (wrep)
-                              if (MyFilms.r[ItemId]["AgeAdded"].ToString().Length > 0)
-                                wstring = MyFilms.r[ItemId]["AgeAdded"].ToString();
-                            setGUIProperty("db.ageadded.value", wstring);
-                            break;
                         case "actors":
                             if (wrep)
                                 if (MyFilms.r[ItemId]["Actors"].ToString().Length > 0)
