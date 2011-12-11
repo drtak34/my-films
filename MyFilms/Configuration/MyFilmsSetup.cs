@@ -219,7 +219,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntSTitle.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && 
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded") // added "DatedAdded" to remove filter
+                  dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
                 {
                   AntFilterItem1.Items.Add(dc.ColumnName);
                   AntFilterItem2.Items.Add(dc.ColumnName);
@@ -229,7 +229,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem4.Items.Add(dc.ColumnName);
                   AntItem5.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded_Num")
+                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded")
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
@@ -240,7 +240,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" &&
                     dc.ColumnName != "Rating" && dc.ColumnName != "Size" && dc.ColumnName != "Picture" &&
                     dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded" && 
-                    dc.ColumnName != "AgeAdded_Num" && dc.ColumnName != "AgeAdded")
+                    dc.ColumnName != "AgeAdded")
                 {
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
@@ -248,7 +248,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "TranslatedTitle" &&
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" &&
-                    dc.ColumnName != "Length_Num" && dc.ColumnName != "Number" && dc.ColumnName != "AgeAdded_Num")
+                    dc.ColumnName != "Length_Num" && dc.ColumnName != "Number")
                 {
                   AntViewItem1.Items.Add(dc.ColumnName);
                   AntViewItem2.Items.Add(dc.ColumnName);
@@ -258,7 +258,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
                   && dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Picture" && dc.ColumnName != "DateAdded" &&
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded_Num" && dc.ColumnName != "AgeAdded")
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded")
                 {
                   AntSearchItem1.Items.Add(dc.ColumnName);
                   AntSearchItem2.Items.Add(dc.ColumnName);
@@ -273,7 +273,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntSort2.Items.Add(dc.ColumnName);
                   AntIdentItem.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded_Num" && dc.ColumnName != "AgeAdded")
+                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded")
                 {
                   AntUpdItem1.Items.Add(dc.ColumnName);
                   AntUpdItem2.Items.Add(dc.ColumnName);
@@ -284,7 +284,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               }
               else // Fields not supported by AMC - (dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")
               {
-                if (CatalogType.SelectedIndex == 10 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification"))
+                if (CatalogType.SelectedIndex == 10 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification" || dc.ColumnName == "Edition" || dc.ColumnName == "Studio"))
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
