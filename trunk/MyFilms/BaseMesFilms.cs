@@ -97,9 +97,9 @@ namespace MyFilmsPlugin.MyFilms
               using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
               {
                 LogMyFilms.Debug("initData()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-                //foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+                foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
                 data.ReadXml(fs);
-                //foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+                foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
                 fs.Close();
                 LogMyFilms.Debug("initData()- closing  '" + catalogfile + "' FileStream");
               }
@@ -213,12 +213,12 @@ namespace MyFilmsPlugin.MyFilms
         }
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
+          bool iscached = false;
           LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
           watchReadMovies.Reset(); watchReadMovies.Start();
-          if (data == null) 
+          if (data == null)
             initData();
-          else 
-            LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
+          else iscached = true;
           if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
 
           movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
@@ -229,7 +229,7 @@ namespace MyFilmsPlugin.MyFilms
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
           watchReadMovies.Stop();
-          LogMyFilms.Debug("ReadDataMovies() - Finished ... (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("ReadDataMovies() - Finished ... cached = '" + iscached + "' (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
 
           return movies;
 
@@ -389,9 +389,9 @@ namespace MyFilmsPlugin.MyFilms
             using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("LoadMyFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-              //foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+              foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
               data.ReadXml(fs);
-              //foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+              foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
               fs.Close();
               LogMyFilms.Debug("LoadMyFilms()- closing  '" + catalogfile + "' FileStream");
             }

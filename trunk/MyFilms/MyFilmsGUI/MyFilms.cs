@@ -1691,15 +1691,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //---------------------------------------------------------------------------------------
           // Mouse/Keyboard Clicked
           //---------------------------------------------------------------------------------------
-          LogMyFilms.Debug("GUI_MSG_CLICKED recognized !");
-          if ((iControl == (int)Controls.CTRL_BtnSrtBy) && (conf.Boolselect))
-            // No change sort method and no searchs during select
-            return true;
+          // LogMyFilms.Debug("GUI_MSG_CLICKED recognized !");
           if ((iControl == (int)Controls.CTRL_BtnSearchT) && (conf.Boolselect))
             conf.Boolselect = false;
           if (iControl == (int)Controls.CTRL_BtnSearchT)
             // Search dialog search
             Change_Search_Options();
+          if ((iControl == (int)Controls.CTRL_BtnSrtBy) && (conf.Boolselect))
+          {
+            // No change of normal sort method and no searchs during select (views, e.g. country, year, etc.) - change count sorting instead ...
+            conf.BoolSortCountinViews = !conf.BoolSortCountinViews;
+
+            if (IsPersonField(conf.WStrSort))
+            {
+              if (conf.WStrSort == "ACTORS" && !string.IsNullOrEmpty(conf.StrActors)) // Specialhandling for Actors search view
+              {
+                conf.StrSelect = "Actors like '*" + conf.StrActors + "*'";
+                getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
+              }
+              else if (!string.IsNullOrEmpty(conf.StrSelectViews))
+              {
+                // conf.StrSelect = conf.StrSelectViews;
+                getSelectFromDivx(conf.StrSelectViews, conf.WStrSort, conf.WStrSortSens, "*", true, "");
+              }
+              else getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, "");
+            }
+            else
+            {
+              if (conf.WStrSort == "DateAdded")
+                getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "Date", " DESC", "*", true, "");
+              else
+                getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+            }
+            return true;
+          }
           if (iControl == (int)Controls.CTRL_BtnSrtBy)
           // Choice of Sort Method - depending of if it is a Collection or normal filmlist (BoolCollection)
           {
@@ -2962,31 +2987,53 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     void SortChanged(object sender, SortEventArgs e)
     {
-      if (conf.BoolCollection)
+      if (conf.Boolselect) //in Views / Groupviews
       {
-        if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInHierarchies.Trim().Substring(0, 3).ToLower())
-          return;
-
-        if (BtnSrtBy.IsAscending)
-          conf.StrSortSensInHierarchies = " ASC";
+        if (conf.BoolSortCountinViews)
+        {
+          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInViews.Trim().Substring(0, 3).ToLower())
+            return;
+          if (BtnSrtBy.IsAscending)
+            conf.StrSortSensInViews = " ASC";
+          else
+            conf.StrSortSensInViews = " DESC";
+        }
         else
-          conf.StrSortSensInHierarchies = " DESC";
+        {
+          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.WStrSortSens.Trim().Substring(0, 3).ToLower())
+            return;
+          if (BtnSrtBy.IsAscending)
+            conf.WStrSortSens = " ASC";
+          else
+            conf.WStrSortSens = " DESC";
+        }
       }
       else
       {
-        if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
-          return;
+        if (conf.BoolCollection) // film groups/collections
+        {
+          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInHierarchies.Trim().Substring(0, 3).ToLower())
+            return;
 
-        if (BtnSrtBy.IsAscending)
-          conf.StrSortSens = " ASC";
+          if (BtnSrtBy.IsAscending)
+            conf.StrSortSensInHierarchies = " ASC";
+          else
+            conf.StrSortSensInHierarchies = " DESC";
+        }
         else
-          conf.StrSortSens = " DESC";
+        {
+          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
+            return;
+
+          if (BtnSrtBy.IsAscending)
+            conf.StrSortSens = " ASC";
+          else
+            conf.StrSortSens = " DESC";
+        }
       }
 
-      if (!conf.Boolselect)
-        GetFilmList();
-      else
-        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, true, "");
+      if (!conf.Boolselect) GetFilmList();
+      else getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
       return;
     }
 
@@ -3401,6 +3448,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (age <= 365) return "5" + GUILocalizeStrings.Get(10798966); //last year
       if (age <= 3 * 365) return "6" + GUILocalizeStrings.Get(10798967); //last 3 years
       return "7" + GUILocalizeStrings.Get(10798968); //older than 3 years
+    }
+
+    private static int GetValueRange(int iValue)
+    {
+      if (iValue == 0) return 0;
+      if (iValue <= 1) return 1;
+      if (iValue <= 5) return 5;
+      if (iValue <= 10) return 10;
+      if (iValue <= 20) return 20;
+      if (iValue <= 50) return 50;
+      if (iValue <= 100) return 100;
+      if (iValue <= 200) return 200;
+      if (iValue <= 500) return 500;
+      if (iValue <= 1000) return 1000;
+      if (iValue <= 2000) return 2000;
+      if (iValue <= 5000) return 5000;
+      if (iValue <= 10000) return 10000;
+      if (iValue <= 20000) return 20000;
+      return iValue;
     }
 
     private static bool IsSingleValueField(string fieldname)
@@ -3906,7 +3972,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public void getSelectFromDivx(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
     {
-      //GUIListItem item = new GUIListItem();
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
       string champselect = "";
@@ -3914,31 +3979,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       ArrayList w_tableau = new ArrayList();
       List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
       int Wnb_enr = 0;
+      DateTime now = DateTime.Now;
 
       conf.Wstar = NewWstar;
-      BtnSrtBy.Label = GUILocalizeStrings.Get(103);
+
+      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
+      BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.StrSortSensInViews == " ASC") : (WStrSortSens == " ASC");
+
       conf.Boolselect = true;
       conf.Wselectedlabel = "";
-      if (ClearIndex)
-        conf.StrIndex = 0;
-      if (conf.UseListViewForGoups)
-        Change_LayOut(0);
-      else
-        Change_LayOut(MyFilms.conf.StrLayOut);
+      if (ClearIndex) conf.StrIndex = 0;
+      if (conf.UseListViewForGoups) Change_LayOut(0);
+      else Change_LayOut(MyFilms.conf.StrLayOut);
       facadeView.Clear();
-      //GUIControl.ClearControl(GetID, facadeView.GetID); // taken from OV
       int wi = 0;
 
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString          : '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect                  : '" + WstrSelect + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort                    : '" + WStrSort + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString : '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect : '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect         : '" + WstrSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort           : '" + WStrSort + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSortSens       : '" + WStrSortSens + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar           : '" + NewWstar + "'");
 
       bool isperson = false;
-      bool recentlyadded = false;
       if (IsPersonField(WStrSort))
       {
         isperson = true;
@@ -3949,12 +4013,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         isperson = false;
         currentListLevel = Listlevel.Group;
       }
-      bool isdate = false;
-      if (WStrSort == "Date" || WStrSort == "DateAdded")
-        isdate = true;
-
-      if (WStrSort == "RecentlyAdded") // calculate recently added fields
-        recentlyadded = true;
+      bool isdate = (WStrSort == "Date" || WStrSort == "DateAdded") ? true : false;
+      bool recentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
 
       // Collect List of all attributes in w_tableau
       watch.Reset(); watch.Start();
@@ -3969,7 +4029,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int age = -1;
             DateTime dateAdded;
             if (DateTime.TryParse(string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]), out dateAdded))
-              age = (int)DateTime.Now.Subtract(dateAdded).TotalDays;
+              age = (int)now.Subtract(dateAdded).TotalDays;
             enr["RecentlyAdded"] = GetDayRange(age);
           }
           champselect = enr["RecentlyAdded"].ToString();
@@ -3983,8 +4043,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           w_tableau.Add(wtab[wi].ToString().Trim());
         }
       }
-      watch.Stop();
-      LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group Names Finished (" + (watch.ElapsedMilliseconds) + " ms)");
+      watch.Stop(); 
+      LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group (sub)Names Finished (" + (watch.ElapsedMilliseconds) + " ms)");
 
       watch.Reset(); watch.Start();
       if (IsSingleValueField(WStrSort))
@@ -4011,47 +4071,84 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           w_tableau.Sort(0, w_tableau.Count, myComparer);
         }
       }
-      watch.Stop();
-      LogMyFilms.Debug("(GetSelectFromDivx) - Sorting Finished (" + (watch.ElapsedMilliseconds) + " ms)");
+      watch.Stop(); 
+      LogMyFilms.Debug("(GetSelectFromDivx) - Base Sorting Finished (" + (watch.ElapsedMilliseconds) + " ms)");
+
+      if (conf.BoolSortCountinViews) // if sorting by counts is selected ... do it...
+      {
+        watch.Reset(); watch.Start();
+        int itemcount = 0;
+        string currentitem = "";
+        string item = "";
+        var list = new List<KeyValuePair<string, int>>();
+        for (wi = 0; wi != w_tableau.Count; wi++)
+        {
+          item = w_tableau[wi].ToString();
+          if (string.Compare(currentitem, item, true) == 0) // Are the strings equal? Then add count!
+            itemcount++;
+          else
+          {
+            if (itemcount > 0 && item.Length > 0)
+            {
+              for (int i = (wi - itemcount); i != wi; i++)
+              {
+                list.Add(new KeyValuePair<string, int>(currentitem, itemcount));
+              }
+            }
+            //LogMyFilms.Debug("(GetSelectFromDivx) - Counting item: '" + currentitem.ToString() + "', Count = '" + itemcount + "'");
+            itemcount = 1;
+            currentitem = w_tableau[wi].ToString();
+          }
+        }
+        if (itemcount > 0 && item.Length > 0)
+        {
+          for (int i = (wi - itemcount); i != wi; i++)
+          {
+            list.Add(new KeyValuePair<string, int>(currentitem, itemcount));
+          }
+        }
+        watch.Stop();
+        LogMyFilms.Debug("(GetSelectFromDivx) - Collectiong Countlist Finished (" + (watch.ElapsedMilliseconds) + " ms)");
+
+        watch.Reset(); watch.Start();
+        if (conf.StrSortSensInViews == " ASC") list.Sort(CompareCount);
+        else list.Sort(CompareCountDescending);
+        watch.Stop();
+        LogMyFilms.Debug("(GetSelectFromDivx) - Sorting reverse by ocurrencies Finished (" + (watch.ElapsedMilliseconds) + " ms)");
+
+        watch.Reset(); watch.Start();
+        for (wi = 0; wi != w_tableau.Count; wi++)
+        {
+          w_tableau[wi] = list[wi].Key;
+        }
+        watch.Stop();
+        LogMyFilms.Debug("(GetSelectFromDivx) - Copy back to display array Finished (" + (watch.ElapsedMilliseconds) + " ms)");
+      }
 
       if (MyFilms.conf.StrViews || MyFilms.conf.StrPersons) // Check if Thumbs directories exist or create them
       {
-        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
-          System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
-        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons"))
-          System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
+        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
       }
 
-      // setting up thumbs directory configuration
-      string strThumbDirectory;
-      // string[] strActiveFacadeImages; // image pathes for Icon and Thumb -> moved usage to background thread
-      if (isperson)
-        strThumbDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons);
-      else
-        strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + WStrSort.ToLower() + @"\";
+      // setting up thumbs directory configuration // string[] strActiveFacadeImages; // image pathes for Icon and Thumb -> moved usage to background thread
+      string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons) : MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsGroups) + WStrSort.ToLower() + @"\";
+      
       bool getThumbs = false;
-      if (MyFilms.conf.StrViews && (MyFilms.conf.StrViewsDfltAll || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country"))))
+      if ((MyFilms.conf.StrPersons && isperson) || (MyFilms.conf.StrViews && (MyFilms.conf.StrViewsDfltAll || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country")))))
         getThumbs = true;
-      if (MyFilms.conf.StrPersons && isperson)
-        getThumbs = true;
-      bool createFanartDir = false;
-      if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
-        createFanartDir = true;
+      bool createFanartDir = (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") ? true : false;
       if (!System.IO.Directory.Exists(strThumbDirectory)) // Check groupview thumbs cache directories and create them
-        try { System.IO.Directory.CreateDirectory(strThumbDirectory); }
-        catch (Exception) { }
+        try { System.IO.Directory.CreateDirectory(strThumbDirectory); } catch (Exception) { }
       if (!System.IO.Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check groupview thumbs (sub)directories and create them
-        try { System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); }
-        catch (Exception) { }
-
-      if (isperson) // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
-        {AsynUpdateActors(w_tableau);}
+        try { System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); } catch (Exception) { }
+      if (isperson) { AsynUpdateActors(w_tableau); } // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
 
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
       DataRow[] rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, "", WStrSort, WStrSortSens);
-      bool countItems = false;
-      if (isperson && !WstrSelect.Contains("not like") && !string.IsNullOrEmpty(WstrSelect) && !WstrSelect.Contains("**")) // extensive counts only for conditional lists, otherwise takes too much time!
-        countItems = true;
+      bool countItems = (isperson && !WstrSelect.Contains("not like") && !string.IsNullOrEmpty(WstrSelect) && !WstrSelect.Contains("**")) ? true : false; // extensive counts only for conditional lists, otherwise takes too much time!
+
+      watch.Reset(); watch.Start();
       for (wi = 0; wi != w_tableau.Count; wi++)
       {
         champselect = w_tableau[wi].ToString();
@@ -4061,8 +4158,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          // if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
-          if (conf.Wstar == "*" || ListConditionTrue(champselect, conf.Wstar))
+          if (conf.Wstar == "*" || ListConditionTrue(champselect, conf.Wstar)) // if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
           {
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
             {
@@ -4082,17 +4178,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //item.DVDLabel = WStrSort.ToLower();
               //MediaPortal.Util.Utils.SetDefaultIcons(item);
               item.Path = WStrSort.ToLower();
-
-              if (isperson) 
-                item.TVTag = "person";
-              else 
-                item.TVTag = "group";
+              item.TVTag = (isperson) ? "person" : "group";
               item.IsFolder = true;
               facadeDownloadItems.Add(item); // offload artwork loading in background thread - first collect items in list!
               item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
               facadeView.Add(item);
-              if (SelItem != "" && item.Label == SelItem)
-                conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
+              if (SelItem != "" && item.Label == SelItem) conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
             }
             Wnb_enr = 1;
             wchampselect = champselect;
@@ -4118,25 +4209,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.Path = WStrSort.ToLower();
         //item.ItemId = number; // Only used in GetFilmList
 
-        if (isperson)
-          item.TVTag = "person";
-        else
-          item.TVTag = "group";
+        item.TVTag = (isperson) ? "person" : "group";
         item.IsFolder = true;
         facadeDownloadItems.Add(item); // offload artwork loading in background thread - first collect items in list!
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         facadeView.Add(item);
-        if (SelItem != "" && item.Label == SelItem)
-          conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
+        if (SelItem != "" && item.Label == SelItem) conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
         Wnb_enr = 0;
       }
       //item.FreeMemory();
-      LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Finished");
+      watch.Stop();
+      LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Finished (" + (watch.ElapsedMilliseconds) + " ms)");
 
-      if (string.IsNullOrEmpty(conf.StrSelectViews))
-        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
-      else
-        conf.StrTxtSelect = "[" + conf.StrSelectViews.Substring(conf.StrSelectViews.IndexOf("'")).Trim(new Char[] { '\'', '*' }) + "]";
+      conf.StrTxtSelect = (string.IsNullOrEmpty(conf.StrSelectViews)) ? conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) : conf.StrTxtSelect = "[" + conf.StrSelectViews.Substring(conf.StrSelectViews.IndexOf("'")).Trim(new Char[] { '\'', '*' }) + "]";  // "Selection"
       if (conf.Wstar != "*" && !string.IsNullOrEmpty(conf.Wstar)) 
         conf.StrTxtSelect += " " + GUILocalizeStrings.Get(1079896) + " [*" + conf.Wstar + "*]"; // add to "Selection": Persons with Filter
       MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
@@ -4147,17 +4232,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if ((conf.StrIndex > facadeView.Count - 1) || (conf.StrIndex < 0)) //check index within bounds, will be unless xml file heavily edited
         conf.StrIndex = 0;
 
-      // Call this async after facade is loaded - WIP
-      //if (getThumbs) this.LoadFacadeImages(WStrSort, strThumbDirectory, isperson);
       if (getThumbs)
       {
         // load first image syncronously, as asyncloading might cause flicker or even let it disappear
         string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeView[conf.StrIndex].Label, strThumbDirectory, isperson);
         string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-        facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0].ToString();
-        facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1].ToString();
-        facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0].ToString();
-
+        facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
+        facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1];
+        facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0];
         // load the rest of images asynchronously!
         this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
       }
@@ -4189,7 +4271,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
       GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
       this.SetDummyControlsForFacade(currentListLevel);
-      //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
     }
 
@@ -4554,6 +4635,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         return ((new CaseInsensitiveComparer()).Compare(y, x));
       }
+    }
+
+    static int CompareCount(KeyValuePair<string, int> a, KeyValuePair<string, int> b)
+    {
+      //if (a.Value == b.Value) return (a.Key.CompareTo(b.Key));
+      return (a.Value.CompareTo(b.Value));
+    }
+
+    static int CompareCountDescending(KeyValuePair<string, int> a, KeyValuePair<string, int> b)
+    {
+      if (b.Value == a.Value) return (a.Key.CompareTo(b.Key)); // alphabetical here ...
+      return (b.Value.CompareTo(a.Value));
     }
 
     //----------------------------------------------------------------------------------------------
