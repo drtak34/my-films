@@ -2070,7 +2070,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = conf.Wselectedlabel;
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           conf.StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-        else if (IsSingleValueField(conf.WStrSort))
+        else if (IsAlphaNumericalField(conf.WStrSort))
           conf.StrSelect = conf.WStrSort + " like '" + sLabel.Replace("'", "''") + "'";
         else
         {
@@ -2521,7 +2521,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = facadeView.SelectedListItem.Label;
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-        else if (IsSingleValueField(conf.WStrSort))
+        else if (IsAlphaNumericalField(conf.WStrSort))
           StrSelect = conf.WStrSort + " like '" + sLabel.Replace("'", "''") + "'";
         else
         {
@@ -3475,7 +3475,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return iValue;
     }
 
-    private static bool IsSingleValueField(string fieldname)
+    private static bool IsAlphaNumericalField(string fieldname)
     {
       if (fieldname == "Length_Num" || fieldname == "Length" || fieldname == "AgeAdded" || fieldname == "Size" ||
         fieldname == "AudioBitrate" || fieldname == "VideoBitrate")
@@ -3978,82 +3978,77 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public void getSelectFromDivx(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
     {
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString : '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect : '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect         : '" + WstrSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort           : '" + WStrSort + "', WStrSortSens : '" + WStrSortSens + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar           : '" + NewWstar + "', ClearIndex: '" + ClearIndex + "', SelItem: '" + SelItem + "'");
+
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
       string champselect = "";
       string wchampselect = "";
       ArrayList w_tableau = new ArrayList();
       List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
-      int Wnb_enr = 0;
+      bool isperson = (IsPersonField(WStrSort)) ? true : false;
+      bool isdate = (WStrSort == "Date" || WStrSort == "DateAdded") ? true : false;
+      bool isalphanumeriacalfield = IsAlphaNumericalField(WStrSort) ? true : false;
+      bool recentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
       DateTime now = DateTime.Now;
-
-      conf.Wstar = NewWstar;
 
       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.StrSortSensInViews == " ASC") : (WStrSortSens == " ASC");
+      currentListLevel = (isperson) ? Listlevel.Person : Listlevel.Group;
+      this.SetDummyControlsForFacade(currentListLevel);
 
+      conf.Wstar = NewWstar;
       conf.Boolselect = true;
       conf.Wselectedlabel = "";
       if (ClearIndex) conf.StrIndex = 0;
       if (conf.UseListViewForGoups) Change_LayOut(0);
       else Change_LayOut(MyFilms.conf.StrLayOut);
-      facadeView.Clear();
-      int wi = 0;
-
-      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString : '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect : '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect         : '" + WstrSelect + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort           : '" + WStrSort + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSortSens       : '" + WStrSortSens + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar           : '" + NewWstar + "'");
-
-      bool isperson = false;
-      if (IsPersonField(WStrSort))
-      {
-        isperson = true;
-        currentListLevel = Listlevel.Person;
-      }
-      else
-      {
-        isperson = false;
-        currentListLevel = Listlevel.Group;
-      }
-      bool isdate = (WStrSort == "Date" || WStrSort == "DateAdded") ? true : false;
-      bool recentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
 
       // Collect List of all attributes in w_tableau
+      facadeView.Clear();
+      int Wnb_enr = 0;
+      int wi = 0;
+      DateTime dateAdded;
+      int iNumber = -1;
       watch.Reset(); watch.Start();
       foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
-        if (isdate) 
-          champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+        if (isdate) champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
         else if (recentlyadded)
         {
           if (string.IsNullOrEmpty(enr["RecentlyAdded"].ToString()))
           {
-            int age = -1;
-            DateTime dateAdded;
+            iNumber = -1;
             if (DateTime.TryParse(string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]), out dateAdded))
-              age = (int)now.Subtract(dateAdded).TotalDays;
-            enr["RecentlyAdded"] = GetDayRange(age);
+              iNumber = (int)now.Subtract(dateAdded).TotalDays;
+            enr["RecentlyAdded"] = GetDayRange(iNumber);
           }
           champselect = enr["RecentlyAdded"].ToString();
         }
+        //else if (conf.BoolShowValueRanges && isalphanumeriacalfield) (( bool to be added in config, also needs change to facade population to support "ranges" on selection
+        //{
+        //  champselect = (int.TryParse(enr[WStrSort].ToString().Trim(), out iNumber)) ? GetValueRange(iNumber).ToString() : enr[WStrSort].ToString().Trim();
+        //  enr["TempView"] = champselect;
+        //}
         else
           champselect = enr[WStrSort].ToString().Trim();
 
         ArrayList wtab = Search_String(champselect); //ArrayList wtab = Search_String(champselect, isperson);
         for (wi = 0; wi < wtab.Count; wi++)
         {
-          w_tableau.Add(wtab[wi].ToString().Trim());
+          w_tableau.Add(wtab[wi]);
         }
       }
       watch.Stop(); 
       LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group (sub)Names Finished (" + (watch.ElapsedMilliseconds) + " ms)");
 
       watch.Reset(); watch.Start();
-      if (IsSingleValueField(WStrSort))
+      if (isalphanumeriacalfield)
       {
         if (WStrSortSens == " ASC")
         {
@@ -4249,15 +4244,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // load the rest of images asynchronously!
         this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
       }
-      
+
       if (facadeView.Count == 0)
       {
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
         DisplayAllMovies();
         GetFilmList();
-        GUIControl.ShowControl(GetID, 34);
-        SetLabelSelect("root");
-        SetLabelView("all");
+        GUIControl.ShowControl(GetID, 34); SetLabelSelect("root"); SetLabelView("all");
       }
       else
       {
@@ -4266,17 +4259,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
           MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
-        // else
-        //   MyFilmsDetail.Load_Detailed_DB(0, false);
-
-        // Disabled because replaced by SpeedLoader
-        // ImgLstFilm.SetFileName("#myfilms.picture");
-        // ImgLstGroup.SetFileName("#myfilms.picture");
+        // else MyFilmsDetail.Load_Detailed_DB(0, false);
         // this.Load_Rating(0); // old method - nor more used
       }
       MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
       GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
-      this.SetDummyControlsForFacade(currentListLevel);
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
     }
 
@@ -4984,7 +4971,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.WStrSort = wStrViewDfltItem;
                 if (wStrViewDfltItem == "DateAdded")
                   conf.StrSelect = "Date" + " like '" + DateTime.Parse(conf.StrViewDfltText).ToShortDateString() + "'";
-                else if (IsSingleValueField(wStrViewDfltItem))
+                else if (IsAlphaNumericalField(wStrViewDfltItem))
                   conf.StrSelect = wStrViewDfltItem + " like '" + conf.StrViewDfltText + "'";
                 else
                   conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";

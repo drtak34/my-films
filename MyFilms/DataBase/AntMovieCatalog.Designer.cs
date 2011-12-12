@@ -3383,6 +3383,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIsOnlineTrailer;
             
+            private global::System.Data.DataColumn columnTempView;
+            
             private global::System.Data.DataColumn columnAspectratio;
             
             private global::System.Data.DataColumn columnCategoryTrakt;
@@ -3817,6 +3819,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TempViewColumn {
+                get {
+                    return this.columnTempView;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn AspectratioColumn {
                 get {
                     return this.columnAspectratio;
@@ -3935,6 +3944,7 @@ namespace MyFilmsPlugin.DataBase {
                         string IMDB_Rank, 
                         string IsOnline, 
                         string IsOnlineTrailer, 
+                        string TempView, 
                         string Aspectratio, 
                         string CategoryTrakt, 
                         string LastPosition, 
@@ -3997,6 +4007,7 @@ namespace MyFilmsPlugin.DataBase {
                         IMDB_Rank,
                         IsOnline,
                         IsOnlineTrailer,
+                        TempView,
                         Aspectratio,
                         CategoryTrakt,
                         LastPosition,
@@ -4064,6 +4075,7 @@ namespace MyFilmsPlugin.DataBase {
                         string IMDB_Rank, 
                         string IsOnline, 
                         string IsOnlineTrailer, 
+                        string TempView, 
                         string Aspectratio, 
                         string CategoryTrakt, 
                         string LastPosition, 
@@ -4125,6 +4137,7 @@ namespace MyFilmsPlugin.DataBase {
                         IMDB_Rank,
                         IsOnline,
                         IsOnlineTrailer,
+                        TempView,
                         Aspectratio,
                         CategoryTrakt,
                         LastPosition,
@@ -4207,6 +4220,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIMDB_Rank = base.Columns["IMDB_Rank"];
                 this.columnIsOnline = base.Columns["IsOnline"];
                 this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
+                this.columnTempView = base.Columns["TempView"];
                 this.columnAspectratio = base.Columns["Aspectratio"];
                 this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
                 this.columnLastPosition = base.Columns["LastPosition"];
@@ -4326,6 +4340,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnIsOnline);
                 this.columnIsOnlineTrailer = new global::System.Data.DataColumn("IsOnlineTrailer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsOnlineTrailer);
+                this.columnTempView = new global::System.Data.DataColumn("TempView", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTempView);
                 this.columnAspectratio = new global::System.Data.DataColumn("Aspectratio", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAspectratio);
                 this.columnCategoryTrakt = new global::System.Data.DataColumn("CategoryTrakt", typeof(string), null, global::System.Data.MappingType.Element);
@@ -7776,6 +7792,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TempView {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.TempViewColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte TempView in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.TempViewColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Aspectratio {
                 get {
                     try {
@@ -8398,6 +8429,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetIsOnlineTrailerNull() {
                 this[this.tableMovie.IsOnlineTrailerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTempViewNull() {
+                return this.IsNull(this.tableMovie.TempViewColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTempViewNull() {
+                this[this.tableMovie.TempViewColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
