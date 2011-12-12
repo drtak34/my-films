@@ -2138,6 +2138,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       }
 
+      //IComparer ics = new AlphanumComparatorFast();
+      //if (conf.StrSortSens.Contains("ASC"))
+      //  r.ToList().Sort((a, b) => ics.Compare(a[conf.StrSorta], b[conf.StrSorta]));
+      //else
+      //  r.ToList().Sort((a, b) => ics.Compare(b[conf.StrSorta], a[conf.StrSorta]));
+
       int iCnt = 0;
       int DelimCnt = 0, DelimCnt2;
       GUIListItem item = new GUIListItem();
@@ -2178,7 +2184,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool isdate = false;
       if (conf.WStrSort == "Date" || conf.WStrSort == "DateAdded") isdate = true;
       // Check and create Group thumb folder ...
-      if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+      if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) 
         System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
 
