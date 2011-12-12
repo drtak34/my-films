@@ -520,6 +520,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (StrSortSensInHierarchies == "" || StrSortSensInHierarchies == "ASC") StrSortSensInHierarchies = " ASC";
             if (StrSortSensInHierarchies == "DESC") StrSortSensInHierarchies = " DESC";
 
+            if (StrSortSensInViews == "" || StrSortSensInViews == "DESC") StrSortSensInViews = " DESC";
+            if (StrSortSensInViews == "ASC") StrSortSensInViews = " ASC";
+
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
                 {
@@ -867,6 +870,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strSortaInHierarchies; }
           set { strSortaInHierarchies = value; }
         }
+        private bool boolSortCountinViews = false;
+        public bool BoolSortCountinViews
+        {
+          get { return boolSortCountinViews; }
+          set { boolSortCountinViews = value; }
+        }
         private string strActors = string.Empty;
         public string StrActors
         {
@@ -1134,11 +1143,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strSortSens; }
           set { strSortSens = value; }
         }
-        private string strSortSensInHierarchies = string.Empty; //InHierarchies
+        private string strSortSensInHierarchies = string.Empty; //In Hierarchies
         public string StrSortSensInHierarchies
         {
           get { return strSortSensInHierarchies; }
           set { strSortSensInHierarchies = value; }
+        }
+        private string strSortSensInViews = string.Empty; //In Views
+        public string StrSortSensInViews
+        {
+          get { return strSortSensInViews; }
+          set { strSortSensInViews = value; }
         }
         private string wStrSort = string.Empty;
         public string WStrSort

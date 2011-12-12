@@ -5911,10 +5911,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         case "length":
                         case "length_num":
                             if (wrep)
+                            {
+                              int length = 0;
                               if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
                                 wstring = MyFilms.r[ItemId]["Length"].ToString();
-                            setGUIProperty("db.length.value", wstring);
-                            MyFilms.currentMovie.Length = (int)MyFilms.r[ItemId]["Length_Num"];
+                              setGUIProperty("db.length.value", wstring);
+                              bool success = int.TryParse(MyFilms.r[ItemId]["Length_Num"].ToString(), out length);
+                              MyFilms.currentMovie.Length = (success) ? length : 0;
+                            }
+                            else
+                            {
+                              clearGUIProperty("db.length.value");
+                            }
                             break;
                         case "actors":
                             if (wrep)

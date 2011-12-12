@@ -101,7 +101,7 @@ namespace MyFilmsPlugin.MyFilms
             langPath = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
             thumbsPath = Config.GetFolder(Config.Dir.Thumbs);
             thumbsPathViews = Config.GetFolder(Config.Dir.Thumbs);
-            thumbsPathGroups = Config.GetFolder(Config.Dir.Thumbs);
+            thumbsPathGroups = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
             thumbsPathPersons = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             skinPath = Config.GetFolder(Config.Dir.Skin);
             initFolders();
