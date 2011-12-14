@@ -350,6 +350,7 @@
 					<onright>10000</onright>
 					<onup>105</onup>
 					<ondown>102</ondown>
+					<visible>plugin.isenabled(MP-TV Series)</visible>
 				</control>
 			<!-- End - Additional Buttons for Links to other Plugins -->
 			</control>
