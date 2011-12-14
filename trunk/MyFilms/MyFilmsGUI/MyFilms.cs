@@ -3918,10 +3918,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         // load first image syncronously, as asyncloading might cause flicker or even let it disappear
         string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeView[conf.StrIndex].Label, strThumbDirectory, isperson);
-        string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-        facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0].ToString();
-        facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1].ToString();
-        facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0].ToString();
+        // string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+        facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
+        facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1];
+        facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0];
 
         // load the rest of images asynchronously!
         this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir, true);
@@ -3941,15 +3941,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Fanartstatus(true);
         GUIControl.ShowControl(GetID, 34);
 
-        if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
-          MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
+        //if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
+        //  MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
         // else
         //   MyFilmsDetail.Load_Detailed_DB(0, false);
 
-        // Disabled because replaced by SpeedLoader
-        // ImgLstFilm.SetFileName("#myfilms.picture");
-        // ImgLstGroup.SetFileName("#myfilms.picture");
-        // this.Load_Rating(0); // old method - nor more used
       }
       MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
       GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
@@ -4316,10 +4312,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //  item.IconImage = texture;
               //  item.IconImageBig = texture;
               //}
-              
-              item.ThumbnailImage = strActiveFacadeImages[0].ToString();
-              item.IconImage = strActiveFacadeImages[1].ToString();
-              item.IconImageBig = strActiveFacadeImages[0].ToString();
+              item.ThumbnailImage = strActiveFacadeImages[0];
+              item.IconImage = strActiveFacadeImages[1];
+              item.IconImageBig = strActiveFacadeImages[0];
 
               // if selected force an update of thumbnail
               //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
@@ -4457,6 +4452,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               default:
                 break;
             }
+
+          if (strThumbSource == string.Empty)
+          {
+            strThumbSource = MyFilmsDetail.CreateOrUpdateActor(itemlabel);
+          }
+
           if (strThumbSource != string.Empty)
           {
             //Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
@@ -6402,12 +6403,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Artistcontext
-      if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && (conf.WStrSort.ToLower().Contains("actor") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("producer") || conf.WStrSort.ToLower().Contains("writer")))
+      if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && IsPersonField(conf.WStrSort))
       {
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
         {
-          dlg.Add(GUILocalizeStrings.Get(1079884));
-          //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
+          dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
           upd_choice[ichoice] = "artistdetail";
           ichoice++;
         }
@@ -6435,12 +6435,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ichoice++;
         }
 
-        if (MyFilmsDetail.ExtendedStartmode("Context Movie: Internet data update for PERSONS")) // check if specialmode is configured for disabled features
-        {
-          dlg.Add(GUILocalizeStrings.Get(1079899));        //Update Internet Person Details
-          upd_choice[ichoice] = "grabber-person";
-          ichoice++;
-        }
+        dlg.Add(GUILocalizeStrings.Get(1079899));        //Update Internet Person Details
+        upd_choice[ichoice] = "grabber-person";
+        ichoice++;
       }
 
       if ((MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual) && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
@@ -7072,6 +7069,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
         case "grabber":
+          conf.StrIndex = facadeView.SelectedListItem.ItemId;
+          conf.StrTIndex = facadeView.SelectedListItem.Label;
           string title = MyFilmsDetail.GetSearchTitle(r, facadeView.SelectedListItem.ItemId, "titleoption");
           string mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
           if (mediapath.Contains(";")) // take the forst source file
@@ -7079,8 +7078,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
           }
 
-          conf.StrIndex = facadeView.SelectedListItem.ItemId;
-          conf.StrTIndex = facadeView.SelectedListItem.Label;
           sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
 
           MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false, sTitles);
@@ -7089,10 +7086,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "grabber-person":
-          string personname = facadeView.SelectedListItem.Label;
-
           conf.StrIndex = facadeView.SelectedListItem.ItemId;
           conf.StrTIndex = facadeView.SelectedListItem.Label;
+          string personname = facadeView.SelectedListItem.Label;
 
           MyFilmsDetail.grabb_Internet_Informations(personname, GetID, MyFilms.conf.StrGrabber_ChooseScript, "", "", MyFilmsDetail.GrabType.Person, false, null);
           Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload

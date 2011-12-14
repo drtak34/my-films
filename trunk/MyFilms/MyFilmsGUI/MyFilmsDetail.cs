@@ -2941,7 +2941,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 switch (grabtype)
                 {
                   case GrabType.MultiCovers:
-                    if (script.Type.ToString().ToLower().Contains("multicovers"))
+                    if (script.Type.ToLower().Contains("multicovers"))
                       displayNamePost = " - (Multi Cover)";
                     else
                       displayNamePost = " - (Single Cover)";
@@ -3012,7 +3012,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.ShowWaitCursor = true;
               dlgPrgrs.DisableCancel(true);
               dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Internet Movie Grabber"));
-              dlgPrgrs.SetLine(1, "Searching Movies ...");
+              dlgPrgrs.SetLine(1, "Searching Movie/Name ...");
               dlgPrgrs.Percentage = 0;
               dlgPrgrs.NeedRefresh();
               dlgPrgrs.ShouldRenderLayer();
@@ -3022,7 +3022,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
 
               dlgPrgrs.Percentage = 100;
-              dlgPrgrs.SetLine(1, "Finished Searching Movies ...");
+              dlgPrgrs.SetLine(1, "Finished Searching Movie/Name ...");
               dlgPrgrs.NeedRefresh();
               dlgPrgrs.ShouldRenderLayer();
               Thread.Sleep(500);
@@ -3639,7 +3639,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               if (IsUpdateRequired("TranslatedTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle], grabtype, onlyselected, onlymissing, onlynonempty))
               {
-                ttitle = Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle];
+              if (string.IsNullOrEmpty(person.Name))
+                  person.Name = Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle];
               }
 
               if (IsUpdateRequired("Description", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Description], grabtype, onlyselected, onlymissing, onlynonempty))
@@ -3656,16 +3657,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               string temp = "";
               if (IsUpdateRequired("Country", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Country], grabtype, onlyselected, onlymissing, onlynonempty))
-                temp = Result[(int)Grabber_URLClass.Grabber_Output.Country];
+                person.PlaceOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Country];
               if (IsUpdateRequired("Category", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Category], grabtype, onlyselected, onlymissing, onlynonempty))
                 temp = Result[(int)Grabber_URLClass.Grabber_Output.Category];
               if (IsUpdateRequired("URL", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.URL], grabtype, onlyselected, onlymissing, onlynonempty))
                 if (MyFilms.conf.StrStorage != "URL")
-                  temp = Result[(int)Grabber_URLClass.Grabber_Output.URL];
+                  person.IMDBActorID = Result[(int)Grabber_URLClass.Grabber_Output.URL];
               if (IsUpdateRequired("Comments", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Comments], grabtype, onlyselected, onlymissing, onlynonempty))
-                MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
-              if (IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty) && grabtype == GrabType.All) 
-                temp = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
+                person.DateOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
+              if (IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty) && grabtype == GrabType.All)
+              {
+                person.ThumbnailUrl = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
+              }
+              if (!string.IsNullOrEmpty(MyFilms.conf.StrPathArtist) && !string.IsNullOrEmpty(person.ThumbnailUrl))
+              {
+                string filenameperson;
+                string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, person.Name, true, true, out filenameperson);
+              }
               // grabb_Internet_Details_Informations_Cover(Result, interactive, GetID, wscript, grabtype, sTitles);
               #endregion
               #endregion
@@ -3717,7 +3725,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Update_XML_database();
             LogMyFilms.Info("Database Updated for title/ttitle: " + title + "/" + ttitle);
 
-            if (title.Length > 0 && MyFilms.conf.StrFanart) // Get Fanart
+            if (title.Length > 0 && MyFilms.conf.StrFanart && grabtype != GrabType.Person) // Get Fanart
             {
               #region fanart
               // GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
@@ -5316,6 +5324,63 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // LogMyFilms.Debug("(SearchFanart) - Fanart config for '" + title + "': wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             return wfanart;
         }
+
+
+        public static string CreateOrUpdateActor(string name)
+        {
+            // Get IMDB images
+            Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+            Grabber.MyFilmsIMDB.IMDBUrl wurl;
+            _imdb.FindActor(name);
+            IMDBActor imdbActor = new IMDBActor();
+            string filename1person = string.Empty;
+
+            if (_imdb.Count == 0)
+            {
+              string url = string.Empty;
+              wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+              if (wurl.URL.Length != 0)
+              {
+                url = wurl.URL;
+                //url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
+                //url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
+                Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
+                fetchactor.GetActorDetails(url, name, false, out imdbActor);
+                string filenameperson;
+                if (!string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+                  filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, imdbActor.ThumbnailUrl, imdbActor.Name, true, true, out filenameperson);
+                else
+                  Log.Debug("CreateOrUpdateActor() - Personartworkpath not set - no image download possible !");
+
+                LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + name + "', path='" + filename1person + "'");
+                // Add actor to datbbase to get infos in person facades later...
+                int actorId = VideoDatabase.AddActor(imdbActor.Name);
+                if (actorId > 0)
+                {
+                  VideoDatabase.SetActorInfo(actorId, imdbActor);
+                  //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+                  // Deactivated, as downloading not yet working !!!
+                  //if (imdbActor.ThumbnailUrl != string.Empty)
+                  //{
+                  //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                  //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                  //  Utils.FileDelete(largeCoverArt);
+                  //  Utils.FileDelete(coverArt);
+                  //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+                  //}
+                }
+              }
+            }
+            else
+            {
+              int actorId = VideoDatabase.AddActor(imdbActor.Name);
+              imdbActor.Name = name;
+              VideoDatabase.SetActorInfo(actorId, imdbActor);
+            }
+          return filename1person;
+        }
+
         //-------------------------------------------------------------------------------------------
         //  Control search Numeric : only numerics
         //-------------------------------------------------------------------------------------------        
