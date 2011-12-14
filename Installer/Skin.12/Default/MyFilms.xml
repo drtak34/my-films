@@ -258,7 +258,7 @@
 			<width>250</width>
 			<height>400</height>
 			<dimColor>ffffffff</dimColor>
- 			<visible>[control.hasfocus(2)|control.hasfocus(3)|control.hasfocus(4)|control.hasfocus(5)|control.hasfocus(6)|control.hasfocus(7)|control.hasfocus(10012)]</visible>
+			<visible>!Control.HasFocus(50)</visible>
 			<control>
 				<type>image</type>
 				<description>Menu Background</description>
@@ -303,7 +303,6 @@
 					<description>Layout</description>
 					<id>2</id>
 					<width>180</width>
-					<onleft>10012</onleft>
 					<onright>50</onright>
 					<onup>10012</onup>
 					<ondown>3</ondown>
@@ -314,7 +313,6 @@
 					<id>3</id>
 					<width>180</width>
 					<offsetSortButtonX>155</offsetSortButtonX>
-					<onleft>6</onleft>
 					<onright>50</onright>
 					<onup>2</onup>
 					<ondown>5</ondown>
@@ -326,7 +324,6 @@
 					<description>Switch view</description>
 					<id>5</id>
 					<width>180</width>
-					<onleft>3</onleft>
 					<onright>50</onright>
 					<onup>3</onup>
 					<ondown>4</ondown>
@@ -337,7 +334,6 @@
 					<description>Search</description>
 					<id>4</id>
 					<width>180</width>
-					<onleft>3</onleft>
 					<onright>50</onright>
 					<onup>5</onup>
 					<ondown>6</ondown>
@@ -348,7 +344,6 @@
 					<description>Options</description>
 					<id>6</id>
 					<width>180</width>
-					<onleft>4</onleft>
 					<onright>50</onright>
 					<onup>4</onup>
 					<ondown>7</ondown>
@@ -359,7 +354,6 @@
 					<description>Global Filter Options</description>
 					<id>7</id>
 					<width>180</width>
-					<onleft>5</onleft>
 					<onright>50</onright>
 					<onup>6</onup>
 					<ondown>8</ondown>
@@ -369,7 +363,6 @@
 					<description>Global Updates</description>
 					<id>8</id>
 					<width>180</width>
-					<onleft>4</onleft>
 					<onright>50</onright>
 					<onup>7</onup>
 					<ondown>10012</ondown>
@@ -390,10 +383,10 @@
 					<hyperlink>9811</hyperlink>
 					<label>1300</label>
 					<width>180</width>
-					<onleft>7</onleft>
 					<onright>50</onright>
-					<onup>7</onup>
+					<onup>8</onup>
 					<ondown>2</ondown>
+					<visible>plugin.isenabled(MP-TV Series)</visible>
 				</control>
 			 </control>
 
