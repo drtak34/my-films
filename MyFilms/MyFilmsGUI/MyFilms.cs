@@ -3924,7 +3924,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0].ToString();
 
         // load the rest of images asynchronously!
-        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
+        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir, true);
       }
 
       if (facadeView.Count == 0)
@@ -4144,7 +4144,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (isperson) { AsynUpdateActors(w_tableau); } // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
 
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
-      DataRow[] rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, "", WStrSort, WStrSortSens);
       bool countItems = (isperson && !WstrSelect.Contains("not like") && !string.IsNullOrEmpty(WstrSelect) && !WstrSelect.Contains("**")) ? true : false; // extensive counts only for conditional lists, otherwise takes too much time!
 
       watch.Reset(); watch.Start();
@@ -4164,18 +4163,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIListItem item = new GUIListItem(); 
               item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
               
-              if (countItems)
-              {
-                int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
-                // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
-                if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(WStrSort.ToLower()) + " (" + count + ")";
-              }
-              else
+              //if (countItems)
+              //{
+              //  int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
+              //  // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
+              //  if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(WStrSort.ToLower()) + " (" + count + ")";
+              //}
+              //else
                 item.Label2 = Wnb_enr.ToString();
               item.Path = WStrSort.ToLower();
               item.TVTag = (isperson) ? "person" : "group";
               item.IsFolder = true;
-              facadeDownloadItems.Add(item); // offload artwork loading in background thread - first collect items in list!
+              facadeDownloadItems.Add(item); // offload artwork (and count for person lists) loading in background thread - first collect items in list!
               item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
               facadeView.Add(item);
               if (SelItem != "" && item.Label == SelItem) conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
@@ -4191,12 +4190,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIListItem item = new GUIListItem();
         //item.ItemId = number; // Only used in GetFilmList
         item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
-        if (countItems)
-        {
-          int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
-          if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(WStrSort.ToLower()) + " (" + count + ")";
-        }
-        else
+        //if (countItems)
+        //{
+        //  int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
+        //  if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(WStrSort.ToLower()) + " (" + count + ")";
+        //}
+        //else
           item.Label2 = Wnb_enr.ToString();
         //item.Label3 = WStrSort.ToLower();
         //item.DVDLabel = WStrSort.ToLower();
@@ -4235,7 +4234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1];
         facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0];
         // load the rest of images asynchronously!
-        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
+        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir, countItems);
       }
 
       if (facadeView.Count == 0)
@@ -4280,7 +4279,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return false;
     }
     
-    private void GetImages(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir)
+    private void GetImages(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir, bool countItems)
     {
       StopDownload = false;
 
@@ -4299,6 +4298,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         new System.Threading.Thread(delegate(object o)
         {
           List<GUIListItem> items = (List<GUIListItem>)o;
+          DataRow[] rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", WStrSort, conf.StrSortSensInViews);
+
           foreach (GUIListItem item in items)
           {
             // stop download if we have exited window
@@ -4333,6 +4334,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
             }
 
+            if (countItems)
+            {
+              int count = rtemp.Where(x => x[WStrSort].ToString().Contains(item.Label)).Count();
+              // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
+              if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(WStrSort.ToLower()) + " (" + count + ")";
+            }
+
             // ToDo: Add downloader to SetViewThumbs - or here ...
 
             //string remoteThumb = item.ImageRemotePath;
@@ -4351,7 +4359,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         })
         {
           IsBackground = true,
-          Name = "MyFilms Image Detector and Downloader" + i.ToString()
+          Name = "MyFilms Image Detector and Downloader" + i
         }.Start(groupList);
       }
     }
