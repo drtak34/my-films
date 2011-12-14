@@ -1591,7 +1591,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (conf.Boolreturn)
           {
             conf.Boolreturn = false;
-            if (conf.WStrSort.ToString() == "ACTORS") // Removed "ToUpper"
+            if (conf.WStrSort.ToString() == "ACTORS") // Removed "ToUpper"  IsPersonField(conf.WStrSort)
               if (GetPrevFilmList())
                 return;
               else
@@ -2000,9 +2000,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               // conf.StrSelect = conf.StrSelectViews;
               getSelectFromDivx(conf.StrSelectViews, conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
+              conf.StrSelectViews = "";
             }
             else
+            {
               getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
+            }
+            conf.StrSelect = "";
           }
           else
           {
@@ -2011,7 +2015,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
           }
-          conf.StrSelect = "";
           switch (conf.WStrSort.ToLower())
           {
             case "persons":
@@ -2094,7 +2097,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.StrTitleSelect != "") //' in blake's seven causes fuckup
         s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1.ToString(), conf.StrTitleSelect.Replace("'", "''"), conf.TitleDelim);
       else
-        s = s + conf.StrTitle1.ToString() + " not like ''";
+        s = s + conf.StrTitle1 + " not like ''";
       conf.StrFilmSelect = s;
       LogMyFilms.Debug("(SetFilmSelect) - StrFilmSelect: '" + s + "'");
     }
@@ -2537,7 +2540,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.StrTitleSelect != "") //' in blake's seven causes fuckup
         s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1.ToString(), conf.StrTitleSelect.Replace("'", "''"), conf.TitleDelim);
       else
-        s = s + conf.StrTitle1.ToString() + " not like ''";
+        s = s + conf.StrTitle1 + " not like ''";
       string StrFilmSelect = s;
 
       ArrayList RandomFanartItems = new ArrayList();
@@ -2551,14 +2554,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string sTitle;
       string sFullTitle;
       string sPrevTitle = "";
-      //string SelItem = gSelItem.ToString();
-      //int iSelItem = -2;
-
-      // if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
       if (conf.StrTitleSelect != "") DelimCnt = NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1; //get num .'s in title
-      //----------------------------------------------------------------------------------------
-      // Load the DataSet.
       int number = -1;
       ArrayList w_tableau = new ArrayList();
       bool isdate = false;
@@ -2616,7 +2613,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       fin: ;
       }
       fanartItems = RandomFanartItems;
-      return !(RandomFanartItems.Count == 1 && item.IsFolder); //ret false if single folder found
+      return !(RandomFanartItems.Count == 1 && item.IsFolder);
     }
 
     private bool GetRandomFanartForGroups(int limit)
@@ -2629,7 +2626,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       catch (Exception ex)
       {
-        LogMyFilms.DebugException("GetRandomFanartForGroups(): exception on calling GetMoviesInGroup() - ", ex);
+        //LogMyFilms.DebugException("GetRandomFanartForGroups(): exception on calling GetMoviesInGroup() - ", ex);
+        LogMyFilms.Warn("GetRandomFanartForGroups(): exception on calling GetMoviesInGroup() - " + ex.Message);
         return false;
       }
       currentFanartList.Clear(); // clear list from former content
@@ -4161,10 +4159,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (conf.Wstar == "*" || ListConditionTrue(champselect, conf.Wstar)) // if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
           {
-            if ((Wnb_enr > 0) && (wchampselect.Length > 0))
+            if (Wnb_enr > 0 && (wchampselect.Length > 0))
             {
               GUIListItem item = new GUIListItem(); 
-              //item.ItemId = number;
               item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
               
               if (countItems)
@@ -4175,9 +4172,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               else
                 item.Label2 = Wnb_enr.ToString();
-              //item.Label3 = WStrSort.ToLower();
-              //item.DVDLabel = WStrSort.ToLower();
-              //MediaPortal.Util.Utils.SetDefaultIcons(item);
               item.Path = WStrSort.ToLower();
               item.TVTag = (isperson) ? "person" : "group";
               item.IsFolder = true;
@@ -4192,10 +4186,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      if ((Wnb_enr > 0) && (wchampselect.Length > 0))
+      if (Wnb_enr > 0 && (wchampselect.Length > 0))
       {
         GUIListItem item = new GUIListItem();
-        //item.ItemId = number;
+        //item.ItemId = number; // Only used in GetFilmList
         item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
         if (countItems)
         {
@@ -4208,7 +4202,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //item.DVDLabel = WStrSort.ToLower();
         //MediaPortal.Util.Utils.SetDefaultIcons(item);
         item.Path = WStrSort.ToLower();
-        //item.ItemId = number; // Only used in GetFilmList
 
         item.TVTag = (isperson) ? "person" : "group";
         item.IsFolder = true;
