@@ -963,14 +963,19 @@ namespace MyFilmsPlugin.MyFilms
 
             foreach (string config in configs)
             {
-              MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
-              if (tmpconf.AllowTraktSync || tmpconf.AllowRecentlyAddedAPI)
-                LogMyFilms.Debug("GetMovies() - Trakt = '" + tmpconf.AllowTraktSync + "', RecentMedia = '" + tmpconf.AllowRecentlyAddedAPI + "', CatalogType = '" + tmpconf.StrFileType + "', Config = '" + config + "', Catalogfile = '" + tmpconf.StrFileXml + "'");
-              else
-                LogMyFilms.Debug("GetMovies() - Trakt = '" + tmpconf.AllowTraktSync + "', RecentMedia = '" + tmpconf.AllowRecentlyAddedAPI + "', CatalogType = '" + tmpconf.StrFileType + "', Config = '" + config + "'");
+              string StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+              string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+              bool AllowTraktSync = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+              bool AllowRecentlyAddedAPI = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
 
-              if (File.Exists(tmpconf.StrFileXml) && (tmpconf.AllowTraktSync || (!traktOnly && tmpconf.AllowRecentlyAddedAPI)))
+              if (AllowTraktSync || AllowRecentlyAddedAPI)
+                LogMyFilms.Debug("GetMovies() - Trakt = '" + AllowTraktSync + "', RecentMedia = '" + AllowRecentlyAddedAPI + "', CatalogType = '" + StrFileType + "', Config = '" + config + "', Catalogfile = '" + StrFileXml + "'");
+              else
+                LogMyFilms.Debug("GetMovies() - Trakt = '" + AllowTraktSync + "', RecentMedia = '" + AllowRecentlyAddedAPI + "', CatalogType = '" + StrFileType + "', Config = '" + config + "'");
+
+              if (File.Exists(StrFileXml) && (AllowTraktSync || (!traktOnly && AllowRecentlyAddedAPI)))
               {
+                MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
                 _dataLock.EnterReadLock();
                 try
                 {
@@ -978,7 +983,7 @@ namespace MyFilmsPlugin.MyFilms
                 }
                 catch (Exception e)
                 {
-                  LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+                  LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message + ", " + e.StackTrace);
                   // throw e; // we should NOT throw the exception, otherwilse MP crashes due to unhandled exception
                 }
                 finally
@@ -988,15 +993,8 @@ namespace MyFilmsPlugin.MyFilms
 
                 try
                 {
-                  string sqlExpression = "";
-                  string sqlSort = "";
-
-                  if (!string.IsNullOrEmpty(Expression)) sqlExpression = Expression;
-                  else sqlExpression = tmpconf.StrDfltSelect + tmpconf.StrTitle1 + " not like ''";
-
-                  if (!string.IsNullOrEmpty(Sort)) sqlSort = Sort;
-                  else sqlSort = "OriginalTitle" + " " + "ASC";
-
+                  string sqlExpression = (!string.IsNullOrEmpty(Expression)) ? Expression : tmpconf.StrDfltSelect + tmpconf.StrTitle1 + " not like ''";
+                  string sqlSort = (!string.IsNullOrEmpty(Sort)) ? Sort : "OriginalTitle" + " " + "ASC";
                   DataRow[] results = dataExport.Tables["Movie"].Select(sqlExpression, sqlSort);
                   // if (results.Length == 0) continue;
 
@@ -1607,9 +1605,7 @@ namespace MyFilmsPlugin.MyFilms
 
       using (XmlSettings XmlConfig = new XmlSettings(MediaPortal.Configuration.Config.GetFile(MediaPortal.Configuration.Config.Dir.Config, "MyFilms.xml")))
       {
-          string config = _mConfig;
-          MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
-
+          string config = _mConfig; // MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
           string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
           string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
           string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
@@ -1635,7 +1631,6 @@ namespace MyFilmsPlugin.MyFilms
               return;
             }
           }
-
           LogMyFilms.Debug("Commit() : TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
           LogMyFilms.Debug("Commit() : Update requested for Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Watched = '" + _mIWatched + "'");
 
@@ -1646,11 +1641,6 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Debug("Trakt not enabled for this config - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
               return;
             }
-            //if (StrFileType != "0" && StrFileType != "10")
-            //{
-            //  LogMyFilms.Debug("Catalog Type is readonly (EC) - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-            //  return;
-            //}
             BaseMesFilms._dataLock.EnterReadLock();
             try
             {
