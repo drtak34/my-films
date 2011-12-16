@@ -4942,7 +4942,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
               {
-                if (conf.StrViewDfltItem.ToLower() == "year" || conf.StrViewDfltItem.ToLower() == "category" || conf.StrViewDfltItem.ToLower() == "country" || conf.StrViewDfltItem.ToLower() == "storage" || conf.StrViewDfltItem.ToLower() == "actors")
+                if (conf.StrViewDfltItem.ToLower() == "year" || conf.StrViewDfltItem.ToLower() == "category" || conf.StrViewDfltItem.ToLower() == "country" || conf.StrViewDfltItem.ToLower() == "storage" || conf.StrViewDfltItem.ToLower() == "actors" || conf.StrViewDfltItem.ToLower() == "recentlyadded")
                   Change_view(conf.StrViewDfltItem.ToLower());
                 else
                 {
