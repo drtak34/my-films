@@ -2709,13 +2709,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         newFanart = currentFanartList[0];
       else if (currentFanartList.Count > 1)
       {
+        Int32 randomFanartIndex = -1;
         while (!success && errorcount < 10)
         {
           try
           {
             //Choose Random Fanart from Resultlist
             System.Random rnd = new System.Random();
-            Int32 randomFanartIndex = rnd.Next(currentFanartList.Count);
+            randomFanartIndex = rnd.Next(currentFanartList.Count);
             newFanart = currentFanartList[randomFanartIndex];
             if (newFanart != backdrop.Filename)
             {
@@ -2730,7 +2731,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception ex)
           {
-            LogMyFilms.DebugException("GetNewRandomFanart() - error, invalid index !", ex);
+            LogMyFilms.Warn("GetNewRandomFanart() - error, invalid index !  - Available: '" + currentFanartList.Count + "', selected ID: '" + randomFanartIndex + "' - " + ex.Message);
             errorcount += 1;
             success = false;
           }
