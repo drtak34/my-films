@@ -1372,6 +1372,12 @@ namespace MyFilmsPlugin.MyFilms
               case "AudioChannelCount":
               case "audiochannelcount":
                 return GUILocalizeStrings.Get(10798953);
+              case "AgeAdded":
+              case "ageadded":
+                return GUILocalizeStrings.Get(10798954);
+              case "IndexedTitle":
+              case "indexedtitle":
+                return GUILocalizeStrings.Get(10798955);
               default:
                 return string.Empty;
             }

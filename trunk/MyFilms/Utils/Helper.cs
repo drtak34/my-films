@@ -119,6 +119,22 @@ namespace MyFilmsPlugin.MyFilms.Utils
             return BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
         }
 
+        public static string EscapeLikeValue(string valueWithoutWildcards)
+        {
+          StringBuilder sb = new StringBuilder();
+          for (int i = 0; i < valueWithoutWildcards.Length; i++)
+          {
+            char c = valueWithoutWildcards[i];
+            if (c == '*' || c == '%' || c == '[' || c == ']')
+              sb.Append("[").Append(c).Append("]");
+            else if (c == '\'')
+              sb.Append("''");
+            else
+              sb.Append(c);
+          }
+          return sb.ToString();
+        }
+
     }
     #endregion
 
@@ -219,7 +235,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }      
 
         #endregion
-
 
         #region Other Public Methods
 
@@ -697,7 +712,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
 
         #endregion
-
 
         #region Web Methods
         public static bool DownloadFile(string url, string localFile)
