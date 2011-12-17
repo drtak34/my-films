@@ -4463,10 +4463,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
             }
 
-          if (strThumbSource == string.Empty)
-          {
-            strThumbSource = MyFilmsDetail.CreateOrUpdateActor(itemlabel);
-          }
+          //if (strThumbSource == string.Empty)
+          //{
+          //  strThumbSource = MyFilmsDetail.CreateOrUpdateActor(itemlabel);
+          //}
 
           if (strThumbSource != string.Empty)
           {
