@@ -2074,13 +2074,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           conf.StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
         else if (IsAlphaNumericalField(conf.WStrSort))
-          conf.StrSelect = conf.WStrSort + " like '" + sLabel.Replace("'", "''") + "'";
+          conf.StrSelect = conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'";
         else
         {
           if (sLabel == "")
             conf.StrSelect = conf.WStrSort + " is NULL";
           else
-            conf.StrSelect = conf.WStrSort + " like '*" + sLabel.Replace("'", "''") + "*'";
+            conf.StrSelect = conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(sLabel) + "*'";
         }
         conf.StrTxtSelect = "[" + sLabel + "]";
         conf.StrTitleSelect = "";
@@ -2095,7 +2095,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.StrSelect != "")
         s = conf.StrSelect + " And ";
       if (conf.StrTitleSelect != "") //' in blake's seven causes fuckup
-        s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1.ToString(), conf.StrTitleSelect.Replace("'", "''"), conf.TitleDelim);
+        s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1, StringExtensions.EscapeLikeValue(conf.StrTitleSelect), conf.TitleDelim);
       else
         s = s + conf.StrTitle1 + " not like ''";
       conf.StrFilmSelect = s;
@@ -2507,7 +2507,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         })
         {
           IsBackground = true, Priority = ThreadPriority.BelowNormal,
-          Name = "MyFilms FilmList Image Detector" + i.ToString()
+          Name = "MyFilms FilmList Image Detector" + i
         }.Start(groupList);
       }
     }
@@ -2525,20 +2525,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
           StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
         else if (IsAlphaNumericalField(conf.WStrSort))
-          StrSelect = conf.WStrSort + " like '" + sLabel.Replace("'", "''") + "'";
+          StrSelect = conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'";
         else
         {
           if (sLabel == "")
             StrSelect = conf.WStrSort + " is NULL";
           else
-            StrSelect = conf.WStrSort + " like '*" + sLabel.Replace("'", "''") + "*'";
+            StrSelect = conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(sLabel) + "*'";
         }
       }
 
       if (StrSelect != "")
         s = StrSelect + " And ";
       if (conf.StrTitleSelect != "") //' in blake's seven causes fuckup
-        s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1.ToString(), conf.StrTitleSelect.Replace("'", "''"), conf.TitleDelim);
+        s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1, StringExtensions.EscapeLikeValue(conf.StrTitleSelect), conf.TitleDelim);
       else
         s = s + conf.StrTitle1 + " not like ''";
       string StrFilmSelect = s;
@@ -3989,7 +3989,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool isperson = (IsPersonField(WStrSort)) ? true : false;
       bool isdate = (WStrSort == "Date" || WStrSort == "DateAdded") ? true : false;
       bool isalphanumeriacalfield = IsAlphaNumericalField(WStrSort) ? true : false;
-      bool recentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
+      bool isrecentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
+      bool isindexedtitle = (WStrSort == "IndexedTitle") ? true : false; // calculate recently added fields
       DateTime now = DateTime.Now;
 
       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
@@ -4014,7 +4015,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
         if (isdate) champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
-        else if (recentlyadded)
+        else if (isrecentlyadded)
         {
           if (string.IsNullOrEmpty(enr["RecentlyAdded"].ToString()))
           {
@@ -4024,6 +4025,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             enr["RecentlyAdded"] = GetDayRange(iNumber);
           }
           champselect = enr["RecentlyAdded"].ToString();
+        }
+        else if (isindexedtitle)
+        {
+          if (string.IsNullOrEmpty(enr["IndexedTitle"].ToString()))
+          {
+            enr["IndexedTitle"] = enr[MyFilms.conf.StrTitle1].ToString().Substring(0, 1).ToUpper();
+          }
+          champselect = enr["IndexedTitle"].ToString();
         }
         //else if (conf.BoolShowValueRanges && isalphanumeriacalfield) (( bool to be added in config, also needs change to facade population to support "ranges" on selection
         //{
@@ -4158,7 +4167,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (Wnb_enr > 0 && (wchampselect.Length > 0))
             {
               GUIListItem item = new GUIListItem(); 
-              item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
+              item.Label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
               
               //if (countItems)
               //{
@@ -4186,7 +4195,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         GUIListItem item = new GUIListItem();
         //item.ItemId = number; // Only used in GetFilmList
-        item.Label = (recentlyadded) ? wchampselect.Substring(1) : wchampselect;
+        item.Label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
         //if (countItems)
         //{
         //  int count = rtemp.Where(x => x[WStrSort].ToString().Contains(wchampselect)).Count();
@@ -10617,6 +10626,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case "recentlyadded":
           newViewLabel = GUILocalizeStrings.Get(10798954); //recentlyadded
+          break;
+        case "indexedtitle":
+          newViewLabel = GUILocalizeStrings.Get(10798955); //Indexed Title
           break;
         case "storage":
           conf.StrTxtSelect = GUILocalizeStrings.Get(10798736);

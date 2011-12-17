@@ -3299,6 +3299,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnEdition;
             
+            private global::System.Data.DataColumn columnIndexedTitle;
+            
             private global::System.Data.DataColumn columnDirector;
             
             private global::System.Data.DataColumn columnProducer;
@@ -3521,6 +3523,13 @@ namespace MyFilmsPlugin.DataBase {
             public global::System.Data.DataColumn EditionColumn {
                 get {
                     return this.columnEdition;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn IndexedTitleColumn {
+                get {
+                    return this.columnIndexedTitle;
                 }
             }
             
@@ -3903,6 +3912,7 @@ namespace MyFilmsPlugin.DataBase {
                         string TranslatedTitle, 
                         string FormattedTitle, 
                         string Edition, 
+                        string IndexedTitle, 
                         string Director, 
                         string Producer, 
                         string Country, 
@@ -3965,6 +3975,7 @@ namespace MyFilmsPlugin.DataBase {
                         TranslatedTitle,
                         FormattedTitle,
                         Edition,
+                        IndexedTitle,
                         Director,
                         Producer,
                         Country,
@@ -4014,7 +4025,7 @@ namespace MyFilmsPlugin.DataBase {
                         AudioChannelCount,
                         Persons};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[38] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[39] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4036,6 +4047,7 @@ namespace MyFilmsPlugin.DataBase {
                         string TranslatedTitle, 
                         string FormattedTitle, 
                         string Edition, 
+                        string IndexedTitle, 
                         string Director, 
                         string Producer, 
                         string Country, 
@@ -4095,6 +4107,7 @@ namespace MyFilmsPlugin.DataBase {
                         TranslatedTitle,
                         FormattedTitle,
                         Edition,
+                        IndexedTitle,
                         Director,
                         Producer,
                         Country,
@@ -4144,7 +4157,7 @@ namespace MyFilmsPlugin.DataBase {
                         AudioChannelCount,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[38] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[39] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4178,6 +4191,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnTranslatedTitle = base.Columns["TranslatedTitle"];
                 this.columnFormattedTitle = base.Columns["FormattedTitle"];
                 this.columnEdition = base.Columns["Edition"];
+                this.columnIndexedTitle = base.Columns["IndexedTitle"];
                 this.columnDirector = base.Columns["Director"];
                 this.columnProducer = base.Columns["Producer"];
                 this.columnCountry = base.Columns["Country"];
@@ -4256,6 +4270,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnFormattedTitle);
                 this.columnEdition = new global::System.Data.DataColumn("Edition", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEdition);
+                this.columnIndexedTitle = new global::System.Data.DataColumn("IndexedTitle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIndexedTitle);
                 this.columnDirector = new global::System.Data.DataColumn("Director", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnDirector);
                 this.columnProducer = new global::System.Data.DataColumn("Producer", typeof(string), null, global::System.Data.MappingType.Attribute);
@@ -4888,7 +4904,7 @@ namespace MyFilmsPlugin.DataBase {
                         AudioChannelCount,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[37];
+                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[38];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -7167,6 +7183,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string IndexedTitle {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.IndexedTitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte IndexedTitle in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.IndexedTitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Director {
                 get {
                     if (this.IsDirectorNull()) {
@@ -8019,6 +8050,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetEditionNull() {
                 this[this.tableMovie.EditionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsIndexedTitleNull() {
+                return this.IsNull(this.tableMovie.IndexedTitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetIndexedTitleNull() {
+                this[this.tableMovie.IndexedTitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

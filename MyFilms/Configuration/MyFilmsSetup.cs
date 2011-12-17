@@ -239,8 +239,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
                     dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" &&
                     dc.ColumnName != "Rating" && dc.ColumnName != "Size" && dc.ColumnName != "Picture" &&
-                    dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded" && 
-                    dc.ColumnName != "AgeAdded")
+                    dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded" &&
+                    dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
@@ -258,7 +258,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
                   && dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Picture" && dc.ColumnName != "DateAdded" &&
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded")
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntSearchItem1.Items.Add(dc.ColumnName);
                   AntSearchItem2.Items.Add(dc.ColumnName);
@@ -267,13 +267,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" &&
                     dc.ColumnName != "Picture" && dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
                     dc.ColumnName != "DateAdded" && // disabled for Doug testing
-                    dc.ColumnName != "Date" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded")
+                    dc.ColumnName != "Date" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntSort1.Items.Add(dc.ColumnName);
                   AntSort2.Items.Add(dc.ColumnName);
                   AntIdentItem.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded")
+                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntUpdItem1.Items.Add(dc.ColumnName);
                   AntUpdItem2.Items.Add(dc.ColumnName);
