@@ -663,12 +663,28 @@ End additional Backdrops  -->
 			<width>1220</width>
 			<align>center</align>
 			<font>font24</font>
-			<label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem'))</label>
+			<label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
 			<visible>[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
+<!--		<control>
+			<description>Group Label</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>30</posX>
+			<posY>702</posY>
+			<label>1079908</label>
+			<font>font16</font>
+			<align>left</align>
+			<textcolor>80ffffff</textcolor>
+			<visible>string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+-->
 		<control>
 			<type>label</type>
 			<description>Year and Genre and Runtime (Filmstrip and CoverFlow)</description>
@@ -863,7 +879,7 @@ End additional Backdrops  -->
 			<posY>485</posY>
 			<width>750</width>
 			<font>font22</font>
-			<label>#myfilms.user.mastertitle.value</label>
+			<label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
 			<visible>facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -1234,7 +1250,7 @@ End additional Backdrops  -->
 			<width>1220</width>
 			<align>center</align>
 			<font>font20</font>
-			<label>#myfilms.user.mastertitle.value</label>
+			<label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
 			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control> 
