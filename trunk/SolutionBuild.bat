@@ -1,5 +1,11 @@
 REM %1 = Solution Directory
 REM %2 = $(ConfigurationName) Debug/Release
+
+REM Select program path based on current machine environment
+set progpath=%ProgramFiles%
+if not "%ProgramFiles(x86)%".=="". set progpath=%ProgramFiles(x86)%
+
+
 echo %1 >%1\solutionbuild.log
 echo %2 >>%1\solutionbuild.log
 xcopy %1\AMCupdater\AMCupdater\Merge\AMCUpdater.exe %1\Installer\Base.12 /r/y >>%1\solutionbuild.log
