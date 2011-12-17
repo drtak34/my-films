@@ -31,9 +31,9 @@ echo Building MyFilms...
 "%WINDIR%\Microsoft.NET\Framework\v4.0.30319\MSBUILD.exe" /target:Rebuild /property:Configuration=%BUILD_TYPE% "..\MyFilmsSuite.sln" >> %LOG%
 
 rem echo Building MPEI
-rem copy "..\MPEI\MyFilms_MP12.xmp2" "..\MPEI\MyFilms_MP12_COPY.xmp2"
-rem "%progpath%\Team MediaPortal\MediaPortal\MpeMaker.exe" "..\MPEI\MyFilms_MP12_COPY.xmp2" /B >> %LOG%
-rem del "..\MPEI\MyFilms_MP12_COPY.xmp2"
+rem copy "..\Installer\MyFilms.xmp2" "..\Installer\MyFilms_COPY.xmp2"
+rem "%progpath%\Team MediaPortal\MediaPortal\MpeMaker.exe" "..\Installer\MyFilms_COPY.xmp2" /B >> %LOG%
+rem del "..\Installer\MyFilms_COPY.xmp2"
 
 echo.
 echo Building MyFilms done.
