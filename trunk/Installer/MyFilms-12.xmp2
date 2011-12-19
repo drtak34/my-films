@@ -2253,6 +2253,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{2da77b48-ea06-4346-a005-147d83dd763b}-TMDB-ZH.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ZH.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-DE-Person.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7df28536-41ca-4150-a806-804d4175a477}-TMDB-DE-Person.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-Person.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3102,7 +3109,7 @@ public class Script
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
-                    <Value>%Desktop%\MyFilms Configuration.lnk</Value>
+                    <Value>%Desktop%\MyFilms Setup.lnk</Value>
                     <ValueType>Template</ValueType>
                     <Description>Location of shortcut</Description>
                   </SectionParam>
@@ -3112,7 +3119,7 @@ public class Script
                     <Description>Target of short cut</Description>
                   </SectionParam>
                   <SectionParam Name="Description">
-                    <Value>MyFilms Configuration</Value>
+                    <Value>MyFilms Setup</Value>
                     <ValueType>String</ValueType>
                     <Description>Description tooltip text </Description>
                   </SectionParam>
@@ -3585,10 +3592,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Config" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3605,7 +3612,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1735</Revision>
+      <Revision>1797</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3617,7 +3624,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-11-17T01:19:38.4943802+01:00</ReleaseDate>
+    <ReleaseDate>2011-12-17T18:00:14.5940284+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -5866,6 +5873,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\TMDB-ZH.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2da77b48-ea06-4346-a005-147d83dd763b}-TMDB-ZH.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ZH.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-DE-Person.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7df28536-41ca-4150-a806-804d4175a477}-TMDB-DE-Person.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-Person.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
