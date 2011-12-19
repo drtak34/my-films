@@ -43,6 +43,7 @@ namespace MyFilmsPlugin.MyFilms
           thumbsViews,
           thumbsGroups,
           thumbsPersons,
+          GrabberScripts,
           app,
           skin
         };
@@ -63,6 +64,7 @@ namespace MyFilmsPlugin.MyFilms
         static string thumbsPathViews = string.Empty;
         static string thumbsPathGroups = string.Empty;
         static string thumbsPathPersons = string.Empty;
+        static string GrabberScripts = string.Empty;
         static string apppath = string.Empty;
         static string skinPath = string.Empty;
         #endregion
@@ -103,6 +105,7 @@ namespace MyFilmsPlugin.MyFilms
             thumbsPathViews = Config.GetFolder(Config.Dir.Thumbs);
             thumbsPathGroups = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
             thumbsPathPersons = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
+            GrabberScripts = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\";
             skinPath = Config.GetFolder(Config.Dir.Skin);
             initFolders();
         }
@@ -164,6 +167,8 @@ namespace MyFilmsPlugin.MyFilms
               return thumbsPathGroups;
             case Path.thumbsPersons:
               return thumbsPathPersons;
+            case Path.GrabberScripts:
+              return GrabberScripts;
             case Path.app:
               return apppath;
             case Path.skin:
