@@ -5851,5 +5851,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
 #endregion
 
+        private void button_GrabberScriptUpdate_Click(object sender, EventArgs e)
+        {
+          Grabber.Updater.UpdateScripts(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
+        }
+
     }
 }

@@ -554,6 +554,7 @@
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.myFilmsData = new MyFilmsPlugin.DataBase.MyFilmsData();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -4752,7 +4753,7 @@
           this.AMCConfigView.Location = new System.Drawing.Point(17, 27);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(692, 54);
+          this.AMCConfigView.Size = new System.Drawing.Size(507, 54);
           this.AMCConfigView.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -5273,6 +5274,7 @@
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
+          this.Tab_Other.Controls.Add(this.button_GrabberScriptUpdate);
           this.Tab_Other.Controls.Add(this.personDataGridView);
           this.Tab_Other.Controls.Add(this.customFieldDataGridView);
           this.Tab_Other.Controls.Add(ownerLabel);
@@ -5616,6 +5618,16 @@
           // 
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
+          // 
+          // button_GrabberScriptUpdate
+          // 
+          this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(557, 38);
+          this.button_GrabberScriptUpdate.Name = "button_GrabberScriptUpdate";
+          this.button_GrabberScriptUpdate.Size = new System.Drawing.Size(152, 27);
+          this.button_GrabberScriptUpdate.TabIndex = 120;
+          this.button_GrabberScriptUpdate.Text = "Grabber Script Update";
+          this.button_GrabberScriptUpdate.UseVisualStyleBackColor = true;
+          this.button_GrabberScriptUpdate.Click += new System.EventHandler(this.button_GrabberScriptUpdate_Click);
           // 
           // MyFilmsSetup
           // 
@@ -6211,5 +6223,6 @@
         private BindingSource personBindingSource;
         private TextBox AntFilterFreeText;
         private Label AntFreetextFilterItem;
+        private Button button_GrabberScriptUpdate;
     }
 }
