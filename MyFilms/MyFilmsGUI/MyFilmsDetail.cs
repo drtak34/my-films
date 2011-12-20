@@ -6296,11 +6296,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             i = i + 1;
             if (i < 6)
             {
-              setGUIProperty("db.actors.actor" + i + ".name", actorname, true);
+              setGUIProperty("db.actors.actor" + i + ".name", actorname);
               if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
               {
                 string personartworkpath = MyFilms.conf.StrPathArtist;
-                setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg", true);
+                setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg");
               }
             }
           }
