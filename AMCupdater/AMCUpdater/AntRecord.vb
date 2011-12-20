@@ -1840,7 +1840,7 @@ Public Class AntRecord
                     If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
                         Dim fanart As List(Of Grabber.DBMovieInfo)
                         Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                        fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, String.Empty, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
+                        fanart = Gb.GetFanart(title, ttitle, year, director, _InternetSearchHintIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, String.Empty, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
                         If fanart.Count = 1 Then
                             If fanart(0).Backdrops.Count > 0 Then
                                 TempValue = fanart(0).Backdrops(0).ToString

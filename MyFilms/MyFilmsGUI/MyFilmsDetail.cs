@@ -2096,6 +2096,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
           string personartworkpath = string.Empty;
           Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+          string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
           if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
           {
             LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.year.ToString() + "'");
@@ -2105,7 +2106,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
             }
             doUpdateDetailsViewByFinishEvent = true;
-            Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath);
+            Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath);
           }
         }
 
@@ -3744,8 +3745,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 new System.Threading.Thread(delegate()
                   {
-                    GrabArtwork(title, ttitle, (int)year, director, MyFilms.conf.StrTitle1.ToString(), dlgPrgrs);
-
+                    string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
+                    GrabArtwork(title, ttitle, (int)year, director, imdbid, MyFilms.conf.StrTitle1.ToString(), dlgPrgrs);
                   //GrabArtwork(title, ttitle, (int)year, director, MyFilms.conf.StrTitle1.ToString(), r => 
                   //{
                   //  dlgPrgrs.Percentage = r;
@@ -3758,7 +3759,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }) { Name = "MyFilmsArtworkLoader", IsBackground = true }.Start();
                 return;
               }
-
               // System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
               #endregion
             }
@@ -3982,7 +3982,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return updaterequired;
         }
 
-        private static void GrabArtwork(string title, string ttitle, int year, string director, string StrTitle1, GUIDialogProgress dlgPrgrs)
+        private static void GrabArtwork(string title, string ttitle, int year, string director, string imdbid, string StrTitle1, GUIDialogProgress dlgPrgrs)
         {
           try
           {
@@ -3996,7 +3996,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.Percentage = 10;
 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, MyFilms.conf.StrPathFanart, true, false, StrTitle1);
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
           }
           catch (Exception)
           {
@@ -4741,6 +4741,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return fanartTitle;
         }
 
+        // returns the first title name of the configured mastertitle field
+        public static string GetIMDB_Id(DataRow movieRecord)
+        {
+          string IMDB = "";
+          if (!string.IsNullOrEmpty(movieRecord["IMDB_Id"].ToString()))
+          {
+            IMDB = movieRecord["IMDB_Id"].ToString();
+          }
+          else if (!string.IsNullOrEmpty(movieRecord["URL"].ToString()))
+          {
+            string CleanString = movieRecord["URL"].ToString();
+            Regex CutText = new Regex("" + @"tt\d{7}" + "");
+            Match m = CutText.Match(CleanString);
+            if (m.Success)
+              IMDB = m.Value;
+          }
+          //LogMyFilms.Debug("GetIMDB_Id: returning IMDB_Id: '" + IMDB + "'");
+          return IMDB;
+        }
+
+
         private static string RemoveGroupNames(string FullName)
         {
           string Name = FullName;
@@ -4795,13 +4816,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Dowload backdrops on theMovieDB.org
         //-------------------------------------------------------------------------------------------        
-        public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string wftitle, string director, string year, bool choose, int wGetID, string savetitle, string personartworkpath)
+        public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string wftitle, string director, string imdbid, string year, bool choose, int wGetID, string savetitle, string personartworkpath)
         {
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
           int wyear = 0;
           try { wyear = Convert.ToInt32(year); }
           catch { }
-          System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, savetitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose, MyFilms.conf.StrTitle1, personartworkpath);
+          System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, savetitle, wyear, director, imdbid, MyFilms.conf.StrPathFanart, true, choose, MyFilms.conf.StrTitle1, personartworkpath);
           //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose);
           LogMyFilms.Debug("(DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "'");
           int listCount = listemovies.Count;
@@ -4899,19 +4920,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //Remove_Backdrops_Fanart(wtitle, true);
                     //Remove_Backdrops_Fanart(wttitle, true);
                     //Remove_Backdrops_Fanart(wftitle, true);
-                    Download_Backdrops_Fanart(keyboard.Text, string.Empty, string.Empty, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
+                    Download_Backdrops_Fanart(keyboard.Text, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
                   }
                   break;
                 }
                 if (dlgs.SelectedLabel > 0 && dlgs.SelectedLabel < 3) // if one of otitle or ttitle selected, keep year and director
                 {
-                  Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, wftitle, year, director, true, wGetID, savetitle, personartworkpath);
+                  Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, wftitle, year, director, string.Empty, true, wGetID, savetitle, personartworkpath);
                   //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                   break;
                 }
                 if (dlgs.SelectedLabel > 2) // For subitems, search without year and director !
                 {
-                  Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, wftitle, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
+                  Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, wftitle, string.Empty, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
                   //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                   break;
                 }

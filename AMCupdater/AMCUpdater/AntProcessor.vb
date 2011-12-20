@@ -950,6 +950,25 @@ Public Class AntProcessor
                             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                             Dim fanart As List(Of Grabber.DBMovieInfo)
 
+                            Dim FileToScan As String = String.Empty
+                            Dim AllFilesPath As String = String.Empty
+                            If Not IsNothing(CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field)) Then
+                                FileToScan = CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field).Value
+                            End If
+
+                            If FileToScan.IndexOf(";") > 0 Then
+                                'In case of multi-part files take the first part to internet scan; record the full list in AllFilesPath
+                                AllFilesPath = FileToScan
+                                FileToScan = FileToScan.Substring(0, FileToScan.IndexOf(";"))
+                            End If
+
+                            Dim wIMDB_Id As String = ""
+                            If row("AntTitle").ToString.Length > 0 Then
+                                If (row("AntIMDB_Id").ToString.Length > 0) Then
+                                    wIMDB_Id = row("AntIMDB_Id").ToString
+                                End If
+                            End If
+
                             Dim fanartTitle As String = ""
                             Dim year As Int16 = 0
 
@@ -957,9 +976,11 @@ Public Class AntProcessor
                             Dim director As String = ""
                             Dim title As String = String.Empty
                             Dim ttitle As String = String.Empty
+
                             fanartTitle = GetFanartTitle(CurrentNode, title, ttitle, ftitle, year, director)
+
                             If fanartTitle.Length > 0 Then
-                                fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, String.Empty, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
+                                fanart = Gb.GetFanart(title, ttitle, year, director, wIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, String.Empty, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
                                 'End If
                                 If (fanart.Count > 0) Then
                                     If (fanart(0).Name = "already") Then

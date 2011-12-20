@@ -197,35 +197,32 @@ namespace grabber
     {
         //private const string apiSearchMovie = "http://api.themoviedb.org/2.0/Movie.search?api_key=1e66c0cc99696feaf2ea56695e134eae&title=";
         private const string apiSearchMovie = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+        private const string apiSearchMovieByIMDB = "http://api.themoviedb.org/2.1/Movie.imdbLookup/en/xml/1e66c0cc99696feaf2ea56695e134eae/"; // add tt-nbr to search for movie ... tt0137523
         private const string apiSearchPerson = "http://api.themoviedb.org/2.1/Person.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
         //private const string apiGetMovieInfo = "http://api.themoviedb.org/2.0/Movie.getInfo?api_key=1e66c0cc99696feaf2ea56695e134eae&id=";
         private const string apiGetMovieInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
         private const string apiGetPersonInfo = "http://api.themoviedb.org/2.1/Person.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+      
 
-        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose)
+        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, string imdbid, bool choose)
         {
-          return getMoviesByTitles(title, ttitle, year, director, choose, "en"); // set "en" as default
+          return getMoviesByTitles(title, ttitle, year, director, imdbid, choose, "en"); // set "en" as default
         }
 
-        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose, string language)
+        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, string imdbid, bool choose, string language)
         {
             List<DBMovieInfo> results = new List<DBMovieInfo>();
-            results = getMoviesByTitle(title, year, director, choose, language);
+            results = getMoviesByTitle(title, year, director, imdbid, choose, language);
             if (results.Count == 1)
                 return results;
             List<DBMovieInfo> results2 = new List<DBMovieInfo>();
-            results2 = getMoviesByTitle(ttitle, year, director, choose, language);
+            results2 = getMoviesByTitle(ttitle, year, director, imdbid, choose, language);
             if (results2.Count == 1)
                 return results2;
             return results;
         }
 
-        public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, bool choose)
-        {
-          return getMoviesByTitle(title, year, director, choose, "en");
-        }
-
-        public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, bool choose, string language)
+        public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, string imdbid, bool choose, string language)
         {
             //title = Grabber.GrabUtil.normalizeTitle(title);
             string id = string.Empty;
@@ -241,7 +238,12 @@ namespace grabber
 
             List<DBMovieInfo> results = new List<DBMovieInfo>();
             List<DBMovieInfo> resultsdet = new List<DBMovieInfo>();
-            XmlNodeList xml = getXML(apiSearchLanguage + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
+            XmlNodeList xml = null;
+            if (!string.IsNullOrEmpty(imdbid))
+              xml = getXML(apiSearchMovieByIMDB + imdbid);
+            if (xml == null) // if imdb search was unsuccessful use normal search...
+              xml = getXML(apiSearchLanguage + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
+
             if (xml == null)
                 return results;
 

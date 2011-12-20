@@ -2113,12 +2113,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <returns>If returns false means is currently displaying a single folder</returns>
     bool GetFilmList<T>(T gSelItem)
     {
-      LogMyFilms.Debug("GetFilmList started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
       SetFilmSelect();
-      string GlobalFilterString = "";
       // set online filter only, if scan is done already ...
-      if (InitialIsOnlineScan) GlobalFilterString =  GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      else GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      string GlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating
+                                    : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      bool isalphanumeriacalfield = false;
+      bool sortascending = true;
+      string sortfield = "";
+
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:             '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:             '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:             '" + conf.StrFilmSelect + "'");
@@ -2132,20 +2134,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:     '" + conf.StrSortaInHierarchies + "'");
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
-        r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSortaInHierarchies, conf.StrSortSensInHierarchies, false);
+        isalphanumeriacalfield = IsAlphaNumericalField(conf.StrSortaInHierarchies) ? true : false;
+        sortascending = (conf.StrSortSensInHierarchies == " ASC") ? true : false;
+        sortfield = conf.StrSortaInHierarchies;
+        r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSortaInHierarchies, conf.StrSortSensInHierarchies, false); 
       }
       else
       {
         LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:                  '" + conf.StrSorta + "'");
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:               '" + conf.StrSortSens + "'");
+        isalphanumeriacalfield = IsAlphaNumericalField(conf.StrSorta) ? true : false;
+        sortascending = (conf.StrSortSens == " ASC") ? true : false;
+        sortfield = conf.StrSorta;
         r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       }
 
-      //IComparer ics = new AlphanumComparatorFast();
-      //if (conf.StrSortSens.Contains("ASC"))
-      //  r.ToList().Sort((a, b) => ics.Compare(a[conf.StrSorta], b[conf.StrSorta]));
-      //else
-      //  r.ToList().Sort((a, b) => ics.Compare(b[conf.StrSorta], a[conf.StrSorta]));
+      if (isalphanumeriacalfield && !string.IsNullOrEmpty(sortfield))
+      {
+        LogMyFilms.Debug("GetFilmList() - alphanumeric sorting: sortascending = '" + sortascending + "', sortfield = '" + sortfield + "'");
+        watch.Reset();
+        watch.Start();
+        if (sortascending)
+        {
+          
+          IComparer myComparer = new AlphanumComparatorFast();
+          Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+          //r.ToList().Sort((a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+        }
+        else
+        {
+          IComparer myComparer = new myReverserAlphanumComparatorFast();
+          Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+          //r.ToList().Sort((a, b) => myComparer.Compare(b[sortfield], a[sortfield]));
+          //r.Reverse();
+        }
+        watch.Stop();
+        LogMyFilms.Debug("GetFilmList() - alphanumeric sorting finished (" + (watch.ElapsedMilliseconds) + " ms)");
+      }
 
       int iCnt = 0;
       int DelimCnt = 0, DelimCnt2;
@@ -4654,6 +4679,46 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return (b.Value.CompareTo(a.Value));
     }
 
+
+    //----------------------------------------------------------------------------------------------
+    //  GUIListItem Sort
+    //----------------------------------------------------------------------------------------------
+    public class GUIListLabelComparer : IComparer<GUIListItem>
+    {
+      public int Compare(GUIListItem x, GUIListItem y)
+      {
+        return x.Label.CompareTo(y.Label);
+      }
+    }
+
+    public class GUIListLabel2Comparer : IComparer<GUIListItem>
+    {
+      public int Compare(GUIListItem x, GUIListItem y)
+      {
+        return x.Label2.CompareTo(y.Label2);
+      }
+    }
+
+    private class MyDataRowComparer : IComparer<DataRow>
+    {
+      public int Compare(DataRow x, DataRow y)
+      {
+        return String.Compare(x.Field<string>("c1"), y.Field<string>("c1"));
+      } 
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //  Reverse Alphanumeric Sort
+    //----------------------------------------------------------------------------------------------
+    public class myReverserAlphanumComparatorFast : IComparer
+    {
+      // Calls AlphanumComparatorFast.Compare with the parameters reversed.
+      int IComparer.Compare(Object x, Object y)
+      {
+        return ((new AlphanumComparatorFast()).Compare(y, x));
+      }
+    }
+
     //----------------------------------------------------------------------------------------------
     //  Alphanumeric Sort
     //----------------------------------------------------------------------------------------------
@@ -7112,6 +7177,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
 
             string personartworkpath = string.Empty;
+            string imdbid = MyFilmsDetail.GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
             //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
             //fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
@@ -7124,7 +7190,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
               }
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath);
             }
           }
           break;
@@ -10033,7 +10099,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       BackgroundWorker worker = sender as BackgroundWorker;
       Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-      string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+      string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty, wimdbid = string.Empty; int wyear = 0;
       if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist)) // if persoin artwork path present and person thumbs enabled, also load person images
       {
         personartworkpath = MyFilms.conf.StrPathArtist;
@@ -10043,6 +10109,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         fanartTitle = wtitle = wttitle = wftitle = wdirector = string.Empty;
         wyear = 0;
+        wimdbid = MyFilmsDetail.GetIMDB_Id(movieRecord);
         fanartTitle = MyFilmsDetail.GetFanartTitle(movieRecord, out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
 
         //if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
@@ -10056,7 +10123,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
         if (fanartTitle.Length > 0)
         {
-          List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, fanartTitle, wyear, wdirector, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1, personartworkpath);
+          List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, fanartTitle, wyear, wdirector, wimdbid, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1, personartworkpath);
         }
       }
     }
