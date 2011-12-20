@@ -40,22 +40,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
         // public LoadParameterInfo LoadParams = null;
-        public Configuration(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
+        public Configuration(string CurrentConfig, bool setcurrentconfig, bool create_temp, LoadParameterInfo loadParams)
         {
             //-----------------------------------------------------------------------------------------------
             //   Load Config Parameters in MyFilms.xml file (section CurrentConfig)
             //-----------------------------------------------------------------------------------------------
 
             //LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
-            XmlConfig XmlConfigold = new XmlConfig();
-            XmlConfigold.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
-            // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
-            //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-            //{
-            //  xmlwriter.SetValue("MyFilms", "Current_Config", CurrentConfig);
-            //  xmlwriter.Dispose();
-            //}
-            //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            if (setcurrentconfig)
+            {
+              XmlConfig XmlConfigSave = new XmlConfig();
+              XmlConfigSave.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
+              // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
+              //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+              //{
+              //  xmlwriter.SetValue("MyFilms", "Current_Config", CurrentConfig);
+              //  xmlwriter.Dispose();
+              //}
+              //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            }
             using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
                 StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);

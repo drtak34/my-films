@@ -4817,7 +4817,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
       LogMyFilms.Debug("Load_Config(): Start loading config '" + CurrentConfig + "'");
-      conf = new Configuration(CurrentConfig, create_temp, loadParams);
+      conf = new Configuration(CurrentConfig, true, create_temp, loadParams);
       LogMyFilms.Debug("Load_Config(): End loading config '" + CurrentConfig + "'");
       if ((conf.Boolreturn) && (conf.Wselectedlabel == string.Empty))
       {

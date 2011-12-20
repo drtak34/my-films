@@ -939,10 +939,8 @@ namespace MyFilmsPlugin.MyFilms
             GetMovieArtworkDetails(movie.MovieRow, movie.MFconfig, ref tmpmovie);
             movielistwithartwork.Add(tmpmovie);
           }
-          foreach (MFMovie movie in movielistwithartwork)
-          {
-            LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");
-          }
+          // foreach (MFMovie movie in movielistwithartwork) LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");
+          LogMyFilms.Debug("GetMostRecent() - Returning '" + movielistwithartwork.Count + "' movies.");
           return movielistwithartwork;
         }
         #endregion
@@ -975,7 +973,7 @@ namespace MyFilmsPlugin.MyFilms
 
               if (File.Exists(StrFileXml) && (AllowTraktSync || (!traktOnly && AllowRecentlyAddedAPI)))
               {
-                MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
+                MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, false, true, null);
                 _dataLock.EnterReadLock();
                 try
                 {
@@ -1009,7 +1007,7 @@ namespace MyFilmsPlugin.MyFilms
                       {
                         movie.MFconfig = tmpconf;
                         movie.MovieRow = sr;
-                        // GetMovieArtworkDetails(sr, tmpconf, ref movie); // movied to LM API as it's a lot of I/O ...
+                        // GetMovieArtworkDetails(sr, tmpconf, ref movie); // moved to LM API as it's a lot of I/O ...
                       }
                       movies.Add(movie);
                       moviecount += 1;
@@ -1108,13 +1106,12 @@ namespace MyFilmsPlugin.MyFilms
           string IMDB = "";
           if (!string.IsNullOrEmpty(row["IMDB_Id"].ToString()))
             IMDB = row["IMDB_Id"].ToString();
-
-          if (!string.IsNullOrEmpty(row["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+          else if (!string.IsNullOrEmpty(row["URL"].ToString()))
           {
-            string CleanString = row["URL"].ToString();
+            string URLstring = row["URL"].ToString();
             Regex CutText = new Regex("" + @"tt\d{7}" + "");
-            Match m = CutText.Match(CleanString);
-            if (m.Success)
+            Match m = CutText.Match(URLstring);
+            if (m.Success) 
               IMDB = m.Value;
           }
           movie.IMDBNumber = IMDB;
@@ -1194,7 +1191,6 @@ namespace MyFilmsPlugin.MyFilms
               }
               if (wzone.Length > 0)
                 wtab.Add(wzone);
-              wzone = string.Empty;
             }
           }
           return wtab;
