@@ -396,12 +396,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected override void OnPageDestroy(int new_windowId)
         {
           //DBOption.SetOptions(DBOption.cFanartCurrentView, (int)CurrentView);
-          MFCover selectedFanart = m_Facade.SelectedListItem.TVTag as MFCover;
-          if (selectedFanart != null)
-          {
-            //setDefaultCover(selectedFanart); // ToDo: Change to update MF Catalog
-          }
-
+          //MFCover selectedFanart = m_Facade.SelectedListItem.TVTag as MFCover;
+          //if (selectedFanart != null)
+          //{
+          //  //setDefaultCover(selectedFanart); // ToDo: Change to update MF Catalog
+          //}
 
           if (loadingWorker.IsBusy)
               loadingWorker.CancelAsync();

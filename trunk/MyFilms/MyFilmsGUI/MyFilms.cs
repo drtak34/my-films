@@ -2132,7 +2132,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.BoolCollection = false;
       if (conf.BoolCollection && Helper.FieldIsSet(conf.StrSortaInHierarchies)) // only use Collection sort, if there is a value - otherwise use default
       {
-        LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:     '" + conf.StrSortaInHierarchies + "'");
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:    '" + conf.StrSortaInHierarchies + "'");
         LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
         isalphanumeriacalfield = IsAlphaNumericalField(conf.StrSortaInHierarchies) ? true : false;
         sortascending = (conf.StrSortSensInHierarchies == " ASC") ? true : false;
@@ -2976,7 +2976,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Load_Logos(MyFilms.r[currentItem.ItemId], true); // set logos
       }
 
-      LogMyFilms.Debug("switch (currentItem.TVTag.ToString() with TVTag = '" + currentItem.TVTag.ToString() + "', currentItem.ItemId = '" + currentItem.ItemId.ToString() + "'"); 
+      LogMyFilms.Debug("switch (currentItem.TVTag.ToString() with TVTag = '" + currentItem.TVTag + "', currentItem.ItemId = '" + currentItem.ItemId + "'"); 
       switch (currentItem.TVTag.ToString()) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
       {
         case "person":
@@ -3999,11 +3999,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public void getSelectFromDivx(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
     {
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString : '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect : '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect         : '" + WstrSelect + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort           : '" + WStrSort + "', WStrSortSens : '" + WStrSortSens + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar           : '" + NewWstar + "', ClearIndex: '" + ClearIndex + "', SelItem: '" + SelItem + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString   : '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect   : '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect           : '" + WstrSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort/WStrSortSens: '" + WStrSort + "', '" + WStrSortSens + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar/ClearIndex  : '" + NewWstar + "', '" + ClearIndex + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - SelItem              : '" + SelItem + "'");
 
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
