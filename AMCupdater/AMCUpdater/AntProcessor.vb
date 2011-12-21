@@ -1400,7 +1400,8 @@ Public Class AntProcessor
                             FoundFileName = StripPathFromFile(foundFile, CurrentMoviePath)
 
                             'File Handling - compare extension to known media filetypes (trailer or movies)
-                            If Array.IndexOf(ValidMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
+                            Dim extension As String = foundFile.Substring(InStrRev(foundFile, ".")).ToLower
+                            If Array.Exists(ValidMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then
                                 'Check, if it's a trailer
                                 Dim isTrailer As Boolean = False
                                 For Each TrailerProp As String In ValidTrailerExtensions
@@ -1408,8 +1409,6 @@ Public Class AntProcessor
                                         isTrailer = True
                                     End If
                                 Next
-
-                                'If Array.IndexOf(ValidTrailerExtensions, foundFile.Substring(InStr(foundFile, "."))) >= 0 Then
                                 If isTrailer = True Then
                                     LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
 
@@ -1426,7 +1425,7 @@ Public Class AntProcessor
                                     ds.Tables("tblFoundMediaFiles").Rows.Add(row)
                                 End If
 
-                            ElseIf Array.IndexOf(ValidNonMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
+                            ElseIf Array.Exists(ValidNonMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then 'If Array.IndexOf(ValidNonMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
                                 'Check for match against non-movie file types:
                                 LogEvent("  File Found (NonMedia) - " & FoundFileName, EventLogLevel.Informational)
 
