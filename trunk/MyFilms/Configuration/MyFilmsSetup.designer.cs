@@ -514,6 +514,7 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
           this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -554,7 +555,6 @@
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.myFilmsData = new MyFilmsPlugin.DataBase.MyFilmsData();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -2075,6 +2075,7 @@
           this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 49);
           this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
           this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
+          this.cbGrabberOverrideLanguage.Sorted = true;
           this.cbGrabberOverrideLanguage.TabIndex = 64;
           this.ToolTip1.SetToolTip(this.cbGrabberOverrideLanguage, resources.GetString("cbGrabberOverrideLanguage.ToolTip"));
           // 
@@ -2498,6 +2499,7 @@
           this.cbfdupdate.Location = new System.Drawing.Point(10, 58);
           this.cbfdupdate.Name = "cbfdupdate";
           this.cbfdupdate.Size = new System.Drawing.Size(150, 21);
+          this.cbfdupdate.Sorted = true;
           this.cbfdupdate.TabIndex = 15;
           this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
@@ -2553,6 +2555,7 @@
           this.AntUpdField.Location = new System.Drawing.Point(197, 18);
           this.AntUpdField.Name = "AntUpdField";
           this.AntUpdField.Size = new System.Drawing.Size(151, 21);
+          this.AntUpdField.Sorted = true;
           this.AntUpdField.TabIndex = 81;
           this.ToolTip1.SetToolTip(this.AntUpdField, "Choose a DB item to add to the property update list.");
           this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
@@ -2673,6 +2676,7 @@
           this.cbWatched.Location = new System.Drawing.Point(10, 74);
           this.cbWatched.Name = "cbWatched";
           this.cbWatched.Size = new System.Drawing.Size(123, 21);
+          this.cbWatched.Sorted = true;
           this.cbWatched.TabIndex = 73;
           this.ToolTip1.SetToolTip(this.cbWatched, resources.GetString("cbWatched.ToolTip"));
           // 
@@ -2779,6 +2783,7 @@
           this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
           this.AntUpdItem2.Name = "AntUpdItem2";
           this.AntUpdItem2.Size = new System.Drawing.Size(123, 21);
+          this.AntUpdItem2.Sorted = true;
           this.AntUpdItem2.TabIndex = 33;
           // 
           // AntUpdText2
@@ -2794,6 +2799,7 @@
           this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
           this.AntUpdItem1.Name = "AntUpdItem1";
           this.AntUpdItem1.Size = new System.Drawing.Size(123, 21);
+          this.AntUpdItem1.Sorted = true;
           this.AntUpdItem1.TabIndex = 30;
           // 
           // AntUpdText1
@@ -2870,6 +2876,7 @@
           this.SortInHierarchies.Location = new System.Drawing.Point(28, 45);
           this.SortInHierarchies.Name = "SortInHierarchies";
           this.SortInHierarchies.Size = new System.Drawing.Size(121, 21);
+          this.SortInHierarchies.Sorted = true;
           this.SortInHierarchies.TabIndex = 0;
           // 
           // groupBox_SortByItem
@@ -2892,6 +2899,7 @@
           this.AntSort2.Location = new System.Drawing.Point(10, 45);
           this.AntSort2.Name = "AntSort2";
           this.AntSort2.Size = new System.Drawing.Size(145, 21);
+          this.AntSort2.Sorted = true;
           this.AntSort2.TabIndex = 38;
           this.AntSort2.SelectedIndexChanged += new System.EventHandler(this.AntSort2_SelectedIndexChanged);
           // 
@@ -2908,6 +2916,7 @@
           this.AntSort1.Location = new System.Drawing.Point(10, 18);
           this.AntSort1.Name = "AntSort1";
           this.AntSort1.Size = new System.Drawing.Size(145, 21);
+          this.AntSort1.Sorted = true;
           this.AntSort1.TabIndex = 36;
           this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
           // 
@@ -2972,6 +2981,7 @@
           this.AntSearchField.Location = new System.Drawing.Point(189, 34);
           this.AntSearchField.Name = "AntSearchField";
           this.AntSearchField.Size = new System.Drawing.Size(148, 21);
+          this.AntSearchField.Sorted = true;
           this.AntSearchField.TabIndex = 78;
           this.ToolTip1.SetToolTip(this.AntSearchField, "Choose a DB item to add to the property search list.");
           this.AntSearchField.SelectedIndexChanged += new System.EventHandler(this.AntSearchField_SelectedIndexChanged);
@@ -3036,6 +3046,7 @@
           this.AntSearchItem2.Location = new System.Drawing.Point(10, 67);
           this.AntSearchItem2.Name = "AntSearchItem2";
           this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
+          this.AntSearchItem2.Sorted = true;
           this.AntSearchItem2.TabIndex = 38;
           this.ToolTip1.SetToolTip(this.AntSearchItem2, "Choose a DB item for search");
           // 
@@ -3053,6 +3064,7 @@
           this.AntSearchItem1.Location = new System.Drawing.Point(10, 40);
           this.AntSearchItem1.Name = "AntSearchItem1";
           this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
+          this.AntSearchItem1.Sorted = true;
           this.AntSearchItem1.TabIndex = 36;
           this.ToolTip1.SetToolTip(this.AntSearchItem1, "Choose a DB item for Search");
           // 
@@ -3388,6 +3400,7 @@
           this.AntFilterItem2.Location = new System.Drawing.Point(55, 46);
           this.AntFilterItem2.Name = "AntFilterItem2";
           this.AntFilterItem2.Size = new System.Drawing.Size(115, 21);
+          this.AntFilterItem2.Sorted = true;
           this.AntFilterItem2.TabIndex = 22;
           this.AntFilterItem2.SelectedIndexChanged += new System.EventHandler(this.AntFilterItem2_SelectedIndexChanged);
           // 
@@ -3404,6 +3417,7 @@
           this.AntFilterItem1.Location = new System.Drawing.Point(55, 19);
           this.AntFilterItem1.Name = "AntFilterItem1";
           this.AntFilterItem1.Size = new System.Drawing.Size(115, 21);
+          this.AntFilterItem1.Sorted = true;
           this.AntFilterItem1.TabIndex = 19;
           this.AntFilterItem1.SelectedIndexChanged += new System.EventHandler(this.AntFilterItem1_SelectedIndexChanged);
           // 
@@ -3636,6 +3650,7 @@
           this.AntViewItem5.Location = new System.Drawing.Point(10, 146);
           this.AntViewItem5.Name = "AntViewItem5";
           this.AntViewItem5.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem5.Sorted = true;
           this.AntViewItem5.TabIndex = 24;
           this.AntViewItem5.SelectedIndexChanged += new System.EventHandler(this.AntViewItem5_SelectedIndexChanged);
           // 
@@ -3660,6 +3675,7 @@
           this.AntViewItem4.Location = new System.Drawing.Point(10, 120);
           this.AntViewItem4.Name = "AntViewItem4";
           this.AntViewItem4.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem4.Sorted = true;
           this.AntViewItem4.TabIndex = 21;
           this.AntViewItem4.SelectedIndexChanged += new System.EventHandler(this.AntViewItem4_SelectedIndexChanged);
           // 
@@ -3684,6 +3700,7 @@
           this.AntViewItem3.Location = new System.Drawing.Point(10, 94);
           this.AntViewItem3.Name = "AntViewItem3";
           this.AntViewItem3.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem3.Sorted = true;
           this.AntViewItem3.TabIndex = 18;
           this.AntViewItem3.SelectedIndexChanged += new System.EventHandler(this.AntViewItem3_SelectedIndexChanged);
           // 
@@ -3724,6 +3741,7 @@
           this.AntViewItem2.Location = new System.Drawing.Point(10, 68);
           this.AntViewItem2.Name = "AntViewItem2";
           this.AntViewItem2.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem2.Sorted = true;
           this.AntViewItem2.TabIndex = 15;
           this.AntViewItem2.SelectedIndexChanged += new System.EventHandler(this.AntViewItem2_SelectedIndexChanged);
           // 
@@ -3733,6 +3751,7 @@
           this.AntViewItem1.Location = new System.Drawing.Point(10, 42);
           this.AntViewItem1.Name = "AntViewItem1";
           this.AntViewItem1.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem1.Sorted = true;
           this.AntViewItem1.TabIndex = 12;
           this.AntViewItem1.SelectedIndexChanged += new System.EventHandler(this.AntViewItem1_SelectedIndexChanged);
           // 
@@ -3779,6 +3798,7 @@
           this.AntItem5.Location = new System.Drawing.Point(10, 144);
           this.AntItem5.Name = "AntItem5";
           this.AntItem5.Size = new System.Drawing.Size(160, 21);
+          this.AntItem5.Sorted = true;
           this.AntItem5.TabIndex = 33;
           // 
           // AntItem4
@@ -3787,6 +3807,7 @@
           this.AntItem4.Location = new System.Drawing.Point(10, 117);
           this.AntItem4.Name = "AntItem4";
           this.AntItem4.Size = new System.Drawing.Size(160, 21);
+          this.AntItem4.Sorted = true;
           this.AntItem4.TabIndex = 32;
           // 
           // AntLabel3
@@ -3812,6 +3833,7 @@
           this.AntItem3.Location = new System.Drawing.Point(10, 90);
           this.AntItem3.Name = "AntItem3";
           this.AntItem3.Size = new System.Drawing.Size(160, 21);
+          this.AntItem3.Sorted = true;
           this.AntItem3.TabIndex = 29;
           // 
           // AntItem2
@@ -3820,6 +3842,7 @@
           this.AntItem2.Location = new System.Drawing.Point(10, 63);
           this.AntItem2.Name = "AntItem2";
           this.AntItem2.Size = new System.Drawing.Size(160, 21);
+          this.AntItem2.Sorted = true;
           this.AntItem2.TabIndex = 27;
           // 
           // AntLabel2
@@ -4000,6 +4023,7 @@
           this.AntStorageTrailer.Location = new System.Drawing.Point(190, 52);
           this.AntStorageTrailer.Name = "AntStorageTrailer";
           this.AntStorageTrailer.Size = new System.Drawing.Size(185, 21);
+          this.AntStorageTrailer.Sorted = true;
           this.AntStorageTrailer.TabIndex = 68;
           this.ToolTip1.SetToolTip(this.AntStorageTrailer, resources.GetString("AntStorageTrailer.ToolTip"));
           // 
@@ -4322,6 +4346,7 @@
           this.AntStorage.Location = new System.Drawing.Point(172, 16);
           this.AntStorage.Name = "AntStorage";
           this.AntStorage.Size = new System.Drawing.Size(222, 21);
+          this.AntStorage.Sorted = true;
           this.AntStorage.TabIndex = 53;
           this.ToolTip1.SetToolTip(this.AntStorage, resources.GetString("AntStorage.ToolTip"));
           // 
@@ -5296,6 +5321,16 @@
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
+          // button_GrabberScriptUpdate
+          // 
+          this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(557, 38);
+          this.button_GrabberScriptUpdate.Name = "button_GrabberScriptUpdate";
+          this.button_GrabberScriptUpdate.Size = new System.Drawing.Size(152, 27);
+          this.button_GrabberScriptUpdate.TabIndex = 120;
+          this.button_GrabberScriptUpdate.Text = "Grabber Script Update";
+          this.button_GrabberScriptUpdate.UseVisualStyleBackColor = true;
+          this.button_GrabberScriptUpdate.Click += new System.EventHandler(this.button_GrabberScriptUpdate_Click);
+          // 
           // personDataGridView
           // 
           this.personDataGridView.AutoGenerateColumns = false;
@@ -5618,16 +5653,6 @@
           // 
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
-          // 
-          // button_GrabberScriptUpdate
-          // 
-          this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(557, 38);
-          this.button_GrabberScriptUpdate.Name = "button_GrabberScriptUpdate";
-          this.button_GrabberScriptUpdate.Size = new System.Drawing.Size(152, 27);
-          this.button_GrabberScriptUpdate.TabIndex = 120;
-          this.button_GrabberScriptUpdate.Text = "Grabber Script Update";
-          this.button_GrabberScriptUpdate.UseVisualStyleBackColor = true;
-          this.button_GrabberScriptUpdate.Click += new System.EventHandler(this.button_GrabberScriptUpdate_Click);
           // 
           // MyFilmsSetup
           // 
