@@ -708,7 +708,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       bool defaultconfig = false;
       GUIWaitCursor.Init(); GUIWaitCursor.Show();
-      if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+      if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos && PreviousWindowId != ID_BrowseTheWeb && !MovieScrobbling)
       {
         if (InitialStart) 
           InitMainScreen(false); // don't log to MyFilms.log Property clear
@@ -762,6 +762,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (MyFilms.conf.StrFanart) Fanartstatus(true);
         else Fanartstatus(false);
       }
+
       if (string.IsNullOrEmpty(Configuration.CurrentConfig))
       {
         GUIWaitCursor.Hide();
@@ -771,7 +772,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       bool launchMediaScanner = InitialStart;
 
-      if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+      if ((conf.AlwaysDefaultView || InitialStart) && PreviousWindowId != ID_MyFilmsDetail && !MovieScrobbling && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos && PreviousWindowId != ID_BrowseTheWeb)
       {
         LogMyFilms.Debug("OnPageLoad() - load facade with DefaultView -> Fin_Charge_Init(true, false)");
         Fin_Charge_Init(true, defaultconfig); // defaultconfig is true, if a default config is set in MF setup (not default view!)
@@ -1678,7 +1679,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       int dControl = messageType.TargetControlId;
       int iControl = messageType.SenderControlId;
-      LogMyFilms.Debug("GUIMessage: " + messageType.Message.ToString() + ", Param1: " + messageType.Param1.ToString() + ", Sender: " + iControl.ToString() + ", Target: " + dControl.ToString() + "");
+      LogMyFilms.Debug("GUIMessage: " + messageType.Message + ", Param1: " + messageType.Param1 + ", Sender: " + iControl + ", Target: " + dControl + "");
       switch (messageType.Message)
       {
         case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
@@ -1719,9 +1720,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
             {
               if (conf.WStrSort == "DateAdded")
-                getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "Date", " DESC", "*", true, "");
+                getSelectFromDivx(conf.StrTitle1 + " not like ''", "Date", " DESC", "*", true, "");
               else
-                getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+                getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
             }
             return true;
           }
@@ -4960,19 +4961,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        //// not necessary - already done in Configuration loading !
-        //// override settings by loadparams ?
-        //if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.View) && loadParamInfo.Config == Configuration.CurrentConfig) // set views as defined by loadparams
-        //{
-        //  conf.Boolselect = false;
-        //  LogMyFilms.Debug("(Fin_Charge_Init) - loadParameters - set view from '" + conf.StrViewDfltItem + "' to '" + loadParamInfo.View + "'");
-        //  conf.StrViewDfltItem = loadParamInfo.View;
-        //  if (!string.IsNullOrEmpty(loadParamInfo.ViewValue)) // set views value filter as defined by loadparams
-        //  {
-        //    LogMyFilms.Debug("(Fin_Charge_Init) - loadParameters - set view filter value from '" + conf.StrViewDfltText + "' to '" + loadParamInfo.ViewValue + "'");
-        //    conf.StrViewDfltText = loadParamInfo.ViewValue;
-        //  }
-        //}
 
         // now set views in MF ...
         if (conf.Boolselect) // Groupviews ? 
