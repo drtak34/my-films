@@ -91,17 +91,27 @@ namespace MyFilmsPlugin.MyFilms
           _dataLock.EnterReadLock();
           data = new AntMovieCatalog();
           string catalogfile = MyFilms.conf.StrFileXml;
-          LogMyFilms.Debug("initData() - Start reading catalogfile '" + catalogfile + "'");
           try
             {
               using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
               {
-                LogMyFilms.Debug("initData()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-                foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+                LogMyFilms.Debug("initData() - opening FileStream '" + catalogfile + "' with FileMode.Open, FileAccess.Read, FileShare.Read");
+                foreach (DataTable dataTable in data.Tables)
+                {
+                  dataTable.BeginLoadData();
+                }
                 data.ReadXml(fs);
-                foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+                foreach (DataTable dataTable in data.Tables)
+                {
+                  dataTable.EndLoadData();
+                  LogMyFilms.Debug("initData() - loaded table '" + dataTable + "'");
+                  foreach (var childrelation in dataTable.ChildRelations)
+                  {
+                    LogMyFilms.Debug("initData() - childrelation: '" + childrelation + "'");
+                  }
+                }
                 fs.Close();
-                LogMyFilms.Debug("initData()- closing  '" + catalogfile + "' FileStream");
+                LogMyFilms.Debug("initData() - closing  FileStream '" + catalogfile + "'");
               }
             }
           catch (Exception e)
@@ -115,7 +125,6 @@ namespace MyFilmsPlugin.MyFilms
             }
           watch.Stop();
           LogMyFilms.Debug("initData() - End reading catalogfile '" + catalogfile + "' (" + (watch.ElapsedMilliseconds) + " ms)");
-          LogMyFilms.Debug("initData() - CalcDays Started ...");
           watch.Reset(); watch.Start();
           DateTime now = DateTime.Now;
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
@@ -129,7 +138,7 @@ namespace MyFilmsPlugin.MyFilms
             }
           }
           watch.Stop();
-          LogMyFilms.Debug("initData() - CalcDays Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("initData() - CalcDays done ... (" + (watch.ElapsedMilliseconds) + " ms)");
         }
 
         private static void initDataMyFilms()
@@ -1147,7 +1156,6 @@ namespace MyFilmsPlugin.MyFilms
           if (!File.Exists(file) || string.IsNullOrEmpty(file))
             file = tempconf.DefaultCover;
           movie.Picture = file;
-
           movie.Fanart = MyFilmsDetail.Search_Fanart(MyFilmsDetail.GetSearchTitles(row, "", tempconf).FanartTitle, false, "file", false, file, string.Empty, tempconf)[0];
         }
 
