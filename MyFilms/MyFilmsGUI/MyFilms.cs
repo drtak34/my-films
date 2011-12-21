@@ -6463,12 +6463,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ichoice++;
         }
 
-        if (MyFilmsDetail.ExtendedStartmode("Context: Personlist in facade")) // check if specialmode is configured for disabled features
-        {
-          dlg.Add(GUILocalizeStrings.Get(1079879));//Search Infos to related persons (load persons in facadeview) - only available in filmlist
-          upd_choice[ichoice] = "moviepersonlist";
-          ichoice++;
-        }
+        dlg.Add(GUILocalizeStrings.Get(1079879));//Search Infos to related persons (load persons in facadeview) - only available in filmlist
+        upd_choice[ichoice] = "moviepersonlist";
+        ichoice++;
 
         if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Update for all persons of movie")) // check if specialmode is configured for disabled features
         {
