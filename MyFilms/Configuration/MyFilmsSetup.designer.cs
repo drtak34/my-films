@@ -1380,9 +1380,9 @@
           this.chkFanartDefaultViews.AutoSize = true;
           this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 36);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
-          this.chkFanartDefaultViews.Size = new System.Drawing.Size(109, 30);
+          this.chkFanartDefaultViews.Size = new System.Drawing.Size(88, 30);
           this.chkFanartDefaultViews.TabIndex = 80;
-          this.chkFanartDefaultViews.Text = "Fanart for default \r\ngroup views";
+          this.chkFanartDefaultViews.Text = "Fanart for \r\ndefault views";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
           this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
           // 
@@ -3467,9 +3467,9 @@
           this.chkUseListviewForGroups.AutoSize = true;
           this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 107);
           this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
-          this.chkUseListviewForGroups.Size = new System.Drawing.Size(211, 17);
+          this.chkUseListviewForGroups.Size = new System.Drawing.Size(179, 17);
           this.chkUseListviewForGroups.TabIndex = 81;
-          this.chkUseListviewForGroups.Text = "Always use List Layout for Group Views";
+          this.chkUseListviewForGroups.Text = "Always use List Layout for Views";
           this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
                   "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
           this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
