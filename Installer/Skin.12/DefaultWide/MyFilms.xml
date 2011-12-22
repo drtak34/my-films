@@ -702,7 +702,7 @@
 			<id>1</id>
 			<posX>45</posX>
 			<posY>557</posY>
-			<label>1079908</label>
+			<label>971</label>
 			<font>font12</font>
 			<align>left</align>
 			<textcolor>80ffffff</textcolor>
@@ -900,14 +900,15 @@
 		<control>
 			<type>image</type>
 			<description>View Thumb (no zoom)</description>
-			<id>1</id>
-			<posX>45</posX>
+			<id>0</id>
+			<posX>40</posX>
 			<posY>90</posY>
 			<width>288</width>
 			<height>420</height>
-			<texture>#myfilms.groupcoverimage</texture>
+			<texture>#myfilms.viewcoverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<valign>middle</valign>
+			<centered>yes</centered>
+			<filtered>no</filtered>
 			<visible>Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
@@ -922,7 +923,7 @@
       		<id>1</id>
       		<posX>39</posX>
       		<posY>83</posY>
-      		<width>306</width>
+      		<width>292</width>
       		<height>436</height>
       		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
       		<visible>Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
@@ -1033,7 +1034,7 @@
 			<align>center</align>
 			<font>font12</font>
 			<textcolor>80ffffff</textcolor>
-			<label>1079908</label>
+			<label>971</label>
 			<visible>string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
