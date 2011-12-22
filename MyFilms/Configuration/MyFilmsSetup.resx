@@ -532,7 +532,8 @@ However, you can define a value other than that, if you require it.</value>
   <data name="UserProfileName.ToolTip" xml:space="preserve">
     <value>You can set a "User Profile Name" that will be used for watched status handling.
 This is useful, if you want the watched status kept separately for different users.
-If you checked "Enhanced Watched Status handling" you can select the user grom global settings in MyFilms GUI.
+If you checked "Enhanced Watched Status handling" you can select the user 
+in the hidden menu ("Options" - "Global Settings ...") in MyFilms GUI.
 The user "global" is always existing and is counting global watched status.</value>
   </data>
   <data name="cbWatched.ToolTip" xml:space="preserve">
