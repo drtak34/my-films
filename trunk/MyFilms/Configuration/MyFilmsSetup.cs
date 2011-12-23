@@ -5857,5 +5857,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Grabber.Updater.UpdateScripts(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
         }
 
+        private void Config_Name_TextChanged(object sender, EventArgs e)
+        {
+          Config_Name.Text = StringExtensions.XmlCharacterWhitelist(Config_Name.Text).Replace(@"'", "");
+        }
+
     }
 }

@@ -135,6 +135,32 @@ namespace MyFilmsPlugin.MyFilms.Utils
           return sb.ToString();
         }
 
+        /// <summary>
+        /// Returns cleaned string valid for XML
+        /// </summary>
+        /// <param name="in_string">The string to clean</param>
+        /// <returns>The Whitelisted String</returns>
+        public static string XmlCharacterWhitelist(string in_string)
+        {
+          if (in_string == null) return null;
+
+          StringBuilder sbOutput = new StringBuilder();
+          char ch;
+
+          for (int i = 0; i < in_string.Length; i++)
+          {
+            ch = in_string[i];
+            if ((ch >= 0x0020 && ch <= 0xD7FF) ||
+              (ch >= 0xE000 && ch <= 0xFFFD) ||
+              ch == 0x0009 ||
+              ch == 0x000A ||
+              ch == 0x000D)
+            {
+              sbOutput.Append(ch);
+            }
+          }
+          return sbOutput.ToString();
+        }
     }
     #endregion
 

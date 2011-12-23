@@ -3,6 +3,8 @@
   using System;
   using System.Windows.Forms;
 
+  using MyFilmsPlugin.MyFilms.Utils;
+
   public partial class MyFilmsInputBox : Form
     {
         public MyFilmsInputBox()
@@ -56,7 +58,7 @@
 
         private void textBoxNewName_TextChanged(object sender, EventArgs e)
         {
-
+          textBoxNewName.Text = StringExtensions.XmlCharacterWhitelist(textBoxNewName.Text).Replace(@"'", "");
         }
 
         private void textBoxNewName_KeyUp(object sender, KeyEventArgs e)

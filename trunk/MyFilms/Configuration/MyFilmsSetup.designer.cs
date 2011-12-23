@@ -681,6 +681,7 @@
           this.ToolTip1.SetToolTip(this.Config_Name, resources.GetString("Config_Name.ToolTip"));
           this.Config_Name.SelectedIndexChanged += new System.EventHandler(this.Config_Name_SelectedIndexChanged);
           this.Config_Name.Leave += new System.EventHandler(this.Config_Name_SelectedIndexChanged);
+          this.Config_Name.TextChanged += new System.EventHandler(this.Config_Name_TextChanged);
           // 
           // textBoxPluginName
           // 
