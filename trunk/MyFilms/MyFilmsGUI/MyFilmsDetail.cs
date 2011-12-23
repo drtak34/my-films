@@ -787,6 +787,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         //   Change Menu (and process corresponding actions)
         //--------------------------------------------------------------------------------------------
+        MyFilmsCoverManager cm = null;
         private void Change_Menu(string choiceView)
         {
             
@@ -866,8 +867,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // Updates ...
                     choiceViewMenu.Add("updatesmenu");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
-                    choiceViewMenu.Add("fanartcovermenu");
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
+                    choiceViewMenu.Add("covermanager");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798767)); // Fanart Manager ...
+                    choiceViewMenu.Add("fanartmanager");
+
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
+                    //choiceViewMenu.Add("fanartcovermenu");
 
                     if (Helper.IsTraktAvailableAndEnabled) //  && MyFilms.conf.AllowTraktSync
                     {
@@ -1123,8 +1130,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
 
-                    //if (ExtendedStartmode("Details context: Change Local COver)"))
-                    //{
                     int iCovercount = 0;
                     bool success = int.TryParse(ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true), out iCovercount);
                     if (iCovercount > 1)
@@ -1132,25 +1137,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " " + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true)); // Change Cover
                       choiceViewMenu.Add("changecover");
                     }
-                    //}
 
-                    if (ExtendedStartmode("Details context: Manage Local Cover requires separate screen and is not yet implemented)"))
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Select Cover 
-                      choiceViewMenu.Add("selectcover");
-                    }
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Covermanager ...
+                    //choiceViewMenu.Add("covermanager");
 
-                    //if (ExtendedStartmode("Details context: Download Single Cover"))
-                    //{
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798766)); // Load single Cover ...
-                      choiceViewMenu.Add("loadcover");
-                    //}
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798766)); // Load single Cover ...
+                    choiceViewMenu.Add("loadcover");
 
-                    //if (ExtendedStartmode("Details context: Download Multi Covers"))
-                    //{
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798764)); // Load Covers ...
-                      choiceViewMenu.Add("loadmulticover");
-                    //}
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798764)); // Load Covers ...
+                    choiceViewMenu.Add("loadmulticover");
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
                     choiceViewMenu.Add("tmdbposter");
@@ -1164,6 +1159,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (MyFilms.conf.StrFanart)
                     {
+                      if (ExtendedStartmode("Details context: Fanart Manager ..."))
+                      {
+                        dlgmenu.Add(GUILocalizeStrings.Get(10798766)); // Fanart Manager ...
+                        choiceViewMenu.Add("fanartmanager");
+                      }
+
                       dlgmenu.Add(GUILocalizeStrings.Get(1079874)); // Remove Fanart
                       choiceViewMenu.Add("deletefanart");
 
@@ -1921,19 +1922,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Change_Menu("fanartcovermenu"); // stay in cover toggle menu
                     break;
 
-                case "selectcover":
-                    MyFilmsCoverManager cm = null;
+                case "covermanager":
                     LogMyFilms.Debug("Switching to Cover Manager Window");
                     if (cm == null)
                     {
                       cm = new MyFilmsCoverManager();
-                        GUIWindow cmwindow = (GUIWindow)cm;
-                        GUIWindowManager.Add(ref cmwindow);
-                        cm.Init();
+                      GUIWindow cmwindow = (GUIWindow)cm;
+                      GUIWindowManager.Add(ref cmwindow);
+                      cm.Init();
                     }
                     cm.MovieID = MyFilms.conf.StrIndex;
                     cm.setPageTitle("Cover Manager");
+                    //sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex));
+                    //cm.ArtworkFileName = GetOrCreateCoverFilename(MyFilms.r, MyFilms.conf.StrIndex, sTitles.MasterTitle);
                     GUIWindowManager.ActivateWindow(cm.GetID, false);
+                    break;
+
+                case "fanartmanager":
+                    LogMyFilms.Info("Fanart Manager : Not yet implemented - using old submenu instead!");
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798767)); // Fanart Manager ...
+
+                    if (MyFilms.conf.StrFanart)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079874)); // Remove Fanart
+                      choiceViewMenu.Add("deletefanart");
+
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079851)); // Create single fanart from movie as multi image (local)
+                      choiceViewMenu.Add("createfanartmultiimage");
+
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079849)); // create single images fanart from movie (local)
+                      choiceViewMenu.Add("createfanartsingleimages");
+
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079853)); // create fanart from movie (local)
+                      choiceViewMenu.Add("createfanart");
+
+                      if (!g_Player.Stopped && g_Player.HasVideo && !string.IsNullOrEmpty(g_Player.CurrentFile))
+                      {
+                        dlgmenu.Add(GUILocalizeStrings.Get(1079852)); // Create single fanart from movie on current position (local)
+                        choiceViewMenu.Add("createfanartonposition");
+                      }
+
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079862)); // Download Fanart (online)
+                      choiceViewMenu.Add("fanart");
+                    }
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                    {
+                      Change_Menu("mainmenu");
+                      return;
+                    }
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
 
                 case "loadcover":
@@ -3806,11 +3848,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else 
             newPicture = Path.Combine(MyFilms.conf.StrPathImg, tmpPicturename);
 
-          newPictureCatalogname = tmpPicturename;
-          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-            newPictureCatalogname = MyFilms.conf.StrPicturePrefix + tmpPicturename;
-          if (MyFilms.conf.PictureHandling == "Full Path")
-            newPictureCatalogname = newPicture;
+          newPictureCatalogname = GetPictureCatalogNameFromFilename(newPicture);
 
           LogMyFilms.Debug("Cover Image path : '" + MyFilms.conf.StrPathImg + "'");
           LogMyFilms.Debug("Picturehandling  : '" + MyFilms.conf.PictureHandling + "'");
@@ -4043,10 +4081,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("(CreateThumbFromMovie): Error - Moviefilesource: '" + fileName + "' does not exist !");
               return;
             }
-            string tempImage = System.IO.Path.GetTempPath() + "MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+            string tempImage = System.IO.Path.GetTempPath() + "MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"] + ".jpg";
             if (System.IO.File.Exists(tempImage)) System.IO.File.Delete(tempImage);
             //if (System.IO.File.Exists(tempImage + "L")) System.IO.File.Delete(tempImage + "L");
-            string strThumb = MyFilms.conf.StrPathImg + "\\MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+            string strThumb = MyFilms.conf.StrPathImg + "\\MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"] + ".jpg";
             LogMyFilms.Debug("(CreateThumbFromMovie): Moviefilesource: '" + fileName + "', Covernamedestination: '" + strThumb + "', TempImage: '" + tempImage + "'");
 
             //if (Img_Path_Type.ToLower() == "true")
@@ -4072,7 +4110,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Failed getting aspectratio of movie");
             else
             {
-              LogMyFilms.Debug("GetAspectratio: ar = '" + ar.ToString() + "'");
+              LogMyFilms.Debug("GetAspectratio: ar = '" + ar + "'");
             }
             //"fullscreen" : "widescreen"
             if (ar == "fullscreen")
@@ -4201,25 +4239,81 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           return "";
         }
-          
+
+        //-------------------------------------------------------------------------------------------
+        //  Returns existing or newly created filename for coverart
+        //-------------------------------------------------------------------------------------------        
+        public static string GetOrCreateCoverFilename(DataRow[] r1, int index, string mastertitle)
+        {
+          string file = string.Empty;
+          if (r1[index]["Picture"].ToString().Length > 0)
+          {
+            if ((r1[index]["Picture"].ToString().IndexOf(":\\") == -1) && (r1[index]["Picture"].ToString().Substring(0, 2) != "\\\\"))
+              file = MyFilms.conf.StrPathImg + "\\" + r1[index]["Picture"];
+            else
+              file = r1[index]["Picture"].ToString();
+          }
+          //if (!System.IO.File.Exists(file) || string.IsNullOrEmpty(file))
+          //  file = MyFilms.conf.DefaultCover;
+          if (string.IsNullOrEmpty(file))
+          {
+            // create new name, as none is existing yet ...
+            string title = (mastertitle.EndsWith(".jpg")) ? mastertitle.Substring(0, mastertitle.Length - 4) : mastertitle;
+            title = GrabUtil.CreateFilename(title) + ".jpg";
+            //if (first && !System.IO.File.Exists(dirname + safeName + ".jpg"))
+            //  filename = dirname + safeName + ".jpg";
+            //else
+            //  filename = dirname + safeName + " [" + imageUrl.GetHashCode() + "].jpg";
+            
+            
+            if (MyFilms.conf.StrPicturePrefix.Length > 0)
+              file = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + title;
+            else
+              file = MyFilms.conf.StrPathImg + "\\" + title;
+
+            if (!System.IO.Directory.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix))
+              try
+              {
+                System.IO.Directory.CreateDirectory(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix);
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Debug("GetOrCreateCoverFilename() - Error with Exception  = '" + ex.Message + "'");
+              }
+          }
+          LogMyFilms.Debug("GetOrCreateCoverFilename() - PictureFilename = '" + file + "'");
+          return file;
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Returns filename to be stored in catalog, depending on settings
+        //-------------------------------------------------------------------------------------------        
+        public static string GetPictureCatalogNameFromFilename(string picturefilename)
+        {
+          string newPictureCatalogname = ""; // entry to be stored in catalog
+          string tmpPicturename = picturefilename.Substring(picturefilename.LastIndexOf("\\") + 1);
+          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+          {
+            newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
+          }
+          if (MyFilms.conf.PictureHandling == "Full Path")
+          {
+            newPictureCatalogname = picturefilename;
+          }
+          LogMyFilms.Debug("GetPictureCatalogNameFromFilename() - PictureCatalogName = '" + newPictureCatalogname + "' for Picture '" + picturefilename + "'");
+          return newPictureCatalogname;
+        }
+
         //-------------------------------------------------------------------------------------------
         //  Dowload TMDBinfos (Poster(s), Movieinfos) on theMovieDB.org
         //-------------------------------------------------------------------------------------------        
         public static void Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose, int wGetID, string savetitle)
         {
-
-          //string tmpPicture = "";
-          string tmpPicturename = ""; // picturename only
           string oldPicture = MyFilmsDetail.getGUIProperty("picture");
           string newPicture = ""; // full path to new picture
           string newPictureCatalogname = ""; // entry to be stored in catalog
           if (string.IsNullOrEmpty(oldPicture))
             oldPicture = "";
-
-          if (MyFilms.conf.StrPicturePrefix.Length > 0)
-            newPicture = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + tmpPicturename;
-          else
-            newPicture = MyFilms.conf.StrPathImg + "\\" + tmpPicturename;
 
           if (!System.IO.Directory.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix))
             try
@@ -4364,20 +4458,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 listemovies[0].Name = filename;
 
-                tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
-                if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                {
-                  newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0,MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
-                }
-                if (MyFilms.conf.PictureHandling == "Full Path")
-                {
-                  newPictureCatalogname = newPicture;
-                }
+                newPictureCatalogname = GetPictureCatalogNameFromFilename(newPicture);
                 if (!choose)
                 {
                   MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
                   Update_XML_database();
-                  LogMyFilms.Info("(Update_XML_database()) - Database Updated for created Coverthumb: " + tmpPicturename);
+                  LogMyFilms.Info("(Update_XML_database()) - Database Updated for created Coverthumb: " + newPicture);
                 }
                 else
                 {
@@ -4399,7 +4485,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
                   Update_XML_database();
-                  LogMyFilms.Info("(Update_XML_database()) - Database Updated with '" + newPictureCatalogname + "' for created Coverthumb '" + tmpPicturename + "'");
+                  LogMyFilms.Info("(Update_XML_database()) - Database Updated with '" + newPictureCatalogname + "' for created Coverthumb '" + newPicture + "'");
                 }
               }
               break;
@@ -4456,7 +4542,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (patternLength2 < patternLength) 
             patternLength = patternLength2;
           searchPattern = searchPattern.Substring(0, patternLength);
-          
+
           LogMyFilms.Debug("(ChangeLocalCover) - startPattern = '" + startPattern + "', searchPattern = '" + searchPattern + "', currentStorePath = '" + currentStorePath + "'");
           
           directoryname = currentPicture.Substring(0, currentPicture.LastIndexOf("\\"));
@@ -4504,15 +4590,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               nCurrent = 0;
             newPicture = filesfound[nCurrent];
 
-            string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
-            if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-            {
-              newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
-            }
-            if (MyFilms.conf.PictureHandling == "Full Path")
-            {
-              newPictureCatalogname = newPicture;
-            }
+            newPictureCatalogname = GetPictureCatalogNameFromFilename(newPicture);
             if (!interactive)
             {
               // add confirmation dialog here....
@@ -4523,7 +4601,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("(ChangeLocalCover) : NewCatalogName: '" + newPictureCatalogname + "'");
               Update_XML_database();
             }
-            return "(" + filesfoundcounter.ToString() + ")";
+            return "(" + filesfoundcounter + ")";
           }
           else
             LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
@@ -5512,7 +5590,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Length > 0)
             {
                 if ((MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\") == -1) && (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\"))
-                    file = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+                    file = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"];
                 else
                     file = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
             }
