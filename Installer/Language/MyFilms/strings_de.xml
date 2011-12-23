@@ -258,6 +258,7 @@
     <String id="10798726">Suche Trailer - alle Filme (lokal)</String>
     <String id="10798727">Zeige Film-Server Status</String>
     <String id="10798728">Erzeuge Cover vom Film</String>
+    <String id="10798729">Erzeuge Mosaik Cover vom Film</String>
     <String id="10798730">Aktualisiere alle Felder (nur bei neuen Daten)</String>
     <String id="10798731">Personen Infos (IMDB)</String>
     <String id="10798732">Wähle Eigenschaft für Update ...</String>
@@ -286,9 +287,12 @@
     <String id="10798761">Lade Covers (TMDB)</String>
     <String id="10798762">Cover wechseln</String>
     <String id="10798763">Cover Manager ...</String>
-    <String id="10798764">Lade Cover ...</String>
+    <String id="10798764">Lade mehrere Cover ...</String>
     <String id="10798765">*** Zeige Alle ***</String>
     <String id="10798766">Lade einzelnes Cover ...</String>
+    <String id="10798767">Fanart Manager ...</String>
+    <String id="10798768">Kein Cover gefunden!</String>
+    <String id="10798769">Wähle Cover als Default</String>
     <String id="10798770">Globaler Filter "Nur verfügbare Filme" ({0})</String>
     <String id="10798771">Anzeige Optionen ...</String>
     <String id="10798772">Wähle Feld ...</String>
@@ -314,6 +318,7 @@
     <String id="10798801">Soll wirklich die Trailersuche</String>
     <String id="10798802">für {0} Filme gestartet werden?</String>
     <String id="10798803">Erweiterte Suche (Verzeichnisse) ?</String>
+    <String id="10798810">Lösche Cover aus der Datenbank</String>
     <String id="10798940">Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Schlagwörter</String>

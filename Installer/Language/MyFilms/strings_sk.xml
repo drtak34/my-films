@@ -250,6 +250,7 @@
     <String id="10798726">Hľadať Trailer - všetky filmy (miestne)</String>
     <String id="10798727">Zobraziť NAS Server status</String>
     <String id="10798728">Vytvoriť obal z filmu</String>
+    <String id="10798729">Create cover from film as mosaic</String>
     <String id="10798730">Update all properties (only when new data)</String>
     <String id="10798731">Osoba info (IMDB)</String>
     <String id="10798732">Vyberte vlastnosť pre aktualizáciu</String>
@@ -277,9 +278,12 @@
     <String id="10798761">Nahrať obaly (TMDB)</String>
     <String id="10798762">Zmena obalu</String>
     <String id="10798763">Cover Manager ...</String>
-    <String id="10798764">Load Covers ...</String>
+    <String id="10798764">Load multiple Covers ...</String>
     <String id="10798765">*** Show All ***</String>
     <String id="10798766">Load single Cover ...</String>
+    <String id="10798767">Fanart Manager ...</String>
+    <String id="10798768">No Cover found !</String>
+    <String id="10798769">Select Cover as Default</String>
     <String id="10798770">Zobraziť iba filmy s médiami k dispozícii ({0})</String>
     <String id="10798771">Možnosti zobrazenia ...</String>
     <String id="10798772">Vyberte si pole ...</String>
@@ -305,6 +309,7 @@
     <String id="10798801">By mal trailer hľadať skutočne</String>
     <String id="10798802">Začínať pre {0} filmov?</String>
     <String id="10798803">Extended search (directories) ?</String>
+    <String id="10798810">Delete movie cover from DB</String>
     <String id="10798940">Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>
