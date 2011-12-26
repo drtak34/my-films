@@ -1046,48 +1046,48 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("picture", NewArtworkFileName);
           return;
 
-          MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-          string currentPicture = MyFilmsDetail.getGUIProperty("picture");
-          //if ((r1[Index]["Picture"].ToString().IndexOf(":\\") == -1) && (r1[Index]["Picture"].ToString().Substring(0, 2) != "\\\\"))
-          //  MyFilms.conf.FileImage = MyFilms.conf.StrPathImg + "\\" + r1[Index]["Picture"].ToString();
+          //MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+          //string currentPicture = MyFilmsDetail.getGUIProperty("picture");
+          ////if ((r1[Index]["Picture"].ToString().IndexOf(":\\") == -1) && (r1[Index]["Picture"].ToString().Substring(0, 2) != "\\\\"))
+          ////  MyFilms.conf.FileImage = MyFilms.conf.StrPathImg + "\\" + r1[Index]["Picture"].ToString();
+          ////else
+          ////  MyFilms.conf.FileImage = r1[Index]["Picture"].ToString();
+          //if ((MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\") == -1) && (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\"))
+          //  currentPicture = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"];
           //else
-          //  MyFilms.conf.FileImage = r1[Index]["Picture"].ToString();
-          if ((MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\") == -1) && (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\"))
-            currentPicture = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"];
-          else
-            currentPicture = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+          //  currentPicture = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
 
-          if (string.IsNullOrEmpty(currentPicture))
-            currentPicture = sTitles.FanartTitle + ".jpg";
+          //if (string.IsNullOrEmpty(currentPicture))
+          //  currentPicture = sTitles.FanartTitle + ".jpg";
 
-          LogMyFilms.Debug("setDefaultCover - currentPicture = '" + currentPicture + "'");
-          if (System.IO.File.Exists(currentPicture))
-          {
-            //string safeName = Grabber.GrabUtil.CreateFilename(title);
-            //filename = dirname + safeName + " [" + imageUrl.GetHashCode() + "].jpg";
+          //LogMyFilms.Debug("setDefaultCover - currentPicture = '" + currentPicture + "'");
+          //if (System.IO.File.Exists(currentPicture))
+          //{
+          //  //string safeName = Grabber.GrabUtil.CreateFilename(title);
+          //  //filename = dirname + safeName + " [" + imageUrl.GetHashCode() + "].jpg";
 
-            string newFile = System.IO.Path.GetFileNameWithoutExtension(currentPicture) + " [" + currentPicture.GetHashCode() + "]." + System.IO.Path.GetExtension(currentPicture);
-            LogMyFilms.Debug("setDefaultCover - newFile = '" + newFile + "'");
-            try
-            {
-              System.IO.File.Copy(currentPicture, newFile, true);
-              File.Delete(currentPicture);
-            }
-            catch (Exception ex)
-            {
-              LogMyFilms.Debug("setDefaultCover - error renaming currentPicture: " + ex.Message + ex.StackTrace);
-            }
-          }
-          try
-          {
-            File.Copy(cover.FullPath, currentPicture, true);
-            File.Delete(cover.FullPath);
-            LogMyFilms.Debug("setDefaultCover - sucessfully set new Default Cover: '" + currentPicture + "'");
-          }
-          catch (Exception ex)
-          {
-            LogMyFilms.Debug("setDefaultCover - error renaming currentPicture: " + ex.Message + ex.StackTrace);
-          }
+          //  string newFile = System.IO.Path.GetFileNameWithoutExtension(currentPicture) + " [" + currentPicture.GetHashCode() + "]." + System.IO.Path.GetExtension(currentPicture);
+          //  LogMyFilms.Debug("setDefaultCover - newFile = '" + newFile + "'");
+          //  try
+          //  {
+          //    System.IO.File.Copy(currentPicture, newFile, true);
+          //    File.Delete(currentPicture);
+          //  }
+          //  catch (Exception ex)
+          //  {
+          //    LogMyFilms.Debug("setDefaultCover - error renaming currentPicture: " + ex.Message + ex.StackTrace);
+          //  }
+          //}
+          //try
+          //{
+          //  File.Copy(cover.FullPath, currentPicture, true);
+          //  File.Delete(cover.FullPath);
+          //  LogMyFilms.Debug("setDefaultCover - sucessfully set new Default Cover: '" + currentPicture + "'");
+          //}
+          //catch (Exception ex)
+          //{
+          //  LogMyFilms.Debug("setDefaultCover - error renaming currentPicture: " + ex.Message + ex.StackTrace);
+          //}
         }
 
         void saveChangesToDB()
