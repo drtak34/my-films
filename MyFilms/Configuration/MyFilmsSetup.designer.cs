@@ -553,7 +553,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.myFilmsData = new MyFilmsPlugin.DataBase.MyFilmsData();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
@@ -620,7 +619,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.myFilmsData)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           this.SuspendLayout();
           // 
@@ -5644,12 +5642,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // myFilmsData
-          // 
-          this.myFilmsData.DataSetName = "MyFilmsData";
-          this.myFilmsData.Locale = new System.Globalization.CultureInfo("en-US");
-          this.myFilmsData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
           // customFieldsBindingSource
           // 
           this.customFieldsBindingSource.DataMember = "CustomFields";
@@ -5787,7 +5779,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.myFilmsData)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
@@ -6213,7 +6204,6 @@
         private Label labelRecentlyAddedAPI;
         private CheckBox cbAllowRecentAddedAPI;
         private AntMovieCatalog antMovieCatalog;
-        private MyFilmsData myFilmsData;
         private BindingSource propertiesBindingSource;
         private TextBox ownerTextBox;
         private TextBox mailTextBox;
