@@ -666,15 +666,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            bool OnlineVideosRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
-            bool OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
-            LogMyFilms.Debug("MyFilms.Init() - OnlineVideosRightPlugin = '" + OnlineVideosRightPlugin + "', OnlineVideosRightVersion = '" + OnlineVideosRightVersion + "'");
-            if (OnlineVideosRightPlugin && OnlineVideosRightVersion) 
-              return true;
-            return false;
-            // return Helper.IsAssemblyAvailable("OnlineVideos", new Version(0, 30, 0, 13883)) && IsPluginEnabled("OnlineVideos");
-            // return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "OnlineVideos.MediaPortal1.dll")) && IsPluginEnabled("Online Videos");
-            
+            bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(0, 27, 0, 0), true) && IsPluginEnabled("OnlineVideos");
+            LogMyFilms.Debug("Helper() - OnlineVideos available and enabled = '" + status + "'");
+            return status;
           }
         }
 
