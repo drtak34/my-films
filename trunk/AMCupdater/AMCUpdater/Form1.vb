@@ -2596,6 +2596,7 @@ Public Class Form1
                  Where y.Number <> Nothing _
                  Select CType(y.Number, Integer?)).Max
 
+        newMovie.Contents_Id = 0
         newMovie.Number = x + 1
         newMovie.OriginalTitle = "New Movie"
         myMovieCatalog.Movie.AddMovieRow(newMovie)
@@ -2606,6 +2607,7 @@ Public Class Form1
         Dim amc As AntMovieCatalog = New AntMovieCatalog()
         Dim newPerson As AntMovieCatalog.PersonRow
         newPerson = amc.Person.NewPersonRow()
+        newPerson.Persons_Id = 0
         newPerson.Name = "New Person"
         newPerson.IsActor = False
         newPerson.IsProducer = False
@@ -2911,6 +2913,7 @@ Public Class Form1
             'Dim newPerson As AMCUpdater.AntMovieCatalog.MovieRow
             Dim newPerson As AMCUpdater.AntMovieCatalog.PersonRow
             newPerson = PersonBindingSource.DataSource.NewPersonRow()
+            newPerson.Persons_Id = 0
             newPerson.Name = person
             newPerson.IsActor = False
             newPerson.IsProducer = False
