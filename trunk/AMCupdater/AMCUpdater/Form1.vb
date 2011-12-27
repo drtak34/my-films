@@ -216,6 +216,7 @@ Public Class Form1
         MediaData.Add("source", "source")
         MediaData.Add("subtitles", "subtitles")
         MediaData.Add("languages", "languages")
+        MediaData.Add("audiochannelcount", "audiochannelcount")
 
         InternetData = New Hashtable
         InternetData.Add("rating", "rating")
@@ -234,7 +235,7 @@ Public Class Form1
         ' Guzzi added: Extended fields
         InternetData.Add("writer", "writer")
         InternetData.Add("certification", "certification")
-        InternetData.Add("languages", "languages")
+        ' InternetData.Add("languages", "languages") ' deactivated, as it also can be retrieved via mediainfo - we have a bit inconsitency here ...
         InternetData.Add("tagline", "tagline")
         InternetData.Add("imdb_id", "imdb_id")
         InternetData.Add("tmdb_id", "tmdb_id")
