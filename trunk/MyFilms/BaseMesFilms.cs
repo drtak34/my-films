@@ -27,9 +27,11 @@ namespace MyFilmsPlugin.MyFilms
   using System.Collections;
   using System.Collections.Generic;
   using System.Data;
+  using System.Data.DataSetExtensions;
   using System.Diagnostics;
   using System.IO;
   using System.Linq;
+  using System.Reflection;
   using System.Text.RegularExpressions;
   using System.Threading;
   using System.Xml;
@@ -48,6 +50,7 @@ namespace MyFilmsPlugin.MyFilms
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
+        //private static XmlDataDocument xmlDoc; // XML Doc file for chierarchical access like XPath
 
         public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         public class MFConfig
@@ -86,7 +89,8 @@ namespace MyFilmsPlugin.MyFilms
         #region méthodes statique sprivées
         private static void initData()
         {
-          watch.Reset(); watch.Start();
+          Stopwatch initDataWatch = new Stopwatch();
+          initDataWatch.Reset(); initDataWatch.Start();
           _dataLock.EnterReadLock();
           data = new AntMovieCatalog();
           string catalogfile = MyFilms.conf.StrFileXml;
@@ -100,6 +104,9 @@ namespace MyFilmsPlugin.MyFilms
                   dataTable.BeginLoadData();
                 }
                 data.ReadXml(fs);
+                //// synchronize dataset with hierarchical XMLdoc
+                //xmlDoc = new XmlDataDocument(data);
+                //xmlDoc.Load(fs);
                 foreach (DataTable dataTable in data.Tables)
                 {
                   dataTable.EndLoadData();
@@ -122,53 +129,132 @@ namespace MyFilmsPlugin.MyFilms
             {
               _dataLock.ExitReadLock();
             }
-          watch.Stop();
-          LogMyFilms.Debug("initData() - End reading catalogfile '" + catalogfile + "' (" + (watch.ElapsedMilliseconds) + " ms)");
-          watch.Reset(); watch.Start();
+          initDataWatch.Stop();
+          LogMyFilms.Debug("initData() - End reading catalogfile '" + catalogfile + "' (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
+          initDataWatch.Reset(); initDataWatch.Start();
           DateTime now = DateTime.Now;
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           {
             if (movieRow.IsAgeAddedNull())
             {
-              if (!movieRow.IsDateAddedNull())
-                movieRow.AgeAdded = ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString();
-              else
-                movieRow.AgeAdded = "9999";
+              movieRow.AgeAdded = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString() : "9999";
             }
           }
-          watch.Stop();
-          LogMyFilms.Debug("initData() - CalcDays done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          initDataWatch.Stop();
+          LogMyFilms.Debug("initData() - CalcDays done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
 
-          //// create extended movie table ...
-          //watchReadMovies.Reset(); watchReadMovies.Start();
-          //using (DataTable targetTable = data.Movie.Clone()) //using (DataTable targetTable = data.Movie.Clone()) //using (DataTable targetTable = data.Tables["MovieEnhanced"])
+          //// Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
+          //initDataWatch.Reset(); initDataWatch.Start();
+          //foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           //{
-          //  var dt2Query = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
-          //      new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
-          //  var dt2FilterQuery = from dc in dt2Query.AsEnumerable()
-          //                       where targetTable.Columns.Contains(dc.ColumnName) == false
-          //                       select dc;
-          //  targetTable.Columns.AddRange(dt2FilterQuery.ToArray());
-          //  var rowData = from row1 in data.Movie.AsEnumerable()
-          //                join row2 in data.CustomFields.AsEnumerable()
-          //                on row1.Movie_Id equals row2.Movie_Id
-          //                select row1.ItemArray.Concat(row2.ItemArray.Where(r2 => row1.ItemArray.Contains(r2) == false)).ToArray();
-          //  foreach (object[] values in rowData)
-          //  {
-          //    targetTable.Rows.Add(values);
-          //  }
-          //  targetTable.TableName = "MovieEnhanced";
-          //  data.Tables.Add(targetTable);
+          //  string persons = string.Empty;
+          //  persons += (!movieRow.IsActorsNull()) ? movieRow.Actors : " ";
+          //  persons += " ,";
+          //  persons += (!movieRow.IsProducerNull()) ? movieRow.Producer : " ";
+          //  persons += " ,";
+          //  persons += (!movieRow.IsDirectorNull()) ? movieRow.Director : " ";
+          //  persons += " ,";
+          //  persons += (!movieRow.IsWriterNull()) ? movieRow.Writer : " ";
+          //  movieRow.Persons = persons;
           //}
-          //watchReadMovies.Stop();
-          //LogMyFilms.Debug("initData() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
-          
-          //watch.Reset(); watch.Start();
+          //initDataWatch.Stop();
+          //LogMyFilms.Debug("initData() - CalcPersons done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
+
+          //XmlNodeList nodeList = xmlDoc.DocumentElement.SelectNodes("descendant::Movie[*/CustomFields/Movie_Id=1]");
+          //DataRow dataRow;
+          //foreach (XmlNode xmlNode in nodeList)
+          //{
+          //  dataRow = xmlDoc.GetRowFromElement((XmlElement)xmlNode);
+          //  if (dataRow != null)
+          //    Console.WriteLine(dataRow[0]);
+          //}
+
+          // create extended movie table ...
+          initDataWatch.Reset(); initDataWatch.Start();
+          using (DataTable targetTable = data.Movie.Clone()) //using (DataTable targetTable = data.Tables["MovieEnhanced"])
+          {
+            var dt2Query = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
+                new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
+            var dt2FilterQuery = from dc in dt2Query.AsEnumerable()
+                                 where targetTable.Columns.Contains(dc.ColumnName) == false
+                                 select dc;
+            targetTable.Columns.AddRange(dt2FilterQuery.ToArray());
+            var rowData = from row1 in data.Movie.AsEnumerable()
+                          join row2 in data.CustomFields.AsEnumerable()
+                          on row1.Movie_Id equals row2.Movie_Id 
+                          //into mc
+                          //from subcustomfields in mc.DefaultIfEmpty()
+                          //where row2.Movie_Id == 0
+                          select row1.ItemArray.Concat(row2.ItemArray.Where(r2 => row1.ItemArray.Contains(r2) == false)).ToArray();
+            foreach (object[] values in rowData)
+            {
+              targetTable.Rows.Add(values);
+            }
+            targetTable.TableName = "MovieEnhanced";
+            data.Tables.Add(targetTable);
+          }
+          foreach (DataColumn column in data.Tables["MovieEnhanced"].Columns)
+          {
+            LogMyFilms.Debug("InitData() - 'MovieEnhanced' Columnname = '" + column.ColumnName + "'");
+          }
+          initDataWatch.Stop();
+          LogMyFilms.Debug("initData() - JoinTables (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
+
+
+          // Copy CustomDataFields to MyFilms Datafields for internal usage
+          initDataWatch.Reset(); initDataWatch.Start();
+          foreach (AntMovieCatalog.CustomFieldRow customFieldRow in data.CustomField) // add Customfields Rows to Movie table
+          {
+            DataColumn customfieldcolumn = new DataColumn();
+            customfieldcolumn.ColumnName = customFieldRow.Tag;
+            switch (customFieldRow.Type) // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
+            {
+              case "ftString":
+                customfieldcolumn.DataType = typeof(string);
+                break;
+              case "ftInteger":
+                customfieldcolumn.DataType = typeof(int);
+                break;
+              case "ftBoolean":
+                customfieldcolumn.DataType = typeof(bool);
+                break;
+              case "ftDate":
+                customfieldcolumn.DataType = typeof(DateTime);
+                break;
+              default:
+                customfieldcolumn.DataType = typeof(string);
+                break;
+            }
+            customfieldcolumn.DefaultValue = customFieldRow.DefaultValue;
+            customfieldcolumn.Caption = customFieldRow.Name;
+
+            if (!data.Tables["MovieEnhanced"].Columns.Contains(customfieldcolumn.ColumnName))
+              data.Tables["MovieEnhanced"].Columns.Add(customfieldcolumn);
+            LogMyFilms.Debug("initData() - DynamicCustomField: '" + customFieldRow.Name + "'");
+          }
+          //foreach (DataColumn column in data.CustomFields.Columns)
+          //{
+          //  // add CustomColumns, if not already present
+          //  if (!data.Movie.Columns.Contains(column.ColumnName))
+          //    data.Movie.Columns.Add(column);
+          //}
+          //foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
+          //{
+          //  DataRow cf = movieRow.GetCustomFieldsRows()[0];
+          //  foreach (DataColumn column in data.CustomFields.Columns)
+          //  {
+          //    movieRow[column.ColumnName] = cf[column.ColumnName];
+          //  }
+          //}
+          initDataWatch.Stop();
+          LogMyFilms.Debug("initData() - AddDynamicCustomFields done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
+
+          //initDataWatch.Reset(); initDataWatch.Start();
           //try
           //{
           //  foreach (AntMovieCatalog.MovieRow movieRow in movies)
           //  {
-          //    //DataRow customFieldsRow = movieRow.GetCustomFieldsRows()[0]; // get first one, is it's 1:1 relation ...              
+          //    //DataRow customFieldsRow = movieRow.GetCustomFieldsRows()[0]; // get first one, as it's 1:1 relation ...              
           //    foreach (DataColumn column in data.CustomFields.Columns)
           //    {
           //      if (column.ColumnMapping != MappingType.Hidden)
@@ -178,16 +264,85 @@ namespace MyFilmsPlugin.MyFilms
           //        //movieRow[column.ColumnName] = movieRow.GetCustomFieldsRows()[0][column.ColumnName];
           //        LogMyFilms.Debug("initData() - movieRow '" + column.ColumnName + "' populated with value '" + value + "'");
           //      }
-                
+
           //    }
           //  }
           //}
           //catch (Exception ex)
           //{
-          //  LogMyFilms.Debug("initData() - Error !" + ex.Message + ", tackTrace: " + ex.StackTrace);
+          //  LogMyFilms.Error("initData() - Error !" + ex.Message + ", tackTrace: " + ex.StackTrace);
           //}
-          //watch.Stop();
-          //LogMyFilms.Debug("initData() - CopyColumns done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          //initDataWatch.Stop();
+          //LogMyFilms.Debug("initData() - CopyColumns done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
+        }
+
+
+        private static DataTable LINQToDataTable<T>(IEnumerable<T> varlist)
+        {
+             DataTable dtReturn = new DataTable();
+
+             // column names 
+             PropertyInfo[] oProps = null;
+
+             if (varlist == null) return dtReturn;
+
+             foreach (T rec in varlist)
+             {
+                  // Use reflection to get property names, to create table, Only first time, others will follow 
+                  if (oProps == null)
+                  {
+                       oProps = ((Type)rec.GetType()).GetProperties();
+                       foreach (PropertyInfo pi in oProps)
+                       {
+                            Type colType = pi.PropertyType;
+
+                            if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition()      
+                            ==typeof(Nullable<>)))
+                             {
+                                 colType = colType.GetGenericArguments()[0];
+                             }
+
+                            dtReturn.Columns.Add(new DataColumn(pi.Name, colType));
+                       }
+                  }
+
+                  DataRow dr = dtReturn.NewRow();
+
+                  foreach (PropertyInfo pi in oProps)
+                  {
+                       dr[pi.Name] = pi.GetValue(rec, null) ?? DBNull.Value;
+                  }
+
+                  dtReturn.Rows.Add(dr);
+             }
+             return dtReturn;
+        }
+
+        private static DataTable ObjectArrayToDataTable(object[] data)
+        {
+          DataTable dt = new DataTable();
+          if (data.Length == 0) return dt; // if data is empty, return an empty table
+
+          Type t = data[0].GetType();
+          System.Reflection.PropertyInfo[] piList = t.GetProperties();
+
+          foreach (System.Reflection.PropertyInfo p in piList)
+          {
+            dt.Columns.Add(new DataColumn(p.Name, p.PropertyType));
+          }
+
+          object[] row = new object[piList.Length];
+
+          foreach (object obj in data)
+          {
+            int i = 0;
+            foreach (System.Reflection.PropertyInfo pi in piList)
+            {
+              row[i++] = pi.GetValue(obj, null);
+            }
+            dt.Rows.Add(row);
+          }
+          return dt;
         }
 
         private static string GetNameForMyFilmsDatafile(string catalogfullpath)
@@ -234,18 +389,20 @@ namespace MyFilmsPlugin.MyFilms
         }
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-          bool iscached = false;
+          bool iscached = true;
           LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
           watchReadMovies.Reset(); watchReadMovies.Start();
-          if (data == null) 
+          if (data == null)
+          {
+            iscached = false;
             initData();
-          else 
-            iscached = true;
+          }
 
-          if (StrSelect.Length == 0) 
-            StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
+          if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
 
-          movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens); //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+          movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+          //movies = GetEnhancedMovies().Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+          //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           if (movies.Length == 0 && all)
           {
             StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
@@ -253,12 +410,68 @@ namespace MyFilmsPlugin.MyFilms
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
           watchReadMovies.Stop();
-          LogMyFilms.Debug("ReadDataMovies() - Finished ... cached = '" + iscached + "' (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
-
+          LogMyFilms.Debug("ReadDataMovies() - Finished ... (cached = '" + iscached + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
           return movies;
 
           #region testing join and view
 
+          //var query1 = from movie in data.Movie
+          //             from customfields in data.CustomFields
+          //             where movie.Movie_Id == customfields.Movie_Id
+          //             where !movie.IsCheckedNull() && movie.TranslatedTitle != ""
+          //             select movie;
+
+          //var query2 = from movie in data.Movie
+          //             from customfieds in data.CustomFields
+          //             where customfieds.IsWatchedNull()
+          //             select movie;
+
+          //var finalQuery = query1.Union(query2);
+
+          //DataTable bindingTable = finalQuery.CopyToDataTable();
+
+
+          //var query =     from movie in data.Movie.AsEnumerable()
+          //                join customfields in data.CustomFields.AsEnumerable()
+          //                on movie.Field<int>("Movie_Id") equals
+          //                    customfields.Field<int>("Movie_Id")
+          //                where movie.TranslatedTitle != "" //&& movie.Field<DateTime>("Date").Month == 8
+          //                select new
+          //                {
+          //                  movie,
+          //                  customfields,
+          //                  MovieAddedDate =
+          //                      movie.Field<DateTime>("Date"),
+          //                  CustomField1 = 
+          //                      customfields.CustomField1
+          //                };
+
+          //query.Select(el =>
+          //                {
+          //                  DataRow row = data.Movie.NewRow();
+          //                  row["CustomField1"] = el.CustomField1;
+          //                  return row;
+          //                }
+          //            ).CopyToDataTable(data.Tables["MoviesExtended"], LoadOption.PreserveChanges);
+
+          //var queryext = from movie in data.Movie
+          //               where movie.DateAdded.DayOfYear == DateTime.Now.DayOfYear
+          //               where movie.IsTranslatedTitleNull() == false
+          //              select new
+          //              {
+          //                movie,
+          //                CustomFields = movie.ContentsRow.GetMovieRows(),
+          //                movie.TranslatedTitle
+          //              };
+
+          //DataTable dt = LINQToDataTable(queryext);
+
+          //foreach (var result in queryext)
+          //{
+          //  bindingTable.Rows.Add(new object[] { result, result.TranslatedTitle });
+          //}
+
+          
           //// create extended movie table ...
           //watchReadMovies.Reset(); watchReadMovies.Start();
           //DataTable targetTable = data.Movie.Clone();
@@ -560,9 +773,9 @@ namespace MyFilmsPlugin.MyFilms
           #endregion
         }
 
-        private void GetEnhancedMovies()
+        private static DataTable GetEnhancedMovies()
         {
-                    var movies_enhanced =
+          var movies_enhanced =
               from o in data.Movie
               //where   o.Year == "1998"
               orderby o.OriginalTitle ascending 
@@ -624,7 +837,6 @@ namespace MyFilmsPlugin.MyFilms
                 o.IMDB_Rank,
                 o.IsOnline,
                 o.IsOnlineTrailer,
-                o.TempView,
                 o.Aspectratio,
                 o.CategoryTrakt,
                 o.LastPosition,
@@ -657,17 +869,7 @@ namespace MyFilmsPlugin.MyFilms
                 //o.GetCustomFieldsRows()[0].LastPosition,
                 //o.GetCustomFieldsRows()[0].AudioChannelCount
               };
-
-          //foreach (AntMovieCatalog.MovieRow movieRow in movies)
-          //  DataRow customFieldsRow = movieRow.GetCustomFieldsRows()[0]; // get first one, is it's 1:1 relation ...
-        }
-
-        public static DataRow[] ReadDataPersons(string StrSelect, string StrSort, string StrSortSens)
-        {
-          if (data == null) initData();
-          if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
-          persons = data.Person.Select(StrSelect, StrSort + " " + StrSortSens);
-          return persons;
+          return LINQToDataTable(movies_enhanced);
         }
 
         private DataTable JoinDataTables(DataTable LeftTable, DataTable RightTable, String LeftPrimaryColumn, String RightPrimaryColumn)
@@ -772,6 +974,8 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Debug("LoadMyFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
               foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
               data.ReadXml(fs);
+              //xmlDoc = new XmlDataDocument(data);
+              //xmlDoc.Load(fs);
               foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
               fs.Close();
               LogMyFilms.Debug("LoadMyFilms()- closing  '" + catalogfile + "' FileStream");
@@ -796,15 +1000,31 @@ namespace MyFilmsPlugin.MyFilms
           {
             if (movieRow.IsAgeAddedNull())
             {
-              if (!movieRow.IsDateAddedNull())
-                movieRow.AgeAdded = ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString();
-              else
-                movieRow.AgeAdded = "9999";
+              movieRow.AgeAdded = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString() : "9999";
             }
           }
+
           watch.Stop();
           watchReadMovies.Stop();
           LogMyFilms.Debug("LoadMyFilms() - CalcDays Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
+
+          //// Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
+          //watch.Reset(); watch.Start();
+          //foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
+          //{
+          //  string persons = string.Empty;
+          //  persons += (!movieRow.IsActorsNull()) ? movieRow.Actors : " ";
+          //  persons += " ,";
+          //  persons += (!movieRow.IsProducerNull()) ? movieRow.Producer : " ";
+          //  persons += " ,";
+          //  persons += (!movieRow.IsDirectorNull()) ? movieRow.Director : " ";
+          //  persons += " ,";
+          //  persons += (!movieRow.IsWriterNull()) ? movieRow.Writer : " ";
+          //  movieRow.Persons = persons;
+          //}
+          //watch.Stop();
+          //LogMyFilms.Debug("initData() - CalcPersons done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+
           LogMyFilms.Debug("LoadMyFilms() - Finished ... (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
         }
 
@@ -840,18 +1060,9 @@ namespace MyFilmsPlugin.MyFilms
             }
 
             if (success)
-            {
               return true; // write successful!
-            }
             else
-            {
-              //MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-              //dlgOk.SetHeading("Error");//my videos
-              //dlgOk.SetLine(1, "Error during updating the XML database '" + catalogfile + "' !");
-              //dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-              //dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
-              return false;
-            }
+              return false; // write unsuccessful!
           }
           else
           {
@@ -878,9 +1089,7 @@ namespace MyFilmsPlugin.MyFilms
                 using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
                 {
                   LogMyFilms.Debug("SaveMyFilmsToDisk()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-
                   fs.SetLength(0); // do not append, owerwrite !
-
                   using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
                   {
                     LogMyFilms.Debug("SaveMyFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
@@ -890,6 +1099,7 @@ namespace MyFilmsPlugin.MyFilms
                     MyXmlTextWriter.Flush();
                     MyXmlTextWriter.Close();
                   }
+                  //xmlDoc.Save(fs);
                   fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
                   LogMyFilms.Debug("SaveMyFilmsToDisk()- closing '" + catalogfile + "' FileStream and releasing file lock");
                   success = true;
@@ -1668,7 +1878,15 @@ namespace MyFilmsPlugin.MyFilms
               case "ageadded":
                 return GUILocalizeStrings.Get(10798956);
               default:
-                return string.Empty;
+                {
+                  string translation = string.Empty;
+                  foreach (AntMovieCatalog.CustomFieldRow customFieldRow in data.CustomField.Rows)
+                  {
+                    if (customFieldRow.Tag.ToLower() == Column.ToLower()) 
+                      translation = (!customFieldRow.IsNameNull()) ? customFieldRow.Name : customFieldRow.Tag;
+                  }
+                  return translation;
+                }
             }
         }
         #endregion

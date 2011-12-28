@@ -220,7 +220,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" &&  // added "DatedAdded" to remove filter
                   dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Movie_ID" && dc.ColumnName != "Favorite" && 
-                  dc.ColumnName != "TempView" && dc.ColumnName != "LastPosition")
+                  dc.ColumnName != "LastPosition")
                 {
                   AntFilterItem1.Items.Add(dc.ColumnName);
                   AntFilterItem2.Items.Add(dc.ColumnName);
