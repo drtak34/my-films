@@ -4061,11 +4061,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           champselect = enr["IndexedTitle"].ToString();
         }
-        //else if (conf.BoolShowValueRanges && isalphanumeriacalfield) (( bool to be added in config, also needs change to facade population to support "ranges" on selection
-        //{
-        //  champselect = (int.TryParse(enr[WStrSort].ToString().Trim(), out iNumber)) ? GetValueRange(iNumber).ToString() : enr[WStrSort].ToString().Trim();
-        //  enr["TempView"] = champselect;
-        //}
         else
           champselect = enr[WStrSort].ToString().Trim();
 
