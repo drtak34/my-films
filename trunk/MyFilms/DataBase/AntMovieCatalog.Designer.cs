@@ -3385,8 +3385,6 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIsOnlineTrailer;
             
-            private global::System.Data.DataColumn columnTempView;
-            
             private global::System.Data.DataColumn columnAspectratio;
             
             private global::System.Data.DataColumn columnCategoryTrakt;
@@ -3394,6 +3392,12 @@ namespace MyFilmsPlugin.DataBase {
             private global::System.Data.DataColumn columnLastPosition;
             
             private global::System.Data.DataColumn columnAudioChannelCount;
+            
+            private global::System.Data.DataColumn columnCustomField1;
+            
+            private global::System.Data.DataColumn columnCustomField2;
+            
+            private global::System.Data.DataColumn columnCustomField3;
             
             private global::System.Data.DataColumn columnPersons;
             
@@ -3828,13 +3832,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TempViewColumn {
-                get {
-                    return this.columnTempView;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn AspectratioColumn {
                 get {
                     return this.columnAspectratio;
@@ -3859,6 +3856,27 @@ namespace MyFilmsPlugin.DataBase {
             public global::System.Data.DataColumn AudioChannelCountColumn {
                 get {
                     return this.columnAudioChannelCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CustomField1Column {
+                get {
+                    return this.columnCustomField1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CustomField2Column {
+                get {
+                    return this.columnCustomField2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CustomField3Column {
+                get {
+                    return this.columnCustomField3;
                 }
             }
             
@@ -3954,11 +3972,13 @@ namespace MyFilmsPlugin.DataBase {
                         string IMDB_Rank, 
                         string IsOnline, 
                         string IsOnlineTrailer, 
-                        string TempView, 
                         string Aspectratio, 
                         string CategoryTrakt, 
                         string LastPosition, 
                         string AudioChannelCount, 
+                        string CustomField1, 
+                        string CustomField2, 
+                        string CustomField3, 
                         string Persons) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -4018,11 +4038,13 @@ namespace MyFilmsPlugin.DataBase {
                         IMDB_Rank,
                         IsOnline,
                         IsOnlineTrailer,
-                        TempView,
                         Aspectratio,
                         CategoryTrakt,
                         LastPosition,
                         AudioChannelCount,
+                        CustomField1,
+                        CustomField2,
+                        CustomField3,
                         Persons};
                 if ((parentContentsRowByContents_Movie != null)) {
                     columnValuesArray[39] = parentContentsRowByContents_Movie[0];
@@ -4087,11 +4109,13 @@ namespace MyFilmsPlugin.DataBase {
                         string IMDB_Rank, 
                         string IsOnline, 
                         string IsOnlineTrailer, 
-                        string TempView, 
                         string Aspectratio, 
                         string CategoryTrakt, 
                         string LastPosition, 
-                        string AudioChannelCount) {
+                        string AudioChannelCount, 
+                        string CustomField1, 
+                        string CustomField2, 
+                        string CustomField3) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
@@ -4150,11 +4174,13 @@ namespace MyFilmsPlugin.DataBase {
                         IMDB_Rank,
                         IsOnline,
                         IsOnlineTrailer,
-                        TempView,
                         Aspectratio,
                         CategoryTrakt,
                         LastPosition,
                         AudioChannelCount,
+                        CustomField1,
+                        CustomField2,
+                        CustomField3,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
                     columnValuesArray[39] = parentContentsRowByContents_Movie[0];
@@ -4234,11 +4260,13 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIMDB_Rank = base.Columns["IMDB_Rank"];
                 this.columnIsOnline = base.Columns["IsOnline"];
                 this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
-                this.columnTempView = base.Columns["TempView"];
                 this.columnAspectratio = base.Columns["Aspectratio"];
                 this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
                 this.columnLastPosition = base.Columns["LastPosition"];
                 this.columnAudioChannelCount = base.Columns["AudioChannelCount"];
+                this.columnCustomField1 = base.Columns["CustomField1"];
+                this.columnCustomField2 = base.Columns["CustomField2"];
+                this.columnCustomField3 = base.Columns["CustomField3"];
                 this.columnPersons = base.Columns["Persons"];
             }
             
@@ -4356,8 +4384,6 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnIsOnline);
                 this.columnIsOnlineTrailer = new global::System.Data.DataColumn("IsOnlineTrailer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsOnlineTrailer);
-                this.columnTempView = new global::System.Data.DataColumn("TempView", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTempView);
                 this.columnAspectratio = new global::System.Data.DataColumn("Aspectratio", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAspectratio);
                 this.columnCategoryTrakt = new global::System.Data.DataColumn("CategoryTrakt", typeof(string), null, global::System.Data.MappingType.Element);
@@ -4366,6 +4392,12 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnLastPosition);
                 this.columnAudioChannelCount = new global::System.Data.DataColumn("AudioChannelCount", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAudioChannelCount);
+                this.columnCustomField1 = new global::System.Data.DataColumn("CustomField1", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomField1);
+                this.columnCustomField2 = new global::System.Data.DataColumn("CustomField2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomField2);
+                this.columnCustomField3 = new global::System.Data.DataColumn("CustomField3", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomField3);
                 this.columnPersons = new global::System.Data.DataColumn("Persons", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPersons);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -7823,21 +7855,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string TempView {
-                get {
-                    try {
-                        return ((string)(this[this.tableMovie.TempViewColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte TempView in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.TempViewColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Aspectratio {
                 get {
                     try {
@@ -7894,6 +7911,51 @@ namespace MyFilmsPlugin.DataBase {
                 }
                 set {
                     this[this.tableMovie.AudioChannelCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CustomField1 {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.CustomField1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte CustomField1 in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.CustomField1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CustomField2 {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.CustomField2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte CustomField2 in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.CustomField2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CustomField3 {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.CustomField3Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte CustomField3 in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.CustomField3Column] = value;
                 }
             }
             
@@ -8473,16 +8535,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsTempViewNull() {
-                return this.IsNull(this.tableMovie.TempViewColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetTempViewNull() {
-                this[this.tableMovie.TempViewColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsAspectratioNull() {
                 return this.IsNull(this.tableMovie.AspectratioColumn);
             }
@@ -8520,6 +8572,36 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetAudioChannelCountNull() {
                 this[this.tableMovie.AudioChannelCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCustomField1Null() {
+                return this.IsNull(this.tableMovie.CustomField1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCustomField1Null() {
+                this[this.tableMovie.CustomField1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCustomField2Null() {
+                return this.IsNull(this.tableMovie.CustomField2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCustomField2Null() {
+                this[this.tableMovie.CustomField2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCustomField3Null() {
+                return this.IsNull(this.tableMovie.CustomField3Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCustomField3Null() {
+                this[this.tableMovie.CustomField3Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
