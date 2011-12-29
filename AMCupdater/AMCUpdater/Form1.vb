@@ -1995,9 +1995,6 @@ Public Class Form1
     Private Sub MyFilmsWikiToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyFilmsWikiToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/Updating_AMC_Data/AMC_Updater")
     End Sub
-    Private Sub AMCUpdaterSourceforgeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AMCUpdaterSourceforgeToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://sourceforge.net/projects/amcupdater/")
-    End Sub
     Private Sub AntMovieCatalogToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AntMovieCatalogToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://www.antp.be/software/moviecatalog")
 
@@ -2132,7 +2129,8 @@ Public Class Form1
         End Try
 
     End Sub
-    Private Sub UserManualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManualToolStripMenuItem.Click
+    Private Sub UserManualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        ' Currently not used (no updated manual available), Menu entry removed from About Dropdown
         Try
             If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath & "\AMCUpdater User Guide.pdf") Then
                 System.Diagnostics.Process.Start(My.Application.Info.DirectoryPath & "\AMCUpdater User Guide.pdf")
