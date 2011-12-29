@@ -1007,12 +1007,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0)
                       {
                         // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
-                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, false);
+                        MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, false);
                       }
                       else
                       {
                         // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
-                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, true);
+                        MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, true);
                       }
                     }
                     else
@@ -1020,12 +1020,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
                       {
                         // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
-                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, false);
+                        MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, false);
                       }
                       else
                       {
                         // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
-                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, true);
+                        MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, true);
                       }
                     }
                     afficher_detail(true);
@@ -2403,7 +2403,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               MyFilms.r[Index][MyFilms.conf.StrWatchedField] = MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
           }
-          LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+          LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField + "' to '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
 
           Update_XML_database();
           
@@ -2436,10 +2436,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
                 string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
                 string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
 
                 if (tempuser == userprofilename) // Update Count Value
                 {
-                  sNew = tempuser + ":" + count.ToString() + ":" + temprating;
+                  sNew = tempuser + ":" + count + ":" + temprating + ":" + tempdatewatched;
                 }
                 if (string.IsNullOrEmpty(newEnhancedWatchedValue))
                   newEnhancedWatchedValue = sNew;
@@ -2451,9 +2452,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
-              newEnhancedWatchedValue = userprofilename + ":" + count.ToString() + ":" + "-1";
+              newEnhancedWatchedValue = userprofilename + ":" + count + ":" + "-1:";
             else
-              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + count.ToString() + ":" + "-1";
+              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + count + ":" + "-1:";
           }
           MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
         }
@@ -2461,26 +2462,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static string EnhancedWatchedValue(string s, string type)
         {
+          // "Global:0:-1|MikePlanet:0:-1" or "Global:0:-1|MikePlanet:0:-1:2011-12-24"
           string value = "";
-          string tmp = "";
+          string[] split = s.Split(new Char[] { ':' });
           switch (type)
           {
             case "username":
-              value = s.Substring(0, s.IndexOf(":"));
+              value = (split.Length > 0) ? split[0] : "";
               break;
             case "count":
-              tmp = s.Substring(s.IndexOf(":") + 1);
-              if (tmp.Contains(":"))
-                value = tmp.Substring(0, tmp.IndexOf(":"));
-              else
-                value = tmp;
+              value = (split.Length > 1) ? split[1] : "0";
               break;
             case "rating":
-              tmp = s.Substring(s.IndexOf(":") + 1);
-              if (tmp.Contains(":"))
-                value = tmp.Substring(tmp.IndexOf(":") + 1);
-              else
-                value = "-1";
+              value = (split.Length > 2) ? split[2] : "-1";
+              break;
+            case "datewatched":
+              value = (split.Length > 3) ? split[3] : "";
               break;
           }
           return value;
@@ -2504,6 +2501,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
                 string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
                 string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
 
                 if (tempuser == userprofilename)
                 {
@@ -2534,6 +2532,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
                 string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
                 string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
                 if (tempuser == userprofilename)
                 {
                   return temprating;
@@ -2563,10 +2562,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
                 string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
                 string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
 
                 if (tempuser == userprofilename) // Update Count Value
                 {
-                  sNew = tempuser + ":" + tempcount + ":" + rating;
+                  sNew = tempuser + ":" + tempcount + ":" + rating + ":" + tempdatewatched;
                 }
                 if (string.IsNullOrEmpty(newEnhancedWatchedValue))
                   newEnhancedWatchedValue = sNew;
@@ -2578,9 +2578,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
-              newEnhancedWatchedValue = userprofilename + ":" + "0" + ":" + rating;
+              newEnhancedWatchedValue = userprofilename + ":" + "0" + ":" + rating + ":";
             else
-              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + "0" + ":" + rating;
+              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + "0" + ":" + rating + ":";
           }
           MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
         }
@@ -2612,8 +2612,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           int count = GetWatchedCount(Index, userprofilename);
           string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
           string newEnhancedWatchedValue = string.Empty;
+          CultureInfo InvC = CultureInfo.InvariantCulture;
+          string datenow = DateTime.Now.ToString("d", InvC); // short date as invariant culture
 
-          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
+          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value and add/update datewatched
           {
             string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string s in split)
@@ -2624,9 +2626,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
                 string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
                 string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
                 if (tempuser == userprofilename)
                 {
-                  sNew = tempuser + ":" + (count + 1).ToString() + ":" + temprating;
+                  sNew = tempuser + ":" + (count + 1) + ":" + temprating + ":" + datenow;
                 }
                 if (string.IsNullOrEmpty(newEnhancedWatchedValue))
                   newEnhancedWatchedValue = sNew;
@@ -2638,12 +2641,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
-              newEnhancedWatchedValue = userprofilename + ":" + (count + 1).ToString() + ":" + "-1";
+              newEnhancedWatchedValue = userprofilename + ":" + (count + 1) + ":" + "-1:" + DateTime.Now.Date.ToShortDateString();
             else
-              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + (count + 1).ToString() + ":" + "-1";
+              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + (count + 1) + ":" + "-1:" + datenow;
           }
           MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
-
         }
 
         //-------------------------------------------------------------------------------------------
