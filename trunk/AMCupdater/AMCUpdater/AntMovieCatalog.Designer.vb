@@ -3323,8 +3323,6 @@ Partial Public Class AntMovieCatalog
         
         Private columnWatched As Global.System.Data.DataColumn
         
-        Private columnDateWatched As Global.System.Data.DataColumn
-        
         Private columnFavorite As Global.System.Data.DataColumn
         
         Private columnIMDB_Id As Global.System.Data.DataColumn
@@ -3680,13 +3678,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DateWatchedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDateWatched
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property FavoriteColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnFavorite
@@ -3875,7 +3866,6 @@ Partial Public Class AntMovieCatalog
                     ByVal Certification As String,  _
                     ByVal Writer As String,  _
                     ByVal Watched As String,  _
-                    ByVal DateWatched As Date,  _
                     ByVal Favorite As String,  _
                     ByVal IMDB_Id As String,  _
                     ByVal TMDB_Id As String,  _
@@ -3893,9 +3883,9 @@ Partial Public Class AntMovieCatalog
                     ByVal Persons As String,  _
                     ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, Subtitles, Size, Disks, Length_Num, Picture, Fanart, Certification, Writer, Watched, DateWatched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, Persons, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, Subtitles, Size, Disks, Length_Num, Picture, Fanart, Certification, Writer, Watched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, Persons, Nothing, Nothing}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(57) = parentContentsRowByContents_Movie(0)
+                columnValuesArray(56) = parentContentsRowByContents_Movie(0)
             End If
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
@@ -3942,7 +3932,6 @@ Partial Public Class AntMovieCatalog
                     ByVal Certification As String,  _
                     ByVal Writer As String,  _
                     ByVal Watched As String,  _
-                    ByVal DateWatched As Date,  _
                     ByVal Favorite As String,  _
                     ByVal IMDB_Id As String,  _
                     ByVal TMDB_Id As String,  _
@@ -3959,9 +3948,9 @@ Partial Public Class AntMovieCatalog
                     ByVal AudioChannelCount As String,  _
                     ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Nothing, Subtitles, Size, Disks, Nothing, Picture, Fanart, Certification, Writer, Watched, DateWatched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, Nothing, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Nothing, Subtitles, Size, Disks, Nothing, Picture, Fanart, Certification, Writer, Watched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, Nothing, Nothing, Nothing}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(57) = parentContentsRowByContents_Movie(0)
+                columnValuesArray(56) = parentContentsRowByContents_Movie(0)
             End If
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
@@ -4022,7 +4011,6 @@ Partial Public Class AntMovieCatalog
             Me.columnCertification = MyBase.Columns("Certification")
             Me.columnWriter = MyBase.Columns("Writer")
             Me.columnWatched = MyBase.Columns("Watched")
-            Me.columnDateWatched = MyBase.Columns("DateWatched")
             Me.columnFavorite = MyBase.Columns("Favorite")
             Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
             Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
@@ -4127,8 +4115,6 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnWriter)
             Me.columnWatched = New Global.System.Data.DataColumn("Watched", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnWatched)
-            Me.columnDateWatched = New Global.System.Data.DataColumn("DateWatched", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDateWatched)
             Me.columnFavorite = New Global.System.Data.DataColumn("Favorite", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFavorite)
             Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -4348,10 +4334,6 @@ Partial Public Class AntMovieCatalog
         
         Private columnCustomField3 As Global.System.Data.DataColumn
         
-        Private columnCustomField4 As Global.System.Data.DataColumn
-        
-        Private columnCustomField5 As Global.System.Data.DataColumn
-        
         Private columnEdition As Global.System.Data.DataColumn
         
         Private columnStudio As Global.System.Data.DataColumn
@@ -4371,8 +4353,6 @@ Partial Public Class AntMovieCatalog
         Private columnCategoryTrakt As Global.System.Data.DataColumn
         
         Private columnWatched As Global.System.Data.DataColumn
-        
-        Private columnDateWatched As Global.System.Data.DataColumn
         
         Private columnFavorite As Global.System.Data.DataColumn
         
@@ -4450,20 +4430,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CustomField4Column() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCustomField4
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property CustomField5Column() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCustomField5
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property EditionColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnEdition
@@ -4530,13 +4496,6 @@ Partial Public Class AntMovieCatalog
         Public ReadOnly Property WatchedColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnWatched
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property DateWatchedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDateWatched
             End Get
         End Property
         
@@ -4650,8 +4609,6 @@ Partial Public Class AntMovieCatalog
                     ByVal CustomField1 As String,  _
                     ByVal CustomField2 As String,  _
                     ByVal CustomField3 As String,  _
-                    ByVal CustomField4 As String,  _
-                    ByVal CustomField5 As String,  _
                     ByVal Edition As String,  _
                     ByVal Studio As String,  _
                     ByVal Fanart As String,  _
@@ -4662,7 +4619,6 @@ Partial Public Class AntMovieCatalog
                     ByVal Aspectratio As String,  _
                     ByVal CategoryTrakt As String,  _
                     ByVal Watched As String,  _
-                    ByVal DateWatched As String,  _
                     ByVal Favorite As String,  _
                     ByVal RatingUser As String,  _
                     ByVal IMDB_Id As String,  _
@@ -4675,9 +4631,9 @@ Partial Public Class AntMovieCatalog
                     ByVal AudioChannelCount As String,  _
                     ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
             Dim rowCustomFieldsRow As CustomFieldsRow = CType(Me.NewRow,CustomFieldsRow)
-            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, CustomField4, CustomField5, Edition, Studio, Fanart, Certification, Writer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, DateWatched, Favorite, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, AudioChannelCount, Nothing}
+            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, Edition, Studio, Fanart, Certification, Writer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, Favorite, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, AudioChannelCount, Nothing}
             If (Not (parentMovieRowByMovie_CustomFields) Is Nothing) Then
-                columnValuesArray(26) = parentMovieRowByMovie_CustomFields(56)
+                columnValuesArray(23) = parentMovieRowByMovie_CustomFields(55)
             End If
             rowCustomFieldsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCustomFieldsRow)
@@ -4701,8 +4657,6 @@ Partial Public Class AntMovieCatalog
             Me.columnCustomField1 = MyBase.Columns("CustomField1")
             Me.columnCustomField2 = MyBase.Columns("CustomField2")
             Me.columnCustomField3 = MyBase.Columns("CustomField3")
-            Me.columnCustomField4 = MyBase.Columns("CustomField4")
-            Me.columnCustomField5 = MyBase.Columns("CustomField5")
             Me.columnEdition = MyBase.Columns("Edition")
             Me.columnStudio = MyBase.Columns("Studio")
             Me.columnFanart = MyBase.Columns("Fanart")
@@ -4713,7 +4667,6 @@ Partial Public Class AntMovieCatalog
             Me.columnAspectratio = MyBase.Columns("Aspectratio")
             Me.columnCategoryTrakt = MyBase.Columns("CategoryTrakt")
             Me.columnWatched = MyBase.Columns("Watched")
-            Me.columnDateWatched = MyBase.Columns("DateWatched")
             Me.columnFavorite = MyBase.Columns("Favorite")
             Me.columnRatingUser = MyBase.Columns("RatingUser")
             Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
@@ -4735,10 +4688,6 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnCustomField2)
             Me.columnCustomField3 = New Global.System.Data.DataColumn("CustomField3", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnCustomField3)
-            Me.columnCustomField4 = New Global.System.Data.DataColumn("CustomField4", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnCustomField4)
-            Me.columnCustomField5 = New Global.System.Data.DataColumn("CustomField5", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnCustomField5)
             Me.columnEdition = New Global.System.Data.DataColumn("Edition", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnEdition)
             Me.columnStudio = New Global.System.Data.DataColumn("Studio", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
@@ -4759,8 +4708,6 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnCategoryTrakt)
             Me.columnWatched = New Global.System.Data.DataColumn("Watched", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnWatched)
-            Me.columnDateWatched = New Global.System.Data.DataColumn("DateWatched", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
-            MyBase.Columns.Add(Me.columnDateWatched)
             Me.columnFavorite = New Global.System.Data.DataColumn("Favorite", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnFavorite)
             Me.columnRatingUser = New Global.System.Data.DataColumn("RatingUser", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
@@ -4786,8 +4733,6 @@ Partial Public Class AntMovieCatalog
             Me.columnCustomField1.Namespace = ""
             Me.columnCustomField2.Namespace = ""
             Me.columnCustomField3.Namespace = ""
-            Me.columnCustomField4.Namespace = ""
-            Me.columnCustomField5.Namespace = ""
             Me.columnEdition.Namespace = ""
             Me.columnStudio.Namespace = ""
             Me.columnFanart.Namespace = ""
@@ -4798,7 +4743,6 @@ Partial Public Class AntMovieCatalog
             Me.columnAspectratio.Namespace = ""
             Me.columnCategoryTrakt.Namespace = ""
             Me.columnWatched.Namespace = ""
-            Me.columnDateWatched.Namespace = ""
             Me.columnFavorite.Namespace = ""
             Me.columnRatingUser.Namespace = ""
             Me.columnIMDB_Id.Namespace = ""
@@ -7287,20 +7231,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property DateWatched() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableMovie.DateWatchedColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte DateWatched in Tabelle Movie ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMovie.DateWatchedColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Favorite() As String
             Get
                 Try 
@@ -7945,16 +7875,6 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsDateWatchedNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.DateWatchedColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetDateWatchedNull()
-            Me(Me.tableMovie.DateWatchedColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsFavoriteNull() As Boolean
             Return Me.IsNull(Me.tableMovie.FavoriteColumn)
         End Function
@@ -8182,34 +8102,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property CustomField4() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableCustomFields.CustomField4Column),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField4 in Tabelle CustomFields ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableCustomFields.CustomField4Column) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property CustomField5() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableCustomFields.CustomField5Column),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte CustomField5 in Tabelle CustomFields ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableCustomFields.CustomField5Column) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Edition() As String
             Get
                 Try 
@@ -8346,20 +8238,6 @@ Partial Public Class AntMovieCatalog
             End Get
             Set
                 Me(Me.tableCustomFields.WatchedColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property DateWatched() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableCustomFields.DateWatchedColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte DateWatched in Tabelle CustomFields ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableCustomFields.DateWatchedColumn) = value
             End Set
         End Property
         
@@ -8558,26 +8436,6 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsCustomField4Null() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.CustomField4Column)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetCustomField4Null()
-            Me(Me.tableCustomFields.CustomField4Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsCustomField5Null() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.CustomField5Column)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetCustomField5Null()
-            Me(Me.tableCustomFields.CustomField5Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsEditionNull() As Boolean
             Return Me.IsNull(Me.tableCustomFields.EditionColumn)
         End Function
@@ -8675,16 +8533,6 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetWatchedNull()
             Me(Me.tableCustomFields.WatchedColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsDateWatchedNull() As Boolean
-            Return Me.IsNull(Me.tableCustomFields.DateWatchedColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetDateWatchedNull()
-            Me(Me.tableCustomFields.DateWatchedColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
