@@ -2302,13 +2302,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
                 if (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) && sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() && sr[conf.StrWatchedField].ToString().Length > 0) // changed to take setup config into consideration
                   tmpwatched = true;
-              if (tmpwatched) sr[conf.StrWatchedField] = "Global:1:-1";
-              else sr[conf.StrWatchedField] = "Global:0:-1";
+              sr[conf.StrWatchedField] = (tmpwatched) ? "Global:1:-1:" : "Global:0:-1:";
             }
             if (!sr[conf.StrWatchedField].ToString().Contains(conf.StrUserProfileName + ":"))
             {
-                if (tmpwatched) sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":1:-1";
-                else sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":0:-1";
+                sr[conf.StrWatchedField] = (tmpwatched) ? sr[conf.StrWatchedField] + "|" + conf.StrUserProfileName + ":1:-1:" : sr[conf.StrWatchedField] + "|" + conf.StrUserProfileName + ":0:-1:";
             }
             if (EnhancedWatched(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) == true)
               item.IsPlayed = true;
@@ -2319,10 +2317,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               string s = sr[conf.StrWatchedField].ToString();
               string count = s.Substring(s.IndexOf(":") + 1, 1);
-              if (count == "0")
-                sr[conf.StrWatchedField] = conf.GlobalUnwatchedOnlyValue;
-              else 
-                sr[conf.StrWatchedField] = "true";
+              sr[conf.StrWatchedField] = (count == "0") ? conf.GlobalUnwatchedOnlyValue : "true";
             }
             if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
               if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
@@ -2350,17 +2345,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           item.ItemId = number;
           // set availability status
-          if (InitialIsOnlineScan) // only display media status, if onlinescan was done
+          if (InitialIsOnlineScan) // only display media status, if onlinescan was done // if its online, set IsRemote to false !
           {
             if (string.IsNullOrEmpty(sr["IsOnline"].ToString()))
               item.IsRemote = false;
             else
-              if (bool.Parse(sr["IsOnline"].ToString())) // if its online, set IsRemote to false !
-              {
-                item.IsRemote = false;
-              }
-              else
-                item.IsRemote = true;
+              item.IsRemote = (bool.Parse(sr["IsOnline"].ToString())) ? false : true;
           }
           // load special icons to indicate watched/available flags in listcontrol
           if (IsPinIconsAvailable)
@@ -2768,15 +2758,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
-      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0"))
-      {
-        return false;
-      }
-      
-      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":"))
-      {
-        return false;
-      }
+      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
+      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
       return true; // count > 0 -> return true
     }
 

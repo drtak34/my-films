@@ -2306,14 +2306,16 @@ namespace MyFilmsPlugin.MyFilms
             string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
             string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
             string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+            string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
+            
 
             if (tempuser == "Global" && int.Parse(tempcount) < count) // Update Count Value for Global count, if it is lower than user count
             {
-              sNew = tempuser + ":" + count.ToString() + ":" + temprating;
+              sNew = tempuser + ":" + count + ":" + temprating + ":" + tempdatewatched;
             }
             if (tempuser == UserProfileName) // Update Count Value for selected user
             {
-              sNew = tempuser + ":" + count.ToString() + ":" + temprating;
+              sNew = tempuser + ":" + count + ":" + temprating + ":" + tempdatewatched;
             }
             if (string.IsNullOrEmpty(newEnhancedWatchedValue))
               newEnhancedWatchedValue = sNew;
@@ -2325,9 +2327,9 @@ namespace MyFilmsPlugin.MyFilms
       else
       {
         if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":"))
-          newEnhancedWatchedValue = "Global:" + count + ":-1|" + UserProfileName + ":" + count + ":" + "-1";
+          newEnhancedWatchedValue = "Global:" + count + ":-1:|" + UserProfileName + ":" + count + ":" + "-1:";
         else
-          newEnhancedWatchedValue = EnhancedWatchedValue + "|" + UserProfileName + ":" + count.ToString() + ":" + "-1";
+          newEnhancedWatchedValue = EnhancedWatchedValue + "|" + UserProfileName + ":" + count + ":" + "-1:";
       }
       return newEnhancedWatchedValue;
     }
