@@ -5892,7 +5892,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         public static void Load_Detailed_DB(int ItemId, bool wrep)
         {
-            LogMyFilms.Debug("Load_Detailed_DB - ItemId: '" + ItemId.ToString() + "', Details (wrep): '" + wrep.ToString() + "'");
+            LogMyFilms.Debug("Load_Detailed_DB - ItemId: '" + ItemId + "', Details (wrep): '" + wrep + "'");
             string wstrformat = "";
             AntMovieCatalog ds = new AntMovieCatalog();
 
@@ -6167,7 +6167,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               MyFilms.currentMovie.IMDBNumber = "";
                             break;
                         case "tmdb_id":
-                        case "datewatched":
                         case "watched":
                             break;
 
