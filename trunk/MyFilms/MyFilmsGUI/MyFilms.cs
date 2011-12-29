@@ -6942,17 +6942,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (facadeView.SelectedListItem.IsPlayed)
           {
             facadeView.SelectedListItem.IsPlayed = false;
-            // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, false);
             MyFilmsDetail.Watched_Toggle((int)facadeView.SelectedListItem.ItemId, false);
           }
           else
           {
             facadeView.SelectedListItem.IsPlayed = true;
-            // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, true);
             MyFilmsDetail.Watched_Toggle((int)facadeView.SelectedListItem.ItemId, true);
           }
           //Fin_Charge_Init(true, true);
-          //this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
         case "updatemenu":
