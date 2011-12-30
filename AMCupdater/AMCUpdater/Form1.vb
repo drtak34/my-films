@@ -2307,7 +2307,13 @@ Public Class Form1
         CurrentSettings.Edition_Strings = EditionString
 
         CurrentSettings.Group_Name_Applies_To = cbGroupNameAppliesTo.SelectedItem.ToString
-        CurrentSettings.Edition_Name_Applies_To = cbEditionNameAppliesTo.SelectedItem.ToString
+
+        If Not cbEditionNameAppliesTo.SelectedItem Is Nothing Then
+            CurrentSettings.Edition_Name_Applies_To = cbEditionNameAppliesTo.SelectedItem.ToString
+        Else
+            CurrentSettings.Edition_Name_Applies_To = ""
+        End If
+
         CurrentSettings.Master_Title = cbMasterTitle.SelectedItem.ToString
         CurrentSettings.Grabber_Override_Language = chkGrabberOverrideLanguage.Text.ToString()
         CurrentSettings.Grabber_Override_GetRoles = chkGrabberOverrideGetRoles.Text.ToString
