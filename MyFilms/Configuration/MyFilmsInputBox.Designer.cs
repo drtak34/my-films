@@ -101,7 +101,8 @@
             "PVD - Personal Video Database (0.9.9.21)",
             "eXtreme Movie Manager (V7.1.1.1)",
             "XBMC (V10.0)",
-            "MovingPicturesXML (V1.2 process plugin)"});
+            "MovingPicturesXML (V1.2 process plugin)",
+            "Ant Movie Catalog Xtended (V4.1)"});
           this.cbCatalogType.Location = new System.Drawing.Point(112, 132);
           this.cbCatalogType.Name = "cbCatalogType";
           this.cbCatalogType.Size = new System.Drawing.Size(227, 21);
