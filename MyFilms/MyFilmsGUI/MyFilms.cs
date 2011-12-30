@@ -390,6 +390,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private const int SkinInterfaceVersionMajor = 1;
     private const int SkinInterfaceVersionMinor = 0;
     // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
+
+    public static bool DebugPropertyLogging { get; set; }
+
     private string currentSkin = null;
 
     public string[] PersonTypes = new string[] { "Persons", "Actors", "Producer", "Director", "Writer", "Borrower" };
@@ -397,6 +400,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
     LoadParameterInfo loadParamInfo;
+
     #endregion
 
     #region Enums
@@ -566,8 +570,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Debug("MyFilms.Init() started.");
-      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() + "', BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
-      LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
+      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version + "', BuildDate: '" + MyFilmsSettings.BuildDate + "'");
+      LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion + "',    BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
       LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
 
       // Fanart Timer
@@ -10696,12 +10700,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static void InitGUIPropertyLabels()
     {
-      using (
-        MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
         MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
         LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
+        DebugPropertyLogging = (xmlreader.GetValueAsString("MyFilms", "PropertyLogging", "false").ToLower() == "true") ? true : false;
+        LogMyFilms.Info("Property Logging: '" + DebugPropertyLogging + "'");
       }
       AntMovieCatalog ds = new AntMovieCatalog();
       foreach (DataColumn dc in ds.Movie.Columns)
