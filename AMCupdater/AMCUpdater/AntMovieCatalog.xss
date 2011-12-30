@@ -11,7 +11,7 @@
     <Shape ID="DesignTable:MyFilmsSettings" ZOrder="19" X="706" Y="-6" Height="61" Width="159" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
     <Shape ID="DesignTable:Users" ZOrder="18" X="1200" Y="-4" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
     <Shape ID="DesignTable:User" ZOrder="17" X="1209" Y="161" Height="112" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="108" />
-    <Shape ID="DesignTable:CustomFieldsProperties" ZOrder="1" X="212" Y="281" Height="198" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="194" />
+    <Shape ID="DesignTable:CustomFieldsProperties" ZOrder="1" X="212" Y="281" Height="130" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="126" />
     <Shape ID="DesignTable:CustomField" ZOrder="24" X="515" Y="248" Height="197" Width="172" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="193" />
     <Shape ID="DesignTable:ListValue" ZOrder="5" X="819" Y="302" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:Contents" ZOrder="23" X="290" Y="519" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
