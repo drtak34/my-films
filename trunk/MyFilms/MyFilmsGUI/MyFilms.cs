@@ -214,8 +214,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public const string ImdbBaseUrl = "http://www.imdb.com/";
 
-    public const bool LogGUIProperties = false;
-
     enum Controls : int
     {
       CTRL_BtnLayout = 2,
