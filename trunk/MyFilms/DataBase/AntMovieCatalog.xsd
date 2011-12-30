@@ -222,6 +222,9 @@
           </xs:complexType>
         </xs:element>
       </xs:choice>
+      <xs:attribute name="Format" type="xs:string" />
+      <xs:attribute name="Version" type="xs:string" />
+      <xs:attribute name="Date" type="xs:string" />
     </xs:complexType>
     <xs:unique name="Users_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//Users" />
