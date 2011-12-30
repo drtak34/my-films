@@ -61,6 +61,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
+                AlwaysShowConfigMenu = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false);
                 StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
                 StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", string.Empty);
                 StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", string.Empty);
@@ -575,6 +576,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         // bool variables
+        private bool alwaysShowConfigMenu = false;
+        public bool AlwaysShowConfigMenu
+        {
+          get { return alwaysShowConfigMenu; }
+          set { alwaysShowConfigMenu = value; }
+        }
+
         private bool boolselect = false;
         public bool Boolselect
         {

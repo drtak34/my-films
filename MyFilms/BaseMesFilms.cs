@@ -1675,7 +1675,7 @@ namespace MyFilmsPlugin.MyFilms
           // sort descending by dateadded
           movielist = movielist.OrderByDescending(x => x.DateTime).ToList();
           //movielist.Sort((x, y) => -x.DateTime.CompareTo(y.DateTime)); // minus is for descending order... saves movielist.Reverse();
-          LogMyFilms.Debug("GetMostRecent() - Returning (nonlimited) movies: '" + movielist.Count + "'");
+          LogMyFilms.Debug("GetMostRecent() - retrieving (nonlimited) movies: '" + movielist.Count + "'");
 
           // now apply the result count limit
           movielist = movielist.Take(limit).ToList();

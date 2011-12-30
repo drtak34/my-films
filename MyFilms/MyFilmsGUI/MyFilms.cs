@@ -1605,8 +1605,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           else
           {
-            GUIWindowManager.ShowPreviousWindow();
-            return;
+            if (conf.AlwaysShowConfigMenu) // show config menu selection, if selected in setup on "leaving"
+            {
+              if (!ChooseNewConfig()) 
+                GUIWindowManager.ShowPreviousWindow(); // if user "escapes", return to previous window / quit
+              return;
+            }
+            else
+            {
+              GUIWindowManager.ShowPreviousWindow();
+              return;
+            }
           }
         case Action.ActionType.ACTION_KEY_PRESSED:
           base.OnAction(action);
@@ -5393,69 +5402,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "config": //Choose Database
-          GUIControl.ShowControl(GetID, 34); // hide elements in skin
-          string newConfig = Configuration.Choice_Config(GetID);
-          newConfig = Configuration.Control_Access_Config(newConfig, GetID);
-          if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
-          {
-            InitMainScreen(false); // reset all properties and values
-            InitGlobalFilters(false); // reset global filters, when loading new config !
-            //Change "Config":
-            if (facadeView.SelectedListItem != null)
-              Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-            else
-              Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
-            Configuration.CurrentConfig = newConfig;
-            InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
-            InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
-            //GUIWaitCursor.Init();
-            //GUIWaitCursor.Show();
-            //GUIWindowManager.Process();
-            //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-            Load_Config(newConfig, true, null);
-            if (InitialStart)
-            {
-              Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
-              //Loadfacade(); // load facade threaded...
-
-              if (conf.StrFileType != "0" && conf.StrFileType != "10")
-              {
-                if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
-                {
-                  ImportComplete();
-                  LogMyFilms.Debug("Change_View(): Fired 'ImportCompleted' event to trigger sync to trakt page after initial DB import of external Catalog is finished !");
-                }
-              }
-            }
-            else
-            {
-              Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-              //if (conf.AlwaysDefaultView)
-              //  Loadfacade(); // load threaded Fin_Charge_Init(true, true)
-              //else
-              //  Refreshfacade(); // load threaded Fin_Charge_Init(false, true)
-            }
-
-            // launch DB watcher for multiseat
-            InitFSwatcher();
-
-            // Launch Background availability scanner, if configured in setup
-            if (MyFilms.conf.ScanMediaOnStart && InitialStart)
-            {
-              LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + InitialStart.ToString() + "'");
-              this.AsynIsOnlineCheck();
-            }
-            InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
-
-            if (MyFilms.conf.StrFanart)
-              Fanartstatus(true);
-            else
-              Fanartstatus(false);
-          }
-          else
-            GUIControl.HideControl(GetID, 34); // show elements in skin
-          //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-          //GUIWaitCursor.Hide();
+          ChooseNewConfig();
           break;
 
         case "nasstatus": //Check and show status of NAS Servers
@@ -6251,6 +6198,75 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Change_View(" + choiceView + ") -> End");
     }
 
+    private bool ChooseNewConfig()
+    {
+      bool success = false;
+      GUIControl.ShowControl(GetID, 34); // hide elements in skin
+      string newConfig = Configuration.Choice_Config(GetID);
+      newConfig = Configuration.Control_Access_Config(newConfig, GetID);
+      if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
+      {
+        success = true;
+        InitMainScreen(false); // reset all properties and values
+        InitGlobalFilters(false); // reset global filters, when loading new config !
+        //Change "Config":
+        if (facadeView.SelectedListItem != null)
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+        else
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
+        Configuration.CurrentConfig = newConfig;
+        InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
+        InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+        //GUIWaitCursor.Init();
+        //GUIWaitCursor.Show();
+        //GUIWindowManager.Process();
+        //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+        Load_Config(newConfig, true, null);
+        if (InitialStart)
+        {
+          Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
+          //Loadfacade(); // load facade threaded...
+
+          if (conf.StrFileType != "0" && conf.StrFileType != "10")
+          {
+            if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+            {
+              ImportComplete();
+              LogMyFilms.Debug("Change_View(): Fired 'ImportCompleted' event to trigger sync to trakt page after initial DB import of external Catalog is finished !");
+            }
+          }
+        }
+        else
+        {
+          Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+          //if (conf.AlwaysDefaultView)
+          //  Loadfacade(); // load threaded Fin_Charge_Init(true, true)
+          //else
+          //  Refreshfacade(); // load threaded Fin_Charge_Init(false, true)
+        }
+
+        // launch DB watcher for multiseat
+        InitFSwatcher();
+
+        // Launch Background availability scanner, if configured in setup
+        if (MyFilms.conf.ScanMediaOnStart && InitialStart)
+        {
+          LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + InitialStart.ToString() + "'");
+          this.AsynIsOnlineCheck();
+        }
+        InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
+
+        if (MyFilms.conf.StrFanart)
+          Fanartstatus(true);
+        else
+          Fanartstatus(false);
+      }
+      else
+        GUIControl.HideControl(GetID, 34); // show elements in skin
+      //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+      //GUIWaitCursor.Hide();
+      return success;
+    }
 
     private void Change_UserProfileName()
     {
