@@ -749,7 +749,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (defaultconfig) // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
             InitMainScreen(false); // don't log to MyFilms.log Property clear
           Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
-          if (InitialStart && conf.StrFileType != "0" && conf.StrFileType != "10")
+          if (InitialStart && conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 && conf.StrFileType != Configuration.CatalogType.AntMovieCatalog4Xtended)
           {
             if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
             {
@@ -4434,21 +4434,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             switch (conf.StrFileType) // perform catalog specific searches ...
             {
-              case "0": // ANT Movie Catalog
+              case Configuration.CatalogType.AntMovieCatalog3:
                 break;
-              case "10":// Starter Settings ANT extnded DB
+              case Configuration.CatalogType.AntMovieCatalog4Xtended:
                 break;
-              case "1": // DVD Profiler
+              case Configuration.CatalogType.DVDProfiler:
                 break;
-              case "2": // Movie Collector V7.1.4
+              case Configuration.CatalogType.MovieCollector:
                 break;
-              case "3": // MyMovies
+              case Configuration.CatalogType.MyMovies:
                 break;
-              case "4": // EAX MC 2.5.0
-              case "5": // EAX 3.x
+              case Configuration.CatalogType.EaxMovieCatalog2:
+              case Configuration.CatalogType.EaxMovieCatalog3:
                 if (System.IO.File.Exists(strPathArtist + itemlabel.Replace(" ", ".") + ".jpg")) strThumbSource = strPathArtist + itemlabel.Replace(" ", ".") + ".jpg";
                 break;
-              case "6": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+              case Configuration.CatalogType.PersonalVideoDatabase: // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
                 if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
                 {
                   string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
@@ -4458,7 +4458,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     strThumbSource = files[0];
                 }
                 break;
-              case "7": // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
+              case Configuration.CatalogType.eXtremeMovieManager: // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
                 if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in XMM picture directory
                 {
                   string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
@@ -4469,11 +4469,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     strThumbSource = files[0];
                 }
                 break;
-              case "8": // XBMC fulldb export (all movies in one DB)
+              case Configuration.CatalogType.XBMC:
                 break;
-              case "9": // MovingPicturesXML V1.2
+              case Configuration.CatalogType.MovingPicturesXML:
                 break;
-              case "11": // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+              case Configuration.CatalogType.XBMCnfoReader:
                 break;
               default:
                 break;
@@ -5725,7 +5725,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else // display item fields
                 {
-                  if (MyFilms.conf.StrFileType != "0" || (dc.ColumnName != "DateAdded" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
+                  if (MyFilms.conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || (dc.ColumnName != "DateAdded" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
                     && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags"
                     && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"))
                   {
@@ -6229,7 +6229,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
           //Loadfacade(); // load facade threaded...
 
-          if (conf.StrFileType != "0" && conf.StrFileType != "10")
+          if (conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 && conf.StrFileType != Configuration.CatalogType.AntMovieCatalog4Xtended)
           {
             if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
             {

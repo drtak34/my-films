@@ -41,6 +41,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using MyFilmsPlugin.Configuration;
   using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms.CatalogConverter;
+  using MyFilmsPlugin.MyFilms.MyFilmsGUI;
   using MyFilmsPlugin.MyFilms.Utils;
   
   using TaskScheduler;
@@ -80,7 +81,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             InitializeComponent();
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString();
+            this.label_VersionNumber.Text = "Version " + asm.GetName().Version;
         }
 
 
@@ -115,7 +116,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               //this.btnWatchedImport.Visible = false; // disable export/import for watched status (not yet implemented)
               // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
               //CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
-              CatalogType.Items.Remove("MyFilms extended Database");
+              //CatalogType.Items.Remove("Ant Movie Catalog Xtended (V4.1)");
               CatalogType.Items.Remove("XBMC nfo reader");
               //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
               //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
@@ -130,22 +131,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //    this.General.TabPages.Insert(loc, this.tabPageSave);
             //  }
             //}
-//"Ant Movie Catalog (V3.5.1.2)",
-//"DVD Profiler (V3.7.2)",
-//"Movie Collector (V7.1.4)",
-//"MyMovies (V3.18)",
-//"Eax Movie Catalog (2.5.0)",
-//"eXtreme Movie Manager (V7.1.1.1)",
-//"XBMC (V10.0)",
-//"MyFilms extended Database",
-//"XBMC nfo reader",
-//"Eax Movie Catalog (3.0.9 b5)",
-//"PVD - Personal Video Database (0.9.9.21)",
-//"MovingPicturesXML (V1.2 process plugin)"});
 
-            //this.label_VersionNumber.Text = "Version 5.1.0 alpha";
-            LogMyFilms.Info("MFsetup: Started with version '" + label_VersionNumber.Text + "'");
-
+            LogMyFilms.Info("MyFilms Setup: Started with version '" + label_VersionNumber.Text + "'");
 
             MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
             //            for (int i = 0; i < (int)MesFilms_nb_config; i++)
@@ -196,15 +183,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" 
-                && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" 
-                && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" 
-                && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio" 
-                && dc.ColumnName != "CategoryTrakt")
-                // All those fieds are currently not supported by ANT-MC - they will be added, if CatalogType changes to external catalog to the respective fields
-                // Also removed Contents_Id and Pictures, as they mostly useless.
+              if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && 
+                   dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart")
+                  && (CatalogType.SelectedIndex != 0 || 
+                  (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" && 
+                   dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && 
+                   dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && 
+                   dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite"))
+                )
               {
-                if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" ||
+                if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
                     dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
                     dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
                 {
@@ -218,9 +206,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntTitle2.Items.Add(dc.ColumnName);
                   AntSTitle.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" &&  // added "DatedAdded" to remove filter
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Movie_ID" && dc.ColumnName != "Favorite" && 
-                  dc.ColumnName != "LastPosition")
+                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
                 {
                   AntFilterItem1.Items.Add(dc.ColumnName);
                   AntFilterItem2.Items.Add(dc.ColumnName);
@@ -230,26 +216,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem4.Items.Add(dc.ColumnName);
                   AntItem5.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded")
+                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "Number" &&
-                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" &&
+                if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
                     dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
-                    dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" &&
-                    dc.ColumnName != "Rating" && dc.ColumnName != "Size" && dc.ColumnName != "Picture" &&
-                    dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded" &&
-                    dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                    dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" && 
+                    dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded")
                 {
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "TranslatedTitle" &&
-                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" &&
-                    dc.ColumnName != "Length_Num" && dc.ColumnName != "Number")
+                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Number")
                 {
                   AntViewItem1.Items.Add(dc.ColumnName);
                   AntViewItem2.Items.Add(dc.ColumnName);
@@ -257,18 +238,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntViewItem4.Items.Add(dc.ColumnName);
                   AntViewItem5.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
-                  && dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Picture" && dc.ColumnName != "DateAdded" &&
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && 
+                    dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" &&
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntSearchItem1.Items.Add(dc.ColumnName);
                   AntSearchItem2.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Contents_Id" && dc.ColumnName != "TranslatedTitle" &&
-                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" &&
-                    dc.ColumnName != "Picture" && dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
-                    dc.ColumnName != "DateAdded" && // disabled for Doug testing
-                    dc.ColumnName != "Date" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                    dc.ColumnName != "Length" && dc.ColumnName != "Rating" && 
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntSort1.Items.Add(dc.ColumnName);
                   AntSort2.Items.Add(dc.ColumnName);
@@ -281,14 +261,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   cbfdupdate.Items.Add(dc.ColumnName);
                   cbWatched.Items.Add(dc.ColumnName);
                   CmdPar.Items.Add(dc.ColumnName);
-                }
-              }
-              else // Fields not supported by AMC - (dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")
-              {
-                if (CatalogType.SelectedIndex == 10 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification" || dc.ColumnName == "Edition" || dc.ColumnName == "Studio"))
-                {
-                  AntSearchField.Items.Add(dc.ColumnName);
-                  AntUpdField.Items.Add(dc.ColumnName);
                 }
               }
             }
@@ -368,7 +340,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 //eXtreme Movie Manager (V7.1.0.2)
                 //XBMC (V10.0)
                 //MyFilms DB (ANT with extended Database Fields)
-              if (CatalogType.SelectedIndex == 0 || CatalogType.SelectedIndex == 10 || CatalogType.SelectedIndex == 11) // AMC, AMCextended or XBMC NFO reader
+              if (IsAMCcatalogType(CatalogType.SelectedIndex) || CatalogType.SelectedIndex == 11) // AMC, AMCextended or XBMC NFO reader
                 {
                     if (System.Windows.Forms.MessageBox.Show("That File doesn't exists, do you want to create it ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -417,11 +389,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               {
                 string catalogDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                 string imgPrefixFilenameOnly = "";
-                if (MesFilmsImg.Text == catalogDirectory && CatalogType.SelectedIndex == 0)  // only if not external catalog
+                if (MesFilmsImg.Text == catalogDirectory && IsAMCcatalogType(CatalogType.SelectedIndex))  // only if not external catalog
                   cbPictureHandling.Text = "Relative Path";
                 else
                   cbPictureHandling.Text = "Full Path"; // set as default, unless other is possible
-                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory && CatalogType.SelectedIndex == 0) // only if not external catalog
+                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory && IsAMCcatalogType(CatalogType.SelectedIndex)) // only if not external catalog
                 {
                   MesFilmsImg.Text = catalogDirectory;
                   cbPictureHandling.Text = "Relative Path";
@@ -1124,7 +1096,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (rbsuppress4.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressType", "4");
 
-            if (CatalogType.SelectedIndex != 0) // common external catalog options
+            if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // common external catalog options
             {
               XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddTagline", chkAddTagline.Checked);
               XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddTags", chkAddTags.Checked);
@@ -2127,10 +2099,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Selected_Enreg_TextChanged();
         }
 
+        private bool IsAMCcatalogType(int selectedindex)
+        {
+          return (selectedindex == 0 || selectedindex == 10) ? true : false;
+        }
 
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
-          if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
+          if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
           {
             if (!NewConfigButton)
             {
@@ -2960,7 +2936,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     string DestinationCertification = "";
                     string DestinationWriter = "";
 
-                    if (CatalogType.SelectedIndex != 0)
+                    if (!IsAMCcatalogType(CatalogType.SelectedIndex))
                     {
                       if (chkAddTagline.Checked)
                         DestinationTagline = ECMergeDestinationFieldTagline.Text;
@@ -3097,7 +3073,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 int pos = reader.LinePosition;
                 reader.MoveToNextAttribute();
-                System.Windows.Forms.MessageBox.Show("Invalid Character for Movie Number " + reader.Value + " at position " + pos.ToString() + ", number of records read : " + mydivx.Movie.Count.ToString() + ". You have to correct the Movie's information with your movie catalog software !. Exception Message : " + ex.Message, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                System.Windows.Forms.MessageBox.Show("Invalid Character for Movie Number " + reader.Value + " at position " + pos + ", number of records read : " + mydivx.Movie.Count + ". You have to correct the Movie's information with your movie catalog software !. Exception Message : " + ex.Message, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return mydivx;
             }
             return mydivx;
@@ -3107,22 +3083,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private bool WriteXml(AntMovieCatalog dataset, string Catalog)
         {
           if (dataset == null || string.IsNullOrEmpty(Catalog)) return false;
-          if (CatalogType.SelectedIndex != 0 && CatalogType.SelectedIndex != 10) return false; // only write AMC type catalogs
+          if (!IsAMCcatalogType(CatalogType.SelectedIndex)) return false; // only write AMC type catalogs
 
           try
           {
             using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
             {
-              LogMyFilms.Debug(
-                "Commit()- opening '" + Catalog +
-                "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-              fs.SetLength(0); // do not append, owerwrite !
-
+              LogMyFilms.Debug("Commit()- opening '" + Catalog + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+              fs.SetLength(0);
               using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
               {
                 LogMyFilms.Debug("Commit()- writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
                 MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-                  // Added by Guzzi to get properly formatted output XML
                 MyXmlTextWriter.WriteStartDocument();
                 dataset.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
                 MyXmlTextWriter.Flush();
@@ -3134,9 +3106,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           catch (Exception saveexeption)
           {
-            LogMyFilms.Debug(
-              "Commit()- exception while trying to save data in '" + Catalog + "' - exception: " + saveexeption.Message +
-              ", stacktrace: " + saveexeption.StackTrace);
+            LogMyFilms.Debug("Commit()- exception while trying to save data in '" + Catalog + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
             return false;
           }
           return true;
@@ -4349,7 +4319,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnLaunchAMCglobal_Click(object sender, EventArgs e)
         {
-          if (CatalogType.SelectedIndex == 0 || CatalogType.SelectedIndex == 10) // can be "10" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
+          if (IsAMCcatalogType(CatalogType.SelectedIndex)) // can be "10" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
             launchAMCmanager();
           else
             MessageBox.Show("Cannot launch AMC Updater !  \n AMC Updater is not supported for external catalogs other than AMC  !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -4853,7 +4823,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Config_Name.Text = newConfig_Name;
           this.Refresh_Items(true);
 
-          CatalogType.SelectedIndex = 0; // can be "10" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
+          CatalogType.SelectedIndex = 0; // can be "10" = "AMC 4.1 extended DB"
 
           // Ask user to select existing or create new catalog...
           bool useExistingCatalog = true;
@@ -5235,7 +5205,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               break;
           }
               
-          if (newCatalog && (CatalogType.SelectedIndex == 0 || CatalogType.SelectedIndex == 10))
+          if (newCatalog && IsAMCcatalogType(CatalogType.SelectedIndex))
           {
             launchAMCmanager();
           }
@@ -5452,7 +5422,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           switch (CatalogType.SelectedIndex)
           {
             case 0: // ANT Movie Catalog
-            case 10:// Starter Settings ANT extnded DB
+            case 10:// ANT Movie Catalog extnded V4.1
               break;
             case 1: // DVD Profiler
             case 2: // Movie Collector V7.1.4
@@ -5522,7 +5492,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void buttonOpenTmpFileAMC_Click(object sender, EventArgs e)
         {
           string destFile = string.Empty;
-          if (CatalogType.SelectedIndex == 0)
+          if (IsAMCcatalogType(CatalogType.SelectedIndex))
             destFile = MesFilmsCat.Text;
           else
             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -5536,7 +5506,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MessageBox.Show("Unable to launch Ant Movie Catalog ! \nPlease set the path accordingly first!", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
           }
-          if (CatalogType.SelectedIndex != 0) // show warning when launching AMC with EC tmp file !
+          if (IsAMCcatalogType(CatalogType.SelectedIndex)) // show warning when launching AMC with EC tmp file !
           {
             MessageBox.Show("Info: You are launching AMC with a temporary cache catalog file !\nPlease be aware, that changes in MC will be overwritten on next export of your external catalog !", "AMC Launcher Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
           }

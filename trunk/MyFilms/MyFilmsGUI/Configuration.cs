@@ -39,6 +39,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
+        public enum CatalogType
+        {
+          AntMovieCatalog3 = 0,
+          DVDProfiler = 1,
+          MovieCollector = 2,
+          MyMovies = 3,
+          EaxMovieCatalog2 = 4,
+          EaxMovieCatalog3 = 5,
+          PersonalVideoDatabase = 6,
+          eXtremeMovieManager  = 7,
+          XBMC = 8,
+          MovingPicturesXML = 9,
+          AntMovieCatalog4Xtended = 10,
+          XBMCnfoReader = 11
+        }
+
         // public LoadParameterInfo LoadParams = null;
         public Configuration(string CurrentConfig, bool setcurrentconfig, bool create_temp, LoadParameterInfo loadParams)
         {
@@ -126,7 +142,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
                 StrFileXmlTemp = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
-                StrFileType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0");
+                StrFileType = (CatalogType)int.Parse(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0"));
                 StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", string.Empty);
                 StrArtistDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistDflt", false);
                 StrPathFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartPicture", string.Empty);
@@ -177,7 +193,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string DestinationCertification = "";
                 string DestinationWriter = "";
 
-                if (StrFileType != "0")
+                if (StrFileType != CatalogType.AntMovieCatalog3)
                 {
                   if (addTagline)
                     DestinationTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTagline", "");
@@ -197,11 +213,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 ReadOnly = true;
                 switch (StrFileType)
                 {
-                    case "0": // ANT Movie Catalog
-                    case "10":// ANT Movie Catalog extended
+                    case CatalogType.AntMovieCatalog3:
+                    case CatalogType.AntMovieCatalog4Xtended:
                       ReadOnly = false;
                       break;
-                    case "1": // DVD Profiler
+                    case CatalogType.DVDProfiler:
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -220,7 +236,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "2": // Movie Collector V7.1.4
+                    case CatalogType.MovieCollector:
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -238,7 +254,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "3": // MyMovies
+                    case CatalogType.MyMovies:
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -256,7 +272,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "4": // EAX 2.5.0
+                    case CatalogType.EaxMovieCatalog2:
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -274,7 +290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "5": // EAX 3.x
+                    case CatalogType.EaxMovieCatalog3:
                         if (create_temp)
                         {
                           string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -292,7 +308,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "6": // PVD 0.9.9.21
+                    case CatalogType.PersonalVideoDatabase:
                         if (create_temp)
                         {
                           string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -310,7 +326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "7": // XMM
+                    case CatalogType.eXtremeMovieManager:
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -328,7 +344,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "8": // XBMC fulldb export (all movies in one DB)
+                    case CatalogType.XBMC: // XBMC fulldb export (all movies in one DB)
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -346,7 +362,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "9": // MovingPicturesXML
+                    case CatalogType.MovingPicturesXML:
                         if (create_temp)
                         {
                           string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -364,7 +380,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "11": // XBMC NFO reader
+                    case CatalogType.XBMCnfoReader:
                         break;
                 }
                 StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);
@@ -1106,8 +1122,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strFileXmlTemp; }
           set { strFileXmlTemp = value; }
         }
-        private string strFileType = string.Empty;
-        public string StrFileType
+        private CatalogType strFileType;
+        public CatalogType StrFileType
         {
           get { return strFileType; }
           set { strFileType = value; }
@@ -1623,10 +1639,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             switch (MyFilms.conf.StrFileType)
             {
-              case "0":
-              case "10":
+              case CatalogType.AntMovieCatalog3:
+              case CatalogType.AntMovieCatalog4Xtended:
                 break;
-              case "1":
+              case CatalogType.DVDProfiler:
                 XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
                 break;
             }

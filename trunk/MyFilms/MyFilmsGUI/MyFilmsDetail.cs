@@ -5319,20 +5319,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // Added to support fanart for external catalogs
                 switch (tmpconf.StrFileType)
                 {
-                  case "0": // ANT Movie Catalog
+                  case Configuration.CatalogType.AntMovieCatalog3:
                     break;
-                  case "10":// Starter Settings ANT extnded DB
-                    break;
-
-                  case "1": // DVD Profiler
-                    break;
-                  case "2": // Movie Collector V7.1.4
-                    break;
-                  case "3": // MyMovies
+                  case Configuration.CatalogType.AntMovieCatalog4Xtended:
                     break;
 
-                  case "4": // EAX MC 2.5.0
-                  case "5": // EAX 3.x
+                  case Configuration.CatalogType.DVDProfiler:
+                    break;
+                  case Configuration.CatalogType.MovieCollector:
+                    break;
+                  case Configuration.CatalogType.MyMovies:
+                    break;
+                  case Configuration.CatalogType.EaxMovieCatalog2:
+                  case Configuration.CatalogType.EaxMovieCatalog3:
                     if (!string.IsNullOrEmpty(tmpconf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
                       string searchname = HTMLParser.removeHtml(title).Replace(" ", "."); // replaces special character "á" and other special chars !
@@ -5347,8 +5346,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                     }
                     break;
-
-                  case "6": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+                  case Configuration.CatalogType.PersonalVideoDatabase: // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
                     if (!string.IsNullOrEmpty(tmpconf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
                       string searchname = HTMLParser.removeHtml(title); // replaces special character "á" and other special chars !
@@ -5363,8 +5361,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                     }
                     break;
-
-                  case "7": // XMM
+                  case Configuration.CatalogType.eXtremeMovieManager:
                     if (!string.IsNullOrEmpty(tmpconf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
                       string searchname = HTMLParser.removeHtml(title).Replace(" ", "-"); // replaces special character "á" and other special chars !
@@ -5383,10 +5380,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
 
-                  case "8": // XBMC fulldb export (all movies in one DB)
+                  case Configuration.CatalogType.XBMC: // XBMC fulldb export (all movies in one DB)
                     break;
 
-                  case "9": // MovingPicturesXML V1.2
+                  case Configuration.CatalogType.MovingPicturesXML:
                     if (!string.IsNullOrEmpty(tmpconf.StrPathFanart)) //Search matching files in MoPi fanart directory
                     {
                       string searchname = HTMLParser.removeHtml(title); // replaces special character "á" and other special chars !
@@ -5402,7 +5399,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
 
-                  case "11": // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+                  case Configuration.CatalogType.XBMCnfoReader: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                     break;
 
                   default:
