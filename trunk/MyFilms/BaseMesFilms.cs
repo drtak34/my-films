@@ -1173,7 +1173,10 @@ namespace MyFilmsPlugin.MyFilms
           Int32.TryParse(row["Year"].ToString(), out year);
           movie.Year = year;
           movie.Category = row["Category"].ToString();
-          movie.Length = (int)row["Length_Num"];
+
+          int length = 0;
+          Int32.TryParse(row["Length"].ToString(), out length);
+          movie.Length = length;
 
           movie.Title = row["OriginalTitle"].ToString();
           if (row[tmpconf.StrTitle1].ToString().Length > 0)
