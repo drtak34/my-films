@@ -458,7 +458,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             // Save MF config
             Save_Config();
-            Read_XML_AMCconfig(Config_Name.Text, true); // reread config file with new defaults
+            Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
         }
 
         private void Save_Config()
@@ -1595,7 +1595,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //  btnCreateAMCDefaultConfig.Visible = false;
 
             // Added by Guzzi to load or initialize the AMCupdater Default configuration and create default configfiles, if necessary.
-            Read_XML_AMCconfig(Config_Name.Text, true); // read current (or create new default) config file
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
 
             textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
         }
@@ -1922,10 +1922,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 CatalogType.SelectedIndex = newCatalogSelectedIndex; // set to selected catalog type 
                 Save_Config();
                 // Create matching AMCupdater config
-                Read_XML_AMCconfig(Config_Name.Text, true); // read current (or create new default) config file
+                Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
                 CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
                 Save_XML_AMCconfig(Config_Name.Text); // save new config
-                Read_XML_AMCconfig(Config_Name.Text, true); // reread config file with new defaults
+                Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
 
                 Config_Name.Focus();
                 textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
@@ -3163,7 +3163,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
-        private void Read_XML_AMCconfig(string currentconfig, bool overwriteGUIsettings)
+        private void Read_XML_AMCconfig(string currentconfig)
         {
           if (currentconfig.Length == 0) // Do not process, if no valid config is selected !
             return;
@@ -3216,20 +3216,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AMCConfigView.Items[i].SubItems.Add(dr[0].ToString());
             i = i + 1;
           }
-
-          // set MF GUI to values from AMC file, if overwriteGUIsettings set true
-          if (overwriteGUIsettings)
+          // set MF GUI to values from AMC file, if values are present
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
+            AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
           {
-            if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
-              AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
-            if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
-            {
-              if (AMCGetAttribute("Purge_Missing_Files").ToLower() == "true") chkAMC_Purge_Missing_Files.Checked = true;
-              else chkAMC_Purge_Missing_Files.Checked = false;
-            }
-            if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
-              AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
+            if (AMCGetAttribute("Purge_Missing_Files").ToLower() == "true") chkAMC_Purge_Missing_Files.Checked = true;
+            else chkAMC_Purge_Missing_Files.Checked = false;
           }
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
+            AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
 
         //  if (i > 0)
         //  {
@@ -4535,7 +4531,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AmcTitleSearchHandling.Focus();
             return;
           }
-          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings";
+          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
           if (System.IO.File.Exists(wfiledefault + ".xml"))
           {
             if (System.IO.File.Exists(wfiledefault + "_" + Config_Name.Text + ".xml"))
@@ -4549,10 +4545,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 System.IO.File.Copy(wfiledefault + "_" + Config_Name.Text + ".xml", wfiledefault + "_" + Config_Name.Text + ".xml.sav", true);
             }
             System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
-            Read_XML_AMCconfig(Config_Name.Text, false); // read current (or create new default) config file
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
             CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
             Save_XML_AMCconfig(Config_Name.Text); // save new config
-            Read_XML_AMCconfig(Config_Name.Text, true); // reread config file with new defaults
+            Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
 
             if (AMCMovieScanPath.Text.Length != 0)
             {
@@ -4572,13 +4568,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           // Set Parameters from MyFilms configuration
           AMCSetAttribute("Ant_Database_Source_Field", AntStorage.Text);
-          AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCExcludedMoviesFile.txt");
+          AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
           
           if (txtGrabber.Text.Length != 0)
             AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
           else
             AMCSetAttribute("Internet_Parser_Path", Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml");
-          AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCExcludedMoviesFile.txt");
+          AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
           AMCSetAttribute("Manual_Internet_Parser_Path", txtGrabber.Text);
           AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
           AMCSetAttribute("Master_Title", AntTitle1.Text); // Check, if this should be replaced by ItemSearchGrabber...
@@ -5207,10 +5203,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
 
-            Read_XML_AMCconfig(Config_Name.Text, true); // read current (or create new default) config file
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
             CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
             Save_XML_AMCconfig(Config_Name.Text); // save new config
-            Read_XML_AMCconfig(Config_Name.Text, true); // reread config file with new defaults
+            Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
           }
 
           // Create Desktop Icon for AMCupdater with config created...
