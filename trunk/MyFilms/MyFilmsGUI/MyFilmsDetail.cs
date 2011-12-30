@@ -8770,7 +8770,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void setGUIProperty(string name, string value)
         {
-          setGUIProperty(name, value, DebugPropertyLoggingEnabled());
+          setGUIProperty(name, value, MyFilms.DebugPropertyLogging);
         }
 
         public static void setGUIProperty(string name, string value, bool log)
@@ -8788,7 +8788,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void clearGUIProperty(string name)
         {
-          setGUIProperty(name, string.Empty, DebugPropertyLoggingEnabled());
+          setGUIProperty(name, string.Empty, MyFilms.DebugPropertyLogging);
         }
 
         public static void clearGUIProperty(string name, bool log)
@@ -8837,11 +8837,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             LogMyFilms.Debug("Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
           return false;
-        }
-
-        public static bool DebugPropertyLoggingEnabled()
-        {
-          return (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.PropertyLogging);
         }
 
         public static bool IsInternetConnectionAvailable()

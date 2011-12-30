@@ -562,12 +562,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return pluginMode; }
           set { pluginMode = value; }
         }
-        private static bool propertyLogging = false;
-        public static bool PropertyLogging
-        {
-          get { return propertyLogging; }
-          set { propertyLogging = value; }
-        }
         private static int nbConfig = int.MinValue;
         public static int NbConfig
         {
@@ -1742,7 +1736,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
             NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
             PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Reads Plugin start mode and sets to normal if not present
-            PropertyLogging = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PropertyLogging", false); // Reads Plugin property logging modeand sets to false if not present
             LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
             if (NbConfig == 0)
             {
