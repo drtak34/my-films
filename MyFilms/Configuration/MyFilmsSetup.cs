@@ -1971,7 +1971,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 try
                 {
                     mydivx.Clear();
-
                 }
                 catch { }
                 mydivx = ReadXml();
@@ -1979,18 +1978,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 {
                     DataRow[] movies = mydivx.Movie.Select(StrDfltSelect + AntTitle1.Text + " not like ''");
                     if (mydivx.Movie.Count > 0)
-                        if (movies.Length > 0)
-                            System.Windows.Forms.MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'User defined Config Filter' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        else
-                          System.Windows.Forms.MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the 'User defined Config Filter' or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    {
+                      if (movies.Length > 0) MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'User defined Config Filter' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                      else MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the 'User defined Config Filter' or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                      if (IsAMC4AndHasInvalidCustomFields(mydivx)) MessageBox.Show("Your XML file seems to have CustomFields defined that are NOT supported by MyFilms ! Their content will get lost, if you continue!", "MyFilms Compatibility Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);;
+                    }
                     else if (!WizardActive)
                     {
-                        if (System.Windows.Forms.MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
-                        {
-                            MesFilmsCat.Focus();
-                            return false;
-                        }
-                        System.Windows.Forms.MessageBox.Show("You have to fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                      if (System.Windows.Forms.MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
+                      {
+                        MesFilmsCat.Focus();
+                        return false;
+                      }
+                      System.Windows.Forms.MessageBox.Show("You have to fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -2001,6 +2001,53 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               return false;
             }
             return true; // save config in calling routine
+        }
+
+        private bool IsAMC4AndHasInvalidCustomFields(AntMovieCatalog mydivx)
+        {
+          AntMovieCatalog.CustomFieldsPropertiesRow[] cfpCollection = mydivx.Catalog[0].GetCustomFieldsPropertiesRows();
+          if (cfpCollection.Length == 0) return false;
+
+          List<string[]> CustomFieldList = new List<string[]>(); // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
+          // <CustomField Tag="Edition" Name="Edition" Type="ftString" GUIProperties="rx6:ry51:rw526:rh25:aw1:ah0:lw94" />
+          //CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
+          CustomFieldList.Add(new string[] { "Edition", "Edition", "ftString" });
+          CustomFieldList.Add(new string[] { "Studio", "Studio", "ftString" });
+          CustomFieldList.Add(new string[] { "Fanart", "Fanart", "ftString" });
+          CustomFieldList.Add(new string[] { "Certification", "Certification", "ftString" });
+          CustomFieldList.Add(new string[] { "Writer", "Writer", "ftString" });
+          CustomFieldList.Add(new string[] { "TagLine", "TagLine", "ftString" });
+          CustomFieldList.Add(new string[] { "Tags", "Tags", "ftString" });
+          CustomFieldList.Add(new string[] { "Aspectratio", "Aspectratio", "ftString" });
+          CustomFieldList.Add(new string[] { "CategoryTrakt", "CategoryTrakt", "ftString" });
+          CustomFieldList.Add(new string[] { "Watched", "Watched", "ftString" });
+          //CustomFieldList.Add(new string[] { "RecentlyAdded", "RecentlyAdded", "ftString" });
+          //CustomFieldList.Add(new string[] { "AgeAdded", "AgeAdded" ,"ftString"});
+          CustomFieldList.Add(new string[] { "Favorite", "Favorite", "ftString" });
+          CustomFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftString" });
+          CustomFieldList.Add(new string[] { "IMDB_Id", "IMDB_Id", "ftString" });
+          CustomFieldList.Add(new string[] { "TMDB_Id", "TMDB_Id", "ftString" });
+          CustomFieldList.Add(new string[] { "IMDB_Rank", "IMDB_Rank", "ftString" });
+          CustomFieldList.Add(new string[] { "SourceTrailer", "SourceTrailer", "ftString" });
+          CustomFieldList.Add(new string[] { "IsOnline", "IsOnline", "ftString" });
+          CustomFieldList.Add(new string[] { "IsOnlineTrailer", "IsOnlineTrailer", "ftString" });
+          CustomFieldList.Add(new string[] { "LastPosition", "LastPosition", "ftString" });
+          CustomFieldList.Add(new string[] { "AudioChannelCount", "AudioChannelCount", "ftString" });
+          CustomFieldList.Add(new string[] { "CustomField1", "CustomField1", "ftString" });
+          CustomFieldList.Add(new string[] { "CustomField2", "CustomField2", "ftString" });
+          CustomFieldList.Add(new string[] { "CustomField3", "CustomField3", "ftString" });
+
+          List<string> CustomFieldTagList = new List<string>();
+          foreach (string[] stringse in CustomFieldList) CustomFieldTagList.Add(stringse[0]);
+
+          ArrayList cFields = new ArrayList();
+          AntMovieCatalog.CustomFieldRow[] cfrCollection = mydivx.CustomFieldsProperties[0].GetCustomFieldRows();
+
+          foreach (AntMovieCatalog.CustomFieldRow fieldRow in cfrCollection)
+          {
+            if (!CustomFieldTagList.Contains(fieldRow.Tag)) return true;
+          }
+          return false;
         }
 
         private void Selected_Enreg_TextChanged()
