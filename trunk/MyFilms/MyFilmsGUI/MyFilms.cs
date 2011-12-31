@@ -3646,15 +3646,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "AudioChannelCount", true) == 0) return true;
       if (string.Compare(fieldname, "AudioBitrate", true) == 0) return true;
       if (string.Compare(fieldname, "VideoBitrate", true) == 0) return true;
+      if (string.Compare(fieldname, "Aspectratio", true) == 0) return true;
+      if (string.Compare(fieldname, "Framerate", true) == 0) return true;
+      if (string.Compare(fieldname, "Resolution", true) == 0) return true;
       if (string.Compare(fieldname, "Number", true) == 0) return true;
       if (string.Compare(fieldname, "Rating", true) == 0) return true;
       if (string.Compare(fieldname, "RatingUser", true) == 0) return true;
-      if (string.Compare(fieldname, "Aspectratio", true) == 0) return true;
       if (string.Compare(fieldname, "LastPosition", true) == 0) return true;
       if (string.Compare(fieldname, "CustomField1", true) == 0) return true;
       if (string.Compare(fieldname, "CustomField2", true) == 0) return true;
       if (string.Compare(fieldname, "CustomField3", true) == 0) return true;
-      if (string.Compare(fieldname, "Framerate", true) == 0) return true;
       if (string.Compare(fieldname, "Languages", true) == 0) return true;
       return false;
 
