@@ -1747,27 +1747,49 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg.SetHeading(GUILocalizeStrings.Get(1079905)); // Sort by (Colletion) ...
             else
               dlg.SetHeading(GUILocalizeStrings.Get(1079902)); // Sort by ... 
-            System.Collections.Generic.List<string> choiceSort = new System.Collections.Generic.List<string>();
+            List<string> choiceSort = new List<string>();
             dlg.Add(GUILocalizeStrings.Get(103));//Title
-            dlg.Add(GUILocalizeStrings.Get(366));//Year
-            dlg.Add(GUILocalizeStrings.Get(104));//Date
-            dlg.Add(GUILocalizeStrings.Get(367));//Rating
             choiceSort.Add("title");
+            dlg.Add(GUILocalizeStrings.Get(366));//Year
             choiceSort.Add("year");
+            dlg.Add(GUILocalizeStrings.Get(104));//Date
             choiceSort.Add("date");
+            dlg.Add(GUILocalizeStrings.Get(367));//Rating
             choiceSort.Add("rating");
             for (int i = 0; i < 2; i++)
             {
               if (Helper.FieldIsSet(conf.StrSort[i]))
               {
                 dlg.Add(GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i]);//Specific sort i
-                choiceSort.Add(string.Format("sort{0}", i.ToString()));
+                choiceSort.Add(string.Format("sort{0}", i));
               }
             }
-            dlg.DoModal(GetID);
 
-            if (dlg.SelectedLabel == -1)
-              return true;
+            dlg.Add(GUILocalizeStrings.Get(10798765)); // *** show all ***
+            choiceSort.Add("showall");
+            dlg.DoModal(GetID);
+            if (dlg.SelectedLabel == -1) return true;
+
+            // show all sort options, if selected ...
+            if (choiceSort[dlg.SelectedLabel] == "showall")
+            {
+              dlg.Reset();
+              if (conf.BoolCollection) dlg.SetHeading(GUILocalizeStrings.Get(1079905)); // Sort by (Colletion) ...
+              else dlg.SetHeading(GUILocalizeStrings.Get(1079902)); // Sort by ... 
+              choiceSort.Clear();
+              List<string> DisplayItems = GetDisplayItems("sort");
+              foreach (string displayItem in DisplayItems)
+              {
+                string entry = (string.IsNullOrEmpty(BaseMesFilms.Translate_Column(displayItem)))
+                                 ? displayItem
+                                 : BaseMesFilms.Translate_Column(displayItem);
+                dlg.Add(entry);
+                choiceSort.Add(displayItem);
+                LogMyFilms.Debug("Sort Menu - add '{0}' as '{1}'", displayItem, entry);
+              }
+              dlg.DoModal(GetID);
+              if (dlg.SelectedLabel == -1) return true;
+            }
             conf.StrIndex = 0;
             string tmpCurrentSortMethod = conf.CurrentSortMethod;
             string tmpStrSorta = conf.StrSorta;
@@ -1804,6 +1826,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   i = 1;
                 tmpCurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i];
                 tmpStrSorta = conf.StrSort[i];
+                tmpStrSortSens = " ASC";
+                break;
+              default:
+                tmpCurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + BaseMesFilms.Translate_Column(choiceSort[dlg.SelectedLabel]);
+                tmpStrSorta = choiceSort[dlg.SelectedLabel];
                 tmpStrSortSens = " ASC";
                 break;
             }
@@ -1967,6 +1994,107 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     #endregion
 
+    List<string> GetDisplayItems(string displayoption)
+    {
+      List<string> ItemsToDisplay = new List<string>();
+      AntMovieCatalog amc = new AntMovieCatalog();
+      foreach (DataColumn dc in amc.Movie.Columns)
+      {
+        if ((dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" &&
+             dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart")
+            && (conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 ||
+            (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
+             dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
+             dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
+             dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite"))
+          )
+        {
+          switch (displayoption)
+          {
+            case "sort":
+              if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" &&
+                  dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
+                  dc.ColumnName != "Description" && dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" &&
+                  dc.ColumnName != "RecentlyAdded") ItemsToDisplay.Add(dc.ColumnName);
+              break;
+            default:
+              if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) ||
+                  dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
+                  dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
+              {
+                //AntStorage.Items.Add(dc.ColumnName);
+                //AntStorageTrailer.Items.Add(dc.ColumnName);
+              }
+
+              if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
+              {
+                //AntTitle1.Items.Add(dc.ColumnName); // Fields already added in Controls definition
+                //AntTitle2.Items.Add(dc.ColumnName);
+                //AntSTitle.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+              {
+                //AntFilterItem1.Items.Add(dc.ColumnName);
+                //AntFilterItem2.Items.Add(dc.ColumnName);
+                //AntItem1.Items.Add(dc.ColumnName);
+                //AntItem2.Items.Add(dc.ColumnName);
+                //AntItem3.Items.Add(dc.ColumnName);
+                //AntItem4.Items.Add(dc.ColumnName);
+                //AntItem5.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
+              {
+                //AntSearchField.Items.Add(dc.ColumnName);
+                //AntUpdField.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
+                  dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
+                  dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded")
+              {
+                if (displayoption == "sort") ItemsToDisplay.Add(dc.ColumnName);
+                //SField1.Items.Add(dc.ColumnName);
+                //SField2.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Number")
+              {
+                //AntViewItem1.Items.Add(dc.ColumnName);
+                //AntViewItem2.Items.Add(dc.ColumnName);
+                //AntViewItem3.Items.Add(dc.ColumnName);
+                //AntViewItem4.Items.Add(dc.ColumnName);
+                //AntViewItem5.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" &&
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                //AntSearchItem1.Items.Add(dc.ColumnName);
+                //AntSearchItem2.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                  dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                //AntSort1.Items.Add(dc.ColumnName);
+                //AntSort2.Items.Add(dc.ColumnName);
+                //AntIdentItem.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                //AntUpdItem1.Items.Add(dc.ColumnName);
+                //AntUpdItem2.Items.Add(dc.ColumnName);
+                //cbfdupdate.Items.Add(dc.ColumnName);
+                //cbWatched.Items.Add(dc.ColumnName);
+                //CmdPar.Items.Add(dc.ColumnName);
+              }
+              break;
+          }
+        }
+      }
+      ItemsToDisplay.Sort();
+      return ItemsToDisplay;
+    }
 
     /// <summary>Jumps to prev folder in FilmList  by modifying Selects and calling GetFilmList</summary>
     /// <returns>If returns false means cannot jump back any further, so caller must exit plugin to main menu.</returns>
