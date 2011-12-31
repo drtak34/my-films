@@ -2666,7 +2666,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (wfanart[0] != " " && wfanart[0] != MyFilms.conf.DefaultFanartImage && !currentFanartList.Contains(wfanart[0]))
         {
           currentFanartList.Add(wfanart[0]);
-          LogMyFilms.Debug("GetRandomFanartForGroups() - added fanart #" + currentFanartList.Count + " : '" + wfanart[0] + "'");
+          // LogMyFilms.Debug("GetRandomFanartForGroups() - added fanart #" + currentFanartList.Count + " : '" + wfanart[0] + "'");
           i += 1;
           if (i >= limit && limit != 0)
             return true;
@@ -2702,7 +2702,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!currentFanartList.Contains(file))
             {
               currentFanartList.Add(file);
-              LogMyFilms.Debug("GetRandomFanartForFilms() - added fanart #" + currentFanartList.Count + " : '" + file + "'");
+              //LogMyFilms.Debug("GetRandomFanartForFilms() - added fanart #" + currentFanartList.Count + " : '" + file + "'");
               i += 1;
               if (i >= limit && limit != 0)
                 return true;
@@ -3376,7 +3376,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (choiceSearch[dlg.SelectedLabel] == "randomsearch")
       {
-        SearchMoviesbyRandomWithTrailer(false);
+        //SearchMoviesbyRandomWithTrailer(false); 
+        SearchMoviesbyRandomWithTrailerOriginalVersion(false);
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
         dlg.DeInit();
         return;
@@ -10388,7 +10389,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (currentFanartList.Count > 1)
       {
         backdrop.Filename = newfanart;
-        LogMyFilms.Debug("(ToggleFanart): Loaded fanart is: '" + backdrop.Filename + "'");
+        // LogMyFilms.Debug("(ToggleFanart): Loaded fanart is: '" + backdrop.Filename + "'");
         return true;
       }
       else
