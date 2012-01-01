@@ -4,6 +4,7 @@ Imports System.Text
 Imports System.Security.Cryptography
 Imports System.Management
 Imports System.Windows.Forms
+Imports System.Windows.Forms.SystemInformation
 
 Imports MediaPortal.Configuration
 Imports NLog
@@ -116,7 +117,7 @@ Public Class Form1
         If My.Settings.LogFormSize.Height > 0 And My.Settings.LogFormSize.Width > 0 Then
             dgLogWindow.Size = My.Settings.LogFormSize
         End If
-        If My.Settings.LogFormLocation.X > 0 And My.Settings.LogFormLocation.Y > 0 Then
+        If My.Settings.LogFormLocation.X > 0 And My.Settings.LogFormLocation.Y > 0 And (My.Settings.LogFormLocation.X + My.Settings.LogFormSize.Width) < VirtualScreen.Width And (My.Settings.LogFormLocation.Y + My.Settings.LogFormSize.Height) < VirtualScreen.Height Then
             dgLogWindow.Location = My.Settings.LogFormLocation
         End If
 
