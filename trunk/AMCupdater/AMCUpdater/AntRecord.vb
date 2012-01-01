@@ -1905,6 +1905,11 @@ Public Class AntRecord
         Dim attr As Xml.XmlAttribute
         Dim element As Xml.XmlElement
         Dim IsUpdateRequired As Boolean = False
+
+        If currentAttribute = _SourceField And ProcessMode = Process_Mode_Names.Import Then ' always activate Sourcefield, if in import mode - even if it is unchecked in DB area. (possible conflict when not using "Source" ...
+            Return True
+        End If
+
         If _DatabaseFields(currentAttribute.ToLower) = False Then ' Field not selected !
             Return False
         Else
