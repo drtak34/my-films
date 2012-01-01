@@ -903,6 +903,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return boolSortCountinViews; }
           set { boolSortCountinViews = value; }
         }
+        private bool boolShowEmptyValuesInViews = false;
+        public bool BoolShowEmptyValuesInViews
+        {
+          get { return boolShowEmptyValuesInViews; }
+          set { boolShowEmptyValuesInViews = value; }
+        }
         private string strActors = string.Empty;
         public string StrActors
         {
