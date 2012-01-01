@@ -95,14 +95,15 @@
     <String id="1079860">Manuelle Eingabe</String>
     <String id="1079861">Aktualisiere Film Datenbank (AMCupdater)</String>
     <String id="1079862">Lade Fanart (online)</String>
-    <String id="1079863">Umschalten 'manuelle Wahl Grabberskript' ({0})</String>
-    <String id="1079864">Umschalten 'automatisch bestes Suchergebnis' ({0})</String>
+    <String id="1079863">Umschalten 'Manuelle Wahl Grabberskript' ({0})</String>
+    <String id="1079864">Umschalten 'Automatisch bestes Suchergebnis' ({0})</String>
     <String id="1079865">Umschalten 'Windows Dateidialog' ({0})</String>
     <String id="1079866">Suche Filme nach beteiligten Personen</String>
     <String id="1079867">Auswahl der Person</String>
     <String id="1079868">Schauspieler</String>
     <String id="1079869">Regisseur</String>
     <String id="1079870">Auswahl</String>
+    <String id="1079871">Umschalten 'Zeige leere Werte in Views' ({0})</String>
     <String id="1079872">Erster Titel</String>
     <String id="1079873">Letzter Titel</String>
     <String id="1079874">Lösche Fanart (aktueller Film)</String>
