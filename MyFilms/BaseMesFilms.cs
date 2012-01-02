@@ -525,7 +525,7 @@ namespace MyFilmsPlugin.MyFilms
           //CustomFieldList.Add(new string[] { "RecentlyAdded", "RecentlyAdded", "ftString" });
           //CustomFieldList.Add(new string[] { "AgeAdded", "AgeAdded" ,"ftString"});
           CustomFieldList.Add(new string[] { "Favorite", "Favorite", "ftString" });
-          CustomFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftString" });
+          CustomFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftReal" }); // Decimal in MyFilms ...
           CustomFieldList.Add(new string[] { "IMDB_Id", "IMDB_Id", "ftString" });
           CustomFieldList.Add(new string[] { "TMDB_Id", "TMDB_Id", "ftString" });
           CustomFieldList.Add(new string[] { "IMDB_Rank", "IMDB_Rank", "ftString" });
@@ -1361,7 +1361,11 @@ namespace MyFilmsPlugin.MyFilms
         }
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-          LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
+          //LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
+          //LogMyFilms.Debug("ReadDataMovies() - Strating ... with : StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
+          LogMyFilms.Debug("ReadDataMovies() - StrDfltSelect       = '" + StrDfltSelect + "'");
+          LogMyFilms.Debug("ReadDataMovies() - StrSelect           = '" + StrSelect + "'");
+          LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens = '" + StrSort + " " + StrSortSens + "'");
           Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
           bool iscached = true;
           if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
