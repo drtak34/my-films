@@ -6570,10 +6570,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                 dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                dlgOk.SetLine(1, MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()].ToString());//video title
+                dlgOk.SetLine(1, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString()); //video title
                 dlgOk.SetLine(2, "maximum 20 entries for the playlist");
                 dlgOk.DoModal(GetID);
-                LogMyFilms.Info("Too many entries found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "', number of entries found = " + newItems.Count.ToString());
+                LogMyFilms.Info("Too many entries found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count);
                 return;
             }
             setProcessAnimationStatus(false, m_SearchAnimation);
