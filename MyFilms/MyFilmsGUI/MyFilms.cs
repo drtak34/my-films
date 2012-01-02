@@ -3237,14 +3237,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         choiceSort.Add("Date");
         dlg.Add(GUILocalizeStrings.Get(367));//Rating
         choiceSort.Add("Rating");
-        for (int i = 0; i < 2; i++)
-        {
-          if (Helper.FieldIsSet(conf.StrSort[i]))
-          {
-            dlg.Add(GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i]);//Specific sort i
-            choiceSort.Add(string.Format("Sort{0}", i));
-          }
-        }
         dlg.Add(GUILocalizeStrings.Get(10798765)); // *** show all ***
         choiceSort.Add("showall");
 
@@ -3304,13 +3296,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             tmpCurrentSortMethod = GUILocalizeStrings.Get(367);
             tmpStrSorta = "Rating";
             tmpStrSortSens = " DESC";
-            break;
-          case "Sort0":
-          case "Sort1":
-            int i = (choiceSort[dlg.SelectedLabel] == "Sort1") ? 1 : 0;
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i];
-            tmpStrSorta = conf.StrSort[i];
-            tmpStrSortSens = " ASC";
             break;
           default:
             break;
