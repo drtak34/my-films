@@ -300,7 +300,6 @@
           this.groupBox_SortByItem = new System.Windows.Forms.GroupBox();
           this.AntSort2 = new System.Windows.Forms.ComboBox();
           this.AntTSort2 = new System.Windows.Forms.TextBox();
-          this.AntSort1 = new System.Windows.Forms.ComboBox();
           this.AntTSort1 = new System.Windows.Forms.TextBox();
           this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
           this.AntSearchFieldReset = new System.Windows.Forms.Button();
@@ -554,6 +553,7 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.AntSort1 = new System.Windows.Forms.ComboBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -2908,16 +2908,6 @@
           this.AntTSort2.Name = "AntTSort2";
           this.AntTSort2.Size = new System.Drawing.Size(173, 20);
           this.AntTSort2.TabIndex = 39;
-          // 
-          // AntSort1
-          // 
-          this.AntSort1.FormattingEnabled = true;
-          this.AntSort1.Location = new System.Drawing.Point(10, 18);
-          this.AntSort1.Name = "AntSort1";
-          this.AntSort1.Size = new System.Drawing.Size(145, 21);
-          this.AntSort1.Sorted = true;
-          this.AntSort1.TabIndex = 36;
-          this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
           // 
           // AntTSort1
           // 
@@ -5647,6 +5637,16 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
+          // AntSort1
+          // 
+          this.AntSort1.FormattingEnabled = true;
+          this.AntSort1.Location = new System.Drawing.Point(10, 18);
+          this.AntSort1.Name = "AntSort1";
+          this.AntSort1.Size = new System.Drawing.Size(145, 21);
+          this.AntSort1.Sorted = true;
+          this.AntSort1.TabIndex = 36;
+          this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6159,7 +6159,6 @@
         private GroupBox groupBox_SortByItem;
         private ComboBox AntSort2;
         private TextBox AntTSort2;
-        private ComboBox AntSort1;
         private TextBox AntTSort1;
         private TextBox AntLabel5;
         private TextBox AntLabel4;
@@ -6240,5 +6239,6 @@
         private TextBox AntFilterFreeText;
         private Label AntFreetextFilterItem;
         private Button button_GrabberScriptUpdate;
+        private ComboBox AntSort1;
     }
 }

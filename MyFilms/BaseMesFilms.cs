@@ -1578,21 +1578,16 @@ namespace MyFilmsPlugin.MyFilms
               {
                 _dataLock.ExitReadLock();
               }
-              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect, view.ToUpper() + " ASC");
+              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect, view + " ASC");
               if (results.Length == 0) return null;
 
               foreach (DataRow enr in results)
               {
                 try
                 {
-                  bool isdate = false;
-                  if (view == "Date" || view == "DateAdded")
-                    isdate = true;
-
-                  if (isdate)
-                    champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
-                  else
-                    champselect = enr[view].ToString().Trim();
+                  bool isdate = (view == "Date" || view == "DateAdded");
+                  champselect = (isdate) ? string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]) : enr[view].ToString().Trim();;
+                    
                   ArrayList wtab = Base_Search_String(champselect, listSeparator, roleSeparator);
                   for (int wi = 0; wi < wtab.Count; wi++)
                   {

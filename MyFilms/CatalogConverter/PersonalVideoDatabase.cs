@@ -159,7 +159,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNode("aka") != null && nodeDVD.SelectSingleNode("aka").InnerText.Length > 0)
                       WriteAntAtribute(destXml, "aka", nodeDVD.SelectSingleNode("aka").InnerText);
                     if (nodeDVD.SelectSingleNode("viewed") != null)
-                      if (nodeDVD.SelectSingleNode("viewed").InnerText.ToUpper() == "-1")
+                      if (nodeDVD.SelectSingleNode("viewed").InnerText == "-1")
                         WriteAntAtribute(destXml, "viewed", "true");
                         else
                         WriteAntAtribute(destXml, "viewed", "false");

@@ -4850,7 +4850,7 @@ namespace MyFilmsPlugin.DataBase {
                         string CategoryTrakt, 
                         string Watched, 
                         string Favorite, 
-                        string RatingUser, 
+                        decimal RatingUser, 
                         string IMDB_Id, 
                         string TMDB_Id, 
                         string IMDB_Rank, 
@@ -4964,7 +4964,7 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnWatched);
                 this.columnFavorite = new global::System.Data.DataColumn("Favorite", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnFavorite);
-                this.columnRatingUser = new global::System.Data.DataColumn("RatingUser", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnRatingUser = new global::System.Data.DataColumn("RatingUser", typeof(decimal), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnRatingUser);
                 this.columnIMDB_Id = new global::System.Data.DataColumn("IMDB_Id", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnIMDB_Id);
@@ -8764,10 +8764,10 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string RatingUser {
+            public decimal RatingUser {
                 get {
                     try {
-                        return ((string)(this[this.tableCustomFields.RatingUserColumn]));
+                        return ((decimal)(this[this.tableCustomFields.RatingUserColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("Der Wert für Spalte RatingUser in Tabelle CustomFields ist DBNull.", e);

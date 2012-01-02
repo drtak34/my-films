@@ -828,25 +828,25 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     break;
                 case "year":
                     wDfltSortMethod = GUILocalizeStrings.Get(366);
-                    wDfltSort = "YEAR";
+                    wDfltSort = "Year";
                     break;
                 case "date":
                 case "dateadded":
                     wDfltSortMethod = GUILocalizeStrings.Get(621);
-                    wDfltSort = "DateAdded";
+                    wDfltSort = "Date";
                     break;
                 case "rating":
                     wDfltSortMethod = GUILocalizeStrings.Get(367);
-                    wDfltSort = "RATING";
+                    wDfltSort = "Rating";
                     break;
                 default:
                     wDfltSort = Sort.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
-                    if (Sort.Text.ToLower() == AntSort1.Text.ToLower())
+                    if (Sort.Text.ToLower() == AntSort1.Text)
                     {
                         wDfltSortMethod = AntTSort1.Text;
                         wDfltSort = AntSort1.Text;
                     }
-                    if (Sort.Text.ToLower() == AntSort2.Text.ToLower())
+                    if (Sort.Text.ToLower() == AntSort2.Text)
                     {
                         wDfltSortMethod = AntTSort2.Text;
                         wDfltSort = AntSort2.Text;
@@ -870,25 +870,25 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 break;
               case "year":
                 wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(366);
-                wDfltSortInHierarchies = "YEAR";
+                wDfltSortInHierarchies = "Year";
                 break;
               case "date":
               case "dateadded":
                 wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(621);
-                wDfltSortInHierarchies = "DateAdded";
+                wDfltSortInHierarchies = "Date";
                 break;
               case "rating":
                 wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(367);
-                wDfltSortInHierarchies = "RATING";
+                wDfltSortInHierarchies = "Rating";
                 break;
               default:
                 wDfltSortInHierarchies = SortInHierarchies.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
-                if (SortInHierarchies.Text.ToLower() == AntSort1.Text.ToLower())
+                if (SortInHierarchies.Text.ToLower() == AntSort1.Text)
                 {
                   wDfltSortMethodInHierarchies = AntTSort1.Text;
                   wDfltSortInHierarchies = AntSort1.Text;
                 }
-                if (SortInHierarchies.Text.ToLower() == AntSort2.Text.ToLower())
+                if (SortInHierarchies.Text.ToLower() == AntSort2.Text)
                 {
                   wDfltSortMethodInHierarchies = AntTSort2.Text;
                   wDfltSortInHierarchies = AntSort2.Text;
