@@ -297,10 +297,6 @@
           this.label62 = new System.Windows.Forms.Label();
           this.SortSensInHierarchies = new System.Windows.Forms.ComboBox();
           this.SortInHierarchies = new System.Windows.Forms.ComboBox();
-          this.groupBox_SortByItem = new System.Windows.Forms.GroupBox();
-          this.AntSort2 = new System.Windows.Forms.ComboBox();
-          this.AntTSort2 = new System.Windows.Forms.TextBox();
-          this.AntTSort1 = new System.Windows.Forms.TextBox();
           this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
           this.AntSearchFieldReset = new System.Windows.Forms.Button();
           this.AntSearchFieldClear = new System.Windows.Forms.Button();
@@ -553,7 +549,6 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.AntSort1 = new System.Windows.Forms.ComboBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -581,7 +576,6 @@
           this.groupBox_AntUpdatingItems.SuspendLayout();
           this.Tab_Search.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          this.groupBox_SortByItem.SuspendLayout();
           this.groupBoxSearchByProperties.SuspendLayout();
           this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
@@ -2811,7 +2805,6 @@
           // Tab_Search
           // 
           this.Tab_Search.Controls.Add(this.groupBox4);
-          this.Tab_Search.Controls.Add(this.groupBox_SortByItem);
           this.Tab_Search.Controls.Add(this.groupBoxSearchByProperties);
           this.Tab_Search.Controls.Add(this.groupBox_SupplementarySearch);
           this.Tab_Search.Controls.Add(this.groupBox_Separators);
@@ -2877,44 +2870,6 @@
           this.SortInHierarchies.Size = new System.Drawing.Size(121, 21);
           this.SortInHierarchies.Sorted = true;
           this.SortInHierarchies.TabIndex = 0;
-          // 
-          // groupBox_SortByItem
-          // 
-          this.groupBox_SortByItem.Controls.Add(this.AntSort2);
-          this.groupBox_SortByItem.Controls.Add(this.AntTSort2);
-          this.groupBox_SortByItem.Controls.Add(this.AntSort1);
-          this.groupBox_SortByItem.Controls.Add(this.AntTSort1);
-          this.groupBox_SortByItem.Location = new System.Drawing.Point(15, 11);
-          this.groupBox_SortByItem.Name = "groupBox_SortByItem";
-          this.groupBox_SortByItem.Size = new System.Drawing.Size(350, 77);
-          this.groupBox_SortByItem.TabIndex = 36;
-          this.groupBox_SortByItem.TabStop = false;
-          this.groupBox_SortByItem.Text = "User defined Sort Item";
-          this.ToolTip1.SetToolTip(this.groupBox_SortByItem, resources.GetString("groupBox_SortByItem.ToolTip"));
-          // 
-          // AntSort2
-          // 
-          this.AntSort2.FormattingEnabled = true;
-          this.AntSort2.Location = new System.Drawing.Point(10, 45);
-          this.AntSort2.Name = "AntSort2";
-          this.AntSort2.Size = new System.Drawing.Size(145, 21);
-          this.AntSort2.Sorted = true;
-          this.AntSort2.TabIndex = 38;
-          this.AntSort2.SelectedIndexChanged += new System.EventHandler(this.AntSort2_SelectedIndexChanged);
-          // 
-          // AntTSort2
-          // 
-          this.AntTSort2.Location = new System.Drawing.Point(164, 45);
-          this.AntTSort2.Name = "AntTSort2";
-          this.AntTSort2.Size = new System.Drawing.Size(173, 20);
-          this.AntTSort2.TabIndex = 39;
-          // 
-          // AntTSort1
-          // 
-          this.AntTSort1.Location = new System.Drawing.Point(164, 19);
-          this.AntTSort1.Name = "AntTSort1";
-          this.AntTSort1.Size = new System.Drawing.Size(173, 20);
-          this.AntTSort1.TabIndex = 37;
           // 
           // groupBoxSearchByProperties
           // 
@@ -5637,16 +5592,6 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
-          // AntSort1
-          // 
-          this.AntSort1.FormattingEnabled = true;
-          this.AntSort1.Location = new System.Drawing.Point(10, 18);
-          this.AntSort1.Name = "AntSort1";
-          this.AntSort1.Size = new System.Drawing.Size(145, 21);
-          this.AntSort1.Sorted = true;
-          this.AntSort1.TabIndex = 36;
-          this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5720,8 +5665,6 @@
           this.Tab_Search.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          this.groupBox_SortByItem.ResumeLayout(false);
-          this.groupBox_SortByItem.PerformLayout();
           this.groupBoxSearchByProperties.ResumeLayout(false);
           this.groupBoxSearchByProperties.PerformLayout();
           this.groupBox_SupplementarySearch.ResumeLayout(false);
@@ -6156,10 +6099,6 @@
         private TextBox AMCexePath;
         private Label lblAMCpath;
         private Button buttonAMCpathSearch;
-        private GroupBox groupBox_SortByItem;
-        private ComboBox AntSort2;
-        private TextBox AntTSort2;
-        private TextBox AntTSort1;
         private TextBox AntLabel5;
         private TextBox AntLabel4;
         private ComboBox AntItem5;
@@ -6239,6 +6178,5 @@
         private TextBox AntFilterFreeText;
         private Label AntFreetextFilterItem;
         private Button button_GrabberScriptUpdate;
-        private ComboBox AntSort1;
     }
 }

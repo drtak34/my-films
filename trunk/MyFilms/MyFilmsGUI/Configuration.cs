@@ -127,8 +127,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   StrSearchText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchText{0}", i), string.Empty);
                   StrSearchItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchItem{0}", i), string.Empty);
-                  StrTSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntTSort{0}", i), string.Empty);
-                  StrSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSort{0}", i), string.Empty);
                 }
                 if (StrTitle1 == "OriginalTitle")
                 {
@@ -527,10 +525,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               StrSelect = StrTitle1.ToString() + " not like ''";
             //if (StrSelectViews == "")
             //  StrSelectViews = StrTitle1.ToString() + " not like ''";
-            if (StrSort[0].Length == 0)
-                StrSort[0] = "(none)";
-            if (StrSort[1].Length == 0)
-                StrSort[1] = "(none)";
             if (StrSorta == "") StrSorta = StrSTitle;
             if (StrSortaInHierarchies == "") StrSortaInHierarchies = StrSTitle;
 
@@ -1049,18 +1043,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strIdentItem; }
             set { strIdentItem = value; }
-        }
-        private string[] strSort = {string.Empty,string.Empty};
-        public string[] StrSort
-        {
-            get { return strSort; }
-            set { strSort = value; }
-        }
-        private string[] strTSort = { string.Empty, string.Empty};
-        public string[] StrTSort
-        {
-            get { return strTSort; }
-            set { strTSort = value; }
         }
         private string[] strViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] StrViewItem
