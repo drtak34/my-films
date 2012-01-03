@@ -55,7 +55,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           XBMCnfoReader = 11
         }
 
-        // public LoadParameterInfo LoadParams = null;
+        private bool IsExternalCatalog(CatalogType type)
+        {
+          return (StrFileType != CatalogType.AntMovieCatalog3 && StrFileType != CatalogType.AntMovieCatalog4Xtended);
+        }
+
         public Configuration(string CurrentConfig, bool setcurrentconfig, bool create_temp, LoadParameterInfo loadParams)
         {
             //-----------------------------------------------------------------------------------------------
@@ -191,29 +195,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string DestinationCertification = "";
                 string DestinationWriter = "";
 
-                if (StrFileType != CatalogType.AntMovieCatalog3)
+                if (IsExternalCatalog(StrFileType))
                 {
-                  if (addTagline)
-                    DestinationTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTagline", "");
+                  if (addTagline) DestinationTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTagline", "");
                   else DestinationTagline = "";
-                  if (addTags)
-                    DestinationTags = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTags", "");
+                  if (addTags) DestinationTags = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTags", "");
                   else DestinationTags = "";
-                  if (addCertification)
-                    DestinationCertification = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationCertification", "");
+                  if (addCertification) DestinationCertification = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationCertification", "");
                   else DestinationCertification = "";
-                  if (addWriter)
-                    DestinationWriter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationWriter", "");
+                  if (addWriter) DestinationWriter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationWriter", "");
                   else DestinationWriter = "";
                 }
                 // LogMyFilms.Debug("MFC: switch (StrFileType) '" + StrFileType.ToString() + "'");
 
-                ReadOnly = true;
+                ReadOnly = IsExternalCatalog(StrFileType);
+
+                #region Catalog Specific Settings ...
                 switch (StrFileType)
                 {
                     case CatalogType.AntMovieCatalog3:
                     case CatalogType.AntMovieCatalog4Xtended:
-                      ReadOnly = false;
                       break;
                     case CatalogType.DVDProfiler:
                         if (create_temp)
@@ -381,6 +382,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     case CatalogType.XBMCnfoReader:
                         break;
                 }
+                #endregion
+
                 StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);
                 StrSelectViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelectViews", string.Empty);
                 StrActors = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrActors", string.Empty);
@@ -522,7 +525,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             } // End reading config
 
             if (StrSelect == "")
-              StrSelect = StrTitle1.ToString() + " not like ''";
+              StrSelect = StrTitle1 + " not like ''";
             //if (StrSelectViews == "")
             //  StrSelectViews = StrTitle1.ToString() + " not like ''";
             if (StrSorta == "") StrSorta = StrSTitle;
