@@ -906,6 +906,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return boolShowEmptyValuesInViews; }
           set { boolShowEmptyValuesInViews = value; }
         }
+        private bool boolDontSplitValuesInViews = false;
+        public bool BoolDontSplitValuesInViews
+        {
+          get { return boolDontSplitValuesInViews; }
+          set { boolDontSplitValuesInViews = value; }
+        }
         private string strActors = string.Empty;
         public string StrActors
         {

@@ -78,6 +78,7 @@
     <String id="1079834">Die Film Media Dateien werden unwiderruflich gel�scht !</String>
     <String id="1079835">Wollen Sie die Film Dateien löschen ?</String>
     <String id="1079840">Wähle User Profil ('{0}')</String>
+    <String id="1079845">Umschalten 'Zeige ganze Werte an' ({0})</String>
     <String id="1079846">Abgeschlossen ...</String>
     <String id="1079847">MyFilms lokale Fanart Erstellung</String>
     <String id="1079848">Erstelle neue Fanart(s) vom Film</String>
@@ -103,7 +104,7 @@
     <String id="1079868">Schauspieler</String>
     <String id="1079869">Regisseur</String>
     <String id="1079870">Auswahl</String>
-    <String id="1079871">Umschalten 'Zeige leere Werte in Views' ({0})</String>
+    <String id="1079871">Umschalten 'Zeige leere Werte' ({0})</String>
     <String id="1079872">Erster Titel</String>
     <String id="1079873">Letzter Titel</String>
     <String id="1079874">Lösche Fanart (aktueller Film)</String>

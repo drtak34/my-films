@@ -2998,19 +2998,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInViews.Trim().Substring(0, 3).ToLower())
             return;
-          if (BtnSrtBy.IsAscending)
-            conf.StrSortSensInViews = " ASC";
-          else
-            conf.StrSortSensInViews = " DESC";
+          conf.StrSortSensInViews = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
         }
         else
         {
           if (e.Order.ToString().Substring(0, 3).ToLower() == conf.WStrSortSens.Trim().Substring(0, 3).ToLower())
             return;
-          if (BtnSrtBy.IsAscending)
-            conf.WStrSortSens = " ASC";
-          else
-            conf.WStrSortSens = " DESC";
+          conf.WStrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
         }
       }
       else
@@ -3019,21 +3013,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInHierarchies.Trim().Substring(0, 3).ToLower())
             return;
-
-          if (BtnSrtBy.IsAscending)
-            conf.StrSortSensInHierarchies = " ASC";
-          else
-            conf.StrSortSensInHierarchies = " DESC";
+          conf.StrSortSensInHierarchies = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
         }
         else
         {
           if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
             return;
-
-          if (BtnSrtBy.IsAscending)
-            conf.StrSortSens = " ASC";
-          else
-            conf.StrSortSens = " DESC";
+          conf.StrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
         }
       }
 
@@ -4258,6 +4244,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool isperson = IsPersonField(fieldType);
       bool isdate = IsDateField(fieldType);
       bool issplitfield = IsSplittableField(WStrSort);
+      bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
       bool isrecentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
       bool isindexedtitle = (WStrSort == "IndexedTitle") ? true : false; // calculate recently added fields
       DateTime now = DateTime.Now;
@@ -4312,7 +4299,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
           champselect = row[WStrSort].ToString().Trim();
 
-        if (issplitfield)
+        if (issplitfield && !dontsplitvalues)
         {
           ArrayList wtab = Search_String(champselect); //ArrayList wtab = Search_String(champselect, isperson);
           if (wtab.Count > 0)
@@ -4325,7 +4312,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else w_tableau.Add(champselect);
       }
       watch.Stop();
-      LogMyFilms.Debug("(GetSelectFromDivx) - Read View Names for '" + WStrSort + "' finished (split items = '" + issplitfield + "') (" + (watch.ElapsedMilliseconds) + " ms)");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Read View Names for '" + WStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "') (" + (watch.ElapsedMilliseconds) + " ms)");
       #endregion
 
       #region Sorting based on FieldType using custom IComparer
@@ -7078,6 +7065,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
         upd_choice[ichoice] = "showemptyvaluesinviewscontext";
         ichoice++;
+
+        if (MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798628))); // Don't split values
+        if (!MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798629)));
+        upd_choice[ichoice] = "dontsplitvaluesinviews";
+        ichoice++;
       }
 
       // Moviecontext
@@ -7275,7 +7267,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "showemptyvaluesinviewscontext":
           {
             MyFilms.conf.BoolShowEmptyValuesInViews = !MyFilms.conf.BoolShowEmptyValuesInViews;
-            LogMyFilms.Debug("Context_Menu_Movie() : Option 'show empty values in views' changed to " + MyFilms.conf.BoolShowEmptyValuesInViews);
+            LogMyFilms.Debug("Context_Menu_Movie() : Option 'show empty values' changed to " + MyFilms.conf.BoolShowEmptyValuesInViews);
+            Refreshfacade();
+            break;
+          }
+
+        case "dontsplitvaluesinviews":
+          {
+            MyFilms.conf.BoolDontSplitValuesInViews = !MyFilms.conf.BoolDontSplitValuesInViews;
+            LogMyFilms.Debug("Context_Menu_Movie() : Option 'Don't split values' changed to " + MyFilms.conf.BoolDontSplitValuesInViews);
             Refreshfacade();
             break;
           }
