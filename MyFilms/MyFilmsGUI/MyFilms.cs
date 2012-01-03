@@ -1603,7 +1603,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
               else
                 base.OnAction(action);
-            Change_view(conf.WStrSort);
+            this.Change_View_Action(conf.WStrSort);
             SetDummyControlsForFacade(currentListLevel);
             return;
           }
@@ -1714,13 +1714,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Change_Search_Options();
           if (iControl == (int)Controls.CTRL_BtnSrtBy)
           {
-            Change_Sort_Option();
+            this.Change_Sort_Option_Menu();
             return true;
           }
           if (iControl == (int)Controls.CTRL_BtnViewAs)
           // Change Selected View
           {
-            Change_Selection_type_Video();
+            this.Change_View_Menu();
             return base.OnMessage(messageType);
           }
           if (iControl == (int)Controls.CTRL_BtnOptions)
@@ -1733,7 +1733,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (iControl == (int)Controls.CTRL_BtnUpdates)
           // Change Selected Option
           {
-            Change_view("globalupdates");
+            this.Change_Menu_Action("globalupdates");
             // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade // Reremoved for Doug !
             return base.OnMessage(messageType);
           }
@@ -2232,7 +2232,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (isdate && string.Format("{0:dd/MM/yyyy}", DateTime.Parse(s).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
               goto suite;
-            if (s.IndexOf(conf.Wselectedlabel.Trim(), StringComparison.OrdinalIgnoreCase) >= 0) //if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // 
+            if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // if (s.IndexOf(conf.Wselectedlabel.Trim(), StringComparison.OrdinalIgnoreCase) >= 0) // string.Compare(champselect, wchampselect, true) == 0
               goto suite;
           }
           goto fin;
@@ -2587,7 +2587,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (isdate && string.Format("{0:dd/MM/yyyy}", DateTime.Parse(val).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
               goto suite;
-            if (val.IndexOf(conf.Wselectedlabel.Trim(), StringComparison.OrdinalIgnoreCase) >= 0)
+            if (val.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (val.IndexOf(conf.Wselectedlabel.Trim(), StringComparison.OrdinalIgnoreCase) >= 0)
               goto suite;
           }
           goto fin;
@@ -2675,7 +2675,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (wfanart[1] == "dir")
         fanartDirectory = wfanart[0];
 
-      if (!string.IsNullOrEmpty(fanartDirectory) && System.IO.Directory.Exists(fanartDirectory))
+      if (!string.IsNullOrEmpty(fanartDirectory) && Directory.Exists(fanartDirectory))
       {
         string searchname = "*.jpg";
         string[] files = Directory.GetFiles(fanartDirectory, searchname, SearchOption.TopDirectoryOnly);
@@ -2784,16 +2784,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //private void Load_Lstdetail(GUIListItem currentItem, int ItemId, string wlabel)//wrep = false display only image, all properties cleared
     private void Load_Lstdetail(GUIListItem currentItem, bool forceLoading)
     {
-      LogMyFilms.Debug("Load_Lstdetail - Start: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
+      LogMyFilms.Debug("(Load_Lstdetail) - Start: ItemId = '" + currentItem.ItemId + "', label = '" + currentItem.Label + "', TVtag = '" + currentItem.TVTag + "'");
       if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading && currentItem.TVTag.ToString() != "group")
       {
-        LogMyFilms.Debug("(Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        LogMyFilms.Debug("(Load_Lstdetail) - Skipping: ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
         return;
       }
       if (currentItem.ItemId == -1)
       {
         // reinit some fields //filmcover.Filename = ""; //backdrop.Filename = ""; //MyFilmsDetail.Init_Detailed_DB(false);
-        LogMyFilms.Debug("(Load_Lstdetail): ItemId == -1 -> return");
+        LogMyFilms.Debug("(Load_Lstdetail) - Skipping: ItemId == -1 -> return");
         return;
       }
 
@@ -2829,16 +2829,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (wfanart[0] == " ")
         {
           Fanartstatus(false);
-          GUIControl.HideControl(GetID, 35);
         }
         else
         {
           Fanartstatus(true);
-          GUIControl.ShowControl(GetID, 35);
         }
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
-        LogMyFilms.Debug("(Load_Lstdetail): Backdrop status: '" + backdrop.Active.ToString() + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+        LogMyFilms.Debug("(Load_Lstdetail): Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
         conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
@@ -2921,12 +2919,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (wfanart[0] == " ")
         {
           Fanartstatus(false);
-          GUIControl.HideControl(GetID, 35);
+          
         }
         else
         {
           Fanartstatus(true);
-          GUIControl.ShowControl(GetID, 35);
         }
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
@@ -3121,7 +3118,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     //  Select View for Video
     //--------------------------------------------------------------------------------------------
-    private void Change_Selection_type_Video()
+    private void Change_View_Menu()
     {
       List<string> choiceView = new List<string>();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -3129,31 +3126,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View (films) ...
       dlg.Add(GUILocalizeStrings.Get(342));//videos
-      choiceView.Add("all");
+      choiceView.Add("All");
       dlg.Add(GUILocalizeStrings.Get(345));//year
-      choiceView.Add("year");
+      choiceView.Add("Year");
       dlg.Add(GUILocalizeStrings.Get(10798664));//genre -> category
-      choiceView.Add("category");
+      choiceView.Add("Category");
       dlg.Add(GUILocalizeStrings.Get(200026));//countries
-      choiceView.Add("country");
+      choiceView.Add("Country");
       dlg.Add(GUILocalizeStrings.Get(10798954));//recentlyadded
-      choiceView.Add("recentlyadded");
+      choiceView.Add("RecentlyAdded");
       dlg.Add(GUILocalizeStrings.Get(10798667));//actors 
-      choiceView.Add("actors");
+      choiceView.Add("Actors");
       //dlg1.Add(GUILocalizeStrings.Get(200027));//Watched
 
       // Commented, as we have replaced this feature with global overlay filter for "media available"
       //if (Helper.FieldIsSet(conf.StrStorage.Length))
       //{
       //    dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
-      //    choiceView.Add("storage");
+      //    SelectedView.Add("storage");
       //}
 
       for (int i = 0; i < 5; i++)
       {
         if (Helper.FieldIsSet(conf.StrViewItem[i]))
         {
-          choiceView.Add(string.Format("view{0}", i));
+          choiceView.Add(string.Format("View{0}", i));
           if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
             dlg.Add(conf.StrViewItem[i]);   // specific user View1
           else
@@ -3184,17 +3181,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
       }
-      
       conf.StrSelectViews = ""; // reset movie context filter for person views
-      Change_view(choiceView[dlg.SelectedLabel].ToLower());
-      SetDummyControlsForFacade(currentListLevel);
+      this.Change_View_Action(choiceView[dlg.SelectedLabel]);
       return;
     }
 
     //--------------------------------------------------------------------------------------------
     //  Change Sort Option for films, vies or collections/groups
     //--------------------------------------------------------------------------------------------
-    private void Change_Sort_Option()
+    private void Change_Sort_Option_Menu()
     {
       if (conf.Boolselect) // view sort (grouping) // No change of normal filmlist sort method and no searchs in grouped views (views, e.g. country, year, etc.) - change count sorting instead ...
       {
@@ -3375,7 +3370,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         return;
       }
-      Change_view(choiceView[dlg1.SelectedLabel].ToLower());
+      this.Change_Menu_Action(choiceView[dlg1.SelectedLabel].ToLower());
       return;
     }
 
@@ -3427,7 +3422,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg1.SelectedLabel == -1)
         return;
       LogMyFilms.Debug("Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
-      Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+      this.Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
       return;
     }
 
@@ -4270,7 +4265,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.StrSortSensInViews == " ASC") : (WStrSortSens == " ASC");
       currentListLevel = (isperson) ? Listlevel.Person : Listlevel.Group;
-      this.SetDummyControlsForFacade(currentListLevel);
+      SetDummyControlsForFacade(currentListLevel);
 
       conf.Wstar = NewWstar;
       conf.Boolselect = true;
@@ -4560,7 +4555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (facadeView.Count > 0)
       {
-        if (IsPersonField(fieldType)) MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
+        //if (IsPersonField(fieldType)) MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
         //else MyFilmsDetail.Load_Detailed_DB(0, false);
         if (getThumbs)
         {
@@ -5476,13 +5471,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       GUIWaitCursor.Init();
       GUIWaitCursor.Show();
-      Fin_Charge_Init(false, true);
+      Fin_Charge_Init(false, false);
       GUIWaitCursor.Hide();
     }
 
     private void Loadfacade()
     {
-      Thread LoadThread = new Thread(new ThreadStart(Worker_Refreshfacade));
+      Thread LoadThread = new Thread(new ThreadStart(Worker_Loadfacade));
       LoadThread.IsBackground = true;
       LoadThread.Priority = ThreadPriority.AboveNormal;
       LoadThread.Name = "MyFilms Fin_Charge_Init (true-true)";
@@ -5494,7 +5489,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       GUIWaitCursor.Init();
       GUIWaitCursor.Show();
-      Fin_Charge_Init(true, true);
+      Fin_Charge_Init(false, true);
       GUIWaitCursor.Hide();
     }
 
@@ -5505,17 +5500,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Fin_Charge_Init(bool LoadDfltSlct, bool reload)
     {
       LogMyFilms.Debug("Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
-      //if (publishTimer != null)
-      //  publishTimer.SafeDispose();
+      //if (publishTimer != null) publishTimer.SafeDispose();
+
       if (LoadDfltSlct || (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.View)))
       {
+        MovieScrobbling = false; // reset scrobbler filter setting
         conf.Boolselect = false; // Groupviews = false
         ResetGlobalFilters();
-        MovieScrobbling = false; // reset scrobbler filter setting
       }
-      if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
+      if ((PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors) || (reload))
       {
-        if (reload) //chargement des films
+        if (reload) // ReLoad MyFilms DB from disk 
         {
           BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
@@ -5526,30 +5521,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //Layout = conf.StrLayOut;
 
-      //if (MyFilms.conf.GlobalUnwatchedOnly)
-      //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
-      //else
-      //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
+      #region Configure Button Labels ...
+      // BtnToggleGlobalWatched.Label = (MyFilms.conf.GlobalUnwatchedOnly) ? string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628)) : string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
 
-      if (string.IsNullOrEmpty(conf.CurrentSortMethod))
-        conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
-      if (string.IsNullOrEmpty(conf.CurrentSortMethodInHierarchies))
-        conf.CurrentSortMethodInHierarchies = conf.CurrentSortMethod;
-      if (conf.BoolCollection)
-      {
-        BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
-      }
-      else
-      {
-        BtnSrtBy.Label = conf.CurrentSortMethod;
-      }
-      string BtnSearchT = GUILocalizeStrings.Get(137);
+      if (string.IsNullOrEmpty(conf.CurrentSortMethod)) conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
+      if (string.IsNullOrEmpty(conf.CurrentSortMethodInHierarchies)) conf.CurrentSortMethodInHierarchies = conf.CurrentSortMethod;
+      BtnSrtBy.Label = (conf.BoolCollection) ? conf.CurrentSortMethodInHierarchies : conf.CurrentSortMethod;
 
-      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearchT, BtnSearchT);
+      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearchT, GUILocalizeStrings.Get(137));
       BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
+      #endregion
+
       InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
 
-      // check if single movie is requested by loadparameters
+      // check if is requested by loadparameters
+      #region If LoadParams - Check and set single movie in current config ...
       if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
       {
         LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
@@ -5563,8 +5549,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               index += 1;
               // string movieNumber = sr["Number"].ToString();
               // string movieName = sr[conf.StrTitle1].ToString();
-              string movieNumberString = Int32.Parse(sr["Number"].ToString()).ToString();
-              if (movieNumberString == loadParamInfo.MovieID)
+              if (loadParamInfo.MovieID == Int32.Parse(sr["Number"].ToString()).ToString())
               {
                 // bool success = int.TryParse(loadParamInfo.MovieID, out index);
                 conf.StrIndex = index;
@@ -5577,23 +5562,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GetFilmList(conf.StrIndex);
         SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
       }
+      #endregion
       else
       {
-
         // now set views in MF ...
-        if (conf.Boolselect) // Groupviews ? 
+        if (conf.Boolselect) // Groupviews / Persons
         {
-          // Hack to get persons in ASC order after returning from external plugins ...
-          if (IsPersonField(conf.WStrSort))
-          {
-            currentListLevel = Listlevel.Person;
-            getSelectFromDivx(conf.StrSelect, conf.WStrSort, " ASC", conf.Wstar, false, ""); // preserve index from last time
-          }
-          else
-          {
-            currentListLevel = Listlevel.Group;
-            getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
-          }
+          currentListLevel = (IsPersonField(conf.WStrSort)) ? Listlevel.Person : Listlevel.Group;
+          getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSensInViews, conf.Wstar, false, ""); // preserve index from last time
           LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
           SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
         }
@@ -5601,43 +5577,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           Change_LayOut(MyFilms.conf.StrLayOut);
           currentListLevel = Listlevel.Movie; // set as default, if no group view
-          if (!(LoadDfltSlct) && (loadParamInfo == null || string.IsNullOrEmpty(loadParamInfo.View))) // Defaultview not selected and no view loadparameters set
+          if (!LoadDfltSlct && (loadParamInfo == null || string.IsNullOrEmpty(loadParamInfo.View))) // Defaultview not selected and no view loadparameters set
           {
-            GetFilmList(conf.StrIndex);
             SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+            GetFilmList(conf.StrIndex);
           }
-          else                                        // Defaultview selected
+          else // Defaultview selected
           {
             if (!Helper.FieldIsSet(conf.StrViewDfltItem) || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
             {
               conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
               conf.Boolselect = false;
-              if (conf.StrSortSens == " ASC")
-                BtnSrtBy.IsAscending = true;
-              else
-                BtnSrtBy.IsAscending = false;
-              GetFilmList(conf.StrIndex);
+              BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
               SetLabelView("all");
               SetLabelSelect("root");
+              GetFilmList(conf.StrIndex);
             }
-            else
+            else // called with userdefined views - so launch them ...
             {
+              #region Set and Call userdefined Views
               if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
               {
-                if (conf.StrViewDfltItem == "Year" || conf.StrViewDfltItem == "Category" || conf.StrViewDfltItem == "Country" || conf.StrViewDfltItem == "Storage" || conf.StrViewDfltItem == "Actors" || conf.StrViewDfltItem == "RecentlyAdded")
-                  Change_view(conf.StrViewDfltItem);
+                if (IsCategoryYearCountryField(conf.StrViewDfltItem)|| conf.StrViewDfltItem == "Storage" || conf.StrViewDfltItem == "Actors" || conf.StrViewDfltItem == "RecentlyAdded")
+                  this.Change_View_Action(conf.StrViewDfltItem);
                 else
                 {
                   for (int i = 0; i < 5; i++)
                   {
                     if (conf.StrViewDfltItem.ToLower() == conf.StrViewText[i].ToLower() || conf.StrViewDfltItem.ToLower() == conf.StrViewItem[i].ToLower())
-                      Change_view(string.Format("View{0}", i).ToLower());
+                      this.Change_View_Action(string.Format("View{0}", i));
                   }
                 }
-                // SetLabelView and SetLabelSelect will be set by "Change_view"
               }
-              else
-              // View List as selected - filteritem IS defined for the defaultview
+              else // filteritem IS defined for the defaultview
               {
                 string wStrViewDfltItem = conf.StrViewDfltItem;
                 for (int i = 0; i < 5; i++)
@@ -5645,7 +5617,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (conf.StrViewDfltItem == conf.StrViewText[i])
                   {
                     wStrViewDfltItem = conf.StrViewItem[i];
-                    SetLabelView("view" + i);
+                    SetLabelView("View" + i);
                     break;
                   }
                 }
@@ -5664,19 +5636,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
                 // TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
                 conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
-                SetLabelSelect(conf.StrTxtSelect);
 
-                if (wStrViewDfltItem.Length > 0)
-                  SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
+                if (wStrViewDfltItem.Length > 0) SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
+                SetLabelSelect(conf.StrTxtSelect);
                 MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
-                BtnSrtBy.Label = conf.CurrentSortMethod;
-                // BtnSrtBy.Label = conf.WStrSort; // ToDo: Check, why initial value not set properly
-                if (conf.StrSortSens == " ASC")
-                  BtnSrtBy.IsAscending = true;
-                else
-                  BtnSrtBy.IsAscending = false;
                 GetFilmList(conf.StrIndex);
               }
+              #endregion
             }
           }
         }
@@ -5687,10 +5653,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
         SetLabelSelect(conf.StrTxtSelect);
       SetDummyControlsForFacade(currentListLevel);
-      if (conf.LastID == ID_MyFilmsDetail)
-        GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
-      else if (conf.LastID == ID_MyFilmsActors)
-        GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
+
+      if (conf.LastID == ID_MyFilmsDetail) GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
+      else if (conf.LastID == ID_MyFilmsActors) GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
       else GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
     }
 
@@ -5708,12 +5673,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
       {
-        // GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-        if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
-          GlobalFilterStringUnwatched = conf.StrWatchedField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND ";
-        else
-          GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-        MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
+        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrWatchedField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND "; MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
       }
       else
       {
@@ -5721,11 +5681,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
       }
 
-      if (conf.GlobalAvailableOnly)
-        GlobalFilterIsOnlineOnly = true;
-      else
-        GlobalFilterIsOnlineOnly = false;
-
+      GlobalFilterIsOnlineOnly = conf.GlobalAvailableOnly;
+      
       if (GlobalFilterIsOnlineOnly)
       {
         GlobalFilterStringIsOnline = "IsOnline like 'true' AND ";
@@ -5793,22 +5750,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 #endif
     }
+
     //--------------------------------------------------------------------------------------------
     //   Change View Response  (and process corresponding filter list)
     //--------------------------------------------------------------------------------------------
-    private void Change_view(string choiceView)
+    private void Change_View_Action(string SelectedView)
     {
-      Change_view(choiceView, false);
+      this.Change_View_Action(SelectedView, false);
     }
-    private void Change_view(string choiceView, bool restrictToCurrentMovie)
+    private void Change_View_Action(string selectedView, bool restrictToCurrentMovie)
     {
-      LogMyFilms.Debug("Change_View called with '" + choiceView + "', restrictToCurrentMovie = '" + restrictToCurrentMovie + "'");
-      XmlConfig XmlConfig = new XmlConfig();
+      LogMyFilms.Debug("Change_View_Action called with '" + selectedView + "', restrictToCurrentMovie = '" + restrictToCurrentMovie + "'");
       conf.Boolview = false;
       conf.Boolstorage = false;
-      switch (choiceView.ToLower())
+      SetDummyControlsForFacade(currentListLevel);
+      switch (selectedView)
       {
-        case "all":
+        #region Predefined Views ...
+        case "All":
           //  Change View All Films
           currentListLevel = Listlevel.Movie;
           conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
@@ -5821,46 +5780,45 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           this.SetLabelSelect("root");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
-        case "year":
+        case "Year":
           //  Change View by Year
           currentListLevel = Listlevel.Group;
           conf.WStrSort = "Year";
           conf.WStrSortSens = " DESC";
           BtnSrtBy.IsAscending = false;
-          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+          getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
           SetLabelView("year");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
-        case "category":
+        case "Category":
           currentListLevel = Listlevel.Group;
           conf.WStrSort = "Category";
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
-          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+          getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
           SetLabelView("category");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
-        case "recentlyadded":
+        case "RecentlyAdded":
           currentListLevel = Listlevel.Group;
           conf.WStrSort = "RecentlyAdded";
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
-          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+          getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
           SetLabelView("recentlyadded");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
-
-        case "country":
+        case "Country":
           currentListLevel = Listlevel.Group;
           conf.WStrSort = "Country";
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
-          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+          getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
           SetLabelView("country");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
-        case "actors":
+        case "Actors":
           //  Change View by "Actors":
           currentListLevel = Listlevel.Person;
           conf.WStrSort = "Actors";
@@ -5874,7 +5832,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
-        case "producer":
+        case "Producer":
           currentListLevel = Listlevel.Person;
           conf.WStrSort = "Producer";
           conf.WStrSortSens = " ASC";
@@ -5887,7 +5845,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
-        case "director":
+        case "Director":
           currentListLevel = Listlevel.Person;
           conf.WStrSort = "Director";
           conf.WStrSortSens = " ASC";
@@ -5900,7 +5858,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
-        case "writer":
+        case "Writer":
           currentListLevel = Listlevel.Person;
           conf.WStrSort = "Writer";
           conf.WStrSortSens = " ASC";
@@ -5913,7 +5871,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
-        case "persons":
+        case "Persons":
           currentListLevel = Listlevel.Person;
           conf.WStrSort = "Persons";
           conf.WStrSortSens = " ASC";
@@ -5924,7 +5882,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
-        case "storage":
+        case "Storage":
           // Change View by "Storage":
           currentListLevel = Listlevel.Movie;
           conf.StrSelect = "((" + conf.StrTitle1 + " not like '') and (" + conf.StrStorage + " not like ''))";
@@ -5942,41 +5900,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           SetLabelView("storage");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
+        #endregion
 
-        case "view0":
-        case "view1":
-        case "view2":
-        case "view3":
-        case "view4":
+        #region Userdefined Views ...
+        case "View0":
+        case "View1":
+        case "View2":
+        case "View3":
+        case "View4":
           // specific user View
           int i = 0;
-          if (choiceView.ToLower() == "view1") i = 1;
-          if (choiceView.ToLower() == "view2") i = 2;
-          if (choiceView.ToLower() == "view3") i = 3;
-          if (choiceView.ToLower() == "view4") i = 4;
+          if (selectedView == "View1") i = 1;
+          if (selectedView == "View2") i = 2;
+          if (selectedView == "View3") i = 3;
+          if (selectedView == "View4") i = 4;
 
           if (conf.StrViewItem[i] != "")
 
             switch (conf.StrViewItem[i].ToLower())
             {
-              case "producer":
-              case "director":
-              case "writer":
-              case "actors":
-              case "borrower":
+              case "Producer":
+              case "Director":
+              case "Writer":
+              case "Actors":
+              case "Borrower":
                 currentListLevel = Listlevel.Person;
                 break;
-              case "originaltitle":
-              case "translatedtitle":
-              case "formattedtitle":
+              case "OriginalTitle":
+              case "TranslatedTitle":
+              case "FormattedTitle":
                 currentListLevel = Listlevel.Movie;
                 break;
               default:
                 currentListLevel = Listlevel.Group;
                 break;
             }
+
           conf.WStrSort = conf.StrViewItem[i];
-          SetLabelView(choiceView.ToLower());
+          SetLabelView(selectedView.ToLower());
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
           if (conf.StrViewValue[i].Length > 0 && !conf.StrViewValue[i].Contains(","))
@@ -6018,7 +5979,54 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //}
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
+        #endregion
 
+        #region Default View Handling ...
+        default: // other nonspecific views ...
+          {
+            switch (selectedView)
+            {
+              case "Producer":
+              case "Director":
+              case "Writer":
+              case "Actors":
+              case "Borrower":
+                currentListLevel = Listlevel.Person;
+                break;
+              case "OriginalTitle":
+              case "TranslatedTitle":
+              case "FormattedTitle":
+                currentListLevel = Listlevel.Movie;
+                break;
+              default:
+                currentListLevel = Listlevel.Group;
+                break;
+            }
+            SetDummyControlsForFacade(currentListLevel);
+            conf.WStrSort = selectedView;
+            conf.WStrSortSens = " ASC";
+            BtnSrtBy.IsAscending = true;
+            getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
+            SetLabelView(selectedView.ToLower());
+            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+            break;
+          }
+        #endregion
+      }
+      LogMyFilms.Debug("Change_View_Action(" + selectedView + ") -> End");
+    }
+    
+    //--------------------------------------------------------------------------------------------
+    //   Menu actions ...
+    //--------------------------------------------------------------------------------------------
+    private void Change_Menu_Action(string choiceView)
+    {
+      LogMyFilms.Debug("Change_View called with '" + choiceView + "'");
+      XmlConfig XmlConfig = new XmlConfig();
+      conf.Boolview = false;
+      conf.Boolstorage = false;
+      switch (choiceView.ToLower())
+      {
         case "config": //Choose Database
           ChooseNewConfig();
           break;
@@ -6232,15 +6240,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           dlg1.DoModal(GetID);
-          if (dlg1.SelectedLabel == -1)
-          {
-            return;
-          }
+          if (dlg1.SelectedLabel == -1) return;
 
-          LogMyFilms.Debug(
-            "Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
-
-          Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+          LogMyFilms.Debug("Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
+          this.Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
           return;
 
         case "globalupdates":
@@ -6300,7 +6303,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             return;
           }
-          Change_view(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
+          this.Change_Menu_Action(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
           return;
 
         case "globalmappings": // map useritems from GUI
@@ -6508,7 +6511,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           LogMyFilms.Info("Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          if (!Context_Menu) Change_view("globaloptions");
+          if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
 
@@ -6529,7 +6532,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info(
             "(SetGlobalFilterString IsOnline) - 'GlobalFilterStringIsOnline' = '" + GlobalFilterStringIsOnline + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          if (!Context_Menu) Change_view("globaloptions");
+          if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
 
@@ -6552,7 +6555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           LogMyFilms.Info("(SetGlobalFilterString Trailers) - 'GlobalFilterStringTrailersOnly' = '" + GlobalFilterStringTrailersOnly + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          if (!Context_Menu) Change_view("globaloptions");
+          if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
 
@@ -6575,7 +6578,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info(
             "(SetGlobalFilterString MinRating) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          if (!Context_Menu) Change_view("globaloptions");
+          if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
 
@@ -6618,7 +6621,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info(
             "(SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          if (!Context_Menu) Change_view("globaloptions");
+          if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
 
@@ -6761,13 +6764,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             delegate()
               {
                 // MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-                for (i = 0; i < w_index_count; i++)
+                for (int i = 0; i < w_index_count; i++)
                 {
                   try
                   {
                     string title = wr[i][MyFilms.conf.StrTitle1].ToString();
                     LogMyFilms.Debug(
-                      "(GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] +
+                      "(GlobalSearchTrailerLocal) - Number: '" + i + "' - Index to search: '" + w_index[i] +
                       "'");
                     if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Register trailer for '" + title + "'");
                     if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / w_index_count;
@@ -6815,7 +6818,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "ShowEmptyValuesInViews", MyFilms.conf.StrGrabber_ChooseScript); // disabled, as we do not keep the setting persistant in config
           LogMyFilms.Info("Grabber Option 'show empty values in views' changed to " + MyFilms.conf.BoolShowEmptyValuesInViews);
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-          Change_view("globaloptions");
+          Refreshfacade();
+          this.Change_Menu_Action("globaloptions");
           break;
         case "choosescript":
           MyFilms.conf.StrGrabber_ChooseScript = !MyFilms.conf.StrGrabber_ChooseScript;
@@ -6824,7 +6828,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info(
             "Grabber Option 'use always that script' changed to " + MyFilms.conf.StrGrabber_ChooseScript);
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-          Change_view("globaloptions");
+          this.Change_Menu_Action("globaloptions");
           break;
         case "findbestmatch":
           MyFilms.conf.StrGrabber_Always = !MyFilms.conf.StrGrabber_Always;
@@ -6833,7 +6837,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info(
             "Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-          Change_view("globaloptions");
+          this.Change_Menu_Action("globaloptions");
           break;
         case "windowsfiledialog":
           MyFilms.conf.WindowsFileDialog = !MyFilms.conf.WindowsFileDialog;
@@ -6842,7 +6846,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info(
             "Update Option 'use Windows File Dialog...' changed to " + MyFilms.conf.WindowsFileDialog.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-          Change_view("globaloptions");
+          this.Change_Menu_Action("globaloptions");
           break;
         case "alwaysdefaultview":
           MyFilms.conf.AlwaysDefaultView = !MyFilms.conf.AlwaysDefaultView;
@@ -6859,14 +6863,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //else
           //  Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-          Change_view("globaloptions");
+          this.Change_Menu_Action("globaloptions");
           break;
         case "alwayslistforgroups":
           MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
           XmlConfig.WriteXmlConfig(
             "MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
           LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
-          Change_view("globaloptions");
+          this.Change_Menu_Action("globaloptions");
           break;
 
         case "woluserdialog":
@@ -6874,39 +6878,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           XmlConfig.WriteXmlConfig(
             "MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
           LogMyFilms.Info("Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
-          Change_view("globaloptions");
+          this.Change_Menu_Action("globaloptions");
           break;
 
         default: // other nonspecific views ...
           {
-            switch (choiceView.ToLower())
-            {
-              case "producer":
-              case "director":
-              case "writer":
-              case "actors":
-              case "borrower":
-                currentListLevel = Listlevel.Person;
-                break;
-              case "originaltitle":
-              case "translatedtitle":
-              case "formattedtitle":
-                currentListLevel = Listlevel.Movie;
-                break;
-              default:
-                currentListLevel = Listlevel.Group;
-                break;
-            }
-            conf.WStrSort = choiceView;
-            conf.WStrSortSens = " ASC";
-            BtnSrtBy.IsAscending = true;
-            getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
-            SetLabelView(choiceView.ToLower());
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+            LogMyFilms.Error("Change_View(" + choiceView + ") is not a known Menu Action !!!"); 
             break;
           }
       }
-      LogMyFilms.Debug("Change_View(" + choiceView + ") -> End");
     }
 
     private bool ChooseNewConfig()
@@ -7089,6 +7069,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string[] upd_choice = new string[20];
       int ichoice = 0;
       MyFilmsDetail.Searchtitles sTitles;
+
+
+      // View Context
+      if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && MyFilms.conf.Boolselect)
+      {
+        if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
+        if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
+        upd_choice[ichoice] = "showemptyvaluesinviewscontext";
+        ichoice++;
+      }
 
       // Moviecontext
       if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
@@ -7282,6 +7272,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
 
+        case "showemptyvaluesinviewscontext":
+          {
+            MyFilms.conf.BoolShowEmptyValuesInViews = !MyFilms.conf.BoolShowEmptyValuesInViews;
+            LogMyFilms.Debug("Context_Menu_Movie() : Option 'show empty values in views' changed to " + MyFilms.conf.BoolShowEmptyValuesInViews);
+            Refreshfacade();
+            break;
+          }
+
         case "analogyperson":
           {
             SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId, Context_Menu);
@@ -7328,7 +7326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (string.IsNullOrEmpty(persontype)) 
                 break;
               conf.StrSelectViews = conf.StrTitle1 + " like '*" + conf.StrTIndex + "'"; // set filter to current movie name - use "*" at the beginning to include movies with hierarchies !
-              Change_view(persontype.ToLower(), true);
+              this.Change_View_Action(persontype, true);
             }
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
             break;
@@ -7769,7 +7767,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           LogMyFilms.Debug("Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
 
-          Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+          this.Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
           //Context_Menu = false;
           return;
 
@@ -10345,7 +10343,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             // alternatively RefreshFacade() to be called to also update facade (only when main window is active)
-            Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+            Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
           }
 
           // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
@@ -10429,7 +10427,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               else
               {
-                Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+                Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
               }
               success = true;
             }
@@ -11111,7 +11109,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (backdrop == null)
         backdrop = new ImageSwapper();
 
-      if (status == true)
+      if (status)
       {
         if (!backdrop.Active)
           backdrop.Active = true;
@@ -11119,9 +11117,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           _fanartTimer.Change(0, RandomFanartDelay); //default 15000 = 15 secs
         else
           _fanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+        GUIControl.ShowControl(GetID, 35);
       }
       else
       {
+        GUIControl.HideControl(GetID, 35);
         if (backdrop.Active)
           backdrop.Active = false;
         // Disable Random Fanart Timer
@@ -11302,9 +11302,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     private void SetLabelSelect(string selectLabel)
     {
-      string newSelectLabel = selectLabel;
-      selectLabel = selectLabel.ToLower();
-      switch (selectLabel)
+      switch (selectLabel.ToLower())
       {
         case "root":
 
@@ -11321,8 +11319,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         default:
-          conf.StrTxtSelect = newSelectLabel;
-          MyFilmsDetail.setGUIProperty("select", newSelectLabel);
+          conf.StrTxtSelect = selectLabel;
+          MyFilmsDetail.setGUIProperty("select", selectLabel);
           break;
       }
     }
@@ -11352,12 +11350,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       catch (Exception) { }
 
       FileTarget fileTarget = new FileTarget();
+      // Filter logFilter = new Filter(); // use to only log MyFilms messages ...
       fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
-      fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " + "${level:fixedLength=true:padding=5} " +
-                          "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " +
-                          "${exception:format=tostring}";
+      fileTarget.Layout = "${date:format=HH\\:mm\\:ss,f}|" +  // "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " + 
+                          "${qpc:normalize=true:difference=true:alignDecimalPoint=true:precision=3:seconds=true} " + 
+                          "${level:fixedLength=true:padding=5} " +
+                          "[${threadname:fixedLength=true:padding=10} | ${threadid:fixedLength=true:padding=2} | ${logger:fixedLength=true:padding=15:shortName=true} ]: " + 
+                          "${message} ${exception:format=tostring}";
                           //"${qpc}";
-                         //${qpc:normalize=Boolean:difference=Boolean:alignDecimalPoint=Boolean:precision=Integer:seconds=Boolean}
+                          // ${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff}
+                          //${qpc:normalize=Boolean:difference=Boolean:alignDecimalPoint=Boolean:precision=Integer:seconds=Boolean}
+                          // ${threadid} - The identifier of the current thread.
+                          // ${threadname} - The name of the current thread.
 
       config.AddTarget("file", fileTarget);
 
@@ -11566,40 +11570,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void SetDummyControls(Listlevel listlevel)
     {
-      LogMyFilms.Debug("SetDummyControlsForFacade(): listlevel = '" + listlevel + "'");
       if (dummyFacadeFilm == null || dummyFacadeGroup == null || dummyFacadePerson == null)
       {
-        LogMyFilms.Debug("SetDummyControlsForFacade() - error, null detected - cannot set !");
+        LogMyFilms.Debug("SetDummyControlsForFacade() - : listlevel = '" + listlevel + "' - Error, null detected (controls missing in skin?) - cannot set !");
         return;
       }
+      LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to '" + listlevel + "'");
       switch (listlevel)
       {
         case Listlevel.Movie:
-          LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'film'");
           if (!dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = true;
           if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           break;
         case Listlevel.Group:
-          LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'group'");
           if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
           if (!dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = true;
           if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           break;
         case Listlevel.Person:
-          LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'person'");
           if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
           if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (!dummyFacadePerson.Visible) dummyFacadePerson.Visible = true;
           break;
         case Listlevel.None:
-          LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'none'");
           if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
           if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           break;
         default:
-          LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'default' (all false)");
+          LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'Default' (all false)");
           dummyFacadeFilm.Visible = false;
           dummyFacadeGroup.Visible = false;
           dummyFacadePerson.Visible = false;
