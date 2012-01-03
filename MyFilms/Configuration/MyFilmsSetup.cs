@@ -1219,61 +1219,61 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
-            MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", "");
-            AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalogExecutable", "");
-            MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", "");
-            MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", "");
-            MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", "");
+            MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
+            AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
+            MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntPicture", "");
+            MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ArtistPicturePath", "");
+            MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartPicture", "");
             lblResultingGroupViewsPathFanart.Text = MesFilmsFanart.Text + "\\_Group\\";
-            MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", "");
-            chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", false);
-            chkDfltViewsAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDfltAll", false);
-            chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
-            chkViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", false);
-            chkPersons.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Persons", false);
-            AntStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorage", "");
-            AntStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorageTrailer", "");
-            PathStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorage", "");
-            PathStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorageTrailer", "");
-            AntIdentItem.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntIdentItem", "");
-            AntIdentLabel.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntIdentLabel", "");
-            AntTitle1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTitle1", "");
-            AntTitle2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTitle2", "");
-            AntSTitle.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSTitle", "");
+            MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewsPicture", "");
+            chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewsDflt", false);
+            chkDfltViewsAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewsDfltAll", false);
+            chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ArtistDflt", false);
+            chkViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Views", false);
+            chkPersons.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Persons", false);
+            AntStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntStorage", "");
+            AntStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntStorageTrailer", "");
+            PathStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PathStorage", "");
+            PathStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PathStorageTrailer", "");
+            AntIdentItem.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntIdentItem", "");
+            AntIdentLabel.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntIdentLabel", "");
+            AntTitle1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntTitle1", "");
+            AntTitle2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntTitle2", "");
+            AntSTitle.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSTitle", "");
             if (AntSTitle.Text == "")
                 AntSTitle.Text = AntTitle1.Text;
-            Sort.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSort", "");
-            SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortInHierarchies", "");
-            SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSens", "");
-            SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSensInHierarchies", "");
-            //AntFilterMinRating.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterMinRating", "5");
-            AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem1", "");
-            AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign1", "#");
-            AntFilterText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText1", "");
-            AntFilterItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem2", "");
-            AntFilterSign2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign2", "#");
-            AntFilterText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText2", "");
-            AntFilterFreeText.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterFreeText", "");
-            AntFilterComb.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterComb", "and");
-            AntViewItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem1", "");
-            AntViewText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText1", "");
-            AntViewValue1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewValue1", "");
-            AntViewItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem2", "");
-            AntViewText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText2", "");
-            AntViewValue2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewValue2", "");
-            AntViewItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem3", "");
-            AntViewText3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText3", "");
-            AntViewValue3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewValue3", "");
-            AntViewItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem4", "");
-            AntViewText4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText4", "");
-            AntViewValue4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewValue4", "");
-            AntViewItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem5", "");
-            AntViewText5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText5", "");
-            AntViewValue5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewValue5", "");
-            AntSearchItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchItem1", "");
-            AntSearchText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchText1", "");
-            AntSearchItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchItem2", "");
-            AntSearchText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchText2", "");
+            Sort.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSort", "");
+            SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", "");
+            SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", "");
+            SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", "");
+            //AntFilterMinRating.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterMinRating", "5");
+            AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem1", "");
+            AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign1", "#");
+            AntFilterText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterText1", "");
+            AntFilterItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem2", "");
+            AntFilterSign2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign2", "#");
+            AntFilterText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterText2", "");
+            AntFilterFreeText.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterFreeText", "");
+            AntFilterComb.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterComb", "and");
+            AntViewItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem1", "");
+            AntViewText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", "");
+            AntViewValue1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue1", "");
+            AntViewItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem2", "");
+            AntViewText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText2", "");
+            AntViewValue2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue2", "");
+            AntViewItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem3", "");
+            AntViewText3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText3", "");
+            AntViewValue3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue3", "");
+            AntViewItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem4", "");
+            AntViewText4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText4", "");
+            AntViewValue4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue4", "");
+            AntViewItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem5", "");
+            AntViewText5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText5", "");
+            AntViewValue5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue5", "");
+            AntSearchItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", "");
+            AntSearchText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchText1", "");
+            AntSearchItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem2", "");
+            AntSearchText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchText2", "");
             AntUpdItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem1", "");
             AntUpdText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText1", "");
             AntUpdDflT1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT1", "");
@@ -1300,62 +1300,62 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
               }
             }
-            check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", false);
-            comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
-            check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", false);
-            NAS_Name_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-1", string.Empty);
-            NAS_MAC_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-1", string.Empty);
-            NAS_Name_2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-2", string.Empty);
-            NAS_MAC_2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-2", string.Empty);
-            NAS_Name_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-3", string.Empty);
-            NAS_MAC_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-3", string.Empty);
+            check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
+            comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
+            check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Userdialog", false);
+            NAS_Name_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-Name-1", string.Empty);
+            NAS_MAC_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-MAC-1", string.Empty);
+            NAS_Name_2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-Name-2", string.Empty);
+            NAS_MAC_2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-MAC-2", string.Empty);
+            NAS_Name_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-Name-3", string.Empty);
+            NAS_MAC_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-MAC-3", string.Empty);
 
-            AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem1", string.Empty);
-            AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", string.Empty);
-            AntItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem2", string.Empty);
-            AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", string.Empty);
-            AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem3", string.Empty);
-            AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel3", string.Empty);
-            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem4", string.Empty);
-            AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel4", string.Empty);
-            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem5", string.Empty);
-            AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel5", string.Empty);
-            ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator1", ",");
-            ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator2", ";");
-            ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator3", "[");
-            ListSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator4", "|");
-            ListSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator5", string.Empty);
-            RoleSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator1", "(");
-            RoleSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator2", ")");
-            RoleSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator3", " as ");
-            RoleSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator4", "....");
-            RoleSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator5", "|");
-            CmdPar.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdPar", "(none)");
-            CmdExe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdExe", string.Empty);
-            TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "TitleDelim", "\\");
-            //chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", false);
-            chkDfltFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", false);
-            chkDfltFanartImage.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", false);
-            chkDfltFanartImageAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", false);
-            chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", false);
-            chkFanartDefaultViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViews", false);
-            chkFanartDefaultViewsUseRandom.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViewsUseRandom", false);
-            txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
-            txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PicturePrefix", string.Empty);
-            //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
-            chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", false);
-            chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", false);
-            //txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe"); 
-            chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", false);
-            txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", string.Empty);
-            chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", false);
-            chkSuppressManual.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressManual", false);
-            chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
-            cbWatched.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WatchedField", "Checked");
-            cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", string.Empty);
-            txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressValue", string.Empty);
-            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", true);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config ! // Rechanged to true, as now config name should be required anymore for logo config!
-            string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressType", "1");
+            AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem1", string.Empty);
+            AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", string.Empty);
+            AntItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem2", string.Empty);
+            AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel2", string.Empty);
+            AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem3", string.Empty);
+            AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel3", string.Empty);
+            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem4", string.Empty);
+            AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", string.Empty);
+            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", string.Empty);
+            AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", string.Empty);
+            ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator1", ",");
+            ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator2", ";");
+            ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator3", "[");
+            ListSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator4", "|");
+            ListSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator5", string.Empty);
+            RoleSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator1", "(");
+            RoleSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator2", ")");
+            RoleSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator3", " as ");
+            RoleSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator4", "....");
+            RoleSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator5", "|");
+            CmdPar.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CmdPar", "(none)");
+            CmdExe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CmdExe", string.Empty);
+            TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", "\\");
+            //chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber", false);
+            chkDfltFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDflt", false);
+            chkDfltFanartImage.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDfltImage", false);
+            chkDfltFanartImageAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDfltImageAll", false);
+            chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Fanart", false);
+            chkFanartDefaultViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDefaultViews", false);
+            chkFanartDefaultViewsUseRandom.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDefaultViewsUseRandom", false);
+            txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_cnf", string.Empty);
+            txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PicturePrefix", string.Empty);
+            //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
+            chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", false);
+            chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", false);
+            //txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_exe", Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe"); 
+            chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", false);
+            txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", string.Empty);
+            chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Suppress", false);
+            chkSuppressManual.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressManual", false);
+            chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressPlayed", false);
+            cbWatched.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WatchedField", "Checked");
+            cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressField", string.Empty);
+            txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", string.Empty);
+            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", true);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config ! // Rechanged to true, as now config name should be required anymore for logo config!
+            string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1");
             switch (wsuppressType)
             {
                 case "1":
@@ -1371,97 +1371,97 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     rbsuppress4.Checked = true;
                     break;
             }
-            Dwp.Text = crypto.Decrypter(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Dwp", string.Empty));
+            Dwp.Text = crypto.Decrypter(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Dwp", string.Empty));
             Rpt_Dwp.Text = Dwp.Text;
             //fmu pour etre coherent avec MP qui stocke les booleens en yes/no au lieu de true/false
             //fmu       if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "True")
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseOriginaltitleForMissingTranslatedtitle", "False") == "True" //fmu
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseOriginaltitleForMissingTranslatedtitle", "False") == "yes")  //fmu
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", "False") == "True" //fmu
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", "False") == "yes")  //fmu
               chkUseOriginalAsTranslatedTitle.Checked = true;
             else
               chkUseOriginalAsTranslatedTitle.Checked = false;
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "True" //fmu
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "yes")  //fmu
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", "False") == "True" //fmu
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", "False") == "yes")  //fmu
                 SearchFileName.Checked = true;
             else
                 SearchFileName.Checked = false;
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", "False") == "True" //fmu
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", "False") == "yes")  //fmu
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", "False") == "True" //fmu
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", "False") == "yes")  //fmu
               SearchSubDirs.Checked = true;
             else
               SearchSubDirs.Checked = false;
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchOnlyExactMatches", "False") == "True"
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchOnlyExactMatches", "False") == "yes")
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", "False") == "True"
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", "False") == "yes")
               SearchOnlyExactMatches.Checked = true;
             else
               SearchOnlyExactMatches.Checked = false;
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", "False") == "True" //fmu
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", "False") == "yes")  //fmu
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirsTrailer", "False") == "True" //fmu
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirsTrailer", "False") == "yes")  //fmu
                 SearchSubDirsTrailer.Checked = true;
             else
                 SearchSubDirsTrailer.Checked = false;
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", "False") == "True"
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", "False") == "yes")
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", "False") == "True"
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", "False") == "yes")
                 check_WOL_enable.Checked = true;
             else
                 check_WOL_enable.Checked = false;
 
-            comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
+            comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
 
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", "False") == "True"
-            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", "False") == "yes")
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Userdialog", "False") == "True"
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Userdialog", "False") == "yes")
                 check_WOL_Userdialog.Checked = true;
             else
                 check_WOL_Userdialog.Checked = false;
 
             chkDVDprofilerMergeWithGenreField.Checked = false;
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "") == "Category")
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "DVDPTagField", "") == "Category")
               chkDVDprofilerMergeWithGenreField.Checked = true;
             else
               chkDVDprofilerMergeWithGenreField.Checked = false;
-            CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
-            CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
-            AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
-            chkUseListviewForGroups.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseListviewForGroups", true);
-            chkGlobalAvailableOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalAvailableOnly", false);
-            chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", false);
-            textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
+            CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CheckWatched", false);
+            CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CheckWatchedPlayerStopped", false);
+            AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AlwaysDefaultView", false);
+            chkUseListviewForGroups.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseListviewForGroups", true);
+            chkGlobalAvailableOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalAvailableOnly", false);
+            chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnly", false);
+            textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnlyValue", "false");
 
-            chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "EnhancedWatchedStatusHandling", false);
-            UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UserProfileName", "Global");
+            chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
+            UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", "Global");
 
-            chkScanMediaOnStart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckMediaOnStart", false);
-            cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AllowTraktSync", false);
-            cbAllowRecentAddedAPI.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AllowRecentAddedAPI", false);
-            chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", false);
-            chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", false);
+            chkScanMediaOnStart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", false);
+            cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", false);
+            cbAllowRecentAddedAPI.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", false);
+            chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", false);
+            chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WindowsFileDialog", false);
             // common external catalog options
-            chkAddTagline.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddTagline", false);
-            chkAddTags.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddTags", false);
-            chkAddCertification.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddCertification", false);
-            chkAddWriter.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddWriter", false);
-            ECMergeDestinationFieldTagline.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationTagline", "");
-            ECMergeDestinationFieldTags.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationTags", "");
-            ECMergeDestinationFieldCertification.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationCertification", "");
-            ECMergeDestinationFieldWriter.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationWriter", "");
-            chkDVDprofilerOnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
-            ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
-            ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", "");
-            ItemSearchGrabberScriptsFilter.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberScriptsFilter", "");
-            cbGrabberOverrideLanguage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideLanguage", string.Empty);
-            cbGrabberOverridePersonLimit.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverridePersonLimit", string.Empty);
-            cbGrabberOverrideTitleLimit.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideTitleLimit", string.Empty);
-            cbGrabberOverrideGetRoles.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideGetRoles", string.Empty);
+            chkAddTagline.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTagline", false);
+            chkAddTags.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTags", false);
+            chkAddCertification.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddCertification", false);
+            chkAddWriter.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddWriter", false);
+            ECMergeDestinationFieldTagline.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddDestinationTagline", "");
+            ECMergeDestinationFieldTags.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddDestinationTags", "");
+            ECMergeDestinationFieldCertification.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddDestinationCertification", "");
+            ECMergeDestinationFieldWriter.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddDestinationWriter", "");
+            chkDVDprofilerOnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyFile", false);
+            ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ItemSearchFileName", "");
+            ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ItemSearchGrabberName", "");
+            ItemSearchGrabberScriptsFilter.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ItemSearchGrabberScriptsFilter", "");
+            cbGrabberOverrideLanguage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GrabberOverrideLanguage", string.Empty);
+            cbGrabberOverridePersonLimit.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GrabberOverridePersonLimit", string.Empty);
+            cbGrabberOverrideTitleLimit.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GrabberOverrideTitleLimit", string.Empty);
+            cbGrabberOverrideGetRoles.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GrabberOverrideGetRoles", string.Empty);
 
-            cbPictureHandling.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PictureHandling", "");
-            DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", "");
-            DefaultCoverArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", "");
-            DefaultCoverViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", "");
-            DefaultFanartImage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultFanartImage", "");
+            cbPictureHandling.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PictureHandling", "");
+            DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "DefaultCover", "");
+            DefaultCoverArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "DefaultCoverArtist", "");
+            DefaultCoverViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "DefaultCoverViews", "");
+            DefaultFanartImage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "DefaultFanartImage", "");
             View_Dflt_Item.Items.Remove(View_Dflt_Item.Text);
             View_Dflt_Item.Items.Add(View_Dflt_Item.Text);
-            View_Dflt_Item.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltItem", "(none)");
-            View_Dflt_Text.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltText", "");
+            View_Dflt_Item.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewDfltItem", "(none)");
+            View_Dflt_Text.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewDfltText", "");
             if ((Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", ""))
                 Config_Dflt.Checked = true;
             else
@@ -1471,7 +1471,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //    View_Dflt_Item.Items.Add(AntViewItem1.Text);
             //if (!(AntViewItem2.Text == "Country") & !(AntViewItem2.Text == "Category") & !(AntViewItem2.Text == "Year") & !(AntViewItem2.Text == "(none)"))
             //    View_Dflt_Item.Items.Add(AntViewItem2.Text);
-            int WLayOut = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "LayOut", 0);
+            int WLayOut = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0);
             if (WLayOut == 0)
                 LayOut.Text = "List";
             if (WLayOut == 1)

@@ -328,8 +328,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 GUITextureManager.CleanupThumbs();
                                 GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsDetail);
                             }
-                            else
-                            // View List as selected
+                            else // View List as selected
                             {
                                 MyFilms.conf.Wselectedlabel = facadeView.SelectedListItem.Label;
                                 Change_LayOut(MyFilms.conf.StrLayOut);

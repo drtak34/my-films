@@ -158,8 +158,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   int iLayout = 0;
                   if (int.TryParse(loadParams.Layout, out iLayout)) 
                     if (iLayout >= 0 && iLayout <= 4)
+                    {
                       StrLayOut = iLayout;
+                      StrLayOutInViews = iLayout;
+                      StrLayOutInHierarchies = iLayout;
+                    }
+                      
                 }
+                StrLayOutInViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOutInViews", StrLayOut);
+                StrLayOutInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOutInHierarchies", StrLayOut);
 
                 Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
                 Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
@@ -404,7 +411,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string wDfltSortInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
                 string wDfltSortSensInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
                 string wDfltSortMethodInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
-
+              
                 StrTxtView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "View", string.Empty);
                 StrTxtSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Selection", string.Empty);
                 try { StrIndex = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "IndexItem", -1); }
@@ -504,9 +511,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Boolreturn = false;
                     Boolselect = true;
                     Wselectedlabel = StrViewDfltText;
-                    if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))  
+                    if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))
+                    {
                       StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
-
+                      StrLayOutInHierarchies = StrLayOut;
+                      StrLayOutInViews = StrLayOut;
+                    }
                     if (Helper.FieldIsSet(wDfltSort))
                     {
                       StrSorta = wDfltSort;
@@ -1290,6 +1300,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strLayOut; }
             set { strLayOut = value; }
         }
+        private int strLayOutInViews = int.MinValue;
+        public int StrLayOutInViews
+        {
+            get { return strLayOutInViews; }
+            set { strLayOutInViews = value; }
+        }
+        private int strLayOutInHierarchies = int.MinValue;
+        public int StrLayOutInHierarchies
+        {
+            get { return strLayOutInHierarchies; }
+            set { strLayOutInHierarchies = value; }
+        }
         private int lastID = int.MinValue;
         public int LastID
         {
@@ -1630,6 +1652,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MyFilms.conf.WStrSort);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOutInViews", MyFilms.conf.StrLayOutInViews);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOutInHierarchies", MyFilms.conf.StrLayOutInHierarchies);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
