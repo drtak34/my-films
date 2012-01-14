@@ -85,7 +85,6 @@ namespace MyFilmsPlugin.DataBase {
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
-            this.InitExpressions();
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -96,9 +95,6 @@ namespace MyFilmsPlugin.DataBase {
                 global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
                 this.Relations.CollectionChanged += schemaChangedHandler1;
-                if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.ExcludeSchema)) {
-                    this.InitExpressions();
-                }
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
@@ -155,7 +151,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             else {
                 this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                this.InitExpressions();
             }
             this.GetSerializationData(info, context);
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -319,7 +314,6 @@ namespace MyFilmsPlugin.DataBase {
         public override global::System.Data.DataSet Clone() {
             AntMovieCatalog cln = ((AntMovieCatalog)(base.Clone()));
             cln.InitVars();
-            cln.InitExpressions();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
@@ -525,7 +519,7 @@ namespace MyFilmsPlugin.DataBase {
             base.Tables.Add(this.tableListValue);
             this.tableContents = new ContentsDataTable();
             base.Tables.Add(this.tableContents);
-            this.tableMovie = new MovieDataTable(false);
+            this.tableMovie = new MovieDataTable();
             base.Tables.Add(this.tableMovie);
             this.tableCustomFields = new CustomFieldsDataTable();
             base.Tables.Add(this.tableCustomFields);
@@ -796,14 +790,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             xs.Add(dsSchema);
             return type;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitExpressions() {
-            this.Movie.DateAddedColumn.Expression = "Convert(Date,\'System.DateTime\')";
-            this.Movie.Length_NumColumn.Expression = "Convert(Length,\'System.Int32\')";
-            this.Movie.PersonsColumn.Expression = "ISNULL(Actors,\' \') + \', \' + ISNULL(Producer, \' \') + \', \' + ISNULL(Director, \' \') " +
-                "+ \', \' + ISNULL(Writer, \' \')";
         }
         
         public delegate void CatalogRowChangeEventHandler(object sender, CatalogRowChangeEvent e);
@@ -3353,8 +3339,6 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnContents_Id;
             
-            private global::System.Data.DataColumn columnLength_Num;
-            
             private global::System.Data.DataColumn columnFanart;
             
             private global::System.Data.DataColumn columnCertification;
@@ -3400,18 +3384,10 @@ namespace MyFilmsPlugin.DataBase {
             private global::System.Data.DataColumn columnPersons;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MovieDataTable() : 
-                    this(false) {
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MovieDataTable(bool initExpressions) {
+            public MovieDataTable() {
                 this.TableName = "Movie";
                 this.BeginInit();
                 this.InitClass();
-                if ((initExpressions == true)) {
-                    this.InitExpressions();
-                }
                 this.EndInit();
             }
             
@@ -3718,13 +3694,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Length_NumColumn {
-                get {
-                    return this.columnLength_Num;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn FanartColumn {
                 get {
                     return this.columnFanart;
@@ -3947,7 +3916,6 @@ namespace MyFilmsPlugin.DataBase {
                         string Disks, 
                         string Picture, 
                         ContentsRow parentContentsRowByContents_Movie, 
-                        int Length_Num, 
                         string Fanart, 
                         string Certification, 
                         string Writer, 
@@ -4012,7 +3980,6 @@ namespace MyFilmsPlugin.DataBase {
                         Picture,
                         null,
                         null,
-                        Length_Num,
                         Fanart,
                         Certification,
                         Writer,
@@ -4035,140 +4002,6 @@ namespace MyFilmsPlugin.DataBase {
                         CustomField2,
                         CustomField3,
                         Persons};
-                if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[39] = parentContentsRowByContents_Movie[0];
-                }
-                rowMovieRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMovieRow);
-                return rowMovieRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MovieRow AddMovieRow(
-                        int Number, 
-                        string Checked, 
-                        string MediaLabel, 
-                        string MediaType, 
-                        string Source, 
-                        string Date, 
-                        string Borrower, 
-                        decimal Rating, 
-                        decimal RatingUser, 
-                        string OriginalTitle, 
-                        string TranslatedTitle, 
-                        string FormattedTitle, 
-                        string Edition, 
-                        string IndexedTitle, 
-                        string Director, 
-                        string Producer, 
-                        string Country, 
-                        string Category, 
-                        string Year, 
-                        string Length, 
-                        string Actors, 
-                        string URL, 
-                        string Description, 
-                        string Comments, 
-                        string VideoFormat, 
-                        string VideoBitrate, 
-                        string AudioFormat, 
-                        string AudioBitrate, 
-                        string Resolution, 
-                        string Framerate, 
-                        string Languages, 
-                        string Subtitles, 
-                        string Size, 
-                        string RecentlyAdded, 
-                        string AgeAdded, 
-                        string Disks, 
-                        string Picture, 
-                        ContentsRow parentContentsRowByContents_Movie, 
-                        string Fanart, 
-                        string Certification, 
-                        string Writer, 
-                        string Watched, 
-                        string Favorite, 
-                        string IMDB_Id, 
-                        string TMDB_Id, 
-                        string SourceTrailer, 
-                        string TagLine, 
-                        string Tags, 
-                        string Studio, 
-                        string IMDB_Rank, 
-                        string IsOnline, 
-                        string IsOnlineTrailer, 
-                        string Aspectratio, 
-                        string CategoryTrakt, 
-                        string LastPosition, 
-                        string AudioChannelCount, 
-                        string CustomField1, 
-                        string CustomField2, 
-                        string CustomField3) {
-                MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        Number,
-                        Checked,
-                        MediaLabel,
-                        MediaType,
-                        Source,
-                        Date,
-                        Borrower,
-                        Rating,
-                        RatingUser,
-                        OriginalTitle,
-                        TranslatedTitle,
-                        FormattedTitle,
-                        Edition,
-                        IndexedTitle,
-                        Director,
-                        Producer,
-                        Country,
-                        Category,
-                        Year,
-                        Length,
-                        Actors,
-                        URL,
-                        Description,
-                        Comments,
-                        VideoFormat,
-                        VideoBitrate,
-                        AudioFormat,
-                        AudioBitrate,
-                        Resolution,
-                        Framerate,
-                        Languages,
-                        Subtitles,
-                        Size,
-                        null,
-                        RecentlyAdded,
-                        AgeAdded,
-                        Disks,
-                        Picture,
-                        null,
-                        null,
-                        null,
-                        Fanart,
-                        Certification,
-                        Writer,
-                        Watched,
-                        Favorite,
-                        IMDB_Id,
-                        TMDB_Id,
-                        SourceTrailer,
-                        TagLine,
-                        Tags,
-                        Studio,
-                        IMDB_Rank,
-                        IsOnline,
-                        IsOnlineTrailer,
-                        Aspectratio,
-                        CategoryTrakt,
-                        LastPosition,
-                        AudioChannelCount,
-                        CustomField1,
-                        CustomField2,
-                        CustomField3,
-                        null};
                 if ((parentContentsRowByContents_Movie != null)) {
                     columnValuesArray[39] = parentContentsRowByContents_Movie[0];
                 }
@@ -4231,7 +4064,6 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnPicture = base.Columns["Picture"];
                 this.columnMovie_Id = base.Columns["Movie_Id"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
-                this.columnLength_Num = base.Columns["Length_Num"];
                 this.columnFanart = base.Columns["Fanart"];
                 this.columnCertification = base.Columns["Certification"];
                 this.columnWriter = base.Columns["Writer"];
@@ -4338,8 +4170,6 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnMovie_Id);
                 this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnContents_Id);
-                this.columnLength_Num = new global::System.Data.DataColumn("Length_Num", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLength_Num);
                 this.columnFanart = new global::System.Data.DataColumn("Fanart", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFanart);
                 this.columnCertification = new global::System.Data.DataColumn("Certification", typeof(string), null, global::System.Data.MappingType.Element);
@@ -4416,7 +4246,6 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnLanguages.Namespace = "";
                 this.columnSubtitles.Namespace = "";
                 this.columnSize.Namespace = "";
-                this.columnDateAdded.ReadOnly = true;
                 this.columnDisks.Namespace = "";
                 this.columnPicture.Namespace = "";
                 this.columnMovie_Id.AutoIncrement = true;
@@ -4424,9 +4253,6 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnMovie_Id.Unique = true;
                 this.columnMovie_Id.Namespace = "";
                 this.columnContents_Id.Namespace = "";
-                this.columnLength_Num.ReadOnly = true;
-                this.columnLength_Num.DefaultValue = ((int)(0));
-                this.columnPersons.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4442,14 +4268,6 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Type GetRowType() {
                 return typeof(MovieRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitExpressions() {
-                this.DateAddedColumn.Expression = "Convert(Date,\'System.DateTime\')";
-                this.Length_NumColumn.Expression = "Convert(Length,\'System.Int32\')";
-                this.PersonsColumn.Expression = "ISNULL(Actors,\' \') + \', \' + ISNULL(Producer, \' \') + \', \' + ISNULL(Director, \' \') " +
-                    "+ \', \' + ISNULL(Writer, \' \')";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7554,21 +7372,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int Length_Num {
-                get {
-                    try {
-                        return ((int)(this[this.tableMovie.Length_NumColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Length_Num in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.Length_NumColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Fanart {
                 get {
                     try {
@@ -8296,16 +8099,6 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetContents_IdNull() {
                 this[this.tableMovie.Contents_IdColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsLength_NumNull() {
-                return this.IsNull(this.tableMovie.Length_NumColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetLength_NumNull() {
-                this[this.tableMovie.Length_NumColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

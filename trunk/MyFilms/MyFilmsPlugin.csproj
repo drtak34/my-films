@@ -142,6 +142,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ViewManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\ViewManager.Designer.cs">
+      <DependentUpon>ViewManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -211,7 +217,7 @@
     <Compile Include="CatalogConverter\MovieCollector.cs" />
     <Compile Include="CatalogConverter\MyMovies.cs" />
     <Compile Include="Utils\Logos.cs" />
-    <Compile Include="Utils\MyFilmsTranslations.cs" />
+    <Compile Include="Utils\Translations.cs" />
     <Compile Include="Utils\XmlSettings.cs" />
     <Compile Include="Utils\Utility.cs" />
     <Compile Include="Utils\WakeOnLanManager.cs" />
@@ -329,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\MyFilmsSetup.resx">
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\ViewManager.resx">
+      <DependentUpon>ViewManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\trakt.png" />
   </ItemGroup>

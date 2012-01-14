@@ -123,9 +123,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
                   StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
-                    //if (StrViewText[i - 1].ToLower() == wViewDfltItem.ToLower())
-                    //    StrViewDfltItem = StrViewItem[i - 1];
+                  //if (StrViewText[i - 1].ToLower() == wViewDfltItem.ToLower()) StrViewDfltItem = StrViewItem[i - 1];
                   StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i), string.Empty);
+
+                  //View tmp = new View();
+                  //tmp.InitDefaults();
+                  //tmp.ID = i - 1;
+                  //tmp.ViewDBItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
+                  //tmp.ViewDBItemValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i), string.Empty);
+                  //tmp.ViewDisplayName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
+                  //CustomViews.Add(tmp);
                 }
                 for (int i = 1; i < 3; i++)
                 {
@@ -392,8 +399,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #endregion
 
                 StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);
-                StrSelectViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelectViews", string.Empty);
-                StrActors = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrActors", string.Empty);
+                StrPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrPersons", string.Empty);
                 StrTitleSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrTitleSelect", string.Empty);
                 StrFilmSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrFilmSelect", string.Empty);
                 StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
@@ -411,7 +417,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string wDfltSortInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
                 string wDfltSortSensInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
                 string wDfltSortMethodInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
-              
+
+                StartView.InitDefaults();
+                CurrentView.InitDefaults();
+
+                // ViewManager.CurrentSettings.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
+                CurrentView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
+                CurrentView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
+                CurrentView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
+
+                CurrentView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortInHierarchies", string.Empty);
+                CurrentView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethodInHierarchies", string.Empty);
+                CurrentView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSensInHierarchies", string.Empty);
+
+                StartView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
+                StartView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
+                StartView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
+
+                StartView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
+                StartView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
+                StartView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
+
+                string startview = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentView", string.Empty);
+                if (!string.IsNullOrEmpty(startview)) StartView.LoadFromString(startview);
+
+                ViewContext = (MyFilms.ViewContext)Enum.Parse(typeof(MyFilms.ViewContext), XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.ViewContext.None)));
                 StrTxtView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "View", string.Empty);
                 StrTxtSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Selection", string.Empty);
                 try { StrIndex = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "IndexItem", -1); }
@@ -419,7 +449,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrTIndex = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleItem", string.Empty);
                 Boolselect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolselect", false);
                 Boolreturn = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolreturn", false);
-                Boolview = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolview", false);
+                Boolindexed = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolindexed", false);
+                Boolindexedreturn = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolindexedreturn", false);
+                IndexedChars = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "IndexedChars", 0);
                 WStrSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WStrSort", string.Empty);
                 Wselectedlabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WSelectedLabel", string.Empty);
                 Wstar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Wstar", string.Empty);
@@ -445,8 +477,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrFanartDfltImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImage", false);
                 StrFanartDfltImageAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImageAll", false);
-                StrViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
-                StrPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Persons", false);
+                this.UseThumbsForViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
+                this.UseThumbsForPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Persons", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
                 StrViewsDfltAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDfltAll", false);
                 StrCheckWOLenable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Enable", false);
@@ -462,7 +494,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MyFilms.SearchHistory.Clear();
                 foreach (string s in StrSearchHistory.Split('|'))
                 {
-                  if (!string.IsNullOrEmpty(s.Trim()))
+                  if (!string.IsNullOrEmpty(s.Trim())) 
                     MyFilms.SearchHistory.Add(s);
                 }
 
@@ -486,11 +518,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
 
                 CmdExe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdExe", string.Empty);
-                if (CmdExe == "(none)")
-                    CmdExe = "";
+                if (CmdExe == "(none)") CmdExe = "";
                 CmdPar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdPar", string.Empty);
-                if (CmdPar == "(none)")
-                    CmdPar = "";
+                if (CmdPar == "(none)") CmdPar = "";
                 OnlyTitleList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyTitleList", false);
                 WindowsFileDialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WindowsFileDialog", false);
                 GlobalAvailableOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalAvailableOnly", false);
@@ -510,6 +540,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Wstar = "";
                     Boolreturn = false;
                     Boolselect = true;
+                    Boolindexed = false;
+                    Boolindexedreturn = false;
+
                     Wselectedlabel = StrViewDfltText;
                     if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))
                     {
@@ -534,21 +567,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 XmlConfig.Dispose();
             } // End reading config
 
-            if (StrSelect == "")
-              StrSelect = StrTitle1 + " not like ''";
-            //if (StrSelectViews == "")
-            //  StrSelectViews = StrTitle1.ToString() + " not like ''";
-            if (StrSorta == "") StrSorta = StrSTitle;
-            if (StrSortaInHierarchies == "") StrSortaInHierarchies = StrSTitle;
 
-            if (StrSortSens == "" || StrSortSens == "ASC") StrSortSens = " ASC";
+            if (string.IsNullOrEmpty(CurrentSortMethod)) CurrentSortMethod = GUILocalizeStrings.Get(103);
+            if (string.IsNullOrEmpty(CurrentSortMethodInHierarchies)) CurrentSortMethodInHierarchies = CurrentSortMethod;
+          
+            if (string.IsNullOrEmpty(StrSelect))
+              StrSelect = StrTitle1 + " not like ''";
+
+            if (string.IsNullOrEmpty(StrSorta)) StrSorta = StrSTitle;
+            if (string.IsNullOrEmpty(StrSortaInHierarchies)) StrSortaInHierarchies = StrSTitle;
+
+            if (string.IsNullOrEmpty(StrSortSens) || StrSortSens == "ASC") StrSortSens = " ASC";
             if (StrSortSens == "DESC") StrSortSens = " DESC";
 
-            if (StrSortSensInHierarchies == "" || StrSortSensInHierarchies == "ASC") StrSortSensInHierarchies = " ASC";
+            if (string.IsNullOrEmpty(StrSortSensInHierarchies) || StrSortSensInHierarchies == "ASC") StrSortSensInHierarchies = " ASC";
             if (StrSortSensInHierarchies == "DESC") StrSortSensInHierarchies = " DESC";
 
-            if (StrSortSensInViews == "" || StrSortSensInViews == "DESC") StrSortSensInViews = " DESC";
-            if (StrSortSensInViews == "ASC") StrSortSensInViews = " ASC";
+            if (string.IsNullOrEmpty(WStrSortSens) || WStrSortSens == "ASC") WStrSortSens = " ASC";
+            if (WStrSortSens == "DESC") WStrSortSens = " DESC";
+
+            if (string.IsNullOrEmpty(WStrSortSensCount) || WStrSortSensCount == "DESC") WStrSortSensCount = " DESC";
+            if (WStrSortSensCount == "ASC") WStrSortSensCount = " ASC";
 
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
@@ -573,11 +612,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return currentConfig; }
           set { currentConfig = value; }
         }
-        private static MFView currentMFView;
-        public static MFView CurrentMFView
+        private static MFView viewManager = new MFView();
+        public static MFView ViewManager
         {
-          get { return currentMFView; }
-          set { currentMFView = value; }
+          get { return viewManager; }
+          set { viewManager = value; }
+        }
+        private static View startView = new View();
+        public View StartView
+        {
+          get { return startView; }
+          set { startView = value; }
+        }
+        private static View currentView = new View();
+        public View CurrentView
+        {
+          get { return currentView; }
+          set { currentView = value; }
         }
         private static string pluginMode = string.Empty;
         public static string PluginMode
@@ -606,11 +657,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           set { alwaysShowConfigMenu = value; }
         }
 
+        private MyFilms.ViewContext viewContext = MyFilms.ViewContext.None;
+        public MyFilms.ViewContext ViewContext
+        {
+            get { return viewContext; }
+            set { viewContext = value; }
+        }
+        private int menuSelectedID = -1;
+        public int MenuSelectedID
+        {
+          get { return menuSelectedID; }
+          set { menuSelectedID = value; }
+        }
         private bool boolselect = false;
         public bool Boolselect
         {
-            get { return boolselect; }
-            set { boolselect = value; }
+          get { return boolselect; }
+          set { boolselect = value; }
         }
         private bool boolreturn = false;
         public bool Boolreturn
@@ -618,17 +681,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return boolreturn; }
             set { boolreturn = value; }
         }
-        private bool boolview = false;
-        public bool Boolview
+        private bool boolindexed = false;
+        public bool Boolindexed
         {
-            get { return boolview; }
-            set { boolview = value; }
+          get { return boolindexed; }
+          set { boolindexed = value; }
         }
-        private bool boolstorage = false;
-        public bool Boolstorage
+        private int indexedChars = 0;
+        public int IndexedChars
         {
-          get { return boolstorage; }
-          set { boolstorage = value; }
+          get { return indexedChars; }
+          set { indexedChars = value; }
+        }
+        private bool boolindexedreturn = false;
+        public bool Boolindexedreturn
+        {
+          get { return boolindexedreturn; }
+          set { boolindexedreturn = value; }
         }
         private bool boolCollection; // state variable to indicate, if the current browse position is a movie collection (used for sort by actions)
         public bool BoolCollection
@@ -748,12 +817,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return strSelect; }
           set { strSelect = value; }
-        }
-        private string strSelectViews = string.Empty;
-        public string StrSelectViews
-        {
-          get { return strSelectViews; }
-          set { strSelectViews = value; }
         }
         private string strDirStor = string.Empty;
         public string StrDirStor
@@ -922,11 +985,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return boolDontSplitValuesInViews; }
           set { boolDontSplitValuesInViews = value; }
         }
-        private string strActors = string.Empty;
-        public string StrActors
+        private bool boolReverseNames = false;
+        public bool BoolReverseNames
         {
-            get { return strActors; }
-            set { strActors = value; }
+          get { return boolReverseNames; }
+          set { boolReverseNames = value; }
+        }
+        private string strPersons = string.Empty;
+        public string StrPersons
+        {
+            get { return this.strPersons; }
+            set { this.strPersons = value; }
         }
         private string strTxtView = string.Empty;
         public string StrTxtView
@@ -1063,11 +1132,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strIdentItem; }
             set { strIdentItem = value; }
         }
+        private View[] customView = { new View(), new View(), new View(), new View(), new View() };
+        public View[] CustomView
+        {
+          get { return customView; }
+          set { customView = value; }
+        }
+        private List<View> customViews = new List<View>();
+        public List<View> CustomViews
+        {
+          get { return customViews; }
+          set { customViews = value; }
+        }
         private string[] strViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] StrViewItem
         {
-            get { return strViewItem; }
-            set { strViewItem = value; }
+          get { return strViewItem; }
+          set { strViewItem = value; }
         }
         private string[] strViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] StrViewText
@@ -1183,11 +1264,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strSortSensInHierarchies; }
           set { strSortSensInHierarchies = value; }
         }
-        private string strSortSensInViews = string.Empty; //In Views
-        public string StrSortSensInViews
+        private string wStrSortSensCount = string.Empty; //In Views for number count sort direction
+        public string WStrSortSensCount
         {
-          get { return strSortSensInViews; }
-          set { strSortSensInViews = value; }
+          get { return this.wStrSortSensCount; }
+          set { this.wStrSortSensCount = value; }
         }
         private string wStrSort = string.Empty;
         public string WStrSort
@@ -1201,7 +1282,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return wStrSelect; }
             set { wStrSelect = value; }
         }
-        private string wStrSortSens = string.Empty;
+        private string wStrSortSens = string.Empty; //In Views
         public string WStrSortSens
         {
             get { return wStrSortSens; }
@@ -1390,17 +1471,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strArtistDflt; }
             set { strArtistDflt = value; }
         }
-        private bool strViews = false;
-        public bool StrViews
+        private bool useThumbsForViews = false;
+        public bool UseThumbsForViews
         {
-          get { return strViews; }
-          set { strViews = value; }
+          get { return this.useThumbsForViews; }
+          set { this.useThumbsForViews = value; }
         }
-        private bool strPersons = false;
-        public bool StrPersons
+        private bool useThumbsForPersons = false;
+        public bool UseThumbsForPersons
         {
-          get { return strPersons; }
-          set { strPersons = value; }
+          get { return this.useThumbsForPersons; }
+          set { this.useThumbsForPersons = value; }
         }
         private bool strViewsDflt = false;
         public bool StrViewsDflt
@@ -1630,33 +1711,46 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelectViews", MyFilms.conf.StrSelectViews);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MyFilms.conf.StrActors);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrPersons", MyFilms.conf.StrPersons);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
+
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MyFilms.conf.CurrentSortMethod);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MyFilms.conf.StrSortSens);
+            
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortInHierarchies", MyFilms.conf.StrSortaInHierarchies); //InHierarchies
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethodInHierarchies", MyFilms.conf.CurrentSortMethodInHierarchies);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSensInHierarchies", MyFilms.conf.StrSortSensInHierarchies);
+
+            string tmp1 = Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext));
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "View", MyFilms.conf.StrTxtView);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MyFilms.conf.StrTxtSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MyFilms.conf.Boolselect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolreturn", MyFilms.conf.Boolreturn);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolview", MyFilms.conf.Boolview);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexed", MyFilms.conf.Boolindexed);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexedreturn", MyFilms.conf.Boolindexedreturn);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexedChars", MyFilms.conf.IndexedChars);
+
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MyFilms.conf.Wselectedlabel);
+            
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MyFilms.conf.WStrSort);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
+            
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOutInViews", MyFilms.conf.StrLayOutInViews);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOutInHierarchies", MyFilms.conf.StrLayOutInHierarchies);
+            
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
+            string tmp2 = MyFilms.conf.CurrentView.SaveToString();
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentView", MyFilms.conf.CurrentView.SaveToString());
 
             switch (MyFilms.conf.StrFileType)
             {
@@ -1688,8 +1782,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (Dwp.Length == 0) return configname;
               MediaPortal.Dialogs.VirtualKeyboard keyboard =
                 (MediaPortal.Dialogs.VirtualKeyboard)
-                MediaPortal.GUI.Library.GUIWindowManager.GetWindow(
-                  (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
               if (null == keyboard) return string.Empty;
               keyboard.Reset();
               keyboard.Text = string.Empty;

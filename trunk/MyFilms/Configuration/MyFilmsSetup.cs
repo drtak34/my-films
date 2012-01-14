@@ -204,7 +204,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntTitle2.Items.Add(dc.ColumnName);
                   AntSTitle.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
                 {
                   AntFilterItem1.Items.Add(dc.ColumnName);
                   AntFilterItem2.Items.Add(dc.ColumnName);
@@ -214,7 +214,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem4.Items.Add(dc.ColumnName);
                   AntItem5.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
@@ -222,13 +222,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
                     dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
                     dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" && 
-                    dc.ColumnName != "URL" && dc.ColumnName != "Length_Num" && dc.ColumnName != "RecentlyAdded")
+                    dc.ColumnName != "URL" && dc.ColumnName != "RecentlyAdded")
                 {
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Number")
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Number")
                 {
                   AntViewItem1.Items.Add(dc.ColumnName);
                   AntViewItem2.Items.Add(dc.ColumnName);
@@ -237,7 +237,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntViewItem5.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && 
-                    dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" &&
+                    dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
                     dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntSearchItem1.Items.Add(dc.ColumnName);
@@ -250,7 +250,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 {
                   AntIdentItem.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Length_Num" && dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
                   AntUpdItem1.Items.Add(dc.ColumnName);
                   AntUpdItem2.Items.Add(dc.ColumnName);
@@ -1576,6 +1576,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //mydivx.Clear();
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
+            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu
             View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Films
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
@@ -3594,6 +3595,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
+            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu
             View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); //Films
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
@@ -4918,14 +4920,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Preset separators:
           ListSeparator1.Text = ",";
           ListSeparator2.Text = ";";
-          ListSeparator3.Text = "[";
-          ListSeparator4.Text = "|";
+          ListSeparator3.Text = "|";
+          ListSeparator4.Text = "/";
           ListSeparator5.Text = string.Empty;
           RoleSeparator1.Text = "(";
           RoleSeparator2.Text = ")";
-          RoleSeparator3.Text = " as ";
-          RoleSeparator4.Text = "....";
-          RoleSeparator5.Text = "|";
+          RoleSeparator3.Text = "as ";
+          RoleSeparator4.Text = string.Empty;
+          RoleSeparator5.Text = string.Empty;
 
           chkFanart.Checked = true;
           chkFanartDefaultViews.Checked = false;

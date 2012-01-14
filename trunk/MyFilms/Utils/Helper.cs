@@ -524,21 +524,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
             return new string(a);
         }
 
-        public static void GetEpisodeIndexesFromComposite(string compositeID, out int seasonIndex, out int episodeIndex)
+        public static bool Contains(string source, string toCheck)
         {
-            seasonIndex = 0;
-            episodeIndex = 0;
-
-            if (string.IsNullOrEmpty(compositeID)) return;
-        
-            string[] splits = compositeID.Split(new char[] { '_' });
-            string[] epComp = splits[1].Split(new char[] { 'x' });
-
-            int.TryParse(epComp[0], out seasonIndex);
-            int.TryParse(epComp[1], out episodeIndex);
-            
-            return;
+          return Contains(source, toCheck, StringComparison.OrdinalIgnoreCase);
         }
+        public static bool Contains(string source, string toCheck, StringComparison comp)
+        {
+          if (string.IsNullOrEmpty(toCheck) || string.IsNullOrEmpty(source))
+            return true;
+          return source.IndexOf(toCheck, comp) >= 0;
+        } 
 
         #endregion
 
@@ -719,15 +714,23 @@ namespace MyFilmsPlugin.MyFilms.Utils
           string status = "local";
           if (IsTraktAvailableAndEnabled)
           {
-            if (TraktSettings.Username == username)
+            try
             {
-              if (TraktSettings.AccountStatus == ConnectionState.Connected) 
-                status = "online";
-              else
-                status = "offline";
+              if (TraktSettings.Username == username)
+              {
+                if (TraktSettings.AccountStatus == ConnectionState.Connected)
+                  status = "online";
+                else
+                  status = "offline";
+              }
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Warn("GetUserOnlineStatus(): problem getting Trakt user status : " + ex.Message);
+              status = "local";
             }
           }
-          LogMyFilms.Debug("GetUserOnlineStatus(): connection status for '" + username + "' is '" + status + "'");
+          LogMyFilms.Debug("GetUserOnlineStatus(): connection status for '" + username + "' is set to '" + status + "'");
           return status;
         }
 
