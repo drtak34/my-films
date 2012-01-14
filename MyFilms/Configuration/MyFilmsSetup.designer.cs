@@ -549,6 +549,11 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.AntViewIndex1 = new System.Windows.Forms.ComboBox();
+          this.lblAntViewIndex = new System.Windows.Forms.Label();
+          this.lbl_View_Dflt_Text = new System.Windows.Forms.Label();
+          this.AntViewFilter1 = new System.Windows.Forms.TextBox();
+          this.lbl_AntViewFilter = new System.Windows.Forms.Label();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -3374,6 +3379,7 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.lbl_View_Dflt_Text);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalAvailableOnly);
           this.groupBox_DefaultView.Controls.Add(this.chkUseListviewForGroups);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
@@ -3463,9 +3469,9 @@
           // Sort
           // 
           this.Sort.FormattingEnabled = true;
-          this.Sort.Location = new System.Drawing.Point(189, 44);
+          this.Sort.Location = new System.Drawing.Point(194, 44);
           this.Sort.Name = "Sort";
-          this.Sort.Size = new System.Drawing.Size(90, 21);
+          this.Sort.Size = new System.Drawing.Size(85, 21);
           this.Sort.TabIndex = 76;
           // 
           // AlwaysDefaultView
@@ -3507,19 +3513,23 @@
           this.View_Dflt_Item.FormattingEnabled = true;
           this.View_Dflt_Item.Location = new System.Drawing.Point(10, 18);
           this.View_Dflt_Item.Name = "View_Dflt_Item";
-          this.View_Dflt_Item.Size = new System.Drawing.Size(170, 21);
+          this.View_Dflt_Item.Size = new System.Drawing.Size(143, 21);
           this.View_Dflt_Item.TabIndex = 16;
           this.View_Dflt_Item.SelectedIndexChanged += new System.EventHandler(this.View_Dflt_Item_SelectedIndexChanged);
           // 
           // View_Dflt_Text
           // 
-          this.View_Dflt_Text.Location = new System.Drawing.Point(189, 18);
+          this.View_Dflt_Text.Location = new System.Drawing.Point(194, 18);
           this.View_Dflt_Text.Name = "View_Dflt_Text";
-          this.View_Dflt_Text.Size = new System.Drawing.Size(151, 20);
+          this.View_Dflt_Text.Size = new System.Drawing.Size(146, 20);
           this.View_Dflt_Text.TabIndex = 17;
           // 
           // groupBox_SupplementaryView
           // 
+          this.groupBox_SupplementaryView.Controls.Add(this.lbl_AntViewFilter);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewFilter1);
+          this.groupBox_SupplementaryView.Controls.Add(this.lblAntViewIndex);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewIndex1);
           this.groupBox_SupplementaryView.Controls.Add(this.label41);
           this.groupBox_SupplementaryView.Controls.Add(this.label31);
           this.groupBox_SupplementaryView.Controls.Add(this.label26);
@@ -3659,7 +3669,7 @@
           // 
           this.AntViewValue1.Location = new System.Drawing.Point(237, 42);
           this.AntViewValue1.Name = "AntViewValue1";
-          this.AntViewValue1.Size = new System.Drawing.Size(103, 20);
+          this.AntViewValue1.Size = new System.Drawing.Size(51, 20);
           this.AntViewValue1.TabIndex = 14;
           // 
           // AntViewText2
@@ -3672,9 +3682,9 @@
           // 
           // AntViewText1
           // 
-          this.AntViewText1.Location = new System.Drawing.Point(126, 42);
+          this.AntViewText1.Location = new System.Drawing.Point(128, 42);
           this.AntViewText1.Name = "AntViewText1";
-          this.AntViewText1.Size = new System.Drawing.Size(105, 20);
+          this.AntViewText1.Size = new System.Drawing.Size(61, 20);
           this.AntViewText1.TabIndex = 13;
           this.AntViewText1.TextChanged += new System.EventHandler(this.AntViewText1_Leave);
           this.AntViewText1.Leave += new System.EventHandler(this.AntViewText1_Leave);
@@ -5592,6 +5602,55 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
+          // AntViewIndex1
+          // 
+          this.AntViewIndex1.FormattingEnabled = true;
+          this.AntViewIndex1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+          this.AntViewIndex1.Location = new System.Drawing.Point(194, 42);
+          this.AntViewIndex1.Name = "AntViewIndex1";
+          this.AntViewIndex1.Size = new System.Drawing.Size(37, 21);
+          this.AntViewIndex1.TabIndex = 30;
+          this.ToolTip1.SetToolTip(this.AntViewIndex1, "You can define number of chars to be viewd as indexed group\r\nfor this Item, e.g.\r" +
+                  "\n\"1\" results in getting a view of first letter.");
+          // 
+          // lblAntViewIndex
+          // 
+          this.lblAntViewIndex.AutoSize = true;
+          this.lblAntViewIndex.Location = new System.Drawing.Point(193, 23);
+          this.lblAntViewIndex.Name = "lblAntViewIndex";
+          this.lblAntViewIndex.Size = new System.Drawing.Size(33, 13);
+          this.lblAntViewIndex.TabIndex = 31;
+          this.lblAntViewIndex.Text = "Index";
+          // 
+          // lbl_View_Dflt_Text
+          // 
+          this.lbl_View_Dflt_Text.AutoSize = true;
+          this.lbl_View_Dflt_Text.Location = new System.Drawing.Point(157, 22);
+          this.lbl_View_Dflt_Text.Name = "lbl_View_Dflt_Text";
+          this.lbl_View_Dflt_Text.Size = new System.Drawing.Size(34, 13);
+          this.lbl_View_Dflt_Text.TabIndex = 83;
+          this.lbl_View_Dflt_Text.Text = "Value";
+          // 
+          // AntViewFilter1
+          // 
+          this.AntViewFilter1.Location = new System.Drawing.Point(294, 42);
+          this.AntViewFilter1.Name = "AntViewFilter1";
+          this.AntViewFilter1.Size = new System.Drawing.Size(46, 20);
+          this.AntViewFilter1.TabIndex = 32;
+          this.ToolTip1.SetToolTip(this.AntViewFilter1, resources.GetString("AntViewFilter1.ToolTip"));
+          // 
+          // lbl_AntViewFilter
+          // 
+          this.lbl_AntViewFilter.AutoSize = true;
+          this.lbl_AntViewFilter.Location = new System.Drawing.Point(310, 23);
+          this.lbl_AntViewFilter.Name = "lbl_AntViewFilter";
+          this.lbl_AntViewFilter.Size = new System.Drawing.Size(29, 13);
+          this.lbl_AntViewFilter.TabIndex = 33;
+          this.lbl_AntViewFilter.Text = "Filter";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6178,5 +6237,10 @@
         private TextBox AntFilterFreeText;
         private Label AntFreetextFilterItem;
         private Button button_GrabberScriptUpdate;
+        private ComboBox AntViewIndex1;
+        private Label lblAntViewIndex;
+        private Label lbl_View_Dflt_Text;
+        private TextBox AntViewFilter1;
+        private Label lbl_AntViewFilter;
     }
 }

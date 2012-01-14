@@ -27,6 +27,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
+  using System.Text;
   using System.Threading;
   using System.Data;
   using System.Diagnostics;
@@ -459,6 +460,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
             int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
 
+
+            //if (ImgFanartDir != null) ImgFanartDir.TexturePath = "";
+            //if (ImgFanart != null) ImgFanart.SetFileName(MyFilms.conf.DefaultFanartImage);
             afficher_detail(true);
 
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
@@ -467,7 +471,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("OnPageLoad() finished.");
             base.OnPageLoad(); // let animations run!
         }
-
 
         protected override void OnPageDestroy(int new_windowId)
         {
@@ -2142,7 +2145,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
           {
             LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.year.ToString() + "'");
-            if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+            if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
             {
               personartworkpath = MyFilms.conf.StrPathArtist;
               LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
@@ -5407,7 +5410,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 if ((tmpconf.StrFanartDflt) && !(rep) && System.IO.File.Exists(filecover))
                 {
-                    wfanart[0] = filecover.ToString();
+                    wfanart[0] = filecover;
                     wfanart[1] = "file";
                     //Added Guzzi - Fix that no fanart was returned ...
                     return wfanart;
@@ -5605,105 +5608,114 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //if (ImgDetFilm != null)
             //  ImgDetFilm.FileName = file;
 
-            // Logos:
-            this.Load_Logos(MyFilms.r[MyFilms.conf.StrIndex]);
-          
-            //ImageSwapper backdrop = new ImageSwapper();
-            string[] wfanart = new string[2];
-            Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-
-            //string fanartTitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-      			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
-            //if (MyFilms.conf.StrTitle1 != "OriginalTitle")
-            //{
-
-            //    if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-            //        fanartTitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-            //}
-            if (ImgFanartDir != null)
+            // load the rest threaded - logos and fanart might take a bit ...
+            new System.Threading.Thread(delegate()
             {
-              wfanart = Search_Fanart(sTitles.FanartTitle, false, "dir", false, file, string.Empty);
-                LogMyFilms.Debug("(afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-            }
-            else
-            {
-              wfanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty);
-                LogMyFilms.Debug("(afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-            }
+              {
+                #region threaded loading of logos, fanart and file availability check ...
+                
+                // load detailed DB infos
+                Load_Detailed_DB(MyFilms.conf.StrIndex, true);
 
-            if (wfanart[0] == " ")
-            {
+                // Logos:
+                this.Load_Logos(MyFilms.r[MyFilms.conf.StrIndex]);
+
+                //ImageSwapper backdrop = new ImageSwapper();
+                string[] wfanart = new string[2];
+                Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+
                 if (ImgFanartDir != null)
-                    ImgFanartDir.PreAllocResources();
-                GUIControl.HideControl(GetID, 35);
-            }
-            else
-            {
-                GUIControl.ShowControl(GetID, 35);
-                if (wfanart[1] == "dir")
                 {
+                  wfanart = Search_Fanart(sTitles.FanartTitle, false, "dir", false, file, string.Empty);
+                  LogMyFilms.Debug("(afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                }
+                else
+                {
+                  wfanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty);
+                  LogMyFilms.Debug("(afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                }
+
+                if (wfanart[0] == " ")
+                {
+                  if (ImgFanartDir != null) ImgFanartDir.PreAllocResources();
+                  // GUIControl.HideControl(GetID, 35);
+                }
+                else
+                {
+                  // GUIControl.ShowControl(GetID, 35);
+                  if (wfanart[1] == "dir")
+                  {
                     ImgFanartDir.TexturePath = wfanart[0];
                     ImgFanartDir.PreAllocResources();
                     ImgFanartDir.AllocResources();
                     GUIControl.HideControl(GetID, (int)Controls.CTRL_Fanart);
                     GUIControl.ShowControl(GetID, (int)Controls.CTRL_FanartDir);
-                }
-                else
-                {
+                  }
+                  else
+                  {
                     if (ImgFanartDir != null)
                     {
-                        ImgFanartDir.PreAllocResources();
-                        GUIControl.HideControl(GetID, (int)Controls.CTRL_FanartDir);
+                      ImgFanartDir.PreAllocResources();
+                      GUIControl.HideControl(GetID, (int)Controls.CTRL_FanartDir);
                     }
                     ImgFanart.SetFileName(wfanart[0]);
-                    setGUIProperty("currentfanart", wfanart[0].ToString()); 
+                    setGUIProperty("currentfanart", wfanart[0]);
                     GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
+                  }
                 }
-            }
-            MyFilms.currentMovie.Fanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty)[0]; 
-            //MyFilms.currentMovie.Fanart = wfanart[0];  
+                MyFilms.currentMovie.Fanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty)[0];
 
-            if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && checkfileavailability)
-            {
-                if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
+                if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && checkfileavailability)
                 {
+                  if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
+                  {
                     int at = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().IndexOf(";", 0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length);
                     if (at == -1)
-                        file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length).Trim().ToString(), MyFilms.conf.StrDirStor);
+                      file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length).Trim().ToString(), MyFilms.conf.StrDirStor);
                     else
-                        file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, at).Trim().ToString(), MyFilms.conf.StrDirStor);
+                      file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, at).Trim().ToString(), MyFilms.conf.StrDirStor);
+                  }
+                  else
+                    file = "false";
+                  if (file != "false" && (file.Length > 0))
+                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_ImgDD);
+                  else
+                    GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
                 }
                 else
-                    file = "false";
-                if (file != "false" && (file.Length > 0))
-                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_ImgDD);
-                else
-                    GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
-            }
-            else
-                GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
+                  GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
 
-            Load_Detailed_DB(MyFilms.conf.StrIndex, true);
-            if (MyFilms.conf.StrIndex == StrMax - 1)
-            {
-                GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnNext);
-                GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnLast);
-            }
-            else
-            {
-                GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnNext);
-                GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnLast);
-            }
-            if (MyFilms.conf.StrIndex == 0)
-            {
-                GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnPrior);
-                GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnFirst);
-            }
-            else
-            {
-                GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnPrior);
-                GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
-            }
+                if (MyFilms.conf.StrIndex == StrMax - 1)
+                {
+                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnNext);
+                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnLast);
+                }
+                else
+                {
+                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnNext);
+                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnLast);
+                }
+                if (MyFilms.conf.StrIndex == 0)
+                {
+                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnPrior);
+                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnFirst);
+                }
+                else
+                {
+                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnPrior);
+                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
+                }
+                #endregion
+              }
+              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+              {
+                {
+                  // Do this after thread finished ...
+                }
+                return 0;
+              }, 0, 0, null);
+            }) { Name = "MyFilmsOnPageLoadWorker", IsBackground = true }.Start();
+
         }
 
 
@@ -5891,10 +5903,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         public static void Load_Detailed_DB(int ItemId, bool wrep)
         {
-            LogMyFilms.Debug("Load_Detailed_DB - ItemId: '" + ItemId + "', Details (wrep): '" + wrep + "'");
+            LogMyFilms.Debug("Load_Detailed_DB() - ItemId: '" + ItemId + "', Details (wrep): '" + wrep + "'");
             string wstrformat = "";
             AntMovieCatalog ds = new AntMovieCatalog();
 
+            if (MyFilms.r == null || ItemId > MyFilms.r.Length - 1)
+            {
+              LogMyFilms.Warn("Load_Detailed_DB() - Failed loading details - index '" + ItemId + "' not within current dataset ... now clearing properties ...");
+              Init_Detailed_DB(false);
+              return;
+            }
             foreach (DataColumn dc in ds.Movie.Columns)
             {
               string wstring = "";
@@ -6072,14 +6090,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             break;
 
                         case "length":
-                        case "length_num":
                             if (wrep)
                             {
                               int length = 0;
                               if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
                                 wstring = MyFilms.r[ItemId]["Length"].ToString();
                               setGUIProperty("db.length.value", wstring);
-                              bool success = int.TryParse(MyFilms.r[ItemId]["Length_Num"].ToString(), out length);
+                              bool success = int.TryParse(wstring, out length);
                               MyFilms.currentMovie.Length = (success) ? length : 0;
                             }
                             else
@@ -6373,7 +6390,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (i < 6)
             {
               setGUIProperty("db.actors.actor" + i + ".name", actorname);
-              if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+              if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
               {
                 string personartworkpath = MyFilms.conf.StrPathArtist;
                 setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg");
@@ -8783,7 +8800,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //    clearGUIProperty(name.ToString());
         //}
 
-        public static void clearGUIProperty(string name)
+        private static readonly HashSet<char> badChars = new HashSet<char> { '!', '@', '#', '$', '%', '_' };
+        public static string CleanString(string str)
+        {
+          var result = new StringBuilder(str.Length);
+          for (int i = 0; i < str.Length; i++)
+          {
+            if (!badChars.Contains(str[i]))
+              result.Append(str[i]);
+          }
+          return result.ToString();
+        }
+        
+      public static void clearGUIProperty(string name)
         {
           setGUIProperty(name, string.Empty, MyFilms.DebugPropertyLogging);
         }

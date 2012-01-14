@@ -29,6 +29,7 @@ namespace MyFilmsPlugin.MyFilms
   using System.Data;
   using System.Data.DataSetExtensions;
   using System.Diagnostics;
+  using System.Globalization;
   using System.IO;
   using System.Linq;
   using System.Reflection;
@@ -75,8 +76,8 @@ namespace MyFilmsPlugin.MyFilms
         }
     
         //private static Dictionary<string, string> dataPath;
-        private static DataRow[] movies;          // selected movies with filters
-        //private static DataTable tableMoviesExtended;  // all movies as join with customfields
+        private static DataRow[] movies;                // selected movies with filters
+        // private static DataTable tableMoviesExtended;   // all extended Movie DataTable as join with customfields ...
         private static Stopwatch watch = new Stopwatch();
 
         #region ctor
@@ -185,96 +186,105 @@ namespace MyFilmsPlugin.MyFilms
         private static DataTable GetEnhancedMovies()
         {
           var movies_enhanced =
-              from o in data.Movie
-              //where   o.Year == "1998"
-              orderby o.OriginalTitle ascending
+              from movieRow in data.Movie.AsEnumerable()
+              join customFieldsRow in data.CustomFields.AsEnumerable()
+              on movieRow.Field<int>("Movie_Id") equals customFieldsRow.Field<int>("Movie_Id")
+              //into leftjoined
+              // where movieRow.Field<string>("Studio") == ""
+              // where movieRow.Field<decimal?>("Rating") > 5
+              // orderby movieRow.OriginalTitle ascending
+
+              // from tmp in leftjoined.DefaultIfEmpty()
               select new
               {
-                o.Movie_Id,
-                o.Number,
-                o.Checked,
-                o.MediaLabel,
-                o.MediaType,
-                o.Source,
-                o.Date,
-                o.Borrower,
-                o.Rating,
-                o.OriginalTitle,
-                o.TranslatedTitle,
-                o.FormattedTitle,
-                o.IndexedTitle,
-                o.Director,
-                o.Producer,
-                o.Country,
-                o.Category,
-                o.Year,
-                o.Length,
-                o.Actors,
-                o.URL,
-                o.Description,
-                o.Comments,
-                o.VideoFormat,
-                o.VideoBitrate,
-                o.AudioFormat,
-                o.AudioBitrate,
-                o.Resolution,
-                o.Framerate,
-                o.Languages,
-                o.Subtitles,
-                o.Size,
-                o.DateAdded,
-                o.RecentlyAdded,
-                o.AgeAdded,
-                o.Disks,
-                o.Picture,
-                o.Length_Num,
-                o.Persons,
-                //o.CustomField1,
-                //o.CustomField2,
-                //o.CustomField3,
-                //o.RatingUser,
-                //o.Edition,
-                //o.Fanart,
-                //o.Certification,
-                //o.Writer,
-                //o.Watched,
-                //o.Favorite,
-                //o.IMDB_Id,
-                //o.TMDB_Id,
-                //o.SourceTrailer,
-                //o.TagLine,
-                //o.Tags,
-                //o.Studio,
-                //o.IMDB_Rank,
-                o.IsOnline,
-                o.IsOnlineTrailer,
-                //o.Aspectratio,
-                //o.CategoryTrakt,
-                //o.LastPosition,
-                //o.AudioChannelCount,
-                o.GetCustomFieldsRows()[0].CustomField1,
-                o.GetCustomFieldsRows()[0].CustomField2,
-                o.GetCustomFieldsRows()[0].CustomField3,
-                o.GetCustomFieldsRows()[0].Edition,
-                o.GetCustomFieldsRows()[0].Studio,
-                o.GetCustomFieldsRows()[0].Fanart,
-                o.GetCustomFieldsRows()[0].Certification,
-                o.GetCustomFieldsRows()[0].Writer,
-                o.GetCustomFieldsRows()[0].TagLine,
-                o.GetCustomFieldsRows()[0].Tags,
-                o.GetCustomFieldsRows()[0].Aspectratio,
-                o.GetCustomFieldsRows()[0].CategoryTrakt,
-                o.GetCustomFieldsRows()[0].Watched,
-                o.GetCustomFieldsRows()[0].Favorite,
-                o.GetCustomFieldsRows()[0].RatingUser,
-                o.GetCustomFieldsRows()[0].IMDB_Id,
-                o.GetCustomFieldsRows()[0].TMDB_Id,
-                o.GetCustomFieldsRows()[0].IMDB_Rank,
-                o.GetCustomFieldsRows()[0].SourceTrailer,
-                //o.GetCustomFieldsRows()[0].IsOnline,
-                //o.GetCustomFieldsRows()[0].IsOnlineTrailer,
-                o.GetCustomFieldsRows()[0].LastPosition,
-                o.GetCustomFieldsRows()[0].AudioChannelCount
+                // movieRow.Movie_Id,
+                Number = movieRow.Field<int>("Number"),
+                OriginalTitle = movieRow.Field<string>("OriginalTitle"),
+                TranslatedTitle = movieRow.Field<string>("TranslatedTitle"),
+                FormattedTitle = movieRow.Field<string>("FormattedTitle"),
+                IndexedTitle = movieRow.Field<string>("IndexedTitle"),
+                Checked = movieRow.Field<string>("Checked"),
+                MediaLabel = movieRow.Field<string>("MediaLabel"),
+                MediaType = movieRow.Field<string>("MediaType"),
+                Source = movieRow.Field<string>("Source"),
+                Date = movieRow.Field<string>("Date"),
+                Borrower = movieRow.Field<string>("Borrower"),
+                // Rating = movieRow.Field<Decimal>("Rating"),
+                Description = movieRow.Field<string>("Description"),
+                Comments = movieRow.Field<string>("Comments"),
+                Director = movieRow.Field<string>("Director"),
+                Producer = movieRow.Field<string>("Producer"),
+                Country = movieRow.Field<string>("Country"),
+                Category = movieRow.Field<string>("Category"),
+                Year = movieRow.Field<string>("Year"),
+                Length = movieRow.Field<string>("Length"),
+                Actors = movieRow.Field<string>("Actors"),
+                URL = movieRow.Field<string>("URL"),
+                VideoFormat = movieRow.Field<string>("VideoFormat"),
+                VideoBitrate = movieRow.Field<string>("VideoBitrate"),
+                AudioFormat = movieRow.Field<string>("AudioFormat"),
+                AudioBitrate = movieRow.Field<string>("AudioBitrate"),
+                Resolution = movieRow.Field<string>("Resolution"),
+                Framerate = movieRow.Field<string>("Framerate"),
+                Languages = movieRow.Field<string>("Languages"),
+                Subtitles = movieRow.Field<string>("Subtitles"),
+                Size = movieRow.Field<string>("Size"),
+                // DateAdded = movieRow.Field<DateTime>("DateAdded"),
+                RecentlyAdded = movieRow.Field<string>("RecentlyAdded"),
+                AgeAdded = movieRow.Field<string>("AgeAdded"),
+                Disks = movieRow.Field<string>("Disks"),
+                Picture = movieRow.Field<string>("Picture"),
+                Persons = movieRow.Field<string>("Persons"),
+
+                // Extended Fields
+                IsOnline = movieRow.Field<string>("IsOnline"),
+                IsOnlineTrailer = movieRow.Field<string>("IsOnlineTrailer"),
+                //CustomField1 = movieRow.Field<string>("CustomField1"),
+                //CustomField2 = movieRow.Field<string>("CustomField2"),
+                //CustomField3 = movieRow.Field<string>("CustomField3"),
+                //RatingUser = movieRow.Field<string>("RatingUser"),
+                //Edition = movieRow.Field<string>("Edition"),
+                //Fanart = movieRow.Field<string>("Fanart"),
+                //Certification = movieRow.Field<string>("Certification"),
+                //Writer = movieRow.Field<string>("Writer"),
+                //Watched = movieRow.Field<string>("Watched"),
+                //Favorite = movieRow.Field<string>("Favorite"),
+                //IMDB_Id = movieRow.Field<string>("IMDB_Id"),
+                //TMDB_Id = movieRow.Field<string>("TMDB_Id"),
+                //SourceTrailer = movieRow.Field<string>("SourceTrailer"),
+                //TagLine = movieRow.Field<string>("TagLine"),
+                //Tags = movieRow.Field<string>("Tags"),
+                //Studio = movieRow.Field<string>("Studio"),
+                //IMDB_Rank = movieRow.Field<string>("IMDB_Rank"),
+                //Aspectratio = movieRow.Field<string>("Aspectratio"),
+                //CategoryTrakt = movieRow.Field<string>("CategoryTrakt"),
+                //LastPosition = movieRow.Field<string>("LastPosition"),
+                //AudioChannelCount = movieRow.Field<string>("AudioChannelCount"),
+
+                // CustomFields
+                IsOnline_Cust = customFieldsRow.Field<string>("IsOnline"),
+                IsOnlineTrailer_Cust = customFieldsRow.Field<string>("IsOnlineTrailer"),
+                CustomField1 = customFieldsRow.Field<string>("CustomField1"),
+                CustomField2 = customFieldsRow.Field<string>("CustomField2"),
+                CustomField3 = customFieldsRow.Field<string>("CustomField3"),
+                Edition = customFieldsRow.Field<string>("Edition"),
+                Studio = customFieldsRow.Field<string>("Studio"),
+                Fanart = customFieldsRow.Field<string>("Fanart"),
+                Certification = customFieldsRow.Field<string>("Certification"),
+                Writer = customFieldsRow.Field<string>("Writer"),
+                TagLine = customFieldsRow.Field<string>("TagLine"),
+                Tags = customFieldsRow.Field<string>("Tags"),
+                Aspectratio = customFieldsRow.Field<string>("Aspectratio"),
+                CategoryTrakt = customFieldsRow.Field<string>("CategoryTrakt"),
+                Watched = customFieldsRow.Field<string>("Watched"),
+                Favorite = customFieldsRow.Field<string>("Favorite"),
+                // RatingUser = customFieldsRow.Field<Decimal>("RatingUser"),
+                IMDB_Id = customFieldsRow.Field<string>("IMDB_Id"),
+                TMDB_Id = customFieldsRow.Field<string>("TMDB_Id"),
+                IMDB_Rank = customFieldsRow.Field<string>("IMDB_Rank"),
+                SourceTrailer = customFieldsRow.Field<string>("SourceTrailer"),
+                LastPosition = customFieldsRow.Field<string>("LastPosition"),
+                AudioChannelCount = customFieldsRow.Field<string>("AudioChannelCount")
               };
           return LINQToDataTable(movies_enhanced);
         }
@@ -460,18 +470,91 @@ namespace MyFilmsPlugin.MyFilms
           var commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           {
+            movieRow.BeginEdit();
             AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0];
             foreach (DataColumn dc in commonColumns)
             {
-              if (movieRow[dc.ColumnName] != DBNull.Value && dc.ColumnName != "Movie_Id")
+              object temp;
+              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName]))
               {
-                customFields[dc.ColumnName] = movieRow[dc.ColumnName];
-                if (cleanfileonexit) movieRow[dc.ColumnName] = DBNull.Value;
+                movieRow[dc.ColumnName] = temp;
+              }
+              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = movieRow[dc.ColumnName]))
+              {
+                customFields[dc.ColumnName] = temp;
+                if (cleanfileonexit) movieRow[dc.ColumnName] = System.Convert.DBNull;
               }
             }
           }
+          data.Movie.AcceptChanges();
           saveDataWatch.Stop();
           LogMyFilms.Debug("CopyMovieExtendedDataToCustomFields() - Copy CustomFields from MovieRow's done ... (" + (saveDataWatch.ElapsedMilliseconds) + " ms)");
+        }
+
+        private static void CreateMissingCustomFieldsEntries()
+        {
+          Stopwatch loadDataWatch = new Stopwatch(); loadDataWatch.Reset(); loadDataWatch.Start();
+          foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
+          {
+            AntMovieCatalog.CustomFieldsRow[] customFieldsRows = movieRow.GetCustomFieldsRows();
+            if (customFieldsRows.Length == 0) // create CustomFields Element, if not existing ...
+            {
+              AntMovieCatalog.CustomFieldsRow customFields = data.CustomFields.NewCustomFieldsRow();
+              customFields.SetParentRow(movieRow);
+              data.CustomFields.AddCustomFieldsRow(customFields);
+              // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
+            }
+          }
+          loadDataWatch.Stop();
+          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Check and create missing customfields for movie table done ... (" + (loadDataWatch.ElapsedMilliseconds) + " ms)");
+        }
+
+        private static void CopyCustomFieldsToMovieRows()
+        {
+          // Get Data from CustomFields copy customfields to movie table ...
+          var commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
+          // var onlyCustomFieldColumns = data.CustomFields.Columns.OfType<DataColumn>().Except(data.Movie.Columns.OfType<DataColumn>(), new DataColumnComparer());
+          Stopwatch loadDataWatch = new Stopwatch(); loadDataWatch.Reset(); loadDataWatch.Start();
+          //data.Movie.BeginLoadData();
+          //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
+          //foreach (DataColumn commonColumn in commonColumns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - Intersect Column: '" + commonColumn.ColumnName + "'");
+          foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
+          {
+            movieRow.BeginEdit();
+            AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
+            foreach (DataColumn dc in commonColumns)
+            {
+              object temp;
+              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName]))
+              {
+                movieRow[dc.ColumnName] = temp;
+              }
+              // if (customFields[dc.ColumnName] != DBNull.Value && dc.ColumnName != "Movie_Id") movieRow[dc.ColumnName] = customFields[dc.ColumnName];
+            }
+            ////LogMyFilms.Debug("LoadMyFilmsFromDisk() - processing movie ID '" + movieRow.Number + "', otitle = '" + movieRow.OriginalTitle + "'");
+            //AntMovieCatalog.CustomFieldsRow[] cfCollection = movieRow.GetCustomFieldsRows();
+            //if (cfCollection.Length == 0) // create CustomFields Element, if not existing ...
+            //{
+            //  AntMovieCatalog.CustomFieldsRow customFields = data.CustomFields.NewCustomFieldsRow();
+            //  customFields.SetParentRow(movieRow);
+            //  data.CustomFields.AddCustomFieldsRow(customFields); // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
+            //}
+            //else // copy data to Movie Row if CustomFields Element exists ...
+            //{
+            //  AntMovieCatalog.CustomFieldsRow customFields = cfCollection[0];
+            //  foreach (DataColumn dc in commonColumns)
+            //  {
+            //    if (customFields[dc.ColumnName] != DBNull.Value && dc.ColumnName != "Movie_Id") movieRow[dc.ColumnName] = customFields[dc.ColumnName];
+            //  }
+            //}
+          }
+          //data.EnforceConstraints = true;
+          //data.Movie.EndLoadData();
+          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy CustomFields PreAcceptChanges ... (" + (loadDataWatch.ElapsedMilliseconds) + " ms)");
+          data.Movie.AcceptChanges();
+          loadDataWatch.Stop();
+          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy CustomFields to MovieRow's done ... (" + (loadDataWatch.ElapsedMilliseconds) + " ms)");
+          
         }
 
         private static void CreateOrUpdateCustomsFieldsProperties()
@@ -621,18 +704,25 @@ namespace MyFilmsPlugin.MyFilms
 
           watch.Reset(); watch.Start();
           _dataLock.EnterReadLock();
-          data = new AntMovieCatalog();
+          data = new AntMovieCatalog(); 
           try
           {
             using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-              foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData();
+              foreach (DataTable dataTable in data.Tables)
+              {
+                // dataTable.Rows.Clear();
+                dataTable.BeginLoadData();
+              }
               //// synchronize dataset with hierarchical XMLdoc
               //xmlDoc = new XmlDataDocument(data);
               //xmlDoc.Load(fs);
               data.ReadXml(fs);
-              foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+              foreach (DataTable dataTable in data.Tables)
+              {
+                dataTable.EndLoadData();
+              }
               fs.Close();
               LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");
             }
@@ -661,54 +751,104 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) + " ms)");
           #endregion
 
-          #region calculate artificial columns like AgeAdded etc.
-          // Calculate AgeAdded Fields ...
-          watch.Reset(); watch.Start();
-          DateTime now = DateTime.Now;
-          foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
-          {
-            if (movieRow.IsAgeAddedNull()) movieRow.AgeAdded = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays).ToString() : "9999";
-          }
-          watch.Stop();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc AgeAdded Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
-          #endregion
-
           CreateOrUpdateCustomsFieldsProperties();
 
-          #region copy customfields to movie table
-          // Get Data from CustomFields ...
+          CreateMissingCustomFieldsEntries();
+
+          #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
+          DateTime now = DateTime.Now;
+          //watch.Reset(); watch.Start();
+          //foreach (AntMovieCatalog.MovieRow movieRow in data.Movie) 
+          //  movieRow.BeginEdit();
+          //watch.Stop();
+          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - Set movieRows in Edit Mode ... (" + (watch.ElapsedMilliseconds) + " ms)");
+
           watch.Reset(); watch.Start();
           var commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
-          //foreach (DataColumn commonColumn in commonColumns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - Intersect Column: '" + commonColumn.ColumnName + "'");
+          //data.Movie.BeginLoadData();
+          //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           {
-            //LogMyFilms.Debug("LoadMyFilmsFromDisk() - processing movie ID '" + movieRow.Number + "', otitle = '" + movieRow.OriginalTitle + "'");
-            AntMovieCatalog.CustomFieldsRow[] cfCollection = movieRow.GetCustomFieldsRows();
-            if (cfCollection.Length == 0) // create CustomFields Element, if not existing ...
+            movieRow.BeginEdit();
+            // Convert(Date,'System.DateTime')
+            DateTime added;
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ???
+              movieRow.DateAdded = added;
+            // else movieRow.DateAdded = DateTime.MinValue;
+            int iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
+            movieRow.AgeAdded = iAge.ToString();
+            movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
+            movieRow.IndexedTitle = movieRow[MyFilms.conf.StrTitle1].ToString().Substring(0, 1).ToUpper();
+            // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
+            movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " ");
+            // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
+
+            // Copy CustomFields data ....
+            AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
+            foreach (DataColumn dc in commonColumns)
             {
-              AntMovieCatalog.CustomFieldsRow customFields = data.CustomFields.NewCustomFieldsRow();
-              customFields.SetParentRow(movieRow);
-              data.CustomFields.AddCustomFieldsRow(customFields); // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
-            }
-            else // copy data to Movie Row if CustomFields Element exists ...
-            {
-              AntMovieCatalog.CustomFieldsRow customFields = cfCollection[0];
-              foreach (DataColumn dc in commonColumns)
-              {
-                if (customFields[dc.ColumnName] != DBNull.Value && dc.ColumnName != "Movie_Id") movieRow[dc.ColumnName] = customFields[dc.ColumnName];
-              }
+              object temp;
+              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp;
             }
           }
+          //data.EnforceConstraints = true;
+          //data.Movie.EndLoadData();
+          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc PreAcceptChanges ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          data.Movie.AcceptChanges();
           watch.Stop();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy CustomFields to MovieRow's done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          #endregion
+
+
+          // CopyCustomFieldsToMovieRows();
+
+          #region Other join table tests
+          //watch.Reset(); watch.Start();
+          //var commonColumnsX = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
+          // var onlyCustomFieldColumns = data.CustomFields.Columns.OfType<DataColumn>().Except(data.Movie.Columns.OfType<DataColumn>(), new DataColumnComparer());
+          //tableMoviesExtended = new DataTable();
+          //tableMoviesExtended.Columns.AddRange(
+          //    data.Movie.Columns.OfType<DataColumn>()
+          //    .Union(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer())
+          //    .Select(c => new DataColumn(c.Caption, c.DataType, c.Expression, c.ColumnMapping))
+          //    .ToArray());
+
+          //var rowData2 = data.Movie.AsEnumerable().Join(
+          //    data.CustomFields.AsEnumerable(),
+          //    row => commonColumnsX.Select(col => row[col.Caption]).ToArray(),
+          //    row => commonColumnsX.Select(col => row[col.Caption]).ToArray(),
+          //    (row1, row2) =>
+          //    {
+          //      var row = tableMoviesExtended.NewRow();
+          //      row.ItemArray = tableMoviesExtended.Columns.OfType<DataColumn>().Select(col => row1.Table.Columns.Contains(col.Caption) ? row1[col.Caption] : row2[col.Caption]).ToArray();
+          //      return row;
+          //    },
+          //    new ObjectArrayComparer());
+
+          //foreach (var row in rowData2)
+          //  tableMoviesExtended.Rows.Add(row);
+          //watch.Stop();
+          //foreach (DataColumn dataColumn in tableMoviesExtended.Columns)
+          //  LogMyFilms.Debug("LoadMyFilmsFromDisk() - Table Join version 2 containing Column '" + dataColumn.ToString() + "'");
+
+          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy joined data to new datatable version 2 done ... (" + (watch.ElapsedMilliseconds) + " ms)");
           #endregion
 
           #region create new enhanced movie rowcollection by joining movie and customfields rows
           //watch.Reset(); watch.Start();
-          //tableMoviesExtended = GetEnhancedMovies();
+          //tableMoviesExtended = SQLOps.Join(data.Movie, data.CustomFields, data.Movie.Movie_IdColumn, data.CustomFields.Movie_IdColumn); // Medium - 2 secs
           //int rows = tableMoviesExtended.Rows.Count;
           //watch.Stop();
-          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + rows + "' rows by joining movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+          //foreach (DataColumn dataColumn in tableMoviesExtended.Columns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - SQLOps.Join() - containing Column '" + dataColumn + "'");
+          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + rows + "' rows by SQLOps.Join movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+
+          //watch.Reset(); watch.Start();
+          //tableMoviesExtended = GetEnhancedMovies(); // SLOW !!!! > 11 secs for loading movies ...
+          //int irows = tableMoviesExtended.Rows.Count;
+          //watch.Stop();
+          //foreach (DataColumn dataColumn in tableMoviesExtended.Columns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() v1 - containing Column '" + dataColumn + "'");
+          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + irows + "' rows by joining movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
           #endregion
 
           #region create new joined movieextended datatable
@@ -729,7 +869,7 @@ namespace MyFilmsPlugin.MyFilms
           //    var values = movieRow.ItemArray.Concat(customFieldsRow.ItemArray.Where(r2 => row.ItemArray.Contains(r2) == false));
           //    tableMoviesExtended.Rows.Add((object)values);
           //  }
-            
+
           //  //var rowData = from row1 in data.Movie.AsEnumerable()
           //  //              join row2 in data.CustomFields.AsEnumerable()
           //  //              on row1.Movie_Id equals row2.Movie_Id
@@ -819,66 +959,7 @@ namespace MyFilmsPlugin.MyFilms
           #endregion
 
           #region testing joins and views - experimental ...
-
-          //var query1 = from movie in data.Movie
-          //             from customfields in data.CustomFields
-          //             where movie.Movie_Id == customfields.Movie_Id
-          //             where !movie.IsCheckedNull() && movie.TranslatedTitle != ""
-          //             select movie;
-
-          //var query2 = from movie in data.Movie
-          //             from customfieds in data.CustomFields
-          //             where customfieds.IsWatchedNull()
-          //             select movie;
-
-          //var finalQuery = query1.Union(query2);
-
-          //DataTable bindingTable = finalQuery.CopyToDataTable();
-
-
-          //var query =     from movie in data.Movie.AsEnumerable()
-          //                join customfields in data.CustomFields.AsEnumerable()
-          //                on movie.Field<int>("Movie_Id") equals
-          //                    customfields.Field<int>("Movie_Id")
-          //                where movie.TranslatedTitle != "" //&& movie.Field<DateTime>("Date").Month == 8
-          //                select new
-          //                {
-          //                  movie,
-          //                  customfields,
-          //                  MovieAddedDate =
-          //                      movie.Field<DateTime>("Date"),
-          //                  CustomField1 = 
-          //                      customfields.CustomField1
-          //                };
-
-          //query.Select(el =>
-          //                {
-          //                  DataRow row = data.Movie.NewRow();
-          //                  row["CustomField1"] = el.CustomField1;
-          //                  return row;
-          //                }
-          //            ).CopyToDataTable(data.Tables["MoviesExtended"], LoadOption.PreserveChanges);
-
-          //var queryext = from movie in data.Movie
-          //               where movie.DateAdded.DayOfYear == DateTime.Now.DayOfYear
-          //               where movie.IsTranslatedTitleNull() == false
-          //              select new
-          //              {
-          //                movie,
-          //                CustomFields = movie.ContentsRow.GetMovieRows(),
-          //                movie.TranslatedTitle
-          //              };
-
-          //DataTable dt = LINQToDataTable(queryext);
-
-          //foreach (var result in queryext)
-          //{
-          //  bindingTable.Rows.Add(new object[] { result, result.TranslatedTitle });
-          //}
-
-
           //// create extended movie table ...
-          //watchReadMovies.Reset(); watchReadMovies.Start();
           //DataTable targetTable = data.Movie.Clone();
           //var dt2Columns = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
           //    new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
@@ -901,195 +982,114 @@ namespace MyFilmsPlugin.MyFilms
           //watchReadMovies.Stop();
           //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms) - Records: '" + moviesEnhanced.Length + "'");
           //return moviesEnhanced;
-
-
-          ////Create new joined table with customFields ...
-          //watchReadMovies.Reset(); watchReadMovies.Start();
-          //DataTable dt = new DataTable();
-          //dt = data.Movie.Clone();
-          //DataRow[] drResults = data.CustomFields.Select();
-          //foreach (DataRow dr in drResults)
-          //{
-          //  object[] row = dr.ItemArray;
-          //  if (row.ToString() != "Movie_ID")
-          //    dt.Rows.Add(row);
-          //}
-          //DataRow[] new_movies = dt.Select(MyFilms.conf.StrTitle1 + " not like ''");
-          //watchReadMovies.Stop();
-          //LogMyFilms.Debug("ReadDataMovies() - JoinTables Variant 1 (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
-
-          //watchReadMovies.Reset(); watchReadMovies.Start();
-          //DataTable targetTable = data.Movie.Clone();
-          //var dt2Columns = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
-          //    new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
-          //targetTable.Columns.AddRange(dt2Columns.ToArray());
-          //var rowData =
-          //    from row1 in data.Movie.AsEnumerable()
-          //    join row2 in data.CustomFields.AsEnumerable()
-          //        on row1.Field<int>("Movie_ID") equals row2.Field<int>("Movie_ID")
-          //    select row1.ItemArray.Concat(row2.ItemArray).ToArray();
-          //foreach (object[] values in rowData)
-          //  targetTable.Rows.Add(values);
-          //DataRow[] newmovies = targetTable.Select(MyFilms.conf.StrTitle1 + " not like ''");
-          //watchReadMovies.Stop();
-          //LogMyFilms.Debug("ReadDataMovies() - JoinTables Variant 2 (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
-
-
-          //var movies_enhanced =
-          //    from o in data.Movie
-          //    where   o.Year == "1998"
-          //    orderby o.DateAdded descending
-          //    select new 
-          //    { 
-          //      o.Movie_Id, 
-          //      o.OriginalTitle,
-          //      CustomField_1 = o.GetCustomFieldsRows()[0].CustomField1
-          //      // ...
-          //    };
-
-          //foreach (AntMovieCatalog.MovieRow movieRow in movies)
-          //  DataRow customFieldsRow = movieRow.GetCustomFieldsRows()[0]; // get first one, is it's 1:1 relation ...
-
-          //SELECT Productos.idProducto, Productos.Nombre, Precios.Precio, Tiendas.idTienda, Zonas.Zona,Productos.idZona FROM
-          //Productos INNER JOIN Precios ON Productos.idProducto = Precios.idProducto
-
-          //var moviesquery = from movie in data.Movie
-          //              join extendedfields in data.CustomFields on movie.Movie_Id equals extendedfields.Movie_Id into gj
-          //              from subpet in gj.DefaultIfEmpty()
-          //              select new { movie.OriginalTitle, PetName = (subpet == null ? String.Empty : subpet.CustomField1) };
-
-          //var q = from c in data.Movie
-          //  join o in data.CustomFields on c.Movie_Id equals o.Movie_Id into g
-          //  select new {movie = c.OriginalTitle, Extendedfields = g};
-
-          //var moviesextended = from ant in data.Movie
-          //                     join custom in data.CustomFields on ant.Movie_Id equals custom.Movie_Id into g
-          //                     select new
-          //                     {
-          //                       ant,
-          //                       movie = ant.OriginalTitle,
-          //                       Extendedfields = g
-          //                     };
-
-          //var queryProducer =
-          //    from movie in data.Movie
-          //    group movie by movie.Producer into groupProducer
-          //    orderby groupProducer.Key
-          //    select groupProducer;
-
-          //IGrouping<System.Reflection.MemberTypes, System.Reflection.MemberInfo> group =
-          //                typeof(String).GetMembers().
-          //                GroupBy(member => member.MemberType).
-          //                First();
-
-
-
-          //DataView dataView = (from movie in
-          //                       data.Movie.AsEnumerable()
-          //                     where movie.Field<int?>("YearEstablished") < 1960
-          //                     orderby movie.Field<string>("Country")
-          //                     select movie).AsDataView();
-
-          //DataRowView[] drv = dataView.FindRows("Canada");
-
-          //var query8 = from movie in data.Movie.AsEnumerable()
-          //             join customfields in data.CustomField.AsEnumerable()
-          //             on movie.Field<string>("Country") equals
-          //             customfields.Field<string>("Name")
-          //             select new
-          //             {
-          //               ParkName = movie.Field<string>("Name"),
-          //               Country = customfields.Field<string>("Name"),
-          //               Continent = customfields.
-          //               GetParentRow(data.CustomField.ParentRelations[0]
-          //               )
-          //               .Field<string>("Name")
-          //             };
-
-          //var query = from t1 in data.Movie.AsEnumerable()
-          //            join t2 in data.CustomField.AsEnumerable()
-          //              // <int> == <int?> für Null Vergleich
-          //            on t1.Field<int>("id") equals t2.Field<int?>("idTabelle1")
-          //            select new
-          //            {
-          //              t1id = t1.Field<int>("id"),
-          //              t2id = t2.Field<int>("id"),
-          //              t1daten = t1.Field<string>("Daten"),
-          //              t2daten = t2.Field<string>("Daten"),
-          //            };
-          //foreach (var row in query)
-          //{
-          //  Console.WriteLine("{0}\t{1}\t{2:d}\t{3}",
-          //  row.t1id, row.t2id, row.t1daten, row.t2daten);
-          //}
-
-          //var abfrage = from emp in data.Movie
-          //              join con in data.CustomField on emp.Movie_Id
-          //              equals con.CustomField_Id into ec
-          //              from subEmp in ec.DefaultIfEmpty()
-          //              select new
-          //              {
-          //                emp.Movie_Id,
-          //                FirstName =
-          //                  (subEmp == null ? String.Empty : subEmp.Name)
-          //              };
-
-          //var orders = data.Tables["SalesOrderHeader"].AsEnumerable();
-          //var details = data.Tables["SalesOrderDetail"].AsEnumerable();
-
-          //var query0 =
-          //    from order in orders
-          //    join detail in details
-          //    on order.Field<int>("SalesOrderID")
-          //    equals detail.Field<int>("SalesOrderID") into ords
-          //    select new
-          //    {
-          //      CustomerID =
-          //          order.Field<int>("SalesOrderID"),
-          //      ords = ords.Count()
-          //    };
-
-          //foreach (var order in query)
-          //{
-          //  // Console.WriteLine("CustomerID: {0}  Orders Count: {1}", order.CustomerID, order.ords);
-          //}
-
-
-
-          //DataTable dtMovies = data.Movie;
-          //DataTable dtExtendedFields = data.Tables["ExtendedField"];
-          //var querynew =
-          //    from movie in dtMovies.AsEnumerable()
-          //    join extendedfields in dtExtendedFields.AsEnumerable()
-          //    on movie.Field<Int32>("MovieID") equals
-          //    extendedfields.Field<Int32>("MovieID")
-          //    select new
-          //    {
-          //      ContactID = movie.Field<Int32>("ContactID"),
-          //      SalesOrderID = extendedfields.Field<Int32>("SalesOrderID"),
-          //      FirstName = movie.Field<string>("FirstName"),
-          //      Lastname = movie.Field<string>("Lastname"),
-          //      TotalDue = extendedfields.Field<decimal>("TotalDue")
-          //    };
-
-
-          //foreach (var contact_order in querynew)
-          //{
-          //  Console.WriteLine("ContactID: {0} "
-          //                  + "SalesOrderID: {1} "
-          //                  + "FirstName: {2} "
-          //                  + "Lastname: {3} "
-          //                  + "TotalDue: {4}",
-          //      contact_order.ContactID,
-          //      contact_order.SalesOrderID,
-          //      contact_order.FirstName,
-          //      contact_order.Lastname,
-          //      contact_order.TotalDue);
-          //}
           #endregion
 
           return success;
         }
+
+    
+        // <summary>
+        /// Summary description for SQLOps.
+        /// </summary>
+        public class SQLOps
+        {
+          public SQLOps()
+          {
+          }
+
+          //FJC = First Join Column
+          //SJC = Second Join Column
+
+        public static DataTable Join(DataTable First, DataTable Second, DataColumn[] FJC, DataColumn[] SJC)
+        {
+          //Create Empty Table
+          DataTable table = new DataTable("Join");
+
+          // Use a DataSet to leverage DataRelation
+          using (DataSet ds = new DataSet())
+          {
+            //Add Copy of Tables
+            ds.Tables.AddRange(new DataTable[] { First.Copy(), Second.Copy() });
+
+            //Identify Joining Columns from First
+            DataColumn[] parentcolumns = new DataColumn[FJC.Length];
+
+            for (int i = 0; i < parentcolumns.Length; i++)
+            {
+              parentcolumns[i] = ds.Tables[0].Columns[FJC[i].ColumnName];
+            }
+
+            //Identify Joining Columns from Second
+            DataColumn[] childcolumns = new DataColumn[SJC.Length];
+
+            for (int i = 0; i < childcolumns.Length; i++)
+            {
+              childcolumns[i] = ds.Tables[1].Columns[SJC[i].ColumnName];
+            }
+
+            //Create DataRelation
+            DataRelation r = new DataRelation(string.Empty, parentcolumns, childcolumns, false);
+            ds.Relations.Add(r);
+
+            //Create Columns for JOIN table
+            for (int i = 0; i < First.Columns.Count; i++)
+            {
+              table.Columns.Add(First.Columns[i].ColumnName, First.Columns[i].DataType);
+            }
+
+            for (int i = 0; i < Second.Columns.Count; i++)
+            {
+              //Beware Duplicates
+              if (!table.Columns.Contains(Second.Columns[i].ColumnName))
+                table.Columns.Add(Second.Columns[i].ColumnName, Second.Columns[i].DataType);
+              else
+                table.Columns.Add(Second.Columns[i].ColumnName + "_Second", Second.Columns[i].DataType);
+            }
+
+
+            //Loop through First table
+            table.BeginLoadData();
+
+            foreach (DataRow firstrow in ds.Tables[0].Rows)
+            {
+              //Get "joined" rows
+              DataRow[] childrows = firstrow.GetChildRows(r);
+              if (childrows != null && childrows.Length > 0)
+              {
+                object[] parentarray = firstrow.ItemArray;
+                foreach (DataRow secondrow in childrows)
+                {
+                  object[] secondarray = secondrow.ItemArray;
+                  object[] joinarray = new object[parentarray.Length + secondarray.Length];
+                  Array.Copy(parentarray, 0, joinarray, 0, parentarray.Length);
+                  Array.Copy(secondarray, 0, joinarray, parentarray.Length, secondarray.Length);
+                  table.LoadDataRow(joinarray, true);
+                }
+              }
+              else
+              {
+                object[] parentarray = firstrow.ItemArray;
+                object[] joinarray = new object[parentarray.Length];
+                Array.Copy(parentarray, 0, joinarray, 0, parentarray.Length);
+                table.LoadDataRow(joinarray, true);
+              }
+            }
+            table.EndLoadData();
+          }
+
+          return table;
+        }
+
+        public static DataTable Join(DataTable First, DataTable Second, DataColumn FJC, DataColumn SJC)
+        {
+          return SQLOps.Join(First, Second, new DataColumn[] { FJC }, new DataColumn[] { SJC });
+        }
+
+        public static DataTable Join(DataTable First, DataTable Second, string FJC, string SJC)
+        {
+          return SQLOps.Join(First, Second, new DataColumn[] { First.Columns[FJC] }, new DataColumn[] { First.Columns[SJC] });
+        } 
+  }
 
         private static ArrayList GetMoviesGlobal(string Expression, string Sort, bool traktOnly)
         {
@@ -1376,6 +1376,7 @@ namespace MyFilmsPlugin.MyFilms
             initData();
           }
           movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens); //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+          // movies = tableMoviesExtended.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           if (movies.Length == 0 && all)
           {
             StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
@@ -2352,5 +2353,13 @@ namespace MyFilmsPlugin.MyFilms
       return newEnhancedWatchedValue;
     }
 
+  }
+
+  public static class DBNullableExtensions
+  {
+    public static object ToDBValue<T>(this Nullable<T> value) where T : struct
+    {
+      return value.HasValue ? (object)value.Value : DBNull.Value;
+    }
   }
 }
