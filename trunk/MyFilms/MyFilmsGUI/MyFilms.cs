@@ -1838,6 +1838,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   else // View List as selected
                   {
                     conf.Wselectedlabel = facadeView.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
+                    if (conf.BoolReverseNames) // Re-Reverse the names to properly select the person from DB ...
+                    {
+                      conf.Wselectedlabel = ReReverseName(conf.Wselectedlabel);
+                    }
                     Change_LayOut(MyFilms.conf.StrLayOut);
                     conf.Boolreturn = (!facadeView.SelectedListItem.IsFolder);
                     do
@@ -1860,6 +1864,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     #endregion
 
+    private string ReReverseName(string reversedName)
+    {
+      if (reversedName.Contains(", ")) // "Re"Reverse Names "Willis, Bruce" --> "Bruce Willis"
+        return reversedName.Substring(reversedName.LastIndexOf(", ") + 1) + " " + reversedName.Substring(0, reversedName.LastIndexOf(", "));
+      else 
+        return reversedName;
+    }
+    
     ArrayList GetDisplayItems(string displayoption)
     {
       ArrayList ItemsToDisplay = new ArrayList();
@@ -2042,6 +2054,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SelItem = conf.StrTxtSelect.Substring(conf.StrTxtSelect.IndexOf(@"["));
             SelItem = SelItem.Substring(0, SelItem.IndexOf(@"]"));
             SelItem = NewString.StripChars(@"[]", SelItem);
+            if (IsPersonField(conf.WStrSort) && conf.BoolReverseNames) SelItem = ReReverseName(SelItem);
           }
           conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
 
@@ -6020,11 +6033,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Change_View_Action called with '" + selectedView + "'");
 
       conf.StrSelect = ""; // reset view filter
+      conf.StrDfltSelect = conf.StrConfigSelect; // reset to config filter ...
       if (conf.IndexedChars > 0) // if indexed view is enabled ...
       {
         conf.Boolindexed = true;
         conf.Boolindexedreturn = false;
-        // conf.StrSelect = conf.WStrSort + " like '*" + conf.Wstar + "*'"; // only for actors ! - so do it later in method ...
       }
 
       switch (selectedView)
@@ -6098,6 +6111,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.WStrSort = conf.StrViewItem[i];
           SetLabelView(selectedView.ToLower());
           conf.WStrSortSens = " ASC";
+          conf.IndexedChars = conf.ViewIndex[i];
+          if (conf.StrViewFilter[i].Length > 0)
+          {
+            if (conf.StrDfltSelect.Length == 0)
+              conf.StrDfltSelect = conf.StrViewFilter[i];
+            else
+              conf.StrDfltSelect += " AND " + conf.StrViewFilter[i];
+          }
+
           if (conf.StrViewValue[i].Length > 0 && !conf.StrViewValue[i].Contains(","))
           {
             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
@@ -6870,8 +6892,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ArrayList w_index = new ArrayList();
           int w_index_count = 0;
           string t_number_id = "";
-          DataRow[] wr = BaseMesFilms.ReadDataMovies(
-            conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+          DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
           //Now build a list of valid movies in w_index with Number registered
           foreach (DataRow wsr in wr)
           {
@@ -7250,15 +7271,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         upd_choice[ichoice] = "showindexedvalues";
         ichoice++;
 
-        if (MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798628))); // Don't split values
+        if (MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798628))); // Don't split values
         if (!MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798629)));
         upd_choice[ichoice] = "dontsplitvaluesinviews";
         ichoice++;
 
         if (IsPersonField(conf.WStrSort))
         {
-          if (MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798628))); // Don't split values
-          if (!MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798629)));
+          if (MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798628))); // Reverse names
+          if (!MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798629)));
           upd_choice[ichoice] = "reversenames";
           ichoice++;
         }

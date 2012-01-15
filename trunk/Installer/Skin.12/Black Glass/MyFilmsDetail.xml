@@ -5,10 +5,10 @@
 	<allowoverlay>player.hasmedia+[!facadeview.filmstrip|!facadeview.coverflow]</allowoverlay>
 	<define>#header.background:hover_Films.png</define>
 	<define>#header.label:#myfilms.config.pluginname (#myfilms.view)</define>
-  <animation effect="fade" time="250" start="100" end="0">WindowClose</animation>
-  <animation effect="fade" time="250" start="0" end="100">WindowOpen</animation>
-  <controls>
-		<import>common.window.background.xml</import>
+  	<animation effect="fade" time="250" start="100" end="0">WindowClose</animation>
+  	<animation effect="fade" time="250" start="0" end="100">WindowOpen</animation>
+  	<controls>
+<!--		<import>common.window.background.xml</import> -->
 <!--
 		<control>
 			<type>image</type>
@@ -23,43 +23,42 @@
 			<shouldCache>true</shouldCache>
 		</control>
 -->
+
 		<control>
-			<description>fanart</description>
+			<description>SingleImage Fanart</description>
 			<type>image</type>
 			<id>1000</id>
 			<posX>0</posX>
 			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
-      <keepaspectratio>yes</keepaspectratio>
+      			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
 			<texture>#myfilms.fanart</texture>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
-      <animation effect="fade" time="250">WindowClose</animation>
-    </control>
+      			<animation effect="fade" time="250">visiblechange</animation>
+      			<animation effect="fade" time="250">WindowOpen</animation>
+      			<animation effect="fade" time="250">WindowClose</animation>
+    		</control>
 		<control>
-			<description>fanart</description>
+			<description>MultiImage Fanart</description>
 			<type>multiimage</type>
 			<id>1001</id>
 			<posX>0</posX>
 			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
-      <imagepath></imagepath>
-      <timeperimage>3000</timeperimage>
-      <fadetime>1000</fadetime>
-      <loop>yes</loop>
-      <keepaspectratio>yes</keepaspectratio>
+      			<imagepath></imagepath>
+      			<timeperimage>3000</timeperimage>
+      			<fadetime>1000</fadetime>
+      			<loop>yes</loop>
+      			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
-      <randomize>true</randomize>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
-      <animation effect="fade" time="250">WindowClose</animation>
-    </control>
+      			<randomize>true</randomize>
+      			<animation effect="fade" time="250">visiblechange</animation>
+      			<animation effect="fade" time="250">WindowOpen</animation>
+      			<animation effect="fade" time="250">WindowClose</animation>
+    		</control>
 		<control>
 			<description>BG Overlay</description>
 			<type>image</type>
@@ -68,12 +67,11 @@
 			<height>720</height>
 			<texture>bg.jpg</texture>
 			<colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10099)</visible>
 			<shouldCache>true</shouldCache>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
+      			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="450">WindowClose</animation>	
+			<animation effect="fade" time="200">WindowOpen</animation>
 		</control>
 <!--		<import>common.window.overlay.xml</import> -->
 		<import>common.window.time.xml</import>
@@ -86,10 +84,9 @@
 			<width>948</width>
 			<height>766</height>
 			<texture>bg_facade.png</texture>
-      <visible>!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10099)</visible>
 			<shouldCache>true</shouldCache>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -102,8 +99,7 @@
 			<font>font28</font>
 			<align>left</align>
 			<textcolor>60ffffff</textcolor>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -367,20 +363,20 @@
 			  <disabledcolor>30000000</disabledcolor>
 			  <textureFocus>MyFilms\ledon.png</textureFocus>
 			  <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-  		    <subitems>
-    		    <subitem>101</subitem>
-    		    <subitem>100</subitem>
-    		    <subitem>417</subitem>
-  		    </subitems>
-			    <textXOff>0</textXOff>
-			    <textYOff>0</textYOff>
-		    <visible>!Control.HasFocus(10099)</visible>
+  		    	  <subitems>
+    		    		<subitem>101</subitem>
+    		    		<subitem>100</subitem>
+    		    	  	<subitem>417</subitem>
+  		    	  </subitems>
+			  <textXOff>0</textXOff>
+			  <textYOff>0</textYOff>
+		    	  <visible>!Control.HasFocus(10099)</visible>
 			  <animation effect="slide" time="0" start="-400,0" reversible="true">focus</animation>
 			  <animation effect="slide" time="0" end="-400,0" reversible="true">unfocus</animation>
 		  </control>
  -->
 
-    <control>
+    		<control>
 			<description>Play Button and Summary</description>
 			<type>button</type>
 			<id>10000</id>

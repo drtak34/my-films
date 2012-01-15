@@ -756,7 +756,6 @@ Partial Public Class AntMovieCatalog
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Private Sub InitExpressions()
         Me.Movie.DateAddedColumn.Expression = "Convert(Date,'System.DateTime')"
-        Me.Movie.Length_NumColumn.Expression = "Convert(Length,'System.Int32')"
         Me.Movie.PersonsColumn.Expression = "ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') "& _ 
             "+ ', ' + ISNULL(Writer, ' ')"
     End Sub
@@ -3323,8 +3322,6 @@ Partial Public Class AntMovieCatalog
         
         Private columnContents_Id As Global.System.Data.DataColumn
         
-        Private columnLength_Num As Global.System.Data.DataColumn
-        
         Private columnFanart As Global.System.Data.DataColumn
         
         Private columnCertification As Global.System.Data.DataColumn
@@ -3690,13 +3687,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public ReadOnly Property Length_NumColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnLength_Num
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property FanartColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnFanart
@@ -3919,7 +3909,6 @@ Partial Public Class AntMovieCatalog
                     ByVal Disks As String,  _
                     ByVal Picture As String,  _
                     ByVal parentContentsRowByContents_Movie As ContentsRow,  _
-                    ByVal Length_Num As Integer,  _
                     ByVal Fanart As String,  _
                     ByVal Certification As String,  _
                     ByVal Writer As String,  _
@@ -3943,7 +3932,7 @@ Partial Public Class AntMovieCatalog
                     ByVal CustomField3 As String,  _
                     ByVal Persons As String) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, IndexedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Size, DateAdded, RecentlyAdded, AgeAdded, Disks, Picture, Nothing, Nothing, Length_Num, Fanart, Certification, Writer, Watched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, CustomField1, CustomField2, CustomField3, Persons}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, IndexedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Size, DateAdded, RecentlyAdded, AgeAdded, Disks, Picture, Nothing, Nothing, Fanart, Certification, Writer, Watched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, CustomField1, CustomField2, CustomField3, Persons}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
                 columnValuesArray(39) = parentContentsRowByContents_Movie(0)
             End If
@@ -4014,7 +4003,7 @@ Partial Public Class AntMovieCatalog
                     ByVal CustomField2 As String,  _
                     ByVal CustomField3 As String) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, IndexedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Size, Nothing, RecentlyAdded, AgeAdded, Disks, Picture, Nothing, Nothing, Nothing, Fanart, Certification, Writer, Watched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, CustomField1, CustomField2, CustomField3, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, RatingUser, OriginalTitle, TranslatedTitle, FormattedTitle, Edition, IndexedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Size, Nothing, RecentlyAdded, AgeAdded, Disks, Picture, Nothing, Nothing, Fanart, Certification, Writer, Watched, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, IMDB_Rank, IsOnline, IsOnlineTrailer, Aspectratio, CategoryTrakt, LastPosition, AudioChannelCount, CustomField1, CustomField2, CustomField3, Nothing}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
                 columnValuesArray(39) = parentContentsRowByContents_Movie(0)
             End If
@@ -4077,7 +4066,6 @@ Partial Public Class AntMovieCatalog
             Me.columnPicture = MyBase.Columns("Picture")
             Me.columnMovie_Id = MyBase.Columns("Movie_Id")
             Me.columnContents_Id = MyBase.Columns("Contents_Id")
-            Me.columnLength_Num = MyBase.Columns("Length_Num")
             Me.columnFanart = MyBase.Columns("Fanart")
             Me.columnCertification = MyBase.Columns("Certification")
             Me.columnWriter = MyBase.Columns("Writer")
@@ -4187,8 +4175,6 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnMovie_Id)
             Me.columnContents_Id = New Global.System.Data.DataColumn("Contents_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnContents_Id)
-            Me.columnLength_Num = New Global.System.Data.DataColumn("Length_Num", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLength_Num)
             Me.columnFanart = New Global.System.Data.DataColumn("Fanart", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFanart)
             Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -4272,8 +4258,6 @@ Partial Public Class AntMovieCatalog
             Me.columnMovie_Id.Unique = true
             Me.columnMovie_Id.Namespace = ""
             Me.columnContents_Id.Namespace = ""
-            Me.columnLength_Num.ReadOnly = true
-            Me.columnLength_Num.DefaultValue = CType(0,Integer)
             Me.columnPersons.ReadOnly = true
         End Sub
         
@@ -4295,7 +4279,6 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Private Sub InitExpressions()
             Me.DateAddedColumn.Expression = "Convert(Date,'System.DateTime')"
-            Me.Length_NumColumn.Expression = "Convert(Length,'System.Int32')"
             Me.PersonsColumn.Expression = "ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') "& _ 
                 "+ ', ' + ISNULL(Writer, ' ')"
         End Sub
@@ -7311,20 +7294,6 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property Length_Num() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tableMovie.Length_NumColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Length_Num in Tabelle Movie ist DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMovie.Length_NumColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Fanart() As String
             Get
                 Try 
@@ -8030,16 +7999,6 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetContents_IdNull()
             Me(Me.tableMovie.Contents_IdColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Function IsLength_NumNull() As Boolean
-            Return Me.IsNull(Me.tableMovie.Length_NumColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Sub SetLength_NumNull()
-            Me(Me.tableMovie.Length_NumColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _

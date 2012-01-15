@@ -125,6 +125,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
                   //if (StrViewText[i - 1].ToLower() == wViewDfltItem.ToLower()) StrViewDfltItem = StrViewItem[i - 1];
                   StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i), string.Empty);
+                  ViewIndex[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewIndex{0}", i), 0);
+                  StrViewFilter[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewFilter{0}", i), string.Empty);
+                  
 
                   //View tmp = new View();
                   //tmp.InitDefaults();
@@ -402,7 +405,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrPersons", string.Empty);
                 StrTitleSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrTitleSelect", string.Empty);
                 StrFilmSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrFilmSelect", string.Empty);
-                StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
+                StrConfigSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
+                StrDfltSelect = StrConfigSelect;
 
                 StrSorta = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
                 CurrentSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
@@ -922,8 +926,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private string strDfltSelect = string.Empty;
         public string StrDfltSelect
         {
-            get { return strDfltSelect; }
-            set { strDfltSelect = value; }
+          get { return strDfltSelect; }
+          set { strDfltSelect = value; }
+        }
+        private string strConfigSelect = string.Empty;
+        public string StrConfigSelect
+        {
+          get { return strConfigSelect; }
+          set { strConfigSelect = value; }
         }
         private string strTitle1 = string.Empty;
         public string StrTitle1
@@ -1161,6 +1171,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strViewValue; }
             set { strViewValue = value; }
+        }
+        private int[] viewIndex = { 0, 0, 0, 0, 0 };
+        public int[] ViewIndex
+        {
+          get { return viewIndex; }
+          set { viewIndex = value; }
+        }
+        private string[] strViewFilter = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        public string[] StrViewFilter
+        {
+          get { return strViewFilter; }
+          set { strViewFilter = value; }
         }
         private string strViewDfltItem = string.Empty;
         public string StrViewDfltItem
@@ -1714,7 +1736,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrPersons", MyFilms.conf.StrPersons);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrConfigSelect); // StrDefaultSelect is the combined filter including "view filter"
 
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MyFilms.conf.CurrentSortMethod);
