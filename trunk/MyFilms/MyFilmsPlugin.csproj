@@ -142,6 +142,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\FilterEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\FilterEditor.Designer.cs">
+      <DependentUpon>FilterEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\ViewManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +333,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\MyFilmsIcon.ico" />
+    <EmbeddedResource Include="Configuration\FilterEditor.resx">
+      <DependentUpon>FilterEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\HyperLinkParamGenerator.resx">
       <DependentUpon>HyperLinkParamGenerator.cs</DependentUpon>
     </EmbeddedResource>
