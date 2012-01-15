@@ -278,5 +278,190 @@ namespace MyFilmsPlugin.MyFilmsGUI
     }
     #endregion
   }
+  public class ViewState
+  {
+    public ViewState() { }
+
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
+    #region public vars
+
+    private string strSelect = string.Empty;
+    public string StrSelect
+    {
+      get { return strSelect; }
+      set { strSelect = value; }
+    }
+
+    private string strPersons = string.Empty;
+    public string StrPersons
+    {
+      get { return strPersons; }
+      set { strPersons = value; }
+    }
+
+    private string strTitleSelect = string.Empty;
+    public string StrTitleSelect
+    {
+      get { return strTitleSelect; }
+      set { strTitleSelect = value; }
+    }
+
+    private string strFilmSelect = string.Empty;
+    public string StrFilmSelect
+    {
+      get { return strFilmSelect; }
+      set { strFilmSelect = value; }
+    }
+
+    private MyFilms.ViewContext viewContext = MyFilms.ViewContext.Menu;
+    public MyFilms.ViewContext ViewContext
+    {
+      get { return viewContext; }
+      set { viewContext = value; }
+    }
+
+    private string strTxtView = string.Empty;
+    public string StrTxtView
+    {
+      get { return strTxtView; }
+      set { strTxtView = value; }
+    }
+
+    private string strTxtSelect = string.Empty;
+    public string StrTxtSelect
+    {
+      get { return strTxtSelect; }
+      set { strTxtSelect = value; }
+    }
+
+    private bool boolselect;
+    public bool Boolselect
+    {
+      get { return boolselect; }
+      set { boolselect = value; }
+    }
+
+    private bool boolreturn;
+    public bool Boolreturn
+    {
+      get { return boolreturn; }
+      set { boolreturn = value; }
+    }
+
+    private bool boolindexed;
+    public bool Boolindexed
+    {
+      get { return boolindexed; }
+      set { boolindexed = value; }
+    }
+
+    private bool boolindexedreturn;
+    public bool Boolindexedreturn
+    {
+      get { return boolindexedreturn; }
+      set { boolindexedreturn = value; }
+    }
+
+    private int indexedChars = 0;
+    public int IndexedChars
+    {
+      get { return indexedChars; }
+      set { indexedChars = value; }
+    }
+
+    private bool boolReverseNames;
+    public bool BoolReverseNames
+    {
+      get { return boolReverseNames; }
+      set { boolReverseNames = value; }
+    }
+
+    private bool boolShowEmptyValuesInViews;
+    public bool BoolShowEmptyValuesInViews
+    {
+      get { return boolShowEmptyValuesInViews; }
+      set { boolShowEmptyValuesInViews = value; }
+    }
+    
+    private string wselectedlabel = string.Empty;
+    public string Wselectedlabel
+    {
+      get { return wselectedlabel; }
+      set { wselectedlabel = value; }
+    }
+
+    private string wStrSort = string.Empty;
+    public string WStrSort
+    {
+      get { return wStrSort; }
+      set { wStrSort = value; }
+    }
+
+    private string wStrSortSensCount = string.Empty;
+    public string WStrSortSensCount
+    {
+      get { return wStrSortSensCount; }
+      set { wStrSortSensCount = value; }
+    }
+
+    private bool boolSortCountinViews;
+    public bool BoolSortCountinViews
+    {
+      get { return boolSortCountinViews; }
+      set { boolSortCountinViews = value; }
+    }
+
+    private string wstar = string.Empty;
+    public string Wstar
+    {
+      get { return wstar; }
+      set { wstar = value; }
+    }
+
+    private int strLayOut = 0;
+    public int StrLayOut
+    {
+      get { return strLayOut; }
+      set { strLayOut = value; }
+    }
+
+    private int wStrLayOut = 0;
+    public int WStrLayOut
+    {
+      get { return wStrLayOut; }
+      set { wStrLayOut = value; }
+    }
+
+    private int strLayOutInHierarchies = 0;
+    public int StrLayOutInHierarchies
+    {
+      get { return this.strLayOutInHierarchies; }
+      set { this.strLayOutInHierarchies = value; }
+    }
+
+    private int lastID = 0;
+    public int LastID
+    {
+      get { return lastID; }
+      set { lastID = value; }
+    }
+
+    private int indexItem = 0;
+    public int IndexItem
+    {
+      get { return indexItem; }
+      set { indexItem = value; }
+    }
+
+    private string titleItem = string.Empty;
+    public string TitleItem
+    {
+      get { return titleItem; }
+      set { titleItem = value; }
+    }
+    // CurrentView", MyFilms.conf.CurrentView.SaveToString());
+    #endregion
+  }
 
 }

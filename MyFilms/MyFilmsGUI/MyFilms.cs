@@ -52,6 +52,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms.Utils;
   using MyFilmsPlugin.MyFilms.Utils.Cornerstone.MP;
+  using MyFilmsPlugin.MyFilmsGUI;
 
   using NLog;
   using NLog.Config;
@@ -404,6 +405,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static string[] PersonTypes = new string[] { "Persons", "Actors", "Producer", "Director", "Writer", "Borrower" };
 
     private static string EmptyFacadeValue = "(empty)";
+
+    // View History for facade navigation support
+    private static List<ViewState> ViewHistory = new List<ViewState>();
 
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
@@ -1541,6 +1545,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
           LogStatusVars("PreviousMenu");
+          if (ViewHistory.Count > 0)
+          {
+            RestoreLastView();
+          }
           switch (conf.ViewContext)
           {
             case ViewContext.None: // do nothing, if no valid context is there (e.g. because there is still backgroundloading of menu active...)
@@ -1585,7 +1593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return;
                   else 
                     base.OnAction(action);
-                Change_LayOut(MyFilms.conf.StrLayOutInViews);
+                Change_LayOut(MyFilms.conf.WStrLayOut);
                 // conf.StrSelect = "";
                 Change_View_Action(conf.WStrSort);
                 // SetDummyControlsForFacade(conf.ViewContext); // will be set in Lst_Details ...
@@ -1777,7 +1785,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Change_LayOut(dlg.SelectedLabel);
 
             if (conf.Boolselect)
-              MyFilms.conf.StrLayOutInViews = dlg.SelectedLabel;
+              MyFilms.conf.WStrLayOut = dlg.SelectedLabel;
             else if (conf.BoolCollection)
               MyFilms.conf.StrLayOutInHierarchies = dlg.SelectedLabel;
             else
@@ -2005,7 +2013,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug(caller + string.Format("() - CurrentSortMethodInHierarchies : '{0}'", conf.CurrentSortMethodInHierarchies));
 
       LogMyFilms.Debug(caller + string.Format("() - StrLayOut (Layout)             : '{0}'", conf.StrLayOut));
-      LogMyFilms.Debug(caller + string.Format("() - StrLayOutInViews               : '{0}'", conf.StrLayOutInViews));
+      LogMyFilms.Debug(caller + string.Format("() - WStrLayOut               : '{0}'", conf.WStrLayOut));
       LogMyFilms.Debug(caller + string.Format("() - StrLayOutInHierarchies         : '{0}'", conf.StrLayOutInHierarchies));
 
       //LogMyFilms.Debug(caller + string.Format("() - LastID            : '{0}'", conf.LastID));
@@ -4473,7 +4481,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.Wselectedlabel = "";
       if (ClearIndex) conf.StrIndex = 0;
       if (conf.UseListViewForGoups) Change_LayOut(0);
-      else Change_LayOut(MyFilms.conf.StrLayOutInViews);
+      else Change_LayOut(MyFilms.conf.WStrLayOut);
       facadeView.Clear();
       #endregion
 
@@ -5961,7 +5969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("Fin_Charge_Init() - normal load, conf.Boolselect = '" + conf.Boolselect + "'");
         if (conf.Boolselect) // Groupviews / Persons
         {
-          Change_LayOut(MyFilms.conf.StrLayOutInViews);
+          Change_LayOut(MyFilms.conf.WStrLayOut);
           SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
           getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, false, ""); // preserve index from last time
           LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
@@ -12037,7 +12045,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       pDlgOk.DoModal(GUIWindowManager.ActiveWindow);
     }
 
-      private void CheckSkinInterfaceVersion()
+    private void CheckSkinInterfaceVersion()
       {
         string Skin = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
         if (currentSkin == null || currentSkin != Skin)
@@ -12072,7 +12080,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor, ref int VersionBuild, ref int VersionRevision)
+    private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor, ref int VersionBuild, ref int VersionRevision)
       {
       string _versionMajor = "";
       string _versionMinor = "";
@@ -12150,27 +12158,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return true;
     }
 
-    //enum BackGroundLoadingArgumentType
-    //{
-    //  None,
-    //  FullElement,
-    //  ElementForDelayedImgLoading,
-    //  DelayedImgLoading,
-    //  DelayedImgInit,
-    //  ElementSelection,
-    //  SkipSeasonDown,
-    //  SkipSeasonUp,
-    //  SetFacadeMode
-    //}
-
-    //class BackgroundFacadeLoadingArgument
-    //{
-    //  public BackGroundLoadingArgumentType Type = BackGroundLoadingArgumentType.None;
-
-    //  public object Argument = null;
-    //  public int IndexArgument = 0;
-    //}
-
     //private void GUIWindowManager_OnNewMessage(GUIMessage message)
     //{
     //  switch (message.Message)
@@ -12196,9 +12183,93 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //      break;
     //  }
     //}
+
+    private bool SaveLastView()
+    {
+      // Configuration conf = new Configuration();
+      ViewState state = new ViewState();
+
+      state.Boolselect = conf.Boolselect;
+      state.Boolreturn = conf.Boolreturn;
+      state.Boolindexed = conf.Boolindexed;
+      state.Boolindexedreturn = conf.Boolindexedreturn;
+      state.IndexedChars = conf.IndexedChars;
+      state.BoolReverseNames = conf.BoolReverseNames;
+      state.BoolShowEmptyValuesInViews = conf.BoolShowEmptyValuesInViews;
+
+      state.StrSelect = conf.StrSelect;
+      state.StrPersons = conf.StrPersons;
+      state.StrTitleSelect = conf.StrTitleSelect;
+      state.StrFilmSelect = conf.StrFilmSelect;
+      state.ViewContext = conf.ViewContext;
+      state.StrTxtView = conf.StrTxtView;
+      state.StrTxtSelect = conf.StrTxtSelect;
+
+      state.Wselectedlabel = conf.Wselectedlabel;
+      state.WStrSort = conf.WStrSort;
+      state.WStrSortSensCount = conf.WStrSortSensCount;
+      state.BoolSortCountinViews = conf.BoolSortCountinViews;
+      state.Wstar = conf.Wstar;
+
+      state.StrLayOut = conf.StrLayOut;
+      state.WStrLayOut = conf.WStrLayOut;
+      state.StrLayOutInHierarchies = conf.StrLayOutInHierarchies;
+      state.LastID = conf.LastID;
+
+      state.IndexItem = (facadeView.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? facadeView.SelectedListItemIndex : 0) : -1; //may need to check if there is no item selected and so save -1
+      state.TitleItem = (facadeView.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? facadeView.SelectedItem.ToString() : facadeView.SelectedListItem.Label) : string.Empty; //may need to check if there is no item selected and so save ""
+
+      ViewHistory.Add(state);
+      return true;
+    }
+
+    private bool RestoreLastView()
+    {
+      if (ViewHistory.Count > 0)
+      {
+        ViewState state = ViewHistory.Last();
+
+        conf.Boolselect = state.Boolselect;
+        conf.Boolreturn = state.Boolreturn;
+        conf.Boolindexed = state.Boolindexed;
+        conf.Boolindexedreturn = state.Boolindexedreturn;
+        conf.IndexedChars = state.IndexedChars;
+        conf.BoolReverseNames = state.BoolReverseNames;
+        conf.BoolShowEmptyValuesInViews = state.BoolShowEmptyValuesInViews;
+
+        conf.StrSelect = state.StrSelect;
+        conf.StrPersons = state.StrPersons;
+        conf.StrTitleSelect = state.StrTitleSelect;
+        conf.StrFilmSelect = state.StrFilmSelect;
+        conf.ViewContext = state.ViewContext;
+        conf.StrTxtView = state.StrTxtView;
+        conf.StrTxtSelect = state.StrTxtSelect;
+
+        conf.Wselectedlabel = state.Wselectedlabel;
+        conf.WStrSort = state.WStrSort;
+        conf.WStrSortSensCount = state.WStrSortSensCount;
+        conf.BoolSortCountinViews = state.BoolSortCountinViews;
+        conf.Wstar = state.Wstar;
+
+        conf.StrLayOut = state.StrLayOut;
+        conf.WStrLayOut = state.WStrLayOut;
+        conf.StrLayOutInHierarchies = state.StrLayOutInHierarchies;
+        conf.LastID = state.LastID;
+
+        int IndexItem = state.IndexItem;
+        string TitleItem = state.TitleItem;
+
+        //IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
+        //TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+
+        ViewHistory.Remove(ViewHistory.Last());
+        return true;
+      }
+      else 
+        return false;
+    }
   }
 
-  
   //public class GUIMyFilmsListItem : GUIListItem
   //{
   //  #region Facade Item
@@ -12254,6 +12325,5 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   //  #endregion
   //}
-
 
 }

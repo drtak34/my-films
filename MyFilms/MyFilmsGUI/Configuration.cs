@@ -162,7 +162,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrPathArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistPicturePath", string.Empty);
 
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", 0);
-                StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOut", StrLayOut);
+                this.WStrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOut", StrLayOut);
+                StrLayOutInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOutInHierarchies", StrLayOut);
+
                 if (loadParams != null && !string.IsNullOrEmpty(loadParams.Layout))
                 {
                   int iLayout = 0;
@@ -170,13 +172,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iLayout >= 0 && iLayout <= 4)
                     {
                       StrLayOut = iLayout;
-                      StrLayOutInViews = iLayout;
+                      this.WStrLayOut = iLayout;
                       StrLayOutInHierarchies = iLayout;
                     }
                       
                 }
-                StrLayOutInViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOutInViews", StrLayOut);
-                StrLayOutInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOutInHierarchies", StrLayOut);
 
                 Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
                 Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
@@ -552,7 +552,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
                       StrLayOutInHierarchies = StrLayOut;
-                      StrLayOutInViews = StrLayOut;
+                      this.WStrLayOut = StrLayOut;
                     }
                     if (Helper.FieldIsSet(wDfltSort))
                     {
@@ -1403,11 +1403,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strLayOut; }
             set { strLayOut = value; }
         }
-        private int strLayOutInViews = int.MinValue;
-        public int StrLayOutInViews
+        private int wStrLayOut = int.MinValue;
+        public int WStrLayOut
         {
-            get { return strLayOutInViews; }
-            set { strLayOutInViews = value; }
+            get { return this.wStrLayOut; }
+            set { this.wStrLayOut = value; }
         }
         private int strLayOutInHierarchies = int.MinValue;
         public int StrLayOutInHierarchies
@@ -1763,10 +1763,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MyFilms.conf.WStrSort);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
-            
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOutInViews", MyFilms.conf.StrLayOutInViews);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOutInHierarchies", MyFilms.conf.StrLayOutInHierarchies);
+
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LayOut", MyFilms.conf.StrLayOut);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LayOutInHierarchies", MyFilms.conf.StrLayOutInHierarchies);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.WStrLayOut);
             
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
