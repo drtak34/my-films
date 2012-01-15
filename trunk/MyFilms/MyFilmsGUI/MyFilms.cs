@@ -4774,7 +4774,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if ((conf.StrIndex > facadeView.Count - 1) || (conf.StrIndex < 0)) //check index within bounds, will be unless xml file heavily edited
         conf.StrIndex = 0;
 
-      GUIControl.ShowControl(GetID, 34); // hide film controls ....
+      // will be done in Lst_Details later ...GUIControl.ShowControl(GetID, 34); // hide film controls ....
 
       if (facadeView.Count > 0)
       {
