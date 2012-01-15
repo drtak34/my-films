@@ -20,7 +20,7 @@
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
       <KeyNextPage />
-      <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023__x0022_GsearchResultClass_x0022_._x002A__x003F_Poster_x0020_zu_x0020_</KeyStartTitle>
+      <KeyStartTitle Param1="_x0023_REGEX_x0023__x0020_-_x0020_Moviemaze.de" Param2="">_x0023_REGEX_x0023__x0022_GsearchResultClass_x0022_._x002A__x003F_Poster_x0020_zu_x0020_</KeyStartTitle>
       <KeyEndTitle>_x0022_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="" Param2="">_x003C_b_x003E_YEAR:</KeyStartYear>
@@ -29,7 +29,7 @@
       <KeyStartDirector Param1="" Param2="" />
       <KeyEndDirector />
       <KeyDirectorIndex />
-      <KeyStartLink Param1="" Param2="">_x0022_unescapedUrl_x0022_:_x0022_</KeyStartLink>
+      <KeyStartLink Param1="_x0023_REGEX_x0023__x002F__x005C_d_x002F_" Param2="_x002F_">_x0022_unescapedUrl_x0022_:_x0022_</KeyStartLink>
       <KeyEndLink>_x0022_</KeyEndLink>
       <KeyLinkIndex />
       <KeyStartID Param1="" Param2="">_x0023_REGEX_x0023__x003B__x0022__x003E__x003C_a_x0020_href_x003D__x0022_._x002A__x003F_id_x003D_</KeyStartID>
@@ -57,12 +57,12 @@
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
-      <KeyStartImg Param1="filme" Param2="http:_x002F__x002F_www.moviemaze.de_x002F_filme">_x003C_img_x0020_src_x003D__x0022__x002F_</KeyStartImg>
+      <KeyStartImg Param1="filme" Param2="http:_x002F__x002F_www.moviemaze.de_x002F_filme_x002F_">_x003C_img_x0020_src_x003D__x0022__x002F_</KeyStartImg>
       <KeyEndImg>_x0022_</KeyEndImg>
       <KeyImgIndex />
-      <KeyImgPage />
-      <KeyStartLinkImg Param1="" Param2="" />
-      <KeyEndLinkImg />
+      <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
+      <KeyStartLinkImg Param1="_x0023_REVERSE_x0023__x0023_REGEX_x0023__x0023_MULTI_x0023__x002F__x005C_d_x005C_d_x002F__x007C__x002F_1_x002F__x003B__x002F_media_x007C_http:_x002F__x002F_www.moviemaze.de_x002F_media" Param2="_x002F_1_x002F_">_x0023_REGEX_x0023__x0022__x003E__x003C_img_x0020_src_x003D__x0022__x002F_filme_x002F_</KeyStartLinkImg>
+      <KeyEndLinkImg>href_x003D__x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
       <KeyStartRate Param1="" Param2="" />
