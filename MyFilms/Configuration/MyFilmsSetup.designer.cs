@@ -339,6 +339,7 @@
           this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
           this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.lbl_View_Dflt_Text = new System.Windows.Forms.Label();
           this.chkGlobalAvailableOnly = new System.Windows.Forms.CheckBox();
           this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
@@ -352,6 +353,10 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBox_SupplementaryView = new System.Windows.Forms.GroupBox();
+          this.lbl_AntViewFilter = new System.Windows.Forms.Label();
+          this.AntViewFilter1 = new System.Windows.Forms.TextBox();
+          this.lblAntViewIndex = new System.Windows.Forms.Label();
+          this.AntViewIndex1 = new System.Windows.Forms.ComboBox();
           this.label41 = new System.Windows.Forms.Label();
           this.label31 = new System.Windows.Forms.Label();
           this.label26 = new System.Windows.Forms.Label();
@@ -549,11 +554,14 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.AntViewIndex1 = new System.Windows.Forms.ComboBox();
-          this.lblAntViewIndex = new System.Windows.Forms.Label();
-          this.lbl_View_Dflt_Text = new System.Windows.Forms.Label();
-          this.AntViewFilter1 = new System.Windows.Forms.TextBox();
-          this.lbl_AntViewFilter = new System.Windows.Forms.Label();
+          this.AntViewIndex2 = new System.Windows.Forms.ComboBox();
+          this.AntViewIndex3 = new System.Windows.Forms.ComboBox();
+          this.AntViewIndex4 = new System.Windows.Forms.ComboBox();
+          this.AntViewIndex5 = new System.Windows.Forms.ComboBox();
+          this.AntViewFilter2 = new System.Windows.Forms.TextBox();
+          this.AntViewFilter3 = new System.Windows.Forms.TextBox();
+          this.AntViewFilter4 = new System.Windows.Forms.TextBox();
+          this.AntViewFilter5 = new System.Windows.Forms.TextBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -3251,7 +3259,7 @@
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText1);
           this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(371, 6);
           this.groupBox_AntSelectedEnreg.Name = "groupBox_AntSelectedEnreg";
-          this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 144);
+          this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 158);
           this.groupBox_AntSelectedEnreg.TabIndex = 27;
           this.groupBox_AntSelectedEnreg.TabStop = false;
           this.groupBox_AntSelectedEnreg.Text = "User defined Config Filters";
@@ -3287,7 +3295,7 @@
           this.Selected_Enreg.Name = "Selected_Enreg";
           this.Selected_Enreg.ReadOnly = true;
           this.Selected_Enreg.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-          this.Selected_Enreg.Size = new System.Drawing.Size(347, 40);
+          this.Selected_Enreg.Size = new System.Drawing.Size(347, 54);
           this.Selected_Enreg.TabIndex = 28;
           this.Selected_Enreg.TabStop = false;
           // 
@@ -3399,6 +3407,15 @@
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
+          // 
+          // lbl_View_Dflt_Text
+          // 
+          this.lbl_View_Dflt_Text.AutoSize = true;
+          this.lbl_View_Dflt_Text.Location = new System.Drawing.Point(157, 22);
+          this.lbl_View_Dflt_Text.Name = "lbl_View_Dflt_Text";
+          this.lbl_View_Dflt_Text.Size = new System.Drawing.Size(34, 13);
+          this.lbl_View_Dflt_Text.TabIndex = 83;
+          this.lbl_View_Dflt_Text.Text = "Value";
           // 
           // chkGlobalAvailableOnly
           // 
@@ -3526,6 +3543,14 @@
           // 
           // groupBox_SupplementaryView
           // 
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewFilter5);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewFilter4);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewFilter3);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewFilter2);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewIndex5);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewIndex4);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewIndex3);
+          this.groupBox_SupplementaryView.Controls.Add(this.AntViewIndex2);
           this.groupBox_SupplementaryView.Controls.Add(this.lbl_AntViewFilter);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewFilter1);
           this.groupBox_SupplementaryView.Controls.Add(this.lblAntViewIndex);
@@ -3548,13 +3573,53 @@
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewText1);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewItem2);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewItem1);
-          this.groupBox_SupplementaryView.Location = new System.Drawing.Point(9, 170);
+          this.groupBox_SupplementaryView.Location = new System.Drawing.Point(9, 165);
           this.groupBox_SupplementaryView.Name = "groupBox_SupplementaryView";
-          this.groupBox_SupplementaryView.Size = new System.Drawing.Size(347, 178);
+          this.groupBox_SupplementaryView.Size = new System.Drawing.Size(450, 183);
           this.groupBox_SupplementaryView.TabIndex = 24;
           this.groupBox_SupplementaryView.TabStop = false;
           this.groupBox_SupplementaryView.Text = "User defined Views";
           this.ToolTip1.SetToolTip(this.groupBox_SupplementaryView, resources.GetString("groupBox_SupplementaryView.ToolTip"));
+          // 
+          // lbl_AntViewFilter
+          // 
+          this.lbl_AntViewFilter.AutoSize = true;
+          this.lbl_AntViewFilter.Location = new System.Drawing.Point(327, 23);
+          this.lbl_AntViewFilter.Name = "lbl_AntViewFilter";
+          this.lbl_AntViewFilter.Size = new System.Drawing.Size(29, 13);
+          this.lbl_AntViewFilter.TabIndex = 33;
+          this.lbl_AntViewFilter.Text = "Filter";
+          // 
+          // AntViewFilter1
+          // 
+          this.AntViewFilter1.Location = new System.Drawing.Point(328, 42);
+          this.AntViewFilter1.Name = "AntViewFilter1";
+          this.AntViewFilter1.Size = new System.Drawing.Size(116, 20);
+          this.AntViewFilter1.TabIndex = 32;
+          this.ToolTip1.SetToolTip(this.AntViewFilter1, resources.GetString("AntViewFilter1.ToolTip"));
+          // 
+          // lblAntViewIndex
+          // 
+          this.lblAntViewIndex.AutoSize = true;
+          this.lblAntViewIndex.Location = new System.Drawing.Point(193, 23);
+          this.lblAntViewIndex.Name = "lblAntViewIndex";
+          this.lblAntViewIndex.Size = new System.Drawing.Size(33, 13);
+          this.lblAntViewIndex.TabIndex = 31;
+          this.lblAntViewIndex.Text = "Index";
+          // 
+          // AntViewIndex1
+          // 
+          this.AntViewIndex1.FormattingEnabled = true;
+          this.AntViewIndex1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+          this.AntViewIndex1.Location = new System.Drawing.Point(194, 42);
+          this.AntViewIndex1.Name = "AntViewIndex1";
+          this.AntViewIndex1.Size = new System.Drawing.Size(37, 21);
+          this.AntViewIndex1.TabIndex = 30;
+          this.ToolTip1.SetToolTip(this.AntViewIndex1, "You can define number of chars to be viewd as indexed group\r\nfor this Item, e.g.\r" +
+                  "\n\"1\" results in getting a view of first letter.");
           // 
           // label41
           // 
@@ -3587,14 +3652,14 @@
           // 
           this.AntViewValue5.Location = new System.Drawing.Point(237, 146);
           this.AntViewValue5.Name = "AntViewValue5";
-          this.AntViewValue5.Size = new System.Drawing.Size(103, 20);
+          this.AntViewValue5.Size = new System.Drawing.Size(85, 20);
           this.AntViewValue5.TabIndex = 26;
           // 
           // AntViewText5
           // 
-          this.AntViewText5.Location = new System.Drawing.Point(126, 146);
+          this.AntViewText5.Location = new System.Drawing.Point(115, 146);
           this.AntViewText5.Name = "AntViewText5";
-          this.AntViewText5.Size = new System.Drawing.Size(105, 20);
+          this.AntViewText5.Size = new System.Drawing.Size(73, 20);
           this.AntViewText5.TabIndex = 25;
           this.AntViewText5.Leave += new System.EventHandler(this.AntViewText5_Leave);
           // 
@@ -3603,7 +3668,7 @@
           this.AntViewItem5.FormattingEnabled = true;
           this.AntViewItem5.Location = new System.Drawing.Point(10, 146);
           this.AntViewItem5.Name = "AntViewItem5";
-          this.AntViewItem5.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem5.Size = new System.Drawing.Size(99, 21);
           this.AntViewItem5.Sorted = true;
           this.AntViewItem5.TabIndex = 24;
           this.AntViewItem5.SelectedIndexChanged += new System.EventHandler(this.AntViewItem5_SelectedIndexChanged);
@@ -3612,14 +3677,14 @@
           // 
           this.AntViewValue4.Location = new System.Drawing.Point(237, 120);
           this.AntViewValue4.Name = "AntViewValue4";
-          this.AntViewValue4.Size = new System.Drawing.Size(103, 20);
+          this.AntViewValue4.Size = new System.Drawing.Size(85, 20);
           this.AntViewValue4.TabIndex = 23;
           // 
           // AntViewText4
           // 
-          this.AntViewText4.Location = new System.Drawing.Point(126, 120);
+          this.AntViewText4.Location = new System.Drawing.Point(115, 120);
           this.AntViewText4.Name = "AntViewText4";
-          this.AntViewText4.Size = new System.Drawing.Size(105, 20);
+          this.AntViewText4.Size = new System.Drawing.Size(73, 20);
           this.AntViewText4.TabIndex = 22;
           this.AntViewText4.Leave += new System.EventHandler(this.AntViewText4_Leave);
           // 
@@ -3628,7 +3693,7 @@
           this.AntViewItem4.FormattingEnabled = true;
           this.AntViewItem4.Location = new System.Drawing.Point(10, 120);
           this.AntViewItem4.Name = "AntViewItem4";
-          this.AntViewItem4.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem4.Size = new System.Drawing.Size(99, 21);
           this.AntViewItem4.Sorted = true;
           this.AntViewItem4.TabIndex = 21;
           this.AntViewItem4.SelectedIndexChanged += new System.EventHandler(this.AntViewItem4_SelectedIndexChanged);
@@ -3637,14 +3702,14 @@
           // 
           this.AntViewValue3.Location = new System.Drawing.Point(237, 94);
           this.AntViewValue3.Name = "AntViewValue3";
-          this.AntViewValue3.Size = new System.Drawing.Size(103, 20);
+          this.AntViewValue3.Size = new System.Drawing.Size(85, 20);
           this.AntViewValue3.TabIndex = 20;
           // 
           // AntViewText3
           // 
-          this.AntViewText3.Location = new System.Drawing.Point(126, 94);
+          this.AntViewText3.Location = new System.Drawing.Point(115, 94);
           this.AntViewText3.Name = "AntViewText3";
-          this.AntViewText3.Size = new System.Drawing.Size(105, 20);
+          this.AntViewText3.Size = new System.Drawing.Size(73, 20);
           this.AntViewText3.TabIndex = 19;
           this.AntViewText3.Leave += new System.EventHandler(this.AntViewText3_Leave);
           // 
@@ -3653,7 +3718,7 @@
           this.AntViewItem3.FormattingEnabled = true;
           this.AntViewItem3.Location = new System.Drawing.Point(10, 94);
           this.AntViewItem3.Name = "AntViewItem3";
-          this.AntViewItem3.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem3.Size = new System.Drawing.Size(99, 21);
           this.AntViewItem3.Sorted = true;
           this.AntViewItem3.TabIndex = 18;
           this.AntViewItem3.SelectedIndexChanged += new System.EventHandler(this.AntViewItem3_SelectedIndexChanged);
@@ -3662,29 +3727,29 @@
           // 
           this.AntViewValue2.Location = new System.Drawing.Point(237, 68);
           this.AntViewValue2.Name = "AntViewValue2";
-          this.AntViewValue2.Size = new System.Drawing.Size(103, 20);
+          this.AntViewValue2.Size = new System.Drawing.Size(85, 20);
           this.AntViewValue2.TabIndex = 17;
           // 
           // AntViewValue1
           // 
           this.AntViewValue1.Location = new System.Drawing.Point(237, 42);
           this.AntViewValue1.Name = "AntViewValue1";
-          this.AntViewValue1.Size = new System.Drawing.Size(51, 20);
+          this.AntViewValue1.Size = new System.Drawing.Size(85, 20);
           this.AntViewValue1.TabIndex = 14;
           // 
           // AntViewText2
           // 
-          this.AntViewText2.Location = new System.Drawing.Point(126, 68);
+          this.AntViewText2.Location = new System.Drawing.Point(115, 68);
           this.AntViewText2.Name = "AntViewText2";
-          this.AntViewText2.Size = new System.Drawing.Size(105, 20);
+          this.AntViewText2.Size = new System.Drawing.Size(73, 20);
           this.AntViewText2.TabIndex = 16;
           this.AntViewText2.Leave += new System.EventHandler(this.AntViewText2_Leave);
           // 
           // AntViewText1
           // 
-          this.AntViewText1.Location = new System.Drawing.Point(128, 42);
+          this.AntViewText1.Location = new System.Drawing.Point(115, 42);
           this.AntViewText1.Name = "AntViewText1";
-          this.AntViewText1.Size = new System.Drawing.Size(61, 20);
+          this.AntViewText1.Size = new System.Drawing.Size(73, 20);
           this.AntViewText1.TabIndex = 13;
           this.AntViewText1.TextChanged += new System.EventHandler(this.AntViewText1_Leave);
           this.AntViewText1.Leave += new System.EventHandler(this.AntViewText1_Leave);
@@ -3694,7 +3759,7 @@
           this.AntViewItem2.FormattingEnabled = true;
           this.AntViewItem2.Location = new System.Drawing.Point(10, 68);
           this.AntViewItem2.Name = "AntViewItem2";
-          this.AntViewItem2.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem2.Size = new System.Drawing.Size(99, 21);
           this.AntViewItem2.Sorted = true;
           this.AntViewItem2.TabIndex = 15;
           this.AntViewItem2.SelectedIndexChanged += new System.EventHandler(this.AntViewItem2_SelectedIndexChanged);
@@ -3704,7 +3769,7 @@
           this.AntViewItem1.ItemHeight = 13;
           this.AntViewItem1.Location = new System.Drawing.Point(10, 42);
           this.AntViewItem1.Name = "AntViewItem1";
-          this.AntViewItem1.Size = new System.Drawing.Size(110, 21);
+          this.AntViewItem1.Size = new System.Drawing.Size(99, 21);
           this.AntViewItem1.Sorted = true;
           this.AntViewItem1.TabIndex = 12;
           this.AntViewItem1.SelectedIndexChanged += new System.EventHandler(this.AntViewItem1_SelectedIndexChanged);
@@ -3724,9 +3789,9 @@
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label3);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
-          this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(371, 153);
+          this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(465, 165);
           this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
-          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 195);
+          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(276, 183);
           this.groupBox_DetailedSupplementaryInformations.TabIndex = 22;
           this.groupBox_DetailedSupplementaryInformations.TabStop = false;
           this.groupBox_DetailedSupplementaryInformations.Text = "User defined Display Items";
@@ -3734,47 +3799,47 @@
           // 
           // AntLabel5
           // 
-          this.AntLabel5.Location = new System.Drawing.Point(185, 145);
+          this.AntLabel5.Location = new System.Drawing.Point(141, 135);
           this.AntLabel5.Name = "AntLabel5";
-          this.AntLabel5.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel5.Size = new System.Drawing.Size(116, 20);
           this.AntLabel5.TabIndex = 35;
           // 
           // AntLabel4
           // 
-          this.AntLabel4.Location = new System.Drawing.Point(185, 118);
+          this.AntLabel4.Location = new System.Drawing.Point(141, 109);
           this.AntLabel4.Name = "AntLabel4";
-          this.AntLabel4.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel4.Size = new System.Drawing.Size(116, 20);
           this.AntLabel4.TabIndex = 34;
           // 
           // AntItem5
           // 
           this.AntItem5.FormattingEnabled = true;
-          this.AntItem5.Location = new System.Drawing.Point(10, 144);
+          this.AntItem5.Location = new System.Drawing.Point(10, 134);
           this.AntItem5.Name = "AntItem5";
-          this.AntItem5.Size = new System.Drawing.Size(160, 21);
+          this.AntItem5.Size = new System.Drawing.Size(120, 21);
           this.AntItem5.Sorted = true;
           this.AntItem5.TabIndex = 33;
           // 
           // AntItem4
           // 
           this.AntItem4.FormattingEnabled = true;
-          this.AntItem4.Location = new System.Drawing.Point(10, 117);
+          this.AntItem4.Location = new System.Drawing.Point(10, 109);
           this.AntItem4.Name = "AntItem4";
-          this.AntItem4.Size = new System.Drawing.Size(160, 21);
+          this.AntItem4.Size = new System.Drawing.Size(120, 21);
           this.AntItem4.Sorted = true;
           this.AntItem4.TabIndex = 32;
           // 
           // AntLabel3
           // 
-          this.AntLabel3.Location = new System.Drawing.Point(185, 90);
+          this.AntLabel3.Location = new System.Drawing.Point(141, 84);
           this.AntLabel3.Name = "AntLabel3";
-          this.AntLabel3.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel3.Size = new System.Drawing.Size(116, 20);
           this.AntLabel3.TabIndex = 30;
           // 
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(11, 174);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(11, 161);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(230, 17);
           this.chkOnlyTitle.TabIndex = 31;
@@ -3784,32 +3849,32 @@
           // AntItem3
           // 
           this.AntItem3.FormattingEnabled = true;
-          this.AntItem3.Location = new System.Drawing.Point(10, 90);
+          this.AntItem3.Location = new System.Drawing.Point(10, 84);
           this.AntItem3.Name = "AntItem3";
-          this.AntItem3.Size = new System.Drawing.Size(160, 21);
+          this.AntItem3.Size = new System.Drawing.Size(120, 21);
           this.AntItem3.Sorted = true;
           this.AntItem3.TabIndex = 29;
           // 
           // AntItem2
           // 
           this.AntItem2.FormattingEnabled = true;
-          this.AntItem2.Location = new System.Drawing.Point(10, 63);
+          this.AntItem2.Location = new System.Drawing.Point(10, 59);
           this.AntItem2.Name = "AntItem2";
-          this.AntItem2.Size = new System.Drawing.Size(160, 21);
+          this.AntItem2.Size = new System.Drawing.Size(120, 21);
           this.AntItem2.Sorted = true;
           this.AntItem2.TabIndex = 27;
           // 
           // AntLabel2
           // 
-          this.AntLabel2.Location = new System.Drawing.Point(185, 63);
+          this.AntLabel2.Location = new System.Drawing.Point(141, 59);
           this.AntLabel2.Name = "AntLabel2";
-          this.AntLabel2.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel2.Size = new System.Drawing.Size(116, 20);
           this.AntLabel2.TabIndex = 28;
           // 
           // label7
           // 
           this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(8, 18);
+          this.label7.Location = new System.Drawing.Point(8, 17);
           this.label7.Name = "label7";
           this.label7.Size = new System.Drawing.Size(94, 13);
           this.label7.TabIndex = 22;
@@ -3819,16 +3884,16 @@
           // 
           this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
           this.AntItem1.FormattingEnabled = true;
-          this.AntItem1.Location = new System.Drawing.Point(10, 36);
+          this.AntItem1.Location = new System.Drawing.Point(10, 34);
           this.AntItem1.Name = "AntItem1";
-          this.AntItem1.Size = new System.Drawing.Size(160, 21);
+          this.AntItem1.Size = new System.Drawing.Size(120, 21);
           this.AntItem1.Sorted = true;
           this.AntItem1.TabIndex = 25;
           // 
           // label3
           // 
           this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(187, 18);
+          this.label3.Location = new System.Drawing.Point(143, 17);
           this.label3.Name = "label3";
           this.label3.Size = new System.Drawing.Size(33, 13);
           this.label3.TabIndex = 21;
@@ -3836,9 +3901,9 @@
           // 
           // AntLabel1
           // 
-          this.AntLabel1.Location = new System.Drawing.Point(185, 36);
+          this.AntLabel1.Location = new System.Drawing.Point(141, 34);
           this.AntLabel1.Name = "AntLabel1";
-          this.AntLabel1.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel1.Size = new System.Drawing.Size(116, 20);
           this.AntLabel1.TabIndex = 26;
           // 
           // Tab_Trailer
@@ -5602,54 +5667,81 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
-          // AntViewIndex1
+          // AntViewIndex2
           // 
-          this.AntViewIndex1.FormattingEnabled = true;
-          this.AntViewIndex1.Items.AddRange(new object[] {
+          this.AntViewIndex2.FormattingEnabled = true;
+          this.AntViewIndex2.Items.AddRange(new object[] {
             "0",
             "1",
             "2"});
-          this.AntViewIndex1.Location = new System.Drawing.Point(194, 42);
-          this.AntViewIndex1.Name = "AntViewIndex1";
-          this.AntViewIndex1.Size = new System.Drawing.Size(37, 21);
-          this.AntViewIndex1.TabIndex = 30;
-          this.ToolTip1.SetToolTip(this.AntViewIndex1, "You can define number of chars to be viewd as indexed group\r\nfor this Item, e.g.\r" +
-                  "\n\"1\" results in getting a view of first letter.");
+          this.AntViewIndex2.Location = new System.Drawing.Point(194, 68);
+          this.AntViewIndex2.Name = "AntViewIndex2";
+          this.AntViewIndex2.Size = new System.Drawing.Size(37, 21);
+          this.AntViewIndex2.TabIndex = 34;
           // 
-          // lblAntViewIndex
+          // AntViewIndex3
           // 
-          this.lblAntViewIndex.AutoSize = true;
-          this.lblAntViewIndex.Location = new System.Drawing.Point(193, 23);
-          this.lblAntViewIndex.Name = "lblAntViewIndex";
-          this.lblAntViewIndex.Size = new System.Drawing.Size(33, 13);
-          this.lblAntViewIndex.TabIndex = 31;
-          this.lblAntViewIndex.Text = "Index";
+          this.AntViewIndex3.FormattingEnabled = true;
+          this.AntViewIndex3.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+          this.AntViewIndex3.Location = new System.Drawing.Point(194, 94);
+          this.AntViewIndex3.Name = "AntViewIndex3";
+          this.AntViewIndex3.Size = new System.Drawing.Size(37, 21);
+          this.AntViewIndex3.TabIndex = 35;
           // 
-          // lbl_View_Dflt_Text
+          // AntViewIndex4
           // 
-          this.lbl_View_Dflt_Text.AutoSize = true;
-          this.lbl_View_Dflt_Text.Location = new System.Drawing.Point(157, 22);
-          this.lbl_View_Dflt_Text.Name = "lbl_View_Dflt_Text";
-          this.lbl_View_Dflt_Text.Size = new System.Drawing.Size(34, 13);
-          this.lbl_View_Dflt_Text.TabIndex = 83;
-          this.lbl_View_Dflt_Text.Text = "Value";
+          this.AntViewIndex4.FormattingEnabled = true;
+          this.AntViewIndex4.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+          this.AntViewIndex4.Location = new System.Drawing.Point(194, 120);
+          this.AntViewIndex4.Name = "AntViewIndex4";
+          this.AntViewIndex4.Size = new System.Drawing.Size(37, 21);
+          this.AntViewIndex4.TabIndex = 36;
           // 
-          // AntViewFilter1
+          // AntViewIndex5
           // 
-          this.AntViewFilter1.Location = new System.Drawing.Point(294, 42);
-          this.AntViewFilter1.Name = "AntViewFilter1";
-          this.AntViewFilter1.Size = new System.Drawing.Size(46, 20);
-          this.AntViewFilter1.TabIndex = 32;
-          this.ToolTip1.SetToolTip(this.AntViewFilter1, resources.GetString("AntViewFilter1.ToolTip"));
+          this.AntViewIndex5.FormattingEnabled = true;
+          this.AntViewIndex5.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+          this.AntViewIndex5.Location = new System.Drawing.Point(194, 146);
+          this.AntViewIndex5.Name = "AntViewIndex5";
+          this.AntViewIndex5.Size = new System.Drawing.Size(37, 21);
+          this.AntViewIndex5.TabIndex = 37;
           // 
-          // lbl_AntViewFilter
+          // AntViewFilter2
           // 
-          this.lbl_AntViewFilter.AutoSize = true;
-          this.lbl_AntViewFilter.Location = new System.Drawing.Point(310, 23);
-          this.lbl_AntViewFilter.Name = "lbl_AntViewFilter";
-          this.lbl_AntViewFilter.Size = new System.Drawing.Size(29, 13);
-          this.lbl_AntViewFilter.TabIndex = 33;
-          this.lbl_AntViewFilter.Text = "Filter";
+          this.AntViewFilter2.Location = new System.Drawing.Point(328, 68);
+          this.AntViewFilter2.Name = "AntViewFilter2";
+          this.AntViewFilter2.Size = new System.Drawing.Size(116, 20);
+          this.AntViewFilter2.TabIndex = 38;
+          // 
+          // AntViewFilter3
+          // 
+          this.AntViewFilter3.Location = new System.Drawing.Point(328, 95);
+          this.AntViewFilter3.Name = "AntViewFilter3";
+          this.AntViewFilter3.Size = new System.Drawing.Size(116, 20);
+          this.AntViewFilter3.TabIndex = 39;
+          // 
+          // AntViewFilter4
+          // 
+          this.AntViewFilter4.Location = new System.Drawing.Point(328, 120);
+          this.AntViewFilter4.Name = "AntViewFilter4";
+          this.AntViewFilter4.Size = new System.Drawing.Size(116, 20);
+          this.AntViewFilter4.TabIndex = 40;
+          // 
+          // AntViewFilter5
+          // 
+          this.AntViewFilter5.Location = new System.Drawing.Point(328, 146);
+          this.AntViewFilter5.Name = "AntViewFilter5";
+          this.AntViewFilter5.Size = new System.Drawing.Size(116, 20);
+          this.AntViewFilter5.TabIndex = 41;
           // 
           // MyFilmsSetup
           // 
@@ -6242,5 +6334,13 @@
         private Label lbl_View_Dflt_Text;
         private TextBox AntViewFilter1;
         private Label lbl_AntViewFilter;
+        private ComboBox AntViewIndex5;
+        private ComboBox AntViewIndex4;
+        private ComboBox AntViewIndex3;
+        private ComboBox AntViewIndex2;
+        private TextBox AntViewFilter5;
+        private TextBox AntViewFilter4;
+        private TextBox AntViewFilter3;
+        private TextBox AntViewFilter2;
     }
 }
