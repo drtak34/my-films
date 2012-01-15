@@ -2097,9 +2097,14 @@ Public Class Form1
     End Sub
     Private Sub SaveConfigFileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveConfigFileAsToolStripMenuItem.Click
         ApplySettings()
+        Dim MePoConfigPath As String = Config.GetDirectoryInfo(Config.Dir.Config).ToString
         Try
             With SaveFileDialog1
-                .InitialDirectory = My.Application.Info.DirectoryPath
+                If System.IO.Directory.Exists(MePoConfigPath) Then
+                    .InitialDirectory = MePoConfigPath
+                Else
+                    .InitialDirectory = My.Application.Info.DirectoryPath
+                End If
                 .FileName = "AMCUpdater_Settings.xml"
                 .CheckFileExists = False
                 .CheckPathExists = True
@@ -2696,6 +2701,7 @@ Public Class Form1
 
     Private Sub SaveConfigFileToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveConfigFileToolStripMenuItem.Click
         ApplySettings()
+        Dim MePoConfigPath As String = Config.GetDirectoryInfo(Config.Dir.Config).ToString
         If My.Application.CommandLineArgs.Count > 0 Then
             Try
                 Try
@@ -2713,7 +2719,11 @@ Public Class Form1
         Else
             Try
                 With SaveFileDialog1
-                    .InitialDirectory = My.Application.Info.DirectoryPath
+                    If System.IO.Directory.Exists(MePoConfigPath) Then
+                        .InitialDirectory = MePoConfigPath
+                    Else
+                        .InitialDirectory = My.Application.Info.DirectoryPath
+                    End If
                     .FileName = "AMCUpdater_Settings.xml"
                     .CheckFileExists = False
                     .CheckPathExists = True
