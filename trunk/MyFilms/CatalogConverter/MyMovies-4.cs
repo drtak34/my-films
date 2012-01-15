@@ -80,7 +80,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("LocalTrailer/URL", "SourceTrailer");
             //ProfilerDict.Add("watched", "Watched");
             //ProfilerDict.Add("watcheddate", "WatchedDate");
-            //ProfilerDict.Add("IMDB_Id", "IMDB_Id");
+            ProfilerDict.Add("IMDB_Id", "IMDB_Id");
             //ProfilerDict.Add("TMDB_Id", "TMDB_Id");
         }
         public string ConvertMyMovies(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, bool OnlyFile)
@@ -355,7 +355,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     //WriteAntAtribute(destXml, "TagLine", Tagline);
                     //WriteAntAtribute(destXml, "Categories", Tags);
                     if (nodeIMDB != null)
-                      WriteAntAtribute(destXml, "IMDB", nodeIMDB.Value);
+                    {
+                      WriteAntAtribute(destXml, "IMDB", nodeIMDB.Value); // goes into "URL"
+                      WriteAntAtribute(destXml, "IMDB_Id", nodeIMDB.Value); // goes into "IMDB_Id" field
+                    }
                     WriteAntAtribute(destXml, "MovieFile", Source);
                     WriteAntAtribute(destXml, "LocalTrailer/URL", SourceTrailer);
 
