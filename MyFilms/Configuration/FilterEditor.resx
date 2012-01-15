@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,6 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="AntFreetextFilterItem.ToolTip" xml:space="preserve">
+    <value>USER-DEFINED VALUES
+
+User-defined values may be used within expressions to be compared against DB values. 
+String values should be enclosed within single quotes. Date values should be enclosed within pound signs (#). 
+Decimals and scientific notation are permissible for numeric values. For example:
+- "FirstName = 'John'"
+- "Price &lt;= 50.00"
+- "Birthdate &lt; #1/31/82#"
+
+For columns that contain enumeration values, cast the value to an integer data type. For example:
+- "EnumColumn = 5"
+
+OPERATORS
+Concatenation is allowed using Boolean AND, OR, and NOT operators. You can use parentheses to group clauses 
+and force precedence. The AND operator has precedence over other operators. 
+For example:
+- (LastName = 'Smith' OR LastName = 'Jones') AND FirstName = 'John'
+
+When creating comparison expressions, the following operators are allowed:
+
+&lt;
+&gt;
+&lt;=
+&gt;=
+&lt;&gt;
+=
+IN
+LIKE
+
+The following arithmetic operators are also supported in expressions:
++ (addition)
+- (subtraction)
+* (multiplication)
+/ (division)
+% (modulus)
+
+STRING OPERATORS
+
+To concatenate a string, use the + character. 
+Whether string comparisons are case-sensitive or not is determined by the value of the DataSet class's CaseSensitive property. 
+However, you can override that value with the DataTable class's CaseSensitive property.
+
+WILDCARD CHARACTERS
+
+Both the * and % can be used interchangeably for wildcards in a LIKE comparison. 
+If the string in a LIKE clause contains a * or %, those characters should be escaped in brackets ([]). 
+If a bracket is in the clause, the bracket characters should be escaped in brackets (for example [[] or []]). 
+A wildcard is allowed at the beginning and end of a pattern, or at the end of a pattern, or at the beginning of a pattern. 
+For example:
+- "ItemName LIKE '*product*'"
+- "ItemName LIKE '*product'"
+- "ItemName LIKE 'product*'"
+
+Wildcards are not allowed in the middle of a string. For example, 'te*xt' is not allowed.</value>
+  </data>
+  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
+    <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
+select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
+
+For example, if you have a configuration of movies for children to watch, 
+and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
+and define a filter to not include films when that field value equals ‘XXX’.  
+Define this configuration by default and a menu of other configurations will not appear, 
+so children will not be aware of any other configurations.
+
+Adult movies can then be included in another configuration that is password protected.
+
+Alterternatively you could define a "whitelist" config for children:
+Category LIKE '*Children*' will include all movies, that have Children as part of the Category
+Category LIKE 'Children' will include all movies, that have Children as Category
+
+Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions)
+not in
+like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
+  </data>
+  <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
+    <value>If you wish to filter records to be displayed, or records to be excluded for this particular view, 
+select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
+
+For example, if you have a configuration of movies for children to watch, 
+and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
+and define a filter to not include films when that field value equals ‘XXX’.  
+Define this configuration by default and a menu of other configurations will not appear, 
+so children will not be aware of any other configurations.
+
+Adult movies can then be included in another configuration that is password protected.
+
+Alterternatively you could define a "whitelist" config for children:
+Category LIKE '*Children*' will include all movies, that have Children as part of the Category
+Category LIKE 'Children' will include all movies, that have Children as Category
+
+Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions)
+not in
+like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

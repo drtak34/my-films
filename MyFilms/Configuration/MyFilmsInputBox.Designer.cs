@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyFilmsInputBox));
           this.label1 = new System.Windows.Forms.Label();
           this.textBoxNewName = new System.Windows.Forms.TextBox();
           this.buttonOK = new System.Windows.Forms.Button();
@@ -207,6 +208,7 @@
           this.Controls.Add(this.textBoxNewName);
           this.Controls.Add(this.label1);
           this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+          this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
           this.Name = "MyFilmsInputBox";
           this.Text = "MyFilmsInputBox";
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

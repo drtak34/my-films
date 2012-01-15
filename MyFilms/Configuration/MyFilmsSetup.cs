@@ -5840,5 +5840,30 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Config_Name.Text = StringExtensions.XmlCharacterWhitelist(Config_Name.Text).Replace(@"'", "");
         }
 
+        private void AntFilterSign1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AntFilterComb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAntViewFilter1_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText1.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK)
+          {
+            AntViewFilter1.Text = filterEditor.ConfigString;
+          }
+          else
+            MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
     }
 }

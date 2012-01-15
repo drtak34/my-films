@@ -633,30 +633,6 @@ The plugin needs to know what separator is used to indicate the role text for fi
 Note: Separators will need time to process - for person views (e.g. actors), you can speed up 
 the view sigificantly by defining only those separators you really need.</value>
   </data>
-  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
-    <value>Supprted filter operators:
-=
-like
-not like
-&lt;
-&gt;
-# executed as "&lt;&gt;"
-in (requires a list of allowed expressions, placeholders not allowed)
-not in
-like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
-
-Examples:
-"Number IN (1, 2, 3)"                    // integer values
-"Number NOT IN (1, 2, 3)"  // values not from the list
-"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
-"OriginalTitle LIKE 'j*'"       // values that start with 'j'
-"Actors LIKE '%jo%'"     // values that contain 'jo'
-"Category NOT LIKE 'j*'"   // values that don't start with 'j'
-"Category # 'Action' AND Category &lt;&gt; 'Horror'"
-"Category NOT IN ('Action', 'Horror')"
-"Actors IN ('Bruce Willis', 'Adriano Celentano')"
-"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
-  </data>
   <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
     <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
 select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
@@ -695,9 +671,13 @@ If a value is entered for the second parameter, only records containing that val
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
   </data>
-  <data name="AntViewFilter1.ToolTip" xml:space="preserve">
-    <value>THe filter allows you to restrict the displayed results.
-It works same way as "User defined config filters", but you can define them "per view".
+  <data name="lbl_AntViewFilter.ToolTip" xml:space="preserve">
+    <value>The Filter can be used to add any restriction to that specific View.
+You can use it the same way as "User defined config filters", but you can define them "per view".
+It as additional to the "Userdefined Config Filter", so if you already have defined a Config Filter, 
+you do not need to repeat that filter setting here.
+The edit buttom helps you to create filter rules.
+
 Example:
 "Category like 'Action'" only displays movies of this category.</value>
   </data>
@@ -718,6 +698,30 @@ Optional:
     <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
 As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
 </value>
+  </data>
+  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
+    <value>Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions, placeholders not allowed)
+not in
+like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
+
+Examples:
+"Number IN (1, 2, 3)"                    // integer values
+"Number NOT IN (1, 2, 3)"  // values not from the list
+"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
+"OriginalTitle LIKE 'j*'"       // values that start with 'j'
+"Actors LIKE '%jo%'"     // values that contain 'jo'
+"Category NOT LIKE 'j*'"   // values that don't start with 'j'
+"Category # 'Action' AND Category &lt;&gt; 'Horror'"
+"Category NOT IN ('Action', 'Horror')"
+"Actors IN ('Bruce Willis', 'Adriano Celentano')"
+"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
   </data>
   <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
     <value>"Only available" option acts as global overlayfilter for all views
