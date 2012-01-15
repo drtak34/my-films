@@ -1868,7 +1868,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private string ReReverseName(string reversedName)
     {
       if (reversedName.Contains(", ")) // "Re"Reverse Names "Willis, Bruce" --> "Bruce Willis"
-        return reversedName.Substring(reversedName.LastIndexOf(", ") + 1) + " " + reversedName.Substring(0, reversedName.LastIndexOf(", "));
+        return reversedName.Substring(reversedName.LastIndexOf(", ") + 2) + " " + reversedName.Substring(0, reversedName.LastIndexOf(", "));
       else 
         return reversedName;
     }
