@@ -630,7 +630,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.clearGUIProperty("picture");
 
-      #region init buttons and grister sort button handler ...
+      #region init buttons and register sort button handler ...
       GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearchT, GUILocalizeStrings.Get(137));
       BtnSrtBy.SortChanged -= new SortEventHandler(SortChanged);
       BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
@@ -644,6 +644,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
+
       if (!filmcover.Active) filmcover.Active = true;
       if (!viewcover.Active) viewcover.Active = true;
       if (!personcover.Active) personcover.Active = true;
@@ -709,7 +710,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (!InitialStart && IsDefaultConfig) InitMainScreen(false); // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
 
       }
-
+      base.OnPageLoad(); // let animations run  
       GUIWaitCursor.Init(); GUIWaitCursor.Show();
       Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) || IsDefaultConfig)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set      //new System.Threading.Thread(delegate()
       OnPageload_Step_2();
@@ -733,7 +734,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //    }, 0, 0, null);
       //}) { Name = "MyFilmsOnPageLoadWorker", IsBackground = true }.Start();
       
-      base.OnPageLoad(); // let animations run  
+      // base.OnPageLoad(); // let animations run  
     }
 
     private void OnPageload_Step_2()
@@ -2981,7 +2982,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //GUIControl.ShowControl(GetID, 34);
             //Load_Rating(0); // old method - nor more used
             Clear_Logos(); // reset logos
-
+            SetDummyControlsForFacade(conf.ViewContext);
           }
           #endregion
           else
@@ -2997,7 +2998,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string fanartTitle = sTitles.FanartTitle;
             if (currentItem.TVTag.ToString() == "group")
             {
-              this.SetDummyControlsForFacade(ViewContext.MovieCollection);
+              SetDummyControlsForFacade(ViewContext.MovieCollection);
               fanartTitle = currentItem.Label; // movie collections in film list
 
               Regex p = new Regex(@"\([0-9]*\)"); // count in brackets
@@ -3413,7 +3414,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("GetSelectFromMenuView() - launched with showall = '" + showall + "'");
       GUIControl.ShowControl(GetID, 34); // hide film controls ...
-      this.SetDummyControlsForFacade(ViewContext.Menu); // reset all covers ...
+      SetDummyControlsForFacade(ViewContext.Menu); // reset all covers ...
 
       conf.ViewContext = (showall) ? ViewContext.MenuAll : ViewContext.Menu;
       // conf.StrSelect = ""; // reset movie filter for views
@@ -4577,9 +4578,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         default: // default sorter
           if (WStrSortSens == " ASC")
           {
-            //IComparer myComparer = new AlphanumComparatorFast();
-            //w_tableau.Sort(0, w_tableau.Count, myComparer);
-            w_tableau.Sort(0, w_tableau.Count, null);
+            IComparer myComparer = new myForwarderClass();
+            w_tableau.Sort(0, w_tableau.Count, myComparer);
+            //w_tableau.Sort(0, w_tableau.Count, null);
           }
           else
           {
@@ -4689,14 +4690,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //else
         champselect = w_tableau[wi].ToString();
 
-        if (!MyFilms.conf.Boolindexed && string.Compare(champselect, wchampselect, true) == 0) // Are the strings equal? Then add count!
+        if (!MyFilms.conf.Boolindexed && string.Compare(champselect, wchampselect, StringComparison.OrdinalIgnoreCase) == 0)  // if (!MyFilms.conf.Boolindexed && string.Compare(champselect, wchampselect, true) == 0) // Are the strings equal? Then add count!
         {
           Wnb_enr++; // count items of distinct property
         }
-        else if (MyFilms.conf.Boolindexed && string.Compare(champselect, 0, wchampselect, 0, MyFilms.conf.IndexedChars, CultureInfo.CurrentCulture, CompareOptions.OrdinalIgnoreCase) == 0)
+        else if (MyFilms.conf.Boolindexed && string.Compare(champselect, 0, wchampselect, 0, MyFilms.conf.IndexedChars, StringComparison.OrdinalIgnoreCase) == 0) //  CultureInfo.CurrentCulture, CompareOptions.OrdinalIgnoreCase
         {
           Wnb_enr++; // count items of distinct property
-          if (string.Compare(champselect, wchampselectIndexed, true) != 0)
+          if (string.Compare(champselect, wchampselectIndexed, StringComparison.OrdinalIgnoreCase) != 0)
           {
             Wnb_enrIndexed++;
             wchampselectIndexed = champselect;
@@ -4704,7 +4705,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          if (conf.Wstar == "*" || ListConditionTrue(champselect, conf.Wstar, conf.Boolindexed))
+          if (conf.Wstar == "*" || ListConditionTrue(champselect, conf.Wstar, conf.Boolindexedreturn))
           {
             if (Wnb_enr > 0 && (wchampselect.Length > 0 || conf.BoolShowEmptyValuesInViews))
             {
@@ -4794,7 +4795,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
       GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
-      // SetDummyControlsForFacade(conf.ViewContext); .. will be set in Lst_Detailed... don't do it here as dupe !
+      // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
       #endregion
     }
 
@@ -4805,15 +4806,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string[] split = filterlist.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
         foreach (string s in split)
         {
-          // if (champselect.ToUpper().Contains(s.Trim().ToUpper())) return true;
-          if (champselect.IndexOf(s.Trim(), StringComparison.OrdinalIgnoreCase) >= 0) return true;
+          if (indexedview)
+          {
+            if (champselect.StartsWith(s.Trim(), StringComparison.OrdinalIgnoreCase))
+              return true;
+          }
+          else
+          {
+            // if (champselect.ToUpper().Contains(s.Trim().ToUpper())) return true;
+            if (champselect.IndexOf(s.Trim(), StringComparison.OrdinalIgnoreCase) >= 0) 
+              return true;
+          }
         }
       }
       else
       {
         if (indexedview) // if (filterlist.Length == 1) // if it's single character compare, use it as "first character"
         {
-          if (champselect.StartsWith(filterlist, StringComparison.OrdinalIgnoreCase))
+          if (champselect.StartsWith(filterlist, StringComparison.OrdinalIgnoreCase)) 
             return true;
           else
             return false;
@@ -5200,7 +5210,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //----------------------------------------------------------------------------------------------
     static int NormalCompare(object x, object y)
     {
-      return string.Compare(x.ToString(), y.ToString(), StringComparison.CurrentCultureIgnoreCase);
+      return string.Compare(x.ToString(), y.ToString(), StringComparison.OrdinalIgnoreCase); // StringComparison.CurrentCultureIgnoreCase
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //  Forward Sort
+    //----------------------------------------------------------------------------------------------
+    public class myForwarderClass : IComparer
+    {
+      // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
+      int IComparer.Compare(Object x, Object y)
+      {
+        //CompareOptions compareOptions = CompareOptions.IgnoreCase | CompareOptions.IgnoreWidth | CompareOptions.IgnoreNonSpace;
+        //string.Compare(strA, strB, CultureInfo.CurrentCulture, compareOptions) == 0
+        //int i = String.Compare(x.ToString(), y.ToString(), StringComparison.OrdinalIgnoreCase);
+        //if (i == 0) 
+        //  return String.CompareOrdinal(x.ToString(), y.ToString());
+        //else
+        //  return i;  // return ((new CaseInsensitiveComparer(CultureInfo.InvariantCulture)).Compare(x, y));
+        return String.Compare(x.ToString(), y.ToString(), StringComparison.OrdinalIgnoreCase);
+      }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -5211,7 +5240,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
       int IComparer.Compare(Object x, Object y)
       {
-        return ((new CaseInsensitiveComparer()).Compare(y, x));
+        return String.Compare(y.ToString(), x.ToString(), StringComparison.OrdinalIgnoreCase);  // return String.CompareOrdinal(y.ToString(), x.ToString());  //return ((new CaseInsensitiveComparer()).Compare(y, x));
       }
     }
 
@@ -5798,20 +5827,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
 
       LogMyFilms.Debug("Fin_Charge_Init(): (re)load done - now do action for currentViewContext = '" + conf.ViewContext + "'");
-      if (conf.ViewContext == ViewContext.Menu)
+      if (conf.ViewContext == ViewContext.None)
       {
+        conf.StrSelect = conf.StrTitle1 + " not like ''";
+        conf.Boolselect = false;
+        conf.Boolindexed = false;
+        conf.Boolindexedreturn = false;
+        SetLabelView("all");
+        GetFilmList(conf.StrIndex);
+
         Change_LayOut(0);
         SetLabelSelect("menu");
         GetSelectFromMenuView(false); // load views into facade ...
       }
-      else
-        if (conf.ViewContext == ViewContext.MenuAll)
+      else if (conf.ViewContext == ViewContext.Menu)
+        {
+          Change_LayOut(0);
+          SetLabelSelect("menu");
+          GetSelectFromMenuView(false); // load views into facade ...
+        }
+        else
+          if (conf.ViewContext == ViewContext.MenuAll)
         {
           Change_LayOut(0);
           GetSelectFromMenuView(true); // load views into facade ...
         }
-        else
-          if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
+        else  if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
       #region If LoadParams - Check and set single movie in current config ...
       {
         LogMyFilms.Debug("Fin_Charge_Init() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
