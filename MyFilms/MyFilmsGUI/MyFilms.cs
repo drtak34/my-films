@@ -2985,9 +2985,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             personcover.Filename = conf.FileImage; // ToDo: has to be conditional
             filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
 
-            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
+            groupcover.Filename = conf.FileImage; // to be set to group collection covers
 
-            //GUIControl.ShowControl(GetID, 34);
+            GUIControl.ShowControl(GetID, 34);
             //Load_Rating(0); // old method - nor more used
             Clear_Logos(); // reset logos
             SetDummyControlsForFacade(conf.ViewContext);
