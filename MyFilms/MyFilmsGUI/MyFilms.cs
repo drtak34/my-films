@@ -1583,7 +1583,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (GetPrevFilmList()) 
                   return; //  GetSelectFromMenuView(false); // changed to directly call manu instead of "full film list" if (GetPrevFilmList()) return;
                 else
-                  GetSelectFromMenuView(false); 
+                {
+                  GetSelectFromMenuView(false);
+                  return;
+                } 
               }
               if (conf.Boolreturn)
               {
@@ -1602,8 +1605,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               if (GetPrevFilmList()) 
                 return; // disabled, as we don't want to go back to full film list by default anymore (menu instead)
-
-              GetSelectFromMenuView(false); // Call simple Menu ...
+              else
+              {
+                GetSelectFromMenuView(false); // Call simple Menu ...
+                return;
+              }
               break;
           }
           break;
@@ -3352,7 +3358,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //if (!counts.ContainsKey(champselect)) counts.Add(champselect, 1);
             //else counts[champselect]++;
           }
-            
         }
         else
         {
@@ -3572,13 +3577,46 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (!conf.OnlyTitleList && string.IsNullOrEmpty(countitem.Label2))
             {
-              string newLabel = CountViewItems(countitem.DVDLabel).ToString();
-              if (StopMenuCountThread) 
-                break;
-              countitem.Label2 = newLabel;
+              string newLabel = countitem.Label2;
+              if (!countitem.DVDLabel.ToLower().StartsWith("view"))
+              {
+                newLabel = CountViewItems(countitem.DVDLabel).ToString();
+                if (StopMenuCountThread)
+                  break;
+                countitem.Label2 = newLabel;
+              }
+              else
+              {
+                for (int i = 0; i < 5; i++) // check for userdefined views ...
+                {
+                  if (Helper.FieldIsSet(conf.StrViewItem[i]))
+                  {
+                    if (countitem.DVDLabel == (string.Format("View{0}", i)))
+                    {
+                      if (string.IsNullOrEmpty(conf.StrViewValue[i]))
+                      {
+                        //item.Label2 = r.Select(p => (string)p[conf.StrViewItem[i]]).Distinct(StringComparer.OrdinalIgnoreCase).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
+                        newLabel = CountViewItems(conf.StrViewItem[i]).ToString();
+                        if (StopMenuCountThread)
+                          break;
+                        countitem.Label2 = newLabel;
+                      }
+                      else
+                      {
+                        item.Label2 = "('" + conf.StrViewValue[i] + "')";
+                        //item.Label2 = "(" + conf.StrViewValue[i] + ") " + r.Select(p => p[conf.StrViewItem[i]].Equals(conf.StrViewValue[i])).Count().ToString();
+                        //where d.Element("ProductName").Value.IndexOf(textBox1.Text, StringComparison.InvariantCultureIgnoreCase) > 0                        
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
-          catch (Exception) { }
+          catch (Exception ex)
+          {
+            LogMyFilms.DebugException("CountItems - Exception: ", ex);
+          }
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
