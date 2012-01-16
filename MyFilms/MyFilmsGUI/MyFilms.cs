@@ -3572,6 +3572,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
         foreach (GUIListItem countitem in items)
         {
+          #region count items
           if (StopMenuCountThread) break;
           try
           {
@@ -3617,6 +3618,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             LogMyFilms.DebugException("CountItems - Exception: ", ex);
           }
+          #endregion
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -3624,7 +3626,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //conf.ViewContext = ViewContext.Menu;
             return 0;
           }, 0, 0, null);
-      }) { Name = "MyFilmsMenuCountWorker", IsBackground = true }.Start(threadlist);
+      }) { Name = "MyFilmsMenuCountWorker", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start(threadlist);
       return;
     }
 
