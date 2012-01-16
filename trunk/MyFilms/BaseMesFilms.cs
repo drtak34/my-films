@@ -779,7 +779,8 @@ namespace MyFilmsPlugin.MyFilms
             int iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
             movieRow.AgeAdded = iAge.ToString();
             movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
-            movieRow.IndexedTitle = movieRow[MyFilms.conf.StrTitle1].ToString().Substring(0, 1).ToUpper();
+            string index = movieRow[MyFilms.conf.StrTitle1].ToString();
+            movieRow.IndexedTitle = (index.Length > 0) ?  index.Substring(0, 1).ToUpper() : "";
             // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
             movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " ");
             // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
