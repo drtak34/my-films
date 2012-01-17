@@ -2260,6 +2260,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{7df28536-41ca-4150-a806-804d4175a477}-TMDB-DE-Person.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-Person.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\MyMovies-IT.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c22fb8bc-e5d2-409c-a6ab-70d600d0bf54}-MyMovies-IT.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\MyMovies-IT.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3592,9 +3599,9 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Config" />
           </Items>
         </SubSystemsUsed>
@@ -3612,7 +3619,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1797</Revision>
+      <Revision>1873</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3624,7 +3631,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-12-17T18:00:14.5940284+01:00</ReleaseDate>
+    <ReleaseDate>2012-01-17T04:22:26.7298021+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -5880,6 +5887,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\TMDB-DE-Person.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7df28536-41ca-4150-a806-804d4175a477}-TMDB-DE-Person.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-Person.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\MyMovies-IT.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c22fb8bc-e5d2-409c-a6ab-70d600d0bf54}-MyMovies-IT.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\MyMovies-IT.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
