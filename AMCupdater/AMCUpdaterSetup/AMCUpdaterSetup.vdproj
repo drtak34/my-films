@@ -363,6 +363,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F620DB441BC240E29BEBCC6539DFA408"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_FA32D11B67A15BF8584DB5F1E0CA1B56"
         "OwnerKey" = "8:_33D936DA92184A1AB462B3BED2C945C8"
         "MsmSig" = "8:_UNDEFINED"
@@ -406,12 +412,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FA32D11B67A15BF8584DB5F1E0CA1B56"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4502E2672DB911EED787988A704ED42B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -425,6 +425,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_ADB2F7E29EDB3BF8DBEEF528FE70CC51"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FA32D11B67A15BF8584DB5F1E0CA1B56"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1447,7 +1453,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Grabber, Version=5.2.0.1734, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Grabber, Version=5.2.0.1873, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_EBFA3CA42915232732A9929E0227433F"
@@ -1478,6 +1484,26 @@
             {
             "SourcePath" = "8:..\\..\\Installer\\Config\\scripts\\MyFilms\\IMDB-Full.xml"
             "TargetName" = "8:IMDB-Full.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_C34CBD5D82944DC38BA4B056F9D323B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F620DB441BC240E29BEBCC6539DFA408"
+            {
+            "SourcePath" = "8:..\\..\\Installer\\Config\\scripts\\MyFilms\\MyMovies-IT.xml"
+            "TargetName" = "8:MyMovies-IT.xml"
             "Tag" = "8:"
             "Folder" = "8:_C34CBD5D82944DC38BA4B056F9D323B7"
             "Condition" = "8:"
@@ -1624,7 +1650,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AMC Updater"
         "ProductCode" = "8:{27BDD2CD-AA4F-46C1-A3BD-8230AEF96422}"
-        "PackageCode" = "8:{8CB78A0F-73FD-4B73-8905-8681DC360199}"
+        "PackageCode" = "8:{E431E53E-5C6F-4FBA-A569-D6D1E2BE8EE7}"
         "UpgradeCode" = "8:{6C05476F-DF35-4F16-91CF-6F4AB31A1CD1}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
