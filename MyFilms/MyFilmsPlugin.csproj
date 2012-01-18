@@ -218,11 +218,13 @@
     <Compile Include="Utils\CString.cs" />
     <Compile Include="CatalogConverter\EaxMovieCatalog.cs" />
     <Compile Include="Utils\FastImage.cs" />
+    <Compile Include="Utils\GUIUtils.cs" />
     <Compile Include="Utils\Helper.cs" />
     <Compile Include="Utils\LocalizeStrings.cs" />
     <Compile Include="CatalogConverter\MovieCollector.cs" />
     <Compile Include="CatalogConverter\MyMovies.cs" />
     <Compile Include="Utils\Logos.cs" />
+    <Compile Include="Utils\StringEnum.cs" />
     <Compile Include="Utils\Translations.cs" />
     <Compile Include="Utils\XmlSettings.cs" />
     <Compile Include="Utils\Utility.cs" />

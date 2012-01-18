@@ -5643,7 +5643,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                 {
                   // GUIControl.ShowControl(GetID, 35);
-                  if (wfanart[1] == "dir")
+                  if (wfanart[1] == "dir" && ImgFanartDir != null)
                   {
                     ImgFanartDir.TexturePath = wfanart[0];
                     ImgFanartDir.PreAllocResources();
@@ -8791,8 +8791,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             string property = "#myfilms." + name;
             if (log)
-            LogMyFilms.Debug("setGuiProperty [{0}]: '{1}'", property, value);
-            GUIPropertyManager.SetProperty(property, value);
+            LogMyFilms.Debug("setGuiProperty [{0}]: '{1}' - nonsanitized input: '{2}'", property, StringExtensions.SanitizeXmlString(value), value);
+            GUIPropertyManager.SetProperty(property, StringExtensions.SanitizeXmlString(value));
         }
 
         //void clearGUIProperty(guiProperty name)
@@ -8812,7 +8812,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return result.ToString();
         }
         
-      public static void clearGUIProperty(string name)
+        public static void clearGUIProperty(string name)
         {
           setGUIProperty(name, string.Empty, MyFilms.DebugPropertyLogging);
         }

@@ -349,7 +349,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
           return false;
         }
 
-    /// <summary>
+        /// <summary>
         /// Removes multiple spaces and replaces them with one space   
         /// </summary>
         /// <param name="input"></param>
@@ -358,7 +358,6 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         {
           return Regex.Replace(input, @"\s{2,}", " ").Trim();
         }
-
 
         #endregion
 
