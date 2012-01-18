@@ -183,11 +183,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
               if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && 
                    dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart")
-                  && (CatalogType.SelectedIndex != 0 || 
-                  (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" && 
-                   dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && 
-                   dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && 
-                   dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite"))
+                  && (CatalogType.SelectedIndex != 0 ||
+                  (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
+                   dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
+                   dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
+                   dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" && 
+                   dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3"))
                 )
               {
                 if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
@@ -1231,6 +1232,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
+            this.AddRemoveExtendedfields((CatalogType.SelectedIndex > 0));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
             AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
             MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntPicture", "");
@@ -1548,6 +1550,118 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
         }
 
+        private void AddRemoveExtendedfields(bool isXtended)
+        {
+          AntMovieCatalog ds = new AntMovieCatalog();
+          foreach (DataColumn dc in ds.Movie.Columns)
+          {
+            if (IsExtendedField(dc.ColumnName))
+            {
+              if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
+                  dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
+                  dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
+              {
+                if (AntStorage.Items.Contains(dc.ColumnName)) AntStorage.Items.Remove(dc.ColumnName);
+                if (isXtended) AntStorage.Items.Add(dc.ColumnName);
+                if (AntStorageTrailer.Items.Contains(dc.ColumnName)) AntStorageTrailer.Items.Remove(dc.ColumnName);
+                if (isXtended) AntStorageTrailer.Items.Add(dc.ColumnName);
+              }
+
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+              {
+                if (AntFilterItem1.Items.Contains(dc.ColumnName)) AntFilterItem1.Items.Remove(dc.ColumnName);
+                if (isXtended) AntFilterItem1.Items.Add(dc.ColumnName);
+                if (AntFilterItem2.Items.Contains(dc.ColumnName)) AntFilterItem2.Items.Remove(dc.ColumnName);
+                if (isXtended) AntFilterItem2.Items.Add(dc.ColumnName);
+                if (AntItem1.Items.Contains(dc.ColumnName)) AntItem1.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItem1.Items.Add(dc.ColumnName);
+                if (AntItem2.Items.Contains(dc.ColumnName)) AntItem2.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItem2.Items.Add(dc.ColumnName);
+                if (AntItem3.Items.Contains(dc.ColumnName)) AntItem3.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItem3.Items.Add(dc.ColumnName);
+                if (AntItem4.Items.Contains(dc.ColumnName)) AntItem4.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItem4.Items.Add(dc.ColumnName);
+                if (AntItem5.Items.Contains(dc.ColumnName)) AntItem5.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItem5.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
+              {
+                if (AntSearchField.Items.Contains(dc.ColumnName)) AntSearchField.Items.Remove(dc.ColumnName);
+                if (isXtended) AntSearchField.Items.Add(dc.ColumnName);
+                if (AntUpdField.Items.Contains(dc.ColumnName)) AntUpdField.Items.Remove(dc.ColumnName);
+                if (isXtended) AntUpdField.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
+                  dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
+                  dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" &&
+                  dc.ColumnName != "URL" && dc.ColumnName != "RecentlyAdded")
+              {
+                if (SField1.Items.Contains(dc.ColumnName)) SField1.Items.Remove(dc.ColumnName);
+                if (isXtended) SField1.Items.Add(dc.ColumnName);
+                if (SField2.Items.Contains(dc.ColumnName)) SField2.Items.Remove(dc.ColumnName);
+                if (isXtended) SField2.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Number")
+              {
+                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem1.Items.Remove(dc.ColumnName);
+                if (isXtended) AntViewItem1.Items.Add(dc.ColumnName);
+                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem2.Items.Remove(dc.ColumnName);
+                if (isXtended) AntViewItem2.Items.Add(dc.ColumnName);
+                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem3.Items.Remove(dc.ColumnName);
+                if (isXtended) AntViewItem3.Items.Add(dc.ColumnName);
+                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem4.Items.Remove(dc.ColumnName);
+                if (isXtended) AntViewItem4.Items.Add(dc.ColumnName);
+                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem5.Items.Remove(dc.ColumnName);
+                if (isXtended) AntViewItem5.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                if (SField1.Items.Contains(dc.ColumnName)) AntSearchItem1.Items.Remove(dc.ColumnName);
+                if (isXtended) AntSearchItem1.Items.Add(dc.ColumnName);
+                if (SField1.Items.Contains(dc.ColumnName)) AntSearchItem2.Items.Remove(dc.ColumnName);
+                if (isXtended) AntSearchItem2.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                  dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                if (AntIdentItem.Items.Contains(dc.ColumnName)) AntIdentItem.Items.Remove(dc.ColumnName);
+                AntIdentItem.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                if (AntUpdItem1.Items.Contains(dc.ColumnName)) AntUpdItem1.Items.Remove(dc.ColumnName);
+                if (isXtended) AntUpdItem1.Items.Add(dc.ColumnName);
+                if (AntUpdItem2.Items.Contains(dc.ColumnName)) AntUpdItem2.Items.Remove(dc.ColumnName);
+                if (isXtended) AntUpdItem2.Items.Add(dc.ColumnName);
+                if (cbfdupdate.Items.Contains(dc.ColumnName)) cbfdupdate.Items.Remove(dc.ColumnName);
+                if (isXtended) cbfdupdate.Items.Add(dc.ColumnName);
+                if (cbWatched.Items.Contains(dc.ColumnName)) cbWatched.Items.Remove(dc.ColumnName);
+                if (isXtended) cbWatched.Items.Add(dc.ColumnName);
+                if (CmdPar.Items.Contains(dc.ColumnName)) CmdPar.Items.Remove(dc.ColumnName);
+                if (isXtended) CmdPar.Items.Add(dc.ColumnName);
+              }
+            }
+          }
+        }
+
+        private bool IsExtendedField(string DbField)
+        {
+          if (DbField == "IMDB_Id" || DbField == "TMDB_Id" || DbField == "Watched" || DbField == "Certification" ||
+               DbField == "Writer" || DbField == "SourceTrailer" || DbField == "TagLine" || DbField == "Tags" ||
+               DbField == "RatingUser" || DbField == "Studio" || DbField == "IMDB_Rank" || DbField != "Edition" ||
+               DbField == "Aspectratio" || DbField == "CategoryTrakt" || DbField == "Favorite" ||
+               DbField == "CustomField1" || DbField == "CustomField2" || DbField == "CustomField3") 
+            return true;
+          else 
+            return false;
+        }
+    
+    
         private void Refresh_Tabs(bool enable)
         {
           if (!enable)
