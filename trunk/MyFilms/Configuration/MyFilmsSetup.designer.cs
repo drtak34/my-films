@@ -353,6 +353,11 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBox_SupplementaryView = new System.Windows.Forms.GroupBox();
+          this.btnAntViewFilter5 = new System.Windows.Forms.Button();
+          this.btnAntViewFilter4 = new System.Windows.Forms.Button();
+          this.btnAntViewFilter3 = new System.Windows.Forms.Button();
+          this.btnAntViewFilter2 = new System.Windows.Forms.Button();
+          this.btnAntViewFilter1 = new System.Windows.Forms.Button();
           this.AntViewFilter5 = new System.Windows.Forms.TextBox();
           this.AntViewFilter4 = new System.Windows.Forms.TextBox();
           this.AntViewFilter3 = new System.Windows.Forms.TextBox();
@@ -562,11 +567,6 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.btnAntViewFilter1 = new System.Windows.Forms.Button();
-          this.btnAntViewFilter2 = new System.Windows.Forms.Button();
-          this.btnAntViewFilter3 = new System.Windows.Forms.Button();
-          this.btnAntViewFilter4 = new System.Windows.Forms.Button();
-          this.btnAntViewFilter5 = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -3316,7 +3316,6 @@
           this.AntFilterComb.Name = "AntFilterComb";
           this.AntFilterComb.Size = new System.Drawing.Size(43, 21);
           this.AntFilterComb.TabIndex = 18;
-          this.AntFilterComb.SelectedIndexChanged += new System.EventHandler(this.AntFilterComb_SelectedIndexChanged);
           // 
           // AntFilterSign2
           // 
@@ -3356,7 +3355,6 @@
           this.AntFilterSign1.Size = new System.Drawing.Size(60, 21);
           this.AntFilterSign1.TabIndex = 20;
           this.ToolTip1.SetToolTip(this.AntFilterSign1, resources.GetString("AntFilterSign1.ToolTip"));
-          this.AntFilterSign1.SelectedIndexChanged += new System.EventHandler(this.AntFilterSign1_SelectedIndexChanged);
           // 
           // AntFilterItem2
           // 
@@ -3592,6 +3590,56 @@
           this.groupBox_SupplementaryView.TabStop = false;
           this.groupBox_SupplementaryView.Text = "User defined Views";
           this.ToolTip1.SetToolTip(this.groupBox_SupplementaryView, resources.GetString("groupBox_SupplementaryView.ToolTip"));
+          // 
+          // btnAntViewFilter5
+          // 
+          this.btnAntViewFilter5.Location = new System.Drawing.Point(418, 146);
+          this.btnAntViewFilter5.Name = "btnAntViewFilter5";
+          this.btnAntViewFilter5.Size = new System.Drawing.Size(26, 20);
+          this.btnAntViewFilter5.TabIndex = 46;
+          this.btnAntViewFilter5.Text = "...";
+          this.btnAntViewFilter5.UseVisualStyleBackColor = true;
+          this.btnAntViewFilter5.Click += new System.EventHandler(this.btnAntViewFilter5_Click);
+          // 
+          // btnAntViewFilter4
+          // 
+          this.btnAntViewFilter4.Location = new System.Drawing.Point(417, 120);
+          this.btnAntViewFilter4.Name = "btnAntViewFilter4";
+          this.btnAntViewFilter4.Size = new System.Drawing.Size(27, 20);
+          this.btnAntViewFilter4.TabIndex = 45;
+          this.btnAntViewFilter4.Text = "...";
+          this.btnAntViewFilter4.UseVisualStyleBackColor = true;
+          this.btnAntViewFilter4.Click += new System.EventHandler(this.btnAntViewFilter4_Click);
+          // 
+          // btnAntViewFilter3
+          // 
+          this.btnAntViewFilter3.Location = new System.Drawing.Point(417, 95);
+          this.btnAntViewFilter3.Name = "btnAntViewFilter3";
+          this.btnAntViewFilter3.Size = new System.Drawing.Size(27, 19);
+          this.btnAntViewFilter3.TabIndex = 44;
+          this.btnAntViewFilter3.Text = "...";
+          this.btnAntViewFilter3.UseVisualStyleBackColor = true;
+          this.btnAntViewFilter3.Click += new System.EventHandler(this.btnAntViewFilter3_Click);
+          // 
+          // btnAntViewFilter2
+          // 
+          this.btnAntViewFilter2.Location = new System.Drawing.Point(418, 68);
+          this.btnAntViewFilter2.Name = "btnAntViewFilter2";
+          this.btnAntViewFilter2.Size = new System.Drawing.Size(26, 20);
+          this.btnAntViewFilter2.TabIndex = 43;
+          this.btnAntViewFilter2.Text = "...";
+          this.btnAntViewFilter2.UseVisualStyleBackColor = true;
+          this.btnAntViewFilter2.Click += new System.EventHandler(this.btnAntViewFilter2_Click);
+          // 
+          // btnAntViewFilter1
+          // 
+          this.btnAntViewFilter1.Location = new System.Drawing.Point(418, 42);
+          this.btnAntViewFilter1.Name = "btnAntViewFilter1";
+          this.btnAntViewFilter1.Size = new System.Drawing.Size(26, 20);
+          this.btnAntViewFilter1.TabIndex = 42;
+          this.btnAntViewFilter1.Text = "...";
+          this.btnAntViewFilter1.UseVisualStyleBackColor = true;
+          this.btnAntViewFilter1.Click += new System.EventHandler(this.btnAntViewFilter1_Click);
           // 
           // AntViewFilter5
           // 
@@ -5760,52 +5808,6 @@
           // 
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
-          // 
-          // btnAntViewFilter1
-          // 
-          this.btnAntViewFilter1.Location = new System.Drawing.Point(418, 42);
-          this.btnAntViewFilter1.Name = "btnAntViewFilter1";
-          this.btnAntViewFilter1.Size = new System.Drawing.Size(26, 20);
-          this.btnAntViewFilter1.TabIndex = 42;
-          this.btnAntViewFilter1.Text = "...";
-          this.btnAntViewFilter1.UseVisualStyleBackColor = true;
-          this.btnAntViewFilter1.Click += new System.EventHandler(this.btnAntViewFilter1_Click);
-          // 
-          // btnAntViewFilter2
-          // 
-          this.btnAntViewFilter2.Location = new System.Drawing.Point(418, 68);
-          this.btnAntViewFilter2.Name = "btnAntViewFilter2";
-          this.btnAntViewFilter2.Size = new System.Drawing.Size(26, 20);
-          this.btnAntViewFilter2.TabIndex = 43;
-          this.btnAntViewFilter2.Text = "...";
-          this.btnAntViewFilter2.UseVisualStyleBackColor = true;
-          // 
-          // btnAntViewFilter3
-          // 
-          this.btnAntViewFilter3.Location = new System.Drawing.Point(417, 95);
-          this.btnAntViewFilter3.Name = "btnAntViewFilter3";
-          this.btnAntViewFilter3.Size = new System.Drawing.Size(27, 19);
-          this.btnAntViewFilter3.TabIndex = 44;
-          this.btnAntViewFilter3.Text = "...";
-          this.btnAntViewFilter3.UseVisualStyleBackColor = true;
-          // 
-          // btnAntViewFilter4
-          // 
-          this.btnAntViewFilter4.Location = new System.Drawing.Point(417, 120);
-          this.btnAntViewFilter4.Name = "btnAntViewFilter4";
-          this.btnAntViewFilter4.Size = new System.Drawing.Size(27, 20);
-          this.btnAntViewFilter4.TabIndex = 45;
-          this.btnAntViewFilter4.Text = "...";
-          this.btnAntViewFilter4.UseVisualStyleBackColor = true;
-          // 
-          // btnAntViewFilter5
-          // 
-          this.btnAntViewFilter5.Location = new System.Drawing.Point(418, 146);
-          this.btnAntViewFilter5.Name = "btnAntViewFilter5";
-          this.btnAntViewFilter5.Size = new System.Drawing.Size(26, 20);
-          this.btnAntViewFilter5.TabIndex = 46;
-          this.btnAntViewFilter5.Text = "...";
-          this.btnAntViewFilter5.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
