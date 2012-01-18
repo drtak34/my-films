@@ -1693,9 +1693,11 @@ namespace MyFilmsPlugin.MyFilms
           }
 
           // sort descending by dateadded
-          movielist = movielist.OrderByDescending(x => x.DateTime).ToList();
-          //movielist.Sort((x, y) => -x.DateTime.CompareTo(y.DateTime)); // minus is for descending order... saves movielist.Reverse();
-          LogMyFilms.Debug("GetMostRecent() - retrieving (nonlimited) movies: '" + movielist.Count + "'");
+          movielist = movielist.OrderByDescending(x => x.DateTime).ToList(); //movielist.Sort((x, y) => -x.DateTime.CompareTo(y.DateTime)); // minus is for descending order... saves movielist.Reverse();
+          LogMyFilms.Debug("GetMostRecent() - result of nonlimited movies: '" + movielist.Count + "'");
+
+          movielist = movielist.Distinct(new DistinctItemComparer()).ToList();
+          LogMyFilms.Debug("GetMostRecent() - result of nonlimited movies without dupes: '" + movielist.Count + "'");
 
           // now apply the result count limit
           movielist = movielist.Take(limit).ToList();
@@ -1713,6 +1715,20 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("GetMostRecent() - Returning '" + movielistwithartwork.Count + "' movies.");
           return movielistwithartwork;
         }
+
+        class DistinctItemComparer : IEqualityComparer<MFMovie>
+        {
+          public bool Equals(MFMovie x, MFMovie y)
+          {
+            return x.Title == y.Title &&
+                x.File == y.File;
+          }
+          public int GetHashCode(MFMovie obj)
+          {
+            return obj.Title.GetHashCode() ^
+                obj.File.GetHashCode();
+          }
+        }        
         #endregion
 
         public static string Translate_Column(string Column)
