@@ -5840,16 +5840,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Config_Name.Text = StringExtensions.XmlCharacterWhitelist(Config_Name.Text).Replace(@"'", "");
         }
 
-        private void AntFilterSign1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AntFilterComb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAntViewFilter1_Click(object sender, EventArgs e)
         {
           FilterEditor filterEditor = new FilterEditor();
@@ -5857,13 +5847,52 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           filterEditor.MasterTitle = AntTitle1.Text;
           filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
           filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK)
-          {
-            AntViewFilter1.Text = filterEditor.ConfigString;
-          }
-          else
-            MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter1.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
+        private void btnAntViewFilter2_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText2.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter2.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAntViewFilter3_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText3.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter3.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAntViewFilter4_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText4.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter4.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAntViewFilter5_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText5.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter5.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
