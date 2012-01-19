@@ -46,15 +46,15 @@ namespace MyFilmsPlugin.MyFilms.Utils
 		/// <summary>
 		/// Fonction de cryptage : elle necessite en argument une chaîne de caractères,
 		/// et renvoie une chaîne de caractères cryptée (cipher-text).
-		/// </summary>
 		/// <param name=" TexteBrut"></param>
 		/// <returns name="string CypherTexte"></returns>
-		// ***************************************************************************
+    /// </summary>
+    // ***************************************************************************
 
 		public string Crypter(string TexteBrut)
 		{
-            if (TexteBrut.Length == 0)
-              return string.Empty;
+      if (TexteBrut.Length == 0)
+        return string.Empty;
 			MemoryStream CypherTexteMem = new MemoryStream();
 			
 			CryptoStream CStream = new CryptoStream(CypherTexteMem, 
@@ -78,15 +78,15 @@ namespace MyFilmsPlugin.MyFilms.Utils
 		/// <summary>
 		/// Fonction de décryptage : elle necessite en argument une chaîne de 
 		/// caractères cryptés (cipher-text) et renvoie une chaîne de caractères.
-		/// </summary>
-		/// <param name="string CypherTexte"></param>
-		/// <returns name="string Textebrut"></returns>
-		// ***************************************************************************
+		/// <param name="CypherTexte"></param>
+		/// <returns name="Textebrut"></returns>
+    /// </summary>
+    // ***************************************************************************
 
 		public string Decrypter(string CypherTexte)
 		{
-            if (CypherTexte.Length == 0)
-              return string.Empty;	
+      if (CypherTexte.Length == 0)
+        return string.Empty;	
 			MemoryStream CypherTexteMem = new MemoryStream(new UnicodeEncoding().GetBytes(CypherTexte));
 			
 			CryptoStream CStream = new CryptoStream(CypherTexteMem, rj.CreateDecryptor(Clef, Vect),CryptoStreamMode.Read);

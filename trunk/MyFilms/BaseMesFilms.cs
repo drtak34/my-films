@@ -989,7 +989,7 @@ namespace MyFilmsPlugin.MyFilms
         }
 
     
-        // <summary>
+        /// <summary>
         /// Summary description for SQLOps.
         /// </summary>
         public class SQLOps
@@ -1479,8 +1479,8 @@ namespace MyFilmsPlugin.MyFilms
               string[] StrViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewValue = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
 
               string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
-              bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
-              bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+              //bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+              //bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
               for (int i = 1; i < 6; i++)
               {
                 StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewItem{0}", i), string.Empty);
@@ -1521,7 +1521,7 @@ namespace MyFilmsPlugin.MyFilms
         /// <summary>
         /// returns a string List of available values for a given config & view
         /// use GetConfigViewLists() to get valid values for config and view
-        /// returns <null> if no values can be evaluated - user should still be able to manually set a value for startparam
+        /// returns 'null' if no values can be evaluated - user should still be able to manually set a value for startparam
         /// </summary>        
         public static List<string> GetViewListValues(string config, string view)
         {
@@ -1537,8 +1537,8 @@ namespace MyFilmsPlugin.MyFilms
             string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
             string[] listSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
             string[] roleSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
-            bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
-            bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+            //bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+            //bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
             string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
             int j = 0;
             for (int i = 1; i <= 5; i++)
@@ -1588,7 +1588,7 @@ namespace MyFilmsPlugin.MyFilms
                 try
                 {
                   bool isdate = (view == "Date" || view == "DateAdded");
-                  champselect = (isdate) ? string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]) : enr[view].ToString().Trim();;
+                  champselect = (isdate) ? string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]) : enr[view].ToString().Trim();
                     
                   ArrayList wtab = Base_Search_String(champselect, listSeparator, roleSeparator);
                   for (int wi = 0; wi < wtab.Count; wi++)
@@ -1605,7 +1605,7 @@ namespace MyFilmsPlugin.MyFilms
               for (int wi = 0; wi != w_tableau.Count; wi++)
               {
                 champselect = w_tableau[wi].ToString();
-                if (string.Compare(champselect, wchampselect, true) == 0) // Are the strings equal? Then add count!
+                if (string.Compare(champselect, wchampselect, StringComparison.OrdinalIgnoreCase) == 0) // Are the strings equal? Then add count!
                 {
                   Wnb_enr++; // count items of distinct property
                 }
@@ -1658,7 +1658,7 @@ namespace MyFilmsPlugin.MyFilms
         /// <param name="type">most recent type</param>
         /// <param name="days">number of days to look back in database</param>
         /// <param name="limit">number of results to return</param>
-        /// <param name="unwatched">only get unwatched episodes (only used with recent added type)</param>
+        /// <param name="unwatchedOnly">only get unwatched episodes (only used with recent added type)</param>
         public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
         {
           string enumtype = Enum.GetName(typeof(MostRecentType), type);
@@ -1669,7 +1669,7 @@ namespace MyFilmsPlugin.MyFilms
           // Create Time Span to lookup most recents
           DateTime dateCompare = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
           dateCompare = dateCompare.Subtract(new TimeSpan(days, 0, 0, 0, 0));
-          string date = dateCompare.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
+          //string date = dateCompare.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
 
           // get all movies
           allmovies = GetMoviesGlobal("", "", false);

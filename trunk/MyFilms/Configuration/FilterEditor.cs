@@ -223,10 +223,8 @@ namespace MyFilmsPlugin.Configuration
         {
           System.Windows.Forms.MessageBox.Show("Must be 'or' or 'and' for filter combination", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
           AntFilterComb.Focus();
-          return;
         }
       }
-      
     }
 
     private void btnOK_Click(object sender, EventArgs e)

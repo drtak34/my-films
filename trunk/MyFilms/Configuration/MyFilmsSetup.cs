@@ -270,7 +270,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             textBoxNBconfigs.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", string.Empty);
 
             st = new ScheduledTasks();
-            Task t = null; ;
+            Task t = null;
             string name = string.Empty;
             if (MesFilmsCat.Text.LastIndexOf("\\") > 0)
             {
@@ -2078,7 +2078,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     {
                       if (movies.Length > 0) MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'User defined Config Filter' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
                       else MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the 'User defined Config Filter' or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                      if (IsAMC4AndHasInvalidCustomFields(mydivx)) MessageBox.Show("Your XML file seems to have CustomFields defined that are NOT supported by MyFilms ! Their content will get lost, if you continue!", "MyFilms Compatibility Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);;
+                      if (IsAMC4AndHasInvalidCustomFields(mydivx)) MessageBox.Show("Your XML file seems to have CustomFields defined that are NOT supported by MyFilms ! Their content will get lost, if you continue!", "MyFilms Compatibility Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
                     else if (!WizardActive)
                     {
@@ -2245,7 +2245,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private bool IsAMCcatalogType(int selectedindex)
         {
-          return (selectedindex == 0 || selectedindex == 10) ? true : false;
+          return (selectedindex == 0 || selectedindex == 10);
         }
 
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
@@ -4333,13 +4333,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     LogMyFilms.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
                     if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
-                    {
                         LogMyFilms.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
-                    }
                     else
-                    {
                         LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -4348,7 +4344,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("No MAC address available for '" + NAS_Name_1 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No MAC address available for '" + NAS_Name_1 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -4370,13 +4366,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     LogMyFilms.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
                     if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_2.Text, intTimeOut))
-                    {
                         LogMyFilms.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
-                    }
                     else
-                    {
                         LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -4385,7 +4377,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("No MAC address available for '" + NAS_Name_2 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No MAC address available for '" + NAS_Name_2 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -4407,13 +4399,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     LogMyFilms.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
                     if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_3.Text, intTimeOut))
-                    {
                         LogMyFilms.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
-                    }
                     else
-                    {
                         LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -4422,20 +4410,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("No MAC address available for '" + NAS_Name_3 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No MAC address available for '" + NAS_Name_3 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void NAS_Name_2_TextChanged(object sender, EventArgs e)
         {
-            if (NAS_Name_2.Text.Length == 0)
-                NAS_MAC_2.Text = "";
+            if (NAS_Name_2.Text.Length == 0) NAS_MAC_2.Text = "";
         }
 
         private void NAS_Name_3_TextChanged(object sender, EventArgs e)
         {
-            if (NAS_Name_3.Text.Length == 0)
-                NAS_MAC_3.Text = "";
+            if (NAS_Name_3.Text.Length == 0) NAS_MAC_3.Text = "";
         }
 
 
@@ -4502,23 +4488,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
           string linkName = "AMC-Updater '" + Config_Name.Text + "'";
-          string commandLine = "\"" + Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe""" + " \"" +
-                               Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" +
-                               Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() +
-                               "\" \"GUI\"";
-          string argument = "\"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" +
-                            Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI";
+          //string commandLine = "\"" + Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe""" + " \"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log) + "\" \"GUI\"";
+          //string argument = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log) + "\" \"GUI";
 
           string shortcutFile = deskDir + @"\AMC-Updater (" + Config_Name.Text + ")" + ".lnk";
-          string soureFile = Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe";
+          string soureFile = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe";
           string description = "AMC: '" + Config_Name.Text + "'";
 
-          string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" +
-                             Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+          string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
 
           //string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + " " + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\"" + " " + "\"" + "GUI\"";
           string hotKey = String.Empty;
-          string workingDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\MyFilms";
+          string workingDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
 
           if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url"))
             try
@@ -5376,10 +5357,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           if (chkAMC_Purge_Missing_Files.Checked && !WizardActive && AMCGetAttribute("Purge_Missing_Files") != "true")
           {
-            if (System.Windows.Forms.MessageBox.Show("Are you sure, you want to purge records from your DB \n where media files are not accessible during AMC Updater scans ?",
-                "Control Configuration",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure, you want to purge records from your DB \n where media files are not accessible during AMC Updater scans ?", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
               return;
             }
@@ -5959,7 +5937,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           FilterEditor filterEditor = new FilterEditor();
           filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText1.Text + "')";
           filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
           filterEditor.ShowDialog(this);
           if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter1.Text = filterEditor.ConfigString;
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -5970,7 +5948,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           FilterEditor filterEditor = new FilterEditor();
           filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText2.Text + "')";
           filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
           filterEditor.ShowDialog(this);
           if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter2.Text = filterEditor.ConfigString;
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -5981,7 +5959,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           FilterEditor filterEditor = new FilterEditor();
           filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText3.Text + "')";
           filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
           filterEditor.ShowDialog(this);
           if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter3.Text = filterEditor.ConfigString;
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -5992,7 +5970,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           FilterEditor filterEditor = new FilterEditor();
           filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText4.Text + "')";
           filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
           filterEditor.ShowDialog(this);
           if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter4.Text = filterEditor.ConfigString;
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -6003,7 +5981,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           FilterEditor filterEditor = new FilterEditor();
           filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText5.Text + "')";
           filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (CatalogType.SelectedIndex != 0) ? true : false;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
           filterEditor.ShowDialog(this);
           if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter5.Text = filterEditor.ConfigString;
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);

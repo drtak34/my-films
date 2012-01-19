@@ -598,7 +598,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             base.OnAction(actionType);
-            return;
         }
         //---------------------------------------------------------------------------------------
         //   Handle posted Messages
@@ -1072,7 +1071,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798702)); // Updates ...
 
-                    if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
+                    if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
                       choiceViewMenu.Add("grabber");
@@ -1607,8 +1606,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
               case "updproperty":
-                    System.Collections.Generic.List<string> choiceUpd = new System.Collections.Generic.List<string>();
-                    ArrayList w_tableau = new ArrayList();
+                    List<string> choiceUpd = new List<string>();
                     if (dlgmenu == null) return;
                     dlgmenu.Reset();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798643)); // menu
@@ -5126,7 +5124,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               //url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
                               Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
                               fetchactor.GetActorDetails(url, persondetails.Name, false, out imdbActor);
-                              if (dlgPrgrs != null) dlgPrgrs.Percentage = 50; ;
+                              if (dlgPrgrs != null) dlgPrgrs.Percentage = 50;
                               filename1person = GrabUtil.DownloadPersonArtwork(personartworkpath, imdbActor.ThumbnailUrl, persondetails.Name, true, firstpersonimage, out filenameperson);
                               if (dlgPrgrs != null) dlgPrgrs.Percentage = 100;
                               LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
@@ -7932,8 +7930,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         /// Permet de rechercher un fichier dans un dossier et ces sous dossier
         /// </summary>
         /// <param name="fileName">le nom du fichier recherché</param>
-        /// <param name="path">le chemin du répertoire dans lequel chercher</param>
+        /// <param name="searchrep">le chemin du répertoire dans lequel chercher</param>
         /// <param name="recur">spécifie s'il s'agit d'une relance recursive</param>
+        /// <param name="Trailer">if called for trailers</param>
         public static void SearchFiles(string fileName, string searchrep, bool recur, bool Trailer)
         {
             System.Text.RegularExpressions.Regex oRegex;
