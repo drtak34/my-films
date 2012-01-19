@@ -1097,7 +1097,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.Update_XML_database();
           LogMyFilms.Info("saveChangesToDB() - Database updated with '" + newPictureCatalogname + "' for Cover file '" + NewArtworkFileName + "'");
           //MyFilmsDetail.afficher_detail(true);
-          return;
         }
 
         //-------------------------------------------------------------------------------------------

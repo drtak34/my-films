@@ -180,8 +180,8 @@ namespace MyFilmsPlugin.MyFilms
         /// <summary>
         /// Gets the required minimum version for third party plugins
         /// </summary>
-        /// <param name="path">The Settings.Path to get</param>
-        /// <returns>The fully qualified Path as a String</returns>
+        /// <param name="plugin">The enum of the plugin to get the minimum version for</param>
+        /// <returns>String with minimum version required</returns>
         public static string GetRequiredMinimumVersion(MinimumVersion plugin)
         {
           switch (plugin)

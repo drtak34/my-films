@@ -1616,7 +1616,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GetSelectFromMenuView(false); // Call simple Menu ...
                 return;
               }
-              break;
           }
           break;
         case Action.ActionType.ACTION_KEY_PRESSED:
@@ -3324,9 +3323,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private int CountViewItems(string WStrSort)
     {
       string champselect = "";
-      //string wchampselect = "";
       int wi;
-      //int Wnb_enr = 0;
       List<string> ItemList = new List<string>();
 
       bool issplitfield = IsSplittableField(WStrSort);
@@ -3337,32 +3334,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (DataRow row in r)
       {
         champselect = row[WStrSort].ToString().ToUpper().Trim();
-        //object temp;
-        //champselect = (DBNull.Value != (temp = row[WStrSort])) ? (temp.ToString().ToUpper().Trim()) : "";
         if (issplitfield && !dontsplitvalues)
         {
           ArrayList wtab = Search_String(champselect);
           if (wtab.Count > 0)
           {
+            // ItemList.AddRange(wtab);
             for (wi = 0; wi < wtab.Count; wi++)
             {
               ItemList.Add((string)wtab[wi]);
-              //if (!counts.ContainsKey(wtab[wi])) counts.Add(wtab[wi], 1);
-              //else counts[val]++;
             }
           }
           else if (conf.BoolShowEmptyValuesInViews)  // only add empty entries, if they should show - speeds up sorting otherwise ...
           {
             ItemList.Add(champselect);
-            //if (!counts.ContainsKey(champselect)) counts.Add(champselect, 1);
-            //else counts[champselect]++;
           }
         }
         else
         {
           ItemList.Add(champselect);
-          //if (!counts.ContainsKey(champselect)) counts.Add(champselect, 1);
-          //else counts[champselect]++;
         }
       }
 
@@ -4071,7 +4061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool IsPersonField(FieldType fieldtype)
     {
-      return (fieldtype == FieldType.Person) ? true : false;
+      return (fieldtype == FieldType.Person);
     }
     private static bool IsPersonField(string fieldname)  // "Persons", "Actors", "Producer", "Director", "Writer", "Borrower"
     {
@@ -4103,7 +4093,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool IsAlphaNumericalField(FieldType fieldtype)
     {
-      return (fieldtype == FieldType.AlphaNumeric) ? true : false;
+      return (fieldtype == FieldType.AlphaNumeric);
     }
     private static bool IsSplittableField(string fieldname)
     {
@@ -4152,7 +4142,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool IsTitleField(FieldType fieldtype)
     {
-      return (fieldtype == FieldType.Title) ? true : false;
+      return (fieldtype == FieldType.Title);
     }
     private static bool IsTitleField(string fieldname)
     {
@@ -4164,7 +4154,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool IsDateField(FieldType fieldtype)
     {
-      return (fieldtype == FieldType.Date) ? true : false;
+      return (fieldtype == FieldType.Date);
     }
     private static bool IsDateField(string fieldname)
     {
@@ -4186,9 +4176,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     public static ArrayList Search_String(string champselect, bool reverseNames)
     {
-      Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
-      System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
-      foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
+      //Match theMatch = Regex.Match(source, pattern, RegexOptions.Compiled);
+      //MatchCollection theMatches = Regex.Matches(source, pattern, RegexOptions.Compiled);
+      
+      // Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
+      // MatchCollection oMatches = oRegex.Matches(champselect);
+      MatchCollection oMatches = Regex.Matches(champselect, "\\([^\\)]*?[,;].*?[\\(\\)]", RegexOptions.Compiled);
+      foreach (Match oMatch in oMatches)
       {
         Regex oRegexReplace = new Regex("[,;]");
         champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty));
@@ -4197,6 +4191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       int wi = 0;
       string[] Sep = conf.ListSeparator;
+      string[] roleSep = conf.RoleSeparator;
       string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
       string wzone = string.Empty;
       int wzoneIndexPosition = 0;
@@ -4208,9 +4203,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           wzone = arSplit[wi].Replace("  ", " ").Trim();
           for (int i = 0; i <= 4; i++)
           {
-            if (conf.RoleSeparator[i].Length > 0)
+            if (roleSep[i].Length > 0)
             {
-              wzoneIndexPosition = wzone.IndexOf(conf.RoleSeparator[i]); //wzoneIndexPosition = wzone.IndexOf(conf.RoleSeparator[i],StringComparison.OrdinalIgnoreCase);
+              wzoneIndexPosition = wzone.IndexOf(roleSep[i], StringComparison.OrdinalIgnoreCase); //wzoneIndexPosition = wzone.IndexOf(conf.RoleSeparator[i],StringComparison.OrdinalIgnoreCase);
               
               if (wzoneIndexPosition == wzone.Length - 1)
               {
@@ -4225,12 +4220,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (reverseNames && wzone.Contains(" ")) // Reverse Names "Bruce Willis" -> "Willis, Bruce"
           {
-            wzone = wzone.Substring(wzone.LastIndexOf(" ") + 1) + ", " + wzone.Substring(0, wzone.LastIndexOf(" "));
+            wzone = wzone.Substring(wzone.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1) + ", " + wzone.Substring(0, wzone.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase));
           }
 
           if (wzone.Length > 0)
           {
-            wtab.Add(wzone.Trim());
+            wtab.Add(wzone);
           }
         }
       }
@@ -4534,9 +4529,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool isdate = IsDateField(fieldType);
       bool issplitfield = IsSplittableField(WStrSort);
       bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
-      bool isrecentlyadded = (WStrSort == "RecentlyAdded") ? true : false; // calculate recently added fields
-      bool isindexedtitle = (WStrSort == "IndexedTitle") ? true : false; // calculate recently added fields
-      DateTime now = DateTime.Now;
+      bool isrecentlyadded = (WStrSort == "RecentlyAdded"); // calculate recently added fields
+      bool isindexedtitle = (WStrSort == "IndexedTitle"); // calculate recently added fields
+      //DateTime now = DateTime.Now;
 
       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (WStrSortSens == " ASC");
@@ -4548,6 +4543,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
 
       if (MyFilms.conf.IndexedChars == 0) MyFilms.conf.Boolindexed = false;
+      bool isindexed = conf.Boolindexed;
+      int indexedChars = MyFilms.conf.IndexedChars;
       conf.Wstar = NewWstar;
       conf.Boolselect = true;
       conf.Wselectedlabel = "";
@@ -4597,25 +4594,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ArrayList wtab = Search_String(champselect, conf.BoolReverseNames); //ArrayList wtab = Search_String(champselect, isperson);
           if (wtab.Count > 0)
           {
-            for (wi = 0; wi < wtab.Count; wi++)
-            {
-              w_tableau.Add(wtab[wi]); // already "Trim()ed"
-            }
+            // ToDo: Test, if AddRange() is faster than looping !
+            //w_tableau.AddRange(wtab);
+            for (wi = 0; wi < wtab.Count; wi++) w_tableau.Add(wtab[wi]); // already "Trim()ed"
           }
           else if (conf.BoolShowEmptyValuesInViews)  // only add empty entries, if they should show - speeds up sorting otherwise ...
           {
-            //if (conf.Boolindexed && champselect.Length > 0)
-            //  w_tableau.Add(champselect.Substring(0, 1));
-            //else
-              w_tableau.Add(champselect);
+            w_tableau.Add(champselect);
           }
         }
         else
         {
-          //if (conf.Boolindexed && champselect.Length > 0)
-          //  w_tableau.Add(champselect.Substring(0, 1));
-          //else
-            w_tableau.Add(champselect);
+          w_tableau.Add(champselect);
         }
       }
       watch.Stop();
@@ -4658,15 +4648,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         default: // default sorter
           if (WStrSortSens == " ASC")
           {
-            //w_tableau.Sort(0, w_tableau.Count, StringComparer.OrdinalIgnoreCase);
-            IComparer myComparer = new myForwarderClass();
-            w_tableau.Sort(0, w_tableau.Count, myComparer);
+            w_tableau.Sort(0, w_tableau.Count, StringComparer.Ordinal);
+            //IComparer myComparer = new myForwarderClass();
+            //w_tableau.Sort(0, w_tableau.Count, myComparer);
             //w_tableau.Sort(0, w_tableau.Count, null);
           }
           else
           {
-            IComparer myComparer = new myReverserClass();
-            w_tableau.Sort(0, w_tableau.Count, myComparer);
+            w_tableau.Sort(0, w_tableau.Count, StringComparer.Ordinal);
+            w_tableau.Reverse();
+            //IComparer myComparer = new myReverserClass();
+            //w_tableau.Sort(0, w_tableau.Count, myComparer);
           }
           break;
       }
@@ -4685,7 +4677,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         for (wi = 0; wi != w_tableau.Count; wi++)
         {
           item = w_tableau[wi].ToString();
-          if (string.Compare(currentitem, item, true) == 0) // Are the strings equal? Then add count!
+          if (string.Compare(currentitem, item, StringComparison.OrdinalIgnoreCase) == 0) // Are the strings equal? Then add count!
             itemcount++;
           else
           {
@@ -4762,7 +4754,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region populating facade
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
-      bool countItems = (isperson && !WstrSelect.Contains("not like") && !string.IsNullOrEmpty(WstrSelect) && !WstrSelect.Contains("**")) ? true : false; // extensive counts only for conditional lists, otherwise takes too much time!
+      bool countItems = (isperson && !WstrSelect.Contains("not like") && !string.IsNullOrEmpty(WstrSelect) && !WstrSelect.Contains("**")); // extensive counts only for conditional lists, otherwise takes too much time!
       watch.Reset(); watch.Start();
       for (wi = 0; wi != w_tableau.Count; wi++)
       {
@@ -4771,11 +4763,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //else
         champselect = w_tableau[wi].ToString();
 
-        if (!MyFilms.conf.Boolindexed && string.Compare(champselect, wchampselect, StringComparison.OrdinalIgnoreCase) == 0)  // if (!MyFilms.conf.Boolindexed && string.Compare(champselect, wchampselect, true) == 0) // Are the strings equal? Then add count!
+        if (!isindexed && string.Compare(champselect, wchampselect, StringComparison.OrdinalIgnoreCase) == 0)  // if (!MyFilms.conf.Boolindexed && string.Compare(champselect, wchampselect, true) == 0) // Are the strings equal? Then add count!
         {
           Wnb_enr++; // count items of distinct property
         }
-        else if (MyFilms.conf.Boolindexed && string.Compare(champselect, 0, wchampselect, 0, MyFilms.conf.IndexedChars, StringComparison.OrdinalIgnoreCase) == 0) //  CultureInfo.CurrentCulture, CompareOptions.OrdinalIgnoreCase
+        else if (isindexed && string.Compare(champselect, 0, wchampselect, 0, indexedChars, StringComparison.OrdinalIgnoreCase) == 0) //  CultureInfo.CurrentCulture, CompareOptions.OrdinalIgnoreCase
         {
           Wnb_enr++; // count items of distinct property
           if (string.Compare(champselect, wchampselectIndexed, StringComparison.OrdinalIgnoreCase) != 0)
@@ -4792,9 +4784,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               GUIListItem item = new GUIListItem();
               string label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
-              label = (MyFilms.conf.Boolindexed && MyFilms.conf.IndexedChars > 0 && label.Length >= MyFilms.conf.IndexedChars) ? label.Substring(0, MyFilms.conf.IndexedChars).ToUpperInvariant() : label;
+              label = (isindexed && indexedChars > 0 && label.Length >= indexedChars) ? label.Substring(0, indexedChars).ToUpperInvariant() : label;
               item.Label = (label.Length == 0) ? EmptyFacadeValue : label; // show <empty> value if empty
-              item.Label2 = (MyFilms.conf.Boolindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
+              item.Label2 = (isindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
               item.Path = WStrSort.ToLower();
               item.TVTag = (isperson) ? "person" : "group";
               item.IsFolder = true;
@@ -4817,9 +4809,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //item.ItemId = number; // Only used in GetFilmList
         // item.Label = (wchampselect.Length == 0) ? EmptyFacadeValue : (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
         string label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
-        label = (MyFilms.conf.Boolindexed && MyFilms.conf.IndexedChars > 0 && label.Length >= MyFilms.conf.IndexedChars) ? label.Substring(0, MyFilms.conf.IndexedChars).ToUpperInvariant() : label;
+        label = (isindexed && indexedChars > 0 && label.Length >= indexedChars) ? label.Substring(0, indexedChars).ToUpperInvariant() : label;
         item.Label = (label.Length == 0) ? EmptyFacadeValue : label; // show <empty> value if empty
-        item.Label2 = (MyFilms.conf.Boolindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
+        item.Label2 = (isindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
         //item.Label3 = WStrSort;
         //if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) MediaPortal.Util.Utils.SetDefaultIcons(item);
         item.Path = WStrSort.ToLower();
@@ -4954,7 +4946,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (getThumbs)
             {
               string[] strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
-              string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+              //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
 
               //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
               //{
@@ -7779,12 +7771,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //string test = _imdb[0].IMDBURL;
               _imdb.FindActor(actor);
               IMDBActor imdbActor = new IMDBActor();
-              string ttt = imdbActor.ThumbnailUrl;
+              // string ttt = imdbActor.ThumbnailUrl;
               if (_imdb.Count > 0)
               {
                 //int index = IMDBFetcher.FuzzyMatch(actor);
                 int index;
-                int matchingIndex = -1;
                 int matchingDistance = int.MaxValue;
                 bool isAmbiguous = false;
 
@@ -7801,15 +7792,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     isAmbiguous = false;
                     matchingDistance = distance;
-                    matchingIndex = index;
                   }
                 }
-
-                if (isAmbiguous)
-                {
-                  matchingIndex = 0;
-                }
-
 
                 //LogMyFilms.Info("Getting actor:{0}", _imdb[index].Title);
                 //_imdb.GetActorDetails(_imdb[index], director, out imdbActor);
@@ -8017,7 +8001,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break; // stop, if no internet available
           else
           {
-            Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+            // Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
 
             string personartworkpath = string.Empty;
             string imdbid = MyFilmsDetail.GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
@@ -10912,7 +10896,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      BackgroundWorker worker = sender as BackgroundWorker;
+      // BackgroundWorker worker = sender as BackgroundWorker;
       // MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
       string exeName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe"; 
       string argsLine = "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
@@ -11008,7 +10992,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgUpdateFanart_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      BackgroundWorker worker = sender as BackgroundWorker;
+      // BackgroundWorker worker = sender as BackgroundWorker;
       Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
       string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty, wimdbid = string.Empty; int wyear = 0;
       if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist)) // if persoin artwork path present and person thumbs enabled, also load person images
@@ -11111,7 +11095,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgLoadMovieList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      BackgroundWorker worker = sender as BackgroundWorker;
+      // BackgroundWorker worker = sender as BackgroundWorker;
       string searchrep = MyFilms.conf.StrDirStor;
       DriveInfo[] allDrives = DriveInfo.GetDrives();
 
@@ -11190,24 +11174,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgIsOnlineCheck_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      BackgroundWorker worker = sender as BackgroundWorker;
+      // BackgroundWorker worker = sender as BackgroundWorker;
       DateTime startTime = DateTime.Now;
       Regex oRegex = new Regex(";"); 
       LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
 
       // Check Config
-      bool filmSource = true;
-      if (!Helper.FieldIsSet(conf.StrStorage)) // no source path set?
-        filmSource = false;
-      bool filmSearch = true;
-      if (string.IsNullOrEmpty(conf.ItemSearchFile) || string.IsNullOrEmpty(MyFilms.conf.SearchFile) || conf.SearchFile == "False" || conf.SearchFile == "no")
-        filmSearch = false;
-      bool trailerSource = true;
-      if (!Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
-        trailerSource = false;
-      bool trailerSearch = true;
-      if (string.IsNullOrEmpty(conf.ItemSearchFileTrailer) || string.IsNullOrEmpty(MyFilms.conf.SearchFileTrailer) || conf.SearchFileTrailer == "False" || conf.SearchFileTrailer == "no")
-        trailerSearch = false;
+      bool filmSource = Helper.FieldIsSet(conf.StrStorage);
+      bool filmSearch = !(string.IsNullOrEmpty(conf.ItemSearchFile) || string.IsNullOrEmpty(MyFilms.conf.SearchFile) || conf.SearchFile == "False" || conf.SearchFile == "no");
+      bool trailerSource = Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer);
+      bool trailerSearch = !(string.IsNullOrEmpty(conf.ItemSearchFileTrailer) || string.IsNullOrEmpty(MyFilms.conf.SearchFileTrailer) || conf.SearchFileTrailer == "False" || conf.SearchFileTrailer == "no");
       LogMyFilms.Debug("bgIsOnlineCheck_DoWork: filmSource = '" + filmSource + "', filmSearch = '" + filmSearch + "', trailerSource = '" + trailerSource + "', trailerSearch = '" + trailerSearch + "'");
 
       // Build MovieList (files)
@@ -11331,7 +11307,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string[] result = conf.MovieList.Find(
               delegate(string[] files)
               {
-                return files.Where(n => n.ToLower().Contains(@"\" + movieName + @".") || n.ToLower().Contains(@"\" + movieName + @"\")).Count() > 0;
+                return files.Count(n => n.ToLower().Contains(@"\" + movieName + @".") || n.ToLower().Contains(@"\" + movieName + @"\")) > 0;
               }
               );
               if (result != null)
@@ -11817,7 +11793,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
         MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
         LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
-        DebugPropertyLogging = (xmlreader.GetValueAsString("MyFilms", "PropertyLogging", "false").ToLower() == "true") ? true : false;
+        DebugPropertyLogging = (xmlreader.GetValueAsString("MyFilms", "PropertyLogging", "false").ToLower() == "true");
         LogMyFilms.Info("Property Logging: '" + DebugPropertyLogging + "'");
       }
 
