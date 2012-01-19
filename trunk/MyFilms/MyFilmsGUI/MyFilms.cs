@@ -238,6 +238,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_ImagePerson = 1022,
       CTRL_ImageHierarchy = 1023,
       CTRL_List = 50, // Changed from 1026 to 50 due to meeting MePo Standards
+      CTRL_ListMenu = 51, // added as separate list control for new menu
       CTRL_logos_id2001 = 2001,
       CTRL_logos_id2002 = 2002,
       CTRL_logos_id2003 = 2003,
@@ -263,6 +264,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     [SkinControlAttribute((int)Controls.CTRL_List)]
     protected GUIFacadeControl facadeView;
+
+    [SkinControlAttribute((int)Controls.CTRL_ListMenu)]
+    protected GUIFacadeControl facadeViewMenu;
 
     [SkinControlAttribute((int)Controls.CTRL_ImageFilm)]
     protected GUIImage ImgLstFilm;
@@ -7514,14 +7518,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: IMDB all sort of details and updates (several entries)"))
         {
-          dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
+          dlg.Add(GUILocalizeStrings.Get(1079882));
+            // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
           upd_choice[ichoice] = "updateperson";
           ichoice++;
-        }
 
-        dlg.Add(GUILocalizeStrings.Get(1079899));        //Update Internet Person Details
-        upd_choice[ichoice] = "grabber-person";
-        ichoice++;
+          if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079899)); //Update Internet Person Details
+            upd_choice[ichoice] = "grabber-person";
+            ichoice++;
+          }
+        }
       }
       #endregion
 
@@ -7542,7 +7550,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ichoice++;
       }
 
-      if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+      if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder && (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended))
       {
         dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
         upd_choice[ichoice] = "grabber";
@@ -8083,7 +8091,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             upd_choice[ichoice] = "suppress";
             ichoice++;
           }
-          if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+          if ((facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder) && (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended))
           {
             dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
             upd_choice[ichoice] = "grabber";

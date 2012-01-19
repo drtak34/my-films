@@ -1072,8 +1072,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798702)); // Updates ...
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-                    choiceViewMenu.Add("grabber");
+                    if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+                      choiceViewMenu.Add("grabber");
+                    }
 
                     if (MyFilms.conf.StrUpdList[0].Length > 0)
                     {
