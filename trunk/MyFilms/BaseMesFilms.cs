@@ -793,7 +793,6 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
           #endregion
 
-
           // CopyCustomFieldsToMovieRows();
 
           #region Other join table tests
