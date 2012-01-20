@@ -2145,7 +2145,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else if (IsAlphaNumericalField(conf.WStrSort))
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else
-          conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(sLabel) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+        {
+          if (conf.BoolDontSplitValuesInViews)
+            conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+          else
+            conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(sLabel) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+        }
 
         conf.StrTxtSelect = (LabelNotEmpty) ? "[" + sLabel + "]" : "[" + EmptyFacadeValue + "]";
         conf.StrTitleSelect = "";
@@ -2308,7 +2313,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wfacadewiew = 0;
       ArrayList w_tableau = new ArrayList();
       bool isdate = IsDateField(conf.WStrSort);
-      bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
       // Check and create Group thumb folder ...
       if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
@@ -2324,7 +2328,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (isdate && string.Format("{0:dd/MM/yyyy}", DateTime.Parse(s).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
               goto suite;
-            if ((!dontsplitvalues && s.IndexOf(conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) >= 0) || string.Compare(s, conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) == 0)  // if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // string.Compare(champselect, wchampselect, true) == 0
+            if (s.IndexOf(conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) >= 0)  // if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // string.Compare(champselect, wchampselect, true) == 0
               goto suite;
           }
           goto fin;
