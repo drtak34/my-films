@@ -367,7 +367,6 @@ namespace MyFilmsPlugin.MyFilms
 
           foreach (DataRow row in dataTable.Rows)
             output.Add(row[ColumnIndex]);
-
           return output;
         } 
 
@@ -467,7 +466,7 @@ namespace MyFilmsPlugin.MyFilms
         {
           Stopwatch saveDataWatch = new Stopwatch();
           saveDataWatch.Reset(); saveDataWatch.Start();
-          var commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
+          IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
           {
             movieRow.BeginEdit();
@@ -757,14 +756,8 @@ namespace MyFilmsPlugin.MyFilms
 
           #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
           DateTime now = DateTime.Now;
-          //watch.Reset(); watch.Start();
-          //foreach (AntMovieCatalog.MovieRow movieRow in data.Movie) 
-          //  movieRow.BeginEdit();
-          //watch.Stop();
-          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - Set movieRows in Edit Mode ... (" + (watch.ElapsedMilliseconds) + " ms)");
-
           watch.Reset(); watch.Start();
-          var commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
+          IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
           //data.Movie.BeginLoadData();
           //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
           foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
@@ -777,12 +770,11 @@ namespace MyFilmsPlugin.MyFilms
               movieRow.DateAdded = added;
             // else movieRow.DateAdded = DateTime.MinValue;
             int iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
-            movieRow.AgeAdded = iAge.ToString();
+            movieRow.AgeAdded = iAge.ToString(CultureInfo.InvariantCulture);
             movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
             string index = movieRow[MyFilms.conf.StrTitle1].ToString();
             movieRow.IndexedTitle = (index.Length > 0) ?  index.Substring(0, 1).ToUpper() : "";
-            // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
-            movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " ");
+            movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
             // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
 
             // Copy CustomFields data ....
