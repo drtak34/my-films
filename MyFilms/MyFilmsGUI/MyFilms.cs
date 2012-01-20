@@ -2290,6 +2290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string SelItem = gSelItem.ToString();
       int iSelItem = -2;
       bool tmpwatched = false;
+
       var facadeDownloadItems = new List<GUIListItem>();
       if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
@@ -2307,6 +2308,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wfacadewiew = 0;
       ArrayList w_tableau = new ArrayList();
       bool isdate = IsDateField(conf.WStrSort);
+      bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
       // Check and create Group thumb folder ...
       if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
@@ -2322,7 +2324,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (isdate && string.Format("{0:dd/MM/yyyy}", DateTime.Parse(s).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
               goto suite;
-            if (s.IndexOf(conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) >= 0)  // if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // string.Compare(champselect, wchampselect, true) == 0
+            if ((!dontsplitvalues && s.IndexOf(conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) >= 0) || string.Compare(s, conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) == 0)  // if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // string.Compare(champselect, wchampselect, true) == 0
               goto suite;
           }
           goto fin;
@@ -4561,23 +4563,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           DateTime tmpdate;
           champselect = (DateTime.TryParse(row[WStrSort].ToString(), out tmpdate)) ? string.Format("{0:yyyy/MM/dd}", tmpdate) : "";
         }
-        else if (isrecentlyadded)
-        {
-          //if (string.IsNullOrEmpty(row["RecentlyAdded"].ToString()))
-          //{
-          //  DateTime dateAdded;
-          //  int iNumber = -1;
-          //  if (DateTime.TryParse(row["Date"].ToString(), out dateAdded)) iNumber = (int)now.Subtract(dateAdded).TotalDays;
-          //  else iNumber = 0;
-          //  row["RecentlyAdded"] = GetDayRange(iNumber);
-          //}
-          champselect = row["RecentlyAdded"].ToString();
-        }
-        else if (isindexedtitle)
-        {
-          if (string.IsNullOrEmpty(row["IndexedTitle"].ToString())) row["IndexedTitle"] = row[MyFilms.conf.StrTitle1].ToString().Substring(0, 1).ToUpper();
-          champselect = row["IndexedTitle"].ToString();
-        }
         else
           champselect = row[WStrSort].ToString().Trim();
 
@@ -4586,9 +4571,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ArrayList wtab = Search_String(champselect, conf.BoolReverseNames); //ArrayList wtab = Search_String(champselect, isperson);
           if (wtab.Count > 0)
           {
-            // ToDo: Test, if AddRange() is faster than looping !
-            //w_tableau.AddRange(wtab);
-            for (wi = 0; wi < wtab.Count; wi++) w_tableau.Add(wtab[wi]); // already "Trim()ed"
+            for (wi = 0; wi < wtab.Count; wi++) w_tableau.Add(wtab[wi]); //w_tableau.AddRange(wtab);
           }
           else if (showEmptyValues)  // only add empty entries, if they should show - speeds up sorting otherwise ...
           {
@@ -4626,31 +4609,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
 
-        //// Disabled, as the DateTime.Parse() was way too slow (4-5 seconds on big datasets) - here it is sufficient to convert date string into a string sortable format though (yyyy-mm-dd) ...
-        //case FieldType.Date:
-        //  if (WStrSortSens == " ASC")
-        //  {
-        //    IComparer myComparer = new myDateComparer();
-        //    w_tableau.Sort(0, w_tableau.Count, myComparer);
-        //  }
-        //  else
-        //  {
-        //    IComparer myComparer = new myDateReverseComparer();
-        //    w_tableau.Sort(0, w_tableau.Count, myComparer);
-        //  }
-        //  break;
-
         default: // default sorter
           if (WStrSortSens == " ASC")
           {
-            w_tableau.Sort(0, w_tableau.Count, StringComparer.Ordinal);
+            w_tableau.Sort(0, w_tableau.Count, StringComparer.OrdinalIgnoreCase);
             //IComparer myComparer = new myForwarderClass();
             //w_tableau.Sort(0, w_tableau.Count, myComparer);
             //w_tableau.Sort(0, w_tableau.Count, null);
           }
           else
           {
-            w_tableau.Sort(0, w_tableau.Count, StringComparer.Ordinal);
+            w_tableau.Sort(0, w_tableau.Count, StringComparer.OrdinalIgnoreCase);
             w_tableau.Reverse();
             //IComparer myComparer = new myReverserClass();
             //w_tableau.Sort(0, w_tableau.Count, myComparer);
@@ -6372,6 +6341,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.ViewContext = ViewContext.Group;
                 break;
               case "Year":
+              case "Date":
+              case "DateAdded":
                 conf.ViewContext = ViewContext.Group;
                 conf.WStrSortSens = " DESC";
                 break;
