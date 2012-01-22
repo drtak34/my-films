@@ -5,22 +5,29 @@ Imports System.Linq
 Imports System.Globalization
 Imports System.ComponentModel
 Imports System.Threading
+Imports System.Windows.Forms
 Imports MediaPortal.Configuration
 Imports System.Xml
+Imports System.Timers
+Imports System.Text
 
 
 Module Module1
+
+    Private LogEventNew As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
 
     Public WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker
     Public CurrentSettings As New AntSettings
     Public wurl As New ArrayList
 
+    Private watch As Stopwatch = Nothing
+    Private BufferedLogEvents As StringBuilder = New StringBuilder()
+
     Public Enum EventLogLevel As Integer
         None
-        InformationalWithGrabbing
         Informational
         ImportantEvent
-        ErrorOrSimilar
+        ErrorEvent
     End Enum
 
 
@@ -250,7 +257,7 @@ Module Module1
             CurrentMax = CurrentMax + 1
             Return CurrentMax
         Else
-            LogEvent("Error - Cannot access file " & FilePath & " to get next available Movie ID.", EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent - Cannot access file " & FilePath & " to get next available Movie ID.", EventLogLevel.ErrorEvent)
             Return 0
         End If
 
@@ -383,6 +390,7 @@ Module Module1
         CleanString = RemoveNastyCharacters(CleanString)
         Return CleanString
     End Function
+
     Public Function GetIMDBidFromFilePath(ByVal FilePath As String)
         Dim CleanString As String = ""
 
@@ -441,7 +449,6 @@ Module Module1
         Return strText
     End Function
 
-
     Public Function GetFileData(ByVal FilePath As String, ByVal DataItem As String)
         'Function to retreive information from the given file.
 
@@ -458,8 +465,8 @@ Module Module1
         Dim MI As MediaInfo = New MediaInfo
         Dim i As Integer = 0
         If Not System.IO.File.Exists(FilePath) Then
-            Return "ERROR : File cannot be found"
-            LogEvent("Error - Cannot open file for analysis - " & FilePath, EventLogLevel.ErrorOrSimilar)
+            Return "ErrorEvent : File cannot be found"
+            LogEvent("ErrorEvent - Cannot open file for analysis - " & FilePath, EventLogLevel.ErrorEvent)
             Exit Function
         End If
 
@@ -475,7 +482,7 @@ Module Module1
 
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, 3)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, 3)
                     ReturnValue = ""
                 End Try
 
@@ -494,7 +501,7 @@ Module Module1
 
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
 
@@ -514,7 +521,7 @@ Module Module1
                     End If
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "videoformat"
@@ -530,7 +537,7 @@ Module Module1
                     End If
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "videobitrate" 'divide by 1000 as returned in bps.
@@ -547,7 +554,7 @@ Module Module1
                     End If
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "audioformat"
@@ -558,7 +565,7 @@ Module Module1
                     MI.Close()
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "audiostreamcount"
@@ -569,7 +576,7 @@ Module Module1
                     MI.Close()
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "audiostreamcodeclist"
@@ -580,7 +587,7 @@ Module Module1
                     MI.Close()
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "audiostreamlanguagelist"
@@ -621,7 +628,7 @@ Module Module1
                     MI.Close()
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "audiobitrate" 'divide
@@ -638,7 +645,7 @@ Module Module1
                     End If
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "audiochannelcount"
@@ -655,7 +662,7 @@ Module Module1
                     End If
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "textstreamcodeclist"
@@ -666,7 +673,7 @@ Module Module1
                     MI.Close()
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "textstreamlanguagelist"
@@ -701,7 +708,7 @@ Module Module1
                     MI.Close()
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
 
@@ -717,7 +724,7 @@ Module Module1
                     ReturnValue = TempString
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "framerate"
@@ -729,7 +736,7 @@ Module Module1
                     ReturnValue = TempString
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "filesize" 'get in MB = divide by 1024 twice
@@ -739,7 +746,7 @@ Module Module1
                     ReturnValue = CLng((TempInteger / 1048576)).ToString
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "date"
@@ -761,7 +768,7 @@ Module Module1
                     End Select
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case "aspectratio"
@@ -773,7 +780,7 @@ Module Module1
                     ReturnValue = TempString
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
             Case Else
@@ -788,7 +795,6 @@ Module Module1
         Return ReturnValue
 
     End Function
-
 
     Public Function GetHTMLFileData(ByVal FilePath As String, ByVal DataItem As String)
         'Guzzi: Function to retreive information from the HTML-Files in movie directory...
@@ -817,8 +823,8 @@ Module Module1
         End If
 
         If Not System.IO.File.Exists(HTMLfilename) Then
-            LogEvent("Error - Cannot open file for analysis - " & HTMLfilename, EventLogLevel.ErrorOrSimilar)
-            Return "ERROR : File " + HTMLfilename + " cannot be found"
+            LogEvent("ErrorEvent - Cannot open file for analysis - " & HTMLfilename, EventLogLevel.ErrorEvent)
+            Return "ErrorEvent : File " + HTMLfilename + " cannot be found"
             Exit Function
         End If
 
@@ -834,7 +840,7 @@ Module Module1
 
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, 3)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, 3)
                     ReturnValue = ""
                 End Try
 
@@ -859,7 +865,7 @@ Module Module1
                     'MsgBox(Guzzidescription2)
                     ReturnValue = Guzzidescription2
                 Catch ex As Exception
-                    LogEvent("fnGetDescription: ERROR - Cannot parse " + FilePath, 3)
+                    LogEvent("fnGetDescription: ErrorEvent - Cannot parse " + FilePath, 3)
                 End Try
 
             Case "filename"
@@ -877,7 +883,7 @@ Module Module1
 
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
 
@@ -892,8 +898,8 @@ Module Module1
                 FilePath = FileName + "\index.php.htm"
                 Dim fi As New IO.FileInfo(FilePath)
                 If Not fi.Exists Then
-                    LogEvent("fnGetDateAdded: Error - Cannot open file for analysis: " & FilePath, 3)
-                    Return "ERROR : File " + FilePath + " cannot be found"
+                    LogEvent("fnGetDateAdded: ErrorEvent - Cannot open file for analysis: " & FilePath, 3)
+                    Return "ErrorEvent : File " + FilePath + " cannot be found"
                     Exit Function
                 End If
                 Try
@@ -915,9 +921,9 @@ Module Module1
                     Dim Guzzidescription3 As String = Guzzidescription2.Substring(InStrRev(Guzzidescription2, " "))
                     ReturnValue = Guzzidescription3
                 Catch ex As Exception
-                    LogEvent("fnGetDateAdded: ERROR - Cannot parse " + FilePath, 3)
+                    LogEvent("fnGetDateAdded: ErrorEvent - Cannot parse " + FilePath, 3)
                     'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
 
@@ -970,7 +976,6 @@ Module Module1
         ReturnValue = FileName.Replace(FileNameEnd, "")
         Return ReturnValue
     End Function
-
 
     Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String, ByVal Group_Name_Identifier As String)
         Dim ReturnValue As String = String.Empty
@@ -1162,12 +1167,27 @@ Module Module1
 
 
         If Form1.Visible = True Then
-            dgLogWindow.txtLogWindow.AppendText(LogText & vbCrLf)
-            If LogLevel = EventLogLevel.ImportantEvent Then
-                Form1.ToolStripStatusLabel.Text = EventString
+            'LogEventNew.Debug(LogText & vbCrLf)
+            If watch Is Nothing Then
+                watch = New Stopwatch()
+                watch.Reset()
+                watch.Start()
+            End If
+
+            BufferedLogEvents.AppendLine(LogText) 'BufferedLogEvents += LogText & vbCrLf
+
+            If watch.Elapsed.TotalMilliseconds > 200 Then
+                dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
+                BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+                watch.Reset()
+                watch.Start()
             End If
         End If
 
+        'dgLogWindow.txtLogWindow.AppendText(LogText & vbCrLf)
+        'If LogLevel = EventLogLevel.ImportantEvent Then
+        '    Form1.ToolStripStatusLabel.Text = EventString
+        'End If
         If LogItem = True Then
             Try
                 My.Computer.FileSystem.WriteAllText(path, vbCrLf + LogText, True)
@@ -1177,7 +1197,12 @@ Module Module1
         End If
 
     End Sub
-
+    Public Sub LogEventCheckBuffer()
+        If BufferedLogEvents.Length > 0 And watch.Elapsed.TotalMilliseconds > 200 Then
+            dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
+            BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+        End If
+    End Sub
     Public Enum ButtonStatus
         ReadyToParseXML = 0
         ReadyToSearchFolders = 1
@@ -1219,7 +1244,6 @@ Module Module1
             Form1.btnJustDoIt.Enabled = False
         End If
     End Sub
-
 
     Public Function GetFileChecksum(ByVal FilePath As String)
 
@@ -1427,6 +1451,7 @@ Module Module1
         End If
         Return fanartTitle
     End Function
+
     Public Function RemoveGroupNameAndEdition(ByVal FullName As String, ByVal Edition As String) As String
         Dim Name As String
         If FullName.Contains("\") = True Then
@@ -1444,6 +1469,7 @@ Module Module1
 
         Return Name
     End Function
+
     Public Function WriteNfoFile(ByVal OutFileName As String, ByVal node As XmlNode, ByVal UpdateOnlyMissing As Boolean, ByVal mastertitle As String)
         ' Create XmlWriterSettings.
 

@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{
 		Installer\update.xml = Installer\update.xml
 	EndProjectSection
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AMCupdaterLib", "AMCupdater\AMCupdaterLib\AMCupdaterLib.vbproj", "{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -194,6 +196,24 @@ Global
 		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|x64.ActiveCfg = Release|Any CPU
 		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|x86.ActiveCfg = Release|Any CPU
 		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|x86.Build.0 = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release (Standalone)|x64.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release|x64.ActiveCfg = Release|Any CPU
+		{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

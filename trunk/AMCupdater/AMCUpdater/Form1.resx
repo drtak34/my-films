@@ -139,34 +139,6 @@
     <value>Use "Import Movies" to scan your movie directories, retrieve mediainfo and internet data, add the movies to your catalog and optional remove movies you don't have anymore from catalog.
 Depending on your settings, this can be done with or without user interaction (e.g. userdialog if movie can't be identified automatically) and you can decide, if a non identified movie should be added without internet data.</value>
   </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 5</value>
-  </metadata>
-  <data name="chkDontAskInteractive.ToolTip" xml:space="preserve">
-    <value>Only effective, if you have chosen the internet lookup behaviour as
-"try to find best match automatically".
-If unchecked, you will get a dialog for each movie AMCupdater cannot automatically match.
-If checked, you won't get a dialog - instead AMCupdater is importing the movie without internet data.</value>
-  </data>
-  <data name="cbInternetLookupBehaviour.ToolTip" xml:space="preserve">
-    <value>If you choose "try to find best match automatically", AMCupdater will automatically load internet infos
-in the case, only one match is found for the selected movie (assuming, this one match is the right one).
-If you choose "always ask" you will always get a dialog to verify, if the found movie is the correct one - 
-even if only one result was found.
-
-Note:
-If you don't have e.g. the year in the directory or movie name, AMCupdater most probably will not get good matches on movie searches.
-To get good matches automatically, year should be in directory or filename in brackets - e.g. "moviename (1982)"</value>
-  </data>
-  <data name="chkImportOnInternetFail.ToolTip" xml:space="preserve">
-    <value>Continue processing and import files even when Internet lookup fails or similar.
-This is the preferred setting for silent background operation, if you
-prefer to have your media files imported, even if the internet lookup is failing.
-It gives you the possibility to update the INternet infos interactively in MyFilms.
-To have this option active for silent background operation (e.g. global update from MyFilms GUI,
-but NOT active for AMCupdater interactive GUI mode, you have to select the 
-option "Don't import file in interactive mode".</value>
-  </data>
   <data name="cbTitleHandling.ToolTip" xml:space="preserve">
     <value>Options are:
 File Name: use file name for title field
@@ -188,16 +160,6 @@ If you have your movie files in folders, that have the movie title, select “fo
     <value>Enter the location of an Internet Parser file.
 These files allow AMCUpdater to access Internet Movie sites to get movie information
 Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
-  </data>
-  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
-    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
-If orphaned entries are found, they will be purged from the database.
-This only affects database entries which reference the currently scanned movie folder(s).
-Override path is taken into account for this option.
-For example, an entry listing a Source of 'd:\Movies' will not be considered an orphan if you only scan 'e:\Other Movies'.
-
-Entries with sources outside the scan directories are not purged automatically - only entries with sources 
-within the active scan folders will be purged automatically.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancelProcessing.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -382,6 +344,50 @@ within the active scan folders will be purged automatically.</value>
         pVUnkyNj9wU/bHJfQvQVQFr/dwyKhUQPMpakbJRgR5rMWXYLQJqMbU1FyLoLPvt1/uTpK4N8bA2Zo0L7
         kjX+os/+D1cNRyxq14aNAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <metadata name="MovieBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>19, 90</value>
+  </metadata>
+  <metadata name="PersonBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>175, 91</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 5</value>
+  </metadata>
+  <data name="chkDontAskInteractive.ToolTip" xml:space="preserve">
+    <value>Only effective, if you have chosen the internet lookup behaviour as
+"try to find best match automatically".
+If unchecked, you will get a dialog for each movie AMCupdater cannot automatically match.
+If checked, you won't get a dialog - instead AMCupdater is importing the movie without internet data.</value>
+  </data>
+  <data name="cbInternetLookupBehaviour.ToolTip" xml:space="preserve">
+    <value>If you choose "try to find best match automatically", AMCupdater will automatically load internet infos
+in the case, only one match is found for the selected movie (assuming, this one match is the right one).
+If you choose "always ask" you will always get a dialog to verify, if the found movie is the correct one - 
+even if only one result was found.
+
+Note:
+If you don't have e.g. the year in the directory or movie name, AMCupdater most probably will not get good matches on movie searches.
+To get good matches automatically, year should be in directory or filename in brackets - e.g. "moviename (1982)"</value>
+  </data>
+  <data name="chkImportOnInternetFail.ToolTip" xml:space="preserve">
+    <value>Continue processing and import files even when Internet lookup fails or similar.
+This is the preferred setting for silent background operation, if you
+prefer to have your media files imported, even if the internet lookup is failing.
+It gives you the possibility to update the INternet infos interactively in MyFilms.
+To have this option active for silent background operation (e.g. global update from MyFilms GUI,
+but NOT active for AMCupdater interactive GUI mode, you have to select the 
+option "Don't import file in interactive mode".</value>
+  </data>
+  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
+    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
+If orphaned entries are found, they will be purged from the database.
+This only affects database entries which reference the currently scanned movie folder(s).
+Override path is taken into account for this option.
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphan if you only scan 'e:\Other Movies'.
+
+Entries with sources outside the scan directories are not purged automatically - only entries with sources 
+within the active scan folders will be purged automatically.</value>
   </data>
   <data name="btnManualCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -801,9 +807,6 @@ These files will be scanned to determine what languages are included, if possibl
 This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
 </value>
   </data>
-  <metadata name="MovieBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>19, 90</value>
-  </metadata>
   <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>21, 64</value>
   </metadata>
@@ -907,9 +910,6 @@ This does not affect the detection of external subtitle files - but may improve 
         2t8BnlFC1NRw1uAAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="PersonBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>175, 91</value>
-  </metadata>
   <data name="CheckBox1.ToolTip" xml:space="preserve">
     <value>Check this, if you want to update your movie data without user interaction.
 If a movie can't be identified automatically, it will NOT show the userdialog for manual selection.

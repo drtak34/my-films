@@ -448,8 +448,6 @@ Public Class AntRecord
                 End If
             End If
         Next
-
-
     End Sub
     Public Sub CreateElement()
         _XMLElement = XMLDoc.CreateElement("Movie")
@@ -462,8 +460,8 @@ Public Class AntRecord
 
         'Dim CurrentNode2 As Xml.XmlNode
         'Dim CurrentAttribute2 As String
-        ''CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
-        'CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
+        ''CurrentNode2 = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
+        'CurrentNode2 = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
         'If (Not CurrentNode2 Is Nothing) Then
         '    If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then 'check, if two movies with same otitle but different recordnumber exist
         '        CurrentAttribute2 = _SourceField
@@ -1021,7 +1019,7 @@ Public Class AntRecord
                 End While
             End If
         Catch ex As Exception
-            _LastOutputMessage = "ERROR : Error on Internet Lookup for " & _FileName.ToString & " : " & ex.Message.ToString & " - Stacktrace: " & ex.StackTrace.ToString
+            _LastOutputMessage = "ErrorEvent : ErrorEvent on Internet Lookup for " & _FileName.ToString & " : " & ex.Message.ToString & " - Stacktrace: " & ex.StackTrace.ToString
         End Try
     End Sub
 
@@ -1291,7 +1289,7 @@ Public Class AntRecord
                     TempValue = _InternetData(Grabber_Output.TranslatedTitle)
                     If TempValue Is Nothing Or TempValue = "" Then
                         _InternetLookupOK = False
-                        _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : Matching the movie was successful, but grabber failed getting movie details data (title)"
+                        _LastOutputMessage = "ErrorEvent : ErrorEvent importing " & _FileName.ToString & " : Matching the movie was successful, but grabber failed getting movie details data (title)"
                     End If
                 End If
             End If
@@ -1332,7 +1330,7 @@ Public Class AntRecord
                     _XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
                 End If
             ElseIf ProcessMode = Process_Mode_Names.Import Then
-                _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : No originaltitle or translatedtitle activated"
+                _LastOutputMessage = "ErrorEvent : ErrorEvent importing " & _FileName.ToString & " : No originaltitle or translatedtitle activated"
             End If
 
             CurrentAttribute = "FormattedTitle"
@@ -1424,7 +1422,7 @@ Public Class AntRecord
                 'TempValue = fnGetFileData(_FilePath, "Runtime")
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
-                        If GetFileData(wfile, "runtime") <> "" And Not GetFileData(wfile, "runtime").Contains("ERROR") Then
+                        If GetFileData(wfile, "runtime") <> "" And Not GetFileData(wfile, "runtime").Contains("ErrorEvent") Then
                             If TempValue = "" Then
                                 TempValue = GetFileData(wfile, "runtime")
                             Else
@@ -1437,7 +1435,7 @@ Public Class AntRecord
                 Else
                     TempValue = GetFileData(_FilePath, "runtime")
                 End If
-                If Not TempValue.Contains("ERROR") Then
+                If Not TempValue.Contains("ErrorEvent") Then
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
@@ -1482,7 +1480,7 @@ Public Class AntRecord
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
-                        If GetFileData(wfile, "FileSize") <> "" And Not GetFileData(wfile, "FileSize").Contains("ERROR") Then
+                        If GetFileData(wfile, "FileSize") <> "" And Not GetFileData(wfile, "FileSize").Contains("ErrorEvent") Then
                             If TempValue = "" Then
                                 TempValue = GetFileData(wfile, "FileSize")
                             Else
@@ -1494,7 +1492,7 @@ Public Class AntRecord
                     TempValue = GetFileData(_FilePath, "FileSize")
                 End If
 
-                If Not TempValue.Contains("ERROR") Then
+                If Not TempValue.Contains("ErrorEvent") Then
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
@@ -1897,7 +1895,7 @@ Public Class AntRecord
             End If
 
         Catch ex As Exception
-            _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : " & ex.Message.ToString & ", " & ex.StackTrace.ToString
+            _LastOutputMessage = "ErrorEvent : ErrorEvent importing " & _FileName.ToString & " : " & ex.Message.ToString & ", " & ex.StackTrace.ToString
         End Try
     End Sub
 
@@ -2087,7 +2085,7 @@ Public Class AntRecord
     Public Sub UpdateElement()
 
         Dim CurrentNode As Xml.XmlNode
-        CurrentNode = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & _MovieNumber & "']")
+        CurrentNode = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & _MovieNumber & "']")
         CurrentNode.Attributes(_SourceField).Value = _OverridePath
         _XMLElement = CurrentNode
 

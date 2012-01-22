@@ -21,7 +21,7 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
-            'LogEvent("", EventLogLevel.ErrorOrSimilar)
+            'LogEvent("", EventLogLevel.ErrorEvent)
             'LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
             'LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
             'If My.Application.CommandLineArgs.Count > 0 Then
@@ -43,7 +43,7 @@ Namespace My
                 CurrentSettings.LoadUserSettings(My.Application.CommandLineArgs.Item(0))
                 Dim ConfigFile As String = My.Application.CommandLineArgs.Item(0)
                 If Not IO.File.Exists(ConfigFile) Then
-                    LogEvent("ERROR - Config File '" & ConfigFile.ToString & "' not found.", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent - Config File '" & ConfigFile.ToString & "' not found.", EventLogLevel.ErrorEvent)
                     Exit Sub
                 End If
 
@@ -59,7 +59,7 @@ Namespace My
 
                 If (My.Application.CommandLineArgs.Count < 3 And My.Application.CommandLineArgs.Count > 0) Then
                     Dim c As New BatchApplication
-                    LogEvent("", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("", EventLogLevel.ErrorEvent)
                     LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
                     LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Arguments : " & My.Application.CommandLineArgs.ToString, EventLogLevel.ImportantEvent)
@@ -67,14 +67,14 @@ Namespace My
                     e.Cancel = True
                     c.Main()
                 ElseIf My.Application.CommandLineArgs.Item(2) = "GUI" Then
-                    LogEvent("", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("", EventLogLevel.ErrorEvent)
                     LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
                     LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in forced GUI Mode with Configfile", EventLogLevel.ImportantEvent)
                     'CurrentSettings.LoadUserSettings()
                 Else
                     Dim c As New BatchApplication
-                    LogEvent("", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("", EventLogLevel.ErrorEvent)
                     LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
                     LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in forced Console Mode", EventLogLevel.ImportantEvent)
@@ -82,7 +82,7 @@ Namespace My
                     c.Main()
                 End If
             Else
-                LogEvent("", EventLogLevel.ErrorOrSimilar)
+                LogEvent("", EventLogLevel.ErrorEvent)
                 LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
                 LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                 LogEvent("Running in GUI Mode", EventLogLevel.ImportantEvent)
@@ -166,7 +166,7 @@ Namespace My
                     End If
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                 Finally
                     LogEvent(" - Processing Complete.", EventLogLevel.ImportantEvent)
                 End Try

@@ -34,6 +34,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System.Windows.Forms;
   using System.Xml;
 
+  using Grabber;
+
   using IWshRuntimeLibrary;
 
   using MediaPortal.Configuration;
@@ -76,6 +78,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private bool RunWizardAfterInstall = false; // Will only be set true after first blank install, when no MyFilms.xml config is present to launch Wizard.
         private bool NewConfigButton = false; // Will avid that catalogselectedindex-changed will be run on "New!" config...
         private string ActiveLogoPath = String.Empty;
+
+        private string Config_Name_Last = "NoFormerConfig";
 
         public MyFilmsSetup()
         {
@@ -1210,8 +1214,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void Config_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-          Config_Name_Load();
-          BindSources();
+          if (Config_Name.Text == Config_Name_Last)
+          {
+            return;
+          }
+          else
+          {
+            Config_Name_Load();
+            BindSources();
+            Config_Name_Last = Config_Name.Text;
+          }
         }
 
         private void BindSources()
@@ -1231,7 +1243,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);
-            CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
+            CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
             this.AddRemoveExtendedfields((CatalogType.SelectedIndex > 0));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
             AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
@@ -2418,8 +2430,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         //XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/XMM_Movie_Database/Movie");
                         //foreach (XmlNode nodeDVD in dvdList)
                         //{ }
-                        XmlNode nodeDBname = doc.DocumentElement.SelectSingleNode("/XMM_Movie_Database/DBName");
-                        XmlNode nodeDBpath = doc.DocumentElement.SelectSingleNode("/XMM_Movie_Database/DBpath");
+                        XmlNode nodeDBname = doc.DocumentElement.SelectSingleNodeFast("/XMM_Movie_Database/DBName");
+                        XmlNode nodeDBpath = doc.DocumentElement.SelectSingleNodeFast("/XMM_Movie_Database/DBpath");
                         if (nodeDBname != null && nodeDBname.InnerText.Length > 0)
                           DBname = nodeDBname.InnerText.Replace(char.ConvertFromUtf32(160), " ");
                         if (nodeDBpath != null && nodeDBpath.InnerText.Length > 0)

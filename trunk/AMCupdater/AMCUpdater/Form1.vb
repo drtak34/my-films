@@ -5,12 +5,16 @@ Imports System.Security.Cryptography
 Imports System.Management
 Imports System.Windows.Forms
 Imports System.Windows.Forms.SystemInformation
+Imports System.Drawing
+Imports Importer
 
 Imports MediaPortal.Configuration
 Imports NLog
 Imports NLog.Targets
 Imports MediaPortal.Services
 Imports NLog.Config
+Imports System.Timers
+
 'Imports MyFilmsPlugin
 
 Public Class Form1
@@ -26,8 +30,14 @@ Public Class Form1
     Public OverridePath As String
     Public SourceField As String
 
+    Public Shared aTimer As System.Threading.Timer
+
     Private ValidOptions As Boolean = True
-    Private LogAMCU As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
+    Private Shared LogEventNew As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
+
+    Private bWatcherActive As Boolean = False
+    Public Shared watcher As ShareWatcherHelper.ShareWatcherHelper = Nothing
+    'Public Shared watcher As Watcher = Nothing
 
     Shared MediaData As Hashtable
     Shared InternetData As Hashtable
@@ -36,6 +46,11 @@ Public Class Form1
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
+        'InitLogger()
+
+        ' Create a timer that will call the OnTimedEvent method every second.
+        aTimer = New System.Threading.Timer(AddressOf OnTimedEvent, Nothing, 0, 1000)
+
         Dim asm As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly()
         Label_VersionNumber.Text = "V" + asm.GetName().Version.ToString()
 
@@ -51,6 +66,18 @@ Public Class Form1
 
 
     End Sub
+
+    Sub OnTimedEvent(ByVal x As Object)
+        ' Don't do anything if the form's handle hasn't been created 
+        ' or the form has been disposed.
+        If (Not Me.IsHandleCreated And Not Me.IsDisposed) Then Return
+
+        ' Create the method invoker.
+        ' The method body shows the current time in the forms title bar.
+        Dim mi As MethodInvoker = AddressOf LogEventCheckBuffer
+        Me.Invoke(mi)
+    End Sub
+
     Private Sub HideTabPage(ByVal tp As TabPage)
         If TabControl1.TabPages.Contains(tp) Then TabControl1.TabPages.Remove(tp)
     End Sub
@@ -97,8 +124,9 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Enter
-        InitLogger()
+        'InitLogger()
     End Sub
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         If My.Settings.MainFormSize.Height > 0 And My.Settings.MainFormSize.Width > 0 Then
@@ -279,7 +307,7 @@ Public Class Form1
             'MsgBoxStyle.OkOnly, "Save...")
         Catch ex As Exception
             MsgBox("There was a problem saving your settings.", _
-            MsgBoxStyle.Critical, "Save Error...")
+            MsgBoxStyle.Critical, "Save ErrorEvent...")
         End Try
 
         If dgLogWindow.Visible = True Then
@@ -408,7 +436,7 @@ Public Class Form1
 
             SetCheckButtonStatus(ButtonStatus.ReadyToFindOrphans)
         Else
-            MsgBox("Error : Movie Folder(s) Not Found : " & ErrorText, MsgBoxStyle.Exclamation)
+            MsgBox("ErrorEvent : Movie Folder(s) Not Found : " & ErrorText, MsgBoxStyle.Exclamation)
         End If
         Me.Cursor = Windows.Forms.Cursors.Arrow
 
@@ -443,7 +471,7 @@ Public Class Form1
         Try
             AntProcessor.UpdateXMLFile()
         Catch ex As Exception
-            LogEvent("Error : " & ex.Message & " - Stacktrace: " & ex.StackTrace.ToString, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " & ex.Message & " - Stacktrace: " & ex.StackTrace.ToString, EventLogLevel.ErrorEvent)
             'Finally
             'fnSetCheckButtonStatus(ButtonStatus.ParseXML)
         End Try
@@ -466,6 +494,81 @@ Public Class Form1
 
     End Sub
 
+    Private Sub BtnImportWatcher_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnImportWatcher.Click
+
+        If watcher Is Nothing Then
+            'Thread.CurrentThread.Name = "ShareWatcher"
+            bWatcherActive = True
+            BtnImportWatcher.BackColor = Color.Green
+            ' Setup the Watching
+            watcher = New ShareWatcherHelper.ShareWatcherHelper()
+            watcher.SetMonitoring(True)
+            watcher.StartMonitor()
+        Else
+            If bWatcherActive Then
+                bWatcherActive = False
+                BtnImportWatcher.BackColor = Color.Empty
+                SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
+                watcher.ChangeMonitoring(False)
+            Else
+                bWatcherActive = True
+                BtnImportWatcher.BackColor = Color.Green
+                SetCheckButtonStatus(ButtonStatus.DisableAll)
+                watcher.ChangeMonitoring(True)
+            End If
+        End If
+    End Sub
+
+    Private Sub UpdateSingleMovies(ByVal filenames As String())
+        btnParseXML_Click(Nothing, Nothing) ' read DB
+        'btnProcessMovieList_Click(Nothing, Nothing) ' check existing files
+
+        ApplySettings()
+        With AntProcessor
+            .ProcessMovieFolderForSingleMovie(filenames)
+        End With
+
+        btnFindOrphans_Click(Nothing, Nothing) ' find orphans
+        If AntProcessor.CountOrphanFiles > 0 Then
+            SetCheckButtonStatus(ButtonStatus.DisableAll)
+            Try
+                AntProcessor.UpdateXMLFile()
+            Catch ex As Exception
+                LogEvent("ErrorEvent : " & ex.Message & " - Stacktrace: " & ex.StackTrace.ToString, EventLogLevel.ErrorEvent)
+            End Try
+            ' added to force refresh of View Collection Tab
+            txtConfigFilePath_TextChanged(Nothing, Nothing) 'Me.txtConfigFilePath.Text = Me.txtConfigFilePath.Text
+        End If
+        SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
+    End Sub
+
+    Private Sub setUpFolderWatches()
+        Dim importFolders As List(Of String) = New List(Of String)
+
+        For Each CurrentMoviePath In CurrentSettings.Movie_Scan_Path.Split(";")
+
+            Dim dir As New DirectoryInfo(CurrentMoviePath)
+            If Not dir.Exists Then
+                LogEvent("ErrorEvent : Cannot access folder '" + CurrentMoviePath.ToString + "'", EventLogLevel.ErrorEvent)
+            Else
+                If Not CurrentMoviePath.EndsWith("\") = True Then
+                    CurrentMoviePath = CurrentMoviePath & "\"
+                    importFolders.Add(CurrentMoviePath)
+                End If
+            End If
+        Next
+
+
+        'watcher = New Watcher(importFolders, 5)
+        'watcher.WatcherProgress += New Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress)
+        'watcher.StartFolderWatch()
+    End Sub
+
+    Private Sub stopFolderWatches()
+        'watcher.StopFolderWatch()
+        'watcher.WatcherProgress -= New Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress)
+        'watcher = Nothing
+    End Sub
 
 #End Region
 
@@ -664,7 +767,7 @@ Public Class Form1
                 End If
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -693,13 +796,13 @@ Public Class Form1
                         txtConfigFilePath.Text = .FileName
                         txtManualXMLPath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             Console.WriteLine(ex.Message)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
@@ -798,13 +901,13 @@ Public Class Form1
                     Try
                         txtManualXMLPath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             Console.WriteLine(ex.Message)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
@@ -836,13 +939,13 @@ Public Class Form1
                     Try
                         txtParserFilePath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -873,13 +976,13 @@ Public Class Form1
                     Try
                         txtExcludeFilePath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -905,12 +1008,12 @@ Public Class Form1
                     Try
                         txtExecuteProgramPath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             Console.WriteLine(ex.Message)
             '            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
@@ -1038,13 +1141,13 @@ Public Class Form1
                     Try
                         txtManualInternetParserPath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -1071,13 +1174,13 @@ Public Class Form1
                     Try
                         txtManualExcludedMoviesPath.Text = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -2070,13 +2173,13 @@ Public Class Form1
                     Try
                         SettingsFile = .FileName
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             Console.WriteLine(ex.Message)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
@@ -2123,13 +2226,13 @@ Public Class Form1
                         CurrentSettings.UserSettingsFile = .FileName
                         CurrentSettings.SaveUserSettings()
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             Console.WriteLine(ex.Message)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
@@ -2542,7 +2645,7 @@ Public Class Form1
                 End If
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -2566,7 +2669,7 @@ Public Class Form1
                 End If
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -2611,7 +2714,7 @@ Public Class Form1
         newMovie.OriginalTitle = "New Movie"
         myMovieCatalog.Movie.AddMovieRow(newMovie)
         LogEvent("Added new Movie : '" & newMovie.OriginalTitle & "', Number : '" & newMovie.Number & "'", EventLogLevel.Informational)
-        'LogEvent("ERROR : ", EventLogLevel.Informational)
+        'LogEvent("ErrorEvent : ", EventLogLevel.Informational)
     End Sub
     Private Sub BindingNavigatorAddNewItemPerson_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItemPerson.Click
         Dim amc As AntMovieCatalog = New AntMovieCatalog()
@@ -2708,11 +2811,11 @@ Public Class Form1
                     CurrentSettings.UserSettingsFile = My.Application.CommandLineArgs.Item(0)
                     CurrentSettings.SaveUserSettings()
                 Catch fileException As Exception
-                    LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                 End Try
 
             Catch ex As Exception
-                LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+                LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
                 Console.WriteLine(ex.Message)
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
             End Try
@@ -2742,13 +2845,13 @@ Public Class Form1
                             CurrentSettings.UserSettingsFile = .FileName
                             CurrentSettings.SaveUserSettings()
                         Catch fileException As Exception
-                            LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                            LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                         End Try
                     End If
 
                 End With
             Catch ex As Exception
-                LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+                LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
                 Console.WriteLine(ex.Message)
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
             End Try
@@ -2825,7 +2928,7 @@ Public Class Form1
                 My.Computer.FileSystem.DeleteFile(txtExcludeFilePath.Text)
                 MsgBox("File deleted !", MsgBoxStyle.Information)
             Catch deleteException As Exception
-                MsgBox("An error occurred ! - Error: " + deleteException.Message, MsgBoxStyle.Exclamation)
+                MsgBox("An ErrorEvent occurred ! - ErrorEvent: " + deleteException.Message, MsgBoxStyle.Exclamation)
             End Try
         End If
     End Sub
@@ -2837,7 +2940,7 @@ Public Class Form1
                 My.Computer.FileSystem.DeleteFile(txtManualExcludedMoviesPath.Text)
                 MsgBox("File deleted !", MsgBoxStyle.Information)
             Catch deleteException As Exception
-                MsgBox("An error occurred ! - Error: " + deleteException.Message, MsgBoxStyle.Exclamation)
+                MsgBox("An ErrorEvent occurred ! - ErrorEvent: " + deleteException.Message, MsgBoxStyle.Exclamation)
             End Try
         End If
     End Sub
@@ -2953,15 +3056,15 @@ Public Class Form1
     End Sub
     Private Shared Sub InitLogger()
         'Dim config As Nlog.LoggingConfiguration = LogManager.Configuration ?? new LoggingConfiguration
-        Dim conf As LoggingConfiguration
+        Dim LogEvent As LoggingConfiguration
         If Not LogManager.Configuration Is Nothing Then
-            conf = LogManager.Configuration
+            LogEvent = LogManager.Configuration
         Else
-            conf = New LoggingConfiguration
+            LogEvent = New LoggingConfiguration
         End If
 
-        Dim LogFileName As String = "MyFilmsAMCU.log"
-        Dim OldLogFileName As String = "MyFilmsAMCU-old.log"
+        Const LogFileName As String = "MyFilmsAMCU.log"
+        Const OldLogFileName As String = "MyFilmsAMCU-old.log"
         Try
             Dim logFile As FileInfo = New FileInfo(Config.GetFile(Config.Dir.Log, LogFileName))
             If logFile.Exists = True Then
@@ -2978,13 +3081,23 @@ Public Class Form1
         Dim fileTarget As FileTarget = New FileTarget
         fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName)
         fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " & "${level:fixedLength=true:padding=5} " & "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " & "${exception:format=tostring}"
+        LogEvent.AddTarget("file", fileTarget)
 
-        conf.AddTarget("file", fileTarget)
+        'Dim logWindowTarget As RichTextBoxTarget = New RichTextBoxTarget()
+        'logWindowTarget.Name = "WindowLog"
+        'logWindowTarget.FormName = "dgLogWindow"
+        'logWindowTarget.ControlName = "RichTextBoxLogWindow" 'dgLogWindow.RichTextBoxLogWindow.Name
+        'logWindowTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " & "${level:fixedLength=true:padding=5} " & "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " & "${exception:format=tostring}"
+        ''logWindowTarget.Layout = "${longdate}|${level:uppercase=true}|${logger}|${message}"
+        'logWindowTarget.UseDefaultRowColoringRules = True
+        ''logWindowTarget.WordColoringRules.Add("backgroundColor=grey fontColor=black ignoreCase=False regex="String" style="Enum" text="String" wholeWords = "Boolean")
+        'LogEvent.AddTarget("logwindow", logWindowTarget)
+
 
         ' Get current Log Level from MediaPortal 
         Dim logLevel As NLog.LogLevel
 
-        'logLevel = logLevel.Error
+        'logLevel = logLevel.ErrorEvent
         'logLevel = logLevel.Warn
         'logLevel = logLevel.Info
         logLevel = logLevel.Debug
@@ -2993,8 +3106,13 @@ Public Class Form1
 #End If
 
         Dim Rule As LoggingRule = New LoggingRule("*", logLevel, fileTarget)
-        conf.LoggingRules.Add(Rule)
-        LogManager.Configuration = conf
+        LogEvent.LoggingRules.Add(Rule)
+        NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(fileTarget, logLevel.Trace)
+        'Dim Rule2 As LoggingRule = New LoggingRule("*", logLevel, logWindowTarget)
+        'LogEvent.LoggingRules.Add(Rule2)
+        'NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(logWindowTarget, logLevel.Debug)
+        LogManager.Configuration = LogEvent
     End Sub
+
 End Class
 

@@ -29,6 +29,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System.Xml;
   using System.Globalization;
 
+  using Grabber;
+
   class PersonalVideoDatabase
     {
         public Dictionary<string, string> ProfilerDict;
@@ -147,33 +149,33 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     string Certification = string.Empty;
                   
                     destXml.WriteStartElement("Movie");
-                    string wID = nodeDVD.SelectSingleNode("num").InnerText;
+                    string wID = nodeDVD.SelectSingleNodeFast("num").InnerText;
                     if (!string.IsNullOrEmpty(wID))
                         WriteAntAtribute(destXml, "num", wID);
                     else
                         WriteAntAtribute(destXml, "num", "9999");
-                    if (nodeDVD.SelectSingleNode("origtitle") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNode("origtitle").InnerText))
-                      WriteAntAtribute(destXml, "origtitle", nodeDVD.SelectSingleNode("origtitle").InnerText);
-                    if (nodeDVD.SelectSingleNode("title") != null && nodeDVD.SelectSingleNode("title").InnerText.Length > 0)
-                      WriteAntAtribute(destXml, "title", nodeDVD.SelectSingleNode("title").InnerText);
-                    if (nodeDVD.SelectSingleNode("aka") != null && nodeDVD.SelectSingleNode("aka").InnerText.Length > 0)
-                      WriteAntAtribute(destXml, "aka", nodeDVD.SelectSingleNode("aka").InnerText);
-                    if (nodeDVD.SelectSingleNode("viewed") != null)
-                      if (nodeDVD.SelectSingleNode("viewed").InnerText == "-1")
+                    if (nodeDVD.SelectSingleNodeFast("origtitle") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNodeFast("origtitle").InnerText))
+                      WriteAntAtribute(destXml, "origtitle", nodeDVD.SelectSingleNodeFast("origtitle").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("title") != null && nodeDVD.SelectSingleNodeFast("title").InnerText.Length > 0)
+                      WriteAntAtribute(destXml, "title", nodeDVD.SelectSingleNodeFast("title").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("aka") != null && nodeDVD.SelectSingleNodeFast("aka").InnerText.Length > 0)
+                      WriteAntAtribute(destXml, "aka", nodeDVD.SelectSingleNodeFast("aka").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("viewed") != null)
+                      if (nodeDVD.SelectSingleNodeFast("viewed").InnerText == "-1")
                         WriteAntAtribute(destXml, "viewed", "true");
                         else
                         WriteAntAtribute(destXml, "viewed", "false");
                     DateTime dt = new DateTime();
-                    if (nodeDVD.SelectSingleNode("dateadded") != null)
+                    if (nodeDVD.SelectSingleNodeFast("dateadded") != null)
                         try
                         {
-                          dt = DateTime.Parse(nodeDVD.SelectSingleNode("dateadded").InnerText.ToString());
+                          dt = DateTime.Parse(nodeDVD.SelectSingleNodeFast("dateadded").InnerText.ToString());
                         }
                         catch
                         {
                             try
                             {
-                              dt = DateTime.Parse(nodeDVD.SelectSingleNode("dateadded").InnerText.ToString(), ci);
+                              dt = DateTime.Parse(nodeDVD.SelectSingleNodeFast("dateadded").InnerText.ToString(), ci);
                             }
                             catch
                             {
@@ -181,17 +183,17 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             }
                         }
                     WriteAntAtribute(destXml, "dateadded", dt.ToShortDateString());
-                    if (nodeDVD.SelectSingleNode("country") != null)
-                      if (nodeDVD.SelectSingleNode("country").InnerText.StartsWith("|"))
-                        WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNode("country").InnerText.Substring(1));
+                    if (nodeDVD.SelectSingleNodeFast("country") != null)
+                      if (nodeDVD.SelectSingleNodeFast("country").InnerText.StartsWith("|"))
+                        WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNodeFast("country").InnerText.Substring(1));
                         else
-                        WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNode("country").InnerText);
+                        WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNodeFast("country").InnerText);
                     string wRating = "0";
-                    if (nodeDVD.SelectSingleNode("imdbrating") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNode("imdbrating").InnerText) && nodeDVD.SelectSingleNode("imdbrating").InnerText != "0")
-                      wRating = nodeDVD.SelectSingleNode("imdbrating").InnerText;
-                    else if (nodeDVD.SelectSingleNode("rating") != null)
+                    if (nodeDVD.SelectSingleNodeFast("imdbrating") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNodeFast("imdbrating").InnerText) && nodeDVD.SelectSingleNodeFast("imdbrating").InnerText != "0")
+                      wRating = nodeDVD.SelectSingleNodeFast("imdbrating").InnerText;
+                    else if (nodeDVD.SelectSingleNodeFast("rating") != null)
                     {
-                      wRating = nodeDVD.SelectSingleNode("rating").InnerText;
+                      wRating = nodeDVD.SelectSingleNodeFast("rating").InnerText;
                     }
                     decimal wrating = 0;
                     try { wrating = Convert.ToDecimal(wRating, ci); }
@@ -201,72 +203,72 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         catch { }
                     }
                     WriteAntAtribute(destXml, "imdbrating", wrating.ToString().Replace(",", "."));
-                    string wYear = nodeDVD.SelectSingleNode("year").InnerText;
+                    string wYear = nodeDVD.SelectSingleNodeFast("year").InnerText;
                     if (!string.IsNullOrEmpty(wYear))
                         WriteAntAtribute(destXml, "year", wYear);
-                    if (nodeDVD.SelectSingleNode("length") != null)
-                      WriteAntAtribute(destXml, "length", nodeDVD.SelectSingleNode("length").InnerText);
-                    if (nodeDVD.SelectSingleNode("genre") != null)
-                      if (nodeDVD.SelectSingleNode("genre").InnerText.StartsWith("|"))
-                        WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNode("genre").InnerText.Substring(1).Replace("|", ""));
+                    if (nodeDVD.SelectSingleNodeFast("length") != null)
+                      WriteAntAtribute(destXml, "length", nodeDVD.SelectSingleNodeFast("length").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("genre") != null)
+                      if (nodeDVD.SelectSingleNodeFast("genre").InnerText.StartsWith("|"))
+                        WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNodeFast("genre").InnerText.Substring(1).Replace("|", ""));
                         else
-                        WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNode("genre").InnerText.Replace("|", ","));
-                    if (nodeDVD.SelectSingleNode("director") != null)
-                      WriteAntAtribute(destXml, "director", nodeDVD.SelectSingleNode("director").InnerText);
-                    if (nodeDVD.SelectSingleNode("producer") != null)
-                      WriteAntAtribute(destXml, "producer", nodeDVD.SelectSingleNode("producer").InnerText);
+                        WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNodeFast("genre").InnerText.Replace("|", ","));
+                    if (nodeDVD.SelectSingleNodeFast("director") != null)
+                      WriteAntAtribute(destXml, "director", nodeDVD.SelectSingleNodeFast("director").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("producer") != null)
+                      WriteAntAtribute(destXml, "producer", nodeDVD.SelectSingleNodeFast("producer").InnerText);
                     string Writer = string.Empty;
-                    if (nodeDVD.SelectSingleNode("scenario") != null) // Writer
-                      Writer = nodeDVD.SelectSingleNode("scenario").InnerText;
+                    if (nodeDVD.SelectSingleNodeFast("scenario") != null) // Writer
+                      Writer = nodeDVD.SelectSingleNodeFast("scenario").InnerText;
                     //WriteAntAtribute(destXml, "scenario", Writer);
-                    if (nodeDVD.SelectSingleNode("actors") != null)
-                      WriteAntAtribute(destXml, "actors", nodeDVD.SelectSingleNode("actors").InnerText);
-                    if (nodeDVD.SelectSingleNode("poster") != null)
-                      WriteAntAtribute(destXml, "poster", nodeDVD.SelectSingleNode("poster").InnerText);
-                    if (nodeDVD.SelectSingleNode("type") != null)
-                      WriteAntAtribute(destXml, "type", nodeDVD.SelectSingleNode("type").InnerText);
-                    if (nodeDVD.SelectSingleNode("label") != null)
-                      WriteAntAtribute(destXml, "label", nodeDVD.SelectSingleNode("label").InnerText);
-                    if (nodeDVD.SelectSingleNode("url") != null)
-                      WriteAntAtribute(destXml, "url", nodeDVD.SelectSingleNode("url").InnerText);
-                    if (nodeDVD.SelectSingleNode("langs") != null)
-                      if (nodeDVD.SelectSingleNode("langs").InnerText.StartsWith("|"))
-                        WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNode("langs").InnerText.Substring(1));
+                    if (nodeDVD.SelectSingleNodeFast("actors") != null)
+                      WriteAntAtribute(destXml, "actors", nodeDVD.SelectSingleNodeFast("actors").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("poster") != null)
+                      WriteAntAtribute(destXml, "poster", nodeDVD.SelectSingleNodeFast("poster").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("type") != null)
+                      WriteAntAtribute(destXml, "type", nodeDVD.SelectSingleNodeFast("type").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("label") != null)
+                      WriteAntAtribute(destXml, "label", nodeDVD.SelectSingleNodeFast("label").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("url") != null)
+                      WriteAntAtribute(destXml, "url", nodeDVD.SelectSingleNodeFast("url").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("langs") != null)
+                      if (nodeDVD.SelectSingleNodeFast("langs").InnerText.StartsWith("|"))
+                        WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNodeFast("langs").InnerText.Substring(1));
                         else
-                        WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNode("langs").InnerText);
-                    if (nodeDVD.SelectSingleNode("subs") != null)
-                      WriteAntAtribute(destXml, "subs", nodeDVD.SelectSingleNode("subs").InnerText);
-                    if (nodeDVD.SelectSingleNode("videocodec") != null)
-                      WriteAntAtribute(destXml, "videocodec", nodeDVD.SelectSingleNode("videocodec").InnerText);
-                    if (nodeDVD.SelectSingleNode("audiocodec") != null)
-                      WriteAntAtribute(destXml, "audiocodec", nodeDVD.SelectSingleNode("audiocodec").InnerText);
-                    if (nodeDVD.SelectSingleNode("resolution") != null)
-                      WriteAntAtribute(destXml, "resolution", nodeDVD.SelectSingleNode("resolution").InnerText);
-                    if (nodeDVD.SelectSingleNode("videobitrate") != null)
-                      WriteAntAtribute(destXml, "videobitrate", nodeDVD.SelectSingleNode("videobitrate").InnerText);
-                    if (nodeDVD.SelectSingleNode("audiobitrate") != null)
-                      WriteAntAtribute(destXml, "audiobitrate", nodeDVD.SelectSingleNode("audiobitrate").InnerText);
-                    if (nodeDVD.SelectSingleNode("size") != null)
-                      WriteAntAtribute(destXml, "size", nodeDVD.SelectSingleNode("size").InnerText);
-                    if (nodeDVD.SelectSingleNode("framerate") != null)
-                      WriteAntAtribute(destXml, "framerate", nodeDVD.SelectSingleNode("framerate").InnerText);
-                    if (nodeDVD.SelectSingleNode("mpaa") != null)
+                        WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNodeFast("langs").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("subs") != null)
+                      WriteAntAtribute(destXml, "subs", nodeDVD.SelectSingleNodeFast("subs").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("videocodec") != null)
+                      WriteAntAtribute(destXml, "videocodec", nodeDVD.SelectSingleNodeFast("videocodec").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("audiocodec") != null)
+                      WriteAntAtribute(destXml, "audiocodec", nodeDVD.SelectSingleNodeFast("audiocodec").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("resolution") != null)
+                      WriteAntAtribute(destXml, "resolution", nodeDVD.SelectSingleNodeFast("resolution").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("videobitrate") != null)
+                      WriteAntAtribute(destXml, "videobitrate", nodeDVD.SelectSingleNodeFast("videobitrate").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("audiobitrate") != null)
+                      WriteAntAtribute(destXml, "audiobitrate", nodeDVD.SelectSingleNodeFast("audiobitrate").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("size") != null)
+                      WriteAntAtribute(destXml, "size", nodeDVD.SelectSingleNodeFast("size").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("framerate") != null)
+                      WriteAntAtribute(destXml, "framerate", nodeDVD.SelectSingleNodeFast("framerate").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("mpaa") != null)
                     {
-                      Certification = nodeDVD.SelectSingleNode("mpaa").InnerText;
+                      Certification = nodeDVD.SelectSingleNodeFast("mpaa").InnerText;
                       //WriteAntAtribute(destXml, "mpaa", Certification);
                     }
-                    if (nodeDVD.SelectSingleNode("tagline") != null)
+                    if (nodeDVD.SelectSingleNodeFast("tagline") != null)
                     {
-                      Tagline = nodeDVD.SelectSingleNode("tagline").InnerText;
+                      Tagline = nodeDVD.SelectSingleNodeFast("tagline").InnerText;
                       //WriteAntAtribute(destXml, "tagline", Tagline);
                     }
-                    if (nodeDVD.SelectSingleNode("tags") != null)
+                    if (nodeDVD.SelectSingleNodeFast("tags") != null)
                     {
-                      Tags = nodeDVD.SelectSingleNode("tags").InnerText;
+                      Tags = nodeDVD.SelectSingleNodeFast("tags").InnerText;
                       //WriteAntAtribute(destXml, "tags", Tags);
                     }
-                    if (nodeDVD.SelectSingleNode("count") != null)
-                      WriteAntAtribute(destXml, "count", nodeDVD.SelectSingleNode("count").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("count") != null)
+                      WriteAntAtribute(destXml, "count", nodeDVD.SelectSingleNodeFast("count").InnerText);
 
                     //string Description, 
                     string DescriptionMerged = string.Empty;
@@ -285,11 +287,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
                       DescriptionMerged += Certification;
                     }
-                    XmlNode nodePlot = nodeDVD.SelectSingleNode("Plot");
-                    if (nodeDVD.SelectSingleNode("description") != null && nodeDVD.SelectSingleNode("description").InnerText != null)
+                    XmlNode nodePlot = nodeDVD.SelectSingleNodeFast("Plot");
+                    if (nodeDVD.SelectSingleNodeFast("description") != null && nodeDVD.SelectSingleNodeFast("description").InnerText != null)
                     {
                       if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
-                      DescriptionMerged += nodeDVD.SelectSingleNode("description").InnerText;
+                      DescriptionMerged += nodeDVD.SelectSingleNodeFast("description").InnerText;
                     }
                     WriteAntAtribute(destXml, "description", DescriptionMerged);
 
@@ -310,15 +312,15 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
                       CommentsMerged += Certification;
                     }
-                    if (nodeDVD.SelectSingleNode("comment") != null && nodeDVD.SelectSingleNode("comment").InnerText != null)
+                    if (nodeDVD.SelectSingleNodeFast("comment") != null && nodeDVD.SelectSingleNodeFast("comment").InnerText != null)
                     {
                       if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
-                      CommentsMerged += nodeDVD.SelectSingleNode("comment").InnerText;
+                      CommentsMerged += nodeDVD.SelectSingleNodeFast("comment").InnerText;
                     }
                     WriteAntAtribute(destXml, "comment", CommentsMerged);
 
-                    if (nodeDVD.SelectSingleNode("path") != null)
-                      WriteAntAtribute(destXml, "path", nodeDVD.SelectSingleNode("path").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("path") != null)
+                      WriteAntAtribute(destXml, "path", nodeDVD.SelectSingleNodeFast("path").InnerText);
 
                     // Now writing MF extended attributes
                     WriteAntElement(destXml, "mpaa", Certification);
