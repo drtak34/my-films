@@ -1,6 +1,6 @@
 namespace Grabber_Interface
 {
-    partial class GrabConfig
+  partial class GrabConfig
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -113,9 +113,6 @@ namespace Grabber_Interface
           this.textHeaders = new System.Windows.Forms.TextBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
-          this.pictureBox1 = new System.Windows.Forms.PictureBox();
-          this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
-          this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.tabPageDetailPage = new System.Windows.Forms.TabPage();
           this.btnLoadDetailInWeb = new System.Windows.Forms.Button();
           this.button_Load_File = new System.Windows.Forms.Button();
@@ -143,8 +140,8 @@ namespace Grabber_Interface
           this.label13 = new System.Windows.Forms.Label();
           this.label14 = new System.Windows.Forms.Label();
           this.label15 = new System.Windows.Forms.Label();
-          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
+          this.label36 = new System.Windows.Forms.Label();
           this.label37 = new System.Windows.Forms.Label();
           this.label35 = new System.Windows.Forms.Label();
           this.label9 = new System.Windows.Forms.Label();
@@ -209,19 +206,16 @@ namespace Grabber_Interface
           this.Version_Label = new System.Windows.Forms.Label();
           this.lblLanguage = new System.Windows.Forms.Label();
           this.lblVersion = new System.Windows.Forms.Label();
-          this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-          this.label36 = new System.Windows.Forms.Label();
+          this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
+          this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
+          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
           this.tabPageDetailPage.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).BeginInit();
           this.tabPageSearchPage.SuspendLayout();
           this.groupBox6.SuspendLayout();
           this.groupBox5.SuspendLayout();
@@ -232,8 +226,10 @@ namespace Grabber_Interface
           this.groupBox7.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.tabControl1.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).BeginInit();
           this.SuspendLayout();
           // 
           // textConfig
@@ -901,28 +897,6 @@ namespace Grabber_Interface
           this.linkLabelMFwiki.TabStop = true;
           this.linkLabelMFwiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMFwiki_LinkClicked);
           // 
-          // pictureBox1
-          // 
-          resources.ApplyResources(this.pictureBox1, "pictureBox1");
-          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.film_reel_128x128;
-          this.pictureBox1.Name = "pictureBox1";
-          this.pictureBox1.TabStop = false;
-          // 
-          // pictureBoxUSFlag
-          // 
-          resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
-          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
-          this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
-          this.pictureBoxUSFlag.TabStop = false;
-          this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
-          // 
-          // pictureBoxFranceFlag
-          // 
-          resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
-          this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
-          this.pictureBoxFranceFlag.TabStop = false;
-          this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
-          // 
           // tabPageDetailPage
           // 
           this.tabPageDetailPage.Controls.Add(this.btnLoadDetailInWeb);
@@ -1121,14 +1095,6 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label15, "label15");
           this.label15.Name = "label15";
           // 
-          // pictureBoxPreviewCover
-          // 
-          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
-          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
-          this.pictureBoxPreviewCover.TabStop = false;
-          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
-          // 
           // tabPageSearchPage
           // 
           this.tabPageSearchPage.Controls.Add(this.textHeaders);
@@ -1159,6 +1125,11 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPageSearchPage, "tabPageSearchPage");
           this.tabPageSearchPage.Name = "tabPageSearchPage";
           this.tabPageSearchPage.UseVisualStyleBackColor = true;
+          // 
+          // label36
+          // 
+          resources.ApplyResources(this.label36, "label36");
+          this.label36.Name = "label36";
           // 
           // label37
           // 
@@ -1302,17 +1273,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle17;
+          dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle9;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle18.NullValue = null;
-          dataGridViewCellStyle18.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle18;
+          dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle10.NullValue = null;
+          dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle10;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1325,16 +1296,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle19;
+          dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle11;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle20;
+          dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle12;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1656,18 +1627,35 @@ namespace Grabber_Interface
           resources.ApplyResources(this.lblVersion, "lblVersion");
           this.lblVersion.Name = "lblVersion";
           // 
-          // iMDBEnumeratorBindingSource
+          // pictureBox1
           // 
-          this.iMDBEnumeratorBindingSource.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
+          resources.ApplyResources(this.pictureBox1, "pictureBox1");
+          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.film_reel_128x128;
+          this.pictureBox1.Name = "pictureBox1";
+          this.pictureBox1.TabStop = false;
           // 
-          // iMDBEnumeratorBindingSource1
+          // pictureBoxUSFlag
           // 
-          this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
+          resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
+          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
+          this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
+          this.pictureBoxUSFlag.TabStop = false;
+          this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
           // 
-          // label36
+          // pictureBoxFranceFlag
           // 
-          resources.ApplyResources(this.label36, "label36");
-          this.label36.Name = "label36";
+          resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
+          this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
+          this.pictureBoxFranceFlag.TabStop = false;
+          this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
+          // 
+          // pictureBoxPreviewCover
+          // 
+          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
+          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
+          this.pictureBoxPreviewCover.TabStop = false;
+          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
           // GrabConfig
           // 
@@ -1707,15 +1695,11 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).EndInit();
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
           this.tabPageDetailPage.ResumeLayout(false);
           this.tabPageDetailPage.PerformLayout();
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).EndInit();
           this.tabPageSearchPage.ResumeLayout(false);
           this.tabPageSearchPage.PerformLayout();
           this.groupBox6.ResumeLayout(false);
@@ -1732,8 +1716,10 @@ namespace Grabber_Interface
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
           this.tabControl1.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1865,8 +1851,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.ComboBox cbTtitlePreferredLanguage;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.DataGridView dataGridViewMapping;
-        private System.Windows.Forms.BindingSource iMDBEnumeratorBindingSource1;
-        private System.Windows.Forms.BindingSource iMDBEnumeratorBindingSource;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Button button_SaveAs;

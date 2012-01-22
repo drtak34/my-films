@@ -47,6 +47,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.Services;
   using MediaPortal.Util;
   using MediaPortal.Video.Database;
+
   using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms.Configuration;
   using MyFilmsPlugin.MyFilms.Utils;
@@ -8227,10 +8228,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         case "person":
           {
-            Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
-            Grabber.MyFilmsIMDB.IMDBUrl wurl;
+            var _imdb = new IMDB();
+            IMDB.IMDBUrl wurl;
             _imdb.FindActor(searchexpression);
-            Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
+            var imdbActor = new IMDBActor();
 
             if (_imdb.Count > 0)
             {
@@ -8242,13 +8243,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //    if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
               //    _imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
               //}
-              wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+              wurl = (IMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
               if (wurl.URL.Length != 0)
               {
                 url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
                 url = ImdbBaseUrl + url.Substring(url.IndexOf("name")); // redirect to base www.imdb.com server and remove localized returns...
               }
-              //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+              //_imdb.GetActorDetails(_imdb[0], false, out imdbActor); // Details here not needed - we just want the URL !
             }
             break;
           }

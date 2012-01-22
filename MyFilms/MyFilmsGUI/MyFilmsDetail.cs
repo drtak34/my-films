@@ -5106,8 +5106,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           // Get further IMDB images
                           if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading additional IMDB person images ...");
                           if (dlgPrgrs != null) dlgPrgrs.Percentage = 0;
-                          Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
-                          Grabber.MyFilmsIMDB.IMDBUrl wurl;
+                          IMDB _imdb = new IMDB();
+                          IMDB.IMDBUrl wurl;
                           _imdb.FindActor(persondetails.Name);
                           //Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
                           IMDBActor imdbActor = new IMDBActor();
@@ -5116,7 +5116,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           {
                             if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + persondetails.Name + "' (IMDB)");
                             string url = string.Empty;
-                            wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                            wurl = (IMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
                             if (wurl.URL.Length != 0)
                             {
                               url = wurl.URL;
@@ -5427,12 +5427,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return wfanart;
         }
 
-
         public static string CreateOrUpdateActor(string name)
         {
             // Get IMDB images
-            Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
-            Grabber.MyFilmsIMDB.IMDBUrl wurl;
+            IMDB _imdb = new IMDB();
+            IMDB.IMDBUrl wurl;
             _imdb.FindActor(name);
             IMDBActor imdbActor = new IMDBActor();
             string filename1person = string.Empty;
@@ -5440,7 +5439,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (_imdb.Count == 0)
             {
               string url = string.Empty;
-              wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+              wurl = (IMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
               if (wurl.URL.Length != 0)
               {
                 url = wurl.URL;
