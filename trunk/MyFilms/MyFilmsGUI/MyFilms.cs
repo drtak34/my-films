@@ -4423,6 +4423,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return true;
     }
 
+    private bool LoadIndexSkinThumbs(GUIListItem item)
+    {
+      // Available (Files are Local) Images
+      if (!System.IO.File.Exists(GUIGraphicsContext.Skin + @"\Media\alpha\a.png")) 
+      {
+        //item.ThumbnailImage = "";
+        //item.IconImage = "";
+        //item.IconImageBig = "";
+        return false; // return, if skin does not support index thumbs
+      }
+
+      string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
+      if (strStartLetter.IsNumerical()) strStartLetter = "#";
+      string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
+      item.ThumbnailImage = IndexThumb;
+      //item.IconImage = IndexThumb;
+      //item.IconImageBig = IndexThumb;
+      return true;
+    }
+
     /// <summary>Performs 'getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty)' in background thread</summary>
     private void getSelectFromDivxThreaded()
     {
@@ -4800,32 +4820,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // will be done in Lst_Details later ...GUIControl.ShowControl(GetID, 34); // hide film controls ....
 
-      if (facadeView.Count > 0)
-      {
-        if (getThumbs)
-        {
-          // load first image syncronously, as asyncloading might cause flicker or even let it disappear
-          string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeView[conf.StrIndex].Label, strThumbDirectory, isperson);
-          string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-          facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
-          facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1];
-          facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0];
-          // load the rest of images asynchronously!
-          GetImages(WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir, countItems);  // GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir, countItems);
-        }
-        //if (IsPersonField(fieldType)) MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
-        //else MyFilmsDetail.Load_Detailed_DB(0, false);
-        //this.Load_Rating(0); // old method - nor more used
-      }
-      else
+      if (facadeView.Count == 0)
       {
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
         DisplayAllMovies();
         GetFilmList();
         SetLabelSelect("root"); SetLabelView("all");
       }
-      MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
-      GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
+      else
+      {
+        if (getThumbs)
+        {
+          #region load first image syncronously, as asyncloading might cause flicker or even let it disappear
+          if (conf.IndexedChars > 0) LoadIndexSkinThumbs(facadeView[conf.StrIndex]);
+          else
+          {
+            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeView[conf.StrIndex].Label, strThumbDirectory, isperson);
+            string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+            facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
+            facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1];
+            facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0];
+          }
+          #endregion
+          GetImages(WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir, countItems); // load the rest of images asynchronously!
+        }
+        //if (IsPersonField(fieldType)) MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
+        //else MyFilmsDetail.Load_Detailed_DB(0, false);
+        //this.Load_Rating(0); // old method - nor more used
+        MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
+        GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
+      }
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
       // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
       #endregion
@@ -4897,22 +4921,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (string.IsNullOrEmpty(facadeView[i].ThumbnailImage))
               {
-                string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson);
-                //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+                if (conf.IndexedChars > 0)
+                {
+                  LoadIndexSkinThumbs(facadeView[i]);
+                }
+                else
+                {
+                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson);
+                  //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
 
-                //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
-                //{
-                //  item.ThumbnailImage = texture;
-                //  item.IconImage = texture;
-                //  item.IconImageBig = texture;
-                //}
-                item.ThumbnailImage = strActiveFacadeImages[0];
-                item.IconImage = strActiveFacadeImages[1];
-                item.IconImageBig = strActiveFacadeImages[0];
+                  //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+                  //{
+                  //  item.ThumbnailImage = texture;
+                  //  item.IconImage = texture;
+                  //  item.IconImageBig = texture;
+                  //}
+                  item.ThumbnailImage = strActiveFacadeImages[0];
+                  item.IconImage = strActiveFacadeImages[1];
+                  item.IconImageBig = strActiveFacadeImages[0];
 
-                // if selected force an update of thumbnail
-                //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
-                //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+                  // if selected force an update of thumbnail
+                  //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+                  //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+                }
               }
             }
             #endregion
@@ -5076,7 +5107,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
     {
-      var thumbimages = new string[2];
+      string[] thumbimages = new string[2];
       thumbimages[0] = string.Empty; // ThumbnailImage
       thumbimages[1] = string.Empty; //IconImage
       string strThumb = strThumbDirectory + itemlabel + ".png";
@@ -5084,6 +5115,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string strThumbSource = string.Empty;
 
       if (isPerson)
+      #region thumbs for person views
       {
         //strThumbSource = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieActors, itemlabel); // check for actors images in MyVideos...
         //LogMyFilms.Debug("Artist thumbs - GetCoverName(Thumbs, MovieActors) - strThumb = '" + strThumb + "'");
@@ -5109,7 +5141,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else if (System.IO.File.Exists(strPathArtist + itemlabel + ".jpg")) strThumbSource = strPathArtist + itemlabel + ".jpg";
           else if (System.IO.File.Exists(strPathArtist + itemlabel + ".png")) strThumbSource = strPathArtist + itemlabel + ".png";
           else
-            switch (conf.StrFileType) // perform catalog specific searches ...
+            #region perform catalog specific searches ...
+            switch (conf.StrFileType) 
             {
               case Configuration.CatalogType.AntMovieCatalog3:
                 break;
@@ -5155,6 +5188,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               default:
                 break;
             }
+            #endregion
 
           //if (strThumbSource == string.Empty)
           //{
@@ -5204,6 +5238,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
       }
+        #endregion
       else if (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort))
       {
         if (File.Exists(strThumb)) // If there is thumbs in cache folder ...
