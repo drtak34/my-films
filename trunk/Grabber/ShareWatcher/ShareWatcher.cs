@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using global::ShareWatcherHelper;
 
-namespace Grabber.ShareWatcherHelper
+namespace ShareWatcherHelper
 {
   using System.Net.Mime;
   using System.Threading;
@@ -26,22 +26,22 @@ namespace Grabber.ShareWatcherHelper
 
     #region CommonMethods
 
-    //// Enable / Disable the monitoring of shares
-    //private void monitoringEnabledMenuItem_Click(object sender, EventArgs e)
-    //{
-    //  if (this.bMonitoring)
-    //  {
-    //    this.bMonitoring = false;
-    //    this.monitoringEnabledMenuItem.Checked = false;
-    //    watcher.ChangeMonitoring(false);
-    //  }
-    //  else
-    //  {
-    //    this.bMonitoring = true;
-    //    this.monitoringEnabledMenuItem.Checked = true;
-    //    watcher.ChangeMonitoring(true);
-    //  }
-    //}
+    // Enable / Disable the monitoring of shares
+    private void monitoringEnabledMenuItem_Click(object sender, EventArgs e)
+    {
+      if (this.bMonitoring)
+      {
+        this.bMonitoring = false;
+        //this.monitoringEnabledMenuItem.Checked = false;
+        watcher.ChangeMonitoring(false);
+      }
+      else
+      {
+        this.bMonitoring = true;
+        //this.monitoringEnabledMenuItem.Checked = true;
+        watcher.ChangeMonitoring(true);
+      }
+    }
 
     //// React on Windows System Shutdown
     //private const int WM_QUERYENDSESSION = 0x11;
