@@ -2,34 +2,9 @@ Imports System.Threading
 Imports System.Xml
 Imports System.ComponentModel
 Imports System.Text
-
-Public Class FilmUpdatedEventArgs
-    Inherits EventArgs
-    Private _errorClass As String
-    Private _message As String
-
-    'Constructor.
-    Public Sub New(ByVal errorclass As String, ByVal message As String)
-        Me._errorClass = errorclass
-        Me._message = message
-    End Sub
-End Class
+Imports Grabber
 
 Public Class AntProcessor
-    Public Event FilmUpdated As FilmUpdatedEventHandler
-    ' The protected OnFilmUpdatedEventName method raises the event by invoking the delegates. The sender is always this, the current instance
-    ' of the class.
-
-    Protected Overridable Sub OnFilmUpdated(ByVal e As FilmUpdatedEventArgs)
-        RaiseEvent FilmUpdated(Me, e)
-    End Sub
-
-    Public Delegate Sub FilmUpdatedEventHandler(ByVal sender As Object, ByVal e As FilmUpdatedEventArgs)
-
-    'Public Delegate MovieImportedDelegate(movie As String)
-    'Shared Event MovieImported As MovieImportedDelegate
-    'Public Event FilmUpdatedEventName As FilmUpdatedEventHandler
-    'Public Delegate Sub FilmUpdatedEventHandler(ByVal sender As Object, ByVal e As FilmUpdatedEventArgs)
 
     Private Shared WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker ' changed to public to get progress from MF plugin
     Private Shared WithEvents bgwManualUpdate As New System.ComponentModel.BackgroundWorker
@@ -70,9 +45,7 @@ Public Class AntProcessor
     Private Shared _ManualMissingTrailer As Boolean = True
     Private Shared _ManualNfoFileHandling As String
     Private Shared _ManualNfoFileOnlyUpdateMissing As Boolean
-
     Private Shared _TempXMLBackupFile As String
-
     Private Shared _OperationCancelled As Boolean = False
 
     Public ReadOnly Property CountXMLRecords() As Integer
@@ -454,6 +427,7 @@ Public Class AntProcessor
         End Select
 
     End Function
+
     Public Sub ManualTestOperation()
 
         '_ManualOperation = 'Update Value', 'Delete Record', 'Delete Value', 'Update Record'
@@ -531,90 +505,187 @@ Public Class AntProcessor
             LogEvent(" - Delete NFO File : " & _ManualNfoFileHandling.ToString, EventLogLevel.ImportantEvent)
         End If
 
+
         'Dim XmlDoc As New XmlDocument
         XMLDoc = New XmlDocument
         XMLDoc.Load(_ManualXMLPath)
-        Dim CurrentMovieNumber As Integer
 
-        While TextReader.Read()
-            If TextReader.Name = "Movie" Then
-                CurrentMovieNumber = TextReader.GetAttribute("Number")
-                CurrentNode = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & CurrentMovieNumber.ToString & "']")
-                If CurrentNode IsNot Nothing Then
-                    Dim wtitle As String
-                    If (Not IsNothing(CurrentNode.Attributes("TranslatedTitle"))) Then
-                        If (CurrentNode.Attributes("TranslatedTitle").Value.Length <> 0) Then
-                            wtitle = CurrentNode.Attributes("TranslatedTitle").Value
-                        Else
-                            wtitle = CurrentNode.Attributes("OriginalTitle").Value
-                        End If
+        Dim CurrentMovieNumber As Integer
+        Dim movielist As XmlNodeList
+        movielist = XMLDoc.DocumentElement.SelectNodes("/AntMovieCatalog/Catalog/Contents/Movie")
+        For Each CurrentNode In movielist
+            If CurrentNode.Attributes("Number").Value Is Nothing Then
+
+            End If
+            If (Not IsNothing(CurrentNode.Attributes("Number"))) Then
+                If (CurrentNode.Attributes("Number").Value.Length <> 0) Then
+                    CurrentMovieNumber = CurrentNode.Attributes("Number").Value
+                Else
+                    Continue For
+                End If
+            Else
+                Continue For
+            End If
+
+            'CurrentMovieNumber = TextReader.GetAttribute("Number")
+            'CurrentNode = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & CurrentMovieNumber.ToString & "']")
+            ''CurrentNode = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & CurrentMovieNumber.ToString & "']")
+            If CurrentNode IsNot Nothing Then
+                Dim wtitle As String
+                If (Not IsNothing(CurrentNode.Attributes("TranslatedTitle"))) Then
+                    If (CurrentNode.Attributes("TranslatedTitle").Value.Length <> 0) Then
+                        wtitle = CurrentNode.Attributes("TranslatedTitle").Value
                     Else
                         wtitle = CurrentNode.Attributes("OriginalTitle").Value
                     End If
+                Else
+                    wtitle = CurrentNode.Attributes("OriginalTitle").Value
+                End If
 
-                    'Dim wotitle As String = wtitle
-                    'If (Not IsNothing(CurrentNode.Attributes("OriginalTitle"))) Then
-                    '    If (CurrentNode.Attributes("OriginalTitle").Value.Length <> 0) Then
-                    '        wotitle = Grabber.GrabUtil.normalizeTitle(CurrentNode.Attributes("OriginalTitle").Value)
-                    '    End If
-                    'End If
+                'Dim wotitle As String = wtitle
+                'If (Not IsNothing(CurrentNode.Attributes("OriginalTitle"))) Then
+                '    If (CurrentNode.Attributes("OriginalTitle").Value.Length <> 0) Then
+                '        wotitle = Grabber.GrabUtil.normalizeTitle(CurrentNode.Attributes("OriginalTitle").Value)
+                '    End If
+                'End If
 
-                    ' skip those:
-                    If _ManualOperation = "Download Fanart" Then
-                        If _ManualMissingFanartDownload Then
-                            If Not ManualTestMissingFanart_IsUpdateNeeded(wtitle) Then Continue While
+                ' skip those:
+                If _ManualOperation = "Download Fanart" Then
+                    If _ManualMissingFanartDownload Then
+                        If Not ManualTestMissingFanart_IsUpdateNeeded(wtitle) Then Continue For
+                    End If
+                End If
+
+                ' get search hints for better matching from DB
+                Dim wyear As String = ""
+                If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
+                    wyear = CurrentNode.Attributes("Year").Value
+                End If
+                Dim wdirector As String = ""
+                If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
+                    wdirector = CurrentNode.Attributes("Director").Value
+                End If
+
+                Dim wIMDB_Id As String = ""
+                If (Not IsNothing(CurrentNode.Attributes("IMDB_Id"))) Then
+                    wIMDB_Id = CurrentNode.Attributes("IMDB_Id").Value
+                ElseIf CurrentNode.Item("IMDB_Id") IsNot Nothing Then
+                    If CurrentNode.Item("IMDB_Id").InnerText.Length > 0 Then
+                        wIMDB_Id = CurrentNode.Item("IMDB_Id").InnerText.ToString
+                    ElseIf (Not IsNothing(CurrentNode.Attributes("URL"))) Then
+                        Dim wIMDBfromURL As String = GetIMDBidFromFilePath(CurrentNode.Attributes("URL").Value) ' tries to get IMDBid from URL
+                        If wIMDBfromURL.Length > 0 Then
+                            wIMDB_Id = wIMDBfromURL
                         End If
                     End If
+                End If
 
-                    ' get search hints for better matching from DB
-                    Dim wyear As String = ""
-                    If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
-                        wyear = CurrentNode.Attributes("Year").Value
-                    End If
-                    Dim wdirector As String = ""
-                    If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
-                        wdirector = CurrentNode.Attributes("Director").Value
-                    End If
-
-                    Dim wIMDB_Id As String = ""
-                    If (Not IsNothing(CurrentNode.Attributes("IMDB_Id"))) Then
-                        wIMDB_Id = CurrentNode.Attributes("IMDB_Id").Value
-                    ElseIf CurrentNode.Item("IMDB_Id") IsNot Nothing Then
-                        If CurrentNode.Item("IMDB_Id").InnerText.Length > 0 Then
-                            wIMDB_Id = CurrentNode.Item("IMDB_Id").InnerText.ToString
-                        ElseIf (Not IsNothing(CurrentNode.Attributes("URL"))) Then
-                            Dim wIMDBfromURL As String = GetIMDBidFromFilePath(CurrentNode.Attributes("URL").Value) ' tries to get IMDBid from URL
-                            If wIMDBfromURL.Length > 0 Then
-                                wIMDB_Id = wIMDBfromURL
-                            End If
-                        End If
-                    End If
-
-                    If _ManualParameterMatchAll = True Then
-                        'We're matching all records - proceed with editing
-                        ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
-                        LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
-                    Else
-                        'Parameters in use - check first then proceed
-                        If CurrentNode IsNot Nothing Then
-                            Dim wrecord As Integer
-                            wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
-                            wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
-                            If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
+                If _ManualParameterMatchAll = True Then
+                    'We're matching all records - proceed with editing
+                    ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
+                    LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+                Else
+                    'Parameters in use - check first then proceed
+                    If CurrentNode IsNot Nothing Then
+                        Dim wrecord As Integer
+                        wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
+                        wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
+                        If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
+                            ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
+                            LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+                        Else
+                            If (_ManualParameterAndOr = "and" And wrecord = 2) Then
                                 ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                                 LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
-                            Else
-                                If (_ManualParameterAndOr = "and" And wrecord = 2) Then
-                                    ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
-                                    LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
-                                End If
                             End If
                         End If
                     End If
-
                 End If
+
             End If
-        End While
+        Next
+
+
+        'While TextReader.Read()
+        '    If TextReader.Name = "Movie" Then
+        '        CurrentMovieNumber = TextReader.GetAttribute("Number")
+        '        CurrentNode = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & CurrentMovieNumber.ToString & "']")
+        '        'CurrentNode = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & CurrentMovieNumber.ToString & "']")
+        '        If CurrentNode IsNot Nothing Then
+        '            Dim wtitle As String
+        '            If (Not IsNothing(CurrentNode.Attributes("TranslatedTitle"))) Then
+        '                If (CurrentNode.Attributes("TranslatedTitle").Value.Length <> 0) Then
+        '                    wtitle = CurrentNode.Attributes("TranslatedTitle").Value
+        '                Else
+        '                    wtitle = CurrentNode.Attributes("OriginalTitle").Value
+        '                End If
+        '            Else
+        '                wtitle = CurrentNode.Attributes("OriginalTitle").Value
+        '            End If
+
+        '            'Dim wotitle As String = wtitle
+        '            'If (Not IsNothing(CurrentNode.Attributes("OriginalTitle"))) Then
+        '            '    If (CurrentNode.Attributes("OriginalTitle").Value.Length <> 0) Then
+        '            '        wotitle = Grabber.GrabUtil.normalizeTitle(CurrentNode.Attributes("OriginalTitle").Value)
+        '            '    End If
+        '            'End If
+
+        '            ' skip those:
+        '            If _ManualOperation = "Download Fanart" Then
+        '                If _ManualMissingFanartDownload Then
+        '                    If Not ManualTestMissingFanart_IsUpdateNeeded(wtitle) Then Continue While
+        '                End If
+        '            End If
+
+        '            ' get search hints for better matching from DB
+        '            Dim wyear As String = ""
+        '            If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
+        '                wyear = CurrentNode.Attributes("Year").Value
+        '            End If
+        '            Dim wdirector As String = ""
+        '            If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
+        '                wdirector = CurrentNode.Attributes("Director").Value
+        '            End If
+
+        '            Dim wIMDB_Id As String = ""
+        '            If (Not IsNothing(CurrentNode.Attributes("IMDB_Id"))) Then
+        '                wIMDB_Id = CurrentNode.Attributes("IMDB_Id").Value
+        '            ElseIf CurrentNode.Item("IMDB_Id") IsNot Nothing Then
+        '                If CurrentNode.Item("IMDB_Id").InnerText.Length > 0 Then
+        '                    wIMDB_Id = CurrentNode.Item("IMDB_Id").InnerText.ToString
+        '                ElseIf (Not IsNothing(CurrentNode.Attributes("URL"))) Then
+        '                    Dim wIMDBfromURL As String = GetIMDBidFromFilePath(CurrentNode.Attributes("URL").Value) ' tries to get IMDBid from URL
+        '                    If wIMDBfromURL.Length > 0 Then
+        '                        wIMDB_Id = wIMDBfromURL
+        '                    End If
+        '                End If
+        '            End If
+
+        '            If _ManualParameterMatchAll = True Then
+        '                'We're matching all records - proceed with editing
+        '                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
+        '                LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+        '            Else
+        '                'Parameters in use - check first then proceed
+        '                If CurrentNode IsNot Nothing Then
+        '                    Dim wrecord As Integer
+        '                    wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
+        '                    wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
+        '                    If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
+        '                        ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
+        '                        LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+        '                    Else
+        '                        If (_ManualParameterAndOr = "and" And wrecord = 2) Then
+        '                            ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
+        '                            LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+        '                        End If
+        '                    End If
+        '                End If
+        '            End If
+
+        '        End If
+        '    End If
+        'End While
 
         If ds.Tables("tblNodesToProcess").Rows.Count > 0 Then
             LogEvent("Ready to Proceed. " & ds.Tables("tblNodesToProcess").Rows.Count.ToString & " Records Matched.", EventLogLevel.ImportantEvent)
@@ -629,8 +700,6 @@ Public Class AntProcessor
         If Not (TextReader Is Nothing) Then
             TextReader.Close()
         End If
-
-
 
     End Sub
 
@@ -649,7 +718,7 @@ Public Class AntProcessor
                 Dim NewFileNameShort As String = System.IO.Path.GetFileName(NewFileName)
                 LogEvent("Backing up xml file - done. (" & NewFileNameShort & ")", EventLogLevel.ImportantEvent)
             Catch ex As Exception
-                LogEvent("ERROR : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorOrSimilar)
+                LogEvent("ErrorEvent : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorEvent)
             End Try
         End If
 
@@ -683,12 +752,12 @@ Public Class AntProcessor
 
             Dim CurrentNode As Xml.XmlNode
             Dim newAttr As Xml.XmlAttribute
-            Dim MovieRootNode As Xml.XmlNode = XmlDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents")
+            Dim MovieRootNode As Xml.XmlNode = XmlDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents")
             Dim ProcessCounter As Integer = 0
             Dim DoScan As Boolean = True
 
             For Each row As DataRow In ds.Tables("tblNodesToProcess").Rows
-                CurrentNode = XmlDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & row("AntID") & "']")
+                CurrentNode = XmlDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & row("AntID") & "']")
                 If bgwManualUpdate.CancellationPending = True Then
                     Exit Sub
                 End If
@@ -934,7 +1003,7 @@ Public Class AntProcessor
                                 .SaveProgress()
                             End With
 
-                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
+                            If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwManualUpdate.ReportProgress(ProcessCounter, Ant.LastOutputMessage)
                             Else
                                 If (CurrentNode.Attributes("Number") Is Nothing) Then
@@ -1069,7 +1138,7 @@ Public Class AntProcessor
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO files '" & NfoMyFilmsFilenameShort & ", " & NfoMovieFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
                                 End If
                             Catch ex As Exception
-                                bgwManualUpdate.ReportProgress(ProcessCounter, "Error creating/updating NFO file : " & ex.Message)
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "ErrorEvent creating/updating NFO file : " & ex.Message)
                             End Try
                         Else
                             bgwManualUpdate.ReportProgress(ProcessCounter, "NFO File(s) not created/updated (File/Path Not Found) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
@@ -1134,7 +1203,7 @@ Public Class AntProcessor
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO files '" & NfoMyFilmsFilenameShort & ", " & NfoMovieFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
                                 End If
                             Catch ex As Exception
-                                bgwManualUpdate.ReportProgress(ProcessCounter, "Error deleting NFO file(s) : " & ex.Message)
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "ErrorEvent deleting NFO file(s) : " & ex.Message)
                             End Try
                         Else
                             bgwManualUpdate.ReportProgress(ProcessCounter, "NFO File(s) not deleted (File/Path Not Found) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
@@ -1148,6 +1217,7 @@ Public Class AntProcessor
         Public Sub New()
 
         End Sub
+
     End Class
 
     Private Shared Sub bgwManualUpdate_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwManualUpdate.DoWork
@@ -1160,15 +1230,15 @@ Public Class AntProcessor
 
 
         If e.Error IsNot Nothing Then
-            'If e.Error.Message.ToString <> "" Then
-            LogEvent("ERROR : " & e.Error.Message.ToLower, EventLogLevel.ErrorOrSimilar)
+            'If e.ErrorEvent.Message.ToString <> "" Then
+            LogEvent("ErrorEvent : " & e.Error.Message.ToLower, EventLogLevel.ErrorEvent)
             'End If
         End If
 
 
         If _OperationCancelled = True Then
             If MsgBox("Save work done so far?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
-                LogEvent("Operation Cancelled.", EventLogLevel.ErrorOrSimilar)
+                LogEvent("Operation Cancelled.", EventLogLevel.ErrorEvent)
                 Form1.ToolStripProgressBar.Value = Form1.ToolStripProgressBar.Maximum
                 Try
                     My.Computer.FileSystem.CopyFile(_TempXMLBackupFile, CurrentSettings.Manual_XML_File, True)
@@ -1178,7 +1248,7 @@ Public Class AntProcessor
                 End Try
                 Exit Sub
             Else
-                LogEvent("Operation Cancelled - Save Continuing", EventLogLevel.ErrorOrSimilar)
+                LogEvent("Operation Cancelled - Save Continuing", EventLogLevel.ErrorEvent)
             End If
         End If
 
@@ -1245,6 +1315,7 @@ Public Class AntProcessor
         LogEvent(e.UserState, EventLogLevel.Informational)
 
     End Sub
+
     Public Sub bgwManualUpdate_Cancel()
         bgwManualUpdate.CancelAsync()
         Form1.btnManualDoTest.Enabled = True
@@ -1253,7 +1324,7 @@ Public Class AntProcessor
 
         _OperationCancelled = True
 
-        LogEvent("Halting Operation by user request - Please Wait.", EventLogLevel.ErrorOrSimilar)
+        LogEvent("Halting Operation by user request - Please Wait.", EventLogLevel.ErrorEvent)
     End Sub
 
 #End Region
@@ -1334,7 +1405,7 @@ Public Class AntProcessor
             LogEvent("Parsing XML File - Complete - " & ds.Tables("tblXML").Rows.Count.ToString & " entries found.", EventLogLevel.ImportantEvent)
             LogEvent("===================================================================================================", EventLogLevel.Informational)
         Catch ex As Exception
-            LogEvent("ERROR : Cannot parse XML file", EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : Cannot parse XML file", EventLogLevel.ErrorEvent)
         End Try
 
     End Sub
@@ -1373,7 +1444,7 @@ Public Class AntProcessor
 
             Dim dir As New DirectoryInfo(CurrentMoviePath)
             If Not dir.Exists Then
-                LogEvent("ERROR : Cannot access folder '" + CurrentMoviePath.ToString + "'", EventLogLevel.ErrorOrSimilar)
+                LogEvent("ErrorEvent : Cannot access folder '" + CurrentMoviePath.ToString + "'", EventLogLevel.ErrorEvent)
             Else
                 If Not CurrentMoviePath.EndsWith("\") = True Then
                     CurrentMoviePath = CurrentMoviePath & "\"
@@ -1457,7 +1528,7 @@ Public Class AntProcessor
                                 'LogEvent("  File Excluded - " & FoundFileName, EventLogLevel.Informational)
                             End If
                         Catch ex As Exception
-                            LogEvent("ERROR : " & ex.Message & ", " & ex.InnerException.ToString, EventLogLevel.ErrorOrSimilar)
+                            LogEvent("ErrorEvent : " & ex.Message & ", " & ex.InnerException.ToString, EventLogLevel.ErrorEvent)
                         End Try
                     Else
                         LogEvent("  File Excluded - " & foundFile & "  - (always ignore)", EventLogLevel.Informational)
@@ -1469,6 +1540,122 @@ Public Class AntProcessor
         Next
         LogEvent("---------------------------------------------------------------------------------------------------", EventLogLevel.Informational)
         LogEvent("Processing Movie Folder - Done - " & CountFilesFound.ToString & " files found.", EventLogLevel.ImportantEvent)
+        LogEvent("===================================================================================================", EventLogLevel.Informational)
+    End Sub
+
+
+    Public Sub ProcessMovieFolderForSingleMovie(ByVal filenames As String())
+        'Sub to enumerate file in the given MoviePath location - comes from watcher ...
+
+        If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then
+            ds.Tables("tblFoundMediaFiles").Clear()
+        End If
+        If ds.Tables("tblFoundNonMediaFiles") IsNot Nothing Then
+            ds.Tables("tblFoundNonMediaFiles").Clear()
+        End If
+        If ds.Tables("tblFoundTrailerFiles") IsNot Nothing Then
+            ds.Tables("tblFoundTrailerFiles").Clear()
+        End If
+
+        Dim XMLExclTable As New Hashtable ' "always ignore" movies
+        If (IO.File.Exists(CurrentSettings.Excluded_Movies_File)) Then
+            Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
+            Dim i As Integer = 0
+            Do While sr.Peek() >= 0
+                XMLExclTable.Add(i, sr.ReadLine)
+                i += 1
+            Loop
+        End If
+
+        Dim FoundFileName As String
+        Dim ValidMediaExtensions As String() = CurrentSettings.File_Types_Media.Split(";")
+        Dim ValidNonMediaExtensions As String() = CurrentSettings.File_Types_Non_Media.Split(";")
+        Dim ValidTrailerExtensions As String() = CurrentSettings.File_Types_Trailer.Split(";") ' Added for trailer detection
+        Dim row As DataRow
+
+        Dim CurrentMoviePath As String
+
+        LogEvent("Identifying Files from Watcher ...", EventLogLevel.ImportantEvent)
+        For Each foundFile As String In filenames
+
+            CurrentMoviePath = System.IO.Path.GetDirectoryName(foundFile)
+            If Not CurrentMoviePath.EndsWith("\") = True Then
+                CurrentMoviePath = CurrentMoviePath & "\"
+            End If
+
+            If (XMLExclTable.ContainsValue(foundFile.ToLower) = False) Then ' if not in "always ignore" file
+                'Check for match against movie file types:
+                Try
+                    'I took out the Override path here so every file gets loaded into tblFoundMovieFiles properly.  Override path handling moved to Processor
+                    FoundFileName = StripPathFromFile(foundFile, CurrentMoviePath)
+
+                    'File Handling - compare extension to known media filetypes (trailer or movies)
+                    Dim extension As String = foundFile.Substring(InStrRev(foundFile, ".")).ToLower
+                    If Array.Exists(ValidMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then
+                        'Check, if it's a trailer
+                        Dim isTrailer As Boolean = False
+                        For Each TrailerProp As String In ValidTrailerExtensions
+                            If FoundFileName.ToLower.Contains(TrailerProp.ToLower) Then
+                                isTrailer = True
+                            End If
+                        Next
+                        If isTrailer = True Then
+                            LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
+
+                            row = ds.Tables("tblFoundTrailerFiles").NewRow()
+                            row("FileName") = FoundFileName
+                            row("FilePath") = CurrentMoviePath
+                            ds.Tables("tblFoundTrailerFiles").Rows.Add(row)
+                        Else
+                            LogEvent("  File Found (movie) - " & FoundFileName, EventLogLevel.Informational)
+
+                            row = ds.Tables("tblFoundMediaFiles").NewRow()
+                            row("FileName") = FoundFileName
+                            row("FilePath") = CurrentMoviePath
+                            ds.Tables("tblFoundMediaFiles").Rows.Add(row)
+                        End If
+
+                    ElseIf Array.Exists(ValidNonMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then 'If Array.IndexOf(ValidNonMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
+                        'Check for match against non-movie file types:
+                        LogEvent("  File Found (NonMedia) - " & FoundFileName, EventLogLevel.Informational)
+
+                        row = ds.Tables("tblFoundNonMediaFiles").NewRow()
+                        row("FileName") = FoundFileName
+                        row("FilePath") = CurrentMoviePath
+                        ds.Tables("tblFoundNonMediaFiles").Rows.Add(row)
+
+                    ElseIf CurrentSettings.Scan_For_DVD_Folders = True Then
+                        'Finally special handling to check for DVD images in folders.
+                        If Right(FoundFileName, 12).ToLower = "video_ts.ifo" Then
+                            LogEvent("  File Found (DVD folder) - " & FoundFileName, EventLogLevel.Informational)
+
+                            row = ds.Tables("tblFoundNonMediaFiles").NewRow()
+                            row("FileName") = FoundFileName
+                            row("FilePath") = CurrentMoviePath
+                            ds.Tables("tblFoundNonMediaFiles").Rows.Add(row)
+                        End If
+                        'Finally special handling to check for BR images in folders.
+                        If Right(FoundFileName, 10).ToLower = "index.bdmv" And Not Right(FoundFileName, 18).ToLower = "\backup\index.bdmv" Then
+                            LogEvent("  File Found (BR folder) - " & FoundFileName, EventLogLevel.Informational)
+
+                            row = ds.Tables("tblFoundNonMediaFiles").NewRow()
+                            row("FileName") = FoundFileName
+                            row("FilePath") = CurrentMoviePath
+                            ds.Tables("tblFoundNonMediaFiles").Rows.Add(row)
+                        End If
+                    Else
+                        'LogEvent("  File Excluded - " & FoundFileName, EventLogLevel.Informational)
+                    End If
+                Catch ex As Exception
+                    LogEvent("ErrorEvent : " & ex.Message & ", " & ex.InnerException.ToString, EventLogLevel.ErrorEvent)
+                End Try
+            Else
+                LogEvent("  File Excluded - " & foundFile & "  - (always ignore)", EventLogLevel.Informational)
+            End If
+
+        Next
+        LogEvent("---------------------------------------------------------------------------------------------------", EventLogLevel.Informational)
+        LogEvent("Processing File(s) from Watcher Done - " & CountFilesFound.ToString & " files found.", EventLogLevel.ImportantEvent)
         LogEvent("===================================================================================================", EventLogLevel.Informational)
     End Sub
 
@@ -1863,7 +2050,7 @@ Public Class AntProcessor
     Public Sub UpdateXMLFile()
 
         If (Not (System.IO.File.Exists(CurrentSettings.Internet_Parser_Path.ToString))) Then
-            MsgBox("Error : Cannot find Parser Configuration file : " & CurrentSettings.Internet_Parser_Path.ToString, MsgBoxStyle.Critical, "Missing File")
+            MsgBox("ErrorEvent : Cannot find Parser Configuration file : " & CurrentSettings.Internet_Parser_Path.ToString, MsgBoxStyle.Critical, "Missing File")
             SetCheckButtonStatus(ButtonStatus.ReadyToDoImport)
             Exit Sub
         End If
@@ -1930,7 +2117,7 @@ Public Class AntProcessor
                 LogEvent("Backing up xml file - done.", EventLogLevel.ImportantEvent)
             Catch ex As Exception
                 DoProcess = False
-                LogEvent("ERROR : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorOrSimilar)
+                LogEvent("ErrorEvent : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorEvent)
             End Try
         End If
 
@@ -1987,7 +2174,7 @@ Public Class AntProcessor
         'Try
         e.Result = XMLUpdateObject.UpdateXML()
         'Catch ex As Exception
-        'LogEvent("ERROR : " & ex.Message, EventLogLevel.ErrorOrSimilar)
+        'LogEvent("ErrorEvent : " & ex.Message, EventLogLevel.ErrorEvent)
         'End Try
 
     End Sub
@@ -1998,7 +2185,7 @@ Public Class AntProcessor
             Form1.btnCancelProcessing.Enabled = False
         End If
         _OperationCancelled = True
-        LogEvent("Halting Operation by user request - Please Wait.", EventLogLevel.ErrorOrSimilar)
+        LogEvent("Halting Operation by user request - Please Wait.", EventLogLevel.ErrorEvent)
     End Sub
 
     Private Class XMLUpdateClass
@@ -2031,7 +2218,7 @@ Public Class AntProcessor
             End If
 
             Dim MovieRootNode As Xml.XmlNode
-            MovieRootNode = xmldoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents")
+            MovieRootNode = xmldoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents")
             Dim row As DataRow
 
             Dim wtime As String
@@ -2153,7 +2340,7 @@ Public Class AntProcessor
                             Ant.ProhibitInternetLookup = True
                             Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
                             Ant.SaveProgress()
-                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
+                            If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                             Else
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Updated - " & ReplacementPath & " - " & Ant.LastOutputMessage)
@@ -2168,9 +2355,9 @@ Public Class AntProcessor
                                 bgwFolderScanUpdate.CancelAsync()
                             End If
 
-                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Or Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
+                            If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Or Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
-                                'LogEvent("ERROR : " & blah.LastOutputMessage, EventLogLevel.ErrorOrSimilar)
+                                'LogEvent("ErrorEvent : " & blah.LastOutputMessage, EventLogLevel.ErrorEvent)
                             Else
                                 If CurrentSettings.Import_File_On_Internet_Lookup_Failure And (_InteractiveMode = False Or CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = False) Then
                                     'Doesn't matter if the Internet loookup worked; just load the entry:
@@ -2311,7 +2498,7 @@ Public Class AntProcessor
                             Ant.ProhibitInternetLookup = True
                             Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
                             Ant.SaveProgress()
-                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
+                            If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                             Else
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Updated - " & ReplacementPath)
@@ -2322,13 +2509,13 @@ Public Class AntProcessor
                             Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
                             Ant.SaveProgress()
                             'Catch ex As Exception
-                            'LogEvent("ERROR : " & ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                            'LogEvent("ErrorEvent : " & ex.Message.ToString, EventLogLevel.ErrorEvent)
                             'End Try
 
 
-                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
+                            If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
-                                'LogEvent("ERROR : " & blah.LastOutputMessage, EventLogLevel.ErrorOrSimilar)
+                                'LogEvent("ErrorEvent : " & blah.LastOutputMessage, EventLogLevel.ErrorEvent)
                             Else
                                 'Check to see whether to save record:
                                 If CurrentSettings.Import_File_On_Internet_Lookup_Failure = True Then
@@ -2369,19 +2556,20 @@ Public Class AntProcessor
         End Function
     End Class
 
+
     Private Shared Sub bgwFolderScanUpdate_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwFolderScanUpdate.RunWorkerCompleted
         'Now new XML document is in memory; and we have an arraylist of movies with multiple parts:
 
         If e.Error IsNot Nothing Then
-            'If e.Error.Message.ToString <> "" Then
-            LogEvent("ERROR : " & e.Error.Message.ToLower, EventLogLevel.ErrorOrSimilar)
+            'If e.ErrorEvent.Message.ToString <> "" Then
+            LogEvent("ErrorEvent : " & e.Error.Message.ToLower, EventLogLevel.ErrorEvent)
             'End If
         End If
 
         'Check to see if the cancel button was clicked; if so prompt on how to continue
         If _OperationCancelled = True Then
             If MsgBox("Save work done so far?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
-                LogEvent("Operation Cancelled.", EventLogLevel.ErrorOrSimilar)
+                LogEvent("Operation Cancelled.", EventLogLevel.ErrorEvent)
                 'If _InteractiveMode = True Then
                 Form1.ToolStripProgressBar.Value = Form1.ToolStripProgressBar.Maximum
                 Form1.btnCancelProcessing.Enabled = False
@@ -2394,7 +2582,7 @@ Public Class AntProcessor
                 End Try
                 Exit Sub
             Else
-                LogEvent("Operation Cancelled - Save Continuing", EventLogLevel.ErrorOrSimilar)
+                LogEvent("Operation Cancelled - Save Continuing", EventLogLevel.ErrorEvent)
             End If
         End If
 
@@ -2410,7 +2598,7 @@ Public Class AntProcessor
 
         'Purge database entries for missing files (optional)
         If CurrentSettings.Purge_Missing_Files = True Then
-            Dim MovieRootNode As Xml.XmlNode = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents")
+            Dim MovieRootNode As Xml.XmlNode = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents")
             Dim NodeToDelete As Xml.XmlNode
             Dim row As DataRow
 
@@ -2418,7 +2606,7 @@ Public Class AntProcessor
 
             For Each row In ds.Tables("tblOrphanedAntRecords").Rows
 
-                NodeToDelete = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & row("AntID") & "']")
+                NodeToDelete = XMLDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & row("AntID") & "']")
                 If Not NodeToDelete Is Nothing Then
                     _CountRecordsDeleted += 1
                     MovieRootNode.RemoveChild(NodeToDelete)
@@ -2439,7 +2627,7 @@ Public Class AntProcessor
             End If
             My.Computer.FileSystem.DeleteFile(_TempXMLBackupFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
         Catch ex As Exception
-            LogEvent("ERROR SAVING CHANGES TO XML FILE.", EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent SAVING CHANGES TO XML FILE.", EventLogLevel.ErrorEvent)
         End Try
 
 
@@ -2490,8 +2678,6 @@ Public Class AntProcessor
     End Sub
 
 #End Region
-
-
 
 
     Public Sub Reset()

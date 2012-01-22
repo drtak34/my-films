@@ -800,12 +800,12 @@ Public Class AntSettings
                 If Not row Is Nothing Then
                     If Not row.Item("Value") Is DBNull.Value Then
                         value = dsDefaultSettings.Tables(0).Rows.Find(OptionName).Item("Value")
-                        LogEvent("Error Reading Config Attribute '" & OptionName & "' - Using Default Value of '" & value.ToString & "'", EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent Reading Config Attribute '" & OptionName & "' - Using Default Value of '" & value.ToString & "'", EventLogLevel.ErrorEvent)
                     Else
-                        LogEvent("Error Reading Config Attribute '" & OptionName & "' - No Default Setting Found.", EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent Reading Config Attribute '" & OptionName & "' - No Default Setting Found.", EventLogLevel.ErrorEvent)
                     End If
                 Else
-                    LogEvent("Error Reading Config Attribute '" & OptionName & "' - No Default Setting Found.", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("ErrorEvent Reading Config Attribute '" & OptionName & "' - No Default Setting Found.", EventLogLevel.ErrorEvent)
                 End If
 
                 'MsgBox("Failed reading Attribute - " & OptionName)
@@ -823,7 +823,7 @@ Public Class AntSettings
                 'dsSettings.Tables(0).Rows.Add()
 
                 dsSettings.Tables(0).Rows.Add(OptionValue, OptionName)
-                'LogEvent("Failed Setting Config Attribute '" & OptionName & "'", EventLogLevel.ErrorOrSimilar)
+                'LogEvent("Failed Setting Config Attribute '" & OptionName & "'", EventLogLevel.ErrorEvent)
                 'MsgBox("Failed Setting Attribute - " & OptionName)
             End If
         End If
@@ -843,7 +843,7 @@ Public Class AntSettings
                 If dsSettings.Tables.Count = 1 Then
                     dsSettings.Tables(0).PrimaryKey = New DataColumn() {dsSettings.Tables(0).Columns("Option")}
                 Else
-                    MsgBox("Error reading default settings file - recreating file.")
+                    MsgBox("ErrorEvent reading default settings file - recreating file.")
                     CreateDefaultFiles()
                     LoadUserSettings()
                 End If
@@ -863,17 +863,17 @@ Public Class AntSettings
                     dsSettings.CaseSensitive = False
                     dsSettings.Tables(0).PrimaryKey = New DataColumn() {dsSettings.Tables(0).Columns("Option")}
                     'If dsSettings.Tables(0).Rows.Count < 24 Then
-                    'MsgBox("Error parsing config file - loading defaults instead")
+                    'MsgBox("ErrorEvent parsing config file - loading defaults instead")
                     'LoadUserSettings()
                     'End If
                 Catch ex As Exception
-                    MsgBox("Error reading config file: '" + ex.Message + "' - loading defaults instead")
+                    MsgBox("ErrorEvent reading config file: '" + ex.Message + "' - loading defaults instead")
                     dsSettings.Clear()
                     LoadUserSettings()
                 End Try
             Else
-                'Error - cannot load file
-                Err.Raise(10000, , "Error loading custom config file - file not found")
+                'ErrorEvent - cannot load file
+                Err.Raise(10000, , "ErrorEvent loading custom config file - file not found")
             End If
         End If
 

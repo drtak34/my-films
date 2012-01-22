@@ -29,6 +29,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System.Xml;
   using System.Globalization;
 
+  using Grabber;
+
   using NLog;
 
   class EaxMovieCatalog3
@@ -121,7 +123,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                   try
                   {
-                    XmlNodeList DiscsList = nodeDVD.SelectSingleNode("Discs").SelectNodes("Disc");
+                    XmlNodeList DiscsList = nodeDVD.SelectSingleNodeFast("Discs").SelectNodes("Disc");
                     if ((DiscsList != null) && (DiscsList.Count != 0))
                     {
                       foreach (XmlNode nodeDisc in DiscsList)
@@ -241,8 +243,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.Attributes["Studio"] != null)
                       Studio = nodeDVD.Attributes["Studio"].Value;
 
-                    if (nodeDVD.SelectSingleNode("Cast") != null)
-                      WriteAntAtribute(destXml, "Cast", nodeDVD.SelectSingleNode("Cast").InnerText);
+                    if (nodeDVD.SelectSingleNodeFast("Cast") != null)
+                      WriteAntAtribute(destXml, "Cast", nodeDVD.SelectSingleNodeFast("Cast").InnerText);
                     if (nodeDVD.Attributes["Picture"] != null)
                         WriteAntAtribute(destXml, "Picture", nodeDVD.Attributes["Picture"].Value);
                     if (nodeDVD.Attributes["Format"] != null)
@@ -269,10 +271,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
                       DescriptionMerged += Certification;
                     }
-                    if (nodeDVD.SelectSingleNode("PlotOriginal") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNode("PlotOriginal").InnerText))
+                    if (nodeDVD.SelectSingleNodeFast("PlotOriginal") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNodeFast("PlotOriginal").InnerText))
                     {
                       if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
-                      DescriptionMerged += nodeDVD.SelectSingleNode("PlotOriginal").InnerText;
+                      DescriptionMerged += nodeDVD.SelectSingleNodeFast("PlotOriginal").InnerText;
                     }
                     WriteAntAtribute(destXml, "Description", DescriptionMerged);
 
@@ -293,10 +295,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
                       CommentsMerged += Certification;
                     }
-                    if (nodeDVD.SelectSingleNode("Comments") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNode("Comments").InnerText))
+                    if (nodeDVD.SelectSingleNodeFast("Comments") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNodeFast("Comments").InnerText))
                     {
                       if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
-                      CommentsMerged += nodeDVD.SelectSingleNode("Comments").InnerText;
+                      CommentsMerged += nodeDVD.SelectSingleNodeFast("Comments").InnerText;
                     }
                     WriteAntAtribute(destXml, "Comments", CommentsMerged);
                   

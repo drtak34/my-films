@@ -11,9 +11,9 @@ namespace Cornerstone.Tools {
 
     public class WebGrabber {
 
-        #region Private variables
-        private static NLog.Logger LogMyFilmsS = NLog.LogManager.GetCurrentClassLogger();  //log
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        #region Private variables
         private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();
         private static int unsafeHeaderUserCount;
         private static object lockingObj;
@@ -347,7 +347,7 @@ namespace Cornerstone.Tools {
 
     public class AdvancedStringComparer
     {
-      private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+      private static Logger logger = LogManager.GetCurrentClassLogger();
 
       // Calculates the Levenshtein Distance between two strings. The least number of 
       // changes to make one string equal to the other. Useful for finding 

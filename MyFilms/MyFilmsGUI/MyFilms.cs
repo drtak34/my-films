@@ -29,9 +29,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.ComponentModel;
   using System.Data;
   using System.Diagnostics;
-  using System.Linq;
   using System.Globalization;
   using System.IO;
+  using System.Linq;
   using System.Text.RegularExpressions;
   using System.Threading;
   using System.Web.UI.WebControls;
@@ -47,24 +47,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.Services;
   using MediaPortal.Util;
   using MediaPortal.Video.Database;
-
-  using MyFilmsPlugin.MyFilms.Configuration;
   using MyFilmsPlugin.DataBase;
+  using MyFilmsPlugin.MyFilms.Configuration;
   using MyFilmsPlugin.MyFilms.Utils;
   using MyFilmsPlugin.MyFilms.Utils.Cornerstone.MP;
   using MyFilmsPlugin.MyFilmsGUI;
-
   using NLog;
   using NLog.Config;
   using NLog.Targets;
-
+  using Action = MediaPortal.GUI.Library.Action;
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
-
-  using Action = MediaPortal.GUI.Library.Action;
   // using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
-
 
   /// <summary>
     /// Summary description for GUIMyFilms.
@@ -1884,7 +1879,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private string ReReverseName(string reversedName)
     {
       if (reversedName.Contains(", ")) // "Re"Reverse Names "Willis, Bruce" --> "Bruce Willis"
-        return reversedName.Substring(reversedName.LastIndexOf(", ") + 2) + " " + reversedName.Substring(0, reversedName.LastIndexOf(", "));
+        return reversedName.Substring(reversedName.LastIndexOf(", ", System.StringComparison.Ordinal) + 2) + " " + reversedName.Substring(0, reversedName.LastIndexOf(", ", System.StringComparison.Ordinal));
       else 
         return reversedName;
     }
@@ -2136,7 +2131,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         AntMovieCatalog ds = new AntMovieCatalog();
         string datatype = ds.Movie.Columns[conf.WStrSort].DataType.Name; // == "string"
 
-        LogMyFilms.Debug(string.Format("(SetFilmSelect) - DB-Field: '{0}', datatype = '{1}', ColumnType = '{2}'", conf.WStrSort, datatype, ColumnType.ToString()));
+        LogMyFilms.Debug(string.Format("(SetFilmSelect) - DB-Field: '{0}', datatype = '{1}', ColumnType = '{2}'", conf.WStrSort, datatype, ColumnType));
 
         if (ColumnType != typeof(string))
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " = '" + sLabel + "'" : conf.WStrSort + " is NULL";
@@ -4160,6 +4155,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wi;
       string[] Sep = conf.ListSeparator;
       string[] roleSep = conf.RoleSeparator;
+      //char[] SepAsChars; string tS = String.Empty; for (int i = 0; i <= Sep.Length; i++) tS += Sep[i]; SepAsChars = tS.ToCharArray(); string[] arSplit = champselect.Split(SepAsChars, StringSplitOptions.RemoveEmptyEntries);
       string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
       string wzone = string.Empty;
       int wzoneIndexPosition;
@@ -4167,7 +4163,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (arSplit[wi].Length > 0)
         {
-          // wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim()); // Replaced for performancereasons - HTML cleanup was not necessary !
+          // wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim()); // Replaced for performancereasons - HTML cleanup was not necessary and was VERY slow!
           wzone = arSplit[wi].Replace("  ", " ").Trim();
           for (int i = 0; i <= 4; i++)
           {
@@ -12198,28 +12194,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         XmlElement root = doc.DocumentElement;
         if (root != null)
         {
-          XmlNode controlsNode = root.SelectSingleNode("controls");
+          XmlNode controlsNode = GenericExtensions.SelectSingleNodeFast(root, "controls");
           if (controlsNode != null)
           {
-            XmlNode settingsNode = controlsNode.SelectSingleNode("settings");
+            XmlNode settingsNode = GenericExtensions.SelectSingleNodeFast(controlsNode, "settings");
             if (settingsNode != null)
             {
-              XmlNode skininterfaceversionNode = settingsNode.SelectSingleNode("skininterfaceversion");
+              XmlNode skininterfaceversionNode = GenericExtensions.SelectSingleNodeFast(settingsNode, "skininterfaceversion");
               if (skininterfaceversionNode != null)
               {
-                XmlNode versionNode = skininterfaceversionNode.SelectSingleNode("version");
+                XmlNode versionNode = GenericExtensions.SelectSingleNodeFast(skininterfaceversionNode, "version");
                 if (versionNode != null)
                 {
-                  XmlNode majorVersionNode = versionNode.SelectSingleNode("major");
+                  XmlNode majorVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "major");
                   if (majorVersionNode != null)
                     _versionMajor = majorVersionNode.InnerText;
-                  XmlNode minorVersionNode = versionNode.SelectSingleNode("minor");
+                  XmlNode minorVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "minor");
                   if (minorVersionNode != null)
                     _versionMinor = minorVersionNode.InnerText;
-                  XmlNode buildVersionNode = versionNode.SelectSingleNode("build");
+                  XmlNode buildVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "build");
                   if (buildVersionNode != null)
                     _versionBuild = buildVersionNode.InnerText;
-                  XmlNode revisionVersionNode = versionNode.SelectSingleNode("revision");
+                  XmlNode revisionVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "revision");
                   if (revisionVersionNode != null)
                     _versionRevision = revisionVersionNode.InnerText;
                 }

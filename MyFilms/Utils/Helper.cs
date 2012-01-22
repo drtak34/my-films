@@ -202,6 +202,36 @@ namespace MyFilmsPlugin.MyFilms.Utils
           );
         }
 
+        public static List<string> fSplit(String src, char delim) 
+        {
+          List<string> output = new List<string>();
+          int index = 0;
+          int lindex = 0;
+          while((index = src.IndexOf(delim,lindex)) != -1) 
+          {
+            output.Add(src.Substring(lindex,index));
+            lindex = index+1;
+          }
+          output.Add(src.Substring(lindex));
+          return output;
+          //return output.ToArray(new String[output.Size()]);
+        }
+
+        private static List<string> fSplit(string src, string delim) 
+        {
+          List<string> output = new List<string>();
+          int index = 0;
+          int lindex = 0;
+          while((index = src.IndexOf(delim,lindex)) != -1) 
+          {
+            output.Add(src.Substring(lindex,index));
+            lindex = index+delim.Length;
+          }
+          output.Add(src.Substring(lindex));
+          return output;
+          //return output.ToArray(new String[output.size()]);
+        }
+
     }
     #endregion
 

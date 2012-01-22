@@ -64,6 +64,8 @@ using NLog;
 
 namespace MyFilmsPlugin.MyFilms.Utils
 {
+  using Grabber;
+
   class XmlConfig
     {
 
@@ -136,7 +138,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 CreateSection(Section);
             }
             //Posit on section node
-            XmlNode section = profile.SelectSingleNode("section[@name='" + Section + "']");
+            XmlNode section = profile.SelectSingleNodeFast("section[@name='" + Section + "']");
 
             //Create Entry if doesn't exist
             XPath = @"/profile/section[@name='" + Section + "']/entry[@name='" + Entry + "']";
@@ -146,7 +148,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 CreateEntry(Section, Entry);
             }
             //Posit on entry node
-            XmlNode entry = section.SelectSingleNode("entry[@name='" + Entry + "']");
+            XmlNode entry = section.SelectSingleNodeFast("entry[@name='" + Entry + "']");
 
             //Store entry value
             entry.InnerText = Value;
@@ -181,11 +183,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (ListEntry.Count > 0)
             {
                 //Posit on section node
-                XmlNode section = profile.SelectSingleNode("section[@name='" + Section + "']");
+                XmlNode section = profile.SelectSingleNodeFast("section[@name='" + Section + "']");
                 if (Entry.Length > 0)
                 {
                     //Posit on entry node
-                    XmlNode entry = section.SelectSingleNode("entry[@name='" + Entry + "']");
+                    XmlNode entry = section.SelectSingleNodeFast("entry[@name='" + Entry + "']");
                     //Remove the entry node for section
                     section.RemoveChild(entry);
                 }
@@ -263,9 +265,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (ListEntry.Count > 0)
             {
                 //Posit on section node
-                XmlNode section = profile.SelectSingleNode("section[@name='" + Section + "']");
+                XmlNode section = profile.SelectSingleNodeFast("section[@name='" + Section + "']");
                 //Posit on entry node
-                XmlNode entry = section.SelectSingleNode("entry[@name='" + Entry + "']");
+                XmlNode entry = section.SelectSingleNodeFast("entry[@name='" + Entry + "']");
                 //Recover value with entry data
                 Value = entry.InnerText;
             }
@@ -292,7 +294,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
             // If value exist, return it otherwise, return default value
             if (ListEntry.Count > 0)
-                Value = ListEntry.Item(0).SelectSingleNode("Value").InnerText;
+                Value = ListEntry.Item(0).SelectSingleNodeFast("Value").InnerText;
 
             return Value;
         }
@@ -340,7 +342,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             //Recover profile node
             XmlElement profile = configxml.DocumentElement;
             //Posit on section node
-            XmlNode section = profile.SelectSingleNode("section[@name='" + Section + "']");
+            XmlNode section = profile.SelectSingleNodeFast("section[@name='" + Section + "']");
             //Create new node for entry
             XmlNode entry = configxml.CreateElement("entry");
             //Add "name" attribute to entry node

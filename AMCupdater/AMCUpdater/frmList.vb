@@ -111,13 +111,13 @@ Public Class frmList
                         txtTmpParserFilePath.Text = .FileName
                         txtTmpParserFilePathShort.Text = .FileName.ToString.Substring(.FileName.ToString.LastIndexOf("\") + 1)
                     Catch fileException As Exception
-                        LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
                 End If
 
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
     End Sub
@@ -319,7 +319,7 @@ Public Class frmList
             End If
         End If
         If (currentPathFull.Length <> (currentStartPath + "\" + currentDirectoryName + "\" + currentFileName).Length) Then
-            MsgBox("Error getting directory and file information !" + Chr(13) + "'" + currentPathFull + "'" + Chr(13) + "'" + currentStartPath + "\" + currentDirectoryName + "\" + currentFileName + "'", MsgBoxStyle.Exclamation, Me.Text)
+            MsgBox("ErrorEvent getting directory and file information !" + Chr(13) + "'" + currentPathFull + "'" + Chr(13) + "'" + currentStartPath + "\" + currentDirectoryName + "\" + currentFileName + "'", MsgBoxStyle.Exclamation, Me.Text)
             Return
         End If
         If Not System.IO.File.Exists(currentPathFull) Then
@@ -346,13 +346,13 @@ Public Class frmList
                         Me.DialogResult = Windows.Forms.DialogResult.Cancel ' to cancel import in List Selection !
                         Return
                     Catch renameException As Exception
-                        LogEvent("RENAME : successful! Old name = '...\" + .TextBoxDirectoryNameCurrent.Text + "\" + .TextBoxFileNameCurrent.Text + "', New name = '" + .TextBoxDirectoryNameNew.Text + "\" + .TextBoxFileNameNew.Text + "'", EventLogLevel.ErrorOrSimilar)
-                        MsgBox("Rename not successful! - Error: " + renameException.Message, MsgBoxStyle.Exclamation)
+                        LogEvent("RENAME : successful! Old name = '...\" + .TextBoxDirectoryNameCurrent.Text + "\" + .TextBoxFileNameCurrent.Text + "', New name = '" + .TextBoxDirectoryNameNew.Text + "\" + .TextBoxFileNameNew.Text + "'", EventLogLevel.ErrorEvent)
+                        MsgBox("Rename not successful! - ErrorEvent: " + renameException.Message, MsgBoxStyle.Exclamation)
                     End Try
                 End If
             End With
         Catch ex As Exception
-            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
@@ -364,7 +364,7 @@ Public Class frmList
             Call Shell("explorer /select," & info.FullName, AppWinStyle.NormalFocus)
             'Process.Start("explorer.exe", info.DirectoryName)
         Catch ex As Exception
-            MsgBox("Path '" & txtSourceFull.Text & "' not found! - Error: " + ex.Message, MsgBoxStyle.Exclamation)
+            MsgBox("Path '" & txtSourceFull.Text & "' not found! - ErrorEvent: " + ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
 End Class
