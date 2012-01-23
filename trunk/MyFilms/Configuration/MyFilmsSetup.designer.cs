@@ -2728,6 +2728,7 @@
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText2);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
+          this.groupBox_AntUpdatingItems.Enabled = false;
           this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(17, 6);
           this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
           this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 104);
