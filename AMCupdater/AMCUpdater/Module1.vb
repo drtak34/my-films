@@ -11,25 +11,26 @@ Imports System.Xml
 Imports System.Timers
 Imports System.Text
 
-
 Module Module1
-
-    Private LogEventNew As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
 
     Public WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker
     Public CurrentSettings As New AntSettings
+    Public CurrentLogDirectory As String
     Public wurl As New ArrayList
+    Friend BufferedLogEvents As StringBuilder = New StringBuilder()
 
-    Private watch As Stopwatch = Nothing
-    Private BufferedLogEvents As StringBuilder = New StringBuilder()
+
+    'Private LogEventNew As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
+    Public watch As Stopwatch = New Stopwatch()
 
     Public Enum EventLogLevel As Integer
         None
+        InformationalWithGrabbing
         Informational
         ImportantEvent
         ErrorEvent
+        WriteBuffer
     End Enum
-
 
     Public Function GetDVDFolderName(ByVal FileName As String) As String
         'Function to try and guess the correct movie name for a DVD image stored in a folder.
@@ -188,10 +189,10 @@ Module Module1
 
     End Function
 
-    ' This method is used to catch the possible exception
-    ' that can be raised when accessing the FileInfo.Length property.
-    ' In this particular case, it is safe to ignore the exception.
     Function GetFileLength(ByVal fi As System.IO.FileInfo) As Long
+        ' This method is used to catch the possible exception
+        ' that can be raised when accessing the FileInfo.Length property.
+        ' In this particular case, it is safe to ignore the exception.
         Dim retval As Long
         Try
             retval = fi.Length
@@ -200,7 +201,6 @@ Module Module1
             ' just return zero bytes. 
             retval = 0
         End Try
-
         Return retval
     End Function
 
@@ -317,6 +317,7 @@ Module Module1
         Return CleanString
 
     End Function
+
     Public Function GetYearFromFilePath(ByVal FilePath As String)
         'File Name
         'Folder Name
@@ -1104,6 +1105,17 @@ Module Module1
 
     <STAThread()> _
     Public Sub LogEvent(ByVal EventString As String, ByVal LogLevel As EventLogLevel)
+
+        If LogLevel = EventLogLevel.WriteBuffer Then
+            'If (Not dgLogWindow.IsHandleCreated And Not dgLogWindow.IsDisposed) Then Return
+            dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
+            BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+            'Form1.aTimer.Change(Timeout.Infinite, Timeout.Infinite)
+            watch.Reset()
+            watch.Start()
+            Return
+        End If
+
         'LogLevels...
         ' 0 = None (no logging)
         ' 1 = InformationalWithGrabbing
@@ -1138,71 +1150,59 @@ Module Module1
             End If
         End If
 
-
         'Sub to write log information.  If the GUI is running then it also appends to the txtProcess box.
-        Dim path As String
         Dim LogText As String = My.Computer.Clock.LocalTime.ToString + " - " + EventString
-        Dim LogDirectoryParam As String
-        If My.Application.CommandLineArgs.Count > 1 Then
-            If My.Application.CommandLineArgs.Item(1) = "LogDirectory" Then
-                LogDirectoryParam = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log"
-            Else
-                LogDirectoryParam = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\" + My.Application.CommandLineArgs.Item(1)
-            End If
 
-            If CurrentSettings.LogDirectory.Length > 0 Then
-                path = CurrentSettings.LogDirectory + "\MyFilmsAMCupdater.log"
-            ElseIf Directory.Exists(LogDirectoryParam) Then
-                path = LogDirectoryParam + "\MyFilmsAMCupdater.log"
-            Else
-                path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
-            End If
-        Else
-            If (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log")) Then
-                path = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log\AMCUpdater.log"
-            Else
-                path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
-            End If
-        End If
-
-
-        If Form1.Visible = True Then
-            'LogEventNew.Debug(LogText & vbCrLf)
-            If watch Is Nothing Then
-                watch = New Stopwatch()
-                watch.Reset()
-                watch.Start()
-            End If
-
-            BufferedLogEvents.AppendLine(LogText) 'BufferedLogEvents += LogText & vbCrLf
-
-            If watch.Elapsed.TotalMilliseconds > 200 Then
-                dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
-                BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
-                watch.Reset()
-                watch.Start()
-            End If
-        End If
-
-        'dgLogWindow.txtLogWindow.AppendText(LogText & vbCrLf)
-        'If LogLevel = EventLogLevel.ImportantEvent Then
-        '    Form1.ToolStripStatusLabel.Text = EventString
-        'End If
         If LogItem = True Then
             Try
-                My.Computer.FileSystem.WriteAllText(path, vbCrLf + LogText, True)
+                My.Computer.FileSystem.WriteAllText(CurrentLogDirectory, vbCrLf + LogText, True)
             Catch ex As Exception
-
             End Try
         End If
 
-    End Sub
-    Public Sub LogEventCheckBuffer()
-        If BufferedLogEvents.Length > 0 And watch.Elapsed.TotalMilliseconds > 200 Then
-            dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
-            BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+        If Form1.Visible = True Then
+            'dgLogWindow.txtLogWindow.AppendText(LogText & vbCrLf)
+            'LogEventNew.Debug(LogText & vbCrLf)
+            BufferedLogEvents.AppendLine(LogText) 'BufferedLogEvents += LogText & vbCrLf
+            If watch.Elapsed.TotalMilliseconds > 200 Then
+                dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
+                BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+                If LogLevel = EventLogLevel.ImportantEvent Then
+                    Form1.ToolStripStatusLabel.Text = EventString
+                End If
+                watch.Reset()
+                watch.Start()
+                'Form1.aTimer.Change(Timeout.Infinite, Timeout.Infinite)
+            Else
+                'Form1.aTimer.Change(1000, Timeout.Infinite) ' call buffercheck once in 1 second, if nothing else happens ...
+            End If
         End If
     End Sub
+
+    Public Sub LogEventCheckBuffer()
+        If BufferedLogEvents.Length > 0 And watch.Elapsed.TotalMilliseconds > 500 Then
+            'LogEvent("", EventLogLevel.WriteBuffer) ' write buffer in sta thread ...
+            dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
+            BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+            watch.Reset()
+            watch.Start()
+        End If
+    End Sub
+
+    '  ''' <summary>
+    '  ''' Diese Methode wird von einem Background Thread (nicht UI Thread) aufgerufen
+    '  ''' </summary>
+    '  ''' <param name="max">Maximale Anzahl der Durchläufe</param>
+    '  Private Sub BackgroundThreadAction(ByVal max As Integer)
+    '      If max < 0 Then
+    'InvokeIfRequired(Me.textBoxStatus, DirectCast(Sub() Me.textBoxStatus.Text = "max value must be greater than zero", MethodInvoker))
+    '          Return
+    '      End If
+    '      For i As Integer = 0 To max - 1
+    'InvokeIfRequired(Me.textBoxStatus, DirectCast(Sub() Me.textBoxStatus.Text = [String].Format("Processing value {0}", i), MethodInvoker))
+    '          Thread.Sleep(10)
+    '      Next
+    '  End Sub
     Public Enum ButtonStatus
         ReadyToParseXML = 0
         ReadyToSearchFolders = 1
@@ -1611,6 +1611,19 @@ Module Module1
         Return ReturnValue
     End Function
 
+    ''' <summary>
+    ''' Methode die die UI Interaktionen durchführt.
+    ''' </summary>
+    ''' <param name="target">Control welches geändert wird, werden mehrere Controls geändert muss hier das Parent Control übergeben werden</param>
+    ''' <param name="methodToInvoke">der Delegate der ausgeführt werden soll (UI Aktionen)</param>
+    Private Sub InvokeIfRequired(ByVal target As Control, ByVal methodToInvoke As [Delegate])
+        If target.InvokeRequired Then ' Mit Hilfe von InvokeRequired wird geprüft ob der Aufruf direkt an die UI gehen kann oder ob ein Invokeing hier von Nöten ist
+            target.Invoke(methodToInvoke) ' Das Control muss per Invoke geändert werden, weil der aufruf aus einem Backgroundthread kommt
+        Else
+            methodToInvoke.DynamicInvoke() ' Die Änderung an der UI kann direkt aufgerufen werden.
+        End If
+    End Sub
+
     '<FlagsAttribute()> Public Enum EAccessType As Integer
     '    change = 1
     '    insert = 2
@@ -1643,5 +1656,4 @@ Module Module1
     'Private Function GetEnumValue(ByVal strName As String) As EAccessType
     '    Enum.Parse(EAccessType.GetType(), strName) ' @_ntr_: danke ;-)
     'End Function
-
 End Module

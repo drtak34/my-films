@@ -1,3 +1,5 @@
+Imports MediaPortal.Configuration
+
 Namespace My
 
     ' The following events are availble for MyApplication:
@@ -16,31 +18,42 @@ Namespace My
 
         Private Sub MyApplication_ShutDown(ByVal Sender As Object, ByVal e As System.EventArgs) Handles Me.Shutdown
 
-
-
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
-            'LogEvent("", EventLogLevel.ErrorEvent)
-            'LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
-            'LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
-            'If My.Application.CommandLineArgs.Count > 0 Then
-            ' Call the main routine for windowless operation.
-            'Dim c As New BatchApplication
-            'LogEvent("Running in Console Mode", EventLogLevel.ImportantEvent)
-            'e.Cancel = True
-            'c.Main()
-            'Else
-            'LogEvent("Running in GUI Mode", EventLogLevel.ImportantEvent)
-            'End If
-
             'Dim Settings As New AntSettings
 
-
             'Read Dir for Logging, if 2nd Commandlineparameter is present
+            Dim LogDirectoryParam As String = ""
+            Dim CommandlineString As String = ""
+            CommandlineString = Application.CommandLineArgs.ToList().Aggregate(CommandlineString, Function(current, commandLineArg) current + (commandLineArg.ToString() & " "))
+            If My.Application.CommandLineArgs.Count > 1 Then
+                If My.Application.CommandLineArgs.Item(1) = "LogDirectory" And Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString) Then
+                    LogDirectoryParam = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log"
+                Else
+                    LogDirectoryParam = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\" + My.Application.CommandLineArgs.Item(1)
+                End If
+            Else
+                If (Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log")) Then
+                    CurrentLogDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log\AMCUpdater.log"
+                Else
+                    CurrentLogDirectory = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
+                End If
+            End If
 
             If My.Application.CommandLineArgs.Count > 0 Then
                 CurrentSettings.LoadUserSettings(My.Application.CommandLineArgs.Item(0))
+
+                If CurrentSettings.LogDirectory.Length > 0 Then
+                    CurrentLogDirectory = CurrentSettings.LogDirectory + "\MyFilmsAMCupdater.log"
+                ElseIf LogDirectoryParam.Length > 0 Then
+                    If Directory.Exists(LogDirectoryParam) Then
+                        CurrentLogDirectory = LogDirectoryParam + "\MyFilmsAMCupdater.log"
+                    End If
+                Else
+                    CurrentLogDirectory = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
+                End If
+
                 Dim ConfigFile As String = My.Application.CommandLineArgs.Item(0)
                 If Not IO.File.Exists(ConfigFile) Then
                     LogEvent("ErrorEvent - Config File '" & ConfigFile.ToString & "' not found.", EventLogLevel.ErrorEvent)
@@ -54,29 +67,20 @@ Namespace My
                     Form1.Text = "Ant Movie Catalog Auto-Updater"
                 End If
 
-
-                'CurrentSettings.LoadUserSettings(ConfigFile)
+                LogEvent("", EventLogLevel.ErrorEvent)
+                LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
+                LogEvent("'" & My.Application.CommandLineArgs.Count.ToString & "' Arguments Found : " & CommandlineString, EventLogLevel.ImportantEvent)
 
                 If (My.Application.CommandLineArgs.Count < 3 And My.Application.CommandLineArgs.Count > 0) Then
                     Dim c As New BatchApplication
                     LogEvent("", EventLogLevel.ErrorEvent)
-                    LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
-                    LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
-                    LogEvent("Arguments : " & My.Application.CommandLineArgs.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in Console Mode", EventLogLevel.ImportantEvent)
                     e.Cancel = True
                     c.Main()
                 ElseIf My.Application.CommandLineArgs.Item(2) = "GUI" Then
-                    LogEvent("", EventLogLevel.ErrorEvent)
-                    LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
-                    LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in forced GUI Mode with Configfile", EventLogLevel.ImportantEvent)
-                    'CurrentSettings.LoadUserSettings()
                 Else
                     Dim c As New BatchApplication
-                    LogEvent("", EventLogLevel.ErrorEvent)
-                    LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
-                    LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in forced Console Mode", EventLogLevel.ImportantEvent)
                     e.Cancel = True
                     c.Main()
@@ -84,12 +88,10 @@ Namespace My
             Else
                 LogEvent("", EventLogLevel.ErrorEvent)
                 LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
-                LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
+                LogEvent("'" & My.Application.CommandLineArgs.Count.ToString & "' Arguments Found : " & CommandlineString, EventLogLevel.ImportantEvent)
                 LogEvent("Running in GUI Mode", EventLogLevel.ImportantEvent)
                 CurrentSettings.LoadUserSettings()
             End If
-
-
         End Sub
 
 
