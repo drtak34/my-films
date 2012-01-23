@@ -6604,15 +6604,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // Change grabber find trying best match option (status off)
           choiceViewGlobalOptions.Add("findbestmatch");
 
-          //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), MesFilms.conf.WindowsFileDialog.ToString(), (!MesFilms.conf.WindowsFileDialog).ToString()));  // Using Windows File Dialog File for that session
-          if (MyFilms.conf.WindowsFileDialog)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));
-              // Using Windows File Dialog File for that session (status on)
-          if (!MyFilms.conf.WindowsFileDialog)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));
-              // Using Windows File Dialog File for that session (status off)
-          choiceViewGlobalOptions.Add("windowsfiledialog");
-
           if (MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798628)));
           if (!MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("alwaysdefaultview");
@@ -7211,60 +7202,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case "choosescript":
           MyFilms.conf.StrGrabber_ChooseScript = !MyFilms.conf.StrGrabber_ChooseScript;
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "Grabber_ChooseScript", MyFilms.conf.StrGrabber_ChooseScript);
-          LogMyFilms.Info(
-            "Grabber Option 'use always that script' changed to " + MyFilms.conf.StrGrabber_ChooseScript);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_ChooseScript", MyFilms.conf.StrGrabber_ChooseScript);
+          LogMyFilms.Info("Grabber Option 'use always that script' changed to " + MyFilms.conf.StrGrabber_ChooseScript);
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           this.Change_Menu_Action("globaloptions");
           break;
         case "findbestmatch":
           MyFilms.conf.StrGrabber_Always = !MyFilms.conf.StrGrabber_Always;
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "Grabber_Always", MyFilms.conf.StrGrabber_Always);
-          LogMyFilms.Info(
-            "Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
-          //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-          this.Change_Menu_Action("globaloptions");
-          break;
-        case "windowsfiledialog":
-          MyFilms.conf.WindowsFileDialog = !MyFilms.conf.WindowsFileDialog;
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "WindowsFileDialog", MyFilms.conf.WindowsFileDialog);
-          LogMyFilms.Info(
-            "Update Option 'use Windows File Dialog...' changed to " + MyFilms.conf.WindowsFileDialog.ToString());
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_Always", MyFilms.conf.StrGrabber_Always);
+          LogMyFilms.Info("Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           this.Change_Menu_Action("globaloptions");
           break;
         case "alwaysdefaultview":
           MyFilms.conf.AlwaysDefaultView = !MyFilms.conf.AlwaysDefaultView;
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MyFilms.conf.AlwaysDefaultView);
-          LogMyFilms.Info(
-            "Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
-
-          //if (MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
-          //if (!MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
-
-          //if (MyFilms.conf.AlwaysDefaultView)
-          //  Fin_Charge_Init(true, true); //DefaultSelect, reload
-          //else
-          //  Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
-          //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MyFilms.conf.AlwaysDefaultView);
+          LogMyFilms.Info("Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
           this.Change_Menu_Action("globaloptions");
           break;
         case "alwayslistforgroups":
           MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
           LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
           this.Change_Menu_Action("globaloptions");
           break;
 
         case "woluserdialog":
           MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
           LogMyFilms.Info("Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
           this.Change_Menu_Action("globaloptions");
           break;

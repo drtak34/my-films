@@ -526,7 +526,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 CmdPar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdPar", string.Empty);
                 if (CmdPar == "(none)") CmdPar = "";
                 OnlyTitleList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyTitleList", false);
-                WindowsFileDialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WindowsFileDialog", false);
                 GlobalAvailableOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalAvailableOnly", false);
                 GlobalUnwatchedOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnly", false);
                 GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
@@ -763,12 +762,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return onlyTitleList; }
             set { onlyTitleList = value; }
-        }
-        private bool windowsFileDialog = false;
-        public bool WindowsFileDialog
-        {
-            get { return windowsFileDialog; }
-            set { windowsFileDialog = value; }
         }
         private bool strLogos = false;
         public bool StrLogos

@@ -284,7 +284,6 @@
           this.label46 = new System.Windows.Forms.Label();
           this.label45 = new System.Windows.Forms.Label();
           this.label44 = new System.Windows.Forms.Label();
-          this.chkWindowsFileDialog = new System.Windows.Forms.CheckBox();
           this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
           this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
           this.AntUpdItem2 = new System.Windows.Forms.ComboBox();
@@ -2721,7 +2720,6 @@
           this.groupBox_AntUpdatingItems.Controls.Add(this.label46);
           this.groupBox_AntUpdatingItems.Controls.Add(this.label45);
           this.groupBox_AntUpdatingItems.Controls.Add(this.label44);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.chkWindowsFileDialog);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem2);
@@ -2729,9 +2727,9 @@
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
           this.groupBox_AntUpdatingItems.Enabled = false;
-          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(17, 6);
+          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(17, 10);
           this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
-          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 104);
+          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(234, 86);
           this.groupBox_AntUpdatingItems.TabIndex = 33;
           this.groupBox_AntUpdatingItems.TabStop = false;
           this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
@@ -2740,7 +2738,7 @@
           // label46
           // 
           this.label46.AutoSize = true;
-          this.label46.Location = new System.Drawing.Point(228, 15);
+          this.label46.Location = new System.Drawing.Point(150, 16);
           this.label46.Name = "label46";
           this.label46.Size = new System.Drawing.Size(72, 13);
           this.label46.TabIndex = 80;
@@ -2749,7 +2747,7 @@
           // label45
           // 
           this.label45.AutoSize = true;
-          this.label45.Location = new System.Drawing.Point(136, 15);
+          this.label45.Location = new System.Drawing.Point(105, 15);
           this.label45.Name = "label45";
           this.label45.Size = new System.Drawing.Size(33, 13);
           this.label45.TabIndex = 79;
@@ -2764,29 +2762,18 @@
           this.label44.TabIndex = 78;
           this.label44.Text = "DB Item to update";
           // 
-          // chkWindowsFileDialog
-          // 
-          this.chkWindowsFileDialog.AutoSize = true;
-          this.chkWindowsFileDialog.Location = new System.Drawing.Point(10, 82);
-          this.chkWindowsFileDialog.Name = "chkWindowsFileDialog";
-          this.chkWindowsFileDialog.Size = new System.Drawing.Size(328, 17);
-          this.chkWindowsFileDialog.TabIndex = 77;
-          this.chkWindowsFileDialog.Text = "Use Standard Windows File Dialog for Movie file name Updating";
-          this.ToolTip1.SetToolTip(this.chkWindowsFileDialog, resources.GetString("chkWindowsFileDialog.ToolTip"));
-          this.chkWindowsFileDialog.UseVisualStyleBackColor = true;
-          // 
           // AntUpdDflT2
           // 
-          this.AntUpdDflT2.Location = new System.Drawing.Point(231, 57);
+          this.AntUpdDflT2.Location = new System.Drawing.Point(153, 58);
           this.AntUpdDflT2.Name = "AntUpdDflT2";
-          this.AntUpdDflT2.Size = new System.Drawing.Size(117, 20);
+          this.AntUpdDflT2.Size = new System.Drawing.Size(69, 20);
           this.AntUpdDflT2.TabIndex = 35;
           // 
           // AntUpdDflT1
           // 
-          this.AntUpdDflT1.Location = new System.Drawing.Point(231, 32);
+          this.AntUpdDflT1.Location = new System.Drawing.Point(153, 33);
           this.AntUpdDflT1.Name = "AntUpdDflT1";
-          this.AntUpdDflT1.Size = new System.Drawing.Size(117, 20);
+          this.AntUpdDflT1.Size = new System.Drawing.Size(69, 20);
           this.AntUpdDflT1.TabIndex = 32;
           // 
           // AntUpdItem2
@@ -2794,15 +2781,15 @@
           this.AntUpdItem2.FormattingEnabled = true;
           this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
           this.AntUpdItem2.Name = "AntUpdItem2";
-          this.AntUpdItem2.Size = new System.Drawing.Size(123, 21);
+          this.AntUpdItem2.Size = new System.Drawing.Size(92, 21);
           this.AntUpdItem2.Sorted = true;
           this.AntUpdItem2.TabIndex = 33;
           // 
           // AntUpdText2
           // 
-          this.AntUpdText2.Location = new System.Drawing.Point(139, 58);
+          this.AntUpdText2.Location = new System.Drawing.Point(108, 58);
           this.AntUpdText2.Name = "AntUpdText2";
-          this.AntUpdText2.Size = new System.Drawing.Size(86, 20);
+          this.AntUpdText2.Size = new System.Drawing.Size(39, 20);
           this.AntUpdText2.TabIndex = 34;
           // 
           // AntUpdItem1
@@ -2810,15 +2797,15 @@
           this.AntUpdItem1.FormattingEnabled = true;
           this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
           this.AntUpdItem1.Name = "AntUpdItem1";
-          this.AntUpdItem1.Size = new System.Drawing.Size(123, 21);
+          this.AntUpdItem1.Size = new System.Drawing.Size(92, 21);
           this.AntUpdItem1.Sorted = true;
           this.AntUpdItem1.TabIndex = 30;
           // 
           // AntUpdText1
           // 
-          this.AntUpdText1.Location = new System.Drawing.Point(139, 33);
+          this.AntUpdText1.Location = new System.Drawing.Point(108, 33);
           this.AntUpdText1.Name = "AntUpdText1";
-          this.AntUpdText1.Size = new System.Drawing.Size(86, 20);
+          this.AntUpdText1.Size = new System.Drawing.Size(39, 20);
           this.AntUpdText1.TabIndex = 31;
           // 
           // Tab_Search
@@ -6094,7 +6081,6 @@
         private Label label27;
         private TabPage Tab_Update;
         private GroupBox groupBox_AntUpdatingItems;
-        private CheckBox chkWindowsFileDialog;
         private TextBox AntUpdDflT2;
         private TextBox AntUpdDflT1;
         private ComboBox AntUpdItem2;

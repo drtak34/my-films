@@ -1017,7 +1017,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", cbAllowTraktSync.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", cbAllowRecentAddedAPI.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", chkOnlyTitle.Checked);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ItemSearchFileName", ItemSearchFileName.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ItemSearchGrabberName", ItemSearchGrabberName.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ItemSearchGrabberScriptsFilter", ItemSearchGrabberScriptsFilter.Text);
@@ -1472,7 +1471,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", false);
             cbAllowRecentAddedAPI.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", false);
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", false);
-            chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WindowsFileDialog", false);
             // common external catalog options
             chkAddTagline.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTagline", false);
             chkAddTags.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTags", false);
@@ -1923,15 +1921,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkEnhancedWatchedStatusHandling.Checked = false;
             UserProfileName.Text = string.Empty;
             chkOnlyTitle.Checked = false;
-            chkWindowsFileDialog.Checked = false;
-            //chkGrabber.Checked = false;
             txtGrabber.ResetText();
             txtPicturePrefix.ResetText();
             chkGrabber_Always.Checked = false;
             chkGrabber_ChooseScript.Checked = false;
             chkAMCUpd.Checked = false;
             txtAMCUpd_cnf.ResetText();
-            //txtAMCUpd_exe.ResetText();
             chkDfltFanart.Checked = false;
             chkDfltFanartImage.Checked = false;
             chkDfltFanartImageAll.Checked = false;
