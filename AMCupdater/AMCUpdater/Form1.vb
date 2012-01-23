@@ -3171,6 +3171,29 @@ Public Class Form1
         LogManager.Configuration = LogEvent
     End Sub
 
+    Private Sub btnOpenLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenLog.Click
+        If CurrentLogDirectory.Length = 0 Then
+            MessageBox.Show("The file '" + CurrentLogDirectory + "' does not exist!", "AMC Updater - Logfile", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        Else
+            Using p As Process = New Process()
+                Dim psi As ProcessStartInfo = New ProcessStartInfo()
+                psi.FileName = "notepad.exe"
+                psi.UseShellExecute = True
+                psi.WindowStyle = ProcessWindowStyle.Normal
+                psi.Arguments = CurrentLogDirectory
+                psi.ErrorDialog = True
+                If (OSInfo.OSInfo.VistaOrLater()) Then
+                    psi.Verb = "runas"
+                End If
+                p.StartInfo = psi
+                Try
+                    p.Start()
+                Catch ex As Exception
+                End Try
+            End Using
+        End If
+    End Sub
 End Class
 
 

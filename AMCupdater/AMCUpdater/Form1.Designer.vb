@@ -33,13 +33,13 @@ Partial Class Form1
         Dim SiteLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -70,6 +70,7 @@ Partial Class Form1
         Me.ToolStripProgressMessage = New System.Windows.Forms.Label
         Me.btnShowHideLog = New System.Windows.Forms.Button
         Me.GroupBox8 = New System.Windows.Forms.GroupBox
+        Me.BtnImportWatcher = New System.Windows.Forms.Button
         Me.Label16 = New System.Windows.Forms.Label
         Me.btnParseXML = New System.Windows.Forms.Button
         Me.btnFindOrphans = New System.Windows.Forms.Button
@@ -536,7 +537,7 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
-        Me.BtnImportWatcher = New System.Windows.Forms.Button
+        Me.btnOpenLog = New System.Windows.Forms.Button
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -682,6 +683,7 @@ Partial Class Form1
         '
         'Import_Movies
         '
+        Me.Import_Movies.Controls.Add(Me.btnOpenLog)
         Me.Import_Movies.Controls.Add(Me.Label_VersionNumber)
         Me.Import_Movies.Controls.Add(Me.LinkLabelMyFilmsWiki)
         Me.Import_Movies.Controls.Add(Me.Label88)
@@ -986,6 +988,16 @@ Partial Class Form1
         Me.GroupBox8.TabIndex = 2
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Begin Import ..."
+        '
+        'BtnImportWatcher
+        '
+        Me.BtnImportWatcher.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnImportWatcher.Location = New System.Drawing.Point(500, 32)
+        Me.BtnImportWatcher.Name = "BtnImportWatcher"
+        Me.BtnImportWatcher.Size = New System.Drawing.Size(60, 57)
+        Me.BtnImportWatcher.TabIndex = 67
+        Me.BtnImportWatcher.Text = "Start Import Watcher"
+        Me.BtnImportWatcher.UseVisualStyleBackColor = True
         '
         'Label16
         '
@@ -4226,27 +4238,27 @@ Partial Class Form1
         Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
         Me.DataGridViewMovie.Name = "DataGridViewMovie"
         Me.DataGridViewMovie.ReadOnly = True
         Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle26.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewMovie.RowHeadersVisible = False
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4257,8 +4269,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -4267,8 +4279,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -4291,8 +4303,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -5550,26 +5562,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle28.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -5626,15 +5638,14 @@ Partial Class Form1
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
         '
-        'BtnImportWatcher
+        'btnOpenLog
         '
-        Me.BtnImportWatcher.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnImportWatcher.Location = New System.Drawing.Point(500, 32)
-        Me.BtnImportWatcher.Name = "BtnImportWatcher"
-        Me.BtnImportWatcher.Size = New System.Drawing.Size(60, 57)
-        Me.BtnImportWatcher.TabIndex = 67
-        Me.BtnImportWatcher.Text = "Start Import Watcher"
-        Me.BtnImportWatcher.UseVisualStyleBackColor = True
+        Me.btnOpenLog.Location = New System.Drawing.Point(410, 549)
+        Me.btnOpenLog.Name = "btnOpenLog"
+        Me.btnOpenLog.Size = New System.Drawing.Size(75, 23)
+        Me.btnOpenLog.TabIndex = 108
+        Me.btnOpenLog.Text = "Open Log"
+        Me.btnOpenLog.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -6279,4 +6290,5 @@ Partial Class Form1
     Friend WithEvents Label100 As System.Windows.Forms.Label
     Friend WithEvents txtSampleAudioChannelCount As System.Windows.Forms.TextBox
     Friend WithEvents BtnImportWatcher As System.Windows.Forms.Button
+    Friend WithEvents btnOpenLog As System.Windows.Forms.Button
 End Class
