@@ -574,14 +574,6 @@ You can update e.g. the "checked" field with a value "true" to indicate "watched
 However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
-  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
-    <value>If chosen, the option to update the filename / source of the movie in the update menu ("Filename") will use the 
-windows file dialog to choose a movie file. If unchecked, Mediaportal's virtual keyboard will be launched.
-
-As this option will be using a standard windows file dialog to browse the file system and select the movie file,
-it is not recommended to use that option for remote only users. 
-If using a mouse, this option can be enabled.</value>
-  </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
 but you can define two more fields to be updated here.

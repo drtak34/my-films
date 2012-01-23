@@ -1416,26 +1416,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       wfile = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
                       wdirectory = System.IO.Path.GetDirectoryName(wfile);
                     }
-                    if (MyFilms.conf.WindowsFileDialog)
+                    keyboard.Reset();
+                    keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                    keyboard.DoModal(GetID);
+                    if (keyboard.IsConfirmed)
                     {
-                      openFileDialog1.Title = "Select media file";
-                      openFileDialog1.RestoreDirectory = true;
-                      openFileDialog1.InitialDirectory = wdirectory;
-                      if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                          wfile = openFileDialog1.FileName;
+                      wfile = keyboard.Text.ToString();
                     }
                     else
-                    {
-                      keyboard.Reset();
-                      keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                      keyboard.DoModal(GetID);
-                      if (keyboard.IsConfirmed)
-                      {
-                        wfile = keyboard.Text.ToString();
-                      }
-                      else 
-                        wfile = string.Empty;
-                    }
+                      wfile = string.Empty;
                     if (wfile != string.Empty)
                     {
                         MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage] = wfile;
