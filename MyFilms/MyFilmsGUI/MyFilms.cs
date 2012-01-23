@@ -171,7 +171,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
       }
-
       strButtonText = wPluginName;
       strButtonImage = String.Empty;
       strButtonImageFocus = String.Empty;
@@ -183,11 +182,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     #endregion
 
-
-    /*
-       * Log declarations
-       */
-    private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
+    // Log declarations
+    private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();
     private const string LogFileName = "MyFilms.log";  //log's filename
     private const string OldLogFileName = "MyFilms.old.log";  //log's old filename
 
@@ -366,6 +362,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string GlobalFilterStringMinRating = string.Empty;
     public string GlobalFilterStringIsOnline = string.Empty;
     //public string GlobalUnwatchedFilterString = string.Empty;
+    public string GlobalFilterStringCustomFilter = string.Empty;
 
     public static bool trailerscrobbleactive = false;
     public int actorID = 0;
@@ -1660,9 +1657,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
             }
           }
-
-          if (action.wID.ToString().Substring(0, 6) == "REMOTE")
-            return;
+          if (action.wID.ToString().Substring(0, 6) == "REMOTE") return;
           base.OnAction(action);
           break;
       }
@@ -3804,9 +3799,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating.ToString()));
       choiceViewGlobalOptions.Add("filterdbsetrating");
 
+      //if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
+      //if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
+      //choiceViewGlobalOptions.Add("showemptyvaluesinviews");
+
       dlg1.DoModal(GetID);
-      if (dlg1.SelectedLabel == -1)
-        return;
+      if (dlg1.SelectedLabel == -1) return;
       LogMyFilms.Debug("Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
       this.Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
     }
@@ -6538,73 +6536,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg1 == null) return;
           dlg1.Reset();
           dlg1.SetHeading(GUILocalizeStrings.Get(10798689)); // Global Options ...
-          System.Collections.Generic.List<string> choiceViewGlobalOptions =
-            new System.Collections.Generic.List<string>();
-
-          // Change global Unwatchedfilteroption
-          // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSupPlayer))// Make it conditoional, so only displayed, if options enabled in setup !
-          if (MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
-          if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
-          choiceViewGlobalOptions.Add("globalunwatchedfilter");
-
-          // Change global MovieFilter (Only Movies with media files reachable (requires at least initial scan!)
-          if (InitialIsOnlineScan)
-          {
-            if (GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798628)));
-            if (!GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798629)));
-            choiceViewGlobalOptions.Add("filterdbisonline");
-          }
-
-          // Change global MovieFilter (Only Movies with Trailer)
-          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
-          {
-            if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
-            if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
-            choiceViewGlobalOptions.Add("filterdbtrailer");
-          }
-
-          // Change global MovieFilter (Only Movies with highRating)
-          if (GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
-          if (!GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798629)));
-          choiceViewGlobalOptions.Add("filterdbrating");
-
-          // Change Value for global MovieFilter (Only Movies with highRating)
-          dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating));
-          choiceViewGlobalOptions.Add("filterdbsetrating");
+          List<string> choiceViewGlobalOptions = new List<string>();
 
           // Choose UserProfileName
-          //if (MyFilmsDetail.ExtendedStartmode("Global Settings - Enhanced Watched Status Handling - User Profile Name"))
-          //{
           if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
           {
             dlg1.Add(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName));
             choiceViewGlobalOptions.Add("userprofilename");
           }
-          //}
 
-          if (MyFilms.conf.BoolShowEmptyValuesInViews)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
-          if (!MyFilms.conf.BoolShowEmptyValuesInViews)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
-          choiceViewGlobalOptions.Add("showemptyvaluesinviews");
-
-          // From ZebonsMerge
-          //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
-          if (MyFilms.conf.StrGrabber_ChooseScript)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));
-              // Choose grabber script for that session (status on)
-          if (!MyFilms.conf.StrGrabber_ChooseScript)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));
-              // Choose grabber script for that session (status off)
+          // Choose grabber script for that session
+          if (MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));
+          if (!MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("choosescript");
 
-          //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
-          if (MyFilms.conf.StrGrabber_Always)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));
-              // Change grabber find trying best match option (status on)
-          if (!MyFilms.conf.StrGrabber_Always)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));
-              // Change grabber find trying best match option (status off)
+          // Change grabber find trying best match option
+          if (MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));
+          if (!MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("findbestmatch");
 
           if (MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798628)));
