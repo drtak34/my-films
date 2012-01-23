@@ -22,13 +22,14 @@ namespace ShareWatcherHelper
 {
   using System;
   using System.Collections;
+  using System.Collections.Generic;
   using System.IO;
   using System.Threading;
   using System.Timers;
 
   using MediaPortal.GUI.Library;
-  using MediaPortal.Music.Database;
-  using MediaPortal.Profile;
+//  using MediaPortal.Music.Database;
+//  using MediaPortal.Profile;
   using MediaPortal.Services;
   using MediaPortal.Util;
 
@@ -41,7 +42,7 @@ namespace ShareWatcherHelper
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
     private bool bMonitoring;
-    public static MusicDatabase MyFilmsDB = null;
+//    public static MusicDatabase MyFilmsDB = null;
     private ArrayList m_Shares = new ArrayList();
     private ArrayList m_Watchers = new ArrayList();
 
@@ -52,15 +53,20 @@ namespace ShareWatcherHelper
     private Timer m_Timer = null;
     private int m_TimerInterval = 2000; // milliseconds
 
+    public static event MediaFoundEventDelegate MediaFound;
+    public delegate void MediaFoundEventDelegate(List<string> mediafiles, bool removeorphaned);
+
+
+
     #endregion
 
     #region Constructors/Destructors
 
-    public ShareWatcherHelper()
+    public ShareWatcherHelper(List<string> watchdirectories)
     {
 
-      MyFilmsDB = MusicDatabase.Instance;
-      this.LoadShares();
+//      MyFilmsDB = MusicDatabase.Instance;
+      this.LoadShares(watchdirectories);
       LogMyFilms.Info("ShareWatcher starting up!");
     }
 
@@ -111,8 +117,11 @@ namespace ShareWatcherHelper
         {
           watcher.EnableRaisingEvents = false;
         }
-        this.m_Timer.Stop();
-        this.m_Events.Clear();
+        if (this.m_Timer != null)
+        {
+          this.m_Timer.Stop();
+          this.m_Events.Clear();
+        }
         Log.Info(LogType.MusicShareWatcher, "Monitoring of shares disabled");
       }
     }
@@ -245,6 +254,7 @@ namespace ShareWatcherHelper
           lock (this.m_Events.SyncRoot)
           {
             ShareWatcherEvent currentEvent = null;
+            List<string> newfiles = new List<string>();
             for (int i = 0; i < this.m_Events.Count; i++)
             {
               currentEvent = this.m_Events[i] as ShareWatcherEvent;
@@ -252,30 +262,39 @@ namespace ShareWatcherHelper
               {
                 case ShareWatcherEvent.EventType.Create:
                 case ShareWatcherEvent.EventType.Change:
-                  AddUpdateSong(currentEvent.FileName);
+                  newfiles.Add(currentEvent.FileName);
+                  //AddUpdateSong(currentEvent.FileName);
                   break;
                 case ShareWatcherEvent.EventType.Delete:
-                  MyFilmsDB.DeleteSong(currentEvent.FileName, true);
+                  //MyFilmsDB.DeleteSong(currentEvent.FileName, true);
                   Log.Info(LogType.MusicShareWatcher, "Deleted Song: {0}", currentEvent.FileName);
                   break;
                 case ShareWatcherEvent.EventType.DeleteDirectory:
-                  MyFilmsDB.DeleteSongDirectory(currentEvent.FileName);
+                  //MyFilmsDB.DeleteSongDirectory(currentEvent.FileName);
                   Log.Info(LogType.MusicShareWatcher, "Deleted Directory: {0}", currentEvent.FileName);
                   break;
                 case ShareWatcherEvent.EventType.Rename:
-                  if (MyFilmsDB.RenameSong(currentEvent.OldFileName, currentEvent.FileName))
-                  {
-                    Log.Info(LogType.MusicShareWatcher, "Song / Directory {0} renamed to {1]", currentEvent.OldFileName,
-                             currentEvent.FileName);
-                  }
-                  else
-                  {
-                    Log.Info(LogType.MusicShareWatcher, "Song / Directory rename failed: {0}", currentEvent.FileName);
-                  }
+                  //if (MyFilmsDB.RenameSong(currentEvent.OldFileName, currentEvent.FileName))
+                  //{
+                  //  Log.Info(LogType.MusicShareWatcher, "Song / Directory {0} renamed to {1]", currentEvent.OldFileName,
+                  //           currentEvent.FileName);
+                  //}
+                  //else
+                  //{
+                  //  Log.Info(LogType.MusicShareWatcher, "Song / Directory rename failed: {0}", currentEvent.FileName);
+                  //}
                   break;
               }
               this.m_Events.RemoveAt(i);
               i--; // Don't skip next event
+            }
+            if (newfiles.Count > 0)
+            {
+              if (MediaFound != null) // trigger AMCupdater to check and/or add file
+              {
+                MediaFound(newfiles, false);
+                newfiles.Clear();
+              }
             }
           }
         }
@@ -286,14 +305,13 @@ namespace ShareWatcherHelper
       }
     }
 
-    // Method used by OnCreated / Onchanged to add / update the song structure
-    private static void AddUpdateSong(string strFileName)
+    private static void AddUpdateSong(string strFileName) // Method used by OnCreated / Onchanged to add / update the song structure
     {
-      if (MyFilmsDB.SongExists(strFileName))
-      {
-        MyFilmsDB.UpdateSong(strFileName);
-        return;
-      }
+      //if (MyFilmsDB.SongExists(strFileName))
+      //{
+      //  MyFilmsDB.UpdateSong(strFileName);
+      //  return;
+      //}
       // For some reason the Create is fired already by windows while the file is still copied.
       // This happens especially on large songs copied via WLAN.
       // The result is that MP Readtag is throwing an IO Exception.
@@ -312,7 +330,7 @@ namespace ShareWatcherHelper
         return;
       }
 
-      MyFilmsDB.AddSong(strFileName);
+      //MyFilmsDB.AddSong(strFileName);
       // Check for Various Artists
       //MyFilmsDB.CheckVariousArtists(song.Album);
     }
@@ -322,40 +340,19 @@ namespace ShareWatcherHelper
     #region Common Methods
 
     // Retrieve the Music Shares that should be monitored
-    private int LoadShares()
+    private int LoadShares(List<string> watchdirectories)
     {
-      Settings xmlreader = new MPSettings();
-
-      for (int i = 0; i < VirtualDirectory.MaxSharesCount; i++)
+      for (int i = 0; i < watchdirectories.Count; i++)
       {
-        string strSharePath = String.Format("sharepath{0}", i);
-        string shareType = String.Format("sharetype{0}", i);
-        string shareScan = String.Format("sharescan{0}", i);
-
-        string ShareType = xmlreader.GetValueAsString("music", shareType, string.Empty);
-        if (ShareType == "yes")
-        {
-          continue; // We can't monitor ftp shares
-        }
-
-        bool ShareScanData = xmlreader.GetValueAsBool("music", shareScan, true);
-        if (!ShareScanData)
-        {
-          continue;
-        }
-
-        string SharePath = xmlreader.GetValueAsString("music", strSharePath, string.Empty);
+        string SharePath = watchdirectories[i];
 
         if (SharePath.Length > 0)
         {
           this.m_Shares.Add(SharePath);
         }
       }
-
-      xmlreader = null;
       return 0;
     }
-
     #endregion
   }
 }

@@ -1544,7 +1544,7 @@ Public Class AntProcessor
     End Sub
 
 
-    Public Sub ProcessMovieFolderForSingleMovie(ByVal filenames As String())
+    Public Sub ProcessMovieFolderForSingleMovie(ByVal filenames As List(Of String))
         'Sub to enumerate file in the given MoviePath location - comes from watcher ...
 
         If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then

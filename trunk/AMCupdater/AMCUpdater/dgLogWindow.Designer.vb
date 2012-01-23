@@ -31,7 +31,6 @@ Partial Class dgLogWindow
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLogWindow.BackColor = System.Drawing.SystemColors.Window
-        Me.txtLogWindow.CausesValidation = False
         Me.txtLogWindow.Location = New System.Drawing.Point(12, 12)
         Me.txtLogWindow.Multiline = True
         Me.txtLogWindow.Name = "txtLogWindow"

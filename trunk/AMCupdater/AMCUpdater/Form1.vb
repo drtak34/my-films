@@ -7,6 +7,7 @@ Imports System.Windows.Forms
 Imports System.Windows.Forms.SystemInformation
 Imports System.Drawing
 Imports Importer
+Imports System.Xml
 
 Imports MediaPortal.Configuration
 Imports NLog
@@ -14,6 +15,8 @@ Imports NLog.Targets
 Imports MediaPortal.Services
 Imports NLog.Config
 Imports System.Timers
+Imports System.Security.Policy
+Imports ShareWatcherHelper.ShareWatcherHelper
 
 'Imports MyFilmsPlugin
 
@@ -33,26 +36,34 @@ Public Class Form1
     Public Shared aTimer As System.Threading.Timer
 
     Private ValidOptions As Boolean = True
-    Private Shared LogEventNew As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
+    'Private Shared LogEventNew As NLog.Logger = NLog.LogManager.GetCurrentClassLogger() ' add nlog logging
 
-    Private bWatcherActive As Boolean = False
+    Private watcherIsActive As Boolean = False
     Public Shared watcher As ShareWatcherHelper.ShareWatcherHelper = Nothing
-    'Public Shared watcher As Watcher = Nothing
 
     Shared MediaData As Hashtable
     Shared InternetData As Hashtable
 
-    Public Sub New()
+    Public Sub New() ' Public Sub New(ByVal pub As Publisher)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
         'InitLogger()
 
         ' Create a timer that will call the OnTimedEvent method every second.
-        aTimer = New System.Threading.Timer(AddressOf OnTimedEvent, Nothing, 0, 1000)
+        aTimer = New System.Threading.Timer(AddressOf OnTimedEvent, Nothing, 0, 2000)
+        'aTimer = New System.Threading.Timer(AddressOf OnTimedEvent, Nothing, Timeout.Infinite, Timeout.Infinite) ' initialize disabled timer
+        watch.Reset()
+        watch.Start()
 
         Dim asm As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly()
         Label_VersionNumber.Text = "V" + asm.GetName().Version.ToString()
+        'Subscribe to Importer Event...
+        AddHandler MediaFound, AddressOf MediaFoundEventHandler
+        ' Won't throw an exception if obj is Nothing
+        'RaiseEvent MsgArrivedEvent("Test message")
+        'RemoveHandler MsgArrivedEvent, AddressOf My_MsgArrivedCallback
+
 
 #If Config = "Release" Then
         ToolStripMenuItemDebug.Visible = False
@@ -68,14 +79,32 @@ Public Class Form1
     End Sub
 
     Sub OnTimedEvent(ByVal x As Object)
-        ' Don't do anything if the form's handle hasn't been created 
-        ' or the form has been disposed.
+        '' Don't do anything if the form's handle hasn't been created 
+        '' or the form has been disposed.
         If (Not Me.IsHandleCreated And Not Me.IsDisposed) Then Return
 
-        ' Create the method invoker.
-        ' The method body shows the current time in the forms title bar.
-        Dim mi As MethodInvoker = AddressOf LogEventCheckBuffer
-        Me.Invoke(mi)
+        If Not Me.InvokeRequired Then
+            WriteBufferToLogWindow()
+        Else
+            Try
+                Dim mi As MethodInvoker = AddressOf WriteBufferToLogWindow ' Create the method invoker. - The method body adds the logbuffer in sta thread
+                Me.Invoke(mi)
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Sub WriteBufferToLogWindow()
+        If BufferedLogEvents.Length > 0 And watch.Elapsed.TotalMilliseconds > 500 Then
+            dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
+            BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
+            watch.Reset()
+            watch.Start()
+        End If
+    End Sub
+
+    Private Sub MediaFoundEventHandler(ByVal mediafiles As List(Of String), ByVal removeorphans As Boolean)
+        UpdateSingleMovies(mediafiles, removeorphans)
     End Sub
 
     Private Sub HideTabPage(ByVal tp As TabPage)
@@ -287,6 +316,7 @@ Public Class Form1
         Me.ValidateChildren()
 
     End Sub
+
     Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
         Try
@@ -371,9 +401,9 @@ Public Class Form1
         If Not f.Exists Then
             Dim rep = MsgBox("File : " + f.FullName + " doesn't exist! Do you want to create it ?", MsgBoxStyle.YesNoCancel)
             If rep = 6 Then
-                Dim destXml As New Xml.XmlTextWriter(txtConfigFilePath.Text, System.Text.Encoding.Default)
+                Dim destXml As New System.Xml.XmlTextWriter(txtConfigFilePath.Text, System.Text.Encoding.Default)
                 destXml.WriteStartDocument(False)
-                destXml.Formatting = Xml.Formatting.Indented
+                destXml.Formatting = System.Xml.Formatting.Indented
                 destXml.WriteStartElement("AntMovieCatalog")
                 destXml.WriteStartElement("Catalog")
                 destXml.WriteElementString("Properties", "")
@@ -495,37 +525,60 @@ Public Class Form1
     End Sub
 
     Private Sub BtnImportWatcher_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnImportWatcher.Click
-
-        If watcher Is Nothing Then
-            'Thread.CurrentThread.Name = "ShareWatcher"
-            bWatcherActive = True
-            BtnImportWatcher.BackColor = Color.Green
-            ' Setup the Watching
-            watcher = New ShareWatcherHelper.ShareWatcherHelper()
-            watcher.SetMonitoring(True)
-            watcher.StartMonitor()
+        If InitWatcher() = True Then
+            watcherIsActive = True
+            BtnImportWatcher.BackColor = Color.DarkSeaGreen
+            BtnImportWatcher.Text = "Stop Import Watcher"
+            SetCheckButtonStatus(ButtonStatus.DisableAll)
         Else
-            If bWatcherActive Then
-                bWatcherActive = False
+            If watcherIsActive Then
+                watcherIsActive = False
                 BtnImportWatcher.BackColor = Color.Empty
+                BtnImportWatcher.Text = "Start Import Watcher"
                 SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
                 watcher.ChangeMonitoring(False)
             Else
-                bWatcherActive = True
-                BtnImportWatcher.BackColor = Color.Green
+                watcherIsActive = True
+                BtnImportWatcher.BackColor = Color.DarkSeaGreen
                 SetCheckButtonStatus(ButtonStatus.DisableAll)
                 watcher.ChangeMonitoring(True)
             End If
         End If
     End Sub
 
-    Private Sub UpdateSingleMovies(ByVal filenames As String())
+    Private Function InitWatcher() As Boolean
+        If watcher Is Nothing Then
+            'Thread.CurrentThread.Name = "ShareWatcher"
+            Dim scandirectories As List(Of String) = New List(Of String)()
+            For Each CurrentMoviePath In CurrentSettings.Movie_Scan_Path.Split(";")
+                If CurrentMoviePath Is Nothing Or CurrentMoviePath.Length = 0 Then Continue For
+                Dim dir As New DirectoryInfo(CurrentMoviePath)
+                If Not dir.Exists Then
+                    LogEvent("ErrorEvent : Cannot access folder '" + CurrentMoviePath.ToString + "'", EventLogLevel.ErrorEvent)
+                Else
+                    scandirectories.Add(CurrentMoviePath)
+                End If
+            Next
+            watcher = New ShareWatcherHelper.ShareWatcherHelper(scandirectories) ' Setup the Watching
+            watcher.SetMonitoring(True)
+            watcher.StartMonitor()
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Sub UpdateSingleMovies(ByVal mediafiles As List(Of String), ByVal removeorphans As Boolean)
+        For Each mediafile As String In mediafiles
+            BufferedLogEvents.AppendLine("Watcher detected file - '" & mediafile & "'")
+        Next
+        Return
         btnParseXML_Click(Nothing, Nothing) ' read DB
         'btnProcessMovieList_Click(Nothing, Nothing) ' check existing files
 
         ApplySettings()
         With AntProcessor
-            .ProcessMovieFolderForSingleMovie(filenames)
+            .ProcessMovieFolderForSingleMovie(mediafiles)
         End With
 
         btnFindOrphans_Click(Nothing, Nothing) ' find orphans
@@ -2701,6 +2754,7 @@ Public Class Form1
         myMovieCatalog.WriteXml(destXml)
         destXml.Close()
     End Sub
+
     Private Sub BindingNavigatorAddNewItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem.Click
         Dim newMovie As AntMovieCatalog.MovieRow
         newMovie = myMovieCatalog.Movie.NewMovieRow()
@@ -2716,6 +2770,7 @@ Public Class Form1
         LogEvent("Added new Movie : '" & newMovie.OriginalTitle & "', Number : '" & newMovie.Number & "'", EventLogLevel.Informational)
         'LogEvent("ErrorEvent : ", EventLogLevel.Informational)
     End Sub
+
     Private Sub BindingNavigatorAddNewItemPerson_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItemPerson.Click
         Dim amc As AntMovieCatalog = New AntMovieCatalog()
         Dim newPerson As AntMovieCatalog.PersonRow
@@ -3000,6 +3055,7 @@ Public Class Form1
         Director
         Writer
     End Enum
+
     Private Sub AddOrUpdatePerson(ByVal person As String, ByVal type As PersonType)
         person = person.Trim
         If person.Contains("(") Then
@@ -3054,6 +3110,7 @@ Public Class Form1
     Private Sub ToolStripButtonGrabPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonGrabPersons.Click
 
     End Sub
+
     Private Shared Sub InitLogger()
         'Dim config As Nlog.LoggingConfiguration = LogManager.Configuration ?? new LoggingConfiguration
         Dim LogEvent As LoggingConfiguration
@@ -3115,4 +3172,6 @@ Public Class Form1
     End Sub
 
 End Class
+
+
 
