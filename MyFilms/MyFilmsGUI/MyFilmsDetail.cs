@@ -1097,21 +1097,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
 
                     //No more needed because of updproperties !!! - so discussion about removal?
-                    if (StrUpdItem1 != "(none)")
+                    if (ExtendedStartmode("Details context: Itemx update to labely (moved to testmode"))
                     {
-                      if (StrUpdText1.Length > 0)
-                        dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
-                      else
-                        dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
-                      choiceViewMenu.Add("item1");
-                    }
-                    if (StrUpdItem2 != "(none)")
-                    {
-                      if (StrUpdText2.Length > 0)
-                        dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
-                      else
-                        dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
-                      choiceViewMenu.Add("item2");
+                      if (StrUpdItem1 != "(none)")
+                      {
+                        if (StrUpdText1.Length > 0)
+                          dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
+                        else
+                          dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
+                        choiceViewMenu.Add("item1");
+                      }
+                      if (StrUpdItem2 != "(none)")
+                      {
+                        if (StrUpdText2.Length > 0)
+                          dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
+                        else
+                          dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
+                        choiceViewMenu.Add("item2");
+                      }
                     }
 
                     //dlgmenu.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
