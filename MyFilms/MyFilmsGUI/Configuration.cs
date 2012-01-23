@@ -537,8 +537,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 UseListViewForGoups = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseListviewForGroups", true);
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
-                if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && !string.IsNullOrEmpty(loadParams.View)))
+                if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
                 {
+                    viewContext = MyFilms.ViewContext.StartView;  
                     strIndex = -1;
                     LastID = -1;
                     Wstar = "";

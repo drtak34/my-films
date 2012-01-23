@@ -441,6 +441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Person,
       Menu,
       MenuAll,
+      StartView,
       None
     }
 
@@ -5933,7 +5934,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (publishTimer != null) publishTimer.SafeDispose();
 
       // reset view
-      if (LoadDfltSlct || (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.View)))
+      if (conf.ViewContext == ViewContext.StartView) // if View or Movie_ID loadparams are present, it is already set to "Startview"
       {
         conf.Boolselect = false; // Groupviews = false
         ResetGlobalFilters();
@@ -5973,165 +5974,175 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
 
       LogMyFilms.Debug("Fin_Charge_Init(): (re)load done - now do action for currentViewContext = '" + conf.ViewContext + "'");
-      if (conf.ViewContext == ViewContext.None)
+      
+      switch (conf.ViewContext)
       {
-        conf.StrSelect = conf.StrTitle1 + " not like ''";
-        conf.Boolselect = false;
-        conf.Boolindexed = false;
-        conf.Boolindexedreturn = false;
-        SetLabelView("all");
-        GetFilmList(conf.StrIndex);
-
-        Change_LayOut(0);
-        SetLabelSelect("menu");
-        GetSelectFromMenuView(false); // load views into facade ...
-      }
-      else if (conf.ViewContext == ViewContext.Menu)
-        {
-          Change_LayOut(0);
-          SetLabelSelect("menu");
-          GetSelectFromMenuView(false); // load views into facade ...
-        }
-        else if (conf.ViewContext == ViewContext.MenuAll)
-        {
-          Change_LayOut(0);
-          GetSelectFromMenuView(true); // load views into facade ...
-        }
-        else  if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
-      #region If LoadParams - Check and set single movie in current config ...
-      {
-        LogMyFilms.Debug("Fin_Charge_Init() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
-        // load dataset with default filters
-        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-        // facade index is set in filmlist loading - only launching details necessary !
-        Change_LayOut(MyFilms.conf.StrLayOut);
-        if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
-        {
-          int index = -1;
-          foreach (DataRow sr in r)
-          {
-            index += 1;
-            // string movieNumber = sr["Number"].ToString();
-            // string movieName = sr[conf.StrTitle1].ToString();
-            if (loadParamInfo.MovieID == Int32.Parse(sr["Number"].ToString()).ToString())
-            {
-              // bool success = int.TryParse(loadParamInfo.MovieID, out index);
-              conf.StrIndex = index;
-              conf.StrTIndex = sr[conf.StrTitle1].ToString();
-              LogMyFilms.Debug("Fin_Charge_Init(): loadParam - set movie '" + conf.StrTIndex + "' by index '" + conf.StrIndex + "'");
-            }
-          }
-        }
-        GetFilmList(conf.StrIndex);
-        SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
-      }
-      #endregion
-      else if (LoadDfltSlct || (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.View))) // Defaultview or loadparamaters (via default view settings)
-      #region Load Default View via config or LoadParameter ...
-      {
-        LogMyFilms.Debug("Fin_Charge_Init() - load default view - (config or loadparameter)");
-        Change_LayOut(MyFilms.conf.StrLayOut);
-        if (!Helper.FieldIsSet(conf.StrViewDfltItem) || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
-        {
-          conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
+        case ViewContext.None:
+          #region Default, if nothing is configured
+          conf.StrSelect = conf.StrTitle1 + " not like ''";
           conf.Boolselect = false;
           conf.Boolindexed = false;
           conf.Boolindexedreturn = false;
-          conf.ViewContext = ViewContext.Movie;
           SetLabelView("all");
-          SetLabelSelect("root");
           GetFilmList(conf.StrIndex);
-        }
-        else // called with userdefined views - so launch them ...
-        {
-          #region Set and Call userdefined Views
-          if (conf.StrViewDfltItem == GUILocalizeStrings.Get(342))
-          {
-            conf.ViewContext = ViewContext.Menu;
-            SetLabelSelect("menu");
-            GetSelectFromMenuView(false);
-          }
-          else if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
-          {
-            if (IsCategoryYearCountryField(conf.StrViewDfltItem) || conf.StrViewDfltItem == "Storage" || conf.StrViewDfltItem == "Actors" || conf.StrViewDfltItem == "RecentlyAdded")
-              Change_View_Action(conf.StrViewDfltItem);
-            else
-            {
-              for (int i = 0; i < 5; i++)
-              {
-                if (conf.StrViewDfltItem.ToLower() == conf.StrViewText[i].ToLower() || conf.StrViewDfltItem.ToLower() == conf.StrViewItem[i].ToLower())
-                  Change_View_Action(string.Format("View{0}", i));
-              }
-            }
-          }
-          else // filteritem IS defined for the defaultview
-          {
-            string wStrViewDfltItem = conf.StrViewDfltItem;
-            for (int i = 0; i < 5; i++)
-            {
-              if (conf.StrViewDfltItem == conf.StrViewText[i])
-              {
-                wStrViewDfltItem = conf.StrViewItem[i];
-                SetLabelView("View" + i);
-                break;
-              }
-            }
-            conf.Boolselect = true;
-            conf.Boolreturn = true;
-            conf.WStrSort = wStrViewDfltItem;
-            string sLabel = conf.Wselectedlabel;
-            if (GetColumnType(wStrViewDfltItem) != typeof(string))
-              conf.StrSelect = wStrViewDfltItem + " = '" + conf.StrViewDfltText + "'";
-            else if (IsDateField(wStrViewDfltItem))
-              conf.StrSelect = wStrViewDfltItem + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.StrViewDfltText).ToShortDateString()) + "*'";
-            else if (IsAlphaNumericalField(wStrViewDfltItem))
-              conf.StrSelect = wStrViewDfltItem + " like '" + conf.StrViewDfltText + "'";
-            else
-              conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
-            // TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
-            conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
 
-            if (wStrViewDfltItem.Length > 0) SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
-            SetLabelSelect(conf.StrTxtSelect);
-            MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+          Change_LayOut(0);
+          SetLabelSelect("menu");
+          GetSelectFromMenuView(false); // load views into facade ...
+          #endregion
+          break;
+
+        case ViewContext.Menu:
+          Change_LayOut(0);
+          SetLabelSelect("menu");
+          GetSelectFromMenuView(false); // load views into facade ...
+          break;
+
+        case ViewContext.MenuAll:
+          Change_LayOut(0);
+          SetLabelSelect("menu");
+          GetSelectFromMenuView(true); // load views into facade ...
+          break;
+
+        case ViewContext.StartView:
+          if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
+          #region If LoadParams - Check and set single movie in current config ...
+          {
+            LogMyFilms.Debug("Fin_Charge_Init() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
+            // load dataset with default filters
+            r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+            // facade index is set in filmlist loading - only launching details necessary !
+            Change_LayOut(MyFilms.conf.StrLayOut);
+            if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
+            {
+              int index = -1;
+              foreach (DataRow sr in r)
+              {
+                index += 1;
+                // string movieNumber = sr["Number"].ToString();
+                // string movieName = sr[conf.StrTitle1].ToString();
+                if (loadParamInfo.MovieID == Int32.Parse(sr["Number"].ToString()).ToString())
+                {
+                  // bool success = int.TryParse(loadParamInfo.MovieID, out index);
+                  conf.StrIndex = index;
+                  conf.StrTIndex = sr[conf.StrTitle1].ToString();
+                  LogMyFilms.Debug("Fin_Charge_Init(): loadParam - set movie '" + conf.StrTIndex + "' by index '" + conf.StrIndex + "'");
+                }
+              }
+            }
             GetFilmList(conf.StrIndex);
+            SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
           }
           #endregion
-        }
-      }
-      #endregion
-      else
-      #region Normally load or refresh the facade ...
-      {
-        LogMyFilms.Debug("Fin_Charge_Init() - normal load, conf.Boolselect = '" + conf.Boolselect + "'");
-        if (conf.Boolselect) // Groupviews / Persons
-        {
-          Change_LayOut(MyFilms.conf.WStrLayOut);
-          SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
-          getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, false, ""); // preserve index from last time
-          LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
-        }
-        else
-        {
-          Change_LayOut(MyFilms.conf.StrLayOut);
-          SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
-          conf.ViewContext = ViewContext.Movie;
-          GetFilmList(conf.StrIndex);
-          if (facadeView.Count == 0)
+          else
+          #region Load Default View via config or LoadParameter ...
           {
-            LogMyFilms.Error("Fin_Charge_Init(): Movie list seems empty - return!");
-            return;
-          }
-        }
-      }
-      #endregion
+            LogMyFilms.Debug("Fin_Charge_Init() - load default view - (config or loadparameter)");
+            Change_LayOut(MyFilms.conf.StrLayOut);
+            if (!Helper.FieldIsSet(conf.StrViewDfltItem) || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
+            {
+              conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
+              conf.Boolselect = false;
+              conf.Boolindexed = false;
+              conf.Boolindexedreturn = false;
+              conf.ViewContext = ViewContext.Movie;
+              SetLabelView("all");
+              SetLabelSelect("root");
+              GetFilmList(conf.StrIndex);
+            }
+            else // called with userdefined views - so launch them ...
+            {
+              #region Set and Call userdefined Views
+              if (conf.StrViewDfltItem == GUILocalizeStrings.Get(342))
+              {
+                conf.ViewContext = ViewContext.Menu;
+                SetLabelSelect("menu");
+                GetSelectFromMenuView(false);
+              }
+              else if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
+              {
+                if (IsCategoryYearCountryField(conf.StrViewDfltItem) || conf.StrViewDfltItem == "Storage" || conf.StrViewDfltItem == "Actors" || conf.StrViewDfltItem == "RecentlyAdded")
+                  Change_View_Action(conf.StrViewDfltItem);
+                else
+                {
+                  for (int i = 0; i < 5; i++)
+                  {
+                    if (conf.StrViewDfltItem.ToLower() == conf.StrViewText[i].ToLower() || conf.StrViewDfltItem.ToLower() == conf.StrViewItem[i].ToLower())
+                      Change_View_Action(string.Format("View{0}", i));
+                  }
+                }
+              }
+              else // filteritem IS defined for the defaultview
+              {
+                string wStrViewDfltItem = conf.StrViewDfltItem;
+                for (int i = 0; i < 5; i++)
+                {
+                  if (conf.StrViewDfltItem == conf.StrViewText[i])
+                  {
+                    wStrViewDfltItem = conf.StrViewItem[i];
+                    SetLabelView("View" + i);
+                    break;
+                  }
+                }
+                conf.Boolselect = true;
+                conf.Boolreturn = true;
+                conf.WStrSort = wStrViewDfltItem;
+                string sLabel = conf.Wselectedlabel;
+                if (GetColumnType(wStrViewDfltItem) != typeof(string))
+                  conf.StrSelect = wStrViewDfltItem + " = '" + conf.StrViewDfltText + "'";
+                else if (IsDateField(wStrViewDfltItem))
+                  conf.StrSelect = wStrViewDfltItem + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.StrViewDfltText).ToShortDateString()) + "*'";
+                else if (IsAlphaNumericalField(wStrViewDfltItem))
+                  conf.StrSelect = wStrViewDfltItem + " like '" + conf.StrViewDfltText + "'";
+                else
+                  conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
+                // TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
+                conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
 
+                if (wStrViewDfltItem.Length > 0) SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
+                SetLabelSelect(conf.StrTxtSelect);
+                MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+                GetFilmList(conf.StrIndex);
+              }
+              #endregion
+            }
+          }
+          #endregion
+          break;
+
+        default:
+          #region Normally load or refresh the facade ...
+          {
+            LogMyFilms.Debug("Fin_Charge_Init() - normal load, conf.Boolselect = '" + conf.Boolselect + "'");
+            if (conf.Boolselect) // Groupviews / Persons
+            {
+              Change_LayOut(MyFilms.conf.WStrLayOut);
+              SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+              getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, false, ""); // preserve index from last time
+              LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
+            }
+            else
+            {
+              Change_LayOut(MyFilms.conf.StrLayOut);
+              SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+              conf.ViewContext = ViewContext.Movie;
+              GetFilmList(conf.StrIndex);
+              if (facadeView.Count == 0)
+              {
+                LogMyFilms.Error("Fin_Charge_Init(): Movie list seems empty - return!");
+                return;
+              }
+            }
+          }
+          #endregion
+          break;
+      }
+      
       LogMyFilms.Debug("Fin_Charge_Init: StrSelect = '" + conf.StrSelect + "', StrTxtSelect = '" + conf.StrTxtSelect + "'");
       if (string.IsNullOrEmpty(conf.StrTxtSelect) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) // empty or starts with "all" or "filtered" ... 
         SetLabelSelect("root");
       else
         SetLabelSelect(conf.StrTxtSelect);
-      // SetDummyControlsForFacade(conf.ViewContext); will be set in Lst_Details later ...
 
       if (conf.LastID == ID_MyFilmsDetail) GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       else if (conf.LastID == ID_MyFilmsActors) GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
