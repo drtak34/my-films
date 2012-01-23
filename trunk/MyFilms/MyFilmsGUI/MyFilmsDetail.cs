@@ -1584,7 +1584,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgYesNo.DoModal(GetID);
                     if (dlgYesNo.IsConfirmed)
                     {
-                      // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId);
+                      // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeFilms.SelectedListItem.ItemId);
                       MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true);
                       MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                       afficher_detail(true);
@@ -5219,7 +5219,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return Search_Fanart(title, main, searched, rep, filecover, group, MyFilms.conf);
         }
         public static string[] Search_Fanart(string title, bool main, string searched, bool rep, string filecover, string group, Configuration tmpconf)
-        //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
+        //                     Search_Fanart(wlabel, true, "file", false, facadeFilms.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
             //if (MyFilms.conf == tmpconf) LogMyFilms.Debug("Search_Fanart(): Using '" + title + "'");
             string[] wfanart = new string[2];
