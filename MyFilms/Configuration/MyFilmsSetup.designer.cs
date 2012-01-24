@@ -479,16 +479,6 @@
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.chkSuppressManual = new System.Windows.Forms.CheckBox();
           this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
-          this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
-          this.label46 = new System.Windows.Forms.Label();
-          this.label45 = new System.Windows.Forms.Label();
-          this.label44 = new System.Windows.Forms.Label();
-          this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
-          this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
-          this.AntUpdItem2 = new System.Windows.Forms.ComboBox();
-          this.AntUpdText2 = new System.Windows.Forms.TextBox();
-          this.AntUpdItem1 = new System.Windows.Forms.ComboBox();
-          this.AntUpdText1 = new System.Windows.Forms.TextBox();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -532,6 +522,19 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.dgViews = new System.Windows.Forms.DataGridView();
+          this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.DBItem = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.DefaultValue = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.FilmsSort = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.Index = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.ViewLayout = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.FilmsLayout = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.HierarchyLayout = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.ViewFilter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ViewFilterEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+          this.UnwatchedOnly = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.OnlyAvailable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
           this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -572,19 +575,16 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.dgViews = new System.Windows.Forms.DataGridView();
-          this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.DBItem = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.DefaultValue = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.FilmsSort = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.Index = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.ViewLayout = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.FilmsLayout = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.HierarchyLayout = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.ViewFilter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ViewFilterEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-          this.UnwatchedOnly = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.OnlyAvailable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
+          this.label46 = new System.Windows.Forms.Label();
+          this.label45 = new System.Windows.Forms.Label();
+          this.label44 = new System.Windows.Forms.Label();
+          this.AntUpdItem1 = new System.Windows.Forms.ComboBox();
+          this.AntUpdText1 = new System.Windows.Forms.TextBox();
+          this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
+          this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
+          this.AntUpdText2 = new System.Windows.Forms.TextBox();
+          this.AntUpdItem2 = new System.Windows.Forms.ComboBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -632,7 +632,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.groupBox_DVDprofiler.SuspendLayout();
           this.groupBox13.SuspendLayout();
-          this.groupBox_AntUpdatingItems.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
@@ -642,6 +641,7 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dgViews)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.antMovieCatalog)).BeginInit();
@@ -650,7 +650,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.dgViews)).BeginInit();
+          this.groupBox_AntUpdatingItems.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -4975,99 +4975,6 @@
           this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
           this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
           // 
-          // groupBox_AntUpdatingItems
-          // 
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label46);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label45);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label44);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem2);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText2);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
-          this.groupBox_AntUpdatingItems.Enabled = false;
-          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(507, 6);
-          this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
-          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(234, 86);
-          this.groupBox_AntUpdatingItems.TabIndex = 121;
-          this.groupBox_AntUpdatingItems.TabStop = false;
-          this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
-          this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
-          // 
-          // label46
-          // 
-          this.label46.AutoSize = true;
-          this.label46.Location = new System.Drawing.Point(150, 16);
-          this.label46.Name = "label46";
-          this.label46.Size = new System.Drawing.Size(72, 13);
-          this.label46.TabIndex = 80;
-          this.label46.Text = "Update Value";
-          // 
-          // label45
-          // 
-          this.label45.AutoSize = true;
-          this.label45.Location = new System.Drawing.Point(105, 15);
-          this.label45.Name = "label45";
-          this.label45.Size = new System.Drawing.Size(33, 13);
-          this.label45.TabIndex = 79;
-          this.label45.Text = "Label";
-          // 
-          // label44
-          // 
-          this.label44.AutoSize = true;
-          this.label44.Location = new System.Drawing.Point(9, 15);
-          this.label44.Name = "label44";
-          this.label44.Size = new System.Drawing.Size(93, 13);
-          this.label44.TabIndex = 78;
-          this.label44.Text = "DB Item to update";
-          // 
-          // AntUpdDflT2
-          // 
-          this.AntUpdDflT2.Location = new System.Drawing.Point(153, 58);
-          this.AntUpdDflT2.Name = "AntUpdDflT2";
-          this.AntUpdDflT2.Size = new System.Drawing.Size(69, 20);
-          this.AntUpdDflT2.TabIndex = 35;
-          // 
-          // AntUpdDflT1
-          // 
-          this.AntUpdDflT1.Location = new System.Drawing.Point(153, 33);
-          this.AntUpdDflT1.Name = "AntUpdDflT1";
-          this.AntUpdDflT1.Size = new System.Drawing.Size(69, 20);
-          this.AntUpdDflT1.TabIndex = 32;
-          // 
-          // AntUpdItem2
-          // 
-          this.AntUpdItem2.FormattingEnabled = true;
-          this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
-          this.AntUpdItem2.Name = "AntUpdItem2";
-          this.AntUpdItem2.Size = new System.Drawing.Size(92, 21);
-          this.AntUpdItem2.Sorted = true;
-          this.AntUpdItem2.TabIndex = 33;
-          // 
-          // AntUpdText2
-          // 
-          this.AntUpdText2.Location = new System.Drawing.Point(108, 58);
-          this.AntUpdText2.Name = "AntUpdText2";
-          this.AntUpdText2.Size = new System.Drawing.Size(39, 20);
-          this.AntUpdText2.TabIndex = 34;
-          // 
-          // AntUpdItem1
-          // 
-          this.AntUpdItem1.FormattingEnabled = true;
-          this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
-          this.AntUpdItem1.Name = "AntUpdItem1";
-          this.AntUpdItem1.Size = new System.Drawing.Size(92, 21);
-          this.AntUpdItem1.Sorted = true;
-          this.AntUpdItem1.TabIndex = 30;
-          // 
-          // AntUpdText1
-          // 
-          this.AntUpdText1.Location = new System.Drawing.Point(108, 33);
-          this.AntUpdText1.Name = "AntUpdText1";
-          this.AntUpdText1.Size = new System.Drawing.Size(39, 20);
-          this.AntUpdText1.TabIndex = 31;
-          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -5572,6 +5479,96 @@
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
+          // dgViews
+          // 
+          this.dgViews.AllowUserToAddRows = false;
+          this.dgViews.AllowUserToDeleteRows = false;
+          this.dgViews.BackgroundColor = System.Drawing.SystemColors.Window;
+          this.dgViews.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
+          this.dgViews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.dgViews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Label,
+            this.DBItem,
+            this.DefaultValue,
+            this.FilmsSort,
+            this.Index,
+            this.ViewLayout,
+            this.FilmsLayout,
+            this.HierarchyLayout,
+            this.ViewFilter,
+            this.ViewFilterEdit,
+            this.UnwatchedOnly,
+            this.OnlyAvailable});
+          this.dgViews.Location = new System.Drawing.Point(187, 27);
+          this.dgViews.MultiSelect = false;
+          this.dgViews.Name = "dgViews";
+          this.dgViews.RowHeadersVisible = false;
+          this.dgViews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+          this.dgViews.Size = new System.Drawing.Size(303, 163);
+          this.dgViews.TabIndex = 122;
+          // 
+          // Label
+          // 
+          this.Label.HeaderText = "View Name";
+          this.Label.Name = "Label";
+          // 
+          // DBItem
+          // 
+          this.DBItem.HeaderText = "DB Item";
+          this.DBItem.Name = "DBItem";
+          // 
+          // DefaultValue
+          // 
+          this.DefaultValue.HeaderText = "Default Value";
+          this.DefaultValue.Name = "DefaultValue";
+          // 
+          // FilmsSort
+          // 
+          this.FilmsSort.HeaderText = "Sort Order";
+          this.FilmsSort.Name = "FilmsSort";
+          // 
+          // Index
+          // 
+          this.Index.HeaderText = "Index";
+          this.Index.Name = "Index";
+          // 
+          // ViewLayout
+          // 
+          this.ViewLayout.HeaderText = "View Layout";
+          this.ViewLayout.Name = "ViewLayout";
+          // 
+          // FilmsLayout
+          // 
+          this.FilmsLayout.HeaderText = "Film List Layout";
+          this.FilmsLayout.Name = "FilmsLayout";
+          // 
+          // HierarchyLayout
+          // 
+          this.HierarchyLayout.HeaderText = "Hierarchy Layout";
+          this.HierarchyLayout.Name = "HierarchyLayout";
+          // 
+          // ViewFilter
+          // 
+          this.ViewFilter.HeaderText = "View Filter";
+          this.ViewFilter.Name = "ViewFilter";
+          // 
+          // ViewFilterEdit
+          // 
+          this.ViewFilterEdit.HeaderText = "Edit";
+          this.ViewFilterEdit.Name = "ViewFilterEdit";
+          // 
+          // UnwatchedOnly
+          // 
+          this.UnwatchedOnly.HeaderText = "Unwatched Only";
+          this.UnwatchedOnly.Name = "UnwatchedOnly";
+          this.UnwatchedOnly.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          // 
+          // OnlyAvailable
+          // 
+          this.OnlyAvailable.HeaderText = "Only Available";
+          this.OnlyAvailable.Name = "OnlyAvailable";
+          this.OnlyAvailable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          // 
           // button_GrabberScriptUpdate
           // 
           this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(607, 140);
@@ -5899,95 +5896,98 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
-          // dgViews
+          // groupBox_AntUpdatingItems
           // 
-          this.dgViews.AllowUserToAddRows = false;
-          this.dgViews.AllowUserToDeleteRows = false;
-          this.dgViews.BackgroundColor = System.Drawing.SystemColors.Window;
-          this.dgViews.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-          this.dgViews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-          this.dgViews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Label,
-            this.DBItem,
-            this.DefaultValue,
-            this.FilmsSort,
-            this.Index,
-            this.ViewLayout,
-            this.FilmsLayout,
-            this.HierarchyLayout,
-            this.ViewFilter,
-            this.ViewFilterEdit,
-            this.UnwatchedOnly,
-            this.OnlyAvailable});
-          this.dgViews.Location = new System.Drawing.Point(187, 27);
-          this.dgViews.MultiSelect = false;
-          this.dgViews.Name = "dgViews";
-          this.dgViews.RowHeadersVisible = false;
-          this.dgViews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-          this.dgViews.Size = new System.Drawing.Size(303, 163);
-          this.dgViews.TabIndex = 122;
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label46);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label45);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label44);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem2);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText2);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
+          this.groupBox_AntUpdatingItems.Enabled = false;
+          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(507, 6);
+          this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
+          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(234, 86);
+          this.groupBox_AntUpdatingItems.TabIndex = 121;
+          this.groupBox_AntUpdatingItems.TabStop = false;
+          this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
+          this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
           // 
-          // Label
+          // label46
           // 
-          this.Label.HeaderText = "View Name";
-          this.Label.Name = "Label";
+          this.label46.AutoSize = true;
+          this.label46.Location = new System.Drawing.Point(150, 16);
+          this.label46.Name = "label46";
+          this.label46.Size = new System.Drawing.Size(72, 13);
+          this.label46.TabIndex = 80;
+          this.label46.Text = "Update Value";
           // 
-          // DBItem
+          // label45
           // 
-          this.DBItem.HeaderText = "DB Item";
-          this.DBItem.Name = "DBItem";
+          this.label45.AutoSize = true;
+          this.label45.Location = new System.Drawing.Point(105, 15);
+          this.label45.Name = "label45";
+          this.label45.Size = new System.Drawing.Size(33, 13);
+          this.label45.TabIndex = 79;
+          this.label45.Text = "Label";
           // 
-          // DefaultValue
+          // label44
           // 
-          this.DefaultValue.HeaderText = "Default Value";
-          this.DefaultValue.Name = "DefaultValue";
+          this.label44.AutoSize = true;
+          this.label44.Location = new System.Drawing.Point(9, 15);
+          this.label44.Name = "label44";
+          this.label44.Size = new System.Drawing.Size(93, 13);
+          this.label44.TabIndex = 78;
+          this.label44.Text = "DB Item to update";
           // 
-          // FilmsSort
+          // AntUpdItem1
           // 
-          this.FilmsSort.HeaderText = "Sort Order";
-          this.FilmsSort.Name = "FilmsSort";
+          this.AntUpdItem1.FormattingEnabled = true;
+          this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
+          this.AntUpdItem1.Name = "AntUpdItem1";
+          this.AntUpdItem1.Size = new System.Drawing.Size(92, 21);
+          this.AntUpdItem1.Sorted = true;
+          this.AntUpdItem1.TabIndex = 30;
           // 
-          // Index
+          // AntUpdText1
           // 
-          this.Index.HeaderText = "Index";
-          this.Index.Name = "Index";
+          this.AntUpdText1.Location = new System.Drawing.Point(108, 33);
+          this.AntUpdText1.Name = "AntUpdText1";
+          this.AntUpdText1.Size = new System.Drawing.Size(39, 20);
+          this.AntUpdText1.TabIndex = 31;
           // 
-          // ViewLayout
+          // AntUpdDflT1
           // 
-          this.ViewLayout.HeaderText = "View Layout";
-          this.ViewLayout.Name = "ViewLayout";
+          this.AntUpdDflT1.Location = new System.Drawing.Point(153, 33);
+          this.AntUpdDflT1.Name = "AntUpdDflT1";
+          this.AntUpdDflT1.Size = new System.Drawing.Size(69, 20);
+          this.AntUpdDflT1.TabIndex = 32;
           // 
-          // FilmsLayout
+          // AntUpdDflT2
           // 
-          this.FilmsLayout.HeaderText = "Film List Layout";
-          this.FilmsLayout.Name = "FilmsLayout";
+          this.AntUpdDflT2.Location = new System.Drawing.Point(153, 58);
+          this.AntUpdDflT2.Name = "AntUpdDflT2";
+          this.AntUpdDflT2.Size = new System.Drawing.Size(69, 20);
+          this.AntUpdDflT2.TabIndex = 35;
           // 
-          // HierarchyLayout
+          // AntUpdText2
           // 
-          this.HierarchyLayout.HeaderText = "Hierarchy Layout";
-          this.HierarchyLayout.Name = "HierarchyLayout";
+          this.AntUpdText2.Location = new System.Drawing.Point(108, 58);
+          this.AntUpdText2.Name = "AntUpdText2";
+          this.AntUpdText2.Size = new System.Drawing.Size(39, 20);
+          this.AntUpdText2.TabIndex = 34;
           // 
-          // ViewFilter
+          // AntUpdItem2
           // 
-          this.ViewFilter.HeaderText = "View Filter";
-          this.ViewFilter.Name = "ViewFilter";
-          // 
-          // ViewFilterEdit
-          // 
-          this.ViewFilterEdit.HeaderText = "Edit";
-          this.ViewFilterEdit.Name = "ViewFilterEdit";
-          // 
-          // UnwatchedOnly
-          // 
-          this.UnwatchedOnly.HeaderText = "Unwatched Only";
-          this.UnwatchedOnly.Name = "UnwatchedOnly";
-          this.UnwatchedOnly.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-          // 
-          // OnlyAvailable
-          // 
-          this.OnlyAvailable.HeaderText = "Only Available";
-          this.OnlyAvailable.Name = "OnlyAvailable";
-          this.OnlyAvailable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.AntUpdItem2.FormattingEnabled = true;
+          this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
+          this.AntUpdItem2.Name = "AntUpdItem2";
+          this.AntUpdItem2.Size = new System.Drawing.Size(92, 21);
+          this.AntUpdItem2.Sorted = true;
+          this.AntUpdItem2.TabIndex = 33;
           // 
           // MyFilmsSetup
           // 
@@ -6097,8 +6097,6 @@
           this.groupBox_DVDprofiler.ResumeLayout(false);
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
-          this.groupBox_AntUpdatingItems.ResumeLayout(false);
-          this.groupBox_AntUpdatingItems.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -6112,6 +6110,7 @@
           this.General.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dgViews)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.antMovieCatalog)).EndInit();
@@ -6120,7 +6119,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.dgViews)).EndInit();
+          this.groupBox_AntUpdatingItems.ResumeLayout(false);
+          this.groupBox_AntUpdatingItems.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6583,16 +6583,6 @@
         private Button btnAntViewFilter4;
         private Button btnAntViewFilter3;
         private Button btnAntViewFilter2;
-        private GroupBox groupBox_AntUpdatingItems;
-        private Label label46;
-        private Label label45;
-        private Label label44;
-        private TextBox AntUpdDflT2;
-        private TextBox AntUpdDflT1;
-        private ComboBox AntUpdItem2;
-        private TextBox AntUpdText2;
-        private ComboBox AntUpdItem1;
-        private TextBox AntUpdText1;
         private Label lblAntViewSortOrder;
         private ComboBox AntViewSortOrder1;
         private ComboBox AntViewSortOrder5;
@@ -6612,5 +6602,15 @@
         private DataGridViewButtonColumn ViewFilterEdit;
         private DataGridViewCheckBoxColumn UnwatchedOnly;
         private DataGridViewCheckBoxColumn OnlyAvailable;
+        private GroupBox groupBox_AntUpdatingItems;
+        private Label label46;
+        private Label label45;
+        private Label label44;
+        private TextBox AntUpdDflT2;
+        private TextBox AntUpdDflT1;
+        private ComboBox AntUpdItem2;
+        private TextBox AntUpdText2;
+        private ComboBox AntUpdItem1;
+        private TextBox AntUpdText1;
     }
 }

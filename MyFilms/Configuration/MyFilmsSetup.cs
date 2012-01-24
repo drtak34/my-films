@@ -183,10 +183,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CmdPar.Items.Add("(none)");
             CatalogType.SelectedIndex = 0;
 
-            for (int i = 1; i < 6; i++)
-            {
-              dgViews.Rows.Add();
-            }
+            //for (int i = 1; i < 6; i++) dgViews.Rows.Add();
 
             foreach (DataColumn dc in ds.Movie.Columns)
             {
@@ -1254,7 +1251,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
-            this.AddRemoveExtendedfields((CatalogType.SelectedIndex > 0));
+            AddRemoveExtendedfields((CatalogType.SelectedIndex > 0));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
             AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
             MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntPicture", "");
@@ -1282,7 +1279,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", "");
             SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", "");
             SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", "");
-            //AntFilterMinRating.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterMinRating", "5");
             AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem1", "");
             AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign1", "#");
             AntFilterText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterText1", "");
@@ -1332,7 +1328,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntUpdDflT1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT1", "");
             AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", "");
             AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", "");
-            AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", string.Empty);
+            AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", "");
             AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "");
             AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "");
 
@@ -1386,7 +1382,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CmdPar.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CmdPar", "(none)");
             CmdExe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CmdExe", string.Empty);
             TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", "\\");
-            //chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber", false);
             chkDfltFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDflt", false);
             chkDfltFanartImage.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDfltImage", false);
             chkDfltFanartImageAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDfltImageAll", false);
@@ -1395,10 +1390,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkFanartDefaultViewsUseRandom.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "FanartDefaultViewsUseRandom", false);
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_cnf", string.Empty);
             txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PicturePrefix", string.Empty);
-            //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
             chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", false);
             chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", false);
-            //txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_exe", Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe"); 
             chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", false);
             txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", string.Empty);
             chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Suppress", false);
@@ -1407,7 +1400,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cbWatched.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WatchedField", "Checked");
             cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressField", string.Empty);
             txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", string.Empty);
-            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", true);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config ! // Rechanged to true, as now config name should be required anymore for logo config!
+            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", true);
             string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1");
             switch (wsuppressType)
             {
@@ -1426,8 +1419,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             Dwp.Text = crypto.Decrypter(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Dwp", string.Empty));
             Rpt_Dwp.Text = Dwp.Text;
-            //fmu pour etre coherent avec MP qui stocke les booleens en yes/no au lieu de true/false
-            //fmu       if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "True")
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", "False") == "True" //fmu
             || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", "False") == "yes")  //fmu
               chkUseOriginalAsTranslatedTitle.Checked = true;
@@ -1532,16 +1523,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 LayOut.Text = "Large Icons";
             if (WLayOut == 3)
                 LayOut.Text = "Filmstrip";
-#if MP11
-            if (WLayOut == 4)
-            {
-              WLayOut = 3;
-              LayOut.Text = "Filmstrip";
-            }
-#else
             if (WLayOut == 4)
                 LayOut.Text = "Cover Flow";
-#endif
 
             AntViewText_Change();
             AntSort_Change();
@@ -1561,14 +1544,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               groupBox_AMCupdater_ExternalApplication.Enabled = false;
               groupBox_AMCupdaterScheduer.Enabled = false;
             }
-            //if (PathStorage.Text.Length > 0 && AMCMovieScanPath.Text.Length == 0) // disabled, because users don't want to always have that path copied to AMC scan path
-            //  AMCMovieScanPath.Text = PathStorage.Text;
-            //else
-            //  AMCMovieScanPath.Text = String.Empty;
-            //if (AMCMovieScanPath.Text.Length == 0)
-            //  btnCreateAMCDefaultConfig.Visible = true;
-            //else
-            //  btnCreateAMCDefaultConfig.Visible = false;
 
             // Added by Guzzi to load or initialize the AMCupdater Default configuration and create default configfiles, if necessary.
             Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
@@ -1679,7 +1654,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           if (DbField == "IMDB_Id" || DbField == "TMDB_Id" || DbField == "Watched" || DbField == "Certification" ||
                DbField == "Writer" || DbField == "SourceTrailer" || DbField == "TagLine" || DbField == "Tags" ||
-               DbField == "RatingUser" || DbField == "Studio" || DbField == "IMDB_Rank" || DbField != "Edition" ||
+               DbField == "RatingUser" || DbField == "Studio" || DbField == "IMDB_Rank" || DbField == "Edition" ||
                DbField == "Aspectratio" || DbField == "CategoryTrakt" || DbField == "Favorite" ||
                DbField == "CustomField1" || DbField == "CustomField2" || DbField == "CustomField3") 
             return true;
@@ -1788,8 +1763,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               groupBox_PlayMovieInfos.Enabled = true;
               groupBox_PreLaunchingCommand.Enabled = true;
             }
-            if (!all)
-                return;
+
+            if (!all) return;
+
             Config_Dflt.Checked = false;
             MesFilmsCat.ResetText();
             MesFilmsImg.ResetText();
@@ -1807,7 +1783,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSTitle.ResetText();
             Sort.ResetText();
             SortInHierarchies.ResetText();
-            //AntFilterMinRating.ResetText();
             AntFilterItem1.ResetText();
             AntFilterItem2.ResetText();
             AntFilterText1.ResetText();
@@ -1816,7 +1791,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterSign1.ResetText();
             AntFilterSign2.ResetText();
             AntFilterComb.ResetText();
-            dgViews.Rows.Clear();
+            //dgViews.Rows.Clear();
             AntViewItem1.ResetText();
             AntViewItem2.ResetText();
             AntViewItem3.ResetText();
@@ -1987,13 +1962,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
               string linkName = "AMC-Updater '" + DeleteName + "'";
               string shortcutFile = deskDir + @"\AMC-Updater (" + DeleteName + ")" + ".lnk";
-              if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url"))
-                try {System.IO.File.Delete(deskDir + "\\" + linkName + ".url");} catch{}
-              if (System.IO.File.Exists(shortcutFile))
-                try {System.IO.File.Delete(shortcutFile);} catch{}
-              string AMCupdaterConfigFile = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings" + "_" + DeleteName + ".xml";
-              if (System.IO.File.Exists(AMCupdaterConfigFile))
-                try { System.IO.File.Delete(AMCupdaterConfigFile); } catch{}
+              if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url")) try {System.IO.File.Delete(deskDir + "\\" + linkName + ".url");} catch{}
+              if (System.IO.File.Exists(shortcutFile)) try {System.IO.File.Delete(shortcutFile);} catch{}
+              string AMCupdaterConfigFile = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + DeleteName + ".xml";
+              if (System.IO.File.Exists(AMCupdaterConfigFile)) try { System.IO.File.Delete(AMCupdaterConfigFile); } catch{}
             }
         }
 
@@ -2111,18 +2083,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     }
                     else if (!WizardActive)
                     {
-                      if (System.Windows.Forms.MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
+                      if (MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
                       {
                         MesFilmsCat.Focus();
                         return false;
                       }
-                      System.Windows.Forms.MessageBox.Show("You have to fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                      MessageBox.Show("You have to fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
             else
             {
-              System.Windows.Forms.MessageBox.Show("Please give the XML file's name first");
+              MessageBox.Show("Please give the XML file's name first");
               MesFilmsCat.Focus();
               return false;
             }
