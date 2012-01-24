@@ -183,6 +183,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CmdPar.Items.Add("(none)");
             CatalogType.SelectedIndex = 0;
 
+            for (int i = 1; i < 6; i++)
+            {
+              dgViews.Rows.Add();
+            }
+
             foreach (DataColumn dc in ds.Movie.Columns)
             {
               if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && 
@@ -907,30 +912,36 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterFreeText", AntFilterFreeText.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterComb", AntFilterComb.Text);
 
+          
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem1", AntViewItem1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", AntViewText1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue1", AntViewValue1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex1", AntViewIndex1.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder1", AntViewSortOrder1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter1", AntViewFilter1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem2", AntViewItem2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText2", AntViewText2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue2", AntViewValue2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex2", AntViewIndex2.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder2", AntViewSortOrder2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter2", AntViewFilter2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem3", AntViewItem3.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText3", AntViewText3.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue3", AntViewValue3.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex3", AntViewIndex3.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder3", AntViewSortOrder3.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter3", AntViewFilter3.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem4", AntViewItem4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText4", AntViewText4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue4", AntViewValue4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex4", AntViewIndex4.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder4", AntViewSortOrder4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter4", AntViewFilter4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem5", AntViewItem5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText5", AntViewText5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue5", AntViewValue5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex5", AntViewIndex5.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", AntViewSortOrder5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", AntViewFilter5.Text);
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", AntSearchItem1.Text);
@@ -1285,26 +1296,31 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", "");
             AntViewValue1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue1", "");
             AntViewIndex1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex1", "0");
+            AntViewSortOrder1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder1", " ASC");
             AntViewFilter1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter1", "");
             AntViewItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem2", "");
             AntViewText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText2", "");
             AntViewValue2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue2", "");
             AntViewIndex2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex2", "0");
+            AntViewSortOrder2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder2", " ASC");
             AntViewFilter2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter2", "");
             AntViewItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem3", "");
             AntViewText3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText3", "");
             AntViewValue3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue3", "");
             AntViewIndex3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex3", "0");
+            AntViewSortOrder3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder3", " ASC");
             AntViewFilter3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter3", "");
             AntViewItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem4", "");
             AntViewText4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText4", "");
             AntViewValue4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue4", "");
             AntViewIndex4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex4", "0");
+            AntViewSortOrder4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder4", " ASC");
             AntViewFilter4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter4", "");
             AntViewItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem5", "");
             AntViewText5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText5", "");
             AntViewValue5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewValue5", "");
             AntViewIndex5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex5", "0");
+            AntViewSortOrder5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", " ASC");
             AntViewFilter5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", "");
 
             AntSearchItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", "");
@@ -1800,6 +1816,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterSign1.ResetText();
             AntFilterSign2.ResetText();
             AntFilterComb.ResetText();
+            dgViews.Rows.Clear();
             AntViewItem1.ResetText();
             AntViewItem2.ResetText();
             AntViewItem3.ResetText();
@@ -1820,6 +1837,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewIndex3.ResetText();
             AntViewIndex4.ResetText();
             AntViewIndex5.ResetText();
+            AntViewSortOrder1.ResetText();
+            AntViewSortOrder2.ResetText();
+            AntViewSortOrder3.ResetText();
+            AntViewSortOrder4.ResetText();
+            AntViewSortOrder5.ResetText();
             AntViewFilter1.Clear();
             AntViewFilter2.Clear();
             AntViewFilter3.Clear();
@@ -3821,10 +3843,24 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void View_Dflt_Item_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (View_Dflt_Item.Text == GUILocalizeStrings.Get(924))  // Menu
+            {
+              View_Dflt_Text.Enabled = false;
+              LayOut.Enabled = false;
+              Sort.Enabled = false;
+              SortSens.Enabled = false;
+            }
+            else
+            {
+              View_Dflt_Text.Enabled = true;
+              LayOut.Enabled = true;
+              Sort.Enabled = true;
+              SortSens.Enabled = true;
+            }
             if (View_Dflt_Item.Text == "(none)")
             {
-                View_Dflt_Text.Clear();
-                return;
+              View_Dflt_Text.Clear();
+              return;
             }
             if (View_Dflt_Item.Text == AntViewText1.Text && AntViewValue1.Text.Length > 0)
             {

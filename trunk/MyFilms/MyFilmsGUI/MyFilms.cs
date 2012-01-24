@@ -410,6 +410,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // View History for facade navigation support
     private static List<ViewState> ViewHistory = new List<ViewState>();
 
+    // cache to store viewstate params from current session per view
+    Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();
+
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
     LoadParameterInfo loadParamInfo;
@@ -1547,7 +1550,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // set focus to facade, if e.g. menu buttons had focus (after global options etc.)
             return;
           }
+
           LogStatusVars("PreviousMenu");
+          if (!string.IsNullOrEmpty(conf.WStrSort)) SaveLastView(conf.WStrSort);
+
           if (ViewHistory.Count > 0)
           {
             LogMyFilms.Debug("Restoring state '" + ViewHistory.Count + "' from Statehistory.");
@@ -3802,6 +3808,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
       //if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
       //choiceViewGlobalOptions.Add("showemptyvaluesinviews");
+
+      //// Select or disable a custom filter (e.g. category value, year value, etc.)
+      //if (GlobalFilterStringCustomFilter.Length > 0) dlg1.Add(string.Format(GUILocalizeStrings.Get(0), GUILocalizeStrings.Get(0))); // disable user filter 'field-filter'
+      //if (GlobalFilterStringCustomFilter.Length == 0) dlg1.Add(GUILocalizeStrings.Get(0)); // select user filter
+      //choiceViewGlobalOptions.Add("filterdbcustomfilter");
 
       dlg1.DoModal(GetID);
       if (dlg1.SelectedLabel == -1) return;
@@ -6229,14 +6240,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Change_View_Action(string selectedView)
     {
       LogMyFilms.Debug("Change_View_Action called with '" + selectedView + "'");
-
       conf.StrSelect = ""; // reset view filter
       conf.StrDfltSelect = conf.StrConfigSelect; // reset to config filter ...
-      if (conf.IndexedChars > 0) // if indexed view is enabled ...
-      {
-        conf.Boolindexed = true;
-        conf.Boolindexedreturn = false;
-      }
+      conf.IndexedChars = 0;
+      conf.Boolindexed = false;
 
       switch (selectedView)
       {
@@ -6308,6 +6315,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           conf.WStrSort = conf.StrViewItem[i];
           SetLabelView(selectedView.ToLower());
+          conf.StrSortSens = conf.StrViewSortOrder[i];
           conf.WStrSortSens = " ASC";
           conf.IndexedChars = conf.ViewIndex[i];
           if (conf.StrViewFilter[i].Length > 0)
@@ -6340,6 +6348,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
+            if (conf.IndexedChars > 0) // if indexed view is enabled ...
+            {
+              conf.Boolindexed = true;
+              conf.Boolindexedreturn = false;
+            }
             string listfilter = (conf.StrViewValue[i].Length == 0) ? "*" : conf.StrViewValue[i];
             if (conf.StrViewValue[i].Length == 0)
               getSelectFromDivxThreaded();
@@ -6398,6 +6411,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.ViewContext = ViewContext.Group;
                 break;
             }
+
+            if (conf.IndexedChars > 0) // if indexed view is enabled ...
+            {
+              conf.Boolindexed = true;
+              conf.Boolindexedreturn = false;
+            }
+
+            RestoreLastView(selectedView);
+
             //getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
             getSelectFromDivxThreaded();
             break;
@@ -12241,7 +12263,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //}
 
     private bool SaveLastView()
+    { return SaveLastView(null); }
+    private bool SaveLastView(string viewname)
     {
+      LogMyFilms.Debug("SaveLastView() called with '" + viewname + "'");
       // Configuration conf = new Configuration();
       ViewState state = new ViewState();
 
@@ -12275,16 +12300,67 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       state.IndexItem = (this.facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedListItemIndex : 0) : -1; //may need to check if there is no item selected and so save -1
       state.TitleItem = (this.facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedItem.ToString() : this.facadeFilms.SelectedListItem.Label) : string.Empty; //may need to check if there is no item selected and so save ""
 
-      ViewHistory.Add(state);
+      if (!string.IsNullOrEmpty(viewname))
+      {
+        if (ViewStateCache.ContainsKey(viewname)) ViewStateCache.Remove(viewname);
+        ViewStateCache.Add(viewname, state);
+      }
+      else
+      {
+        ViewHistory.Add(state);
+      }
       return true;
     }
 
     private bool RestoreLastView()
+    { return  RestoreLastView(null); }
+    private bool RestoreLastView(string viewname)
     {
-      if (ViewHistory.Count > 0)
+      LogMyFilms.Debug("RestoreLastView() called with '" + viewname + "'"); 
+      ViewState state = new ViewState();
+      if (!string.IsNullOrEmpty(viewname))
       {
-        ViewState state = ViewHistory.Last();
+        if (ViewStateCache.TryGetValue(viewname, out state))
+        {
+          conf.Boolselect = state.Boolselect;
+          conf.Boolreturn = state.Boolreturn;
+          conf.Boolindexed = state.Boolindexed;
+          conf.Boolindexedreturn = state.Boolindexedreturn;
+          conf.IndexedChars = state.IndexedChars;
+          conf.BoolReverseNames = state.BoolReverseNames;
+          conf.BoolShowEmptyValuesInViews = state.BoolShowEmptyValuesInViews;
 
+          //conf.StrSelect = state.StrSelect;
+          //conf.StrPersons = state.StrPersons;
+          //conf.StrTitleSelect = state.StrTitleSelect;
+          //conf.StrFilmSelect = state.StrFilmSelect;
+          //conf.ViewContext = state.ViewContext;
+          //conf.StrTxtView = state.StrTxtView;
+          //conf.StrTxtSelect = state.StrTxtSelect;
+
+          conf.Wselectedlabel = state.Wselectedlabel;
+          conf.WStrSort = state.WStrSort;
+          conf.WStrSortSensCount = state.WStrSortSensCount;
+          conf.BoolSortCountinViews = state.BoolSortCountinViews;
+          conf.Wstar = state.Wstar;
+
+          conf.StrLayOut = state.StrLayOut;
+          conf.WStrLayOut = state.WStrLayOut;
+          conf.StrLayOutInHierarchies = state.StrLayOutInHierarchies;
+          conf.LastID = state.LastID;
+
+          int IndexItem = state.IndexItem;
+          string TitleItem = state.TitleItem;
+
+          //IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
+          //TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+          return true;
+        }
+        else return false;
+      }
+      else if (ViewHistory.Count > 0)
+      {
+        state = ViewHistory.Last();
         conf.Boolselect = state.Boolselect;
         conf.Boolreturn = state.Boolreturn;
         conf.Boolindexed = state.Boolindexed;
@@ -12321,8 +12397,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ViewHistory.Remove(ViewHistory.Last());
         return true;
       }
-      else 
-        return false;
+      return false;
     }
   }
 

@@ -348,5 +348,7 @@
     <String id="10798966">Letztes Jahr</String>
     <String id="10798967">Letzte 3 Jahre</String>
     <String id="10798968">Älter als 3 Jahre</String>
+    <String id="10798670">Globaler Filter "Wähle Custom Filter" ({0})</String>
+    <String id="10798671">Globaler Filter "Deaktiviere Custom Filter" ({0})</String>
   </Section>
 </Language>
