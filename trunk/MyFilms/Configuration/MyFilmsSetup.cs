@@ -223,7 +223,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
                 {
-                  AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
@@ -963,7 +962,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", AntLabel5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewDfltItem", View_Dflt_Item.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewDfltText", View_Dflt_Text.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchList", AntSearchList.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UpdateList", AntUpdList.Text);
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", check_WOL_enable.Checked);
@@ -1329,24 +1327,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", "");
             AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", "");
             AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", "");
-            AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "");
             AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "");
 
             if (AntTitle1.Text.Length > 0)
             {
               if (AntTitle1.Text == "TranslatedTitle")
               {
-                if (AntSearchList.Text.Length == 0)
-                  AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-                if (AntUpdList.Text.Length == 0)
-                  AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+                if (AntUpdList.Text.Length == 0) AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
               }
               if (AntTitle1.Text == "OriginalTitle" || AntTitle1.Text == "FormattedTitle")
               {
-                if (AntSearchList.Text.Length == 0)
-                  AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-                if (AntUpdList.Text.Length == 0)
-                  AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+                if (AntUpdList.Text.Length == 0) AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
               }
             }
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
@@ -1587,8 +1578,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               }
               if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
               {
-                if (AntSearchField.Items.Contains(dc.ColumnName)) AntSearchField.Items.Remove(dc.ColumnName);
-                if (isXtended) AntSearchField.Items.Add(dc.ColumnName);
                 if (AntUpdField.Items.Contains(dc.ColumnName)) AntUpdField.Items.Remove(dc.ColumnName);
                 if (isXtended) AntUpdField.Items.Add(dc.ColumnName);
               }
@@ -1826,7 +1815,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSearchText1.ResetText();
             AntSearchItem2.ResetText();
             AntSearchText2.ResetText();
-            AntSearchList.ResetText();
             AntUpdList.ResetText();
             AntUpdItem1.ResetText();
             AntUpdItem2.ResetText();
@@ -2334,7 +2322,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Fanart"; // fanart path
                     }
                     cbWatched.Text = "Checked";
-                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
               case 3: // MyMovies
                     AntStorage.Text = "Source";
@@ -2345,7 +2332,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
                       //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
                     }
-                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     chkAddTagline.Checked = true;
                     ECMergeDestinationFieldTagline.Text = "Description";
                     break;
@@ -2358,7 +2344,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
                       // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
                     }
-                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
 
               case 5: // EAX MC 3.0.9
@@ -2375,7 +2360,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
                     }
                     cbWatched.Text = "Checked";
-                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
 
               case 6: // PVD Personal Video Database V0.9.9.21
@@ -2570,10 +2554,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntSearchItem2.Items.Add("Tags");
           AntSearchItem1.Items.Add("Studio");
           AntSearchItem2.Items.Add("Studio");
-
-          AntSearchField.Items.Add("Writer");
-          AntSearchField.Items.Add("Certification");
-          AntSearchField.Items.Add("Studio");
 
           cbWatched.Items.Add("Watched");
           //cbfdupdate.Items.Add(dc.ColumnName);
@@ -4059,22 +4039,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   }
                   catch (Exception ex)
                   {
-                    LogMyFilms.Debug("Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
+                    LogMyFilms.Debug("Setup: Error deleting file '" + wfile + "' - Exception: " + ex);
                   }  
                 }
             }
         }
 
-        private void AntSearchField_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!AntSearchList.Text.Contains(AntSearchField.Text))
-            {
-                if (AntSearchList.Text.Length > 0)
-                    AntSearchList.Text = AntSearchList.Text + ", " + AntSearchField.Text;
-                else
-                    AntSearchList.Text = AntSearchField.Text;
-            }
-        }
         private void AntUpdField_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!AntUpdList.Text.Contains(AntUpdField.Text))
@@ -4763,21 +4733,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntUpdList.Text = String.Empty;
         }
 
-        private void AntSearchFieldClear_Click(object sender, EventArgs e)
-        {
-          AntSearchList.Text = String.Empty;
-        }
-
         private void AntUpdFieldReset_Click_1(object sender, EventArgs e)
         {
-          AntUpdList.Text =
-            "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
-        }
-
-        private void AntSearchFieldResetToDefault_Click(object sender, EventArgs e)
-        {
-          AntSearchList.Text =
-            "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
+          AntUpdList.Text = "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
         }
 
         private void comboBoxLogoPresets_SelectedIndexChanged(object sender, EventArgs e)
@@ -4887,17 +4845,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           if (AntTitle1.Text == "TranslatedTitle")
           {
-            if (AntSearchList.Text.Length == 0)
-              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-            if (AntUpdList.Text.Length == 0)
-              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+            if (AntUpdList.Text.Length == 0) AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
           }
           if (AntTitle1.Text == "OriginalTitle" || AntTitle1.Text == "FormattedTitle")
           {
-            if (AntSearchList.Text.Length == 0)
-              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-            if (AntUpdList.Text.Length == 0)
-              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+            if (AntUpdList.Text.Length == 0) AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
           }
         }
 
@@ -5052,12 +5004,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           if (AntTitle1.Text == "TranslatedTitle")
           {
-            AntSearchList.Text = "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
             AntUpdList.Text = "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
           }
           if (AntTitle1.Text == "OriginalTitle" || AntTitle1.Text == "FormattedTitle")
           {
-            AntSearchList.Text = "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
             AntUpdList.Text = "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
           }
 

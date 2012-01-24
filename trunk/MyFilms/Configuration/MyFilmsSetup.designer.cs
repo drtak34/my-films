@@ -286,12 +286,6 @@
           this.label62 = new System.Windows.Forms.Label();
           this.SortSensInHierarchies = new System.Windows.Forms.ComboBox();
           this.SortInHierarchies = new System.Windows.Forms.ComboBox();
-          this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
-          this.AntSearchFieldReset = new System.Windows.Forms.Button();
-          this.AntSearchFieldClear = new System.Windows.Forms.Button();
-          this.label18 = new System.Windows.Forms.Label();
-          this.AntSearchField = new System.Windows.Forms.ComboBox();
-          this.AntSearchList = new System.Windows.Forms.TextBox();
           this.groupBox_SupplementarySearch = new System.Windows.Forms.GroupBox();
           this.label43 = new System.Windows.Forms.Label();
           this.label42 = new System.Windows.Forms.Label();
@@ -611,7 +605,6 @@
           this.groupBox2.SuspendLayout();
           this.Tab_Search.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          this.groupBoxSearchByProperties.SuspendLayout();
           this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.Tab_Views.SuspendLayout();
@@ -2738,7 +2731,6 @@
           // Tab_Search
           // 
           this.Tab_Search.Controls.Add(this.groupBox4);
-          this.Tab_Search.Controls.Add(this.groupBoxSearchByProperties);
           this.Tab_Search.Controls.Add(this.groupBox_SupplementarySearch);
           this.Tab_Search.Controls.Add(this.groupBox_Separators);
           this.Tab_Search.Location = new System.Drawing.Point(4, 22);
@@ -2803,75 +2795,6 @@
           this.SortInHierarchies.Size = new System.Drawing.Size(121, 21);
           this.SortInHierarchies.Sorted = true;
           this.SortInHierarchies.TabIndex = 0;
-          // 
-          // groupBoxSearchByProperties
-          // 
-          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchFieldReset);
-          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchFieldClear);
-          this.groupBoxSearchByProperties.Controls.Add(this.label18);
-          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchField);
-          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchList);
-          this.groupBoxSearchByProperties.Location = new System.Drawing.Point(15, 225);
-          this.groupBoxSearchByProperties.Name = "groupBoxSearchByProperties";
-          this.groupBoxSearchByProperties.Size = new System.Drawing.Size(712, 114);
-          this.groupBoxSearchByProperties.TabIndex = 35;
-          this.groupBoxSearchByProperties.TabStop = false;
-          this.groupBoxSearchByProperties.Text = "Global Search by Properties";
-          this.ToolTip1.SetToolTip(this.groupBoxSearchByProperties, "In opposition to the \"User defined Search Items\", this is a more generic search \r" +
-                  "\nand it is based on searching the whole catalog, including items, that are not v" +
-                  "isible in the current view\r\n");
-          // 
-          // AntSearchFieldReset
-          // 
-          this.AntSearchFieldReset.Location = new System.Drawing.Point(591, 34);
-          this.AntSearchFieldReset.Name = "AntSearchFieldReset";
-          this.AntSearchFieldReset.Size = new System.Drawing.Size(106, 21);
-          this.AntSearchFieldReset.TabIndex = 86;
-          this.AntSearchFieldReset.Text = "Reset to Defaults";
-          this.ToolTip1.SetToolTip(this.AntSearchFieldReset, "This will reset the search list to the MyFilms default values.");
-          this.AntSearchFieldReset.UseVisualStyleBackColor = true;
-          this.AntSearchFieldReset.Click += new System.EventHandler(this.AntSearchFieldResetToDefault_Click);
-          // 
-          // AntSearchFieldClear
-          // 
-          this.AntSearchFieldClear.Location = new System.Drawing.Point(490, 34);
-          this.AntSearchFieldClear.Name = "AntSearchFieldClear";
-          this.AntSearchFieldClear.Size = new System.Drawing.Size(64, 21);
-          this.AntSearchFieldClear.TabIndex = 85;
-          this.AntSearchFieldClear.Text = "Clear";
-          this.ToolTip1.SetToolTip(this.AntSearchFieldClear, "This will clear the items from the search list.");
-          this.AntSearchFieldClear.UseVisualStyleBackColor = true;
-          this.AntSearchFieldClear.Click += new System.EventHandler(this.AntSearchFieldClear_Click);
-          // 
-          // label18
-          // 
-          this.label18.AutoSize = true;
-          this.label18.Location = new System.Drawing.Point(13, 38);
-          this.label18.Name = "label18";
-          this.label18.Size = new System.Drawing.Size(152, 13);
-          this.label18.TabIndex = 80;
-          this.label18.Text = "Search by Properties Selection";
-          // 
-          // AntSearchField
-          // 
-          this.AntSearchField.FormattingEnabled = true;
-          this.AntSearchField.Location = new System.Drawing.Point(189, 34);
-          this.AntSearchField.Name = "AntSearchField";
-          this.AntSearchField.Size = new System.Drawing.Size(148, 21);
-          this.AntSearchField.Sorted = true;
-          this.AntSearchField.TabIndex = 78;
-          this.ToolTip1.SetToolTip(this.AntSearchField, "Choose a DB item to add to the property search list.");
-          this.AntSearchField.SelectedIndexChanged += new System.EventHandler(this.AntSearchField_SelectedIndexChanged);
-          // 
-          // AntSearchList
-          // 
-          this.AntSearchList.BackColor = System.Drawing.SystemColors.Control;
-          this.AntSearchList.Location = new System.Drawing.Point(16, 72);
-          this.AntSearchList.Name = "AntSearchList";
-          this.AntSearchList.Size = new System.Drawing.Size(681, 20);
-          this.AntSearchList.TabIndex = 79;
-          this.ToolTip1.SetToolTip(this.AntSearchList, "This field cannot be edited directly, but shows you the chosen DB items for searc" +
-                  "h.");
           // 
           // groupBox_SupplementarySearch
           // 
@@ -6060,8 +5983,6 @@
           this.Tab_Search.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          this.groupBoxSearchByProperties.ResumeLayout(false);
-          this.groupBoxSearchByProperties.PerformLayout();
           this.groupBox_SupplementarySearch.ResumeLayout(false);
           this.groupBox_SupplementarySearch.PerformLayout();
           this.groupBox_Separators.ResumeLayout(false);
@@ -6302,12 +6223,6 @@
         private Label lblUpdateValue;
         private ComboBox cbfdupdate;
         private TabPage Tab_Search;
-        private GroupBox groupBoxSearchByProperties;
-        private Button AntSearchFieldReset;
-        private Button AntSearchFieldClear;
-        private Label label18;
-        private ComboBox AntSearchField;
-        private TextBox AntSearchList;
         private GroupBox groupBox_SupplementarySearch;
         private Label lblUserdefinedSearchItems;
         private ComboBox AntSearchItem2;

@@ -138,12 +138,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (StrTitle1 == "OriginalTitle")
                 {
                   StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
-                  StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number").Split(new Char[] { ',' });
                 }
                 else
                 {
                   StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
-                  StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number").Split(new Char[] { ',' });
                 }
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
                 StrFileXmlTemp = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -1217,12 +1215,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strSearchText; }
             set { strSearchText = value; }
-        }
-        private string[] strSearchList = { string.Empty, string.Empty };
-        public string[] StrSearchList
-        {
-            get { return strSearchList; }
-            set { strSearchList = value; }
         }
         private string[] strUpdList = { string.Empty, string.Empty };
         public string[] StrUpdList
