@@ -148,11 +148,11 @@
     <String id="10798610">Films as </String>
     <String id="10798611">Function selection for</String>
     <String id="10798612">Producer</String>
-    <String id="10798613">Choose property for searching</String>
-    <String id="10798614">Search related films by properties</String>
-    <String id="10798615">Search all films by properties</String>
-    <String id="10798616">Search on all properties</String>
-    <String id="10798617">Search on property </String>
+    <String id="10798613">Choose field for searching</String>
+    <String id="10798614">Search related films by fields</String>
+    <String id="10798615">Search all films by fields</String>
+    <String id="10798616">Search on all fields</String>
+    <String id="10798617">Search on field </String>
     <String id="10798618">Global search for string '{0}'</String>
     <String id="10798619">=> {0} entry(ies) found for {1}</String>
     <String id="10798620">Person info</String>
@@ -174,8 +174,8 @@
     <String id="10798639">No films found!</String>
     <String id="10798640">No entry corresponding to the searched value.</String>
     <String id="10798641">No entry to be search for.</String>
-    <String id="10798642">Update film data by property</String>
-    <String id="10798643">Select property for updating</String>
+    <String id="10798642">Update film data by field</String>
+    <String id="10798643">Select field for updating</String>
     <String id="10798644">Wrong input format. Please retry.</String>
     <String id="10798645">Global search (areas)</String>
     <String id="10798646">Search films</String>
@@ -262,12 +262,12 @@
     <String id="10798727">Show NAS Server status</String>
     <String id="10798728">Create cover from film</String>
     <String id="10798729">Create cover from film as mosaic</String>
-    <String id="10798730">Update all properties (only when new data)</String>
+    <String id="10798730">Update all fields (only when new data)</String>
     <String id="10798731">Person info (IMDB)</String>
-    <String id="10798732">Choose property for update ...</String>
+    <String id="10798732">Choose field for update ...</String>
     <String id="10798733">Replace existing cover with this one?</String>
-    <String id="10798734">Update all properties</String>
-    <String id="10798735">Update only missing properties</String>
+    <String id="10798734">Update all fields</String>
+    <String id="10798735">Update only missing fields</String>
     <String id="10798736">Locally Available</String>
     <String id="10798737">Trailer not found locally</String>
     <String id="10798738">Try Online Trailer?</String>
