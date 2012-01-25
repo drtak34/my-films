@@ -135,14 +135,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   StrSearchText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchText{0}", i), string.Empty);
                   StrSearchItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchItem{0}", i), string.Empty);
                 }
-                if (StrTitle1 == "OriginalTitle")
-                {
-                  StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
-                }
-                else
-                {
-                  StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
-                }
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
                 StrFileXmlTemp = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                 StrFileType = (CatalogType)int.Parse(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0"));
@@ -1215,12 +1207,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strSearchText; }
             set { strSearchText = value; }
-        }
-        private string[] strUpdList = { string.Empty, string.Empty };
-        public string[] StrUpdList
-        {
-            get { return strUpdList; }
-            set { strUpdList = value; }
         }
         private string strFileXml = string.Empty;
         public string StrFileXml

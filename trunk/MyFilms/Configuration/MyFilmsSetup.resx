@@ -501,10 +501,6 @@ However be careful not to activate the delete options ("Delete Options", otherwi
 
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
-  <data name="groupBoxUpdateByProperties.ToolTip" xml:space="preserve">
-    <value>In opposition to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
-The difference is, you can't predefine a value for the update - but will always get a user dialog prefilled with the current value to change the content.</value>
-  </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value>This option allows AMC users to update field info for storing your "watched status".
 
