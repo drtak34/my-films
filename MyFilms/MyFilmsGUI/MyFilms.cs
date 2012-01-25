@@ -3850,17 +3850,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(344)); //Actors
       choiceSearch.Add("actors");
-      for (int i = 0; i < 2; i++)
+
+      if (MyFilmsDetail.ExtendedStartmode("User defined search items 1 and 2"))
       {
-        if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
+        for (int i = 0; i < 2; i++)
         {
-          if (MyFilms.conf.StrSearchText[i].Length == 0) 
-            dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
-          else 
-            dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
-          choiceSearch.Add(string.Format("search{0}", i.ToString()));
+          if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
+          {
+            if (MyFilms.conf.StrSearchText[i].Length == 0)
+              dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
+            else
+              dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
+            choiceSearch.Add(string.Format("search{0}", i.ToString()));
+          }
         }
       }
+
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
       {
         dlg.Add(GUILocalizeStrings.Get(1079866)); //Search related movies by persons
@@ -6437,7 +6442,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "nasstatus": //Check and show status of NAS Servers
-
+          #region nasstatus
           //First check status of configured NAS-Servers
           WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
           int intTimeOut = conf.StrWOLtimeout; //Timeout für WOL
@@ -6543,6 +6548,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
           return;
+          #endregion
 
         case "globaloptions":
           LogMyFilms.Debug("Building (sub)menu globaloptions");

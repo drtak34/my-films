@@ -280,14 +280,6 @@
           this.label62 = new System.Windows.Forms.Label();
           this.SortSensInHierarchies = new System.Windows.Forms.ComboBox();
           this.SortInHierarchies = new System.Windows.Forms.ComboBox();
-          this.groupBox_SupplementarySearch = new System.Windows.Forms.GroupBox();
-          this.label43 = new System.Windows.Forms.Label();
-          this.label42 = new System.Windows.Forms.Label();
-          this.lblUserdefinedSearchItems = new System.Windows.Forms.Label();
-          this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
-          this.AntSearchText2 = new System.Windows.Forms.TextBox();
-          this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
-          this.AntSearchText1 = new System.Windows.Forms.TextBox();
           this.groupBox_Separators = new System.Windows.Forms.GroupBox();
           this.label25 = new System.Windows.Forms.Label();
           this.label23 = new System.Windows.Forms.Label();
@@ -467,6 +459,16 @@
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.chkSuppressManual = new System.Windows.Forms.CheckBox();
           this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
+          this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
+          this.label46 = new System.Windows.Forms.Label();
+          this.label45 = new System.Windows.Forms.Label();
+          this.label44 = new System.Windows.Forms.Label();
+          this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
+          this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
+          this.AntUpdItem2 = new System.Windows.Forms.ComboBox();
+          this.AntUpdText2 = new System.Windows.Forms.TextBox();
+          this.AntUpdItem1 = new System.Windows.Forms.ComboBox();
+          this.AntUpdText1 = new System.Windows.Forms.TextBox();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -563,16 +565,13 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
-          this.label46 = new System.Windows.Forms.Label();
-          this.label45 = new System.Windows.Forms.Label();
-          this.label44 = new System.Windows.Forms.Label();
-          this.AntUpdItem1 = new System.Windows.Forms.ComboBox();
-          this.AntUpdText1 = new System.Windows.Forms.TextBox();
-          this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
-          this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
-          this.AntUpdText2 = new System.Windows.Forms.TextBox();
-          this.AntUpdItem2 = new System.Windows.Forms.ComboBox();
+          this.groupBox_SupplementarySearch = new System.Windows.Forms.GroupBox();
+          this.label43 = new System.Windows.Forms.Label();
+          this.label42 = new System.Windows.Forms.Label();
+          this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
+          this.AntSearchText2 = new System.Windows.Forms.TextBox();
+          this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
+          this.AntSearchText1 = new System.Windows.Forms.TextBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -598,7 +597,6 @@
           this.groupBox2.SuspendLayout();
           this.Tab_Search.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.Tab_Views.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
@@ -618,6 +616,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.groupBox_DVDprofiler.SuspendLayout();
           this.groupBox13.SuspendLayout();
+          this.groupBox_AntUpdatingItems.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
@@ -636,7 +635,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
-          this.groupBox_AntUpdatingItems.SuspendLayout();
+          this.groupBox_SupplementarySearch.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2657,7 +2656,6 @@
           // Tab_Search
           // 
           this.Tab_Search.Controls.Add(this.groupBox4);
-          this.Tab_Search.Controls.Add(this.groupBox_SupplementarySearch);
           this.Tab_Search.Controls.Add(this.groupBox_Separators);
           this.Tab_Search.Location = new System.Drawing.Point(4, 22);
           this.Tab_Search.Name = "Tab_Search";
@@ -2721,86 +2719,6 @@
           this.SortInHierarchies.Size = new System.Drawing.Size(121, 21);
           this.SortInHierarchies.Sorted = true;
           this.SortInHierarchies.TabIndex = 0;
-          // 
-          // groupBox_SupplementarySearch
-          // 
-          this.groupBox_SupplementarySearch.Controls.Add(this.label43);
-          this.groupBox_SupplementarySearch.Controls.Add(this.label42);
-          this.groupBox_SupplementarySearch.Controls.Add(this.lblUserdefinedSearchItems);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem2);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText2);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem1);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
-          this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(15, 94);
-          this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
-          this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(350, 125);
-          this.groupBox_SupplementarySearch.TabIndex = 34;
-          this.groupBox_SupplementarySearch.TabStop = false;
-          this.groupBox_SupplementarySearch.Text = "User defined Search Items";
-          this.ToolTip1.SetToolTip(this.groupBox_SupplementarySearch, resources.GetString("groupBox_SupplementarySearch.ToolTip"));
-          // 
-          // label43
-          // 
-          this.label43.AutoSize = true;
-          this.label43.Location = new System.Drawing.Point(164, 22);
-          this.label43.Name = "label43";
-          this.label43.Size = new System.Drawing.Size(125, 13);
-          this.label43.TabIndex = 42;
-          this.label43.Text = "Value to display on menu";
-          // 
-          // label42
-          // 
-          this.label42.AutoSize = true;
-          this.label42.Location = new System.Drawing.Point(8, 22);
-          this.label42.Name = "label42";
-          this.label42.Size = new System.Drawing.Size(92, 13);
-          this.label42.TabIndex = 41;
-          this.label42.Text = "DB Item to search";
-          // 
-          // lblUserdefinedSearchItems
-          // 
-          this.lblUserdefinedSearchItems.AutoSize = true;
-          this.lblUserdefinedSearchItems.Location = new System.Drawing.Point(25, 102);
-          this.lblUserdefinedSearchItems.Name = "lblUserdefinedSearchItems";
-          this.lblUserdefinedSearchItems.Size = new System.Drawing.Size(293, 13);
-          this.lblUserdefinedSearchItems.TabIndex = 40;
-          this.lblUserdefinedSearchItems.Text = "Those Items will show up as separate choice in search menu";
-          // 
-          // AntSearchItem2
-          // 
-          this.AntSearchItem2.FormattingEnabled = true;
-          this.AntSearchItem2.Location = new System.Drawing.Point(10, 67);
-          this.AntSearchItem2.Name = "AntSearchItem2";
-          this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
-          this.AntSearchItem2.Sorted = true;
-          this.AntSearchItem2.TabIndex = 38;
-          this.ToolTip1.SetToolTip(this.AntSearchItem2, "Choose a DB item for search");
-          // 
-          // AntSearchText2
-          // 
-          this.AntSearchText2.Location = new System.Drawing.Point(164, 68);
-          this.AntSearchText2.Name = "AntSearchText2";
-          this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
-          this.AntSearchText2.TabIndex = 39;
-          this.ToolTip1.SetToolTip(this.AntSearchText2, "Label to be displayed in search menu");
-          // 
-          // AntSearchItem1
-          // 
-          this.AntSearchItem1.FormattingEnabled = true;
-          this.AntSearchItem1.Location = new System.Drawing.Point(10, 40);
-          this.AntSearchItem1.Name = "AntSearchItem1";
-          this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
-          this.AntSearchItem1.Sorted = true;
-          this.AntSearchItem1.TabIndex = 36;
-          this.ToolTip1.SetToolTip(this.AntSearchItem1, "Choose a DB item for Search");
-          // 
-          // AntSearchText1
-          // 
-          this.AntSearchText1.Location = new System.Drawing.Point(164, 41);
-          this.AntSearchText1.Name = "AntSearchText1";
-          this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
-          this.AntSearchText1.TabIndex = 37;
-          this.ToolTip1.SetToolTip(this.AntSearchText1, "Label to be displayed in search menu");
           // 
           // groupBox_Separators
           // 
@@ -4823,6 +4741,99 @@
           this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
           this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
           // 
+          // groupBox_AntUpdatingItems
+          // 
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label46);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label45);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label44);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem2);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText2);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
+          this.groupBox_AntUpdatingItems.Enabled = false;
+          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(507, 6);
+          this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
+          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(234, 86);
+          this.groupBox_AntUpdatingItems.TabIndex = 121;
+          this.groupBox_AntUpdatingItems.TabStop = false;
+          this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
+          this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
+          // 
+          // label46
+          // 
+          this.label46.AutoSize = true;
+          this.label46.Location = new System.Drawing.Point(150, 16);
+          this.label46.Name = "label46";
+          this.label46.Size = new System.Drawing.Size(72, 13);
+          this.label46.TabIndex = 80;
+          this.label46.Text = "Update Value";
+          // 
+          // label45
+          // 
+          this.label45.AutoSize = true;
+          this.label45.Location = new System.Drawing.Point(105, 15);
+          this.label45.Name = "label45";
+          this.label45.Size = new System.Drawing.Size(33, 13);
+          this.label45.TabIndex = 79;
+          this.label45.Text = "Label";
+          // 
+          // label44
+          // 
+          this.label44.AutoSize = true;
+          this.label44.Location = new System.Drawing.Point(9, 15);
+          this.label44.Name = "label44";
+          this.label44.Size = new System.Drawing.Size(93, 13);
+          this.label44.TabIndex = 78;
+          this.label44.Text = "DB Item to update";
+          // 
+          // AntUpdDflT2
+          // 
+          this.AntUpdDflT2.Location = new System.Drawing.Point(153, 58);
+          this.AntUpdDflT2.Name = "AntUpdDflT2";
+          this.AntUpdDflT2.Size = new System.Drawing.Size(69, 20);
+          this.AntUpdDflT2.TabIndex = 35;
+          // 
+          // AntUpdDflT1
+          // 
+          this.AntUpdDflT1.Location = new System.Drawing.Point(153, 33);
+          this.AntUpdDflT1.Name = "AntUpdDflT1";
+          this.AntUpdDflT1.Size = new System.Drawing.Size(69, 20);
+          this.AntUpdDflT1.TabIndex = 32;
+          // 
+          // AntUpdItem2
+          // 
+          this.AntUpdItem2.FormattingEnabled = true;
+          this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
+          this.AntUpdItem2.Name = "AntUpdItem2";
+          this.AntUpdItem2.Size = new System.Drawing.Size(92, 21);
+          this.AntUpdItem2.Sorted = true;
+          this.AntUpdItem2.TabIndex = 33;
+          // 
+          // AntUpdText2
+          // 
+          this.AntUpdText2.Location = new System.Drawing.Point(108, 58);
+          this.AntUpdText2.Name = "AntUpdText2";
+          this.AntUpdText2.Size = new System.Drawing.Size(39, 20);
+          this.AntUpdText2.TabIndex = 34;
+          // 
+          // AntUpdItem1
+          // 
+          this.AntUpdItem1.FormattingEnabled = true;
+          this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
+          this.AntUpdItem1.Name = "AntUpdItem1";
+          this.AntUpdItem1.Size = new System.Drawing.Size(92, 21);
+          this.AntUpdItem1.Sorted = true;
+          this.AntUpdItem1.TabIndex = 30;
+          // 
+          // AntUpdText1
+          // 
+          this.AntUpdText1.Location = new System.Drawing.Point(108, 33);
+          this.AntUpdText1.Name = "AntUpdText1";
+          this.AntUpdText1.Size = new System.Drawing.Size(39, 20);
+          this.AntUpdText1.TabIndex = 31;
+          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -5302,6 +5313,7 @@
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
+          this.Tab_Other.Controls.Add(this.groupBox_SupplementarySearch);
           this.Tab_Other.Controls.Add(this.dgViews);
           this.Tab_Other.Controls.Add(this.groupBox_AntUpdatingItems);
           this.Tab_Other.Controls.Add(this.button_GrabberScriptUpdate);
@@ -5351,7 +5363,7 @@
           this.dgViews.Name = "dgViews";
           this.dgViews.RowHeadersVisible = false;
           this.dgViews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-          this.dgViews.Size = new System.Drawing.Size(303, 163);
+          this.dgViews.Size = new System.Drawing.Size(307, 107);
           this.dgViews.TabIndex = 122;
           // 
           // Label
@@ -5418,7 +5430,7 @@
           // 
           // button_GrabberScriptUpdate
           // 
-          this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(607, 140);
+          this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(200, 166);
           this.button_GrabberScriptUpdate.Name = "button_GrabberScriptUpdate";
           this.button_GrabberScriptUpdate.Size = new System.Drawing.Size(134, 27);
           this.button_GrabberScriptUpdate.TabIndex = 120;
@@ -5692,7 +5704,7 @@
           // 
           // btnGrabberInterface
           // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(607, 173);
+          this.btnGrabberInterface.Location = new System.Drawing.Point(351, 166);
           this.btnGrabberInterface.Name = "btnGrabberInterface";
           this.btnGrabberInterface.Size = new System.Drawing.Size(134, 27);
           this.btnGrabberInterface.TabIndex = 91;
@@ -5743,98 +5755,75 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
-          // groupBox_AntUpdatingItems
+          // groupBox_SupplementarySearch
           // 
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label46);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label45);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label44);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem2);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText2);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
-          this.groupBox_AntUpdatingItems.Enabled = false;
-          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(507, 6);
-          this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
-          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(234, 86);
-          this.groupBox_AntUpdatingItems.TabIndex = 121;
-          this.groupBox_AntUpdatingItems.TabStop = false;
-          this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
-          this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
+          this.groupBox_SupplementarySearch.Controls.Add(this.label43);
+          this.groupBox_SupplementarySearch.Controls.Add(this.label42);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem2);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText2);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem1);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
+          this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(507, 98);
+          this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
+          this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(234, 89);
+          this.groupBox_SupplementarySearch.TabIndex = 123;
+          this.groupBox_SupplementarySearch.TabStop = false;
+          this.groupBox_SupplementarySearch.Text = "User defined Search Items";
+          this.ToolTip1.SetToolTip(this.groupBox_SupplementarySearch, resources.GetString("groupBox_SupplementarySearch.ToolTip"));
           // 
-          // label46
+          // label43
           // 
-          this.label46.AutoSize = true;
-          this.label46.Location = new System.Drawing.Point(150, 16);
-          this.label46.Name = "label46";
-          this.label46.Size = new System.Drawing.Size(72, 13);
-          this.label46.TabIndex = 80;
-          this.label46.Text = "Update Value";
+          this.label43.AutoSize = true;
+          this.label43.Location = new System.Drawing.Point(104, 17);
+          this.label43.Name = "label43";
+          this.label43.Size = new System.Drawing.Size(125, 13);
+          this.label43.TabIndex = 42;
+          this.label43.Text = "Value to display on menu";
           // 
-          // label45
+          // label42
           // 
-          this.label45.AutoSize = true;
-          this.label45.Location = new System.Drawing.Point(105, 15);
-          this.label45.Name = "label45";
-          this.label45.Size = new System.Drawing.Size(33, 13);
-          this.label45.TabIndex = 79;
-          this.label45.Text = "Label";
+          this.label42.AutoSize = true;
+          this.label42.Location = new System.Drawing.Point(6, 17);
+          this.label42.Name = "label42";
+          this.label42.Size = new System.Drawing.Size(92, 13);
+          this.label42.TabIndex = 41;
+          this.label42.Text = "DB Item to search";
           // 
-          // label44
+          // AntSearchItem2
           // 
-          this.label44.AutoSize = true;
-          this.label44.Location = new System.Drawing.Point(9, 15);
-          this.label44.Name = "label44";
-          this.label44.Size = new System.Drawing.Size(93, 13);
-          this.label44.TabIndex = 78;
-          this.label44.Text = "DB Item to update";
+          this.AntSearchItem2.FormattingEnabled = true;
+          this.AntSearchItem2.Location = new System.Drawing.Point(8, 62);
+          this.AntSearchItem2.Name = "AntSearchItem2";
+          this.AntSearchItem2.Size = new System.Drawing.Size(90, 21);
+          this.AntSearchItem2.Sorted = true;
+          this.AntSearchItem2.TabIndex = 38;
+          this.ToolTip1.SetToolTip(this.AntSearchItem2, "Choose a DB item for search");
           // 
-          // AntUpdItem1
+          // AntSearchText2
           // 
-          this.AntUpdItem1.FormattingEnabled = true;
-          this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
-          this.AntUpdItem1.Name = "AntUpdItem1";
-          this.AntUpdItem1.Size = new System.Drawing.Size(92, 21);
-          this.AntUpdItem1.Sorted = true;
-          this.AntUpdItem1.TabIndex = 30;
+          this.AntSearchText2.Location = new System.Drawing.Point(104, 63);
+          this.AntSearchText2.Name = "AntSearchText2";
+          this.AntSearchText2.Size = new System.Drawing.Size(118, 20);
+          this.AntSearchText2.TabIndex = 39;
+          this.ToolTip1.SetToolTip(this.AntSearchText2, "Label to be displayed in search menu");
           // 
-          // AntUpdText1
+          // AntSearchItem1
           // 
-          this.AntUpdText1.Location = new System.Drawing.Point(108, 33);
-          this.AntUpdText1.Name = "AntUpdText1";
-          this.AntUpdText1.Size = new System.Drawing.Size(39, 20);
-          this.AntUpdText1.TabIndex = 31;
+          this.AntSearchItem1.FormattingEnabled = true;
+          this.AntSearchItem1.Location = new System.Drawing.Point(8, 35);
+          this.AntSearchItem1.Name = "AntSearchItem1";
+          this.AntSearchItem1.Size = new System.Drawing.Size(90, 21);
+          this.AntSearchItem1.Sorted = true;
+          this.AntSearchItem1.TabIndex = 36;
+          this.ToolTip1.SetToolTip(this.AntSearchItem1, "Choose a DB item for Search");
           // 
-          // AntUpdDflT1
+          // AntSearchText1
           // 
-          this.AntUpdDflT1.Location = new System.Drawing.Point(153, 33);
-          this.AntUpdDflT1.Name = "AntUpdDflT1";
-          this.AntUpdDflT1.Size = new System.Drawing.Size(69, 20);
-          this.AntUpdDflT1.TabIndex = 32;
-          // 
-          // AntUpdDflT2
-          // 
-          this.AntUpdDflT2.Location = new System.Drawing.Point(153, 58);
-          this.AntUpdDflT2.Name = "AntUpdDflT2";
-          this.AntUpdDflT2.Size = new System.Drawing.Size(69, 20);
-          this.AntUpdDflT2.TabIndex = 35;
-          // 
-          // AntUpdText2
-          // 
-          this.AntUpdText2.Location = new System.Drawing.Point(108, 58);
-          this.AntUpdText2.Name = "AntUpdText2";
-          this.AntUpdText2.Size = new System.Drawing.Size(39, 20);
-          this.AntUpdText2.TabIndex = 34;
-          // 
-          // AntUpdItem2
-          // 
-          this.AntUpdItem2.FormattingEnabled = true;
-          this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
-          this.AntUpdItem2.Name = "AntUpdItem2";
-          this.AntUpdItem2.Size = new System.Drawing.Size(92, 21);
-          this.AntUpdItem2.Sorted = true;
-          this.AntUpdItem2.TabIndex = 33;
+          this.AntSearchText1.Location = new System.Drawing.Point(104, 36);
+          this.AntSearchText1.Name = "AntSearchText1";
+          this.AntSearchText1.Size = new System.Drawing.Size(118, 20);
+          this.AntSearchText1.TabIndex = 37;
+          this.ToolTip1.SetToolTip(this.AntSearchText1, "Label to be displayed in search menu");
           // 
           // MyFilmsSetup
           // 
@@ -5905,8 +5894,6 @@
           this.Tab_Search.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          this.groupBox_SupplementarySearch.ResumeLayout(false);
-          this.groupBox_SupplementarySearch.PerformLayout();
           this.groupBox_Separators.ResumeLayout(false);
           this.groupBox_Separators.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
@@ -5940,6 +5927,8 @@
           this.groupBox_DVDprofiler.ResumeLayout(false);
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
+          this.groupBox_AntUpdatingItems.ResumeLayout(false);
+          this.groupBox_AntUpdatingItems.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -5962,8 +5951,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
-          this.groupBox_AntUpdatingItems.ResumeLayout(false);
-          this.groupBox_AntUpdatingItems.PerformLayout();
+          this.groupBox_SupplementarySearch.ResumeLayout(false);
+          this.groupBox_SupplementarySearch.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6139,12 +6128,6 @@
         private Label lblUpdateValue;
         private ComboBox cbfdupdate;
         private TabPage Tab_Search;
-        private GroupBox groupBox_SupplementarySearch;
-        private Label lblUserdefinedSearchItems;
-        private ComboBox AntSearchItem2;
-        private TextBox AntSearchText2;
-        private ComboBox AntSearchItem1;
-        private TextBox AntSearchText1;
         private GroupBox groupBox_Separators;
         private Label label25;
         private Label label23;
@@ -6268,8 +6251,6 @@
         private Label label41;
         private Label label31;
         private Label label26;
-        private Label label43;
-        private Label label42;
         private TextBox DefaultFanartImage;
         private TextBox DefaultCoverViews;
         private Button ButDefFanart;
@@ -6443,5 +6424,12 @@
         private TextBox AntUpdText2;
         private ComboBox AntUpdItem1;
         private TextBox AntUpdText1;
+        private GroupBox groupBox_SupplementarySearch;
+        private Label label43;
+        private Label label42;
+        private ComboBox AntSearchItem2;
+        private TextBox AntSearchText2;
+        private ComboBox AntSearchItem1;
+        private TextBox AntSearchText1;
     }
 }
