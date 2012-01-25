@@ -980,12 +980,6 @@ and enter a pre-defined value to update the field.
 
 A possible use case could be ""Language" "french" to have a oneclick solution to set a movie to this setting without using virtual keyboard.</value>
   </data>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>269, 17</value>
-  </metadata>
-  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>111, 17</value>
-  </metadata>
   <data name="groupBox_SupplementarySearch.ToolTip" xml:space="preserve">
     <value>The following searches are implemented as fixed search options:
 	by films
@@ -995,6 +989,12 @@ You can add additional searches by selecting the database field and adding a val
 Those searches will be shown as separate entries in the search menu. 
 They obey the filter settings, so will be based on views you have defined.</value>
   </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>269, 17</value>
+  </metadata>
+  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>111, 17</value>
+  </metadata>
   <metadata name="Label.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

@@ -4088,7 +4088,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       // if (string.Compare(fieldname, "Year", true) == 0) return true;
       if (string.Compare(fieldname, "Length", true) == 0) return true;
-      if (string.Compare(fieldname, "AgeAdded", true) == 0) return true;
       if (string.Compare(fieldname, "Size", true) == 0) return true;
       if (string.Compare(fieldname, "Disks", true) == 0) return true;
       if (string.Compare(fieldname, "AudioChannelCount", true) == 0) return true;
@@ -4108,6 +4107,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool IsDecimalField(string fieldname)
     {
+      if (string.Compare(fieldname, "AgeAdded", true) == 0) return true;
       if (string.Compare(fieldname, "Rating", true) == 0) return true;
       if (string.Compare(fieldname, "RatingUser", true) == 0) return true;
       return false;
