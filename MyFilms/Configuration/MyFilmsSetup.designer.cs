@@ -262,12 +262,6 @@
           this.txtfdupdate = new System.Windows.Forms.TextBox();
           this.lblUpdateValue = new System.Windows.Forms.Label();
           this.cbfdupdate = new System.Windows.Forms.ComboBox();
-          this.groupBoxUpdateByProperties = new System.Windows.Forms.GroupBox();
-          this.AntUpdFieldReset = new System.Windows.Forms.Button();
-          this.AntUpdFieldClear = new System.Windows.Forms.Button();
-          this.label33 = new System.Windows.Forms.Label();
-          this.AntUpdField = new System.Windows.Forms.ComboBox();
-          this.AntUpdList = new System.Windows.Forms.TextBox();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.btnWatchedImport = new System.Windows.Forms.Button();
           this.btnWatchedExport = new System.Windows.Forms.Button();
@@ -601,7 +595,6 @@
           this.groupBoxDeletionOptions.SuspendLayout();
           this.gpsuppress.SuspendLayout();
           this.gpspfield.SuspendLayout();
-          this.groupBoxUpdateByProperties.SuspendLayout();
           this.groupBox2.SuspendLayout();
           this.Tab_Search.SuspendLayout();
           this.groupBox4.SuspendLayout();
@@ -2525,73 +2518,6 @@
           this.cbfdupdate.Sorted = true;
           this.cbfdupdate.TabIndex = 15;
           this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
-          // 
-          // groupBoxUpdateByProperties
-          // 
-          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdFieldReset);
-          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdFieldClear);
-          this.groupBoxUpdateByProperties.Controls.Add(this.label33);
-          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdField);
-          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdList);
-          this.groupBoxUpdateByProperties.Location = new System.Drawing.Point(17, 265);
-          this.groupBoxUpdateByProperties.Name = "groupBoxUpdateByProperties";
-          this.groupBoxUpdateByProperties.Size = new System.Drawing.Size(711, 83);
-          this.groupBoxUpdateByProperties.TabIndex = 34;
-          this.groupBoxUpdateByProperties.TabStop = false;
-          this.groupBoxUpdateByProperties.Text = "Update by Properties";
-          this.ToolTip1.SetToolTip(this.groupBoxUpdateByProperties, resources.GetString("groupBoxUpdateByProperties.ToolTip"));
-          // 
-          // AntUpdFieldReset
-          // 
-          this.AntUpdFieldReset.Location = new System.Drawing.Point(582, 17);
-          this.AntUpdFieldReset.Name = "AntUpdFieldReset";
-          this.AntUpdFieldReset.Size = new System.Drawing.Size(108, 22);
-          this.AntUpdFieldReset.TabIndex = 86;
-          this.AntUpdFieldReset.Text = "Reset to Default";
-          this.ToolTip1.SetToolTip(this.AntUpdFieldReset, "This will reset the update llist to the MyFilms default values.");
-          this.AntUpdFieldReset.UseVisualStyleBackColor = true;
-          this.AntUpdFieldReset.Click += new System.EventHandler(this.AntUpdFieldReset_Click_1);
-          // 
-          // AntUpdFieldClear
-          // 
-          this.AntUpdFieldClear.Location = new System.Drawing.Point(488, 18);
-          this.AntUpdFieldClear.Name = "AntUpdFieldClear";
-          this.AntUpdFieldClear.Size = new System.Drawing.Size(64, 21);
-          this.AntUpdFieldClear.TabIndex = 84;
-          this.AntUpdFieldClear.Text = "Clear";
-          this.ToolTip1.SetToolTip(this.AntUpdFieldClear, "This will clear the items from the update list.");
-          this.AntUpdFieldClear.UseVisualStyleBackColor = true;
-          this.AntUpdFieldClear.Click += new System.EventHandler(this.AntUpdFieldReset_Click);
-          // 
-          // label33
-          // 
-          this.label33.AutoSize = true;
-          this.label33.Location = new System.Drawing.Point(12, 21);
-          this.label33.Name = "label33";
-          this.label33.Size = new System.Drawing.Size(153, 13);
-          this.label33.TabIndex = 83;
-          this.label33.Text = "Update by Properties Selection";
-          // 
-          // AntUpdField
-          // 
-          this.AntUpdField.FormattingEnabled = true;
-          this.AntUpdField.Location = new System.Drawing.Point(197, 18);
-          this.AntUpdField.Name = "AntUpdField";
-          this.AntUpdField.Size = new System.Drawing.Size(151, 21);
-          this.AntUpdField.Sorted = true;
-          this.AntUpdField.TabIndex = 81;
-          this.ToolTip1.SetToolTip(this.AntUpdField, "Choose a DB item to add to the property update list.");
-          this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
-          // 
-          // AntUpdList
-          // 
-          this.AntUpdList.BackColor = System.Drawing.SystemColors.Control;
-          this.AntUpdList.Location = new System.Drawing.Point(15, 51);
-          this.AntUpdList.Name = "AntUpdList";
-          this.AntUpdList.Size = new System.Drawing.Size(675, 20);
-          this.AntUpdList.TabIndex = 82;
-          this.ToolTip1.SetToolTip(this.AntUpdList, "This field cannot be edited directly, but shows you the chosen DB items for updat" +
-                  "es.\r\n");
           // 
           // groupBox2
           // 
@@ -4592,7 +4518,6 @@
           this.AntTitle1.Size = new System.Drawing.Size(178, 21);
           this.AntTitle1.TabIndex = 10;
           this.ToolTip1.SetToolTip(this.AntTitle1, resources.GetString("AntTitle1.ToolTip"));
-          this.AntTitle1.SelectedIndexChanged += new System.EventHandler(this.AntTitle1_SelectedIndexChanged);
           // 
           // ButCat
           // 
@@ -5343,7 +5268,6 @@
           // 
           this.Tab_Update.Controls.Add(this.chkSuppressManual);
           this.Tab_Update.Controls.Add(this.groupBox2);
-          this.Tab_Update.Controls.Add(this.groupBoxUpdateByProperties);
           this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
           this.Tab_Update.Location = new System.Drawing.Point(4, 22);
           this.Tab_Update.Name = "Tab_Update";
@@ -5976,8 +5900,6 @@
           this.gpsuppress.PerformLayout();
           this.gpspfield.ResumeLayout(false);
           this.gpspfield.PerformLayout();
-          this.groupBoxUpdateByProperties.ResumeLayout(false);
-          this.groupBoxUpdateByProperties.PerformLayout();
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
           this.Tab_Search.ResumeLayout(false);
@@ -6204,12 +6126,6 @@
         private ComboBox cbWatched;
         private CheckBox chkEnhancedWatchedStatusHandling;
         private CheckBox CheckWatched;
-        private GroupBox groupBoxUpdateByProperties;
-        private Button AntUpdFieldReset;
-        private Button AntUpdFieldClear;
-        private Label label33;
-        private ComboBox AntUpdField;
-        private TextBox AntUpdList;
         private GroupBox groupBoxDeletionOptions;
         private CheckBox chkSuppress;
         private GroupBox gpsuppress;
