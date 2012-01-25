@@ -3912,7 +3912,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Size, 
                         System.DateTime DateAdded, 
                         string RecentlyAdded, 
-                        string AgeAdded, 
+                        int AgeAdded, 
                         string Disks, 
                         string Picture, 
                         ContentsRow parentContentsRowByContents_Movie, 
@@ -4160,7 +4160,7 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnDateAdded);
                 this.columnRecentlyAdded = new global::System.Data.DataColumn("RecentlyAdded", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRecentlyAdded);
-                this.columnAgeAdded = new global::System.Data.DataColumn("AgeAdded", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnAgeAdded = new global::System.Data.DataColumn("AgeAdded", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAgeAdded);
                 this.columnDisks = new global::System.Data.DataColumn("Disks", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnDisks);
@@ -4246,6 +4246,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnLanguages.Namespace = "";
                 this.columnSubtitles.Namespace = "";
                 this.columnSize.Namespace = "";
+                this.columnAgeAdded.DefaultValue = ((int)(9999));
                 this.columnDisks.Namespace = "";
                 this.columnPicture.Namespace = "";
                 this.columnMovie_Id.AutoIncrement = true;
@@ -7302,10 +7303,10 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string AgeAdded {
+            public int AgeAdded {
                 get {
                     try {
-                        return ((string)(this[this.tableMovie.AgeAddedColumn]));
+                        return ((int)(this[this.tableMovie.AgeAddedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("Der Wert für Spalte AgeAdded in Tabelle Movie ist DBNull.", e);

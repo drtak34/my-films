@@ -231,7 +231,7 @@ namespace MyFilmsPlugin.MyFilms
                 Size = movieRow.Field<string>("Size"),
                 // DateAdded = movieRow.Field<DateTime>("DateAdded"),
                 RecentlyAdded = movieRow.Field<string>("RecentlyAdded"),
-                AgeAdded = movieRow.Field<string>("AgeAdded"),
+                AgeAdded = movieRow.Field<int>("AgeAdded"),
                 Disks = movieRow.Field<string>("Disks"),
                 Picture = movieRow.Field<string>("Picture"),
                 Persons = movieRow.Field<string>("Persons"),
@@ -765,12 +765,14 @@ namespace MyFilmsPlugin.MyFilms
             movieRow.BeginEdit();
             // Convert(Date,'System.DateTime')
             DateTime added;
-            CultureInfo ci = CultureInfo.CurrentCulture;
-            if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ???
+            int iAge = 9999; // set default to 9999 for those, where we do not have date(added) in DB ...
+            // CultureInfo ci = CultureInfo.CurrentCulture;
+            if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
+            {
               movieRow.DateAdded = added;
-            // else movieRow.DateAdded = DateTime.MinValue;
-            int iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
-            movieRow.AgeAdded = iAge.ToString(CultureInfo.InvariantCulture);
+              iAge = (int)now.Subtract(added).TotalDays; // iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
+            }
+            movieRow.AgeAdded = iAge; // sets integer value
             movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
             string index = movieRow[MyFilms.conf.StrTitle1].ToString();
             movieRow.IndexedTitle = (index.Length > 0) ?  index.Substring(0, 1).ToUpper() : "";
