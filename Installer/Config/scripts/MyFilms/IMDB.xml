@@ -155,8 +155,8 @@
       <KeyEndDetails2 />
       <KeyDetails2Index />
       <KeyDetails2Page />
-      <KeyStartStudio Param1="" Param2="" />
-      <KeyEndStudio />
+      <KeyStartStudio Param1="" Param2="">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Production_x0020_Co_x005B_s_x005D__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartStudio>
+      <KeyEndStudio>_x0023_REGEX_x0023__x0022__x003E__x003C_a_x0020_href_x003D__x0022_companycredits_x0022__x003E__x007C__x003C_span</KeyEndStudio>
       <KeyStudioIndex />
       <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
@@ -167,8 +167,8 @@
       <KeyEndIMDB_Rank />
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
-      <KeyStartIMDB_Id Param1="" Param2="" />
-      <KeyEndIMDB_Id />
+      <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.com_x002F_title_x002F_</KeyStartIMDB_Id>
+      <KeyEndIMDB_Id>_x002F__x0022_</KeyEndIMDB_Id>
       <KeyIMDB_IdIndex />
       <KeyIMDB_IdPage />
       <KeyStartTMDB_Id Param1="" Param2="" />
