@@ -1902,6 +1902,8 @@ Public Class AntRecord
     Private Function IsUpdateRequested(ByVal currentAttribute As String, ByVal ProcessMode As Process_Mode_Names) As Boolean
         Dim attr As Xml.XmlAttribute
         Dim element As Xml.XmlElement
+        Dim customfieldselement As Xml.XmlElement
+        Dim customfieldsattr As Xml.XmlAttribute
         Dim IsUpdateRequired As Boolean = False
 
         If currentAttribute = _SourceField And ProcessMode = Process_Mode_Names.Import Then ' always activate Sourcefield, if in import mode - even if it is unchecked in DB area. (possible conflict when not using "Source" ...
@@ -1914,7 +1916,8 @@ Public Class AntRecord
             If OnlyAddMissingData = True And ProcessMode = Process_Mode_Names.Update Then
                 attr = _XMLElement.Attributes(currentAttribute)
                 element = _XMLElement.Item(currentAttribute)
-                If attr Is Nothing And element Is Nothing Then ' no values exist at all
+                customfieldselement = _XMLElement.Item("CustomFields")
+                If attr Is Nothing And element Is Nothing And customfieldselement Is Nothing Then ' no values exist at all
                     Return True
                 Else
                     If Not attr Is Nothing Then ' check for standard attr value
@@ -1925,7 +1928,20 @@ Public Class AntRecord
                         Else
                             Return False
                         End If
-                    ElseIf Not element Is Nothing Then  ' check for enhanced element value
+                    ElseIf Not customfieldselement Is Nothing Then  ' check for new AMC4 enhanced element value (Customfields)
+                        customfieldsattr = customfieldselement.Attributes(currentAttribute)
+                        If Not customfieldsattr Is Nothing Then ' check for  attr value inf customfields element
+                            If customfieldsattr.Value Is Nothing Then
+                                Return True
+                            ElseIf customfieldsattr.Value = "" Then
+                                Return True
+                            Else
+                                Return False
+                            End If
+                        Else
+                            Return True
+                        End If
+                    ElseIf Not element Is Nothing Then  ' check for old MyFilms enhanced element value
                         If element.InnerText Is Nothing Then
                             Return True
                         ElseIf element.InnerText = "" Then
