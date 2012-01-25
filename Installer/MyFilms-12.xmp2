@@ -804,13 +804,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\5dot1.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{22b3d394-b28e-4be0-bac5-eff2d461a56d}-5dot1.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\5dot1.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Thumbs\MyFilms\DefaultLogos\720p.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{93c020ea-8176-4762-b1e0-3508586d89f3}-720p.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\720p.png</DestinationFilename>
@@ -2032,6 +2025,34 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Thumbs\MyFilms\DefaultLogos.B3\xvid.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{af451ef1-a682-4c3d-aef6-3798ee8bc020}-xvid.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3\xvid.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\6.1.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b07a92db-9337-40cf-9bf7-04f39a0f2ab4}-6.1.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\6.1.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\7.1.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8932ec53-78f4-415c-832a-6772a1188232}-7.1.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\7.1.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\mono.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e7713793-1dc5-411c-bef9-233865704bc1}-mono.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\mono.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{834b6850-1da7-467f-8705-48739485bb66}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3599,10 +3620,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3619,7 +3640,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1873</Revision>
+      <Revision>1904</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3631,7 +3652,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-01-17T04:22:26.7298021+01:00</ReleaseDate>
+    <ReleaseDate>2012-01-25T04:41:03.0270715+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -4438,13 +4459,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\5.1.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{449aeb6d-bb0d-42fe-9ea6-20cc3c60b161}-5.1.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\5.1.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\5dot1.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{22b3d394-b28e-4be0-bac5-eff2d461a56d}-5dot1.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\5dot1.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -5670,6 +5684,34 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos.B3\xvid.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{af451ef1-a682-4c3d-aef6-3798ee8bc020}-xvid.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3\xvid.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\6.1.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b07a92db-9337-40cf-9bf7-04f39a0f2ab4}-6.1.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\6.1.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\7.1.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8932ec53-78f4-415c-832a-6772a1188232}-7.1.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\7.1.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\mono.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e7713793-1dc5-411c-bef9-233865704bc1}-mono.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\mono.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{834b6850-1da7-467f-8705-48739485bb66}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
