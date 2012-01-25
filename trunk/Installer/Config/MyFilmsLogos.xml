@@ -28,6 +28,11 @@
     <entry name="ID2001_18">AudioBitrate;contains;375;or;AudioBitrate;contains;438;5.1.png</entry>
     <entry name="ID2001_19">AudioBitrate;contains;188;or;AudioBitrate;contains;156;stereo.png</entry>
     <entry name="ID2001_20">Subtitles;filled;;;;;;Subtitles.png</entry>
+    <entry name="ID2001_21">AudioChannelCount;contains;1;;;;;mono.png</entry>
+    <entry name="ID2001_22">AudioChannelCount;contains;2;;;;;stereo.png</entry>
+    <entry name="ID2001_23">AudioChannelCount;contains;6;;;;;5.1.png</entry>
+    <entry name="ID2001_24">AudioChannelCount;contains;7;;;;;6.1.png</entry>
+    <entry name="ID2001_25">AudioChannelCount;contains;8;;;;;7.1.png</entry>
   </section>
   <section name="ID2002">
     <entry name="ID2002_0">Category;contains;action;;;;;Action.png</entry>
