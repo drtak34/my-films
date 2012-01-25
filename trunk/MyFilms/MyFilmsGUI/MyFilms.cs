@@ -1913,8 +1913,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           switch (displayoption)
           {
             case "sort":
-              if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" &&
-                  dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
+              if (//dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && 
+                  dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
                   dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
                   dc.ColumnName != "RecentlyAdded")
                 ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
