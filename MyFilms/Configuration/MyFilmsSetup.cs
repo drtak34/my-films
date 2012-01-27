@@ -67,6 +67,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private string MyFilms_PluginMode = String.Empty; // "normal" for standard operations, "test" for extended functionalities, to be set manually in MyFilms.XML
         private string StrDfltSelect = string.Empty;
         private AntMovieCatalog mydivx = new AntMovieCatalog();
+        private MFview views = new MFview();
         private Crypto crypto = new Crypto();
         public int selected_Logo_Item;
         public bool load = true;
@@ -182,6 +183,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntItem5.Items.Add("(none)");
             CmdPar.Items.Add("(none)");
             CatalogType.SelectedIndex = 0;
+
+            //dBfieldComboBox.Items.Add("(none)");
 
             //for (int i = 1; i < 6; i++) dgViews.Rows.Add();
 
@@ -1236,6 +1239,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           customFieldBindingSource.ResumeBinding();
           personBindingSource.DataSource = mydivx.Person;
           personBindingSource.ResumeBinding();
+
+          // views
+          viewBindingSource.DataSource = views;
+          viewBindingSource.ResumeBinding();
         }
 
         
@@ -1311,6 +1318,22 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewIndex5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex5", "0");
             AntViewSortOrder5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", " ASC");
             AntViewFilter5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", "");
+
+            views.View.Clear();
+            for (int i = 1; i < 6; i++)
+            {
+              MFview mfv = new MFview();
+              MFview.ViewRow viewdefinition = mfv.View.NewViewRow();
+              viewdefinition.DBfield = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", i), string.Empty);
+              viewdefinition.Label = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", i), string.Empty);
+              viewdefinition.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", i), string.Empty);
+              viewdefinition.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", i), 0);
+              viewdefinition.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortOrder{0}", i), " ASC");
+              if (viewdefinition.SortDirectionView.StartsWith("ASC")) viewdefinition.SortDirectionView = " ASC";
+              if (viewdefinition.SortDirectionView.StartsWith("DESC")) viewdefinition.SortDirectionView = " DESC";
+              viewdefinition.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", i), string.Empty);
+              views.View.AddViewRow(viewdefinition);
+            }
 
             AntSearchItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", "");
             AntSearchText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchText1", "");
@@ -5884,6 +5907,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           filterEditor.ShowDialog(this);
           if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter5.Text = filterEditor.ConfigString;
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void viewBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
