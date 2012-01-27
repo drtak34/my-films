@@ -1869,10 +1869,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             case (int)Controls.CTRL_BtnSearch: // Search dialog search
               conf.Boolselect = false;
               Change_Search_Options();
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
               break;
             case (int)Controls.CTRL_BtnSortBy:
               Change_Sort_Option_Menu();
-              return true;
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
               break;
             case (int)Controls.CTRL_BtnViewAs:
               Change_View_Menu();
@@ -2462,21 +2463,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "FormattedTitle":
                 item.Label2 = sr["Year"].ToString();
                 break;
-              case "YEAR":
+              case "Year":
                 item.Label2 = sr["Year"].ToString();
                 break;
+              case "Date":
               case "DateAdded":
-                try {item.Label2 = sr["Date"].ToString();}
+                try { item.Label2 = sr["Date"].ToString(); }
                 catch {}
                 break;
-              case "RATING":
+              case "Rating":
                 item.Label2 = sr["Rating"].ToString();
                 break;
               default:
                 if (sortItem == conf.StrSTitle)
                   item.Label2 = sr["Year"].ToString();
                 else
-                  item.Label2 = sr[sortItem].ToString();
+                {
+                  string label2 = sr[sortItem].ToString(); // string label2 = sr[conf.WStrSort].ToString();
+                  if (IsSplittableField(sortItem))
+                  {
+                    string wzone = string.Empty;
+                    ArrayList wtab = Search_String(label2, false);
+                    if (wtab.Count > 0) label2  = wtab[0].ToString();
+                    if (wtab.Count > 1) label2 += " ...";
+                  }
+                  if (label2.Length > 34) label2 = label2.Substring(0, 30) + " ...";
+                  item.Label2 = label2;
+                }
                 break;
             }
           }
