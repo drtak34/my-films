@@ -123,10 +123,10 @@ namespace MyFilmsPlugin.Configuration
       else
         if (StrDfltSelect.Length > 0)
           StrDfltSelect = StrDfltSelect + " AND ";
-      if (AntFilterSign2.Text == "#")
-        wAntFilterSign = "<>";
-      else
-        wAntFilterSign = AntFilterSign2.Text;
+
+      if (AntFilterSign2.Text == "#") wAntFilterSign = "<>";
+      else wAntFilterSign = AntFilterSign2.Text;
+
       if ((AntFilterItem2.Text.Length > 0) && !(AntFilterItem2.Text == "(none)"))
         if (AntFilterItem2.Text == "DateAdded")
           if ((AntFilterSign2.Text == "#") || (AntFilterSign2.Text == "not like"))
@@ -148,7 +148,7 @@ namespace MyFilmsPlugin.Configuration
             StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
       if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
         StrDfltSelect = StrDfltSelect + AntFilterFreeText.Text + " AND ";
-      ExpressionPreview.Text = StrDfltSelect + masterTitle + " not like ''";
+      ExpressionPreview.Text = StrDfltSelect + masterTitle + " not like ''" + " AND";
       LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + ExpressionPreview.Text + "'");
       ConfigString = ExpressionPreview.Text;
     }
