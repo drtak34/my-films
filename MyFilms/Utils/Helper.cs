@@ -752,9 +752,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
           if (Helper.IsTraktAvailableAndEnabled)
           {
             if (TraktSettings.UserLogins.Count > 0)
-              foreach (string user in userlist)
+              foreach (var user in TraktSettings.UserLogins)
               {
-                userlist.Add(user);
+                userlist.Add(user.Username);
               }
               return userlist;
           }
@@ -778,7 +778,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
           return false;
         }
-
 
         public static string GetUserOnlineStatus(string username)
         {

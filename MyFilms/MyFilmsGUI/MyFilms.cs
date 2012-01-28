@@ -3049,6 +3049,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case ViewContext.None:
           break;
         default:
+          if (currentItem == null) return;
           if ((currentItem.IsFolder) && (MyFilms.conf.Boolselect))
           #region Views with grouping ...
           {
@@ -6984,8 +6985,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // GlobalFilterTrailersOnly
           GlobalFilterTrailersOnly = !GlobalFilterTrailersOnly;
           LogMyFilms.Info("Global filter for Trailers Only is now set to '" + GlobalFilterTrailersOnly + "'");
-          //if (GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
-          //if (!GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           if (GlobalFilterTrailersOnly)
           {
@@ -7389,7 +7388,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
       //}
 
-      dlg.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // New Value ...
+      dlg.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // Add User ...
       choiceGlobalUserProfileName.Add("");
 
       // add Trakt user, if there is any configured:
@@ -7418,7 +7417,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
-      foreach (DataRow sr in r)
+      foreach (DataRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
       {
         string strEnhancedWatchedValue = sr[conf.StrWatchedField].ToString().Trim();
         string[] split1 = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
@@ -12453,6 +12452,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     { return SaveLastView(null); }
     private bool SaveLastView(string viewname)
     {
+      if (null == viewname) return false;
+
       LogMyFilms.Debug("SaveLastView() called with '" + viewname + "'");
       // Configuration conf = new Configuration();
       ViewState state = new ViewState();
