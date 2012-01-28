@@ -780,7 +780,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       if (conf.StrEnhancedWatchedStatusHandling && !string.IsNullOrEmpty(conf.StrUserProfileName))
-        MyFilmsDetail.setGUIProperty("config.currentuseronlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+        MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
 
       loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
@@ -5983,7 +5983,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
       if (conf.StrEnhancedWatchedStatusHandling)
       {
-        MyFilmsDetail.setGUIProperty("config.currentusername", conf.StrUserProfileName);
+        MyFilmsDetail.setGUIProperty("user.watched.name", conf.StrUserProfileName);
       }
 
       if (conf.StrDfltSelect.Length > 0)
@@ -12014,6 +12014,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("user.watched.value");
       MyFilmsDetail.clearGUIProperty("user.watched.count");
       MyFilmsDetail.clearGUIProperty("user.watched.name");
+      MyFilmsDetail.clearGUIProperty("user.watched.onlinestatus");
       MyFilmsDetail.clearGUIProperty("user.watched.global");
 
       MyFilmsDetail.clearGUIProperty("user.source.isonline");
@@ -12027,8 +12028,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("Fanart2");
       MyFilmsDetail.clearGUIProperty("config.currentconfig");
       MyFilmsDetail.clearGUIProperty("config.configfilter");
-      MyFilmsDetail.clearGUIProperty("config.currentusername");
-      MyFilmsDetail.clearGUIProperty("config.currentuseronlinestatus");
       MyFilmsDetail.clearGUIProperty("view");
       MyFilmsDetail.clearGUIProperty("select");
       MyFilmsDetail.clearGUIProperty("picture");
