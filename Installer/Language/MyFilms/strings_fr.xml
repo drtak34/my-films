@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Language name="French" characters="255">
   <Section name="unmapped">
-    <String id="100">Vue : Icônes</String>
-    <String id="101">Vue : Liste</String>
+    <String id="100">Affichage : Icônes</String>
+    <String id="101">Affichage : Liste</String>
     <String id="103">Trier par Nom</String>
     <String id="104">Trier par Date d'Ajout</String>
     <String id="127">Objets</String>
@@ -28,15 +28,15 @@
     <String id="366">Trier par Année</String>
     <String id="367">Trier par Classement</String>
     <String id="369">Titre</String>
-    <String id="417">Vue : Grandes icônes</String>
+    <String id="417">Affichage : Grandes icônes</String>
     <String id="432">Supprimer le film de la BD</String>
     <String id="433">Supprimer réellement ?</String>
     <String id="457">Changer de vue</String>
     <String id="496">Options</String>
     <String id="621">Trier par Date</String>
     <String id="712">Retour</String>
-    <String id="733">Vue : Pellicule</String>
-    <String id="791">Vue : Cover Flow</String>
+    <String id="733">Affichage : Pellicule</String>
+    <String id="791">Affichage : Cover Flow</String>
     <String id="863">Fichier</String>
     <String id="875">Programme en cours</String>
     <String id="900">Reprendre le film à l'endroit laissé ?</String>
@@ -71,10 +71,10 @@
     <String id="107986">Films</String>
     <String id="107987">Films</String>
     <String id="107988">Films</String>
-    <String id="1079830">Delete movie ...</String>
-    <String id="1079831">Remove movie from catalog</String>
-    <String id="1079832">Delete movie file(s) from disk</String>
-    <String id="1079833">Delete from catalog and disk</String>
+    <String id="1079840">Changer d'utilisateur ('{0}')</String>
+    <String id="1079846">Accompli ...</String>
+    <String id="1079847">Créateur de Fanart</String>
+    <String id="1079848">Créer un fanart à partir du film</String>
     <String id="1079834">If you confirm, you media files will physically be deleted !</String>
     <String id="1079835">Are you sure you want to delete movie ?</String>
     <String id="1079839">Reverse names ({0})</String>
@@ -91,7 +91,7 @@
     <String id="1079853">Create fanart from movie as mosaic/single images (local)</String>
     <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Arrêter la mise à jour de la base de données(active)</String>
-    <String id="1079856">Global Update cancelled !</String>
+    <String id="1079856">Mise à jour globale annulée!</String>
     <String id="1079857">Télécharger les données TMDB (en ligne)</String>
     <String id="1079858">Sélection manuelle avec le clavier</String>
     <String id="1079859">Choisir les expressions de recherche</String>
@@ -134,7 +134,7 @@
     <String id="1079897">Utiliser la vue liste pour les groupes ({0})</String>
     <String id="1079898">Demander si WOL doit être envoyé ({0})</String>
     <String id="1079899">Get internet person info (selected person)</String>
-    <String id="1079901">Vue(Layout) ...</String>
+    <String id="1079901">Affichage ...</String>
     <String id="1079902">Classer par ...</String>
     <String id="1079903">Changer la vue ...</String>
     <String id="1079904">Options de contexte...</String>
@@ -155,7 +155,7 @@
     <String id="10798617">Recherche sur champ </String>
     <String id="10798618">Recherche globale de la chaîne '{0}'</String>
     <String id="10798619">=&gt; {0} entrée(s) trouvé(es) dans {1}</String>
-    <String id="10798620">Info de la personne</String>
+    <String id="10798620">Info sur l'acteur</String>
     <String id="10798621">Recherche aléatoire de films</String>
     <String id="10798622">Tout</String>
     <String id="10798623">(pas d'infos)</String>
@@ -169,18 +169,14 @@
     <String id="10798631">Monter le status du serveur NAS</String>
     <String id="10798632">Filtré(s)</String>
     <String id="10798636">Nom du fichier</String>
-    <String id="10798637">Paqs de films pour cette affichage!</String>
+    <String id="10798637">Pas de films pour cet affichage!</String>
     <String id="10798638">Montrer toute la liste des films</String>
     <String id="10798639">Pas de Film(s) trouvé(s)!</String>
-    <String id="10798640">Aucune entrée correspondant à la valeur recherchée.
-</String>
-    <String id="10798641">Pas d'entrée à rechercher.
-</String>
-    <String id="10798642">
-Mise à jour des données du film par la propriété</String>
-    <String id="10798643">Sélectionner les propritées pour la mise à jour</String>
-    <String id="10798644">Format d'entrée incorrecte. S'il vous plaît essayez de nouveau.
-</String>
+    <String id="10798640">Aucune entrée correspondant à la valeur recherchée.</String>
+    <String id="10798641">Pas d'entrée à rechercher.</String>
+    <String id="10798642">Mise à jour des données du film par la propriété</String>
+    <String id="10798643">Sélectionner les propriétées pour la mise à jour</String>
+    <String id="10798644">Format d'entrée incorrecte. Essayez de nouveau svp.</String>
     <String id="10798645">Recherche globale(areas)</String>
     <String id="10798646">Recherche de films</String>
     <String id="10798647">Recherhce des acteurs</String>
@@ -228,8 +224,7 @@ Mise à jour des données du film par la propriété</String>
     <String id="10798689">Paramètres globaux ...</String>
     <String id="10798690">Mise à jour globale ...</String>
     <String id="10798691">Montrer uniquement les films avec une bande annonce ({0})</String>
-    <String id="10798692">Montrer des films uniquement avec une note minimale
-({0})</String>
+    <String id="10798692">Montrer des films uniquement avec une note minimale ({0})</String>
     <String id="10798693">Changer la note minimale de '{0}'</String>
     <String id="10798694">Chercher et ajouter les bandes annonces locales(tous les films)</String>
     <String id="10798695">Recherche des bandes annonces terminée !</String>
@@ -252,30 +247,30 @@ Mise à jour des données du film par la propriété</String>
     <String id="10798712">Bandes Annonces Apple iTunes (OnlineVideos)</String>
     <String id="10798713">Films Non visionnés " ({0})</String>
     <String id="10798714">Filtres Globaux ...</String>
-    <String id="10798715">Load person info (all persons)</String>
+    <String id="10798715">Charger les infos sur la personne (liste entière)</String>
     <String id="10798716">Bandes Annonces IMDB (OnlineVideos)</String>
-    <String id="10798717">Incomplete movie data</String>
-    <String id="10798718">=&gt; {0} Film(s) manquants '{1}'</String>
+    <String id="10798717">Donnée du film incomplète</String>
+    <String id="10798718">=&gt; {0} Film(s) manquant(s) '{1}'</String>
     <String id="10798719">Chargement des infos (.nfo file, local, ajouter les infos manquantes)</String>
     <String id="10798720">Chargement des infos (.nfo file, local, remplacer toutes les infos)</String>
     <String id="10798721">Chargement des infos à partir du fichier Ant Load films(local)</String>
-    <String id="10798722">Store films info in Ant file (local)</String>
+    <String id="10798722">Stocker les infos du film  dans le fichier Ant (local)</String>
     <String id="10798723">Recherche de Bandes annonces (local)</String>
-    <String id="10798724">Charger les Bandes Annonces (online)</String>
+    <String id="10798724">Charger les Bandes Annonces (en ligne)</String>
     <String id="10798725">Supprimer les Bandes Annonces du catalogue (film sélectionné)</String>
     <String id="10798726">Recherche des Bandes Annonces - tous les films (local)</String>
     <String id="10798727">Montrer le status du serveur Nas</String>
     <String id="10798728">Créer la vignette du film</String>
-    <String id="10798729">Create cover from film as mosaic</String>
-    <String id="10798730">Update all properties (only when new data)</String>
+    <String id="10798730">Charger les infos du film (.nfo file, local)</String>
+    <String id="10798731">Infos sur la personne (IMDB)</String>
     <String id="10798731">Person info (IMDB)</String>
     <String id="10798732">Choisir les propriétés pour la mise à jour ...</String>
     <String id="10798733">Remplacer la vignette existante par celle-ci?</String>
     <String id="10798734">Mettre à jour toutes les propriétés</String>
     <String id="10798735">Mettre à jour uniquement les propriétés manquantes</String>
-    <String id="10798736">disponibles localement</String>
+    <String id="10798736">Disponibles localement</String>
     <String id="10798737">Bande Annonce non trouvée localement</String>
-    <String id="10798738">essayer les Bandes Annonces en ligne?</String>
+    <String id="10798738">Essayer les Bandes Annonces en ligne?</String>
     <String id="10798739">Rechercher les Bandes Annonces locales et mettre à jour la DB?</String>
     <String id="10798740">*** Lancer toutes les Bandes Annonces ***</String>
     <String id="10798741">(active)</String>
@@ -304,23 +299,21 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798767">Fanart Manager ...</String>
     <String id="10798768">No Cover found !</String>
     <String id="10798769">Select Cover as Default</String>
-    <String id="10798770">Montrer uniquement les films avec supports disponibles
- ({0})</String>
+    <String id="10798770">Montrer uniquement les films avec supports disponibles ({0})</String>
     <String id="10798771">Options d'affichage ...</String>
     <String id="10798772">Choisir les champs...</String>
-    <String id="10798773">Afficher les éléments
-</String>
+    <String id="10798773">Afficher les éléments</String>
     <String id="10798774">vide</String>
     <String id="10798775">Trakt ...</String>
     <String id="10798776">Trakt</String>
-    <String id="10798777">Calendar</String>
-    <String id="10798778">Friends</String>
+    <String id="10798777">Calendrier</String>
+    <String id="10798778">Amis</String>
     <String id="10798779">Suggestions</String>
-    <String id="10798780">Popular movies</String>
-    <String id="10798781">Watchlist</String>
+    <String id="10798780">Films Populaires</String>
+    <String id="10798781">Liste de films vus</String>
     <String id="10798782">Shouts</String>
-    <String id="10798783">Add movie to watchlist</String>
-    <String id="10798784">Rate movie</String>
+    <String id="10798783">Ajouter un film à listes des films vus</String>
+    <String id="10798784">Noter le film</String>
     <String id="10798785">Add to List...</String>
     <String id="10798786">Show Lists ...</String>
     <String id="10798787">Show related movies</String>
@@ -339,7 +332,7 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798944">Note utilisateur</String>
     <String id="10798945">Fanart</String>
     <String id="10798946">Studio du Film</String>
-    <String id="10798947">IMDB Toplist</String>
+    <String id="10798947">Toplist IMDB</String>
     <String id="10798948">Status en ligne</String>
     <String id="10798949">Edition</String>
     <String id="10798950">Status des Bandes annonces en ligne</String>
