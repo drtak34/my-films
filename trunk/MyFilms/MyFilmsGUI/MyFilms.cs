@@ -225,6 +225,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_DummyFacadeGroup = 37,
       CTRL_DummyFacadePerson = 38,
       CTRL_DummyFacadeHierarchy = 39,
+      CTRL_DummyFacadeMenu = 40,
       CTRL_ImageFilm = 1020,
       CTRL_ImageGroup = 1021,
       CTRL_ImagePerson = 1022,
@@ -311,6 +312,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     
     [SkinControlAttribute((int)Controls.CTRL_DummyFacadePerson)]
     protected GUILabelControl dummyFacadePerson = null;
+
+    [SkinControlAttribute((int)Controls.CTRL_DummyFacadeMenu)]
+    protected GUILabelControl dummyFacadeMenu = null;
 
     #endregion
 
@@ -1953,7 +1957,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
       {
-        //
+        MyFilms.conf.WStrLayOut = dlg.SelectedLabel; // we share Layoutr for menu with Views ...
       }
       else if (conf.Boolselect)
         MyFilms.conf.WStrLayOut = dlg.SelectedLabel;
@@ -3548,7 +3552,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void GetSelectFromMenuView(bool showall)
     {
       LogMyFilms.Debug("GetSelectFromMenuView() - launched with showall = '" + showall + "'");
-      Change_LayOut(0); // always use listview for menu ...
+      Change_LayOut(conf.WStrLayOut); // we share the layout with Views ...
       GUIControl.ShowControl(GetID, 34); // hide film controls ...
       SetDummyControlsForFacade(ViewContext.Menu); // reset all covers ...
 
@@ -3699,7 +3703,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.MenuSelectedID = 0;
       MyFilmsDetail.setGUIProperty("nbobjects.value", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString(CultureInfo.InvariantCulture));
       GUIPropertyManager.SetProperty("#itemcount", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString(CultureInfo.InvariantCulture));
-      GUIPropertyManager.SetProperty("#itemtype", "Views");
+      // GUIPropertyManager.SetProperty("#itemtype", "Views"); // disabled, as we otherwise have to set it in all facade listings ...
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedID);
       //conf.ViewContext = ViewContext.None;
       LogMyFilms.Debug("GetSelectFromMenuView() - end facade load ...");
@@ -3724,15 +3728,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // Check, if default group cover is present
                 if (MyFilms.conf.StrViewsDflt)
                 {
-                  string strPathViews = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
-                                          ? conf.StrPathViews
-                                          : conf.StrPathViews + "\\";
-                  strPathViews = strPathViews + this.facadeFilms[i].Label.ToLower() + "\\" + "Default.jpg";
+                  string strPathViews = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
+                  strPathViews = strPathViews + GetFieldFromViewLabel(facadeFilms[i].DVDLabel).ToLower() + "\\" + "Default.jpg";
                   if (!System.IO.File.Exists(strPathViews))
                   {
                     if (MyFilms.conf.StrViewsDflt && (MyFilms.conf.DefaultCoverViews.Length > 0))
                     {
-                      if (IsPersonField(facadeFilms[i].Label)) 
+                      if (IsPersonField(GetFieldFromViewLabel(facadeFilms[i].DVDLabel)))
                         strPathViews = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
                       else 
                         strPathViews = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultGroup.jpg";
@@ -3836,6 +3838,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }) { Name = "MyFilmsMenuCountWorker", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start();
     }
 
+    private string GetFieldFromViewLabel(string viewlabel)
+    {
+      foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+      {
+        if (viewRow.Label == viewlabel) return viewRow.DBfield;
+      }
+      return viewlabel;
+    }
+    
     //--------------------------------------------------------------------------------------------
     //  Change Sort Option for films, vies or collections/groups
     //--------------------------------------------------------------------------------------------
@@ -4973,7 +4984,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
       }
 
-      // setting up thumbs directory configuration // string[] strActiveFacadeImages; // image pathes for Icon and Thumb -> moved usage to background thread
       string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons) : MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsGroups) + WStrSort.ToLower() + @"\";
       
       bool getThumbs = ((MyFilms.conf.UseThumbsForPersons && isperson) || (MyFilms.conf.UseThumbsForViews && (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort))));
@@ -12410,36 +12420,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dummyFacadeHierarchy != null && dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeMenu != null && !dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = true;
           break;
         case ViewContext.Movie:
           if (dummyFacadeFilm != null && !dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = true;
           if (dummyFacadeHierarchy != null && dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
           break;
         case ViewContext.MovieCollection:
           if (dummyFacadeFilm != null && dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
           if (dummyFacadeHierarchy != null && !dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = true;
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
           break;
         case ViewContext.Group:
           if (dummyFacadeFilm != null && dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
           if (dummyFacadeHierarchy != null && dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
           if (dummyFacadeGroup != null && !dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = true;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
           break;
         case ViewContext.Person:
           if (dummyFacadeFilm != null && dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
           if (dummyFacadeHierarchy != null && dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && !dummyFacadePerson.Visible) dummyFacadePerson.Visible = true;
+          if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
           break;
         case ViewContext.None:
-          if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
-          if (dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
-          if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
-          if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeFilm != null && dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
+          if (dummyFacadeHierarchy != null && dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
+          if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
+          if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
           break;
         default:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting ViewContext to 'Default' (all false)");
@@ -12447,6 +12463,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dummyFacadeHierarchy != null && dummyFacadeHierarchy.Visible) dummyFacadeHierarchy.Visible = false;
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
+          if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
           break;
       }
     }
