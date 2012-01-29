@@ -107,14 +107,13 @@
           System.Windows.Forms.Label sortFieldHierarchyLabel;
           System.Windows.Forms.Label sortDirectionHierarchyLabel;
           System.Windows.Forms.Label layoutHierarchyLabel;
-          System.Windows.Forms.Label label60;
-          System.Windows.Forms.Label label64;
-          System.Windows.Forms.Label label65;
-          System.Windows.Forms.Label label66;
-          System.Windows.Forms.Label label67;
           System.Windows.Forms.Label label68;
-          System.Windows.Forms.Label label69;
           System.Windows.Forms.Label label70;
+          System.Windows.Forms.Label label69;
+          System.Windows.Forms.Label label67;
+          System.Windows.Forms.Label label66;
+          System.Windows.Forms.Label label60;
+          System.Windows.Forms.Label label65;
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyFilmsSetup));
           this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.Config_Name = new System.Windows.Forms.ComboBox();
@@ -311,6 +310,50 @@
           this.RoleSeparator1 = new System.Windows.Forms.ComboBox();
           this.label24 = new System.Windows.Forms.Label();
           this.ListSeparator1 = new System.Windows.Forms.ComboBox();
+          this.groupBoxView = new System.Windows.Forms.GroupBox();
+          this.dgViewsList = new System.Windows.Forms.DataGridView();
+          this.labelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.viewEnabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+          this.mFview = new MyFilmsPlugin.DataBase.MFview();
+          this.groupBox3 = new System.Windows.Forms.GroupBox();
+          this.AntViewLayoutFilms = new System.Windows.Forms.ComboBox();
+          this.AntViewSortOrderFilms = new System.Windows.Forms.ComboBox();
+          this.AntViewSortFilms = new System.Windows.Forms.ComboBox();
+          this.AntViewSortType = new System.Windows.Forms.ComboBox();
+          this.AntViewLayoutHierarchy = new System.Windows.Forms.ComboBox();
+          this.label57 = new System.Windows.Forms.Label();
+          this.AntViewSortOrderHierarchies = new System.Windows.Forms.ComboBox();
+          this.label58 = new System.Windows.Forms.Label();
+          this.label59 = new System.Windows.Forms.Label();
+          this.AntViewSortHierarchies = new System.Windows.Forms.ComboBox();
+          this.AntViewLayoutView = new System.Windows.Forms.ComboBox();
+          this.AntViewSortOrder = new System.Windows.Forms.ComboBox();
+          this.AntViewItem = new System.Windows.Forms.ComboBox();
+          this.groupBox5 = new System.Windows.Forms.GroupBox();
+          this.AntViewOnlyAvailableCheckBox = new System.Windows.Forms.CheckBox();
+          this.AntViewOnlyUnwatchedCheckBox = new System.Windows.Forms.CheckBox();
+          this.AntViewFilter = new System.Windows.Forms.TextBox();
+          this.AntViewFilterEditButton = new System.Windows.Forms.Button();
+          this.AntViewValue = new System.Windows.Forms.TextBox();
+          this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
+          this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+          this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+          this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+          this.AntViewReverseNamesCheckbox = new System.Windows.Forms.CheckBox();
+          this.checkBox2 = new System.Windows.Forms.CheckBox();
+          this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.Tab_Views = new System.Windows.Forms.TabPage();
           this.groupBox_AntSelectedEnreg = new System.Windows.Forms.GroupBox();
           this.AntFreetextFilterItem = new System.Windows.Forms.Label();
@@ -535,58 +578,6 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
-          this.groupBoxView = new System.Windows.Forms.GroupBox();
-          this.button1 = new System.Windows.Forms.Button();
-          this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
-          this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-          this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-          this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-          this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-          this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-          this.label57 = new System.Windows.Forms.Label();
-          this.label58 = new System.Windows.Forms.Label();
-          this.label59 = new System.Windows.Forms.Label();
-          this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-          this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.mFview = new MyFilmsPlugin.DataBase.MFview();
-          this.textBox1 = new System.Windows.Forms.TextBox();
-          this.comboBox3 = new System.Windows.Forms.ComboBox();
-          this.textBox3 = new System.Windows.Forms.TextBox();
-          this.textBox4 = new System.Windows.Forms.TextBox();
-          this.checkBox2 = new System.Windows.Forms.CheckBox();
-          this.checkBox3 = new System.Windows.Forms.CheckBox();
-          this.checkBox4 = new System.Windows.Forms.CheckBox();
-          this.comboBox4 = new System.Windows.Forms.ComboBox();
-          this.comboBox5 = new System.Windows.Forms.ComboBox();
-          this.comboBox6 = new System.Windows.Forms.ComboBox();
-          this.comboBox7 = new System.Windows.Forms.ComboBox();
-          this.comboBox8 = new System.Windows.Forms.ComboBox();
-          this.comboBox9 = new System.Windows.Forms.ComboBox();
-          this.comboBox10 = new System.Windows.Forms.ComboBox();
-          this.comboBox11 = new System.Windows.Forms.ComboBox();
-          this.viewDataGridView = new System.Windows.Forms.DataGridView();
-          this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
-          this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewCheckBoxColumn6 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.dataGridViewCheckBoxColumn7 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.dataGridViewCheckBoxColumn8 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewCheckBoxColumn9 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.dgViews = new System.Windows.Forms.DataGridView();
           this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.DBItem = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -640,20 +631,7 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.customFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-          this.viewsBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.btnEditView = new System.Windows.Forms.Button();
-          this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-          this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-          this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-          this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-          this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-          this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-          this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-          this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-          this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-          this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-          this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-          this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
           this.label52 = new System.Windows.Forms.Label();
           this.label33 = new System.Windows.Forms.Label();
           this.label18 = new System.Windows.Forms.Label();
@@ -685,14 +663,13 @@
           sortFieldHierarchyLabel = new System.Windows.Forms.Label();
           sortDirectionHierarchyLabel = new System.Windows.Forms.Label();
           layoutHierarchyLabel = new System.Windows.Forms.Label();
-          label60 = new System.Windows.Forms.Label();
-          label64 = new System.Windows.Forms.Label();
-          label65 = new System.Windows.Forms.Label();
-          label66 = new System.Windows.Forms.Label();
-          label67 = new System.Windows.Forms.Label();
           label68 = new System.Windows.Forms.Label();
-          label69 = new System.Windows.Forms.Label();
           label70 = new System.Windows.Forms.Label();
+          label69 = new System.Windows.Forms.Label();
+          label67 = new System.Windows.Forms.Label();
+          label66 = new System.Windows.Forms.Label();
+          label60 = new System.Windows.Forms.Label();
+          label65 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxExternal.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
@@ -715,6 +692,15 @@
           this.Tab_Search.SuspendLayout();
           this.groupBox4.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
+          this.groupBoxView.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dgViewsList)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.mFview)).BeginInit();
+          this.groupBox3.SuspendLayout();
+          this.groupBox5.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).BeginInit();
+          this.bindingNavigatorViews.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).BeginInit();
           this.Tab_Views.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -744,13 +730,6 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
-          this.groupBoxView.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
-          this.bindingNavigator2.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.mFview)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.viewDataGridView)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.dgViews)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
@@ -760,9 +739,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.viewsBindingSource)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
-          this.bindingNavigator1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
           this.SuspendLayout();
           // 
@@ -874,77 +850,68 @@
           layoutHierarchyLabel.TabIndex = 27;
           layoutHierarchyLabel.Text = "Layout";
           // 
-          // label60
-          // 
-          label60.AutoSize = true;
-          label60.Location = new System.Drawing.Point(178, 80);
-          label60.Name = "label60";
-          label60.Size = new System.Drawing.Size(36, 13);
-          label60.TabIndex = 34;
-          label60.Text = "Index:";
-          // 
-          // label64
-          // 
-          label64.AutoSize = true;
-          label64.Location = new System.Drawing.Point(8, 53);
-          label64.Name = "label64";
-          label64.Size = new System.Drawing.Size(36, 13);
-          label64.TabIndex = 3;
-          label64.Text = "Label:";
-          // 
-          // label65
-          // 
-          label65.AutoSize = true;
-          label65.Location = new System.Drawing.Point(8, 79);
-          label65.Name = "label65";
-          label65.Size = new System.Drawing.Size(44, 13);
-          label65.TabIndex = 5;
-          label65.Text = "DBfield:";
-          // 
-          // label66
-          // 
-          label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(265, 80);
-          label66.Name = "label66";
-          label66.Size = new System.Drawing.Size(37, 13);
-          label66.TabIndex = 7;
-          label66.Text = "Value:";
-          // 
-          // label67
-          // 
-          label67.AutoSize = true;
-          label67.Location = new System.Drawing.Point(8, 106);
-          label67.Name = "label67";
-          label67.Size = new System.Drawing.Size(32, 13);
-          label67.TabIndex = 9;
-          label67.Text = "Filter:";
-          // 
           // label68
           // 
           label68.AutoSize = true;
-          label68.Location = new System.Drawing.Point(62, 140);
+          label68.Location = new System.Drawing.Point(67, 19);
           label68.Name = "label68";
           label68.Size = new System.Drawing.Size(51, 13);
           label68.TabIndex = 23;
           label68.Text = "Sort Field";
           // 
-          // label69
-          // 
-          label69.AutoSize = true;
-          label69.Location = new System.Drawing.Point(175, 140);
-          label69.Name = "label69";
-          label69.Size = new System.Drawing.Size(71, 13);
-          label69.TabIndex = 25;
-          label69.Text = "Sort Direction";
-          // 
           // label70
           // 
           label70.AutoSize = true;
-          label70.Location = new System.Drawing.Point(273, 140);
+          label70.Location = new System.Drawing.Point(270, 19);
           label70.Name = "label70";
           label70.Size = new System.Drawing.Size(39, 13);
           label70.TabIndex = 27;
           label70.Text = "Layout";
+          // 
+          // label69
+          // 
+          label69.AutoSize = true;
+          label69.Location = new System.Drawing.Point(208, 19);
+          label69.Name = "label69";
+          label69.Size = new System.Drawing.Size(26, 13);
+          label69.TabIndex = 25;
+          label69.Text = "Sort";
+          // 
+          // label67
+          // 
+          label67.AutoSize = true;
+          label67.Location = new System.Drawing.Point(7, 47);
+          label67.Name = "label67";
+          label67.Size = new System.Drawing.Size(32, 13);
+          label67.TabIndex = 9;
+          label67.Text = "Filter:";
+          // 
+          // label66
+          // 
+          label66.AutoSize = true;
+          label66.Location = new System.Drawing.Point(7, 21);
+          label66.Name = "label66";
+          label66.Size = new System.Drawing.Size(37, 13);
+          label66.TabIndex = 7;
+          label66.Text = "Value:";
+          // 
+          // label60
+          // 
+          label60.AutoSize = true;
+          label60.Location = new System.Drawing.Point(314, 50);
+          label60.Name = "label60";
+          label60.Size = new System.Drawing.Size(36, 13);
+          label60.TabIndex = 34;
+          label60.Text = "Index:";
+          // 
+          // label65
+          // 
+          label65.AutoSize = true;
+          label65.Location = new System.Drawing.Point(143, 50);
+          label65.Name = "label65";
+          label65.Size = new System.Drawing.Size(47, 13);
+          label65.TabIndex = 5;
+          label65.Text = "DB field:";
           // 
           // ToolTip1
           // 
@@ -2930,6 +2897,7 @@
           this.Tab_Search.AutoScroll = true;
           this.Tab_Search.Controls.Add(this.groupBox4);
           this.Tab_Search.Controls.Add(this.groupBox_Separators);
+          this.Tab_Search.Controls.Add(this.groupBoxView);
           this.Tab_Search.Location = new System.Drawing.Point(4, 22);
           this.Tab_Search.Name = "Tab_Search";
           this.Tab_Search.Size = new System.Drawing.Size(747, 354);
@@ -2944,7 +2912,7 @@
           this.groupBox4.Controls.Add(this.label62);
           this.groupBox4.Controls.Add(this.SortSensInHierarchies);
           this.groupBox4.Controls.Add(this.SortInHierarchies);
-          this.groupBox4.Location = new System.Drawing.Point(377, 11);
+          this.groupBox4.Location = new System.Drawing.Point(532, 11);
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.Size = new System.Drawing.Size(350, 77);
           this.groupBox4.TabIndex = 37;
@@ -3009,7 +2977,7 @@
           this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
           this.groupBox_Separators.Controls.Add(this.label24);
           this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(377, 94);
+          this.groupBox_Separators.Location = new System.Drawing.Point(532, 94);
           this.groupBox_Separators.Name = "groupBox_Separators";
           this.groupBox_Separators.Size = new System.Drawing.Size(350, 125);
           this.groupBox_Separators.TabIndex = 28;
@@ -3189,6 +3157,490 @@
           this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator1.TabIndex = 70;
           this.ListSeparator1.Text = "List";
+          // 
+          // groupBoxView
+          // 
+          this.groupBoxView.Controls.Add(this.dgViewsList);
+          this.groupBoxView.Controls.Add(this.groupBox3);
+          this.groupBoxView.Controls.Add(this.AntViewItem);
+          this.groupBoxView.Controls.Add(this.groupBox5);
+          this.groupBoxView.Controls.Add(this.bindingNavigatorViews);
+          this.groupBoxView.Controls.Add(this.AntViewReverseNamesCheckbox);
+          this.groupBoxView.Controls.Add(label60);
+          this.groupBoxView.Controls.Add(this.checkBox2);
+          this.groupBoxView.Controls.Add(this.AntViewIndex);
+          this.groupBoxView.Controls.Add(label65);
+          this.groupBoxView.Location = new System.Drawing.Point(9, 8);
+          this.groupBoxView.Name = "groupBoxView";
+          this.groupBoxView.Size = new System.Drawing.Size(517, 324);
+          this.groupBoxView.TabIndex = 126;
+          this.groupBoxView.TabStop = false;
+          this.groupBoxView.Text = "View Editor ...";
+          // 
+          // dgViewsList
+          // 
+          this.dgViewsList.AllowUserToAddRows = false;
+          this.dgViewsList.AllowUserToDeleteRows = false;
+          this.dgViewsList.AutoGenerateColumns = false;
+          this.dgViewsList.BackgroundColor = System.Drawing.SystemColors.Menu;
+          this.dgViewsList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.dgViewsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.dgViewsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.labelDataGridViewTextBoxColumn,
+            this.viewEnabledDataGridViewCheckBoxColumn});
+          this.dgViewsList.DataSource = this.viewBindingSource;
+          this.dgViewsList.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+          this.dgViewsList.Location = new System.Drawing.Point(6, 44);
+          this.dgViewsList.Name = "dgViewsList";
+          this.dgViewsList.RowHeadersVisible = false;
+          this.dgViewsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+          this.dgViewsList.Size = new System.Drawing.Size(117, 274);
+          this.dgViewsList.TabIndex = 42;
+          // 
+          // labelDataGridViewTextBoxColumn
+          // 
+          this.labelDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+          this.labelDataGridViewTextBoxColumn.DataPropertyName = "Label";
+          this.labelDataGridViewTextBoxColumn.HeaderText = "Label";
+          this.labelDataGridViewTextBoxColumn.Name = "labelDataGridViewTextBoxColumn";
+          // 
+          // viewEnabledDataGridViewCheckBoxColumn
+          // 
+          this.viewEnabledDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          this.viewEnabledDataGridViewCheckBoxColumn.DataPropertyName = "ViewEnabled";
+          this.viewEnabledDataGridViewCheckBoxColumn.HeaderText = "on";
+          this.viewEnabledDataGridViewCheckBoxColumn.Name = "viewEnabledDataGridViewCheckBoxColumn";
+          this.viewEnabledDataGridViewCheckBoxColumn.Width = 25;
+          // 
+          // viewBindingSource
+          // 
+          this.viewBindingSource.DataMember = "View";
+          this.viewBindingSource.DataSource = this.mFview;
+          // 
+          // mFview
+          // 
+          this.mFview.DataSetName = "MFview";
+          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
+          // groupBox3
+          // 
+          this.groupBox3.Controls.Add(label68);
+          this.groupBox3.Controls.Add(this.AntViewLayoutFilms);
+          this.groupBox3.Controls.Add(this.AntViewSortOrderFilms);
+          this.groupBox3.Controls.Add(this.AntViewSortFilms);
+          this.groupBox3.Controls.Add(this.AntViewSortType);
+          this.groupBox3.Controls.Add(this.AntViewLayoutHierarchy);
+          this.groupBox3.Controls.Add(label70);
+          this.groupBox3.Controls.Add(this.label57);
+          this.groupBox3.Controls.Add(this.AntViewSortOrderHierarchies);
+          this.groupBox3.Controls.Add(this.label58);
+          this.groupBox3.Controls.Add(label69);
+          this.groupBox3.Controls.Add(this.label59);
+          this.groupBox3.Controls.Add(this.AntViewSortHierarchies);
+          this.groupBox3.Controls.Add(this.AntViewLayoutView);
+          this.groupBox3.Controls.Add(this.AntViewSortOrder);
+          this.groupBox3.Location = new System.Drawing.Point(136, 197);
+          this.groupBox3.Name = "groupBox3";
+          this.groupBox3.Size = new System.Drawing.Size(373, 121);
+          this.groupBox3.TabIndex = 41;
+          this.groupBox3.TabStop = false;
+          this.groupBox3.Text = "Default Sort and Layouts";
+          // 
+          // AntViewLayoutFilms
+          // 
+          this.AntViewLayoutFilms.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutFilms", true));
+          this.AntViewLayoutFilms.FormattingEnabled = true;
+          this.AntViewLayoutFilms.Items.AddRange(new object[] {
+            "List",
+            "Small Icons",
+            "Large Icons",
+            "Filmstrip",
+            "Cover Flow"});
+          this.AntViewLayoutFilms.Location = new System.Drawing.Point(260, 64);
+          this.AntViewLayoutFilms.Name = "AntViewLayoutFilms";
+          this.AntViewLayoutFilms.Size = new System.Drawing.Size(90, 21);
+          this.AntViewLayoutFilms.TabIndex = 34;
+          // 
+          // AntViewSortOrderFilms
+          // 
+          this.AntViewSortOrderFilms.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionFilms", true));
+          this.AntViewSortOrderFilms.FormattingEnabled = true;
+          this.AntViewSortOrderFilms.Items.AddRange(new object[] {
+            " ASC",
+            " DESC"});
+          this.AntViewSortOrderFilms.Location = new System.Drawing.Point(200, 64);
+          this.AntViewSortOrderFilms.Name = "AntViewSortOrderFilms";
+          this.AntViewSortOrderFilms.Size = new System.Drawing.Size(54, 21);
+          this.AntViewSortOrderFilms.TabIndex = 32;
+          // 
+          // AntViewSortFilms
+          // 
+          this.AntViewSortFilms.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldFilms", true));
+          this.AntViewSortFilms.FormattingEnabled = true;
+          this.AntViewSortFilms.Location = new System.Drawing.Point(64, 65);
+          this.AntViewSortFilms.Name = "AntViewSortFilms";
+          this.AntViewSortFilms.Size = new System.Drawing.Size(124, 21);
+          this.AntViewSortFilms.Sorted = true;
+          this.AntViewSortFilms.TabIndex = 30;
+          // 
+          // AntViewSortType
+          // 
+          this.AntViewSortType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldViewType", true));
+          this.AntViewSortType.FormattingEnabled = true;
+          this.AntViewSortType.Items.AddRange(new object[] {
+            "Count",
+            "Name"});
+          this.AntViewSortType.Location = new System.Drawing.Point(64, 37);
+          this.AntViewSortType.Name = "AntViewSortType";
+          this.AntViewSortType.Size = new System.Drawing.Size(124, 21);
+          this.AntViewSortType.Sorted = true;
+          this.AntViewSortType.TabIndex = 40;
+          // 
+          // AntViewLayoutHierarchy
+          // 
+          this.AntViewLayoutHierarchy.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutHierarchy", true));
+          this.AntViewLayoutHierarchy.FormattingEnabled = true;
+          this.AntViewLayoutHierarchy.Items.AddRange(new object[] {
+            "List",
+            "Small Icons",
+            "Large Icons",
+            "Filmstrip",
+            "Cover Flow"});
+          this.AntViewLayoutHierarchy.Location = new System.Drawing.Point(260, 91);
+          this.AntViewLayoutHierarchy.Name = "AntViewLayoutHierarchy";
+          this.AntViewLayoutHierarchy.Size = new System.Drawing.Size(90, 21);
+          this.AntViewLayoutHierarchy.TabIndex = 28;
+          // 
+          // label57
+          // 
+          this.label57.AutoSize = true;
+          this.label57.Location = new System.Drawing.Point(7, 67);
+          this.label57.Name = "label57";
+          this.label57.Size = new System.Drawing.Size(30, 13);
+          this.label57.TabIndex = 38;
+          this.label57.Text = "Films";
+          // 
+          // AntViewSortOrderHierarchies
+          // 
+          this.AntViewSortOrderHierarchies.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionHierarchy", true));
+          this.AntViewSortOrderHierarchies.FormattingEnabled = true;
+          this.AntViewSortOrderHierarchies.Items.AddRange(new object[] {
+            " ASC",
+            " DESC"});
+          this.AntViewSortOrderHierarchies.Location = new System.Drawing.Point(200, 91);
+          this.AntViewSortOrderHierarchies.Name = "AntViewSortOrderHierarchies";
+          this.AntViewSortOrderHierarchies.Size = new System.Drawing.Size(54, 21);
+          this.AntViewSortOrderHierarchies.TabIndex = 26;
+          // 
+          // label58
+          // 
+          this.label58.AutoSize = true;
+          this.label58.Location = new System.Drawing.Point(7, 94);
+          this.label58.Name = "label58";
+          this.label58.Size = new System.Drawing.Size(52, 13);
+          this.label58.TabIndex = 37;
+          this.label58.Text = "Hierarchy";
+          // 
+          // label59
+          // 
+          this.label59.AutoSize = true;
+          this.label59.Location = new System.Drawing.Point(7, 42);
+          this.label59.Name = "label59";
+          this.label59.Size = new System.Drawing.Size(30, 13);
+          this.label59.TabIndex = 36;
+          this.label59.Text = "View";
+          // 
+          // AntViewSortHierarchies
+          // 
+          this.AntViewSortHierarchies.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldHierarchy", true));
+          this.AntViewSortHierarchies.FormattingEnabled = true;
+          this.AntViewSortHierarchies.Location = new System.Drawing.Point(64, 91);
+          this.AntViewSortHierarchies.Name = "AntViewSortHierarchies";
+          this.AntViewSortHierarchies.Size = new System.Drawing.Size(124, 21);
+          this.AntViewSortHierarchies.Sorted = true;
+          this.AntViewSortHierarchies.TabIndex = 24;
+          // 
+          // AntViewLayoutView
+          // 
+          this.AntViewLayoutView.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutView", true));
+          this.AntViewLayoutView.FormattingEnabled = true;
+          this.AntViewLayoutView.Items.AddRange(new object[] {
+            "List",
+            "Small Icons",
+            "Large Icons",
+            "Filmstrip",
+            "Cover Flow"});
+          this.AntViewLayoutView.Location = new System.Drawing.Point(260, 37);
+          this.AntViewLayoutView.Name = "AntViewLayoutView";
+          this.AntViewLayoutView.Size = new System.Drawing.Size(90, 21);
+          this.AntViewLayoutView.TabIndex = 22;
+          // 
+          // AntViewSortOrder
+          // 
+          this.AntViewSortOrder.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionView", true));
+          this.AntViewSortOrder.FormattingEnabled = true;
+          this.AntViewSortOrder.Items.AddRange(new object[] {
+            " ASC",
+            " DESC"});
+          this.AntViewSortOrder.Location = new System.Drawing.Point(200, 37);
+          this.AntViewSortOrder.Name = "AntViewSortOrder";
+          this.AntViewSortOrder.Size = new System.Drawing.Size(54, 21);
+          this.AntViewSortOrder.TabIndex = 20;
+          // 
+          // AntViewItem
+          // 
+          this.AntViewItem.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
+          this.AntViewItem.FormattingEnabled = true;
+          this.AntViewItem.Location = new System.Drawing.Point(200, 47);
+          this.AntViewItem.Name = "AntViewItem";
+          this.AntViewItem.Size = new System.Drawing.Size(107, 21);
+          this.AntViewItem.Sorted = true;
+          this.AntViewItem.TabIndex = 6;
+          this.ToolTip1.SetToolTip(this.AntViewItem, "Select the field you want to use for this view.");
+          // 
+          // groupBox5
+          // 
+          this.groupBox5.Controls.Add(this.AntViewOnlyAvailableCheckBox);
+          this.groupBox5.Controls.Add(this.AntViewOnlyUnwatchedCheckBox);
+          this.groupBox5.Controls.Add(this.AntViewFilter);
+          this.groupBox5.Controls.Add(label67);
+          this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
+          this.groupBox5.Controls.Add(this.AntViewValue);
+          this.groupBox5.Controls.Add(label66);
+          this.groupBox5.Location = new System.Drawing.Point(136, 90);
+          this.groupBox5.Name = "groupBox5";
+          this.groupBox5.Size = new System.Drawing.Size(373, 101);
+          this.groupBox5.TabIndex = 42;
+          this.groupBox5.TabStop = false;
+          this.groupBox5.Text = "Filter Settings";
+          // 
+          // AntViewOnlyAvailableCheckBox
+          // 
+          this.AntViewOnlyAvailableCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "OnlyAvailable", true));
+          this.AntViewOnlyAvailableCheckBox.Location = new System.Drawing.Point(64, 70);
+          this.AntViewOnlyAvailableCheckBox.Name = "AntViewOnlyAvailableCheckBox";
+          this.AntViewOnlyAvailableCheckBox.Size = new System.Drawing.Size(124, 24);
+          this.AntViewOnlyAvailableCheckBox.TabIndex = 41;
+          this.AntViewOnlyAvailableCheckBox.Text = "Show only Available";
+          this.AntViewOnlyAvailableCheckBox.UseVisualStyleBackColor = true;
+          // 
+          // AntViewOnlyUnwatchedCheckBox
+          // 
+          this.AntViewOnlyUnwatchedCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "OnlyUnwatched", true));
+          this.AntViewOnlyUnwatchedCheckBox.Location = new System.Drawing.Point(219, 70);
+          this.AntViewOnlyUnwatchedCheckBox.Name = "AntViewOnlyUnwatchedCheckBox";
+          this.AntViewOnlyUnwatchedCheckBox.Size = new System.Drawing.Size(137, 24);
+          this.AntViewOnlyUnwatchedCheckBox.TabIndex = 40;
+          this.AntViewOnlyUnwatchedCheckBox.Text = "Show only Unwatched";
+          this.AntViewOnlyUnwatchedCheckBox.UseVisualStyleBackColor = true;
+          // 
+          // AntViewFilter
+          // 
+          this.AntViewFilter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
+          this.AntViewFilter.Location = new System.Drawing.Point(64, 44);
+          this.AntViewFilter.Name = "AntViewFilter";
+          this.AntViewFilter.Size = new System.Drawing.Size(222, 20);
+          this.AntViewFilter.TabIndex = 10;
+          // 
+          // AntViewFilterEditButton
+          // 
+          this.AntViewFilterEditButton.Location = new System.Drawing.Point(292, 44);
+          this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
+          this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
+          this.AntViewFilterEditButton.TabIndex = 39;
+          this.AntViewFilterEditButton.Text = "...";
+          this.AntViewFilterEditButton.UseVisualStyleBackColor = true;
+          this.AntViewFilterEditButton.Click += new System.EventHandler(this.button1_Click);
+          // 
+          // AntViewValue
+          // 
+          this.AntViewValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
+          this.AntViewValue.Location = new System.Drawing.Point(64, 18);
+          this.AntViewValue.Name = "AntViewValue";
+          this.AntViewValue.Size = new System.Drawing.Size(107, 20);
+          this.AntViewValue.TabIndex = 8;
+          // 
+          // bindingNavigatorViews
+          // 
+          this.bindingNavigatorViews.AddNewItem = this.toolStripButton1;
+          this.bindingNavigatorViews.BindingSource = this.viewBindingSource;
+          this.bindingNavigatorViews.CountItem = this.toolStripLabel1;
+          this.bindingNavigatorViews.DeleteItem = this.toolStripButton2;
+          this.bindingNavigatorViews.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+          this.bindingNavigatorViews.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton3,
+            this.toolStripButton4,
+            this.toolStripSeparator1,
+            this.toolStripTextBox1,
+            this.toolStripLabel1,
+            this.toolStripSeparator2,
+            this.toolStripButton5,
+            this.toolStripButton6,
+            this.toolStripSeparator3,
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripSeparator4,
+            this.toolStripButton7,
+            this.toolStripButton8});
+          this.bindingNavigatorViews.Location = new System.Drawing.Point(3, 16);
+          this.bindingNavigatorViews.MoveFirstItem = this.toolStripButton3;
+          this.bindingNavigatorViews.MoveLastItem = this.toolStripButton6;
+          this.bindingNavigatorViews.MoveNextItem = this.toolStripButton5;
+          this.bindingNavigatorViews.MovePreviousItem = this.toolStripButton4;
+          this.bindingNavigatorViews.Name = "bindingNavigatorViews";
+          this.bindingNavigatorViews.PositionItem = this.toolStripTextBox1;
+          this.bindingNavigatorViews.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+          this.bindingNavigatorViews.Size = new System.Drawing.Size(511, 25);
+          this.bindingNavigatorViews.TabIndex = 38;
+          this.bindingNavigatorViews.Text = "bindingNavigatorViews";
+          // 
+          // toolStripButton1
+          // 
+          this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+          this.toolStripButton1.Name = "toolStripButton1";
+          this.toolStripButton1.RightToLeftAutoMirrorImage = true;
+          this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton1.Text = "Neu hinzufügen";
+          this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+          // 
+          // toolStripLabel1
+          // 
+          this.toolStripLabel1.Name = "toolStripLabel1";
+          this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
+          this.toolStripLabel1.Text = "von {0}";
+          this.toolStripLabel1.ToolTipText = "Die Gesamtanzahl der Elemente.";
+          // 
+          // toolStripButton2
+          // 
+          this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+          this.toolStripButton2.Name = "toolStripButton2";
+          this.toolStripButton2.RightToLeftAutoMirrorImage = true;
+          this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton2.Text = "Löschen";
+          // 
+          // toolStripButton3
+          // 
+          this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+          this.toolStripButton3.Name = "toolStripButton3";
+          this.toolStripButton3.RightToLeftAutoMirrorImage = true;
+          this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton3.Text = "Erste verschieben";
+          // 
+          // toolStripButton4
+          // 
+          this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+          this.toolStripButton4.Name = "toolStripButton4";
+          this.toolStripButton4.RightToLeftAutoMirrorImage = true;
+          this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton4.Text = "Vorherige verschieben";
+          // 
+          // toolStripSeparator1
+          // 
+          this.toolStripSeparator1.Name = "toolStripSeparator1";
+          this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+          // 
+          // toolStripTextBox1
+          // 
+          this.toolStripTextBox1.AccessibleName = "Position";
+          this.toolStripTextBox1.AutoSize = false;
+          this.toolStripTextBox1.Name = "toolStripTextBox1";
+          this.toolStripTextBox1.Size = new System.Drawing.Size(50, 21);
+          this.toolStripTextBox1.Text = "0";
+          this.toolStripTextBox1.ToolTipText = "Aktuelle Position";
+          // 
+          // toolStripSeparator2
+          // 
+          this.toolStripSeparator2.Name = "toolStripSeparator2";
+          this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+          // 
+          // toolStripButton5
+          // 
+          this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+          this.toolStripButton5.Name = "toolStripButton5";
+          this.toolStripButton5.RightToLeftAutoMirrorImage = true;
+          this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton5.Text = "Nächste verschieben";
+          // 
+          // toolStripButton6
+          // 
+          this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+          this.toolStripButton6.Name = "toolStripButton6";
+          this.toolStripButton6.RightToLeftAutoMirrorImage = true;
+          this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton6.Text = "Letzte verschieben";
+          // 
+          // toolStripSeparator3
+          // 
+          this.toolStripSeparator3.Name = "toolStripSeparator3";
+          this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+          // 
+          // toolStripSeparator4
+          // 
+          this.toolStripSeparator4.Name = "toolStripSeparator4";
+          this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+          // 
+          // toolStripButton7
+          // 
+          this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButton7.Name = "toolStripButton7";
+          this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton7.Text = "up";
+          this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+          // 
+          // toolStripButton8
+          // 
+          this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButton8.Name = "toolStripButton8";
+          this.toolStripButton8.Size = new System.Drawing.Size(37, 22);
+          this.toolStripButton8.Text = "down";
+          this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+          // 
+          // AntViewReverseNamesCheckbox
+          // 
+          this.AntViewReverseNamesCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "ReverseNames", true));
+          this.AntViewReverseNamesCheckbox.Location = new System.Drawing.Point(400, 69);
+          this.AntViewReverseNamesCheckbox.Name = "AntViewReverseNamesCheckbox";
+          this.AntViewReverseNamesCheckbox.Size = new System.Drawing.Size(109, 22);
+          this.AntViewReverseNamesCheckbox.TabIndex = 16;
+          this.AntViewReverseNamesCheckbox.Text = "Reverse Names";
+          this.ToolTip1.SetToolTip(this.AntViewReverseNamesCheckbox, "In person views, like \"Actors\" this option reverses first and last name.\r\nThis is" +
+                  " useful, if you prefer a list by last name, but internet database\r\nonly provides" +
+                  " you persons as \"first last\".");
+          this.AntViewReverseNamesCheckbox.UseVisualStyleBackColor = true;
+          // 
+          // checkBox2
+          // 
+          this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "ShowEmpty", true));
+          this.checkBox2.Location = new System.Drawing.Point(400, 46);
+          this.checkBox2.Name = "checkBox2";
+          this.checkBox2.Size = new System.Drawing.Size(86, 24);
+          this.checkBox2.TabIndex = 14;
+          this.checkBox2.Text = "Show Empty";
+          this.ToolTip1.SetToolTip(this.checkBox2, resources.GetString("checkBox2.ToolTip"));
+          this.checkBox2.UseVisualStyleBackColor = true;
+          // 
+          // AntViewIndex
+          // 
+          this.AntViewIndex.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
+          this.AntViewIndex.Location = new System.Drawing.Point(355, 47);
+          this.AntViewIndex.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+          this.AntViewIndex.Name = "AntViewIndex";
+          this.AntViewIndex.Size = new System.Drawing.Size(39, 20);
+          this.AntViewIndex.TabIndex = 35;
+          this.ToolTip1.SetToolTip(this.AntViewIndex, "You can view normally (\"0\") or indexed. Indexed means there will be a grouping by" +
+                  " the first x characters (1 or 2).");
           // 
           // Tab_Views
           // 
@@ -5656,8 +6108,6 @@
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
-          this.Tab_Other.Controls.Add(this.groupBoxView);
-          this.Tab_Other.Controls.Add(this.viewDataGridView);
           this.Tab_Other.Controls.Add(this.groupBox_SupplementarySearch);
           this.Tab_Other.Controls.Add(this.dgViews);
           this.Tab_Other.Controls.Add(this.groupBox_AntUpdatingItems);
@@ -5682,489 +6132,6 @@
           this.Tab_Other.TabIndex = 11;
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
-          // 
-          // groupBoxView
-          // 
-          this.groupBoxView.Controls.Add(this.button1);
-          this.groupBoxView.Controls.Add(this.bindingNavigator2);
-          this.groupBoxView.Controls.Add(this.label57);
-          this.groupBoxView.Controls.Add(this.label58);
-          this.groupBoxView.Controls.Add(this.label59);
-          this.groupBoxView.Controls.Add(label60);
-          this.groupBoxView.Controls.Add(this.numericUpDown1);
-          this.groupBoxView.Controls.Add(label64);
-          this.groupBoxView.Controls.Add(this.textBox1);
-          this.groupBoxView.Controls.Add(label65);
-          this.groupBoxView.Controls.Add(this.comboBox3);
-          this.groupBoxView.Controls.Add(label66);
-          this.groupBoxView.Controls.Add(this.textBox3);
-          this.groupBoxView.Controls.Add(label67);
-          this.groupBoxView.Controls.Add(this.textBox4);
-          this.groupBoxView.Controls.Add(this.checkBox2);
-          this.groupBoxView.Controls.Add(this.checkBox3);
-          this.groupBoxView.Controls.Add(this.checkBox4);
-          this.groupBoxView.Controls.Add(this.comboBox4);
-          this.groupBoxView.Controls.Add(this.comboBox5);
-          this.groupBoxView.Controls.Add(label68);
-          this.groupBoxView.Controls.Add(this.comboBox6);
-          this.groupBoxView.Controls.Add(label69);
-          this.groupBoxView.Controls.Add(this.comboBox7);
-          this.groupBoxView.Controls.Add(label70);
-          this.groupBoxView.Controls.Add(this.comboBox8);
-          this.groupBoxView.Controls.Add(this.comboBox9);
-          this.groupBoxView.Controls.Add(this.comboBox10);
-          this.groupBoxView.Controls.Add(this.comboBox11);
-          this.groupBoxView.Location = new System.Drawing.Point(139, 51);
-          this.groupBoxView.Name = "groupBoxView";
-          this.groupBoxView.Size = new System.Drawing.Size(468, 252);
-          this.groupBoxView.TabIndex = 125;
-          this.groupBoxView.TabStop = false;
-          this.groupBoxView.Text = "View Editor ...";
-          // 
-          // button1
-          // 
-          this.button1.Location = new System.Drawing.Point(373, 103);
-          this.button1.Name = "button1";
-          this.button1.Size = new System.Drawing.Size(45, 20);
-          this.button1.TabIndex = 39;
-          this.button1.Text = "edit";
-          this.button1.UseVisualStyleBackColor = true;
-          // 
-          // bindingNavigator2
-          // 
-          this.bindingNavigator2.AddNewItem = this.toolStripButton1;
-          this.bindingNavigator2.CountItem = this.toolStripLabel1;
-          this.bindingNavigator2.DeleteItem = this.toolStripButton2;
-          this.bindingNavigator2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-          this.bindingNavigator2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripSeparator1,
-            this.toolStripTextBox1,
-            this.toolStripLabel1,
-            this.toolStripSeparator2,
-            this.toolStripButton5,
-            this.toolStripButton6,
-            this.toolStripSeparator3,
-            this.toolStripButton1,
-            this.toolStripButton2});
-          this.bindingNavigator2.Location = new System.Drawing.Point(3, 16);
-          this.bindingNavigator2.MoveFirstItem = this.toolStripButton3;
-          this.bindingNavigator2.MoveLastItem = this.toolStripButton6;
-          this.bindingNavigator2.MoveNextItem = this.toolStripButton5;
-          this.bindingNavigator2.MovePreviousItem = this.toolStripButton4;
-          this.bindingNavigator2.Name = "bindingNavigator2";
-          this.bindingNavigator2.PositionItem = this.toolStripTextBox1;
-          this.bindingNavigator2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-          this.bindingNavigator2.Size = new System.Drawing.Size(462, 25);
-          this.bindingNavigator2.TabIndex = 38;
-          this.bindingNavigator2.Text = "bindingNavigator2";
-          // 
-          // toolStripButton1
-          // 
-          this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-          this.toolStripButton1.Name = "toolStripButton1";
-          this.toolStripButton1.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-          this.toolStripButton1.Text = "Neu hinzufügen";
-          // 
-          // toolStripLabel1
-          // 
-          this.toolStripLabel1.Name = "toolStripLabel1";
-          this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
-          this.toolStripLabel1.Text = "von {0}";
-          this.toolStripLabel1.ToolTipText = "Die Gesamtanzahl der Elemente.";
-          // 
-          // toolStripButton2
-          // 
-          this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-          this.toolStripButton2.Name = "toolStripButton2";
-          this.toolStripButton2.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-          this.toolStripButton2.Text = "Löschen";
-          // 
-          // toolStripButton3
-          // 
-          this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-          this.toolStripButton3.Name = "toolStripButton3";
-          this.toolStripButton3.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-          this.toolStripButton3.Text = "Erste verschieben";
-          // 
-          // toolStripButton4
-          // 
-          this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-          this.toolStripButton4.Name = "toolStripButton4";
-          this.toolStripButton4.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-          this.toolStripButton4.Text = "Vorherige verschieben";
-          // 
-          // toolStripSeparator1
-          // 
-          this.toolStripSeparator1.Name = "toolStripSeparator1";
-          this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-          // 
-          // toolStripTextBox1
-          // 
-          this.toolStripTextBox1.AccessibleName = "Position";
-          this.toolStripTextBox1.AutoSize = false;
-          this.toolStripTextBox1.Name = "toolStripTextBox1";
-          this.toolStripTextBox1.Size = new System.Drawing.Size(50, 21);
-          this.toolStripTextBox1.Text = "0";
-          this.toolStripTextBox1.ToolTipText = "Aktuelle Position";
-          // 
-          // toolStripSeparator2
-          // 
-          this.toolStripSeparator2.Name = "toolStripSeparator2";
-          this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-          // 
-          // toolStripButton5
-          // 
-          this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-          this.toolStripButton5.Name = "toolStripButton5";
-          this.toolStripButton5.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-          this.toolStripButton5.Text = "Nächste verschieben";
-          // 
-          // toolStripButton6
-          // 
-          this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-          this.toolStripButton6.Name = "toolStripButton6";
-          this.toolStripButton6.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-          this.toolStripButton6.Text = "Letzte verschieben";
-          // 
-          // toolStripSeparator3
-          // 
-          this.toolStripSeparator3.Name = "toolStripSeparator3";
-          this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-          // 
-          // label57
-          // 
-          this.label57.AutoSize = true;
-          this.label57.Location = new System.Drawing.Point(8, 216);
-          this.label57.Name = "label57";
-          this.label57.Size = new System.Drawing.Size(30, 13);
-          this.label57.TabIndex = 38;
-          this.label57.Text = "Films";
-          // 
-          // label58
-          // 
-          this.label58.AutoSize = true;
-          this.label58.Location = new System.Drawing.Point(8, 190);
-          this.label58.Name = "label58";
-          this.label58.Size = new System.Drawing.Size(52, 13);
-          this.label58.TabIndex = 37;
-          this.label58.Text = "Hierarchy";
-          // 
-          // label59
-          // 
-          this.label59.AutoSize = true;
-          this.label59.Location = new System.Drawing.Point(8, 166);
-          this.label59.Name = "label59";
-          this.label59.Size = new System.Drawing.Size(30, 13);
-          this.label59.TabIndex = 36;
-          this.label59.Text = "View";
-          // 
-          // numericUpDown1
-          // 
-          this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
-          this.numericUpDown1.Location = new System.Drawing.Point(220, 78);
-          this.numericUpDown1.Name = "numericUpDown1";
-          this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
-          this.numericUpDown1.TabIndex = 35;
-          // 
-          // viewBindingSource
-          // 
-          this.viewBindingSource.DataMember = "View";
-          this.viewBindingSource.DataSource = this.mFview;
-          // 
-          // mFview
-          // 
-          this.mFview.DataSetName = "MFview";
-          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
-          // textBox1
-          // 
-          this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
-          this.textBox1.Location = new System.Drawing.Point(65, 50);
-          this.textBox1.Name = "textBox1";
-          this.textBox1.Size = new System.Drawing.Size(107, 20);
-          this.textBox1.TabIndex = 4;
-          // 
-          // comboBox3
-          // 
-          this.comboBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
-          this.comboBox3.FormattingEnabled = true;
-          this.comboBox3.Location = new System.Drawing.Point(65, 76);
-          this.comboBox3.Name = "comboBox3";
-          this.comboBox3.Size = new System.Drawing.Size(107, 21);
-          this.comboBox3.TabIndex = 6;
-          // 
-          // textBox3
-          // 
-          this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
-          this.textBox3.Location = new System.Drawing.Point(304, 77);
-          this.textBox3.Name = "textBox3";
-          this.textBox3.Size = new System.Drawing.Size(114, 20);
-          this.textBox3.TabIndex = 8;
-          // 
-          // textBox4
-          // 
-          this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
-          this.textBox4.Location = new System.Drawing.Point(65, 103);
-          this.textBox4.Name = "textBox4";
-          this.textBox4.Size = new System.Drawing.Size(299, 20);
-          this.textBox4.TabIndex = 10;
-          // 
-          // checkBox2
-          // 
-          this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.viewBindingSource, "ShowEmpty", true));
-          this.checkBox2.Location = new System.Drawing.Point(333, 166);
-          this.checkBox2.Name = "checkBox2";
-          this.checkBox2.Size = new System.Drawing.Size(121, 24);
-          this.checkBox2.TabIndex = 14;
-          this.checkBox2.Text = "Show Empty";
-          this.checkBox2.UseVisualStyleBackColor = true;
-          // 
-          // checkBox3
-          // 
-          this.checkBox3.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.viewBindingSource, "ReverseNames", true));
-          this.checkBox3.Location = new System.Drawing.Point(333, 187);
-          this.checkBox3.Name = "checkBox3";
-          this.checkBox3.Size = new System.Drawing.Size(121, 24);
-          this.checkBox3.TabIndex = 16;
-          this.checkBox3.Text = "Reverse Names";
-          this.checkBox3.UseVisualStyleBackColor = true;
-          // 
-          // checkBox4
-          // 
-          this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.viewBindingSource, "SortOcurrencies", true));
-          this.checkBox4.Location = new System.Drawing.Point(333, 208);
-          this.checkBox4.Name = "checkBox4";
-          this.checkBox4.Size = new System.Drawing.Size(121, 24);
-          this.checkBox4.TabIndex = 18;
-          this.checkBox4.Text = "Sort Occurenvies";
-          this.checkBox4.UseVisualStyleBackColor = true;
-          // 
-          // comboBox4
-          // 
-          this.comboBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionView", true));
-          this.comboBox4.FormattingEnabled = true;
-          this.comboBox4.Location = new System.Drawing.Point(178, 161);
-          this.comboBox4.Name = "comboBox4";
-          this.comboBox4.Size = new System.Drawing.Size(63, 21);
-          this.comboBox4.TabIndex = 20;
-          // 
-          // comboBox5
-          // 
-          this.comboBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutView", true));
-          this.comboBox5.FormattingEnabled = true;
-          this.comboBox5.Location = new System.Drawing.Point(247, 161);
-          this.comboBox5.Name = "comboBox5";
-          this.comboBox5.Size = new System.Drawing.Size(69, 21);
-          this.comboBox5.TabIndex = 22;
-          // 
-          // comboBox6
-          // 
-          this.comboBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldHierarchy", true));
-          this.comboBox6.FormattingEnabled = true;
-          this.comboBox6.Location = new System.Drawing.Point(65, 187);
-          this.comboBox6.Name = "comboBox6";
-          this.comboBox6.Size = new System.Drawing.Size(107, 21);
-          this.comboBox6.TabIndex = 24;
-          // 
-          // comboBox7
-          // 
-          this.comboBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionHierarchy", true));
-          this.comboBox7.FormattingEnabled = true;
-          this.comboBox7.Location = new System.Drawing.Point(178, 187);
-          this.comboBox7.Name = "comboBox7";
-          this.comboBox7.Size = new System.Drawing.Size(63, 21);
-          this.comboBox7.TabIndex = 26;
-          // 
-          // comboBox8
-          // 
-          this.comboBox8.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutHierarchy", true));
-          this.comboBox8.FormattingEnabled = true;
-          this.comboBox8.Location = new System.Drawing.Point(247, 187);
-          this.comboBox8.Name = "comboBox8";
-          this.comboBox8.Size = new System.Drawing.Size(69, 21);
-          this.comboBox8.TabIndex = 28;
-          // 
-          // comboBox9
-          // 
-          this.comboBox9.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldFilms", true));
-          this.comboBox9.FormattingEnabled = true;
-          this.comboBox9.Location = new System.Drawing.Point(65, 214);
-          this.comboBox9.Name = "comboBox9";
-          this.comboBox9.Size = new System.Drawing.Size(107, 21);
-          this.comboBox9.TabIndex = 30;
-          // 
-          // comboBox10
-          // 
-          this.comboBox10.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionFilms", true));
-          this.comboBox10.FormattingEnabled = true;
-          this.comboBox10.Location = new System.Drawing.Point(178, 213);
-          this.comboBox10.Name = "comboBox10";
-          this.comboBox10.Size = new System.Drawing.Size(63, 21);
-          this.comboBox10.TabIndex = 32;
-          // 
-          // comboBox11
-          // 
-          this.comboBox11.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutFilms", true));
-          this.comboBox11.FormattingEnabled = true;
-          this.comboBox11.Location = new System.Drawing.Point(246, 213);
-          this.comboBox11.Name = "comboBox11";
-          this.comboBox11.Size = new System.Drawing.Size(70, 21);
-          this.comboBox11.TabIndex = 34;
-          // 
-          // viewDataGridView
-          // 
-          this.viewDataGridView.AutoGenerateColumns = false;
-          this.viewDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-          this.viewDataGridView.BackgroundColor = System.Drawing.SystemColors.Menu;
-          this.viewDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-          this.viewDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn24,
-            this.dataGridViewTextBoxColumn25,
-            this.dataGridViewTextBoxColumn26,
-            this.Edit,
-            this.dataGridViewTextBoxColumn27,
-            this.dataGridViewCheckBoxColumn6,
-            this.dataGridViewCheckBoxColumn7,
-            this.dataGridViewCheckBoxColumn8,
-            this.dataGridViewTextBoxColumn28,
-            this.dataGridViewTextBoxColumn29,
-            this.dataGridViewTextBoxColumn30,
-            this.dataGridViewCheckBoxColumn9,
-            this.dataGridViewTextBoxColumn31,
-            this.dataGridViewTextBoxColumn32,
-            this.dataGridViewTextBoxColumn33});
-          this.viewDataGridView.DataSource = this.viewBindingSource;
-          this.viewDataGridView.Location = new System.Drawing.Point(215, 58);
-          this.viewDataGridView.Name = "viewDataGridView";
-          this.viewDataGridView.RowHeadersVisible = false;
-          this.viewDataGridView.Size = new System.Drawing.Size(254, 102);
-          this.viewDataGridView.TabIndex = 124;
-          // 
-          // dataGridViewTextBoxColumn22
-          // 
-          this.dataGridViewTextBoxColumn22.DataPropertyName = "Label";
-          this.dataGridViewTextBoxColumn22.HeaderText = "Label";
-          this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-          this.dataGridViewTextBoxColumn22.Width = 58;
-          // 
-          // dataGridViewTextBoxColumn24
-          // 
-          this.dataGridViewTextBoxColumn24.DataPropertyName = "DBfield";
-          this.dataGridViewTextBoxColumn24.HeaderText = "DBfield";
-          this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-          this.dataGridViewTextBoxColumn24.Width = 66;
-          // 
-          // dataGridViewTextBoxColumn25
-          // 
-          this.dataGridViewTextBoxColumn25.DataPropertyName = "Value";
-          this.dataGridViewTextBoxColumn25.HeaderText = "Value";
-          this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-          this.dataGridViewTextBoxColumn25.Width = 59;
-          // 
-          // dataGridViewTextBoxColumn26
-          // 
-          this.dataGridViewTextBoxColumn26.DataPropertyName = "Filter";
-          this.dataGridViewTextBoxColumn26.HeaderText = "Filter";
-          this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-          this.dataGridViewTextBoxColumn26.Width = 54;
-          // 
-          // Edit
-          // 
-          this.Edit.HeaderText = "Edit";
-          this.Edit.Name = "Edit";
-          this.Edit.Width = 31;
-          // 
-          // dataGridViewTextBoxColumn27
-          // 
-          this.dataGridViewTextBoxColumn27.DataPropertyName = "Index";
-          this.dataGridViewTextBoxColumn27.HeaderText = "Index";
-          this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
-          this.dataGridViewTextBoxColumn27.Width = 58;
-          // 
-          // dataGridViewCheckBoxColumn6
-          // 
-          this.dataGridViewCheckBoxColumn6.DataPropertyName = "ShowEmpty";
-          this.dataGridViewCheckBoxColumn6.HeaderText = "ShowEmpty";
-          this.dataGridViewCheckBoxColumn6.Name = "dataGridViewCheckBoxColumn6";
-          this.dataGridViewCheckBoxColumn6.Width = 69;
-          // 
-          // dataGridViewCheckBoxColumn7
-          // 
-          this.dataGridViewCheckBoxColumn7.DataPropertyName = "ReverseNames";
-          this.dataGridViewCheckBoxColumn7.HeaderText = "ReverseNames";
-          this.dataGridViewCheckBoxColumn7.Name = "dataGridViewCheckBoxColumn7";
-          this.dataGridViewCheckBoxColumn7.Width = 86;
-          // 
-          // dataGridViewCheckBoxColumn8
-          // 
-          this.dataGridViewCheckBoxColumn8.DataPropertyName = "SortOcurrencies";
-          this.dataGridViewCheckBoxColumn8.HeaderText = "SortOcurrencies";
-          this.dataGridViewCheckBoxColumn8.Name = "dataGridViewCheckBoxColumn8";
-          this.dataGridViewCheckBoxColumn8.Width = 89;
-          // 
-          // dataGridViewTextBoxColumn28
-          // 
-          this.dataGridViewTextBoxColumn28.DataPropertyName = "SortDirectionView";
-          this.dataGridViewTextBoxColumn28.HeaderText = "SortDirectionView";
-          this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
-          this.dataGridViewTextBoxColumn28.Width = 116;
-          // 
-          // dataGridViewTextBoxColumn29
-          // 
-          this.dataGridViewTextBoxColumn29.DataPropertyName = "LayoutView";
-          this.dataGridViewTextBoxColumn29.HeaderText = "LayoutView";
-          this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
-          this.dataGridViewTextBoxColumn29.Width = 87;
-          // 
-          // dataGridViewTextBoxColumn30
-          // 
-          this.dataGridViewTextBoxColumn30.DataPropertyName = "SortFieldHierarchy";
-          this.dataGridViewTextBoxColumn30.HeaderText = "SortFieldHierarchy";
-          this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
-          this.dataGridViewTextBoxColumn30.Width = 118;
-          // 
-          // dataGridViewCheckBoxColumn9
-          // 
-          this.dataGridViewCheckBoxColumn9.DataPropertyName = "SortDirectionHierarchy";
-          this.dataGridViewCheckBoxColumn9.HeaderText = "SortDirectionHierarchy";
-          this.dataGridViewCheckBoxColumn9.Name = "dataGridViewCheckBoxColumn9";
-          this.dataGridViewCheckBoxColumn9.Width = 119;
-          // 
-          // dataGridViewTextBoxColumn31
-          // 
-          this.dataGridViewTextBoxColumn31.DataPropertyName = "LayoutHierarchy";
-          this.dataGridViewTextBoxColumn31.HeaderText = "LayoutHierarchy";
-          this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
-          this.dataGridViewTextBoxColumn31.Width = 109;
-          // 
-          // dataGridViewTextBoxColumn32
-          // 
-          this.dataGridViewTextBoxColumn32.DataPropertyName = "SortDirectionFilms";
-          this.dataGridViewTextBoxColumn32.HeaderText = "SortDirectionFilms";
-          this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
-          this.dataGridViewTextBoxColumn32.Width = 116;
-          // 
-          // dataGridViewTextBoxColumn33
-          // 
-          this.dataGridViewTextBoxColumn33.DataPropertyName = "LayoutFilms";
-          this.dataGridViewTextBoxColumn33.HeaderText = "LayoutFilms";
-          this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
-          this.dataGridViewTextBoxColumn33.Width = 87;
           // 
           // dgViews
           // 
@@ -6583,11 +6550,6 @@
           this.customFieldsBindingSource.DataMember = "CustomFields";
           this.customFieldsBindingSource.DataSource = this.antMovieCatalog;
           // 
-          // viewsBindingSource
-          // 
-          this.viewsBindingSource.DataMember = "FK_View_Views";
-          this.viewsBindingSource.DataSource = this.viewBindingSource;
-          // 
           // btnEditView
           // 
           this.btnEditView.Location = new System.Drawing.Point(373, 103);
@@ -6596,121 +6558,6 @@
           this.btnEditView.TabIndex = 39;
           this.btnEditView.Text = "edit";
           this.btnEditView.UseVisualStyleBackColor = true;
-          // 
-          // bindingNavigator1
-          // 
-          this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
-          this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-          this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
-          this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-          this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem});
-          this.bindingNavigator1.Location = new System.Drawing.Point(3, 16);
-          this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-          this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
-          this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
-          this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-          this.bindingNavigator1.Name = "bindingNavigator1";
-          this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-          this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-          this.bindingNavigator1.Size = new System.Drawing.Size(462, 25);
-          this.bindingNavigator1.TabIndex = 38;
-          this.bindingNavigator1.Text = "bindingNavigator1";
-          // 
-          // bindingNavigatorAddNewItem
-          // 
-          this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-          this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-          this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-          this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorAddNewItem.Text = "Neu hinzufügen";
-          // 
-          // bindingNavigatorCountItem
-          // 
-          this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-          this.bindingNavigatorCountItem.Size = new System.Drawing.Size(44, 22);
-          this.bindingNavigatorCountItem.Text = "von {0}";
-          this.bindingNavigatorCountItem.ToolTipText = "Die Gesamtanzahl der Elemente.";
-          // 
-          // bindingNavigatorDeleteItem
-          // 
-          this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-          this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-          this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-          this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorDeleteItem.Text = "Löschen";
-          // 
-          // bindingNavigatorMoveFirstItem
-          // 
-          this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-          this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-          this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-          this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorMoveFirstItem.Text = "Erste verschieben";
-          // 
-          // bindingNavigatorMovePreviousItem
-          // 
-          this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-          this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-          this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-          this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorMovePreviousItem.Text = "Vorherige verschieben";
-          // 
-          // bindingNavigatorSeparator
-          // 
-          this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-          this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-          // 
-          // bindingNavigatorPositionItem
-          // 
-          this.bindingNavigatorPositionItem.AccessibleName = "Position";
-          this.bindingNavigatorPositionItem.AutoSize = false;
-          this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-          this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 21);
-          this.bindingNavigatorPositionItem.Text = "0";
-          this.bindingNavigatorPositionItem.ToolTipText = "Aktuelle Position";
-          // 
-          // bindingNavigatorSeparator1
-          // 
-          this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-          this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-          // 
-          // bindingNavigatorMoveNextItem
-          // 
-          this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-          this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-          this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-          this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorMoveNextItem.Text = "Nächste verschieben";
-          // 
-          // bindingNavigatorMoveLastItem
-          // 
-          this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-          this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-          this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-          this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorMoveLastItem.Text = "Letzte verschieben";
-          // 
-          // bindingNavigatorSeparator2
-          // 
-          this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-          this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
           // 
           // label52
           // 
@@ -6741,7 +6588,6 @@
           // 
           // indexNumericUpDown
           // 
-          this.indexNumericUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
           this.indexNumericUpDown.Location = new System.Drawing.Point(220, 78);
           this.indexNumericUpDown.Name = "indexNumericUpDown";
           this.indexNumericUpDown.Size = new System.Drawing.Size(39, 20);
@@ -6749,7 +6595,6 @@
           // 
           // labelTextBox
           // 
-          this.labelTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
           this.labelTextBox.Location = new System.Drawing.Point(65, 50);
           this.labelTextBox.Name = "labelTextBox";
           this.labelTextBox.Size = new System.Drawing.Size(107, 20);
@@ -6757,7 +6602,6 @@
           // 
           // dBfieldComboBox
           // 
-          this.dBfieldComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
           this.dBfieldComboBox.FormattingEnabled = true;
           this.dBfieldComboBox.Location = new System.Drawing.Point(65, 76);
           this.dBfieldComboBox.Name = "dBfieldComboBox";
@@ -6766,7 +6610,6 @@
           // 
           // valueTextBox
           // 
-          this.valueTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
           this.valueTextBox.Location = new System.Drawing.Point(304, 77);
           this.valueTextBox.Name = "valueTextBox";
           this.valueTextBox.Size = new System.Drawing.Size(114, 20);
@@ -6774,7 +6617,6 @@
           // 
           // filterTextBox
           // 
-          this.filterTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
           this.filterTextBox.Location = new System.Drawing.Point(65, 103);
           this.filterTextBox.Name = "filterTextBox";
           this.filterTextBox.Size = new System.Drawing.Size(299, 20);
@@ -6782,7 +6624,6 @@
           // 
           // showEmptyCheckBox
           // 
-          this.showEmptyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.viewBindingSource, "ShowEmpty", true));
           this.showEmptyCheckBox.Location = new System.Drawing.Point(333, 166);
           this.showEmptyCheckBox.Name = "showEmptyCheckBox";
           this.showEmptyCheckBox.Size = new System.Drawing.Size(121, 24);
@@ -6792,7 +6633,6 @@
           // 
           // reverseNamesCheckBox
           // 
-          this.reverseNamesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.viewBindingSource, "ReverseNames", true));
           this.reverseNamesCheckBox.Location = new System.Drawing.Point(333, 187);
           this.reverseNamesCheckBox.Name = "reverseNamesCheckBox";
           this.reverseNamesCheckBox.Size = new System.Drawing.Size(121, 24);
@@ -6802,7 +6642,6 @@
           // 
           // sortOcurrenciesCheckBox
           // 
-          this.sortOcurrenciesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.viewBindingSource, "SortOcurrencies", true));
           this.sortOcurrenciesCheckBox.Location = new System.Drawing.Point(333, 208);
           this.sortOcurrenciesCheckBox.Name = "sortOcurrenciesCheckBox";
           this.sortOcurrenciesCheckBox.Size = new System.Drawing.Size(121, 24);
@@ -6812,7 +6651,6 @@
           // 
           // sortDirectionViewComboBox
           // 
-          this.sortDirectionViewComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionView", true));
           this.sortDirectionViewComboBox.FormattingEnabled = true;
           this.sortDirectionViewComboBox.Location = new System.Drawing.Point(178, 161);
           this.sortDirectionViewComboBox.Name = "sortDirectionViewComboBox";
@@ -6821,7 +6659,6 @@
           // 
           // layoutViewComboBox
           // 
-          this.layoutViewComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutView", true));
           this.layoutViewComboBox.FormattingEnabled = true;
           this.layoutViewComboBox.Location = new System.Drawing.Point(247, 161);
           this.layoutViewComboBox.Name = "layoutViewComboBox";
@@ -6830,7 +6667,6 @@
           // 
           // sortFieldHierarchyComboBox
           // 
-          this.sortFieldHierarchyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldHierarchy", true));
           this.sortFieldHierarchyComboBox.FormattingEnabled = true;
           this.sortFieldHierarchyComboBox.Location = new System.Drawing.Point(65, 187);
           this.sortFieldHierarchyComboBox.Name = "sortFieldHierarchyComboBox";
@@ -6839,7 +6675,6 @@
           // 
           // sortDirectionHierarchyComboBox
           // 
-          this.sortDirectionHierarchyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionHierarchy", true));
           this.sortDirectionHierarchyComboBox.FormattingEnabled = true;
           this.sortDirectionHierarchyComboBox.Location = new System.Drawing.Point(178, 187);
           this.sortDirectionHierarchyComboBox.Name = "sortDirectionHierarchyComboBox";
@@ -6848,7 +6683,6 @@
           // 
           // layoutHierarchyComboBox
           // 
-          this.layoutHierarchyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutHierarchy", true));
           this.layoutHierarchyComboBox.FormattingEnabled = true;
           this.layoutHierarchyComboBox.Location = new System.Drawing.Point(247, 187);
           this.layoutHierarchyComboBox.Name = "layoutHierarchyComboBox";
@@ -6857,7 +6691,6 @@
           // 
           // sortFieldFilmsComboBox
           // 
-          this.sortFieldFilmsComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortFieldFilms", true));
           this.sortFieldFilmsComboBox.FormattingEnabled = true;
           this.sortFieldFilmsComboBox.Location = new System.Drawing.Point(65, 214);
           this.sortFieldFilmsComboBox.Name = "sortFieldFilmsComboBox";
@@ -6866,7 +6699,6 @@
           // 
           // sortDirectionFilmsComboBox
           // 
-          this.sortDirectionFilmsComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "SortDirectionFilms", true));
           this.sortDirectionFilmsComboBox.FormattingEnabled = true;
           this.sortDirectionFilmsComboBox.Location = new System.Drawing.Point(178, 213);
           this.sortDirectionFilmsComboBox.Name = "sortDirectionFilmsComboBox";
@@ -6875,7 +6707,6 @@
           // 
           // layoutFilmsComboBox
           // 
-          this.layoutFilmsComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "LayoutFilms", true));
           this.layoutFilmsComboBox.FormattingEnabled = true;
           this.layoutFilmsComboBox.Location = new System.Drawing.Point(246, 213);
           this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
@@ -6953,6 +6784,19 @@
           this.groupBox4.PerformLayout();
           this.groupBox_Separators.ResumeLayout(false);
           this.groupBox_Separators.PerformLayout();
+          this.groupBoxView.ResumeLayout(false);
+          this.groupBoxView.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dgViewsList)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.mFview)).EndInit();
+          this.groupBox3.ResumeLayout(false);
+          this.groupBox3.PerformLayout();
+          this.groupBox5.ResumeLayout(false);
+          this.groupBox5.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).EndInit();
+          this.bindingNavigatorViews.ResumeLayout(false);
+          this.bindingNavigatorViews.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).EndInit();
           this.Tab_Views.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.PerformLayout();
@@ -7001,15 +6845,6 @@
           this.General.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
-          this.groupBoxView.ResumeLayout(false);
-          this.groupBoxView.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).EndInit();
-          this.bindingNavigator2.ResumeLayout(false);
-          this.bindingNavigator2.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.mFview)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.viewDataGridView)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.dgViews)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
@@ -7019,10 +6854,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.viewsBindingSource)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
-          this.bindingNavigator1.ResumeLayout(false);
-          this.bindingNavigator1.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
@@ -7502,75 +7333,7 @@
         private TextBox AntSearchText2;
         private ComboBox AntSearchItem1;
         private TextBox AntSearchText1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn5;
-        private BindingSource viewBindingSource;
-        private MFview mFview;
-        private DataGridView viewDataGridView;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
-        private DataGridViewButtonColumn Edit;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn6;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn7;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn8;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn9;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
-        private BindingSource viewsBindingSource;
-        private GroupBox groupBoxView;
-        private Button button1;
-        private BindingNavigator bindingNavigator2;
-        private ToolStripButton toolStripButton1;
-        private ToolStripLabel toolStripLabel1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
-        private ToolStripButton toolStripButton4;
-        private ToolStripSeparator toolStripSeparator1;
-        private ToolStripTextBox toolStripTextBox1;
-        private ToolStripSeparator toolStripSeparator2;
-        private ToolStripButton toolStripButton5;
-        private ToolStripButton toolStripButton6;
-        private ToolStripSeparator toolStripSeparator3;
-        private Label label57;
-        private Label label58;
-        private Label label59;
-        private NumericUpDown numericUpDown1;
-        private TextBox textBox1;
-        private ComboBox comboBox3;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private CheckBox checkBox2;
-        private CheckBox checkBox3;
-        private CheckBox checkBox4;
-        private ComboBox comboBox4;
-        private ComboBox comboBox5;
-        private ComboBox comboBox6;
-        private ComboBox comboBox7;
-        private ComboBox comboBox8;
-        private ComboBox comboBox9;
-        private ComboBox comboBox10;
-        private ComboBox comboBox11;
         private Button btnEditView;
-        private BindingNavigator bindingNavigator1;
-        private ToolStripButton bindingNavigatorAddNewItem;
-        private ToolStripLabel bindingNavigatorCountItem;
-        private ToolStripButton bindingNavigatorDeleteItem;
-        private ToolStripButton bindingNavigatorMoveFirstItem;
-        private ToolStripButton bindingNavigatorMovePreviousItem;
-        private ToolStripSeparator bindingNavigatorSeparator;
-        private ToolStripTextBox bindingNavigatorPositionItem;
-        private ToolStripSeparator bindingNavigatorSeparator1;
-        private ToolStripButton bindingNavigatorMoveNextItem;
-        private ToolStripButton bindingNavigatorMoveLastItem;
-        private ToolStripSeparator bindingNavigatorSeparator2;
         private Label label52;
         private Label label33;
         private Label label18;
@@ -7590,5 +7353,49 @@
         private ComboBox sortFieldFilmsComboBox;
         private ComboBox sortDirectionFilmsComboBox;
         private ComboBox layoutFilmsComboBox;
+        private GroupBox groupBoxView;
+        private DataGridView dgViewsList;
+        private GroupBox groupBox3;
+        private ComboBox AntViewLayoutFilms;
+        private ComboBox AntViewSortOrderFilms;
+        private ComboBox AntViewSortFilms;
+        private ComboBox AntViewSortType;
+        private CheckBox AntViewReverseNamesCheckbox;
+        private ComboBox AntViewLayoutHierarchy;
+        private Label label57;
+        private ComboBox AntViewSortOrderHierarchies;
+        private Label label58;
+        private Label label59;
+        private ComboBox AntViewSortHierarchies;
+        private ComboBox AntViewLayoutView;
+        private ComboBox AntViewSortOrder;
+        private ComboBox AntViewItem;
+        private GroupBox groupBox5;
+        private CheckBox AntViewOnlyAvailableCheckBox;
+        private CheckBox AntViewOnlyUnwatchedCheckBox;
+        private TextBox AntViewFilter;
+        private Button AntViewFilterEditButton;
+        private TextBox AntViewValue;
+        private CheckBox checkBox2;
+        private NumericUpDown AntViewIndex;
+        private BindingSource viewBindingSource;
+        private MFview mFview;
+        private DataGridViewTextBoxColumn labelDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn viewEnabledDataGridViewCheckBoxColumn;
+        private BindingNavigator bindingNavigatorViews;
+        private ToolStripButton toolStripButton1;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton3;
+        private ToolStripButton toolStripButton4;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripTextBox toolStripTextBox1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton toolStripButton5;
+        private ToolStripButton toolStripButton6;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripButton toolStripButton7;
+        private ToolStripButton toolStripButton8;
     }
 }

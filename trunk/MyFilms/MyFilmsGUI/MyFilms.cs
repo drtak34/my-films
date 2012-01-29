@@ -3378,12 +3378,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //    SelectedView.Add("storage");
       //}
 
+      // add new (!) userdefined views ...
+      foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
+      {
+        if (Helper.FieldIsSet(customView.DBfield) && customView.ViewEnabled)
+        {
+          choiceView.Add(customView.Label);
+          if (string.IsNullOrEmpty(customView.Label))
+          {
+            dlg.Add(customView.DBfield); // specific user View1
+          }
+          else
+          {
+            dlg.Add(customView.Label); // specific Text for View1
+          }
+        }
+      }
+
       for (var i = 0; i < 5; i++)
       {
         if (Helper.FieldIsSet(conf.StrViewItem[i]))
         {
           choiceView.Add(string.Format("View{0}", i));
-          if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
+          if (string.IsNullOrEmpty(conf.StrViewText[i]))
           {
             dlg.Add(conf.StrViewItem[i]); // specific user View1
           }
@@ -3569,6 +3586,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.IsFolder = true;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         this.facadeFilms.Add(item);
+
+        // add new (!) userdefined views ...
+        foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
+        {
+          if (Helper.FieldIsSet(customView.DBfield) && customView.ViewEnabled)
+          {
+            item = new GUIListItem();
+            item.DVDLabel = customView.Label; // (string.Format("View{0}", i));
+            if (string.IsNullOrEmpty(customView.Label))
+            {
+              item.Label = customView.DBfield;   // specific user View1
+            }
+            else
+            {
+              item.Label = customView.Label;   // specific Text for View1
+            }
+            //if (string.IsNullOrEmpty(conf.StrViewValue[i]))
+            //  item.Label2 = r.Select(p => (string)p[conf.StrViewItem[i]]).Distinct(StringComparer.CurrentCultureIgnoreCase).Count().ToString();
+            // where d.Element("ProductName").Value.IndexOf(textBox1.Text, StringComparison.InvariantCultureIgnoreCase) > 0
+            //else
+            //  item.Label2 = "(" + conf.StrViewValue[i] + ") " + r.Select(p => p[conf.StrViewItem[i]].Equals(conf.StrViewValue[i])).Count().ToString();
+            item.IsFolder = true;
+            item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+            this.facadeFilms.Add(item);
+          }
+        }
 
         // add userdefined views ...
         for (i = 0; i < 5; i++)
@@ -6336,6 +6379,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.IndexedChars = 0;
       conf.Boolindexed = false;
 
+      MFview.ViewRow currentCustomView = MyFilms.conf.CustomViews.View.NewViewRow();
+      foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
+      {
+        if (selectedView == customView.Label)
+        {
+          selectedView = "Customview";
+          currentCustomView = customView;
+          break;
+        }
+      }
       switch (selectedView)
       {
         #region Special Views ...
@@ -6370,6 +6423,101 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
         #endregion
 
+        #region New CustomViews ...
+        case "Customview":
+          if (currentCustomView == null) return;
+          if (currentCustomView.DBfield != "")
+
+            switch (currentCustomView.DBfield)
+            {
+              case "Producer":
+              case "Director":
+              case "Writer":
+              case "Actors":
+              case "Borrower":
+                conf.ViewContext = ViewContext.Person;
+                break;
+              case "OriginalTitle":
+              case "TranslatedTitle":
+              case "FormattedTitle":
+                conf.ViewContext = ViewContext.Movie;
+                break;
+              default:
+                conf.ViewContext = ViewContext.Group;
+                break;
+            }
+
+          conf.WStrSort = currentCustomView.DBfield;
+
+          if (string.IsNullOrEmpty(currentCustomView.Label))
+            SetLabelView(currentCustomView.DBfield);
+          else
+            SetLabelView(currentCustomView.Label);
+
+          conf.StrSortSens = currentCustomView.SortDirectionFilms;
+          conf.WStrSortSens = currentCustomView.SortDirectionView;
+          conf.IndexedChars = currentCustomView.Index;
+          if (currentCustomView.Filter.Length > 0)
+          {
+            if (conf.StrDfltSelect.Length == 0)
+              conf.StrDfltSelect = currentCustomView.Filter;
+            else
+              conf.StrDfltSelect += " AND " + currentCustomView.Filter;
+          }
+
+          if (currentCustomView.Value.Length > 0 && !currentCustomView.Value.Contains(","))
+          {
+            conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+            conf.Boolselect = true;
+            conf.Wstar = "*";
+            if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(344) + " [*" + conf.Wstar + "*]";
+            // TxtSelect.Label = conf.StrTxtSelect;
+            MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+            conf.StrSelect = conf.WStrSort;
+
+            conf.StrFilmSelect = string.Empty;
+            conf.Wselectedlabel = currentCustomView.Value;
+            conf.Boolreturn = true;
+            do
+            {
+              if (conf.StrTitleSelect != string.Empty) conf.StrTitleSelect += conf.TitleDelim;
+              conf.StrTitleSelect += currentCustomView.Value;
+            }
+            while (GetFilmList() == false); //keep calling while single folders found
+          }
+          else
+          {
+            if (conf.IndexedChars > 0) // if indexed view is enabled ...
+            {
+              conf.Boolindexed = true;
+              conf.Boolindexedreturn = false;
+            }
+            conf.StrLayOut = int.Parse(currentCustomView.LayoutFilms);
+            conf.StrLayOutInHierarchies = int.Parse(currentCustomView.LayoutHierarchy);
+            conf.WStrLayOut = int.Parse(currentCustomView.LayoutView);
+            conf.BoolSortCountinViews = (currentCustomView.SortFieldViewType == "Count");
+
+            string listfilter = (currentCustomView.Value.Length == 0) ? "*" : currentCustomView.Value;
+            if (currentCustomView.Value.Length == 0)
+              getSelectFromDivxThreaded();
+            else
+              getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, listfilter, true, string.Empty);
+          }
+
+          //if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
+          //{
+          //    MyFilmsDetail.setGUIProperty("view", conf.StrViewItem[i]);   // specific user View1
+          //    GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewItem[i]);
+          //}
+          //else
+          //{
+          //    MyFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
+          //    GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewText[i]);
+          //}
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          break;
+        #endregion
+
         #region Userdefined Views ...
         case "View0":
         case "View1":
@@ -6385,7 +6533,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (conf.StrViewItem[i] != "")
 
-            switch (conf.StrViewItem[i].ToLower())
+            switch (conf.StrViewItem[i])
             {
               case "Producer":
               case "Director":
@@ -6468,6 +6616,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Default View Handling ...
         default: // other nonspecific views ...
           {
+            // custom views
+            
+            // standard views...
             conf.WStrSort = selectedView;
             conf.WStrSortSens = " ASC";
             SetLabelView(selectedView.ToLower());

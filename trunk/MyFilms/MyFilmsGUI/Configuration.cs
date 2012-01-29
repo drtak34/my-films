@@ -30,6 +30,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MediaPortal.Configuration;
 
+  using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms;
 
   using MyFilmsPlugin.MyFilms.CatalogConverter;
@@ -130,6 +131,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   StrViewFilter[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewFilter{0}", i), string.Empty);
                 }
 
+                CustomViews.View.Clear();
+                int index = 1;
+                while (true) //for (int i = 1; i < 6; i++)
+                {
+                  if (string.IsNullOrEmpty(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntViewText" + index, string.Empty)))
+                    break;
+                  MFview.ViewRow view = CustomViews.View.NewViewRow();
+                  view.Label = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", index), string.Empty);
+                  view.ViewEnabled = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewEnabled{0}", index), true);
+                  view.DBfield = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", index), string.Empty);
+                  view.Value = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", index), string.Empty);
+                  view.Filter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewFilter{0}", index), string.Empty);
+                  view.Index = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewIndex{0}", index), 0);
+                  view.ShowEmpty = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewShowEmpty{0}", index), false);
+                  view.ReverseNames = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewReverseNames{0}", index), false);
+                  view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), "Name");
+                  view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), " ASC");
+                  view.LayoutView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutView{0}", index), "0");
+                  view.SortFieldFilms = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldFilms{0}", index), "");
+                  view.SortDirectionFilms = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionFilms{0}", index), " ASC");
+                  view.LayoutFilms = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutFilms{0}", index), "0");
+                  view.SortFieldHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldHierarchy{0}", index), "");
+                  view.SortDirectionHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionHierarchy{0}", index), " ASC");
+                  view.LayoutHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutHierarchy{0}", index), "0");
+                  view.OnlyUnwatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewOnlyUnwatched{0}", index), false);
+                  view.OnlyAvailable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewOnlyAvailable{0}", index), false);
+                  CustomViews.View.AddViewRow(view);
+                  index++;
+                }
+              
                 for (int i = 1; i < 3; i++)
                 {
                   StrSearchText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchText{0}", i), string.Empty);
@@ -476,7 +507,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 //// read states vars for each possible view - do we also need states for "userdefined views"?  
                 //DataBase.AntMovieCatalog ds = new DataBase.AntMovieCatalog();
-                //MyFilms.conf.CustomViews.Clear();
+                //MyFilms.conf.CustomView.Clear();
                 //foreach (DataColumn dc in ds.Movie.Columns)
                 //{
                 //  View tView = new View();
@@ -485,12 +516,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //  if (!string.IsNullOrEmpty(viewstate))
                 //  {
                 //    tView.LoadFromString(viewstate);
-                //    MyFilms.conf.CustomViews.Add(tView);
+                //    MyFilms.conf.CustomView.Add(tView);
                 //  }
                 //  else
                 //  {
                 //    tView.ViewDBItem = dc.ColumnName;
-                //    CustomViews.Add(tView);
+                //    CustomView.Add(tView);
                 //  }
                 //}
               
@@ -1136,18 +1167,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strIdentItem; }
             set { strIdentItem = value; }
         }
-        private View[] customView = { new View(), new View(), new View(), new View(), new View() };
-        public View[] CustomView
+        private MFview customViews = new MFview();
+        public MFview CustomViews
         {
-          get { return customView; }
-          set { customView = value; }
+          get { return customViews; }
+          set { customViews = value; }
         }
-        //private List<View> customViews = new List<View>();
-        //public List<View> CustomViews
-        //{
-        //  get { return customViews; }
-        //  set { customViews = value; }
-        //}
         private string[] strViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] StrViewItem
         {
@@ -1760,7 +1785,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
 
-            //foreach (View viewstate in MyFilms.conf.CustomViews)
+            //foreach (View viewstate in MyFilms.conf.CustomView)
             //{
             //  string viewstateName = "ViewState-" + viewstate.ViewDBItem;
             //  XmlConfig.WriteXmlConfig("MyFilms", currentConfig, viewstateName, MyFilms.conf.CurrentView.SaveToString());
