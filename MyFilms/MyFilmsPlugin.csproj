@@ -273,7 +273,6 @@
     <None Include="DataBase\MFview.xss">
       <DependentUpon>MFview.xsd</DependentUpon>
     </None>
-    <None Include="Properties\DataSources\MyFilmsPlugin.MyFilmsGUI.ViewState.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

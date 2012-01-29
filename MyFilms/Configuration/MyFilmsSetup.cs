@@ -31,6 +31,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System.Globalization;
   using System.IO;
   using System.Net;
+  using System.Reflection;
   using System.Windows.Forms;
   using System.Xml;
 
@@ -67,7 +68,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private string MyFilms_PluginMode = String.Empty; // "normal" for standard operations, "test" for extended functionalities, to be set manually in MyFilms.XML
         private string StrDfltSelect = string.Empty;
         private AntMovieCatalog mydivx = new AntMovieCatalog();
-        private MFview views = new MFview();
+        private MFview myviews = new MFview();
+        IList ViewDbItems = new ArrayList();
+
         private Crypto crypto = new Crypto();
         public int selected_Logo_Item;
         public bool load = true;
@@ -163,10 +166,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle2.Items.Add("(none)");
             Sort.Items.Add("(none)");
             SortInHierarchies.Items.Add("(none)");
+            AntViewSortFilms.Items.Add("(none)");
+            AntViewSortHierarchies.Items.Add("(none)");
             AntIdentItem.Items.Add("(none)");
             //AntFilterMinRating.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
+            AntViewItem.Items.Add("(none)");
             AntViewItem1.Items.Add("(none)");
             AntViewItem2.Items.Add("(none)");
             AntViewItem3.Items.Add("(none)");
@@ -235,6 +241,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Number")
                 {
+                  ViewDbItems.Add(dc.ColumnName);
+                  AntViewItem.Items.Add(dc.ColumnName);
                   AntViewItem1.Items.Add(dc.ColumnName);
                   AntViewItem2.Items.Add(dc.ColumnName);
                   AntViewItem3.Items.Add(dc.ColumnName);
@@ -475,14 +483,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (!string.IsNullOrEmpty(txtGrabber.Text) && string.IsNullOrEmpty(cbPictureHandling.Text))
               {
-              System.Windows.Forms.MessageBox.Show("The Field used for selecting if cover image name to be stored with relative or absolute path is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              MessageBox.Show("The Field used for selecting if cover image name to be stored with relative or absolute path is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
               General.SelectedIndex = 6;
               cbPictureHandling.Focus();
               return;
             }
             if (AntViewItem1.Text == "Rating")
             {
-                System.Windows.Forms.MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewItem1.Text = null;
                 AntViewText1.Clear();
                 AntViewItem1.Focus();
@@ -490,7 +498,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem2.Text == "Rating")
             {
-                System.Windows.Forms.MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewItem2.Text = null;
                 AntViewText2.Clear();
                 AntViewItem2.Focus();
@@ -498,7 +506,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem3.Text == "Rating")
             {
-                System.Windows.Forms.MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewItem3.Text = null;
                 AntViewText3.Clear();
                 AntViewItem3.Focus();
@@ -506,7 +514,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem4.Text == "Rating")
             {
-                System.Windows.Forms.MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewItem4.Text = null;
                 AntViewText4.Clear();
                 AntViewItem4.Focus();
@@ -514,7 +522,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem5.Text == "Rating")
             {
-                System.Windows.Forms.MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewItem5.Text = null;
                 AntViewText5.Clear();
                 AntViewItem5.Focus();
@@ -524,7 +532,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntViewItem1.Text = "(none)";
             if (AntViewItem1.Text != "(none)" && AntViewText1.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText1.Focus();
                 return;
             }
@@ -532,7 +540,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntViewItem2.Text = "(none)";
             if (AntViewItem2.Text != "(none)" && AntViewText2.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText2.Focus();
                 return;
             }
@@ -540,7 +548,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntViewItem3.Text = "(none)";
             if (AntViewItem3.Text != "(none)" && AntViewText3.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText3.Focus();
                 return;
             }
@@ -548,7 +556,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntViewItem4.Text = "(none)";
             if (AntViewItem4.Text != "(none)" && AntViewText4.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText4.Focus();
                 return;
             }
@@ -556,7 +564,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntViewItem5.Text = "(none)";
             if (AntViewItem5.Text != "(none)" && AntViewText5.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText5.Focus();
                 return;
             }
@@ -566,13 +574,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntFilterItem1.Text = "(none)";
             if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterSign1.Focus();
                 return;
             }
             if (AntFilterItem1.Text != "(none)" && AntFilterText1.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterText1.Focus();
                 return;
             }
@@ -580,13 +588,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntFilterItem2.Text = "(none)";
             if (AntFilterItem2.Text != "(none)" && AntFilterSign2.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterSign2.Focus();
                 return;
             }
             if (AntFilterItem2.Text != "(none)" && AntFilterText2.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterText2.Focus();
                 return;
             }
@@ -594,7 +602,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 if (AntFilterComb.Text.Length == 0)
                 {
-                    System.Windows.Forms.MessageBox.Show("Must be 'or' or 'and' for filter combination", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Must be 'or' or 'and' for filter combination", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     AntFilterComb.Focus();
                     return;
                 }
@@ -607,7 +615,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 catch
                 {
-                    System.Windows.Forms.MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     AntFilterText1.Focus();
                 }
             }
@@ -619,7 +627,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 catch
                 {
-                    System.Windows.Forms.MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     AntFilterText2.Focus();
                 }
             }
@@ -635,7 +643,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntUpdItem2.Text = "(none)";
             if (AntUpdItem2.Text != "(none)" && AntUpdText2.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Button Label is mandatory with the corresponding Update Field Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Button Label is mandatory with the corresponding Update Field Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntUpdText2.Focus();
                 return;
             }
@@ -643,7 +651,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntSearchItem1.Text = "(none)";
             if (AntSearchItem1.Text != "(none)" && AntSearchText1.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntSearchText1.Focus();
                 return;
             }
@@ -651,14 +659,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 AntSearchItem2.Text = "(none)";
             if (AntSearchItem2.Text != "(none)" && AntSearchText2.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntSearchText2.Focus();
                 return;
             }
             if (Dwp.Text.Length > 0)
                 if (Dwp.Text != Rpt_Dwp.Text)
                 {
-                    System.Windows.Forms.MessageBox.Show("The two Passwords must be identical !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("The two Passwords must be identical !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     Dwp.Clear();
                     Rpt_Dwp.Focus();
                     Dwp.Focus();
@@ -667,7 +675,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (chkAMCUpd.Checked)
                 if (txtGrabber.Text.Length == 0)
                 {
-                    System.Windows.Forms.MessageBox.Show("Grabber Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Grabber Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     txtGrabber.Focus();
                     return;
                 }
@@ -675,21 +683,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 if (txtAMCUpd_cnf.Text.Length == 0)
                 {
-                    System.Windows.Forms.MessageBox.Show("AMCUpdater Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("AMCUpdater Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     txtAMCUpd_cnf.Focus();
                     return;
                 }
             }
             if ((chksupplaystop.Checked) && (!chkSuppress.Checked))
             {
-                System.Windows.Forms.MessageBox.Show("Suppress action must be enabled for that choice !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Suppress action must be enabled for that choice !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 chksupplaystop.Focus();
                 return;
             }
             if (chkSuppress.Checked)
                 if (((rbsuppress3.Checked) || (rbsuppress4.Checked)) && ((cbfdupdate.Text.Length == 0) || (txtfdupdate.Text.Length == 0)))
                 {
-                    System.Windows.Forms.MessageBox.Show("For updating entry, field and value are mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("For updating entry, field and value are mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     cbfdupdate.Focus();
                     return;
                 }
@@ -704,27 +712,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //}
             if ((chkFanart.Checked) && (MesFilmsFanart.Text.Length == 0))
             {
-                System.Windows.Forms.MessageBox.Show("Fanart Path must be fill for using !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Fanart Path must be fill for using !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 MesFilmsFanart.Focus();
                 return;
             }
             if ((chkEnhancedWatchedStatusHandling.Checked) && (UserProfileName.Text.Length == 0))
             {
-              System.Windows.Forms.MessageBox.Show("'Active User Profile Name' must be filled when activating 'Enhanced Watched Status Handling' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              MessageBox.Show("'Active User Profile Name' must be filled when activating 'Enhanced Watched Status Handling' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
               General.SelectedIndex = 4;
               UserProfileName.Focus();
               return;
             }
             if ((chkEnhancedWatchedStatusHandling.Checked) && (cbWatched.Text.ToLower() == "checked"))
             {
-              System.Windows.Forms.MessageBox.Show("You have enabled 'Enhanced Watched Status Handling' and use 'Checked' field for watched status !\n This is NOT compatible with AMC and it is recommended to use a field that can store text like e.g. 'MediaLabel' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+              MessageBox.Show("You have enabled 'Enhanced Watched Status Handling' and use 'Checked' field for watched status !\n This is NOT compatible with AMC and it is recommended to use a field that can store text like e.g. 'MediaLabel' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
               General.SelectedIndex = 4;
               cbWatched.Focus();
               // return;
             }
             if (chkGlobalAvailableOnly.Checked && !chkScanMediaOnStart.Checked)
             {
-              System.Windows.Forms.MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+              MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
             }
 
             Selected_Enreg_TextChanged();
@@ -770,29 +778,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (Verify_Config() == false) // check if config successful and if config should be saved
               return;
 
-            int WLayOut = 0;
-            if (LayOut.Text == "List")
-                WLayOut = 0;
-            if (LayOut.Text == "Small Icons")
-                WLayOut = 1;
-            if (LayOut.Text == "Large Icons")
-                WLayOut = 2;
-            if (LayOut.Text == "Filmstrip")
-                WLayOut = 3;
-#if MP11
-            if (LayOut.Text == "Cover Flow")
-            {
-              WLayOut = 3;
-              LayOut.Text = "Filmstrip";
-            }
-#else
-          if (LayOut.Text == "Cover Flow")
-                WLayOut = 4;
-#endif
-
-
-            if (AntTitle2.Text.Length == 0)
-                AntTitle2.Text = "(none)";
+            if (AntTitle2.Text.Length == 0) AntTitle2.Text = "(none)";
             string wDfltSortMethod = string.Empty;
             string wDfltSort = string.Empty;
             switch (Sort.Text.ToLower())
@@ -907,37 +893,60 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterFreeText", AntFilterFreeText.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterComb", AntFilterComb.Text);
 
-          
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem1", AntViewItem1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", AntViewText1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue1", AntViewValue1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex1", AntViewIndex1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder1", AntViewSortOrder1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter1", AntViewFilter1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem2", AntViewItem2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText2", AntViewText2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue2", AntViewValue2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex2", AntViewIndex2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder2", AntViewSortOrder2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter2", AntViewFilter2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem3", AntViewItem3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText3", AntViewText3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue3", AntViewValue3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex3", AntViewIndex3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder3", AntViewSortOrder3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter3", AntViewFilter3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem4", AntViewItem4.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText4", AntViewText4.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue4", AntViewValue4.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex4", AntViewIndex4.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder4", AntViewSortOrder4.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter4", AntViewFilter4.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem5", AntViewItem5.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText5", AntViewText5.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue5", AntViewValue5.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex5", AntViewIndex5.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", AntViewSortOrder5.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", AntViewFilter5.Text);
+            int index = 1;
+            foreach (MFview.ViewRow viewRow in myviews.View) // for (int i = 1; i < 6; i++)
+            {
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", index), viewRow.Label);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewEnabled{0}", index), viewRow.ViewEnabled);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index), viewRow.DBfield);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), viewRow.Value);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), viewRow.Filter);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), viewRow.Index);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewReverseNames{0}", index), viewRow.ReverseNames);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index), viewRow.SortFieldFilms);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionFilms{0}", index), viewRow.SortDirectionFilms);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutFilms{0}", index), this.GetLayoutFromName(viewRow.LayoutFilms));
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index), viewRow.SortFieldHierarchy);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionHierarchy{0}", index), viewRow.SortDirectionHierarchy);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutHierarchy{0}", index), this.GetLayoutFromName(viewRow.LayoutHierarchy));
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyUnwatched{0}", index), viewRow.OnlyUnwatched);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyAvailable{0}", index), viewRow.OnlyAvailable);
+            }
+            
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem1", AntViewItem1.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", AntViewText1.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue1", AntViewValue1.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex1", AntViewIndex1.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder1", AntViewSortOrder1.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter1", AntViewFilter1.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem2", AntViewItem2.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText2", AntViewText2.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue2", AntViewValue2.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex2", AntViewIndex2.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder2", AntViewSortOrder2.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter2", AntViewFilter2.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem3", AntViewItem3.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText3", AntViewText3.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue3", AntViewValue3.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex3", AntViewIndex3.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder3", AntViewSortOrder3.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter3", AntViewFilter3.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem4", AntViewItem4.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText4", AntViewText4.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue4", AntViewValue4.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex4", AntViewIndex4.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder4", AntViewSortOrder4.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter4", AntViewFilter4.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem5", AntViewItem5.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText5", AntViewText5.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue5", AntViewValue5.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex5", AntViewIndex5.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", AntViewSortOrder5.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", AntViewFilter5.Text);
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", AntSearchItem1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchText1", AntSearchText1.Text);
@@ -998,7 +1007,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CurrentSortMethodInHierarchies", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", WLayOut);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrDfltSelect", StrDfltSelect);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Dwp", crypto.Crypter(Dwp.Text));
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", chkUseOriginalAsTranslatedTitle.Checked);
@@ -1035,14 +1044,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "DefaultFanartImage", DefaultFanartImage.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CmdExe", CmdExe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CmdPar", CmdPar.Text);
-            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber", chkGrabber.Checked);
-            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_Dir", txtDirGrab.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_cnf", txtGrabber.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "PicturePrefix", txtPicturePrefix.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", chkGrabber_Always.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", chkGrabber_ChooseScript.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", chkAMCUpd.Checked);
-            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_exe", txtAMCUpd_exe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", txtAMCUpd_cnf.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Fanart", chkFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "FanartDefaultViews", chkFanartDefaultViews.Checked);
@@ -1101,14 +1107,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
               Save_XML_Logos();
             }
-            //if (chkAMCUpd.Checked)
-            //{
-            //  Save_XML_AMCconfig(currentconfig);
-            //}
+            //if (chkAMCUpd.Checked) Save_XML_AMCconfig(currentconfig);
             textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
             System.Windows.Forms.MessageBox.Show("Configuration saved !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private int GetLayoutFromName(string layoutname)
+        {
+          int wLayout = 0;
+          if (layoutname == "List") wLayout = 0;
+          if (layoutname == "Small Icons") wLayout = 1;
+          if (layoutname == "Large Icons") wLayout = 2;
+          if (layoutname == "Filmstrip") wLayout = 3;
+          if (layoutname == "Cover Flow") wLayout = 4;
+          return wLayout;
+        }
+        
+        private string GetLayoutFromInt(int layoutnumber)
+        {
+          string layoutname = "List";
+          if (layoutnumber == 0) layoutname = "List";
+          if (layoutnumber == 1) layoutname = "Small Icons";
+          if (layoutnumber == 2) layoutname = "Large Icons";
+          if (layoutnumber == 3) layoutname = "Filmstrip";
+          if (layoutnumber == 4) layoutname = "Cover Flow";
+          return layoutname;
+        }
+    
         private void Save_XML_Logos()
         {
             string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
@@ -1241,7 +1266,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           personBindingSource.ResumeBinding();
 
           // views
-          viewBindingSource.DataSource = views;
+          viewBindingSource.DataSource = this.myviews;
           viewBindingSource.ResumeBinding();
         }
 
@@ -1319,20 +1344,37 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewSortOrder5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", " ASC");
             AntViewFilter5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", "");
 
-            views.View.Clear();
-            for (int i = 1; i < 6; i++)
+            myviews.View.Clear();
+            // Breaking out of loops
+            int index = 1;
+            while (true) //for (int i = 1; i < 6; i++)
             {
-              MFview mfv = new MFview();
-              MFview.ViewRow viewdefinition = mfv.View.NewViewRow();
-              viewdefinition.DBfield = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", i), string.Empty);
-              viewdefinition.Label = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", i), string.Empty);
-              viewdefinition.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", i), string.Empty);
-              viewdefinition.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", i), 0);
-              viewdefinition.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortOrder{0}", i), " ASC");
-              if (viewdefinition.SortDirectionView.StartsWith("ASC")) viewdefinition.SortDirectionView = " ASC";
-              if (viewdefinition.SortDirectionView.StartsWith("DESC")) viewdefinition.SortDirectionView = " DESC";
-              viewdefinition.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", i), string.Empty);
-              views.View.AddViewRow(viewdefinition);
+              if (string.IsNullOrEmpty(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText" + index, string.Empty)))
+                break;
+              MFview.ViewRow view = myviews.View.NewViewRow();
+              view.Label = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", index), string.Empty);
+              view.ViewEnabled = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewEnabled{0}", index), true);
+              view.DBfield = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index), string.Empty);
+              view.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), string.Empty);
+              view.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), string.Empty);
+              view.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), 0);
+              view.ShowEmpty = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index), false);
+              view.ReverseNames = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewReverseNames{0}", index), false);
+              view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), "Name");
+              view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), " ASC");
+              view.LayoutView = this.GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index), 0));
+              view.SortFieldFilms = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index), "Name");
+              view.SortDirectionFilms = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionFilms{0}", index), " ASC");
+              view.LayoutFilms = this.GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutFilms{0}", index), 0));
+              view.SortFieldHierarchy = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index), "Name");
+              view.SortDirectionHierarchy = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionHierarchy{0}", index), " ASC");
+              view.LayoutHierarchy = this.GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutHierarchy{0}", index), 0));
+              view.OnlyUnwatched = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyUnwatched{0}", index), false);
+              view.OnlyAvailable = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyAvailable{0}", index), false);
+              //if (view.SortDirectionView.StartsWith("ASC")) view.SortDirectionView = " ASC";
+              //if (view.SortDirectionView.StartsWith("DESC")) view.SortDirectionView = " DESC";
+              myviews.View.AddViewRow(view);
+              index++;
             }
 
             AntSearchItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", "");
@@ -1511,25 +1553,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //    View_Dflt_Item.Items.Add(AntViewItem1.Text);
             //if (!(AntViewItem2.Text == "Country") & !(AntViewItem2.Text == "Category") & !(AntViewItem2.Text == "Year") & !(AntViewItem2.Text == "(none)"))
             //    View_Dflt_Item.Items.Add(AntViewItem2.Text);
-            int WLayOut = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0);
-            if (WLayOut == 0)
-                LayOut.Text = "List";
-            if (WLayOut == 1)
-                LayOut.Text = "Small Icons";
-            if (WLayOut == 2)
-                LayOut.Text = "Large Icons";
-            if (WLayOut == 3)
-                LayOut.Text = "Filmstrip";
-            if (WLayOut == 4)
-                LayOut.Text = "Cover Flow";
+
+            LayOut.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0));
 
             AntViewText_Change();
             AntSort_Change();
             
-            if (Config_Name.Text.Length > 0) 
-              chkLogos.Enabled = true;
-            else 
-              chkLogos.Enabled = false;
+            chkLogos.Enabled = (Config_Name.Text.Length > 0);
 
             if (chkAMCUpd.Checked)
             {
@@ -1595,15 +1625,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                   dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Number")
               {
-                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem1.Items.Remove(dc.ColumnName);
+                if (AntViewItem.Items.Contains(dc.ColumnName)) AntViewItem.Items.Remove(dc.ColumnName);
+                if (isXtended) AntViewItem.Items.Add(dc.ColumnName);
+                
+                if (AntViewItem1.Items.Contains(dc.ColumnName)) AntViewItem1.Items.Remove(dc.ColumnName);
                 if (isXtended) AntViewItem1.Items.Add(dc.ColumnName);
-                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem2.Items.Remove(dc.ColumnName);
+                if (AntViewItem2.Items.Contains(dc.ColumnName)) AntViewItem2.Items.Remove(dc.ColumnName);
                 if (isXtended) AntViewItem2.Items.Add(dc.ColumnName);
-                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem3.Items.Remove(dc.ColumnName);
+                if (AntViewItem3.Items.Contains(dc.ColumnName)) AntViewItem3.Items.Remove(dc.ColumnName);
                 if (isXtended) AntViewItem3.Items.Add(dc.ColumnName);
-                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem4.Items.Remove(dc.ColumnName);
+                if (AntViewItem4.Items.Contains(dc.ColumnName)) AntViewItem4.Items.Remove(dc.ColumnName);
                 if (isXtended) AntViewItem4.Items.Add(dc.ColumnName);
-                if (SField1.Items.Contains(dc.ColumnName)) AntViewItem5.Items.Remove(dc.ColumnName);
+                if (AntViewItem5.Items.Contains(dc.ColumnName)) AntViewItem5.Items.Remove(dc.ColumnName);
                 if (isXtended) AntViewItem5.Items.Add(dc.ColumnName);
               }
               if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
@@ -1640,6 +1673,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
         }
 
+        private void AddItem(IList list, Type type, string valueMember, string displayMember, string displayText)
+        {
+          //Creates an instance of the specified type using the constructor that best matches the specified parameters.
+          
+          Object obj = Activator.CreateInstance(type);
+
+          // Gets the Display Property Information
+          PropertyInfo displayProperty = type.GetProperty(displayMember);
+
+          // Sets the required text into the display property
+          displayProperty.SetValue(obj, displayText, null);
+
+          // Gets the Value Property Information
+          PropertyInfo valueProperty = type.GetProperty(valueMember);
+
+          // Sets the required value into the value property
+          valueProperty.SetValue(obj, -1, null);
+
+          // Insert the new object on the list
+          list.Insert(0, obj);
+        }
+
         private bool IsExtendedField(string DbField)
         {
           if (DbField == "IMDB_Id" || DbField == "TMDB_Id" || DbField == "Watched" || DbField == "Certification" ||
@@ -1651,7 +1706,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else 
             return false;
         }
-    
     
         private void Refresh_Tabs(bool enable)
         {
@@ -1782,6 +1836,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterSign2.ResetText();
             AntFilterComb.ResetText();
             //dgViews.Rows.Clear();
+            AntViewItem.ResetText();
             AntViewItem1.ResetText();
             AntViewItem2.ResetText();
             AntViewItem3.ResetText();
@@ -2043,11 +2098,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private static void MesFilmsSetup_Quit()
         {
         }
+
         private void Config_Name_Control(object sender, EventArgs e)
         {
-            if (Config_Name.Text.Length > 0)
-                return;
-            System.Windows.Forms.MessageBox.Show("Give the Configuration's Name first !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (Config_Name.Text.Length > 0) return;
+            MessageBox.Show("Give the Configuration's Name first !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             Config_Name.Focus();
         }
         private bool Verify_Config()
@@ -2475,7 +2530,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
-
         private void AddExtendedFieldsForExternalCatalogs()
         {
           AntStorageTrailer.Items.Add("SourceTrailer");
@@ -2729,7 +2783,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("File choosen isn't a Picture !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("File choosen isn't a Picture !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     SPicture.Focus();
                     return;
                 }
@@ -2740,7 +2794,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             if (SLogo_Type.Text.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Logo Type must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Logo Type must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 SLogo_Type.Focus();
                 return;
             }
@@ -2748,7 +2802,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 if ((SField1.Text.Length == 0 || SOp1.Text.Length == 0) && (SOp1.Text != "filled" && SOp1.Text != "not filled"))
                 {
-                    System.Windows.Forms.MessageBox.Show("The three Fields for comparison must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("The three Fields for comparison must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     SField1.Focus();
                     return;
                 }
@@ -2757,20 +2811,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 if ((SField2.Text.Length == 0 || SOp2.Text.Length == 0) && (SOp2.Text != "filled" && SOp2.Text != "not filled"))
                 {
-                    System.Windows.Forms.MessageBox.Show("The three Fields for comparison must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("The three Fields for comparison must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     SField2.Focus();
                     return;
                 }
             }
             if ((SAnd_Or.Text.Length == 0) && ((SField2.Text.Length > 0) || (SOp2.Text.Length > 0) || (SValue2.Text.Length > 0)))
             {
-                System.Windows.Forms.MessageBox.Show("The Operator 'AND' or 'OR' must be defined for Two conditions !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The Operator 'AND' or 'OR' must be defined for Two conditions !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 SAnd_Or.Focus();
                 return;
             }
             if (SPicture.BackgroundImage == null)
             {
-                System.Windows.Forms.MessageBox.Show("Logo must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Logo must be defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 SPicture.Focus();
                 return;
             }
@@ -2807,7 +2861,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             if (LogoView.SelectedItems.Count != 0)
             {
-                System.Windows.Forms.DialogResult rc = System.Windows.Forms.MessageBox.Show("Focused Item'll be remove, do you confirm ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult rc = System.Windows.Forms.MessageBox.Show("Focused Item'll be remove, do you confirm ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (rc == DialogResult.Yes)
                 {
                     LogoView.SelectedItems[0].Remove();
@@ -2816,7 +2870,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Please select an Item for re ordering rules !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please select an Item for re ordering rules !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
         }
@@ -2833,7 +2887,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           else
           {
-            System.Windows.Forms.MessageBox.Show("Please first select an Item for updating !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            MessageBox.Show("Please first select an Item for updating !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             return;
           }
         }
@@ -2851,7 +2905,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Please select an Item for re ordering rules !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please select an Item for re ordering rules !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -2868,7 +2922,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Please select an Item for re ordering rules !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please select an Item for re ordering rules !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
             LogoView.Items[LogoView.SelectedItems[0].Index + 1].Selected = true;
@@ -3033,10 +3087,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     SValue.Items.Add(wsfield);
                 }
             }
-            //Guzzi: Added aspectratio (e.g. 2,39) and ar (e.g. 16:9)
-            // Disables, because it's not yet working - requires changes in logos.cs of plugincode
-            //SValue.Items.Add("aspectratio");
-            //SValue.Items.Add("ar");
         }
         public AntMovieCatalog ReadXml()
         {
@@ -3193,7 +3243,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 int pos = reader.LinePosition;
                 reader.MoveToNextAttribute();
-                System.Windows.Forms.MessageBox.Show("Invalid Character for Movie Number " + reader.Value + " at position " + pos + ", number of records read : " + mydivx.Movie.Count + ". You have to correct the Movie's information with your movie catalog software !. Exception Message : " + ex.Message, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Invalid Character for Movie Number " + reader.Value + " at position " + pos + ", number of records read : " + mydivx.Movie.Count + ". You have to correct the Movie's information with your movie catalog software !. Exception Message : " + ex.Message, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return mydivx;
             }
             return mydivx;
@@ -3612,7 +3662,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 General.SelectTab(4);
                 cbfdupdate.Focus();
-                System.Windows.Forms.MessageBox.Show("Be carefull, if you use the field 'Checked' for deleted movies, you cann't get any difference between deleted and launching movies !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Be carefull, if you use the field 'Checked' for deleted movies, you cann't get any difference between deleted and launching movies !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -3622,7 +3672,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 General.SelectTab(4);
                 chksupplaystop.Focus();
-                System.Windows.Forms.MessageBox.Show("Be carefull, that deletion action'll be done each time ended watching movie !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Be carefull, that deletion action'll be done each time ended watching movie !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -3753,6 +3803,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             Sort.Items.Clear();
             SortInHierarchies.Items.Clear();
+            AntViewSortFilms.Items.Clear();
+            AntViewSortHierarchies.Items.Clear();
             //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
             //    Sort.Items.Add(AntSTitle.Text);
             //else
@@ -3765,6 +3817,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SortInHierarchies.Items.Add("Year");
             SortInHierarchies.Items.Add("Date");
             SortInHierarchies.Items.Add("Rating");
+            AntViewSortFilms.Items.Add("Title");
+            AntViewSortFilms.Items.Add("Year");
+            AntViewSortFilms.Items.Add("Date");
+            AntViewSortFilms.Items.Add("Rating");
+            AntViewSortHierarchies.Items.Add("Title");
+            AntViewSortHierarchies.Items.Add("Year");
+            AntViewSortHierarchies.Items.Add("Date");
+            AntViewSortHierarchies.Items.Add("Rating");
 
             //Guzzi: Added to not Reset setting when localized strings present
             if (
@@ -5656,21 +5716,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 else
                 {
-                  System.Windows.Forms.MessageBox.Show("Watched info NOT exported!  No Movies found in Catalog !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                  MessageBox.Show("Watched info NOT exported!  No Movies found in Catalog !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
                 }
               }
               else
-                System.Windows.Forms.MessageBox.Show("Watched info NOT exported!  Catalog cannot be read !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                MessageBox.Show("Watched info NOT exported!  Catalog cannot be read !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
             }
             else
             {
               LogMyFilms.Debug("Movie Data cannot be read - Watched info NOT exported!");
-              System.Windows.Forms.MessageBox.Show("Movie Data cannot be read - Watched info NOT exported!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+              MessageBox.Show("Movie Data cannot be read - Watched info NOT exported!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
               return;
             }
             w.Close();
             LogMyFilms.Debug("Watched info succesfully exported!");
-            System.Windows.Forms.MessageBox.Show("Watched info succesfully exported !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            MessageBox.Show("Watched info succesfully exported !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information); 
           }
 
         }
@@ -5909,9 +5969,119 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void viewBindingSource_CurrentChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
+          filterEditor.MasterTitle = AntViewFilter.Text;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+          //this.viewBindingSource.MoveUp();
+          int position = viewBindingSource.Position;
+          if (position == 0) return;  // already at top
+
+          viewBindingSource.RaiseListChangedEvents = false;
+
+          //MFview current = (MFview)viewBindingSource.Current;
+          //viewBindingSource.Remove(current);
+
+          DataRow selectedRow = myviews.View.Rows[position];
+          DataRow newRow = myviews.View.NewRow();
+          newRow.ItemArray = selectedRow.ItemArray; // copy data
+          myviews.View.Rows.Remove(selectedRow);
+          myviews.View.Rows.InsertAt(newRow, position - 1);
+
+          //viewBindingSource.Insert(position - 1, current);
+          viewBindingSource.Position = position - 1;
+
+          viewBindingSource.RaiseListChangedEvents = true;
+          viewBindingSource.ResetBindings(false);
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+          //this.viewBindingSource.MoveDown();
+          int position = viewBindingSource.Position;
+          if (position == viewBindingSource.Count - 1) return;  // already at bottom
+
+          viewBindingSource.RaiseListChangedEvents = false;
+
+          //MFview current = (MFview)viewBindingSource.Current;
+          //viewBindingSource.Remove(current);
+
+
+          DataRow selectedRow = myviews.View.Rows[position];
+          DataRow newRow = myviews.View.NewRow();
+          newRow.ItemArray = selectedRow.ItemArray; // copy data
+          myviews.View.Rows.Remove(selectedRow);
+          myviews.View.Rows.InsertAt(newRow, position + 1);
+
+          //viewBindingSource.Insert(position + 1, current);
+          viewBindingSource.Position = position + 1;
+
+          viewBindingSource.RaiseListChangedEvents = true;
+          viewBindingSource.ResetBindings(false);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+          //// Populate the rows.
+          //string[] row1 = new string[]{"Meatloaf", "Main Dish"};
+          //string[] row2 = new string[]{"Key Lime Pie", "Dessert", "lime juice, evaporated milk", "****"};
+          //object[] rows = new object[] { row1, row2 };
+
+          //foreach (string[] rowArray in rows)
+          //{
+          //  dgViewsList.Rows.Add(rowArray); // addding row 
+          //}
+        }
+
     }
+  public static class BindingSourceExtension
+  {
+    public static void MoveUp(this BindingSource aBindingSource)
+    {
+      int position = aBindingSource.Position;
+      if (position == 0) return;  // already at top
+
+      aBindingSource.RaiseListChangedEvents = false;
+
+      object current = aBindingSource.Current;
+      aBindingSource.Remove(current);
+
+      position--;
+
+      aBindingSource.Insert(position, current);
+      aBindingSource.Position = position;
+
+      aBindingSource.RaiseListChangedEvents = true;
+      aBindingSource.ResetBindings(false);
+    }
+
+    public static void MoveDown(this BindingSource aBindingSource)
+    {
+      int position = aBindingSource.Position;
+      if (position == aBindingSource.Count - 1) return;  // already at bottom
+
+      aBindingSource.RaiseListChangedEvents = false;
+
+      object current = aBindingSource.Current;
+      aBindingSource.Remove(current);
+
+      position++;
+
+      aBindingSource.Insert(position, current);
+      aBindingSource.Position = position;
+
+      aBindingSource.RaiseListChangedEvents = true;
+      aBindingSource.ResetBindings(false);
+    }
+
+  }
 }
