@@ -193,13 +193,13 @@ namespace MyFilmsPlugin.Configuration
     {
       if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
       {
-        System.Windows.Forms.MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterSign1.Focus();
         return;
       }
       if (AntFilterItem1.Text != "(none)" && AntFilterText1.Text.Length == 0)
       {
-        System.Windows.Forms.MessageBox.Show("Length of Filter Text Item must be > 0", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Length of Filter Text Item must be > 0", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterText1.Focus();
         return;
       }
@@ -207,13 +207,13 @@ namespace MyFilmsPlugin.Configuration
         AntFilterItem2.Text = "(none)";
       if (AntFilterItem2.Text != "(none)" && AntFilterSign2.Text.Length == 0)
       {
-        System.Windows.Forms.MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterSign2.Focus();
         return;
       }
       if (AntFilterItem2.Text != "(none)" && AntFilterText2.Text.Length == 0)
       {
-        System.Windows.Forms.MessageBox.Show("Length of Filter Text Item must be > 0", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Length of Filter Text Item must be > 0", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterText2.Focus();
         return;
       }
@@ -221,7 +221,7 @@ namespace MyFilmsPlugin.Configuration
       {
         if (AntFilterComb.Text.Length == 0)
         {
-          System.Windows.Forms.MessageBox.Show("Must be 'or' or 'and' for filter combination", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+          MessageBox.Show("Must be 'or' or 'and' for filter combination", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
           AntFilterComb.Focus();
         }
       }
@@ -231,13 +231,13 @@ namespace MyFilmsPlugin.Configuration
     {
       Selected_Enreg_TextChanged();
       CheckExpression();
-      this.DialogResult = System.Windows.Forms.DialogResult.OK;
+      this.DialogResult = DialogResult.OK;
       this.Close();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.DialogResult = DialogResult.Cancel;
       this.Close();
     }
 
