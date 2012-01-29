@@ -569,7 +569,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
                 if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
                 {
-                    viewContext = MyFilms.ViewContext.StartView;  
+                    viewContext = MyFilms.ViewContext.StartView;
                     strIndex = -1;
                     LastID = -1;
                     Wstar = "";

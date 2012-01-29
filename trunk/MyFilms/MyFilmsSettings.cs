@@ -40,6 +40,8 @@ namespace MyFilmsPlugin.MyFilms
           logBackup,
           lang,
           thumbs,
+          OrgDefaultImages,
+          OrgGroupViewImages,
           thumbsViews,
           thumbsGroups,
           thumbsPersons,
@@ -63,6 +65,8 @@ namespace MyFilmsPlugin.MyFilms
         static string thumbsPath = string.Empty;
         static string thumbsPathViews = string.Empty;
         static string thumbsPathGroups = string.Empty;
+        static string OrgDefaultImages = string.Empty;
+        static string OrgGroupViewImages = string.Empty;
         static string thumbsPathPersons = string.Empty;
         static string GrabberScripts = string.Empty;
         static string apppath = string.Empty;
@@ -103,6 +107,8 @@ namespace MyFilmsPlugin.MyFilms
             langPath = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
             thumbsPath = Config.GetFolder(Config.Dir.Thumbs);
             thumbsPathViews = Config.GetFolder(Config.Dir.Thumbs);
+            OrgDefaultImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages\";
+            OrgGroupViewImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\GroupViewImages\";
             thumbsPathGroups = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
             thumbsPathPersons = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             GrabberScripts = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\";
@@ -159,6 +165,10 @@ namespace MyFilmsPlugin.MyFilms
               return backupLogPath;
             case Path.lang:
               return langPath;
+            case Path.OrgDefaultImages:
+              return OrgDefaultImages;
+            case Path.OrgGroupViewImages:
+              return OrgGroupViewImages;
             case Path.thumbs:
               return thumbsPath;
             case Path.thumbsViews:
