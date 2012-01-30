@@ -4078,8 +4078,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.SetHeading(GUILocalizeStrings.Get(137) + " ..."); // Search ...
       var choiceSearch = new List<string>();
 
-      dlg.Add(GUILocalizeStrings.Get(10798615)); //Search global movies by property
+      dlg.Add(GUILocalizeStrings.Get(10798615)); //Search global movies by property 
       choiceSearch.Add("globalproperty");
+
+      dlg.Add(GUILocalizeStrings.Get(10798608)); //Search global persons by role
+      choiceSearch.Add("globalpersons");
 
       if (MyFilmsDetail.ExtendedStartmode("Global Random Movie Search"))
       {
@@ -4133,7 +4136,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
         dlg.DeInit();
         return;
-        //return base.OnMessage(message);
       }
 
       if (choiceSearch[dlg.SelectedLabel] == "analogyproperty")
@@ -4142,7 +4144,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
         dlg.DeInit();
         return;
-        //return base.OnMessage(message);
       }
       if (choiceSearch[dlg.SelectedLabel] == "randomsearch")
       {
@@ -4151,7 +4152,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
         dlg.DeInit();
         return;
-        //return base.OnMessage(message);
       }
       if (choiceSearch[dlg.SelectedLabel] == "globalareas")
       {
@@ -4159,7 +4159,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
         dlg.DeInit();
         return;
-        //return base.OnMessage(message);
       }
       if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
       {
@@ -4167,8 +4166,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
         dlg.DeInit();
         return;
-        //return base.OnMessage(message);
       }
+
+      if (choiceSearch[dlg.SelectedLabel] == "globalpersons")
+      {
+        SearchMoviesbyPersons(false, string.Empty, string.Empty);
+        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+        dlg.DeInit();
+        return;
+      }
+
       var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       if (null == keyboard) return; //if (null == keyboard) return true;
       keyboard.Reset();
@@ -4176,6 +4183,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       keyboard.DoModal(GetID);
       if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
       {
+        UpdateRecentSearch(keyboard.Text, 20);
         switch (choiceSearch[dlg.SelectedLabel])
         {
           case "title":
@@ -4222,9 +4230,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        // GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // commented, as we do not want to return to facade
         dlg.DeInit();
-        this.Change_Search_Options(); // recall search menu
+        Change_Search_Options(); // recall search menu
       }
     }
 
@@ -7881,8 +7888,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: IMDB all sort of details and updates (several entries)"))
         {
-          dlg.Add(GUILocalizeStrings.Get(1079882));
-            // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
+          dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
           upd_choice[ichoice] = "updateperson";
           ichoice++;
 
@@ -8622,15 +8628,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079909)); // select role
       ArrayList w_tableau = new ArrayList();
-      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      List<string> choiceSearch = new List<string>();
 
       foreach (string personfield in PersonTypes)
       {
         if (MyFilms.r[Index][personfield].ToString().Length > 0)
         {
           w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index][personfield].ToString())));
-          // make list unique/distinct
-          w_tableau = new ArrayList(w_tableau.ToArray().Distinct().ToList());
+          w_tableau = new ArrayList(w_tableau.ToArray().Distinct().ToList()); // make list unique/distinct
           
           dlg.Add(BaseMesFilms.Translate_Column(personfield) + " (" + w_tableau.Count + ")");
           choiceSearch.Add(personfield);
@@ -8735,23 +8740,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //First add general option to show MP Actor Infos
       if (wperson.Length > 0)
       {
-        // First check if actor exists... - this only works with MePo V1.1.5+
-        ArrayList actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
-        //System.Collections.Generic.List<string> actorList = new System.Collections.Generic.List<string>();
-        try
-        {
-          MyFilmsDetail.GetActorByName(wperson, actorList);
-        }
-        catch (Exception)
-        { }
-
         if (MyFilmsDetail.ExtendedStartmode("relatedpersonsearch: add person option to dialog menu for personinfodialog"))
         {
+          // First check if actor exists... - this only works with MePo V1.1.5+
+          LogMyFilms.Debug("Check, if Person is found in IMDB-DB (using MP actors DB)");
+          ArrayList actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
+          try
+          {
+            MyFilmsDetail.GetActorByName(wperson, actorList);
+          }
+          catch (Exception)
+          { }
           dlg.Add(GUILocalizeStrings.Get(10798731) + " (" + actorList.Count.ToString() + ")");
           choiceSearch.Add("PersonInfo");
         }
       }
 
+      LogMyFilms.Debug("Adding search results for roles to menu ...");
       DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       if (wr.Length > 0)
       {
@@ -9163,7 +9168,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void SearchRelatedMoviesbyProperties(int Index, bool returnToContextmenu) // (int Index, IEnumerable<string> wSearchList)
     {
       // first select the property to be searching on
-      AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       List<string> choiceSearch = new List<string>();
       ArrayList w_tableau = new ArrayList();
@@ -9339,12 +9343,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
         w_rating = MyFilms.r[Index][wproperty].ToString().Replace(",", ".");
       if ((wproperty == "Rating") && (choiceSearch[dlg.SelectedLabel] == "RatingExact"))
-        conf.StrSelect = wproperty.ToString() + " = " + w_rating;
+        conf.StrSelect = wproperty + " = " + w_rating;
       else
         if ((wproperty == "Rating") && (choiceSearch[dlg.SelectedLabel] == "RatingBetter"))
           conf.StrSelect = wproperty + " > " + w_rating;
         else
+        {
+          UpdateRecentSearch(choiceSearch[dlg.SelectedLabel], 20);
           conf.StrSelect = (wproperty == "Number") ? wproperty + " = " + choiceSearch[dlg.SelectedLabel] : wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
+        }
       if (choiceSearch.Count == 0)
         conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " (none)";
       else
@@ -10371,6 +10378,152 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
       }
     }
+
+    //*****************************************************************************************
+    //*  Global search persons
+    //*****************************************************************************************
+    private void SearchMoviesbyPersons(bool returnToContextmenu, string searchExpression, string searchField)
+    {
+      string wperson = "";
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+      List<string> choiceSearch = new List<string>();
+
+      if (null == keyboard) return; //if (null == keyboard) return true;
+      keyboard.Reset();
+      keyboard.Text = "";
+      keyboard.DoModal(GetID);
+      if (!keyboard.IsConfirmed || keyboard.Text.Length == 0) return;
+
+      UpdateRecentSearch(keyboard.Text, 20);
+      if (control_searchText(keyboard.Text))
+      {
+        wperson = keyboard.Text;
+      }
+      else return;
+
+      dlg.Reset();
+      choiceSearch.Clear();
+      dlg.SetHeading(GUILocalizeStrings.Get(10798611) + wperson); // function selection (actor, director, producer)
+
+      LogMyFilms.Debug("Adding search results for roles to menu ...");
+      DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      if (wr.Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
+        choiceSearch.Add("Producer");
+      }
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      if (wr.Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
+        choiceSearch.Add("Director");
+      }
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      if (wr.Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
+        choiceSearch.Add("Writer");
+      }
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      if (wr.Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
+        choiceSearch.Add("Actors");
+      }
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Persons like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      if (wr.Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798951) + "  (" + wr.Length + ")");
+        choiceSearch.Add("Persons");
+      }
+      if (choiceSearch.Count == 0)
+      {
+        if (dlg1 == null) return;
+        dlg1.SetHeading(GUILocalizeStrings.Get(1079867));
+        dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
+        dlg1.DoModal(GUIWindowManager.ActiveWindow);
+        return;
+      }
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1) return;
+      //conf.StrSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'";
+      //switch (choiceSearch[dlg.SelectedLabel])
+      //{
+      //  case "Actors":
+      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]"; // "Selection"
+      //    break;
+      //  case "Producer":
+      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+      //    break;
+      //  case "Director":
+      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
+      //    break;
+      //  case "Writer":
+      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798684) + " [*" + wperson + @"*]";
+      //    break;
+      //  case "Persons":
+      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
+      //    break;
+      //  default:
+      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
+      //    break;
+      //}
+      conf.StrTitleSelect = "";
+      conf.ViewContext = ViewContext.Person;
+      conf.WStrSort = choiceSearch[dlg.SelectedLabel];
+      conf.Wselectedlabel = "";
+      conf.WStrSortSens = " ASC";
+      conf.StrPersons = wperson;
+      getSelectFromDivx(choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
+      SetLabelView("search"); // show "search"
+    }
+
+
+    private int CountPersonsFound(string WStrSort, string newStar)
+    {
+      int wi;
+      int count = 0;
+      string champselect;
+      HashSet<string> set = new HashSet<string>(StringComparer.OrdinalIgnoreCase); //List<string> itemList = new List<string>();
+
+      bool issplitfield = IsSplittableField(WStrSort);
+      bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
+      bool showEmptyValues = MyFilms.conf.BoolShowEmptyValuesInViews;
+
+      watch.Reset(); watch.Start();
+      foreach (DataRow row in r)
+      {
+        champselect = row[WStrSort].ToString().Trim();
+        if (issplitfield && !dontsplitvalues)
+        {
+          ArrayList wtab = Search_String(champselect, false);
+          if (wtab.Count > 0) // itemList.AddRange(wtab);
+          {
+            for (wi = 0; wi < wtab.Count; wi++)
+            {
+              if (set.Add((string)wtab[wi])) count++; // itemList.Add((string)wtab[wi]);
+            }
+          }
+          else if (showEmptyValues)  // only add empty entries, if they should show - speeds up sorting otherwise ...
+          {
+            if (set.Add(champselect)) count++;  // itemList.Add(champselect);
+          }
+        }
+        else
+        {
+          if (champselect.Length > 0 || showEmptyValues)  // only add empty entries, if they should show - speeds up sorting otherwise ...
+          {
+            if (set.Add(champselect)) count++;  // itemList.Add(champselect);
+          }
+        }
+      }
+      watch.Stop();
+      LogMyFilms.Debug("CountViewItems - Finished Count ('" + count + "') (" + (watch.ElapsedMilliseconds) + " ms)  - Read View Names for '" + WStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "')");
+      return count;
+    }
+
 
     //*****************************************************************************************
     //*  Global search movies by properties     (Guzzi Version)                               *
