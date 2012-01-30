@@ -144,13 +144,14 @@
     <String id="1079908">Film Sammlung</String>
     <String id="1079909">Wähle Rolle</String>
     <String id="1079910">Sortiere: Anzahl</String>
+    <String id="10798608">Globale Suche (Personen)</String>
     <String id="10798609">Letzte Suche ...</String>
     <String id="10798610">Filme als </String>
     <String id="10798611">Wähle Funktion für </String>
     <String id="10798612">Produzent</String>
     <String id="10798613">Wähle Eigenschaft zur Suche</String>
     <String id="10798614">Suche Filme nach ähnlichen Eigenschaften</String>
-    <String id="10798615">Globale Suche (nach Eigenschaften)</String>
+    <String id="10798615">Globale Suche (Filme)</String>
     <String id="10798616">Suche in allen Eigenschaften</String>
     <String id="10798617">Suche in: </String>
     <String id="10798618">Globale Suche nach '{0}'</String>
