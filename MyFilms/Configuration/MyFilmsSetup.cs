@@ -226,8 +226,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Number")
+                if (dc.ColumnName != "Description" && dc.ColumnName != "Comments") //  && dc.ColumnName != "Number" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
                 {
                   AntViewItem.Items.Add(dc.ColumnName);
                   AntViewItem1.Items.Add(dc.ColumnName);
@@ -5938,6 +5937,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //{
           //  dgViewsList.Rows.Add(rowArray); // addding row 
           //}
+          viewBindingSource.ResetBindings(false);
+          //int position = viewBindingSource.Position;
+          dgViewsList.Focus();
         }
 
         private void AntViewItem_SelectedIndexChanged(object sender, EventArgs e)
@@ -5951,6 +5953,22 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
         }
 
+        private void AntViewOnlyAvailableCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+          if (AntViewOnlyAvailableCheckBox.Checked && !chkScanMediaOnStart.Checked)
+          {
+            AntViewOnlyAvailableCheckBox.ForeColor = System.Drawing.Color.IndianRed;
+          }
+          else
+          {
+            AntViewOnlyAvailableCheckBox.ResetForeColor();
+          }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+          viewBindingSource.ResetBindings(false);
+        }
       }
 
       public static class BindingSourceExtension
