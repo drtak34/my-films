@@ -585,7 +585,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       
       // Initialize Backgroundworker
       InitializeBackgroundWorker();
-
+      InitFolders();
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
@@ -2433,8 +2433,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wfacadewiew = 0;
       ArrayList w_tableau = new ArrayList();
       bool isdate = IsDateField(conf.WStrSort);
-      // Check and create Group thumb folder ...
-      if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
 
       foreach (DataRow sr in r)
@@ -4985,20 +4983,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       #region directory handling
-      if (MyFilms.conf.UseThumbsForViews || MyFilms.conf.UseThumbsForPersons) // Check if Thumbs directories exist or create them
-      {
-        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
-        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
-      }
-
       string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons) : MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsGroups) + WStrSort.ToLower() + @"\";
       
       bool getThumbs = ((MyFilms.conf.UseThumbsForPersons && isperson) || (MyFilms.conf.UseThumbsForViews && (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort))));
       bool createFanartDir = IsCategoryYearCountryField(WStrSort);
+
       if (!Directory.Exists(strThumbDirectory)) // Check groupview thumbs cache directories and create them
-        try {Directory.CreateDirectory(strThumbDirectory); } catch (Exception) { }
+        try { Directory.CreateDirectory(strThumbDirectory); } catch (Exception) { }
       if (!Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check groupview thumbs (sub)directories and create them
-        try {Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); } catch (Exception) { }
+        try { Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); } catch (Exception) { }
       #endregion
 
       if (isperson) { AsynUpdateActors(w_tableau); } // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
@@ -11162,6 +11155,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     private void GetTitleGrab()
     {
+    }
+
+    private void InitFolders()
+    {
+      // Check and create Group thumb folder ...
+      if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+      if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+      if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
     }
 
     private void InitializeBackgroundWorker()

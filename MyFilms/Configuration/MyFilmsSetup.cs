@@ -4958,15 +4958,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             catch { }
           }
           MesFilmsImgArtist.Text = ArtistImagesDirectory;
-          DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+          DefaultCover.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultCover.jpg"; //DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
 
-          DefaultCoverArtist.Text = MyFilmsSettings.Path.OrgDefaultImages + @"DefaultArtist.jpg";
-          DefaultCoverViews.Text = MyFilmsSettings.Path.OrgDefaultImages + @"DefaultGroup.jpg";
-          DefaultFanartImage.Text = MyFilmsSettings.Path.OrgDefaultImages + @"DefaultFanartImage.jpg";
+          DefaultCoverArtist.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultArtist.jpg";
+          DefaultCoverViews.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultGroup.jpg";
+          DefaultFanartImage.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultFanartImage.jpg";
           chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
 
           string GroupViewImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\GroupViewImages";
-          if (!System.IO.Directory.Exists(GroupViewImagesDirectory))
+          if (!Directory.Exists(GroupViewImagesDirectory))
           {
             try
             {
