@@ -867,7 +867,7 @@
           // label67
           // 
           label67.AutoSize = true;
-          label67.Location = new System.Drawing.Point(7, 47);
+          label67.Location = new System.Drawing.Point(7, 70);
           label67.Name = "label67";
           label67.Size = new System.Drawing.Size(32, 13);
           label67.TabIndex = 9;
@@ -876,7 +876,7 @@
           // label66
           // 
           label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(7, 21);
+          label66.Location = new System.Drawing.Point(7, 28);
           label66.Name = "label66";
           label66.Size = new System.Drawing.Size(37, 13);
           label66.TabIndex = 7;
@@ -885,7 +885,7 @@
           // label60
           // 
           label60.AutoSize = true;
-          label60.Location = new System.Drawing.Point(314, 62);
+          label60.Location = new System.Drawing.Point(312, 62);
           label60.Name = "label60";
           label60.Size = new System.Drawing.Size(36, 13);
           label60.TabIndex = 34;
@@ -2981,6 +2981,7 @@
           this.toolStripButton2.RightToLeftAutoMirrorImage = true;
           this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
           this.toolStripButton2.Text = "Löschen";
+          this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
           // 
           // toolStripButton3
           // 
@@ -3049,7 +3050,8 @@
           // 
           // toolStripButton7
           // 
-          this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
           this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.toolStripButton7.Name = "toolStripButton7";
           this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
@@ -3058,10 +3060,11 @@
           // 
           // toolStripButton8
           // 
-          this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton8.Image = global::MyFilmsPlugin.Properties.Resources.arrow_down;
           this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.toolStripButton8.Name = "toolStripButton8";
-          this.toolStripButton8.Size = new System.Drawing.Size(37, 22);
+          this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
           this.toolStripButton8.Text = "down";
           this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
           // 
@@ -3079,9 +3082,11 @@
           this.dgViewsList.DataSource = this.viewBindingSource;
           this.dgViewsList.GridColor = System.Drawing.SystemColors.ControlDarkDark;
           this.dgViewsList.Location = new System.Drawing.Point(6, 44);
+          this.dgViewsList.MultiSelect = false;
           this.dgViewsList.Name = "dgViewsList";
           this.dgViewsList.RowHeadersVisible = false;
           this.dgViewsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+          this.dgViewsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
           this.dgViewsList.Size = new System.Drawing.Size(117, 274);
           this.dgViewsList.TabIndex = 42;
           // 
@@ -3122,7 +3127,7 @@
           this.groupBox3.Size = new System.Drawing.Size(373, 121);
           this.groupBox3.TabIndex = 41;
           this.groupBox3.TabStop = false;
-          this.groupBox3.Text = "Sort and Layouts";
+          this.groupBox3.Text = "Sort and Layouts for View Levels";
           // 
           // AntViewLayoutFilms
           // 
@@ -3296,34 +3301,35 @@
           // AntViewOnlyAvailableCheckBox
           // 
           this.AntViewOnlyAvailableCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "OnlyAvailable", true));
-          this.AntViewOnlyAvailableCheckBox.Location = new System.Drawing.Point(64, 70);
+          this.AntViewOnlyAvailableCheckBox.Location = new System.Drawing.Point(264, 16);
           this.AntViewOnlyAvailableCheckBox.Name = "AntViewOnlyAvailableCheckBox";
-          this.AntViewOnlyAvailableCheckBox.Size = new System.Drawing.Size(124, 24);
+          this.AntViewOnlyAvailableCheckBox.Size = new System.Drawing.Size(103, 21);
           this.AntViewOnlyAvailableCheckBox.TabIndex = 41;
-          this.AntViewOnlyAvailableCheckBox.Text = "Show only Available";
+          this.AntViewOnlyAvailableCheckBox.Text = "Only Available";
           this.AntViewOnlyAvailableCheckBox.UseVisualStyleBackColor = true;
+          this.AntViewOnlyAvailableCheckBox.CheckedChanged += new System.EventHandler(this.AntViewOnlyAvailableCheckBox_CheckedChanged);
           // 
           // AntViewOnlyUnwatchedCheckBox
           // 
           this.AntViewOnlyUnwatchedCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "OnlyUnwatched", true));
-          this.AntViewOnlyUnwatchedCheckBox.Location = new System.Drawing.Point(219, 70);
+          this.AntViewOnlyUnwatchedCheckBox.Location = new System.Drawing.Point(264, 37);
           this.AntViewOnlyUnwatchedCheckBox.Name = "AntViewOnlyUnwatchedCheckBox";
-          this.AntViewOnlyUnwatchedCheckBox.Size = new System.Drawing.Size(137, 24);
+          this.AntViewOnlyUnwatchedCheckBox.Size = new System.Drawing.Size(105, 24);
           this.AntViewOnlyUnwatchedCheckBox.TabIndex = 40;
-          this.AntViewOnlyUnwatchedCheckBox.Text = "Show only Unwatched";
+          this.AntViewOnlyUnwatchedCheckBox.Text = "Only Unwatched";
           this.AntViewOnlyUnwatchedCheckBox.UseVisualStyleBackColor = true;
           // 
           // AntViewFilter
           // 
           this.AntViewFilter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
-          this.AntViewFilter.Location = new System.Drawing.Point(64, 44);
+          this.AntViewFilter.Location = new System.Drawing.Point(64, 67);
           this.AntViewFilter.Name = "AntViewFilter";
-          this.AntViewFilter.Size = new System.Drawing.Size(222, 20);
+          this.AntViewFilter.Size = new System.Drawing.Size(257, 20);
           this.AntViewFilter.TabIndex = 10;
           // 
           // AntViewFilterEditButton
           // 
-          this.AntViewFilterEditButton.Location = new System.Drawing.Point(292, 44);
+          this.AntViewFilterEditButton.Location = new System.Drawing.Point(327, 67);
           this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
           this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
           this.AntViewFilterEditButton.TabIndex = 39;
@@ -3334,7 +3340,7 @@
           // AntViewValue
           // 
           this.AntViewValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
-          this.AntViewValue.Location = new System.Drawing.Point(64, 18);
+          this.AntViewValue.Location = new System.Drawing.Point(64, 25);
           this.AntViewValue.Name = "AntViewValue";
           this.AntViewValue.Size = new System.Drawing.Size(107, 20);
           this.AntViewValue.TabIndex = 8;
@@ -3342,7 +3348,7 @@
           // AntViewReverseNamesCheckbox
           // 
           this.AntViewReverseNamesCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "ReverseNames", true));
-          this.AntViewReverseNamesCheckbox.Location = new System.Drawing.Point(406, 69);
+          this.AntViewReverseNamesCheckbox.Location = new System.Drawing.Point(400, 69);
           this.AntViewReverseNamesCheckbox.Name = "AntViewReverseNamesCheckbox";
           this.AntViewReverseNamesCheckbox.Size = new System.Drawing.Size(105, 22);
           this.AntViewReverseNamesCheckbox.TabIndex = 16;
@@ -3355,7 +3361,7 @@
           // checkBox2
           // 
           this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "ShowEmpty", true));
-          this.checkBox2.Location = new System.Drawing.Point(406, 46);
+          this.checkBox2.Location = new System.Drawing.Point(400, 46);
           this.checkBox2.Name = "checkBox2";
           this.checkBox2.Size = new System.Drawing.Size(86, 24);
           this.checkBox2.TabIndex = 14;
@@ -3366,7 +3372,7 @@
           // AntViewIndex
           // 
           this.AntViewIndex.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
-          this.AntViewIndex.Location = new System.Drawing.Point(355, 59);
+          this.AntViewIndex.Location = new System.Drawing.Point(354, 60);
           this.AntViewIndex.Maximum = new decimal(new int[] {
             2,
             0,

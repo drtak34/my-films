@@ -350,6 +350,8 @@
     <EmbeddedResource Include="Resources\AMCUpdaterSmall.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\arrow-down.png" />
+    <None Include="Resources\arrow-up.png" />
     <Content Include="Resources\MyFilmsIcon.ico" />
     <EmbeddedResource Include="Configuration\FilterEditor.resx">
       <DependentUpon>FilterEditor.cs</DependentUpon>
