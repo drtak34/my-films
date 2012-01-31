@@ -308,6 +308,8 @@
           this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
           this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
           this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
           this.dgViewsList = new System.Windows.Forms.DataGridView();
           this.labelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.viewEnabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -638,8 +640,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-          this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -1921,7 +1921,8 @@
           this.cbPictureHandling.FormattingEnabled = true;
           this.cbPictureHandling.Items.AddRange(new object[] {
             "Full Path",
-            "Relative Path"});
+            "Relative Path",
+            "Use Folder.jpg"});
           this.cbPictureHandling.Location = new System.Drawing.Point(599, 41);
           this.cbPictureHandling.Name = "cbPictureHandling";
           this.cbPictureHandling.Size = new System.Drawing.Size(130, 21);
@@ -2975,7 +2976,7 @@
           // toolStripLabel1
           // 
           this.toolStripLabel1.Name = "toolStripLabel1";
-          this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
+          this.toolStripLabel1.Size = new System.Drawing.Size(44, 13);
           this.toolStripLabel1.Text = "von {0}";
           this.toolStripLabel1.ToolTipText = "Die Gesamtanzahl der Elemente.";
           // 
@@ -2985,7 +2986,7 @@
           this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
           this.toolStripButton2.Name = "toolStripButton2";
           this.toolStripButton2.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton2.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton2.Text = "Löschen";
           this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
           // 
@@ -2995,7 +2996,7 @@
           this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
           this.toolStripButton3.Name = "toolStripButton3";
           this.toolStripButton3.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton3.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton3.Text = "Erste verschieben";
           // 
           // toolStripButton4
@@ -3004,13 +3005,13 @@
           this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
           this.toolStripButton4.Name = "toolStripButton4";
           this.toolStripButton4.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton4.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton4.Text = "Vorherige verschieben";
           // 
           // toolStripSeparator1
           // 
           this.toolStripSeparator1.Name = "toolStripSeparator1";
-          this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+          this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
           // 
           // toolStripTextBox1
           // 
@@ -3024,7 +3025,7 @@
           // toolStripSeparator2
           // 
           this.toolStripSeparator2.Name = "toolStripSeparator2";
-          this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+          this.toolStripSeparator2.Size = new System.Drawing.Size(6, 23);
           // 
           // toolStripButton5
           // 
@@ -3032,7 +3033,7 @@
           this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
           this.toolStripButton5.Name = "toolStripButton5";
           this.toolStripButton5.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton5.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton5.Text = "Nächste verschieben";
           // 
           // toolStripButton6
@@ -3041,18 +3042,18 @@
           this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
           this.toolStripButton6.Name = "toolStripButton6";
           this.toolStripButton6.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton6.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton6.Text = "Letzte verschieben";
           // 
           // toolStripSeparator3
           // 
           this.toolStripSeparator3.Name = "toolStripSeparator3";
-          this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+          this.toolStripSeparator3.Size = new System.Drawing.Size(6, 23);
           // 
           // toolStripSeparator4
           // 
           this.toolStripSeparator4.Name = "toolStripSeparator4";
-          this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+          this.toolStripSeparator4.Size = new System.Drawing.Size(6, 23);
           // 
           // toolStripButton7
           // 
@@ -3060,7 +3061,7 @@
           this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
           this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.toolStripButton7.Name = "toolStripButton7";
-          this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton7.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton7.Text = "up";
           this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
           // 
@@ -3070,9 +3071,24 @@
           this.toolStripButton8.Image = global::MyFilmsPlugin.Properties.Resources.arrow_down;
           this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.toolStripButton8.Name = "toolStripButton8";
-          this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton8.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton8.Text = "down";
           this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+          // 
+          // toolStripSeparator5
+          // 
+          this.toolStripSeparator5.Name = "toolStripSeparator5";
+          this.toolStripSeparator5.Size = new System.Drawing.Size(6, 23);
+          // 
+          // toolStripButton9
+          // 
+          this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+          this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButton9.Name = "toolStripButton9";
+          this.toolStripButton9.Size = new System.Drawing.Size(54, 17);
+          this.toolStripButton9.Text = "Add New";
+          this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
           // 
           // dgViewsList
           // 
@@ -6624,21 +6640,6 @@
           this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
-          // 
-          // toolStripSeparator5
-          // 
-          this.toolStripSeparator5.Name = "toolStripSeparator5";
-          this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-          // 
-          // toolStripButton9
-          // 
-          this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-          this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-          this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.toolStripButton9.Name = "toolStripButton9";
-          this.toolStripButton9.Size = new System.Drawing.Size(54, 22);
-          this.toolStripButton9.Text = "Add New";
-          this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
           // 
           // MyFilmsSetup
           // 
