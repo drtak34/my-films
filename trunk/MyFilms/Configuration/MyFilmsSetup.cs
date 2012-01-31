@@ -5937,8 +5937,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //{
           //  dgViewsList.Rows.Add(rowArray); // addding row 
           //}
-          viewBindingSource.ResetBindings(false);
           //int position = viewBindingSource.Position;
+          //if (position < viewBindingSource.Count - 1) position = viewBindingSource.Count; // set to end of list
+
+          //viewBindingSource.RaiseListChangedEvents = false;
+          //MFview.ViewRow newRow = myviews.View.NewViewRow();
+          //newRow.Label = "NewView";
+          //myviews.View.Rows.InsertAt(newRow, position + 1);
+          //viewBindingSource.Position = position + 1;
+          //viewBindingSource.RaiseListChangedEvents = true;
+          viewBindingSource.ResetBindings(false);
           dgViewsList.Focus();
         }
 
@@ -5969,6 +5977,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           viewBindingSource.ResetBindings(false);
         }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+          MFview.ViewRow newRow = myviews.View.NewViewRow();
+          newRow.Label = "New View";
+          myviews.View.Rows.Add(newRow);
+          viewBindingSource.ResetBindings(false);
+          viewBindingSource.Position = viewBindingSource.Count - 1;
+        }
+
       }
 
       public static class BindingSourceExtension

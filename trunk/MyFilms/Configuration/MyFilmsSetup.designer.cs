@@ -638,6 +638,8 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -2933,7 +2935,10 @@
             this.toolStripButton2,
             this.toolStripSeparator4,
             this.toolStripButton7,
-            this.toolStripButton8});
+            this.toolStripButton8,
+            this.toolStripSeparator5,
+            this.toolStripButton9});
+          this.bindingNavigatorViews.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
           this.bindingNavigatorViews.Location = new System.Drawing.Point(3, 16);
           this.bindingNavigatorViews.MoveFirstItem = this.toolStripButton3;
           this.bindingNavigatorViews.MoveLastItem = this.toolStripButton6;
@@ -2942,17 +2947,18 @@
           this.bindingNavigatorViews.Name = "bindingNavigatorViews";
           this.bindingNavigatorViews.PositionItem = this.toolStripTextBox1;
           this.bindingNavigatorViews.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-          this.bindingNavigatorViews.Size = new System.Drawing.Size(511, 25);
+          this.bindingNavigatorViews.Size = new System.Drawing.Size(511, 23);
           this.bindingNavigatorViews.TabIndex = 38;
           this.bindingNavigatorViews.Text = "bindingNavigatorViews";
           // 
           // toolStripButton1
           // 
           this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButton1.Enabled = false;
           this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
           this.toolStripButton1.Name = "toolStripButton1";
           this.toolStripButton1.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+          this.toolStripButton1.Size = new System.Drawing.Size(23, 20);
           this.toolStripButton1.Text = "Neu hinzufügen";
           this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
           // 
@@ -6619,6 +6625,21 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // toolStripSeparator5
+          // 
+          this.toolStripSeparator5.Name = "toolStripSeparator5";
+          this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+          // 
+          // toolStripButton9
+          // 
+          this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+          this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButton9.Name = "toolStripButton9";
+          this.toolStripButton9.Size = new System.Drawing.Size(54, 22);
+          this.toolStripButton9.Text = "Add New";
+          this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -7290,5 +7311,7 @@
         private TextBox AntUpdText2;
         private ComboBox AntUpdItem1;
         private TextBox AntUpdText1;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripButton toolStripButton9;
     }
 }

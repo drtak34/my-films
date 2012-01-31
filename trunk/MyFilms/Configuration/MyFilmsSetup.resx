@@ -697,34 +697,49 @@ It will NOT change, if user manually sets a movie to watched or unwatched.</valu
   <data name="toolStripButton7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
-        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
+        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
+</value>
+  </data>
+  <data name="toolStripButton9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
+        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
+        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
+        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
+        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
+        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
+        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
+        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
+        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
+        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="checkBox2.ToolTip" xml:space="preserve">
