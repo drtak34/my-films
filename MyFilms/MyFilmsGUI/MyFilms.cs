@@ -2225,6 +2225,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
             {
               conf.StrSelect = ""; // reset view filter ...
+              conf.Wstar = "*";
             }
             getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, SelItem); // getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
           }
@@ -9182,21 +9183,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region build menu
       if (dlg == null) return;
       dlg.Reset();
-      dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
+      dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // Choose property for search
 
-      dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1));
+      dlg.Add(BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1));
       choiceSearch.Add(MyFilms.conf.StrTitle1);
 
       if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
       {
-        dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2));
+        dlg.Add(BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2));
         choiceSearch.Add(MyFilms.conf.StrTitle2);
       }
 
       string[] defaultupdateitems = { "Category", "Year", "Date", "Country", "Rating" };
       foreach (string wupd in defaultupdateitems)
       {
-        dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wupd.Trim()));
+        dlg.Add(BaseMesFilms.Translate_Column(wupd.Trim()));
         choiceSearch.Add(wupd.Trim());
       }
 
@@ -9224,7 +9225,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!string.IsNullOrEmpty(MyFilms.r[Index][displayItem[0]].ToString()))
           {
             string entry = (string.IsNullOrEmpty(displayItem[1])) ? displayItem[0] : displayItem[1];
-            dlg.Add(GUILocalizeStrings.Get(10798617) + entry);
+            dlg.Add(entry);
             choiceSearch.Add(displayItem[0]);
             LogMyFilms.Debug("search related movie properties menu - add '{0}' as '{1}'", displayItem[0], entry);
           }
@@ -10543,7 +10544,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (dlg == null) return;
         dlg.Reset();
-        dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // menu
+        dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // global search (films)
 
         if (SearchHistory.Count > 0) // only show dialog, if there was a searchword stored before ...
         {
@@ -10554,12 +10555,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Add(GUILocalizeStrings.Get(10798616)); // search on all fields
         choiceSearch.Add("all");
 
-        dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(conf.StrTitle1));
+        dlg.Add(BaseMesFilms.Translate_Column(conf.StrTitle1));
         choiceSearch.Add(conf.StrTitle1);
 
         if (Helper.FieldIsSet(conf.StrTitle2))
         {
-        dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(conf.StrTitle2));
+        dlg.Add(BaseMesFilms.Translate_Column(conf.StrTitle2));
         choiceSearch.Add(conf.StrTitle2);
         }
         
@@ -10584,7 +10585,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           foreach (string[] displayItem in displayItems)
           {
             string entry = (string.IsNullOrEmpty(displayItem[1])) ? displayItem[0] : displayItem[1];
-            dlg.Add(GUILocalizeStrings.Get(10798617) + entry);
+            dlg.Add(entry);
             choiceSearch.Add(displayItem[0]);
             LogMyFilms.Debug("Search Menu - add '{0}' as '{1}'", displayItem[0], entry);
           }
