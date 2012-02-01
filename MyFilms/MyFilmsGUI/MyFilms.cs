@@ -13005,11 +13005,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.StrLayOutInHierarchies = state.StrLayOutInHierarchies;
         conf.LastID = state.LastID;
 
-        int IndexItem = state.IndexItem;
-        string TitleItem = state.TitleItem;
-
-        //IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
-        //TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+        try { conf.StrIndex = state.IndexItem; } catch { conf.StrIndex = -1; }
+        conf.StrTIndex = state.TitleItem;
 
         ViewHistory.Remove(ViewHistory.Last());
         LogMyFilms.Debug("RestoreLastView() ViewHistory after restore is: '" + ViewHistory.Count + "'"); 
