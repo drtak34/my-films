@@ -164,7 +164,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntIdentItem.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
-            AntViewItem.Items.Add("(none)");
+            //AntViewItem.Items.Add("(none)"); // removed, as we do not want to have "none" views defined - they can be disabled instead, as they are dxnamic
             AntViewItem1.Items.Add("(none)");
             AntViewItem2.Items.Add("(none)");
             AntViewItem3.Items.Add("(none)");
