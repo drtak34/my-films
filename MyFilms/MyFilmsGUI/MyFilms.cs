@@ -1559,8 +1559,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (ViewHistory.Count > 0)
           {
-            LogMyFilms.Debug("Restoring state '" + ViewHistory.Count + "' from Statehistory.");
             RestoreLastView();
+            r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with restored former filters to get proper counts ...
+            this.Refreshfacade();
+            return;
           }
           switch (conf.ViewContext)
           {
@@ -1601,13 +1603,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   // switch to selected root node here ...
                   if (!Helper.FieldIsSet(conf.StrViewDfltText) || conf.StrViewDfltText != "menu")
                   {
-                    SetLabelView("menu"); // if back on "root", show view as "movies"
+                    SetLabelView("menu");
                     SetLabelSelect("root");
                     GetSelectFromMenuView(false);
                   }
                   else
                   {
-                    SetLabelView("all"); // if back on "root", show view as "movies"
+                    SetLabelView("all");
                     SetLabelSelect("root");
 
                     conf.ViewContext = MyFilms.ViewContext.StartView;
@@ -8789,15 +8791,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
       dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1)
-        return;
+      if (dlg.SelectedLabel == -1) return;
       if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
       {
         string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(wperson);
         this.PersonInfo(actorSearchname);
         return;
       }
-      conf.StrSelect = choiceSearch[dlg.SelectedLabel].ToString() + " like '*" + wperson + "*'";
+
+      SaveLastView(); // to restore to current context after search results ...
+      
+      conf.StrSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'";
       switch (choiceSearch[dlg.SelectedLabel])
       {
         case "Actors":
@@ -12871,12 +12875,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //}
 
     private bool SaveLastView()
-    { return SaveLastView(null); }
+    { return SaveLastView(string.Empty); }
     private bool SaveLastView(string viewname)
     {
       if (null == viewname) return false;
 
-      LogMyFilms.Debug("SaveLastView() called with '" + viewname + "'");
+      LogMyFilms.Debug("SaveLastView() called with '" + viewname + "', current ViewHistory stack count is: '" + ViewHistory.Count + "'");
       // Configuration conf = new Configuration();
       ViewState state = new ViewState();
 
@@ -12914,19 +12918,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (ViewStateCache.ContainsKey(viewname)) ViewStateCache.Remove(viewname);
         ViewStateCache.Add(viewname, state);
+        LogMyFilms.Debug("SaveLastView() - saved viewstate for '" + viewname + "'");
       }
       else
       {
         ViewHistory.Add(state);
+        LogMyFilms.Debug("SaveLastView() - saved state to history stack - stack count is now: '" + ViewHistory.Count + "'");
       }
       return true;
     }
 
     private bool RestoreLastView()
-    { return  RestoreLastView(null); }
+    { return  RestoreLastView(string.Empty); }
     private bool RestoreLastView(string viewname)
     {
-      LogMyFilms.Debug("RestoreLastView() called with '" + viewname + "'"); 
+      LogMyFilms.Debug("RestoreLastView() called with '" + viewname + "', current ViewHistory stack count is: '" + ViewHistory.Count + "'"); 
       ViewState state = new ViewState();
       if (!string.IsNullOrEmpty(viewname))
       {
@@ -12964,6 +12970,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           //IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
           //TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+          LogMyFilms.Debug("SaveLastView() - restored viewstate for '" + viewname + "'");
           return true;
         }
         else return false;
@@ -13005,6 +13012,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
 
         ViewHistory.Remove(ViewHistory.Last());
+        LogMyFilms.Debug("RestoreLastView() ViewHistory after restore is: '" + ViewHistory.Count + "'"); 
         return true;
       }
       return false;
