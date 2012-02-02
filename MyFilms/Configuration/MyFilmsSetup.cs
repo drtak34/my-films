@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System;
   using System.Collections;
   using System.Collections.Generic;
+  using System.ComponentModel;
   using System.Data;
   using System.Diagnostics;
   using System.Globalization;
@@ -5986,6 +5987,108 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           viewBindingSource.ResetBindings(false);
           viewBindingSource.Position = viewBindingSource.Count - 1;
         }
+
+        private void buttonUpdateGrabberScripts_Click(object sender, EventArgs e)
+        {
+          string versionfile = Config.GetFolder(Config.Dir.Config) + @"\MyFilmsScriptVersions.xml";
+          if (System.IO.File.Exists(versionfile))
+          {
+            System.IO.File.Delete(versionfile);
+          }
+          Uri url = new Uri("http://my-films.googlecode.com/svn/trunk/Installer/updateScriptVersions.xml");
+          DownloadFileAsync(url, versionfile);
+          //UpdateScriptFiles();
+        }
+
+        private void DownloadFileAsync(Uri url, string file)
+        {
+          WebClient webClient = new WebClient();
+          webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+          webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+          webClient.DownloadFileAsync(url, file);
+        }
+    
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+          progressBarUpdateGrabberScripts.Value = e.ProgressPercentage;
+        }
+
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+          //FileInfo versionfile = new FileInfo(file);
+          //if (versionfile.Length == 0)
+          //{
+          //  System.IO.File.Delete(file);
+          //}
+          MessageBox.Show("Download completed!");
+        }
+
+        public void UpdateScriptFiles()
+        {
+          Version newVersion = null;
+          string name = "";
+          string url = "";
+          XmlTextReader reader;
+          try
+          {
+            string xmlURL = "http://domain/app_version.xml";
+            reader = new XmlTextReader(xmlURL);
+            reader.MoveToContent();
+            string elementName = "";
+            if ((reader.NodeType == XmlNodeType.Element) &&
+                (reader.Name == "MyFilmsGrabberScript"))
+            {
+              while (reader.Read())
+              {
+                // when we find an element node,
+                // we remember its name
+                if (reader.NodeType == XmlNodeType.Element)
+                  elementName = reader.Name;
+                else
+                {
+                  // for text nodes...
+                  if ((reader.NodeType == XmlNodeType.Text) &&
+                      (reader.HasValue))
+                  {
+                    // we check what the name of the node was
+                    switch (elementName)
+                    {
+                      case "version":
+                        // thats why we keep the version info
+                        // in xxx.xxx.xxx.xxx format
+                        // the Version class does the
+                        // parsing for us
+                        newVersion = new Version(reader.Value);
+                        break;
+                      case "name":
+                        name = reader.Value;
+                        break;
+                      case "url":
+                        url = reader.Value;
+                        break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          catch (Exception)
+          {
+          }
+          finally
+          {
+            //if (null != reader) reader.Close();
+          }
+
+          // get the current version
+          Version curVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+          // compare the versions
+          if (curVersion.CompareTo(newVersion) < 0)
+          {
+            // load updated scripts here ...
+          }
+        }
+      
 
       }
 

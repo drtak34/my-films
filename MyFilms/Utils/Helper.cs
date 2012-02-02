@@ -44,6 +44,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using TraktPlugin;
   using TraktPlugin.TraktAPI;
   using TraktPlugin.TraktAPI.DataStructures;
+  using System.Xml;
 
   #region String Extension Methods
     public static class StringExtensions
@@ -891,7 +892,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
           return size;
         }
-
     }
 
 }
