@@ -580,6 +580,7 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
           this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
           this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -640,6 +641,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -6125,6 +6127,8 @@
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
+          this.Tab_Other.Controls.Add(this.progressBarUpdateGrabberScripts);
+          this.Tab_Other.Controls.Add(this.buttonUpdateGrabberScripts);
           this.Tab_Other.Controls.Add(this.button_GrabberScriptUpdate);
           this.Tab_Other.Controls.Add(this.personDataGridView);
           this.Tab_Other.Controls.Add(this.customFieldDataGridView);
@@ -6146,6 +6150,16 @@
           this.Tab_Other.TabIndex = 11;
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
+          // 
+          // buttonUpdateGrabberScripts
+          // 
+          this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(563, 168);
+          this.buttonUpdateGrabberScripts.Name = "buttonUpdateGrabberScripts";
+          this.buttonUpdateGrabberScripts.Size = new System.Drawing.Size(137, 23);
+          this.buttonUpdateGrabberScripts.TabIndex = 121;
+          this.buttonUpdateGrabberScripts.Text = "Update Grabber Scripts";
+          this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
+          this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
           // 
           // button_GrabberScriptUpdate
           // 
@@ -6640,6 +6654,13 @@
           this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
+          // 
+          // progressBarUpdateGrabberScripts
+          // 
+          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(563, 137);
+          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
+          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(137, 23);
+          this.progressBarUpdateGrabberScripts.TabIndex = 122;
           // 
           // MyFilmsSetup
           // 
@@ -7314,5 +7335,7 @@
         private TextBox AntUpdText1;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripButton toolStripButton9;
+        private Button buttonUpdateGrabberScripts;
+        private ProgressBar progressBarUpdateGrabberScripts;
     }
 }
