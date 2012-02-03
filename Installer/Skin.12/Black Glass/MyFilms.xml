@@ -2057,5 +2057,31 @@ End additional Backdrops  -->
 				<animation effect="fade" time="250" condition="Control.isvisible(34)">visiblechange</animation>
 
 -->
+
+<!-- OV download indicator -->
+<control>
+<type>image</type>
+<id>1</id>
+<posX>856</posX>
+<posY>696</posY>
+<width>18</width>
+<height>18</height>
+<texture>isupdate.png</texture>
+<visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+<animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
+</control>
+
+<control>
+<description>number of current downloads</description>
+<type>label</type>
+<id>47016</id>
+<posX>881</posX>
+<posY>695</posY>
+<label>#OnlineVideos.currentDownloads #(L(921))</label>
+<font>font10</font>
+<textcolor>7fffffff</textcolor>
+<visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+</control>
+
   </controls>
 </window>
