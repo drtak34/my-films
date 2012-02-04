@@ -166,11 +166,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
             //AntViewItem.Items.Add("(none)"); // removed, as we do not want to have "none" views defined - they can be disabled instead, as they are dxnamic
-            AntViewItem1.Items.Add("(none)");
-            AntViewItem2.Items.Add("(none)");
-            AntViewItem3.Items.Add("(none)");
-            AntViewItem4.Items.Add("(none)");
-            AntViewItem5.Items.Add("(none)");
             AntItem1.Items.Add("(none)");
             AntItem2.Items.Add("(none)");
             AntItem3.Items.Add("(none)");
@@ -226,11 +221,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (dc.ColumnName != "Description" && dc.ColumnName != "Comments") //  && dc.ColumnName != "Number" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
                 {
                   AntViewItem.Items.Add(dc.ColumnName);
-                  AntViewItem1.Items.Add(dc.ColumnName);
-                  AntViewItem2.Items.Add(dc.ColumnName);
-                  AntViewItem3.Items.Add(dc.ColumnName);
-                  AntViewItem4.Items.Add(dc.ColumnName);
-                  AntViewItem5.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
@@ -463,50 +453,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbPictureHandling.Focus();
               return;
             }
-            if (AntViewItem1.Text.Length == 0)
-                AntViewItem1.Text = "(none)";
-            if (AntViewItem1.Text != "(none)" && AntViewText1.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntViewText1.Focus();
-                return;
-            }
-            if (AntViewItem2.Text.Length == 0)
-                AntViewItem2.Text = "(none)";
-            if (AntViewItem2.Text != "(none)" && AntViewText2.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntViewText2.Focus();
-                return;
-            }
-            if (AntViewItem3.Text.Length == 0)
-                AntViewItem3.Text = "(none)";
-            if (AntViewItem3.Text != "(none)" && AntViewText3.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntViewText3.Focus();
-                return;
-            }
-            if (AntViewItem4.Text.Length == 0)
-                AntViewItem4.Text = "(none)";
-            if (AntViewItem4.Text != "(none)" && AntViewText4.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntViewText4.Focus();
-                return;
-            }
-            if (AntViewItem5.Text.Length == 0)
-                AntViewItem5.Text = "(none)";
-            if (AntViewItem5.Text != "(none)" && AntViewText5.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntViewText5.Focus();
-                return;
-            }
-            if (View_Dflt_Item.Text.Length == 0)
-                View_Dflt_Item.Text = "(none)";
-            if (AntFilterItem1.Text.Length == 0)
-                AntFilterItem1.Text = "(none)";
+            if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
+            if (AntFilterItem1.Text.Length == 0) AntFilterItem1.Text = "(none)";
             if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
             {
                 MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -1202,7 +1150,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
-            AddRemoveExtendedfields((CatalogType.SelectedIndex > 0));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
             AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
             MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntPicture", "");
@@ -1323,16 +1270,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", string.Empty);
             AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", string.Empty);
             AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", string.Empty);
+
             ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator1", ",");
             ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator2", ";");
-            ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator3", "[");
-            ListSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator4", "|");
+            ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator3", "|");
+            ListSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator4", "/");
             ListSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator5", string.Empty);
             RoleSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator1", "(");
             RoleSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator2", ")");
-            RoleSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator3", " as ");
-            RoleSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator4", "....");
-            RoleSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator5", "|");
+            RoleSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator3", "as ");
+            RoleSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator4", "");
+            RoleSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator5", "");
             CmdPar.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CmdPar", "(none)");
             CmdExe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CmdExe", string.Empty);
             TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", "\\");
@@ -1497,8 +1445,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (isXtended) AntItem5.Items.Add(dc.ColumnName);
               }
               if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
-                  dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
-                  dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" &&
+                  dc.ColumnName != "Comments" && dc.ColumnName != "Description" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" &&
                   dc.ColumnName != "URL" && dc.ColumnName != "RecentlyAdded")
               {
                 if (SField1.Items.Contains(dc.ColumnName)) SField1.Items.Remove(dc.ColumnName);
@@ -1511,17 +1458,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               {
                 if (AntViewItem.Items.Contains(dc.ColumnName)) AntViewItem.Items.Remove(dc.ColumnName);
                 if (isXtended) AntViewItem.Items.Add(dc.ColumnName);
-                
-                if (AntViewItem1.Items.Contains(dc.ColumnName)) AntViewItem1.Items.Remove(dc.ColumnName);
-                if (isXtended) AntViewItem1.Items.Add(dc.ColumnName);
-                if (AntViewItem2.Items.Contains(dc.ColumnName)) AntViewItem2.Items.Remove(dc.ColumnName);
-                if (isXtended) AntViewItem2.Items.Add(dc.ColumnName);
-                if (AntViewItem3.Items.Contains(dc.ColumnName)) AntViewItem3.Items.Remove(dc.ColumnName);
-                if (isXtended) AntViewItem3.Items.Add(dc.ColumnName);
-                if (AntViewItem4.Items.Contains(dc.ColumnName)) AntViewItem4.Items.Remove(dc.ColumnName);
-                if (isXtended) AntViewItem4.Items.Add(dc.ColumnName);
-                if (AntViewItem5.Items.Contains(dc.ColumnName)) AntViewItem5.Items.Remove(dc.ColumnName);
-                if (isXtended) AntViewItem5.Items.Add(dc.ColumnName);
               }
               if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                   dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
@@ -1594,7 +1530,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Tab_Trailer.Enabled = false;
             Tab_Logos.Enabled = false;
             Tab_Views.Enabled = false;
-            Tab_Search.Enabled = false;
+            Tab_Config.Enabled = false;
             Tab_Update.Enabled = false;
             Tab_AMCupdater.Enabled = false;
             Tab_Artwork.Enabled = false;
@@ -1615,7 +1551,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Tab_Trailer.Enabled = true;
             Tab_Logos.Enabled = true;
             Tab_Views.Enabled = true;
-            Tab_Search.Enabled = true;
+            Tab_Config.Enabled = true;
             Tab_Update.Enabled = true;
             Tab_AMCupdater.Enabled = true;
             Tab_Artwork.Enabled = true;
@@ -1650,7 +1586,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               Tab_Trailer.Enabled = false;
               Tab_Logos.Enabled = false;
               Tab_Views.Enabled = false;
-              Tab_Search.Enabled = false;
+              Tab_Config.Enabled = false;
               Tab_Update.Enabled = false;
               Tab_AMCupdater.Enabled = false;
               Tab_Artwork.Enabled = false;
@@ -1672,7 +1608,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               Tab_Trailer.Enabled = true;
               Tab_Logos.Enabled = true;
               Tab_Views.Enabled = true;
-              Tab_Search.Enabled = true;
+              Tab_Config.Enabled = true;
               Tab_Update.Enabled = true;
               Tab_AMCupdater.Enabled = true;
               Tab_Artwork.Enabled = true;
@@ -1717,36 +1653,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterComb.ResetText();
             //dgViews.Rows.Clear();
             AntViewItem.ResetText();
-            AntViewItem1.ResetText();
-            AntViewItem2.ResetText();
-            AntViewItem3.ResetText();
-            AntViewItem4.ResetText();
-            AntViewItem5.ResetText();
-            AntViewText1.ResetText();
-            AntViewText2.ResetText();
-            AntViewText3.ResetText();
-            AntViewText4.ResetText();
-            AntViewText5.ResetText();
-            AntViewValue1.ResetText();
-            AntViewValue2.ResetText();
-            AntViewValue3.ResetText();
-            AntViewValue4.ResetText();
-            AntViewValue5.ResetText();
-            AntViewIndex1.ResetText();
-            AntViewIndex2.ResetText();
-            AntViewIndex3.ResetText();
-            AntViewIndex4.ResetText();
-            AntViewIndex5.ResetText();
-            AntViewSortOrder1.ResetText();
-            AntViewSortOrder2.ResetText();
-            AntViewSortOrder3.ResetText();
-            AntViewSortOrder4.ResetText();
-            AntViewSortOrder5.ResetText();
-            AntViewFilter1.Clear();
-            AntViewFilter2.Clear();
-            AntViewFilter3.Clear();
-            AntViewFilter4.Clear();
-            AntViewFilter5.Clear();
             AntLabel1.ResetText();
             AntLabel2.ResetText();
             AntLabel3.ResetText();
@@ -2164,6 +2070,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
+          AddRemoveExtendedfields(CatalogType.SelectedIndex > 0);
           if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
           {
             if (!NewConfigButton)
@@ -2208,14 +2115,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             Tab_ExternalCatalogs.Enabled = true;
             txtPicturePrefix.Text = "";
-            if (!AntViewItem1.Items.Contains("Writer")) // only add if not already done!
-              AddExtendedFieldsForExternalCatalogs();
-
             groupBoxExtendedFieldHandling.Enabled = true;
           }
           groupBox_DVDprofiler.Enabled = false; // deaktivates DVDprofiler options as default...
 
-            
+            switch (CatalogType.SelectedIndex)
+            #region catalog specific settings
             //0	Ant Movie Catalog (V3.5.1.2)
             //1	DVD Profiler (V3.7.2)
             //2	Movie Collector (V7.1.4)
@@ -2228,8 +2133,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //9	MovingPicturesXML (V1.2 process plugin)
             //10	MyFilms extended Database
             //11	XBMC nfo reader          
-          
-            switch (CatalogType.SelectedIndex)
             {
               case 0:
                     groupBoxExtendedFieldHandling.Enabled = false; 
@@ -2398,77 +2301,48 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       AntStorageTrailer.Text = "Borrower";
                     break;
             }
+            #endregion
         }
 
-        private void AddExtendedFieldsForExternalCatalogs()
+        private void AddDefaultViews()
         {
-          AntStorageTrailer.Items.Add("SourceTrailer");
+          MFview.ViewRow newRow = MyCustomViews.View.NewViewRow();
 
-          //Fanart,
-          //RatingUser,
-          //Studio,
-          //IMDB_Rank,
-          //IsOnline,
-          //Aspectratio,
-          AntViewItem1.Items.Add("Writer");
-          AntViewItem2.Items.Add("Writer");
-          AntViewItem3.Items.Add("Writer");
-          AntViewItem4.Items.Add("Writer");
-          AntViewItem5.Items.Add("Writer");
-          AntViewItem1.Items.Add("Certification");
-          AntViewItem2.Items.Add("Certification");
-          AntViewItem3.Items.Add("Certification");
-          AntViewItem4.Items.Add("Certification");
-          AntViewItem5.Items.Add("Certification");
-          AntViewItem1.Items.Add("TagLine");
-          AntViewItem2.Items.Add("TagLine");
-          AntViewItem3.Items.Add("TagLine");
-          AntViewItem4.Items.Add("TagLine");
-          AntViewItem5.Items.Add("TagLine");
-          AntViewItem1.Items.Add("Tags");
-          AntViewItem2.Items.Add("Tags");
-          AntViewItem3.Items.Add("Tags");
-          AntViewItem4.Items.Add("Tags");
-          AntViewItem5.Items.Add("Tags");
-          AntViewItem1.Items.Add("Studio");
-          AntViewItem2.Items.Add("Studio");
-          AntViewItem3.Items.Add("Studio");
-          AntViewItem4.Items.Add("Studio");
-          AntViewItem5.Items.Add("Studio");
-
-          AntFilterItem1.Items.Add("Writer");
-          AntFilterItem2.Items.Add("Writer");
-          AntFilterItem1.Items.Add("Certification");
-          AntFilterItem2.Items.Add("Certification");
-          AntFilterItem1.Items.Add("Tags");
-          AntFilterItem2.Items.Add("Tags");
-          AntItem1.Items.Add("Writer");
-          AntItem2.Items.Add("Writer");
-          AntItem3.Items.Add("Writer");
-          AntItem4.Items.Add("Writer");
-          AntItem5.Items.Add("Writer");
-          AntItem1.Items.Add("Certification");
-          AntItem2.Items.Add("Certification");
-          AntItem3.Items.Add("Certification");
-          AntItem4.Items.Add("Certification");
-          AntItem5.Items.Add("Certification");
-          AntItem1.Items.Add("TagLine");
-          AntItem2.Items.Add("TagLine");
-          AntItem3.Items.Add("TagLine");
-          AntItem4.Items.Add("TagLine");
-          AntItem5.Items.Add("TagLine");
-          AntItem1.Items.Add("Tags");
-          AntItem2.Items.Add("Tags");
-          AntItem3.Items.Add("Tags");
-          AntItem4.Items.Add("Tags");
-          AntItem5.Items.Add("Tags");
-          AntItem1.Items.Add("Studio");
-          AntItem2.Items.Add("Studio");
-          AntItem3.Items.Add("Studio");
-          AntItem4.Items.Add("Studio");
-          AntItem5.Items.Add("Studio");
-
-          cbWatched.Items.Add("Watched");
+          //Films (mastertitle)
+          newRow.DBfield = AntTitle1.Text;
+          newRow.Label = GUILocalizeStrings.Get(342); // videos
+          newRow.Filter = AntTitle1.Text + " not like ''";
+          MyCustomViews.View.Rows.Add(newRow);
+          //year
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Year";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //Category
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Category";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //Country
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Country";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //RecentlyAdded
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "RecentlyAdded";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //Actors
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Actors";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //Producer
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Producer";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
         }
 
         private void btnGrabber_Click(object sender, EventArgs e)
@@ -4970,8 +4844,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntItem5.Text = "Date";
           AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
-          AntViewItem1.Text = "Producer";
-          AntViewText1.Text = BaseMesFilms.Translate_Column(AntViewItem1.Text.Trim());
+          // add default Views
+          MyCustomViews.View.Clear();
+          AddDefaultViews();
 
           cbWatched.Text = "Checked";
 
@@ -5012,6 +4887,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           switch (newCountry)
           {
+            #region set country specific settings
             case "Austria":
             case "Germany":
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.DE-OFDB.xml";
@@ -5085,7 +4961,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Sweden
           //Switzerland
           //Turkey
-          //Uruguay
+            //Uruguay
+            #endregion
           }
 
           //AMCupdater
@@ -5774,61 +5651,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Config_Name.Text = StringExtensions.XmlCharacterWhitelist(Config_Name.Text).Replace(@"'", "");
         }
 
-        private void btnAntViewFilter1_Click(object sender, EventArgs e)
-        {
-          FilterEditor filterEditor = new FilterEditor();
-          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText1.Text + "')";
-          filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-          filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter1.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnAntViewFilter2_Click(object sender, EventArgs e)
-        {
-          FilterEditor filterEditor = new FilterEditor();
-          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText2.Text + "')";
-          filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-          filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter2.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnAntViewFilter3_Click(object sender, EventArgs e)
-        {
-          FilterEditor filterEditor = new FilterEditor();
-          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText3.Text + "')";
-          filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-          filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter3.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnAntViewFilter4_Click(object sender, EventArgs e)
-        {
-          FilterEditor filterEditor = new FilterEditor();
-          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText4.Text + "')";
-          filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-          filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter4.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnAntViewFilter5_Click(object sender, EventArgs e)
-        {
-          FilterEditor filterEditor = new FilterEditor();
-          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewText5.Text + "')";
-          filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-          filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter5.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
           FilterEditor filterEditor = new FilterEditor();
@@ -5916,7 +5738,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void AntViewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
           AntViewText_Change(); 
-          if (AntViewItem.Text.Length == 0) AntViewItem.Text = "(none)";
+          if (AntViewItem.Text.Length == 0)
+          {
+            AntViewItem.Text = "(none)";
+            MyCustomViews.View.FindByID(viewBindingSource.Position).ViewEnabled = false;
+          }
+
           if (AntViewItem.Text != "(none)" &&  string.IsNullOrEmpty(this.MyCustomViews.View.FindByID(viewBindingSource.Position).Label))
           {
             MessageBox.Show("The View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -6052,7 +5879,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             // load updated scripts here ...
           }
         }
-      
+
+        private void toolStripButtonAddDefaults_Click(object sender, EventArgs e)
+        {
+          this.AddDefaultViews();
+        }
 
       }
 
