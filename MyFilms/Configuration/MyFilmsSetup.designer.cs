@@ -292,11 +292,11 @@
           this.Tab_Search = new System.Windows.Forms.TabPage();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
           this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
-          this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
           this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-          this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
           this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
           this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
           this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -306,10 +306,10 @@
           this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
           this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-          this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-          this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButtonMoveUp = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButtonMoveDown = new System.Windows.Forms.ToolStripButton();
           this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-          this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+          this.toolStripButtonAddNew = new System.Windows.Forms.ToolStripButton();
           this.dgViewsList = new System.Windows.Forms.DataGridView();
           this.labelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.viewEnabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -580,6 +580,7 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
           this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
           this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
@@ -641,7 +642,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -2919,10 +2919,10 @@
           // 
           // bindingNavigatorViews
           // 
-          this.bindingNavigatorViews.AddNewItem = this.toolStripButton1;
+          this.bindingNavigatorViews.AddNewItem = this.toolStripButtonAdd;
           this.bindingNavigatorViews.BindingSource = this.viewBindingSource;
           this.bindingNavigatorViews.CountItem = this.toolStripLabel1;
-          this.bindingNavigatorViews.DeleteItem = this.toolStripButton2;
+          this.bindingNavigatorViews.DeleteItem = this.toolStripButtonDelete;
           this.bindingNavigatorViews.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
           this.bindingNavigatorViews.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton3,
@@ -2934,13 +2934,13 @@
             this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripSeparator3,
-            this.toolStripButton1,
-            this.toolStripButton2,
+            this.toolStripButtonAdd,
+            this.toolStripButtonDelete,
             this.toolStripSeparator4,
-            this.toolStripButton7,
-            this.toolStripButton8,
+            this.toolStripButtonMoveUp,
+            this.toolStripButtonMoveDown,
             this.toolStripSeparator5,
-            this.toolStripButton9});
+            this.toolStripButtonAddNew});
           this.bindingNavigatorViews.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
           this.bindingNavigatorViews.Location = new System.Drawing.Point(3, 16);
           this.bindingNavigatorViews.MoveFirstItem = this.toolStripButton3;
@@ -2954,16 +2954,16 @@
           this.bindingNavigatorViews.TabIndex = 38;
           this.bindingNavigatorViews.Text = "bindingNavigatorViews";
           // 
-          // toolStripButton1
+          // toolStripButtonAdd
           // 
-          this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton1.Enabled = false;
-          this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-          this.toolStripButton1.Name = "toolStripButton1";
-          this.toolStripButton1.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton1.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton1.Text = "Neu hinzufügen";
-          this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+          this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButtonAdd.Enabled = false;
+          this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
+          this.toolStripButtonAdd.Name = "toolStripButtonAdd";
+          this.toolStripButtonAdd.RightToLeftAutoMirrorImage = true;
+          this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 20);
+          this.toolStripButtonAdd.Text = "Neu hinzufügen";
+          this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButton1_Click);
           // 
           // viewBindingSource
           // 
@@ -2982,15 +2982,15 @@
           this.toolStripLabel1.Text = "von {0}";
           this.toolStripLabel1.ToolTipText = "Die Gesamtanzahl der Elemente.";
           // 
-          // toolStripButton2
+          // toolStripButtonDelete
           // 
-          this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-          this.toolStripButton2.Name = "toolStripButton2";
-          this.toolStripButton2.RightToLeftAutoMirrorImage = true;
-          this.toolStripButton2.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton2.Text = "Löschen";
-          this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+          this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
+          this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+          this.toolStripButtonDelete.RightToLeftAutoMirrorImage = true;
+          this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 20);
+          this.toolStripButtonDelete.Text = "Löschen";
+          this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButton2_Click);
           // 
           // toolStripButton3
           // 
@@ -3057,45 +3057,46 @@
           this.toolStripSeparator4.Name = "toolStripSeparator4";
           this.toolStripSeparator4.Size = new System.Drawing.Size(6, 23);
           // 
-          // toolStripButton7
+          // toolStripButtonMoveUp
           // 
-          this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-          this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.toolStripButton7.Name = "toolStripButton7";
-          this.toolStripButton7.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton7.Text = "up";
-          this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+          this.toolStripButtonMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButtonMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonMoveUp.Image")));
+          this.toolStripButtonMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButtonMoveUp.Name = "toolStripButtonMoveUp";
+          this.toolStripButtonMoveUp.Size = new System.Drawing.Size(23, 20);
+          this.toolStripButtonMoveUp.Text = "up";
+          this.toolStripButtonMoveUp.Click += new System.EventHandler(this.toolStripButton7_Click);
           // 
-          // toolStripButton8
+          // toolStripButtonMoveDown
           // 
-          this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButton8.Image = global::MyFilmsPlugin.Properties.Resources.arrow_down;
-          this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.toolStripButton8.Name = "toolStripButton8";
-          this.toolStripButton8.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton8.Text = "down";
-          this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+          this.toolStripButtonMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButtonMoveDown.Image = global::MyFilmsPlugin.Properties.Resources.arrow_down;
+          this.toolStripButtonMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButtonMoveDown.Name = "toolStripButtonMoveDown";
+          this.toolStripButtonMoveDown.Size = new System.Drawing.Size(23, 20);
+          this.toolStripButtonMoveDown.Text = "down";
+          this.toolStripButtonMoveDown.Click += new System.EventHandler(this.toolStripButton8_Click);
           // 
           // toolStripSeparator5
           // 
           this.toolStripSeparator5.Name = "toolStripSeparator5";
           this.toolStripSeparator5.Size = new System.Drawing.Size(6, 23);
           // 
-          // toolStripButton9
+          // toolStripButtonAddNew
           // 
-          this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-          this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-          this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.toolStripButton9.Name = "toolStripButton9";
-          this.toolStripButton9.Size = new System.Drawing.Size(54, 17);
-          this.toolStripButton9.Text = "Add New";
-          this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+          this.toolStripButtonAddNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButtonAddNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddNew.Image")));
+          this.toolStripButtonAddNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.toolStripButtonAddNew.Name = "toolStripButtonAddNew";
+          this.toolStripButtonAddNew.Size = new System.Drawing.Size(54, 17);
+          this.toolStripButtonAddNew.Text = "Add New";
+          this.toolStripButtonAddNew.Click += new System.EventHandler(this.toolStripButton9_Click);
           // 
           // dgViewsList
           // 
           this.dgViewsList.AllowUserToAddRows = false;
           this.dgViewsList.AllowUserToDeleteRows = false;
+          this.dgViewsList.AllowUserToResizeRows = false;
           this.dgViewsList.AutoGenerateColumns = false;
           this.dgViewsList.BackgroundColor = System.Drawing.SystemColors.Menu;
           this.dgViewsList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -6151,6 +6152,13 @@
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
+          // progressBarUpdateGrabberScripts
+          // 
+          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(563, 137);
+          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
+          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(137, 23);
+          this.progressBarUpdateGrabberScripts.TabIndex = 122;
+          // 
           // buttonUpdateGrabberScripts
           // 
           this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(563, 168);
@@ -6654,13 +6662,6 @@
           this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
-          // 
-          // progressBarUpdateGrabberScripts
-          // 
-          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(563, 137);
-          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
-          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(137, 23);
-          this.progressBarUpdateGrabberScripts.TabIndex = 122;
           // 
           // MyFilmsSetup
           // 
@@ -7301,9 +7302,9 @@
         private DataGridViewTextBoxColumn labelDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn viewEnabledDataGridViewCheckBoxColumn;
         private BindingNavigator bindingNavigatorViews;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton toolStripButtonAdd;
         private ToolStripLabel toolStripLabel1;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButtonDelete;
         private ToolStripButton toolStripButton3;
         private ToolStripButton toolStripButton4;
         private ToolStripSeparator toolStripSeparator1;
@@ -7313,8 +7314,8 @@
         private ToolStripButton toolStripButton6;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripSeparator toolStripSeparator4;
-        private ToolStripButton toolStripButton7;
-        private ToolStripButton toolStripButton8;
+        private ToolStripButton toolStripButtonMoveUp;
+        private ToolStripButton toolStripButtonMoveDown;
         private TabPage Tab_OldStuff;
         private GroupBox groupBox_SupplementarySearch;
         private Label label43;
@@ -7334,7 +7335,7 @@
         private ComboBox AntUpdItem1;
         private TextBox AntUpdText1;
         private ToolStripSeparator toolStripSeparator5;
-        private ToolStripButton toolStripButton9;
+        private ToolStripButton toolStripButtonAddNew;
         private Button buttonUpdateGrabberScripts;
         private ProgressBar progressBarUpdateGrabberScripts;
     }

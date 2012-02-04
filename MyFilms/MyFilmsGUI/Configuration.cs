@@ -131,9 +131,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   StrViewFilter[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewFilter{0}", i), string.Empty);
                 }
 
+
+                int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntViewTotalCount", 5); // set to 5 as default to keep compatibility
                 CustomViews.View.Clear();
                 int index = 1;
-                while (true) //for (int i = 1; i < 6; i++)
+                for (int i = 1; i < iCustomViews + 1; i++) // while (true) //
                 {
                   if (string.IsNullOrEmpty(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntViewText" + index, string.Empty)))
                     break;
@@ -148,15 +150,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   view.ReverseNames = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewReverseNames{0}", index), false);
                   view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), "Name");
                   view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), " ASC");
+                  if (view.SortDirectionView.Contains("ASC")) view.SortDirectionView = " ASC"; else view.SortDirectionView = " DESC";
                   view.LayoutView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutView{0}", index), "0");
                   view.SortFieldFilms = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldFilms{0}", index), "");
                   view.SortDirectionFilms = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionFilms{0}", index), " ASC");
+                  if (view.SortDirectionFilms.Contains("ASC")) view.SortDirectionFilms = " ASC"; else view.SortDirectionFilms = " DESC";
                   view.LayoutFilms = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutFilms{0}", index), "0");
                   view.SortFieldHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldHierarchy{0}", index), "");
                   view.SortDirectionHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionHierarchy{0}", index), " ASC");
+                  if (view.SortDirectionHierarchy.Contains("ASC")) view.SortDirectionHierarchy = " ASC"; else view.SortDirectionHierarchy = " DESC";
                   view.LayoutHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutHierarchy{0}", index), "0");
                   view.OnlyUnwatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewOnlyUnwatched{0}", index), false);
                   view.OnlyAvailable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewOnlyAvailable{0}", index), false);
+                  LogMyFilms.Debug("Adding view '" + view.Label + "'");
                   CustomViews.View.AddViewRow(view);
                   index++;
                 }
