@@ -167,11 +167,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   index++;
                 }
               
-                for (int i = 1; i < 3; i++)
-                {
-                  StrSearchText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchText{0}", i), string.Empty);
-                  StrSearchItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchItem{0}", i), string.Empty);
-                }
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
                 StrFileXmlTemp = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                 StrFileType = (CatalogType)int.Parse(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0"));
@@ -1226,18 +1221,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strViewDfltText; }
             set { strViewDfltText = value; }
-        }
-        private string[] strSearchItem = {string.Empty,string.Empty};
-        public string[] StrSearchItem
-        {
-            get { return strSearchItem; }
-            set { strSearchItem = value; }
-        }
-        private string[] strSearchText= {string.Empty,string.Empty};
-        public string[] StrSearchText
-        {
-            get { return strSearchText; }
-            set { strSearchText = value; }
         }
         private string strFileXml = string.Empty;
         public string StrFileXml

@@ -4104,20 +4104,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(344)); //Actors
       choiceSearch.Add("actors");
 
-      if (MyFilmsDetail.ExtendedStartmode("User defined search items 1 and 2"))
-      {
-        for (int i = 0; i < 2; i++)
-        {
-          if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
-          {
-            if (MyFilms.conf.StrSearchText[i].Length == 0)
-              dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
-            else
-              dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
-            choiceSearch.Add(string.Format("search{0}", i.ToString()));
-          }
-        }
-      }
+      //if (MyFilmsDetail.ExtendedStartmode("User defined search items 1 and 2"))
+      //{
+      //  for (int i = 0; i < 2; i++)
+      //  {
+      //    if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
+      //    {
+      //      if (MyFilms.conf.StrSearchText[i].Length == 0)
+      //        dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
+      //      else
+      //        dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
+      //      choiceSearch.Add(string.Format("search{0}", i.ToString()));
+      //    }
+      //  }
+      //}
 
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
       {
@@ -4212,20 +4212,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           case "search0":
           case "search1":
-            int i = 0;
-            if (choiceSearch[dlg.SelectedLabel] == "search1") i = 1;
-            var ds = new AntMovieCatalog();
-            if (control_searchText(keyboard.Text))
-            {
-              if (ds.Movie.Columns[conf.StrSearchItem[i]].DataType.Name == "string") 
-                conf.StrSelect = conf.StrSearchItem[i] + " like '*" + keyboard.Text + "*'";
-              else 
-                conf.StrSelect = conf.StrSearchItem[i] + " = '" + keyboard.Text + "'";
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
-              conf.StrTitleSelect = "";
-              GetFilmList();
-            }
-            else return; // false;
+            //int i = 0;
+            //if (choiceSearch[dlg.SelectedLabel] == "search1") i = 1;
+            //var ds = new AntMovieCatalog();
+            //if (control_searchText(keyboard.Text))
+            //{
+            //  if (ds.Movie.Columns[conf.StrSearchItem[i]].DataType.Name == "string") 
+            //    conf.StrSelect = conf.StrSearchItem[i] + " like '*" + keyboard.Text + "*'";
+            //  else 
+            //    conf.StrSelect = conf.StrSearchItem[i] + " = '" + keyboard.Text + "'";
+            //  conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
+            //  conf.StrTitleSelect = "";
+            //  GetFilmList();
+            //}
+            //else return; // false;
             break;
         }
       }
@@ -10735,6 +10735,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1) return;
             wproperty = choiceSearch[dlg.SelectedLabel];
+
+
+            // from former search definition:
+            //int i = 0;
+            //if (choiceSearch[dlg.SelectedLabel] == "search1") i = 1;
+            //var ds = new AntMovieCatalog();
+            //if (control_searchText(keyboard.Text))
+            //{
+            //  if (ds.Movie.Columns[conf.StrSearchItem[i]].DataType.Name == "string")
+            //    conf.StrSelect = conf.StrSearchItem[i] + " like '*" + keyboard.Text + "*'";
+            //  else
+            //    conf.StrSelect = conf.StrSearchItem[i] + " = '" + keyboard.Text + "'";
+            //  conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
+            //  conf.StrTitleSelect = "";
+            //  GetFilmList();
+            //}
+            //else return; // false;
+
             if (control_searchText(keyboard.Text))
             {
 
@@ -10751,8 +10769,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
                   break;
               }
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) +
-                                  " [*" + keyboard.Text + @"*]";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + keyboard.Text + @"*]";
 
               conf.StrTitleSelect = string.Empty;
               // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
@@ -10899,6 +10916,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (dlg.SelectedLabel == -1) return;
                 break;
               }
+
+              // this was former search stuff:
+              //int i = 0;
+              //if (choiceSearch[dlg.SelectedLabel] == "search1") i = 1;
+              //var ds = new AntMovieCatalog();
+              //if (control_searchText(keyboard.Text))
+              //{
+              //  if (ds.Movie.Columns[conf.StrSearchItem[i]].DataType.Name == "string")
+              //    conf.StrSelect = conf.StrSearchItem[i] + " like '*" + keyboard.Text + "*'";
+              //  else
+              //    conf.StrSelect = conf.StrSearchItem[i] + " = '" + keyboard.Text + "'";
+              //  conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
+              //  conf.StrTitleSelect = "";
+              //  GetFilmList();
+              //}
+              //else return; // false;
 
               switch (wproperty)
               {

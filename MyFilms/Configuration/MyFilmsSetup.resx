@@ -618,6 +618,9 @@ It will NOT change, if user manually sets a movie to watched or unwatched.</valu
   <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1393, 16</value>
   </metadata>
+  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1393, 16</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripButtonAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -742,6 +745,9 @@ It will NOT change, if user manually sets a movie to watched or unwatched.</valu
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
   <data name="checkBox2.ToolTip" xml:space="preserve">
     <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
 you will get an additional group in the view with films having no category assigned.
@@ -779,9 +785,6 @@ The plugin needs to know what separator is used to indicate the role text for fi
 Note: Separators will need time to process - for person views (e.g. actors), you can speed up 
 the view sigificantly by defining only those separators you really need.</value>
   </data>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
-  </metadata>
   <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
     <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
 select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
@@ -1148,25 +1151,6 @@ This is to make sure, MyFilms won't overwrite any settings that you may have don
     <value>You can create start parameters for use on buttons anywhere in MediaPortal.
 Select the configuration, views, layout or search parameters, create the start parameters
 and copy the resulting hyperlink as hyperlink parameter to the button anywhere in your skin.</value>
-  </data>
-  <data name="groupBox_SupplementarySearch.ToolTip" xml:space="preserve">
-    <value>The following searches are implemented as fixed search options:
-	by films
-	by actors
-
-You can add additional searches by selecting the database field and adding a value to filter that field by, if required.
-Those searches will be shown as separate entries in the search menu. 
-They obey the filter settings, so will be based on views you have defined.</value>
-  </data>
-  <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
-    <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
-but you can define two more fields to be updated here.
-They will show as separate menu entries.
-
-Select the database field to be updated, enter the label associated with that field 
-and enter a pre-defined value to update the field.
-
-A possible use case could be ""Language" "french" to have a oneclick solution to set a movie to this setting without using virtual keyboard.</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
