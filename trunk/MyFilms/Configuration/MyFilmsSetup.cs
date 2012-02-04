@@ -171,10 +171,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewItem3.Items.Add("(none)");
             AntViewItem4.Items.Add("(none)");
             AntViewItem5.Items.Add("(none)");
-            AntSearchItem1.Items.Add("(none)");
-            AntSearchItem2.Items.Add("(none)");
-            AntUpdItem1.Items.Add("(none)");
-            AntUpdItem2.Items.Add("(none)");
             AntItem1.Items.Add("(none)");
             AntItem2.Items.Add("(none)");
             AntItem3.Items.Add("(none)");
@@ -236,13 +232,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntViewItem4.Items.Add(dc.ColumnName);
                   AntViewItem5.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && 
-                    dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
-                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-                {
-                  AntSearchItem1.Items.Add(dc.ColumnName);
-                  AntSearchItem2.Items.Add(dc.ColumnName);
-                }
                 if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
                     dc.ColumnName != "Length" && dc.ColumnName != "Rating" && 
@@ -252,8 +241,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
                 {
-                  AntUpdItem1.Items.Add(dc.ColumnName);
-                  AntUpdItem2.Items.Add(dc.ColumnName);
                   cbfdupdate.Items.Add(dc.ColumnName);
                   cbWatched.Items.Add(dc.ColumnName);
                   CmdPar.Items.Add(dc.ColumnName);
@@ -579,38 +566,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntFilterText2.Focus();
                 }
             }
-            if (AntUpdItem1.Text.Length == 0)
-                AntUpdItem1.Text = "(none)";
-            if (AntUpdItem1.Text != "(none)" && AntUpdText1.Text.Length == 0)
-            {
-                MessageBox.Show("The Button Label is mandatory with the corresponding Update Field Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntUpdText1.Focus();
-                return;
-            }
-            if (AntUpdItem2.Text.Length == 0)
-                AntUpdItem2.Text = "(none)";
-            if (AntUpdItem2.Text != "(none)" && AntUpdText2.Text.Length == 0)
-            {
-                MessageBox.Show("The Button Label is mandatory with the corresponding Update Field Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntUpdText2.Focus();
-                return;
-            }
-            if (AntSearchItem1.Text.Length == 0)
-                AntSearchItem1.Text = "(none)";
-            if (AntSearchItem1.Text != "(none)" && AntSearchText1.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntSearchText1.Focus();
-                return;
-            }
-            if (AntSearchItem2.Text.Length == 0)
-                AntSearchItem2.Text = "(none)";
-            if (AntSearchItem2.Text != "(none)" && AntSearchText2.Text.Length == 0)
-            {
-                MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntSearchText2.Focus();
-                return;
-            }
             if (Dwp.Text.Length > 0)
                 if (Dwp.Text != Rpt_Dwp.Text)
                 {
@@ -868,16 +823,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", AntViewSortOrder5.Text);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", AntViewFilter5.Text);
 
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", AntSearchItem1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchText1", AntSearchText1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem2", AntSearchItem2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSearchText2", AntSearchText2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem1", AntUpdItem1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntUpdText1", AntUpdText1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT1", AntUpdDflT1.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", AntUpdItem2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", AntUpdText2.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", AntUpdDflT2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItem1", AntItem1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", AntLabel1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItem2", AntItem2.Text);
@@ -998,6 +943,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (rbsuppress4.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "4");
 
+            CleanupOldEntries(); // this can be removed in later versions - only to clean up config files from unused entries ...
+
             if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // common external catalog options
             {
               XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTagline", chkAddTagline.Checked);
@@ -1078,6 +1025,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewOnlyAvailable{0}", index));
         }
 
+        private void CleanupOldEntries() // this can be removed in later versions - only to clean up config files from unused entries ...
+        {
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntSearchItem1");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntSearchText1");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntSearchItem2");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntSearchText2");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdItem1");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdText1");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdDflT1");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdItem2");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdText2");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdDflT2");
+        }
+    
         private int GetLayoutFromName(string layoutname)
         {
           int wLayout = 0;
@@ -1342,17 +1303,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               index++;
             }
 
-            AntSearchItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem1", "");
-            AntSearchText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchText1", "");
-            AntSearchItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchItem2", "");
-            AntSearchText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSearchText2", "");
-            AntUpdItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem1", "");
-            AntUpdText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText1", "");
-            AntUpdDflT1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT1", "");
-            AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", "");
-            AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", "");
-            AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", "");
-
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
             comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
             check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Userdialog", false);
@@ -1577,10 +1527,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
                   dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
               {
-                if (SField1.Items.Contains(dc.ColumnName)) AntSearchItem1.Items.Remove(dc.ColumnName);
-                if (isXtended) AntSearchItem1.Items.Add(dc.ColumnName);
-                if (SField1.Items.Contains(dc.ColumnName)) AntSearchItem2.Items.Remove(dc.ColumnName);
-                if (isXtended) AntSearchItem2.Items.Add(dc.ColumnName);
+                if (SField1.Items.Contains(dc.ColumnName)) SField1.Items.Remove(dc.ColumnName);
+                if (isXtended) SField1.Items.Add(dc.ColumnName);
+                if (SField2.Items.Contains(dc.ColumnName)) SField2.Items.Remove(dc.ColumnName);
+                if (isXtended) SField2.Items.Add(dc.ColumnName);
               }
               if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                   dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
@@ -1592,10 +1542,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               }
               if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
               {
-                if (AntUpdItem1.Items.Contains(dc.ColumnName)) AntUpdItem1.Items.Remove(dc.ColumnName);
-                if (isXtended) AntUpdItem1.Items.Add(dc.ColumnName);
-                if (AntUpdItem2.Items.Contains(dc.ColumnName)) AntUpdItem2.Items.Remove(dc.ColumnName);
-                if (isXtended) AntUpdItem2.Items.Add(dc.ColumnName);
                 if (cbfdupdate.Items.Contains(dc.ColumnName)) cbfdupdate.Items.Remove(dc.ColumnName);
                 if (isXtended) cbfdupdate.Items.Add(dc.ColumnName);
                 if (cbWatched.Items.Contains(dc.ColumnName)) cbWatched.Items.Remove(dc.ColumnName);
@@ -1801,16 +1747,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewFilter3.Clear();
             AntViewFilter4.Clear();
             AntViewFilter5.Clear();
-            AntSearchItem1.ResetText();
-            AntSearchText1.ResetText();
-            AntSearchItem2.ResetText();
-            AntSearchText2.ResetText();
-            AntUpdItem1.ResetText();
-            AntUpdItem2.ResetText();
-            AntUpdText1.ResetText();
-            AntUpdText2.ResetText();
-            AntUpdDflT1.ResetText();
-            AntUpdDflT2.ResetText();
             AntLabel1.ResetText();
             AntLabel2.ResetText();
             AntLabel3.ResetText();
@@ -2531,17 +2467,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntItem3.Items.Add("Studio");
           AntItem4.Items.Add("Studio");
           AntItem5.Items.Add("Studio");
-
-          AntSearchItem1.Items.Add("Writer");
-          AntSearchItem2.Items.Add("Writer");
-          AntSearchItem1.Items.Add("Certification");
-          AntSearchItem2.Items.Add("Certification");
-          AntSearchItem1.Items.Add("TagLine");
-          AntSearchItem2.Items.Add("TagLine");
-          AntSearchItem1.Items.Add("Tags");
-          AntSearchItem2.Items.Add("Tags");
-          AntSearchItem1.Items.Add("Studio");
-          AntSearchItem2.Items.Add("Studio");
 
           cbWatched.Items.Add("Watched");
         }

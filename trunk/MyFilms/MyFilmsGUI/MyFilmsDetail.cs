@@ -802,13 +802,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int ItemID;
 
             // Read Info from MyFilms Configfile
-            XmlConfig XmlConfig = new XmlConfig();
-            StrUpdItem1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdItem1", "");
-            StrUpdText1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdText1", "");
-            StrUpdDflT1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdDflT1", "");
-            StrUpdItem2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdItem2", "");
-            StrUpdText2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdText2", "");
-            StrUpdDflT2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdDflT2", "");
+            //XmlConfig XmlConfig = new XmlConfig();
+            //StrUpdItem1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdItem1", "");
+            //StrUpdText1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdText1", "");
+            //StrUpdDflT1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdDflT1", "");
+            //StrUpdItem2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdItem2", "");
+            //StrUpdText2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdText2", "");
+            //StrUpdDflT2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdDflT2", "");
 
             AntMovieCatalog ds = new AntMovieCatalog();
             ItemID = (int)MyFilms.r[MyFilms.conf.StrIndex]["Number"]; //set unique id num (ant allows it to be non-unique but that is a bad idea)
