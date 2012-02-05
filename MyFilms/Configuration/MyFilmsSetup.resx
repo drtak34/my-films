@@ -153,8 +153,51 @@
   <metadata name="layoutHierarchyLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <metadata name="label68.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="label70.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="label69.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <data name="label69.ToolTip" xml:space="preserve">
+    <value>You can define the sort order for the respective view.
+Mostly, "Ascending" is the best choice.
+For fields like "Date" or "Rating" it is useful to use "Descending".
+You can set separate sort orders for the view itself, the underlying film list and optional hierarchy film lists.</value>
+  </data>
+  <metadata name="label67.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label67.ToolTip" xml:space="preserve">
+    <value>The Filter can be used to add any restriction to that specific View.
+You can use it the same way as "User defined config filters", but you can define them "per view".
+It as additional to the "Userdefined Config Filter", so if you already have defined a Config Filter, 
+you do not need to repeat that filter setting here.
+The edit buttom helps you to create filter rules.
+
+Example:
+"Category like 'Action'" only displays movies of this category.
+Note: Other than "Value", the filter will apply and still display Views as "groupings".</value>
+  </data>
+  <metadata name="label66.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label66.ToolTip" xml:space="preserve">
+    <value>The Default Value will allow you to directly display the film list filtered to that value.
+Important: If this field is set, MyFilms will directly display a filmlist and skip any "groiuped" View.
+Use "*" to show complete filmlist.</value>
+  </data>
+  <metadata name="label60.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="label65.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
   <data name="Config_Name.ToolTip" xml:space="preserve">
     <value>Enter a unique name for each configuration.
@@ -626,6 +669,30 @@ in (requires a list of allowed expressions)
 not in
 like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
   </data>
+  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
+    <value>Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions, placeholders not allowed)
+not in
+like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
+
+Examples:
+"Number IN (1, 2, 3)"                    // integer values
+"Number NOT IN (1, 2, 3)"  // values not from the list
+"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
+"OriginalTitle LIKE 'j*'"       // values that start with 'j'
+"Actors LIKE '%jo%'"     // values that contain 'jo'
+"Category NOT LIKE 'j*'"   // values that don't start with 'j'
+"Category # 'Action' AND Category &lt;&gt; 'Horror'"
+"Category NOT IN ('Action', 'Horror')"
+"Actors IN ('Bruce Willis', 'Adriano Celentano')"
+"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
+  </data>
   <data name="groupBox4.ToolTip" xml:space="preserve">
     <value>In movie hierarchies, normally the same sort order is used
 as in all other views.
@@ -658,35 +725,6 @@ The plugin needs to know what separator is used to indicate the role text for fi
 Note: Separators will need time to process - for person views (e.g. actors), you can speed up 
 the view sigificantly by defining only those separators you really need.</value>
   </data>
-  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1245, 18</value>
-  </metadata>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
-  </metadata>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
-  </metadata>
-  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
-    <value>"Only available" option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-Note:
-The availability status is only usable after MyFilms has done a scan. 
-This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
-Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
-  </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-AMC users can configure the field and value to identify unwatched films
-on "update" tab (Watched-Status Handling).</value>
-  </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
 Select the option “Display Always that view when using this config”, 
@@ -714,6 +752,12 @@ For example, you can define a view for children with ‘Category’ – ‘Anima
         GfxviDf8XxNr/L8y2oR0A0hO++RqAAAkI9ieo+gjUwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1245, 18</value>
+  </metadata>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
   <data name="toolStripButtonDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -834,32 +878,11 @@ For example, you can define a view for children with ‘Category’ – ‘Anima
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="label68.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label70.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label69.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label67.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label66.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label60.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="checkBox2.ToolTip" xml:space="preserve">
     <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
 you will get an additional group in the view with films having no category assigned.
 This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
   </data>
-  <metadata name="label65.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="groupBoxView.ToolTip" xml:space="preserve">
     <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
 In this section you can define additional views; 
@@ -871,6 +894,29 @@ Optional:
 - You can set Index to values of 1 or 2 to get indexed display of the values
 - You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
   </data>
+  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
+    <value>"Only available" option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+Note:
+The availability status is only usable after MyFilms has done a scan. 
+This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
+Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
+  </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+AMC users can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
+  </data>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
 and thus to integrate trailers into MyFilms.
@@ -1545,62 +1591,6 @@ and copy the resulting hyperlink as hyperlink parameter to the button anywhere i
   <metadata name="customFieldsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>848, 17</value>
   </metadata>
-  <metadata name="label68.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label70.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="label69.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="label69.ToolTip" xml:space="preserve">
-    <value>You can define the sort order for the respective view.
-Mostly, "Ascending" is the best choice.
-For fields like "Date" or "Rating" it is useful to use "Descending".
-You can set separate sort orders for the view itself, the underlying film list and optional hierarchy film lists.</value>
-  </data>
-  <metadata name="label67.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="label67.ToolTip" xml:space="preserve">
-    <value>The Filter can be used to add any restriction to that specific View.
-You can use it the same way as "User defined config filters", but you can define them "per view".
-It as additional to the "Userdefined Config Filter", so if you already have defined a Config Filter, 
-you do not need to repeat that filter setting here.
-The edit buttom helps you to create filter rules.
-
-Example:
-"Category like 'Action'" only displays movies of this category.
-Note: Other than "Value", the filter will apply and still display Views as "groupings".</value>
-  </data>
-  <metadata name="label66.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
-    <value>Supprted filter operators:
-=
-like
-not like
-&lt;
-&gt;
-# executed as "&lt;&gt;"
-in (requires a list of allowed expressions, placeholders not allowed)
-not in
-like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
-
-Examples:
-"Number IN (1, 2, 3)"                    // integer values
-"Number NOT IN (1, 2, 3)"  // values not from the list
-"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
-"OriginalTitle LIKE 'j*'"       // values that start with 'j'
-"Actors LIKE '%jo%'"     // values that contain 'jo'
-"Category NOT LIKE 'j*'"   // values that don't start with 'j'
-"Category # 'Action' AND Category &lt;&gt; 'Horror'"
-"Category NOT IN ('Action', 'Horror')"
-"Actors IN ('Bruce Willis', 'Adriano Celentano')"
-"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>125</value>
   </metadata>

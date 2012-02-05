@@ -56,7 +56,7 @@ namespace MyFilmsPlugin.Configuration
       set { ExpressionPreview.Text = value; }
     }
 
-    private string StrDfltSelect;
+    private string StrViewFilterSelect;
 
     private string masterTitle;
     public string MasterTitle
@@ -93,7 +93,7 @@ namespace MyFilmsPlugin.Configuration
 
     private void Selected_Enreg_TextChanged()
     {
-      StrDfltSelect = "";
+      this.StrViewFilterSelect = "";
       string wAntFilterSign;
       if (AntFilterSign1.Text == "#")
         wAntFilterSign = "<>";
@@ -102,27 +102,27 @@ namespace MyFilmsPlugin.Configuration
       if ((AntFilterItem1.Text.Length > 0) && !(AntFilterItem1.Text == "(none)"))
         if (AntFilterItem1.Text == "DateAdded")
           if ((AntFilterSign1.Text == "#") || (AntFilterSign1.Text == "not like"))
-            StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# or " + AntFilterItem1.Text + " is null) ";
+            this.StrViewFilterSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# or " + AntFilterItem1.Text + " is null) ";
           else if ((AntFilterSign1.Text == "in") || (AntFilterSign1.Text == "not in"))
-            StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, true) + ")) ";
+            this.StrViewFilterSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, true) + ")) ";
           else if (AntFilterSign1.Text == "like in")
-            StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem1.Text, AntFilterText1.Text, true) + ") ";
+            this.StrViewFilterSelect = "(" + TransformedLikeIn(AntFilterItem1.Text, AntFilterText1.Text, true) + ") ";
           else
-            StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# ) ";
+            this.StrViewFilterSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText1.Text) + "# ) ";
         else
           if ((AntFilterSign1.Text == "#") || (AntFilterSign1.Text == "not like"))
-            StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "' or " + AntFilterItem1.Text + " is null) ";
+            this.StrViewFilterSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "' or " + AntFilterItem1.Text + " is null) ";
           else if ((AntFilterSign1.Text == "in") || (AntFilterSign1.Text == "not in"))
-            StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, false) + ")) ";
+            this.StrViewFilterSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText1.Text, false) + ")) ";
           else if (AntFilterSign1.Text == "like in")
-            StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem1.Text, AntFilterText1.Text, false) + ") ";
+            this.StrViewFilterSelect = "(" + TransformedLikeIn(AntFilterItem1.Text, AntFilterText1.Text, false) + ") ";
           else
-            StrDfltSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "') ";
-      if ((AntFilterComb.Text == "or") && (StrDfltSelect.Length > 0))
-        StrDfltSelect = StrDfltSelect + " OR ";
+            this.StrViewFilterSelect = "(" + AntFilterItem1.Text + " " + wAntFilterSign + " '" + AntFilterText1.Text + "') ";
+      if ((AntFilterComb.Text == "or") && (this.StrViewFilterSelect.Length > 0))
+        this.StrViewFilterSelect = this.StrViewFilterSelect + " OR ";
       else
-        if (StrDfltSelect.Length > 0)
-          StrDfltSelect = StrDfltSelect + " AND ";
+        if (this.StrViewFilterSelect.Length > 0)
+          this.StrViewFilterSelect = this.StrViewFilterSelect + " AND ";
 
       if (AntFilterSign2.Text == "#") wAntFilterSign = "<>";
       else wAntFilterSign = AntFilterSign2.Text;
@@ -130,25 +130,26 @@ namespace MyFilmsPlugin.Configuration
       if ((AntFilterItem2.Text.Length > 0) && !(AntFilterItem2.Text == "(none)"))
         if (AntFilterItem2.Text == "DateAdded")
           if ((AntFilterSign2.Text == "#") || (AntFilterSign2.Text == "not like"))
-            StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# or " + AntFilterItem2.Text + " is null)) AND ";
+            this.StrViewFilterSelect = "(" + this.StrViewFilterSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# or " + AntFilterItem2.Text + " is null)) AND ";
           else if ((AntFilterSign2.Text == "in") || (AntFilterSign2.Text == "not in"))
-            StrDfltSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, true) + ")) AND ";
+            this.StrViewFilterSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, true) + ")) AND ";
           else if (AntFilterSign2.Text == "like in")
-            StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem2.Text, AntFilterText2.Text, true) + ") AND ";
+            this.StrViewFilterSelect = "(" + TransformedLikeIn(AntFilterItem2.Text, AntFilterText2.Text, true) + ") AND ";
           else
-            StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# )) AND ";
+            this.StrViewFilterSelect = "(" + this.StrViewFilterSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " #" + Convert.ToDateTime(AntFilterText2.Text) + "# )) AND ";
         else
           if ((AntFilterSign2.Text == "#") || (AntFilterSign2.Text == "not like"))
-            StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' or " + AntFilterItem2.Text + " is null)) AND ";
+            this.StrViewFilterSelect = "(" + this.StrViewFilterSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' or " + AntFilterItem2.Text + " is null)) AND ";
           else if ((AntFilterSign2.Text == "in") || (AntFilterSign2.Text == "not in"))
-            StrDfltSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, false) + ")) AND ";
+            this.StrViewFilterSelect = "(" + AntFilterItem2.Text + " " + wAntFilterSign + " (" + DBitemList(AntFilterText2.Text, false) + ")) AND ";
           else if (AntFilterSign2.Text == "like in")
-            StrDfltSelect = "(" + TransformedLikeIn(AntFilterItem2.Text, AntFilterText2.Text, true) + ") AND ";
+            this.StrViewFilterSelect = "(" + TransformedLikeIn(AntFilterItem2.Text, AntFilterText2.Text, true) + ") AND ";
           else
-            StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
+            this.StrViewFilterSelect = "(" + this.StrViewFilterSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
       if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
-        StrDfltSelect = StrDfltSelect + AntFilterFreeText.Text + " AND ";
-      ExpressionPreview.Text = StrDfltSelect + masterTitle + " not like ''" + " AND";
+        this.StrViewFilterSelect = this.StrViewFilterSelect + AntFilterFreeText.Text + " AND ";
+      if (StrViewFilterSelect.EndsWith(" AND ")) StrViewFilterSelect = StrViewFilterSelect.Substring(0, StrViewFilterSelect.Length - 5);
+      ExpressionPreview.Text = this.StrViewFilterSelect; //ExpressionPreview.Text = this.StrViewFilterSelect + masterTitle + " not like ''" + " AND ";
       LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + ExpressionPreview.Text + "'");
       ConfigString = ExpressionPreview.Text;
     }

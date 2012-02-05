@@ -194,6 +194,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntStorageTrailer.Items.Add(dc.ColumnName);
                 }
 
+                //if (dc.ColumnName == "OriginalTitle" || dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "FormattedTitle" || dc.ColumnName == "Year" ||
+                //    dc.ColumnName == "Date" || dc.ColumnName == "Rating")
+                //{
+                //  Sort.Items.Add(dc.ColumnName);
+                //  SortInHierarchies.Items.Add(dc.ColumnName);
+                //  AntViewSortFilms.Items.Add(dc.ColumnName);
+                //  AntViewSortHierarchies.Items.Add(dc.ColumnName);
+                //}
+
                 if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
                 {
                   //AntTitle1.Items.Add(dc.ColumnName); // Fields already added in Controls definition
@@ -621,6 +630,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               return;
 
             if (AntTitle2.Text.Length == 0) AntTitle2.Text = "(none)";
+
             string wDfltSortMethod = string.Empty;
             string wDfltSort = string.Empty;
             switch (Sort.Text.ToLower())
@@ -940,10 +950,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index), viewRow.SortFieldFilms);
+          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index), (viewRow.SortFieldFilms == "(none)") ? AntTitle1.Text : viewRow.SortFieldFilms);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionFilms{0}", index), viewRow.SortDirectionFilms);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutFilms{0}", index), this.GetLayoutFromName(viewRow.LayoutFilms));
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index), viewRow.SortFieldHierarchy);
+          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index), (viewRow.SortFieldHierarchy == "(none)") ? AntTitle1.Text : viewRow.SortFieldHierarchy);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionHierarchy{0}", index), viewRow.SortDirectionHierarchy);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutHierarchy{0}", index), this.GetLayoutFromName(viewRow.LayoutHierarchy));
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyUnwatched{0}", index), viewRow.OnlyUnwatched);
@@ -2025,7 +2035,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
               StrDfltSelect = StrDfltSelect + AntFilterFreeText.Text + " AND ";
             Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
-            LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
+            LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text + "'");
         }
 
         private string DBitemList(string inputstring, bool isdate)
@@ -2311,11 +2321,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Films (mastertitle)
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = GUILocalizeStrings.Get(342); // videos
-          newRow.Filter = AntTitle1.Text + " not like ''";
+          newRow.Value = "*";
           MyCustomViews.View.Rows.Add(newRow);
           //year
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Year";
+          newRow.SortDirectionView = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           MyCustomViews.View.Rows.Add(newRow);
           //Category
@@ -2331,11 +2342,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //RecentlyAdded
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "RecentlyAdded";
+          newRow.SortFieldFilms = "AgeAdded";
+          newRow.SortDirectionFilms = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Actors";
+          newRow.Index = 1;
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           MyCustomViews.View.Rows.Add(newRow);
           //Producer
@@ -3473,41 +3487,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
         }
 
-        private void AntViewText1_Leave(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewText2_Leave(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewText3_Leave(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewText4_Leave(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewText5_Leave(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
         private void AntViewText_Change()
         {
           View_Dflt_Item.Items.Clear();
-          View_Dflt_Item.Items.Add("(none)");
-          View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu
-          View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); //Films
-          View_Dflt_Item.Items.Add("Year");
-          View_Dflt_Item.Items.Add("Category");
-          View_Dflt_Item.Items.Add("Country");
-          View_Dflt_Item.Items.Add("RecentlyAdded");
+          View_Dflt_Item.Items.Add("(none)"); // View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu - will be used when "none"
+          //View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); //Films
+          //View_Dflt_Item.Items.Add("Year");
+          //View_Dflt_Item.Items.Add("Category");
+          //View_Dflt_Item.Items.Add("Country");
+          //View_Dflt_Item.Items.Add("RecentlyAdded");
 
           foreach (MFview.ViewRow viewRow in this.MyCustomViews.View)
           {
@@ -3528,52 +3516,51 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               View_Dflt_Text.Text = string.Empty;
           }
         }
-        
+
         private void AntSort_Change()
         {
-            Sort.Items.Clear();
-            SortInHierarchies.Items.Clear();
-            AntViewSortFilms.Items.Clear();
-            AntViewSortHierarchies.Items.Clear();
-            //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
-            //    Sort.Items.Add(AntSTitle.Text);
-            //else
-            //    Sort.Items.Add(AntTitle1);
-            Sort.Items.Add("Title");
-            Sort.Items.Add("Year");
-            Sort.Items.Add("Date");
-            Sort.Items.Add("Rating");
-            SortInHierarchies.Items.Add("Title");
-            SortInHierarchies.Items.Add("Year");
-            SortInHierarchies.Items.Add("Date");
-            SortInHierarchies.Items.Add("Rating");
-            AntViewSortFilms.Items.Add("Title");
-            AntViewSortFilms.Items.Add("Year");
-            AntViewSortFilms.Items.Add("Date");
-            AntViewSortFilms.Items.Add("Rating");
-            AntViewSortHierarchies.Items.Add("Title");
-            AntViewSortHierarchies.Items.Add("Year");
-            AntViewSortHierarchies.Items.Add("Date");
-            AntViewSortHierarchies.Items.Add("Rating");
+          Sort.Items.Clear();
+          SortInHierarchies.Items.Clear();
+          AntViewSortFilms.Items.Clear();
+          AntViewSortHierarchies.Items.Clear();
+          //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
+          //    Sort.Items.Add(AntSTitle.Text);
+          //else
+          //    Sort.Items.Add(AntTitle1);
+          Sort.Items.Add("Title");
+          Sort.Items.Add("Year");
+          Sort.Items.Add("Date");
+          Sort.Items.Add("Rating");
+          SortInHierarchies.Items.Add("Title");
+          SortInHierarchies.Items.Add("Year");
+          SortInHierarchies.Items.Add("Date");
+          SortInHierarchies.Items.Add("Rating");
+          AntViewSortFilms.Items.Add("Title");
+          AntViewSortFilms.Items.Add("Year");
+          AntViewSortFilms.Items.Add("Date");
+          AntViewSortFilms.Items.Add("Rating");
+          AntViewSortHierarchies.Items.Add("Title");
+          AntViewSortHierarchies.Items.Add("Year");
+          AntViewSortHierarchies.Items.Add("Date");
+          AntViewSortHierarchies.Items.Add("Rating");
 
-            // if (!Sort.Items.Contains(Sort.Text)) Sort.Text = "(none)";
-            //Guzzi: Added to not Reset setting when localized strings present
-            if (
-                !Sort.Text.ToLower().Contains("title") 
-                && Sort.Text.ToLower() != "year" 
-                && !Sort.Text.ToLower().Contains("date")
-                && Sort.Text.ToLower() != "rating" 
-              )
-              Sort.Text = "(none)";
-            if (
-                !SortInHierarchies.Text.ToLower().Contains("title")
-                && SortInHierarchies.Text.ToLower() != "year"
-                && !SortInHierarchies.Text.ToLower().Contains("date")
-                && SortInHierarchies.Text.ToLower() != "rating"
-              )
-              SortInHierarchies.Text = "(none)";
+          // if (!Sort.Items.Contains(Sort.Text)) Sort.Text = "(none)";
+          //Guzzi: Added to not Reset setting when localized strings present
+          if (
+              !Sort.Text.ToLower().Contains("title")
+              && Sort.Text.ToLower() != "year"
+              && !Sort.Text.ToLower().Contains("date")
+              && Sort.Text.ToLower() != "rating"
+            )
+            Sort.Text = "(none)";
+          if (
+              !SortInHierarchies.Text.ToLower().Contains("title")
+              && SortInHierarchies.Text.ToLower() != "year"
+              && !SortInHierarchies.Text.ToLower().Contains("date")
+              && SortInHierarchies.Text.ToLower() != "rating"
+            )
+            SortInHierarchies.Text = "(none)";
         }
-
 
         private void View_Dflt_Item_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3639,41 +3626,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //}
             View_Dflt_Text.Enabled = true;
 
-        }
-
-        private void AntSort1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntSort_Change();
-        }
-
-        private void AntSort2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntSort_Change();
-        }
-
-        private void AntViewItem1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewItem2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewItem3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewItem4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntViewText_Change();
-        }
-
-        private void AntViewItem5_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AntViewText_Change();
         }
 
         public Task CreateTask(string name)
@@ -3863,12 +3815,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 else
                     PathStorageTrailer.Text = PathStorageTrailer.Text + ";" + folderBrowserDialog1.SelectedPath;
             }
-        }
-
-        private void NAS_1_Name_TextChanged(object sender, EventArgs e)
-        {
-            if (NAS_Name_1.Text.Length == 0)
-            NAS_MAC_1.Text = "";
         }
 
         private void check_WOL_enable_CheckedChanged(object sender, EventArgs e)
@@ -4181,6 +4127,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
+        private void NAS_1_Name_TextChanged(object sender, EventArgs e)
+        {
+          if (NAS_Name_1.Text.Length == 0)
+            NAS_MAC_1.Text = "";
+        }
+
         private void NAS_Name_2_TextChanged(object sender, EventArgs e)
         {
             if (NAS_Name_2.Text.Length == 0) NAS_MAC_2.Text = "";
@@ -4190,7 +4142,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             if (NAS_Name_3.Text.Length == 0) NAS_MAC_3.Text = "";
         }
-
 
         private void btnLaunchAMCglobal_Click(object sender, EventArgs e)
         {
@@ -4300,8 +4251,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         /// <param name="Arguments">Command line arguments</param>
         /// <param name="HotKey">Shortcut hot key as a string, for example "Ctrl+F"</param>
         /// <param name="WorkingDirectory">"Start in" shorcut parameter</param>
-        public void CreateShortcut(string SourceFile, string ShortcutFile, string Description,
-           string Arguments, string HotKey, string WorkingDirectory)
+        public void CreateShortcut(string SourceFile, string ShortcutFile, string Description, string Arguments, string HotKey, string WorkingDirectory)
         {
           // Check necessary parameters first:
           if (String.IsNullOrEmpty(SourceFile))
@@ -5651,90 +5601,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Config_Name.Text = StringExtensions.XmlCharacterWhitelist(Config_Name.Text).Replace(@"'", "");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-          FilterEditor filterEditor = new FilterEditor();
-          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
-          filterEditor.MasterTitle = AntTitle1.Text;
-          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-          filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void toolStripButton7_Click(object sender, EventArgs e)
-        {
-          //this.viewBindingSource.MoveUp();
-          int position = viewBindingSource.Position;
-          if (position == 0) return;  // already at top
-
-          viewBindingSource.RaiseListChangedEvents = false;
-
-          //MFview current = (MFview)viewBindingSource.Current;
-          //viewBindingSource.Remove(current);
-
-          DataRow selectedRow = this.MyCustomViews.View.Rows[position];
-          DataRow newRow = this.MyCustomViews.View.NewRow();
-          newRow.ItemArray = selectedRow.ItemArray; // copy data
-          this.MyCustomViews.View.Rows.Remove(selectedRow);
-          this.MyCustomViews.View.Rows.InsertAt(newRow, position - 1);
-
-          //viewBindingSource.Insert(position - 1, current);
-          viewBindingSource.Position = position - 1;
-
-          viewBindingSource.RaiseListChangedEvents = true;
-          viewBindingSource.ResetBindings(false);
-        }
-
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-          //this.viewBindingSource.MoveDown();
-          int position = viewBindingSource.Position;
-          if (position == viewBindingSource.Count - 1) return;  // already at bottom
-
-          viewBindingSource.RaiseListChangedEvents = false;
-
-          //MFview current = (MFview)viewBindingSource.Current;
-          //viewBindingSource.Remove(current);
-
-
-          DataRow selectedRow = this.MyCustomViews.View.Rows[position];
-          DataRow newRow = this.MyCustomViews.View.NewRow();
-          newRow.ItemArray = selectedRow.ItemArray; // copy data
-          this.MyCustomViews.View.Rows.Remove(selectedRow);
-          this.MyCustomViews.View.Rows.InsertAt(newRow, position + 1);
-
-          //viewBindingSource.Insert(position + 1, current);
-          viewBindingSource.Position = position + 1;
-
-          viewBindingSource.RaiseListChangedEvents = true;
-          viewBindingSource.ResetBindings(false);
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-          //// Populate the rows.
-          //string[] row1 = new string[]{"Meatloaf", "Main Dish"};
-          //string[] row2 = new string[]{"Key Lime Pie", "Dessert", "lime juice, evaporated milk", "****"};
-          //object[] rows = new object[] { row1, row2 };
-
-          //foreach (string[] rowArray in rows)
-          //{
-          //  dgViewsList.Rows.Add(rowArray); // addding row 
-          //}
-          //int position = viewBindingSource.Position;
-          //if (position < viewBindingSource.Count - 1) position = viewBindingSource.Count; // set to end of list
-
-          //viewBindingSource.RaiseListChangedEvents = false;
-          //MFview.ViewRow newRow = MyCustomViews.View.NewViewRow();
-          //newRow.Label = "NewView";
-          //MyCustomViews.View.Rows.InsertAt(newRow, position + 1);
-          //viewBindingSource.Position = position + 1;
-          //viewBindingSource.RaiseListChangedEvents = true;
-          viewBindingSource.ResetBindings(false);
-          dgViewsList.Focus();
-        }
-
         private void AntViewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
           AntViewText_Change(); 
@@ -5761,22 +5627,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             AntViewOnlyAvailableCheckBox.ResetForeColor();
           }
-        }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-          viewBindingSource.ResetBindings(false);
-        }
-
-        private void toolStripButton9_Click(object sender, EventArgs e)
-        {
-          MFview.ViewRow newRow = this.MyCustomViews.View.NewViewRow();
-          newRow.Label = "New View";
-          this.MyCustomViews.View.Rows.Add(newRow);
-          // bindingNavigatorSaveItem.PerformClick();
-          //viewBindingSourceAddNewItem.PerformClick();
-          viewBindingSource.ResetBindings(false);
-          viewBindingSource.Position = viewBindingSource.Count - 1;
         }
 
         private void buttonUpdateGrabberScripts_Click(object sender, EventArgs e)
@@ -5883,6 +5733,117 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void toolStripButtonAddDefaults_Click(object sender, EventArgs e)
         {
           this.AddDefaultViews();
+        }
+
+        private void AntViewFilterEditButton_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter.Text = filterEditor.ConfigString;
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+          //// Populate the rows.
+          //string[] row1 = new string[]{"Meatloaf", "Main Dish"};
+          //string[] row2 = new string[]{"Key Lime Pie", "Dessert", "lime juice, evaporated milk", "****"};
+          //object[] rows = new object[] { row1, row2 };
+
+          //foreach (string[] rowArray in rows)
+          //{
+          //  dgViewsList.Rows.Add(rowArray); // addding row 
+          //}
+          //int position = viewBindingSource.Position;
+          //if (position < viewBindingSource.Count - 1) position = viewBindingSource.Count; // set to end of list
+
+          //viewBindingSource.RaiseListChangedEvents = false;
+          //MFview.ViewRow newRow = MyCustomViews.View.NewViewRow();
+          //newRow.Label = "NewView";
+          //MyCustomViews.View.Rows.InsertAt(newRow, position + 1);
+          //viewBindingSource.Position = position + 1;
+          //viewBindingSource.RaiseListChangedEvents = true;
+          MFview.ViewRow newRow = this.MyCustomViews.View.NewViewRow();
+          newRow.Label = "New View";
+          this.MyCustomViews.View.Rows.Add(newRow);
+          // bindingNavigatorSaveItem.PerformClick();
+          //viewBindingSourceAddNewItem.PerformClick();
+          viewBindingSource.ResetBindings(false);
+          dgViewsList.Focus();
+          viewBindingSource.Position = viewBindingSource.Count - 1;
+        }
+
+        private void toolStripButtonAddNew_Click(object sender, EventArgs e)
+        {
+          MFview.ViewRow newRow = this.MyCustomViews.View.NewViewRow();
+          newRow.Label = "New View";
+          this.MyCustomViews.View.Rows.Add(newRow);
+          // bindingNavigatorSaveItem.PerformClick();
+          //viewBindingSourceAddNewItem.PerformClick();
+          viewBindingSource.ResetBindings(false);
+          viewBindingSource.Position = viewBindingSource.Count - 1;
+        }
+
+        private void toolStripButtonMoveUp_Click(object sender, EventArgs e)
+        {
+          //this.viewBindingSource.MoveUp();
+          int position = viewBindingSource.Position;
+          if (position == 0) return;  // already at top
+
+          viewBindingSource.RaiseListChangedEvents = false;
+
+          //MFview current = (MFview)viewBindingSource.Current;
+          //viewBindingSource.Remove(current);
+
+          DataRow selectedRow = this.MyCustomViews.View.Rows[position];
+          DataRow newRow = this.MyCustomViews.View.NewRow();
+          newRow.ItemArray = selectedRow.ItemArray; // copy data
+          this.MyCustomViews.View.Rows.Remove(selectedRow);
+          this.MyCustomViews.View.Rows.InsertAt(newRow, position - 1);
+
+          //viewBindingSource.Insert(position - 1, current);
+          viewBindingSource.Position = position - 1;
+
+          viewBindingSource.RaiseListChangedEvents = true;
+          viewBindingSource.ResetBindings(false);
+        }
+
+        private void toolStripButtonMoveDown_Click(object sender, EventArgs e)
+        {
+          //this.viewBindingSource.MoveDown();
+          int position = viewBindingSource.Position;
+          if (position == viewBindingSource.Count - 1) return;  // already at bottom
+
+          viewBindingSource.RaiseListChangedEvents = false;
+
+          //MFview current = (MFview)viewBindingSource.Current;
+          //viewBindingSource.Remove(current);
+
+
+          DataRow selectedRow = this.MyCustomViews.View.Rows[position];
+          DataRow newRow = this.MyCustomViews.View.NewRow();
+          newRow.ItemArray = selectedRow.ItemArray; // copy data
+          this.MyCustomViews.View.Rows.Remove(selectedRow);
+          this.MyCustomViews.View.Rows.InsertAt(newRow, position + 1);
+
+          //viewBindingSource.Insert(position + 1, current);
+          viewBindingSource.Position = position + 1;
+
+          viewBindingSource.RaiseListChangedEvents = true;
+          viewBindingSource.ResetBindings(false);
+        }
+
+        private void dgViewsList_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+          AntViewText_Change();
+        }
+
+        private void dgViewsList_Leave(object sender, EventArgs e)
+        {
+          AntViewText_Change();
         }
 
       }

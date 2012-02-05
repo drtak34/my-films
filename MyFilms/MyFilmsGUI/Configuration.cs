@@ -118,18 +118,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", string.Empty);
                 if (loadParams != null && !string.IsNullOrEmpty(loadParams.ViewValue)) StrViewDfltText = loadParams.ViewValue;
 
-                for (int i = 1; i < 6; i++)
-                {
-                  StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
-                  StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
-                  //if (StrViewText[i - 1].ToLower() == wViewDfltItem.ToLower()) StrViewDfltItem = StrViewItem[i - 1];
-                  StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i), string.Empty);
-                  ViewIndex[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewIndex{0}", i), 0);
-                  StrViewSortOrder[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortOrder{0}", i), " ASC");
-                  if (StrViewSortOrder[i - 1].StartsWith("ASC")) StrViewSortOrder[i - 1] = " ASC";
-                  if (StrViewSortOrder[i - 1].StartsWith("DESC")) StrViewSortOrder[i - 1] = " DESC";
-                  StrViewFilter[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewFilter{0}", i), string.Empty);
-                }
+                //for (int i = 1; i < 6; i++)
+                //{
+                //  StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
+                //  StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
+                //  //if (StrViewText[i - 1].ToLower() == wViewDfltItem.ToLower()) StrViewDfltItem = StrViewItem[i - 1];
+                //  StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i), string.Empty);
+                //}
 
 
                 int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntViewTotalCount", 5); // set to 5 as default to keep compatibility
@@ -419,8 +414,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrPersons", string.Empty);
                 StrTitleSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrTitleSelect", string.Empty);
                 StrFilmSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrFilmSelect", string.Empty);
-                StrConfigSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
-                StrDfltSelect = StrConfigSelect;
+                StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
+                StrViewSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrViewSelect", string.Empty);
 
                 StrSorta = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
                 CurrentSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
@@ -955,11 +950,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strDfltSelect; }
           set { strDfltSelect = value; }
         }
-        private string strConfigSelect = string.Empty;
-        public string StrConfigSelect
+        private string strViewSelect = string.Empty;
+        public string StrViewSelect
         {
-          get { return strConfigSelect; }
-          set { strConfigSelect = value; }
+          get { return strViewSelect; }
+          set { strViewSelect = value; }
         }
         private string strTitle1 = string.Empty;
         public string StrTitle1
@@ -1174,42 +1169,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return customViews; }
           set { customViews = value; }
         }
-        private string[] strViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
-        public string[] StrViewItem
-        {
-          get { return strViewItem; }
-          set { strViewItem = value; }
-        }
-        private string[] strViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
-        public string[] StrViewText
-        {
-            get { return strViewText; }
-            set { strViewText = value; }
-        }
-        private string[] strViewValue = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
-        public string[] StrViewValue
-        {
-          get { return strViewValue; }
-          set { strViewValue = value; }
-        }
-        private int[] viewIndex = { 0, 0, 0, 0, 0 };
-        public int[] ViewIndex
-        {
-          get { return viewIndex; }
-          set { viewIndex = value; }
-        }
-        private string[] strViewSortOrder = { " ASC", " ASC", " ASC", " ASC", " ASC" };
-        public string[] StrViewSortOrder
-        {
-          get { return this.strViewSortOrder; }
-          set { this.strViewSortOrder = value; }
-        }
-        private string[] strViewFilter = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
-        public string[] StrViewFilter
-        {
-          get { return strViewFilter; }
-          set { strViewFilter = value; }
-        }
+        //private string[] strViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        //public string[] StrViewItem
+        //{
+        //  get { return strViewItem; }
+        //  set { strViewItem = value; }
+        //}
+        //private string[] strViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        //public string[] StrViewText
+        //{
+        //    get { return strViewText; }
+        //    set { strViewText = value; }
+        //}
+        //private string[] strViewValue = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        //public string[] StrViewValue
+        //{
+        //  get { return strViewValue; }
+        //  set { strViewValue = value; }
+        //}
         private string strViewDfltItem = string.Empty;
         public string StrViewDfltItem
         {
@@ -1738,7 +1715,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrPersons", MyFilms.conf.StrPersons);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrConfigSelect); // StrDefaultSelect is the combined filter including "view filter"
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrViewSelect", MyFilms.conf.StrViewSelect); // Custom View filter, is set
 
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MyFilms.conf.CurrentSortMethod);
