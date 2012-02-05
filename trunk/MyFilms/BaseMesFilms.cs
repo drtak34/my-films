@@ -1369,6 +1369,7 @@ namespace MyFilmsPlugin.MyFilms
             iscached = false;
             initData();
           }
+          LogMyFilms.Debug("ReadDataMovies() - Expression          = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "'");
           movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens); //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           // movies = tableMoviesExtended.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           if (movies.Length == 0 && all)
