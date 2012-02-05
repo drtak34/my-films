@@ -700,6 +700,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return menuSelectedID; }
           set { menuSelectedID = value; }
         }
+        private bool boolMenuShowAll = false;
+        public bool BoolMenuShowAll
+        {
+          get { return boolMenuShowAll; }
+          set { boolMenuShowAll = value; }
+        }
         private bool boolselect = false;
         public bool Boolselect
         {
