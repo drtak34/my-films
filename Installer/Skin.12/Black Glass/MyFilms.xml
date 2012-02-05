@@ -63,6 +63,17 @@
       <!-- to make a control visible only when you are in HIERARCHY VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>control.isvisible(39)</visible> -->
       <!-- to make a control invisible when you are in HIERARCHY VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>!control.isvisible(39)</visible> -->
     </control>
+    <control>
+      <description>Dummy Label for Menu</description>
+      <type>label</type>
+      <id>40</id>
+      <posX>-50</posX>
+      <posY>-50</posY>
+      <visible>true</visible>
+      <focusable>no</focusable>
+      <!-- to make a control visible only when you are in MENU VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>control.isvisible(40)</visible> -->
+      <!-- to make a control invisible when you are in MENU VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>!control.isvisible(40)</visible> -->
+    </control>
         	<control>
             		<type>label</type>
             		<description>(Folder) - Visible when Folder or selection - Label use for Hide or unHide some items with Skin visible conditions</description>
@@ -1961,6 +1972,18 @@ End additional Backdrops  -->
 			<textcolor>60ffffff</textcolor>
 			<label>Hierarchy: #myfilms.groupcoverimage</label>
       			<visible>control.isvisible(39)</visible>
+		</control>
+		<control>
+			<description>Testlabel Hierarchy or Collection</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>340</posX>
+			<posY>140</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>Menu!</label>
+      			<visible>control.isvisible(40)</visible>
 		</control>
 		<control>
 			<description>Cover Art for Films</description>
