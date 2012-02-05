@@ -2339,6 +2339,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         sortascending = conf.StrSortSens;
         sortfield = conf.StrSorta;
       }
+      if (string.IsNullOrEmpty(sortfield))
+      {
+        sortfield = MyFilms.conf.StrTitle1;
+        LogMyFilms.Error("(GetFilmList) - sort field not properly set - resetting to mastertitle to avoid sort exception !");
+      }
       #endregion
 
       #region Set sort buttons (movie vs. collection)
