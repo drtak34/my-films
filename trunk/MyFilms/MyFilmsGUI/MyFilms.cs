@@ -1576,7 +1576,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
             case ViewContext.MenuAll:
               StopLoadingMenuDetails = true;
-              conf.MenuSelectedID = -1;
+              conf.MenuSelectedID = -2; // -2 means coming from MenuAll
               GetSelectFromMenuView(false); // Call simple Menu ...
               break;
             case ViewContext.Menu:
@@ -1620,9 +1620,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   else
                   {
-                    SetLabelView("menu");
-                    SetLabelSelect("root");
-                    GetSelectFromMenuView(false);
+                    GetSelectFromMenuView(conf.BoolMenuShowAll);
                   }
                   return;
                 } 
@@ -1652,9 +1650,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  SetLabelView("menu");
-                  SetLabelSelect("root");
-                  GetSelectFromMenuView(false);  // Call simple Menu ...
+                  GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
                 }
                 return;
               }
@@ -3547,11 +3543,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void GetSelectFromMenuView(bool showall)
     {
       LogMyFilms.Debug("GetSelectFromMenuView() - launched with showall = '" + showall + "'");
+      conf.BoolMenuShowAll = showall; // remember state
+
       Change_LayOut(0); // always use list view
       //if (conf.UseListViewForGoups) Change_LayOut(0);
       //else Change_LayOut(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
+
       GUIControl.ShowControl(GetID, 34); // hide film controls ...
       SetDummyControlsForFacade(ViewContext.Menu); // reset all covers ...
+      SetLabelView("menu");
+      SetLabelSelect("root");
 
       conf.ViewContext = (showall) ? ViewContext.MenuAll : ViewContext.Menu;
       // conf.StrSelect = ""; // reset movie filter for views
@@ -3570,6 +3571,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       
       if (!showall)
       {
+        #region old hardcoded entries
         //item = new GUIListItem(); 
         //item.Label = GUILocalizeStrings.Get(342);//videos
         //item.DVDLabel = "All";
@@ -3617,6 +3619,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //item.IsFolder = true;
         //item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         //this.facadeFilms.Add(item);
+        #endregion
 
         // add new (!) userdefined views ...
         foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
@@ -3656,13 +3659,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (item != null) item.FreeMemory();
       item.SafeDispose();
-      if ((conf.MenuSelectedID > this.facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
+      if (conf.MenuSelectedID == -2) 
+        conf.MenuSelectedID = facadeFilms.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
+      else if ((conf.MenuSelectedID > this.facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
         conf.MenuSelectedID = 0;
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedID);
-      MyFilmsDetail.setGUIProperty("nbobjects.value", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString(CultureInfo.InvariantCulture));
-      GUIPropertyManager.SetProperty("#itemcount", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString(CultureInfo.InvariantCulture));
+
+      MyFilmsDetail.setGUIProperty("nbobjects.value", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString());
+      GUIPropertyManager.SetProperty("#itemcount", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString());
       // GUIPropertyManager.SetProperty("#itemtype", "Views"); // disabled, as we otherwise have to set it in all facade listings ...
-      //conf.ViewContext = ViewContext.None;
       LogMyFilms.Debug("GetSelectFromMenuView() - end facade load ...");
 
       // load dataset and counts threaded ...
@@ -3670,6 +3675,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       new Thread(delegate()
       {
+        #region Load Thumbs and Counts threaded
         BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
         for (i = 0; i < this.facadeFilms.Count; i++)
         {
@@ -3792,6 +3798,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //conf.ViewContext = ViewContext.Menu;
             return 0;
           }, 0, 0, null);
+        #endregion
       }) { Name = "MyFilmsMenuCountWorker", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start();
     }
 
@@ -4293,6 +4300,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "DateWatched", true) == 0) return false;
       if (string.Compare(fieldname, "DateAdded", true) == 0) return false;
       if (string.Compare(fieldname, "Year", true) == 0) return false;
+      if (IsDecimalField(fieldname)) return false;
       if (IsAlphaNumericalField(fieldname)) return false;
       return true;
     }
