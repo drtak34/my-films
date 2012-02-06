@@ -3744,7 +3744,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     string sortfield = (viewRow.SortFieldFilms == "(none)" || viewRow.SortFieldFilms == "Title")
                                          ? ((Helper.FieldIsSet(conf.StrSTitle)) ? conf.StrSTitle : conf.StrTitle1)
                                          : viewRow.SortFieldFilms;
-                    if (string.IsNullOrEmpty(viewRow.Filter) && string.IsNullOrEmpty(viewRow.Filter)) // no "Value" filter
+                    if (string.IsNullOrEmpty(viewRow.Value)) // no "Value" filter
                     {
                       if (string.IsNullOrEmpty(viewRow.Filter))
                         newLabel = CountViewItems(r, viewRow.DBfield).ToString(); // newLabel = r.Select(p => (string)p[conf.StrViewItem[ii]]).Distinct(MfStringComparer).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
@@ -3762,13 +3762,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       string ValueFilter = "";
                       if (GetColumnType(viewRow.DBfield) != typeof(string))
-                        ValueFilter = viewRow.DBfield + " = '" + conf.StrViewDfltText + "'";
+                        ValueFilter = viewRow.DBfield + " = '" + viewRow.Value + "'";
                       else if (IsDateField(viewRow.DBfield))
-                        ValueFilter = viewRow.DBfield + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.StrViewDfltText).ToShortDateString()) + "*'";
+                        ValueFilter = viewRow.DBfield + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(viewRow.Value).ToShortDateString()) + "*'";
                       else if (IsAlphaNumericalField(viewRow.DBfield))
-                        ValueFilter = viewRow.DBfield + " like '" + conf.StrViewDfltText + "'";
+                        ValueFilter = viewRow.DBfield + " like '" + viewRow.Value + "'";
                       else
-                        ValueFilter = viewRow.DBfield + " like '*" + conf.StrViewDfltText + "*'";
+                        ValueFilter = viewRow.DBfield + " like '*" + viewRow.Value + "*'";
 
                       if (string.IsNullOrEmpty(viewRow.Filter))
                         newLabel = "(" + viewRow.Value + ") " + BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, ValueFilter, sortfield, viewRow.SortDirectionFilms).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
