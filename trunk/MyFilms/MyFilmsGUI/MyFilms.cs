@@ -7771,12 +7771,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ichoice++;
           }
         }
-        if (conf.ViewContext == ViewContext.MenuAll)
-        {
-          dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
-          upd_choice[ichoice] = "menuadd";
-          ichoice++;
-        }
       }
       #endregion
 
@@ -7932,6 +7926,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //    upd_choice[ichoice] = "updatemenu";
       }
       #endregion
+
+      if (conf.ViewContext != ViewContext.Menu)
+      {
+        dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
+        upd_choice[ichoice] = "menuadd";
+        ichoice++;
+      }
+
       ichoice++;
 
       dlg.DoModal(GetID);
@@ -8029,7 +8031,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "menuadd":
           {
             MFview.ViewRow newRow = MyFilms.conf.CustomViews.View.NewViewRow();
-            
+
             //ArrayList DisplayItems = GetDisplayItems("view");
             //foreach (string[] displayItem in DisplayItems)
             //{
@@ -8040,23 +8042,71 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //    break;
             //  }
             //}
-            newRow.Label = facadeFilms.SelectedListItem.Label + " *";
-            newRow.DBfield = facadeFilms.SelectedListItem.DVDLabel;
-            newRow.ViewEnabled = true;
-            LogMyFilms.Debug("Context_Menu_Movie() - Add View with DB Field '" + newRow.DBfield + "', Label '" + newRow.Label + "'");
-            newRow.SortDirectionView = " ASC";
-            newRow.SortDirectionFilms = " ASC";
-            newRow.SortDirectionHierarchy = " ASC";
-            newRow.SortFieldViewType = "Name";
-            newRow.SortFieldFilms = conf.StrTitle1;
-            newRow.SortFieldHierarchy = conf.StrTitle1;
-            newRow.Index = 0;
-            newRow.LayoutView = "0"; // List view
-            newRow.LayoutFilms = "0";
-            newRow.LayoutHierarchy = "0";
-            newRow.Value = "";
-            newRow.Filter = "";
+            if (conf.ViewContext != ViewContext.Menu)
+            {
+              dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
+              upd_choice[ichoice] = "menuadd";
+              ichoice++;
+            }
 
+            newRow.ViewEnabled = true;
+            newRow.ShowEmpty = conf.BoolShowEmptyValuesInViews;
+            newRow.ReverseNames = conf.BoolReverseNames;
+            newRow.OnlyUnwatched = (GlobalFilterStringUnwatched.Length > 0);
+            newRow.OnlyAvailable = (GlobalFilterIsOnlineOnly);
+            switch (conf.ViewContext)
+            {
+              case ViewContext.MenuAll:
+                newRow.Label = facadeFilms.SelectedListItem.Label + " *";
+                newRow.DBfield = facadeFilms.SelectedListItem.DVDLabel;
+                newRow.SortDirectionView = " ASC";
+                newRow.SortDirectionFilms = " ASC";
+                newRow.SortDirectionHierarchy = " ASC";
+                newRow.SortFieldViewType = "Name";
+                newRow.SortFieldFilms = conf.StrTitle1;
+                newRow.SortFieldHierarchy = conf.StrTitle1;
+                newRow.Index = 0;
+                newRow.LayoutView = "0"; // List view
+                newRow.LayoutFilms = "0";
+                newRow.LayoutHierarchy = "0";
+                newRow.Value = "";
+                newRow.Filter = "";
+                break;
+              case ViewContext.Movie:
+              case ViewContext.MovieCollection:
+              case ViewContext.Group:
+              case ViewContext.Person:
+                newRow.Label = BaseMesFilms.Translate_Column(conf.WStrSort) + " - " + conf.StrTxtSelect + " *";
+                newRow.DBfield = conf.WStrSort;
+                newRow.SortDirectionView = (conf.BoolSortCountinViews) ? conf.WStrSortSensCount : conf.WStrSortSens;
+                newRow.SortDirectionFilms = conf.StrSortSens;
+                newRow.SortDirectionHierarchy = conf.StrSortSensInHierarchies;
+                newRow.SortFieldViewType = (conf.BoolSortCountinViews) ? "Count" : "Name";
+                newRow.SortFieldFilms = conf.StrSorta;
+                newRow.SortFieldHierarchy = conf.StrSortaInHierarchies;
+                newRow.Index = conf.IndexedChars;
+                newRow.LayoutView = conf.WStrLayOut.ToString();
+                newRow.LayoutFilms = conf.StrLayOut.ToString();
+                newRow.LayoutHierarchy = conf.StrLayOutInHierarchies.ToString();
+                switch (conf.ViewContext)
+                {
+                  case ViewContext.Movie:
+                  case ViewContext.MovieCollection:
+                    //newRow.Value = Prev_Label;
+                    newRow.Value = conf.Wselectedlabel;
+                    newRow.Filter = conf.StrSelect;
+                    break;
+                  case ViewContext.Group:
+                  case ViewContext.Person:
+                    newRow.Value = "";
+                    newRow.Filter = conf.StrViewSelect;
+                    break;
+                }
+                break;
+              default:
+                return;
+            }
+            if (newRow.DBfield.Length == 0 || newRow.Label.Length == 0) return;
             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
             if (null == keyboard) return;
             keyboard.Reset();
@@ -8066,6 +8116,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               newRow.Label = keyboard.Text;
               MyFilms.conf.CustomViews.View.AddViewRow(newRow);
+              LogMyFilms.Debug("Context_Menu_Movie() - Add View with DB Field '" + newRow.DBfield + "', Label '" + newRow.Label + "', Value '" + newRow.Value + "'");
               SaveCustomViews();
               GetSelectFromMenuView(conf.BoolMenuShowAll);
             }
