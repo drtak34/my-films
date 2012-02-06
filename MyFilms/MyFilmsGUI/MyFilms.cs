@@ -7758,6 +7758,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(1079822)); // Move Menu Entry Down
           upd_choice[ichoice] = "menumovedown";
           ichoice++;
+          dlg.Add(GUILocalizeStrings.Get(1079824)); // Rename Menu Entry
+          upd_choice[ichoice] = "menurename";
+          ichoice++;
+          if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079825)); // Set Film Filter Value
+            upd_choice[ichoice] = "menusetvalue";
+            ichoice++;
+            dlg.Add(GUILocalizeStrings.Get(1079826)); // Set View Filter Expression
+            upd_choice[ichoice] = "menusetfilter";
+            ichoice++;
+          }
         }
         if (conf.ViewContext == ViewContext.MenuAll)
         {
@@ -8044,9 +8056,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             newRow.LayoutHierarchy = "0";
             newRow.Value = "";
             newRow.Filter = "";
-            MyFilms.conf.CustomViews.View.AddViewRow(newRow);
-            SaveCustomViews();
-            GetSelectFromMenuView(conf.BoolMenuShowAll);
+
+            VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+            if (null == keyboard) return;
+            keyboard.Reset();
+            keyboard.Text = newRow.Label;
+            keyboard.DoModal(GetID);
+            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+            {
+              newRow.Label = keyboard.Text;
+              MyFilms.conf.CustomViews.View.AddViewRow(newRow);
+              SaveCustomViews();
+              GetSelectFromMenuView(conf.BoolMenuShowAll);
+            }
             break;
           }
 
@@ -8110,6 +8132,79 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             SaveCustomViews();
             GetSelectFromMenuView(conf.BoolMenuShowAll);
+            break;
+          }
+
+        case "menurename":
+          {
+            foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+            {
+              if (facadeFilms.SelectedListItem.Label == viewRow.Label)
+              {
+                VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                if (null == keyboard) return;
+                keyboard.Reset();
+                keyboard.Text = viewRow.Label;
+                keyboard.DoModal(GetID);
+                if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                {
+                  viewRow.Label = keyboard.Text;
+                  SaveCustomViews();
+                  GetSelectFromMenuView(conf.BoolMenuShowAll);
+                }
+                break;
+              }
+            }
+            break;
+          }
+
+        case "menusetvalue":
+          {
+            foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+            {
+              if (facadeFilms.SelectedListItem.Label == viewRow.Label)
+              {
+                VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                if (null == keyboard) return;
+                keyboard.Reset();
+                keyboard.Text = viewRow.Value;
+                keyboard.DoModal(GetID);
+                if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                {
+                  viewRow.Value = keyboard.Text;
+                  SaveCustomViews();
+                  GetSelectFromMenuView(conf.BoolMenuShowAll);
+                }
+                break;
+              }
+            }
+            break;
+          }
+
+        case "menusetfilter":
+          {
+            foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+            {
+              if (facadeFilms.SelectedListItem.Label == viewRow.Label)
+              {
+                // ToDo:
+                // ändern
+                // löschen
+                // auswählen via "field" und "wert - wert wahlweise manuell
+                VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                if (null == keyboard) return;
+                keyboard.Reset();
+                keyboard.Text = viewRow.Filter;
+                keyboard.DoModal(GetID);
+                if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                {
+                  viewRow.Filter = keyboard.Text;
+                  SaveCustomViews();
+                  GetSelectFromMenuView(conf.BoolMenuShowAll);
+                }
+                break;
+              }
+            }
             break;
           }
 
