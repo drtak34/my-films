@@ -71,6 +71,10 @@
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
+    <String id="1079820">Lösche Menü Eintrag</String>
+    <String id="1079821">Menü Eintrag nach oben</String>
+    <String id="1079822">Menü Eintrag nach unten</String>
+    <String id="1079823">Füge Ansicht als Default Menü Eintrag hinzu</String>
     <String id="1079830">Lösche Film ...</String>
     <String id="1079831">Lösche Film aus Datenbank</String>
     <String id="1079832">Lösche Film Datei(en) von Disk</String>

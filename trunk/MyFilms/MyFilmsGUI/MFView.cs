@@ -462,6 +462,104 @@ namespace MyFilmsPlugin.MyFilmsGUI
     }
     // CurrentView", MyFilms.conf.CurrentView.SaveToString());
     #endregion
+
+    public void InitDefaults()
+    {
+      strSelect = string.Empty;
+      strPersons = string.Empty;
+      strTitleSelect = string.Empty;
+      strFilmSelect = string.Empty;
+      viewContext = MyFilms.ViewContext.Menu;
+      strTxtView = string.Empty;
+      strTxtSelect = string.Empty;
+      boolselect = false;
+      boolreturn = false;
+      boolindexed = false;
+      boolindexedreturn = false;
+      indexedChars = 0;
+      boolReverseNames = false;
+      boolShowEmptyValuesInViews = false;
+      wselectedlabel = string.Empty;
+      wStrSort = string.Empty;
+      wStrSortSensCount = string.Empty;
+      boolSortCountinViews = false;
+      wstar = string.Empty;
+      strLayOut = 0;
+      wStrLayOut = 0;
+      strLayOutInHierarchies = 0;
+      lastID = 0;
+      indexItem = 0;
+      titleItem = string.Empty;
+    }
+
+    public string SaveToString()
+    {
+      string savestring =
+        strSelect + "|" +
+        strPersons + "|" +
+        strTitleSelect + "|" +
+        strFilmSelect + "|" +
+        Enum.GetName(typeof(MyFilms.Layout), viewContext) + "|" +
+        strTxtView + "|" +
+        strTxtSelect + "|" +
+        boolselect.ToString() + "|" +
+        boolreturn.ToString() + "|" +
+        boolindexed.ToString() + "|" +
+        boolindexedreturn.ToString() + "|" +
+        indexedChars.ToString() + "|" +
+        boolReverseNames.ToString() + "|" +
+        boolShowEmptyValuesInViews.ToString() + "|" +
+        wselectedlabel + "|" +
+        wStrSort + "|" +
+        wStrSortSensCount + "|" +
+        boolSortCountinViews.ToString() + "|" +
+        wstar + "|" +
+        strLayOut.ToString() + "|" +
+        wStrLayOut.ToString() + "|" +
+        strLayOutInHierarchies.ToString() + "|" +
+        lastID.ToString() + "|" +
+        indexItem.ToString() + "|" +
+        titleItem;
+      LogMyFilms.Debug("SaveToString() - output = '" + savestring + "'");
+      return savestring;
+    }
+
+    public void LoadFromString(string inputstring)
+    {
+      int i = 0;
+      string[] split = inputstring.Split(new char[] { '|' }, StringSplitOptions.None);
+      LogMyFilms.Debug("LoadFromString() - parsed '" + split.Length + "' elements from inputstring = '" + inputstring + "'");
+      foreach (string s in split)
+      {
+        LogMyFilms.Debug("LoadFromString() - Parsed Value [" + i + "] = '" + s + "'");
+        i++;
+      }
+      strSelect = split[0];
+      strPersons = split[1];
+      strTitleSelect = split[2];
+      strFilmSelect = split[3];
+      viewContext = (MyFilms.ViewContext)Enum.Parse(typeof(MyFilms.ViewContext), split[4], true); // MyFilms.ViewContext.Menu;
+      strTxtView = split[5];
+      strTxtSelect = split[6];
+      boolselect = bool.Parse(split[7]);
+      boolreturn = bool.Parse(split[8]);
+      boolindexed = bool.Parse(split[9]);
+      boolindexedreturn = bool.Parse(split[10]);
+      indexedChars = int.Parse(split[11]);
+      boolReverseNames = bool.Parse(split[12]);
+      boolShowEmptyValuesInViews = bool.Parse(split[13]);
+      wselectedlabel = split[14];
+      wStrSort = split[15];
+      wStrSortSensCount = split[16];
+      boolSortCountinViews = bool.Parse(split[17]);
+      wstar = split[18];
+      strLayOut = int.Parse(split[19]);
+      wStrLayOut = int.Parse(split[20]);
+      strLayOutInHierarchies = int.Parse(split[21]);
+      lastID = int.Parse(split[22]);
+      indexItem = int.Parse(split[23]);
+      titleItem = split[24];
+    }
   }
 
 }
