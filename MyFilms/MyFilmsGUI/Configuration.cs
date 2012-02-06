@@ -157,7 +157,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   view.LayoutHierarchy = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutHierarchy{0}", index), "0");
                   view.OnlyUnwatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewOnlyUnwatched{0}", index), false);
                   view.OnlyAvailable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewOnlyAvailable{0}", index), false);
-                  LogMyFilms.Debug("Adding view '" + view.Label + "'");
+                  LogMyFilms.Debug("Adding view - #: '" + index + "', DBitem: '" + view.DBfield + "', View Label: '" + view.Label + "'");
                   CustomViews.View.AddViewRow(view);
                   index++;
                 }
