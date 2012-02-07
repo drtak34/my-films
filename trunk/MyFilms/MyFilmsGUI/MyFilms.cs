@@ -7989,9 +7989,49 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "showindexedvalues":
           {
-            // conf.StrSelect = ""; // reset view select filter
-            MyFilms.conf.IndexedChars++;
-            if (MyFilms.conf.IndexedChars > 2) MyFilms.conf.IndexedChars = 0;
+            GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            List<string> choiceViewMenu = new List<string>();
+
+            if (dlgmenu == null) return;
+            dlgmenu.Reset();
+            choiceViewMenu.Clear();
+            string headline = (MyFilms.conf.IndexedChars == 0) ? (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))) : (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + MyFilms.conf.IndexedChars));
+            dlgmenu.SetHeading(headline);
+
+            dlgmenu.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))); // disabled indexed view
+            choiceViewMenu.Add("0");
+
+            dlgmenu.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + "1"));
+            choiceViewMenu.Add("1");
+
+            dlgmenu.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + "2"));
+            choiceViewMenu.Add("2");
+
+            dlgmenu.DoModal(GetID);
+            if (dlgmenu.SelectedLabel == -1)
+            {
+              break;
+            }
+            switch (choiceViewMenu[dlgmenu.SelectedLabel])
+            {
+              case "0":
+                if (MyFilms.conf.IndexedChars == 0) return;
+                MyFilms.conf.IndexedChars = 0;
+                break;
+              case "1":
+                if (MyFilms.conf.IndexedChars == 1) return;
+                MyFilms.conf.IndexedChars = 1;
+                break;
+              case "2":
+                if (MyFilms.conf.IndexedChars == 2) return;
+                MyFilms.conf.IndexedChars = 2;
+                break;
+              default:
+                return;
+            }
+
+            //MyFilms.conf.IndexedChars++;
+            //if (MyFilms.conf.IndexedChars > 2) MyFilms.conf.IndexedChars = 0;
 
             if (MyFilms.conf.IndexedChars > 0)
             {
