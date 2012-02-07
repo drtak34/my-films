@@ -379,6 +379,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static event DetailsUpdatedEventDelegate DetailsUpdated;
         public delegate void DetailsUpdatedEventDelegate(bool searchPicture);
 
+        // MF event for trailer completed (to start next)
+        public static event TrailerEndedEventDelegate TrailerEnded;
+        public delegate void TrailerEndedEventDelegate(string filename);
+
         static MyFilmsDetail()
         {
           playlistPlayer = PlayListPlayer.SingletonPlayer;
@@ -7151,7 +7155,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction); // make sure it doesn't register twice ....
             GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
 
-            // tell any listeners that user rated the movie
+            // tell any listeners that user started the movie
             MFMovie movie = new MFMovie();
             movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
             if (MovieStarted != null && MyFilms.conf.AllowTraktSync)
@@ -7200,10 +7204,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!PlayBackEventIsOfConcern(type, filename))
           {
             LogMyFilms.Debug("OnPlayBackEnded was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
-            if (MyFilms.trailerscrobbleactive == true)
+            if (MyFilms.trailerscrobbleactive)
             {
+              if (TrailerEnded != null && MyFilms.conf.AllowTraktSync)
+              {
+                TrailerEnded(filename);
+                LogMyFilms.Debug("OnPlayBackEnded(): Fired 'TrailerEnded' event with filename = '" + filename + "'");
+              }
               MyFilms.trailerscrobbleactive = false;
-              // MyFilms.PlayRandomTrailer(true);
             }
             return;
           }

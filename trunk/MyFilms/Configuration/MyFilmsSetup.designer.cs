@@ -583,6 +583,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.label10 = new System.Windows.Forms.Label();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -3386,6 +3387,7 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.label10);
           this.groupBox_DefaultView.Controls.Add(this.lbl_View_Dflt_Text);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalAvailableOnly);
           this.groupBox_DefaultView.Controls.Add(this.chkUseListviewForGroups);
@@ -3398,9 +3400,9 @@
           this.groupBox_DefaultView.Controls.Add(this.LayOut);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Item);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
-          this.groupBox_DefaultView.Location = new System.Drawing.Point(530, 11);
+          this.groupBox_DefaultView.Location = new System.Drawing.Point(530, 43);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-          this.groupBox_DefaultView.Size = new System.Drawing.Size(208, 329);
+          this.groupBox_DefaultView.Size = new System.Drawing.Size(208, 297);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
@@ -3409,7 +3411,7 @@
           // lbl_View_Dflt_Text
           // 
           this.lbl_View_Dflt_Text.AutoSize = true;
-          this.lbl_View_Dflt_Text.Location = new System.Drawing.Point(13, 63);
+          this.lbl_View_Dflt_Text.Location = new System.Drawing.Point(10, 83);
           this.lbl_View_Dflt_Text.Name = "lbl_View_Dflt_Text";
           this.lbl_View_Dflt_Text.Size = new System.Drawing.Size(34, 13);
           this.lbl_View_Dflt_Text.TabIndex = 83;
@@ -3418,7 +3420,7 @@
           // chkGlobalAvailableOnly
           // 
           this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(10, 237);
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(10, 257);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
           this.chkGlobalAvailableOnly.TabIndex = 82;
@@ -3430,7 +3432,7 @@
           // chkUseListviewForGroups
           // 
           this.chkUseListviewForGroups.AutoSize = true;
-          this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 191);
+          this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 211);
           this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
           this.chkUseListviewForGroups.Size = new System.Drawing.Size(179, 17);
           this.chkUseListviewForGroups.TabIndex = 81;
@@ -3442,7 +3444,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 214);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 234);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -3456,7 +3458,7 @@
           this.SortSens.Items.AddRange(new object[] {
             "ASC",
             "DESC"});
-          this.SortSens.Location = new System.Drawing.Point(141, 112);
+          this.SortSens.Location = new System.Drawing.Point(141, 132);
           this.SortSens.Name = "SortSens";
           this.SortSens.Size = new System.Drawing.Size(55, 21);
           this.SortSens.TabIndex = 78;
@@ -3465,7 +3467,7 @@
           // label32
           // 
           this.label32.AutoSize = true;
-          this.label32.Location = new System.Drawing.Point(13, 115);
+          this.label32.Location = new System.Drawing.Point(13, 135);
           this.label32.Name = "label32";
           this.label32.Size = new System.Drawing.Size(26, 13);
           this.label32.TabIndex = 77;
@@ -3474,7 +3476,7 @@
           // Sort
           // 
           this.Sort.FormattingEnabled = true;
-          this.Sort.Location = new System.Drawing.Point(50, 112);
+          this.Sort.Location = new System.Drawing.Point(50, 132);
           this.Sort.Name = "Sort";
           this.Sort.Size = new System.Drawing.Size(85, 21);
           this.Sort.TabIndex = 76;
@@ -3482,7 +3484,7 @@
           // AlwaysDefaultView
           // 
           this.AlwaysDefaultView.AutoSize = true;
-          this.AlwaysDefaultView.Location = new System.Drawing.Point(10, 152);
+          this.AlwaysDefaultView.Location = new System.Drawing.Point(10, 172);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
           this.AlwaysDefaultView.Size = new System.Drawing.Size(143, 30);
           this.AlwaysDefaultView.TabIndex = 75;
@@ -3493,7 +3495,7 @@
           // label14
           // 
           this.label14.AutoSize = true;
-          this.label14.Location = new System.Drawing.Point(7, 88);
+          this.label14.Location = new System.Drawing.Point(7, 108);
           this.label14.Name = "label14";
           this.label14.Size = new System.Drawing.Size(39, 13);
           this.label14.TabIndex = 67;
@@ -3508,7 +3510,7 @@
             "Large Icons",
             "Filmstrip",
             "Cover Flow"});
-          this.LayOut.Location = new System.Drawing.Point(50, 85);
+          this.LayOut.Location = new System.Drawing.Point(50, 105);
           this.LayOut.Name = "LayOut";
           this.LayOut.Size = new System.Drawing.Size(103, 21);
           this.LayOut.TabIndex = 66;
@@ -3517,7 +3519,7 @@
           // View_Dflt_Item
           // 
           this.View_Dflt_Item.FormattingEnabled = true;
-          this.View_Dflt_Item.Location = new System.Drawing.Point(50, 18);
+          this.View_Dflt_Item.Location = new System.Drawing.Point(50, 38);
           this.View_Dflt_Item.Name = "View_Dflt_Item";
           this.View_Dflt_Item.Size = new System.Drawing.Size(146, 21);
           this.View_Dflt_Item.TabIndex = 16;
@@ -3525,7 +3527,7 @@
           // 
           // View_Dflt_Text
           // 
-          this.View_Dflt_Text.Location = new System.Drawing.Point(50, 59);
+          this.View_Dflt_Text.Location = new System.Drawing.Point(50, 79);
           this.View_Dflt_Text.Name = "View_Dflt_Text";
           this.View_Dflt_Text.Size = new System.Drawing.Size(146, 20);
           this.View_Dflt_Text.TabIndex = 17;
@@ -5999,6 +6001,15 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // label10
+          // 
+          this.label10.AutoSize = true;
+          this.label10.Location = new System.Drawing.Point(12, 36);
+          this.label10.Name = "label10";
+          this.label10.Size = new System.Drawing.Size(30, 26);
+          this.label10.TabIndex = 84;
+          this.label10.Text = "Start\r\nView";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6608,5 +6619,6 @@
         private TextBox AntFilterText2;
         private ComboBox AntFilterItem1;
         private TextBox AntFilterText1;
+        private Label label10;
     }
 }

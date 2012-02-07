@@ -330,18 +330,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     // public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
-    // public int Layout = 0; // no more used?
     public static int Prev_ItemID = -1;
 
     public static GUIListItem itemToPublish = null;
 
     public static string Prev_Label = string.Empty;
-    //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
-    public bool Context_Menu = false;
+
     public static Configuration conf;
     public static Logos confLogos;
-    //private string currentConfig;
-    private string strPluginName = "MyFilms";
+
     public static DataRow[] r; // will hold current recordset to traverse
     public static MFMovie currentMovie = new MFMovie(); // will hold current recordset to traverse
 
@@ -352,7 +349,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private AsyncImageResource personcover = null;
     private AsyncImageResource groupcover = null;
 
-    // Guzzi: Added from TV-Series for Fanarttoggling
+    //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
+    private bool Context_Menu = false;
+    //private string currentConfig;
+    private string strPluginName = "MyFilms";
 
     private System.Threading.Timer _fanartTimer = null;
 
@@ -368,14 +368,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //public string GlobalUnwatchedFilterString = string.Empty;
     public string GlobalFilterStringCustomFilter = string.Empty;
 
-    public static bool trailerscrobbleactive = false;
-    public int actorID = 0;
-
-    public enum optimizeOption { optimizeDisabled };
-
-    public static bool InitialStart = false; //Added to implement InitialViewSetup
-    public static bool InitialIsOnlineScan = false; //Added to implement switch if facade should display media availability
-    public static bool InitialMediaScannerStartDone = false; //Added to implement switch if facade should display media availability
+    public static bool InitialStart = false;                  //Added to implement InitialViewSetup
+    public static bool InitialIsOnlineScan = false;           //Added to implement switch if facade should display media availability
+    public static bool InitialMediaScannerStartDone = false;  //Added to implement switch if facade should display media availability
 
     // current Random Fanart
     public static List<string> currentFanartList = new List<string>();
@@ -383,13 +378,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // current Trailer List for Scrobbling
     private static List<MFMovie> currentTrailerMoviesList = new List<MFMovie>();
     private static MFMovie currentTrailerPlayingItem = null;
+    public static bool trailerscrobbleactive = false;
 
     //PlayList currentPlaylist = null;
     //PlayListItem currentPlayingItem = null;
 
     private bool NetworkAvailabilityChanged_Subscribed = false;
     private bool PowerModeChanged_Subscribed = false;
-    // private bool PlayerEvents_Subscribed = false;
 
     private double lastPublished = 0;
     private Timer publishTimer;
@@ -401,10 +396,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // Version for Skin Interface
     private const int SkinInterfaceVersionMajor = 1;
     private const int SkinInterfaceVersionMinor = 0;
-    // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
 
     public static bool DebugPropertyLogging { get; set; }
 
+    // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
     private string currentSkin = null;
 
     public static string[] PersonTypes = new string[] { "Persons", "Actors", "Producer", "Director", "Writer", "Borrower" };
@@ -499,13 +494,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public delegate void EventHandler(object sender, EventArgs e);
 
-    System.ComponentModel.BackgroundWorker bgUpdateDB = new System.ComponentModel.BackgroundWorker();
-    System.ComponentModel.BackgroundWorker bgUpdateFanart = new System.ComponentModel.BackgroundWorker();
-    System.ComponentModel.BackgroundWorker bgUpdateActors = new System.ComponentModel.BackgroundWorker();
-    System.ComponentModel.BackgroundWorker bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
-    System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
-    System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
-    // System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
+    BackgroundWorker bgUpdateDB = new BackgroundWorker();
+    BackgroundWorker bgUpdateFanart = new BackgroundWorker();
+    BackgroundWorker bgUpdateActors = new BackgroundWorker();
+    BackgroundWorker bgUpdateTrailer = new BackgroundWorker();
+    BackgroundWorker bgLoadMovieList = new BackgroundWorker();
+    BackgroundWorker bgIsOnlineCheck = new BackgroundWorker();
 
     public static FileSystemWatcher FSwatcher = new FileSystemWatcher();
 
@@ -576,7 +570,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Init Eventhandler for Background Updates
       MyFilmsDetail.DetailsUpdated += new MyFilmsDetail.DetailsUpdatedEventDelegate(OnDetailsUpdated);
-      
+
+      // Init Eventhandler for Trailer Scrobbling
+      MyFilmsDetail.TrailerEnded += new MyFilmsDetail.TrailerEndedEventDelegate(OnTrailerEnded);
+
       // Register Messagehandler for CD-Inserted-Messages
       //GUIWindowManager.Receivers += new SendMessageHandler(GUIWindowManager_OnNewMessage);
 
@@ -2129,7 +2126,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug(caller + string.Format("() - ViewContext        : '{0}'", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext)));
       LogMyFilms.Debug(caller + string.Format("() - StrTxtView         : '{0}' (View)", conf.StrTxtView));
       LogMyFilms.Debug(caller + string.Format("() - StrTxtSelect       : '{0}' (Selection)", conf.StrTxtSelect));
-      LogMyFilms.Debug(caller + string.Format("() - CurrentView        : '{0}'", conf.CurrentView.SaveToString()));
+      //LogMyFilms.Debug(caller + string.Format("() - CurrentView        : '{0}'", conf.CurrentView.SaveToString()));
 
       LogMyFilms.Debug(caller + string.Format("() - Boolselect         : '{0}'", conf.Boolselect));
       LogMyFilms.Debug(caller + string.Format("() - Boolreturn         : '{0}'", conf.Boolreturn));
@@ -8450,7 +8447,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgOk.DoModal(GetID);
               return;
             }
-            actorID = 0;
+            int actorID = 0;
             string actorname = string.Empty;
             char[] splitter = { '|' };
             foreach (string act in actorList)
@@ -8483,7 +8480,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string zoom = "100";
             //value = value.Replace("%link%", url);
             //value = value.Replace("%zoom%", zoom);
-            LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+            LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
             MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
@@ -9608,8 +9605,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
       ArrayList w_tableau = new ArrayList();
       ArrayList wsub_tableau = new ArrayList();
-      bool GetItems = false;
-      bool GetSubItems = true;
       if (dlg == null) return;
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798621)); // menu for random search
@@ -9653,70 +9648,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              if (GetSubItems)
+              wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
+              foreach (object t in wsub_tableau)
               {
-                // LogMyFilms.Debug("SubItemGrabber: Input: " + wsr[dc.ColumnName]);
-                wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
-                foreach (object t in wsub_tableau)
                 {
-                  // LogMyFilms.Debug("SubItemGrabber: Output: " + t);
+                  if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
                   {
-                    if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
+                    for (int i = 0; i < w_tableau.Count; i++)
                     {
-                      //if (!w_index.Contains(
-                      for (int i = 0; i < w_tableau.Count; i++)
+                      if (w_tableau[i].ToString() == t.ToString())
                       {
-                        if (w_tableau[i].ToString() == t.ToString())
-                        {
-                          w_count[i] = (int)w_count[i] + 1;
-                          //LogMyFilms.Debug("SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
-                          break;
-                        }
+                        w_count[i] = (int)w_count[i] + 1;
+                        //LogMyFilms.Debug("SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
+                        break;
                       }
                     }
-                    else
-                    // add to w_tableau and move 1 to w_count
-                    {
-                      LogMyFilms.Debug("SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
-                      w_tableau.Add(t.ToString());
-                      w_count.Add(1);
-                    }
                   }
-                }
-
-              }
-              if (GetItems)
-              {
-                if (w_tableau.Contains(wsr[dc.ColumnName])) // search position in w_tableau for adding +1 to w_count
-                {
-                  for (int i = 0; i < w_tableau.Count; i++)
+                  else // add to w_tableau and move 1 to w_count
                   {
-                    if (w_tableau[i].ToString() == wsr[dc.ColumnName].ToString())
-                    {
-                      w_count[i] = (int)w_count[i] + 1;
-                      //LogMyFilms.Debug("(Guzzi) Class already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
-                      break;
-                    }
+                    LogMyFilms.Debug("SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
+                    w_tableau.Add(t.ToString());
+                    w_count.Add(1);
                   }
-                }
-                else
-                // add to w_tableau and move 1 to w_count
-                {
-                  //LogMyFilms.Debug("AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
-                  w_tableau.Add(wsr[dc.ColumnName].ToString());
-                  w_count.Add(1);
                 }
               }
             }
           }
         }
       }
-      if (w_tableau.Count == 0)
-      {
-        LogMyFilms.Debug("PropertyClassCount is 0");
-        //return;
-      }
-
+      if (w_tableau.Count == 0) LogMyFilms.Debug("PropertyClassCount is 0");
 
       string wproperty2 = "";
 
@@ -9732,10 +9692,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           choiceSearch.Add(w_tableau[i].ToString());
         }
         dlg.DoModal(GetID);
-        if (dlg.SelectedLabel == -1)
-          return;
-        string t_wproperty2 = choiceSearch[dlg.SelectedLabel];
-        wproperty2 = t_wproperty2;
+        if (dlg.SelectedLabel == -1) return;
+        wproperty2 = choiceSearch[dlg.SelectedLabel];
       }
       else
         wproperty2 = "*";
@@ -9880,6 +9838,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       ////LogMyFilms.Debug("(SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
     }
 
+    private void OnTrailerEnded(string filename)
+    {
+      LogMyFilms.Debug("OnTrailerEnded(): Received TrailerEnded event with filename '" + filename + "'");
+      //MyFilms.PlayRandomTrailer(true);
+
+    }
+
     public void PlayRandomTrailer(bool showMenu)
     {
       if (showMenu)
@@ -9894,8 +9859,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlgYesNo.SetNoLabel("Next Trailer");
         dlgYesNo.SetDefaultToYes(false);
         dlgYesNo.DoModal(ID_MyFilms);
-        if (dlgYesNo.IsConfirmed)
-          this.TrailerScrobbleOptionsMenu(0);
+        if (dlgYesNo.IsConfirmed) TrailerScrobbleOptionsMenu(0);
         //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
       }
 
@@ -9923,7 +9887,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (GUIGraphicsContext.IsFullScreenVideo) {
       //  GUIGraphicsContext.IsFullScreenVideo = false;
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      List<string> choiceSearch = new List<string>();
       //Before showing menu, first play the trailer
       //conf.Wselectedlabel = facadeFilms.SelectedListItem.Label;
       //Change_LayOut(MesFilms.conf.StrLayOut);
@@ -12496,7 +12460,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.GetActorByName(wperson, actorList);
         if (actorList.Count != 0)
         {
-          actorID = 0;
+          int actorID = 0;
           string actorname = string.Empty;
           char[] splitter = { '|' };
           foreach (string act in actorList)

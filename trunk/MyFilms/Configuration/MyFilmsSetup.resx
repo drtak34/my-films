@@ -725,6 +725,26 @@ The plugin needs to know what separator is used to indicate the role text for fi
 Note: Separators will need time to process - for person views (e.g. actors), you can speed up 
 the view sigificantly by defining only those separators you really need.</value>
   </data>
+  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
+    <value>"Only available" option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+Note:
+The availability status is only usable after MyFilms has done a scan. 
+This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
+Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
+  </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+AMC users can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
+  </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
 Select the option “Display Always that view when using this config”, 
@@ -735,6 +755,20 @@ the last view used before exiting the plugin will be shown next time.
 If a value is entered for the second parameter, only records containing that value will be displayed.  
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
+  </data>
+  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 53</value>
+  </metadata>
+  <data name="groupBoxView.ToolTip" xml:space="preserve">
+    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
+In this section you can define additional views; 
+select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
+If there is no value entered, a menu will be displayed for the range of values available in the database.  
+If a value is entered, a list of the movies with that value will be displayed.
+Optional: 
+- If you want to use a list of values, you can add them as comma separated values.
+- You can set Index to values of 1 or 2 to get indexed display of the values
+- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
   </data>
   <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 53</value>
@@ -878,45 +912,14 @@ For example, you can define a view for children with ‘Category’ – ‘Anima
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
   <data name="checkBox2.ToolTip" xml:space="preserve">
     <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
 you will get an additional group in the view with films having no category assigned.
 This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
   </data>
-  <data name="groupBoxView.ToolTip" xml:space="preserve">
-    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
-In this section you can define additional views; 
-select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
-If there is no value entered, a menu will be displayed for the range of values available in the database.  
-If a value is entered, a list of the movies with that value will be displayed.
-Optional: 
-- If you want to use a list of values, you can add them as comma separated values.
-- You can set Index to values of 1 or 2 to get indexed display of the values
-- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
-  </data>
-  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
-    <value>"Only available" option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-Note:
-The availability status is only usable after MyFilms has done a scan. 
-This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
-Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
-  </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-AMC users can configure the field and value to identify unwatched films
-on "update" tab (Watched-Status Handling).</value>
-  </data>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
-  </metadata>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
 and thus to integrate trailers into MyFilms.
