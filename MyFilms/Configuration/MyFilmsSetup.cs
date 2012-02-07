@@ -424,6 +424,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 Config_Name.Focus();
                 return;
             }
+
+            foreach (MFview.ViewRow viewRow in this.MyCustomViews.View) // for (int i = 1; i < 6; i++)
+            {
+              if (string.IsNullOrEmpty(viewRow.DBfield))
+              {
+                MessageBox.Show("No DB field is set for Custom View '" + viewRow.Label + "' - this is required - delete that view or add missing config!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+              }
+            }
+          
             if (Config_Dflt.Checked && Config_Menu.Checked)
             {
                 MessageBox.Show("Option 'Always Display Configuration Menu' not possible with a Default Configuration defined !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
