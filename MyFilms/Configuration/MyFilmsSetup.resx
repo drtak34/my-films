@@ -171,20 +171,6 @@ Mostly, "Ascending" is the best choice.
 For fields like "Date" or "Rating" it is useful to use "Descending".
 You can set separate sort orders for the view itself, the underlying film list and optional hierarchy film lists.</value>
   </data>
-  <metadata name="label67.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="label67.ToolTip" xml:space="preserve">
-    <value>The Filter can be used to add any restriction to that specific View.
-You can use it the same way as "User defined config filters", but you can define them "per view".
-It as additional to the "Userdefined Config Filter", so if you already have defined a Config Filter, 
-you do not need to repeat that filter setting here.
-The edit buttom helps you to create filter rules.
-
-Example:
-"Category like 'Action'" only displays movies of this category.
-Note: Other than "Value", the filter will apply and still display Views as "groupings".</value>
-  </data>
   <metadata name="label66.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
