@@ -160,8 +160,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle2.Items.Add("(none)");
             Sort.Items.Add("(none)");
             SortInHierarchies.Items.Add("(none)");
-            AntViewSortFilms.Items.Add("(none)");
-            AntViewSortHierarchies.Items.Add("(none)");
             AntIdentItem.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
@@ -951,46 +949,30 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", index), viewRow.Label);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewEnabled{0}", index), viewRow.ViewEnabled);
+          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewImagePath{0}", index), viewRow.ImagePath);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index), viewRow.DBfield);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), viewRow.Value);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), viewRow.Filter);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), viewRow.Index);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewReverseNames{0}", index), viewRow.ReverseNames);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index), (viewRow.SortFieldFilms == "(none)") ? AntTitle1.Text : viewRow.SortFieldFilms);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionFilms{0}", index), viewRow.SortDirectionFilms);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutFilms{0}", index), this.GetLayoutFromName(viewRow.LayoutFilms));
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index), (viewRow.SortFieldHierarchy == "(none)") ? AntTitle1.Text : viewRow.SortFieldHierarchy);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionHierarchy{0}", index), viewRow.SortDirectionHierarchy);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutHierarchy{0}", index), this.GetLayoutFromName(viewRow.LayoutHierarchy));
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyUnwatched{0}", index), viewRow.OnlyUnwatched);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyAvailable{0}", index), viewRow.OnlyAvailable);
         }
 
         private void RemoveView(int index)
         {
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewEnabled{0}", index));
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewImagePath{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewReverseNames{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionFilms{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLayoutFilms{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionHierarchy{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLayoutHierarchy{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewOnlyUnwatched{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewOnlyAvailable{0}", index));
         }
 
         private void CleanupOldEntries() // this can be removed in later versions - only to clean up config files from unused entries ...
@@ -1245,27 +1227,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               MFview.ViewRow view = this.MyCustomViews.View.NewViewRow();
               view.DBfield = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index), string.Empty);
               view.ViewEnabled = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewEnabled{0}", index), true);
+              view.ImagePath = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewImagePath{0}", index), string.Empty);
               view.Label = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", index), string.Empty);
               // if (view.Label.Length == 0) view.Label = view.DBfield;
               view.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), string.Empty);
               view.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), string.Empty);
               view.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), 0);
               view.ShowEmpty = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index), false);
-              view.ReverseNames = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewReverseNames{0}", index), false);
               view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), "Name");
               view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), " ASC");
               if (view.SortDirectionView.Contains("ASC")) view.SortDirectionView = " ASC"; else view.SortDirectionView = " DESC";
               view.LayoutView = this.GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index), 0));
-              view.SortFieldFilms = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldFilms{0}", index), string.Empty);
-              view.SortDirectionFilms = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionFilms{0}", index), " ASC");
-              if (view.SortDirectionFilms.Contains("ASC")) view.SortDirectionFilms = " ASC"; else view.SortDirectionFilms = " DESC";
-              view.LayoutFilms = this.GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutFilms{0}", index), 0));
-              view.SortFieldHierarchy = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldHierarchy{0}", index), string.Empty);
-              view.SortDirectionHierarchy = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionHierarchy{0}", index), " ASC");
-              if (view.SortDirectionHierarchy.Contains("ASC")) view.SortDirectionHierarchy = " ASC"; else view.SortDirectionHierarchy = " DESC";
-              view.LayoutHierarchy = this.GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutHierarchy{0}", index), 0));
-              view.OnlyUnwatched = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyUnwatched{0}", index), false);
-              view.OnlyAvailable = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewOnlyAvailable{0}", index), false);
               this.MyCustomViews.View.AddViewRow(view);
               index++;
             }
@@ -2352,8 +2324,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //RecentlyAdded
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "RecentlyAdded";
-          newRow.SortFieldFilms = "AgeAdded";
-          newRow.SortDirectionFilms = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
@@ -3531,8 +3501,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           Sort.Items.Clear();
           SortInHierarchies.Items.Clear();
-          AntViewSortFilms.Items.Clear();
-          AntViewSortHierarchies.Items.Clear();
           //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
           //    Sort.Items.Add(AntSTitle.Text);
           //else
@@ -3545,14 +3513,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           SortInHierarchies.Items.Add("Year");
           SortInHierarchies.Items.Add("Date");
           SortInHierarchies.Items.Add("Rating");
-          AntViewSortFilms.Items.Add("Title");
-          AntViewSortFilms.Items.Add("Year");
-          AntViewSortFilms.Items.Add("Date");
-          AntViewSortFilms.Items.Add("Rating");
-          AntViewSortHierarchies.Items.Add("Title");
-          AntViewSortHierarchies.Items.Add("Year");
-          AntViewSortHierarchies.Items.Add("Date");
-          AntViewSortHierarchies.Items.Add("Rating");
 
           // if (!Sort.Items.Contains(Sort.Text)) Sort.Text = "(none)";
           //Guzzi: Added to not Reset setting when localized strings present
@@ -5534,6 +5494,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void chkGlobalAvailableOnly_CheckedChanged(object sender, EventArgs e)
         {
+          if (chkGlobalAvailableOnly.Checked && !chkScanMediaOnStart.Checked)
+          {
+            chkGlobalAvailableOnly.ForeColor = System.Drawing.Color.IndianRed;
+          }
+          else
+          {
+            chkGlobalAvailableOnly.ResetForeColor();
+          }
           //if (chkGlobalAvailableOnly.Checked && !chkScanMediaOnStart.Checked)
           //{
           //  // MessageBox.Show("If you don't have 'scan media on start' enabled, \nyou won't get the filtered view until you made a manual scan via options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -5613,29 +5581,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void AntViewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-          AntViewText_Change(); 
+          AntViewText_Change();
+          // if (viewBindingSource.List.Count == 0) return;
           if (AntViewItem.Text.Length == 0)
           {
             AntViewItem.Text = "(none)";
             MyCustomViews.View.FindByID(viewBindingSource.Position).ViewEnabled = false;
           }
 
-          if (AntViewItem.Text != "(none)" &&  string.IsNullOrEmpty(this.MyCustomViews.View.FindByID(viewBindingSource.Position).Label))
+          if (AntViewItem.Text != "(none)" &&  string.IsNullOrEmpty(MyCustomViews.View.FindByID(viewBindingSource.Position).Label))
           {
             MessageBox.Show("The View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             dgViewsList.Focus();
-          }
-        }
-
-        private void AntViewOnlyAvailableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-          if (AntViewOnlyAvailableCheckBox.Checked && !chkScanMediaOnStart.Checked)
-          {
-            AntViewOnlyAvailableCheckBox.ForeColor = System.Drawing.Color.IndianRed;
-          }
-          else
-          {
-            AntViewOnlyAvailableCheckBox.ResetForeColor();
           }
         }
 
@@ -5854,6 +5811,22 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void dgViewsList_Leave(object sender, EventArgs e)
         {
           AntViewText_Change();
+        }
+
+        private void AntViewValue_TextChanged(object sender, EventArgs e)
+        {
+          if (!string.IsNullOrEmpty(AntViewValue.Text))
+          {
+            AntViewIndex.Visible = false;
+            lblAntViewIndex.Visible = false;
+            groupBoxSortAndLayoutForView.Visible = false;
+          }
+          else
+          {
+            AntViewIndex.Visible = true;
+            lblAntViewIndex.Visible = true;
+            groupBoxSortAndLayoutForView.Visible = true;
+          }
         }
 
       }

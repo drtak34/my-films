@@ -148,12 +148,6 @@
     <Compile Include="Configuration\FilterEditor.Designer.cs">
       <DependentUpon>FilterEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\ViewManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Configuration\ViewManager.Designer.cs">
-      <DependentUpon>ViewManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataBase\AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -364,9 +358,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\MyFilmsSetup.resx">
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\ViewManager.resx">
-      <DependentUpon>ViewManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\trakt.png" />
   </ItemGroup>

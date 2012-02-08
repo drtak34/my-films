@@ -3738,22 +3738,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (countitem.DVDLabel == (viewRow.Label))
                   {
                     success = true;
-                    string sortfield = (viewRow.SortFieldFilms == "(none)" || viewRow.SortFieldFilms == "Title")
-                                         ? ((Helper.FieldIsSet(conf.StrSTitle)) ? conf.StrSTitle : conf.StrTitle1)
-                                         : viewRow.SortFieldFilms;
                     if (string.IsNullOrEmpty(viewRow.Value)) // no "Value" filter
                     {
                       if (string.IsNullOrEmpty(viewRow.Filter))
                         newLabel = CountViewItems(r, viewRow.DBfield).ToString(); // newLabel = r.Select(p => (string)p[conf.StrViewItem[ii]]).Distinct(MfStringComparer).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
                       else
-                        newLabel = "* " + CountViewItems(BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, "", sortfield, viewRow.SortDirectionFilms), viewRow.DBfield).ToString();
+                        newLabel = "* " + CountViewItems(BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens), viewRow.DBfield).ToString();
                     }
                     else if (viewRow.Value == "*") // filmlist show all (possible "Value" filter) -> Count films, as it jumps directly to films
                     {
                       if (string.IsNullOrEmpty(viewRow.Filter))
                         newLabel = r.Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();  // Select(row => row.Field<int?>("F1")).Where(val => val.HasValue).Select(val => val.Value).Distinct() // newLabel = r.Length.ToString(); 
                       else
-                        newLabel = "* " + BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, "", sortfield, viewRow.SortDirectionFilms).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
+                        newLabel = "* " + BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
                     }
                     else // "Value" filter present - use it !
                     {
@@ -3768,9 +3765,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         ValueFilter = viewRow.DBfield + " like '*" + viewRow.Value + "*'";
 
                       if (string.IsNullOrEmpty(viewRow.Filter))
-                        newLabel = "(" + viewRow.Value + ") " + BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, ValueFilter, sortfield, viewRow.SortDirectionFilms).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
+                        newLabel = "(" + viewRow.Value + ") " + BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, ValueFilter, conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
                       else
-                        newLabel = "* " + "(" + viewRow.Value + ") " + BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, ValueFilter, sortfield, viewRow.SortDirectionFilms).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
+                        newLabel = "* " + "(" + viewRow.Value + ") " + BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, ValueFilter, conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
 
                       //newLabel = "(" + viewRow.Value + ")";
                       //newLabel = "(" + viewRow.Value + ") " + r.Select(p => p[viewRow.DBfield].Equals(viewRow.Value)).Count().ToString();
@@ -6553,13 +6550,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //conf.WStrSortSensCount
           conf.BoolSortCountinViews = (selectedCustomView.SortFieldViewType == "Count");
           conf.WStrSortSens = selectedCustomView.SortDirectionView;
-          conf.StrSorta = (selectedCustomView.SortFieldFilms == "(none)" || selectedCustomView.SortFieldFilms == "Title") ? ((Helper.FieldIsSet(conf.StrSTitle)) ? conf.StrSTitle : conf.StrTitle1 ) : selectedCustomView.SortFieldFilms;
-          conf.StrSortSens = selectedCustomView.SortDirectionFilms;
-          conf.StrSortaInHierarchies = (selectedCustomView.SortFieldHierarchy == "(none)" || selectedCustomView.SortFieldHierarchy == "Title") ? ((Helper.FieldIsSet(conf.StrSTitle)) ? conf.StrSTitle : conf.StrTitle1) : selectedCustomView.SortFieldHierarchy;
-          conf.StrSortSensInHierarchies = selectedCustomView.SortDirectionHierarchy;
           conf.IndexedChars = selectedCustomView.Index;
-          conf.StrLayOut = int.Parse(selectedCustomView.LayoutFilms);
-          conf.StrLayOutInHierarchies = int.Parse(selectedCustomView.LayoutHierarchy);
           conf.WStrLayOut = int.Parse(selectedCustomView.LayoutView);
 
           if (selectedCustomView.Filter.Length > 0)
@@ -8088,24 +8079,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             newRow.ViewEnabled = true;
             newRow.ShowEmpty = conf.BoolShowEmptyValuesInViews;
-            newRow.ReverseNames = conf.BoolReverseNames;
-            newRow.OnlyUnwatched = (GlobalFilterStringUnwatched.Length > 0);
-            newRow.OnlyAvailable = (GlobalFilterIsOnlineOnly);
             switch (conf.ViewContext)
             {
               case ViewContext.MenuAll:
                 newRow.Label = facadeFilms.SelectedListItem.Label + " *";
                 newRow.DBfield = facadeFilms.SelectedListItem.DVDLabel;
                 newRow.SortDirectionView = " ASC";
-                newRow.SortDirectionFilms = " ASC";
-                newRow.SortDirectionHierarchy = " ASC";
                 newRow.SortFieldViewType = "Name";
-                newRow.SortFieldFilms = conf.StrTitle1;
-                newRow.SortFieldHierarchy = conf.StrTitle1;
                 newRow.Index = 0;
                 newRow.LayoutView = "0"; // List view
-                newRow.LayoutFilms = "0";
-                newRow.LayoutHierarchy = "0";
                 newRow.Value = "";
                 newRow.Filter = "";
                 break;
@@ -8116,15 +8098,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 newRow.Label = BaseMesFilms.Translate_Column(conf.WStrSort) + " - " + conf.StrTxtSelect + " *";
                 newRow.DBfield = conf.WStrSort;
                 newRow.SortDirectionView = (conf.BoolSortCountinViews) ? conf.WStrSortSensCount : conf.WStrSortSens;
-                newRow.SortDirectionFilms = conf.StrSortSens;
-                newRow.SortDirectionHierarchy = conf.StrSortSensInHierarchies;
                 newRow.SortFieldViewType = (conf.BoolSortCountinViews) ? "Count" : "Name";
-                newRow.SortFieldFilms = conf.StrSorta;
-                newRow.SortFieldHierarchy = conf.StrSortaInHierarchies;
                 newRow.Index = conf.IndexedChars;
                 newRow.LayoutView = conf.WStrLayOut.ToString();
-                newRow.LayoutFilms = conf.StrLayOut.ToString();
-                newRow.LayoutHierarchy = conf.StrLayOutInHierarchies.ToString();
                 switch (conf.ViewContext)
                 {
                   case ViewContext.Movie:
@@ -11381,23 +11357,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewItem{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewEnabled{0}", index));
+      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewImagePath{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewText{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewReverseNames{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldFilms{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionFilms{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutFilms{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldHierarchy{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionHierarchy{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutHierarchy{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewOnlyUnwatched{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewOnlyAvailable{0}", index));
     }
 
 
@@ -11405,23 +11373,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewText{0}", index), viewRow.Label);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewEnabled{0}", index), viewRow.ViewEnabled);
+      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewImagePath{0}", index), viewRow.ImagePath);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewItem{0}", index), viewRow.DBfield);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index), viewRow.Value);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index), viewRow.Filter);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index), viewRow.Index);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewReverseNames{0}", index), viewRow.ReverseNames);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldFilms{0}", index), (viewRow.SortFieldFilms == "(none)") ? MyFilms.conf.StrTitle1 : viewRow.SortFieldFilms);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionFilms{0}", index), viewRow.SortDirectionFilms);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutFilms{0}", index), this.GetLayoutFromName(viewRow.LayoutFilms));
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldHierarchy{0}", index), (viewRow.SortFieldHierarchy == "(none)") ? MyFilms.conf.StrTitle1 : viewRow.SortFieldHierarchy);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionHierarchy{0}", index), viewRow.SortDirectionHierarchy);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutHierarchy{0}", index), this.GetLayoutFromName(viewRow.LayoutHierarchy));
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewOnlyUnwatched{0}", index), viewRow.OnlyUnwatched);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewOnlyAvailable{0}", index), viewRow.OnlyAvailable);
     }
 
     private int GetLayoutFromName(string layoutname)
@@ -11502,6 +11462,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("globalfilter.isonline", log);
       }
 
+      if (!GlobalFilterMinRating)
+      {
+        GlobalFilterStringMinRating = "";
+        MyFilmsDetail.clearGUIProperty("globalfilter.minrating", log);
+        MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue", log);
+      }
       if (!GlobalFilterMinRating)
       {
         GlobalFilterStringMinRating = "";
