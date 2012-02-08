@@ -1568,10 +1568,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
             View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu
-            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Films
-            View_Dflt_Item.Items.Add("Year");
-            View_Dflt_Item.Items.Add("Category");
-            View_Dflt_Item.Items.Add("Country");
+            //View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Films
+            //View_Dflt_Item.Items.Add("Year");
+            //View_Dflt_Item.Items.Add("Category");
+            //View_Dflt_Item.Items.Add("Country");
             if (Config_Name.Text.Length == 0)
             {
               //btnFirstTimeSetup.Enabled = true;
@@ -3470,7 +3470,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void AntViewText_Change()
         {
           View_Dflt_Item.Items.Clear();
-          View_Dflt_Item.Items.Add("(none)"); // View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu - will be used when "none"
+          View_Dflt_Item.Items.Add("(none)"); 
+          View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu - will be used when "none"
           //View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); //Films
           //View_Dflt_Item.Items.Add("Year");
           //View_Dflt_Item.Items.Add("Category");
@@ -3534,24 +3535,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void View_Dflt_Item_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (View_Dflt_Item.Text == GUILocalizeStrings.Get(924))  // Menu
+            if (View_Dflt_Item.Text == "(none)" || View_Dflt_Item.Text == GUILocalizeStrings.Get(924)) // menu
             {
-              View_Dflt_Text.Enabled = false;
-              LayOut.Enabled = false;
-              Sort.Enabled = false;
-              SortSens.Enabled = false;
+              View_Dflt_Text.Visible = false;
+              lbl_View_Dflt_Text.Visible = false;
+              View_Dflt_Text.Clear();
+              return;
             }
             else
             {
-              View_Dflt_Text.Enabled = true;
-              LayOut.Enabled = true;
-              Sort.Enabled = true;
-              SortSens.Enabled = true;
-            }
-            if (View_Dflt_Item.Text == "(none)")
-            {
-              View_Dflt_Text.Clear();
-              return;
+              View_Dflt_Text.Visible = true;
+              lbl_View_Dflt_Text.Visible = true;
             }
 
             foreach (MFview.ViewRow viewRow in this.MyCustomViews.View)
