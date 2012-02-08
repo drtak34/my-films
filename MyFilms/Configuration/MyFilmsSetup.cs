@@ -5582,14 +5582,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void AntViewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
           AntViewText_Change();
+          // if (MyCustomViews.View.Rows.Count == 0) return;
           // if (viewBindingSource.List.Count == 0) return;
+          // viewBindingSource.ResetBindings(false);
           if (AntViewItem.Text.Length == 0)
           {
             AntViewItem.Text = "(none)";
-            MyCustomViews.View.FindByID(viewBindingSource.Position).ViewEnabled = false;
+
+            MyCustomViews.View[viewBindingSource.Position].ViewEnabled = false;
           }
 
-          if (AntViewItem.Text != "(none)" &&  string.IsNullOrEmpty(MyCustomViews.View.FindByID(viewBindingSource.Position).Label))
+          if (AntViewItem.Text != "(none)" && string.IsNullOrEmpty(MyCustomViews.View[viewBindingSource.Position].Label))
           {
             MessageBox.Show("The View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             dgViewsList.Focus();
