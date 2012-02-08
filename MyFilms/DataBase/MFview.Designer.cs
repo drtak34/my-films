@@ -268,6 +268,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnViewEnabled;
             
+            private global::System.Data.DataColumn columnImagePath;
+            
             private global::System.Data.DataColumn columnDBfield;
             
             private global::System.Data.DataColumn columnValue;
@@ -278,29 +280,11 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnShowEmpty;
             
-            private global::System.Data.DataColumn columnReverseNames;
-            
             private global::System.Data.DataColumn columnSortFieldViewType;
             
             private global::System.Data.DataColumn columnSortDirectionView;
             
             private global::System.Data.DataColumn columnLayoutView;
-            
-            private global::System.Data.DataColumn columnSortFieldFilms;
-            
-            private global::System.Data.DataColumn columnSortDirectionFilms;
-            
-            private global::System.Data.DataColumn columnLayoutFilms;
-            
-            private global::System.Data.DataColumn columnSortFieldHierarchy;
-            
-            private global::System.Data.DataColumn columnSortDirectionHierarchy;
-            
-            private global::System.Data.DataColumn columnLayoutHierarchy;
-            
-            private global::System.Data.DataColumn columnOnlyUnwatched;
-            
-            private global::System.Data.DataColumn columnOnlyAvailable;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ViewDataTable() {
@@ -354,6 +338,13 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ImagePathColumn {
+                get {
+                    return this.columnImagePath;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn DBfieldColumn {
                 get {
                     return this.columnDBfield;
@@ -389,13 +380,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ReverseNamesColumn {
-                get {
-                    return this.columnReverseNames;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn SortFieldViewTypeColumn {
                 get {
                     return this.columnSortFieldViewType;
@@ -413,62 +397,6 @@ namespace MyFilmsPlugin.DataBase {
             public global::System.Data.DataColumn LayoutViewColumn {
                 get {
                     return this.columnLayoutView;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SortFieldFilmsColumn {
-                get {
-                    return this.columnSortFieldFilms;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SortDirectionFilmsColumn {
-                get {
-                    return this.columnSortDirectionFilms;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn LayoutFilmsColumn {
-                get {
-                    return this.columnLayoutFilms;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SortFieldHierarchyColumn {
-                get {
-                    return this.columnSortFieldHierarchy;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SortDirectionHierarchyColumn {
-                get {
-                    return this.columnSortDirectionHierarchy;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn LayoutHierarchyColumn {
-                get {
-                    return this.columnLayoutHierarchy;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn OnlyUnwatchedColumn {
-                get {
-                    return this.columnOnlyUnwatched;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn OnlyAvailableColumn {
-                get {
-                    return this.columnOnlyAvailable;
                 }
             }
             
@@ -501,48 +429,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ViewRow AddViewRow(
-                        string Label, 
-                        bool ViewEnabled, 
-                        string DBfield, 
-                        string Value, 
-                        string Filter, 
-                        int Index, 
-                        bool ShowEmpty, 
-                        bool ReverseNames, 
-                        string SortFieldViewType, 
-                        string SortDirectionView, 
-                        string LayoutView, 
-                        string SortFieldFilms, 
-                        string SortDirectionFilms, 
-                        string LayoutFilms, 
-                        string SortFieldHierarchy, 
-                        string SortDirectionHierarchy, 
-                        string LayoutHierarchy, 
-                        bool OnlyUnwatched, 
-                        bool OnlyAvailable) {
+            public ViewRow AddViewRow(string Label, bool ViewEnabled, string ImagePath, string DBfield, string Value, string Filter, int Index, bool ShowEmpty, string SortFieldViewType, string SortDirectionView, string LayoutView) {
                 ViewRow rowViewRow = ((ViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Label,
                         ViewEnabled,
+                        ImagePath,
                         DBfield,
                         Value,
                         Filter,
                         Index,
                         ShowEmpty,
-                        ReverseNames,
                         SortFieldViewType,
                         SortDirectionView,
-                        LayoutView,
-                        SortFieldFilms,
-                        SortDirectionFilms,
-                        LayoutFilms,
-                        SortFieldHierarchy,
-                        SortDirectionHierarchy,
-                        LayoutHierarchy,
-                        OnlyUnwatched,
-                        OnlyAvailable};
+                        LayoutView};
                 rowViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowViewRow);
                 return rowViewRow;
@@ -571,23 +472,15 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnID = base.Columns["ID"];
                 this.columnLabel = base.Columns["Label"];
                 this.columnViewEnabled = base.Columns["ViewEnabled"];
+                this.columnImagePath = base.Columns["ImagePath"];
                 this.columnDBfield = base.Columns["DBfield"];
                 this.columnValue = base.Columns["Value"];
                 this.columnFilter = base.Columns["Filter"];
                 this.columnIndex = base.Columns["Index"];
                 this.columnShowEmpty = base.Columns["ShowEmpty"];
-                this.columnReverseNames = base.Columns["ReverseNames"];
                 this.columnSortFieldViewType = base.Columns["SortFieldViewType"];
                 this.columnSortDirectionView = base.Columns["SortDirectionView"];
                 this.columnLayoutView = base.Columns["LayoutView"];
-                this.columnSortFieldFilms = base.Columns["SortFieldFilms"];
-                this.columnSortDirectionFilms = base.Columns["SortDirectionFilms"];
-                this.columnLayoutFilms = base.Columns["LayoutFilms"];
-                this.columnSortFieldHierarchy = base.Columns["SortFieldHierarchy"];
-                this.columnSortDirectionHierarchy = base.Columns["SortDirectionHierarchy"];
-                this.columnLayoutHierarchy = base.Columns["LayoutHierarchy"];
-                this.columnOnlyUnwatched = base.Columns["OnlyUnwatched"];
-                this.columnOnlyAvailable = base.Columns["OnlyAvailable"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -598,6 +491,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnLabel);
                 this.columnViewEnabled = new global::System.Data.DataColumn("ViewEnabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnViewEnabled);
+                this.columnImagePath = new global::System.Data.DataColumn("ImagePath", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImagePath);
                 this.columnDBfield = new global::System.Data.DataColumn("DBfield", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDBfield);
                 this.columnValue = new global::System.Data.DataColumn("Value", typeof(string), null, global::System.Data.MappingType.Element);
@@ -608,30 +503,12 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnIndex);
                 this.columnShowEmpty = new global::System.Data.DataColumn("ShowEmpty", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShowEmpty);
-                this.columnReverseNames = new global::System.Data.DataColumn("ReverseNames", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReverseNames);
                 this.columnSortFieldViewType = new global::System.Data.DataColumn("SortFieldViewType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSortFieldViewType);
                 this.columnSortDirectionView = new global::System.Data.DataColumn("SortDirectionView", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSortDirectionView);
                 this.columnLayoutView = new global::System.Data.DataColumn("LayoutView", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLayoutView);
-                this.columnSortFieldFilms = new global::System.Data.DataColumn("SortFieldFilms", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSortFieldFilms);
-                this.columnSortDirectionFilms = new global::System.Data.DataColumn("SortDirectionFilms", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSortDirectionFilms);
-                this.columnLayoutFilms = new global::System.Data.DataColumn("LayoutFilms", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLayoutFilms);
-                this.columnSortFieldHierarchy = new global::System.Data.DataColumn("SortFieldHierarchy", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSortFieldHierarchy);
-                this.columnSortDirectionHierarchy = new global::System.Data.DataColumn("SortDirectionHierarchy", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSortDirectionHierarchy);
-                this.columnLayoutHierarchy = new global::System.Data.DataColumn("LayoutHierarchy", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLayoutHierarchy);
-                this.columnOnlyUnwatched = new global::System.Data.DataColumn("OnlyUnwatched", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOnlyUnwatched);
-                this.columnOnlyAvailable = new global::System.Data.DataColumn("OnlyAvailable", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOnlyAvailable);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint2", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -645,18 +522,9 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnFilter.DefaultValue = ((string)(""));
                 this.columnIndex.DefaultValue = ((int)(0));
                 this.columnShowEmpty.DefaultValue = ((bool)(false));
-                this.columnReverseNames.DefaultValue = ((bool)(false));
                 this.columnSortFieldViewType.DefaultValue = ((string)("Name"));
                 this.columnSortDirectionView.DefaultValue = ((string)(" ASC"));
                 this.columnLayoutView.DefaultValue = ((string)("List"));
-                this.columnSortFieldFilms.DefaultValue = ((string)("(none)"));
-                this.columnSortDirectionFilms.DefaultValue = ((string)(" ASC"));
-                this.columnLayoutFilms.DefaultValue = ((string)("List"));
-                this.columnSortFieldHierarchy.DefaultValue = ((string)("(none)"));
-                this.columnSortDirectionHierarchy.DefaultValue = ((string)(" ASC"));
-                this.columnLayoutHierarchy.DefaultValue = ((string)("List"));
-                this.columnOnlyUnwatched.DefaultValue = ((bool)(false));
-                this.columnOnlyAvailable.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -824,6 +692,21 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string ImagePath {
+                get {
+                    try {
+                        return ((string)(this[this.tableView.ImagePathColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte ImagePath in Tabelle View ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView.ImagePathColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string DBfield {
                 get {
                     try {
@@ -899,21 +782,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool ReverseNames {
-                get {
-                    try {
-                        return ((bool)(this[this.tableView.ReverseNamesColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte ReverseNames in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.ReverseNamesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string SortFieldViewType {
                 get {
                     try {
@@ -959,126 +827,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SortFieldFilms {
-                get {
-                    try {
-                        return ((string)(this[this.tableView.SortFieldFilmsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SortFieldFilms in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.SortFieldFilmsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SortDirectionFilms {
-                get {
-                    try {
-                        return ((string)(this[this.tableView.SortDirectionFilmsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SortDirectionFilms in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.SortDirectionFilmsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string LayoutFilms {
-                get {
-                    try {
-                        return ((string)(this[this.tableView.LayoutFilmsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte LayoutFilms in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.LayoutFilmsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SortFieldHierarchy {
-                get {
-                    try {
-                        return ((string)(this[this.tableView.SortFieldHierarchyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SortFieldHierarchy in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.SortFieldHierarchyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SortDirectionHierarchy {
-                get {
-                    try {
-                        return ((string)(this[this.tableView.SortDirectionHierarchyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SortDirectionHierarchy in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.SortDirectionHierarchyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string LayoutHierarchy {
-                get {
-                    try {
-                        return ((string)(this[this.tableView.LayoutHierarchyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte LayoutHierarchy in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.LayoutHierarchyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool OnlyUnwatched {
-                get {
-                    try {
-                        return ((bool)(this[this.tableView.OnlyUnwatchedColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte OnlyUnwatched in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.OnlyUnwatchedColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool OnlyAvailable {
-                get {
-                    try {
-                        return ((bool)(this[this.tableView.OnlyAvailableColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte OnlyAvailable in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.OnlyAvailableColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsViewEnabledNull() {
                 return this.IsNull(this.tableView.ViewEnabledColumn);
             }
@@ -1086,6 +834,16 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetViewEnabledNull() {
                 this[this.tableView.ViewEnabledColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsImagePathNull() {
+                return this.IsNull(this.tableView.ImagePathColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetImagePathNull() {
+                this[this.tableView.ImagePathColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1139,16 +897,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsReverseNamesNull() {
-                return this.IsNull(this.tableView.ReverseNamesColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetReverseNamesNull() {
-                this[this.tableView.ReverseNamesColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsSortFieldViewTypeNull() {
                 return this.IsNull(this.tableView.SortFieldViewTypeColumn);
             }
@@ -1176,86 +924,6 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetLayoutViewNull() {
                 this[this.tableView.LayoutViewColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSortFieldFilmsNull() {
-                return this.IsNull(this.tableView.SortFieldFilmsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSortFieldFilmsNull() {
-                this[this.tableView.SortFieldFilmsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSortDirectionFilmsNull() {
-                return this.IsNull(this.tableView.SortDirectionFilmsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSortDirectionFilmsNull() {
-                this[this.tableView.SortDirectionFilmsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsLayoutFilmsNull() {
-                return this.IsNull(this.tableView.LayoutFilmsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetLayoutFilmsNull() {
-                this[this.tableView.LayoutFilmsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSortFieldHierarchyNull() {
-                return this.IsNull(this.tableView.SortFieldHierarchyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSortFieldHierarchyNull() {
-                this[this.tableView.SortFieldHierarchyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSortDirectionHierarchyNull() {
-                return this.IsNull(this.tableView.SortDirectionHierarchyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSortDirectionHierarchyNull() {
-                this[this.tableView.SortDirectionHierarchyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsLayoutHierarchyNull() {
-                return this.IsNull(this.tableView.LayoutHierarchyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetLayoutHierarchyNull() {
-                this[this.tableView.LayoutHierarchyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsOnlyUnwatchedNull() {
-                return this.IsNull(this.tableView.OnlyUnwatchedColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetOnlyUnwatchedNull() {
-                this[this.tableView.OnlyUnwatchedColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsOnlyAvailableNull() {
-                return this.IsNull(this.tableView.OnlyAvailableColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetOnlyAvailableNull() {
-                this[this.tableView.OnlyAvailableColumn] = global::System.Convert.DBNull;
             }
         }
         
