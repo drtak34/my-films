@@ -2820,7 +2820,8 @@ Public Class Form1
                 End If
 
                 If (System.IO.File.Exists(txtConfigFilePath.Text)) Then
-                    myMovieCatalog.ReadXml(txtConfigFilePath.Text)
+                    LoadMyFilmsFromDisk(txtConfigFilePath.Text)
+                    'myMovieCatalog.ReadXml(txtConfigFilePath.Text)
 
                     'myMovieTable = myMovieCatalog.Tables("Movie")
                     myMovieTable = myMovieCatalog.Movie
@@ -2852,6 +2853,90 @@ Public Class Form1
     Private Sub BindingNavigatorPositionItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorPositionItem.Click
 
     End Sub
+
+    Private Function LoadMyFilmsFromDisk(ByVal catalogfile As String) As Boolean
+        '#Region "load catalog from file into dataset"
+        Dim success As Boolean = False
+
+        watch.Reset()
+        watch.Start()
+        Try
+            Using fs As New FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read)
+                'LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" & catalogfile & "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read")
+                For Each dataTable As DataTable In myMovieCatalog.Tables
+                    dataTable.BeginLoadData()
+                Next
+                '''/ synchronize dataset with hierarchical XMLdoc
+                'xmlDoc = new XmlDataDocument(myMovieCatalog);
+                'xmlDoc.Load(fs);
+                myMovieCatalog.ReadXml(fs)
+                For Each dataTable As DataTable In myMovieCatalog.Tables
+                    dataTable.EndLoadData()
+                Next
+                fs.Close()
+                'LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" & catalogfile & "' FileStream")
+            End Using
+            success = True
+        Catch e As Exception
+            success = False
+            MessageBox.Show("Error reading xml database after " & myMovieCatalog.Movie.Count & " records; movie: '" & myMovieCatalog.Movie(myMovieCatalog.Movie.Count - 1).OriginalTitle & "'; error : " & e.Message, "AMC Updater - DB Reader", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        watch.[Stop]()
+        'LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) & " ms)")
+        '#End Region
+
+        'CreateOrUpdateCustomsFieldsProperties()
+
+        'CreateMissingCustomFieldsEntries()
+
+        ''#Region "calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ..."
+        'Dim now As DateTime = DateTime.Now
+        'watch.Reset()
+        'watch.Start()
+        'Dim commonColumns As IEnumerable(Of DataColumn) = myMovieCatalog.Movie.Columns.OfType(Of DataColumn)().Intersect(myMovieCatalog.CustomFields.Columns.OfType(Of DataColumn)(), New DataColumnComparer())
+        ''data.Movie.BeginLoadData();
+        ''data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
+        'For Each movieRow As AntMovieCatalog.MovieRow In myMovieCatalog.Movie
+        '    movieRow.BeginEdit()
+        '    ' Convert(Date,'System.DateTime')
+        '    Dim added As DateTime
+        '    Dim iAge As Integer = 9999
+        '    ' set default to 9999 for those, where we do not have date(added) in DB ...
+        '    ' CultureInfo ci = CultureInfo.CurrentCulture;
+        '    If Not movieRow.IsDateNull() AndAlso DateTime.TryParse(movieRow.[Date], added) Then
+        '        ' CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
+        '        movieRow.DateAdded = added
+        '        ' iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
+        '        iAge = CInt(now.Subtract(added).TotalDays)
+        '    End If
+        '    movieRow.AgeAdded = iAge
+        '    ' sets integer value
+        '    movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge)
+        '    Dim index As String = movieRow(MyFilms.conf.StrTitle1).ToString()
+        '    movieRow.IndexedTitle = If((index.Length > 0), index.Substring(0, 1).ToUpper(), "")
+        '    movieRow.Persons = (If(movieRow.Actors, " ")) & ", " & (If(movieRow.Producer, " ")) & ", " & (If(movieRow.Director, " ")) & ", " & (If(movieRow.Writer, " "))
+        '    ' Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
+        '    ' if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
+        '    ' Copy CustomFields data ....
+        '    Dim customFields As AntMovieCatalog.CustomFieldsRow = movieRow.GetCustomFieldsRows()(0)
+        '    ' Relations["Movie_CustomFields"]
+        '    For Each dc As DataColumn In commonColumns
+        '        Dim temp As Object
+        '        If dc.ColumnName <> "Movie_Id" AndAlso DBNull.Value <> (InlineAssignHelper(temp, customFields(dc.ColumnName))) Then
+        '            movieRow(dc.ColumnName) = temp
+        '        End If
+        '    Next
+        'Next
+        ''data.EnforceConstraints = true;
+        ''data.Movie.EndLoadData();
+        'LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc PreAcceptChanges ... (" + (watch.ElapsedMilliseconds) & " ms)")
+        'myMovieCatalog.Movie.AcceptChanges()
+        'watch.[Stop]()
+        'LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) & " ms)")
+        ''#End Region
+
+        Return success
+    End Function
 
     Private Sub TextBox2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox2.TextChanged
         '        TextBox2.Text = 1
