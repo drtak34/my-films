@@ -163,7 +163,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntIdentItem.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
-            //AntViewItem.Items.Add("(none)"); // removed, as we do not want to have "none" views defined - they can be disabled instead, as they are dxnamic
+            //AntViewItem.Items.Add("(none)"); // removed, as we do not want to have "none" views defined - they can be disabled instead, as they are handled dynamic
             AntItem1.Items.Add("(none)");
             AntItem2.Items.Add("(none)");
             AntItem3.Items.Add("(none)");
@@ -471,66 +471,66 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             
             if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
             
-            if (AntFilterItem1.Text.Length == 0) AntFilterItem1.Text = "(none)";
-            if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
-            {
-                MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntFilterSign1.Focus();
-                return;
-            }
-            if (AntFilterItem1.Text != "(none)" && AntFilterText1.Text.Length == 0)
-            {
-                MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntFilterText1.Focus();
-                return;
-            }
-            if (AntFilterItem2.Text.Length == 0)
-                AntFilterItem2.Text = "(none)";
-            if (AntFilterItem2.Text != "(none)" && AntFilterSign2.Text.Length == 0)
-            {
-                MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntFilterSign2.Focus();
-                return;
-            }
-            if (AntFilterItem2.Text != "(none)" && AntFilterText2.Text.Length == 0)
-            {
-                MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                AntFilterText2.Focus();
-                return;
-            }
-            if (AntFilterItem1.Text != "(none)" && AntFilterItem2.Text != "(none)")
-            {
-                if (AntFilterComb.Text.Length == 0)
-                {
-                    MessageBox.Show("Must be 'or' or 'and' for filter combination", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    AntFilterComb.Focus();
-                    return;
-                }
-            }
-            if (AntFilterItem1.Text == "DateAdded")
-            {
-                try
-                {
-                    DateTime wdate = Convert.ToDateTime(AntFilterText1.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    AntFilterText1.Focus();
-                }
-            }
-            if (AntFilterItem2.Text == "DateAdded")
-            {
-                try
-                {
-                    DateTime wdate = Convert.ToDateTime(AntFilterText2.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    AntFilterText2.Focus();
-                }
-            }
+            //if (AntFilterItem1.Text.Length == 0) AntFilterItem1.Text = "(none)";
+            //if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    AntFilterSign1.Focus();
+            //    return;
+            //}
+            //if (AntFilterItem1.Text != "(none)" && AntFilterText1.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    AntFilterText1.Focus();
+            //    return;
+            //}
+            //if (AntFilterItem2.Text.Length == 0)
+            //    AntFilterItem2.Text = "(none)";
+            //if (AntFilterItem2.Text != "(none)" && AntFilterSign2.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    AntFilterSign2.Focus();
+            //    return;
+            //}
+            //if (AntFilterItem2.Text != "(none)" && AntFilterText2.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    AntFilterText2.Focus();
+            //    return;
+            //}
+            //if (AntFilterItem1.Text != "(none)" && AntFilterItem2.Text != "(none)")
+            //{
+            //    if (AntFilterComb.Text.Length == 0)
+            //    {
+            //        MessageBox.Show("Must be 'or' or 'and' for filter combination", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        AntFilterComb.Focus();
+            //        return;
+            //    }
+            //}
+            //if (AntFilterItem1.Text == "DateAdded")
+            //{
+            //    try
+            //    {
+            //        DateTime wdate = Convert.ToDateTime(AntFilterText1.Text);
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        AntFilterText1.Focus();
+            //    }
+            //}
+            //if (AntFilterItem2.Text == "DateAdded")
+            //{
+            //    try
+            //    {
+            //        DateTime wdate = Convert.ToDateTime(AntFilterText2.Text);
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        AntFilterText2.Focus();
+            //    }
+            //}
             if (Dwp.Text.Length > 0)
                 if (Dwp.Text != Rpt_Dwp.Text)
                 {
@@ -738,6 +738,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntTitle1", AntTitle1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntTitle2", AntTitle2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntSTitle", AntSTitle.Text);
+            
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem1", AntFilterItem1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign1", AntFilterSign1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterText1", AntFilterText1.Text);
@@ -746,6 +747,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterText2", AntFilterText2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterFreeText", AntFilterFreeText.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntFilterComb", AntFilterComb.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrDfltSelect", StrDfltSelect);
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewTotalCount", MyCustomViews.View.Count);
             int index = 1;
@@ -840,7 +842,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrDfltSelect", StrDfltSelect);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Dwp", crypto.Crypter(Dwp.Text));
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", chkUseOriginalAsTranslatedTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", SearchFileName.Checked);
@@ -1099,18 +1100,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
-        private void AntFilterItem1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        //private void AntFilterItem1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
 
-            if (AntFilterItem1.Text == "(none)")
-                AntFilterText1.Clear();
-        }
+        //    if (AntFilterItem1.Text == "(none)")
+        //        AntFilterText1.Clear();
+        //}
 
-        private void AntFilterItem2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (AntFilterItem2.Text == "(none)")
-                AntFilterText2.Clear();
-        }
+        //private void AntFilterItem2_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (AntFilterItem2.Text == "(none)")
+        //        AntFilterText2.Clear();
+        //}
 
         public void ButQuit_Click(object sender, EventArgs e)
         {
@@ -1179,6 +1180,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", "");
             SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", "");
             SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", "");
+
             AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem1", "");
             AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign1", "#");
             AntFilterText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterText1", "");
@@ -1187,6 +1189,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterText2", "");
             AntFilterFreeText.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterFreeText", "");
             AntFilterComb.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterComb", "and");
+
+            StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "StrDfltSelect", "");
+            textBoxStrDfltSelect.Text = StrDfltSelect;
 
             //AntViewItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewItem1", "");
             //AntViewText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", "");
@@ -1644,7 +1649,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntFilterSign1.ResetText();
             AntFilterSign2.ResetText();
             AntFilterComb.ResetText();
-            //dgViews.Rows.Clear();
             AntViewItem.ResetText();
             AntLabel1.ResetText();
             AntLabel2.ResetText();
@@ -2017,8 +2021,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
             if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
               StrDfltSelect = StrDfltSelect + AntFilterFreeText.Text + " AND ";
-            Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
-            LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text + "'");
+            //Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
+            //LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text + "'");
         }
 
         private string DBitemList(string inputstring, bool isdate)
@@ -5789,6 +5793,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
         }
 
+        private void buttonWikiHelp_Click(object sender, EventArgs e)
+        {
+          System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films");
+        }
+
+        private void btnCustomConfigFilter_Click(object sender, EventArgs e)
+        {
+          FilterEditor filterEditor = new FilterEditor();
+          filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
+          filterEditor.MasterTitle = AntTitle1.Text;
+          filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
+          filterEditor.FilterItem1 = AntFilterItem1.Text;
+          filterEditor.FilterItem2 = AntFilterItem2.Text;
+          filterEditor.FilterSign1 = AntFilterSign1.Text;
+          filterEditor.FilterSign2 = AntFilterSign2.Text;
+          filterEditor.FilterText1 = AntFilterText1.Text;
+          filterEditor.FilterText2 = AntFilterText2.Text;
+          filterEditor.FilterFreeText = AntFilterFreeText.Text;
+          filterEditor.FilterComb = AntFilterComb.Text;
+          filterEditor.ShowDialog(this);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK)
+          {
+            StrDfltSelect  = filterEditor.StrDfltSelect;
+            textBoxStrDfltSelect.Text = filterEditor.StrDfltSelect;
+          }
+          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
       }
 
       public static class BindingSourceExtension

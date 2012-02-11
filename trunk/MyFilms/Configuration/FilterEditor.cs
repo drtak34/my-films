@@ -50,11 +50,65 @@ namespace MyFilmsPlugin.Configuration
       set { extendedFields = value; }
     }
 
+    public string FilterItem1
+    {
+      get { return AntFilterItem1.Text; }
+      set { AntFilterItem1.Text = value; }
+    }
+
+    public string FilterSign1
+    {
+      get { return AntFilterSign1.Text; }
+      set { AntFilterSign1.Text = value; }
+    }
+
+    public string FilterText1
+    {
+      get { return AntFilterText1.Text; }
+      set { AntFilterText1.Text = value; }
+    }
+
+    public string FilterItem2
+    {
+      get { return AntFilterItem2.Text; }
+      set { AntFilterItem2.Text = value; }
+    }
+
+    public string FilterSign2
+    {
+      get { return AntFilterSign2.Text; }
+      set { AntFilterSign2.Text = value; }
+    }
+
+    public string FilterText2
+    {
+      get { return AntFilterText2.Text; }
+      set { AntFilterText2.Text = value; }
+    }
+
+    public string FilterFreeText
+    {
+      get { return AntFilterFreeText.Text; }
+      set { AntFilterFreeText.Text = value; }
+    }
+
+    public string FilterComb
+    {
+      get { return AntFilterComb.Text; }
+      set { AntFilterComb.Text = value; }
+    }
+
     public string ConfigString
     {
       get { return ExpressionPreview.Text; }
       set { ExpressionPreview.Text = value; }
     }
+    public string StrDfltSelect
+    {
+      get { return strDfltSelect; }
+      set { strDfltSelect = value; }
+    }
+    private string strDfltSelect;
 
     private string StrViewFilterSelect;
 
@@ -148,6 +202,7 @@ namespace MyFilmsPlugin.Configuration
             this.StrViewFilterSelect = "(" + this.StrViewFilterSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
       if (!string.IsNullOrEmpty(AntFilterFreeText.Text))
         this.StrViewFilterSelect = this.StrViewFilterSelect + AntFilterFreeText.Text + " AND ";
+      strDfltSelect = StrViewFilterSelect; // this is for config filters, inlcuding the "AND" at the end ...
       if (StrViewFilterSelect.EndsWith(" AND ")) StrViewFilterSelect = StrViewFilterSelect.Substring(0, StrViewFilterSelect.Length - 5);
       ExpressionPreview.Text = this.StrViewFilterSelect; //ExpressionPreview.Text = this.StrViewFilterSelect + masterTitle + " not like ''" + " AND ";
       LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + ExpressionPreview.Text + "'");
@@ -192,29 +247,29 @@ namespace MyFilmsPlugin.Configuration
 
     private void CheckExpression()
     {
+      if (AntFilterItem1.Text.Length == 0) AntFilterItem1.Text = "(none)";
       if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
       {
-        MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterSign1.Focus();
         return;
       }
       if (AntFilterItem1.Text != "(none)" && AntFilterText1.Text.Length == 0)
       {
-        MessageBox.Show("Length of Filter Text Item must be > 0", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterText1.Focus();
         return;
       }
-      if (AntFilterItem2.Text.Length == 0)
-        AntFilterItem2.Text = "(none)";
+      if (AntFilterItem2.Text.Length == 0) AntFilterItem2.Text = "(none)";
       if (AntFilterItem2.Text != "(none)" && AntFilterSign2.Text.Length == 0)
       {
-        MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterSign2.Focus();
         return;
       }
       if (AntFilterItem2.Text != "(none)" && AntFilterText2.Text.Length == 0)
       {
-        MessageBox.Show("Length of Filter Text Item must be > 0", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         AntFilterText2.Focus();
         return;
       }
@@ -222,8 +277,33 @@ namespace MyFilmsPlugin.Configuration
       {
         if (AntFilterComb.Text.Length == 0)
         {
-          MessageBox.Show("Must be 'or' or 'and' for filter combination", "Filter Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+          MessageBox.Show("Must be 'or' or 'and' for filter combination", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
           AntFilterComb.Focus();
+          return;
+        }
+      }
+      if (AntFilterItem1.Text == "DateAdded")
+      {
+        try
+        {
+          DateTime wdate = Convert.ToDateTime(AntFilterText1.Text);
+        }
+        catch
+        {
+          MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+          AntFilterText1.Focus();
+        }
+      }
+      if (AntFilterItem2.Text == "DateAdded")
+      {
+        try
+        {
+          DateTime wdate = Convert.ToDateTime(AntFilterText2.Text);
+        }
+        catch
+        {
+          MessageBox.Show("Your Date has not a valid format; try your local format (ex : DD/MM/YYYY)", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+          AntFilterText2.Focus();
         }
       }
     }
