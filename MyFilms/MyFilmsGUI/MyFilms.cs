@@ -6481,7 +6481,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         }
       }
-      if (selectedView == 1079819) selectedView = "Nenu";
+      if (selectedView == GUILocalizeStrings.Get(1079819)) selectedView = "Menu"; // Views Menu
       switch (selectedView)
       {
         #region Special Views ...

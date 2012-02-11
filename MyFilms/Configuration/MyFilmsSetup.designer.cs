@@ -122,7 +122,6 @@
           this.Config_Menu = new System.Windows.Forms.CheckBox();
           this.label_VersionNumber = new System.Windows.Forms.Label();
           this.ButCopy = new System.Windows.Forms.Button();
-          this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
           this.groupBoxExternal = new System.Windows.Forms.GroupBox();
           this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
@@ -223,27 +222,6 @@
           this.label_DefaultArtistImage = new System.Windows.Forms.Label();
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
-          this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
-          this.lblFilterGrabberScripts = new System.Windows.Forms.Label();
-          this.ItemSearchGrabberScriptsFilter = new System.Windows.Forms.TextBox();
-          this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
-          this.chkGrabber_Always = new System.Windows.Forms.CheckBox();
-          this.btnEditScript = new System.Windows.Forms.Button();
-          this.groupBox6 = new System.Windows.Forms.GroupBox();
-          this.cbGrabberOverrideGetRoles = new System.Windows.Forms.ComboBox();
-          this.label55 = new System.Windows.Forms.Label();
-          this.label51 = new System.Windows.Forms.Label();
-          this.cbGrabberOverrideTitleLimit = new System.Windows.Forms.ComboBox();
-          this.label50 = new System.Windows.Forms.Label();
-          this.label49 = new System.Windows.Forms.Label();
-          this.cbGrabberOverridePersonLimit = new System.Windows.Forms.ComboBox();
-          this.cbGrabberOverrideLanguage = new System.Windows.Forms.ComboBox();
-          this.lblSearchGrabberName = new System.Windows.Forms.Label();
-          this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
-          this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
-          this.btnGrabber = new System.Windows.Forms.Button();
-          this.txtGrabber = new System.Windows.Forms.TextBox();
-          this.label27 = new System.Windows.Forms.Label();
           this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
           this.groupBox_AMCupdaterScheduer = new System.Windows.Forms.GroupBox();
           this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
@@ -288,30 +266,6 @@
           this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.Tab_Config = new System.Windows.Forms.TabPage();
-          this.groupBox_DetailedSupplementaryInformations = new System.Windows.Forms.GroupBox();
-          this.AntLabel5 = new System.Windows.Forms.TextBox();
-          this.AntLabel4 = new System.Windows.Forms.TextBox();
-          this.AntItem5 = new System.Windows.Forms.ComboBox();
-          this.AntItem4 = new System.Windows.Forms.ComboBox();
-          this.AntLabel3 = new System.Windows.Forms.TextBox();
-          this.AntItem3 = new System.Windows.Forms.ComboBox();
-          this.AntItem2 = new System.Windows.Forms.ComboBox();
-          this.AntLabel2 = new System.Windows.Forms.TextBox();
-          this.label7 = new System.Windows.Forms.Label();
-          this.AntItem1 = new System.Windows.Forms.ComboBox();
-          this.label3 = new System.Windows.Forms.Label();
-          this.AntLabel1 = new System.Windows.Forms.TextBox();
-          this.groupBox_AntSelectedEnreg = new System.Windows.Forms.GroupBox();
-          this.AntFreetextFilterItem = new System.Windows.Forms.Label();
-          this.AntFilterFreeText = new System.Windows.Forms.TextBox();
-          this.Selected_Enreg = new System.Windows.Forms.TextBox();
-          this.AntFilterComb = new System.Windows.Forms.ComboBox();
-          this.AntFilterSign2 = new System.Windows.Forms.ComboBox();
-          this.AntFilterSign1 = new System.Windows.Forms.ComboBox();
-          this.AntFilterItem2 = new System.Windows.Forms.ComboBox();
-          this.AntFilterText2 = new System.Windows.Forms.TextBox();
-          this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
-          this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.Tab_Views = new System.Windows.Forms.TabPage();
           this.groupBox_Separators = new System.Windows.Forms.GroupBox();
           this.RoleSeparator5 = new System.Windows.Forms.ComboBox();
@@ -397,20 +351,20 @@
           this.AntStorageTrailer = new System.Windows.Forms.ComboBox();
           this.label35 = new System.Windows.Forms.Label();
           this.Tab_General = new System.Windows.Forms.TabPage();
-          this.groupBoxSetupWizard = new System.Windows.Forms.GroupBox();
-          this.btnFirstTimeSetup = new System.Windows.Forms.Button();
-          this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
-          this.groupBox_Security = new System.Windows.Forms.GroupBox();
-          this.label_Security = new System.Windows.Forms.Label();
-          this.label16 = new System.Windows.Forms.Label();
-          this.label15 = new System.Windows.Forms.Label();
-          this.Rpt_Dwp = new System.Windows.Forms.TextBox();
-          this.Dwp = new System.Windows.Forms.TextBox();
           this.groupBox_PreLaunchingCommand = new System.Windows.Forms.GroupBox();
           this.label39 = new System.Windows.Forms.Label();
           this.label38 = new System.Windows.Forms.Label();
           this.CmdPar = new System.Windows.Forms.ComboBox();
           this.CmdExe = new System.Windows.Forms.TextBox();
+          this.groupBox3 = new System.Windows.Forms.GroupBox();
+          this.btnCustomConfigFilter = new System.Windows.Forms.Button();
+          this.textBoxStrDfltSelect = new System.Windows.Forms.TextBox();
+          this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
+          this.groupBox_Security = new System.Windows.Forms.GroupBox();
+          this.label16 = new System.Windows.Forms.Label();
+          this.label15 = new System.Windows.Forms.Label();
+          this.Rpt_Dwp = new System.Windows.Forms.TextBox();
+          this.Dwp = new System.Windows.Forms.TextBox();
           this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
           this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
           this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
@@ -465,6 +419,29 @@
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.chkSuppressManual = new System.Windows.Forms.CheckBox();
           this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
+          this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
+          this.lblFilterGrabberScripts = new System.Windows.Forms.Label();
+          this.ItemSearchGrabberScriptsFilter = new System.Windows.Forms.TextBox();
+          this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
+          this.chkGrabber_Always = new System.Windows.Forms.CheckBox();
+          this.btnEditScript = new System.Windows.Forms.Button();
+          this.groupBox6 = new System.Windows.Forms.GroupBox();
+          this.cbGrabberOverrideGetRoles = new System.Windows.Forms.ComboBox();
+          this.label55 = new System.Windows.Forms.Label();
+          this.label51 = new System.Windows.Forms.Label();
+          this.cbGrabberOverrideTitleLimit = new System.Windows.Forms.ComboBox();
+          this.label50 = new System.Windows.Forms.Label();
+          this.label49 = new System.Windows.Forms.Label();
+          this.cbGrabberOverridePersonLimit = new System.Windows.Forms.ComboBox();
+          this.cbGrabberOverrideLanguage = new System.Windows.Forms.ComboBox();
+          this.lblSearchGrabberName = new System.Windows.Forms.Label();
+          this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
+          this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
+          this.btnGrabber = new System.Windows.Forms.Button();
+          this.txtGrabber = new System.Windows.Forms.TextBox();
+          this.label27 = new System.Windows.Forms.Label();
+          this.btnFirstTimeSetup = new System.Windows.Forms.Button();
+          this.buttonWikiHelp = new System.Windows.Forms.Button();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -570,6 +547,29 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.groupBox_AntSelectedEnreg = new System.Windows.Forms.GroupBox();
+          this.AntFreetextFilterItem = new System.Windows.Forms.Label();
+          this.AntFilterFreeText = new System.Windows.Forms.TextBox();
+          this.AntFilterComb = new System.Windows.Forms.ComboBox();
+          this.AntFilterSign2 = new System.Windows.Forms.ComboBox();
+          this.AntFilterSign1 = new System.Windows.Forms.ComboBox();
+          this.AntFilterItem2 = new System.Windows.Forms.ComboBox();
+          this.AntFilterText2 = new System.Windows.Forms.TextBox();
+          this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
+          this.AntFilterText1 = new System.Windows.Forms.TextBox();
+          this.groupBox_DetailedSupplementaryInformations = new System.Windows.Forms.GroupBox();
+          this.AntLabel5 = new System.Windows.Forms.TextBox();
+          this.AntLabel4 = new System.Windows.Forms.TextBox();
+          this.AntItem5 = new System.Windows.Forms.ComboBox();
+          this.AntItem4 = new System.Windows.Forms.ComboBox();
+          this.AntLabel3 = new System.Windows.Forms.TextBox();
+          this.AntItem3 = new System.Windows.Forms.ComboBox();
+          this.AntItem2 = new System.Windows.Forms.ComboBox();
+          this.AntLabel2 = new System.Windows.Forms.TextBox();
+          this.label7 = new System.Windows.Forms.Label();
+          this.AntItem1 = new System.Windows.Forms.ComboBox();
+          this.label3 = new System.Windows.Forms.Label();
+          this.AntLabel1 = new System.Windows.Forms.TextBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -597,8 +597,6 @@
           this.groupBox22.SuspendLayout();
           this.groupBox1.SuspendLayout();
           this.groupBox_ArtistImages.SuspendLayout();
-          this.groupBox_GrabberOptions.SuspendLayout();
-          this.groupBox6.SuspendLayout();
           this.groupBox_AMCupdater.SuspendLayout();
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
@@ -607,8 +605,6 @@
           this.gpspfield.SuspendLayout();
           this.groupBox2.SuspendLayout();
           this.Tab_Config.SuspendLayout();
-          this.groupBox_DetailedSupplementaryInformations.SuspendLayout();
-          this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.Tab_Views.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -626,9 +622,9 @@
           this.Tab_Trailer.SuspendLayout();
           this.groupBox24.SuspendLayout();
           this.Tab_General.SuspendLayout();
-          this.groupBoxSetupWizard.SuspendLayout();
-          this.groupBox_Security.SuspendLayout();
           this.groupBox_PreLaunchingCommand.SuspendLayout();
+          this.groupBox3.SuspendLayout();
+          this.groupBox_Security.SuspendLayout();
           this.groupBox_PlayMovieInfos.SuspendLayout();
           this.groupBoxMoviePathInfos.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
@@ -636,6 +632,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.groupBox_DVDprofiler.SuspendLayout();
           this.groupBox13.SuspendLayout();
+          this.groupBox_GrabberOptions.SuspendLayout();
+          this.groupBox6.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
@@ -654,6 +652,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          this.groupBox_AntSelectedEnreg.SuspendLayout();
+          this.groupBox_DetailedSupplementaryInformations.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -767,7 +767,7 @@
           // label68
           // 
           label68.AutoSize = true;
-          label68.Location = new System.Drawing.Point(13, 18);
+          label68.Location = new System.Drawing.Point(13, 16);
           label68.Name = "label68";
           label68.Size = new System.Drawing.Size(124, 13);
           label68.TabIndex = 23;
@@ -776,7 +776,7 @@
           // label70
           // 
           label70.AutoSize = true;
-          label70.Location = new System.Drawing.Point(225, 18);
+          label70.Location = new System.Drawing.Point(225, 16);
           label70.Name = "label70";
           label70.Size = new System.Drawing.Size(39, 13);
           label70.TabIndex = 27;
@@ -785,7 +785,7 @@
           // label69
           // 
           label69.AutoSize = true;
-          label69.Location = new System.Drawing.Point(148, 18);
+          label69.Location = new System.Drawing.Point(148, 16);
           label69.Name = "label69";
           label69.Size = new System.Drawing.Size(26, 13);
           label69.TabIndex = 25;
@@ -795,7 +795,7 @@
           // label66
           // 
           label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(279, 48);
+          label66.Location = new System.Drawing.Point(279, 50);
           label66.Name = "label66";
           label66.Size = new System.Drawing.Size(37, 13);
           label66.TabIndex = 7;
@@ -805,7 +805,7 @@
           // label65
           // 
           label65.AutoSize = true;
-          label65.Location = new System.Drawing.Point(149, 48);
+          label65.Location = new System.Drawing.Point(149, 50);
           label65.Name = "label65";
           label65.Size = new System.Drawing.Size(47, 13);
           label65.TabIndex = 5;
@@ -912,18 +912,6 @@
                   "lters, \r\nbut based on same movie DB.");
           this.ButCopy.UseVisualStyleBackColor = true;
           this.ButCopy.Click += new System.EventHandler(this.ButCopy_Click);
-          // 
-          // linkLabelMyFilmsWiki
-          // 
-          this.linkLabelMyFilmsWiki.AutoSize = true;
-          this.linkLabelMyFilmsWiki.Location = new System.Drawing.Point(216, 475);
-          this.linkLabelMyFilmsWiki.Name = "linkLabelMyFilmsWiki";
-          this.linkLabelMyFilmsWiki.Size = new System.Drawing.Size(134, 13);
-          this.linkLabelMyFilmsWiki.TabIndex = 78;
-          this.linkLabelMyFilmsWiki.TabStop = true;
-          this.linkLabelMyFilmsWiki.Text = "MyFilms Wiki Online Pages";
-          this.ToolTip1.SetToolTip(this.linkLabelMyFilmsWiki, "Opens the MyFilms Wiki in your browser...");
-          this.linkLabelMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMyFilmsWiki_LinkClicked);
           // 
           // Tab_Trakt
           // 
@@ -2000,312 +1988,13 @@
           this.DefaultCoverArtist.TabIndex = 92;
           this.ToolTip1.SetToolTip(this.DefaultCoverArtist, resources.GetString("DefaultCoverArtist.ToolTip"));
           // 
-          // groupBox_GrabberOptions
-          // 
-          this.groupBox_GrabberOptions.Controls.Add(this.lblFilterGrabberScripts);
-          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberScriptsFilter);
-          this.groupBox_GrabberOptions.Controls.Add(this.txtGrabberDisplay);
-          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_Always);
-          this.groupBox_GrabberOptions.Controls.Add(this.btnEditScript);
-          this.groupBox_GrabberOptions.Controls.Add(this.groupBox6);
-          this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
-          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
-          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
-          this.groupBox_GrabberOptions.Controls.Add(this.btnGrabber);
-          this.groupBox_GrabberOptions.Controls.Add(this.txtGrabber);
-          this.groupBox_GrabberOptions.Controls.Add(this.label27);
-          this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 9);
-          this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
-          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 133);
-          this.groupBox_GrabberOptions.TabIndex = 1;
-          this.groupBox_GrabberOptions.TabStop = false;
-          this.groupBox_GrabberOptions.Text = "MyFilms Internal Internet Grabbing";
-          this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
-          // 
-          // lblFilterGrabberScripts
-          // 
-          this.lblFilterGrabberScripts.AutoSize = true;
-          this.lblFilterGrabberScripts.Location = new System.Drawing.Point(16, 51);
-          this.lblFilterGrabberScripts.Name = "lblFilterGrabberScripts";
-          this.lblFilterGrabberScripts.Size = new System.Drawing.Size(105, 13);
-          this.lblFilterGrabberScripts.TabIndex = 68;
-          this.lblFilterGrabberScripts.Text = "Filter Grabber Scripts";
-          // 
-          // ItemSearchGrabberScriptsFilter
-          // 
-          this.ItemSearchGrabberScriptsFilter.Location = new System.Drawing.Point(145, 48);
-          this.ItemSearchGrabberScriptsFilter.Name = "ItemSearchGrabberScriptsFilter";
-          this.ItemSearchGrabberScriptsFilter.Size = new System.Drawing.Size(138, 20);
-          this.ItemSearchGrabberScriptsFilter.TabIndex = 72;
-          this.ToolTip1.SetToolTip(this.ItemSearchGrabberScriptsFilter, resources.GetString("ItemSearchGrabberScriptsFilter.ToolTip"));
-          // 
-          // txtGrabberDisplay
-          // 
-          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 22);
-          this.txtGrabberDisplay.Name = "txtGrabberDisplay";
-          this.txtGrabberDisplay.ReadOnly = true;
-          this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
-          this.txtGrabberDisplay.TabIndex = 67;
-          this.ToolTip1.SetToolTip(this.txtGrabberDisplay, resources.GetString("txtGrabberDisplay.ToolTip"));
-          // 
-          // chkGrabber_Always
-          // 
-          this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(19, 74);
-          this.chkGrabber_Always.Name = "chkGrabber_Always";
-          this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
-          this.chkGrabber_Always.TabIndex = 56;
-          this.chkGrabber_Always.Text = "try to find best match automatically";
-          this.ToolTip1.SetToolTip(this.chkGrabber_Always, resources.GetString("chkGrabber_Always.ToolTip"));
-          this.chkGrabber_Always.UseVisualStyleBackColor = true;
-          // 
-          // btnEditScript
-          // 
-          this.btnEditScript.Location = new System.Drawing.Point(289, 22);
-          this.btnEditScript.Name = "btnEditScript";
-          this.btnEditScript.Size = new System.Drawing.Size(95, 20);
-          this.btnEditScript.TabIndex = 66;
-          this.btnEditScript.Text = "Grabber Options";
-          this.ToolTip1.SetToolTip(this.btnEditScript, resources.GetString("btnEditScript.ToolTip"));
-          this.btnEditScript.UseVisualStyleBackColor = true;
-          this.btnEditScript.Click += new System.EventHandler(this.btnEditScript_Click);
-          // 
-          // groupBox6
-          // 
-          this.groupBox6.Controls.Add(this.cbGrabberOverrideGetRoles);
-          this.groupBox6.Controls.Add(this.label55);
-          this.groupBox6.Controls.Add(this.label51);
-          this.groupBox6.Controls.Add(this.cbGrabberOverrideTitleLimit);
-          this.groupBox6.Controls.Add(this.label50);
-          this.groupBox6.Controls.Add(this.label49);
-          this.groupBox6.Controls.Add(this.cbGrabberOverridePersonLimit);
-          this.groupBox6.Controls.Add(this.cbGrabberOverrideLanguage);
-          this.groupBox6.Location = new System.Drawing.Point(398, 15);
-          this.groupBox6.Name = "groupBox6";
-          this.groupBox6.Size = new System.Drawing.Size(330, 112);
-          this.groupBox6.TabIndex = 65;
-          this.groupBox6.TabStop = false;
-          this.groupBox6.Text = "MyFilms Grabber Override Options ...";
-          this.ToolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
-          // 
-          // cbGrabberOverrideGetRoles
-          // 
-          this.cbGrabberOverrideGetRoles.FormattingEnabled = true;
-          this.cbGrabberOverrideGetRoles.Items.AddRange(new object[] {
-            "true",
-            "false"});
-          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 21);
-          this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
-          this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverrideGetRoles.TabIndex = 71;
-          this.ToolTip1.SetToolTip(this.cbGrabberOverrideGetRoles, "If checked, add Roles to actor infos.\r\nDepends on the grabber script supporting t" +
-                  "hat option.");
-          // 
-          // label55
-          // 
-          this.label55.AutoSize = true;
-          this.label55.Location = new System.Drawing.Point(191, 27);
-          this.label55.Name = "label55";
-          this.label55.Size = new System.Drawing.Size(82, 13);
-          this.label55.TabIndex = 70;
-          this.label55.Text = "Get Actor Roles";
-          // 
-          // label51
-          // 
-          this.label51.AutoSize = true;
-          this.label51.Location = new System.Drawing.Point(191, 79);
-          this.label51.Name = "label51";
-          this.label51.Size = new System.Drawing.Size(66, 13);
-          this.label51.TabIndex = 68;
-          this.label51.Text = "Limit # Titles";
-          // 
-          // cbGrabberOverrideTitleLimit
-          // 
-          this.cbGrabberOverrideTitleLimit.FormattingEnabled = true;
-          this.cbGrabberOverrideTitleLimit.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "10",
-            "15",
-            "20",
-            "999"});
-          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 76);
-          this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
-          this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverrideTitleLimit.TabIndex = 67;
-          this.ToolTip1.SetToolTip(this.cbGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed.\r\nYou may also set a preferred lan" +
-                  "guage/country \r\nfor grabbing in the override options.");
-          // 
-          // label50
-          // 
-          this.label50.AutoSize = true;
-          this.label50.Location = new System.Drawing.Point(12, 28);
-          this.label50.Name = "label50";
-          this.label50.Size = new System.Drawing.Size(161, 13);
-          this.label50.TabIndex = 66;
-          this.label50.Text = "Preferred Languages / Countries";
-          // 
-          // label49
-          // 
-          this.label49.AutoSize = true;
-          this.label49.Location = new System.Drawing.Point(191, 52);
-          this.label49.Name = "label49";
-          this.label49.Size = new System.Drawing.Size(79, 13);
-          this.label49.TabIndex = 65;
-          this.label49.Text = "Limit # Persons";
-          // 
-          // cbGrabberOverridePersonLimit
-          // 
-          this.cbGrabberOverridePersonLimit.FormattingEnabled = true;
-          this.cbGrabberOverridePersonLimit.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "10",
-            "15",
-            "20",
-            "999"});
-          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 48);
-          this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
-          this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverridePersonLimit.TabIndex = 63;
-          this.ToolTip1.SetToolTip(this.cbGrabberOverridePersonLimit, "Limits the number of person names grabbed.\r\nThis settings applies to all fields t" +
-                  "hat grab person names, \r\nlike actors, producers, writers, directors.");
-          // 
-          // cbGrabberOverrideLanguage
-          // 
-          this.cbGrabberOverrideLanguage.FormattingEnabled = true;
-          this.cbGrabberOverrideLanguage.Items.AddRange(new object[] {
-            "Argentina",
-            "Australia",
-            "Austria",
-            "Belgium",
-            "Brazil",
-            "Canada",
-            "Chile",
-            "Croatia",
-            "Czech Republic",
-            "Denmark",
-            "Estonia",
-            "Finland",
-            "France",
-            "Germany",
-            "Greece",
-            "Hong Kong",
-            "Hungary",
-            "Iceland",
-            "India",
-            "Ireland",
-            "Israel",
-            "Italy",
-            "Japan",
-            "Malaysia",
-            "Mexico",
-            "Netherlands",
-            "New Zealand",
-            "Norway",
-            "Peru",
-            "Philippines",
-            "Poland",
-            "Portugal",
-            "Romania",
-            "Russia",
-            "Singapore",
-            "Slovakia",
-            "Slovenia",
-            "South Africa",
-            "South Korea",
-            "Spain",
-            "Sweden",
-            "Switzerland",
-            "Turkey",
-            "UK",
-            "Uruguay",
-            "USA"});
-          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 49);
-          this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
-          this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
-          this.cbGrabberOverrideLanguage.Sorted = true;
-          this.cbGrabberOverrideLanguage.TabIndex = 64;
-          this.ToolTip1.SetToolTip(this.cbGrabberOverrideLanguage, resources.GetString("cbGrabberOverrideLanguage.ToolTip"));
-          // 
-          // lblSearchGrabberName
-          // 
-          this.lblSearchGrabberName.AutoSize = true;
-          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 105);
-          this.lblSearchGrabberName.Name = "lblSearchGrabberName";
-          this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
-          this.lblSearchGrabberName.TabIndex = 62;
-          this.lblSearchGrabberName.Text = "Title for Internet Updates";
-          // 
-          // chkGrabber_ChooseScript
-          // 
-          this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(226, 74);
-          this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
-          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
-          this.chkGrabber_ChooseScript.TabIndex = 60;
-          this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
-          this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
-          this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
-          // 
-          // ItemSearchGrabberName
-          // 
-          this.ItemSearchGrabberName.FormattingEnabled = true;
-          this.ItemSearchGrabberName.Items.AddRange(new object[] {
-            "OriginalTitle",
-            "TranslatedTitle",
-            "FormattedTitle"});
-          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 102);
-          this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
-          this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
-          this.ItemSearchGrabberName.TabIndex = 61;
-          this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, "The title that you want to use for internet data searches.\r\nMyFilms will offer yo" +
-                  "u the other titles for a \"re\"search too.");
-          // 
-          // btnGrabber
-          // 
-          this.btnGrabber.Location = new System.Drawing.Point(251, 22);
-          this.btnGrabber.Name = "btnGrabber";
-          this.btnGrabber.Size = new System.Drawing.Size(32, 20);
-          this.btnGrabber.TabIndex = 55;
-          this.btnGrabber.Text = "...";
-          this.ToolTip1.SetToolTip(this.btnGrabber, "Browse and choose the script you want MyFilms \r\nto use as default.");
-          this.btnGrabber.UseVisualStyleBackColor = true;
-          this.btnGrabber.Click += new System.EventHandler(this.btnGrabber_Click);
-          // 
-          // txtGrabber
-          // 
-          this.txtGrabber.Location = new System.Drawing.Point(145, 22);
-          this.txtGrabber.Name = "txtGrabber";
-          this.txtGrabber.Size = new System.Drawing.Size(68, 20);
-          this.txtGrabber.TabIndex = 54;
-          this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
-          this.txtGrabber.Visible = false;
-          this.txtGrabber.TextChanged += new System.EventHandler(this.txtGrabber_TextChanged);
-          // 
-          // label27
-          // 
-          this.label27.AutoSize = true;
-          this.label27.Location = new System.Drawing.Point(16, 25);
-          this.label27.Name = "label27";
-          this.label27.Size = new System.Drawing.Size(112, 13);
-          this.label27.TabIndex = 53;
-          this.label27.Text = "Default Grabber Script";
-          // 
           // groupBox_AMCupdater
           // 
           this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
-          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 148);
+          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 24);
           this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
           this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 200);
           this.groupBox_AMCupdater.TabIndex = 2;
@@ -2514,10 +2203,9 @@
           // 
           this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
           this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
-          this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
-          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(378, 31);
+          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(354, 12);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(335, 228);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 100);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
           this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions ...";
@@ -2530,16 +2218,16 @@
           this.gpsuppress.Controls.Add(this.rbsuppress3);
           this.gpsuppress.Controls.Add(this.rbsuppress1);
           this.gpsuppress.Enabled = false;
-          this.gpsuppress.Location = new System.Drawing.Point(15, 35);
+          this.gpsuppress.Location = new System.Drawing.Point(8, 40);
           this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(294, 93);
+          this.gpsuppress.Size = new System.Drawing.Size(368, 50);
           this.gpsuppress.TabIndex = 2;
           this.gpsuppress.TabStop = false;
           // 
           // rbsuppress2
           // 
           this.rbsuppress2.AutoSize = true;
-          this.rbsuppress2.Location = new System.Drawing.Point(18, 30);
+          this.rbsuppress2.Location = new System.Drawing.Point(175, 10);
           this.rbsuppress2.Name = "rbsuppress2";
           this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
           this.rbsuppress2.TabIndex = 5;
@@ -2550,31 +2238,31 @@
           // rbsuppress4
           // 
           this.rbsuppress4.AutoSize = true;
-          this.rbsuppress4.Location = new System.Drawing.Point(18, 72);
+          this.rbsuppress4.Location = new System.Drawing.Point(175, 29);
           this.rbsuppress4.Name = "rbsuppress4";
-          this.rbsuppress4.Size = new System.Drawing.Size(201, 17);
+          this.rbsuppress4.Size = new System.Drawing.Size(186, 17);
           this.rbsuppress4.TabIndex = 4;
           this.rbsuppress4.TabStop = true;
-          this.rbsuppress4.Text = "Update db entry and delete movie file";
+          this.rbsuppress4.Text = "Update db entry - delete movie file";
           this.rbsuppress4.UseVisualStyleBackColor = true;
           this.rbsuppress4.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
           // 
           // rbsuppress3
           // 
           this.rbsuppress3.AutoSize = true;
-          this.rbsuppress3.Location = new System.Drawing.Point(18, 51);
+          this.rbsuppress3.Location = new System.Drawing.Point(14, 28);
           this.rbsuppress3.Name = "rbsuppress3";
-          this.rbsuppress3.Size = new System.Drawing.Size(196, 17);
+          this.rbsuppress3.Size = new System.Drawing.Size(155, 17);
           this.rbsuppress3.TabIndex = 2;
           this.rbsuppress3.TabStop = true;
-          this.rbsuppress3.Text = "Update db entry and keep movie file";
+          this.rbsuppress3.Text = "Update db - keep movie file";
           this.rbsuppress3.UseVisualStyleBackColor = true;
           this.rbsuppress3.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
           // 
           // rbsuppress1
           // 
           this.rbsuppress1.AutoSize = true;
-          this.rbsuppress1.Location = new System.Drawing.Point(18, 9);
+          this.rbsuppress1.Location = new System.Drawing.Point(14, 9);
           this.rbsuppress1.Name = "rbsuppress1";
           this.rbsuppress1.Size = new System.Drawing.Size(119, 17);
           this.rbsuppress1.TabIndex = 1;
@@ -2603,9 +2291,9 @@
           this.gpspfield.Controls.Add(this.cbfdupdate);
           this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(15, 134);
+          this.gpspfield.Location = new System.Drawing.Point(354, 118);
           this.gpspfield.Name = "gpspfield";
-          this.gpspfield.Size = new System.Drawing.Size(294, 87);
+          this.gpspfield.Size = new System.Drawing.Size(387, 87);
           this.gpspfield.TabIndex = 18;
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
@@ -2672,9 +2360,9 @@
           this.groupBox2.Controls.Add(this.cbWatched);
           this.groupBox2.Controls.Add(this.chkEnhancedWatchedStatusHandling);
           this.groupBox2.Controls.Add(this.CheckWatched);
-          this.groupBox2.Location = new System.Drawing.Point(13, 12);
+          this.groupBox2.Location = new System.Drawing.Point(6, 12);
           this.groupBox2.Name = "groupBox2";
-          this.groupBox2.Size = new System.Drawing.Size(354, 143);
+          this.groupBox2.Size = new System.Drawing.Size(338, 143);
           this.groupBox2.TabIndex = 72;
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Watched-Status Handling";
@@ -2682,7 +2370,7 @@
           // 
           // btnWatchedImport
           // 
-          this.btnWatchedImport.Location = new System.Drawing.Point(273, 33);
+          this.btnWatchedImport.Location = new System.Drawing.Point(255, 33);
           this.btnWatchedImport.Name = "btnWatchedImport";
           this.btnWatchedImport.Size = new System.Drawing.Size(75, 21);
           this.btnWatchedImport.TabIndex = 86;
@@ -2693,7 +2381,7 @@
           // 
           // btnWatchedExport
           // 
-          this.btnWatchedExport.Location = new System.Drawing.Point(273, 11);
+          this.btnWatchedExport.Location = new System.Drawing.Point(255, 11);
           this.btnWatchedExport.Name = "btnWatchedExport";
           this.btnWatchedExport.Size = new System.Drawing.Size(75, 21);
           this.btnWatchedExport.TabIndex = 85;
@@ -2705,7 +2393,7 @@
           // lblUnwatchedItemsValue
           // 
           this.lblUnwatchedItemsValue.AutoSize = true;
-          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(183, 57);
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(165, 57);
           this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
           this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(165, 13);
           this.lblUnwatchedItemsValue.TabIndex = 84;
@@ -2713,7 +2401,7 @@
           // 
           // textBoxGlobalUnwatchedOnlyValue
           // 
-          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(186, 75);
+          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(168, 75);
           this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
           this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(162, 20);
           this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 83;
@@ -2744,7 +2432,7 @@
           // UserProfileName
           // 
           this.UserProfileName.Enabled = false;
-          this.UserProfileName.Location = new System.Drawing.Point(186, 117);
+          this.UserProfileName.Location = new System.Drawing.Point(168, 117);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);
           this.UserProfileName.TabIndex = 71;
@@ -2798,275 +2486,13 @@
           // 
           this.Tab_Config.AutoScroll = true;
           this.Tab_Config.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
-          this.Tab_Config.Controls.Add(this.groupBox_AntSelectedEnreg);
           this.Tab_Config.Location = new System.Drawing.Point(4, 22);
           this.Tab_Config.Name = "Tab_Config";
           this.Tab_Config.Size = new System.Drawing.Size(747, 354);
           this.Tab_Config.TabIndex = 9;
-          this.Tab_Config.Text = "Config";
+          this.Tab_Config.Text = "Display";
           this.ToolTip1.SetToolTip(this.Tab_Config, "Setup for user defined searches \r\nand user defined sort items");
           this.Tab_Config.UseVisualStyleBackColor = true;
-          // 
-          // groupBox_DetailedSupplementaryInformations
-          // 
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel5);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel4);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem5);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem4);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem2);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel2);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label7);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
-          this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(426, 28);
-          this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
-          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(273, 169);
-          this.groupBox_DetailedSupplementaryInformations.TabIndex = 39;
-          this.groupBox_DetailedSupplementaryInformations.TabStop = false;
-          this.groupBox_DetailedSupplementaryInformations.Text = "Custom Display Items";
-          this.ToolTip1.SetToolTip(this.groupBox_DetailedSupplementaryInformations, resources.GetString("groupBox_DetailedSupplementaryInformations.ToolTip"));
-          // 
-          // AntLabel5
-          // 
-          this.AntLabel5.Location = new System.Drawing.Point(127, 137);
-          this.AntLabel5.Name = "AntLabel5";
-          this.AntLabel5.Size = new System.Drawing.Size(124, 20);
-          this.AntLabel5.TabIndex = 35;
-          // 
-          // AntLabel4
-          // 
-          this.AntLabel4.Location = new System.Drawing.Point(127, 111);
-          this.AntLabel4.Name = "AntLabel4";
-          this.AntLabel4.Size = new System.Drawing.Size(124, 20);
-          this.AntLabel4.TabIndex = 34;
-          // 
-          // AntItem5
-          // 
-          this.AntItem5.FormattingEnabled = true;
-          this.AntItem5.Location = new System.Drawing.Point(14, 136);
-          this.AntItem5.Name = "AntItem5";
-          this.AntItem5.Size = new System.Drawing.Size(94, 21);
-          this.AntItem5.Sorted = true;
-          this.AntItem5.TabIndex = 33;
-          // 
-          // AntItem4
-          // 
-          this.AntItem4.FormattingEnabled = true;
-          this.AntItem4.Location = new System.Drawing.Point(14, 111);
-          this.AntItem4.Name = "AntItem4";
-          this.AntItem4.Size = new System.Drawing.Size(94, 21);
-          this.AntItem4.Sorted = true;
-          this.AntItem4.TabIndex = 32;
-          // 
-          // AntLabel3
-          // 
-          this.AntLabel3.Location = new System.Drawing.Point(127, 86);
-          this.AntLabel3.Name = "AntLabel3";
-          this.AntLabel3.Size = new System.Drawing.Size(124, 20);
-          this.AntLabel3.TabIndex = 30;
-          // 
-          // AntItem3
-          // 
-          this.AntItem3.FormattingEnabled = true;
-          this.AntItem3.Location = new System.Drawing.Point(14, 86);
-          this.AntItem3.Name = "AntItem3";
-          this.AntItem3.Size = new System.Drawing.Size(94, 21);
-          this.AntItem3.Sorted = true;
-          this.AntItem3.TabIndex = 29;
-          // 
-          // AntItem2
-          // 
-          this.AntItem2.FormattingEnabled = true;
-          this.AntItem2.Location = new System.Drawing.Point(14, 61);
-          this.AntItem2.Name = "AntItem2";
-          this.AntItem2.Size = new System.Drawing.Size(94, 21);
-          this.AntItem2.Sorted = true;
-          this.AntItem2.TabIndex = 27;
-          // 
-          // AntLabel2
-          // 
-          this.AntLabel2.Location = new System.Drawing.Point(127, 61);
-          this.AntLabel2.Name = "AntLabel2";
-          this.AntLabel2.Size = new System.Drawing.Size(124, 20);
-          this.AntLabel2.TabIndex = 28;
-          // 
-          // label7
-          // 
-          this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(12, 19);
-          this.label7.Name = "label7";
-          this.label7.Size = new System.Drawing.Size(94, 13);
-          this.label7.TabIndex = 22;
-          this.label7.Text = "DB Item to Display";
-          // 
-          // AntItem1
-          // 
-          this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-          this.AntItem1.FormattingEnabled = true;
-          this.AntItem1.Location = new System.Drawing.Point(14, 36);
-          this.AntItem1.Name = "AntItem1";
-          this.AntItem1.Size = new System.Drawing.Size(94, 21);
-          this.AntItem1.Sorted = true;
-          this.AntItem1.TabIndex = 25;
-          // 
-          // label3
-          // 
-          this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(127, 19);
-          this.label3.Name = "label3";
-          this.label3.Size = new System.Drawing.Size(33, 13);
-          this.label3.TabIndex = 21;
-          this.label3.Text = "Label";
-          // 
-          // AntLabel1
-          // 
-          this.AntLabel1.Location = new System.Drawing.Point(127, 36);
-          this.AntLabel1.Name = "AntLabel1";
-          this.AntLabel1.Size = new System.Drawing.Size(124, 20);
-          this.AntLabel1.TabIndex = 26;
-          // 
-          // groupBox_AntSelectedEnreg
-          // 
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFreetextFilterItem);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterFreeText);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.Selected_Enreg);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterComb);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterSign2);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterSign1);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterItem2);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText2);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterItem1);
-          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText1);
-          this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(29, 28);
-          this.groupBox_AntSelectedEnreg.Name = "groupBox_AntSelectedEnreg";
-          this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 169);
-          this.groupBox_AntSelectedEnreg.TabIndex = 38;
-          this.groupBox_AntSelectedEnreg.TabStop = false;
-          this.groupBox_AntSelectedEnreg.Text = "Custom Config Filters";
-          this.ToolTip1.SetToolTip(this.groupBox_AntSelectedEnreg, resources.GetString("groupBox_AntSelectedEnreg.ToolTip"));
-          this.groupBox_AntSelectedEnreg.Leave += new System.EventHandler(this.Selected_Enreg_Changed);
-          // 
-          // AntFreetextFilterItem
-          // 
-          this.AntFreetextFilterItem.AutoSize = true;
-          this.AntFreetextFilterItem.Location = new System.Drawing.Point(4, 76);
-          this.AntFreetextFilterItem.Name = "AntFreetextFilterItem";
-          this.AntFreetextFilterItem.Size = new System.Drawing.Size(50, 13);
-          this.AntFreetextFilterItem.TabIndex = 30;
-          this.AntFreetextFilterItem.Text = "FreeFilter";
-          // 
-          // AntFilterFreeText
-          // 
-          this.AntFilterFreeText.Location = new System.Drawing.Point(55, 73);
-          this.AntFilterFreeText.Name = "AntFilterFreeText";
-          this.AntFilterFreeText.Size = new System.Drawing.Size(303, 20);
-          this.AntFilterFreeText.TabIndex = 29;
-          this.ToolTip1.SetToolTip(this.AntFilterFreeText, "This field allows you to define freetext conditions for your DB restrictions.\r\nIt" +
-                  " could be used e.g. to restrict the config to certain actors:\r\n(Actors like \'*Wi" +
-                  "llis*\' OR Actors like \'*Celentano*\')");
-          // 
-          // Selected_Enreg
-          // 
-          this.Selected_Enreg.BackColor = System.Drawing.SystemColors.ButtonFace;
-          this.Selected_Enreg.BorderStyle = System.Windows.Forms.BorderStyle.None;
-          this.Selected_Enreg.Enabled = false;
-          this.Selected_Enreg.Location = new System.Drawing.Point(11, 98);
-          this.Selected_Enreg.Multiline = true;
-          this.Selected_Enreg.Name = "Selected_Enreg";
-          this.Selected_Enreg.ReadOnly = true;
-          this.Selected_Enreg.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-          this.Selected_Enreg.Size = new System.Drawing.Size(347, 54);
-          this.Selected_Enreg.TabIndex = 28;
-          this.Selected_Enreg.TabStop = false;
-          // 
-          // AntFilterComb
-          // 
-          this.AntFilterComb.DisplayMember = "or";
-          this.AntFilterComb.FormattingEnabled = true;
-          this.AntFilterComb.ItemHeight = 13;
-          this.AntFilterComb.Items.AddRange(new object[] {
-            "or",
-            "and"});
-          this.AntFilterComb.Location = new System.Drawing.Point(6, 34);
-          this.AntFilterComb.Name = "AntFilterComb";
-          this.AntFilterComb.Size = new System.Drawing.Size(43, 21);
-          this.AntFilterComb.TabIndex = 18;
-          // 
-          // AntFilterSign2
-          // 
-          this.AntFilterSign2.DisplayMember = "#";
-          this.AntFilterSign2.FormattingEnabled = true;
-          this.AntFilterSign2.Items.AddRange(new object[] {
-            "=",
-            "#",
-            ">",
-            "<",
-            "like",
-            "not like",
-            "in",
-            "not in",
-            "like in"});
-          this.AntFilterSign2.Location = new System.Drawing.Point(176, 46);
-          this.AntFilterSign2.Name = "AntFilterSign2";
-          this.AntFilterSign2.Size = new System.Drawing.Size(60, 21);
-          this.AntFilterSign2.TabIndex = 23;
-          // 
-          // AntFilterSign1
-          // 
-          this.AntFilterSign1.DisplayMember = "#";
-          this.AntFilterSign1.FormattingEnabled = true;
-          this.AntFilterSign1.Items.AddRange(new object[] {
-            "=",
-            "#",
-            ">",
-            "<",
-            "like",
-            "not like",
-            "in",
-            "not in",
-            "like in"});
-          this.AntFilterSign1.Location = new System.Drawing.Point(176, 19);
-          this.AntFilterSign1.Name = "AntFilterSign1";
-          this.AntFilterSign1.Size = new System.Drawing.Size(60, 21);
-          this.AntFilterSign1.TabIndex = 20;
-          this.ToolTip1.SetToolTip(this.AntFilterSign1, resources.GetString("AntFilterSign1.ToolTip"));
-          // 
-          // AntFilterItem2
-          // 
-          this.AntFilterItem2.FormattingEnabled = true;
-          this.AntFilterItem2.Location = new System.Drawing.Point(55, 46);
-          this.AntFilterItem2.Name = "AntFilterItem2";
-          this.AntFilterItem2.Size = new System.Drawing.Size(115, 21);
-          this.AntFilterItem2.Sorted = true;
-          this.AntFilterItem2.TabIndex = 22;
-          this.AntFilterItem2.SelectedIndexChanged += new System.EventHandler(this.AntFilterItem2_SelectedIndexChanged);
-          // 
-          // AntFilterText2
-          // 
-          this.AntFilterText2.Location = new System.Drawing.Point(242, 46);
-          this.AntFilterText2.Name = "AntFilterText2";
-          this.AntFilterText2.Size = new System.Drawing.Size(116, 20);
-          this.AntFilterText2.TabIndex = 24;
-          // 
-          // AntFilterItem1
-          // 
-          this.AntFilterItem1.FormattingEnabled = true;
-          this.AntFilterItem1.Location = new System.Drawing.Point(55, 19);
-          this.AntFilterItem1.Name = "AntFilterItem1";
-          this.AntFilterItem1.Size = new System.Drawing.Size(115, 21);
-          this.AntFilterItem1.Sorted = true;
-          this.AntFilterItem1.TabIndex = 19;
-          this.AntFilterItem1.SelectedIndexChanged += new System.EventHandler(this.AntFilterItem1_SelectedIndexChanged);
-          // 
-          // AntFilterText1
-          // 
-          this.AntFilterText1.Location = new System.Drawing.Point(242, 19);
-          this.AntFilterText1.Name = "AntFilterText1";
-          this.AntFilterText1.Size = new System.Drawing.Size(116, 20);
-          this.AntFilterText1.TabIndex = 21;
           // 
           // Tab_Views
           // 
@@ -3096,9 +2522,9 @@
           this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
           this.groupBox_Separators.Controls.Add(this.label24);
           this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(7, 277);
+          this.groupBox_Separators.Location = new System.Drawing.Point(6, 266);
           this.groupBox_Separators.Name = "groupBox_Separators";
-          this.groupBox_Separators.Size = new System.Drawing.Size(467, 71);
+          this.groupBox_Separators.Size = new System.Drawing.Size(467, 81);
           this.groupBox_Separators.TabIndex = 128;
           this.groupBox_Separators.TabStop = false;
           this.groupBox_Separators.Text = "Separators";
@@ -3112,7 +2538,7 @@
             "(",
             "....",
             ")"});
-          this.RoleSeparator5.Location = new System.Drawing.Point(342, 40);
+          this.RoleSeparator5.Location = new System.Drawing.Point(342, 45);
           this.RoleSeparator5.Name = "RoleSeparator5";
           this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator5.TabIndex = 82;
@@ -3126,7 +2552,7 @@
             "(",
             "....",
             ")"});
-          this.RoleSeparator4.Location = new System.Drawing.Point(293, 40);
+          this.RoleSeparator4.Location = new System.Drawing.Point(293, 45);
           this.RoleSeparator4.Name = "RoleSeparator4";
           this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator4.TabIndex = 81;
@@ -3139,7 +2565,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator5.Location = new System.Drawing.Point(342, 13);
+          this.ListSeparator5.Location = new System.Drawing.Point(342, 18);
           this.ListSeparator5.Name = "ListSeparator5";
           this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator5.TabIndex = 80;
@@ -3152,7 +2578,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator4.Location = new System.Drawing.Point(293, 13);
+          this.ListSeparator4.Location = new System.Drawing.Point(293, 18);
           this.ListSeparator4.Name = "ListSeparator4";
           this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator4.TabIndex = 79;
@@ -3165,7 +2591,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator3.Location = new System.Drawing.Point(244, 13);
+          this.ListSeparator3.Location = new System.Drawing.Point(244, 18);
           this.ListSeparator3.Name = "ListSeparator3";
           this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator3.TabIndex = 78;
@@ -3178,7 +2604,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator2.Location = new System.Drawing.Point(195, 13);
+          this.ListSeparator2.Location = new System.Drawing.Point(195, 18);
           this.ListSeparator2.Name = "ListSeparator2";
           this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator2.TabIndex = 77;
@@ -3192,7 +2618,7 @@
             "(",
             ")",
             "...."});
-          this.RoleSeparator2.Location = new System.Drawing.Point(195, 40);
+          this.RoleSeparator2.Location = new System.Drawing.Point(195, 45);
           this.RoleSeparator2.Name = "RoleSeparator2";
           this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator2.Sorted = true;
@@ -3207,7 +2633,7 @@
             "(",
             ")",
             "...."});
-          this.RoleSeparator3.Location = new System.Drawing.Point(244, 40);
+          this.RoleSeparator3.Location = new System.Drawing.Point(244, 45);
           this.RoleSeparator3.Name = "RoleSeparator3";
           this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator3.Sorted = true;
@@ -3217,7 +2643,7 @@
           // label22
           // 
           this.label22.AutoSize = true;
-          this.label22.Location = new System.Drawing.Point(14, 43);
+          this.label22.Location = new System.Drawing.Point(14, 48);
           this.label22.Name = "label22";
           this.label22.Size = new System.Drawing.Size(107, 13);
           this.label22.TabIndex = 74;
@@ -3232,7 +2658,7 @@
             "(",
             ")",
             "...."});
-          this.RoleSeparator1.Location = new System.Drawing.Point(146, 40);
+          this.RoleSeparator1.Location = new System.Drawing.Point(146, 45);
           this.RoleSeparator1.Name = "RoleSeparator1";
           this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator1.Sorted = true;
@@ -3242,7 +2668,7 @@
           // label24
           // 
           this.label24.AutoSize = true;
-          this.label24.Location = new System.Drawing.Point(14, 16);
+          this.label24.Location = new System.Drawing.Point(14, 21);
           this.label24.Name = "label24";
           this.label24.Size = new System.Drawing.Size(72, 13);
           this.label24.TabIndex = 71;
@@ -3257,7 +2683,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator1.Location = new System.Drawing.Point(146, 13);
+          this.ListSeparator1.Location = new System.Drawing.Point(146, 18);
           this.ListSeparator1.Name = "ListSeparator1";
           this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator1.TabIndex = 70;
@@ -3276,9 +2702,9 @@
           this.groupBox_DefaultView.Controls.Add(this.AlwaysDefaultView);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Item);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
-          this.groupBox_DefaultView.Location = new System.Drawing.Point(480, 11);
+          this.groupBox_DefaultView.Location = new System.Drawing.Point(480, 5);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-          this.groupBox_DefaultView.Size = new System.Drawing.Size(258, 337);
+          this.groupBox_DefaultView.Size = new System.Drawing.Size(258, 342);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
@@ -3530,9 +2956,9 @@
           this.groupBoxView.Controls.Add(this.checkBox2);
           this.groupBoxView.Controls.Add(this.AntViewIndex);
           this.groupBoxView.Controls.Add(label65);
-          this.groupBoxView.Location = new System.Drawing.Point(7, 11);
+          this.groupBoxView.Location = new System.Drawing.Point(6, 5);
           this.groupBoxView.Name = "groupBoxView";
-          this.groupBoxView.Size = new System.Drawing.Size(467, 263);
+          this.groupBoxView.Size = new System.Drawing.Size(467, 255);
           this.groupBoxView.TabIndex = 127;
           this.groupBoxView.TabStop = false;
           this.groupBoxView.Text = "Custom View Editor ...";
@@ -3541,7 +2967,7 @@
           // lblAntViewIndex
           // 
           this.lblAntViewIndex.AutoSize = true;
-          this.lblAntViewIndex.Location = new System.Drawing.Point(149, 103);
+          this.lblAntViewIndex.Location = new System.Drawing.Point(149, 102);
           this.lblAntViewIndex.Name = "lblAntViewIndex";
           this.lblAntViewIndex.Size = new System.Drawing.Size(36, 13);
           this.lblAntViewIndex.TabIndex = 43;
@@ -3742,7 +3168,7 @@
           this.dgViewsList.RowHeadersVisible = false;
           this.dgViewsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
           this.dgViewsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-          this.dgViewsList.Size = new System.Drawing.Size(117, 211);
+          this.dgViewsList.Size = new System.Drawing.Size(117, 205);
           this.dgViewsList.TabIndex = 42;
           this.dgViewsList.Leave += new System.EventHandler(this.dgViewsList_Leave);
           // 
@@ -3771,7 +3197,7 @@
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewSortOrder);
           this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(136, 185);
           this.groupBoxSortAndLayoutForView.Name = "groupBoxSortAndLayoutForView";
-          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(321, 70);
+          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(321, 64);
           this.groupBoxSortAndLayoutForView.TabIndex = 41;
           this.groupBoxSortAndLayoutForView.TabStop = false;
           this.groupBoxSortAndLayoutForView.Text = "Sort and Layouts for View";
@@ -3783,7 +3209,7 @@
           this.AntViewSortType.Items.AddRange(new object[] {
             "Count",
             "Name"});
-          this.AntViewSortType.Location = new System.Drawing.Point(10, 36);
+          this.AntViewSortType.Location = new System.Drawing.Point(10, 34);
           this.AntViewSortType.Name = "AntViewSortType";
           this.AntViewSortType.Size = new System.Drawing.Size(124, 21);
           this.AntViewSortType.Sorted = true;
@@ -3799,7 +3225,7 @@
             "Large Icons",
             "Filmstrip",
             "Cover Flow"});
-          this.AntViewLayoutView.Location = new System.Drawing.Point(215, 36);
+          this.AntViewLayoutView.Location = new System.Drawing.Point(215, 34);
           this.AntViewLayoutView.Name = "AntViewLayoutView";
           this.AntViewLayoutView.Size = new System.Drawing.Size(90, 21);
           this.AntViewLayoutView.TabIndex = 22;
@@ -3811,7 +3237,7 @@
           this.AntViewSortOrder.Items.AddRange(new object[] {
             " ASC",
             " DESC"});
-          this.AntViewSortOrder.Location = new System.Drawing.Point(140, 36);
+          this.AntViewSortOrder.Location = new System.Drawing.Point(140, 34);
           this.AntViewSortOrder.Name = "AntViewSortOrder";
           this.AntViewSortOrder.Size = new System.Drawing.Size(62, 21);
           this.AntViewSortOrder.TabIndex = 20;
@@ -3820,7 +3246,7 @@
           // 
           this.AntViewItem.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
           this.AntViewItem.FormattingEnabled = true;
-          this.AntViewItem.Location = new System.Drawing.Point(146, 64);
+          this.AntViewItem.Location = new System.Drawing.Point(146, 66);
           this.AntViewItem.Name = "AntViewItem";
           this.AntViewItem.Size = new System.Drawing.Size(107, 21);
           this.AntViewItem.Sorted = true;
@@ -3834,9 +3260,9 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
-          this.groupBox5.Location = new System.Drawing.Point(136, 129);
+          this.groupBox5.Location = new System.Drawing.Point(136, 134);
           this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(321, 50);
+          this.groupBox5.Size = new System.Drawing.Size(321, 45);
           this.groupBox5.TabIndex = 42;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Filter Expression ...";
@@ -3844,14 +3270,14 @@
           // AntViewFilter
           // 
           this.AntViewFilter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
-          this.AntViewFilter.Location = new System.Drawing.Point(10, 19);
+          this.AntViewFilter.Location = new System.Drawing.Point(10, 16);
           this.AntViewFilter.Name = "AntViewFilter";
           this.AntViewFilter.Size = new System.Drawing.Size(266, 20);
           this.AntViewFilter.TabIndex = 10;
           // 
           // AntViewFilterEditButton
           // 
-          this.AntViewFilterEditButton.Location = new System.Drawing.Point(282, 19);
+          this.AntViewFilterEditButton.Location = new System.Drawing.Point(282, 16);
           this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
           this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
           this.AntViewFilterEditButton.TabIndex = 39;
@@ -3862,7 +3288,7 @@
           // AntViewValue
           // 
           this.AntViewValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
-          this.AntViewValue.Location = new System.Drawing.Point(276, 64);
+          this.AntViewValue.Location = new System.Drawing.Point(276, 66);
           this.AntViewValue.Name = "AntViewValue";
           this.AntViewValue.Size = new System.Drawing.Size(136, 20);
           this.AntViewValue.TabIndex = 8;
@@ -3871,9 +3297,9 @@
           // checkBox2
           // 
           this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "ShowEmpty", true));
-          this.checkBox2.Location = new System.Drawing.Point(282, 99);
+          this.checkBox2.Location = new System.Drawing.Point(276, 100);
           this.checkBox2.Name = "checkBox2";
-          this.checkBox2.Size = new System.Drawing.Size(86, 24);
+          this.checkBox2.Size = new System.Drawing.Size(86, 19);
           this.checkBox2.TabIndex = 14;
           this.checkBox2.Text = "Show Empty";
           this.ToolTip1.SetToolTip(this.checkBox2, resources.GetString("checkBox2.ToolTip"));
@@ -3882,7 +3308,7 @@
           // AntViewIndex
           // 
           this.AntViewIndex.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
-          this.AntViewIndex.Location = new System.Drawing.Point(196, 100);
+          this.AntViewIndex.Location = new System.Drawing.Point(214, 100);
           this.AntViewIndex.Maximum = new decimal(new int[] {
             2,
             0,
@@ -4045,10 +3471,10 @@
           // 
           // Tab_General
           // 
-          this.Tab_General.Controls.Add(this.groupBoxSetupWizard);
+          this.Tab_General.Controls.Add(this.groupBox_AntSelectedEnreg);
+          this.Tab_General.Controls.Add(this.groupBox_PreLaunchingCommand);
           this.Tab_General.Controls.Add(this.lblYellowShowRequiredItems);
           this.Tab_General.Controls.Add(this.groupBox_Security);
-          this.Tab_General.Controls.Add(this.groupBox_PreLaunchingCommand);
           this.Tab_General.Controls.Add(this.groupBox_PlayMovieInfos);
           this.Tab_General.Controls.Add(this.label13);
           this.Tab_General.Controls.Add(this.CatalogType);
@@ -4065,111 +3491,16 @@
           this.ToolTip1.SetToolTip(this.Tab_General, "Basic configuration like selecting movie catalog, titles to display, etc.");
           this.Tab_General.UseVisualStyleBackColor = true;
           // 
-          // groupBoxSetupWizard
-          // 
-          this.groupBoxSetupWizard.Controls.Add(this.btnFirstTimeSetup);
-          this.groupBoxSetupWizard.Location = new System.Drawing.Point(477, 283);
-          this.groupBoxSetupWizard.Name = "groupBoxSetupWizard";
-          this.groupBoxSetupWizard.Size = new System.Drawing.Size(259, 64);
-          this.groupBoxSetupWizard.TabIndex = 78;
-          this.groupBoxSetupWizard.TabStop = false;
-          this.groupBoxSetupWizard.Text = "Setup Wizard";
-          this.ToolTip1.SetToolTip(this.groupBoxSetupWizard, resources.GetString("groupBoxSetupWizard.ToolTip"));
-          // 
-          // btnFirstTimeSetup
-          // 
-          this.btnFirstTimeSetup.Location = new System.Drawing.Point(13, 19);
-          this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
-          this.btnFirstTimeSetup.Size = new System.Drawing.Size(236, 35);
-          this.btnFirstTimeSetup.TabIndex = 77;
-          this.btnFirstTimeSetup.Text = "Setup Wizard\r\n(new configuration with presets)";
-          this.btnFirstTimeSetup.UseVisualStyleBackColor = true;
-          this.btnFirstTimeSetup.Click += new System.EventHandler(this.btnFirstTimeSetup_Click);
-          // 
-          // lblYellowShowRequiredItems
-          // 
-          this.lblYellowShowRequiredItems.AutoSize = true;
-          this.lblYellowShowRequiredItems.BackColor = System.Drawing.SystemColors.Info;
-          this.lblYellowShowRequiredItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(533, 252);
-          this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
-          this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(140, 28);
-          this.lblYellowShowRequiredItems.TabIndex = 76;
-          this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory \r\nfor the plugin to work !";
-          this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-          // 
-          // groupBox_Security
-          // 
-          this.groupBox_Security.Controls.Add(this.label_Security);
-          this.groupBox_Security.Controls.Add(this.label16);
-          this.groupBox_Security.Controls.Add(this.label15);
-          this.groupBox_Security.Controls.Add(this.Rpt_Dwp);
-          this.groupBox_Security.Controls.Add(this.Dwp);
-          this.groupBox_Security.Location = new System.Drawing.Point(475, 44);
-          this.groupBox_Security.Name = "groupBox_Security";
-          this.groupBox_Security.Size = new System.Drawing.Size(262, 101);
-          this.groupBox_Security.TabIndex = 75;
-          this.groupBox_Security.TabStop = false;
-          this.groupBox_Security.Text = "Security";
-          this.ToolTip1.SetToolTip(this.groupBox_Security, resources.GetString("groupBox_Security.ToolTip"));
-          // 
-          // label_Security
-          // 
-          this.label_Security.AutoSize = true;
-          this.label_Security.Location = new System.Drawing.Point(74, 21);
-          this.label_Security.Name = "label_Security";
-          this.label_Security.Size = new System.Drawing.Size(167, 13);
-          this.label_Security.TabIndex = 73;
-          this.label_Security.Text = "Enter password to protect the DB:";
-          // 
-          // label16
-          // 
-          this.label16.AutoSize = true;
-          this.label16.Location = new System.Drawing.Point(12, 72);
-          this.label16.Name = "label16";
-          this.label16.Size = new System.Drawing.Size(42, 13);
-          this.label16.TabIndex = 72;
-          this.label16.Text = "Repeat";
-          // 
-          // label15
-          // 
-          this.label15.AutoSize = true;
-          this.label15.Location = new System.Drawing.Point(12, 46);
-          this.label15.Name = "label15";
-          this.label15.Size = new System.Drawing.Size(53, 13);
-          this.label15.TabIndex = 71;
-          this.label15.Text = "Password";
-          // 
-          // Rpt_Dwp
-          // 
-          this.Rpt_Dwp.Location = new System.Drawing.Point(77, 69);
-          this.Rpt_Dwp.Name = "Rpt_Dwp";
-          this.Rpt_Dwp.Size = new System.Drawing.Size(174, 20);
-          this.Rpt_Dwp.TabIndex = 70;
-          this.Rpt_Dwp.UseSystemPasswordChar = true;
-          // 
-          // Dwp
-          // 
-          this.Dwp.Location = new System.Drawing.Point(77, 43);
-          this.Dwp.Name = "Dwp";
-          this.Dwp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-          this.Dwp.Size = new System.Drawing.Size(174, 20);
-          this.Dwp.TabIndex = 69;
-          this.ToolTip1.SetToolTip(this.Dwp, "Enter a password here if you wish to restrict access (from children, for example)" +
-                  " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
-                  "ond field.\r\n");
-          this.Dwp.UseSystemPasswordChar = true;
-          // 
           // groupBox_PreLaunchingCommand
           // 
           this.groupBox_PreLaunchingCommand.Controls.Add(this.label39);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.label38);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdPar);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdExe);
-          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(475, 155);
+          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(451, 272);
           this.groupBox_PreLaunchingCommand.Name = "groupBox_PreLaunchingCommand";
-          this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(262, 87);
-          this.groupBox_PreLaunchingCommand.TabIndex = 70;
+          this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(286, 76);
+          this.groupBox_PreLaunchingCommand.TabIndex = 78;
           this.groupBox_PreLaunchingCommand.TabStop = false;
           this.groupBox_PreLaunchingCommand.Text = "Pre-Launching Command";
           this.ToolTip1.SetToolTip(this.groupBox_PreLaunchingCommand, resources.GetString("groupBox_PreLaunchingCommand.ToolTip"));
@@ -4197,7 +3528,7 @@
           this.CmdPar.FormattingEnabled = true;
           this.CmdPar.Location = new System.Drawing.Point(93, 48);
           this.CmdPar.Name = "CmdPar";
-          this.CmdPar.Size = new System.Drawing.Size(158, 21);
+          this.CmdPar.Size = new System.Drawing.Size(140, 21);
           this.CmdPar.TabIndex = 37;
           this.ToolTip1.SetToolTip(this.CmdPar, "The value of the  chosen DB-field will be used as commandline option for the appl" +
                   "ication laiunched");
@@ -4206,10 +3537,110 @@
           // 
           this.CmdExe.Location = new System.Drawing.Point(93, 19);
           this.CmdExe.Name = "CmdExe";
-          this.CmdExe.Size = new System.Drawing.Size(158, 20);
+          this.CmdExe.Size = new System.Drawing.Size(140, 20);
           this.CmdExe.TabIndex = 36;
           this.ToolTip1.SetToolTip(this.CmdExe, "Enter the commandline to an application you want to launch before the movie is st" +
                   "arted in internal player");
+          // 
+          // groupBox3
+          // 
+          this.groupBox3.Controls.Add(this.btnCustomConfigFilter);
+          this.groupBox3.Controls.Add(this.textBoxStrDfltSelect);
+          this.groupBox3.Location = new System.Drawing.Point(0, 0);
+          this.groupBox3.Name = "groupBox3";
+          this.groupBox3.Size = new System.Drawing.Size(286, 107);
+          this.groupBox3.TabIndex = 77;
+          this.groupBox3.TabStop = false;
+          this.groupBox3.Text = "Custom Config Filter";
+          this.ToolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
+          // 
+          // btnCustomConfigFilter
+          // 
+          this.btnCustomConfigFilter.Location = new System.Drawing.Point(93, 19);
+          this.btnCustomConfigFilter.Name = "btnCustomConfigFilter";
+          this.btnCustomConfigFilter.Size = new System.Drawing.Size(121, 23);
+          this.btnCustomConfigFilter.TabIndex = 31;
+          this.btnCustomConfigFilter.Text = "Custom Config Filter";
+          this.btnCustomConfigFilter.UseVisualStyleBackColor = true;
+          this.btnCustomConfigFilter.Click += new System.EventHandler(this.btnCustomConfigFilter_Click);
+          // 
+          // textBoxStrDfltSelect
+          // 
+          this.textBoxStrDfltSelect.BackColor = System.Drawing.SystemColors.ButtonFace;
+          this.textBoxStrDfltSelect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.textBoxStrDfltSelect.Enabled = false;
+          this.textBoxStrDfltSelect.Location = new System.Drawing.Point(12, 48);
+          this.textBoxStrDfltSelect.Multiline = true;
+          this.textBoxStrDfltSelect.Name = "textBoxStrDfltSelect";
+          this.textBoxStrDfltSelect.ReadOnly = true;
+          this.textBoxStrDfltSelect.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+          this.textBoxStrDfltSelect.Size = new System.Drawing.Size(264, 48);
+          this.textBoxStrDfltSelect.TabIndex = 28;
+          this.textBoxStrDfltSelect.TabStop = false;
+          // 
+          // lblYellowShowRequiredItems
+          // 
+          this.lblYellowShowRequiredItems.AutoSize = true;
+          this.lblYellowShowRequiredItems.BackColor = System.Drawing.SystemColors.Info;
+          this.lblYellowShowRequiredItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 128);
+          this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
+          this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(245, 15);
+          this.lblYellowShowRequiredItems.TabIndex = 76;
+          this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory for the plugin to work !";
+          this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+          // 
+          // groupBox_Security
+          // 
+          this.groupBox_Security.Controls.Add(this.label16);
+          this.groupBox_Security.Controls.Add(this.label15);
+          this.groupBox_Security.Controls.Add(this.Rpt_Dwp);
+          this.groupBox_Security.Controls.Add(this.Dwp);
+          this.groupBox_Security.Location = new System.Drawing.Point(451, 44);
+          this.groupBox_Security.Name = "groupBox_Security";
+          this.groupBox_Security.Size = new System.Drawing.Size(286, 77);
+          this.groupBox_Security.TabIndex = 75;
+          this.groupBox_Security.TabStop = false;
+          this.groupBox_Security.Text = "Security - Password to protect the config / DB";
+          this.ToolTip1.SetToolTip(this.groupBox_Security, resources.GetString("groupBox_Security.ToolTip"));
+          // 
+          // label16
+          // 
+          this.label16.AutoSize = true;
+          this.label16.Location = new System.Drawing.Point(12, 50);
+          this.label16.Name = "label16";
+          this.label16.Size = new System.Drawing.Size(42, 13);
+          this.label16.TabIndex = 72;
+          this.label16.Text = "Repeat";
+          // 
+          // label15
+          // 
+          this.label15.AutoSize = true;
+          this.label15.Location = new System.Drawing.Point(12, 24);
+          this.label15.Name = "label15";
+          this.label15.Size = new System.Drawing.Size(53, 13);
+          this.label15.TabIndex = 71;
+          this.label15.Text = "Password";
+          // 
+          // Rpt_Dwp
+          // 
+          this.Rpt_Dwp.Location = new System.Drawing.Point(82, 47);
+          this.Rpt_Dwp.Name = "Rpt_Dwp";
+          this.Rpt_Dwp.Size = new System.Drawing.Size(151, 20);
+          this.Rpt_Dwp.TabIndex = 70;
+          this.Rpt_Dwp.UseSystemPasswordChar = true;
+          // 
+          // Dwp
+          // 
+          this.Dwp.Location = new System.Drawing.Point(82, 21);
+          this.Dwp.Name = "Dwp";
+          this.Dwp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+          this.Dwp.Size = new System.Drawing.Size(151, 20);
+          this.Dwp.TabIndex = 69;
+          this.ToolTip1.SetToolTip(this.Dwp, "Enter a password here if you wish to restrict access (from children, for example)" +
+                  " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
+                  "ond field.\r\n");
+          this.Dwp.UseSystemPasswordChar = true;
           // 
           // groupBox_PlayMovieInfos
           // 
@@ -4222,7 +3653,7 @@
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentItem);
           this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 155);
           this.groupBox_PlayMovieInfos.Name = "groupBox_PlayMovieInfos";
-          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(458, 193);
+          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(438, 193);
           this.groupBox_PlayMovieInfos.TabIndex = 74;
           this.groupBox_PlayMovieInfos.TabStop = false;
           this.groupBox_PlayMovieInfos.Text = "Movie Playback Path Configuration";
@@ -4249,7 +3680,7 @@
           this.groupBoxMoviePathInfos.Controls.Add(this.ItemSearchFileName);
           this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 61);
           this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
-          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(446, 96);
+          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(420, 96);
           this.groupBoxMoviePathInfos.TabIndex = 71;
           this.groupBoxMoviePathInfos.TabStop = false;
           this.groupBoxMoviePathInfos.Text = "Playback Search Configuration";
@@ -4257,7 +3688,7 @@
           // SearchOnlyExactMatches
           // 
           this.SearchOnlyExactMatches.AutoSize = true;
-          this.SearchOnlyExactMatches.Location = new System.Drawing.Point(338, 38);
+          this.SearchOnlyExactMatches.Location = new System.Drawing.Point(296, 40);
           this.SearchOnlyExactMatches.Name = "SearchOnlyExactMatches";
           this.SearchOnlyExactMatches.Size = new System.Drawing.Size(79, 30);
           this.SearchOnlyExactMatches.TabIndex = 69;
@@ -4278,7 +3709,7 @@
           // 
           this.PathStorage.Location = new System.Drawing.Point(166, 14);
           this.PathStorage.Name = "PathStorage";
-          this.PathStorage.Size = new System.Drawing.Size(236, 20);
+          this.PathStorage.Size = new System.Drawing.Size(172, 20);
           this.PathStorage.TabIndex = 54;
           this.ToolTip1.SetToolTip(this.PathStorage, resources.GetString("PathStorage.ToolTip"));
           // 
@@ -4296,7 +3727,7 @@
           // 
           // butPath
           // 
-          this.butPath.Location = new System.Drawing.Point(408, 14);
+          this.butPath.Location = new System.Drawing.Point(347, 13);
           this.butPath.Name = "butPath";
           this.butPath.Size = new System.Drawing.Size(32, 20);
           this.butPath.TabIndex = 55;
@@ -4326,13 +3757,13 @@
             "FormattedTitle"});
           this.ItemSearchFileName.Location = new System.Drawing.Point(166, 43);
           this.ItemSearchFileName.Name = "ItemSearchFileName";
-          this.ItemSearchFileName.Size = new System.Drawing.Size(157, 21);
+          this.ItemSearchFileName.Size = new System.Drawing.Size(124, 21);
           this.ItemSearchFileName.TabIndex = 67;
           this.ToolTip1.SetToolTip(this.ItemSearchFileName, resources.GetString("ItemSearchFileName.ToolTip"));
           // 
           // AntIdentLabel
           // 
-          this.AntIdentLabel.Location = new System.Drawing.Point(335, 165);
+          this.AntIdentLabel.Location = new System.Drawing.Point(302, 164);
           this.AntIdentLabel.Name = "AntIdentLabel";
           this.AntIdentLabel.Size = new System.Drawing.Size(117, 20);
           this.AntIdentLabel.TabIndex = 57;
@@ -4371,7 +3802,7 @@
           this.AntIdentItem.FormattingEnabled = true;
           this.AntIdentItem.Location = new System.Drawing.Point(172, 164);
           this.AntIdentItem.Name = "AntIdentItem";
-          this.AntIdentItem.Size = new System.Drawing.Size(157, 21);
+          this.AntIdentItem.Size = new System.Drawing.Size(124, 21);
           this.AntIdentItem.TabIndex = 56;
           this.ToolTip1.SetToolTip(this.AntIdentItem, resources.GetString("AntIdentItem.ToolTip"));
           // 
@@ -4421,7 +3852,7 @@
           this.groupBox_TitleOrder.Controls.Add(this.AntTitle1);
           this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 44);
           this.groupBox_TitleOrder.Name = "groupBox_TitleOrder";
-          this.groupBox_TitleOrder.Size = new System.Drawing.Size(458, 101);
+          this.groupBox_TitleOrder.Size = new System.Drawing.Size(438, 101);
           this.groupBox_TitleOrder.TabIndex = 61;
           this.groupBox_TitleOrder.TabStop = false;
           this.groupBox_TitleOrder.Text = "Title Order";
@@ -4557,7 +3988,7 @@
           this.butNew.Name = "butNew";
           this.butNew.Size = new System.Drawing.Size(64, 31);
           this.butNew.TabIndex = 79;
-          this.butNew.Text = "New ...";
+          this.butNew.Text = " New ...";
           this.ToolTip1.SetToolTip(this.butNew, "To create a new MyFilms configuration.");
           this.butNew.UseVisualStyleBackColor = true;
           this.butNew.Click += new System.EventHandler(this.butNew_Click);
@@ -4693,11 +4124,11 @@
           // 
           this.btnLaunchAMCglobal.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCglobal.Image")));
           this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(45, 465);
+          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(105, 466);
           this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
-          this.btnLaunchAMCglobal.Size = new System.Drawing.Size(152, 31);
+          this.btnLaunchAMCglobal.Size = new System.Drawing.Size(72, 31);
           this.btnLaunchAMCglobal.TabIndex = 77;
-          this.btnLaunchAMCglobal.Text = "Launch AMC Updater";
+          this.btnLaunchAMCglobal.Text = "Import ";
           this.btnLaunchAMCglobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
           this.ToolTip1.SetToolTip(this.btnLaunchAMCglobal, resources.GetString("btnLaunchAMCglobal.ToolTip"));
           this.btnLaunchAMCglobal.UseVisualStyleBackColor = true;
@@ -4803,7 +4234,7 @@
           // chkSuppressManual
           // 
           this.chkSuppressManual.AutoSize = true;
-          this.chkSuppressManual.Location = new System.Drawing.Point(393, 10);
+          this.chkSuppressManual.Location = new System.Drawing.Point(16, 175);
           this.chkSuppressManual.Name = "chkSuppressManual";
           this.chkSuppressManual.Size = new System.Drawing.Size(216, 17);
           this.chkSuppressManual.TabIndex = 19;
@@ -4823,6 +4254,326 @@
           this.ToolTip1.SetToolTip(this.btnHyperLinkParamGen, resources.GetString("btnHyperLinkParamGen.ToolTip"));
           this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
           this.btnHyperLinkParamGen.Click += new System.EventHandler(this.btnHyperLinkParamGen_Click);
+          // 
+          // groupBox_GrabberOptions
+          // 
+          this.groupBox_GrabberOptions.Controls.Add(this.lblFilterGrabberScripts);
+          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberScriptsFilter);
+          this.groupBox_GrabberOptions.Controls.Add(this.txtGrabberDisplay);
+          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_Always);
+          this.groupBox_GrabberOptions.Controls.Add(this.btnEditScript);
+          this.groupBox_GrabberOptions.Controls.Add(this.groupBox6);
+          this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
+          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
+          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
+          this.groupBox_GrabberOptions.Controls.Add(this.btnGrabber);
+          this.groupBox_GrabberOptions.Controls.Add(this.txtGrabber);
+          this.groupBox_GrabberOptions.Controls.Add(this.label27);
+          this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 211);
+          this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
+          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 133);
+          this.groupBox_GrabberOptions.TabIndex = 73;
+          this.groupBox_GrabberOptions.TabStop = false;
+          this.groupBox_GrabberOptions.Text = "MyFilms Internal Internet Grabbing";
+          this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
+          // 
+          // lblFilterGrabberScripts
+          // 
+          this.lblFilterGrabberScripts.AutoSize = true;
+          this.lblFilterGrabberScripts.Location = new System.Drawing.Point(16, 51);
+          this.lblFilterGrabberScripts.Name = "lblFilterGrabberScripts";
+          this.lblFilterGrabberScripts.Size = new System.Drawing.Size(105, 13);
+          this.lblFilterGrabberScripts.TabIndex = 68;
+          this.lblFilterGrabberScripts.Text = "Filter Grabber Scripts";
+          // 
+          // ItemSearchGrabberScriptsFilter
+          // 
+          this.ItemSearchGrabberScriptsFilter.Location = new System.Drawing.Point(145, 48);
+          this.ItemSearchGrabberScriptsFilter.Name = "ItemSearchGrabberScriptsFilter";
+          this.ItemSearchGrabberScriptsFilter.Size = new System.Drawing.Size(138, 20);
+          this.ItemSearchGrabberScriptsFilter.TabIndex = 72;
+          this.ToolTip1.SetToolTip(this.ItemSearchGrabberScriptsFilter, resources.GetString("ItemSearchGrabberScriptsFilter.ToolTip"));
+          // 
+          // txtGrabberDisplay
+          // 
+          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 22);
+          this.txtGrabberDisplay.Name = "txtGrabberDisplay";
+          this.txtGrabberDisplay.ReadOnly = true;
+          this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
+          this.txtGrabberDisplay.TabIndex = 67;
+          this.ToolTip1.SetToolTip(this.txtGrabberDisplay, resources.GetString("txtGrabberDisplay.ToolTip"));
+          // 
+          // chkGrabber_Always
+          // 
+          this.chkGrabber_Always.AutoSize = true;
+          this.chkGrabber_Always.Location = new System.Drawing.Point(19, 74);
+          this.chkGrabber_Always.Name = "chkGrabber_Always";
+          this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
+          this.chkGrabber_Always.TabIndex = 56;
+          this.chkGrabber_Always.Text = "try to find best match automatically";
+          this.ToolTip1.SetToolTip(this.chkGrabber_Always, resources.GetString("chkGrabber_Always.ToolTip"));
+          this.chkGrabber_Always.UseVisualStyleBackColor = true;
+          // 
+          // btnEditScript
+          // 
+          this.btnEditScript.Location = new System.Drawing.Point(289, 22);
+          this.btnEditScript.Name = "btnEditScript";
+          this.btnEditScript.Size = new System.Drawing.Size(95, 20);
+          this.btnEditScript.TabIndex = 66;
+          this.btnEditScript.Text = "Grabber Options";
+          this.ToolTip1.SetToolTip(this.btnEditScript, resources.GetString("btnEditScript.ToolTip"));
+          this.btnEditScript.UseVisualStyleBackColor = true;
+          // 
+          // groupBox6
+          // 
+          this.groupBox6.Controls.Add(this.cbGrabberOverrideGetRoles);
+          this.groupBox6.Controls.Add(this.label55);
+          this.groupBox6.Controls.Add(this.label51);
+          this.groupBox6.Controls.Add(this.cbGrabberOverrideTitleLimit);
+          this.groupBox6.Controls.Add(this.label50);
+          this.groupBox6.Controls.Add(this.label49);
+          this.groupBox6.Controls.Add(this.cbGrabberOverridePersonLimit);
+          this.groupBox6.Controls.Add(this.cbGrabberOverrideLanguage);
+          this.groupBox6.Location = new System.Drawing.Point(398, 15);
+          this.groupBox6.Name = "groupBox6";
+          this.groupBox6.Size = new System.Drawing.Size(330, 112);
+          this.groupBox6.TabIndex = 65;
+          this.groupBox6.TabStop = false;
+          this.groupBox6.Text = "MyFilms Grabber Override Options ...";
+          this.ToolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
+          // 
+          // cbGrabberOverrideGetRoles
+          // 
+          this.cbGrabberOverrideGetRoles.FormattingEnabled = true;
+          this.cbGrabberOverrideGetRoles.Items.AddRange(new object[] {
+            "true",
+            "false"});
+          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 21);
+          this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
+          this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverrideGetRoles.TabIndex = 71;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideGetRoles, "If checked, add Roles to actor infos.\r\nDepends on the grabber script supporting t" +
+                  "hat option.");
+          // 
+          // label55
+          // 
+          this.label55.AutoSize = true;
+          this.label55.Location = new System.Drawing.Point(191, 27);
+          this.label55.Name = "label55";
+          this.label55.Size = new System.Drawing.Size(82, 13);
+          this.label55.TabIndex = 70;
+          this.label55.Text = "Get Actor Roles";
+          // 
+          // label51
+          // 
+          this.label51.AutoSize = true;
+          this.label51.Location = new System.Drawing.Point(191, 79);
+          this.label51.Name = "label51";
+          this.label51.Size = new System.Drawing.Size(66, 13);
+          this.label51.TabIndex = 68;
+          this.label51.Text = "Limit # Titles";
+          // 
+          // cbGrabberOverrideTitleLimit
+          // 
+          this.cbGrabberOverrideTitleLimit.FormattingEnabled = true;
+          this.cbGrabberOverrideTitleLimit.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "15",
+            "20",
+            "999"});
+          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 76);
+          this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
+          this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverrideTitleLimit.TabIndex = 67;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed.\r\nYou may also set a preferred lan" +
+                  "guage/country \r\nfor grabbing in the override options.");
+          // 
+          // label50
+          // 
+          this.label50.AutoSize = true;
+          this.label50.Location = new System.Drawing.Point(12, 28);
+          this.label50.Name = "label50";
+          this.label50.Size = new System.Drawing.Size(161, 13);
+          this.label50.TabIndex = 66;
+          this.label50.Text = "Preferred Languages / Countries";
+          // 
+          // label49
+          // 
+          this.label49.AutoSize = true;
+          this.label49.Location = new System.Drawing.Point(191, 52);
+          this.label49.Name = "label49";
+          this.label49.Size = new System.Drawing.Size(79, 13);
+          this.label49.TabIndex = 65;
+          this.label49.Text = "Limit # Persons";
+          // 
+          // cbGrabberOverridePersonLimit
+          // 
+          this.cbGrabberOverridePersonLimit.FormattingEnabled = true;
+          this.cbGrabberOverridePersonLimit.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "15",
+            "20",
+            "999"});
+          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 48);
+          this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
+          this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverridePersonLimit.TabIndex = 63;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverridePersonLimit, "Limits the number of person names grabbed.\r\nThis settings applies to all fields t" +
+                  "hat grab person names, \r\nlike actors, producers, writers, directors.");
+          // 
+          // cbGrabberOverrideLanguage
+          // 
+          this.cbGrabberOverrideLanguage.FormattingEnabled = true;
+          this.cbGrabberOverrideLanguage.Items.AddRange(new object[] {
+            "Argentina",
+            "Australia",
+            "Austria",
+            "Belgium",
+            "Brazil",
+            "Canada",
+            "Chile",
+            "Croatia",
+            "Czech Republic",
+            "Denmark",
+            "Estonia",
+            "Finland",
+            "France",
+            "Germany",
+            "Greece",
+            "Hong Kong",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Ireland",
+            "Israel",
+            "Italy",
+            "Japan",
+            "Malaysia",
+            "Mexico",
+            "Netherlands",
+            "New Zealand",
+            "Norway",
+            "Peru",
+            "Philippines",
+            "Poland",
+            "Portugal",
+            "Romania",
+            "Russia",
+            "Singapore",
+            "Slovakia",
+            "Slovenia",
+            "South Africa",
+            "South Korea",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Turkey",
+            "UK",
+            "Uruguay",
+            "USA"});
+          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 49);
+          this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
+          this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
+          this.cbGrabberOverrideLanguage.Sorted = true;
+          this.cbGrabberOverrideLanguage.TabIndex = 64;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideLanguage, resources.GetString("cbGrabberOverrideLanguage.ToolTip"));
+          // 
+          // lblSearchGrabberName
+          // 
+          this.lblSearchGrabberName.AutoSize = true;
+          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 105);
+          this.lblSearchGrabberName.Name = "lblSearchGrabberName";
+          this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
+          this.lblSearchGrabberName.TabIndex = 62;
+          this.lblSearchGrabberName.Text = "Title for Internet Updates";
+          // 
+          // chkGrabber_ChooseScript
+          // 
+          this.chkGrabber_ChooseScript.AutoSize = true;
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(226, 74);
+          this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
+          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
+          this.chkGrabber_ChooseScript.TabIndex = 60;
+          this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
+          this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
+          this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
+          // 
+          // ItemSearchGrabberName
+          // 
+          this.ItemSearchGrabberName.FormattingEnabled = true;
+          this.ItemSearchGrabberName.Items.AddRange(new object[] {
+            "OriginalTitle",
+            "TranslatedTitle",
+            "FormattedTitle"});
+          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 102);
+          this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
+          this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
+          this.ItemSearchGrabberName.TabIndex = 61;
+          this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, "The title that you want to use for internet data searches.\r\nMyFilms will offer yo" +
+                  "u the other titles for a \"re\"search too.");
+          // 
+          // btnGrabber
+          // 
+          this.btnGrabber.Location = new System.Drawing.Point(251, 22);
+          this.btnGrabber.Name = "btnGrabber";
+          this.btnGrabber.Size = new System.Drawing.Size(32, 20);
+          this.btnGrabber.TabIndex = 55;
+          this.btnGrabber.Text = "...";
+          this.ToolTip1.SetToolTip(this.btnGrabber, "Browse and choose the script you want MyFilms \r\nto use as default.");
+          this.btnGrabber.UseVisualStyleBackColor = true;
+          // 
+          // txtGrabber
+          // 
+          this.txtGrabber.Location = new System.Drawing.Point(145, 22);
+          this.txtGrabber.Name = "txtGrabber";
+          this.txtGrabber.Size = new System.Drawing.Size(68, 20);
+          this.txtGrabber.TabIndex = 54;
+          this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
+          this.txtGrabber.Visible = false;
+          // 
+          // label27
+          // 
+          this.label27.AutoSize = true;
+          this.label27.Location = new System.Drawing.Point(16, 25);
+          this.label27.Name = "label27";
+          this.label27.Size = new System.Drawing.Size(112, 13);
+          this.label27.TabIndex = 53;
+          this.label27.Text = "Default Grabber Script";
+          // 
+          // btnFirstTimeSetup
+          // 
+          this.btnFirstTimeSetup.Location = new System.Drawing.Point(195, 466);
+          this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
+          this.btnFirstTimeSetup.Size = new System.Drawing.Size(124, 31);
+          this.btnFirstTimeSetup.TabIndex = 77;
+          this.btnFirstTimeSetup.Text = " Setup Wizard ...";
+          this.ToolTip1.SetToolTip(this.btnFirstTimeSetup, resources.GetString("btnFirstTimeSetup.ToolTip"));
+          this.btnFirstTimeSetup.UseVisualStyleBackColor = true;
+          this.btnFirstTimeSetup.Click += new System.EventHandler(this.btnFirstTimeSetup_Click);
+          // 
+          // buttonWikiHelp
+          // 
+          this.buttonWikiHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+          this.buttonWikiHelp.ForeColor = System.Drawing.SystemColors.HotTrack;
+          this.buttonWikiHelp.Location = new System.Drawing.Point(22, 466);
+          this.buttonWikiHelp.Name = "buttonWikiHelp";
+          this.buttonWikiHelp.Size = new System.Drawing.Size(64, 31);
+          this.buttonWikiHelp.TabIndex = 83;
+          this.buttonWikiHelp.Text = "Wiki Help";
+          this.ToolTip1.SetToolTip(this.buttonWikiHelp, "Opens the MyFilms Wiki in your browser...");
+          this.buttonWikiHelp.UseVisualStyleBackColor = true;
+          this.buttonWikiHelp.Click += new System.EventHandler(this.buttonWikiHelp_Click);
           // 
           // label11
           // 
@@ -5255,19 +5006,20 @@
           // Tab_AMCupdater
           // 
           this.Tab_AMCupdater.Controls.Add(this.groupBox_AMCupdater);
-          this.Tab_AMCupdater.Controls.Add(this.groupBox_GrabberOptions);
           this.Tab_AMCupdater.Location = new System.Drawing.Point(4, 22);
           this.Tab_AMCupdater.Name = "Tab_AMCupdater";
           this.Tab_AMCupdater.Padding = new System.Windows.Forms.Padding(3);
           this.Tab_AMCupdater.Size = new System.Drawing.Size(747, 354);
           this.Tab_AMCupdater.TabIndex = 4;
-          this.Tab_AMCupdater.Text = "Internet Grabbing";
+          this.Tab_AMCupdater.Text = "Import";
           this.Tab_AMCupdater.ToolTipText = "Setup for internet updates and basic configuration for AMC Updater";
           this.Tab_AMCupdater.UseVisualStyleBackColor = true;
           // 
           // Tab_Update
           // 
+          this.Tab_Update.Controls.Add(this.groupBox_GrabberOptions);
           this.Tab_Update.Controls.Add(this.chkSuppressManual);
+          this.Tab_Update.Controls.Add(this.gpspfield);
           this.Tab_Update.Controls.Add(this.groupBox2);
           this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
           this.Tab_Update.Location = new System.Drawing.Point(4, 22);
@@ -5282,9 +5034,9 @@
           // General
           // 
           this.General.Controls.Add(this.Tab_General);
-          this.General.Controls.Add(this.Tab_Trailer);
           this.General.Controls.Add(this.Tab_Config);
           this.General.Controls.Add(this.Tab_Views);
+          this.General.Controls.Add(this.Tab_Trailer);
           this.General.Controls.Add(this.Tab_Update);
           this.General.Controls.Add(this.Tab_AMCupdater);
           this.General.Controls.Add(this.Tab_Artwork);
@@ -5837,17 +5589,262 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // groupBox_AntSelectedEnreg
+          // 
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.groupBox3);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFreetextFilterItem);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterFreeText);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterComb);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterSign2);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterSign1);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterItem2);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText2);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterItem1);
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText1);
+          this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(451, 160);
+          this.groupBox_AntSelectedEnreg.Name = "groupBox_AntSelectedEnreg";
+          this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(286, 106);
+          this.groupBox_AntSelectedEnreg.TabIndex = 79;
+          this.groupBox_AntSelectedEnreg.TabStop = false;
+          this.groupBox_AntSelectedEnreg.Text = "Custom Config Filters";
+          this.ToolTip1.SetToolTip(this.groupBox_AntSelectedEnreg, resources.GetString("groupBox_AntSelectedEnreg.ToolTip"));
+          // 
+          // AntFreetextFilterItem
+          // 
+          this.AntFreetextFilterItem.AutoSize = true;
+          this.AntFreetextFilterItem.Location = new System.Drawing.Point(4, 76);
+          this.AntFreetextFilterItem.Name = "AntFreetextFilterItem";
+          this.AntFreetextFilterItem.Size = new System.Drawing.Size(50, 13);
+          this.AntFreetextFilterItem.TabIndex = 30;
+          this.AntFreetextFilterItem.Text = "FreeFilter";
+          // 
+          // AntFilterFreeText
+          // 
+          this.AntFilterFreeText.Location = new System.Drawing.Point(55, 73);
+          this.AntFilterFreeText.Name = "AntFilterFreeText";
+          this.AntFilterFreeText.Size = new System.Drawing.Size(220, 20);
+          this.AntFilterFreeText.TabIndex = 29;
+          this.ToolTip1.SetToolTip(this.AntFilterFreeText, "This field allows you to define freetext conditions for your DB restrictions.\r\nIt" +
+                  " could be used e.g. to restrict the config to certain actors:\r\n(Actors like \'*Wi" +
+                  "llis*\' OR Actors like \'*Celentano*\')");
+          // 
+          // AntFilterComb
+          // 
+          this.AntFilterComb.DisplayMember = "or";
+          this.AntFilterComb.FormattingEnabled = true;
+          this.AntFilterComb.ItemHeight = 13;
+          this.AntFilterComb.Items.AddRange(new object[] {
+            "or",
+            "and"});
+          this.AntFilterComb.Location = new System.Drawing.Point(6, 34);
+          this.AntFilterComb.Name = "AntFilterComb";
+          this.AntFilterComb.Size = new System.Drawing.Size(43, 21);
+          this.AntFilterComb.TabIndex = 18;
+          // 
+          // AntFilterSign2
+          // 
+          this.AntFilterSign2.DisplayMember = "#";
+          this.AntFilterSign2.FormattingEnabled = true;
+          this.AntFilterSign2.Items.AddRange(new object[] {
+            "=",
+            "#",
+            ">",
+            "<",
+            "like",
+            "not like",
+            "in",
+            "not in",
+            "like in"});
+          this.AntFilterSign2.Location = new System.Drawing.Point(122, 46);
+          this.AntFilterSign2.Name = "AntFilterSign2";
+          this.AntFilterSign2.Size = new System.Drawing.Size(60, 21);
+          this.AntFilterSign2.TabIndex = 23;
+          // 
+          // AntFilterSign1
+          // 
+          this.AntFilterSign1.DisplayMember = "#";
+          this.AntFilterSign1.FormattingEnabled = true;
+          this.AntFilterSign1.Items.AddRange(new object[] {
+            "=",
+            "#",
+            ">",
+            "<",
+            "like",
+            "not like",
+            "in",
+            "not in",
+            "like in"});
+          this.AntFilterSign1.Location = new System.Drawing.Point(122, 19);
+          this.AntFilterSign1.Name = "AntFilterSign1";
+          this.AntFilterSign1.Size = new System.Drawing.Size(60, 21);
+          this.AntFilterSign1.TabIndex = 20;
+          this.ToolTip1.SetToolTip(this.AntFilterSign1, resources.GetString("AntFilterSign1.ToolTip"));
+          // 
+          // AntFilterItem2
+          // 
+          this.AntFilterItem2.FormattingEnabled = true;
+          this.AntFilterItem2.Location = new System.Drawing.Point(55, 46);
+          this.AntFilterItem2.Name = "AntFilterItem2";
+          this.AntFilterItem2.Size = new System.Drawing.Size(61, 21);
+          this.AntFilterItem2.Sorted = true;
+          this.AntFilterItem2.TabIndex = 22;
+          // 
+          // AntFilterText2
+          // 
+          this.AntFilterText2.Location = new System.Drawing.Point(188, 46);
+          this.AntFilterText2.Name = "AntFilterText2";
+          this.AntFilterText2.Size = new System.Drawing.Size(87, 20);
+          this.AntFilterText2.TabIndex = 24;
+          // 
+          // AntFilterItem1
+          // 
+          this.AntFilterItem1.FormattingEnabled = true;
+          this.AntFilterItem1.Location = new System.Drawing.Point(55, 19);
+          this.AntFilterItem1.Name = "AntFilterItem1";
+          this.AntFilterItem1.Size = new System.Drawing.Size(61, 21);
+          this.AntFilterItem1.Sorted = true;
+          this.AntFilterItem1.TabIndex = 19;
+          // 
+          // AntFilterText1
+          // 
+          this.AntFilterText1.Location = new System.Drawing.Point(188, 19);
+          this.AntFilterText1.Name = "AntFilterText1";
+          this.AntFilterText1.Size = new System.Drawing.Size(87, 20);
+          this.AntFilterText1.TabIndex = 21;
+          // 
+          // groupBox_DetailedSupplementaryInformations
+          // 
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel5);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel4);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem5);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem4);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel3);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem3);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem2);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel2);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label7);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label3);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
+          this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(15, 16);
+          this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
+          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(211, 152);
+          this.groupBox_DetailedSupplementaryInformations.TabIndex = 130;
+          this.groupBox_DetailedSupplementaryInformations.TabStop = false;
+          this.groupBox_DetailedSupplementaryInformations.Text = "Custom Display Items";
+          this.ToolTip1.SetToolTip(this.groupBox_DetailedSupplementaryInformations, resources.GetString("groupBox_DetailedSupplementaryInformations.ToolTip"));
+          // 
+          // AntLabel5
+          // 
+          this.AntLabel5.Location = new System.Drawing.Point(111, 125);
+          this.AntLabel5.Name = "AntLabel5";
+          this.AntLabel5.Size = new System.Drawing.Size(90, 20);
+          this.AntLabel5.TabIndex = 35;
+          // 
+          // AntLabel4
+          // 
+          this.AntLabel4.Location = new System.Drawing.Point(111, 101);
+          this.AntLabel4.Name = "AntLabel4";
+          this.AntLabel4.Size = new System.Drawing.Size(90, 20);
+          this.AntLabel4.TabIndex = 34;
+          // 
+          // AntItem5
+          // 
+          this.AntItem5.FormattingEnabled = true;
+          this.AntItem5.Location = new System.Drawing.Point(11, 124);
+          this.AntItem5.Name = "AntItem5";
+          this.AntItem5.Size = new System.Drawing.Size(94, 21);
+          this.AntItem5.Sorted = true;
+          this.AntItem5.TabIndex = 33;
+          // 
+          // AntItem4
+          // 
+          this.AntItem4.FormattingEnabled = true;
+          this.AntItem4.Location = new System.Drawing.Point(11, 101);
+          this.AntItem4.Name = "AntItem4";
+          this.AntItem4.Size = new System.Drawing.Size(94, 21);
+          this.AntItem4.Sorted = true;
+          this.AntItem4.TabIndex = 32;
+          // 
+          // AntLabel3
+          // 
+          this.AntLabel3.Location = new System.Drawing.Point(111, 78);
+          this.AntLabel3.Name = "AntLabel3";
+          this.AntLabel3.Size = new System.Drawing.Size(90, 20);
+          this.AntLabel3.TabIndex = 30;
+          // 
+          // AntItem3
+          // 
+          this.AntItem3.FormattingEnabled = true;
+          this.AntItem3.Location = new System.Drawing.Point(11, 78);
+          this.AntItem3.Name = "AntItem3";
+          this.AntItem3.Size = new System.Drawing.Size(94, 21);
+          this.AntItem3.Sorted = true;
+          this.AntItem3.TabIndex = 29;
+          // 
+          // AntItem2
+          // 
+          this.AntItem2.FormattingEnabled = true;
+          this.AntItem2.Location = new System.Drawing.Point(11, 55);
+          this.AntItem2.Name = "AntItem2";
+          this.AntItem2.Size = new System.Drawing.Size(94, 21);
+          this.AntItem2.Sorted = true;
+          this.AntItem2.TabIndex = 27;
+          // 
+          // AntLabel2
+          // 
+          this.AntLabel2.Location = new System.Drawing.Point(111, 55);
+          this.AntLabel2.Name = "AntLabel2";
+          this.AntLabel2.Size = new System.Drawing.Size(90, 20);
+          this.AntLabel2.TabIndex = 28;
+          // 
+          // label7
+          // 
+          this.label7.AutoSize = true;
+          this.label7.Location = new System.Drawing.Point(9, 16);
+          this.label7.Name = "label7";
+          this.label7.Size = new System.Drawing.Size(94, 13);
+          this.label7.TabIndex = 22;
+          this.label7.Text = "DB Item to Display";
+          // 
+          // AntItem1
+          // 
+          this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+          this.AntItem1.FormattingEnabled = true;
+          this.AntItem1.Location = new System.Drawing.Point(11, 32);
+          this.AntItem1.Name = "AntItem1";
+          this.AntItem1.Size = new System.Drawing.Size(94, 21);
+          this.AntItem1.Sorted = true;
+          this.AntItem1.TabIndex = 25;
+          // 
+          // label3
+          // 
+          this.label3.AutoSize = true;
+          this.label3.Location = new System.Drawing.Point(111, 16);
+          this.label3.Name = "label3";
+          this.label3.Size = new System.Drawing.Size(33, 13);
+          this.label3.TabIndex = 21;
+          this.label3.Text = "Label";
+          // 
+          // AntLabel1
+          // 
+          this.AntLabel1.Location = new System.Drawing.Point(111, 32);
+          this.AntLabel1.Name = "AntLabel1";
+          this.AntLabel1.Size = new System.Drawing.Size(90, 20);
+          this.AntLabel1.TabIndex = 26;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(779, 506);
+          this.Controls.Add(this.buttonWikiHelp);
+          this.Controls.Add(this.btnLaunchAMCglobal);
+          this.Controls.Add(this.btnFirstTimeSetup);
           this.Controls.Add(this.btnHyperLinkParamGen);
           this.Controls.Add(this.lblNbConfig);
           this.Controls.Add(this.textBoxNBconfigs);
           this.Controls.Add(this.butNew);
-          this.Controls.Add(this.linkLabelMyFilmsWiki);
-          this.Controls.Add(this.btnLaunchAMCglobal);
           this.Controls.Add(this.ButCopy);
           this.Controls.Add(this.pictureBoxMyFilms);
           this.Controls.Add(this.Config_Menu);
@@ -5862,6 +5859,7 @@
           this.Controls.Add(this.General);
           this.Controls.Add(this.ButQuit);
           this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+          this.HelpButton = true;
           this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
           this.Name = "MyFilmsSetup";
           this.Text = "MyFilms Setup";
@@ -5885,10 +5883,6 @@
           this.groupBox1.PerformLayout();
           this.groupBox_ArtistImages.ResumeLayout(false);
           this.groupBox_ArtistImages.PerformLayout();
-          this.groupBox_GrabberOptions.ResumeLayout(false);
-          this.groupBox_GrabberOptions.PerformLayout();
-          this.groupBox6.ResumeLayout(false);
-          this.groupBox6.PerformLayout();
           this.groupBox_AMCupdater.ResumeLayout(false);
           this.groupBox_AMCupdater.PerformLayout();
           this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
@@ -5904,10 +5898,6 @@
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
           this.Tab_Config.ResumeLayout(false);
-          this.groupBox_DetailedSupplementaryInformations.ResumeLayout(false);
-          this.groupBox_DetailedSupplementaryInformations.PerformLayout();
-          this.groupBox_AntSelectedEnreg.ResumeLayout(false);
-          this.groupBox_AntSelectedEnreg.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
           this.groupBox_Separators.ResumeLayout(false);
           this.groupBox_Separators.PerformLayout();
@@ -5935,11 +5925,12 @@
           this.groupBox24.PerformLayout();
           this.Tab_General.ResumeLayout(false);
           this.Tab_General.PerformLayout();
-          this.groupBoxSetupWizard.ResumeLayout(false);
-          this.groupBox_Security.ResumeLayout(false);
-          this.groupBox_Security.PerformLayout();
           this.groupBox_PreLaunchingCommand.ResumeLayout(false);
           this.groupBox_PreLaunchingCommand.PerformLayout();
+          this.groupBox3.ResumeLayout(false);
+          this.groupBox3.PerformLayout();
+          this.groupBox_Security.ResumeLayout(false);
+          this.groupBox_Security.PerformLayout();
           this.groupBox_PlayMovieInfos.ResumeLayout(false);
           this.groupBox_PlayMovieInfos.PerformLayout();
           this.groupBoxMoviePathInfos.ResumeLayout(false);
@@ -5952,6 +5943,10 @@
           this.groupBox_DVDprofiler.ResumeLayout(false);
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
+          this.groupBox_GrabberOptions.ResumeLayout(false);
+          this.groupBox_GrabberOptions.PerformLayout();
+          this.groupBox6.ResumeLayout(false);
+          this.groupBox6.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -5974,6 +5969,10 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          this.groupBox_AntSelectedEnreg.ResumeLayout(false);
+          this.groupBox_AntSelectedEnreg.PerformLayout();
+          this.groupBox_DetailedSupplementaryInformations.ResumeLayout(false);
+          this.groupBox_DetailedSupplementaryInformations.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6001,7 +6000,6 @@
         private PictureBox pictureBoxMyFilms;
         private Button ButCopy;
         private Button btnLaunchAMCglobal;
-        private LinkLabel linkLabelMyFilmsWiki;
         private TabPage Tab_Trakt;
         private TabPage Tab_ExternalCatalogs;
         private GroupBox groupBox9;
@@ -6119,12 +6117,6 @@
         private Button btnCreateAMCDesktopIcon;
         private Button btnCreateAMCDefaultConfig;
         private CheckBox chkAMCUpd;
-        private GroupBox groupBox_GrabberOptions;
-        private CheckBox chkGrabber_ChooseScript;
-        private CheckBox chkGrabber_Always;
-        private Button btnGrabber;
-        private TextBox txtGrabber;
-        private Label label27;
         private TabPage Tab_Update;
         private GroupBox groupBox2;
         private Label lblUnwatchedItemsValue;
@@ -6176,16 +6168,10 @@
         private TabPage Tab_General;
         private Label lblYellowShowRequiredItems;
         private GroupBox groupBox_Security;
-        private Label label_Security;
         private Label label16;
         private Label label15;
         private TextBox Rpt_Dwp;
         private TextBox Dwp;
-        private GroupBox groupBox_PreLaunchingCommand;
-        private Label label39;
-        private Label label38;
-        private ComboBox CmdPar;
-        private TextBox CmdExe;
         private GroupBox groupBox_PlayMovieInfos;
         private GroupBox groupBoxMoviePathInfos;
         private Label label5;
@@ -6215,7 +6201,6 @@
         private Label label1;
         private TabControl General;
         private Button btnFirstTimeSetup;
-        private GroupBox groupBoxSetupWizard;
         private Label lblResultingGroupViewsPathFanart;
         private Button butNew;
         private TextBox DefaultFanartImage;
@@ -6226,8 +6211,6 @@
         private Label label48;
         private CheckBox chkDfltFanartImage;
         private CheckBox chkPersons;
-        private Label lblSearchGrabberName;
-        private ComboBox ItemSearchGrabberName;
         private TextBox textBoxNBconfigs;
         private Label lblNbConfig;
         private CheckBox chkDfltViewsAll;
@@ -6243,14 +6226,6 @@
         private CheckBox chkUseListviewForGroups;
         private CheckBox chkAddCertification;
         private ComboBox ECMergeDestinationFieldTagline;
-        private ComboBox cbGrabberOverrideLanguage;
-        private ComboBox cbGrabberOverridePersonLimit;
-        private GroupBox groupBox6;
-        private Label label49;
-        private Label label50;
-        private ComboBox cbGrabberOverrideTitleLimit;
-        private Button btnEditScript;
-        private Label label51;
         private CheckBox chkAddTags;
         private Label label53;
         private Label label54;
@@ -6266,10 +6241,7 @@
         private Label lblAMCpath;
         private Button buttonAMCpathSearch;
         private CheckBox chkScanMediaOnStart;
-        private TextBox txtGrabberDisplay;
         private CheckBox cbAllowTraktSync;
-        private Label label55;
-        private ComboBox cbGrabberOverrideGetRoles;
         private CheckBox SearchOnlyExactMatches;
         private ComboBox AmcTitleSearchHandling;
         private Label label56;
@@ -6292,8 +6264,6 @@
         private LinkLabel linkLabelUsingTraktInMyFilmsWiki;
         private CheckBox chkSuppressManual;
         private Label label61;
-        private Label lblFilterGrabberScripts;
-        private TextBox ItemSearchGrabberScriptsFilter;
         private Button btnHyperLinkParamGen;
         private GroupBox groupBoxExternal;
         private Label labelRecentlyAddedAPI;
@@ -6389,30 +6359,6 @@
         private Button AntViewFilterEditButton;
         private TextBox AntViewValue;
         private NumericUpDown AntViewIndex;
-        private GroupBox groupBox_DetailedSupplementaryInformations;
-        private TextBox AntLabel5;
-        private TextBox AntLabel4;
-        private ComboBox AntItem5;
-        private ComboBox AntItem4;
-        private TextBox AntLabel3;
-        private ComboBox AntItem3;
-        private ComboBox AntItem2;
-        private TextBox AntLabel2;
-        private Label label7;
-        private ComboBox AntItem1;
-        private Label label3;
-        private TextBox AntLabel1;
-        private GroupBox groupBox_AntSelectedEnreg;
-        private Label AntFreetextFilterItem;
-        private TextBox AntFilterFreeText;
-        private TextBox Selected_Enreg;
-        private ComboBox AntFilterComb;
-        private ComboBox AntFilterSign2;
-        private ComboBox AntFilterSign1;
-        private ComboBox AntFilterItem2;
-        private TextBox AntFilterText2;
-        private ComboBox AntFilterItem1;
-        private TextBox AntFilterText1;
         private Label label10;
         private GroupBox groupBox4;
         private ComboBox LayoutInHierarchies;
@@ -6437,5 +6383,58 @@
         private Label label24;
         private ComboBox ListSeparator1;
         private CheckBox chkOnlyTitle;
+        private GroupBox groupBox_GrabberOptions;
+        private Label lblFilterGrabberScripts;
+        private TextBox ItemSearchGrabberScriptsFilter;
+        private TextBox txtGrabberDisplay;
+        private CheckBox chkGrabber_Always;
+        private Button btnEditScript;
+        private GroupBox groupBox6;
+        private ComboBox cbGrabberOverrideGetRoles;
+        private Label label55;
+        private Label label51;
+        private ComboBox cbGrabberOverrideTitleLimit;
+        private Label label50;
+        private Label label49;
+        private ComboBox cbGrabberOverridePersonLimit;
+        private ComboBox cbGrabberOverrideLanguage;
+        private Label lblSearchGrabberName;
+        private CheckBox chkGrabber_ChooseScript;
+        private ComboBox ItemSearchGrabberName;
+        private Button btnGrabber;
+        private TextBox txtGrabber;
+        private Label label27;
+        private Button buttonWikiHelp;
+        private GroupBox groupBox3;
+        private TextBox textBoxStrDfltSelect;
+        private Button btnCustomConfigFilter;
+        private GroupBox groupBox_PreLaunchingCommand;
+        private Label label39;
+        private Label label38;
+        private ComboBox CmdPar;
+        private TextBox CmdExe;
+        private GroupBox groupBox_AntSelectedEnreg;
+        private Label AntFreetextFilterItem;
+        private TextBox AntFilterFreeText;
+        private ComboBox AntFilterComb;
+        private ComboBox AntFilterSign2;
+        private ComboBox AntFilterSign1;
+        private ComboBox AntFilterItem2;
+        private TextBox AntFilterText2;
+        private ComboBox AntFilterItem1;
+        private TextBox AntFilterText1;
+        private GroupBox groupBox_DetailedSupplementaryInformations;
+        private TextBox AntLabel5;
+        private TextBox AntLabel4;
+        private ComboBox AntItem5;
+        private ComboBox AntItem4;
+        private TextBox AntLabel3;
+        private ComboBox AntItem3;
+        private ComboBox AntItem2;
+        private TextBox AntLabel2;
+        private Label label7;
+        private ComboBox AntItem1;
+        private Label label3;
+        private TextBox AntLabel1;
     }
 }
