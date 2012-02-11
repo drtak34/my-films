@@ -150,7 +150,6 @@
     </Compile>
     <Compile Include="DataBase\AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="BaseMesFilms.cs" />
     <Compile Include="CatalogConverter\DvdProfiler.cs" />
@@ -176,11 +175,6 @@
     </Compile>
     <Compile Include="Configuration\MyFilmsSetup.designer.cs">
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\AntMovieCatalog.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataBase\MFview.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -251,7 +245,6 @@
     <None Include="DataBase\AntMovieCatalog.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>AntMovieCatalog.Designer.cs</LastGenOutput>
     </None>
     <None Include="DataBase\AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>

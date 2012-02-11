@@ -273,8 +273,8 @@
           this.label61 = new System.Windows.Forms.Label();
           this.chksupplaystop = new System.Windows.Forms.CheckBox();
           this.txtfdupdate = new System.Windows.Forms.TextBox();
-          this.lblUpdateValue = new System.Windows.Forms.Label();
           this.cbfdupdate = new System.Windows.Forms.ComboBox();
+          this.lblUpdateValue = new System.Windows.Forms.Label();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.btnWatchedImport = new System.Windows.Forms.Button();
           this.btnWatchedExport = new System.Windows.Forms.Button();
@@ -313,7 +313,21 @@
           this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
           this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.Tab_Views = new System.Windows.Forms.TabPage();
+          this.groupBox_Separators = new System.Windows.Forms.GroupBox();
+          this.RoleSeparator5 = new System.Windows.Forms.ComboBox();
+          this.RoleSeparator4 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator5 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator4 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator3 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator2 = new System.Windows.Forms.ComboBox();
+          this.RoleSeparator2 = new System.Windows.Forms.ComboBox();
+          this.RoleSeparator3 = new System.Windows.Forms.ComboBox();
+          this.label22 = new System.Windows.Forms.Label();
+          this.RoleSeparator1 = new System.Windows.Forms.ComboBox();
+          this.label24 = new System.Windows.Forms.Label();
+          this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
           this.groupBox7 = new System.Windows.Forms.GroupBox();
           this.Sort = new System.Windows.Forms.ComboBox();
           this.label32 = new System.Windows.Forms.Label();
@@ -337,7 +351,6 @@
           this.groupBoxView = new System.Windows.Forms.GroupBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
           this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
-          this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
           this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -350,11 +363,11 @@
           this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
           this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
           this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+          this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
           this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
           this.toolStripButtonMoveUp = new System.Windows.Forms.ToolStripButton();
           this.toolStripButtonMoveDown = new System.Windows.Forms.ToolStripButton();
           this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-          this.toolStripButtonAddNew = new System.Windows.Forms.ToolStripButton();
           this.toolStripButtonAddDefaults = new System.Windows.Forms.ToolStripButton();
           this.dgViewsList = new System.Windows.Forms.DataGridView();
           this.labelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -557,20 +570,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.groupBox_Separators = new System.Windows.Forms.GroupBox();
-          this.RoleSeparator5 = new System.Windows.Forms.ComboBox();
-          this.RoleSeparator4 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator5 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator4 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator3 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator2 = new System.Windows.Forms.ComboBox();
-          this.RoleSeparator2 = new System.Windows.Forms.ComboBox();
-          this.RoleSeparator3 = new System.Windows.Forms.ComboBox();
-          this.label22 = new System.Windows.Forms.Label();
-          this.RoleSeparator1 = new System.Windows.Forms.ComboBox();
-          this.label24 = new System.Windows.Forms.Label();
-          this.ListSeparator1 = new System.Windows.Forms.ComboBox();
-          this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -611,6 +610,7 @@
           this.groupBox_DetailedSupplementaryInformations.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.Tab_Views.SuspendLayout();
+          this.groupBox_Separators.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
           this.groupBox7.SuspendLayout();
           this.groupBox4.SuspendLayout();
@@ -654,7 +654,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          this.groupBox_Separators.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2518,7 +2517,7 @@
           this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
           this.groupBoxDeletionOptions.Location = new System.Drawing.Point(378, 31);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(350, 228);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(335, 228);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
           this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions ...";
@@ -2533,7 +2532,7 @@
           this.gpsuppress.Enabled = false;
           this.gpsuppress.Location = new System.Drawing.Point(15, 35);
           this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(321, 93);
+          this.gpsuppress.Size = new System.Drawing.Size(294, 93);
           this.gpsuppress.TabIndex = 2;
           this.gpsuppress.TabStop = false;
           // 
@@ -2601,12 +2600,12 @@
           this.gpspfield.Controls.Add(this.label61);
           this.gpspfield.Controls.Add(this.chksupplaystop);
           this.gpspfield.Controls.Add(this.txtfdupdate);
-          this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Controls.Add(this.cbfdupdate);
+          this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Enabled = false;
           this.gpspfield.Location = new System.Drawing.Point(15, 134);
           this.gpspfield.Name = "gpspfield";
-          this.gpspfield.Size = new System.Drawing.Size(321, 87);
+          this.gpspfield.Size = new System.Drawing.Size(294, 87);
           this.gpspfield.TabIndex = 18;
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
@@ -2615,7 +2614,7 @@
           // label61
           // 
           this.label61.AutoSize = true;
-          this.label61.Location = new System.Drawing.Point(169, 40);
+          this.label61.Location = new System.Drawing.Point(138, 39);
           this.label61.Name = "label61";
           this.label61.Size = new System.Drawing.Size(72, 13);
           this.label61.TabIndex = 21;
@@ -2636,10 +2635,20 @@
           // 
           // txtfdupdate
           // 
-          this.txtfdupdate.Location = new System.Drawing.Point(170, 58);
+          this.txtfdupdate.Location = new System.Drawing.Point(139, 57);
           this.txtfdupdate.Name = "txtfdupdate";
-          this.txtfdupdate.Size = new System.Drawing.Size(144, 20);
+          this.txtfdupdate.Size = new System.Drawing.Size(115, 20);
           this.txtfdupdate.TabIndex = 16;
+          // 
+          // cbfdupdate
+          // 
+          this.cbfdupdate.FormattingEnabled = true;
+          this.cbfdupdate.Location = new System.Drawing.Point(10, 57);
+          this.cbfdupdate.Name = "cbfdupdate";
+          this.cbfdupdate.Size = new System.Drawing.Size(123, 21);
+          this.cbfdupdate.Sorted = true;
+          this.cbfdupdate.TabIndex = 15;
+          this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
           // lblUpdateValue
           // 
@@ -2649,16 +2658,6 @@
           this.lblUpdateValue.Size = new System.Drawing.Size(93, 13);
           this.lblUpdateValue.TabIndex = 20;
           this.lblUpdateValue.Text = "DB Item to update";
-          // 
-          // cbfdupdate
-          // 
-          this.cbfdupdate.FormattingEnabled = true;
-          this.cbfdupdate.Location = new System.Drawing.Point(10, 58);
-          this.cbfdupdate.Name = "cbfdupdate";
-          this.cbfdupdate.Size = new System.Drawing.Size(150, 21);
-          this.cbfdupdate.Sorted = true;
-          this.cbfdupdate.TabIndex = 15;
-          this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
           // groupBox2
           // 
@@ -2673,7 +2672,7 @@
           this.groupBox2.Controls.Add(this.cbWatched);
           this.groupBox2.Controls.Add(this.chkEnhancedWatchedStatusHandling);
           this.groupBox2.Controls.Add(this.CheckWatched);
-          this.groupBox2.Location = new System.Drawing.Point(18, 31);
+          this.groupBox2.Location = new System.Drawing.Point(13, 12);
           this.groupBox2.Name = "groupBox2";
           this.groupBox2.Size = new System.Drawing.Size(354, 143);
           this.groupBox2.TabIndex = 72;
@@ -3083,6 +3082,187 @@
           this.ToolTip1.SetToolTip(this.Tab_Views, "Setup for userdefined views and filters");
           this.Tab_Views.UseVisualStyleBackColor = true;
           // 
+          // groupBox_Separators
+          // 
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator5);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator4);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator5);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator4);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator3);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator2);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator2);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator3);
+          this.groupBox_Separators.Controls.Add(this.label22);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
+          this.groupBox_Separators.Controls.Add(this.label24);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator1);
+          this.groupBox_Separators.Location = new System.Drawing.Point(7, 277);
+          this.groupBox_Separators.Name = "groupBox_Separators";
+          this.groupBox_Separators.Size = new System.Drawing.Size(467, 71);
+          this.groupBox_Separators.TabIndex = 128;
+          this.groupBox_Separators.TabStop = false;
+          this.groupBox_Separators.Text = "Separators";
+          this.ToolTip1.SetToolTip(this.groupBox_Separators, resources.GetString("groupBox_Separators.ToolTip"));
+          // 
+          // RoleSeparator5
+          // 
+          this.RoleSeparator5.FormattingEnabled = true;
+          this.RoleSeparator5.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            "....",
+            ")"});
+          this.RoleSeparator5.Location = new System.Drawing.Point(342, 40);
+          this.RoleSeparator5.Name = "RoleSeparator5";
+          this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator5.TabIndex = 82;
+          this.RoleSeparator5.Text = "List";
+          // 
+          // RoleSeparator4
+          // 
+          this.RoleSeparator4.FormattingEnabled = true;
+          this.RoleSeparator4.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            "....",
+            ")"});
+          this.RoleSeparator4.Location = new System.Drawing.Point(293, 40);
+          this.RoleSeparator4.Name = "RoleSeparator4";
+          this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator4.TabIndex = 81;
+          this.RoleSeparator4.Text = "List";
+          // 
+          // ListSeparator5
+          // 
+          this.ListSeparator5.FormattingEnabled = true;
+          this.ListSeparator5.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator5.Location = new System.Drawing.Point(342, 13);
+          this.ListSeparator5.Name = "ListSeparator5";
+          this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator5.TabIndex = 80;
+          this.ListSeparator5.Text = "List";
+          // 
+          // ListSeparator4
+          // 
+          this.ListSeparator4.FormattingEnabled = true;
+          this.ListSeparator4.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator4.Location = new System.Drawing.Point(293, 13);
+          this.ListSeparator4.Name = "ListSeparator4";
+          this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator4.TabIndex = 79;
+          this.ListSeparator4.Text = "List";
+          // 
+          // ListSeparator3
+          // 
+          this.ListSeparator3.FormattingEnabled = true;
+          this.ListSeparator3.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator3.Location = new System.Drawing.Point(244, 13);
+          this.ListSeparator3.Name = "ListSeparator3";
+          this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator3.TabIndex = 78;
+          this.ListSeparator3.Text = "List";
+          // 
+          // ListSeparator2
+          // 
+          this.ListSeparator2.FormattingEnabled = true;
+          this.ListSeparator2.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator2.Location = new System.Drawing.Point(195, 13);
+          this.ListSeparator2.Name = "ListSeparator2";
+          this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator2.TabIndex = 77;
+          this.ListSeparator2.Text = "List";
+          // 
+          // RoleSeparator2
+          // 
+          this.RoleSeparator2.FormattingEnabled = true;
+          this.RoleSeparator2.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            ")",
+            "...."});
+          this.RoleSeparator2.Location = new System.Drawing.Point(195, 40);
+          this.RoleSeparator2.Name = "RoleSeparator2";
+          this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator2.Sorted = true;
+          this.RoleSeparator2.TabIndex = 76;
+          this.RoleSeparator2.Text = "List";
+          // 
+          // RoleSeparator3
+          // 
+          this.RoleSeparator3.FormattingEnabled = true;
+          this.RoleSeparator3.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            ")",
+            "...."});
+          this.RoleSeparator3.Location = new System.Drawing.Point(244, 40);
+          this.RoleSeparator3.Name = "RoleSeparator3";
+          this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator3.Sorted = true;
+          this.RoleSeparator3.TabIndex = 75;
+          this.RoleSeparator3.Text = "List";
+          // 
+          // label22
+          // 
+          this.label22.AutoSize = true;
+          this.label22.Location = new System.Drawing.Point(14, 43);
+          this.label22.Name = "label22";
+          this.label22.Size = new System.Drawing.Size(107, 13);
+          this.label22.TabIndex = 74;
+          this.label22.Text = "Role Text Separators";
+          this.ToolTip1.SetToolTip(this.label22, "Separators to remove \"roles\" from person names for Actors, Producers, etc.");
+          // 
+          // RoleSeparator1
+          // 
+          this.RoleSeparator1.FormattingEnabled = true;
+          this.RoleSeparator1.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            ")",
+            "...."});
+          this.RoleSeparator1.Location = new System.Drawing.Point(146, 40);
+          this.RoleSeparator1.Name = "RoleSeparator1";
+          this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator1.Sorted = true;
+          this.RoleSeparator1.TabIndex = 73;
+          this.RoleSeparator1.Text = "List";
+          // 
+          // label24
+          // 
+          this.label24.AutoSize = true;
+          this.label24.Location = new System.Drawing.Point(14, 16);
+          this.label24.Name = "label24";
+          this.label24.Size = new System.Drawing.Size(72, 13);
+          this.label24.TabIndex = 71;
+          this.label24.Text = "List Separator";
+          this.ToolTip1.SetToolTip(this.label24, "Separators used for splitting splittable fields, like Genre, Country, Actors, etc" +
+                  ".");
+          // 
+          // ListSeparator1
+          // 
+          this.ListSeparator1.FormattingEnabled = true;
+          this.ListSeparator1.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator1.Location = new System.Drawing.Point(146, 13);
+          this.ListSeparator1.Name = "ListSeparator1";
+          this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator1.TabIndex = 70;
+          this.ListSeparator1.Text = "List";
+          // 
           // groupBox_DefaultView
           // 
           this.groupBox_DefaultView.Controls.Add(this.chkOnlyTitle);
@@ -3103,6 +3283,19 @@
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
+          // 
+          // chkOnlyTitle
+          // 
+          this.chkOnlyTitle.AutoSize = true;
+          this.chkOnlyTitle.Location = new System.Drawing.Point(46, 271);
+          this.chkOnlyTitle.Name = "chkOnlyTitle";
+          this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
+          this.chkOnlyTitle.TabIndex = 86;
+          this.chkOnlyTitle.Text = "Only Movie Title in List Layout";
+          this.ToolTip1.SetToolTip(this.chkOnlyTitle, "Depending on the skin, there is normally displayed additional information like \"y" +
+                  "ear\"\r\nor \"counts\".\r\nBy enabling that option, only the title itself will be displ" +
+                  "ayed in list layouts.");
+          this.chkOnlyTitle.UseVisualStyleBackColor = true;
           // 
           // groupBox7
           // 
@@ -3263,7 +3456,7 @@
           // chkGlobalAvailableOnly
           // 
           this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(25, 313);
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(46, 314);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
           this.chkGlobalAvailableOnly.TabIndex = 82;
@@ -3275,7 +3468,7 @@
           // chkUseListviewForGroups
           // 
           this.chkUseListviewForGroups.AutoSize = true;
-          this.chkUseListviewForGroups.Location = new System.Drawing.Point(25, 249);
+          this.chkUseListviewForGroups.Location = new System.Drawing.Point(46, 250);
           this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
           this.chkUseListviewForGroups.Size = new System.Drawing.Size(179, 17);
           this.chkUseListviewForGroups.TabIndex = 81;
@@ -3287,7 +3480,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(25, 291);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(46, 292);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -3298,12 +3491,14 @@
           // AlwaysDefaultView
           // 
           this.AlwaysDefaultView.AutoSize = true;
-          this.AlwaysDefaultView.Location = new System.Drawing.Point(25, 227);
+          this.AlwaysDefaultView.Location = new System.Drawing.Point(46, 228);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
-          this.AlwaysDefaultView.Size = new System.Drawing.Size(205, 17);
+          this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
           this.AlwaysDefaultView.TabIndex = 75;
-          this.AlwaysDefaultView.Text = "Display always this view for this config";
-          this.ToolTip1.SetToolTip(this.AlwaysDefaultView, "Enabling a DefaultView will disable \'remember last item/view\'");
+          this.AlwaysDefaultView.Text = "Display always this View";
+          this.ToolTip1.SetToolTip(this.AlwaysDefaultView, "Enabling a DefaultView will disable \'remember last item/view\'\r\nTHis results in al" +
+                  "ways the selected view will be displayed, \r\nwhen starting the MyFilms plugin wit" +
+                  "h this config.");
           this.AlwaysDefaultView.UseVisualStyleBackColor = true;
           // 
           // View_Dflt_Item
@@ -3356,7 +3551,7 @@
           // 
           // bindingNavigatorViews
           // 
-          this.bindingNavigatorViews.AddNewItem = this.toolStripButtonAdd;
+          this.bindingNavigatorViews.AddNewItem = null;
           this.bindingNavigatorViews.BindingSource = this.viewBindingSource;
           this.bindingNavigatorViews.CountItem = this.toolStripLabel1;
           this.bindingNavigatorViews.DeleteItem = this.toolStripButtonDelete;
@@ -3377,7 +3572,6 @@
             this.toolStripButtonMoveUp,
             this.toolStripButtonMoveDown,
             this.toolStripSeparator5,
-            this.toolStripButtonAddNew,
             this.toolStripButtonAddDefaults});
           this.bindingNavigatorViews.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
           this.bindingNavigatorViews.Location = new System.Drawing.Point(3, 16);
@@ -3391,18 +3585,6 @@
           this.bindingNavigatorViews.Size = new System.Drawing.Size(461, 23);
           this.bindingNavigatorViews.TabIndex = 38;
           this.bindingNavigatorViews.Text = "bindingNavigatorViews";
-          // 
-          // toolStripButtonAdd
-          // 
-          this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.toolStripButtonAdd.Enabled = false;
-          this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
-          this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-          this.toolStripButtonAdd.RightToLeftAutoMirrorImage = true;
-          this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButtonAdd.Text = "Neu hinzufügen";
-          this.toolStripButtonAdd.Visible = false;
-          this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
           // 
           // viewBindingSource
           // 
@@ -3490,6 +3672,16 @@
           this.toolStripSeparator3.Name = "toolStripSeparator3";
           this.toolStripSeparator3.Size = new System.Drawing.Size(6, 23);
           // 
+          // toolStripButtonAdd
+          // 
+          this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
+          this.toolStripButtonAdd.Name = "toolStripButtonAdd";
+          this.toolStripButtonAdd.RightToLeftAutoMirrorImage = true;
+          this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 20);
+          this.toolStripButtonAdd.Text = "Neu hinzufügen";
+          this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+          // 
           // toolStripSeparator4
           // 
           this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -3519,16 +3711,6 @@
           // 
           this.toolStripSeparator5.Name = "toolStripSeparator5";
           this.toolStripSeparator5.Size = new System.Drawing.Size(6, 23);
-          // 
-          // toolStripButtonAddNew
-          // 
-          this.toolStripButtonAddNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-          this.toolStripButtonAddNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddNew.Image")));
-          this.toolStripButtonAddNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.toolStripButtonAddNew.Name = "toolStripButtonAddNew";
-          this.toolStripButtonAddNew.Size = new System.Drawing.Size(54, 17);
-          this.toolStripButtonAddNew.Text = "Add New";
-          this.toolStripButtonAddNew.Click += new System.EventHandler(this.toolStripButtonAddNew_Click);
           // 
           // toolStripButtonAddDefaults
           // 
@@ -5655,200 +5837,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // groupBox_Separators
-          // 
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator5);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator4);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator5);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator4);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator3);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator2);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator2);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator3);
-          this.groupBox_Separators.Controls.Add(this.label22);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
-          this.groupBox_Separators.Controls.Add(this.label24);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(7, 277);
-          this.groupBox_Separators.Name = "groupBox_Separators";
-          this.groupBox_Separators.Size = new System.Drawing.Size(467, 71);
-          this.groupBox_Separators.TabIndex = 128;
-          this.groupBox_Separators.TabStop = false;
-          this.groupBox_Separators.Text = "Separators";
-          this.ToolTip1.SetToolTip(this.groupBox_Separators, resources.GetString("groupBox_Separators.ToolTip"));
-          // 
-          // RoleSeparator5
-          // 
-          this.RoleSeparator5.FormattingEnabled = true;
-          this.RoleSeparator5.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            "....",
-            ")"});
-          this.RoleSeparator5.Location = new System.Drawing.Point(342, 40);
-          this.RoleSeparator5.Name = "RoleSeparator5";
-          this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator5.TabIndex = 82;
-          this.RoleSeparator5.Text = "List";
-          // 
-          // RoleSeparator4
-          // 
-          this.RoleSeparator4.FormattingEnabled = true;
-          this.RoleSeparator4.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            "....",
-            ")"});
-          this.RoleSeparator4.Location = new System.Drawing.Point(293, 40);
-          this.RoleSeparator4.Name = "RoleSeparator4";
-          this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator4.TabIndex = 81;
-          this.RoleSeparator4.Text = "List";
-          // 
-          // ListSeparator5
-          // 
-          this.ListSeparator5.FormattingEnabled = true;
-          this.ListSeparator5.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator5.Location = new System.Drawing.Point(342, 13);
-          this.ListSeparator5.Name = "ListSeparator5";
-          this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator5.TabIndex = 80;
-          this.ListSeparator5.Text = "List";
-          // 
-          // ListSeparator4
-          // 
-          this.ListSeparator4.FormattingEnabled = true;
-          this.ListSeparator4.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator4.Location = new System.Drawing.Point(293, 13);
-          this.ListSeparator4.Name = "ListSeparator4";
-          this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator4.TabIndex = 79;
-          this.ListSeparator4.Text = "List";
-          // 
-          // ListSeparator3
-          // 
-          this.ListSeparator3.FormattingEnabled = true;
-          this.ListSeparator3.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator3.Location = new System.Drawing.Point(244, 13);
-          this.ListSeparator3.Name = "ListSeparator3";
-          this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator3.TabIndex = 78;
-          this.ListSeparator3.Text = "List";
-          // 
-          // ListSeparator2
-          // 
-          this.ListSeparator2.FormattingEnabled = true;
-          this.ListSeparator2.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator2.Location = new System.Drawing.Point(195, 13);
-          this.ListSeparator2.Name = "ListSeparator2";
-          this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator2.TabIndex = 77;
-          this.ListSeparator2.Text = "List";
-          // 
-          // RoleSeparator2
-          // 
-          this.RoleSeparator2.FormattingEnabled = true;
-          this.RoleSeparator2.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            ")",
-            "...."});
-          this.RoleSeparator2.Location = new System.Drawing.Point(195, 40);
-          this.RoleSeparator2.Name = "RoleSeparator2";
-          this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator2.Sorted = true;
-          this.RoleSeparator2.TabIndex = 76;
-          this.RoleSeparator2.Text = "List";
-          // 
-          // RoleSeparator3
-          // 
-          this.RoleSeparator3.FormattingEnabled = true;
-          this.RoleSeparator3.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            ")",
-            "...."});
-          this.RoleSeparator3.Location = new System.Drawing.Point(244, 40);
-          this.RoleSeparator3.Name = "RoleSeparator3";
-          this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator3.Sorted = true;
-          this.RoleSeparator3.TabIndex = 75;
-          this.RoleSeparator3.Text = "List";
-          // 
-          // label22
-          // 
-          this.label22.AutoSize = true;
-          this.label22.Location = new System.Drawing.Point(14, 43);
-          this.label22.Name = "label22";
-          this.label22.Size = new System.Drawing.Size(107, 13);
-          this.label22.TabIndex = 74;
-          this.label22.Text = "Role Text Separators";
-          this.ToolTip1.SetToolTip(this.label22, "Separators to remove \"roles\" from person names for Actors, Producers, etc.");
-          // 
-          // RoleSeparator1
-          // 
-          this.RoleSeparator1.FormattingEnabled = true;
-          this.RoleSeparator1.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            ")",
-            "...."});
-          this.RoleSeparator1.Location = new System.Drawing.Point(146, 40);
-          this.RoleSeparator1.Name = "RoleSeparator1";
-          this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator1.Sorted = true;
-          this.RoleSeparator1.TabIndex = 73;
-          this.RoleSeparator1.Text = "List";
-          // 
-          // label24
-          // 
-          this.label24.AutoSize = true;
-          this.label24.Location = new System.Drawing.Point(14, 16);
-          this.label24.Name = "label24";
-          this.label24.Size = new System.Drawing.Size(72, 13);
-          this.label24.TabIndex = 71;
-          this.label24.Text = "List Separator";
-          this.ToolTip1.SetToolTip(this.label24, "Separators used for splitting splittable fields, like Genre, Country, Actors, etc" +
-                  ".");
-          // 
-          // ListSeparator1
-          // 
-          this.ListSeparator1.FormattingEnabled = true;
-          this.ListSeparator1.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator1.Location = new System.Drawing.Point(146, 13);
-          this.ListSeparator1.Name = "ListSeparator1";
-          this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator1.TabIndex = 70;
-          this.ListSeparator1.Text = "List";
-          // 
-          // chkOnlyTitle
-          // 
-          this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(25, 270);
-          this.chkOnlyTitle.Name = "chkOnlyTitle";
-          this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
-          this.chkOnlyTitle.TabIndex = 86;
-          this.chkOnlyTitle.Text = "Only Movie Title in List Layout";
-          this.ToolTip1.SetToolTip(this.chkOnlyTitle, "Depending on the skin, there is normally displayed additional information like \"y" +
-                  "ear\"\r\nor \"counts\".\r\nBy enabling that option, only the title itself will be displ" +
-                  "ayed in list layouts.");
-          this.chkOnlyTitle.UseVisualStyleBackColor = true;
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5921,6 +5909,8 @@
           this.groupBox_AntSelectedEnreg.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
+          this.groupBox_Separators.ResumeLayout(false);
+          this.groupBox_Separators.PerformLayout();
           this.groupBox_DefaultView.ResumeLayout(false);
           this.groupBox_DefaultView.PerformLayout();
           this.groupBox7.ResumeLayout(false);
@@ -5984,8 +5974,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          this.groupBox_Separators.ResumeLayout(false);
-          this.groupBox_Separators.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6387,7 +6375,6 @@
         private ToolStripButton toolStripButtonMoveUp;
         private ToolStripButton toolStripButtonMoveDown;
         private ToolStripSeparator toolStripSeparator5;
-        private ToolStripButton toolStripButtonAddNew;
         private ToolStripButton toolStripButtonAddDefaults;
         private DataGridView dgViewsList;
         private DataGridViewTextBoxColumn labelDataGridViewTextBoxColumn;

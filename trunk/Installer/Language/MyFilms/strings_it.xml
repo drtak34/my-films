@@ -71,6 +71,7 @@
     <String id="107986">My Films</String>
     <String id="107987">My Films</String>
     <String id="107988">My Films</String>
+    <String id="1079819">Views Menu</String>
     <String id="1079820">Delete menu entry</String>
     <String id="1079821">Move menu entry up</String>
     <String id="1079822">Move menu entry down</String>
@@ -78,6 +79,8 @@
     <String id="1079824">Rename menu entry</String>
     <String id="1079825">Set Film filter value</String>
     <String id="1079826">Set View filter expression</String>
+    <String id="1079827">Disable menu entry</String>
+    <String id="1079828">Enable menu entry</String>
     <String id="1079830">Elimina Film ...</String>
     <String id="1079831">Elimina film dal catalogo</String>
     <String id="1079832">Elimina file dal disco</String>

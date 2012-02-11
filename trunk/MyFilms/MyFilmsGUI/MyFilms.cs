@@ -6277,11 +6277,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else // called with userdefined views - so launch them ...
             {
               #region Set and Call userdefined Views
-              if (conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // films
+              if (conf.StrViewDfltItem == GUILocalizeStrings.Get(1079819)) // Views Menu
               {
                 conf.ViewContext = ViewContext.Menu;
                 SetLabelSelect("menu");
-                GetSelectFromMenuView(false);
+                GetSelectFromMenuView(conf.BoolMenuShowAll);
               }
               else if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
               {
@@ -6481,6 +6481,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         }
       }
+      if (selectedView == 1079819) selectedView = "Nenu";
       switch (selectedView)
       {
         #region Special Views ...
@@ -7727,16 +7728,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         upd_choice[ichoice] = "dontsplitvaluesinviews";
         ichoice++;
 
-        if (IsPersonField(conf.WStrSort))
-        {
-          if (MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798628))); // Reverse names
-          if (!MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798629)));
-          upd_choice[ichoice] = "reversenames";
-          ichoice++;
-        }
-
         if (conf.ViewContext == ViewContext.Menu)
         {
+          dlg.Add(GUILocalizeStrings.Get(1079827)); // Disable Menu Entry
+          upd_choice[ichoice] = "menudisable";
+          ichoice++;
+
+          foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+          {
+            if (!viewRow.ViewEnabled)
+            {
+              dlg.Add(GUILocalizeStrings.Get(1079828)); // Enable Menu Entry
+              upd_choice[ichoice] = "menuenable";
+              ichoice++;
+              break;
+            }
+          }
+
           dlg.Add(GUILocalizeStrings.Get(1079820)); // Delete Menu Entry
           upd_choice[ichoice] = "menudelete";
           ichoice++;
@@ -7880,6 +7888,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ichoice++;
           }
         }
+
+        if (MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798628))); // Reverse names
+        if (!MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798629)));
+        upd_choice[ichoice] = "reversenames";
+        ichoice++;
       }
       #endregion
 
@@ -8133,6 +8146,54 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               SaveCustomViews();
               GetSelectFromMenuView(conf.BoolMenuShowAll);
             }
+            break;
+          }
+
+
+        case "menudisable":
+          {
+            foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+            {
+              if (facadeFilms.SelectedListItem.Label == viewRow.Label)
+              {
+                viewRow.ViewEnabled = false;
+                break;
+              }
+            }
+            SaveCustomViews();
+            GetSelectFromMenuView(conf.BoolMenuShowAll);
+            break;
+          }
+
+        case "menuenable":
+          {
+            GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+
+            if (dlgmenu == null) return;
+            dlgmenu.Reset();
+            dlgmenu.SetHeading(GUILocalizeStrings.Get(1079828)); // Enable Menu Entry
+
+            foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+            {
+              if (viewRow.ViewEnabled == false)
+              {
+                dlgmenu.Add(viewRow.Label);
+              }
+            }
+
+            dlgmenu.DoModal(GetID);
+            if (dlgmenu.SelectedLabel == -1) break;
+
+            foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+            {
+              if (dlgmenu.SelectedLabelText == viewRow.Label && viewRow.ViewEnabled == false)
+              {
+                viewRow.ViewEnabled = true;
+                break;
+              }
+            }
+            SaveCustomViews();
+            GetSelectFromMenuView(conf.BoolMenuShowAll);
             break;
           }
 

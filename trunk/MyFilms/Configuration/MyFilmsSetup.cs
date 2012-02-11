@@ -197,8 +197,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 //{
                 //  Sort.Items.Add(dc.ColumnName);
                 //  SortInHierarchies.Items.Add(dc.ColumnName);
-                //  AntViewSortFilms.Items.Add(dc.ColumnName);
-                //  AntViewSortHierarchies.Items.Add(dc.ColumnName);
                 //}
 
                 if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
@@ -470,7 +468,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbPictureHandling.Focus();
               return;
             }
+            
             if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
+            
             if (AntFilterItem1.Text.Length == 0) AntFilterItem1.Text = "(none)";
             if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
             {
@@ -595,8 +595,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
 
             Selected_Enreg_TextChanged();
-            if (View_Dflt_Item.Text.Length == 0)
-                View_Dflt_Item.Text = "(none)";
+            if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
 
             // Delete temporary catalog file
             string destFile = string.Empty;
@@ -671,6 +670,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     wDfltSort = "Rating";
                     break;
                 default:
+                    wDfltSortMethod = BaseMesFilms.Translate_Column(Sort.Text);  
                     wDfltSort = Sort.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
                     break;
                                        
@@ -703,6 +703,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 wDfltSortInHierarchies = "Rating";
                 break;
               default:
+                wDfltSortMethodInHierarchies = BaseMesFilms.Translate_Column(SortInHierarchies.Text);
                 wDfltSortInHierarchies = SortInHierarchies.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
                 break;
 
@@ -1567,7 +1568,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //mydivx.Clear();
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
-            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu
+            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(1079819)); //Views Menu
             //View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Films
             //View_Dflt_Item.Items.Add("Year");
             //View_Dflt_Item.Items.Add("Category");
@@ -3502,35 +3503,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           Sort.Items.Clear();
           SortInHierarchies.Items.Clear();
-          //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
-          //    Sort.Items.Add(AntSTitle.Text);
-          //else
-          //    Sort.Items.Add(AntTitle1);
-          Sort.Items.Add("Title");
+          if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
+          {
+            Sort.Items.Add(AntSTitle.Text);
+            SortInHierarchies.Items.Add(AntSTitle.Text);
+          }
+          else
+          {
+            Sort.Items.Add(AntTitle1);
+            SortInHierarchies.Items.Add(AntTitle1);
+          }
+          //Sort.Items.Add("Title");
+          //SortInHierarchies.Items.Add("Title");
           Sort.Items.Add("Year");
           Sort.Items.Add("Date");
           Sort.Items.Add("Rating");
-          SortInHierarchies.Items.Add("Title");
           SortInHierarchies.Items.Add("Year");
           SortInHierarchies.Items.Add("Date");
           SortInHierarchies.Items.Add("Rating");
 
-          // if (!Sort.Items.Contains(Sort.Text)) Sort.Text = "(none)";
-          //Guzzi: Added to not Reset setting when localized strings present
-          if (
-              !Sort.Text.ToLower().Contains("title")
-              && Sort.Text.ToLower() != "year"
-              && !Sort.Text.ToLower().Contains("date")
-              && Sort.Text.ToLower() != "rating"
-            )
-            Sort.Text = "(none)";
-          if (
-              !SortInHierarchies.Text.ToLower().Contains("title")
-              && SortInHierarchies.Text.ToLower() != "year"
-              && !SortInHierarchies.Text.ToLower().Contains("date")
-              && SortInHierarchies.Text.ToLower() != "rating"
-            )
-            SortInHierarchies.Text = "(none)";
+          if (!Sort.Items.Contains(Sort.Text)) Sort.Text = "(none)";
+          if (!SortInHierarchies.Items.Contains(Sort.Text)) SortInHierarchies.Text = "(none)";
         }
 
         private void View_Dflt_Item_SelectedIndexChanged(object sender, EventArgs e)
@@ -5711,36 +5704,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
-        {
-          //// Populate the rows.
-          //string[] row1 = new string[]{"Meatloaf", "Main Dish"};
-          //string[] row2 = new string[]{"Key Lime Pie", "Dessert", "lime juice, evaporated milk", "****"};
-          //object[] rows = new object[] { row1, row2 };
-
-          //foreach (string[] rowArray in rows)
-          //{
-          //  dgViewsList.Rows.Add(rowArray); // addding row 
-          //}
-          //int position = viewBindingSource.Position;
-          //if (position < viewBindingSource.Count - 1) position = viewBindingSource.Count; // set to end of list
-
-          //viewBindingSource.RaiseListChangedEvents = false;
-          //MFview.ViewRow newRow = MyCustomViews.View.NewViewRow();
-          //newRow.Label = "NewView";
-          //MyCustomViews.View.Rows.InsertAt(newRow, position + 1);
-          //viewBindingSource.Position = position + 1;
-          //viewBindingSource.RaiseListChangedEvents = true;
-          MFview.ViewRow newRow = this.MyCustomViews.View.NewViewRow();
-          newRow.Label = "New View";
-          this.MyCustomViews.View.Rows.Add(newRow);
-          // bindingNavigatorSaveItem.PerformClick();
-          //viewBindingSourceAddNewItem.PerformClick();
-          viewBindingSource.ResetBindings(false);
-          dgViewsList.Focus();
-          viewBindingSource.Position = viewBindingSource.Count - 1;
-        }
-
-        private void toolStripButtonAddNew_Click(object sender, EventArgs e)
         {
           MFview.ViewRow newRow = this.MyCustomViews.View.NewViewRow();
           newRow.Label = "New View";
