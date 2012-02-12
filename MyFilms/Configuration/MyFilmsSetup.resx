@@ -156,6 +156,9 @@
   <metadata name="label68.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="label70.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
@@ -539,6 +542,11 @@ Note:
 The "global count" will inclease each time any user is watching a film thus representing "total plays".
 It will NOT change, if user manually sets a movie to watched or unwatched.</value>
   </data>
+  <data name="groupBox_DetailedSupplementaryInformations.ToolTip" xml:space="preserve">
+    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
+As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
+</value>
+  </data>
   <data name="groupBox_Separators.ToolTip" xml:space="preserve">
     <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
 there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... ‘  
@@ -563,6 +571,58 @@ the last view used before exiting the plugin will be shown next time.
 If a value is entered for the second parameter, only records containing that value will be displayed.  
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value>In movie hierarchies, normally the same sort order is used
+as in all other views.
+If you prefer a different sort order once you entered a movie group (hierarchy, collection),
+you can define a different sort order here.
+
+Example:
+You usually browse your movies sorted by rating, descending to alway have highest rated movies at the beginning.
+You are using movie hierarchies / collections, like e.g.
+Star Trek\Star Trek 1
+Star Trek\Star Trek 2
+If you enter the movie collection (here 'Star Trek') you prefer to have the movies sorted by year, ascending to have
+them in a better order.
+To achieve that, choose "Year" and "ASC".
+Note: the settings apply for ALL orders whenever you enter a hierarchy group, including single movies or multiple second level hierarchies.
+
+</value>
+  </data>
+  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
+    <value>"Only available" option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+Note:
+The availability status is only usable after MyFilms has done a scan. 
+This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
+Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
+  </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+AMC users can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
+  </data>
+  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 53</value>
+  </metadata>
+  <data name="groupBoxView.ToolTip" xml:space="preserve">
+    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
+In this section you can define additional views; 
+select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
+If there is no value entered, a menu will be displayed for the range of values available in the database.  
+If a value is entered, a list of the movies with that value will be displayed.
+Optional: 
+- If you want to use a list of values, you can add them as comma separated values.
+- You can set Index to values of 1 or 2 to get indexed display of the values
+- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
   </data>
   <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 53</value>
@@ -691,63 +751,14 @@ For example, you can define a view for children with ‘Category’ – ‘Anima
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
   <data name="checkBox2.ToolTip" xml:space="preserve">
     <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
 you will get an additional group in the view with films having no category assigned.
 This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
   </data>
-  <data name="groupBoxView.ToolTip" xml:space="preserve">
-    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
-In this section you can define additional views; 
-select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
-If there is no value entered, a menu will be displayed for the range of values available in the database.  
-If a value is entered, a list of the movies with that value will be displayed.
-Optional: 
-- If you want to use a list of values, you can add them as comma separated values.
-- You can set Index to values of 1 or 2 to get indexed display of the values
-- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
-  </data>
-  <data name="groupBox4.ToolTip" xml:space="preserve">
-    <value>In movie hierarchies, normally the same sort order is used
-as in all other views.
-If you prefer a different sort order once you entered a movie group (hierarchy, collection),
-you can define a different sort order here.
-
-Example:
-You usually browse your movies sorted by rating, descending to alway have highest rated movies at the beginning.
-You are using movie hierarchies / collections, like e.g.
-Star Trek\Star Trek 1
-Star Trek\Star Trek 2
-If you enter the movie collection (here 'Star Trek') you prefer to have the movies sorted by year, ascending to have
-them in a better order.
-To achieve that, choose "Year" and "ASC".
-Note: the settings apply for ALL orders whenever you enter a hierarchy group, including single movies or multiple second level hierarchies.
-
-</value>
-  </data>
-  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
-    <value>"Only available" option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-Note:
-The availability status is only usable after MyFilms has done a scan. 
-This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
-Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
-  </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-AMC users can configure the field and value to identify unwatched films
-on "update" tab (Watched-Status Handling).</value>
-  </data>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
-  </metadata>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
 and thus to integrate trailers into MyFilms.
@@ -780,14 +791,6 @@ If you use external ANT movie catalog to edit this field manually, you can add m
 e.g.: "\\server\path\trailer1.flv;C:\Movies\trailer2.flv"
 When using the trailer search &amp; register, MyFilms will automatically populate this DB field for you.</value>
   </data>
-  <data name="groupBox_PreLaunchingCommand.ToolTip" xml:space="preserve">
-    <value>You can define here a command batch file to be executed 
-before each movie launch. 
-In the parameter field, select the item field of your database 
-passed as  parameter to the command file.
-
-Very unused...</value>
-  </data>
   <data name="groupBox3.ToolTip" xml:space="preserve">
     <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
 select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
@@ -815,12 +818,93 @@ in (requires a list of allowed expressions)
 not in
 like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
   </data>
+  <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
+    <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
+select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
+
+For example, if you have a configuration of movies for children to watch, 
+and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
+and define a filter to not include films when that field value equals ‘XXX’.  
+Define this configuration by default and a menu of other configurations will not appear, 
+so children will not be aware of any other configurations.
+
+Adult movies can then be included in another configuration that is password protected.
+
+Alterternatively you could define a "whitelist" config for children:
+Category LIKE '*Children*' will include all movies, that have Children as part of the Category
+Category LIKE 'Children' will include all movies, that have Children as Category
+
+Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions)
+not in
+like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
+  </data>
+  <data name="groupBox_PreLaunchingCommand.ToolTip" xml:space="preserve">
+    <value>You can define here a command batch file to be executed 
+before each movie launch. 
+In the parameter field, select the item field of your database 
+passed as  parameter to the command file.
+
+Very unused...</value>
+  </data>
   <data name="groupBox_Security.ToolTip" xml:space="preserve">
     <value>You can set a password on a config.
 Selecting that config will then ask the user to enter the password.
 This is useful to deny access to certain movies, e.g. having all adult movies in a separate config and set a password.
 
 Note: If you have a password on the default config, each time you enter myfilms the user will have to enter the password.</value>
+  </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>Title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
+  </data>
+  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
+    <value>Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions, placeholders not allowed)
+not in
+like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
+
+Examples:
+"Number IN (1, 2, 3)"                    // integer values
+"Number NOT IN (1, 2, 3)"  // values not from the list
+"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
+"OriginalTitle LIKE 'j*'"       // values that start with 'j'
+"Actors LIKE '%jo%'"     // values that contain 'jo'
+"Category NOT LIKE 'j*'"   // values that don't start with 'j'
+"Category # 'Action' AND Category &lt;&gt; 'Horror'"
+"Category NOT IN ('Action', 'Horror')"
+"Actors IN ('Bruce Willis', 'Adriano Celentano')"
+"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
   </data>
   <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
     <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
@@ -870,34 +954,6 @@ In the first field, select the database item to be displayed containing the Medi
 In the second field you can enter your own text message to provide additional information.
 
 This is for users using offline library content, like DVD and BR discs or USB drives.</value>
-  </data>
-  <data name="CatalogType.ToolTip" xml:space="preserve">
-    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
-Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
-The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
-  </data>
-  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
-    <value>Title selection:
-You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
-
-Grouping:
-Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
-This can be used to group more than one movie together,
-e.g. for collections.
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
-  </data>
-  <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
-    <value>This setting is useful for non english users:
-If using translated title as mastertitle, certain views might miss 
-items, if the translated title is empty.
-MyFilms can use the originaltitle as replacement in those cases.</value>
   </data>
   <data name="label17.ToolTip" xml:space="preserve">
     <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
@@ -1533,62 +1589,6 @@ If you want to test or do skinning, but don't have a working catalog, you can se
   <metadata name="customFieldsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>848, 17</value>
   </metadata>
-  <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
-    <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
-select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
-
-For example, if you have a configuration of movies for children to watch, 
-and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
-and define a filter to not include films when that field value equals ‘XXX’.  
-Define this configuration by default and a menu of other configurations will not appear, 
-so children will not be aware of any other configurations.
-
-Adult movies can then be included in another configuration that is password protected.
-
-Alterternatively you could define a "whitelist" config for children:
-Category LIKE '*Children*' will include all movies, that have Children as part of the Category
-Category LIKE 'Children' will include all movies, that have Children as Category
-
-Supprted filter operators:
-=
-like
-not like
-&lt;
-&gt;
-# executed as "&lt;&gt;"
-in (requires a list of allowed expressions)
-not in
-like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
-  </data>
-  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
-    <value>Supprted filter operators:
-=
-like
-not like
-&lt;
-&gt;
-# executed as "&lt;&gt;"
-in (requires a list of allowed expressions, placeholders not allowed)
-not in
-like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
-
-Examples:
-"Number IN (1, 2, 3)"                    // integer values
-"Number NOT IN (1, 2, 3)"  // values not from the list
-"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
-"OriginalTitle LIKE 'j*'"       // values that start with 'j'
-"Actors LIKE '%jo%'"     // values that contain 'jo'
-"Category NOT LIKE 'j*'"   // values that don't start with 'j'
-"Category # 'Action' AND Category &lt;&gt; 'Horror'"
-"Category NOT IN ('Action', 'Horror')"
-"Actors IN ('Bruce Willis', 'Adriano Celentano')"
-"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
-  </data>
-  <data name="groupBox_DetailedSupplementaryInformations.ToolTip" xml:space="preserve">
-    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
-As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
-</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>125</value>
   </metadata>
