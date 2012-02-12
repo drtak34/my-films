@@ -563,7 +563,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 return;
             }
             if (chkSuppress.Checked)
-                if (((rbsuppress3.Checked) || (rbsuppress4.Checked)) && ((cbfdupdate.Text.Length == 0) || (txtfdupdate.Text.Length == 0)))
+              if ((cbSuppress.SelectedIndex == 2 || cbSuppress.SelectedIndex == 3) && (cbfdupdate.Text.Length == 0 || txtfdupdate.Text.Length == 0))
                 {
                     MessageBox.Show("For updating entry, field and value are mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     cbfdupdate.Focus();
@@ -1702,7 +1702,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cbfdupdate.ResetText();
             cbWatched.ResetText();
             txtfdupdate.ResetText();
-            rbsuppress1.Checked = true;
+            cbSuppress.ResetText();
             SearchSubDirs.Checked = false;
             SearchOnlyExactMatches.Checked = false;
             SearchSubDirsTrailer.Checked = false;
@@ -5835,27 +5835,36 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnGrabber_Click_1(object sender, EventArgs e)
+        private void buttonResetViewImage_Click(object sender, EventArgs e)
         {
-
+          MyCustomViews.View[viewBindingSource.Position].ImagePath = "";
         }
 
-        private void txtGrabberDisplay_TextChanged(object sender, EventArgs e)
+        private void AntViewsImage_Click(object sender, EventArgs e)
         {
+          if (!string.IsNullOrEmpty(MyCustomViews.View[viewBindingSource.Position].ImagePath))
+            openFileDialog1.FileName = MyCustomViews.View[viewBindingSource.Position].ImagePath;
+          else
+          {
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+          }
 
+          if (null != MyCustomViews.View[viewBindingSource.Position].ImagePath && MyCustomViews.View[viewBindingSource.Position].ImagePath.Contains("\\"))
+            openFileDialog1.InitialDirectory = MyCustomViews.View[viewBindingSource.Position].ImagePath.Substring(0, MyCustomViews.View[viewBindingSource.Position].ImagePath.LastIndexOf("\\") + 1);
+
+          openFileDialog1.RestoreDirectory = true;
+          openFileDialog1.DefaultExt = "jpg";
+          openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
+          openFileDialog1.Title = "Select Views Image";
+          if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            MyCustomViews.View[viewBindingSource.Position].ImagePath = openFileDialog1.FileName;
         }
 
-        private void txtGrabber_TextChanged_1(object sender, EventArgs e)
+        private void AntViewsImage_DoubleClick(object sender, EventArgs e)
         {
-
+          MyCustomViews.View[viewBindingSource.Position].ImagePath = "";
         }
-
-        private void btnEditScript_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-
       }
 
       public static class BindingSourceExtension
