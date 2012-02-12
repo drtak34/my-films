@@ -453,6 +453,19 @@ including grabbing media info, internet movie data, cover image and fanart.
 You can use and launch AMCUpdater in batch mode from inside the MyFilms GUI or schedule a task 
 to run independently from Mediaportal / My Films.</value>
   </data>
+  <data name="gpspfield.ToolTip" xml:space="preserve">
+    <value>This defines the action taken, when the player finishes.
+You can update e.g. the "checked" field with a value "true to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
+
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
+  <data name="chkSuppress.ToolTip" xml:space="preserve">
+    <value>When enabled, the selected actions are automatically performed after a movie is watched.
+
+Note: If physical removal is selected, your movie files will be deleted
+from disk after you watched it - handle with care !</value>
+  </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The automatic Deletion Options allow you to update and/or delete records and/or media files 
 after the corresponding movie is watched - or manually via the context menu.
@@ -462,13 +475,6 @@ Be careful - enabling delete options can delete not only the record in your data
 Update DB = update the record with settings of "Player finished Update Action"
 Delete DB entry = delete the record from the DB
 Delete Movie file = PHYSICALLY DELETES your movie from storage medium.</value>
-  </data>
-  <data name="gpspfield.ToolTip" xml:space="preserve">
-    <value>This defines the action taken, when the player finishes.
-You can update e.g. the "checked" field with a value "true to indicate "watched status". 
-However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
-
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="btnWatchedImport.ToolTip" xml:space="preserve">
     <value>You can import a formerly created backupfile of your watched status.
@@ -558,6 +564,11 @@ The plugin needs to know what separator is used to indicate the role text for fi
 Note: Separators will need time to process - for person views (e.g. actors), you can speed up 
 the view sigificantly by defining only those separators you really need.</value>
   </data>
+  <data name="chkShowEmpty.ToolTip" xml:space="preserve">
+    <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
+you will get an additional group in the view with films having no category assigned.
+This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
+  </data>
   <data name="groupBox4.ToolTip" xml:space="preserve">
     <value>In movie hierarchies, normally the same sort order is used
 as in all other views.
@@ -607,14 +618,14 @@ If a value is entered for the second parameter, only records containing that val
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
   </data>
-  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 53</value>
-  </metadata>
   <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1245, 18</value>
   </metadata>
   <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1167, 18</value>
+  </metadata>
+  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 53</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripButtonDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -733,11 +744,6 @@ For example, you can define a view for children with ‘Category’ – ‘Anima
         NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="checkBox2.ToolTip" xml:space="preserve">
-    <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
-you will get an additional group in the view with films having no category assigned.
-This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
   </data>
   <data name="groupBoxView.ToolTip" xml:space="preserve">
     <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  

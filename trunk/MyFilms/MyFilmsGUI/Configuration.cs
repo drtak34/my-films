@@ -141,7 +141,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   view.Value = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", index), string.Empty);
                   view.Filter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewFilter{0}", index), string.Empty);
                   view.Index = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewIndex{0}", index), 0);
-                  view.ShowEmpty = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewShowEmpty{0}", index), false);
                   view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), "Name");
                   view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), " ASC");
                   if (view.SortDirectionView.Contains("ASC")) view.SortDirectionView = " ASC"; else view.SortDirectionView = " DESC";
@@ -551,8 +550,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 AllowTraktSync = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AllowTraktSync", false);
                 AllowRecentlyAddedAPI = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AllowRecentAddedAPI", false);
 
-
-                UseListViewForGoups = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseListviewForGroups", true);
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
                 if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
                 {
@@ -731,12 +728,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return boolCollection; }
           set { boolCollection = value; }
-        }
-        private bool useListViewForGoups = true;
-        public bool UseListViewForGoups
-        {
-            get { return useListViewForGoups; }
-            set { useListViewForGoups = value; }
         }
         private bool alwaysDefaultView = false;
         public bool AlwaysDefaultView
