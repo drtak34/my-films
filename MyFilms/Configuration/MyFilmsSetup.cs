@@ -594,6 +594,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
             }
 
+            if (chkSuppress.Enabled && cbSuppress.SelectedIndex == -1)
+            {
+              General.SelectedIndex = 4;
+              cbSuppress.Focus();
+              MessageBox.Show("You have enabled the automatic deletion after a movie is watched - select the proper action !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+            }
+
             Selected_Enreg_TextChanged();
             if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
 
@@ -850,7 +857,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatched", CheckWatched.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AlwaysDefaultView", AlwaysDefaultView.Checked);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UseListviewForGroups", chkUseListviewForGroups.Checked);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UseListviewForGroups", chkUseListviewForGroups.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalAvailableOnly", chkGlobalAvailableOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
@@ -901,14 +908,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "WatchedField", cbWatched.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressField", cbfdupdate.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", txtfdupdate.Text);
-            if (rbsuppress1.Checked)
-                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1");
-            if (rbsuppress2.Checked)
+            switch (cbSuppress.SelectedIndex)
+            {
+              case 0:
+                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1"); // delete DB entry only
+                break;
+              case 1:
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "2");
-            if (rbsuppress3.Checked)
+                break;
+              case 2:
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "3");
-            if (rbsuppress4.Checked)
+                break;
+              case 3:
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "4");
+                break;
+            }
 
             CleanupOldEntries(); // this can be removed in later versions - only to clean up config files from unused entries ...
 
@@ -955,7 +969,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), viewRow.Value);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), viewRow.Filter);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), viewRow.Index);
-          XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
@@ -970,7 +983,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index));
-          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLayoutView{0}", index));
@@ -1238,7 +1250,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               view.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), string.Empty);
               view.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), string.Empty);
               view.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), 0);
-              view.ShowEmpty = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewShowEmpty{0}", index), false);
               view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), "Name");
               view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), " ASC");
               if (view.SortDirectionView.Contains("ASC")) view.SortDirectionView = " ASC"; else view.SortDirectionView = " DESC";
@@ -1303,18 +1314,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1");
             switch (wsuppressType)
             {
-                case "1":
-                    rbsuppress1.Checked = true;
-                    break;
-                case "2":
-                    rbsuppress2.Checked = true;
-                    break;
-                case "3":
-                    rbsuppress3.Checked = true;
-                    break;
-                default:
-                    rbsuppress4.Checked = true;
-                    break;
+              case "1":
+                cbSuppress.SelectedIndex = 0;  
+                break;
+              case "2":
+                cbSuppress.SelectedIndex = 1;
+                break;
+              case "3":
+                cbSuppress.SelectedIndex = 2;
+                break;
+              default:
+                cbSuppress.SelectedIndex = 3;
+                break;
             }
             Dwp.Text = crypto.Decrypter(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Dwp", string.Empty));
             Rpt_Dwp.Text = Dwp.Text;
@@ -1334,7 +1345,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CheckWatched", false);
             CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AlwaysDefaultView", false);
-            chkUseListviewForGroups.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseListviewForGroups", true);
+            //chkUseListviewForGroups.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseListviewForGroups", true);
             chkGlobalAvailableOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalAvailableOnly", false);
             chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnly", false);
             textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnlyValue", "false");
@@ -1526,7 +1537,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Tab_Trailer.Enabled = false;
             Tab_Logos.Enabled = false;
             Tab_Views.Enabled = false;
-            Tab_Config.Enabled = false;
+            Tab_Display.Enabled = false;
             Tab_Update.Enabled = false;
             Tab_AMCupdater.Enabled = false;
             Tab_Artwork.Enabled = false;
@@ -1547,7 +1558,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Tab_Trailer.Enabled = true;
             Tab_Logos.Enabled = true;
             Tab_Views.Enabled = true;
-            Tab_Config.Enabled = true;
+            Tab_Display.Enabled = true;
             Tab_Update.Enabled = true;
             Tab_AMCupdater.Enabled = true;
             Tab_Artwork.Enabled = true;
@@ -1582,7 +1593,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               Tab_Trailer.Enabled = false;
               Tab_Logos.Enabled = false;
               Tab_Views.Enabled = false;
-              Tab_Config.Enabled = false;
+              Tab_Display.Enabled = false;
               Tab_Update.Enabled = false;
               Tab_AMCupdater.Enabled = false;
               Tab_Artwork.Enabled = false;
@@ -1604,7 +1615,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               Tab_Trailer.Enabled = true;
               Tab_Logos.Enabled = true;
               Tab_Views.Enabled = true;
-              Tab_Config.Enabled = true;
+              Tab_Display.Enabled = true;
               Tab_Update.Enabled = true;
               Tab_AMCupdater.Enabled = true;
               Tab_Artwork.Enabled = true;
@@ -1721,7 +1732,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDVDprofilerMergeWithGenreField.Checked = false;
             chkDVDprofilerOnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;
-            chkUseListviewForGroups.Checked = true;
+            //chkUseListviewForGroups.Checked = true;
             chkGlobalAvailableOnly.Checked = false;
             chkGlobalUnwatchedOnly.Checked = false;
             chkScanMediaOnStart.Checked = false;
@@ -3353,13 +3364,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   
           if (chkSuppress.Checked)
             {
-                gpsuppress.Enabled = true;
+                cbSuppress.Enabled = true;
                 gpspfield.Enabled = true;
                 chksupplaystop.Enabled = true;
             }
             else
             {
-                gpsuppress.Enabled = false;
+                cbSuppress.Enabled = false;
                 chksupplaystop.Checked = false;
                 gpspfield.Enabled = false;
                 chksupplaystop.Enabled = false;
@@ -3372,12 +3383,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (chkSuppress.Checked) chkSuppress.Checked = false;
         }
 
-        private void rbsuppress_CheckedChanged(object sender, EventArgs e)
+        private void cbSuppress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((rbsuppress3.Checked) || (rbsuppress4.Checked))
-                gpspfield.Enabled = true;
-            else
-                gpspfield.Enabled = false;
+          if ((cbSuppress.SelectedIndex == 2) || (cbSuppress.SelectedIndex == 3))
+            gpspfield.Enabled = true;
+          else
+            gpspfield.Enabled = false;
         }
 
         private void cbfdupdate_SelectedIndexChanged(object sender, EventArgs e)
@@ -3532,14 +3543,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (View_Dflt_Item.Text == "(none)" || View_Dflt_Item.Text == GUILocalizeStrings.Get(1079819)) // Views Menu
             {
               View_Dflt_Text.Visible = false;
-              lbl_View_Dflt_Text.Visible = false;
+              //lbl_View_Dflt_Text.Visible = false;
               View_Dflt_Text.Clear();
               return;
             }
             else
             {
               View_Dflt_Text.Visible = true;
-              lbl_View_Dflt_Text.Visible = true;
+              //lbl_View_Dflt_Text.Visible = true;
             }
 
             foreach (MFview.ViewRow viewRow in this.MyCustomViews.View)
@@ -4316,13 +4327,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           // Set Parameters from MyFilms configuration
           AMCSetAttribute("Ant_Database_Source_Field", AntStorage.Text);
-          AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
+          AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCExcludedMoviesFile.txt");
           
           if (txtGrabber.Text.Length != 0)
             AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
           else
             AMCSetAttribute("Internet_Parser_Path", Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml");
-          AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
+          AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCExcludedMoviesFile.txt");
           AMCSetAttribute("Manual_Internet_Parser_Path", txtGrabber.Text);
           AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
           AMCSetAttribute("Master_Title", AntTitle1.Text); // Check, if this should be replaced by ItemSearchGrabber...
@@ -5823,6 +5834,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void btnGrabber_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtGrabberDisplay_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtGrabber_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditScript_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
 
       }
 

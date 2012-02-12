@@ -278,8 +278,6 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIndex;
             
-            private global::System.Data.DataColumn columnShowEmpty;
-            
             private global::System.Data.DataColumn columnSortFieldViewType;
             
             private global::System.Data.DataColumn columnSortDirectionView;
@@ -373,13 +371,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ShowEmptyColumn {
-                get {
-                    return this.columnShowEmpty;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn SortFieldViewTypeColumn {
                 get {
                     return this.columnSortFieldViewType;
@@ -429,7 +420,7 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ViewRow AddViewRow(string Label, bool ViewEnabled, string ImagePath, string DBfield, string Value, string Filter, int Index, bool ShowEmpty, string SortFieldViewType, string SortDirectionView, string LayoutView) {
+            public ViewRow AddViewRow(string Label, bool ViewEnabled, string ImagePath, string DBfield, string Value, string Filter, int Index, string SortFieldViewType, string SortDirectionView, string LayoutView) {
                 ViewRow rowViewRow = ((ViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -440,7 +431,6 @@ namespace MyFilmsPlugin.DataBase {
                         Value,
                         Filter,
                         Index,
-                        ShowEmpty,
                         SortFieldViewType,
                         SortDirectionView,
                         LayoutView};
@@ -477,7 +467,6 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnValue = base.Columns["Value"];
                 this.columnFilter = base.Columns["Filter"];
                 this.columnIndex = base.Columns["Index"];
-                this.columnShowEmpty = base.Columns["ShowEmpty"];
                 this.columnSortFieldViewType = base.Columns["SortFieldViewType"];
                 this.columnSortDirectionView = base.Columns["SortDirectionView"];
                 this.columnLayoutView = base.Columns["LayoutView"];
@@ -501,8 +490,6 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnFilter);
                 this.columnIndex = new global::System.Data.DataColumn("Index", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIndex);
-                this.columnShowEmpty = new global::System.Data.DataColumn("ShowEmpty", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnShowEmpty);
                 this.columnSortFieldViewType = new global::System.Data.DataColumn("SortFieldViewType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSortFieldViewType);
                 this.columnSortDirectionView = new global::System.Data.DataColumn("SortDirectionView", typeof(string), null, global::System.Data.MappingType.Element);
@@ -521,7 +508,6 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnValue.DefaultValue = ((string)(""));
                 this.columnFilter.DefaultValue = ((string)(""));
                 this.columnIndex.DefaultValue = ((int)(0));
-                this.columnShowEmpty.DefaultValue = ((bool)(false));
                 this.columnSortFieldViewType.DefaultValue = ((string)("Name"));
                 this.columnSortDirectionView.DefaultValue = ((string)(" ASC"));
                 this.columnLayoutView.DefaultValue = ((string)("List"));
@@ -767,21 +753,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool ShowEmpty {
-                get {
-                    try {
-                        return ((bool)(this[this.tableView.ShowEmptyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte ShowEmpty in Tabelle View ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView.ShowEmptyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string SortFieldViewType {
                 get {
                     try {
@@ -884,16 +855,6 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetIndexNull() {
                 this[this.tableView.IndexColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsShowEmptyNull() {
-                return this.IsNull(this.tableView.ShowEmptyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetShowEmptyNull() {
-                this[this.tableView.ShowEmptyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

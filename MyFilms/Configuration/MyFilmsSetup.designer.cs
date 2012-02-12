@@ -241,18 +241,15 @@
           this.btnCreateAMCDesktopIcon = new System.Windows.Forms.Button();
           this.chkAMCUpd = new System.Windows.Forms.CheckBox();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
-          this.gpsuppress = new System.Windows.Forms.GroupBox();
-          this.rbsuppress2 = new System.Windows.Forms.RadioButton();
-          this.rbsuppress4 = new System.Windows.Forms.RadioButton();
-          this.rbsuppress3 = new System.Windows.Forms.RadioButton();
-          this.rbsuppress1 = new System.Windows.Forms.RadioButton();
-          this.chkSuppress = new System.Windows.Forms.CheckBox();
+          this.cbSuppress = new System.Windows.Forms.ComboBox();
           this.gpspfield = new System.Windows.Forms.GroupBox();
           this.label61 = new System.Windows.Forms.Label();
           this.chksupplaystop = new System.Windows.Forms.CheckBox();
           this.txtfdupdate = new System.Windows.Forms.TextBox();
           this.cbfdupdate = new System.Windows.Forms.ComboBox();
           this.lblUpdateValue = new System.Windows.Forms.Label();
+          this.chkSuppressManual = new System.Windows.Forms.CheckBox();
+          this.chkSuppress = new System.Windows.Forms.CheckBox();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.btnWatchedImport = new System.Windows.Forms.Button();
           this.btnWatchedExport = new System.Windows.Forms.Button();
@@ -265,7 +262,7 @@
           this.cbWatched = new System.Windows.Forms.ComboBox();
           this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
-          this.Tab_Config = new System.Windows.Forms.TabPage();
+          this.Tab_Display = new System.Windows.Forms.TabPage();
           this.groupBox_DetailedSupplementaryInformations = new System.Windows.Forms.GroupBox();
           this.AntLabel5 = new System.Windows.Forms.TextBox();
           this.AntLabel4 = new System.Windows.Forms.TextBox();
@@ -294,6 +291,7 @@
           this.label24 = new System.Windows.Forms.Label();
           this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.chkShowEmpty = new System.Windows.Forms.CheckBox();
           this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
           this.groupBox7 = new System.Windows.Forms.GroupBox();
           this.Sort = new System.Windows.Forms.ComboBox();
@@ -308,18 +306,17 @@
           this.SortSensInHierarchies = new System.Windows.Forms.ComboBox();
           this.SortInHierarchies = new System.Windows.Forms.ComboBox();
           this.label10 = new System.Windows.Forms.Label();
-          this.lbl_View_Dflt_Text = new System.Windows.Forms.Label();
           this.chkGlobalAvailableOnly = new System.Windows.Forms.CheckBox();
-          this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.AlwaysDefaultView = new System.Windows.Forms.CheckBox();
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
-          this.lblAntViewIndex = new System.Windows.Forms.Label();
-          this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
+          this.textBoxViewLabel = new System.Windows.Forms.TextBox();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
+          this.lblAntViewIndex = new System.Windows.Forms.Label();
+          this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
           this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
           this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
           this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
@@ -348,7 +345,6 @@
           this.AntViewFilter = new System.Windows.Forms.TextBox();
           this.AntViewFilterEditButton = new System.Windows.Forms.Button();
           this.AntViewValue = new System.Windows.Forms.TextBox();
-          this.checkBox2 = new System.Windows.Forms.CheckBox();
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.Tab_Trailer = new System.Windows.Forms.TabPage();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
@@ -439,7 +435,6 @@
           this.AMCConfigView = new System.Windows.Forms.ListView();
           this.Option = new System.Windows.Forms.ColumnHeader();
           this.Value = new System.Windows.Forms.ColumnHeader();
-          this.chkSuppressManual = new System.Windows.Forms.CheckBox();
           this.btnHyperLinkParamGen = new System.Windows.Forms.Button();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
           this.lblFilterGrabberScripts = new System.Windows.Forms.Label();
@@ -505,7 +500,6 @@
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
-          this.groupBox_ManualDeletion = new System.Windows.Forms.GroupBox();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
           this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
@@ -601,10 +595,9 @@
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
           this.groupBoxDeletionOptions.SuspendLayout();
-          this.gpsuppress.SuspendLayout();
           this.gpspfield.SuspendLayout();
           this.groupBox2.SuspendLayout();
-          this.Tab_Config.SuspendLayout();
+          this.Tab_Display.SuspendLayout();
           this.groupBox_DetailedSupplementaryInformations.SuspendLayout();
           this.Tab_Views.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
@@ -612,10 +605,10 @@
           this.groupBox7.SuspendLayout();
           this.groupBox4.SuspendLayout();
           this.groupBoxView.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).BeginInit();
-          this.bindingNavigatorViews.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.mFview)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).BeginInit();
+          this.bindingNavigatorViews.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dgViewsList)).BeginInit();
           this.groupBoxSortAndLayoutForView.SuspendLayout();
           this.groupBox5.SuspendLayout();
@@ -643,7 +636,6 @@
           this.Tab_Artwork.SuspendLayout();
           this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Update.SuspendLayout();
-          this.groupBox_ManualDeletion.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).BeginInit();
@@ -798,7 +790,7 @@
           // label66
           // 
           label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(313, 50);
+          label66.Location = new System.Drawing.Point(342, 70);
           label66.Name = "label66";
           label66.Size = new System.Drawing.Size(37, 13);
           label66.TabIndex = 7;
@@ -808,7 +800,7 @@
           // label65
           // 
           label65.AutoSize = true;
-          label65.Location = new System.Drawing.Point(183, 50);
+          label65.Location = new System.Drawing.Point(183, 70);
           label65.Name = "label65";
           label65.Size = new System.Drawing.Size(47, 13);
           label65.TabIndex = 5;
@@ -1720,7 +1712,7 @@
           this.btnResetThumbs.Name = "btnResetThumbs";
           this.btnResetThumbs.Size = new System.Drawing.Size(64, 36);
           this.btnResetThumbs.TabIndex = 76;
-          this.btnResetThumbs.Text = "Reset Thumbs";
+          this.btnResetThumbs.Text = "Reset Cache";
           this.ToolTip1.SetToolTip(this.btnResetThumbs, resources.GetString("btnResetThumbs.ToolTip"));
           this.btnResetThumbs.UseVisualStyleBackColor = true;
           this.btnResetThumbs.Click += new System.EventHandler(this.btnResetThumbs_Click);
@@ -1922,7 +1914,7 @@
           this.btnResetThumbsArtist.Name = "btnResetThumbsArtist";
           this.btnResetThumbsArtist.Size = new System.Drawing.Size(64, 34);
           this.btnResetThumbsArtist.TabIndex = 99;
-          this.btnResetThumbsArtist.Text = "Reset Thumbs";
+          this.btnResetThumbsArtist.Text = "Reset Cache";
           this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, resources.GetString("btnResetThumbsArtist.ToolTip"));
           this.btnResetThumbsArtist.UseVisualStyleBackColor = true;
           this.btnResetThumbsArtist.Click += new System.EventHandler(this.btnResetThumbsArtist_Click);
@@ -2204,87 +2196,33 @@
           // 
           // groupBoxDeletionOptions
           // 
-          this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.cbSuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
+          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppressManual);
           this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
-          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(354, 12);
+          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(354, 14);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 100);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 178);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
-          this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions ...";
+          this.groupBoxDeletionOptions.Text = "Update and Deletion Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
-          // gpsuppress
+          // cbSuppress
           // 
-          this.gpsuppress.Controls.Add(this.rbsuppress2);
-          this.gpsuppress.Controls.Add(this.rbsuppress4);
-          this.gpsuppress.Controls.Add(this.rbsuppress3);
-          this.gpsuppress.Controls.Add(this.rbsuppress1);
-          this.gpsuppress.Enabled = false;
-          this.gpsuppress.Location = new System.Drawing.Point(8, 40);
-          this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(368, 50);
-          this.gpsuppress.TabIndex = 2;
-          this.gpsuppress.TabStop = false;
-          // 
-          // rbsuppress2
-          // 
-          this.rbsuppress2.AutoSize = true;
-          this.rbsuppress2.Location = new System.Drawing.Point(175, 10);
-          this.rbsuppress2.Name = "rbsuppress2";
-          this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
-          this.rbsuppress2.TabIndex = 5;
-          this.rbsuppress2.TabStop = true;
-          this.rbsuppress2.Text = "Delete both db entry and movie file";
-          this.rbsuppress2.UseVisualStyleBackColor = true;
-          // 
-          // rbsuppress4
-          // 
-          this.rbsuppress4.AutoSize = true;
-          this.rbsuppress4.Location = new System.Drawing.Point(175, 29);
-          this.rbsuppress4.Name = "rbsuppress4";
-          this.rbsuppress4.Size = new System.Drawing.Size(186, 17);
-          this.rbsuppress4.TabIndex = 4;
-          this.rbsuppress4.TabStop = true;
-          this.rbsuppress4.Text = "Update db entry - delete movie file";
-          this.rbsuppress4.UseVisualStyleBackColor = true;
-          this.rbsuppress4.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
-          // 
-          // rbsuppress3
-          // 
-          this.rbsuppress3.AutoSize = true;
-          this.rbsuppress3.Location = new System.Drawing.Point(14, 28);
-          this.rbsuppress3.Name = "rbsuppress3";
-          this.rbsuppress3.Size = new System.Drawing.Size(155, 17);
-          this.rbsuppress3.TabIndex = 2;
-          this.rbsuppress3.TabStop = true;
-          this.rbsuppress3.Text = "Update db - keep movie file";
-          this.rbsuppress3.UseVisualStyleBackColor = true;
-          this.rbsuppress3.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
-          // 
-          // rbsuppress1
-          // 
-          this.rbsuppress1.AutoSize = true;
-          this.rbsuppress1.Location = new System.Drawing.Point(14, 9);
-          this.rbsuppress1.Name = "rbsuppress1";
-          this.rbsuppress1.Size = new System.Drawing.Size(119, 17);
-          this.rbsuppress1.TabIndex = 1;
-          this.rbsuppress1.TabStop = true;
-          this.rbsuppress1.Text = "Delete db entry only";
-          this.rbsuppress1.UseVisualStyleBackColor = true;
-          // 
-          // chkSuppress
-          // 
-          this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(15, 19);
-          this.chkSuppress.Name = "chkSuppress";
-          this.chkSuppress.Size = new System.Drawing.Size(294, 17);
-          this.chkSuppress.TabIndex = 0;
-          this.chkSuppress.Text = "Enable automatic deletion options after movie is watched";
-          this.ToolTip1.SetToolTip(this.chkSuppress, "WHen enabled, the selected actions are automatically performed after a movie is w" +
-                  "atched.");
-          this.chkSuppress.UseVisualStyleBackColor = true;
-          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
+          this.cbSuppress.Enabled = false;
+          this.cbSuppress.FormattingEnabled = true;
+          this.cbSuppress.Items.AddRange(new object[] {
+            "Delete DB Entry only",
+            "Delete both DB entry and Movie file",
+            "Update DB - Keep movie file",
+            "Update DB entry - Delete Movie File"});
+          this.cbSuppress.Location = new System.Drawing.Point(174, 40);
+          this.cbSuppress.Name = "cbSuppress";
+          this.cbSuppress.Size = new System.Drawing.Size(181, 21);
+          this.cbSuppress.TabIndex = 20;
+          this.cbSuppress.Text = "Delete DB Entry only";
+          this.cbSuppress.SelectedIndexChanged += new System.EventHandler(this.cbSuppress_SelectedIndexChanged);
           // 
           // gpspfield
           // 
@@ -2294,9 +2232,9 @@
           this.gpspfield.Controls.Add(this.cbfdupdate);
           this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(354, 118);
+          this.gpspfield.Location = new System.Drawing.Point(20, 74);
           this.gpspfield.Name = "gpspfield";
-          this.gpspfield.Size = new System.Drawing.Size(387, 87);
+          this.gpspfield.Size = new System.Drawing.Size(335, 93);
           this.gpspfield.TabIndex = 18;
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
@@ -2305,7 +2243,7 @@
           // label61
           // 
           this.label61.AutoSize = true;
-          this.label61.Location = new System.Drawing.Point(138, 39);
+          this.label61.Location = new System.Drawing.Point(141, 42);
           this.label61.Name = "label61";
           this.label61.Size = new System.Drawing.Size(72, 13);
           this.label61.TabIndex = 21;
@@ -2315,7 +2253,7 @@
           // 
           this.chksupplaystop.AutoSize = true;
           this.chksupplaystop.Enabled = false;
-          this.chksupplaystop.Location = new System.Drawing.Point(10, 19);
+          this.chksupplaystop.Location = new System.Drawing.Point(13, 22);
           this.chksupplaystop.Name = "chksupplaystop";
           this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
           this.chksupplaystop.TabIndex = 19;
@@ -2326,7 +2264,7 @@
           // 
           // txtfdupdate
           // 
-          this.txtfdupdate.Location = new System.Drawing.Point(139, 57);
+          this.txtfdupdate.Location = new System.Drawing.Point(142, 60);
           this.txtfdupdate.Name = "txtfdupdate";
           this.txtfdupdate.Size = new System.Drawing.Size(115, 20);
           this.txtfdupdate.TabIndex = 16;
@@ -2334,7 +2272,7 @@
           // cbfdupdate
           // 
           this.cbfdupdate.FormattingEnabled = true;
-          this.cbfdupdate.Location = new System.Drawing.Point(10, 57);
+          this.cbfdupdate.Location = new System.Drawing.Point(13, 60);
           this.cbfdupdate.Name = "cbfdupdate";
           this.cbfdupdate.Size = new System.Drawing.Size(123, 21);
           this.cbfdupdate.Sorted = true;
@@ -2344,11 +2282,37 @@
           // lblUpdateValue
           // 
           this.lblUpdateValue.AutoSize = true;
-          this.lblUpdateValue.Location = new System.Drawing.Point(9, 40);
+          this.lblUpdateValue.Location = new System.Drawing.Point(12, 43);
           this.lblUpdateValue.Name = "lblUpdateValue";
           this.lblUpdateValue.Size = new System.Drawing.Size(93, 13);
           this.lblUpdateValue.TabIndex = 20;
           this.lblUpdateValue.Text = "DB Item to update";
+          // 
+          // chkSuppressManual
+          // 
+          this.chkSuppressManual.AutoSize = true;
+          this.chkSuppressManual.Location = new System.Drawing.Point(20, 19);
+          this.chkSuppressManual.Name = "chkSuppressManual";
+          this.chkSuppressManual.Size = new System.Drawing.Size(136, 17);
+          this.chkSuppressManual.TabIndex = 19;
+          this.chkSuppressManual.Text = "Enable manual deletion";
+          this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
+                  "\r\nNote: Enabling allows the user to delete files physically - don\'t enable for c" +
+                  "onfig used by your kids ;-)");
+          this.chkSuppressManual.UseVisualStyleBackColor = true;
+          this.chkSuppressManual.CheckedChanged += new System.EventHandler(this.chkSuppressManual_CheckedChanged);
+          // 
+          // chkSuppress
+          // 
+          this.chkSuppress.AutoSize = true;
+          this.chkSuppress.Location = new System.Drawing.Point(20, 42);
+          this.chkSuppress.Name = "chkSuppress";
+          this.chkSuppress.Size = new System.Drawing.Size(148, 17);
+          this.chkSuppress.TabIndex = 0;
+          this.chkSuppress.Text = "Enable automatic deletion";
+          this.ToolTip1.SetToolTip(this.chkSuppress, resources.GetString("chkSuppress.ToolTip"));
+          this.chkSuppress.UseVisualStyleBackColor = true;
+          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
           // 
           // groupBox2
           // 
@@ -2363,9 +2327,9 @@
           this.groupBox2.Controls.Add(this.cbWatched);
           this.groupBox2.Controls.Add(this.chkEnhancedWatchedStatusHandling);
           this.groupBox2.Controls.Add(this.CheckWatched);
-          this.groupBox2.Location = new System.Drawing.Point(6, 12);
+          this.groupBox2.Location = new System.Drawing.Point(6, 14);
           this.groupBox2.Name = "groupBox2";
-          this.groupBox2.Size = new System.Drawing.Size(338, 143);
+          this.groupBox2.Size = new System.Drawing.Size(338, 178);
           this.groupBox2.TabIndex = 72;
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Watched-Status Handling";
@@ -2396,7 +2360,7 @@
           // lblUnwatchedItemsValue
           // 
           this.lblUnwatchedItemsValue.AutoSize = true;
-          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(165, 57);
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(165, 70);
           this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
           this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(165, 13);
           this.lblUnwatchedItemsValue.TabIndex = 84;
@@ -2404,7 +2368,7 @@
           // 
           // textBoxGlobalUnwatchedOnlyValue
           // 
-          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(168, 75);
+          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(168, 88);
           this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
           this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(162, 20);
           this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 83;
@@ -2413,7 +2377,7 @@
           // CheckWatchedPlayerStopped
           // 
           this.CheckWatchedPlayerStopped.AutoSize = true;
-          this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 34);
+          this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 42);
           this.CheckWatchedPlayerStopped.Name = "CheckWatchedPlayerStopped";
           this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(238, 17);
           this.CheckWatchedPlayerStopped.TabIndex = 75;
@@ -2426,7 +2390,7 @@
           // Label_UserProfileName
           // 
           this.Label_UserProfileName.AutoSize = true;
-          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 120);
+          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 137);
           this.Label_UserProfileName.Name = "Label_UserProfileName";
           this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
           this.Label_UserProfileName.TabIndex = 72;
@@ -2435,7 +2399,7 @@
           // UserProfileName
           // 
           this.UserProfileName.Enabled = false;
-          this.UserProfileName.Location = new System.Drawing.Point(168, 117);
+          this.UserProfileName.Location = new System.Drawing.Point(168, 134);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);
           this.UserProfileName.TabIndex = 71;
@@ -2444,7 +2408,7 @@
           // label19
           // 
           this.label19.AutoSize = true;
-          this.label19.Location = new System.Drawing.Point(8, 57);
+          this.label19.Location = new System.Drawing.Point(8, 70);
           this.label19.Name = "label19";
           this.label19.Size = new System.Drawing.Size(150, 13);
           this.label19.TabIndex = 74;
@@ -2453,7 +2417,7 @@
           // cbWatched
           // 
           this.cbWatched.FormattingEnabled = true;
-          this.cbWatched.Location = new System.Drawing.Point(10, 74);
+          this.cbWatched.Location = new System.Drawing.Point(10, 87);
           this.cbWatched.Name = "cbWatched";
           this.cbWatched.Size = new System.Drawing.Size(123, 21);
           this.cbWatched.Sorted = true;
@@ -2463,7 +2427,7 @@
           // chkEnhancedWatchedStatusHandling
           // 
           this.chkEnhancedWatchedStatusHandling.AutoSize = true;
-          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 98);
+          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 115);
           this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
           this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(200, 17);
           this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
@@ -2475,7 +2439,7 @@
           // CheckWatched
           // 
           this.CheckWatched.AutoSize = true;
-          this.CheckWatched.Location = new System.Drawing.Point(10, 15);
+          this.CheckWatched.Location = new System.Drawing.Point(10, 19);
           this.CheckWatched.Name = "CheckWatched";
           this.CheckWatched.Size = new System.Drawing.Size(178, 17);
           this.CheckWatched.TabIndex = 69;
@@ -2485,17 +2449,17 @@
           this.CheckWatched.UseVisualStyleBackColor = true;
           this.CheckWatched.CheckedChanged += new System.EventHandler(this.CheckWatched_CheckedChanged);
           // 
-          // Tab_Config
+          // Tab_Display
           // 
-          this.Tab_Config.AutoScroll = true;
-          this.Tab_Config.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
-          this.Tab_Config.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Config.Name = "Tab_Config";
-          this.Tab_Config.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Config.TabIndex = 9;
-          this.Tab_Config.Text = "Display";
-          this.ToolTip1.SetToolTip(this.Tab_Config, "Setup for user defined searches \r\nand user defined sort items");
-          this.Tab_Config.UseVisualStyleBackColor = true;
+          this.Tab_Display.AutoScroll = true;
+          this.Tab_Display.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
+          this.Tab_Display.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Display.Name = "Tab_Display";
+          this.Tab_Display.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Display.TabIndex = 9;
+          this.Tab_Display.Text = "Display";
+          this.ToolTip1.SetToolTip(this.Tab_Display, "Setup for user defined display items");
+          this.Tab_Display.UseVisualStyleBackColor = true;
           // 
           // groupBox_DetailedSupplementaryInformations
           // 
@@ -2815,13 +2779,12 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.chkShowEmpty);
           this.groupBox_DefaultView.Controls.Add(this.chkOnlyTitle);
           this.groupBox_DefaultView.Controls.Add(this.groupBox7);
           this.groupBox_DefaultView.Controls.Add(this.groupBox4);
           this.groupBox_DefaultView.Controls.Add(this.label10);
-          this.groupBox_DefaultView.Controls.Add(this.lbl_View_Dflt_Text);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalAvailableOnly);
-          this.groupBox_DefaultView.Controls.Add(this.chkUseListviewForGroups);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
           this.groupBox_DefaultView.Controls.Add(this.AlwaysDefaultView);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Item);
@@ -2834,10 +2797,21 @@
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
           // 
+          // chkShowEmpty
+          // 
+          this.chkShowEmpty.AutoSize = true;
+          this.chkShowEmpty.Location = new System.Drawing.Point(15, 309);
+          this.chkShowEmpty.Name = "chkShowEmpty";
+          this.chkShowEmpty.Size = new System.Drawing.Size(85, 17);
+          this.chkShowEmpty.TabIndex = 87;
+          this.chkShowEmpty.Text = "Show Empty";
+          this.ToolTip1.SetToolTip(this.chkShowEmpty, resources.GetString("chkShowEmpty.ToolTip"));
+          this.chkShowEmpty.UseVisualStyleBackColor = true;
+          // 
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(15, 271);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(15, 243);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
           this.chkOnlyTitle.TabIndex = 86;
@@ -2854,7 +2828,7 @@
           this.groupBox7.Controls.Add(this.SortSens);
           this.groupBox7.Controls.Add(this.LayOut);
           this.groupBox7.Controls.Add(this.label14);
-          this.groupBox7.Location = new System.Drawing.Point(6, 73);
+          this.groupBox7.Location = new System.Drawing.Point(6, 61);
           this.groupBox7.Name = "groupBox7";
           this.groupBox7.Size = new System.Drawing.Size(246, 73);
           this.groupBox7.TabIndex = 85;
@@ -2866,7 +2840,7 @@
           this.Sort.FormattingEnabled = true;
           this.Sort.Location = new System.Drawing.Point(61, 19);
           this.Sort.Name = "Sort";
-          this.Sort.Size = new System.Drawing.Size(117, 21);
+          this.Sort.Size = new System.Drawing.Size(104, 21);
           this.Sort.TabIndex = 76;
           // 
           // label32
@@ -2884,7 +2858,7 @@
           this.SortSens.Items.AddRange(new object[] {
             "ASC",
             "DESC"});
-          this.SortSens.Location = new System.Drawing.Point(184, 19);
+          this.SortSens.Location = new System.Drawing.Point(171, 19);
           this.SortSens.Name = "SortSens";
           this.SortSens.Size = new System.Drawing.Size(55, 21);
           this.SortSens.TabIndex = 78;
@@ -2901,7 +2875,7 @@
             "Cover Flow"});
           this.LayOut.Location = new System.Drawing.Point(61, 46);
           this.LayOut.Name = "LayOut";
-          this.LayOut.Size = new System.Drawing.Size(117, 21);
+          this.LayOut.Size = new System.Drawing.Size(104, 21);
           this.LayOut.TabIndex = 66;
           this.LayOut.Text = "List";
           // 
@@ -2921,7 +2895,7 @@
           this.groupBox4.Controls.Add(this.label62);
           this.groupBox4.Controls.Add(this.SortSensInHierarchies);
           this.groupBox4.Controls.Add(this.SortInHierarchies);
-          this.groupBox4.Location = new System.Drawing.Point(6, 151);
+          this.groupBox4.Location = new System.Drawing.Point(6, 139);
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.Size = new System.Drawing.Size(246, 71);
           this.groupBox4.TabIndex = 43;
@@ -2949,7 +2923,7 @@
             "Cover Flow"});
           this.LayoutInHierarchies.Location = new System.Drawing.Point(61, 45);
           this.LayoutInHierarchies.Name = "LayoutInHierarchies";
-          this.LayoutInHierarchies.Size = new System.Drawing.Size(117, 21);
+          this.LayoutInHierarchies.Size = new System.Drawing.Size(104, 21);
           this.LayoutInHierarchies.TabIndex = 29;
           this.LayoutInHierarchies.Text = "List";
           // 
@@ -2969,7 +2943,7 @@
           this.SortSensInHierarchies.Items.AddRange(new object[] {
             "ASC",
             "DESC"});
-          this.SortSensInHierarchies.Location = new System.Drawing.Point(184, 19);
+          this.SortSensInHierarchies.Location = new System.Drawing.Point(171, 19);
           this.SortSensInHierarchies.Name = "SortSensInHierarchies";
           this.SortSensInHierarchies.Size = new System.Drawing.Size(55, 21);
           this.SortSensInHierarchies.TabIndex = 1;
@@ -2981,32 +2955,23 @@
           this.SortInHierarchies.FormattingEnabled = true;
           this.SortInHierarchies.Location = new System.Drawing.Point(61, 19);
           this.SortInHierarchies.Name = "SortInHierarchies";
-          this.SortInHierarchies.Size = new System.Drawing.Size(117, 21);
+          this.SortInHierarchies.Size = new System.Drawing.Size(104, 21);
           this.SortInHierarchies.Sorted = true;
           this.SortInHierarchies.TabIndex = 0;
           // 
           // label10
           // 
           this.label10.AutoSize = true;
-          this.label10.Location = new System.Drawing.Point(12, 17);
+          this.label10.Location = new System.Drawing.Point(12, 21);
           this.label10.Name = "label10";
           this.label10.Size = new System.Drawing.Size(30, 26);
           this.label10.TabIndex = 84;
           this.label10.Text = "Start\r\nView";
           // 
-          // lbl_View_Dflt_Text
-          // 
-          this.lbl_View_Dflt_Text.AutoSize = true;
-          this.lbl_View_Dflt_Text.Location = new System.Drawing.Point(12, 52);
-          this.lbl_View_Dflt_Text.Name = "lbl_View_Dflt_Text";
-          this.lbl_View_Dflt_Text.Size = new System.Drawing.Size(34, 13);
-          this.lbl_View_Dflt_Text.TabIndex = 83;
-          this.lbl_View_Dflt_Text.Text = "Value";
-          // 
           // chkGlobalAvailableOnly
           // 
           this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(15, 314);
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(15, 286);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
           this.chkGlobalAvailableOnly.TabIndex = 82;
@@ -3015,22 +2980,10 @@
           this.chkGlobalAvailableOnly.UseVisualStyleBackColor = true;
           this.chkGlobalAvailableOnly.CheckedChanged += new System.EventHandler(this.chkGlobalAvailableOnly_CheckedChanged);
           // 
-          // chkUseListviewForGroups
-          // 
-          this.chkUseListviewForGroups.AutoSize = true;
-          this.chkUseListviewForGroups.Location = new System.Drawing.Point(15, 250);
-          this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
-          this.chkUseListviewForGroups.Size = new System.Drawing.Size(179, 17);
-          this.chkUseListviewForGroups.TabIndex = 81;
-          this.chkUseListviewForGroups.Text = "Always use List Layout for Views";
-          this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
-                  "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
-          this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
-          // 
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(15, 292);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(15, 264);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -3041,7 +2994,7 @@
           // AlwaysDefaultView
           // 
           this.AlwaysDefaultView.AutoSize = true;
-          this.AlwaysDefaultView.Location = new System.Drawing.Point(15, 228);
+          this.AlwaysDefaultView.Location = new System.Drawing.Point(15, 220);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
           this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
           this.AlwaysDefaultView.TabIndex = 75;
@@ -3054,21 +3007,23 @@
           // View_Dflt_Item
           // 
           this.View_Dflt_Item.FormattingEnabled = true;
-          this.View_Dflt_Item.Location = new System.Drawing.Point(67, 19);
+          this.View_Dflt_Item.Location = new System.Drawing.Point(67, 23);
           this.View_Dflt_Item.Name = "View_Dflt_Item";
-          this.View_Dflt_Item.Size = new System.Drawing.Size(117, 21);
+          this.View_Dflt_Item.Size = new System.Drawing.Size(104, 21);
           this.View_Dflt_Item.TabIndex = 16;
           this.View_Dflt_Item.SelectedIndexChanged += new System.EventHandler(this.View_Dflt_Item_SelectedIndexChanged);
           // 
           // View_Dflt_Text
           // 
-          this.View_Dflt_Text.Location = new System.Drawing.Point(67, 49);
+          this.View_Dflt_Text.Enabled = false;
+          this.View_Dflt_Text.Location = new System.Drawing.Point(177, 23);
           this.View_Dflt_Text.Name = "View_Dflt_Text";
-          this.View_Dflt_Text.Size = new System.Drawing.Size(117, 20);
+          this.View_Dflt_Text.Size = new System.Drawing.Size(55, 20);
           this.View_Dflt_Text.TabIndex = 17;
           // 
           // groupBoxView
           // 
+          this.groupBoxView.Controls.Add(this.textBoxViewLabel);
           this.groupBoxView.Controls.Add(this.lblAntViewIndex);
           this.groupBoxView.Controls.Add(this.bindingNavigatorViews);
           this.groupBoxView.Controls.Add(this.dgViewsList);
@@ -3077,7 +3032,6 @@
           this.groupBoxView.Controls.Add(this.groupBox5);
           this.groupBoxView.Controls.Add(this.AntViewValue);
           this.groupBoxView.Controls.Add(label66);
-          this.groupBoxView.Controls.Add(this.checkBox2);
           this.groupBoxView.Controls.Add(this.AntViewIndex);
           this.groupBoxView.Controls.Add(label65);
           this.groupBoxView.Location = new System.Drawing.Point(6, 5);
@@ -3088,10 +3042,31 @@
           this.groupBoxView.Text = "Custom View Editor ...";
           this.ToolTip1.SetToolTip(this.groupBoxView, resources.GetString("groupBoxView.ToolTip"));
           // 
+          // textBoxViewLabel
+          // 
+          this.textBoxViewLabel.BackColor = System.Drawing.SystemColors.Control;
+          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+          this.textBoxViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
+          this.textBoxViewLabel.Enabled = false;
+          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 49);
+          this.textBoxViewLabel.Name = "textBoxViewLabel";
+          this.textBoxViewLabel.Size = new System.Drawing.Size(272, 13);
+          this.textBoxViewLabel.TabIndex = 44;
+          // 
+          // viewBindingSource
+          // 
+          this.viewBindingSource.DataMember = "View";
+          this.viewBindingSource.DataSource = this.mFview;
+          // 
+          // mFview
+          // 
+          this.mFview.DataSetName = "MFview";
+          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
           // lblAntViewIndex
           // 
           this.lblAntViewIndex.AutoSize = true;
-          this.lblAntViewIndex.Location = new System.Drawing.Point(183, 102);
+          this.lblAntViewIndex.Location = new System.Drawing.Point(291, 70);
           this.lblAntViewIndex.Name = "lblAntViewIndex";
           this.lblAntViewIndex.Size = new System.Drawing.Size(36, 13);
           this.lblAntViewIndex.TabIndex = 43;
@@ -3135,16 +3110,6 @@
           this.bindingNavigatorViews.Size = new System.Drawing.Size(461, 23);
           this.bindingNavigatorViews.TabIndex = 38;
           this.bindingNavigatorViews.Text = "bindingNavigatorViews";
-          // 
-          // viewBindingSource
-          // 
-          this.viewBindingSource.DataMember = "View";
-          this.viewBindingSource.DataSource = this.mFview;
-          // 
-          // mFview
-          // 
-          this.mFview.DataSetName = "MFview";
-          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
           // 
           // toolStripLabel1
           // 
@@ -3265,10 +3230,11 @@
           // toolStripButtonAddDefaults
           // 
           this.toolStripButtonAddDefaults.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+          this.toolStripButtonAddDefaults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.toolStripButtonAddDefaults.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddDefaults.Image")));
           this.toolStripButtonAddDefaults.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.toolStripButtonAddDefaults.Name = "toolStripButtonAddDefaults";
-          this.toolStripButtonAddDefaults.Size = new System.Drawing.Size(71, 17);
+          this.toolStripButtonAddDefaults.Size = new System.Drawing.Size(69, 17);
           this.toolStripButtonAddDefaults.Text = "add defaults";
           this.toolStripButtonAddDefaults.Click += new System.EventHandler(this.toolStripButtonAddDefaults_Click);
           // 
@@ -3319,9 +3285,9 @@
           this.groupBoxSortAndLayoutForView.Controls.Add(label69);
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewLayoutView);
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewSortOrder);
-          this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 185);
+          this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 181);
           this.groupBoxSortAndLayoutForView.Name = "groupBoxSortAndLayoutForView";
-          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 64);
+          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 68);
           this.groupBoxSortAndLayoutForView.TabIndex = 41;
           this.groupBoxSortAndLayoutForView.TabStop = false;
           this.groupBoxSortAndLayoutForView.Text = "Sort and Layouts for View";
@@ -3335,7 +3301,7 @@
             "Name"});
           this.AntViewSortType.Location = new System.Drawing.Point(10, 35);
           this.AntViewSortType.Name = "AntViewSortType";
-          this.AntViewSortType.Size = new System.Drawing.Size(101, 21);
+          this.AntViewSortType.Size = new System.Drawing.Size(104, 21);
           this.AntViewSortType.Sorted = true;
           this.AntViewSortType.TabIndex = 40;
           // 
@@ -3361,16 +3327,16 @@
           this.AntViewSortOrder.Items.AddRange(new object[] {
             " ASC",
             " DESC"});
-          this.AntViewSortOrder.Location = new System.Drawing.Point(117, 35);
+          this.AntViewSortOrder.Location = new System.Drawing.Point(120, 35);
           this.AntViewSortOrder.Name = "AntViewSortOrder";
-          this.AntViewSortOrder.Size = new System.Drawing.Size(62, 21);
+          this.AntViewSortOrder.Size = new System.Drawing.Size(59, 21);
           this.AntViewSortOrder.TabIndex = 20;
           // 
           // AntViewItem
           // 
           this.AntViewItem.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
           this.AntViewItem.FormattingEnabled = true;
-          this.AntViewItem.Location = new System.Drawing.Point(180, 65);
+          this.AntViewItem.Location = new System.Drawing.Point(180, 85);
           this.AntViewItem.Name = "AntViewItem";
           this.AntViewItem.Size = new System.Drawing.Size(104, 21);
           this.AntViewItem.Sorted = true;
@@ -3384,9 +3350,9 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
-          this.groupBox5.Location = new System.Drawing.Point(170, 134);
+          this.groupBox5.Location = new System.Drawing.Point(170, 118);
           this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(291, 45);
+          this.groupBox5.Size = new System.Drawing.Size(291, 57);
           this.groupBox5.TabIndex = 42;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Filter Expression ...";
@@ -3394,14 +3360,14 @@
           // AntViewFilter
           // 
           this.AntViewFilter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
-          this.AntViewFilter.Location = new System.Drawing.Point(10, 16);
+          this.AntViewFilter.Location = new System.Drawing.Point(10, 21);
           this.AntViewFilter.Name = "AntViewFilter";
           this.AntViewFilter.Size = new System.Drawing.Size(243, 20);
           this.AntViewFilter.TabIndex = 10;
           // 
           // AntViewFilterEditButton
           // 
-          this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 16);
+          this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 21);
           this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
           this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
           this.AntViewFilterEditButton.TabIndex = 39;
@@ -3412,27 +3378,16 @@
           // AntViewValue
           // 
           this.AntViewValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
-          this.AntViewValue.Location = new System.Drawing.Point(298, 66);
+          this.AntViewValue.Location = new System.Drawing.Point(335, 86);
           this.AntViewValue.Name = "AntViewValue";
-          this.AntViewValue.Size = new System.Drawing.Size(125, 20);
+          this.AntViewValue.Size = new System.Drawing.Size(117, 20);
           this.AntViewValue.TabIndex = 8;
           this.AntViewValue.TextChanged += new System.EventHandler(this.AntViewValue_TextChanged);
-          // 
-          // checkBox2
-          // 
-          this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.viewBindingSource, "ShowEmpty", true));
-          this.checkBox2.Location = new System.Drawing.Point(298, 100);
-          this.checkBox2.Name = "checkBox2";
-          this.checkBox2.Size = new System.Drawing.Size(86, 19);
-          this.checkBox2.TabIndex = 14;
-          this.checkBox2.Text = "Show Empty";
-          this.ToolTip1.SetToolTip(this.checkBox2, resources.GetString("checkBox2.ToolTip"));
-          this.checkBox2.UseVisualStyleBackColor = true;
           // 
           // AntViewIndex
           // 
           this.AntViewIndex.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
-          this.AntViewIndex.Location = new System.Drawing.Point(242, 100);
+          this.AntViewIndex.Location = new System.Drawing.Point(290, 86);
           this.AntViewIndex.Maximum = new decimal(new int[] {
             2,
             0,
@@ -4465,19 +4420,6 @@
           this.Value.Text = "Value";
           this.Value.Width = 515;
           // 
-          // chkSuppressManual
-          // 
-          this.chkSuppressManual.AutoSize = true;
-          this.chkSuppressManual.Location = new System.Drawing.Point(11, 18);
-          this.chkSuppressManual.Name = "chkSuppressManual";
-          this.chkSuppressManual.Size = new System.Drawing.Size(216, 17);
-          this.chkSuppressManual.TabIndex = 19;
-          this.chkSuppressManual.Text = "Enable manual deletion / removal option";
-          this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
-                  "");
-          this.chkSuppressManual.UseVisualStyleBackColor = true;
-          this.chkSuppressManual.CheckedChanged += new System.EventHandler(this.chkSuppressManual_CheckedChanged);
-          // 
           // btnHyperLinkParamGen
           // 
           this.btnHyperLinkParamGen.Location = new System.Drawing.Point(667, 37);
@@ -4557,6 +4499,7 @@
           this.btnEditScript.Text = "Grabber Options";
           this.ToolTip1.SetToolTip(this.btnEditScript, resources.GetString("btnEditScript.ToolTip"));
           this.btnEditScript.UseVisualStyleBackColor = true;
+          this.btnEditScript.Click += new System.EventHandler(this.btnEditScript_Click);
           // 
           // groupBox6
           // 
@@ -4766,6 +4709,7 @@
           this.btnGrabber.Text = "...";
           this.ToolTip1.SetToolTip(this.btnGrabber, "Browse and choose the script you want MyFilms \r\nto use as default.");
           this.btnGrabber.UseVisualStyleBackColor = true;
+          this.btnGrabber.Click += new System.EventHandler(this.btnGrabber_Click);
           // 
           // txtGrabber
           // 
@@ -4775,6 +4719,7 @@
           this.txtGrabber.TabIndex = 54;
           this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
           this.txtGrabber.Visible = false;
+          this.txtGrabber.TextChanged += new System.EventHandler(this.txtGrabber_TextChanged);
           // 
           // label27
           // 
@@ -5251,9 +5196,7 @@
           // 
           // Tab_Update
           // 
-          this.Tab_Update.Controls.Add(this.groupBox_ManualDeletion);
           this.Tab_Update.Controls.Add(this.groupBox_GrabberOptions);
-          this.Tab_Update.Controls.Add(this.gpspfield);
           this.Tab_Update.Controls.Add(this.groupBox2);
           this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
           this.Tab_Update.Location = new System.Drawing.Point(4, 22);
@@ -5265,20 +5208,10 @@
           this.Tab_Update.ToolTipText = "Setup for update options (updates to values from GUI)";
           this.Tab_Update.UseVisualStyleBackColor = true;
           // 
-          // groupBox_ManualDeletion
-          // 
-          this.groupBox_ManualDeletion.Controls.Add(this.chkSuppressManual);
-          this.groupBox_ManualDeletion.Location = new System.Drawing.Point(6, 159);
-          this.groupBox_ManualDeletion.Name = "groupBox_ManualDeletion";
-          this.groupBox_ManualDeletion.Size = new System.Drawing.Size(338, 46);
-          this.groupBox_ManualDeletion.TabIndex = 74;
-          this.groupBox_ManualDeletion.TabStop = false;
-          this.groupBox_ManualDeletion.Text = "Manual Deletion ...";
-          // 
           // General
           // 
           this.General.Controls.Add(this.Tab_General);
-          this.General.Controls.Add(this.Tab_Config);
+          this.General.Controls.Add(this.Tab_Display);
           this.General.Controls.Add(this.Tab_Views);
           this.General.Controls.Add(this.Tab_Trailer);
           this.General.Controls.Add(this.Tab_Update);
@@ -5891,13 +5824,11 @@
           this.groupBox_AMCupdater_ExternalApplication.PerformLayout();
           this.groupBoxDeletionOptions.ResumeLayout(false);
           this.groupBoxDeletionOptions.PerformLayout();
-          this.gpsuppress.ResumeLayout(false);
-          this.gpsuppress.PerformLayout();
           this.gpspfield.ResumeLayout(false);
           this.gpspfield.PerformLayout();
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
-          this.Tab_Config.ResumeLayout(false);
+          this.Tab_Display.ResumeLayout(false);
           this.groupBox_DetailedSupplementaryInformations.ResumeLayout(false);
           this.groupBox_DetailedSupplementaryInformations.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
@@ -5911,11 +5842,11 @@
           this.groupBox4.PerformLayout();
           this.groupBoxView.ResumeLayout(false);
           this.groupBoxView.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.mFview)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).EndInit();
           this.bindingNavigatorViews.ResumeLayout(false);
           this.bindingNavigatorViews.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.mFview)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.dgViewsList)).EndInit();
           this.groupBoxSortAndLayoutForView.ResumeLayout(false);
           this.groupBoxSortAndLayoutForView.PerformLayout();
@@ -5960,8 +5891,6 @@
           this.Tab_Artwork.ResumeLayout(false);
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
-          this.groupBox_ManualDeletion.ResumeLayout(false);
-          this.groupBox_ManualDeletion.PerformLayout();
           this.General.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
@@ -6131,17 +6060,12 @@
         private CheckBox CheckWatched;
         private GroupBox groupBoxDeletionOptions;
         private CheckBox chkSuppress;
-        private GroupBox gpsuppress;
-        private RadioButton rbsuppress2;
-        private RadioButton rbsuppress4;
-        private RadioButton rbsuppress3;
-        private RadioButton rbsuppress1;
         private GroupBox gpspfield;
         private CheckBox chksupplaystop;
         private TextBox txtfdupdate;
         private Label lblUpdateValue;
         private ComboBox cbfdupdate;
-        private TabPage Tab_Config;
+        private TabPage Tab_Display;
         private TabPage Tab_Views;
         private GroupBox groupBox_DefaultView;
         private CheckBox chkGlobalUnwatchedOnly;
@@ -6222,7 +6146,6 @@
         private ComboBox cbPictureHandling;
         private GroupBox groupBoxExtendedFieldHandling;
         private CheckBox chkAddTagline;
-        private CheckBox chkUseListviewForGroups;
         private CheckBox chkAddCertification;
         private ComboBox ECMergeDestinationFieldTagline;
         private CheckBox chkAddTags;
@@ -6302,7 +6225,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private BindingSource personBindingSource;
         private Button button_GrabberScriptUpdate;
-        private Label lbl_View_Dflt_Text;
         private Button btnEditView;
         private Label label52;
         private Label label33;
@@ -6365,7 +6287,6 @@
         private ComboBox SortSensInHierarchies;
         private ComboBox SortInHierarchies;
         private GroupBox groupBox7;
-        private CheckBox checkBox2;
         private Label label26;
         private Label lblAntViewIndex;
         private GroupBox groupBox_Separators;
@@ -6435,7 +6356,9 @@
         private ComboBox AntItem1;
         private Label label3;
         private TextBox AntLabel1;
-        private GroupBox groupBox_ManualDeletion;
         private TextBox View_Dflt_Text;
+        private CheckBox chkShowEmpty;
+        private TextBox textBoxViewLabel;
+        private ComboBox cbSuppress;
     }
 }

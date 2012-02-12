@@ -1947,7 +1947,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079901)); // View (Layout) ...
       dlg.Add(GUILocalizeStrings.Get(101));//List
-      if (!conf.UseListViewForGoups || !conf.Boolselect)
+      if (!conf.Boolselect) // if (!conf.UseListViewForGoups || !conf.Boolselect)
       {
         dlg.Add(GUILocalizeStrings.Get(100));//Icons
         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
@@ -4801,8 +4801,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.Boolselect = true;
       conf.Wselectedlabel = "";
       if (ClearIndex) conf.StrIndex = 0;
-      if (conf.UseListViewForGoups) Change_LayOut(0);
-      else Change_LayOut(MyFilms.conf.WStrLayOut);
+      // if (conf.UseListViewForGoups) Change_LayOut(0); else 
+      Change_LayOut(MyFilms.conf.WStrLayOut);
       ClearFacade(); // facadeFilms.Clear();
       #endregion
 
@@ -6900,9 +6900,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("alwaysdefaultview");
 
-          if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
-          if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
-          choiceViewGlobalOptions.Add("alwayslistforgroups");
+          //if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
+          //if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
+          //choiceViewGlobalOptions.Add("alwayslistforgroups");
 
           if (MyFilms.conf.StrCheckWOLenable)
           {
@@ -7509,12 +7509,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info("Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
           this.Change_Menu_Action("globaloptions");
           break;
-        case "alwayslistforgroups":
-          MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
-          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
-          LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
-          this.Change_Menu_Action("globaloptions");
-          break;
+        //case "alwayslistforgroups":
+        //  MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
+        //  XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
+        //  LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
+        //  this.Change_Menu_Action("globaloptions");
+        //  break;
 
         case "woluserdialog":
           MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
@@ -8092,7 +8092,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             newRow.ViewEnabled = true;
-            newRow.ShowEmpty = conf.BoolShowEmptyValuesInViews;
+            //newRow.ShowEmpty = conf.BoolShowEmptyValuesInViews;
             switch (conf.ViewContext)
             {
               case ViewContext.MenuAll:
@@ -11424,7 +11424,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index));
+      //XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index));
@@ -11440,7 +11440,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index), viewRow.Value);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index), viewRow.Filter);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index), viewRow.Index);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
+      //XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
