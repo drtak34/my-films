@@ -3544,9 +3544,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             foreach (MFview.ViewRow viewRow in this.MyCustomViews.View)
             {
-              if (View_Dflt_Item.Text == viewRow.Label && viewRow.Value.Length > 0)
+              if (View_Dflt_Item.Text == viewRow.Label)
               {
-                View_Dflt_Text.Text = viewRow.Value;
+                View_Dflt_Text.Text =  (viewRow.Value.Length > 0) ? viewRow.Value : "";
                 View_Dflt_Text.Enabled = false;
                 return;
               }
@@ -5823,6 +5823,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
       }
 
       public static class BindingSourceExtension

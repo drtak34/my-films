@@ -314,6 +314,7 @@
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.AlwaysDefaultView = new System.Windows.Forms.CheckBox();
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
+          this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
           this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
@@ -569,7 +570,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -3059,6 +3059,13 @@
           this.View_Dflt_Item.Size = new System.Drawing.Size(117, 21);
           this.View_Dflt_Item.TabIndex = 16;
           this.View_Dflt_Item.SelectedIndexChanged += new System.EventHandler(this.View_Dflt_Item_SelectedIndexChanged);
+          // 
+          // View_Dflt_Text
+          // 
+          this.View_Dflt_Text.Location = new System.Drawing.Point(67, 49);
+          this.View_Dflt_Text.Name = "View_Dflt_Text";
+          this.View_Dflt_Text.Size = new System.Drawing.Size(117, 20);
+          this.View_Dflt_Text.TabIndex = 17;
           // 
           // groupBoxView
           // 
@@ -5825,13 +5832,6 @@
           this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
-          // 
-          // View_Dflt_Text
-          // 
-          this.View_Dflt_Text.Location = new System.Drawing.Point(67, 49);
-          this.View_Dflt_Text.Name = "View_Dflt_Text";
-          this.View_Dflt_Text.Size = new System.Drawing.Size(117, 20);
-          this.View_Dflt_Text.TabIndex = 17;
           // 
           // MyFilmsSetup
           // 
