@@ -593,8 +593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (string.IsNullOrEmpty(CurrentSortMethod)) CurrentSortMethod = GUILocalizeStrings.Get(103);
             if (string.IsNullOrEmpty(CurrentSortMethodInHierarchies)) CurrentSortMethodInHierarchies = CurrentSortMethod;
           
-            if (string.IsNullOrEmpty(StrSelect))
-              StrSelect = StrTitle1 + " not like ''";
+            // if (string.IsNullOrEmpty(StrSelect)) StrSelect = StrTitle1 + " not like ''";
 
             if (string.IsNullOrEmpty(StrSorta)) StrSorta = StrSTitle;
             if (string.IsNullOrEmpty(StrSortaInHierarchies)) StrSortaInHierarchies = StrSTitle;
