@@ -89,7 +89,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", string.Empty);
                 StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", string.Empty);
                 StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", string.Empty);
-                UseOriginaltitleForMissingTranslatedtitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseOriginaltitleForMissingTranslatedtitle", false);
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
@@ -1049,12 +1048,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strStorageTrailer; }
             set { strStorageTrailer = value; }
-        }
-        private bool useOriginaltitleForMissingTranslatedtitle = false;
-        public bool UseOriginaltitleForMissingTranslatedtitle
-        {
-          get { return useOriginaltitleForMissingTranslatedtitle; }
-          set { useOriginaltitleForMissingTranslatedtitle = value; }
         }
         private string searchFile = "False";
         public string SearchFile

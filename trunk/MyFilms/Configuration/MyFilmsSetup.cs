@@ -843,7 +843,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Dwp", crypto.Crypter(Dwp.Text));
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", chkUseOriginalAsTranslatedTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", SearchFileName.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", SearchOnlyExactMatches.Checked);
@@ -1319,7 +1318,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             Dwp.Text = crypto.Decrypter(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Dwp", string.Empty));
             Rpt_Dwp.Text = Dwp.Text;
-            chkUseOriginalAsTranslatedTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UseOriginaltitleForMissingTranslatedtitle", false);
             SearchFileName.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", false);
             SearchSubDirs.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", false);
             SearchOnlyExactMatches.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", false);
@@ -5817,6 +5815,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             StrDfltSelect  = filterEditor.StrDfltSelect;
             textBoxStrDfltSelect.Text = filterEditor.StrDfltSelect;
+            AntFilterItem1.Text = filterEditor.FilterItem1;
+            AntFilterItem2.Text = filterEditor.FilterItem2;
+            AntFilterSign1.Text = filterEditor.FilterSign1;
+            AntFilterSign2.Text = filterEditor.FilterSign2;
+            AntFilterText1.Text = filterEditor.FilterText1;
+            AntFilterText2.Text = filterEditor.FilterText2;
+            AntFilterFreeText.Text = filterEditor.FilterFreeText;
+            AntFilterComb.Text = filterEditor.FilterComb;
           }
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
