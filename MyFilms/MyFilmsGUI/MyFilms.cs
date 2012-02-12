@@ -781,7 +781,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       if (conf.StrEnhancedWatchedStatusHandling && !string.IsNullOrEmpty(conf.StrUserProfileName))
-        MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+        if (Helper.IsTraktAvailableAndEnabled) 
+          MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
 
       loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
@@ -12672,7 +12673,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "menu":
-          conf.StrTxtSelect = GUILocalizeStrings.Get(924); // menu
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079819); // views menu
           MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
           break;
 

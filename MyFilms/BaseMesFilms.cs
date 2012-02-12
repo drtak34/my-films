@@ -2221,14 +2221,14 @@ namespace MyFilmsPlugin.MyFilms
                     sr[WatchedField] = newEnhancedWatchedValue;
                   }
                   if (sr[WatchedField].ToString().ToLower() != oldWatchedString.ToLower())
-                    LogMyFilms.Debug("Commit() : Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField].ToString() + "', WatchedCount = '" + _mIWatchedCount + "'");
+                    LogMyFilms.Debug("Commit() : Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField] + "', WatchedCount = '" + _mIWatchedCount + "'");
 
                   // imdb number
                   string oldIMDB = sr["IMDB_Id"].ToString();
                   if (!string.IsNullOrEmpty(_mStrIMDBNumber))
                     sr["IMDB_Id"] = _mStrIMDBNumber;
                   if (sr["IMDB_Id"].ToString() != oldIMDB)
-                    LogMyFilms.Debug("Commit() : Updating 'IMDB_Id' from '" + oldIMDB + "' to '" + sr["IMDB_Id"].ToString() + "'");
+                    LogMyFilms.Debug("Commit() : Updating 'IMDB_Id' from '" + oldIMDB + "' to '" + sr["IMDB_Id"] + "'");
                 }
                 catch (Exception ex)
                 {
@@ -2238,7 +2238,7 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception e)
             {
-              LogMyFilms.Error(": Error reading xml database after " + dataImport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              LogMyFilms.Error(": Error reading xml database after " + dataImport.Movie.Count.ToString() + " records; error : " + e.Message + ", " + e.StackTrace);
             }
             finally
             {

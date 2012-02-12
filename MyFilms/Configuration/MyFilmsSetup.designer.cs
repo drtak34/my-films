@@ -314,7 +314,6 @@
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.AlwaysDefaultView = new System.Windows.Forms.CheckBox();
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
-          this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
           this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
@@ -383,11 +382,6 @@
           this.CmdPar = new System.Windows.Forms.ComboBox();
           this.CmdExe = new System.Windows.Forms.TextBox();
           this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
-          this.groupBox_Security = new System.Windows.Forms.GroupBox();
-          this.label16 = new System.Windows.Forms.Label();
-          this.label15 = new System.Windows.Forms.Label();
-          this.Rpt_Dwp = new System.Windows.Forms.TextBox();
-          this.Dwp = new System.Windows.Forms.TextBox();
           this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
           this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
           this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
@@ -403,6 +397,11 @@
           this.AntStorage = new System.Windows.Forms.ComboBox();
           this.label4 = new System.Windows.Forms.Label();
           this.AntIdentItem = new System.Windows.Forms.ComboBox();
+          this.groupBox_Security = new System.Windows.Forms.GroupBox();
+          this.label16 = new System.Windows.Forms.Label();
+          this.label15 = new System.Windows.Forms.Label();
+          this.Rpt_Dwp = new System.Windows.Forms.TextBox();
+          this.Dwp = new System.Windows.Forms.TextBox();
           this.label13 = new System.Windows.Forms.Label();
           this.CatalogType = new System.Windows.Forms.ComboBox();
           this.groupBox_TitleOrder = new System.Windows.Forms.GroupBox();
@@ -570,6 +569,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -626,9 +626,9 @@
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox_PreLaunchingCommand.SuspendLayout();
-          this.groupBox_Security.SuspendLayout();
           this.groupBox_PlayMovieInfos.SuspendLayout();
           this.groupBoxMoviePathInfos.SuspendLayout();
+          this.groupBox_Security.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
           this.groupBoxExtendedFieldHandling.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
@@ -3060,13 +3060,6 @@
           this.View_Dflt_Item.TabIndex = 16;
           this.View_Dflt_Item.SelectedIndexChanged += new System.EventHandler(this.View_Dflt_Item_SelectedIndexChanged);
           // 
-          // View_Dflt_Text
-          // 
-          this.View_Dflt_Text.Location = new System.Drawing.Point(67, 49);
-          this.View_Dflt_Text.Name = "View_Dflt_Text";
-          this.View_Dflt_Text.Size = new System.Drawing.Size(117, 20);
-          this.View_Dflt_Text.TabIndex = 17;
-          // 
           // groupBoxView
           // 
           this.groupBoxView.Controls.Add(this.lblAntViewIndex);
@@ -3595,12 +3588,11 @@
           // 
           // Tab_General
           // 
-          this.Tab_General.Controls.Add(this.groupBox3);
           this.Tab_General.Controls.Add(this.groupBox_AntSelectedEnreg);
           this.Tab_General.Controls.Add(this.groupBox_PreLaunchingCommand);
           this.Tab_General.Controls.Add(this.lblYellowShowRequiredItems);
-          this.Tab_General.Controls.Add(this.groupBox_Security);
           this.Tab_General.Controls.Add(this.groupBox_PlayMovieInfos);
+          this.Tab_General.Controls.Add(this.groupBox_Security);
           this.Tab_General.Controls.Add(this.label13);
           this.Tab_General.Controls.Add(this.CatalogType);
           this.Tab_General.Controls.Add(this.groupBox_TitleOrder);
@@ -3618,6 +3610,7 @@
           // 
           // groupBox_AntSelectedEnreg
           // 
+          this.groupBox_AntSelectedEnreg.Controls.Add(this.groupBox3);
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFreetextFilterItem);
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterFreeText);
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterComb);
@@ -3627,9 +3620,9 @@
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText2);
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterItem1);
           this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText1);
-          this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(451, 160);
+          this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(451, 44);
           this.groupBox_AntSelectedEnreg.Name = "groupBox_AntSelectedEnreg";
-          this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(286, 106);
+          this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(286, 101);
           this.groupBox_AntSelectedEnreg.TabIndex = 79;
           this.groupBox_AntSelectedEnreg.TabStop = false;
           this.groupBox_AntSelectedEnreg.Text = "Custom Config Filters";
@@ -3639,9 +3632,9 @@
           // 
           this.groupBox3.Controls.Add(this.btnCustomConfigFilter);
           this.groupBox3.Controls.Add(this.textBoxStrDfltSelect);
-          this.groupBox3.Location = new System.Drawing.Point(451, 155);
+          this.groupBox3.Location = new System.Drawing.Point(0, 0);
           this.groupBox3.Name = "groupBox3";
-          this.groupBox3.Size = new System.Drawing.Size(286, 111);
+          this.groupBox3.Size = new System.Drawing.Size(286, 101);
           this.groupBox3.TabIndex = 77;
           this.groupBox3.TabStop = false;
           this.groupBox3.Text = "Custom Config Filter";
@@ -3651,7 +3644,7 @@
           // 
           this.btnCustomConfigFilter.Location = new System.Drawing.Point(12, 19);
           this.btnCustomConfigFilter.Name = "btnCustomConfigFilter";
-          this.btnCustomConfigFilter.Size = new System.Drawing.Size(53, 80);
+          this.btnCustomConfigFilter.Size = new System.Drawing.Size(53, 74);
           this.btnCustomConfigFilter.TabIndex = 31;
           this.btnCustomConfigFilter.Text = "Custom\r\nConfig\r\nFilter";
           this.btnCustomConfigFilter.UseVisualStyleBackColor = true;
@@ -3667,7 +3660,7 @@
           this.textBoxStrDfltSelect.Name = "textBoxStrDfltSelect";
           this.textBoxStrDfltSelect.ReadOnly = true;
           this.textBoxStrDfltSelect.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-          this.textBoxStrDfltSelect.Size = new System.Drawing.Size(194, 80);
+          this.textBoxStrDfltSelect.Size = new System.Drawing.Size(194, 74);
           this.textBoxStrDfltSelect.TabIndex = 28;
           this.textBoxStrDfltSelect.TabStop = false;
           // 
@@ -3780,7 +3773,7 @@
           this.groupBox_PreLaunchingCommand.Controls.Add(this.label38);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdPar);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdExe);
-          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(451, 272);
+          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(451, 238);
           this.groupBox_PreLaunchingCommand.Name = "groupBox_PreLaunchingCommand";
           this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(286, 76);
           this.groupBox_PreLaunchingCommand.TabIndex = 78;
@@ -3830,64 +3823,12 @@
           this.lblYellowShowRequiredItems.AutoSize = true;
           this.lblYellowShowRequiredItems.BackColor = System.Drawing.SystemColors.Info;
           this.lblYellowShowRequiredItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 128);
+          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 325);
           this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
           this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(245, 15);
           this.lblYellowShowRequiredItems.TabIndex = 76;
           this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory for the plugin to work !";
           this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-          // 
-          // groupBox_Security
-          // 
-          this.groupBox_Security.Controls.Add(this.label16);
-          this.groupBox_Security.Controls.Add(this.label15);
-          this.groupBox_Security.Controls.Add(this.Rpt_Dwp);
-          this.groupBox_Security.Controls.Add(this.Dwp);
-          this.groupBox_Security.Location = new System.Drawing.Point(451, 44);
-          this.groupBox_Security.Name = "groupBox_Security";
-          this.groupBox_Security.Size = new System.Drawing.Size(286, 77);
-          this.groupBox_Security.TabIndex = 75;
-          this.groupBox_Security.TabStop = false;
-          this.groupBox_Security.Text = "Security - Password to protect the config / DB";
-          this.ToolTip1.SetToolTip(this.groupBox_Security, resources.GetString("groupBox_Security.ToolTip"));
-          // 
-          // label16
-          // 
-          this.label16.AutoSize = true;
-          this.label16.Location = new System.Drawing.Point(12, 50);
-          this.label16.Name = "label16";
-          this.label16.Size = new System.Drawing.Size(42, 13);
-          this.label16.TabIndex = 72;
-          this.label16.Text = "Repeat";
-          // 
-          // label15
-          // 
-          this.label15.AutoSize = true;
-          this.label15.Location = new System.Drawing.Point(12, 24);
-          this.label15.Name = "label15";
-          this.label15.Size = new System.Drawing.Size(53, 13);
-          this.label15.TabIndex = 71;
-          this.label15.Text = "Password";
-          // 
-          // Rpt_Dwp
-          // 
-          this.Rpt_Dwp.Location = new System.Drawing.Point(82, 47);
-          this.Rpt_Dwp.Name = "Rpt_Dwp";
-          this.Rpt_Dwp.Size = new System.Drawing.Size(151, 20);
-          this.Rpt_Dwp.TabIndex = 70;
-          this.Rpt_Dwp.UseSystemPasswordChar = true;
-          // 
-          // Dwp
-          // 
-          this.Dwp.Location = new System.Drawing.Point(82, 21);
-          this.Dwp.Name = "Dwp";
-          this.Dwp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-          this.Dwp.Size = new System.Drawing.Size(151, 20);
-          this.Dwp.TabIndex = 69;
-          this.ToolTip1.SetToolTip(this.Dwp, "Enter a password here if you wish to restrict access (from children, for example)" +
-                  " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
-                  "ond field.\r\n");
-          this.Dwp.UseSystemPasswordChar = true;
           // 
           // groupBox_PlayMovieInfos
           // 
@@ -4053,6 +3994,58 @@
           this.AntIdentItem.TabIndex = 56;
           this.ToolTip1.SetToolTip(this.AntIdentItem, resources.GetString("AntIdentItem.ToolTip"));
           // 
+          // groupBox_Security
+          // 
+          this.groupBox_Security.Controls.Add(this.label16);
+          this.groupBox_Security.Controls.Add(this.label15);
+          this.groupBox_Security.Controls.Add(this.Rpt_Dwp);
+          this.groupBox_Security.Controls.Add(this.Dwp);
+          this.groupBox_Security.Location = new System.Drawing.Point(451, 155);
+          this.groupBox_Security.Name = "groupBox_Security";
+          this.groupBox_Security.Size = new System.Drawing.Size(286, 77);
+          this.groupBox_Security.TabIndex = 75;
+          this.groupBox_Security.TabStop = false;
+          this.groupBox_Security.Text = "Security - Password to protect the config / DB";
+          this.ToolTip1.SetToolTip(this.groupBox_Security, resources.GetString("groupBox_Security.ToolTip"));
+          // 
+          // label16
+          // 
+          this.label16.AutoSize = true;
+          this.label16.Location = new System.Drawing.Point(12, 50);
+          this.label16.Name = "label16";
+          this.label16.Size = new System.Drawing.Size(42, 13);
+          this.label16.TabIndex = 72;
+          this.label16.Text = "Repeat";
+          // 
+          // label15
+          // 
+          this.label15.AutoSize = true;
+          this.label15.Location = new System.Drawing.Point(12, 24);
+          this.label15.Name = "label15";
+          this.label15.Size = new System.Drawing.Size(53, 13);
+          this.label15.TabIndex = 71;
+          this.label15.Text = "Password";
+          // 
+          // Rpt_Dwp
+          // 
+          this.Rpt_Dwp.Location = new System.Drawing.Point(93, 47);
+          this.Rpt_Dwp.Name = "Rpt_Dwp";
+          this.Rpt_Dwp.Size = new System.Drawing.Size(140, 20);
+          this.Rpt_Dwp.TabIndex = 70;
+          this.Rpt_Dwp.UseSystemPasswordChar = true;
+          // 
+          // Dwp
+          // 
+          this.Dwp.Location = new System.Drawing.Point(93, 21);
+          this.Dwp.Name = "Dwp";
+          this.Dwp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+          this.Dwp.Size = new System.Drawing.Size(140, 20);
+          this.Dwp.TabIndex = 69;
+          this.ToolTip1.SetToolTip(this.Dwp, "Enter a password here if you wish to restrict access (from children, for example)" +
+                  " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
+                  "ond field.\r\n");
+          this.Dwp.UseSystemPasswordChar = true;
+          // 
           // label13
           // 
           this.label13.AutoSize = true;
@@ -4081,7 +4074,7 @@
             "XBMC nfo reader"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
-          this.CatalogType.Size = new System.Drawing.Size(193, 21);
+          this.CatalogType.Size = new System.Drawing.Size(194, 21);
           this.CatalogType.TabIndex = 62;
           this.ToolTip1.SetToolTip(this.CatalogType, resources.GetString("CatalogType.ToolTip"));
           this.CatalogType.SelectedIndexChanged += new System.EventHandler(this.CatalogType_SelectedIndexChanged);
@@ -4126,7 +4119,7 @@
           // label17
           // 
           this.label17.AutoSize = true;
-          this.label17.Location = new System.Drawing.Point(316, 14);
+          this.label17.Location = new System.Drawing.Point(309, 13);
           this.label17.Name = "label17";
           this.label17.Size = new System.Drawing.Size(84, 26);
           this.label17.TabIndex = 66;
@@ -4136,7 +4129,7 @@
           // 
           // TitleDelim
           // 
-          this.TitleDelim.Location = new System.Drawing.Point(406, 18);
+          this.TitleDelim.Location = new System.Drawing.Point(399, 17);
           this.TitleDelim.MaxLength = 1;
           this.TitleDelim.Name = "TitleDelim";
           this.TitleDelim.Size = new System.Drawing.Size(20, 20);
@@ -5833,6 +5826,13 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // View_Dflt_Text
+          // 
+          this.View_Dflt_Text.Location = new System.Drawing.Point(67, 49);
+          this.View_Dflt_Text.Name = "View_Dflt_Text";
+          this.View_Dflt_Text.Size = new System.Drawing.Size(117, 20);
+          this.View_Dflt_Text.TabIndex = 17;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5933,12 +5933,12 @@
           this.groupBox3.PerformLayout();
           this.groupBox_PreLaunchingCommand.ResumeLayout(false);
           this.groupBox_PreLaunchingCommand.PerformLayout();
-          this.groupBox_Security.ResumeLayout(false);
-          this.groupBox_Security.PerformLayout();
           this.groupBox_PlayMovieInfos.ResumeLayout(false);
           this.groupBox_PlayMovieInfos.PerformLayout();
           this.groupBoxMoviePathInfos.ResumeLayout(false);
           this.groupBoxMoviePathInfos.PerformLayout();
+          this.groupBox_Security.ResumeLayout(false);
+          this.groupBox_Security.PerformLayout();
           this.groupBox_TitleOrder.ResumeLayout(false);
           this.groupBox_TitleOrder.PerformLayout();
           this.groupBoxExtendedFieldHandling.ResumeLayout(false);
@@ -6152,7 +6152,6 @@
         private Label label14;
         private ComboBox LayOut;
         private ComboBox View_Dflt_Item;
-        private TextBox View_Dflt_Text;
         private TabPage Tab_Trailer;
         private GroupBox groupBox24;
         private Label labelTrailers;
@@ -6437,5 +6436,6 @@
         private Label label3;
         private TextBox AntLabel1;
         private GroupBox groupBox_ManualDeletion;
+        private TextBox View_Dflt_Text;
     }
 }

@@ -1684,7 +1684,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ItemSearchGrabberName.ResetText();
             ItemSearchGrabberScriptsFilter.ResetText();
             cbPictureHandling.ResetText();
-            chkUseOriginalAsTranslatedTitle.Checked = false;
             SearchFileName.Checked = false;
             chkSuppress.Checked = false;
             chkSuppressManual.Checked = false;
@@ -3473,8 +3472,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void AntViewText_Change()
         {
           View_Dflt_Item.Items.Clear();
-          View_Dflt_Item.Items.Add("(none)"); 
-          View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(924)); //Menu - will be used when "none"
+          View_Dflt_Item.Items.Add("(none)");
+          View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(1079819)); // Views Menu - will be used when "none"
           //View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); //Films
           //View_Dflt_Item.Items.Add("Year");
           //View_Dflt_Item.Items.Add("Category");
@@ -3530,7 +3529,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void View_Dflt_Item_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (View_Dflt_Item.Text == "(none)" || View_Dflt_Item.Text == GUILocalizeStrings.Get(924)) // menu
+          if (View_Dflt_Item.Text == "(none)" || View_Dflt_Item.Text == GUILocalizeStrings.Get(1079819)) // Views Menu
             {
               View_Dflt_Text.Visible = false;
               lbl_View_Dflt_Text.Visible = false;
@@ -4652,7 +4651,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle2.Text = "TranslatedTitle";
             ItemSearchFileName.Text = "OriginalTitle";
             ItemSearchGrabberName.Text = "OriginalTitle";
-            chkUseOriginalAsTranslatedTitle.Checked = false;
           }
           else
           {
@@ -4660,7 +4658,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle2.Text = "OriginalTitle";
             ItemSearchFileName.Text = "TranslatedTitle";
             ItemSearchGrabberName.Text = "TranslatedTitle";
-            chkUseOriginalAsTranslatedTitle.Checked = true;
           }
 
           AntSTitle.Text = "FormattedTitle";
