@@ -27,6 +27,8 @@ using System.Collections.Generic;
 
 namespace MyFilmsPlugin.MyFilms.Utils
 {
+  using System.Globalization;
+
   using MediaPortal.Profile;
 
   ///// <summary>
@@ -160,31 +162,31 @@ namespace MyFilmsPlugin.MyFilms.Utils
                                }, iDefault);
     }
 
-    //public float GetValueAsFloat(string section, string entry, float fDefault)
-    //{
-    //  object obj = xmlDoc.GetValue(section, entry);
-    //  if (obj == null) return fDefault;
-    //  string strValue = obj.ToString();
-    //  if (strValue == null) return fDefault;
-    //  if (strValue.Length == 0) return fDefault;
-    //  try
-    //  {
-    //    float test=123.456f;
-    //    string tmp=test.ToString();
-    //    bool useCommas = (tmp.IndexOf(",") >= 0);
-    //    if (useCommas==false) 
-    //      strValue = strValue.Replace(',', '.');
-    //    else
-    //      strValue = strValue.Replace('.', ',');
+    public float GetValueAsFloat(string section, string entry, float fDefault)
+    {
+      object obj = xmlDoc.GetValue(section, entry);
+      if (obj == null) return fDefault;
+      string strValue = obj.ToString();
+      if (strValue == null) return fDefault;
+      if (strValue.Length == 0) return fDefault;
+      try
+      {
+        float test = 123.456f;
+        string tmp = test.ToString();
+        bool useCommas = (tmp.IndexOf(",") >= 0);
+        if (useCommas == false)
+          strValue = strValue.Replace(',', '.');
+        else
+          strValue = strValue.Replace('.', ',');
 
-    //    float fRet = (float)System.Double.Parse(strValue, NumberFormatInfo.InvariantInfo);
-    //    return fRet;
-    //  }
-    //  catch (Exception)
-    //  {
-    //  }
-    //  return fDefault;
-    //}
+        float fRet = (float)System.Double.Parse(strValue, NumberFormatInfo.InvariantInfo);
+        return fRet;
+      }
+      catch (Exception)
+      {
+      }
+      return fDefault;
+    }
 
 
     public void WriteXmlConfig(string FileName, string section, string entry, object objValue)

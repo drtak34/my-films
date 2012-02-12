@@ -504,6 +504,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnLabel.AllowDBNull = false;
                 this.columnLabel.DefaultValue = ((string)(""));
                 this.columnViewEnabled.DefaultValue = ((bool)(true));
+                this.columnImagePath.DefaultValue = ((string)(""));
                 this.columnDBfield.DefaultValue = ((string)("(none)"));
                 this.columnValue.DefaultValue = ((string)(""));
                 this.columnFilter.DefaultValue = ((string)(""));
@@ -680,11 +681,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ImagePath {
                 get {
-                    try {
-                        return ((string)(this[this.tableView.ImagePathColumn]));
+                    if (this.IsImagePathNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte ImagePath in Tabelle View ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableView.ImagePathColumn]));
                     }
                 }
                 set {

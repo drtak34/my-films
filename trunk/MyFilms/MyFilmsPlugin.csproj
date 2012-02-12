@@ -18,8 +18,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Resources\MyFilmsIcon.ico</ApplicationIcon>
-	<TargetFrameworkSubset>Full</TargetFrameworkSubset>
-	<PublishUrl>publish\</PublishUrl>
+    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
+    <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -143,6 +143,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\MFview.cs">
+      <DependentUpon>MFview.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PerfWatch.cs" />
     <Compile Include="Configuration\FilterEditor.cs">
       <SubType>Form</SubType>

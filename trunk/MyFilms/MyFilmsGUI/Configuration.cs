@@ -547,6 +547,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
 
                 ScanMediaOnStart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckMediaOnStart", false);
+                BoolShowEmptyValuesInViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ShowEmpty", false);
                 AllowTraktSync = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AllowTraktSync", false);
                 AllowRecentlyAddedAPI = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AllowRecentAddedAPI", false);
 

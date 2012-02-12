@@ -312,9 +312,11 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
-          this.textBoxViewLabel = new System.Windows.Forms.TextBox();
+          this.buttonResetImage = new System.Windows.Forms.Button();
+          this.AntViewsImage = new System.Windows.Forms.PictureBox();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
+          this.textBoxViewLabel = new System.Windows.Forms.TextBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
           this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
           this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -564,7 +566,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.AntViewsImage = new System.Windows.Forms.PictureBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -606,6 +607,7 @@
           this.groupBox7.SuspendLayout();
           this.groupBox4.SuspendLayout();
           this.groupBoxView.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.AntViewsImage)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.mFview)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).BeginInit();
@@ -648,7 +650,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.AntViewsImage)).BeginInit();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -3023,6 +3024,7 @@
           // 
           // groupBoxView
           // 
+          this.groupBoxView.Controls.Add(this.buttonResetImage);
           this.groupBoxView.Controls.Add(this.AntViewsImage);
           this.groupBoxView.Controls.Add(this.textBoxViewLabel);
           this.groupBoxView.Controls.Add(this.lblAntViewIndex);
@@ -3043,16 +3045,29 @@
           this.groupBoxView.Text = "Custom View Editor ...";
           this.ToolTip1.SetToolTip(this.groupBoxView, resources.GetString("groupBoxView.ToolTip"));
           // 
-          // textBoxViewLabel
+          // buttonResetImage
           // 
-          this.textBoxViewLabel.BackColor = System.Drawing.SystemColors.Control;
-          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-          this.textBoxViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
-          this.textBoxViewLabel.Enabled = false;
-          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 68);
-          this.textBoxViewLabel.Name = "textBoxViewLabel";
-          this.textBoxViewLabel.Size = new System.Drawing.Size(177, 20);
-          this.textBoxViewLabel.TabIndex = 44;
+          this.buttonResetImage.Location = new System.Drawing.Point(376, 68);
+          this.buttonResetImage.Name = "buttonResetImage";
+          this.buttonResetImage.Size = new System.Drawing.Size(40, 20);
+          this.buttonResetImage.TabIndex = 89;
+          this.buttonResetImage.Text = "clear";
+          this.buttonResetImage.UseVisualStyleBackColor = true;
+          this.buttonResetImage.Click += new System.EventHandler(this.buttonResetImage_Click);
+          // 
+          // AntViewsImage
+          // 
+          this.AntViewsImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.AntViewsImage.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.viewBindingSource, "ImagePath", true));
+          this.AntViewsImage.Location = new System.Drawing.Point(420, 48);
+          this.AntViewsImage.Name = "AntViewsImage";
+          this.AntViewsImage.Size = new System.Drawing.Size(40, 60);
+          this.AntViewsImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+          this.AntViewsImage.TabIndex = 88;
+          this.AntViewsImage.TabStop = false;
+          this.ToolTip1.SetToolTip(this.AntViewsImage, resources.GetString("AntViewsImage.ToolTip"));
+          this.AntViewsImage.DoubleClick += new System.EventHandler(this.AntViewsImage_DoubleClick);
+          this.AntViewsImage.Click += new System.EventHandler(this.AntViewsImage_Click);
           // 
           // viewBindingSource
           // 
@@ -3063,6 +3078,17 @@
           // 
           this.mFview.DataSetName = "MFview";
           this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
+          // textBoxViewLabel
+          // 
+          this.textBoxViewLabel.BackColor = System.Drawing.SystemColors.Control;
+          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.textBoxViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
+          this.textBoxViewLabel.Enabled = false;
+          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 68);
+          this.textBoxViewLabel.Name = "textBoxViewLabel";
+          this.textBoxViewLabel.Size = new System.Drawing.Size(177, 20);
+          this.textBoxViewLabel.TabIndex = 44;
           // 
           // lblAntViewIndex
           // 
@@ -3114,6 +3140,7 @@
           // 
           // toolStripLabel1
           // 
+          this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 1);
           this.toolStripLabel1.Name = "toolStripLabel1";
           this.toolStripLabel1.Size = new System.Drawing.Size(44, 13);
           this.toolStripLabel1.Text = "von {0}";
@@ -5767,19 +5794,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // AntViewsImage
-          // 
-          this.AntViewsImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-          this.AntViewsImage.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.viewBindingSource, "ImagePath", true));
-          this.AntViewsImage.Location = new System.Drawing.Point(407, 46);
-          this.AntViewsImage.Name = "AntViewsImage";
-          this.AntViewsImage.Size = new System.Drawing.Size(40, 60);
-          this.AntViewsImage.TabIndex = 88;
-          this.AntViewsImage.TabStop = false;
-          this.ToolTip1.SetToolTip(this.AntViewsImage, resources.GetString("AntViewsImage.ToolTip"));
-          this.AntViewsImage.DoubleClick += new System.EventHandler(this.AntViewsImage_DoubleClick);
-          this.AntViewsImage.Click += new System.EventHandler(this.AntViewsImage_Click);
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5856,6 +5870,7 @@
           this.groupBox4.PerformLayout();
           this.groupBoxView.ResumeLayout(false);
           this.groupBoxView.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.AntViewsImage)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.viewBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.mFview)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorViews)).EndInit();
@@ -5917,7 +5932,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.AntViewsImage)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6376,5 +6390,6 @@
         private TextBox textBoxViewLabel;
         private ComboBox cbSuppress;
         private PictureBox AntViewsImage;
+        private Button buttonResetImage;
     }
 }

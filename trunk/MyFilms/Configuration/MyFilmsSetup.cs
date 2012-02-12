@@ -864,8 +864,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", chkEnhancedWatchedStatusHandling.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", UserProfileName.Text);
-          
+
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", chkScanMediaOnStart.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", chkShowEmpty.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", cbAllowTraktSync.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", cbAllowRecentAddedAPI.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", chkOnlyTitle.Checked);
@@ -1357,6 +1358,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", false);
             cbAllowRecentAddedAPI.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", false);
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", false);
+            chkShowEmpty.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", false);
+          
             // common external catalog options
             chkAddTagline.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTagline", false);
             chkAddTags.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTags", false);
@@ -1736,6 +1739,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkGlobalAvailableOnly.Checked = false;
             chkGlobalUnwatchedOnly.Checked = false;
             chkScanMediaOnStart.Checked = false;
+            chkShowEmpty.Checked = false;
             cbAllowTraktSync.Checked = false;
             cbAllowRecentAddedAPI.Checked = false;
             textBoxGlobalUnwatchedOnlyValue.Text = "false";
@@ -3275,16 +3279,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void Charge_LogosView(ref string[] wtab, int i, string typelogo, string logopath)
         {
             LogoView.Items.Add(typelogo);
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[0].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[1].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[2].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[3].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[4].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[5].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[6].ToString());
-            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetFileName(wtab[7].ToString()));
-            if (System.IO.File.Exists(wtab[7].ToString()))
-              LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(wtab[7].ToString()));
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[0]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[1]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[2]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[3]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[4]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[5]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[6]);
+            LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetFileName(wtab[7]));
+            if (System.IO.File.Exists(wtab[7]))
+              LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(wtab[7]));
             else
                 if (System.IO.File.Exists(logopath +  wtab[7])) // Check if Logofile exists in default media directory of current skin and add it, if found
                     LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(logopath + wtab[7]));
@@ -5773,11 +5777,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           viewBindingSource.ResetBindings(false);
         }
 
-        private void dgViewsList_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-          AntViewText_Change();
-        }
-
         private void dgViewsList_Leave(object sender, EventArgs e)
         {
           AntViewText_Change();
@@ -5835,35 +5834,35 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonResetViewImage_Click(object sender, EventArgs e)
-        {
-          MyCustomViews.View[viewBindingSource.Position].ImagePath = "";
-        }
-
         private void AntViewsImage_Click(object sender, EventArgs e)
         {
-          if (!string.IsNullOrEmpty(MyCustomViews.View[viewBindingSource.Position].ImagePath))
-            openFileDialog1.FileName = MyCustomViews.View[viewBindingSource.Position].ImagePath;
+          if (!string.IsNullOrEmpty(AntViewsImage.ImageLocation))
+            openFileDialog1.FileName = AntViewsImage.ImageLocation;
           else
           {
             openFileDialog1.FileName = String.Empty;
             openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
           }
 
-          if (null != MyCustomViews.View[viewBindingSource.Position].ImagePath && MyCustomViews.View[viewBindingSource.Position].ImagePath.Contains("\\"))
-            openFileDialog1.InitialDirectory = MyCustomViews.View[viewBindingSource.Position].ImagePath.Substring(0, MyCustomViews.View[viewBindingSource.Position].ImagePath.LastIndexOf("\\") + 1);
+          if (null != AntViewsImage.ImageLocation && AntViewsImage.ImageLocation.Contains("\\"))
+            openFileDialog1.InitialDirectory = AntViewsImage.ImageLocation.Substring(0, AntViewsImage.ImageLocation.LastIndexOf("\\") + 1);
 
           openFileDialog1.RestoreDirectory = true;
           openFileDialog1.DefaultExt = "jpg";
           openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
           openFileDialog1.Title = "Select Views Image";
           if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-            MyCustomViews.View[viewBindingSource.Position].ImagePath = openFileDialog1.FileName;
+            AntViewsImage.ImageLocation = openFileDialog1.FileName;
         }
 
         private void AntViewsImage_DoubleClick(object sender, EventArgs e)
         {
-          MyCustomViews.View[viewBindingSource.Position].ImagePath = "";
+          AntViewsImage.ImageLocation = "";
+        }
+
+        private void buttonResetImage_Click(object sender, EventArgs e)
+        {
+          AntViewsImage.ImageLocation = "";
         }
       }
 
