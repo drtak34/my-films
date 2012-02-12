@@ -564,6 +564,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.AntViewsImage = new System.Windows.Forms.PictureBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -647,6 +648,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.AntViewsImage)).BeginInit();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -790,7 +792,7 @@
           // label66
           // 
           label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(342, 70);
+          label66.Location = new System.Drawing.Point(351, 98);
           label66.Name = "label66";
           label66.Size = new System.Drawing.Size(37, 13);
           label66.TabIndex = 7;
@@ -800,7 +802,7 @@
           // label65
           // 
           label65.AutoSize = true;
-          label65.Location = new System.Drawing.Point(183, 70);
+          label65.Location = new System.Drawing.Point(183, 99);
           label65.Name = "label65";
           label65.Size = new System.Drawing.Size(47, 13);
           label65.TabIndex = 5;
@@ -2220,7 +2222,6 @@
           this.cbSuppress.Name = "cbSuppress";
           this.cbSuppress.Size = new System.Drawing.Size(181, 21);
           this.cbSuppress.TabIndex = 20;
-          this.cbSuppress.Text = "Delete DB Entry only";
           this.cbSuppress.SelectedIndexChanged += new System.EventHandler(this.cbSuppress_SelectedIndexChanged);
           // 
           // gpspfield
@@ -2476,7 +2477,7 @@
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
           this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(27, 24);
           this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
-          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(259, 170);
+          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(324, 204);
           this.groupBox_DetailedSupplementaryInformations.TabIndex = 130;
           this.groupBox_DetailedSupplementaryInformations.TabStop = false;
           this.groupBox_DetailedSupplementaryInformations.Text = "Custom Display Items";
@@ -2484,14 +2485,14 @@
           // 
           // AntLabel5
           // 
-          this.AntLabel5.Location = new System.Drawing.Point(120, 135);
+          this.AntLabel5.Location = new System.Drawing.Point(140, 150);
           this.AntLabel5.Name = "AntLabel5";
           this.AntLabel5.Size = new System.Drawing.Size(105, 20);
           this.AntLabel5.TabIndex = 35;
           // 
           // AntLabel4
           // 
-          this.AntLabel4.Location = new System.Drawing.Point(120, 111);
+          this.AntLabel4.Location = new System.Drawing.Point(140, 123);
           this.AntLabel4.Name = "AntLabel4";
           this.AntLabel4.Size = new System.Drawing.Size(105, 20);
           this.AntLabel4.TabIndex = 34;
@@ -2499,24 +2500,24 @@
           // AntItem5
           // 
           this.AntItem5.FormattingEnabled = true;
-          this.AntItem5.Location = new System.Drawing.Point(20, 134);
+          this.AntItem5.Location = new System.Drawing.Point(20, 150);
           this.AntItem5.Name = "AntItem5";
-          this.AntItem5.Size = new System.Drawing.Size(94, 21);
+          this.AntItem5.Size = new System.Drawing.Size(101, 21);
           this.AntItem5.Sorted = true;
           this.AntItem5.TabIndex = 33;
           // 
           // AntItem4
           // 
           this.AntItem4.FormattingEnabled = true;
-          this.AntItem4.Location = new System.Drawing.Point(20, 111);
+          this.AntItem4.Location = new System.Drawing.Point(20, 123);
           this.AntItem4.Name = "AntItem4";
-          this.AntItem4.Size = new System.Drawing.Size(94, 21);
+          this.AntItem4.Size = new System.Drawing.Size(101, 21);
           this.AntItem4.Sorted = true;
           this.AntItem4.TabIndex = 32;
           // 
           // AntLabel3
           // 
-          this.AntLabel3.Location = new System.Drawing.Point(120, 88);
+          this.AntLabel3.Location = new System.Drawing.Point(140, 96);
           this.AntLabel3.Name = "AntLabel3";
           this.AntLabel3.Size = new System.Drawing.Size(105, 20);
           this.AntLabel3.TabIndex = 30;
@@ -2524,24 +2525,24 @@
           // AntItem3
           // 
           this.AntItem3.FormattingEnabled = true;
-          this.AntItem3.Location = new System.Drawing.Point(20, 88);
+          this.AntItem3.Location = new System.Drawing.Point(20, 96);
           this.AntItem3.Name = "AntItem3";
-          this.AntItem3.Size = new System.Drawing.Size(94, 21);
+          this.AntItem3.Size = new System.Drawing.Size(101, 21);
           this.AntItem3.Sorted = true;
           this.AntItem3.TabIndex = 29;
           // 
           // AntItem2
           // 
           this.AntItem2.FormattingEnabled = true;
-          this.AntItem2.Location = new System.Drawing.Point(20, 65);
+          this.AntItem2.Location = new System.Drawing.Point(20, 69);
           this.AntItem2.Name = "AntItem2";
-          this.AntItem2.Size = new System.Drawing.Size(94, 21);
+          this.AntItem2.Size = new System.Drawing.Size(101, 21);
           this.AntItem2.Sorted = true;
           this.AntItem2.TabIndex = 27;
           // 
           // AntLabel2
           // 
-          this.AntLabel2.Location = new System.Drawing.Point(120, 65);
+          this.AntLabel2.Location = new System.Drawing.Point(140, 69);
           this.AntLabel2.Name = "AntLabel2";
           this.AntLabel2.Size = new System.Drawing.Size(105, 20);
           this.AntLabel2.TabIndex = 28;
@@ -2561,14 +2562,14 @@
           this.AntItem1.FormattingEnabled = true;
           this.AntItem1.Location = new System.Drawing.Point(20, 42);
           this.AntItem1.Name = "AntItem1";
-          this.AntItem1.Size = new System.Drawing.Size(94, 21);
+          this.AntItem1.Size = new System.Drawing.Size(101, 21);
           this.AntItem1.Sorted = true;
           this.AntItem1.TabIndex = 25;
           // 
           // label3
           // 
           this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(120, 26);
+          this.label3.Location = new System.Drawing.Point(147, 26);
           this.label3.Name = "label3";
           this.label3.Size = new System.Drawing.Size(33, 13);
           this.label3.TabIndex = 21;
@@ -2576,7 +2577,7 @@
           // 
           // AntLabel1
           // 
-          this.AntLabel1.Location = new System.Drawing.Point(120, 42);
+          this.AntLabel1.Location = new System.Drawing.Point(140, 42);
           this.AntLabel1.Name = "AntLabel1";
           this.AntLabel1.Size = new System.Drawing.Size(105, 20);
           this.AntLabel1.TabIndex = 26;
@@ -2609,9 +2610,9 @@
           this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
           this.groupBox_Separators.Controls.Add(this.label24);
           this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(6, 266);
+          this.groupBox_Separators.Location = new System.Drawing.Point(6, 273);
           this.groupBox_Separators.Name = "groupBox_Separators";
-          this.groupBox_Separators.Size = new System.Drawing.Size(467, 81);
+          this.groupBox_Separators.Size = new System.Drawing.Size(467, 74);
           this.groupBox_Separators.TabIndex = 128;
           this.groupBox_Separators.TabStop = false;
           this.groupBox_Separators.Text = "Separators";
@@ -2625,7 +2626,7 @@
             "(",
             "....",
             ")"});
-          this.RoleSeparator5.Location = new System.Drawing.Point(376, 45);
+          this.RoleSeparator5.Location = new System.Drawing.Point(376, 43);
           this.RoleSeparator5.Name = "RoleSeparator5";
           this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator5.TabIndex = 82;
@@ -2639,7 +2640,7 @@
             "(",
             "....",
             ")"});
-          this.RoleSeparator4.Location = new System.Drawing.Point(327, 45);
+          this.RoleSeparator4.Location = new System.Drawing.Point(327, 43);
           this.RoleSeparator4.Name = "RoleSeparator4";
           this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator4.TabIndex = 81;
@@ -2652,7 +2653,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator5.Location = new System.Drawing.Point(376, 18);
+          this.ListSeparator5.Location = new System.Drawing.Point(376, 16);
           this.ListSeparator5.Name = "ListSeparator5";
           this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator5.TabIndex = 80;
@@ -2665,7 +2666,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator4.Location = new System.Drawing.Point(327, 18);
+          this.ListSeparator4.Location = new System.Drawing.Point(327, 16);
           this.ListSeparator4.Name = "ListSeparator4";
           this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator4.TabIndex = 79;
@@ -2678,7 +2679,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator3.Location = new System.Drawing.Point(278, 18);
+          this.ListSeparator3.Location = new System.Drawing.Point(278, 16);
           this.ListSeparator3.Name = "ListSeparator3";
           this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator3.TabIndex = 78;
@@ -2691,7 +2692,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator2.Location = new System.Drawing.Point(229, 18);
+          this.ListSeparator2.Location = new System.Drawing.Point(229, 16);
           this.ListSeparator2.Name = "ListSeparator2";
           this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator2.TabIndex = 77;
@@ -2705,7 +2706,7 @@
             "(",
             ")",
             "...."});
-          this.RoleSeparator2.Location = new System.Drawing.Point(229, 45);
+          this.RoleSeparator2.Location = new System.Drawing.Point(229, 43);
           this.RoleSeparator2.Name = "RoleSeparator2";
           this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator2.Sorted = true;
@@ -2720,7 +2721,7 @@
             "(",
             ")",
             "...."});
-          this.RoleSeparator3.Location = new System.Drawing.Point(278, 45);
+          this.RoleSeparator3.Location = new System.Drawing.Point(278, 43);
           this.RoleSeparator3.Name = "RoleSeparator3";
           this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator3.Sorted = true;
@@ -2730,7 +2731,7 @@
           // label22
           // 
           this.label22.AutoSize = true;
-          this.label22.Location = new System.Drawing.Point(14, 48);
+          this.label22.Location = new System.Drawing.Point(14, 46);
           this.label22.Name = "label22";
           this.label22.Size = new System.Drawing.Size(107, 13);
           this.label22.TabIndex = 74;
@@ -2745,7 +2746,7 @@
             "(",
             ")",
             "...."});
-          this.RoleSeparator1.Location = new System.Drawing.Point(180, 45);
+          this.RoleSeparator1.Location = new System.Drawing.Point(180, 43);
           this.RoleSeparator1.Name = "RoleSeparator1";
           this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator1.Sorted = true;
@@ -2755,7 +2756,7 @@
           // label24
           // 
           this.label24.AutoSize = true;
-          this.label24.Location = new System.Drawing.Point(14, 21);
+          this.label24.Location = new System.Drawing.Point(14, 19);
           this.label24.Name = "label24";
           this.label24.Size = new System.Drawing.Size(72, 13);
           this.label24.TabIndex = 71;
@@ -2770,7 +2771,7 @@
             ",",
             ";",
             "|"});
-          this.ListSeparator1.Location = new System.Drawing.Point(180, 18);
+          this.ListSeparator1.Location = new System.Drawing.Point(180, 16);
           this.ListSeparator1.Name = "ListSeparator1";
           this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
           this.ListSeparator1.TabIndex = 70;
@@ -3022,6 +3023,7 @@
           // 
           // groupBoxView
           // 
+          this.groupBoxView.Controls.Add(this.AntViewsImage);
           this.groupBoxView.Controls.Add(this.textBoxViewLabel);
           this.groupBoxView.Controls.Add(this.lblAntViewIndex);
           this.groupBoxView.Controls.Add(this.bindingNavigatorViews);
@@ -3035,7 +3037,7 @@
           this.groupBoxView.Controls.Add(label65);
           this.groupBoxView.Location = new System.Drawing.Point(6, 5);
           this.groupBoxView.Name = "groupBoxView";
-          this.groupBoxView.Size = new System.Drawing.Size(467, 255);
+          this.groupBoxView.Size = new System.Drawing.Size(467, 262);
           this.groupBoxView.TabIndex = 127;
           this.groupBoxView.TabStop = false;
           this.groupBoxView.Text = "Custom View Editor ...";
@@ -3044,12 +3046,12 @@
           // textBoxViewLabel
           // 
           this.textBoxViewLabel.BackColor = System.Drawing.SystemColors.Control;
-          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
           this.textBoxViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
           this.textBoxViewLabel.Enabled = false;
-          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 49);
+          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 68);
           this.textBoxViewLabel.Name = "textBoxViewLabel";
-          this.textBoxViewLabel.Size = new System.Drawing.Size(272, 13);
+          this.textBoxViewLabel.Size = new System.Drawing.Size(177, 20);
           this.textBoxViewLabel.TabIndex = 44;
           // 
           // viewBindingSource
@@ -3065,7 +3067,7 @@
           // lblAntViewIndex
           // 
           this.lblAntViewIndex.AutoSize = true;
-          this.lblAntViewIndex.Location = new System.Drawing.Point(291, 70);
+          this.lblAntViewIndex.Location = new System.Drawing.Point(291, 99);
           this.lblAntViewIndex.Name = "lblAntViewIndex";
           this.lblAntViewIndex.Size = new System.Drawing.Size(36, 13);
           this.lblAntViewIndex.TabIndex = 43;
@@ -3257,7 +3259,7 @@
           this.dgViewsList.RowHeadersVisible = false;
           this.dgViewsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
           this.dgViewsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-          this.dgViewsList.Size = new System.Drawing.Size(158, 205);
+          this.dgViewsList.Size = new System.Drawing.Size(158, 212);
           this.dgViewsList.TabIndex = 42;
           this.dgViewsList.Leave += new System.EventHandler(this.dgViewsList_Leave);
           // 
@@ -3284,9 +3286,9 @@
           this.groupBoxSortAndLayoutForView.Controls.Add(label69);
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewLayoutView);
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewSortOrder);
-          this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 181);
+          this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 191);
           this.groupBoxSortAndLayoutForView.Name = "groupBoxSortAndLayoutForView";
-          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 68);
+          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 65);
           this.groupBoxSortAndLayoutForView.TabIndex = 41;
           this.groupBoxSortAndLayoutForView.TabStop = false;
           this.groupBoxSortAndLayoutForView.Text = "Sort and Layouts for View";
@@ -3335,7 +3337,7 @@
           // 
           this.AntViewItem.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
           this.AntViewItem.FormattingEnabled = true;
-          this.AntViewItem.Location = new System.Drawing.Point(180, 85);
+          this.AntViewItem.Location = new System.Drawing.Point(180, 114);
           this.AntViewItem.Name = "AntViewItem";
           this.AntViewItem.Size = new System.Drawing.Size(104, 21);
           this.AntViewItem.Sorted = true;
@@ -3349,9 +3351,9 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
-          this.groupBox5.Location = new System.Drawing.Point(170, 118);
+          this.groupBox5.Location = new System.Drawing.Point(170, 139);
           this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(291, 57);
+          this.groupBox5.Size = new System.Drawing.Size(291, 48);
           this.groupBox5.TabIndex = 42;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Filter Expression ...";
@@ -3359,14 +3361,14 @@
           // AntViewFilter
           // 
           this.AntViewFilter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
-          this.AntViewFilter.Location = new System.Drawing.Point(10, 21);
+          this.AntViewFilter.Location = new System.Drawing.Point(10, 18);
           this.AntViewFilter.Name = "AntViewFilter";
           this.AntViewFilter.Size = new System.Drawing.Size(243, 20);
           this.AntViewFilter.TabIndex = 10;
           // 
           // AntViewFilterEditButton
           // 
-          this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 21);
+          this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 18);
           this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
           this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
           this.AntViewFilterEditButton.TabIndex = 39;
@@ -3377,7 +3379,7 @@
           // AntViewValue
           // 
           this.AntViewValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
-          this.AntViewValue.Location = new System.Drawing.Point(335, 86);
+          this.AntViewValue.Location = new System.Drawing.Point(344, 114);
           this.AntViewValue.Name = "AntViewValue";
           this.AntViewValue.Size = new System.Drawing.Size(117, 20);
           this.AntViewValue.TabIndex = 8;
@@ -3386,7 +3388,7 @@
           // AntViewIndex
           // 
           this.AntViewIndex.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
-          this.AntViewIndex.Location = new System.Drawing.Point(290, 86);
+          this.AntViewIndex.Location = new System.Drawing.Point(290, 115);
           this.AntViewIndex.Maximum = new decimal(new int[] {
             2,
             0,
@@ -5765,6 +5767,19 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // AntViewsImage
+          // 
+          this.AntViewsImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.AntViewsImage.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.viewBindingSource, "ImagePath", true));
+          this.AntViewsImage.Location = new System.Drawing.Point(407, 46);
+          this.AntViewsImage.Name = "AntViewsImage";
+          this.AntViewsImage.Size = new System.Drawing.Size(40, 60);
+          this.AntViewsImage.TabIndex = 88;
+          this.AntViewsImage.TabStop = false;
+          this.ToolTip1.SetToolTip(this.AntViewsImage, resources.GetString("AntViewsImage.ToolTip"));
+          this.AntViewsImage.DoubleClick += new System.EventHandler(this.AntViewsImage_DoubleClick);
+          this.AntViewsImage.Click += new System.EventHandler(this.AntViewsImage_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5902,6 +5917,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.AntViewsImage)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6359,5 +6375,6 @@
         private CheckBox chkShowEmpty;
         private TextBox textBoxViewLabel;
         private ComboBox cbSuppress;
+        private PictureBox AntViewsImage;
     }
 }

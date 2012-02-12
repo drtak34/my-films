@@ -3633,6 +3633,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.DVDLabel = customView.Label; // (string.Format("View{0}", i));
             item.Label = (string.IsNullOrEmpty(customView.Label)) ? customView.DBfield : customView.Label;
             item.IsFolder = true;
+            if (!string.IsNullOrEmpty(customView.ImagePath))
+            {
+              item.ThumbnailImage = customView.ImagePath;
+              item.IconImage = customView.ImagePath;
+              item.IconImageBig = customView.ImagePath;
+            }
             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
             this.facadeFilms.Add(item);
           }
