@@ -140,17 +140,6 @@
 			<label>#myfilms.cover.filterresolution (#selectedindex/#myfilms.cover.count)</label>
 		</control>
 		<control>
-			<description>Download Status</description>
-			<type>label</type>
-			<id>0</id>
-			<posX>1250</posX>
-			<posY>130</posY>
-			<align>right</align>
-			<textcolor>90ffffff</textcolor>
-			<label>#myfilms.cover.downloadingstatus #myfilms.cover.loadingstatus</label>
-			<label>downloadingstatus loadingstatus</label>
-		</control>
-		<control>
 			<description>Current Cover Label</description>
 			<type>label</type>
 			<label>Current Default</label>
@@ -328,7 +317,7 @@
 			<height>714</height>
 			<texture>bg_left.png</texture>
 			<colorDiffuse>ffffffff</colorDiffuse>
-			<visible>![control.hasfocus(2)|control.hasfocus(12)]</visible>		
+			<visible>![control.hasfocus(2)|control.hasfocus(12)|control.hasfocus(13)]</visible>		
 			<animation effect="fade" time="50">WindowClose</animation>
 			<animation effect="fade" time="50">WindowOpen</animation>
 			<animation effect="fade" time="250">visiblechange</animation>
@@ -347,7 +336,7 @@
 			<width>425</width>
 			<height>720</height>
 			<dimColor>ffffffff</dimColor>
-			<visible>control.hasfocus(2)|control.hasfocus(12)</visible>
+			<visible>control.hasfocus(2)|control.hasfocus(12)|control.hasfocus(13)</visible>
 			<animation effect="fade" time="250" start="75" reversible="false">visible</animation>
 			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
 			<animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
@@ -372,6 +361,13 @@
 					<type>button</type>
 					<id>12</id>
 					<label>Filter</label>
+					<onright>50</onright>
+				</control>
+				<control>
+					<description>Download Cover</description>
+					<type>button</type>
+					<id>13</id>
+					<label>Download</label>
 					<onright>50</onright>
 				</control>		
 			</control>

@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MediaPortal.GUI.Library;
+using MediaPortal.Dialogs;
 using Action = MediaPortal.GUI.Library.Action;
 using System.ComponentModel;
 using System.Drawing;
@@ -42,7 +43,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using Grabber;
 
   class MyFilmsCoverManager : GUIWindow
-    {
+  {
+
+      #region Skin Controls
+
         [SkinControlAttribute(50)]
         protected GUIFacadeControl m_Facade = null;
 
@@ -54,6 +58,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         [SkinControlAttribute(12)]
         protected GUIButtonControl buttonFilters = null;
+
+        [SkinControlAttribute(13)]
+        protected GUIButtonControl buttonDownloadCover = null;
+
+      #endregion
+
+      #region Enums
 
         enum menuAction
         {
@@ -92,6 +103,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             PlayList = 5
         }
 
+      #endregion
+
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         int movieId = -1;
         private string movieLabel = string.Empty;
@@ -106,16 +119,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private int initialView = -1;
         bool m_bQuickSelect = false;
 
+        public static void setGUIProperty(string name, string value)
+        {
+            string property = "#myfilms." + name;
+            GUIPropertyManager.SetProperty(property, StringExtensions.SanitizeXmlString(value));
+        }
+
         # region DownloadWorker
         static MyFilmsCoverManager()
-        {         
+        {
             // lets set up the downloader            
             downloadingWorker.WorkerSupportsCancellation = true;
             downloadingWorker.WorkerReportsProgress = true;
             downloadingWorker.DoWork += new DoWorkEventHandler(downloadingWorker_DoWork);
             downloadingWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(downloadingWorker_RunWorkerCompleted);
-            
-            setDownloadStatus();
+
         }
 
         void downloadingWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -131,7 +149,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         static void downloadingWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            setDownloadStatus();
+            
         }
 
         static void downloadingWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -177,19 +195,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //    }
             //} 
             //while (toDownload.Count > 0 && !downloadingWorker.CancellationPending);
-        }
-
-        static void setDownloadStatus()
-        {
-          lock (toDownload)
-          {
-            if (toDownload.Count > 0)
-            {
-              MyFilmsDetail.setGUIProperty("cover.downloadingstatus", string.Format("Download Status [{0}]", toDownload.Count));
-            }
-            else
-              MyFilmsDetail.setGUIProperty("cover.downloadingstatus", " ");
-          }
         }
 
         #endregion
@@ -245,7 +250,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               initialView = 2; // bigthumbs as default ...
               CurrentView = (View)initialView;
             }
-            m_Facade.CurrentLayout = (GUIFacadeControl.Layout)CurrentView;                
+            m_Facade.CurrentLayout = (GUIFacadeControl.Layout)CurrentView;
           }            
 
           base.OnPageLoad();
@@ -254,11 +259,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           UpdateLayoutButton();
           if (labelResolution != null) labelResolution.Label = "LabelResolution";
           if (buttonFilters != null) buttonFilters.Label = "ArtworkFilter";
+          if (buttonDownloadCover != null) buttonDownloadCover.Label = "DownloadCovers";
 
           ClearProperties();
           UpdateFilterProperty(false);
-
-          setDownloadStatus();
 
           string movielabel = MyFilms.r[MovieID][MyFilms.conf.StrTitle1].ToString();
           if (!string.IsNullOrEmpty(MyFilms.r[MovieID][MyFilms.conf.StrTitle2].ToString()))
@@ -320,13 +324,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             MyFilmsDetail.clearGUIProperty("cover.currentmoviename");
             MyFilmsDetail.clearGUIProperty("cover.count");
-            MyFilmsDetail.clearGUIProperty("cover.loadingstatus");
             MyFilmsDetail.clearGUIProperty("cover.selectedcoverresolution");
             MyFilmsDetail.clearGUIProperty("cover.selectedcoverresolutionclass");
             MyFilmsDetail.clearGUIProperty("cover.selectedcovername");
 
             MyFilmsDetail.clearGUIProperty("cover.selectedcoversize");
             MyFilmsDetail.clearGUIProperty("cover.selectedcoversizenum");
+            MyFilmsDetail.clearGUIProperty("cover.selectedpreview");
 
         }
 
@@ -342,13 +346,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
           MyFilmsDetail.setGUIProperty("cover.currentmoviename", MovieLabel);
-          MyFilmsDetail.setGUIProperty("cover.loadingstatus", string.Empty);
           MyFilmsDetail.setGUIProperty("cover.count", m_Facade.Count.ToString());
 
           totalFanart = int.Parse(m_Facade.Count.ToString());
           if (totalFanart == 0)
             {
-              MyFilmsDetail.setGUIProperty("cover.loadingstatus", GUILocalizeStrings.Get(10798768)); // no covers found !
                 // Enable Filters button in case Artwork is filtered
                 if (DisplayFilter != "All" && !string.IsNullOrEmpty(DisplayFilter) && buttonFilters != null)
                 {
@@ -396,14 +398,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageDestroy(int new_windowId)
         {
-          // MFCover selectedFanart = m_Facade.SelectedListItem.TVTag as MFCover;
-          if (!string.IsNullOrEmpty(NewArtworkFileName) && File.Exists(NewArtworkFileName))
+          MFCover selectedFanart = m_Facade.SelectedListItem.TVTag as MFCover;
+          if (!string.IsNullOrEmpty(NewArtworkFileName) && File.Exists(NewArtworkFileName) && MyFilmsDetail.getGUIProperty("picture") == NewArtworkFileName)
           {
-            saveChangesToDB();
+              saveChangesToDB();
           }
           else
           {
-            LogMyFilms.Debug("OnPageDestroy - saveChangesToDB() - Cover file does not exist - not saving Cover '" + NewArtworkFileName + "' to DB !");
+              LogMyFilms.Debug("OnPageDestroy - saveChangesToDB() - Cover file does not exist - not saving Cover '" + NewArtworkFileName + "' to DB !");
           }
 
           if (loadingWorker.IsBusy)
@@ -537,12 +539,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   case (int)menuAction.LoadFromTmdb:
                     //downloadFanart(selectedCover);
                     sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-                    if (string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
-                      return;
-                    if (MyFilms.conf.StrFanart)
-                    {
-                      MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.OriginalTitle);
-                    }
+                    MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.OriginalTitle);
                     m_Facade.Clear();
                     loadingWorker.RunWorkerAsync(this.MovieID);
                     break;
@@ -609,6 +606,91 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
             }
         }
+
+        private void ShowCoverContextMenu()
+        {
+            try
+            {
+
+                IDialogbox dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                if (dlg == null) return;
+                dlg.Reset();
+                dlg.SetHeading("MyFilms Cover Manager");
+
+                GUIListItem pItem;
+
+                pItem = new GUIListItem(GUILocalizeStrings.Get(10798766));  // Load single Cover ...
+                dlg.Add(pItem);
+                pItem.ItemId = (int)menuAction.LoadSingle;
+
+                pItem = new GUIListItem(GUILocalizeStrings.Get(10798764)); // Load multiple Covers ...
+                dlg.Add(pItem);
+                pItem.ItemId = (int)menuAction.LoadMultiple;
+
+                pItem = new GUIListItem(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
+                dlg.Add(pItem);
+                pItem.ItemId = (int)menuAction.LoadFromTmdb;
+
+                if (MyFilmsDetail.ExtendedStartmode("CoverManager: Creation of Covers from Movie not yet supported"))
+                {
+                    pItem = new GUIListItem(GUILocalizeStrings.Get(10798728)); // create cover from movie ...
+                    dlg.Add(pItem);
+                    pItem.ItemId = (int)menuAction.CreateFromMovie;
+
+                    pItem = new GUIListItem(GUILocalizeStrings.Get(10798729)); // Create cover from film as mosaic
+                    dlg.Add(pItem);
+                    pItem.ItemId = (int)menuAction.CreateFromMovieAsMosaic;
+
+                }
+
+                // lets show it
+                dlg.DoModal(GUIWindowManager.ActiveWindow);
+                string title = "";
+                string mediapath = "";
+                MyFilmsDetail.Searchtitles sTitles;
+                switch (dlg.SelectedId) // what was chosen?
+                {
+                    case (int)menuAction.LoadSingle:
+                        title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
+                        mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
+                        sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
+                        MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles);
+                        m_Facade.Clear();
+                        loadingWorker.RunWorkerAsync(this.MovieID);
+                        break;
+                    case (int)menuAction.LoadMultiple:
+                        title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
+                        mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
+                        sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
+                        MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles);
+                        m_Facade.Clear();
+                        loadingWorker.RunWorkerAsync(this.MovieID);
+                        break;
+                    case (int)menuAction.LoadFromTmdb:
+                        sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+                        MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.OriginalTitle);
+                        m_Facade.Clear();
+                        loadingWorker.RunWorkerAsync(this.MovieID);
+                        break;
+                    case (int)menuAction.CreateFromMovie:
+                        //ToDo: Add Code for single image thumbnailer
+                        m_Facade.Clear();
+                        loadingWorker.RunWorkerAsync(this.MovieID);
+                        break;
+                    case (int)menuAction.CreateFromMovieAsMosaic:
+                        MyFilmsDetail.CreateThumbFromMovie();
+                        m_Facade.Clear();
+                        loadingWorker.RunWorkerAsync(this.MovieID);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMyFilms.Debug("Exception in Artwork Chooser Context Menu: " + ex.Message);
+                return;
+            }
+        }
+
         #endregion
 
 
@@ -690,14 +772,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (loadedItem != null) {                        
                         m_Facade.Add(loadedItem);                   
                         // we use this to tell the gui how many Artwork we are loading
-                        MyFilmsDetail.setGUIProperty("cover.loadingstatus", string.Format("ArtworkOnlineLoading", e.ProgressPercentage, totalFanart));
                         MyFilmsDetail.setGUIProperty("cover.count", e.ProgressPercentage.ToString());
                         if (m_Facade != null) 
                           this.m_Facade.Focus = true;
                     }
                     else if (e.ProgressPercentage > 0) {
                         // we use this to tell the gui how many Artwork we are loading
-                      MyFilmsDetail.setGUIProperty("cover.loadingstatus", string.Format("ArtworkOnlineLoading", 0, e.ProgressPercentage));
                         totalFanart = e.ProgressPercentage;
                     }
                 }
@@ -862,6 +942,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIControl.FocusControl(GetID, controlId);
             }
 
+            if (control == buttonDownloadCover)
+            {
+                ShowCoverContextMenu();
+                buttonDownloadCover.Focus = false;
+                GUIControl.FocusControl(7992, 50);
+                return;
+            }
+
             if (actionType != Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
             if (control == this.m_Facade)
             {
@@ -955,7 +1043,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 toDownload.Enqueue(fanart);
             }
-            setDownloadStatus();
             // don't return, user can queue up multiple Artwork to download
             // the last he selects to download will be the chosen one by default
 
@@ -999,13 +1086,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   if (add)
                   {
-                    item = new GUIListItem(f.ImageResolution);
-                    item.IsRemote = false;
-                    item.TVTag = f;
-                    // item.IconImage = item.IconImageBig = ImageAllocator.GetOtherImage(filename, new System.Drawing.Size(0, 0), false);
-                    item.IconImage = item.IconImageBig = f.FullPath;
-
-                    item.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
+                      item = new GUIListItem(f.ImageResolution);
+                      item.IsRemote = false;
+                      item.TVTag = f;
+                      item.IconImage = ImageAllocator.GetOtherImage(f.FullPath, new System.Drawing.Size(0, 0), false);
+                      item.IconImageBig = ImageAllocator.GetOtherImage(f.FullPath, new System.Drawing.Size(0, 0), false);
+                      item.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
                   }
                   loadingWorker.ReportProgress((i < 100 ? ++i : 100), item);
                   if (loadingWorker.CancellationPending)
@@ -1035,6 +1121,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //preview = ImageAllocator.GetOtherImage(cover.FullPath, default(System.Drawing.Size), false);
           preview = m_Facade.SelectedListItem.IconImageBig;
           MyFilmsDetail.setGUIProperty("cover.selectedpreview", preview);
+
         }
 
         void setDefaultCover(MFCover cover)
