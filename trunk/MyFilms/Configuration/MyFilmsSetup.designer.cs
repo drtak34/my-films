@@ -1492,22 +1492,22 @@
           this.Fanart.Controls.Add(this.MesFilmsFanart);
           this.Fanart.Controls.Add(this.labelFanart);
           this.Fanart.Controls.Add(this.chkDfltFanart);
-          this.Fanart.Location = new System.Drawing.Point(6, 231);
+          this.Fanart.Location = new System.Drawing.Point(6, 230);
           this.Fanart.Name = "Fanart";
-          this.Fanart.Size = new System.Drawing.Size(735, 120);
+          this.Fanart.Size = new System.Drawing.Size(735, 121);
           this.Fanart.TabIndex = 71;
           this.Fanart.TabStop = false;
-          this.Fanart.Text = "Fanart (Backdrops)";
+          this.Fanart.Text = "Fanart ...";
           this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
           // 
           // chkFanartDefaultViewsUseRandom
           // 
           this.chkFanartDefaultViewsUseRandom.AutoSize = true;
-          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(150, 36);
+          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(37, 99);
           this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
-          this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(86, 30);
+          this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(116, 17);
           this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
-          this.chkFanartDefaultViewsUseRandom.Text = "Use random \r\nfilm fanart";
+          this.chkFanartDefaultViewsUseRandom.Text = "Use random Fanart";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViewsUseRandom, "If selected, MyFilms will show random fanart from the movies contained in the sel" +
                   "ected group.");
           this.chkFanartDefaultViewsUseRandom.UseVisualStyleBackColor = true;
@@ -1517,40 +1517,40 @@
           this.chkFanartDefaultViews.AutoSize = true;
           this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 36);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
-          this.chkFanartDefaultViews.Size = new System.Drawing.Size(88, 30);
+          this.chkFanartDefaultViews.Size = new System.Drawing.Size(139, 17);
           this.chkFanartDefaultViews.TabIndex = 80;
-          this.chkFanartDefaultViews.Text = "Fanart for \r\ndefault views";
+          this.chkFanartDefaultViews.Text = "Fanart for Default Views";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
           this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
           // 
           // chkDfltFanartImageAll
           // 
           this.chkDfltFanartImageAll.AutoSize = true;
-          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(150, 66);
+          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(229, 36);
           this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
-          this.chkDfltFanartImageAll.Size = new System.Drawing.Size(67, 30);
+          this.chkDfltFanartImageAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltFanartImageAll.TabIndex = 79;
-          this.chkDfltFanartImageAll.Text = "Use for \r\nall Views";
+          this.chkDfltFanartImageAll.Text = "Use for all Views";
           this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all group views like persons, date added, etc.");
           this.chkDfltFanartImageAll.UseVisualStyleBackColor = true;
           // 
           // label48
           // 
           this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(242, 72);
+          this.label48.Location = new System.Drawing.Point(396, 49);
           this.label48.Name = "label48";
-          this.label48.Size = new System.Drawing.Size(69, 26);
+          this.label48.Size = new System.Drawing.Size(74, 13);
           this.label48.TabIndex = 78;
-          this.label48.Text = "Default \r\nFanart Image";
+          this.label48.Text = "Default Fanart";
           // 
           // chkDfltFanartImage
           // 
           this.chkDfltFanartImage.AutoSize = true;
-          this.chkDfltFanartImage.Location = new System.Drawing.Point(37, 66);
+          this.chkDfltFanartImage.Location = new System.Drawing.Point(37, 57);
           this.chkDfltFanartImage.Name = "chkDfltFanartImage";
-          this.chkDfltFanartImage.Size = new System.Drawing.Size(114, 30);
+          this.chkDfltFanartImage.Size = new System.Drawing.Size(193, 17);
           this.chkDfltFanartImage.TabIndex = 77;
-          this.chkDfltFanartImage.Text = "Use default image \r\nfor missing fanart";
+          this.chkDfltFanartImage.Text = "Use default image for missing fanart";
           this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and group views like year," +
                   " genre, country.");
           this.chkDfltFanartImage.UseVisualStyleBackColor = true;
@@ -1559,7 +1559,7 @@
           // ButDefFanart
           // 
           this.ButDefFanart.AllowDrop = true;
-          this.ButDefFanart.Location = new System.Drawing.Point(625, 76);
+          this.ButDefFanart.Location = new System.Drawing.Point(625, 45);
           this.ButDefFanart.Name = "ButDefFanart";
           this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
           this.ButDefFanart.TabIndex = 76;
@@ -1569,16 +1569,16 @@
           // 
           // DefaultFanartImage
           // 
-          this.DefaultFanartImage.Location = new System.Drawing.Point(315, 76);
+          this.DefaultFanartImage.Location = new System.Drawing.Point(511, 45);
           this.DefaultFanartImage.Name = "DefaultFanartImage";
-          this.DefaultFanartImage.Size = new System.Drawing.Size(304, 20);
+          this.DefaultFanartImage.Size = new System.Drawing.Size(108, 20);
           this.DefaultFanartImage.TabIndex = 75;
           // 
           // lblResultingGroupViewsPathFanart
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(312, 48);
+          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(508, 79);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
@@ -1590,27 +1590,27 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(242, 48);
+          this.label40.Location = new System.Drawing.Point(396, 79);
           this.label40.Name = "label40";
-          this.label40.Size = new System.Drawing.Size(32, 13);
+          this.label40.Size = new System.Drawing.Size(93, 13);
           this.label40.TabIndex = 73;
-          this.label40.Text = "Path:";
+          this.label40.Text = "Views Fanart Path";
           // 
           // chkFanart
           // 
           this.chkFanart.AutoSize = true;
-          this.chkFanart.Location = new System.Drawing.Point(18, 18);
+          this.chkFanart.Location = new System.Drawing.Point(18, 15);
           this.chkFanart.Name = "chkFanart";
-          this.chkFanart.Size = new System.Drawing.Size(78, 17);
+          this.chkFanart.Size = new System.Drawing.Size(92, 17);
           this.chkFanart.TabIndex = 71;
-          this.chkFanart.Text = "Use Fanart";
+          this.chkFanart.Text = "Enable Fanart";
           this.chkFanart.UseVisualStyleBackColor = true;
           this.chkFanart.CheckedChanged += new System.EventHandler(this.chkFanart_CheckedChanged);
           // 
           // btnFanart
           // 
           this.btnFanart.Enabled = false;
-          this.btnFanart.Location = new System.Drawing.Point(625, 13);
+          this.btnFanart.Location = new System.Drawing.Point(625, 19);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
           this.btnFanart.TabIndex = 70;
@@ -1621,25 +1621,25 @@
           // MesFilmsFanart
           // 
           this.MesFilmsFanart.Enabled = false;
-          this.MesFilmsFanart.Location = new System.Drawing.Point(315, 13);
+          this.MesFilmsFanart.Location = new System.Drawing.Point(511, 19);
           this.MesFilmsFanart.Name = "MesFilmsFanart";
-          this.MesFilmsFanart.Size = new System.Drawing.Size(304, 20);
+          this.MesFilmsFanart.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsFanart.TabIndex = 68;
           // 
           // labelFanart
           // 
           this.labelFanart.AutoSize = true;
-          this.labelFanart.Location = new System.Drawing.Point(242, 14);
+          this.labelFanart.Location = new System.Drawing.Point(396, 22);
           this.labelFanart.Name = "labelFanart";
-          this.labelFanart.Size = new System.Drawing.Size(65, 26);
+          this.labelFanart.Size = new System.Drawing.Size(62, 13);
           this.labelFanart.TabIndex = 69;
-          this.labelFanart.Text = "Fanart Path \r\n(Images)";
+          this.labelFanart.Text = "Fanart Path";
           // 
           // chkDfltFanart
           // 
           this.chkDfltFanart.AutoSize = true;
           this.chkDfltFanart.Enabled = false;
-          this.chkDfltFanart.Location = new System.Drawing.Point(37, 95);
+          this.chkDfltFanart.Location = new System.Drawing.Point(37, 78);
           this.chkDfltFanart.Name = "chkDfltFanart";
           this.chkDfltFanart.Size = new System.Drawing.Size(191, 17);
           this.chkDfltFanart.TabIndex = 67;
@@ -1659,18 +1659,18 @@
           this.groupBox22.Controls.Add(this.chkDfltViews);
           this.groupBox22.Controls.Add(this.label29);
           this.groupBox22.Controls.Add(this.MesFilmsViews);
-          this.groupBox22.Location = new System.Drawing.Point(6, 70);
+          this.groupBox22.Location = new System.Drawing.Point(6, 80);
           this.groupBox22.Name = "groupBox22";
-          this.groupBox22.Size = new System.Drawing.Size(735, 87);
+          this.groupBox22.Size = new System.Drawing.Size(735, 69);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
-          this.groupBox22.Text = "Thumbs for Views (Genre, Year, Country, ...)";
+          this.groupBox22.Text = "Views ...";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
           // 
           // chkDfltViewsAll
           // 
           this.chkDfltViewsAll.AutoSize = true;
-          this.chkDfltViewsAll.Location = new System.Drawing.Point(57, 67);
+          this.chkDfltViewsAll.Location = new System.Drawing.Point(229, 15);
           this.chkDfltViewsAll.Name = "chkDfltViewsAll";
           this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltViewsAll.TabIndex = 80;
@@ -1683,7 +1683,7 @@
           // label47
           // 
           this.label47.AutoSize = true;
-          this.label47.Location = new System.Drawing.Point(184, 44);
+          this.label47.Location = new System.Drawing.Point(396, 43);
           this.label47.Name = "label47";
           this.label47.Size = new System.Drawing.Size(99, 13);
           this.label47.TabIndex = 79;
@@ -1701,9 +1701,9 @@
           // 
           // DefaultCoverViews
           // 
-          this.DefaultCoverViews.Location = new System.Drawing.Point(315, 41);
+          this.DefaultCoverViews.Location = new System.Drawing.Point(511, 41);
           this.DefaultCoverViews.Name = "DefaultCoverViews";
-          this.DefaultCoverViews.Size = new System.Drawing.Size(304, 20);
+          this.DefaultCoverViews.Size = new System.Drawing.Size(108, 20);
           this.DefaultCoverViews.TabIndex = 77;
           // 
           // btnResetThumbs
@@ -1722,9 +1722,9 @@
           this.chkViews.AutoSize = true;
           this.chkViews.Location = new System.Drawing.Point(18, 15);
           this.chkViews.Name = "chkViews";
-          this.chkViews.Size = new System.Drawing.Size(125, 17);
+          this.chkViews.Size = new System.Drawing.Size(142, 17);
           this.chkViews.TabIndex = 71;
-          this.chkViews.Text = "use thumbs for views";
+          this.chkViews.Text = "Enable Images for Views";
           this.chkViews.UseVisualStyleBackColor = true;
           // 
           // btnViews
@@ -1740,17 +1740,17 @@
           // chkDfltViews
           // 
           this.chkDfltViews.AutoSize = true;
-          this.chkDfltViews.Location = new System.Drawing.Point(37, 35);
+          this.chkDfltViews.Location = new System.Drawing.Point(37, 38);
           this.chkDfltViews.Name = "chkDfltViews";
-          this.chkDfltViews.Size = new System.Drawing.Size(112, 30);
+          this.chkDfltViews.Size = new System.Drawing.Size(200, 17);
           this.chkDfltViews.TabIndex = 75;
-          this.chkDfltViews.Text = "Use default image\r\nfor missing thumbs";
+          this.chkDfltViews.Text = "Use default image for missing thumbs";
           this.chkDfltViews.UseVisualStyleBackColor = true;
           // 
           // label29
           // 
           this.label29.AutoSize = true;
-          this.label29.Location = new System.Drawing.Point(184, 18);
+          this.label29.Location = new System.Drawing.Point(396, 17);
           this.label29.Name = "label29";
           this.label29.Size = new System.Drawing.Size(96, 13);
           this.label29.TabIndex = 73;
@@ -1758,9 +1758,9 @@
           // 
           // MesFilmsViews
           // 
-          this.MesFilmsViews.Location = new System.Drawing.Point(315, 14);
+          this.MesFilmsViews.Location = new System.Drawing.Point(511, 14);
           this.MesFilmsViews.Name = "MesFilmsViews";
-          this.MesFilmsViews.Size = new System.Drawing.Size(304, 20);
+          this.MesFilmsViews.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsViews.TabIndex = 72;
           this.ToolTip1.SetToolTip(this.MesFilmsViews, resources.GetString("MesFilmsViews.ToolTip"));
           // 
@@ -1776,18 +1776,18 @@
           this.groupBox1.Controls.Add(this.ButImg);
           this.groupBox1.Controls.Add(this.MesFilmsImg);
           this.groupBox1.Controls.Add(this.label2);
-          this.groupBox1.Location = new System.Drawing.Point(6, 1);
+          this.groupBox1.Location = new System.Drawing.Point(6, 7);
           this.groupBox1.Name = "groupBox1";
           this.groupBox1.Size = new System.Drawing.Size(735, 67);
           this.groupBox1.TabIndex = 85;
           this.groupBox1.TabStop = false;
-          this.groupBox1.Text = "Cover Images";
+          this.groupBox1.Text = "Films ...";
           this.ToolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
           // 
           // lblPicturePrefix
           // 
           this.lblPicturePrefix.AutoSize = true;
-          this.lblPicturePrefix.Location = new System.Drawing.Point(508, 17);
+          this.lblPicturePrefix.Location = new System.Drawing.Point(15, 16);
           this.lblPicturePrefix.Name = "lblPicturePrefix";
           this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
           this.lblPicturePrefix.TabIndex = 98;
@@ -1795,16 +1795,16 @@
           // 
           // txtPicturePrefix
           // 
-          this.txtPicturePrefix.Location = new System.Drawing.Point(583, 14);
+          this.txtPicturePrefix.Location = new System.Drawing.Point(106, 13);
           this.txtPicturePrefix.Name = "txtPicturePrefix";
-          this.txtPicturePrefix.Size = new System.Drawing.Size(146, 20);
+          this.txtPicturePrefix.Size = new System.Drawing.Size(122, 20);
           this.txtPicturePrefix.TabIndex = 97;
           this.ToolTip1.SetToolTip(this.txtPicturePrefix, resources.GetString("txtPicturePrefix.ToolTip"));
           // 
           // lblPictureHandling
           // 
           this.lblPictureHandling.AutoSize = true;
-          this.lblPictureHandling.Location = new System.Drawing.Point(508, 43);
+          this.lblPictureHandling.Location = new System.Drawing.Point(15, 42);
           this.lblPictureHandling.Name = "lblPictureHandling";
           this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
           this.lblPictureHandling.TabIndex = 96;
@@ -1817,16 +1817,16 @@
             "Full Path",
             "Relative Path",
             "Use Folder.jpg"});
-          this.cbPictureHandling.Location = new System.Drawing.Point(599, 41);
+          this.cbPictureHandling.Location = new System.Drawing.Point(106, 40);
           this.cbPictureHandling.Name = "cbPictureHandling";
-          this.cbPictureHandling.Size = new System.Drawing.Size(130, 21);
+          this.cbPictureHandling.Size = new System.Drawing.Size(122, 21);
           this.cbPictureHandling.TabIndex = 95;
           this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
           this.cbPictureHandling.SelectedIndexChanged += new System.EventHandler(this.cbPictureHandling_SelectedIndexChanged);
           // 
           // ButDefCov
           // 
-          this.ButDefCov.Location = new System.Drawing.Point(455, 39);
+          this.ButDefCov.Location = new System.Drawing.Point(625, 39);
           this.ButDefCov.Name = "ButDefCov";
           this.ButDefCov.Size = new System.Drawing.Size(32, 20);
           this.ButDefCov.TabIndex = 90;
@@ -1836,16 +1836,16 @@
           // 
           // DefaultCover
           // 
-          this.DefaultCover.Location = new System.Drawing.Point(145, 39);
+          this.DefaultCover.Location = new System.Drawing.Point(511, 39);
           this.DefaultCover.Name = "DefaultCover";
-          this.DefaultCover.Size = new System.Drawing.Size(304, 20);
+          this.DefaultCover.Size = new System.Drawing.Size(108, 20);
           this.DefaultCover.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.DefaultCover, resources.GetString("DefaultCover.ToolTip"));
           // 
           // label_DefaulCover
           // 
           this.label_DefaulCover.AutoSize = true;
-          this.label_DefaulCover.Location = new System.Drawing.Point(15, 43);
+          this.label_DefaulCover.Location = new System.Drawing.Point(396, 45);
           this.label_DefaulCover.Name = "label_DefaulCover";
           this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
           this.label_DefaulCover.TabIndex = 88;
@@ -1853,7 +1853,7 @@
           // 
           // ButImg
           // 
-          this.ButImg.Location = new System.Drawing.Point(455, 13);
+          this.ButImg.Location = new System.Drawing.Point(625, 13);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
           this.ButImg.TabIndex = 87;
@@ -1863,16 +1863,16 @@
           // 
           // MesFilmsImg
           // 
-          this.MesFilmsImg.Location = new System.Drawing.Point(145, 13);
+          this.MesFilmsImg.Location = new System.Drawing.Point(511, 13);
           this.MesFilmsImg.Name = "MesFilmsImg";
-          this.MesFilmsImg.Size = new System.Drawing.Size(304, 20);
+          this.MesFilmsImg.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsImg.TabIndex = 85;
           this.ToolTip1.SetToolTip(this.MesFilmsImg, resources.GetString("MesFilmsImg.ToolTip"));
           // 
           // label2
           // 
           this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(15, 16);
+          this.label2.Location = new System.Drawing.Point(396, 18);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
           this.label2.TabIndex = 86;
@@ -1889,23 +1889,22 @@
           this.groupBox_ArtistImages.Controls.Add(this.label_DefaultArtistImage);
           this.groupBox_ArtistImages.Controls.Add(this.label_ArtistImagePath);
           this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
-          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 159);
+          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 155);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
           this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 69);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
-          this.groupBox_ArtistImages.Text = "Thumbs for Persons (actors, directors, producer)";
-          this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, "Use this area to define a path where artist thumbs (images for persons) should be" +
-                  " stored.\r\nWorks same way as cover images for movies.");
+          this.groupBox_ArtistImages.Text = "Persons Views ...";
+          this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, resources.GetString("groupBox_ArtistImages.ToolTip"));
           // 
           // chkPersons
           // 
           this.chkPersons.AutoSize = true;
           this.chkPersons.Location = new System.Drawing.Point(18, 15);
           this.chkPersons.Name = "chkPersons";
-          this.chkPersons.Size = new System.Drawing.Size(135, 17);
+          this.chkPersons.Size = new System.Drawing.Size(152, 17);
           this.chkPersons.TabIndex = 100;
-          this.chkPersons.Text = "use thumbs for persons";
+          this.chkPersons.Text = "Enable Images for Persons";
           this.chkPersons.UseVisualStyleBackColor = true;
           // 
           // btnResetThumbsArtist
@@ -1922,11 +1921,11 @@
           // chkDfltArtist
           // 
           this.chkDfltArtist.AutoSize = true;
-          this.chkDfltArtist.Location = new System.Drawing.Point(37, 32);
+          this.chkDfltArtist.Location = new System.Drawing.Point(37, 38);
           this.chkDfltArtist.Name = "chkDfltArtist";
-          this.chkDfltArtist.Size = new System.Drawing.Size(114, 30);
+          this.chkDfltArtist.Size = new System.Drawing.Size(200, 17);
           this.chkDfltArtist.TabIndex = 98;
-          this.chkDfltArtist.Text = "Use default image \r\nfor missing thumbs";
+          this.chkDfltArtist.Text = "Use default image for missing thumbs";
           this.chkDfltArtist.UseVisualStyleBackColor = true;
           // 
           // ButDefCovArtist
@@ -1951,16 +1950,16 @@
           // 
           // MesFilmsImgArtist
           // 
-          this.MesFilmsImgArtist.Location = new System.Drawing.Point(315, 14);
+          this.MesFilmsImgArtist.Location = new System.Drawing.Point(511, 14);
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
-          this.MesFilmsImgArtist.Size = new System.Drawing.Size(304, 20);
+          this.MesFilmsImgArtist.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsImgArtist.TabIndex = 95;
           this.ToolTip1.SetToolTip(this.MesFilmsImgArtist, resources.GetString("MesFilmsImgArtist.ToolTip"));
           // 
           // label_DefaultArtistImage
           // 
           this.label_DefaultArtistImage.AutoSize = true;
-          this.label_DefaultArtistImage.Location = new System.Drawing.Point(184, 43);
+          this.label_DefaultArtistImage.Location = new System.Drawing.Point(396, 44);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
           this.label_DefaultArtistImage.Size = new System.Drawing.Size(109, 13);
           this.label_DefaultArtistImage.TabIndex = 94;
@@ -1969,7 +1968,7 @@
           // label_ArtistImagePath
           // 
           this.label_ArtistImagePath.AutoSize = true;
-          this.label_ArtistImagePath.Location = new System.Drawing.Point(184, 18);
+          this.label_ArtistImagePath.Location = new System.Drawing.Point(396, 19);
           this.label_ArtistImagePath.Name = "label_ArtistImagePath";
           this.label_ArtistImagePath.Size = new System.Drawing.Size(102, 13);
           this.label_ArtistImagePath.TabIndex = 93;
@@ -1977,9 +1976,9 @@
           // 
           // DefaultCoverArtist
           // 
-          this.DefaultCoverArtist.Location = new System.Drawing.Point(315, 40);
+          this.DefaultCoverArtist.Location = new System.Drawing.Point(511, 40);
           this.DefaultCoverArtist.Name = "DefaultCoverArtist";
-          this.DefaultCoverArtist.Size = new System.Drawing.Size(304, 20);
+          this.DefaultCoverArtist.Size = new System.Drawing.Size(108, 20);
           this.DefaultCoverArtist.TabIndex = 92;
           this.ToolTip1.SetToolTip(this.DefaultCoverArtist, resources.GetString("DefaultCoverArtist.ToolTip"));
           // 
