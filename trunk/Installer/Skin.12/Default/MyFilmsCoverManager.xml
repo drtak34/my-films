@@ -140,16 +140,6 @@
 			<label>#myfilms.cover.filterresolution (#selectedindex/#myfilms.cover.count)</label>
 		</control>
 		<control>
-			<description>Download Status</description>
-			<type>label</type>
-			<id>0</id>
-			<posX>695</posX>
-			<posY>95</posY>
-			<align>right</align>
-			<textcolor>90ffffff</textcolor>
-			<label>#myfilms.cover.downloadingstatus #myfilms.cover.loadingstatus</label>
-		</control>
-		<control>
 			<description>Current Cover Label</description>
 			<type>label</type>
 			<label>Current Default</label>
@@ -330,7 +320,7 @@
 			<width>425</width>
 			<height>720</height>
 			<dimColor>ffffffff</dimColor>
-			<visible>control.hasfocus(2)|control.hasfocus(12)</visible>
+			<visible>control.hasfocus(2)|control.hasfocus(12)|control.hasfocus(13)</visible>
 			<animation effect="fade" time="250" start="75" reversible="false">visible</animation>
 			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
 			<animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
@@ -358,7 +348,15 @@
 					<width>160</width>
 					<label>Filter</label>
 					<onright>50</onright>
-				</control>		
+				</control>
+				<control>
+					<description>Resolution Filter</description>
+					<type>button</type>
+					<id>13</id>
+					<width>160</width>
+					<label>Download</label>
+					<onright>50</onright>
+				</control>	
 			</control>
 		</control>
 

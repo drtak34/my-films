@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -17,8 +18,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Resources\MyFilmsIcon.ico</ApplicationIcon>
-    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
-    <PublishUrl>publish\</PublishUrl>
+	<TargetFrameworkSubset>Full</TargetFrameworkSubset>
+	<PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -142,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PerfWatch.cs" />
     <Compile Include="Configuration\FilterEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +189,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MFview.xsd</DependentUpon>
     </Compile>
+    <Compile Include="imageAllocator.cs" />
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\MFView.cs" />
     <Compile Include="MyFilmsGUI\GUIConnector.cs" />
