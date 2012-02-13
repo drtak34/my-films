@@ -413,7 +413,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static List<ViewState> ViewHistory = new List<ViewState>();
 
     // cache to store viewstate params from current session per view
-    Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();
+    public static Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();
 
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
@@ -593,8 +593,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public override void DeInit()
     {
       base.DeInit();
+      LogMyFilms.Debug("MyFilms.DeInit() - Saving Config changes ...");
       XmlSettings.SaveCache();
-      LogMyFilms.Debug("MyFilms.DeInit() - Saving Config cahnges ...");
       BaseMesFilms.CancelMyFilms();
       LogMyFilms.Debug("MyFilms.DeInit() - Shutdown completed...");
     }
