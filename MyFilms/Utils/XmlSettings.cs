@@ -219,6 +219,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
       xmlCache.Clear();
     }
 
+    //public void Save()
+    //{
+    //  xmlDoc.Save();
+    //}
+
     #region IDisposable Members
 
     public void Dispose()

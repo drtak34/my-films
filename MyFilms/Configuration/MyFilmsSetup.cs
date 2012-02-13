@@ -82,8 +82,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private bool NewConfigButton = false; // Will avid that catalogselectedindex-changed will be run on "New!" config...
         private string ActiveLogoPath = String.Empty;
 
-        private string Config_Name_Last = "NoFormerConfig";
-
         public MyFilmsSetup()
         {
             InitializeComponent();
@@ -1133,16 +1131,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void Config_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-          if (Config_Name.Text == Config_Name_Last)
-          {
-            return;
-          }
-          else
-          {
-            Config_Name_Load();
-            BindSources();
-            Config_Name_Last = Config_Name.Text;
-          }
+          Config_Name_Load();
+          BindSources();
         }
 
         private void BindSources()

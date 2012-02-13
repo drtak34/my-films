@@ -176,7 +176,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
                     fileLogoName = "MyFilms_" + skinName + "_M" + logoConfigOverride + fileLogoName + ".png";
                 else
                     fileLogoName = "MyFilms_" + skinName + "_D" + logoConfigOverride + fileLogoName + ".png";
-                XmlConfig XmlConfig = new XmlConfig();
                 Image single = null;
                 int wHeight = 0;
                 int wWidth = 0;

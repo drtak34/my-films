@@ -72,9 +72,36 @@ namespace MyFilmsPlugin.MyFilms.Utils
 #region <<DECLARATION>>
         // private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //for logging
         XmlDocument configxml = new XmlDocument();
+        private string xmlFileName = "";
+
 #endregion
 
 #region <<public>>
+
+        //public XmlConfig(string fileName) // can be filename only (MP config dir) or fully qualified
+        //{
+        //  xmlFileName = fileName;
+        //  // Create file if doesn't exist
+        //  if (!File.Exists(EntireFilenameConfig(fileName)))
+        //  {
+        //    CreateXmlConfig(fileName);
+        //  }
+        //  configxml.Load(EntireFilenameConfig(fileName));
+        //}
+
+        public void Load(string FileName)
+        {
+          //Open xml document
+          configxml.Load(EntireFilenameConfig(FileName));
+          xmlFileName = FileName;
+        }
+
+        public void Save()
+        {
+          //Save xml config file   
+          if (xmlFileName.Length > 0)
+          configxml.Save(EntireFilenameConfig(xmlFileName));
+        }
 
         // Recover install MediaPortal path
         public string PathInstalMP()
@@ -95,6 +122,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
         // Called with bool type
         public void WriteXmlConfig(string FileName, string Section, string Entry, bool Value)
         {
+          WriteXmlConfig(FileName, Section, Entry, Value, true);
+        }
+        public void WriteXmlConfig(string FileName, string Section, string Entry, bool Value, bool immediateWrite)
+        {
           string value = string.Empty;
             // Change true by "yes" and false by "no" for xml MediaPortal compatibility 
             if (Value)
@@ -106,28 +137,38 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 value = "no";
             }
 
-            WriteXmlConfig(FileName, Section, Entry, value);
+            WriteXmlConfig(FileName, Section, Entry, value, immediateWrite);
         }
 
         // Called with decimal type
         public void WriteXmlConfig(string FileName, string Section, string Entry, decimal Value)
         {
+          WriteXmlConfig(FileName, Section, Entry, Value, true);
+        }
+        public void WriteXmlConfig(string FileName, string Section, string Entry, decimal Value, bool immediateWrite)
+        {
             string value = Value.ToString();
-
-            WriteXmlConfig(FileName, Section, Entry, value);
+            WriteXmlConfig(FileName, Section, Entry, value, immediateWrite);
         }
 
         // Write a config file with XmlDocument
         public void WriteXmlConfig(string FileName, string Section, string Entry, string Value)
         {
-            // Create file if doesn't exist
-            if (!File.Exists(EntireFilenameConfig(FileName)))
-            {
-                CreateXmlConfig(FileName);
-            }
+          WriteXmlConfig(FileName, Section, Entry, Value, true);
+        }
+        public void WriteXmlConfig(string FileName, string Section, string Entry, string Value, bool immediateWrite)
+        {
+          // Create file if doesn't exist
+          if (!File.Exists(EntireFilenameConfig(FileName)))
+          {
+            CreateXmlConfig(FileName);
+          }
 
             //Open xml document
-            configxml.Load(EntireFilenameConfig(FileName));
+            if (FileName != xmlFileName)
+            {
+              this.Load(FileName);
+            }
             //Recover profile node
             XmlElement profile = configxml.DocumentElement;
             //Create section if doesn't exist
@@ -153,12 +194,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
             //Store entry value
             entry.InnerText = Value;
 
-            //Save xml config file   
-            configxml.Save(EntireFilenameConfig(FileName));
+            //Save xml config file  
+            if (immediateWrite) configxml.Save(EntireFilenameConfig(FileName));
         }
 
         // Remove an Entry
         public void RemoveEntry(string FileName, string Section, string Entry)
+        {
+          RemoveEntry(FileName, Section, Entry, true);
+        }
+        public void RemoveEntry(string FileName, string Section, string Entry, bool immideateWrite)
         {
             // Return if xml file doesn't exist
             if (!File.Exists(EntireFilenameConfig(FileName)))
@@ -167,7 +212,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
 
             //Open xml document
-            configxml.Load(EntireFilenameConfig(FileName));
+            if (FileName != xmlFileName)
+            {
+              this.Load(FileName);
+            }
             //Recover profile node
             XmlElement profile = configxml.DocumentElement;
 
@@ -196,7 +244,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                     section.RemoveAll();
 
                 //Save xml config file   
-                configxml.Save(EntireFilenameConfig(FileName));
+                if (immideateWrite) configxml.Save(EntireFilenameConfig(FileName));
             }
             return;
         }
@@ -253,7 +301,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
 
             //Open xml document
-            configxml.Load(EntireFilenameConfig(FileName));
+            if (FileName != xmlFileName)
+            {
+              this.Load(FileName);
+            }
             //Recover profile node
             XmlElement profile = configxml.DocumentElement;
 

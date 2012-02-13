@@ -71,8 +71,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
             if (setcurrentconfig)
             {
-              XmlConfig XmlConfigSave = new XmlConfig();
-              XmlConfigSave.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
+              XmlConfig xmlConfigSave = new XmlConfig();
+              xmlConfigSave.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
               // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
               //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
               //{
@@ -81,8 +81,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //}
               //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             }
-            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)) // true = cached !
             {
+                #region read xml data
                 AlwaysShowConfigMenu = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false);
                 StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
                 StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", string.Empty);
@@ -554,40 +555,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
                 if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
                 {
-                    viewContext = MyFilms.ViewContext.StartView;
-                    strIndex = -1;
-                    LastID = -1;
-                    Wstar = "";
-                    Boolreturn = false;
-                    Boolselect = true;
-                    Boolindexed = false;
-                    Boolindexedreturn = false;
+                  viewContext = MyFilms.ViewContext.StartView;
+                  strIndex = -1;
+                  LastID = -1;
+                  Wstar = "";
+                  Boolreturn = false;
+                  Boolselect = true;
+                  Boolindexed = false;
+                  Boolindexedreturn = false;
 
-                    Wselectedlabel = StrViewDfltText;
-                    if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))
-                    {
-                      StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
-                      StrLayOutInHierarchies = StrLayOut;
-                      this.WStrLayOut = StrLayOut;
-                    }
-                    if (Helper.FieldIsSet(wDfltSort))
-                    {
-                      StrSorta = wDfltSort;
-                      StrSortSens = wDfltSortSens;
-                      CurrentSortMethod = wDfltSortMethod;
-                    }
-                    if (Helper.FieldIsSet(wDfltSortInHierarchies)) // hierarchies sort settings
-                    {
-                      StrSortaInHierarchies = wDfltSortInHierarchies;
-                      StrSortSensInHierarchies = wDfltSortSensInHierarchies;
-                      CurrentSortMethodInHierarchies = wDfltSortMethodInHierarchies;
-                    }
+                  Wselectedlabel = StrViewDfltText;
+                  if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))
+                  {
+                    StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
+                    StrLayOutInHierarchies = StrLayOut;
+                    this.WStrLayOut = StrLayOut;
+                  }
+                  if (Helper.FieldIsSet(wDfltSort))
+                  {
+                    StrSorta = wDfltSort;
+                    StrSortSens = wDfltSortSens;
+                    CurrentSortMethod = wDfltSortMethod;
+                  }
+                  if (Helper.FieldIsSet(wDfltSortInHierarchies)) // hierarchies sort settings
+                  {
+                    StrSortaInHierarchies = wDfltSortInHierarchies;
+                    StrSortSensInHierarchies = wDfltSortSensInHierarchies;
+                    CurrentSortMethodInHierarchies = wDfltSortMethodInHierarchies;
+                  }
                 }
-
-                XmlConfig.Dispose();
+              XmlConfig.Dispose();
+              #endregion
             } // End reading config
 
-
+            #region check and correct settings
             if (string.IsNullOrEmpty(CurrentSortMethod)) CurrentSortMethod = GUILocalizeStrings.Get(103);
             if (string.IsNullOrEmpty(CurrentSortMethodInHierarchies)) CurrentSortMethodInHierarchies = CurrentSortMethod;
           
@@ -620,7 +621,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
                     StrArtist = false;
                 }
-            // LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'");
+            #endregion
+          // LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'");
         }
 
 #region Getter/Setter - static values
@@ -1691,6 +1693,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("MFC: Configuration saving started for '" + currentConfig + "'");
           using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
+            #region save xml data
             //XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
@@ -1749,7 +1752,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
                 break;
             }
-            //XmlConfig.Dispose();
+            #endregion
+            // XmlConfig.Dispose();
+            // XmlConfig.Save();
           }
           LogMyFilms.Debug("MFC: Configuration saving ended for '" + currentConfig + "'");
         }
