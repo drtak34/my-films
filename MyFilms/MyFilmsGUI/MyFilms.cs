@@ -413,7 +413,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static List<ViewState> ViewHistory = new List<ViewState>();
 
     // cache to store viewstate params from current session per view
-    public static Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();
+    Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();  // public static Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();
 
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
