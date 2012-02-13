@@ -105,6 +105,23 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
+    //// Recover install MediaPortal path
+    //public string PathInstalMP()
+    //{
+    //  string path = Config.GetFolder(Config.Dir.Config);
+    //  return path;
+    //}
+
+    //// Build entire filename of config file
+    //public string EntireFilenameConfig(string FileName)
+    //{
+    //  if (FileName.Contains(":\\"))
+    //    return FileName;
+    //  string entirefilename = PathInstalMP() + @"\" + FileName + ".xml";
+    //  return entirefilename;
+    //}
+
+
     public string GetValue(string section, string entry)
     {
       object value = xmlDoc.GetValue(section, entry);
@@ -140,27 +157,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
                                  return Int32.TryParse(val, out iVal) ? iVal : iDefault;
                                }, iDefault);
     }
-    public string ReadXmlConfig(string FileName, string section, string entry, string strDefault)
-    {
-      return GetValueOrDefault(section, entry, val => val, strDefault);
-    }
-
-    public bool ReadXmlConfig(string FileName, string section, string entry, bool bDefault)
-    {
-      return GetValueOrDefault(section, entry,
-                               val => val.Equals("yes", StringComparison.InvariantCultureIgnoreCase),
-                               bDefault);
-    }
-
-    public int ReadXmlConfig(string FileName, string section, string entry, int iDefault)
-    {
-      return GetValueOrDefault(section, entry,
-                               val =>
-                               {
-                                 int iVal;
-                                 return Int32.TryParse(val, out iVal) ? iVal : iDefault;
-                               }, iDefault);
-    }
 
     public float GetValueAsFloat(string section, string entry, float fDefault)
     {
@@ -188,6 +184,27 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return fDefault;
     }
 
+    public string ReadXmlConfig(string FileName, string section, string entry, string strDefault)
+    {
+      return GetValueOrDefault(section, entry, val => val, strDefault);
+    }
+
+    public bool ReadXmlConfig(string FileName, string section, string entry, bool bDefault)
+    {
+      return GetValueOrDefault(section, entry,
+                               val => val.Equals("yes", StringComparison.InvariantCultureIgnoreCase),
+                               bDefault);
+    }
+
+    public int ReadXmlConfig(string FileName, string section, string entry, int iDefault)
+    {
+      return GetValueOrDefault(section, entry,
+                               val =>
+                               {
+                                 int iVal;
+                                 return Int32.TryParse(val, out iVal) ? iVal : iDefault;
+                               }, iDefault);
+    }
 
     public void WriteXmlConfig(string FileName, string section, string entry, object objValue)
     {
@@ -207,6 +224,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
     public void SetValueAsBool(string section, string entry, bool bValue)
     {
       SetValue(section, entry, bValue ? "yes" : "no");
+    }
+
+    public void RemoveEntry(string FileName, string section, string entry)
+    {
+      xmlDoc.RemoveEntry(section, entry);
     }
 
     public void RemoveEntry(string section, string entry)
@@ -249,7 +271,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     #region Fields
 
     private bool _isCached;
-    private static Dictionary<string, ISettingsProvider> xmlCache = new Dictionary<string, ISettingsProvider>();
+    private static Dictionary<string, ISettingsProvider>  xmlCache = new Dictionary<string, ISettingsProvider>();
     private string xmlFileName;
     private ISettingsProvider xmlDoc;
 

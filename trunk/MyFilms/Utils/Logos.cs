@@ -85,10 +85,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
               LogMyFilms.Debug("Using MyFilms default logo config file: '" + activeLogoConfigFile + "'");
             }
 
-          using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(activeLogoConfigFile))
+            using (XmlSettings XmlConfig = new XmlSettings(activeLogoConfigFile))
             {
                 // First check, if Config specific LogoConfig exists, if not create it from default file!
-                XmlConfig XmlConfig = new XmlConfig();
+                // XmlConfig XmlConfig = new XmlConfig();
                 //LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", XmlConfig.PathInstalMP() + @"\thumbs\");
                 LogosPath = XmlConfig.ReadXmlConfig(activeLogoConfigFile, "ID0000", "LogosPath", "");
                 //Recreate the path to make it OS independant...
