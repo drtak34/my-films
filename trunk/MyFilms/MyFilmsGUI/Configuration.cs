@@ -496,25 +496,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrNasName3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-3", string.Empty);
                 StrNasMAC3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-3", string.Empty);
 
-                //// read states vars for each possible view - do we also need states for "userdefined views"?  
-                //DataBase.AntMovieCatalog ds = new DataBase.AntMovieCatalog();
-                //MyFilms.conf.CustomView.Clear();
-                //foreach (DataColumn dc in ds.Movie.Columns)
-                //{
-                //  View tView = new View();
-                //  string viewstateName = "ViewState-" + dc.ColumnName;
-                //  string viewstate = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, viewstateName, string.Empty);
-                //  if (!string.IsNullOrEmpty(viewstate))
-                //  {
-                //    tView.LoadFromString(viewstate);
-                //    MyFilms.conf.CustomView.Add(tView);
-                //  }
-                //  else
-                //  {
-                //    tView.ViewDBItem = dc.ColumnName;
-                //    CustomView.Add(tView);
-                //  }
-                //}
+                // read states vars for each possible view - do we also need states for "userdefined views"?  
+                DataBase.AntMovieCatalog ds = new DataBase.AntMovieCatalog();
+                MyFilms.ViewStateCache.Clear();
+                foreach (DataColumn dc in ds.Movie.Columns)
+                {
+                  ViewState tView = new ViewState();
+                  string viewstateName = "ViewState-" + dc.ColumnName;
+                  string viewstate = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, viewstateName, string.Empty);
+                  if (!string.IsNullOrEmpty(viewstate))
+                  {
+                    tView.LoadFromString(viewstate);
+                    MyFilms.ViewStateCache.Add(dc.ColumnName, tView);
+                  }
+                  //else
+                  //{
+                  //  tView.ViewDBItem = dc.ColumnName;
+                  //  CustomView.Add(tView);
+                  //}
+                }
               
                 StrSearchHistory = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchHistory", string.Empty);
                 MyFilms.SearchHistory.Clear();
@@ -589,7 +589,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     CurrentSortMethodInHierarchies = wDfltSortMethodInHierarchies;
                   }
                 }
-              XmlConfig.Dispose();
+                XmlConfig.Dispose();
               #endregion
             } // End reading config
 
@@ -1743,7 +1743,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
 
-            //foreach (View viewstate in MyFilms.conf.CustomView)
+            foreach (KeyValuePair<string, ViewState> viewState in MyFilms.ViewStateCache)
+            {
+              XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ViewState-" + viewState.Key, viewState.Value.SaveToString());
+            }
+            
+            //foreach (View viewstate in MyFilms.conf.CustomView.View)
             //{
             //  string viewstateName = "ViewState-" + viewstate.ViewDBItem;
             //  XmlConfig.WriteXmlConfig("MyFilms", currentConfig, viewstateName, MyFilms.conf.CurrentView.SaveToString());

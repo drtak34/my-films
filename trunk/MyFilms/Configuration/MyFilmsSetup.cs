@@ -407,7 +407,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             // Save MF config
             Save_Config();
-            XmlSettings.SaveCache();
+            // XmlSettings.SaveCache();
             Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
         }
 
