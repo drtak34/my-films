@@ -55,7 +55,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //private WshShellClass WshShell; // Added for creating Desktop icon via wsh
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
-        XmlConfig XmlConfig = new XmlConfig();
+        XmlConfig XmlConfig = new XmlConfig();  // XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")); // XmlConfig XmlConfig = new XmlConfig();
         //XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")); //Guzzi
 
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
@@ -407,6 +407,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             // Save MF config
             Save_Config();
+            XmlSettings.SaveCache();
             Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
         }
 

@@ -69,20 +69,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //-----------------------------------------------------------------------------------------------
 
             //LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
-            if (setcurrentconfig)
-            {
-              XmlConfig xmlConfigSave = new XmlConfig();
-              xmlConfigSave.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
-              // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
-              //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-              //{
-              //  xmlwriter.SetValue("MyFilms", "Current_Config", CurrentConfig);
-              //  xmlwriter.Dispose();
-              //}
-              //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-            }
+            //if (setcurrentconfig)
+            //{
+            //  XmlConfig xmlConfigSave = new XmlConfig();
+            //  xmlConfigSave.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
+            //  // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
+            //  //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            //  //{
+            //  //  xmlwriter.SetValue("MyFilms", "Current_Config", CurrentConfig);
+            //  //  xmlwriter.Dispose();
+            //  //}
+            //  //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            //}
             using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)) // true = cached !
             {
+                if (setcurrentconfig)
+                {
+                  XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
+                  // XmlSettings.SaveCache(); // ToDo: Debug, if it is required here !
+                }
                 #region read xml data
                 AlwaysShowConfigMenu = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false);
                 StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
@@ -1754,7 +1759,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             #endregion
             // XmlConfig.Dispose();
-            // XmlConfig.Save();
+            // XmlSettings.SaveCache();
           }
           LogMyFilms.Debug("MFC: Configuration saving ended for '" + currentConfig + "'");
         }

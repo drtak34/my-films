@@ -8440,8 +8440,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         
         static public bool MountImageFile(int WindowID, string file)
         {
-            XmlConfig XmlConfig = new XmlConfig();    
-            m_askBeforePlayingDVDImage = XmlConfig.ReadXmlConfig("MyFilms", "daemon", "askbeforeplaying", false);
+          MPSettings mpSettings = new MPSettings();    
+            m_askBeforePlayingDVDImage = mpSettings.GetValueAsBool("daemon", "askbeforeplaying", false);
 //            }
             if (!DaemonTools.IsMounted(file))
             {
