@@ -1978,10 +1978,20 @@ Public Class AntProcessor
         dvOrphanedMediaFiles = ds.Tables("tblOrphanedMediaFiles").DefaultView
         dvOrphanedMediaFiles.Sort = "FileName"
 
-        Dim Path() As String
+        Dim Path() As String = CurrentSettings.Movie_Scan_Path.Split(";")   ' scan pathes
+        Dim PathAvailable() As Boolean = New Boolean() {}                   ' scan path availability
+        For i As Integer = 0 To Path.Length - 1
+            If System.IO.Directory.Exists(Path(i)) Then
+                PathAvailable(i) = True
+            Else
+                PathAvailable(i) = False
+            End If
+        Next
         Dim iTemp As Integer
         Dim strTemp, strTemp2 As String
         Dim FileMoved As Boolean = False
+
+        Const RemoveOrphansWhenPathNotAvailable As Boolean = True ' Todo: To make configurable in setup
 
         For Each row In ds.Tables("tblXML").Rows
             If dvFoundMediaFiles.Find(row("AntShortPath")) = -1 Then
@@ -2013,31 +2023,31 @@ Public Class AntProcessor
 
                     If FileMoved = False Then
                         'And if not there, it's probably an orphan - check to see if the path is different:
-                        Path = CurrentSettings.Movie_Scan_Path.Split(";")
-                        For i As Integer = 0 To Path.Length - 1
-                            If CurrentSettings.Override_Path = "" Then
-                                strTemp = row("AntPath").ToString.ToLower
-                                strTemp2 = Path(i).ToLower
-                                iTemp = row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower)
-                                If row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower) > -1 Then
-                                    'Match - we're scanning the path that this entry refers to - must be orphaned.
-                                    ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
-                                    LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
-                                End If
-                            Else
-                                'Match - the ant records refers to the location we're using as override path.
-                                strTemp = row("AntPath").ToString.ToLower
-                                strTemp2 = CurrentSettings.Override_Path.ToLower
-                                iTemp = row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower)
-                                If row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower) > -1 Then
-                                    'Match - we're scanning the path that this entry refers to - must be orphaned.
-                                    ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
-                                    LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
+                        For i As Integer = 0 To Path.Length - 1 ' for each scan path
+                            If RemoveOrphansWhenPathNotAvailable = True Or PathAvailable(i) = True Then ' check only for orphans, if path is available or user explicitely wants to check 
+                                If CurrentSettings.Override_Path = "" Then
+                                    strTemp = row("AntPath").ToString.ToLower
+                                    strTemp2 = Path(i).ToLower  ' scan pathes
+                                    iTemp = row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower)
+                                    If row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower) > -1 Then
+                                        'Match - we're scanning the path that this entry refers to - must be orphaned.
+                                        ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
+                                        LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
+                                    End If
+                                Else
+                                    'Match - the ant records refers to the location we're using as override path.
+                                    strTemp = row("AntPath").ToString.ToLower
+                                    strTemp2 = CurrentSettings.Override_Path.ToLower
+                                    iTemp = row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower)
+                                    If row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower) > -1 Then
+                                        'Match - we're scanning the path that this entry refers to - must be orphaned.
+                                        ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
+                                        LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
+                                    End If
                                 End If
                             End If
                         Next
                     End If
-
                 End If
             End If
         Next row
