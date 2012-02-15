@@ -1952,7 +1952,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079901)); // View (Layout) ...
       dlg.Add(GUILocalizeStrings.Get(101));//List
-      if (!conf.Boolselect) // if (!conf.UseListViewForGoups || !conf.Boolselect)
+      if (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll) // if (!conf.UseListViewForGoups || !conf.Boolselect)
       {
         dlg.Add(GUILocalizeStrings.Get(100));//Icons
         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
@@ -6231,12 +6231,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case ViewContext.Menu:
-          SetLabelSelect("menu");
           GetSelectFromMenuView(false); // load views into facade ...
           break;
 
         case ViewContext.MenuAll:
-          SetLabelSelect("menu");
           GetSelectFromMenuView(true); // load views into facade ...
           break;
 
@@ -6291,8 +6289,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               #region Set and Call userdefined Views
               if (conf.StrViewDfltItem == GUILocalizeStrings.Get(1079819)) // Views Menu
               {
-                conf.ViewContext = ViewContext.Menu;
-                SetLabelSelect("menu");
                 GetSelectFromMenuView(conf.BoolMenuShowAll);
               }
               else if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
@@ -6527,6 +6523,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
           #endregion
         #endregion
+
+        case "Menu": //  Change View to "Menu"
+          conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
+          conf.WStrSort = conf.StrSTitle;
+          conf.Boolselect = false;
+          conf.Boolreturn = false;
+          GetSelectFromMenuView(conf.BoolMenuShowAll); // load views into facade ...
+          break;
 
         case "CustomView":
           #region New CustomViews ...
