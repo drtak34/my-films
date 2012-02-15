@@ -1980,7 +1980,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
       {
-        GetSelectFromMenuView(false);
+        GetSelectFromMenuView(conf.BoolMenuShowAll);
         return;
       }
       if (conf.Boolselect)
