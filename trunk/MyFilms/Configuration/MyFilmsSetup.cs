@@ -1227,8 +1227,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //AntViewSortOrder5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", " ASC");
             //AntViewFilter5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", "");
 
-            int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewTotalCount", 5); // 5 to keep compatibility with old views ...
-            this.MyCustomViews.View.Clear();
+            MyCustomViews.View.Clear();
+            int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntViewTotalCount", -1);
+            if (iCustomViews == -1) // Customviews not yet present ... ToDo: Remove in later Version - only "migration code"
+            {
+              AddOldHardcodedViews();
+            }
             int index = 1;
             while (true) // for (int i = 1; i < iCustomViews + 1; i++)
             {
@@ -2343,6 +2347,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Producer
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Producer";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+        }
+
+        private void AddOldHardcodedViews()
+        {
+          MFview.ViewRow newRow = MyCustomViews.View.NewViewRow();
+
+          //Films (mastertitle)
+          newRow.DBfield = AntTitle1.Text;
+          newRow.Label = GUILocalizeStrings.Get(342); // videos
+          newRow.Value = "*";
+          MyCustomViews.View.Rows.Add(newRow);
+          //year
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Year";
+          newRow.SortDirectionView = " DESC";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //Category
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Category";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          MyCustomViews.View.Rows.Add(newRow);
+          //Country
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = "Country";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           MyCustomViews.View.Rows.Add(newRow);
         }

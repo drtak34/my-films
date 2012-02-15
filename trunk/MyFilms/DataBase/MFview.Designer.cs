@@ -511,7 +511,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIndex.DefaultValue = ((int)(0));
                 this.columnSortFieldViewType.DefaultValue = ((string)("Name"));
                 this.columnSortDirectionView.DefaultValue = ((string)(" ASC"));
-                this.columnLayoutView.DefaultValue = ((string)("List"));
+                this.columnLayoutView.DefaultValue = ((string)("0"));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -132,8 +132,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //}
 
 
-                int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntViewTotalCount", 5); // set to 5 as default to keep compatibility
                 CustomViews.View.Clear();
+                int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntViewTotalCount", -1);
+                if (iCustomViews == -1) // New Customviews not yet present ...
+                {
+                  MFview.ViewRow newRow = CustomViews.View.NewViewRow();
+
+                  //Films (mastertitle)
+                  newRow.DBfield = StrTitle1;
+                  newRow.Label = GUILocalizeStrings.Get(342); // videos
+                  newRow.Value = "*";
+                  CustomViews.View.Rows.Add(newRow);
+                  //year
+                  newRow = CustomViews.View.NewViewRow();
+                  newRow.DBfield = "Year";
+                  newRow.SortDirectionView = " DESC";
+                  newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  CustomViews.View.Rows.Add(newRow);
+                  //Category
+                  newRow = CustomViews.View.NewViewRow();
+                  newRow.DBfield = "Category";
+                  newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  CustomViews.View.Rows.Add(newRow);
+                  //Country
+                  newRow = CustomViews.View.NewViewRow();
+                  newRow.DBfield = "Country";
+                  newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  CustomViews.View.Rows.Add(newRow);
+                  iCustomViews = 5; // to load "old Custom Views"
+                }
+
                 int index = 1;
                 for (int i = 1; i < iCustomViews + 1; i++) // while (true) //
                 {
@@ -152,7 +180,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (view.SortDirectionView.Contains("ASC")) view.SortDirectionView = " ASC"; else view.SortDirectionView = " DESC";
                   view.LayoutView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutView{0}", index), "0");
                   LogMyFilms.Debug("Adding view - #: '" + index + "', DBitem: '" + view.DBfield + "', View Label: '" + view.Label + "'");
-                  CustomViews.View.AddViewRow(view);
+                  if (view.DBfield.Length > 0) 
+                    CustomViews.View.AddViewRow(view);
                   index++;
                 }
               

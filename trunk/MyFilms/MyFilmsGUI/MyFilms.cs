@@ -6568,6 +6568,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.BoolSortCountinViews = (selectedCustomView.SortFieldViewType == "Count");
           conf.WStrSortSens = selectedCustomView.SortDirectionView;
           conf.IndexedChars = selectedCustomView.Index;
+          //int iLayout = 0;
+          //int.TryParse(selectedCustomView.LayoutView, out iLayout);
+          //conf.WStrLayOut = iLayout;
           conf.WStrLayOut = int.Parse(selectedCustomView.LayoutView);
 
           if (selectedCustomView.Filter.Length > 0)
