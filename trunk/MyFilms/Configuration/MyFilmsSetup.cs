@@ -5874,17 +5874,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
           openFileDialog1.Title = "Select Views Image";
           if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+          {
             AntViewsImage.ImageLocation = openFileDialog1.FileName;
-        }
-
-        private void AntViewsImage_DoubleClick(object sender, EventArgs e)
-        {
-          AntViewsImage.ImageLocation = "";
+            viewBindingSource.EndEdit();
+            //buttonResetImage.Focus(); // change focus to update binding source ! Otherwise content gets lost, if save immediately
+          }
         }
 
         private void buttonResetImage_Click(object sender, EventArgs e)
         {
           AntViewsImage.ImageLocation = "";
+          viewBindingSource.EndEdit();
         }
       }
 
