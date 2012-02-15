@@ -20,7 +20,7 @@
     </settings>
 		<import>common.window.background.xml</import>
     <control>
-      <description>Dummy Label for Films</description>
+      <description>Dummy Label for Films View</description>
       <type>label</type>
       <id>36</id>
       <posX>-50</posX>
@@ -31,7 +31,7 @@
       <!-- to make a control invisible when you are in FILMS VIEW (Movies) do this: <visible>!control.isvisible(36)</visible> -->
     </control>
     <control>
-      <description>Dummy Label for Views (films)</description>
+      <description>Dummy Label for Grouped View</description>
       <type>label</type>
       <id>37</id>
       <posX>-50</posX>
@@ -42,7 +42,7 @@
       <!-- to make a control invisible when you are in GROUP VIEW (Year, Category, etc.) do this: <visible>!control.isvisible(37)</visible> -->
     </control>
     <control>
-      <description>Dummy Label for Views (persons)</description>
+      <description>Dummy Label for Person View</description>
       <type>label</type>
       <id>38</id>
       <posX>-50</posX>
