@@ -316,7 +316,6 @@
           this.AntViewsImage = new System.Windows.Forms.PictureBox();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
-          this.textBoxViewLabel = new System.Windows.Forms.TextBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
           this.bindingNavigatorViews = new System.Windows.Forms.BindingNavigator(this.components);
           this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -566,6 +565,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.labelViewLabel = new System.Windows.Forms.Label();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -793,7 +793,7 @@
           // label66
           // 
           label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(187, 104);
+          label66.Location = new System.Drawing.Point(183, 104);
           label66.Name = "label66";
           label66.Size = new System.Drawing.Size(34, 13);
           label66.TabIndex = 7;
@@ -3024,9 +3024,9 @@
           // 
           // groupBoxView
           // 
+          this.groupBoxView.Controls.Add(this.labelViewLabel);
           this.groupBoxView.Controls.Add(this.buttonResetImage);
           this.groupBoxView.Controls.Add(this.AntViewsImage);
-          this.groupBoxView.Controls.Add(this.textBoxViewLabel);
           this.groupBoxView.Controls.Add(this.lblAntViewIndex);
           this.groupBoxView.Controls.Add(this.bindingNavigatorViews);
           this.groupBoxView.Controls.Add(this.dgViewsList);
@@ -3066,7 +3066,6 @@
           this.AntViewsImage.TabIndex = 88;
           this.AntViewsImage.TabStop = false;
           this.ToolTip1.SetToolTip(this.AntViewsImage, resources.GetString("AntViewsImage.ToolTip"));
-          this.AntViewsImage.DoubleClick += new System.EventHandler(this.AntViewsImage_DoubleClick);
           this.AntViewsImage.Click += new System.EventHandler(this.AntViewsImage_Click);
           // 
           // viewBindingSource
@@ -3078,17 +3077,6 @@
           // 
           this.mFview.DataSetName = "MFview";
           this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
-          // textBoxViewLabel
-          // 
-          this.textBoxViewLabel.BackColor = System.Drawing.SystemColors.Control;
-          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-          this.textBoxViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
-          this.textBoxViewLabel.Enabled = false;
-          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 48);
-          this.textBoxViewLabel.Name = "textBoxViewLabel";
-          this.textBoxViewLabel.Size = new System.Drawing.Size(169, 13);
-          this.textBoxViewLabel.TabIndex = 44;
           // 
           // lblAntViewIndex
           // 
@@ -5804,6 +5792,17 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // labelViewLabel
+          // 
+          this.labelViewLabel.AutoSize = true;
+          this.labelViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
+          this.labelViewLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+          this.labelViewLabel.Location = new System.Drawing.Point(179, 48);
+          this.labelViewLabel.Name = "labelViewLabel";
+          this.labelViewLabel.Size = new System.Drawing.Size(99, 13);
+          this.labelViewLabel.TabIndex = 90;
+          this.labelViewLabel.Text = "Custom View Name";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6397,9 +6396,9 @@
         private TextBox AntLabel1;
         private TextBox View_Dflt_Text;
         private CheckBox chkShowEmpty;
-        private TextBox textBoxViewLabel;
         private ComboBox cbSuppress;
         private PictureBox AntViewsImage;
         private Button buttonResetImage;
+        private Label labelViewLabel;
     }
 }
