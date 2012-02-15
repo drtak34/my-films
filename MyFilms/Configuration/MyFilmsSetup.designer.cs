@@ -763,7 +763,7 @@
           // label68
           // 
           label68.AutoSize = true;
-          label68.Location = new System.Drawing.Point(16, 17);
+          label68.Location = new System.Drawing.Point(16, 16);
           label68.Name = "label68";
           label68.Size = new System.Drawing.Size(53, 13);
           label68.TabIndex = 23;
@@ -774,7 +774,7 @@
           // label70
           // 
           label70.AutoSize = true;
-          label70.Location = new System.Drawing.Point(202, 17);
+          label70.Location = new System.Drawing.Point(202, 16);
           label70.Name = "label70";
           label70.Size = new System.Drawing.Size(39, 13);
           label70.TabIndex = 27;
@@ -783,7 +783,7 @@
           // label69
           // 
           label69.AutoSize = true;
-          label69.Location = new System.Drawing.Point(125, 17);
+          label69.Location = new System.Drawing.Point(125, 16);
           label69.Name = "label69";
           label69.Size = new System.Drawing.Size(26, 13);
           label69.TabIndex = 25;
@@ -793,21 +793,21 @@
           // label66
           // 
           label66.AutoSize = true;
-          label66.Location = new System.Drawing.Point(351, 98);
+          label66.Location = new System.Drawing.Point(187, 104);
           label66.Name = "label66";
-          label66.Size = new System.Drawing.Size(37, 13);
+          label66.Size = new System.Drawing.Size(34, 13);
           label66.TabIndex = 7;
-          label66.Text = "Value:";
+          label66.Text = "Value";
           this.ToolTip1.SetToolTip(label66, resources.GetString("label66.ToolTip"));
           // 
           // label65
           // 
           label65.AutoSize = true;
-          label65.Location = new System.Drawing.Point(183, 99);
+          label65.Location = new System.Drawing.Point(183, 65);
           label65.Name = "label65";
           label65.Size = new System.Drawing.Size(47, 13);
           label65.TabIndex = 5;
-          label65.Text = "DB field:";
+          label65.Text = "DB Field";
           this.ToolTip1.SetToolTip(label65, "DB Item to view is setting the information that will be shoen, if you select this" +
                   " view.");
           // 
@@ -1506,7 +1506,7 @@
           // chkFanartDefaultViewsUseRandom
           // 
           this.chkFanartDefaultViewsUseRandom.AutoSize = true;
-          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(37, 99);
+          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(37, 36);
           this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
           this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(116, 17);
           this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
@@ -1518,18 +1518,18 @@
           // chkFanartDefaultViews
           // 
           this.chkFanartDefaultViews.AutoSize = true;
-          this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 36);
+          this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 99);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
-          this.chkFanartDefaultViews.Size = new System.Drawing.Size(139, 17);
+          this.chkFanartDefaultViews.Size = new System.Drawing.Size(161, 17);
           this.chkFanartDefaultViews.TabIndex = 80;
-          this.chkFanartDefaultViews.Text = "Fanart for Default Views";
+          this.chkFanartDefaultViews.Text = "Use Fanart for Default Views";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
           this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
           // 
           // chkDfltFanartImageAll
           // 
           this.chkDfltFanartImageAll.AutoSize = true;
-          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(229, 36);
+          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(229, 99);
           this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
           this.chkDfltFanartImageAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltFanartImageAll.TabIndex = 79;
@@ -1540,7 +1540,7 @@
           // label48
           // 
           this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(396, 49);
+          this.label48.Location = new System.Drawing.Point(396, 58);
           this.label48.Name = "label48";
           this.label48.Size = new System.Drawing.Size(74, 13);
           this.label48.TabIndex = 78;
@@ -1551,9 +1551,9 @@
           this.chkDfltFanartImage.AutoSize = true;
           this.chkDfltFanartImage.Location = new System.Drawing.Point(37, 57);
           this.chkDfltFanartImage.Name = "chkDfltFanartImage";
-          this.chkDfltFanartImage.Size = new System.Drawing.Size(193, 17);
+          this.chkDfltFanartImage.Size = new System.Drawing.Size(199, 17);
           this.chkDfltFanartImage.TabIndex = 77;
-          this.chkDfltFanartImage.Text = "Use default image for missing fanart";
+          this.chkDfltFanartImage.Text = "Use Default Image for missing Fanart";
           this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and group views like year," +
                   " genre, country.");
           this.chkDfltFanartImage.UseVisualStyleBackColor = true;
@@ -1562,7 +1562,7 @@
           // ButDefFanart
           // 
           this.ButDefFanart.AllowDrop = true;
-          this.ButDefFanart.Location = new System.Drawing.Point(625, 45);
+          this.ButDefFanart.Location = new System.Drawing.Point(625, 54);
           this.ButDefFanart.Name = "ButDefFanart";
           this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
           this.ButDefFanart.TabIndex = 76;
@@ -1572,7 +1572,7 @@
           // 
           // DefaultFanartImage
           // 
-          this.DefaultFanartImage.Location = new System.Drawing.Point(511, 45);
+          this.DefaultFanartImage.Location = new System.Drawing.Point(511, 54);
           this.DefaultFanartImage.Name = "DefaultFanartImage";
           this.DefaultFanartImage.Size = new System.Drawing.Size(108, 20);
           this.DefaultFanartImage.TabIndex = 75;
@@ -1581,7 +1581,7 @@
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(508, 79);
+          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(508, 101);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
@@ -1593,7 +1593,7 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(396, 79);
+          this.label40.Location = new System.Drawing.Point(396, 101);
           this.label40.Name = "label40";
           this.label40.Size = new System.Drawing.Size(93, 13);
           this.label40.TabIndex = 73;
@@ -1613,7 +1613,7 @@
           // btnFanart
           // 
           this.btnFanart.Enabled = false;
-          this.btnFanart.Location = new System.Drawing.Point(625, 19);
+          this.btnFanart.Location = new System.Drawing.Point(625, 15);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
           this.btnFanart.TabIndex = 70;
@@ -1624,7 +1624,7 @@
           // MesFilmsFanart
           // 
           this.MesFilmsFanart.Enabled = false;
-          this.MesFilmsFanart.Location = new System.Drawing.Point(511, 19);
+          this.MesFilmsFanart.Location = new System.Drawing.Point(511, 15);
           this.MesFilmsFanart.Name = "MesFilmsFanart";
           this.MesFilmsFanart.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsFanart.TabIndex = 68;
@@ -1632,7 +1632,7 @@
           // labelFanart
           // 
           this.labelFanart.AutoSize = true;
-          this.labelFanart.Location = new System.Drawing.Point(396, 22);
+          this.labelFanart.Location = new System.Drawing.Point(396, 18);
           this.labelFanart.Name = "labelFanart";
           this.labelFanart.Size = new System.Drawing.Size(62, 13);
           this.labelFanart.TabIndex = 69;
@@ -1644,9 +1644,9 @@
           this.chkDfltFanart.Enabled = false;
           this.chkDfltFanart.Location = new System.Drawing.Point(37, 78);
           this.chkDfltFanart.Name = "chkDfltFanart";
-          this.chkDfltFanart.Size = new System.Drawing.Size(191, 17);
+          this.chkDfltFanart.Size = new System.Drawing.Size(193, 17);
           this.chkDfltFanart.TabIndex = 67;
-          this.chkDfltFanart.Text = "Use movie cover for missing Fanart";
+          this.chkDfltFanart.Text = "Use Movie Cover for missing Fanart";
           this.chkDfltFanart.UseVisualStyleBackColor = true;
           this.chkDfltFanart.CheckedChanged += new System.EventHandler(this.chkDfltFanart_CheckedChanged);
           // 
@@ -3039,7 +3039,7 @@
           this.groupBoxView.Controls.Add(label65);
           this.groupBoxView.Location = new System.Drawing.Point(6, 5);
           this.groupBoxView.Name = "groupBoxView";
-          this.groupBoxView.Size = new System.Drawing.Size(467, 262);
+          this.groupBoxView.Size = new System.Drawing.Size(467, 266);
           this.groupBoxView.TabIndex = 127;
           this.groupBoxView.TabStop = false;
           this.groupBoxView.Text = "Custom View Editor ...";
@@ -3047,11 +3047,11 @@
           // 
           // buttonResetImage
           // 
-          this.buttonResetImage.Location = new System.Drawing.Point(376, 68);
+          this.buttonResetImage.Location = new System.Drawing.Point(371, 45);
           this.buttonResetImage.Name = "buttonResetImage";
-          this.buttonResetImage.Size = new System.Drawing.Size(40, 20);
+          this.buttonResetImage.Size = new System.Drawing.Size(18, 18);
           this.buttonResetImage.TabIndex = 89;
-          this.buttonResetImage.Text = "clear";
+          this.buttonResetImage.Text = "X";
           this.buttonResetImage.UseVisualStyleBackColor = true;
           this.buttonResetImage.Click += new System.EventHandler(this.buttonResetImage_Click);
           // 
@@ -3059,9 +3059,9 @@
           // 
           this.AntViewsImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
           this.AntViewsImage.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.viewBindingSource, "ImagePath", true));
-          this.AntViewsImage.Location = new System.Drawing.Point(420, 48);
+          this.AntViewsImage.Location = new System.Drawing.Point(395, 45);
           this.AntViewsImage.Name = "AntViewsImage";
-          this.AntViewsImage.Size = new System.Drawing.Size(40, 60);
+          this.AntViewsImage.Size = new System.Drawing.Size(66, 99);
           this.AntViewsImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
           this.AntViewsImage.TabIndex = 88;
           this.AntViewsImage.TabStop = false;
@@ -3082,22 +3082,22 @@
           // textBoxViewLabel
           // 
           this.textBoxViewLabel.BackColor = System.Drawing.SystemColors.Control;
-          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.textBoxViewLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
           this.textBoxViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
           this.textBoxViewLabel.Enabled = false;
-          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 68);
+          this.textBoxViewLabel.Location = new System.Drawing.Point(180, 48);
           this.textBoxViewLabel.Name = "textBoxViewLabel";
-          this.textBoxViewLabel.Size = new System.Drawing.Size(177, 20);
+          this.textBoxViewLabel.Size = new System.Drawing.Size(169, 13);
           this.textBoxViewLabel.TabIndex = 44;
           // 
           // lblAntViewIndex
           // 
           this.lblAntViewIndex.AutoSize = true;
-          this.lblAntViewIndex.Location = new System.Drawing.Point(291, 99);
+          this.lblAntViewIndex.Location = new System.Drawing.Point(291, 65);
           this.lblAntViewIndex.Name = "lblAntViewIndex";
-          this.lblAntViewIndex.Size = new System.Drawing.Size(36, 13);
+          this.lblAntViewIndex.Size = new System.Drawing.Size(33, 13);
           this.lblAntViewIndex.TabIndex = 43;
-          this.lblAntViewIndex.Text = "Index:";
+          this.lblAntViewIndex.Text = "Index";
           this.ToolTip1.SetToolTip(this.lblAntViewIndex, "You can define number of chars to be viewd as indexed group\r\nfor this Item, e.g.\r" +
                   "\n\"1\" results in getting a view of first letter.");
           // 
@@ -3144,7 +3144,7 @@
           this.toolStripLabel1.Name = "toolStripLabel1";
           this.toolStripLabel1.Size = new System.Drawing.Size(44, 13);
           this.toolStripLabel1.Text = "von {0}";
-          this.toolStripLabel1.ToolTipText = "Die Gesamtanzahl der Elemente.";
+          this.toolStripLabel1.ToolTipText = "Total number of Items.";
           // 
           // toolStripButtonDelete
           // 
@@ -3153,7 +3153,8 @@
           this.toolStripButtonDelete.Name = "toolStripButtonDelete";
           this.toolStripButtonDelete.RightToLeftAutoMirrorImage = true;
           this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButtonDelete.Text = "Löschen";
+          this.toolStripButtonDelete.Text = "Delete";
+          this.toolStripButtonDelete.ToolTipText = "Delete current Item";
           // 
           // toolStripButton3
           // 
@@ -3162,7 +3163,8 @@
           this.toolStripButton3.Name = "toolStripButton3";
           this.toolStripButton3.RightToLeftAutoMirrorImage = true;
           this.toolStripButton3.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton3.Text = "Erste verschieben";
+          this.toolStripButton3.Text = "Select First";
+          this.toolStripButton3.ToolTipText = "Select First";
           // 
           // toolStripButton4
           // 
@@ -3171,7 +3173,7 @@
           this.toolStripButton4.Name = "toolStripButton4";
           this.toolStripButton4.RightToLeftAutoMirrorImage = true;
           this.toolStripButton4.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton4.Text = "Vorherige verschieben";
+          this.toolStripButton4.Text = "Choose previous";
           // 
           // toolStripSeparator1
           // 
@@ -3185,7 +3187,7 @@
           this.toolStripTextBox1.Name = "toolStripTextBox1";
           this.toolStripTextBox1.Size = new System.Drawing.Size(50, 21);
           this.toolStripTextBox1.Text = "0";
-          this.toolStripTextBox1.ToolTipText = "Aktuelle Position";
+          this.toolStripTextBox1.ToolTipText = "Current Item";
           // 
           // toolStripSeparator2
           // 
@@ -3199,7 +3201,7 @@
           this.toolStripButton5.Name = "toolStripButton5";
           this.toolStripButton5.RightToLeftAutoMirrorImage = true;
           this.toolStripButton5.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton5.Text = "Nächste verschieben";
+          this.toolStripButton5.Text = "Choose next";
           // 
           // toolStripButton6
           // 
@@ -3208,7 +3210,8 @@
           this.toolStripButton6.Name = "toolStripButton6";
           this.toolStripButton6.RightToLeftAutoMirrorImage = true;
           this.toolStripButton6.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButton6.Text = "Letzte verschieben";
+          this.toolStripButton6.Text = "Select Last";
+          this.toolStripButton6.ToolTipText = "Select Last";
           // 
           // toolStripSeparator3
           // 
@@ -3222,7 +3225,7 @@
           this.toolStripButtonAdd.Name = "toolStripButtonAdd";
           this.toolStripButtonAdd.RightToLeftAutoMirrorImage = true;
           this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 20);
-          this.toolStripButtonAdd.Text = "Neu hinzufügen";
+          this.toolStripButtonAdd.Text = "Add New";
           this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
           // 
           // toolStripSeparator4
@@ -3238,6 +3241,7 @@
           this.toolStripButtonMoveUp.Name = "toolStripButtonMoveUp";
           this.toolStripButtonMoveUp.Size = new System.Drawing.Size(23, 20);
           this.toolStripButtonMoveUp.Text = "up";
+          this.toolStripButtonMoveUp.ToolTipText = "Move Item up";
           this.toolStripButtonMoveUp.Click += new System.EventHandler(this.toolStripButtonMoveUp_Click);
           // 
           // toolStripButtonMoveDown
@@ -3248,6 +3252,7 @@
           this.toolStripButtonMoveDown.Name = "toolStripButtonMoveDown";
           this.toolStripButtonMoveDown.Size = new System.Drawing.Size(23, 20);
           this.toolStripButtonMoveDown.Text = "down";
+          this.toolStripButtonMoveDown.ToolTipText = "Move Item down";
           this.toolStripButtonMoveDown.Click += new System.EventHandler(this.toolStripButtonMoveDown_Click);
           // 
           // toolStripSeparator5
@@ -3264,6 +3269,9 @@
           this.toolStripButtonAddDefaults.Name = "toolStripButtonAddDefaults";
           this.toolStripButtonAddDefaults.Size = new System.Drawing.Size(69, 17);
           this.toolStripButtonAddDefaults.Text = "add defaults";
+          this.toolStripButtonAddDefaults.ToolTipText = "Add default Views:\r\nThis will add the default Views to the Custom Views.\r\nExistin" +
+              "g Views will NOT be removed - default views will be added to the end of the list" +
+              ".";
           this.toolStripButtonAddDefaults.Click += new System.EventHandler(this.toolStripButtonAddDefaults_Click);
           // 
           // dgViewsList
@@ -3286,7 +3294,7 @@
           this.dgViewsList.RowHeadersVisible = false;
           this.dgViewsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
           this.dgViewsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-          this.dgViewsList.Size = new System.Drawing.Size(158, 212);
+          this.dgViewsList.Size = new System.Drawing.Size(158, 216);
           this.dgViewsList.TabIndex = 42;
           this.dgViewsList.Leave += new System.EventHandler(this.dgViewsList_Leave);
           // 
@@ -3313,9 +3321,9 @@
           this.groupBoxSortAndLayoutForView.Controls.Add(label69);
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewLayoutView);
           this.groupBoxSortAndLayoutForView.Controls.Add(this.AntViewSortOrder);
-          this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 191);
+          this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 196);
           this.groupBoxSortAndLayoutForView.Name = "groupBoxSortAndLayoutForView";
-          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 65);
+          this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 64);
           this.groupBoxSortAndLayoutForView.TabIndex = 41;
           this.groupBoxSortAndLayoutForView.TabStop = false;
           this.groupBoxSortAndLayoutForView.Text = "Sort and Layouts for View";
@@ -3327,7 +3335,7 @@
           this.AntViewSortType.Items.AddRange(new object[] {
             "Count",
             "Name"});
-          this.AntViewSortType.Location = new System.Drawing.Point(10, 35);
+          this.AntViewSortType.Location = new System.Drawing.Point(10, 34);
           this.AntViewSortType.Name = "AntViewSortType";
           this.AntViewSortType.Size = new System.Drawing.Size(104, 21);
           this.AntViewSortType.Sorted = true;
@@ -3343,7 +3351,7 @@
             "Large Icons",
             "Filmstrip",
             "Cover Flow"});
-          this.AntViewLayoutView.Location = new System.Drawing.Point(192, 35);
+          this.AntViewLayoutView.Location = new System.Drawing.Point(192, 34);
           this.AntViewLayoutView.Name = "AntViewLayoutView";
           this.AntViewLayoutView.Size = new System.Drawing.Size(90, 21);
           this.AntViewLayoutView.TabIndex = 22;
@@ -3355,7 +3363,7 @@
           this.AntViewSortOrder.Items.AddRange(new object[] {
             " ASC",
             " DESC"});
-          this.AntViewSortOrder.Location = new System.Drawing.Point(120, 35);
+          this.AntViewSortOrder.Location = new System.Drawing.Point(120, 34);
           this.AntViewSortOrder.Name = "AntViewSortOrder";
           this.AntViewSortOrder.Size = new System.Drawing.Size(59, 21);
           this.AntViewSortOrder.TabIndex = 20;
@@ -3364,7 +3372,7 @@
           // 
           this.AntViewItem.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "DBfield", true));
           this.AntViewItem.FormattingEnabled = true;
-          this.AntViewItem.Location = new System.Drawing.Point(180, 114);
+          this.AntViewItem.Location = new System.Drawing.Point(180, 80);
           this.AntViewItem.Name = "AntViewItem";
           this.AntViewItem.Size = new System.Drawing.Size(104, 21);
           this.AntViewItem.Sorted = true;
@@ -3378,9 +3386,10 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
-          this.groupBox5.Location = new System.Drawing.Point(170, 139);
+          this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+          this.groupBox5.Location = new System.Drawing.Point(170, 145);
           this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(291, 48);
+          this.groupBox5.Size = new System.Drawing.Size(291, 46);
           this.groupBox5.TabIndex = 42;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Filter Expression ...";
@@ -3388,14 +3397,14 @@
           // AntViewFilter
           // 
           this.AntViewFilter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Filter", true));
-          this.AntViewFilter.Location = new System.Drawing.Point(10, 18);
+          this.AntViewFilter.Location = new System.Drawing.Point(10, 16);
           this.AntViewFilter.Name = "AntViewFilter";
           this.AntViewFilter.Size = new System.Drawing.Size(243, 20);
           this.AntViewFilter.TabIndex = 10;
           // 
           // AntViewFilterEditButton
           // 
-          this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 18);
+          this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 16);
           this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
           this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
           this.AntViewFilterEditButton.TabIndex = 39;
@@ -3406,16 +3415,16 @@
           // AntViewValue
           // 
           this.AntViewValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Value", true));
-          this.AntViewValue.Location = new System.Drawing.Point(344, 114);
+          this.AntViewValue.Location = new System.Drawing.Point(180, 120);
           this.AntViewValue.Name = "AntViewValue";
-          this.AntViewValue.Size = new System.Drawing.Size(117, 20);
+          this.AntViewValue.Size = new System.Drawing.Size(149, 20);
           this.AntViewValue.TabIndex = 8;
           this.AntViewValue.TextChanged += new System.EventHandler(this.AntViewValue_TextChanged);
           // 
           // AntViewIndex
           // 
           this.AntViewIndex.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.viewBindingSource, "Index", true));
-          this.AntViewIndex.Location = new System.Drawing.Point(290, 115);
+          this.AntViewIndex.Location = new System.Drawing.Point(290, 81);
           this.AntViewIndex.Maximum = new decimal(new int[] {
             2,
             0,
@@ -3632,11 +3641,11 @@
           // 
           // btnCustomConfigFilter
           // 
-          this.btnCustomConfigFilter.Location = new System.Drawing.Point(12, 19);
+          this.btnCustomConfigFilter.Location = new System.Drawing.Point(9, 19);
           this.btnCustomConfigFilter.Name = "btnCustomConfigFilter";
-          this.btnCustomConfigFilter.Size = new System.Drawing.Size(53, 74);
+          this.btnCustomConfigFilter.Size = new System.Drawing.Size(42, 23);
           this.btnCustomConfigFilter.TabIndex = 31;
-          this.btnCustomConfigFilter.Text = "Custom\r\nConfig\r\nFilter";
+          this.btnCustomConfigFilter.Text = "Edit";
           this.btnCustomConfigFilter.UseVisualStyleBackColor = true;
           this.btnCustomConfigFilter.Click += new System.EventHandler(this.btnCustomConfigFilter_Click);
           // 
@@ -3645,12 +3654,12 @@
           this.textBoxStrDfltSelect.BackColor = System.Drawing.SystemColors.ButtonFace;
           this.textBoxStrDfltSelect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
           this.textBoxStrDfltSelect.Enabled = false;
-          this.textBoxStrDfltSelect.Location = new System.Drawing.Point(82, 19);
+          this.textBoxStrDfltSelect.Location = new System.Drawing.Point(60, 19);
           this.textBoxStrDfltSelect.Multiline = true;
           this.textBoxStrDfltSelect.Name = "textBoxStrDfltSelect";
           this.textBoxStrDfltSelect.ReadOnly = true;
           this.textBoxStrDfltSelect.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-          this.textBoxStrDfltSelect.Size = new System.Drawing.Size(194, 74);
+          this.textBoxStrDfltSelect.Size = new System.Drawing.Size(216, 74);
           this.textBoxStrDfltSelect.TabIndex = 28;
           this.textBoxStrDfltSelect.TabStop = false;
           // 
@@ -3951,9 +3960,9 @@
           this.label6.AutoSize = true;
           this.label6.Location = new System.Drawing.Point(11, 18);
           this.label6.Name = "label6";
-          this.label6.Size = new System.Drawing.Size(150, 13);
+          this.label6.Size = new System.Drawing.Size(152, 13);
           this.label6.TabIndex = 59;
-          this.label6.Text = "DB Item for Movie Source Info";
+          this.label6.Text = "DB Field for Movie Source Info";
           // 
           // AntStorage
           // 
@@ -3969,11 +3978,11 @@
           // label4
           // 
           this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(11, 167);
+          this.label4.Location = new System.Drawing.Point(12, 167);
           this.label4.Name = "label4";
-          this.label4.Size = new System.Drawing.Size(155, 13);
+          this.label4.Size = new System.Drawing.Size(132, 13);
           this.label4.TabIndex = 58;
-          this.label4.Text = "Offline Media Identification Item";
+          this.label4.Text = "Offline Media Identification";
           // 
           // AntIdentItem
           // 
@@ -4079,6 +4088,7 @@
           this.groupBox_TitleOrder.Controls.Add(this.label8);
           this.groupBox_TitleOrder.Controls.Add(this.AntTitle2);
           this.groupBox_TitleOrder.Controls.Add(this.AntTitle1);
+          this.groupBox_TitleOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 44);
           this.groupBox_TitleOrder.Name = "groupBox_TitleOrder";
           this.groupBox_TitleOrder.Size = new System.Drawing.Size(438, 101);
