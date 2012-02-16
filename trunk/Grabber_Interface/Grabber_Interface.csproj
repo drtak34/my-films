@@ -132,7 +132,6 @@
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="XmlConf.cs" />
-    <Compile Include="XmlConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\United States of America%28USA%29.png" />
