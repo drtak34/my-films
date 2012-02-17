@@ -1991,7 +1991,7 @@ Public Class AntProcessor
         Dim strTemp, strTemp2 As String
         Dim FileMoved As Boolean = False
 
-        Const RemoveOrphansWhenPathNotAvailable As Boolean = True ' Todo: To make configurable in setup
+        'Const RemoveOrphansWhenPathNotAvailable As Boolean = True ' Todo: To make configurable in setup
 
         For Each row In ds.Tables("tblXML").Rows
             If dvFoundMediaFiles.Find(row("AntShortPath")) = -1 Then
@@ -2024,7 +2024,7 @@ Public Class AntProcessor
                     If FileMoved = False Then
                         'And if not there, it's probably an orphan - check to see if the path is different:
                         For i As Integer = 0 To Path.Length - 1 ' for each scan path
-                            If RemoveOrphansWhenPathNotAvailable = True Or PathAvailable(i) = True Then ' check only for orphans, if path is available or user explicitely wants to check 
+                            If CurrentSettings.Purge_Missing_Files_When_Source_Unavailable = True Or PathAvailable(i) = True Then ' check only for orphans, if path is available or user explicitely wants to check 
                                 If CurrentSettings.Override_Path = "" Then
                                     strTemp = row("AntPath").ToString.ToLower
                                     strTemp2 = Path(i).ToLower  ' scan pathes
@@ -2083,6 +2083,7 @@ Public Class AntProcessor
         LogEvent("  MediaLabel : " + CurrentSettings.Ant_Media_Label.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  SourceField : " + CurrentSettings.Ant_Database_Source_Field.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  PurgeMissing : " + CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  PurgeMissing Always: " + CurrentSettings.Purge_Missing_Files_When_Source_Unavailable.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Don't Import on Internet Lookup Failure in GuiMode: " + CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)

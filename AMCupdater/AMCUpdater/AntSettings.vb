@@ -203,6 +203,19 @@ Public Class AntSettings
             SetAttribute("Purge_Missing_Files", value)
         End Set
     End Property
+    Public Property Purge_Missing_Files_When_Source_Unavailable() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Purge_Missing_Files_When_Source_Unavailable").ToLower
+            If tempvalue = "true" Or tempvalue = "false" Then
+                Return tempvalue
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Purge_Missing_Files_When_Source_Unavailable", value)
+        End Set
+    End Property
     Public Property RegEx_Check_For_MultiPart_Files() As String
         Get
             Return ReadAttribute("RegEx_Check_For_MultiPart_Files")

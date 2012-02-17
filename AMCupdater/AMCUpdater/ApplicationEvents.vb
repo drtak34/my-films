@@ -119,6 +119,7 @@ Namespace My
                 LogEvent(" - Overwrite Original File Option : " & CurrentSettings.Overwrite_XML_File.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Source Field : " & CurrentSettings.Ant_Database_Source_Field.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Purge Missing Movies From Database : " & CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
+                LogEvent(" - PurgeMissing Always: " + CurrentSettings.Purge_Missing_Files_When_Source_Unavailable.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Check for folders containing DVD copies : " + CurrentSettings.Scan_For_DVD_Folders.ToString, EventLogLevel.ImportantEvent)
 
                 For Each s As String In My.Application.CommandLineArgs

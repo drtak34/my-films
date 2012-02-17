@@ -42,6 +42,9 @@
   <Values Option="Purge_Missing_Files">
     <Value>False</Value>
   </Values>
+  <Values Option="Purge_Missing_Files_When_Source_Unavailable">
+    <Value>False</Value>
+  </Values>
   <Values Option="RegEx_Check_For_MultiPart_Files">
     <Value>[-|_|.| +][cC][dD][0-9]|[-|_|.| +][dD][iI][sS][kKcC][0-9]|[0-9]of[0-9]</Value>
   </Values>
