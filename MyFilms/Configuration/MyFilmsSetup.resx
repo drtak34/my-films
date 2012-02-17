@@ -392,6 +392,16 @@ and it will be used as a default person image.</value>
 Works same way as cover images for movies.
 It is used for "person like" Views, like actors, director, producer, writer.</value>
   </data>
+  <data name="txtAMCUpd_cnf_Display.ToolTip" xml:space="preserve">
+    <value>You can define, what AMCUpdater config file should be used.
+This applies to:
+- Launching Global Import in MyFilms GUI
+- Launching AMCUpdater via "Import" button in setup
+- Launching AMCUpdater via desktop icon
+
+Note: If you changed this setting, you have to "(re)create Desktop Icon" 
+to update the link - otherwise, it won't use the new config file you've set.</value>
+  </data>
   <data name="scheduleAMCUpdater.ToolTip" xml:space="preserve">
     <value>You can use the Windows scheduler to schedule AMCupdater to run and update automatically to update your catalog.
 Make sure the configuration you choose for this matches your needs.

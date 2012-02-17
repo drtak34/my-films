@@ -4220,24 +4220,42 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //string commandLine = "\"" + Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe""" + " \"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log) + "\" \"GUI\"";
           //string argument = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log) + "\" \"GUI";
 
+          string configParam = "";
+          if (!string.IsNullOrEmpty(txtAMCUpd_cnf.Text))
+          {
+            if (!System.IO.File.Exists(txtAMCUpd_cnf.Text))
+            {
+              MessageBox.Show("Config file not found !  \n The config file you have set cannot be found ! Please correct your settings.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              return;
+            }
+            else
+              configParam = txtAMCUpd_cnf.Text;
+          }
+          else
+          {
+            if (!System.IO.File.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml"))
+            {
+              MessageBox.Show("Cannot launch AMC Updater !  \n You first have to create a config for AMCupdater (create Default Config on AMC Updater Tab) !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              return;
+            }
+            else
+              configParam = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
+          }
+
+
           string shortcutFile = deskDir + @"\AMC-Updater (" + Config_Name.Text + ")" + ".lnk";
           string soureFile = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe";
           string description = "AMC: '" + Config_Name.Text + "'";
 
-          string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+          string arguments = configParam + " " + "LogDirectory" + " " + "GUI";
 
           //string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + " " + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\"" + " " + "\"" + "GUI\"";
           string hotKey = String.Empty;
           string workingDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
 
           if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url"))
-            try
-            {
-              System.IO.File.Delete(deskDir + "\\" + linkName + ".url");
-            }
-            catch
-            {
-            }
+            try { System.IO.File.Delete(deskDir + "\\" + linkName + ".url"); }
+            catch { }
 
           try
           {
@@ -4250,7 +4268,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           LogMyFilms.Debug("Setup - Successfully created Desktop Icon for '" + linkName + "'");
           if (!WizardActive)
-            MessageBox.Show("Successfully created Desktop Icon for " + linkName + "", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Successfully created Desktop Icon for " + linkName + " \n Linked Config File: " + configParam, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -4961,7 +4979,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
 
           // Create Desktop Icon for AMCupdater with config created...
-          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) // only for YMC configs
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) // only for AMC configs
             CreateAMCDesktopIcon();
 
           // Change Config to selected catalog type
