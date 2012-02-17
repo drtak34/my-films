@@ -89,6 +89,7 @@
     <String id="1079835">Are you sure you want to delete movie ?</String>
     <String id="1079839">Reverse names ({0})</String>
     <String id="1079840">Choose user profile ('{0}')</String>
+    <String id="1079843">Userdefined DB Update (AMCupdater)</String>
     <String id="1079844">Show indexed values ({0})</String>
     <String id="1079845">Don't split values ({0})</String>
     <String id="1079846">Done ...</String>

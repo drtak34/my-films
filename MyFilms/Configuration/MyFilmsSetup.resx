@@ -408,6 +408,16 @@ Make sure the configuration you choose for this matches your needs.
 Note: You can always launch AMCupdater from within MyFilms anytime you wish and let it import movies in the background.
 If you prefer that, you do NOT require to schedule a task via scheduler.</value>
   </data>
+  <data name="label28.ToolTip" xml:space="preserve">
+    <value>You can define, what AMCUpdater config file should be used.
+This applies to:
+- Launching Global Import in MyFilms GUI
+- Launching AMCUpdater via "Import" button in setup
+- Launching AMCUpdater via desktop icon
+
+Note: If you changed this setting, you have to "(re)create Desktop Icon" 
+to update the link - otherwise, it won't use the new config file you've set.</value>
+  </data>
   <data name="AmcTitleSearchHandling.ToolTip" xml:space="preserve">
     <value>Options are:
 File Name: use file name for title field
@@ -430,7 +440,7 @@ If you have your movie files in folders, that have the movie title, select “fo
 This configuration is used, when you start AMCupdater from the setup or the created desktop icon.
 You might want to recreate this configuration, if you have changed settings in MyFilms setup and AMCupdater setup
 and want to create a new default setup.
-In normal usage this is not required, as saving MyFilms coinfig also pushes changes to AMCupdater config file.
+In normal usage this is not required, as saving MyFilms config also pushes changes to AMCupdater config file.
 Note: This will overwrite your existing AMC Updater settings file - so you'll lose customizations you made.</value>
   </data>
   <data name="chkAMC_Purge_Missing_Files.ToolTip" xml:space="preserve">
