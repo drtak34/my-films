@@ -2010,6 +2010,7 @@
           this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
           this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(272, 20);
           this.txtAMCUpd_cnf_Display.TabIndex = 62;
+          this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf_Display, resources.GetString("txtAMCUpd_cnf_Display.ToolTip"));
           // 
           // groupBox_AMCupdaterScheduer
           // 
