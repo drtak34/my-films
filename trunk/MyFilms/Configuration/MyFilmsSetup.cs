@@ -4148,20 +4148,36 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     
         private void launchAMCmanager()
         {
-          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
-          if (!System.IO.File.Exists(wfiledefault + "_" + Config_Name.Text + ".xml"))
+          string configParam = "";
+          if (!string.IsNullOrEmpty(txtAMCUpd_cnf.Text))
           {
-            MessageBox.Show("Cannot launch AMC Updater !  \n You first have to create a config for AMCupdater (create Default Config on AMC Updater Tab) !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            return;
+            if (!System.IO.File.Exists(txtAMCUpd_cnf.Text))
+            {
+              MessageBox.Show("Cannot launch AMC Updater !  \n The config file you have set cannot be found ! Please correct your settings.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              return;
+            }
+            else 
+              configParam = txtAMCUpd_cnf.Text;
           }
-          
+          else
+          {
+            if (!System.IO.File.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml"))
+            {
+              MessageBox.Show("Cannot launch AMC Updater !  \n You first have to create a config for AMCupdater (create Default Config on AMC Updater Tab) !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              return;
+            }
+            else
+              configParam = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
+          }
+
           using (Process p = new Process())
           {
             ProcessStartInfo psi = new ProcessStartInfo();
             psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe";
             psi.UseShellExecute = true;
             psi.WindowStyle = ProcessWindowStyle.Normal;
-            psi.Arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+            psi.Arguments = "\"" + configParam + "\"" + " " + "LogDirectory" + " " + "GUI";
+
             //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
             psi.ErrorDialog = true;
             if (OSInfo.OSInfo.VistaOrLater())
@@ -5886,6 +5902,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntViewsImage.ImageLocation = "";
           viewBindingSource.EndEdit();
         }
+
       }
 
       public static class BindingSourceExtension

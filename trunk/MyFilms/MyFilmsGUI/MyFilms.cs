@@ -11918,7 +11918,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       // BackgroundWorker worker = sender as BackgroundWorker;
       // MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
-      string exeName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe"; 
+      string exeName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe";
       string argsLine = "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
       //static public void RunAMCupdater(string exeName, string argsLine)
       if (exeName.Length > 0)
