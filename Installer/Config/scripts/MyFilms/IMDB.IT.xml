@@ -63,6 +63,7 @@
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
+      <KeyEncodingLinkImg />
       <KeyStartRate Param1="" Param2="">_x003C_div_x0020_class_x003D__x0022_starbar-meta_x0022__x003E_</KeyStartRate>
       <KeyEndRate>_x002F_</KeyEndRate>
       <KeyRateIndex />
@@ -119,6 +120,7 @@
       <KeyEndLinkPersons>_x002F__x003E_</KeyEndLinkPersons>
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
+      <KeyEncodingLinkPersons />
       <KeyStartComment Param1="_x0023_REGEX_x0023__x003C_br_x002F__x003E__x003C_br_x002F__x003E_" Param2="_x0020__x003C_p_x003E__x003C__x002F_p_x003E_">_x0023_REGEX_x0023_Autor._x002A__x003F_:</KeyStartComment>
       <KeyEndComment>_x003C_div_x0020_class_x003D__x0022_</KeyEndComment>
       <KeyCommentRegExp />
@@ -143,18 +145,22 @@
       <KeyEndLinkTitles>_x002F__x003E_</KeyEndLinkTitles>
       <KeyLinkTitlesIndex />
       <KeyLinkTitlesPage />
+      <KeyEncodingLinkTitles />
       <KeyStartLinkCertification Param1="" Param2="" />
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
       <KeyLinkCertificationPage />
+      <KeyEncodingLinkCertification />
       <KeyStartLinkComment Param1="" Param2="" />
       <KeyEndLinkComment />
       <KeyLinkCommentIndex />
       <KeyLinkCommentPage />
+      <KeyEncodingLinkComment />
       <KeyStartDetails2 Param1="" Param2="" />
       <KeyEndDetails2 />
       <KeyDetails2Index />
       <KeyDetails2Page />
+      <KeyEncodingDetails2 />
       <KeyStartStudio Param1="" Param2="" />
       <KeyEndStudio />
       <KeyStudioIndex />
@@ -179,14 +185,17 @@
       <KeyEndLinkSyn>_x002F__x0022__x0020__x002F__x003E_</KeyEndLinkSyn>
       <KeyLinkSynIndex />
       <KeyLinkSynPage />
+      <KeyEncodingLinkSyn />
       <KeyStartLinkGeneric1 Param1="_x002E_es_x002F_" Param2="_x002E_en_x002F_">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_</KeyStartLinkGeneric1>
       <KeyEndLinkGeneric1>_x0022__x0020__x002F__x003E_</KeyEndLinkGeneric1>
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page />
+      <KeyEncodingLinkGeneric1 />
       <KeyStartLinkGeneric2 Param1="" Param2="" />
       <KeyEndLinkGeneric2 />
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
+      <KeyEncodingLinkGeneric2 />
       <KeyStartGeneric1 Param1="" Param2="" />
       <KeyEndGeneric1 />
       <KeyGeneric1Index />
@@ -212,6 +221,7 @@
       <KeyEndLinkMultiPosters />
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
+      <KeyEncodingLinkMultiPosters />
       <KeyStartMultiPosters Param1="" Param2="" />
       <KeyEndMultiPosters />
       <KeyMultiPostersIndex />
@@ -223,6 +233,7 @@
       <KeyEndLinkPhotos />
       <KeyLinkPhotosIndex />
       <KeyLinkPhotosPage />
+      <KeyEncodingLinkPhotos />
       <KeyStartPhotos Param1="" Param2="" />
       <KeyEndPhotos />
       <KeyPhotosIndex />
@@ -234,6 +245,7 @@
       <KeyEndLinkPersonImages />
       <KeyLinkPersonImagesIndex />
       <KeyLinkPersonImagesPage />
+      <KeyEncodingLinkPersonImages />
       <KeyStartPersonImages Param1="" Param2="" />
       <KeyEndPersonImages />
       <KeyPersonImagesIndex />
@@ -245,6 +257,7 @@
       <KeyEndLinkMultiFanart />
       <KeyLinkMultiFanartIndex />
       <KeyLinkMultiFanartPage />
+      <KeyEncodingLinkMultiFanart />
       <KeyStartMultiFanart Param1="" Param2="" />
       <KeyEndMultiFanart />
       <KeyMultiFanartIndex />
@@ -256,6 +269,7 @@
       <KeyEndLinkTrailer />
       <KeyLinkTrailerIndex />
       <KeyLinkTrailerPage />
+      <KeyEncodingLinkTrailer />
       <KeyStartTrailer Param1="" Param2="" />
       <KeyEndTrailer />
       <KeyTrailerIndex />
