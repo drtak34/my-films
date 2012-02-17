@@ -2334,6 +2334,7 @@ Public Class Form1
         CurrentSettings.Override_Path = txtOverridePath.Text
         CurrentSettings.Overwrite_XML_File = chkOverwriteXML.Checked
         CurrentSettings.Purge_Missing_Files = chkPurgeMissing.Checked
+        CurrentSettings.Purge_Missing_Files_When_Source_Unavailable = chkPurgeMissingAlways.Checked
         CurrentSettings.RegEx_Check_For_MultiPart_Files = txtRegExSearchMultiPart.Text
         CurrentSettings.Scan_For_DVD_Folders = chkCheckDVDFolders.Checked
         CurrentSettings.Store_Short_Names_Only = chkShortNames.Checked
@@ -2512,6 +2513,12 @@ Public Class Form1
             txtOverridePath.Text = CurrentSettings.Override_Path
             chkOverwriteXML.Checked = CurrentSettings.Overwrite_XML_File
             chkPurgeMissing.Checked = CurrentSettings.Purge_Missing_Files
+            If (chkPurgeMissing.Checked) Then
+                chkPurgeMissingAlways.Enabled = True
+            Else
+                chkPurgeMissingAlways.Enabled = False
+            End If
+            chkPurgeMissingAlways.Checked = CurrentSettings.Purge_Missing_Files_When_Source_Unavailable
             txtRegExSearchMultiPart.Text = CurrentSettings.RegEx_Check_For_MultiPart_Files
             chkCheckDVDFolders.Checked = CurrentSettings.Scan_For_DVD_Folders
             chkShortNames.Checked = CurrentSettings.Store_Short_Names_Only
@@ -3280,6 +3287,13 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub chkPurgeMissing_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPurgeMissing.CheckedChanged
+        If (chkPurgeMissing.Checked) Then
+            chkPurgeMissingAlways.Enabled = True
+        Else
+            chkPurgeMissingAlways.Enabled = False
+        End If
+    End Sub
 End Class
 
 
