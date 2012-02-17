@@ -6960,6 +6960,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               dlg2.Add(GUILocalizeStrings.Get(1079861)); // Update Database with external AMCupdater
               choiceViewGlobalUpdates.Add("updatedb");
+
+              if (MyFilmsDetail.ExtendedStartmode("Global AMCU Custom Update")) // check if specialmode is configured for disabled features
+              {
+                dlg2.Add(GUILocalizeStrings.Get(1079843)); // Userdefined DB Update (AMCUpdater)
+                // Search all personinfos
+                choiceViewGlobalUpdates.Add("updatedbselect");
+              }
             }
           }
 
@@ -7001,7 +7008,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg3 == null) return;
           dlg3.Reset();
           dlg3.SetHeading(GUILocalizeStrings.Get(10798771)); // Display options ...
-          System.Collections.Generic.List<string> choiceGlobalMappings = new System.Collections.Generic.List<string>();
+          List<string> choiceGlobalMappings = new List<string>();
 
           dlg3.Add(
             GUILocalizeStrings.Get(10798773) + " 1 (" + MyFilms.conf.Stritem1 + "-" + MyFilms.conf.Strlabel1 + ")");
@@ -7288,10 +7295,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgRating.DoModal(GetID);
 
           MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.InvariantCulture);
-          XmlConfig.WriteXmlConfig(
-            "MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
-          LogMyFilms.Info(
-            "(FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
+          LogMyFilms.Info("(FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           if (GlobalFilterMinRating)
           {
@@ -7316,8 +7321,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Launch IsOnlineCheck in batch mode
           if (bgIsOnlineCheck.IsBusy)
           {
-            ShowMessageDialog(GUILocalizeStrings.Get(1079850), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330));
-              //action already launched
+            ShowMessageDialog(GUILocalizeStrings.Get(1079850), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
             break;
           }
           AsynIsOnlineCheck();
@@ -7329,20 +7333,65 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (bgUpdateDB.IsBusy)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330));
-              //action already launched
+            //action already launched
             break;
           }
           if (MyFilmsDetail.GlobalLockIsActive(MyFilms.conf.StrFileXml))
           {
             ShowMessageDialog(
               GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(1079854), GUILocalizeStrings.Get(330));
-              //movie db already in use (locked)
+            //movie db already in use (locked)
             break;
           }
-          AsynUpdateDatabase();
+          AsynUpdateDatabase("");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
 
+        case "updatedbselect":
+          // Launch AMCUpdater in batch mode with selection of profile - e.g. to only update values etc.
+          if (bgUpdateDB.IsBusy)
+          {
+            ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
+            break;
+          }
+          if (MyFilmsDetail.GlobalLockIsActive(MyFilms.conf.StrFileXml))
+          {
+            ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(1079854), GUILocalizeStrings.Get(330)); //movie db already in use (locked)
+            break;
+          }
+          string selectedprofile = "";
+
+          GUIDialogMenu dlgprofile = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlgprofile == null) return;
+          dlgprofile.Reset();
+          dlgprofile.SetHeading(GUILocalizeStrings.Get(1079843)); // Userdefined DB Update (AMCUpdater)
+          List<string> choiceAMCconfig = new List<string>();
+          
+          DirectoryInfo dirsInf = new DirectoryInfo(MyFilms.conf.StrAMCUpd_cnf.Substring(0, MyFilms.conf.StrAMCUpd_cnf.LastIndexOf("\\")));
+          bool isMePoDataDir = (MyFilms.conf.StrAMCUpd_cnf.Substring(0, MyFilms.conf.StrAMCUpd_cnf.LastIndexOf("\\")) == Config.GetDirectoryInfo(Config.Dir.Config).ToString());
+          FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
+
+          foreach (FileSystemInfo sfi in sfiles)
+          {
+            if (sfi.Extension.ToLower() == ".xml" && (sfi.Name.StartsWith("MyFilmsAMCSettings")) || !isMePoDataDir)
+            {
+              dlgprofile.Add(sfi.Name);
+              choiceAMCconfig.Add(sfi.FullName);
+              LogMyFilms.Info("Custom AMCupdater update) - Add config: '" + sfi.FullName + "'");
+            }
+          }
+
+          dlgprofile.DoModal(GetID);
+          if (dlgprofile.SelectedLabel == -1) return;
+          //int selection = dlgprofile.SelectedLabel;
+          selectedprofile = choiceAMCconfig[dlgprofile.SelectedLabel];
+          dlgprofile.Reset();
+          choiceAMCconfig.Clear();
+          
+          AsynUpdateDatabase(selectedprofile);
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          break;
+        
         case "cancelupdatedb":
           // stop background worker
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
@@ -11897,12 +11946,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  Update Database in batch mode                                                        *
     //*****************************************************************************************
-    public void AsynUpdateDatabase()
+    public void AsynUpdateDatabase(string config)
     {
+      LogMyFilms.Info("AsynUpdateDatabase() - Launch global AMCU update with config = '" + config + "'");
       if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
       {
         MyFilmsDetail.SetGlobalLock(true, MyFilms.conf.StrFileXml); // also disabled local FSwatcher
-        bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
+        bgUpdateDB.RunWorkerAsync(config); // bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
         if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
         {
@@ -11919,7 +11969,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // BackgroundWorker worker = sender as BackgroundWorker;
       // MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
       string exeName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe";
-      string argsLine = "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
+      string amcConfig = (string.IsNullOrEmpty(e.Argument.ToString()))
+                   ? "\"" + MyFilms.conf.StrAMCUpd_cnf + "\""
+                   : "\"" + e.Argument.ToString() + "\"";
+      string argsLine = amcConfig + " " + "\"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
       //static public void RunAMCupdater(string exeName, string argsLine)
       if (exeName.Length > 0)
       {

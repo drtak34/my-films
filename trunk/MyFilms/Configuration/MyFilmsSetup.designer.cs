@@ -2055,6 +2055,7 @@
           this.label28.Size = new System.Drawing.Size(90, 13);
           this.label28.TabIndex = 56;
           this.label28.Text = "AMCU Config File";
+          this.ToolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
           // 
           // groupBox_AMCupdater_ExternalApplication
           // 
