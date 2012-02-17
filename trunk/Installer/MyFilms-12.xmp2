@@ -2983,6 +2983,15 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
           </Items>
         </Files>
       </GroupItem>
+      <GroupItem Name="DesktopShortcuts">
+        <ParentGroup />
+        <DisplayName>Desktop Shortcuts</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Will create Shortcuts on your desktop for MyFilms Setup and Grabber Interface</Description>
+        <Files>
+          <Items />
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -3051,6 +3060,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
         </Actions>
         <IncludedGroups>
           <string>Default</string>
+          <string>DesktopShortcuts</string>
           <string>SampleMovies</string>
         </IncludedGroups>
         <PanelName>Tree View Selector</PanelName>
@@ -3133,7 +3143,7 @@ public class Script
               </Params>
               <ExecuteLocation>AfterPanelShow</ExecuteLocation>
             </ActionItem>
-            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="Default">
+            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="DesktopShortcuts">
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
@@ -3161,7 +3171,7 @@ public class Script
               </Params>
               <ExecuteLocation>AfterPanelShow</ExecuteLocation>
             </ActionItem>
-            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="Default">
+            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="DesktopShortcuts">
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
@@ -3237,7 +3247,7 @@ public class Script
               </Params>
               <ExecuteLocation>AfterPanelShow</ExecuteLocation>
             </ActionItem>
-            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="Default">
+            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="DesktopShortcuts">
               <Params>
                 <Items>
                   <SectionParam Name="ShortCut location">
@@ -3620,10 +3630,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3640,7 +3650,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1904</Revision>
+      <Revision>1974</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3652,7 +3662,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-01-25T04:41:03.0270715+01:00</ReleaseDate>
+    <ReleaseDate>2012-02-15T06:00:06.1512178+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
