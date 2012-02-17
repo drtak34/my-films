@@ -65,6 +65,7 @@
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
+      <KeyEncodingLinkImg />
       <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003C_li_x0020_class_x003D__x0022_current-rating_x0022_._x002A__x003F__x0022__x003E_._x002A__x003F__x0020_</KeyStartRate>
       <KeyEndRate>_x0023_REGEX_x0023_._x002F_10</KeyEndRate>
       <KeyRateIndex />
@@ -121,6 +122,7 @@
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
+      <KeyEncodingLinkPersons />
       <KeyStartComment Param1="_x0023_REGEX_x0023__x005B__x005C__x007C__x005D__x005B__x0020__x005D__x007C__x003C_br._x002A__x003F__x003E__x007C__x003C_div._x002A__x003F__x003C__x002F_div_x003E__x007C__x003C_div_x0020_style_x003D_._x002A__x003F__x003C__x002F_div_x003E_" Param2="">_x0023_REGEX_x0023__x003C_h1_x003E_._x002A__x003F__x003C__x002F_li_x003E_</KeyStartComment>
       <KeyEndComment>_x0023_REGEX_x0023_BEWERTUNG</KeyEndComment>
       <KeyCommentRegExp>_x003C_li_x0020_class_x003D__x0022_c5b_x0022__x003E__x003C_h2_x003E_._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C_.._x0020_class_x003D__x0022_leer_x0022__x003E_</KeyCommentRegExp>
@@ -145,18 +147,22 @@
       <KeyEndLinkTitles />
       <KeyLinkTitlesIndex />
       <KeyLinkTitlesPage />
+      <KeyEncodingLinkTitles />
       <KeyStartLinkCertification Param1="" Param2="" />
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
       <KeyLinkCertificationPage />
+      <KeyEncodingLinkCertification />
       <KeyStartLinkComment Param1="_x0023_REVERSE_x0023__x002F_kino" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino">_x0022__x003E_Filmkritik</KeyStartLinkComment>
       <KeyEndLinkComment>href_x003D__x0022_</KeyEndLinkComment>
       <KeyLinkCommentIndex />
       <KeyLinkCommentPage />
+      <KeyEncodingLinkComment />
       <KeyStartDetails2 Param1="" Param2="" />
       <KeyEndDetails2 />
       <KeyDetails2Index />
       <KeyDetails2Page />
+      <KeyEncodingDetails2 />
       <KeyStartStudio Param1="" Param2="">_x003C_dt_x0020_class_x003D__x0022_c1_x0022__x003E_Studio:_x003C__x002F_dt_x003E_</KeyStartStudio>
       <KeyEndStudio>_x003C__x002F_dd_x003E_</KeyEndStudio>
       <KeyStudioIndex />
@@ -181,14 +187,17 @@
       <KeyEndLinkSyn />
       <KeyLinkSynIndex />
       <KeyLinkSynPage />
+      <KeyEncodingLinkSyn />
       <KeyStartLinkGeneric1 Param1="" Param2="" />
       <KeyEndLinkGeneric1 />
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page />
+      <KeyEncodingLinkGeneric1 />
       <KeyStartLinkGeneric2 Param1="" Param2="" />
       <KeyEndLinkGeneric2 />
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
+      <KeyEncodingLinkGeneric2 />
       <KeyStartGeneric1 Param1="" Param2="" />
       <KeyEndGeneric1 />
       <KeyGeneric1Index />
@@ -214,6 +223,7 @@
       <KeyEndLinkMultiPosters />
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
+      <KeyEncodingLinkMultiPosters />
       <KeyStartMultiPosters Param1="" Param2="" />
       <KeyEndMultiPosters />
       <KeyMultiPostersIndex />
@@ -225,6 +235,7 @@
       <KeyEndLinkPhotos />
       <KeyLinkPhotosIndex />
       <KeyLinkPhotosPage />
+      <KeyEncodingLinkPhotos />
       <KeyStartPhotos Param1="" Param2="" />
       <KeyEndPhotos />
       <KeyPhotosIndex />
@@ -236,6 +247,7 @@
       <KeyEndLinkPersonImages />
       <KeyLinkPersonImagesIndex />
       <KeyLinkPersonImagesPage />
+      <KeyEncodingLinkPersonImages />
       <KeyStartPersonImages Param1="" Param2="" />
       <KeyEndPersonImages />
       <KeyPersonImagesIndex />
@@ -247,6 +259,7 @@
       <KeyEndLinkMultiFanart />
       <KeyLinkMultiFanartIndex />
       <KeyLinkMultiFanartPage />
+      <KeyEncodingLinkMultiFanart />
       <KeyStartMultiFanart Param1="" Param2="" />
       <KeyEndMultiFanart />
       <KeyMultiFanartIndex />
@@ -258,6 +271,7 @@
       <KeyEndLinkTrailer />
       <KeyLinkTrailerIndex />
       <KeyLinkTrailerPage />
+      <KeyEncodingLinkTrailer />
       <KeyStartTrailer Param1="" Param2="" />
       <KeyEndTrailer />
       <KeyTrailerIndex />

@@ -1133,6 +1133,7 @@ namespace Grabber_Interface
       string strParam2 = string.Empty;
       string strIndex = string.Empty;
       string strPage = string.Empty;
+      string strEncoding = string.Empty;
       string strActivePage = string.Empty;
 
       URLBodyDetail = string.Empty;
@@ -1222,6 +1223,8 @@ namespace Grabber_Interface
         strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
         strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
         strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Page)._Value;
+        try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingDetails2)._Value; }
+        catch (Exception) { strPage = ""; }
 
         strActivePage = this.LoadPage(strPage);
         if (strStart.Length > 0)
@@ -1232,7 +1235,7 @@ namespace Grabber_Interface
           else
             strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
           URLBodyDetail2 = strTemp;
-          BodyDetail2 = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+          BodyDetail2 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
         }
         else
           BodyDetail2 = "";
@@ -1255,6 +1258,9 @@ namespace Grabber_Interface
         strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param2;
         strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Index)._Value;
         strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Page)._Value;
+        try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric1)._Value; }
+        catch (Exception) { strPage = ""; }
+
         strActivePage = this.LoadPage(strPage);
         if (strStart.Length > 0)
         {
@@ -1264,7 +1270,7 @@ namespace Grabber_Interface
           else
             strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
           URLBodyLinkGeneric1 = strTemp;
-          BodyLinkGeneric1 = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+          BodyLinkGeneric1 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
         }
         else
           BodyLinkGeneric1 = "";
@@ -1287,6 +1293,9 @@ namespace Grabber_Interface
         strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param2;
         strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Index)._Value;
         strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Page)._Value;
+        try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric2)._Value; }
+        catch (Exception) { strEncoding = ""; }
+        
         strActivePage = this.LoadPage(strPage);
         if (strStart.Length > 0)
         {
@@ -1296,7 +1305,7 @@ namespace Grabber_Interface
           else
             strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
           URLBodyLinkGeneric2 = strTemp;
-          BodyLinkGeneric2 = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+          BodyLinkGeneric2 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
         }
         else
           BodyLinkGeneric2 = "";
@@ -1317,6 +1326,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkImg)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1326,7 +1338,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkImg = strTemp;
-        BodyLinkImg = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkImg = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkImg = "";
@@ -1342,6 +1354,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersons)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1351,7 +1366,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkPersons = strTemp;
-        BodyLinkPersons = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkPersons = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkPersons = "";
@@ -1367,6 +1382,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTitles)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1376,7 +1394,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkTitles = strTemp;
-        BodyLinkTitles = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkTitles = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkTitles = "";
@@ -1392,6 +1410,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkCertification)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1401,7 +1422,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkCertification = strTemp;
-        BodyLinkCertification = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkCertification = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkCertification = "";
@@ -1417,6 +1438,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkSyn)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1426,7 +1450,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkSyn = strTemp;
-        BodyLinkSyn = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkSyn = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkSyn = "";
@@ -1442,6 +1466,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkComment)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1451,7 +1478,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkComment = strTemp;
-        BodyLinkComment = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkComment = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkComment = "";
@@ -1467,6 +1494,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiPosters)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1476,7 +1506,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkMultiPosters = strTemp;
-        BodyLinkMultiPosters = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkMultiPosters = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkMultiPosters = "";
@@ -1492,6 +1522,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPhotos)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1501,7 +1534,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkPhotos = strTemp;
-        BodyLinkPhotos = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkPhotos = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkPhotos = "";
@@ -1517,6 +1550,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersonImages)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1526,7 +1562,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkPersonImages = strTemp;
-        BodyLinkPersonImages = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkPersonImages = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkPersonImages = "";
@@ -1542,6 +1578,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiFanart)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1551,7 +1590,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkMultiFanart = strTemp;
-        BodyLinkMultiFanart = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkMultiFanart = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkMultiFanart = "";
@@ -1567,6 +1606,9 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTrailer)._Value; }
+      catch (Exception) { strEncoding = ""; }
+
       strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
@@ -1576,7 +1618,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkTrailer = strTemp;
-        BodyLinkTrailer = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        BodyLinkTrailer = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
       }
       else
         BodyLinkTrailer = "";
@@ -1766,6 +1808,9 @@ namespace Grabber_Interface
       buttonPrevParamDetail.Visible = true;
       lblResult.Text = "Sub URL";
       //lblComplement.Text = "Complement";
+      lblEncodingSubPage.Visible = false;
+      EncodingSubPage.Visible = false;
+      EncodingSubPage.Text = "";
       if (!textBodyDetail.Text.Equals(BodyDetail))
         textBodyDetail.Text = BodyDetail;
 
@@ -2122,28 +2167,40 @@ namespace Grabber_Interface
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric3Index)._Value;
           break;
         case 26: // Link Secondary Details Base Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Page)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingDetails2)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 27: // Link Generic 1
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Page)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric1)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Index)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric1)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 28: // Link Generic 2
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Page)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric2)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Index)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric2)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 29: // Link Coverart-Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgPage)._Value;
@@ -2152,6 +2209,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkImg)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkImg)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 30: // Link Persons Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsPage)._Value;
@@ -2160,6 +2219,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersons)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersons)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 31: // Link Titles-Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesPage)._Value;
@@ -2168,6 +2229,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTitles)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTitles)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 32: // Link Certification-Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationPage)._Value;
@@ -2176,6 +2239,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkCertification)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkCertification)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 33: // Link Comment-Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentPage)._Value;
@@ -2184,6 +2249,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkComment)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 34: // Link Synopsis/Description-Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynPage)._Value;
@@ -2192,8 +2259,9 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkSyn)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
-
         case 35: // Link MultiPosters - Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1;
@@ -2201,6 +2269,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiPosters)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiPosters)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 36: // Link Photos - Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
@@ -2209,6 +2279,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPhotos)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPhotos)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 37: // Link PersonImages - Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
@@ -2217,6 +2289,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersonImages)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersonImages)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 38: // Link MultiFanart - Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
@@ -2225,6 +2299,8 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiFanart)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiFanart)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 39: // Link Trailer - Secondary Page
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
@@ -2233,8 +2309,9 @@ namespace Grabber_Interface
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTrailer)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value;
+          try { EncodingSubPage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTrailer)._Value; }
+          catch { EncodingSubPage.Text = string.Empty; };
           break;
-
         case 40: // MultiPosters
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersPage)._Value;
           lblLanguages.Visible = true;

@@ -361,6 +361,8 @@ public class TagName
   public static string KeyEndLinkImg = "KeyEndLinkImg";
   public static string KeyLinkImgIndex = "KeyLinkImgIndex";
   public static string KeyLinkImgPage = "KeyLinkImgPage";
+  public static string KeyEncodingLinkImg = "KeyEncodingLinkImg"; // Added Encoding as override options for webpages not properly posting page encoding
+
   public static string KeyStartRate = "KeyStartRate";           // Rating
   public static string KeyEndRate = "KeyEndRate";
   public static string KeyRateIndex = "KeyRateIndex";
@@ -374,6 +376,7 @@ public class TagName
   public static string KeyEndLinkSyn = "KeyEndLinkSyn";
   public static string KeyLinkSynIndex = "KeyLinkSynIndex";
   public static string KeyLinkSynPage = "KeyLinkSynPage";
+  public static string KeyEncodingLinkSyn = "KeyEncodingLinkSyn"; // Added Encoding as override options for webpages not properly posting page encoding
   
   public static string KeyStartSyn = "KeyStartSyn";             // Synopsis / Description
   public static string KeyEndSyn = "KeyEndSyn";
@@ -420,21 +423,26 @@ public class TagName
   public static string KeyEndLinkPersons = "KeyEndLinkPersons";
   public static string KeyLinkPersonsIndex = "KeyLinkPersonsIndex";
   public static string KeyLinkPersonsPage = "KeyLinkPersonsPage";
+  public static string KeyEncodingLinkPersons = "KeyEncodingLinkPersons"; // Added Encoding as override options for webpages not properly posting page encoding
   
   public static string KeyStartLinkTitles = "KeyStartLinkTitles";
   public static string KeyEndLinkTitles = "KeyEndLinkTitles";
   public static string KeyLinkTitlesIndex = "KeyLinkTitlesIndex";
   public static string KeyLinkTitlesPage = "KeyLinkTitlesPage";
+  public static string KeyEncodingLinkTitles = "KeyEncodingLinkTitles"; // Added Encoding as override options for webpages not properly posting page encoding
 
   public static string KeyStartLinkCertification = "KeyStartLinkCertification";
   public static string KeyEndLinkCertification = "KeyEndLinkCertification";
   public static string KeyLinkCertificationIndex = "KeyLinkCertificationIndex";
   public static string KeyLinkCertificationPage = "KeyLinkCertificationPage";
+  public static string KeyEncodingLinkCertification = "KeyEncodingLinkCertification"; // Added Encoding as override options for webpages not properly posting page encoding
 
   public static string KeyStartLinkComment = "KeyStartLinkComment"; // Comment Link Page
   public static string KeyEndLinkComment = "KeyEndLinkComment";
   public static string KeyLinkCommentIndex = "KeyLinkCommentIndex";
   public static string KeyLinkCommentPage = "KeyLinkCommentPage";
+  public static string KeyEncodingLinkComment = "KeyEncodingLinkComment"; // Added Encoding as override options for webpages not properly posting page encoding
+
 
   public static string KeyStartComment = "KeyStartComment";     // Comment
   public static string KeyEndComment = "KeyEndComment";
@@ -483,20 +491,24 @@ public class TagName
   public static string KeyTMDB_IdIndex = "KeyTMDB_IdIndex";
   public static string KeyTMDB_IdPage = "KeyTMDB_IdPage";
 
-  // secondary Details page - will be loaded forst and is available for all fields as option
+  // secondary Details page - will be loaded first and is available for all fields as option
   public static string KeyStartDetails2 = "KeyStartDetails2";     // Details2
   public static string KeyEndDetails2 = "KeyEndDetails2";
   public static string KeyDetails2Index = "KeyDetails2Index";
   public static string KeyDetails2Page = "KeyDetails2Page";
+  public static string KeyEncodingDetails2 = "KeyEncodingDetails2"; // Added Encoding as override options for webpages not properly posting page encoding
 
   public static string KeyStartLinkGeneric1 = "KeyStartLinkGeneric1"; // Generic Link Page 1
   public static string KeyEndLinkGeneric1 = "KeyEndLinkGeneric1";
   public static string KeyLinkGeneric1Index = "KeyLinkGeneric1Index";
   public static string KeyLinkGeneric1Page = "KeyLinkGeneric1Page";
+  public static string KeyEncodingLinkGeneric1 = "KeyEncodingLinkGeneric1"; // Added Encoding as override options for webpages not properly posting page encoding
+
   public static string KeyStartLinkGeneric2 = "KeyStartLinkGeneric2"; // Generic Link Page 2
   public static string KeyEndLinkGeneric2 = "KeyEndLinkGeneric2";
   public static string KeyLinkGeneric2Index = "KeyLinkGeneric2Index";
   public static string KeyLinkGeneric2Page = "KeyLinkGeneric2Page";
+  public static string KeyEncodingLinkGeneric2 = "KeyEncodingLinkGeneric2"; // Added Encoding as override options for webpages not properly posting page encoding
 
   // Generic Fields
   public static string KeyStartGeneric1 = "KeyStartGeneric1";     // Generic Fields 1
@@ -538,6 +550,8 @@ public class TagName
   public static string KeyEndLinkMultiPosters = "KeyEndLinkMultiPosters";
   public static string KeyLinkMultiPostersIndex = "KeyLinkMultiPostersIndex";
   public static string KeyLinkMultiPostersPage = "KeyLinkMultiPostersPage";
+  public static string KeyEncodingLinkMultiPosters = "KeyEncodingLinkMultiPosters"; // Added Encoding as override options for webpages not properly posting page encoding
+
   public static string KeyStartMultiPosters = "KeyStartMultiPosters";     // MultiPosters 
   public static string KeyEndMultiPosters = "KeyEndMultiPosters";
   public static string KeyMultiPostersIndex = "KeyMultiPostersIndex";
@@ -550,6 +564,8 @@ public class TagName
   public static string KeyEndLinkPhotos = "KeyEndLinkPhotos";
   public static string KeyLinkPhotosIndex = "KeyLinkPhotosIndex";
   public static string KeyLinkPhotosPage = "KeyLinkPhotosPage";
+  public static string KeyEncodingLinkPhotos = "KeyEncodingLinkPhotos"; // Added Encoding as override options for webpages not properly posting page encoding
+
   public static string KeyStartPhotos = "KeyStartPhotos";     // Photos 
   public static string KeyEndPhotos = "KeyEndPhotos";
   public static string KeyPhotosIndex = "KeyPhotosIndex";
@@ -562,6 +578,8 @@ public class TagName
   public static string KeyEndLinkPersonImages = "KeyEndLinkPersonImages";
   public static string KeyLinkPersonImagesIndex = "KeyLinkPersonImagesIndex";
   public static string KeyLinkPersonImagesPage = "KeyLinkPersonImagesPage";
+  public static string KeyEncodingLinkPersonImages = "KeyEncodingLinkPersonImages"; // Added Encoding as override options for webpages not properly posting page encoding
+
   public static string KeyStartPersonImages = "KeyStartPersonImages";     // PersonImages 
   public static string KeyEndPersonImages = "KeyEndPersonImages";
   public static string KeyPersonImagesIndex = "KeyPersonImagesIndex";
@@ -574,6 +592,7 @@ public class TagName
   public static string KeyEndLinkMultiFanart = "KeyEndLinkMultiFanart";
   public static string KeyLinkMultiFanartIndex = "KeyLinkMultiFanartIndex";
   public static string KeyLinkMultiFanartPage = "KeyLinkMultiFanartPage";
+  public static string KeyEncodingLinkMultiFanart = "KeyEncodingLinkMultiFanart"; // Added Encoding as override options for webpages not properly posting page encoding
   public static string KeyStartMultiFanart = "KeyStartMultiFanart";     // MultiFanart 
   public static string KeyEndMultiFanart = "KeyEndMultiFanart";
   public static string KeyMultiFanartIndex = "KeyMultiFanartIndex";
@@ -586,6 +605,7 @@ public class TagName
   public static string KeyEndLinkTrailer = "KeyEndLinkTrailer";
   public static string KeyLinkTrailerIndex = "KeyLinkTrailerIndex";
   public static string KeyLinkTrailerPage = "KeyLinkTrailerPage";
+  public static string KeyEncodingLinkTrailer = "KeyEncodingLinkTrailer"; // Added Encoding as override options for webpages not properly posting page encoding
   public static string KeyStartTrailer = "KeyStartTrailer";     // Trailer 
   public static string KeyEndTrailer = "KeyEndTrailer";
   public static string KeyTrailerIndex = "KeyTrailerIndex";
