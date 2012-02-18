@@ -291,6 +291,12 @@ When scanning and importing new films, My Films (AMCUpdater) will limit the down
 You may alter these options in AMCU Settings on the Database Fields tab under picture handling. 
 You may also download additional fanart images from within My Films.</value>
   </data>
+  <data name="pictureBoxDefaultViewImage.ToolTip" xml:space="preserve">
+    <value>Click to select the image file that you wish to use as the default view image.  
+The default view image will be displayed for the "grouped" views, like "Country", "Year", etc.
+when a view does not have specific associated photo or image
+and it will be used as a default view image.</value>
+  </data>
   <data name="btnResetThumbs.ToolTip" xml:space="preserve">
     <value>That action will remove all generated cache thumbs for group views.
 (Your original images will not be deleted.)
@@ -320,6 +326,13 @@ for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
 The setting for this path is done via the Fanart path setting automatically; 
 See "Fanart for default group views - path" below.</value>
   </data>
+  <data name="pictureBoxDefaultCover.ToolTip" xml:space="preserve">
+    <value>Click to change Default Movie Cover.
+The default cover image will be displayed when a movie entry does not have an associated cover image
+and it will be used as a default fanart image if the appropriate Fanart option is selected in the ‘Picture’ section, 
+and a movie entry does not have an associated fanart image.
+</value>
+  </data>
   <data name="txtPicturePrefix.ToolTip" xml:space="preserve">
     <value>You can define a prefix for the cover images that will be 
 added to the image name.
@@ -346,13 +359,6 @@ If you do select a path that is NOT a subdir of the catalog file, this setting w
 If the Cover Images Path is the same as the catalog directory, 
 this setting should be "Relative Path" and only the image name will be stored in the catalog.</value>
   </data>
-  <data name="DefaultCover.ToolTip" xml:space="preserve">
-    <value>Enter the full path and file name of the image file that you wish to use as the default cover image.  
-You can use the browse button to select the file.  
-The default cover image will be displayed when a movie entry does not have an associated cover image
-and it will be used as a default fanart image if the appropriate Fanart option is selected in the ‘Picture’ section, 
-and a movie entry does not have an associated fanart image.</value>
-  </data>
   <data name="MesFilmsImg.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder containing the DVD cover image files – by default it is the same as the path to your database file.
 You can use the browse button to find the correct path.
@@ -369,6 +375,11 @@ This is mainly required, if you have only image names without full path stored i
 You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
 </value>
   </data>
+  <data name="pictureBoxDefaultPersonImage.ToolTip" xml:space="preserve">
+    <value>Click to select the image file that you wish to use as the default person image.  
+The default person image will be displayed when a person does not have an associated photo or image
+and it will be used as a default person image.</value>
+  </data>
   <data name="btnResetThumbsArtist.ToolTip" xml:space="preserve">
     <value>That action will remove all generated person image thumbs.
 (Your original images will not be deleted.)
@@ -381,18 +392,18 @@ with new ones to let MyFilms (re)create the cache.
 Matching will be done based on images filename that matches the person's name.
 You can use the browse button to find the correct path.</value>
   </data>
-  <data name="DefaultCoverArtist.ToolTip" xml:space="preserve">
-    <value>Enter the full path and file name of the image file that you wish to use as the default person image.  
-You can use the browse button to select the file.  
-The default person image will be displayed when a person does not have an associated photo or image
-and it will be used as a default person image.</value>
-  </data>
   <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
     <value>Use this area to define a path where artist thumbs (images for persons) should be stored.
 Works same way as cover images for movies.
 It is used for "person like" Views, like actors, director, producer, writer.</value>
   </data>
-  <data name="txtAMCUpd_cnf_Display.ToolTip" xml:space="preserve">
+  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
+    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
+MyFilms will create such a file for each Configuration Name.
+You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
+However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
+  </data>
+  <data name="groupBox8.ToolTip" xml:space="preserve">
     <value>You can define, what AMCUpdater config file should be used.
 This applies to:
 - Launching Global Import in MyFilms GUI
@@ -407,16 +418,6 @@ to update the link - otherwise, it won't use the new config file you've set.</va
 Make sure the configuration you choose for this matches your needs.
 Note: You can always launch AMCupdater from within MyFilms anytime you wish and let it import movies in the background.
 If you prefer that, you do NOT require to schedule a task via scheduler.</value>
-  </data>
-  <data name="label28.ToolTip" xml:space="preserve">
-    <value>You can define, what AMCUpdater config file should be used.
-This applies to:
-- Launching Global Import in MyFilms GUI
-- Launching AMCUpdater via "Import" button in setup
-- Launching AMCUpdater via desktop icon
-
-Note: If you changed this setting, you have to "(re)create Desktop Icon" 
-to update the link - otherwise, it won't use the new config file you've set.</value>
   </data>
   <data name="AmcTitleSearchHandling.ToolTip" xml:space="preserve">
     <value>Options are:
@@ -467,12 +468,6 @@ Loading data includes:
 - getting internet info via the selected internet grabber script
 - getting cover image via the selected internet grabber script
 - loading fanart</value>
-  </data>
-  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
-    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
-MyFilms will create such a file for each Configuration Name.
-You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
-However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,

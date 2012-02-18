@@ -176,13 +176,13 @@
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.btnLogoClearCache = new System.Windows.Forms.Button();
           this.Fanart = new System.Windows.Forms.GroupBox();
+          this.buttonDefaultFanartReset = new System.Windows.Forms.Button();
+          this.pictureBoxDefaultFanart = new System.Windows.Forms.PictureBox();
           this.chkFanartDefaultViewsUseRandom = new System.Windows.Forms.CheckBox();
           this.chkFanartDefaultViews = new System.Windows.Forms.CheckBox();
           this.chkDfltFanartImageAll = new System.Windows.Forms.CheckBox();
           this.label48 = new System.Windows.Forms.Label();
           this.chkDfltFanartImage = new System.Windows.Forms.CheckBox();
-          this.ButDefFanart = new System.Windows.Forms.Button();
-          this.DefaultFanartImage = new System.Windows.Forms.TextBox();
           this.lblResultingGroupViewsPathFanart = new System.Windows.Forms.Label();
           this.label40 = new System.Windows.Forms.Label();
           this.chkFanart = new System.Windows.Forms.CheckBox();
@@ -191,10 +191,11 @@
           this.labelFanart = new System.Windows.Forms.Label();
           this.chkDfltFanart = new System.Windows.Forms.CheckBox();
           this.groupBox22 = new System.Windows.Forms.GroupBox();
+          this.chkShowIndexedImgInIndViews = new System.Windows.Forms.CheckBox();
+          this.buttonDefaultViewImageReset = new System.Windows.Forms.Button();
+          this.pictureBoxDefaultViewImage = new System.Windows.Forms.PictureBox();
           this.chkDfltViewsAll = new System.Windows.Forms.CheckBox();
           this.label47 = new System.Windows.Forms.Label();
-          this.ButDefCovViews = new System.Windows.Forms.Button();
-          this.DefaultCoverViews = new System.Windows.Forms.TextBox();
           this.btnResetThumbs = new System.Windows.Forms.Button();
           this.chkViews = new System.Windows.Forms.CheckBox();
           this.btnViews = new System.Windows.Forms.Button();
@@ -202,32 +203,31 @@
           this.label29 = new System.Windows.Forms.Label();
           this.MesFilmsViews = new System.Windows.Forms.TextBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
+          this.buttonDefaultCoverReset = new System.Windows.Forms.Button();
+          this.pictureBoxDefaultCover = new System.Windows.Forms.PictureBox();
           this.lblPicturePrefix = new System.Windows.Forms.Label();
           this.txtPicturePrefix = new System.Windows.Forms.TextBox();
           this.lblPictureHandling = new System.Windows.Forms.Label();
           this.cbPictureHandling = new System.Windows.Forms.ComboBox();
-          this.ButDefCov = new System.Windows.Forms.Button();
-          this.DefaultCover = new System.Windows.Forms.TextBox();
           this.label_DefaulCover = new System.Windows.Forms.Label();
           this.ButImg = new System.Windows.Forms.Button();
           this.MesFilmsImg = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
           this.groupBox_ArtistImages = new System.Windows.Forms.GroupBox();
+          this.buttonDefaultPersonImageReset = new System.Windows.Forms.Button();
+          this.pictureBoxDefaultPersonImage = new System.Windows.Forms.PictureBox();
           this.chkPersons = new System.Windows.Forms.CheckBox();
           this.btnResetThumbsArtist = new System.Windows.Forms.Button();
           this.chkDfltArtist = new System.Windows.Forms.CheckBox();
-          this.ButDefCovArtist = new System.Windows.Forms.Button();
           this.ButImgArtist = new System.Windows.Forms.Button();
           this.MesFilmsImgArtist = new System.Windows.Forms.TextBox();
           this.label_DefaultArtistImage = new System.Windows.Forms.Label();
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
-          this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
           this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
           this.groupBox_AMCupdaterScheduer = new System.Windows.Forms.GroupBox();
           this.scheduleAMCUpdater = new System.Windows.Forms.CheckBox();
           this.btnParameters = new System.Windows.Forms.Button();
-          this.label28 = new System.Windows.Forms.Label();
           this.groupBox_AMCupdater_ExternalApplication = new System.Windows.Forms.GroupBox();
           this.label56 = new System.Windows.Forms.Label();
           this.AmcTitleSearchHandling = new System.Windows.Forms.ComboBox();
@@ -566,6 +566,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.groupBox8 = new System.Windows.Forms.GroupBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -590,9 +591,13 @@
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
           this.Fanart.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultFanart)).BeginInit();
           this.groupBox22.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultViewImage)).BeginInit();
           this.groupBox1.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultCover)).BeginInit();
           this.groupBox_ArtistImages.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).BeginInit();
           this.groupBox_AMCupdater.SuspendLayout();
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
@@ -650,6 +655,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          this.groupBox8.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -1481,13 +1487,13 @@
           // 
           // Fanart
           // 
+          this.Fanart.Controls.Add(this.buttonDefaultFanartReset);
+          this.Fanart.Controls.Add(this.pictureBoxDefaultFanart);
           this.Fanart.Controls.Add(this.chkFanartDefaultViewsUseRandom);
           this.Fanart.Controls.Add(this.chkFanartDefaultViews);
           this.Fanart.Controls.Add(this.chkDfltFanartImageAll);
           this.Fanart.Controls.Add(this.label48);
           this.Fanart.Controls.Add(this.chkDfltFanartImage);
-          this.Fanart.Controls.Add(this.ButDefFanart);
-          this.Fanart.Controls.Add(this.DefaultFanartImage);
           this.Fanart.Controls.Add(this.lblResultingGroupViewsPathFanart);
           this.Fanart.Controls.Add(this.label40);
           this.Fanart.Controls.Add(this.chkFanart);
@@ -1502,6 +1508,28 @@
           this.Fanart.TabStop = false;
           this.Fanart.Text = "Fanart ...";
           this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
+          // 
+          // buttonDefaultFanartReset
+          // 
+          this.buttonDefaultFanartReset.Location = new System.Drawing.Point(711, 11);
+          this.buttonDefaultFanartReset.Name = "buttonDefaultFanartReset";
+          this.buttonDefaultFanartReset.Size = new System.Drawing.Size(18, 18);
+          this.buttonDefaultFanartReset.TabIndex = 102;
+          this.buttonDefaultFanartReset.Text = "X";
+          this.ToolTip1.SetToolTip(this.buttonDefaultFanartReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
+          this.buttonDefaultFanartReset.UseVisualStyleBackColor = true;
+          // 
+          // pictureBoxDefaultFanart
+          // 
+          this.pictureBoxDefaultFanart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.pictureBoxDefaultFanart.Location = new System.Drawing.Point(639, 36);
+          this.pictureBoxDefaultFanart.Name = "pictureBoxDefaultFanart";
+          this.pictureBoxDefaultFanart.Size = new System.Drawing.Size(90, 52);
+          this.pictureBoxDefaultFanart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+          this.pictureBoxDefaultFanart.TabIndex = 82;
+          this.pictureBoxDefaultFanart.TabStop = false;
+          this.ToolTip1.SetToolTip(this.pictureBoxDefaultFanart, "Click to select default fanart image.");
+          this.pictureBoxDefaultFanart.Click += new System.EventHandler(this.pictureBoxDefaultFanart_Click);
           // 
           // chkFanartDefaultViewsUseRandom
           // 
@@ -1540,11 +1568,11 @@
           // label48
           // 
           this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(396, 58);
+          this.label48.Location = new System.Drawing.Point(592, 49);
           this.label48.Name = "label48";
-          this.label48.Size = new System.Drawing.Size(74, 13);
+          this.label48.Size = new System.Drawing.Size(41, 26);
           this.label48.TabIndex = 78;
-          this.label48.Text = "Default Fanart";
+          this.label48.Text = "Default\r\nFanart";
           // 
           // chkDfltFanartImage
           // 
@@ -1559,29 +1587,11 @@
           this.chkDfltFanartImage.UseVisualStyleBackColor = true;
           this.chkDfltFanartImage.CheckedChanged += new System.EventHandler(this.chkDfltFanartImage_CheckedChanged);
           // 
-          // ButDefFanart
-          // 
-          this.ButDefFanart.AllowDrop = true;
-          this.ButDefFanart.Location = new System.Drawing.Point(625, 54);
-          this.ButDefFanart.Name = "ButDefFanart";
-          this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
-          this.ButDefFanart.TabIndex = 76;
-          this.ButDefFanart.Text = "...";
-          this.ButDefFanart.UseVisualStyleBackColor = true;
-          this.ButDefFanart.Click += new System.EventHandler(this.ButDefFanart_Click);
-          // 
-          // DefaultFanartImage
-          // 
-          this.DefaultFanartImage.Location = new System.Drawing.Point(511, 54);
-          this.DefaultFanartImage.Name = "DefaultFanartImage";
-          this.DefaultFanartImage.Size = new System.Drawing.Size(108, 20);
-          this.DefaultFanartImage.TabIndex = 75;
-          // 
           // lblResultingGroupViewsPathFanart
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(508, 101);
+          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(452, 101);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
@@ -1593,7 +1603,7 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(396, 101);
+          this.label40.Location = new System.Drawing.Point(352, 101);
           this.label40.Name = "label40";
           this.label40.Size = new System.Drawing.Size(93, 13);
           this.label40.TabIndex = 73;
@@ -1613,7 +1623,7 @@
           // btnFanart
           // 
           this.btnFanart.Enabled = false;
-          this.btnFanart.Location = new System.Drawing.Point(625, 15);
+          this.btnFanart.Location = new System.Drawing.Point(569, 16);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
           this.btnFanart.TabIndex = 70;
@@ -1624,7 +1634,7 @@
           // MesFilmsFanart
           // 
           this.MesFilmsFanart.Enabled = false;
-          this.MesFilmsFanart.Location = new System.Drawing.Point(511, 15);
+          this.MesFilmsFanart.Location = new System.Drawing.Point(455, 15);
           this.MesFilmsFanart.Name = "MesFilmsFanart";
           this.MesFilmsFanart.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsFanart.TabIndex = 68;
@@ -1632,7 +1642,7 @@
           // labelFanart
           // 
           this.labelFanart.AutoSize = true;
-          this.labelFanart.Location = new System.Drawing.Point(396, 18);
+          this.labelFanart.Location = new System.Drawing.Point(383, 19);
           this.labelFanart.Name = "labelFanart";
           this.labelFanart.Size = new System.Drawing.Size(62, 13);
           this.labelFanart.TabIndex = 69;
@@ -1652,28 +1662,64 @@
           // 
           // groupBox22
           // 
+          this.groupBox22.Controls.Add(this.chkShowIndexedImgInIndViews);
+          this.groupBox22.Controls.Add(this.buttonDefaultViewImageReset);
+          this.groupBox22.Controls.Add(this.pictureBoxDefaultViewImage);
           this.groupBox22.Controls.Add(this.chkDfltViewsAll);
           this.groupBox22.Controls.Add(this.label47);
-          this.groupBox22.Controls.Add(this.ButDefCovViews);
-          this.groupBox22.Controls.Add(this.DefaultCoverViews);
           this.groupBox22.Controls.Add(this.btnResetThumbs);
           this.groupBox22.Controls.Add(this.chkViews);
           this.groupBox22.Controls.Add(this.btnViews);
           this.groupBox22.Controls.Add(this.chkDfltViews);
           this.groupBox22.Controls.Add(this.label29);
           this.groupBox22.Controls.Add(this.MesFilmsViews);
-          this.groupBox22.Location = new System.Drawing.Point(6, 80);
+          this.groupBox22.Location = new System.Drawing.Point(6, 78);
           this.groupBox22.Name = "groupBox22";
-          this.groupBox22.Size = new System.Drawing.Size(735, 69);
+          this.groupBox22.Size = new System.Drawing.Size(735, 78);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Views ...";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
           // 
+          // chkShowIndexedImgInIndViews
+          // 
+          this.chkShowIndexedImgInIndViews.AutoSize = true;
+          this.chkShowIndexedImgInIndViews.Location = new System.Drawing.Point(37, 55);
+          this.chkShowIndexedImgInIndViews.Name = "chkShowIndexedImgInIndViews";
+          this.chkShowIndexedImgInIndViews.Size = new System.Drawing.Size(115, 17);
+          this.chkShowIndexedImgInIndViews.TabIndex = 103;
+          this.chkShowIndexedImgInIndViews.Text = "Use Index Thumbs";
+          this.ToolTip1.SetToolTip(this.chkShowIndexedImgInIndViews, "If checked, MyFilms will show \"Index Thumbs\" (\"A\", \"B\", etc.) in all indexed view" +
+                  "s.\r\nMake sure, your skin does support them.");
+          this.chkShowIndexedImgInIndViews.UseVisualStyleBackColor = true;
+          // 
+          // buttonDefaultViewImageReset
+          // 
+          this.buttonDefaultViewImageReset.Location = new System.Drawing.Point(711, 16);
+          this.buttonDefaultViewImageReset.Name = "buttonDefaultViewImageReset";
+          this.buttonDefaultViewImageReset.Size = new System.Drawing.Size(18, 18);
+          this.buttonDefaultViewImageReset.TabIndex = 102;
+          this.buttonDefaultViewImageReset.Text = "X";
+          this.ToolTip1.SetToolTip(this.buttonDefaultViewImageReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
+          this.buttonDefaultViewImageReset.UseVisualStyleBackColor = true;
+          this.buttonDefaultViewImageReset.Click += new System.EventHandler(this.buttonDefaultViewImageReset_Click);
+          // 
+          // pictureBoxDefaultViewImage
+          // 
+          this.pictureBoxDefaultViewImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.pictureBoxDefaultViewImage.Location = new System.Drawing.Point(672, 16);
+          this.pictureBoxDefaultViewImage.Name = "pictureBoxDefaultViewImage";
+          this.pictureBoxDefaultViewImage.Size = new System.Drawing.Size(33, 50);
+          this.pictureBoxDefaultViewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+          this.pictureBoxDefaultViewImage.TabIndex = 81;
+          this.pictureBoxDefaultViewImage.TabStop = false;
+          this.ToolTip1.SetToolTip(this.pictureBoxDefaultViewImage, resources.GetString("pictureBoxDefaultViewImage.ToolTip"));
+          this.pictureBoxDefaultViewImage.Click += new System.EventHandler(this.pictureBoxDefaultViewImage_Click);
+          // 
           // chkDfltViewsAll
           // 
           this.chkDfltViewsAll.AutoSize = true;
-          this.chkDfltViewsAll.Location = new System.Drawing.Point(229, 15);
+          this.chkDfltViewsAll.Location = new System.Drawing.Point(229, 16);
           this.chkDfltViewsAll.Name = "chkDfltViewsAll";
           this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltViewsAll.TabIndex = 80;
@@ -1686,34 +1732,17 @@
           // label47
           // 
           this.label47.AutoSize = true;
-          this.label47.Location = new System.Drawing.Point(396, 43);
+          this.label47.Location = new System.Drawing.Point(622, 16);
           this.label47.Name = "label47";
-          this.label47.Size = new System.Drawing.Size(99, 13);
+          this.label47.Size = new System.Drawing.Size(44, 26);
           this.label47.TabIndex = 79;
-          this.label47.Text = "Default View Image";
-          // 
-          // ButDefCovViews
-          // 
-          this.ButDefCovViews.Location = new System.Drawing.Point(625, 41);
-          this.ButDefCovViews.Name = "ButDefCovViews";
-          this.ButDefCovViews.Size = new System.Drawing.Size(32, 20);
-          this.ButDefCovViews.TabIndex = 78;
-          this.ButDefCovViews.Text = "...";
-          this.ButDefCovViews.UseVisualStyleBackColor = true;
-          this.ButDefCovViews.Click += new System.EventHandler(this.ButDefCovViews_Click);
-          // 
-          // DefaultCoverViews
-          // 
-          this.DefaultCoverViews.Location = new System.Drawing.Point(511, 41);
-          this.DefaultCoverViews.Name = "DefaultCoverViews";
-          this.DefaultCoverViews.Size = new System.Drawing.Size(108, 20);
-          this.DefaultCoverViews.TabIndex = 77;
+          this.label47.Text = "Default \r\nImage";
           // 
           // btnResetThumbs
           // 
-          this.btnResetThumbs.Location = new System.Drawing.Point(665, 11);
+          this.btnResetThumbs.Location = new System.Drawing.Point(473, 39);
           this.btnResetThumbs.Name = "btnResetThumbs";
-          this.btnResetThumbs.Size = new System.Drawing.Size(64, 36);
+          this.btnResetThumbs.Size = new System.Drawing.Size(77, 20);
           this.btnResetThumbs.TabIndex = 76;
           this.btnResetThumbs.Text = "Reset Cache";
           this.ToolTip1.SetToolTip(this.btnResetThumbs, resources.GetString("btnResetThumbs.ToolTip"));
@@ -1732,7 +1761,7 @@
           // 
           // btnViews
           // 
-          this.btnViews.Location = new System.Drawing.Point(625, 14);
+          this.btnViews.Location = new System.Drawing.Point(569, 13);
           this.btnViews.Name = "btnViews";
           this.btnViews.Size = new System.Drawing.Size(32, 20);
           this.btnViews.TabIndex = 74;
@@ -1743,7 +1772,7 @@
           // chkDfltViews
           // 
           this.chkDfltViews.AutoSize = true;
-          this.chkDfltViews.Location = new System.Drawing.Point(37, 38);
+          this.chkDfltViews.Location = new System.Drawing.Point(37, 35);
           this.chkDfltViews.Name = "chkDfltViews";
           this.chkDfltViews.Size = new System.Drawing.Size(200, 17);
           this.chkDfltViews.TabIndex = 75;
@@ -1753,15 +1782,15 @@
           // label29
           // 
           this.label29.AutoSize = true;
-          this.label29.Location = new System.Drawing.Point(396, 17);
+          this.label29.Location = new System.Drawing.Point(353, 17);
           this.label29.Name = "label29";
-          this.label29.Size = new System.Drawing.Size(96, 13);
+          this.label29.Size = new System.Drawing.Size(97, 13);
           this.label29.TabIndex = 73;
-          this.label29.Text = "Views Picture Path";
+          this.label29.Text = "Views Images Path";
           // 
           // MesFilmsViews
           // 
-          this.MesFilmsViews.Location = new System.Drawing.Point(511, 14);
+          this.MesFilmsViews.Location = new System.Drawing.Point(455, 13);
           this.MesFilmsViews.Name = "MesFilmsViews";
           this.MesFilmsViews.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsViews.TabIndex = 72;
@@ -1769,12 +1798,12 @@
           // 
           // groupBox1
           // 
+          this.groupBox1.Controls.Add(this.buttonDefaultCoverReset);
+          this.groupBox1.Controls.Add(this.pictureBoxDefaultCover);
           this.groupBox1.Controls.Add(this.lblPicturePrefix);
           this.groupBox1.Controls.Add(this.txtPicturePrefix);
           this.groupBox1.Controls.Add(this.lblPictureHandling);
           this.groupBox1.Controls.Add(this.cbPictureHandling);
-          this.groupBox1.Controls.Add(this.ButDefCov);
-          this.groupBox1.Controls.Add(this.DefaultCover);
           this.groupBox1.Controls.Add(this.label_DefaulCover);
           this.groupBox1.Controls.Add(this.ButImg);
           this.groupBox1.Controls.Add(this.MesFilmsImg);
@@ -1786,6 +1815,29 @@
           this.groupBox1.TabStop = false;
           this.groupBox1.Text = "Films ...";
           this.ToolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
+          // 
+          // buttonDefaultCoverReset
+          // 
+          this.buttonDefaultCoverReset.Location = new System.Drawing.Point(711, 11);
+          this.buttonDefaultCoverReset.Name = "buttonDefaultCoverReset";
+          this.buttonDefaultCoverReset.Size = new System.Drawing.Size(18, 18);
+          this.buttonDefaultCoverReset.TabIndex = 101;
+          this.buttonDefaultCoverReset.Text = "X";
+          this.ToolTip1.SetToolTip(this.buttonDefaultCoverReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
+          this.buttonDefaultCoverReset.UseVisualStyleBackColor = true;
+          this.buttonDefaultCoverReset.Click += new System.EventHandler(this.buttonDefaultCoverReset_Click_1);
+          // 
+          // pictureBoxDefaultCover
+          // 
+          this.pictureBoxDefaultCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.pictureBoxDefaultCover.Location = new System.Drawing.Point(672, 11);
+          this.pictureBoxDefaultCover.Name = "pictureBoxDefaultCover";
+          this.pictureBoxDefaultCover.Size = new System.Drawing.Size(33, 50);
+          this.pictureBoxDefaultCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+          this.pictureBoxDefaultCover.TabIndex = 99;
+          this.pictureBoxDefaultCover.TabStop = false;
+          this.ToolTip1.SetToolTip(this.pictureBoxDefaultCover, resources.GetString("pictureBoxDefaultCover.ToolTip"));
+          this.pictureBoxDefaultCover.Click += new System.EventHandler(this.pictureBoxDefaultCover_Click);
           // 
           // lblPicturePrefix
           // 
@@ -1827,36 +1879,18 @@
           this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
           this.cbPictureHandling.SelectedIndexChanged += new System.EventHandler(this.cbPictureHandling_SelectedIndexChanged);
           // 
-          // ButDefCov
-          // 
-          this.ButDefCov.Location = new System.Drawing.Point(625, 39);
-          this.ButDefCov.Name = "ButDefCov";
-          this.ButDefCov.Size = new System.Drawing.Size(32, 20);
-          this.ButDefCov.TabIndex = 90;
-          this.ButDefCov.Text = "...";
-          this.ButDefCov.UseVisualStyleBackColor = true;
-          this.ButDefCov.Click += new System.EventHandler(this.ButDefCov_Click);
-          // 
-          // DefaultCover
-          // 
-          this.DefaultCover.Location = new System.Drawing.Point(511, 39);
-          this.DefaultCover.Name = "DefaultCover";
-          this.DefaultCover.Size = new System.Drawing.Size(108, 20);
-          this.DefaultCover.TabIndex = 89;
-          this.ToolTip1.SetToolTip(this.DefaultCover, resources.GetString("DefaultCover.ToolTip"));
-          // 
           // label_DefaulCover
           // 
           this.label_DefaulCover.AutoSize = true;
-          this.label_DefaulCover.Location = new System.Drawing.Point(396, 45);
+          this.label_DefaulCover.Location = new System.Drawing.Point(622, 11);
           this.label_DefaulCover.Name = "label_DefaulCover";
-          this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
+          this.label_DefaulCover.Size = new System.Drawing.Size(44, 26);
           this.label_DefaulCover.TabIndex = 88;
-          this.label_DefaulCover.Text = "Default Movie Cover";
+          this.label_DefaulCover.Text = "Default \r\nCover";
           // 
           // ButImg
           // 
-          this.ButImg.Location = new System.Drawing.Point(625, 13);
+          this.ButImg.Location = new System.Drawing.Point(569, 26);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
           this.ButImg.TabIndex = 87;
@@ -1866,7 +1900,7 @@
           // 
           // MesFilmsImg
           // 
-          this.MesFilmsImg.Location = new System.Drawing.Point(511, 13);
+          this.MesFilmsImg.Location = new System.Drawing.Point(455, 26);
           this.MesFilmsImg.Name = "MesFilmsImg";
           this.MesFilmsImg.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsImg.TabIndex = 85;
@@ -1875,7 +1909,7 @@
           // label2
           // 
           this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(396, 18);
+          this.label2.Location = new System.Drawing.Point(352, 30);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
           this.label2.TabIndex = 86;
@@ -1883,22 +1917,45 @@
           // 
           // groupBox_ArtistImages
           // 
+          this.groupBox_ArtistImages.Controls.Add(this.buttonDefaultPersonImageReset);
+          this.groupBox_ArtistImages.Controls.Add(this.pictureBoxDefaultPersonImage);
           this.groupBox_ArtistImages.Controls.Add(this.chkPersons);
           this.groupBox_ArtistImages.Controls.Add(this.btnResetThumbsArtist);
           this.groupBox_ArtistImages.Controls.Add(this.chkDfltArtist);
-          this.groupBox_ArtistImages.Controls.Add(this.ButDefCovArtist);
           this.groupBox_ArtistImages.Controls.Add(this.ButImgArtist);
           this.groupBox_ArtistImages.Controls.Add(this.MesFilmsImgArtist);
           this.groupBox_ArtistImages.Controls.Add(this.label_DefaultArtistImage);
           this.groupBox_ArtistImages.Controls.Add(this.label_ArtistImagePath);
-          this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
-          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 155);
+          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 158);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
           this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 69);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
           this.groupBox_ArtistImages.Text = "Persons Views ...";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, resources.GetString("groupBox_ArtistImages.ToolTip"));
+          // 
+          // buttonDefaultPersonImageReset
+          // 
+          this.buttonDefaultPersonImageReset.Location = new System.Drawing.Point(711, 12);
+          this.buttonDefaultPersonImageReset.Name = "buttonDefaultPersonImageReset";
+          this.buttonDefaultPersonImageReset.Size = new System.Drawing.Size(18, 18);
+          this.buttonDefaultPersonImageReset.TabIndex = 102;
+          this.buttonDefaultPersonImageReset.Text = "X";
+          this.ToolTip1.SetToolTip(this.buttonDefaultPersonImageReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
+          this.buttonDefaultPersonImageReset.UseVisualStyleBackColor = true;
+          this.buttonDefaultPersonImageReset.Click += new System.EventHandler(this.buttonDefaultPersonImageReset_Click);
+          // 
+          // pictureBoxDefaultPersonImage
+          // 
+          this.pictureBoxDefaultPersonImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+          this.pictureBoxDefaultPersonImage.Location = new System.Drawing.Point(672, 12);
+          this.pictureBoxDefaultPersonImage.Name = "pictureBoxDefaultPersonImage";
+          this.pictureBoxDefaultPersonImage.Size = new System.Drawing.Size(33, 50);
+          this.pictureBoxDefaultPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+          this.pictureBoxDefaultPersonImage.TabIndex = 101;
+          this.pictureBoxDefaultPersonImage.TabStop = false;
+          this.ToolTip1.SetToolTip(this.pictureBoxDefaultPersonImage, resources.GetString("pictureBoxDefaultPersonImage.ToolTip"));
+          this.pictureBoxDefaultPersonImage.Click += new System.EventHandler(this.pictureBoxDefaultPersonImage_Click);
           // 
           // chkPersons
           // 
@@ -1912,9 +1969,9 @@
           // 
           // btnResetThumbsArtist
           // 
-          this.btnResetThumbsArtist.Location = new System.Drawing.Point(665, 12);
+          this.btnResetThumbsArtist.Location = new System.Drawing.Point(473, 40);
           this.btnResetThumbsArtist.Name = "btnResetThumbsArtist";
-          this.btnResetThumbsArtist.Size = new System.Drawing.Size(64, 34);
+          this.btnResetThumbsArtist.Size = new System.Drawing.Size(77, 20);
           this.btnResetThumbsArtist.TabIndex = 99;
           this.btnResetThumbsArtist.Text = "Reset Cache";
           this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, resources.GetString("btnResetThumbsArtist.ToolTip"));
@@ -1931,19 +1988,9 @@
           this.chkDfltArtist.Text = "Use default image for missing thumbs";
           this.chkDfltArtist.UseVisualStyleBackColor = true;
           // 
-          // ButDefCovArtist
-          // 
-          this.ButDefCovArtist.Location = new System.Drawing.Point(625, 40);
-          this.ButDefCovArtist.Name = "ButDefCovArtist";
-          this.ButDefCovArtist.Size = new System.Drawing.Size(32, 20);
-          this.ButDefCovArtist.TabIndex = 97;
-          this.ButDefCovArtist.Text = "...";
-          this.ButDefCovArtist.UseVisualStyleBackColor = true;
-          this.ButDefCovArtist.Click += new System.EventHandler(this.ButDefCovArtist_Click);
-          // 
           // ButImgArtist
           // 
-          this.ButImgArtist.Location = new System.Drawing.Point(625, 15);
+          this.ButImgArtist.Location = new System.Drawing.Point(569, 13);
           this.ButImgArtist.Name = "ButImgArtist";
           this.ButImgArtist.Size = new System.Drawing.Size(32, 20);
           this.ButImgArtist.TabIndex = 96;
@@ -1953,7 +2000,7 @@
           // 
           // MesFilmsImgArtist
           // 
-          this.MesFilmsImgArtist.Location = new System.Drawing.Point(511, 14);
+          this.MesFilmsImgArtist.Location = new System.Drawing.Point(455, 13);
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
           this.MesFilmsImgArtist.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsImgArtist.TabIndex = 95;
@@ -1962,39 +2009,28 @@
           // label_DefaultArtistImage
           // 
           this.label_DefaultArtistImage.AutoSize = true;
-          this.label_DefaultArtistImage.Location = new System.Drawing.Point(396, 44);
+          this.label_DefaultArtistImage.Location = new System.Drawing.Point(622, 12);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
-          this.label_DefaultArtistImage.Size = new System.Drawing.Size(109, 13);
+          this.label_DefaultArtistImage.Size = new System.Drawing.Size(41, 26);
           this.label_DefaultArtistImage.TabIndex = 94;
-          this.label_DefaultArtistImage.Text = "Default Person Image";
+          this.label_DefaultArtistImage.Text = "Default\r\nImage";
           // 
           // label_ArtistImagePath
           // 
           this.label_ArtistImagePath.AutoSize = true;
-          this.label_ArtistImagePath.Location = new System.Drawing.Point(396, 19);
+          this.label_ArtistImagePath.Location = new System.Drawing.Point(347, 16);
           this.label_ArtistImagePath.Name = "label_ArtistImagePath";
           this.label_ArtistImagePath.Size = new System.Drawing.Size(102, 13);
           this.label_ArtistImagePath.TabIndex = 93;
           this.label_ArtistImagePath.Text = "Person Images Path";
           // 
-          // DefaultCoverArtist
-          // 
-          this.DefaultCoverArtist.Location = new System.Drawing.Point(511, 40);
-          this.DefaultCoverArtist.Name = "DefaultCoverArtist";
-          this.DefaultCoverArtist.Size = new System.Drawing.Size(108, 20);
-          this.DefaultCoverArtist.TabIndex = 92;
-          this.ToolTip1.SetToolTip(this.DefaultCoverArtist, resources.GetString("DefaultCoverArtist.ToolTip"));
-          // 
           // groupBox_AMCupdater
           // 
           this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
-          this.groupBox_AMCupdater.Controls.Add(this.txtAMCUpd_cnf_Display);
+          this.groupBox_AMCupdater.Controls.Add(this.groupBox8);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
-          this.groupBox_AMCupdater.Controls.Add(this.label28);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
-          this.groupBox_AMCupdater.Controls.Add(this.txtAMCUpd_cnf);
-          this.groupBox_AMCupdater.Controls.Add(this.btnAMCUpd_cnf);
           this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 24);
           this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
           this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 270);
@@ -2006,17 +2042,16 @@
           // txtAMCUpd_cnf_Display
           // 
           this.txtAMCUpd_cnf_Display.Enabled = false;
-          this.txtAMCUpd_cnf_Display.Location = new System.Drawing.Point(388, 39);
+          this.txtAMCUpd_cnf_Display.Location = new System.Drawing.Point(17, 19);
           this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
-          this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(272, 20);
+          this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(255, 20);
           this.txtAMCUpd_cnf_Display.TabIndex = 62;
-          this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf_Display, resources.GetString("txtAMCUpd_cnf_Display.ToolTip"));
           // 
           // groupBox_AMCupdaterScheduer
           // 
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.scheduleAMCUpdater);
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnParameters);
-          this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 78);
+          this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 87);
           this.groupBox_AMCupdaterScheduer.Name = "groupBox_AMCupdaterScheduer";
           this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 62);
           this.groupBox_AMCupdaterScheduer.TabIndex = 62;
@@ -2046,16 +2081,6 @@
           this.btnParameters.Text = "Task Parameters";
           this.btnParameters.UseVisualStyleBackColor = true;
           this.btnParameters.Click += new System.EventHandler(this.btnParameters_Click);
-          // 
-          // label28
-          // 
-          this.label28.AutoSize = true;
-          this.label28.Location = new System.Drawing.Point(293, 42);
-          this.label28.Name = "label28";
-          this.label28.Size = new System.Drawing.Size(90, 13);
-          this.label28.TabIndex = 56;
-          this.label28.Text = "AMCU Config File";
-          this.ToolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
           // 
           // groupBox_AMCupdater_ExternalApplication
           // 
@@ -2182,7 +2207,7 @@
           // 
           // txtAMCUpd_cnf
           // 
-          this.txtAMCUpd_cnf.Location = new System.Drawing.Point(389, 39);
+          this.txtAMCUpd_cnf.Location = new System.Drawing.Point(18, 19);
           this.txtAMCUpd_cnf.Name = "txtAMCUpd_cnf";
           this.txtAMCUpd_cnf.Size = new System.Drawing.Size(168, 20);
           this.txtAMCUpd_cnf.TabIndex = 57;
@@ -2192,7 +2217,7 @@
           // 
           // btnAMCUpd_cnf
           // 
-          this.btnAMCUpd_cnf.Location = new System.Drawing.Point(666, 39);
+          this.btnAMCUpd_cnf.Location = new System.Drawing.Point(278, 19);
           this.btnAMCUpd_cnf.Name = "btnAMCUpd_cnf";
           this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 20);
           this.btnAMCUpd_cnf.TabIndex = 58;
@@ -2799,13 +2824,13 @@
           this.groupBox_DefaultView.Size = new System.Drawing.Size(258, 342);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
-          this.groupBox_DefaultView.Text = "Default Start View";
+          this.groupBox_DefaultView.Text = "Start Settings ...";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
           // 
           // chkShowEmpty
           // 
           this.chkShowEmpty.AutoSize = true;
-          this.chkShowEmpty.Location = new System.Drawing.Point(15, 309);
+          this.chkShowEmpty.Location = new System.Drawing.Point(40, 315);
           this.chkShowEmpty.Name = "chkShowEmpty";
           this.chkShowEmpty.Size = new System.Drawing.Size(85, 17);
           this.chkShowEmpty.TabIndex = 87;
@@ -2816,7 +2841,7 @@
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(15, 243);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(40, 249);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
           this.chkOnlyTitle.TabIndex = 86;
@@ -2833,7 +2858,7 @@
           this.groupBox7.Controls.Add(this.SortSens);
           this.groupBox7.Controls.Add(this.LayOut);
           this.groupBox7.Controls.Add(this.label14);
-          this.groupBox7.Location = new System.Drawing.Point(6, 61);
+          this.groupBox7.Location = new System.Drawing.Point(6, 93);
           this.groupBox7.Name = "groupBox7";
           this.groupBox7.Size = new System.Drawing.Size(246, 73);
           this.groupBox7.TabIndex = 85;
@@ -2900,7 +2925,7 @@
           this.groupBox4.Controls.Add(this.label62);
           this.groupBox4.Controls.Add(this.SortSensInHierarchies);
           this.groupBox4.Controls.Add(this.SortInHierarchies);
-          this.groupBox4.Location = new System.Drawing.Point(6, 139);
+          this.groupBox4.Location = new System.Drawing.Point(6, 172);
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.Size = new System.Drawing.Size(246, 71);
           this.groupBox4.TabIndex = 43;
@@ -2967,16 +2992,16 @@
           // label10
           // 
           this.label10.AutoSize = true;
-          this.label10.Location = new System.Drawing.Point(12, 21);
+          this.label10.Location = new System.Drawing.Point(12, 32);
           this.label10.Name = "label10";
-          this.label10.Size = new System.Drawing.Size(30, 26);
+          this.label10.Size = new System.Drawing.Size(30, 13);
           this.label10.TabIndex = 84;
-          this.label10.Text = "Start\r\nView";
+          this.label10.Text = "View";
           // 
           // chkGlobalAvailableOnly
           // 
           this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(15, 286);
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(40, 292);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
           this.chkGlobalAvailableOnly.TabIndex = 82;
@@ -2988,7 +3013,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(15, 264);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(40, 270);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -2999,7 +3024,7 @@
           // AlwaysDefaultView
           // 
           this.AlwaysDefaultView.AutoSize = true;
-          this.AlwaysDefaultView.Location = new System.Drawing.Point(15, 220);
+          this.AlwaysDefaultView.Location = new System.Drawing.Point(40, 61);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
           this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
           this.AlwaysDefaultView.TabIndex = 75;
@@ -3012,7 +3037,7 @@
           // View_Dflt_Item
           // 
           this.View_Dflt_Item.FormattingEnabled = true;
-          this.View_Dflt_Item.Location = new System.Drawing.Point(67, 23);
+          this.View_Dflt_Item.Location = new System.Drawing.Point(67, 29);
           this.View_Dflt_Item.Name = "View_Dflt_Item";
           this.View_Dflt_Item.Size = new System.Drawing.Size(104, 21);
           this.View_Dflt_Item.TabIndex = 16;
@@ -3021,7 +3046,7 @@
           // View_Dflt_Text
           // 
           this.View_Dflt_Text.Enabled = false;
-          this.View_Dflt_Text.Location = new System.Drawing.Point(177, 23);
+          this.View_Dflt_Text.Location = new System.Drawing.Point(177, 29);
           this.View_Dflt_Text.Name = "View_Dflt_Text";
           this.View_Dflt_Text.Size = new System.Drawing.Size(55, 20);
           this.View_Dflt_Text.TabIndex = 17;
@@ -3077,6 +3102,7 @@
           this.buttonResetImage.Size = new System.Drawing.Size(18, 18);
           this.buttonResetImage.TabIndex = 89;
           this.buttonResetImage.Text = "X";
+          this.ToolTip1.SetToolTip(this.buttonResetImage, "Click to reset image.\r\n(Image itself will not be deleted.)");
           this.buttonResetImage.UseVisualStyleBackColor = true;
           this.buttonResetImage.Click += new System.EventHandler(this.buttonResetImage_Click);
           // 
@@ -3389,7 +3415,7 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
-          this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+          this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.groupBox5.Location = new System.Drawing.Point(170, 145);
           this.groupBox5.Name = "groupBox5";
           this.groupBox5.Size = new System.Drawing.Size(291, 46);
@@ -5807,6 +5833,19 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // groupBox8
+          // 
+          this.groupBox8.Controls.Add(this.txtAMCUpd_cnf_Display);
+          this.groupBox8.Controls.Add(this.btnAMCUpd_cnf);
+          this.groupBox8.Controls.Add(this.txtAMCUpd_cnf);
+          this.groupBox8.Location = new System.Drawing.Point(388, 19);
+          this.groupBox8.Name = "groupBox8";
+          this.groupBox8.Size = new System.Drawing.Size(332, 53);
+          this.groupBox8.TabIndex = 63;
+          this.groupBox8.TabStop = false;
+          this.groupBox8.Text = "AMCU Config File ...";
+          this.ToolTip1.SetToolTip(this.groupBox8, resources.GetString("groupBox8.ToolTip"));
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5851,12 +5890,16 @@
           this.groupBox25.PerformLayout();
           this.Fanart.ResumeLayout(false);
           this.Fanart.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultFanart)).EndInit();
           this.groupBox22.ResumeLayout(false);
           this.groupBox22.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultViewImage)).EndInit();
           this.groupBox1.ResumeLayout(false);
           this.groupBox1.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultCover)).EndInit();
           this.groupBox_ArtistImages.ResumeLayout(false);
           this.groupBox_ArtistImages.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).EndInit();
           this.groupBox_AMCupdater.ResumeLayout(false);
           this.groupBox_AMCupdater.PerformLayout();
           this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
@@ -5945,6 +5988,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          this.groupBox8.ResumeLayout(false);
+          this.groupBox8.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6046,15 +6091,11 @@
         private GroupBox groupBox_ArtistImages;
         private Button btnResetThumbsArtist;
         private CheckBox chkDfltArtist;
-        private Button ButDefCovArtist;
         private Button ButImgArtist;
         private TextBox MesFilmsImgArtist;
         private Label label_DefaultArtistImage;
         private Label label_ArtistImagePath;
-        private TextBox DefaultCoverArtist;
         private GroupBox groupBox1;
-        private Button ButDefCov;
-        private TextBox DefaultCover;
         private Label label_DefaulCover;
         private Button ButImg;
         private TextBox MesFilmsImg;
@@ -6077,7 +6118,6 @@
         private GroupBox groupBox_AMCupdater;
         private GroupBox groupBox_AMCupdaterScheduer;
         private CheckBox scheduleAMCUpdater;
-        private Label label28;
         private Button btnParameters;
         private TextBox txtAMCUpd_cnf;
         private Button btnAMCUpd_cnf;
@@ -6169,10 +6209,6 @@
         private Button btnFirstTimeSetup;
         private Label lblResultingGroupViewsPathFanart;
         private Button butNew;
-        private TextBox DefaultFanartImage;
-        private TextBox DefaultCoverViews;
-        private Button ButDefFanart;
-        private Button ButDefCovViews;
         private Label label47;
         private Label label48;
         private CheckBox chkDfltFanartImage;
@@ -6404,5 +6440,15 @@
         private PictureBox AntViewsImage;
         private Button buttonResetImage;
         private Label labelViewLabel;
+        private PictureBox pictureBoxDefaultFanart;
+        private PictureBox pictureBoxDefaultViewImage;
+        private PictureBox pictureBoxDefaultCover;
+        private PictureBox pictureBoxDefaultPersonImage;
+        private Button buttonDefaultCoverReset;
+        private Button buttonDefaultFanartReset;
+        private Button buttonDefaultViewImageReset;
+        private Button buttonDefaultPersonImageReset;
+        private CheckBox chkShowIndexedImgInIndViews;
+        private GroupBox groupBox8;
     }
 }
