@@ -2288,6 +2288,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{c22fb8bc-e5d2-409c-a6ab-70d600d0bf54}-MyMovies-IT.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\MyMovies-IT.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB-TMDBcover.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e08b96f8-02c3-448a-896e-ae27c3c81852}-IMDB-TMDBcover.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-TMDBcover.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -5946,6 +5953,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\MyMovies-IT.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{c22fb8bc-e5d2-409c-a6ab-70d600d0bf54}-MyMovies-IT.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\MyMovies-IT.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB-TMDBcover.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e08b96f8-02c3-448a-896e-ae27c3c81852}-IMDB-TMDBcover.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-TMDBcover.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
