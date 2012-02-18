@@ -515,6 +515,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 UseThumbsForPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Persons", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
                 StrViewsDfltAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDfltAll", false);
+                StrViewsShowIndexedImgInIndViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsShowIndexedImages", false);
                 StrCheckWOLenable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Enable", false);
                 StrWOLtimeout = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Timeout", "15"));
                 StrCheckWOLuserdialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Userdialog", false);
@@ -1514,6 +1515,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return strViewsDfltAll; }
           set { strViewsDfltAll = value; }
+        }
+        private bool strViewsShowIndexedImgInIndViews = false;
+        public bool StrViewsShowIndexedImgInIndViews
+        {
+          get { return strViewsShowIndexedImgInIndViews; }
+          set { strViewsShowIndexedImgInIndViews = value; }
         }
 
         private bool strCheckWOLenable = false;

@@ -1636,7 +1636,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (GetPrevFilmList()) return;
                   else base.OnAction(action);
                 }
-                // Change_LayOut(MyFilms.conf.WStrLayOut); // done in GetSelextFromDivx
+                // Change_LayOut(MyFilms.conf.WStrLayOut); // done in GetSelectFromDivx
                 // conf.StrSelect = "";
                 Change_View_Action(conf.WStrSort);
                 return;
@@ -1647,8 +1647,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
               {
                 // switch to selected root node here ...
-                if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.AlwaysDefaultView)
+                if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.StrViewDfltItem != GUILocalizeStrings.Get(1079819) && conf.AlwaysDefaultView)
                 {
+                  
                   base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
                 }
                 else
@@ -4967,8 +4968,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region directory handling
       string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons) : MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsGroups) + WStrSort.ToLower() + @"\";
-      
-      bool getThumbs = ((MyFilms.conf.UseThumbsForPersons && isperson) || (MyFilms.conf.UseThumbsForViews && (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort))));
+
+      bool getThumbs = ((MyFilms.conf.UseThumbsForPersons && isperson) || (MyFilms.conf.UseThumbsForViews && (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort)) || MyFilms.conf.StrViewsShowIndexedImgInIndViews));
       bool createFanartDir = IsCategoryYearCountryField(WStrSort);
 
       if (!Directory.Exists(strThumbDirectory)) // Check groupview thumbs cache directories and create them
@@ -5163,7 +5164,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (string.IsNullOrEmpty(this.facadeFilms[i].ThumbnailImage))
               {
-                if (conf.IndexedChars > 0)
+                if (conf.IndexedChars > 0 && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
                 {
                   LoadIndexSkinThumbs(this.facadeFilms[i]);
                 }
