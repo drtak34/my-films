@@ -403,7 +403,7 @@ MyFilms will create such a file for each Configuration Name.
 You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
 However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
   </data>
-  <data name="groupBox8.ToolTip" xml:space="preserve">
+  <data name="groupBoxAMCUpdaterConfigFile.ToolTip" xml:space="preserve">
     <value>You can define, what AMCUpdater config file should be used.
 This applies to:
 - Launching Global Import in MyFilms GUI
