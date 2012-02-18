@@ -178,7 +178,10 @@ You can set separate sort orders for the view itself, the underlying film list a
     <value>False</value>
   </metadata>
   <data name="label66.ToolTip" xml:space="preserve">
-    <value>The Default Value will allow you to directly display the film list filtered to that value.
+    <value>The Value will allow you to directly display the film list filtered to that value.
+Practically, a rule "DBfield like *Value*" will be used - but other than Filter Expression, 
+this is affecting the display (Film list instead of grouped view).
+
 Important: If this field is set, MyFilms will directly display a filmlist and skip any "grouped" View.
 Use "*" to show complete filmlist.</value>
   </data>
@@ -271,14 +274,6 @@ fully qualified path to a logo is stored in the rule, so it might not be fully p
 "Use skins default logos" is the default and will search for logos in the skindirectory\media\logos 
 and it's subdirectories for logos matching the name in the logo rule. It should work in most situations.</value>
   </data>
-  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
-    <value>If enabled, fanart will be used for group views.
-MyFilms will autocreate subfolders for you.
-Images placed in those folders will be used for fanart display
- in the default group views (category, year, genre).
-
-If disabled, default fanart will be displayed, if it is enabled.</value>
-  </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
 Enter the full path (or use the browse button) to the root folder containing the fanart image files.
@@ -293,6 +288,14 @@ Note:
 When scanning and importing new films, My Films (AMCUpdater) will limit the download to 3 images by default. 
 You may alter these options in AMCU Settings on the Database Fields tab under picture handling. 
 You may also download additional fanart images from within My Films.</value>
+  </data>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
   </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
     <value>Select the “Use thumbs for group views" option if you have image files 
@@ -377,6 +380,11 @@ Remark:
 If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
 set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
   </data>
+  <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where artist thumbs (images for persons) should be stored.
+Works same way as cover images for movies.
+It is used for "person like" Views, like actors, director, producer, writer.</value>
+  </data>
   <data name="pictureBoxDefaultPersonImage.ToolTip" xml:space="preserve">
     <value>Click to select the image file that you wish to use as the default person image.  
 The default person image will be displayed when a person does not have an associated photo or image
@@ -393,11 +401,6 @@ with new ones to let MyFilms (re)create the cache.
     <value>Enter the full path to the folder containing the person image files.
 Matching will be done based on images filename that matches the person's name.
 You can use the browse button to find the correct path.</value>
-  </data>
-  <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
-    <value>Use this area to define a path where artist thumbs (images for persons) should be stored.
-Works same way as cover images for movies.
-It is used for "person like" Views, like actors, director, producer, writer.</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,
@@ -599,80 +602,20 @@ If a value is entered for the second parameter, only records containing that val
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
   </data>
-  <data name="chkShowEmpty.ToolTip" xml:space="preserve">
-    <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
-you will get an additional group in the view with films having no category assigned.
-This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
-  </data>
-  <data name="groupBox4.ToolTip" xml:space="preserve">
-    <value>In movie hierarchies, normally the same sort order is used
-as in all other views.
-If you prefer a different sort order once you entered a movie group (hierarchy, collection),
-you can define a different sort order here.
-
-Example:
-You usually browse your movies sorted by rating, descending to alway have highest rated movies at the beginning.
-You are using movie hierarchies / collections, like e.g.
-Star Trek\Star Trek 1
-Star Trek\Star Trek 2
-If you enter the movie collection (here 'Star Trek') you prefer to have the movies sorted by year, ascending to have
-them in a better order.
-To achieve that, choose "Year" and "ASC".
-Note: the settings apply for ALL orders whenever you enter a hierarchy group, including single movies or multiple second level hierarchies.
-
-</value>
-  </data>
-  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
-    <value>"Only available" option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-Note:
-The availability status is only usable after MyFilms has done a scan. 
-This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
-Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
-  </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-AMC users can configure the field and value to identify unwatched films
-on "update" tab (Watched-Status Handling).</value>
-  </data>
-  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 53</value>
-  </metadata>
-  <data name="groupBoxView.ToolTip" xml:space="preserve">
-    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
-In this section you can define additional views; 
-select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
-If there is no value entered, a menu will be displayed for the range of values available in the database.  
-If a value is entered, a list of the movies with that value will be displayed.
-Optional: 
-- If you want to use a list of values, you can add them as comma separated values.
-- You can set Index to values of 1 or 2 to get indexed display of the values
-- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
-  </data>
   <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1245, 18</value>
-  </metadata>
-  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1245, 18</value>
-  </metadata>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
-  </metadata>
-  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1167, 18</value>
   </metadata>
   <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1245, 18</value>
   </metadata>
   <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 53</value>
+  </metadata>
+  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1245, 18</value>
+  </metadata>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripButtonDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -792,6 +735,75 @@ Optional:
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="groupBox5.ToolTip" xml:space="preserve">
+    <value>"Filter Expression" allows you to apply filter rules, that limit the results.
+Other than "Value", it will keep "grouped Views" as display and not directly show a filmlist of the results - allowing you to have
+views like "Category, Year, etc. - so Filter Expression can be used as Filter to allow free combinations of any conditions users might want.
+MyFilms helps you to create such conditions, but if you're familiar with MS Expressions, you can use them directly too.
+
+That filter can be combined with "Value", e.g.:
+You want all your action movies directly as film list from last 30 days (DBfield Category, value “action”, filter “ageadded &lt; 30”)
+You could do the same in the past by using different configs based on same catalog - as Filter works same way as config filter. 
+But now, you don’t need separate configs, just für that. 
+You still might want to use different configs, if you e.g. want to have password protection, etc. </value>
+  </data>
+  <data name="groupBoxView.ToolTip" xml:space="preserve">
+    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
+In this section you can define additional views; 
+select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
+If there is no value entered, a menu will be displayed for the range of values available in the database.  
+If a value is entered, a list of the movies with that value will be displayed.
+Optional: 
+- If you want to use a list of values, you can add them as comma separated values.
+- You can set Index to values of 1 or 2 to get indexed display of the values
+- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
+  </data>
+  <data name="chkShowEmpty.ToolTip" xml:space="preserve">
+    <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
+you will get an additional group in the view with films having no category assigned.
+This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value>In movie hierarchies, normally the same sort order is used
+as in all other views.
+If you prefer a different sort order once you entered a movie group (hierarchy, collection),
+you can define a different sort order here.
+
+Example:
+You usually browse your movies sorted by rating, descending to alway have highest rated movies at the beginning.
+You are using movie hierarchies / collections, like e.g.
+Star Trek\Star Trek 1
+Star Trek\Star Trek 2
+If you enter the movie collection (here 'Star Trek') you prefer to have the movies sorted by year, ascending to have
+them in a better order.
+To achieve that, choose "Year" and "ASC".
+Note: the settings apply for ALL orders whenever you enter a hierarchy group, including single movies or multiple second level hierarchies.
+
+</value>
+  </data>
+  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
+    <value>"Only available" option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+Note:
+The availability status is only usable after MyFilms has done a scan. 
+This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
+Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
+  </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+AMC users can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
+  </data>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
 and thus to integrate trailers into MyFilms.
