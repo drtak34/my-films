@@ -3003,8 +3003,9 @@ namespace Grabber_Interface
 
                 // Create new FileInfo object and get the Length.
                 FileInfo f = new FileInfo(Result[i]);
-                long s1 = f.Length;
-                labelImageSize.Text = s1.ToString();
+                //long s1 = f.Length;
+                //labelImageSize.Text = s1.ToString();
+                labelImageSize.Text = this.ByteString(f.Length);
               }
               catch (Exception ex)
               {
@@ -4279,10 +4280,56 @@ namespace Grabber_Interface
           textURLPreview.Text = find; // load Parameter in Sub URL field (to allow web launching etc.
 
         if (find.EndsWith("jpg") || find.EndsWith("png"))
-          try { pictureBoxPreviewCover.ImageLocation = find; }
-          catch {}
+        {
+          try
+          {
+            pictureBoxPreviewCover.ImageLocation = find;
+          }
+          catch { }
+        }
+          try
+          {
+            // Create new FileInfo object and get the Length.
+            FileInfo f = new FileInfo(find);
+            labelImageSize.Text = this.ByteString(f.Length);
+          }
+          catch
+          {
+            try
+            {
+              string strTemp = Environment.GetEnvironmentVariable("TEMP") + @"\MFgrabpreview.jpg";
+              try { System.IO.File.Delete(strTemp); }
+              catch (Exception) { }
+              GrabUtil.DownLoadImage(find, strTemp);
+              FileInfo f = new FileInfo(strTemp);
+              labelImageSize.Text = this.ByteString(f.Length);
+              pictureBoxPreviewCover.ImageLocation = strTemp;
+              //try { System.IO.File.Delete(strTemp); }
+              //catch (Exception) { }
+            }
+            catch (Exception) { }
+          }
       }
 
+    }
+
+    private string ByteString(long bytes)
+    {
+      double s = bytes;
+      string[] format = new string[]
+                  {
+                      "{0} bytes", "{0} KB",  
+                      "{0} MB", "{0} GB", "{0} TB", "{0} PB", "{0} EB"
+                  };
+
+      int i = 0;
+
+      while (i < format.Length && s >= 1024)
+      {
+        s = (long)(100 * s / 1024) / 100.0;
+        i++;
+      }
+      return string.Format(format[i], s);
     }
 
     private void buttonPrevParam1_Click(object sender, EventArgs e)
