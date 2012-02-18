@@ -224,7 +224,10 @@
           this.label_DefaultArtistImage = new System.Windows.Forms.Label();
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
+          this.groupBoxAMCUpdaterConfigFile = new System.Windows.Forms.GroupBox();
           this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
+          this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
+          this.txtAMCUpd_cnf = new System.Windows.Forms.TextBox();
           this.groupBox_AMCupdaterScheduer = new System.Windows.Forms.GroupBox();
           this.scheduleAMCUpdater = new System.Windows.Forms.CheckBox();
           this.btnParameters = new System.Windows.Forms.Button();
@@ -238,8 +241,6 @@
           this.AMCMovieScanPath = new System.Windows.Forms.TextBox();
           this.btnCreateAMCDesktopIcon = new System.Windows.Forms.Button();
           this.chkAMCUpd = new System.Windows.Forms.CheckBox();
-          this.txtAMCUpd_cnf = new System.Windows.Forms.TextBox();
-          this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
           this.cbSuppress = new System.Windows.Forms.ComboBox();
           this.gpspfield = new System.Windows.Forms.GroupBox();
@@ -566,7 +567,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.groupBox8 = new System.Windows.Forms.GroupBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -599,6 +599,7 @@
           this.groupBox_ArtistImages.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).BeginInit();
           this.groupBox_AMCupdater.SuspendLayout();
+          this.groupBoxAMCUpdaterConfigFile.SuspendLayout();
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
           this.groupBoxDeletionOptions.SuspendLayout();
@@ -655,7 +656,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          this.groupBox8.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2027,7 +2027,7 @@
           // groupBox_AMCupdater
           // 
           this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
-          this.groupBox_AMCupdater.Controls.Add(this.groupBox8);
+          this.groupBox_AMCupdater.Controls.Add(this.groupBoxAMCUpdaterConfigFile);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
@@ -2039,6 +2039,19 @@
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
           this.ToolTip1.SetToolTip(this.groupBox_AMCupdater, resources.GetString("groupBox_AMCupdater.ToolTip"));
           // 
+          // groupBoxAMCUpdaterConfigFile
+          // 
+          this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.txtAMCUpd_cnf_Display);
+          this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.btnAMCUpd_cnf);
+          this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.txtAMCUpd_cnf);
+          this.groupBoxAMCUpdaterConfigFile.Location = new System.Drawing.Point(388, 19);
+          this.groupBoxAMCUpdaterConfigFile.Name = "groupBoxAMCUpdaterConfigFile";
+          this.groupBoxAMCUpdaterConfigFile.Size = new System.Drawing.Size(332, 53);
+          this.groupBoxAMCUpdaterConfigFile.TabIndex = 63;
+          this.groupBoxAMCUpdaterConfigFile.TabStop = false;
+          this.groupBoxAMCUpdaterConfigFile.Text = "AMCU Config File ...";
+          this.ToolTip1.SetToolTip(this.groupBoxAMCUpdaterConfigFile, resources.GetString("groupBoxAMCUpdaterConfigFile.ToolTip"));
+          // 
           // txtAMCUpd_cnf_Display
           // 
           this.txtAMCUpd_cnf_Display.Enabled = false;
@@ -2046,6 +2059,26 @@
           this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
           this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(255, 20);
           this.txtAMCUpd_cnf_Display.TabIndex = 62;
+          // 
+          // btnAMCUpd_cnf
+          // 
+          this.btnAMCUpd_cnf.Location = new System.Drawing.Point(278, 19);
+          this.btnAMCUpd_cnf.Name = "btnAMCUpd_cnf";
+          this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 20);
+          this.btnAMCUpd_cnf.TabIndex = 58;
+          this.btnAMCUpd_cnf.Text = "...";
+          this.btnAMCUpd_cnf.UseVisualStyleBackColor = true;
+          this.btnAMCUpd_cnf.Click += new System.EventHandler(this.btnAMCUpd_cnf_Click);
+          // 
+          // txtAMCUpd_cnf
+          // 
+          this.txtAMCUpd_cnf.Location = new System.Drawing.Point(18, 19);
+          this.txtAMCUpd_cnf.Name = "txtAMCUpd_cnf";
+          this.txtAMCUpd_cnf.Size = new System.Drawing.Size(168, 20);
+          this.txtAMCUpd_cnf.TabIndex = 57;
+          this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf, resources.GetString("txtAMCUpd_cnf.ToolTip"));
+          this.txtAMCUpd_cnf.Visible = false;
+          this.txtAMCUpd_cnf.TextChanged += new System.EventHandler(this.txtAMCUpd_cnf_TextChanged);
           // 
           // groupBox_AMCupdaterScheduer
           // 
@@ -2204,26 +2237,6 @@
           this.ToolTip1.SetToolTip(this.chkAMCUpd, resources.GetString("chkAMCUpd.ToolTip"));
           this.chkAMCUpd.UseVisualStyleBackColor = false;
           this.chkAMCUpd.CheckedChanged += new System.EventHandler(this.chkAMCUpd_CheckedChanged);
-          // 
-          // txtAMCUpd_cnf
-          // 
-          this.txtAMCUpd_cnf.Location = new System.Drawing.Point(18, 19);
-          this.txtAMCUpd_cnf.Name = "txtAMCUpd_cnf";
-          this.txtAMCUpd_cnf.Size = new System.Drawing.Size(168, 20);
-          this.txtAMCUpd_cnf.TabIndex = 57;
-          this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf, resources.GetString("txtAMCUpd_cnf.ToolTip"));
-          this.txtAMCUpd_cnf.Visible = false;
-          this.txtAMCUpd_cnf.TextChanged += new System.EventHandler(this.txtAMCUpd_cnf_TextChanged);
-          // 
-          // btnAMCUpd_cnf
-          // 
-          this.btnAMCUpd_cnf.Location = new System.Drawing.Point(278, 19);
-          this.btnAMCUpd_cnf.Name = "btnAMCUpd_cnf";
-          this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 20);
-          this.btnAMCUpd_cnf.TabIndex = 58;
-          this.btnAMCUpd_cnf.Text = "...";
-          this.btnAMCUpd_cnf.UseVisualStyleBackColor = true;
-          this.btnAMCUpd_cnf.Click += new System.EventHandler(this.btnAMCUpd_cnf_Click);
           // 
           // groupBoxDeletionOptions
           // 
@@ -2830,7 +2843,7 @@
           // chkShowEmpty
           // 
           this.chkShowEmpty.AutoSize = true;
-          this.chkShowEmpty.Location = new System.Drawing.Point(40, 315);
+          this.chkShowEmpty.Location = new System.Drawing.Point(67, 318);
           this.chkShowEmpty.Name = "chkShowEmpty";
           this.chkShowEmpty.Size = new System.Drawing.Size(85, 17);
           this.chkShowEmpty.TabIndex = 87;
@@ -2841,7 +2854,7 @@
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(40, 249);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(67, 249);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
           this.chkOnlyTitle.TabIndex = 86;
@@ -3001,7 +3014,7 @@
           // chkGlobalAvailableOnly
           // 
           this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(40, 292);
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(67, 295);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
           this.chkGlobalAvailableOnly.TabIndex = 82;
@@ -3013,7 +3026,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(40, 270);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(67, 272);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -3024,7 +3037,7 @@
           // AlwaysDefaultView
           // 
           this.AlwaysDefaultView.AutoSize = true;
-          this.AlwaysDefaultView.Location = new System.Drawing.Point(40, 61);
+          this.AlwaysDefaultView.Location = new System.Drawing.Point(67, 61);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
           this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
           this.AlwaysDefaultView.TabIndex = 75;
@@ -5833,19 +5846,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // groupBox8
-          // 
-          this.groupBox8.Controls.Add(this.txtAMCUpd_cnf_Display);
-          this.groupBox8.Controls.Add(this.btnAMCUpd_cnf);
-          this.groupBox8.Controls.Add(this.txtAMCUpd_cnf);
-          this.groupBox8.Location = new System.Drawing.Point(388, 19);
-          this.groupBox8.Name = "groupBox8";
-          this.groupBox8.Size = new System.Drawing.Size(332, 53);
-          this.groupBox8.TabIndex = 63;
-          this.groupBox8.TabStop = false;
-          this.groupBox8.Text = "AMCU Config File ...";
-          this.ToolTip1.SetToolTip(this.groupBox8, resources.GetString("groupBox8.ToolTip"));
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5902,6 +5902,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).EndInit();
           this.groupBox_AMCupdater.ResumeLayout(false);
           this.groupBox_AMCupdater.PerformLayout();
+          this.groupBoxAMCUpdaterConfigFile.ResumeLayout(false);
+          this.groupBoxAMCUpdaterConfigFile.PerformLayout();
           this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
           this.groupBox_AMCupdaterScheduer.PerformLayout();
           this.groupBox_AMCupdater_ExternalApplication.ResumeLayout(false);
@@ -5988,8 +5990,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          this.groupBox8.ResumeLayout(false);
-          this.groupBox8.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6449,6 +6449,6 @@
         private Button buttonDefaultViewImageReset;
         private Button buttonDefaultPersonImageReset;
         private CheckBox chkShowIndexedImgInIndViews;
-        private GroupBox groupBox8;
+        private GroupBox groupBoxAMCUpdaterConfigFile;
     }
 }

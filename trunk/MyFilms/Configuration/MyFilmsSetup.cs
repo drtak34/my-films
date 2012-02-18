@@ -1403,11 +1403,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             if (chkAMCUpd.Checked)
             {
+              groupBoxAMCUpdaterConfigFile.Enabled = true;
               groupBox_AMCupdater_ExternalApplication.Enabled = true;
               groupBox_AMCupdaterScheduer.Enabled = true;
             }
             else
             {
+              groupBoxAMCUpdaterConfigFile.Enabled = false;
               groupBox_AMCupdater_ExternalApplication.Enabled = false;
               groupBox_AMCupdaterScheduer.Enabled = false;
             }
