@@ -1532,7 +1532,7 @@
           // pictureBoxDefaultFanart
           // 
           this.pictureBoxDefaultFanart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-          this.pictureBoxDefaultFanart.Location = new System.Drawing.Point(639, 36);
+          this.pictureBoxDefaultFanart.Location = new System.Drawing.Point(625, 47);
           this.pictureBoxDefaultFanart.Name = "pictureBoxDefaultFanart";
           this.pictureBoxDefaultFanart.Size = new System.Drawing.Size(90, 52);
           this.pictureBoxDefaultFanart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1578,7 +1578,7 @@
           // label48
           // 
           this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(592, 49);
+          this.label48.Location = new System.Drawing.Point(622, 11);
           this.label48.Name = "label48";
           this.label48.Size = new System.Drawing.Size(41, 26);
           this.label48.TabIndex = 78;
@@ -1633,7 +1633,7 @@
           // btnFanart
           // 
           this.btnFanart.Enabled = false;
-          this.btnFanart.Location = new System.Drawing.Point(569, 16);
+          this.btnFanart.Location = new System.Drawing.Point(569, 15);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
           this.btnFanart.TabIndex = 70;
@@ -3139,7 +3139,9 @@
           this.AntViewsImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
           this.AntViewsImage.TabIndex = 88;
           this.AntViewsImage.TabStop = false;
-          this.ToolTip1.SetToolTip(this.AntViewsImage, resources.GetString("AntViewsImage.ToolTip"));
+          this.ToolTip1.SetToolTip(this.AntViewsImage, "Preview of Cover Image loaded for this View.\r\nKlick to open dialog to choose a cu" +
+                  "stom one. \r\n\r\nIf no image is selected, MyFilms will try to use dfault images, we" +
+                  "re possible.");
           this.AntViewsImage.Click += new System.EventHandler(this.AntViewsImage_Click);
           // 
           // lblAntViewIndex

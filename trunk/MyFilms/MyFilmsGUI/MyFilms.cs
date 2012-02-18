@@ -3122,6 +3122,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case ViewContext.Menu:
         case ViewContext.MenuAll:
+          //conf.MenuSelectedID = currentItem.ItemId; // remember last menu position ...  
           MyFilmsDetail.Init_Detailed_DB(false);
           Clear_Logos();
           GUIControl.ShowControl(GetID, 34);
@@ -7824,6 +7825,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return;
       Context_Menu = true;
+      conf.MenuSelectedID = facadeFilms.SelectedListItemIndex; // remember current facade position for Menu refresh
+
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079904)); // Context options ...
       string[] upd_choice = new string[20];
@@ -8353,6 +8356,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilms.conf.CustomViews.View.Rows.InsertAt(newRow, rowIndex - 1);
             }
             SaveCustomViews();
+            conf.MenuSelectedID--;
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             break;
           }
@@ -8377,6 +8381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilms.conf.CustomViews.View.Rows.InsertAt(newRow, rowIndex + 1);
             }
             SaveCustomViews();
+            conf.MenuSelectedID++;
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             break;
           }
