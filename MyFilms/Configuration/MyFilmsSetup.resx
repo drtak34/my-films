@@ -271,6 +271,14 @@ fully qualified path to a logo is stored in the rule, so it might not be fully p
 "Use skins default logos" is the default and will search for logos in the skindirectory\media\logos 
 and it's subdirectories for logos matching the name in the logo rule. It should work in most situations.</value>
   </data>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
+  </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
 Enter the full path (or use the browse button) to the root folder containing the fanart image files.
@@ -285,14 +293,6 @@ Note:
 When scanning and importing new films, My Films (AMCUpdater) will limit the download to 3 images by default. 
 You may alter these options in AMCU Settings on the Database Fields tab under picture handling. 
 You may also download additional fanart images from within My Films.</value>
-  </data>
-  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
-    <value>If enabled, fanart will be used for group views.
-MyFilms will autocreate subfolders for you.
-Images placed in those folders will be used for fanart display
- in the default group views (category, year, genre).
-
-If disabled, default fanart will be displayed, if it is enabled.</value>
   </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
     <value>Select the “Use thumbs for group views" option if you have image files 
@@ -339,8 +339,7 @@ You can also define a default cover, that will be used, if there is no cover def
     <value>Click to change Default Movie Cover.
 The default cover image will be displayed when a movie entry does not have an associated cover image
 and it will be used as a default fanart image if the appropriate Fanart option is selected in the ‘Picture’ section, 
-and a movie entry does not have an associated fanart image.
-</value>
+and a movie entry does not have an associated fanart image.</value>
   </data>
   <data name="txtPicturePrefix.ToolTip" xml:space="preserve">
     <value>You can define a prefix for the cover images that will be 
@@ -378,11 +377,6 @@ Remark:
 If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
 set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
   </data>
-  <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
-    <value>Use this area to define a path where artist thumbs (images for persons) should be stored.
-Works same way as cover images for movies.
-It is used for "person like" Views, like actors, director, producer, writer.</value>
-  </data>
   <data name="pictureBoxDefaultPersonImage.ToolTip" xml:space="preserve">
     <value>Click to select the image file that you wish to use as the default person image.  
 The default person image will be displayed when a person does not have an associated photo or image
@@ -399,6 +393,11 @@ with new ones to let MyFilms (re)create the cache.
     <value>Enter the full path to the folder containing the person image files.
 Matching will be done based on images filename that matches the person's name.
 You can use the browse button to find the correct path.</value>
+  </data>
+  <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where artist thumbs (images for persons) should be stored.
+Works same way as cover images for movies.
+It is used for "person like" Views, like actors, director, producer, writer.</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,
@@ -669,13 +668,9 @@ Optional:
   <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1167, 18</value>
   </metadata>
-  <data name="AntViewsImage.ToolTip" xml:space="preserve">
-    <value>Preview of Cover Image loaded for this View.
-Klick to open dialog to choose a custom one. 
-Double click to reset the image to "none".
-
-If no image is selected, MyFilms will try to use dfault images, were possible.</value>
-  </data>
+  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1245, 18</value>
+  </metadata>
   <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 53</value>
   </metadata>
@@ -1210,16 +1205,16 @@ You still can tweak all settings later to your personal preferences.
 Note:
 If you want to test or do skinning, but don't have a working catalog, you can select the "SampleMovies.xml" catalog.</value>
   </data>
-  <data name="cbSyncFromServerOnStartup.ToolTip" xml:space="preserve">
-    <value>When enabled, MyFilms will copy the central config file into local MP data directory before starting up internal services.
-Note: Enabling this will overwrite your local MyFilms.xml each time you start Mediaportal !</value>
-  </data>
   <data name="groupBoxCentralConfig.ToolTip" xml:space="preserve">
     <value>For users with central storage, these options allow to configure "auto updates" of the MyFilms config 
 from a central storage location.
 Note: MyFilms stores some machine specific information in the MyFilms.xml config file - if you update that file 
 from a central location, those settings will also be overwritten with the ones from central storage.
 THe settings of this section are stored in MyFilmsServer.xml file in Mediaportal data directory.</value>
+  </data>
+  <data name="cbSyncFromServerOnStartup.ToolTip" xml:space="preserve">
+    <value>When enabled, MyFilms will copy the central config file into local MP data directory before starting up internal services.
+Note: Enabling this will overwrite your local MyFilms.xml each time you start Mediaportal !</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
