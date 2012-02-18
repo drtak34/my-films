@@ -462,6 +462,15 @@
           this.label27 = new System.Windows.Forms.Label();
           this.btnFirstTimeSetup = new System.Windows.Forms.Button();
           this.buttonWikiHelp = new System.Windows.Forms.Button();
+          this.groupBoxCentralConfig = new System.Windows.Forms.GroupBox();
+          this.btnMyFilmsServerSave = new System.Windows.Forms.Button();
+          this.label25 = new System.Windows.Forms.Label();
+          this.btnSyncToServer = new System.Windows.Forms.Button();
+          this.btnSyncFromServer = new System.Windows.Forms.Button();
+          this.cbSyncFromServerOnStartup = new System.Windows.Forms.CheckBox();
+          this.btnMyFilmsCentralConfigFile = new System.Windows.Forms.Button();
+          this.MyFilmsCentralConfigDir = new System.Windows.Forms.TextBox();
+          this.label23 = new System.Windows.Forms.Label();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -478,7 +487,7 @@
           this.lblAMCpath = new System.Windows.Forms.Label();
           this.buttonAMCpathSearch = new System.Windows.Forms.Button();
           this.buttonOpenTmpFile = new System.Windows.Forms.Button();
-          this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
+          this.Tab_Network = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
           this.btnUpdate = new System.Windows.Forms.Button();
           this.lblLogoPresets = new System.Windows.Forms.Label();
@@ -638,9 +647,10 @@
           this.groupBox13.SuspendLayout();
           this.groupBox_GrabberOptions.SuspendLayout();
           this.groupBox6.SuspendLayout();
+          this.groupBoxCentralConfig.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
-          this.Tab_WakeOnLan.SuspendLayout();
+          this.Tab_Network.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
           this.Tab_AMCupdater.SuspendLayout();
@@ -1089,9 +1099,9 @@
           this.groupBox25.Controls.Add(this.check_WOL_enable);
           this.groupBox25.Controls.Add(this.NAS_Name_1);
           this.groupBox25.Controls.Add(this.label36);
-          this.groupBox25.Location = new System.Drawing.Point(22, 29);
+          this.groupBox25.Location = new System.Drawing.Point(22, 105);
           this.groupBox25.Name = "groupBox25";
-          this.groupBox25.Size = new System.Drawing.Size(705, 274);
+          this.groupBox25.Size = new System.Drawing.Size(705, 234);
           this.groupBox25.TabIndex = 73;
           this.groupBox25.TabStop = false;
           this.groupBox25.Text = "WakeOnLAN Options to Support NAS Storage";
@@ -1123,7 +1133,7 @@
           // 
           // buttonSendMagicPacket3
           // 
-          this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 233);
+          this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 200);
           this.buttonSendMagicPacket3.Name = "buttonSendMagicPacket3";
           this.buttonSendMagicPacket3.Size = new System.Drawing.Size(81, 23);
           this.buttonSendMagicPacket3.TabIndex = 91;
@@ -1133,7 +1143,7 @@
           // 
           // buttonSendMagicPacket2
           // 
-          this.buttonSendMagicPacket2.Location = new System.Drawing.Point(603, 207);
+          this.buttonSendMagicPacket2.Location = new System.Drawing.Point(603, 174);
           this.buttonSendMagicPacket2.Name = "buttonSendMagicPacket2";
           this.buttonSendMagicPacket2.Size = new System.Drawing.Size(81, 23);
           this.buttonSendMagicPacket2.TabIndex = 90;
@@ -1144,7 +1154,7 @@
           // label30
           // 
           this.label30.AutoSize = true;
-          this.label30.Location = new System.Drawing.Point(414, 114);
+          this.label30.Location = new System.Drawing.Point(414, 94);
           this.label30.Name = "label30";
           this.label30.Size = new System.Drawing.Size(272, 13);
           this.label30.TabIndex = 89;
@@ -1152,7 +1162,7 @@
           // 
           // buttonSendMagicPacket1
           // 
-          this.buttonSendMagicPacket1.Location = new System.Drawing.Point(603, 183);
+          this.buttonSendMagicPacket1.Location = new System.Drawing.Point(603, 150);
           this.buttonSendMagicPacket1.Name = "buttonSendMagicPacket1";
           this.buttonSendMagicPacket1.Size = new System.Drawing.Size(81, 23);
           this.buttonSendMagicPacket1.TabIndex = 88;
@@ -1162,7 +1172,7 @@
           // 
           // buttonGetMACadresses
           // 
-          this.buttonGetMACadresses.Location = new System.Drawing.Point(417, 143);
+          this.buttonGetMACadresses.Location = new System.Drawing.Point(417, 110);
           this.buttonGetMACadresses.Name = "buttonGetMACadresses";
           this.buttonGetMACadresses.Size = new System.Drawing.Size(160, 28);
           this.buttonGetMACadresses.TabIndex = 87;
@@ -1173,7 +1183,7 @@
           // label_NAS_Server_3_MAC
           // 
           this.label_NAS_Server_3_MAC.AutoSize = true;
-          this.label_NAS_Server_3_MAC.Location = new System.Drawing.Point(292, 238);
+          this.label_NAS_Server_3_MAC.Location = new System.Drawing.Point(292, 205);
           this.label_NAS_Server_3_MAC.Name = "label_NAS_Server_3_MAC";
           this.label_NAS_Server_3_MAC.Size = new System.Drawing.Size(119, 13);
           this.label_NAS_Server_3_MAC.TabIndex = 86;
@@ -1182,7 +1192,7 @@
           // NAS_MAC_3
           // 
           this.NAS_MAC_3.Enabled = false;
-          this.NAS_MAC_3.Location = new System.Drawing.Point(417, 235);
+          this.NAS_MAC_3.Location = new System.Drawing.Point(417, 202);
           this.NAS_MAC_3.Name = "NAS_MAC_3";
           this.NAS_MAC_3.Size = new System.Drawing.Size(160, 20);
           this.NAS_MAC_3.TabIndex = 85;
@@ -1190,7 +1200,7 @@
           // label_NAS_Server_3_Name
           // 
           this.label_NAS_Server_3_Name.AutoSize = true;
-          this.label_NAS_Server_3_Name.Location = new System.Drawing.Point(24, 238);
+          this.label_NAS_Server_3_Name.Location = new System.Drawing.Point(24, 205);
           this.label_NAS_Server_3_Name.Name = "label_NAS_Server_3_Name";
           this.label_NAS_Server_3_Name.Size = new System.Drawing.Size(84, 13);
           this.label_NAS_Server_3_Name.TabIndex = 84;
@@ -1199,7 +1209,7 @@
           // NAS_Name_3
           // 
           this.NAS_Name_3.Enabled = false;
-          this.NAS_Name_3.Location = new System.Drawing.Point(114, 235);
+          this.NAS_Name_3.Location = new System.Drawing.Point(114, 202);
           this.NAS_Name_3.Name = "NAS_Name_3";
           this.NAS_Name_3.Size = new System.Drawing.Size(160, 20);
           this.NAS_Name_3.TabIndex = 83;
@@ -1208,7 +1218,7 @@
           // label_NAS_Server_2_MAC
           // 
           this.label_NAS_Server_2_MAC.AutoSize = true;
-          this.label_NAS_Server_2_MAC.Location = new System.Drawing.Point(292, 212);
+          this.label_NAS_Server_2_MAC.Location = new System.Drawing.Point(292, 179);
           this.label_NAS_Server_2_MAC.Name = "label_NAS_Server_2_MAC";
           this.label_NAS_Server_2_MAC.Size = new System.Drawing.Size(119, 13);
           this.label_NAS_Server_2_MAC.TabIndex = 82;
@@ -1217,7 +1227,7 @@
           // NAS_MAC_2
           // 
           this.NAS_MAC_2.Enabled = false;
-          this.NAS_MAC_2.Location = new System.Drawing.Point(417, 209);
+          this.NAS_MAC_2.Location = new System.Drawing.Point(417, 176);
           this.NAS_MAC_2.Name = "NAS_MAC_2";
           this.NAS_MAC_2.Size = new System.Drawing.Size(160, 20);
           this.NAS_MAC_2.TabIndex = 81;
@@ -1225,7 +1235,7 @@
           // label_NAS_Server_2_Name
           // 
           this.label_NAS_Server_2_Name.AutoSize = true;
-          this.label_NAS_Server_2_Name.Location = new System.Drawing.Point(24, 212);
+          this.label_NAS_Server_2_Name.Location = new System.Drawing.Point(24, 179);
           this.label_NAS_Server_2_Name.Name = "label_NAS_Server_2_Name";
           this.label_NAS_Server_2_Name.Size = new System.Drawing.Size(84, 13);
           this.label_NAS_Server_2_Name.TabIndex = 80;
@@ -1234,7 +1244,7 @@
           // NAS_Name_2
           // 
           this.NAS_Name_2.Enabled = false;
-          this.NAS_Name_2.Location = new System.Drawing.Point(114, 209);
+          this.NAS_Name_2.Location = new System.Drawing.Point(114, 176);
           this.NAS_Name_2.Name = "NAS_Name_2";
           this.NAS_Name_2.Size = new System.Drawing.Size(160, 20);
           this.NAS_Name_2.TabIndex = 79;
@@ -1243,7 +1253,7 @@
           // label_NAS_Server_1_MAC
           // 
           this.label_NAS_Server_1_MAC.AutoSize = true;
-          this.label_NAS_Server_1_MAC.Location = new System.Drawing.Point(292, 186);
+          this.label_NAS_Server_1_MAC.Location = new System.Drawing.Point(292, 153);
           this.label_NAS_Server_1_MAC.Name = "label_NAS_Server_1_MAC";
           this.label_NAS_Server_1_MAC.Size = new System.Drawing.Size(119, 13);
           this.label_NAS_Server_1_MAC.TabIndex = 78;
@@ -1252,7 +1262,7 @@
           // NAS_MAC_1
           // 
           this.NAS_MAC_1.Enabled = false;
-          this.NAS_MAC_1.Location = new System.Drawing.Point(417, 183);
+          this.NAS_MAC_1.Location = new System.Drawing.Point(417, 150);
           this.NAS_MAC_1.Name = "NAS_MAC_1";
           this.NAS_MAC_1.Size = new System.Drawing.Size(160, 20);
           this.NAS_MAC_1.TabIndex = 77;
@@ -1260,7 +1270,7 @@
           // label_NAS_Server_1_Name
           // 
           this.label_NAS_Server_1_Name.AutoSize = true;
-          this.label_NAS_Server_1_Name.Location = new System.Drawing.Point(24, 186);
+          this.label_NAS_Server_1_Name.Location = new System.Drawing.Point(24, 153);
           this.label_NAS_Server_1_Name.Name = "label_NAS_Server_1_Name";
           this.label_NAS_Server_1_Name.Size = new System.Drawing.Size(84, 13);
           this.label_NAS_Server_1_Name.TabIndex = 76;
@@ -1294,7 +1304,7 @@
           // NAS_Name_1
           // 
           this.NAS_Name_1.Enabled = false;
-          this.NAS_Name_1.Location = new System.Drawing.Point(114, 183);
+          this.NAS_Name_1.Location = new System.Drawing.Point(114, 150);
           this.NAS_Name_1.Name = "NAS_Name_1";
           this.NAS_Name_1.Size = new System.Drawing.Size(160, 20);
           this.NAS_Name_1.TabIndex = 68;
@@ -1303,7 +1313,7 @@
           // label36
           // 
           this.label36.AutoSize = true;
-          this.label36.Location = new System.Drawing.Point(24, 151);
+          this.label36.Location = new System.Drawing.Point(24, 118);
           this.label36.Name = "label36";
           this.label36.Size = new System.Drawing.Size(235, 13);
           this.label36.TabIndex = 69;
@@ -4834,6 +4844,106 @@
           this.buttonWikiHelp.UseVisualStyleBackColor = true;
           this.buttonWikiHelp.Click += new System.EventHandler(this.buttonWikiHelp_Click);
           // 
+          // groupBoxCentralConfig
+          // 
+          this.groupBoxCentralConfig.Controls.Add(this.btnMyFilmsServerSave);
+          this.groupBoxCentralConfig.Controls.Add(this.label25);
+          this.groupBoxCentralConfig.Controls.Add(this.btnSyncToServer);
+          this.groupBoxCentralConfig.Controls.Add(this.btnSyncFromServer);
+          this.groupBoxCentralConfig.Controls.Add(this.cbSyncFromServerOnStartup);
+          this.groupBoxCentralConfig.Controls.Add(this.btnMyFilmsCentralConfigFile);
+          this.groupBoxCentralConfig.Controls.Add(this.MyFilmsCentralConfigDir);
+          this.groupBoxCentralConfig.Controls.Add(this.label23);
+          this.groupBoxCentralConfig.Location = new System.Drawing.Point(22, 6);
+          this.groupBoxCentralConfig.Name = "groupBoxCentralConfig";
+          this.groupBoxCentralConfig.Size = new System.Drawing.Size(705, 93);
+          this.groupBoxCentralConfig.TabIndex = 74;
+          this.groupBoxCentralConfig.TabStop = false;
+          this.groupBoxCentralConfig.Text = "Central Config Handling";
+          this.ToolTip1.SetToolTip(this.groupBoxCentralConfig, resources.GetString("groupBoxCentralConfig.ToolTip"));
+          // 
+          // btnMyFilmsServerSave
+          // 
+          this.btnMyFilmsServerSave.Location = new System.Drawing.Point(609, 57);
+          this.btnMyFilmsServerSave.Name = "btnMyFilmsServerSave";
+          this.btnMyFilmsServerSave.Size = new System.Drawing.Size(75, 23);
+          this.btnMyFilmsServerSave.TabIndex = 7;
+          this.btnMyFilmsServerSave.Text = "Save";
+          this.ToolTip1.SetToolTip(this.btnMyFilmsServerSave, "You have to save the settings for central config separately from \"normal\" MyFilms" +
+                  " setup.\r\nHowever, this usually only has to be done once when you setup your netw" +
+                  "orked MyFilms environment.");
+          this.btnMyFilmsServerSave.UseVisualStyleBackColor = true;
+          this.btnMyFilmsServerSave.Click += new System.EventHandler(this.btnMyFilmsServerSave_Click);
+          // 
+          // label25
+          // 
+          this.label25.AutoSize = true;
+          this.label25.Location = new System.Drawing.Point(397, 24);
+          this.label25.Name = "label25";
+          this.label25.Size = new System.Drawing.Size(150, 13);
+          this.label25.TabIndex = 6;
+          this.label25.Text = "Manual Sync from or to Server";
+          // 
+          // btnSyncToServer
+          // 
+          this.btnSyncToServer.Location = new System.Drawing.Point(354, 57);
+          this.btnSyncToServer.Name = "btnSyncToServer";
+          this.btnSyncToServer.Size = new System.Drawing.Size(105, 23);
+          this.btnSyncToServer.TabIndex = 3;
+          this.btnSyncToServer.Text = "Sync to Server";
+          this.btnSyncToServer.UseVisualStyleBackColor = true;
+          this.btnSyncToServer.Click += new System.EventHandler(this.btnSyncToServer_Click);
+          // 
+          // btnSyncFromServer
+          // 
+          this.btnSyncFromServer.Location = new System.Drawing.Point(474, 57);
+          this.btnSyncFromServer.Name = "btnSyncFromServer";
+          this.btnSyncFromServer.Size = new System.Drawing.Size(105, 23);
+          this.btnSyncFromServer.TabIndex = 4;
+          this.btnSyncFromServer.Text = "Sync from Server";
+          this.btnSyncFromServer.UseVisualStyleBackColor = true;
+          this.btnSyncFromServer.Click += new System.EventHandler(this.btnSyncFromServer_Click);
+          // 
+          // cbSyncFromServerOnStartup
+          // 
+          this.cbSyncFromServerOnStartup.AutoSize = true;
+          this.cbSyncFromServerOnStartup.Location = new System.Drawing.Point(27, 23);
+          this.cbSyncFromServerOnStartup.Name = "cbSyncFromServerOnStartup";
+          this.cbSyncFromServerOnStartup.Size = new System.Drawing.Size(244, 17);
+          this.cbSyncFromServerOnStartup.TabIndex = 5;
+          this.cbSyncFromServerOnStartup.Text = "Enable automatic Sync from Server on Startup";
+          this.ToolTip1.SetToolTip(this.cbSyncFromServerOnStartup, resources.GetString("cbSyncFromServerOnStartup.ToolTip"));
+          this.cbSyncFromServerOnStartup.UseVisualStyleBackColor = true;
+          this.cbSyncFromServerOnStartup.CheckedChanged += new System.EventHandler(this.cbSyncFromServerOnStartup_CheckedChanged);
+          // 
+          // btnMyFilmsCentralConfigFile
+          // 
+          this.btnMyFilmsCentralConfigFile.Location = new System.Drawing.Point(280, 58);
+          this.btnMyFilmsCentralConfigFile.Name = "btnMyFilmsCentralConfigFile";
+          this.btnMyFilmsCentralConfigFile.Size = new System.Drawing.Size(29, 20);
+          this.btnMyFilmsCentralConfigFile.TabIndex = 2;
+          this.btnMyFilmsCentralConfigFile.Text = "...";
+          this.btnMyFilmsCentralConfigFile.UseVisualStyleBackColor = true;
+          this.btnMyFilmsCentralConfigFile.Click += new System.EventHandler(this.btnMyFilmsCentralConfigFile_Click);
+          // 
+          // MyFilmsCentralConfigDir
+          // 
+          this.MyFilmsCentralConfigDir.Location = new System.Drawing.Point(27, 58);
+          this.MyFilmsCentralConfigDir.Name = "MyFilmsCentralConfigDir";
+          this.MyFilmsCentralConfigDir.Size = new System.Drawing.Size(247, 20);
+          this.MyFilmsCentralConfigDir.TabIndex = 1;
+          this.ToolTip1.SetToolTip(this.MyFilmsCentralConfigDir, "Set the directory to store to / retrieve from the MyFilms.xml config file.\r\nIt sh" +
+                  "ould be a place that is accessible from all your workstations / HTPCs.");
+          // 
+          // label23
+          // 
+          this.label23.AutoSize = true;
+          this.label23.Location = new System.Drawing.Point(33, 43);
+          this.label23.Name = "label23";
+          this.label23.Size = new System.Drawing.Size(165, 13);
+          this.label23.TabIndex = 0;
+          this.label23.Text = "Path to central MyFilms Config Dir";
+          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -4975,17 +5085,18 @@
           this.buttonOpenTmpFile.UseVisualStyleBackColor = true;
           this.buttonOpenTmpFile.Click += new System.EventHandler(this.buttonOpenTmpFile_Click);
           // 
-          // Tab_WakeOnLan
+          // Tab_Network
           // 
-          this.Tab_WakeOnLan.Controls.Add(this.groupBox25);
-          this.Tab_WakeOnLan.Location = new System.Drawing.Point(4, 22);
-          this.Tab_WakeOnLan.Name = "Tab_WakeOnLan";
-          this.Tab_WakeOnLan.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_WakeOnLan.Size = new System.Drawing.Size(747, 354);
-          this.Tab_WakeOnLan.TabIndex = 8;
-          this.Tab_WakeOnLan.Text = "WakeOnLAN";
-          this.Tab_WakeOnLan.ToolTipText = "Setup for WakeOnLan features";
-          this.Tab_WakeOnLan.UseVisualStyleBackColor = true;
+          this.Tab_Network.Controls.Add(this.groupBoxCentralConfig);
+          this.Tab_Network.Controls.Add(this.groupBox25);
+          this.Tab_Network.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Network.Name = "Tab_Network";
+          this.Tab_Network.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Network.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Network.TabIndex = 8;
+          this.Tab_Network.Text = "Network";
+          this.Tab_Network.ToolTipText = "Setup for WakeOnLan features";
+          this.Tab_Network.UseVisualStyleBackColor = true;
           // 
           // Tab_Logos
           // 
@@ -5298,7 +5409,7 @@
           this.General.Controls.Add(this.Tab_AMCupdater);
           this.General.Controls.Add(this.Tab_Artwork);
           this.General.Controls.Add(this.Tab_Logos);
-          this.General.Controls.Add(this.Tab_WakeOnLan);
+          this.General.Controls.Add(this.Tab_Network);
           this.General.Controls.Add(this.Tab_ExternalCatalogs);
           this.General.Controls.Add(this.Tab_Trakt);
           this.General.Controls.Add(this.Tab_Other);
@@ -5969,10 +6080,12 @@
           this.groupBox_GrabberOptions.PerformLayout();
           this.groupBox6.ResumeLayout(false);
           this.groupBox6.PerformLayout();
+          this.groupBoxCentralConfig.ResumeLayout(false);
+          this.groupBoxCentralConfig.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
-          this.Tab_WakeOnLan.ResumeLayout(false);
+          this.Tab_Network.ResumeLayout(false);
           this.Tab_Logos.ResumeLayout(false);
           this.Tab_Logos.PerformLayout();
           this.Tab_Artwork.ResumeLayout(false);
@@ -6024,7 +6137,7 @@
         private GroupBox groupBox_DVDprofiler;
         private GroupBox groupBox13;
         private CheckBox chkDVDprofilerOnlyFile;
-        private TabPage Tab_WakeOnLan;
+        private TabPage Tab_Network;
         private GroupBox groupBox25;
         private Label label37;
         private ComboBox comboWOLtimeout;
@@ -6450,5 +6563,14 @@
         private Button buttonDefaultPersonImageReset;
         private CheckBox chkShowIndexedImgInIndViews;
         private GroupBox groupBoxAMCUpdaterConfigFile;
+        private GroupBox groupBoxCentralConfig;
+        private Button btnSyncFromServer;
+        private Button btnSyncToServer;
+        private Button btnMyFilmsCentralConfigFile;
+        private TextBox MyFilmsCentralConfigDir;
+        private Label label23;
+        private CheckBox cbSyncFromServerOnStartup;
+        private Button btnMyFilmsServerSave;
+        private Label label25;
     }
 }

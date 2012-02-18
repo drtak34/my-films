@@ -562,6 +562,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion + "',    BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
       LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
 
+      // check, if remote config file should be copied to local MP data dir (MyFilms Server Setup)
+      SyncRemoteConfig();
+
       // Fanart Timer
       _fanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
 
@@ -803,6 +806,55 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  AsynLoadMovieList();
         //}
         // ********************************
+      }
+    }
+
+    private void SyncRemoteConfig()
+    {
+      if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilmsServer.xml"))
+      {
+        LogMyFilms.Warn("SyncRemoteConfig() - local file MyFilmsServer.xml not found - cannot read sync settings - exit sync."); 
+        return;
+      }
+      XmlConfig MyFilmsServer = new XmlConfig();
+      string MyFilmsCentralConfigDir = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
+      bool SyncFromServerOnStartup = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+      if (SyncFromServerOnStartup && System.IO.File.Exists(MyFilmsCentralConfigDir + @"\MyFilms.xml"))
+      {
+        LogMyFilms.Info("SyncRemoteConfig() - Server Sync is enabled - remote directory: '" + MyFilmsCentralConfigDir + "'");
+        string serverConfigFile = MyFilmsCentralConfigDir + @"\MyFilmsServer.xml";
+        string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
+        if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir))
+        {
+          LogMyFilms.Error("SyncRemoteConfig() - remote directory is not accessible !");
+        }
+        else if (!System.IO.File.Exists(serverConfigFile))
+        {
+          LogMyFilms.Error("SyncRemoteConfig() - remote config file note found !");
+        }
+        else
+        {
+          if (System.IO.File.Exists(localConfigFile))
+          {
+            try
+            {
+              System.IO.File.Copy(localConfigFile, localConfigFile + "_" + System.DateTime.Now.ToLongTimeString(), true);
+            }
+            catch (Exception)
+            {
+              LogMyFilms.Error("SyncRemoteConfig() - could not backup local MyFilms.xml config file !");
+            }
+          }
+          try
+          {
+            System.IO.File.Copy(serverConfigFile, localConfigFile, true);
+            LogMyFilms.Info("SyncRemoteConfig() - Successfully copied remote config to local config");
+          }
+          catch (Exception)
+          {
+            LogMyFilms.Error("SyncRemoteConfig() - could not copy remote config to local config file !");
+          }
+        }
       }
     }
 
