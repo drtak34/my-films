@@ -3447,6 +3447,7 @@
           this.groupBox5.TabIndex = 42;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Filter Expression ...";
+          this.ToolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
           // 
           // AntViewFilter
           // 
