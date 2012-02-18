@@ -5128,11 +5128,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (getThumbs)
         {
           #region load first image syncronously, as asyncloading might cause flicker or even let it disappear
-          if (conf.IndexedChars > 0) LoadIndexSkinThumbs(this.facadeFilms[conf.StrIndex]);
+          if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews) LoadIndexSkinThumbs(this.facadeFilms[conf.StrIndex]);
           else
           {
             string[] strActiveFacadeImages = SetViewThumbs(WStrSort, this.facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson);
-            string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+            // string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
             this.facadeFilms[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
             this.facadeFilms[conf.StrIndex].IconImage = strActiveFacadeImages[1];
             this.facadeFilms[conf.StrIndex].IconImageBig = strActiveFacadeImages[0];
@@ -5217,7 +5217,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (string.IsNullOrEmpty(this.facadeFilms[i].ThumbnailImage))
               {
-                if (conf.IndexedChars > 0 && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
+                if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
                 {
                   LoadIndexSkinThumbs(this.facadeFilms[i]);
                 }
