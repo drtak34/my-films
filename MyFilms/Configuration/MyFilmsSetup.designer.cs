@@ -462,15 +462,7 @@
           this.label27 = new System.Windows.Forms.Label();
           this.btnFirstTimeSetup = new System.Windows.Forms.Button();
           this.buttonWikiHelp = new System.Windows.Forms.Button();
-          this.groupBoxCentralConfig = new System.Windows.Forms.GroupBox();
-          this.btnMyFilmsServerSave = new System.Windows.Forms.Button();
-          this.label25 = new System.Windows.Forms.Label();
-          this.btnSyncToServer = new System.Windows.Forms.Button();
-          this.btnSyncFromServer = new System.Windows.Forms.Button();
-          this.cbSyncFromServerOnStartup = new System.Windows.Forms.CheckBox();
-          this.btnMyFilmsCentralConfigFile = new System.Windows.Forms.Button();
-          this.MyFilmsCentralConfigDir = new System.Windows.Forms.TextBox();
-          this.label23 = new System.Windows.Forms.Label();
+          this.btnServerSync = new System.Windows.Forms.Button();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -647,7 +639,6 @@
           this.groupBox13.SuspendLayout();
           this.groupBox_GrabberOptions.SuspendLayout();
           this.groupBox6.SuspendLayout();
-          this.groupBoxCentralConfig.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_Network.SuspendLayout();
@@ -840,7 +831,7 @@
           // 
           this.Config_Name.BackColor = System.Drawing.SystemColors.Info;
           this.Config_Name.FormattingEnabled = true;
-          this.Config_Name.Location = new System.Drawing.Point(195, 39);
+          this.Config_Name.Location = new System.Drawing.Point(189, 42);
           this.Config_Name.Name = "Config_Name";
           this.Config_Name.Size = new System.Drawing.Size(172, 21);
           this.Config_Name.Sorted = true;
@@ -852,7 +843,7 @@
           // 
           // textBoxPluginName
           // 
-          this.textBoxPluginName.Location = new System.Drawing.Point(195, 11);
+          this.textBoxPluginName.Location = new System.Drawing.Point(189, 14);
           this.textBoxPluginName.Name = "textBoxPluginName";
           this.textBoxPluginName.Size = new System.Drawing.Size(172, 20);
           this.textBoxPluginName.TabIndex = 5;
@@ -884,7 +875,7 @@
           // Config_Dflt
           // 
           this.Config_Dflt.AutoSize = true;
-          this.Config_Dflt.Location = new System.Drawing.Point(460, 13);
+          this.Config_Dflt.Location = new System.Drawing.Point(482, 17);
           this.Config_Dflt.Name = "Config_Dflt";
           this.Config_Dflt.Size = new System.Drawing.Size(125, 17);
           this.Config_Dflt.TabIndex = 73;
@@ -895,7 +886,7 @@
           // Config_Menu
           // 
           this.Config_Menu.AutoSize = true;
-          this.Config_Menu.Location = new System.Drawing.Point(460, 41);
+          this.Config_Menu.Location = new System.Drawing.Point(482, 45);
           this.Config_Menu.Name = "Config_Menu";
           this.Config_Menu.Size = new System.Drawing.Size(159, 17);
           this.Config_Menu.TabIndex = 74;
@@ -907,7 +898,7 @@
           // 
           this.label_VersionNumber.AutoSize = true;
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
-          this.label_VersionNumber.Location = new System.Drawing.Point(650, 16);
+          this.label_VersionNumber.Location = new System.Drawing.Point(652, 18);
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(89, 13);
           this.label_VersionNumber.TabIndex = 34;
@@ -1099,7 +1090,7 @@
           this.groupBox25.Controls.Add(this.check_WOL_enable);
           this.groupBox25.Controls.Add(this.NAS_Name_1);
           this.groupBox25.Controls.Add(this.label36);
-          this.groupBox25.Location = new System.Drawing.Point(22, 105);
+          this.groupBox25.Location = new System.Drawing.Point(22, 50);
           this.groupBox25.Name = "groupBox25";
           this.groupBox25.Size = new System.Drawing.Size(705, 234);
           this.groupBox25.TabIndex = 73;
@@ -4406,7 +4397,7 @@
           // 
           this.btnLaunchAMCglobal.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCglobal.Image")));
           this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(105, 466);
+          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(103, 466);
           this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
           this.btnLaunchAMCglobal.Size = new System.Drawing.Size(72, 31);
           this.btnLaunchAMCglobal.TabIndex = 77;
@@ -4515,7 +4506,7 @@
           // 
           // btnHyperLinkParamGen
           // 
-          this.btnHyperLinkParamGen.Location = new System.Drawing.Point(667, 37);
+          this.btnHyperLinkParamGen.Location = new System.Drawing.Point(668, 40);
           this.btnHyperLinkParamGen.Name = "btnHyperLinkParamGen";
           this.btnHyperLinkParamGen.Size = new System.Drawing.Size(75, 23);
           this.btnHyperLinkParamGen.TabIndex = 82;
@@ -4825,9 +4816,9 @@
           // 
           // btnFirstTimeSetup
           // 
-          this.btnFirstTimeSetup.Location = new System.Drawing.Point(195, 466);
+          this.btnFirstTimeSetup.Location = new System.Drawing.Point(198, 466);
           this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
-          this.btnFirstTimeSetup.Size = new System.Drawing.Size(124, 31);
+          this.btnFirstTimeSetup.Size = new System.Drawing.Size(114, 31);
           this.btnFirstTimeSetup.TabIndex = 77;
           this.btnFirstTimeSetup.Text = " Setup Wizard ...";
           this.ToolTip1.SetToolTip(this.btnFirstTimeSetup, resources.GetString("btnFirstTimeSetup.ToolTip"));
@@ -4847,110 +4838,21 @@
           this.buttonWikiHelp.UseVisualStyleBackColor = true;
           this.buttonWikiHelp.Click += new System.EventHandler(this.buttonWikiHelp_Click);
           // 
-          // groupBoxCentralConfig
+          // btnServerSync
           // 
-          this.groupBoxCentralConfig.Controls.Add(this.btnMyFilmsServerSave);
-          this.groupBoxCentralConfig.Controls.Add(this.label25);
-          this.groupBoxCentralConfig.Controls.Add(this.btnSyncToServer);
-          this.groupBoxCentralConfig.Controls.Add(this.btnSyncFromServer);
-          this.groupBoxCentralConfig.Controls.Add(this.cbSyncFromServerOnStartup);
-          this.groupBoxCentralConfig.Controls.Add(this.btnMyFilmsCentralConfigFile);
-          this.groupBoxCentralConfig.Controls.Add(this.MyFilmsCentralConfigDir);
-          this.groupBoxCentralConfig.Controls.Add(this.label23);
-          this.groupBoxCentralConfig.Location = new System.Drawing.Point(22, 6);
-          this.groupBoxCentralConfig.Name = "groupBoxCentralConfig";
-          this.groupBoxCentralConfig.Size = new System.Drawing.Size(705, 93);
-          this.groupBoxCentralConfig.TabIndex = 74;
-          this.groupBoxCentralConfig.TabStop = false;
-          this.groupBoxCentralConfig.Text = "Central Config Handling";
-          this.ToolTip1.SetToolTip(this.groupBoxCentralConfig, resources.GetString("groupBoxCentralConfig.ToolTip"));
-          // 
-          // btnMyFilmsServerSave
-          // 
-          this.btnMyFilmsServerSave.Location = new System.Drawing.Point(609, 57);
-          this.btnMyFilmsServerSave.Name = "btnMyFilmsServerSave";
-          this.btnMyFilmsServerSave.Size = new System.Drawing.Size(75, 23);
-          this.btnMyFilmsServerSave.TabIndex = 7;
-          this.btnMyFilmsServerSave.Text = "Save";
-          this.ToolTip1.SetToolTip(this.btnMyFilmsServerSave, "You have to save the settings for central config separately from \"normal\" MyFilms" +
-                  " setup.\r\nHowever, this usually only has to be done once when you setup your netw" +
-                  "orked MyFilms environment.");
-          this.btnMyFilmsServerSave.UseVisualStyleBackColor = true;
-          this.btnMyFilmsServerSave.Click += new System.EventHandler(this.btnMyFilmsServerSave_Click);
-          // 
-          // label25
-          // 
-          this.label25.AutoSize = true;
-          this.label25.Location = new System.Drawing.Point(397, 24);
-          this.label25.Name = "label25";
-          this.label25.Size = new System.Drawing.Size(150, 13);
-          this.label25.TabIndex = 6;
-          this.label25.Text = "Manual Sync from or to Server";
-          // 
-          // btnSyncToServer
-          // 
-          this.btnSyncToServer.Location = new System.Drawing.Point(354, 57);
-          this.btnSyncToServer.Name = "btnSyncToServer";
-          this.btnSyncToServer.Size = new System.Drawing.Size(105, 23);
-          this.btnSyncToServer.TabIndex = 3;
-          this.btnSyncToServer.Text = "Sync to Server";
-          this.btnSyncToServer.UseVisualStyleBackColor = true;
-          this.btnSyncToServer.Click += new System.EventHandler(this.btnSyncToServer_Click);
-          // 
-          // btnSyncFromServer
-          // 
-          this.btnSyncFromServer.Location = new System.Drawing.Point(474, 57);
-          this.btnSyncFromServer.Name = "btnSyncFromServer";
-          this.btnSyncFromServer.Size = new System.Drawing.Size(105, 23);
-          this.btnSyncFromServer.TabIndex = 4;
-          this.btnSyncFromServer.Text = "Sync from Server";
-          this.btnSyncFromServer.UseVisualStyleBackColor = true;
-          this.btnSyncFromServer.Click += new System.EventHandler(this.btnSyncFromServer_Click);
-          // 
-          // cbSyncFromServerOnStartup
-          // 
-          this.cbSyncFromServerOnStartup.AutoSize = true;
-          this.cbSyncFromServerOnStartup.Location = new System.Drawing.Point(27, 23);
-          this.cbSyncFromServerOnStartup.Name = "cbSyncFromServerOnStartup";
-          this.cbSyncFromServerOnStartup.Size = new System.Drawing.Size(244, 17);
-          this.cbSyncFromServerOnStartup.TabIndex = 5;
-          this.cbSyncFromServerOnStartup.Text = "Enable automatic Sync from Server on Startup";
-          this.ToolTip1.SetToolTip(this.cbSyncFromServerOnStartup, resources.GetString("cbSyncFromServerOnStartup.ToolTip"));
-          this.cbSyncFromServerOnStartup.UseVisualStyleBackColor = true;
-          this.cbSyncFromServerOnStartup.CheckedChanged += new System.EventHandler(this.cbSyncFromServerOnStartup_CheckedChanged);
-          // 
-          // btnMyFilmsCentralConfigFile
-          // 
-          this.btnMyFilmsCentralConfigFile.Location = new System.Drawing.Point(280, 58);
-          this.btnMyFilmsCentralConfigFile.Name = "btnMyFilmsCentralConfigFile";
-          this.btnMyFilmsCentralConfigFile.Size = new System.Drawing.Size(29, 20);
-          this.btnMyFilmsCentralConfigFile.TabIndex = 2;
-          this.btnMyFilmsCentralConfigFile.Text = "...";
-          this.btnMyFilmsCentralConfigFile.UseVisualStyleBackColor = true;
-          this.btnMyFilmsCentralConfigFile.Click += new System.EventHandler(this.btnMyFilmsCentralConfigFile_Click);
-          // 
-          // MyFilmsCentralConfigDir
-          // 
-          this.MyFilmsCentralConfigDir.Location = new System.Drawing.Point(27, 58);
-          this.MyFilmsCentralConfigDir.Name = "MyFilmsCentralConfigDir";
-          this.MyFilmsCentralConfigDir.Size = new System.Drawing.Size(247, 20);
-          this.MyFilmsCentralConfigDir.TabIndex = 1;
-          this.ToolTip1.SetToolTip(this.MyFilmsCentralConfigDir, "Set the directory to store to / retrieve from the MyFilms.xml config file.\r\nIt sh" +
-                  "ould be a place that is accessible from all your workstations / HTPCs.");
-          // 
-          // label23
-          // 
-          this.label23.AutoSize = true;
-          this.label23.Location = new System.Drawing.Point(33, 43);
-          this.label23.Name = "label23";
-          this.label23.Size = new System.Drawing.Size(165, 13);
-          this.label23.TabIndex = 0;
-          this.label23.Text = "Path to central MyFilms Config Dir";
+          this.btnServerSync.Location = new System.Drawing.Point(376, 12);
+          this.btnServerSync.Name = "btnServerSync";
+          this.btnServerSync.Size = new System.Drawing.Size(84, 23);
+          this.btnServerSync.TabIndex = 84;
+          this.btnServerSync.Text = "Central Config";
+          this.ToolTip1.SetToolTip(this.btnServerSync, resources.GetString("btnServerSync.ToolTip"));
+          this.btnServerSync.UseVisualStyleBackColor = true;
+          this.btnServerSync.Click += new System.EventHandler(this.btnFirstTimeSetupSyncClient_Click);
           // 
           // label11
           // 
           this.label11.AutoSize = true;
-          this.label11.Location = new System.Drawing.Point(80, 14);
+          this.label11.Location = new System.Drawing.Point(80, 17);
           this.label11.Name = "label11";
           this.label11.Size = new System.Drawing.Size(97, 13);
           this.label11.TabIndex = 36;
@@ -4959,7 +4861,7 @@
           // label12
           // 
           this.label12.AutoSize = true;
-          this.label12.Location = new System.Drawing.Point(80, 42);
+          this.label12.Location = new System.Drawing.Point(80, 45);
           this.label12.Name = "label12";
           this.label12.Size = new System.Drawing.Size(100, 13);
           this.label12.TabIndex = 38;
@@ -5090,7 +4992,6 @@
           // 
           // Tab_Network
           // 
-          this.Tab_Network.Controls.Add(this.groupBoxCentralConfig);
           this.Tab_Network.Controls.Add(this.groupBox25);
           this.Tab_Network.Location = new System.Drawing.Point(4, 22);
           this.Tab_Network.Name = "Tab_Network";
@@ -5774,7 +5675,7 @@
           // textBoxNBconfigs
           // 
           this.textBoxNBconfigs.Enabled = false;
-          this.textBoxNBconfigs.Location = new System.Drawing.Point(421, 39);
+          this.textBoxNBconfigs.Location = new System.Drawing.Point(421, 42);
           this.textBoxNBconfigs.Name = "textBoxNBconfigs";
           this.textBoxNBconfigs.Size = new System.Drawing.Size(28, 20);
           this.textBoxNBconfigs.TabIndex = 80;
@@ -5784,7 +5685,7 @@
           // 
           this.lblNbConfig.AutoSize = true;
           this.lblNbConfig.Enabled = false;
-          this.lblNbConfig.Location = new System.Drawing.Point(373, 42);
+          this.lblNbConfig.Location = new System.Drawing.Point(373, 45);
           this.lblNbConfig.Name = "lblNbConfig";
           this.lblNbConfig.Size = new System.Drawing.Size(42, 13);
           this.lblNbConfig.TabIndex = 81;
@@ -5965,6 +5866,7 @@
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(779, 506);
+          this.Controls.Add(this.btnServerSync);
           this.Controls.Add(this.buttonWikiHelp);
           this.Controls.Add(this.btnLaunchAMCglobal);
           this.Controls.Add(this.btnFirstTimeSetup);
@@ -6083,8 +5985,6 @@
           this.groupBox_GrabberOptions.PerformLayout();
           this.groupBox6.ResumeLayout(false);
           this.groupBox6.PerformLayout();
-          this.groupBoxCentralConfig.ResumeLayout(false);
-          this.groupBoxCentralConfig.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -6566,14 +6466,6 @@
         private Button buttonDefaultPersonImageReset;
         private CheckBox chkShowIndexedImgInIndViews;
         private GroupBox groupBoxAMCUpdaterConfigFile;
-        private GroupBox groupBoxCentralConfig;
-        private Button btnSyncFromServer;
-        private Button btnSyncToServer;
-        private Button btnMyFilmsCentralConfigFile;
-        private TextBox MyFilmsCentralConfigDir;
-        private Label label23;
-        private CheckBox cbSyncFromServerOnStartup;
-        private Button btnMyFilmsServerSave;
-        private Label label25;
+        private Button btnServerSync;
     }
 }
