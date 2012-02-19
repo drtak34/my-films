@@ -1470,38 +1470,34 @@ namespace MyFilmsPlugin.MyFilms
               viewList = new List<KeyValuePair<string, string>>();
               viewList.Clear();
               MFConfig configViewList = new MFConfig();
-              string[] StrViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewValue = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
 
               string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
               //bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
               //bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-              for (int i = 1; i < 6; i++)
-              {
-                StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewItem{0}", i), string.Empty);
-                StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewText{0}", i), string.Empty);
-                StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewValue{0}", i), string.Empty);
-              }
 
               if (System.IO.File.Exists(Catalog))
               {
-                //viewList.Add(new KeyValuePair<string, string>("all", GUILocalizeStrings.Get(342)));
-                viewList.Add(new KeyValuePair<string, string>("Year", GUILocalizeStrings.Get(345)));
-                viewList.Add(new KeyValuePair<string, string>("Category", GUILocalizeStrings.Get(10798664)));
-                viewList.Add(new KeyValuePair<string, string>("Country", GUILocalizeStrings.Get(200026)));
-                viewList.Add(new KeyValuePair<string, string>("Actors", GUILocalizeStrings.Get(10798667)));
-                for (int i = 0; i < 5; i++) // userdefined views
+                int iCustomViews = XmlConfig.ReadXmlConfig("MyFilms", config, "AntViewTotalCount", -1);
+                if (iCustomViews == -1) // Customviews not yet present ... ToDo: Remove in later Version - only "migration code"
                 {
-                  if (!string.IsNullOrEmpty(StrViewItem[i]) && StrViewItem[i] != "(none)")
-                  {
-                    string viewName = "", viewDisplayName = "";
-                    // viewName = (string.Format("view{0}", i));
-                    viewName = StrViewItem[i];
-                    if (!string.IsNullOrEmpty(StrViewText[i]))
-                      viewDisplayName = StrViewText[i];
-                    else
-                      viewDisplayName = StrViewItem[i];
-                    viewList.Add(new KeyValuePair<string, string>(viewName, viewDisplayName));
-                  }
+                  //viewList.Add(new KeyValuePair<string, string>("all", GUILocalizeStrings.Get(342)));
+                  viewList.Add(new KeyValuePair<string, string>("Year", GUILocalizeStrings.Get(345)));
+                  viewList.Add(new KeyValuePair<string, string>("Category", GUILocalizeStrings.Get(10798664)));
+                  viewList.Add(new KeyValuePair<string, string>("Country", GUILocalizeStrings.Get(200026)));
+                  viewList.Add(new KeyValuePair<string, string>("Actors", GUILocalizeStrings.Get(10798667)));
+                }
+                int index = 1;
+                while (true) // for (int i = 1; i < iCustomViews + 1; i++)
+                {
+                  string viewName = "", viewDisplayName = "";
+                  viewName = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewItem{0}", index), string.Empty);
+                  viewDisplayName = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewText{0}", index), string.Empty);
+                  if (string.IsNullOrEmpty(viewName)) break; // stop loading, if no View name is given
+
+                  if (string.IsNullOrEmpty(viewDisplayName))
+                    viewDisplayName = viewName;
+                  viewList.Add(new KeyValuePair<string, string>(viewName, viewDisplayName));
+                  index++;
                 }
               }
               configViewList.Name = config;
@@ -1534,6 +1530,13 @@ namespace MyFilmsPlugin.MyFilms
             //bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
             //bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
             string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+            string StrSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrSelect", string.Empty);
+            string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
+
+
+            if (string.IsNullOrEmpty(StrSelect))
+              StrSelect = StrTitle1 + " not like ''";
+
             int j = 0;
             for (int i = 1; i <= 5; i++)
             {
@@ -1574,7 +1577,7 @@ namespace MyFilmsPlugin.MyFilms
               {
                 _dataLock.ExitReadLock();
               }
-              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect, view + " ASC");
+              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect + StrSelect, view + " ASC");
               if (results.Length == 0) return null;
 
               foreach (DataRow enr in results)
