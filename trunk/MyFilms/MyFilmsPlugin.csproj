@@ -143,6 +143,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\CentralConfigSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\CentralConfigSetup.Designer.cs">
+      <DependentUpon>CentralConfigSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\MFview.cs">
       <DependentUpon>MFview.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -348,6 +354,9 @@
     <None Include="Resources\arrow-down.png" />
     <None Include="Resources\arrow-up.png" />
     <Content Include="Resources\MyFilmsIcon.ico" />
+    <EmbeddedResource Include="Configuration\CentralConfigSetup.resx">
+      <DependentUpon>CentralConfigSetup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\FilterEditor.resx">
       <DependentUpon>FilterEditor.cs</DependentUpon>
     </EmbeddedResource>

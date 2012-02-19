@@ -89,17 +89,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             this.label_VersionNumber.Text = "Version " + asm.GetName().Version;
         }
 
-
-        private void LoadServerConfig()
-        {
-          XmlConfig MyFilmsServer = new XmlConfig();
-          MyFilmsCentralConfigDir.Text = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
-          cbSyncFromServerOnStartup.Checked = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
-        }
-
         private void MesFilmsSetup_Load(object sender, EventArgs e)
         {
-            LoadServerConfig(); // will 
             Refresh_Items(true);
             if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\" + "MyFilms" + ".xml"))
               RunWizardAfterInstall = true;
@@ -265,13 +256,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 name = MesFilmsCat.Text.Substring(MesFilmsCat.Text.LastIndexOf("\\") + 1);
                 name = name.Substring(0, name.Length - 4);
             }
-            try
-            {
-                t = st.OpenTask("MyFilms_AMCUpdater_" + name);
-            }
-            catch (ArgumentException)
-            {
-            }
+            try { t = st.OpenTask("MyFilms_AMCUpdater_" + name); }
+            catch (ArgumentException) { }
             if (t != null)
                 scheduleAMCUpdater.Checked = true;
             else
@@ -285,7 +271,47 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               RunWizardAfterInstall = false;
               WizardActive = false;
             }
+            else // check, if remote server sync is enabled
+            {
+              LoadCentralConfigSetupAndUpdateVisibility();
+            }
         }
+
+    
+        private void LoadCentralConfigSetupAndUpdateVisibility()
+        {
+          XmlConfig MyFilmsServer = new XmlConfig();
+          string CentralConfigDir = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
+          bool SyncFromServerOnStartup = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+          if (SyncFromServerOnStartup && CentralConfigDir.Length > 0)
+          {
+            SetLocalConfigVisibility(false);
+          }
+          else
+          {
+            SetLocalConfigVisibility(true);
+          }
+        }
+
+        private void SetLocalConfigVisibility(bool visibility)
+        {
+          if (visibility)
+            btnServerSync.ResetBackColor();
+          else
+            btnServerSync.BackColor = System.Drawing.Color.DarkSeaGreen;
+          textBoxPluginName.Enabled = visibility;
+          Config_Menu.Enabled = visibility;
+          Config_Name.Enabled = visibility;
+          Config_Dflt.Enabled = visibility;
+          General.Enabled = visibility;
+          btnLaunchAMCglobal.Enabled = visibility;
+          btnFirstTimeSetup.Enabled = visibility;
+          butNew.Enabled = visibility;
+          ButSave.Enabled = visibility;
+          ButCopy.Enabled = visibility;
+          ButDelet.Enabled = visibility;
+        }
+
         private void ButCat_Click(object sender, System.EventArgs e)
         {
           if (!string.IsNullOrEmpty(MesFilmsCat.Text))
@@ -5964,124 +5990,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             pictureBoxDefaultFanart.ImageLocation = openFileDialog1.FileName;
         }
 
-        private void btnMyFilmsCentralConfigFile_Click(object sender, EventArgs e)
+        private void btnFirstTimeSetupSyncClient_Click(object sender, EventArgs e)
         {
-          if (!String.IsNullOrEmpty(MyFilmsCentralConfigDir.Text))
-          {
-            folderBrowserDialog1.SelectedPath = MyFilmsCentralConfigDir.Text;
-            if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
-              folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
-          }
+          CentralConfigSetup syncSetup = new CentralConfigSetup();
+          if (syncSetup.ShowDialog(this) == DialogResult.OK) 
+            MesFilmsSetup_Load(sender, e); // reload setup config
           else
-            folderBrowserDialog1.SelectedPath = String.Empty;
-          folderBrowserDialog1.Description = "Path for Central Config File";
-          if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-          {
-            if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != this.folderBrowserDialog1.SelectedPath.Length - 1)
-              folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
-            MyFilmsCentralConfigDir.Text = folderBrowserDialog1.SelectedPath;
-          }
-        }
-
-        private void btnMyFilmsServerSave_Click(object sender, EventArgs e)
-        {
-          XmlConfig MyFilmsServer = new XmlConfig();
-          MyFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", MyFilmsCentralConfigDir.Text);
-          MyFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", cbSyncFromServerOnStartup.Checked);
-          MyFilmsServer.Save();
-        }
-
-        private void btnSyncToServer_Click(object sender, EventArgs e)
-        {
-          string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilmsServer.xml";
-          string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
-          if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir.Text))
-          {
-            MessageBox.Show(
-              "Your remote directory does not exist - cannot continue !\nPlease make sure the path is existing and accessible.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-          }
-          if (!System.IO.File.Exists(localConfigFile))
-          {
-            MessageBox.Show("Local MyFilms.xml not found - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-          }
-          if (System.IO.File.Exists(serverConfigFile))
-          {
-            try
-            {
-              System.IO.File.Copy(serverConfigFile, serverConfigFile + "_" + System.DateTime.Now.ToLongTimeString(), true);
-            }
-            catch (Exception)
-            {
-              MessageBox.Show(
-                "Cannot write to Server directory - Missing access rights? - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-              return;
-            }
-          }
-          try
-          {
-            System.IO.File.Copy(localConfigFile, serverConfigFile, true);
-            MessageBox.Show("Successfully copied local config to remote directory !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          }
-          catch (Exception)
-          {
-            MessageBox.Show("Cannot write to Server directory - Missing access rights? - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-          }
-        }
-
-        private void btnSyncFromServer_Click(object sender, EventArgs e)
-        {
-          string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilmsServer.xml";
-          string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
-          if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir.Text))
-          {
-            MessageBox.Show("Your remote directory does not exist - cannot continue !\nPlease make sure the path is existing and accessible.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-          }
-          if (!System.IO.File.Exists(serverConfigFile))
-          {
-            MessageBox.Show("Remote MyFilms.xml not found - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-          }
-
-          if (MessageBox.Show("Are you sure you want to copy remote config to local config ?\n\nIf you select 'yes', your local config file will be overwritten, MyFilms setup will be closed and you loose your local configuration.\n(A backup will be autocreated)",
-              "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-            return;
-
-          if (System.IO.File.Exists(localConfigFile))
-          {
-            try
-            {
-              System.IO.File.Copy(localConfigFile, localConfigFile + "_" + System.DateTime.Now.ToLongTimeString(), true);
-            }
-            catch (Exception)
-            {
-              MessageBox.Show("Cannot write to local directory - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-              return;
-            }
-          }
-          try
-          {
-            System.IO.File.Copy(serverConfigFile, localConfigFile, true);
-            MessageBox.Show("Successfully copied remote config to local directory !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("MyFilms Setup will now close - you have to reload the setup to load updated MyFilms.xml config file !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            Close();
-          }
-          catch (Exception)
-          {
-            MessageBox.Show("Cannot copy to local directory - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-          }
-        }
-
-        private void cbSyncFromServerOnStartup_CheckedChanged(object sender, EventArgs e)
-        {
-          if (cbSyncFromServerOnStartup.Checked) 
-            cbSyncFromServerOnStartup.ForeColor = System.Drawing.Color.Red;
-          else
-            cbSyncFromServerOnStartup.ResetForeColor();
+            LoadCentralConfigSetupAndUpdateVisibility();
         }
     }
 

@@ -838,7 +838,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             try
             {
-              System.IO.File.Copy(localConfigFile, localConfigFile + "_" + System.DateTime.Now.ToLongTimeString(), true);
+              string backupfile = localConfigFile.Replace(".xml", " - " + DateTime.Now.ToString("u").Replace(":", "-") + ".xml").Replace("/", "-");
+              System.IO.File.Copy(localConfigFile, backupfile, true);
             }
             catch (Exception)
             {
