@@ -32,7 +32,7 @@ namespace MyFilmsPlugin.Configuration
       if (cbSyncFromServerOnStartup.Checked)
       {
         // first check if a remote path is configured and available
-        string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilmsServer.xml";
+        string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilms.xml";
         if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir.Text))
         {
           MessageBox.Show("Your remote directory does not exist - cannot continue !\nPlease make sure the path is existing and accessible.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -66,7 +66,7 @@ namespace MyFilmsPlugin.Configuration
 
     private void btnSyncToServer_Click(object sender, EventArgs e)
     {
-      string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilmsServer.xml";
+      string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilms.xml";
       string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
       if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir.Text))
       {
@@ -106,7 +106,7 @@ namespace MyFilmsPlugin.Configuration
 
     private void btnSyncFromServer_Click(object sender, EventArgs e)
     {
-      string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilmsServer.xml";
+      string serverConfigFile = MyFilmsCentralConfigDir.Text + @"\MyFilms.xml";
       string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
       if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir.Text))
       {
