@@ -2381,6 +2381,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Index = 1;
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
           newRow = MyCustomViews.View.NewViewRow();
