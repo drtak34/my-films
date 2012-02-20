@@ -234,7 +234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrUserProfileName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UserProfileName", "Global");
 
                 StrECoptionStoreTaglineInDescription = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionStoreTaglineInDescription", false);
-                // Common EC options
+                #region Common EC options
                 bool addTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddTagline", false);
                 bool addTags = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddTags", false);
                 bool addCertification = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddCertification", false);
@@ -256,6 +256,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   else DestinationWriter = "";
                 }
                 // LogMyFilms.Debug("MFC: switch (StrFileType) '" + StrFileType.ToString() + "'");
+                #endregion
 
                 ReadOnly = IsExternalCatalog(StrFileType);
 
@@ -440,6 +441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
                 StrViewSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrViewSelect", string.Empty);
 
+                #region Sort Settings
                 StrSorta = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
                 CurrentSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
                 StrSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
@@ -453,29 +455,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string wDfltSortInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
                 string wDfltSortSensInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
                 string wDfltSortMethodInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
+                #endregion
 
-                StartView.InitDefaults();
-                CurrentView.InitDefaults();
+                #region experimental Viewmanager settings
+                //StartView.InitDefaults();
+                //CurrentView.InitDefaults();
 
-                // ViewManager.CurrentSettings.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
-                CurrentView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
-                CurrentView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
-                CurrentView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
+                ////ViewManager.CurrentSettings.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
+                //CurrentView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
+                //CurrentView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
+                //CurrentView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
 
-                CurrentView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortInHierarchies", string.Empty);
-                CurrentView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethodInHierarchies", string.Empty);
-                CurrentView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSensInHierarchies", string.Empty);
+                //CurrentView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortInHierarchies", string.Empty);
+                //CurrentView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethodInHierarchies", string.Empty);
+                //CurrentView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSensInHierarchies", string.Empty);
 
-                StartView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
-                StartView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
-                StartView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
+                //StartView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
+                //StartView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
+                //StartView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
 
-                StartView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
-                StartView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
-                StartView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
+                //StartView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
+                //StartView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
+                //StartView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
 
-                string startview = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentView", string.Empty);
-                if (!string.IsNullOrEmpty(startview)) StartView.LoadFromString(startview);
+                //string startview = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentView", string.Empty);
+                //if (!string.IsNullOrEmpty(startview)) StartView.LoadFromString(startview);
+                #endregion
 
                 ViewContext = (MyFilms.ViewContext)Enum.Parse(typeof(MyFilms.ViewContext), XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.ViewContext.None)));
                 StrTxtView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "View", string.Empty);
@@ -668,24 +673,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return currentConfig; }
           set { currentConfig = value; }
         }
-        private static MFView viewManager = new MFView();
-        public static MFView ViewManager
-        {
-          get { return viewManager; }
-          set { viewManager = value; }
-        }
-        private static View startView = new View();
-        public View StartView
-        {
-          get { return startView; }
-          set { startView = value; }
-        }
-        private static View currentView = new View();
-        public View CurrentView
+        private string currentView = string.Empty;
+        public string CurrentView
         {
           get { return currentView; }
           set { currentView = value; }
         }
+
+        //private static MFView viewManager = new MFView();
+        //public static MFView ViewManager
+        //{
+        //  get { return viewManager; }
+        //  set { viewManager = value; }
+        //}
+        //private static View startView = new View();
+        //public View StartView
+        //{
+        //  get { return startView; }
+        //  set { startView = value; }
+        //}
+        //private static View currentView = new View();
+        //public View CurrentView
+        //{
+        //  get { return currentView; }
+        //  set { currentView = value; }
+        //}
         private static string pluginMode = string.Empty;
         public static string PluginMode
         {
@@ -1790,7 +1802,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //  XmlConfig.WriteXmlConfig("MyFilms", currentConfig, viewstateName, MyFilms.conf.CurrentView.SaveToString());
             //}
 
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentView", MyFilms.conf.CurrentView.SaveToString());
+            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentView", MyFilms.conf.CurrentView.SaveToString());
 
             switch (MyFilms.conf.StrFileType)
             {

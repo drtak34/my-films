@@ -278,6 +278,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
     }
     #endregion
   }
+  
   public class ViewState
   {
     public ViewState() { }
