@@ -5049,7 +5049,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (!Directory.Exists(strThumbDirectory)) // Check groupview thumbs cache directories and create them
         try { Directory.CreateDirectory(strThumbDirectory); } catch (Exception) { }
-      if (!Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check groupview thumbs (sub)directories and create them
+      if (conf.StrPathViews.Length > 0 && !Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check groupview thumbs (sub)directories and create them
         try { Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); } catch (Exception) { }
       #endregion
 
@@ -5573,6 +5573,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             strPathViews = conf.StrPathViews;
           else
             strPathViews = conf.StrPathViews + "\\";
+          string strPathViewsRoot = strPathViews;
           strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added view subfolder to searchpath
           if (File.Exists(strPathViews + itemlabel + ".jpg"))
             createCacheThumb(strPathViews + itemlabel + ".jpg", strThumb, cacheThumbWith, cacheThumbHeight, "large");
@@ -5587,6 +5588,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Check, if default group cover is present
           if (MyFilms.conf.StrViewsDflt)
           {
+            string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg";
+            if (System.IO.File.Exists(strImageInViewsDefaultFolder))
+            {
+              thumbimages[0] = strImageInViewsDefaultFolder;
+              thumbimages[1] = strImageInViewsDefaultFolder;
+              return thumbimages;
+            }
             if (System.IO.File.Exists(strPathViews + "Default.jpg"))
             {
               thumbimages[0] = strPathViews + "Default.jpg";
