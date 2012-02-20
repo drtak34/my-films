@@ -80,6 +80,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.PropertyOne = "#myfilms.fanart";
       backdrop.PropertyTwo = "#myfilms.fanart2";
 
+      // create Menu image swapper
+      menucover = new AsyncImageResource();
+      menucover.Property = "#myfilms.menuimage";
+      menucover.Delay = 125;
+
       // create Film Cover image swapper
       filmcover = new AsyncImageResource();
       filmcover.Property = "#myfilms.coverimage";
@@ -229,6 +234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_DummyFacadePerson = 38,
       CTRL_DummyFacadeHierarchy = 39,
       CTRL_DummyFacadeMenu = 40,
+      CTRL_ImageMenu = 1019,
       CTRL_ImageFilm = 1020,
       CTRL_ImageGroup = 1021,
       CTRL_ImagePerson = 1022,
@@ -267,6 +273,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     [SkinControlAttribute((int)Controls.CTRL_ListViews)]
     protected GUIFacadeControl facadeViews;
+
+    [SkinControlAttribute((int)Controls.CTRL_ImageMenu)]
+    protected GUIImage ImgLstFilm;
 
     [SkinControlAttribute((int)Controls.CTRL_ImageFilm)]
     protected GUIImage ImgLstFilm;
@@ -347,6 +356,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //Imageswapperdefinitions for fanart and cover
     private ImageSwapper backdrop;
+
+    private AsyncImageResource menucover = null;
     private AsyncImageResource filmcover = null;
     private AsyncImageResource viewcover = null;
     private AsyncImageResource personcover = null;
@@ -663,6 +674,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
 
+      if (!menucover.Active) menucover.Active = true;
       if (!filmcover.Active) filmcover.Active = true;
       if (!viewcover.Active) viewcover.Active = true;
       if (!personcover.Active) personcover.Active = true;
@@ -3127,6 +3139,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.Init_Detailed_DB(false);
           Clear_Logos();
           GUIControl.ShowControl(GetID, 34);
+          menucover.Filename = currentItem.ThumbnailImage;
           filmcover.Filename = "";
           viewcover.Filename = "";
           personcover.Filename = "";
@@ -3785,6 +3798,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception) {}
         }
+        //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_ListFilms);
         for (i = 0; i < this.facadeFilms.Count; i++)
         {
           if (StopLoadingMenuDetails) break;
@@ -3865,7 +3879,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
             // Do this after thread finished ...
-            //conf.ViewContext = ViewContext.Menu;
             return 0;
           }, 0, 0, null);
         #endregion
@@ -6529,6 +6542,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Change_View_Action(string selectedView)
     {
       LogMyFilms.Debug("Change_View_Action called with '" + selectedView + "'");
+      conf.CurrentView = selectedView;
       conf.StrSelect = ""; // reset view filter
       conf.StrViewSelect = "";
       conf.IndexedChars = 0;
@@ -6590,6 +6604,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "CustomView":
           #region New CustomViews ...
           if (selectedCustomView == null) return;
+
+          // RestoreLastView(conf.CurrentView); // restore saved settings, if there are any - might be "more" than the ones defined in Custom Views
 
           switch (selectedCustomView.DBfield)
           {
@@ -6809,7 +6825,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.Boolindexedreturn = false;
             }
 
-            RestoreLastView(selectedView);
+            RestoreLastView(conf.CurrentView);
 
             //getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
             getSelectFromDivxThreaded();
@@ -11613,6 +11629,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.Init_Detailed_DB(log);  // Includes clear of db & user properties
 
       backdrop.Filename = String.Empty;
+      menucover.Filename = String.Empty;
       filmcover.Filename = String.Empty;
       viewcover.Filename = String.Empty;
       personcover.Filename = String.Empty;
