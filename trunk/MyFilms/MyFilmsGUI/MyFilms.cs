@@ -2416,6 +2416,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       #region Set sort buttons (movie vs. collection)
+
+      BtnSrtBy.IsEnabled = true;
       if (conf.BoolCollection)
       {
         BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
@@ -3355,6 +3357,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     void SortChanged(object sender, SortEventArgs e)
     {
+      if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) return; // no sorting for menu types !
       LogMyFilms.Debug("SortChanged() - handler called with order = '" + e.Order + "'");
       LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - WStrSortSensCount        : '{0}'", conf.WStrSortSensCount));
       LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - WStrSortSens             : '{0}'", conf.WStrSortSens));
@@ -3624,6 +3627,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Change_LayOut(0); // always use list view
       //if (conf.UseListViewForGoups) Change_LayOut(0);
       //else Change_LayOut(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
+
+      BtnSrtBy.Label = GUILocalizeStrings.Get(103); // sort: name
+      BtnSrtBy.IsAscending = true;
+      BtnSrtBy.IsEnabled = false;
 
       GUIControl.ShowControl(GetID, 34); // hide film controls ...
       SetDummyControlsForFacade(ViewContext.Menu); // reset all covers ...
@@ -4864,6 +4871,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //DateTime now = DateTime.Now;
 
+      BtnSrtBy.IsEnabled = true;
       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (WStrSortSens == " ASC");
       conf.ViewContext = (isperson) ? ViewContext.Person : ViewContext.Group;
