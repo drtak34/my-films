@@ -3009,7 +3009,8 @@ namespace Grabber_Interface
               }
               catch (Exception ex)
               {
-                MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                labelImageSize.Text = "n/a";
+                //MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               }
             }
             break;
