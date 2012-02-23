@@ -1974,7 +1974,7 @@ End additional Backdrops  -->
       			<visible>control.isvisible(39)</visible>
 		</control>
 		<control>
-			<description>Testlabel Hierarchy or Collection</description>
+			<description>Testlabel Menu</description>
 			<type>label</type>
 			<id>0</id>
 			<posX>340</posX>
