@@ -958,7 +958,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   case "playtraileronlinevideos":
                     site = "YouTube";
-                    titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer";
+                    titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer" + ((MyFilms.conf.GrabberOverrideLanguage.Length > 0) ? (" " + MyFilms.conf.GrabberOverrideLanguage) : "");
                     break;
                   case "playtraileronlinevideosappleitunes":
                     site = "iTunes Movie Trailers";
@@ -7016,7 +7016,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 case "playtraileronlinevideos":
                   site = "YouTube";
-                  titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer";
+                  titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer" + ((MyFilms.conf.GrabberOverrideLanguage.Length > 0) ? (" " + MyFilms.conf.GrabberOverrideLanguage) : "");
                   break;
                 case "playtraileronlinevideosappleitunes":
                   site = "iTunes Movie Trailers";
