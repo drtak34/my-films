@@ -1281,7 +1281,7 @@ namespace MyFilmsPlugin.MyFilms
           if (row["Picture"].ToString().Length > 0)
           {
             if ((row["Picture"].ToString().IndexOf(":\\") == -1) && (row["Picture"].ToString().Substring(0, 2) != "\\\\"))
-              file = tempconf.StrPathImg + "\\" + row["Picture"].ToString();
+              file = tempconf.StrPathImg + "\\" + row["Picture"];
             else
               file = row["Picture"].ToString();
           }

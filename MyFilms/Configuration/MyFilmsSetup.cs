@@ -2382,6 +2382,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           newRow.Index = 1;
+          newRow.Value = "*";
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
           newRow = MyCustomViews.View.NewViewRow();
@@ -3288,7 +3289,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           string skinLogoPath;
           using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
           {
-            skinLogoPath = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos";
+            skinLogoPath = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "DefaultWide") + @"\Media\Logos";
             // Get current path to logos in skindirectory
             //logoConfigPathSkin = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin"); // Get current path to active skin directory
           }
@@ -5813,14 +5814,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           if (!string.IsNullOrEmpty(AntViewValue.Text))
           {
-            AntViewIndex.Visible = false;
-            lblAntViewIndex.Visible = false;
+            //AntViewIndex.Visible = false;
+            //lblAntViewIndex.Visible = false;
             groupBoxSortAndLayoutForView.Visible = false;
           }
           else
           {
-            AntViewIndex.Visible = true;
-            lblAntViewIndex.Visible = true;
+            //AntViewIndex.Visible = true;
+            //lblAntViewIndex.Visible = true;
             groupBoxSortAndLayoutForView.Visible = true;
           }
         }

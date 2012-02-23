@@ -275,7 +275,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIFacadeControl facadeViews;
 
     [SkinControlAttribute((int)Controls.CTRL_ImageMenu)]
-    protected GUIImage ImgLstFilm;
+    protected GUIImage ImgLstMenu;
 
     [SkinControlAttribute((int)Controls.CTRL_ImageFilm)]
     protected GUIImage ImgLstFilm;
@@ -574,7 +574,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
 
       // check, if remote config file should be copied to local MP data dir (MyFilms Server Setup)
-      this.SyncConfigFromRemoteServer();
+      SyncConfigFromRemoteServer();
 
       // Fanart Timer
       _fanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
@@ -672,7 +672,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region (re)link backdrop image controls to the backdrop image swapper
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
-      backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
+      //backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
 
       if (!menucover.Active) menucover.Active = true;
       if (!filmcover.Active) filmcover.Active = true;
@@ -831,6 +831,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XmlConfig MyFilmsServer = new XmlConfig();
       string MyFilmsCentralConfigDir = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
       bool SyncFromServerOnStartup = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+      LogMyFilms.Info("SyncConfigFromRemoteServer() - SyncOnStartup = '" + SyncFromServerOnStartup + "'");
       if (SyncFromServerOnStartup && System.IO.File.Exists(MyFilmsCentralConfigDir + @"\MyFilms.xml"))
       {
         LogMyFilms.Info("SyncConfigFromRemoteServer() - Server Sync is enabled - remote directory: '" + MyFilmsCentralConfigDir + "'");
@@ -868,6 +869,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Error("SyncConfigFromRemoteServer() - could not copy remote config to local config file !");
           }
         }
+      }
+      else
+      {
+        LogMyFilms.Info("SyncConfigFromRemoteServer() - Server Sync is disabled - running on local config only !");
       }
     }
 
@@ -1941,7 +1946,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                   default:
-                    if (conf.IndexedChars > 0 && conf.Boolindexed && conf.Wstar == "*") // enter indexed view ...
+                    if (conf.IndexedChars > 0 && conf.Boolindexed && conf.Wstar == "*") // enter indexed view ... //  && !IsTitleField(conf.WStrSort)
                     {
                       conf.Boolindexed = false;
                       conf.Boolindexedreturn = true;
@@ -1956,7 +1961,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else // View List as selected
                     {
                       conf.Wselectedlabel = (conf.BoolReverseNames && this.facadeFilms.SelectedListItem.Label != EmptyFacadeValue) ? ReReverseName(conf.Wselectedlabel) : this.facadeFilms.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
-                      //Change_LayOut(MyFilms.conf.StrLayOut);
                       conf.Boolreturn = (!this.facadeFilms.SelectedListItem.IsFolder);
                       do
                       {
@@ -3629,7 +3633,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //else Change_LayOut(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
 
       BtnSrtBy.Label = GUILocalizeStrings.Get(103); // sort: name
-      BtnSrtBy.IsAscending = true;
+      //BtnSrtBy.IsAscending = true;
       BtnSrtBy.IsEnabled = false;
 
       GUIControl.ShowControl(GetID, 34); // hide film controls ...
@@ -3805,7 +3809,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception) {}
         }
-        //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_ListFilms);
+        // GUIControl.RefreshControl(GetID, (int)Controls.CTRL_ListFilms);
         for (i = 0; i < this.facadeFilms.Count; i++)
         {
           if (StopLoadingMenuDetails) break;
@@ -6667,7 +6671,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             conf.StrViewSelect = selectedCustomView.Filter + " AND ";
           }
 
-          if (selectedCustomView.Value == "*") // Film list view without value filter
+          if (conf.IndexedChars == 0 && selectedCustomView.Value == "*") // Film list view without value filter - but only, if no indexed view is selected
           {
             conf.ViewContext = ViewContext.Movie;
             conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
@@ -11713,7 +11717,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void InitFolders()
     {
       // Check and create Group thumb folder ...
-      if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
     }
