@@ -16,7 +16,7 @@ Public Class frmList
     Private Sub btnSearchAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgain.Click
         Dim distance As String
         btnSearchAgain.Enabled = False
-        SearchPage = 1
+        SearchPage = -1
         If txtSearchString.Text <> "" Then
             lstOptionsExt.Rows.Clear()
             lstOptionsExt.Rows.Add(New String() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
