@@ -345,15 +345,22 @@ Module Module1
             Return matcher.Value.Substring(1, 4)
         End If
 
-        Dim p1 As New Regex("[^0-9][0-9]{4}[^0-9]") ' year in non numbers
+        Dim p1 As New Regex("[^0-9][0-9]{4}[^0-9p]") ' year in non numbers
         MatchList = p1.Matches(CleanString)
         If MatchList.Count > 0 Then
             matcher = MatchList(MatchList.Count - 1)
             Return matcher.Value.Substring(1, 4)
         End If
 
-        Dim p2 As New Regex("[0-9]{4}") ' year just as 4-digit
+        Dim p2 As New Regex("[^0-9][0-9]{4}[^0-9]") ' year in non numbers
         MatchList = p2.Matches(CleanString)
+        If MatchList.Count > 0 Then
+            matcher = MatchList(MatchList.Count - 1)
+            Return matcher.Value.Substring(1, 4)
+        End If
+
+        Dim p3 As New Regex("[0-9]{4}") ' year just as 4-digit
+        MatchList = p3.Matches(CleanString)
         If MatchList.Count > 0 Then
             matcher = MatchList(MatchList.Count - 1)
             Return matcher.Value
