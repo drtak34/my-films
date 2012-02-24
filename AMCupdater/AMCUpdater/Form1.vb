@@ -1262,7 +1262,7 @@ Public Class Form1
 
         If chkPurgeMissing.Checked = True Then
             Dim Warning As String = "Warning : The 'Purge missing' option removes invalid entries from your database file."
-            Warning += vbCrLf + "It is therefore potentially dangerous - please proceed with caution."
+            Warning += vbCrLf + "It thus might remove content from your database - please proceed with caution."
             Warning += vbCrLf + vbCrLf + "Do you wish to continue?"
 
             Dim ReturnValue As Integer
@@ -3290,8 +3290,11 @@ Public Class Form1
     Private Sub chkPurgeMissing_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPurgeMissing.CheckedChanged
         If (chkPurgeMissing.Checked) Then
             chkPurgeMissingAlways.Enabled = True
+            chkPurgeMissing.ForeColor = Color.Red
         Else
+            chkPurgeMissing.ResetForeColor()
             chkPurgeMissingAlways.Enabled = False
+            chkPurgeMissingAlways.Checked = False
         End If
     End Sub
 End Class
