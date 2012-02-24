@@ -9138,6 +9138,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
       ArrayList w_tableau = new ArrayList();
       System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      if (MyFilms.r[Index]["Actors"].ToString().Length > 0)
+      {
+        w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index]["Actors"].ToString())));
+        foreach (object t in w_tableau)
+        {
+          dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + t);
+          choiceSearch.Add(t.ToString());
+        }
+      }
       if (MyFilms.r[Index]["Producer"].ToString().Length > 0)
       {
         w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index]["Producer"].ToString())));
@@ -9162,15 +9171,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         foreach (object t in w_tableau)
         {
           dlg.Add(GUILocalizeStrings.Get(10798684) + " : " + t);
-          choiceSearch.Add(t.ToString());
-        }
-      }
-      if (MyFilms.r[Index]["Actors"].ToString().Length > 0)
-      {
-        w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index]["Actors"].ToString())));
-        foreach (object t in w_tableau)
-        {
-          dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + t);
           choiceSearch.Add(t.ToString());
         }
       }
@@ -9226,6 +9226,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       LogMyFilms.Debug("Adding search results for roles to menu ...");
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      if (wr.Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
+        choiceSearch.Add("Actors");
+      }
       DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       if (wr.Length > 0)
       {
@@ -9243,12 +9249,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
         choiceSearch.Add("Writer");
-      }
-      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      if (wr.Length > 0)
-      {
-        dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
-        choiceSearch.Add("Actors");
       }
       //wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Persons like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       //if (wr.Length > 0)
