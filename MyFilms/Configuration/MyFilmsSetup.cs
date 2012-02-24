@@ -92,7 +92,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void MesFilmsSetup_Load(object sender, EventArgs e)
         {
             Refresh_Items(true);
-            if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\" + "MyFilms" + ".xml"))
+            if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml"))
               RunWizardAfterInstall = true;
             textBoxPluginName.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
             MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
@@ -258,22 +258,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             try { t = st.OpenTask("MyFilms_AMCUpdater_" + name); }
             catch (ArgumentException) { }
-            if (t != null)
-                scheduleAMCUpdater.Checked = true;
-            else
-                scheduleAMCUpdater.Checked = false;
+            scheduleAMCUpdater.Checked = (t != null);
             load = false;
             // Now start SetupWizard, if it's a clean new install
             if (RunWizardAfterInstall)
             {
               WizardActive = true;
+              System.Threading.Thread.Sleep(100);
               newCatalogWizard();
               RunWizardAfterInstall = false;
               WizardActive = false;
             }
-            else // check, if remote server sync is enabled
+            else
             {
-              LoadCentralConfigSetupAndUpdateVisibility();
+              LoadCentralConfigSetupAndUpdateVisibility();  // check, if remote server sync is enabled
             }
         }
 
@@ -627,7 +625,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
             }
 
-            if (chkSuppress.Enabled && cbSuppress.SelectedIndex == -1)
+            if (chkSuppress.Checked && cbSuppress.SelectedIndex == -1)
             {
               General.SelectedIndex = 4;
               cbSuppress.Focus();
@@ -1884,6 +1882,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       textBoxPluginName.Text = "MyFilms"; // Make sure, a plugin name is given - assign default, if user didn't choose any!
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
+                    XmlConfig.Save();
                     LogMyFilms.Debug("(Setup) - Quit - created default empty config!");
                     mydivx.Dispose();
                     Close();
@@ -1905,6 +1904,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text);
+            XmlConfig.Save();
             LogMyFilms.Debug("(Setup) - Quit - saved base config!");
             Close();
         }
@@ -2488,13 +2488,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 groupBox_AMCupdater_ExternalApplication.Enabled = true;
                 groupBox_AMCupdaterScheduer.Enabled = true;
-                //txtAMCUpd_exe.Enabled = true;
-                //btnAMCUpd_exe.Enabled = true;
                 //txtAMCUpd_cnf.Enabled = true;
                 //btnAMCUpd_cnf.Enabled = true;
                 //scheduleAMCUpdater.Enabled = true;
                 //btnParameters.Enabled = true;
-                //btnLaunchAMCupdater.Enabled = true;
                 //btnAMCMovieScanPathAdd.Enabled = true;
                 //chkAMC_Purge_Missing_Files.Enabled = true;
                 //btnCreateAMCDefaultConfig.Enabled = true;
@@ -2505,13 +2502,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 groupBox_AMCupdater_ExternalApplication.Enabled = false;
                 groupBox_AMCupdaterScheduer.Enabled = false;
-                //txtAMCUpd_exe.Enabled = false;
-                //btnAMCUpd_exe.Enabled = false;
                 //txtAMCUpd_cnf.Enabled = false;
                 //btnAMCUpd_cnf.Enabled = false;
                 //scheduleAMCUpdater.Enabled = false;
                 //btnParameters.Enabled = false;
-                //btnLaunchAMCupdater.Enabled = false;
                 //btnAMCMovieScanPathAdd.Enabled = false;
                 //chkAMC_Purge_Missing_Files.Enabled = false;
                 //btnCreateAMCDefaultConfig.Enabled = false;
@@ -4616,7 +4610,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
           input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
           input.Country = "USA";
-          input.ShowDialog(this);
+          input.ShowDialog();
           string newConfig_Name = input.ConfigName;
           string newCatalogType = input.CatalogType;
           string newCountry = input.Country;
@@ -4634,7 +4628,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           // Set Configuration Name & initialize new current config
           Config_Name.Text = newConfig_Name;
-          this.Refresh_Items(true);
+          Refresh_Items(true); // Reset all
+          // Refresh_Tabs(true); // enable Tabs - autocontrolled by the changes handlers ...
 
           CatalogType.SelectedIndex = 0; // can be "10" = "AMC 4.1 extended DB"
 
@@ -4664,11 +4659,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (useExistingCatalog)
           {
             string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
-            //if (!System.IO.Directory.Exists(CatalogDirectory))
-            //{
-            //  try {System.IO.Directory.CreateDirectory(CatalogDirectory);}
-            //  catch {}
-            //}
             // Ask User for existing database file
             newCatalog = false;
             openFileDialog1.FileName = String.Empty;
@@ -4795,22 +4785,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           string GroupViewImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\GroupViewImages";
           if (!Directory.Exists(GroupViewImagesDirectory))
           {
-            try
-            {
-              System.IO.Directory.CreateDirectory(GroupViewImagesDirectory);
-              // Will be autocreated by GUI plugin
-              //System.IO.Directory.CreateDirectory(GroupViewImagesDirectory + @"\category");
-              //System.IO.Directory.CreateDirectory(GroupViewImagesDirectory + @"\country");
-              //System.IO.Directory.CreateDirectory(GroupViewImagesDirectory + @"\year");
-            }
-            catch
-            {
-            }
+            try { System.IO.Directory.CreateDirectory(GroupViewImagesDirectory); }
+            catch { }
           }
 
           MesFilmsViews.Text = GroupViewImagesDirectory;
           chkViews.Checked = true; // Use Thumbs for views
-          chkPersons.Checked = false; // Don't use Thumbs for persons views
+          chkPersons.Checked = true; // Don't use Thumbs for persons views
           chkDfltViews.Checked = true; // Use default cover for missing thumbs
           chkShowIndexedImgInIndViews.Checked = true; // activate indexed Images for in
           chkDfltViewsAll.Checked = false; // Use group view thumbs for all group views
@@ -4840,6 +4821,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AddDefaultViews();
 
           cbWatched.Text = "Checked";
+
+          // chkSuppress.Checked = false;
 
           // Now ask user for his movie directory...
           if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)
