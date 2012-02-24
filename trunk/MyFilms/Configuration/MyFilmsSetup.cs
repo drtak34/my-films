@@ -4245,7 +4245,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           string soureFile = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe";
           string description = "AMC: '" + Config_Name.Text + "'";
 
-          string arguments = configParam + " " + "LogDirectory" + " " + "GUI";
+          string arguments = "\"" + configParam + "\" " + "LogDirectory" + " " + "GUI";
 
           //string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + " " + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\"" + " " + "\"" + "GUI\"";
           string hotKey = String.Empty;
