@@ -2203,6 +2203,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 29: // Link Coverart-Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param2;
@@ -2213,6 +2215,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 30: // Link Persons Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param2;
@@ -2223,6 +2227,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 31: // Link Titles-Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param2;
@@ -2233,6 +2239,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 32: // Link Certification-Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param2;
@@ -2243,6 +2251,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 33: // Link Comment-Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
@@ -2253,6 +2263,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 34: // Link Synopsis/Description-Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2;
@@ -2263,6 +2275,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 35: // Link MultiPosters - Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2;
@@ -2273,6 +2287,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 36: // Link Photos - Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2;
@@ -2283,6 +2299,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 37: // Link PersonImages - Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2;
@@ -2293,6 +2311,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 38: // Link MultiFanart - Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2;
@@ -2303,6 +2323,8 @@ namespace Grabber_Interface
           catch { EncodingSubPage.Text = string.Empty; };
           break;
         case 39: // Link Trailer - Secondary Page
+          lblEncodingSubPage.Visible = true;
+          EncodingSubPage.Visible = true;
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2;
@@ -4817,6 +4839,59 @@ namespace Grabber_Interface
       //tp1.Text=tp2Text;
       //tp2.Text=tp1Text;
 
+    }
+
+    private void EncodingSubPage_TextChanged(object sender, EventArgs e)
+    {
+      switch (cb_ParamDetail.SelectedIndex)
+      {
+        case 26:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingDetails2)._Value = EncodingSubPage.Text;
+          break;
+        case 27:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric1)._Value = EncodingSubPage.Text;
+          break;
+        case 28:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric2)._Value = EncodingSubPage.Text;
+          break;
+        case 29:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkImg)._Value = EncodingSubPage.Text;
+          break;
+        case 30:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersons)._Value = EncodingSubPage.Text;
+          break;
+        case 31:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTitles)._Value = EncodingSubPage.Text;
+          break;
+        case 32:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkCertification)._Value = EncodingSubPage.Text;
+          break;
+        case 33:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkComment)._Value = EncodingSubPage.Text;
+          break;
+        case 34:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkSyn)._Value = EncodingSubPage.Text;
+          break;
+
+        case 35:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiPosters)._Value = EncodingSubPage.Text;
+          break;
+        case 36:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPhotos)._Value = EncodingSubPage.Text;
+          break;
+        case 37:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersonImages)._Value = EncodingSubPage.Text;
+          break;
+        case 38:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiFanart)._Value = EncodingSubPage.Text;
+          break;
+        case 39:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTrailer)._Value = EncodingSubPage.Text;
+          break;
+
+        default:
+          break;
+      }
     }
 
   }

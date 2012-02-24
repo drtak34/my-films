@@ -59,6 +59,7 @@
       <KeyEndImg />
       <KeyImgIndex />
       <KeyImgPage />
+      <KeyEncodingLinkImg />
       <KeyStartLinkImg Param1="" Param2="" />
       <KeyEndLinkImg />
       <KeyLinkImgIndex />
@@ -119,6 +120,7 @@
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
+      <KeyEncodingLinkPersons />
       <KeyStartComment Param1="" Param2="" />
       <KeyEndComment />
       <KeyCommentRegExp />
@@ -143,6 +145,7 @@
       <KeyEndLinkTitles />
       <KeyLinkTitlesIndex />
       <KeyLinkTitlesPage />
+      <KeyEncodingLinkTitles />
       <KeyStartLinkCertification Param1="" Param2="" />
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
@@ -151,10 +154,12 @@
       <KeyEndLinkComment />
       <KeyLinkCommentIndex />
       <KeyLinkCommentPage />
+      <KeyEncodingLinkComment />
       <KeyStartDetails2 Param1="" Param2="" />
       <KeyEndDetails2 />
       <KeyDetails2Index />
       <KeyDetails2Page />
+      <KeyEncodingDetails2 />
       <KeyStartStudio Param1="" Param2="" />
       <KeyEndStudio />
       <KeyStudioIndex />
@@ -179,14 +184,17 @@
       <KeyEndLinkSyn />
       <KeyLinkSynIndex />
       <KeyLinkSynPage />
+      <KeyEncodingLinkSyn />
       <KeyStartLinkGeneric1 Param1="" Param2="" />
       <KeyEndLinkGeneric1 />
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page />
+      <KeyEncodingLinkGeneric1 />
       <KeyStartLinkGeneric2 Param1="" Param2="" />
       <KeyEndLinkGeneric2 />
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
+      <KeyEncodingLinkGeneric2 />
       <KeyStartGeneric1 Param1="" Param2="" />
       <KeyEndGeneric1 />
       <KeyGeneric1Index />
@@ -212,6 +220,7 @@
       <KeyEndLinkMultiPosters />
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
+      <KeyEncodingLinkMultiPosters />
       <KeyStartMultiPosters Param1="" Param2="" />
       <KeyEndMultiPosters />
       <KeyMultiPostersIndex />
@@ -230,10 +239,12 @@
       <KeyPhotosMaxItems />
       <KeyPhotosLanguage />
       <KeyPhotosPage />
+      <KeyEncodingLinkPhotos />
       <KeyStartLinkPersonImages Param1="" Param2="" />
       <KeyEndLinkPersonImages />
       <KeyLinkPersonImagesIndex />
       <KeyLinkPersonImagesPage />
+      <KeyEncodingLinkPersonImages />
       <KeyStartPersonImages Param1="" Param2="" />
       <KeyEndPersonImages />
       <KeyPersonImagesIndex />
@@ -245,6 +256,7 @@
       <KeyEndLinkMultiFanart />
       <KeyLinkMultiFanartIndex />
       <KeyLinkMultiFanartPage />
+      <KeyEncodingLinkMultiFanart />
       <KeyStartMultiFanart Param1="" Param2="" />
       <KeyEndMultiFanart />
       <KeyMultiFanartIndex />
@@ -256,6 +268,7 @@
       <KeyEndLinkTrailer />
       <KeyLinkTrailerIndex />
       <KeyLinkTrailerPage />
+      <KeyEncodingLinkTrailer />
       <KeyStartTrailer Param1="" Param2="" />
       <KeyEndTrailer />
       <KeyTrailerIndex />
