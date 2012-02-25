@@ -2347,6 +2347,62 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{8767b463-d897-45d0-b59e-63c182b7521d}-MyFilms.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\MyFilms.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultArtist2.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8ce24df7-b135-4a0e-ac83-b21e55d6a96b}-DefaultArtist2.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultArtist2.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultCountry.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{825ee596-e209-4d38-8ab9-e2e12526e2d0}-DefaultCountry.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultCountry.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultFilms.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cc4efa0a-aef6-41ec-9636-e2d0eac780d3}-DefaultFilms.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultFilms.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultGroup2.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d0d23714-2ce8-47ed-8818-8d26355133af}-DefaultGroup2.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultGroup2.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultIndex.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{503a4863-6e50-47e6-99c0-be7286cfc15f}-DefaultIndex.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultIndex.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultRecentlyAdded.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{954c84d0-8e16-4195-b9ff-be32d63a6049}-DefaultRecentlyAdded.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultRecentlyAdded.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultView.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b1f21681-5572-40d4-a928-0a063cb898c5}-DefaultView.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultView.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultYear.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{66e5b35e-73c6-43c2-81b3-19710d30f19a}-DefaultYear.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultYear.jpg</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3637,10 +3693,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3657,7 +3713,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>1986</Revision>
+      <Revision>2016</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3669,7 +3725,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-02-18T05:03:27.0517824+01:00</ReleaseDate>
+    <ReleaseDate>2012-02-25T04:30:22.1713007+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -6006,6 +6062,62 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultArtist2.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8ce24df7-b135-4a0e-ac83-b21e55d6a96b}-DefaultArtist2.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultArtist2.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultCountry.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{825ee596-e209-4d38-8ab9-e2e12526e2d0}-DefaultCountry.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultCountry.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultFilms.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cc4efa0a-aef6-41ec-9636-e2d0eac780d3}-DefaultFilms.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultFilms.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultGroup2.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d0d23714-2ce8-47ed-8818-8d26355133af}-DefaultGroup2.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultGroup2.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultIndex.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{503a4863-6e50-47e6-99c0-be7286cfc15f}-DefaultIndex.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultIndex.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultRecentlyAdded.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{954c84d0-8e16-4195-b9ff-be32d63a6049}-DefaultRecentlyAdded.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultRecentlyAdded.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultView.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b1f21681-5572-40d4-a928-0a063cb898c5}-DefaultView.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultView.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultYear.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{66e5b35e-73c6-43c2-81b3-19710d30f19a}-DefaultYear.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultYear.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\GroupViewImages\year\Default.jpg</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{4deab4a1-26ce-442a-9ec4-19f96c24d1f5}-Default.jpg</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\year\Default.jpg</DestinationFilename>
@@ -6628,6 +6740,16 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <DestinationFilename>%Thumbs%\MyFilms\WebLinks</DestinationFilename>
         <Folder>WebLinks</Folder>
         <Group>WebLinks</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{6947c21b-4bc7-4a7f-91a1-29229de50a27}-</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages</DestinationFilename>
+        <Folder>Thumbs\MyFilms\DefaultImages</Folder>
+        <Group>DefaultImages</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
