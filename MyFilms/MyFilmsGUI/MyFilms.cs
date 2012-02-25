@@ -234,11 +234,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_DummyFacadePerson = 38,
       CTRL_DummyFacadeHierarchy = 39,
       CTRL_DummyFacadeMenu = 40,
-      CTRL_ImageMenu = 1019,
-      CTRL_ImageFilm = 1020,
-      CTRL_ImageGroup = 1021,
-      CTRL_ImagePerson = 1022,
-      CTRL_ImageHierarchy = 1023,
       CTRL_ListFilms = 50, // Changed from 1026 to 50 due to meeting MePo Standards - holds film lists and hierarchies
       CTRL_ListMenu = 51, // added as separate list control for new menu - holds menu and extended menu
       CTRL_ListViews = 52, // added as separate list control for Views - holds normal and indexed views (groupings)
@@ -273,21 +268,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     [SkinControlAttribute((int)Controls.CTRL_ListViews)]
     protected GUIFacadeControl facadeViews;
-
-    [SkinControlAttribute((int)Controls.CTRL_ImageMenu)]
-    protected GUIImage ImgLstMenu;
-
-    [SkinControlAttribute((int)Controls.CTRL_ImageFilm)]
-    protected GUIImage ImgLstFilm;
-
-    [SkinControlAttribute((int)Controls.CTRL_ImageGroup)]
-    protected GUIImage ImgLstGroup;
-
-    [SkinControlAttribute((int)Controls.CTRL_ImagePerson)]
-    protected GUIImage ImgLstPerson;
-
-    [SkinControlAttribute((int)Controls.CTRL_ImageHierarchy)]
-    protected GUIImage ImgLstHierarchy;
 
     [SkinControlAttribute((int)Controls.CTRL_logos_id2001)]
     protected GUIImage ImgID2001;
