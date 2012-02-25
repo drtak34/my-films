@@ -933,11 +933,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected override void OnShowContextMenu()
     {
       LogMyFilms.Debug("OnShowContextMenu() started");
-      if (this.facadeFilms.SelectedListItemIndex > -1)
+      switch (conf.ViewContext)
       {
-        if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        Context_Menu_Movie(this.facadeFilms.SelectedListItem.ItemId);
-        return;
+        case ViewContext.Menu:
+        case ViewContext.MenuAll:
+          if (this.facadeMenu.SelectedListItemIndex > -1)
+          {
+            if (!facadeMenu.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListMenu);
+            Context_Menu_Movie(this.facadeMenu.SelectedListItem.ItemId);
+            return;
+          }
+          break;
+        default:
+          if (this.facadeFilms.SelectedListItemIndex > -1)
+          {
+            if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            Context_Menu_Movie(this.facadeFilms.SelectedListItem.ItemId);
+            return;
+          }
+          break;
       }
       base.OnShowContextMenu();
     }
@@ -1621,10 +1635,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (GetPrevFilmList()) return;
           break;
         case Action.ActionType.ACTION_PREVIOUS_MENU:
-          if (!this.facadeFilms.Focus)
+          switch (conf.ViewContext)
           {
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // set focus to facade, if e.g. menu buttons had focus (after global options etc.)
-            return;
+            case ViewContext.Menu:
+            case ViewContext.MenuAll:
+              if (!this.facadeMenu.Focus)
+              {
+                GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListMenu); // set focus to facade, if e.g. menu buttons had focus (after global options etc.)
+                return;
+              }
+              break;
+            default:
+              if (!this.facadeFilms.Focus)
+              {
+                GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // set focus to facade, if e.g. menu buttons had focus (after global options etc.)
+                return;
+              }
+              break;
           }
 
           LogStatusVars("PreviousMenu");
@@ -1918,10 +1945,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //---------------------------------------------------------------------------------------
           // LogMyFilms.Debug("GUI_MSG_CLICKED recognized !");
 
-          if (iControl == (int)Controls.CTRL_ListFilms && message.Param1 != 7)  return true;  // we only handle "SELECT_ITEM" here - some other events raised onClicked too for some reason?
+          if (iControl == (int)Controls.CTRL_ListFilms && message.Param1 != 7) return true;  // we only handle "SELECT_ITEM" here - some other events raised onClicked too for some reason?
+          if (iControl == (int)Controls.CTRL_ListMenu && message.Param1 != 7) return true;  // we only handle "SELECT_ITEM" here - some other events raised onClicked too for some reason?
             
           switch (iControl)
           {
+            case (int)Controls.CTRL_ListMenu:
+              #region Item selected in facade - do action ...
+              if (this.facadeMenu.SelectedListItemIndex > -1) // if (facadeFilms.SelectedListItemIndex > -1 && !bgOnPageLoad.IsBusy) // do not allow going to details when loading thread still active !!!
+              {
+                // LogStatusVars("SelectItem");
+                switch (conf.ViewContext)
+                {
+                  case ViewContext.None:
+                    break;
+                  case ViewContext.Menu:
+                  case ViewContext.MenuAll:
+                    if (this.facadeMenu.SelectedListItem.DVDLabel == "showall")
+                    {
+                      conf.MenuSelectedID = -1;
+                      GetSelectFromMenuView(true);
+                    }
+                    else
+                    {
+                      conf.MenuSelectedID = this.facadeMenu.SelectedListItemIndex; // remember last menu position ...
+                      Change_View_Action(this.facadeMenu.SelectedListItem.DVDLabel);
+                    }
+                    break;
+
+                  default:
+                    break;
+                }
+              }
+              #endregion
+              break;
             case (int)Controls.CTRL_ListFilms:
               #region Item selected in facade - do action ...
               if (this.facadeFilms.SelectedListItemIndex > -1) // if (facadeFilms.SelectedListItemIndex > -1 && !bgOnPageLoad.IsBusy) // do not allow going to details when loading thread still active !!!
@@ -1977,35 +2034,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             case (int)Controls.CTRL_BtnSearch: // Search dialog search
               conf.Boolselect = false;
               Change_Search_Options();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnSortBy:
               Change_Sort_Option_Menu();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnViewAs:
               Change_View_Menu();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnOptions:
               Change_Option();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnUpdates:
               Change_Menu_Action("globalupdates");
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnGlobalOverlayFilter:
               Change_Global_Filters();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnToggleGlobalUnwatchedStatus:
               ToggleGlobalUnwatched();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
             case (int)Controls.CTRL_BtnLayout:
               Change_Layout();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              FocusActiveFacadeControl();
               break;
           }
           #endregion
@@ -2015,6 +2072,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     #endregion
 
+    private void FocusActiveFacadeControl()
+    {
+      switch (conf.ViewContext)
+      {
+        case ViewContext.Menu:
+        case ViewContext.MenuAll:
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListMenu);
+          break;
+        default:
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          break;
+      }
+    }
+    
+    
     private void Change_Layout()
     {
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -3654,7 +3726,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIListItem item = null;
       int i;
       LogMyFilms.Debug("GetSelectFromMenuView() - start facade load ...");
-      ClearFacade(); // facadeFilms.Clear();
+      facadeMenu.Clear();
+      // if (this.facadeMenu.ListLayout != null) this.facadeMenu.ListLayout.Clear();
+      //ClearFacade(); // facadeFilms.Clear();
       
       if (!showall)
       {
@@ -3724,7 +3798,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               item.IconImageBig = customView.ImagePath;
             }
             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-            this.facadeFilms.Add(item);
+            facadeMenu.Add(item);
           }
         }
 
@@ -3732,7 +3806,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.Label = GUILocalizeStrings.Get(10798765); // *** show all ***
         item.DVDLabel = "showall";
         item.IsFolder = true;
-        this.facadeFilms.Add(item);
+        this.facadeMenu.Add(item);
       }
       else
       {
@@ -3747,19 +3821,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // item.Label2 = CountViewItems(item.DVDLabel).ToString(); 
           item.IsFolder = true;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-          this.facadeFilms.Add(item);
+          this.facadeMenu.Add(item);
         }
       }
       if (item != null) item.FreeMemory();
       item.SafeDispose();
-      if (conf.MenuSelectedID == -2) 
-        conf.MenuSelectedID = facadeFilms.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
-      else if ((conf.MenuSelectedID > this.facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
+      if (conf.MenuSelectedID == -2)
+        conf.MenuSelectedID = facadeMenu.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
+      else if ((conf.MenuSelectedID > this.facadeMenu.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
         conf.MenuSelectedID = 0;
-      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedID);
+      FocusActiveFacadeControl();
+      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListMenu, (int)conf.MenuSelectedID);
 
-      MyFilmsDetail.setGUIProperty("nbobjects.value", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString());
-      GUIPropertyManager.SetProperty("#itemcount", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString());
+      MyFilmsDetail.setGUIProperty("nbobjects.value", (!showall ? facadeMenu.Count : facadeMenu.Count - 1).ToString());
+      GUIPropertyManager.SetProperty("#itemcount", (!showall ? facadeMenu.Count : facadeMenu.Count - 1).ToString());
       // GUIPropertyManager.SetProperty("#itemtype", "Views"); // disabled, as we otherwise have to set it in all facade listings ...
       LogMyFilms.Debug("GetSelectFromMenuView() - end facade load ...");
 
@@ -3770,13 +3845,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         #region Load Thumbs and Counts threaded
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
-        for (i = 0; i < this.facadeFilms.Count; i++)
+        for (i = 0; i < this.facadeMenu.Count; i++)
         {
           if (StopLoadingMenuDetails) break;
           try
           {
             #region Set Thumbs
-            if (string.IsNullOrEmpty(this.facadeFilms[i].ThumbnailImage))
+            if (string.IsNullOrEmpty(this.facadeMenu[i].ThumbnailImage))
             {
               // string strThumbDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsGroups) + WStrSort.ToLower() + @"\";
               if (conf.StrPathViews.Length > 0)
@@ -3785,12 +3860,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (MyFilms.conf.StrViewsDflt)
                 {
                   string strPathViews = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
-                  strPathViews = strPathViews + GetFieldFromViewLabel(facadeFilms[i].DVDLabel).ToLower() + "\\" + "Default.jpg";
+                  strPathViews = strPathViews + GetFieldFromViewLabel(facadeMenu[i].DVDLabel).ToLower() + "\\" + "Default.jpg";
                   if (!System.IO.File.Exists(strPathViews))
                   {
                     if (MyFilms.conf.StrViewsDflt && (MyFilms.conf.DefaultCoverViews.Length > 0))
                     {
-                      if (IsPersonField(GetFieldFromViewLabel(facadeFilms[i].DVDLabel)))
+                      if (IsPersonField(GetFieldFromViewLabel(facadeMenu[i].DVDLabel)))
                         strPathViews = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
                       else 
                         strPathViews = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultGroup.jpg";
@@ -3798,9 +3873,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   if (System.IO.File.Exists(strPathViews))
                   {
-                    facadeFilms[i].ThumbnailImage = strPathViews;
-                    facadeFilms[i].IconImage = strPathViews;
-                    facadeFilms[i].IconImageBig = strPathViews;
+                    facadeMenu[i].ThumbnailImage = strPathViews;
+                    facadeMenu[i].IconImage = strPathViews;
+                    facadeMenu[i].IconImageBig = strPathViews;
                   }
                 }
               }
@@ -3810,7 +3885,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           catch (Exception) {}
         }
         // GUIControl.RefreshControl(GetID, (int)Controls.CTRL_ListFilms);
-        for (i = 0; i < this.facadeFilms.Count; i++)
+        for (i = 0; i < this.facadeMenu.Count; i++)
         {
           if (StopLoadingMenuDetails) break;
           try
@@ -3818,7 +3893,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region count items
 
             bool success = false;
-            GUIListItem countitem = this.facadeFilms[i];
+            GUIListItem countitem = this.facadeMenu[i];
             if (countitem.DVDLabel == "showall") continue; // skip the menu only entry
             if (!conf.OnlyTitleList && string.IsNullOrEmpty(countitem.Label2)) // first try to get info for custom views ...
             {
@@ -4010,7 +4085,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.StrSorta, conf.StrSortSens, "*", true, "");
         else
           GetFilmList();
-        GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+        FocusActiveFacadeControl();
       }
     }
 
@@ -6480,7 +6555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.LastID == ID_MyFilmsDetail) GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       else if (conf.LastID == ID_MyFilmsActors) GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
-      else GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+      else FocusActiveFacadeControl(); //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
     }
 
     private void ResetGlobalFilters()
@@ -6592,7 +6667,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           SetLabelView("all");
           SetLabelSelect("root");
           GetFilmList();
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           SetDummyControlsForFacade(conf.ViewContext);
           break;
 
@@ -6608,7 +6683,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.WStrSort = conf.StrSTitle;
           GetFilmList();
           SetLabelView("storage");
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
           #endregion
         #endregion
@@ -6682,7 +6757,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SetLabelView("all");
             SetLabelSelect("root");
             GetFilmList();
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            FocusActiveFacadeControl();
             SetDummyControlsForFacade(conf.ViewContext);
           }
           else if (selectedCustomView.Value.Length > 0 && !selectedCustomView.Value.Contains(",")) // Film list view with value filter
@@ -6730,7 +6805,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //    MyFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
           //    GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewText[i]);
           //}
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
         #endregion
 
@@ -7416,7 +7491,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
           AsynIsOnlineCheck();
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
 
         case "updatedb":
@@ -7435,7 +7510,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
           AsynUpdateDatabase("");
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
 
         case "updatedbselect":
@@ -7480,7 +7555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           choiceAMCconfig.Clear();
           
           AsynUpdateDatabase(selectedprofile);
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
         
         case "cancelupdatedb":
@@ -7493,7 +7568,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             ShowMessageDialog("", "AMC Updater cannot be stopped!", ""); // AMC Updater is stopping!
           }
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
 
         case "downfanart":
@@ -7505,7 +7580,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
           AsynUpdateFanart();
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          FocusActiveFacadeControl();
           break;
 
         case "personinfos-all":
@@ -7636,7 +7711,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "incomplete-movie-data":
           SearchIncompleteMovies();
-          GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // set focus to list
+          FocusActiveFacadeControl();
           break;
 
         case "showemptyvaluesinviews":
@@ -8499,7 +8574,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "analogyperson":
           {
             SearchRelatedMoviesbyPersons((int)this.facadeFilms.SelectedListItem.ItemId, Context_Menu);
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            FocusActiveFacadeControl();
             dlg.DeInit();
             break;
           }
@@ -8507,7 +8582,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "analogyproperty":
           {
             SearchRelatedMoviesbyProperties((int)this.facadeFilms.SelectedListItem.ItemId, Context_Menu);
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            FocusActiveFacadeControl();
             dlg.DeInit();
             break;
           }
@@ -8561,7 +8636,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // getSelectFromDivx(conf.StrTitle1 + " not like ''", persontype, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
               // getSelectFromDivx(conf.StrFilmSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
             }
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            FocusActiveFacadeControl();
             break;
           }
 
@@ -8602,7 +8677,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region update person info from internet
             //Todo: add calls to update the personinfos from IMDB - use database and grabberclasses from MePo / Deda
             ArtistIMDBpictures(this.facadeFilms.SelectedListItem.Label); // Call Updategrabber with Textlabel/Actorname
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            FocusActiveFacadeControl();
             dlg.DeInit();
 
 
@@ -10204,7 +10279,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //GetFilmList(); //Is this necessary????
             //conf.StrIndex = facadeFilms.SelectedListItem.ItemId;
             //conf.StrTIndex = facadeFilms.SelectedListItem.Label;
-            GUIControl.FocusControl(ID_MyFilms, (int)Controls.CTRL_ListFilms);
+            FocusActiveFacadeControl();
             dlg.DeInit();
             return;
 
@@ -10596,7 +10671,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //GetFilmList(); //Is this necessary????
                 conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId; //Guzzi: Muß hier erst der facadeview geladen werden?
                 conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
-                GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+                FocusActiveFacadeControl();
                 dlg.DeInit();
                 return;
 
