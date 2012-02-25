@@ -3764,23 +3764,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // Check, if default group cover is present
                 if (MyFilms.conf.StrViewsDflt)
                 {
-                  string strPathViews = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
-                  strPathViews = strPathViews + GetFieldFromViewLabel(facadeFilms[i].DVDLabel).ToLower() + "\\" + "Default.jpg";
-                  if (!System.IO.File.Exists(strPathViews))
+                  string strMenuImage = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
+                  strMenuImage = strMenuImage + GetFieldFromViewLabel(facadeFilms[i].DVDLabel).ToLower() + "\\" + "Default.jpg";
+                  if (!System.IO.File.Exists(strMenuImage))
                   {
-                    if (MyFilms.conf.StrViewsDflt && (MyFilms.conf.DefaultCoverViews.Length > 0))
+                    if (IsPersonField(GetFieldFromViewLabel(facadeFilms[i].DVDLabel)))
                     {
-                      if (IsPersonField(GetFieldFromViewLabel(facadeFilms[i].DVDLabel)))
-                        strPathViews = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
-                      else 
-                        strPathViews = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultGroup.jpg";
+                      if (MyFilms.conf.DefaultCoverArtist.Length > 0)
+                        strMenuImage = MyFilms.conf.DefaultCoverArtist;
+                      else
+                        strMenuImage = MyFilms.conf.DefaultCover;
+                    }
+                    else
+                    {
+                      if (MyFilms.conf.DefaultCoverViews.Length > 0)
+                        strMenuImage = MyFilms.conf.DefaultCoverViews;
+                      else
+                        strMenuImage = MyFilms.conf.DefaultCover; //MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
                     }
                   }
-                  if (System.IO.File.Exists(strPathViews))
+                  if (System.IO.File.Exists(strMenuImage))
                   {
-                    facadeFilms[i].ThumbnailImage = strPathViews;
-                    facadeFilms[i].IconImage = strPathViews;
-                    facadeFilms[i].IconImageBig = strPathViews;
+                    facadeFilms[i].ThumbnailImage = strMenuImage;
+                    facadeFilms[i].IconImage = strMenuImage;
+                    facadeFilms[i].IconImageBig = strMenuImage;
                   }
                 }
               }
