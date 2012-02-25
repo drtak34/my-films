@@ -575,6 +575,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (txtGrabber.Text.Length == 0)
                 {
                     MessageBox.Show("Grabber Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    General.SelectedIndex = 4; 
                     txtGrabber.Focus();
                     return;
                 }
@@ -583,6 +584,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (txtAMCUpd_cnf.Text.Length == 0)
                 {
                     MessageBox.Show("AMCUpdater Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    General.SelectedIndex = 5;
                     txtAMCUpd_cnf.Focus();
                     return;
                 }
