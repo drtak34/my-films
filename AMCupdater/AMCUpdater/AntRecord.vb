@@ -1384,8 +1384,8 @@ Public Class AntRecord
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
-            CurrentAttribute = _SourceField ' Sourcefile - field depends on configuration
-            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) And IsUpdateRequested(CurrentAttribute, ProcessMode) Then
+            CurrentAttribute = _SourceField ' Sourcefile - field depends on configuration - always update, if mode is "import"
+            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) And (IsUpdateRequested(CurrentAttribute, ProcessMode) Or ProcessMode = Process_Mode_Names.Import) Then
                 If (_FilePath.Length > 0) Then
                     If Not String.IsNullOrEmpty(_OverridePath) Then
                         TempValue = _OverridePath
@@ -1907,10 +1907,6 @@ Public Class AntRecord
         Dim customfieldselement As Xml.XmlElement
         Dim customfieldsattr As Xml.XmlAttribute
         Dim IsUpdateRequired As Boolean = False
-
-        If currentAttribute = _SourceField And ProcessMode = Process_Mode_Names.Import Then ' always activate Sourcefield, if in import mode - even if it is unchecked in DB area. (possible conflict when not using "Source" ...
-            Return True
-        End If
 
         If _DatabaseFields(currentAttribute.ToLower) = False Then ' Field not selected !
             Return False
