@@ -7,7 +7,6 @@ Public Class frmList
 
     Dim DialogRename As New DialogRename()
     Private SearchTextChanged As Boolean = False
-    Private SearchPage = 1
 
     Private Sub lstOptionsExt_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstOptionsExt.DoubleClick
         Me.DialogResult = Windows.Forms.DialogResult.OK
@@ -16,15 +15,13 @@ Public Class frmList
     Private Sub btnSearchAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgain.Click
         Dim distance As String
         btnSearchAgain.Enabled = False
-        SearchPage = -1
+        lstOptionsExt.Rows.Clear()
+        'lstOptionsExt.Rows.Add(New String() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
+        'Thread.Sleep(5)
         If txtSearchString.Text <> "" Then
-            lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
-            'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-            'Dim wurl As ArrayList
             wurl.Clear()
-            wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
+            wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, -1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
@@ -39,11 +36,11 @@ Public Class frmList
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
-                btnSearchNextPage.Enabled = True
+                btnSearchAllPages.Enabled = True
             Else
                 lstOptionsExt.Rows.Add(New Object() {Nothing, "No results found !", "", "", "", "", "", ""})
                 btnOK.Enabled = False
-                btnSearchNextPage.Enabled = False
+                btnSearchAllPages.Enabled = False
             End If
             SearchTextChanged = False
         Else
@@ -172,6 +169,7 @@ Public Class frmList
     Private Sub frmList_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.txtSearchString.Focus()
         Me.btnSearchAgain.Enabled = False
+        Me.btnSearchAllPages.Enabled = True
     End Sub
 
     Private Sub ButtonGrabberOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonGrabberOptions.Click
@@ -213,10 +211,12 @@ Public Class frmList
 
     Private Sub txtSearchString_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearchString.TextChanged
         btnSearchAgain.Enabled = True
+        btnSearchAllPages.Enabled = True
     End Sub
 
     Private Sub txtTmpParserFilePathShort_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTmpParserFilePathShort.TextChanged
         btnSearchAgain.Enabled = True
+        btnSearchAllPages.Enabled = True
     End Sub
 
     Private Sub lstOptionsExt_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lstOptionsExt.CellContentClick
@@ -372,37 +372,41 @@ Public Class frmList
         End Try
     End Sub
 
-    Private Sub btnSearchNextPage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchNextPage.Click
+    Private Sub btnSearchNextPage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAllPages.Click
         Dim distance As String
+        Dim resultfound As Boolean = False
+        Dim SearchPage As Integer = -1 ' results in starting with page = 0
         btnSearchAgain.Enabled = False
-        SearchPage = SearchPage + 1
+        btnSearchAllPages.Enabled = False
         If txtSearchString.Text <> "" Then
             lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
-            'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-            'Dim wurl As ArrayList
-            wurl.Clear()
-            wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
-            lstOptionsExt.Rows.Clear()
-            If (wurl.Count > 0) Then
-                For i As Integer = 0 To wurl.Count - 1
-                    If FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString) = Integer.MaxValue Then
-                        distance = ""
-                    Else
-                        distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
-                    End If
-                    Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wurl.Item(i).Thumb)
-                    lstOptionsExt.Rows.Add(New Object() {image, wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).Akas, wurl.Item(i).ID, wurl.Item(i).URL, distance})
-                Next
+            While SearchPage < 25
+                SearchPage += 1
+                wurl.Clear()
+                wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
+                If (wurl.Count > 0) Then
+                    For i As Integer = 0 To wurl.Count - 1
+                        If FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString) = Integer.MaxValue Then
+                            distance = ""
+                        Else
+                            distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
+                        End If
+                        Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wurl.Item(i).Thumb)
+                        lstOptionsExt.Rows.Add(New Object() {image, wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).Akas, wurl.Item(i).ID, wurl.Item(i).URL, distance})
+                    Next
+                    resultfound = True
+                ElseIf (SearchPage > 1) Then ' If no results AND page is 2 or bigger, stop loop
+                    Exit While
+                End If
+            End While
+            If resultfound = True Then
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
-                btnSearchNextPage.Enabled = True
             Else
                 lstOptionsExt.Rows.Add(New Object() {Nothing, "No results found !", "", "", "", "", "", ""})
                 btnOK.Enabled = False
-                btnSearchNextPage.Enabled = False
             End If
             SearchTextChanged = False
         Else
