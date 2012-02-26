@@ -8147,7 +8147,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlgmenu == null) return;
             dlgmenu.Reset();
             choiceViewMenu.Clear();
-            string headline = (MyFilms.conf.IndexedChars == 0) ? (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))) : (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + MyFilms.conf.IndexedChars));
+            MFview.ViewRow currentCustomView = null;
+            int currentIndex = conf.IndexedChars;
+            if (conf.ViewContext == ViewContext.Menu)
+            {
+              foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+              {
+                if (facadeFilms.SelectedListItem.Label == viewRow.Label)
+                {
+                  currentCustomView = viewRow;
+                  currentIndex = viewRow.Index;
+                  break;
+                }
+              }
+            }
+
+            string headline = (currentIndex == 0) ? (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))) : (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + currentIndex));
             dlgmenu.SetHeading(headline);
 
             dlgmenu.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))); // disabled indexed view
@@ -8167,37 +8182,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (choiceViewMenu[dlgmenu.SelectedLabel])
             {
               case "0":
-                if (MyFilms.conf.IndexedChars == 0) return;
-                MyFilms.conf.IndexedChars = 0;
+                if (currentIndex == 0) return;
+                currentIndex = 0;
                 break;
               case "1":
-                if (MyFilms.conf.IndexedChars == 1) return;
-                MyFilms.conf.IndexedChars = 1;
+                if (currentIndex == 1) return;
+                currentIndex = 1;
                 break;
               case "2":
-                if (MyFilms.conf.IndexedChars == 2) return;
-                MyFilms.conf.IndexedChars = 2;
+                if (currentIndex == 2) return;
+                currentIndex = 2;
                 break;
               default:
                 return;
             }
 
-            //MyFilms.conf.IndexedChars++;
-            //if (MyFilms.conf.IndexedChars > 2) MyFilms.conf.IndexedChars = 0;
 
-            if (MyFilms.conf.IndexedChars > 0)
+            if (conf.ViewContext == ViewContext.Menu)
             {
-              MyFilms.conf.Boolindexed = true;
-              MyFilms.conf.Boolindexedreturn = false;
+              if (currentCustomView != null)
+              {
+                currentCustomView.Index = currentIndex;
+                LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed for Custom View '" + currentCustomView.Label + "' to '" + currentIndex + "'");
+                SaveCustomViews();
+              }
+              else
+                LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' cannot be changed, Custom View not found !");
             }
             else
             {
-              MyFilms.conf.Boolindexed = false;
-              MyFilms.conf.Boolindexedreturn = false;
-              MyFilms.conf.Wstar = "*";
+              MyFilms.conf.IndexedChars = currentIndex;
+              if (MyFilms.conf.IndexedChars > 0)
+              {
+                MyFilms.conf.Boolindexed = true;
+                MyFilms.conf.Boolindexedreturn = false;
+              }
+              else
+              {
+                MyFilms.conf.Boolindexed = false;
+                MyFilms.conf.Boolindexedreturn = false;
+                MyFilms.conf.Wstar = "*";
+              }
+              LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed to '" + MyFilms.conf.IndexedChars + "'");
+              Refreshfacade();
             }
-            LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed to '" + MyFilms.conf.IndexedChars + "'");
-            Refreshfacade();
             break;
           }
 
