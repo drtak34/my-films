@@ -651,10 +651,10 @@ Public Class AntRecord
                             frmList.txtSourceFull.Text = _FilePath
                             If (wurl.Count = 0) Then
                                 frmList.lstOptionsExt.Rows.Add(New String() {Nothing, "Movie not found...", "", "", "", "", "", ""})
-                                frmList.btnSearchNextPage.Enabled = False
+                                frmList.btnSearchAllPages.Enabled = False
                             Else
                                 ' index = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
-                                frmList.btnSearchNextPage.Enabled = True
+                                frmList.btnSearchAllPages.Enabled = True
                                 For i As Integer = 0 To wurl.Count - 1
                                     If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
                                         wlimityear = True

@@ -62,7 +62,7 @@ Partial Class frmList
         Me.btnSearchGoogle = New System.Windows.Forms.Button
         Me.ToolTipImportDialog = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnRenameAndCancel = New System.Windows.Forms.Button
-        Me.btnSearchNextPage = New System.Windows.Forms.Button
+        Me.btnSearchAllPages = New System.Windows.Forms.Button
         Me.txtSourceFull = New System.Windows.Forms.TextBox
         Me.txtSourceFullAllPath = New System.Windows.Forms.TextBox
         Me.pbCoverPreview = New System.Windows.Forms.PictureBox
@@ -111,7 +111,8 @@ Partial Class frmList
         Me.btnSearchAgain.TabIndex = 40
         Me.btnSearchAgain.Text = "Search Again"
         Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAgain, "Perform new search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will only be available, if settings have been changed," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like" & _
-                " grabber script or search title.")
+                " grabber script or search title." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note: By default, only the first page results " & _
+                "are loaded.")
         Me.btnSearchAgain.UseVisualStyleBackColor = True
         '
         'txtTmpParserFilePath
@@ -426,18 +427,18 @@ Partial Class frmList
         Me.ToolTipImportDialog.SetToolTip(Me.btnRenameAndCancel, resources.GetString("btnRenameAndCancel.ToolTip"))
         Me.btnRenameAndCancel.UseVisualStyleBackColor = True
         '
-        'btnSearchNextPage
+        'btnSearchAllPages
         '
-        Me.btnSearchNextPage.Enabled = False
-        Me.btnSearchNextPage.Location = New System.Drawing.Point(126, 364)
-        Me.btnSearchNextPage.Name = "btnSearchNextPage"
-        Me.btnSearchNextPage.Size = New System.Drawing.Size(22, 23)
-        Me.btnSearchNextPage.TabIndex = 89
-        Me.btnSearchNextPage.Text = ">"
-        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchNextPage, "For grabbers supporting multiple pages, you can show search results of next page." & _
-                "")
-        Me.btnSearchNextPage.UseVisualStyleBackColor = True
-        Me.btnSearchNextPage.Visible = False
+        Me.btnSearchAllPages.Enabled = False
+        Me.btnSearchAllPages.Location = New System.Drawing.Point(126, 364)
+        Me.btnSearchAllPages.Name = "btnSearchAllPages"
+        Me.btnSearchAllPages.Size = New System.Drawing.Size(22, 23)
+        Me.btnSearchAllPages.TabIndex = 89
+        Me.btnSearchAllPages.Text = ">"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAllPages, "For grabbers supporting multiple pages, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "you can show search results of all page" & _
+                "s." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "When using simple search expressions, this can result " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "in many resu" & _
+                "lts and significant loading time." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.btnSearchAllPages.UseVisualStyleBackColor = True
         '
         'txtSourceFull
         '
@@ -474,7 +475,7 @@ Partial Class frmList
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(856, 396)
         Me.ControlBox = False
-        Me.Controls.Add(Me.btnSearchNextPage)
+        Me.Controls.Add(Me.btnSearchAllPages)
         Me.Controls.Add(Me.pbCoverPreview)
         Me.Controls.Add(Me.txtSourceFullAllPath)
         Me.Controls.Add(Me.txtSourceFull)
@@ -548,5 +549,5 @@ Partial Class frmList
     Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Distance As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnSearchNextPage As System.Windows.Forms.Button
+    Friend WithEvents btnSearchAllPages As System.Windows.Forms.Button
 End Class

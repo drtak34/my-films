@@ -441,8 +441,7 @@ Public Class Form1
             MsgBox("You must select the folder you want to scan for movies!")
             Exit Sub
         End If
-
-        For Each MovieFolder In txtMovieFolder.Text.Split(";")
+        For Each MovieFolder In txtMovieFolder.Text.Split(New Char() {";", ","}, System.StringSplitOptions.RemoveEmptyEntries)
 
             Dim f As New IO.DirectoryInfo(MovieFolder)
 
