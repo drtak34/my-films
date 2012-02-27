@@ -1926,7 +1926,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                   default:
-                    if (conf.IndexedChars > 0 && conf.Boolindexed && conf.Wstar == "*") // enter indexed view ... //  && !IsTitleField(conf.WStrSort)
+                    //if (conf.BoolSkipViewState)
+                    //{
+                    //  // only, if direct to filmlist is requested
+                    //}
+                    //if (conf.IndexedChars > 0 && conf.Boolindexed && conf.Wstar == "*" && IsTitleField(GetCustomViewFromViewLabel(conf.CurrentView).DBfield)) // enter indexed view ... //  && !IsTitleField(conf.WStrSort) // if (conf.IndexedChars > 0 && conf.Boolindexed && conf.Wstar == "*" && IsTitleField(GetCustomViewFromViewLabel(conf.CurrentView).DBfield)) // enter indexed view ... //  && !IsTitleField(conf.WStrSort)
+                    //{
+                    //  conf.Wselectedlabel = (conf.BoolReverseNames && this.facadeFilms.SelectedListItem.Label != EmptyFacadeValue) ? ReReverseName(conf.Wselectedlabel) : this.facadeFilms.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
+                    //  conf.Boolreturn = (!this.facadeFilms.SelectedListItem.IsFolder);
+                    //  do
+                    //  {
+                    //    if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
+                    //    conf.StrTitleSelect += conf.Wselectedlabel;
+                    //  }
+                    //  while (GetFilmList() == false); //keep calling while single folders found
+                    //}
+                    //else 
+                    if (conf.IndexedChars > 0 && conf.Boolindexed && conf.Wstar == "*" && !conf.BoolSkipViewState) // enter indexed view ... 
                     {
                       conf.Boolindexed = false;
                       conf.Boolindexedreturn = true;
@@ -1940,7 +1956,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     else // View List as selected
                     {
+                      //conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+                      //conf.Boolselect = true;
+                      //conf.Boolreturn = true;
+                      //conf.Wstar = "*";
+                      //if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(344) + " [*" + conf.Wstar + "*]";
+                      //// TxtSelect.Label = conf.StrTxtSelect;
+                      //MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+                      //conf.StrSelect = conf.WStrSort;
+
+                      //conf.StrFilmSelect = string.Empty;
+                      //conf.Wselectedlabel = (selectedCustomView.Value != "*") ? selectedCustomView.Value : "";
+                      //do
+                      //{
+                      //  if (conf.StrTitleSelect != string.Empty) conf.StrTitleSelect += conf.TitleDelim;
+                      //  conf.StrTitleSelect += selectedCustomView.Value;
+                      //}
+                      //while (GetFilmList() == false); //keep calling while single folders found
+                      
                       conf.Wselectedlabel = (conf.BoolReverseNames && this.facadeFilms.SelectedListItem.Label != EmptyFacadeValue) ? ReReverseName(conf.Wselectedlabel) : this.facadeFilms.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
+
                       conf.Boolreturn = (!this.facadeFilms.SelectedListItem.IsFolder);
                       do
                       {
@@ -2320,7 +2355,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string datatype = ds.Movie.Columns[conf.WStrSort].DataType.Name; // == "string"
 
         LogMyFilms.Debug(string.Format("(SetFilmSelect) - DB-Field: '{0}', datatype = '{1}', ColumnType = '{2}'", conf.WStrSort, datatype, ColumnType));
-
         if (ColumnType != typeof(string))
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " = '" + sLabel + "'" : conf.WStrSort + " is NULL";
         else if (IsDateField(conf.WStrSort))
@@ -2338,6 +2372,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.StrTxtSelect = (LabelNotEmpty) ? "[" + sLabel + "]" : "[" + EmptyFacadeValue + "]";
         conf.StrTitleSelect = "";
         conf.Boolselect = false;
+        if (conf.BoolSkipViewState)
+        {
+          conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+          // conf.StrTxtSelect = (LabelNotEmpty) ? "[" + sLabel + "*]" : "[" + EmptyFacadeValue + "]";
+        }
       }
       else
       {
@@ -3891,7 +3930,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       return viewlabel;
     }
-    
+
+    private MFview.ViewRow GetCustomViewFromViewLabel(string viewlabel)
+    {
+      foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+      {
+        if (viewRow.Label == viewlabel) return viewRow;
+      }
+      return null;
+    }
+
     //--------------------------------------------------------------------------------------------
     //  Change Sort Option for films, vies or collections/groups
     //--------------------------------------------------------------------------------------------
@@ -5108,7 +5156,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.IsFolder = true;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         this.facadeFilms.Add(item);
-        if (SelItem != "" && item.Label == SelItem) conf.StrIndex = this.facadeFilms.Count - 1; //test if this item is one to select
+        if (SelItem != "" && item.Label == SelItem) conf.StrIndex = facadeFilms.Count - 1; //test if this item is one to select
         Wnb_enr = 0;
       }
       if (item != null) item.FreeMemory();
@@ -6554,6 +6602,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.StrViewSelect = "";
       conf.IndexedChars = 0;
       conf.Boolindexed = false;
+      conf.BoolSkipViewState = false;
 
       MFview.ViewRow selectedCustomView = MyFilms.conf.CustomViews.View.NewViewRow();
       foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
@@ -6612,8 +6661,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region New CustomViews ...
           if (selectedCustomView == null) return;
 
-          // RestoreLastView(conf.CurrentView); // restore saved settings, if there are any - might be "more" than the ones defined in Custom Views
-
           switch (selectedCustomView.DBfield)
           {
             case "Producer":
@@ -6636,13 +6683,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           conf.WStrSort = selectedCustomView.DBfield;
 
-          if (string.IsNullOrEmpty(selectedCustomView.Label))
-            SetLabelView(selectedCustomView.DBfield);
-          else
-            SetLabelView(selectedCustomView.Label);
-          
-          //conf.WStrSort = selectedCustomView.SortFieldViewType;
-          //conf.WStrSortSensCount
           conf.BoolSortCountinViews = (selectedCustomView.SortFieldViewType == "Count");
           conf.WStrSortSens = selectedCustomView.SortDirectionView;
           conf.IndexedChars = selectedCustomView.Index;
@@ -6658,6 +6698,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             conf.StrViewSelect = selectedCustomView.Filter + " AND ";
           }
 
+          if (selectedCustomView.Value.Length > 0 && IsTitleField(conf.WStrSort))
+          {
+            conf.BoolSkipViewState = true;
+          }
+
+          // RestoreLastView(conf.CurrentView); // restore saved settings, if there are any - might be "more" than the ones defined in Custom Views
+
+          // now view film list, filtered list or view ...
           if (conf.IndexedChars == 0 && selectedCustomView.Value == "*") // Film list view without value filter - but only, if no indexed view is selected
           {
             conf.ViewContext = ViewContext.Movie;
@@ -6672,7 +6720,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
             SetDummyControlsForFacade(conf.ViewContext);
           }
-          else if (selectedCustomView.Value.Length > 0 && !selectedCustomView.Value.Contains(",")) // Film list view with value filter
+          else if (conf.IndexedChars == 0 && selectedCustomView.Value.Length > 0 && !selectedCustomView.Value.Contains(",")) // Film list view with value filter
           {
             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
             conf.Boolselect = true;
@@ -6684,7 +6732,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             conf.StrSelect = conf.WStrSort;
 
             conf.StrFilmSelect = string.Empty;
-            conf.Wselectedlabel = selectedCustomView.Value;
+            conf.Wselectedlabel = (selectedCustomView.Value != "*") ? selectedCustomView.Value : "";
             do
             {
               if (conf.StrTitleSelect != string.Empty) conf.StrTitleSelect += conf.TitleDelim;
@@ -6707,16 +6755,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, listfilter, true, string.Empty);
           }
 
-          //if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
-          //{
-          //    MyFilmsDetail.setGUIProperty("view", conf.StrViewItem[i]);   // specific user View1
-          //    GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewItem[i]);
-          //}
-          //else
-          //{
-          //    MyFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
-          //    GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewText[i]);
-          //}
+          SetLabelView(!string.IsNullOrEmpty(selectedCustomView.Label) ? selectedCustomView.Label : selectedCustomView.DBfield);
+          GUIPropertyManager.SetProperty("#currentmodule", (!string.IsNullOrEmpty(selectedCustomView.Label) ? selectedCustomView.Label : selectedCustomView.DBfield));
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
         #endregion
@@ -6785,12 +6825,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  break;
         #endregion
 
-        #region Default View Handling ...
-        default: // other nonspecific views ...
+        #region Default Generic View Handling ...
+        default: // generic views ...
           {
-            // custom views
-            
-            // standard views...
             conf.WStrSort = selectedView;
             conf.WStrSortSens = " ASC";
             SetLabelView(selectedView.ToLower());
@@ -6833,9 +6870,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             RestoreLastView(conf.CurrentView);
-
-            //getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
-            getSelectFromDivxThreaded();
+            getSelectFromDivxThreaded(); //getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
             break;
           }
         #endregion
