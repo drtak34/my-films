@@ -163,6 +163,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
                   newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultCountry.jpg";
                   CustomViews.View.Rows.Add(newRow);
+                  //RecentlyAdded
+                  newRow = CustomViews.View.NewViewRow();
+                  newRow.DBfield = "RecentlyAdded";
+                  newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultRecentlyAdded.jpg";
+                  CustomViews.View.Rows.Add(newRow);
+                  //Indexed title view
+                  newRow = CustomViews.View.NewViewRow();
+                  newRow.DBfield = StrTitle1;
+                  newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  newRow.Index = 1;
+                  newRow.Value = "*";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultIndex.jpg";
+                  CustomViews.View.Rows.Add(newRow);
                   iCustomViews = 5; // to load "old Custom Views"
                 }
 
