@@ -3160,6 +3160,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case ViewContext.Menu:
         case ViewContext.MenuAll:
+          #region menu types
           //conf.MenuSelectedID = currentItem.ItemId; // remember last menu position ...  
           MyFilmsDetail.Init_Detailed_DB(false);
           Clear_Logos();
@@ -3186,6 +3187,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilmsDetail.setGUIProperty("currentfanart", " ");
             }
           }
+          #endregion
           break;
         //case ViewContext.Movie:
         //case ViewContext.MovieCollection:
@@ -3217,8 +3219,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
             LogMyFilms.Debug("(Load_Lstdetail): Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
-            conf.FileImage = currentItem.ThumbnailImage;
-            MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
+            //conf.FileImage = currentItem.ThumbnailImage;
+            //viewcover.Filename = conf.FileImage;
+            //personcover.Filename = conf.FileImage; // ToDo: has to be conditional
+            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
+            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
+
+            viewcover.Filename = currentItem.ThumbnailImage;
+            personcover.Filename = currentItem.ThumbnailImage;
+            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
+
+            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
+            MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
             //if (this.facadeFilms.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
             //{
             //  if (!filmcover.Active) filmcover.Active = true;
@@ -3233,16 +3245,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //  if (personcover.Active) personcover.Active = false;
             //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
             //}
-            viewcover.Filename = conf.FileImage;
-            personcover.Filename = conf.FileImage; // ToDo: has to be conditional
-            filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
-
-            groupcover.Filename = conf.FileImage; // to be set to group collection covers
 
             GUIControl.ShowControl(GetID, 34);
+            SetDummyControlsForFacade(conf.ViewContext);
+
             //Load_Rating(0); // old method - nor more used
             Clear_Logos(); // reset logos
-            SetDummyControlsForFacade(conf.ViewContext);
           }
           #endregion
           else
@@ -3309,8 +3317,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
             LogMyFilms.Debug("(Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[X]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
-            conf.FileImage = currentItem.ThumbnailImage;
-            MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
             //if (this.facadeFilms.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
             //{
             //  if (!filmcover.Active) filmcover.Active = true;
@@ -3325,9 +3331,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //  if (personcover.Active) personcover.Active = false;
             //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
             //}
-            filmcover.Filename = conf.FileImage;
             //}
-            if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
+
+            //conf.FileImage = currentItem.ThumbnailImage;
+            //filmcover.Filename = conf.FileImage;
+            //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
+            //if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
+            //conf.FileImage = currentItem.ThumbnailImage;
+            filmcover.Filename = currentItem.ThumbnailImage;
+            MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
+            if (currentItem.TVTag.ToString() == "group") groupcover.Filename = currentItem.ThumbnailImage;
 
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
           }
@@ -3562,6 +3575,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (dlg.SelectedLabel == -1) return;
       }
       // conf.StrSelect = ""; // reset movie context filter for person views
+      personcover.Filename = "";
+      groupcover.Filename = "";
+      viewcover.Filename = "";
+
       Change_View_Action(choiceView[dlg.SelectedLabel]);
     }
 
@@ -3831,6 +3848,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               }
             }
+            //if (i == conf.MenuSelectedID)
+            //{
+            //  var publisher = new MovieDetailsPublisherWorker(Load_Lstdetail);
+            //  publisher.BeginInvoke(itemToPublish, true, null, null);
+            //  // Load_Lstdetail(facadeFilms[i], true); // republish to get coverimage
+            //}
             #endregion
           }
           catch (Exception) {}
@@ -3916,6 +3939,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
             // Do this after thread finished ...
+            GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedID);
             return 0;
           }, 0, 0, null);
         #endregion

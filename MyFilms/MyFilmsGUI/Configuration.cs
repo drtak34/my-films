@@ -142,22 +142,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   newRow.DBfield = StrTitle1;
                   newRow.Label = GUILocalizeStrings.Get(342); // videos
                   newRow.Value = "*";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultFilms.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //year
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "Year";
                   newRow.SortDirectionView = " DESC";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultYear.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //Category
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "Category";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultGroup2.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //Country
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "Country";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultCountry.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   iCustomViews = 5; // to load "old Custom Views"
                 }
@@ -636,6 +640,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (string.IsNullOrEmpty(StrSorta)) StrSorta = StrSTitle;
             if (string.IsNullOrEmpty(StrSortaInHierarchies)) StrSortaInHierarchies = StrSTitle;
+
+            // ToDo: Remove Migration Code
+            if (StrSorta == "DateAdded") StrSorta = "Date";
+            if (StrSortaInHierarchies == "DateAdded") StrSortaInHierarchies = "Date";
 
             if (string.IsNullOrEmpty(StrSortSens) || StrSortSens == "ASC") StrSortSens = " ASC";
             if (StrSortSens == "DESC") StrSortSens = " DESC";
