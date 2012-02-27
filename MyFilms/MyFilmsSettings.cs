@@ -42,6 +42,7 @@ namespace MyFilmsPlugin.MyFilms
           thumbs,
           OrgDefaultImages,
           OrgGroupViewImages,
+          thumbsFilms,
           thumbsViews,
           thumbsGroups,
           thumbsPersons,
@@ -65,6 +66,7 @@ namespace MyFilmsPlugin.MyFilms
         static string thumbsPath = string.Empty;
         static string thumbsPathViews = string.Empty;
         static string thumbsPathGroups = string.Empty;
+        static string thumbsPathFilms = string.Empty;
         static string OrgDefaultImages = string.Empty;
         static string OrgGroupViewImages = string.Empty;
         static string thumbsPathPersons = string.Empty;
@@ -110,6 +112,7 @@ namespace MyFilmsPlugin.MyFilms
             OrgDefaultImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages\";
             OrgGroupViewImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\GroupViewImages\";
             thumbsPathGroups = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
+            thumbsPathFilms = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies\";
             thumbsPathPersons = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             GrabberScripts = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\";
             skinPath = Config.GetFolder(Config.Dir.Skin);
@@ -175,6 +178,8 @@ namespace MyFilmsPlugin.MyFilms
               return thumbsPathViews;
             case Path.thumbsGroups:
               return thumbsPathGroups;
+            case Path.thumbsFilms:
+              return thumbsPathFilms;
             case Path.thumbsPersons:
               return thumbsPathPersons;
             case Path.GrabberScripts:

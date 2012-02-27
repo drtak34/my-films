@@ -2764,6 +2764,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void GetImagesFilmList(List<GUIListItem> itemsWithThumbs)
     {
       StopLoadingFilmlistDetails = false;
+      string CoverThumbDir = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies";
 
       // split the downloads in X+ groups and do multithreaded downloading
       int groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // Guzzi: Set group to x to only allow x thread(s)
@@ -2791,7 +2792,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string strThumb;
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
-            if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT group views!)
+            if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT views!)
             {
               if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
               {
@@ -2843,15 +2844,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //  conf.FileImage = conf.DefaultCover;
               }
             }
-            strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
+            //strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
+            strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
+            
             if (!File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
             {
-              Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+              //Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+              Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
               LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel + "'");
             }
             if (File.Exists(strThumb))
             {
               item.IconImage = strThumb;
+              item.IconImageBig = strThumb;
+              item.ThumbnailImage = strThumb;
             }
             else
             {
@@ -11791,6 +11797,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void InitFolders()
     {
       // Check and create Group thumb folder ...
+      if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies");
       if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
       if (!Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
     }
