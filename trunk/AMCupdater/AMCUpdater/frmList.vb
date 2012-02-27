@@ -376,30 +376,36 @@ Public Class frmList
         Dim distance As String
         Dim resultfound As Boolean = False
         Dim SearchPage As Integer = -1 ' results in starting with page = 0
+        Dim pageurl As New ArrayList
+
         btnSearchAgain.Enabled = False
         btnSearchAllPages.Enabled = False
         If txtSearchString.Text <> "" Then
             lstOptionsExt.Rows.Clear()
+            wurl.Clear()
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             While SearchPage < 25
                 SearchPage += 1
-                wurl.Clear()
-                wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
-                If (wurl.Count > 0) Then
-                    For i As Integer = 0 To wurl.Count - 1
-                        If FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString) = Integer.MaxValue Then
-                            distance = ""
-                        Else
-                            distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
-                        End If
-                        Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wurl.Item(i).Thumb)
-                        lstOptionsExt.Rows.Add(New Object() {image, wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).Akas, wurl.Item(i).ID, wurl.Item(i).URL, distance})
-                    Next
-                    resultfound = True
+                pageurl.Clear()
+                pageurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
+                If (pageurl.Count > 0) Then
+                    wurl.AddRange(pageurl)
                 ElseIf (SearchPage > 1) Then ' If no results AND page is 2 or bigger, stop loop
                     Exit While
                 End If
             End While
+            If (wurl.Count > 0) Then
+                For i As Integer = 0 To wurl.Count - 1
+                    If FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString) = Integer.MaxValue Then
+                        distance = ""
+                    Else
+                        distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
+                    End If
+                    Dim image As System.Drawing.Image = GrabUtil.GetImageFromUrl(wurl.Item(i).Thumb)
+                    lstOptionsExt.Rows.Add(New Object() {image, wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).Akas, wurl.Item(i).ID, wurl.Item(i).URL, distance})
+                Next
+                resultfound = True
+            End If
             If resultfound = True Then
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
