@@ -752,8 +752,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool boolreturn = false;
         public bool Boolreturn
         {
-            get { return boolreturn; }
-            set { boolreturn = value; }
+          get { return boolreturn; }
+          set { boolreturn = value; }
+        }
+        private bool boolSkipViewState = false;
+        public bool BoolSkipViewState
+        {
+          get { return boolSkipViewState; }
+          set { boolSkipViewState = value; }
         }
         private bool boolindexed = false;
         public bool Boolindexed
