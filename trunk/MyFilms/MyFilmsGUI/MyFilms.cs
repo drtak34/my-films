@@ -3671,6 +3671,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("GetSelectFromMenuView() - launched with showall = '" + showall + "'");
       conf.BoolMenuShowAll = showall; // remember state
+      if (MyFilms.conf.CustomViews.View.Rows.Count == 0) showall = true; // show generic views, if there is no Custom Views defined in config - but keep it as "base menu"
 
       Change_LayOut(0); // always use list view
       //if (conf.UseListViewForGoups) Change_LayOut(0);
