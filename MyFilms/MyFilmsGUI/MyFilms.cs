@@ -2850,7 +2850,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
             {
               //Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
-              Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+              Picture.CreateThumbnail(item.ThumbnailImage, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
               LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel + "'");
             }
             if (File.Exists(strThumb))
@@ -4816,18 +4816,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private bool LoadIndexSkinThumbs(GUIListItem item)
     {
-      // Available (Files are Local) Images
-      if (!System.IO.File.Exists(GUIGraphicsContext.Skin + @"\Media\alpha\a.png")) 
-      {
-        //item.ThumbnailImage = "";
-        //item.IconImage = "";
-        //item.IconImageBig = "";
-        return false; // return, if skin does not support index thumbs
-      }
+      if (!File.Exists(GUIGraphicsContext.Skin + @"\Media\alpha\a.png")) return false; // return, if skin does not support index thumbs
 
       string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
       if (strStartLetter.IsNumerical()) strStartLetter = "#";
       string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
+      if (!File.Exists(IndexThumb)) IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer" + ".png";
       item.ThumbnailImage = IndexThumb;
       //item.IconImage = IndexThumb;
       //item.IconImageBig = IndexThumb;
@@ -5297,35 +5291,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
           rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
         // DataRow[] rtemp = r;
-        for (i = 0; i < this.facadeFilms.Count; i++)
+        for (i = 0; i < facadeFilms.Count; i++)
         {
           if (StopLoadingViewDetails) break; // stop download if we have exited window
           try
           {
-            GUIListItem item = this.facadeFilms[i];
+            GUIListItem item = facadeFilms[i];
             #region get thumbs
-            if (getThumbs && this.facadeFilms[i] != null)
+            if (getThumbs && facadeFilms[i] != null)
             {
-              if (string.IsNullOrEmpty(this.facadeFilms[i].ThumbnailImage))
+              if (string.IsNullOrEmpty(facadeFilms[i].ThumbnailImage))
               {
                 if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
                 {
-                  LoadIndexSkinThumbs(this.facadeFilms[i]);
+                  LoadIndexSkinThumbs(facadeFilms[i]);
                 }
                 else
                 {
                   string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson);
                   //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-
                   //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
                   //{
                   //  item.ThumbnailImage = texture;
                   //  item.IconImage = texture;
                   //  item.IconImageBig = texture;
                   //}
-                  item.ThumbnailImage = strActiveFacadeImages[0];
                   item.IconImage = strActiveFacadeImages[1];
                   item.IconImageBig = strActiveFacadeImages[0];
+                  item.ThumbnailImage = strActiveFacadeImages[0];
 
                   // if selected force an update of thumbnail
                   //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
@@ -5388,108 +5381,96 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void GetImagesOld(List<GUIListItem> itemsWithThumbs, string wStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir, bool countItems)
     {
-      StopLoadingViewDetails = false;
+      //StopLoadingViewDetails = false;
 
-      var groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // split the downloads in X+ groups and do multithreaded downloading // Guzzi: Set group to x to only allow x thread(s)
-      var groups = (int)Math.Ceiling((double)itemsWithThumbs.Count / groupSize);
+      //var groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // split the downloads in X+ groups and do multithreaded downloading // Guzzi: Set group to x to only allow x thread(s)
+      //var groups = (int)Math.Ceiling((double)itemsWithThumbs.Count / groupSize);
 
-      for (int i = 0; i < groups; i++)
-      {
-        var groupList = new List<GUIListItem>();
-        for (int j = groupSize * i; j < groupSize * i + (groupSize * (i + 1) > itemsWithThumbs.Count ? itemsWithThumbs.Count - groupSize * i : groupSize); j++)
-        {
-          groupList.Add(itemsWithThumbs[j]);
-        }
+      //for (int i = 0; i < groups; i++)
+      //{
+      //  var groupList = new List<GUIListItem>();
+      //  for (int j = groupSize * i; j < groupSize * i + (groupSize * (i + 1) > itemsWithThumbs.Count ? itemsWithThumbs.Count - groupSize * i : groupSize); j++)
+      //  {
+      //    groupList.Add(itemsWithThumbs[j]);
+      //  }
 
-        new Thread(delegate(object o)
-        {
-          #region taskaction
-          var items = (List<GUIListItem>)o;
-          Thread.Sleep(25);
-          DataRow[] rtemp = null;
-          if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
-            rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
-          // DataRow[] rtemp = r;
+      //  new Thread(delegate(object o)
+      //  {
+      //    #region taskaction
+      //    var items = (List<GUIListItem>)o;
+      //    Thread.Sleep(25);
+      //    DataRow[] rtemp = null;
+      //    if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
+      //      rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
+      //    // DataRow[] rtemp = r;
 
-          foreach (GUIListItem item in items)
-          {
-            // stop download if we have exited window
-            if (StopLoadingViewDetails)
-              break;
+      //    foreach (GUIListItem item in items)
+      //    {
+      //      // stop download if we have exited window
+      //      if (StopLoadingViewDetails)
+      //        break;
 
-            if (getThumbs)
-            {
-              string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson);
-              //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+      //      if (getThumbs)
+      //      {
+      //        string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson);
+      //        //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
 
-              //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
-              //{
-              //  item.ThumbnailImage = texture;
-              //  item.IconImage = texture;
-              //  item.IconImageBig = texture;
-              //}
-              item.ThumbnailImage = strActiveFacadeImages[0];
-              item.IconImage = strActiveFacadeImages[1];
-              item.IconImageBig = strActiveFacadeImages[0];
+      //        //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+      //        //{
+      //        //  item.ThumbnailImage = texture;
+      //        //  item.IconImage = texture;
+      //        //  item.IconImageBig = texture;
+      //        //}
+      //        item.ThumbnailImage = strActiveFacadeImages[0];
+      //        item.IconImage = strActiveFacadeImages[1];
+      //        item.IconImageBig = strActiveFacadeImages[0];
 
-              // if selected force an update of thumbnail
-              //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
-              //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
-            }
+      //        // if selected force an update of thumbnail
+      //        //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+      //        //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+      //      }
 
-            if (createFanartDir) MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, wStrSort.ToLower());
+      //      if (createFanartDir) MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, wStrSort.ToLower());
 
-            if (conf.StrPersons.Length > 0 && rtemp != null)
-            {
-              int count = rtemp.Count(x => x[wStrSort].ToString().IndexOf(item.Label, StringComparison.OrdinalIgnoreCase) > 0);
-              if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(wStrSort) + " (" + count + ")"; // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
+      //      if (conf.StrPersons.Length > 0 && rtemp != null)
+      //      {
+      //        int count = rtemp.Count(x => x[wStrSort].ToString().IndexOf(item.Label, StringComparison.OrdinalIgnoreCase) > 0);
+      //        if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(wStrSort) + " (" + count + ")"; // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
 
-              //foreach (string role in PersonTypes)
-              //{
-              //  count = rtemp.Count(x => x[role].ToString().Contains(item.Label));
-              //  // LogMyFilms.Debug("role: '" + role + "', count: '" + count + "'");
-              //  if (count > 0) item.Label2 = (string.IsNullOrEmpty(item.Label2)) ? BaseMesFilms.Translate_Column(role) + " (" + count + ")" : item.Label2 + ", " + BaseMesFilms.Translate_Column(role) + " (" + count + ")";
-              //}
-            }
+      //        //foreach (string role in PersonTypes)
+      //        //{
+      //        //  count = rtemp.Count(x => x[role].ToString().Contains(item.Label));
+      //        //  // LogMyFilms.Debug("role: '" + role + "', count: '" + count + "'");
+      //        //  if (count > 0) item.Label2 = (string.IsNullOrEmpty(item.Label2)) ? BaseMesFilms.Translate_Column(role) + " (" + count + ")" : item.Label2 + ", " + BaseMesFilms.Translate_Column(role) + " (" + count + ")";
+      //        //}
+      //      }
 
-            // ToDo: Add downloader to SetViewThumbs - or here ...
+      //      // ToDo: Add downloader to SetViewThumbs - or here ...
 
-            //string remoteThumb = item.ImageRemotePath;
-            //if (string.IsNullOrEmpty(remoteThumb)) continue;
+      //      //string remoteThumb = item.ImageRemotePath;
+      //      //if (string.IsNullOrEmpty(remoteThumb)) continue;
 
-            //string localThumb = item.Image;
-            //if (string.IsNullOrEmpty(localThumb)) continue;
+      //      //string localThumb = item.Image;
+      //      //if (string.IsNullOrEmpty(localThumb)) continue;
 
-            //if (Helper.DownloadFile(remoteThumb, localThumb))
-            //{
-            //  // notify that thumbnail image has been downloaded
-            //  item.ThumbnailImage = localThumb;
-            //  item.NotifyPropertyChanged("ThumbnailImage");
-            //}
-          }
-          items.SafeDispose();
-          items = null;
-          #endregion
-          return;
-        })
-        {
-          IsBackground = true,
-          Name = "MyFilms Image Detector and Downloader" + i,
-          Priority = ThreadPriority.BelowNormal
-        }.Start(groupList);
-      }
-    }
-
-    private void LoadFacadeImages(string WStrSort, string strThumbDirectory, bool isperson)
-    {
-      for(int i = 0; i < this.facadeFilms.Count; i++)
-      {
-        GUIListItem item = this.facadeFilms[i];
-        string[] strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
-        item.ThumbnailImage = strActiveFacadeImages[0];
-        item.IconImage = strActiveFacadeImages[1];
-        item.IconImageBig = strActiveFacadeImages[0];
-      }
+      //      //if (Helper.DownloadFile(remoteThumb, localThumb))
+      //      //{
+      //      //  // notify that thumbnail image has been downloaded
+      //      //  item.ThumbnailImage = localThumb;
+      //      //  item.NotifyPropertyChanged("ThumbnailImage");
+      //      //}
+      //    }
+      //    items.SafeDispose();
+      //    items = null;
+      //    #endregion
+      //    return;
+      //  })
+      //  {
+      //    IsBackground = true,
+      //    Name = "MyFilms Image Detector and Downloader" + i,
+      //    Priority = ThreadPriority.BelowNormal
+      //  }.Start(groupList);
+      //}
     }
 
     private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
@@ -5498,7 +5479,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       thumbimages[0] = string.Empty; // ThumbnailImage
       thumbimages[1] = string.Empty; //IconImage
       string strThumb = strThumbDirectory + itemlabel + ".png";
-      //string strThumbLarge = string.Empty;
       string strThumbSource = string.Empty;
 
       if (isPerson)
@@ -5511,7 +5491,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //else
         //  return strThumb;
 
-        if (System.IO.File.Exists(strThumb)) // If there is missing thumbs in cache folder ...
+        if (File.Exists(strThumb)) // If there is missing thumbs in cache folder ...
         {
           thumbimages[0] = strThumb;
           thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
@@ -5592,7 +5572,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
             //return thumbimages;
 
-            if (System.IO.File.Exists(strThumb)) // (re)check if thumbs exist...
+            if (File.Exists(strThumb)) // (re)check if thumbs exist...
             {
               thumbimages[0] = strThumb;
               thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
@@ -5646,7 +5626,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added view subfolder to searchpath
           if (File.Exists(strPathViews + itemlabel + ".jpg"))
             createCacheThumb(strPathViews + itemlabel + ".jpg", strThumb, cacheThumbWith, cacheThumbHeight, "large");
-          else if (System.IO.File.Exists(strPathViews + itemlabel + ".png"))
+          else if (File.Exists(strPathViews + itemlabel + ".png"))
             createCacheThumb(strPathViews + itemlabel + ".png", strThumb, cacheThumbWith, cacheThumbHeight, "large");
           if (File.Exists(strThumb))
           {
