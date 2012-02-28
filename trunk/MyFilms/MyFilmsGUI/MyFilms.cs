@@ -2790,7 +2790,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
             }
 
-            string strThumb;
+            string strThumb; // cached cover
+
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
             if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT views!)
             {
@@ -2844,7 +2845,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //  conf.FileImage = conf.DefaultCover;
               }
             }
-            //strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
+            item.MusicTag = item.ThumbnailImage; // keep Original one in music tag for big list thumb ...
+            // strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
             strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
             
             if (!File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
@@ -3344,8 +3346,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
             //if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
             //conf.FileImage = currentItem.ThumbnailImage;
-            filmcover.Filename = currentItem.ThumbnailImage;
-            MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
+            filmcover.Filename = currentItem.MusicTag != null && (!string.IsNullOrEmpty((string)currentItem.MusicTag)) ? currentItem.MusicTag.ToString() : currentItem.ThumbnailImage;
+            MyFilmsDetail.setGUIProperty("picture", filmcover.Filename, true);
             if (currentItem.TVTag.ToString() == "group") groupcover.Filename = currentItem.ThumbnailImage;
 
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
