@@ -6445,9 +6445,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   //  if (conf.StrViewDfltItem.ToLower() == conf.StrViewText[i].ToLower() || conf.StrViewDfltItem.ToLower() == conf.StrViewItem[i].ToLower())
                   //    Change_View_Action(string.Format("View{0}", i));
                   //}
+                  // MFview.ViewRow customView = this.GetCustomViewFromViewLabel(conf.StrViewDfltItem);
                   foreach (MFview.ViewRow customView in conf.CustomViews.View)
                   {
-                    if (conf.StrViewDfltItem == customView.DBfield)
+                    if (conf.StrViewDfltItem == customView.DBfield) 
                       Change_View_Action(customView.Label);
                   }
                 }
@@ -8209,30 +8210,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Clear();
             MFview.ViewRow currentCustomView = null;
             int currentIndex = conf.IndexedChars;
-            if (conf.ViewContext == ViewContext.Menu)
-            {
-              foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
-              {
-                if (facadeFilms.SelectedListItem.Label == viewRow.Label)
-                {
-                  currentCustomView = viewRow;
-                  currentIndex = viewRow.Index;
-                  break;
-                }
-              }
-            }
-            else // Views - check, which one is active
-            {
-              foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
-              {
-                if (conf.CurrentView == viewRow.Label)  // if (facadeFilms.SelectedListItem.Label == viewRow.Label)
-                {
-                  currentCustomView = viewRow;
-                  currentIndex = viewRow.Index;
-                  break;
-                }
-              }
-            }
+
+            if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) currentCustomView = GetCustomViewFromViewLabel(facadeFilms.SelectedListItem.Label);
+            else currentCustomView = GetCustomViewFromViewLabel(conf.CurrentView); // Views - check, which one is active
+            if (currentCustomView != null) currentIndex = currentCustomView.Index;
 
             string headline = (currentIndex == 0) ? (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))) : (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + currentIndex));
             dlgmenu.SetHeading(headline);
@@ -8316,16 +8297,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             MFview.ViewRow newRow = MyFilms.conf.CustomViews.View.NewViewRow();
 
-            //ArrayList DisplayItems = GetDisplayItems("view");
-            //foreach (string[] displayItem in DisplayItems)
-            //{
-            //  if (facadeFilms.SelectedListItem.Label == displayItem[1])
-            //  {
-            //    newRow.DBfield = displayItem[0];
-            //    newRow.ViewEnabled = true;
-            //    break;
-            //  }
-            //}
             if (conf.ViewContext != ViewContext.Menu)
             {
               dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
