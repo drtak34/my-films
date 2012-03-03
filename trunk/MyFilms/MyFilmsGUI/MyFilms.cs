@@ -2849,7 +2849,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.MusicTag = item.ThumbnailImage; // keep Original one in music tag for big list thumb ...
             // strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
             strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
-            strThumbSmall = Path.GetFileNameWithoutExtension(strThumb) + "_s." + Path.GetExtension(strThumb);
+            strThumbSmall = strThumb.Substring(0, strThumb.LastIndexOf(".")) + "_s" + Path.GetExtension(strThumb);
 
             if (!string.IsNullOrEmpty(item.ThumbnailImage) && item.ThumbnailImage != conf.DefaultCover && !File.Exists(strThumb))
             {
