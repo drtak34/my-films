@@ -2791,6 +2791,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             string strThumb; // cached cover
+            string strThumbSmall; // cached cover for Icons - small resolution
 
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
             if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT views!)
@@ -2848,16 +2849,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.MusicTag = item.ThumbnailImage; // keep Original one in music tag for big list thumb ...
             // strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
             strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
+            strThumbSmall = Path.GetFileNameWithoutExtension(strThumb) + "_s." + Path.GetExtension(strThumb);
             
             if (!File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
             {
-              //Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+              Picture.CreateThumbnail(item.ThumbnailImage, strThumbSmall, 100, 150, 0, Thumbs.SpeedThumbsSmall);
               Picture.CreateThumbnail(item.ThumbnailImage, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
               LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel + "'");
             }
             if (File.Exists(strThumb))
             {
-              item.IconImage = strThumb;
+              item.IconImage = strThumbSmall;
               item.IconImageBig = strThumb;
               item.ThumbnailImage = strThumb;
             }
