@@ -3181,6 +3181,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           personcover.Filename = "";
           groupcover.Filename = "";
 
+          MFview.ViewRow selectedView = this.GetCustomViewFromViewLabel(currentItem.Label);
+          if (selectedView != null)
+            MyFilmsDetail.setGUIProperty("index", selectedView.Index);
+          else
+            MyFilmsDetail.clearGUIProperty("index");
+
           if (conf.StrFanartDefaultViewsUseRandom)
           {
             string MenuFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
@@ -5225,7 +5231,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews) LoadIndexSkinThumbs(this.facadeFilms[conf.StrIndex]);
           else
           {
-            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, this.facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson);
+            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, this.facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView));
             // string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
             this.facadeFilms[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
             this.facadeFilms[conf.StrIndex].IconImage = strActiveFacadeImages[1];
@@ -5300,6 +5306,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
           rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
         // DataRow[] rtemp = r;
+
+        MFview.ViewRow currentCustomView = null;
+        currentCustomView = GetCustomViewFromViewLabel(conf.CurrentView); // Views - check, which one is active
+
         for (i = 0; i < facadeFilms.Count; i++)
         {
           if (StopLoadingViewDetails) break; // stop download if we have exited window
@@ -5317,7 +5327,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson);
+                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView);
                   //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
                   //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
                   //{
@@ -5483,7 +5493,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
     }
 
-    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
+    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView)
     {
       string[] thumbimages = new string[2];
       thumbimages[0] = string.Empty; // ThumbnailImage
@@ -5644,10 +5654,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             thumbimages[1] = strThumb;
             return thumbimages;
           }
+
           // Check, if default group cover is present
           if (MyFilms.conf.StrViewsDflt)
           {
-            string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg";
+            if (currentCustomView != null) // if there is an image defined in Custom View
+            {
+              thumbimages[0] = currentCustomView.ImagePath;
+              thumbimages[1] = currentCustomView.ImagePath;
+              return thumbimages;
+            }
+
+            string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg"; // if there is a Default.jpg in the view subfolder
             if (System.IO.File.Exists(strImageInViewsDefaultFolder))
             {
               thumbimages[0] = strImageInViewsDefaultFolder;
@@ -8309,6 +8327,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               case ViewContext.MenuAll:
                 newRow.Label = facadeFilms.SelectedListItem.Label + " *";
+                newRow.ImagePath = facadeFilms.SelectedListItem.ThumbnailImage;
                 newRow.DBfield = facadeFilms.SelectedListItem.DVDLabel;
                 newRow.SortDirectionView = " ASC";
                 newRow.SortFieldViewType = "Name";
@@ -8334,11 +8353,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //newRow.Value = Prev_Label;
                     newRow.Value = conf.Wselectedlabel;
                     newRow.Filter = conf.StrSelect;
+                    newRow.ImagePath = (groupcover.Filename.Length > 0) ? groupcover.Filename : filmcover.Filename;
                     break;
                   case ViewContext.Group:
+                    newRow.Value = "";
+                    newRow.Filter = conf.StrViewSelect;
+                    newRow.ImagePath = (viewcover.Filename.Length > 0) ? viewcover.Filename : filmcover.Filename;
+                    break;
                   case ViewContext.Person:
                     newRow.Value = "";
                     newRow.Filter = conf.StrViewSelect;
+                    newRow.ImagePath = (personcover.Filename.Length > 0) ? personcover.Filename : filmcover.Filename;
                     break;
                 }
                 break;
@@ -13048,6 +13073,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("config.configfilter");
       MyFilmsDetail.clearGUIProperty("view");
       MyFilmsDetail.clearGUIProperty("select");
+      MyFilmsDetail.clearGUIProperty("index");
       MyFilmsDetail.clearGUIProperty("picture");
       MyFilmsDetail.clearGUIProperty("currentfanart");
       MyFilmsDetail.clearGUIProperty("statusmessage");
