@@ -8250,30 +8250,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
             }
 
-
+            // if it is a view, save the settings for it
             if (currentCustomView != null)
             {
               currentCustomView.Index = currentIndex;
               LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed for Custom View '" + currentCustomView.Label + "' to '" + currentIndex + "'");
               SaveCustomViews();
             }
+
+            // now change settings for GUI
+            MyFilms.conf.IndexedChars = currentIndex;
+            if (MyFilms.conf.IndexedChars > 0)
+            {
+              MyFilms.conf.Boolindexed = true;
+              MyFilms.conf.Boolindexedreturn = false;
+            }
             else
             {
-              MyFilms.conf.IndexedChars = currentIndex;
-              if (MyFilms.conf.IndexedChars > 0)
-              {
-                MyFilms.conf.Boolindexed = true;
-                MyFilms.conf.Boolindexedreturn = false;
-              }
-              else
-              {
-                MyFilms.conf.Boolindexed = false;
-                MyFilms.conf.Boolindexedreturn = false;
-                MyFilms.conf.Wstar = "*";
-              }
-              LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed to '" + MyFilms.conf.IndexedChars + "'");
-              Refreshfacade();
+              MyFilms.conf.Boolindexed = false;
+              MyFilms.conf.Boolindexedreturn = false;
+              MyFilms.conf.Wstar = "*";
             }
+            LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed to '" + MyFilms.conf.IndexedChars + "'");
+            Refreshfacade();
             break;
           }
 
