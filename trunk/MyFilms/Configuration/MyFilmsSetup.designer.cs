@@ -568,6 +568,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.btnResetThumbsFilms = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -1799,6 +1800,7 @@
           // 
           // groupBox1
           // 
+          this.groupBox1.Controls.Add(this.btnResetThumbsFilms);
           this.groupBox1.Controls.Add(this.buttonDefaultCoverReset);
           this.groupBox1.Controls.Add(this.pictureBoxDefaultCover);
           this.groupBox1.Controls.Add(this.lblPicturePrefix);
@@ -1891,7 +1893,7 @@
           // 
           // ButImg
           // 
-          this.ButImg.Location = new System.Drawing.Point(569, 26);
+          this.ButImg.Location = new System.Drawing.Point(569, 14);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
           this.ButImg.TabIndex = 87;
@@ -1901,7 +1903,7 @@
           // 
           // MesFilmsImg
           // 
-          this.MesFilmsImg.Location = new System.Drawing.Point(455, 26);
+          this.MesFilmsImg.Location = new System.Drawing.Point(455, 14);
           this.MesFilmsImg.Name = "MesFilmsImg";
           this.MesFilmsImg.Size = new System.Drawing.Size(108, 20);
           this.MesFilmsImg.TabIndex = 85;
@@ -1910,7 +1912,7 @@
           // label2
           // 
           this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(352, 30);
+          this.label2.Location = new System.Drawing.Point(352, 18);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
           this.label2.TabIndex = 86;
@@ -5861,6 +5863,16 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // btnResetThumbsFilms
+          // 
+          this.btnResetThumbsFilms.Location = new System.Drawing.Point(473, 39);
+          this.btnResetThumbsFilms.Name = "btnResetThumbsFilms";
+          this.btnResetThumbsFilms.Size = new System.Drawing.Size(77, 20);
+          this.btnResetThumbsFilms.TabIndex = 102;
+          this.btnResetThumbsFilms.Text = "Reset Cache";
+          this.btnResetThumbsFilms.UseVisualStyleBackColor = true;
+          this.btnResetThumbsFilms.Click += new System.EventHandler(this.btnResetThumbsFilms_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6467,5 +6479,6 @@
         private CheckBox chkShowIndexedImgInIndViews;
         private GroupBox groupBoxAMCUpdaterConfigFile;
         private Button btnServerSync;
+        private Button btnResetThumbsFilms;
     }
 }

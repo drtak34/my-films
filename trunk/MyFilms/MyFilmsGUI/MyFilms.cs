@@ -2850,8 +2850,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
             strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
             strThumbSmall = Path.GetFileNameWithoutExtension(strThumb) + "_s." + Path.GetExtension(strThumb);
-            
-            if (!File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
+
+            if (!string.IsNullOrEmpty(item.ThumbnailImage) && item.ThumbnailImage != conf.DefaultCover && !File.Exists(strThumb))
             {
               Picture.CreateThumbnail(item.ThumbnailImage, strThumbSmall, 100, 150, 0, Thumbs.SpeedThumbsSmall);
               Picture.CreateThumbnail(item.ThumbnailImage, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
