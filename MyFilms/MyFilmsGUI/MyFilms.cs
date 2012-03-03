@@ -7911,24 +7911,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.Searchtitles sTitles;
 
 
-      #region Menu Context and special switches ...
+      #region Menu Context ...
       if ((this.facadeFilms.SelectedListItemIndex > -1 && this.facadeFilms.SelectedListItem.IsFolder && MyFilms.conf.Boolselect) || conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
       {
-        if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
-        if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "showemptyvaluesinviewscontext";
-        ichoice++;
-
-        if (MyFilms.conf.IndexedChars > 0) dlg.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + MyFilms.conf.IndexedChars)); // Show only indexed items in view
-        if (MyFilms.conf.IndexedChars == 0) dlg.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "showindexedvalues";
-        ichoice++;
-
-        if (MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798628))); // Don't split values
-        if (!MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "dontsplitvaluesinviews";
-        ichoice++;
-
         if (conf.ViewContext == ViewContext.Menu)
         {
           dlg.Add(GUILocalizeStrings.Get(1079827)); // Disable Menu Entry
@@ -7968,6 +7953,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ichoice++;
           }
         }
+      }
+      #endregion
+
+      #region Views context
+      if ((this.facadeFilms.SelectedListItemIndex > -1 && this.facadeFilms.SelectedListItem.IsFolder && MyFilms.conf.Boolselect) && conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll)
+      {
+        if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
+        if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
+        upd_choice[ichoice] = "showemptyvaluesinviewscontext";
+        ichoice++;
+
+        if (MyFilms.conf.IndexedChars > 0) dlg.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + MyFilms.conf.IndexedChars)); // Show only indexed items in view
+        if (MyFilms.conf.IndexedChars == 0) dlg.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629)));
+        upd_choice[ichoice] = "showindexedvalues";
+        ichoice++;
+
+        if (MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798628))); // Don't split values
+        if (!MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798629)));
+        upd_choice[ichoice] = "dontsplitvaluesinviews";
+        ichoice++;
       }
       #endregion
 
@@ -8214,6 +8219,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               }
             }
+            else // Views - check, which one is active
+            {
+              foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+              {
+                if (conf.CurrentView == viewRow.Label)  // if (facadeFilms.SelectedListItem.Label == viewRow.Label)
+                {
+                  currentCustomView = viewRow;
+                  currentIndex = viewRow.Index;
+                  break;
+                }
+              }
+            }
 
             string headline = (currentIndex == 0) ? (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629))) : (string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + currentIndex));
             dlgmenu.SetHeading(headline);
@@ -8251,16 +8268,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
 
-            if (conf.ViewContext == ViewContext.Menu)
+            if (currentCustomView != null)
             {
-              if (currentCustomView != null)
-              {
-                currentCustomView.Index = currentIndex;
-                LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed for Custom View '" + currentCustomView.Label + "' to '" + currentIndex + "'");
-                SaveCustomViews();
-              }
-              else
-                LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' cannot be changed, Custom View not found !");
+              currentCustomView.Index = currentIndex;
+              LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed for Custom View '" + currentCustomView.Label + "' to '" + currentIndex + "'");
+              SaveCustomViews();
             }
             else
             {
