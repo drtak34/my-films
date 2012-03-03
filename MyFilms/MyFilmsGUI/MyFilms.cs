@@ -5123,6 +5123,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region populating facade
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
+      //int number = -1;
       bool countItems = (isperson && !WstrSelect.Contains("not like") && !string.IsNullOrEmpty(WstrSelect) && !WstrSelect.Contains("**")); // extensive counts only for conditional lists, otherwise takes too much time!
       watch.Reset(); watch.Start();
       for (wi = 0; wi != w_tableau.Count; wi++)
@@ -5147,7 +5148,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (Wnb_enr > 0 && (wchampselect.Length > 0 || conf.BoolShowEmptyValuesInViews))
             {
+              //number++;
               item = new GUIListItem();
+              //item.ItemId = number;
               string label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
               label = (isindexed && indexedChars > 0 && label.Length >= indexedChars) ? label.Substring(0, indexedChars).ToUpperInvariant() : label;
               item.Label = (label.Length == 0) ? EmptyFacadeValue : label; // show <empty> value if empty
@@ -5169,6 +5172,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (Wnb_enr > 0 && (wchampselect.Length > 0 || conf.BoolShowEmptyValuesInViews))
       {
+        //number++;
         item = new GUIListItem();
         //item.ItemId = number; // Only used in GetFilmList
         // item.Label = (wchampselect.Length == 0) ? EmptyFacadeValue : (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
@@ -5319,6 +5323,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   //  item.IconImage = texture;
                   //  item.IconImageBig = texture;
                   //}
+
                   item.IconImage = strActiveFacadeImages[1];
                   item.IconImageBig = strActiveFacadeImages[0];
                   item.ThumbnailImage = strActiveFacadeImages[0];

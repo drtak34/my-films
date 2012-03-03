@@ -169,10 +169,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// </summary>
         public static string SanitizeXmlString(string xml)
         {
-          if (xml == null)
-          {
-            throw new ArgumentNullException("xml");
-          }
+          // if (xml == null) throw new ArgumentNullException("xml");
+          if (xml == null) return "";
 
           StringBuilder buffer = new StringBuilder(xml.Length);
 
