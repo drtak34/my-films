@@ -332,12 +332,6 @@ you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
 You can place a "default.jpg" in the respective sub folder that will be displayed
 when no specific thumb can be matched.</value>
   </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value>Use this area to define a path where cover images are stored.
-This is mainly required, if you have only image names without full path stored in your DB.
-You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
-</value>
-  </data>
   <data name="pictureBoxDefaultCover.ToolTip" xml:space="preserve">
     <value>Click to change Default Movie Cover.
 The default cover image will be displayed when a movie entry does not have an associated cover image
@@ -379,6 +373,12 @@ populate or change them accordingly.
 Remark:
 If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
 set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where cover images are stored.
+This is mainly required, if you have only image names without full path stored in your DB.
+You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
+</value>
   </data>
   <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
     <value>Use this area to define a path where artist thumbs (images for persons) should be stored.

@@ -5993,6 +5993,25 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             LoadCentralConfigSetupAndUpdateVisibility();
         }
+
+        private void btnResetThumbsFilms_Click(object sender, EventArgs e)
+        {
+          DialogResult dialogResult = MessageBox.Show("Are you sure you want to reset all generated Film Cover Thumbs?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+          if (dialogResult == DialogResult.Yes)
+          {
+            foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies", "*.*", SearchOption.AllDirectories))
+            {
+              try
+              {
+                System.IO.File.Delete(wfile);
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Debug("Setup: Error deleting file '" + wfile + "' - Exception: " + ex);
+              }
+            }
+          }
+        }
     }
 
       public static class BindingSourceExtension
