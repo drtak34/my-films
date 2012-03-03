@@ -3606,6 +3606,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Sort.Items.Add("Year");
           Sort.Items.Add("Date");
           Sort.Items.Add("Rating");
+          Sort.Items.Add("Number");
           SortInHierarchies.Items.Add("Year");
           SortInHierarchies.Items.Add("Date");
           SortInHierarchies.Items.Add("Rating");

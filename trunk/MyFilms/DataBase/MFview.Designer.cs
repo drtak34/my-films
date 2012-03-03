@@ -284,6 +284,12 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnLayoutView;
             
+            private global::System.Data.DataColumn columnSortFieldFilms;
+            
+            private global::System.Data.DataColumn columnSortDirectionFilms;
+            
+            private global::System.Data.DataColumn columnLayoutFilms;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ViewDataTable() {
                 this.TableName = "View";
@@ -392,6 +398,27 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SortFieldFilmsColumn {
+                get {
+                    return this.columnSortFieldFilms;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SortDirectionFilmsColumn {
+                get {
+                    return this.columnSortDirectionFilms;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn LayoutFilmsColumn {
+                get {
+                    return this.columnLayoutFilms;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -420,7 +447,7 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ViewRow AddViewRow(string Label, bool ViewEnabled, string ImagePath, string DBfield, string Value, string Filter, int Index, string SortFieldViewType, string SortDirectionView, string LayoutView) {
+            public ViewRow AddViewRow(string Label, bool ViewEnabled, string ImagePath, string DBfield, string Value, string Filter, int Index, string SortFieldViewType, string SortDirectionView, string LayoutView, string SortFieldFilms, string SortDirectionFilms, string LayoutFilms) {
                 ViewRow rowViewRow = ((ViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -433,7 +460,10 @@ namespace MyFilmsPlugin.DataBase {
                         Index,
                         SortFieldViewType,
                         SortDirectionView,
-                        LayoutView};
+                        LayoutView,
+                        SortFieldFilms,
+                        SortDirectionFilms,
+                        LayoutFilms};
                 rowViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowViewRow);
                 return rowViewRow;
@@ -470,6 +500,9 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnSortFieldViewType = base.Columns["SortFieldViewType"];
                 this.columnSortDirectionView = base.Columns["SortDirectionView"];
                 this.columnLayoutView = base.Columns["LayoutView"];
+                this.columnSortFieldFilms = base.Columns["SortFieldFilms"];
+                this.columnSortDirectionFilms = base.Columns["SortDirectionFilms"];
+                this.columnLayoutFilms = base.Columns["LayoutFilms"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -496,6 +529,12 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnSortDirectionView);
                 this.columnLayoutView = new global::System.Data.DataColumn("LayoutView", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLayoutView);
+                this.columnSortFieldFilms = new global::System.Data.DataColumn("SortFieldFilms", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSortFieldFilms);
+                this.columnSortDirectionFilms = new global::System.Data.DataColumn("SortDirectionFilms", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSortDirectionFilms);
+                this.columnLayoutFilms = new global::System.Data.DataColumn("LayoutFilms", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLayoutFilms);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint2", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -512,6 +551,9 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnSortFieldViewType.DefaultValue = ((string)("Name"));
                 this.columnSortDirectionView.DefaultValue = ((string)(" ASC"));
                 this.columnLayoutView.DefaultValue = ((string)("0"));
+                this.columnSortFieldFilms.DefaultValue = ((string)("OriginalTitle"));
+                this.columnSortDirectionFilms.DefaultValue = ((string)(" ASC"));
+                this.columnLayoutFilms.DefaultValue = ((string)("0"));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -799,6 +841,51 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string SortFieldFilms {
+                get {
+                    try {
+                        return ((string)(this[this.tableView.SortFieldFilmsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SortFieldFilms in Tabelle View ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView.SortFieldFilmsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string SortDirectionFilms {
+                get {
+                    try {
+                        return ((string)(this[this.tableView.SortDirectionFilmsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SortDirectionFilms in Tabelle View ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView.SortDirectionFilmsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string LayoutFilms {
+                get {
+                    try {
+                        return ((string)(this[this.tableView.LayoutFilmsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte LayoutFilms in Tabelle View ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView.LayoutFilmsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsViewEnabledNull() {
                 return this.IsNull(this.tableView.ViewEnabledColumn);
             }
@@ -886,6 +973,36 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetLayoutViewNull() {
                 this[this.tableView.LayoutViewColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSortFieldFilmsNull() {
+                return this.IsNull(this.tableView.SortFieldFilmsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSortFieldFilmsNull() {
+                this[this.tableView.SortFieldFilmsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSortDirectionFilmsNull() {
+                return this.IsNull(this.tableView.SortDirectionFilmsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSortDirectionFilmsNull() {
+                this[this.tableView.SortDirectionFilmsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsLayoutFilmsNull() {
+                return this.IsNull(this.tableView.LayoutFilmsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetLayoutFilmsNull() {
+                this[this.tableView.LayoutFilmsColumn] = global::System.Convert.DBNull;
             }
         }
         
