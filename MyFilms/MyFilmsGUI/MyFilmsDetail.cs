@@ -7260,6 +7260,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             LogMyFilms.Debug("OnPlayBackStarted was initiated - filename: '" + filename + "'");
 
+            // indicate to skin, that it is MyFilms playing a file
+            setGUIProperty("isplaying", "true", true);
             // attach to global action event, to handle remote keys during playback - e.g. trailer previews
             GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction); // make sure it doesn't register twice ....
             GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
@@ -7342,6 +7344,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");
 
+            // indicate to skin, that MyFilms isn't playing anymore
+            setGUIProperty("isplaying", "false", true);
             MyFilms.conf.MyFilmsPlaybackActive = false;  
             // detach from global action event, to handle remote keys during playback - e.g. trailer previews
             try

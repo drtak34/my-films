@@ -13111,6 +13111,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("view");
       MyFilmsDetail.clearGUIProperty("select");
       MyFilmsDetail.clearGUIProperty("index");
+      MyFilmsDetail.clearGUIProperty("isplaying");
       MyFilmsDetail.clearGUIProperty("picture");
       MyFilmsDetail.clearGUIProperty("currentfanart");
       MyFilmsDetail.clearGUIProperty("statusmessage");
