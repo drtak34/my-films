@@ -3183,7 +3183,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           MFview.ViewRow selectedView = this.GetCustomViewFromViewLabel(currentItem.Label);
           if (selectedView != null)
-            MyFilmsDetail.setGUIProperty("index", selectedView.Index);
+            MyFilmsDetail.setGUIProperty("index", selectedView.Index.ToString());
           else
             MyFilmsDetail.clearGUIProperty("index");
 
