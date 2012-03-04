@@ -722,7 +722,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       base.OnPageLoad(); // let animations run  
       GUIWaitCursor.Init(); GUIWaitCursor.Show();
-      Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) || IsDefaultConfig)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set      //new System.Threading.Thread(delegate()
+      Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) || IsDefaultConfig)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
       OnPageload_Step_2();
       GUIWaitCursor.Hide();
 
@@ -1907,6 +1907,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (this.facadeFilms.SelectedListItemIndex > -1) // if (facadeFilms.SelectedListItemIndex > -1 && !bgOnPageLoad.IsBusy) // do not allow going to details when loading thread still active !!!
               {
                 // LogStatusVars("SelectItem");
+                #region context dependant actions
                 switch (conf.ViewContext)
                 {
                   case ViewContext.None:
@@ -1986,6 +1987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
                 }
+                #endregion
               }
               #endregion
               break;
@@ -2024,7 +2026,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
           #endregion
-          break;
+          return base.OnMessage(message);
       }
       return base.OnMessage(message);
     }
@@ -2064,11 +2066,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.DeInit();
 
       if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
-      {
         GetSelectFromMenuView(conf.BoolMenuShowAll);
-        return;
-      }
-      if (conf.Boolselect)
+      else if (conf.Boolselect)
         getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
       else
         GetFilmList();
@@ -3446,8 +3445,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      if (conf.Boolselect) getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
-      else GetFilmList();
+      if (conf.Boolselect) 
+        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
+      else 
+        GetFilmList();
     }
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
@@ -6297,12 +6298,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Refreshfacade()
     {
-      Thread LoadThread = new Thread(new ThreadStart(Worker_Refreshfacade));
-      LoadThread.IsBackground = true;
-      LoadThread.Priority = ThreadPriority.AboveNormal;
-      LoadThread.Name = "MyFilms Fin_Charge_Init (false-false)";
-      LoadThread.Start();
-      //LoadThread.Join(); // wait until background thread finished ...
+      //Thread LoadThread = new Thread(new ThreadStart(Worker_Refreshfacade));
+      //LoadThread.IsBackground = true;
+      //LoadThread.Priority = ThreadPriority.AboveNormal;
+      //LoadThread.Name = "MyFilms Fin_Charge_Init (false-false)";
+      //LoadThread.Start();
+      ////LoadThread.Join(); // wait until background thread finished ...
+
+      new System.Threading.Thread(delegate()
+      {
+        {
+          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          Fin_Charge_Init(false, false);
+          GUIWaitCursor.Hide();
+        }
+        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+          {
+            {
+              // what to do after it has finished here ....
+            }
+            return 0;
+          }, 0, 0, null);
+      }) { Name = "MyFilmsBGWorker", IsBackground = true }.Start();
+
     }
 
     private void Worker_Refreshfacade()
@@ -6314,12 +6332,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Loadfacade()
     {
-      var loadThread = new Thread(new ThreadStart(Worker_Loadfacade));
-      loadThread.IsBackground = true;
-      loadThread.Priority = ThreadPriority.Normal;
-      loadThread.Name = "MyFilms Fin_Charge_Init (false-true)";
-      loadThread.Start();
-      //loadThread.Join(); // wait until background thread finished ...
+      //var loadThread = new Thread(new ThreadStart(Worker_Loadfacade));
+      //loadThread.IsBackground = true;
+      //loadThread.Priority = ThreadPriority.Normal;
+      //loadThread.Name = "MyFilms Fin_Charge_Init (false-true)";
+      //loadThread.Start();
+      ////loadThread.Join(); // wait until background thread finished ...
+
+      new System.Threading.Thread(delegate()
+      {
+        {
+          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          Fin_Charge_Init(false, true);
+          GUIWaitCursor.Hide();
+        }
+        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+        {
+          {
+            // what to do after it has finished here ....
+          }
+          return 0;
+        }, 0, 0, null);
+      }) { Name = "MyFilmsBGWorker", IsBackground = true }.Start();
     }
 
     private void Worker_Loadfacade()
