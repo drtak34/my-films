@@ -5658,20 +5658,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Check, if default group cover is present
           if (MyFilms.conf.StrViewsDflt)
           {
-            if (currentCustomView != null) // if there is an image defined in Custom View
-            {
-              thumbimages[0] = currentCustomView.ImagePath;
-              thumbimages[1] = currentCustomView.ImagePath;
-              return thumbimages;
-            }
-
-            string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg"; // if there is a Default.jpg in the view subfolder
+            // if there is a Default.jpg in the view subfolder
+            string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg";
             if (System.IO.File.Exists(strImageInViewsDefaultFolder))
             {
               thumbimages[0] = strImageInViewsDefaultFolder;
               thumbimages[1] = strImageInViewsDefaultFolder;
               return thumbimages;
             }
+            // if there is an image defined in Custom View
+            if (currentCustomView != null)
+            {
+              thumbimages[0] = currentCustomView.ImagePath;
+              thumbimages[1] = currentCustomView.ImagePath;
+              return thumbimages;
+            }
+
+            // Otherwise use Default image
             if (System.IO.File.Exists(strPathViews + "Default.jpg"))
             {
               thumbimages[0] = strPathViews + "Default.jpg";
