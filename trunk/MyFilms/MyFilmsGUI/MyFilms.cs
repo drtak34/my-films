@@ -3220,11 +3220,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // MyFilmsDetail.clearGUIProperty("user.mastertitle.groupcount");
             MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", currentItem.Label2, true);
 
+            #region fanart
             var wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
             if (conf.StrFanartDefaultViewsUseRandom)
             {
-              var GroupFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
-              if (GroupFanart != " ") wfanart[0] = GroupFanart;
+              var groupFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
+              if (groupFanart != " ") wfanart[0] = groupFanart;
             }
             if (wfanart[0] == " ")
               Fanartstatus(false);
@@ -3233,6 +3234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             backdrop.Filename = wfanart[0];
             MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
             LogMyFilms.Debug("(Load_Lstdetail): Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            #endregion
 
             //conf.FileImage = currentItem.ThumbnailImage;
             //viewcover.Filename = conf.FileImage;
@@ -3246,25 +3248,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             //groupcover.Filename = conf.FileImage; // to be set to group collection covers
             MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
-            //if (this.facadeFilms.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
-            //{
-            //  if (!filmcover.Active) filmcover.Active = true;
-            //  if (!viewcover.Active) viewcover.Active = true;
-            //  if (!personcover.Active) personcover.Active = true;
-            //  viewcover.Filename = conf.FileImage;
-            //}
-            //else
-            //{
-            //  if (filmcover.Active) filmcover.Active = false;
-            //  if (viewcover.Active) viewcover.Active = false;
-            //  if (personcover.Active) personcover.Active = false;
-            //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
-            //}
 
             GUIControl.ShowControl(GetID, 34);
             SetDummyControlsForFacade(conf.ViewContext);
 
-            //Load_Rating(0); // old method - nor more used
+            // Load_Rating(0); // old method - nor more used
             Clear_Logos(); // reset logos
           }
           #endregion
@@ -3281,7 +3269,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string fanartTitle = sTitles.FanartTitle;
             if (currentItem.TVTag.ToString() == "group")
             {
-              SetDummyControlsForFacade(ViewContext.MovieCollection);
               fanartTitle = currentItem.Label; // movie collections in film list
 
               Regex p = new Regex(@"\([0-9]*\)"); // count in brackets
@@ -3292,10 +3279,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Match matcher = matchList[0];
                 groupcount = matcher.Value.Trim(new Char[] { '(', ')' }).Trim();
               }
-            }
-            else
-            {
-              this.SetDummyControlsForFacade(ViewContext.Movie);
             }
             MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", groupcount, true);
 
@@ -3332,22 +3315,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
             LogMyFilms.Debug("(Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[X]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
-            //if (this.facadeFilms.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
-            //{
-            //  if (!filmcover.Active) filmcover.Active = true;
-            //  if (!viewcover.Active) viewcover.Active = true;
-            //  if (!personcover.Active) personcover.Active = true;
-            //  filmcover.Filename = conf.FileImage;
-            //}
-            //else
-            //{
-            //  if (filmcover.Active) filmcover.Active = false;
-            //  if (viewcover.Active) viewcover.Active = false;
-            //  if (personcover.Active) personcover.Active = false;
-            //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
-            //}
-            //}
-
             //conf.FileImage = currentItem.ThumbnailImage;
             //filmcover.Filename = conf.FileImage;
             //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
@@ -3357,6 +3324,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("picture", filmcover.Filename, true);
             if (currentItem.TVTag.ToString() == "group") groupcover.Filename = currentItem.ThumbnailImage;
 
+            SetDummyControlsForFacade(conf.ViewContext);
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
           }
           #endregion
