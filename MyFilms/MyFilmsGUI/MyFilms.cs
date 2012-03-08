@@ -234,6 +234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_DummyFacadePerson = 38,
       CTRL_DummyFacadeHierarchy = 39,
       CTRL_DummyFacadeMenu = 40,
+      CTRL_DummyFacadeIndex = 41,
       CTRL_ListFilms = 50, // Changed from 1026 to 50 due to meeting MePo Standards - holds film lists and hierarchies
       CTRL_ListMenu = 51, // added as separate list control for new menu - holds menu and extended menu
       CTRL_ListViews = 52, // added as separate list control for Views - holds normal and indexed views (groupings)
@@ -307,6 +308,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     [SkinControlAttribute((int)Controls.CTRL_DummyFacadeMenu)]
     protected GUILabelControl dummyFacadeMenu = null;
+
+    [SkinControlAttribute((int)Controls.CTRL_DummyFacadeIndex)]
+    protected GUILabelControl dummyFacadeIndex = null;
 
     #endregion
 
@@ -13179,7 +13183,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void SetDummyControls(ViewContext viewContext)
     {
-      if (dummyFacadeFilm == null || dummyFacadeHierarchy == null || dummyFacadeGroup == null || dummyFacadePerson == null)
+      if (dummyFacadeFilm == null || dummyFacadeHierarchy == null || dummyFacadeGroup == null || dummyFacadePerson == null || dummyFacadeIndex == null)
       {
         LogMyFilms.Warn("SetDummyControlsForFacade() - : ViewContext = '" + viewContext + "' - Warning ! - null detected (controls missing in skin?)");
         // return;
@@ -13244,6 +13248,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
+          if (dummyFacadeIndex != null && dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = false;
           break;
         default:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting ViewContext to 'Default' (all false)");
@@ -13252,7 +13257,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dummyFacadeGroup != null && dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
           if (dummyFacadePerson != null && dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           if (dummyFacadeMenu != null && dummyFacadeMenu.Visible) dummyFacadeMenu.Visible = false;
+          if (dummyFacadeIndex != null && dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = false;
           break;
+      }
+      if (dummyFacadeIndex != null)
+      {
+        bool indexed = (conf.Boolindexed && !conf.Boolindexedreturn);
+        if (!indexed && dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = false;
+        if (indexed && !dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = true;
+        LogMyFilms.Debug("SetDummyControlsForFacade() setting dummyFacadeIndex to '" + indexed + "'");
       }
     }
 
