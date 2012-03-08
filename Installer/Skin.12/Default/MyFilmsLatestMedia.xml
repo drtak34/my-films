@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+  <controls>
+    <!--     *******************************************************************************************  -->
+    <!--     *************************   RECENTLY ADDED - MyFilms   ****************************  -->
+    <!--     *******************************************************************************************  -->
+	<control>
+		<description>Recently Added group</description>
+		<type>group</type>
+		<dimColor>ffffffff</dimColor>
+	    <visible>Control.isvisible(40)</visible>
+		<!-- <control Style="BasicHomeFade">
+		  <description>background for recently added files</description>
+		  <type>image</type>
+		  <id>98764</id>
+		  <posX>370</posX>
+		  <posY>560</posY>
+		  <width>1220</width>
+		  <height>150</height>
+		  <texture>list_sub_focus.png</texture>
+		  <colordiffuse>ccffffff</colordiffuse>
+		  <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)+!Player.hasmedia</visible>
+		</control> -->
+		<control Style="BasicHomeFade">
+		  <description>Updates label</description>
+		  <type>label</type>
+		  <id>0</id>
+		  <posX>310</posX>
+		  <posY>415</posY>
+		  <width>360</width>
+		  <label>4558</label>
+		  <align>left</align>
+		  <font>font14</font>
+		  <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)</visible>
+		  <textcolor>ffa9d0f7</textcolor>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>MyFilms Latest Title 1</description>
+		  <type>fadelabel</type>
+		  <id>0</id>
+		  <posX>322</posX>
+		  <posY>455</posY>
+		  <width>400</width>
+		  <label>#latestMediaHandler.myfilms.latest1.dateAdded: #latestMediaHandler.myfilms.latest1.title (#latestMediaHandler.myfilms.latest1.year) - #latestMediaHandler.myfilms.latest1.runtime #myfilms.db.length.unit</label>
+		  <align>left</align>
+		  <font>font11</font>
+		  <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)</visible>
+		  <textcolor>gainsboro</textcolor>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>MyFilms Latest Title 2</description>
+		  <type>fadelabel</type>
+		  <id>0</id>
+		  <posX>322</posX>
+		  <posY>475</posY>
+		  <width>400</width>
+		  <label>#latestMediaHandler.myfilms.latest2.title - #latestMediaHandler.myfilms.latest2.genre - #latestMediaHandler.myfilms.latest2.runtime - #latestMediaHandler.myfilms.latest2.year  (#latestMediaHandler.myfilms.latest2.dateAdded)</label>
+		  <align>left</align>
+		  <font>font11</font>
+		  <label>#latestMediaHandler.myfilms.latest2.dateAdded: #latestMediaHandler.myfilms.latest2.title (#latestMediaHandler.myfilms.latest2.year) - #latestMediaHandler.myfilms.latest2.runtime #myfilms.db.length.unit</label>
+		  <textcolor>gainsboro</textcolor>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>MyFilms Latest Title 3</description>
+		  <type>label</type>
+		  <id>0</id>
+		  <posX>322</posX>
+		  <posY>495</posY>
+		  <width>400</width>
+		  <label>#latestMediaHandler.myfilms.latest3.dateAdded: #latestMediaHandler.myfilms.latest3.title (#latestMediaHandler.myfilms.latest3.year) - #latestMediaHandler.myfilms.latest3.runtime #myfilms.db.length.unit</label>
+		  <align>left</align>
+		  <font>font11</font>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)</visible>
+		  <textcolor>gainsboro</textcolor>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>Cover1</description>
+		  <type>image</type>
+		  <id>1</id>
+		  <posX>50</posX>
+		  <posY>450</posY>
+		  <width>60</width>
+		  <height>90</height>
+		  <colordiffuse>ffffffff</colordiffuse>
+		  <texture mask="Picturethumbmask.png">#latestMediaHandler.myfilms.latest1.poster</texture>
+		  <shouldCache>true</shouldCache>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+!Player.hasmedia</visible>
+		  <animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>Overlay Cover 1</description>
+		  <type>image</type>
+		  <id>0</id>
+		  <posX>48</posX>
+		  <posY>450</posY>
+		  <width>60</width>
+		  <height>90</height>
+		  <texture>Picturethumbframe.png</texture>
+		  <align>left</align>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+!Player.hasmedia</visible>
+		  <textcolor>gainsboro</textcolor>
+		  <animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>Cover2</description>
+		  <type>image</type>
+		  <id>1</id>
+		  <posX>122</posX>
+		  <posY>450</posY>
+		  <width>60</width>
+		  <height>90</height>
+		  <colordiffuse>ffffffff</colordiffuse>
+		  <texture mask="Picturethumbmask.png">#latestMediaHandler.myfilms.latest2.poster</texture>
+		  <shouldCache>true</shouldCache>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+!Player.hasmedia</visible>
+		  <animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>Overlay Cover 2</description>
+		  <type>image</type>
+		  <id>0</id>
+		  <posX>120</posX>
+		  <posY>450</posY>
+		  <width>60</width>
+		  <height>90</height>
+		  <texture>Picturethumbframe.png</texture>
+		  <align>left</align>
+		  <font>font10</font>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+!Player.hasmedia</visible>
+		  <textcolor>gainsboro</textcolor>
+		  <animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>Cover3</description>
+		  <type>image</type>
+		  <id>1</id>
+		  <posX>194</posX>
+		  <posY>450</posY>
+		  <width>60</width>
+		  <height>90</height>
+		  <colordiffuse>ffffffff</colordiffuse>
+		  <texture mask="Picturethumbmask.png">#latestMediaHandler.myfilms.latest3.poster</texture>
+		  <shouldCache>true</shouldCache>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+!Player.hasmedia</visible>
+		  <animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control Style="BasicHomeFade">
+		  <description>Overlay Cover 3</description>
+		  <type>image</type>
+		  <id>0</id>
+		  <posX>192</posX>
+		  <posY>450</posY>
+		  <width>60</width>
+		  <height>90</height>
+		  <texture>Picturethumbframe.png</texture>
+		  <align>left</align>
+		  <font>font10</font>
+		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+!Player.hasmedia</visible>
+		  <textcolor>gainsboro</textcolor>
+		  <animation effect="fade" time="250">visiblechange</animation>
+		</control>
+	</control>
+  </controls>
+</window>
