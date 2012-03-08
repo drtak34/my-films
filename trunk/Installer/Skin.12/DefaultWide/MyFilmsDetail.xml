@@ -4,7 +4,6 @@
 	<defaultcontrol>10000</defaultcontrol>
 	<allowoverlay>player.hasmedia+!control.hasfocus(10099)</allowoverlay>
 	<define>#header.label:#myfilms.config.pluginname</define>
-	<animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
 	<controls>
      	 <control>
       	    <description>BG</description>
@@ -38,8 +37,6 @@
 			<texture>#myfilms.fanart</texture>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="1">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>fanart</description>
@@ -84,8 +81,6 @@
 			<colordiffuse>90ffffff</colordiffuse>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Bottom Gradient Overlay for Fanart View</description>
@@ -98,8 +93,6 @@
 			<texture>MyFilms\gradient.png</texture>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!--		<import>common.window.overlay.xml</import>
 			<import>common.time.xml</import> -->
@@ -136,8 +129,6 @@
 			<textcolor>ffa9d0f7</textcolor>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Filters group</description>
@@ -1322,29 +1313,11 @@
 		<height>538</height>
 		<keepaspectratio>yes</keepaspectratio>
 		<zoom>yes</zoom>
-		<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
-		<texture>#myfilms.picture</texture>
+		<visible>!Control.HasFocus(10099)</visible>
+		<texture>#myfilms.coverimage</texture>
+		<animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
-	</control>
-	<control>
-		<description>Thumbnail with video playing</description>
-		<type>image</type>
-		<id>0</id>
-		<posX>49</posX>
-		<posY>81</posY>
-		<width>295</width>
-		<height>430</height>
-		<texture>#myfilms.picture</texture>
-		<keepaspectratio>yes</keepaspectratio>
-		<zoom>yes</zoom>
-		<visible>!Control.HasFocus(10099)+player.hasmedia</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<description>Cover Art Glass Overlay</description>
@@ -1355,9 +1328,23 @@
 		<width>406</width>
 		<height>556</height>
 		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-		<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
+		<visible>!Control.HasFocus(10099)</visible>
+		<animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>View Image on Film Lists</description>
+		<id>0</id>
+		<posX>400</posX>
+		<posY>55</posY>
+		<width>63</width>
+		<height>95</height>
+		<texture mask="Picturethumbmask.png">#myfilms.viewcoverimage</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<valign>top</valign>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 	</control>
 	<control>
 		<description>Video/Audio Format</description>
@@ -1372,8 +1359,6 @@
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<description>No. Date Languages Subtitles</description>
@@ -1389,8 +1374,6 @@
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<type>image</type>
@@ -1406,8 +1389,6 @@
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<type>image</type>
@@ -1423,24 +1404,6 @@
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
-	</control>
-	<control>
-		<type>image</type>
-		<id>0</id>
-		<posX>2170</posX>
-		<posY>160</posY>
-		<width>35</width>
-		<height>35</height>
-		<align>right</align>
-		<texture>MyFilms\Films_DD.png</texture>
-		<colordiffuse>7fffffff</colordiffuse>
-		<visible>!Control.HasFocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<!-- <control>
 		<type>fadelabel</type>
@@ -1470,8 +1433,6 @@
 		<visible>Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control> 
 	<control>
 		<type>label</type>

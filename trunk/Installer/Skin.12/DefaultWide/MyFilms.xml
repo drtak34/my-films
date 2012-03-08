@@ -38,26 +38,74 @@
 		  <font>font13</font>
 		  <textcolor>ffa9d0f7</textcolor>
 		</control>
+        <!-- DUMMY LABELS -->
         <control>
             <type>label</type>
-            <description>Label Visible for Views (Category, Country, Year, etc.</description>
+            <description>Dummy control Visible for Views other than Film Lists Including Views Menu)</description>
             <id>34</id>
 			<label></label>
-            <posX>0</posX>
-            <posY>0</posY>
-            <visible>yes</visible>
-            <focusable>no</focusable>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<visible>no</visible>
+			<!-- to make a control visible only when you are in a VIEW do this: <visible>control.isvisible(34)</visible> -->
+			<!-- to make a control invisible when you are in a VIEW do this: <visible>!control.isvisible(34)</visible> -->
+			<!-- Note: Dummy control 34 is maintained for backwards compatibility, but skins may use more specific View controls  -->
         </control>
         <control>
             <type>label</type>
-            <description>Label Fanart Visible when Fanart found</description>
+            <description>Dummy control Visible when Fanart found</description>
             <id>35</id>
 			<label></label>
-            <posX>0</posX>
-            <posY>0</posY>
-            <visible>yes</visible>
-            <focusable>no</focusable>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<!-- to make a control Visible only when FANART is found: <visible>control.isvisible(35)</visible> -->
+			<!-- to make a control Invisible only when FANART is found: <visible>!control.isvisible(35)</visible> -->
        	</control>
+		<control>
+			<description>Dummy control for Film Lists</description>
+			<type>label</type>
+			<id>36</id>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<!-- to make a control Visible only in Film Lists do this: <visible>control.isvisible(36)</visible> -->
+			<!-- to make a control Invisible in Film Lists (Movies) do this: <visible>!control.isvisible(36)</visible> -->
+		</control>
+		<control>
+			<description>Dummy control for Views other than Person views(Category, Year, Country, etc.)</description>
+			<type>label</type>
+			<id>37</id>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<!-- to make a control Visible only in non person VIEWS: <visible>control.isvisible(37)</visible> -->
+			<!-- to make a control Invisible in non person VIEWS: <visible>!control.isvisible(37)</visible> -->
+		</control>
+		<control>
+			<description>Dummy control for PERSONS VIEWS</description>
+			<type>label</type>
+			<id>38</id>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<!-- to make a control Visible only in PERSONS VIEWS (Actors, Writer, etc.): <visible>control.isvisible(38)</visible> -->
+			<!-- to make a control Invisible in PERSONS VIEWS (Actors, Writer, etc.): <visible>!control.isvisible(38)</visible> -->
+		</control>
+		<control>
+			<description>Dummy control for Groups/Hierarchies like Box Sets</description>
+			<type>label</type>
+			<id>39</id>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<!-- to make a control Visible only in GROUP HIERARCHY: <visible>control.isvisible(39)</visible> -->
+			<!-- to make a control Invisible in GROUP HIERARCHY: <visible>!control.isvisible(39)</visible> -->
+		</control>
+		<control>
+			<description>Dummy control for Views Menu</description>
+			<type>label</type>
+			<id>40</id>
+			<posX>-50</posX>
+			<posY>-50</posY>
+			<!-- to make a control Visible only in VIEWS MENU: <visible>control.isvisible(40)</visible> -->
+			<!-- to make a control Invisible in VIEWS MENU: <visible>!control.isvisible(40)</visible> -->
+		</control>
         <control>
             <description>fanart</description>
             <type>image</type>
@@ -98,7 +146,6 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
             <!-- Do not modify the visibility for this component. It is handled by the plug-in. -->
 		</control>
-
 		<control>
 			<description>Overlay for FanArt</description>
 			<id>0</id>
@@ -113,6 +160,22 @@
 			<animation effect="fade" time="70">visible</animation>
 			<animation effect="fade" time="70" delay="300">hidden</animation>
 		</control>
+		
+	<!-- For a Background for Views Menu -->
+		<!-- <control>
+			<description>Views Menu background</description>
+			<id>0</id>
+			<type>image</type>
+			<posX>370</posX>
+			<posY>72</posY>
+			<width>850</width>
+			<height>485</height>
+			<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover2.png</texture>
+			<colordiffuse>ff808080</colordiffuse>
+			<visible>Control.isvisible(40)</visible>
+			<animation effect="fade" time="70">visible</animation>
+			<animation effect="fade" time="70" delay="300">hidden</animation>
+		</control> -->
 		<control>
 			<description>Top Gradient Overlay for Filmstrip/Coverflow</description>
 			<type>image</type>
@@ -126,8 +189,6 @@
 			<visible>!control.isvisible(34)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
  		<control>
 			<id>0</id>
@@ -142,8 +203,6 @@
 			<visible>!control.isvisible(34)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>My Films logo</description>
@@ -168,8 +227,6 @@
 			<textcolor>ffa9d0f7</textcolor>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Global Filter Icons group</description>
@@ -226,11 +283,11 @@
 			<type>fadelabel</type>
 			<description>Config Name and Filter</description>
 			<id>1</id>
-			<posX>425</posX>
-			<posY>40</posY>
+		    <posX>400</posX>
+			<posY>20</posY>
 			<width>430</width>
 			<font>font14</font>
-			<textcolor>cca9d0f7</textcolor>
+			<textcolor>ffa9d0f7</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
 			<label>#myfilms.config.currentconfig</label>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
@@ -257,7 +314,7 @@
 			<posY>77</posY>
 			<width>750</width>
 			<font>font14</font>
-			<textcolor>7fffffff</textcolor>
+			<textcolor>eeffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
 			<label>#myfilms.view #myfilms.select</label>
 			<wrapString> | </wrapString>
@@ -430,21 +487,37 @@
 		<control>
         	<type>group</type>
        		<visible>!Control.HasFocus(50)</visible>
-      	   	<animation effect="fade" time="250">WindowOpen</animation>
-      		<animation effect="fade" time="250">WindowClose</animation>
-      		<animation effect="slide" time="150" start="0,-300">WindowOpen</animation>
-      		<animation effect="slide" time="250" end="800,0">WindowClose</animation>
 			<control>
         		<description>composite control consisting of a list control and a thumbnail panel</description>
         		<type>facadeview</type>
         		<id>50</id>
+          		<control>
+					<type>listcontrol</type>
+					<description>listcontrol</description>
+					<posX>422</posX>
+					<posY>115</posY>
+					<width>760</width>
+					<height>450</height>
+					<onleft>4</onleft>
+					<onright>6</onright>
+					<IconXOff>10</IconXOff>
+					<IconYOff>3</IconYOff>
+					<itemwidth>16</itemwidth>
+					<itemHeight>24</itemHeight>
+					<keepaspectratio>yes</keepaspectratio>
+					<font>font13</font>
+					<spinPosX>1111</spinPosX>
+					<spinPosY>668</spinPosY>
+					<folderPrefix />
+					<folderSuffix />
+				</control>
 				<control>
 					<description>Thumbnail Panel</description>
 					<type>thumbnailpanel</type>
 	          		<posX>50</posX>
-	          		<posY>120</posY>
+	          		<posY>130</posY>
 	          		<width>1173</width>
-	          		<height>380</height>
+	          		<height>450</height>
 					<onleft>4</onleft>
 					<itemWidth>90</itemWidth>
 					<itemHeight>125</itemHeight>
@@ -469,29 +542,9 @@
 	          		<renderUnfocusText>no</renderUnfocusText>
 					<unfocusedAlpha>150</unfocusedAlpha>
 					<font>font13</font>
-      					<animation effect="fade" time="250">WindowClose</animation>
 					<animation effect="fade" time="250">Focus</animation>
 					<animation effect="fade" time="250">UnFocus</animation>
 	         	 </control>
-          		 <control>
-					<type>listcontrol</type>
-					<description>listcontrol</description>
-					<posX>422</posX>
-					<posY>115</posY>
-					<width>760</width>
-					<height>450</height>
-					<onleft>4</onleft>
-					<onright>6</onright>
-					<IconXOff>10</IconXOff>
-					<IconYOff>3</IconYOff>
-					<itemwidth>18</itemwidth>
-					<itemHeight>30</itemHeight>
-					<keepaspectratio>yes</keepaspectratio>
-					<font>font13</font>
-					<spinPosX>1111</spinPosX>
-					<spinPosY>668</spinPosY>
-					<unfocusedAlpha>200</unfocusedAlpha>
-					</control>
         		<control>
           			<description>Filmstrip view</description>
 					<type>filmstrip</type>
@@ -509,11 +562,11 @@
 					<spinPosX>2000</spinPosX>
 					<spinColor>ffcccccc</spinColor>
           			<itemWidth>134</itemWidth>
-          			<itemHeight>196</itemHeight>
+          			<itemHeight>301</itemHeight>
           			<textureWidth>134</textureWidth>
-          			<textureHeight>196</textureHeight>
+          			<textureHeight>201</textureHeight>
           			<thumbWidth>130</thumbWidth>
-          			<thumbHeight>192</thumbHeight>
+          			<thumbHeight>196</thumbHeight>
           			<thumbPosX>2</thumbPosX>
           			<thumbPosY>2</thumbPosY>
           			<imageFolderFocus>Picture_cover2.png</imageFolderFocus>
@@ -527,7 +580,7 @@
           			<showBackGround>no</showBackGround>
           			<showInfoImage>no</showInfoImage>
 					<unfocusedAlpha>180</unfocusedAlpha>
-					<keepaspectratio>yes</keepaspectratio>
+					<keepaspectratio>no</keepaspectratio>
           			<thumbAnimation effect="zoom" start="100,100" end="110,110" time="200">focus</thumbAnimation>
           			<thumbAnimation effect="zoom" start="110,110" end="100,100" time="200">unfocus</thumbAnimation>
 					<animation effect="fade" time="250">Focus</animation>
@@ -608,10 +661,10 @@
 									<posX>20</posX>
 									<posY>37</posY>
 									<width>200</width>
-									<height>29</height>
+									<height>48</height>
 									<label>#myfilms.db.actors.value</label>
 									<font>font9</font>
-									<lineSpacing>2.5</lineSpacing>
+									<lineSpacing>1.5</lineSpacing>
 									<align>left</align>
 									<textcolor>FFDDDDDD</textcolor>
 									<seperator>: : :</seperator>
@@ -637,10 +690,10 @@
 									<posX>20</posX>
 									<posY>140</posY>
 									<width>200</width>
-									<height>62</height>
+									<height>103</height>
 									<label>#myfilms.db.description.value</label>
 									<font>font9</font>
-									<lineSpacing>2.5</lineSpacing>
+									<lineSpacing>1.5</lineSpacing>
 									<textcolor>FFFFFFFF</textcolor>
 									<seperator>: : :</seperator>
 									<shadowAngle>-</shadowAngle>
@@ -667,21 +720,8 @@
 			<shadowDistance>2</shadowDistance>
 			<shadowColor>ff083556</shadowColor>
 			<label>#selecteditem #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
-			<visible>facadeview.list+!player.hasmedia</visible>
-        </control>
-		<control>
-			<type>fadelabel</type>
-			<description>Selected Item - Master Title or Group Names (Media Playing or Icons)</description>
-			<id>1</id>
-			<posX>45</posX>
-			<posY>510</posY>
-			<font>font16</font>
-			<width>310</width>
-			<shadowAngle>45</shadowAngle>
-			<shadowDistance>2</shadowDistance>
-			<shadowColor>ff083556</shadowColor>
-			<label>#selecteditem #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
-			<visible>facadeview.smallicons|facadeview.largeicons|[facadeview.list+player.hasmedia]</visible>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
+			<animation effect="slide" time="450" end="0,-10" condition="Player.hasmedia">conditional</animation>
         </control>
 		<control>
 			<description>RatingValue</description>
@@ -694,7 +734,7 @@
 			<align>left</align>
 			<textcolor>ffffcc00</textcolor>
 			<visible>!string.equals(#myfilms.db.rating.value,0)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
-			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
 			<description>Group Label</description>
@@ -769,8 +809,6 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 			<visible>!string.equals(#myfilms.user.mastertitle.groupcount)+!facadeview.filmstrip+!facadeview.coverflow+!Control.isvisible(34)</visible>
 		</control>
 		<!-- <control>
@@ -792,12 +830,12 @@
 			<id>1</id>
 			<posX>45</posX>
 			<posY>610</posY>
-			<label>#myfilms.db.year.value</label>
+			<label>#myfilms.db.year.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
 			<font>font14</font>
 			<shadowAngle>45</shadowAngle>
 			<shadowDistance>2</shadowDistance>
 			<shadowColor>ff083556</shadowColor>
-			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
+			<visible>!Control.isvisible(34)+string.equals(#myfilms.db.length.value)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -846,7 +884,6 @@
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
-
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -859,95 +896,158 @@
 			<label>#myfilms.user.item2.value</label>
 			<font>font11</font>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
-
 		</control>
+
+		<!-- Cover/Thumb Images -->
 		<control>
 			<type>image</type>
-			<description>Cover Image (zoom)</description>
-			<id>1020</id>
+			<description>Film Cover Image</description>
+			<id>0</id>
 			<posX>45</posX>
 			<posY>90</posY>
-			<width>288</width>
+			<width>280</width>
 			<height>420</height>
 			<texture>#myfilms.coverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<zoom>yes</zoom>
-			<visible>!Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
-			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
-            <animation effect="slide" time="450" end="-400,0">hidden</animation>
-      		<animation effect="fade" time="250">WindowOpen</animation>
-      		<animation effect="fade" time="250">WindowClose</animation>
+      		<visible>!Control.isvisible(34)+facadeview.list</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
 		</control>
     	<control>
       		<type>image</type>
-    		<description>Backgroundframe of selected item</description>
-      		<id>1</id>
-      		<posX>39</posX>
+    		<description>Cover Background frame</description>
+      		<id>0</id>
+      		<posX>38</posX>
       		<posY>83</posY>
-      		<width>306</width>
+      		<width>296</width>
       		<height>436</height>
       		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-      		<visible>!Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
-			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
-            <animation effect="slide" time="450" end="-400,0">hidden</animation>
-      		<animation effect="fade" time="250">WindowOpen</animation>
-      		<animation effect="fade" time="250">WindowClose</animation>
+      		<visible>!Control.isvisible(34)+facadeview.list</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
+    	</control>
+    	<control>
+      		<type>image</type>
+    		<description>Views Menu Image Background frame</description>
+      		<id>0</id>
+      		<posX>38</posX>
+      		<posY>83</posY>
+      		<width>296</width>
+      		<height>436</height>
+			<colordiffuse>ff808080</colordiffuse>
+      		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover2.png</texture>
+			<visible>Control.isvisible(40)</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
     	</control>
 		<control>
 			<type>image</type>
-			<description>View Thumb (no zoom)</description>
+			<description>Views Menu Image</description>
+			<id>0</id>
+			<posX>45</posX>
+			<posY>90</posY>
+			<width>280</width>
+			<height>420</height>
+            <texture>#myfilms.menuimage</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<visible>control.isvisible(40)+facadeview.list</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
+		</control>
+    	<control>
+      		<type>image</type>
+    		<description>Views Background frame</description>
+      		<id>0</id>
+      		<posX>38</posX>
+      		<posY>83</posY>
+      		<width>296</width>
+      		<height>436</height>
+      		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
+			<visible>Control.isvisible(34)+!Control.isvisible(40)+facadeview.list+Control.HasFocus(50)</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="zoom" time="450" start="30,30" center="390,40" condition="!Control.isvisible(36)">conditional</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
+    	</control>
+		 <control>
+			<type>image</type>
+			<description>View Image</description>
+			<id>0</id>
+			<posX>45</posX>
+			<posY>90</posY>
+			<width>280</width>
+			<height>420</height>
+			<texture>#myfilms.viewcoverimage</texture>
+			<centered>yes</centered>
+			<keepaspectratio>yes</keepaspectratio>
+			<visible>Control.isvisible(37)+facadeview.list</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="zoom" time="450" start="30,30" center="390,40" condition="!Control.isvisible(36)">conditional</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Person Image</description>
+			<id>0</id>
+			<posX>45</posX>
+			<posY>90</posY>
+			<width>280</width>
+			<height>420</height>
+			<texture>#myfilms.personcoverimage</texture>
+			<centered>yes</centered>
+			<keepaspectratio>yes</keepaspectratio>
+			<visible>Control.isvisible(38)+facadeview.list+Control.HasFocus(50)</visible>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+			<animation effect="zoom" time="450" start="30,30" center="390,40" condition="!Control.isvisible(36)">conditional</animation>
+			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation>
+		</control>
+        <control>
+			<type>image</type>
+			<description>View Image on Film Lists (List Layout)</description>
 			<id>0</id>
 			<posX>40</posX>
 			<posY>90</posY>
 			<width>288</width>
 			<height>420</height>
-			<texture>#myfilms.viewcoverimage</texture>
+			<texture mask="Picturethumbmask.png">#myfilms.viewcoverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<filtered>no</filtered>
-			<visible>Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
-			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-            <animation effect="slide" time="450" end="-400,0">hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
-      		<animation effect="fade" time="250">WindowOpen</animation>
-      		<animation effect="fade" time="250">WindowClose</animation>
+			<valign>top</valign>
+			<visible>Control.isvisible(36)+facadeview.list+!Control.isvisible(50)</visible>
+			<animation effect="zoom" time="450" end="30,30" center="390,40" condition="Control.isvisible(36)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
 		</control>
-    	<control>
-      		<type>image</type>
-    		<description>Backgroundframe of selected item</description>
-      		<id>1</id>
-      		<posX>39</posX>
-      		<posY>83</posY>
-      		<width>292</width>
-      		<height>436</height>
-      		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-      		<visible>Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
-			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
-            <animation effect="slide" time="450" end="-400,0">hidden</animation>
-      		<animation effect="fade" time="250">WindowOpen</animation>
-      		<animation effect="fade" time="250">WindowClose</animation>
-    	</control>
 		<control>
 			<type>image</type>
-			<description>Thumb of selected item</description>
-			<id>1021</id>
-			<posX>45</posX>
-			<posY>100</posY>
-			<width>180</width>
-			<height>300</height>
-			<texture>#myfilms.coverimage</texture>
+			<description>View Image on Film Lists (Non List Layouts)</description>
+			<id>0</id>
+			<posX>240</posX>
+			<posY>15</posY>
+			<width>60</width>
+			<height>90</height>
+			<texture mask="Picturethumbmask.png">#myfilms.viewcoverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<visible>no</visible>
+			<valign>top</valign>
+			<visible>Control.isvisible(36)+!facadeview.list</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
-		
-<!-- Filmstrip/Coverflow -->
+		<control>
+			<type>image</type>
+			<description>Group Hierarchy (Box Set) Image on Group lists</description>
+			<id>0</id>
+			<posX>40</posX>
+			<posY>90</posY>
+			<width>288</width>
+			<height>420</height>
+			<texture mask="Picturethumbmask.png">#myfilms.groupcoverimage</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<visible>facadeview.list+Control.isvisible(39)+Control.hasfocus(50)</visible>
+			<animation effect="zoom" time="450" end="30,30" center="390,40" condition="Control.isvisible(39)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
+		</control>
+
+		<!-- Filmstrip/Coverflow -->
 		<control>
 			<type>label</type>
 			<description>Title (Filmstrip/Coverflow Not Watched)</description>
@@ -961,16 +1061,12 @@
 			<shadowDistance>2</shadowDistance>
 			<shadowColor>ff080808</shadowColor>
 			<label>#selecteditem #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
-
 			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
 		<control>
 			<type>imagelist</type>
 			<id>1</id>
-
 			<posX>1125</posX>
 			<posY>700</posY>
 			<width>302</width>
@@ -989,8 +1085,6 @@
 			<percentage>#myfilms.db.rating.value</percentage>
 			<visible>!string.equals(#myfilms.db.rating.value,0)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>label</type>
@@ -1005,8 +1099,6 @@
 			<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#(iif(neq(#myfilms.db.category.value,''),'#myfilms.db.category.value',''))</label>
 			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
 		<control>
 			<type>label</type>
@@ -1021,8 +1113,6 @@
 			<label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit - ',''))#(iif(neq(#myfilms.db.rating.value,'0'),'#myfilms.db.rating.value',''))</label>
 			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
 		<control>
 			<type>label</type>
@@ -1053,8 +1143,6 @@
 			<colordiffuse>cfffffff</colordiffuse>
 			<visible>!string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<!-- Watched/Unwatched Icon -->
 	<control>
@@ -1240,20 +1328,28 @@
 			<colordiffuse>ffffffff</colordiffuse>
 			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
 		</control>
-		
 		<control>
-		  <description>Number of Files Label</description>
-		  <type>label</type>
-		  <id>1</id>
-		  <posX>425</posX>
-		  <posY>665</posY>
-		  <label>#selectedindex/#itemcount #itemtype</label>
-		  <align>left</align>
-		  <textcolor>bfffffff</textcolor>
-		  <visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#selectedindex)+string.equals(#itemcount)</visible>
-		  <animation effect="fade" time="250">WindowOpen</animation>
-		  <animation effect="fade" time="250">WindowClose</animation>
+			<description>Number of Files Label</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>425</posX>
+			<posY>665</posY>
+			<label>#selectedindex/#itemcount #itemtype</label>
+			<align>left</align>
+			<textcolor>bfffffff</textcolor>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#selectedindex)+string.equals(#itemcount)</visible>
 		</control>
+		<!-- <control>
+			<description>Number of Files Label (Views menu)</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>425</posX>
+			<posY>520</posY>
+			<label>#selectedindex/#itemcount #itemtype</label>
+			<align>left</align>
+			<textcolor>bfffffff</textcolor>
+			<visible>Control.isvisible(40)+string.equals(#selectedindex)+string.equals(#itemcount)</visible>
+		</control> -->
 		<control>
 			<type>animation</type>
 			<description>Waiting during search</description>
@@ -1267,5 +1363,6 @@
             		<visible>no</visible>
 			<keepaspectratio>yes</keepaspectratio>
 		</control>
+	  <import>MyFilmsLatestMedia.xml</import>
     </controls>
 </window>
