@@ -1633,6 +1633,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
             case ViewContext.MenuAll:
               StopLoadingMenuDetails = true;
+              // if there is no views defined :
+              if (MyFilms.conf.CustomViews.View.Rows.Count == 0)
+              {
+                if (conf.AlwaysShowConfigMenu) // show config menu selection, if selected in setup on "leaving"
+                {
+                  if (!ChooseNewConfig()) GUIWindowManager.ShowPreviousWindow(); // if user "escapes", return to previous window / quit
+                  return;
+                }
+                base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
+                return;
+              }
+
               conf.MenuSelectedID = -2; // -2 means coming from MenuAll
               GetSelectFromMenuView(false); // Call simple Menu ...
               break;
@@ -3653,8 +3665,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("GetSelectFromMenuView() - launched with showall = '" + showall + "'");
       conf.BoolMenuShowAll = showall; // remember state
       if (MyFilms.conf.CustomViews.View.Rows.Count == 0) showall = true; // show generic views, if there is no Custom Views defined in config - but keep it as "base menu"
+      //// alternatively count the active views:
+      //int viewcount = 0;
+      //foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
+      //{
+      //  if (viewRow.ViewEnabled) viewcount++;
+      //}
 
-      Change_LayOut(0); // always use list view
+       Change_LayOut(0); // always use list view
       //if (conf.UseListViewForGoups) Change_LayOut(0);
       //else Change_LayOut(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
 
@@ -3758,6 +3776,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.Label = GUILocalizeStrings.Get(10798765); // *** show all ***
         item.DVDLabel = "showall";
         item.IsFolder = true;
+        // item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected); 
         this.facadeFilms.Add(item);
       }
       else
