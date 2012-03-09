@@ -42,7 +42,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public static ArrayList ID2003Logos = new ArrayList();
         public static ArrayList ID2012Logos = new ArrayList();
         public static string LogosPath = string.Empty; // Source Path for Logos
-        public static string LogosPathThumbs = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos\"; // Path for creating Thumbs - hardcoded.
+        public static string LogosPathThumbs = MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsLogos); // Path for creating Thumbs - hardcoded.
         public static int spacer = 1; // Added for Logo Spacing, set to 1 for default
         public static string logoConfigOverride = String.Empty; // Added for differentiate cache files for override configs to be able to change skin from GUI having correct logos
 

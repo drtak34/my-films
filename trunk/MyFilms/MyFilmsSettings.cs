@@ -39,13 +39,14 @@ namespace MyFilmsPlugin.MyFilms
           log,
           logBackup,
           lang,
-          thumbs,
+          MFpath,
+          MFthumbs,
           OrgDefaultImages,
           OrgGroupViewImages,
           thumbsFilms,
-          thumbsViews,
           thumbsGroups,
           thumbsPersons,
+          thumbsLogos,
           GrabberScripts,
           app,
           skin
@@ -63,13 +64,14 @@ namespace MyFilmsPlugin.MyFilms
         static string logPath = string.Empty;
         static string backupLogPath = string.Empty;
         static string langPath = string.Empty;
-        static string thumbsPath = string.Empty;
-        static string thumbsPathViews = string.Empty;
+        static string MFthumbsPath = string.Empty;
+        static string MFPath = string.Empty;
         static string thumbsPathGroups = string.Empty;
         static string thumbsPathFilms = string.Empty;
         static string OrgDefaultImages = string.Empty;
         static string OrgGroupViewImages = string.Empty;
         static string thumbsPathPersons = string.Empty;
+        static string thumbsPathLogos = string.Empty;
         static string GrabberScripts = string.Empty;
         static string apppath = string.Empty;
         static string skinPath = string.Empty;
@@ -104,18 +106,23 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception) { }
 
-            logPath = Config.GetFile(Config.Dir.Log, "MyFilms.log");
-            backupLogPath = Config.GetFile(Config.Dir.Log, "MyFilms.bak");
-            langPath = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
-            thumbsPath = Config.GetFolder(Config.Dir.Thumbs);
-            thumbsPathViews = Config.GetFolder(Config.Dir.Thumbs);
-            OrgDefaultImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages\";
-            OrgGroupViewImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\GroupViewImages\";
-            thumbsPathGroups = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
-            thumbsPathFilms = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies\";
-            thumbsPathPersons = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
-            GrabberScripts = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\";
-            skinPath = Config.GetFolder(Config.Dir.Skin);
+            logPath             = Config.GetFile(Config.Dir.Log, "MyFilms.log");
+            backupLogPath       = Config.GetFile(Config.Dir.Log, "MyFilms.bak");
+            langPath            = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
+            MFPath              = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms";
+            MFthumbsPath        = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\Thumbs";
+
+            thumbsPathGroups    = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
+            thumbsPathFilms     = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies\";
+            thumbsPathPersons   = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
+            thumbsPathLogos     = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos\";
+
+            GrabberScripts      = Config.GetFolder(Config.Dir.Config) + @"\scripts\MyFilms";
+            skinPath            = Config.GetFolder(Config.Dir.Skin);
+
+            OrgDefaultImages    = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            OrgGroupViewImages  = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\GroupViewImages";
+
             initFolders();
         }
         #endregion
@@ -172,16 +179,18 @@ namespace MyFilmsPlugin.MyFilms
               return OrgDefaultImages;
             case Path.OrgGroupViewImages:
               return OrgGroupViewImages;
-            case Path.thumbs:
-              return thumbsPath;
-            case Path.thumbsViews:
-              return thumbsPathViews;
+            case Path.MFpath:
+              return MFPath;
+            case Path.MFthumbs:
+              return MFthumbsPath;
             case Path.thumbsGroups:
               return thumbsPathGroups;
             case Path.thumbsFilms:
               return thumbsPathFilms;
             case Path.thumbsPersons:
               return thumbsPathPersons;
+            case Path.thumbsLogos:
+              return thumbsPathLogos;
             case Path.GrabberScripts:
               return GrabberScripts;
             case Path.app:

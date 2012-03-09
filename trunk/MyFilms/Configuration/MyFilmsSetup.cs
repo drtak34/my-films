@@ -317,8 +317,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
             {
               openFileDialog1.FileName = String.Empty;
-              //if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
-              //  openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
+              //if (System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\Catalog\"))
+              //  openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\Catalog\";
               //else
                 // openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
                 openFileDialog1.InitialDirectory = "";
@@ -2357,32 +2357,32 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = GUILocalizeStrings.Get(342); // videos
           newRow.Value = "*";
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Films.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Films.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Year
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Year";
           newRow.SortDirectionView = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Year.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Year.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Category
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Category";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Category.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Category.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Country
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Country";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Country.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Country.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //RecentlyAdded
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "RecentlyAdded";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"RecentlyAdded.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\RecentlyAdded.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Indexed title view
           newRow = MyCustomViews.View.NewViewRow();
@@ -2390,20 +2390,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           newRow.Index = 1;
           newRow.Value = "*";
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"TitlesIndex.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\TitlesIndex.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Actors";
           newRow.Index = 1;
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"PersonsIndex.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\PersonsIndex.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Producer
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Producer";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Persons.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Persons.jpg";
           MyCustomViews.View.Rows.Add(newRow);
         }
 
@@ -2415,26 +2415,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = GUILocalizeStrings.Get(342); // videos
           newRow.Value = "*";
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Films.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Films.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //year
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Year";
           newRow.SortDirectionView = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Year.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Year.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Category
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Category";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Category.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Category.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Country
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Country";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Country.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Country.jpg";
           MyCustomViews.View.Rows.Add(newRow);
         }
 
@@ -2445,7 +2445,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
             {
               openFileDialog1.FileName = String.Empty;
-              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+              openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts);
             }
 
             if (txtGrabber.Text.Contains("\\"))
@@ -2580,7 +2580,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
           {
             openFileDialog1.FileName = String.Empty;
-            //openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            //openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages);
           }
           if (SFilePicture.Text.Contains("\\"))
             openFileDialog1.InitialDirectory = SFilePicture.Text.Substring(0, SFilePicture.Text.LastIndexOf("\\") + 1);
@@ -3804,7 +3804,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to reset all generated Thumbs?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups", "*.*", SearchOption.AllDirectories))
+              foreach (string wfile in System.IO.Directory.GetFiles(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Groups", "*.*", SearchOption.AllDirectories))
                 {
                   try
                   {
@@ -3891,7 +3891,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons"))
+              foreach (string wfile in System.IO.Directory.GetFiles(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Persons"))
                 {
                   try
                   {
@@ -4264,7 +4264,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           //string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + " " + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\"" + " " + "\"" + "GUI\"";
           string hotKey = String.Empty;
-          string workingDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+          string workingDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts);
 
           if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url"))
             try { System.IO.File.Delete(deskDir + "\\" + linkName + ".url"); }
@@ -4405,7 +4405,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (txtGrabber.Text.Length != 0)
             AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
           else
-            AMCSetAttribute("Internet_Parser_Path", Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml");
+            AMCSetAttribute("Internet_Parser_Path", MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml");
           AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCExcludedMoviesFile.txt");
           AMCSetAttribute("Manual_Internet_Parser_Path", txtGrabber.Text);
           AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
@@ -4586,10 +4586,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void LogoClearCache(bool showmessage)
         {
-          if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos"))
-            System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos");
+          if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos"))
+            System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos");
           int i = 0;
-          foreach (string sFile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos"))
+          foreach (string sFile in System.IO.Directory.GetFiles(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos"))
           {
             if (sFile.ToUpper().EndsWith(".PNG"))
               System.IO.File.Delete(sFile);
@@ -4673,7 +4673,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           if (useExistingCatalog)
           {
-            string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
+            string CatalogDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\Catalog";
             // Ask User for existing database file
             newCatalog = false;
             openFileDialog1.FileName = String.Empty;
@@ -4696,13 +4696,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           else
           {
-            string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
+            string CatalogDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\Catalog";
             if (!System.IO.Directory.Exists(CatalogDirectory))
             {
               try {System.IO.Directory.CreateDirectory(CatalogDirectory);}
               catch {}
             }
-            string CatalogName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog\" + Config_Name.Text + ".xml";
+            string CatalogName = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\Catalog\" + Config_Name.Text + ".xml";
             if (!System.IO.File.Exists(CatalogName))
             {
               XmlTextWriter destXml = new XmlTextWriter(CatalogName, System.Text.Encoding.Default);
@@ -4775,7 +4775,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           View_Dflt_Item.Text = GUILocalizeStrings.Get(1079819);
 
 
-          string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
+          string FanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\Fanart";
           if (!System.IO.Directory.Exists(FanartDirectory))
           {
             try { System.IO.Directory.CreateDirectory(FanartDirectory); }
@@ -4783,21 +4783,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           MesFilmsFanart.Text = FanartDirectory;
 
-          string ArtistImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\PersonImages";
+          string ArtistImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath) + @"\PersonImages";
           if (!System.IO.Directory.Exists(ArtistImagesDirectory))
           {
             try { System.IO.Directory.CreateDirectory(ArtistImagesDirectory); }
             catch { }
           }
           MesFilmsImgArtist.Text = ArtistImagesDirectory;
-          pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Cover2.jpg"; //DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+          pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Cover2.jpg"; //DefaultCover.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Cover.jpg";
 
-          pictureBoxDefaultPersonImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Persons2.jpg";
-          pictureBoxDefaultViewImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Views.jpg";
-          pictureBoxDefaultFanart.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Fanart.jpg";
+          pictureBoxDefaultPersonImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Persons2.jpg";
+          pictureBoxDefaultViewImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Views.jpg";
+          pictureBoxDefaultFanart.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Fanart.jpg";
           chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
 
-          string GroupViewImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\GroupViewImages";
+          string GroupViewImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgGroupViewImages);
           if (!Directory.Exists(GroupViewImagesDirectory))
           {
             try { System.IO.Directory.CreateDirectory(GroupViewImagesDirectory); }
@@ -4815,7 +4815,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           comboBoxLogoSpacing.Text = "2";
           comboBoxLogoPresets.Text = "Use Logos of currently selected skin";
           //GrabberConfig
-          //txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+          //txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml";
           chkGrabber_ChooseScript.Checked = true; //Don't use default script (ask)
 
           CheckWatchedPlayerStopped.Checked = true; // set watched status handling
@@ -4868,7 +4868,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           cbGrabberOverrideLanguage.Text = newCountry;
 
           // set defaults first:
-          txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+          txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml";
           cbGrabberOverrideGetRoles.Text = "true";
           cbGrabberOverridePersonLimit.Text = "10";
           cbGrabberOverrideTitleLimit.Text = "0";
@@ -4879,20 +4879,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             #region set country specific settings
             case "Austria":
             case "Germany":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.DE-OFDB.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.DE-OFDB.xml";
               cbGrabberOverrideGetRoles.Text = "";
               cbGrabberOverridePersonLimit.Text = "";
               cbGrabberOverrideTitleLimit.Text = "";
               ItemSearchGrabberScriptsFilter.Text = "de, all";
               break;
             case "China":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\TMDB-ZH.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\TMDB-ZH.xml";
               break;
             case "Canada":
             case "UK":
             case "USA":
             case "Australia":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml";
               cbGrabberOverrideGetRoles.Text = "true";
               cbGrabberOverridePersonLimit.Text = "10";
               cbGrabberOverrideTitleLimit.Text = "0";
@@ -4902,19 +4902,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             case "Peru":
             case "Spain":
             case "Chile":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.ES.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.ES.xml";
               ItemSearchGrabberScriptsFilter.Text = "es, all";
               break;
             case "France":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.FR.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.FR.xml";
               ItemSearchGrabberScriptsFilter.Text = "fr, all";
               break;
             case "Italy":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.IT.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.IT.xml";
               ItemSearchGrabberScriptsFilter.Text = "it, all";
               break;
             case "Portugal":
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.PT.xml";
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.PT.xml";
               ItemSearchGrabberScriptsFilter.Text = "pt, all";
               break;
           // No country specific settings:  
@@ -5867,7 +5867,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
           {
             openFileDialog1.FileName = String.Empty;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages);
           }
 
           if (null != AntViewsImage.ImageLocation && AntViewsImage.ImageLocation.Contains("\\"))
@@ -5898,7 +5898,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
           {
             openFileDialog1.FileName = String.Empty;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages);
           }
 
           if (pictureBoxDefaultCover.ImageLocation.Contains("\\"))
@@ -5929,7 +5929,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
           {
             openFileDialog1.FileName = String.Empty;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages);
           }
 
           if (pictureBoxDefaultViewImage.ImageLocation.Contains("\\"))
@@ -5950,7 +5950,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
           {
             openFileDialog1.FileName = String.Empty;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages);
           }
 
           if (pictureBoxDefaultPersonImage.ImageLocation.Contains("\\"))
@@ -5976,7 +5976,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
           {
             openFileDialog1.FileName = String.Empty;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            openFileDialog1.InitialDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages);
           }
 
           if (pictureBoxDefaultFanart.ImageLocation.Contains("\\"))
@@ -6004,7 +6004,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           DialogResult dialogResult = MessageBox.Show("Are you sure you want to reset all generated Film Cover Thumbs?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
           if (dialogResult == DialogResult.Yes)
           {
-            foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Movies", "*.*", SearchOption.AllDirectories))
+            foreach (string wfile in System.IO.Directory.GetFiles(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Movies", "*.*", SearchOption.AllDirectories))
             {
               try
               {

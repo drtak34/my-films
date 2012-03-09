@@ -143,32 +143,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   newRow.DBfield = StrTitle1;
                   newRow.Label = GUILocalizeStrings.Get(342); // videos
                   newRow.Value = "*";
-                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Films.jpg";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Films.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //year
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "Year";
                   newRow.SortDirectionView = " DESC";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Year.jpg";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Year.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //Category
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "Category";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Category.jpg";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Category.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //Country
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "Country";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Country.jpg";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\Country.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //RecentlyAdded
                   newRow = CustomViews.View.NewViewRow();
                   newRow.DBfield = "RecentlyAdded";
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"RecentlyAdded.jpg";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\RecentlyAdded.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   //Indexed title view
                   newRow = CustomViews.View.NewViewRow();
@@ -176,7 +176,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
                   newRow.Index = 1;
                   newRow.Value = "*";
-                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"TitlesIndex.jpg";
+                  newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"\TitlesIndex.jpg";
                   CustomViews.View.Rows.Add(newRow);
                   iCustomViews = 5; // to load "old Custom Views"
                 }

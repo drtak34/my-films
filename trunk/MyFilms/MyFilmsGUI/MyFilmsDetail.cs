@@ -3020,20 +3020,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("(grabb_Internet_Informations) with grabtype = '" + grabtype + "', title = '" + FullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
           if (choosescript)
           {
-            if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms"))
+            if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts)))
             {
               GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
               dlgOk.SetHeading(GUILocalizeStrings.Get(645)); // menu
-              dlgOk.SetLine(1, string.Format(GUILocalizeStrings.Get(1079876), Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms"));
+              dlgOk.SetLine(1, string.Format(GUILocalizeStrings.Get(1079876), MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts)));
               dlgOk.SetLine(2, GUILocalizeStrings.Get(1079877));
               dlgOk.DoModal(GetID);
               LogMyFilms.Info("My Films : The Directory grabber config files doesn't exists. Verify your Configuration !");
               return;
             }
 
-            if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms\user"))
+            if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"))
             {
-              try { System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms\user"); }
+              try { System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"); }
               catch (Exception ex)
               {
                 LogMyFilms.Debug("Error creating user script directory: '" + ex.Message + "'");
@@ -3062,7 +3062,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Log.Error("The default script is not compatible with current MyFilms version - please change your settings !");
               }
             }
-            DirectoryInfo dirsInf = new DirectoryInfo(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms");
+            DirectoryInfo dirsInf = new DirectoryInfo(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
             FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
 
             foreach (FileSystemInfo sfi in sfiles)
@@ -3326,7 +3326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string downLoadPath;
             if (interactive)
-              downLoadPath = Path.GetTempPath(); //downLoadPath = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms";
+              downLoadPath = Path.GetTempPath(); //downLoadPath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath);
             else
             {
               if (grabtype == GrabType.Person)
