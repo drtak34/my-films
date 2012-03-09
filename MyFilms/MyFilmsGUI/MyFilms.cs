@@ -2854,6 +2854,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             #endregion
 
+            #region create artifical covers with title - inactive
             if (item.ThumbnailImage == "" || !File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
               {
               //string strlabel = item.Label;
@@ -2890,7 +2891,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //if (conf.DefaultCover.Length > 0)
                 //  conf.FileImage = conf.DefaultCover;
               }
-            }
+              }
+            #endregion
+
             item.MusicTag = item.ThumbnailImage; // keep Original one in music tag for big list thumb ...
             // strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
             strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
@@ -3227,10 +3230,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           groupcover.Filename = "";
 
           MFview.ViewRow selectedView = this.GetCustomViewFromViewLabel(currentItem.Label);
-          if (selectedView != null)
-            MyFilmsDetail.setGUIProperty("index", selectedView.Index.ToString());
-          else
-            MyFilmsDetail.clearGUIProperty("index");
+          if (selectedView != null) MyFilmsDetail.setGUIProperty("index", selectedView.Index.ToString());
+          else MyFilmsDetail.clearGUIProperty("index");
 
           if (conf.StrFanartDefaultViewsUseRandom)
           {
@@ -3258,7 +3259,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case ViewContext.None:
           break;
         default:
-          if (currentItem == null) return;
           if ((currentItem.IsFolder) && (MyFilms.conf.Boolselect))
           #region Views with grouping ...
           {
@@ -3366,9 +3366,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
             //if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
             //conf.FileImage = currentItem.ThumbnailImage;
-            filmcover.Filename = currentItem.MusicTag != null && (!string.IsNullOrEmpty((string)currentItem.MusicTag)) ? currentItem.MusicTag.ToString() : currentItem.ThumbnailImage;
+            filmcover.Filename = (currentItem.MusicTag != null && !string.IsNullOrEmpty((string)currentItem.MusicTag)) ? currentItem.MusicTag.ToString() : currentItem.ThumbnailImage;
             MyFilmsDetail.setGUIProperty("picture", filmcover.Filename, true);
-            if (currentItem.TVTag.ToString() == "group") groupcover.Filename = currentItem.ThumbnailImage;
+            if (currentItem.TVTag.ToString() == "group") groupcover.Filename = filmcover.Filename;
 
             SetDummyControlsForFacade(conf.ViewContext);
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
@@ -3827,6 +3827,45 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (item != null) item.FreeMemory();
       item.SafeDispose();
+
+      #region load first image, so itemhandler can load it
+      if (facadeFilms.Count > 0)
+      {
+         if (conf.StrPathViews.Length > 0)
+        {
+          // Check, if default group cover is present
+          if (MyFilms.conf.StrViewsDflt)
+          {
+            string strMenuImage = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
+            strMenuImage = strMenuImage + GetFieldFromViewLabel(facadeFilms[0].DVDLabel).ToLower() + "\\" + "Default.jpg";
+            if (!System.IO.File.Exists(strMenuImage))
+            {
+              if (IsPersonField(GetFieldFromViewLabel(facadeFilms[0].DVDLabel)))
+              {
+                if (MyFilms.conf.DefaultCoverArtist.Length > 0)
+                  strMenuImage = MyFilms.conf.DefaultCoverArtist;
+                else
+                  strMenuImage = MyFilms.conf.DefaultCover;
+              }
+              else
+              {
+                if (MyFilms.conf.DefaultCoverViews.Length > 0)
+                  strMenuImage = MyFilms.conf.DefaultCoverViews;
+                else
+                  strMenuImage = MyFilms.conf.DefaultCover; //MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
+              }
+            }
+            if (System.IO.File.Exists(strMenuImage))
+            {
+              facadeFilms[0].ThumbnailImage = strMenuImage;
+              facadeFilms[0].IconImage = strMenuImage;
+              facadeFilms[0].IconImageBig = strMenuImage;
+            }
+          }
+        }
+      }
+      #endregion
+      
       if (conf.MenuSelectedID == -2) 
         conf.MenuSelectedID = facadeFilms.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
       else if ((conf.MenuSelectedID > this.facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
