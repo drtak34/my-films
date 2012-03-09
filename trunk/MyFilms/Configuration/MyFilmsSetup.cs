@@ -2357,32 +2357,32 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = GUILocalizeStrings.Get(342); // videos
           newRow.Value = "*";
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultFilms.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Films.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Year
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Year";
           newRow.SortDirectionView = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultYear.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Year.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Category
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Category";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultGroup2.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Category.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Country
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Country";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultCountry.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Country.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //RecentlyAdded
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "RecentlyAdded";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultRecentlyAdded.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"RecentlyAdded.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Indexed title view
           newRow = MyCustomViews.View.NewViewRow();
@@ -2390,20 +2390,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           newRow.Index = 1;
           newRow.Value = "*";
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultIndex.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"TitlesIndex.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Actors";
           newRow.Index = 1;
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultArtist2.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"PersonsIndex.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Producer
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Producer";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
-          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultArtist2.jpg";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Persons.jpg";
           MyCustomViews.View.Rows.Add(newRow);
         }
 
@@ -2415,22 +2415,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = GUILocalizeStrings.Get(342); // videos
           newRow.Value = "*";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Films.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //year
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Year";
           newRow.SortDirectionView = " DESC";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Year.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Category
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Category";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Category.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Country
           newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = "Country";
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Country.jpg";
           MyCustomViews.View.Rows.Add(newRow);
         }
 
@@ -4786,11 +4790,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             catch { }
           }
           MesFilmsImgArtist.Text = ArtistImagesDirectory;
-          pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultCover.jpg"; //DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+          pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Cover2.jpg"; //DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
 
-          pictureBoxDefaultPersonImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultArtist.jpg";
-          pictureBoxDefaultViewImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultGroup.jpg";
-          pictureBoxDefaultFanart.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"DefaultFanartImage.jpg";
+          pictureBoxDefaultPersonImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Persons2.jpg";
+          pictureBoxDefaultViewImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Views.jpg";
+          pictureBoxDefaultFanart.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + @"Fanart.jpg";
           chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
 
           string GroupViewImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\GroupViewImages";
