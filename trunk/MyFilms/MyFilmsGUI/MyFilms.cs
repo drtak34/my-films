@@ -4890,6 +4890,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!File.Exists(GUIGraphicsContext.Skin + @"\Media\alpha\a.png")) return false; // return, if skin does not support index thumbs
 
+      item.ThumbnailImage = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer.png";
+      return true;
+
+
       string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
       if (strStartLetter.IsNumerical()) strStartLetter = "#";
       string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
