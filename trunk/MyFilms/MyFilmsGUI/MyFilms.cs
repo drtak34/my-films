@@ -2372,6 +2372,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug(string.Format("(SetFilmSelect) - DB-Field: '{0}', datatype = '{1}', ColumnType = '{2}'", conf.WStrSort, datatype, ColumnType));
         if (ColumnType != typeof(string))
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " = '" + sLabel + "'" : conf.WStrSort + " is NULL";
+        else if (conf.WStrSort == "Date")
+          conf.StrSelect = (LabelNotEmpty) ? "DateAdded" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else if (IsDateField(conf.WStrSort))
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else if (IsAlphaNumericalField(conf.WStrSort))
@@ -2567,12 +2569,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (conf.Boolreturn) //in case of selection by view verify if value correspond excatly to the searched string
         {
           w_tableau = Search_String(sr[conf.WStrSort].ToString());
-          foreach (string s in w_tableau)
+          for (int wi = 0; wi < w_tableau.Count; wi++)
           {
-            if (isdate && string.Format("{0:dd/MM/yyyy}", DateTime.Parse(s).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
-              goto suite;
-            if (s.IndexOf(conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) >= 0)  // if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // string.Compare(champselect, wchampselect, true) == 0
-              goto suite;
+            string s = w_tableau[wi].ToString();
+            if (isdate)
+            {
+              if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(s).ToShortDateString()) ==
+                  string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
+              {
+                goto suite;
+              }
+            }
+            else
+            {
+              if (s.IndexOf(conf.Wselectedlabel, StringComparison.OrdinalIgnoreCase) >= 0) // if (s.ToLower().Contains(conf.Wselectedlabel.Trim().ToLower())) // if (string.Compare(s, conf.Wselectedlabel.Trim(), true) >= 0) // string.Compare(champselect, wchampselect, true) == 0
+              {
+                goto suite;
+              }
+            }
           }
           goto fin;
         }
@@ -2627,7 +2641,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
               case "Date":
               case "DateAdded":
-                try { item.Label2 = sr["Date"].ToString(); }
+                try
+                {
+                  item.Label2 = DateTime.Parse(sr["Date"].ToString()).ToShortDateString();
+                  //item.Label2 = ((DateTime)sr["DateAdded"]).ToShortDateString();
+                }
                 catch {}
                 break;
               case "Rating":
@@ -4973,6 +4991,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // champselect = string.Format("{0:yyyy/MM/dd}", row["DateAdded"]);
           DateTime tmpdate;
           champselect = (DateTime.TryParse(row[WStrSort].ToString(), out tmpdate)) ? string.Format("{0:yyyy/MM/dd}", tmpdate) : "";
+          //try { champselect = string.Format("{0:dd/MM/yyyy}", DateTime.Parse(row[WStrSort].ToString()).ToShortDateString()); }
+          //catch (Exception) { champselect = ""; }
         }
         else
           champselect = row[WStrSort].ToString().Trim();
