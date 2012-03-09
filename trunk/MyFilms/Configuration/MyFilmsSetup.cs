@@ -4586,10 +4586,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void LogoClearCache(bool showmessage)
         {
-          if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos"))
-            System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos");
+          if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsLogos)))
+            System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsLogos));
           int i = 0;
-          foreach (string sFile in System.IO.Directory.GetFiles(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos"))
+          foreach (string sFile in System.IO.Directory.GetFiles(MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsLogos)))
           {
             if (sFile.ToUpper().EndsWith(".PNG"))
               System.IO.File.Delete(sFile);
