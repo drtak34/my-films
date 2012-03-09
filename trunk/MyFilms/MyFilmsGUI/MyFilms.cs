@@ -3794,7 +3794,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.Label = GUILocalizeStrings.Get(10798765); // *** show all ***
         item.DVDLabel = "showall";
         item.IsFolder = true;
-        // item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected); 
+        item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected); 
         this.facadeFilms.Add(item);
       }
       else
