@@ -2825,23 +2825,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string strThumb; // cached cover
             string strThumbSmall; // cached cover for Icons - small resolution
+            string strThumbGroup = ""; // thumbnail for Groups/collections
 
+            #region group-collection image handling
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
             if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT views!)
             {
               if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
               {
-                item.IconImage = conf.StrPathImg + "\\" + item.Label + ".jpg";
-                item.IconImageBig = conf.StrPathImg + "\\" + item.Label + ".jpg";
-                item.ThumbnailImage = conf.StrPathImg + "\\" + item.Label + ".jpg";
+                strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".jpg";
               }
               else if (System.IO.File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
               {
-                item.IconImage = conf.StrPathImg + "\\" + item.Label + ".png";
-                item.IconImageBig = conf.StrPathImg + "\\" + item.Label + ".png";
-                item.ThumbnailImage = conf.StrPathImg + "\\" + item.Label + ".png";
+                strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".png";
               }
+              else if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg")) // if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+              {
+                strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg";
+              }
+              else if (MyFilms.conf.StrPicturePrefix.Contains("\\"))
+              {
+                if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg"))
+                  strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg";
+              }
+              item.IconImage = strThumbGroup;
+              item.IconImageBig = strThumbGroup;
+              item.ThumbnailImage = strThumbGroup;
             }
+            #endregion
+
             if (item.ThumbnailImage == "" || !File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
               {
               //string strlabel = item.Label;
