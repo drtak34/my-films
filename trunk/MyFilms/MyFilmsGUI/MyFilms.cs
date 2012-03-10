@@ -3835,7 +3835,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region load first image, so itemhandler can load it
       if (facadeFilms.Count > 0)
       {
-         if (conf.StrPathViews.Length > 0)
+        if (facadeFilms[0].ThumbnailImage.Length == 0 && conf.StrPathViews.Length > 0)
         {
           // Check, if default group cover is present
           if (MyFilms.conf.StrViewsDflt)
