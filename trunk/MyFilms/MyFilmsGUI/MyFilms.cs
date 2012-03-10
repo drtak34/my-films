@@ -3266,6 +3266,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // MyFilmsDetail.clearGUIProperty("user.mastertitle.groupcount");
             MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", currentItem.Label2, true);
 
+            //conf.FileImage = currentItem.ThumbnailImage;
+            //viewcover.Filename = conf.FileImage;
+            //personcover.Filename = conf.FileImage; // ToDo: has to be conditional
+            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
+            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
+
+            viewcover.Filename = currentItem.ThumbnailImage;
+            personcover.Filename = currentItem.ThumbnailImage;
+            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
+
+            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
+            MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
+
             #region fanart
             var wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
             if (conf.StrFanartDefaultViewsUseRandom)
@@ -3282,19 +3295,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("(Load_Lstdetail): Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             #endregion
 
-            //conf.FileImage = currentItem.ThumbnailImage;
-            //viewcover.Filename = conf.FileImage;
-            //personcover.Filename = conf.FileImage; // ToDo: has to be conditional
-            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
-            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
-
-            viewcover.Filename = currentItem.ThumbnailImage;
-            personcover.Filename = currentItem.ThumbnailImage;
-            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
-
-            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
-            MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
-
             GUIControl.ShowControl(GetID, 34);
             SetDummyControlsForFacade(conf.ViewContext);
 
@@ -3306,6 +3306,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Movie display ...
           {
             LogMyFilms.Debug("(Load_Lstdetail): Item is Movie itself!");
+
+            //conf.FileImage = currentItem.ThumbnailImage;
+            //filmcover.Filename = conf.FileImage;
+            //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
+            //if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
+            //conf.FileImage = currentItem.ThumbnailImage;
+            string currentfilmcover = (!string.IsNullOrEmpty(currentItem.MusicTag.ToString()))
+                                        ? currentItem.MusicTag.ToString()
+                                        : currentItem.ThumbnailImage;
+            filmcover.Filename = currentfilmcover;
+            MyFilmsDetail.setGUIProperty("picture", filmcover.Filename, true);
+            if (currentItem.TVTag.ToString() == "group" && conf.ViewContext == ViewContext.Movie)
+              groupcover.Filename = currentfilmcover;
+
             if (conf.StrFanartDefaultViewsUseRandom) currentFanartList.Clear();
 
             var wfanart = new string[2];
@@ -3360,15 +3374,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             backdrop.Filename = wfanart[0];
             MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
             LogMyFilms.Debug("(Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[X]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-
-            //conf.FileImage = currentItem.ThumbnailImage;
-            //filmcover.Filename = conf.FileImage;
-            //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
-            //if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
-            //conf.FileImage = currentItem.ThumbnailImage;
-            filmcover.Filename = (currentItem.MusicTag != null && !string.IsNullOrEmpty((string)currentItem.MusicTag)) ? currentItem.MusicTag.ToString() : currentItem.ThumbnailImage;
-            MyFilmsDetail.setGUIProperty("picture", filmcover.Filename, true);
-            if (currentItem.TVTag.ToString() == "group") groupcover.Filename = filmcover.Filename;
 
             SetDummyControlsForFacade(conf.ViewContext);
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
