@@ -93,6 +93,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="OnlineVideos, Version=1.1.0.1932, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\OnlineVideos.dll</HintPath>
+    </Reference>
     <Reference Include="SubCentral, Version=1.0.0.203, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\SubCentral.dll</HintPath>

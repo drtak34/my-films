@@ -4893,15 +4893,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       item.ThumbnailImage = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer.png";
       return true;
 
-
-      string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
-      if (strStartLetter.IsNumerical()) strStartLetter = "#";
-      string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
-      if (!File.Exists(IndexThumb)) IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer" + ".png";
-      item.ThumbnailImage = IndexThumb;
-      //item.IconImage = IndexThumb;
-      //item.IconImageBig = IndexThumb;
-      return true;
+      //string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
+      //if (strStartLetter.IsNumerical()) strStartLetter = "#";
+      //string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
+      //if (!File.Exists(IndexThumb)) IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer" + ".png";
+      //item.ThumbnailImage = IndexThumb;
+      ////item.IconImage = IndexThumb;
+      ////item.IconImageBig = IndexThumb;
+      //return true;
     }
 
     /// <summary>Performs 'getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty)' in background thread</summary>
@@ -12464,7 +12463,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (string path in SearchDir)
       {
         MyFilms.conf.MovieList.Add(System.IO.Directory.GetFiles(path));
-        if ((MyFilms.conf.SearchSubDirs == "no") || (!System.IO.Directory.Exists(path))) continue;
+        if ((MyFilms.conf.SearchSubDirs == false) || (!System.IO.Directory.Exists(path))) continue;
         foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
         {
           MyFilms.conf.MovieList.Add(System.IO.Directory.GetFiles(sFolderSub));
@@ -12533,7 +12532,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool filmSource = Helper.FieldIsSet(conf.StrStorage);
       bool filmSearch = !(string.IsNullOrEmpty(conf.ItemSearchFile) || string.IsNullOrEmpty(MyFilms.conf.SearchFile) || conf.SearchFile == "False" || conf.SearchFile == "no");
       bool trailerSource = Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer);
-      bool trailerSearch = !(string.IsNullOrEmpty(conf.ItemSearchFileTrailer) || string.IsNullOrEmpty(MyFilms.conf.SearchFileTrailer) || conf.SearchFileTrailer == "False" || conf.SearchFileTrailer == "no");
+      bool trailerSearch = !(string.IsNullOrEmpty(conf.ItemSearchFileTrailer) || !MyFilms.conf.SearchFileTrailer);
       LogMyFilms.Debug("bgIsOnlineCheck_DoWork: filmSource = '" + filmSource + "', filmSearch = '" + filmSearch + "', trailerSource = '" + trailerSource + "', trailerSearch = '" + trailerSearch + "'");
 
       // Build MovieList (files)
@@ -12561,7 +12560,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - GetDir: '" + path + "'");
               conf.MovieList.Add(System.IO.Directory.GetFiles(path));
-              if (MyFilms.conf.SearchSubDirs == "no") continue;
+              if (MyFilms.conf.SearchSubDirs == false) continue;
               foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
               {
                 MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - GetDir: '" + sFolderSub + "'");
@@ -12589,7 +12588,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (Directory.Exists(path))
           {
             MyFilms.conf.TrailerList.Add(System.IO.Directory.GetFiles(path));
-            if (MyFilms.conf.SearchSubDirsTrailer == "no") continue;
+            if (MyFilms.conf.SearchSubDirsTrailer == false) continue;
             foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
             {
               conf.TrailerList.Add(System.IO.Directory.GetFiles(sFolderSub));

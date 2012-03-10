@@ -106,9 +106,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               // this.chkEnhancedWatchedStatusHandling.Visible = false; // Disable Watched options for Userprofiles
               // this.Label_UserProfileName.Visible = false;
               // this.UserProfileName.Visible = false;
+              this.cbTrailerAutoregister.Visible = false;
               this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
-              this.SearchFileNameTrailer.Visible = false;
-              this.ItemSearchFileNameTrailer.Visible = false;
               this.ShowTrailerPlayDialog.Visible = false;
               this.ShowTrailerWhenStartingMovie.Visible = false;
               this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
@@ -887,6 +886,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", SearchOnlyExactMatches.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TrailerAutoregister", cbTrailerAutoregister.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatched", CheckWatched.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AlwaysDefaultView", AlwaysDefaultView.Checked);
@@ -1365,6 +1365,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SearchSubDirs.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", false);
             SearchOnlyExactMatches.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", false);
             SearchSubDirsTrailer.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirsTrailer", false);
+            cbTrailerAutoregister.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "TrailerAutoregister", false);
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
             comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
             check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Userdialog", false);
@@ -1743,6 +1744,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SearchSubDirs.Checked = false;
             SearchOnlyExactMatches.Checked = false;
             SearchSubDirsTrailer.Checked = false;
+            cbTrailerAutoregister.Checked = false;
             check_WOL_enable.Checked = false;
             comboWOLtimeout.ResetText();
             check_WOL_Userdialog.Checked = false;
