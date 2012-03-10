@@ -5581,7 +5581,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //else
         //  return strThumb;
 
-        if (File.Exists(strThumb)) // If there is missing thumbs in cache folder ...
+        if (File.Exists(strThumb)) // If there is thumbs in cache folder ...
         {
           thumbimages[0] = strThumb;
           thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
@@ -5678,13 +5678,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //}
 
         // if (!System.IO.File.Exists(strThumb) && conf.StrArtistDflt && conf.DefaultCoverArtist.Length > 0)
-        if (conf.StrArtistDflt && conf.DefaultCoverArtist.Length > 0)
+
+        // Check, if default person cover is present
+        if (conf.StrArtistDflt)
         {
+          string strPathArtist;
+          if (conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\") strPathArtist = conf.StrPathArtist;
+          else strPathArtist = conf.StrPathArtist + "\\";
+
           //ImageFast.CreateImage(strThumb, item.Label); // this is to create a pseudo cover with name of label added to it
           //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
           //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
-          thumbimages[0] = conf.DefaultCoverArtist;
-          thumbimages[1] = conf.DefaultCoverArtist;
+
+          //// if there is a Default.jpg in the view subfolder
+          //string strImageInViewsDefaultFolder = strPathArtist + WStrSort.ToLower() + ".jpg";
+          //if (System.IO.File.Exists(strImageInViewsDefaultFolder))
+          //{
+          //  thumbimages[0] = strImageInViewsDefaultFolder;
+          //  thumbimages[1] = strImageInViewsDefaultFolder;
+          //  return thumbimages;
+          //}
+
+          // if there is an image defined in Custom View
+          if (currentCustomView != null)
+          {
+            thumbimages[0] = currentCustomView.ImagePath;
+            thumbimages[1] = currentCustomView.ImagePath;
+            return thumbimages;
+          }
+
+          // Otherwise use Default image
+          if (conf.DefaultCoverArtist.Length > 0)
+          {
+            thumbimages[0] = conf.DefaultCoverArtist;
+            thumbimages[1] = conf.DefaultCoverArtist;
+            return thumbimages;
+          }
+          thumbimages[0] = "";
+          thumbimages[1] = "";
           return thumbimages;
         }
         else
@@ -5693,7 +5724,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           thumbimages[1] = "";
           return thumbimages;
         }
-
       }
         #endregion
       else if (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort))
