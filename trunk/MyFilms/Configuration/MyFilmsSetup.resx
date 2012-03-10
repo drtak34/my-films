@@ -648,6 +648,13 @@ For example, you can define a view for children with ‘Category’ – ‘Anima
   <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1167, 18</value>
   </metadata>
+  <data name="AntViewsImage.ToolTip" xml:space="preserve">
+    <value>Preview of Cover Image loaded for this View.
+Klick to open dialog to choose a custom one. 
+
+If no image is selected, MyFilms will try to use default images, were possible - so even
+if you have not defined an image here, you might get a default image displayed in GUI.</value>
+  </data>
   <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 53</value>
   </metadata>

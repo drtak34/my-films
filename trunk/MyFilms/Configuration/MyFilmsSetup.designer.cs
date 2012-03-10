@@ -3141,9 +3141,7 @@
           this.AntViewsImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
           this.AntViewsImage.TabIndex = 88;
           this.AntViewsImage.TabStop = false;
-          this.ToolTip1.SetToolTip(this.AntViewsImage, "Preview of Cover Image loaded for this View.\r\nKlick to open dialog to choose a cu" +
-                  "stom one. \r\n\r\nIf no image is selected, MyFilms will try to use dfault images, we" +
-                  "re possible.");
+          this.ToolTip1.SetToolTip(this.AntViewsImage, resources.GetString("AntViewsImage.ToolTip"));
           this.AntViewsImage.Click += new System.EventHandler(this.AntViewsImage_Click);
           // 
           // lblAntViewIndex

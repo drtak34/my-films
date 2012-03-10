@@ -8455,21 +8455,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 switch (conf.ViewContext)
                 {
                   case ViewContext.Movie:
+                    //newRow.Value = Prev_Label;
+                    newRow.Value = conf.Wselectedlabel;
+                    newRow.Filter = conf.StrSelect;
+                    if (IsPersonField(newRow.DBfield))
+                      newRow.ImagePath = (!string.IsNullOrEmpty(personcover.Filename)) ? personcover.Filename : "";
+                    else
+                      newRow.ImagePath = (!string.IsNullOrEmpty(viewcover.Filename)) ? viewcover.Filename : "";
+                    //newRow.ImagePath = (!string.IsNullOrEmpty(filmcover.Filename)) ? filmcover.Filename : "";
+                    break;
                   case ViewContext.MovieCollection:
                     //newRow.Value = Prev_Label;
                     newRow.Value = conf.Wselectedlabel;
                     newRow.Filter = conf.StrSelect;
-                    newRow.ImagePath = (groupcover.Filename.Length > 0) ? groupcover.Filename : filmcover.Filename;
+                    newRow.ImagePath = (!string.IsNullOrEmpty(groupcover.Filename)) ? groupcover.Filename : (!string.IsNullOrEmpty(filmcover.Filename)) ? filmcover.Filename : "";
                     break;
                   case ViewContext.Group:
                     newRow.Value = "";
                     newRow.Filter = conf.StrViewSelect;
-                    newRow.ImagePath = (viewcover.Filename.Length > 0) ? viewcover.Filename : filmcover.Filename;
+                    // newRow.ImagePath = (!string.IsNullOrEmpty(viewcover.Filename)) ? viewcover.Filename : filmcover.Filename;
                     break;
                   case ViewContext.Person:
                     newRow.Value = "";
                     newRow.Filter = conf.StrViewSelect;
-                    newRow.ImagePath = (personcover.Filename.Length > 0) ? personcover.Filename : filmcover.Filename;
+                    // newRow.ImagePath = (!string.IsNullOrEmpty(personcover.Filename)) ? personcover.Filename : filmcover.Filename;
                     break;
                 }
                 break;
