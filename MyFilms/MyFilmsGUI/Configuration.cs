@@ -96,7 +96,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", string.Empty);
                 StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", string.Empty);
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
-                SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
+                SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", false);
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
                 ItemSearchGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchGrabberName", string.Empty);
                 ItemSearchGrabberScriptsFilter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchGrabberScriptsFilter", string.Empty);
@@ -106,9 +106,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GrabberOverrideGetRoles = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverrideGetRoles", string.Empty);
                 PictureHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PictureHandling", string.Empty);
                 ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
-                SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
-                SearchOnlyExactMatches = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchOnlyExactMatches", "No");
-                SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
+                SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", false);
+                SearchOnlyExactMatches = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchOnlyExactMatches", false);
+                SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", false);
+                AutoRegisterTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TrailerAutoregister", false);
+
                 CheckWatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatched", false);
                 CheckWatchedPlayerStopped = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatchedPlayerStopped", false);
                 StrIdentItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentItem", string.Empty);
@@ -123,7 +125,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", string.Empty);
                 if (loadParams != null && !string.IsNullOrEmpty(loadParams.ViewValue)) StrViewDfltText = loadParams.ViewValue;
 
-                //for (int i = 1; i < 6; i++)
+                //for (int i = 1; i < 6; i++) // This is old View items
                 //{
                 //  StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
                 //  StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
@@ -1125,11 +1127,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return searchFile; }
             set { searchFile = value; }
         }
-        private string searchFileTrailer = "False";
-        public string SearchFileTrailer
+        private bool searchFileTrailer = false;
+        public bool SearchFileTrailer
         {
             get { return searchFileTrailer; }
             set { searchFileTrailer = value; }
+        }
+        private bool autoRegisterTrailer = false;
+        public bool AutoRegisterTrailer
+        {
+          get { return autoRegisterTrailer; }
+          set { autoRegisterTrailer = value; }
         }
         private string itemSearchFile = string.Empty;
         public string ItemSearchFile
@@ -1186,20 +1194,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return itemSearchFileTrailer; }
             set { itemSearchFileTrailer = value; }
         }
-        private string searchSubDirs = "False";
-        public string SearchSubDirs
+        private bool searchSubDirs = false;
+        public bool SearchSubDirs
         {
             get { return searchSubDirs; }
             set { searchSubDirs = value; }
         }
-        private string searchOnlyExactMatches = "False";
-        public string SearchOnlyExactMatches
+        private bool searchOnlyExactMatches = false;
+        public bool SearchOnlyExactMatches
         {
             get { return searchOnlyExactMatches; }
             set { searchOnlyExactMatches = value; }
         }
-        private string searchSubDirsTrailer = "False";
-        public string SearchSubDirsTrailer
+        private bool searchSubDirsTrailer = false;
+        public bool SearchSubDirsTrailer
         {
             get { return searchSubDirsTrailer; }
             set { searchSubDirsTrailer = value; }

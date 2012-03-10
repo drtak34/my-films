@@ -203,6 +203,7 @@
           this.label29 = new System.Windows.Forms.Label();
           this.MesFilmsViews = new System.Windows.Forms.TextBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
+          this.btnResetThumbsFilms = new System.Windows.Forms.Button();
           this.buttonDefaultCoverReset = new System.Windows.Forms.Button();
           this.pictureBoxDefaultCover = new System.Windows.Forms.PictureBox();
           this.lblPicturePrefix = new System.Windows.Forms.Label();
@@ -351,15 +352,14 @@
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.Tab_Trailer = new System.Windows.Forms.TabPage();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
+          this.cbTrailerAutoregister = new System.Windows.Forms.CheckBox();
           this.labelTrailers = new System.Windows.Forms.Label();
           this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
           this.ShowTrailerWhenStartingMovie = new System.Windows.Forms.CheckBox();
           this.btnTrailer = new System.Windows.Forms.Button();
           this.ShowTrailerPlayDialog = new System.Windows.Forms.CheckBox();
           this.PathStorageTrailer = new System.Windows.Forms.TextBox();
-          this.SearchFileNameTrailer = new System.Windows.Forms.CheckBox();
           this.label34 = new System.Windows.Forms.Label();
-          this.ItemSearchFileNameTrailer = new System.Windows.Forms.ComboBox();
           this.AntStorageTrailer = new System.Windows.Forms.ComboBox();
           this.label35 = new System.Windows.Forms.Label();
           this.Tab_General = new System.Windows.Forms.TabPage();
@@ -568,7 +568,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.btnResetThumbsFilms = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -1818,6 +1817,16 @@
           this.groupBox1.TabStop = false;
           this.groupBox1.Text = "Films ...";
           this.ToolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
+          // 
+          // btnResetThumbsFilms
+          // 
+          this.btnResetThumbsFilms.Location = new System.Drawing.Point(473, 39);
+          this.btnResetThumbsFilms.Name = "btnResetThumbsFilms";
+          this.btnResetThumbsFilms.Size = new System.Drawing.Size(77, 20);
+          this.btnResetThumbsFilms.TabIndex = 102;
+          this.btnResetThumbsFilms.Text = "Reset Cache";
+          this.btnResetThumbsFilms.UseVisualStyleBackColor = true;
+          this.btnResetThumbsFilms.Click += new System.EventHandler(this.btnResetThumbsFilms_Click);
           // 
           // buttonDefaultCoverReset
           // 
@@ -3498,15 +3507,14 @@
           // 
           // groupBox24
           // 
+          this.groupBox24.Controls.Add(this.cbTrailerAutoregister);
           this.groupBox24.Controls.Add(this.labelTrailers);
           this.groupBox24.Controls.Add(this.SearchSubDirsTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerWhenStartingMovie);
           this.groupBox24.Controls.Add(this.btnTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerPlayDialog);
           this.groupBox24.Controls.Add(this.PathStorageTrailer);
-          this.groupBox24.Controls.Add(this.SearchFileNameTrailer);
           this.groupBox24.Controls.Add(this.label34);
-          this.groupBox24.Controls.Add(this.ItemSearchFileNameTrailer);
           this.groupBox24.Controls.Add(this.AntStorageTrailer);
           this.groupBox24.Controls.Add(this.label35);
           this.groupBox24.Location = new System.Drawing.Point(23, 37);
@@ -3516,6 +3524,17 @@
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
+          // 
+          // cbTrailerAutoregister
+          // 
+          this.cbTrailerAutoregister.AutoSize = true;
+          this.cbTrailerAutoregister.Location = new System.Drawing.Point(27, 155);
+          this.cbTrailerAutoregister.Name = "cbTrailerAutoregister";
+          this.cbTrailerAutoregister.Size = new System.Drawing.Size(114, 17);
+          this.cbTrailerAutoregister.TabIndex = 75;
+          this.cbTrailerAutoregister.Text = "Autoregister Trailer";
+          this.ToolTip1.SetToolTip(this.cbTrailerAutoregister, resources.GetString("cbTrailerAutoregister.ToolTip"));
+          this.cbTrailerAutoregister.UseVisualStyleBackColor = true;
           // 
           // labelTrailers
           // 
@@ -3530,7 +3549,7 @@
           // SearchSubDirsTrailer
           // 
           this.SearchSubDirsTrailer.AutoSize = true;
-          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 121);
+          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 132);
           this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
           this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
           this.SearchSubDirsTrailer.TabIndex = 74;
@@ -3581,17 +3600,6 @@
           this.PathStorageTrailer.TabIndex = 68;
           this.ToolTip1.SetToolTip(this.PathStorageTrailer, resources.GetString("PathStorageTrailer.ToolTip"));
           // 
-          // SearchFileNameTrailer
-          // 
-          this.SearchFileNameTrailer.AutoSize = true;
-          this.SearchFileNameTrailer.Location = new System.Drawing.Point(27, 169);
-          this.SearchFileNameTrailer.Name = "SearchFileNameTrailer";
-          this.SearchFileNameTrailer.Size = new System.Drawing.Size(144, 17);
-          this.SearchFileNameTrailer.TabIndex = 71;
-          this.SearchFileNameTrailer.Text = "Search by Movie\'s Name";
-          this.ToolTip1.SetToolTip(this.SearchFileNameTrailer, resources.GetString("SearchFileNameTrailer.ToolTip"));
-          this.SearchFileNameTrailer.UseVisualStyleBackColor = true;
-          // 
           // label34
           // 
           this.label34.AutoSize = true;
@@ -3600,20 +3608,6 @@
           this.label34.Size = new System.Drawing.Size(142, 13);
           this.label34.TabIndex = 69;
           this.label34.Text = "Extended Trailer Searchpath";
-          // 
-          // ItemSearchFileNameTrailer
-          // 
-          this.ItemSearchFileNameTrailer.FormattingEnabled = true;
-          this.ItemSearchFileNameTrailer.Items.AddRange(new object[] {
-            "OriginalTitle",
-            "TranslatedTitle",
-            "FormattedTitle"});
-          this.ItemSearchFileNameTrailer.Location = new System.Drawing.Point(190, 167);
-          this.ItemSearchFileNameTrailer.Name = "ItemSearchFileNameTrailer";
-          this.ItemSearchFileNameTrailer.Size = new System.Drawing.Size(185, 21);
-          this.ItemSearchFileNameTrailer.TabIndex = 70;
-          this.ToolTip1.SetToolTip(this.ItemSearchFileNameTrailer, "Choose the title that should be used for matching mediafiles to the movies in you" +
-                  "r DB.\r\n");
           // 
           // AntStorageTrailer
           // 
@@ -5863,16 +5857,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // btnResetThumbsFilms
-          // 
-          this.btnResetThumbsFilms.Location = new System.Drawing.Point(473, 39);
-          this.btnResetThumbsFilms.Name = "btnResetThumbsFilms";
-          this.btnResetThumbsFilms.Size = new System.Drawing.Size(77, 20);
-          this.btnResetThumbsFilms.TabIndex = 102;
-          this.btnResetThumbsFilms.Text = "Reset Cache";
-          this.btnResetThumbsFilms.UseVisualStyleBackColor = true;
-          this.btnResetThumbsFilms.Click += new System.EventHandler(this.btnResetThumbsFilms_Click);
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6194,9 +6178,7 @@
         private Button btnTrailer;
         private CheckBox ShowTrailerPlayDialog;
         private TextBox PathStorageTrailer;
-        private CheckBox SearchFileNameTrailer;
         private Label label34;
-        private ComboBox ItemSearchFileNameTrailer;
         private ComboBox AntStorageTrailer;
         private Label label35;
         private TabPage Tab_General;
@@ -6480,5 +6462,6 @@
         private GroupBox groupBoxAMCUpdaterConfigFile;
         private Button btnServerSync;
         private Button btnResetThumbsFilms;
+        private CheckBox cbTrailerAutoregister;
     }
 }
