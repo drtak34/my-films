@@ -3548,6 +3548,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg == null) return;
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View (films) ...
+      #region old hardcoded entries - disabled
       //dlg.Add(GUILocalizeStrings.Get(342));//videos
       //choiceView.Add("All");
       //dlg.Add(GUILocalizeStrings.Get(345));//year
@@ -3568,28 +3569,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //    dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
       //    SelectedView.Add("storage");
       //}
+      #endregion
 
-      // add new (!) userdefined views ...
-      foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
+      if (MyFilms.conf.CustomViews.View.Rows.Count > 0)
       {
-        if (Helper.FieldIsSet(customView.DBfield) && customView.ViewEnabled)
+        foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View) // add new (!) userdefined views ...
         {
-          choiceView.Add(customView.Label); //choiceView.Add(string.Format("View{0}", i));
-          if (string.IsNullOrEmpty(customView.Label)) 
-            dlg.Add(customView.DBfield); // specific user View1
-          else 
-            dlg.Add(customView.Label); // specific Text for View1
+          if (Helper.FieldIsSet(customView.DBfield) && customView.ViewEnabled)
+          {
+            choiceView.Add(customView.Label); //choiceView.Add(string.Format("View{0}", i));
+            if (string.IsNullOrEmpty(customView.Label))
+              dlg.Add(customView.DBfield); // specific user View1
+            else
+              dlg.Add(customView.Label); // specific Text for View1
+          }
         }
+
+        dlg.Add(GUILocalizeStrings.Get(10798765)); // *** show all ***
+        choiceView.Add("showall");
+
+        dlg.DoModal(GetID);
+        if (dlg.SelectedLabel == -1) return;
       }
 
-      dlg.Add(GUILocalizeStrings.Get(10798765)); // *** show all ***
-      choiceView.Add("showall");
-
-      dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1) return;
-
-      // show all sort options, if selected ...
-      if (choiceView[dlg.SelectedLabel] == "showall")
+      // show all sort options, if selected or no custom views available ...
+      if (MyFilms.conf.CustomViews.View.Rows.Count == 0 || choiceView[dlg.SelectedLabel] == "showall")
       {
         dlg.Reset();
         dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View (films) ...
