@@ -5396,11 +5396,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (string.IsNullOrEmpty(facadeFilms[i].ThumbnailImage))
               {
-                if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
-                {
-                  LoadIndexSkinThumbs(facadeFilms[i]);
-                }
-                else
+                //if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
+                //{
+                //  LoadIndexSkinThumbs(facadeFilms[i]);
+                //}
+                //else
                 {
                   string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView);
                   //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
