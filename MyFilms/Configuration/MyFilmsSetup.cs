@@ -4846,7 +4846,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             MessageBox.Show("Now choose the folder containing your movies.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            string samplemovies =  Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\SampleMovies";
+            string samplemovies = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\SampleMovies";
             if (System.IO.Directory.Exists(samplemovies))
               folderBrowserDialog1.SelectedPath = samplemovies;
 
