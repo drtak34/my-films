@@ -1382,12 +1382,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strTIndex; }
             set { strTIndex = value; }
         }
-        private string fileImage = string.Empty;
-        public string FileImage
-        {
-          get { return fileImage; }
-          set { fileImage = value; }
-        }
+        //private string fileImage = string.Empty;
+        //public string FileImage
+        //{
+        //  get { return fileImage; }
+        //  set { fileImage = value; }
+        //}
         private string strPluginName = string.Empty;
         public string StrPluginName
         {

@@ -6044,10 +6044,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         public static void Init_Detailed_DB(bool log)
         {
+          LogMyFilms.Debug("Init_Detailed_DB() - log = '" + log + "'"); 
             AntMovieCatalog ds = new AntMovieCatalog();
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-                //clearGUIProperty("db." + dc.ColumnName.ToLower() + ".label"); // Don't Clear Labels - they're only set once when plugin start !
+              //clearGUIProperty("db." + dc.ColumnName.ToLower() + ".label"); // Don't Clear Labels - they're only set once when plugin start !
               clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value", log);
             }
             
@@ -6100,7 +6101,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.watched.global", log);
             clearGUIProperty("user.source.isonline", log);
             clearGUIProperty("user.sourcetrailer.isonline", log);
-
         }
 
         //-------------------------------------------------------------------------------------------
@@ -6109,7 +6109,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void Load_Detailed_DB(int ItemId, bool wrep)
         {
             LogMyFilms.Debug("Load_Detailed_DB() - ItemId: '" + ItemId + "', Details (wrep): '" + wrep + "'");
-			Stopwatch stopwatch = new Stopwatch();
+			      Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset(); stopwatch.Start();
             string wstrformat = "";
             AntMovieCatalog ds = new AntMovieCatalog();
