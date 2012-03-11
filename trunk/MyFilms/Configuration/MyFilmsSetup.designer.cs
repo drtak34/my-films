@@ -1594,11 +1594,11 @@
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
           this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(452, 101);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
-          this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
+          this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(105, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
-          this.lblResultingGroupViewsPathFanart.Text = "<Group Views Fanart Path>";
+          this.lblResultingGroupViewsPathFanart.Text = "<Views Fanart Path>";
           this.ToolTip1.SetToolTip(this.lblResultingGroupViewsPathFanart, "To use Fanart for \"Views\" put fanart in the subfolder for year, category, country" +
-                  ", \r\ne.g. <fanartfolder>\\\\_group\\\\year\\2010\";");
+                  ", \r\ne.g. <fanartfolder>\\_view\\year\\2010");
           // 
           // label40
           // 

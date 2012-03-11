@@ -3366,7 +3366,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string downLoadPath;
             if (interactive)
-              downLoadPath = Path.GetTempPath(); //downLoadPath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFpath);
+              downLoadPath = Path.GetTempPath(); //downLoadPath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath);
             else
             {
               if (grabtype == GrabType.Person)
@@ -5454,11 +5454,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if ((group == "country" || group == "year" || group == "category") && tmpconf.StrFanartDefaultViews) // Default views and fanart for group view enabled?
                     {
-                      if (!System.IO.Directory.Exists(tmpconf.StrPathFanart + "\\_Group"))
-                        System.IO.Directory.CreateDirectory(tmpconf.StrPathFanart + "\\_Group");
-                      if (!System.IO.Directory.Exists(tmpconf.StrPathFanart + "\\_Group\\" + group))
-                        System.IO.Directory.CreateDirectory(tmpconf.StrPathFanart + "\\_Group\\" + group);
-                      safeName = tmpconf.StrPathFanart + "\\_Group\\" + group + "\\{" + title + "}";
+                      if (!System.IO.Directory.Exists(tmpconf.StrPathFanart + "\\_View")) System.IO.Directory.CreateDirectory(tmpconf.StrPathFanart + "\\_View");
+                      if (!System.IO.Directory.Exists(tmpconf.StrPathFanart + "\\_View\\" + group)) System.IO.Directory.CreateDirectory(tmpconf.StrPathFanart + "\\_View\\" + group);
+                      safeName = tmpconf.StrPathFanart + "\\_View\\" + group + "\\{" + title + "}";
                     }
                     else
                     if (tmpconf.StrFanartDfltImageAll && (wfanart[0] == "" || wfanart[0] == " "))

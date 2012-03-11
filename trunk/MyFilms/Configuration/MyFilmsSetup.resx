@@ -325,7 +325,7 @@ Select the option 'Use the default movie cover for missing thumbs' if you wish t
 when no thumb for views is available.
 
 You can also use fanart for those views, to do so, put fanart in the subfolder 
-for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
+for year, category, country, e.g. &lt;fanartfolder&gt;\\_view\\year\2010";
 The setting for this path is done via the Fanart path setting automatically; 
 See "Fanart for default group views - path" below.</value>
   </data>

@@ -319,10 +319,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 coverArtImage = MyFilms.conf.DefaultCover;
 
-                //if (System.IO.File.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Groups\NoPhoto.jpg"))
-                //    item.ThumbnailImage = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Groups\NoPhoto.jpg"; 
+                //if (System.IO.File.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\NoPhoto.jpg"))
+                //    item.ThumbnailImage = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\NoPhoto.jpg"; 
                 if (System.IO.File.Exists(MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
-                        coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
+                   coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
                 LogMyFilms.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");
                 if (File.Exists(coverArtImage))
                 {

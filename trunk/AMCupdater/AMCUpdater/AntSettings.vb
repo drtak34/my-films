@@ -925,8 +925,8 @@ Public Class AntSettings
     Public Sub CreateDefaultFiles()
         'Dim dirname = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString & "\MyFilms\AMCupdaterData"
         Dim dirname = Config.GetDirectoryInfo(Config.Dir.Config).ToString
-        'if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
-        '     System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+        'if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Views"))
+        '     System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Views");
         ' LogDirectoryParam = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
         If Not (System.IO.Directory.Exists(dirname)) Then
             System.IO.Directory.CreateDirectory(dirname)
