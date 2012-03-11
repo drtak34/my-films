@@ -93,7 +93,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // create Group Cover image swapper
       viewcover = new AsyncImageResource();
       viewcover.Property = "#myfilms.viewcoverimage";
-      viewcover.Delay = 125;
+      viewcover.Delay = 75;
 
       // create Person Cover image swapper
       personcover = new AsyncImageResource();
@@ -103,7 +103,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // create Group Cover image swapper
       groupcover = new AsyncImageResource();
       groupcover.Property = "#myfilms.groupcoverimage";
-      groupcover.Delay = 125;
+      groupcover.Delay = 50;
 
     }
     #endregion
@@ -2831,7 +2831,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
             if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT views!)
             {
-              if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
+              if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg"))
+              {
+                strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg";
+              }
+              else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
               {
                 strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".jpg";
               }
@@ -3377,6 +3381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             SetDummyControlsForFacade(conf.ViewContext);
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
+            // Load_Rating(conf.W_rating); // old method - no more used
           }
           #endregion
           break;
@@ -3410,7 +3415,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       #endregion
-      // Load_Rating(conf.W_rating); // old method - no more used
     }
 
     //-------------------------------------------------------------------------------------------
@@ -3615,9 +3619,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (dlg.SelectedLabel == -1) return;
       }
       // conf.StrSelect = ""; // reset movie context filter for person views
-      personcover.Filename = "";
-      groupcover.Filename = "";
-      viewcover.Filename = "";
+      //viewcover.Filename = "";
+      //personcover.Filename = "";
+      //groupcover.Filename = "";
 
       Change_View_Action(choiceView[dlg.SelectedLabel]);
     }
