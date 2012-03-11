@@ -327,10 +327,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
     public static int Prev_ItemID = -1;
+    public static string Prev_Label = string.Empty;
 
     public static GUIListItem itemToPublish = null;
-
-    public static string Prev_Label = string.Empty;
 
     public static Configuration conf;
     public static Logos confLogos;
@@ -368,7 +367,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static bool InitialStart = false;                  //Added to implement InitialViewSetup
     public static bool InitialIsOnlineScan = false;           //Added to implement switch if facade should display media availability
-    public static bool InitialMediaScannerStartDone = false;  //Added to implement switch if facade should display media availability
 
     // current Random Fanart
     public static List<string> currentFanartList = new List<string>();
@@ -2271,6 +2269,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogStatusVars("GetPrevFilmList");
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
+      // lastPublished = 0; // set timer to 0 to make sure no delayed publish is done (instead immediately !)
+
       string SelItem = "";
 
       if (conf.StrTitleSelect == "")
@@ -2542,6 +2542,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string SelItem = gSelItem.ToString();
       int iSelItem = -2;
       bool tmpwatched = false;
+      string currentImage = "";
 
       var facadeDownloadItems = new List<GUIListItem>();
       if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
@@ -2594,6 +2595,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       suite:
         #region suite - process facade item ...
+        currentImage = ""; // reset facade image
         sFullTitle = sTitle = sr[conf.StrTitle1].ToString();
 
         DelimCnt2 = NewString.PosCount(conf.TitleDelim, sTitle, false);
@@ -2611,10 +2613,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             item.Label = sTitle; //reset to current single folder as > 1 entries
             item.IsFolder = true;
-            item.TVTag = "group";
-
-            item.ThumbnailImage = conf.FileImage;
-            item.IconImage = conf.FileImage;
+            item.ThumbnailImage = currentImage;
+            item.IconImage = currentImage;
           }
         }
         else
@@ -2624,7 +2624,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.ItemId = number;
           item.Label = (DelimCnt < DelimCnt2) ? sFullTitle.Substring(sFullTitle.LastIndexOf(conf.TitleDelim, System.StringComparison.Ordinal) + 1) : sFullTitle; // Set = full subfolders path initially - new: set only to last name
           item.DVDLabel = sTitle; // used by background thread
-          item.TVTag = "film";
+          item.IsFolder = false;
           #region Label2 ...
           if (!MyFilms.conf.OnlyTitleList)
           {
@@ -2720,26 +2720,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (sr["Picture"].ToString().Length > 0)
           {
             if ((sr["Picture"].ToString().IndexOf(":\\", System.StringComparison.Ordinal) == -1) && (sr["Picture"].ToString().Substring(0, 2) != "\\\\"))
-              conf.FileImage = conf.StrPathImg + "\\" + sr["Picture"];
+              currentImage = conf.StrPathImg + "\\" + sr["Picture"];
             else
-              conf.FileImage = sr["Picture"].ToString();
+              currentImage = sr["Picture"].ToString();
           }
           else
           {
-            conf.FileImage = string.Empty;
+            currentImage = string.Empty;
           }
-          item.ThumbnailImage = conf.FileImage;
-          item.IconImageBig = conf.FileImage;
-          item.IconImage = conf.FileImage;
+          item.ThumbnailImage = currentImage;
+          item.IconImageBig = currentImage;
+          item.IconImage = currentImage;
           #endregion
 
           facadeDownloadItems.Add(item);
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-          this.facadeFilms.Add(item);
+          facadeFilms.Add(item);
 
           if (iSelItem == -2) //set selected item = passed in string?
           {
-            if (sTitle == SelItem) wfacadewiew = this.facadeFilms.Count - 1; //test if this item is one to select
+            if (sTitle == SelItem) wfacadewiew = facadeFilms.Count - 1; //test if this item is one to select
           }
         }
 
@@ -2747,11 +2747,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (!(conf.StrTIndex.Length > 0))
           {
-            if (number == iSelItem) wfacadewiew = this.facadeFilms.Count - 1; //test if this item is one to select
+            if (number == iSelItem) wfacadewiew = facadeFilms.Count - 1; //test if this item is one to select
           }
           else
           {
-            if ((number == iSelItem) && (sFullTitle == conf.StrTIndex)) wfacadewiew = this.facadeFilms.Count - 1; //test if this item is one to select
+            if (number == iSelItem && sFullTitle == conf.StrTIndex) wfacadewiew = facadeFilms.Count - 1; //test if this item is one to select
           }
         }
         sPrevTitle = sTitle;
@@ -2825,33 +2825,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string strThumb; // cached cover
             string strThumbSmall; // cached cover for Icons - small resolution
-            string strThumbGroup = ""; // thumbnail for Groups/collections
 
             #region group-collection image handling
             //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
-            if (item.TVTag.ToString() == "group") // special handling for groups (movie collections - NOT views!)
+            if (item.IsFolder) // special handling for groups (movie collections - NOT views!)
             {
-              if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg"))
-              {
-                strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg";
-              }
-              else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
-              {
-                strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".jpg";
-              }
-              else if (System.IO.File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
-              {
-                strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".png";
-              }
-              else if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg")) // if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-              {
-                strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg";
-              }
-              else if (MyFilms.conf.StrPicturePrefix.Contains("\\"))
-              {
-                if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg"))
-                  strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg";
-              }
+              string strThumbGroup = GetGroupImage(item); // thumbnail for Groups/collections
               item.IconImage = strThumbGroup;
               item.IconImageBig = strThumbGroup;
               item.ThumbnailImage = strThumbGroup;
@@ -2934,6 +2913,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    private string GetGroupImage(GUIListItem item)
+    {
+      string strThumbGroup = ""; // thumbnail for Groups/collections
+      if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg"))
+      {
+        strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg";
+      }
+      else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
+      {
+        strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".jpg";
+      }
+      else if (System.IO.File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
+      {
+        strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".png";
+      }
+      else if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg")) // if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+      {
+        strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg";
+      }
+      else if (MyFilms.conf.StrPicturePrefix.Contains("\\"))
+      {
+        if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg"))
+          strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg";
+      }
+      return strThumbGroup;
+    }
+    
+    
     bool GetMoviesInGroup(ref ArrayList fanartItems)
     {
       LogMyFilms.Debug("GetRandomFanartForGroups started ...");
@@ -3196,18 +3203,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //private void Load_Lstdetail(GUIListItem currentItem, int ItemId, string wlabel)//wrep = false display only image, all properties cleared
     private void Load_Lstdetail(GUIListItem currentItem, bool forceLoading)
     {
-      string TVtag = (currentItem.TVTag != null) ? currentItem.TVTag.ToString() : "<null>";
-      LogMyFilms.Debug("Load_Lstdetail() - Start: ItemId = '" + currentItem.ItemId + "', label = '" + currentItem.Label + "', TVtag = '" + TVtag + "', ViewContext = '" + conf.ViewContext + "', forceLoading = '" + forceLoading + "'");
-      if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading && (currentItem.TVTag == null || currentItem.TVTag.ToString() != "group"))
+      //int waitcounter = 0;
+      //while (itemToPublish == null)
+      //{
+      //  LogMyFilms.Debug("Load_Lstdetail() - Waitcounter =  '" + waitcounter + "'");
+      //  Thread.Sleep(5);
+      //  waitcounter++;
+      //  if (waitcounter > 100) return;
+      //}
+
+      #region sanity checks ...
+      if (currentItem == null)
       {
-        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        LogMyFilms.Warn("Load_Lstdetail() - Skipping: currentItem is null ! -> return");
         return;
       }
-      #region sanity checks ...
       if (currentItem.ItemId == -1)
       {
         // reinit some fields //filmcover.Filename = ""; //backdrop.Filename = ""; //MyFilmsDetail.Init_Detailed_DB(false);
-        LogMyFilms.Debug("Load_Lstdetail() - Skipping: ItemId == -1 -> return");
+        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == -1 -> return");
         return;
       }
       if (r == null || currentItem.ItemId > r.Length - 1)
@@ -3216,25 +3230,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
+      LogMyFilms.Debug("Load_Lstdetail() - Start: ItemId = '" + currentItem.ItemId + "', label = '" + currentItem.Label + "', ViewContext = '" + conf.ViewContext + "', forceLoading = '" + forceLoading + "'");
+
+      if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading)
+      {
+        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        return;
+      }
       Prev_ItemID = currentItem.ItemId;
       Prev_Label = currentItem.Label;
 
-      switch (conf.ViewContext) // ToDo: Add and change code on conditions
+      switch (conf.ViewContext)
       {
         case ViewContext.Menu:
         case ViewContext.MenuAll:
           #region menu types
           //conf.MenuSelectedID = currentItem.ItemId; // remember last menu position ...  
           MyFilmsDetail.Init_Detailed_DB(false);
+          // GUIControl.ShowControl(GetID, 34);
           Clear_Logos();
-          GUIControl.ShowControl(GetID, 34);
           menucover.Filename = currentItem.ThumbnailImage;
           filmcover.Filename = "";
           viewcover.Filename = "";
           personcover.Filename = "";
           groupcover.Filename = "";
 
-          MFview.ViewRow selectedView = this.GetCustomViewFromViewLabel(currentItem.Label);
+          MFview.ViewRow selectedView = GetCustomViewFromViewLabel(currentItem.Label);
           if (selectedView != null) MyFilmsDetail.setGUIProperty("index", selectedView.Index.ToString());
           else MyFilmsDetail.clearGUIProperty("index");
 
@@ -3271,48 +3292,89 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // MyFilmsDetail.clearGUIProperty("user.mastertitle.groupcount");
             MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", currentItem.Label2, true);
 
-            //conf.FileImage = currentItem.ThumbnailImage;
-            //viewcover.Filename = conf.FileImage;
-            //personcover.Filename = conf.FileImage;
-            //filmcover.Filename = conf.FileImage;
-            //groupcover.Filename = conf.FileImage;
-
-            viewcover.Filename = currentItem.ThumbnailImage;
-            personcover.Filename = currentItem.ThumbnailImage;
-            //filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
-
-            //groupcover.Filename = conf.FileImage; // to be set to group collection covers
+            switch (conf.ViewContext)
+            {
+              case ViewContext.Person:
+                personcover.Filename = currentItem.ThumbnailImage;
+                break;
+              case ViewContext.Group:
+                viewcover.Filename = currentItem.ThumbnailImage;
+                break;
+              default:
+                //conf.FileImage = currentItem.ThumbnailImage;
+                //viewcover.Filename = conf.FileImage;
+                //personcover.Filename = conf.FileImage;
+                //filmcover.Filename = conf.FileImage;
+                //groupcover.Filename = conf.FileImage;
+                break;
+            }
             MyFilmsDetail.setGUIProperty("picture", currentItem.ThumbnailImage, true);
 
             #region fanart
-            var wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
-            if (conf.StrFanartDefaultViewsUseRandom)
+            new System.Threading.Thread(delegate()
             {
-              var groupFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
-              if (groupFanart != " ") wfanart[0] = groupFanart;
-            }
-            if (wfanart[0] == " ") Fanartstatus(false);
-            else Fanartstatus(true);
-            backdrop.Filename = wfanart[0];
-            MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
-            LogMyFilms.Debug("Load_Lstdetail() - Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+              {
+                LogMyFilms.Debug("Load_Lstdetail() - Sleep 500 ms to let animations go ...");
+                Thread.Sleep(500); // wait, so animations don't stutter
+                try
+                {
+                  var wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
+                  if (conf.StrFanartDefaultViewsUseRandom)
+                  {
+                    var groupFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
+                    if (groupFanart != " ") wfanart[0] = groupFanart;
+                  }
+                  if (wfanart[0] == " ") Fanartstatus(false);
+                  else Fanartstatus(true);
+                  backdrop.Filename = wfanart[0];
+                  MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
+                  LogMyFilms.Debug("Load_Lstdetail() - Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Warn("Load_Lstdetail() - Fanart-exception: '" + ex.Message + "'");
+                }
+              }
+              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+              {
+                {
+                  // after thread is finished ...
+                }
+                return 0;
+              }, 0, 0, null);
+            }) { Name = "MyFilmsSetFanartOnPageLoadWorker", IsBackground = true }.Start();
             #endregion
-
-            GUIControl.ShowControl(GetID, 34);
-            SetDummyControlsForFacade(conf.ViewContext);
 
             // Load_Rating(0); // old method - nor more used
             Clear_Logos(); // reset logos
+
+            switch (conf.ViewContext)
+            {
+              case ViewContext.Person:
+                MyFilmsDetail.clearGUIProperty("user.source.isonline");
+                MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+
+                MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
+                MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, true);
+                break;
+              case ViewContext.Group:
+                MyFilmsDetail.clearGUIProperty("user.source.isonline");
+                MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+                MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
+                break;
+            }
+            GUIControl.ShowControl(GetID, 34);
+            SetDummyControlsForFacade(conf.ViewContext);
           }
           #endregion
           else
           #region Movie display ...
           {
-            LogMyFilms.Debug("Load_Lstdetail() - Item is Movie itself!");
+            LogMyFilms.Debug("Load_Lstdetail() - Item is Film List Item - contains hierarchy = '" + currentItem.IsFolder + "'");
 
             #region set groupcount
             string groupcount = "";
-            if (currentItem.TVTag.ToString() == "group")
+            if (currentItem.IsFolder) // contains collection for a hierarchy
             {
               Regex p = new Regex(@"\([0-9]*\)"); // count in brackets
               MatchCollection matchList = p.Matches(currentItem.Label2);
@@ -3326,70 +3388,85 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", groupcount, true);
             #endregion
 
-            //conf.FileImage = currentItem.ThumbnailImage;
-            //filmcover.Filename = conf.FileImage;
-            //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
-            //if (currentItem.TVTag.ToString() == "group") groupcover.Filename = conf.FileImage;
-            //conf.FileImage = currentItem.ThumbnailImage;
-            conf.FileImage = (!string.IsNullOrEmpty(currentItem.MusicTag.ToString()))
-                                        ? currentItem.MusicTag.ToString()
-                                        : currentItem.ThumbnailImage;
-            LogMyFilms.Debug("Load_Lstdetail() - currentfilmcover = '" + conf.FileImage + "'");
-            filmcover.Filename = conf.FileImage;
-            MyFilmsDetail.setGUIProperty("picture", conf.FileImage, true);
-            if (currentItem.TVTag.ToString() == "group" && conf.ViewContext == ViewContext.Movie) groupcover.Filename = conf.FileImage;
+            string currentFilmCover = "";
+            if (currentItem.MusicTag != null && !string.IsNullOrEmpty(currentItem.MusicTag.ToString())) 
+              currentFilmCover = currentItem.MusicTag.ToString();
+            else if (currentItem.ThumbnailImage != null && !string.IsNullOrEmpty(currentItem.ThumbnailImage))
+              currentFilmCover = currentItem.ThumbnailImage;
+
+            //currentFilmCover = (currentItem.MusicTag != null && !string.IsNullOrEmpty(currentItem.MusicTag.ToString()))
+            //                            ? currentItem.MusicTag.ToString()
+            //                            : ((!string.IsNullOrEmpty(currentItem.ThumbnailImage)) ? currentItem.ThumbnailImage : "");
+            if (currentItem.IsFolder && conf.ViewContext == ViewContext.Movie)
+            {
+              string currentGroupCover = GetGroupImage(currentItem); // HierarchyImage for selected item
+              if (currentGroupCover.Length > 0) currentFilmCover = currentGroupCover;
+            }
+            LogMyFilms.Debug("Load_Lstdetail() - currentFilmCover = '" + currentFilmCover + "'");
+            filmcover.Filename = currentFilmCover;
+            MyFilmsDetail.setGUIProperty("picture", currentFilmCover, true);
+            if (currentItem.IsFolder && conf.ViewContext == ViewContext.Movie)
+              groupcover.Filename = currentFilmCover;
 
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
             SetDummyControlsForFacade(conf.ViewContext);
             // Load_Rating(conf.W_rating); // old method - no more used
 
-            #region set fanart
+            if (!currentItem.IsFolder) MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true); // load details, if it is not a hierarchyentry (folder)
 
+            #region set fanart
             new System.Threading.Thread(delegate()
             {
               {
                 LogMyFilms.Debug("Load_Lstdetail() - Sleep 500 ms to let animations go ...");
                 Thread.Sleep(500); // wait, so animations don't stutter
+                try
+                {
+                  if (conf.StrFanartDefaultViewsUseRandom) currentFanartList.Clear();
+                  string fanartTitle = (currentItem.IsFolder) ? currentItem.Label : MyFilmsDetail.GetSearchTitles(MyFilms.r[currentItem.ItemId], "").FanartTitle;
+                  LogMyFilms.Debug("Load_Lstdetail() - FanartTitle from facadeview = '" + fanartTitle + "'");
+                  #region disabled code
+                  //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+                  //fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeFilms.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+                  // fanartTitle = currentItem.Label;
+                  //if (MyFilms.conf.StrTitle1 == "FormattedTitle") // added to get fanart displayed when mastertitle is set to formattedtitle
+                  //{
+                  //  fanartTitle = MyFilms.r[facadeFilms.SelectedListItem.ItemId]["OriginalTitle"].ToString();
+                  //  //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
+                  //  if (MyFilms.conf.StrTitle1 != "OriginalTitle")
+                  //  {
+
+                  //    if (MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"].ToString().Length > 0)
+                  //      fanartTitle = MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
+                  //  }
+                  //}
+                  #endregion
+                  string[] wfanart = MyFilmsDetail.Search_Fanart(fanartTitle, true, "file", false, currentFilmCover, string.Empty);
+                  if (conf.StrFanartDefaultViewsUseRandom)
+                  {
+                    string FilmFanart = GetNewRandomFanart(true, true);
+                    // resets and populates fanart list and selects a random one
+                    if (FilmFanart != " ") wfanart[0] = FilmFanart;
+                  }
+
+                  LogMyFilms.Debug("Load_Lstdetail() - Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                  if (wfanart[0] == " ")
+                    Fanartstatus(false);
+                  else
+                    Fanartstatus(true);
+                  backdrop.Filename = wfanart[0];
+                  MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
+                  LogMyFilms.Debug("Load_Lstdetail() - Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[X]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Warn("Load_Lstdetail() - Fanart-exception: '" + ex.Message + "'");
+                }
               }
               GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
                 {
                   {
                     // after thread is finished ...
-                    if (conf.StrFanartDefaultViewsUseRandom) currentFanartList.Clear();
-                    string fanartTitle = (currentItem.TVTag.ToString() == "group") ? currentItem.Label : MyFilmsDetail.GetSearchTitles(MyFilms.r[currentItem.ItemId], "").FanartTitle;
-                    LogMyFilms.Debug("Load_Lstdetail() - FanartTitle from facadeview = '" + fanartTitle + "'");
-                    #region disabled code
-                    //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
-                    //fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeFilms.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-                    // fanartTitle = currentItem.Label;
-                    //if (MyFilms.conf.StrTitle1 == "FormattedTitle") // added to get fanart displayed when mastertitle is set to formattedtitle
-                    //{
-                    //  fanartTitle = MyFilms.r[facadeFilms.SelectedListItem.ItemId]["OriginalTitle"].ToString();
-                    //  //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
-                    //  if (MyFilms.conf.StrTitle1 != "OriginalTitle")
-                    //  {
-
-                    //    if (MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"].ToString().Length > 0)
-                    //      fanartTitle = MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
-                    //  }
-                    //}
-                    #endregion
-                    string[] wfanart = MyFilmsDetail.Search_Fanart(fanartTitle, true, "file", false, conf.FileImage, string.Empty);
-                    if (conf.StrFanartDefaultViewsUseRandom)
-                    {
-                      string FilmFanart = GetNewRandomFanart(true, true);
-                      // resets and populates fanart list and selects a random one
-                      if (FilmFanart != " ") wfanart[0] = FilmFanart;
-                    }
-
-                    LogMyFilms.Debug("Load_Lstdetail() - Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                    if (wfanart[0] == " ")
-                      Fanartstatus(false);
-                    else
-                      Fanartstatus(true);
-                    backdrop.Filename = wfanart[0];
-                    MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
-                    LogMyFilms.Debug("Load_Lstdetail() - Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[X]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                   }
                   return 0;
                 }, 0, 0, null);
@@ -3400,35 +3477,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
           break;
       }
-
-      #region Load item type specific details ...
-      LogMyFilms.Debug("switch (currentItem.TVTag.ToString() with TVTag = '" + currentItem.TVTag + "', currentItem.ItemId = '" + currentItem.ItemId + "'");
-      if (currentItem.TVTag != null && !string.IsNullOrEmpty(currentItem.TVTag.ToString()))
-      {
-        switch (currentItem.TVTag.ToString()) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
-        {
-          case "person":
-            MyFilmsDetail.clearGUIProperty("user.source.isonline");
-            MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
-
-            MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
-            MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, true);
-            break;
-          case "group":
-            MyFilmsDetail.clearGUIProperty("user.source.isonline");
-            MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
-            MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
-            break;
-          case "film":
-            MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true);
-            break;
-          default:
-            // MyFilmsDetail.Init_Detailed_DB(false);
-            //GUIControl.ShowControl(GetID, 34);
-            break;
-        }
-      }
-      #endregion
+      // itemToPublish = null;
     }
 
     //-------------------------------------------------------------------------------------------
@@ -3553,9 +3602,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         lastPublished = tickCount;
         if (publishTimer == null)
-          publishTimer = new Timer(delegate { Load_Lstdetail(itemToPublish, false); }, null, 150, Timeout.Infinite);
+          publishTimer = new Timer(delegate { Load_Lstdetail(itemToPublish, false); }, null, 125, Timeout.Infinite);
         else
-          publishTimer.Change(150, Timeout.Infinite);
+          publishTimer.Change(125, Timeout.Infinite);
       }
     }
 
@@ -3722,6 +3771,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("GetSelectFromMenuView() - launched with showall = '" + showall + "'");
       conf.BoolMenuShowAll = showall; // remember state
       if (MyFilms.conf.CustomViews.View.Rows.Count == 0) showall = true; // show generic views, if there is no Custom Views defined in config - but keep it as "base menu"
+
       //// alternatively count the active views:
       //int viewcount = 0;
       //foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
@@ -3729,9 +3779,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  if (viewRow.ViewEnabled) viewcount++;
       //}
 
-       Change_LayOut(0); // always use list view
-      //if (conf.UseListViewForGoups) Change_LayOut(0);
-      //else Change_LayOut(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
+      Prev_ItemID = -1;
+      Prev_Label = string.Empty;
+
+      Change_LayOut(0); // always use list view // Change_LayOut(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
 
       BtnSrtBy.Label = GUILocalizeStrings.Get(103); // sort: name
       //BtnSrtBy.IsAscending = true;
@@ -3863,8 +3914,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           this.facadeFilms.Add(item);
         }
       }
-      if (item != null) item.FreeMemory();
-      item.SafeDispose();
+      //if (item != null) item.FreeMemory();
+      //item.SafeDispose();
 
       #region load first image, so itemhandler can load it - disabled
       //if (facadeFilms.Count > 0)
@@ -5287,7 +5338,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               item.Label = (label.Length == 0) ? EmptyFacadeValue : label; // show <empty> value if empty
               item.Label2 = (isindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
               item.Path = WStrSort.ToLower();
-              item.TVTag = (isperson) ? "person" : "group";
+              //item.TVTag = (isperson) ? "person" : "group";
               item.IsFolder = true;
               item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
               this.facadeFilms.Add(item);
@@ -5314,7 +5365,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //item.Label3 = WStrSort;
         //if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) MediaPortal.Util.Utils.SetDefaultIcons(item);
         item.Path = WStrSort.ToLower();
-        item.TVTag = (isperson) ? "person" : "group";
+        //item.TVTag = (isperson) ? "person" : "group";
         item.IsFolder = true;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         this.facadeFilms.Add(item);
@@ -5351,7 +5402,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (getThumbs)
         {
           #region load first image syncronously, as asyncloading might cause flicker or even let it disappear
-          if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews) LoadIndexSkinThumbs(this.facadeFilms[conf.StrIndex]);
+          if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews) 
+            LoadIndexSkinThumbs(facadeFilms[conf.StrIndex]);
           else
           {
             string[] strActiveFacadeImages = SetViewThumbs(WStrSort, this.facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView));
@@ -5444,11 +5496,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (string.IsNullOrEmpty(facadeFilms[i].ThumbnailImage))
               {
-                //if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
-                //{
-                //  LoadIndexSkinThumbs(facadeFilms[i]);
-                //}
-                //else
+                if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
+                {
+                  LoadIndexSkinThumbs(facadeFilms[i]);
+                }
+                else
                 {
                   string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView);
                   //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
