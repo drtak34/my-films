@@ -2797,7 +2797,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void GetImagesFilmList(List<GUIListItem> itemsWithThumbs)
     {
       StopLoadingFilmlistDetails = false;
-      string CoverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Movies";
+      string CoverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
 
       // split the downloads in X+ groups and do multithreaded downloading
       int groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // Guzzi: Set group to x to only allow x thread(s)
@@ -2859,7 +2859,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
               //string strlabel = item.Label;
               //MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
-                //strThumb = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Groups\" + strlabel;
+                //strThumb = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\" + strlabel;
               //if (System.IO.File.Exists(strThumb + ".png"))
               //{
               //  conf.FileImage = strThumb + ".png"; 
@@ -3861,7 +3861,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (MyFilms.conf.DefaultCoverViews.Length > 0)
                   strMenuImage = MyFilms.conf.DefaultCoverViews;
                 else
-                  strMenuImage = MyFilms.conf.DefaultCover; //MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
+                  strMenuImage = MyFilms.conf.DefaultCover; //MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + "DefaultArtist.jpg";
               }
             }
             if (System.IO.File.Exists(strMenuImage))
@@ -3923,7 +3923,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (MyFilms.conf.DefaultCoverViews.Length > 0)
                         strMenuImage = MyFilms.conf.DefaultCoverViews;
                       else
-                        strMenuImage = MyFilms.conf.DefaultCover; //MyFilmsSettings.GetPath(MyFilmsSettings.Path.OrgDefaultImages) + "DefaultArtist.jpg";
+                        strMenuImage = MyFilms.conf.DefaultCover; //MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + "DefaultArtist.jpg";
                     }
                   }
                   if (System.IO.File.Exists(strMenuImage))
@@ -5191,7 +5191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       #region directory handling
-      string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsPersons) : MyFilmsSettings.GetPath(MyFilmsSettings.Path.thumbsGroups) + WStrSort.ToLower() + @"\";
+      string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons\" : MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\" + WStrSort.ToLower() + @"\";
 
       bool getThumbs = ((MyFilms.conf.UseThumbsForPersons && isperson) || (MyFilms.conf.UseThumbsForViews && (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort)) || MyFilms.conf.StrViewsShowIndexedImgInIndViews));
       bool createFanartDir = IsCategoryYearCountryField(WStrSort);
@@ -11944,10 +11944,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void InitFolders()
     {
       // Check and create Group thumb folder ...
-      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Movies")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Movies");
-      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Groups")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Groups");
-      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Persons")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Persons");
-      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MFthumbs) + @"\MyFilms_Logos");
+      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies");
+      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views");
+      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons");
+      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Logos")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Logos");
     }
 
     private void InitializeBackgroundWorker()
