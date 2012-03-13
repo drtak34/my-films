@@ -4655,10 +4655,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)
           {
-            if (MyFilms_PluginMode != "normal") // added to only allow new catalogs in test mode
+            if (MyFilms_PluginMode != "normal" || MyFilms_PluginMode == "normal") // added to only allow new catalogs in test mode // edit: reenabled for normal mode
             {
-              if (
-                MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.",
+              if (MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.",
                   "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
                 useExistingCatalog = true;
               else 
