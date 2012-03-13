@@ -40,6 +40,7 @@ namespace MyFilmsPlugin.MyFilms
           logBackup,
           lang,
           MyFilmsPath,
+          MyFilmsThumbsPath,
           ThumbsCache,
           DefaultImages,
           ViewImages,
@@ -62,6 +63,7 @@ namespace MyFilmsPlugin.MyFilms
         static string langPath = string.Empty;
         static string ThumbsCachePath = string.Empty;
         static string MyFilmsPath = string.Empty;
+        static string MyFilmsThumbsPath = string.Empty;
         static string DefaultImages = string.Empty;
         static string ViewImages = string.Empty;
         static string GrabberScripts = string.Empty;
@@ -104,6 +106,7 @@ namespace MyFilmsPlugin.MyFilms
           langPath          = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
 
           MyFilmsPath       = Config.GetFolder(Config.Dir.Config) + @"\MyFilms";
+          MyFilmsThumbsPath = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms";
           DefaultImages     = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
           ViewImages        = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\ViewImages";
 
@@ -171,6 +174,8 @@ namespace MyFilmsPlugin.MyFilms
               return ViewImages;
             case Path.MyFilmsPath:
               return MyFilmsPath;
+            case Path.MyFilmsThumbsPath:
+              return MyFilmsThumbsPath;
             case Path.ThumbsCache:
               return ThumbsCachePath;
             case Path.GrabberScripts:
