@@ -4776,7 +4776,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           View_Dflt_Item.Text = GUILocalizeStrings.Get(1079819);
 
 
-          string FanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\Fanart";
+          string FanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\Fanart";
           if (!System.IO.Directory.Exists(FanartDirectory))
           {
             try { System.IO.Directory.CreateDirectory(FanartDirectory); }
@@ -4784,7 +4784,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           MesFilmsFanart.Text = FanartDirectory;
 
-          string ArtistImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\PersonImages";
+          string ArtistImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\PersonImages";
           if (!System.IO.Directory.Exists(ArtistImagesDirectory))
           {
             try { System.IO.Directory.CreateDirectory(ArtistImagesDirectory); }
