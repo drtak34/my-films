@@ -131,7 +131,7 @@
     <Value>False</Value>
   </Values>
   <Values Option="Folder_Name_Is_Group_Name">
-    <Value>False</Value>
+    <Value>True</Value>
   </Values>
   <Values Option="Group_Name_Applies_To">
     <Value>Original Title</Value>
