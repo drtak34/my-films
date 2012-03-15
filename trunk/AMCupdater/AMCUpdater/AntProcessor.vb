@@ -2134,11 +2134,11 @@ Public Class AntProcessor
 
         'Take an additional backup regardless and store in the application directory.
         ' _TempXMLBackupFile = My.Application.Info.DirectoryPath & "\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
-        If Not (System.IO.Directory.Exists(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCUbackup")) Then
-            System.IO.Directory.CreateDirectory(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCUbackup")
+        If Not (System.IO.Directory.Exists(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup")) Then
+            System.IO.Directory.CreateDirectory(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup")
         End If
 
-        _TempXMLBackupFile = MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCUbackup\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
+        _TempXMLBackupFile = MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
         _TempXMLBackupFile = _TempXMLBackupFile.Replace("/", "-")
         My.Computer.FileSystem.CopyFile(CurrentSettings.XML_File, _TempXMLBackupFile)
 
