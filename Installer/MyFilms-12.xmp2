@@ -2867,13 +2867,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Ohorten\ohorten.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f8e4e6b6-2cb8-4404-9499-57d08f8b542f}-ohorten.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Ohorten\ohorten.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{baee0eb6-19d5-4115-a395-b224770e9177}-movie.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</DestinationFilename>
@@ -2997,6 +2990,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{7ec2de04-7978-4920-b5cb-fde5eea7c049}-24 s01e02 Day1 0100-0200.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\24 Collection\Season 1\24 s01e02 Day1 0100-0200.wmv</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\O'Horten\ohorten.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{11db4dcd-3c20-4891-a315-36ef776e2715}-ohorten.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\O'Horten\ohorten.wmv</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3019,16 +3019,16 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{19bf223b-6c9b-43d0-b45d-306292242f95}-AMCUpdaterSetup.msi</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</DestinationFilename>
+              <LocalFileName>Config\MyFilms\AMCUinstaller\AMCUpdaterSetup.msi</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{25324841-d7b2-4e5d-8b69-25a86d94e1b5}-AMCUpdaterSetup.msi</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\AMCUinstaller\AMCUpdaterSetup.msi</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\AMCinstaller\setup.exe</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f2e9d5af-b4e3-4e28-b7e0-07c4d5e3a4a2}-setup.exe</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\AMCinstaller\setup.exe</DestinationFilename>
+              <LocalFileName>Config\MyFilms\AMCUinstaller\setup.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0f9128f8-82aa-4ee5-acf6-08ea32ec5df8}-setup.exe</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\AMCUinstaller\setup.exe</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3146,6 +3146,15 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
           <Items />
         </Files>
       </GroupItem>
+      <GroupItem Name="Cleanup">
+        <ParentGroup />
+        <DisplayName>Cleanup</DisplayName>
+        <DefaulChecked>false</DefaulChecked>
+        <Description>Cleanup</Description>
+        <Files>
+          <Items />
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -3216,6 +3225,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
           <string>Default</string>
           <string>DesktopShortcuts</string>
           <string>SampleMovies</string>
+          <string>Cleanup</string>
         </IncludedGroups>
         <PanelName>Tree View Selector</PanelName>
         <WizardButtonsEnum>BackNextCancel</WizardButtonsEnum>
@@ -3569,6 +3579,117 @@ public class Script
               </Params>
               <ExecuteLocation>AfterPanelShow</ExecuteLocation>
             </ActionItem>
+            <ActionItem Name="Script" ActionType="Script" ConditionGroup="Cleanup">
+              <Params>
+                <Items>
+                  <SectionParam Name="Script">
+                    <Value>//css_reference "MpeCore.dll"; 
+using MpeCore.Classes; 	
+using MpeCore; 	
+using System.Windows.Forms;  
+using System.IO; 	
+
+public class Script 	
+{
+  public static void Main(PackageClass packageClass, ActionItem actionItem)
+  {
+    string tempdir = ""; // path
+
+    //string tempfile = Path.Combine(MpeInstaller.TransformInRealPath("%Base%"), "aMPedSetup.exe");
+    //try
+    //{
+    //  if (File.Exists(tempfile)) File.Delete(tempfile);
+    //}
+    //catch {}
+
+    tempdir = Path.Combine(MpeInstaller.TransformInRealPath("%Thumbs%"), @"MyFilms\Thumbs");
+    try
+    {
+      if (System.IO.Directory.Exists(tempdir)) System.IO.Directory.Delete(tempdir, true);
+    }
+    catch { }
+
+    tempdir = Path.Combine(MpeInstaller.TransformInRealPath("%Thumbs%"), @"MyFilms\AMCinstaller");
+    try
+    {
+      if (System.IO.Directory.Exists(tempdir)) System.IO.Directory.Delete(tempdir, true);
+    }
+    catch { }
+
+    tempdir = Path.Combine(MpeInstaller.TransformInRealPath("%Thumbs%"), @"MyFilms\WebLinks");
+    try
+    {
+      if (System.IO.Directory.Exists(tempdir)) System.IO.Directory.Delete(tempdir, true);
+    }
+    catch { }
+
+    //string[] allFileNames = System.IO.Directory.GetFiles(tempFolder, "*.*", System.IO.SearchOption.AllDirectories);
+    //foreach (string filename in allFileNames)
+    //{
+    //  FileAttributes attr = File.GetAttributes(filename);
+    //  File.SetAttributes(filename, attr &amp; ~FileAttributes.ReadOnly);
+    //}
+
+    //// Delete selected files only
+    //string path = "C:\\Work\\Directory";
+    //var di = new DirectoryInfo(path);
+
+    //// remove readonly attributes
+    //foreach (var file in di.GetFiles("*", SearchOption.AllDirectories)) 
+    //  file.Attributes &amp;= ~FileAttributes.ReadOnly;
+
+    //var files = Directory.GetDirectories(path, "*.png");
+    ////foreach(var file in files) Console.WriteLine(file);
+    ////foreach(var file in files.OrderByDescending(x=&gt;x).Skip(7)) Console.WriteLine(file);
+    //foreach (var file in files.OrderByDescending(x =&gt; x).Skip(7)) Directory.Delete(file);
+
+    // info dialog to user
+    if (!packageClass.Silent)
+    {
+      MessageBox.Show("Cleanup of old MyFilms files done ...");
+    }
+    return;
+  }
+}
+</Value>
+                    <ValueType>Script</ValueType>
+                    <Description />
+                  </SectionParam>
+                  <SectionParam Name="Uninstall Script">
+                    <Value>//css_reference "MpeCore.dll";
+
+using MpeCore.Classes; 	
+using MpeCore; 	
+using System.Windows.Forms;  
+using System.IO; 	
+
+public class Script 	
+{ 	
+	public static void Main(PackageClass packageClass, ActionItem actionItem) 	
+	{ 	
+		string setupExe = Path.Combine( 	
+		MpeInstaller.TransformInRealPath("%Base%"), "aMPedSetup.exe"); 	
+		try	
+		{ 	
+		if (File.Exists(setupExe)) 	
+			File.Delete(setupExe); 	
+		} 	
+		catch {} 	
+
+     		if (!packageClass.Silent)  
+     		{  
+       			MessageBox.Show("Cleanup of old MyFilms files done ...");  
+     		}  
+	return; 	
+	} 	
+}</Value>
+                    <ValueType>Script</ValueType>
+                    <Description />
+                  </SectionParam>
+                </Items>
+              </Params>
+              <ExecuteLocation>AfterPanelHide</ExecuteLocation>
+            </ActionItem>
           </Items>
         </Actions>
         <IncludedGroups>
@@ -3577,6 +3698,7 @@ public class Script
           <string>Logos</string>
           <string>Scripts</string>
           <string>GrabberInterface</string>
+          <string>Cleanup</string>
         </IncludedGroups>
         <PanelName>Install Section</PanelName>
         <WizardButtonsEnum>Next</WizardButtonsEnum>
@@ -6650,13 +6772,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Ohorten\ohorten.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f8e4e6b6-2cb8-4404-9499-57d08f8b542f}-ohorten.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Ohorten\ohorten.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{baee0eb6-19d5-4115-a395-b224770e9177}-movie.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</DestinationFilename>
@@ -6783,16 +6898,23 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{19bf223b-6c9b-43d0-b45d-306292242f95}-AMCUpdaterSetup.msi</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</DestinationFilename>
+        <LocalFileName>Config\MyFilms\SampleMovies\O'Horten\ohorten.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{11db4dcd-3c20-4891-a315-36ef776e2715}-ohorten.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\O'Horten\ohorten.wmv</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\AMCinstaller\setup.exe</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f2e9d5af-b4e3-4e28-b7e0-07c4d5e3a4a2}-setup.exe</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\AMCinstaller\setup.exe</DestinationFilename>
+        <LocalFileName>Config\MyFilms\AMCUinstaller\AMCUpdaterSetup.msi</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{25324841-d7b2-4e5d-8b69-25a86d94e1b5}-AMCUpdaterSetup.msi</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\AMCUinstaller\AMCUpdaterSetup.msi</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\AMCUinstaller\setup.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0f9128f8-82aa-4ee5-acf6-08ea32ec5df8}-setup.exe</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\AMCUinstaller\setup.exe</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -6872,16 +6994,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3</DestinationFilename>
         <Folder>Thumbs\MyFilms\DefaultLogos.B3</Folder>
         <Group>Logos</Group>
-        <Recursive>true</Recursive>
-      </FolderGroup>
-      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName />
-        <ZipFileName>Installer{CopyFile}\{154004e9-7df8-41fe-8e33-6cb15cbcf145}-</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\AMCinstaller</DestinationFilename>
-        <Folder>Config\MyFilms\AMCinstaller</Folder>
-        <Group>AMCinstaller</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
       <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
