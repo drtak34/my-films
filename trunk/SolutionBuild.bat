@@ -12,7 +12,7 @@ xcopy %1\AMCupdater\AMCupdater\Merge\AMCUpdater.exe %1\Installer\Base.12 /r/y >>
 xcopy %1\Grabber_Interface\Merge\MyFilms_Grabber_Interface.exe %1\Installer\Base.12 /r/y >>%1\solutionbuild.log
 xcopy %1\Grabber_Plugin\bin\%2\MyVideoGrabber.dll %1\Installer\plugins.12\Windows /r/y >>%1\solutionbuild.log
 xcopy %1\MyFilms\Merge\MyFilms.dll %1\Installer\plugins.12\Windows /r/y >>%1\solutionbuild.log
-xcopy %1\AMCupdater\AMCupdaterSetup\%2\*.* %1\Installer\Config\MyFilms\AMCinstaller /r/y >>%1\solutionbuild.log
+xcopy %1\AMCupdater\AMCupdaterSetup\%2\*.* %1\Installer\Config\MyFilms\AMCUinstaller /r/y >>%1\solutionbuild.log
 
 cd %1\Installer
 rem dir >>%1\solutionbuild.log
