@@ -5002,17 +5002,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!File.Exists(GUIGraphicsContext.Skin + @"\Media\alpha\a.png")) return false; // return, if skin does not support index thumbs
 
-      item.ThumbnailImage = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer.png";
-      return true;
-
-      //string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
-      //if (strStartLetter.IsNumerical()) strStartLetter = "#";
-      //string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
-      //if (!File.Exists(IndexThumb)) IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer" + ".png";
-      //item.ThumbnailImage = IndexThumb;
-      ////item.IconImage = IndexThumb;
-      ////item.IconImageBig = IndexThumb;
+      //item.ThumbnailImage = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer.png";
       //return true;
+
+      string strStartLetter = (item.Label != EmptyFacadeValue && item.Label.Length > 0) ? item.Label.Substring(0, 1) : "Logo leer";
+      if (strStartLetter.IsNumerical()) strStartLetter = "#";
+      string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
+      if (!File.Exists(IndexThumb)) IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer" + ".png";
+      item.ThumbnailImage = IndexThumb;
+      //item.IconImage = IndexThumb;
+      //item.IconImageBig = IndexThumb;
+      return true;
     }
 
     /// <summary>Performs 'getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty)' in background thread</summary>
