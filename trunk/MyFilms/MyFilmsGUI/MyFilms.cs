@@ -5410,7 +5410,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LoadIndexSkinThumbs(facadeFilms[conf.StrIndex]);
           else
           {
-            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, this.facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView));
+            // if there is a Default.jpg in the view subfolder
+            string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
+            string strImageInViewsDefaultFolder = strPathViewsRoot + wStrSort.ToLower() + ".jpg";
+            string DefaultViewImage = (System.IO.File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
+            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView), DefaultViewImage);
             // string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
             this.facadeFilms[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
             this.facadeFilms[conf.StrIndex].IconImage = strActiveFacadeImages[1];
@@ -5489,6 +5493,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MFview.ViewRow currentCustomView = null;
         currentCustomView = GetCustomViewFromViewLabel(conf.CurrentView); // Views - check, which one is active
 
+        // if there is a Default.jpg in the view subfolder
+        string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
+        string strImageInViewsDefaultFolder = strPathViewsRoot + wStrSort.ToLower() + ".jpg";
+        string DefaultViewImage = (System.IO.File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
+
         for (i = 0; i < facadeFilms.Count; i++)
         {
           if (StopLoadingViewDetails) break; // stop download if we have exited window
@@ -5506,7 +5515,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView);
+                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, DefaultViewImage);
                   //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
                   //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
                   //{
@@ -5672,7 +5681,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
     }
 
-    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView)
+    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView, string DefaultViewImage)
     {
       string[] thumbimages = new string[2];
       thumbimages[0] = string.Empty; // ThumbnailImage
@@ -5799,14 +5808,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
           //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
 
-          //// if there is a Default.jpg in the view subfolder
-          //string strImageInViewsDefaultFolder = strPathArtist + WStrSort.ToLower() + ".jpg";
-          //if (System.IO.File.Exists(strImageInViewsDefaultFolder))
-          //{
-          //  thumbimages[0] = strImageInViewsDefaultFolder;
-          //  thumbimages[1] = strImageInViewsDefaultFolder;
-          //  return thumbimages;
-          //}
+          // if there is a Default.jpg in the view subfolder
+          if (DefaultViewImage != null)
+          {
+            thumbimages[0] = DefaultViewImage;
+            thumbimages[1] = DefaultViewImage;
+            return thumbimages;
+          }
 
           // if there is an image defined in Custom View
           if (currentCustomView != null)
@@ -5846,11 +5854,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (conf.StrPathViews.Length > 0)
         {
-          string strPathViews = String.Empty;
-          if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
-            strPathViews = conf.StrPathViews;
-          else
-            strPathViews = conf.StrPathViews + "\\";
+          string strPathViews = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
           string strPathViewsRoot = strPathViews;
           strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added view subfolder to searchpath
           if (File.Exists(strPathViews + itemlabel + ".jpg"))
@@ -5868,11 +5872,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.StrViewsDflt)
           {
             // if there is a Default.jpg in the view subfolder
-            string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg";
-            if (System.IO.File.Exists(strImageInViewsDefaultFolder))
+            if (DefaultViewImage != null)
             {
-              thumbimages[0] = strImageInViewsDefaultFolder;
-              thumbimages[1] = strImageInViewsDefaultFolder;
+              thumbimages[0] = DefaultViewImage;
+              thumbimages[1] = DefaultViewImage;
               return thumbimages;
             }
             // if there is an image defined in Custom View
