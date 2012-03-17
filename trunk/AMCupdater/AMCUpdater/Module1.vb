@@ -271,7 +271,12 @@ Module Module1
 
         Dim CleanString As String = ""
 
-        If CurrentSettings.Movie_Title_Handling.Contains("File Name") Then
+        If CurrentSettings.Series_Name_Identifier.Length > 0 And FilePath.Contains(CurrentSettings.Series_Name_Identifier) Then ' only, if identified as "series".
+            'Strip Path
+            CleanString = FilePath.Substring(FilePath.LastIndexOf("\") + 1)
+            'Strip Extension
+            CleanString = CleanString.Substring(0, CleanString.LastIndexOf("."))
+        ElseIf CurrentSettings.Movie_Title_Handling.Contains("File Name") Then
             'Strip Path
             CleanString = FilePath.Substring(FilePath.LastIndexOf("\") + 1)
             'Strip Extension
@@ -1043,7 +1048,7 @@ Module Module1
                 Dim Blah As String() = FilePath.Split("\")
                 For Each Part As String In Blah
                     If Part.Contains(Series_Name_Identifier) Then
-                        ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
+                        ReturnValue = Part.Replace(Series_Name_Identifier, "").Trim
                     Else
                         If (ReturnValue.Length > 0) Then
                             ReturnValue = ReturnValue & "\"
