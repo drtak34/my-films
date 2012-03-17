@@ -6619,8 +6619,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //clearGUIProperty("db.description.value");
           LogMyFilms.Debug("Load_Detailed_PersonInfo for '" + artistname + "'");
           ArrayList actorList = new ArrayList();
-          
-          MyFilmsDetail.GetActorByName(artistname, actorList);
+
+          VideoDatabase.GetActorByName(artistname, actorList);
+          //MyFilmsDetail.GetActorByName(artistname, actorList);
           if (actorList.Count < 1 || actorList.Count > 5) // Do not proceed, of none or too many results !
           {
               return;

@@ -3289,6 +3289,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Views with grouping ...
           {
             LogMyFilms.Debug("Load_Lstdetail() - Item is Folder and BoolSelect is true");
+            MyFilmsDetail.Init_Detailed_DB(false);
             // MyFilmsDetail.clearGUIProperty("user.mastertitle.groupcount");
             MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", currentItem.Label2, true);
 
@@ -3348,23 +3349,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Load_Rating(0); // old method - nor more used
             Clear_Logos(); // reset logos
 
+            GUIControl.ShowControl(GetID, 34);
+            SetDummyControlsForFacade(conf.ViewContext);
+
             switch (conf.ViewContext)
             {
               case ViewContext.Person:
                 MyFilmsDetail.clearGUIProperty("user.source.isonline");
                 MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
 
-                MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
+                MyFilmsDetail.Init_Detailed_DB(false);
+                // MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
                 MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, true);
                 break;
               case ViewContext.Group:
                 MyFilmsDetail.clearGUIProperty("user.source.isonline");
                 MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
-                MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
+                // MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
                 break;
             }
-            GUIControl.ShowControl(GetID, 34);
-            SetDummyControlsForFacade(conf.ViewContext);
           }
           #endregion
           else
@@ -3409,10 +3412,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               groupcover.Filename = currentFilmCover;
 
             Load_Logos(MyFilms.r, currentItem.ItemId); // set logos
-            SetDummyControlsForFacade(conf.ViewContext);
-            // Load_Rating(conf.W_rating); // old method - no more used
-
-            if (!currentItem.IsFolder) MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true); // load details, if it is not a hierarchyentry (folder)
 
             #region set fanart
             new System.Threading.Thread(delegate()
@@ -3473,6 +3472,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }) { Name = "MyFilmsSetFanartOnPageLoadWorker", IsBackground = true }.Start();
             #endregion
 
+            SetDummyControlsForFacade(conf.ViewContext);
+            // Load_Rating(conf.W_rating); // old method - no more used
+
+            if (!currentItem.IsFolder) MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true); // load details, if it is not a hierarchyentry (folder)
           }
           #endregion
           break;
@@ -3681,10 +3684,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
       }
-      // conf.StrSelect = ""; // reset movie context filter for person views
-      //viewcover.Filename = "";
-      //personcover.Filename = "";
-      //groupcover.Filename = "";
+
+      conf.StrSelect = ""; // reset movie context filter for person views
+      viewcover.Filename = "";
+      personcover.Filename = "";
+      groupcover.Filename = "";
 
       Change_View_Action(choiceView[dlg.SelectedLabel]);
     }
