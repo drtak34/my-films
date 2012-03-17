@@ -985,7 +985,7 @@ Module Module1
         Return ReturnValue
     End Function
 
-    Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String, ByVal Group_Name_Identifier As String)
+    Public Function GetGroupName(ByVal FilePath As String, ByVal Movie_Title_Handling As String, ByVal Group_Name_Identifier As String, ByVal Series_Name_Identifier As String)
         Dim ReturnValue As String = String.Empty
 
         '2001\2001 - A Space Odyssey.avi
@@ -1010,7 +1010,7 @@ Module Module1
             Return ReturnValue
         End If
         ' If parts can be found...
-        If Group_Name_Identifier.Length = 0 Then ' no search expression defined - use standard rules
+        If Group_Name_Identifier.Length = 0 And Series_Name_Identifier.Length = 0 Then ' no search expression defined - use standard rules
             If FilePath.Split("\").Length = 2 Then
                 'Just a folder and a filename it seems - use the parent.
                 ReturnValue = FilePath.Substring(0, FilePath.IndexOf("\"))
@@ -1029,15 +1029,31 @@ Module Module1
                 End If
             End If
 
-        Else ' search expression found - search for last match
-            Dim Blah As String() = FilePath.Split("\")
-            'We should now have at least 3 strings, the last of which will be the filename.  Let's use the one before that:
-            For Each Part As String In Blah
-                If Part.Contains(Group_Name_Identifier) Then
-                    ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
-                End If
-            Next
-            ' finally we have the last found match, use it as ReturnValue
+        Else
+            If Group_Name_Identifier.Length > 0 Then ' search expression for collection found - search for last match
+                Dim Blah As String() = FilePath.Split("\")
+                For Each Part As String In Blah
+                    If Part.Contains(Group_Name_Identifier) Then
+                        ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
+                    End If
+                Next
+                ' finally we have the last found match, use it as ReturnValue
+            End If
+            If Series_Name_Identifier.Length > 0 And ReturnValue.Length = 0 Then ' only, if no collection name was found ...
+                Dim Blah As String() = FilePath.Split("\")
+                For Each Part As String In Blah
+                    If Part.Contains(Series_Name_Identifier) Then
+                        ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
+                    Else
+                        If (ReturnValue.Length > 0) Then
+                            ReturnValue = ReturnValue & "\"
+                        End If
+                        ReturnValue = ReturnValue & Part
+                    End If
+                Next
+                ReturnValue = ReturnValue.Trim("\")
+                ' finally we have the first found match including the rest if the path as hierarchy, use it as ReturnValue
+            End If
         End If
 
         Return ReturnValue

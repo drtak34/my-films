@@ -539,6 +539,8 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
+        Me.txtSeriesNameIdentifier = New System.Windows.Forms.TextBox
+        Me.Label101 = New System.Windows.Forms.Label
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -1741,7 +1743,9 @@ Partial Class Form1
         'GroupBox_TitleHandling
         '
         Me.GroupBox_TitleHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_TitleHandling.Controls.Add(Me.Label101)
         Me.GroupBox_TitleHandling.Controls.Add(Me.cbEditionNameAppliesTo)
+        Me.GroupBox_TitleHandling.Controls.Add(Me.txtSeriesNameIdentifier)
         Me.GroupBox_TitleHandling.Controls.Add(Me.Label106)
         Me.GroupBox_TitleHandling.Controls.Add(Me.Label89)
         Me.GroupBox_TitleHandling.Controls.Add(Me.txtGroupNameIdentifier)
@@ -1750,9 +1754,9 @@ Partial Class Form1
         Me.GroupBox_TitleHandling.Controls.Add(Me.lblGroupNameAppliesTo)
         Me.GroupBox_TitleHandling.Controls.Add(Me.cbMasterTitle)
         Me.GroupBox_TitleHandling.Controls.Add(Me.lblMasterTitle)
-        Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 170)
+        Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 164)
         Me.GroupBox_TitleHandling.Name = "GroupBox_TitleHandling"
-        Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 120)
+        Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 140)
         Me.GroupBox_TitleHandling.TabIndex = 54
         Me.GroupBox_TitleHandling.TabStop = False
         Me.GroupBox_TitleHandling.Text = "Title Handling ..."
@@ -1761,7 +1765,7 @@ Partial Class Form1
         '
         Me.cbEditionNameAppliesTo.FormattingEnabled = True
         Me.cbEditionNameAppliesTo.Items.AddRange(New Object() {"", "Original Title", "Translated Title", "Both Titles"})
-        Me.cbEditionNameAppliesTo.Location = New System.Drawing.Point(164, 66)
+        Me.cbEditionNameAppliesTo.Location = New System.Drawing.Point(164, 85)
         Me.cbEditionNameAppliesTo.Name = "cbEditionNameAppliesTo"
         Me.cbEditionNameAppliesTo.Size = New System.Drawing.Size(174, 21)
         Me.cbEditionNameAppliesTo.TabIndex = 55
@@ -1770,7 +1774,7 @@ Partial Class Form1
         'Label106
         '
         Me.Label106.AutoSize = True
-        Me.Label106.Location = New System.Drawing.Point(18, 69)
+        Me.Label106.Location = New System.Drawing.Point(18, 88)
         Me.Label106.Name = "Label106"
         Me.Label106.Size = New System.Drawing.Size(127, 13)
         Me.Label106.TabIndex = 54
@@ -1779,17 +1783,17 @@ Partial Class Form1
         'Label89
         '
         Me.Label89.AutoSize = True
-        Me.Label89.Location = New System.Drawing.Point(201, 18)
+        Me.Label89.Location = New System.Drawing.Point(170, 14)
         Me.Label89.Name = "Label89"
-        Me.Label89.Size = New System.Drawing.Size(41, 13)
+        Me.Label89.Size = New System.Drawing.Size(53, 13)
         Me.Label89.TabIndex = 53
-        Me.Label89.Text = "Search"
+        Me.Label89.Text = "Collection"
         '
         'txtGroupNameIdentifier
         '
-        Me.txtGroupNameIdentifier.Location = New System.Drawing.Point(248, 14)
+        Me.txtGroupNameIdentifier.Location = New System.Drawing.Point(229, 11)
         Me.txtGroupNameIdentifier.Name = "txtGroupNameIdentifier"
-        Me.txtGroupNameIdentifier.Size = New System.Drawing.Size(90, 20)
+        Me.txtGroupNameIdentifier.Size = New System.Drawing.Size(109, 20)
         Me.txtGroupNameIdentifier.TabIndex = 52
         Me.ToolTip1.SetToolTip(Me.txtGroupNameIdentifier, resources.GetString("txtGroupNameIdentifier.ToolTip"))
         '
@@ -1799,7 +1803,7 @@ Partial Class Form1
         Me.cbGroupNameAppliesTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGroupNameAppliesTo.FormattingEnabled = True
         Me.cbGroupNameAppliesTo.Items.AddRange(New Object() {"Original Title", "Translated Title", "Both Titles"})
-        Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(164, 40)
+        Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(164, 59)
         Me.cbGroupNameAppliesTo.Name = "cbGroupNameAppliesTo"
         Me.cbGroupNameAppliesTo.Size = New System.Drawing.Size(174, 21)
         Me.cbGroupNameAppliesTo.TabIndex = 44
@@ -1809,16 +1813,16 @@ Partial Class Form1
         Me.chkFolderNameIsGroupName.AutoSize = True
         Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(21, 17)
         Me.chkFolderNameIsGroupName.Name = "chkFolderNameIsGroupName"
-        Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(175, 17)
+        Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(112, 30)
         Me.chkFolderNameIsGroupName.TabIndex = 42
-        Me.chkFolderNameIsGroupName.Text = "Folder Name as Group Identifier"
+        Me.chkFolderNameIsGroupName.Text = "Folder Name " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "as Group Identifier"
         Me.ToolTip1.SetToolTip(Me.chkFolderNameIsGroupName, resources.GetString("chkFolderNameIsGroupName.ToolTip"))
         Me.chkFolderNameIsGroupName.UseVisualStyleBackColor = True
         '
         'lblGroupNameAppliesTo
         '
         Me.lblGroupNameAppliesTo.AutoSize = True
-        Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(18, 43)
+        Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(18, 62)
         Me.lblGroupNameAppliesTo.Name = "lblGroupNameAppliesTo"
         Me.lblGroupNameAppliesTo.Size = New System.Drawing.Size(113, 13)
         Me.lblGroupNameAppliesTo.TabIndex = 43
@@ -1830,7 +1834,7 @@ Partial Class Form1
         Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMasterTitle.FormattingEnabled = True
         Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle", "FormattedTitle"})
-        Me.cbMasterTitle.Location = New System.Drawing.Point(164, 93)
+        Me.cbMasterTitle.Location = New System.Drawing.Point(164, 112)
         Me.cbMasterTitle.Name = "cbMasterTitle"
         Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
         Me.cbMasterTitle.TabIndex = 51
@@ -1840,7 +1844,7 @@ Partial Class Form1
         'lblMasterTitle
         '
         Me.lblMasterTitle.AutoSize = True
-        Me.lblMasterTitle.Location = New System.Drawing.Point(18, 96)
+        Me.lblMasterTitle.Location = New System.Drawing.Point(18, 115)
         Me.lblMasterTitle.Name = "lblMasterTitle"
         Me.lblMasterTitle.Size = New System.Drawing.Size(62, 13)
         Me.lblMasterTitle.TabIndex = 50
@@ -1852,9 +1856,9 @@ Partial Class Form1
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.chkShortNames)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.Label26)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.txtDefaultSourceField)
-        Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 107)
+        Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 103)
         Me.GroupBox_StorageFieldHandling.Name = "GroupBox_StorageFieldHandling"
-        Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 61)
+        Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 56)
         Me.GroupBox_StorageFieldHandling.TabIndex = 56
         Me.GroupBox_StorageFieldHandling.TabStop = False
         Me.GroupBox_StorageFieldHandling.Text = "Storage Field Handling ..."
@@ -1862,11 +1866,11 @@ Partial Class Form1
         'chkShortNames
         '
         Me.chkShortNames.AutoSize = True
-        Me.chkShortNames.Location = New System.Drawing.Point(21, 38)
+        Me.chkShortNames.Location = New System.Drawing.Point(21, 35)
         Me.chkShortNames.Name = "chkShortNames"
-        Me.chkShortNames.Size = New System.Drawing.Size(145, 17)
+        Me.chkShortNames.Size = New System.Drawing.Size(124, 17)
         Me.chkShortNames.TabIndex = 69
-        Me.chkShortNames.Text = "Store files with name only"
+        Me.chkShortNames.Text = "Store with name only"
         Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
                 "les in your setup.")
         Me.chkShortNames.UseVisualStyleBackColor = True
@@ -1896,7 +1900,7 @@ Partial Class Form1
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.Label13)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.chkReadDVDLabel)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.txtMediaLabel)
-        Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 296)
+        Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 307)
         Me.GroupBox_MediaLabelFieldHandling.Name = "GroupBox_MediaLabelFieldHandling"
         Me.GroupBox_MediaLabelFieldHandling.Size = New System.Drawing.Size(353, 62)
         Me.GroupBox_MediaLabelFieldHandling.TabIndex = 55
@@ -1941,7 +1945,7 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label30)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.cbDateHandling)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.cbCheckHandling)
-        Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 364)
+        Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 373)
         Me.GroupBox_OtherFieldHandling.Name = "GroupBox_OtherFieldHandling"
         Me.GroupBox_OtherFieldHandling.Size = New System.Drawing.Size(353, 100)
         Me.GroupBox_OtherFieldHandling.TabIndex = 52
@@ -2023,9 +2027,9 @@ Partial Class Form1
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.cbPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.txtPictureFilenamePrefix)
-        Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 470)
+        Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 477)
         Me.GroupBox_PictureHandling.Name = "GroupBox_PictureHandling"
-        Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 99)
+        Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 95)
         Me.GroupBox_PictureHandling.TabIndex = 53
         Me.GroupBox_PictureHandling.TabStop = False
         Me.GroupBox_PictureHandling.Text = "Image Handling ..."
@@ -2110,7 +2114,7 @@ Partial Class Form1
         Me.lblInternetLookupRequired.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblInternetLookupRequired.AutoSize = True
         Me.lblInternetLookupRequired.ForeColor = System.Drawing.Color.Red
-        Me.lblInternetLookupRequired.Location = New System.Drawing.Point(8, 556)
+        Me.lblInternetLookupRequired.Location = New System.Drawing.Point(8, 557)
         Me.lblInternetLookupRequired.Name = "lblInternetLookupRequired"
         Me.lblInternetLookupRequired.Size = New System.Drawing.Size(227, 13)
         Me.lblInternetLookupRequired.TabIndex = 39
@@ -2131,7 +2135,7 @@ Partial Class Form1
         Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAll)
         Me.GroupBox16.Location = New System.Drawing.Point(239, 7)
         Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.Size = New System.Drawing.Size(353, 97)
+        Me.GroupBox16.Size = New System.Drawing.Size(353, 93)
         Me.GroupBox16.TabIndex = 9
         Me.GroupBox16.TabStop = False
         Me.GroupBox16.Text = "Quick Select ..."
@@ -5663,6 +5667,23 @@ Partial Class Form1
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
         '
+        'txtSeriesNameIdentifier
+        '
+        Me.txtSeriesNameIdentifier.Location = New System.Drawing.Point(229, 35)
+        Me.txtSeriesNameIdentifier.Name = "txtSeriesNameIdentifier"
+        Me.txtSeriesNameIdentifier.Size = New System.Drawing.Size(109, 20)
+        Me.txtSeriesNameIdentifier.TabIndex = 70
+        Me.ToolTip1.SetToolTip(Me.txtSeriesNameIdentifier, resources.GetString("txtSeriesNameIdentifier.ToolTip"))
+        '
+        'Label101
+        '
+        Me.Label101.AutoSize = True
+        Me.Label101.Location = New System.Drawing.Point(170, 38)
+        Me.Label101.Name = "Label101"
+        Me.Label101.Size = New System.Drawing.Size(36, 13)
+        Me.Label101.TabIndex = 71
+        Me.Label101.Text = "Series"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6308,4 +6329,6 @@ Partial Class Form1
     Friend WithEvents BtnImportWatcher As System.Windows.Forms.Button
     Friend WithEvents btnOpenLog As System.Windows.Forms.Button
     Friend WithEvents chkPurgeMissingAlways As System.Windows.Forms.CheckBox
+    Friend WithEvents txtSeriesNameIdentifier As System.Windows.Forms.TextBox
+    Friend WithEvents Label101 As System.Windows.Forms.Label
 End Class

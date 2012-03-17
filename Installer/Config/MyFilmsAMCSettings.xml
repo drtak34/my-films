@@ -205,4 +205,7 @@
   <Values Option="Group_Name_Identifier">
     <Value>Collection</Value>
   </Values>
+  <Values Option="Series_Name_Identifier">
+    <Value>(Series)</Value>
+  </Values>
 </NewDataSet>

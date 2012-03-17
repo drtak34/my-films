@@ -681,6 +681,24 @@ AMCUpdater tries to get those Edition Names (like "Directors Cut, Unrated, Exten
 from the media name.
 You can add it to OriginalTitle, TranslatedTitle or Both.</value>
   </data>
+  <data name="txtSeriesNameIdentifier.ToolTip" xml:space="preserve">
+    <value>You can define a search expression to identify the folder to be used for "series name".
+Other than "group name" this will add the complete path hierarchy from the detected field - so
+when browsing in MyFilms plugin you'll get a "series hierarchy" presented.
+
+If left empty, the standard rules apply.
+If a search expression is defined, AMCupdater will check your file path and 
+only directory names containing the search expression
+will be added as group/series name - independent of their relative position. 
+The match closest to the mediafile is used (if multiple directories match the search expression).
+
+Example: 
+Search expression = "(Series)"
+Series\24 (Series)\Season 1\24-s01e01.avi
+Series\24 (Series)\Season 1\24-s01e02.avi
+Series\24 (Series)\Season 2\24-s02e01.avi
+</value>
+  </data>
   <data name="txtGroupNameIdentifier.ToolTip" xml:space="preserve">
     <value>You can define a search expression to identify the folder to be used for "group name".
 If left empty, the standard rules apply.
