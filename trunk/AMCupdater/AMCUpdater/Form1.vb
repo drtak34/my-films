@@ -2358,6 +2358,7 @@ Public Class Form1
         CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
 
         CurrentSettings.Group_Name_Identifier = txtGroupNameIdentifier.Text
+        CurrentSettings.Series_Name_Identifier = txtSeriesNameIdentifier.Text
 
 
 
@@ -2559,6 +2560,7 @@ Public Class Form1
             chkGrabberOverrideTitleLimit.Text = CurrentSettings.Grabber_Override_TitleLimit
 
             txtGroupNameIdentifier.Text = CurrentSettings.Group_Name_Identifier
+            txtSeriesNameIdentifier.Text = CurrentSettings.Series_Name_Identifier
 
             Dim DBFields() As String
             DBFields = CurrentSettings.Database_Fields_To_Import.Split(";")

@@ -692,6 +692,14 @@ Public Class AntSettings
             SetAttribute("Group_Name_Identifier", value)
         End Set
     End Property
+    Public Property Series_Name_Identifier() As String
+        Get
+            Return ReadAttribute("Series_Name_Identifier")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Series_Name_Identifier", value)
+        End Set
+    End Property
 
     Public Sub New()
         Dim AppPath As String = My.Application.Info.DirectoryPath
