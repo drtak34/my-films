@@ -3029,7 +3029,7 @@ namespace Grabber_Interface
                 //labelImageSize.Text = s1.ToString();
                 labelImageSize.Text = this.ByteString(f.Length);
               }
-              catch (Exception ex)
+              catch (Exception)
               {
                 labelImageSize.Text = "n/a";
                 //MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

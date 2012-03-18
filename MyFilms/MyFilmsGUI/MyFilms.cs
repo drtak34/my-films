@@ -6968,7 +6968,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.WStrSort = selectedCustomView.DBfield;
 
           conf.BoolSortCountinViews = (selectedCustomView.SortFieldViewType == "Count");
-          conf.WStrSortSens = selectedCustomView.SortDirectionView;
+          if (conf.BoolSortCountinViews)
+            conf.WStrSortSensCount = selectedCustomView.SortDirectionView;
+          else
+            conf.WStrSortSens = selectedCustomView.SortDirectionView;
+          
           conf.IndexedChars = selectedCustomView.Index;
           //int iLayout = 0;
           //int.TryParse(selectedCustomView.LayoutView, out iLayout);
@@ -7025,7 +7029,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             while (GetFilmList() == false); //keep calling while single folders found
           }
           else
-          // Group Views
+          // Indexed Views
           {
             if (conf.IndexedChars > 0) // if indexed view is enabled ...
             {
