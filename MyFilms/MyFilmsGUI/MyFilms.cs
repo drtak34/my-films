@@ -5234,12 +5234,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         int itemcount = 0;
         string currentitem = "";
         string itemValue = "";
+
         var list = new List<KeyValuePair<string, int>>();
         for (wi = 0; wi != w_tableau.Count; wi++)
         {
           itemValue = w_tableau[wi].ToString();
-          if (string.Compare(currentitem, itemValue, StringComparison.OrdinalIgnoreCase) == 0) // Are the strings equal? Then add count!
+          if (!isindexed && string.Compare(currentitem, itemValue, StringComparison.OrdinalIgnoreCase) == 0) // Are the strings equal? Then add count!
             itemcount++;
+          else if (isindexed && string.Compare(itemValue, 0, currentitem, 0, indexedChars, StringComparison.OrdinalIgnoreCase) == 0) //  CultureInfo.CurrentCulture, CompareOptions.OrdinalIgnoreCase
+          {
+            itemcount++; // count items of distinct property
+            //if (string.Compare(champselect, wchampselectIndexed, StringComparison.OrdinalIgnoreCase) != 0)
+            //{
+            //  itemcountIndexed++;
+            //  currentitemIndexed = itemValue;
+            //}
+          }
           else
           {
             if (itemcount > 0 && itemValue.Length > 0)
@@ -5249,7 +5259,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 list.Add(new KeyValuePair<string, int>(currentitem, itemcount));
               }
             }
-            //LogMyFilms.Debug("(GetSelectFromDivx) - Counting item: '" + currentitem.ToString() + "', Count = '" + itemcount + "'");
+            LogMyFilms.Debug("(GetSelectFromDivx) - Counting item: '" + currentitem + "', Count = '" + itemcount + "'");
             itemcount = 1;
             currentitem = w_tableau[wi].ToString();
           }
