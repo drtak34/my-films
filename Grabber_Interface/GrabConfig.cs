@@ -4750,40 +4750,40 @@ namespace Grabber_Interface
 
     private void textBody_TextChanged(object sender, EventArgs e)
     {
-      try
-      {
-        // Make a DataObject.
-        DataObject data_object = new DataObject();
+      //try
+      //{
+      //  // Make a DataObject.
+      //  DataObject data_object = new DataObject();
 
-        // Add the data in various formats.
-        data_object.SetData(DataFormats.Rtf, textBody.Rtf);
-        data_object.SetData(DataFormats.Text, textBody.Text);
+      //  // Add the data in various formats.
+      //  data_object.SetData(DataFormats.Rtf, textBody.Rtf);
+      //  data_object.SetData(DataFormats.Text, textBody.Text);
 
-        // Copy data to the
-        Clipboard.SetDataObject(data_object);
-      }
-      catch (Exception)
-      {
-      }
+      //  // Copy data to the
+      //  Clipboard.SetDataObject(data_object);
+      //}
+      //catch (Exception)
+      //{
+      //}
     }
 
     private void textBodyDetail_TextChanged(object sender, EventArgs e)
     {
-      try
-      {
-        // Make a DataObject.
-        DataObject data_object = new DataObject();
+      //try
+      //{
+      //  // Make a DataObject.
+      //  DataObject data_object = new DataObject();
 
-        // Add the data in various formats.
-        data_object.SetData(DataFormats.Rtf, textBodyDetail.Rtf);
-        data_object.SetData(DataFormats.Text, textBodyDetail.Text);
+      //  // Add the data in various formats.
+      //  data_object.SetData(DataFormats.Rtf, textBodyDetail.Rtf);
+      //  data_object.SetData(DataFormats.Text, textBodyDetail.Text);
 
-        // Copy data to the
-        Clipboard.SetDataObject(data_object);
-      }
-      catch (Exception)
-      {
-      }
+      //  // Copy data to the
+      //  Clipboard.SetDataObject(data_object);
+      //}
+      //catch (Exception)
+      //{
+      //}
     }
 
     private void HideTabPage(TabPage tp)
@@ -4892,6 +4892,64 @@ namespace Grabber_Interface
         default:
           break;
       }
+    }
+
+    private void contextMenuStripSearch_Opening(object sender, CancelEventArgs e)
+    {
+      // Runs before the user sees anything. A great place to set Enabled to true or false.
+      copySelectionToolStripMenuItem.Enabled = textBody.SelectionLength > 0;
+    }
+
+    private void contextMenuStripDetails_Opening(object sender, CancelEventArgs e)
+    {
+      // Runs before the user sees anything. A great place to set Enabled to true or false.
+      copySelectionToolStripMenuItem1.Enabled = textBodyDetail.SelectionLength > 0;
+    }
+
+    private void toolStripMenuSearchCopyAll_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        // Make a DataObject.
+        DataObject data_object = new DataObject();
+
+        // Add the data in various formats.
+        data_object.SetData(DataFormats.Rtf, textBody.Rtf);
+        data_object.SetData(DataFormats.Text, textBody.Text);
+
+        // Copy data to the Clipboard
+        Clipboard.SetDataObject(data_object);
+      }
+      catch (Exception) { }
+    }
+
+    private void toolStripMenuDetailsCopyAll_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        // Make a DataObject.
+        DataObject data_object = new DataObject();
+
+        // Add the data in various formats.
+        data_object.SetData(DataFormats.Rtf, textBodyDetail.Rtf);
+        data_object.SetData(DataFormats.Text, textBodyDetail.Text);
+
+        // Copy data to the Clipboard
+        Clipboard.SetDataObject(data_object);
+      }
+      catch (Exception) { }
+    }
+
+    private void copySelectionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      // Here, add the copy command to the relevant control, such as...
+      textBody.Copy(); // Added manually.
+    }
+
+    private void copySelectionToolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+      // Here, add the copy command to the relevant control, such as...
+      textBodyDetail.Copy(); // Added manually.
     }
 
   }
