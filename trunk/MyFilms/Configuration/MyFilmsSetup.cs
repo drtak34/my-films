@@ -33,7 +33,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System.IO;
   using System.Net;
   using System.Reflection;
+  using System.Threading;
   using System.Windows.Forms;
+  using System.Windows.Data;
   using System.Xml;
 
   using Grabber;
@@ -790,7 +792,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewTotalCount", MyCustomViews.View.Count);
             int index = 1;
-            foreach (MFview.ViewRow viewRow in this.MyCustomViews.View) // for (int i = 1; i < 6; i++)
+            foreach (MFview.ViewRow viewRow in MyCustomViews.View) // for (int i = 1; i < 6; i++)
             {
               SaveView(index, viewRow);
               index++;
@@ -5740,8 +5742,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           filterEditor.MasterTitle = AntTitle1.Text;
           filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
           filterEditor.ShowDialog(this);
-          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK) AntViewFilter.Text = filterEditor.ConfigString;
-          else MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK)
+          {
+            // AntViewFilter.Focus();
+            AntViewFilter.Text = filterEditor.ConfigString;
+            viewBindingSource.EndEdit();
+          }
+          else 
+            MessageBox.Show("Filter Editor cancelled !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void AntViewFilter_TextChanged(object sender, EventArgs e)
+        {
+          // AntViewFilterEditButton.Focus();
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
@@ -6018,6 +6031,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
           }
         }
+
     }
 
       public static class BindingSourceExtension

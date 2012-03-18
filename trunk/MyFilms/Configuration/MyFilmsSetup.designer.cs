@@ -3456,6 +3456,7 @@
           this.AntViewFilter.Name = "AntViewFilter";
           this.AntViewFilter.Size = new System.Drawing.Size(243, 20);
           this.AntViewFilter.TabIndex = 10;
+          this.AntViewFilter.TextChanged += new System.EventHandler(this.AntViewFilter_TextChanged);
           // 
           // AntViewFilterEditButton
           // 
