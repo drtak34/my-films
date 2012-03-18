@@ -13311,6 +13311,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       MyFilmsDetail.clearGUIProperty("user.watched.value");
       MyFilmsDetail.clearGUIProperty("user.watched.count");
+      MyFilmsDetail.clearGUIProperty("user.watched.date");
       MyFilmsDetail.clearGUIProperty("user.watched.name");
       MyFilmsDetail.clearGUIProperty("user.watched.onlinestatus");
       MyFilmsDetail.clearGUIProperty("user.watched.global");
