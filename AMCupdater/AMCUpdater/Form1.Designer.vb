@@ -139,7 +139,9 @@ Partial Class Form1
         Me.btnManualSelectExcludedMoviesFile = New System.Windows.Forms.Button
         Me.DatabaseFields = New System.Windows.Forms.TabPage
         Me.GroupBox_TitleHandling = New System.Windows.Forms.GroupBox
+        Me.Label101 = New System.Windows.Forms.Label
         Me.cbEditionNameAppliesTo = New System.Windows.Forms.ComboBox
+        Me.txtSeriesNameIdentifier = New System.Windows.Forms.TextBox
         Me.Label106 = New System.Windows.Forms.Label
         Me.Label89 = New System.Windows.Forms.Label
         Me.txtGroupNameIdentifier = New System.Windows.Forms.TextBox
@@ -539,8 +541,6 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
-        Me.txtSeriesNameIdentifier = New System.Windows.Forms.TextBox
-        Me.Label101 = New System.Windows.Forms.Label
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -1761,6 +1761,15 @@ Partial Class Form1
         Me.GroupBox_TitleHandling.TabStop = False
         Me.GroupBox_TitleHandling.Text = "Title Handling ..."
         '
+        'Label101
+        '
+        Me.Label101.AutoSize = True
+        Me.Label101.Location = New System.Drawing.Point(170, 38)
+        Me.Label101.Name = "Label101"
+        Me.Label101.Size = New System.Drawing.Size(36, 13)
+        Me.Label101.TabIndex = 71
+        Me.Label101.Text = "Series"
+        '
         'cbEditionNameAppliesTo
         '
         Me.cbEditionNameAppliesTo.FormattingEnabled = True
@@ -1770,6 +1779,14 @@ Partial Class Form1
         Me.cbEditionNameAppliesTo.Size = New System.Drawing.Size(174, 21)
         Me.cbEditionNameAppliesTo.TabIndex = 55
         Me.ToolTip1.SetToolTip(Me.cbEditionNameAppliesTo, resources.GetString("cbEditionNameAppliesTo.ToolTip"))
+        '
+        'txtSeriesNameIdentifier
+        '
+        Me.txtSeriesNameIdentifier.Location = New System.Drawing.Point(229, 35)
+        Me.txtSeriesNameIdentifier.Name = "txtSeriesNameIdentifier"
+        Me.txtSeriesNameIdentifier.Size = New System.Drawing.Size(109, 20)
+        Me.txtSeriesNameIdentifier.TabIndex = 70
+        Me.ToolTip1.SetToolTip(Me.txtSeriesNameIdentifier, resources.GetString("txtSeriesNameIdentifier.ToolTip"))
         '
         'Label106
         '
@@ -5666,23 +5683,6 @@ Partial Class Form1
         Me.ImageListViewPersons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
-        '
-        'txtSeriesNameIdentifier
-        '
-        Me.txtSeriesNameIdentifier.Location = New System.Drawing.Point(229, 35)
-        Me.txtSeriesNameIdentifier.Name = "txtSeriesNameIdentifier"
-        Me.txtSeriesNameIdentifier.Size = New System.Drawing.Size(109, 20)
-        Me.txtSeriesNameIdentifier.TabIndex = 70
-        Me.ToolTip1.SetToolTip(Me.txtSeriesNameIdentifier, resources.GetString("txtSeriesNameIdentifier.ToolTip"))
-        '
-        'Label101
-        '
-        Me.Label101.AutoSize = True
-        Me.Label101.Location = New System.Drawing.Point(170, 38)
-        Me.Label101.Name = "Label101"
-        Me.Label101.Size = New System.Drawing.Size(36, 13)
-        Me.Label101.TabIndex = 71
-        Me.Label101.Text = "Series"
         '
         'Form1
         '
