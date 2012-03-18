@@ -203,7 +203,7 @@
     <Value>3</Value>
   </Values>
   <Values Option="Group_Name_Identifier">
-    <Value>Collection</Value>
+    <Value>(Group)</Value>
   </Values>
   <Values Option="Series_Name_Identifier">
     <Value>(Series)</Value>
