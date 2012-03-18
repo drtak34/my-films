@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -122,6 +122,8 @@ namespace Grabber_Interface
           this.btnLoadDetailPreview = new System.Windows.Forms.Button();
           this.textURLPreview = new System.Windows.Forms.TextBox();
           this.textBodyDetail = new System.Windows.Forms.RichTextBox();
+          this.contextMenuStripDetails = new System.Windows.Forms.ContextMenuStrip(this.components);
+          this.toolStripMenuDetailsCopyAll = new System.Windows.Forms.ToolStripMenuItem();
           this.label10 = new System.Windows.Forms.Label();
           this.groupBox3 = new System.Windows.Forms.GroupBox();
           this.textPreview = new System.Windows.Forms.RichTextBox();
@@ -160,6 +162,8 @@ namespace Grabber_Interface
           this.label19 = new System.Windows.Forms.Label();
           this.label17 = new System.Windows.Forms.Label();
           this.textBody = new System.Windows.Forms.RichTextBox();
+          this.contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
+          this.toolStripMenuSearchCopyAll = new System.Windows.Forms.ToolStripMenuItem();
           this.lblResultsFound = new System.Windows.Forms.Label();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.dataGridViewSearchResults = new System.Windows.Forms.DataGridView();
@@ -212,16 +216,20 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
+          this.copySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.copySelectionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
           this.tabPageDetailPage.SuspendLayout();
+          this.contextMenuStripDetails.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).BeginInit();
           this.tabPageSearchPage.SuspendLayout();
           this.groupBox6.SuspendLayout();
           this.groupBox5.SuspendLayout();
+          this.contextMenuStripSearch.SuspendLayout();
           this.groupBox2.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSearchResults)).BeginInit();
           this.groupBox1.SuspendLayout();
@@ -970,6 +978,7 @@ namespace Grabber_Interface
           // textBodyDetail
           // 
           resources.ApplyResources(this.textBodyDetail, "textBodyDetail");
+          this.textBodyDetail.ContextMenuStrip = this.contextMenuStripDetails;
           this.textBodyDetail.HideSelection = false;
           this.textBodyDetail.Name = "textBodyDetail";
           this.textBodyDetail.ReadOnly = true;
@@ -977,6 +986,21 @@ namespace Grabber_Interface
           this.textBodyDetail.SelectionChanged += new System.EventHandler(this.textBodyDetail_SelectionChanged);
           this.textBodyDetail.TextChanged += new System.EventHandler(this.textBodyDetail_TextChanged);
           this.textBodyDetail.Click += new System.EventHandler(this.textBodyDetail_Click);
+          // 
+          // contextMenuStripDetails
+          // 
+          this.contextMenuStripDetails.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuDetailsCopyAll,
+            this.copySelectionToolStripMenuItem1});
+          this.contextMenuStripDetails.Name = "contextMenuStripDetails";
+          resources.ApplyResources(this.contextMenuStripDetails, "contextMenuStripDetails");
+          this.contextMenuStripDetails.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDetails_Opening);
+          // 
+          // toolStripMenuDetailsCopyAll
+          // 
+          this.toolStripMenuDetailsCopyAll.Name = "toolStripMenuDetailsCopyAll";
+          resources.ApplyResources(this.toolStripMenuDetailsCopyAll, "toolStripMenuDetailsCopyAll");
+          this.toolStripMenuDetailsCopyAll.Click += new System.EventHandler(this.toolStripMenuDetailsCopyAll_Click);
           // 
           // label10
           // 
@@ -1245,6 +1269,7 @@ namespace Grabber_Interface
           // textBody
           // 
           resources.ApplyResources(this.textBody, "textBody");
+          this.textBody.ContextMenuStrip = this.contextMenuStripSearch;
           this.textBody.HideSelection = false;
           this.textBody.Name = "textBody";
           this.textBody.ReadOnly = true;
@@ -1252,6 +1277,21 @@ namespace Grabber_Interface
           this.textBody.SelectionChanged += new System.EventHandler(this.textBody_SelectionChanged);
           this.textBody.TextChanged += new System.EventHandler(this.textBody_TextChanged);
           this.textBody.Click += new System.EventHandler(this.textBody_Click);
+          // 
+          // contextMenuStripSearch
+          // 
+          this.contextMenuStripSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuSearchCopyAll,
+            this.copySelectionToolStripMenuItem});
+          this.contextMenuStripSearch.Name = "contextMenuStripSearch";
+          resources.ApplyResources(this.contextMenuStripSearch, "contextMenuStripSearch");
+          this.contextMenuStripSearch.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripSearch_Opening);
+          // 
+          // toolStripMenuSearchCopyAll
+          // 
+          this.toolStripMenuSearchCopyAll.Name = "toolStripMenuSearchCopyAll";
+          resources.ApplyResources(this.toolStripMenuSearchCopyAll, "toolStripMenuSearchCopyAll");
+          this.toolStripMenuSearchCopyAll.Click += new System.EventHandler(this.toolStripMenuSearchCopyAll_Click);
           // 
           // lblResultsFound
           // 
@@ -1297,17 +1337,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+          dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle9;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle6.NullValue = null;
-          dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle6;
+          dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle10.NullValue = null;
+          dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle10;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1320,16 +1360,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
+          dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle11;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+          dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle12;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1630,6 +1670,7 @@ namespace Grabber_Interface
           // tabControl1
           // 
           resources.ApplyResources(this.tabControl1, "tabControl1");
+          this.tabControl1.ContextMenuStrip = this.contextMenuStripSearch;
           this.tabControl1.Controls.Add(this.tabPageUserSettings);
           this.tabControl1.Controls.Add(this.tabPageSearchPage);
           this.tabControl1.Controls.Add(this.tabPageDetailPage);
@@ -1673,6 +1714,18 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
           // 
+          // copySelectionToolStripMenuItem
+          // 
+          this.copySelectionToolStripMenuItem.Name = "copySelectionToolStripMenuItem";
+          resources.ApplyResources(this.copySelectionToolStripMenuItem, "copySelectionToolStripMenuItem");
+          this.copySelectionToolStripMenuItem.Click += new System.EventHandler(this.copySelectionToolStripMenuItem_Click);
+          // 
+          // copySelectionToolStripMenuItem1
+          // 
+          this.copySelectionToolStripMenuItem1.Name = "copySelectionToolStripMenuItem1";
+          resources.ApplyResources(this.copySelectionToolStripMenuItem1, "copySelectionToolStripMenuItem1");
+          this.copySelectionToolStripMenuItem1.Click += new System.EventHandler(this.copySelectionToolStripMenuItem1_Click);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1713,6 +1766,7 @@ namespace Grabber_Interface
           this.groupBox10.PerformLayout();
           this.tabPageDetailPage.ResumeLayout(false);
           this.tabPageDetailPage.PerformLayout();
+          this.contextMenuStripDetails.ResumeLayout(false);
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
@@ -1723,6 +1777,7 @@ namespace Grabber_Interface
           this.groupBox6.PerformLayout();
           this.groupBox5.ResumeLayout(false);
           this.groupBox5.PerformLayout();
+          this.contextMenuStripSearch.ResumeLayout(false);
           this.groupBox2.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSearchResults)).EndInit();
           this.groupBox1.ResumeLayout(false);
@@ -1921,6 +1976,12 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox textHeaders;
         private System.Windows.Forms.TextBox EncodingSubPage;
         private System.Windows.Forms.Label lblEncodingSubPage;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripSearch;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDetails;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuSearchCopyAll;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuDetailsCopyAll;
+        private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem1;
 
     }
 }
