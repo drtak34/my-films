@@ -2612,7 +2612,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           return value;
         }
-      
+
         //-------------------------------------------------------------------------------------------
         //  Get enhanced watch count
         //-------------------------------------------------------------------------------------------        
@@ -2643,6 +2643,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           return count;
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Get enhanced watch date
+        //-------------------------------------------------------------------------------------------        
+        private static DateTime GetWatchedDate(int Index, string userprofilename)
+        {
+          DateTime datewatched = DateTime.MinValue;
+          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
+
+          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
+          {
+            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in split)
+            {
+              if (s.Contains(":"))
+              {
+                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
+                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
+                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
+
+                if (tempuser == userprofilename)
+                {
+                  bool success = DateTime.TryParse(tempcount, out datewatched);
+                  if (!success) datewatched = DateTime.MinValue;
+                  return datewatched;
+                }
+              }
+            }
+          }
+          return datewatched;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -6097,6 +6129,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.sourcetrailer.count", log);
             clearGUIProperty("user.watched.value", log);
             clearGUIProperty("user.watched.count", log);
+            clearGUIProperty("user.watched.date", log);
             clearGUIProperty("user.watched.name", log);
             clearGUIProperty("user.watched.global", log);
             clearGUIProperty("user.source.isonline", log);
@@ -6234,9 +6267,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         int count = GetWatchedCount(ItemId, MyFilms.conf.StrUserProfileName);
                         if (count > 0)
+                        {
                           setGUIProperty("user.watched.value", "true");
+                          DateTime watcheddate = GetWatchedDate(ItemId, MyFilms.conf.StrUserProfileName);
+                          string strWatchedDate = (watcheddate > DateTime.MinValue) ? watcheddate.ToShortDateString() : "";
+                          setGUIProperty("user.watched.date", strWatchedDate);
+                        }
                         else
+                        {
                           setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                          setGUIProperty("user.watched.date", "");
+                        }
                         setGUIProperty("user.watched.count", count.ToString());
                         setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
                         setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
