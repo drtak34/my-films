@@ -1802,9 +1802,9 @@ Partial Class Form1
         Me.Label89.AutoSize = True
         Me.Label89.Location = New System.Drawing.Point(170, 14)
         Me.Label89.Name = "Label89"
-        Me.Label89.Size = New System.Drawing.Size(53, 13)
+        Me.Label89.Size = New System.Drawing.Size(36, 13)
         Me.Label89.TabIndex = 53
-        Me.Label89.Text = "Collection"
+        Me.Label89.Text = "Group"
         '
         'txtGroupNameIdentifier
         '
