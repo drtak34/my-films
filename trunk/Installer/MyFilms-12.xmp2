@@ -2846,48 +2846,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{00ce6812-58c1-4888-a6f5-1bf0658e9ae1}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e4051621-00d0-44a1-a978-cb682cd8a0b9}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{c51b7f1d-ef52-45dd-88d9-122208850de7}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{baee0eb6-19d5-4115-a395-b224770e9177}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{94f08fce-6695-48f5-8bc4-e28443d72514}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1\movie.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{6c12bd0f-ce18-4e0d-a2d0-5cba514598ec}-movie.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1\movie.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\MyFilms\SampleMovies\Enid (2009) (tt1397265)\movie.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{ff818045-0bca-41b6-8984-ce1134aade8e}-movie.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\Enid (2009) (tt1397265)\movie.wmv</DestinationFilename>
@@ -2996,6 +2954,62 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Config\MyFilms\SampleMovies\24 (Series)\Season 1\24 s01e02 Day1 0100-0200.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{cc72a4ab-9187-457a-a481-eb338b8b7d01}-24 s01e02 Day1 0100-0200.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\24 (Series)\Season 1\24 s01e02 Day1 0100-0200.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Star Trek (Group)\Star Trek IV - The Voyage Home (1986)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ffee0a3b-875c-4c5e-995f-b9577ddc6ea6}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek (Group)\Star Trek IV - The Voyage Home (1986)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Nemesis (2002)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8543979f-f18e-425b-b5f7-646c80a9b260}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Nemesis (2002)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Generations (1994)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{073bc528-b66b-4a55-bd13-350ad10e0cfa}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Generations (1994)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a30b1ada-bfbe-4000-b7f5-bab1ec9027bb}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie (tt1201607).wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b04c5575-f8f9-4e28-9531-bf7a84f0dccd}-movie (tt1201607).wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie (tt1201607).wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1 (tt0926084)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f7280f0a-7055-4211-a3f1-2ecb628a8b81}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1 (tt0926084)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ebf4a2a8-f063-4da5-ab59-48cf58e5283a}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\1408\movie.wmv</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{eba159c6-6b43-4211-9fb1-309e885da8d2}-movie.wmv</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\1408\movie.wmv</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3608,8 +3622,8 @@ public class Script
     tempdirNew = Path.Combine(MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\ThumbsCache");
     try
     {
-      if (!System.IO.Directory.Exists(tempdirNew)) System.IO.Directory.CreateDirectory(tempdirNew);
-      CopyFiles(tempdir, tempdirNew);
+      //if (!System.IO.Directory.Exists(tempdirNew)) System.IO.Directory.CreateDirectory(tempdirNew);
+      //CopyFiles(tempdir, tempdirNew);
       if (System.IO.Directory.Exists(tempdir)) System.IO.Directory.Delete(tempdir, true);
     }
     catch (System.Exception ex)
@@ -3982,7 +3996,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>2088</Revision>
+      <Revision>2103</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3994,7 +4008,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-03-17T08:11:12.1980077+01:00</ReleaseDate>
+    <ReleaseDate>2012-03-19T04:27:43.4081093+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -6807,48 +6821,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{00ce6812-58c1-4888-a6f5-1bf0658e9ae1}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek Collection\Star Trek IV - The Voyage Home (1986)\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e4051621-00d0-44a1-a978-cb682cd8a0b9}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Nemesis (2002)\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c51b7f1d-ef52-45dd-88d9-122208850de7}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek Collection\Star Trek - Generations (1994)\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{baee0eb6-19d5-4115-a395-b224770e9177}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{94f08fce-6695-48f5-8bc4-e28443d72514}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1\movie.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{6c12bd0f-ce18-4e0d-a2d0-5cba514598ec}-movie.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1\movie.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\MyFilms\SampleMovies\Enid (2009) (tt1397265)\movie.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{ff818045-0bca-41b6-8984-ce1134aade8e}-movie.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\Enid (2009) (tt1397265)\movie.wmv</DestinationFilename>
@@ -6957,6 +6929,62 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\MyFilms\SampleMovies\24 (Series)\Season 1\24 s01e02 Day1 0100-0200.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{cc72a4ab-9187-457a-a481-eb338b8b7d01}-24 s01e02 Day1 0100-0200.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\24 (Series)\Season 1\24 s01e02 Day1 0100-0200.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Star Trek (Group)\Star Trek IV - The Voyage Home (1986)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ffee0a3b-875c-4c5e-995f-b9577ddc6ea6}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek (Group)\Star Trek IV - The Voyage Home (1986)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Nemesis (2002)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8543979f-f18e-425b-b5f7-646c80a9b260}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Nemesis (2002)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Generations (1994)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{073bc528-b66b-4a55-bd13-350ad10e0cfa}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Star Trek (Group)\Star Trek - Generations (1994)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a30b1ada-bfbe-4000-b7f5-bab1ec9027bb}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Philosopher's Stone (2001)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie (tt1201607).wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b04c5575-f8f9-4e28-9531-bf7a84f0dccd}-movie (tt1201607).wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part2\movie (tt1201607).wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1 (tt0926084)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f7280f0a-7055-4211-a3f1-2ecb628a8b81}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Harry Potter (Group)\Harry Potter and the Deathly Hallows\Harry Potter and the Deathly Hallows Part1 (tt0926084)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ebf4a2a8-f063-4da5-ab59-48cf58e5283a}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\1408\movie.wmv</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{eba159c6-6b43-4211-9fb1-309e885da8d2}-movie.wmv</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\1408\movie.wmv</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
