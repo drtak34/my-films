@@ -1609,7 +1609,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
 
-          LogStatusVars("PreviousMenu");
+          // LogStatusVars("PreviousMenu");
           if (!string.IsNullOrEmpty(conf.WStrSort)) SaveLastView(conf.WStrSort);
 
           if (ViewHistory.Count > 0)
@@ -1681,6 +1681,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     conf.Boolselect = true;
                     conf.Boolindexed = false;
                     conf.Boolindexedreturn = false;
+
+                    viewcover.Filename = "";
+                    personcover.Filename = "";
+                    groupcover.Filename = "";
 
                     conf.Wselectedlabel = conf.StrViewDfltText;
                     Change_View_Action(conf.StrViewDfltItem);
@@ -3376,6 +3380,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Movie display ...
           {
             LogMyFilms.Debug("Load_Lstdetail() - Item is Film List Item - contains hierarchy = '" + currentItem.IsFolder + "'");
+            if (currentItem.IsFolder) MyFilmsDetail.Init_Detailed_DB(false);
 
             #region set groupcount
             string groupcount = "";
@@ -3398,11 +3403,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               currentFilmCover = currentItem.MusicTag.ToString();
             else if (currentItem.ThumbnailImage != null && !string.IsNullOrEmpty(currentItem.ThumbnailImage))
               currentFilmCover = currentItem.ThumbnailImage;
-
             //currentFilmCover = (currentItem.MusicTag != null && !string.IsNullOrEmpty(currentItem.MusicTag.ToString()))
             //                            ? currentItem.MusicTag.ToString()
             //                            : ((!string.IsNullOrEmpty(currentItem.ThumbnailImage)) ? currentItem.ThumbnailImage : "");
-            if (currentItem.IsFolder && conf.ViewContext == ViewContext.Movie)
+            LogMyFilms.Debug("Load_Lstdetail() - currentFilmCover = '" + currentFilmCover + "'");
+
+            if (currentItem.IsFolder) //  && conf.ViewContext == ViewContext.Movie
             {
               string currentGroupCover = GetGroupImage(currentItem); // HierarchyImage for selected item
               if (currentGroupCover.Length > 0) currentFilmCover = currentGroupCover;
