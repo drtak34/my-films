@@ -2915,6 +2915,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private string GetGroupImage(GUIListItem item)
     {
+      LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "'");
       string strThumbGroup = ""; // thumbnail for Groups/collections
       if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg"))
       {
@@ -2924,7 +2925,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".jpg";
       }
-      else if (System.IO.File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
+      else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
       {
         strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".png";
       }
@@ -2936,10 +2937,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg"))
           strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg";
+        // if (strThumbGroup == "") strThumbGroup = MyFilms.conf.DefaultCover; // ToDo: Add default cover for hierarchies / box sets
       }
+      LogMyFilms.Debug("GetGroupImage() - returning image = '" + strThumbGroup + "'");
       return strThumbGroup;
     }
-    
     
     bool GetMoviesInGroup(ref ArrayList fanartItems)
     {
@@ -3234,7 +3236,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading)
       {
-        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == Prev_ItemID ('" + Prev_ItemID + "') AND  currentItem.Label == Prev_Label ('" + Prev_Label + "') -> return");
         return;
       }
       Prev_ItemID = currentItem.ItemId;
