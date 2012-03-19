@@ -125,7 +125,7 @@
     <Value>\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$|\s\d{4}\.</Value>
   </Values>
   <Values Option="Edition_Strings">
-    <Value>[sS]tandard|Standard Edition;[eE]xtended|Extended Edition;[cC]ollector|Collectors Edition;[dD]irector|Directors Cut;[uU]nrated|Unrated</Value>
+    <Value>[sS]tandard|Standard Edition;[eE]xtended|Extended Edition;[cC]ollector|Collectors Edition;[dD]irector|Directors Cut;[uU]nrated|Unrated;3D|3D Edition</Value>
   </Values>
   <Values Option="Check_Field_Handling">
     <Value>False</Value>
