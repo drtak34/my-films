@@ -1275,11 +1275,11 @@ Public Class AntRecord
 
                 ' Get Internetdata with "best title possible"
                 If IsValidTitle(_XMLElement, "FormattedTitle") Then
-                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("FormattedTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
+                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("FormattedTitle").Value.ToString, GetEdition(_FilePath)))
                 ElseIf IsValidTitle(_XMLElement, "TranslatedTitle") Then
-                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
+                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath)))
                 ElseIf IsValidTitle(_XMLElement, "OriginalTitle") Then
-                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("OriginalTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
+                    DoInternetLookup(RemoveGroupNameAndEdition(_XMLElement.Attributes("OriginalTitle").Value.ToString, GetEdition(_FilePath)))
                 Else
                     DoInternetLookup(GetTitleFromFilePath(_FilePath)) 'No DB title available, so use the cleaned filename instead:
                 End If
@@ -1339,7 +1339,7 @@ Public Class AntRecord
             CurrentAttribute = "FormattedTitle"
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If _XMLElement.Attributes("TranslatedTitle") IsNot Nothing Then
-                    TempValue = Grabber.GrabUtil.TitleToArchiveName(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)))
+                    TempValue = Grabber.GrabUtil.TitleToArchiveName(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath)))
                     TempValue = AddGroupName(TempValue, "Translated Title")
                     TempValue = AddEdition(TempValue, "Translated Title")
                 ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
@@ -1516,7 +1516,7 @@ Public Class AntRecord
 
             CurrentAttribute = "Edition" ' Get "Edition" from filename for separate field
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                TempValue = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
+                TempValue = GetEdition(_FilePath)
                 CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
             End If
 
@@ -2070,12 +2070,13 @@ Public Class AntRecord
     End Function
     Private Function AddEdition(ByRef Title As String, ByRef TitleField As String) As String
         Dim TempValue = Title
-
-        Dim Edition As String = GetEdition(_FilePath, CurrentSettings.Movie_Title_Handling)
-        If Edition <> "" Then
-            If CurrentSettings.Edition_Name_Applies_To = TitleField Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
-                If Not TempValue.EndsWith(" (" & Edition & ")") Then
-                    TempValue = TempValue & " (" & Edition & ")"
+        If TempValue.Length > 0 Then
+            Dim Edition As String = GetEdition(_FilePath)
+            If Edition <> "" Then
+                If CurrentSettings.Edition_Name_Applies_To = TitleField Or CurrentSettings.Edition_Name_Applies_To = "Both Titles" Then
+                    If Not TempValue.EndsWith(" (" & Edition & ")") Then
+                        TempValue = TempValue & " (" & Edition & ")"
+                    End If
                 End If
             End If
         End If
@@ -2084,12 +2085,14 @@ Public Class AntRecord
     Private Function AddGroupName(ByRef Title As String, ByRef TitleField As String) As String
         Dim TempValue = Title
 
-        If _GroupName <> "" Then
-            If CurrentSettings.Folder_Name_Is_Group_Name = True Then
-                If CurrentSettings.Group_Name_Applies_To = TitleField Or CurrentSettings.Group_Name_Applies_To = "Both Titles" Then
-                    'If TempValue <> _GroupName.ToString And Not TempValue.StartsWith(_GroupName.ToString & "\") Then
-                    If Not TempValue.StartsWith(_GroupName.ToString & "\") Then
-                        TempValue = _GroupName.ToString & "\" & TempValue
+        If TempValue.Length > 0 Then
+            If _GroupName <> "" Then
+                If CurrentSettings.Folder_Name_Is_Group_Name = True Then
+                    If CurrentSettings.Group_Name_Applies_To = TitleField Or CurrentSettings.Group_Name_Applies_To = "Both Titles" Then
+                        'If TempValue <> _GroupName.ToString And Not TempValue.StartsWith(_GroupName.ToString & "\") Then
+                        If Not TempValue.StartsWith(_GroupName.ToString & "\") Then
+                            TempValue = _GroupName.ToString & "\" & TempValue
+                        End If
                     End If
                 End If
             End If

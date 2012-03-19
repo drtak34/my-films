@@ -1016,56 +1016,93 @@ Module Module1
         End If
         ' If parts can be found...
         If Group_Name_Identifier.Length = 0 And Series_Name_Identifier.Length = 0 Then ' no search expression defined - use standard rules
-            If FilePath.Split("\").Length = 2 Then
-                'Just a folder and a filename it seems - use the parent.
+            If FilePath.Split("\").Length = 2 Then 'Just a folder and a filename it seems - use the parent.
                 ReturnValue = FilePath.Substring(0, FilePath.IndexOf("\"))
             Else
-                Dim Blah As String() = FilePath.Split("\")
+                Dim FolderNames As String() = FilePath.Split("\")
                 'We should now have at least 3 strings, the last of which will be the filename.  Let's use the one before that:
                 ' Todo depends on Title handling ...
                 'File(Name)
                 'Folder(Name)
                 'Relative(Name)
 
-                If Movie_Title_Handling.Contains("Folder") And Blah.Length > 2 Then ' if it's "folder handling", use parent folder of the movie folder
-                    ReturnValue = Blah(Blah.Length - 3)
+                If Movie_Title_Handling.Contains("Folder") And FolderNames.Length > 2 Then ' if it's "folder handling", use parent folder of the movie folder
+                    ReturnValue = FolderNames(FolderNames.Length - 3)
                 Else
-                    ReturnValue = Blah(Blah.Length - 2) ' use movie folder itself
+                    ReturnValue = FolderNames(FolderNames.Length - 2) ' use movie folder itself
                 End If
             End If
 
         Else
             If Group_Name_Identifier.Length > 0 Then ' search expression for collection found - search for last match
-                Dim Blah As String() = FilePath.Split("\")
-                For Each Part As String In Blah
+                'Dim FolderNames As String() = FilePath.Split("\")
+                'For i As Integer = LBound(FolderNames) To UBound(FolderNames) Step 1
+                '    Dim Part As String = FolderNames(i)
+                '    If Part.Contains(Group_Name_Identifier) Then
+                '        ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
+                '    End If
+                'Next
+                Dim FolderNames As String() = FilePath.Split("\")
+                Dim StartAdding As Boolean = False
+                Dim PartialGroupName As String = ""
+                Dim MaxFolderPosition As Integer
+                If FolderNames.Length = 2 Then
+                    MaxFolderPosition = 1
+                ElseIf Movie_Title_Handling.Contains("Folder") And FolderNames.Length > 2 Then
+                    MaxFolderPosition = FolderNames.Length - 3 ' parent folder of movie folder
+                Else
+                    MaxFolderPosition = FolderNames.Length - 2 ' movie folder itself
+                End If
+
+                For i As Integer = LBound(FolderNames) To MaxFolderPosition Step 1 'For i As Integer = LBound(FolderNames) To UBound(FolderNames) Step 1
+                    Dim Part As String = FolderNames(i)
                     If Part.Contains(Group_Name_Identifier) Then
-                        ReturnValue = Part.Replace(Group_Name_Identifier, "").Trim
+                        PartialGroupName = Part.Replace(Group_Name_Identifier, "").Trim
+                        StartAdding = True
+                    Else
+                        PartialGroupName = Part
+                    End If
+                    If StartAdding = True Then
+                        If (ReturnValue.Length > 0) Then
+                            ReturnValue = ReturnValue & "\" & PartialGroupName
+                        Else
+                            ReturnValue = PartialGroupName
+                        End If
                     End If
                 Next
                 ' finally we have the last found match, use it as ReturnValue
             End If
-            If Series_Name_Identifier.Length > 0 And ReturnValue.Length = 0 Then ' only, if no collection name was found ...
-                Dim Blah As String() = FilePath.Split("\")
-                For Each Part As String In Blah
+            If Series_Name_Identifier.Length > 0 And ReturnValue.Length = 0 Then ' only, if no Group found before ...
+                Dim FolderNames As String() = FilePath.Split("\")
+                If FolderNames.Length < 2 Then
+                    Return ""
+                End If
+                Dim StartAdding As Boolean = False
+                Dim PartialGroupName As String = ""
+
+                For i As Integer = LBound(FolderNames) To (UBound(FolderNames) - 1) Step 1
+                    Dim Part As String = FolderNames(i)
                     If Part.Contains(Series_Name_Identifier) Then
-                        ReturnValue = Part.Replace(Series_Name_Identifier, "").Trim
+                        PartialGroupName = Part.Replace(Series_Name_Identifier, "").Trim
+                        StartAdding = True
                     Else
+                        PartialGroupName = Part
+                    End If
+                    If StartAdding = True Then
                         If (ReturnValue.Length > 0) Then
-                            ReturnValue = ReturnValue & "\"
+                            ReturnValue = ReturnValue & "\" & PartialGroupName
+                        Else
+                            ReturnValue = PartialGroupName
                         End If
-                        ReturnValue = ReturnValue & Part
                     End If
                 Next
-                ReturnValue = ReturnValue.Trim("\")
                 ' finally we have the first found match including the rest if the path as hierarchy, use it as ReturnValue
             End If
         End If
-
         Return ReturnValue
-
     End Function
 
-    Public Function GetEdition(ByVal FilePath As String, ByVal Movie_Title_Handling As String)
+    Public Function GetEdition(ByVal FilePath As String)
         Dim ReturnValue As String = ""
 
         Dim RegCheck As Regex
