@@ -3976,7 +3976,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new Thread(delegate()
       {
         #region Load Thumbs and Counts threaded
-        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
+        DataRow[] rows = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
         for (i = 0; i < this.facadeFilms.Count; i++)
         {
           if (StopLoadingMenuDetails) break;
@@ -4018,20 +4018,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 if (Helper.FieldIsSet(viewRow.DBfield))
                 {
-                  if (countitem.DVDLabel == (viewRow.Label))
+                  if (countitem.DVDLabel == viewRow.Label)
                   {
                     success = true;
                     if (string.IsNullOrEmpty(viewRow.Value)) // no "Value" filter
                     {
                       if (string.IsNullOrEmpty(viewRow.Filter))
-                        newLabel = CountViewItems(r, viewRow.DBfield).ToString(); // newLabel = r.Select(p => (string)p[conf.StrViewItem[ii]]).Distinct(MfStringComparer).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
+                        newLabel = CountViewItems(rows, viewRow.DBfield).ToString(); // newLabel = r.Select(p => (string)p[conf.StrViewItem[ii]]).Distinct(MfStringComparer).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
                       else
                         newLabel = "* " + CountViewItems(BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens), viewRow.DBfield).ToString();
                     }
                     else if (viewRow.Value == "*") // filmlist show all (possible "Value" filter) -> Count films, as it jumps directly to films
                     {
                       if (string.IsNullOrEmpty(viewRow.Filter))
-                        newLabel = r.Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();  // Select(row => row.Field<int?>("F1")).Where(val => val.HasValue).Select(val => val.Value).Distinct() // newLabel = r.Length.ToString(); 
+                        newLabel = rows.Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();  // Select(row => row.Field<int?>("F1")).Where(val => val.HasValue).Select(val => val.Value).Distinct() // newLabel = r.Length.ToString(); 
                       else
                         newLabel = "* " + BaseMesFilms.ReadDataMovies(viewRow.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
                     }
@@ -4066,7 +4066,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               if (!success) // get standard count, if no custom views match ...
               {
-                newLabel = CountViewItems(r, countitem.DVDLabel).ToString();
+                newLabel = CountViewItems(rows, countitem.DVDLabel).ToString();
                 if (StopLoadingMenuDetails) break;
                 countitem.Label2 = newLabel;
               }
@@ -5259,7 +5259,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 list.Add(new KeyValuePair<string, int>(currentitem, itemcount));
               }
             }
-            LogMyFilms.Debug("(GetSelectFromDivx) - Counting item: '" + currentitem + "', Count = '" + itemcount + "'");
+            // LogMyFilms.Debug("(GetSelectFromDivx) - Counting item: '" + currentitem + "', Count = '" + itemcount + "'");
             itemcount = 1;
             currentitem = w_tableau[wi].ToString();
           }
