@@ -2430,6 +2430,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string GlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
 
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:             '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrViewSelect:             '" + conf.StrViewSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:             '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:             '" + conf.StrFilmSelect + "'");
 
@@ -2478,7 +2479,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
+      r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
 
       #region Additional sorting ...
       FieldType fieldType = GetFieldType(sortfield);
@@ -2978,7 +2979,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string StrFilmSelect = s;
 
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      DataRow[] rFanart = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+      DataRow[] rFanart = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       LogMyFilms.Debug("(GetRandomFanartForGroups) - Count: '" + r.Length + "'");
       int iCnt = 0;
       int DelimCnt = 0, DelimCnt2;
@@ -5098,8 +5099,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
       LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString      : '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect      : '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrViewSelect      : '" + conf.StrViewSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect      : '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect              : '" + WstrSelect + "'");
       LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort - WStrSortSens : '" + WStrSort + "' - '" + WStrSortSens + "'");
       LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar - ClearIndex   : '" + NewWstar + "' - '" + ClearIndex + "'");
@@ -5505,7 +5506,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         int i;
         DataRow[] rtemp = null;
         if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
-          rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
+          rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrViewSelect + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
         // DataRow[] rtemp = r;
 
         MFview.ViewRow currentCustomView = null;
