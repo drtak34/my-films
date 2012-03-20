@@ -293,6 +293,7 @@
           this.label24 = new System.Windows.Forms.Label();
           this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.chkReversePersonNames = new System.Windows.Forms.CheckBox();
           this.chkShowEmpty = new System.Windows.Forms.CheckBox();
           this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
           this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -2834,6 +2835,7 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.chkReversePersonNames);
           this.groupBox_DefaultView.Controls.Add(this.chkShowEmpty);
           this.groupBox_DefaultView.Controls.Add(this.chkOnlyTitle);
           this.groupBox_DefaultView.Controls.Add(this.groupBox7);
@@ -2852,10 +2854,21 @@
           this.groupBox_DefaultView.Text = "Start Settings ...";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
           // 
+          // chkReversePersonNames
+          // 
+          this.chkReversePersonNames.AutoSize = true;
+          this.chkReversePersonNames.Location = new System.Drawing.Point(67, 319);
+          this.chkReversePersonNames.Name = "chkReversePersonNames";
+          this.chkReversePersonNames.Size = new System.Drawing.Size(138, 17);
+          this.chkReversePersonNames.TabIndex = 88;
+          this.chkReversePersonNames.Text = "Reverse Person Names";
+          this.ToolTip1.SetToolTip(this.chkReversePersonNames, resources.GetString("chkReversePersonNames.ToolTip"));
+          this.chkReversePersonNames.UseVisualStyleBackColor = true;
+          // 
           // chkShowEmpty
           // 
           this.chkShowEmpty.AutoSize = true;
-          this.chkShowEmpty.Location = new System.Drawing.Point(67, 318);
+          this.chkShowEmpty.Location = new System.Drawing.Point(67, 298);
           this.chkShowEmpty.Name = "chkShowEmpty";
           this.chkShowEmpty.Size = new System.Drawing.Size(85, 17);
           this.chkShowEmpty.TabIndex = 87;
@@ -2866,7 +2879,7 @@
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(67, 249);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(67, 229);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
           this.chkOnlyTitle.TabIndex = 86;
@@ -2883,7 +2896,7 @@
           this.groupBox7.Controls.Add(this.SortSens);
           this.groupBox7.Controls.Add(this.LayOut);
           this.groupBox7.Controls.Add(this.label14);
-          this.groupBox7.Location = new System.Drawing.Point(6, 93);
+          this.groupBox7.Location = new System.Drawing.Point(6, 72);
           this.groupBox7.Name = "groupBox7";
           this.groupBox7.Size = new System.Drawing.Size(246, 73);
           this.groupBox7.TabIndex = 85;
@@ -2950,7 +2963,7 @@
           this.groupBox4.Controls.Add(this.label62);
           this.groupBox4.Controls.Add(this.SortSensInHierarchies);
           this.groupBox4.Controls.Add(this.SortInHierarchies);
-          this.groupBox4.Location = new System.Drawing.Point(6, 172);
+          this.groupBox4.Location = new System.Drawing.Point(6, 151);
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.Size = new System.Drawing.Size(246, 71);
           this.groupBox4.TabIndex = 43;
@@ -3017,7 +3030,7 @@
           // label10
           // 
           this.label10.AutoSize = true;
-          this.label10.Location = new System.Drawing.Point(12, 32);
+          this.label10.Location = new System.Drawing.Point(12, 21);
           this.label10.Name = "label10";
           this.label10.Size = new System.Drawing.Size(30, 13);
           this.label10.TabIndex = 84;
@@ -3026,7 +3039,7 @@
           // chkGlobalAvailableOnly
           // 
           this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(67, 295);
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(67, 275);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
           this.chkGlobalAvailableOnly.TabIndex = 82;
@@ -3038,7 +3051,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(67, 272);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(67, 252);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -3049,7 +3062,7 @@
           // AlwaysDefaultView
           // 
           this.AlwaysDefaultView.AutoSize = true;
-          this.AlwaysDefaultView.Location = new System.Drawing.Point(67, 61);
+          this.AlwaysDefaultView.Location = new System.Drawing.Point(67, 50);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
           this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
           this.AlwaysDefaultView.TabIndex = 75;
@@ -3062,7 +3075,7 @@
           // View_Dflt_Item
           // 
           this.View_Dflt_Item.FormattingEnabled = true;
-          this.View_Dflt_Item.Location = new System.Drawing.Point(67, 29);
+          this.View_Dflt_Item.Location = new System.Drawing.Point(67, 18);
           this.View_Dflt_Item.Name = "View_Dflt_Item";
           this.View_Dflt_Item.Size = new System.Drawing.Size(104, 21);
           this.View_Dflt_Item.TabIndex = 16;
@@ -3071,7 +3084,7 @@
           // View_Dflt_Text
           // 
           this.View_Dflt_Text.Enabled = false;
-          this.View_Dflt_Text.Location = new System.Drawing.Point(177, 29);
+          this.View_Dflt_Text.Location = new System.Drawing.Point(177, 18);
           this.View_Dflt_Text.Name = "View_Dflt_Text";
           this.View_Dflt_Text.Size = new System.Drawing.Size(55, 20);
           this.View_Dflt_Text.TabIndex = 17;
@@ -6462,5 +6475,6 @@
         private Button btnServerSync;
         private Button btnResetThumbsFilms;
         private CheckBox cbTrailerAutoregister;
+        private CheckBox chkReversePersonNames;
     }
 }
