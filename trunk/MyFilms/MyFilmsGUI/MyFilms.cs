@@ -3381,7 +3381,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Movie display ...
           {
             LogMyFilms.Debug("Load_Lstdetail() - Item is Film List Item - contains hierarchy = '" + currentItem.IsFolder + "'");
-            if (currentItem.IsFolder) MyFilmsDetail.Init_Detailed_DB(false);
+            if (currentItem.IsFolder)
+            {
+              // GUIControl.ShowControl(GetID, 34);
+              MyFilmsDetail.Init_Detailed_DB(false);
+            }
 
             #region set groupcount
             string groupcount = "";
@@ -3484,7 +3488,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SetDummyControlsForFacade(conf.ViewContext);
             // Load_Rating(conf.W_rating); // old method - no more used
 
-            if (!currentItem.IsFolder) MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true); // load details, if it is not a hierarchyentry (folder)
+            if (!currentItem.IsFolder)
+            {
+              // GUIControl.HideControl(GetID, 34);
+              MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true); // load details, if it is not a hierarchyentry (folder)
+            }
           }
           #endregion
           break;
