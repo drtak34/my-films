@@ -902,6 +902,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", chkScanMediaOnStart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", chkShowEmpty.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ReversePersonNames", chkReversePersonNames.Checked);
+
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", cbAllowTraktSync.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", cbAllowRecentAddedAPI.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", chkOnlyTitle.Checked);
@@ -1393,6 +1395,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cbAllowRecentAddedAPI.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", false);
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", false);
             chkShowEmpty.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", false);
+            chkReversePersonNames.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ReversePersonNames", false);
           
             // common external catalog options
             chkAddTagline.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTagline", false);
