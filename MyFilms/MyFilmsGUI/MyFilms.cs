@@ -13869,8 +13869,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.Boolindexed = state.Boolindexed;
           conf.Boolindexedreturn = state.Boolindexedreturn;
           conf.IndexedChars = state.IndexedChars;
-          conf.BoolReverseNames = state.BoolReverseNames;
-          conf.BoolShowEmptyValuesInViews = state.BoolShowEmptyValuesInViews;
+          // conf.BoolReverseNames = state.BoolReverseNames; don't restore for Generic view state cache, as it is more a "global" setting
+          // conf.BoolShowEmptyValuesInViews = state.BoolShowEmptyValuesInViews;
 
           //conf.StrSelect = state.StrSelect;
           //conf.StrPersons = state.StrPersons;
