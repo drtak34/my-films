@@ -4812,10 +4812,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           MesFilmsViews.Text = ViewImagesDirectory;
           chkViews.Checked = true; // Use Thumbs for views
-          chkPersons.Checked = true; // Don't use Thumbs for persons views
+          chkPersons.Checked = true; // Use Thumbs for persons views
           chkDfltViews.Checked = true; // Use default cover for missing thumbs
           chkShowIndexedImgInIndViews.Checked = true; // activate indexed Images for in
-          chkDfltViewsAll.Checked = false; // Use group view thumbs for all group views
+          chkDfltViewsAll.Checked = true; // Use group view thumbs for all group views
           // Logos
           chkLogos.Checked = true;
           comboBoxLogoSpacing.Text = "2";
