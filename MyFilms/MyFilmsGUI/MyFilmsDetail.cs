@@ -55,7 +55,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MyFilmsPlugin.DataBase;
 
   using MyFilmsPlugin.MyFilms.Utils;
-
   using SQLite.NET;
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
@@ -1035,6 +1034,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", GUILocalizeStrings.Get(10798749) + " (" + title + ")"); // download to movie directory
 
                   InitTrailerwatcher(path); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
+
+                  // InitOVEventHandler(); // ToDo: Requires check, if OV1.2 is available ...
 
                   LogMyFilms.Debug("Starting OnlineVideos with '" + OVstartparams + "'");
                   // should this be set here to make original movie doesn't get set to watched??
@@ -3131,7 +3132,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               catch (Exception)
               {
-                Log.Error("The default script is not compatible with current MyFilms version - please change your settings !");
+                LogMyFilms.Error("The default script is not compatible with current MyFilms version - please change your settings !");
               }
             }
             DirectoryInfo dirsInf = new DirectoryInfo(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
@@ -4427,7 +4428,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception ex)
           {
-            Log.Error("GetAspectRatio: Error getting aspectratio via mediainfo.dll - Exception: " + ex.ToString());
+            LogMyFilms.Error("GetAspectRatio: Error getting aspectratio via mediainfo.dll - Exception: " + ex.ToString());
           }
           return "";
         }
@@ -5688,7 +5689,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (!string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
                   filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, imdbActor.ThumbnailUrl, imdbActor.Name, true, true, out filenameperson);
                 else
-                  Log.Debug("CreateOrUpdateActor() - Personartworkpath not set - no image download possible !");
+                  LogMyFilms.Debug("CreateOrUpdateActor() - Personartworkpath not set - no image download possible !");
 
                 LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + name + "', path='" + filename1person + "'");
                 // Add actor to datbbase to get infos in person facades later...
@@ -9559,6 +9560,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         return false;
       }
+
+      #region GUI Events
+      private void InitOVEventHandler()
+      {
+        // Subscribe to Events
+        try
+        {
+          var OV = new OnlineVideos.MediaPortal1.GUIOnlineVideos();
+          OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
+          LogMyFilms.Debug("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos: " + ex.Message);
+        }
+      }
+      
+      private void OnVideoDownloaded(string file, string site, string categoryRecursiveName, string videoTitle)
+      {
+        LogMyFilms.Debug("OnVideoDownloaded() - file = '" + file + "', site = '" + site + "', categoryrecursivename = '" + categoryRecursiveName + "', videoTitle = '" + videoTitle + "'");
+      }
+      #endregion
+
     }
 
 }
