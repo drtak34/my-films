@@ -6849,7 +6849,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Play Movie
         //-------------------------------------------------------------------------------------------
         {
-           
+
+            //Version Select Dialog
+            string filestorage = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
+            if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
+            {
+                Regex filmver = new Regex(@"\[\[([^\#]*)##([^\]]*)\]\]");
+                MatchCollection filmverMatches = filmver.Matches(filestorage);
+                if (filmverMatches.Count > 0)
+                {
+                    GUIDialogMenu versionmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    versionmenu.Reset();
+                    versionmenu.SetHeading("Select Version");
+                    List<string> filestr = new List<string>();
+                    for (int i = 0; i < filmverMatches.Count; i++)
+                    {
+                        versionmenu.Add(filmverMatches[i].Groups[2].Value);
+                        filestr.Add(filmverMatches[i].Groups[1].Value);
+                    }
+                    versionmenu.DoModal(GetID);
+                    if (versionmenu.SelectedLabel == -1) return;
+                    filestorage = filestr[versionmenu.SelectedLabel];
+                }
+            }
+
             // Guzzi: Added WOL to start remote host before playing the files
             // Wake up the TV server, if required
             // HandleWakeUpNas();
@@ -6860,7 +6883,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
               int wTimeout = MyFilms.conf.StrWOLtimeout;
               bool isActive;
-              string UNCpath = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
+              string UNCpath = filestorage;
               string NasServerName;
               string NasMACAddress;
 
@@ -6952,7 +6975,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int IMovieIndex = 0;
 
             //Guzzi: Added BoolType for Trailerlaunch
-			      Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
+            Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false, filestorage);
             //Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex);
             if (newItems.Count > 20)
             // Maximum 20 entries (limitation for MP dialogFileStacking)
@@ -6985,7 +7008,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 // Check, if the content returned is a BR playlist to supress internal player and dialogs
                 bool isBRcontent = false;
-                string mediapath = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
+                string mediapath = filestorage;
                 if (newItems[0].ToString().ToLower().EndsWith("bdmv")) 
                   isBRcontent = true;
 
@@ -7979,6 +8002,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private static void Search_All_Files(int select_item, bool delete, ref bool NoResumeMovie, ref ArrayList newItems, ref int IMovieIndex, bool Trailer)
         {
+            Search_All_Files(select_item, delete, ref NoResumeMovie, ref newItems, ref IMovieIndex, Trailer, "");
+        }
+
+        private static void Search_All_Files(int select_item, bool delete, ref bool NoResumeMovie, ref ArrayList newItems, ref int IMovieIndex, bool Trailer, string overrideFileName)
+        {
             string fileName = string.Empty;
             string[] split1;
             string[] split2;
@@ -8013,6 +8041,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 try { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim(); }
                 catch { fileName = string.Empty; }
               }
+            }
+
+            if (!string.IsNullOrEmpty(overrideFileName))
+            {
+                LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - override filename: '" + overrideFileName.Trim());
+                fileName = overrideFileName.Trim();
             }
 
             if (string.IsNullOrEmpty(fileName) && !Trailer)
