@@ -737,6 +737,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
 
+        public static bool IsOnlineVideosAvailableAndEnabledV12
+        {
+          get
+          {
+            bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(1, 2, 0, 0), true) && IsPluginEnabled("OnlineVideos");
+            LogMyFilms.Debug("Helper() - OnlineVideos 1.2 available and enabled = '" + status + "'");
+            return status;
+          }
+        }
+
         public static string GetTraktUser()
         {
           if (Helper.IsTraktAvailableAndEnabled)
