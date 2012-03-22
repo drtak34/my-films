@@ -38,6 +38,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Text.RegularExpressions;
   using System.Windows.Forms;
 
+  using OnlineVideos.MediaPortal1;
+
   using grabber;
   using Grabber;
   
@@ -1035,7 +1037,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   InitTrailerwatcher(path); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
 
-                  // InitOVEventHandler(); // ToDo: Requires check, if OV1.2 is available ...
+                  if (Helper.IsOnlineVideosAvailableAndEnabledV12) InitOVEventHandler();
+                  else LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos - you need OV V1.2+ installed and enabled !");
 
                   LogMyFilms.Debug("Starting OnlineVideos with '" + OVstartparams + "'");
                   // should this be set here to make original movie doesn't get set to watched??
@@ -9599,16 +9602,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       private void InitOVEventHandler()
       {
         // Subscribe to Events
-        try
-        {
-          var OV = new OnlineVideos.MediaPortal1.GUIOnlineVideos();
-          OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
-          LogMyFilms.Debug("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
-        }
-        catch (Exception ex)
-        {
-          LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos: " + ex.Message);
-        }
+          try
+          {
+            GUIOnlineVideos OV = (GUIOnlineVideos)GUIWindowManager.GetWindow(MyFilms.ID_OnlineVideos);
+            OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
+            LogMyFilms.Debug("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos: " + ex.Message);
+          }
       }
       
       private void OnVideoDownloaded(string file, string site, string categoryRecursiveName, string videoTitle)
