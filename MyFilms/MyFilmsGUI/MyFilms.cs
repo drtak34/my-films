@@ -5443,7 +5443,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
             string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg";
             string DefaultViewImage = (System.IO.File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
-            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView), DefaultViewImage);
+            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView), DefaultViewImage, conf.BoolReverseNames);
             // string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
             this.facadeFilms[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
             this.facadeFilms[conf.StrIndex].IconImage = strActiveFacadeImages[1];
@@ -5526,6 +5526,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
         string strImageInViewsDefaultFolder = strPathViewsRoot + wStrSort.ToLower() + ".jpg";
         string DefaultViewImage = (System.IO.File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
+        bool reversenames = conf.BoolReverseNames;
 
         for (i = 0; i < facadeFilms.Count; i++)
         {
@@ -5544,7 +5545,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, DefaultViewImage);
+                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, DefaultViewImage, reversenames);
                   //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
                   //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
                   //{
@@ -5710,8 +5711,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
     }
 
-    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView, string DefaultViewImage)
+    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView, string DefaultViewImage, bool reversenames)
     {
+      if (isPerson && reversenames) itemlabel = ReReverseName(itemlabel);
+
       string[] thumbimages = new string[2];
       thumbimages[0] = string.Empty; // ThumbnailImage
       thumbimages[1] = string.Empty; //IconImage
@@ -10206,7 +10209,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // first select the area where to make random search on - "all", "category", "year", "country" - then populate the currentTrailerMovieList
       AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      List<string> choiceSearch = new List<string>();
       ArrayList w_tableau = new ArrayList();
       ArrayList wsub_tableau = new ArrayList();
       if (dlg == null) return;
@@ -11006,7 +11009,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // first select the area where to make random search on - "all", "category", "year", "country"
       AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      List<string> choiceSearch = new List<string>();
       ArrayList w_tableau = new ArrayList();
       ArrayList wsub_tableau = new ArrayList();
       bool GetItems = false;
