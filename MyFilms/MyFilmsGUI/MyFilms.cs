@@ -1710,7 +1710,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
               }
 
-              if (GetPrevFilmList()) 
+              if (GetPrevFilmList())
                 return; // disabled, as we don't want to go back to full film list by default anymore (menu instead)
               else
               {
@@ -2298,6 +2298,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           return false; //this was already "root" view - so jumping back should leave the plugin !
         }
+        if (GetCustomViewFromViewLabel(conf.CurrentView) != null && GetCustomViewFromViewLabel(conf.CurrentView).Value.Length > 0) // if it's a custom view and a filter value is set
+          return false;
         else
         {   
           // Jump back to prev view_display (categorised by year, genre etc) // Removed ACTORS special handling
@@ -7039,7 +7041,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
             conf.Boolselect = true;
-            conf.Boolreturn = true;
+            conf.Boolreturn = false;
             conf.Wstar = "*";
             if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(344) + " [*" + conf.Wstar + "*]";
             // TxtSelect.Label = conf.StrTxtSelect;
