@@ -119,6 +119,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 		</control>
 		<control>
+			<description>Plugin name from Setup</description>
 			<type>label</type>
 			<id>1</id>
 			<posX>125</posX>
@@ -127,12 +128,9 @@
 			<font>font18</font>
 			<align>left</align>
 			<textcolor>ffa9d0f7</textcolor>
-			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
 		<control>
-			<description>Filters group</description>
-			<posX>1</posX>
+			<description>Global Filter Icons group</description>
 			<type>group</type>
 			<posX>125</posX>
 			<posY>50</posY>
@@ -186,16 +184,13 @@
 			<type>fadelabel</type>
 			<description>Config Name</description>
 			<id>1</id>
-			<posX>500</posX>
-			<posY>37</posY>
-			<width>350</width>
-			<height>24</height>
-			<label>label</label>
+		    <posX>500</posX>
+			<posY>20</posY>
+			<width>430</width>
 			<font>font14</font>
+			<label>#myfilms.config.currentconfig #myfilms.config.configfilter</label>
 			<textcolor>cca9d0f7</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<visible>!control.hasfocus(10099)</visible>
-			<label>#myfilms.config.currentconfig #myfilms.config.configfilter</label>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -204,13 +199,12 @@
 			<posX>500</posX>
 			<posY>65</posY>
 			<width>750</width>
-			<height>24</height>
-			<label>label</label>
+			<label>#myfilms.view #myfilms.select</label>
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
+			<wrapString> | </wrapString>
 			<visible>!control.hasfocus(10099)</visible>
-			<label>#myfilms.view #myfilms.select</label>
 		</control>
 		<control>
 			<type>actiongroup</type>
@@ -226,13 +220,8 @@
 			<width>425</width>
 			<height>720</height>
 			<dimColor>ffffffff</dimColor>
-			<animation effect="fade" time="250" start="75" reversible="false">visible</animation>
-			<animation effect="slide" tween="circle" easing="out" time="250" start="-233,0" reversible="false">visible</animation>
-			<animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
-			<animation effect="slide" tween="circle" easing="out" time="250" end="-233,0" reversible="false">hidden</animation>
-			<animation effect="slide" time="150" end="-400,0" reversible="false">WindowClose</animation>
-			<animation effect="slide" tween="circle" easing="out" time="250" start="-233,0" reversible="false">WindowOpen</animation>
-			<animation effect="fade" time="250" start="75" reversible="false">WindowOpen</animation>
+			<animation effect="slide" time="450" start="-400,0">visible</animation>
+			<animation effect="slide" time="450" end="-400,0">hidden</animation>
 			<control>
 				<type>image</type>
 				<id>0</id>
@@ -248,8 +237,8 @@
 				<type>label</type>
 				<description>Menu Label</description>
 				<id>1</id>
-				<posX>145</posX>
-				<posY>70</posY>
+				<posX>185</posX>
+				<posY>80</posY>
 				<label>924</label>
 				<font>font18</font>
 				<align>left</align>
@@ -259,19 +248,17 @@
 			<control>
 				<type>group</type>
 				<description>group element</description>
-				<!-- <id>27</id> -->
-				<id>1234</id>
 				<animation effect="fade" time="450" reversible="true">visible</animation>
 				<animation effect="fade" time="450" reversible="true">hidden</animation>
 				<visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
 				<posX>100</posX>
-				<posY>120</posY>
+				<posY>130</posY>
 				<layout>StackLayout</layout>
 				<control>
 					<type>button</type>
 					<description>Back</description>
 					<id>102</id>
-					<onup>10014</onup>
+					<onup>10012</onup>
 					<ondown>109</ondown>
 					<onright>10000</onright>
 					<label>712</label>
@@ -299,8 +286,8 @@
 					<description>previous</description>
 					<id>104</id>
 					<onright>10000</onright>
-					<onup>107</onup>
 					<ondown>103</ondown>
+					<onup>107</onup>
 					<label>210</label>
 				</control>
 				<control>
@@ -308,8 +295,8 @@
 					<description>next</description>
 					<id>103</id>
 					<onright>10000</onright>
-					<onup>104</onup>
 					<ondown>106</ondown>
+					<onup>104</onup>
 					<label>209</label>
 				</control>
 				<control>
@@ -317,16 +304,16 @@
 					<description>First</description>
 					<id>106</id>
 					<onright>10000</onright>
-					<onup>103</onup>
 					<ondown>105</ondown>
+					<onup>103</onup>
 				</control>
 				<control>
 					<type>button</type>
 					<description>Last</description>
 					<id>105</id>
 					<onright>10000</onright>
-					<onup>106</onup>
 					<ondown>10012</ondown>
+					<onup>106</onup>
 				</control>
 
 			<!-- Start - Additional Buttons for Links to other Plugins -->
@@ -515,6 +502,7 @@
 	</control> -->
 	<control>
 		<type>imagelist</type>
+		<description>Rating Stars</description>
 		<id>1</id>
 		<posX>520</posX>
 		<posY>147</posY>
@@ -1305,19 +1293,19 @@
 
 	<control>
 		<type>image</type>
-		<description>Thumbnail with no video playing</description>
+		<description>Cover Image</description>
 		<id>0</id>
 		<posX>49</posX>
 		<posY>81</posY>
 		<width>380</width>
 		<height>538</height>
-		<keepaspectratio>yes</keepaspectratio>
+		<texture>#myfilms.picture</texture>
 		<zoom>yes</zoom>
-		<visible>!Control.HasFocus(10099)</visible>
-		<texture>#myfilms.coverimage</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]</visible>
 		<animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>
 	<control>
 		<description>Cover Art Glass Overlay</description>
@@ -1328,12 +1316,14 @@
 		<width>406</width>
 		<height>556</height>
 		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-		<visible>!Control.HasFocus(10099)</visible>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
 		<animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>
 	<control>
 		<type>image</type>
-		<description>View Image on Film Lists</description>
+		<description>View Image</description>
 		<id>0</id>
 		<posX>400</posX>
 		<posY>55</posY>
@@ -1343,8 +1333,38 @@
 		<keepaspectratio>yes</keepaspectratio>
 		<valign>top</valign>
 		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>Person Image</description>
+		<id>0</id>
+		<posX>400</posX>
+		<posY>55</posY>
+		<width>63</width>
+		<height>95</height>
+		<texture mask="Picturethumbmask.png">#myfilms.personcoverimage</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<valign>top</valign>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>Group Cover</description>
+		<id>0</id>
+		<posX>400</posX>
+		<posY>55</posY>
+		<width>63</width>
+		<height>95</height>
+		<texture mask="Picturethumbmask.png">#myfilms.groupcoverimage</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<valign>top</valign>
+		<visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>
 	<control>
 		<description>Video/Audio Format</description>
@@ -1368,7 +1388,6 @@
 		<posY>690</posY>
 		<label>#myfilms.db.number.label: #myfilms.db.number.value | #myfilms.db.date.label: #myfilms.db.date.value | #myfilms.db.languages.label: #myfilms.db.languages.value | #myfilms.db.subtitles.label: #myfilms.db.subtitles.value</label>
 		<font>font10</font>
-		<align>left</align>
 		<textcolor>90ffffff</textcolor>
 		<width>690</width>
 		<visible>!Control.HasFocus(10099)</visible>
@@ -1419,7 +1438,7 @@
 		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.item3.value)</visible>
 	</control> -->
 
-<!-- Start Special View for FullColorFanart -->
+<!-- FULL FANART VIEW START -->
 	<control>
 		<type>label</type>
 		<description>Title (FullColor Fanart View)</description>
