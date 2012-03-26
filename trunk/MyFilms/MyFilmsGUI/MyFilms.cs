@@ -2679,7 +2679,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (DelimCnt < DelimCnt2) item.Label2 = "(" + iCnt + ")  " + NewString.PosRight(")  ", item.Label2);// prepend (items in folder count)
           #endregion
-
+          #region Label2 ...
+          item.Label3 = sr["Edition"].ToString() ?? "";
+          #endregion
           #region Watched Status
           if (conf.StrEnhancedWatchedStatusHandling)
           {
