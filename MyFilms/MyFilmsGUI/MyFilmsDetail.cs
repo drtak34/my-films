@@ -7942,18 +7942,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 try
                 {
                     string wImage;
-                    if ((MyFilms.r[select_item]["Picture"].ToString().IndexOf(":\\") == -1) && (MyFilms.r[select_item]["Picture"].ToString().Substring(0, 2) != "\\\\"))
-                        wImage = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[select_item]["Picture"];
-                    else
-                        wImage = MyFilms.r[select_item]["Picture"].ToString();
+                  string DbPicture = MyFilms.r[select_item]["Picture"].ToString();
+                  if (DbPicture.IndexOf(":\\") == -1 && ( DbPicture.Length < 2 || DbPicture.Substring(0, 2) != "\\\\"))
+                    wImage = MyFilms.conf.StrPathImg + "\\" + DbPicture;
+                  else
+                    wImage = DbPicture;
                     if (!System.IO.File.Exists(wImage))
                         wImage = Config.Dir.Skin + "\\media\\Films_No_Cover.png";
-                    if (System.IO.File.Exists(wImage))
+                    if (System.IO.File.Exists(wImage)) // && wImage.Length < 249 check pathes are not too long!
                     {
-                        if (!System.IO.File.Exists(strThumb))
-                            Picture.CreateThumbnail(wImage, strThumb, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, Thumbs.SpeedThumbsSmall);
-                        if (!System.IO.File.Exists(LargeThumb))
-                            Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge);
+                      if (!System.IO.File.Exists(strThumb)) Picture.CreateThumbnail(wImage, strThumb, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, Thumbs.SpeedThumbsSmall);
+                      if (!System.IO.File.Exists(LargeThumb)) Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge);
                     }
                 }
                 catch (Exception ex)
