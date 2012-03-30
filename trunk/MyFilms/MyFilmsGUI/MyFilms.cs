@@ -2214,10 +2214,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      foreach (string[] strings in ItemsToDisplay) LogMyFilms.Debug("GetDisplayItems() - Unsorted: '" + strings[0] + "', '" + strings[1] + "'");
+      // foreach (string[] strings in ItemsToDisplay) LogMyFilms.Debug("GetDisplayItems() - Unsorted: '" + strings[0] + "', '" + strings[1] + "'");
       IComparer myComp = new myDBfieldComparer();
       ItemsToDisplay.Sort(0, ItemsToDisplay.Count, myComp);
-      foreach (string[] strings in ItemsToDisplay) LogMyFilms.Debug("GetDisplayItems() - Sorted  : '" + strings[0] + "', '" + strings[1] + "'");
+      // foreach (string[] strings in ItemsToDisplay) LogMyFilms.Debug("GetDisplayItems() - Sorted  : '" + strings[0] + "', '" + strings[1] + "'");
+      LogMyFilms.Debug("GetDisplayItems() - returning '" + ItemsToDisplay.Count + "' display items (sorted)");
       return ItemsToDisplay;
     }
 
@@ -2679,7 +2680,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (DelimCnt < DelimCnt2) item.Label2 = "(" + iCnt + ")  " + NewString.PosRight(")  ", item.Label2);// prepend (items in folder count)
           #endregion
-          #region Label2 ...
+          #region Label3 ...
           item.Label3 = sr["Edition"].ToString() ?? "";
           #endregion
           #region Watched Status
@@ -4280,6 +4281,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.StrSorta, conf.StrSortSens, "*", true, "");
         else
           GetFilmList();
+        GUIWindowManager.Process(); 
         GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
       }
     }
@@ -7079,6 +7081,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           SetLabelView(!string.IsNullOrEmpty(selectedCustomView.Label) ? selectedCustomView.Label : selectedCustomView.DBfield);
           GUIPropertyManager.SetProperty("#currentmodule", (!string.IsNullOrEmpty(selectedCustomView.Label) ? selectedCustomView.Label : selectedCustomView.DBfield));
+          GUIWindowManager.Process(); // required for the next statement to work correctly, so the skinengine has correct state for visibility and focus
+          // GUIControl.FocusControl(GetID, facadeFilms.GetID);
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
         #endregion
