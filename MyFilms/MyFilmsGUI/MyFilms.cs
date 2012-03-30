@@ -8555,13 +8555,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
             }
 
-            // if it is a view, save the settings for it
-            if (currentCustomView != null)
-            {
-              currentCustomView.Index = currentIndex;
-              LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed for Custom View '" + currentCustomView.Label + "' to '" + currentIndex + "'");
-              SaveCustomViews();
-            }
+            //// if it is a view, save the settings for it
+            //if (currentCustomView != null)
+            //{
+            //  currentCustomView.Index = currentIndex;
+            //  LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed for Custom View '" + currentCustomView.Label + "' to '" + currentIndex + "'");
+            //  SaveCustomViews();
+            //}
 
             // now change settings for GUI
             MyFilms.conf.IndexedChars = currentIndex;
