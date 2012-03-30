@@ -1610,7 +1610,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           // LogStatusVars("PreviousMenu");
-          if (!string.IsNullOrEmpty(conf.WStrSort)) SaveLastView(conf.WStrSort);
+          string viewStateCacheName = (null != GetCustomViewFromViewLabel(conf.CurrentView)) ? "CustomView_" + conf.WStrSort : conf.WStrSort;
+          if (!string.IsNullOrEmpty(viewStateCacheName))
+            SaveLastView(viewStateCacheName);
 
           if (ViewHistory.Count > 0)
           {
