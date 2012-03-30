@@ -8447,6 +8447,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
         upd_choice[ichoice] = "menuadd";
         ichoice++;
+
+        if (null != GetCustomViewFromViewLabel(conf.CurrentView))
+
+        {
+          dlg.Add(GUILocalizeStrings.Get(1079829)); // Save current custom view settings
+          upd_choice[ichoice] = "menusavecurrentsettingstoview";
+          ichoice++;
+        }
       }
 
       ichoice++;
@@ -8597,6 +8605,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
 
+        case "menusavecurrentsettingstoview":
+          {
+            MFview.ViewRow newRow = GetCustomViewFromViewLabel(conf.CurrentView);
+            newRow.SortDirectionView = (conf.BoolSortCountinViews) ? conf.WStrSortSensCount : conf.WStrSortSens;
+            newRow.SortFieldViewType = (conf.BoolSortCountinViews) ? "Count" : "Name";
+            newRow.Index = conf.IndexedChars;
+            newRow.LayoutView = conf.WStrLayOut.ToString();
+            LogMyFilms.Debug("Context_Menu_Movie() - Update Custom View - DB Field '" + newRow.DBfield + "', Label '" + newRow.Label + "', Value '" + newRow.Value + "'");
+            SaveCustomViews();
+            break;
+          }
+
         case "menuadd":
           {
             MFview.ViewRow newRow = MyFilms.conf.CustomViews.View.NewViewRow();
@@ -8682,7 +8702,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             break;
           }
-
 
         case "menudisable":
           {
