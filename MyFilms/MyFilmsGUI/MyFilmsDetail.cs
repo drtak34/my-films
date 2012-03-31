@@ -1156,13 +1156,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //No more needed because of updproperties !!! - so discussion about removal?
                 if (ExtendedStartmode("Details context: Itemx update to labely (moved to testmode"))
                 {
-                  if (StrUpdItem1 != "(none)")
+                  if (Helper.FieldIsSet(StrUpdItem1))
                   {
                     if (StrUpdText1.Length > 0) dlgmenu.Add(StrUpdText1); //Specific Item1 label to update
                     else dlgmenu.Add(StrUpdItem1); //Specific Item1 to update
                     choiceViewMenu.Add("item1");
                   }
-                  if (StrUpdItem2 != "(none)")
+                  if (Helper.FieldIsSet(StrUpdItem2))
                   {
                     if (StrUpdText2.Length > 0) dlgmenu.Add(StrUpdText2); //Specific Item2 label to update
                     else dlgmenu.Add(StrUpdItem2); //Specific Item2 to update
