@@ -699,7 +699,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return currentConfig; }
           set { currentConfig = value; }
         }
-        private string currentView = string.Empty;
+        private string currentView = string.Empty; // private MFview.ViewRow currentView = null;
         public string CurrentView
         {
           get { return currentView; }
