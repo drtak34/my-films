@@ -506,7 +506,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   dlg.Add(pItem);
                   pItem.ItemId = (int)menuAction.DeleteAllHigh;
 
-                  pItem = new GUIListItem("Delete all except selected");
+                  pItem = new GUIListItem("Delete all except currently selected");
                   dlg.Add(pItem);
                   pItem.ItemId = (int)menuAction.DeleteAllExceptSelected;
                 }

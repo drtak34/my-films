@@ -337,6 +337,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static DataRow[] r; // will hold current recordset to traverse
     public static MFMovie currentMovie = new MFMovie(); // will hold current recordset to traverse
 
+    private MyFilmsCoverManager cm = null;
+    
     //Imageswapperdefinitions for fanart and cover
     private ImageSwapper backdrop;
 
@@ -8422,6 +8424,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ichoice++;
         }
 
+        dlg.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
+        upd_choice[ichoice] = "covermanager";
+        ichoice++;
+
         if (MyFilms.conf.StrFanart)
         {
           dlg.Add(GUILocalizeStrings.Get(1079862));
@@ -9129,6 +9135,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "updatepersonmovie":
           // ToDo: Update personinfo for all involve artists (takes longer!)
           {
+            break;
+          }
+
+        case "covermanager":
+          {
+            conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+            conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+            LogMyFilms.Debug("Switching to Cover Manager Window");
+
+            if (cm == null)
+            {
+              cm = new MyFilmsCoverManager();
+              GUIWindow cmwindow = (GUIWindow)cm;
+              GUIWindowManager.Add(ref cmwindow);
+              cm.Init();
+            }
+            cm.MovieID = MyFilms.conf.StrIndex;
+            cm.setPageTitle("Cover Manager");
+            //sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex));
+            //cm.ArtworkFileName = GetOrCreateCoverFilename(MyFilms.r, MyFilms.conf.StrIndex, sTitles.MasterTitle);
+            GUIWindowManager.ActivateWindow(cm.GetID, false);
             break;
           }
 
