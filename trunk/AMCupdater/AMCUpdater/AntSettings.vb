@@ -733,7 +733,8 @@ Public Class AntSettings
         dt.Rows.Add("Backup_XML_First", "True") 'DefaultBackupXML
         dt.Rows.Add("Overwrite_XML_File", "True") 'DefaultOverwriteXML
         dt.Rows.Add("Ant_Database_Source_Field", "Source") 'AMCDatabaseSource
-        dt.Rows.Add("Purge_Missing_Files", "False") 'DefaultPurgeMissing
+        dt.Rows.Add("Purge_Missing_Files", "False") 'DefaultPurgeMissing (only when source available)
+        dt.Rows.Add("Purge_Missing_Files_When_Source_Unavailable", "False") 'DefaultPurgeMissing (always)
         dt.Rows.Add("RegEx_Check_For_MultiPart_Files", "[-|_]cd[0-9]|[-|_]disk[0-9]|[0-9]of[0-9]") 'RegExCheckMultiPart
         dt.Rows.Add("Scan_For_DVD_Folders", "True") 'DefaultScanDVDFolders
         dt.Rows.Add("Execute_Program", "False") 'ExecuteProgram
@@ -799,6 +800,7 @@ Public Class AntSettings
         dt.Rows.Add("Only_Update_With_Nonempty_Data", "False")
         dt.Rows.Add("Auto_Approve_Limits", "")
         dt.Rows.Add("Group_Name_Identifier", "")
+        dt.Rows.Add("Series_Name_Identifier", "")
 
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False
