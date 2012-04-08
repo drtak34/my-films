@@ -1979,7 +1979,7 @@ Public Class AntProcessor
         dvOrphanedMediaFiles.Sort = "FileName"
 
         Dim Path() As String = CurrentSettings.Movie_Scan_Path.Split(";")   ' scan pathes
-        Dim PathAvailable() As Boolean = New Boolean() {}                   ' scan path availability
+        Dim PathAvailable(Path.Length - 1) As Boolean                       ' scan path availability
         For i As Integer = 0 To Path.Length - 1
             If System.IO.Directory.Exists(Path(i)) Then
                 PathAvailable(i) = True
