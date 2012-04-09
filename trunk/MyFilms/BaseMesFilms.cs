@@ -1932,6 +1932,7 @@ namespace MyFilmsPlugin.MyFilms
     private string _mStrTitle = string.Empty;
     private string _mStrTranslatedTitle = string.Empty;
     private string _mStrFile = string.Empty;
+    private string _mStrTrailer = string.Empty;
     private string _mStrPath = string.Empty;
     private string _mStrIMDBNumber = string.Empty;
     private string _mStrTMDBNumber = string.Empty;
@@ -2003,6 +2004,12 @@ namespace MyFilmsPlugin.MyFilms
     {
       get { return _mStrFile; }
       set { _mStrFile = value; }
+    }
+
+    public string Trailer
+    {
+      get { return _mStrTrailer; }
+      set { _mStrTrailer = value; }
     }
 
     public string Path
@@ -2129,6 +2136,9 @@ namespace MyFilmsPlugin.MyFilms
       _mIWatchedCount = -1;
       _mDateTime = System.DateTime.Today;
       _mDateAdded = string.Empty;
+      _mStrFile = string.Empty;
+      _mStrTrailer = string.Empty;
+      _mStrPath = string.Empty;
       _mPicture = string.Empty;
       _mFanart = string.Empty;
       _mConfig = string.Empty;

@@ -93,10 +93,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="OnlineVideos, Version=1.2.0.2012, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\OnlineVideos.dll</HintPath>
-    </Reference>
     <Reference Include="OnlineVideos.MediaPortal1, Version=1.2.0.2012, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\OnlineVideos.MediaPortal1.dll</HintPath>

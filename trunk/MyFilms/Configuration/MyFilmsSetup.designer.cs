@@ -358,7 +358,6 @@
           this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
           this.ShowTrailerWhenStartingMovie = new System.Windows.Forms.CheckBox();
           this.btnTrailer = new System.Windows.Forms.Button();
-          this.ShowTrailerPlayDialog = new System.Windows.Forms.CheckBox();
           this.PathStorageTrailer = new System.Windows.Forms.TextBox();
           this.label34 = new System.Windows.Forms.Label();
           this.AntStorageTrailer = new System.Windows.Forms.ComboBox();
@@ -3524,7 +3523,6 @@
           this.groupBox24.Controls.Add(this.SearchSubDirsTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerWhenStartingMovie);
           this.groupBox24.Controls.Add(this.btnTrailer);
-          this.groupBox24.Controls.Add(this.ShowTrailerPlayDialog);
           this.groupBox24.Controls.Add(this.PathStorageTrailer);
           this.groupBox24.Controls.Add(this.label34);
           this.groupBox24.Controls.Add(this.AntStorageTrailer);
@@ -3591,18 +3589,6 @@
           this.btnTrailer.Text = "...";
           this.btnTrailer.UseVisualStyleBackColor = true;
           this.btnTrailer.Click += new System.EventHandler(this.btnTrailer_Click);
-          // 
-          // ShowTrailerPlayDialog
-          // 
-          this.ShowTrailerPlayDialog.AutoSize = true;
-          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 195);
-          this.ShowTrailerPlayDialog.Name = "ShowTrailerPlayDialog";
-          this.ShowTrailerPlayDialog.Size = new System.Drawing.Size(138, 17);
-          this.ShowTrailerPlayDialog.TabIndex = 72;
-          this.ShowTrailerPlayDialog.Text = "Show Trailer Userdialog";
-          this.ToolTip1.SetToolTip(this.ShowTrailerPlayDialog, "-- Coming in future version --\r\nIf checked, a dialog will be displayed to select " +
-                  "trailer, \r\nif more than one trailer is present.");
-          this.ShowTrailerPlayDialog.UseVisualStyleBackColor = true;
           // 
           // PathStorageTrailer
           // 
@@ -6188,7 +6174,6 @@
         private CheckBox SearchSubDirsTrailer;
         private CheckBox ShowTrailerWhenStartingMovie;
         private Button btnTrailer;
-        private CheckBox ShowTrailerPlayDialog;
         private TextBox PathStorageTrailer;
         private Label label34;
         private ComboBox AntStorageTrailer;
