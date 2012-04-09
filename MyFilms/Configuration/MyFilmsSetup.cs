@@ -110,7 +110,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               // this.UserProfileName.Visible = false;
               this.cbTrailerAutoregister.Visible = false;
               this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
-              this.ShowTrailerPlayDialog.Visible = false;
               this.ShowTrailerWhenStartingMovie.Visible = false;
               this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
               this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab

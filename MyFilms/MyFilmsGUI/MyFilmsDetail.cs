@@ -178,8 +178,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static string wsearchfile;
         public static int wGetID;
         //public static bool isTrailer = false;
-        //public static bool trailerPlayed = false;
         public static bool trailerPlayed = false;
+        // public static bool trailerScrobblingMode = false;
         private bool PlayBackEvents_Subscribed = false;
         private bool doUpdateDetailsViewByFinishEvent = false;
 
@@ -6246,15 +6246,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         clearGUIProperty("user.item5.field");
                         clearGUIProperty("user.item5.value");
                       }
-                    if (wrep && (MyFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower())))
+                    if (wrep && MyFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower()))
                     {
                       setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
                       MyFilms.currentMovie.File = MyFilms.r[ItemId][dc.ColumnName].ToString();
                     }
 
-                    if (wrep && (MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower())))
+                    if (wrep && MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower()))
                     {
                       setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      MyFilms.currentMovie.Trailer = MyFilms.r[ItemId][dc.ColumnName].ToString();
                       // add number of trailers : #myfilms.user.sourcetrailer.count
                       if (!string.IsNullOrEmpty(MyFilms.r[ItemId][dc.ColumnName].ToString().Trim()))
                       {
@@ -7449,7 +7450,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           bool playbackeventIsOfConcern = false;
           if (string.IsNullOrEmpty(filename)) return false;
-          if ((MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive))) 
+          if ((MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive)))
+            playbackeventIsOfConcern = true;
+          return playbackeventIsOfConcern;
+        }
+
+        bool PlayBackEventIsOfConcernAsTrailer(g_Player.MediaType type, string filename)
+        {
+          bool playbackeventIsOfConcern = false;
+          if (string.IsNullOrEmpty(filename)) return false;
+          if (MyFilms.currentTrailerPlayingItem != null && type == g_Player.MediaType.Video && MyFilms.currentTrailerPlayingItem.Trailer.Contains(filename)) // if (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.Trailer.Contains(filename)) // 
             playbackeventIsOfConcern = true;
           return playbackeventIsOfConcern;
         }
@@ -7466,8 +7476,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // indicate to skin, that it is MyFilms playing a file
             setGUIProperty("isplaying", "true", true);
             // attach to global action event, to handle remote keys during playback - e.g. trailer previews
-            GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction); // make sure it doesn't register twice ....
-            GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
+            GUIWindowManager.OnNewAction -= new OnActionHandler(GUIWindowManager_OnNewAction); // make sure it doesn't register twice ....
+            GUIWindowManager.OnNewAction += new OnActionHandler(GUIWindowManager_OnNewAction);
 
             // tell any listeners that user started the movie
             MFMovie movie = new MFMovie();
@@ -7513,36 +7523,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //GUIPropertyManager.SetProperty("#Play.Current.Thumb", clear ? " " : osdImage);
           // Check, if property for OSD should be set (came from myvideo DB in the past) -> #Play.Current.Thumb
         }
+
         private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)
         {
           if (!PlayBackEventIsOfConcern(type, filename))
           {
-            LogMyFilms.Debug("OnPlayBackEnded was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
-            if (MyFilms.trailerscrobbleactive)
+            if (PlayBackEventIsOfConcernAsTrailer(type, filename))
             {
-              if (TrailerEnded != null && MyFilms.conf.AllowTraktSync)
+              LogMyFilms.Debug("OnPlayBackEnded was initiated, identified that MyFilms Trailer was played - filename: '" + filename + "'");
+              if (TrailerEnded != null)
               {
-                TrailerEnded(filename);
-                LogMyFilms.Debug("OnPlayBackEnded(): Fired 'TrailerEnded' event with filename = '" + filename + "'");
+                TrailerEnded(filename); // LogMyFilms.Debug("OnPlayBackEnded(): Fired 'TrailerEnded' event with filename = '" + filename + "'");
               }
-              MyFilms.trailerscrobbleactive = false;
             }
+            else LogMyFilms.Debug("OnPlayBackEnded was initiated, but has no relevant movie event data for MyFilms - filename: '" + filename + "'");
             return;
           }
           LogMyFilms.Debug("OnPlayBackEnded was initiated - filename: '" + filename + "'");
           UpdateOnPlayEnd(type, 0, filename, true, false);
         }
+
         private void OnPlayBackStopped(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename)
         {
           if (!PlayBackEventIsOfConcern(type, filename))
           {
-            LogMyFilms.Debug("OnPlayBackStopped was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
+            LogMyFilms.Debug("OnPlayBackStopped was initiated, but has no relevant movie event data for MyFilms - filename: '" + filename + "'");
             MyFilms.trailerscrobbleactive = false;
             return;
           }
           LogMyFilms.Debug("OnPlayBackStopped was initiated - filename: '" + filename + "'");
           UpdateOnPlayEnd(type, timeMovieStopped, filename, false, true);
         }
+
         private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
             LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");

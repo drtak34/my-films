@@ -352,5 +352,8 @@
     <String id="10798966">Last Year</String>
     <String id="10798967">Last 3 Years</String>
     <String id="10798968">Older than 3 Years</String>
+    <String id="10798970">Global filter "choose custom filter" ({0})</String>
+    <String id="10798971">Global filter "disable custom filter" ({0})</String>
+    <String id="10798980">Play random trailers</String>
   </Section>
 </Language>
