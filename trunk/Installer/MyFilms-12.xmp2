@@ -2839,20 +2839,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f0444fe5-b764-4ea8-9972-360e13fe40fb}-movie-trailer.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer2.wmv</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{b52c8531-d64f-46ca-a52d-b576fe53a15a}-movie-trailer2.wmv</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer2.wmv</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\movie.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{82b9acb0-29fb-41fd-b0c8-d6e34c1459f0}-movie.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\movie.wmv</DestinationFilename>
@@ -2940,6 +2926,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Config\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{ebf4a2a8-f063-4da5-ab59-48cf58e5283a}-movie.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{03ca9e59-db24-401a-8dc7-4b34f9e22909}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\Thumbs.db</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3906,10 +3899,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3926,7 +3919,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>2</Minor>
       <Build>0</Build>
-      <Revision>2123</Revision>
+      <Revision>2130</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3938,7 +3931,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-03-30T23:35:47.5875466+02:00</ReleaseDate>
+    <ReleaseDate>2012-04-10T01:57:24.4080784+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -6744,20 +6737,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f0444fe5-b764-4ea8-9972-360e13fe40fb}-movie-trailer.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer2.wmv</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b52c8531-d64f-46ca-a52d-b576fe53a15a}-movie-trailer2.wmv</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\movie-trailer2.wmv</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\movie.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{82b9acb0-29fb-41fd-b0c8-d6e34c1459f0}-movie.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\movie.wmv</DestinationFilename>
@@ -6845,6 +6824,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{ebf4a2a8-f063-4da5-ab59-48cf58e5283a}-movie.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\Avatar (2009) (extended edition)\movie.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\SampleMovies\Black Swan (2010)\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{03ca9e59-db24-401a-8dc7-4b34f9e22909}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\SampleMovies\Black Swan (2010)\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
