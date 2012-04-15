@@ -1996,8 +1996,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //  conf.StrTitleSelect += selectedCustomView.Value;
                       //}
                       //while (GetFilmList() == false); //keep calling while single folders found
-                      
-                      conf.Wselectedlabel = (conf.BoolReverseNames && this.facadeFilms.SelectedListItem.Label != EmptyFacadeValue) ? ReReverseName(conf.Wselectedlabel) : this.facadeFilms.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
+
+                      conf.Wselectedlabel = (conf.BoolReverseNames && facadeFilms.SelectedListItem.Label != EmptyFacadeValue) ? ReReverseName(facadeFilms.SelectedListItem.Label) : facadeFilms.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
 
                       conf.Boolreturn = (!this.facadeFilms.SelectedListItem.IsFolder);
                       do
@@ -2117,6 +2117,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
       //else
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
+    }
+    
+    private string ReverseName(string nonreversedName)
+    {
+      if (nonreversedName.Contains(" ")) // Reverse Names "Bruce Willis" -> "Willis, Bruce"
+        return nonreversedName.Substring(nonreversedName.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1) + ", " + nonreversedName.Substring(0, nonreversedName.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase));
+      else 
+        return nonreversedName;
     }
     
     private string ReReverseName(string reversedName)
@@ -2314,7 +2322,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SelItem = conf.StrTxtSelect.Substring(conf.StrTxtSelect.IndexOf(@"["));
             SelItem = SelItem.Substring(0, SelItem.IndexOf(@"]"));
             SelItem = NewString.StripChars(@"[]", SelItem);
-            if (IsPersonField(conf.WStrSort) && conf.BoolReverseNames) SelItem = ReReverseName(SelItem);
+            if (IsPersonField(conf.WStrSort) && conf.BoolReverseNames)
+              SelItem = ReverseName(SelItem); // SelItem = ReReverseName(SelItem);
           }
           conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
 
