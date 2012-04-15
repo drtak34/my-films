@@ -508,7 +508,11 @@ Public Class AntProcessor
 
         'Dim XmlDoc As New XmlDocument
         XMLDoc = New XmlDocument
-        XMLDoc.Load(_ManualXMLPath)
+        'XMLDoc.Load(_ManualXMLPath)
+
+        Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read)
+        XMLDoc.Load(xmlFile)
+
 
         Dim CurrentMovieNumber As Integer
         Dim movielist As XmlNodeList
@@ -2093,7 +2097,14 @@ Public Class AntProcessor
         LogEvent("  Grabber_Override_GetRoles    : " + CurrentSettings.Grabber_Override_GetRoles.ToString, EventLogLevel.ImportantEvent)
         LogEvent("Starting file analysis and import - " & _CountOrphanFiles.ToString & " orphaned files found.", EventLogLevel.ImportantEvent)
 
-        XMLDoc.Load(CurrentSettings.XML_File)
+        'XMLDoc.Load(CurrentSettings.XML_File)
+
+        Dim xmlFile As New FileStream(CurrentSettings.XML_File, FileMode.Open, FileAccess.ReadWrite, FileShare.Read)
+        XMLDoc.Load(xmlFile)
+
+        'Using s As Stream = File.OpenRead(CurrentSettings.XML_File)
+        '    XMLDoc.Load(s)
+        'End Using
 
         If _InteractiveMode = True Then
             Form1.ToolStripProgressBar.Minimum = 0
