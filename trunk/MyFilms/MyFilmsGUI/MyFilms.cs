@@ -13472,6 +13472,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogManager.Configuration = config;
     }
 
+    private void CheckAndLogEnhancedSkinControls()
+    {
+      if (dummyFacadeMenu == null) LogMyFilms.Warn("SetDummyControlsForFacade() - control missing in skin - 'Menu'");
+      if (dummyFacadeView == null) LogMyFilms.Warn("SetDummyControlsForFacade() - control missing in skin - 'View'");
+      if (dummyFacadePerson == null) LogMyFilms.Warn("SetDummyControlsForFacade() - control missing in skin - 'Person'");
+      if (dummyFacadeIndex == null) LogMyFilms.Warn("SetDummyControlsForFacade() - control missing in skin - 'Index'");
+      if (dummyFacadeFilm == null) LogMyFilms.Warn("SetDummyControlsForFacade() - control missing in skin - 'Film'");
+      if (dummyFacadeHierarchy == null) LogMyFilms.Warn("SetDummyControlsForFacade() - control missing in skin - 'Hierarchy'");
+    }
+    
     private static void InitGUIPropertyLabels()
     {
       using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
@@ -13632,13 +13642,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  LogMyFilms.Warn("SetDummyControlsForFacade() - : ViewContext = '" + viewContext + "' - Warning ! - null detected (controls missing in skin?)");
       //  // return;
       //}
-
-      if (dummyFacadeMenu == null) LogMyFilms.Warn("SetDummyControlsForFacade() - controls missing in skin? - 'Menu')");
-      if (dummyFacadeView == null) LogMyFilms.Warn("SetDummyControlsForFacade() - controls missing in skin? - 'View')");
-      if (dummyFacadePerson == null) LogMyFilms.Warn("SetDummyControlsForFacade() - controls missing in skin? - 'Person')");
-      if (dummyFacadeIndex == null) LogMyFilms.Warn("SetDummyControlsForFacade() - controls missing in skin? - 'Index')");
-      if (dummyFacadeFilm == null) LogMyFilms.Warn("SetDummyControlsForFacade() - controls missing in skin? - 'Film')");
-      if (dummyFacadeHierarchy == null) LogMyFilms.Warn("SetDummyControlsForFacade() - controls missing in skin? - 'Hierarchy')");
 
       //if (viewContext == ViewContext.Movie) GUIControl.ShowControl(ID_MyFilms, (int)Controls.CTRL_DummyFacadeFilm);
       //else GUIControl.HideControl(ID_MyFilms, (int)Controls.CTRL_DummyFacadeFilm);
@@ -13860,6 +13863,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Info("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "'");
           }
         }
+
+      CheckAndLogEnhancedSkinControls();
       }
 
     private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor, ref int VersionBuild, ref int VersionRevision)
