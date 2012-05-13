@@ -226,25 +226,26 @@ Public Class frmList
                 'WebBrowserPreview.Url = New System.Uri(Filepath)
                 'WebBrowserPreview.Refresh()
 
-                System.Diagnostics.Process.Start(Filepath)
-
-                'Using p = New Process
-                '    Dim psi As New ProcessStartInfo
-                '    psi.FileName = Filepath
-                '    psi.UseShellExecute = True
-                '    psi.WindowStyle = ProcessWindowStyle.Normal
-                '    psi.Arguments = ""
-                '    psi.ErrorDialog = True
-                '    If (OSInfo.OSInfo.VistaOrLater()) Then
-                '        psi.Verb = "runas"
-                '    End If
-                '    p.StartInfo = psi
-                '    Try
-                '        p.Start()
-                '    Catch
-                '    End Try
-                'End Using
-
+                If Not Filepath.ToLower().Contains(".nfo") Then
+                    System.Diagnostics.Process.Start(Filepath)
+                Else
+                    Using p = New Process
+                        Dim psi As New ProcessStartInfo
+                        psi.FileName = "notepad.exe"
+                        psi.UseShellExecute = True
+                        psi.WindowStyle = ProcessWindowStyle.Normal
+                        psi.Arguments = """" + Filepath + """"
+                        psi.ErrorDialog = True
+                        If (OSInfo.OSInfo.VistaOrLater()) Then
+                            psi.Verb = "runas"
+                        End If
+                        p.StartInfo = psi
+                        Try
+                            p.Start()
+                        Catch
+                        End Try
+                    End Using
+                End If
             End If
         Catch ex As Exception
         End Try
