@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textConfig.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_Browse.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="textName.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 42</value>
@@ -262,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textName.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="textURLPrefix.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 70</value>
@@ -318,7 +318,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textURLPrefix.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="button_New.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -351,7 +351,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_New.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="button_Save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -384,7 +384,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_Save.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="radioButtonFR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -414,7 +414,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonFR.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="radioButtonEN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -444,7 +444,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonEN.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -532,7 +532,7 @@ expert mode is not required.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonExpertMode.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="TextURLDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 10</value>
@@ -2227,7 +2227,7 @@ Most sites do not support country specific certifications.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_SaveAs.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="URLpage.Items" xml:space="preserve">
     <value />
@@ -2447,7 +2447,7 @@ for sub page grabbing.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textEncoding.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="textLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>367, 44</value>
@@ -2475,7 +2475,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textLanguage.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="textType.Location" type="System.Drawing.Point, System.Drawing">
     <value>367, 70</value>
@@ -2503,7 +2503,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textType.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="textVersion.Location" type="System.Drawing.Point, System.Drawing">
     <value>561, 45</value>
@@ -2527,7 +2527,7 @@ usage:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textVersion.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="textSearchCleanup.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 29</value>
@@ -2751,7 +2751,7 @@ If not set, default encoding will be used.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkLabelMFwiki.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailInWeb.Name" xml:space="preserve">
     <value>btnLoadDetailInWeb</value>
@@ -3967,6 +3967,201 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="&gt;&gt;label36.Name" xml:space="preserve">
+    <value>label36</value>
+  </data>
+  <data name="&gt;&gt;label36.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label36.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label36.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label37.Name" xml:space="preserve">
+    <value>label37</value>
+  </data>
+  <data name="&gt;&gt;label37.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label37.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label37.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label35.Name" xml:space="preserve">
+    <value>label35</value>
+  </data>
+  <data name="&gt;&gt;label35.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label35.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label35.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;labelSearchPosition.Name" xml:space="preserve">
+    <value>labelSearchPosition</value>
+  </data>
+  <data name="&gt;&gt;labelSearchPosition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSearchPosition.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;labelSearchPosition.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;PositionSearch.Name" xml:space="preserve">
+    <value>PositionSearch</value>
+  </data>
+  <data name="&gt;&gt;PositionSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PositionSearch.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;PositionSearch.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.Name" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;label17.Name" xml:space="preserve">
+    <value>label17</value>
+  </data>
+  <data name="&gt;&gt;label17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label17.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;textBody.Name" xml:space="preserve">
+    <value>textBody</value>
+  </data>
+  <data name="&gt;&gt;textBody.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBody.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblResultsFound.Name" xml:space="preserve">
+    <value>lblResultsFound</value>
+  </data>
+  <data name="&gt;&gt;lblResultsFound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblResultsFound.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;lblResultsFound.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="tabPageSearchPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageSearchPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageSearchPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1062, 653</value>
+  </data>
+  <data name="tabPageSearchPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageSearchPage.Text" xml:space="preserve">
+    <value>Search Page</value>
+  </data>
+  <data name="&gt;&gt;tabPageSearchPage.Name" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;tabPageSearchPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageSearchPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="label36.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4207,6 +4402,93 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="button_Load_Web.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button_Load_Web.Location" type="System.Drawing.Point, System.Drawing">
+    <value>459, 13</value>
+  </data>
+  <data name="button_Load_Web.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="button_Load_Web.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="button_Load_Web.Text" xml:space="preserve">
+    <value>Web</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.Name" xml:space="preserve">
+    <value>button_Load_Web</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 18</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>#Search#</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 17</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>#Page#</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="&gt;&gt;label20.Name" xml:space="preserve">
     <value>label20</value>
   </data>
@@ -4266,6 +4548,96 @@ There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="label20.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 17</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="label20.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>Step</value>
+  </data>
+  <data name="&gt;&gt;label20.Name" xml:space="preserve">
+    <value>label20</value>
+  </data>
+  <data name="&gt;&gt;label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label20.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="label16.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>Next Page</value>
+  </data>
+  <data name="&gt;&gt;label16.Name" xml:space="preserve">
+    <value>label16</value>
+  </data>
+  <data name="&gt;&gt;label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label19.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 17</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="label19.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>Start Page</value>
+  </data>
+  <data name="&gt;&gt;label19.Name" xml:space="preserve">
+    <value>label19</value>
+  </data>
+  <data name="&gt;&gt;label19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label19.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4339,6 +4711,23 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="toolStripMenuSearchCopyAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="toolStripMenuSearchCopyAll.Text" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="toolStripMenuSearchCopyAll.ToolTipText" xml:space="preserve">
+    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
+RTF formatted content in an appropriate app - like e.g. wordpad. 
+There you'll find both options when choosing edit - insert ...</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Selection</value>
+  </data>
   <data name="lblResultsFound.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4404,6 +4793,309 @@ There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>21</value>
+  </data>
+  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewSearchResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dataGridViewSearchResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="dataGridViewSearchResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 165</value>
+  </data>
+  <data name="dataGridViewSearchResults.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.Name" xml:space="preserve">
+    <value>dataGridViewSearchResults</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn1.HeaderText" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="ResultColumn1.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Thumb.HeaderText" xml:space="preserve">
+    <value>Img</value>
+  </data>
+  <data name="Thumb.MinimumWidth" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="Thumb.Width" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn2.HeaderText" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ResultColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn3.HeaderText" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="ResultColumn3.Width" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn4.HeaderText" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ResultColumn4.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn5.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ResultColumn5.Width" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn6.HeaderText" xml:space="preserve">
+    <value>DetailsURL</value>
+  </data>
+  <data name="ResultColumn6.Width" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn7.HeaderText" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="ResultColumn7.MinimumWidth" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="ResultColumn7.Width" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn8.HeaderText" xml:space="preserve">
+    <value>AKAs</value>
+  </data>
+  <data name="ResultColumn8.Width" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;labelSearchAkasRegex.Name" xml:space="preserve">
+    <value>labelSearchAkasRegex</value>
+  </data>
+  <data name="&gt;&gt;labelSearchAkasRegex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSearchAkasRegex.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelSearchAkasRegex.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.Name" xml:space="preserve">
+    <value>label_SearchMatches_Starttext</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.Name" xml:space="preserve">
+    <value>label_SearchMatches_Endtext</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.Name" xml:space="preserve">
+    <value>button_FirstMatch</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.Name" xml:space="preserve">
+    <value>button_NextMatch</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;btReset.Name" xml:space="preserve">
+    <value>btReset</value>
+  </data>
+  <data name="&gt;&gt;btReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btReset.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;btReset.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.Name" xml:space="preserve">
+    <value>labelReplaceWith</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.Name" xml:space="preserve">
+    <value>labelReplace</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.Name" xml:space="preserve">
+    <value>textReplaceWith</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 92</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 184</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>23</value>
   </data>
   <data name="labelSearchAkasRegex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4774,27 +5466,6 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 92</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 184</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>tabPageSearchPage</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4825,365 +5496,6 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
-  <data name="tabPageSearchPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageSearchPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageSearchPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 653</value>
-  </data>
-  <data name="tabPageSearchPage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageSearchPage.Text" xml:space="preserve">
-    <value>Search Page</value>
-  </data>
-  <data name="&gt;&gt;tabPageSearchPage.Name" xml:space="preserve">
-    <value>tabPageSearchPage</value>
-  </data>
-  <data name="&gt;&gt;tabPageSearchPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageSearchPage.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="button_Load_Web.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button_Load_Web.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 13</value>
-  </data>
-  <data name="button_Load_Web.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="button_Load_Web.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="button_Load_Web.Text" xml:space="preserve">
-    <value>Web</value>
-  </data>
-  <data name="&gt;&gt;button_Load_Web.Name" xml:space="preserve">
-    <value>button_Load_Web</value>
-  </data>
-  <data name="&gt;&gt;button_Load_Web.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_Load_Web.Parent" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="&gt;&gt;button_Load_Web.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 18</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>#Search#</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 17</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>#Page#</value>
-  </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="label20.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 17</value>
-  </data>
-  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="label20.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="label20.Text" xml:space="preserve">
-    <value>Step</value>
-  </data>
-  <data name="&gt;&gt;label20.Name" xml:space="preserve">
-    <value>label20</value>
-  </data>
-  <data name="&gt;&gt;label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label20.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 17</value>
-  </data>
-  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="label16.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label16.Text" xml:space="preserve">
-    <value>Next Page</value>
-  </data>
-  <data name="&gt;&gt;label16.Name" xml:space="preserve">
-    <value>label16</value>
-  </data>
-  <data name="&gt;&gt;label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label19.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 17</value>
-  </data>
-  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="label19.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="label19.Text" xml:space="preserve">
-    <value>Start Page</value>
-  </data>
-  <data name="&gt;&gt;label19.Name" xml:space="preserve">
-    <value>label19</value>
-  </data>
-  <data name="&gt;&gt;label19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label19.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="toolStripMenuSearchCopyAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="toolStripMenuSearchCopyAll.Text" xml:space="preserve">
-    <value>Copy All</value>
-  </data>
-  <data name="toolStripMenuSearchCopyAll.ToolTipText" xml:space="preserve">
-    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
-RTF formatted content in an appropriate app - like e.g. wordpad. 
-There you'll find both options when choosing edit - insert ...</value>
-  </data>
-  <data name="copySelectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="copySelectionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy Selection</value>
-  </data>
-  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewSearchResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dataGridViewSearchResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="dataGridViewSearchResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>539, 165</value>
-  </data>
-  <data name="dataGridViewSearchResults.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.Name" xml:space="preserve">
-    <value>dataGridViewSearchResults</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn1.HeaderText" xml:space="preserve">
-    <value>#</value>
-  </data>
-  <data name="ResultColumn1.Width" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Thumb.HeaderText" xml:space="preserve">
-    <value>Img</value>
-  </data>
-  <data name="Thumb.MinimumWidth" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="Thumb.Width" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn2.HeaderText" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="ResultColumn2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn3.HeaderText" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="ResultColumn3.Width" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn4.HeaderText" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="ResultColumn4.Width" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn5.HeaderText" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="ResultColumn5.Width" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn6.HeaderText" xml:space="preserve">
-    <value>DetailsURL</value>
-  </data>
-  <data name="ResultColumn6.Width" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
-  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn7.HeaderText" xml:space="preserve">
-    <value>Director</value>
-  </data>
-  <data name="ResultColumn7.MinimumWidth" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="ResultColumn7.Width" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn8.HeaderText" xml:space="preserve">
-    <value>AKAs</value>
-  </data>
-  <data name="ResultColumn8.Width" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
   <data name="label34.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -5212,7 +5524,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label34.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5242,7 +5554,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;label33.Name" xml:space="preserve">
     <value>label33</value>
@@ -6050,7 +6362,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="Version_Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -6086,7 +6398,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Version_Label.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="lblLanguage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6116,7 +6428,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblVersion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6146,7 +6458,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -6176,7 +6488,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="pictureBoxUSFlag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -6206,7 +6518,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxUSFlag.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="pictureBoxFranceFlag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -6252,7 +6564,34 @@ If you want to create a new configuration based on the existing script, you can 
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxFranceFlag.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
+  </data>
+  <data name="cbFileBasedReader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbFileBasedReader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>686, 49</value>
+  </data>
+  <data name="cbFileBasedReader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="cbFileBasedReader.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="cbFileBasedReader.Text" xml:space="preserve">
+    <value>File Based Reader</value>
+  </data>
+  <data name="&gt;&gt;cbFileBasedReader.Name" xml:space="preserve">
+    <value>cbFileBasedReader</value>
+  </data>
+  <data name="&gt;&gt;cbFileBasedReader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbFileBasedReader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbFileBasedReader.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

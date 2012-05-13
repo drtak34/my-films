@@ -2101,6 +2101,7 @@ Public Class AntProcessor
 
         Dim xmlFile As New FileStream(CurrentSettings.XML_File, FileMode.Open, FileAccess.ReadWrite, FileShare.Read)
         XMLDoc.Load(xmlFile)
+        xmlFile.Close()
 
         'Using s As Stream = File.OpenRead(CurrentSettings.XML_File)
         '    XMLDoc.Load(s)
@@ -2643,7 +2644,15 @@ Public Class AntProcessor
 
         Try
             If CurrentSettings.Overwrite_XML_File = True Then
-                XMLDoc.Save(CurrentSettings.XML_File)
+                'XMLDoc.Save(CurrentSettings.XML_File)
+                Dim xmlFile As New FileStream(CurrentSettings.XML_File, FileMode.Open, FileAccess.Write, FileShare.Read)
+                XMLDoc.Save(xmlFile)
+                xmlFile.Close()
+
+                'Using s As Stream = File.OpenWrite(CurrentSettings.XML_File)
+                '    XMLDoc.Save(s)
+                '    s.Close()
+                'End Using
             Else
                 XMLDoc.Save(CurrentSettings.XML_File.Replace(".xml", "-NEW.xml"))
             End If
