@@ -422,16 +422,8 @@ namespace Grabber_Interface
       catch (Exception) { textUserAgent.Text = ""; }
       try { textHeaders.Text = xmlConf.find(xmlConf.listGen, TagName.Headers)._Value; }
       catch (Exception) { textHeaders.Text = ""; }
-      string strFileBasedReader = "";
-      try
-      {
-        cbFileBasedReader.Checked = (xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value == "true");
-      }
-      catch (Exception)
-      {
-        cbFileBasedReader.Checked = false;
-      }
-
+      try { cbFileBasedReader.Checked = (xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value == "true"); }
+      catch (Exception) { cbFileBasedReader.Checked = false; }
 
       TextURL.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
       textRedir.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1;
@@ -710,6 +702,11 @@ namespace Grabber_Interface
       if (string.IsNullOrEmpty(textConfig.Text))
       {
         MessageBox.Show("No Config loaded !", "Error");
+        return;
+      }
+      if (cbFileBasedReader.Checked && !TextSearch.Text.Contains("\\"))
+      {
+        MessageBox.Show("You have to select a movie FILE, when File Based Reader is selected !", "Error");
         return;
       }
       else
@@ -4674,9 +4671,27 @@ namespace Grabber_Interface
     {
       try
       {
-        //webBrowserPreview.Url = new Uri(textURLPreview.Text);
-        //webBrowserPreview.Refresh();
-        Process.Start(textURLPreview.Text);
+        if (cbFileBasedReader.Checked)
+        {
+          using (Process p = new Process())
+          {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "notepad.exe";
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Normal;
+            psi.Arguments = "\"" + textURLPreview.Text + "\"";
+            psi.ErrorDialog = true;
+            if (OSInfo.OSInfo.VistaOrLater()) psi.Verb = "runas";
+            p.StartInfo = psi;
+            p.Start();
+          }
+        }
+        else
+        {
+          //webBrowserPreview.Url = new Uri(textURLPreview.Text);
+          //webBrowserPreview.Refresh();
+          Process.Start(textURLPreview.Text);
+        }
       }
       catch (Exception)
       {
@@ -4718,7 +4733,7 @@ namespace Grabber_Interface
           //webBrowserPreview.Refresh();
           Process.Start(wurl);
         }
-        catch (Exception) {throw;}
+        catch (Exception) { throw; }
       }
     }
 
@@ -4740,7 +4755,23 @@ namespace Grabber_Interface
         if (e.ColumnIndex == this.dataGridViewSearchResults.Columns["ResultColumn6"].Index)
         {
           string Filepath = this.dataGridViewSearchResults["ResultColumn6", e.RowIndex].Value.ToString();
-          System.Diagnostics.Process.Start(Filepath);
+          if (!Filepath.Contains(".nfo"))
+            Process.Start(Filepath);
+          else
+          {
+            using (Process p = new Process())
+            {
+              ProcessStartInfo psi = new ProcessStartInfo();
+              psi.FileName = "notepad.exe";
+              psi.UseShellExecute = true;
+              psi.WindowStyle = ProcessWindowStyle.Normal;
+              psi.Arguments = "\"" + Filepath + "\"";
+              psi.ErrorDialog = true;
+              if (OSInfo.OSInfo.VistaOrLater()) psi.Verb = "runas";
+              p.StartInfo = psi;
+              p.Start();
+            }
+          }
         }
       }
       catch (Exception) {}
@@ -4980,19 +5011,51 @@ namespace Grabber_Interface
     {
       if (cbFileBasedReader.Checked)
       {
+        label8.Text = "#Filename#";
+        btnLoadDetailInWeb.Text = "Show";
         textRedir.Visible = false;
         textSearchCleanup.Visible = false;
         textUserAgent.Visible = false;
         textAccept.Visible = false;
         textHeaders.Visible = false;
+        label17.Visible = false;
+        label9.Visible = false;
+        label35.Visible = false;
+        label36.Visible = false;
+        label37.Visible = false;
+        groupBox5.Visible = false;
+        groupBox1.Visible = false;
+        textBox5.Visible = false;
+        button_Find.Visible = false;
+        label2.Visible = false;
+        textURLPrefix.Visible = false;
+        label11.Visible = false;
+        textPage.Visible = false;
+        button_Load_Web.Visible = false;
       }
       else
       {
+        label8.Text = "#Search#";
+        btnLoadDetailInWeb.Text = "Web";
         textRedir.Visible = true;
         textSearchCleanup.Visible = true;
         textUserAgent.Visible = true;
         textAccept.Visible = true;
         textHeaders.Visible = true;
+        label17.Visible = true;
+        label9.Visible = true;
+        label35.Visible = true;
+        label36.Visible = true;
+        label37.Visible = true;
+        groupBox5.Visible = true;
+        groupBox1.Visible = true;
+        textBox5.Visible = true;
+        button_Find.Visible = true;
+        label2.Visible = true;
+        textURLPrefix.Visible = true;
+        label11.Visible = true;
+        textPage.Visible = true;
+        button_Load_Web.Visible = true;
       }
     }
 
