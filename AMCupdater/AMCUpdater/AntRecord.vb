@@ -501,7 +501,7 @@ Public Class AntRecord
                 While (True)
                     'If _InternetSearchHintIMDB_Id.Length > 0 Then
                     If _InternetSearchHintIMDB_Id.Length > 0 And (_Dont_Ask_Interactive = True Or _InternetLookupAlwaysPrompt = False) Then
-                        wurl = Gb.ReturnURL(_InternetSearchHintIMDB_Id, _ParserPath, wpage, _InternetLookupAlwaysPrompt)
+                        wurl = Gb.ReturnURL(_InternetSearchHintIMDB_Id, _ParserPath, wpage, _InternetLookupAlwaysPrompt, _FilePath)
                         If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
                             _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, _GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                             _InternetLookupOK = True
@@ -514,7 +514,7 @@ Public Class AntRecord
                     End If
 
                     wurl.Clear() ' clear to make sure nothing left from tt request ...
-                    wurl = Gb.ReturnURL(SearchString, _ParserPath, wpage, _InternetLookupAlwaysPrompt)
+                    wurl = Gb.ReturnURL(SearchString, _ParserPath, wpage, _InternetLookupAlwaysPrompt, _FilePath)
                     If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
 
                         '_InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage)

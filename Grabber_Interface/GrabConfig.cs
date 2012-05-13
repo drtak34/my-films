@@ -422,6 +422,16 @@ namespace Grabber_Interface
       catch (Exception) { textUserAgent.Text = ""; }
       try { textHeaders.Text = xmlConf.find(xmlConf.listGen, TagName.Headers)._Value; }
       catch (Exception) { textHeaders.Text = ""; }
+      string strFileBasedReader = "";
+      try
+      {
+        cbFileBasedReader.Checked = (xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value == "true");
+      }
+      catch (Exception)
+      {
+        cbFileBasedReader.Checked = false;
+      }
+
 
       TextURL.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
       textRedir.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1;
@@ -556,6 +566,15 @@ namespace Grabber_Interface
       catch (Exception) { }
       try { xmlConf.find(xmlConf.listGen, TagName.Headers)._Value = textHeaders.Text; }
       catch (Exception) { }
+
+      try
+      {
+        if (cbFileBasedReader.Checked)
+          xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value = "true";
+        else
+          xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value = "false";
+      }
+      catch (Exception) {}
 
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1 = textRedir.Text;
@@ -4955,6 +4974,26 @@ namespace Grabber_Interface
     {
       // Here, add the copy command to the relevant control, such as...
       textBodyDetail.Copy(); // Added manually.
+    }
+
+    private void cbFileBasedReader_CheckedChanged(object sender, EventArgs e)
+    {
+      if (cbFileBasedReader.Checked)
+      {
+        textRedir.Visible = false;
+        textSearchCleanup.Visible = false;
+        textUserAgent.Visible = false;
+        textAccept.Visible = false;
+        textHeaders.Visible = false;
+      }
+      else
+      {
+        textRedir.Visible = true;
+        textSearchCleanup.Visible = true;
+        textUserAgent.Visible = true;
+        textAccept.Visible = true;
+        textHeaders.Visible = true;
+      }
     }
 
   }

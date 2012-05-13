@@ -309,6 +309,7 @@ public class TagName
   public static string Version = "Version";                     // Added Version for future use
   public static string Encoding = "Encoding";                   // Added Encoding as override options for webpages not properly posting page encoding
   public static string SearchCleanup = "SearchCleanup";         // Added Encoding as override options for webpages not properly posting page encoding
+  public static string FileBasedReader = "FileBasedReader";     // Added FileBasedReader as option to read data from filesystem instead of web
 
   public static string Accept = "Accept";                       // Added Accept as override options for web requests
   public static string UserAgent = "UserAgent";                 // Added Useragent as override options for web requests

@@ -218,6 +218,7 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
+          this.cbFileBasedReader = new System.Windows.Forms.CheckBox();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -1726,10 +1727,18 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
           // 
+          // cbFileBasedReader
+          // 
+          resources.ApplyResources(this.cbFileBasedReader, "cbFileBasedReader");
+          this.cbFileBasedReader.Name = "cbFileBasedReader";
+          this.cbFileBasedReader.UseVisualStyleBackColor = true;
+          this.cbFileBasedReader.CheckedChanged += new System.EventHandler(this.cbFileBasedReader_CheckedChanged);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+          this.Controls.Add(this.cbFileBasedReader);
           this.Controls.Add(this.lblType);
           this.Controls.Add(this.label34);
           this.Controls.Add(this.lblVersion);
@@ -1982,6 +1991,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuDetailsCopyAll;
         private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem1;
+        private System.Windows.Forms.CheckBox cbFileBasedReader;
 
     }
 }
