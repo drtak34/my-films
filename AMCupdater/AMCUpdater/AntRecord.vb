@@ -1877,10 +1877,17 @@ Public Class AntRecord
                         Dim FanartFileExists As Boolean = False
                         Dim NewFanartThumbName As String = _FilePath
 
-                        If NewFanartThumbName.Contains("\") = True Then
-                            NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
+                        TempValue = _InternetData(Grabber_Output.Fanart)
+
+                        If TempValue.Length > 0 Then
+                            NewFanartThumbName = _InternetData(Grabber_Output.Fanart)
+                        Else
+                            If NewFanartThumbName.Contains("\") = True Then
+                                NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
+                            End If
+                            NewFanartThumbName += "\fanart.jpg"
                         End If
-                        NewFanartThumbName += "\fanart.jpg"
+
                         Try
                             If File.Exists(NewFanartThumbName) Then
                                 FanartFileExists = True
