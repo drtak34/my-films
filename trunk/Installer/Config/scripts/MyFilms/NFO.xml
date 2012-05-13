@@ -7,6 +7,7 @@
     <Type>details|cover|fanart</Type>
     <Version>0.9</Version>
     <Encoding>UTF-8</Encoding>
+    <FileBasedReader>true</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="" />
       <KeyEndThumb />
@@ -51,7 +52,7 @@
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
-      <KeyStartImg Param1="" Param2="">_x0023_NFO_x0023__x0023_Filename_x0023_.tbn</KeyStartImg>
+      <KeyStartImg Param1="" Param2="">_x0023_NFO_x0023__x0023_Filename_x0023_.jpg</KeyStartImg>
       <KeyEndImg>_x0023_NFO_x0023__x0023_Filename_x0023_-fanart.jpg</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage />
