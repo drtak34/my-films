@@ -295,8 +295,8 @@ namespace Grabber_Interface
         // reset preview cover
         pictureBoxPreviewCover.ImageLocation = "";
 
-        if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
-          TextURL.Text = "http://" + TextURL.Text;
+        //if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
+        //  TextURL.Text = "http://" + TextURL.Text;
 
         strSearch = TextSearch.Text;
         strSearch = GrabUtil.CleanupSearch(strSearch, textSearchCleanup.Text); // cleanup search expression
@@ -305,6 +305,9 @@ namespace Grabber_Interface
 
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
+
+        if (wurl.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
+          wurl = "http://" + wurl;
 
         Body = GrabUtil.GetPage(wurl, textEncoding.Text, out absoluteUri, cookie, textHeaders.Text, textAccept.Text, textUserAgent.Text);
 
@@ -1179,7 +1182,7 @@ namespace Grabber_Interface
         if (TextURLDetail.Text.ToLower().StartsWith("http"))
           BodyDetail = GrabUtil.GetPage(TextURLDetail.Text, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
         else
-          BodyDetail = this.ReadFile(TextURLDetail.Text); // Read html page from file !
+          BodyDetail = GrabUtil.GetFileContent(TextURLDetail.Text, textEncoding.Text); // Read nfo content from file !
         if (xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length > 0)
         {
           iStart = BodyDetail.IndexOf(xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value);
@@ -4721,11 +4724,7 @@ namespace Grabber_Interface
           System.Diagnostics.Process.Start(Filepath);
         }
       }
-      catch (Exception)
-      {
-        
-        throw;
-      }
+      catch (Exception) {}
     }
 
     private void textBody_CursorChanged(object sender, EventArgs e)
@@ -4738,6 +4737,12 @@ namespace Grabber_Interface
 
     private void button_openMediafile_Click(object sender, EventArgs e)
     {
+      if (!string.IsNullOrEmpty(TextSearch.Text))
+        openFileDialog1.FileName = TextSearch.Text;
+      else
+        openFileDialog1.FileName = String.Empty;
+      if (TextSearch.Text.Contains("\\"))
+        openFileDialog1.InitialDirectory = TextSearch.Text.Substring(0, TextSearch.Text.LastIndexOf("\\") + 1);
       openFileDialog1.RestoreDirectory = true;
       openFileDialog1.Filter = "All Files (*.*)|*.*";
       openFileDialog1.Title = "Open a media file for local grabbing";

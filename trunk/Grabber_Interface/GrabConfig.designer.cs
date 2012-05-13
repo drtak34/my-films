@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -124,6 +124,7 @@ namespace Grabber_Interface
           this.textBodyDetail = new System.Windows.Forms.RichTextBox();
           this.contextMenuStripDetails = new System.Windows.Forms.ContextMenuStrip(this.components);
           this.toolStripMenuDetailsCopyAll = new System.Windows.Forms.ToolStripMenuItem();
+          this.copySelectionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
           this.label10 = new System.Windows.Forms.Label();
           this.groupBox3 = new System.Windows.Forms.GroupBox();
           this.textPreview = new System.Windows.Forms.RichTextBox();
@@ -164,6 +165,7 @@ namespace Grabber_Interface
           this.textBody = new System.Windows.Forms.RichTextBox();
           this.contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
           this.toolStripMenuSearchCopyAll = new System.Windows.Forms.ToolStripMenuItem();
+          this.copySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.lblResultsFound = new System.Windows.Forms.Label();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.dataGridViewSearchResults = new System.Windows.Forms.DataGridView();
@@ -216,8 +218,6 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
-          this.copySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.copySelectionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -1002,6 +1002,12 @@ namespace Grabber_Interface
           resources.ApplyResources(this.toolStripMenuDetailsCopyAll, "toolStripMenuDetailsCopyAll");
           this.toolStripMenuDetailsCopyAll.Click += new System.EventHandler(this.toolStripMenuDetailsCopyAll_Click);
           // 
+          // copySelectionToolStripMenuItem1
+          // 
+          this.copySelectionToolStripMenuItem1.Name = "copySelectionToolStripMenuItem1";
+          resources.ApplyResources(this.copySelectionToolStripMenuItem1, "copySelectionToolStripMenuItem1");
+          this.copySelectionToolStripMenuItem1.Click += new System.EventHandler(this.copySelectionToolStripMenuItem1_Click);
+          // 
           // label10
           // 
           resources.ApplyResources(this.label10, "label10");
@@ -1293,6 +1299,12 @@ namespace Grabber_Interface
           resources.ApplyResources(this.toolStripMenuSearchCopyAll, "toolStripMenuSearchCopyAll");
           this.toolStripMenuSearchCopyAll.Click += new System.EventHandler(this.toolStripMenuSearchCopyAll_Click);
           // 
+          // copySelectionToolStripMenuItem
+          // 
+          this.copySelectionToolStripMenuItem.Name = "copySelectionToolStripMenuItem";
+          resources.ApplyResources(this.copySelectionToolStripMenuItem, "copySelectionToolStripMenuItem");
+          this.copySelectionToolStripMenuItem.Click += new System.EventHandler(this.copySelectionToolStripMenuItem_Click);
+          // 
           // lblResultsFound
           // 
           resources.ApplyResources(this.lblResultsFound, "lblResultsFound");
@@ -1337,17 +1349,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle9;
+          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle5;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle10.NullValue = null;
-          dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle10;
+          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle6.NullValue = null;
+          dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle6;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1360,16 +1372,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle11;
+          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle12;
+          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1713,18 +1725,6 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
-          // 
-          // copySelectionToolStripMenuItem
-          // 
-          this.copySelectionToolStripMenuItem.Name = "copySelectionToolStripMenuItem";
-          resources.ApplyResources(this.copySelectionToolStripMenuItem, "copySelectionToolStripMenuItem");
-          this.copySelectionToolStripMenuItem.Click += new System.EventHandler(this.copySelectionToolStripMenuItem_Click);
-          // 
-          // copySelectionToolStripMenuItem1
-          // 
-          this.copySelectionToolStripMenuItem1.Name = "copySelectionToolStripMenuItem1";
-          resources.ApplyResources(this.copySelectionToolStripMenuItem1, "copySelectionToolStripMenuItem1");
-          this.copySelectionToolStripMenuItem1.Click += new System.EventHandler(this.copySelectionToolStripMenuItem1_Click);
           // 
           // GrabConfig
           // 
