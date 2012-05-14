@@ -1559,6 +1559,9 @@ Public Class Form1
     Private Sub txtPictureFilenamePrefix_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPictureFilenamePrefix.TextChanged
         Me.ValidateChildren()
     End Sub
+    Private Sub txtPictureFilenameSuffix_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPictureFilenameSuffix.TextChanged
+        Me.ValidateChildren()
+    End Sub
     Private Sub cbPictureHandling_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbPictureHandling.SelectedIndexChanged
         Database_Fields_Validation()
     End Sub
@@ -2078,11 +2081,13 @@ Public Class Form1
                 If FieldChecked = True Then
                     cbPictureHandling.Enabled = True
                     txtPictureFilenamePrefix.Enabled = True
+                    txtPictureFilenameSuffix.Enabled = True
                     lblPictureHandling.Enabled = True
                     lblPicturePrefix.Enabled = True
                 Else
                     cbPictureHandling.Enabled = False
                     txtPictureFilenamePrefix.Enabled = False
+                    txtPictureFilenameSuffix.Enabled = False
                     lblPictureHandling.Enabled = False
                     lblPicturePrefix.Enabled = False
                 End If
@@ -2122,13 +2127,16 @@ Public Class Form1
         If cbPictureHandling.SelectedIndex > -1 Then
             If cbPictureHandling.SelectedItem = "Use Folder.jpg" Then
                 txtPictureFilenamePrefix.Enabled = False
+                txtPictureFilenameSuffix.Enabled = False
                 lblPicturePrefix.Enabled = False
             Else
                 txtPictureFilenamePrefix.Enabled = True
+                txtPictureFilenameSuffix.Enabled = True
                 lblPicturePrefix.Enabled = True
             End If
         Else
             txtPictureFilenamePrefix.Enabled = True
+            txtPictureFilenameSuffix.Enabled = True
             lblPicturePrefix.Enabled = True
         End If
 
@@ -2343,6 +2351,7 @@ Public Class Form1
         CurrentSettings.Parse_Playlist_Files = chkParsePlaylistFiles.Checked
         CurrentSettings.Parse_Trailers = chkParseTrailers.Checked
         CurrentSettings.Image_Download_Filename_Prefix = txtPictureFilenamePrefix.Text
+        CurrentSettings.Image_Download_Filename_Suffix = txtPictureFilenameSuffix.Text
         CurrentSettings.Prohibit_Internet_Lookup = chkProhibitInternetLookup.Checked
         CurrentSettings.Parse_Subtitle_Files = chkParseSubtitleFiles.Checked
         CurrentSettings.Rescan_Moved_Files = chkRescanMovedFiles.Checked
@@ -2531,6 +2540,7 @@ Public Class Form1
             chkParsePlaylistFiles.Checked = CurrentSettings.Parse_Playlist_Files
             chkParseTrailers.Checked = CurrentSettings.Parse_Trailers
             txtPictureFilenamePrefix.Text = CurrentSettings.Image_Download_Filename_Prefix
+            txtPictureFilenameSuffix.Text = CurrentSettings.Image_Download_Filename_Suffix
             chkProhibitInternetLookup.Checked = CurrentSettings.Prohibit_Internet_Lookup
             chkParseSubtitleFiles.Checked = CurrentSettings.Parse_Subtitle_Files
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files

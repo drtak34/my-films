@@ -148,6 +148,9 @@
   <Values Option="Image_Download_Filename_Prefix">
     <Value />
   </Values>
+  <Values Option="Image_Download_Filename_Suffix">
+    <Value />
+  </Values>
   <Values Option="Use_Folder_Dot_Jpg">
     <Value>False</Value>
   </Values>

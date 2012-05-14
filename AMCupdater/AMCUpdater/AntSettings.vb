@@ -577,6 +577,14 @@ Public Class AntSettings
             SetAttribute("Image_Download_Filename_Prefix", value)
         End Set
     End Property
+    Public Property Image_Download_Filename_Suffix() As String
+        Get
+            Return ReadAttribute("Image_Download_Filename_Suffix")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Image_Download_Filename_Suffix", value)
+        End Set
+    End Property
     Public Property LogDirectory() As String
         Get
             Return ReadAttribute("LogDirectory")
@@ -783,6 +791,7 @@ Public Class AntSettings
         dt.Rows.Add("Parse_Trailers", "False")
         dt.Rows.Add("Store_Image_With_Relative_Path", "True")
         dt.Rows.Add("Image_Download_Filename_Prefix", "")
+        dt.Rows.Add("Image_Download_Filename_Suffix", "")
         dt.Rows.Add("Use_Folder_Dot_Jpg", "False")
         dt.Rows.Add("Create_Cover_From_Movie", "False")
         dt.Rows.Add("Prohibit_Internet_Lookup", "False")
