@@ -1700,14 +1700,18 @@ Public Class AntRecord
                         'Not using folder.jpg - use default location instead (with the xml file, maybe using override path)
                         If _InternetData(Grabber_Output.PicturePathShort) <> String.Empty Then
                             Dim PicturePathPrefix As String = CurrentSettings.Image_Download_Filename_Prefix.ToString 'Covers\'
+                            Dim PicturePathSuffix As String = CurrentSettings.Image_Download_Filename_Suffix.ToString '_(%year%)' - supports placeholder, like e.g. year, number
                             Dim PicturePathFull As String = _InternetData(Grabber_Output.PicturePathLong) 'C:\Ant Movie Catalog\2001_ A Space Odyssey.jpg
                             Dim PictureFileName As String = _InternetData(Grabber_Output.PicturePathShort) '2001_ A Space Odyssey.jpg
+                            Dim PictureFileNameWithSuffix As String = Path.GetFileNameWithoutExtension(PictureFileName) + PictureNameWithSuffix(PicturePathSuffix, _InternetData(Grabber_Output.Year), _MovieNumber.ToString()) + Path.GetExtension(PictureFileName)
                             Dim PicturePathToSave As String = String.Empty
+
 
                             'Check, if the returned picture is existing - it might not due to download errors like 404
                             If System.IO.File.Exists(PicturePathFull) Then
                                 'Separate the folder from the prefix string (if needed)
                                 Dim PrefixString As String = String.Empty
+                                Dim SuffixString As String = PictureNameWithSuffix(PicturePathSuffix, _InternetData(Grabber_Output.Year), _MovieNumber.ToString())
                                 Dim PrefixPath As String = String.Empty
                                 If PicturePathPrefix <> String.Empty Then
                                     If PicturePathPrefix.Contains("\") = True Then
@@ -1719,16 +1723,16 @@ Public Class AntRecord
                                 End If
 
                                 Dim NewFileName As String = String.Empty
-                                If PrefixString <> String.Empty Then
+                                If PrefixString <> String.Empty Or SuffixString <> String.Empty Then
                                     'Need to rename the file.
-                                    NewFileName = PicturePathFull.Replace(PictureFileName, PrefixString & PictureFileName)
+                                    NewFileName = PicturePathFull.Replace(PictureFileName, PrefixString & PictureFileNameWithSuffix)
                                     If Not File.Exists(NewFileName) Then
                                         File.Copy(PicturePathFull, NewFileName)
                                         Thread.Sleep(20)
                                     End If
                                     File.Delete(PicturePathFull)
                                     PicturePathFull = NewFileName
-                                    PictureFileName = PrefixString & PictureFileName
+                                    PictureFileName = PrefixString & PictureFileNameWithSuffix
                                 End If
 
                                 If PrefixPath <> String.Empty Then
@@ -2194,6 +2198,36 @@ Public Class AntRecord
         Return CoverFileExists
     End Function
 
+    Private Function PictureNameWithSuffix(ByVal Expression As String, ByVal Year As String, ByVal Number As String) As String
+        ' Expression sample: " (%year%)"
+
+        If Year Is Nothing Then
+            Year = ""
+        End If
+        If Number Is Nothing Then
+            Number = ""
+        End If
+
+        If Year.Length = 0 And Number.Length = 0 Then
+            Return ""
+        End If
+
+        Dim NewExpression As String = Expression
+        If NewExpression.Contains("%year%") Then
+            NewExpression = NewExpression.Replace("%year%", Year)
+            If Year.Length = 0 And NewExpression.Contains("%number%") = False Then
+                Return ""
+            End If
+        End If
+        If NewExpression.Contains("%number%") Then
+            NewExpression = NewExpression.Replace("%number%", Year)
+            If Number.Length = 0 Then
+                Return ""
+            End If
+        End If
+        Return NewExpression
+    End Function
+
     Private Function DrvLabel(ByVal MediaPath As String) As String
         Dim Label As String = ""
 
@@ -2239,7 +2273,17 @@ Public Class AntRecord
     End Function
 
     Public Sub SaveProgress()
-        XMLDoc.Save(_XMLFilePath)
+        'XMLDoc.Save(_XMLFilePath)
+
+        Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read)
+        XMLDoc.Save(xmlFile)
+        xmlFile.Close()
+
+        'Using s As Stream = File.OpenWrite(CurrentSettings.XML_File)
+        '    XMLDoc.Save(s)
+        '    s.Close()
+        'End Using
+
     End Sub
 
 End Class
