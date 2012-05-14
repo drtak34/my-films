@@ -1651,12 +1651,12 @@ Public Class AntRecord
                             'Import run - use existing folder.jpg if present; add it if not.
                             If FileExists = True Then
                                 'It's there; use it.  Delete the one we just downloaded, if needed:
-                                If _InternetData(Grabber_Output.PicturePathLong) <> String.Empty Then
+                                If _InternetData(Grabber_Output.PicturePathLong) <> String.Empty And File.Exists(Grabber_Output.PicturePathLong) Then
                                     File.Delete(_InternetData(Grabber_Output.PicturePathLong))
                                 End If
                             Else
                                 'If we have anything from the grabber, copy it and use that.
-                                If _InternetData(Grabber_Output.PicturePathLong) <> String.Empty Then
+                                If _InternetData(Grabber_Output.PicturePathLong) <> String.Empty And File.Exists(Grabber_Output.PicturePathLong) Then
                                     File.Copy(_InternetData(Grabber_Output.PicturePathLong), NewFileName)
                                     File.Delete(_InternetData(Grabber_Output.PicturePathLong))
                                     FileExists = True
@@ -1668,7 +1668,7 @@ Public Class AntRecord
                                 'check it's used; if not just use it and we're done.
                                 If FileIsLinked = True Then
                                     'It's already in use, so update it:
-                                    If _InternetData(Grabber_Output.PicturePathShort) <> String.Empty Then
+                                    If _InternetData(Grabber_Output.PicturePathShort) <> String.Empty And File.Exists(Grabber_Output.PicturePathLong) Then
                                         If FileExists = True Then
                                             System.IO.File.Delete(NewFileName)
                                         End If
@@ -1679,7 +1679,7 @@ Public Class AntRecord
                                 End If
                             Else
                                 'Try and get a new one:
-                                If _InternetData(Grabber_Output.PicturePathShort) <> String.Empty Then
+                                If _InternetData(Grabber_Output.PicturePathShort) <> String.Empty And File.Exists(Grabber_Output.PicturePathLong) Then
                                     If FileExists = True Then
                                         System.IO.File.Delete(NewFileName)
                                     End If
