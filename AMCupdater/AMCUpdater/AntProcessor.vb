@@ -510,7 +510,7 @@ Public Class AntProcessor
         XMLDoc = New XmlDocument
         'XMLDoc.Load(_ManualXMLPath)
 
-        Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read)
+        Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
         XMLDoc.Load(xmlFile)
 
 
@@ -1263,7 +1263,16 @@ Public Class AntProcessor
     End Sub
 
     Private Shared Sub bgwManualUpdate_PostProcessing()
-        XMLDoc.Save(_ManualXMLPath)
+        'XMLDoc.Save(_ManualXMLPath)
+        Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.Write, FileShare.Read)
+        XMLDoc.Save(xmlFile)
+        xmlFile.Close()
+
+        'Using s As Stream = File.OpenWrite(CurrentSettings.XML_File)
+        '    XMLDoc.Save(s)
+        '    s.Close()
+        'End Using
+
         Form1.btnManualCancel.Enabled = False
         Form1.btnManualApplyChanges.Enabled = False
         Form1.btnManualDoTest.Enabled = True
