@@ -32,14 +32,14 @@ Partial Class Form1
         Dim MailLabel As System.Windows.Forms.Label
         Dim SiteLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -138,6 +138,11 @@ Partial Class Form1
         Me.btnManualSelectXMLFile = New System.Windows.Forms.Button
         Me.btnManualSelectExcludedMoviesFile = New System.Windows.Forms.Button
         Me.DatabaseFields = New System.Windows.Forms.TabPage
+        Me.GroupBox_FanartHandling = New System.Windows.Forms.GroupBox
+        Me.cbFanartLimitResolutionMin = New System.Windows.Forms.ComboBox
+        Me.lblFanartLimits = New System.Windows.Forms.Label
+        Me.cbFanartLimitResolutionMax = New System.Windows.Forms.ComboBox
+        Me.cbNumFanartLimitNumber = New System.Windows.Forms.NumericUpDown
         Me.GroupBox_TitleHandling = New System.Windows.Forms.GroupBox
         Me.Label101 = New System.Windows.Forms.Label
         Me.cbEditionNameAppliesTo = New System.Windows.Forms.ComboBox
@@ -166,10 +171,7 @@ Partial Class Form1
         Me.cbDateHandling = New System.Windows.Forms.ComboBox
         Me.cbCheckHandling = New System.Windows.Forms.ComboBox
         Me.GroupBox_PictureHandling = New System.Windows.Forms.GroupBox
-        Me.cbFanartLimitResolutionMin = New System.Windows.Forms.ComboBox
-        Me.lblFanartLimits = New System.Windows.Forms.Label
-        Me.cbNumFanartLimitNumber = New System.Windows.Forms.NumericUpDown
-        Me.cbFanartLimitResolutionMax = New System.Windows.Forms.ComboBox
+        Me.txtPictureFilenameSuffix = New System.Windows.Forms.TextBox
         Me.lblPicturePrefix = New System.Windows.Forms.Label
         Me.lblPictureHandling = New System.Windows.Forms.Label
         Me.cbPictureHandling = New System.Windows.Forms.ComboBox
@@ -541,8 +543,6 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
-        Me.GroupBox_FanartHandling = New System.Windows.Forms.GroupBox
-        Me.txtPictureFilenameSuffix = New System.Windows.Forms.TextBox
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -560,12 +560,13 @@ Partial Class Form1
         Me.GroupBox10.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.DatabaseFields.SuspendLayout()
+        Me.GroupBox_FanartHandling.SuspendLayout()
+        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox_TitleHandling.SuspendLayout()
         Me.GroupBox_StorageFieldHandling.SuspendLayout()
         Me.GroupBox_MediaLabelFieldHandling.SuspendLayout()
         Me.GroupBox_OtherFieldHandling.SuspendLayout()
         Me.GroupBox_PictureHandling.SuspendLayout()
-        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox16.SuspendLayout()
         Me.ScanFilters.SuspendLayout()
         Me.GroupBox28.SuspendLayout()
@@ -624,7 +625,6 @@ Partial Class Form1
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox_FanartHandling.SuspendLayout()
         Me.SuspendLayout()
         '
         'OwnerLabel
@@ -1341,7 +1341,7 @@ Partial Class Form1
         '
         Me.cbManualParameterOperator2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbManualParameterOperator2.FormattingEnabled = True
-        Me.cbManualParameterOperator2.Items.AddRange(New Object() {"=", "!=", "LIKE", "NOT LIKE", "EXISTS", "NOT EXISTS", ">", "<"})
+        Me.cbManualParameterOperator2.Items.AddRange(New Object() {"=", "!=", "LIKE", "NOT LIKE", "EXISTS", "NOT EXISTS", ">", "<", ">Num", "<Num"})
         Me.cbManualParameterOperator2.Location = New System.Drawing.Point(215, 74)
         Me.cbManualParameterOperator2.Name = "cbManualParameterOperator2"
         Me.cbManualParameterOperator2.Size = New System.Drawing.Size(111, 21)
@@ -1744,6 +1744,56 @@ Partial Class Form1
         Me.DatabaseFields.Text = "Database Fields"
         Me.DatabaseFields.UseVisualStyleBackColor = True
         '
+        'GroupBox_FanartHandling
+        '
+        Me.GroupBox_FanartHandling.Controls.Add(Me.cbFanartLimitResolutionMin)
+        Me.GroupBox_FanartHandling.Controls.Add(Me.lblFanartLimits)
+        Me.GroupBox_FanartHandling.Controls.Add(Me.cbFanartLimitResolutionMax)
+        Me.GroupBox_FanartHandling.Controls.Add(Me.cbNumFanartLimitNumber)
+        Me.GroupBox_FanartHandling.Location = New System.Drawing.Point(239, 534)
+        Me.GroupBox_FanartHandling.Name = "GroupBox_FanartHandling"
+        Me.GroupBox_FanartHandling.Size = New System.Drawing.Size(353, 43)
+        Me.GroupBox_FanartHandling.TabIndex = 57
+        Me.GroupBox_FanartHandling.TabStop = False
+        Me.GroupBox_FanartHandling.Text = "Fanart Handling ..."
+        '
+        'cbFanartLimitResolutionMin
+        '
+        Me.cbFanartLimitResolutionMin.FormattingEnabled = True
+        Me.cbFanartLimitResolutionMin.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
+        Me.cbFanartLimitResolutionMin.Location = New System.Drawing.Point(164, 16)
+        Me.cbFanartLimitResolutionMin.Name = "cbFanartLimitResolutionMin"
+        Me.cbFanartLimitResolutionMin.Size = New System.Drawing.Size(78, 21)
+        Me.cbFanartLimitResolutionMin.TabIndex = 53
+        Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMin, "Sets minimum resolution for fanart to be allowed to download.")
+        '
+        'lblFanartLimits
+        '
+        Me.lblFanartLimits.AutoSize = True
+        Me.lblFanartLimits.Location = New System.Drawing.Point(18, 19)
+        Me.lblFanartLimits.Name = "lblFanartLimits"
+        Me.lblFanartLimits.Size = New System.Drawing.Size(66, 13)
+        Me.lblFanartLimits.TabIndex = 52
+        Me.lblFanartLimits.Text = "Fanart Limits"
+        '
+        'cbFanartLimitResolutionMax
+        '
+        Me.cbFanartLimitResolutionMax.FormattingEnabled = True
+        Me.cbFanartLimitResolutionMax.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
+        Me.cbFanartLimitResolutionMax.Location = New System.Drawing.Point(248, 16)
+        Me.cbFanartLimitResolutionMax.Name = "cbFanartLimitResolutionMax"
+        Me.cbFanartLimitResolutionMax.Size = New System.Drawing.Size(90, 21)
+        Me.cbFanartLimitResolutionMax.TabIndex = 50
+        Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMax, "Sets maximum resolution for fanart to be allowed to download.")
+        '
+        'cbNumFanartLimitNumber
+        '
+        Me.cbNumFanartLimitNumber.Location = New System.Drawing.Point(100, 17)
+        Me.cbNumFanartLimitNumber.Name = "cbNumFanartLimitNumber"
+        Me.cbNumFanartLimitNumber.Size = New System.Drawing.Size(44, 20)
+        Me.cbNumFanartLimitNumber.TabIndex = 51
+        Me.ToolTip1.SetToolTip(Me.cbNumFanartLimitNumber, "Limits the number of downloaded fanarts." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """0"" = all available.")
+        '
         'GroupBox_TitleHandling
         '
         Me.GroupBox_TitleHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -2052,42 +2102,13 @@ Partial Class Form1
         Me.GroupBox_PictureHandling.TabStop = False
         Me.GroupBox_PictureHandling.Text = "Cover Handling ..."
         '
-        'cbFanartLimitResolutionMin
+        'txtPictureFilenameSuffix
         '
-        Me.cbFanartLimitResolutionMin.FormattingEnabled = True
-        Me.cbFanartLimitResolutionMin.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
-        Me.cbFanartLimitResolutionMin.Location = New System.Drawing.Point(164, 16)
-        Me.cbFanartLimitResolutionMin.Name = "cbFanartLimitResolutionMin"
-        Me.cbFanartLimitResolutionMin.Size = New System.Drawing.Size(78, 21)
-        Me.cbFanartLimitResolutionMin.TabIndex = 53
-        Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMin, "Sets minimum resolution for fanart to be allowed to download.")
-        '
-        'lblFanartLimits
-        '
-        Me.lblFanartLimits.AutoSize = True
-        Me.lblFanartLimits.Location = New System.Drawing.Point(18, 19)
-        Me.lblFanartLimits.Name = "lblFanartLimits"
-        Me.lblFanartLimits.Size = New System.Drawing.Size(66, 13)
-        Me.lblFanartLimits.TabIndex = 52
-        Me.lblFanartLimits.Text = "Fanart Limits"
-        '
-        'cbNumFanartLimitNumber
-        '
-        Me.cbNumFanartLimitNumber.Location = New System.Drawing.Point(100, 17)
-        Me.cbNumFanartLimitNumber.Name = "cbNumFanartLimitNumber"
-        Me.cbNumFanartLimitNumber.Size = New System.Drawing.Size(44, 20)
-        Me.cbNumFanartLimitNumber.TabIndex = 51
-        Me.ToolTip1.SetToolTip(Me.cbNumFanartLimitNumber, "Limits the number of downloaded fanarts." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """0"" = all available.")
-        '
-        'cbFanartLimitResolutionMax
-        '
-        Me.cbFanartLimitResolutionMax.FormattingEnabled = True
-        Me.cbFanartLimitResolutionMax.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
-        Me.cbFanartLimitResolutionMax.Location = New System.Drawing.Point(248, 16)
-        Me.cbFanartLimitResolutionMax.Name = "cbFanartLimitResolutionMax"
-        Me.cbFanartLimitResolutionMax.Size = New System.Drawing.Size(90, 21)
-        Me.cbFanartLimitResolutionMax.TabIndex = 50
-        Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMax, "Sets maximum resolution for fanart to be allowed to download.")
+        Me.txtPictureFilenameSuffix.Location = New System.Drawing.Point(248, 40)
+        Me.txtPictureFilenameSuffix.Name = "txtPictureFilenameSuffix"
+        Me.txtPictureFilenameSuffix.Size = New System.Drawing.Size(90, 20)
+        Me.txtPictureFilenameSuffix.TabIndex = 50
+        Me.ToolTip1.SetToolTip(Me.txtPictureFilenameSuffix, resources.GetString("txtPictureFilenameSuffix.ToolTip"))
         '
         'lblPicturePrefix
         '
@@ -4285,27 +4306,27 @@ Partial Class Form1
         Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
         Me.DataGridViewMovie.Name = "DataGridViewMovie"
         Me.DataGridViewMovie.ReadOnly = True
         Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewMovie.RowHeadersVisible = False
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4316,8 +4337,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -4326,8 +4347,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -4350,8 +4371,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -5609,26 +5630,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -5685,27 +5706,6 @@ Partial Class Form1
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
         '
-        'GroupBox_FanartHandling
-        '
-        Me.GroupBox_FanartHandling.Controls.Add(Me.cbFanartLimitResolutionMin)
-        Me.GroupBox_FanartHandling.Controls.Add(Me.lblFanartLimits)
-        Me.GroupBox_FanartHandling.Controls.Add(Me.cbFanartLimitResolutionMax)
-        Me.GroupBox_FanartHandling.Controls.Add(Me.cbNumFanartLimitNumber)
-        Me.GroupBox_FanartHandling.Location = New System.Drawing.Point(239, 534)
-        Me.GroupBox_FanartHandling.Name = "GroupBox_FanartHandling"
-        Me.GroupBox_FanartHandling.Size = New System.Drawing.Size(353, 43)
-        Me.GroupBox_FanartHandling.TabIndex = 57
-        Me.GroupBox_FanartHandling.TabStop = False
-        Me.GroupBox_FanartHandling.Text = "Fanart Handling ..."
-        '
-        'txtPictureFilenameSuffix
-        '
-        Me.txtPictureFilenameSuffix.Location = New System.Drawing.Point(248, 40)
-        Me.txtPictureFilenameSuffix.Name = "txtPictureFilenameSuffix"
-        Me.txtPictureFilenameSuffix.Size = New System.Drawing.Size(90, 20)
-        Me.txtPictureFilenameSuffix.TabIndex = 50
-        Me.ToolTip1.SetToolTip(Me.txtPictureFilenameSuffix, resources.GetString("txtPictureFilenameSuffix.ToolTip"))
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5742,6 +5742,9 @@ Partial Class Form1
         Me.GroupBox9.PerformLayout()
         Me.DatabaseFields.ResumeLayout(False)
         Me.DatabaseFields.PerformLayout()
+        Me.GroupBox_FanartHandling.ResumeLayout(False)
+        Me.GroupBox_FanartHandling.PerformLayout()
+        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox_TitleHandling.ResumeLayout(False)
         Me.GroupBox_TitleHandling.PerformLayout()
         Me.GroupBox_StorageFieldHandling.ResumeLayout(False)
@@ -5752,7 +5755,6 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.PerformLayout()
         Me.GroupBox_PictureHandling.ResumeLayout(False)
         Me.GroupBox_PictureHandling.PerformLayout()
-        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
         Me.ScanFilters.ResumeLayout(False)
@@ -5842,8 +5844,6 @@ Partial Class Form1
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox_FanartHandling.ResumeLayout(False)
-        Me.GroupBox_FanartHandling.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
