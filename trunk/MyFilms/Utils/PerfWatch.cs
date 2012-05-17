@@ -1,4 +1,4 @@
-ï»¿#region GNU license
+#region GNU license
 // MyFilms - Plugin for Mediaportal
 // http://www.team-mediaportal.com
 // Copyright (C) 2006-2007
@@ -21,13 +21,13 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-
-namespace aclib.Performance
+namespace MyFilmsPlugin.Utils
 {
-    static public class PerfWatcher
+  using System;
+  using System.Collections.Generic;
+  using System.Diagnostics;
+
+  static public class PerfWatcher
     {
         static Dictionary<string, Watch> _watches = new Dictionary<string, Watch>();
         const string anonName = "Anonymous";
@@ -177,7 +177,7 @@ namespace aclib.Performance
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get { return this._name; }
         }
 
         int _startCounter;
@@ -186,7 +186,7 @@ namespace aclib.Performance
         /// </summary>
         public int StartCounter
         {
-            get { return _startCounter; }
+            get { return this._startCounter; }
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace aclib.Performance
         /// <param name="name">The Name (Identifier) of this Watch</param>
         public Watch(string name)
         {
-            _name = name;
+            this._name = name;
             PerfWatcher.AddWatch(this);
         }
 
@@ -204,7 +204,7 @@ namespace aclib.Performance
         /// </summary>
         public new void Start()
         {
-            _startCounter++;
+            this._startCounter++;
             base.Start();
         }
 
@@ -213,7 +213,7 @@ namespace aclib.Performance
         /// </summary>
         public new void Reset()
         {
-            _startCounter = 0;
+            this._startCounter = 0;
             base.Reset();
         }
 
@@ -231,7 +231,7 @@ namespace aclib.Performance
                     msStart = this.ElapsedMilliseconds / this.StartCounter;
                     usStart = this.ElapsedMicroseconds / this.StartCounter;
 
-                    return string.Format("Watch: Started: {1} time(s) - Elapsed: {2}ms ({3} Âµs) -> {4} ms ({5} Âµs)/start \"{0}\"",
+                    return string.Format("Watch: Started: {1} time(s) - Elapsed: {2}ms ({3} µs) -> {4} ms ({5} µs)/start \"{0}\"",
                                      this.Name, this.StartCounter, this.ElapsedMilliseconds, this.ElapsedMicroseconds, msStart, usStart);
                 }
                 else return string.Format("Watch: {0} - Started: never", this.Name);
@@ -251,7 +251,7 @@ namespace aclib.Performance
         /// </summary>
         public long ElapsedMicroseconds
         {
-            get { return (long)(Elapsed.Ticks / 10); }
+            get { return (long)(this.Elapsed.Ticks / 10); }
         }
 
         #region IComparable<Watch> Members

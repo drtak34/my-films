@@ -1,5 +1,5 @@
 #region GNU license
-// MP-TVSeries - Plugin for Mediaportal
+// MyFilms - Plugin for Mediaportal
 // http://www.team-mediaportal.com
 // Copyright (C) 2006-2007
 //
@@ -21,131 +21,31 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-using System;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Text;
-using MediaPortal.Util;
-using MediaPortal.GUI.Library;
-using System.Text.RegularExpressions;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using aclib.Performance;
-
-namespace MyFilmsPlugin.MyFilms.Utils
+namespace MyFilmsPlugin.Utils
 {
-    public class ImageAllocator
+  using System;
+  using System.Collections.Generic;
+  using System.Drawing;
+  using System.Reflection;
+  using System.Runtime.InteropServices;
+  using System.Text.RegularExpressions;
+
+  using MediaPortal.GUI.Library;
+
+  public class ImageAllocator
     {
-        enum ImageType
-        {
-            widebanner,
-            poster,
-        }
-
-        enum NewEpisodeThumbType
-        {
-            none,
-            unwatched,
-            recentlyadded
-        }
-
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         static String s_sFontName;
-        static List<String> s_SeriesImageList = new List<string>();
-        static List<String> s_SeasonsImageList = new List<string>();
+        static List<String> s_PosterImageList = new List<string>();
         static List<String> s_OtherPersistentImageList = new List<string>();
         static List<String> s_OtherDiscardableImageList = new List<string>();
-        static Size reqSeriesPosterSize = new Size(680 * DBOption.GetOptions(DBOption.cQualitySeriesPosters) / 100, 1000 * DBOption.GetOptions(DBOption.cQualitySeriesPosters) / 100);
-        static Size reqSeriesPosterCFSize = new Size(680 * DBOption.GetOptions(DBOption.cQualitySeriesCoverflow) / 100, 1000 * DBOption.GetOptions(DBOption.cQualitySeriesCoverflow) / 100);
-        static Size reqSeriesBannerSize = new Size(758 * DBOption.GetOptions(DBOption.cQualitySeriesBanners) / 100, 140 * DBOption.GetOptions(DBOption.cQualitySeriesBanners) / 100);
-        static Size reqSeasonPosterSize = new Size(400 * DBOption.GetOptions(DBOption.cQualitySeasonBanners) / 100, 578 * DBOption.GetOptions(DBOption.cQualitySeasonBanners) / 100);
-        static Size reqSeasonPosterCFSize = new Size(400 * DBOption.GetOptions(DBOption.cQualitySeasonCoverflow) / 100, 578 * DBOption.GetOptions(DBOption.cQualitySeasonCoverflow) / 100);
-        static float reqEpisodeImagePercentage = (float)(DBOption.GetOptions(DBOption.cQualityEpisodeImages)) / 100f;
         static Size DefPosterSize = new Size(680, 1000);
-        static Size DefBannerSize = new Size(758, 140);
-        static Size DefSeasonPosterSize = new Size(400, 578);
 
         static ImageAllocator()
         {
         }
 
-        #region Helpers
-        /// <summary>
-        /// Create a banner image of the specified size, outputting the input text on it
-        /// </summary>
-        /// <param name="sizeImage">Size of the image to be generated</param>
-        /// <param name="label">Text to be output on the image</param>
-        /// <returns>a bitmap object</returns>
-        private static Bitmap drawSimpleBanner(Size sizeImage, string label)
-        {
-            Bitmap image = new Bitmap(sizeImage.Width, sizeImage.Height);
-            Graphics gph = Graphics.FromImage(image);
-            //gph.FillRectangle(new SolidBrush(Color.FromArgb(50, Color.White)), new Rectangle(0, 0, sizeImage.Width, sizeImage.Height));
-            GUIFont fontList = GUIFontManager.GetFont(s_sFontName);
-            Font font = new Font(fontList.FontName, 36);
-            gph.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-            gph.DrawString(label, font, new SolidBrush(Color.FromArgb(200, Color.White)), 5, (sizeImage.Height - font.GetHeight()) / 2);
-            gph.Dispose();
-            return image;
-        }
-
-        /// <summary>
-        /// Drawing a 'NEW' stamp on top of an existing banner.
-        /// </summary>
-        /// <param name="origBanner">Location of the original banner.</param>
-        /// <returns>The new banner.</returns>
-        private static Bitmap drawNewBanner(string origBanner, ImageType type)
-        {
-          Image mainImage = LoadImageFastFromFile(origBanner);
-          if (mainImage == null)
-          {
-            return null;
-          }
-
-          Bitmap image = new Bitmap(mainImage);
-          return drawNewBanner(image, type);
-        }
-
-        /// <summary>
-        /// Drawing a 'NEW' stamp on top of an existing banner.
-        /// </summary>
-        /// <param name="origBanner">Original banner.</param>
-        /// <returns>The new banner.</returns>
-        private static Bitmap drawNewBanner(Bitmap origBanner, ImageType type)
-        {
-            if (origBanner == null)
-            {
-                return null;
-            }
-
-            string newStampLocation = GUIGraphicsContext.Skin + @"\Media\tvseries_newlabel.png";
-            Image newImage = LoadImageFastFromFile(newStampLocation);
-
-            Graphics gph = Graphics.FromImage(origBanner);
-            try
-            {
-                if (newImage != null)
-                {
-                  Bitmap newStamp = new Bitmap(newImage);
-                  if (type == ImageType.poster)
-                      gph.DrawImage(newStamp, SkinSettings.PosterNewStampPosX, SkinSettings.PosterNewStampPosY);
-                  else
-                      gph.DrawImage(newStamp, SkinSettings.WideBannerNewStampPosX, SkinSettings.WideBannerNewStampPosY);
-                }
-                else
-                {
-                    gph.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.White)), new Rectangle(((origBanner.Width - 200) / 2), ((origBanner.Height - 100) / 2), 200, 100));
-                    GUIFont fontList = GUIFontManager.GetFont(s_sFontName);
-                    Font font = new Font(fontList.FontName, 50);
-                    gph.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-                    gph.DrawString("New", font, new SolidBrush(Color.FromArgb(200, Color.Red)), ((origBanner.Width - 180) / 2), (origBanner.Height - font.GetHeight()) / 2);
-                }
-            }
-            finally
-            {
-                gph.Dispose();
-            }
-            return origBanner;
-        }
+        #region Helper
 
         /// <summary>
         /// Takes an Image sFileName and tries to load it into MP' graphics memory
@@ -165,7 +65,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
             catch (Exception e)
             {
-                MPTVSeriesLog.Write("Unable to add to MP's Graphics memory: " + sFileName + " Error: " + e.Message);
+                LogMyFilms.Error("Unable to add to MP's Graphics memory: " + sFileName + " Error: " + e.Message);
                 return string.Empty;
             }
         }
@@ -174,7 +74,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
             // note: GetHashCode() experiences strangeness with dissappearing textures
             // replace ';' to avoid issues with mediaportal texture splitting code            
-            return "[TVSeries:" + name.Replace(";","-") + "]";
+            return "[MyFilms:" + name.Replace(";", "-") + "]";
         }
 
         /// <summary>
@@ -188,11 +88,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
             string name = buildIdentifier ? ImageAllocator.buildIdentifier(identifier) : identifier;
             try
-            {                
+            {
                 // we don't have to try first, if name already exists mp will not do anything with the image
                 if (size.Height > 0 && (size.Height != image.Size.Height || size.Width != image.Size.Width)) //resize
-                {                    
-                    image = Resize(image, size);                                        
+                {
+                    image = Resize(image, size);
                 }
                 PerfWatcher.GetNamedWatch("add to TextureManager").Start();
                 //MPTVSeriesLog.WriteMultiLine("AsyncImageResource LoadFromMemory - " + Environment.StackTrace, MPTVSeriesLog.LogLevel.Debug);
@@ -201,7 +101,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
             catch (Exception)
             {
-                MPTVSeriesLog.Write("Unable to add to MP's Graphics memory: " + identifier);
+                LogMyFilms.Debug("Unable to add to MP's Graphics memory: " + identifier);
                 return string.Empty;
             }
             return name;
@@ -209,13 +109,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         public static string ExtractFullName(string identifier)
         {
-            String RegExp = @"\[TVSeries:(.*)\]";
+            String RegExp = @"\[MyFilms:(.*)\]";
             Regex Engine = new Regex(RegExp, RegexOptions.IgnoreCase);
             Match match = Engine.Match(identifier);
             if (match.Success)
                 return match.Groups[1].Value;
             else
-                return identifier;            
+                return identifier;
         }
 
         public static void Flush(List<String> toFlush)
@@ -243,165 +143,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
             s_sFontName = sFontName;
         }
 
-        /// <summary>
-        /// Sets or gets the default Series banner size with which banners will be loaded into memory
-        /// </summary>
-        public static Size SetSeriesBannerSize
-        {
-            set { reqSeriesBannerSize = value; } 
-            get { return reqSeriesBannerSize;} 
-        }
-
-        /// <summary>
-        /// Sets or gets the default Season banner size with which filmstrip posters will be loaded into memory
-        /// </summary>
-        public static Size SetSeasonPosterSize
-        { 
-            set { reqSeasonPosterSize = value; } 
-            get { return reqSeasonPosterSize; } 
-        }
-
-        /// <summary>
-        /// Sets or gets the default Season poster size with which coverflow posters will be loaded into memory
-        /// </summary>
-        public static Size SetSeasonPosterCFSize
-        {
-            set { reqSeasonPosterCFSize = value; }
-            get { return reqSeasonPosterCFSize; }
-        }
-
-        /// <summary>
-        /// Sets or gets the default Series poster size with which Filmstrip posters will be loaded into memory
-        /// </summary>
-        public static Size SetSeriesPosterSize
-        { 
-            set { reqSeriesPosterSize = value; } 
-            get { return reqSeriesPosterSize; } 
-        }
-
-        /// <summary>
-        /// Sets or gets the default Series poster size with which Coverflow posters will be loaded into memory
-        /// </summary>
-        public static Size SetSeriesPosterCFSize
-        {
-            set { SetSeriesPosterCFSize = value; }
-            get { return reqSeriesPosterCFSize; }
-        }
-
-        public static String GetSeriesBanner(DBSeries series)
-        {
-            string sFileName = series.Banner;;
-            string sTextureName = string.Empty;
-            
-            bool ShowNewImage = false;
-
-            NewEpisodeThumbType newEpisodeThumbType = (NewEpisodeThumbType)(int)DBOption.GetOptions(DBOption.cNewEpisodeThumbType);
-
-            if (newEpisodeThumbType == NewEpisodeThumbType.recentlyadded)
-            {
-                ShowNewImage = series[DBOnlineSeries.cHasNewEpisodes];
-            }
-            else if (newEpisodeThumbType == NewEpisodeThumbType.unwatched)
-            {
-                ShowNewImage = series[DBOnlineSeries.cEpisodesUnWatched];
-            }
-
-            if (sFileName.Length > 0 && System.IO.File.Exists(sFileName)) 
-            {
-                if (ShowNewImage)
-                {
-                    //make banner with new tag
-                    string ident = sFileName + "_new";
-                    sTextureName = buildMemoryImage(drawNewBanner(sFileName, ImageType.widebanner), ident, reqSeriesBannerSize, true);
-                }
-                else
-                {
-                    if (DBOption.GetOptions(DBOption.cAltImgLoading))
-                    {
-                        // bypass memoryimagebuilder
-                        sTextureName = sFileName;
-                    }
-                    else
-                        sTextureName = buildMemoryImageFromFile(sFileName, reqSeriesBannerSize);
-                }
-            }
-            
-            if (string.IsNullOrEmpty(sTextureName))
-            {                
-                // no image, use text, create our own
-                string ident = "series_" + series[DBSeries.cID];
-                Bitmap b = drawSimpleBanner(DefBannerSize, series[DBOnlineSeries.cPrettyName]); // create "full" size banner so we can stamp new on it
-                if (ShowNewImage)
-                {
-                    drawNewBanner(b, ImageType.widebanner);
-                }
-                sTextureName = buildMemoryImage(b, ident, reqSeriesBannerSize, true);
-            }
-
-            if(sTextureName.Length > 0 && !s_SeriesImageList.Contains(sTextureName)) 
-                s_SeriesImageList.Add(sTextureName);            
-            
-            return sTextureName;
-        }
-
-        public static String GetSeriesPoster(DBSeries series, bool isCoverflow)
-        {
-            string sFileName = series.Poster;;
-            string sTextureName = string.Empty;
-
-            bool ShowNewImage = false;
-
-            NewEpisodeThumbType newEpisodeThumbType = (NewEpisodeThumbType)(int)DBOption.GetOptions(DBOption.cNewEpisodeThumbType);
-
-            if (newEpisodeThumbType == NewEpisodeThumbType.recentlyadded)
-            {
-                ShowNewImage = series[DBOnlineSeries.cHasNewEpisodes];
-            }
-            else if (newEpisodeThumbType == NewEpisodeThumbType.unwatched)
-            {
-                ShowNewImage = series[DBOnlineSeries.cEpisodesUnWatched];
-            }
-
-            Size size = isCoverflow ? reqSeriesPosterCFSize : reqSeriesPosterSize;
-
-            if (sFileName.Length > 0 && System.IO.File.Exists(sFileName))
-            {
-                if (ShowNewImage)
-                {
-                    //make banner with new tag
-                    string ident = sFileName + "_new";
-                    sTextureName = buildMemoryImage(drawNewBanner(sFileName, ImageType.poster), ident, size, true);
-                }
-                else
-                {
-                    if (DBOption.GetOptions(DBOption.cAltImgLoading))
-                    {
-                        // bypass memoryimagebuilder
-                        sTextureName = sFileName;
-                    }
-                    else
-                        sTextureName = buildMemoryImageFromFile(sFileName, size);
-                }
-            }
-
-            if (string.IsNullOrEmpty(sTextureName))
-            {
-                // no image, use text, create our own
-                string ident = "series_" + series[DBSeries.cID];
-                Bitmap b = drawSimpleBanner(DefPosterSize, series[DBOnlineSeries.cPrettyName]); // create "full" size poster so we can stamp new on it
-                if (ShowNewImage)
-                {
-                    drawNewBanner(b, ImageType.poster);
-                }
-                sTextureName = buildMemoryImage(b, ident, size, true);
-            }
-
-            if (sTextureName.Length > 0 && !s_SeriesImageList.Contains(sTextureName)) 
-                s_SeriesImageList.Add(sTextureName);
-
-            return sTextureName;
-        }
-
         public static String GetOtherImage(string sFileName, System.Drawing.Size size, bool bPersistent)
         {
             return GetOtherImage(null, sFileName, size, bPersistent);
@@ -410,7 +151,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public static String GetOtherImage(Image i, string sFileName, System.Drawing.Size size, bool bPersistent)
         {
             String sTextureName;
-            if(i != null) sTextureName = buildMemoryImage(i, sFileName, size, true);
+            if (i != null) sTextureName = buildMemoryImage(i, sFileName, size, true);
             else sTextureName = buildMemoryImageFromFile(sFileName, size);
             if (bPersistent)
             {
@@ -424,26 +165,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         public static void FlushAll()
         {
-            FlushOthers(true);
-            FlushSeasons();
-            FlushSeries();
+            FlushPosters();
         }
 
-        public static void FlushSeries()
+        public static void FlushPosters()
         {
-            Flush(s_SeriesImageList);
-        }
-
-        public static void FlushSeasons()
-        {
-            Flush(s_SeasonsImageList);
-        }
- 
-        public static void FlushOthers(bool bFlushPersistents)
-        {
-            Flush(s_OtherDiscardableImageList);
-            if (bFlushPersistents)
-                Flush(s_OtherPersistentImageList);
+            Flush(s_PosterImageList);
         }
 
         #region FastBitmapLoading From File
@@ -466,7 +193,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 // We are not using ICM at all, fudge that, this should be FAAAAAST!
                 if (GdipLoadImageFromFile(filename, out image) != 0)
                 {
-                    LogMyFilms.Debug("Reverting to slow ImageLoading for: " + filename, MPTVSeriesLog.LogLevel.Debug);
+                    LogMyFilms.Debug("Reverting to slow ImageLoading for: " + filename);
                     i = Image.FromFile(filename);
                 }
                 else i = (Image)imageType.InvokeMember("FromGDIplus", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, new object[] { image });
@@ -474,12 +201,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
             catch (System.IO.FileNotFoundException fe)
             {
-                LogMyFilms.Debug("Image does not exist: " + filename + " - " + fe.Message);
+                LogMyFilms.Error("Image does not exist: " + filename + " - " + fe.Message);
             }
             catch (Exception e)
             {
                 // this probably means the image is bad
-                LogMyFilms.Debug("Unable to load Imagefile (corrupt?): " + filename + " - " + e.Message);
+                LogMyFilms.Error("Unable to load Imagefile (corrupt?): " + filename + " - " + e.Message);
                 return null;
             }
             return i;

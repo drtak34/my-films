@@ -42,6 +42,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using Grabber;
 
+  using MyFilmsPlugin.Utils;
+
   class MyFilmsCoverManager : GUIWindow
   {
 

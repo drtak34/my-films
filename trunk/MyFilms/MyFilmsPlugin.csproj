@@ -157,7 +157,6 @@
       <DependentUpon>MFview.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PerfWatch.cs" />
     <Compile Include="Configuration\FilterEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,7 +202,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MFview.xsd</DependentUpon>
     </Compile>
-    <Compile Include="imageAllocator.cs" />
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\MFView.cs" />
     <Compile Include="MyFilmsGUI\GUIConnector.cs" />
@@ -236,10 +234,12 @@
     <Compile Include="Utils\FastImage.cs" />
     <Compile Include="Utils\GUIUtils.cs" />
     <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Utils\imageAllocator.cs" />
     <Compile Include="Utils\LocalizeStrings.cs" />
     <Compile Include="CatalogConverter\MovieCollector.cs" />
     <Compile Include="CatalogConverter\MyMovies.cs" />
     <Compile Include="Utils\Logos.cs" />
+    <Compile Include="Utils\PerfWatch.cs" />
     <Compile Include="Utils\StringEnum.cs" />
     <Compile Include="Utils\Translations.cs" />
     <Compile Include="Utils\XmlSettings.cs" />
