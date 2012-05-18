@@ -282,14 +282,17 @@ Module Module1
             'Strip Extension
             CleanString = CleanString.Substring(0, CleanString.LastIndexOf("."))
         ElseIf CurrentSettings.Movie_Title_Handling.Contains("Folder Name") Then
-            'Strip filename:
-            CleanString = FilePath.Substring(0, FilePath.LastIndexOf("\"))
-            'Strip Path:
-            CleanString = CleanString.Substring(CleanString.LastIndexOf("\") + 1)
+            If FilePath.Contains("\") Then
+                'Strip filename:
+                CleanString = FilePath.Substring(0, FilePath.LastIndexOf("\"))
+                'Strip Path:
+                CleanString = CleanString.Substring(CleanString.LastIndexOf("\") + 1)
+            Else
+                CleanString = FilePath
+            End If
         Else
             CleanString = FilePath
         End If
-
 
         Dim CutText As New Regex("\(" & CurrentSettings.RegEx_Check_For_MultiPart_Files & "\)")
         Dim m As Match
@@ -1674,6 +1677,20 @@ Module Module1
             End If
         End If
         Return ReturnValue
+    End Function
+
+    Public Function ByteString(ByVal bytes As Long) As String
+        Dim s As Double = bytes
+        Dim format As String() = New String() {"{0} bytes", "{0} KB", "{0} MB", "{0} GB", "{0} TB", "{0} PB", _
+         "{0} EB"}
+
+        Dim i As Integer = 0
+
+        While i < format.Length AndAlso s >= 1024
+            s = CLng(Math.Truncate(100 * s / 1024)) / 100.0
+            i += 1
+        End While
+        Return String.Format(format(i), s)
     End Function
 
     ''' <summary>

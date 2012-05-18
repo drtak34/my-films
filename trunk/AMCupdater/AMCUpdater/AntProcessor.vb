@@ -2,12 +2,14 @@ Imports System.Threading
 Imports System.Xml
 Imports System.ComponentModel
 Imports System.Text
+Imports System.Windows.Forms
 Imports Grabber
 
 Public Class AntProcessor
 
     Private Shared WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker ' changed to public to get progress from MF plugin
     Private Shared WithEvents bgwManualUpdate As New System.ComponentModel.BackgroundWorker
+    Private Shared WithEvents bgwManualMovieUpdate As New System.ComponentModel.BackgroundWorker
 
     Private Shared ds As DataSet
 
@@ -320,6 +322,8 @@ Public Class AntProcessor
         bgwFolderScanUpdate.WorkerSupportsCancellation = True
         bgwManualUpdate.WorkerReportsProgress = True
         bgwManualUpdate.WorkerSupportsCancellation = True
+        bgwManualMovieUpdate.WorkerReportsProgress = True
+        bgwManualMovieUpdate.WorkerSupportsCancellation = True
     End Sub
 
 #Region "Manual Updater"
@@ -742,6 +746,44 @@ Public Class AntProcessor
             'muc.RunUpdate()
             'bgwManualUpdate_PostProcessing()
         End If
+    End Sub
+
+    Public Sub ManualUpdateOperation()
+
+        _OperationCancelled = False
+
+        ' backup the xml file before updating 
+        If CurrentSettings.Backup_XML_First = True Then
+            LogEvent("Backing up xml file.", EventLogLevel.ImportantEvent)
+            Dim NewFileName As String = Replace(CurrentSettings.Manual_XML_File, ".xml", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".xml")
+            NewFileName = NewFileName.Replace("/", "-")
+
+            Try
+                My.Computer.FileSystem.CopyFile(CurrentSettings.Manual_XML_File, NewFileName, True)
+                Dim NewFileNameShort As String = System.IO.Path.GetFileName(NewFileName)
+                LogEvent("Backing up xml file - done. (" & NewFileNameShort & ")", EventLogLevel.ImportantEvent)
+            Catch ex As Exception
+                LogEvent("ErrorEvent : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorEvent)
+            End Try
+        End If
+
+
+        'Dim XmlDoc As New XmlDocument
+        XMLDoc = New XmlDocument
+        'XMLDoc.Load(_ManualXMLPath)
+
+        Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+        XMLDoc.Load(xmlFile)
+
+        LogEvent("Performing Single Update Process", EventLogLevel.ImportantEvent)
+        Dim smuc As New SingleMovieUpdateClass
+        smuc.XmlDoc = XMLDoc
+
+        'TO SWITCH FROM SINGLE-THREAD to MULTI-THREAD, CHANGE HERE!
+        'bgwManualMovieUpdate.RunWorkerAsync(smuc)
+        smuc.RunUpdate()
+        bgwManualUpdate_PostProcessing()
+
     End Sub
 
     Private Class ManualUpdateClass
@@ -1224,14 +1266,250 @@ Public Class AntProcessor
 
     End Class
 
+    Private Class SingleMovieUpdateClass
+
+        Public XmlDoc As XmlDocument
+
+        Public Sub RunUpdate()
+
+            Dim CurrentNode As Xml.XmlNode
+
+            CurrentNode = XmlDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & Form1.TextBox2.Text & "']")
+            ' Save current / old state to be able to revert ...
+            Dim CurrentNodeOriginalValue As Xml.XmlNode = CurrentNode.CloneNode(True)
+
+            Dim FileToScan As String = String.Empty
+            Dim AllFilesPath As String = String.Empty
+            If Not IsNothing(CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field)) Then
+                FileToScan = CurrentNode.Attributes(CurrentSettings.Ant_Database_Source_Field).Value
+            End If
+
+            If FileToScan.IndexOf(";") > 0 Then
+                'In case of multi-part files take the first part to internet scan; record the full list in AllFilesPath
+                AllFilesPath = FileToScan
+                FileToScan = FileToScan.Substring(0, FileToScan.IndexOf(";"))
+            End If
+
+            Dim wDirector As String = ""
+            Dim wYear As String = ""
+            Dim wIMDB_Id As String = ""
+            If CurrentNode.Attributes(CurrentSettings.Master_Title).ToString.Length > 0 Then '            If row("AntTitle").ToString.Length > 0 Then
+                If (CurrentNode.Attributes("Director").ToString.Length > 0) Then
+                    If (CurrentNode.Attributes("Director").ToString.IndexOf(",") > 0) Then
+                        wDirector = CurrentNode.Attributes("Director").ToString.Substring(0, CurrentNode.Attributes("Director").ToString.IndexOf(","))
+                    Else
+                        wDirector = CurrentNode.Attributes("Director").ToString
+                    End If
+                End If
+                If (CurrentNode.Attributes("Year").ToString.Length > 0) Then
+                    wYear = CurrentNode.Attributes("Year").ToString
+                End If
+                If Not CurrentNode.Item("IMDB_Id") Is Nothing Then
+                    If (CurrentNode.Item("IMDB_Id").ToString.Length > 0) Then
+                        wIMDB_Id = CurrentNode.Item("IMDB_Id").ToString
+                    End If
+                End If
+            End If
+
+            ' search Filename
+            Dim wtitle As String = CurrentNode.Attributes(CurrentSettings.Master_Title).ToString
+            If IsFileNeeded() = True Then
+                'If My.Computer.FileSystem.FileExists(FileToScan) = False Then
+                If (CurrentSettings.Folder_Name_Is_Group_Name) Then
+                    If (CurrentSettings.Group_Name_Applies_To = "Original Title" Or CurrentSettings.Group_Name_Applies_To = "Both Titles") Then
+                        wtitle = "OriginalTitle"
+                    Else
+                        If (CurrentSettings.Group_Name_Applies_To = "Translated Title") Then
+                            wtitle = "TranslatedTitle"
+                        ElseIf (CurrentSettings.Group_Name_Applies_To = "Formatted Title") Then
+                            wtitle = "FormattedTitle"
+                        End If
+                    End If
+                    Try
+                        wtitle = CurrentNode.Attributes(wtitle).Value
+                    Catch ex As Exception
+                        wtitle = CurrentNode.Attributes(CurrentSettings.Master_Title).ToString
+                    End Try
+                End If
+            End If
+
+            Dim Ant As New AntRecord()
+            With Ant
+                .XMLDoc = XmlDoc
+                .XMLElement = CurrentNode
+                .XMLFilePath = CurrentSettings.Manual_XML_File
+                .FilePath = FileToScan
+                .AllFilesPath = AllFilesPath
+                If AllFilesPath.Length > 0 Then
+                    .OverridePath = AllFilesPath
+                Else
+                    .OverridePath = FileToScan
+                End If
+                'File(Name)
+                'Folder(Name)
+                'Relative(Name)
+                If FileToScan.Length > 0 Then ' first try to get groupname by default rules from filename
+                    If FileToScan.ToString.Contains("\") Then
+                        .GroupName = GetGroupName(FileToScan, CurrentSettings.Movie_Title_Handling, CurrentSettings.Group_Name_Identifier, CurrentSettings.Series_Name_Identifier)
+                    End If
+                Else
+                    If wtitle.Length > 0 Then ' fallback to possibly existing group name
+                        If wtitle.Contains("\") = True Then
+                            .GroupName = wtitle.Substring(0, wtitle.LastIndexOf("\"))
+                            'Console.WriteLine("-" & .GroupName.ToString & "-")
+                        End If
+                    End If
+                End If
+                'If CurrentNode.Attributes("MovieNumber") Then
+                .ExcludeFile = CurrentSettings.Manual_Excluded_Movies_File
+                .InternetLookupAlwaysPrompt = True
+                .DateHandling = CurrentSettings.Date_Handling
+                .MovieTitleHandling = CurrentSettings.Movie_Title_Handling
+                .MasterTitle = CurrentSettings.Master_Title
+                .InteractiveMode = True
+                Dim ImagePath As String = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
+                Dim ImagePrefix As String = CurrentSettings.Image_Download_Filename_Prefix.ToString
+
+                If (CurrentSettings.Use_Folder_Dot_Jpg = False And CurrentSettings.Image_Download_Filename_Prefix.Length > 0) Then
+                    If ImagePrefix.LastIndexOf("\") > -1 Then 'Example : "foldername\" or "foldername\prefix_"
+                        Dim PictureFolder As String = ImagePrefix.Substring(0, ImagePrefix.IndexOf("\"))
+                        ImagePath = ImagePath & "\" & PictureFolder
+                        If Not My.Computer.FileSystem.DirectoryExists(ImagePath) Then
+                            My.Computer.FileSystem.CreateDirectory(ImagePath)
+                        Else
+                            'ImagePath = ImagePath & "\" & ImagePrefix
+                        End If
+                    End If
+                End If
+
+                Dim ImagePathTemp = System.IO.Path.GetTempPath()
+
+                '.ImagePath = ImagePath
+                .ImagePath = ImagePathTemp
+
+                .InternetSearchHint = wDirector
+                .InternetSearchHintYear = wYear
+                .InternetSearchHintIMDB_Id = wIMDB_Id
+                .ParserPath = CurrentSettings.Manual_Internet_Parser_Path
+                .GrabberOverrideLanguage = CurrentSettings.Grabber_Override_Language
+                .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
+                .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
+                .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
+                .OnlyAddMissingData = False ' added for "add missing data" mode"
+                .OnlyUpdateNonEmptyData = False
+                .Dont_Ask_Interactive = False ' added for silent updates without asking user to choose movie on failed auto matches
+
+                .ProcessFile(AntRecord.Process_Mode_Names.Update)
+
+                Dim UpdateMovieDialog As New frmMovieUpdate()
+                With UpdateMovieDialog
+                    Dim item As Object
+                    Dim FieldName As String
+                    Dim FieldChecked As Boolean
+                    Dim ValueOld As String
+                    Dim ValueNew As String
+
+                    For Each item In Form1.cbDatabaseFields.Items
+                        FieldName = item.ToString
+                        FieldChecked = Form1.cbDatabaseFields.GetItemChecked(Form1.cbDatabaseFields.Items.IndexOf(FieldName))
+                        Try
+                            ValueOld = GetValue(CurrentNodeOriginalValue, FieldName) 'ValueOld = CurrentNodeOriginalValue.Attributes(FieldName).Value
+                            ValueNew = GetValue(CurrentNode, FieldName) 'ValueNew = Ant.XMLElement.Attributes(FieldName).Value
+                            .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
+                            If FieldName = "Picture" Then
+                                .PictureBoxOld.ImageLocation = Path.Combine(ImagePath, ValueOld)
+                                .PictureBoxNew.ImageLocation = Path.Combine(ImagePathTemp, ValueNew)
+                            End If
+                        Catch ex As Exception
+                            MsgBox("Exception adding data ('" + FieldName + "') to Movie Update Dialog: " + ex.Message, MsgBoxStyle.OkOnly)
+                        End Try
+                    Next
+
+                    If .ShowDialog = Windows.Forms.DialogResult.OK Then
+                        For i As Integer = 0 To .DgvUpdateMovie.RowCount - 1
+                            Dim itemName As String = ""
+                            Dim itemValue As String = ""
+                            Try
+                                itemName = .DgvUpdateMovie(1, i).Value
+                                If .DgvUpdateMovie(0, i).Value = True Then
+                                    itemValue = .DgvUpdateMovie(3, i).Value
+                                    If itemName = "Picture" Then
+                                        File.Copy(Path.Combine(ImagePathTemp, itemValue), Path.Combine(ImagePath, itemValue), True)
+                                        Thread.Sleep(20)
+                                        File.Delete(Path.Combine(ImagePathTemp, itemValue))
+                                    End If
+                                Else
+                                    itemValue = .DgvUpdateMovie(2, i).Value
+                                End If
+                                If itemName = "Date" Then
+                                    Try
+                                        itemValue = Convert.ToDateTime(itemValue).ToShortDateString()
+                                    Catch ex As Exception
+                                        itemValue = DateTime.Now.ToShortDateString()
+                                    End Try
+                                End If
+                            Catch ex As Exception
+                                MsgBox("Exception updating data ('" + itemName + "') to Movie: " + ex.Message, MsgBoxStyle.OkOnly)
+                            End Try
+                            Try
+                                If CurrentNode.Attributes(itemName) IsNot Nothing Then
+                                    CurrentNode.Attributes(itemName).Value = itemValue
+                                Else
+                                    If CurrentNode.Item("CustomFields") IsNot Nothing Then
+                                        Dim customfieldselement As Xml.XmlElement = CurrentNode.Item("CustomFields")
+                                        If customfieldselement.Attributes(itemName) IsNot Nothing Then
+                                            customfieldselement.Attributes(itemName).Value = itemValue
+                                        End If
+                                    End If
+                                    If CurrentNode.Item(itemName) IsNot Nothing Then
+                                        CurrentNode.Item(itemName).InnerText = itemValue
+                                    End If
+                                End If
+                            Catch ex As Exception
+                                MsgBox("Exception updating data ('" + itemName + "') to Movie: " + ex.Message + ", " + ex.StackTrace, MsgBoxStyle.OkOnly)
+                            End Try
+                        Next
+                    Else
+                        CurrentNode = CurrentNodeOriginalValue
+                    End If
+                End With
+
+                Ant.SaveProgress()
+                'If frmMovieUpdate.DialogResult = DialogResult.OK Then
+                '    .SaveProgress()
+                'End If
+            End With
+
+            If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
+                bgwManualMovieUpdate.ReportProgress(100, Ant.LastOutputMessage)
+            Else
+                If (CurrentNode.Attributes("Number") Is Nothing) Then
+                    bgwManualMovieUpdate.ReportProgress(100, "File Scanned for Data : " & CurrentNode.Attributes(CurrentSettings.Master_Title).ToString & " | " & Ant.LastOutputMessage)
+                Else
+                    bgwManualMovieUpdate.ReportProgress(100, "File Scanned for Data : " & CurrentNode.Attributes("Number").Value & " | " & CurrentNode.Attributes(CurrentSettings.Master_Title).Value.ToString & " | " & Ant.LastOutputMessage)
+                End If
+            End If
+
+        End Sub
+
+        Public Sub New()
+
+        End Sub
+
+    End Class
+
     Private Shared Sub bgwManualUpdate_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwManualUpdate.DoWork
         Dim ManualUpdateObject As ManualUpdateClass = CType(e.Argument, ManualUpdateClass)
         'e.Result = ManualUpdateObject.RunUpdate()
         ManualUpdateObject.RunUpdate()
     End Sub
 
-    Private Shared Sub bgwManualUpdate_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwManualUpdate.RunWorkerCompleted
+    Private Shared Sub bgwManualMovieUpdate_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwManualMovieUpdate.DoWork
+        Dim SingleMovieUpdateObject As SingleMovieUpdateClass = CType(e.Argument, SingleMovieUpdateClass)
+        SingleMovieUpdateObject.RunUpdate()
+    End Sub
 
+    Private Shared Sub bgwManualUpdate_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwManualUpdate.RunWorkerCompleted
 
         If e.Error IsNot Nothing Then
             'If e.ErrorEvent.Message.ToString <> "" Then
@@ -1261,10 +1539,50 @@ Public Class AntProcessor
         bgwManualUpdate_PostProcessing()
 
     End Sub
+    Private Shared Sub bgwManualMovieUpdate_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwManualMovieUpdate.RunWorkerCompleted
+
+        If e.Error IsNot Nothing Then
+            LogEvent("ErrorEvent : " & e.Error.Message.ToLower, EventLogLevel.ErrorEvent)
+        End If
+
+        If _OperationCancelled = True Then
+            If MsgBox("Save work done so far?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                LogEvent("Operation Cancelled.", EventLogLevel.ErrorEvent)
+                Form1.ToolStripProgressBar.Value = Form1.ToolStripProgressBar.Maximum
+                Try
+                    My.Computer.FileSystem.CopyFile(_TempXMLBackupFile, CurrentSettings.Manual_XML_File, True)
+                    My.Computer.FileSystem.DeleteFile(_TempXMLBackupFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
+                Catch ex As Exception
+
+                End Try
+                Exit Sub
+            Else
+                LogEvent("Operation Cancelled - Save Continuing", EventLogLevel.ErrorEvent)
+            End If
+        End If
+
+        Form1.txtConfigFilePath_TextChanged(sender, e) ' added to force refresh of View Collection Tab
+
+        'XMLDoc.Save(_ManualXMLPath)
+        Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.Write, FileShare.Read)
+        xmlFile.SetLength(0)
+        XMLDoc.Save(xmlFile)
+        xmlFile.Close()
+
+        'Using s As Stream = File.OpenWrite(CurrentSettings.XML_File)
+        '    XMLDoc.Save(s)
+        '    s.Close()
+        'End Using
+
+        Form1.ToolStripProgressBar.Value = Form1.ToolStripProgressBar.Maximum
+        LogEvent("Manual Single Movie Update Complete.", EventLogLevel.ImportantEvent)
+        LogEvent("===================================================================================================", EventLogLevel.Informational)
+    End Sub
 
     Private Shared Sub bgwManualUpdate_PostProcessing()
         'XMLDoc.Save(_ManualXMLPath)
         Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.Write, FileShare.Read)
+        xmlFile.SetLength(0)
         XMLDoc.Save(xmlFile)
         xmlFile.Close()
 
@@ -1329,11 +1647,32 @@ Public Class AntProcessor
 
     End Sub
 
+    Private Shared Sub bgwManualMovieUpdate_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles bgwManualMovieUpdate.ProgressChanged
+
+        'Console.WriteLine(e.UserState)
+        'Console.WriteLine("Min: " & Form1.ToolStripProgressBar.Minimum.ToString & ", Max : " & Form1.ToolStripProgressBar.Maximum.ToString & ", Value : " & Form1.ToolStripProgressBar.Value.ToString)
+        If Form1.ToolStripProgressBar.Value < Form1.ToolStripProgressBar.Maximum Then
+            Form1.ToolStripProgressBar.Value += 10
+            Form1.ToolStripProgressMessage.Text = "status: " & Form1.ToolStripProgressBar.Value.ToString & " of " & Form1.ToolStripProgressBar.Maximum.ToString & " total movie(s)"
+        End If
+        'The e.UserState includes messages from the background process.  In this case, it's the 'File Imported - Filename' message.
+        LogEvent(e.UserState, EventLogLevel.Informational)
+
+    End Sub
+
     Public Sub bgwManualUpdate_Cancel()
         bgwManualUpdate.CancelAsync()
         Form1.btnManualDoTest.Enabled = True
         Form1.btnManualApplyChanges.Enabled = True
         Form1.btnManualCancel.Enabled = False
+
+        _OperationCancelled = True
+
+        LogEvent("Halting Operation by user request - Please Wait.", EventLogLevel.ErrorEvent)
+    End Sub
+
+    Public Sub bgwManualMovieUpdate_Cancel()
+        bgwManualMovieUpdate.CancelAsync()
 
         _OperationCancelled = True
 
@@ -2655,6 +2994,7 @@ Public Class AntProcessor
             If CurrentSettings.Overwrite_XML_File = True Then
                 'XMLDoc.Save(CurrentSettings.XML_File)
                 Dim xmlFile As New FileStream(CurrentSettings.XML_File, FileMode.Open, FileAccess.Write, FileShare.Read)
+                xmlFile.SetLength(0)
                 XMLDoc.Save(xmlFile)
                 xmlFile.Close()
 
@@ -2718,7 +3058,6 @@ Public Class AntProcessor
     End Sub
 
 #End Region
-
 
     Public Sub Reset()
         If ds.Tables("tblXML") IsNot Nothing Then
@@ -3133,6 +3472,53 @@ Public Class AntProcessor
         'Guzzi: To be added
         Return True
 
+    End Function
+
+    Private Shared Function GetValue(ByVal CurrentNode As Xml.XmlNode, ByVal currentAttribute As String) As String
+        Dim currentValue As String = ""
+        Dim attr As Xml.XmlAttribute
+        Dim element As Xml.XmlElement
+        Dim customfieldselement As Xml.XmlElement
+        Dim customfieldsattr As Xml.XmlAttribute
+
+        attr = CurrentNode.Attributes(currentAttribute)
+        element = CurrentNode.Item(currentAttribute)
+        customfieldselement = CurrentNode.Item("CustomFields")
+        If attr Is Nothing And element Is Nothing And customfieldselement Is Nothing Then ' no values exist at all
+            Return ""
+        Else
+            If Not attr Is Nothing Then ' check for standard attr value
+                If attr.Value Is Nothing Then
+                    Return ""
+                ElseIf attr.Value = "" Then
+                    Return ""
+                Else
+                    Return attr.Value
+                End If
+            ElseIf Not customfieldselement Is Nothing Then  ' check for new AMC4 enhanced element value (Customfields)
+                customfieldsattr = customfieldselement.Attributes(currentAttribute)
+                If Not customfieldsattr Is Nothing Then ' check for  attr value inf customfields element
+                    If customfieldsattr.Value Is Nothing Then
+                        Return ""
+                    ElseIf customfieldsattr.Value = "" Then
+                        Return ""
+                    Else
+                        Return customfieldsattr.Value
+                    End If
+                Else
+                    Return ""
+                End If
+            ElseIf Not element Is Nothing Then  ' check for old MyFilms enhanced element value
+                If element.InnerText Is Nothing Then
+                    Return ""
+                ElseIf element.InnerText = "" Then
+                    Return ""
+                Else
+                    Return element.InnerText
+                End If
+            End If
+        End If
+        Return ""
     End Function
 
     Private Sub EventNeu(ByVal EineVariable As String)

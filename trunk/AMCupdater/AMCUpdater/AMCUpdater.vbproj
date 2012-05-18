@@ -178,10 +178,22 @@
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmImageViewer.Designer.vb">
+      <DependentUpon>frmImageViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImageViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmList.Designer.vb">
       <DependentUpon>frmList.vb</DependentUpon>
     </Compile>
     <Compile Include="frmList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovieUpdate.Designer.vb">
+      <DependentUpon>frmMovieUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMovieUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MediaInfoDLL.vb" />
@@ -242,6 +254,12 @@
   <ItemGroup>
     <EmbeddedResource Include="DialogRename.resx">
       <DependentUpon>DialogRename.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImageViewer.resx">
+      <DependentUpon>frmImageViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMovieUpdate.resx">
+      <DependentUpon>frmMovieUpdate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cancel.png" />
     <EmbeddedResource Include="Resources\Go.png" />

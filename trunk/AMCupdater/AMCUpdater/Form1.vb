@@ -158,11 +158,11 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If My.Settings.MainFormSize.Height > 0 And My.Settings.MainFormSize.Width > 0 Then
-            Me.Size = My.Settings.MainFormSize
-        End If
         If My.Settings.MainFormLocation.X > 0 And My.Settings.MainFormLocation.Y > 0 Then
             Me.Location = My.Settings.MainFormLocation
+        End If
+        If My.Settings.MainFormSize.Height > 0 And My.Settings.MainFormSize.Width > 0 Then
+            Me.Size = My.Settings.MainFormSize
         End If
 
         Me.AddOwnedForm(dgLogWindow)
@@ -171,11 +171,11 @@ Public Class Form1
         Else
             dgLogWindow.Visible = False
         End If
-        If My.Settings.LogFormSize.Height > 0 And My.Settings.LogFormSize.Width > 0 Then
-            dgLogWindow.Size = My.Settings.LogFormSize
-        End If
         If My.Settings.LogFormLocation.X > 0 And My.Settings.LogFormLocation.Y > 0 And (My.Settings.LogFormLocation.X + My.Settings.LogFormSize.Width) < VirtualScreen.Width And (My.Settings.LogFormLocation.Y + My.Settings.LogFormSize.Height) < VirtualScreen.Height Then
             dgLogWindow.Location = My.Settings.LogFormLocation
+        End If
+        If My.Settings.LogFormSize.Height > 0 And My.Settings.LogFormSize.Width > 0 Then
+            dgLogWindow.Size = My.Settings.LogFormSize
         End If
 
         'Dim lngLeft As Long
@@ -3211,7 +3211,7 @@ Public Class Form1
     End Sub
 
     Private Sub ToolStripButtonGrabPersons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButtonGrabPersons.Click
-
+        MsgBox("Not yet implemented !", MsgBoxStyle.Information)
     End Sub
 
     Private Shared Sub InitLogger()
@@ -3307,6 +3307,104 @@ Public Class Form1
             chkPurgeMissingAlways.Enabled = False
             chkPurgeMissingAlways.Checked = False
         End If
+    End Sub
+
+    Private Sub BindingNavigatorUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorUpdate.Click
+
+        Dim f As New IO.FileInfo(txtManualXMLPath.Text)
+        If Not f.Exists Then
+            MsgBox("File : " + f.FullName + " doesn't exist !", MsgBoxStyle.Critical)
+            txtManualXMLPath.Focus()
+            Return
+        End If
+
+        AntProcessor = New AntProcessor()
+        AntProcessor.ManualOperation = "Update"
+        AntProcessor.ManualXMLPath = txtManualXMLPath.Text
+        ApplySettings()
+        AntProcessor.ManualUpdateOperation()
+
+        ReloadMovies()
+    End Sub
+
+    Private Sub ReloadMovies()
+
+        Dim position As Integer = MovieBindingSource.Position
+
+        Dim myMovieTable As AMCUpdater.AntMovieCatalog.MovieDataTable = Nothing
+        Dim myPersonTable As AMCUpdater.AntMovieCatalog.PersonDataTable = Nothing
+        Dim myProperties As AMCUpdater.AntMovieCatalog.PropertiesDataTable = Nothing
+        myMovieCatalog = New AntMovieCatalog()
+        Try
+            Directory.SetCurrentDirectory(System.IO.Path.GetDirectoryName(txtConfigFilePath.Text)) ' Set current directory to retrieve images without full pathnames
+        Catch ex As Exception
+        End Try
+        If (System.IO.File.Exists(txtConfigFilePath.Text)) Then
+            LoadMyFilmsFromDisk(txtConfigFilePath.Text)
+            myMovieTable = myMovieCatalog.Movie
+            MovieBindingSource.DataSource = myMovieTable
+            myProperties = myMovieCatalog.Properties
+            PropertiesBindingSource.DataSource = myProperties
+        Else
+            MovieBindingSource.DataSource = myMovieTable
+            PersonBindingSource.DataSource = myPersonTable
+            PropertiesBindingSource.DataSource = myProperties
+        End If
+        MovieBindingSource.ResumeBinding()
+        'MovieBindingSource.ResetBindings(False)
+        PersonBindingSource.ResumeBinding()
+        PropertiesBindingSource.ResumeBinding()
+        MovieBindingSource.Position = position
+    End Sub
+
+    Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
+        Dim ImageViewer As New frmImageViewer()
+        Dim imagefile = Me.PictureBox1.ImageLocation
+        If Not System.IO.File.Exists(imagefile) Then
+            'MsgBox("File '" + imagefile + "' does not exist !", MsgBoxStyle.OkOnly)
+            Return
+        End If
+        ImageViewer.Text = "Image Viever"
+        ImageViewer.PictureBoxImageViewer.ImageLocation = imagefile
+        Try
+            Dim f As New FileInfo(imagefile)
+            ImageViewer.Text += " - Size = " + ByteString(f.Length)
+        Catch ex As Exception
+            MsgBox("Exception retrieving image data: " + ex.Message + ex.StackTrace, MsgBoxStyle.OkOnly)
+        End Try
+        Try
+            Dim image As System.Drawing.Image = Drawing.Image.FromFile(imagefile)
+            ImageViewer.Text += " - Format = " + image.Width.ToString + "x" + image.Height.ToString
+            image.Dispose()
+        Catch ex As Exception
+            MsgBox("Exception retrieving image data: " + ex.Message + ex.StackTrace, MsgBoxStyle.OkOnly)
+        End Try
+        ImageViewer.ShowDialog()
+    End Sub
+
+    Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
+        Dim ImageViewer As New frmImageViewer()
+        Dim imagefile = Me.PictureBox2.ImageLocation
+        If Not System.IO.File.Exists(imagefile) Then
+            'MsgBox("File '" + imagefile + "' does not exist !", MsgBoxStyle.OkOnly)
+            Return
+        End If
+        ImageViewer.Text = "Image Viever"
+        ImageViewer.PictureBoxImageViewer.ImageLocation = imagefile
+        Try
+            Dim f As New FileInfo(imagefile)
+            ImageViewer.Text += " - Size = " + ByteString(f.Length)
+        Catch ex As Exception
+            MsgBox("Exception retrieving image data: " + ex.Message + ex.StackTrace, MsgBoxStyle.OkOnly)
+        End Try
+        Try
+            Dim image As System.Drawing.Image = Drawing.Image.FromFile(imagefile)
+            ImageViewer.Text += " - Format = " + image.Width.ToString + "x" + image.Height.ToString
+            image.Dispose()
+        Catch ex As Exception
+            MsgBox("Exception retrieving image data: " + ex.Message + ex.StackTrace, MsgBoxStyle.OkOnly)
+        End Try
+        ImageViewer.ShowDialog()
     End Sub
 End Class
 
