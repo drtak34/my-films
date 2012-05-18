@@ -2277,6 +2277,7 @@ Public Class AntRecord
 
         Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read)
         XMLDoc.Save(xmlFile)
+        xmlFile.SetLength(0)
         xmlFile.Close()
 
         'Using s As Stream = File.OpenWrite(CurrentSettings.XML_File)
