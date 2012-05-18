@@ -725,10 +725,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       }
       base.OnPageLoad(); // let animations run  
-      GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
       Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) || IsDefaultConfig)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
       OnPageload_Step_2();
-      GUIWaitCursor.Hide();
+      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
 
       //new System.Threading.Thread(delegate()
       //{
@@ -5057,9 +5057,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new Thread(delegate()
       {
         {
-          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
           getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
-          GUIWaitCursor.Hide();
+          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -6565,9 +6565,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new System.Threading.Thread(delegate()
       {
         {
-          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
           Fin_Charge_Init(false, false);
-          GUIWaitCursor.Hide();
+          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -6582,9 +6582,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Worker_Refreshfacade()
     {
-      GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
       Fin_Charge_Init(false, false);
-      GUIWaitCursor.Hide();
+      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
     }
 
     private void Loadfacade()
@@ -6599,9 +6599,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new System.Threading.Thread(delegate()
       {
         {
-          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
           Fin_Charge_Init(false, true);
-          GUIWaitCursor.Hide();
+          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
         {
@@ -6615,9 +6615,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Worker_Loadfacade()
     {
-      GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
       Fin_Charge_Init(false, true);
-      GUIWaitCursor.Hide();
+      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
     }
 
     //--------------------------------------------------------------------------------------------

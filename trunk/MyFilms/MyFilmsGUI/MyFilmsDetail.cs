@@ -101,6 +101,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_Title = 2025,
             CTRL_OTitle = 2026,
             CTRL_ImgDD = 2072,
+            CTRL_GuiWaitCursor = 2080,
             CTRL_ActorMultiThumb = 3333,
         }
         [SkinControlAttribute((int)Controls.CTRL_BtnMaj)]
@@ -123,7 +124,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected GUIImage ImgID2012;
         [SkinControlAttribute((int)Controls.CTRL_ImgDD)] // Indicates if it's a file existant for movie on HD
         protected GUIImage ImgDD;
-        [SkinControlAttribute(2080)]
+        [SkinControlAttribute((int)Controls.CTRL_GuiWaitCursor)]
         protected GUIAnimation m_SearchAnimation;
         [SkinControlAttribute((int)Controls.CTRL_Fanart)]
         protected GUIImage ImgFanart;
