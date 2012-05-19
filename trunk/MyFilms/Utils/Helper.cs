@@ -661,6 +661,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
 
+        public static bool IsBluRayPlayerLauncherAvailableAndEnabled
+        {
+          get
+          {
+            bool status = Helper.IsAssemblyAvailable("BluRayPlayerLauncher", new Version(0, 1, 1, 1), false) && IsPluginEnabled("Blu-Ray Player Launcher");
+            LogMyFilms.Debug("Helper() - BluRayPlayerLauncher available and enabled = '" + status + "'");
+            return status;
+          }
+        }
+
         public static bool IsTraktAvailableAndEnabled
         {
           get

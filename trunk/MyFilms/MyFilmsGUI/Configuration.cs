@@ -553,6 +553,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrNasName3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-3", string.Empty);
                 StrNasMAC3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-3", string.Empty);
 
+                ExternalPlayerPath = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ExternalPlayerPath", string.Empty);
+                ExternalPlayerStartParams = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ExternalPlayerStartParams", string.Empty);
+                ExternalPlayerExtensions = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ExternalPlayerExtensions", string.Empty);
+
                 //// read states vars for each possible view - do we also need states for "userdefined views"?  
                 //DataBase.AntMovieCatalog ds = new DataBase.AntMovieCatalog();
                 //MyFilms.ViewStateCache.Clear();
@@ -1634,6 +1638,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strNasMAC3; }
             set { strNasMAC3 = value; }
+        }
+
+        private string externalPlayerPath = string.Empty;
+        public string ExternalPlayerPath
+        {
+            get { return externalPlayerPath; }
+            set { externalPlayerPath = value; }
+        }
+
+        private string externalPlayerStartParams = string.Empty;
+        public string ExternalPlayerStartParams
+        {
+            get { return externalPlayerStartParams; }
+            set { externalPlayerStartParams = value; }
+        }
+
+        private string externalPlayerExtensions = string.Empty;
+        public string ExternalPlayerExtensions
+        {
+            get { return externalPlayerExtensions; }
+            set { externalPlayerExtensions = value; }
         }
 
         private string strSearchHistory = string.Empty;

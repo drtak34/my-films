@@ -962,6 +962,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 break;
             }
 
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerPath", tbExternalPlayerPath.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerStartParams", tbExternalPlayerStartParams.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerExtensions", tbExternalPlayerExtensions.Text);
+
             CleanupOldEntries(); // this can be removed in later versions - only to clean up config files from unused entries ...
 
             if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // common external catalog options
@@ -1395,7 +1399,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", false);
             chkShowEmpty.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", false);
             chkReversePersonNames.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ReversePersonNames", false);
-          
+
+            tbExternalPlayerPath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerPath", "");
+            tbExternalPlayerStartParams.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerStartParams", "");
+            tbExternalPlayerExtensions.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerExtensions", "");
+
             // common external catalog options
             chkAddTagline.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTagline", false);
             chkAddTags.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ECoptionAddTags", false);
@@ -1810,6 +1818,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //btnCreateAMCDesktopIcon.Enabled = false;
             //btnCreateAMCDefaultConfig.Enabled = false;
             //comboBoxLogoSpacing.ResetText();
+            tbExternalPlayerPath.Text = string.Empty;
+            tbExternalPlayerStartParams.Text = string.Empty;
+            tbExternalPlayerExtensions.Text = string.Empty;
         }
 
         private void ButDelet_Click(object sender, EventArgs e)
@@ -6032,6 +6043,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               }
             }
           }
+        }
+
+        private void butExternalPlayer_Click(object sender, EventArgs e)
+        {
+          if (!string.IsNullOrEmpty(tbExternalPlayerPath.Text))
+            openFileDialog1.FileName = tbExternalPlayerPath.Text;
+          else
+          {
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Base).ToString();
+          }
+
+          if (tbExternalPlayerPath.Text.Contains("\\"))
+            openFileDialog1.InitialDirectory = tbExternalPlayerPath.Text.Substring(0, tbExternalPlayerPath.Text.LastIndexOf("\\") + 1);
+
+          openFileDialog1.RestoreDirectory = true;
+          openFileDialog1.DefaultExt = "exe";
+          openFileDialog1.Filter = "External Player Files|*.exe";
+          openFileDialog1.Title = "Select External Player Executable";
+          if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            tbExternalPlayerPath.Text = openFileDialog1.FileName;
         }
 
     }

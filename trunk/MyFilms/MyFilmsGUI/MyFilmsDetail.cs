@@ -38,6 +38,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Text.RegularExpressions;
   using System.Windows.Forms;
 
+  using MediaPortal.Ripper;
+
   using OnlineVideos.MediaPortal1;
 
   using grabber;
@@ -415,6 +417,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           LogMyFilms.Debug("MyFilmsDetail.Init() started.");
           LogMyFilms.Debug("MyFilmsDetail.Init() ended.");
+          GUIWindowManager.Receivers += new SendMessageHandler(GUIWindowManager_OnNewMessage);
           return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
         }
 
@@ -6854,7 +6857,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Play Movie
         //-------------------------------------------------------------------------------------------
         {
-
+            enableNativeAutoplay(); // in case, other plugin disabled it
             //Version Select Dialog
             string filestorage = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
             if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
@@ -7014,11 +7017,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // Check, if the content returned is a BR playlist to supress internal player and dialogs
                 bool isBRcontent = false;
                 string mediapath = filestorage;
+                LogMyFilms.Info("Launch_Movie() - SingleItem found ('" + newItems[0] + "'), filestorage = '" + filestorage + "'");
                 if (newItems[0].ToString().ToLower().EndsWith("bdmv")) 
                   isBRcontent = true;
 
                 if (!isBRcontent || Helper.IsBDHandlerAvailableAndEnabled)
                 {
+                  LogMyFilms.Info("Launch_Movie() - start internal playback");
                   playlistPlayer.Reset();
                   playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
                   PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
@@ -7038,6 +7043,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   MyFilms.conf.MyFilmsPlaybackActive = true;
                   // play movie...
                   PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
+                }
+                else if (MyFilms.conf.ExternalPlayerPath.Length > 0)
+                {
+                  LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath.Length + "'");
+                  string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                  foreach (string s in split)
+                  {
+                    if (filestorage.ToLower().Contains(s.ToLower()))
+                    {
+                      try
+                      {
+                        LaunchExternalPlayer(filestorage);
+                      }
+                      catch (Exception)
+                      {
+                      }
+                      
+                    }
+                  }
+                }
+                else if (Helper.IsBluRayPlayerLauncherAvailableAndEnabled)
+                {
+                  LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
+                  GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
                 }
             }
             else
@@ -9609,6 +9638,279 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         return false;
       }
+
+      private void GUIWindowManager_OnNewMessage(GUIMessage message)
+      {
+        LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received ! - MessageType = '" + message.Message.ToString() + "', Param1 = '" + message.Param1 + "', Param2 = '" + message.Param2 + "', message label = '" + message.Label + "'");
+        //public enum MediaType // global category
+        //{
+        //  UNKNOWN = 0,
+        //  PHOTO = 1,
+        //  VIDEO = 2,
+        //  AUDIO = 3
+        //}
+        //public enum MediaSubType // add here new formats
+        //{
+        //  UNKNOWN = 0,
+        //  DVD = 1,
+        //  AUDIO_CD = 2,
+        //  BLURAY = 3,
+        //  HDDVD = 4,
+        //  VCD = 5,
+        //  FILES = 6
+        //}
+        switch (message.Message)
+        {
+          case GUIMessage.MessageType.GUI_MSG_AUTOPLAY_VOLUME:
+            if (message.Param1 == (int)MediaPortal.Ripper.AutoPlay.MediaType.VIDEO)
+            {
+              switch (message.Param2)
+              {
+                case (int)AutoPlay.MediaSubType.AUDIO_CD:
+                case (int)AutoPlay.MediaSubType.BLURAY:
+                  LogMyFilms.Debug(
+                    "GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.BLURAY'");
+                  // GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+                  break;
+                case (int)AutoPlay.MediaSubType.DVD:
+                  LogMyFilms.Debug(
+                    "GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.DVD'");
+                  // OnPlayDVD(message.Label, GetID);
+                  break;
+                case (int)AutoPlay.MediaSubType.FILES:
+                case (int)AutoPlay.MediaSubType.VCD:
+                  LogMyFilms.Debug(
+                    "GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.VCD' or 'AutoPlay.MediaSubType.FILES'");
+                  // OnPlayFiles((System.Collections.ArrayList)message.Object);
+                  break;
+                case (int)AutoPlay.MediaSubType.HDDVD:
+                case (int)AutoPlay.MediaSubType.UNKNOWN:
+                  break;
+                default:
+                  break;
+              }
+            }
+            break;
+              default:
+            break;
+        }
+      }
+
+      #region External Player
+
+      private static void LaunchExternalPlayer(string videoPath)
+      {
+        LogMyFilms.Debug("LaunchExternalPlayer() - Launching external player.");
+
+        // First check if the user supplied executable for the external player is valid
+        string execPath = MyFilms.conf.ExternalPlayerPath;
+        if (!File.Exists(execPath))
+        {
+          // if it's not show a dialog explaining the error
+          ShowNotificationDialog("Error", "MissingExternalPlayerExe");
+          LogMyFilms.Warn("The external player executable '{0}' is missing.", execPath);
+          // do nothing
+          resetPlayer();
+          return;
+        }
+
+        // process the argument string and replace the 'filename' variable
+        string arguments = MyFilms.conf.ExternalPlayerStartParams;
+        string videoRoot = Utility.GetMovieBaseDirectory(new FileInfo(videoPath).Directory).FullName;
+        string filename = Utility.IsDriveRoot(videoRoot) ? videoRoot : videoPath;
+        string fps = GetFPS(videoPath);
+        string virtualDrive = DaemonTools.GetVirtualDrive();
+        if (virtualDrive.LastIndexOf("\\") != virtualDrive.Length - 1) virtualDrive = virtualDrive.Trim() + "\\";
+
+        arguments = arguments.Replace("%filename%", filename);
+        arguments = arguments.Replace("%fps%", fps);
+        arguments = arguments.Replace("%root%", videoRoot);
+        arguments = arguments.Replace("%drive%", virtualDrive);
+
+        LogMyFilms.Debug("External Player: Video='{0}', Root={1}, FPS={2}, ExecPath={3}, CommandLine={4}, VirtualDrive={5}", filename, videoRoot, fps, execPath, arguments, virtualDrive);
+        LogMyFilms.Debug("Command Line: '" + arguments + "'");
+
+        // Set Refresh Rate Based On FPS if needed
+        bool UseDynamicRefreshRateChangerWithExternalPlayer = true; // Todo: add setting "Settings.UseDynamicRefreshRateChangerWithExternalPlayer"
+        if (UseDynamicRefreshRateChangerWithExternalPlayer) 
+        {
+          double framerate = double.Parse(GetFPS(videoPath).ToString(NumberFormatInfo.InvariantInfo), NumberFormatInfo.InvariantInfo);
+          LogMyFilms.Info("Requesting new refresh rate: FPS={0}", framerate.ToString());
+          RefreshRateChanger.SetRefreshRateBasedOnFPS(framerate, filename, RefreshRateChanger.MediaType.Video);
+          if (RefreshRateChanger.RefreshRateChangePending)
+          {
+            TimeSpan ts = DateTime.Now - RefreshRateChanger.RefreshRateChangeExecutionTime;
+            if (ts.TotalSeconds > RefreshRateChanger.WAIT_FOR_REFRESHRATE_RESET_MAX)
+            {
+              LogMyFilms.Info("Refresh rate change failed. Please check your mediaportal log and configuration", RefreshRateChanger.WAIT_FOR_REFRESHRATE_RESET_MAX);
+              RefreshRateChanger.ResetRefreshRateState();
+            }
+          }
+        }
+
+        // Setup the external player process
+        ProcessStartInfo processinfo = new ProcessStartInfo();
+        processinfo.FileName = execPath;
+        processinfo.Arguments = arguments;
+
+        Process hdPlayer = new Process();
+        hdPlayer.StartInfo = processinfo;
+        hdPlayer.Exited += OnHDPlayerExited;
+        hdPlayer.EnableRaisingEvents = true;
+
+        try
+        {
+          // start external player process
+          hdPlayer.Start();
+
+          // disable mediaportal input devices
+          MediaPortal.InputDevices.InputDevices.Stop();
+
+          // hide mediaportal and suspend rendering to save resources for the external player
+          GUIGraphicsContext.BlankScreen = true;
+          GUIGraphicsContext.form.Hide();
+          GUIGraphicsContext.CurrentState = GUIGraphicsContext.State.SUSPENDING;
+
+          LogMyFilms.Info("HD Playback: External player started.");
+          // onMediaStarted(queuedMedia);
+        }
+        catch (Exception e)
+        {
+          LogMyFilms.ErrorException("HD Playback: Could not start the external player process.", e);
+          resetPlayer();
+        }
+      }
+
+      private static void OnHDPlayerExited(object obj, EventArgs e)
+      {
+        // Restore refresh rate if it was changed
+        bool UseDynamicRefreshRateChangerWithExternalPlayer = true; // Todo: add setting "Settings.UseDynamicRefreshRateChangerWithExternalPlayer"
+        if (UseDynamicRefreshRateChangerWithExternalPlayer && RefreshRateChanger.RefreshRateChangePending)
+          RefreshRateChanger.AdaptRefreshRate();
+
+        // enable mediaportal input devices
+        MediaPortal.InputDevices.InputDevices.Init();
+
+        // show mediaportal and start rendering
+        GUIGraphicsContext.BlankScreen = false;
+        GUIGraphicsContext.form.Show();
+        GUIGraphicsContext.ResetLastActivity();
+        GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GETFOCUS, 0, 0, 0, 0, 0, null);
+        GUIWindowManager.SendThreadMessage(msg);
+        GUIGraphicsContext.CurrentState = GUIGraphicsContext.State.RUNNING;
+        LogMyFilms.Info("HD Playback: The external player has exited.");
+      }
+
+      private static void resetPlayer()
+      {
+        //// If we have an image mounted, unmount it
+        //if (mountedPlayback)
+        //{
+        //  queuedMedia.UnMount();
+        //  mountedPlayback = false;
+        //}
+
+        // reset player variables
+
+        if (GUIGraphicsContext.IsFullScreenVideo)
+          GUIGraphicsContext.IsFullScreenVideo = false;
+
+        //activeMedia = null;
+        //queuedMedia = null;
+        //_playerState = MoviePlayerState.Idle;
+        //_resumeActive = false;
+        //listenToExternalPlayerEvents = false;
+        //donePlayingCustomIntros = false;
+        //customIntrosPlayed = 0;
+
+        LogMyFilms.Debug("Reset.");
+      }
+
+      /// <summary>
+      /// Disable MediaPortal AutoPlay
+      /// </summary>
+      private static void disableNativeAutoplay() 
+      {
+          LogMyFilms.Info("Disabling native autoplay.");
+          AutoPlay.StopListening();
+      }
+
+      /// <summary>
+      /// Enable MediaPortal AutoPlay
+      /// </summary>
+      private static void enableNativeAutoplay() 
+      {
+          if (GUIGraphicsContext.CurrentState == GUIGraphicsContext.State.RUNNING) 
+          {
+            LogMyFilms.Info("Re-enabling native autoplay.");
+              AutoPlay.StartListening();
+          }
+      }
+
+      /// <summary>
+      /// Get refresh rate for file
+      /// </summary>
+      private static string GetFPS(string file)
+      {
+        LogMyFilms.Debug("GetFPS - Get RefreshRate for file '" + file + "'.");
+        if (!System.IO.File.Exists(file))
+        {
+          return "";
+        }
+
+        double fps = -1;
+        string _BD_Framerate = "";
+        try
+        {
+          MediaInfo MI = new MediaInfo();
+          MI.Open(file);
+          _BD_Framerate = MI.Get(Grabber.StreamKind.Video, 0, "FrameRate");
+
+          LogMyFilms.Info("GetFPS() - Framerate via Mediainfo: - {0}", _BD_Framerate);
+
+          switch (_BD_Framerate)
+          {
+            case "23.976":
+              fps = 23.976;
+              break;
+            case "24":
+              fps = 24;
+              break;
+            case "24.000":
+              fps = 24;
+              break;
+            case "25":
+              fps = 25;
+              break;
+            case "25.000":
+              fps = 25;
+              break;
+            case "29.970":
+              fps = 29.97;
+              break;
+            case "50":
+              fps = 50;
+              break;
+            case "50.000":
+              fps = 50;
+              break;
+            case "59.94":
+              fps = 59.94;
+              break;
+          }
+        }
+        catch (Exception e)
+        {
+          LogMyFilms.Error("GetFPS() - failed to get refresh rate from disk!");
+          LogMyFilms.Error("GetFPS() - exception {0}", e);
+          return "";
+        }
+        return _BD_Framerate;
+      }
+
+      #endregion
+
+
 
       #region GUI Events
       private void InitOVEventHandler()
