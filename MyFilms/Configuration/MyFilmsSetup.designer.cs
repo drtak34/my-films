@@ -383,7 +383,12 @@
           this.CmdExe = new System.Windows.Forms.TextBox();
           this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
           this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
+          this.tbExternalPlayerStartParams = new System.Windows.Forms.TextBox();
+          this.butExternalPlayer = new System.Windows.Forms.Button();
+          this.tbExternalPlayerPath = new System.Windows.Forms.TextBox();
+          this.tbExternalPlayerExtensions = new System.Windows.Forms.TextBox();
           this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
+          this.label23 = new System.Windows.Forms.Label();
           this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
           this.SearchOnlyExactMatches = new System.Windows.Forms.CheckBox();
           this.label5 = new System.Windows.Forms.Label();
@@ -3812,7 +3817,7 @@
           this.groupBox_PreLaunchingCommand.Controls.Add(this.label38);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdPar);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdExe);
-          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(451, 238);
+          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(451, 234);
           this.groupBox_PreLaunchingCommand.Name = "groupBox_PreLaunchingCommand";
           this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(286, 76);
           this.groupBox_PreLaunchingCommand.TabIndex = 78;
@@ -3862,7 +3867,7 @@
           this.lblYellowShowRequiredItems.AutoSize = true;
           this.lblYellowShowRequiredItems.BackColor = System.Drawing.SystemColors.Info;
           this.lblYellowShowRequiredItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 325);
+          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 323);
           this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
           this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(245, 15);
           this.lblYellowShowRequiredItems.TabIndex = 76;
@@ -3871,30 +3876,81 @@
           // 
           // groupBox_PlayMovieInfos
           // 
+          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerStartParams);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.butExternalPlayer);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerPath);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerExtensions);
           this.groupBox_PlayMovieInfos.Controls.Add(this.chkScanMediaOnStart);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.label23);
           this.groupBox_PlayMovieInfos.Controls.Add(this.groupBoxMoviePathInfos);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentLabel);
           this.groupBox_PlayMovieInfos.Controls.Add(this.label6);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntStorage);
           this.groupBox_PlayMovieInfos.Controls.Add(this.label4);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentItem);
-          this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 155);
+          this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 151);
           this.groupBox_PlayMovieInfos.Name = "groupBox_PlayMovieInfos";
-          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(438, 193);
+          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(438, 197);
           this.groupBox_PlayMovieInfos.TabIndex = 74;
           this.groupBox_PlayMovieInfos.TabStop = false;
           this.groupBox_PlayMovieInfos.Text = "Movie Playback Path Configuration";
           // 
+          // tbExternalPlayerStartParams
+          // 
+          this.tbExternalPlayerStartParams.Location = new System.Drawing.Point(302, 169);
+          this.tbExternalPlayerStartParams.Name = "tbExternalPlayerStartParams";
+          this.tbExternalPlayerStartParams.Size = new System.Drawing.Size(65, 20);
+          this.tbExternalPlayerStartParams.TabIndex = 86;
+          this.ToolTip1.SetToolTip(this.tbExternalPlayerStartParams, "External Player start parameters.\r\n\r\nSupported placeholders:\r\n- %filename%\r\n- %fp" +
+                  "s%\r\n- %root%\r\n- %drive%\r\n\r\nE.g. use %filename% as placeholder for the media file" +
+                  " to be played.");
+          // 
+          // butExternalPlayer
+          // 
+          this.butExternalPlayer.Location = new System.Drawing.Point(267, 169);
+          this.butExternalPlayer.Name = "butExternalPlayer";
+          this.butExternalPlayer.Size = new System.Drawing.Size(29, 20);
+          this.butExternalPlayer.TabIndex = 71;
+          this.butExternalPlayer.Text = "...";
+          this.butExternalPlayer.UseVisualStyleBackColor = true;
+          this.butExternalPlayer.Click += new System.EventHandler(this.butExternalPlayer_Click);
+          // 
+          // tbExternalPlayerPath
+          // 
+          this.tbExternalPlayerPath.Location = new System.Drawing.Point(172, 169);
+          this.tbExternalPlayerPath.Name = "tbExternalPlayerPath";
+          this.tbExternalPlayerPath.Size = new System.Drawing.Size(89, 20);
+          this.tbExternalPlayerPath.TabIndex = 85;
+          this.ToolTip1.SetToolTip(this.tbExternalPlayerPath, "Path to external player.\r\nLeave empty, if you prefer using internal Player.");
+          // 
+          // tbExternalPlayerExtensions
+          // 
+          this.tbExternalPlayerExtensions.Location = new System.Drawing.Point(373, 169);
+          this.tbExternalPlayerExtensions.Name = "tbExternalPlayerExtensions";
+          this.tbExternalPlayerExtensions.Size = new System.Drawing.Size(53, 20);
+          this.tbExternalPlayerExtensions.TabIndex = 70;
+          this.ToolTip1.SetToolTip(this.tbExternalPlayerExtensions, "Here you can define the extension that will launch \r\nthe external player, if path" +
+                  " is defined.\r\nMultiple values can be separated by semi colon (\";\").");
+          // 
           // chkScanMediaOnStart
           // 
           this.chkScanMediaOnStart.AutoSize = true;
-          this.chkScanMediaOnStart.Location = new System.Drawing.Point(27, 37);
+          this.chkScanMediaOnStart.Location = new System.Drawing.Point(302, 20);
           this.chkScanMediaOnStart.Name = "chkScanMediaOnStart";
           this.chkScanMediaOnStart.Size = new System.Drawing.Size(120, 17);
           this.chkScanMediaOnStart.TabIndex = 83;
           this.chkScanMediaOnStart.Text = "Scan media on start";
           this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
           this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
+          // 
+          // label23
+          // 
+          this.label23.AutoSize = true;
+          this.label23.Location = new System.Drawing.Point(12, 172);
+          this.label23.Name = "label23";
+          this.label23.Size = new System.Drawing.Size(77, 13);
+          this.label23.TabIndex = 84;
+          this.label23.Text = "External Player";
           // 
           // groupBoxMoviePathInfos
           // 
@@ -3905,9 +3961,9 @@
           this.groupBoxMoviePathInfos.Controls.Add(this.butPath);
           this.groupBoxMoviePathInfos.Controls.Add(this.SearchFileName);
           this.groupBoxMoviePathInfos.Controls.Add(this.ItemSearchFileName);
-          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 61);
+          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 41);
           this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
-          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(420, 96);
+          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(420, 92);
           this.groupBoxMoviePathInfos.TabIndex = 71;
           this.groupBoxMoviePathInfos.TabStop = false;
           this.groupBoxMoviePathInfos.Text = "Playback Search Configuration";
@@ -3990,9 +4046,9 @@
           // 
           // AntIdentLabel
           // 
-          this.AntIdentLabel.Location = new System.Drawing.Point(302, 164);
+          this.AntIdentLabel.Location = new System.Drawing.Point(302, 139);
           this.AntIdentLabel.Name = "AntIdentLabel";
-          this.AntIdentLabel.Size = new System.Drawing.Size(117, 20);
+          this.AntIdentLabel.Size = new System.Drawing.Size(124, 20);
           this.AntIdentLabel.TabIndex = 57;
           // 
           // label6
@@ -4018,7 +4074,7 @@
           // label4
           // 
           this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(12, 167);
+          this.label4.Location = new System.Drawing.Point(12, 143);
           this.label4.Name = "label4";
           this.label4.Size = new System.Drawing.Size(132, 13);
           this.label4.TabIndex = 58;
@@ -4027,7 +4083,7 @@
           // AntIdentItem
           // 
           this.AntIdentItem.FormattingEnabled = true;
-          this.AntIdentItem.Location = new System.Drawing.Point(172, 164);
+          this.AntIdentItem.Location = new System.Drawing.Point(172, 139);
           this.AntIdentItem.Name = "AntIdentItem";
           this.AntIdentItem.Size = new System.Drawing.Size(124, 21);
           this.AntIdentItem.TabIndex = 56;
@@ -4039,7 +4095,7 @@
           this.groupBox_Security.Controls.Add(this.label15);
           this.groupBox_Security.Controls.Add(this.Rpt_Dwp);
           this.groupBox_Security.Controls.Add(this.Dwp);
-          this.groupBox_Security.Location = new System.Drawing.Point(451, 155);
+          this.groupBox_Security.Location = new System.Drawing.Point(451, 151);
           this.groupBox_Security.Name = "groupBox_Security";
           this.groupBox_Security.Size = new System.Drawing.Size(286, 77);
           this.groupBox_Security.TabIndex = 75;
@@ -6461,5 +6517,10 @@
         private Button btnResetThumbsFilms;
         private CheckBox cbTrailerAutoregister;
         private CheckBox chkReversePersonNames;
+        private Label label23;
+        private Button butExternalPlayer;
+        private TextBox tbExternalPlayerExtensions;
+        private TextBox tbExternalPlayerPath;
+        private TextBox tbExternalPlayerStartParams;
     }
 }

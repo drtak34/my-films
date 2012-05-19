@@ -209,6 +209,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const int ID_BrowseTheWeb = 54537689;
     public const int ID_OnlineVideos = 4755;
     public const int ID_SubCentral = 84623;
+    public const int ID_BluRayPlayerLauncher = 8080;
 
     public const int cacheThumbWith = 400;
     public const int cacheThumbHeight = 600;
