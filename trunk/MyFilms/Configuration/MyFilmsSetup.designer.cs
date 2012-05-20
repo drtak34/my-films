@@ -3921,7 +3921,9 @@
           this.tbExternalPlayerPath.Name = "tbExternalPlayerPath";
           this.tbExternalPlayerPath.Size = new System.Drawing.Size(89, 20);
           this.tbExternalPlayerPath.TabIndex = 85;
-          this.ToolTip1.SetToolTip(this.tbExternalPlayerPath, "Path to external player.\r\nLeave empty, if you prefer using internal Player.");
+          this.ToolTip1.SetToolTip(this.tbExternalPlayerPath, "Path to external player.\r\nLeave empty, if you prefer using internal Player.\r\nIf y" +
+                  "ou have a valid player defined, MyFilms will offer you \r\na playback option in th" +
+                  "e context menu.");
           // 
           // tbExternalPlayerExtensions
           // 
@@ -3929,8 +3931,7 @@
           this.tbExternalPlayerExtensions.Name = "tbExternalPlayerExtensions";
           this.tbExternalPlayerExtensions.Size = new System.Drawing.Size(53, 20);
           this.tbExternalPlayerExtensions.TabIndex = 70;
-          this.ToolTip1.SetToolTip(this.tbExternalPlayerExtensions, "Here you can define the extension that will launch \r\nthe external player, if path" +
-                  " is defined.\r\nMultiple values can be separated by semi colon (\";\").");
+          this.ToolTip1.SetToolTip(this.tbExternalPlayerExtensions, resources.GetString("tbExternalPlayerExtensions.ToolTip"));
           // 
           // chkScanMediaOnStart
           // 
@@ -4046,7 +4047,7 @@
           // 
           // AntIdentLabel
           // 
-          this.AntIdentLabel.Location = new System.Drawing.Point(302, 139);
+          this.AntIdentLabel.Location = new System.Drawing.Point(302, 140);
           this.AntIdentLabel.Name = "AntIdentLabel";
           this.AntIdentLabel.Size = new System.Drawing.Size(124, 20);
           this.AntIdentLabel.TabIndex = 57;
@@ -4074,7 +4075,7 @@
           // label4
           // 
           this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(12, 143);
+          this.label4.Location = new System.Drawing.Point(12, 144);
           this.label4.Name = "label4";
           this.label4.Size = new System.Drawing.Size(132, 13);
           this.label4.TabIndex = 58;
@@ -4083,7 +4084,7 @@
           // AntIdentItem
           // 
           this.AntIdentItem.FormattingEnabled = true;
-          this.AntIdentItem.Location = new System.Drawing.Point(172, 139);
+          this.AntIdentItem.Location = new System.Drawing.Point(172, 140);
           this.AntIdentItem.Name = "AntIdentItem";
           this.AntIdentItem.Size = new System.Drawing.Size(124, 21);
           this.AntIdentItem.TabIndex = 56;

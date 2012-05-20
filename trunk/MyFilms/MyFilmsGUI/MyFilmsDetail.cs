@@ -593,7 +593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY || actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_MUSIC_PLAY)
             {
-              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
               return;
             }
               
@@ -710,37 +710,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnPlay)
                     // Search File to play
                     {
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay1Description)
                     // Search File to play
                     {
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay2Comment)
                     // Search File to play
                     {
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay3Persons)
                     // Search File to play
                     {
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay4TecDetails)
                     // Search File to play
                     {
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay5)
                     // Search File to play
                     {
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnNext)
@@ -805,7 +805,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // On Button goto MyFilmsThumbs // Changed to alo launch player due to Ember Media Manager discontinued...
                     {
                         //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnMovieThumbs)
@@ -6843,7 +6843,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           int GetID = GUIWindowManager.GetPreviousActiveWindow();
           try
           {
-            Launch_Movie(movieid, GetID, null);
+            Launch_Movie(movieid, GetID, null, false);
           }
           catch (Exception ex)
           {
@@ -6852,253 +6852,277 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        public static void Launch_Movie(int select_item, int GetID, GUIAnimation m_SearchAnimation)
+        public static void Launch_Movie(int select_item, int GetID, GUIAnimation m_SearchAnimation, bool bForceExternalPlayback)
         //-------------------------------------------------------------------------------------------
         // Play Movie
         //-------------------------------------------------------------------------------------------
         {
-            enableNativeAutoplay(); // in case, other plugin disabled it
-            //Version Select Dialog
-            string filestorage = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
-            if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
+          //enableNativeAutoplay(); // in case, other plugin disabled it - removed, as we now do start external player ourselves ...
+
+          #region Version Select Dialog
+          string filestorage = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
+          {
+            Regex filmver = new Regex(@"\[\[([^\#]*)##([^\]]*)\]\]");
+            MatchCollection filmverMatches = filmver.Matches(filestorage);
+            if (filmverMatches.Count > 0)
             {
-                Regex filmver = new Regex(@"\[\[([^\#]*)##([^\]]*)\]\]");
-                MatchCollection filmverMatches = filmver.Matches(filestorage);
-                if (filmverMatches.Count > 0)
-                {
-                    GUIDialogMenu versionmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                    versionmenu.Reset();
-                    versionmenu.SetHeading("Select Version");
-                    List<string> filestr = new List<string>();
-                    for (int i = 0; i < filmverMatches.Count; i++)
-                    {
-                        versionmenu.Add(filmverMatches[i].Groups[2].Value);
-                        filestr.Add(filmverMatches[i].Groups[1].Value);
-                    }
-                    versionmenu.DoModal(GetID);
-                    if (versionmenu.SelectedLabel == -1) return;
-                    filestorage = filestr[versionmenu.SelectedLabel];
-                }
-            }
-
-            // Guzzi: Added WOL to start remote host before playing the files
-            // Wake up the TV server, if required
-            // HandleWakeUpNas();
-            // LogMyFilms.Info("Launched HandleWakeUpNas() to start movie'" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'");
-
-            if (MyFilms.conf.StrCheckWOLenable)
-            {
-              WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
-              int wTimeout = MyFilms.conf.StrWOLtimeout;
-              bool isActive;
-              string UNCpath = filestorage;
-              string NasServerName;
-              string NasMACAddress;
-
-              if (UNCpath.StartsWith("\\\\"))
-                UNCpath = (UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0)).ToLower();
-              if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
+              GUIDialogMenu versionmenu =
+                (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+              versionmenu.Reset();
+              versionmenu.SetHeading("Select Version");
+              List<string> filestr = new List<string>();
+              for (int i = 0; i < filmverMatches.Count; i++)
               {
-                  if (WakeOnLanManager.Ping(UNCpath, wTimeout))
-                      isActive = true;
-                  else
-                      isActive = false;
-
-                  if (!isActive) // Only if NAS server is not yet already rzunning !
-                  {
-                    if (MyFilms.conf.StrCheckWOLuserdialog)
-                    {
-                      GUIDialogYesNo dlgOknas = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                      dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
-                      dlgOknas.SetLine(1, "Film    : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'"); //video title
-                      dlgOknas.SetLine(2, "Server  : '" + UNCpath + "'");
-                      dlgOknas.SetLine(3, "Status  : '" + GUILocalizeStrings.Get(10798742)); // srv name + " - (offline) - start ?"
-                      dlgOknas.DoModal(GetID);
-                      if (!(dlgOknas.IsConfirmed)) return;
-                    }
-
-                    // Search the NAS where movie is located:
-                      if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) && (MyFilms.conf.StrNasMAC1.ToString().Length > 1))
-                      {
-                        NasServerName = MyFilms.conf.StrNasName1;
-                        NasMACAddress = MyFilms.conf.StrNasMAC1;
-                      }
-                      else if ((UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) && (MyFilms.conf.StrNasMAC2.ToString().Length > 1))
-                      {
-                        NasServerName = MyFilms.conf.StrNasName2;
-                        NasMACAddress = MyFilms.conf.StrNasMAC2;
-                      }
-                      else if ((UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)) && (MyFilms.conf.StrNasMAC3.ToString().Length > 1))
-                      {
-                        NasServerName = MyFilms.conf.StrNasName3;
-                        NasMACAddress = MyFilms.conf.StrNasMAC3;
-                      }
-                      else
-                        {
-                          NasServerName = String.Empty;
-                          NasMACAddress = String.Empty;
-                        }
-
-                      // Start NAS Server
-
-                      bool SuccessFulStart = wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(NasMACAddress), NasServerName, wTimeout);
-
-                      if (MyFilms.conf.StrCheckWOLuserdialog)
-                      {
-                        GUIDialogOK dlgOk =
-                          (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
-                        dlgOk.SetLine(1, "");
-                        if (SuccessFulStart)
-                          dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798743)); //successfully started 
-                        else 
-                          dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798744)); // could not be started 
-                        dlgOk.DoModal(GetID);
-                      }
-                  }
+                versionmenu.Add(filmverMatches[i].Groups[2].Value);
+                filestr.Add(filmverMatches[i].Groups[1].Value);
               }
-              else
+              versionmenu.DoModal(GetID);
+              if (versionmenu.SelectedLabel == -1) return;
+              filestorage = filestr[versionmenu.SelectedLabel];
+            }
+          }
+
+          #endregion
+
+          #region handle WOL
+          // Guzzi: Added WOL to start remote host before playing the files
+          // Wake up the TV server, if required
+          // HandleWakeUpNas();
+          // LogMyFilms.Info("Launched HandleWakeUpNas() to start movie'" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'");
+
+          if (MyFilms.conf.StrCheckWOLenable)
+          {
+            WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+            int wTimeout = MyFilms.conf.StrWOLtimeout;
+            bool isActive;
+            string UNCpath = filestorage;
+            string NasServerName;
+            string NasMACAddress;
+
+            if (UNCpath.StartsWith("\\\\")) UNCpath = (UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0)).ToLower();
+            if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) ||
+                (UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) ||
+                (UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
+            {
+              if (WakeOnLanManager.Ping(UNCpath, wTimeout)) isActive = true;
+              else isActive = false;
+
+              if (!isActive) // Only if NAS server is not yet already rzunning !
               {
-                  GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                if (MyFilms.conf.StrCheckWOLuserdialog)
+                {
+                  GUIDialogYesNo dlgOknas =
+                    (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
                   dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
-                  //dlgOknas.SetLine(1, "Movie   : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
-                  dlgOknas.SetLine(2, "Server '" + UNCpath + "' " + GUILocalizeStrings.Get(10798746)); //is not configured for WakeOnLan ! 
-                  dlgOknas.SetLine(3, GUILocalizeStrings.Get(10798747)); // Automatic NAS start not possible ... 
+                  dlgOknas.SetLine(1, "Film    : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'");
+                    //video title
+                  dlgOknas.SetLine(2, "Server  : '" + UNCpath + "'");
+                  dlgOknas.SetLine(3, "Status  : '" + GUILocalizeStrings.Get(10798742));
+                    // srv name + " - (offline) - start ?"
                   dlgOknas.DoModal(GetID);
-                  return;
+                  if (!(dlgOknas.IsConfirmed)) return;
+                }
+
+                // Search the NAS where movie is located:
+                if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) &&
+                    (MyFilms.conf.StrNasMAC1.ToString().Length > 1))
+                {
+                  NasServerName = MyFilms.conf.StrNasName1;
+                  NasMACAddress = MyFilms.conf.StrNasMAC1;
+                }
+                else if ((UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) &&
+                         (MyFilms.conf.StrNasMAC2.ToString().Length > 1))
+                {
+                  NasServerName = MyFilms.conf.StrNasName2;
+                  NasMACAddress = MyFilms.conf.StrNasMAC2;
+                }
+                else if ((UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)) &&
+                         (MyFilms.conf.StrNasMAC3.ToString().Length > 1))
+                {
+                  NasServerName = MyFilms.conf.StrNasName3;
+                  NasMACAddress = MyFilms.conf.StrNasMAC3;
+                }
+                else
+                {
+                  NasServerName = String.Empty;
+                  NasMACAddress = String.Empty;
+                }
+
+                // Start NAS Server
+
+                bool SuccessFulStart = wakeOnLanManager.WakeupSystem(
+                  wakeOnLanManager.GetHwAddrBytes(NasMACAddress), NasServerName, wTimeout);
+
+                if (MyFilms.conf.StrCheckWOLuserdialog)
+                {
+                  GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                  dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
+                  dlgOk.SetLine(1, "");
+                  if (SuccessFulStart)
+                    dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798743));
+                      //successfully started 
+                  else
+                    dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798744));
+                      // could not be started 
+                  dlgOk.DoModal(GetID);
+                }
               }
-            }
-
-            // Run externaly Program before Playing if defined in setup
-            LogMyFilms.Debug("(Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
-            setProcessAnimationStatus(true, m_SearchAnimation);
-            if (Helper.FieldIsSet(MyFilms.conf.CmdPar))
-                RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
-            if (g_Player.Playing)
-                g_Player.Stop();
-
-            // search all files
-            ArrayList newItems = new ArrayList();
-            bool NoResumeMovie = true;
-            int IMovieIndex = 0;
-
-            //Guzzi: Added BoolType for Trailerlaunch
-            Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false, filestorage);
-            //Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex);
-            if (newItems.Count > 20)
-            // Maximum 20 entries (limitation for MP dialogFileStacking)
-            {
-                GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                dlgOk.SetLine(1, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString()); //video title
-                dlgOk.SetLine(2, "maximum 20 entries for the playlist");
-                dlgOk.DoModal(GetID);
-                LogMyFilms.Info("Too many entries found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count);
-                return;
-            }
-            setProcessAnimationStatus(false, m_SearchAnimation);
-            if (newItems.Count > 1)
-            {
-                if (NoResumeMovie)
-                {
-                    GUIDialogFileStacking dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
-                    if (null != dlg)
-                    {
-                        dlg.SetNumberOfFiles(newItems.Count);
-                        dlg.DoModal(GUIWindowManager.ActiveWindow);
-                        int selectedFileIndex = dlg.SelectedFile;
-                        if (selectedFileIndex < 1) return;
-                        IMovieIndex = selectedFileIndex++;
-                    }
-                }
-            }
-            if (newItems.Count > 0)
-            {
-                // Check, if the content returned is a BR playlist to supress internal player and dialogs
-                bool isBRcontent = false;
-                string mediapath = filestorage;
-                LogMyFilms.Info("Launch_Movie() - SingleItem found ('" + newItems[0] + "'), filestorage = '" + filestorage + "'");
-                if (newItems[0].ToString().ToLower().EndsWith("bdmv")) 
-                  isBRcontent = true;
-
-                if (!isBRcontent || Helper.IsBDHandlerAvailableAndEnabled)
-                {
-                  LogMyFilms.Info("Launch_Movie() - start internal playback");
-                  playlistPlayer.Reset();
-                  playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
-                  PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
-                  playlist.Clear();
-
-                  foreach (object t in newItems)
-                  {
-                    string movieFileName = (string)t;
-                    PlayListItem newitem = new PlayListItem();
-                    newitem.FileName = movieFileName;
-                    newitem.Type = PlayListItem.PlayListItemType.Video;
-                    playlist.Add(newitem);
-                  }
-                  // ask for start movie Index
-
-                  // Set Playbackhandler to active
-                  MyFilms.conf.MyFilmsPlaybackActive = true;
-                  // play movie...
-                  PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
-                }
-                else if (MyFilms.conf.ExternalPlayerPath.Length > 0)
-                {
-                  LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath.Length + "'");
-                  string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                  foreach (string s in split)
-                  {
-                    if (filestorage.ToLower().Contains(s.ToLower()))
-                    {
-                      try
-                      {
-                        LaunchExternalPlayer(filestorage);
-                      }
-                      catch (Exception)
-                      {
-                      }
-                      
-                    }
-                  }
-                }
-                else if (Helper.IsBluRayPlayerLauncherAvailableAndEnabled)
-                {
-                  LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
-                  GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
-                }
             }
             else
             {
-                //if (first)
-                //// ask for mounting file first time
-                //{
-                GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                dlgYesNo.SetLine(1, GUILocalizeStrings.Get(219));//no disc
-                if (Helper.FieldIsSet(MyFilms.conf.StrIdentItem))
-                    if (MyFilms.conf.StrIdentLabel.Length > 0)
-                        dlgYesNo.SetLine(2, MyFilms.conf.StrIdentLabel + " = " + MyFilms.r[select_item][MyFilms.conf.StrIdentItem]);//Label Identification for Media
-                    else
-                        dlgYesNo.SetLine(2, "'" + MyFilms.conf.StrIdentItem + "' = " + MyFilms.r[select_item][MyFilms.conf.StrIdentItem]);//ANT Item Identification for Media
-                else
-                    dlgYesNo.SetLine(2, "' disc n° = " + MyFilms.r[select_item]["Number"]);//ANT Number for Identification Media 
-                dlgYesNo.DoModal(GetID);
-                if (dlgYesNo.IsConfirmed)
-                    Launch_Movie(select_item, GetID, m_SearchAnimation);
-                //}
-                else
-                {
-                    GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                    dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                    dlgOk.SetLine(1, GUILocalizeStrings.Get(1036));//no video found
-                    dlgOk.SetLine(2, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString());
-                    dlgOk.DoModal(GetID);
-                    LogMyFilms.Info("File not found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle]);
-                    return;
-                }
+              GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+              dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+              //dlgOknas.SetLine(1, "Movie   : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
+              dlgOknas.SetLine(2, "Server '" + UNCpath + "' " + GUILocalizeStrings.Get(10798746));
+                //is not configured for WakeOnLan ! 
+              dlgOknas.SetLine(3, GUILocalizeStrings.Get(10798747)); // Automatic NAS start not possible ... 
+              dlgOknas.DoModal(GetID);
+              return;
             }
+          }
+
+          #endregion
+
+          LogMyFilms.Debug("(Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
+          setProcessAnimationStatus(true, m_SearchAnimation);
+          #region Run externaly Program before Playing if defined in setup
+          if (Helper.FieldIsSet(MyFilms.conf.CmdPar)) 
+            RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
+          #endregion
+
+          if (g_Player.Playing) g_Player.Stop();
+
+          // search all files
+          ArrayList newItems = new ArrayList();
+          bool NoResumeMovie = true;
+          int IMovieIndex = 0;
+
+          //Guzzi: Added BoolType for Trailerlaunch
+          Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false, filestorage);
+          //Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex);
+          if (newItems.Count > 20) // Maximum 20 entries (limitation for MP dialogFileStacking)
+          {
+            GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+            dlgOk.SetLine(1, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString()); //video title
+            dlgOk.SetLine(2, "maximum 20 entries for the playlist");
+            dlgOk.DoModal(GetID);
+            LogMyFilms.Info(
+              "Too many entries found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] +
+              "', number of entries found = " + newItems.Count);
+            return;
+          }
+          setProcessAnimationStatus(false, m_SearchAnimation);
+
+          #region optional part selection dialog
+          if (newItems.Count > 1)
+          {
+            if (NoResumeMovie)
+            {
+              GUIDialogFileStacking dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
+              if (null != dlg)
+              {
+                dlg.SetNumberOfFiles(newItems.Count);
+                dlg.DoModal(GUIWindowManager.ActiveWindow);
+                int selectedFileIndex = dlg.SelectedFile;
+                if (selectedFileIndex < 1) return;
+                IMovieIndex = selectedFileIndex++;
+              }
+            }
+          }
+          #endregion
+
+          if (newItems.Count > 0)
+          {
+            // Check, if the content returned is a BR playlist to supress internal player and dialogs
+            bool isBRcontent = false;
+            string mediapath = filestorage;
+            LogMyFilms.Info("Launch_Movie() - SingleItem found ('" + newItems[0] + "'), filestorage = '" + filestorage + "'");
+            if (newItems[0].ToString().ToLower().EndsWith("bdmv")) isBRcontent = true;
+
+            if (!isBRcontent || (Helper.IsBDHandlerAvailableAndEnabled && !bForceExternalPlayback))
+            {
+              #region internal playback
+              LogMyFilms.Info("Launch_Movie() - start internal playback");
+              playlistPlayer.Reset();
+              playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
+              PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
+              playlist.Clear();
+
+              foreach (object t in newItems)
+              {
+                string movieFileName = (string)t;
+                PlayListItem newitem = new PlayListItem();
+                newitem.FileName = movieFileName;
+                newitem.Type = PlayListItem.PlayListItemType.Video;
+                playlist.Add(newitem);
+              }
+              // ask for start movie Index
+
+              // Set Playbackhandler to active
+              MyFilms.conf.MyFilmsPlaybackActive = true;
+              // play movie...
+              PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
+              #endregion
+            }
+            else if (MyFilms.conf.ExternalPlayerPath.Length > 0)
+            {
+              #region external player playback (myfilms)
+              LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath.Length + "'");
+              string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(
+                new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+              foreach (string s in split)
+              {
+                if (filestorage.ToLower().Contains(s.ToLower()) || bForceExternalPlayback)
+                {
+                  try
+                  {
+                    LaunchExternalPlayer(filestorage);
+                  }
+                  catch (Exception ex)
+                  {
+                    LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex);
+                  }
+                }
+              }
+              #endregion
+            }
+            else if (Helper.IsBluRayPlayerLauncherAvailableAndEnabled)
+            {
+              LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
+              GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+            }
+          }
+          else
+          {
+            //if (first)
+            //// ask for mounting file first time
+            //{
+            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+            dlgYesNo.SetLine(1, GUILocalizeStrings.Get(219)); //no disc
+            if (Helper.FieldIsSet(MyFilms.conf.StrIdentItem))
+              if (MyFilms.conf.StrIdentLabel.Length > 0)
+                dlgYesNo.SetLine(2, MyFilms.conf.StrIdentLabel + " = " + MyFilms.r[select_item][MyFilms.conf.StrIdentItem]); //Label Identification for Media
+              else
+                dlgYesNo.SetLine(2, "'" + MyFilms.conf.StrIdentItem + "' = " + MyFilms.r[select_item][MyFilms.conf.StrIdentItem]); //ANT Item Identification for Media
+            else 
+              dlgYesNo.SetLine(2, "' disc n° = " + MyFilms.r[select_item]["Number"]); //ANT Number for Identification Media 
+            dlgYesNo.DoModal(GetID);
+            if (dlgYesNo.IsConfirmed) Launch_Movie(select_item, GetID, m_SearchAnimation, bForceExternalPlayback);
+              //}
+            else
+            {
+              GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+              dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+              dlgOk.SetLine(1, GUILocalizeStrings.Get(1036)); //no video found
+              dlgOk.SetLine(2, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString());
+              dlgOk.DoModal(GetID);
+              LogMyFilms.Info("File not found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle]);
+              return;
+            }
+          }
         }
 
         public static void Launch_Movie_Trailer(int select_item, int GetID, GUIAnimation m_SearchAnimation)
@@ -9641,7 +9665,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       private void GUIWindowManager_OnNewMessage(GUIMessage message)
       {
-        LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received ! - MessageType = '" + message.Message.ToString() + "', Param1 = '" + message.Param1 + "', Param2 = '" + message.Param2 + "', message label = '" + message.Label + "'");
         //public enum MediaType // global category
         //{
         //  UNKNOWN = 0,
@@ -9662,6 +9685,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (message.Message)
         {
           case GUIMessage.MessageType.GUI_MSG_AUTOPLAY_VOLUME:
+            LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received ! - MessageType = '" + message.Message.ToString() + "', Param1 = '" + message.Param1 + "', Param2 = '" + message.Param2 + "', message label = '" + message.Label + "'");
             if (message.Param1 == (int)MediaPortal.Ripper.AutoPlay.MediaType.VIDEO)
             {
               switch (message.Param2)
@@ -9691,7 +9715,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
             break;
-              default:
+          default:
             break;
         }
       }
