@@ -772,7 +772,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (r.Length == 0)
             GUIWindowManager.ShowPreviousWindow();
           if (loadParamInfo.Play == "true")
-            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null);
+            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null, false);
           else
             GUIWindowManager.ActivateWindow((int)ID_MyFilmsDetail, true);
         }
@@ -1741,7 +1741,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Play groups as playlist (ToDo)
           if (this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder)
           {
-            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
           }
           base.OnAction(action);
           break;
@@ -1758,7 +1758,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if ((action.m_key.KeyChar == 112) && this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
             {
-              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
             }
             if ((action.m_key.KeyChar == 120) && Context_Menu)
             {
@@ -8315,6 +8315,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(10798709));//play movie 
           upd_choice[ichoice] = "playmovie";
           ichoice++;
+
+          if (MyFilms.conf.ExternalPlayerPath.Length > 0 && System.IO.File.Exists(MyFilms.conf.ExternalPlayerPath))
+          {
+            dlg.Add(GUILocalizeStrings.Get(10798500));//play movie  (external player)
+            upd_choice[ichoice] = "playmovieexternal";
+            ichoice++;
+          }
         }
 
         if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
@@ -8496,7 +8503,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (upd_choice[dlg.SelectedLabel])
       {
         case "playmovie":
-          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, false);
+          break;
+
+        case "playmovieexternal":
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, true);
           break;
 
         case "playtrailer":
@@ -10694,7 +10707,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (choiceSearch[dlg.SelectedLabel])
         {
           case "PlayMovie":
-            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             return;
           case "PlayMovieTrailer":
@@ -10718,7 +10731,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgYesNo.SetLine(2, "Current ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
             dlgYesNo.DoModal(GetID);
             if (dlgYesNo.IsConfirmed)
-              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation);
+              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, false);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             break;
           case "ShowMovieDetails":
@@ -10747,7 +10760,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg1YesNo.DoModal(ID_MyFilms);
             if (dlg1YesNo.IsConfirmed)
               //Launch_Movie(select_item, GetID, m_SearchAnimation);
-              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             break;
           case "NewSearch":
@@ -11086,7 +11099,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (choiceSearch[dlg.SelectedLabel])
             {
               case "PlayMovie":
-                MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+                MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
                 //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
                 return;
               case "PlayMovieTrailer":
@@ -11141,7 +11154,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlg1YesNo.DoModal(GetID);
                 if (dlg1YesNo.IsConfirmed)
                   //Launch_Movie(select_item, GetID, m_SearchAnimation);
-                  MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null);
+                  MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
                 //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
                 break;
               case "NewSearch":

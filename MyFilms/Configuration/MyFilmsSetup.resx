@@ -888,6 +888,13 @@ passed as  parameter to the command file.
 
 Very unused...</value>
   </data>
+  <data name="tbExternalPlayerExtensions.ToolTip" xml:space="preserve">
+    <value>Here you can define the extension that will launch 
+the external player automatically, if the execution path is defined.
+Multiple values can be separated by semi colon (";").
+If you leave this field empty (and have a path to a player defined),
+you will still be able to start playback with external player via context menu.</value>
+  </data>
   <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
     <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
 if they are currently "reachable".
