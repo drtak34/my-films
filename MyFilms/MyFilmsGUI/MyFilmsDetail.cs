@@ -2892,7 +2892,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
           if (files.Length > 0)
           {
-            LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! (DB-Config: '" + DB + "') - First LockFile: '" + files[0] + "', Number LockFiles: '" + files.Length + "'");
+            LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! (DB-Config: '" + DB + "') - First LockFile: '" + files[0] + "', Number LockFiles: '" + files.Length + "', Local MachineName: '" + machineName + "'");
             return true;
           }
           else

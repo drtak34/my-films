@@ -553,7 +553,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml"); 
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
-      LogMyFilms.Debug("MyFilms.Init() started.");
+      LogMyFilms.Info("MyFilms.Init() started on '" + System.Environment.MachineName + "'.");
       LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version + "', BuildDate: '" + MyFilmsSettings.BuildDate + "'");
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion + "',    BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
       LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
