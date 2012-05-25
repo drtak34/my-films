@@ -561,6 +561,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // check, if remote config file should be copied to local MP data dir (MyFilms Server Setup)
       SyncConfigFromRemoteServer();
 
+      // clean orphaned files for all configs if any leftovers
+      CleanOrphanedDBlocks();
+
       // Fanart Timer
       _fanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
 
@@ -858,6 +861,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
       {
         LogMyFilms.Info("SyncConfigFromRemoteServer() - Server Sync is disabled - running on local config only !");
+      }
+    }
+
+    private void CleanOrphanedDBlocks()
+    {
+      using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      {
+        int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+        ArrayList configs = new ArrayList();
+        for (int i = 0; i < MesFilms_nb_config; i++)
+          configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+        foreach (string config in configs)
+        {
+          string StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+          MyFilmsDetail.SetGlobalLock(false, StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
+        }
       }
     }
 
