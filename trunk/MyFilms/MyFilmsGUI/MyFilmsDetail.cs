@@ -6734,6 +6734,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void InitTrailerwatcher(string directorypath)
         {
+          if (!System.IO.Directory.Exists(directorypath))
+          {
+            LogMyFilms.Warn("InitTrailerwatcher() - Trailerwatcher cannot initialize - path does not exist: '" + directorypath + "'");
+            return;
+          }
           if (Trailerwatcher.EnableRaisingEvents && Trailerwatcher.Path == directorypath && directorypath != "")
             return; // return, if it's already enabled and file name has not changed
           else
