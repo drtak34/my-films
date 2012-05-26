@@ -145,7 +145,7 @@ namespace MyFilmsPlugin.Configuration
 
     private void cbEditorLayout_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbEditorLayout.SelectedIndex < 0 || cbEditorLayout.SelectedIndex > 5)
+      if (cbEditorLayout.SelectedIndex < 0 || cbEditorLayout.SelectedIndex > 6)
         cbEditorLayout.SelectedIndex = 0;
       if (cbEditorLayout.SelectedIndex == 0)
         cbEditorLayout.Text = "";
