@@ -220,6 +220,7 @@
       this.cbEditorLayout.Items.AddRange(new object[] {
             "",
             "List View",
+            "List View (extended)",
             "Big Icons",
             "Small Icons",
             "Filmstrip",

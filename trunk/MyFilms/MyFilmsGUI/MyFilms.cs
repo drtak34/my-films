@@ -453,13 +453,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Frequency = 1
     }
 
+    //enum of all possible layouts
     public enum Layout
     {
       List = 0,
-      SmallThumbs = 1,
-      BigThumbs = 2,
-      FilmStrip = 3,
-      CoverFlow = 4
+      SmallIcons = 1,
+      LargeIcons = 2,
+      Filmstrip = 3,
+      AlbumView = 4,
+      Playlist = 5,
+      CoverFlow = 6
     }
 
     enum eContextItems
@@ -2083,6 +2086,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Add(GUILocalizeStrings.Get(101));//List
       if (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll) // if (!conf.UseListViewForGoups || !conf.Boolselect)
       {
+        dlg.Add(GUILocalizeStrings.Get(529));//Cover list
         dlg.Add(GUILocalizeStrings.Get(100));//Icons
         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
         dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
@@ -6920,18 +6924,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List;
           break;
         case 1:
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(529));
+          this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
+          break;
+        case 2:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
           this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
           break;
-        case 2:
+        case 3:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
           this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
           break;
-        case 3:
+        case 4:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
           this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
           break;
-        case 4:
+        case 5:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
           this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
           //if (facadeFilms.CurrentLayout == GUIFacadeControl.Layout.CoverFlow) facadeFilms.CoverFlowLayout.SelectCard(facadeFilms.SelectedListItemIndex); // added to reduce broken initial animation

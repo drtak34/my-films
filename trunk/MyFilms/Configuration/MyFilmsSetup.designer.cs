@@ -2941,6 +2941,7 @@
           this.LayOut.FormattingEnabled = true;
           this.LayOut.Items.AddRange(new object[] {
             "List",
+            "List (extended)",
             "Small Icons",
             "Large Icons",
             "Filmstrip",
@@ -2989,6 +2990,7 @@
           this.LayoutInHierarchies.FormattingEnabled = true;
           this.LayoutInHierarchies.Items.AddRange(new object[] {
             "List",
+            "List (extended)",
             "Small Icons",
             "Large Icons",
             "Filmstrip",
@@ -3418,6 +3420,7 @@
           this.AntViewLayoutView.FormattingEnabled = true;
           this.AntViewLayoutView.Items.AddRange(new object[] {
             "List",
+            "List (extended)",
             "Small Icons",
             "Large Icons",
             "Filmstrip",
