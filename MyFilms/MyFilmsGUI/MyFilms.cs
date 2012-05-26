@@ -4703,6 +4703,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "DateWatched", true) == 0) return false;
       if (string.Compare(fieldname, "DateAdded", true) == 0) return false;
       if (string.Compare(fieldname, "Year", true) == 0) return false;
+      if (string.Compare(fieldname, "RecentlyAdded", true) == 0) return false;
       if (IsDecimalField(fieldname)) return false;
       if (IsAlphaNumericalField(fieldname)) return false;
       return true;
