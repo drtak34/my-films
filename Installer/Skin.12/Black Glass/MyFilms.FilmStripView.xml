@@ -1,0 +1,199 @@
+<window>
+  <controls>
+
+    <!-- FILMSTRIP and COVERFLOW VIEW -->
+
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>-200</posX>
+      <posY>630</posY>
+      <width>1680</width>
+      <height>100</height>
+      <texture>gradient.png</texture>
+      <visible>facadeview.filmstrip</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <type>label</type>
+      <description>Title (Filmstrip)</description>
+      <id>1027</id>
+      <posX>30</posX>
+      <posY>667</posY>
+      <width>1220</width>
+      <align>center</align>
+      <font>font24</font>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <visible>[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <!--		<control>
+			<description>Group Label</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>30</posX>
+			<posY>702</posY>
+			<label>1079908</label>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.db.edition.value,''), (#myfilms.db.edition.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),'#myfilms.user.mastertitle.value #myfilms.db.edition.value','#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+			<font>font16</font>
+			<align>left</align>
+			<textcolor>80ffffff</textcolor>
+			<visible>string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+-->
+    <control>
+      <type>label</type>
+      <description>Year and Genre and Runtime (Filmstrip and CoverFlow)</description>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>703</posY>
+      <width>1220</width>
+      <align>center</align>
+      <font>font14</font>
+      <textcolor>60ffffff</textcolor>
+      <label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#myfilms.db.category.value</label>
+      <visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>label</type>
+      <description>Runtime and rating (Filmstrip)</description>
+      <id>0</id>
+      <posX>1115</posX>
+      <posY>694</posY>
+      <width>220</width>
+      <align>right</align>
+      <font>font10</font>
+      <textcolor>60ffffff</textcolor>
+      <label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))#(iif(neq(#myfilms.db.rating.value,'0'),' - #myfilms.db.rating.value',''))</label>
+      <visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>imagelist</type>
+      <id>0</id>
+      <posX>1125</posX>
+      <posY>696</posY>
+      <width>120</width>
+      <height>40</height>
+      <align>right</align>
+      <textureWidth>15</textureWidth>
+      <textureHeight>15</textureHeight>
+      <colordiffuse>6fffffff</colordiffuse>
+      <subitems>
+        <subitem>MyFilms\UserRatingStarOff.png</subitem>
+        <subitem>MyFilms\UserRatingStarOn.png</subitem>
+      </subitems>
+      <orientation>horizontal</orientation>
+      <align>left</align>
+      <imagesToDraw>10</imagesToDraw>
+      <percentage>#myfilms.db.rating.value</percentage>
+      <visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="50">visiblechange</animation>
+    </control>
+
+    <!-- LOGOS -->
+
+    <control>
+      <type>image</type>
+      <description>Dummy Thumb Logos ID 2001</description>
+      <id>2001</id>
+      <visible>no</visible>
+    </control>
+    <control>
+      <type>image</type>
+      <description>Dummy Thumb Logos ID 2002</description>
+      <id>2002</id>
+      <visible>no</visible>
+    </control>
+    <control>
+      <type>image</type>
+      <description>Dummy Thumb Logos ID 2003</description>
+      <id>2003</id>
+      <visible>no</visible>
+    </control>
+    <!--
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2001 (Filmstrip)</description>
+			<id>0</id>
+			<posX>20</posX>
+			<posY>690</posY>
+			<width>750</width>
+			<height>22</height>
+			<texture>#myfilms.logos_id2001</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>0</spaceBetweenItems>
+			<colordiffuse>cfffffff</colordiffuse>
+			<visible>!player.hasmedia+control.hasfocus(50)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2002 (Filmstrip)</description>
+			<id>0</id>
+			<posX>20</posX>
+			<posY>690</posY>
+			<width>750</width>
+			<height>22</height>
+			<texture>#myfilms.logos_id2002</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>0</spaceBetweenItems>
+			<colordiffuse>cfffffff</colordiffuse>
+			<visible>!player.hasmedia+control.hasfocus(50)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2003 (Filmstrip)</description>
+			<id>0</id>
+			<posX>20</posX>
+			<posY>690</posY>
+			<width>750</width>
+			<height>22</height>
+			<texture>#myfilms.logos_id2003</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>0</spaceBetweenItems>
+			<colordiffuse>cfffffff</colordiffuse>
+			<visible>!player.hasmedia+control.hasfocus(50)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+-->
+    <control>
+      <type>image</type>
+      <description>thumb Logos ID 2012 (Filmstrip)</description>
+      <id>0</id>
+      <posX>20</posX>
+      <posY>690</posY>
+      <width>750</width>
+      <height>22</height>
+      <texture>#myfilms.logos_id2012</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <spaceBetweenItems>0</spaceBetweenItems>
+      <colordiffuse>cfffffff</colordiffuse>
+      <visible>!player.hasmedia+control.hasfocus(50)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+  </controls>
+</window>

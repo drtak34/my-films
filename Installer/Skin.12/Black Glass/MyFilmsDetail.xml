@@ -9,7 +9,7 @@
   	<animation effect="fade" time="250" start="0" end="100">WindowOpen</animation>
   	<controls>
 <!--		<import>common.window.background.xml</import> -->
-<!--
+
 		<control>
 			<type>image</type>
 			<description>BackGround</description>
@@ -19,10 +19,14 @@
 			<width>1280</width>
 			<height>720</height>
 			<texture>bg.jpg</texture>    
-			<visible>control.hasthumb(1000)</visible>
+			<shouldCache>true</shouldCache>
+			<animation effect="fade" time="150">WindowOpen</animation>
+			<animation effect="fade" time="450">WindowClose</animation>
+			<!-- Avoid default artwork flash when first entering plugin -->
+			<!-- <visible>control.hasthumb(1000)</visible> -->
+			<!-- <visible>!string.equals(#myfilms.user.mastertitle,)</visible>-->
 			<shouldCache>true</shouldCache>
 		</control>
--->
 
 		<control>
 			<description>SingleImage Fanart</description>

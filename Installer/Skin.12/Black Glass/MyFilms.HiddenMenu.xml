@@ -1,0 +1,222 @@
+<window>
+  <controls>
+
+    <!-- HIDDEN MENU -->
+
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>-386</posX>
+      <posY>3</posY>
+      <width>418</width>
+      <height>714</height>
+      <texture>bg_left.png</texture>
+      <colordiffuse>ffffffff</colordiffuse>
+      <animation effect="fade" time="50">WindowClose</animation>
+    </control>
+    <control>
+      <type>actiongroup</type>
+      <description>action menu</description>
+      <defaultcontrol>4</defaultcontrol>
+      <onexit>50</onexit>
+      <buttonX>0</buttonX>
+      <buttonY>0</buttonY>
+      <buttonwidth>56</buttonwidth>
+      <buttonheight>720</buttonheight>
+      <textureFocus>-</textureFocus>
+      <textureNoFocus>-</textureNoFocus>
+      <width>425</width>
+      <height>720</height>
+      <dimColor>00ffffff</dimColor>
+
+      <visible>[control.hasfocus(2)|control.hasfocus(3)|control.hasfocus(4)|control.hasfocus(5)|control.hasfocus(6)|control.hasfocus(7)|control.hasfocus(8)|control.hasfocus(10012)|control.hasfocus(10013)|control.hasfocus(10014)|control.hasfocus(99999)]</visible>
+      <animation effect="fade" time="250" start="75" reversible="false">visible</animation>
+      <animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
+      <animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
+      <animation effect="slide" tween="circle" easing="out" time="250" end="-208,0" reversible="false">hidden</animation>
+      <animation effect="slide" time="150" end="-400,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">WindowOpen</animation>
+      <animation effect="fade" time="250" start="75" reversible="false">WindowOpen</animation>
+      <control>
+        <type>image</type>
+        <id>0</id>
+        <posX>0</posX>
+        <posY>0</posY>
+        <width>418</width>
+        <height>720</height>
+        <texture>bg_left.png</texture>
+        <colordiffuse>ffffffff</colordiffuse>
+        <visible>!control.hasfocus(50)</visible>
+      </control>
+
+      <control>
+        <type>label</type>
+        <id>0</id>
+        <posX>30</posX>
+        <posY>35</posY>
+        <label>924</label>
+        <font>font24</font>
+        <align>left</align>
+        <textcolor>ffffffff</textcolor>
+      </control>
+      <control>
+        <type>image</type>
+        <id>0</id>
+        <posX>0</posX>
+        <posY>47</posY>
+        <width>385</width>
+        <height>53</height>
+        <texture>bg_button_nofocus.png</texture>
+      </control>
+
+      <control>
+        <type>group</type>
+        <description>group element</description>
+        <posX>0</posX>
+        <posY>100</posY>
+        <layout>StackLayout</layout>
+        <animation effect="fade" time="450" reversible="true">visible</animation>
+        <animation effect="fade" time="450" reversible="true">hidden</animation>
+        <visible>!control.hasfocus(50)</visible>
+        <mpe>
+          <layout>Grid</layout>
+          <spring>no</spring>
+          <spacing>0</spacing>
+          <padding>
+            <top>0</top>
+            <right>0</right>
+            <bottom>0</bottom>
+            <left>0</left>
+          </padding>
+        </mpe>
+        <control>
+          <type>button</type>
+          <description>Layout</description>
+          <id>2</id>
+          <onright>50</onright>
+          <onup>10014</onup>
+          <ondown>3</ondown>
+          <label>101</label>
+        </control>
+        <control>
+          <type>sortbutton</type>
+          <id>3</id>
+          <onright>50</onright>
+          <onup>2</onup>
+          <ondown>5</ondown>
+          <label>103</label>
+        </control>
+        <control>
+          <type>button</type>
+          <description>Switch view</description>
+          <id>5</id>
+          <onright>50</onright>
+          <onup>3</onup>
+          <ondown>4</ondown>
+          <label>457</label>
+        </control>
+        <control>
+          <type>button</type>
+          <description>Search</description>
+          <id>4</id>
+          <onright>50</onright>
+          <onup>5</onup>
+          <ondown>6</ondown>
+          <label>137</label>
+        </control>
+        <control>
+          <type>button</type>
+          <description>Options</description>
+          <id>6</id>
+          <onright>50</onright>
+          <onup>4</onup>
+          <ondown>7</ondown>
+          <label>496</label>
+        </control>
+        <control>
+          <type>button</type>
+          <description>Global Filter Options</description>
+          <id>7</id>
+          <onright>50</onright>
+          <onup>6</onup>
+          <ondown>8</ondown>
+        </control>
+        <control>
+          <type>button</type>
+          <description>Global Updates</description>
+          <id>8</id>
+          <onright>50</onright>
+          <onup>7</onup>
+          <ondown>10013</ondown>
+        </control>
+
+        <!-- Additional Buttons for Links to other Plugins -->
+
+        <!--
+				<control>
+					<description>Empty</description>
+					<type>button</type>
+					<id>10011</id>
+					<hyperlink></hyperlink>
+					<label>-</label>
+					<onright>50</onright>
+					<onup>8</onup>
+					<ondown>10012</ondown>
+					<texture>bg_facade_line_nofocus.png</texture>
+				</control>
+-->
+        <control>
+          <description>Separator</description>
+          <type>image</type>
+          <id>0</id>
+          <height>13</height>
+          <width>385</width>
+          <texture>bg_facade_line_nofocus.png</texture>
+        </control>
+
+        <!--				<control>
+					<description>Trailer</description>
+					<type>button</type>
+					<id>10012</id>
+					<hyperlink>5900</hyperlink>
+					<label>Trailer</label>
+					<onright>50</onright>
+					<onup>8</onup>
+					<ondown>10013</ondown>
+					<visible>plugin.isenabled(My Trailers)</visible>
+				</control>
+-->
+        <control>
+          <description>Onlinevideos</description>
+          <type>button</type>
+          <id>10013</id>
+          <hyperlink>4755</hyperlink>
+          <label>Online Videos</label>
+          <onright>50</onright>
+          <onup>8</onup>
+          <ondown>10014</ondown>
+        </control>
+        <control>
+          <description>TV-Series</description>
+          <type>button</type>
+          <id>10014</id>
+          <hyperlink>9811</hyperlink>
+          <label>TV-Serien</label>
+          <onright>50</onright>
+          <onup>10013</onup>
+          <ondown>2</ondown>
+        </control>
+        <control>
+          <description>MPEIUPDATE:ceddd4d1-4cac-4846-9af5-f4daee1bbddc</description>
+          <type>button</type>
+          <id>99999</id>
+          <label>MyFilms Update Available !</label>
+          <onup>10014</onup>
+          <ondown>2</ondown>
+          <onright>50</onright>
+          <visible>string.equals(#mpei.ceddd4d1-4cac-4846-9af5-f4daee1bbddc.haveupdate,true)</visible>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>
