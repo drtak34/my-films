@@ -2,42 +2,6 @@
   <controls>
 
     <!-- THUMBS VIEW -->
-    <!-- <control>
-			<description>Backdrop Overlay - ListView</description>
-			<type>image</type>
-			<id>0</id>
-			<posX>458</posX>
-			<posY>48</posY>
-			<width>948</width>
-			<height>766</height>
-			<texture>bg_facade.png</texture>
-			<shouldCache>true</shouldCache>
-			<visible>facadeview.smallicons|facadeview.largeicons</visible>
-			<animation effect="fade" time="250">visiblechange</animation>
-		</control>
-		<control>
-			<type>image</type>
-			<id>0</id>
-			<posX>490</posX>
-			<posY>47</posY>
-			<width>790</width>
-			<height>53</height>
-			<texture>bg_facade_line_nofocus.png</texture>
-			<colordiffuse>77ffffff</colordiffuse>
-			<shouldCache>true</shouldCache>
-			<visible>facadeview.smallicons|facadeview.largeicons</visible>
-			<animation effect="fade" time="250">visiblechange</animation>
-		</control>
-		<control>
-			<id>0</id>
-			<type>image</type>
-			<posX>-200</posX>
-			<posY>680</posY>
-			<width>1680</width>
-			<height>60</height>
-			<texture>gradient.png</texture>
-			<visible>facadeview.smallicons|facadeview.largeicons</visible>
-		</control> -->
     <control>
       <type>label</type>
       <description>Title (Thumbs)</description>
@@ -63,31 +27,6 @@
       <textcolor>60ffffff</textcolor>
       <label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#(iif(neq(#myfilms.db.category.value,''),'#myfilms.db.category.value - ',''))#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))#(iif(neq(#myfilms.db.rating.value,'0'),' - #myfilms.db.rating.value',''))</label>
       <visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-    </control>
-    <!-- <control>
-			<type>label</type>
-			<id>2073</id>
-			<posX>1184</posX>
-			<posY>57</posY>
-			<font>font10</font>
-			<align>left</align>
-			<textcolor>60ffffff</textcolor>
-			<label>#myfilms.nbobjects.value #myfilms.nbobjects.unit</label>
-			<visible>facadeview.smallicons|facadeview.largeicons</visible>
-			<animation effect="fade" time="250">visiblechange</animation>
-		</control> -->
-    <control>
-      <type>label</type>
-      <id>2073</id>
-      <posX>10</posX>
-      <posY>699</posY>
-      <font>font10</font>
-      <align>left</align>
-      <textcolor>9fffffff</textcolor>
-      <label>#selectedindex/#itemcount #itemtype</label>
-      <!-- <label>#myfilms.nbobjects.value #myfilms.nbobjects.unit</label> -->
-      <visible>facadeview.smallicons|facadeview.largeicons</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
   </controls>

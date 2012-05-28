@@ -22,7 +22,7 @@
 
     <import>MyFilms.DummyControls.xml</import>
 
-<!--     <import>common.window.background.xml</import> -->
+    <!-- <import>common.window.background.xml</import> -->
 
     <control>
       <description>Background</description>
@@ -32,7 +32,7 @@
       <height>720</height>
       <texture>bg.jpg</texture>
       <shouldCache>true</shouldCache>
-      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="200">WindowOpen</animation>
       <animation effect="fade" time="450">WindowClose</animation>
       <!-- Avoid default artwork flash when first entering plugin -->
       <!-- <visible>!string.equals(#myfilms.user.mastertitle,)</visible>-->
@@ -41,8 +41,6 @@
     <import>MyFilms.Fanart.xml</import>
 
     <!-- <import>common.window.overlay.xml</import> -->
-
-    <import>common.window.time.xml</import>
 
     <control>
       <description>Overlay NonFilmstrip</description>
@@ -70,7 +68,24 @@
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="450">WindowClose</animation>
     </control>
+<!--
     <control>
+      <description>Additional Overlay Menu</description>
+      <type>image</type>
+      <id>0</id>
+      <width>1280</width>
+      <height>720</height>
+      <texture>black.png</texture>
+      <colordiffuse>5fffffff</colordiffuse>
+      <visible>control.isvisible(40)+![facadeview.filmstrip|facadeview.coverflow]</visible>
+      <shouldCache>true</shouldCache>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="450">WindowClose</animation>
+      <animation effect="fade" time="450">visiblechange</animation>
+    </control>
+-->
+    <control>
+      <description>Header label display</description>
       <type>label</type>
       <id>0</id>
       <posX>30</posX>
@@ -82,8 +97,6 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
-
-
     <control>
       <description>Selection display</description>
       <type>fadelabel</type>
@@ -100,12 +113,13 @@
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
 
+    <import>common.window.time.xml</import>
+
     <import>MyFilms.Facade.xml</import>
     <import>MyFilms.ListView.xml</import>
     <import>MyFilms.ListView.Cover.xml</import>
     <import>MyFilms.FilmStripView.xml</import>
     <import>MyFilms.ThumbsView.xml</import>
-
 
     <!-- Global Overlay Filter Info -->
     <import>MyFilms.Common.xml</import>
@@ -114,8 +128,8 @@
     <import>MyFilms.HiddenMenu.xml</import>
 
     <control>
-      <type>Waiting Animation</type>
       <description>Waiting during search</description>
+      <type>animation</type>
       <id>2080</id>
       <posX>608</posX>
       <posY>460</posY>
@@ -130,6 +144,6 @@
 
     <!-- TEST THUMBS AND LABELS for visibility check  -->
     <!-- <import>MyFilms.TestControls.xml</import> -->
-    
+
   </controls>
 </window>
