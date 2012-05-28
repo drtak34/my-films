@@ -2086,7 +2086,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Add(GUILocalizeStrings.Get(101));//List
       if (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll) // if (!conf.UseListViewForGoups || !conf.Boolselect)
       {
-        dlg.Add(GUILocalizeStrings.Get(529));//Cover list
+        dlg.Add(GUILocalizeStrings.Get(529));//Cover list - used as extended list
         dlg.Add(GUILocalizeStrings.Get(100));//Icons
         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
         dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
@@ -7256,9 +7256,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XmlConfig XmlConfig = new XmlConfig();
       switch (choiceView.ToLower())
       {
-        case "config": //Choose Database
+        case "config":
+          #region Choose Database
           ChooseNewConfig();
           break;
+          #endregion
 
         case "nasstatus": //Check and show status of NAS Servers
           #region nasstatus
@@ -7370,6 +7372,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
 
         case "globaloptions":
+          #region Submenu Globaloptions
           LogMyFilms.Debug("Building (sub)menu globaloptions");
 
           GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -7416,15 +7419,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
           this.Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
           return;
+          #endregion
 
         case "globalupdates":
-
+          #region Submenu GlobalUpdates
           GUIDialogMenu dlg2 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg2 == null) return;
           dlg2.Reset();
           dlg2.SetHeading(GUILocalizeStrings.Get(10798690)); // Global Updates ...
-          System.Collections.Generic.List<string> choiceViewGlobalUpdates =
-            new System.Collections.Generic.List<string>();
+          List<string> choiceViewGlobalUpdates = new System.Collections.Generic.List<string>();
 
           dlg2.Add(GUILocalizeStrings.Get(1079850)); // Update Online status - to check availability if media files
           choiceViewGlobalUpdates.Add("isonlinecheck");
@@ -7483,8 +7486,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           this.Change_Menu_Action(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
           return;
+          #endregion
 
         case "globalmappings": // map useritems from GUI
+          #region globalmappings
           GUIDialogMenu dlg3 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg3 == null) return;
           dlg3.Reset();
@@ -7620,9 +7625,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           return;
+          #endregion
 
-
-        case "userprofilename": // choose global user profile name
+        case "userprofilename":
+          #region choose global user profile name
           Change_UserProfileName();
           XmlConfig.WriteXmlConfig(
             "MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
@@ -7632,9 +7638,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           return;
-
+          #endregion
 
         case "globalwikihelp":
+          #region Wiki Help
           if (Helper.IsBrowseTheWebAvailableAndEnabled)
           {
             //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
@@ -7643,11 +7650,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string zoom = "150";
 
             //Load Webbrowserplugin with the URL
-            LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+            LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
             MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-            GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
+            GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false);
             MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -7657,8 +7664,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
           }
           break;
+          #endregion
 
         case "about":
+          #region About Box
           string infoBackgroundProcess = string.Empty;
           if (bgUpdateFanart.IsBusy) infoBackgroundProcess = "running (fanart & artwork)";
           else infoBackgroundProcess = "not active";
@@ -7673,9 +7682,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgok.SetLine(3, "MyFilms Background Process = '" + infoBackgroundProcess + "'");
           dlgok.DoModal(GetID);
           break;
+          #endregion
 
         case "globalunwatchedfilter":
-          // Global overlayfilter for unwatched movies ...
+          #region Global overlayfilter for unwatched movies ...
           MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
           if (conf.GlobalUnwatchedOnly)
           {
@@ -7692,9 +7702,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
+          #endregion
 
         case "filterdbisonline":
-          // GlobalFilterIsOnline
+          #region GlobalFilterIsOnline
           GlobalFilterIsOnlineOnly = !GlobalFilterIsOnlineOnly;
           LogMyFilms.Info("Global filter for IsOnline available media files is now set to '" + GlobalFilterIsOnlineOnly + "'");
           if (GlobalFilterIsOnlineOnly)
@@ -7712,9 +7723,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
+          #endregion
 
         case "filterdbtrailer":
-          // GlobalFilterTrailersOnly
+          #region GlobalFilterTrailersOnly
           GlobalFilterTrailersOnly = !GlobalFilterTrailersOnly;
           LogMyFilms.Info("Global filter for Trailers Only is now set to '" + GlobalFilterTrailersOnly + "'");
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
@@ -7733,9 +7745,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
+          #endregion
 
         case "filterdbrating":
-          // GlobalFilterMinRating
+          #region GlobalFilterMinRating
           GlobalFilterMinRating = !GlobalFilterMinRating;
           LogMyFilms.Info("Global filter for MinimumRating is now set to '" + GlobalFilterMinRating + "'");
           if (GlobalFilterMinRating)
@@ -7756,9 +7769,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
+          #endregion
 
         case "filterdbsetrating":
-          // Set global value for minimum Rating to restrict movielist
+          #region Set global value for minimum Rating to restrict movielist
           LogMyFilms.Info(
             "(FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating +
             "', current decimalseparator: '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() +
@@ -7797,9 +7811,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
+          #endregion
 
         case "isonlinecheck":
-          // Launch IsOnlineCheck in batch mode
+          #region Launch IsOnlineCheck in batch mode
           if (bgIsOnlineCheck.IsBusy)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079850), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
@@ -7808,9 +7823,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           AsynIsOnlineCheck();
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
+          #endregion
 
         case "updatedb":
-          // Launch AMCUpdater in batch mode
+          #region Launch AMCUpdater in batch mode
           if (bgUpdateDB.IsBusy)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330));
@@ -7827,9 +7843,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           AsynUpdateDatabase("");
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
+          #endregion
 
         case "updatedbselect":
-          // Launch AMCUpdater in batch mode with selection of profile - e.g. to only update values etc.
+          #region Launch AMCUpdater in batch mode with selection of profile - e.g. to only update values etc.
           if (bgUpdateDB.IsBusy)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
@@ -7872,9 +7889,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           AsynUpdateDatabase(selectedprofile);
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
-        
+          #endregion
+
         case "cancelupdatedb":
-          // stop background worker
+          #region stop background worker for AMCupdater
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
           {
             bgUpdateDB.CancelAsync();
@@ -7885,9 +7903,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
+          #endregion
 
         case "downfanart":
-          // Launch Fanart download in batch mode
+          #region Launch Fanart download in batch mode
           if (bgUpdateFanart.IsBusy)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079862), GUILocalizeStrings.Get(921), GUILocalizeStrings.Get(330));
@@ -7897,6 +7916,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           AsynUpdateFanart();
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           break;
+          #endregion
 
         case "personinfos-all":
           // Search and update all personinfos from IMDB
@@ -7905,7 +7925,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "trailer-all":
-          // Launch "Search and register all trailers for all movies in DB" in batch mode
+          #region Launch "Search and register all trailers for all movies in DB" in batch mode
           //if (bgUpdateTrailer.IsBusy)
           //{
           //    ShowMessageDialog(GUILocalizeStrings.Get(10798694), GUILocalizeStrings.Get(921), GUILocalizeStrings.Get(330)); //action already launched
@@ -8022,7 +8042,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   null);
               }) { Name = "GlobalTrailerUpdate", IsBackground = true }.Start();
           return;
-          // break;
+        // break;
+          #endregion
 
         case "incomplete-movie-data":
           SearchIncompleteMovies();
@@ -8099,7 +8120,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //GUIWaitCursor.Init();
         //GUIWaitCursor.Show();
         //GUIWindowManager.Process();
-        //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+        MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
         Load_Config(newConfig, true, null);
         if (InitialStart)
         {
@@ -8142,7 +8163,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
         GUIControl.HideControl(GetID, 34); // show elements in skin
-      //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
       //GUIWaitCursor.Hide();
       return success;
     }
@@ -13903,9 +13924,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             LogMyFilms.Info("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "'");
+            InitMainScreen(false);
+            this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
           }
         }
-
       CheckAndLogEnhancedSkinControls();
       }
 

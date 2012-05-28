@@ -6839,7 +6839,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           
         }
 
-
         public static void PlayMovie(string config, int movieid)
         //-------------------------------------------------------------------------------------------
         // Play Movie from external (wrapper to prepare environment)
