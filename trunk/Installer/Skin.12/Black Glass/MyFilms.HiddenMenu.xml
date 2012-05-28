@@ -11,25 +11,28 @@
       <width>418</width>
       <height>714</height>
       <texture>bg_left.png</texture>
-      <colordiffuse>ffffffff</colordiffuse>
+      <colorDiffuse>ffffffff</colorDiffuse>
+      <visible>control.hasfocus(50)</visible>
       <animation effect="fade" time="50">WindowClose</animation>
+      <animation effect="fade" time="50">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
     </control>
+
     <control>
       <type>actiongroup</type>
       <description>action menu</description>
       <defaultcontrol>4</defaultcontrol>
-      <onexit>50</onexit>
+      <onexit>4</onexit>
       <buttonX>0</buttonX>
       <buttonY>0</buttonY>
-      <buttonwidth>56</buttonwidth>
+      <buttonwidth>385</buttonwidth>
       <buttonheight>720</buttonheight>
       <textureFocus>-</textureFocus>
       <textureNoFocus>-</textureNoFocus>
       <width>425</width>
       <height>720</height>
       <dimColor>00ffffff</dimColor>
-
-      <visible>[control.hasfocus(2)|control.hasfocus(3)|control.hasfocus(4)|control.hasfocus(5)|control.hasfocus(6)|control.hasfocus(7)|control.hasfocus(8)|control.hasfocus(10012)|control.hasfocus(10013)|control.hasfocus(10014)|control.hasfocus(99999)]</visible>
+      <visible>!control.hasfocus(50)</visible>
       <animation effect="fade" time="250" start="75" reversible="false">visible</animation>
       <animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
       <animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
@@ -37,6 +40,8 @@
       <animation effect="slide" time="150" end="-400,0" reversible="false">WindowClose</animation>
       <animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">WindowOpen</animation>
       <animation effect="fade" time="250" start="75" reversible="false">WindowOpen</animation>
+
+
       <control>
         <type>image</type>
         <id>0</id>
@@ -45,8 +50,7 @@
         <width>418</width>
         <height>720</height>
         <texture>bg_left.png</texture>
-        <colordiffuse>ffffffff</colordiffuse>
-        <visible>!control.hasfocus(50)</visible>
+        <colordiffuse>dfffffff</colordiffuse>
       </control>
 
       <control>
@@ -70,25 +74,12 @@
       </control>
 
       <control>
-        <type>group</type>
         <description>group element</description>
+        <type>group</type>
+        <layout>StackLayout(0, Vertical, true)</layout>
         <posX>0</posX>
         <posY>100</posY>
-        <layout>StackLayout</layout>
-        <animation effect="fade" time="450" reversible="true">visible</animation>
-        <animation effect="fade" time="450" reversible="true">hidden</animation>
-        <visible>!control.hasfocus(50)</visible>
-        <mpe>
-          <layout>Grid</layout>
-          <spring>no</spring>
-          <spacing>0</spacing>
-          <padding>
-            <top>0</top>
-            <right>0</right>
-            <bottom>0</bottom>
-            <left>0</left>
-          </padding>
-        </mpe>
+
         <control>
           <type>button</type>
           <description>Layout</description>
