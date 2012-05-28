@@ -6099,6 +6099,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("db.calc.aspectratio.value", log);
             clearGUIProperty("db.calc.imageformat.value", log);
 
+            //for (int j = 1; j < 6; j++)
+            //{
+            //  clearGUIProperty("db.actors.actor" + j + ".name", log);
+            //  clearGUIProperty("db.actors.actor" + j + ".image", log);
+            //}
             clearGUIProperty("db.actors.actor1.name", log);
             clearGUIProperty("db.actors.actor1.image", log);
             clearGUIProperty("db.actors.actor2.name", log);
@@ -6634,26 +6639,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //  }
             //}
 			
-			stopwatch.Stop();
-			LogMyFilms.Debug("Load_Detailed_DB() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
+			    stopwatch.Stop();
+			    LogMyFilms.Debug("Load_Detailed_DB() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
         }
 
         private static void Load_Detailed_DB_PushActorsToSkin(string actors)
         {
+          for (int j = 1; j < 6; j++)
+          {
+              clearGUIProperty("db.actors.actor" + j + ".name");
+              clearGUIProperty("db.actors.actor" + j + ".image");
+          }
+
           ArrayList w_tableau = new ArrayList();
           w_tableau = MyFilms.Search_String(actors);
-          int i = 0;
+          int i = 1;
           foreach (object t in w_tableau)
           {
             string actorname = t.ToString();
-            i = i + 1;
             if (i < 6)
             {
-              setGUIProperty("db.actors.actor" + i + ".name", actorname);
               if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
               {
                 string personartworkpath = MyFilms.conf.StrPathArtist;
-                setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg");
+                if (System.IO.File.Exists(personartworkpath + "\\" + actorname + ".jpg"))
+                {
+                  setGUIProperty("db.actors.actor" + i + ".name", actorname);
+                  setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg");
+                  i = i + 1;
+                }
+              }
+              else
+              {
+                setGUIProperty("db.actors.actor" + i + ".name", actorname);
+                i = i + 1;
               }
             }
           }
