@@ -8508,6 +8508,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ichoice++;
         }
 
+        if (conf.UseThumbsForPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
+        {
+          dlg.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
+          upd_choice[ichoice] = "personimages";
+          ichoice++;
+        }
+
         dlg.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
         upd_choice[ichoice] = "covermanager";
         ichoice++;
@@ -9353,7 +9360,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "fanart":
           conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
           conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
-          if (!MyFilmsDetail.IsInternetConnectionAvailable()) 
+          if (!MyFilmsDetail.IsInternetConnectionAvailable())
             break; // stop, if no internet available
           else
           {
@@ -9373,7 +9380,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
               }
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, false);
+            }
+          }
+          break;
+
+        case "personimages":
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+          if (!MyFilmsDetail.IsInternetConnectionAvailable())
+            break; // stop, if no internet available
+          else
+          {
+            string personartworkpath = string.Empty;
+            string imdbid = MyFilmsDetail.GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
+            sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+            if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
+            {
+              LogMyFilms.Debug("Download PersonImages: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - (started from main menu)");
+              personartworkpath = MyFilms.conf.StrPathArtist;
+              LogMyFilms.Debug("Download PersonArtwork to path: '" + personartworkpath + "'");
+              this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
             }
           }
           break;
