@@ -5642,6 +5642,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MessageBox.Show("The View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             dgViewsList.Focus();
           }
+          if (AntViewItem.Text == "OriginalTitle" || AntViewItem.Text == "TranslatedTitle" || AntViewItem.Text == "FormattedTitle")
+          {
+            if (AntViewValue.Text == "")
+            {
+              AntViewValue.Text = "*";
+            }
+          }
+          else
+          {
+            if (AntViewValue.Text == "*")
+            {
+              AntViewValue.Text = "";
+            }
+          }
         }
 
         private void buttonUpdateGrabberScripts_Click(object sender, EventArgs e)

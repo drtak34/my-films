@@ -3453,7 +3453,7 @@
           this.AntViewItem.TabIndex = 6;
           this.ToolTip1.SetToolTip(this.AntViewItem, "Select the field you want to use for this view.\r\nThe label is the name the specif" +
                   "ic view and will be shown in MyFilms, e.g. \"My Highrated Films\". It can be edite" +
-                  "d in the Ciew list.\r\n");
+                  "d in the View list.\r\n");
           this.AntViewItem.SelectedIndexChanged += new System.EventHandler(this.AntViewItem_SelectedIndexChanged);
           // 
           // groupBox5
