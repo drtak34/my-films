@@ -2108,6 +2108,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wselectindex = this.facadeFilms.SelectedListItemIndex;
       this.Change_Layout_Action(dlg.SelectedLabel);
 
+      if (this.facadeFilms.AlbumListLayout == null && dlg.SelectedLabel == 1) // return, if layout not supported by skin !
+      {
+        MyFilmsDetail.ShowNotificationDialog("MyFilms System Information", "Your skin does not support this layout !");
+        dlg.SelectedLabel = 0;
+      }
+
       if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
       {
         MyFilms.conf.WStrLayOut = dlg.SelectedLabel; // we share Layoutr for menu with Views ...
