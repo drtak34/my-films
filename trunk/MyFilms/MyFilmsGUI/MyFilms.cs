@@ -2977,11 +2977,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private string GetGroupImage(GUIListItem item)
     {
-      LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "'");
+      LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "'");
       string strThumbGroup = ""; // thumbnail for Groups/collections
-      if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg"))
+      if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg")) // check for longnames for nested groups
       {
         strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg";
+      }
+      else if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect + "." + item.Label + ".jpg")) // check for nested directories
+      {
+        strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect + "." + item.Label + ".jpg";
       }
       else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
       {
