@@ -4446,7 +4446,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Update_XML_database();
             LogMyFilms.Info("(Update_XML_database()) - Database Updated for created PictureThumb: " + strThumb);
         }
-
           
         private static string GetAspectRatio(string FileName)
         {
@@ -4766,7 +4765,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }, 0, 0, null);
                                   }) { Name = "MyFilmsTMDBLoader", IsBackground = true }.Start();
         }
-        
 
         //-------------------------------------------------------------------------------------------
         //  Change local Cover Image
@@ -4883,7 +4881,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
           return "";
         }
-
 
         public static Searchtitles GetSearchTitles(DataRow movieRecord, string mediapath)
         {
@@ -5114,7 +5111,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //LogMyFilms.Debug("GetIMDB_Id: returning IMDB_Id: '" + IMDB + "'");
           return IMDB;
         }
-
 
         private static string RemoveGroupNames(string FullName)
         {
@@ -6005,7 +6001,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         }
 
-
         private void Load_Logos(DataRow row)
         {
           //if ((ImgID2001 != null) && (ImgID2002 != null) && (MyFilms.conf.StrLogos))
@@ -6119,7 +6114,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             clearGUIProperty("logos_id2012");
         }
-
 
         //-------------------------------------------------------------------------------------------
         //  initialize exported fields to skin as '#myfilms.<ant db column name> 
@@ -6922,6 +6916,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Play Movie
         //-------------------------------------------------------------------------------------------
         {
+          LogMyFilms.Debug("Launch_Movie() select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "', forceExternalPlayer = '" + bForceExternalPlayback + "'");
           //enableNativeAutoplay(); // in case, other plugin disabled it - removed, as we now do start external player ourselves ...
 
           #region Version Select Dialog
@@ -7049,7 +7044,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           #endregion
 
-          LogMyFilms.Debug("(Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
           setProcessAnimationStatus(true, m_SearchAnimation);
           #region Run externaly Program before Playing if defined in setup
           if (Helper.FieldIsSet(MyFilms.conf.CmdPar)) 
@@ -7106,7 +7100,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Info("Launch_Movie() - SingleItem found ('" + newItems[0] + "'), filestorage = '" + filestorage + "'");
             if (newItems[0].ToString().ToLower().EndsWith("bdmv")) isBRcontent = true;
 
-            if (!isBRcontent || (Helper.IsBDHandlerAvailableAndEnabled && !bForceExternalPlayback))
+            if ((!isBRcontent || Helper.IsBDHandlerAvailableAndEnabled) && !bForceExternalPlayback)
             {
               #region internal playback
               LogMyFilms.Info("Launch_Movie() - start internal playback");
@@ -7134,20 +7128,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else if (MyFilms.conf.ExternalPlayerPath.Length > 0)
             {
               #region external player playback (myfilms)
-              LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath.Length + "'");
-              string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(
-                new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-              foreach (string s in split)
+              LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath + "', argument (filestorage) = '" + filestorage + "'");
+
+              if (bForceExternalPlayback)
               {
-                if (filestorage.ToLower().Contains(s.ToLower()) || bForceExternalPlayback)
+                try
                 {
-                  try
+                  LaunchExternalPlayer(filestorage);
+                  return;
+                }
+                catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
+              }
+              else
+              {
+                string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string s in split)
+                {
+                  if (filestorage.ToLower().Contains(s.ToLower())) // if extension is defined to use external player
                   {
-                    LaunchExternalPlayer(filestorage);
-                  }
-                  catch (Exception ex)
-                  {
-                    LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex);
+                    try
+                    {
+                      LaunchExternalPlayer(filestorage);
+                      return;
+                    }
+                    catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
                   }
                 }
               }
@@ -7587,7 +7591,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             if (!PlayBackEventIsOfConcern(type, filename))
             {
-              LogMyFilms.Debug("OnPlayBackStarted was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
+              if (PlayBackEventIsOfConcernAsTrailer(type, filename))
+              {
+                LogMyFilms.Debug("OnPlayBackEnded was initiated, identified that MyFilms Trailer was played - filename: '" + filename + "'");
+                GUIWindowManager.OnNewAction -= new OnActionHandler(GUIWindowManager_OnNewAction); // make sure it doesn't register twice ....
+                GUIWindowManager.OnNewAction += new OnActionHandler(GUIWindowManager_OnNewAction);
+              }
+              else
+                LogMyFilms.Debug("OnPlayBackStarted was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
               return;
             }
             LogMyFilms.Debug("OnPlayBackStarted was initiated - filename: '" + filename + "'");
@@ -7971,37 +7982,66 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private void GUIWindowManager_OnNewAction(MediaPortal.GUI.Library.Action action)
         {
           LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Action detected - '" + action.wID + "'");
+          LogMyFilms.Debug("GUIWindowManager_OnNewAction(): trailerscrobbleactive = '" + MyFilms.trailerscrobbleactive + "'");
           switch (action.wID)
           {
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_RECORD:
               {
-                int duration = (int)g_Player.Duration;
-                int currentposition = (int)g_Player.CurrentPosition;
-                string file = g_Player.CurrentFile;
-                string title = g_Player.currentTitle;
+                if (!MyFilms.trailerscrobbleactive)
+                {
+                  int duration = (int)g_Player.Duration;
+                  int currentposition = (int)g_Player.CurrentPosition;
+                  string file = g_Player.CurrentFile;
+                  string title = g_Player.currentTitle;
+                  LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Movie Action: Get Fanart Snapshot from current position (position = '" + currentposition + "', duration = '" + duration + "')");
 
-                GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079847)); // MyFilms Fanart Creator
-                dlgYesNo.SetLine(1, ""); // dlgYesNo.SetLine(1, "-> " + currentposition + " s.");
-                dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079852) + " ?"); // Create 'snapshot' fanart from current playback position
-                dlgYesNo.SetLine(3, "");
-                // dlgYesNo.SetNoLabel("Cancel");
-                dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
-                //dlgYesNo.DoModal(GetID);
-                if (!(dlgYesNo.IsConfirmed))
-                  return;
-                Menu_CreateFanart_OnMoviePosition_Parameterized(duration, currentposition, file, title);
+                  GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                  dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079847)); // MyFilms Fanart Creator
+                  dlgYesNo.SetLine(1, ""); // dlgYesNo.SetLine(1, "-> " + currentposition + " s.");
+                  dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079852) + " ?"); // Create 'snapshot' fanart from current playback position
+                  dlgYesNo.SetLine(3, "");
+                  // dlgYesNo.SetNoLabel("Cancel");
+                  dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
+                  //dlgYesNo.DoModal(GetID);
+                  if (!(dlgYesNo.IsConfirmed))
+                    return;
+                  Menu_CreateFanart_OnMoviePosition_Parameterized(duration, currentposition, file, title);
+                }
+                break;
+              }
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY:
+              {
+                if (MyFilms.trailerscrobbleactive)
+                {
+                  LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Trailer Action: Play main movie");
+                  // ToDo: Play main movie
+                }
+                break;
+              }
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU:
+              {
+                if (MyFilms.trailerscrobbleactive)
+                {
+                  LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Trailer Action: Show Options menu");
+                  // ToDo: Show Options menu
+
+                }
+                break;
+              }
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_CHAPTER:
+              {
+                if (MyFilms.trailerscrobbleactive)
+                {
+                  // ToDo: Play next Trailer
+                }
                 break;
               }
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR:
-            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU:
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_KEY_PRESSED:
-            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY:
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_MUSIC_PLAY:
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_PICTURE:
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_PICTURE:
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU:
-            case MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_ITEM:
             case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_ITEM:
             default:
               break;
@@ -8465,8 +8505,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return wresult[dlg.SelectedLabel].ToString();
                 }
             }
-            else
-            // No Movie File Found
+            else // No Movie File Found
             {
                 LogMyFilms.Info("File not found for movie '" + filename.ToString() + "'; string search '" + wsearchfile.ToString() + "'");
                 return string.Empty;
@@ -8578,6 +8617,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     wzone = wzone + "\n" + champselect;
             }
         }
+
         static public string SearchMovie(string filename, string StrDirStor)
         {
             //check if divx is on Disk
@@ -8625,7 +8665,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return "false";
             }
         }
-
 
         static public bool CheckMovie(int idMovie)
         {
@@ -8784,33 +8823,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
             }
         }
-        
-        
+
         static public bool MountImageFile(int WindowID, string file)
         {
-          MPSettings mpSettings = new MPSettings();    
-            m_askBeforePlayingDVDImage = mpSettings.GetValueAsBool("daemon", "askbeforeplaying", false);
-//            }
-            if (!DaemonTools.IsMounted(file))
+          LogMyFilms.Warn("MountImageFile() - called with WindowID = '" + WindowID + "', file = '" + file + "'");
+          MPSettings mpSettings = new MPSettings();
+          m_askBeforePlayingDVDImage = mpSettings.GetValueAsBool("daemon", "askbeforeplaying", false);
+          if (!DaemonTools.IsMounted(file))
+          {
+            if (m_askBeforePlayingDVDImage)
             {
-                if (m_askBeforePlayingDVDImage)
-                {
-                    GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                    if (dlgYesNo != null)
-                    {
-                        dlgYesNo.SetHeading(GUILocalizeStrings.Get(713));
-                        dlgYesNo.SetLine(1, GUILocalizeStrings.Get(531));
-                        dlgYesNo.DoModal(WindowID);
-                        if (!dlgYesNo.IsConfirmed) return false;
-                    }
-                }
-                string vdrive = string.Empty;
-                DaemonTools.Mount(file, out vdrive);
-                if (vdrive == string.Empty && file != String.Empty) return false; // protected share, with wrong pincode
+              GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+              if (dlgYesNo != null)
+              {
+                dlgYesNo.SetHeading(GUILocalizeStrings.Get(713));
+                dlgYesNo.SetLine(1, GUILocalizeStrings.Get(531));
+                dlgYesNo.DoModal(WindowID);
+                if (!dlgYesNo.IsConfirmed) return false;
+              }
             }
+            string vdrive = string.Empty;
+            DaemonTools.Mount(file, out vdrive);
+            if (vdrive == string.Empty && file != String.Empty) return false; // protected share, with wrong pincode
+          }
 
-            return DaemonTools.IsMounted(file);
+          return DaemonTools.IsMounted(file);
         }
+
         public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
         {
             try
@@ -8839,7 +8878,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Warn("setProcessAnimationStatus '" + enable + "' - skin control missing? : " + ex.Message);
             }
         }
-
 
         static public string Replace_String(string file)
         {
@@ -8918,7 +8956,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
-
         static public void RunAMCupdater(string exeName, string argsLine)
         {
             if (exeName.Length > 0)
@@ -8952,7 +8989,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
             }
         }
-
 
         //-------------------------------------------------------------------------------------------
         //  Search All Trailerfiles locally
@@ -9166,7 +9202,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Database Updated !");
         }
 
-      private static void HandleWakeUpNas()
+        private static void HandleWakeUpNas()
         {
             string hostName;
             bool isWakeOnLanEnabled;
