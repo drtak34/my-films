@@ -5194,6 +5194,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool isperson = IsPersonField(fieldType);
       bool isdate = IsDateField(fieldType);
       bool issplitfield = IsSplittableField(WStrSort);
+      bool istitlefield = IsTitleField(WStrSort);
       bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
       bool showEmptyValues = MyFilms.conf.BoolShowEmptyValuesInViews;
       bool isrecentlyadded = (WStrSort == "RecentlyAdded"); // calculate recently added fields
@@ -5428,9 +5429,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               item = new GUIListItem();
               //item.ItemId = number;
               string label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
-              label = (isindexed && indexedChars > 0 && label.Length >= indexedChars) ? label.Substring(0, indexedChars).ToUpperInvariant() : label;
+              string label3 = (istitlefield && !isindexed && label.IndexOf(conf.TitleDelim) > 0) ? label.Substring(0, label.LastIndexOf(conf.TitleDelim)) : ""; // loads title path
+              if (istitlefield && label.IndexOf(conf.TitleDelim) > 0) label = label.Substring(label.LastIndexOf(conf.TitleDelim) + 1);
+              if (isindexed && indexedChars > 0 && label.Length >= indexedChars) label = label.Substring(0, indexedChars).ToUpperInvariant();
               item.Label = (label.Length == 0) ? EmptyFacadeValue : label; // show <empty> value if empty
               item.Label2 = (isindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
+              item.Label3 = label3;
               item.Path = WStrSort.ToLower();
               //item.TVTag = (isperson) ? "person" : "group";
               item.IsFolder = true;
@@ -5453,9 +5457,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //item.ItemId = number; // Only used in GetFilmList
         // item.Label = (wchampselect.Length == 0) ? EmptyFacadeValue : (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
         string label = (isrecentlyadded) ? wchampselect.Substring(1) : wchampselect;
-        label = (isindexed && indexedChars > 0 && label.Length >= indexedChars) ? label.Substring(0, indexedChars).ToUpperInvariant() : label;
+        string label3 = (istitlefield && !isindexed && label.IndexOf(conf.TitleDelim) > 0) ? label.Substring(0, label.LastIndexOf(conf.TitleDelim)) : ""; // loads title path
+        if (istitlefield && label.IndexOf(conf.TitleDelim) > 0) label = label.Substring(label.LastIndexOf(conf.TitleDelim) + 1);
+        if (isindexed && indexedChars > 0 && label.Length >= indexedChars) label = label.Substring(0, indexedChars).ToUpperInvariant();
         item.Label = (label.Length == 0) ? EmptyFacadeValue : label; // show <empty> value if empty
         item.Label2 = (isindexed) ? (Wnb_enrIndexed + " (" + Wnb_enr + ")") : Wnb_enr.ToString(); // preset - will be repopulated with counts, if requested in thread ...
+        item.Label3 = label3;
         //item.Label3 = WStrSort;
         //if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) MediaPortal.Util.Utils.SetDefaultIcons(item);
         item.Path = WStrSort.ToLower();
