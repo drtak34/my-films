@@ -5360,6 +5360,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                         foreach (grabber.DBPersonInfo person in listepersons)
                                         {
                                           bool firstpersonimage = true;
+                                          bool onlysinglepersonimage = true;
                                           grabber.DBPersonInfo persondetails = new DBPersonInfo();
                                           grabber.TheMoviedb TheMoviedb = new grabber.TheMoviedb();
                                           persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
@@ -5380,6 +5381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                               if (!(filenameperson == "already" && filename1person == "already")) filenameperson = "added";
                                               firstpersonimage = false;
                                               i++;
+                                              if (onlysinglepersonimage) break;
                                             }
                                           }
                                           else
@@ -5426,6 +5428,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                                   //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
                                                   //}
                                                 }
+                                                if (onlysinglepersonimage) break;
                                               }
                                             }
                                             else
