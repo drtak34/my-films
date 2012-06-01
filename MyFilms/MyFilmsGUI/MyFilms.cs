@@ -38,6 +38,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Xml;
 
   using Grabber;
+  using Grabber.TheMovieDb;
 
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
@@ -215,6 +216,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const int cacheThumbHeight = 600;
 
     public const string ImdbBaseUrl = "http://www.imdb.com/";
+    public const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
 
     enum Controls : int
     {
@@ -12857,14 +12859,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void bgUpdateActors_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      //BackgroundWorker worker = sender as BackgroundWorker;
-      //Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+      ////BackgroundWorker worker = sender as BackgroundWorker;
+      ////Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
       //ArrayList persons = e.Argument as ArrayList;
-      
+      //Grabber.TheMovieDb.TmdbAPI api = new TmdbAPI(TmdbApiKey);
+
+
       //foreach (string person in persons)
       //{
       //  // ToDo: Reenable AddActor() to scrape actor infos - make sure, it's not causing too much load...
       //  // AddActor(person);
+      //  TmdbPerson[] personsearchresult = api.PersonSearch(person);
+      //  foreach (TmdbPerson tmdbPerson in personsearchresult)
+      //  {
+      //  }
       //}
     }
 
