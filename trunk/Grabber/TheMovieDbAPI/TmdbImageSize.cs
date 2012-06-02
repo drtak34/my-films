@@ -1,4 +1,4 @@
-﻿namespace Grabber.TheMovieDb
+﻿namespace Grabber.TheMovieDbAPI
 {
   public enum TmdbImageSize
     {
