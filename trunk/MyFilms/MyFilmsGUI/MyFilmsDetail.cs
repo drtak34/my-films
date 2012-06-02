@@ -929,8 +929,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // Updates ...
                 choiceViewMenu.Add("updatesmenu");
 
-                dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
-                choiceViewMenu.Add("covermanager");
+                if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsCoverManager.xml"))
+                {
+                  dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
+                  choiceViewMenu.Add("covermanager");
+                }
 
                 dlgmenu.Add(GUILocalizeStrings.Get(10798767)); // Fanart Manager ...
                 choiceViewMenu.Add("fanartmanager");
