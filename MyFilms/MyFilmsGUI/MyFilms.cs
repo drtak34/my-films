@@ -38,7 +38,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Xml;
 
   using Grabber;
-  using Grabber.TheMovieDb;
+  using Grabber.TheMovieDbAPI;
 
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
