@@ -1122,6 +1122,38 @@ Public Class AntProcessor
                                     End If
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart not Found : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                 End If
+
+                                If CurrentSettings.Movie_PersonArtwork_Path.Length > 0 And System.IO.Directory.Exists(CurrentSettings.Movie_PersonArtwork_Path) Then
+                                    Dim filenameperson As String = String.Empty
+                                    Dim filename1person As String = String.Empty
+                                    Dim filename2person As String = String.Empty
+                                    Dim listepersons As List(Of Grabber.DBPersonInfo) = fanart(0).Persons
+                                    For Each person As Grabber.DBPersonInfo In listepersons
+                                        Dim firstpersonimage As Boolean = True
+                                        Dim onlysinglepersonimage As Boolean = True
+                                        Dim persondetails As Grabber.DBPersonInfo = New DBPersonInfo()
+                                        Dim TheMoviedb As New Grabber.TheMoviedb()
+                                        persondetails = TheMoviedb.getPersonsById(person.Id, String.Empty)
+                                        bgwManualUpdate.ReportProgress(ProcessCounter, "PersonImages : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString & "Person Artwork - " + persondetails.Images.Count & " Images found for '" + persondetails.Name & "'")
+                                        If persondetails.Images.Count > 0 Then
+                                            Dim i As Integer = 0
+                                            For Each image As String In persondetails.Images
+                                                filename1person = Grabber.GrabUtil.DownloadPersonArtwork(CurrentSettings.Movie_PersonArtwork_Path, image, persondetails.Name, True, firstpersonimage, filenameperson)
+                                                If filenameperson = String.Empty Then
+                                                    filenameperson = filename1person
+                                                End If
+                                                If Not (filenameperson = "already" AndAlso filename1person = "already") Then
+                                                    filenameperson = "added"
+                                                End If
+                                                firstpersonimage = False
+                                                i += 1
+                                                If onlysinglepersonimage Then
+                                                    Exit For
+                                                End If
+                                            Next
+                                        End If
+                                    Next
+                                End If
                             End If
                         End If
                     Case "Update NFO File"

@@ -1845,13 +1845,29 @@ Public Class AntRecord
                     If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
                         Dim fanart As List(Of Grabber.DBMovieInfo)
                         Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                        fanart = Gb.GetFanart(title, ttitle, year, director, _InternetSearchHintIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, String.Empty, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
+                        fanart = Gb.GetFanart(title, ttitle, year, director, _InternetSearchHintIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
                         If fanart.Count = 1 Then
                             If fanart(0).Backdrops.Count > 0 Then
                                 TempValue = fanart(0).Backdrops(0).ToString
                                 If String.IsNullOrEmpty(TempValue) = False Then
                                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                                 End If
+                            End If
+                            If CurrentSettings.Movie_PersonArtwork_Path.Length > 0 And System.IO.Directory.Exists(CurrentSettings.Movie_PersonArtwork_Path) Then
+                                Dim filenameperson As String = String.Empty
+                                Dim listepersons As List(Of Grabber.DBPersonInfo) = fanart(0).Persons
+                                For Each person As Grabber.DBPersonInfo In listepersons
+                                    Dim TheMoviedb As New Grabber.TheMoviedb()
+                                    Dim persondetails As Grabber.DBPersonInfo = TheMoviedb.getPersonsById(person.Id, String.Empty)
+                                    If persondetails.Images.Count > 0 Then
+                                        For Each image As String In persondetails.Images
+                                            If System.IO.File.Exists(System.IO.Path.Combine(CurrentSettings.Movie_PersonArtwork_Path, persondetails.Name + ".jpg")) Then
+                                                Exit For
+                                            End If
+                                            Grabber.GrabUtil.DownloadPersonArtwork(CurrentSettings.Movie_PersonArtwork_Path, image, persondetails.Name, True, True, filenameperson)
+                                        Next
+                                    End If
+                                Next
                             End If
                         End If
                     ElseIf CurrentSettings.Create_Cover_From_Movie Then ' create missing fanart by thumbnailer
