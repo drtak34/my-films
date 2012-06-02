@@ -8534,9 +8534,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ichoice++;
         }
 
-        dlg.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
-        upd_choice[ichoice] = "covermanager";
-        ichoice++;
+        if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsCoverManager.xml"))
+        {
+          dlg.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
+          upd_choice[ichoice] = "covermanager";
+          ichoice++;
+        }
 
         if (MyFilms.conf.StrFanart)
         {
@@ -13957,6 +13960,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void CheckSkinInterfaceVersion()
       {
+        LogMyFilms.Info("CheckSkinInterfaceVersion(): Current  Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
         string Skin = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
         if (currentSkin == null || currentSkin != Skin)
         {
@@ -13968,24 +13972,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           bool success = GetSkinInterfaceVersion(ref VersionMajor, ref VersionMinor, ref VersionBuild, ref VersionRevision);
           if (success)
           {
-            LogMyFilms.Info("OnPageLoad(): Current  Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
-            LogMyFilms.Info("OnPageLoad(): Required Skin Interface Version = 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
-            if (VersionMajor < SkinInterfaceVersionMajor || VersionMajor == 0)
+            LogMyFilms.Info("CheckSkinInterfaceVersion(): Current  Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
+            LogMyFilms.Info("CheckSkinInterfaceVersion(): Required Skin Interface Version = 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
+            if (VersionMajor != SkinInterfaceVersionMajor || VersionMajor == 0)
             {
               InitMainScreen(false);
               this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin is not compatible!", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
-              if (VersionMajor > 0)
-                GUIWindowManager.ShowPreviousWindow();
+              
+              if (VersionMajor > 0) GUIWindowManager.ShowPreviousWindow(); // leave plugin
             }
-            else if (VersionMinor < SkinInterfaceVersionMinor)
+            else if (VersionMinor != SkinInterfaceVersionMinor)
             {
               InitMainScreen(false);
-              this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
+              if (VersionMinor < SkinInterfaceVersionMinor)
+                this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
+              else
+                this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be downgraded to properly work with this version !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
             }
           }
           else
           {
-            LogMyFilms.Info("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "'");
+            LogMyFilms.Info("CheckSkinInterfaceVersion(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "'");
             InitMainScreen(false);
             this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
           }
