@@ -13960,7 +13960,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void CheckSkinInterfaceVersion()
       {
-        LogMyFilms.Info("CheckSkinInterfaceVersion(): Current  Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
         string Skin = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
         if (currentSkin == null || currentSkin != Skin)
         {
@@ -13996,6 +13995,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             InitMainScreen(false);
             this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
           }
+        }
+        else
+        {
+          LogMyFilms.Info("CheckSkinInterfaceVersion(): skipping check - no skin change - Current Skin is still '" + currentSkin + "'");
         }
       CheckAndLogEnhancedSkinControls();
       }
