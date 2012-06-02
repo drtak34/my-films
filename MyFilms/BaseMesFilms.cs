@@ -1746,6 +1746,9 @@ namespace MyFilmsPlugin.MyFilms
             MFMovie tmpmovie = new MFMovie();
             tmpmovie = movie;
             GetMovieArtworkDetails(movie.MovieRow, movie.MFconfig, ref tmpmovie);
+            // remove group title, if any
+            if (tmpmovie.Title.IndexOf(@"\") > 0) tmpmovie.Title = tmpmovie.Title.Substring(tmpmovie.Title.LastIndexOf(@"\" + 1));
+            if (tmpmovie.TranslatedTitle.IndexOf(@"\") > 0) tmpmovie.TranslatedTitle = tmpmovie.TranslatedTitle.Substring(tmpmovie.TranslatedTitle.LastIndexOf(@"\" + 1));
             movielistwithartwork.Add(tmpmovie);
           }
           // foreach (MFMovie movie in movielistwithartwork) LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");
