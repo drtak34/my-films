@@ -1,9 +1,9 @@
-﻿namespace Grabber.TheMovieDb
+﻿namespace Grabber.TheMovieDbAPI
 {
   using System.Xml.Serialization;
 
-  [XmlType("person")]
-    public class TmdbCastPerson
+  [XmlType("movie")]
+    public class TmdbPersonFilm
     {
         [XmlAttribute("name")]
         public string Name { get; set; }
@@ -18,7 +18,6 @@
         public string Character { get; set; }
 
         [XmlAttribute("id")]
-        public int Id { get; set; }        
-
+        public int Id { get; set; }
     }
 }

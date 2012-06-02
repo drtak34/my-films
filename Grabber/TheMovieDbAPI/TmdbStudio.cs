@@ -1,13 +1,10 @@
-﻿namespace Grabber.TheMovieDb
+﻿namespace Grabber.TheMovieDbAPI
 {
   using System.Xml.Serialization;
 
-  [XmlType("category")]
-    public class TmdbCategory
+  [XmlType("studio")]
+    public class TmdbStudio
     {
-        [XmlAttribute("type")]
-        public string Type { get; set; }
-
         [XmlAttribute("name")]
         public string Name { get; set; }
 

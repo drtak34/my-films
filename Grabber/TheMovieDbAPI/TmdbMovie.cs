@@ -1,4 +1,4 @@
-﻿namespace Grabber.TheMovieDb
+﻿namespace Grabber.TheMovieDbAPI
 {
   using System;
   using System.Xml.Serialization;
