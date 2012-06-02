@@ -1396,10 +1396,10 @@ namespace MyFilmsPlugin.MyFilms
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
           //LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
-          //LogMyFilms.Debug("ReadDataMovies() - Strating ... with : StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
-          LogMyFilms.Debug("ReadDataMovies() - StrDfltSelect       = '" + StrDfltSelect + "'");
-          LogMyFilms.Debug("ReadDataMovies() - StrSelect           = '" + StrSelect + "'");
-          LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens = '" + StrSort + " " + StrSortSens + "'");
+          //LogMyFilms.Debug("ReadDataMovies() - Starting ... with : StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
+          LogMyFilms.Debug("ReadDataMovies() - StrDfltSelect           = '" + StrDfltSelect + "'");
+          LogMyFilms.Debug("ReadDataMovies() - StrSelect               = '" + StrSelect + "'");
+          LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens/all = '" + StrSort + " " + StrSortSens + "', '" + all + "'");
           Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
           bool iscached = true;
           if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
@@ -1419,7 +1419,7 @@ namespace MyFilmsPlugin.MyFilms
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
           watchReadMovies.Stop();
-          LogMyFilms.Debug("ReadDataMovies() - Finished ... (cached = '" + iscached + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("ReadDataMovies() - Finished ...  returning '" + movies.Length + "' movies (cached = '" + iscached + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
           return movies;
         }
 
@@ -1747,8 +1747,8 @@ namespace MyFilmsPlugin.MyFilms
             tmpmovie = movie;
             GetMovieArtworkDetails(movie.MovieRow, movie.MFconfig, ref tmpmovie);
             // remove group title, if any
-            if (tmpmovie.Title.IndexOf(@"\") > 0) tmpmovie.Title = tmpmovie.Title.Substring(tmpmovie.Title.LastIndexOf(@"\" + 1));
-            if (tmpmovie.TranslatedTitle.IndexOf(@"\") > 0) tmpmovie.TranslatedTitle = tmpmovie.TranslatedTitle.Substring(tmpmovie.TranslatedTitle.LastIndexOf(@"\" + 1));
+            if (tmpmovie.Title.IndexOf(movie.MFconfig.TitleDelim) > 0) tmpmovie.Title = tmpmovie.Title.Substring(tmpmovie.Title.LastIndexOf(movie.MFconfig.TitleDelim) + 1);
+            if (tmpmovie.TranslatedTitle.IndexOf(movie.MFconfig.TitleDelim) > 0) tmpmovie.TranslatedTitle = tmpmovie.TranslatedTitle.Substring(tmpmovie.TranslatedTitle.LastIndexOf(movie.MFconfig.TitleDelim) + 1);
             movielistwithartwork.Add(tmpmovie);
           }
           // foreach (MFMovie movie in movielistwithartwork) LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");

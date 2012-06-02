@@ -7624,7 +7624,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MovieStarted(movie);
               LogMyFilms.Debug("OnPlayBackStarted(): Fired 'MovieStarted' event with movie = '" + movie.Title + "'");
             }
-            
+
+            string otitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
+            string ttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+            LogMyFilms.Debug("OnPlayBackStarted() was initiated - movie index = '" + MyFilms.conf.StrIndex + "', count = '" + MyFilms.r.Length + "', otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
+
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedMovie = movie; // store movie object
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
@@ -7704,9 +7708,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction);
             }
-            catch (Exception)
-            {
-            }  
+            catch (Exception) { }  
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
@@ -7724,6 +7726,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             try
             {
                 DataRow[] r1 = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
+                string otitle = r1[MyFilms.conf.StrPlayedIndex]["OriginalTitle"].ToString();
+                string ttitle = r1[MyFilms.conf.StrPlayedIndex]["TranslatedTitle"].ToString();
+                LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - movie index = '" + MyFilms.conf.StrPlayedIndex + "', count = '" + r1.Length + "', otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
                 // Handle all movie files from idMovie
                 ArrayList movies = new ArrayList();
                 int playTimePercentage = 0; // Set watched flag after 80% of total played time
