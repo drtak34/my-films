@@ -145,5 +145,11 @@
     <!-- TEST THUMBS AND LABELS for visibility check  -->
     <!-- <import>MyFilms.TestControls.xml</import> -->
 
+
+    <!-- LATEST MEDIA IN MENU  -->
+    <!-- <import>MyFilms.LatestMedia.xml</import> -->
+
+<import>MyFilms.LatestMedia.xml</import>
+
   </controls>
 </window>
