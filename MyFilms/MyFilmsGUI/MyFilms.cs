@@ -12138,10 +12138,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     private void SearchIncompleteMovies()
     {
-      // first select the property to be searching on
       AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      List<string> choiceSearch = new List<string>();
       ArrayList w_tableau = new ArrayList();
       ArrayList w_count = new ArrayList();
       string wproperty = string.Empty;
@@ -12151,21 +12150,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798717)); // incomplete movie data
-      DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+      DataRow[] dataRows = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
       LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
       LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrSorta     : '" + conf.StrSorta + "'");
       LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
-      foreach (DataRow wsr in wr)
+      foreach (DataRow dataRow in dataRows)
       {
         foreach (DataColumn dc in ds.Movie.Columns)
         {
-          //if (wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()))
-          if (string.IsNullOrEmpty(wsr[dc.ColumnName].ToString())) //Check if field is empty // old: wsr[dc.ColumnName].ToString().Length == 0
+          if (string.IsNullOrEmpty(dataRow[dc.ColumnName].ToString())) //Check if field is empty // old: wsr[dc.ColumnName].ToString().Length == 0
             if (w_tableau.Contains(dc.ColumnName.ToLower()))
-            // search position in w_tableau for adding +1 to w_count
             {
-              for (int i = 0; i < w_tableau.Count; i++)
+              for (int i = 0; i < w_tableau.Count; i++) // search position in w_tableau for adding +1 to w_count
               {
                 if (w_tableau[i].ToString() == dc.ColumnName.ToLower())
                 {
@@ -12174,23 +12171,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               }
             }
-            else
-            // add to w_tableau and move 1 to w_count
+            else // new item - add it to w_tableau and with count 1 to w_count
             {
               w_tableau.Add(dc.ColumnName.ToLower());
               w_count.Add(1);
             }
         }
       }
-      LogMyFilms.Debug("(SearchIncompleteMovies) - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
-      if (w_tableau.Count == 0) // NodeLabelEditEventArgs Results found
+      LogMyFilms.Debug("SearchIncompleteMovies() - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
+      if (w_tableau.Count == 0) // no results found
       {
         GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
         dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
         dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625)); // no result found for searched items
         dlgOk.DoModal(GetID);
-        if (dlg.SelectedLabel == -1)
-          return;
+        if (dlg.SelectedLabel == -1) return;
         return;
       }
       dlg.Reset();
@@ -12212,10 +12207,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1)
-        return;
+      if (dlg.SelectedLabel == -1) return;
       wproperty = choiceSearch[dlg.SelectedLabel];
-      LogMyFilms.Debug("(SearchIncompleteMovies) - ChosenProperty is '" + wproperty + "'");
+      LogMyFilms.Debug("SearchIncompleteMovies() - ChosenProperty is '" + wproperty + "'");
 
       conf.ViewContext = ViewContext.Movie;
       conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
