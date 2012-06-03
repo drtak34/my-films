@@ -57,4 +57,41 @@
         End Try
         ImageViewer.ShowDialog()
     End Sub
+
+    Private Sub ButtonSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonSelectAll.Click
+        For i As Integer = 0 To Me.DgvUpdateMovie.RowCount - 1
+            Me.DgvUpdateMovie(0, i).Value = True
+        Next
+    End Sub
+
+    Private Sub ButtonSelectNone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonSelectNone.Click
+        For i As Integer = 0 To Me.DgvUpdateMovie.RowCount - 1
+            Me.DgvUpdateMovie(0, i).Value = False
+        Next
+    End Sub
+    Private Sub ButtonSelectOnlyMissingData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonSelectOnlyMissingData.Click
+        For i As Integer = 0 To Me.DgvUpdateMovie.RowCount - 1
+            Dim itemName As String = Me.DgvUpdateMovie(1, i).Value
+            Dim itemValueOld As String = Me.DgvUpdateMovie(2, i).Value
+            Dim itemValueNew As String = Me.DgvUpdateMovie(3, i).Value
+            If String.IsNullOrEmpty(itemValueOld) And Not String.IsNullOrEmpty(itemValueNew) Then
+                Me.DgvUpdateMovie(0, i).Value = True
+            Else
+                Me.DgvUpdateMovie(0, i).Value = False
+            End If
+        Next
+    End Sub
+
+    Private Sub ButtonSelectOnlyNonEmptyData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonSelectOnlyNonEmptyData.Click
+        For i As Integer = 0 To Me.DgvUpdateMovie.RowCount - 1
+            Dim itemName As String = Me.DgvUpdateMovie(1, i).Value
+            Dim itemValueOld As String = Me.DgvUpdateMovie(2, i).Value
+            Dim itemValueNew As String = Me.DgvUpdateMovie(3, i).Value
+            If Not String.IsNullOrEmpty(itemValueNew) Then
+                Me.DgvUpdateMovie(0, i).Value = True
+            Else
+                Me.DgvUpdateMovie(0, i).Value = False
+            End If
+        Next
+    End Sub
 End Class

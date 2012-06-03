@@ -23,23 +23,30 @@ Partial Class frmMovieUpdate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMovieUpdate))
         Me.DgvUpdateMovie = New System.Windows.Forms.DataGridView
-        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
-        Me.MovieBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ButtonOK = New System.Windows.Forms.Button
-        Me.ButtonCancel = New System.Windows.Forms.Button
         Me.cbUpdate = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.tbItem = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.tbCurrent = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.tbNew = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
+        Me.MovieBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ButtonOK = New System.Windows.Forms.Button
+        Me.ButtonCancel = New System.Windows.Forms.Button
         Me.PictureBoxOld = New System.Windows.Forms.PictureBox
         Me.PictureBoxNew = New System.Windows.Forms.PictureBox
+        Me.ButtonSelectOnlyMissingData = New System.Windows.Forms.Button
+        Me.ButtonSelectOnlyNonEmptyData = New System.Windows.Forms.Button
+        Me.ButtonSelectAll = New System.Windows.Forms.Button
+        Me.ButtonSelectNone = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox
         CType(Me.DgvUpdateMovie, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MovieBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBoxOld, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBoxNew, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DgvUpdateMovie
@@ -49,46 +56,24 @@ Partial Class frmMovieUpdate
         Me.DgvUpdateMovie.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DgvUpdateMovie.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvUpdateMovie.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DgvUpdateMovie.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DgvUpdateMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvUpdateMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cbUpdate, Me.tbItem, Me.tbCurrent, Me.tbNew})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvUpdateMovie.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvUpdateMovie.Location = New System.Drawing.Point(3, 4)
         Me.DgvUpdateMovie.Name = "DgvUpdateMovie"
         Me.DgvUpdateMovie.RowHeadersVisible = False
         Me.DgvUpdateMovie.Size = New System.Drawing.Size(904, 433)
         Me.DgvUpdateMovie.TabIndex = 0
-        '
-        'AntMovieCatalog
-        '
-        Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
-        Me.AntMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'MovieBindingSource
-        '
-        Me.MovieBindingSource.DataMember = "Movie"
-        Me.MovieBindingSource.DataSource = Me.AntMovieCatalog
-        '
-        'ButtonOK
-        '
-        Me.ButtonOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ButtonOK.Location = New System.Drawing.Point(821, 568)
-        Me.ButtonOK.Name = "ButtonOK"
-        Me.ButtonOK.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonOK.TabIndex = 1
-        Me.ButtonOK.Text = "OK"
-        Me.ButtonOK.UseVisualStyleBackColor = True
-        '
-        'ButtonCancel
-        '
-        Me.ButtonCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.ButtonCancel.Location = New System.Drawing.Point(728, 568)
-        Me.ButtonCancel.Name = "ButtonCancel"
-        Me.ButtonCancel.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonCancel.TabIndex = 2
-        Me.ButtonCancel.Text = "Cancel"
-        Me.ButtonCancel.UseVisualStyleBackColor = True
         '
         'cbUpdate
         '
@@ -116,6 +101,37 @@ Partial Class frmMovieUpdate
         Me.tbNew.HeaderText = "New Value"
         Me.tbNew.Name = "tbNew"
         '
+        'AntMovieCatalog
+        '
+        Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
+        Me.AntMovieCatalog.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'MovieBindingSource
+        '
+        Me.MovieBindingSource.DataMember = "Movie"
+        Me.MovieBindingSource.DataSource = Me.AntMovieCatalog
+        '
+        'ButtonOK
+        '
+        Me.ButtonOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ButtonOK.Location = New System.Drawing.Point(782, 549)
+        Me.ButtonOK.Name = "ButtonOK"
+        Me.ButtonOK.Size = New System.Drawing.Size(86, 33)
+        Me.ButtonOK.TabIndex = 1
+        Me.ButtonOK.Text = "OK"
+        Me.ButtonOK.UseVisualStyleBackColor = True
+        '
+        'ButtonCancel
+        '
+        Me.ButtonCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.ButtonCancel.Location = New System.Drawing.Point(782, 473)
+        Me.ButtonCancel.Name = "ButtonCancel"
+        Me.ButtonCancel.Size = New System.Drawing.Size(86, 23)
+        Me.ButtonCancel.TabIndex = 2
+        Me.ButtonCancel.Text = "Cancel"
+        Me.ButtonCancel.UseVisualStyleBackColor = True
+        '
         'PictureBoxOld
         '
         Me.PictureBoxOld.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -137,6 +153,56 @@ Partial Class frmMovieUpdate
         Me.PictureBoxNew.TabIndex = 4
         Me.PictureBoxNew.TabStop = False
         '
+        'ButtonSelectOnlyMissingData
+        '
+        Me.ButtonSelectOnlyMissingData.Location = New System.Drawing.Point(20, 65)
+        Me.ButtonSelectOnlyMissingData.Name = "ButtonSelectOnlyMissingData"
+        Me.ButtonSelectOnlyMissingData.Size = New System.Drawing.Size(159, 23)
+        Me.ButtonSelectOnlyMissingData.TabIndex = 5
+        Me.ButtonSelectOnlyMissingData.Text = "Select only missing data"
+        Me.ButtonSelectOnlyMissingData.UseVisualStyleBackColor = True
+        '
+        'ButtonSelectOnlyNonEmptyData
+        '
+        Me.ButtonSelectOnlyNonEmptyData.Location = New System.Drawing.Point(20, 104)
+        Me.ButtonSelectOnlyNonEmptyData.Name = "ButtonSelectOnlyNonEmptyData"
+        Me.ButtonSelectOnlyNonEmptyData.Size = New System.Drawing.Size(159, 23)
+        Me.ButtonSelectOnlyNonEmptyData.TabIndex = 6
+        Me.ButtonSelectOnlyNonEmptyData.Text = "Select only nonempty data"
+        Me.ButtonSelectOnlyNonEmptyData.UseVisualStyleBackColor = True
+        '
+        'ButtonSelectAll
+        '
+        Me.ButtonSelectAll.Location = New System.Drawing.Point(20, 23)
+        Me.ButtonSelectAll.Name = "ButtonSelectAll"
+        Me.ButtonSelectAll.Size = New System.Drawing.Size(75, 23)
+        Me.ButtonSelectAll.TabIndex = 7
+        Me.ButtonSelectAll.Text = "Select all"
+        Me.ButtonSelectAll.UseVisualStyleBackColor = True
+        '
+        'ButtonSelectNone
+        '
+        Me.ButtonSelectNone.Location = New System.Drawing.Point(104, 23)
+        Me.ButtonSelectNone.Name = "ButtonSelectNone"
+        Me.ButtonSelectNone.Size = New System.Drawing.Size(75, 23)
+        Me.ButtonSelectNone.TabIndex = 8
+        Me.ButtonSelectNone.Text = "Select none"
+        Me.ButtonSelectNone.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.ButtonSelectAll)
+        Me.GroupBox1.Controls.Add(Me.ButtonSelectOnlyMissingData)
+        Me.GroupBox1.Controls.Add(Me.ButtonSelectOnlyNonEmptyData)
+        Me.GroupBox1.Controls.Add(Me.ButtonSelectNone)
+        Me.GroupBox1.Location = New System.Drawing.Point(544, 450)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(201, 141)
+        Me.GroupBox1.TabIndex = 9
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Field Selection ..."
+        '
         'frmMovieUpdate
         '
         Me.AcceptButton = Me.ButtonOK
@@ -144,6 +210,7 @@ Partial Class frmMovieUpdate
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.ButtonCancel
         Me.ClientSize = New System.Drawing.Size(908, 603)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.PictureBoxNew)
         Me.Controls.Add(Me.PictureBoxOld)
         Me.Controls.Add(Me.ButtonCancel)
@@ -157,6 +224,7 @@ Partial Class frmMovieUpdate
         CType(Me.MovieBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBoxOld, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBoxNew, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -171,4 +239,9 @@ Partial Class frmMovieUpdate
     Friend WithEvents tbNew As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PictureBoxOld As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBoxNew As System.Windows.Forms.PictureBox
+    Friend WithEvents ButtonSelectOnlyMissingData As System.Windows.Forms.Button
+    Friend WithEvents ButtonSelectOnlyNonEmptyData As System.Windows.Forms.Button
+    Friend WithEvents ButtonSelectAll As System.Windows.Forms.Button
+    Friend WithEvents ButtonSelectNone As System.Windows.Forms.Button
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
 End Class
