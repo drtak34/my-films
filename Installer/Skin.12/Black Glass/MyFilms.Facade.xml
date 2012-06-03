@@ -4,16 +4,16 @@
     <control>
       <type>group</type>
       <description>group element</description>
-      <animation effect="fade" time="150">WindowClose</animation>
-      <animation effect="slide" tween="circle" easing="out" time="200" start="600,0" reversible="false">WindowOpen</animation>
-      <animation effect="slide" tween="circle" easing="out" time="200" end="600,0" reversible="false">WindowClose</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" start="800,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="800,0" reversible="false">WindowClose</animation>
       <animation effect="slide" tween="sine" easing="in" time="200" end="191,0" condition="!control.hasfocus(50)">conditional</animation>
       <dimColor>ffffffff</dimColor>
 
       <!-- FACADE FRAME FOR  LIST VIEW -->
 
       <control>
-        <description>Backdrop Overlay - ListView</description>
+        <description>Facade List Frame - ListView</description>
         <type>image</type>
         <id>0</id>
         <posX>815</posX>

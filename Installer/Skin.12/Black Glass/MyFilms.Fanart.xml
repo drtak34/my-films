@@ -13,10 +13,6 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-<!--
-			<animation effect="fade" time="250">visible</animation>
-			<animation effect="fade" time="250" delay="250">hidden</animation>
--->
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -35,10 +31,6 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-<!--
-			<animation effect="fade" time="250">visible</animation>
-			<animation effect="fade" time="250" delay="250">hidden</animation>
--->
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -65,9 +57,8 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<animation effect="fade" time="250">visible</animation>
-			<animation effect="fade" time="250" delay="250">hidden</animation>
-			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<visible>control.isvisible(11)+facadeview.list</visible>
 		</control>
@@ -83,9 +74,8 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<animation effect="fade" time="250">visible</animation>
-			<animation effect="fade" time="250" delay="250">hidden</animation>
-			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<visible>control.isvisible(21)+facadeview.list</visible>
 		</control>
