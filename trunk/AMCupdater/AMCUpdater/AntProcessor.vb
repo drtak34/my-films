@@ -331,8 +331,8 @@ Public Class AntProcessor
     Public Function ManualControlRecord(ByVal ManualParameterField As String, ByVal ManualParameterOperator As String, ByVal ManualParameterValue As String, ByRef CurrentNode As XmlNode) As Integer
         Select Case ManualParameterOperator
             Case "LIKE"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
-                    Dim str1 As String = CurrentNode.Attributes(ManualParameterField).Value.ToString
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
+                    Dim str1 As String = GetValue(CurrentNode, ManualParameterField).ToString
                     Dim str2 As String = ManualParameterValue
 
                     If str1.ToLower.IndexOf(str2.ToLower) >= 0 Then
@@ -344,8 +344,8 @@ Public Class AntProcessor
                     Return 0
                 End If
             Case "NOT LIKE"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
-                    Dim str1 As String = CurrentNode.Attributes(ManualParameterField).Value.ToString
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
+                    Dim str1 As String = GetValue(CurrentNode, ManualParameterField).ToString
                     Dim str2 As String = ManualParameterValue
 
                     If str1.ToLower.IndexOf(str2.ToLower) >= 0 Then
@@ -357,8 +357,8 @@ Public Class AntProcessor
                     Return 1
                 End If
             Case "="
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
-                    If CurrentNode.Attributes(ManualParameterField).Value.ToString = ManualParameterValue Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
+                    If GetValue(CurrentNode, ManualParameterField).ToString = ManualParameterValue Then
                         Return 1
                     Else
                         Return 0
@@ -367,9 +367,9 @@ Public Class AntProcessor
                     Return 0
                 End If
             Case "!="
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
                     'Attribute exists, check it's not a match:
-                    If CurrentNode.Attributes(ManualParameterField).Value.ToString <> ManualParameterValue Then
+                    If GetValue(CurrentNode, ManualParameterField).ToString <> ManualParameterValue Then
                         Return 1
                     Else
                         Return 0
@@ -379,8 +379,8 @@ Public Class AntProcessor
                     Return 1
                 End If
             Case ">"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
-                    If CurrentNode.Attributes(ManualParameterField).Value.ToString > ManualParameterValue Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
+                    If GetValue(CurrentNode, ManualParameterField).ToString > ManualParameterValue Then
                         Return 1
                     Else
                         Return 0
@@ -389,8 +389,8 @@ Public Class AntProcessor
                     Return 0
                 End If
             Case ">Num"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
-                    If Val(CurrentNode.Attributes(ManualParameterField).Value.ToString) > Val(ManualParameterValue) Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
+                    If Val(GetValue(CurrentNode, ManualParameterField).ToString) > Val(ManualParameterValue) Then
                         Return 1
                     Else
                         Return 0
@@ -399,31 +399,31 @@ Public Class AntProcessor
                     Return 0
                 End If
             Case "<"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
                     'Attribute exists, check it's not a match:
-                    If CurrentNode.Attributes(ManualParameterField).Value.ToString < ManualParameterValue Then
+                    If GetValue(CurrentNode, ManualParameterField).ToString < ManualParameterValue Then
                         Return 1
                     Else
                         Return 0
                     End If
                 End If
             Case "<Num"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then
                     'Attribute exists, check it's not a match:
-                    If Val(CurrentNode.Attributes(ManualParameterField).Value.ToString) < Val(ManualParameterValue) Then
+                    If Val(GetValue(CurrentNode, ManualParameterField).ToString) < Val(ManualParameterValue) Then
                         Return 1
                     Else
                         Return 0
                     End If
                 End If
             Case "EXISTS"
-                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
+                If GetValue(CurrentNode, ManualParameterField) IsNot Nothing Then 'If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
                     Return 1
                 Else
                     Return 0
                 End If
             Case "NOT EXISTS"
-                If CurrentNode.Attributes(ManualParameterField) Is Nothing Then
+                If GetValue(CurrentNode, ManualParameterField) Is Nothing Then
                     Return 1
                 Else
                     Return 0
@@ -431,6 +431,7 @@ Public Class AntProcessor
         End Select
 
     End Function
+
 
     Public Sub ManualTestOperation()
 
@@ -574,13 +575,9 @@ Public Class AntProcessor
                     wdirector = CurrentNode.Attributes("Director").Value
                 End If
 
-                Dim wIMDB_Id As String = ""
-                If (Not IsNothing(CurrentNode.Attributes("IMDB_Id"))) Then
-                    wIMDB_Id = CurrentNode.Attributes("IMDB_Id").Value
-                ElseIf CurrentNode.Item("IMDB_Id") IsNot Nothing Then
-                    If CurrentNode.Item("IMDB_Id").InnerText.Length > 0 Then
-                        wIMDB_Id = CurrentNode.Item("IMDB_Id").InnerText.ToString
-                    ElseIf (Not IsNothing(CurrentNode.Attributes("URL"))) Then
+                Dim wIMDB_Id As String = GetValue(CurrentNode, "IMDB_Id")
+                If (Not String.IsNullOrEmpty(wIMDB_Id)) Then
+                    If (Not IsNothing(CurrentNode.Attributes("URL"))) Then
                         Dim wIMDBfromURL As String = GetIMDBidFromFilePath(CurrentNode.Attributes("URL").Value) ' tries to get IMDBid from URL
                         If wIMDBfromURL.Length > 0 Then
                             wIMDB_Id = wIMDBfromURL
@@ -1456,6 +1453,9 @@ Public Class AntProcessor
                         Try
                             ValueOld = GetValue(CurrentNodeOriginalValue, FieldName) 'ValueOld = CurrentNodeOriginalValue.Attributes(FieldName).Value
                             ValueNew = GetValue(CurrentNode, FieldName) 'ValueNew = Ant.XMLElement.Attributes(FieldName).Value
+                            If ValueNew.StartsWith("ErrorEvent :") Then
+                                ValueNew = Nothing
+                            End If
                             .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
                             If FieldName = "Picture" Then
                                 .PictureBoxOld.ImageLocation = Path.Combine(ImagePath, ValueOld)
@@ -3516,7 +3516,7 @@ Public Class AntProcessor
     End Function
 
     Private Shared Function GetValue(ByVal CurrentNode As Xml.XmlNode, ByVal currentAttribute As String) As String
-        Dim currentValue As String = ""
+        'Dim currentValue As String = Nothing
         Dim attr As Xml.XmlAttribute
         Dim element As Xml.XmlElement
         Dim customfieldselement As Xml.XmlElement
@@ -3526,11 +3526,11 @@ Public Class AntProcessor
         element = CurrentNode.Item(currentAttribute)
         customfieldselement = CurrentNode.Item("CustomFields")
         If attr Is Nothing And element Is Nothing And customfieldselement Is Nothing Then ' no values exist at all
-            Return ""
+            Return Nothing
         Else
             If Not attr Is Nothing Then ' check for standard attr value
                 If attr.Value Is Nothing Then
-                    Return ""
+                    Return Nothing
                 ElseIf attr.Value = "" Then
                     Return ""
                 Else
@@ -3540,18 +3540,18 @@ Public Class AntProcessor
                 customfieldsattr = customfieldselement.Attributes(currentAttribute)
                 If Not customfieldsattr Is Nothing Then ' check for  attr value inf customfields element
                     If customfieldsattr.Value Is Nothing Then
-                        Return ""
+                        Return Nothing
                     ElseIf customfieldsattr.Value = "" Then
                         Return ""
                     Else
                         Return customfieldsattr.Value
                     End If
                 Else
-                    Return ""
+                    Return Nothing
                 End If
             ElseIf Not element Is Nothing Then  ' check for old MyFilms enhanced element value
                 If element.InnerText Is Nothing Then
-                    Return ""
+                    Return Nothing
                 ElseIf element.InnerText = "" Then
                     Return ""
                 Else
@@ -3559,7 +3559,7 @@ Public Class AntProcessor
                 End If
             End If
         End If
-        Return ""
+        Return Nothing
     End Function
 
     Private Sub EventNeu(ByVal EineVariable As String)
