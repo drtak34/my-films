@@ -1192,11 +1192,18 @@ namespace MyFilmsPlugin.MyFilms
           movie.Title = row["OriginalTitle"].ToString();
           if (row[tmpconf.StrTitle1].ToString().Length > 0)
           {
-            int TitlePos = (tmpconf.StrTitleSelect.Length > 0) ? tmpconf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
+            int TitlePos = (row[tmpconf.StrTitle1].ToString().LastIndexOf(tmpconf.TitleDelim) > 0) ? row[tmpconf.StrTitle1].ToString().LastIndexOf(tmpconf.TitleDelim) + 1 : 0; //only display rest of title after selected part common to group
             movie.Title = row[tmpconf.StrTitle1].ToString().Substring(TitlePos);
+            movie.GroupName = (TitlePos > 1) ? row[tmpconf.StrTitle1].ToString().Substring(TitlePos - 1) : "";
           }
           if (Helper.FieldIsSet(tmpconf.StrTitle2))
-            movie.TranslatedTitle = row[tmpconf.StrTitle2].ToString();
+          {
+            int TitlePos = (row[tmpconf.StrTitle2].ToString().LastIndexOf(tmpconf.TitleDelim) > 0) ? row[tmpconf.StrTitle2].ToString().LastIndexOf(tmpconf.TitleDelim) + 1 : 0;
+            movie.TranslatedTitle = row[tmpconf.StrTitle2].ToString().Substring(TitlePos);
+          }
+
+          // Edition
+          movie.Edition = (!string.IsNullOrEmpty(row["Edition"].ToString())) ? row["Edition"].ToString() : "";
 
           // watched status
           bool played = false;
@@ -1746,12 +1753,10 @@ namespace MyFilmsPlugin.MyFilms
             MFMovie tmpmovie = new MFMovie();
             tmpmovie = movie;
             GetMovieArtworkDetails(movie.MovieRow, movie.MFconfig, ref tmpmovie);
-            // remove group title, if any
-            if (tmpmovie.Title.IndexOf(movie.MFconfig.TitleDelim) > 0) tmpmovie.Title = tmpmovie.Title.Substring(tmpmovie.Title.LastIndexOf(movie.MFconfig.TitleDelim) + 1);
-            if (tmpmovie.TranslatedTitle.IndexOf(movie.MFconfig.TitleDelim) > 0) tmpmovie.TranslatedTitle = tmpmovie.TranslatedTitle.Substring(tmpmovie.TranslatedTitle.LastIndexOf(movie.MFconfig.TitleDelim) + 1);
             movielistwithartwork.Add(tmpmovie);
           }
-          // foreach (MFMovie movie in movielistwithartwork) LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");
+          if (movielistwithartwork.Count < 11) 
+            foreach (MFMovie movie in movielistwithartwork) LogMyFilms.Debug("GetMostRecent() - Returning (limited): config = '" + movie.Config + "', title = '" + movie.Title + "', translatedtitle = '" + movie.TranslatedTitle + "', watched = '" + movie.Watched + "', added = '" + movie.DateAdded + "', datetime = '" + movie.DateTime.ToShortDateString() + "', length = '" + movie.Length.ToString() + "', Category = '" + movie.Category + "', cover = '" + movie.Picture + "', fanart = '" + movie.Fanart + "'");
           LogMyFilms.Debug("GetMostRecent() - Returning '" + movielistwithartwork.Count + "' movies.");
           return movielistwithartwork;
         }
@@ -1974,6 +1979,8 @@ namespace MyFilmsPlugin.MyFilms
     private int _mID = -1;
     private string _mStrTitle = string.Empty;
     private string _mStrTranslatedTitle = string.Empty;
+    private string _mStrGroupName = string.Empty;
+    private string _mStrEdition = string.Empty;
     private string _mStrFile = string.Empty;
     private string _mStrTrailer = string.Empty;
     private string _mStrPath = string.Empty;
@@ -2041,6 +2048,18 @@ namespace MyFilmsPlugin.MyFilms
     {
       get { return _mStrTranslatedTitle; }
       set { _mStrTranslatedTitle = value; }
+    }
+
+    public string GroupName
+    {
+      get { return _mStrGroupName; }
+      set { _mStrGroupName = value; }
+    }
+
+    public string Edition
+    {
+      get { return _mStrEdition; }
+      set { _mStrEdition = value; }
     }
 
     public string File
@@ -2169,6 +2188,8 @@ namespace MyFilmsPlugin.MyFilms
     {
       _mStrTitle = string.Empty;
       _mStrTranslatedTitle = string.Empty;
+      _mStrGroupName = string.Empty;
+      _mStrEdition = string.Empty;
       _mStrIMDBNumber = string.Empty;
       _mStrTMDBNumber = string.Empty;
       _mIYear = 1900;
