@@ -1366,6 +1366,7 @@ Public Class AntProcessor
             End If
 
             Dim Ant As New AntRecord()
+
             With Ant
                 .XMLDoc = XmlDoc
                 .XMLElement = CurrentNode
@@ -1430,6 +1431,14 @@ Public Class AntProcessor
                 .OnlyAddMissingData = False ' added for "add missing data" mode"
                 .OnlyUpdateNonEmptyData = False
                 .Dont_Ask_Interactive = False ' added for silent updates without asking user to choose movie on failed auto matches
+
+                'Dim t As Thread
+                't = New Thread(AddressOf Ant.ProcessFile)
+                't.Start(AntRecord.Process_Mode_Names.Update)
+                't.Join()
+                ''If t.Join(500) Then
+                ''    MsgBox("error in thread execution")
+                ''End If
 
                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
 

@@ -80,7 +80,7 @@
     <Value>C:\AMCUpdater_Excluded_Files.txt</Value>
   </Values>
   <Values Option="Database_Fields_To_Import">
-    <Value>Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;Source|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True;Fanart|True;Languages|True;Certification|True;Writer|True;Tagline|True;Studio|True;Edition|True;IMDBrank|True;IMDB_Id|True;AudioChannelCount|True</Value>
+    <Value>Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;Source|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True;Fanart|True;Languages|True;Certification|True;Writer|True;TagLine|True;Studio|True;Edition|True;IMDB_Rank|True;IMDB_Id|True;AudioChannelCount|True</Value>
   </Values>
   <Values Option="Import_File_On_Internet_Lookup_Failure">
     <Value>True</Value>
