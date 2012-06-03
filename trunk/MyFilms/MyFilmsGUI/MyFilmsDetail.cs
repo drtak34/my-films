@@ -2989,6 +2989,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return lockfilename;
         }
 
+        public static bool AddMovieToCollection(string newGroupName)
+        {
+          string oldtitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+          string newtitle = "";
+          if (oldtitle.IndexOf(MyFilms.conf.TitleDelim) > 0) // already has a groupname
+          {
+            LogMyFilms.Debug("AddMovieToCollection() - cannot add movie to collection '" + newGroupName + "' - already part of collection - oldtitle = '" + oldtitle + "'");
+            return false;
+          }
+          else
+          {
+            newtitle = newGroupName + MyFilms.conf.TitleDelim + oldtitle;
+            LogMyFilms.Debug("AddMovieToCollection() - changing title from '" + oldtitle + "' to '" + newtitle + "'");
+            MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1] = newtitle;
+            Update_XML_database();
+            return true;
+          }
+        }
+
+        public static bool RemoveMovieFromCollection()
+        {
+          string oldtitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+          string newtitle = "";
+          if (oldtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+          {
+            newtitle = oldtitle.Substring(oldtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
+            LogMyFilms.Debug("RemoveMovieFromCollection() - changing title from '" + oldtitle + "' to '" + newtitle + "'");
+            MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1] = newtitle;
+            Update_XML_database();
+            return true;
+          }
+          else
+          {
+            LogMyFilms.Debug("RemoveMovieFromCollection() - cannot remove from collection - oldtitle = '" + oldtitle + "'");
+            return false;
+          }
+        }
+
 
         //-------------------------------------------------------------------------------------------
         //  Get Search title
