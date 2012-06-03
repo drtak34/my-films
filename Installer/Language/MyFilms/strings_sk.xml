@@ -89,6 +89,9 @@
     <String id="1079833">Delete from catalog and disk</String>
     <String id="1079834">If you confirm, you media files will physically be deleted !</String>
     <String id="1079835">Are you sure you want to delete movie ?</String>
+    <String id="1079836">Add to box set ...</String>
+    <String id="1079837">Remove from box set</String>
+    <String id="1079838">Enter new box set name ...</String>
     <String id="1079839">Reverse names ({0})</String>
     <String id="1079840">Vyberte si užívateľský profil ('{0}')</String>
     <String id="1079843">Userdefined DB Update (AMCupdater)</String>

@@ -89,6 +89,9 @@
     <String id="1079833">Lösche Film aus Datenbank und von Disk</String>
     <String id="1079834">Die Film Media Dateien werden unwiderruflich gel�scht !</String>
     <String id="1079835">Wollen Sie die Film Dateien löschen ?</String>
+    <String id="1079836">Füge Film zu Boxset hinzu ...</String>
+    <String id="1079837">Film aus Boxset entfernen</String>
+    <String id="1079838">Neues Box Set ...</String>
     <String id="1079839">Umschalten 'Vertausche Vor- und Nachname' ({0})</String>
     <String id="1079840">Wähle User Profil ('{0}')</String>
     <String id="1079843">Benutzerdefinierte Aktualisierung (AMCupdater)</String>

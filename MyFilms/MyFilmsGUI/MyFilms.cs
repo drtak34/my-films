@@ -8290,6 +8290,51 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    private string Change_MovieGroupName(string movieTitle)
+    {
+      List<string> choiceMovieGroupNames = new List<string>();
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlg == null) return "";
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(1079836) + " - " + movieTitle); // Add to box set ...
+      dlg.Add("<" + GUILocalizeStrings.Get(1079838) + ">"); //     <String id="1079838">Enter new box set name ...</String> // choiceMovieGroupNames.Add("");
+
+      foreach (DataRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens)) // Add already existing Movie Group Names - example of string value: "24\Season 1"
+      {
+        string sFullTitle = sr[conf.StrTitle1].ToString();
+        int DelimCnt = NewString.PosCount(conf.TitleDelim, sFullTitle, false);
+        if (DelimCnt > 0)
+        {
+          for (int i = 1; i < DelimCnt + 1; i++)
+          {
+            string strMovieGroupName = NewString.NPosLeft(conf.TitleDelim, sFullTitle, i, false, false);
+            if (!choiceMovieGroupNames.Contains(strMovieGroupName)) 
+              choiceMovieGroupNames.Add(strMovieGroupName);
+          }
+        }
+      }
+      choiceMovieGroupNames.Sort();
+      foreach (string choiceMovieGroupName in choiceMovieGroupNames)
+      {
+        dlg.Add(choiceMovieGroupName);
+      }
+      dlg.DoModal(GetID);
+
+      if (dlg.SelectedLabel == -1) return "";
+      if (dlg.SelectedLabel == 0) // new value
+      {
+        VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+        if (null == keyboard) return "";
+        keyboard.Reset();
+        keyboard.Text = ""; // Default string is empty
+        keyboard.DoModal(GetID);
+        if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text))) return keyboard.Text;
+        else return "";
+      }
+      else
+        return dlg.SelectedLabelText;
+    }
+    
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
     //--------------------------------------------------------------------------------------------
@@ -8560,6 +8605,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         //    dlg.Add(GUILocalizeStrings.Get(1079892)); // Update ...
         //    upd_choice[ichoice] = "updatemenu";
+
+        if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) // add or remove movie from/to box set (hierarchy)
+        {
+          if (MyFilms.r[this.facadeFilms.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString().IndexOf(MyFilms.conf.TitleDelim) > 0)
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079837)); // Remove from box set
+            upd_choice[ichoice] = "removefromcollection";
+            ichoice++;
+          }
+          else
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079836)); // Add to box set ...
+            upd_choice[ichoice] = "addtocollection";
+            ichoice++;
+          }
+        }
       }
       #endregion
 
@@ -9376,6 +9437,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string personname = this.facadeFilms.SelectedListItem.Label;
 
           MyFilmsDetail.grabb_Internet_Informations(personname, GetID, MyFilms.conf.StrGrabber_ChooseScript, "", "", MyFilmsDetail.GrabType.Person, false, null);
+          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          break;
+
+        case "addtocollection":
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+          string groupname = Change_MovieGroupName(conf.StrTIndex);
+          if (groupname == "") break;
+          MyFilmsDetail.AddMovieToCollection(groupname);
+          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          break;
+
+        case "removefromcollection":
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+          MyFilmsDetail.RemoveMovieFromCollection();
           Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 

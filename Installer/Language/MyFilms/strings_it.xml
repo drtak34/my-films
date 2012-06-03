@@ -89,6 +89,9 @@
     <String id="1079833">Elimina dal catalogo e dal disco</String>
     <String id="1079834">Se confermi i file verranno definitivamente cancellati!</String>
     <String id="1079835">Sei sicuro di voler eliminare il film?</String>
+    <String id="1079836">Add to box set ...</String>
+    <String id="1079837">Remove from box set</String>
+    <String id="1079838">Enter new box set name ...</String>
     <String id="1079839">Inverti nomi ({0})</String>
     <String id="1079840">Seleziona profilo utente ('{0}')</String>
     <String id="1079843">Userdefined DB Update (AMCupdater)</String>
