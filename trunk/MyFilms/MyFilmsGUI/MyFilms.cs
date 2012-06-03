@@ -6954,7 +6954,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case 1:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(529));
-          this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
+          if (this.facadeFilms.AlbumListLayout != null)
+            this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
+          else
+            this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List; // use list view, if skin does not support big icon list
           break;
         case 2:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
