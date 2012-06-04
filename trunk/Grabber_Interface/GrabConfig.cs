@@ -3183,6 +3183,10 @@ namespace Grabber_Interface
           case 74:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Trailer'" + mapped + Environment.NewLine;
             break;
+          case 35:
+          case 75:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: TMDB_Id'" + mapped + Environment.NewLine;
+            break;
           default:
             textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i - 40).ToString() + "'" + mapped + Environment.NewLine;
             break;

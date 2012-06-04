@@ -111,7 +111,7 @@ Public Class AntRecord
         Tagline = 56
         Certification = 57
         IMDB_Id = 58
-        IMDBrank = 59
+        IMDB_Rank = 59
         Studio = 60
         Edition = 61
         Fanart = 62
@@ -127,7 +127,7 @@ Public Class AntRecord
         PersonImages = 72
         MultiFanart = 73
         Trailer = 74
-        Empty35 = 75
+        TMDB_Id = 75
         Empty36 = 76
         Empty37 = 77
         Empty38 = 78
@@ -1814,7 +1814,13 @@ Public Class AntRecord
 
                 CurrentAttribute = "IMDB_Rank"
                 If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                    TempValue = _InternetData(Grabber_Output.IMDBrank)
+                    TempValue = _InternetData(Grabber_Output.IMDB_Rank)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                End If
+
+                CurrentAttribute = "TMDB_Id"
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                    TempValue = _InternetData(Grabber_Output.TMDB_Id)
                     CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
