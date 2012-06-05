@@ -175,12 +175,12 @@
       <KeyEndIMDB_Rank />
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
-      <KeyStartIMDB_Id Param1="" Param2="" />
-      <KeyEndIMDB_Id />
+      <KeyStartIMDB_Id Param1="" Param2="">_x003C_imdb_id_x003E_</KeyStartIMDB_Id>
+      <KeyEndIMDB_Id>_x003C__x002F_</KeyEndIMDB_Id>
       <KeyIMDB_IdIndex />
       <KeyIMDB_IdPage />
-      <KeyStartTMDB_Id Param1="" Param2="" />
-      <KeyEndTMDB_Id />
+      <KeyStartTMDB_Id Param1="" Param2="">_x003C_id_x003E_</KeyStartTMDB_Id>
+      <KeyEndTMDB_Id>_x003C__x002F_id_x003E_</KeyEndTMDB_Id>
       <KeyTMDB_IdIndex />
       <KeyTMDB_IdPage />
       <KeyStartLinkSyn Param1="" Param2="" />

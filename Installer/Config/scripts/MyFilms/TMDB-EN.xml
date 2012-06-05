@@ -171,16 +171,16 @@
       <KeyEndEdition />
       <KeyEditionIndex />
       <KeyEditionPage />
-      <KeyStartIMDB_Rank Param1="" Param2="" />
-      <KeyEndIMDB_Rank />
+      <KeyStartIMDB_Rank Param1="" Param2="">_x003C_popularity_x003E_</KeyStartIMDB_Rank>
+      <KeyEndIMDB_Rank>_x003C__x002F_popularity_x003E_</KeyEndIMDB_Rank>
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
-      <KeyStartIMDB_Id Param1="" Param2="" />
-      <KeyEndIMDB_Id />
+      <KeyStartIMDB_Id Param1="" Param2="">_x003C_imdb_id_x003E_</KeyStartIMDB_Id>
+      <KeyEndIMDB_Id>_x003C__x002F_</KeyEndIMDB_Id>
       <KeyIMDB_IdIndex />
       <KeyIMDB_IdPage />
-      <KeyStartTMDB_Id Param1="" Param2="" />
-      <KeyEndTMDB_Id />
+      <KeyStartTMDB_Id Param1="" Param2="">_x003C_id_x003E_</KeyStartTMDB_Id>
+      <KeyEndTMDB_Id>_x003C__x002F_</KeyEndTMDB_Id>
       <KeyTMDB_IdIndex />
       <KeyTMDB_IdPage />
       <KeyStartLinkSyn Param1="" Param2="" />
@@ -198,10 +198,10 @@
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
       <KeyEncodingLinkGeneric2 />
-      <KeyStartGeneric1 Param1="" Param2="" />
-      <KeyEndGeneric1 />
+      <KeyStartGeneric1 Param1="_x0023_REGEX_x0023_" Param2="">_x003C_studios_x003E_</KeyStartGeneric1>
+      <KeyEndGeneric1>_x003C__x002F_studios_x003E_</KeyEndGeneric1>
       <KeyGeneric1Index />
-      <KeyGeneric1RegExp />
+      <KeyGeneric1RegExp>_x0023_MULTILINE_x0023_name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_url</KeyGeneric1RegExp>
       <KeyGeneric1MaxItems />
       <KeyGeneric1Language />
       <KeyGeneric1Page />
@@ -304,7 +304,7 @@
       <Field_20 source="Studio" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_21 source="Edition" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_22 source="Fanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_23 source="Generic1" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_23 source="Generic1" destination="Studio" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
       <Field_24 source="Generic2" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_25 source="Generic3" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
