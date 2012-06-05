@@ -160,11 +160,11 @@
 			<posY>90</posY>
 			<width>115</width>
 			<height>175</height>
-			<visible>Control.hasfocus(50)</visible>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
 			<texture>#myfilms.picture</texture>
+			<visible>Control.hasfocus(50)</visible>
 			<animation effect="fade" time="1">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<animation effect="fade" time="250">visiblechange</animation>
@@ -209,6 +209,62 @@
 			<animation effect="fade" time="250">visiblechange</animation>
 			<visible>string.equals(#myfilms.cover.selectedcoverresolution)</visible>
 		</control>
+
+		<!--  ************** HIDDEN MENU *****************  -->    
+		<control>
+			<type>actiongroup</type>
+			<description>action menu</description>
+			<defaultcontrol>2</defaultcontrol>
+			<onexit>0</onexit>
+			<buttonX>0</buttonX>
+			<buttonY>0</buttonY>
+			<buttonwidth>56</buttonwidth>
+			<buttonheight>720</buttonheight>
+			<textureFocus>-</textureFocus>
+			<textureNoFocus>-</textureNoFocus>
+			<width>425</width>
+			<height>720</height>
+			<dimColor>ffffffff</dimColor>
+			<visible>control.hasfocus(2)|control.hasfocus(12)|control.hasfocus(13)</visible>
+			<animation effect="fade" time="250" start="75" reversible="false">visible</animation>
+			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
+			<animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
+			<animation effect="slide" tween="circle" easing="out" time="250" end="-208,0" reversible="false">hidden</animation>
+			<animation effect="slide" time="150" end="-400,0" reversible="false">WindowClose</animation>
+			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">WindowOpen</animation>
+			<animation effect="fade" time="250" start="75" reversible="false">WindowOpen</animation>
+			<control>
+				<type>group</type>
+				<layout>StackLayout(0, Vertical, true)</layout>
+				<posX>20</posX>
+				<posY>100</posY>
+				<control>
+					<description>Change Layout</description>
+					<type>button</type>
+					<id>2</id>
+					<width>160</width>
+					<label>Change Layout</label>
+					<onright>50</onright>
+				</control>
+				<control>
+					<description>Resolution Filter</description>
+					<type>button</type>
+					<id>12</id>
+					<width>160</width>
+					<label>Filter</label>
+					<onright>50</onright>
+				</control>
+				<control>
+					<description>Download</description>
+					<type>button</type>
+					<id>13</id>
+					<width>160</width>
+					<label>Download</label>
+					<onright>50</onright>
+				</control>	
+			</control>
+		</control>
+	 <!-- Facade Layouts  -->
 		<control>
 			<type>group</type>
 			<description>group element</description>
@@ -304,61 +360,5 @@
 				</control>
 			</control>
 		</control>
-
-		<!--  ************** HIDDEN MENU *****************  -->    
-		<control>
-			<type>actiongroup</type>
-			<description>action menu</description>
-			<defaultcontrol>2</defaultcontrol>
-			<onexit>0</onexit>
-			<buttonX>0</buttonX>
-			<buttonY>0</buttonY>
-			<buttonwidth>56</buttonwidth>
-			<buttonheight>720</buttonheight>
-			<textureFocus>-</textureFocus>
-			<textureNoFocus>-</textureNoFocus>
-			<width>425</width>
-			<height>720</height>
-			<dimColor>ffffffff</dimColor>
-			<visible>control.hasfocus(2)|control.hasfocus(12)|control.hasfocus(13)</visible>
-			<animation effect="fade" time="250" start="75" reversible="false">visible</animation>
-			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">visible</animation>
-			<animation effect="fade" time="250" end="75" reversible="false">hidden</animation>
-			<animation effect="slide" tween="circle" easing="out" time="250" end="-208,0" reversible="false">hidden</animation>
-			<animation effect="slide" time="150" end="-400,0" reversible="false">WindowClose</animation>
-			<animation effect="slide" tween="circle" easing="out" time="250" start="-208,0" reversible="false">WindowOpen</animation>
-			<animation effect="fade" time="250" start="75" reversible="false">WindowOpen</animation>
-			<control>
-				<type>group</type>
-				<layout>StackLayout(0, Vertical, true)</layout>
-				<posX>20</posX>
-				<posY>100</posY>
-				<control>
-					<description>Change Layout</description>
-					<type>button</type>
-					<id>2</id>
-					<width>160</width>
-					<label>Change Layout</label>
-					<onright>50</onright>
-				</control>
-				<control>
-					<description>Resolution Filter</description>
-					<type>button</type>
-					<id>12</id>
-					<width>160</width>
-					<label>Filter</label>
-					<onright>50</onright>
-				</control>
-				<control>
-					<description>Resolution Filter</description>
-					<type>button</type>
-					<id>13</id>
-					<width>160</width>
-					<label>Download</label>
-					<onright>50</onright>
-				</control>	
-			</control>
-		</control>
-
 	</controls>
 </window>
