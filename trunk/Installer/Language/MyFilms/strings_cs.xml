@@ -361,5 +361,18 @@
     <String id="10798970">Global filter "choose custom filter" ({0})</String>
     <String id="10798971">Global filter "disable custom filter" ({0})</String>
     <String id="10798980">Play random trailers</String>
+    <String id="10799201">MyFilms Cover Manager</String>
+    <String id="10799202">Resolution</String>
+    <String id="10799203">Filter ...</String>
+    <String id="10799204">Download Covers ...</String>
+    <String id="10799211">Delete selected Cover</String>
+    <String id="10799212">Delete all 'Low'</String>
+    <String id="10799213">Delete all 'Medium'</String>
+    <String id="10799214">Delete all 'High'</String>
+    <String id="10799215">Delete all except currently selected</String>
+    <String id="10799221">All</String>
+    <String id="10799222">High</String>
+    <String id="10799223">Medium</String>
+    <String id="10799224">Low</String>
   </Section>
 </Language>
