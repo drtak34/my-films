@@ -11,7 +11,7 @@
       <width>1220</width>
       <align>center</align>
       <font>font20</font>
-      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
       <visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>

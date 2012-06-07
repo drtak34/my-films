@@ -12,7 +12,8 @@
       <width>1220</width>
       <align>center</align>
       <font>font24</font>
-      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
+<!--       <label>#selecteditem#(iif(neq(#myfilms.user.mastertitle.groupcount,''),' #myfilms.user.mastertitle.groupcount',''))#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label> -->
       <visible>[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>

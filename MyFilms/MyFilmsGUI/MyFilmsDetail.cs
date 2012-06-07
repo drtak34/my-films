@@ -4302,7 +4302,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.Percentage = 10;
 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
+            List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
           }
           catch (Exception)
           {
@@ -5397,8 +5397,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                       {
                                         if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading person images for '" + wttitle + "'");
                                         if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "");
-                                        List<grabber.DBPersonInfo> listepersons = listemovies[0].Persons;
-                                        foreach (grabber.DBPersonInfo person in listepersons)
+                                        
+                                        foreach (grabber.DBPersonInfo person in listemovies[0].Persons)
                                         {
                                           bool firstpersonimage = true;
                                           bool onlysinglepersonimage = true;
@@ -5408,6 +5408,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                           LogMyFilms.Info("MF: Person Artwork - " + persondetails.Images.Count + " Images found for '" + persondetails.Name + "'");
                                           if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + persondetails.Name + "'");
                                           if (dlgPrgrs != null) dlgPrgrs.Percentage = 0;
+
+                                          LogMyFilms.Info("Person Artwork: found '" + persondetails.Images.Count + "' images for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
                                           if (persondetails.Images.Count > 0)
                                           {
                                             i = 0;
@@ -5427,7 +5429,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                           }
                                           else
                                           {
-                                            // Get further IMDB images
+                                            #region Get further IMDB images
                                             if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading additional IMDB person images ...");
                                             if (dlgPrgrs != null) dlgPrgrs.Percentage = 0;
                                             IMDB _imdb = new IMDB();
@@ -5508,6 +5510,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                             //    string url = imdbactor.ThumbnailUrl;
                                             //  }
                                             //}
+                                            #endregion
                                           }
                                         }
                                       }
