@@ -88,8 +88,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         enum menuFilterAction
         {
             all,
-            hd,
-            fullhd,
             high,
             medium,
             low
@@ -114,28 +112,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private string newArtworkFileName = string.Empty;
         private string displayFilter = string.Empty;
         BackgroundWorker loadingWorker = null; // to fetch list and thumbnails
-        public static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the actual downloading
-        static Queue<MFCover> toDownload = new Queue<MFCover>();
         int m_PreviousSelectedItem = -1;
         private View currentView = View.LargeIcons;
         private int initialView = -1;
         bool m_bQuickSelect = false;
 
-        public static void setGUIProperty(string name, string value)
-        {
-            string property = "#myfilms." + name;
-            GUIPropertyManager.SetProperty(property, StringExtensions.SanitizeXmlString(value));
-        }
-
         # region DownloadWorker
         static MyFilmsCoverManager()
         {
-            // lets set up the downloader            
-            downloadingWorker.WorkerSupportsCancellation = true;
-            downloadingWorker.WorkerReportsProgress = true;
-            downloadingWorker.DoWork += new DoWorkEventHandler(downloadingWorker_DoWork);
-            downloadingWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(downloadingWorker_RunWorkerCompleted);
-
+            //// lets set up the downloader
+            //downloadingWorker.WorkerSupportsCancellation = true;
+            //downloadingWorker.WorkerReportsProgress = true;
+            //downloadingWorker.DoWork += new DoWorkEventHandler(downloadingWorker_DoWork);
+            //downloadingWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(downloadingWorker_RunWorkerCompleted);
         }
 
         void downloadingWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -196,19 +185,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //            MPTVSeriesLog.Write("Error downloading Artwork: " + f.FullLocalPath);
             //    }
             //} 
-            //while (toDownload.Count > 0 && !downloadingWorker.CancellationPending);
+            // while (toDownload.Count > 0 && !downloadingWorker.CancellationPending);
         }
 
         #endregion
 
-        public static int GetWindowID
-        { get { return MyFilms.ID_MyFilmsCoverManager; } }
-        
         public override int GetID
         { get { return MyFilms.ID_MyFilmsCoverManager; } }
-
-        public int GetWindowId()
-        { return MyFilms.ID_MyFilmsCoverManager; }
 
         public override bool Init()
         {
@@ -259,9 +242,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           
           // update skin controls
           UpdateLayoutButton();
-          if (labelResolution != null) labelResolution.Label = "LabelResolution";
+          if (labelResolution != null) labelResolution.Label = "LabelResolution"; // GUILocalizeStrings.Get(1079830) 7982
           if (buttonFilters != null) buttonFilters.Label = "ArtworkFilter";
-          if (buttonDownloadCover != null) buttonDownloadCover.Label = "DownloadCovers";
+          if (buttonDownloadCover != null) buttonDownloadCover.Label = "Download Covers ...";
 
           ClearProperties();
           UpdateFilterProperty(false);
@@ -278,8 +261,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.setGUIProperty("picture", ArtworkFileName);
           LogMyFilms.Debug("Cover Manager Window initializing");            
              
-          loadingWorker.RunWorkerAsync(this.MovieID);            
-          downloadingWorker.ProgressChanged += new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);            
+          loadingWorker.RunWorkerAsync(this.MovieID);
+          // downloadingWorker.ProgressChanged += new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);            
         }
 
         protected bool AllowView(View view)
@@ -350,8 +333,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("cover.currentmoviename", MovieLabel);
           MyFilmsDetail.setGUIProperty("cover.count", m_Facade.Count.ToString());
 
-          totalFanart = int.Parse(m_Facade.Count.ToString());
-          if (totalFanart == 0)
+          if (int.Parse(m_Facade.Count.ToString()) == 0)
             {
                 // Enable Filters button in case Artwork is filtered
                 if (DisplayFilter != "All" && !string.IsNullOrEmpty(DisplayFilter) && buttonFilters != null)
@@ -360,7 +342,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     OnAction(new Action(Action.ActionType.ACTION_MOVE_RIGHT, 0, 0));                    
                 }
             }
-            totalFanart = 0;
 
             // Load the selected facade so it's not black by default
             if (m_Facade != null && m_Facade.SelectedListItem != null && m_Facade.SelectedListItem.TVTag != null)
@@ -378,7 +359,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         m_bQuickSelect = true;
                         for (int i = 0; i < m_PreviousSelectedItem; i++)
                         {
-                            OnAction(new Action(Action.ActionType.ACTION_MOVE_RIGHT, 0, 0));
+                          LogMyFilms.Debug("worker_RunWorkerCompleted() - move right to focus correct item");  
+                          OnAction(new Action(Action.ActionType.ACTION_MOVE_RIGHT, 0, 0));
                         }
                         m_bQuickSelect = false;
                         // Note: this is better way, but Scroll offset wont work after set
@@ -444,6 +426,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlg.SetHeading("MyFilms Cover Manager");
 
                 GUIListItem pItem;
+
+                if (!loadingWorker.IsBusy) // don't allowing filtering until all data is loaded
+                {
+                  pItem = new GUIListItem("Filter ...");
+                  dlg.Add(pItem);
+                  pItem.ItemId = (int)menuAction.Filters;
+                }
+              
                 if (bCoverSelected)
                 {
                   pItem = new GUIListItem(GUILocalizeStrings.Get(10798769)); // Select Cover as Default
@@ -473,18 +463,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   pItem.ItemId = (int)menuAction.CreateFromMovieAsMosaic;
 
                 }
+
                 if (bCoverSelected)
                 {
-                  //if (MyFilmsDetail.ExtendedStartmode("CoverManager: Filtering Covers/Artwork not yet supported"))
-                  //{
-                    if (!loadingWorker.IsBusy) // Dont allowing filtering until DB has all data
-                    {
-                      pItem = new GUIListItem("Filter ...");
-                      dlg.Add(pItem);
-                      pItem.ItemId = (int)menuAction.Filters;
-                    }
-                  //}
-
                   if (!loadingWorker.IsBusy)
                   {
                     pItem = new GUIListItem(GUILocalizeStrings.Get(10798810)); // Delete Movie Cover from DB
@@ -721,14 +702,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.Add(pItem);
             pItem.ItemId = (int)menuFilterAction.low;
 
-            //pItem = new GUIListItem("1280x720");
-            //dlg.Add(pItem);
-            //pItem.ItemId = (int)menuFilterAction.hd;            
-
-            //pItem = new GUIListItem("1920x1080");
-            //dlg.Add(pItem);
-            //pItem.ItemId = (int)menuFilterAction.fullhd;            
-            
             dlg.DoModal(GUIWindowManager.ActiveWindow);
             if (dlg.SelectedId >= 0)
             {
@@ -736,12 +709,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   case (int)menuFilterAction.all:
                       DisplayFilter = "All";
-                      break;
-                  case (int)menuFilterAction.hd:
-                      DisplayFilter = "High";
-                      break;
-                  case (int)menuFilterAction.fullhd:
-                      //DBOption.SetOptions(DBOption.cArtworkThumbnailResolutionFilter, "2");
                       break;
                   case (int)menuFilterAction.high:
                       DisplayFilter = "High";
@@ -765,30 +732,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         #endregion
 
-        int totalFanart;
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            try {
-                if (m_Facade != null) {
-                    GUIListItem loadedItem = e.UserState as GUIListItem;
-                    if (loadedItem != null) {                        
-                        m_Facade.Add(loadedItem);                   
-                        // we use this to tell the gui how many Artwork we are loading
-                        MyFilmsDetail.setGUIProperty("cover.count", e.ProgressPercentage.ToString());
-                        if (m_Facade != null) 
-                          this.m_Facade.Focus = true;
-                    }
-                    else if (e.ProgressPercentage > 0) {
-                        // we use this to tell the gui how many Artwork we are loading
-                        totalFanart = e.ProgressPercentage;
-                    }
-                }
-            }
-            catch (Exception ex) {
-                LogMyFilms.Debug("Error: Artwork Chooser worker_ProgressChanged() experienced an error: " + ex.Message);               
-            }
-        }
+          try
+          {
+            if (m_Facade != null)
+            {
+              GUIListItem loadedItem = e.UserState as GUIListItem;
+              if (loadedItem != null)
+              {
+                m_Facade.Add(loadedItem);
+                LogMyFilms.Debug("worker_ProgressChanged() - item '" + loadedItem.Label + "' added to facade");
 
+                // we use this to tell the gui how many Artwork we are loading
+                MyFilmsDetail.setGUIProperty("cover.count", m_Facade.Count.ToString());
+                if (m_Facade != null) this.m_Facade.Focus = true;
+              }
+              else
+              {
+                LogMyFilms.Debug("worker_ProgressChanged() - item not added (null)");
+              }
+              //else if (e.ProgressPercentage > 0)
+              //{
+              //  // we use this to tell the gui how many Artwork we are loading
+              //  MyFilmsDetail.setGUIProperty("cover.counttotal", e.ProgressPercentage.ToString()); 
+              //}
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("Error: Artwork Chooser worker_ProgressChanged() experienced an error: " + ex.Message);
+          }
+        }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -941,6 +916,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 } while (shouldContinue);
                 UpdateLayoutButton();
+
+                // (re)load facade
+                m_Facade.Clear();
+                loadingWorker.RunWorkerAsync(this.MovieID);
+
                 GUIControl.FocusControl(GetID, controlId);
             }
 
@@ -948,7 +928,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 ShowCoverContextMenu();
                 buttonDownloadCover.Focus = false;
-                GUIControl.FocusControl(7992, 50);
+                GUIControl.FocusControl(GetID, 50);
                 return;
             }
 
@@ -1038,20 +1018,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        void downloadFanart(MFCover fanart)
-        {
-            // we need to get it, let's queue them up and download in the background
-            lock (toDownload)
-            {
-                toDownload.Enqueue(fanart);
-            }
-            // don't return, user can queue up multiple Artwork to download
-            // the last he selects to download will be the chosen one by default
+        //void downloadFanart(MFCover fanart)
+        //{
+        //    // we need to get it, let's queue them up and download in the background
+        //    lock (toDownload)
+        //    {
+        //        toDownload.Enqueue(fanart);
+        //    }
+        //    // don't return, user can queue up multiple Artwork to download
+        //    // the last he selects to download will be the chosen one by default
 
-            // finally lets check if the downloader is already running, and if not start it
-            if (!downloadingWorker.IsBusy)
-                downloadingWorker.RunWorkerAsync();
-        }
+        //    // finally lets check if the downloader is already running, and if not start it
+        //    if (!downloadingWorker.IsBusy)
+        //        downloadingWorker.RunWorkerAsync();
+        //}
 
         void loadThumbnails(int MovieID)
         {
@@ -1061,24 +1041,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return;
 
                 GUIListItem item = null;
+                GUIWaitCursor.Init(); GUIWaitCursor.Show(); // show waitcorsor while covers are searched on local drive...
                 List<MFCover> covers = GetLocalCover(MyFilms.r, MyFilms.conf.StrIndex, ArtworkFileName);
+                GUIWaitCursor.Hide();
 
                 int i = 0;
-                foreach (MFCover f in covers)
+                foreach (MFCover mfCover in covers)
                 {
                   bool add = false;
+                  item = null; // reset item to null
                   switch (DisplayFilter)
                   {
                     case "High":
-                      if (f.ImageResolutionClass == "High")
+                      if (mfCover.ImageResolutionClass == "High")
                         add = true;
                       break;
                     case "Medium":
-                      if (f.ImageResolutionClass == "Medium")
+                      if (mfCover.ImageResolutionClass == "Medium")
                         add = true;
                       break;
                     case "Low":
-                      if (f.ImageResolutionClass == "Low")
+                      if (mfCover.ImageResolutionClass == "Low")
                         add = true;
                       break;
                     default:
@@ -1088,11 +1071,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   if (add)
                   {
-                      item = new GUIListItem(f.ImageResolution);
+                      item = new GUIListItem(mfCover.ImageResolution);
                       item.IsRemote = false;
-                      item.TVTag = f;
-                      item.IconImage = ImageAllocator.GetOtherImage(f.FullPath, new System.Drawing.Size(0, 0), false);
-                      item.IconImageBig = ImageAllocator.GetOtherImage(f.FullPath, new System.Drawing.Size(0, 0), false);
+                      item.TVTag = mfCover;
+                      item.Path = mfCover.FullPath;
+                      item.IconImageBig = ImageAllocator.GetOtherImage(mfCover.FullPath, new System.Drawing.Size(400, 600), false);
+                      item.IconImage = item.IconImageBig;
+                      item.ThumbnailImage = item.IconImageBig;
                       item.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
                   }
                   loadingWorker.ReportProgress((i < 100 ? ++i : 100), item);
@@ -1109,20 +1094,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("cover.selectedcoversize", cover.ImageSizeFriendly);
           MyFilmsDetail.setGUIProperty("cover.selectedcoversizenum", cover.ImageSize.ToString());
           MyFilmsDetail.setGUIProperty("cover.selectedcovername", cover.FileName);
-
-          string preview = string.Empty;
-          //if (ImageAllocator.LoadImageFastFromFile(cover.FullPath) == null) // Ensure Artwork on Disk is valid as well
-          //{
-          //  LogMyFilms.Debug("Artwork is invalid, deleting...");
-          //  cover.Delete();
-          //  cover.Chosen = false;
-          //  m_Facade.SelectedListItem.Label = "Deleted";
-          //}
-
-          //// Should be safe to assign fullsize Artwork if available
-          //preview = ImageAllocator.GetOtherImage(cover.FullPath, default(System.Drawing.Size), false);
-          preview = m_Facade.SelectedListItem.IconImageBig;
-          MyFilmsDetail.setGUIProperty("cover.selectedpreview", preview);
+          MyFilmsDetail.setGUIProperty("cover.selectedpreview", m_Facade.SelectedListItem.Path);
 
         }
 
@@ -1281,14 +1253,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           LogMyFilms.Debug("Failed to delete file: " + FullPath + " (" + ex.Message + ")");
         }
-      }
-
-      enum Quality
-      {
-        Unknown,
-        Low,
-        Medium,
-        High
       }
 
       private string fullPath;
