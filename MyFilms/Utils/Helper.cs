@@ -446,21 +446,37 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns></returns>
         public static string GetSortByName(string sName)
         {
-            string SortBy = sName;
-            string SortByStrings = "SortByStrings";
+          string SortBy = sName;
+          string SortByStrings = "SortByStrings";
 
-            // loop through and try to remove a preposition            
-            string[] prepositions = SortByStrings.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);            
-            foreach (string currWord in prepositions)
+          // loop through and try to remove a preposition            
+          string[] prepositions = SortByStrings.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+          foreach (string currWord in prepositions)
+          {
+            string word = currWord.ToLower() + " ";
+            if (sName.ToLower().IndexOf(word) == 0)
             {
-                string word = currWord.ToLower() + " ";
-                if (sName.ToLower().IndexOf(word) == 0)
-                {
-                    SortBy = sName.Substring(word.Length) + ", " + sName.Substring(0, currWord.Length);
-                    break;
-                }
+              SortBy = sName.Substring(word.Length) + ", " + sName.Substring(0, currWord.Length);
+              break;
             }
-            return SortBy;
+          }
+          return SortBy;
+        }
+
+        /// <summary>
+        /// Returns a string limited by length
+        /// </summary>
+        /// <param name="sName"></param>
+        /// <param name="iLength"></param>
+        /// <returns></returns>
+        public static string LimitString(string sName, int iLength)
+        {
+          string strLimitedString = sName;
+          if (iLength > 0 && sName.Length > iLength)
+          {
+            strLimitedString = sName.Substring(0, iLength) + " [...]";
+          }
+          return strLimitedString;
         }
 
         /// <summary>
@@ -468,7 +484,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-		public static string ConvertSMSInputToPinCode(string input) {
+		    public static string ConvertSMSInputToPinCode(string input) {
 			switch (input.ToLower()) {
 				case "a":
 				case "b":
