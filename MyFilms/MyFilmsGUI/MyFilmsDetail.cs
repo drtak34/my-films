@@ -224,7 +224,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //PersonImages = 32,
             //MultiFanart = 33,
             //Trailer = 34,
-            //Empty35 = 35,
+            //TMDB_Id = 35,
             //Empty36 = 36,
             //Empty37 = 37,
             //Empty38 = 38,
@@ -265,7 +265,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             PersonImages = 72,
             MultiFanart = 73,
             Trailer = 74,
-            Empty35 = 75,
+            TMDB_Id = 75,
             Empty36 = 76,
             Empty37 = 77,
             Empty38 = 78,
@@ -3182,10 +3182,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"))
             {
               try { System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"); }
-              catch (Exception ex)
-              {
-                LogMyFilms.Debug("Error creating user script directory: '" + ex.Message + "'");
-              }
+              catch (Exception ex) { LogMyFilms.Debug("Error creating user script directory: '" + ex.Message + "'"); }
             }
 
             // Grabber Directory filled, search for XML scripts files
@@ -3613,7 +3610,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 "PersonImages",
                 "MultiFanart",
                 "Trailer",
-                "Empty35",
+                "TMDB_Id",
                 "Empty36",
                 "Empty37",
                 "Empty38",
@@ -3840,7 +3837,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 "PersonImages",
                 "MultiFanart",
                 "Trailer",
-                "Empty35",
+                "TMDB_Id",
                 "Empty36",
                 "Empty37",
                 "Empty38",
