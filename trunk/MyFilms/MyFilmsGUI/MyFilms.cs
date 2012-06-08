@@ -13614,11 +13614,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       catch (Exception) { }
-
+      
       FileTarget fileTarget = new FileTarget();
       // Filter logFilter = new Filter(); // use to only log MyFilms messages ...
       fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
-      fileTarget.Layout = "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " +  // "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " + 
+      fileTarget.Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss,fff} " +  // "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " + 
                           // "| ${qpc:normalize=true:difference=true:alignDecimalPoint=true:precision=3:seconds=true} " + 
                           "${level:fixedLength=true:padding=5} [" +
                           //"[${threadname:fixedLength=true:padding=10} | " + 
