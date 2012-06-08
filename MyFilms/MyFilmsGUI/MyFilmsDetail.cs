@@ -3280,167 +3280,139 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Grabber_URLClass.IMDBUrl wurl;
             ArrayList listUrl = new ArrayList();
 
-            //GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
-            //if (dlgPrgrs != null)
-            //{
-            //  dlgPrgrs.Reset();
-            //  dlgPrgrs.DisplayProgressBar = false;
-            //  dlgPrgrs.ShowWaitCursor = false;
-            //  dlgPrgrs.DisableCancel(true);
-            //  dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Internet Movie Grabber"));
-            //  dlgPrgrs.SetLine(1, "Searching Movie/Name ...");
-            //  dlgPrgrs.Percentage = 0;
-            //  dlgPrgrs.NeedRefresh();
-            //  dlgPrgrs.ShouldRenderLayer();
-            //  dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
-            GUIWaitCursor.Init(); GUIWaitCursor.Show();
             new System.Threading.Thread(delegate()
               {
+                GUIWaitCursor.Init(); GUIWaitCursor.Show();
+                try
+                {
                   // listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath); // MoviePath only when nfo reader used !!!
                   listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
-              //dlgPrgrs.Percentage = 100;
-              //dlgPrgrs.SetLine(1, "Finished Searching Movie/Name ...");
-              //dlgPrgrs.NeedRefresh();
-              //dlgPrgrs.ShouldRenderLayer();
-              //Thread.Sleep(500);
-              //dlgPrgrs.ShowWaitCursor = false;
-              //dlgPrgrs.Close();
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.ErrorException("grabb_Internet_Details_Seach() - exception = '" + ex.Message + "'", ex);
+                }
+                GUIWaitCursor.Hide();
 
-
-              //new System.Threading.Thread(delegate()
-              //  {
-              //    dlgPrgrs.Percentage = 10;
-              //    Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
-              //    if (dlgPrgrs != null)
-              //    {
-              //      dlgPrgrs.Percentage = 100;
-              //      dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
-              //      dlgPrgrs.Close();
-              //    }
-
-              //    GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
-              //  }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
-              //return;
-            //}
-
-
-            int listCount = listUrl.Count;
-            GUIWaitCursor.Hide();
-            if (!MyFilms.conf.StrGrabber_Always)
-                listCount = 2;
-            switch (listCount)
-            {
-                case 1: // only one match -> grab details without user interaction
-                    wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[0];
-                    grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, false, grabtype, sTitles);
-                    break;
-                case 0:
-                    break;
-                default:
-                    GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                    System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
-                    choiceViewMenu.Clear();
-
-                    if (dlg == null) return;
-                    dlg.Reset();
-                    dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                    dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
-                    choiceViewMenu.Add("manual selection");
-
-                    for (int i = 0; i < listUrl.Count; i++)
-                    {
-                      wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[i];
-                      if (wurl.Director.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString()) && wurl.Year.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString()) && (!MyFilms.conf.StrGrabber_Always))
-                      {
-                          if (dlg.SelectedLabel == -1)
-                              dlg.SelectedLabel = i + 1;
-                          else
-                              dlg.SelectedLabel = -2;
-                      }
-                      string viewTitle = wurl.Title;
-                      if (!string.IsNullOrEmpty(wurl.Year)) viewTitle += " (" + wurl.Year + ")";
-                      if (!string.IsNullOrEmpty(wurl.Options)) viewTitle += " - " + wurl.Options + "";
-                      dlg.Add(viewTitle);  
-                      choiceViewMenu.Add(wurl.Title);
-                    }
-                    string[] split = MovieName.Trim().Split(new Char[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string s in split)
-                    {
-                      if (s.Length > 2)
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + s + "'"); // add words from title as search items
-                        choiceViewMenu.Add(s);
-                      }
-                    }
-                    if (grabtype != GrabType.Person)
-                    {
-                      // add all titles as alternative search expressions
-                      if (!string.IsNullOrEmpty(sTitles.OriginalTitle) && !choiceViewMenu.Contains(sTitles.OriginalTitle))
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.OriginalTitle + "'"); //search
-                        choiceViewMenu.Add(sTitles.OriginalTitle);
-                      }
-                      if (!string.IsNullOrEmpty(sTitles.TranslatedTitle) && !choiceViewMenu.Contains(sTitles.TranslatedTitle))
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.TranslatedTitle + "'");
-                        choiceViewMenu.Add(sTitles.TranslatedTitle);
-                      }
-                      if (!string.IsNullOrEmpty(sTitles.FormattedTitle) && !choiceViewMenu.Contains(sTitles.FormattedTitle))
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.FormattedTitle + "'");
-                        choiceViewMenu.Add(sTitles.FormattedTitle);
-                      }
-                      if (!string.IsNullOrEmpty(sTitles.MovieDirectoryTitle) && !choiceViewMenu.Contains(sTitles.MovieDirectoryTitle))
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieDirectoryTitle + "'");
-                        choiceViewMenu.Add(sTitles.MovieDirectoryTitle);
-                      }
-                      if (!string.IsNullOrEmpty(sTitles.MovieFileTitle) && !choiceViewMenu.Contains(sTitles.MovieFileTitle))
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieFileTitle + "'");
-                        choiceViewMenu.Add(sTitles.MovieFileTitle);
-                      }
-                    }
-
-                    if (!(dlg.SelectedLabel > -1))
-                    {
-                        dlg.SelectedLabel = -1;
-                        dlg.DoModal(GetID);
-                    }
-                    if (dlg.SelectedLabel == 0)
-                    {
-                        VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-                        if (null == keyboard) return;
-                        keyboard.Reset();
-                        keyboard.Text = MovieName;
-                        keyboard.DoModal(GetID);
-                        if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
-                            grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, MoviePath, grabtype, sTitles);
+                int listCount = listUrl.Count;
+                if (!MyFilms.conf.StrGrabber_Always)
+                    listCount = 2;
+                switch (listCount)
+                {
+                    case 1: // only one match -> grab details without user interaction
+                        wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[0];
+                        grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, false, grabtype, sTitles);
                         break;
-                    }
-                    if (dlg.SelectedLabel > 0 && dlg.SelectedLabel <= listUrl.Count)
-                    {
-                        wurl = (Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
-                        grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, true, grabtype, sTitles);
+                    case 0:
                         break;
-                    }
-                    if (dlg.SelectedLabel > listUrl.Count)
-                    {
-                      //VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-                      //if (null == keyboard) return;
-                      //keyboard.Reset();
-                      //keyboard.Text = dlg.SelectedLabelText;
-                      //// keyboard.Text = choiceViewMenu[dlg.SelectedLabel];
-                      //keyboard.DoModal(GetID);
-                      //if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
-                      //  grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, MoviePath, grabtype, sTitles);
-                      string strChoice = choiceViewMenu[dlg.SelectedLabel];
-                      LogMyFilms.Debug("grabb_Internet_Informations_Search(): (re)search with new search expression: '" + strChoice + "'");
-                      grabb_Internet_Informations_Search(strChoice, GetID, wscript, MoviePath, grabtype, sTitles);
-                      break;
-                    }
-                    break;
-            }
+                    default:
+                        #region manual choice
+                        GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                        List<string> choiceViewMenu = new List<string>();
+                        choiceViewMenu.Clear();
+
+                        if (dlg == null) return;
+                        dlg.Reset();
+                        dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                        dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
+                        choiceViewMenu.Add("manual selection");
+
+                        for (int i = 0; i < listUrl.Count; i++)
+                        {
+                          wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[i];
+                          if (wurl.Director.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString()) && wurl.Year.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString()) && (!MyFilms.conf.StrGrabber_Always))
+                          {
+                              if (dlg.SelectedLabel == -1)
+                                  dlg.SelectedLabel = i + 1;
+                              else
+                                  dlg.SelectedLabel = -2;
+                          }
+                          string viewTitle = wurl.Title;
+                          if (!string.IsNullOrEmpty(wurl.Year)) viewTitle += " (" + wurl.Year + ")";
+                          if (!string.IsNullOrEmpty(wurl.Options)) viewTitle += " - " + wurl.Options + "";
+                          dlg.Add(viewTitle);  
+                          choiceViewMenu.Add(wurl.Title);
+                        }
+                        string[] split = MovieName.Trim().Split(new Char[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string s in split)
+                        {
+                          if (s.Length > 2)
+                          {
+                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + s + "'"); // add words from title as search items
+                            choiceViewMenu.Add(s);
+                          }
+                        }
+                        if (grabtype != GrabType.Person)
+                        {
+                          #region add all titles as alternative search expressions
+                          if (!string.IsNullOrEmpty(sTitles.OriginalTitle) && !choiceViewMenu.Contains(sTitles.OriginalTitle))
+                          {
+                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.OriginalTitle + "'"); //search
+                            choiceViewMenu.Add(sTitles.OriginalTitle);
+                          }
+                          if (!string.IsNullOrEmpty(sTitles.TranslatedTitle) && !choiceViewMenu.Contains(sTitles.TranslatedTitle))
+                          {
+                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.TranslatedTitle + "'");
+                            choiceViewMenu.Add(sTitles.TranslatedTitle);
+                          }
+                          if (!string.IsNullOrEmpty(sTitles.FormattedTitle) && !choiceViewMenu.Contains(sTitles.FormattedTitle))
+                          {
+                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.FormattedTitle + "'");
+                            choiceViewMenu.Add(sTitles.FormattedTitle);
+                          }
+                          if (!string.IsNullOrEmpty(sTitles.MovieDirectoryTitle) && !choiceViewMenu.Contains(sTitles.MovieDirectoryTitle))
+                          {
+                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieDirectoryTitle + "'");
+                            choiceViewMenu.Add(sTitles.MovieDirectoryTitle);
+                          }
+                          if (!string.IsNullOrEmpty(sTitles.MovieFileTitle) && !choiceViewMenu.Contains(sTitles.MovieFileTitle))
+                          {
+                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + sTitles.MovieFileTitle + "'");
+                            choiceViewMenu.Add(sTitles.MovieFileTitle);
+                          }
+                          #endregion
+                        }
+
+                        if (!(dlg.SelectedLabel > -1))
+                        {
+                            dlg.SelectedLabel = -1;
+                            dlg.DoModal(GetID);
+                        }
+                        if (dlg.SelectedLabel == 0)
+                        {
+                            VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                            if (null == keyboard) return;
+                            keyboard.Reset();
+                            keyboard.Text = MovieName;
+                            keyboard.DoModal(GetID);
+                            if (keyboard.IsConfirmed && keyboard.Text.Length > 0)
+                               grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, MoviePath, grabtype, sTitles);
+                            break;
+                        }
+                        if (dlg.SelectedLabel > 0 && dlg.SelectedLabel <= listUrl.Count)
+                        {
+                            wurl = (Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
+                            grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, true, grabtype, sTitles);
+                            break;
+                        }
+                        if (dlg.SelectedLabel > listUrl.Count)
+                        {
+                          //VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                          //if (null == keyboard) return;
+                          //keyboard.Reset();
+                          //keyboard.Text = dlg.SelectedLabelText;
+                          //// keyboard.Text = choiceViewMenu[dlg.SelectedLabel];
+                          //keyboard.DoModal(GetID);
+                          //if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                          //  grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, MoviePath, grabtype, sTitles);
+                          string strChoice = choiceViewMenu[dlg.SelectedLabel];
+                          LogMyFilms.Debug("grabb_Internet_Informations_Search(): (re)search with new search expression: '" + strChoice + "'");
+                          grabb_Internet_Informations_Search(strChoice, GetID, wscript, MoviePath, grabtype, sTitles);
+                          break;
+                        }
+                        break;
+                        #endregion
+                }
             GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
               }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
             return;
@@ -3451,7 +3423,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, GrabType grabtype, Searchtitles sTitles)
         {
-          LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID + "', interactive = '" + interactive + "'"); 
+          LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID + "', interactive = '" + interactive + "'");
+          GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
 
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
           string[] Result = new string[80];
@@ -3480,12 +3453,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 if (interactive)
                 {
-                  GUIWaitCursor.Init();
-                  GUIWaitCursor.Show();
+                  // GUIWaitCursor.Init(); GUIWaitCursor.Show();
+                  if (dlgPrgrs != null)
+                  {
+                    dlgPrgrs.Reset();
+                    dlgPrgrs.DisplayProgressBar = false;
+                    dlgPrgrs.ShowWaitCursor = true;
+                    dlgPrgrs.DisableCancel(true);
+                    dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Internet Updates"));
+                    dlgPrgrs.SetLine(1, "Loading Details ...");
+                    dlgPrgrs.Percentage = 0;
+                    dlgPrgrs.NeedRefresh();
+                    dlgPrgrs.ShouldRenderLayer();
+                    dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+                  }
+
                 }
                 // Result = Grab.GetDetail(url, downLoadPath, wscript);
                 Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
-                if (interactive) GUIWaitCursor.Hide();
+                if (interactive)
+                {
+                  GUIWaitCursor.Hide();
+                  if (dlgPrgrs != null)
+                  {
+                    dlgPrgrs.ShowWaitCursor = false; 
+                    dlgPrgrs.Close();
+                  }
+                }
 
                 // copy mapped values to original values
                 for (int i = 0; i < 40; i++)
@@ -3504,30 +3498,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   #region Details
 
                   string strChoice = "all"; // defaults to "all", if no other choice
-                  bool onlyselected = true;
+                  bool onlyselected = false;
                   bool onlymissing = false;
                   bool onlynonempty = false;
 
                   if (interactive) // Dialog only in interactive mode
                   {
                     #region interactive selection dialog
-                    // check out alternative select dialogs (hint Dadeo):
+                    // ToDo: check out alternative select dialogs (hint Dadeo):
                     //GUIDialogSelect dlgselect = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);
                     //GUIDialogSelect2 dlgselect2 = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);
 
                     List<string> choiceViewMenu = new List<string>();
-                    GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    GUIDialogSelect dlgmenu = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);  // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  // GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     dlgmenu.Reset();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798732)); // Choose property to update
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798734));
+                    dlgmenu.SetButtonLabel("");
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798734) + " *** ");
                     choiceViewMenu.Add("all");
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798735));
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798735) + " *** ");
                     choiceViewMenu.Add("missing");
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798730));
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798730) + " *** ");
                     choiceViewMenu.Add("all-onlynewdata");
 
                     #region populate selection menu
 
+                    int iPropertyLengthLimit = 33;
                     string[] PropertyList = new string[]
                       {
                         "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director",
@@ -3551,11 +3547,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (strNewValue == null) strNewValue = "";
 
                         if ( // make sure, only supported fields are offered to user for update
-                          wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") && wProperty != "TagLine" &&
-                          wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
+                          wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") && 
+                          // wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && 
+                          wProperty != "Fanart" && wProperty != "Aspectratio" && 
+                          wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
                           && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
                         {
-                          dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), 20) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), 20) + "'");
+                          dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
                           choiceViewMenu.Add(wProperty);
                           LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                         }
@@ -3564,7 +3562,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'"); 
                         }
                       }
-                      catch { LogMyFilms.Debug("GrabberUpdate - Error adding Property '" + wProperty + "' to Selectionmenu"); }
+                      catch { LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu"); }
                       i = i + 1;
                     }
 
@@ -3964,7 +3962,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   #region fanart
 
-                  GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+                  // GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS); // already defined above !
                   if (dlgPrgrs != null)
                   {
                     dlgPrgrs.Reset();
@@ -3981,7 +3979,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     new System.Threading.Thread(delegate()
                         {
                           string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
-                          GrabArtwork(title, ttitle, (int)year, director, imdbid, MyFilms.conf.StrTitle1.ToString(), dlgPrgrs);
+                          GrabArtwork(title, ttitle, (int)year, director, imdbid, MyFilms.conf.StrTitle1, dlgPrgrs);
                           //  dlgPrgrs.Percentage = 100;
                           //  dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
                           //  dlgPrgrs.NeedRefresh();
@@ -4012,8 +4010,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
           return;
         }
-
-
 
         private static void grabb_Internet_Details_Informations_Cover(string[] Result, bool interactive, int GetID, string wscript, GrabType grabtype, Searchtitles sTitles)
         {
@@ -4070,12 +4066,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           switch (grabtype)
           {
             case GrabType.MultiCovers:
+              #region multiple cover images
               Grabber.GrabberScript script = new GrabberScript(wscript);
               ArtworkInfo ArtworkImages = new ArtworkInfo(Result[(int)Grabber_URLClass.Grabber_Output.MultiPosters], script.URLPrefix);
               List<ArtworkInfoItem> testlist = new List<ArtworkInfoItem>();
               testlist = Grabber.GrabUtil.GetMultiImageList(script.URLPrefix, Result[(int)Grabber_URLClass.Grabber_Output.MultiPosters], "");
 
-              System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
+              List<string> choiceViewMenu = new List<string>();
               GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
               dlgmenu.Reset();
               dlgmenu.SetHeading(GUILocalizeStrings.Get(10798764)); // Load Covers ...
@@ -4116,12 +4113,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   dlgPrgrs.Percentage = 0;
                   dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
 
-
                   new System.Threading.Thread(delegate()
                   {
                       try
                       {
-
                           string filename = string.Empty;
                           string filename1 = string.Empty;
                           string filename2 = string.Empty;
@@ -4154,10 +4149,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               }
                           }
                       }
-                      catch (Exception ex)
-                      {
-                          LogMyFilms.DebugException("Thread 'MyFilmsCoverLoader' - exception! - ", ex);
-                      }
+                      catch (Exception ex) { LogMyFilms.DebugException("Thread 'MyFilmsCoverLoader' - exception! - ", ex); }
                       if (dlgPrgrs != null)
                           dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); dlgPrgrs.SetLine(2, ""); Thread.Sleep(50); dlgPrgrs.Close(); // Done...
                       GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
@@ -4171,8 +4163,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }) { Name = "MyFilmsCoverLoader", IsBackground = true }.Start();
                   return;
               }
+              #endregion
               break;
             case GrabType.Cover:
+              #region single cover
               if (interactive)
               {
                 setGUIProperty("picture", tmpPicture);
@@ -4212,6 +4206,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 try { File.Delete(tmpPicture); }
                 catch (Exception ex) { LogMyFilms.Debug("Error deleting tmp file: '" + tmpPicture + "' - Exception: " + ex); }
               }
+              #endregion
               break;
             default:
               break;
