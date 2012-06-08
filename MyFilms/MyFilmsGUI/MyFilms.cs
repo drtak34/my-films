@@ -9429,9 +9429,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
 
+          this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
           MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false, sTitles);
-          //Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
-          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          // Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
+          // this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          // RefreshFacade() will be initiated by OnDetailsUpdated handler, if threaded loading is finished ! - so should NOT be loaded here ...
           break;
 
         case "grabber-person":
@@ -9439,8 +9441,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
           string personname = this.facadeFilms.SelectedListItem.Label;
 
+          this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
           MyFilmsDetail.grabb_Internet_Informations(personname, GetID, MyFilms.conf.StrGrabber_ChooseScript, "", "", MyFilmsDetail.GrabType.Person, false, null);
-          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          // Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          // RefreshFacade() will be initiated by OnDetailsUpdated handler, if threaded loading is finished ! - so should NOT be loaded here ...
           break;
 
         case "addtocollection":
@@ -13451,7 +13455,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("OnDetailsUpdated(): Received DetailUpdated event in context '" + GetID + "', doUpdateMainViewByFinishEvent '" + doUpdateMainViewByFinishEvent + "'");
       if (GetID == MyFilms.ID_MyFilms && doUpdateMainViewByFinishEvent)
       {
-        LogMyFilms.Debug("OnDetailsUpdated(): now reloading Details");
+        LogMyFilms.Debug("OnDetailsUpdated(): now reloading Details in Main screen");
         doUpdateMainViewByFinishEvent = false;
         Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
       }
