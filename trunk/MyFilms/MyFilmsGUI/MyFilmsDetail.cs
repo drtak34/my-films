@@ -1503,6 +1503,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "item1":
+                #region item1
                 if (StrUpdDflT1.Length > 0) keyboard.Text = StrUpdDflT1;
                 else keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1].ToString();
                 keyboard.DoModal(GetID);
@@ -1544,9 +1545,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Update_XML_database();
                   afficher_detail(true);
                 }
+                #endregion
                 break;
 
               case "item2":
+                #region item2
                 if (StrUpdDflT1.Length > 0) keyboard.Text = StrUpdDflT2;
                 else keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2].ToString();
                 keyboard.DoModal(GetID);
@@ -1587,6 +1590,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Update_XML_database();
                   afficher_detail(true);
                 }
+                #endregion
                 break;
 
               case "delete":
@@ -1667,18 +1671,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079833)); //Delete from catalog and disk
                 dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927)); // warning
                 dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));
-                  //If you confirm, you media files will physically be deleted !
+                //If you confirm, you media files will physically be deleted !
                 dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835)); //Are you sure you want to delete movie ?
                 dlgYesNo.DoModal(GetID);
                 if (dlgYesNo.IsConfirmed)
                 {
                   // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeFilms.SelectedListItem.ItemId);
                   MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true);
-                  MyFilms.r = BaseMesFilms.ReadDataMovies(
-                    MyFilms.conf.StrDfltSelect,
-                    MyFilms.conf.StrFilmSelect,
-                    MyFilms.conf.StrSorta,
-                    MyFilms.conf.StrSortSens);
+                  MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                   afficher_detail(true);
                   break;
                 }
@@ -1794,6 +1794,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               case "updmediainfos":
                 {
+                  #region update mediainfo
                   string FileDate = string.Empty;
                   string VideoPlaytime = string.Empty;
                   string VideoCodec = string.Empty;
@@ -1933,6 +1934,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   //MyFilms.r[MyFilms.conf.StrIndex]["Aspectratio"] = string.Empty;
                   //Update_XML_database();
                   //afficher_detail(true);
+                  #endregion
                 }
                 break;
 
@@ -1956,8 +1958,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     mediapath = GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
                     sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
 
+                    // this will be executed after background thread finished
+                    doUpdateDetailsViewByFinishEvent = true;
                     grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.All, false, sTitles);
-                    afficher_detail(true);
+                    // afficher_detail(true); // -> will be executes by OnDetailsUpdated message handler later ...
                     setProcessAnimationStatus(false, m_SearchAnimation); // make sure it's switched off
                     break;
 
@@ -3957,6 +3961,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 Update_XML_database();
                 LogMyFilms.Info("Database Updated for title/ttitle: " + title + "/" + ttitle);
+
+                if (DetailsUpdated != null)
+                  DetailsUpdated(true); // will launch afficher_detail(true) via message handler
 
                 if (title.Length > 0 && MyFilms.conf.StrFanart && grabtype != GrabType.Person) // Get Fanart
                 {
