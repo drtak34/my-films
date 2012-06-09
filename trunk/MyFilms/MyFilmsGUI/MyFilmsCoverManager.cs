@@ -43,6 +43,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using Grabber;
 
   using MyFilmsPlugin.Utils;
+  using MyFilmsPlugin.MyFilms.Utils.Cornerstone.MP;
 
   class MyFilmsCoverManager : GUIWindow
   {
@@ -117,10 +118,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private int initialView = -1;
         bool m_bQuickSelect = false;
 
+        // rivate ImageSwapper CovermanagerBackground;
+        // private Utils.Cornerstone.MP.AsyncImageResource CovermanagerBackground = null;
+
         # region DownloadWorker
         static MyFilmsCoverManager()
         {
             // lets set up the downloader
+          //// create Backdrop image swapper
+          //CovermanagerBackground = new ImageSwapper();
+          //CovermanagerBackground.ImageResource.Delay = 250;
+          //CovermanagerBackground.PropertyOne = "#myfilms.cover.fanart";
+          //CovermanagerBackground.PropertyTwo = "#myfilms.cover.fanart2";
+
         }
         #endregion
 
@@ -170,7 +180,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               CurrentView = (View)initialView;
             }
             m_Facade.CurrentLayout = (GUIFacadeControl.Layout)CurrentView;
-          }            
+          }
+
+          MyFilmsDetail.DetailsUpdated += new MyFilmsDetail.DetailsUpdatedEventDelegate(OnDetailsUpdated);
 
           base.OnPageLoad();
           
@@ -326,6 +338,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           loadingWorker = null;
           Helper.enableNativeAutoplay();
+
+          MyFilmsDetail.DetailsUpdated -= new MyFilmsDetail.DetailsUpdatedEventDelegate(OnDetailsUpdated);
+
           base.OnPageDestroy(new_windowId);
         }
 
@@ -844,9 +859,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 } while (shouldContinue);
                 UpdateLayoutButton();
 
-                // (re)load facade
-                m_Facade.Clear();
-                loadingWorker.RunWorkerAsync(this.MovieID);
+                RefreshFacade();
 
                 GUIControl.FocusControl(GetID, controlId);
             }
@@ -870,6 +883,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setDefaultCover(chosen);
                 }
             }
+        }
+
+
+        private void RefreshFacade()
+        {
+          // (re)load facade
+          m_Facade.Clear();
+          loadingWorker.RunWorkerAsync(this.MovieID);
+        }
+
+
+        private void OnDetailsUpdated(bool searchPicture)
+        {
+          LogMyFilms.Debug("OnDetailsUpdated(): Received DetailUpdated event in context '" + GetID + "'");
+          if (GetID == MyFilms.ID_MyFilmsCoverManager)
+          {
+            LogMyFilms.Debug("OnDetailsUpdated(): now reloading Covermanager Facade");
+            RefreshFacade();
+          }
+          else
+            LogMyFilms.Debug("OnDetailsUpdated(): Skipping reloading Details");
         }
 
 
