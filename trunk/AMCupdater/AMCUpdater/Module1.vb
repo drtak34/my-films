@@ -1411,7 +1411,7 @@ Module Module1
             'InternetData.Add("languages")
             InternetData.Add("imdb_id")
             InternetData.Add("tmdb_id")
-            InternetData.Add("imdbrank")
+            InternetData.Add("imdb_rank")
             InternetData.Add("studio")
             InternetData.Add("fanart") ' Guzzi: added on request Dadeo
 

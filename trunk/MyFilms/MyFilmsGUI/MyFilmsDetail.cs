@@ -187,91 +187,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool doUpdateDetailsViewByFinishEvent = false;
 
         #region Enums
-        private enum Grabber_Output : int
-        {
-            //OriginalTitle = 0,
-            //TranslatedTitle = 1,
-            //PicturePathLong = 2,
-            //Description = 3,
-            //Rating = 4,
-            //Actors = 5,
-            //Director = 6,
-            //Producer = 7,
-            //Year = 8,
-            //Country = 9,
-            //Category = 10,
-            //URL = 11,
-            //PicturePathShort = 12,
-            //SubUrlPersons = 13,
-            //Comment = 14,
-            //Language = 15,
-            //Tagline = 16,
-            //Certification = 17,
-            //SubUrlTitles = 18,
-            //SubUrlCertification = 19,
-            //Writer = 20,
-            //IMDBrank = 21,
-            //Studio = 22,
-            //Edition = 23,
-            //Fanart = 24,
-            //AspectRatio = 25,
-            //TranslatedTitleAllNames = 26,
-            //TranslatedTitleAllValues = 27,
-            //CertificationAllNames = 28,
-            //CertificationAllValues = 29
-            //MultiPosters = 30,
-            //Photos = 31,
-            //PersonImages = 32,
-            //MultiFanart = 33,
-            //Trailer = 34,
-            //TMDB_Id = 35,
-            //Empty36 = 36,
-            //Empty37 = 37,
-            //Empty38 = 38,
-            //Empty39 = 39,
-
-            OriginalTitle = 40,
-            TranslatedTitle = 41,
-            PicturePathLong = 42,
-            Description = 43,
-            Rating = 44,
-            Actors = 45,
-            Director = 46,
-            Producer = 47,
-            Year = 48,
-            Country = 49,
-            Category = 50,
-            URL = 51,
-            PicturePathShort = 52,
-            SubUrlPersons = 53,
-            Comment = 54,
-            Language = 55,
-            Tagline = 56,
-            Certification = 57,
-            SubUrlTitles = 58,
-            SubUrlCertification = 59,
-            Writer = 60,
-            IMDBrank = 61,
-            Studio = 62,
-            Edition = 63,
-            Fanart = 64,
-            AspectRatio = 65,
-            TranslatedTitleAllNames = 66,
-            TranslatedTitleAllValues = 67,
-            CertificationAllNames = 68,
-            CertificationAllValues = 69,
-            MultiPosters = 70,
-            Photos = 71,
-            PersonImages = 72,
-            MultiFanart = 73,
-            Trailer = 74,
-            TMDB_Id = 75,
-            Empty36 = 76,
-            Empty37 = 77,
-            Empty38 = 78,
-            Empty39 = 79
-        }
-
         private enum Grabber_DB_Field
         {
                 //case "Number":
@@ -3294,7 +3209,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 catch (Exception ex)
                 {
-                  LogMyFilms.ErrorException("grabb_Internet_Details_Seach() - exception = '" + ex.Message + "'", ex);
+                  LogMyFilms.ErrorException("grabb_Internet_Details_Search() - exception = '" + ex.Message + "'", ex);
                 }
                 GUIWaitCursor.Hide();
 
@@ -3473,8 +3388,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
 
                 }
-                // Result = Grab.GetDetail(url, downLoadPath, wscript);
-                Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
+                try
+                {
+                  // Result = Grab.GetDetail(url, downLoadPath, wscript);
+                  Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.ErrorException("grabb_Internet_Details_Information() - exception = '" + ex.Message + "'", ex);
+                }
+
                 if (interactive)
                 {
                   GUIWaitCursor.Hide();
@@ -3532,7 +3455,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director",
                         "Producer", "Year", "Country", "Category", "URL", "ImageURL", "Writer", "Comments", "Languages",
-                        "TagLine", "Certification", "IMDB_Id", "IMDBrank", "Studio", "Edition", "Fanart", "Generic1",
+                        "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
                         "Generic2", "Generic3", "TranslatedTitleAllNames", "TranslatedTitleAllValues",
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
                         "MultiFanart", "Trailer", "TMDB_Id", "Empty36", "Empty37", "Empty38", "Empty39"
@@ -3551,8 +3474,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (strNewValue == null) strNewValue = "";
 
                         if ( // make sure, only supported fields are offered to user for update
-                          wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") && 
-                          // wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && 
+                          wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
+                          ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" && wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) && 
                           wProperty != "Fanart" && wProperty != "Aspectratio" && 
                           wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
                           && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
@@ -3652,7 +3575,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (IsUpdateRequired("Director", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Director], grabtype, onlyselected, onlymissing, onlynonempty))
                   {
                     director = Result[(int)Grabber_URLClass.Grabber_Output.Director];
-                    MyFilms.r[MyFilms.conf.StrIndex]["Director"] = Result[(int)Grabber_URLClass.Grabber_Output.Director].ToString();
+                    MyFilms.r[MyFilms.conf.StrIndex]["Director"] = Result[(int)Grabber_URLClass.Grabber_Output.Director];
                   }
                   if (IsUpdateRequired("Producer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Producer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Producer], grabtype, onlyselected, onlymissing, onlynonempty)) 
                     MyFilms.r[MyFilms.conf.StrIndex]["Producer"] = Result[(int)Grabber_URLClass.Grabber_Output.Producer];
@@ -3675,6 +3598,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (IsUpdateRequired("Languages", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Languages"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Language], grabtype, onlyselected, onlymissing, onlynonempty))
                     MyFilms.r[MyFilms.conf.StrIndex]["Languages"] =
                       Result[(int)Grabber_URLClass.Grabber_Output.Language];
+
+                  // AMC4 extended fields
+                  if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
+                  {
+                    if (IsUpdateRequired("TagLine", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TagLine"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Tagline], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["TagLine"] = Result[(int)Grabber_URLClass.Grabber_Output.Tagline];
+                    if (IsUpdateRequired("Certification", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Certification"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Certification], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["Certification"] = Result[(int)Grabber_URLClass.Grabber_Output.Certification];
+                    if (IsUpdateRequired("IMDB_Id", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Id], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"] = Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Id];
+                    if (IsUpdateRequired("IMDB_Rank", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Rank"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Rank], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Rank"] = Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Rank];
+                    if (IsUpdateRequired("TMDB_Id", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TMDB_Id"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TMDB_Id], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["TMDB_Id"] = Result[(int)Grabber_URLClass.Grabber_Output.TMDB_Id];
+                    if (IsUpdateRequired("Studio", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Studio"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Studio], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["Studio"] = Result[(int)Grabber_URLClass.Grabber_Output.Studio];
+                    if (IsUpdateRequired("Edition", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Edition"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Edition], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["Edition"] = Result[(int)Grabber_URLClass.Grabber_Output.Edition];
+                    //if (IsUpdateRequired("Fanart", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Fanart"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Fanart], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                    //  MyFilms.r[MyFilms.conf.StrIndex]["Fanart"] = Result[(int)Grabber_URLClass.Grabber_Output.Fanart];
+                    //if (IsUpdateRequired("Trailer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Trailer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Trailer], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                    //  MyFilms.r[MyFilms.conf.StrIndex]["Trailer"] = Result[(int)Grabber_URLClass.Grabber_Output.Trailer];
+                  }
+
                   if (grabtype == GrabType.All && IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty)) 
                     grabb_Internet_Details_Informations_Cover(Result, interactive, GetID, wscript, grabtype, sTitles);
 
@@ -3697,8 +3644,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   {
 
-                    System.Collections.Generic.List<string> choiceViewMenu =
-                      new System.Collections.Generic.List<string>();
+                    List<string> choiceViewMenu = new List<string>();
                     GUIDialogMenu dlgmenu =
                       (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     dlgmenu.Reset();
@@ -3716,7 +3662,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director",
                         "Producer", "Year", "Country", "Category", "URL", "ImageURL", "Writer", "Comments", "Languages",
-                        "TagLine", "Certification", "IMDB_Id", "IMDBrank", "Studio", "Edition", "Fanart", "Generic1",
+                        "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
                         "Generic2", "Generic3", "TranslatedTitleAllNames", "TranslatedTitleAllValues",
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
                         "MultiFanart", "Trailer", "TMDB_Id", "Empty36", "Empty37", "Empty38", "Empty39"
@@ -3744,20 +3690,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
                           wProperty != "Trailer")
                         {
-                          dlgmenu.Add(
-                            BaseMesFilms.Translate_Column(wProperty) + ": '" +
-                            strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" +
-                            strNewValue.Replace(Environment.NewLine, " # ") + "'");
+                          dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
                           choiceViewMenu.Add(wProperty);
-                          LogMyFilms.Debug(
-                            "GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue +
-                            "'");
+                          LogMyFilms.Debug("GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                         }
                         else
                         {
-                          LogMyFilms.Debug(
-                            "GrabberUpdate - Not added to menu (unsupported) - (" + wProperty + "): '" + strOldValue +
-                            "' -> '" + strNewValue + "'");
+                          LogMyFilms.Debug("GrabberUpdate - Not added to menu (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                         }
                       }
                       catch
@@ -3920,8 +3859,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     if (interactive)
                     {
-                      GUIDialogOK dlgOk =
-                        (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                      GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                       dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //MyFilms System Information
                       dlgOk.SetLine(2, GUILocalizeStrings.Get(10798625)); // no results found
                       dlgOk.DoModal(GetID);
@@ -4031,6 +3969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           switch (grabtype)
           {
             case GrabType.Cover:
+            case GrabType.All:
               tmpPicture = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
               tmpPicturename = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong].Substring(Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong].LastIndexOf("\\") + 1);
               break;
@@ -4173,6 +4112,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               #endregion
               break;
             case GrabType.Cover:
+              #region single cover without confirmation dialog
+              if (newPicture != tmpPicture)
+              {
+                if (!System.IO.Directory.Exists(newPicture.Substring(0, newPicture.LastIndexOf("\\"))))
+                {
+                  try { System.IO.Directory.CreateDirectory(newPicture.Substring(0, newPicture.LastIndexOf("\\"))); }
+                  catch (Exception ex) { LogMyFilms.Debug("Could not create directory '" + newPicture.Substring(0, newPicture.LastIndexOf("\\")) + "' - Exception: " + ex); }
+                }
+                try { File.Copy(tmpPicture, newPicture, true); }
+                catch (Exception ex) { LogMyFilms.Debug("Error copy file: '" + tmpPicture + "' - Exception: " + ex); }
+              }
+
+              if (newPicture != tmpPicture)
+              {
+                try { File.Delete(tmpPicture); }
+                catch (Exception ex) { LogMyFilms.Debug("Error deleting tmp file: '" + tmpPicture + "' - Exception: " + ex); }
+              }
+              #endregion
+              break;
+            case GrabType.All:
               #region single cover
               if (interactive)
               {
