@@ -3121,7 +3121,7 @@ namespace Grabber_Interface
             break;
           case 19:
           case 59:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "IMDBrank" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "IMDB_Rank" + mapped + Environment.NewLine;
             break;
           case 20:
           case 60:
@@ -4627,7 +4627,7 @@ namespace Grabber_Interface
       Fields[16] = "Tagline";
       Fields[17] = "Certification";
       Fields[18] = "IMDB_Id";
-      Fields[19] = "IMDBrank";
+      Fields[19] = "IMDB_Rank";
       Fields[20] = "Studio";
       Fields[21] = "Edition";
       Fields[22] = "Fanart";

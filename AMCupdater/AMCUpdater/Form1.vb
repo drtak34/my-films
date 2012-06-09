@@ -297,7 +297,7 @@ Public Class Form1
         InternetData.Add("tagline", "tagline")
         InternetData.Add("imdb_id", "imdb_id")
         InternetData.Add("tmdb_id", "tmdb_id")
-        InternetData.Add("imdbrank", "imdbrank")
+        InternetData.Add("imdb_rank", "imdb_rank")
         InternetData.Add("studio", "studio")
         InternetData.Add("fanart", "fanart") ' Guzzi: added on request Dadeo
 

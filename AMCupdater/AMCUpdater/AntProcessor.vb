@@ -3489,7 +3489,7 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Tagline", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"IMDB_Id", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"TMDB_Id", "String"})
-            ds.Tables("tblAntFields").Rows.Add(New Object() {"ImdbRank", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"IMDB_Rank", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Studio", "String"})
         End If
 

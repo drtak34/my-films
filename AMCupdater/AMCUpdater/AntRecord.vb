@@ -70,7 +70,7 @@ Public Class AntRecord
         'Tagline = 16
         'Certification = 17
         'IMDB_Id = 18
-        'IMDBrank = 19
+        'IMDB_Rank = 19
         'Studio = 20
         'Edition = 21
         'Fanart = 22
