@@ -7641,11 +7641,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             string otitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
             string ttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-            LogMyFilms.Debug("OnPlayBackStarted() was initiated - movie index = '" + MyFilms.conf.StrIndex + "', count = '" + MyFilms.r.Length + "', otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
+            LogMyFilms.Debug("OnPlayBackStarted() was initiated - MyFilms.conf.StrIndex = '" + MyFilms.conf.StrIndex + "', count = '" + MyFilms.r.Length + "', otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
 
-            // store informations for action at endplayback if any
+            // store informations for action at endplayback if any - Filmnlist filter is: r = BaseMesFilms.ReadDataMovies(conf.GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
+
             MyFilms.conf.StrPlayedMovie = movie; // store movie object
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
+            MyFilms.conf.StrPlayedGlobalFilterString = MyFilms.conf.StrGlobalFilterString;
+            MyFilms.conf.StrPlayedViewSelect = MyFilms.conf.StrViewSelect;
             MyFilms.conf.StrPlayedDfltSelect = MyFilms.conf.StrDfltSelect;
             MyFilms.conf.StrPlayedSelect = MyFilms.conf.StrFilmSelect;
             MyFilms.conf.StrPlayedSort = MyFilms.conf.StrSorta;
@@ -7739,10 +7742,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //}
             try
             {
-                DataRow[] r1 = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
+                //  r = BaseMesFilms.ReadDataMovies(conf.GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
+                DataRow[] r1 = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrPlayedGlobalFilterString + MyFilms.conf.StrPlayedViewSelect + MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
                 string otitle = r1[MyFilms.conf.StrPlayedIndex]["OriginalTitle"].ToString();
                 string ttitle = r1[MyFilms.conf.StrPlayedIndex]["TranslatedTitle"].ToString();
-                LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - movie index = '" + MyFilms.conf.StrPlayedIndex + "', count = '" + r1.Length + "', otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
+                LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - MyFilms.conf.StrPlayedIndex = '" + MyFilms.conf.StrPlayedIndex + "', count = '" + r1.Length + "', otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
                 // Handle all movie files from idMovie
                 ArrayList movies = new ArrayList();
                 int playTimePercentage = 0; // Set watched flag after 80% of total played time
@@ -7992,8 +7996,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                 }
 
-                MyFilms.conf.StrPlayedMovie = null;  
+                MyFilms.conf.StrPlayedMovie = null;
                 MyFilms.conf.StrPlayedIndex = -1;
+                MyFilms.conf.StrPlayedGlobalFilterString = string.Empty;
+                MyFilms.conf.StrPlayedViewSelect = string.Empty;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
                 MyFilms.conf.StrPlayedSelect = string.Empty;
                 MyFilms.conf.StrPlayedSort = string.Empty;

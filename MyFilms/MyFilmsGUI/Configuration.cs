@@ -1017,6 +1017,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             set { roleSeparator = value; }
         }
 
+        private string strGlobalFilterString = string.Empty;
+        public string StrGlobalFilterString
+        {
+          get { return strGlobalFilterString; }
+          set { strGlobalFilterString = value; }
+        }
         private string strDfltSelect = string.Empty;
         public string StrDfltSelect
         {
@@ -1740,6 +1746,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return strWatchedField; }
           set { strWatchedField = value; }
+        }
+
+        private string strPlayedGlobalFilterString = string.Empty;
+        public string StrPlayedGlobalFilterString
+        {
+          get { return strPlayedGlobalFilterString; }
+          set { strPlayedGlobalFilterString = value; }
+        }
+        private string strPlayedViewSelect = string.Empty;
+        public string StrPlayedViewSelect
+        {
+          get { return strPlayedViewSelect; }
+          set { strPlayedViewSelect = value; }
         }
         private string strPlayedDfltSelect = string.Empty;
         public string StrPlayedDfltSelect
