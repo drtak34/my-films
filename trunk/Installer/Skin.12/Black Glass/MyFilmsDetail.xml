@@ -2526,5 +2526,21 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 -->
+
+    <control>
+      <description>Background Status Messages</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>520</posX>
+      <posY>30</posY>
+      <width>550</width>
+      <font>font10</font>
+      <textcolor>60ffffff</textcolor>
+      <label>#myfilms.details.downloadstatus</label>
+      <!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+
   </controls>
 </window>
