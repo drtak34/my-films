@@ -1062,6 +1062,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(10798642)); // Update by Property (choosen within the UPdate List Property
                 choiceViewMenu.Add("updproperty");
 
+                if (ExtendedStartmode("Details context: remove all details"))
+                {
+                  dlgmenu.Add(GUILocalizeStrings.Get(10798795)); // remove all movie details (selected film)
+                  choiceViewMenu.Add("updremovealldetails");
+                }
+
                 //if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && (MyFilms.conf.WindowsFileDialog))
                 if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
                 {
@@ -1707,6 +1713,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   #endregion
                 }
 
+              case "updremovealldetails":
+                AntMovieCatalog dsd = new AntMovieCatalog();
+                foreach (DataColumn dc in dsd.Movie.Columns)
+                {
+                  if (string.IsNullOrEmpty(dc.ColumnName)) continue;
+                  if (dc.ColumnName != "Number" && dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer && dc.ColumnName != MyFilms.conf.StrTitle1)
+                  {
+                    try
+                    {
+                      switch (ds.Movie.Columns[dc.ColumnName].DataType.Name)
+                      {
+                        case "DateTime":
+                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = DateTime.Now;
+                          break;
+                        case "Decimal":
+                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = 0;
+                          break;
+                        case "Int32":
+                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = 0;
+                          break;
+                        default:
+                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = null;
+                          break;
+                      }
+                      LogMyFilms.Debug("Delete value for property '" + dc.ColumnName + "'");
+                    }
+                    catch (Exception ex)
+                    {
+                      LogMyFilms.Debug("Error deleting value for property '" + dc.ColumnName + "', exception: ", ex.Message);
+                    }
+                  }
+                }
+                Update_XML_database();
+                afficher_detail(true);
+                break;
+              
               case "updmediainfos":
                 {
                   #region update mediainfo

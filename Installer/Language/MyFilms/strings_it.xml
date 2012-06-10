@@ -336,6 +336,7 @@
     <String id="10798790">Titolo principale</String>
     <String id="10798791">Titolo secondario</String>
     <String id="10798792">Titolo per Ordinamento</String>
+    <String id="10798795">Remove all movie details (selected film)</String>
     <String id="10798800">Attenzione: possibile errore runtime!</String>
     <String id="10798801">Il Trailer dovrebbe essere ricercato</String>
     <String id="10798802">Inizializzato per {0} films?</String>
