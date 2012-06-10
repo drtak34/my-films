@@ -2192,7 +2192,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
              dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
              dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
-             dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite"))
+             dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite"))
           )
         {
           switch (displayoption)

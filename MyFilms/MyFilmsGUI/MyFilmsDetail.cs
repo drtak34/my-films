@@ -1718,7 +1718,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 foreach (string[] displayItem in deleteItems)
                 {
                   string wproperty = displayItem[0];
-                  if (!string.IsNullOrEmpty(wproperty))
+                  if (!string.IsNullOrEmpty(wproperty) && MyFilms.r[MyFilms.conf.StrIndex][wproperty] != DBNull.Value) // only reset fields existing in DB
                   {
                     try
                     {

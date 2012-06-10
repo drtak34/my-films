@@ -462,7 +462,7 @@ namespace MyFilmsPlugin.MyFilms
           destXml.Close();
         }
 
-        private static void CopyMovieExtendedDataToCustomFields(bool cleanfileonexit)
+        private static void CopyExtendedFieldsToCustomFields(bool cleanfileonexit)
         {
           Stopwatch saveDataWatch = new Stopwatch();
           saveDataWatch.Reset(); saveDataWatch.Start();
@@ -474,10 +474,7 @@ namespace MyFilmsPlugin.MyFilms
             foreach (DataColumn dc in commonColumns)
             {
               object temp;
-              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName]))
-              {
-                movieRow[dc.ColumnName] = temp;
-              }
+              // if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName]))  movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
               if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = movieRow[dc.ColumnName]))
               {
                 customFields[dc.ColumnName] = temp;
@@ -487,7 +484,7 @@ namespace MyFilmsPlugin.MyFilms
           }
           data.Movie.AcceptChanges();
           saveDataWatch.Stop();
-          LogMyFilms.Debug("CopyMovieExtendedDataToCustomFields() - Copy CustomFields from MovieRow's done ... (" + (saveDataWatch.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("CopyExtendedFieldsToCustomFields() - Copy CustomFields from MovieRow's done ... (" + (saveDataWatch.ElapsedMilliseconds) + " ms)");
         }
 
         private static void CreateMissingCustomFieldsEntries()
@@ -506,54 +503,6 @@ namespace MyFilmsPlugin.MyFilms
           }
           loadDataWatch.Stop();
           LogMyFilms.Debug("LoadMyFilmsFromDisk() - Check and create missing customfields for movie table done ... (" + (loadDataWatch.ElapsedMilliseconds) + " ms)");
-        }
-
-        private static void CopyCustomFieldsToMovieRows()
-        {
-          // Get Data from CustomFields copy customfields to movie table ...
-          var commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
-          // var onlyCustomFieldColumns = data.CustomFields.Columns.OfType<DataColumn>().Except(data.Movie.Columns.OfType<DataColumn>(), new DataColumnComparer());
-          Stopwatch loadDataWatch = new Stopwatch(); loadDataWatch.Reset(); loadDataWatch.Start();
-          //data.Movie.BeginLoadData();
-          //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
-          //foreach (DataColumn commonColumn in commonColumns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - Intersect Column: '" + commonColumn.ColumnName + "'");
-          foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
-          {
-            movieRow.BeginEdit();
-            AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-            foreach (DataColumn dc in commonColumns)
-            {
-              object temp;
-              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName]))
-              {
-                movieRow[dc.ColumnName] = temp;
-              }
-              // if (customFields[dc.ColumnName] != DBNull.Value && dc.ColumnName != "Movie_Id") movieRow[dc.ColumnName] = customFields[dc.ColumnName];
-            }
-            ////LogMyFilms.Debug("LoadMyFilmsFromDisk() - processing movie ID '" + movieRow.Number + "', otitle = '" + movieRow.OriginalTitle + "'");
-            //AntMovieCatalog.CustomFieldsRow[] cfCollection = movieRow.GetCustomFieldsRows();
-            //if (cfCollection.Length == 0) // create CustomFields Element, if not existing ...
-            //{
-            //  AntMovieCatalog.CustomFieldsRow customFields = data.CustomFields.NewCustomFieldsRow();
-            //  customFields.SetParentRow(movieRow);
-            //  data.CustomFields.AddCustomFieldsRow(customFields); // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
-            //}
-            //else // copy data to Movie Row if CustomFields Element exists ...
-            //{
-            //  AntMovieCatalog.CustomFieldsRow customFields = cfCollection[0];
-            //  foreach (DataColumn dc in commonColumns)
-            //  {
-            //    if (customFields[dc.ColumnName] != DBNull.Value && dc.ColumnName != "Movie_Id") movieRow[dc.ColumnName] = customFields[dc.ColumnName];
-            //  }
-            //}
-          }
-          //data.EnforceConstraints = true;
-          //data.Movie.EndLoadData();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy CustomFields PreAcceptChanges ... (" + (loadDataWatch.ElapsedMilliseconds) + " ms)");
-          data.Movie.AcceptChanges();
-          loadDataWatch.Stop();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy CustomFields to MovieRow's done ... (" + (loadDataWatch.ElapsedMilliseconds) + " ms)");
-          
         }
 
         private static void CreateOrUpdateCustomsFieldsProperties()
@@ -795,8 +744,6 @@ namespace MyFilmsPlugin.MyFilms
           watch.Stop();
           LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
           #endregion
-
-          // CopyCustomFieldsToMovieRows();
 
           #region Other join table tests
           //watch.Reset(); watch.Start();
@@ -1450,7 +1397,7 @@ namespace MyFilmsPlugin.MyFilms
 
           if (data == null) return false;
           if (timeout == 0) timeout = 10000; // default is 10 secs
-          CopyMovieExtendedDataToCustomFields(false);
+          CopyExtendedFieldsToCustomFields(false);
           LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'"); 
           if (_dataLock.TryEnterWriteLock(timeout))
           {
