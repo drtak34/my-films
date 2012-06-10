@@ -1702,7 +1702,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                         break;
                       default:
-                        MyFilms.r[MyFilms.conf.StrIndex][wproperty] = keyboard.Text.ToString();
+                        MyFilms.r[MyFilms.conf.StrIndex][wproperty] = keyboard.Text;
                         break;
                     }
                     Update_XML_database();
@@ -1714,37 +1714,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
 
               case "updremovealldetails":
-                AntMovieCatalog dsd = new AntMovieCatalog();
-                foreach (DataColumn dc in dsd.Movie.Columns)
+                ArrayList deleteItems = MyFilms.GetDisplayItems("deletedetails");
+                foreach (string[] displayItem in deleteItems)
                 {
-                  if (string.IsNullOrEmpty(dc.ColumnName)) continue;
-                  if (dc.ColumnName != "Number" && dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer && dc.ColumnName != MyFilms.conf.StrTitle1)
+                  string wproperty = displayItem[0];
+                  if (!string.IsNullOrEmpty(wproperty))
                   {
                     try
                     {
-                      switch (ds.Movie.Columns[dc.ColumnName].DataType.Name)
+                      switch (ds.Movie.Columns[wproperty].DataType.Name)
                       {
                         case "DateTime":
-                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = DateTime.Now;
+                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = DateTime.Now;
                           break;
                         case "Decimal":
-                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = 0;
+                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = 0;
                           break;
                         case "Int32":
-                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = 0;
+                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = 0;
                           break;
                         default:
-                          MyFilms.r[MyFilms.conf.StrIndex][dc.ColumnName] = null;
+                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = "";
                           break;
                       }
-                      LogMyFilms.Debug("Delete value for property '" + dc.ColumnName + "'");
+                      LogMyFilms.Debug("Delete value for property '" + wproperty + "'");
                     }
                     catch (Exception ex)
                     {
-                      LogMyFilms.Debug("Error deleting value for property '" + dc.ColumnName + "', exception: ", ex.Message);
+                      LogMyFilms.Debug("Error deleting value for property '" + wproperty + "', exception: ", ex.Message);
                     }
                   }
                 }
+
                 Update_XML_database();
                 afficher_detail(true);
                 break;
