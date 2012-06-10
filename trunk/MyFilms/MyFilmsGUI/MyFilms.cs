@@ -2491,9 +2491,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       SetFilmSelect();
 
       // set online filter only, if scan is done already ...
-      string GlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      MyFilms.conf.StrGlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
 
-      LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:             '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.GlobalFilterString:        '" + conf.StrGlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrViewSelect:             '" + conf.StrViewSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:             '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:             '" + conf.StrFilmSelect + "'");
@@ -2543,7 +2543,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
+      r = BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
 
       #region Additional sorting ...
       FieldType fieldType = GetFieldType(sortfield);
