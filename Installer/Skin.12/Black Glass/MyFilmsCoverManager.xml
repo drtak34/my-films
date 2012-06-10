@@ -197,7 +197,7 @@
 				<font>font24</font>
 				<height>45</height>
 				<textalign>center</textalign>
-				<label>#myfilms.cover.selectedcoverresolutionclass [#myfilms.cover.selectedcoverresolution] #myfilms.cover.selectedcoversize</label>
+				<label>#myfilms.cover.selectedcoverresolutionclass  #(iif(neq(#myfilms.cover.selectedcoverresolution,''),'[#myfilms.cover.selectedcoverresolution]','')) #myfilms.cover.selectedcoversize</label>
 			</control>
 		</control>
 
