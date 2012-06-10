@@ -310,13 +310,152 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         #endregion
+        public static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the  downloading from a queue for e.g. actor images
+
+
+        static Queue<DBPersonInfo> PersonstoDownloadQueue = new Queue<DBPersonInfo>();
+        private object locker = new object();
 
         public MyFilmsDetail()
         {
           //
           // TODO: Add constructor logic here
           //
+          // lets set up the downloader            
+          downloadingWorker.WorkerSupportsCancellation = true;
+          downloadingWorker.WorkerReportsProgress = true;
+          downloadingWorker.DoWork += new DoWorkEventHandler(downloadingWorker_DoWork);
+          downloadingWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(downloadingWorker_RunWorkerCompleted);
+          setDownloadStatus();
+
         }
+
+        void downloadingWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+          // ToDo: Add Updater logic here
+        }
+
+        static void downloadingWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+          LogMyFilms.Debug("downloadingWorker_RunWorkerCompleted() - Finished loading person  images !");  
+          setDownloadStatus();
+        }
+
+        static void downloadingWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+          grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
+          do
+          {
+            DBPersonInfo f;
+            setDownloadStatus();
+            lock (PersonstoDownloadQueue)
+            {
+              f = PersonstoDownloadQueue.Dequeue();
+            }
+            bool bDownloadSuccess = true;
+            // LogMyFilms.Debug("downloadingWorker_DoWork() - remaining items: '" + PersonstoDownloadQueue.Count + "'");
+
+            try
+            {
+              List<DBPersonInfo> personlist = tmdbapi.getPersonsByName(f.Name, false, "en");
+              if (personlist.Count == 0)
+              {
+                LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found, remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                bDownloadSuccess = false;
+              }
+              else
+              {
+                f = personlist[0];
+
+                if (f != null && !System.IO.File.Exists(Path.Combine(MyFilms.conf.StrPathArtist, f.Name)))
+                {
+                  if (f.Images.Count == 0)
+                  {
+                    LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' found, but no images available on TMDB! - remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                    bDownloadSuccess = false;
+                  }
+                  else
+                  {
+                    string filename = Path.Combine(MyFilms.conf.StrPathArtist, f.Name);
+                    //grabber.DBPersonInfo persondetails = new DBPersonInfo();
+                    //persondetails = tmdbapi.getPersonsById(f.Id, string.Empty);
+                    //LogMyFilms.Info("Person Artwork - " + f.Images.Count + " Images found for '" + f.Name + "'");
+                    LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB Image found for person '" + f.Name + "', URL = '" + f.Images[0] + "' - remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                    string filename1person = Grabber.GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, f.Images[0], f.Name, false, true, out filename);
+                    LogMyFilms.Debug("Person Image '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
+
+                    if (downloadingWorker.CancellationPending)
+                    {
+                      bDownloadSuccess = false;
+                      LogMyFilms.Debug("cancel person image download: " + f.Name);
+                    }
+                    System.Windows.Forms.Application.DoEvents();
+                  }
+                }
+              }
+
+              if (!bDownloadSuccess) // try IMDB, if TMDB was not successful !
+              {
+                LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB unsuccessful - try IMDB ...");
+                bDownloadSuccess = true;
+                IMDB _imdb = new IMDB();
+                _imdb.FindActor(f.Name);
+
+                if (_imdb.Count == 0)
+                {
+                  LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found, remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                  bDownloadSuccess = false;
+                }
+                else
+                {
+                  if (_imdb[0].URL.Length != 0)
+                  {
+                    IMDBActor imdbActor = new IMDBActor();
+                    _imdb.GetActorDetails(_imdb[0], false, out imdbActor);
+                    if (imdbActor.ThumbnailUrl.Length > 0)
+                    {
+                      LogMyFilms.Debug("downloadingWorker_DoWork() - IMDB Image found for person '" + f.Name + "', URL = '" + imdbActor.ThumbnailUrl + "' - remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                      string filename = Path.Combine(MyFilms.conf.StrPathArtist, f.Name);
+                      string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, imdbActor.ThumbnailUrl, f.Name, false, true, out filename);
+                      LogMyFilms.Debug("Person Image '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
+                    }
+                    else
+                    {
+                      LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' found, but no images available on IMDB! - remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                      bDownloadSuccess = false;
+                    }
+                  }
+                  else
+                  {
+                    LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' found, but no images available on IMDB! - remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                    bDownloadSuccess = false;
+                  }
+                }
+              }
+
+              LogMyFilms.Debug("Result of image download for '" + f.Name + "': success = '" + bDownloadSuccess + "'");
+              if (bDownloadSuccess) downloadingWorker.ReportProgress(0, f.Name);
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.DebugException("Error loading person image: '" + ex.Message + "'", ex);
+            }
+          }
+          while (PersonstoDownloadQueue.Count > 0 && !downloadingWorker.CancellationPending);
+        }
+
+        static void setDownloadStatus()
+        {
+          // LogMyFilms.Debug("setDownloadStatus() - remaining items in queue = '" + PersonstoDownloadQueue.Count + "'");
+          lock (PersonstoDownloadQueue)
+          {
+            if (PersonstoDownloadQueue.Count > 0)
+              MyFilmsDetail.setGUIProperty("details.downloadstatus", "Person Images to Download: " + PersonstoDownloadQueue.Count);                    
+            else
+              MyFilmsDetail.clearGUIProperty("details.downloadstatus");
+          }
+        }
+
         public override int GetID
         {
             get { return MyFilms.ID_MyFilmsDetail; }
@@ -393,6 +532,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
 
+            downloadingWorker.ProgressChanged += new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);
+
             setProcessAnimationStatus(false, m_SearchAnimation);
 
             if (MyFilms.conf.AutoRegisterTrailer) AutoRegisterTrailer("");
@@ -451,6 +592,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected override void OnPageDestroy(int new_windowId)
         {
           LogMyFilms.Debug("MyFilmsDetail.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+          if (downloadingWorker.IsBusy) downloadingWorker.CancelAsync();
+          // while (downloadingWorker.IsBusy) System.Windows.Forms.Application.DoEvents();
+          // downloadingWorker = null;
+
+          downloadingWorker.ProgressChanged -= new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);            
           if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
             global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
           using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
@@ -5820,6 +5966,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private void afficher_init(int ItemId)
         {
             StrMax = MyFilms.r.Length;
+            AddPersonsToDownloadQueue(); // add persons of current movie to download queue
         }
 
         private void OnDetailsUpdated(bool searchPicture)
@@ -10067,7 +10214,51 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #endregion
 
-
+      private void AddPersonsToDownloadQueue() // add persons of current movie to download queue
+      {
+        new System.Threading.Thread(delegate()
+        {
+          {
+            if (MyFilms.conf.UseThumbsForPersons && System.IO.Directory.Exists(MyFilms.conf.StrPathArtist))
+            {
+              string persons = MyFilms.r[MyFilms.conf.StrIndex]["Persons"].ToString();
+              ArrayList w_tableau = new ArrayList();
+              w_tableau = MyFilms.Search_String(persons);
+              foreach (object t in w_tableau)
+              {
+                string personsname = t.ToString();
+                if (!(System.IO.File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
+                {
+                  downloadPersonImage(personsname);
+                  LogMyFilms.Debug("Person '" + personsname + "' added to downloadQueue !");
+                }
+                else LogMyFilms.Debug("Person '" + personsname + "' NOT added to downloadQueue - image already exists !");
+              }
+              // if (PersonstoDownloadQueue.Count > 0 && !downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // already doine in submethod !
+            }
+          }
+          GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+          {
+            {
+              // this after thread finished ...
+            }
+            return 0;
+          }, 0, 0, null);
+        }) { Name = "MyFilmsPersonToDLqueueLoader", IsBackground = true }.Start();
+      }
+      
+      private void downloadPersonImage(string personname) //void downloadPersonImage(DBPersonInfo person)
+      {
+        // we need to get it, let's queue them up and download in the background
+        DBPersonInfo person = new DBPersonInfo();
+        person.Name = personname;
+        lock (PersonstoDownloadQueue)
+        {
+          PersonstoDownloadQueue.Enqueue(person);
+        }
+        setDownloadStatus();
+        if (!downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // finally lets check if the downloader is already running, and if not start it
+      }
 
       #region GUI Events
       private void InitOVEventHandler()
