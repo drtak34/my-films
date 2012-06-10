@@ -2206,8 +2206,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
             case "view":
               if (
-                  //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                   dc.ColumnName != "Description" && dc.ColumnName != "Comments" //&& dc.ColumnName != "Number"
+                )
+                ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+              break;
+            case "deletedetails":
+              if (
+                  dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer && 
+                  dc.ColumnName != MyFilms.conf.StrTitle1 && // dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Number"
                 )
                 ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
               break;
