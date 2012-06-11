@@ -186,8 +186,8 @@
       <KeyLinkSynIndex />
       <KeyLinkSynPage />
       <KeyEncodingLinkSyn />
-      <KeyStartLinkGeneric1 Param1="" Param2="" />
-      <KeyEndLinkGeneric1 />
+      <KeyStartLinkGeneric1 Param1="tt" Param2="http:_x002F__x002F_m.imdb.com_x002F_title_x002F_tt">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.com_x002F_title_x002F_</KeyStartLinkGeneric1>
+      <KeyEndLinkGeneric1>_x002F__x0022_</KeyEndLinkGeneric1>
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page />
       <KeyEncodingLinkGeneric1 />
@@ -196,13 +196,13 @@
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
       <KeyEncodingLinkGeneric2 />
-      <KeyStartGeneric1 Param1="" Param2="" />
-      <KeyEndGeneric1 />
+      <KeyStartGeneric1 Param1="" Param2="">_x0023_REGEX_x0023_og:title._x002A__x003F_content_x003D__x0022_</KeyStartGeneric1>
+      <KeyEndGeneric1>_x0023_REGEX_x0023__x005C__x0028__x007C__x0022_</KeyEndGeneric1>
       <KeyGeneric1Index />
       <KeyGeneric1RegExp />
       <KeyGeneric1MaxItems />
       <KeyGeneric1Language />
-      <KeyGeneric1Page />
+      <KeyGeneric1Page>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyGeneric1Page>
       <KeyStartGeneric2 Param1="" Param2="" />
       <KeyEndGeneric2 />
       <KeyGeneric2Index />
