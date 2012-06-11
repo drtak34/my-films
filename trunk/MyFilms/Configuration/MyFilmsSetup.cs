@@ -2370,9 +2370,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void AddDefaultViews()
         {
-          MFview.ViewRow newRow = MyCustomViews.View.NewViewRow();
+          MFview.ViewRow newRow = null;
 
           //Films (mastertitle)
+          newRow = MyCustomViews.View.NewViewRow();
           newRow.DBfield = AntTitle1.Text;
           newRow.Label = GUILocalizeStrings.Get(342); // videos
           newRow.Value = "*";
@@ -2410,6 +2411,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.Index = 1;
           newRow.Value = "*";
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\TitlesIndex.jpg";
+          MyCustomViews.View.Rows.Add(newRow);
+          //Box Sets view (mastertitle)
+          newRow = MyCustomViews.View.NewViewRow();
+          newRow.DBfield = AntTitle1.Text;
+          newRow.Label = "Box Sets";
+          newRow.Value = "*";
+          newRow.Filter = @"(" + AntTitle1.Text + @" like '*\*') ";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Films.jpg";
           MyCustomViews.View.Rows.Add(newRow);
           //Actors
           newRow = MyCustomViews.View.NewViewRow();
