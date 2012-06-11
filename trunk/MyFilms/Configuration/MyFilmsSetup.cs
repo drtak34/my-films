@@ -103,6 +103,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
             {
               //hide a tab by removing it from the TabPages collection
+              this.tabPageSave = General.TabPages[12]; // Disable other stuff tab, only temp tab for development
+              this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
               this.tabPageSave = General.TabPages[11];
               this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
               // this.chkEnhancedWatchedStatusHandling.Visible = false; // Disable Watched options for Userprofiles
