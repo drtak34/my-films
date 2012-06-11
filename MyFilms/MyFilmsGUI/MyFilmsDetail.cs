@@ -3793,6 +3793,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   #region AMC4 extended fields
                   if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
                   {
+                    if (IsUpdateRequired("Writer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Writer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Writer], grabtype, onlyselected, onlymissing, onlynonempty))
+                      MyFilms.r[MyFilms.conf.StrIndex]["Writer"] = Result[(int)Grabber_URLClass.Grabber_Output.Writer];
                     if (IsUpdateRequired("TagLine", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TagLine"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Tagline], grabtype, onlyselected, onlymissing, onlynonempty))
                       MyFilms.r[MyFilms.conf.StrIndex]["TagLine"] = Result[(int)Grabber_URLClass.Grabber_Output.Tagline];
                     if (IsUpdateRequired("Certification", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Certification"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Certification], grabtype, onlyselected, onlymissing, onlynonempty))
