@@ -161,6 +161,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           LogMyFilms.Debug("OnPageLoad() - Cover Manager Window initialization started ...");
           AllocResources();
+          MovieID = MyFilms.conf.StrIndex;
           MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MovieID));
           ArtworkFileName = MyFilmsDetail.GetOrCreateCoverFilename(MyFilms.r, MyFilms.conf.StrIndex, sTitles.MasterTitle);
 
@@ -453,7 +454,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                   case (int)menuAction.LoadFromTmdb:
                     sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-                    MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.OriginalTitle);
+                    MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), false, GetID, sTitles.OriginalTitle);
                     // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
                     break;
                   case (int)menuAction.CreateFromMovie:
@@ -466,7 +467,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
                     break;
                   case (int)menuAction.DeleteSelected:
-                    selectedCover.Delete();
+                    selectedCover.Delete(AllTitles());
                     // and reinit the display to get rid of it
                     this.RefreshFacade();
                     break;
@@ -570,7 +571,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         break;
                     case (int)menuAction.LoadFromTmdb:
                         sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-                        MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), true, GetID, sTitles.OriginalTitle);
+                        MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), false, GetID, sTitles.OriginalTitle);
                         // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
                         break;
                     case (int)menuAction.CreateFromMovie:
@@ -686,32 +687,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public int MovieID
         {
-          get { return this.movieId; }
-          set { this.movieId = value; }
+          get { return movieId; }
+          set { movieId = value; }
         }
 
         public string MovieLabel
         {
-          get { return this.movieLabel; }
-          set { this.movieLabel = value; }
+          get { return movieLabel; }
+          set { movieLabel = value; }
         }
 
         public string ArtworkFileName
         {
-          get { return this.artworkFileName; }
-          set { this.artworkFileName = value; }
+          get { return artworkFileName; }
+          set { artworkFileName = value; }
         }
 
         public string NewArtworkFileName
         {
-          get { return this.newArtworkFileName; }
-          set { this.newArtworkFileName = value; }
+          get { return newArtworkFileName; }
+          set { newArtworkFileName = value; }
         }
 
         public string DisplayFilter
         {
-          get { return this.displayFilter; }
-          set { this.displayFilter = value; }
+          get { return displayFilter; }
+          set { displayFilter = value; }
         }
 
         public override bool OnMessage(GUIMessage message)
@@ -914,7 +915,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MFCover item;
                 item = m_Facade[i].TVTag as MFCover;
                 if (item != null && item.ImageResolutionClass == strQuality)
-                  item.Delete();
+                  item.Delete(AllTitles());
             }
           }
           catch (Exception ex) { LogMyFilms.Debug("Failed to set Facade Item as chosen: " + ex.Message); }
@@ -931,7 +932,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MFCover item;
                 item = m_Facade[i].TVTag as MFCover;
                 if (item != null)
-                  item.Delete();
+                  item.Delete(AllTitles());
               }
             }
           }
@@ -1139,6 +1140,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           searchPattern = searchPattern.Substring(0, patternLength);
           return searchPattern;
         }
+
+        private List<string> AllTitles()
+        {
+          List<string> allTitles = new List<string>();
+          string title = null;
+          title = MyFilms.r[MovieID]["OriginalTitle"].ToString();
+          if (!string.IsNullOrEmpty(title)) allTitles.Add(title);
+          title = MyFilms.r[MovieID]["TranslatedTitle"].ToString();
+          if (!string.IsNullOrEmpty(title)) allTitles.Add(title);
+          title = MyFilms.r[MovieID]["FormattedTitle"].ToString();
+          if (!string.IsNullOrEmpty(title)) allTitles.Add(title);
+          return allTitles;
+        }
     }
 
     public class MFCover
@@ -1147,7 +1161,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       
       public MFCover() {}
 
-      public void Delete()
+      public void Delete(List<string> titles)
       {
         try
         {
@@ -1157,6 +1171,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         catch (Exception ex)
         {
           LogMyFilms.Debug("Failed to delete file: " + FullPath + " (" + ex.Message + ")");
+        }
+
+        try // also delete image from thumbscache directory
+        {
+          string CoverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
+          foreach (string title in titles)
+          {
+            string strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, title);
+            if (System.IO.File.Exists(strThumb)) System.IO.File.Delete(strThumb);
+            string strThumbSmall = strThumb.Substring(0, strThumb.LastIndexOf(".")) + "_s" + Path.GetExtension(strThumb);
+            if (System.IO.File.Exists(strThumbSmall)) System.IO.File.Delete(strThumbSmall);
+            LogMyFilms.Debug("Cached thumbs deleted for title = '" + title + "'");
+          }
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug("Failed to delete cache thumb file - exception: " + ex.Message + "");
         }
       }
 

@@ -911,7 +911,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         //   Change Menu (and process corresponding actions)
         //--------------------------------------------------------------------------------------------
-        MyFilmsCoverManager cm = null;
         private void Change_Menu(string choiceView)
         {
             
@@ -2177,6 +2176,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 case "covermanager":
                     LogMyFilms.Debug("Switching to Cover Manager Window");
+                    MyFilmsCoverManager cm = null;
                     if (cm == null)
                     {
                       cm = new MyFilmsCoverManager();
@@ -2184,7 +2184,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       GUIWindowManager.Add(ref cmwindow);
                       cm.Init();
                     }
-                    cm.MovieID = MyFilms.conf.StrIndex;
+                    // cm.MovieID = MyFilms.conf.StrIndex; // will be set later in cm class
                     cm.setPageTitle("Cover Manager");
                     //sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex));
                     //cm.ArtworkFileName = GetOrCreateCoverFilename(MyFilms.r, MyFilms.conf.StrIndex, sTitles.MasterTitle);
@@ -4880,14 +4880,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                       listemovies[0].Name = filename;
 
                                       newPictureCatalogname = GetPictureCatalogNameFromFilename(newPicture);
-                                      if (!choose)
+
+                                      if (wGetID != MyFilms.ID_MyFilmsCoverManager)
                                       {
+                                        if (!choose)
+                                        {
                                           MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
                                           Update_XML_database();
                                           LogMyFilms.Info("(Update_XML_database()) - Database Updated for created Coverthumb: " + newPicture);
-                                      }
-                                      else
-                                      {
+                                        }
+                                        else
+                                        {
                                           //TMDB_Details_Select();
                                           setGUIProperty("picture", newPicture);
                                           GUIWindowManager.Process(); // To Update GUI display ...
@@ -4900,18 +4903,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                           dlgYesNo.DoModal(wGetID);
                                           if (!(dlgYesNo.IsConfirmed))
                                           {
-                                              setGUIProperty("picture", oldPicture);
-                                              GUIWindowManager.Process();
-                                              return;
+                                            setGUIProperty("picture", oldPicture);
+                                            GUIWindowManager.Process();
+                                            return;
                                           }
                                           MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
                                           Update_XML_database();
                                           LogMyFilms.Info("(Update_XML_database()) - Database Updated with '" + newPictureCatalogname + "' for created Coverthumb '" + newPicture + "'");
+                                        }
                                       }
                                   }
-                                  if (dlgPrgrs != null)
-                                      dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); dlgPrgrs.SetLine(2, ""); Thread.Sleep(50); dlgPrgrs.Close(); // Done...
-                                  return;
+                                  if (dlgPrgrs != null) dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); dlgPrgrs.SetLine(2, ""); Thread.Sleep(50); dlgPrgrs.Close(); // Done...
+                                // return;
                               }
                               break;
                       }
@@ -4922,11 +4925,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
                     {
-                        // enter here what to load after background thread has finished !
-                        if (DetailsUpdated != null) DetailsUpdated(true);
-                        return 0;
+                      // enter here what to load after background thread has finished !
+                      if (DetailsUpdated != null) DetailsUpdated(true);
+                      return 0;
                     }, 0, 0, null);
-                                  }) { Name = "MyFilmsTMDBLoader", IsBackground = true }.Start();
+             }) { Name = "MyFilmsTMDBLoader", IsBackground = true }.Start();
         }
 
         //-------------------------------------------------------------------------------------------
