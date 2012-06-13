@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <window>
   <!-- ************************************************* -->
-  <!--     Specific Multiselect Dialog for mvCentral     -->
+  <!--     Specific Multiselect Dialog for MyFilms     -->
   <!-- ************************************************* -->	
   <id>112014</id>
   <defaultcontrol>3</defaultcontrol>
@@ -18,10 +18,10 @@
 		<control>
 			<type>image</type>
 			<id>0</id>
-			<posX>206</posX>
-			<posY>80</posY>
-			<width>970</width>
-			<height>457</height>
+			<posX>100</posX>
+			<posY>50</posY>
+			<width>1070</width>
+			<height>600</height>
 			<texture>context_background.png</texture>
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<animation effect="fade" time="250">WindowClose</animation>
@@ -44,11 +44,11 @@
 			<type>label</type>
 			<id>4</id>
 			<posX>640</posX>
-			<posY>120</posY>
+			<posY>112</posY>
 			<label>181</label>
-			<font>font14</font>
+			<font>font16</font>
 			<textcolor>FFFFFFFF</textcolor>
-		  <align>center</align>
+		    <align>center</align>
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<animation effect="fade" time="250">WindowClose</animation>
 		</control>
@@ -60,8 +60,8 @@
 			<posY>96</posY>
 			<width>69</width>
 			<height>59</height>
-			<textureFocus>dialogue_shutdown_focus.png</textureFocus>
-			<textureNoFocus>dialogue_shutdown_nofocus.png</textureNoFocus>
+			<textureFocus>-</textureFocus>
+			<textureNoFocus>-</textureNoFocus>
 			<label>-</label>
 			<onleft>3</onleft>
 			<onright>3</onright>
@@ -74,26 +74,16 @@
 			<description>options listcontrol</description>
 			<type>listcontrol</type>
 			<id>3</id>
-			<posX>284</posX>
-			<posY>167</posY>
-			<width>800</width>
-			<height>325</height>
-			<onup>2</onup>
-			<onleft>10</onleft>
-			<onright>10</onright>
-			<spinPosX>1060</spinPosX>
-			<spinPosY>472</spinPosY>
-			<textXOff>88</textXOff>
-			<PinIconXOff>60</PinIconXOff>
-			<PinIconYOff>10</PinIconYOff>
-			<PinIconWidth>40</PinIconWidth>
-			<PinIconHeight>25</PinIconHeight>
-			<keepaspectratio>yes</keepaspectratio>
+			<posX>160</posX>
+			<posY>140</posY>
+			<width>950</width>
+			<height>480</height>
+			<spinPosX>960</spinPosX>
+			<spinPosY>587</spinPosY>
+			<textXOff>-10</textXOff>
 			<spinCanFocus>no</spinCanFocus>
-			<itemHeight>34</itemHeight>
-			<itemWidth>53</itemWidth>
-			<IconXOff>17</IconXOff>
-			<IconYOff>3</IconYOff>
+			<onleft>10</onleft>
+			<onright>11</onright>
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<animation effect="fade" time="250">WindowClose</animation>
 		</control>
@@ -101,33 +91,37 @@
 			<description>Okay button</description>
 			<type>button</type>
 			<id>10</id>
-			<label>186</label>
+			<label>-</label>
 			<textalign>center</textalign>
 			<textYOff>0</textYOff>
-			<posX>400</posX>
-			<posY>460</posY>
+			<posX>450</posX>
+			<posY>580</posY>
+		    <width>50</width>
+		    <height>50</height>
 			<onleft>3</onleft>
 			<onright>11</onright>
 			<onup>3</onup>
 			<ondown>3</ondown>
-			<textureFocus>tvguide_button_middle.png</textureFocus>
-			<textureNoFocus>tvguide_button_light_middle.png</textureNoFocus>
+		    <textureFocus>dialogue_ok_focus.png</textureFocus>
+			<textureNoFocus>dialogue_ok_nofocus.png</textureNoFocus>
 		</control>
 		<control>
 			<description>Cancel button</description>
 			<type>button</type>
 			<id>11</id>
-			<label>510</label>
+			<label>-</label>
 			<textalign>center</textalign>
 			<textYOff>0</textYOff>
 			<posX>740</posX>
-			<posY>460</posY>
+			<posY>580</posY>
+		    <width>50</width>
+		    <height>50</height>
 			<onleft>10</onleft>
 			<onright>3</onright>
 			<onup>3</onup>
 			<ondown>3</ondown>
-			<textureFocus>tvguide_button_middle.png</textureFocus>
-			<textureNoFocus>tvguide_button_light_middle.png</textureNoFocus>
+		    <textureFocus>dialogue_exit_focus.png</textureFocus>
+			<textureNoFocus>dialogue_exit_nofocus.png</textureNoFocus>
 		</control>
 	</controls>
 </window>
