@@ -540,6 +540,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrFanartDfltImageAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImageAll", false);
                 UseThumbsForViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
                 UseThumbsForPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Persons", false);
+                PersonsEnableDownloads = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PersonsEnableDownloads", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
                 StrViewsDfltAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDfltAll", false);
                 StrViewsShowIndexedImgInIndViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsShowIndexedImages", false);
@@ -1554,14 +1555,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool useThumbsForViews = false;
         public bool UseThumbsForViews
         {
-          get { return this.useThumbsForViews; }
-          set { this.useThumbsForViews = value; }
+          get { return useThumbsForViews; }
+          set { useThumbsForViews = value; }
         }
+
         private bool useThumbsForPersons = false;
         public bool UseThumbsForPersons
         {
-          get { return this.useThumbsForPersons; }
-          set { this.useThumbsForPersons = value; }
+          get { return useThumbsForPersons; }
+          set { useThumbsForPersons = value; }
+        }
+        private bool personsEnableDownloads = false;
+        public bool PersonsEnableDownloads
+        {
+          get { return personsEnableDownloads; }
+          set { personsEnableDownloads = value; }
         }
         private bool strViewsDflt = false;
         public bool StrViewsDflt

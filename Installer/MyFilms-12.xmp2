@@ -3143,7 +3143,8 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
         <ParentGroup />
         <DisplayName>Cleanup</DisplayName>
         <DefaulChecked>false</DefaulChecked>
-        <Description>Cleanup - will remove folder and it's content from your former MyFilms installation, like thumbs cache images, AMCinstaller and old Weblinks</Description>
+        <Description>Cleanup - will remove folder and it's content from your former MyFilms installation, like thumbs cache images, AMCinstaller and old Weblinks.
+Note: Folders which may contain your user files, like Catalog, GroupViewImages... will not be removed by this option.</Description>
         <Files>
           <Items />
         </Files>

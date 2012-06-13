@@ -573,6 +573,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.chkPersonsEnableDownloads = new System.Windows.Forms.CheckBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -1934,6 +1935,7 @@
           // 
           // groupBox_ArtistImages
           // 
+          this.groupBox_ArtistImages.Controls.Add(this.chkPersonsEnableDownloads);
           this.groupBox_ArtistImages.Controls.Add(this.buttonDefaultPersonImageReset);
           this.groupBox_ArtistImages.Controls.Add(this.pictureBoxDefaultPersonImage);
           this.groupBox_ArtistImages.Controls.Add(this.chkPersons);
@@ -5915,6 +5917,18 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // chkPersonsEnableDownloads
+          // 
+          this.chkPersonsEnableDownloads.AutoSize = true;
+          this.chkPersonsEnableDownloads.Location = new System.Drawing.Point(229, 10);
+          this.chkPersonsEnableDownloads.Name = "chkPersonsEnableDownloads";
+          this.chkPersonsEnableDownloads.Size = new System.Drawing.Size(79, 30);
+          this.chkPersonsEnableDownloads.TabIndex = 103;
+          this.chkPersonsEnableDownloads.Text = "Enable \r\nDownloads";
+          this.ToolTip1.SetToolTip(this.chkPersonsEnableDownloads, "When enabled, MyFilms will automatically try to download\r\nperson images in Detail" +
+                  "s View.");
+          this.chkPersonsEnableDownloads.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6526,5 +6540,6 @@
         private TextBox tbExternalPlayerExtensions;
         private TextBox tbExternalPlayerPath;
         private TextBox tbExternalPlayerStartParams;
+        private CheckBox chkPersonsEnableDownloads;
     }
 }

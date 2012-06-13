@@ -346,6 +346,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
           do
           {
+            if (downloadingWorker.CancellationPending)
+            {
+              LogMyFilms.Debug("cancel person image download...");
+              return;
+            }
+
             DBPersonInfo f;
             setDownloadStatus();
             lock (PersonstoDownloadQueue)
@@ -353,7 +359,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               f = PersonstoDownloadQueue.Dequeue();
             }
             bool bDownloadSuccess = true;
-            // LogMyFilms.Debug("downloadingWorker_DoWork() - remaining items: '" + PersonstoDownloadQueue.Count + "'");
 
             try
             {
@@ -387,7 +392,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (downloadingWorker.CancellationPending)
                     {
                       bDownloadSuccess = false;
-                      LogMyFilms.Debug("cancel person image download: " + f.Name);
+                      LogMyFilms.Debug("cancel person image download - last person: " + f.Name);
+                      lock (PersonstoDownloadQueue)
+                      {
+                        PersonstoDownloadQueue.Clear();
+                      }
+                      return;
                     }
                     System.Windows.Forms.Application.DoEvents();
                   }
@@ -430,6 +440,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' found, but no images available on IMDB! - remaining items: '" + PersonstoDownloadQueue.Count + "'");
                     bDownloadSuccess = false;
                   }
+                }
+                if (downloadingWorker.CancellationPending)
+                {
+                  LogMyFilms.Debug("cancel person image download - last person: " + f.Name);
+                  lock (PersonstoDownloadQueue)
+                  {
+                    PersonstoDownloadQueue.Clear();
+                  }
+                  return;
                 }
               }
 
@@ -532,7 +551,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
 
-            downloadingWorker.ProgressChanged += new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);
+            if (MyFilms.conf.PersonsEnableDownloads)
+            {
+              AddPersonsToDownloadQueue(); // add persons of current movie to download queue
+              downloadingWorker.ProgressChanged += new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);
+            }
 
             setProcessAnimationStatus(false, m_SearchAnimation);
 
@@ -592,11 +615,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected override void OnPageDestroy(int new_windowId)
         {
           LogMyFilms.Debug("MyFilmsDetail.OnPageDestroy(" + new_windowId.ToString() + ") started.");
-          if (downloadingWorker.IsBusy) downloadingWorker.CancelAsync();
-          // while (downloadingWorker.IsBusy) System.Windows.Forms.Application.DoEvents();
-          // downloadingWorker = null;
-
-          downloadingWorker.ProgressChanged -= new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);            
+          if (MyFilms.conf.PersonsEnableDownloads)
+          {
+            if (downloadingWorker.IsBusy) downloadingWorker.CancelAsync();
+            // while (downloadingWorker.IsBusy) System.Windows.Forms.Application.DoEvents();
+            // downloadingWorker = null;
+            downloadingWorker.ProgressChanged -= new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);
+          }
           if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
             global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
           using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
@@ -913,6 +938,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         private void Change_Menu(string choiceView)
         {
+            if (downloadingWorker.IsBusy) downloadingWorker.CancelAsync(); // cancel person image download, if user does select any (other) action
             
             string StrUpdItem1 = null;
             string StrUpdText1 = null;
@@ -5983,7 +6009,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private void afficher_init(int ItemId)
         {
             StrMax = MyFilms.r.Length;
-            AddPersonsToDownloadQueue(); // add persons of current movie to download queue
         }
 
         private void OnDetailsUpdated(bool searchPicture)
