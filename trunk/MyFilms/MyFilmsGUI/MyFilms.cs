@@ -13743,6 +13743,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("picture");
       MyFilmsDetail.clearGUIProperty("currentfanart");
       MyFilmsDetail.clearGUIProperty("statusmessage");
+      MyFilmsDetail.clearGUIProperty("details.downloadstatus");
       // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
     }
 

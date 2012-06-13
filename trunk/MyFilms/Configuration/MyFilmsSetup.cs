@@ -938,6 +938,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewsPicture", MesFilmsViews.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Views", chkViews.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Persons", chkPersons.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "PersonsEnableDownloads", chkPersonsEnableDownloads.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewsDflt", chkDfltViews.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewsDfltAll", chkDfltViewsAll.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewsShowIndexedImages", chkShowIndexedImgInIndViews.Checked);
@@ -1216,6 +1217,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ArtistDflt", false);
             chkViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Views", false);
             chkPersons.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Persons", false);
+            chkPersonsEnableDownloads.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PersonsEnableDownloads", false);
             AntStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntStorage", "");
             AntStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntStorageTrailer", "");
             PathStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PathStorage", "");
@@ -1815,6 +1817,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltArtist.Checked = false;
             chkViews.Checked = false;
             chkPersons.Checked = false;
+            chkPersonsEnableDownloads.Checked = false;
             chkAMC_Purge_Missing_Files.Checked = false;
             AMCMovieScanPath.ResetText();
             AmcTitleSearchHandling.Text = string.Empty;
@@ -4836,6 +4839,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           MesFilmsViews.Text = ViewImagesDirectory;
           chkViews.Checked = true; // Use Thumbs for views
           chkPersons.Checked = true; // Use Thumbs for persons views
+          chkPersonsEnableDownloads.Checked = true; // Use background worker image downloads in details screen to automatically load person images
           chkDfltViews.Checked = true; // Use default cover for missing thumbs
           chkShowIndexedImgInIndViews.Checked = true; // activate indexed Images for in
           chkDfltViewsAll.Checked = true; // Use group view thumbs for all group views
