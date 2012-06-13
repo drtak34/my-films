@@ -42,7 +42,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Overrides
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\DialogMultiSelect.xml");
+            return Load(GUIGraphicsContext.Skin + @"\MyFilmsDialogMultiSelect.xml");
         }
 
         public override int GetID

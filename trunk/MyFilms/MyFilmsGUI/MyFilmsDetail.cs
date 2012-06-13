@@ -3617,31 +3617,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   bool onlyselected = false;
                   bool onlymissing = false;
                   bool onlynonempty = false;
-
-                  if (interactive) // Dialog only in interactive mode
-                  {
-                    #region interactive selection dialog
-                    // ToDo: check out alternative select dialogs (hint Dadeo):
-                    //GUIDialogSelect dlgselect = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);
-                    //GUIDialogSelect2 dlgselect2 = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);
-
-                    List<string> choiceViewMenu = new List<string>();
-                    GUIDialogSelect dlgmenu = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);  // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  // GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                    dlgmenu.Reset();
-                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798732)); // Choose property to update
-                    dlgmenu.SetButtonLabel("");
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798734) + " *** ");
-                    choiceViewMenu.Add("all");
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798735) + " *** ");
-                    choiceViewMenu.Add("missing");
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798730) + " *** ");
-                    choiceViewMenu.Add("all-onlynewdata");
-
-                    #region populate selection menu
-
-                    int iPropertyLengthLimit = 33;
-                    string[] PropertyList = new string[]
-                      {
+                  List<string> updateItems = new List<string>(); // store properties to update for later use ...
+                  int iPropertyLengthLimit = 33;
+                  string[] PropertyList = new string[] {
                         "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director",
                         "Producer", "Year", "Country", "Category", "URL", "ImageURL", "Writer", "Comments", "Languages",
                         "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
@@ -3649,45 +3627,147 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
                         "MultiFanart", "Trailer", "TMDB_Id", "Empty36", "Empty37", "Empty38", "Empty39"
                       };
-                    string strOldValue = "";
-                    string strNewValue = "";
 
-                    int i = 0;
-                    foreach (string wProperty in PropertyList)
+
+                  if (interactive) // Dialog only in interactive mode
+                  {
+                    #region interactive selection dialog
+                    List<string> choiceViewMenu = new List<string>();
+                    GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    dlgmenu.Reset();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798732)); // Choose property to update
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798734) + " *** ");
+                    choiceViewMenu.Add("all");
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798735) + " *** ");
+                    choiceViewMenu.Add("missing");
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798730) + " *** ");
+                    choiceViewMenu.Add("all-onlynewdata");
+                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798798) + " *** "); // Select single field for update ...
+                    choiceViewMenu.Add("singlefield");
+                    if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsDialogMultiSelect.xml"))
                     {
-                      try
-                      {
-                        strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
-                        strNewValue = Result[i];
-                        if (i == 2) strNewValue = Result[12];
-                        if (strNewValue == null) strNewValue = "";
-
-                        if ( // make sure, only supported fields are offered to user for update
-                          wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
-                          ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" && wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) && 
-                          wProperty != "Fanart" && wProperty != "Aspectratio" && 
-                          wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
-                          && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
-                        {
-                          dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
-                          choiceViewMenu.Add(wProperty);
-                          LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
-                        }
-                        else
-                        {
-                          LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'"); 
-                        }
-                      }
-                      catch { LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu"); }
-                      i = i + 1;
+                      dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798799) + " *** "); // Select multiple fields for update ...
+                      choiceViewMenu.Add("multiplefields");
                     }
-
-                    #endregion
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1) return;
                     strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
-                    switch (strChoice)
+
+                    if (strChoice == "singlefield")
+                    {
+                      #region populate select menu, if user has chosen to ...
+                      string strOldValue = "";
+                      string strNewValue = "";
+
+                      GUIDialogSelect dlgSelect = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);  // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  
+                      if (dlgSelect == null) return;
+                      choiceViewMenu.Clear();
+                      dlgSelect.Reset();
+                      dlgSelect.SetHeading(GUILocalizeStrings.Get(10798732)); // choose property to update
+                      dlgSelect.SetButtonLabel("");
+
+                      int i = 0;
+                      foreach (string wProperty in PropertyList)
+                      {
+                        try
+                        {
+                          strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                          strNewValue = Result[i];
+                          if (i == 2) strNewValue = Result[12];
+                          if (strNewValue == null) strNewValue = "";
+
+                          if ( // make sure, only supported fields are offered to user for update
+                            wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
+                            ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" && wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) &&
+                            wProperty != "Fanart" && wProperty != "Aspectratio" &&
+                            wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
+                            && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
+                          {
+                            dlgSelect.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
+                            choiceViewMenu.Add(wProperty);
+                            LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                          }
+                          else
+                          {
+                            LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                          }
+                        }
+                        catch { LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu"); }
+                        i = i + 1;
+                      }
+
+                      dlgSelect.DoModal(GetID);
+                      if (dlgSelect.SelectedLabel == -1) return;  // Nothing was selected
+                      strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
+                      #endregion
+                    }
+
+                    if (choiceViewMenu[dlgmenu.SelectedLabel] == "multiplefields")
+                    {
+                      #region populate multi selection menu, if user has chosen to ...
+                      string strOldValue = "";
+                      string strNewValue = "";
+
+                      GUIWindow dlgMultiSelectOld = (GUIWindow)GUIWindowManager.GetWindow(2100);
+                      GUIDialogMultiSelect dlgMultiSelect = new GUIDialogMultiSelect();
+                      if (dlgMultiSelect == null) return;
+                      dlgMultiSelect.Init();
+                      GUIWindowManager.Replace(2100, dlgMultiSelect);
+                      try
+                      {
+                        dlgMultiSelect.Reset();
+                        dlgMultiSelect.SetHeading(GUILocalizeStrings.Get(10798732)); // choose property to update
+
+                        int i = 0;
+                        foreach (string wProperty in PropertyList)
+                        {
+                          try
+                          {
+                            strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                            strNewValue = Result[i];
+                            if (i == 2) strNewValue = Result[12];
+                            if (strNewValue == null) strNewValue = "";
+
+                            if ( // make sure, only supported fields are offered to user for update
+                              wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
+                              ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" && wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) &&
+                              wProperty != "Fanart" && wProperty != "Aspectratio" &&
+                              wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
+                              && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
+                            {
+                              GUIListItem pItem = new GUIListItem(wProperty);
+                              pItem.TVTag = wProperty;
+                              pItem.Selected = false;
+                              pItem.Label = BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'";
+                              dlgMultiSelect.Add(pItem);
+                              LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                            }
+                            else
+                            {
+                              LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                            }
+                          }
+                          catch { LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu"); }
+                          i = i + 1;
+                        }
+
+                        dlgMultiSelect.DoModal(GetID);
+                        for (int ii = 0; ii < dlgMultiSelect.ListItems.Count; ii++)
+                        {
+                          if (dlgMultiSelect.ListItems[ii].Selected) updateItems.Add(dlgMultiSelect.ListItems[ii].TVTag.ToString());
+                        }
+                        LogMyFilms.Debug("GrabberUpdate - '" + updateItems.Count + "' updateItems selected !");
+                        if (dlgMultiSelect.DialogModalResult != ModalResult.OK || updateItems.Count == 0) return;  // Nothing was selected
+                      }
+                      finally
+                      {
+                        GUIWindowManager.Replace(2100, dlgMultiSelectOld);
+                      }
+                      #endregion
+                    }
+
+                    switch (strChoice) // either an update type - or a single property to update
                     {
                       #region switch update options
                       case "all":
@@ -3719,7 +3799,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   #region load details data
 
                   // ********************************** now load data, if requested ! ******************************
-                  if (IsUpdateRequired("OriginalTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("OriginalTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     title = Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle];
                     wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
@@ -3730,7 +3810,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] = title;
                   }
 
-                  if (IsUpdateRequired("TranslatedTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("TranslatedTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     ttitle = Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle];
                     if ("TranslatedTitle" == strChoice)
@@ -3745,10 +3825,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] = ttitle;
                   }
 
-                  if (IsUpdateRequired("Description", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Description], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("Description", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Description], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                     MyFilms.r[MyFilms.conf.StrIndex]["Description"] = Result[(int)Grabber_URLClass.Grabber_Output.Description];
 
-                  if (IsUpdateRequired("Rating", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Rating], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("Rating", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Rating], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     if (Result[(int)Grabber_URLClass.Grabber_Output.Rating].Length > 0)
                     {
@@ -3760,63 +3840,63 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = string.Format("{0:F1}", wnote);
                     }
                   }
-                  if (IsUpdateRequired("Actors", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Actors"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Actors], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("Actors", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Actors"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Actors], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                     if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Actors"].ToString()) || !onlymissing)
                       MyFilms.r[MyFilms.conf.StrIndex]["Actors"] = Result[(int)Grabber_URLClass.Grabber_Output.Actors];
-                  if (IsUpdateRequired("Director", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Director], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("Director", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Director], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     director = Result[(int)Grabber_URLClass.Grabber_Output.Director];
                     MyFilms.r[MyFilms.conf.StrIndex]["Director"] = Result[(int)Grabber_URLClass.Grabber_Output.Director];
                   }
-                  if (IsUpdateRequired("Producer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Producer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Producer], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                  if (IsUpdateRequired("Producer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Producer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Producer], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     MyFilms.r[MyFilms.conf.StrIndex]["Producer"] = Result[(int)Grabber_URLClass.Grabber_Output.Producer];
-                  if (IsUpdateRequired("Year", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Year], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("Year", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Year], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     try { year = Convert.ToInt16(Result[(int)Grabber_URLClass.Grabber_Output.Year]); }
                     catch { year = 1900; }
                     MyFilms.r[MyFilms.conf.StrIndex]["Year"] = year.ToString();
                   }
 
-                  if (IsUpdateRequired("Country", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Country], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                  if (IsUpdateRequired("Country", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Country], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     MyFilms.r[MyFilms.conf.StrIndex]["Country"] = Result[(int)Grabber_URLClass.Grabber_Output.Country];
-                  if (IsUpdateRequired("Category", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Category], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                  if (IsUpdateRequired("Category", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Category], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     MyFilms.r[MyFilms.conf.StrIndex]["Category"] = Result[(int)Grabber_URLClass.Grabber_Output.Category];
-                  if (IsUpdateRequired("URL", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.URL], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                  if (IsUpdateRequired("URL", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.URL], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     if (MyFilms.conf.StrStorage != "URL") 
                       MyFilms.r[MyFilms.conf.StrIndex]["URL"] = Result[(int)Grabber_URLClass.Grabber_Output.URL];
-                  if (IsUpdateRequired("Comments", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Comments], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                  if (IsUpdateRequired("Comments", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Comments], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
-                  if (IsUpdateRequired("Languages", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Languages"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Language], grabtype, onlyselected, onlymissing, onlynonempty))
+                  if (IsUpdateRequired("Languages", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Languages"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Language], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                     MyFilms.r[MyFilms.conf.StrIndex]["Languages"] =
                       Result[(int)Grabber_URLClass.Grabber_Output.Language];
 
                   #region AMC4 extended fields
                   if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
                   {
-                    if (IsUpdateRequired("Writer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Writer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Writer], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("Writer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Writer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Writer], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["Writer"] = Result[(int)Grabber_URLClass.Grabber_Output.Writer];
-                    if (IsUpdateRequired("TagLine", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TagLine"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Tagline], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("TagLine", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TagLine"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Tagline], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["TagLine"] = Result[(int)Grabber_URLClass.Grabber_Output.Tagline];
-                    if (IsUpdateRequired("Certification", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Certification"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Certification], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("Certification", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Certification"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Certification], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["Certification"] = Result[(int)Grabber_URLClass.Grabber_Output.Certification];
-                    if (IsUpdateRequired("IMDB_Id", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Id], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("IMDB_Id", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Id], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"] = Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Id];
-                    if (IsUpdateRequired("IMDB_Rank", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Rank"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Rank], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("IMDB_Rank", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Rank"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Rank], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Rank"] = Result[(int)Grabber_URLClass.Grabber_Output.IMDB_Rank];
-                    if (IsUpdateRequired("TMDB_Id", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TMDB_Id"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TMDB_Id], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("TMDB_Id", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TMDB_Id"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TMDB_Id], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["TMDB_Id"] = Result[(int)Grabber_URLClass.Grabber_Output.TMDB_Id];
-                    if (IsUpdateRequired("Studio", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Studio"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Studio], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("Studio", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Studio"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Studio], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["Studio"] = Result[(int)Grabber_URLClass.Grabber_Output.Studio];
-                    if (IsUpdateRequired("Edition", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Edition"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Edition], grabtype, onlyselected, onlymissing, onlynonempty))
+                    if (IsUpdateRequired("Edition", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Edition"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Edition], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                       MyFilms.r[MyFilms.conf.StrIndex]["Edition"] = Result[(int)Grabber_URLClass.Grabber_Output.Edition];
-                    //if (IsUpdateRequired("Fanart", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Fanart"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Fanart], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                    //if (IsUpdateRequired("Fanart", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Fanart"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Fanart], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     //  MyFilms.r[MyFilms.conf.StrIndex]["Fanart"] = Result[(int)Grabber_URLClass.Grabber_Output.Fanart];
-                    //if (IsUpdateRequired("Trailer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Trailer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Trailer], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                    //if (IsUpdateRequired("Trailer", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Trailer"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Trailer], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     //  MyFilms.r[MyFilms.conf.StrIndex]["Trailer"] = Result[(int)Grabber_URLClass.Grabber_Output.Trailer];
                   }
                   #endregion
 
-                  if (grabtype == GrabType.All && IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty)) 
+                  if (grabtype == GrabType.All && IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     grabb_Internet_Details_Informations_Cover(Result, interactive, GetID, wscript, grabtype, sTitles);
 
                   #endregion
@@ -3832,12 +3912,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   bool onlyselected = true;
                   bool onlymissing = false;
                   bool onlynonempty = false;
+                  List<string> updateItems = new List<string>(); // store properties to update for later use ... not yet used for persons
 
                   if (interactive) // Dialog only in interactive mode
                     #region interactive selection dialog
 
                   {
-
                     List<string> choiceViewMenu = new List<string>();
                     GUIDialogMenu dlgmenu =
                       (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -3922,121 +4002,48 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   #endregion
 
-                  #region load details data
+                  #region load details data for person
 
-                  // ********************************** now load data, if requested ! ******************************
                   IMDBActor person = new IMDBActor();
-                  if (IsUpdateRequired(
-                    "OriginalTitle",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty))
+                  if (IsUpdateRequired("OriginalTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     title = Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle];
                     person.Name = title;
                   }
 
-                  if (IsUpdateRequired(
-                    "TranslatedTitle",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty))
+                  if (IsUpdateRequired("TranslatedTitle", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     if (string.IsNullOrEmpty(person.Name)) person.Name = Result[(int)Grabber_URLClass.Grabber_Output.TranslatedTitle];
                   }
 
-                  if (IsUpdateRequired(
-                    "Description",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.Description],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty)) person.Biography = Result[(int)Grabber_URLClass.Grabber_Output.Description];
+                  if (IsUpdateRequired("Description", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Description], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
+                    person.Biography = Result[(int)Grabber_URLClass.Grabber_Output.Description];
 
-                  if (IsUpdateRequired(
-                    "Year",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.Year],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty))
+                  if (IsUpdateRequired("Year", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Year], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                   {
                     try
                     {
                       year = Convert.ToInt16(Result[(int)Grabber_URLClass.Grabber_Output.Year]);
                     }
-                    catch
-                    {
-                    }
-
+                    catch {}
                   }
                   string temp = "";
-                  if (IsUpdateRequired(
-                    "Country",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.Country],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty)) person.PlaceOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Country];
-                  if (IsUpdateRequired(
-                    "Category",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.Category],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty)) temp = Result[(int)Grabber_URLClass.Grabber_Output.Category];
-                  if (IsUpdateRequired(
-                    "URL",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.URL],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty)) if (MyFilms.conf.StrStorage != "URL") person.IMDBActorID = Result[(int)Grabber_URLClass.Grabber_Output.URL];
-                  if (IsUpdateRequired(
-                    "Comments",
-                    strChoice,
-                    MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString(),
-                    Result[(int)Grabber_URLClass.Grabber_Output.Comments],
-                    grabtype,
-                    onlyselected,
-                    onlymissing,
-                    onlynonempty)) person.DateOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
-                  if (
-                    IsUpdateRequired(
-                      "Picture",
-                      strChoice,
-                      MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(),
-                      Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong],
-                      grabtype,
-                      onlyselected,
-                      onlymissing,
-                      onlynonempty) && grabtype == GrabType.All)
+                  if (IsUpdateRequired("Country", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Country], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
+                    person.PlaceOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Country];
+                  if (IsUpdateRequired("Category", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Category], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
+                    temp = Result[(int)Grabber_URLClass.Grabber_Output.Category];
+                  if (IsUpdateRequired("URL", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.URL], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
+                    if (MyFilms.conf.StrStorage != "URL") person.IMDBActorID = Result[(int)Grabber_URLClass.Grabber_Output.URL];
+                  if (IsUpdateRequired("Comments", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Comments], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
+                    person.DateOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
+                  if (IsUpdateRequired("Picture", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong], grabtype, onlyselected, onlymissing, onlynonempty, updateItems) && grabtype == GrabType.All)
                   {
                     person.ThumbnailUrl = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
                   }
                   if (!string.IsNullOrEmpty(MyFilms.conf.StrPathArtist) && !string.IsNullOrEmpty(person.ThumbnailUrl))
                   {
                     string filenameperson;
-                    string filename1person = GrabUtil.DownloadPersonArtwork(
-                      MyFilms.conf.StrPathArtist, person.ThumbnailUrl, person.Name, true, true, out filenameperson);
+                    string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, person.Name, true, true, out filenameperson);
                   }
                   // grabb_Internet_Details_Informations_Cover(Result, interactive, GetID, wscript, grabtype, sTitles);
 
@@ -4093,7 +4100,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Update_XML_database();
                 LogMyFilms.Info("Database Updated for title/ttitle: " + title + "/" + ttitle);
 
-                if (DetailsUpdated != null) DetailsUpdated(true); // will launch afficher_detail(true) via message handler
+                if (GetID != MyFilms.ID_MyFilmsCoverManager)
+                  if (DetailsUpdated != null) DetailsUpdated(true); // will launch afficher_detail(true) via message handler
 
                 if (title.Length > 0 && MyFilms.conf.StrFanart && grabtype != GrabType.Person) // Get Fanart
                 {
@@ -4401,12 +4409,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // set picture to new one (full path)
           setGUIProperty("picture", newPicture);
           GUIWindowManager.Process();
+          if (GetID == MyFilms.ID_MyFilmsCoverManager)
+          {
+            if (DetailsUpdated != null) DetailsUpdated(true); // will launch afficher_detail(true) via message handler
+          }
         }
 
-        private static bool IsUpdateRequired(string currentField, string selectedField, string oldvalue, string newvalue, GrabType grabtype, bool onlyselected, bool onlymissing, bool onlynonempty)
+        private static bool IsUpdateRequired(string currentField, string selectedField, string oldvalue, string newvalue, GrabType grabtype, bool onlyselected, bool onlymissing, bool onlynonempty, List<string> updateitems)
         {
           bool updaterequired = false;
-          if (currentField == selectedField || !onlyselected)
+          if (currentField == selectedField || !onlyselected || updateitems.Contains(currentField))
           {
             if (onlymissing && string.IsNullOrEmpty(oldvalue) || !onlymissing)
             {
