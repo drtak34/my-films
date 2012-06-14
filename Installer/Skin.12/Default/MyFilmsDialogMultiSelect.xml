@@ -61,6 +61,8 @@
       <spinPosX>560</spinPosX>
       <spinPosY>460</spinPosY>
       <textXOff>-10</textXOff>
+      <IconXOff>-10</IconXOff>
+      <IconYOff>3</IconYOff>
       <PinIconXOff>2245</PinIconXOff>
       <PinIconYOff>2227</PinIconYOff>
       <textureNoFocus>-</textureNoFocus>

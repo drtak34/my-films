@@ -3558,8 +3558,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, GrabType grabtype, Searchtitles sTitles)
         {
           LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID + "', interactive = '" + interactive + "'");
-          GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
 
+          #region set environment
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
           string[] Result = new string[80];
           string title = string.Empty;
@@ -3582,9 +3582,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           LogMyFilms.Debug("Grabber - GetDetail: OverrideLanguage = '" + MyFilms.conf.GrabberOverrideLanguage + "', OverridePersonLimit = '" + MyFilms.conf.GrabberOverridePersonLimit + "', OverrideTitleLimit = '" + MyFilms.conf.GrabberOverrideTitleLimit + "', Get Roles = '" + MyFilms.conf.GrabberOverrideGetRoles + "'");
           LogMyFilms.Debug("Grabber - GetDetail: script = '" + wscript + "', url = '" + url + "', download path = '" + downLoadPath + "'");
+          #endregion
 
           new System.Threading.Thread(delegate()
               {
+                #region load internet data
+                GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
                 if (interactive)
                 {
                   // GUIWaitCursor.Init(); GUIWaitCursor.Show();
@@ -3608,10 +3611,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   // Result = Grab.GetDetail(url, downLoadPath, wscript);
                   Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
                 }
-                catch (Exception ex)
-                {
-                  LogMyFilms.ErrorException("grabb_Internet_Details_Information() - exception = '" + ex.Message + "'", ex);
-                }
+                catch (Exception ex) { LogMyFilms.ErrorException("grabb_Internet_Details_Information() - exception = '" + ex.Message + "'", ex); }
 
                 if (interactive)
                 {
@@ -3634,6 +3634,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 // string Title_Group = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
                 // string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
+                #endregion
 
                 if (grabtype == GrabType.Details || grabtype == GrabType.All) // grabtype "all" includes cover
                 {
@@ -3643,6 +3644,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   bool onlyselected = false;
                   bool onlymissing = false;
                   bool onlynonempty = false;
+                  List<string> choiceViewMenu = new List<string>();
                   List<string> updateItems = new List<string>(); // store properties to update for later use ...
                   int iPropertyLengthLimit = 33;
                   string[] PropertyList = new string[] {
@@ -3654,96 +3656,54 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         "MultiFanart", "Trailer", "TMDB_Id", "Empty36", "Empty37", "Empty38", "Empty39"
                       };
 
-
                   if (interactive) // Dialog only in interactive mode
                   {
                     #region interactive selection dialog
-                    List<string> choiceViewMenu = new List<string>();
                     GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                    dlgmenu.Reset();
-                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798732)); // Choose property to update
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798734) + " *** ");
-                    choiceViewMenu.Add("all");
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798735) + " *** ");
-                    choiceViewMenu.Add("missing");
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798730) + " *** ");
-                    choiceViewMenu.Add("all-onlynewdata");
-                    dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798798) + " *** "); // Select single field for update ...
-                    choiceViewMenu.Add("singlefield");
-                    if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsDialogMultiSelect.xml"))
+                    bool returnToMainDialog = false; // by default do NOT repeat the dialog - only if returning from sub dialogs
+                    do
                     {
-                      dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798799) + " *** "); // Select multiple fields for update ...
-                      choiceViewMenu.Add("multiplefields");
-                    }
-
-                    dlgmenu.DoModal(GetID);
-                    if (dlgmenu.SelectedLabel == -1) return;
-                    strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
-
-                    if (strChoice == "singlefield")
-                    {
-                      #region populate select menu, if user has chosen to ...
-                      string strOldValue = "";
-                      string strNewValue = "";
-
-                      GUIDialogSelect dlgSelect = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);  // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  
-                      if (dlgSelect == null) return;
+                      #region set main selection dialog for options
+                      returnToMainDialog = false;
                       choiceViewMenu.Clear();
-                      dlgSelect.Reset();
-                      dlgSelect.SetHeading(GUILocalizeStrings.Get(10798732)); // choose property to update
-                      dlgSelect.SetButtonLabel("");
-
-                      int i = 0;
-                      foreach (string wProperty in PropertyList)
+                      dlgmenu.Reset();
+                      dlgmenu.SetHeading(GUILocalizeStrings.Get(10798797)); // Choose update option ...
+                      dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798734) + " *** ");
+                      choiceViewMenu.Add("all");
+                      dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798735) + " *** ");
+                      choiceViewMenu.Add("missing");
+                      dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798730) + " *** ");
+                      choiceViewMenu.Add("all-onlynewdata");
+                      // disabled, as we now have the multiselect dialog
+                      //dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798798) + " *** "); // Select single field for update ...
+                      //choiceViewMenu.Add("singlefield");
+                      if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsDialogMultiSelect.xml"))
                       {
-                        try
-                        {
-                          strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
-                          strNewValue = Result[i];
-                          if (i == 2) strNewValue = Result[12];
-                          if (strNewValue == null) strNewValue = "";
-
-                          if ( // make sure, only supported fields are offered to user for update
-                            wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
-                            ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" && wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) &&
-                            wProperty != "Fanart" && wProperty != "Aspectratio" &&
-                            wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
-                            && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
-                          {
-                            dlgSelect.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
-                            choiceViewMenu.Add(wProperty);
-                            LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
-                          }
-                          else
-                          {
-                            LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
-                          }
-                        }
-                        catch { LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu"); }
-                        i = i + 1;
+                        dlgmenu.Add(" *** " + GUILocalizeStrings.Get(10798799) + " *** ");
+                          // Select multiple fields for update ...
+                        choiceViewMenu.Add("multiplefields");
                       }
-
-                      dlgSelect.DoModal(GetID);
-                      if (dlgSelect.SelectedLabel == -1) return;  // Nothing was selected
+                      dlgmenu.DoModal(GetID);
+                      if (dlgmenu.SelectedLabel == -1) return;
                       strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
+
                       #endregion
-                    }
 
-                    if (choiceViewMenu[dlgmenu.SelectedLabel] == "multiplefields")
-                    {
-                      #region populate multi selection menu, if user has chosen to ...
-                      string strOldValue = "";
-                      string strNewValue = "";
-
-                      GUIWindow dlgMultiSelectOld = (GUIWindow)GUIWindowManager.GetWindow(2100);
-                      GUIDialogMultiSelect dlgMultiSelect = new GUIDialogMultiSelect();
-                      if (dlgMultiSelect == null) return;
-                      dlgMultiSelect.Init();
-                      GUIWindowManager.Replace(2100, dlgMultiSelect);
-                      try
+                      if (strChoice == "singlefield")
                       {
-                        dlgMultiSelect.Reset();
-                        dlgMultiSelect.SetHeading(GUILocalizeStrings.Get(10798732)); // choose property to update
+                        #region populate select menu, if user has chosen to ...
+
+                        string strOldValue = "";
+                        string strNewValue = "";
+
+                        GUIDialogSelect dlgSelect =
+                          (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);
+                          // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  
+                        if (dlgSelect == null) return;
+                        choiceViewMenu.Clear();
+                        dlgSelect.Reset();
+                        dlgSelect.SetHeading(GUILocalizeStrings.Get(10798732)); // choose property to update
+                        dlgSelect.SetButtonLabel("");
 
                         int i = 0;
                         foreach (string wProperty in PropertyList)
@@ -3756,68 +3716,162 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (strNewValue == null) strNewValue = "";
 
                             if ( // make sure, only supported fields are offered to user for update
-                              wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") && !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
-                              ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" && wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" && wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") || MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) &&
-                              wProperty != "Fanart" && wProperty != "Aspectratio" &&
-                              wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
-                              && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" && wProperty != "Trailer")
+                              wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") &&
+                              !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
+                              ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" &&
+                                wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" &&
+                                wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") ||
+                               MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) &&
+                              wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
+                              // set to enabled to get proper selection - WIP
+                              && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
+                              wProperty != "Trailer")
                             {
-                              GUIListItem pItem = new GUIListItem(wProperty);
-                              pItem.TVTag = wProperty;
-                              pItem.Selected = false;
-                              pItem.Label = BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'";
-                              dlgMultiSelect.Add(pItem);
-                              LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                              dlgSelect.Add(
+                                BaseMesFilms.Translate_Column(wProperty) + ": '" +
+                                Helper.LimitString(
+                                  strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" +
+                                Helper.LimitString(
+                                  strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
+                              choiceViewMenu.Add(wProperty);
+                              LogMyFilms.Debug(
+                                "GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue +
+                                "'");
                             }
                             else
                             {
-                              LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                              LogMyFilms.Debug(
+                                "GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue +
+                                "' -> '" + strNewValue + "'");
                             }
                           }
-                          catch { LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu"); }
+                          catch
+                          {
+                            LogMyFilms.Debug(
+                              "GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu");
+                          }
                           i = i + 1;
                         }
 
-                        dlgMultiSelect.DoModal(GetID);
-                        for (int ii = 0; ii < dlgMultiSelect.ListItems.Count; ii++)
-                        {
-                          if (dlgMultiSelect.ListItems[ii].Selected) updateItems.Add(dlgMultiSelect.ListItems[ii].TVTag.ToString());
-                        }
-                        LogMyFilms.Debug("GrabberUpdate - '" + updateItems.Count + "' updateItems selected !");
-                        if (dlgMultiSelect.DialogModalResult != ModalResult.OK || updateItems.Count == 0) return;  // Nothing was selected
-                      }
-                      finally
-                      {
-                        GUIWindowManager.Replace(2100, dlgMultiSelectOld);
-                      }
-                      #endregion
-                    }
+                        dlgSelect.DoModal(GetID);
+                        if (dlgSelect.SelectedLabel == -1) returnToMainDialog = true; // Nothing was selected - return to main selection menu
+                        strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
 
-                    switch (strChoice) // either an update type - or a single property to update
-                    {
-                      #region switch update options
-                      case "all":
-                        onlyselected = false;
-                        onlymissing = false;
-                        onlynonempty = false;
-                        break;
-                      case "missing":
-                        onlyselected = false;
-                        onlymissing = true;
-                        onlynonempty = false;
-                        break;
-                      case "all-onlynewdata":
-                        onlyselected = false;
-                        onlymissing = false;
-                        onlynonempty = true;
-                        break;
-                      default:
-                        onlyselected = true;
-                        onlymissing = false;
-                        onlynonempty = false;
-                        break;
-                      #endregion
+                        #endregion
+                      }
+
+                      if (choiceViewMenu[dlgmenu.SelectedLabel] == "multiplefields")
+                      {
+                        #region populate multi selection menu, if user has chosen to ...
+
+                        string strOldValue = "";
+                        string strNewValue = "";
+
+                        GUIWindow dlgMultiSelectOld = (GUIWindow)GUIWindowManager.GetWindow(2100);
+                        GUIDialogMultiSelect dlgMultiSelect = new GUIDialogMultiSelect();
+                        if (dlgMultiSelect == null) return;
+                        dlgMultiSelect.Init();
+                        GUIWindowManager.Replace(2100, dlgMultiSelect);
+                        try
+                        {
+                          dlgMultiSelect.Reset();
+                          dlgMultiSelect.SetHeading(GUILocalizeStrings.Get(10798732)); // choose property to update
+
+                          int i = 0;
+                          foreach (string wProperty in PropertyList)
+                          {
+                            try
+                            {
+                              strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                              strNewValue = Result[i];
+                              if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) strNewValue = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathShort];
+                              if (strNewValue == null) strNewValue = "";
+
+                              if ( // make sure, only supported fields are offered to user for update
+                                wProperty != "ImageURL" && !wProperty.Contains("Sub") && !wProperty.Contains("All") &&
+                                !wProperty.Contains("Generic") && !wProperty.Contains("Empty") &&
+                                ((wProperty != "TagLine" && wProperty != "Certification" && wProperty != "Writer" &&
+                                  wProperty != "Studio" && wProperty != "Edition" && wProperty != "IMDB_Id" &&
+                                  wProperty != "IMDB_Rank" && wProperty != "TMDB_Id") ||
+                                 MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) &&
+                                wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
+                                // set to enabled to get proper selection - WIP
+                                && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
+                                wProperty != "Trailer")
+                              {
+                                GUIListItem pItem = new GUIListItem(wProperty);
+                                pItem.TVTag = wProperty;
+                                if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) pItem.IconImage = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
+                                pItem.Selected = false;
+                                pItem.Label = BaseMesFilms.Translate_Column(wProperty) + ": '" +
+                                              Helper.LimitString(
+                                                strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) +
+                                              "' -> '" +
+                                              Helper.LimitString(
+                                                strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) +
+                                              "'";
+                                dlgMultiSelect.Add(pItem);
+                                LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                              }
+                              else
+                              {
+                                LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                              }
+                            }
+                            catch
+                            {
+                              LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu");
+                            }
+                            i = i + 1;
+                          }
+
+                          dlgMultiSelect.DoModal(GetID);
+                          for (int ii = 0; ii < dlgMultiSelect.ListItems.Count; ii++)
+                          {
+                            if (dlgMultiSelect.ListItems[ii].Selected) updateItems.Add(dlgMultiSelect.ListItems[ii].TVTag.ToString());
+                          }
+                          LogMyFilms.Debug("GrabberUpdate - '" + updateItems.Count + "' updateItems selected !");
+                          if (dlgMultiSelect.DialogModalResult == ModalResult.Cancel) return; // user cancelled
+                          if (dlgMultiSelect.DialogModalResult == ModalResult.OK && updateItems.Count == 0) return; // Nothing was selected
+                          if (dlgMultiSelect.DialogModalResult != ModalResult.OK) returnToMainDialog = true; // user wants to return to options menu
+                        }
+                        finally
+                        {
+                          GUIWindowManager.Replace(2100, dlgMultiSelectOld);
+                        }
+
+                        #endregion
+                      }
+
+                      switch (strChoice) // either an update type - or a single property to update
+                      {
+                          #region switch update options
+
+                        case "all":
+                          onlyselected = false;
+                          onlymissing = false;
+                          onlynonempty = false;
+                          break;
+                        case "missing":
+                          onlyselected = false;
+                          onlymissing = true;
+                          onlynonempty = false;
+                          break;
+                        case "all-onlynewdata":
+                          onlyselected = false;
+                          onlymissing = false;
+                          onlynonempty = true;
+                          break;
+                        default:
+                          onlyselected = true;
+                          onlymissing = false;
+                          onlynonempty = false;
+                          break;
+
+                          #endregion
+                      }
                     }
+                    while (returnToMainDialog);
                     LogMyFilms.Debug("GrabInternetDetails - interactive choice: '" + strChoice + "', onlyselected = '" + onlyselected + "', onlymissing = '" + onlymissing + "', onlynonempty = '" + onlynonempty + "'");
                     #endregion
                   }
