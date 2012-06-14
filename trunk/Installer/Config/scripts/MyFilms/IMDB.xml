@@ -134,7 +134,7 @@
       <KeyEndTagline>_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_._x002A__x007C__x003C__x002F_div_x003E_._x002A_</KeyEndTagline>
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="MPAA" Param2="">MPAA_x003C__x002F_a_x003E__x0029__x003C__x002F_h4_x003E_</KeyStartCertification>
+      <KeyStartCertification Param1="_x0023_REGEX_x0023_MPAA_x007C_Rated_x007C_for._x002A_" Param2="">MPAA_x003C__x002F_a_x003E__x0029__x003C__x002F_h4_x003E_</KeyStartCertification>
       <KeyEndCertification>_x003C_span_x0020_class_x003D__x0022_</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
@@ -302,8 +302,8 @@
       <Field_20 source="Studio" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_21 source="Edition" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_22 source="Fanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_23 source="Generic1" destination="Description" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
-      <Field_24 source="Generic2" destination="Country" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
+      <Field_23 source="Generic1" destination="OriginalTitle" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
+      <Field_24 source="Generic2" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_25 source="Generic3" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
