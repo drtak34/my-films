@@ -347,8 +347,9 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798791">Secondary title</String>
     <String id="10798792">Sort title</String>
     <String id="10798795">Remove all movie details (selected film)</String>
+    <String id="10798797">Choose Update Option ...</String>
     <String id="10798798">Select single field for update ...</String>
-    <String id="10798799">Select multiple fields for update ...</String>
+    <String id="10798799">Select field(s) for update ...</String>
     <String id="10798800">Attention : durée longue!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">Débuter par {0} films?</String>

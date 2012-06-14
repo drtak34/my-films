@@ -81,6 +81,8 @@
 			<spinPosX>960</spinPosX>
 			<spinPosY>587</spinPosY>
 			<textXOff>-10</textXOff>
+			<IconXOff>-10</IconXOff>
+			<IconYOff>3</IconYOff>
 			<spinCanFocus>no</spinCanFocus>
 			<onleft>10</onleft>
 			<onright>11</onright>
