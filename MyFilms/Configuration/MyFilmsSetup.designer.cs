@@ -215,6 +215,7 @@
           this.MesFilmsImg = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
           this.groupBox_ArtistImages = new System.Windows.Forms.GroupBox();
+          this.chkPersonsEnableDownloads = new System.Windows.Forms.CheckBox();
           this.buttonDefaultPersonImageReset = new System.Windows.Forms.Button();
           this.pictureBoxDefaultPersonImage = new System.Windows.Forms.PictureBox();
           this.chkPersons = new System.Windows.Forms.CheckBox();
@@ -573,7 +574,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.chkPersonsEnableDownloads = new System.Windows.Forms.CheckBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -1953,6 +1953,18 @@
           this.groupBox_ArtistImages.Text = "Persons Views ...";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, resources.GetString("groupBox_ArtistImages.ToolTip"));
           // 
+          // chkPersonsEnableDownloads
+          // 
+          this.chkPersonsEnableDownloads.AutoSize = true;
+          this.chkPersonsEnableDownloads.Location = new System.Drawing.Point(229, 10);
+          this.chkPersonsEnableDownloads.Name = "chkPersonsEnableDownloads";
+          this.chkPersonsEnableDownloads.Size = new System.Drawing.Size(79, 30);
+          this.chkPersonsEnableDownloads.TabIndex = 103;
+          this.chkPersonsEnableDownloads.Text = "Enable \r\nDownloads";
+          this.ToolTip1.SetToolTip(this.chkPersonsEnableDownloads, "When enabled, MyFilms will automatically try to download\r\nperson images in Detail" +
+                  "s View.");
+          this.chkPersonsEnableDownloads.UseVisualStyleBackColor = true;
+          // 
           // buttonDefaultPersonImageReset
           // 
           this.buttonDefaultPersonImageReset.Location = new System.Drawing.Point(711, 12);
@@ -2215,7 +2227,7 @@
           // 
           // btnAMCMovieScanPathAdd
           // 
-          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(655, 20);
+          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(655, 21);
           this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
           this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 20);
           this.btnAMCMovieScanPathAdd.TabIndex = 82;
@@ -5916,18 +5928,6 @@
           this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
-          // 
-          // chkPersonsEnableDownloads
-          // 
-          this.chkPersonsEnableDownloads.AutoSize = true;
-          this.chkPersonsEnableDownloads.Location = new System.Drawing.Point(229, 10);
-          this.chkPersonsEnableDownloads.Name = "chkPersonsEnableDownloads";
-          this.chkPersonsEnableDownloads.Size = new System.Drawing.Size(79, 30);
-          this.chkPersonsEnableDownloads.TabIndex = 103;
-          this.chkPersonsEnableDownloads.Text = "Enable \r\nDownloads";
-          this.ToolTip1.SetToolTip(this.chkPersonsEnableDownloads, "When enabled, MyFilms will automatically try to download\r\nperson images in Detail" +
-                  "s View.");
-          this.chkPersonsEnableDownloads.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
