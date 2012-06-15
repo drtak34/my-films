@@ -583,13 +583,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
             if (chkAMCUpd.Checked)
             {
-                if (txtAMCUpd_cnf.Text.Length == 0)
+              if (txtAMCUpd_cnf.Text.Length == 0)
+              {
+                  MessageBox.Show("AMCUpdater Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                  General.SelectedIndex = 5;
+                  txtAMCUpd_cnf.Focus();
+                  return;
+              }
+              else if (!System.IO.File.Exists(txtAMCUpd_cnf.Text))
+              {
+                if (MessageBox.Show("Your AMCUpdater config file does not exist - do you want to create a default one? \n configured file: '" + txtAMCUpd_cnf.Text + "' \n (If no, you can't save your current config without disabling AMCUpdater)", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show("AMCUpdater Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    General.SelectedIndex = 5;
-                    txtAMCUpd_cnf.Focus();
-                    return;
+                  Read_XML_AMCconfig(Config_Name.Text);
                 }
+                else
+                {
+                  General.SelectedIndex = 5;
+                  txtAMCUpd_cnf.Focus();
+                  return;
+                }
+              }
             }
             if ((chksupplaystop.Checked) && (!chkSuppress.Checked))
             {
@@ -2533,31 +2546,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             if (chkAMCUpd.Checked)
             {
-                groupBox_AMCupdater_ExternalApplication.Enabled = true;
-                groupBox_AMCupdaterScheduer.Enabled = true;
-                //txtAMCUpd_cnf.Enabled = true;
-                //btnAMCUpd_cnf.Enabled = true;
-                //scheduleAMCUpdater.Enabled = true;
-                //btnParameters.Enabled = true;
-                //btnAMCMovieScanPathAdd.Enabled = true;
-                //chkAMC_Purge_Missing_Files.Enabled = true;
-                //btnCreateAMCDefaultConfig.Enabled = true;
-                //btnCreateAMCDesktopIcon.Enabled = true;
-                //AMCMovieScanPath.Enabled = true;
+              groupBoxAMCUpdaterConfigFile.Enabled = true;
+              groupBox_AMCupdater_ExternalApplication.Enabled = true;
+              groupBox_AMCupdaterScheduer.Enabled = true;
             }
             else
             {
-                groupBox_AMCupdater_ExternalApplication.Enabled = false;
-                groupBox_AMCupdaterScheduer.Enabled = false;
-                //txtAMCUpd_cnf.Enabled = false;
-                //btnAMCUpd_cnf.Enabled = false;
-                //scheduleAMCUpdater.Enabled = false;
-                //btnParameters.Enabled = false;
-                //btnAMCMovieScanPathAdd.Enabled = false;
-                //chkAMC_Purge_Missing_Files.Enabled = false;
-                //btnCreateAMCDefaultConfig.Enabled = false;
-                //btnCreateAMCDesktopIcon.Enabled = false;
-                //AMCMovieScanPath.Enabled = false;
+              groupBoxAMCUpdaterConfigFile.Enabled = false;
+              groupBox_AMCupdater_ExternalApplication.Enabled = false;
+              groupBox_AMCupdaterScheduer.Enabled = false;
             }
         }
 
@@ -3151,24 +3148,70 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
+        private void Read_Default_XML_AMCconfig()
+        {
+          string AMCDefaultconfigFile = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + ".xml";
+          if (!System.IO.File.Exists(AMCDefaultconfigFile))
+          {
+            MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            return;
+          }
+
+          //DataSet ds = new DataSet();
+          AMCdsSettings.Clear();
+
+          // Datei öffnen
+          System.IO.FileStream fs = new System.IO.FileStream(AMCDefaultconfigFile, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+          // Datei einlesen
+          System.IO.StreamReader sr = new System.IO.StreamReader(fs);
+          // Stream in DataSet einlesen
+          AMCdsSettings.ReadXml(sr, XmlReadMode.InferSchema);
+          AMCdsSettings.CaseSensitive = false;
+          sr.Close();
+          fs.Close();
+
+          if (AMCdsSettings.Tables.Count == 1)
+            AMCdsSettings.Tables[0].PrimaryKey = new DataColumn[] { AMCdsSettings.Tables[0].Columns["Option"] };
+
+          // load dataset for GUI display
+          AMCConfigView.Items.Clear();
+          int i = 0;
+          foreach (DataRow dr in AMCdsSettings.Tables[0].Rows)
+          {
+            AMCConfigView.Items.Add(dr[1].ToString());
+            AMCConfigView.Items[i].SubItems.Add(dr[0].ToString());
+            i = i + 1;
+          }
+          // set MF GUI to values from AMC file, if values are present
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
+            AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
+          {
+            if (AMCGetAttribute("Purge_Missing_Files").ToLower() == "true") chkAMC_Purge_Missing_Files.Checked = true;
+            else chkAMC_Purge_Missing_Files.Checked = false;
+          }
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
+            AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
+
+        }
+
         private void Read_XML_AMCconfig(string currentconfig)
         {
           if (currentconfig.Length == 0) // Do not process, if no valid config is selected !
             return;
 
-          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
+          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings";
           if (!System.IO.File.Exists(wfiledefault + "_" + currentconfig + ".xml"))
           {
             try
             {
-              
               if (System.IO.File.Exists(wfiledefault + ".xml"))
               {
                 System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsAMCSettings"), wfiledefault + "_" + currentconfig + ".xml", true);
               }
               else
               {
-                MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
               }
                 
@@ -3254,7 +3297,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void Save_XML_AMCconfig(string currentconfig)
         {
           //Save AMC configuration to file (before launching AMCupdater with it)
-          string UserSettingsFile = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings" + "_" + currentconfig + ".xml";
+          string UserSettingsFile = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + currentconfig + ".xml";
 
           if (System.IO.File.Exists(UserSettingsFile))
             System.IO.File.Delete(UserSettingsFile);
@@ -5042,8 +5085,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               MessageBox.Show("Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               break;
             default:
-              MessageBox.Show(
-                "Successfully created a new Configuration for '" + CatalogType.Text + "' with default settings ! \n\nPlease verify the settings to artwork pathes to match your personal needs.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              MessageBox.Show("Successfully created a new Configuration for '" + CatalogType.Text + "' with default settings ! \n\nPlease verify the settings to artwork pathes to match your personal needs.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               General.SelectedIndex = 6;
               MesFilmsImg.Focus(); // Set focus to cover path                
               break;
@@ -5079,6 +5121,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
+              Read_XML_AMCconfig(newConfig_Name);
               NewConfigButton = true;
               Refresh_Items(true); // Reset all
               Refresh_Tabs(true); // enable Tabs
