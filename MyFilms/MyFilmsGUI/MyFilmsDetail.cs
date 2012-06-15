@@ -3696,9 +3696,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         string strOldValue = "";
                         string strNewValue = "";
 
-                        GUIDialogSelect dlgSelect =
-                          (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT);
-                          // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  
+                        GUIDialogSelect dlgSelect = (GUIDialogSelect)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT); // GUIDialogSelect2 dlgmenu = (GUIDialogSelect2)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_SELECT2);  
                         if (dlgSelect == null) return;
                         choiceViewMenu.Clear();
                         dlgSelect.Reset();
