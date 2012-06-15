@@ -1323,15 +1323,19 @@ Public Class AntProcessor
             Dim wYear As String = ""
             Dim wIMDB_Id As String = ""
             If CurrentNode.Attributes(CurrentSettings.Master_Title).ToString.Length > 0 Then '            If row("AntTitle").ToString.Length > 0 Then
-                If (CurrentNode.Attributes("Director").ToString.Length > 0) Then
-                    If (CurrentNode.Attributes("Director").ToString.IndexOf(",") > 0) Then
-                        wDirector = CurrentNode.Attributes("Director").ToString.Substring(0, CurrentNode.Attributes("Director").ToString.IndexOf(","))
-                    Else
-                        wDirector = CurrentNode.Attributes("Director").ToString
+                If Not CurrentNode.Item("Director") Is Nothing Then
+                    If (CurrentNode.Attributes("Director").ToString.Length > 0) Then
+                        If (CurrentNode.Attributes("Director").ToString.IndexOf(",") > 0) Then
+                            wDirector = CurrentNode.Attributes("Director").ToString.Substring(0, CurrentNode.Attributes("Director").ToString.IndexOf(","))
+                        Else
+                            wDirector = CurrentNode.Attributes("Director").ToString
+                        End If
                     End If
                 End If
-                If (CurrentNode.Attributes("Year").ToString.Length > 0) Then
-                    wYear = CurrentNode.Attributes("Year").ToString
+                If Not CurrentNode.Item("Year") Is Nothing Then
+                    If (CurrentNode.Attributes("Year").ToString.Length > 0) Then
+                        wYear = CurrentNode.Attributes("Year").ToString
+                    End If
                 End If
                 If Not CurrentNode.Item("IMDB_Id") Is Nothing Then
                     If (CurrentNode.Item("IMDB_Id").ToString.Length > 0) Then
@@ -1452,9 +1456,16 @@ Public Class AntProcessor
                         FieldChecked = Form1.cbDatabaseFields.GetItemChecked(Form1.cbDatabaseFields.Items.IndexOf(FieldName))
                         Try
                             ValueOld = GetValue(CurrentNodeOriginalValue, FieldName) 'ValueOld = CurrentNodeOriginalValue.Attributes(FieldName).Value
+                            If Not ValueOld Is Nothing Then
+                                If ValueOld.StartsWith("ErrorEvent :") Then
+                                    ValueOld = Nothing
+                                End If
+                            End If
                             ValueNew = GetValue(CurrentNode, FieldName) 'ValueNew = Ant.XMLElement.Attributes(FieldName).Value
-                            If ValueNew.StartsWith("ErrorEvent :") Then
-                                ValueNew = Nothing
+                            If Not ValueNew Is Nothing Then
+                                If ValueNew.StartsWith("ErrorEvent :") Then
+                                    ValueNew = Nothing
+                                End If
                             End If
                             .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
                             If FieldName = "Picture" Then
@@ -1484,9 +1495,9 @@ Public Class AntProcessor
                                 End If
                                 If itemName = "Date" Then
                                     Try
-                                        itemValue = Convert.ToDateTime(itemValue).ToShortDateString()
+                                        itemValue = String.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(itemValue))
                                     Catch ex As Exception
-                                        itemValue = DateTime.Now.ToShortDateString()
+                                        itemValue = Nothing 'String.Format("{0:yyyy/MM/dd}", DateTime.Now)
                                     End Try
                                 End If
                             Catch ex As Exception
