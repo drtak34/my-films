@@ -5723,14 +5723,51 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void buttonUpdateGrabberScripts_Click(object sender, EventArgs e)
         {
-          string versionfile = Config.GetFolder(Config.Dir.Config) + @"\MyFilmsScriptVersions.xml";
-          if (System.IO.File.Exists(versionfile))
+          Thread updateThread = new Thread(delegate(object obj)
           {
-            System.IO.File.Delete(versionfile);
+            string versionfile = Config.GetFolder(Config.Dir.Config) + @"\MyFilmsScriptVersions.xml";
+            if (System.IO.File.Exists(versionfile)) System.IO.File.Delete(versionfile);
+            Uri url = new Uri("http://my-films.googlecode.com/svn/trunk/Installer" + @"/updateScriptVersions.xml");
+
+            if (DownloadFile(url, versionfile)) // DownloadFileAsync(url, versionfile);
+            {
+              int iUpdates = UpdateScriptFiles(versionfile);
+              textBoxUpdateGrabberScripts.Text = "";
+              if (iUpdates > 0) MessageBox.Show(iUpdates + " Grabber Script(s) updated !");
+              else MessageBox.Show("No Updates available !");
+              //try { System.IO.File.Delete(versionfile); } // remove temp download file
+              //catch { }
+            }
+          })
+          {
+            IsBackground = true,
+            Name = "Check for Updates"
+          };
+          updateThread.Start();
+        }
+
+        private bool DownloadFile(Uri url, string file)
+        {
+          WebClient webClient = new WebClient();
+          try
+          {
+            Directory.CreateDirectory(Path.GetDirectoryName(file));
+            if (!System.IO.File.Exists(file))
+            {
+              LogMyFilms.Debug("Downloading file from: {0}", url);
+              webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+              webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+              webClient.DownloadFile(url, file);
+            }
+            return true;
           }
-          Uri url = new Uri("http://my-films.googlecode.com/svn/trunk/Installer/updateScriptVersions.xml");
-          DownloadFileAsync(url, versionfile);
-          //UpdateScriptFiles();
+          catch (Exception)
+          {
+            LogMyFilms.Error("Download failed from '{0}' to '{1}'", url, file);
+            try { if (System.IO.File.Exists(file)) System.IO.File.Delete(file); }
+            catch { }
+            return false;
+          }
         }
 
         private void DownloadFileAsync(Uri url, string file)
@@ -5738,9 +5775,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           WebClient webClient = new WebClient();
           webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
           webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-          webClient.DownloadFileAsync(url, file);
+          webClient.DownloadFileAsync(url, file); // load threaded, but file isn't there for proceeding ...
         }
-    
+
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
           progressBarUpdateGrabberScripts.Value = e.ProgressPercentage;
@@ -5753,73 +5790,151 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //{
           //  System.IO.File.Delete(file);
           //}
-          MessageBox.Show("Download completed!");
+          textBoxUpdateGrabberScripts.Text = "";
+          // MessageBox.Show("Download(s) completed!");
         }
 
-        public void UpdateScriptFiles()
+        public int UpdateScriptFiles(string versionfile)
         {
-          Version newVersion = null;
+          int iUpdates = 0;
+          DirectoryInfo dirsInf = new DirectoryInfo(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
+          FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
+          List<string> ExistingGrabberScriptFiles = new List<string>();
+          Version version = null;
           string name = "";
           string url = "";
-          XmlTextReader reader;
+
+          foreach (FileSystemInfo sfi in sfiles)
+          {
+            if (sfi.Extension.ToLower() == ".xml")
+            {
+              GrabberScript script = new GrabberScript(sfi.FullName);
+              script.Load(sfi.FullName);
+              ExistingGrabberScriptFiles.Add(Path.GetFileName(sfi.FullName).ToLower());
+            }
+          }
+
           try
           {
-            string xmlURL = "http://domain/app_version.xml";
-            reader = new XmlTextReader(xmlURL);
-            reader.MoveToContent();
-            string elementName = "";
-            if ((reader.NodeType == XmlNodeType.Element) &&
-                (reader.Name == "MyFilmsGrabberScript"))
+            XmlDocument doc = new XmlDocument();
+            doc.Load(versionfile);
+            string urlbase = doc.DocumentElement.SelectSingleNode("/grabberscripts/urlbase").InnerText;
+            XmlNodeList grabberupdates = doc.DocumentElement.SelectNodes("/grabberscripts/scripts");
+            foreach (XmlNode grabberupdate in grabberupdates)
             {
-              while (reader.Read())
+              name = grabberupdate.SelectSingleNodeFast("name").InnerText;
+              version = new Version(grabberupdate.SelectSingleNodeFast("version").InnerText);
+              url = urlbase + name;
+              string localfilename = System.IO.Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts), name);
+              string backupfile = Path.Combine(Path.GetDirectoryName(localfilename) + @"\backup\", (Path.GetFileNameWithoutExtension(localfilename) +  " - " + DateTime.Now.ToString("u") + ".xml").Replace(":", "-").Replace("/", "-")) ;
+              // check, if script missing - then load it
+              if (!ExistingGrabberScriptFiles.Contains(name.ToLower()))
               {
-                // when we find an element node,
-                // we remember its name
-                if (reader.NodeType == XmlNodeType.Element)
-                  elementName = reader.Name;
-                else
+                textBoxUpdateGrabberScripts.Text = "updating '" + name + "'";
+                string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xml";
+                if (DownloadFile(new Uri(url), localfilename)) // DownloadFile(new Uri(url), localfilename); // "http://my-films.googlecode.com/svn/trunk/Installer/Config/scripts/MyFilms/";
                 {
-                  // for text nodes...
-                  if ((reader.NodeType == XmlNodeType.Text) &&
-                      (reader.HasValue))
+                  System.IO.File.Copy(tempFile,localfilename,true);
+                  System.IO.File.Delete(tempFile);
+                }
+                iUpdates++;
+              }
+              else
+              {
+                Version curVersion = null;
+                foreach (string existingGrabberScript in ExistingGrabberScriptFiles)
+                {
+                  if (existingGrabberScript.ToLower() == Path.GetFileName(localfilename).ToLower())
                   {
-                    // we check what the name of the node was
-                    switch (elementName)
-                    {
-                      case "version":
-                        // thats why we keep the version info
-                        // in xxx.xxx.xxx.xxx format
-                        // the Version class does the
-                        // parsing for us
-                        newVersion = new Version(reader.Value);
-                        break;
-                      case "name":
-                        name = reader.Value;
-                        break;
-                      case "url":
-                        url = reader.Value;
-                        break;
-                    }
+                    GrabberScript currentScript = new GrabberScript(localfilename);
+                    currentScript.Load(localfilename);
+                    curVersion = new Version(currentScript.Version);
+                  }
+                }
+
+                if (curVersion != null && curVersion.CompareTo(version) < 0) // compare the versions
+                {
+                  textBoxUpdateGrabberScripts.Text = "updating '" + name + "'";
+                  string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xml";
+                  if (DownloadFile(new Uri(url), tempFile)) // DownloadFile(new Uri(url), localfilename); // "http://my-films.googlecode.com/svn/trunk/Installer/Config/scripts/MyFilms/";
+                  {
+                    // backup existing script
+                    if (!System.IO.Directory.Exists(Path.GetDirectoryName(backupfile))) System.IO.Directory.CreateDirectory(Path.GetDirectoryName(backupfile));
+                    System.IO.File.Copy(localfilename, backupfile, true);
+                    System.IO.File.Delete(localfilename);
+                    Thread.Sleep(50);
+                    System.IO.File.Copy(tempFile, localfilename, true);
+                    System.IO.File.Delete(tempFile);
+                    iUpdates++;
                   }
                 }
               }
             }
           }
-          catch (Exception)
+          catch (Exception ex)
           {
-          }
-          finally
-          {
-            //if (null != reader) reader.Close();
+            MessageBox.Show("Error updating script files: '" + ex.Message + "'\n" + ex.StackTrace);
+            return iUpdates;
           }
 
-          // get the current version
-          Version curVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-          // compare the versions
-          if (curVersion.CompareTo(newVersion) < 0)
-          {
-            // load updated scripts here ...
-          }
+          #region old method
+          //Version newVersion = null;
+          //string name = "";
+          //string url = "";
+          //XmlTextReader reader;
+
+          //try
+          //{
+          //  string xmlURL = "http://domain/app_version.xml";
+          //  reader = new XmlTextReader(xmlURL);
+          //  reader.MoveToContent();
+          //  string elementName = "";
+          //  if ((reader.NodeType == XmlNodeType.Element) &&
+          //      (reader.Name == "GrabberScript"))
+          //  {
+          //    while (reader.Read())
+          //    {
+          //      // when we find an element node,
+          //      // we remember its name
+          //      if (reader.NodeType == XmlNodeType.Element)
+          //        elementName = reader.Name;
+          //      else
+          //      {
+          //        // for text nodes...
+          //        if ((reader.NodeType == XmlNodeType.Text) &&
+          //            (reader.HasValue))
+          //        {
+          //          // we check what the name of the node was
+          //          switch (elementName)
+          //          {
+          //            case "version":
+          //              // thats why we keep the version info
+          //              // in xxx.xxx.xxx.xxx format
+          //              // the Version class does the
+          //              // parsing for us
+          //              newVersion = new Version(reader.Value);
+          //              break;
+          //            case "name":
+          //              name = reader.Value;
+          //              break;
+          //            case "url":
+          //              url = reader.Value;
+          //              break;
+          //          }
+          //        }
+          //      }
+          //    }
+          //  }
+          //}
+          //catch (Exception)
+          //{
+          //}
+          //finally
+          //{
+          //  //if (null != reader) reader.Close();
+          //}
+#endregion
+          return iUpdates;
         }
 
         private void toolStripButtonAddDefaults_Click(object sender, EventArgs e)

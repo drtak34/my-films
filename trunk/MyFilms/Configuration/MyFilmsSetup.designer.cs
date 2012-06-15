@@ -512,6 +512,7 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.textBoxUpdateGrabberScripts = new System.Windows.Forms.TextBox();
           this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
           this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
           this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
@@ -5396,6 +5397,7 @@
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
+          this.Tab_Other.Controls.Add(this.textBoxUpdateGrabberScripts);
           this.Tab_Other.Controls.Add(this.progressBarUpdateGrabberScripts);
           this.Tab_Other.Controls.Add(this.buttonUpdateGrabberScripts);
           this.Tab_Other.Controls.Add(this.button_GrabberScriptUpdate);
@@ -5420,11 +5422,19 @@
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
+          // textBoxUpdateGrabberScripts
+          // 
+          this.textBoxUpdateGrabberScripts.Enabled = false;
+          this.textBoxUpdateGrabberScripts.Location = new System.Drawing.Point(563, 123);
+          this.textBoxUpdateGrabberScripts.Name = "textBoxUpdateGrabberScripts";
+          this.textBoxUpdateGrabberScripts.Size = new System.Drawing.Size(137, 20);
+          this.textBoxUpdateGrabberScripts.TabIndex = 123;
+          // 
           // progressBarUpdateGrabberScripts
           // 
-          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(563, 137);
+          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(563, 149);
           this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
-          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(137, 23);
+          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(137, 13);
           this.progressBarUpdateGrabberScripts.TabIndex = 122;
           // 
           // buttonUpdateGrabberScripts
@@ -6541,5 +6551,6 @@
         private TextBox tbExternalPlayerPath;
         private TextBox tbExternalPlayerStartParams;
         private CheckBox chkPersonsEnableDownloads;
+        private TextBox textBoxUpdateGrabberScripts;
     }
 }
