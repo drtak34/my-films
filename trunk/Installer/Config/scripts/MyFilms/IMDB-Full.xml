@@ -296,9 +296,9 @@
       <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_16 source="Tagline" destination="Description" replace="False" addstart="True" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_17 source="Certification" destination="Comment" replace="False" addstart="True" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_18 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_19 source="IMDB_Rank" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_19 source="IMDBrank" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_20 source="Studio" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_21 source="Edition" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_22 source="Fanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -314,7 +314,7 @@
       <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_35 source="TMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
