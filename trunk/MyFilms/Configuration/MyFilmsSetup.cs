@@ -3127,7 +3127,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           return true;
         }
 
-    private void General_Selected(object sender, TabControlCancelEventArgs e)
+        private void General_Selected(object sender, TabControlCancelEventArgs e)
         {
             if (General.SelectedTab.Text == "Logos")
             {
@@ -3201,13 +3201,22 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             return;
 
           string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings";
-          if (!System.IO.File.Exists(wfiledefault + "_" + currentconfig + ".xml"))
+          string AMCconfigFile = (txtAMCUpd_cnf.Text.Length > 0) ? txtAMCUpd_cnf.Text : wfiledefault + "_" + currentconfig + ".xml";
+
+          if (!System.IO.Directory.Exists(Path.GetDirectoryName(AMCconfigFile)))
+          {
+            try
+            { System.IO.Directory.CreateDirectory(Path.GetDirectoryName(AMCconfigFile)); }
+            catch { }
+          }
+
+          if (!System.IO.File.Exists(AMCconfigFile)) // if (!System.IO.File.Exists(wfiledefault + "_" + currentconfig + ".xml"))
           {
             try
             {
               if (System.IO.File.Exists(wfiledefault + ".xml"))
               {
-                System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsAMCSettings"), wfiledefault + "_" + currentconfig + ".xml", true);
+                System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsAMCSettings"), AMCconfigFile, true);
               }
               else
               {
@@ -3218,10 +3227,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             catch
             {
+              MessageBox.Show("The AMCUpdater config file could not be found! \n(" + AMCconfigFile + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
           }
 
-          string AMCconfigFile = wfiledefault + "_" + currentconfig + ".xml";
           //DataSet ds = new DataSet();
           AMCdsSettings.Clear();
 
@@ -3294,21 +3303,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //  }
         }
 
-        private void Save_XML_AMCconfig(string currentconfig)
+        private void Save_XML_AMCconfig(string currentconfig) //Save AMC configuration to file (before launching AMCupdater with it)
         {
-          //Save AMC configuration to file (before launching AMCupdater with it)
-          string UserSettingsFile = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + currentconfig + ".xml";
-
-          if (System.IO.File.Exists(UserSettingsFile))
-            System.IO.File.Delete(UserSettingsFile);
+          string AMCconfigFile = (txtAMCUpd_cnf.Text.Length > 0) ? txtAMCUpd_cnf.Text : Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + currentconfig + ".xml";
+          if (System.IO.File.Exists(AMCconfigFile))
+            System.IO.File.Delete(AMCconfigFile);
           try
           {
-            AMCdsSettings.WriteXml(UserSettingsFile);
-            LogMyFilms.Debug("AMCupdater Settings saved to file: '" + UserSettingsFile + "'");
+            AMCdsSettings.WriteXml(AMCconfigFile);
+            LogMyFilms.Debug("AMCupdater Settings saved to file: '" + AMCconfigFile + "'");
           }
-          catch
-          {
-          }
+          catch { }
         }
 
         private void AMCSetAttribute(string OptionName, string OptionValue)
