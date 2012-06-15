@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlbase>http://my-films.googlecode.com/svn/trunk/Installer/Config/scripts/MyFilms/</urlbase>
-<GrabberScript>
-  <name>IMDB.xml</name>
-  <version>1.1.0.0</version>
-</GrabberScript>
-<GrabberScript>
-  <name>OFDB-XML.xml</name>
-  <version>1.1.0.1</version>
-</GrabberScript>
+<grabberscripts>
+    <name>IMDB.xml</name>
+    <version>1.1.0.0</version>
+</grabberscripts>
+<grabberscripts>
+    <name>OFDB-XML.xml</name>
+    <version>1.1.0.1</version>
+</grabberscripts>
