@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <window>
-	<id>2100</id>
+	<id>7993</id>
 	<defaultcontrol>3</defaultcontrol>
 	<allowoverlay>control.isvisible(13371337)</allowoverlay>
 	<animation effect="fade" time="250">WindowOpen</animation>
