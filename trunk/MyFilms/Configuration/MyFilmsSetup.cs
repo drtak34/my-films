@@ -2538,8 +2538,41 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML AMCUpdater Config Files|*.xml";
             openFileDialog1.Title = "Select AMCUPdater Config file (xml file)";
+            openFileDialog1.CheckFileExists = false;
+            openFileDialog1.CheckPathExists = false;
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+              if (!System.IO.File.Exists(openFileDialog1.FileName))
+              {
+                if (MessageBox.Show("That AMCUpdater config file doesn't exists, do you want to create one with default values ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                  try
+                  {
+                    if (!System.IO.Directory.Exists(Path.GetDirectoryName(openFileDialog1.FileName)))
+                    {
+                      System.IO.Directory.CreateDirectory(Path.GetDirectoryName(openFileDialog1.FileName));
+                    }
+                    txtAMCUpd_cnf.Text = openFileDialog1.FileName;
+                    if (!System.IO.File.Exists(txtAMCUpd_cnf.Text))
+                    {
+                      Read_XML_AMCconfig(Config_Name.Text); // create a new default config at the specified location
+                    }
+                  }
+                  catch (Exception ex)
+                  {
+                    openFileDialog1.CheckFileExists = true;
+                    openFileDialog1.CheckPathExists = true;
+                    MessageBox.Show("File or directory could not be created ! - Message: '" + ex.Message + "'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                  }
+                }
+              }
+              else
+              {
                 txtAMCUpd_cnf.Text = openFileDialog1.FileName;
+              }
+            }
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.CheckPathExists = true;
         }
 
         private void chkAMCUpd_CheckedChanged(object sender, EventArgs e)
