@@ -412,6 +412,9 @@ This applies to:
 - Launching AMCUpdater via "Import" button in setup
 - Launching AMCUpdater via desktop icon
 
+If you select a filename or directory, that currently does not exist (no existing AMCU config file), MyFilms
+will ask you if a new config with default values should be created there for you.
+
 Note: If you changed this setting, you have to "(re)create Desktop Icon" 
 to update the link - otherwise, it won't use the new config file you've set.</value>
   </data>
