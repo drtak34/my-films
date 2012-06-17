@@ -469,9 +469,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           lock (PersonstoDownloadQueue)
           {
             if (PersonstoDownloadQueue.Count > 0)
-              MyFilmsDetail.setGUIProperty("details.downloadstatus", "Person Images to Download: " + PersonstoDownloadQueue.Count);                    
+            {
+              MyFilmsDetail.setGUIProperty("details.downloads.status", string.Format(GUILocalizeStrings.Get(10799230), PersonstoDownloadQueue.Count.ToString()));
+              MyFilmsDetail.setGUIProperty("details.downloads.count", PersonstoDownloadQueue.Count.ToString());
+            }
             else
-              MyFilmsDetail.clearGUIProperty("details.downloadstatus");
+            {
+              MyFilmsDetail.clearGUIProperty("details.downloads.status");
+              MyFilmsDetail.clearGUIProperty("details.downloads.count");
+            }
           }
         }
 

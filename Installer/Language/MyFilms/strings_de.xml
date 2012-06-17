@@ -387,5 +387,6 @@
     <String id="10799222">Hoch</String>
     <String id="10799223">Mittel</String>
     <String id="10799224">Niedrig</String>
+    <String id="10799230">Personenbilder zu laden: {0}</String>
   </Section>
 </Language>
