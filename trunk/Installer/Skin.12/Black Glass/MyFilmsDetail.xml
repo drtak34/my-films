@@ -2538,7 +2538,7 @@
       <align>right</align>
       <font>font10</font>
       <textcolor>60ffffff</textcolor>
-      <label>#myfilms.details.downloadstatus</label>
+      <label>#myfilms.details.downloads.status</label>
       <!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -2552,7 +2552,7 @@
       <width>16</width>
       <height>16</height>
       <texture>isupdate.png</texture>
-      <visible>!string.equals(#myfilms.details.downloadstatus,)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>

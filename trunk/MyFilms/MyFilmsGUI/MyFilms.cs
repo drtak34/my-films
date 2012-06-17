@@ -13791,7 +13791,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("picture");
       MyFilmsDetail.clearGUIProperty("currentfanart");
       MyFilmsDetail.clearGUIProperty("statusmessage");
-      MyFilmsDetail.clearGUIProperty("details.downloadstatus");
+      MyFilmsDetail.clearGUIProperty("details.downloads.status");
+      MyFilmsDetail.clearGUIProperty("details.downloads.count");
       // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
     }
 
