@@ -365,7 +365,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               List<DBPersonInfo> personlist = tmdbapi.getPersonsByName(f.Name, false, "en");
               if (personlist.Count == 0)
               {
-                LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found, remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found on TMDB, remaining items: '" + PersonstoDownloadQueue.Count + "'");
                 bDownloadSuccess = false;
               }
               else
@@ -387,7 +387,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //LogMyFilms.Info("Person Artwork - " + f.Images.Count + " Images found for '" + f.Name + "'");
                     LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB Image found for person '" + f.Name + "', URL = '" + f.Images[0] + "' - remaining items: '" + PersonstoDownloadQueue.Count + "'");
                     string filename1person = Grabber.GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, f.Images[0], f.Name, false, true, out filename);
-                    LogMyFilms.Debug("Person Image '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
+                    LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
 
                     if (downloadingWorker.CancellationPending)
                     {
@@ -406,14 +406,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               if (!bDownloadSuccess) // try IMDB, if TMDB was not successful !
               {
-                LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB unsuccessful - try IMDB ...");
+                // LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB unsuccessful - try IMDB ...");
                 bDownloadSuccess = true;
                 IMDB _imdb = new IMDB();
                 _imdb.FindActor(f.Name);
 
                 if (_imdb.Count == 0)
                 {
-                  LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found, remaining items: '" + PersonstoDownloadQueue.Count + "'");
+                  LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found on IMDB, remaining items: '" + PersonstoDownloadQueue.Count + "'");
                   bDownloadSuccess = false;
                 }
                 else
@@ -427,7 +427,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("downloadingWorker_DoWork() - IMDB Image found for person '" + f.Name + "', URL = '" + imdbActor.ThumbnailUrl + "' - remaining items: '" + PersonstoDownloadQueue.Count + "'");
                       string filename = Path.Combine(MyFilms.conf.StrPathArtist, f.Name);
                       string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, imdbActor.ThumbnailUrl, f.Name, false, true, out filename);
-                      LogMyFilms.Debug("Person Image '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
+                      LogMyFilms.Debug("Person Image (IMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
                     }
                     else
                     {
