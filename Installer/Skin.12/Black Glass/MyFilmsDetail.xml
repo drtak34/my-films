@@ -2538,8 +2538,9 @@
       <align>right</align>
       <font>font10</font>
       <textcolor>60ffffff</textcolor>
-      <label>#myfilms.details.downloads.status</label>
+      <label>'#myfilms.details.downloads.name' - #myfilms.details.downloads.status</label>
       <!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
+      <visible>!string.equals(#myfilms.details.downloads.status,)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>

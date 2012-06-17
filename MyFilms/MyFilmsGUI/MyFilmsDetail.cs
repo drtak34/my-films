@@ -470,13 +470,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (PersonstoDownloadQueue.Count > 0)
             {
+              DBPersonInfo f = PersonstoDownloadQueue.Peek();
               MyFilmsDetail.setGUIProperty("details.downloads.status", string.Format(GUILocalizeStrings.Get(10799230), PersonstoDownloadQueue.Count.ToString()));
               MyFilmsDetail.setGUIProperty("details.downloads.count", PersonstoDownloadQueue.Count.ToString());
+              MyFilmsDetail.setGUIProperty("details.downloads.name", f.Name ?? "");
             }
             else
             {
               MyFilmsDetail.clearGUIProperty("details.downloads.status");
               MyFilmsDetail.clearGUIProperty("details.downloads.count");
+              MyFilmsDetail.clearGUIProperty("details.downloads.name");
             }
           }
         }

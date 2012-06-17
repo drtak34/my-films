@@ -378,6 +378,6 @@
     <String id="10799222">High</String>
     <String id="10799223">Medium</String>
     <String id="10799224">Low</String>
-    <String id="10799230">Person images to download: {0}</String>
+    <String id="10799230">to download: {0}</String>
   </Section>
 </Language>
