@@ -32,6 +32,85 @@ Module Module1
         WriteBuffer
     End Enum
 
+    Public Function GetDVDFolderPath(ByVal FileName As String) As String
+        'Function to try and guess the correct movie name for a DVD image stored in a folder.
+        'DVD files may be stored directly in a folder with the name of the movie.
+        'DVD files may also retain their structure so .vob files will be in \VIDEO_TS\ - assume parent of that is movie name.
+
+        'filename = DVDs\Shawshank Redemption, the\VIDEO_TS.IFO
+        'filename = DVDs\Shawshank Redemption, the\VIDEO_TS\VIDEO_TS.IFO
+
+        Dim TempString As String
+        Dim ReturnValue As String
+
+        'Get the file name itself off the end: \VIDEO_TS.IFO
+        Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
+
+        'This trims the filename and leaves DVDs\ShawshankRedemption, the"
+        FileName = FileName.Replace(FileNameEnd, "")
+
+        If FileName.Contains("\") Then
+            TempString = FileName.Substring(InStrRev(FileName, "\"))
+        Else
+            TempString = FileName
+        End If
+
+        If TempString.ToLower = "video_ts" Then
+            TempString = FileName.Replace(TempString, "")
+            'Check that there isn't a trailing backslash (probably is)
+            If TempString.EndsWith("\") = True Then
+                TempString = TempString.Substring(0, Len(TempString) - 1)
+            End If
+
+            ReturnValue = TempString
+
+            'do more processing?
+        Else
+            ReturnValue = TempString
+        End If
+
+        Return ReturnValue
+
+    End Function
+
+    Public Function GetBRFolderPath(ByVal FileName As String) As String
+        'Function to try and guess the correct movie name for a BR image stored in a folder.
+        'filename = BRs\IRON MAN\BDMV\index.bdmv
+        'filename = BRs\IRON MAN\index.bdmv
+
+        Dim TempString As String
+        Dim ReturnValue As String
+
+        'Get the file name itself off the end: \index.bdmv
+        Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
+
+        'This trims the filename and leaves BRs\IRON MAN"
+        FileName = FileName.Replace(FileNameEnd, "")
+
+        If FileName.Contains("\") Then
+            TempString = FileName.Substring(InStrRev(FileName, "\"))
+        Else
+            TempString = FileName
+        End If
+
+        If TempString.ToLower = "bdmv" Then
+            TempString = FileName.Replace(TempString, "")
+            'Check that there isn't a trailing backslash (probably is)
+            If TempString.EndsWith("\") = True Then
+                TempString = TempString.Substring(0, Len(TempString) - 1)
+            End If
+
+            ReturnValue = TempString
+
+            'do more processing?
+        Else
+            ReturnValue = TempString
+        End If
+
+        Return ReturnValue
+
+    End Function
+
     Public Function GetDVDFolderName(ByVal FileName As String) As String
         'Function to try and guess the correct movie name for a DVD image stored in a folder.
         'DVD files may be stored directly in a folder with the name of the movie.
@@ -468,10 +547,16 @@ Module Module1
     Public Function GetFileData(ByVal FilePath As String, ByVal DataItem As String)
         'Function to retreive information from the given file.
 
+        Dim Directory As Boolean = False
+        Dim DirectoryPath As String = ""
         If FilePath.ToLower.EndsWith("video_ts.ifo") = True Then
+            Directory = True
+            DirectoryPath = GetDVDFolderPath(FilePath)
             FilePath = GetDVDMovieFile(FilePath)
         End If
         If FilePath.ToLower.EndsWith("index.bdmv") = True Then
+            Directory = True
+            DirectoryPath = GetBRFolderPath(FilePath)
             FilePath = GetBRMovieFile(FilePath)
         End If
 
@@ -757,8 +842,13 @@ Module Module1
                 End Try
             Case "filesize" 'get in MB = divide by 1024 twice
                 Try
-                    TempString = CStr(f.Length)
-                    TempInteger = CLng(TempString)
+                    If Directory Then
+                        Dim d As New IO.DirectoryInfo(DirectoryPath)
+                        TempInteger = getDirectorySize(d)
+                    Else
+                        TempString = CStr(f.Length)
+                        TempInteger = CLng(TempString)
+                    End If
                     ReturnValue = CLng((TempInteger / 1048576)).ToString
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
@@ -810,6 +900,20 @@ Module Module1
 
         Return ReturnValue
 
+    End Function
+
+    Public Function getDirectorySize(ByVal dir As IO.DirectoryInfo) As Long
+        Dim t As Long = 0
+
+        For Each _d As IO.DirectoryInfo In dir.GetDirectories()
+            t += getDirectorySize(_d)
+        Next
+
+        For Each _f As IO.FileInfo In dir.GetFiles()
+            t += CLng(CStr(_f.Length))
+        Next
+
+        Return t
     End Function
 
     Public Function GetHTMLFileData(ByVal FilePath As String, ByVal DataItem As String)
