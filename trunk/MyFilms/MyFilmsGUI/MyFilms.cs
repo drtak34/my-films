@@ -13793,6 +13793,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("statusmessage");
       MyFilmsDetail.clearGUIProperty("details.downloads.status");
       MyFilmsDetail.clearGUIProperty("details.downloads.count");
+      MyFilmsDetail.clearGUIProperty("details.downloads.name");
       // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
     }
 
