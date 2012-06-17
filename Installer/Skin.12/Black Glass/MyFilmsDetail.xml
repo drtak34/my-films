@@ -2527,20 +2527,67 @@
 		</control>
 -->
 
+    <!-- Person image background download indicator -->
     <control>
       <description>Background Status Messages</description>
       <type>label</type>
       <id>0</id>
-      <posX>520</posX>
-      <posY>30</posY>
-      <width>550</width>
+      <posX>415</posX>
+      <posY>639</posY>
+      <width>1550</width>
+      <align>right</align>
       <font>font10</font>
       <textcolor>60ffffff</textcolor>
       <label>#myfilms.details.downloadstatus</label>
       <!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>421</posX>
+      <posY>640</posY>
+      <width>16</width>
+      <height>16</height>
+      <texture>isupdate.png</texture>
+      <visible>!string.equals(#myfilms.details.downloadstatus,)</visible>
+      <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
+    <!-- OV download indicator -->
+    <control>
+      <description>number of current downloads</description>
+      <type>label</type>
+      <id>47016</id>
+      <posX>415</posX>
+      <posY>667</posY>
+      <align>right</align>
+      <label>#OnlineVideos.currentDownloads #(L(921))</label>
+      <font>font10</font>
+      <textcolor>60ffffff</textcolor>
+      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>421</posX>
+      <posY>669</posY>
+      <width>16</width>
+      <height>16</height>
+      <texture>isupdate.png</texture>
+      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
   </controls>
 </window>
