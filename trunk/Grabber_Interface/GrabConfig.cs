@@ -2473,6 +2473,14 @@ namespace Grabber_Interface
           catch { textMaxItems.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerIndex)._Value;
           break;
+        case 45: // Runtime
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRuntimePage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndRuntime)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRuntimeIndex)._Value;
+          break;
         case 46: // Collection
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionPage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param1;
@@ -2481,7 +2489,6 @@ namespace Grabber_Interface
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollection)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionIndex)._Value;
           break;
-
 
         default:
           URLpage.Text = "";
@@ -2701,6 +2708,9 @@ namespace Grabber_Interface
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Value = TextKeyStartD.Text;
           break;
+        case 45:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Value = TextKeyStartD.Text;
+          break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value = TextKeyStartD.Text;
           break;
@@ -2883,6 +2893,9 @@ namespace Grabber_Interface
           break;
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndTrailer)._Value = TextKeyStopD.Text;
+          break;
+        case 45:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndRuntime)._Value = TextKeyStopD.Text;
           break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollection)._Value = TextKeyStopD.Text;
@@ -3215,15 +3228,19 @@ namespace Grabber_Interface
             break;
           case 35:
           case 75:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: TMDB_Id'" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "TMDB_Id'" + mapped + Environment.NewLine;
+            break;
+          case 36:
+          case 76:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Runtime'" + mapped + Environment.NewLine;
             break;
           case 37:
           case 77:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Collection'" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Collection'" + mapped + Environment.NewLine;
             break;
           case 39:
           case 79:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Picture URL'" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Picture URL'" + mapped + Environment.NewLine;
             break;
           default:
             textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i - 40).ToString() + "'" + mapped + Environment.NewLine;
@@ -3697,6 +3714,9 @@ namespace Grabber_Interface
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param1 = textDReplace.Text;
           break;
+        case 45:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Param1 = textDReplace.Text;
+          break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param1 = textDReplace.Text;
           break;
@@ -3846,6 +3866,9 @@ namespace Grabber_Interface
           break;
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param2 = textDReplaceWith.Text;
+          break;
+        case 45:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Param2 = textDReplaceWith.Text;
           break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param2 = textDReplaceWith.Text;
@@ -4004,6 +4027,9 @@ namespace Grabber_Interface
           break;
         case "TMDB_Id":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Value;
+          break;
+        case "Runtime":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRuntime)._Value;
           break;
         case "Collection":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value;
@@ -4168,6 +4194,9 @@ namespace Grabber_Interface
         case 44: // added for Trailer
           xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerIndex)._Value = Index.Text;
           break;
+        case 45: // added for Runtime (by web)
+          xmlConf.find(xmlConf.listDetail, TagName.KeyRuntimeIndex)._Value = Index.Text;
+          break;
         case 46: // added for Collection
           xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionIndex)._Value = Index.Text;
           break;
@@ -4324,6 +4353,9 @@ namespace Grabber_Interface
           break;
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerPage)._Value = URLpage.Text;
+          break;
+        case 45:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyRuntimePage)._Value = URLpage.Text;
           break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionPage)._Value = URLpage.Text;

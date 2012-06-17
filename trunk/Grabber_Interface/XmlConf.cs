@@ -188,7 +188,12 @@ class XmlConf
     /// </summary>
     public ListNode find(List<ListNode> list, string name)
     {
-        return list.Find(delegate(ListNode l) { return l._Tag.Equals(name); });
+		ListNode _l = list.Find(delegate(ListNode l) { return l._Tag.Equals(name); });
+		if(_l != null)
+			return _l;
+		_l = new ListNode(name, "", "", "", "", "", "", "", "");
+		list.Add(_l);
+		return _l;
     }
               
 }
@@ -620,5 +625,12 @@ public class TagName
   public static string KeyTrailerLanguage = "KeyTrailerLanguage";
   public static string KeyTrailerPage = "KeyTrailerPage";
 
+  public static string KeyStartRuntime = "KeyStartRuntime";     // Runtime
+  public static string KeyEndRuntime = "KeyEndRuntime";
+  public static string KeyRuntimeRegExp = "KeyRuntimeRegExp";
+  public static string KeyRuntimeIndex = "KeyRuntimeIndex";
+  public static string KeyRuntimeMaxItems = "KeyRuntimeMaxItems";
+  public static string KeyRuntimeLanguage = "KeyRuntimeLanguage";
+  public static string KeyRuntimePage = "KeyRuntimePage";
 }
 

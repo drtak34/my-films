@@ -87,7 +87,7 @@ Public Class AntRecord
         'MultiFanart = 33
         'Trailer = 34
         'TMDB_Id = 35
-        'Empty36 = 36
+        'Runtime = 36
         'Collection = 37
         'Empty38 = 38
         'PictureURL = 39
@@ -128,7 +128,7 @@ Public Class AntRecord
         MultiFanart = 73
         Trailer = 74
         TMDB_Id = 75
-        Empty36 = 76
+        Runtime = 76
         Collection = 77
         Empty38 = 78
         PictureURL = 79
@@ -1434,10 +1434,16 @@ Public Class AntRecord
                             'Diskcount += 1
                         End If
                     Next
-
                 Else
                     TempValue = GetFileData(_FilePath, "runtime")
                 End If
+
+				If _InternetLookupOK = True Then
+					If TempValue.Contains("ErrorEvent") Then
+						TempValue = _InternetData(Grabber_Output.Runtime)
+					End If
+				End If
+
                 If Not TempValue.Contains("ErrorEvent") Then
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
