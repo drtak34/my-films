@@ -279,6 +279,10 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyStartCollection Param1="" Param2="" />
+      <KeyEndCollection />
+      <KeyCollectionIndex />
+      <KeyCollectionPage />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
