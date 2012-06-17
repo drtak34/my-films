@@ -1191,6 +1191,7 @@ namespace Grabber_Interface
 
       if (TextURLDetail.Text.Length > 0)
       {
+        #region Load basic page
         watch.Reset();
         watch.Start();
         textPreview.ResetText();
@@ -1229,9 +1230,10 @@ namespace Grabber_Interface
 
         watch.Stop();
         TimeBodyDetail = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+        #endregion
       }
 
-      // Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
+      #region Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
       try
       {
         watch.Reset();
@@ -1265,8 +1267,9 @@ namespace Grabber_Interface
       {
         BodyDetail2 = "";
       }
+      #endregion
 
-      // Test if there is a page for Generic 1 Page
+      #region Test if there is a page for Generic 1 Page
       try
       {
         watch.Reset();
@@ -1300,8 +1303,9 @@ namespace Grabber_Interface
       {
         BodyLinkGeneric1 = "";
       }
+      #endregion
 
-      // Test if there is a page for Generic 2 Page
+      #region Test if there is a page for Generic 2 Page
       try
       {
         watch.Reset();
@@ -1335,8 +1339,9 @@ namespace Grabber_Interface
       {
         BodyLinkGeneric2 = "";
       }
+      #endregion
 
-      // Test if there is a redirection page for Covers and load page in BodyLinkImg
+      #region Test if there is a redirection page for Covers and load page in BodyLinkImg
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
@@ -1363,8 +1368,9 @@ namespace Grabber_Interface
         BodyLinkImg = "";
       watch.Stop();
       TimeBodyLinkImg = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Persons and load page in BodyLinkPersons
+      #region Test if there is a redirection page for Persons and load page in BodyLinkPersons
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Value;
@@ -1391,8 +1397,9 @@ namespace Grabber_Interface
         BodyLinkPersons = "";
       watch.Stop();
       TimeBodyLinkPersons = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Titles and load page in BodyLinkTitles
+      #region Test if there is a redirection page for Titles and load page in BodyLinkTitles
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
@@ -1419,8 +1426,9 @@ namespace Grabber_Interface
         BodyLinkTitles = "";
       watch.Stop();
       TimeBodyLinkTitles = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Certification and load page in BodyLinkCertification
+      #region Test if there is a redirection page for Certification and load page in BodyLinkCertification
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Value;
@@ -1447,8 +1455,9 @@ namespace Grabber_Interface
         BodyLinkCertification = "";
       watch.Stop();
       TimeBodyLinkCertification = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
+      #region Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
@@ -1475,8 +1484,9 @@ namespace Grabber_Interface
         BodyLinkSyn = "";
       watch.Stop();
       TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Comment and load page in BodyLinkComment
+      #region Test if there is a redirection page for Comment and load page in BodyLinkComment
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
@@ -1503,8 +1513,9 @@ namespace Grabber_Interface
         BodyLinkComment = "";
       watch.Stop();
       TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for MultiPosters and load page in BodyLinkMultiPosters
+      #region Test if there is a redirection page for MultiPosters and load page in BodyLinkMultiPosters
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value;
@@ -1531,8 +1542,9 @@ namespace Grabber_Interface
         BodyLinkMultiPosters = "";
       watch.Stop();
       TimeBodyLinkMultiPosters = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Photos and load page in BodyLinkPhotos
+      #region Test if there is a redirection page for Photos and load page in BodyLinkPhotos
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value;
@@ -1559,8 +1571,9 @@ namespace Grabber_Interface
         BodyLinkPhotos = "";
       watch.Stop();
       TimeBodyLinkPhotos = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for PersonImages and load page in BodyLinkPersonImages
+      #region Test if there is a redirection page for PersonImages and load page in BodyLinkPersonImages
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value;
@@ -1587,8 +1600,9 @@ namespace Grabber_Interface
         BodyLinkPersonImages = "";
       watch.Stop();
       TimeBodyLinkPersonImages = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for MultiFanart and load page in BodyLinkMultiFanart
+      #region Test if there is a redirection page for MultiFanart and load page in BodyLinkMultiFanart
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value;
@@ -1615,8 +1629,9 @@ namespace Grabber_Interface
         BodyLinkMultiFanart = "";
       watch.Stop();
       TimeBodyLinkMultiFanart = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      // Test if there is a redirection page for Trailer and load page in BodyLinkTrailer
+      #region Test if there is a redirection page for Trailer and load page in BodyLinkTrailer
       watch.Reset();
       watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value;
@@ -1643,8 +1658,8 @@ namespace Grabber_Interface
         BodyLinkTrailer = "";
       watch.Stop();
       TimeBodyLinkTrailer = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
     }
-
 
     private string LoadPage(string Page)
     {
@@ -2458,6 +2473,15 @@ namespace Grabber_Interface
           catch { textMaxItems.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerIndex)._Value;
           break;
+        case 46: // Collection
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollection)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionIndex)._Value;
+          break;
+
 
         default:
           URLpage.Text = "";
@@ -2677,6 +2701,9 @@ namespace Grabber_Interface
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Value = TextKeyStartD.Text;
           break;
+        case 46:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value = TextKeyStartD.Text;
+          break;
         
         default:
           TextKeyStartD.Text = "";
@@ -2856,6 +2883,9 @@ namespace Grabber_Interface
           break;
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndTrailer)._Value = TextKeyStopD.Text;
+          break;
+        case 46:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollection)._Value = TextKeyStopD.Text;
           break;
         default:
           TextKeyStopD.Text = "";
@@ -3186,6 +3216,14 @@ namespace Grabber_Interface
           case 35:
           case 75:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: TMDB_Id'" + mapped + Environment.NewLine;
+            break;
+          case 37:
+          case 77:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Collection'" + mapped + Environment.NewLine;
+            break;
+          case 39:
+          case 79:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Picture URL'" + mapped + Environment.NewLine;
             break;
           default:
             textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i - 40).ToString() + "'" + mapped + Environment.NewLine;
@@ -3659,6 +3697,9 @@ namespace Grabber_Interface
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param1 = textDReplace.Text;
           break;
+        case 46:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -3805,6 +3846,9 @@ namespace Grabber_Interface
           break;
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param2 = textDReplaceWith.Text;
+          break;
+        case 46:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param2 = textDReplaceWith.Text;
           break;
 
         default:
@@ -3957,6 +4001,12 @@ namespace Grabber_Interface
           break;
         case "IMDB_Id":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Value;
+          break;
+        case "TMDB_Id":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Value;
+          break;
+        case "Collection":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value;
           break;
         case "Generic Field 1":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGeneric1)._Value;
@@ -4118,6 +4168,9 @@ namespace Grabber_Interface
         case 44: // added for Trailer
           xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerIndex)._Value = Index.Text;
           break;
+        case 46: // added for Collection
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionIndex)._Value = Index.Text;
+          break;
         default:
           break;
       }
@@ -4271,6 +4324,9 @@ namespace Grabber_Interface
           break;
         case 44:
           xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerPage)._Value = URLpage.Text;
+          break;
+        case 46:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionPage)._Value = URLpage.Text;
           break;
 
         default:
@@ -4644,10 +4700,10 @@ namespace Grabber_Interface
       Fields[33] = "MultiFanart";
       Fields[34] = "Trailer";
       Fields[35] = "TMDB_Id";
-      Fields[36] = "Empty36";
-      Fields[37] = "Empty37";
+      Fields[36] = "Runtime";
+      Fields[37] = "Collection";
       Fields[38] = "Empty38";
-      Fields[39] = "Empty39";
+      Fields[39] = "PictureURL";
 
       Column2.Items.Clear();
       Column2.Items.Add(""); // empty field to choose ....

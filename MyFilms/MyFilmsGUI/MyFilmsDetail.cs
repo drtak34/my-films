@@ -3653,7 +3653,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
                         "Generic2", "Generic3", "TranslatedTitleAllNames", "TranslatedTitleAllValues",
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
-                        "MultiFanart", "Trailer", "TMDB_Id", "Empty36", "Empty37", "Empty38", "Empty39"
+                        "MultiFanart", "Trailer", "TMDB_Id", "Runtime", "Collection", "Empty38", "PictureURL"
                       };
 
                   if (interactive) // Dialog only in interactive mode
@@ -3723,7 +3723,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
                               // set to enabled to get proper selection - WIP
                               && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                              wProperty != "Trailer")
+                              wProperty != "Trailer" && wProperty != "Runtime" && wProperty != "Collection")
                             {
                               dlgSelect.Add(
                                 BaseMesFilms.Translate_Column(wProperty) + ": '" +
@@ -3795,7 +3795,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
                                 // set to enabled to get proper selection - WIP
                                 && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                                wProperty != "Trailer")
+                                wProperty != "Trailer" && wProperty != "Collection")
                               {
                                 GUIListItem pItem = new GUIListItem(wProperty);
                                 pItem.TVTag = wProperty;
@@ -3884,6 +3884,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (wtitle.Contains(MyFilms.conf.TitleDelim)) wtitle = wtitle.Substring(wtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
                     if (wtitle != title) Remove_Backdrops_Fanart(wtitle, true);
 
+                    // Add Collection from internet grabber
+                    if (!string.IsNullOrEmpty(Result[(int)Grabber_URLClass.Grabber_Output.Collection]) && string.IsNullOrEmpty(moviehead))
+                    {
+                      moviehead = Result[(int)Grabber_URLClass.Grabber_Output.Collection] + @"\";
+                    }
                     if (MyFilms.conf.StrTitle1 == "OriginalTitle") MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
                     else MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] = title;
                   }
@@ -3899,9 +3904,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     wtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
                     if (wtitle.Contains(MyFilms.conf.TitleDelim)) wtitle = wtitle.Substring(wtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
                     if (wtitle != ttitle) Remove_Backdrops_Fanart(wtitle, true);
-                    if (MyFilms.conf.StrTitle1 == "TranslatedTitle") MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
+                    if (MyFilms.conf.StrTitle1 == "TranslatedTitle")
+                    {
+                      // Add Collection from internet grabber
+                      if (!string.IsNullOrEmpty(Result[(int)Grabber_URLClass.Grabber_Output.Collection]) && string.IsNullOrEmpty(moviehead))
+                      {
+                        moviehead = Result[(int)Grabber_URLClass.Grabber_Output.Collection] + @"\";
+                      }
+                      MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
+                    }
                     else MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] = ttitle;
                   }
+
+                  //if (IsUpdateRequired("Collection", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Collection"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Collection], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
+                  //  MyFilms.r[MyFilms.conf.StrIndex]["Collection"] = Result[(int)Grabber_URLClass.Grabber_Output.Collection];
 
                   if (IsUpdateRequired("Description", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Description], grabtype, onlyselected, onlymissing, onlynonempty, updateItems))
                     MyFilms.r[MyFilms.conf.StrIndex]["Description"] = Result[(int)Grabber_URLClass.Grabber_Output.Description];
@@ -4017,7 +4033,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
                         "Generic2", "Generic3", "TranslatedTitleAllNames", "TranslatedTitleAllValues",
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
-                        "MultiFanart", "Trailer", "TMDB_Id", "Empty36", "Empty37", "Empty38", "Empty39"
+                        "MultiFanart", "Trailer", "TMDB_Id", "Runtime", "Collection", "Empty38", "PictureURL"
                       };
                     string strOldValue = "";
                     string strNewValue = "";
@@ -4040,7 +4056,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wProperty != "Edition" && wProperty != "Fanart" && wProperty != "Aspectratio" &&
                           wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
                           && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                          wProperty != "Trailer")
+                          wProperty != "Trailer" && wProperty != "Runtime" && wProperty != "Collection")
                         {
                           dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
                           choiceViewMenu.Add(wProperty);
