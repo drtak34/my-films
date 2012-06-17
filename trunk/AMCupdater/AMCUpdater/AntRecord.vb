@@ -88,9 +88,9 @@ Public Class AntRecord
         'Trailer = 34
         'TMDB_Id = 35
         'Empty36 = 36
-        'Empty37 = 37
+        'Collection = 37
         'Empty38 = 38
-        'Empty39 = 39
+        'PictureURL = 39
 
         OriginalTitle = 40
         TranslatedTitle = 41
@@ -129,9 +129,9 @@ Public Class AntRecord
         Trailer = 74
         TMDB_Id = 75
         Empty36 = 76
-        Empty37 = 77
+        Collection = 77
         Empty38 = 78
-        Empty39 = 79
+        PictureURL = 79
     End Enum
 
     Private Enum MediaInfo_Output
@@ -1308,7 +1308,7 @@ Public Class AntRecord
                         title = TempValue
                     End If
                 End If
-                TempValue = AddGroupName(TempValue, "Original Title") 'Check to see if there's a group name attached to this, and apply it.
+                TempValue = AddGroupName(TempValue, "Original Title", _InternetData(Grabber_Output.Collection)) 'Check to see if there's a group name attached to this, and apply it.
                 TempValue = AddEdition(TempValue, "Original Title") 'Add Edition, if available and requested
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
@@ -1320,7 +1320,7 @@ Public Class AntRecord
                 Else
                     TempValue = GetTitleFromFilePath(_FilePath)
                 End If
-                TempValue = AddGroupName(TempValue, "Translated Title")
+                TempValue = AddGroupName(TempValue, "Translated Title", _InternetData(Grabber_Output.Collection))
                 TempValue = AddEdition(TempValue, "Translated Title")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
@@ -1340,11 +1340,11 @@ Public Class AntRecord
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If _XMLElement.Attributes("TranslatedTitle") IsNot Nothing Then
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(RemoveGroupNameAndEdition(_XMLElement.Attributes("TranslatedTitle").Value.ToString, GetEdition(_FilePath)))
-                    TempValue = AddGroupName(TempValue, "Translated Title")
+                    TempValue = AddGroupName(TempValue, "Translated Title", _InternetData(Grabber_Output.Collection))
                     TempValue = AddEdition(TempValue, "Translated Title")
                 ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("OriginalTitle").Value)
-                    TempValue = AddGroupName(TempValue, "Original Title")
+                    TempValue = AddGroupName(TempValue, "Original Title", _InternetData(Grabber_Output.Collection))
                     TempValue = AddEdition(TempValue, "Original Title")
                 End If
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
@@ -2115,7 +2115,7 @@ Public Class AntRecord
         End If
         Return TempValue
     End Function
-    Private Function AddGroupName(ByRef Title As String, ByRef TitleField As String) As String
+    Private Function AddGroupName(ByRef Title As String, ByRef TitleField As String, ByVal InternetCollection As String) As String
         Dim TempValue = Title
 
         If TempValue.Length > 0 Then
@@ -2127,6 +2127,10 @@ Public Class AntRecord
                             TempValue = _GroupName.ToString & "\" & TempValue
                         End If
                     End If
+                End If
+            Else
+                If _InternetData(Grabber_Output.Collection).Length > 0 Then
+                    TempValue = _InternetData(Grabber_Output.Collection) & "\" & TempValue
                 End If
             End If
         End If
