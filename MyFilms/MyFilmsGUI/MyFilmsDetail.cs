@@ -4204,55 +4204,55 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Info("Database Updated for title/ttitle: " + title + "/" + ttitle);
 
                 if (GetID != MyFilms.ID_MyFilmsCoverManager)
-                  if (DetailsUpdated != null) DetailsUpdated(true); // will launch afficher_detail(true) via message handler
-
-                if (title.Length > 0 && MyFilms.conf.StrFanart && grabtype != GrabType.Person) // Get Fanart
-                {
-                  #region fanart
-
-                  // GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS); // already defined above !
-                  if (dlgPrgrs != null)
+                  if (title.Length > 0 && MyFilms.conf.StrFanart && grabtype != GrabType.Person) // Get Fanart
                   {
-                    dlgPrgrs.Reset();
-                    dlgPrgrs.DisplayProgressBar = false;
-                    dlgPrgrs.ShowWaitCursor = true;
-                    dlgPrgrs.DisableCancel(true);
-                    dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Artwork Updater"));
-                    dlgPrgrs.SetLine(1, "Loading Artwork ...");
-                    dlgPrgrs.Percentage = 0;
-                    dlgPrgrs.NeedRefresh();
-                    dlgPrgrs.ShouldRenderLayer();
-                    dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+                    #region fanart
 
-                    new System.Threading.Thread(delegate()
-                        {
-                          string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
-                          GrabArtwork(title, ttitle, (int)year, director, imdbid, MyFilms.conf.StrTitle1, dlgPrgrs);
-                          //  dlgPrgrs.Percentage = 100;
-                          //  dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
-                          //  dlgPrgrs.NeedRefresh();
-                          //  dlgPrgrs.ShouldRenderLayer();
-                          //  Thread.Sleep(500);
-                          //  dlgPrgrs.ShowWaitCursor = false;
-                          //  dlgPrgrs.Close();
+                    // GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS); // already defined above !
+                    if (dlgPrgrs != null)
+                    {
+                      dlgPrgrs.Reset();
+                      dlgPrgrs.DisplayProgressBar = false;
+                      dlgPrgrs.ShowWaitCursor = true;
+                      dlgPrgrs.DisableCancel(true);
+                      dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Artwork Updater"));
+                      dlgPrgrs.SetLine(1, "Loading Artwork ...");
+                      dlgPrgrs.Percentage = 0;
+                      dlgPrgrs.NeedRefresh();
+                      dlgPrgrs.ShouldRenderLayer();
+                      dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
 
-                          //GrabArtwork(title, ttitle, (int)year, director, MyFilms.conf.StrTitle1.ToString(), r => 
-                          //{
-                          //  dlgPrgrs.Percentage = r;
-                          //  return dlgPrgrs.ShouldRenderLayer();
-                          //});
-                          GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
-                              { return 0; }, 0, 0, null);
-                        }) { Name = "MyFilmsArtworkLoader", IsBackground = true }.Start();
-                    return;
+                      new System.Threading.Thread(delegate()
+                          {
+                            string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
+                            GrabArtwork(title, ttitle, (int)year, director, imdbid, MyFilms.conf.StrTitle1, dlgPrgrs);
+                            //  dlgPrgrs.Percentage = 100;
+                            //  dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
+                            //  dlgPrgrs.NeedRefresh();
+                            //  dlgPrgrs.ShouldRenderLayer();
+                            //  Thread.Sleep(500);
+                            //  dlgPrgrs.ShowWaitCursor = false;
+                            //  dlgPrgrs.Close();
+
+                            //GrabArtwork(title, ttitle, (int)year, director, MyFilms.conf.StrTitle1.ToString(), r => 
+                            //{
+                            //  dlgPrgrs.Percentage = r;
+                            //  return dlgPrgrs.ShouldRenderLayer();
+                            //});
+                            GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+                                { return 0; }, 0, 0, null);
+                          }) { Name = "MyFilmsArtworkLoader", IsBackground = true }.Start();
+                      return;
+                    }
+                    // System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
+
+                    #endregion
                   }
-                  // System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
-
-                  #endregion
-                }
                 GUIWaitCursor.Hide();
                 GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
                     {
+                      if (GetID != MyFilms.ID_MyFilmsCoverManager)
+                        if (DetailsUpdated != null) DetailsUpdated(true); // will launch screen update with new data, if handler registered
                       return 0;
                     }, 0, 0, null);
               }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
@@ -4419,7 +4419,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                           dlgPrgrs.ShowWaitCursor = false;
                           // enter here what to load after background thread has finished !
-                          // if (DetailsUpdated != null) DetailsUpdated(true); // already sent in details update
+                          if (GetID == MyFilms.ID_MyFilmsCoverManager)
+                          {
+                            if (DetailsUpdated != null) DetailsUpdated(true);
+                          }
                           return 0;
                       }, 0, 0, null);
                   }) { Name = "MyFilmsCoverLoader", IsBackground = true }.Start();
@@ -4502,7 +4505,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             default:
               break;
           }
-          // updtate catalog entry in memory
+          // update catalog entry in memory
           if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()))
             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
           else if (interactive)
@@ -4514,7 +4517,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIWindowManager.Process();
           if (GetID == MyFilms.ID_MyFilmsCoverManager)
           {
-            if (DetailsUpdated != null) DetailsUpdated(true); // will launch afficher_detail(true) via message handler
+            if (DetailsUpdated != null) DetailsUpdated(true);
           }
         }
 

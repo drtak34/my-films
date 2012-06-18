@@ -74,7 +74,7 @@
       <visible>!Control.HasFocus(10099)</visible>
       <shouldCache>true</shouldCache>
       <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="fade" time="450">WindowClose</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="200">WindowOpen</animation>
     </control>
     <!-- <import>common.window.overlay.xml</import> -->
