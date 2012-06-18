@@ -419,7 +419,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #endregion
 
     #region Enums
-    private enum FieldType
+    public enum FieldType
     {
       Title,
       Date,
@@ -2544,61 +2544,61 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       r = BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false); 
 
-      #region Additional sorting ...
-      FieldType fieldType = GetFieldType(sortfield);
-      Type columnType = GetColumnType(sortfield);
-      string strColumnType = (columnType == null) ? "<invalid>" : columnType.ToString();
+      #region Additional sorting ... // MOVED TO BASE METHOD (READDATAMOVIES)
+      //FieldType fieldType = GetFieldType(sortfield);
+      //Type columnType = GetColumnType(sortfield);
+      //string strColumnType = (columnType == null) ? "<invalid>" : columnType.ToString();
 
-      if (!string.IsNullOrEmpty(sortfield) && columnType == typeof(string)) // don't apply special sorting on "native" types - only on string types !
-      {
-        LogMyFilms.Debug("GetFilmList() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + sortfield + "', sortascending = '" + sortascending + "'");
-        watch.Reset(); watch.Start();
-        switch (fieldType)
-        {
-          case FieldType.Decimal:
-            if (sortascending == " ASC")
-            {
-              IComparer myComparer = new myRatingComparer();
-              Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
-            }
-            else
-            {
-              IComparer myComparer = new myRatingComparer();
-              Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[sortfield], a[sortfield]));
-              //r.Reverse();
-            }
-            break;
-          case FieldType.AlphaNumeric:
-            if (sortascending == " ASC")
-            {
-              IComparer myComparer = new AlphanumComparatorFast();
-              Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
-            }
-            else
-            {
-              IComparer myComparer = new myReverserAlphanumComparatorFast();
-              Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
-              //r.Reverse();
-            }
-            break;
-          case FieldType.Date:
-            if (sortascending == " ASC")
-            {
-              IComparer myComparer = new myDateComparer();
-              Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
-            }
-            else
-            {
-              IComparer myComparer = new myDateReverseComparer();
-              Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
-              //IComparer myComparer = new myDateComparer();
-              //Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[sortfield], a[sortfield]));
-            }
-            break;
-        }
-        watch.Stop();
-        LogMyFilms.Debug("GetFilmList() - additional sorting finished (" + (watch.ElapsedMilliseconds) + " ms)");
-      }
+      //if (!string.IsNullOrEmpty(sortfield) && columnType == typeof(string)) // don't apply special sorting on "native" types - only on string types !
+      //{
+      //  LogMyFilms.Debug("GetFilmList() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + sortfield + "', sortascending = '" + sortascending + "'");
+      //  watch.Reset(); watch.Start();
+      //  switch (fieldType)
+      //  {
+      //    case FieldType.Decimal:
+      //      if (sortascending == " ASC")
+      //      {
+      //        IComparer myComparer = new myRatingComparer();
+      //        Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+      //      }
+      //      else
+      //      {
+      //        IComparer myComparer = new myRatingComparer();
+      //        Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[sortfield], a[sortfield]));
+      //        //r.Reverse();
+      //      }
+      //      break;
+      //    case FieldType.AlphaNumeric:
+      //      if (sortascending == " ASC")
+      //      {
+      //        IComparer myComparer = new AlphanumComparatorFast();
+      //        Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+      //      }
+      //      else
+      //      {
+      //        IComparer myComparer = new myReverserAlphanumComparatorFast();
+      //        Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+      //        //r.Reverse();
+      //      }
+      //      break;
+      //    case FieldType.Date:
+      //      if (sortascending == " ASC")
+      //      {
+      //        IComparer myComparer = new myDateComparer();
+      //        Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+      //      }
+      //      else
+      //      {
+      //        IComparer myComparer = new myDateReverseComparer();
+      //        Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(a[sortfield], b[sortfield]));
+      //        //IComparer myComparer = new myDateComparer();
+      //        //Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[sortfield], a[sortfield]));
+      //      }
+      //      break;
+      //  }
+      //  watch.Stop();
+      //  LogMyFilms.Debug("GetFilmList() - additional sorting finished (" + (watch.ElapsedMilliseconds) + " ms)");
+      //}
       #endregion
 
       int iCnt = 0;
@@ -4661,7 +4661,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return iValue;
     }
 
-    private static Type GetColumnType(string fieldname)
+    public static Type GetColumnType(string fieldname)
     {
       AntMovieCatalog ds = new AntMovieCatalog();
       foreach (DataColumn dc in ds.Movie.Columns)
@@ -4671,7 +4671,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return null;
     }
 
-    private static FieldType GetFieldType(string fieldname)
+    public static FieldType GetFieldType(string fieldname)
     {
       if (IsDateField(fieldname)) return FieldType.Date;
       if (IsAlphaNumericalField(fieldname)) return FieldType.AlphaNumeric;
