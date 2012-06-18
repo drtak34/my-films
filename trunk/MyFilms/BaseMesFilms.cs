@@ -1373,6 +1373,64 @@ namespace MyFilmsPlugin.MyFilms
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
           }
           watchReadMovies.Stop();
+
+          #region Additional sorting ...
+          Stopwatch watchReadMoviesSort = new Stopwatch(); watchReadMoviesSort.Reset(); watchReadMoviesSort.Start(); 
+          MyFilms.FieldType fieldType = MyFilms.GetFieldType(StrSort);
+          Type columnType = MyFilms.GetColumnType(StrSort);
+          string strColumnType = (columnType == null) ? "<invalid>" : columnType.ToString();
+
+          if (!string.IsNullOrEmpty(StrSort) && columnType == typeof(string)) // don't apply special sorting on "native" types - only on string types !
+          {
+            LogMyFilms.Debug("ReadDataMovies() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + StrSortSens + "', sortascending = '" + StrSort + "'");
+            watch.Reset(); watch.Start();
+            switch (fieldType)
+            {
+              case MyFilms.FieldType.Decimal:
+                if (StrSortSens == " ASC")
+                {
+                  IComparer myComparer = new MyFilms.myRatingComparer();
+                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                }
+                else
+                {
+                  IComparer myComparer = new MyFilms.myRatingComparer();
+                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
+                  //r.Reverse();
+                }
+                break;
+              case MyFilms.FieldType.AlphaNumeric:
+                if (StrSortSens == " ASC")
+                {
+                  IComparer myComparer = new MyFilms.AlphanumComparatorFast();
+                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                }
+                else
+                {
+                  IComparer myComparer = new MyFilms.myReverserAlphanumComparatorFast();
+                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                  //r.Reverse();
+                }
+                break;
+              case MyFilms.FieldType.Date:
+                if (StrSortSens == " ASC")
+                {
+                  IComparer myComparer = new MyFilms.myDateComparer();
+                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                }
+                else
+                {
+                  IComparer myComparer = new MyFilms.myDateReverseComparer();
+                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                  //IComparer myComparer = new myDateComparer();
+                  //Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
+                }
+                break;
+            }
+            LogMyFilms.Debug("ReadDataMovies() - additional sorting finished (" + (watchReadMoviesSort.ElapsedMilliseconds) + " ms)");
+          }
+          #endregion
+
           LogMyFilms.Debug("ReadDataMovies() - Finished ...  returning '" + movies.Length + "' movies (cached = '" + iscached + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
           return movies;
         }
