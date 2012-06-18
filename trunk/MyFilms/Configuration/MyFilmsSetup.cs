@@ -1315,6 +1315,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.MyCustomViews.View.AddViewRow(view);
               index++;
             }
+            if (iCustomViews == -1) // Customviews not yet present ... ToDo: Remove in later Version - only "migration code"
+            {
+              UpdateOldHardcodedViews();
+            }
 
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
             comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
@@ -2482,6 +2486,22 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Country.jpg";
           MyCustomViews.View.Rows.Add(newRow);
+        }
+
+        private void UpdateOldHardcodedViews()
+        {
+          // upgrade old custom views to new image locations ...
+          foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View) // add new (!) userdefined views ...
+          {
+            if (customView.DBfield == "Producer")
+            {
+              customView.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons.jpg";
+            }
+          }
+          pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Cover2.jpg"; //DefaultCover.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Cover.jpg";
+          pictureBoxDefaultPersonImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons2.jpg";
+          pictureBoxDefaultViewImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Views.jpg";
+          pictureBoxDefaultFanart.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Fanart.jpg";
         }
 
         private void btnGrabber_Click(object sender, EventArgs e)

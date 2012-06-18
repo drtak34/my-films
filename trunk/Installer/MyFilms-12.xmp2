@@ -3470,7 +3470,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>%Thumbs%\MyFilms\WebLinks\Wiki.url</Value>
+                    <Value>%Config%\MyFilms\WebLinks\Wiki.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3498,7 +3498,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>%Thumbs%\MyFilms\WebLinks\Home.url</Value>
+                    <Value>%Config%\MyFilms\WebLinks\Home.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3526,7 +3526,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>%Thumbs%\MyFilms\WebLinks\Forum.url</Value>
+                    <Value>%Config%\MyFilms\WebLinks\Forum.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3554,7 +3554,7 @@ public class Script
                     <Description>Location of shortcut</Description>
                   </SectionParam>
                   <SectionParam Name="ShortCut target">
-                    <Value>%Thumbs%\MyFilms\WebLinks\Issues.url</Value>
+                    <Value>%Config%\MyFilms\WebLinks\Issues.url</Value>
                     <ValueType>Template</ValueType>
                     <Description>Target of short cut</Description>
                   </SectionParam>
@@ -3976,7 +3976,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2230</Revision>
+      <Revision>2247</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3988,7 +3988,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-06-15T11:47:19.2220346+02:00</ReleaseDate>
+    <ReleaseDate>2012-06-17T23:33:36.101385+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
