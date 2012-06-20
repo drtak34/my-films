@@ -10451,7 +10451,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         person.Name = personname;
         lock (PersonstoDownloadQueue)
         {
-          PersonstoDownloadQueue.Enqueue(person);
+          if (!PersonstoDownloadQueue.Contains(person))
+          {
+            PersonstoDownloadQueue.Enqueue(person);
+          }
         }
         setDownloadStatus();
         if (!downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // finally lets check if the downloader is already running, and if not start it
