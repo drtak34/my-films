@@ -4543,7 +4543,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             if (dlgPrgrs != null) 
-              dlgPrgrs.SetLine(1, "Now loading Artwork ...");
+              dlgPrgrs.SetLine(1, "Now loading Fanart ...");
 
             if (dlgPrgrs != null && !dlgPrgrs.ShouldRenderLayer()) 
               return;
@@ -4563,7 +4563,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlgPrgrs != null)
             {
               dlgPrgrs.Percentage = 100; 
-              dlgPrgrs.SetLine(1, "Finished loading Artwork !");
+              dlgPrgrs.SetLine(1, "Finished loading Fanart !");
               dlgPrgrs.ShowWaitCursor = false;
               Thread.Sleep(500);
               dlgPrgrs.Close();
