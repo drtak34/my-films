@@ -467,6 +467,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
                     break;
                   case (int)menuAction.DeleteSelected:
+                    // delete from DB, if it is the one currently selected
+                    if (NewArtworkFileName == selectedCover.FullPath)
+                    {
+                      NewArtworkFileName = "";
+                      sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MovieID], MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MovieID));
+                      ArtworkFileName = MyFilmsDetail.GetOrCreateCoverFilename(MyFilms.r, MovieID, sTitles.MasterTitle);
+                      MyFilmsDetail.clearGUIProperty("picture");
+                      saveChangesToDB();
+                    }
                     selectedCover.Delete(AllTitles());
                     // and reinit the display to get rid of it
                     this.RefreshFacade();
