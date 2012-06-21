@@ -502,6 +502,11 @@ public class TagName
   public static string KeyCollectionIndex = "KeyCollectionIndex";
   public static string KeyCollectionPage = "KeyCollectionPage";
 
+  public static string KeyStartCollectionImageURL = "KeyStartCollectionImageURL";     // Collection (currently supported on TMDB API V3
+  public static string KeyEndCollectionImageURL = "KeyEndCollectionImageURL";
+  public static string KeyCollectionImageURLIndex = "KeyCollectionImageURLIndex";
+  public static string KeyCollectionImageURLPage = "KeyCollectionImageURLPage";
+
   // secondary Details page - will be loaded first and is available for all fields as option
   public static string KeyStartDetails2 = "KeyStartDetails2";     // Details2
   public static string KeyEndDetails2 = "KeyEndDetails2";

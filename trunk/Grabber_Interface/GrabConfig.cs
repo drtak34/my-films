@@ -293,6 +293,7 @@ namespace Grabber_Interface
         // enable preview button
         button_Preview.Enabled = true;
         // reset preview cover
+        pictureBoxPreviewCollection.ImageLocation = "";
         pictureBoxPreviewCover.ImageLocation = "";
 
         //if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
@@ -693,6 +694,7 @@ namespace Grabber_Interface
 
       xmlConf = null;
       listUrl = new ArrayList();
+      pictureBoxPreviewCollection.ImageLocation = "";
       pictureBoxPreviewCover.ImageLocation = "";
 
     }
@@ -2490,6 +2492,15 @@ namespace Grabber_Interface
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionIndex)._Value;
           break;
 
+        case 47: // Collection Image URL
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionImageURLPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollectionImageURL)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionImageURLIndex)._Value;
+          break;
+
         default:
           URLpage.Text = "";
           textDReplace.Text = "";
@@ -2714,6 +2725,9 @@ namespace Grabber_Interface
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value = TextKeyStartD.Text;
           break;
+        case 47:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Value = TextKeyStartD.Text;
+          break;
         
         default:
           TextKeyStartD.Text = "";
@@ -2900,6 +2914,9 @@ namespace Grabber_Interface
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollection)._Value = TextKeyStopD.Text;
           break;
+        case 47:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndCollectionImageURL)._Value = TextKeyStopD.Text;
+          break;
         default:
           TextKeyStopD.Text = "";
           break;
@@ -3029,6 +3046,7 @@ namespace Grabber_Interface
       watch.Reset();
       watch.Start();
       textPreview.Clear();
+      pictureBoxPreviewCollection.ImageLocation = "";
       pictureBoxPreviewCover.ImageLocation = "";
       labelImageSize.Text = "";
 
@@ -3095,6 +3113,16 @@ namespace Grabber_Interface
               {
                 labelImageSize.Text = "n/a";
                 //MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              }
+              try
+              {
+                pictureBoxPreviewCollection.ImageLocation =  Path.Combine(Path.GetDirectoryName(Result[i]), "Collection_" + Path.GetFileName(Result[i])) ;
+                //FileInfo f = new FileInfo(Result[i]);
+                //labelImageSize.Text = this.ByteString(f.Length);
+              }
+              catch (Exception)
+              {
+                // labelImageSize.Text = "n/a";
               }
             }
             break;
@@ -3237,6 +3265,10 @@ namespace Grabber_Interface
           case 37:
           case 77:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Collection'" + mapped + Environment.NewLine;
+            break;
+          case 38:
+          case 78:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "CollectionImageURL'" + mapped + Environment.NewLine;
             break;
           case 39:
           case 79:
@@ -3720,6 +3752,9 @@ namespace Grabber_Interface
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param1 = textDReplace.Text;
           break;
+        case 47:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -3872,6 +3907,9 @@ namespace Grabber_Interface
           break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Param2 = textDReplaceWith.Text;
+          break;
+        case 47:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Param2 = textDReplaceWith.Text;
           break;
 
         default:
@@ -4033,6 +4071,9 @@ namespace Grabber_Interface
           break;
         case "Collection":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollection)._Value;
+          break;
+        case "CollectionImageURL":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Value;
           break;
         case "Generic Field 1":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGeneric1)._Value;
@@ -4200,6 +4241,9 @@ namespace Grabber_Interface
         case 46: // added for Collection
           xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionIndex)._Value = Index.Text;
           break;
+        case 47: // added for Collection Image URL
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionImageURLIndex)._Value = Index.Text;
+          break;
         default:
           break;
       }
@@ -4359,6 +4403,9 @@ namespace Grabber_Interface
           break;
         case 46:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionPage)._Value = URLpage.Text;
+          break;
+        case 47:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCollectionImageURLPage)._Value = URLpage.Text;
           break;
 
         default:
@@ -4734,7 +4781,7 @@ namespace Grabber_Interface
       Fields[35] = "TMDB_Id";
       Fields[36] = "Runtime";
       Fields[37] = "Collection";
-      Fields[38] = "Empty38";
+      Fields[38] = "CollectionImageURL";
       Fields[39] = "PictureURL";
 
       Column2.Items.Clear();
