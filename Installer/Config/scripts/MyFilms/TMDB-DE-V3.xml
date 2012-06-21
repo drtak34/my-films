@@ -5,12 +5,13 @@
     <URLPrefix>http://api.themoviedb.org/3/movie/</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="_x002F_" Param2="http:_x002F__x002F_cf2.imgobject.com_x002F_t_x002F_p_x002F_w185_x002F_">poster_path_x0022_:_x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
@@ -166,7 +167,7 @@
       <KeyStartStudio Param1="" Param2="" />
       <KeyEndStudio />
       <KeyStudioIndex />
-      <KeyStudioPage>URL_x0020_Redirection_x0020_Persons</KeyStudioPage>
+      <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
       <KeyEndEdition />
       <KeyEditionIndex />
@@ -193,8 +194,8 @@
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page />
       <KeyEncodingLinkGeneric1 />
-      <KeyStartLinkGeneric2 Param1="" Param2="" />
-      <KeyEndLinkGeneric2 />
+      <KeyStartLinkGeneric2 Param1="_x0023_ADD_x0023_" Param2="_x000D__x000A_http:_x002F__x002F_api.themoviedb.org_x002F_3_x002F_collection_x002F__x007C__x003F_api_key_x003D_5b8fecd0c39786077bc5af07e56fee5e">_x0022__x002C__x0022_belongs_to_collection_x0022_:_x007B__x0022_id_x0022_:</KeyStartLinkGeneric2>
+      <KeyEndLinkGeneric2>_x002C_</KeyEndLinkGeneric2>
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
       <KeyEncodingLinkGeneric2 />
@@ -279,10 +280,14 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
-      <KeyStartCollection Param1="" Param2="" />
-      <KeyEndCollection />
+      <KeyStartCollection Param1="" Param2="">_x002C__x0022_name_x0022_:_x0022_</KeyStartCollection>
+      <KeyEndCollection>_x0022_</KeyEndCollection>
       <KeyCollectionIndex />
-      <KeyCollectionPage />
+      <KeyCollectionPage>URL_x0020_Redirection_x0020_Generic_x0020_2</KeyCollectionPage>
+      <KeyCollectionImageURLPage>URL_x0020_Redirection_x0020_Generic_x0020_2</KeyCollectionImageURLPage>
+      <KeyStartCollectionImageURL Param1="_x002F_" Param2="http:_x002F__x002F_cf2.imgobject.com_x002F_t_x002F_p_x002F_original_x002F_">_x0022__x002C__x0022_poster_path_x0022_:_x0022_</KeyStartCollectionImageURL>
+      <KeyEndCollectionImageURL>_x0022_</KeyEndCollectionImageURL>
+      <KeyCollectionImageURLIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -320,11 +325,11 @@
       <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_35 source="Empty35" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_36 source="Empty36" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_37 source="Empty37" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_38 source="Empty38" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_39 source="Empty39" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

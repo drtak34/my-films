@@ -3662,7 +3662,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
                         "Generic2", "Generic3", "TranslatedTitleAllNames", "TranslatedTitleAllValues",
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
-                        "MultiFanart", "Trailer", "TMDB_Id", "Runtime", "Collection", "Empty38", "PictureURL"
+                        "MultiFanart", "Trailer", "TMDB_Id", "Runtime", "Collection", "CollectionImageURL", "PictureURL"
                       };
 
                   if (interactive) // Dialog only in interactive mode
@@ -3804,19 +3804,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
                                 // set to enabled to get proper selection - WIP
                                 && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                                wProperty != "Trailer" && wProperty != "Collection")
+                                wProperty != "Trailer" && wProperty != "Collection" && wProperty != "CollectionImageURL")
                               {
                                 GUIListItem pItem = new GUIListItem(wProperty);
                                 pItem.TVTag = wProperty;
                                 if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) pItem.IconImage = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
                                 pItem.Selected = false;
-                                pItem.Label = BaseMesFilms.Translate_Column(wProperty) + ": '" +
-                                              Helper.LimitString(
-                                                strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) +
-                                              "' -> '" +
-                                              Helper.LimitString(
-                                                strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) +
-                                              "'";
+                                pItem.Label = BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'";
                                 dlgMultiSelect.Add(pItem);
                                 LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                               }
@@ -4042,7 +4036,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         "TagLine", "Certification", "IMDB_Id", "IMDB_Rank", "Studio", "Edition", "Fanart", "Generic1",
                         "Generic2", "Generic3", "TranslatedTitleAllNames", "TranslatedTitleAllValues",
                         "CertificationAllNames", "CertificationAllValues", "MultiPosters", "Photos", "PersonImages",
-                        "MultiFanart", "Trailer", "TMDB_Id", "Runtime", "Collection", "Empty38", "PictureURL"
+                        "MultiFanart", "Trailer", "TMDB_Id", "Runtime", "Collection", "CollectionImageURL", "PictureURL"
                       };
                     string strOldValue = "";
                     string strNewValue = "";
@@ -4065,7 +4059,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wProperty != "Edition" && wProperty != "Fanart" && wProperty != "Aspectratio" &&
                           wProperty != "MultiPosters" // set to enabled to get proper selection - WIP
                           && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                          wProperty != "Trailer" && wProperty != "Runtime" && wProperty != "Collection")
+                          wProperty != "Trailer" && wProperty != "Runtime" && wProperty != "Collection" && wProperty != "CollectionImageURL")
                         {
                           dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
                           choiceViewMenu.Add(wProperty);
@@ -4499,6 +4493,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 try { File.Delete(tmpPicture); }
                 catch (Exception ex) { LogMyFilms.Debug("Error deleting tmp file: '" + tmpPicture + "' - Exception: " + ex); }
+              }
+              #endregion
+              #region collection image
+
+              string tmpPictureCollection = Path.GetDirectoryName(tmpPicture) + @"\Collection_" + Path.GetFileName(tmpPicture);
+              string newPictureCollection = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrTitleSelect.Replace(MyFilms.conf.TitleDelim, ".") + "." + sTitles.MasterTitle + ".jpg";
+              if (System.IO.File.Exists(tmpPictureCollection))
+              {
+                try
+                {
+                  File.Copy(tmpPictureCollection, newPictureCollection, true);
+                  LogMyFilms.Debug("Created Collection image '" + newPictureCollection + "'");
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug("Error copy file: '" + tmpPictureCollection + "' - Exception: " + ex);
+                }
+              }
+              else
+              {
+                LogMyFilms.Debug("Collection Cover '" + tmpPictureCollection + "' does not exists - do nothing.");
+              }
+              if (newPictureCollection != tmpPictureCollection)
+              {
+                try { File.Delete(tmpPictureCollection); }
+                catch (Exception ex) { LogMyFilms.Debug("Error deleting tmp file: '" + tmpPictureCollection + "' - Exception: " + ex); }
               }
               #endregion
               break;

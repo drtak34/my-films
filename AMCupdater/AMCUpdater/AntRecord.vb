@@ -89,7 +89,7 @@ Public Class AntRecord
         'TMDB_Id = 35
         'Runtime = 36
         'Collection = 37
-        'Empty38 = 38
+        'CollectionImageURL = 38
         'PictureURL = 39
 
         OriginalTitle = 40
@@ -130,7 +130,7 @@ Public Class AntRecord
         TMDB_Id = 75
         Runtime = 76
         Collection = 77
-        Empty38 = 78
+        CollectionImageURL = 78
         PictureURL = 79
     End Enum
 

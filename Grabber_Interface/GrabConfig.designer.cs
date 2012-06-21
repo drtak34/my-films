@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -219,6 +219,7 @@ namespace Grabber_Interface
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.cbFileBasedReader = new System.Windows.Forms.CheckBox();
+          this.pictureBoxPreviewCollection = new System.Windows.Forms.PictureBox();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -241,6 +242,7 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCollection)).BeginInit();
           this.SuspendLayout();
           // 
           // textConfig
@@ -411,7 +413,8 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items43"),
             resources.GetString("cb_ParamDetail.Items44"),
             resources.GetString("cb_ParamDetail.Items45"),
-            resources.GetString("cb_ParamDetail.Items46")});
+            resources.GetString("cb_ParamDetail.Items46"),
+            resources.GetString("cb_ParamDetail.Items47")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
@@ -919,6 +922,7 @@ namespace Grabber_Interface
           // 
           // tabPageDetailPage
           // 
+          this.tabPageDetailPage.Controls.Add(this.pictureBoxPreviewCollection);
           this.tabPageDetailPage.Controls.Add(this.btnLoadDetailInWeb);
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
           this.tabPageDetailPage.Controls.Add(this.label21);
@@ -1352,17 +1356,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+          dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle9;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle2.NullValue = null;
-          dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle2;
+          dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle10.NullValue = null;
+          dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle10;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1375,16 +1379,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle3;
+          dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle11;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle4;
+          dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle12;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1736,6 +1740,12 @@ namespace Grabber_Interface
           this.cbFileBasedReader.UseVisualStyleBackColor = true;
           this.cbFileBasedReader.CheckedChanged += new System.EventHandler(this.cbFileBasedReader_CheckedChanged);
           // 
+          // pictureBoxPreviewCollection
+          // 
+          resources.ApplyResources(this.pictureBoxPreviewCollection, "pictureBoxPreviewCollection");
+          this.pictureBoxPreviewCollection.Name = "pictureBoxPreviewCollection";
+          this.pictureBoxPreviewCollection.TabStop = false;
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1802,6 +1812,7 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCollection)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1994,6 +2005,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem1;
         private System.Windows.Forms.CheckBox cbFileBasedReader;
+        private System.Windows.Forms.PictureBox pictureBoxPreviewCollection;
 
     }
 }
