@@ -6561,6 +6561,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.source.value", log);
             clearGUIProperty("user.sourcetrailer.value", log);
             clearGUIProperty("user.sourcetrailer.count", log);
+            clearGUIProperty("user.rating.value", log);
             clearGUIProperty("user.watched.value", log);
             clearGUIProperty("user.watched.count", log);
             clearGUIProperty("user.watched.date", log);
@@ -6716,6 +6717,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         setGUIProperty("user.watched.count", count.ToString());
                         setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
                         setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
+                        string rating = GetUserRating(ItemId, MyFilms.conf.StrUserProfileName);
+                        setGUIProperty("user.rating.value", rating);
                       }
                       else
                       {
@@ -6723,6 +6726,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           setGUIProperty("user.watched.value", "true");
                         else
                           setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                        clearGUIProperty("user.rating.value");
                       }
                     }
 
