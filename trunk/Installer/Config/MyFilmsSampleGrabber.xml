@@ -276,6 +276,18 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyStartRuntime Param1="" Param2="" />
+      <KeyEndRuntime />
+      <KeyRuntimeIndex />
+      <KeyRuntimePage />
+      <KeyStartCollection Param1="" Param2="" />
+      <KeyEndCollection />
+      <KeyCollectionIndex />
+      <KeyCollectionPage />
+      <KeyCollectionImageURLPage />
+      <KeyStartCollectionImageURL Param1="" Param2="" />
+      <KeyEndCollectionImageURL />
+      <KeyCollectionImageURLIndex />
     </Details>
   </Section>
 </Profile>
