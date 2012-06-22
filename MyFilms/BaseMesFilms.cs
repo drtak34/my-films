@@ -2284,14 +2284,14 @@ namespace MyFilmsPlugin.MyFilms
               }
 
               DataRow[] results = dataImport.Tables["Movie"].Select(StrDfltSelect + "Number" + " = " + "'" + _mID + "'", "OriginalTitle" + " " + "ASC"); // if (results.Length != 1) continue;
-              if (results.Length != 1)
-                LogMyFilms.Warn("Commit() : Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              if (results.Length != 1) LogMyFilms.Warn("Commit() : Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
 
               foreach (DataRow sr in results)
               {
                 try
                 {
-                  // watched status (and rating) //                     if (_mFRating)
+                  // watched status (and rating) 
+                  if (_mFRating > 0) sr["Rating"] = _mFRating;
 
                   string oldWatchedString = sr[WatchedField].ToString();
                   if (!EnhancedWatchedStatusHandling)
