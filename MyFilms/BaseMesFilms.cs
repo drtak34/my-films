@@ -1,4 +1,4 @@
-#region GNU license
+  #region GNU license
 // MyFilms - Plugin for Mediaportal
 // http://www.team-mediaportal.com
 // Copyright (C) 2006-2007
@@ -610,7 +610,10 @@ namespace MyFilmsPlugin.MyFilms
                     LogMyFilms.Debug("SaveMyFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
                     MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
                     MyXmlTextWriter.WriteStartDocument();
-                    data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                    lock (data)
+                    {
+                      data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                    }
                     MyXmlTextWriter.Flush();
                     MyXmlTextWriter.Close();
                   }
@@ -658,18 +661,21 @@ namespace MyFilmsPlugin.MyFilms
             using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
               LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.ReadWrite");
-              foreach (DataTable dataTable in data.Tables)
+              lock (data)
               {
-                // dataTable.Rows.Clear();
-                dataTable.BeginLoadData();
-              }
-              //// synchronize dataset with hierarchical XMLdoc
-              //xmlDoc = new XmlDataDocument(data);
-              //xmlDoc.Load(fs);
-              data.ReadXml(fs);
-              foreach (DataTable dataTable in data.Tables)
-              {
-                dataTable.EndLoadData();
+                foreach (DataTable dataTable in data.Tables)
+                {
+                  // dataTable.Rows.Clear();
+                  dataTable.BeginLoadData();
+                }
+                //// synchronize dataset with hierarchical XMLdoc
+                //xmlDoc = new XmlDataDocument(data);
+                //xmlDoc.Load(fs);
+                data.ReadXml(fs);
+                foreach (DataTable dataTable in data.Tables)
+                {
+                  dataTable.EndLoadData();
+                }
               }
               fs.Close();
               LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");

@@ -12632,9 +12632,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           success = !Helper.IsFileUsedbyAnotherProcess(conf.StrFileXml);
           i += 1;
-          if (!success) LogMyFilms.Info("FSwatcherChanged() - Attempt '" + i + "'to open Movie Database in read mode unsuccessful, waiting for next retry");
+          if (!success)
+            LogMyFilms.Info("FSwatcherChanged() - Attempt '" + i + "'to open Movie Database in read mode unsuccessful, waiting for next retry");
           Thread.Sleep(1000);
-          }
+        }
+
 
         if (success)
         {
@@ -12662,8 +12664,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          LogMyFilms.Debug(
-            "FSwatcherChanged(): Reloading data not possible - cannot open file for reading ! No Update of dataset done.");
+          LogMyFilms.Debug("FSwatcherChanged(): Reloading data not possible - cannot open file for reading ! No Update of dataset done.");
         }
       }
 

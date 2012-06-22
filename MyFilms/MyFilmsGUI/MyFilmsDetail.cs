@@ -314,7 +314,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
         static Queue<DBPersonInfo> PersonstoDownloadQueue = new Queue<DBPersonInfo>();
-        private object locker = new object();
+        // private object locker = new object();
 
         public MyFilmsDetail()
         {
@@ -7215,7 +7215,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TrailerwatcherChanged(object source, FileSystemEventArgs e)
         {
-          LogMyFilms.Debug("WatcherChanged() - New Trailerwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
+          LogMyFilms.Debug("TrailerwatcherChanged() - New Trailerwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
 
           if (Trailerwatcher.EnableRaisingEvents == false) // ignore event, if notification is switched off
             return;
