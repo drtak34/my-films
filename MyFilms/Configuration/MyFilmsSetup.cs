@@ -2491,7 +2491,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void UpdateOldHardcodedViews()
         {
           // upgrade old custom views to new image locations ...
-          foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View) // add new (!) userdefined views ...
+          foreach (MFview.ViewRow customView in MyCustomViews.View.Rows)
           {
             if (customView.DBfield == "Producer")
             {
