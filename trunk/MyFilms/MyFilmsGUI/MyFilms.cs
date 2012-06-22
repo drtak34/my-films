@@ -13767,6 +13767,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
       MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
 
+      MyFilmsDetail.clearGUIProperty("user.rating.value");
       MyFilmsDetail.clearGUIProperty("user.watched.value");
       MyFilmsDetail.clearGUIProperty("user.watched.count");
       MyFilmsDetail.clearGUIProperty("user.watched.date");
