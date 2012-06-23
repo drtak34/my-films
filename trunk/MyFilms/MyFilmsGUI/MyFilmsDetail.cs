@@ -10449,7 +10449,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #endregion
 
-      private void AddPersonsToDownloadQueue() // add persons of current movie to download queue
+      public static void AddPersonsToDownloadQueue() // add persons of current movie to download queue
       {
         new System.Threading.Thread(delegate()
         {
@@ -10482,7 +10482,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }) { Name = "MyFilmsPersonToDLqueueLoader", IsBackground = true }.Start();
       }
       
-      private void downloadPersonImage(string personname) //void downloadPersonImage(DBPersonInfo person)
+      private static void downloadPersonImage(string personname) //void downloadPersonImage(DBPersonInfo person)
       {
         // we need to get it, let's queue them up and download in the background
         DBPersonInfo person = new DBPersonInfo();
