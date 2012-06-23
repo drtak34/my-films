@@ -13718,7 +13718,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             logLevel = LogLevel.Debug;
 #endif
 
-      LoggingRule rule = new LoggingRule("*", logLevel, fileTarget);
+      LoggingRule rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MyFilms*" to log file
       config.LoggingRules.Add(rule);
 
       LogManager.Configuration = config;

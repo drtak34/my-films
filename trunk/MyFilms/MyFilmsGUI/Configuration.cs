@@ -201,7 +201,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), " ASC");
                   if (view.SortDirectionView.Contains("ASC")) view.SortDirectionView = " ASC"; else view.SortDirectionView = " DESC";
                   view.LayoutView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLayoutView{0}", index), "0");
-                  LogMyFilms.Debug("Adding view - #: '" + index + "', DBitem: '" + view.DBfield + "', View Label: '" + view.Label + "'");
+                  // LogMyFilms.Debug("Adding view - #: '" + index + "', DBitem: '" + view.DBfield + "', View Label: '" + view.Label + "'");
                   if (view.DBfield.Length > 0) 
                     CustomViews.View.AddViewRow(view);
                   index++;

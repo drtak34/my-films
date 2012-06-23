@@ -31,6 +31,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System.Diagnostics;
   using System.Globalization;
   using System.IO;
+  using System.Linq;
   using System.Net;
   using System.Reflection;
   using System.Threading;
@@ -2491,12 +2492,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void UpdateOldHardcodedViews()
         {
           // upgrade old custom views to new image locations ...
-          foreach (MFview.ViewRow customView in MyCustomViews.View.Rows)
+          foreach (MFview.ViewRow customView in this.MyCustomViews.View.Rows.Cast<MFview.ViewRow>().Where(customView => customView.DBfield == "Producer"))
           {
-            if (customView.DBfield == "Producer")
-            {
-              customView.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons.jpg";
-            }
+            customView.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons.jpg";
           }
           pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Cover2.jpg"; //DefaultCover.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Cover.jpg";
           pictureBoxDefaultPersonImage.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons2.jpg";
