@@ -2468,13 +2468,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void TraktRate(MFMovie movie)
         {
-          LogMyFilms.Debug("TraktRate(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
+          LogMyFilms.Debug("TraktRate(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "'");
           TraktPlugin.TraktAPI.DataStructures.TraktRateMovie rateObject = new TraktPlugin.TraktAPI.DataStructures.TraktRateMovie
           {
             IMDBID = movie.IMDBNumber,
+            TMDBID = movie.TMDBNumber,
             Title = movie.Title,
             Year = movie.Year.ToString(),
-            Rating = "love",
+            Rating = "5",
             UserName = TraktPlugin.TraktSettings.Username,
             Password = TraktPlugin.TraktSettings.Password
           };
@@ -3056,10 +3057,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return false;
           }
 
-          string path = System.IO.Path.GetDirectoryName(DB);
-          string filename = System.IO.Path.GetFileNameWithoutExtension(DB);
+          string path = Path.GetDirectoryName(DB);
+          string filename = Path.GetFileNameWithoutExtension(DB);
           string machineName = System.Environment.MachineName;
-          string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
+          string[] files = Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
           if (files.Length > 0)
           {
             LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! (DB-Config: '" + DB + "') - First LockFile: '" + files[0] + "', Number LockFiles: '" + files.Length + "', Local MachineName: '" + machineName + "'");
@@ -3077,41 +3078,46 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void SetGlobalLock(bool lockstate, string config)
         {
+          string strLockFileName = LockFilename(config);
           if (lockstate)
           {
-            
+
             MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
 
             try
             {
-              File.Create(LockFilename(config)).Dispose();
-              LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + LockFilename(config));
+              File.Create(strLockFileName).Dispose();
+              LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + strLockFileName);
             }
             catch (Exception ex)
             {
-              LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + LockFilename(config) + "', exception: " + ex.Message, ex);
+              LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + strLockFileName + "', exception: " + ex.Message, ex);
               // throw;
             }
           }
           else
           {
+            if (System.IO.File.Exists(strLockFileName))
+            {
+              try
+              {
+                File.Delete(strLockFileName);
+                LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + strLockFileName);
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Debug("RemoveGlobalLock() - there seems to be a problem removing global lock - Message: " + ex.Message);
+              }
+            }
             try
             {
-              File.Delete(LockFilename(config));
+              if (MyFilms.FSwatcher.Path.Length > 0) // only try enabling, if there is a path already set !
+                MyFilms.FSwatcher.EnableRaisingEvents = true;
             }
             catch (Exception ex)
             {
-              LogMyFilms.Debug("RemoveGlobalLock() - there seems to be a problem removing global lock - Message: " + ex.Message);
+              LogMyFilms.Debug("RemoveGlobalLock()- FSwatcher - problem enabling Raisingevents - Message (file not yet set?):  '" + ex.Message);
             }
-            try
-            {
-              MyFilms.FSwatcher.EnableRaisingEvents = true;
-            }
-            catch (Exception ex)
-            {
-              LogMyFilms.Debug("RemoveGlobalLock()- FSwatcher - problem enabling Raisingevents - Message:  '" + ex.Message);
-            }
-            LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename(config));
           }
         }
 
@@ -6280,100 +6286,106 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             new System.Threading.Thread(delegate()
             {
               {
-                #region threaded loading of logos, fanart and file availability check ...
-                
-                // load detailed DB infos
-                Load_Detailed_DB(MyFilms.conf.StrIndex, true);
-
-                // Logos:
-                this.Load_Logos(MyFilms.r[MyFilms.conf.StrIndex]);
-
-                //ImageSwapper backdrop = new ImageSwapper();
-                string[] wfanart = new string[2];
-                Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-
-                if (ImgFanartDir != null)
+                try
                 {
-                  wfanart = Search_Fanart(sTitles.FanartTitle, false, "dir", false, file, string.Empty);
-                  LogMyFilms.Debug("(afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                }
-                else
-                {
-                  wfanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty);
-                  LogMyFilms.Debug("(afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                }
+                  #region threaded loading of logos, fanart and file availability check ...
+                  // load detailed DB infos
+                  Load_Detailed_DB(MyFilms.conf.StrIndex, true);
 
-                if (wfanart[0] == " ")
-                {
-                  if (ImgFanartDir != null) ImgFanartDir.PreAllocResources();
-                  // GUIControl.HideControl(GetID, 35);
-                }
-                else
-                {
-                  // GUIControl.ShowControl(GetID, 35);
-                  if (wfanart[1] == "dir" && ImgFanartDir != null)
+                  // Logos:
+                  this.Load_Logos(MyFilms.r[MyFilms.conf.StrIndex]);
+
+                  //ImageSwapper backdrop = new ImageSwapper();
+                  string[] wfanart = new string[2];
+                  Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+
+                  if (ImgFanartDir != null)
                   {
-                    ImgFanartDir.TexturePath = wfanart[0];
-                    ImgFanartDir.PreAllocResources();
-                    ImgFanartDir.AllocResources();
-                    GUIControl.HideControl(GetID, (int)Controls.CTRL_Fanart);
-                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_FanartDir);
+                    wfanart = Search_Fanart(sTitles.FanartTitle, false, "dir", false, file, string.Empty);
+                    LogMyFilms.Debug("(afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                   }
                   else
                   {
-                    if (ImgFanartDir != null)
+                    wfanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty);
+                    LogMyFilms.Debug("(afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                  }
+
+                  if (wfanart[0] == " ")
+                  {
+                    if (ImgFanartDir != null) ImgFanartDir.PreAllocResources();
+                    // GUIControl.HideControl(GetID, 35);
+                  }
+                  else
+                  {
+                    // GUIControl.ShowControl(GetID, 35);
+                    if (wfanart[1] == "dir" && ImgFanartDir != null)
                     {
+                      ImgFanartDir.TexturePath = wfanart[0];
                       ImgFanartDir.PreAllocResources();
-                      GUIControl.HideControl(GetID, (int)Controls.CTRL_FanartDir);
+                      ImgFanartDir.AllocResources();
+                      GUIControl.HideControl(GetID, (int)Controls.CTRL_Fanart);
+                      GUIControl.ShowControl(GetID, (int)Controls.CTRL_FanartDir);
                     }
-                    ImgFanart.SetFileName(wfanart[0]);
-                    setGUIProperty("currentfanart", wfanart[0]);
-                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
-                  }
-                }
-                MyFilms.currentMovie.Fanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty)[0];
-
-                if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && checkfileavailability)
-                {
-                  if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
-                  {
-                    int at = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().IndexOf(";", 0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length);
-                    if (at == -1)
-                      file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length).Trim().ToString(), MyFilms.conf.StrDirStor);
                     else
-                      file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, at).Trim().ToString(), MyFilms.conf.StrDirStor);
+                    {
+                      if (ImgFanartDir != null)
+                      {
+                        ImgFanartDir.PreAllocResources();
+                        GUIControl.HideControl(GetID, (int)Controls.CTRL_FanartDir);
+                      }
+                      ImgFanart.SetFileName(wfanart[0]);
+                      setGUIProperty("currentfanart", wfanart[0]);
+                      GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
+                    }
                   }
-                  else
-                    file = "false";
-                  if (file != "false" && (file.Length > 0))
-                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_ImgDD);
+                  MyFilms.currentMovie.Fanart = Search_Fanart(sTitles.FanartTitle, false, "file", false, file, string.Empty)[0];
+
+                  if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && checkfileavailability)
+                  {
+                    if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
+                    {
+                      int at = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().IndexOf(";", 0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length);
+                      if (at == -1)
+                        file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length).Trim().ToString(), MyFilms.conf.StrDirStor);
+                      else
+                        file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, at).Trim().ToString(), MyFilms.conf.StrDirStor);
+                    }
+                    else
+                      file = "false";
+                    if (file != "false" && (file.Length > 0))
+                      GUIControl.ShowControl(GetID, (int)Controls.CTRL_ImgDD);
+                    else
+                      GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
+                  }
                   else
                     GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
-                }
-                else
-                  GUIControl.HideControl(GetID, (int)Controls.CTRL_ImgDD);
 
-                if (MyFilms.conf.StrIndex == StrMax - 1)
-                {
-                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnNext);
-                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnLast);
-                }
-                else
-                {
-                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnNext);
-                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnLast);
-                }
-                if (MyFilms.conf.StrIndex == 0)
-                {
-                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnPrior);
-                  GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnFirst);
-                }
-                else
-                {
-                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnPrior);
-                  GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
-                }
+                  if (MyFilms.conf.StrIndex == StrMax - 1)
+                  {
+                    GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnNext);
+                    GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnLast);
+                  }
+                  else
+                  {
+                    GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnNext);
+                    GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnLast);
+                  }
+                  if (MyFilms.conf.StrIndex == 0)
+                  {
+                    GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnPrior);
+                    GUIControl.DisableControl(GetID, (int)Controls.CTRL_BtnFirst);
+                  }
+                  else
+                  {
+                    GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnPrior);
+                    GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
+                  }
                 #endregion
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.DebugException("afficher_detail() - error: " + ex.Message, ex);
+                }
               }
               GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
               {
@@ -6594,7 +6606,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string wstring2 = "";
               //LogMyFilms.Debug("PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
 
-                if (MyFilms.r[ItemId][dc.ColumnName] != null)
+                if (MyFilms.r.Length > ItemId && MyFilms.r[ItemId][dc.ColumnName] != null) // make sure, it is a valid part of current loaded dataset "r"
                 {
                     //Added by Guzzi to set userdefined properties
                     if (MyFilms.conf.Stritem1.ToLower() == (dc.ColumnName.ToLower()))
