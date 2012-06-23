@@ -2243,7 +2243,7 @@
       <description>Watched Icon</description>
       <id>1</id>
       <posX>1257</posX>
-      <posY>636</posY>
+      <posY>630</posY>
       <width>14</width>
       <height>14</height>
       <texture>MyFilms\overlayunwatched.png</texture>
@@ -2258,7 +2258,7 @@
       <description>UnWatched Icon</description>
       <id>1</id>
       <posX>1257</posX>
-      <posY>636</posY>
+      <posY>630</posY>
       <width>14</width>
       <height>14</height>
       <texture>MyFilms\overlaywatched.png</texture>
@@ -2276,7 +2276,7 @@
       <type>fadelabel</type>
       <id>1</id>
       <posX>1251</posX>
-      <posY>633</posY>
+      <posY>627</posY>
       <width>280</width>
       <label>#myfilms.user.watched.name: #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
       <font>font10</font>
@@ -2284,6 +2284,52 @@
       <textcolor>6fffffff</textcolor>
       <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)</visible>
     </control>
+
+
+
+<!-- User Rating  -->
+
+<!--
+    <control>
+      <description>UserRatingValue</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>1250</posX>
+      <posY>650</posY>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
+      <font>font9</font>
+      <align>right</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!string.equals(#myfilms.user.rating.value,-1)+!control.isvisible(34)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
+    <control>
+      <description>Rating Stars</description>
+      <type>imagelist</type>
+      <id>0</id>
+      <posX>1260</posX>
+      <posY>653</posY>
+      <width>50</width>
+      <height>10</height>
+      <textureWidth>10</textureWidth>
+      <textureHeight>10</textureHeight>
+      <subitems>
+        <subitem>MyFilms\UserRatingStarOff.png</subitem>
+        <subitem>MyFilms\UserRatingStarOn.png</subitem>
+      </subitems>
+      <orientation>horizontal</orientation>
+      <align>right</align>
+      <imagesToDraw>10</imagesToDraw>
+      <percentage>#myfilms.user.rating.value</percentage>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!string.equals(#myfilms.user.rating.value,-1)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
 
     <!-- Additional Display for Info if Fanart available and Movie available -->
     <control>
