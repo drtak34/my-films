@@ -5207,6 +5207,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool showEmptyValues = MyFilms.conf.BoolShowEmptyValuesInViews;
       bool isrecentlyadded = (WStrSort == "RecentlyAdded"); // calculate recently added fields
       bool isindexedtitle = (WStrSort == "IndexedTitle"); // calculate recently added fields
+      bool reversenames = (isperson && conf.BoolReverseNames);
 
       //DateTime now = DateTime.Now;
 
@@ -5254,7 +5255,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (issplitfield && !dontsplitvalues)
         {
-          ArrayList wtab = Search_String(champselect, conf.BoolReverseNames); //ArrayList wtab = Search_String(champselect, isperson);
+          ArrayList wtab = Search_String(champselect, reversenames); //ArrayList wtab = Search_String(champselect, isperson);
           if (wtab.Count > 0)
           {
             for (wi = 0; wi < wtab.Count; wi++) w_tableau.Add(wtab[wi]); //w_tableau.AddRange(wtab);
@@ -5273,7 +5274,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       watch.Stop();
-      LogMyFilms.Debug("(GetSelectFromDivx) - Read View Names for '" + WStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "') (" + (watch.ElapsedMilliseconds) + " ms)");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Read View Names for '" + WStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "', reversenames = '" + reversenames + "') (" + (watch.ElapsedMilliseconds) + " ms)");
       #endregion
 
       #region Sorting based on FieldType using custom IComparer
