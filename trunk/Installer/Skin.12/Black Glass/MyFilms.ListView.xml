@@ -347,6 +347,51 @@
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
+
+<!-- User Rating  -->
+
+<!--
+    <control>
+      <description>UserRatingValue</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>725</posX>
+      <posY>699</posY>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
+      <font>font9</font>
+      <align>right</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!string.equals(#myfilms.user.rating.value,-1)+!control.isvisible(34)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
+    <control>
+      <description>Rating Stars</description>
+      <type>imagelist</type>
+      <id>0</id>
+      <posX>717</posX>
+      <posY>702</posY>
+      <width>50</width>
+      <height>12</height>
+      <textureWidth>10</textureWidth>
+      <textureHeight>10</textureHeight>
+      <subitems>
+        <subitem>MyFilms\UserRatingStarOff.png</subitem>
+        <subitem>MyFilms\UserRatingStarOn.png</subitem>
+      </subitems>
+      <orientation>horizontal</orientation>
+      <align>right</align>
+      <imagesToDraw>10</imagesToDraw>
+      <percentage>#myfilms.user.rating.value</percentage>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!string.equals(#myfilms.user.rating.value,-1)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+
 <!-- LOGOS -->
 
     <control>
