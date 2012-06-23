@@ -1167,8 +1167,13 @@ namespace MyFilmsPlugin.MyFilms
           movie.Watched = played;
           movie.WatchedCount = -1; // check against it, if value returns...
 
-          // rating
+          // site rating
           float rating = 0;
+          if (!(float.TryParse(row["Rating"].ToString(), out rating))) rating = 0;
+          movie.Rating = rating;
+
+          // user rating
+          rating = 0;
           if (tmpconf.StrEnhancedWatchedStatusHandling) // get usercontext ratings, if enabled
           {
             string tmprating = GetUserRating(row[tmpconf.StrWatchedField].ToString(), tmpconf.StrUserProfileName);
@@ -1184,10 +1189,10 @@ namespace MyFilmsPlugin.MyFilms
           }
           else
           {
-            bool success = float.TryParse(row["Rating"].ToString(), out rating);
+            bool success = float.TryParse(row["RatingUser"].ToString(), out rating);
             if (!success) rating = 0;
           }
-          movie.Rating = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+          movie.RatingUser = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
 
           string mediapath = string.Empty;
           if (Helper.FieldIsSet(tmpconf.StrStorage))
@@ -1242,6 +1247,9 @@ namespace MyFilmsPlugin.MyFilms
             movie.DateTime = wdate;
           }
           catch { }
+          movie.CategoryTrakt.Clear();
+          if (!string.IsNullOrEmpty(row["CategoryTrakt"].ToString()))
+            movie.CategoryTrakt = row["CategoryTrakt"].ToString().Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).Distinct().ToList(); //row["CategoryTrakt"].ToString();
         }
 
         private static void GetMovieArtworkDetails(DataRow row, MyFilmsGUI.Configuration tempconf, ref MFMovie movie)
@@ -1986,6 +1994,7 @@ namespace MyFilmsPlugin.MyFilms
     private string _mStrTitle = string.Empty;
     private string _mStrTranslatedTitle = string.Empty;
     private string _mStrGroupName = string.Empty;
+    private List<string> _mStrCategoryTrakt = new List<string>();
     private string _mStrEdition = string.Empty;
     private string _mStrFile = string.Empty;
     private string _mStrTrailer = string.Empty;
@@ -1996,6 +2005,7 @@ namespace MyFilmsPlugin.MyFilms
     private string _mStrCategory = string.Empty;
     private int _mILength = 0;
     private float _mFRating;
+    private float _mFRatingUser;
     private bool _mIWatched;
     private int _mIWatchedCount = -1;
     private DateTime _mDateTime = System.DateTime.Today;
@@ -2104,10 +2114,19 @@ namespace MyFilmsPlugin.MyFilms
       set { _mIYear = value; }
     }
 
+    /// <summary>
+    /// entries for watchlist, recommendations and user lists.
+    /// </summary>
     public string Category
     {
       get { return _mStrCategory; }
       set { _mStrCategory = value; }
+    }
+
+    public List<string> CategoryTrakt
+    {
+      get { return _mStrCategoryTrakt; }
+      set { _mStrCategoryTrakt = value; }
     }
 
     /// <summary>
@@ -2123,6 +2142,12 @@ namespace MyFilmsPlugin.MyFilms
     {
       get { return _mFRating; }
       set { _mFRating = value; }
+    }
+
+    public float RatingUser
+    {
+      get { return _mFRatingUser; }
+      set { _mFRatingUser = value; }
     }
 
     public DateTime DateTime
@@ -2195,6 +2220,7 @@ namespace MyFilmsPlugin.MyFilms
       _mStrTitle = string.Empty;
       _mStrTranslatedTitle = string.Empty;
       _mStrGroupName = string.Empty;
+      _mStrCategoryTrakt.Clear();
       _mStrEdition = string.Empty;
       _mStrIMDBNumber = string.Empty;
       _mStrTMDBNumber = string.Empty;
@@ -2202,6 +2228,7 @@ namespace MyFilmsPlugin.MyFilms
       _mStrCategory = string.Empty;
       _mILength = 0;
       _mFRating = 0.0f;
+      _mFRatingUser = 0.0f;
       _mIWatched = false;
       _mIWatchedCount = -1;
       _mDateTime = System.DateTime.Today;
@@ -2218,6 +2245,16 @@ namespace MyFilmsPlugin.MyFilms
       _mAllowLatestMediaAPI = false;
       _MFconfig = null;
       _MovieRow = null;
+    }
+
+    public void AddCategoryTrakt(string toAdd)
+    {
+      _mStrCategoryTrakt.Add(toAdd);
+    }
+
+    public void RemoveCategoryTrakt(string toRemove)
+    {
+      _mStrCategoryTrakt.Remove(toRemove);
     }
 
     public void Commit()
@@ -2255,7 +2292,7 @@ namespace MyFilmsPlugin.MyFilms
             }
           }
           LogMyFilms.Debug("Commit() : TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-          LogMyFilms.Debug("Commit() : Update requested for Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Number = '" + _mID + "', Watched = '" + _mIWatched + "', Rating = '" + _mFRating + "'");
+          LogMyFilms.Debug("Commit() : Update requested for Number = '" + _mID + "', Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Watched = '" + _mIWatched + "', Rating = '" + _mFRating + "', RatingUser = '" + _mFRatingUser + "', CategoryTrakt = '" + GetStringValue(_mStrCategoryTrakt) + "'");
 
           if (System.IO.File.Exists(Catalog))
           {
@@ -2289,7 +2326,9 @@ namespace MyFilmsPlugin.MyFilms
               {
                 try
                 {
-                  // Copy CustomFields data ....
+                  bool updateRequired = false;
+
+                  #region Copy CustomFields data ....
                   AntMovieCatalog.CustomFieldsRow customFields = null;
                   if (sr.GetCustomFieldsRows().Length > 0)
                   {
@@ -2307,7 +2346,20 @@ namespace MyFilmsPlugin.MyFilms
                     customFields.SetParentRow(sr);
                     dataImport.CustomFields.AddCustomFieldsRow(customFields);
                   }
-                  
+                  #endregion
+
+                  // CategoryTrakt
+                  if (sr.IsCategoryTraktNull() || sr.CategoryTrakt != GetStringValue(_mStrCategoryTrakt))
+                  {
+                    updateRequired = true;
+                    LogMyFilms.Debug("Commit() : Updating Field 'CategoryTrakt' from '" + ((!sr.IsCategoryTraktNull()) ? sr.CategoryTrakt : "") + "' to '" + GetStringValue(_mStrCategoryTrakt) + "'");
+                    sr.CategoryTrakt = GetStringValue(_mStrCategoryTrakt);
+                  }
+
+                  // site rating
+
+                  if (_mFRating > 0) sr.Rating = (decimal)_mFRating;
+
                   // watched status
                   string oldWatchedString = sr[WatchedField].ToString();
                   if (!EnhancedWatchedStatusHandling)
@@ -2317,9 +2369,8 @@ namespace MyFilmsPlugin.MyFilms
                       sr[WatchedField] = "true";
                     else
                       sr[WatchedField] = GlobalUnwatchedOnlyValue;
-
-                    // rating
-                    if (_mFRating > 0) sr.Rating = (decimal)_mFRating;
+                    // user rating
+                    if (_mFRatingUser > 0) sr.RatingUser = (decimal)_mFRatingUser;
                   }
                   else
                   {
@@ -2328,19 +2379,18 @@ namespace MyFilmsPlugin.MyFilms
 
                     // watched
                     if (!string.IsNullOrEmpty(_mUsername))
-                      newEnhancedWatchedValue = NewEnhancedWatchValue(newEnhancedWatchedValue, _mUsername, _mIWatched, _mIWatchedCount, _mFRating);
+                      newEnhancedWatchedValue = NewEnhancedWatchValue(newEnhancedWatchedValue, _mUsername, _mIWatched, _mIWatchedCount, _mFRatingUser);
                     else
-                      newEnhancedWatchedValue = NewEnhancedWatchValue(EnhancedWatchedValue, UserProfileName, _mIWatched, _mIWatchedCount, _mFRating);
+                      newEnhancedWatchedValue = NewEnhancedWatchValue(EnhancedWatchedValue, UserProfileName, _mIWatched, _mIWatchedCount, _mFRatingUser);
                     sr[WatchedField] = newEnhancedWatchedValue;
-
-                    // rating
-                    if (_mFRating > 0) sr.RatingUser = (decimal)_mFRating;
+                    // "commmon" user rating
+                    if (_mFRatingUser > 0) sr.RatingUser = (decimal)_mFRatingUser;
                   }
                   if (sr[WatchedField].ToString().ToLower() != oldWatchedString.ToLower())
-                    LogMyFilms.Debug("Commit() : Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField] + "', WatchedCount = '" + _mIWatchedCount + "', Rating = '" + _mFRating + "'");
+                    LogMyFilms.Debug("Commit() : Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField] + "', WatchedCount = '" + _mIWatchedCount + "', (user)Rating = '" + _mFRatingUser + "', (site)Rating = '" + _mFRating + "'");
 
                   // imdb number
-                  string oldIMDB = sr.IMDB_Id;
+                  string oldIMDB = (sr.IsIMDB_IdNull()) ? "" : sr.IMDB_Id;
                   if (!string.IsNullOrEmpty(_mStrIMDBNumber))
                     sr.IMDB_Id = _mStrIMDBNumber;
                   if (sr.IMDB_Id != oldIMDB)
@@ -2489,6 +2539,48 @@ namespace MyFilmsPlugin.MyFilms
       }
       return newEnhancedWatchedValue;
     }
+
+    private string Remove(string input, string toRemove)
+    {
+      string output = "";
+      string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+      List<string> itemList = split.Distinct().ToList();
+      if (itemList.Contains(toRemove)) itemList.Remove(toRemove);
+      foreach (string s in itemList)
+      {
+        if (output.Length > 0) output += ", ";
+        output += s;
+      }
+      return output;
+    }
+
+    private string Add(string input, string toAdd)
+    {
+      string output = "";
+      string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+      List<string> itemList = split.Distinct().ToList();
+      if (!itemList.Contains(toAdd)) itemList.Add(toAdd);
+      foreach (string s in itemList)
+      {
+        if (output.Length > 0) output += ", ";
+        output += s;
+      }
+      return output;
+    }
+
+    private string GetStringValue(List<string> input)
+    {
+      string output = "";
+      List<string> itemList = input.Select(x => x.Trim()).Where(x => x.Length > 0).Distinct().ToList();
+      itemList.Sort();
+      foreach (string s in itemList)
+      {
+        if (output.Length > 0) output += ", ";
+        output += s;
+      }
+      return output;
+    }
+
 
   }
 

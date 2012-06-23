@@ -2549,6 +2549,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           movie.Rating = rating;
           // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
 
+          // movie.RatingUser = ????;
+
           string mediapath = string.Empty;
           if (Helper.FieldIsSet(MyFilms.conf.StrStorage))
           {
