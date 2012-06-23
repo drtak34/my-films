@@ -8587,6 +8587,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
           upd_choice[ichoice] = "personimages";
           ichoice++;
+
+          if (MyFilmsDetail.ExtendedStartmode("Dadeo test for loading person images with backgroundworker queue"))
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079900) + " (test Dadeo)"); // Download person images (selected film)
+            upd_choice[ichoice] = "personimagestest";
+            ichoice++;
+          }
         }
 
         if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsCoverManager.xml"))
@@ -9517,6 +9524,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
             }
           }
+          break;
+
+        case "personimagestest":
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+          MyFilmsDetail.AddPersonsToDownloadQueue();
           break;
 
         case "deletefanart":
