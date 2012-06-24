@@ -83,7 +83,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       if (language != null)
         cultureName = GetCultureName(language);
 
-      LogMyFilms.Info("  Loading localised Strings - Path: {0} Culture: {1}  Language: {2} Prefix: {3}", directory, cultureName, language, isPrefixEnabled);
+      LogMyFilms.Info("Loading localised Strings - Path: '{0}', Culture: '{1}', Language: '{2}', Prefix: '{3}'", directory, cultureName, language, isPrefixEnabled);
 
       _stringProvider = new LocalisationProvider(directory, cultureName, isPrefixEnabled);
 

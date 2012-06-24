@@ -10444,6 +10444,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Error("GetFPS() - exception {0}", e);
           return "";
         }
+        LogMyFilms.Debug("GetFPS - _BD_Framerate = '" + _BD_Framerate + "', -> fps = '" + fps.ToString() + "'");
         return _BD_Framerate;
       }
 
