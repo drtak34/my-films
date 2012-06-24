@@ -1038,6 +1038,7 @@ namespace MyFilmsPlugin.MyFilms
           movies.Clear();
           AntMovieCatalog dataExport = new AntMovieCatalog();
           int moviecount = 0; // total count for added movies
+          // int iSkippedConfigs = 0; // number of skipped configs 
 
           using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
@@ -1046,18 +1047,19 @@ namespace MyFilmsPlugin.MyFilms
             for (int i = 0; i < MesFilms_nb_config; i++)
               configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
 
+            LogMyFilms.Debug("GetMoviesGlobal() - Configs found: '" + configs.Count + "' - now checking, if they are enabled ...");
             foreach (string config in configs)
             {
               string StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
               string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
               bool AllowTraktSync = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
               bool AllowRecentlyAddedAPI = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+              string catalogname = Enum.GetName(typeof(MyFilmsGUI.Configuration.CatalogType), Int32.Parse(StrFileType));
 
               if (AllowTraktSync || AllowRecentlyAddedAPI)
-                LogMyFilms.Debug("GetMovies() - Trakt = '" + AllowTraktSync + "', RecentMedia = '" + AllowRecentlyAddedAPI + "', CatalogType = '" + StrFileType + "', Config = '" + config + "', Catalogfile = '" + StrFileXml + "'");
+                LogMyFilms.Debug("Trakt|LMH = '" + AllowTraktSync + "|" + AllowRecentlyAddedAPI + "', Config = '" + config + "', CatalogType = '" + StrFileType + "|" + catalogname + "', DBFile = '" + StrFileXml + "'");
               else
-                LogMyFilms.Debug("GetMovies() - Trakt = '" + AllowTraktSync + "', RecentMedia = '" + AllowRecentlyAddedAPI + "', CatalogType = '" + StrFileType + "', Config = '" + config + "'");
-
+                LogMyFilms.Debug("Trakt|LMH = '" + AllowTraktSync + "|" + AllowRecentlyAddedAPI + "', Config = '" + config + "', CatalogType = '" + StrFileType + "|" + catalogname + "'");
               if (File.Exists(StrFileXml) && (AllowTraktSync || (!traktOnly && AllowRecentlyAddedAPI)))
               {
                 MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, false, true, null);
@@ -2326,7 +2328,7 @@ namespace MyFilmsPlugin.MyFilms
               {
                 try
                 {
-                  bool updateRequired = false;
+                  // bool updateRequired = false;
 
                   #region Copy CustomFields data ....
                   AntMovieCatalog.CustomFieldsRow customFields = null;
@@ -2351,7 +2353,7 @@ namespace MyFilmsPlugin.MyFilms
                   // CategoryTrakt
                   if (sr.IsCategoryTraktNull() || sr.CategoryTrakt != GetStringValue(_mStrCategoryTrakt))
                   {
-                    updateRequired = true;
+                    // updateRequired = true;
                     LogMyFilms.Debug("Commit() : Updating Field 'CategoryTrakt' from '" + ((!sr.IsCategoryTraktNull()) ? sr.CategoryTrakt : "") + "' to '" + GetStringValue(_mStrCategoryTrakt) + "'");
                     sr.CategoryTrakt = GetStringValue(_mStrCategoryTrakt);
                   }
