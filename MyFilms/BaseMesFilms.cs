@@ -52,7 +52,9 @@ namespace MyFilmsPlugin.MyFilms
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
         //private static XmlDataDocument xmlDoc; // XML Doc file for chierarchical access like XPath
 
-        public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+        public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(); // private static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+        // private static readonly object _locker = new object();
+
         public class MFConfig
         {
           public string Name
@@ -599,29 +601,26 @@ namespace MyFilmsPlugin.MyFilms
             {
               try
               {
-                lock (data)
+                MyFilmsDetail.SetGlobalLock(true, catalogfile);
+
+                CopyExtendedFieldsToCustomFields(false);
+
+                using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
                 {
-                  MyFilmsDetail.SetGlobalLock(true, catalogfile);
-
-                  CopyExtendedFieldsToCustomFields(false);
-
-                  using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                  LogMyFilms.Debug("SaveMyFilmsToDisk()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+                  fs.SetLength(0); // do not append, owerwrite !
+                  using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
                   {
-                    LogMyFilms.Debug("SaveMyFilmsToDisk()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-                    fs.SetLength(0); // do not append, owerwrite !
-                    using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
-                    {
-                      LogMyFilms.Debug("SaveMyFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
-                      MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-                      MyXmlTextWriter.WriteStartDocument();
-                      data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema); MyXmlTextWriter.Flush();
-                      MyXmlTextWriter.Close();
-                    }
-                    //xmlDoc.Save(fs);
-                    fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-                    LogMyFilms.Debug("SaveMyFilmsToDisk()- closing '" + catalogfile + "' FileStream and releasing file lock");
-                    success = true;
+                    LogMyFilms.Debug("SaveMyFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
+                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
+                    MyXmlTextWriter.WriteStartDocument();
+                    data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema); MyXmlTextWriter.Flush();
+                    MyXmlTextWriter.Close();
                   }
+                  //xmlDoc.Save(fs);
+                  fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+                  LogMyFilms.Debug("SaveMyFilmsToDisk()- closing '" + catalogfile + "' FileStream and releasing file lock");
+                  success = true;
                 }
               }
               catch (Exception ex)
@@ -650,57 +649,38 @@ namespace MyFilmsPlugin.MyFilms
         private static bool LoadMyFilmsFromDisk(string catalogfile)
         {
           bool success = false;
-          lock (data)
-          {
-            #region load catalog from file into dataset
-            LogMyFilms.Debug("LoadMyFilmsFromDisk()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
-            //if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
+          #region load catalog from file into dataset
+          LogMyFilms.Debug("LoadMyFilmsFromDisk()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
+          //if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
 
+          _dataLock.EnterReadLock();
+          data = new AntMovieCatalog();
+          try
+          {
             watch.Reset(); watch.Start();
-            _dataLock.EnterReadLock();
-            data = new AntMovieCatalog(); 
-            try
+            using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-              using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+              LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.ReadWrite");
+              // lock (_locker)
               {
-                LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.ReadWrite");
-                // lock (data)
-                {
-                  foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData(); // dataTable.Rows.Clear();
-                  //// synchronize dataset with hierarchical XMLdoc
-                  //xmlDoc = new XmlDataDocument(data);
-                  //xmlDoc.Load(fs);
-                  data.ReadXml(fs);
-                  foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
-                }
-                fs.Close();
-                LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");
+                foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData(); // dataTable.Rows.Clear();
+                //// synchronize dataset with hierarchical XMLdoc
+                //xmlDoc = new XmlDataDocument(data);
+                //xmlDoc.Load(fs);
+                data.ReadXml(fs);
+                foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
               }
-              success = true;
-              //foreach (DataTable dataTable in data.Tables)
-              //{
-              //  LogMyFilms.Debug("initData() - loaded table '" + dataTable + "'");
-              //  foreach (var childrelation in dataTable.ChildRelations) LogMyFilms.Debug("initData() - childrelation: '" + childrelation + "'");
-              //}
+              fs.Close();
+              LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");
             }
-            catch (Exception e)
-            {
-              success = false;
-              LogMyFilms.Error("LoadMyFilmsFromDisk() : Error reading xml database after " + data.Movie.Count + " records; error : " + e.Message + ", " + e.StackTrace);
-              if (data.Movie.Count > 0) LogMyFilms.Error("LoadMyFilmsFromDisk() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'");
-              string strOtitle = (data.Movie.Count > 0) ? data.Movie[data.Movie.Count - 1].OriginalTitle : "n/a";
-              throw new Exception("Error reading xml database after " + data.Movie.Count + " records; movie: '" + strOtitle + "'; error : " + e.Message);
-              //LogMyFilms.DebugException("LoadMyFilmsFromDisk()- error reading '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read", ex);
-              // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
-              //throw e;
-            }
-            finally
-            {
-              _dataLock.ExitReadLock();
-            }
+            success = true;
+            //foreach (DataTable dataTable in data.Tables)
+            //{
+            //  LogMyFilms.Debug("initData() - loaded table '" + dataTable + "'");
+            //  foreach (var childrelation in dataTable.ChildRelations) LogMyFilms.Debug("initData() - childrelation: '" + childrelation + "'");
+            //}
             watch.Stop();
             LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) + " ms)");
-            #endregion
 
             CreateOrUpdateCustomsFieldsProperties();
 
@@ -727,7 +707,7 @@ namespace MyFilmsPlugin.MyFilms
               movieRow.AgeAdded = iAge; // sets integer value
               movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
               string index = movieRow[MyFilms.conf.StrTitle1].ToString();
-              movieRow.IndexedTitle = (index.Length > 0) ?  index.Substring(0, 1).ToUpper() : "";
+              movieRow.IndexedTitle = (index.Length > 0) ? index.Substring(0, 1).ToUpper() : "";
               movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
               // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
 
@@ -927,8 +907,25 @@ namespace MyFilmsPlugin.MyFilms
             //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms) - Records: '" + moviesEnhanced.Length + "'");
             //return moviesEnhanced;
             #endregion
-
+          
           }
+          catch (Exception e)
+          {
+            success = false;
+            LogMyFilms.Error("LoadMyFilmsFromDisk() : Error reading xml database after " + data.Movie.Count + " records; error : " + e.Message + ", " + e.StackTrace);
+            if (data.Movie.Count > 0) LogMyFilms.Error("LoadMyFilmsFromDisk() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'");
+            string strOtitle = (data.Movie.Count > 0) ? data.Movie[data.Movie.Count - 1].OriginalTitle : "n/a";
+            throw new Exception("Error reading xml database after " + data.Movie.Count + " records; movie: '" + strOtitle + "'; error : " + e.Message);
+            //LogMyFilms.DebugException("LoadMyFilmsFromDisk()- error reading '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read", ex);
+            // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
+            //throw e;
+          }
+          finally
+          {
+            _dataLock.ExitReadLock();
+          }
+          #endregion
+
           return success;
         }
 
@@ -1042,7 +1039,6 @@ namespace MyFilmsPlugin.MyFilms
           movies.Clear();
           AntMovieCatalog dataExport = new AntMovieCatalog();
           int moviecount = 0; // total count for added movies
-          // int iSkippedConfigs = 0; // number of skipped configs 
 
           using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
@@ -1371,26 +1367,37 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens/all = '" + StrSort + " " + StrSortSens + "', '" + all + "'");
           Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
           bool iscached = true;
-          if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
+
+          if (StrSelect.Length == 0)
+            StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
 
           if (data == null)
           {
             iscached = false;
             initData();
           }
-          LogMyFilms.Debug("ReadDataMovies() - Expression          = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "'");
-          movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens); //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
-          // movies = tableMoviesExtended.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
-          if (movies.Length == 0 && all)
+
+          _dataLock.EnterReadLock();
+          try
           {
-            StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
-            LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
-            movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+            LogMyFilms.Debug("ReadDataMovies() - Expression          = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "'");
+            movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens); //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+            // movies = tableMoviesExtended.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+            if (movies.Length == 0 && all)
+            {
+              StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
+              LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
+              movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+            }
+          }
+          finally
+          {
+            _dataLock.ExitReadLock();
           }
           watchReadMovies.Stop();
 
           #region Additional sorting ...
-          Stopwatch watchReadMoviesSort = new Stopwatch(); watchReadMoviesSort.Reset(); watchReadMoviesSort.Start(); 
+          Stopwatch watchReadMoviesSort = new Stopwatch(); watchReadMoviesSort.Reset(); watchReadMoviesSort.Start();
           MyFilms.FieldType fieldType = MyFilms.GetFieldType(StrSort);
           Type columnType = MyFilms.GetColumnType(StrSort);
           string strColumnType = (columnType == null) ? "<invalid>" : columnType.ToString();
@@ -1454,10 +1461,7 @@ namespace MyFilmsPlugin.MyFilms
         {
           if (!File.Exists(StrFileXml)) throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
           Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
-          // lock (data)
-          {
-            bool success = LoadMyFilmsFromDisk(StrFileXml);
-          }
+          bool success = LoadMyFilmsFromDisk(StrFileXml);
           watchReadMovies.Stop();
           LogMyFilms.Debug("LoadMyFilms() - Finished ... (success = '" + success + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
         }
@@ -2588,7 +2592,6 @@ namespace MyFilmsPlugin.MyFilms
       }
       return output;
     }
-
 
   }
 
