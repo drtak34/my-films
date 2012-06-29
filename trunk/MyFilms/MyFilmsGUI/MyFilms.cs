@@ -4226,7 +4226,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       catch (Exception)
       {
-        
+
       }
       return menuimage;
     }
