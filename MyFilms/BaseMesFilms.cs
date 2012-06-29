@@ -599,28 +599,29 @@ namespace MyFilmsPlugin.MyFilms
             {
               try
               {
-                MyFilmsDetail.SetGlobalLock(true, catalogfile);
-
-                using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                lock (data)
                 {
-                  LogMyFilms.Debug("SaveMyFilmsToDisk()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-                  fs.SetLength(0); // do not append, owerwrite !
-                  using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                  MyFilmsDetail.SetGlobalLock(true, catalogfile);
+
+                  CopyExtendedFieldsToCustomFields(false);
+
+                  using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
                   {
-                    LogMyFilms.Debug("SaveMyFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
-                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-                    MyXmlTextWriter.WriteStartDocument();
-                    lock (data)
+                    LogMyFilms.Debug("SaveMyFilmsToDisk()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+                    fs.SetLength(0); // do not append, owerwrite !
+                    using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
                     {
-                      data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                      LogMyFilms.Debug("SaveMyFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
+                      MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
+                      MyXmlTextWriter.WriteStartDocument();
+                      data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema); MyXmlTextWriter.Flush();
+                      MyXmlTextWriter.Close();
                     }
-                    MyXmlTextWriter.Flush();
-                    MyXmlTextWriter.Close();
+                    //xmlDoc.Save(fs);
+                    fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+                    LogMyFilms.Debug("SaveMyFilmsToDisk()- closing '" + catalogfile + "' FileStream and releasing file lock");
+                    success = true;
                   }
-                  //xmlDoc.Save(fs);
-                  fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-                  LogMyFilms.Debug("SaveMyFilmsToDisk()- closing '" + catalogfile + "' FileStream and releasing file lock");
-                  success = true;
                 }
               }
               catch (Exception ex)
@@ -648,283 +649,286 @@ namespace MyFilmsPlugin.MyFilms
 
         private static bool LoadMyFilmsFromDisk(string catalogfile)
         {
-          #region load catalog from file into dataset
           bool success = false;
-          LogMyFilms.Debug("LoadMyFilmsFromDisk()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
-          //if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
-
-          watch.Reset(); watch.Start();
-          _dataLock.EnterReadLock();
-          data = new AntMovieCatalog(); 
-          try
+          lock (data)
           {
-            using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            #region load catalog from file into dataset
+            LogMyFilms.Debug("LoadMyFilmsFromDisk()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
+            //if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
+
+            watch.Reset(); watch.Start();
+            _dataLock.EnterReadLock();
+            data = new AntMovieCatalog(); 
+            try
             {
-              LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.ReadWrite");
-              lock (data)
+              using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
               {
-                foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData(); // dataTable.Rows.Clear();
-                //// synchronize dataset with hierarchical XMLdoc
-                //xmlDoc = new XmlDataDocument(data);
-                //xmlDoc.Load(fs);
-                data.ReadXml(fs);
-                foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+                LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.ReadWrite");
+                // lock (data)
+                {
+                  foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData(); // dataTable.Rows.Clear();
+                  //// synchronize dataset with hierarchical XMLdoc
+                  //xmlDoc = new XmlDataDocument(data);
+                  //xmlDoc.Load(fs);
+                  data.ReadXml(fs);
+                  foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
+                }
+                fs.Close();
+                LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");
               }
-              fs.Close();
-              LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");
+              success = true;
+              //foreach (DataTable dataTable in data.Tables)
+              //{
+              //  LogMyFilms.Debug("initData() - loaded table '" + dataTable + "'");
+              //  foreach (var childrelation in dataTable.ChildRelations) LogMyFilms.Debug("initData() - childrelation: '" + childrelation + "'");
+              //}
             }
-            success = true;
-            //foreach (DataTable dataTable in data.Tables)
+            catch (Exception e)
+            {
+              success = false;
+              LogMyFilms.Error("LoadMyFilmsFromDisk() : Error reading xml database after " + data.Movie.Count + " records; error : " + e.Message + ", " + e.StackTrace);
+              if (data.Movie.Count > 0) LogMyFilms.Error("LoadMyFilmsFromDisk() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'");
+              string strOtitle = (data.Movie.Count > 0) ? data.Movie[data.Movie.Count - 1].OriginalTitle : "n/a";
+              throw new Exception("Error reading xml database after " + data.Movie.Count + " records; movie: '" + strOtitle + "'; error : " + e.Message);
+              //LogMyFilms.DebugException("LoadMyFilmsFromDisk()- error reading '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read", ex);
+              // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
+              //throw e;
+            }
+            finally
+            {
+              _dataLock.ExitReadLock();
+            }
+            watch.Stop();
+            LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) + " ms)");
+            #endregion
+
+            CreateOrUpdateCustomsFieldsProperties();
+
+            CreateMissingCustomFieldsEntries();
+
+            #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
+            DateTime now = DateTime.Now;
+            watch.Reset(); watch.Start();
+            IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
+            //data.Movie.BeginLoadData();
+            //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
+            foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
+            {
+              movieRow.BeginEdit();
+              // Convert(Date,'System.DateTime')
+              DateTime added;
+              int iAge = 9999; // set default to 9999 for those, where we do not have date(added) in DB ...
+              // CultureInfo ci = CultureInfo.CurrentCulture;
+              if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
+              {
+                movieRow.DateAdded = added;
+                iAge = (int)now.Subtract(added).TotalDays; // iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
+              }
+              movieRow.AgeAdded = iAge; // sets integer value
+              movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
+              string index = movieRow[MyFilms.conf.StrTitle1].ToString();
+              movieRow.IndexedTitle = (index.Length > 0) ?  index.Substring(0, 1).ToUpper() : "";
+              movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
+              // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
+
+              // Copy CustomFields data ....
+              AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
+              foreach (DataColumn dc in commonColumns)
+              {
+                object temp;
+                if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp;
+              }
+            }
+            //data.EnforceConstraints = true;
+            //data.Movie.EndLoadData();
+            LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc PreAcceptChanges ... (" + (watch.ElapsedMilliseconds) + " ms)");
+            data.Movie.AcceptChanges();
+            watch.Stop();
+            LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
+            #endregion
+
+            #region Other join table tests
+            //watch.Reset(); watch.Start();
+            //var commonColumnsX = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
+            // var onlyCustomFieldColumns = data.CustomFields.Columns.OfType<DataColumn>().Except(data.Movie.Columns.OfType<DataColumn>(), new DataColumnComparer());
+            //tableMoviesExtended = new DataTable();
+            //tableMoviesExtended.Columns.AddRange(
+            //    data.Movie.Columns.OfType<DataColumn>()
+            //    .Union(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer())
+            //    .Select(c => new DataColumn(c.Caption, c.DataType, c.Expression, c.ColumnMapping))
+            //    .ToArray());
+
+            //var rowData2 = data.Movie.AsEnumerable().Join(
+            //    data.CustomFields.AsEnumerable(),
+            //    row => commonColumnsX.Select(col => row[col.Caption]).ToArray(),
+            //    row => commonColumnsX.Select(col => row[col.Caption]).ToArray(),
+            //    (row1, row2) =>
+            //    {
+            //      var row = tableMoviesExtended.NewRow();
+            //      row.ItemArray = tableMoviesExtended.Columns.OfType<DataColumn>().Select(col => row1.Table.Columns.Contains(col.Caption) ? row1[col.Caption] : row2[col.Caption]).ToArray();
+            //      return row;
+            //    },
+            //    new ObjectArrayComparer());
+
+            //foreach (var row in rowData2)
+            //  tableMoviesExtended.Rows.Add(row);
+            //watch.Stop();
+            //foreach (DataColumn dataColumn in tableMoviesExtended.Columns)
+            //  LogMyFilms.Debug("LoadMyFilmsFromDisk() - Table Join version 2 containing Column '" + dataColumn.ToString() + "'");
+
+            //LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy joined data to new datatable version 2 done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+            #endregion
+
+            #region create new enhanced movie rowcollection by joining movie and customfields rows
+            //watch.Reset(); watch.Start();
+            //tableMoviesExtended = SQLOps.Join(data.Movie, data.CustomFields, data.Movie.Movie_IdColumn, data.CustomFields.Movie_IdColumn); // Medium - 2 secs
+            //int rows = tableMoviesExtended.Rows.Count;
+            //watch.Stop();
+            //foreach (DataColumn dataColumn in tableMoviesExtended.Columns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - SQLOps.Join() - containing Column '" + dataColumn + "'");
+            //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + rows + "' rows by SQLOps.Join movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+
+            //watch.Reset(); watch.Start();
+            //tableMoviesExtended = GetEnhancedMovies(); // SLOW !!!! > 11 secs for loading movies ...
+            //int irows = tableMoviesExtended.Rows.Count;
+            //watch.Stop();
+            //foreach (DataColumn dataColumn in tableMoviesExtended.Columns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() v1 - containing Column '" + dataColumn + "'");
+            //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + irows + "' rows by joining movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+            #endregion
+
+            #region create new joined movieextended datatable
+            //// create extended movie table ...
+            //watch.Reset(); watch.Start();
+            //using (tableMoviesExtended = data.Movie.Clone()) //using (DataTable targetTable = data.Tables["MovieEnhanced"])
             //{
-            //  LogMyFilms.Debug("initData() - loaded table '" + dataTable + "'");
-            //  foreach (var childrelation in dataTable.ChildRelations) LogMyFilms.Debug("initData() - childrelation: '" + childrelation + "'");
+            //  var dt2Query = data.CustomFields.Columns.OfType<DataColumn>().Select(dc => new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
+            //  var dt2FilterQuery = from dc in dt2Query.AsEnumerable()
+            //                       where tableMoviesExtended.Columns.Contains(dc.ColumnName) == false
+            //                       select dc;
+            //  tableMoviesExtended.Columns.AddRange(dt2FilterQuery.ToArray());
+            //  // populate the rows ...
+            //  foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
+            //  {
+            //    AntMovieCatalog.MovieRow row = movieRow;
+            //    AntMovieCatalog.CustomFieldsRow customFieldsRow = movieRow.GetCustomFieldsRows()[0];
+            //    var values = movieRow.ItemArray.Concat(customFieldsRow.ItemArray.Where(r2 => row.ItemArray.Contains(r2) == false));
+            //    tableMoviesExtended.Rows.Add((object)values);
+            //  }
+
+            //  //var rowData = from row1 in data.Movie.AsEnumerable()
+            //  //              join row2 in data.CustomFields.AsEnumerable()
+            //  //              on row1.Movie_Id equals row2.Movie_Id
+            //  //              //into mc
+            //  //              //from subcustomfields in mc.DefaultIfEmpty()
+            //  //              //where row2.Movie_Id == 0
+            //  //              select row1.ItemArray.Concat(row2.ItemArray.Where(r2 => row1.ItemArray.Contains(r2) == false)).ToArray();
+            //  //foreach (object[] values in rowData)
+            //  //{
+            //  //  tableMoviesExtended.Rows.Add(values);
+            //  //}
+            //  //tableMoviesExtended.TableName = "MovieEnhanced";
+            //  //data.Tables.Add(tableMoviesExtended);
             //}
+            //foreach (DataColumn column in tableMoviesExtended.Columns)
+            //{
+            //  LogMyFilms.Debug("LoadMyFilmsFromDisk() - 'MovieEnhanced' Columnname = '" + column.ColumnName + "'");
+            //}
+            //watch.Stop();
+            //LogMyFilms.Debug("LoadMyFilmsFromDisk() - JoinTables with '" + tableMoviesExtended.Rows.Count + "' rows done ... (" + (watch.ElapsedMilliseconds) + " ms)");
+
+            //// Copy CustomDataFields to MyFilms Datafields for internal usage
+            //initDataWatch.Reset(); initDataWatch.Start();
+            //foreach (AntMovieCatalog.CustomFieldRow customFieldRow in data.CustomField) // add Customfields Rows to Movie table
+            //{
+            //  DataColumn customfieldcolumn = new DataColumn();
+            //  customfieldcolumn.ColumnName = customFieldRow.Tag;
+            //  switch (customFieldRow.Type) // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
+            //  {
+            //    case "ftString":
+            //      customfieldcolumn.DataType = typeof(string);
+            //      break;
+            //    case "ftInteger":
+            //      customfieldcolumn.DataType = typeof(int);
+            //      break;
+            //    case "ftBoolean":
+            //      customfieldcolumn.DataType = typeof(bool);
+            //      break;
+            //    case "ftDate":
+            //      customfieldcolumn.DataType = typeof(DateTime);
+            //      break;
+            //    default:
+            //      customfieldcolumn.DataType = typeof(string);
+            //      break;
+            //  }
+            //  customfieldcolumn.DefaultValue = customFieldRow.DefaultValue;
+            //  customfieldcolumn.Caption = customFieldRow.Name;
+
+            //  if (!data.Tables["MovieEnhanced"].Columns.Contains(customfieldcolumn.ColumnName))
+            //    data.Tables["MovieEnhanced"].Columns.Add(customfieldcolumn);
+            //  LogMyFilms.Debug("initData() - DynamicCustomField: '" + customFieldRow.Name + "'");
+            //}
+
+            // Copy CustomFields to Movie, if present ...
+            //foreach (DataColumn column in data.CustomFields.Columns)
+            //{
+            //  // add CustomColumns, if not already present
+            //  if (!data.Movie.Columns.Contains(column.ColumnName))
+            //    data.Movie.Columns.Add(column);
+            //}
+
+            //initDataWatch.Reset(); initDataWatch.Start();
+            //try
+            //{
+            //  foreach (AntMovieCatalog.MovieRow movieRow in movies)
+            //  {
+            //    //DataRow customFieldsRow = movieRow.GetCustomFieldsRows()[0]; // get first one, as it's 1:1 relation ...              
+            //    foreach (DataColumn column in data.CustomFields.Columns)
+            //    {
+            //      if (column.ColumnMapping != MappingType.Hidden)
+            //      {
+            //        string value = movieRow.GetCustomFieldsRows()[0][column.ColumnName].ToString();
+            //        movieRow[column.ColumnName] = movieRow.GetCustomFieldsRows()[0][column.ColumnName];
+            //        //movieRow[column.ColumnName] = movieRow.GetCustomFieldsRows()[0][column.ColumnName];
+            //        LogMyFilms.Debug("initData() - movieRow '" + column.ColumnName + "' populated with value '" + value + "'");
+            //      }
+
+            //    }
+            //  }
+            //}
+            //catch (Exception ex)
+            //{
+            //  LogMyFilms.Error("initData() - Error !" + ex.Message + ", tackTrace: " + ex.StackTrace);
+            //}
+            //initDataWatch.Stop();
+            //LogMyFilms.Debug("initData() - CopyColumns done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
+            #endregion
+
+            #region testing joins and views - experimental ...
+            //// create extended movie table ...
+            //DataTable targetTable = data.Movie.Clone();
+            //var dt2Columns = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
+            //    new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
+            //targetTable.Columns.AddRange(dt2Columns.ToArray());
+            //var rowData =
+            //    from row1 in data.Movie.AsEnumerable()
+            //    join row2 in data.CustomFields.AsEnumerable()
+            //        on row1.Field<int>("Movie_ID") equals row2.Field<int>("Movie_ID")
+            //    select row1.ItemArray.Concat(row2.ItemArray).ToArray();
+            //foreach (object[] values in rowData)
+            //  targetTable.Rows.Add(values);
+            //DataRow[] moviesEnhanced = targetTable.Select(MyFilms.conf.StrTitle1 + " not like ''");
+            //watchReadMovies.Stop();
+            //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
+
+            //// create extended movie table ...
+            //watchReadMovies.Reset(); watchReadMovies.Start();
+            //DataTable targetTable = DataTableJoiner(data.Movie, data.CustomFields);
+            //DataRow[] moviesEnhanced = targetTable.Select(MyFilms.conf.StrTitle1 + " not like ''");
+            //watchReadMovies.Stop();
+            //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms) - Records: '" + moviesEnhanced.Length + "'");
+            //return moviesEnhanced;
+            #endregion
+
           }
-          catch (Exception e)
-          {
-            success = false;
-            LogMyFilms.Error("LoadMyFilmsFromDisk() : Error reading xml database after " + data.Movie.Count + " records; error : " + e.Message + ", " + e.StackTrace);
-            if (data.Movie.Count > 0) LogMyFilms.Error("LoadMyFilmsFromDisk() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'");
-            string strOtitle = (data.Movie.Count > 0) ? data.Movie[data.Movie.Count - 1].OriginalTitle : "n/a";
-            throw new Exception("Error reading xml database after " + data.Movie.Count + " records; movie: '" + strOtitle + "'; error : " + e.Message);
-            //LogMyFilms.DebugException("LoadMyFilmsFromDisk()- error reading '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read", ex);
-            // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
-            //throw e;
-          }
-          finally
-          {
-            _dataLock.ExitReadLock();
-          }
-          watch.Stop();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) + " ms)");
-          #endregion
-
-          CreateOrUpdateCustomsFieldsProperties();
-
-          CreateMissingCustomFieldsEntries();
-
-          #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
-          DateTime now = DateTime.Now;
-          watch.Reset(); watch.Start();
-          IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
-          //data.Movie.BeginLoadData();
-          //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
-          foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
-          {
-            movieRow.BeginEdit();
-            // Convert(Date,'System.DateTime')
-            DateTime added;
-            int iAge = 9999; // set default to 9999 for those, where we do not have date(added) in DB ...
-            // CultureInfo ci = CultureInfo.CurrentCulture;
-            if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
-            {
-              movieRow.DateAdded = added;
-              iAge = (int)now.Subtract(added).TotalDays; // iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
-            }
-            movieRow.AgeAdded = iAge; // sets integer value
-            movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
-            string index = movieRow[MyFilms.conf.StrTitle1].ToString();
-            movieRow.IndexedTitle = (index.Length > 0) ?  index.Substring(0, 1).ToUpper() : "";
-            movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
-            // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
-
-            // Copy CustomFields data ....
-            AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-            foreach (DataColumn dc in commonColumns)
-            {
-              object temp;
-              if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp;
-            }
-          }
-          //data.EnforceConstraints = true;
-          //data.Movie.EndLoadData();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc PreAcceptChanges ... (" + (watch.ElapsedMilliseconds) + " ms)");
-          data.Movie.AcceptChanges();
-          watch.Stop();
-          LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
-          #endregion
-
-          #region Other join table tests
-          //watch.Reset(); watch.Start();
-          //var commonColumnsX = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
-          // var onlyCustomFieldColumns = data.CustomFields.Columns.OfType<DataColumn>().Except(data.Movie.Columns.OfType<DataColumn>(), new DataColumnComparer());
-          //tableMoviesExtended = new DataTable();
-          //tableMoviesExtended.Columns.AddRange(
-          //    data.Movie.Columns.OfType<DataColumn>()
-          //    .Union(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer())
-          //    .Select(c => new DataColumn(c.Caption, c.DataType, c.Expression, c.ColumnMapping))
-          //    .ToArray());
-
-          //var rowData2 = data.Movie.AsEnumerable().Join(
-          //    data.CustomFields.AsEnumerable(),
-          //    row => commonColumnsX.Select(col => row[col.Caption]).ToArray(),
-          //    row => commonColumnsX.Select(col => row[col.Caption]).ToArray(),
-          //    (row1, row2) =>
-          //    {
-          //      var row = tableMoviesExtended.NewRow();
-          //      row.ItemArray = tableMoviesExtended.Columns.OfType<DataColumn>().Select(col => row1.Table.Columns.Contains(col.Caption) ? row1[col.Caption] : row2[col.Caption]).ToArray();
-          //      return row;
-          //    },
-          //    new ObjectArrayComparer());
-
-          //foreach (var row in rowData2)
-          //  tableMoviesExtended.Rows.Add(row);
-          //watch.Stop();
-          //foreach (DataColumn dataColumn in tableMoviesExtended.Columns)
-          //  LogMyFilms.Debug("LoadMyFilmsFromDisk() - Table Join version 2 containing Column '" + dataColumn.ToString() + "'");
-
-          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy joined data to new datatable version 2 done ... (" + (watch.ElapsedMilliseconds) + " ms)");
-          #endregion
-
-          #region create new enhanced movie rowcollection by joining movie and customfields rows
-          //watch.Reset(); watch.Start();
-          //tableMoviesExtended = SQLOps.Join(data.Movie, data.CustomFields, data.Movie.Movie_IdColumn, data.CustomFields.Movie_IdColumn); // Medium - 2 secs
-          //int rows = tableMoviesExtended.Rows.Count;
-          //watch.Stop();
-          //foreach (DataColumn dataColumn in tableMoviesExtended.Columns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - SQLOps.Join() - containing Column '" + dataColumn + "'");
-          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + rows + "' rows by SQLOps.Join movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
-
-          //watch.Reset(); watch.Start();
-          //tableMoviesExtended = GetEnhancedMovies(); // SLOW !!!! > 11 secs for loading movies ...
-          //int irows = tableMoviesExtended.Rows.Count;
-          //watch.Stop();
-          //foreach (DataColumn dataColumn in tableMoviesExtended.Columns) LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() v1 - containing Column '" + dataColumn + "'");
-          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + irows + "' rows by joining movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
-          #endregion
-
-          #region create new joined movieextended datatable
-          //// create extended movie table ...
-          //watch.Reset(); watch.Start();
-          //using (tableMoviesExtended = data.Movie.Clone()) //using (DataTable targetTable = data.Tables["MovieEnhanced"])
-          //{
-          //  var dt2Query = data.CustomFields.Columns.OfType<DataColumn>().Select(dc => new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
-          //  var dt2FilterQuery = from dc in dt2Query.AsEnumerable()
-          //                       where tableMoviesExtended.Columns.Contains(dc.ColumnName) == false
-          //                       select dc;
-          //  tableMoviesExtended.Columns.AddRange(dt2FilterQuery.ToArray());
-          //  // populate the rows ...
-          //  foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
-          //  {
-          //    AntMovieCatalog.MovieRow row = movieRow;
-          //    AntMovieCatalog.CustomFieldsRow customFieldsRow = movieRow.GetCustomFieldsRows()[0];
-          //    var values = movieRow.ItemArray.Concat(customFieldsRow.ItemArray.Where(r2 => row.ItemArray.Contains(r2) == false));
-          //    tableMoviesExtended.Rows.Add((object)values);
-          //  }
-
-          //  //var rowData = from row1 in data.Movie.AsEnumerable()
-          //  //              join row2 in data.CustomFields.AsEnumerable()
-          //  //              on row1.Movie_Id equals row2.Movie_Id
-          //  //              //into mc
-          //  //              //from subcustomfields in mc.DefaultIfEmpty()
-          //  //              //where row2.Movie_Id == 0
-          //  //              select row1.ItemArray.Concat(row2.ItemArray.Where(r2 => row1.ItemArray.Contains(r2) == false)).ToArray();
-          //  //foreach (object[] values in rowData)
-          //  //{
-          //  //  tableMoviesExtended.Rows.Add(values);
-          //  //}
-          //  //tableMoviesExtended.TableName = "MovieEnhanced";
-          //  //data.Tables.Add(tableMoviesExtended);
-          //}
-          //foreach (DataColumn column in tableMoviesExtended.Columns)
-          //{
-          //  LogMyFilms.Debug("LoadMyFilmsFromDisk() - 'MovieEnhanced' Columnname = '" + column.ColumnName + "'");
-          //}
-          //watch.Stop();
-          //LogMyFilms.Debug("LoadMyFilmsFromDisk() - JoinTables with '" + tableMoviesExtended.Rows.Count + "' rows done ... (" + (watch.ElapsedMilliseconds) + " ms)");
-
-          //// Copy CustomDataFields to MyFilms Datafields for internal usage
-          //initDataWatch.Reset(); initDataWatch.Start();
-          //foreach (AntMovieCatalog.CustomFieldRow customFieldRow in data.CustomField) // add Customfields Rows to Movie table
-          //{
-          //  DataColumn customfieldcolumn = new DataColumn();
-          //  customfieldcolumn.ColumnName = customFieldRow.Tag;
-          //  switch (customFieldRow.Type) // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
-          //  {
-          //    case "ftString":
-          //      customfieldcolumn.DataType = typeof(string);
-          //      break;
-          //    case "ftInteger":
-          //      customfieldcolumn.DataType = typeof(int);
-          //      break;
-          //    case "ftBoolean":
-          //      customfieldcolumn.DataType = typeof(bool);
-          //      break;
-          //    case "ftDate":
-          //      customfieldcolumn.DataType = typeof(DateTime);
-          //      break;
-          //    default:
-          //      customfieldcolumn.DataType = typeof(string);
-          //      break;
-          //  }
-          //  customfieldcolumn.DefaultValue = customFieldRow.DefaultValue;
-          //  customfieldcolumn.Caption = customFieldRow.Name;
-
-          //  if (!data.Tables["MovieEnhanced"].Columns.Contains(customfieldcolumn.ColumnName))
-          //    data.Tables["MovieEnhanced"].Columns.Add(customfieldcolumn);
-          //  LogMyFilms.Debug("initData() - DynamicCustomField: '" + customFieldRow.Name + "'");
-          //}
-
-          // Copy CustomFields to Movie, if present ...
-          //foreach (DataColumn column in data.CustomFields.Columns)
-          //{
-          //  // add CustomColumns, if not already present
-          //  if (!data.Movie.Columns.Contains(column.ColumnName))
-          //    data.Movie.Columns.Add(column);
-          //}
-
-          //initDataWatch.Reset(); initDataWatch.Start();
-          //try
-          //{
-          //  foreach (AntMovieCatalog.MovieRow movieRow in movies)
-          //  {
-          //    //DataRow customFieldsRow = movieRow.GetCustomFieldsRows()[0]; // get first one, as it's 1:1 relation ...              
-          //    foreach (DataColumn column in data.CustomFields.Columns)
-          //    {
-          //      if (column.ColumnMapping != MappingType.Hidden)
-          //      {
-          //        string value = movieRow.GetCustomFieldsRows()[0][column.ColumnName].ToString();
-          //        movieRow[column.ColumnName] = movieRow.GetCustomFieldsRows()[0][column.ColumnName];
-          //        //movieRow[column.ColumnName] = movieRow.GetCustomFieldsRows()[0][column.ColumnName];
-          //        LogMyFilms.Debug("initData() - movieRow '" + column.ColumnName + "' populated with value '" + value + "'");
-          //      }
-
-          //    }
-          //  }
-          //}
-          //catch (Exception ex)
-          //{
-          //  LogMyFilms.Error("initData() - Error !" + ex.Message + ", tackTrace: " + ex.StackTrace);
-          //}
-          //initDataWatch.Stop();
-          //LogMyFilms.Debug("initData() - CopyColumns done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
-          #endregion
-
-          #region testing joins and views - experimental ...
-          //// create extended movie table ...
-          //DataTable targetTable = data.Movie.Clone();
-          //var dt2Columns = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
-          //    new DataColumn(dc.ColumnName, dc.DataType, dc.Expression, dc.ColumnMapping));
-          //targetTable.Columns.AddRange(dt2Columns.ToArray());
-          //var rowData =
-          //    from row1 in data.Movie.AsEnumerable()
-          //    join row2 in data.CustomFields.AsEnumerable()
-          //        on row1.Field<int>("Movie_ID") equals row2.Field<int>("Movie_ID")
-          //    select row1.ItemArray.Concat(row2.ItemArray).ToArray();
-          //foreach (object[] values in rowData)
-          //  targetTable.Rows.Add(values);
-          //DataRow[] moviesEnhanced = targetTable.Select(MyFilms.conf.StrTitle1 + " not like ''");
-          //watchReadMovies.Stop();
-          //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
-
-          //// create extended movie table ...
-          //watchReadMovies.Reset(); watchReadMovies.Start();
-          //DataTable targetTable = DataTableJoiner(data.Movie, data.CustomFields);
-          //DataRow[] moviesEnhanced = targetTable.Select(MyFilms.conf.StrTitle1 + " not like ''");
-          //watchReadMovies.Stop();
-          //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms) - Records: '" + moviesEnhanced.Length + "'");
-          //return moviesEnhanced;
-          #endregion
-
           return success;
         }
 
@@ -1450,7 +1454,10 @@ namespace MyFilmsPlugin.MyFilms
         {
           if (!File.Exists(StrFileXml)) throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
           Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
-          bool success = LoadMyFilmsFromDisk(StrFileXml);
+          // lock (data)
+          {
+            bool success = LoadMyFilmsFromDisk(StrFileXml);
+          }
           watchReadMovies.Stop();
           LogMyFilms.Debug("LoadMyFilms() - Finished ... (success = '" + success + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
         }
@@ -1466,7 +1473,6 @@ namespace MyFilmsPlugin.MyFilms
 
           if (data == null) return false;
           if (timeout == 0) timeout = 10000; // default is 10 secs
-          CopyExtendedFieldsToCustomFields(false);
           LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'"); 
           if (_dataLock.TryEnterWriteLock(timeout))
           {
