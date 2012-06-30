@@ -3045,7 +3045,7 @@ Public Class AntProcessor
         Try
             If CurrentSettings.Overwrite_XML_File = True Then
                 'XMLDoc.Save(CurrentSettings.XML_File)
-                Dim xmlFile As New FileStream(CurrentSettings.XML_File, FileMode.Open, FileAccess.Write, FileShare.Read)
+                Dim xmlFile As New FileStream(CurrentSettings.XML_File, FileMode.Open, FileAccess.Write, FileShare.None)
                 xmlFile.SetLength(0)
                 XMLDoc.Save(xmlFile)
                 xmlFile.Close()
