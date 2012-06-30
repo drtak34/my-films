@@ -12923,10 +12923,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       MyFilmsDetail.clearGUIProperty("statusmessage");
 
-      Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
+      if (GetID == ID_MyFilms)
+      {
+        if (!string.IsNullOrEmpty(Configuration.CurrentConfig))
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
 
-      Load_Config(Configuration.CurrentConfig, true, null);
-      Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        Load_Config(Configuration.CurrentConfig, true, null);
+        Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+      }
+
       MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
       if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
       {
