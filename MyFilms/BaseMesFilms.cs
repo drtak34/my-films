@@ -649,27 +649,24 @@ namespace MyFilmsPlugin.MyFilms
         private static bool LoadMyFilmsFromDisk(string catalogfile)
         {
           bool success = false;
-          #region load catalog from file into dataset
           LogMyFilms.Debug("LoadMyFilmsFromDisk()- Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
-          //if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
+          // if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
 
-          _dataLock.EnterReadLock();
+          _dataLock.EnterWriteLock();
           data = new AntMovieCatalog();
           try
           {
+            #region load catalog from file into dataset
             watch.Reset(); watch.Start();
             using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
               LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.ReadWrite");
-              // lock (_locker)
-              {
-                foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData(); // dataTable.Rows.Clear();
-                //// synchronize dataset with hierarchical XMLdoc
-                //xmlDoc = new XmlDataDocument(data);
-                //xmlDoc.Load(fs);
-                data.ReadXml(fs);
-                foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
-              }
+              foreach (DataTable dataTable in data.Tables) dataTable.BeginLoadData(); // dataTable.Rows.Clear();
+              //// synchronize dataset with hierarchical XMLdoc
+              //xmlDoc = new XmlDataDocument(data);
+              //xmlDoc.Load(fs);
+              data.ReadXml(fs);
+              foreach (DataTable dataTable in data.Tables) dataTable.EndLoadData();
               fs.Close();
               LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" + catalogfile + "' FileStream");
             }
@@ -681,6 +678,7 @@ namespace MyFilmsPlugin.MyFilms
             //}
             watch.Stop();
             LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) + " ms)");
+            #endregion
 
             CreateOrUpdateCustomsFieldsProperties();
 
@@ -922,9 +920,8 @@ namespace MyFilmsPlugin.MyFilms
           }
           finally
           {
-            _dataLock.ExitReadLock();
+            _dataLock.ExitWriteLock();
           }
-          #endregion
 
           return success;
         }
