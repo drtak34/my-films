@@ -1,6 +1,7 @@
 Imports System.Windows.Forms
 Imports Grabber
 Imports Cornerstone.Tools
+Imports System.Xml
 
 Public Class AntRecord
     'Inherits Xml.XmlElement
@@ -2307,17 +2308,35 @@ Public Class AntRecord
     Public Sub SaveProgress()
         'XMLDoc.Save(_XMLFilePath)
 
-        Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read)
-        XMLDoc.Save(xmlFile)
-        xmlFile.SetLength(0)
-        xmlFile.Close()
+        'Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read)
+        'xmlFile.SetLength(0)
+        'XMLDoc.Save(xmlFile)
+        'xmlFile.Close()
 
-        'Using s As Stream = File.OpenWrite(CurrentSettings.XML_File)
-        '    XMLDoc.Save(s)
-        '    s.Close()
-        'End Using
-
+        Try
+            Using fsLock As FileStream = File.Create(LockFilename(_XMLFilePath), 1000, FileOptions.DeleteOnClose) ' create lock file to avoid concurrent writing
+                Using fs As New FileStream(_XMLFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None) ' Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read) ' lock the file for any other use, as we do write to it now !
+                    fs.SetLength(0) ' do not append, owerwrite !
+                    XMLDoc.Save(fs)
+                    fs.Close() ' write buffer and release lock on file (either Flush, Dispose or Close is required)
+                End Using
+            End Using
+            ' retry later 
+        Catch ex As Exception
+        End Try
     End Sub
+
+    Private Shared Function LockFilename(ByVal CatalogFile As String) As String
+        Dim lockerfilename As String = ""
+        Try
+            Dim path As String = System.IO.Path.GetDirectoryName(CatalogFile)
+            Dim filename As String = System.IO.Path.GetFileNameWithoutExtension(CatalogFile)
+            Dim machineName As String = System.Environment.MachineName
+            lockerfilename = path & "\" & filename & "_" & machineName & ".lck"
+        Catch ex As Exception
+        End Try
+        Return lockerfilename
+    End Function
 
 End Class
 
