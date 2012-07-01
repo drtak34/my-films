@@ -6554,21 +6554,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("db.calc.aspectratio.value", log);
             clearGUIProperty("db.calc.imageformat.value", log);
 
-            //for (int j = 1; j < 6; j++)
-            //{
-            //  clearGUIProperty("db.actors.actor" + j + ".name", log);
-            //  clearGUIProperty("db.actors.actor" + j + ".image", log);
-            //}
-            clearGUIProperty("db.actors.actor1.name", log);
-            clearGUIProperty("db.actors.actor1.image", log);
-            clearGUIProperty("db.actors.actor2.name", log);
-            clearGUIProperty("db.actors.actor2.image", log);
-            clearGUIProperty("db.actors.actor3.name", log);
-            clearGUIProperty("db.actors.actor3.image", log);
-            clearGUIProperty("db.actors.actor4.name", log);
-            clearGUIProperty("db.actors.actor4.image", log);
-            clearGUIProperty("db.actors.actor5.name", log);
-            clearGUIProperty("db.actors.actor5.image", log);
+            for (int j = 1; j < 6; j++)
+            {
+              clearGUIProperty("db.actors.actor" + j + ".name", log);
+              clearGUIProperty("db.actors.actor" + j + ".role", log);
+              clearGUIProperty("db.actors.actor" + j + ".image", log);
+            }
 
             clearGUIProperty("user.mastertitle.label", log);
             clearGUIProperty("user.mastertitle.value", log);
@@ -6577,21 +6568,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.secondarytitle.label", log);
             clearGUIProperty("user.secondarytitle.value", log);
             clearGUIProperty("user.secondarytitle.groupname", log);
-            clearGUIProperty("user.item1.label", log);
-            clearGUIProperty("user.item1.field", log);
-            clearGUIProperty("user.item1.value", log);
-            clearGUIProperty("user.item2.label", log);
-            clearGUIProperty("user.item2.field", log);
-            clearGUIProperty("user.item2.value", log);
-            clearGUIProperty("user.item3.label", log);
-            clearGUIProperty("user.item3.field", log);
-            clearGUIProperty("user.item3.value", log);
-            clearGUIProperty("user.item4.label", log);
-            clearGUIProperty("user.item4.field", log);
-            clearGUIProperty("user.item4.value", log);
-            clearGUIProperty("user.item5.label", log);
-            clearGUIProperty("user.item5.field", log);
-            clearGUIProperty("user.item5.value", log);
+
+            for (int j = 1; j < 6; j++)
+            {
+              clearGUIProperty("user.item" + j + ".label", log);
+              clearGUIProperty("user.item" + j + ".field", log);
+              clearGUIProperty("user.item" + j + ".value", log);
+            }
+          
             clearGUIProperty("user.source.value", log);
             clearGUIProperty("user.sourcetrailer.value", log);
             clearGUIProperty("user.sourcetrailer.count", log);
@@ -7102,20 +7086,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 			    LogMyFilms.Debug("Load_Detailed_DB() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
         }
 
-        private static void Load_Detailed_DB_PushActorsToSkin(string actors)
+        private static void Load_Detailed_DB_PushActorsToSkin(string personscontent)
         {
           for (int j = 1; j < 6; j++)
           {
-              clearGUIProperty("db.actors.actor" + j + ".name");
-              clearGUIProperty("db.actors.actor" + j + ".image");
+            clearGUIProperty("db.actors.actor" + j + ".name");
+            clearGUIProperty("db.actors.actor" + j + ".role");
+            clearGUIProperty("db.actors.actor" + j + ".image");
           }
 
-          ArrayList w_tableau = new ArrayList();
-          w_tableau = MyFilms.Search_String(actors);
+          List<DBPersonInfo> w_tableau = new List<DBPersonInfo>();
+          w_tableau = MyFilms.Search_String_Persons(personscontent, false);
           int i = 1;
-          foreach (object t in w_tableau)
+          foreach (DBPersonInfo t in w_tableau)
           {
-            string actorname = t.ToString();
+            string actorname = t.Name;
+            string actorrole = t.Job;
             if (i < 6)
             {
               if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
@@ -7124,6 +7110,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (System.IO.File.Exists(personartworkpath + "\\" + actorname + ".jpg"))
                 {
                   setGUIProperty("db.actors.actor" + i + ".name", actorname);
+                  setGUIProperty("db.actors.actor" + i + ".role", actorrole);
                   setGUIProperty("db.actors.actor" + i + ".image", personartworkpath + "\\" + actorname + ".jpg");
                   i = i + 1;
                 }
@@ -7131,6 +7118,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
               {
                 setGUIProperty("db.actors.actor" + i + ".name", actorname);
+                setGUIProperty("db.actors.actor" + i + ".role", actorrole);
                 i = i + 1;
               }
             }
