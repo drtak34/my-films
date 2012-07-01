@@ -85,6 +85,9 @@
       <focusable>no</focusable>
     </control>
 
+
+<!-- facadeviewcontrols 51 and 52 currently not supported -->
+<!--
     <control>
       <description>Groups - composite control consisting of a list control and a thumbnail panel</description>
       <type>facadeview</type>
@@ -95,6 +98,7 @@
       <type>facadeview</type>
       <id>52</id>
     </control>
+-->
 
   </controls>
 </window>
