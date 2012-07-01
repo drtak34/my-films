@@ -70,7 +70,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\Release\</OutputPath>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE;MP13</DefineConstants>
+    <DefineConstants>TRACE;MP12</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Utils, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">

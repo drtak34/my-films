@@ -240,8 +240,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_DummyFacadeMenu = 40,
       CTRL_DummyFacadeIndex = 41,
       CTRL_ListFilms = 50, // Changed from 1026 to 50 due to meeting MePo Standards - holds film lists and hierarchies
-      CTRL_ListMenu = 51, // added as separate list control for new menu - holds menu and extended menu
-      CTRL_ListViews = 52, // added as separate list control for Views - holds normal and indexed views (groupings)
+      //CTRL_ListMenu = 51, // added as separate list control for new menu - holds menu and extended menu
+      //CTRL_ListViews = 52, // added as separate list control for Views - holds normal and indexed views (groupings)
       CTRL_logos_id2001 = 2001,
       CTRL_logos_id2002 = 2002,
       CTRL_logos_id2003 = 2003,
