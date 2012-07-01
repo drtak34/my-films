@@ -1103,6 +1103,24 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
+<!--
+    <control>
+      <description>Actors 1 Role</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>510</posX>
+      <posY>615</posY>
+      <width>120</width>
+      <align>center</align>
+      <font>font8</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.db.actors.actor1.role</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!string.equals(#myfilms.db.actors.actor1.image,)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
     <control>
       <description>Actors 1 image</description>
       <type>image</type>
@@ -1139,6 +1157,24 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
+<!--
+    <control>
+      <description>Actors 2 Role</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>660</posX>
+      <posY>615</posY>
+      <width>140</width>
+      <align>center</align>
+      <font>font8</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.db.actors.actor2.role</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
     <control>
       <description>Actors 2 image</description>
       <type>image</type>
@@ -1174,6 +1210,24 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
+<!--
+    <control>
+      <description>Actors 3 Role</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>820</posX>
+      <posY>615</posY>
+      <width>140</width>
+      <align>center</align>
+      <font>font8</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.db.actors.actor3.role</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
     <control>
       <description>Actors 3 image</description>
       <type>image</type>
@@ -1209,6 +1263,24 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
+<!--
+    <control>
+      <description>Actors 4 Role</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>980</posX>
+      <posY>615</posY>
+      <width>140</width>
+      <align>center</align>
+      <font>font8</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.db.actors.actor4.role</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
     <control>
       <description>Actors 4 image</description>
       <type>image</type>
@@ -1244,6 +1316,24 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
+<!--
+    <control>
+      <description>Actors 5 Role</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>1140</posX>
+      <posY>615</posY>
+      <width>140</width>
+      <align>center</align>
+      <font>font8</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.db.actors.actor5.role</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
     <control>
       <description>Actors 5 image</description>
       <type>image</type>

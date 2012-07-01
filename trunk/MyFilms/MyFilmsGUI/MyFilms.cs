@@ -4860,6 +4860,67 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return wtab;
     }
 
+    public static List<grabber.DBPersonInfo> Search_String_Persons(string champselect, bool reverseNames)
+    {
+
+      MatchCollection oMatches = oRegex.Matches(champselect);
+      foreach (Match oMatch in oMatches)
+      {
+        champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty));
+      }
+      List<grabber.DBPersonInfo> wtab = new List<grabber.DBPersonInfo>();
+
+      int wi;
+      string[] Sep = conf.ListSeparator;
+      string[] roleSep = conf.RoleSeparator;
+      //char[] SepAsChars; string tS = String.Empty; for (int i = 0; i <= Sep.Length; i++) tS += Sep[i]; SepAsChars = tS.ToCharArray(); string[] arSplit = champselect.Split(SepAsChars, StringSplitOptions.RemoveEmptyEntries);
+      string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
+      string wzone = string.Empty;
+      string wzoneRole = string.Empty;
+      int wzoneIndexPosition;
+      for (wi = 0; wi < arSplit.Length; wi++)
+      {
+        if (arSplit[wi].Length > 0)
+        {
+          // wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim()); // Replaced for performancereasons - HTML cleanup was not necessary and was VERY slow!
+          wzone = arSplit[wi].Replace("  ", " ").Trim();
+          for (int i = 0; i <= 4; i++)
+          {
+            if (roleSep[i].Length > 0)
+            {
+              wzoneIndexPosition = wzone.IndexOf(roleSep[i], StringComparison.OrdinalIgnoreCase); //wzoneIndexPosition = wzone.IndexOf(conf.RoleSeparator[i],StringComparison.OrdinalIgnoreCase);
+
+              if (wzoneIndexPosition == wzone.Length - 1)
+              {
+                wzone = string.Empty;
+                wzoneRole = string.Empty;
+                break;
+              }
+              if (wzoneIndexPosition > 1 && wzoneIndexPosition < wzone.Length)
+              {
+                wzoneRole = wzone.Substring(wzoneIndexPosition + 1).Trim().Trim('(').Trim(')').Replace("as", "").Replace("  ", " ").Trim();
+                wzone = wzone.Substring(0, wzoneIndexPosition).Trim();
+              }
+            }
+          }
+          if (reverseNames && wzone.Contains(" ")) // Reverse Names "Bruce Willis" -> "Willis, Bruce"
+          {
+            wzone = wzone.Substring(wzone.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1) + ", " + wzone.Substring(0, wzone.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase));
+          }
+
+          if (wzone.Length > 0)
+          {
+            grabber.DBPersonInfo person = new grabber.DBPersonInfo();
+            person.Name = wzone;
+            person.Job = wzoneRole;
+            wtab.Add(person);
+          }
+        }
+      }
+      return wtab;
+    }
+
+
     private static bool HasAsciiSubstring(string str, string sub)
     {
       char[] ss = sub.ToCharArray();
