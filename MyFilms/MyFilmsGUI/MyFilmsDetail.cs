@@ -421,7 +421,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (_imdb[0].URL.Length != 0)
                   {
                     IMDBActor imdbActor = new IMDBActor();
+#if MP13
+                    _imdb.GetActorDetails(_imdb[0], out imdbActor);
+#else
                     _imdb.GetActorDetails(_imdb[0], false, out imdbActor);
+#endif
                     if (imdbActor.ThumbnailUrl.Length > 0)
                     {
                       LogMyFilms.Debug("downloadingWorker_DoWork() - IMDB Image found for person '" + f.Name + "', URL = '" + imdbActor.ThumbnailUrl + "' - remaining items: '" + PersonstoDownloadQueue.Count + "'");
@@ -5788,7 +5792,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                   // Add actor to datbbase to get infos in person facades later...
                                   try
                                   {
+#if MP12
                                     int actorId = VideoDatabase.AddActor(imdbActor.Name);
+#else
+                                    int actorId = VideoDatabase.AddActor(null, imdbActor.Name);
+#endif
                                     if (actorId > 0)
                                     {
                                       VideoDatabase.SetActorInfo(actorId, imdbActor);
@@ -5815,7 +5823,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               {
                                 try
                                 {
+#if MP12
                                   int actorId = VideoDatabase.AddActor(imdbActor.Name);
+#else
+                                  int actorId = VideoDatabase.AddActor(null, imdbActor.Name);
+#endif
                                   imdbActor.Name = persondetails.Name;
                                   //IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
                                   //imdbActorMovie.MovieTitle = _movieDetails.Title;
@@ -6105,7 +6117,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static string CreateOrUpdateActor(string name)
         {
-            // Get IMDB images
+          // Get IMDB images
             IMDB _imdb = new IMDB();
             IMDB.IMDBUrl wurl;
             _imdb.FindActor(name);
@@ -6131,11 +6143,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + name + "', path='" + filename1person + "'");
                 // Add actor to datbbase to get infos in person facades later...
+#if MP12
                 int actorId = VideoDatabase.AddActor(imdbActor.Name);
+#else
+                int actorId = VideoDatabase.AddActor(null, imdbActor.Name);
+#endif
                 if (actorId > 0)
                 {
                   VideoDatabase.SetActorInfo(actorId, imdbActor);
-                  //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+                  // VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
 
                   // Deactivated, as downloading not yet working !!!
                   //if (imdbActor.ThumbnailUrl != string.Empty)
@@ -6151,7 +6167,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
+#if MP12
               int actorId = VideoDatabase.AddActor(imdbActor.Name);
+#else
+              int actorId = VideoDatabase.AddActor(null, imdbActor.Name);
+#endif
               imdbActor.Name = name;
               VideoDatabase.SetActorInfo(actorId, imdbActor);
             }
@@ -8137,7 +8157,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 int iidMovie = VideoDatabase.GetMovieId(filename);
                 if (iidMovie >= 0)
                 {
+#if MP12
                     VideoDatabase.GetFiles(iidMovie, ref movies);
+#else
+                    VideoDatabase.GetFilesForMovie(iidMovie, ref movies);
+#endif
+                    #region disabled code
                     //HashSet<string> watchedMovies = new HashSet<string>();
                   
                     //// Stacked movies duration -- taken from Deda, MyVideos
@@ -8195,6 +8220,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //  }
                     //  LogMyFilms.Debug("TotalRuntimeMovie = '" + TotalRuntimeMovie.ToString() + "'");
                     //}
+                    #endregion
 
                     if (g_Player.Player.Duration >= 1)
                     {
@@ -9016,14 +9042,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                     wzone = wzone + "/" + champselect;
             }
-            else
+            else // for actors
             {
                 VideoDatabase.GetMovieInfoById(iidmovie, ref movieDetails);
                 IMDBActor.IMDBActorMovie actorMovie = new IMDBActor.IMDBActorMovie();
                 actorMovie.MovieTitle = movieDetails.Title;
                 actorMovie.Year = movieDetails.Year;
+#if MP12
                 int iiActor = VideoDatabase.AddActor(champselect);
                 VideoDatabase.AddActorToMovie(iidmovie, iiActor);
+#else
+                int iiActor = VideoDatabase.AddActor(string.Empty, champselect);
+                VideoDatabase.AddActorToMovie(iidmovie, iiActor, "actor");
+#endif
                 VideoDatabase.AddActorInfoMovie(iiActor, actorMovie);
                 if (wzone == null)
                     wzone = champselect;
@@ -9104,7 +9135,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (movieDetails.CDLabel.StartsWith("nolabel"))
                     {
                         ArrayList movies = new ArrayList();
+#if MP12
                         VideoDatabase.GetFiles(idMovie, ref movies);
+#else
+                        VideoDatabase.GetFilesForMovie(idMovie, ref movies);
+#endif
                         if (System.IO.File.Exists(/*movieDetails.Path+movieDetails.File*/(string)movies[0]))
                         {
                             cdlabel = MediaPortal.Util.Utils.GetDriveSerial(movieDetails.Path);
