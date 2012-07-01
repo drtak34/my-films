@@ -9240,14 +9240,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //LogMyFilms.Info("Getting actor:{0}", _imdb[index].Title);
                 //_imdb.GetActorDetails(_imdb[index], director, out imdbActor);
 
-#if MP11
-                                //_imdb.GetActorDetails(_imdb[index], out imdbActor);
-#else
-                //_imdb.GetActorDetails(_imdb[index], out imdbActor);
-#endif
-
                 //LogMyFilms.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent);
+#if MP12
                 int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
+#else
+                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
+#endif
                 if (actorId > 0)
                 {
                   MediaPortal.Video.Database.VideoDatabase.SetActorInfo(actorId, imdbActor);
@@ -9265,7 +9263,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               else
               {
-                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(actor);
+#if MP12
+                int actorId = VideoDatabase.AddActor(actor);
+#else
+                int actorId = VideoDatabase.AddActor(null, actor);
+#endif
                 imdbActor.Name = actor;
                 IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
                 //imdbActorMovie.MovieTitle = _movieDetails.Title;
@@ -10066,7 +10068,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       imdb.FindActor(PersonName);
       for (int i = 0; i < imdb.Count; ++i)
       {
+#if MP12
         imdb.GetActorDetails(imdb[i], false, out imdbActor);
+#else
+        imdb.GetActorDetails(imdb[i], out imdbActor);
+#endif
         if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
         {
           break;
@@ -10094,7 +10100,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Log.Debug("IMDBFetcher single actor fetch: url=null or empty for actor {0}", PersonName);
       }
       // Add actor to datbbase to get infos in person facades later...
+#if MP12
       int actorId = VideoDatabase.AddActor(imdbActor.Name);
+#else
+      int actorId = VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
+#endif
       if (actorId > 0)
       {
         VideoDatabase.SetActorInfo(actorId, imdbActor);
@@ -13034,7 +13044,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //List<AntMovieCatalog.PersonRow> persons = new List<AntMovieCatalog.PersonRow>();
       //persons = (from AntMovieCatalog.PersonRow person in ds.Person select person).ToList();
       //persons = ds.Person.Where(x => x.Name == name).ToList();
-      if (ds.Person.Where(x => x.Name == name).ToList().Count == 0)
+      if (ds.Person.Count(x => x.Name == name) == 0)
       {
         AntMovieCatalog.PersonRow person = ds.Person.NewPersonRow();
         person.Name = name;

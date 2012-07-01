@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-#if MP12
+#if MP11
+#else
 using MediaPortal.Common.Utils;
 #endif
 
@@ -37,7 +38,8 @@ using MediaPortal.Common.Utils;
 //[assembly: AssemblyVersion("5.0.2.1332")]
 //[assembly: AssemblyFileVersion("5.0.2.1332")]
 
-#if MP12
+#if MP11
+#else
 [assembly: CompatibleVersion("1.2.100.0", "1.1.6.27644")]
 //[assembly: UsesSubsystem("MP.Config")]
 //[assembly: UsesSubsystem("MP.DB")]
