@@ -268,11 +268,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     [SkinControlAttribute((int)Controls.CTRL_ListFilms)]
     protected GUIFacadeControl facadeFilms;
 
-    [SkinControlAttribute((int)Controls.CTRL_ListMenu)]
-    protected GUIFacadeControl facadeMenu;
+    //[SkinControlAttribute((int)Controls.CTRL_ListMenu)]
+    //protected GUIFacadeControl facadeMenu;
 
-    [SkinControlAttribute((int)Controls.CTRL_ListViews)]
-    protected GUIFacadeControl facadeViews;
+    //[SkinControlAttribute((int)Controls.CTRL_ListViews)]
+    //protected GUIFacadeControl facadeViews;
 
     [SkinControlAttribute((int)Controls.CTRL_logos_id2001)]
     protected GUIImage ImgID2001;
