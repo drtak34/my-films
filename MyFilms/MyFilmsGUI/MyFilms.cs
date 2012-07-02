@@ -399,6 +399,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static bool DebugPropertyLogging { get; set; }
 
+    public static bool SendTraktUpdateMessage { get; set; } // to tell FSwatcher, if Trakt message should be sent
+
     // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
     private string currentSkin = null;
 
@@ -573,6 +575,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Set Variable for FirstTimeView Setup
       InitialStart = true;
+
+      // by default, enable trakt message handling
+      SendTraktUpdateMessage = true;
 
       //Add localized labels for DB Columns
       InitGUIPropertyLabels();
@@ -12754,10 +12759,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.DebugException("FSwatcherChanged()- FSwatcher - problem enabling Raisingevents - Message: '" + ex.Message + "'", ex);
           }
 
-          if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+          if (SendTraktUpdateMessage)
           {
-            ImportComplete();
-            LogMyFilms.Debug("FSwatcherChanged(): Fired 'ImportCompleted' event to trigger sync to trakt page after reloading database content !");
+            if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+            {
+              ImportComplete();
+              LogMyFilms.Debug("FSwatcherChanged(): Fired 'ImportCompleted' event to trigger sync to trakt page after reloading database content !");
+            }
+          }
+          else
+          {
+            LogMyFilms.Debug("FSwatcherChanged(): No 'ImportCompleted' event sent (SendTraktUpdateMessage = '" + SendTraktUpdateMessage + "')"); 
+            SendTraktUpdateMessage = true;
           }
         }
         else

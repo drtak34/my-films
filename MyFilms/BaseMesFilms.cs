@@ -2497,7 +2497,8 @@ namespace MyFilmsPlugin.MyFilms
                   }
                   #endregion
 
-                  #region (re)enable filesystem watcher to notify myfilms on update
+                  #region (re)enable filesystem watcher to notify myfilms on update and disable trakt message handler
+                  MyFilms.SendTraktUpdateMessage = false;
                   try
                   {
                     if (MyFilms.FSwatcher.Path.Length > 0) MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt 
