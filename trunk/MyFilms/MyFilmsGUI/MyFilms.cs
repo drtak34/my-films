@@ -602,6 +602,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MyFilms.DeInit() - Saving Config changes ...");
       XmlSettings.SaveCache();
       BaseMesFilms.CancelMyFilms();
+      CleanOrphanedDBlocks(); // clean orphaned files for all configs if any leftovers
       LogMyFilms.Debug("MyFilms.DeInit() - Shutdown completed...");
     }
 
@@ -3973,7 +3974,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               item.IconImageBig = menuimage;
             }
             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-            this.facadeFilms.Add(item);
+            if (facadeFilms != null) this.facadeFilms.Add(item);
           }
         }
 
@@ -3981,8 +3982,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.Label = GUILocalizeStrings.Get(10798765); // *** show all ***
         item.DVDLabel = "showall";
         item.IsFolder = true;
-        item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected); 
-        facadeFilms.Add(item);
+        item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+        if (facadeFilms != null) facadeFilms.Add(item);
       }
       else
       {
@@ -4001,7 +4002,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.IconImage = menuimage;
           item.IconImageBig = menuimage;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-          this.facadeFilms.Add(item);
+          if (facadeFilms != null) this.facadeFilms.Add(item);
         }
       }
       //if (item != null) item.FreeMemory();
@@ -4044,10 +4045,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  }
       //}
       #endregion
-      
+
+      if (facadeFilms == null) return;
       if (conf.MenuSelectedID == -2) 
         conf.MenuSelectedID = facadeFilms.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
-      else if ((conf.MenuSelectedID > this.facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
+      else if ((conf.MenuSelectedID > facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
         conf.MenuSelectedID = 0;
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedID);
 
@@ -6763,7 +6765,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (reload) // ReLoad MyFilms DB from disk 
         {
           BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
+          // disabled, as there might be trakt writings in the background - we do cleanup on init phase now ! 
+          // MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
           r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
           currentFanartList.Clear(); // as items do change, reset fanart list ...
           #region inform Trakt ro start a sync ...
@@ -12704,7 +12707,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         FSwatcher.EnableRaisingEvents = false;
         LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
 
-        Thread.Sleep(250);
+        Thread.Sleep(2000);
         //FileInfo objFileInfo = new FileInfo(e.FullPath);
         //if (!objFileInfo.Exists) 
         //  return; // ignore the file changed event
@@ -12725,11 +12728,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (success)
         {
-          if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
+          if (GUIWindowManager.ActiveWindow != ID_MyFilms)
           {
             // load dataset
             BaseMesFilms.LoadMyFilms(conf.StrFileXml);
-            MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
+            // disabled - we do cleanup on init phase now - and there might be writings in progress by Trakt API !
+            // MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
             // (re)populate films
             r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
           }
@@ -12740,7 +12744,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
-          FSwatcher.EnableRaisingEvents = true;
+
+          try
+          {
+            if (FSwatcher.Path.Length > 0) FSwatcher.EnableRaisingEvents = true;
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.DebugException("FSwatcherChanged()- FSwatcher - problem enabling Raisingevents - Message: '" + ex.Message + "'", ex);
+          }
+
           if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
           {
             ImportComplete();
@@ -12814,7 +12827,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 // reload data, as it might have changed while sleeping
                 BaseMesFilms.LoadMyFilms(conf.StrFileXml); // load dataset
-                MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
+                // disabled, we do it only on init phase!
+                // MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
                 r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // (re)populate films
               }
               else

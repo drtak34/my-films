@@ -30,6 +30,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Linq;
   using System.Net;
   using System.Diagnostics;
+  using System.Runtime.InteropServices;
   using System.Text;
 
   using MediaPortal.Configuration;
@@ -865,29 +866,32 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
         #endregion
 
-
         public static bool IsFileUsedbyAnotherProcess(string filename)
         {
-          bool inUse = true;
           try
           {
+            // File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read); // this could also be used ?
             using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
               if (fs.CanRead)
               {
                 fs.Close();
-                inUse = false;
+                return false;
               }
             }
-
-            // File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read); // this could also be used ?
           }
-          catch (System.IO.IOException exp)
+          catch (System.IO.IOException)
           {
-            LogMyFilms.Debug("IsFileUsedbyAnotherProcess() - cannot open file: '" + exp.Message + "'");
+            // LogMyFilms.DebugException("IsFileUsedbyAnotherProcess() - cannot open file: '" + exp.Message + "'", exp);
             return true;
           }
-          return inUse;
+          return true;
+        }
+
+        public static bool IsFileLocked(IOException exception)
+        {
+          int errorCode = Marshal.GetHRForException(exception) & ((1 << 16) - 1);
+          return errorCode == 32 || errorCode == 33;
         }
 
         static bool FileInUse(string path)
@@ -904,7 +908,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           catch (IOException ex)
           {
             //check if message is for a File IO
-            string __message = ex.Message.ToString();
+            string __message = ex.Message;
             if (__message.Contains("The process cannot access the file"))
               return true;
             else
