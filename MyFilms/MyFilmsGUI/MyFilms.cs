@@ -5166,8 +5166,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + strStartLetter + ".png";
       if (!File.Exists(IndexThumb)) IndexThumb = GUIGraphicsContext.Skin + @"\Media\alpha\" + "Logo leer" + ".png";
       item.ThumbnailImage = IndexThumb;
-      //item.IconImage = IndexThumb;
-      //item.IconImageBig = IndexThumb;
+      // disable the following two, if you don't want index thumbs in list view
+      item.IconImage = IndexThumb;
+      item.IconImageBig = IndexThumb;
       return true;
     }
 
