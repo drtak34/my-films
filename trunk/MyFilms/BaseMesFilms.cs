@@ -2329,244 +2329,269 @@ namespace MyFilmsPlugin.MyFilms
 
     public void Commit()
     {
+      DoCommit(); 
+      //new System.Threading.Thread(delegate()
+      //{
+      //  try
+      //  {
+      //    DoCommit();
+      //  }
+      //  catch (Exception)
+      //  {
+          
+      //  }
+      //  finally
+      //  {
+          
+      //  }
+      //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+      //  {
+      //    // this will be executed after background thread finished
+      //    return 0;
+      //  }, 0, 0, null);
+      //}) { Name = "API-Commit", IsBackground = true }.Start();
+      //return;
+    }
+
+    private void DoCommit()
+    {
       AntMovieCatalog dataImport = new AntMovieCatalog();
 
       using (XmlSettings XmlConfig = new XmlSettings(MediaPortal.Configuration.Config.GetFile(MediaPortal.Configuration.Config.Dir.Config, "MyFilms.xml")))
       {
-          #region variables
-          string config = _mConfig; // MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
-          string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
-          string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
-          string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
-          bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
-          string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
-          bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
-          string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
-          string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
-          string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
-          IEnumerable<DataColumn> commonColumns = dataImport.Movie.Columns.OfType<DataColumn>().Intersect(dataImport.CustomFields.Columns.OfType<DataColumn>(), new BaseMesFilms.DataColumnComparer());
-          #endregion
+        #region variables
+        string config = _mConfig; // MyFilmsGUI.Configuration tmpconf = new MyFilmsGUI.Configuration(config, true, null);
+        string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+        string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
+        string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+        bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+        string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+        bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
+        string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
+        string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
+        string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
+        IEnumerable<DataColumn> commonColumns = dataImport.Movie.Columns.OfType<DataColumn>().Intersect(dataImport.CustomFields.Columns.OfType<DataColumn>(), new BaseMesFilms.DataColumnComparer());
+        #endregion
 
-          #region sanity checks
-          if (FileType != "0" && FileType != "10")
+        #region sanity checks
+        if (FileType != "0" && FileType != "10")
+        {
+          if (!string.IsNullOrEmpty(CatalogTmp))
+            Catalog = CatalogTmp;
+          else if (!string.IsNullOrEmpty(Catalog) && Catalog.Contains("\\"))
           {
-            if (!string.IsNullOrEmpty(CatalogTmp))
-              Catalog = CatalogTmp;
-            else if (!string.IsNullOrEmpty(Catalog) && Catalog.Contains("\\"))
-            {
-              string Path = System.IO.Path.GetDirectoryName(Catalog);
-              Catalog = Path + "\\" + Catalog.Substring(Catalog.LastIndexOf(@"\") + 1, Catalog.Length - Catalog.LastIndexOf(@"\") - 5) + "_tmp.xml";
-            }
-            else
-            {
-              LogMyFilms.Debug("Catalog Type is readonly (EC) - tmp-Catalog not found - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-              return;
-            }
+            string Path = System.IO.Path.GetDirectoryName(Catalog);
+            Catalog = Path + "\\" + Catalog.Substring(Catalog.LastIndexOf(@"\") + 1, Catalog.Length - Catalog.LastIndexOf(@"\") - 5) + "_tmp.xml";
           }
-          LogMyFilms.Debug("Commit() : TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-          LogMyFilms.Debug("Commit() : Update requested for Number = '" + _mID + "', Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Watched = '" + _mIWatched + "', Rating = '" + _mFRating + "', RatingUser = '" + _mFRatingUser + "', CategoryTrakt = '" + GetStringValue(_mStrCategoryTrakt) + "'");
-
-          if (!System.IO.File.Exists(Catalog)) return;
-          
-          if (!TraktEnabled)
+          else
           {
-            LogMyFilms.Debug("Trakt not enabled for this config - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+            LogMyFilms.Debug("Catalog Type is readonly (EC) - tmp-Catalog not found - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
             return;
           }
-          #endregion
+        }
+        LogMyFilms.Debug("Commit() : TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+        LogMyFilms.Debug("Commit() : Update requested for Number = '" + _mID + "', Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Watched = '" + _mIWatched + "', Rating = '" + _mFRating + "', RatingUser = '" + _mFRatingUser + "', CategoryTrakt = '" + GetStringValue(_mStrCategoryTrakt) + "'");
 
-          #region save changes via memory update to disk
-          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
-          int i = 0;
-          bool success = false; // result of update operation
+        if (!System.IO.File.Exists(Catalog)) return;
 
-          while (!success && i < maxretries)
+        if (!TraktEnabled)
+        {
+          LogMyFilms.Debug("Trakt not enabled for this config - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+          return;
+        }
+        #endregion
+
+        #region save changes via memory update to disk
+        int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+        int i = 0;
+        bool success = false; // result of update operation
+
+        while (!success && i < maxretries)
+        {
+          // first check, if there is a global manual lock
+          if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
           {
-            // first check, if there is a global manual lock
-            if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
+            MyFilmsDetail.SetGlobalLock(true, Catalog);
+            if (BaseMesFilms._dataLock.TryEnterWriteLock(10000))
             {
-              MyFilmsDetail.SetGlobalLock(true, Catalog);
-              if (BaseMesFilms._dataLock.TryEnterWriteLock(10000))
+              try
               {
-                try
+                #region read xml file from disk to memory
+                dataImport.Clear();
+                using (FileStream fs = new FileStream(Catalog, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                  #region read xml file from disk to memory
-                  dataImport.Clear();
-                  using (FileStream fs = new FileStream(Catalog, FileMode.Open, FileAccess.Read, FileShare.Read))
+                  //LogMyFilms.Debug("Commit() - opening '" + Catalog + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+                  foreach (DataTable dataTable in dataImport.Tables) dataTable.BeginLoadData();
+                  dataImport.ReadXml(fs);
+                  foreach (DataTable dataTable in dataImport.Tables) dataTable.EndLoadData();
+                  fs.Close();
+                  //LogMyFilms.Debug("Commit()- closing  '" + Catalog + "' FileStream");
+                }
+
+                DataRow[] results = dataImport.Movie.Select(StrDfltSelect + "Number" + " = " + "'" + _mID + "'", "OriginalTitle" + " " + "ASC"); // if (results.Length != 1) continue;
+                //AntMovieCatalog.MovieRow[] results = dataImport.Movie.Where(m => m.Number == _mID).ToList();
+                #endregion
+
+                if (results.Length != 1) LogMyFilms.Warn("Commit() - Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+
+                #region update all movie records in memory
+                foreach (AntMovieCatalog.MovieRow sr in results)
+                {
+                  // bool updateRequired = false;
+
+                  #region Copy CustomFields data ....
+                  AntMovieCatalog.CustomFieldsRow customFields = null;
+                  if (sr.GetCustomFieldsRows().Length > 0)
                   {
-                    //LogMyFilms.Debug("Commit() - opening '" + Catalog + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
-                    foreach (DataTable dataTable in dataImport.Tables) dataTable.BeginLoadData();
-                    dataImport.ReadXml(fs);
-                    foreach (DataTable dataTable in dataImport.Tables) dataTable.EndLoadData();
-                    fs.Close();
-                    //LogMyFilms.Debug("Commit()- closing  '" + Catalog + "' FileStream");
-                  }
+                    customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
 
-                  DataRow[] results = dataImport.Movie.Select(StrDfltSelect + "Number" + " = " + "'" + _mID + "'", "OriginalTitle" + " " + "ASC"); // if (results.Length != 1) continue;
-                  //AntMovieCatalog.MovieRow[] results = dataImport.Movie.Where(m => m.Number == _mID).ToList();
-                  #endregion
-
-                  if (results.Length != 1) LogMyFilms.Warn("Commit() - Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-
-                  #region update all movie records in memory
-                  foreach (AntMovieCatalog.MovieRow sr in results)
-                  {
-                    // bool updateRequired = false;
-
-                    #region Copy CustomFields data ....
-                    AntMovieCatalog.CustomFieldsRow customFields = null;
-                    if (sr.GetCustomFieldsRows().Length > 0)
-                    {
-                      customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-
-                      foreach (DataColumn dc in commonColumns)
-                      {
-                        object temp;
-                        if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName])) sr[dc.ColumnName] = temp;
-                      }
-                    }
-                    else // create CustomFields Element, if not existing ...
-                    {
-                      customFields = dataImport.CustomFields.NewCustomFieldsRow();
-                      customFields.SetParentRow(sr);
-                      dataImport.CustomFields.AddCustomFieldsRow(customFields);
-                    }
-                    #endregion
-
-                    #region CategoryTrakt
-                    if (sr.IsCategoryTraktNull() || sr.CategoryTrakt != GetStringValue(_mStrCategoryTrakt))
-                    {
-                      // updateRequired = true;
-                      LogMyFilms.Debug("Commit() - Updating Field 'CategoryTrakt' from '" + ((!sr.IsCategoryTraktNull()) ? sr.CategoryTrakt : "") + "' to '" + GetStringValue(_mStrCategoryTrakt) + "'");
-                      sr.CategoryTrakt = GetStringValue(_mStrCategoryTrakt);
-                    }
-                    #endregion
-
-                    #region site rating
-                    if (_mFRating > 0) sr.Rating = (decimal)_mFRating;
-                    #endregion
-
-                    #region watched status
-                    string oldWatchedString = sr[WatchedField].ToString();
-                    if (!EnhancedWatchedStatusHandling)
-                    {
-                      // watched
-                      if (_mIWatched)
-                        sr[WatchedField] = "true";
-                      else
-                        sr[WatchedField] = GlobalUnwatchedOnlyValue;
-                      // user rating
-                      if (_mFRatingUser > 0) sr.RatingUser = (decimal)_mFRatingUser;
-                    }
-                    else
-                    {
-                      string oldEnhancedWatchedValue = sr[WatchedField].ToString();
-                      string newEnhancedWatchedValue = "";
-
-                      // watched
-                      if (!string.IsNullOrEmpty(_mUsername))
-                        newEnhancedWatchedValue = NewEnhancedWatchValue(oldEnhancedWatchedValue, _mUsername, _mIWatched, _mIWatchedCount, _mFRatingUser);
-                      else
-                        newEnhancedWatchedValue = NewEnhancedWatchValue(oldEnhancedWatchedValue, UserProfileName, _mIWatched, _mIWatchedCount, _mFRatingUser);
-                      sr[WatchedField] = newEnhancedWatchedValue;
-                      // "commmon" user rating
-                      if (_mFRatingUser > 0) sr.RatingUser = (decimal)_mFRatingUser;
-                    }
-                    if (sr[WatchedField].ToString().ToLower() != oldWatchedString.ToLower())
-                      LogMyFilms.Debug("Commit() - Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField] + "', WatchedCount = '" + _mIWatchedCount + "', (user)Rating = '" + _mFRatingUser + "', (site)Rating = '" + _mFRating + "'");
-                    #endregion
-
-                    #region imdb number
-                    string oldIMDB = (sr.IsIMDB_IdNull()) ? "" : sr.IMDB_Id;
-                    if (!string.IsNullOrEmpty(_mStrIMDBNumber))
-                      sr.IMDB_Id = _mStrIMDBNumber;
-                    if (sr.IMDB_Id != oldIMDB)
-                      LogMyFilms.Debug("Commit() - Updating 'IMDB_Id' from '" + oldIMDB + "' to '" + sr.IMDB_Id + "'");
-                    #endregion
-
-                    #region copy data to customfields ...
                     foreach (DataColumn dc in commonColumns)
                     {
                       object temp;
-                      if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = sr[dc.ColumnName]))
-                      {
-                        customFields[dc.ColumnName] = temp;
-                      }
+                      if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName])) sr[dc.ColumnName] = temp;
                     }
-                    #endregion
+                  }
+                  else // create CustomFields Element, if not existing ...
+                  {
+                    customFields = dataImport.CustomFields.NewCustomFieldsRow();
+                    customFields.SetParentRow(sr);
+                    dataImport.CustomFields.AddCustomFieldsRow(customFields);
                   }
                   #endregion
 
-                  #region (re)enable filesystem watcher to notify myfilms on update and disable trakt message handler
-                  MyFilms.SendTraktUpdateMessage = false;
-                  try
+                  #region CategoryTrakt
+                  if (sr.IsCategoryTraktNull() || sr.CategoryTrakt != GetStringValue(_mStrCategoryTrakt))
                   {
-                    if (MyFilms.FSwatcher.Path.Length > 0) MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt 
-                  }
-                  catch (Exception ex)
-                  {
-                    LogMyFilms.DebugException("Commit()- FSwatcher - problem enabling Raisingevents - Message: '" + ex.Message + "'", ex);
+                    // updateRequired = true;
+                    LogMyFilms.Debug("Commit() - Updating Field 'CategoryTrakt' from '" + ((!sr.IsCategoryTraktNull()) ? sr.CategoryTrakt : "") + "' to '" + GetStringValue(_mStrCategoryTrakt) + "'");
+                    sr.CategoryTrakt = GetStringValue(_mStrCategoryTrakt);
                   }
                   #endregion
 
-                  #region write xml file
-                  using (FileStream fsTmp = System.IO.File.Create(Catalog.Replace(".xml", ".tmp"), 1000, FileOptions.DeleteOnClose)) // make sure, only one process is writing to file !
+                  #region site rating
+                  if (_mFRating > 0) sr.Rating = (decimal)_mFRating;
+                  #endregion
+
+                  #region watched status
+                  string oldWatchedString = sr[WatchedField].ToString();
+                  if (!EnhancedWatchedStatusHandling)
                   {
-                    using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                    // watched
+                    if (_mIWatched)
+                      sr[WatchedField] = "true";
+                    else
+                      sr[WatchedField] = GlobalUnwatchedOnlyValue;
+                    // user rating
+                    if (_mFRatingUser > 0) sr.RatingUser = (decimal)_mFRatingUser;
+                  }
+                  else
+                  {
+                    string oldEnhancedWatchedValue = sr[WatchedField].ToString();
+                    string newEnhancedWatchedValue = "";
+
+                    // watched
+                    if (!string.IsNullOrEmpty(_mUsername))
+                      newEnhancedWatchedValue = NewEnhancedWatchValue(oldEnhancedWatchedValue, _mUsername, _mIWatched, _mIWatchedCount, _mFRatingUser);
+                    else
+                      newEnhancedWatchedValue = NewEnhancedWatchValue(oldEnhancedWatchedValue, UserProfileName, _mIWatched, _mIWatchedCount, _mFRatingUser);
+                    sr[WatchedField] = newEnhancedWatchedValue;
+                    // "commmon" user rating
+                    if (_mFRatingUser > 0) sr.RatingUser = (decimal)_mFRatingUser;
+                  }
+                  if (sr[WatchedField].ToString().ToLower() != oldWatchedString.ToLower())
+                    LogMyFilms.Debug("Commit() - Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField] + "', WatchedCount = '" + _mIWatchedCount + "', (user)Rating = '" + _mFRatingUser + "', (site)Rating = '" + _mFRating + "'");
+                  #endregion
+
+                  #region imdb number
+                  string oldIMDB = (sr.IsIMDB_IdNull()) ? "" : sr.IMDB_Id;
+                  if (!string.IsNullOrEmpty(_mStrIMDBNumber))
+                    sr.IMDB_Id = _mStrIMDBNumber;
+                  if (sr.IMDB_Id != oldIMDB)
+                    LogMyFilms.Debug("Commit() - Updating 'IMDB_Id' from '" + oldIMDB + "' to '" + sr.IMDB_Id + "'");
+                  #endregion
+
+                  #region copy data to customfields ...
+                  foreach (DataColumn dc in commonColumns)
+                  {
+                    object temp;
+                    if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = sr[dc.ColumnName]))
                     {
-                      // LogMyFilms.Debug("Commit() - opening '" + Catalog + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-                      fs.SetLength(0); // do not append, owerwrite !
-
-                      using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
-                      {
-                        LogMyFilms.Debug("Commit() - writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
-                        MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-                        MyXmlTextWriter.WriteStartDocument();
-                        dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-                        MyXmlTextWriter.Flush();
-                        MyXmlTextWriter.Close();
-                      }
-                      fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-                      // LogMyFilms.Debug("Commit() - closing '" + Catalog + "' FileStream and releasing file lock");
-                      success = true;
+                      customFields[dc.ColumnName] = temp;
                     }
                   }
-                  Thread.Sleep(50); // give time to release file handle
                   #endregion
+                }
+                #endregion
+
+                #region (re)enable filesystem watcher to notify myfilms on update and disable trakt message handler
+                MyFilms.SendTraktUpdateMessage = false;
+                try
+                {
+                  if (MyFilms.FSwatcher.Path.Length > 0) MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt 
                 }
                 catch (Exception ex)
                 {
-                  LogMyFilms.Debug("Commit() - failed saving data to disk - Catalog = '" + Catalog + "' - reason: " + ex.Message);
-                  success = false;
+                  LogMyFilms.DebugException("Commit()- FSwatcher - problem enabling Raisingevents - Message: '" + ex.Message + "'", ex);
                 }
-                finally
+                #endregion
+
+                #region write xml file
+                using (FileStream fsTmp = System.IO.File.Create(Catalog.Replace(".xml", ".tmp"), 1000, FileOptions.DeleteOnClose)) // make sure, only one process is writing to file !
                 {
-                  dataImport.Clear();
-                  MyFilmsDetail.SetGlobalLock(false, Catalog); 
-                  BaseMesFilms._dataLock.ExitWriteLock();
+                  using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                  {
+                    // LogMyFilms.Debug("Commit() - opening '" + Catalog + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+                    fs.SetLength(0); // do not append, owerwrite !
+
+                    using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                    {
+                      LogMyFilms.Debug("Commit() - writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
+                      MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
+                      MyXmlTextWriter.WriteStartDocument();
+                      dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                      MyXmlTextWriter.Flush();
+                      MyXmlTextWriter.Close();
+                    }
+                    fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+                    // LogMyFilms.Debug("Commit() - closing '" + Catalog + "' FileStream and releasing file lock");
+                    success = true;
+                  }
                 }
+                Thread.Sleep(50); // give time to release file handle
+                #endregion
               }
-              else
+              catch (Exception ex)
               {
-                LogMyFilms.Debug("Commit() - timeout when waiting for slim writelock - could not write data !");
+                LogMyFilms.Debug("Commit() - failed saving data to disk - Catalog = '" + Catalog + "' - reason: " + ex.Message);
+                success = false;
+              }
+              finally
+              {
+                dataImport.Clear();
+                MyFilmsDetail.SetGlobalLock(false, Catalog);
+                BaseMesFilms._dataLock.ExitWriteLock();
               }
             }
-            if (success)
+            else
             {
-              continue;
+              LogMyFilms.Debug("Commit() - timeout when waiting for slim writelock - could not write data !");
             }
-            i += 1;
-            LogMyFilms.Info("Commit() - Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
-            Thread.Sleep(1000);
           }
-          if (!success) LogMyFilms.Error("Commit() - Error writing Movie Database after '" + maxretries + "' retries !");
-          #endregion
-          MyFilmsDetail.SetGlobalLock(false, Catalog);
-          Thread.Sleep(2000); // wait 2 seconds to give other clients a chance to write their data ...
+          if (success)
+          {
+            continue;
+          }
+          i += 1;
+          LogMyFilms.Info("Commit() - Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
+          Thread.Sleep(1000);
+        }
+        if (!success) LogMyFilms.Error("Commit() - Error writing Movie Database after '" + maxretries + "' retries !");
+        #endregion
+        MyFilmsDetail.SetGlobalLock(false, Catalog);
+        Thread.Sleep(2000); // wait 2 seconds to give other clients a chance to write their data ...
       }
       if (dataImport != null) dataImport.Dispose();
     }
-
     private string NewEnhancedWatchValue(string EnhancedWatchedValue, string UserProfileName, bool watched, int count, float rating)
     {
       string newEnhancedWatchedValue = "";
