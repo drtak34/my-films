@@ -947,8 +947,6 @@ namespace MyFilmsPlugin.MyFilms
             if (data.Movie.Count > 0) LogMyFilms.Error("LoadMyFilmsFromDisk() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'");
             string strOtitle = (data.Movie.Count > 0) ? data.Movie[data.Movie.Count - 1].OriginalTitle : "n/a";
             throw new Exception("Error reading xml database after " + data.Movie.Count + " records; movie: '" + strOtitle + "'; error : " + e.Message);
-            //LogMyFilms.DebugException("LoadMyFilmsFromDisk()- error reading '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read", ex);
-            // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
             //throw e;
           }
           finally
@@ -1421,35 +1419,82 @@ namespace MyFilmsPlugin.MyFilms
         }
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-          //LogMyFilms.Debug("ReadDataMovies() - Starting ... (StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
-          //LogMyFilms.Debug("ReadDataMovies() - Starting ... with : StrDfltSelect = '" + StrDfltSelect + "', StrSelect = '" + StrSelect + "', StrSort = '" + StrSort + "', StrSortSens = '" + StrSortSens + "', RESULTING DS SELECT = '" + StrDfltSelect + StrSelect + ", " + StrSort + " " + StrSortSens + "')");
-          LogMyFilms.Debug("ReadDataMovies() - StrDfltSelect           = '" + StrDfltSelect + "'");
-          LogMyFilms.Debug("ReadDataMovies() - StrSelect               = '" + StrSelect + "'");
-          LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens/all = '" + StrSort + " " + StrSortSens + "', '" + all + "'");
-          Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
-          bool iscached = true;
+          LogMyFilms.Debug("ReadDataMovies() - StrDfltSelect            = '" + StrDfltSelect + "'");
+          LogMyFilms.Debug("ReadDataMovies() - StrSelect                = '" + StrSelect + "'");
+          LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens, all = '" + StrSort + "/" + StrSortSens + "', '" + all + "', cached = '" + (data != null) + "'");
+          LogMyFilms.Debug("ReadDataMovies() - Expression               = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "'");
+          var watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
 
-          if (StrSelect.Length == 0)
-            StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
+          if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
 
-          if (data == null)
-          {
-            iscached = false;
-            initData();
-          }
+          if (data == null) initData();
 
           _dataLock.EnterReadLock();
           try
           {
-            LogMyFilms.Debug("ReadDataMovies() - Expression          = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "'");
-            movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens); //movies = data.Tables["MovieEnhanced"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
-            // movies = tableMoviesExtended.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+            movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             if (movies.Length == 0 && all)
             {
               StrSelect = MyFilms.conf.StrTitle1 + " not like ''";
               LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
               movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             }
+            #region Additional sorting ...
+            Stopwatch watchReadMoviesSort = new Stopwatch(); watchReadMoviesSort.Reset(); watchReadMoviesSort.Start();
+            MyFilms.FieldType fieldType = MyFilms.GetFieldType(StrSort);
+            Type columnType = MyFilms.GetColumnType(StrSort);
+            string strColumnType = (columnType == null) ? "<invalid>" : columnType.ToString();
+
+            if (!string.IsNullOrEmpty(StrSort) && columnType == typeof(string)) // don't apply special sorting on "native" types - only on string types !
+            {
+              LogMyFilms.Debug("ReadDataMovies() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + StrSortSens + "', sortascending = '" + StrSort + "'");
+              watch.Reset(); watch.Start();
+              switch (fieldType)
+              {
+                case MyFilms.FieldType.Decimal:
+                  if (StrSortSens == " ASC")
+                  {
+                    IComparer myComparer = new MyFilms.myRatingComparer();
+                    Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                  }
+                  else
+                  {
+                    IComparer myComparer = new MyFilms.myRatingComparer();
+                    Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
+                    //r.Reverse();
+                  }
+                  break;
+                case MyFilms.FieldType.AlphaNumeric:
+                  if (StrSortSens == " ASC")
+                  {
+                    IComparer myComparer = new MyFilms.AlphanumComparatorFast();
+                    Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                  }
+                  else
+                  {
+                    IComparer myComparer = new MyFilms.myReverserAlphanumComparatorFast();
+                    Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                    //r.Reverse();
+                  }
+                  break;
+                case MyFilms.FieldType.Date:
+                  if (StrSortSens == " ASC")
+                  {
+                    IComparer myComparer = new MyFilms.myDateComparer();
+                    Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                  }
+                  else
+                  {
+                    IComparer myComparer = new MyFilms.myDateReverseComparer();
+                    Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                    //IComparer myComparer = new myDateComparer();
+                    //Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
+                  }
+                  break;
+              }
+              LogMyFilms.Debug("ReadDataMovies() - additional sorting finished (" + (watchReadMoviesSort.ElapsedMilliseconds) + " ms)");
+            }
+            #endregion
           }
           finally
           {
@@ -1457,64 +1502,7 @@ namespace MyFilmsPlugin.MyFilms
           }
           watchReadMovies.Stop();
 
-          #region Additional sorting ...
-          Stopwatch watchReadMoviesSort = new Stopwatch(); watchReadMoviesSort.Reset(); watchReadMoviesSort.Start();
-          MyFilms.FieldType fieldType = MyFilms.GetFieldType(StrSort);
-          Type columnType = MyFilms.GetColumnType(StrSort);
-          string strColumnType = (columnType == null) ? "<invalid>" : columnType.ToString();
-
-          if (!string.IsNullOrEmpty(StrSort) && columnType == typeof(string)) // don't apply special sorting on "native" types - only on string types !
-          {
-            LogMyFilms.Debug("ReadDataMovies() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + StrSortSens + "', sortascending = '" + StrSort + "'");
-            watch.Reset(); watch.Start();
-            switch (fieldType)
-            {
-              case MyFilms.FieldType.Decimal:
-                if (StrSortSens == " ASC")
-                {
-                  IComparer myComparer = new MyFilms.myRatingComparer();
-                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
-                }
-                else
-                {
-                  IComparer myComparer = new MyFilms.myRatingComparer();
-                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
-                  //r.Reverse();
-                }
-                break;
-              case MyFilms.FieldType.AlphaNumeric:
-                if (StrSortSens == " ASC")
-                {
-                  IComparer myComparer = new MyFilms.AlphanumComparatorFast();
-                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
-                }
-                else
-                {
-                  IComparer myComparer = new MyFilms.myReverserAlphanumComparatorFast();
-                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
-                  //r.Reverse();
-                }
-                break;
-              case MyFilms.FieldType.Date:
-                if (StrSortSens == " ASC")
-                {
-                  IComparer myComparer = new MyFilms.myDateComparer();
-                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
-                }
-                else
-                {
-                  IComparer myComparer = new MyFilms.myDateReverseComparer();
-                  Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
-                  //IComparer myComparer = new myDateComparer();
-                  //Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
-                }
-                break;
-            }
-            LogMyFilms.Debug("ReadDataMovies() - additional sorting finished (" + (watchReadMoviesSort.ElapsedMilliseconds) + " ms)");
-          }
-          #endregion
-
-          LogMyFilms.Debug("ReadDataMovies() - Finished ...  returning '" + movies.Length + "' movies (cached = '" + iscached + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
+          LogMyFilms.Debug("ReadDataMovies() - Finished ...  returning '" + movies.Length + "' movies (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
           return movies;
         }
 
