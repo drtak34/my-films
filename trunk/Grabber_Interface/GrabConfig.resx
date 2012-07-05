@@ -2283,6 +2283,9 @@ Most sites do not support country specific certifications.</value>
   <data name="URLpage.Items14" xml:space="preserve">
     <value>URL Redirection Trailer</value>
   </data>
+  <data name="URLpage.Items15" xml:space="preserve">
+    <value>DetailsPath</value>
+  </data>
   <data name="URLpage.Location" type="System.Drawing.Point, System.Drawing">
     <value>314, 19</value>
   </data>
@@ -3023,21 +3026,6 @@ If not set, default encoding will be used.</value>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="textPreview.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 251</value>
-  </data>
-  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textPreview.Text" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
   </data>
@@ -3073,311 +3061,6 @@ If not set, default encoding will be used.</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
     <value>14</value>
-  </data>
-  <data name="&gt;&gt;lblSubPage.Name" xml:space="preserve">
-    <value>lblSubPage</value>
-  </data>
-  <data name="&gt;&gt;lblSubPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSubPage.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblSubPage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblEncodingSubPage.Name" xml:space="preserve">
-    <value>lblEncodingSubPage</value>
-  </data>
-  <data name="&gt;&gt;lblEncodingSubPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblEncodingSubPage.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblEncodingSubPage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblLanguagesAll.Name" xml:space="preserve">
-    <value>lblLanguagesAll</value>
-  </data>
-  <data name="&gt;&gt;lblLanguagesAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLanguagesAll.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblLanguagesAll.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;chkActorRoles.Name" xml:space="preserve">
-    <value>chkActorRoles</value>
-  </data>
-  <data name="&gt;&gt;chkActorRoles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkActorRoles.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;chkActorRoles.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.Name" xml:space="preserve">
-    <value>lblLanguages</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.Name" xml:space="preserve">
-    <value>lblMaxItems</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.Name" xml:space="preserve">
-    <value>textMaxItems</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.Name" xml:space="preserve">
-    <value>btResetDetail</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;label18.Name" xml:space="preserve">
-    <value>label18</value>
-  </data>
-  <data name="&gt;&gt;label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label18.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.Name" xml:space="preserve">
-    <value>labelDReplaceWith</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.Name" xml:space="preserve">
-    <value>labelDReplace</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.Name" xml:space="preserve">
-    <value>lblComplement</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;label14.Name" xml:space="preserve">
-    <value>label14</value>
-  </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 58</value>
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 215</value>
-  </data>
-  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 13</value>
-  </data>
-  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="label15.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>URL</value>
-  </data>
-  <data name="&gt;&gt;label15.Name" xml:space="preserve">
-    <value>label15</value>
-  </data>
-  <data name="&gt;&gt;label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="pictureBoxPreviewCover.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="pictureBoxPreviewCover.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBoxPreviewCover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>844, 7</value>
-  </data>
-  <data name="pictureBoxPreviewCover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 295</value>
-  </data>
-  <data name="pictureBoxPreviewCover.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBoxPreviewCover.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Name" xml:space="preserve">
-    <value>pictureBoxPreviewCover</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageDetailPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 653</value>
-  </data>
-  <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageDetailPage.Text" xml:space="preserve">
-    <value>Detail page</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.Name" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="toolStripMenuDetailsCopyAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="toolStripMenuDetailsCopyAll.Text" xml:space="preserve">
-    <value>Copy All</value>
-  </data>
-  <data name="toolStripMenuDetailsCopyAll.ToolTipText" xml:space="preserve">
-    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
-RTF formatted content in an appropriate app - like e.g. wordpad. 
-There you'll find both options when choosing edit - insert ...</value>
-  </data>
-  <data name="copySelectionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="copySelectionToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Copy Selection</value>
   </data>
   <data name="lblSubPage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3843,6 +3526,158 @@ There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
     <value>24</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 58</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>493, 215</value>
+  </data>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="pictureBoxPreviewCover.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="pictureBoxPreviewCover.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxPreviewCover.Location" type="System.Drawing.Point, System.Drawing">
+    <value>844, 7</value>
+  </data>
+  <data name="pictureBoxPreviewCover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 295</value>
+  </data>
+  <data name="pictureBoxPreviewCover.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pictureBoxPreviewCover.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.Name" xml:space="preserve">
+    <value>pictureBoxPreviewCover</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageDetailPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1062, 653</value>
+  </data>
+  <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageDetailPage.Text" xml:space="preserve">
+    <value>Detail page</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.Name" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="toolStripMenuDetailsCopyAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="toolStripMenuDetailsCopyAll.Text" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="toolStripMenuDetailsCopyAll.ToolTipText" xml:space="preserve">
+    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
+RTF formatted content in an appropriate app - like e.g. wordpad. 
+There you'll find both options when choosing edit - insert ...</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Copy Selection</value>
+  </data>
+  <data name="textPreview.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 251</value>
+  </data>
+  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textPreview.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
+    <value>textPreview</value>
+  </data>
+  <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label36.Name" xml:space="preserve">
     <value>label36</value>

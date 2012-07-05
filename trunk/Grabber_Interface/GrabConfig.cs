@@ -55,6 +55,7 @@ namespace Grabber_Interface
     private string BodyLinkPersonImages = string.Empty;
     private string BodyLinkMultiFanart = string.Empty;
     private string BodyLinkTrailer = string.Empty;
+    private string BodyLinkDetailsPath = string.Empty;
 
     private string URLBodyDetail = string.Empty;
     private string URLBodyDetail2 = string.Empty;
@@ -71,6 +72,7 @@ namespace Grabber_Interface
     private string URLBodyLinkPersonImages = string.Empty;
     private string URLBodyLinkMultiFanart = string.Empty;
     private string URLBodyLinkTrailer = string.Empty;
+    private string URLBodyLinkDetailsPath = string.Empty;
 
     private string TimeBodyDetail = string.Empty;
     private string TimeBodyDetail2 = string.Empty;
@@ -1193,6 +1195,16 @@ namespace Grabber_Interface
 
       if (TextURLDetail.Text.Length > 0)
       {
+        #region Load the DetailsPath
+        if (TextURLDetail.Text.Length > 0)
+        {
+          URLBodyLinkDetailsPath = TextURLDetail.Text;
+          BodyLinkDetailsPath = TextURLDetail.Text;
+        }
+        else
+          BodyLinkDetailsPath = "";
+        #endregion
+
         #region Load basic page
         watch.Reset();
         watch.Start();
@@ -1713,8 +1725,8 @@ namespace Grabber_Interface
           textURLPreview.Text = URLBodyLinkMultiPosters;
           break;
         case "URL Redirection Photos":
-          strActivePage = BodyLinkMultiPosters;
-          textURLPreview.Text = URLBodyLinkMultiPosters;
+          strActivePage = BodyLinkPhotos;
+          textURLPreview.Text = URLBodyLinkPhotos;
           break;
         case "URL Redirection PersonImages":
           strActivePage = BodyLinkPersonImages;
@@ -1727,6 +1739,10 @@ namespace Grabber_Interface
         case "URL Redirection Trailer":
           strActivePage = BodyLinkTrailer;
           textURLPreview.Text = URLBodyLinkTrailer;
+          break;
+        case "DetailsPath":
+          strActivePage = BodyLinkDetailsPath;
+          textURLPreview.Text = URLBodyLinkDetailsPath;
           break;
 
         default:
@@ -4261,6 +4277,7 @@ namespace Grabber_Interface
       //URL Redirection Certification
       //URL Redirection Comment
       //URL Redirection Description
+      //NFOpath
 
       switch (cb_ParamDetail.SelectedIndex)
       {

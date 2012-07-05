@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -115,6 +115,7 @@ namespace Grabber_Interface
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.tabPageDetailPage = new System.Windows.Forms.TabPage();
+          this.pictureBoxPreviewCollection = new System.Windows.Forms.PictureBox();
           this.btnLoadDetailInWeb = new System.Windows.Forms.Button();
           this.button_Load_File = new System.Windows.Forms.Button();
           this.label21 = new System.Windows.Forms.Label();
@@ -219,11 +220,11 @@ namespace Grabber_Interface
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.cbFileBasedReader = new System.Windows.Forms.CheckBox();
-          this.pictureBoxPreviewCollection = new System.Windows.Forms.PictureBox();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
           this.tabPageDetailPage.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCollection)).BeginInit();
           this.contextMenuStripDetails.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
@@ -242,7 +243,6 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCollection)).BeginInit();
           this.SuspendLayout();
           // 
           // textConfig
@@ -817,7 +817,8 @@ namespace Grabber_Interface
             resources.GetString("URLpage.Items11"),
             resources.GetString("URLpage.Items12"),
             resources.GetString("URLpage.Items13"),
-            resources.GetString("URLpage.Items14")});
+            resources.GetString("URLpage.Items14"),
+            resources.GetString("URLpage.Items15")});
           resources.ApplyResources(this.URLpage, "URLpage");
           this.URLpage.Name = "URLpage";
           this.toolTip1.SetToolTip(this.URLpage, resources.GetString("URLpage.ToolTip"));
@@ -945,6 +946,12 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPageDetailPage, "tabPageDetailPage");
           this.tabPageDetailPage.Name = "tabPageDetailPage";
           this.tabPageDetailPage.UseVisualStyleBackColor = true;
+          // 
+          // pictureBoxPreviewCollection
+          // 
+          resources.ApplyResources(this.pictureBoxPreviewCollection, "pictureBoxPreviewCollection");
+          this.pictureBoxPreviewCollection.Name = "pictureBoxPreviewCollection";
+          this.pictureBoxPreviewCollection.TabStop = false;
           // 
           // btnLoadDetailInWeb
           // 
@@ -1356,17 +1363,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle9;
+          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle5;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle10.NullValue = null;
-          dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle10;
+          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle6.NullValue = null;
+          dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle6;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1379,16 +1386,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle11;
+          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle12;
+          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1740,12 +1747,6 @@ namespace Grabber_Interface
           this.cbFileBasedReader.UseVisualStyleBackColor = true;
           this.cbFileBasedReader.CheckedChanged += new System.EventHandler(this.cbFileBasedReader_CheckedChanged);
           // 
-          // pictureBoxPreviewCollection
-          // 
-          resources.ApplyResources(this.pictureBoxPreviewCollection, "pictureBoxPreviewCollection");
-          this.pictureBoxPreviewCollection.Name = "pictureBoxPreviewCollection";
-          this.pictureBoxPreviewCollection.TabStop = false;
-          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1787,6 +1788,7 @@ namespace Grabber_Interface
           this.groupBox10.PerformLayout();
           this.tabPageDetailPage.ResumeLayout(false);
           this.tabPageDetailPage.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCollection)).EndInit();
           this.contextMenuStripDetails.ResumeLayout(false);
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
@@ -1812,7 +1814,6 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCollection)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
