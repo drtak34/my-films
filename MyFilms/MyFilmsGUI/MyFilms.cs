@@ -2382,7 +2382,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (IsPersonField(conf.WStrSort) && !string.IsNullOrEmpty(conf.StrPersons)) // Specialhandling for Actors search view
           {
-            conf.StrSelect = conf.WStrSort + " like '*" + conf.StrPersons + "*'";
+            conf.StrSelect = conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(conf.StrPersons) + "*'";
             getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, SelItem);
             conf.StrPersons = "";
           }
@@ -3778,6 +3778,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       conf.StrSelect = ""; // reset movie context filter for person views
+      // conf.StrPersons = ""; // reset person list filter
       viewcover.Filename = "";
       personcover.Filename = "";
       groupcover.Filename = "";
