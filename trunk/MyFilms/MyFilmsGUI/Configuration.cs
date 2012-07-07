@@ -232,16 +232,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
 
-                Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
-                Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
-                Strlabel3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel3", string.Empty);
-                Strlabel4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel4", string.Empty);
-                Strlabel5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel5", string.Empty);
                 Stritem1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem1", string.Empty);
                 Stritem2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem2", string.Empty);
                 Stritem3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem3", string.Empty);
                 Stritem4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem4", string.Empty);
                 Stritem5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem5", string.Empty);
+                Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
+                Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
+                Strlabel3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel3", string.Empty);
+                Strlabel4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel4", string.Empty);
+                Strlabel5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel5", string.Empty);
+
+                StritemDetails1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItemDetails1", "Country");
+                StritemDetails2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItemDetails2", "Year");
+                StritemDetails3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItemDetails3", "Category");
+                StritemDetails4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItemDetails4", "Producer");
+                StritemDetails5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItemDetails5", "Languages");
+                StritemDetails6 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItemDetails6", "Date");
+                StrlabelDetails1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabelDetails1", BaseMesFilms.Translate_Column(StritemDetails1));
+                StrlabelDetails2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabelDetails2", BaseMesFilms.Translate_Column(StritemDetails2));
+                StrlabelDetails3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabelDetails3", BaseMesFilms.Translate_Column(StritemDetails3));
+                StrlabelDetails4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabelDetails4", BaseMesFilms.Translate_Column(StritemDetails4));
+                StrlabelDetails5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabelDetails5", BaseMesFilms.Translate_Column(StritemDetails5));
+                StrlabelDetails6 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabelDetails6", BaseMesFilms.Translate_Column(StritemDetails6));
+
                 StrIdentLabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentLabel", string.Empty);
                 StrLogos = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Logos", false);
                 StrSuppress = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Suppress", false);
@@ -1005,6 +1019,80 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return stritem5; }
           set { stritem5 = value; }
         }
+
+        private string strlabelDetails1 = string.Empty;
+        public string StrlabelDetails1
+        {
+          get { return strlabelDetails1; }
+          set { strlabelDetails1 = value; }
+        }
+        private string strlabelDetails2 = string.Empty;
+        public string StrlabelDetails2
+        {
+          get { return strlabelDetails2; }
+          set { strlabelDetails2 = value; }
+        }
+        private string strlabelDetails3 = string.Empty;
+        public string StrlabelDetails3
+        {
+          get { return strlabelDetails3; }
+          set { strlabelDetails3 = value; }
+        }
+        private string strlabelDetails4 = string.Empty;
+        public string StrlabelDetails4
+        {
+          get { return strlabelDetails4; }
+          set { strlabelDetails4 = value; }
+        }
+        private string strlabelDetails5 = string.Empty;
+        public string StrlabelDetails5
+        {
+          get { return strlabelDetails5; }
+          set { strlabelDetails5 = value; }
+        }
+        private string strlabelDetails6 = string.Empty;
+        public string StrlabelDetails6
+        {
+          get { return strlabelDetails6; }
+          set { strlabelDetails6 = value; }
+        }
+        private string stritemDetails1 = string.Empty;
+        public string StritemDetails1
+        {
+          get { return stritemDetails1; }
+          set { stritemDetails1 = value; }
+        }
+        private string stritemDetails2 = string.Empty;
+        public string StritemDetails2
+        {
+          get { return stritemDetails2; }
+          set { stritemDetails2 = value; }
+        }
+        private string stritemDetails3 = string.Empty;
+        public string StritemDetails3
+        {
+          get { return stritemDetails3; }
+          set { stritemDetails3 = value; }
+        }
+        private string stritemDetails4 = string.Empty;
+        public string StritemDetails4
+        {
+          get { return stritemDetails4; }
+          set { stritemDetails4 = value; }
+        }
+        private string stritemDetails5 = string.Empty;
+        public string StritemDetails5
+        {
+          get { return stritemDetails5; }
+          set { stritemDetails5 = value; }
+        }
+        private string stritemDetails6 = string.Empty;
+        public string StritemDetails6
+        {
+          get { return stritemDetails6; }
+          set { stritemDetails6 = value; }
+        }
+
         private string[] listSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] ListSeparator
         {

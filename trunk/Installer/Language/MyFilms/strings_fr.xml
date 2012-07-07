@@ -355,6 +355,7 @@ n'est pas configuré pour le Wake on LAN!
     <String id="10798802">Débuter par {0} films?</String>
     <String id="10798803">Extended search (directories) ?</String>
     <String id="10798810">Delete movie cover from DB</String>
+    <String id="10798820">Details Display Item</String>
     <String id="10798940">Bande Annonce</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>

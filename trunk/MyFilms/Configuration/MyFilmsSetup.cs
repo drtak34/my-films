@@ -169,6 +169,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntItem3.Items.Add("(none)");
             AntItem4.Items.Add("(none)");
             AntItem5.Items.Add("(none)");
+            AntItemDetails1.Items.Add("(none)");
+            AntItemDetails2.Items.Add("(none)");
+            AntItemDetails3.Items.Add("(none)");
+            AntItemDetails4.Items.Add("(none)");
+            AntItemDetails5.Items.Add("(none)");
+            AntItemDetails6.Items.Add("(none)");
             CmdPar.Items.Add("(none)");
             CatalogType.SelectedIndex = 0;
             #region add dropdown content for AMC3
@@ -214,6 +220,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem3.Items.Add(dc.ColumnName);
                   AntItem4.Items.Add(dc.ColumnName);
                   AntItem5.Items.Add(dc.ColumnName);
+                  AntItemDetails1.Items.Add(dc.ColumnName);
+                  AntItemDetails2.Items.Add(dc.ColumnName);
+                  AntItemDetails3.Items.Add(dc.ColumnName);
+                  AntItemDetails4.Items.Add(dc.ColumnName);
+                  AntItemDetails5.Items.Add(dc.ColumnName);
+                  AntItemDetails6.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
                     dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
@@ -858,6 +870,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", AntLabel4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItem5", AntItem5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", AntLabel5.Text);
+
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails1", AntItemDetails1.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails1", AntLabelDetails1.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails2", AntItemDetails2.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", AntLabelDetails2.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", AntItemDetails3.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", AntLabelDetails3.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItem4Details", AntItemDetails4.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", AntLabelDetails4.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", AntItemDetails5.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", AntLabelDetails5.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails6", AntItemDetails6.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails6", AntLabelDetails6.Text);
+
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewDfltItem", View_Dflt_Item.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewDfltText", View_Dflt_Text.Text);
 
@@ -1342,6 +1368,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", string.Empty);
             AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", string.Empty);
 
+            AntItemDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails1", "Country");
+            AntLabelDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails1", BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim()));
+            AntItemDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails2", "Year");
+            AntLabelDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim()));
+            AntItemDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", "Category");
+            AntLabelDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim()));
+            AntItemDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", "Producer");
+            AntLabelDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim()));
+            AntItemDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", "Languages");
+            AntLabelDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim()));
+            AntItemDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails6", "Date");
+            AntLabelDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails6", BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim()));
+
             ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator1", ",");
             ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator2", ";");
             ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator3", "|");
@@ -1523,6 +1562,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (isXtended) AntItem4.Items.Add(dc.ColumnName);
                 if (AntItem5.Items.Contains(dc.ColumnName)) AntItem5.Items.Remove(dc.ColumnName);
                 if (isXtended) AntItem5.Items.Add(dc.ColumnName);
+                if (AntItemDetails1.Items.Contains(dc.ColumnName)) AntItemDetails1.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItemDetails1.Items.Add(dc.ColumnName);
+                if (AntItemDetails2.Items.Contains(dc.ColumnName)) AntItemDetails2.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItemDetails2.Items.Add(dc.ColumnName);
+                if (AntItemDetails3.Items.Contains(dc.ColumnName)) AntItemDetails3.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItemDetails3.Items.Add(dc.ColumnName);
+                if (AntItemDetails4.Items.Contains(dc.ColumnName)) AntItemDetails4.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItemDetails4.Items.Add(dc.ColumnName);
+                if (AntItemDetails5.Items.Contains(dc.ColumnName)) AntItemDetails5.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItemDetails5.Items.Add(dc.ColumnName);
+                if (AntItemDetails6.Items.Contains(dc.ColumnName)) AntItemDetails6.Items.Remove(dc.ColumnName);
+                if (isXtended) AntItemDetails6.Items.Add(dc.ColumnName);
               }
               if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
                   dc.ColumnName != "Comments" && dc.ColumnName != "Description" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" &&
@@ -1743,6 +1794,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntItem3.ResetText();
             AntItem4.ResetText();
             AntItem5.ResetText();
+            AntItemDetails1.ResetText();
+            AntItemDetails2.ResetText();
+            AntItemDetails3.ResetText();
+            AntItemDetails4.ResetText();
+            AntItemDetails5.ResetText();
+            AntItemDetails6.ResetText();
             TitleDelim.ResetText();
             LayOut.ResetText();
             ListSeparator1.ResetText();
@@ -2188,7 +2245,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               TitleDelim.Text = "\\";
               SearchFileName.Checked = true;
 
-              //Presets for useritems:
+              //Presets for useritems for main screen:
               AntItem1.Text = "Country";
               AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
               AntItem2.Text = "Certification";
@@ -2199,6 +2256,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
               AntItem5.Text = "Producer";
               AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+
+              //Presets for useritems for details screen:
+              AntItemDetails1.Text = "Country";
+              AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+              AntItemDetails2.Text = "Certification";
+              AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+              AntItemDetails3.Text = "Category";
+              AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+              AntItemDetails4.Text = "Writer";
+              AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+              AntItemDetails5.Text = "Producer";
+              AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+              AntItemDetails6.Text = "Date";
+              AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
             }
             Tab_ExternalCatalogs.Enabled = true;
             txtPicturePrefix.Text = "";
@@ -4962,6 +5033,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
           AntItem5.Text = "Date";
           AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+
+          AntItemDetails1.Text = "Country";
+          AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+          AntItemDetails2.Text = "Year";
+          AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+          AntItemDetails3.Text = "Category";
+          AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+          AntItemDetails4.Text = "Producer";
+          AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+          AntItemDetails5.Text = "Languages";
+          AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+          AntItemDetails6.Text = "Date";
+          AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
 
           // add default Views
           MyCustomViews.View.Clear();

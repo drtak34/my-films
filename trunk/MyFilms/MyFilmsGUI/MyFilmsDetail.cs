@@ -6575,7 +6575,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               clearGUIProperty("user.item" + j + ".field", log);
               clearGUIProperty("user.item" + j + ".value", log);
             }
-          
+
+            for (int j = 1; j < 7; j++)
+            {
+              clearGUIProperty("user.detailsitem" + j + ".label", log);
+              clearGUIProperty("user.detailsitem" + j + ".field", log);
+              clearGUIProperty("user.detailsitem" + j + ".value", log);
+            }
+
             clearGUIProperty("user.source.value", log);
             clearGUIProperty("user.sourcetrailer.value", log);
             clearGUIProperty("user.sourcetrailer.count", log);
@@ -6614,88 +6621,190 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 if (MyFilms.r.Length > ItemId && MyFilms.r[ItemId][dc.ColumnName] != null) // make sure, it is a valid part of current loaded dataset "r"
                 {
-                    //Added by Guzzi to set userdefined properties
-                    if (MyFilms.conf.Stritem1.ToLower() == (dc.ColumnName.ToLower()))
-                        if (wrep)
-                            {
-                                setGUIProperty("user.item1.label", MyFilms.conf.Strlabel1);
-                                if (MyFilms.conf.Stritem1.ToLower() == "date")
-                                    setGUIProperty("user.item1.field", "w" + MyFilms.conf.Stritem1.ToLower());
-                                else
-                                    setGUIProperty("user.item1.field", MyFilms.conf.Stritem1.ToLower());
-                                setGUIProperty("user.item1.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                            }
-                            else
-                            {
-                                clearGUIProperty("user.item1.label");
-                                clearGUIProperty("user.item1.field");
-                                clearGUIProperty("user.item1.value");
-                            }
-                    if (MyFilms.conf.Stritem2.ToLower() == (dc.ColumnName.ToLower()))
-                        if (wrep)
-                            {
-                                setGUIProperty("user.item2.label", MyFilms.conf.Strlabel2);
-                                if (MyFilms.conf.Stritem2.ToLower() == "date")
-                                    setGUIProperty("user.item2.field", "w" + MyFilms.conf.Stritem2.ToLower());
-                                else
-                                    setGUIProperty("user.item2.field", MyFilms.conf.Stritem2.ToLower());
-                                setGUIProperty("user.item2.value",MyFilms.r[ItemId][dc.ColumnName].ToString());
-                            }
-                            else
-                            {
-                                clearGUIProperty("user.item2.label");
-                                clearGUIProperty("user.item2.field");
-                                clearGUIProperty("user.item2.value");
-                            }
-                    if (MyFilms.conf.Stritem3.ToLower() == (dc.ColumnName.ToLower()))
-                      if (wrep)
-                          {
-                            setGUIProperty("user.item3.label", MyFilms.conf.Strlabel3);
-                            if (MyFilms.conf.Stritem3.ToLower() == "date")
-                                setGUIProperty("user.item3.field", "w" + MyFilms.conf.Stritem3.ToLower());
-                            else
-                                setGUIProperty("user.item3.field", MyFilms.conf.Stritem3.ToLower());
-                            setGUIProperty("user.item3.value",MyFilms.r[ItemId][dc.ColumnName].ToString());
-                          }
-                          else
-                          {
-                            clearGUIProperty("user.item3.label");
-                            clearGUIProperty("user.item3.field");
-                            clearGUIProperty("user.item3.value");
-                          }
-                    if (MyFilms.conf.Stritem4.ToLower() == (dc.ColumnName.ToLower()))
-                      if (wrep)
-                      {
-                        setGUIProperty("user.item4.label", MyFilms.conf.Strlabel4);
-                        if (MyFilms.conf.Stritem4.ToLower() == "date")
-                          setGUIProperty("user.item4.field", "w" + MyFilms.conf.Stritem4.ToLower());
-                        else
-                          setGUIProperty("user.item4.field", MyFilms.conf.Stritem4.ToLower());
-                        setGUIProperty("user.item4.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                      }
+                  #region set userdefined properties for main screen
+                  if (MyFilms.conf.Stritem1.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.item1.label", MyFilms.conf.Strlabel1);
+                      if (MyFilms.conf.Stritem1.ToLower() == "date")
+                        setGUIProperty("user.item1.field", "w" + MyFilms.conf.Stritem1.ToLower());
                       else
-                      {
-                        clearGUIProperty("user.item4.label");
-                        clearGUIProperty("user.item4.field");
-                        clearGUIProperty("user.item4.value");
-                      }
-                    if (MyFilms.conf.Stritem5.ToLower() == (dc.ColumnName.ToLower()))
-                      if (wrep)
-                      {
-                        setGUIProperty("user.item5.label", MyFilms.conf.Strlabel5);
-                        if (MyFilms.conf.Stritem5.ToLower() == "date")
-                          setGUIProperty("user.item5.field", "w" + MyFilms.conf.Stritem5.ToLower());
-                        else
-                          setGUIProperty("user.item5.field", MyFilms.conf.Stritem5.ToLower());
-                        setGUIProperty("user.item5.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                      }
+                        setGUIProperty("user.item1.field", MyFilms.conf.Stritem1.ToLower());
+                      setGUIProperty("user.item1.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.item1.label");
+                      clearGUIProperty("user.item1.field");
+                      clearGUIProperty("user.item1.value");
+                    }
+                  if (MyFilms.conf.Stritem2.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.item2.label", MyFilms.conf.Strlabel2);
+                      if (MyFilms.conf.Stritem2.ToLower() == "date")
+                        setGUIProperty("user.item2.field", "w" + MyFilms.conf.Stritem2.ToLower());
                       else
-                      {
-                        clearGUIProperty("user.item5.label");
-                        clearGUIProperty("user.item5.field");
-                        clearGUIProperty("user.item5.value");
-                      }
-                    if (wrep && MyFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower()))
+                        setGUIProperty("user.item2.field", MyFilms.conf.Stritem2.ToLower());
+                      setGUIProperty("user.item2.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.item2.label");
+                      clearGUIProperty("user.item2.field");
+                      clearGUIProperty("user.item2.value");
+                    }
+                  if (MyFilms.conf.Stritem3.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.item3.label", MyFilms.conf.Strlabel3);
+                      if (MyFilms.conf.Stritem3.ToLower() == "date")
+                        setGUIProperty("user.item3.field", "w" + MyFilms.conf.Stritem3.ToLower());
+                      else
+                        setGUIProperty("user.item3.field", MyFilms.conf.Stritem3.ToLower());
+                      setGUIProperty("user.item3.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.item3.label");
+                      clearGUIProperty("user.item3.field");
+                      clearGUIProperty("user.item3.value");
+                    }
+                  if (MyFilms.conf.Stritem4.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.item4.label", MyFilms.conf.Strlabel4);
+                      if (MyFilms.conf.Stritem4.ToLower() == "date")
+                        setGUIProperty("user.item4.field", "w" + MyFilms.conf.Stritem4.ToLower());
+                      else
+                        setGUIProperty("user.item4.field", MyFilms.conf.Stritem4.ToLower());
+                      setGUIProperty("user.item4.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.item4.label");
+                      clearGUIProperty("user.item4.field");
+                      clearGUIProperty("user.item4.value");
+                    }
+                  if (MyFilms.conf.Stritem5.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.item5.label", MyFilms.conf.Strlabel5);
+                      if (MyFilms.conf.Stritem5.ToLower() == "date")
+                        setGUIProperty("user.item5.field", "w" + MyFilms.conf.Stritem5.ToLower());
+                      else
+                        setGUIProperty("user.item5.field", MyFilms.conf.Stritem5.ToLower());
+                      setGUIProperty("user.item5.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.item5.label");
+                      clearGUIProperty("user.item5.field");
+                      clearGUIProperty("user.item5.value");
+                    }
+                  #endregion
+
+                  #region set userdefined properties for details screen
+                  if (MyFilms.conf.StritemDetails1.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.detailsitem1.label", MyFilms.conf.StrlabelDetails1);
+                      if (MyFilms.conf.StritemDetails1.ToLower() == "date")
+                        setGUIProperty("user.detailsitem1.field", "w" + MyFilms.conf.StritemDetails1.ToLower());
+                      else
+                        setGUIProperty("user.detailsitem1.field", MyFilms.conf.StritemDetails1.ToLower());
+                      setGUIProperty("user.detailsitem1.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.detailsitem1.label");
+                      clearGUIProperty("user.detailsitem1.field");
+                      clearGUIProperty("user.detailsitem1.value");
+                    }
+                  if (MyFilms.conf.StritemDetails2.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.detailsitem2.label", MyFilms.conf.StrlabelDetails2);
+                      if (MyFilms.conf.Stritem2.ToLower() == "date")
+                        setGUIProperty("user.detailsitem2.field", "w" + MyFilms.conf.StritemDetails2.ToLower());
+                      else
+                        setGUIProperty("user.detailsitem2.field", MyFilms.conf.StritemDetails2.ToLower());
+                      setGUIProperty("user.detailsitem2.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.detailsitem2.label");
+                      clearGUIProperty("user.detailsitem2.field");
+                      clearGUIProperty("user.detailsitem2.value");
+                    }
+                  if (MyFilms.conf.StritemDetails3.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.detailsitem3.label", MyFilms.conf.StrlabelDetails3);
+                      if (MyFilms.conf.Stritem3.ToLower() == "date")
+                        setGUIProperty("user.detailsitem3.field", "w" + MyFilms.conf.StritemDetails3.ToLower());
+                      else
+                        setGUIProperty("user.detailsitem3.field", MyFilms.conf.StritemDetails3.ToLower());
+                      setGUIProperty("user.detailsitem3.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.detailsitem3.label");
+                      clearGUIProperty("user.detailsitem3.field");
+                      clearGUIProperty("user.detailsitem3.value");
+                    }
+                  if (MyFilms.conf.StritemDetails4.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.detailsitem4.label", MyFilms.conf.StrlabelDetails4);
+                      if (MyFilms.conf.Stritem4.ToLower() == "date")
+                        setGUIProperty("user.detailsitem4.field", "w" + MyFilms.conf.StritemDetails4.ToLower());
+                      else
+                        setGUIProperty("user.detailsitem4.field", MyFilms.conf.StritemDetails4.ToLower());
+                      setGUIProperty("user.detailsitem4.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.detailsitem4.label");
+                      clearGUIProperty("user.detailsitem4.field");
+                      clearGUIProperty("user.detailsitem4.value");
+                    }
+                  if (MyFilms.conf.StritemDetails5.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.detailsitem5.label", MyFilms.conf.StrlabelDetails5);
+                      if (MyFilms.conf.Stritem5.ToLower() == "date")
+                        setGUIProperty("user.detailsitem5.field", "w" + MyFilms.conf.StritemDetails5.ToLower());
+                      else
+                        setGUIProperty("user.detailsitem5.field", MyFilms.conf.StritemDetails5.ToLower());
+                      setGUIProperty("user.detailsitem5.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.detailsitem5.label");
+                      clearGUIProperty("user.detailsitem5.field");
+                      clearGUIProperty("user.detailsitem5.value");
+                    }
+                  if (MyFilms.conf.StritemDetails6.ToLower() == (dc.ColumnName.ToLower()))
+                    if (wrep)
+                    {
+                      setGUIProperty("user.detailsitem6.label", MyFilms.conf.StrlabelDetails6);
+                      if (MyFilms.conf.Stritem5.ToLower() == "date")
+                        setGUIProperty("user.detailsitem6.field", "w" + MyFilms.conf.StritemDetails6.ToLower());
+                      else
+                        setGUIProperty("user.detailsitem6.field", MyFilms.conf.StritemDetails6.ToLower());
+                      setGUIProperty("user.detailsitem6.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+                    else
+                    {
+                      clearGUIProperty("user.detailsitem6.label");
+                      clearGUIProperty("user.detailsitem6.field");
+                      clearGUIProperty("user.detailsitem6.value");
+                    }
+                  #endregion
+
+                  #region set userdefined sources for movie and trailer
+                  if (wrep && MyFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower()))
                     {
                       setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
                       MyFilms.currentMovie.File = MyFilms.r[ItemId][dc.ColumnName].ToString();
@@ -6714,41 +6823,45 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       else
                         setGUIProperty("user.sourcetrailer.count", "");
                     }
+                  #endregion
 
-                    if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
+                  #region set userdefined watched field
+                  if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
+                  {
+                    if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                     {
-                      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                      int count = GetWatchedCount(ItemId, MyFilms.conf.StrUserProfileName);
+                      if (count > 0)
                       {
-                        int count = GetWatchedCount(ItemId, MyFilms.conf.StrUserProfileName);
-                        if (count > 0)
-                        {
-                          setGUIProperty("user.watched.value", "true");
-                          DateTime watcheddate = GetWatchedDate(ItemId, MyFilms.conf.StrUserProfileName);
-                          string strWatchedDate = (watcheddate > DateTime.MinValue) ? watcheddate.ToShortDateString() : "";
-                          setGUIProperty("user.watched.date", strWatchedDate);
-                        }
-                        else
-                        {
-                          setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
-                          setGUIProperty("user.watched.date", "");
-                        }
-                        setGUIProperty("user.watched.count", count.ToString());
-                        setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
-                        setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
-                        string rating = GetUserRating(ItemId, MyFilms.conf.StrUserProfileName);
-                        setGUIProperty("user.rating.value", rating);
+                        setGUIProperty("user.watched.value", "true");
+                        DateTime watcheddate = GetWatchedDate(ItemId, MyFilms.conf.StrUserProfileName);
+                        string strWatchedDate = (watcheddate > DateTime.MinValue) ? watcheddate.ToShortDateString() : "";
+                        setGUIProperty("user.watched.date", strWatchedDate);
                       }
                       else
                       {
-                        if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
-                          setGUIProperty("user.watched.value", "true");
-                        else
-                          setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
-                        clearGUIProperty("user.rating.value");
+                        setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                        setGUIProperty("user.watched.date", "");
                       }
+                      setGUIProperty("user.watched.count", count.ToString());
+                      setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
+                      setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
+                      string rating = GetUserRating(ItemId, MyFilms.conf.StrUserProfileName);
+                      setGUIProperty("user.rating.value", rating);
                     }
+                    else
+                    {
+                      if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
+                        setGUIProperty("user.watched.value", "true");
+                      else
+                        setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                      clearGUIProperty("user.rating.value");
+                    }
+                  }
+                  #endregion
 
-                    switch (dc.ColumnName.ToLower())
+                  #region set all db fields ...
+                  switch (dc.ColumnName.ToLower())
                     {
                         case "translatedtitle":
                         case "originaltitle":
@@ -7066,6 +7179,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             break;
 
                     }
+                  #endregion
                 }
             }
             //// for catalog using "search" instead storage field

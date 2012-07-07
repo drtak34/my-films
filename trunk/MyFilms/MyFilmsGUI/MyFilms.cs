@@ -7605,21 +7605,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg3.SetHeading(GUILocalizeStrings.Get(10798771)); // Display options ...
           List<string> choiceGlobalMappings = new List<string>();
 
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798773) + " 1 (" + MyFilms.conf.Stritem1 + "-" + MyFilms.conf.Strlabel1 + ")");
+          dlg3.Add(GUILocalizeStrings.Get(10798773) + " 1 (" + MyFilms.conf.Stritem1 + "-" + MyFilms.conf.Strlabel1 + ")"); // Display Item ....
           choiceGlobalMappings.Add("useritem1");
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798773) + " 2 (" + MyFilms.conf.Stritem2 + "-" + MyFilms.conf.Strlabel2 + ")");
+          dlg3.Add(GUILocalizeStrings.Get(10798773) + " 2 (" + MyFilms.conf.Stritem2 + "-" + MyFilms.conf.Strlabel2 + ")");
           choiceGlobalMappings.Add("useritem2");
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798773) + " 3 (" + MyFilms.conf.Stritem3 + "-" + MyFilms.conf.Strlabel3 + ")");
+          dlg3.Add(GUILocalizeStrings.Get(10798773) + " 3 (" + MyFilms.conf.Stritem3 + "-" + MyFilms.conf.Strlabel3 + ")");
           choiceGlobalMappings.Add("useritem3");
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798773) + " 4 (" + MyFilms.conf.Stritem4 + "-" + MyFilms.conf.Strlabel4 + ")");
+          dlg3.Add(GUILocalizeStrings.Get(10798773) + " 4 (" + MyFilms.conf.Stritem4 + "-" + MyFilms.conf.Strlabel4 + ")");
           choiceGlobalMappings.Add("useritem4");
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798773) + " 5 (" + MyFilms.conf.Stritem5 + "-" + MyFilms.conf.Strlabel5 + ")");
+          dlg3.Add(GUILocalizeStrings.Get(10798773) + " 5 (" + MyFilms.conf.Stritem5 + "-" + MyFilms.conf.Strlabel5 + ")");
           choiceGlobalMappings.Add("useritem5");
+
+          dlg3.Add(GUILocalizeStrings.Get(10798820) + " 1 (" + MyFilms.conf.StritemDetails1 + "-" + MyFilms.conf.StrlabelDetails1 + ")"); // Details Display Item ....
+          choiceGlobalMappings.Add("useritemdetails1");
+          dlg3.Add(GUILocalizeStrings.Get(10798820) + " 2 (" + MyFilms.conf.StritemDetails2 + "-" + MyFilms.conf.StrlabelDetails2 + ")");
+          choiceGlobalMappings.Add("useritemdetails1");
+          dlg3.Add(GUILocalizeStrings.Get(10798820) + " 3 (" + MyFilms.conf.StritemDetails3 + "-" + MyFilms.conf.StrlabelDetails3 + ")");
+          choiceGlobalMappings.Add("useritemdetails1");
+          dlg3.Add(GUILocalizeStrings.Get(10798820) + " 4 (" + MyFilms.conf.StritemDetails4 + "-" + MyFilms.conf.StrlabelDetails4 + ")");
+          choiceGlobalMappings.Add("useritemdetails1");
+          dlg3.Add(GUILocalizeStrings.Get(10798820) + " 5 (" + MyFilms.conf.StritemDetails5 + "-" + MyFilms.conf.StrlabelDetails5 + ")");
+          choiceGlobalMappings.Add("useritemdetails1");
+          dlg3.Add(GUILocalizeStrings.Get(10798820) + " 6 (" + MyFilms.conf.StritemDetails6 + "-" + MyFilms.conf.StrlabelDetails6 + ")");
+          choiceGlobalMappings.Add("useritemdetails1");
 
           // master-, secondary-  and sorttitle
           //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
@@ -7661,7 +7669,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choiceGlobalMappings.Add("");
               break;
           }
-          if (selection > 4) // title fields
+          if (selection > 10) // title fields
           {
             ArrayList DisplayItems = GetDisplayItems("titles");
             foreach (string[] displayItem in DisplayItems)
@@ -7712,6 +7720,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilms.conf.Stritem5 = wproperty;
               MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
               LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
+              break;
+            case "useritemdetails1":
+              MyFilms.conf.StritemDetails1 = wproperty;
+              MyFilms.conf.StrlabelDetails1 = BaseMesFilms.Translate_Column(wproperty);
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails1 + "', Label: '" + conf.StrlabelDetails1 + "'.");
+              break;
+            case "useritemdetails2":
+              MyFilms.conf.StritemDetails2 = wproperty;
+              MyFilms.conf.StrlabelDetails2 = BaseMesFilms.Translate_Column(wproperty);
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails2 + "', Label: '" + conf.StrlabelDetails2 + "'.");
+              break;
+            case "useritemdetails3":
+              MyFilms.conf.StritemDetails3 = wproperty;
+              MyFilms.conf.StrlabelDetails3 = BaseMesFilms.Translate_Column(wproperty);
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails3 + "', Label: '" + conf.StrlabelDetails3 + "'.");
+              break;
+            case "useritemdetails4":
+              MyFilms.conf.StritemDetails4 = wproperty;
+              MyFilms.conf.StrlabelDetails4 = BaseMesFilms.Translate_Column(wproperty);
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails4 + "', Label: '" + conf.StrlabelDetails4 + "'.");
+              break;
+            case "useritemdetails5":
+              MyFilms.conf.StritemDetails5 = wproperty;
+              MyFilms.conf.StrlabelDetails5 = BaseMesFilms.Translate_Column(wproperty);
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails5 + "', Label: '" + conf.StrlabelDetails5 + "'.");
+              break;
+            case "useritemdetails6":
+              MyFilms.conf.StritemDetails6 = wproperty;
+              MyFilms.conf.StrlabelDetails6 = BaseMesFilms.Translate_Column(wproperty);
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails6 + "', Label: '" + conf.StrlabelDetails6 + "'.");
               break;
             case "mastertitle":
               MyFilms.conf.StrTitle1 = wproperty;
@@ -12416,6 +12454,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
         xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem5", MyFilms.conf.Stritem5);
         xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
+
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItemDetails1", MyFilms.conf.StritemDetails1);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabelDetails1", MyFilms.conf.StrlabelDetails1);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItemDetails2", MyFilms.conf.StritemDetails2);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabelDetails2", MyFilms.conf.StrlabelDetails2);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItemDetails3", MyFilms.conf.StritemDetails3);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabelDetails3", MyFilms.conf.StrlabelDetails3);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItemDetails4", MyFilms.conf.StritemDetails4);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabelDetails4", MyFilms.conf.StrlabelDetails4);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItemDetails5", MyFilms.conf.StritemDetails5);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabelDetails5", MyFilms.conf.StrlabelDetails5);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItemDetails6", MyFilms.conf.StritemDetails6);
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabelDetails6", MyFilms.conf.StrlabelDetails6);
 
         xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntTitle1", MyFilms.conf.StrTitle1);
         xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntTitle2", MyFilms.conf.StrTitle2);
