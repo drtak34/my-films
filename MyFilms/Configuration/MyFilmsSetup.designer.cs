@@ -266,7 +266,7 @@
           this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.Tab_Display = new System.Windows.Forms.TabPage();
-          this.groupBox_DetailedSupplementaryInformations = new System.Windows.Forms.GroupBox();
+          this.groupBox_UserItemsMain = new System.Windows.Forms.GroupBox();
           this.AntLabel5 = new System.Windows.Forms.TextBox();
           this.AntLabel4 = new System.Windows.Forms.TextBox();
           this.AntItem5 = new System.Windows.Forms.ComboBox();
@@ -275,9 +275,9 @@
           this.AntItem3 = new System.Windows.Forms.ComboBox();
           this.AntItem2 = new System.Windows.Forms.ComboBox();
           this.AntLabel2 = new System.Windows.Forms.TextBox();
-          this.label7 = new System.Windows.Forms.Label();
+          this.label_MainDBitem = new System.Windows.Forms.Label();
           this.AntItem1 = new System.Windows.Forms.ComboBox();
-          this.label3 = new System.Windows.Forms.Label();
+          this.labelMainLabel = new System.Windows.Forms.Label();
           this.AntLabel1 = new System.Windows.Forms.TextBox();
           this.Tab_Views = new System.Windows.Forms.TabPage();
           this.groupBox_Separators = new System.Windows.Forms.GroupBox();
@@ -575,6 +575,32 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.groupBox_UserItemsDetails = new System.Windows.Forms.GroupBox();
+          this.label_UserItem1 = new System.Windows.Forms.Label();
+          this.label_UserItem2 = new System.Windows.Forms.Label();
+          this.label_UserItem3 = new System.Windows.Forms.Label();
+          this.label_UserItem4 = new System.Windows.Forms.Label();
+          this.label_UserItem5 = new System.Windows.Forms.Label();
+          this.AntItemDetails1 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails2 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails3 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails4 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails5 = new System.Windows.Forms.ComboBox();
+          this.AntLabelDetails1 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails2 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails3 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails4 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails5 = new System.Windows.Forms.TextBox();
+          this.label_UserItemDetails1 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails2 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails3 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails4 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails5 = new System.Windows.Forms.Label();
+          this.label_DetailsDBitem = new System.Windows.Forms.Label();
+          this.label_DetailsLabel = new System.Windows.Forms.Label();
+          this.label_UserItemDetails6 = new System.Windows.Forms.Label();
+          this.AntItemDetails6 = new System.Windows.Forms.ComboBox();
+          this.AntLabelDetails6 = new System.Windows.Forms.TextBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -614,7 +640,7 @@
           this.gpspfield.SuspendLayout();
           this.groupBox2.SuspendLayout();
           this.Tab_Display.SuspendLayout();
-          this.groupBox_DetailedSupplementaryInformations.SuspendLayout();
+          this.groupBox_UserItemsMain.SuspendLayout();
           this.Tab_Views.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -664,6 +690,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          this.groupBox_UserItemsDetails.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2527,7 +2554,8 @@
           // Tab_Display
           // 
           this.Tab_Display.AutoScroll = true;
-          this.Tab_Display.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
+          this.Tab_Display.Controls.Add(this.groupBox_UserItemsDetails);
+          this.Tab_Display.Controls.Add(this.groupBox_UserItemsMain);
           this.Tab_Display.Location = new System.Drawing.Point(4, 22);
           this.Tab_Display.Name = "Tab_Display";
           this.Tab_Display.Size = new System.Drawing.Size(747, 354);
@@ -2536,38 +2564,43 @@
           this.ToolTip1.SetToolTip(this.Tab_Display, "Setup for user defined display items");
           this.Tab_Display.UseVisualStyleBackColor = true;
           // 
-          // groupBox_DetailedSupplementaryInformations
+          // groupBox_UserItemsMain
           // 
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel5);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel4);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem5);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem4);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem2);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel2);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label7);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
-          this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(27, 24);
-          this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
-          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(324, 204);
-          this.groupBox_DetailedSupplementaryInformations.TabIndex = 130;
-          this.groupBox_DetailedSupplementaryInformations.TabStop = false;
-          this.groupBox_DetailedSupplementaryInformations.Text = "Custom Display Items";
-          this.ToolTip1.SetToolTip(this.groupBox_DetailedSupplementaryInformations, resources.GetString("groupBox_DetailedSupplementaryInformations.ToolTip"));
+          this.groupBox_UserItemsMain.Controls.Add(this.label_UserItem5);
+          this.groupBox_UserItemsMain.Controls.Add(this.label_UserItem4);
+          this.groupBox_UserItemsMain.Controls.Add(this.label_UserItem3);
+          this.groupBox_UserItemsMain.Controls.Add(this.label_UserItem2);
+          this.groupBox_UserItemsMain.Controls.Add(this.label_UserItem1);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntLabel5);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntLabel4);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntItem5);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntItem4);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntLabel3);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntItem3);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntItem2);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntLabel2);
+          this.groupBox_UserItemsMain.Controls.Add(this.label_MainDBitem);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntItem1);
+          this.groupBox_UserItemsMain.Controls.Add(this.labelMainLabel);
+          this.groupBox_UserItemsMain.Controls.Add(this.AntLabel1);
+          this.groupBox_UserItemsMain.Location = new System.Drawing.Point(21, 52);
+          this.groupBox_UserItemsMain.Name = "groupBox_UserItemsMain";
+          this.groupBox_UserItemsMain.Size = new System.Drawing.Size(324, 221);
+          this.groupBox_UserItemsMain.TabIndex = 130;
+          this.groupBox_UserItemsMain.TabStop = false;
+          this.groupBox_UserItemsMain.Text = "Custom Display Items for Main Screen";
+          this.ToolTip1.SetToolTip(this.groupBox_UserItemsMain, resources.GetString("groupBox_UserItemsMain.ToolTip"));
           // 
           // AntLabel5
           // 
-          this.AntLabel5.Location = new System.Drawing.Point(140, 150);
+          this.AntLabel5.Location = new System.Drawing.Point(165, 149);
           this.AntLabel5.Name = "AntLabel5";
           this.AntLabel5.Size = new System.Drawing.Size(105, 20);
           this.AntLabel5.TabIndex = 35;
           // 
           // AntLabel4
           // 
-          this.AntLabel4.Location = new System.Drawing.Point(140, 123);
+          this.AntLabel4.Location = new System.Drawing.Point(165, 122);
           this.AntLabel4.Name = "AntLabel4";
           this.AntLabel4.Size = new System.Drawing.Size(105, 20);
           this.AntLabel4.TabIndex = 34;
@@ -2575,7 +2608,7 @@
           // AntItem5
           // 
           this.AntItem5.FormattingEnabled = true;
-          this.AntItem5.Location = new System.Drawing.Point(20, 150);
+          this.AntItem5.Location = new System.Drawing.Point(45, 149);
           this.AntItem5.Name = "AntItem5";
           this.AntItem5.Size = new System.Drawing.Size(101, 21);
           this.AntItem5.Sorted = true;
@@ -2584,7 +2617,7 @@
           // AntItem4
           // 
           this.AntItem4.FormattingEnabled = true;
-          this.AntItem4.Location = new System.Drawing.Point(20, 123);
+          this.AntItem4.Location = new System.Drawing.Point(45, 122);
           this.AntItem4.Name = "AntItem4";
           this.AntItem4.Size = new System.Drawing.Size(101, 21);
           this.AntItem4.Sorted = true;
@@ -2592,7 +2625,7 @@
           // 
           // AntLabel3
           // 
-          this.AntLabel3.Location = new System.Drawing.Point(140, 96);
+          this.AntLabel3.Location = new System.Drawing.Point(165, 95);
           this.AntLabel3.Name = "AntLabel3";
           this.AntLabel3.Size = new System.Drawing.Size(105, 20);
           this.AntLabel3.TabIndex = 30;
@@ -2600,7 +2633,7 @@
           // AntItem3
           // 
           this.AntItem3.FormattingEnabled = true;
-          this.AntItem3.Location = new System.Drawing.Point(20, 96);
+          this.AntItem3.Location = new System.Drawing.Point(45, 95);
           this.AntItem3.Name = "AntItem3";
           this.AntItem3.Size = new System.Drawing.Size(101, 21);
           this.AntItem3.Sorted = true;
@@ -2609,7 +2642,7 @@
           // AntItem2
           // 
           this.AntItem2.FormattingEnabled = true;
-          this.AntItem2.Location = new System.Drawing.Point(20, 69);
+          this.AntItem2.Location = new System.Drawing.Point(45, 68);
           this.AntItem2.Name = "AntItem2";
           this.AntItem2.Size = new System.Drawing.Size(101, 21);
           this.AntItem2.Sorted = true;
@@ -2617,42 +2650,42 @@
           // 
           // AntLabel2
           // 
-          this.AntLabel2.Location = new System.Drawing.Point(140, 69);
+          this.AntLabel2.Location = new System.Drawing.Point(165, 68);
           this.AntLabel2.Name = "AntLabel2";
           this.AntLabel2.Size = new System.Drawing.Size(105, 20);
           this.AntLabel2.TabIndex = 28;
           // 
-          // label7
+          // label_MainDBitem
           // 
-          this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(18, 26);
-          this.label7.Name = "label7";
-          this.label7.Size = new System.Drawing.Size(94, 13);
-          this.label7.TabIndex = 22;
-          this.label7.Text = "DB Item to Display";
+          this.label_MainDBitem.AutoSize = true;
+          this.label_MainDBitem.Location = new System.Drawing.Point(43, 25);
+          this.label_MainDBitem.Name = "label_MainDBitem";
+          this.label_MainDBitem.Size = new System.Drawing.Size(94, 13);
+          this.label_MainDBitem.TabIndex = 22;
+          this.label_MainDBitem.Text = "DB Item to Display";
           // 
           // AntItem1
           // 
           this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
           this.AntItem1.FormattingEnabled = true;
-          this.AntItem1.Location = new System.Drawing.Point(20, 42);
+          this.AntItem1.Location = new System.Drawing.Point(45, 41);
           this.AntItem1.Name = "AntItem1";
           this.AntItem1.Size = new System.Drawing.Size(101, 21);
           this.AntItem1.Sorted = true;
           this.AntItem1.TabIndex = 25;
           // 
-          // label3
+          // labelMainLabel
           // 
-          this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(147, 26);
-          this.label3.Name = "label3";
-          this.label3.Size = new System.Drawing.Size(33, 13);
-          this.label3.TabIndex = 21;
-          this.label3.Text = "Label";
+          this.labelMainLabel.AutoSize = true;
+          this.labelMainLabel.Location = new System.Drawing.Point(172, 25);
+          this.labelMainLabel.Name = "labelMainLabel";
+          this.labelMainLabel.Size = new System.Drawing.Size(33, 13);
+          this.labelMainLabel.TabIndex = 21;
+          this.labelMainLabel.Text = "Label";
           // 
           // AntLabel1
           // 
-          this.AntLabel1.Location = new System.Drawing.Point(140, 42);
+          this.AntLabel1.Location = new System.Drawing.Point(165, 41);
           this.AntLabel1.Name = "AntLabel1";
           this.AntLabel1.Size = new System.Drawing.Size(105, 20);
           this.AntLabel1.TabIndex = 26;
@@ -5939,6 +5972,243 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // groupBox_UserItemsDetails
+          // 
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails6);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails6);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails6);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_DetailsLabel);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_DetailsDBitem);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails5);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails4);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails3);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails2);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails1);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails5);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails4);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails3);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails2);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails1);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails5);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails4);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails3);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails2);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails1);
+          this.groupBox_UserItemsDetails.Location = new System.Drawing.Point(387, 52);
+          this.groupBox_UserItemsDetails.Name = "groupBox_UserItemsDetails";
+          this.groupBox_UserItemsDetails.Size = new System.Drawing.Size(324, 221);
+          this.groupBox_UserItemsDetails.TabIndex = 131;
+          this.groupBox_UserItemsDetails.TabStop = false;
+          this.groupBox_UserItemsDetails.Text = "Custom Display Items for Details Screen";
+          this.ToolTip1.SetToolTip(this.groupBox_UserItemsDetails, resources.GetString("groupBox_UserItemsDetails.ToolTip"));
+          // 
+          // label_UserItem1
+          // 
+          this.label_UserItem1.AutoSize = true;
+          this.label_UserItem1.Location = new System.Drawing.Point(20, 44);
+          this.label_UserItem1.Name = "label_UserItem1";
+          this.label_UserItem1.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem1.TabIndex = 36;
+          this.label_UserItem1.Text = "1";
+          // 
+          // label_UserItem2
+          // 
+          this.label_UserItem2.AutoSize = true;
+          this.label_UserItem2.Location = new System.Drawing.Point(20, 71);
+          this.label_UserItem2.Name = "label_UserItem2";
+          this.label_UserItem2.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem2.TabIndex = 37;
+          this.label_UserItem2.Text = "2";
+          // 
+          // label_UserItem3
+          // 
+          this.label_UserItem3.AutoSize = true;
+          this.label_UserItem3.Location = new System.Drawing.Point(20, 98);
+          this.label_UserItem3.Name = "label_UserItem3";
+          this.label_UserItem3.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem3.TabIndex = 38;
+          this.label_UserItem3.Text = "3";
+          // 
+          // label_UserItem4
+          // 
+          this.label_UserItem4.AutoSize = true;
+          this.label_UserItem4.Location = new System.Drawing.Point(20, 125);
+          this.label_UserItem4.Name = "label_UserItem4";
+          this.label_UserItem4.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem4.TabIndex = 39;
+          this.label_UserItem4.Text = "4";
+          // 
+          // label_UserItem5
+          // 
+          this.label_UserItem5.AutoSize = true;
+          this.label_UserItem5.Location = new System.Drawing.Point(20, 152);
+          this.label_UserItem5.Name = "label_UserItem5";
+          this.label_UserItem5.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem5.TabIndex = 40;
+          this.label_UserItem5.Text = "5";
+          // 
+          // AntItemDetails1
+          // 
+          this.AntItemDetails1.FormattingEnabled = true;
+          this.AntItemDetails1.Location = new System.Drawing.Point(45, 39);
+          this.AntItemDetails1.Name = "AntItemDetails1";
+          this.AntItemDetails1.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails1.TabIndex = 0;
+          // 
+          // AntItemDetails2
+          // 
+          this.AntItemDetails2.FormattingEnabled = true;
+          this.AntItemDetails2.Location = new System.Drawing.Point(45, 68);
+          this.AntItemDetails2.Name = "AntItemDetails2";
+          this.AntItemDetails2.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails2.TabIndex = 1;
+          // 
+          // AntItemDetails3
+          // 
+          this.AntItemDetails3.FormattingEnabled = true;
+          this.AntItemDetails3.Location = new System.Drawing.Point(45, 95);
+          this.AntItemDetails3.Name = "AntItemDetails3";
+          this.AntItemDetails3.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails3.TabIndex = 2;
+          // 
+          // AntItemDetails4
+          // 
+          this.AntItemDetails4.FormattingEnabled = true;
+          this.AntItemDetails4.Location = new System.Drawing.Point(45, 122);
+          this.AntItemDetails4.Name = "AntItemDetails4";
+          this.AntItemDetails4.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails4.TabIndex = 3;
+          // 
+          // AntItemDetails5
+          // 
+          this.AntItemDetails5.FormattingEnabled = true;
+          this.AntItemDetails5.Location = new System.Drawing.Point(45, 149);
+          this.AntItemDetails5.Name = "AntItemDetails5";
+          this.AntItemDetails5.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails5.TabIndex = 4;
+          // 
+          // AntLabelDetails1
+          // 
+          this.AntLabelDetails1.Location = new System.Drawing.Point(165, 39);
+          this.AntLabelDetails1.Name = "AntLabelDetails1";
+          this.AntLabelDetails1.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails1.TabIndex = 5;
+          // 
+          // AntLabelDetails2
+          // 
+          this.AntLabelDetails2.Location = new System.Drawing.Point(165, 68);
+          this.AntLabelDetails2.Name = "AntLabelDetails2";
+          this.AntLabelDetails2.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails2.TabIndex = 6;
+          // 
+          // AntLabelDetails3
+          // 
+          this.AntLabelDetails3.Location = new System.Drawing.Point(165, 95);
+          this.AntLabelDetails3.Name = "AntLabelDetails3";
+          this.AntLabelDetails3.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails3.TabIndex = 7;
+          // 
+          // AntLabelDetails4
+          // 
+          this.AntLabelDetails4.Location = new System.Drawing.Point(165, 122);
+          this.AntLabelDetails4.Name = "AntLabelDetails4";
+          this.AntLabelDetails4.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails4.TabIndex = 8;
+          // 
+          // AntLabelDetails5
+          // 
+          this.AntLabelDetails5.Location = new System.Drawing.Point(165, 149);
+          this.AntLabelDetails5.Name = "AntLabelDetails5";
+          this.AntLabelDetails5.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails5.TabIndex = 9;
+          // 
+          // label_UserItemDetails1
+          // 
+          this.label_UserItemDetails1.AutoSize = true;
+          this.label_UserItemDetails1.Location = new System.Drawing.Point(20, 42);
+          this.label_UserItemDetails1.Name = "label_UserItemDetails1";
+          this.label_UserItemDetails1.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails1.TabIndex = 10;
+          this.label_UserItemDetails1.Text = "1";
+          // 
+          // label_UserItemDetails2
+          // 
+          this.label_UserItemDetails2.AutoSize = true;
+          this.label_UserItemDetails2.Location = new System.Drawing.Point(20, 71);
+          this.label_UserItemDetails2.Name = "label_UserItemDetails2";
+          this.label_UserItemDetails2.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails2.TabIndex = 11;
+          this.label_UserItemDetails2.Text = "2";
+          // 
+          // label_UserItemDetails3
+          // 
+          this.label_UserItemDetails3.AutoSize = true;
+          this.label_UserItemDetails3.Location = new System.Drawing.Point(20, 98);
+          this.label_UserItemDetails3.Name = "label_UserItemDetails3";
+          this.label_UserItemDetails3.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails3.TabIndex = 12;
+          this.label_UserItemDetails3.Text = "3";
+          // 
+          // label_UserItemDetails4
+          // 
+          this.label_UserItemDetails4.AutoSize = true;
+          this.label_UserItemDetails4.Location = new System.Drawing.Point(20, 125);
+          this.label_UserItemDetails4.Name = "label_UserItemDetails4";
+          this.label_UserItemDetails4.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails4.TabIndex = 13;
+          this.label_UserItemDetails4.Text = "4";
+          // 
+          // label_UserItemDetails5
+          // 
+          this.label_UserItemDetails5.AutoSize = true;
+          this.label_UserItemDetails5.Location = new System.Drawing.Point(20, 152);
+          this.label_UserItemDetails5.Name = "label_UserItemDetails5";
+          this.label_UserItemDetails5.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails5.TabIndex = 14;
+          this.label_UserItemDetails5.Text = "5";
+          // 
+          // label_DetailsDBitem
+          // 
+          this.label_DetailsDBitem.AutoSize = true;
+          this.label_DetailsDBitem.Location = new System.Drawing.Point(43, 23);
+          this.label_DetailsDBitem.Name = "label_DetailsDBitem";
+          this.label_DetailsDBitem.Size = new System.Drawing.Size(94, 13);
+          this.label_DetailsDBitem.TabIndex = 15;
+          this.label_DetailsDBitem.Text = "DB Item to Display";
+          // 
+          // label_DetailsLabel
+          // 
+          this.label_DetailsLabel.AutoSize = true;
+          this.label_DetailsLabel.Location = new System.Drawing.Point(172, 23);
+          this.label_DetailsLabel.Name = "label_DetailsLabel";
+          this.label_DetailsLabel.Size = new System.Drawing.Size(33, 13);
+          this.label_DetailsLabel.TabIndex = 16;
+          this.label_DetailsLabel.Text = "Label";
+          // 
+          // label_UserItemDetails6
+          // 
+          this.label_UserItemDetails6.AutoSize = true;
+          this.label_UserItemDetails6.Location = new System.Drawing.Point(20, 179);
+          this.label_UserItemDetails6.Name = "label_UserItemDetails6";
+          this.label_UserItemDetails6.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails6.TabIndex = 17;
+          this.label_UserItemDetails6.Text = "6";
+          // 
+          // AntItemDetails6
+          // 
+          this.AntItemDetails6.FormattingEnabled = true;
+          this.AntItemDetails6.Location = new System.Drawing.Point(45, 176);
+          this.AntItemDetails6.Name = "AntItemDetails6";
+          this.AntItemDetails6.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails6.TabIndex = 18;
+          // 
+          // AntLabelDetails6
+          // 
+          this.AntLabelDetails6.Location = new System.Drawing.Point(165, 177);
+          this.AntLabelDetails6.Name = "AntLabelDetails6";
+          this.AntLabelDetails6.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails6.TabIndex = 0;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6009,8 +6279,8 @@
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
           this.Tab_Display.ResumeLayout(false);
-          this.groupBox_DetailedSupplementaryInformations.ResumeLayout(false);
-          this.groupBox_DetailedSupplementaryInformations.PerformLayout();
+          this.groupBox_UserItemsMain.ResumeLayout(false);
+          this.groupBox_UserItemsMain.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
           this.groupBox_Separators.ResumeLayout(false);
           this.groupBox_Separators.PerformLayout();
@@ -6084,6 +6354,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          this.groupBox_UserItemsDetails.ResumeLayout(false);
+          this.groupBox_UserItemsDetails.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6512,7 +6784,7 @@
         private TextBox AntFilterText2;
         private ComboBox AntFilterItem1;
         private TextBox AntFilterText1;
-        private GroupBox groupBox_DetailedSupplementaryInformations;
+        private GroupBox groupBox_UserItemsMain;
         private TextBox AntLabel5;
         private TextBox AntLabel4;
         private ComboBox AntItem5;
@@ -6521,9 +6793,9 @@
         private ComboBox AntItem3;
         private ComboBox AntItem2;
         private TextBox AntLabel2;
-        private Label label7;
+        private Label label_MainDBitem;
         private ComboBox AntItem1;
-        private Label label3;
+        private Label labelMainLabel;
         private TextBox AntLabel1;
         private TextBox View_Dflt_Text;
         private CheckBox chkShowEmpty;
@@ -6552,5 +6824,31 @@
         private TextBox tbExternalPlayerStartParams;
         private CheckBox chkPersonsEnableDownloads;
         private TextBox textBoxUpdateGrabberScripts;
+        private GroupBox groupBox_UserItemsDetails;
+        private Label label_DetailsLabel;
+        private Label label_DetailsDBitem;
+        private Label label_UserItemDetails5;
+        private Label label_UserItemDetails4;
+        private Label label_UserItemDetails3;
+        private Label label_UserItemDetails2;
+        private Label label_UserItemDetails1;
+        private TextBox AntLabelDetails5;
+        private TextBox AntLabelDetails4;
+        private TextBox AntLabelDetails3;
+        private TextBox AntLabelDetails2;
+        private TextBox AntLabelDetails1;
+        private ComboBox AntItemDetails5;
+        private ComboBox AntItemDetails4;
+        private ComboBox AntItemDetails3;
+        private ComboBox AntItemDetails2;
+        private ComboBox AntItemDetails1;
+        private Label label_UserItem5;
+        private Label label_UserItem4;
+        private Label label_UserItem3;
+        private Label label_UserItem2;
+        private Label label_UserItem1;
+        private TextBox AntLabelDetails6;
+        private ComboBox AntItemDetails6;
+        private Label label_UserItemDetails6;
     }
 }

@@ -537,165 +537,142 @@
 		<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	</control>
-	<!-- <control>
-		<type>label</type>
-		<description>Year Label</description>
-		<id>1</id>
-		<posX>310</posX>
-		<posY>140</posY>
-		<label>#myfilms.db.year.label:</label>
-		<textcolor>90ffffff</textcolor>
-		<font>font14</font>
-		<width>200</width>
-		<visible>string.equals(#myfilms.db.year.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-	</control>
+
 	<control>
-		<description>Year Value</description>
+		<description>Details User Item 1 Label</description>
 		<type>label</type>
-		<id>1</id>
-		<posX>435</posX>
-		<posY>140</posY>
-		<label>#myfilms.db.year.value</label>
-		<textcolor>ffffffff</textcolor>
-		<font>font14</font>
-		<width>260</width>
-		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-	</control> -->
-	<control>
-		<type>label</type>
-		<description>Director Label</description>
 		<id>1</id>
 		<posX>310</posX>
 		<posY>165</posY>
-		<label>#myfilms.db.director.label:</label>
+		<label>#myfilms.user.detailsitem1.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.db.director.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.detailsitem1.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>Director Value</description>
+		<description>Details User Item 1 Value</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
 		<posY>165</posY>
-		<label>#myfilms.db.director.value</label>
+		<label>#myfilms.user.detailsitem1.value</label>
 		<width>260</width>
 		<font>font14</font>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Display Item 1 Label</description>
+		<description>Details User Item 2 Label</description>
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
 		<posY>190</posY>
-		<label>#myfilms.user.item1.label:</label>
+		<label>#myfilms.user.detailsitem2.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.user.item1.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.detailsitem2.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Display Item 1 Value</description>
+		<description>Details User Item 2 Value</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
 		<posY>190</posY>
-		<label>#myfilms.user.item1.value</label>
+		<label>#myfilms.user.detailsitem2.value</label>
 		<width>260</width>
 		<font>font14</font>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Item 2 Label</description>
+		<description>Details User Item 3 Label</description>
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
 		<posY>215</posY>
-		<label>#myfilms.user.item2.label:</label>
+		<label>#myfilms.user.detailsitem3.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.user.item2.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.detailsitem3.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Item 2 Value</description>
+		<description>Details User Item 3 Value</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
 		<posY>215</posY>
-		<label>#myfilms.user.item2.value</label>
+		<label>#myfilms.user.detailsitem3.value</label>
 		<width>260</width>
 		<font>font14</font>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Display Item 3 Label</description>
+		<description>Details User Item 4 Label</description>
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
 		<posY>240</posY>
-		<label>#myfilms.user.item3.label:</label>
+		<label>#myfilms.user.detailsitem4.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.user.item3.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.detailsitem4.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Display Item 3 Value</description>
+		<description>Details User Item 4 Value</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
 		<posY>240</posY>
-		<label>#myfilms.user.item3.value</label>
+		<label>#myfilms.user.detailsitem4.value</label>
 		<width>260</width>
 		<font>font14</font>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Item 4 Label</description>
+		<description>Details User Item 5 Label</description>
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
 		<posY>265</posY>
-		<label>#myfilms.user.item4.label:</label>
+		<label>#myfilms.user.detailsitem5.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.user.item4.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.detailsitem5.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Item 4 Value</description>
+		<description>Details User Item 5 Value</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
 		<posY>265</posY>
-		<label>#myfilms.user.item4.value</label>
+		<label>#myfilms.user.detailsitem5.value</label>
 		<width>260</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Item 5 Label</description>
+		<description>Details User Item 6 Label</description>
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
 		<posY>290</posY>
-		<label>#myfilms.user.item5.label:</label>
+		<label>#myfilms.user.detailsitem6.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font13</font>
 		<width>125</width>
-		<visible>string.equals(#myfilms.user.item5.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.detailsitem6.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
-		<description>User Item 5 Value</description>
+		<description>Details User Item 6 Value</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
 		<posY>290</posY>
-		<label>#myfilms.user.item5.value</label>
+		<label>#myfilms.user.detailsitem6.value</label>
 		<width>235</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font13</font>

@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Language name="English" characters="255">
   <Section name="unmapped">
+    <String id="95">Layout: </String>
+    <String id="96">Sort by: </String>
+    <String id="97">View by: </String>
     <String id="100">Layout: Icons</String>
     <String id="101">Layout: List</String>
     <String id="103">Sort by: Name</String>
@@ -318,7 +321,7 @@
     <String id="10798770">Show only films with media available ({0})</String>
     <String id="10798771">Display options ...</String>
     <String id="10798772">Choose Field ...</String>
-    <String id="10798773">Display Item</String>
+    <String id="10798773">Main Display Item</String>
     <String id="10798774">empty</String>
     <String id="10798775">Trakt ...</String>
     <String id="10798776">Trakt</String>
@@ -345,6 +348,7 @@
     <String id="10798802">started for {0} films?</String>
     <String id="10798803">Extended search (directories) ?</String>
     <String id="10798810">Delete movie cover from DB</String>
+    <String id="10798820">Details Display Item</String>
     <String id="10798940">Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>

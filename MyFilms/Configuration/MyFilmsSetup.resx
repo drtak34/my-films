@@ -572,10 +572,17 @@ You can update e.g. the "checked" field with a value "true" to indicate "watched
 However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
-  <data name="groupBox_DetailedSupplementaryInformations.ToolTip" xml:space="preserve">
+  <data name="groupBox_UserItemsDetails.ToolTip" xml:space="preserve">
     <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
 As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
-</value>
+These are user defined items for the details screen.
+You can also change the assignment in MyFilms GUI (Options - View Options).</value>
+  </data>
+  <data name="groupBox_UserItemsMain.ToolTip" xml:space="preserve">
+    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
+As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
+These are user defined items for the main screen.
+You can also change the assignment in MyFilms GUI (Options - View Options).</value>
   </data>
   <data name="groupBox_Separators.ToolTip" xml:space="preserve">
     <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
