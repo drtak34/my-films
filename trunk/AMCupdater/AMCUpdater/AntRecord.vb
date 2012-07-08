@@ -2136,9 +2136,11 @@ Public Class AntRecord
                     End If
                 End If
             Else
-                If Not _InternetData(Grabber_Output.Collection) Is Nothing Then
-                    If _InternetData(Grabber_Output.Collection).Length > 0 Then
-                        TempValue = _InternetData(Grabber_Output.Collection).ToString() & "\" & TempValue
+                If Not _InternetData Is Nothing Then
+                    If Not _InternetData(Grabber_Output.Collection) Is Nothing Then
+                        If _InternetData(Grabber_Output.Collection).Length > 0 Then
+                            TempValue = _InternetData(Grabber_Output.Collection).ToString() & "\" & TempValue
+                        End If
                     End If
                 End If
             End If
