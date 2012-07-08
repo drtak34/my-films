@@ -516,6 +516,8 @@ namespace Grabber_Interface
       else cbCertificationPreferredLanguage.Enabled = false;
 
         // Read Mapping Infos
+        List<string> fields = Grabber.Grabber_URLClass.FieldList();
+
         for (int i = 0; i < 40; i++)
         {
           try
@@ -537,7 +539,16 @@ namespace Grabber_Interface
             dataGridViewMapping.Rows[i].Cells[6].Value = Convert.ToBoolean(val6);
             dataGridViewMapping.Rows[i].Cells[7].Value = Convert.ToBoolean(val7);
           }
-          catch (Exception) {}
+          catch (Exception)
+          {
+            dataGridViewMapping.Rows[i].Cells[1].Value = fields[i];
+            dataGridViewMapping.Rows[i].Cells[2].Value = "";
+            dataGridViewMapping.Rows[i].Cells[3].Value = false;
+            dataGridViewMapping.Rows[i].Cells[4].Value = false;
+            dataGridViewMapping.Rows[i].Cells[5].Value = false;
+            dataGridViewMapping.Rows[i].Cells[6].Value = false;
+            dataGridViewMapping.Rows[i].Cells[7].Value = false;
+          }
         }
     }
 
@@ -4760,46 +4771,11 @@ namespace Grabber_Interface
 
     private void InitMappingTable()
     {
-      Fields[0] = "OriginalTitle";
-      Fields[1] = "TranslatedTitle";
-      Fields[2] = "Picture";
-      Fields[3] = "Description";
-      Fields[4] = "Rating";
-      Fields[5] = "Actors";
-      Fields[6] = "Director";
-      Fields[7] = "Producer";
-      Fields[8] = "Year";
-      Fields[9] = "Country";
-      Fields[10] = "Category";
-      Fields[11] = "URL Redirection Picture";
-      Fields[12] = "ImageURL";
-      Fields[13] = "Writer";
-      Fields[14] = "Comment";
-      Fields[15] = "Language";
-      Fields[16] = "Tagline";
-      Fields[17] = "Certification";
-      Fields[18] = "IMDB_Id";
-      Fields[19] = "IMDB_Rank";
-      Fields[20] = "Studio";
-      Fields[21] = "Edition";
-      Fields[22] = "Fanart";
-      Fields[23] = "Generic1";
-      Fields[24] = "Generic2";
-      Fields[25] = "Generic3";
-      Fields[26] = "TranslatedTitle - All Names";
-      Fields[27] = "TranslatedTitle - All Values";
-      Fields[28] = "Certification - All Names";
-      Fields[29] = "Certification - All Values";
-      Fields[30] = "MultiPosters";
-      Fields[31] = "Photos";
-      Fields[32] = "PersonImages";
-      Fields[33] = "MultiFanart";
-      Fields[34] = "Trailer";
-      Fields[35] = "TMDB_Id";
-      Fields[36] = "Runtime";
-      Fields[37] = "Collection";
-      Fields[38] = "CollectionImageURL";
-      Fields[39] = "PictureURL";
+      List<string> fields = this.FieldList();
+      for (int i = 0; i < 40; i++)
+      {
+        Fields[i] = fields[i];
+      }
 
       Column2.Items.Clear();
       Column2.Items.Add(""); // empty field to choose ....

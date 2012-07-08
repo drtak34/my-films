@@ -2760,13 +2760,14 @@ Public Class AntProcessor
                             Ant.MovieNumber = row("AntID")
                             ' filename exist but with wrong path (may be moved. Entry don't be created but updated    
                             Ant.UpdateElement()
-                            Ant.ProhibitInternetLookup = True
+
+                            Ant.ProhibitInternetLookup = Not CurrentSettings.Rescan_Moved_Files ' Ant.ProhibitInternetLookup = True
                             Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
                             Ant.SaveProgress()
                             If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                             Else
-                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Updated - " & ReplacementPath & " - " & Ant.LastOutputMessage)
+                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File Updated (moved) - " & ReplacementPath & " - " & Ant.LastOutputMessage)
                             End If
                         Else
                             'need to create a new entry:
