@@ -4771,7 +4771,7 @@ namespace Grabber_Interface
 
     private void InitMappingTable()
     {
-      List<string> fields = this.FieldList();
+      List<string> fields = Grabber.Grabber_URLClass.FieldList();
       for (int i = 0; i < 40; i++)
       {
         Fields[i] = fields[i];
