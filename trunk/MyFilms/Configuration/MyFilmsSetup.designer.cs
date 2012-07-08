@@ -266,7 +266,33 @@
           this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.Tab_Display = new System.Windows.Forms.TabPage();
+          this.groupBox_UserItemsDetails = new System.Windows.Forms.GroupBox();
+          this.AntLabelDetails6 = new System.Windows.Forms.TextBox();
+          this.AntItemDetails6 = new System.Windows.Forms.ComboBox();
+          this.label_UserItemDetails6 = new System.Windows.Forms.Label();
+          this.label_DetailsLabel = new System.Windows.Forms.Label();
+          this.label_DetailsDBitem = new System.Windows.Forms.Label();
+          this.label_UserItemDetails5 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails4 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails3 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails2 = new System.Windows.Forms.Label();
+          this.label_UserItemDetails1 = new System.Windows.Forms.Label();
+          this.AntLabelDetails5 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails4 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails3 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails2 = new System.Windows.Forms.TextBox();
+          this.AntLabelDetails1 = new System.Windows.Forms.TextBox();
+          this.AntItemDetails5 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails4 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails3 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails2 = new System.Windows.Forms.ComboBox();
+          this.AntItemDetails1 = new System.Windows.Forms.ComboBox();
           this.groupBox_UserItemsMain = new System.Windows.Forms.GroupBox();
+          this.label_UserItem5 = new System.Windows.Forms.Label();
+          this.label_UserItem4 = new System.Windows.Forms.Label();
+          this.label_UserItem3 = new System.Windows.Forms.Label();
+          this.label_UserItem2 = new System.Windows.Forms.Label();
+          this.label_UserItem1 = new System.Windows.Forms.Label();
           this.AntLabel5 = new System.Windows.Forms.TextBox();
           this.AntLabel4 = new System.Windows.Forms.TextBox();
           this.AntItem5 = new System.Windows.Forms.ComboBox();
@@ -512,10 +538,6 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
-          this.textBoxUpdateGrabberScripts = new System.Windows.Forms.TextBox();
-          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
-          this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
-          this.button_GrabberScriptUpdate = new System.Windows.Forms.Button();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
           this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -575,32 +597,12 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.groupBox_UserItemsDetails = new System.Windows.Forms.GroupBox();
-          this.label_UserItem1 = new System.Windows.Forms.Label();
-          this.label_UserItem2 = new System.Windows.Forms.Label();
-          this.label_UserItem3 = new System.Windows.Forms.Label();
-          this.label_UserItem4 = new System.Windows.Forms.Label();
-          this.label_UserItem5 = new System.Windows.Forms.Label();
-          this.AntItemDetails1 = new System.Windows.Forms.ComboBox();
-          this.AntItemDetails2 = new System.Windows.Forms.ComboBox();
-          this.AntItemDetails3 = new System.Windows.Forms.ComboBox();
-          this.AntItemDetails4 = new System.Windows.Forms.ComboBox();
-          this.AntItemDetails5 = new System.Windows.Forms.ComboBox();
-          this.AntLabelDetails1 = new System.Windows.Forms.TextBox();
-          this.AntLabelDetails2 = new System.Windows.Forms.TextBox();
-          this.AntLabelDetails3 = new System.Windows.Forms.TextBox();
-          this.AntLabelDetails4 = new System.Windows.Forms.TextBox();
-          this.AntLabelDetails5 = new System.Windows.Forms.TextBox();
-          this.label_UserItemDetails1 = new System.Windows.Forms.Label();
-          this.label_UserItemDetails2 = new System.Windows.Forms.Label();
-          this.label_UserItemDetails3 = new System.Windows.Forms.Label();
-          this.label_UserItemDetails4 = new System.Windows.Forms.Label();
-          this.label_UserItemDetails5 = new System.Windows.Forms.Label();
-          this.label_DetailsDBitem = new System.Windows.Forms.Label();
-          this.label_DetailsLabel = new System.Windows.Forms.Label();
-          this.label_UserItemDetails6 = new System.Windows.Forms.Label();
-          this.AntItemDetails6 = new System.Windows.Forms.ComboBox();
-          this.AntLabelDetails6 = new System.Windows.Forms.TextBox();
+          this.groupBox_UpdateGrabberScripts = new System.Windows.Forms.GroupBox();
+          this.textBoxUpdateGrabberScripts = new System.Windows.Forms.TextBox();
+          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
+          this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
+          this.label_UpdateGrabberScriptsInstructions = new System.Windows.Forms.Label();
+          this.button_DeleteBackupScripts = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -640,6 +642,7 @@
           this.gpspfield.SuspendLayout();
           this.groupBox2.SuspendLayout();
           this.Tab_Display.SuspendLayout();
+          this.groupBox_UserItemsDetails.SuspendLayout();
           this.groupBox_UserItemsMain.SuspendLayout();
           this.Tab_Views.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
@@ -690,13 +693,13 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          this.groupBox_UserItemsDetails.SuspendLayout();
+          this.groupBox_UpdateGrabberScripts.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
           // 
           ownerLabel.AutoSize = true;
-          ownerLabel.Location = new System.Drawing.Point(14, 95);
+          ownerLabel.Location = new System.Drawing.Point(379, 12);
           ownerLabel.Name = "ownerLabel";
           ownerLabel.Size = new System.Drawing.Size(41, 13);
           ownerLabel.TabIndex = 91;
@@ -705,7 +708,7 @@
           // mailLabel
           // 
           mailLabel.AutoSize = true;
-          mailLabel.Location = new System.Drawing.Point(14, 121);
+          mailLabel.Location = new System.Drawing.Point(379, 38);
           mailLabel.Name = "mailLabel";
           mailLabel.Size = new System.Drawing.Size(29, 13);
           mailLabel.TabIndex = 93;
@@ -714,7 +717,7 @@
           // siteLabel
           // 
           siteLabel.AutoSize = true;
-          siteLabel.Location = new System.Drawing.Point(14, 147);
+          siteLabel.Location = new System.Drawing.Point(379, 64);
           siteLabel.Name = "siteLabel";
           siteLabel.Size = new System.Drawing.Size(28, 13);
           siteLabel.TabIndex = 95;
@@ -723,7 +726,7 @@
           // descriptionLabel
           // 
           descriptionLabel.AutoSize = true;
-          descriptionLabel.Location = new System.Drawing.Point(14, 173);
+          descriptionLabel.Location = new System.Drawing.Point(379, 90);
           descriptionLabel.Name = "descriptionLabel";
           descriptionLabel.Size = new System.Drawing.Size(38, 13);
           descriptionLabel.TabIndex = 97;
@@ -2090,9 +2093,9 @@
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
-          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 24);
+          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 9);
           this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
-          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 270);
+          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 251);
           this.groupBox_AMCupdater.TabIndex = 2;
           this.groupBox_AMCupdater.TabStop = false;
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
@@ -2103,7 +2106,7 @@
           this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.txtAMCUpd_cnf_Display);
           this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.btnAMCUpd_cnf);
           this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.txtAMCUpd_cnf);
-          this.groupBoxAMCUpdaterConfigFile.Location = new System.Drawing.Point(388, 19);
+          this.groupBoxAMCUpdaterConfigFile.Location = new System.Drawing.Point(388, 13);
           this.groupBoxAMCUpdaterConfigFile.Name = "groupBoxAMCUpdaterConfigFile";
           this.groupBoxAMCUpdaterConfigFile.Size = new System.Drawing.Size(332, 53);
           this.groupBoxAMCUpdaterConfigFile.TabIndex = 63;
@@ -2143,7 +2146,7 @@
           // 
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.scheduleAMCUpdater);
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnParameters);
-          this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 87);
+          this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 71);
           this.groupBox_AMCupdaterScheduer.Name = "groupBox_AMCupdaterScheduer";
           this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 62);
           this.groupBox_AMCupdaterScheduer.TabIndex = 62;
@@ -2185,7 +2188,7 @@
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AMCMovieScanPath);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDesktopIcon);
           this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(11, 155);
+          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 137);
           this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
           this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 100);
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
@@ -2288,7 +2291,7 @@
           // 
           this.chkAMCUpd.AutoSize = true;
           this.chkAMCUpd.BackColor = System.Drawing.Color.Transparent;
-          this.chkAMCUpd.Location = new System.Drawing.Point(24, 41);
+          this.chkAMCUpd.Location = new System.Drawing.Point(24, 36);
           this.chkAMCUpd.Name = "chkAMCUpd";
           this.chkAMCUpd.Size = new System.Drawing.Size(123, 17);
           this.chkAMCUpd.TabIndex = 0;
@@ -2564,6 +2567,198 @@
           this.ToolTip1.SetToolTip(this.Tab_Display, "Setup for user defined display items");
           this.Tab_Display.UseVisualStyleBackColor = true;
           // 
+          // groupBox_UserItemsDetails
+          // 
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails6);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails6);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails6);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_DetailsLabel);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_DetailsDBitem);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails5);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails4);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails3);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails2);
+          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails1);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails5);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails4);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails3);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails2);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails1);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails5);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails4);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails3);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails2);
+          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails1);
+          this.groupBox_UserItemsDetails.Location = new System.Drawing.Point(387, 52);
+          this.groupBox_UserItemsDetails.Name = "groupBox_UserItemsDetails";
+          this.groupBox_UserItemsDetails.Size = new System.Drawing.Size(324, 221);
+          this.groupBox_UserItemsDetails.TabIndex = 131;
+          this.groupBox_UserItemsDetails.TabStop = false;
+          this.groupBox_UserItemsDetails.Text = "Custom Display Items for Details Screen";
+          this.ToolTip1.SetToolTip(this.groupBox_UserItemsDetails, resources.GetString("groupBox_UserItemsDetails.ToolTip"));
+          // 
+          // AntLabelDetails6
+          // 
+          this.AntLabelDetails6.Location = new System.Drawing.Point(165, 177);
+          this.AntLabelDetails6.Name = "AntLabelDetails6";
+          this.AntLabelDetails6.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails6.TabIndex = 0;
+          // 
+          // AntItemDetails6
+          // 
+          this.AntItemDetails6.FormattingEnabled = true;
+          this.AntItemDetails6.Location = new System.Drawing.Point(45, 176);
+          this.AntItemDetails6.Name = "AntItemDetails6";
+          this.AntItemDetails6.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails6.TabIndex = 18;
+          // 
+          // label_UserItemDetails6
+          // 
+          this.label_UserItemDetails6.AutoSize = true;
+          this.label_UserItemDetails6.Location = new System.Drawing.Point(20, 179);
+          this.label_UserItemDetails6.Name = "label_UserItemDetails6";
+          this.label_UserItemDetails6.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails6.TabIndex = 17;
+          this.label_UserItemDetails6.Text = "6";
+          // 
+          // label_DetailsLabel
+          // 
+          this.label_DetailsLabel.AutoSize = true;
+          this.label_DetailsLabel.Location = new System.Drawing.Point(172, 23);
+          this.label_DetailsLabel.Name = "label_DetailsLabel";
+          this.label_DetailsLabel.Size = new System.Drawing.Size(33, 13);
+          this.label_DetailsLabel.TabIndex = 16;
+          this.label_DetailsLabel.Text = "Label";
+          // 
+          // label_DetailsDBitem
+          // 
+          this.label_DetailsDBitem.AutoSize = true;
+          this.label_DetailsDBitem.Location = new System.Drawing.Point(43, 23);
+          this.label_DetailsDBitem.Name = "label_DetailsDBitem";
+          this.label_DetailsDBitem.Size = new System.Drawing.Size(94, 13);
+          this.label_DetailsDBitem.TabIndex = 15;
+          this.label_DetailsDBitem.Text = "DB Item to Display";
+          // 
+          // label_UserItemDetails5
+          // 
+          this.label_UserItemDetails5.AutoSize = true;
+          this.label_UserItemDetails5.Location = new System.Drawing.Point(20, 152);
+          this.label_UserItemDetails5.Name = "label_UserItemDetails5";
+          this.label_UserItemDetails5.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails5.TabIndex = 14;
+          this.label_UserItemDetails5.Text = "5";
+          // 
+          // label_UserItemDetails4
+          // 
+          this.label_UserItemDetails4.AutoSize = true;
+          this.label_UserItemDetails4.Location = new System.Drawing.Point(20, 125);
+          this.label_UserItemDetails4.Name = "label_UserItemDetails4";
+          this.label_UserItemDetails4.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails4.TabIndex = 13;
+          this.label_UserItemDetails4.Text = "4";
+          // 
+          // label_UserItemDetails3
+          // 
+          this.label_UserItemDetails3.AutoSize = true;
+          this.label_UserItemDetails3.Location = new System.Drawing.Point(20, 98);
+          this.label_UserItemDetails3.Name = "label_UserItemDetails3";
+          this.label_UserItemDetails3.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails3.TabIndex = 12;
+          this.label_UserItemDetails3.Text = "3";
+          // 
+          // label_UserItemDetails2
+          // 
+          this.label_UserItemDetails2.AutoSize = true;
+          this.label_UserItemDetails2.Location = new System.Drawing.Point(20, 71);
+          this.label_UserItemDetails2.Name = "label_UserItemDetails2";
+          this.label_UserItemDetails2.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails2.TabIndex = 11;
+          this.label_UserItemDetails2.Text = "2";
+          // 
+          // label_UserItemDetails1
+          // 
+          this.label_UserItemDetails1.AutoSize = true;
+          this.label_UserItemDetails1.Location = new System.Drawing.Point(20, 42);
+          this.label_UserItemDetails1.Name = "label_UserItemDetails1";
+          this.label_UserItemDetails1.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItemDetails1.TabIndex = 10;
+          this.label_UserItemDetails1.Text = "1";
+          // 
+          // AntLabelDetails5
+          // 
+          this.AntLabelDetails5.Location = new System.Drawing.Point(165, 149);
+          this.AntLabelDetails5.Name = "AntLabelDetails5";
+          this.AntLabelDetails5.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails5.TabIndex = 9;
+          // 
+          // AntLabelDetails4
+          // 
+          this.AntLabelDetails4.Location = new System.Drawing.Point(165, 122);
+          this.AntLabelDetails4.Name = "AntLabelDetails4";
+          this.AntLabelDetails4.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails4.TabIndex = 8;
+          // 
+          // AntLabelDetails3
+          // 
+          this.AntLabelDetails3.Location = new System.Drawing.Point(165, 95);
+          this.AntLabelDetails3.Name = "AntLabelDetails3";
+          this.AntLabelDetails3.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails3.TabIndex = 7;
+          // 
+          // AntLabelDetails2
+          // 
+          this.AntLabelDetails2.Location = new System.Drawing.Point(165, 68);
+          this.AntLabelDetails2.Name = "AntLabelDetails2";
+          this.AntLabelDetails2.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails2.TabIndex = 6;
+          // 
+          // AntLabelDetails1
+          // 
+          this.AntLabelDetails1.Location = new System.Drawing.Point(165, 39);
+          this.AntLabelDetails1.Name = "AntLabelDetails1";
+          this.AntLabelDetails1.Size = new System.Drawing.Size(105, 20);
+          this.AntLabelDetails1.TabIndex = 5;
+          // 
+          // AntItemDetails5
+          // 
+          this.AntItemDetails5.FormattingEnabled = true;
+          this.AntItemDetails5.Location = new System.Drawing.Point(45, 149);
+          this.AntItemDetails5.Name = "AntItemDetails5";
+          this.AntItemDetails5.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails5.TabIndex = 4;
+          // 
+          // AntItemDetails4
+          // 
+          this.AntItemDetails4.FormattingEnabled = true;
+          this.AntItemDetails4.Location = new System.Drawing.Point(45, 122);
+          this.AntItemDetails4.Name = "AntItemDetails4";
+          this.AntItemDetails4.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails4.TabIndex = 3;
+          // 
+          // AntItemDetails3
+          // 
+          this.AntItemDetails3.FormattingEnabled = true;
+          this.AntItemDetails3.Location = new System.Drawing.Point(45, 95);
+          this.AntItemDetails3.Name = "AntItemDetails3";
+          this.AntItemDetails3.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails3.TabIndex = 2;
+          // 
+          // AntItemDetails2
+          // 
+          this.AntItemDetails2.FormattingEnabled = true;
+          this.AntItemDetails2.Location = new System.Drawing.Point(45, 68);
+          this.AntItemDetails2.Name = "AntItemDetails2";
+          this.AntItemDetails2.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails2.TabIndex = 1;
+          // 
+          // AntItemDetails1
+          // 
+          this.AntItemDetails1.FormattingEnabled = true;
+          this.AntItemDetails1.Location = new System.Drawing.Point(45, 39);
+          this.AntItemDetails1.Name = "AntItemDetails1";
+          this.AntItemDetails1.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails1.TabIndex = 0;
+          // 
           // groupBox_UserItemsMain
           // 
           this.groupBox_UserItemsMain.Controls.Add(this.label_UserItem5);
@@ -2590,6 +2785,51 @@
           this.groupBox_UserItemsMain.TabStop = false;
           this.groupBox_UserItemsMain.Text = "Custom Display Items for Main Screen";
           this.ToolTip1.SetToolTip(this.groupBox_UserItemsMain, resources.GetString("groupBox_UserItemsMain.ToolTip"));
+          // 
+          // label_UserItem5
+          // 
+          this.label_UserItem5.AutoSize = true;
+          this.label_UserItem5.Location = new System.Drawing.Point(20, 152);
+          this.label_UserItem5.Name = "label_UserItem5";
+          this.label_UserItem5.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem5.TabIndex = 40;
+          this.label_UserItem5.Text = "5";
+          // 
+          // label_UserItem4
+          // 
+          this.label_UserItem4.AutoSize = true;
+          this.label_UserItem4.Location = new System.Drawing.Point(20, 125);
+          this.label_UserItem4.Name = "label_UserItem4";
+          this.label_UserItem4.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem4.TabIndex = 39;
+          this.label_UserItem4.Text = "4";
+          // 
+          // label_UserItem3
+          // 
+          this.label_UserItem3.AutoSize = true;
+          this.label_UserItem3.Location = new System.Drawing.Point(20, 98);
+          this.label_UserItem3.Name = "label_UserItem3";
+          this.label_UserItem3.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem3.TabIndex = 38;
+          this.label_UserItem3.Text = "3";
+          // 
+          // label_UserItem2
+          // 
+          this.label_UserItem2.AutoSize = true;
+          this.label_UserItem2.Location = new System.Drawing.Point(20, 71);
+          this.label_UserItem2.Name = "label_UserItem2";
+          this.label_UserItem2.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem2.TabIndex = 37;
+          this.label_UserItem2.Text = "2";
+          // 
+          // label_UserItem1
+          // 
+          this.label_UserItem1.AutoSize = true;
+          this.label_UserItem1.Location = new System.Drawing.Point(20, 44);
+          this.label_UserItem1.Name = "label_UserItem1";
+          this.label_UserItem1.Size = new System.Drawing.Size(13, 13);
+          this.label_UserItem1.TabIndex = 36;
+          this.label_UserItem1.Text = "1";
           // 
           // AntLabel5
           // 
@@ -4587,10 +4827,10 @@
           this.AMCConfigView.FullRowSelect = true;
           this.AMCConfigView.GridLines = true;
           this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(17, 27);
+          this.AMCConfigView.Location = new System.Drawing.Point(6, 23);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(164, 54);
+          this.AMCConfigView.Size = new System.Drawing.Size(317, 86);
           this.AMCConfigView.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -5381,6 +5621,7 @@
           // 
           // Tab_AMCupdater
           // 
+          this.Tab_AMCupdater.Controls.Add(this.groupBox_UpdateGrabberScripts);
           this.Tab_AMCupdater.Controls.Add(this.groupBox_AMCupdater);
           this.Tab_AMCupdater.Location = new System.Drawing.Point(4, 22);
           this.Tab_AMCupdater.Name = "Tab_AMCupdater";
@@ -5430,10 +5671,6 @@
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
-          this.Tab_Other.Controls.Add(this.textBoxUpdateGrabberScripts);
-          this.Tab_Other.Controls.Add(this.progressBarUpdateGrabberScripts);
-          this.Tab_Other.Controls.Add(this.buttonUpdateGrabberScripts);
-          this.Tab_Other.Controls.Add(this.button_GrabberScriptUpdate);
           this.Tab_Other.Controls.Add(this.personDataGridView);
           this.Tab_Other.Controls.Add(this.customFieldDataGridView);
           this.Tab_Other.Controls.Add(ownerLabel);
@@ -5454,41 +5691,6 @@
           this.Tab_Other.TabIndex = 11;
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
-          // 
-          // textBoxUpdateGrabberScripts
-          // 
-          this.textBoxUpdateGrabberScripts.Enabled = false;
-          this.textBoxUpdateGrabberScripts.Location = new System.Drawing.Point(563, 123);
-          this.textBoxUpdateGrabberScripts.Name = "textBoxUpdateGrabberScripts";
-          this.textBoxUpdateGrabberScripts.Size = new System.Drawing.Size(137, 20);
-          this.textBoxUpdateGrabberScripts.TabIndex = 123;
-          // 
-          // progressBarUpdateGrabberScripts
-          // 
-          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(563, 149);
-          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
-          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(137, 13);
-          this.progressBarUpdateGrabberScripts.TabIndex = 122;
-          // 
-          // buttonUpdateGrabberScripts
-          // 
-          this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(563, 168);
-          this.buttonUpdateGrabberScripts.Name = "buttonUpdateGrabberScripts";
-          this.buttonUpdateGrabberScripts.Size = new System.Drawing.Size(137, 23);
-          this.buttonUpdateGrabberScripts.TabIndex = 121;
-          this.buttonUpdateGrabberScripts.Text = "Update Grabber Scripts";
-          this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
-          this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
-          // 
-          // button_GrabberScriptUpdate
-          // 
-          this.button_GrabberScriptUpdate.Location = new System.Drawing.Point(200, 166);
-          this.button_GrabberScriptUpdate.Name = "button_GrabberScriptUpdate";
-          this.button_GrabberScriptUpdate.Size = new System.Drawing.Size(134, 27);
-          this.button_GrabberScriptUpdate.TabIndex = 120;
-          this.button_GrabberScriptUpdate.Text = "Grabber Script Update";
-          this.button_GrabberScriptUpdate.UseVisualStyleBackColor = true;
-          this.button_GrabberScriptUpdate.Click += new System.EventHandler(this.button_GrabberScriptUpdate_Click);
           // 
           // personDataGridView
           // 
@@ -5512,11 +5714,11 @@
             this.dataGridViewTextBoxColumn18,
             this.dataGridViewTextBoxColumn19});
           this.personDataGridView.DataSource = this.personBindingSource;
-          this.personDataGridView.Location = new System.Drawing.Point(6, 276);
+          this.personDataGridView.Location = new System.Drawing.Point(6, 233);
           this.personDataGridView.Name = "personDataGridView";
           this.personDataGridView.RowHeadersVisible = false;
           this.personDataGridView.RowTemplate.Height = 18;
-          this.personDataGridView.Size = new System.Drawing.Size(738, 75);
+          this.personDataGridView.Size = new System.Drawing.Size(735, 115);
           this.personDataGridView.TabIndex = 119;
           // 
           // dataGridViewTextBoxColumn9
@@ -5649,11 +5851,11 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
           this.customFieldDataGridView.DataSource = this.customFieldBindingSource;
-          this.customFieldDataGridView.Location = new System.Drawing.Point(6, 209);
+          this.customFieldDataGridView.Location = new System.Drawing.Point(6, 115);
           this.customFieldDataGridView.Name = "customFieldDataGridView";
           this.customFieldDataGridView.RowHeadersVisible = false;
           this.customFieldDataGridView.RowTemplate.Height = 18;
-          this.customFieldDataGridView.Size = new System.Drawing.Size(738, 61);
+          this.customFieldDataGridView.Size = new System.Drawing.Size(735, 112);
           this.customFieldDataGridView.TabIndex = 119;
           // 
           // dataGridViewTextBoxColumn1
@@ -5720,9 +5922,9 @@
           // ownerTextBox
           // 
           this.ownerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Owner", true));
-          this.ownerTextBox.Location = new System.Drawing.Point(61, 92);
+          this.ownerTextBox.Location = new System.Drawing.Point(426, 9);
           this.ownerTextBox.Name = "ownerTextBox";
-          this.ownerTextBox.Size = new System.Drawing.Size(79, 20);
+          this.ownerTextBox.Size = new System.Drawing.Size(134, 20);
           this.ownerTextBox.TabIndex = 92;
           // 
           // propertiesBindingSource
@@ -5733,30 +5935,30 @@
           // mailTextBox
           // 
           this.mailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Mail", true));
-          this.mailTextBox.Location = new System.Drawing.Point(61, 118);
+          this.mailTextBox.Location = new System.Drawing.Point(426, 35);
           this.mailTextBox.Name = "mailTextBox";
-          this.mailTextBox.Size = new System.Drawing.Size(79, 20);
+          this.mailTextBox.Size = new System.Drawing.Size(134, 20);
           this.mailTextBox.TabIndex = 94;
           // 
           // siteTextBox
           // 
           this.siteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Site", true));
-          this.siteTextBox.Location = new System.Drawing.Point(61, 144);
+          this.siteTextBox.Location = new System.Drawing.Point(426, 61);
           this.siteTextBox.Name = "siteTextBox";
-          this.siteTextBox.Size = new System.Drawing.Size(79, 20);
+          this.siteTextBox.Size = new System.Drawing.Size(134, 20);
           this.siteTextBox.TabIndex = 96;
           // 
           // descriptionTextBox
           // 
           this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.propertiesBindingSource, "Description", true));
-          this.descriptionTextBox.Location = new System.Drawing.Point(61, 170);
+          this.descriptionTextBox.Location = new System.Drawing.Point(426, 87);
           this.descriptionTextBox.Name = "descriptionTextBox";
-          this.descriptionTextBox.Size = new System.Drawing.Size(79, 20);
+          this.descriptionTextBox.Size = new System.Drawing.Size(134, 20);
           this.descriptionTextBox.TabIndex = 98;
           // 
           // btnGrabberInterface
           // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(351, 166);
+          this.btnGrabberInterface.Location = new System.Drawing.Point(607, 40);
           this.btnGrabberInterface.Name = "btnGrabberInterface";
           this.btnGrabberInterface.Size = new System.Drawing.Size(134, 27);
           this.btnGrabberInterface.TabIndex = 91;
@@ -5767,7 +5969,7 @@
           // lblAMCupdaterConfigPreview
           // 
           this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(22, 11);
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(6, 7);
           this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
           this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
           this.lblAMCupdaterConfigPreview.TabIndex = 90;
@@ -5972,242 +6174,65 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // groupBox_UserItemsDetails
+          // groupBox_UpdateGrabberScripts
           // 
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails6);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails6);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails6);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_DetailsLabel);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_DetailsDBitem);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails5);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails4);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails3);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails2);
-          this.groupBox_UserItemsDetails.Controls.Add(this.label_UserItemDetails1);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails5);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails4);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails3);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails2);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails1);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails5);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails4);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails3);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails2);
-          this.groupBox_UserItemsDetails.Controls.Add(this.AntItemDetails1);
-          this.groupBox_UserItemsDetails.Location = new System.Drawing.Point(387, 52);
-          this.groupBox_UserItemsDetails.Name = "groupBox_UserItemsDetails";
-          this.groupBox_UserItemsDetails.Size = new System.Drawing.Size(324, 221);
-          this.groupBox_UserItemsDetails.TabIndex = 131;
-          this.groupBox_UserItemsDetails.TabStop = false;
-          this.groupBox_UserItemsDetails.Text = "Custom Display Items for Details Screen";
-          this.ToolTip1.SetToolTip(this.groupBox_UserItemsDetails, resources.GetString("groupBox_UserItemsDetails.ToolTip"));
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.button_DeleteBackupScripts);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.label_UpdateGrabberScriptsInstructions);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.textBoxUpdateGrabberScripts);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.progressBarUpdateGrabberScripts);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.buttonUpdateGrabberScripts);
+          this.groupBox_UpdateGrabberScripts.Location = new System.Drawing.Point(6, 263);
+          this.groupBox_UpdateGrabberScripts.Name = "groupBox_UpdateGrabberScripts";
+          this.groupBox_UpdateGrabberScripts.Size = new System.Drawing.Size(735, 85);
+          this.groupBox_UpdateGrabberScripts.TabIndex = 3;
+          this.groupBox_UpdateGrabberScripts.TabStop = false;
+          this.groupBox_UpdateGrabberScripts.Text = "Update Grabber Scripts ...";
+          this.ToolTip1.SetToolTip(this.groupBox_UpdateGrabberScripts, resources.GetString("groupBox_UpdateGrabberScripts.ToolTip"));
           // 
-          // label_UserItem1
+          // textBoxUpdateGrabberScripts
           // 
-          this.label_UserItem1.AutoSize = true;
-          this.label_UserItem1.Location = new System.Drawing.Point(20, 44);
-          this.label_UserItem1.Name = "label_UserItem1";
-          this.label_UserItem1.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem1.TabIndex = 36;
-          this.label_UserItem1.Text = "1";
+          this.textBoxUpdateGrabberScripts.Enabled = false;
+          this.textBoxUpdateGrabberScripts.Location = new System.Drawing.Point(399, 42);
+          this.textBoxUpdateGrabberScripts.Name = "textBoxUpdateGrabberScripts";
+          this.textBoxUpdateGrabberScripts.Size = new System.Drawing.Size(300, 20);
+          this.textBoxUpdateGrabberScripts.TabIndex = 126;
           // 
-          // label_UserItem2
+          // progressBarUpdateGrabberScripts
           // 
-          this.label_UserItem2.AutoSize = true;
-          this.label_UserItem2.Location = new System.Drawing.Point(20, 71);
-          this.label_UserItem2.Name = "label_UserItem2";
-          this.label_UserItem2.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem2.TabIndex = 37;
-          this.label_UserItem2.Text = "2";
+          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(399, 66);
+          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
+          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(300, 13);
+          this.progressBarUpdateGrabberScripts.TabIndex = 125;
           // 
-          // label_UserItem3
+          // buttonUpdateGrabberScripts
           // 
-          this.label_UserItem3.AutoSize = true;
-          this.label_UserItem3.Location = new System.Drawing.Point(20, 98);
-          this.label_UserItem3.Name = "label_UserItem3";
-          this.label_UserItem3.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem3.TabIndex = 38;
-          this.label_UserItem3.Text = "3";
+          this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(399, 13);
+          this.buttonUpdateGrabberScripts.Name = "buttonUpdateGrabberScripts";
+          this.buttonUpdateGrabberScripts.Size = new System.Drawing.Size(143, 25);
+          this.buttonUpdateGrabberScripts.TabIndex = 124;
+          this.buttonUpdateGrabberScripts.Text = "Update Grabber Scripts";
+          this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
+          this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
           // 
-          // label_UserItem4
+          // label_UpdateGrabberScriptsInstructions
           // 
-          this.label_UserItem4.AutoSize = true;
-          this.label_UserItem4.Location = new System.Drawing.Point(20, 125);
-          this.label_UserItem4.Name = "label_UserItem4";
-          this.label_UserItem4.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem4.TabIndex = 39;
-          this.label_UserItem4.Text = "4";
+          this.label_UpdateGrabberScriptsInstructions.AutoSize = true;
+          this.label_UpdateGrabberScriptsInstructions.Location = new System.Drawing.Point(21, 32);
+          this.label_UpdateGrabberScriptsInstructions.Name = "label_UpdateGrabberScriptsInstructions";
+          this.label_UpdateGrabberScriptsInstructions.Size = new System.Drawing.Size(267, 26);
+          this.label_UpdateGrabberScriptsInstructions.TabIndex = 127;
+          this.label_UpdateGrabberScriptsInstructions.Text = "Update will download missing grabber scripts \r\nor update existing ones, if newer " +
+              "versions are available.";
           // 
-          // label_UserItem5
+          // button_DeleteBackupScripts
           // 
-          this.label_UserItem5.AutoSize = true;
-          this.label_UserItem5.Location = new System.Drawing.Point(20, 152);
-          this.label_UserItem5.Name = "label_UserItem5";
-          this.label_UserItem5.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem5.TabIndex = 40;
-          this.label_UserItem5.Text = "5";
-          // 
-          // AntItemDetails1
-          // 
-          this.AntItemDetails1.FormattingEnabled = true;
-          this.AntItemDetails1.Location = new System.Drawing.Point(45, 39);
-          this.AntItemDetails1.Name = "AntItemDetails1";
-          this.AntItemDetails1.Size = new System.Drawing.Size(101, 21);
-          this.AntItemDetails1.TabIndex = 0;
-          // 
-          // AntItemDetails2
-          // 
-          this.AntItemDetails2.FormattingEnabled = true;
-          this.AntItemDetails2.Location = new System.Drawing.Point(45, 68);
-          this.AntItemDetails2.Name = "AntItemDetails2";
-          this.AntItemDetails2.Size = new System.Drawing.Size(101, 21);
-          this.AntItemDetails2.TabIndex = 1;
-          // 
-          // AntItemDetails3
-          // 
-          this.AntItemDetails3.FormattingEnabled = true;
-          this.AntItemDetails3.Location = new System.Drawing.Point(45, 95);
-          this.AntItemDetails3.Name = "AntItemDetails3";
-          this.AntItemDetails3.Size = new System.Drawing.Size(101, 21);
-          this.AntItemDetails3.TabIndex = 2;
-          // 
-          // AntItemDetails4
-          // 
-          this.AntItemDetails4.FormattingEnabled = true;
-          this.AntItemDetails4.Location = new System.Drawing.Point(45, 122);
-          this.AntItemDetails4.Name = "AntItemDetails4";
-          this.AntItemDetails4.Size = new System.Drawing.Size(101, 21);
-          this.AntItemDetails4.TabIndex = 3;
-          // 
-          // AntItemDetails5
-          // 
-          this.AntItemDetails5.FormattingEnabled = true;
-          this.AntItemDetails5.Location = new System.Drawing.Point(45, 149);
-          this.AntItemDetails5.Name = "AntItemDetails5";
-          this.AntItemDetails5.Size = new System.Drawing.Size(101, 21);
-          this.AntItemDetails5.TabIndex = 4;
-          // 
-          // AntLabelDetails1
-          // 
-          this.AntLabelDetails1.Location = new System.Drawing.Point(165, 39);
-          this.AntLabelDetails1.Name = "AntLabelDetails1";
-          this.AntLabelDetails1.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails1.TabIndex = 5;
-          // 
-          // AntLabelDetails2
-          // 
-          this.AntLabelDetails2.Location = new System.Drawing.Point(165, 68);
-          this.AntLabelDetails2.Name = "AntLabelDetails2";
-          this.AntLabelDetails2.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails2.TabIndex = 6;
-          // 
-          // AntLabelDetails3
-          // 
-          this.AntLabelDetails3.Location = new System.Drawing.Point(165, 95);
-          this.AntLabelDetails3.Name = "AntLabelDetails3";
-          this.AntLabelDetails3.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails3.TabIndex = 7;
-          // 
-          // AntLabelDetails4
-          // 
-          this.AntLabelDetails4.Location = new System.Drawing.Point(165, 122);
-          this.AntLabelDetails4.Name = "AntLabelDetails4";
-          this.AntLabelDetails4.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails4.TabIndex = 8;
-          // 
-          // AntLabelDetails5
-          // 
-          this.AntLabelDetails5.Location = new System.Drawing.Point(165, 149);
-          this.AntLabelDetails5.Name = "AntLabelDetails5";
-          this.AntLabelDetails5.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails5.TabIndex = 9;
-          // 
-          // label_UserItemDetails1
-          // 
-          this.label_UserItemDetails1.AutoSize = true;
-          this.label_UserItemDetails1.Location = new System.Drawing.Point(20, 42);
-          this.label_UserItemDetails1.Name = "label_UserItemDetails1";
-          this.label_UserItemDetails1.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails1.TabIndex = 10;
-          this.label_UserItemDetails1.Text = "1";
-          // 
-          // label_UserItemDetails2
-          // 
-          this.label_UserItemDetails2.AutoSize = true;
-          this.label_UserItemDetails2.Location = new System.Drawing.Point(20, 71);
-          this.label_UserItemDetails2.Name = "label_UserItemDetails2";
-          this.label_UserItemDetails2.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails2.TabIndex = 11;
-          this.label_UserItemDetails2.Text = "2";
-          // 
-          // label_UserItemDetails3
-          // 
-          this.label_UserItemDetails3.AutoSize = true;
-          this.label_UserItemDetails3.Location = new System.Drawing.Point(20, 98);
-          this.label_UserItemDetails3.Name = "label_UserItemDetails3";
-          this.label_UserItemDetails3.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails3.TabIndex = 12;
-          this.label_UserItemDetails3.Text = "3";
-          // 
-          // label_UserItemDetails4
-          // 
-          this.label_UserItemDetails4.AutoSize = true;
-          this.label_UserItemDetails4.Location = new System.Drawing.Point(20, 125);
-          this.label_UserItemDetails4.Name = "label_UserItemDetails4";
-          this.label_UserItemDetails4.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails4.TabIndex = 13;
-          this.label_UserItemDetails4.Text = "4";
-          // 
-          // label_UserItemDetails5
-          // 
-          this.label_UserItemDetails5.AutoSize = true;
-          this.label_UserItemDetails5.Location = new System.Drawing.Point(20, 152);
-          this.label_UserItemDetails5.Name = "label_UserItemDetails5";
-          this.label_UserItemDetails5.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails5.TabIndex = 14;
-          this.label_UserItemDetails5.Text = "5";
-          // 
-          // label_DetailsDBitem
-          // 
-          this.label_DetailsDBitem.AutoSize = true;
-          this.label_DetailsDBitem.Location = new System.Drawing.Point(43, 23);
-          this.label_DetailsDBitem.Name = "label_DetailsDBitem";
-          this.label_DetailsDBitem.Size = new System.Drawing.Size(94, 13);
-          this.label_DetailsDBitem.TabIndex = 15;
-          this.label_DetailsDBitem.Text = "DB Item to Display";
-          // 
-          // label_DetailsLabel
-          // 
-          this.label_DetailsLabel.AutoSize = true;
-          this.label_DetailsLabel.Location = new System.Drawing.Point(172, 23);
-          this.label_DetailsLabel.Name = "label_DetailsLabel";
-          this.label_DetailsLabel.Size = new System.Drawing.Size(33, 13);
-          this.label_DetailsLabel.TabIndex = 16;
-          this.label_DetailsLabel.Text = "Label";
-          // 
-          // label_UserItemDetails6
-          // 
-          this.label_UserItemDetails6.AutoSize = true;
-          this.label_UserItemDetails6.Location = new System.Drawing.Point(20, 179);
-          this.label_UserItemDetails6.Name = "label_UserItemDetails6";
-          this.label_UserItemDetails6.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails6.TabIndex = 17;
-          this.label_UserItemDetails6.Text = "6";
-          // 
-          // AntItemDetails6
-          // 
-          this.AntItemDetails6.FormattingEnabled = true;
-          this.AntItemDetails6.Location = new System.Drawing.Point(45, 176);
-          this.AntItemDetails6.Name = "AntItemDetails6";
-          this.AntItemDetails6.Size = new System.Drawing.Size(101, 21);
-          this.AntItemDetails6.TabIndex = 18;
-          // 
-          // AntLabelDetails6
-          // 
-          this.AntLabelDetails6.Location = new System.Drawing.Point(165, 177);
-          this.AntLabelDetails6.Name = "AntLabelDetails6";
-          this.AntLabelDetails6.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails6.TabIndex = 0;
+          this.button_DeleteBackupScripts.Location = new System.Drawing.Point(555, 13);
+          this.button_DeleteBackupScripts.Name = "button_DeleteBackupScripts";
+          this.button_DeleteBackupScripts.Size = new System.Drawing.Size(144, 25);
+          this.button_DeleteBackupScripts.TabIndex = 128;
+          this.button_DeleteBackupScripts.Text = "Delete Script Backups";
+          this.button_DeleteBackupScripts.UseVisualStyleBackColor = true;
+          this.button_DeleteBackupScripts.Click += new System.EventHandler(this.button_DeleteBackupScripts_Click);
           // 
           // MyFilmsSetup
           // 
@@ -6279,6 +6304,8 @@
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
           this.Tab_Display.ResumeLayout(false);
+          this.groupBox_UserItemsDetails.ResumeLayout(false);
+          this.groupBox_UserItemsDetails.PerformLayout();
           this.groupBox_UserItemsMain.ResumeLayout(false);
           this.groupBox_UserItemsMain.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
@@ -6354,8 +6381,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          this.groupBox_UserItemsDetails.ResumeLayout(false);
-          this.groupBox_UserItemsDetails.PerformLayout();
+          this.groupBox_UpdateGrabberScripts.ResumeLayout(false);
+          this.groupBox_UpdateGrabberScripts.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6665,7 +6692,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private BindingSource personBindingSource;
-        private Button button_GrabberScriptUpdate;
         private Button btnEditView;
         private Label label52;
         private Label label33;
@@ -6688,8 +6714,6 @@
         private BindingSource viewBindingSource;
         private MFview mFview;
         private TabPage Tab_OldStuff;
-        private Button buttonUpdateGrabberScripts;
-        private ProgressBar progressBarUpdateGrabberScripts;
         private GroupBox groupBoxView;
         private BindingNavigator bindingNavigatorViews;
         private ToolStripButton toolStripButtonAdd;
@@ -6823,7 +6847,6 @@
         private TextBox tbExternalPlayerPath;
         private TextBox tbExternalPlayerStartParams;
         private CheckBox chkPersonsEnableDownloads;
-        private TextBox textBoxUpdateGrabberScripts;
         private GroupBox groupBox_UserItemsDetails;
         private Label label_DetailsLabel;
         private Label label_DetailsDBitem;
@@ -6850,5 +6873,11 @@
         private TextBox AntLabelDetails6;
         private ComboBox AntItemDetails6;
         private Label label_UserItemDetails6;
+        private GroupBox groupBox_UpdateGrabberScripts;
+        private TextBox textBoxUpdateGrabberScripts;
+        private ProgressBar progressBarUpdateGrabberScripts;
+        private Button buttonUpdateGrabberScripts;
+        private Label label_UpdateGrabberScriptsInstructions;
+        private Button button_DeleteBackupScripts;
     }
 }

@@ -5812,10 +5812,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
 #endregion
 
-        private void button_GrabberScriptUpdate_Click(object sender, EventArgs e)
-        {
-          Grabber.Updater.UpdateScripts(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
-        }
+        //private void button_GrabberScriptUpdate_Click(object sender, EventArgs e)
+        //{
+        //  Grabber.Updater.UpdateScripts(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
+        //}
 
         private void Config_Name_TextChanged(object sender, EventArgs e)
         {
@@ -5860,18 +5860,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           Thread updateThread = new Thread(delegate(object obj)
           {
-            string versionfile = Config.GetFolder(Config.Dir.Config) + @"\MyFilmsScriptVersions.xml";
-            if (System.IO.File.Exists(versionfile)) System.IO.File.Delete(versionfile);
-            Uri url = new Uri("http://my-films.googlecode.com/svn/trunk/Installer" + @"/updateScriptVersions.xml");
-
-            if (DownloadFile(url, versionfile)) // DownloadFileAsync(url, versionfile);
+            try
             {
-              int iUpdates = UpdateScriptFiles(versionfile);
-              textBoxUpdateGrabberScripts.Text = "";
-              if (iUpdates > 0) MessageBox.Show(iUpdates + " Grabber Script(s) updated !");
-              else MessageBox.Show("No Updates available !");
-              //try { System.IO.File.Delete(versionfile); } // remove temp download file
-              //catch { }
+              string versionfile = Config.GetFolder(Config.Dir.Config) + @"\MyFilmsScriptVersions.xml";
+              if (System.IO.File.Exists(versionfile)) System.IO.File.Delete(versionfile);
+              Uri url = new Uri("http://my-films.googlecode.com/svn/trunk/Installer" + @"/updateScriptVersions.xml");
+
+              if (DownloadFile(url, versionfile)) // DownloadFileAsync(url, versionfile);
+              {
+                List<string> updatedscripts = UpdateScriptFiles(versionfile);
+                textBoxUpdateGrabberScripts.Text = "";
+                if (updatedscripts.Count > 0)
+                {
+                  string updatelist = "Grabber Scripts updated: \n";
+                  foreach (string updatedscript in updatedscripts)
+                  {
+                    updatelist += updatedscript + "\n";
+                  }
+                  MessageBox.Show(updatelist);
+                }
+                else MessageBox.Show("No Updates available !");
+                //try { System.IO.File.Delete(versionfile); } // remove temp download file
+                //catch { }
+              }
+            }
+            catch (Exception ex)
+            {
+              MessageBox.Show("Error updating script files: '" + ex.Message + "'\n\n" + ex.StackTrace);
             }
           })
           {
@@ -5926,12 +5941,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //  System.IO.File.Delete(file);
           //}
           textBoxUpdateGrabberScripts.Text = "";
+          progressBarUpdateGrabberScripts.Value = 100;
           // MessageBox.Show("Download(s) completed!");
         }
 
-        public int UpdateScriptFiles(string versionfile)
+        public List<string> UpdateScriptFiles(string versionfile)
         {
-          int iUpdates = 0;
+          List<string> updatedscripts = new List<string>();
           DirectoryInfo dirsInf = new DirectoryInfo(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
           FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
           List<string> ExistingGrabberScriptFiles = new List<string>();
@@ -5943,9 +5959,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             if (sfi.Extension.ToLower() == ".xml")
             {
-              GrabberScript script = new GrabberScript(sfi.FullName);
-              script.Load(sfi.FullName);
-              ExistingGrabberScriptFiles.Add(Path.GetFileName(sfi.FullName).ToLower());
+              try // do try-catch, irf there is old or invalid greabber script files in directory !
+              {
+                GrabberScript script = new GrabberScript(sfi.FullName);
+                script.Load(sfi.FullName);
+                ExistingGrabberScriptFiles.Add(Path.GetFileName(sfi.FullName).ToLower());
+              }
+              catch (Exception ex)
+              {
+                MessageBox.Show("Skip check for invalid Grabber Script '" + sfi.Name + "' - Error: '" + ex.Message + "'");
+              }
             }
           }
 
@@ -5955,24 +5978,35 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             doc.Load(versionfile);
             string urlbase = doc.DocumentElement.SelectSingleNode("/grabberscripts/urlbase").InnerText;
             XmlNodeList grabberupdates = doc.DocumentElement.SelectNodes("/grabberscripts/scripts");
+            if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\temp\")) System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\temp\");
+            progressBarUpdateGrabberScripts.Maximum = grabberupdates.Count;
+            progressBarUpdateGrabberScripts.Value = 0;
             foreach (XmlNode grabberupdate in grabberupdates)
             {
+              if (progressBarUpdateGrabberScripts.Value < progressBarUpdateGrabberScripts.Maximum) progressBarUpdateGrabberScripts.Value += 1;
               name = grabberupdate.SelectSingleNodeFast("name").InnerText;
               version = new Version(grabberupdate.SelectSingleNodeFast("version").InnerText);
               url = urlbase + name;
-              string localfilename = System.IO.Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts), name);
+              string localfilename = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts), name);
               string backupfile = Path.Combine(Path.GetDirectoryName(localfilename) + @"\backup\", (Path.GetFileNameWithoutExtension(localfilename) +  " - " + DateTime.Now.ToString("u") + ".xml").Replace(":", "-").Replace("/", "-")) ;
+              string tempFile = Path.Combine(Path.GetDirectoryName(localfilename) + @"\temp\", Path.GetFileName(localfilename)); // string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xml";
+              if (System.IO.File.Exists(tempFile)) System.IO.File.Delete(tempFile);
+              Thread.Sleep(25);
+
+              textBoxUpdateGrabberScripts.Text = "Checking update for '" + name + "'";
+
               // check, if script missing - then load it
               if (!ExistingGrabberScriptFiles.Contains(name.ToLower()))
               {
-                textBoxUpdateGrabberScripts.Text = "updating '" + name + "'";
-                string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xml";
-                if (DownloadFile(new Uri(url), localfilename)) // DownloadFile(new Uri(url), localfilename); // "http://my-films.googlecode.com/svn/trunk/Installer/Config/scripts/MyFilms/";
+                if (DownloadFile(new Uri(url), tempFile)) // DownloadFile(new Uri(url), localfilename); // "http://my-films.googlecode.com/svn/trunk/Installer/Config/scripts/MyFilms/";
                 {
                   System.IO.File.Copy(tempFile,localfilename,true);
                   System.IO.File.Delete(tempFile);
+                  Thread.Sleep(25);
                 }
-                iUpdates++;
+                GrabberScript newScript = new GrabberScript(localfilename);
+                newScript.Load(localfilename);
+                updatedscripts.Add(newScript.DBName + " (Language(s) = '" + newScript.Language + "', Version = '" + newScript.Version + "')");
               }
               else
               {
@@ -5989,27 +6023,38 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
                 if (curVersion != null && curVersion.CompareTo(version) < 0) // compare the versions
                 {
-                  textBoxUpdateGrabberScripts.Text = "updating '" + name + "'";
-                  string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xml";
+                  textBoxUpdateGrabberScripts.Text = "Updating '" + name + "'";
                   if (DownloadFile(new Uri(url), tempFile)) // DownloadFile(new Uri(url), localfilename); // "http://my-films.googlecode.com/svn/trunk/Installer/Config/scripts/MyFilms/";
                   {
                     // backup existing script
                     if (!System.IO.Directory.Exists(Path.GetDirectoryName(backupfile))) System.IO.Directory.CreateDirectory(Path.GetDirectoryName(backupfile));
                     System.IO.File.Copy(localfilename, backupfile, true);
                     System.IO.File.Delete(localfilename);
-                    Thread.Sleep(50);
+                    Thread.Sleep(25);
                     System.IO.File.Copy(tempFile, localfilename, true);
                     System.IO.File.Delete(tempFile);
-                    iUpdates++;
+                    Thread.Sleep(25);
+                    GrabberScript newScript = new GrabberScript(localfilename);
+                    newScript.Load(localfilename);
+                    updatedscripts.Add(newScript.DBName + " (Language(s) = '" + newScript.Language + "', Version = '" + newScript.Version + "')");
                   }
                 }
               }
+              // delete temp file
+              if (System.IO.File.Exists(tempFile)) System.IO.File.Delete(tempFile);
+              Thread.Sleep(25);
             }
+            // remove temp directory
+            try
+            {
+              if (System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\temp\")) System.IO.Directory.Delete(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\temp\", true);
+            }
+            catch (Exception) { }
           }
           catch (Exception ex)
           {
             MessageBox.Show("Error updating script files: '" + ex.Message + "'\n" + ex.StackTrace);
-            return iUpdates;
+            return updatedscripts;
           }
 
           #region old method
@@ -6069,7 +6114,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //  //if (null != reader) reader.Close();
           //}
 #endregion
-          return iUpdates;
+          return updatedscripts;
+        }
+
+        private void button_DeleteBackupScripts_Click(object sender, EventArgs e)
+        {
+          string backupdir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\backup\";
+          try
+          {
+            if (Directory.Exists(backupdir))
+            {
+              DirectoryInfo dirsInf = new DirectoryInfo(backupdir);
+              FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
+              foreach (FileSystemInfo sfi in sfiles)
+              {
+                if (sfi.Extension.ToLower() == ".xml")
+                {
+                  System.IO.File.Delete(sfi.FullName);
+                }
+              }
+              Directory.Delete(backupdir, true);
+            }
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show("Error deleting script backups: " + ex.Message);
+          }
+          MessageBox.Show("Successfully deleted all script backups !");
         }
 
         private void toolStripButtonAddDefaults_Click(object sender, EventArgs e)
