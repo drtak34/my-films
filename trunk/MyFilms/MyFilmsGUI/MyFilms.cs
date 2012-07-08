@@ -13890,6 +13890,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       LoggingRule rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MyFilms*" to log file
       config.LoggingRules.Add(rule);
+      LoggingRule rule2 = new LoggingRule("Grabber*", logLevel, fileTarget); // add Grabber classes to logging
+      config.LoggingRules.Add(rule2);
 
       LogManager.Configuration = config;
     }
