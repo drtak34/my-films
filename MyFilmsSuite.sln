@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{
 	ProjectSection(SolutionItems) = preProject
 		Installer\MyFilms-12.xmp2 = Installer\MyFilms-12.xmp2
 		Installer\update.xml = Installer\update.xml
+		Installer\updateScriptVersions.xml = Installer\updateScriptVersions.xml
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AMCupdaterLib", "AMCupdater\AMCupdaterLib\AMCupdaterLib.vbproj", "{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}"

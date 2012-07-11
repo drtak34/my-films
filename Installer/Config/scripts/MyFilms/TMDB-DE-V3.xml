@@ -5,7 +5,7 @@
     <URLPrefix>http://api.themoviedb.org/3/movie/</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>2.0.2</Version>
+    <Version>2.1</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -288,6 +288,10 @@
       <KeyStartCollectionImageURL Param1="_x002F_" Param2="http:_x002F__x002F_cf2.imgobject.com_x002F_t_x002F_p_x002F_original_x002F_">_x0022__x002C__x0022_poster_path_x0022_:_x0022_</KeyStartCollectionImageURL>
       <KeyEndCollectionImageURL>_x0022_</KeyEndCollectionImageURL>
       <KeyCollectionImageURLIndex />
+      <KeyRuntimePage />
+      <KeyStartRuntime Param1="" Param2="">runtime_x0022_:</KeyStartRuntime>
+      <KeyEndRuntime>_x002C_</KeyEndRuntime>
+      <KeyRuntimeIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -325,11 +329,11 @@
       <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_35 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_36 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_37 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_38 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_39 source="" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="TMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Collection" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="CollectionImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="PictureURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>
