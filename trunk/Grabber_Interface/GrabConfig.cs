@@ -524,6 +524,7 @@ namespace Grabber_Interface
           {
             string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty, val6 = string.Empty, val7 = string.Empty;
             val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
+            if (string.IsNullOrEmpty(val1)) val1 = fields[i]; // if missing field in script, replace DB-field name with "right one"
             val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
             val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
             val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
