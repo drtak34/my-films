@@ -1091,7 +1091,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           int wLayout = 0;
           if (layoutname == "List") wLayout = 0;
-          if (layoutname == "List (extended)") wLayout = 1;
+          if (layoutname == "Big Icon List") wLayout = 1;
           if (layoutname == "Small Icons") wLayout = 2;
           if (layoutname == "Large Icons") wLayout = 3;
           if (layoutname == "Filmstrip") wLayout = 4;
@@ -1103,7 +1103,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           string layoutname = "List";
           if (layoutnumber == 0) layoutname = "List";
-          if (layoutnumber == 1) layoutname = "List (extended)";
+          if (layoutnumber == 1) layoutname = "Big Icon List";
           if (layoutnumber == 2) layoutname = "Small Icons";
           if (layoutnumber == 3) layoutname = "Large Icons";
           if (layoutnumber == 4) layoutname = "Filmstrip";
