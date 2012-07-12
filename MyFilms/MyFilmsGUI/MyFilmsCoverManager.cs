@@ -101,7 +101,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LargeIcons = 2,
             FilmStrip = 3,
             AlbumView = 4,
-            PlayList = 5
+            PlayList = 5,
+            CoverFlow = 6
         }
 
       #endregion
@@ -244,6 +245,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 case View.PlayList:
                     strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(101);
+                    break;
+                case View.CoverFlow:
+                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(791);
                     break;
             }
             if (buttonLayouts != null)
@@ -763,77 +767,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (control == buttonLayouts)
             {
-              bool shouldContinue = false;
-              do
-              {
-                shouldContinue = false;
-                switch (CurrentView)
-                {
-                  case View.List:
-                    CurrentView = View.PlayList;
-                    if (!AllowView(CurrentView) || m_Facade.PlayListLayout == null)
-                    {
-                      shouldContinue = true;
-                    }
-                    else
-                    {
-                      m_Facade.CurrentLayout = GUIFacadeControl.Layout.Playlist;
-                    }
-                    break;
-
-                  case View.PlayList:
-                    CurrentView = View.Icons;
-                    if (!AllowView(CurrentView) || m_Facade.ThumbnailLayout == null)
-                    {
-                      shouldContinue = true;
-                    }
-                    else
-                    {
-                      m_Facade.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
-                    }
-                    break;
-
-                  case View.Icons:
-                    CurrentView = View.LargeIcons;
-                    if (!AllowView(CurrentView) || m_Facade.ThumbnailLayout == null)
-                    {
-                      shouldContinue = true;
-                    }
-                    else
-                    {
-                      m_Facade.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
-                    }
-                    break;
-
-                  case View.LargeIcons:
-                    CurrentView = View.FilmStrip;
-                    if (!AllowView(CurrentView) || m_Facade.FilmstripLayout == null)
-                    {
-                      shouldContinue = true;
-                    }
-                    else
-                    {
-                      m_Facade.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
-                    }
-                    break;
-
-                  case View.FilmStrip:
-                    CurrentView = View.List;
-                    if (!AllowView(CurrentView) || m_Facade.ListLayout == null)
-                    {
-                      shouldContinue = true;
-                    }
-                    else
-                    {
-                      m_Facade.CurrentLayout = GUIFacadeControl.Layout.List;
-                    }
-                    break;
-                }
-              }
-              while (shouldContinue);
+              Change_Layout();
               UpdateLayoutButton();
               RefreshFacade();
               GUIControl.FocusControl(GetID, controlId);
+              return;
             }
 
 
@@ -858,6 +796,98 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
+        private void Change_Layout()
+        {
+          GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlg == null) return;
+          List<int> menuentries = new List<int>();
+          
+          dlg.Reset();
+          dlg.SetHeading(GUILocalizeStrings.Get(1079901)); // View (Layout) ...
+          if (AllowView(View.List) && m_Facade.ListLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(101));//List
+            menuentries.Add((int)View.List);
+          }
+          if (AllowView(View.Icons) && m_Facade.ThumbnailLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(100));//Icons
+            menuentries.Add((int)View.Icons);
+          }
+          if (AllowView(View.LargeIcons) && m_Facade.ThumbnailLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
+            menuentries.Add((int)View.LargeIcons);
+          }
+          if (AllowView(View.FilmStrip) && m_Facade.FilmstripLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
+            menuentries.Add((int)View.FilmStrip);
+          }
+          if (AllowView(View.AlbumView) && m_Facade.AlbumListLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(529));//Cover list - used as extended list
+            menuentries.Add((int)View.AlbumView);
+          }
+          if (AllowView(View.PlayList) && m_Facade.PlayListLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(529));//Cover list - used as extended list
+            menuentries.Add((int)View.AlbumView);
+          }
+          if (AllowView(View.CoverFlow) && m_Facade.CoverFlowLayout != null)
+          {
+            dlg.Add(GUILocalizeStrings.Get(791));//Coverflow
+            menuentries.Add((int)View.CoverFlow);
+          }
+
+          dlg.DoModal(GetID);
+          if (dlg.SelectedLabel == -1) return;
+
+          Change_Layout_Action(menuentries[dlg.SelectedLabel]);
+          dlg.DeInit();
+        }
+
+        private void Change_Layout_Action(int iLayout)
+        {
+          LogMyFilms.Debug("Change_Layout_Action() - change facade layout to '" + iLayout + "'");
+          switch (iLayout)
+          {
+            case 0:
+              CurrentView = View.List;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.List;
+              break;
+            case 1:
+              CurrentView = View.Icons;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+              break;
+            case 2:
+              CurrentView = View.LargeIcons;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+              break;
+            case 3:
+              CurrentView = View.FilmStrip;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+              break;
+            case 4:
+              CurrentView = View.AlbumView;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
+              break;
+            case 5:
+              CurrentView = View.PlayList;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.Playlist;
+              break;
+            case 6:
+              CurrentView = View.CoverFlow;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
+              break;
+
+            default:
+              CurrentView = View.LargeIcons;
+              m_Facade.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+              break;
+          }
+        }
+    
         private void RefreshFacade() // (re)load facade
         {
           if (loadingWorker.IsBusy)
