@@ -2676,7 +2676,7 @@
       <textcolor>60ffffff</textcolor>
       <label>'#myfilms.details.downloads.name' - #myfilms.details.downloads.status</label>
       <!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
-      <visible>!string.equals(#myfilms.details.downloads.status,)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -2689,7 +2689,7 @@
       <width>16</width>
       <height>16</height>
       <texture>isupdate.png</texture>
-      <visible>!string.equals(#myfilms.details.downloads.status,)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)+!Control.HasFocus(10099)</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -2707,7 +2707,7 @@
       <label>#OnlineVideos.currentDownloads #(L(921))</label>
       <font>font10</font>
       <textcolor>60ffffff</textcolor>
-      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -2720,7 +2720,7 @@
       <width>16</width>
       <height>16</height>
       <texture>isupdate.png</texture>
-      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)+!Control.HasFocus(10099)</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
