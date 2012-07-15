@@ -36,6 +36,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Threading;
   using System.Web.UI.WebControls;
   using System.Xml;
+  using System.Xml.Serialization;
 
   using Grabber;
   using Grabber.TheMovieDbAPI;
@@ -106,6 +107,45 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       groupcover.Property = "#myfilms.groupcoverimage";
       groupcover.Delay = 50;
 
+    }
+    #endregion
+
+    #region MapSettings class
+    [Serializable]
+    public class MapSettings
+    {
+      protected int _SortBy;
+      protected int _ViewAs;
+      protected bool _SortAscending;
+
+      public MapSettings()
+      {
+        // Set default layout
+        _SortBy = 0;
+        _ViewAs = (int)Layout.List;
+        _SortAscending = true;
+      }
+
+      [XmlElement("SortBy")]
+      public int SortBy
+      {
+        get { return _SortBy; }
+        set { _SortBy = value; }
+      }
+
+      [XmlElement("ViewAs")]
+      public int ViewAs
+      {
+        get { return _ViewAs; }
+        set { _ViewAs = value; }
+      }
+
+      [XmlElement("SortAscending")]
+      public bool SortAscending
+      {
+        get { return _SortAscending; }
+        set { _SortAscending = value; }
+      }
     }
     #endregion
 
@@ -410,7 +450,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static string EmptyFacadeValue = "(empty)";
 
     // View History for facade navigation support
-    private static List<ViewState> ViewHistory = new List<ViewState>();
+    // private static List<ViewState> ViewHistory = new List<ViewState>();
+    private Stack ViewHistory = new Stack();
+
+    // new method for back navigation
+    private Stack NavigationStack = new Stack();
+    MapSettings mapSettings = new MapSettings();
+    // static GUIDialogProgress dlgProgress;
 
     // cache to store viewstate params from current session per view
     Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();  // public static Dictionary<string, ViewState> ViewStateCache = new Dictionary<string, ViewState>();
@@ -468,6 +514,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Playlist = 5,
       CoverFlow = 6
     }
+
+    //public enum View
+    //{
+    //  List = 0,
+    //  Icons = 1,
+    //  BigIcons = 2,
+    //  Albums = 3,
+    //  Filmstrip = 4,
+    //  CoverFlow = 5
+    //}
 
     enum eContextItems
     {
@@ -14455,7 +14511,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        ViewHistory.Add(state);
+        // ViewHistory.Add(state);
+        ViewHistory.Push(state);
         LogMyFilms.Debug("SaveLastView() - saved state to history stack - stack count is now: '" + ViewHistory.Count + "'");
       }
       return true;
@@ -14510,7 +14567,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else if (ViewHistory.Count > 0)
       {
-        state = ViewHistory.Last();
+        // state = ViewHistory.Last();
+        state = ViewHistory.Pop() as ViewState;
         conf.Boolselect = state.Boolselect;
         conf.Boolreturn = state.Boolreturn;
         conf.Boolindexed = state.Boolindexed;
@@ -14541,12 +14599,77 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         try { conf.StrIndex = state.IndexItem; } catch { conf.StrIndex = -1; }
         conf.StrTIndex = state.TitleItem;
 
-        ViewHistory.Remove(ViewHistory.Last());
+        // ViewHistory.Remove(ViewHistory.Last());
         LogMyFilms.Debug("RestoreLastView() ViewHistory after restore is: '" + ViewHistory.Count + "'"); 
         return true;
       }
       return false;
     }
+
+    private void DoBack()
+    {
+      if (NavigationStack.Count > 0)
+      {
+        GUIControl.ClearControl(GetID, facadeFilms.GetID);
+        var obj = NavigationStack.Pop() as MyFilmsPlugin.Utils.NavigationObject;
+        obj.SetItems(facadeFilms);
+        facadeFilms.SelectedListItemIndex = obj.Position;
+        GUIPropertyManager.SetProperty("#currentmodule", obj.Title);
+        GUIPropertyManager.SetProperty("#itemtype", obj.ItemType);
+        GUIPropertyManager.SetProperty("#itemcount", facadeFilms.Count.ToString());
+        mapSettings.ViewAs = (int)obj.CurrentView;
+        ShowPanel();
+      }
+    }
+
+    void ShowPanel()
+    {
+      int itemIndex = facadeFilms.SelectedListItemIndex;
+      if (mapSettings.ViewAs == (int)Layout.LargeIcons)
+      {
+        facadeFilms.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+      }
+      else if (mapSettings.ViewAs == (int)Layout.AlbumView)
+      {
+        facadeFilms.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
+      }
+      else if (mapSettings.ViewAs == (int)Layout.SmallIcons)
+      {
+        facadeFilms.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+      }
+      else if (mapSettings.ViewAs == (int)Layout.List)
+      {
+        facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List;
+      }
+      else if (mapSettings.ViewAs == (int)Layout.Filmstrip)
+      {
+        facadeFilms.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+      }
+      else if (mapSettings.ViewAs == (int)Layout.CoverFlow)
+      {
+        facadeFilms.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
+      }
+      if (itemIndex > -1)
+      {
+        GUIControl.SelectItemControl(GetID, facadeFilms.GetID, itemIndex);
+      }
+    }
+
+    private void SaveListState(bool clear)
+    {
+      if (facadeFilms.ListLayout.ListItems.Count > 0)
+      {
+        NavigationStack.Push(new MyFilmsPlugin.Utils.NavigationObject(facadeFilms.ListLayout, GUIPropertyManager.GetProperty("#currentmodule"), GUIPropertyManager.GetProperty("#itemtype"), facadeFilms.SelectedListItemIndex, (Layout)mapSettings.ViewAs));
+      }
+      if (clear)
+      {
+        // ClearLabels("Curent");
+        GUIControl.ClearControl(GetID, facadeFilms.GetID);
+        //MyFilms.temp_player.Reset();
+        //MyFilms.temp_player.GetPlaylist(PlayListType.PLAYLIST_MUSIC_VIDEO).Clear();
+      }
+    }
+
   }
 
   //public class GUIMyFilmsListItem : GUIListItem

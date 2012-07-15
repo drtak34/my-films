@@ -243,6 +243,7 @@
     <Compile Include="CatalogConverter\MovieCollector.cs" />
     <Compile Include="CatalogConverter\MyMovies.cs" />
     <Compile Include="Utils\Logos.cs" />
+    <Compile Include="Utils\NavigationObject.cs" />
     <Compile Include="Utils\PerfWatch.cs" />
     <Compile Include="Utils\StringEnum.cs" />
     <Compile Include="Utils\Translations.cs" />
