@@ -266,6 +266,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           RelatedShows = 87278,
           Shouts = 87280
         }
+
         public enum GrabType
         {
           All,
@@ -660,105 +661,64 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //---------------------------------------------------------------------------------------
         public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
-            LogMyFilms.Debug("MyFilmsDetail: OnAction " + actionType.wID.ToString());
-            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
-            {
+          LogMyFilms.Debug("MyFilmsDetail: OnAction " + actionType.wID.ToString());
+          switch (actionType.wID)
+          {
+            #region action handling
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR:
               //if (BtnMaj.Focus) // first switch to main details window before returning to main window ....
               //{
               //  GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
               //  return;
               //}
               MyFilms.conf.LastID = MyFilms.ID_MyFilms;
-              // GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
               GUIWindowManager.ShowPreviousWindow();
               return;
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU) // context menu for options  like PlayTrailers or Updates
-            {
-                LogMyFilms.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU detected ! ");
-                if (BtnMaj.Focus)
-                {
-                  GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                  Update_XML_Items(); // Call Update Menu
-                }
-                else
-                {
-                  GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                  Update_XML_Items(); // Call Update Menu
-                }
-                return;
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY || actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_MUSIC_PLAY)
-            {
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU: // context menu for options  like PlayTrailers or Updates
+              LogMyFilms.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU detected ! ");
+              if (BtnMaj.Focus)
+              {
+                GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+                Update_XML_Items(); // Call Update Menu
+              }
+              else
+              {
+                GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+                Update_XML_Items(); // Call Update Menu
+              }
+              return;
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_MUSIC_PLAY:
               Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
               return;
-            }
-              
 
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_UP)
-            {
-                if (MyFilms.conf.StrIndex == 0)
-                    return;
-                MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
-                //GUITextureManager.CleanupThumbs();
-                afficher_detail(true);
-                return;
-            }
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_UP:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_ITEM:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_REWIND:
+              if (MyFilms.conf.StrIndex == 0) return;
+              MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
+              //GUITextureManager.CleanupThumbs();
+              afficher_detail(true);
+              if (MyFilms.conf.PersonsEnableDownloads) AddPersonsToDownloadQueue(); // add persons of current movie to download queue
+              return;
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_DOWN:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_ITEM:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_FORWARD:
+              if (MyFilms.conf.StrIndex == StrMax - 1) return;
+              MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
+              //GUITextureManager.CleanupThumbs();
+              afficher_detail(true);
+              if (MyFilms.conf.PersonsEnableDownloads) AddPersonsToDownloadQueue(); // add persons of current movie to download queue
+              return;
 
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_DOWN)
-            {
-                if (MyFilms.conf.StrIndex == StrMax - 1)
-                    return;
-                MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
-                //GUITextureManager.CleanupThumbs();
-                afficher_detail(true);
-                return;
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_ITEM)
-            {
-                if (MyFilms.conf.StrIndex == 0)
-                    return;
-                MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
-                //GUITextureManager.CleanupThumbs();
-                afficher_detail(true);
-                return;
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_ITEM)
-            {
-                if (MyFilms.conf.StrIndex == StrMax - 1)
-                    return;
-                MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
-                //GUITextureManager.CleanupThumbs();
-                afficher_detail(true);
-                return;
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_REWIND)
-            {
-                if (MyFilms.conf.StrIndex == 0)
-                    return;
-                MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
-                //GUITextureManager.CleanupThumbs();
-                afficher_detail(true);
-                return;
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_FORWARD)
-            {
-                if (MyFilms.conf.StrIndex == StrMax - 1)
-                    return;
-                MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
-                //GUITextureManager.CleanupThumbs();
-                afficher_detail(true);
-                return;
-            }
-
-            base.OnAction(actionType);
+            default:
+              break;
+            #endregion
+          }
+          base.OnAction(actionType);
         }
+
         //---------------------------------------------------------------------------------------
         //   Handle posted Messages
         //---------------------------------------------------------------------------------------
@@ -798,135 +758,84 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //---------------------------------------------------------------------------------------
                     // Mouse/Keyboard Clicked
                     //---------------------------------------------------------------------------------------
-                    if (iControl == (int)Controls.CTRL_BtnReturn)
-                    // Return Previous Menu
+                    switch (iControl)
                     {
+                      #region Message clicked handling
+                      case (int)Controls.CTRL_BtnReturn: // Return Previous Menu
                         MyFilms.conf.LastID = MyFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
                         GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlay)
-                    // Search File to play
-                    {
+
+                      case (int)Controls.CTRL_BtnPlay1Description: // Search File to play
+                      case (int)Controls.CTRL_BtnPlay2Comment:
+                      case (int)Controls.CTRL_BtnPlay3Persons:
+                      case (int)Controls.CTRL_BtnPlay4TecDetails:
+                      case (int)Controls.CTRL_BtnPlay5:
                         Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlay1Description)
-                    // Search File to play
-                    {
-                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+                      case (int)Controls.CTRL_ViewFanart: // On Button goto MyFilmsThumbs // Changed to also launch player due to Ember Media Manager discontinued...
+                        //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
+                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlay2Comment)
-                    // Search File to play
-                    {
-                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
-                        return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlay3Persons)
-                    // Search File to play
-                    {
-                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
-                        return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlay4TecDetails)
-                    // Search File to play
-                    {
-                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
-                        return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlay5)
-                    // Search File to play
-                    {
-                      Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
-                        return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnNext)
-                    // Display Next Film (If last do nothing)
-                    {
+
+                      case (int)Controls.CTRL_BtnNext: // Display Next Film (If last do nothing)
                         if (MyFilms.conf.StrIndex == StrMax - 1)
-                            return true;
+                          return true;
                         MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
                         GUITextureManager.CleanupThumbs();
                         afficher_detail(true);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPrior)
-                    // Display Prior Film (If first do nothing)
-                    {
+                      case (int)Controls.CTRL_BtnPrior: // Display Prior Film (If first do nothing)
                         if (MyFilms.conf.StrIndex == 0)
-                            return true;
+                          return true;
                         MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
                         GUITextureManager.CleanupThumbs();
                         afficher_detail(true);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnLast)
-                    // Display Next Film (If last do nothing)
-                    {
+                      case (int)Controls.CTRL_BtnLast: // Display Next Film (If last do nothing)
                         if (MyFilms.conf.StrIndex == StrMax - 1)
-                            return true;
+                          return true;
                         MyFilms.conf.StrIndex = StrMax - 1;
                         GUITextureManager.CleanupThumbs();
                         afficher_detail(true);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnFirst)
-                    // Display Next Film (If First do nothing)
-                    {
+                      case (int)Controls.CTRL_BtnFirst: // Display Next Film (If First do nothing)
                         if (MyFilms.conf.StrIndex == 0)
-                            return true;
+                          return true;
                         MyFilms.conf.StrIndex = 0;
                         GUITextureManager.CleanupThumbs();
                         afficher_detail(true);
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnMaj)
-                    {    // Update items
+                      case (int)Controls.CTRL_BtnMaj: // Update items
                         Change_Menu("mainmenu");  // was: Update_XML_Items();
                         // GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
-                    // Search Trailer File to play
-                    {
-                      if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
-                      {
-                        trailerPlayed = true;
-                        Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
-                      }
+                      case (int)Controls.CTRL_BtnPlayTrailer: // Search Trailer File to play
+                        if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
+                        {
+                          trailerPlayed = true;
+                          Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        }
                         else
                           Change_Menu("trailermenu");
                         return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_ViewFanart)
-                    // On Button goto MyFilmsThumbs // Changed to alo launch player due to Ember Media Manager discontinued...
-                    {
-                        //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
-                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
-                        return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnMovieThumbs)
-                    {
+                      case (int)Controls.CTRL_BtnMovieThumbs:
                         GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsThumbs);
                         return true;
-                    }
-
-                    if (iControl == (int)Controls.CTRL_BtnActors)
-                    {
+                      case (int)Controls.CTRL_BtnActors:
                         GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
                         return true;
-                    }
-
-                    if (iControl == (int)Controls.CTRL_BtnActorThumbs)
-                    {
-                      // Show Actor Details Screen
-                      GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
-                      // Hier Aktivitäten wie z.b. ListControl für Actors?
-                      //GUIWindowManager.ShowPreviousWindow();
-                      //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
-                      return true;
+                      case (int)Controls.CTRL_BtnActorThumbs: // Show Actor Details Screen
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
+                        // Hier Aktivitäten wie z.b. ListControl für Actors?
+                        //GUIWindowManager.ShowPreviousWindow();
+                        //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
+                        return true;
+                      
+                      default:
+                        break;
+                      #endregion
                     }
                 base.OnMessage(messageType); 
                 return true;
@@ -10602,8 +10511,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string personsname = t.ToString();
                 if (!(System.IO.File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
                 {
-                  downloadPersonImage(personsname);
-                  LogMyFilms.Debug("Person '" + personsname + "' added to downloadQueue !");
+                  if (downloadPersonImage(personsname))
+                    LogMyFilms.Debug("Person '" + personsname + "' added to downloadQueue !");
+                  else
+                    LogMyFilms.Debug("Person '" + personsname + "' already in downloadQueue !");
                 }
                 else LogMyFilms.Debug("Person '" + personsname + "' NOT added to downloadQueue - image already exists !");
               }
@@ -10620,20 +10531,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }) { Name = "MyFilmsPersonToDLqueueLoader", IsBackground = true }.Start();
       }
       
-      private static void downloadPersonImage(string personname) //void downloadPersonImage(DBPersonInfo person)
+      private static bool downloadPersonImage(string personname) //void downloadPersonImage(DBPersonInfo person)
       {
+        bool added = false;
         // we need to get it, let's queue them up and download in the background
         DBPersonInfo person = new DBPersonInfo();
         person.Name = personname;
         lock (PersonstoDownloadQueue)
         {
+          foreach (DBPersonInfo personInfo in PersonstoDownloadQueue)
+          {
+            if (personInfo.Name == personname) return false;
+          }
           if (!PersonstoDownloadQueue.Contains(person))
           {
             PersonstoDownloadQueue.Enqueue(person);
+            added = true;
           }
         }
         setDownloadStatus();
         if (!downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // finally lets check if the downloader is already running, and if not start it
+        return added;
       }
 
       #region GUI Events
