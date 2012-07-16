@@ -1808,6 +1808,9 @@ namespace MyFilmsPlugin.MyFilms
               break;
           }
 
+          // remove films without date
+          movielist = movielist.Where(m => (m.DateAdded ?? string.Empty) != string.Empty).ToList();
+          
           // sort descending by dateadded
           movielist = movielist.OrderByDescending(x => x.DateTime).ToList(); //movielist.Sort((x, y) => -x.DateTime.CompareTo(y.DateTime)); // minus is for descending order... saves movielist.Reverse();
           LogMyFilms.Debug("GetMostRecent() - result of nonlimited movies: '" + movielist.Count + "'");
