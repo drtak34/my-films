@@ -373,7 +373,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 f = personlist[0];
 
-                if (f != null && !System.IO.File.Exists(Path.Combine(MyFilms.conf.StrPathArtist, f.Name)))
+                if (f != null && !File.Exists(Path.Combine(MyFilms.conf.StrPathArtist, f.Name)))
                 {
                   if (f.Images.Count == 0)
                   {
@@ -767,7 +767,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                         return true;
 
-                      case (int)Controls.CTRL_BtnPlay1Description: // Search File to play
+                      case (int)Controls.CTRL_BtnPlay: // Search File to play
+                      case (int)Controls.CTRL_BtnPlay1Description:
                       case (int)Controls.CTRL_BtnPlay2Comment:
                       case (int)Controls.CTRL_BtnPlay3Persons:
                       case (int)Controls.CTRL_BtnPlay4TecDetails:
@@ -777,6 +778,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       case (int)Controls.CTRL_ViewFanart: // On Button goto MyFilmsThumbs // Changed to also launch player due to Ember Media Manager discontinued...
                         //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
                         Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+                        return true;
+
+                      case (int)Controls.CTRL_BtnPlayTrailer: // Search Trailer File to play
+                        if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
+                        {
+                          trailerPlayed = true;
+                          Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        }
+                        else
+                          Change_Menu("trailermenu");
                         return true;
 
                       case (int)Controls.CTRL_BtnNext: // Display Next Film (If last do nothing)
@@ -810,15 +821,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       case (int)Controls.CTRL_BtnMaj: // Update items
                         Change_Menu("mainmenu");  // was: Update_XML_Items();
                         // GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
-                        return true;
-                      case (int)Controls.CTRL_BtnPlayTrailer: // Search Trailer File to play
-                        if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
-                        {
-                          trailerPlayed = true;
-                          Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
-                        }
-                        else
-                          Change_Menu("trailermenu");
                         return true;
                       case (int)Controls.CTRL_BtnMovieThumbs:
                         GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsThumbs);
@@ -3639,6 +3641,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           try
                           {
                             strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                            if (strOldValue == null) strOldValue = "";
                             strNewValue = Result[i];
                             if (i == 2) strNewValue = Result[12];
                             if (strNewValue == null) strNewValue = "";
@@ -3653,30 +3656,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
                               // set to enabled to get proper selection - WIP
                               && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                              wProperty != "Trailer" && wProperty != "Runtime" && wProperty != "Collection")
+                              wProperty != "Trailer") //  && wProperty != "Runtime" && wProperty != "Collection"
                             {
-                              dlgSelect.Add(
-                                BaseMesFilms.Translate_Column(wProperty) + ": '" +
-                                Helper.LimitString(
-                                  strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" +
-                                Helper.LimitString(
-                                  strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
+                              dlgSelect.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
                               choiceViewMenu.Add(wProperty);
-                              LogMyFilms.Debug(
-                                "GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue +
-                                "'");
+                              LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                             }
                             else
                             {
-                              LogMyFilms.Debug(
-                                "GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue +
-                                "' -> '" + strNewValue + "'");
+                              LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                             }
                           }
-                          catch
+                          catch (Exception ex)
                           {
-                            LogMyFilms.Debug(
-                              "GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu");
+                            LogMyFilms.Debug("GrabberUpdate - cannot add Property '" + wProperty + "' to Selectionmenu - reason: " + ex.Message);
                           }
                           i = i + 1;
                         }
@@ -3711,6 +3704,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             try
                             {
                               strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                              if (strOldValue == null) strOldValue = "";
                               strNewValue = Result[i];
                               if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) strNewValue = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathShort];
                               if (strNewValue == null) strNewValue = "";
@@ -3725,7 +3719,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 wProperty != "Fanart" && wProperty != "Aspectratio" && wProperty != "MultiPosters"
                                 // set to enabled to get proper selection - WIP
                                 && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
-                                wProperty != "Trailer" && wProperty != "Collection" && wProperty != "CollectionImageURL")
+                                wProperty != "Trailer") //  && wProperty != "Collection" && wProperty != "CollectionImageURL"
                               {
                                 GUIListItem pItem = new GUIListItem(wProperty);
                                 pItem.TVTag = wProperty;
@@ -3740,9 +3734,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 LogMyFilms.Debug("GrabberUpdate - not added (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                               }
                             }
-                            catch
+                            catch (Exception ex)
                             {
-                              LogMyFilms.Debug("GrabberUpdate - cannot adding Property '" + wProperty + "' to Selectionmenu");
+                              LogMyFilms.Debug("GrabberUpdate - cannot add Property '" + wProperty + "' to Selectionmenu - reason: " + ex.Message);
                             }
                             i = i + 1;
                           }
@@ -6448,14 +6442,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         public static void Init_Detailed_DB(bool log)
         {
-          LogMyFilms.Debug("Init_Detailed_DB() - log = '" + log + "'"); 
-            AntMovieCatalog ds = new AntMovieCatalog();
-            foreach (DataColumn dc in ds.Movie.Columns)
+            LogMyFilms.Debug("Init_Detailed_DB() - log = '" + log + "'");
+            using (AntMovieCatalog ds = new AntMovieCatalog())
             {
-              //clearGUIProperty("db." + dc.ColumnName.ToLower() + ".label"); // Don't Clear Labels - they're only set once when plugin start !
-              clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value", log);
+              foreach (DataColumn dc in ds.Movie.Columns)
+              {
+                clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value", log);
+              }
             }
-            
+              
             MyFilms.currentMovie.Reset();
 
             //Clear userdefined properties
@@ -6514,7 +6509,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 			      Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset(); stopwatch.Start();
             string wstrformat = "";
-            AntMovieCatalog ds = new AntMovieCatalog();
 
             if (MyFilms.r == null || ItemId > MyFilms.r.Length - 1)
             {
@@ -6522,11 +6516,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Init_Detailed_DB(false);
               return;
             }
-            foreach (DataColumn dc in ds.Movie.Columns)
+            using (AntMovieCatalog ds = new AntMovieCatalog())
             {
-              string wstring = "";
-              string wstring2 = "";
-              //LogMyFilms.Debug("PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
+              foreach (DataColumn dc in ds.Movie.Columns)
+              {
+                string wstring = "";
+                string wstring2 = "";
+                //LogMyFilms.Debug("PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
 
                 if (MyFilms.r.Length > ItemId && MyFilms.r[ItemId][dc.ColumnName] != null) // make sure, it is a valid part of current loaded dataset "r"
                 {
@@ -6714,24 +6710,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   #region set userdefined sources for movie and trailer
                   if (wrep && MyFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower()))
-                    {
-                      setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                      MyFilms.currentMovie.File = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                    }
+                  {
+                    setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    MyFilms.currentMovie.File = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                  }
 
-                    if (wrep && MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower()))
+                  if (wrep && MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower()))
+                  {
+                    setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    MyFilms.currentMovie.Trailer = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                    // add number of trailers : #myfilms.user.sourcetrailer.count
+                    if (!string.IsNullOrEmpty(MyFilms.r[ItemId][dc.ColumnName].ToString().Trim()))
                     {
-                      setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                      MyFilms.currentMovie.Trailer = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                      // add number of trailers : #myfilms.user.sourcetrailer.count
-                      if (!string.IsNullOrEmpty(MyFilms.r[ItemId][dc.ColumnName].ToString().Trim()))
-                      {
-                        string[] split1 = MyFilms.r[ItemId][dc.ColumnName].ToString().Trim().Split(new Char[] { ';' });
-                        setGUIProperty("user.sourcetrailer.count", split1.Count().ToString());
-                      }
-                      else
-                        setGUIProperty("user.sourcetrailer.count", "");
+                      string[] split1 = MyFilms.r[ItemId][dc.ColumnName].ToString().Trim().Split(new Char[] { ';' });
+                      setGUIProperty("user.sourcetrailer.count", split1.Count().ToString());
                     }
+                    else
+                      setGUIProperty("user.sourcetrailer.count", "");
+                  }
                   #endregion
 
                   #region set userdefined watched field
@@ -6771,325 +6767,326 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   #region set all db fields ...
                   switch (dc.ColumnName.ToLower())
-                    {
-                        case "translatedtitle":
-                        case "originaltitle":
-                        case "formattedtitle":
-                            if (wrep)
-                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                                    if (MyFilms.r[ItemId][dc.ColumnName].ToString().Contains(MyFilms.conf.TitleDelim))
-                                    {
-                                      wstring = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim) + 1);
-                                      wstring2 = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(0, MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim));
-                                    }
-                                    else
-                                    {
-                                      wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                                      wstring2 = "";
-                                    }
-                            setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                  {
+                    case "translatedtitle":
+                    case "originaltitle":
+                    case "formattedtitle":
+                      if (wrep)
+                        if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                          if (MyFilms.r[ItemId][dc.ColumnName].ToString().Contains(MyFilms.conf.TitleDelim))
+                          {
+                            wstring = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim) + 1);
+                            wstring2 = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(0, MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim));
+                          }
+                          else
+                          {
+                            wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                            wstring2 = "";
+                          }
+                      setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
 
-                            if ((MyFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower())))
-                            {
-                              // MyFilms.currentMovie.Title = wstring; // already set in afficher_detail()
-                              if (wrep)
-                              {
-                                setGUIProperty("user.mastertitle.value", wstring);
-                                setGUIProperty("user.mastertitle.groupname", wstring2);
-                              }
-                              else
-                              {
-                                clearGUIProperty("user.mastertitle.value");
-                                clearGUIProperty("user.mastertitle.groupname");
-                              }
-                            }
-                            if ((MyFilms.conf.StrTitle2.ToLower() == (dc.ColumnName.ToLower())))
-                                if (wrep)
-                                {
-                                  setGUIProperty("user.secondarytitle.value", wstring);
-                                  setGUIProperty("user.secondarytitle.groupname", wstring2);
-                                }
-                                    else
-                                {
-                                  clearGUIProperty("user.secondarytitle.value");
-                                  clearGUIProperty("user.secondarytitle.groupname");
-                                }
-                            break;
+                      if ((MyFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower())))
+                      {
+                        // MyFilms.currentMovie.Title = wstring; // already set in afficher_detail()
+                        if (wrep)
+                        {
+                          setGUIProperty("user.mastertitle.value", wstring);
+                          setGUIProperty("user.mastertitle.groupname", wstring2);
+                        }
+                        else
+                        {
+                          clearGUIProperty("user.mastertitle.value");
+                          clearGUIProperty("user.mastertitle.groupname");
+                        }
+                      }
+                      if ((MyFilms.conf.StrTitle2.ToLower() == (dc.ColumnName.ToLower())))
+                        if (wrep)
+                        {
+                          setGUIProperty("user.secondarytitle.value", wstring);
+                          setGUIProperty("user.secondarytitle.groupname", wstring2);
+                        }
+                        else
+                        {
+                          clearGUIProperty("user.secondarytitle.value");
+                          clearGUIProperty("user.secondarytitle.groupname");
+                        }
+                      break;
 
-                        case "length":
-                            if (wrep)
-                            {
-                              int length = 0;
-                              if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
-                                wstring = MyFilms.r[ItemId]["Length"].ToString();
-                              setGUIProperty("db.length.value", wstring);
-                              bool success = int.TryParse(wstring, out length);
-                              MyFilms.currentMovie.Length = (success) ? length : 0;
-                            }
-                            else
-                            {
-                              clearGUIProperty("db.length.value");
-                            }
-                            break;
-                        case "actors":
-                            if (wrep)
-                                if (MyFilms.r[ItemId]["Actors"].ToString().Length > 0)
-                                {
-                                    wstring = MyFilms.r[ItemId]["Actors"].ToString().Replace('|', '\n');
-                                    wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
-                                }
-                            setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                            Load_Detailed_DB_PushActorsToSkin(wstring);
-                            break;
-                        case "description":
-                        case "comments":
-                            if (wrep)
-                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                                {
-                                    wstring = System.Web.HttpUtility.HtmlEncode(MyFilms.r[ItemId][dc.ColumnName].ToString().Replace('’', '\''));
-                                    wstring = wstring.ToString().Replace('|', '\n');
-                                    wstring = wstring.ToString().Replace('…', '.');
-                                    wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
-                                }
-                            setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                            break;
-                        case "date":
-                            if (wrep)
-                                if (MyFilms.r[ItemId]["Date"].ToString().Length > 0)
-                                    wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                            setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                            break;
-                        case "videoformat":
-                            if (wrep)
-                                if (MyFilms.r[ItemId]["VideoFormat"].ToString().Length > 0)
-                                    wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                            setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                            wstrformat = "V:" + MyFilms.r[ItemId]["VideoFormat"].ToString();
-                            break;
-                        case "audioformat":
-                            if (wrep)
-                            {
-                                if (MyFilms.r[ItemId]["AudioFormat"].ToString().Length > 0)
-                                {
-                                    wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                                    if (wstrformat.Length > 1)
-                                        wstrformat = wstrformat + ",A:" + MyFilms.r[ItemId]["AudioFormat"].ToString();
-                                    else
-                                        wstrformat = "A:" + MyFilms.r[ItemId]["AudioFormat"].ToString();
-                                }
-                                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                                setGUIProperty("db.calc.format" + ".value", wstrformat);
-                            }
-                            break;
-                        case "rating":
-                            wstring = "0";
-                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                                wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                            try
-                            {
-                                MyFilms.conf.W_rating = (decimal)MyFilms.r[ItemId][dc.ColumnName];
-                            }
-                            catch
-                            {
-                                MyFilms.conf.W_rating = 0;
-                            }
-                            setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                            break;
-                        case "contents_id":
-                        case "dateadded":
-                        case "picture":
-                            break;
-                        case "fanart":
-                            if ((MyFilms.currentMovie.Fanart.Length == 0) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                              MyFilms.currentMovie.Fanart = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                            break;
-                        case "imdb_id":
-                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                              MyFilms.currentMovie.IMDBNumber = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                            else
-                              MyFilms.currentMovie.IMDBNumber = "";
-                            break;
-                        case "tmdb_id":
-                        case "watched":
-                            break;
+                    case "length":
+                      if (wrep)
+                      {
+                        int length = 0;
+                        if (MyFilms.r[ItemId]["Length"].ToString().Length > 0)
+                          wstring = MyFilms.r[ItemId]["Length"].ToString();
+                        setGUIProperty("db.length.value", wstring);
+                        bool success = int.TryParse(wstring, out length);
+                        MyFilms.currentMovie.Length = (success) ? length : 0;
+                      }
+                      else
+                      {
+                        clearGUIProperty("db.length.value");
+                      }
+                      break;
+                    case "actors":
+                      if (wrep)
+                        if (MyFilms.r[ItemId]["Actors"].ToString().Length > 0)
+                        {
+                          wstring = MyFilms.r[ItemId]["Actors"].ToString().Replace('|', '\n');
+                          wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
+                        }
+                      setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                      Load_Detailed_DB_PushActorsToSkin(wstring);
+                      break;
+                    case "description":
+                    case "comments":
+                      if (wrep)
+                        if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                        {
+                          wstring = System.Web.HttpUtility.HtmlEncode(MyFilms.r[ItemId][dc.ColumnName].ToString().Replace('’', '\''));
+                          wstring = wstring.ToString().Replace('|', '\n');
+                          wstring = wstring.ToString().Replace('…', '.');
+                          wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
+                        }
+                      setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                      break;
+                    case "date":
+                      if (wrep)
+                        if (MyFilms.r[ItemId]["Date"].ToString().Length > 0)
+                          wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                      setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                      break;
+                    case "videoformat":
+                      if (wrep)
+                        if (MyFilms.r[ItemId]["VideoFormat"].ToString().Length > 0)
+                          wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                      setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                      wstrformat = "V:" + MyFilms.r[ItemId]["VideoFormat"].ToString();
+                      break;
+                    case "audioformat":
+                      if (wrep)
+                      {
+                        if (MyFilms.r[ItemId]["AudioFormat"].ToString().Length > 0)
+                        {
+                          wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                          if (wstrformat.Length > 1)
+                            wstrformat = wstrformat + ",A:" + MyFilms.r[ItemId]["AudioFormat"].ToString();
+                          else
+                            wstrformat = "A:" + MyFilms.r[ItemId]["AudioFormat"].ToString();
+                        }
+                        setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                        setGUIProperty("db.calc.format" + ".value", wstrformat);
+                      }
+                      break;
+                    case "rating":
+                      wstring = "0";
+                      if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                        wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                      try
+                      {
+                        MyFilms.conf.W_rating = (decimal)MyFilms.r[ItemId][dc.ColumnName];
+                      }
+                      catch
+                      {
+                        MyFilms.conf.W_rating = 0;
+                      }
+                      setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                      break;
+                    case "contents_id":
+                    case "dateadded":
+                    case "picture":
+                      break;
+                    case "fanart":
+                      if ((MyFilms.currentMovie.Fanart.Length == 0) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                        MyFilms.currentMovie.Fanart = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                      break;
+                    case "imdb_id":
+                      if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                        MyFilms.currentMovie.IMDBNumber = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                      else
+                        MyFilms.currentMovie.IMDBNumber = "";
+                      break;
+                    case "tmdb_id":
+                    case "watched":
+                      break;
 
-                        case "isonline":
-                            // old method
-                            //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                            //{
-                            //  if (MyFilms.InitialIsOnlineScan)
-                            //    setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                            //  else
-                            //    setGUIProperty("user.source.isonline", "");
-                            //}
+                    case "isonline":
+                      // old method
+                      //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                      //{
+                      //  if (MyFilms.InitialIsOnlineScan)
+                      //    setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      //  else
+                      //    setGUIProperty("user.source.isonline", "");
+                      //}
 
-                            // new method
-                            if (wrep)
+                      // new method
+                      if (wrep)
+                      {
+                        if (MyFilms.InitialIsOnlineScan) // if availability scanner did run - either by autostart or manually
+                        {
+                          if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                          {
+                            if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
+                              setGUIProperty("user.source.isonline", "available");
+                            else if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "False")
                             {
-                              if (MyFilms.InitialIsOnlineScan) // if availability scanner did run - either by autostart or manually
+                              if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
                               {
-                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                                {
-                                  if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
-                                    setGUIProperty("user.source.isonline", "available");
-                                  else if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "False")
-                                  {
-                                    if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
-                                    {
-                                      if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
-                                        setGUIProperty("user.source.isonline", "offline");
-                                      else
-                                        setGUIProperty("user.source.isonline", "unavailable");
-                                    }
-                                    else
-                                      setGUIProperty("user.source.isonline", "unavailable");
-                                  }
-                                }
-                                else
-                                  setGUIProperty("user.source.isonline", "unknown"); // should not happen, if scanner did run ...
-                              }
-                              else
-                              {
-                                if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
-                                {
-                                  if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
-                                  {
-                                    if (MyFilms.conf.ScanMediaOnStart) // if availability scanner is supposed to autostart
-                                      setGUIProperty("user.source.isonline", "unknown"); // set to unknown - will be replaced by real status after scan has finished...
-                                    else
-                                      setGUIProperty("user.source.isonline", "available"); // set online as default, even if it's possibly not available ...
-                                  }
-                                  else
-                                    setGUIProperty("user.source.isonline", "unavailable");
-                                }
-                                else if (MyFilms.conf.SearchFile.ToLower() == "true" || MyFilms.conf.SearchFile.ToLower() == "yes") // if search is enabled in setup
-                                  setGUIProperty("user.source.isonline", "unknown");
+                                if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
+                                  setGUIProperty("user.source.isonline", "offline");
                                 else
                                   setGUIProperty("user.source.isonline", "unavailable");
                               }
+                              else
+                                setGUIProperty("user.source.isonline", "unavailable");
+                            }
+                          }
+                          else
+                            setGUIProperty("user.source.isonline", "unknown"); // should not happen, if scanner did run ...
+                        }
+                        else
+                        {
+                          if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
+                          {
+                            if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
+                            {
+                              if (MyFilms.conf.ScanMediaOnStart) // if availability scanner is supposed to autostart
+                                setGUIProperty("user.source.isonline", "unknown"); // set to unknown - will be replaced by real status after scan has finished...
+                              else
+                                setGUIProperty("user.source.isonline", "available"); // set online as default, even if it's possibly not available ...
                             }
                             else
-                              setGUIProperty("user.source.isonline", "");
-                            break;
-                        case "isonlinetrailer":
-                            //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                            //{
-                            //  if (MyFilms.InitialIsOnlineScan)
-                            //    setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                            //  else
-                            //    setGUIProperty("user.sourcetrailer.isonline", "");
-                            //}
-                            if (wrep)
+                              setGUIProperty("user.source.isonline", "unavailable");
+                          }
+                          else if (MyFilms.conf.SearchFile.ToLower() == "true" || MyFilms.conf.SearchFile.ToLower() == "yes") // if search is enabled in setup
+                            setGUIProperty("user.source.isonline", "unknown");
+                          else
+                            setGUIProperty("user.source.isonline", "unavailable");
+                        }
+                      }
+                      else
+                        setGUIProperty("user.source.isonline", "");
+                      break;
+                    case "isonlinetrailer":
+                      //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                      //{
+                      //  if (MyFilms.InitialIsOnlineScan)
+                      //    setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      //  else
+                      //    setGUIProperty("user.sourcetrailer.isonline", "");
+                      //}
+                      if (wrep)
+                      {
+                        if (MyFilms.InitialIsOnlineScan)
+                        {
+                          if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                          {
+                            if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
+                              setGUIProperty("user.sourcetrailer.isonline", "available");
+                            else
                             {
-                              if (MyFilms.InitialIsOnlineScan)
+                              if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
                               {
-                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                                {
-                                  if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
-                                    setGUIProperty("user.sourcetrailer.isonline", "available");
-                                  else
-                                  {
-                                    if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
-                                    {
-                                      if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
-                                        setGUIProperty("user.sourcetrailer.isonline", "offline");
-                                      else
-                                        setGUIProperty("user.sourcetrailer.isonline", "unavailable");
-                                    }
-                                    else
-                                      setGUIProperty("user.sourcetrailer.isonline", "unavailable");
-                                  }
-                                }
-                                else
-                                  setGUIProperty("user.sourcetrailer.isonline", "unknown"); // should not happen, if scanner did run ...
-                              }
-                              else
-                              {
-                                if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
-                                {
-                                  if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
-                                  {
-                                    if (MyFilms.conf.ScanMediaOnStart)
-                                      setGUIProperty("user.sourcetrailer.isonline", "unknown");
-                                    else
-                                      setGUIProperty("user.sourcetrailer.isonline", "available"); // set online as default
-                                  }
-                                  else
-                                    setGUIProperty("user.sourcetrailer.isonline", "unavailable");
-                                }
-                                //else if (MyFilms.conf.SearchFileTrailer.ToLower() == "true" || MyFilms.conf.SearchFileTrailer.ToLower() == "yes") // if search is enabled in setup
-                                //  setGUIProperty("user.sourcetrailer.isonline", "unknown");
+                                if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
+                                  setGUIProperty("user.sourcetrailer.isonline", "offline");
                                 else
                                   setGUIProperty("user.sourcetrailer.isonline", "unavailable");
                               }
+                              else
+                                setGUIProperty("user.sourcetrailer.isonline", "unavailable");
                             }
-                            else
-                              setGUIProperty("user.sourcetrailer.isonline", "");
-                            break;
-                        case "resolution":
-                            decimal aspectratio = 0; 
-                            string ar = "";
-                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                                try
-                                    {
-                                        wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                                        //LogMyFilms.Debug("Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                                        setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                                        //LogMyFilms.Debug("(Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                                        decimal w_hsize;
-                                        decimal w_vsize;
-                                        string[] arSplit;
-                                        string[] Sep = new string[] { "x" };
-                                        arSplit = MyFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
-                                        w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
-                                        w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
-                                        // To Check if/why exception eccurs
-                                        //LogMyFilms.Debug("hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
-                                        aspectratio = (w_hsize / w_vsize);
-                                        aspectratio = Math.Round(aspectratio, 2);
-                                        //Formats:
-                                        //1,33 -> 4:3
-                                        //1,78 -> 16:9 / widescreen
-                                        //1,85 -> widescreen
-                                        //2,35+ -> cinemascope
-                                        if (aspectratio < (decimal)(1.4)) ar = "4:3";
-                                            else if (aspectratio < (decimal)(1.9)) ar = "16:9";
-                                            else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
-                                        wstring = aspectratio.ToString();
-                                    }
-                                catch
-                                    {
-                                        LogMyFilms.Info("Error calculating aspectratio !");
-                                    }
-                            setGUIProperty("db.calc.aspectratio.value", wstring);
-                            setGUIProperty("db.calc.imageformat.value", ar);
-                            break;
-                        case "year":
-                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                          }
+                          else
+                            setGUIProperty("user.sourcetrailer.isonline", "unknown"); // should not happen, if scanner did run ...
+                        }
+                        else
+                        {
+                          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
+                          {
+                            if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
                             {
-                              int year = 0;
-                              setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                              Int32.TryParse(MyFilms.r[ItemId][dc.ColumnName].ToString(), out year);
-                              MyFilms.currentMovie.Year = year;
+                              if (MyFilms.conf.ScanMediaOnStart)
+                                setGUIProperty("user.sourcetrailer.isonline", "unknown");
+                              else
+                                setGUIProperty("user.sourcetrailer.isonline", "available"); // set online as default
                             }
-                              
                             else
-                            {
-                              setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
-                              MyFilms.currentMovie.Year = 0;
-                            }
-                            break;
+                              setGUIProperty("user.sourcetrailer.isonline", "unavailable");
+                          }
+                          //else if (MyFilms.conf.SearchFileTrailer.ToLower() == "true" || MyFilms.conf.SearchFileTrailer.ToLower() == "yes") // if search is enabled in setup
+                          //  setGUIProperty("user.sourcetrailer.isonline", "unknown");
+                          else
+                            setGUIProperty("user.sourcetrailer.isonline", "unavailable");
+                        }
+                      }
+                      else
+                        setGUIProperty("user.sourcetrailer.isonline", "");
+                      break;
+                    case "resolution":
+                      decimal aspectratio = 0;
+                      string ar = "";
+                      if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                        try
+                        {
+                          wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                          //LogMyFilms.Debug("Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                          setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                          //LogMyFilms.Debug("(Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                          decimal w_hsize;
+                          decimal w_vsize;
+                          string[] arSplit;
+                          string[] Sep = new string[] { "x" };
+                          arSplit = MyFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+                          w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
+                          w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
+                          // To Check if/why exception eccurs
+                          //LogMyFilms.Debug("hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
+                          aspectratio = (w_hsize / w_vsize);
+                          aspectratio = Math.Round(aspectratio, 2);
+                          //Formats:
+                          //1,33 -> 4:3
+                          //1,78 -> 16:9 / widescreen
+                          //1,85 -> widescreen
+                          //2,35+ -> cinemascope
+                          if (aspectratio < (decimal)(1.4)) ar = "4:3";
+                          else if (aspectratio < (decimal)(1.9)) ar = "16:9";
+                          else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
+                          wstring = aspectratio.ToString();
+                        }
+                        catch
+                        {
+                          LogMyFilms.Info("Error calculating aspectratio !");
+                        }
+                      setGUIProperty("db.calc.aspectratio.value", wstring);
+                      setGUIProperty("db.calc.imageformat.value", ar);
+                      break;
+                    case "year":
+                      if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                      {
+                        int year = 0;
+                        setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                        Int32.TryParse(MyFilms.r[ItemId][dc.ColumnName].ToString(), out year);
+                        MyFilms.currentMovie.Year = year;
+                      }
 
-                        default:
-                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                            else
-                                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
-                            break;
+                      else
+                      {
+                        setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
+                        MyFilms.currentMovie.Year = 0;
+                      }
+                      break;
 
-                    }
+                    default:
+                      if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                        setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      else
+                        setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
+                      break;
+
+                  }
                   #endregion
                 }
+              }
             }
             //// for catalog using "search" instead storage field
             //if (string.IsNullOrEmpty(MyFilms.currentMovie.File)) // use search method only if required...

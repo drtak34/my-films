@@ -2241,98 +2241,100 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static ArrayList GetDisplayItems(string displayoption)
     {
       ArrayList ItemsToDisplay = new ArrayList();
-      AntMovieCatalog amc = new AntMovieCatalog();
-      foreach (DataColumn dc in amc.Movie.Columns)
+      using (AntMovieCatalog ds = new AntMovieCatalog())
       {
-        if (
-            (dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && 
-             dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition")
-            && 
-            ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode("Restrict DB field Selection for AMC3")) ||
-            (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
-             dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
-             dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
-             dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" && dc.ColumnName != "Fanart"))
-          )
+        foreach (DataColumn dc in ds.Movie.Columns)
         {
-          switch (displayoption)
+          if (
+              (dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" &&
+               dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition")
+              &&
+              ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode("Restrict DB field Selection for AMC3")) ||
+              (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
+               dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
+               dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
+               dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" && dc.ColumnName != "Fanart"))
+            )
           {
-            case "sort":
-              if (//dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && 
-                  dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
-                  dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart"
-                )
-                ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
-              break;
-            case "view":
-              if (
-                //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                  dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart"
-                )
-                ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
-              break;
-            case "deletedetails":
-              if (
-                  dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer && 
-                  dc.ColumnName != MyFilms.conf.StrTitle1 && // dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                  dc.ColumnName != "Number"
-                )
-                ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
-              break;
-            case "titles":
-              if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
-                ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
-              break;
-            case "viewitems":
-              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart") // added "DatedAdded" to remove filter
-                ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
-              break;
+            switch (displayoption)
+            {
+              case "sort":
+                if (//dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && 
+                    dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
+                    dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart"
+                  )
+                  ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                break;
+              case "view":
+                if (
+                  //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart"
+                  )
+                  ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                break;
+              case "deletedetails":
+                if (
+                    dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer &&
+                    dc.ColumnName != MyFilms.conf.StrTitle1 && // dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Number"
+                  )
+                  ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                break;
+              case "titles":
+                if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
+                  ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                break;
+              case "viewitems":
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart") // added "DatedAdded" to remove filter
+                  ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                break;
 
-            default:
-              if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) ||
-                  dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
-                  dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
-              {
-                //AntStorage.Items.Add(dc.ColumnName);
-                //AntStorageTrailer.Items.Add(dc.ColumnName);
-              }
+              default:
+                if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) ||
+                    dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
+                    dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
+                {
+                  //AntStorage.Items.Add(dc.ColumnName);
+                  //AntStorageTrailer.Items.Add(dc.ColumnName);
+                }
 
-              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
-              {
-                //AntFilterItem1.Items.Add(dc.ColumnName);
-                //AntFilterItem2.Items.Add(dc.ColumnName);
-              }
-              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
-              {
-                //AntSearchField.Items.Add(dc.ColumnName);
-                //AntUpdField.Items.Add(dc.ColumnName);
-              }
-              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                  dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-              {
-                //AntSearchItem1.Items.Add(dc.ColumnName);
-                //AntSearchItem2.Items.Add(dc.ColumnName);
-              }
-              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                  dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
-                  dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
-                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-              {
-                //AntSort1.Items.Add(dc.ColumnName);
-                //AntSort2.Items.Add(dc.ColumnName);
-                //AntIdentItem.Items.Add(dc.ColumnName);
-              }
-              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-              {
-                //AntUpdItem1.Items.Add(dc.ColumnName);
-                //AntUpdItem2.Items.Add(dc.ColumnName);
-                //cbfdupdate.Items.Add(dc.ColumnName);
-                //cbWatched.Items.Add(dc.ColumnName);
-                //CmdPar.Items.Add(dc.ColumnName);
-              }
-              break;
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+                {
+                  //AntFilterItem1.Items.Add(dc.ColumnName);
+                  //AntFilterItem2.Items.Add(dc.ColumnName);
+                }
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
+                {
+                  //AntSearchField.Items.Add(dc.ColumnName);
+                  //AntUpdField.Items.Add(dc.ColumnName);
+                }
+                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                {
+                  //AntSearchItem1.Items.Add(dc.ColumnName);
+                  //AntSearchItem2.Items.Add(dc.ColumnName);
+                }
+                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                    dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                {
+                  //AntSort1.Items.Add(dc.ColumnName);
+                  //AntSort2.Items.Add(dc.ColumnName);
+                  //AntIdentItem.Items.Add(dc.ColumnName);
+                }
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                {
+                  //AntUpdItem1.Items.Add(dc.ColumnName);
+                  //AntUpdItem2.Items.Add(dc.ColumnName);
+                  //cbfdupdate.Items.Add(dc.ColumnName);
+                  //cbWatched.Items.Add(dc.ColumnName);
+                  //CmdPar.Items.Add(dc.ColumnName);
+                }
+                break;
+            }
           }
         }
       }
@@ -2495,9 +2497,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string sLabel = conf.Wselectedlabel;
         bool LabelNotEmpty = (sLabel != "");
         Type ColumnType = GetColumnType(conf.WStrSort);
-
-        AntMovieCatalog ds = new AntMovieCatalog();
-        string datatype = ds.Movie.Columns[conf.WStrSort].DataType.Name; // == "string"
+        string datatype = "";
+        using (AntMovieCatalog ds = new AntMovieCatalog())
+        {
+          datatype = ds.Movie.Columns[conf.WStrSort].DataType.Name; // == "string"
+        }
 
         LogMyFilms.Debug(string.Format("(SetFilmSelect) - DB-Field: '{0}', datatype = '{1}', ColumnType = '{2}'", conf.WStrSort, datatype, ColumnType));
         if (ColumnType != typeof(string))
@@ -4728,10 +4732,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static Type GetColumnType(string fieldname)
     {
-      AntMovieCatalog ds = new AntMovieCatalog();
-      foreach (DataColumn dc in ds.Movie.Columns)
+      using (AntMovieCatalog ds = new AntMovieCatalog())
       {
-        if (dc.ColumnName == fieldname) return dc.DataType;
+        foreach (DataColumn dc in ds.Movie.Columns)
+        {
+          if (dc.ColumnName == fieldname) return dc.DataType;
+        }
       }
       return null;
     }
@@ -8168,6 +8174,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
           }
+          ds.Dispose();
           LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
           bool doExtendedSearch = false;
@@ -12812,7 +12819,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //FSwatcher.Renamed += new RenamedEventHandler(FSwatcherRenamed);
 
         FSwatcher.EnableRaisingEvents = true; // Begin watching.
-        LogMyFilms.Debug("InitFSwatcher() - FSwatcher started watching - DB-file: '" + conf.StrFileXml + "'");
+        LogMyFilms.Info("InitFSwatcher() - FSwatcher started watching - DB-file: '" + conf.StrFileXml + "'");
       }
     
       private void FSwatcherChanged(object source, FileSystemEventArgs e)
@@ -12820,24 +12827,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (FSwatcher.EnableRaisingEvents == false) // ignore event, if notification is switched off
           return;
         FSwatcher.EnableRaisingEvents = false;
-        LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
+        LogMyFilms.Info("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
 
-        Thread.Sleep(2000);
+        Thread.Sleep(3000);
         //FileInfo objFileInfo = new FileInfo(e.FullPath);
         //if (!objFileInfo.Exists) 
         //  return; // ignore the file changed event
 
         bool success = false; // result of try open for read
-        int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+        int maxretries = 10; // max retries 10 * 2000 = 20 seconds
         int i = 0;
 
         while (!success && i < maxretries)
         {
           success = !Helper.IsFileUsedbyAnotherProcess(conf.StrFileXml);
           i += 1;
-          if (!success)
-            LogMyFilms.Info("FSwatcherChanged() - Attempt '" + i + "'to open Movie Database in read mode unsuccessful, waiting for next retry");
-          Thread.Sleep(1000);
+          if (!success) LogMyFilms.Debug("FSwatcherChanged() - Attempt '" + i + "'to open Movie Database in read mode unsuccessful, waiting for next retry");
+          Thread.Sleep(2000);
         }
 
 
@@ -13975,10 +13981,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       EmptyFacadeValue = "(<" + GUILocalizeStrings.Get(10798774) + ">)";
-      AntMovieCatalog ds = new AntMovieCatalog();
-      foreach (DataColumn dc in ds.Movie.Columns)
+      using (AntMovieCatalog ds = new AntMovieCatalog())
       {
-        MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
+        foreach (DataColumn dc in ds.Movie.Columns)
+        {
+          MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
+        }
       }
 
       GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
