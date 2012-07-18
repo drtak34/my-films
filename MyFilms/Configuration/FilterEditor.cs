@@ -17,25 +17,27 @@ namespace MyFilmsPlugin.Configuration
     public FilterEditor()
     {
       InitializeComponent();
-      AntMovieCatalog ds = new AntMovieCatalog();
-      AntFilterItem1.Items.Add("(none)");
-      AntFilterItem2.Items.Add("(none)");
-      foreach (DataColumn dc in ds.Movie.Columns)
+      using (AntMovieCatalog ds = new AntMovieCatalog())
       {
-        if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" &&
-             dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" &&
-             dc.ColumnName != "Fanart") &&
-            (ExtendedFields ||
-             (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" &&
-              dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" &&
-              dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" &&
-              dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
-              dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite")))
+        AntFilterItem1.Items.Add("(none)");
+        AntFilterItem2.Items.Add("(none)");
+        foreach (DataColumn dc in ds.Movie.Columns)
         {
-          if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+          if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" &&
+               dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" &&
+               dc.ColumnName != "Fanart") &&
+              (ExtendedFields ||
+               (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" &&
+                dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" &&
+                dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" &&
+                dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
+                dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite")))
           {
-            AntFilterItem1.Items.Add(dc.ColumnName);
-            AntFilterItem2.Items.Add(dc.ColumnName);
+            if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+            {
+              AntFilterItem1.Items.Add(dc.ColumnName);
+              AntFilterItem2.Items.Add(dc.ColumnName);
+            }
           }
         }
       }
