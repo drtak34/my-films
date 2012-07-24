@@ -191,6 +191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                   MFview.ViewRow view = CustomViews.View.NewViewRow();
                   view.Label = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", index), string.Empty);
+                  // view.Label2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewLabel2{0}", index), string.Empty); // cached counts, if available
                   view.ViewEnabled = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewEnabled{0}", index), true);
                   view.ImagePath = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewImagePath{0}", index), string.Empty);
                   view.DBfield = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", index), string.Empty);
@@ -755,6 +756,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return nbConfig; }
             set { nbConfig = value; }
         }
+
+        private string[] dbSelection = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        public string[] DbSelection
+        {
+          get { return dbSelection; }
+          set { dbSelection = value; }
+        }
+
         private static int currentMovie = int.MinValue;
         public static int CurrentMovie
         {
@@ -2081,50 +2090,58 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         //  Return Current Configuration
         //--------------------------------------------------------------------------------------------
-        public static bool Current_Config() // returns true, if a default config is set (requires full reload on entering plugin)
+        public static bool Current_Config(bool showmenu) // returns true, if a default config is set (requires full reload on entering plugin)
         {
-            CurrentConfig = null;
-            bool defaultconfig = false;
+          CurrentConfig = null;
+          bool defaultconfig = false;
 
-            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-            {
+          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
             NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
-            PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Reads Plugin start mode and sets to normal if not present
+            PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal");
+              // Reads Plugin start mode and sets to normal if not present
             LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
             if (NbConfig == 0)
             {
-                MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                dlgOk.SetLine(1, "No Configuration defined");
-                dlgOk.SetLine(2, "Please enter setup first");
-                dlgOk.DoModal(MyFilms.ID_MyFilms);
-                //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
+              MediaPortal.Dialogs.GUIDialogOK dlgOk =
+                (MediaPortal.Dialogs.GUIDialogOK)
+                MediaPortal.GUI.Library.GUIWindowManager.GetWindow(
+                  (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+              dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+              dlgOk.SetLine(1, "No Configuration defined");
+              dlgOk.SetLine(2, "Please enter setup first");
+              dlgOk.DoModal(MyFilms.ID_MyFilms);
+              //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
               return false;
             }
 
             bool boolchoice = true;
             if (CurrentConfig == null)
-              if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty).Length > 0)
-                  CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty);
-                else
-                  CurrentConfig = string.Empty;
+              if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty).Length > 0) CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty);
+              else CurrentConfig = string.Empty;
 
-            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0))
+            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) &&
+                (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0))
             {
               CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
               defaultconfig = true;
             }
-            if (CurrentConfig == string.Empty || (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
+            if (showmenu)
             {
+              if (CurrentConfig == string.Empty || (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
+              {
                 boolchoice = false;
-                CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged
-            }
-            CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MyFilms.ID_MyFilms);
-            if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
+                CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
+                  // "" => user esc's dialog on plugin startup so exit plugin unchanged
+              }
+              CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MyFilms.ID_MyFilms);
+              if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
                 CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
             }
-            return defaultconfig;
+          }
+          return defaultconfig;
         }
+
     }
 
 }

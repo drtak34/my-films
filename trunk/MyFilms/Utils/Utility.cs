@@ -359,6 +359,37 @@ namespace MyFilmsPlugin.MyFilms.Utils {
           return Regex.Replace(input, @"\s{2,}", " ").Trim();
         }
 
+        public static bool HasAsciiSubstring(string str, string sub)
+        {
+          char[] ss = sub.ToCharArray();
+
+          // Similar stupid small optimizations bring 30% speeding-up.
+          int ssLen = ss.Length;
+          for (int j = 0; j < ssLen; ++j)
+            ss[j] = (char)((byte)ss[j] | 32);
+
+          byte ss0 = (byte)ss[0];
+          int len = str.Length - ssLen;
+          for (int i = 0; i < len; ++i)
+          {
+            if ((str[i] | 32) == ss0)
+            {
+              bool bOk = true;
+              for (int j = 1; j < ssLen; ++j)
+              {
+                if ((str[i + j] | 32) != ss[j])
+                {
+                  bOk = false;
+                  break;
+                }
+              }
+              if (bOk)
+                return true;
+            }
+          }
+          return false;
+        }
+
         #endregion
 
         #region General Methods (Unsorted)
@@ -689,7 +720,6 @@ namespace MyFilmsPlugin.MyFilms.Utils {
 
         #endregion
 
-
         // Classes added by Guzzi for use in "Trailer Search & Register" (Rework)
         #region GetFiles (string Path)
         /// <summary>
@@ -780,7 +810,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         }
         #endregion
 
-    #region AMCUpdater Utils
+        #region AMCUpdater Utils
 
     public static string GetDVDFolderName(string FileName)
     {

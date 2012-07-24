@@ -572,26 +572,28 @@ Public Class Form1
             BufferedLogEvents.AppendLine("Watcher detected file - '" & mediafile & "'")
         Next
         Return
-        btnParseXML_Click(Nothing, Nothing) ' read DB
-        'btnProcessMovieList_Click(Nothing, Nothing) ' check existing files
 
-        ApplySettings()
-        With AntProcessor
-            .ProcessMovieFolderForSingleMovie(mediafiles)
-        End With
+        'ToDo: to be activated and tested/debugged
+        'btnParseXML_Click(Nothing, Nothing) ' read DB
+        ''btnProcessMovieList_Click(Nothing, Nothing) ' check existing files
 
-        btnFindOrphans_Click(Nothing, Nothing) ' find orphans
-        If AntProcessor.CountOrphanFiles > 0 Then
-            SetCheckButtonStatus(ButtonStatus.DisableAll)
-            Try
-                AntProcessor.UpdateXMLFile()
-            Catch ex As Exception
-                LogEvent("ErrorEvent : " & ex.Message & " - Stacktrace: " & ex.StackTrace.ToString, EventLogLevel.ErrorEvent)
-            End Try
-            ' added to force refresh of View Collection Tab
-            txtConfigFilePath_TextChanged(Nothing, Nothing) 'Me.txtConfigFilePath.Text = Me.txtConfigFilePath.Text
-        End If
-        SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
+        'ApplySettings()
+        'With AntProcessor
+        '    .ProcessMovieFolderForSingleMovie(mediafiles)
+        'End With
+
+        'btnFindOrphans_Click(Nothing, Nothing) ' find orphans
+        'If AntProcessor.CountOrphanFiles > 0 Then
+        '    SetCheckButtonStatus(ButtonStatus.DisableAll)
+        '    Try
+        '        AntProcessor.UpdateXMLFile()
+        '    Catch ex As Exception
+        '        LogEvent("ErrorEvent : " & ex.Message & " - Stacktrace: " & ex.StackTrace.ToString, EventLogLevel.ErrorEvent)
+        '    End Try
+        '    ' added to force refresh of View Collection Tab
+        '    txtConfigFilePath_TextChanged(Nothing, Nothing) 'Me.txtConfigFilePath.Text = Me.txtConfigFilePath.Text
+        'End If
+        'SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
     End Sub
 
     Private Sub setUpFolderWatches()

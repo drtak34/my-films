@@ -7208,7 +7208,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               catch (Exception ex)
               {
-                LogMyFilms.Debug("Exception while loading person details: " + ex.Message);
+                LogMyFilms.Debug("Load_Detailed_PersonInfo() - Exception while loading person details: " + ex.Message);
+              }
+              finally
+              {
+                // cleanup here ...
               }
             }
           }

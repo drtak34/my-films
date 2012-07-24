@@ -322,6 +322,13 @@ namespace MyFilmsPlugin.MyFilmsGUI
       set { viewContext = value; }
     }
 
+    private string currentView = string.Empty;
+    public string CurrentView
+    {
+      get { return currentView; }
+      set { currentView = value; }
+    }
+
     private string strTxtView = string.Empty;
     public string StrTxtView
     {
@@ -384,7 +391,14 @@ namespace MyFilmsPlugin.MyFilmsGUI
       get { return boolShowEmptyValuesInViews; }
       set { boolShowEmptyValuesInViews = value; }
     }
-    
+
+    private bool boolSkipViewState = false;
+    public bool BoolSkipViewState
+    {
+      get { return boolSkipViewState; }
+      set { boolSkipViewState = value; }
+    }
+
     private string wselectedlabel = string.Empty;
     public string Wselectedlabel
     {
