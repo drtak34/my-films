@@ -1065,6 +1065,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewEnabled{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewImagePath{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewText{0}", index));
+          // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLabel2{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index));
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index));

@@ -1223,7 +1223,6 @@ Module Module1
         Dim RegCheck As Regex
         Dim Matches As MatchCollection
 
-
         For Each Rules In CurrentSettings.Edition_Strings.Split(";")
             Dim Rule() As String = Rules.Split("|")
             Dim EditionSearchExpression As String = Rule(0).ToString
@@ -1247,7 +1246,6 @@ Module Module1
                 ReturnValue = AddToCommaList(ReturnValue, EditionReplaceExpression)
             End If
         Next
-
 
         '[sS]tandard|Standard Edition;[eE]xtended|Extended Edition;[cC]ollector|Collectors Edition;[dD]irector|Directors Cut;[uU]nrated|Unrated
         'If FilePath.ToLower.Contains("standard") = True Then

@@ -102,7 +102,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
         #endregion
 
-
         #region Positional functions
         /// <summary>Searches for substring in string</summary>
         /// <param name="findText">string to look for</param>

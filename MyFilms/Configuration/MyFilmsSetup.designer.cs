@@ -495,6 +495,12 @@
           this.btnFirstTimeSetup = new System.Windows.Forms.Button();
           this.buttonWikiHelp = new System.Windows.Forms.Button();
           this.btnServerSync = new System.Windows.Forms.Button();
+          this.groupBox_UpdateGrabberScripts = new System.Windows.Forms.GroupBox();
+          this.button_DeleteBackupScripts = new System.Windows.Forms.Button();
+          this.label_UpdateGrabberScriptsInstructions = new System.Windows.Forms.Label();
+          this.textBoxUpdateGrabberScripts = new System.Windows.Forms.TextBox();
+          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
+          this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -597,12 +603,13 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.groupBox_UpdateGrabberScripts = new System.Windows.Forms.GroupBox();
-          this.textBoxUpdateGrabberScripts = new System.Windows.Forms.TextBox();
-          this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
-          this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
-          this.label_UpdateGrabberScriptsInstructions = new System.Windows.Forms.Label();
-          this.button_DeleteBackupScripts = new System.Windows.Forms.Button();
+          this.groupBox8 = new System.Windows.Forms.GroupBox();
+          this.label25 = new System.Windows.Forms.Label();
+          this.label7 = new System.Windows.Forms.Label();
+          this.label3 = new System.Windows.Forms.Label();
+          this.LayOutViewFilms = new System.Windows.Forms.ComboBox();
+          this.SortSensViewFilms = new System.Windows.Forms.ComboBox();
+          this.SortViewFilms = new System.Windows.Forms.ComboBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -675,6 +682,7 @@
           this.groupBox13.SuspendLayout();
           this.groupBox_GrabberOptions.SuspendLayout();
           this.groupBox6.SuspendLayout();
+          this.groupBox_UpdateGrabberScripts.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_Network.SuspendLayout();
@@ -690,10 +698,11 @@
           ((System.ComponentModel.ISupportInitialize)(this.customFieldDataGridView)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
+          this.Tab_OldStuff.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          this.groupBox_UpdateGrabberScripts.SuspendLayout();
+          this.groupBox8.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -5191,6 +5200,66 @@
           this.btnServerSync.UseVisualStyleBackColor = true;
           this.btnServerSync.Click += new System.EventHandler(this.btnFirstTimeSetupSyncClient_Click);
           // 
+          // groupBox_UpdateGrabberScripts
+          // 
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.button_DeleteBackupScripts);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.label_UpdateGrabberScriptsInstructions);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.textBoxUpdateGrabberScripts);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.progressBarUpdateGrabberScripts);
+          this.groupBox_UpdateGrabberScripts.Controls.Add(this.buttonUpdateGrabberScripts);
+          this.groupBox_UpdateGrabberScripts.Location = new System.Drawing.Point(6, 263);
+          this.groupBox_UpdateGrabberScripts.Name = "groupBox_UpdateGrabberScripts";
+          this.groupBox_UpdateGrabberScripts.Size = new System.Drawing.Size(735, 85);
+          this.groupBox_UpdateGrabberScripts.TabIndex = 3;
+          this.groupBox_UpdateGrabberScripts.TabStop = false;
+          this.groupBox_UpdateGrabberScripts.Text = "Update Grabber Scripts ...";
+          this.ToolTip1.SetToolTip(this.groupBox_UpdateGrabberScripts, resources.GetString("groupBox_UpdateGrabberScripts.ToolTip"));
+          // 
+          // button_DeleteBackupScripts
+          // 
+          this.button_DeleteBackupScripts.Location = new System.Drawing.Point(555, 13);
+          this.button_DeleteBackupScripts.Name = "button_DeleteBackupScripts";
+          this.button_DeleteBackupScripts.Size = new System.Drawing.Size(144, 25);
+          this.button_DeleteBackupScripts.TabIndex = 128;
+          this.button_DeleteBackupScripts.Text = "Delete Script Backups";
+          this.button_DeleteBackupScripts.UseVisualStyleBackColor = true;
+          this.button_DeleteBackupScripts.Click += new System.EventHandler(this.button_DeleteBackupScripts_Click);
+          // 
+          // label_UpdateGrabberScriptsInstructions
+          // 
+          this.label_UpdateGrabberScriptsInstructions.AutoSize = true;
+          this.label_UpdateGrabberScriptsInstructions.Location = new System.Drawing.Point(21, 32);
+          this.label_UpdateGrabberScriptsInstructions.Name = "label_UpdateGrabberScriptsInstructions";
+          this.label_UpdateGrabberScriptsInstructions.Size = new System.Drawing.Size(267, 26);
+          this.label_UpdateGrabberScriptsInstructions.TabIndex = 127;
+          this.label_UpdateGrabberScriptsInstructions.Text = "Update will download missing grabber scripts \r\nor update existing ones, if newer " +
+              "versions are available.";
+          // 
+          // textBoxUpdateGrabberScripts
+          // 
+          this.textBoxUpdateGrabberScripts.Enabled = false;
+          this.textBoxUpdateGrabberScripts.Location = new System.Drawing.Point(399, 42);
+          this.textBoxUpdateGrabberScripts.Name = "textBoxUpdateGrabberScripts";
+          this.textBoxUpdateGrabberScripts.Size = new System.Drawing.Size(300, 20);
+          this.textBoxUpdateGrabberScripts.TabIndex = 126;
+          // 
+          // progressBarUpdateGrabberScripts
+          // 
+          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(399, 66);
+          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
+          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(300, 13);
+          this.progressBarUpdateGrabberScripts.TabIndex = 125;
+          // 
+          // buttonUpdateGrabberScripts
+          // 
+          this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(399, 13);
+          this.buttonUpdateGrabberScripts.Name = "buttonUpdateGrabberScripts";
+          this.buttonUpdateGrabberScripts.Size = new System.Drawing.Size(143, 25);
+          this.buttonUpdateGrabberScripts.TabIndex = 124;
+          this.buttonUpdateGrabberScripts.Text = "Update Grabber Scripts";
+          this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
+          this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
+          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -5977,6 +6046,7 @@
           // 
           // Tab_OldStuff
           // 
+          this.Tab_OldStuff.Controls.Add(this.groupBox8);
           this.Tab_OldStuff.Location = new System.Drawing.Point(4, 22);
           this.Tab_OldStuff.Name = "Tab_OldStuff";
           this.Tab_OldStuff.Padding = new System.Windows.Forms.Padding(3);
@@ -6174,65 +6244,81 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // groupBox_UpdateGrabberScripts
+          // groupBox8
           // 
-          this.groupBox_UpdateGrabberScripts.Controls.Add(this.button_DeleteBackupScripts);
-          this.groupBox_UpdateGrabberScripts.Controls.Add(this.label_UpdateGrabberScriptsInstructions);
-          this.groupBox_UpdateGrabberScripts.Controls.Add(this.textBoxUpdateGrabberScripts);
-          this.groupBox_UpdateGrabberScripts.Controls.Add(this.progressBarUpdateGrabberScripts);
-          this.groupBox_UpdateGrabberScripts.Controls.Add(this.buttonUpdateGrabberScripts);
-          this.groupBox_UpdateGrabberScripts.Location = new System.Drawing.Point(6, 263);
-          this.groupBox_UpdateGrabberScripts.Name = "groupBox_UpdateGrabberScripts";
-          this.groupBox_UpdateGrabberScripts.Size = new System.Drawing.Size(735, 85);
-          this.groupBox_UpdateGrabberScripts.TabIndex = 3;
-          this.groupBox_UpdateGrabberScripts.TabStop = false;
-          this.groupBox_UpdateGrabberScripts.Text = "Update Grabber Scripts ...";
-          this.ToolTip1.SetToolTip(this.groupBox_UpdateGrabberScripts, resources.GetString("groupBox_UpdateGrabberScripts.ToolTip"));
+          this.groupBox8.Controls.Add(this.label25);
+          this.groupBox8.Controls.Add(this.label7);
+          this.groupBox8.Controls.Add(this.label3);
+          this.groupBox8.Controls.Add(this.LayOutViewFilms);
+          this.groupBox8.Controls.Add(this.SortSensViewFilms);
+          this.groupBox8.Controls.Add(this.SortViewFilms);
+          this.groupBox8.Location = new System.Drawing.Point(228, 144);
+          this.groupBox8.Name = "groupBox8";
+          this.groupBox8.Size = new System.Drawing.Size(291, 66);
+          this.groupBox8.TabIndex = 92;
+          this.groupBox8.TabStop = false;
+          this.groupBox8.Text = "Sort and Layouts for Films (Custom View)";
           // 
-          // textBoxUpdateGrabberScripts
+          // label25
           // 
-          this.textBoxUpdateGrabberScripts.Enabled = false;
-          this.textBoxUpdateGrabberScripts.Location = new System.Drawing.Point(399, 42);
-          this.textBoxUpdateGrabberScripts.Name = "textBoxUpdateGrabberScripts";
-          this.textBoxUpdateGrabberScripts.Size = new System.Drawing.Size(300, 20);
-          this.textBoxUpdateGrabberScripts.TabIndex = 126;
+          this.label25.AutoSize = true;
+          this.label25.Location = new System.Drawing.Point(202, 18);
+          this.label25.Name = "label25";
+          this.label25.Size = new System.Drawing.Size(39, 13);
+          this.label25.TabIndex = 5;
+          this.label25.Text = "Layout";
           // 
-          // progressBarUpdateGrabberScripts
+          // label7
           // 
-          this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(399, 66);
-          this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
-          this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(300, 13);
-          this.progressBarUpdateGrabberScripts.TabIndex = 125;
+          this.label7.AutoSize = true;
+          this.label7.Location = new System.Drawing.Point(125, 18);
+          this.label7.Name = "label7";
+          this.label7.Size = new System.Drawing.Size(26, 13);
+          this.label7.TabIndex = 4;
+          this.label7.Text = "Sort";
           // 
-          // buttonUpdateGrabberScripts
+          // label3
           // 
-          this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(399, 13);
-          this.buttonUpdateGrabberScripts.Name = "buttonUpdateGrabberScripts";
-          this.buttonUpdateGrabberScripts.Size = new System.Drawing.Size(143, 25);
-          this.buttonUpdateGrabberScripts.TabIndex = 124;
-          this.buttonUpdateGrabberScripts.Text = "Update Grabber Scripts";
-          this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
-          this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
+          this.label3.AutoSize = true;
+          this.label3.Location = new System.Drawing.Point(16, 18);
+          this.label3.Name = "label3";
+          this.label3.Size = new System.Drawing.Size(51, 13);
+          this.label3.TabIndex = 3;
+          this.label3.Text = "Sort Field";
           // 
-          // label_UpdateGrabberScriptsInstructions
+          // LayOutViewFilms
           // 
-          this.label_UpdateGrabberScriptsInstructions.AutoSize = true;
-          this.label_UpdateGrabberScriptsInstructions.Location = new System.Drawing.Point(21, 32);
-          this.label_UpdateGrabberScriptsInstructions.Name = "label_UpdateGrabberScriptsInstructions";
-          this.label_UpdateGrabberScriptsInstructions.Size = new System.Drawing.Size(267, 26);
-          this.label_UpdateGrabberScriptsInstructions.TabIndex = 127;
-          this.label_UpdateGrabberScriptsInstructions.Text = "Update will download missing grabber scripts \r\nor update existing ones, if newer " +
-              "versions are available.";
+          this.LayOutViewFilms.FormattingEnabled = true;
+          this.LayOutViewFilms.Items.AddRange(new object[] {
+            "List",
+            "Big Icon List",
+            "Small Icons",
+            "Large Icons",
+            "Filmstrip",
+            "Cover Flow"});
+          this.LayOutViewFilms.Location = new System.Drawing.Point(192, 35);
+          this.LayOutViewFilms.Name = "LayOutViewFilms";
+          this.LayOutViewFilms.Size = new System.Drawing.Size(90, 21);
+          this.LayOutViewFilms.TabIndex = 2;
           // 
-          // button_DeleteBackupScripts
+          // SortSensViewFilms
           // 
-          this.button_DeleteBackupScripts.Location = new System.Drawing.Point(555, 13);
-          this.button_DeleteBackupScripts.Name = "button_DeleteBackupScripts";
-          this.button_DeleteBackupScripts.Size = new System.Drawing.Size(144, 25);
-          this.button_DeleteBackupScripts.TabIndex = 128;
-          this.button_DeleteBackupScripts.Text = "Delete Script Backups";
-          this.button_DeleteBackupScripts.UseVisualStyleBackColor = true;
-          this.button_DeleteBackupScripts.Click += new System.EventHandler(this.button_DeleteBackupScripts_Click);
+          this.SortSensViewFilms.FormattingEnabled = true;
+          this.SortSensViewFilms.Items.AddRange(new object[] {
+            "ASC",
+            "DESC"});
+          this.SortSensViewFilms.Location = new System.Drawing.Point(120, 35);
+          this.SortSensViewFilms.Name = "SortSensViewFilms";
+          this.SortSensViewFilms.Size = new System.Drawing.Size(59, 21);
+          this.SortSensViewFilms.TabIndex = 1;
+          // 
+          // SortViewFilms
+          // 
+          this.SortViewFilms.FormattingEnabled = true;
+          this.SortViewFilms.Location = new System.Drawing.Point(10, 35);
+          this.SortViewFilms.Name = "SortViewFilms";
+          this.SortViewFilms.Size = new System.Drawing.Size(104, 21);
+          this.SortViewFilms.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 
@@ -6360,6 +6446,8 @@
           this.groupBox_GrabberOptions.PerformLayout();
           this.groupBox6.ResumeLayout(false);
           this.groupBox6.PerformLayout();
+          this.groupBox_UpdateGrabberScripts.ResumeLayout(false);
+          this.groupBox_UpdateGrabberScripts.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -6378,11 +6466,12 @@
           ((System.ComponentModel.ISupportInitialize)(this.customFieldDataGridView)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
+          this.Tab_OldStuff.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          this.groupBox_UpdateGrabberScripts.ResumeLayout(false);
-          this.groupBox_UpdateGrabberScripts.PerformLayout();
+          this.groupBox8.ResumeLayout(false);
+          this.groupBox8.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -6879,5 +6968,12 @@
         private Button buttonUpdateGrabberScripts;
         private Label label_UpdateGrabberScriptsInstructions;
         private Button button_DeleteBackupScripts;
+        private GroupBox groupBox8;
+        private Label label25;
+        private Label label7;
+        private Label label3;
+        private ComboBox LayOutViewFilms;
+        private ComboBox SortSensViewFilms;
+        private ComboBox SortViewFilms;
     }
 }
