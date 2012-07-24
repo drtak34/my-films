@@ -8,6 +8,10 @@
     <Version>0.9</Version>
     <Encoding>UTF-8</Encoding>
     <FileBasedReader>true</FileBasedReader>
+    <SearchCleanup />
+    <Accept />
+    <UserAgent />
+    <Headers />
     <URLSearch>
       <KeyStartThumb Param1="" Param2="" />
       <KeyEndThumb />
@@ -52,7 +56,7 @@
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
-      <KeyStartImg Param1="" Param2="">_x0023_NFO_x0023__x0023_Filename_x0023_.jpg</KeyStartImg>
+      <KeyStartImg Param1="" Param2="">_x0023_NFO_x0023_Folder.jpg</KeyStartImg>
       <KeyEndImg>_x0023_NFO_x0023__x0023_Filename_x0023_-fanart.jpg</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage />
@@ -129,8 +133,8 @@
       <KeyEndTagline>_x003C__x002F_tagline_x003E_</KeyEndTagline>
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="_x0023_REGEX_x0023_Germany:" Param2="">_x003C_certification_x003E_</KeyStartCertification>
-      <KeyEndCertification>_x003C__x002F_certification_x003E_</KeyEndCertification>
+      <KeyStartCertification Param1="_x0023_REGEX_x0023_Germany:" Param2="">_x003C_mpaa_x003E_</KeyStartCertification>
+      <KeyEndCertification>_x003C__x002F_mpaa_x003E_</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
       <KeyCertificationPage />
@@ -260,6 +264,28 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyEncodingDetails2 />
+      <KeyEncodingLinkGeneric1 />
+      <KeyEncodingLinkGeneric2 />
+      <KeyEncodingLinkImg />
+      <KeyEncodingLinkPersons />
+      <KeyEncodingLinkTitles />
+      <KeyEncodingLinkCertification />
+      <KeyEncodingLinkSyn />
+      <KeyEncodingLinkComment />
+      <KeyEncodingLinkMultiPosters />
+      <KeyEncodingLinkPhotos />
+      <KeyEncodingLinkPersonImages />
+      <KeyEncodingLinkMultiFanart />
+      <KeyEncodingLinkTrailer />
+      <KeyCollectionPage />
+      <KeyStartCollection Param1="" Param2="">_x003C_set_x003E_</KeyStartCollection>
+      <KeyEndCollection>_x003C__x002F_set_x003E_</KeyEndCollection>
+      <KeyCollectionIndex />
+      <KeyCollectionImageURLPage />
+      <KeyStartCollectionImageURL Param1="" Param2="" />
+      <KeyEndCollectionImageURL />
+      <KeyCollectionImageURLIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
