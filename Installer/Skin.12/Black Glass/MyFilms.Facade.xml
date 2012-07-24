@@ -476,7 +476,7 @@
         <align>left</align>
         <textcolor>60ffffff</textcolor>
         <label>#myfilms.nbobjects.value #myfilms.nbobjects.unit</label>
-        <visible>[facadeview.list|facadeview.album]</visible>
+        <visible>[facadeview.list|facadeview.album]+string.equals(#myfilms.nbobjects.value)</visible>
         <animation effect="slide" tween="circle" easing="out" time="200" start="400,0">visible</animation>
       </control>
       <control>
