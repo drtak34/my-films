@@ -14318,7 +14318,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bool indexed = (conf.Boolindexed && !conf.Boolindexedreturn);
         if (!indexed && dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = false;
         if (indexed && !dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = true;
-        LogMyFilms.Debug("SetDummyControlsForFacade() setting dummyFacadeIndex to '" + indexed + "'");
+        // LogMyFilms.Debug("SetDummyControlsForFacade() setting dummyFacadeIndex to '" + indexed + "'");
       }
     }
 

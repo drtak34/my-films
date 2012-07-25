@@ -798,6 +798,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{4b65be60-dedf-41ab-8f2a-b7ada3da6668}-Western.png</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Western.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilms.ListView.Cover.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e060103e-23a3-4abc-8565-66f1aab6ed54}-MyFilms.ListView.Cover.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MyFilms.ListView.Cover.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\collection.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8ee640a9-a443-468a-848e-1f74037b02dc}-collection.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\collection.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3976,7 +3990,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2283</Revision>
+      <Revision>2294</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3988,7 +4002,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-07-02T06:49:02.6692444+02:00</ReleaseDate>
+    <ReleaseDate>2012-07-08T19:45:51.1370769+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -4802,6 +4816,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Western.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{4b65be60-dedf-41ab-8f2a-b7ada3da6668}-Western.png</ZipFileName>
         <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Western.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\MyFilms.ListView.Cover.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e060103e-23a3-4abc-8565-66f1aab6ed54}-MyFilms.ListView.Cover.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MyFilms.ListView.Cover.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\collection.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8ee640a9-a443-468a-848e-1f74037b02dc}-collection.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\collection.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />

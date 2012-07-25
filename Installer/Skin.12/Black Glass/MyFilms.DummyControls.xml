@@ -6,7 +6,7 @@
       <id>36</id>
       <posX>-50</posX>
       <posY>-50</posY>
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
       <!-- to make a control visible only when you are in FILMS VIEW (Movies) do this: <visible>control.isvisible(36)</visible> -->
       <!-- to make a control invisible when you are in FILMS VIEW (Movies) do this: <visible>!control.isvisible(36)</visible> -->
@@ -17,7 +17,7 @@
       <id>37</id>
       <posX>-50</posX>
       <posY>-50</posY>3
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
       <!-- to make a control visible only when you are in GROUP VIEW (Year, Category, etc.) do this: <visible>control.isvisible(37)</visible> -->
       <!-- to make a control invisible when you are in GROUP VIEW (Year, Category, etc.) do this: <visible>!control.isvisible(37)</visible> -->
@@ -28,7 +28,7 @@
       <id>38</id>
       <posX>-50</posX>
       <posY>-50</posY>
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
       <!-- to make a control visible only when you are in PERSON VIEW (Actors, Writer, etc.) do this: <visible>control.isvisible(38)</visible> -->
       <!-- to make a control invisible when you are in PERSON VIEW (Actors, Writer, etc.) do this: <visible>!control.isvisible(38)</visible> -->
@@ -39,7 +39,7 @@
       <id>39</id>
       <posX>-50</posX>
       <posY>-50</posY>
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
       <!-- to make a control visible only when you are in HIERARCHY VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>control.isvisible(39)</visible> -->
       <!-- to make a control invisible when you are in HIERARCHY VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>!control.isvisible(39)</visible> -->
@@ -50,7 +50,7 @@
       <id>40</id>
       <posX>-50</posX>
       <posY>-50</posY>
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
       <!-- to make a control visible only when you are in MENU VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>control.isvisible(40)</visible> -->
       <!-- to make a control invisible when you are in MENU VIEW (Movie Collection, TV-Seasons, etc.) do this: <visible>!control.isvisible(40)</visible> -->
@@ -61,7 +61,7 @@
       <id>41</id>
       <posX>-50</posX>
       <posY>-50</posY>
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
       <!-- to make a control visible only when you are in an INDEXED VIEW do this: <visible>control.isvisible(41)</visible> -->
       <!-- to make a control invisible when you are in an INDEXED VIEW do this: <visible>!control.isvisible(41)</visible> -->
@@ -72,7 +72,7 @@
       <id>34</id>
       <posX>0</posX>
       <posY>0</posY>
-      <visible>yes</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
     </control>
     <control>
@@ -81,7 +81,7 @@
       <id>35</id>
       <posX>0</posX>
       <posY>0</posY>
-      <visible>yes</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
     </control>
 

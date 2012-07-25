@@ -46,6 +46,7 @@
 			<label></label>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control visible only when you are in a VIEW do this: <visible>control.isvisible(34)</visible> -->
 			<!-- to make a control invisible when you are in a VIEW do this: <visible>!control.isvisible(34)</visible> -->
 			<!-- Note: Dummy control 34 is maintained for backwards compatibility, but skins may use more specific View controls  -->
@@ -57,6 +58,7 @@
 			<label></label>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only when FANART is found: <visible>control.isvisible(35)</visible> -->
 			<!-- to make a control Invisible only when FANART is found: <visible>!control.isvisible(35)</visible> -->
        	</control>
@@ -68,6 +70,7 @@
 			<posY>-50</posY>
 			<!-- to make a control Visible only in Film Lists do this: <visible>control.isvisible(36)</visible> -->
 			<!-- to make a control Invisible in Film Lists (Movies) do this: <visible>!control.isvisible(36)</visible> -->
+      <visible>false</visible>
 		</control>
 		<control>
 			<description>Dummy control for VIEWS other than Person views(Category, Year, Country, etc.)</description>
@@ -75,6 +78,7 @@
 			<id>37</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in non person VIEWS: <visible>control.isvisible(37)</visible> -->
 			<!-- to make a control Invisible in non person VIEWS: <visible>!control.isvisible(37)</visible> -->
 		</control>
@@ -84,6 +88,7 @@
 			<id>38</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in PERSONS VIEWS (Actors, Writer, etc.): <visible>control.isvisible(38)</visible> -->
 			<!-- to make a control Invisible in PERSONS VIEWS (Actors, Writer, etc.): <visible>!control.isvisible(38)</visible> -->
 		</control>
@@ -95,6 +100,7 @@
 			<posY>-50</posY>
 			<!-- to make a control Visible only in GROUP HIERARCHY: <visible>control.isvisible(39)</visible> -->
 			<!-- to make a control Invisible in GROUP HIERARCHY: <visible>!control.isvisible(39)</visible> -->
+      <visible>false</visible>
 		</control>
 		<control>
 			<description>Dummy control for Views Menu</description>
@@ -104,6 +110,7 @@
 			<posY>-50</posY>
 			<!-- to make a control Visible only in VIEWS MENU: <visible>control.isvisible(40)</visible> -->
 			<!-- to make a control Invisible in VIEWS MENU: <visible>!control.isvisible(40)</visible> -->
+      <visible>false</visible>
 		</control>
 		<control>
 			<description>Dummy control for Indexed View Level</description>
@@ -111,6 +118,7 @@
 			<id>41</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in Index View level: <visible>control.isvisible(41)</visible> -->
 			<!-- to make a control Invisible in Index View level: <visible>!control.isvisible(41)</visible> -->
 		</control>
@@ -327,6 +335,8 @@
 			<wrapString> | </wrapString>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
 		</control>
+
+
 	 <!-- Hidden Side Menu -->
 		<control>
 			<type>actiongroup</type>
@@ -680,147 +690,9 @@
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
 
-		<!-- Cover/Thumb Images -->
-		<control>
-			<type>image</type>
-			<description>Film Cover Image (on film list layouts)</description>
-			<id>0</id>
-			<posX>45</posX>
-			<posY>90</posY>
-			<width>280</width>
-			<height>420</height>
-			<texture>#myfilms.coverimage</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<zoom>yes</zoom>
-      		<visible>!Control.isvisible(34)+[facadeview.list|facadeview.album]+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-		</control>
-    	<control>
-      		<type>image</type>
-    		<description>Film Cover Background</description>
-      		<id>0</id>
-      		<posX>38</posX>
-      		<posY>83</posY>
-      		<width>296</width>
-      		<height>436</height>
-      		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-      		<visible>!Control.isvisible(34)+[facadeview.list|facadeview.album]+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-    	</control>
-		<control>
-			<type>image</type>
-			<description>Views Menu Image</description>
-			<id>0</id>
-			<posX>45</posX>
-			<posY>90</posY>
-			<width>280</width>
-			<height>420</height>
-            <texture>#myfilms.menuimage</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<visible>Control.isvisible(40)+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-		</control>
-    	<control>
-      		<type>image</type>
-    		<description>Views Menu Image Background frame</description>
-      		<id>0</id>
-      		<posX>38</posX>
-      		<posY>83</posY>
-      		<width>296</width>
-      		<height>436</height>
-			<colordiffuse>ff808080</colordiffuse>
-      		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-			<visible>Control.isvisible(40)+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-    	</control>
-    	<control>
-			<type>image</type>
-			<description>View Image (on Non-Person Views)</description>
-			<id>0</id>
-			<posX>45</posX>
-			<posY>90</posY>
-			<width>280</width>
-			<height>420</height>
-			<texture>#myfilms.viewcoverimage</texture>
-			<centered>yes</centered>
-			<keepaspectratio>yes</keepaspectratio>
-			<visible>Control.isvisible(37)+[facadeview.list|facadeview.album]+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-			<animation effect="zoom" time="450" start="20,20" center="370,50" condition="!Control.isvisible(36)">conditional</animation>
-		</control>
-		<control>
-			<type>image</type>
-			<description>Person Image (on Persons Views)</description>
-			<id>0</id>
-			<posX>45</posX>
-			<posY>90</posY>
-			<width>280</width>
-			<height>420</height>
-			<texture>#myfilms.personcoverimage</texture>
-			<centered>yes</centered>
-			<keepaspectratio>yes</keepaspectratio>
-			<visible>Control.isvisible(38)+[facadeview.list|facadeview.album]+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-			<animation effect="zoom" time="450" start="20,20" center="370,50" condition="!Control.isvisible(36)">conditional</animation>
-		</control>
-    	<control>
-      		<type>image</type>
-			<description>Views Background frame (all views)</description>
-      		<id>0</id>
-      		<posX>38</posX>
-      		<posY>83</posY>
-      		<width>296</width>
-      		<height>436</height>
-      		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-			<visible>Control.isvisible(34)+!Control.isvisible(40)+[facadeview.list|facadeview.album]+Control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-			<animation effect="zoom" time="450" start="20,20" center="370,50" condition="!Control.isvisible(36)">conditional</animation>
-    	</control>
-        <control>
-			<type>image</type>
-			<description>View Image on Film Lists (List Layout)</description>
-			<id>0</id>
-			<posX>40</posX>
-			<posY>90</posY>
-			<width>288</width>
-			<height>420</height>
-			<texture mask="Picturethumbmask.png">#myfilms.viewcoverimage</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<valign>top</valign>
-			<visible>Control.isvisible(36)+[facadeview.list|facadeview.album]+!Control.isvisible(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-			<animation effect="zoom" time="450" end="20,20" center="370,50" condition="Control.isvisible(36)">conditional</animation>
-		</control>
-        <control>
-			<type>image</type>
-			<description>Person Image on Film Lists (List Layout)</description>
-			<id>0</id>
-			<posX>40</posX>
-			<posY>90</posY>
-			<width>288</width>
-			<height>420</height>
-			<texture mask="Picturethumbmask.png">#myfilms.personcoverimage</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<valign>top</valign>
-			<visible>Control.isvisible(36)+[facadeview.list|facadeview.album]+!Control.isvisible(50)</visible>
-			<animation effect="fade" time="250">Visiblechange</animation>
-			<animation effect="zoom" time="450" end="20,20" center="370,50" condition="Control.isvisible(36)">conditional</animation>
-		</control>
-		<control>
-			<type>image</type>
-			<description>Film Group (Box sets) Image on Group lists (List Layout)</description>
-			<id>0</id>
-			<posX>40</posX>
-			<posY>90</posY>
-			<width>288</width>
-			<height>420</height>
-			<texture mask="Picturethumbmask.png">#myfilms.groupcoverimage</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<visible>[facadeview.list|facadeview.album]+Control.isvisible(39)+Control.hasfocus(50)</visible>
-			<animation effect="zoom" time="450" end="20,20" center="370,50" condition="Control.isvisible(39)">conditional</animation>
-			<animation effect="fade" start="0" end="100" time="250">Visiblechange</animation>
-		</control>
+
+    <import>MyFilms.ListView.Cover.xml</import>
+
 
 		<!-- Filmstrip/Coverflow -->
 		<control>
