@@ -144,13 +144,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return Load(xmlSkin);
         }
 
-		/// <summary>
-		/// MediaPortal will set #currentmodule with GetModuleName()
-		/// </summary>
-		/// <returns>Localized Window Name</returns>
-		//  public override string GetModuleName() {
-		//	return Translation.Artwork;
-		//}
+	      /// <summary>
+	      /// MediaPortal will set #currentmodule with GetModuleName()
+	      /// </summary>
+	      /// <returns>Localized Window Name</returns>
+        public override string GetModuleName()
+        {
+          return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsCoverManager);
+        }
 
         protected View CurrentView
         {

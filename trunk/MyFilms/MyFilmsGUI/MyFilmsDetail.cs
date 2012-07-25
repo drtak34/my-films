@@ -79,7 +79,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_BtnPlay2Comment = 10002,
             CTRL_BtnPlay3Persons = 10003,
             CTRL_BtnPlay4TecDetails = 10004,
-            CTRL_BtnPlay5 = 10005,
+            CTRL_BtnPlay5ExtraDetails = 10005,
             CTRL_ViewFanart = 10099,
             CTRL_BtnReturn = 102,
             CTRL_BtnNext = 103,
@@ -541,6 +541,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
             setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
             setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
+            setGUIProperty("menu.extradetails", GUILocalizeStrings.Get(10798756));
+            setGUIProperty("menu.fanart", GUILocalizeStrings.Get(10798757));
 
             BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
             BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
@@ -724,9 +726,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //---------------------------------------------------------------------------------------
         public override bool OnMessage(GUIMessage messageType)
         {
-            LogMyFilms.Debug("OnMessage - MessageType: '" + messageType.Message.ToString() + "'");
             int dControl = messageType.TargetControlId;
             int iControl = messageType.SenderControlId;
+            LogMyFilms.Debug("OnMessage - MessageType: '" + messageType.Message.ToString() + "', TargetId: '" + dControl + "', SenderId: '" + iControl + "'");
             switch (messageType.Message)
             {
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
@@ -749,8 +751,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 case GUIMessage.MessageType.GUI_MSG_SETFOCUS:
                     //---------------------------------------------------------------------------------------
-                    // Set Focus
+                    // Set Focus and set #currentmodule based on focus
                     //---------------------------------------------------------------------------------------
+                    string basename = GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDetail); // return localized string for Module ID "Films/Details"
+                    switch (dControl)
+                    {
+                      case (int)Controls.CTRL_BtnPlay:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798751));
+                        break;
+                      case (int)Controls.CTRL_BtnPlay1Description:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798752));
+                        break;
+                      case (int)Controls.CTRL_BtnPlay2Comment:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798753));
+                        break;
+                      case (int)Controls.CTRL_BtnPlay3Persons:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798754));
+                        break;
+                      case (int)Controls.CTRL_BtnPlay4TecDetails:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798755));
+                        break;
+                      case (int)Controls.CTRL_BtnPlay5ExtraDetails:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798756));
+                        break;
+                      case (int)Controls.CTRL_ViewFanart:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798757));
+                        break;
+                      default:
+                        GUIPropertyManager.SetProperty("#currentmodule", basename);
+                        break;
+                    }
+                    LogMyFilms.Debug("MSG_Setfocus: focused control = '" + dControl + "', set currentmodule to '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
                     base.OnMessage(messageType);
                     return true;
 
@@ -772,7 +803,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       case (int)Controls.CTRL_BtnPlay2Comment:
                       case (int)Controls.CTRL_BtnPlay3Persons:
                       case (int)Controls.CTRL_BtnPlay4TecDetails:
-                      case (int)Controls.CTRL_BtnPlay5:
+                      case (int)Controls.CTRL_BtnPlay5ExtraDetails:
                         Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
                         return true;
                       case (int)Controls.CTRL_ViewFanart: // On Button goto MyFilmsThumbs // Changed to also launch player due to Ember Media Manager discontinued...

@@ -10,6 +10,20 @@
   <controls>
     <!--		<import>common.window.background.xml</import> -->
 
+<!--
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>27</posY>
+      <label>#(iif(and(neq(L(102012), #currentmodule), neq(L(102002), #currentmodule), neq(L(100100), #currentmodule), neq(L(102015), #currentmodule)), #currentmodule, ' '))</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+-->
+
     <control>
       <type>image</type>
       <description>BackGround</description>
