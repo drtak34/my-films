@@ -1358,28 +1358,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             NAS_Name_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-Name-3", string.Empty);
             NAS_MAC_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-MAC-3", string.Empty);
 
-            AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem1", string.Empty);
-            AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", string.Empty);
-            AntItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem2", string.Empty);
-            AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel2", string.Empty);
-            AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem3", string.Empty);
-            AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel3", string.Empty);
-            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem4", string.Empty);
-            AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", string.Empty);
-            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", string.Empty);
-            AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", string.Empty);
+            AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem1", "Category");
+            AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", BaseMesFilms.Translate_Column(AntItem1.Text.Trim()));
+            AntItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem2", "Country");
+            AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel2", BaseMesFilms.Translate_Column(AntItem2.Text.Trim()));
+            AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem3", "Director");
+            AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel3", BaseMesFilms.Translate_Column(AntItem3.Text.Trim()));
+            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem4", "Certification");
+            AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", BaseMesFilms.Translate_Column(AntItem4.Text.Trim()));
+            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", "Languages");
+            AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", BaseMesFilms.Translate_Column(AntItem5.Text.Trim()));
 
-            AntItemDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails1", "Country");
+            AntItemDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails1", "Category");
             AntLabelDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails1", BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim()));
-            AntItemDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails2", "Year");
+            AntItemDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails2", "Country");
             AntLabelDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim()));
-            AntItemDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", "Category");
+            AntItemDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", "Year");
             AntLabelDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim()));
-            AntItemDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", "Producer");
+            AntItemDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", "Director");
             AntLabelDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim()));
-            AntItemDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", "Languages");
+            AntItemDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", "Producer");
             AntLabelDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim()));
-            AntItemDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails6", "Date");
+            AntItemDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails6", "Certification");
             AntLabelDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails6", BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim()));
 
             ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator1", ",");
@@ -5024,28 +5024,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           CheckWatchedPlayerStopped.Checked = true; // set watched status handling
 
-          AntItem1.Text = "Country";
+          AntItem1.Text = "Category";
           AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
-          AntItem2.Text = "Producer";
+          AntItem2.Text = "Country";
           AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
-          AntItem3.Text = "Category";
+          AntItem3.Text = "Director";
           AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
-          AntItem4.Text = "Languages";
+          AntItem4.Text = "Certification";
           AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
-          AntItem5.Text = "Date";
+          AntItem5.Text = "Languages";
           AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
-          AntItemDetails1.Text = "Country";
+          AntItemDetails1.Text = "Category";
           AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
-          AntItemDetails2.Text = "Year";
+          AntItemDetails2.Text = "Country";
           AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
-          AntItemDetails3.Text = "Category";
+          AntItemDetails3.Text = "Year";
           AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
-          AntItemDetails4.Text = "Producer";
+          AntItemDetails4.Text = "Director";
           AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
-          AntItemDetails5.Text = "Languages";
+          AntItemDetails5.Text = "Producer";
           AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
-          AntItemDetails6.Text = "Date";
+          AntItemDetails6.Text = "Certification";
           AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
 
           // add default Views
