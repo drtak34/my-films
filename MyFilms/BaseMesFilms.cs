@@ -1506,7 +1506,8 @@ namespace MyFilmsPlugin.MyFilms
           // LogMyFilms.Debug("ReadDataMovies() - StrDfltSelect            = '" + StrDfltSelect + "'");
           // LogMyFilms.Debug("ReadDataMovies() - StrSelect                = '" + StrSelect + "'");
           // LogMyFilms.Debug("ReadDataMovies() - StrSort/StrSortSens, all = '" + StrSort + "/" + StrSortSens + "', '" + all + "', cached = '" + (data != null) + "'");
-          LogMyFilms.Debug("ReadDataMovies() - Expression               = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "', all = '" + all + "', extrasort = '" + doextrasort + "', cached = '" + (data != null) + "'");
+          // LogMyFilms.Debug("ReadDataMovies() - Expression               = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "', all = '" + all + "', extrasort = '" + doextrasort + "', cached = '" + (data != null) + "'");
+          LogMyFilms.Debug("ReadDataMovies() - Started with Expression = '" + StrDfltSelect + StrSelect + "|" + StrSort + " " + StrSortSens + "', all = '" + all + "', extrasort = '" + doextrasort + "', cached = '" + (data != null) + "'");
           var watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
 
           if (StrSelect.Length == 0) StrSelect = MyFilms.conf.StrTitle1 + " not like ''";

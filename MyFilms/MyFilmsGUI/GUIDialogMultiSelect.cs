@@ -56,8 +56,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override string GetModuleName()
         {
-          //return Translation.MultiSelectDialog;
-          return "Multi Selection...";
+          return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDialogMultiSelect);
         }
 
         protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
