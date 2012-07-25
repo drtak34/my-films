@@ -127,7 +127,7 @@
       <width>18</width>
       <height>18</height>
       <texture>isupdate.png</texture>
-      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
     </control>
 
@@ -140,7 +140,7 @@
       <label>#OnlineVideos.currentDownloads #(L(921))</label>
       <font>font10</font>
       <textcolor>7fffffff</textcolor>
-      <visible>!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
     </control>
   </controls>
 </window>
