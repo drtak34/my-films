@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Language name="Hungarian" characters="255">
   <Section name="unmapped">
-    <String id="100">Megjelenítés: Ikonok</String>
-    <String id="101">Megjelenítés: Lista</String>
-    <String id="103">Sorrend: Név</String>
-    <String id="104">Sorrend: Dátum</String>
+    <String id="95">Megjelenítés: </String>
+    <String id="96">Sorrend: </String>
+    <String id="97">View by: </String>
+    <String id="100">Ikonok</String>
+    <String id="101">Lista</String>
+    <String id="103">Név</String>
+    <String id="104">Dátum</String>
     <String id="127">Elemek</String>
     <String id="135">Műfajok</String>
     <String id="137">Keresés</String>
@@ -25,19 +28,19 @@
     <String id="342">Filmek</String>
     <String id="344">színészekre</String>
     <String id="345">Év</String>
-    <String id="366">Sorrend: Év</String>
-    <String id="367">Sorrend: Értékelés</String>
+    <String id="366">Év</String>
+    <String id="367">Értékelés</String>
     <String id="369">címre</String>
-    <String id="417">Megjelenítés: Nagy ikonok</String>
+    <String id="417">Nagy ikonok</String>
     <String id="432">Film törlése az adatbázisból</String>
     <String id="433">Biztosan eltávolítod?</String>
     <String id="457">Nézetcsere</String>
     <String id="496">Opciók</String>
-    <String id="529">Layout: Big Icon List</String>
-    <String id="621">Sorrend: Dátum</String>
+    <String id="529">Big Icon List</String>
+    <String id="621">Dátum</String>
     <String id="712">Vissza</String>
-    <String id="733">Megjelenítés: Filmszalag</String>
-    <String id="791">Megjelenítés: Borítók</String>
+    <String id="733">Filmszalag</String>
+    <String id="791">Borítók</String>
     <String id="863">Fájl</String>
     <String id="875">Aktuális program</String>
     <String id="900">Folytatod a filmet?</String>
@@ -146,7 +149,6 @@
     <String id="1079890">Bejátszások a választott személlyel (IMDB)</String>
     <String id="1079891">Fotók a választott személlyel (IMDB)</String>
     <String id="1079892">Frissítés ...</String>
-    <String id="1079893">Sorrend:</String>
     <String id="1079894">Megtekintettként jelölni</String>
     <String id="1079895">Még nem látottként jelölni</String>
     <String id="1079896">Személyek</String>
@@ -163,7 +165,7 @@
     <String id="1079907">Persons</String>
     <String id="1079908">Group</String>
     <String id="1079909">Select Role</String>
-    <String id="1079910">Sort by: Count</String>
+    <String id="1079910">Count</String>
     <String id="10798500">Play Film (external player)</String>
     <String id="10798608">Search all persons by role</String>
     <String id="10798609">Utoljára keresett ...</String>

@@ -233,22 +233,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (view)
             {
                 case View.List:
-                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(101);
+                strLine = GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101); // strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(101); // translations from Mediaportal !
                     break;
                 case View.Icons:
-                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(100);
+                    strLine = GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(100);
                     break;
                 case View.LargeIcons:
-                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(417);
+                    strLine = GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(417);
                     break;
                 case View.FilmStrip:
-                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(733);
+                    strLine = GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(733);
                     break;
                 case View.PlayList:
-                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(101);
+                    strLine = GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101);
                     break;
                 case View.CoverFlow:
-                    strLine = MediaPortal.GUI.Library.GUILocalizeStrings.Get(791);
+                    strLine = GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(791);
                     break;
             }
             if (buttonLayouts != null)

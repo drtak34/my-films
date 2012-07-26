@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Language name="English" characters="255">
   <Section name="unmapped">
-    <String id="100">Vista: Iconos</String>
-    <String id="101">Vista: Lista</String>
-    <String id="103">Ordenar por nombre</String>
-    <String id="104">Ordenar por fecha</String>
+    <String id="95">Vista: </String>
+    <String id="96">Ordenar por: </String>
+    <String id="97">View by: </String>
+    <String id="100">Iconos</String>
+    <String id="101">Lista</String>
+    <String id="103">nombre</String>
+    <String id="104">fecha</String>
     <String id="127">Películas</String>
     <String id="135">Géneros</String>
     <String id="137">Búsqueda</String>
@@ -25,19 +28,19 @@
     <String id="342">Películas</String>
     <String id="344">Intérpretes</String>
     <String id="345">Año</String>
-    <String id="366">Ordenar por año</String>
-    <String id="367">Ordenar por nota</String>
+    <String id="366">año</String>
+    <String id="367">nota</String>
     <String id="369">Título</String>
-    <String id="417">Vista: Iconos grandes</String>
+    <String id="417">Iconos grandes</String>
     <String id="432">Borrar película de la BD</String>
     <String id="433">¿seguro que quiere borrarla?</String>
     <String id="457">Cambiar vista</String>
     <String id="496">Opciones</String>
-    <String id="529">Layout: Big Icon List</String>
-    <String id="621">Ordenar por: Fecha</String>
+    <String id="529">Big Icon List</String>
+    <String id="621">Fecha</String>
     <String id="712">Atrás</String>
-    <String id="733">Vista: Diapositivas</String>
-    <String id="791">Vista: Cover Flow</String>
+    <String id="733">Diapositivas</String>
+    <String id="791">Cover Flow</String>
     <String id="863">Archivo</String>
     <String id="875">Programa actual</String>
     <String id="900">¿Reanudar donde se interrumpió?</String>
@@ -146,7 +149,6 @@
     <String id="1079890">Extractos de películas sobre la persona seleccionada (IMDB)</String>
     <String id="1079891">Fotos de la persona seleccionada (IMDB)</String>
     <String id="1079892">Actualizar ...</String>
-    <String id="1079893">Ordenar por:</String>
     <String id="1079894">Marcar como vista</String>
     <String id="1079895">Marcar como no vista</String>
     <String id="1079896">Persons</String>
@@ -163,7 +165,7 @@
     <String id="1079907">Persons</String>
     <String id="1079908">Group</String>
     <String id="1079909">Select Role</String>
-    <String id="1079910">Sort by: Count</String>
+    <String id="1079910">Count</String>
     <String id="10798500">Play Film (external player)</String>
     <String id="10798608">Search all persons by role</String>
     <String id="10798609">Last Search ...</String>
