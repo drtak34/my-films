@@ -44,6 +44,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using grabber;
   using Grabber;
+  using Grabber.TMDBv3;
   
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
@@ -363,6 +364,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             try
             {
+              //// experimental TMDB v3 code...
+              //Grabber.TMDBv3.Tmdb api = new Grabber.TMDBv3.Tmdb("apikey", "de"); // language is optional, default is "en"
+              //TmdbConfiguration tmdbConf = api.GetConfiguration();
+              //TmdbPersonSearch person = api.SearchPerson("name", 1);
+              //List<PersonResult> persons = person.results;
+              //PersonResult pinfo = persons[0];
+              //TmdbPerson singleperson = api.GetPersonInfo(pinfo.id);
+              //TmdbPersonCredits personFilmList = api.GetPersonCredits(pinfo.id);
+
+              // Search
+              //TmdbMovieSearch SearchMovie(string query, int page)
+              //TmdbPersonSearch SearchPerson(string query, int page)
+              //TmdbCompanySearch SearchCompany(string query, int page);             
+
+              // Person Info
+              //TmdbPerson GetPersonInfo(int PersonID)
+              //TmdbPersonCredits GetPersonCredits(int PersonID)
+              //TmdbPersonImages GetPersonImages(int PersonID)
+              //Movie Info
+              //TmdbMovie GetMovieInfo(int MovieID)
+              //TmdbMovie GetMovieByIMDB(string IMDB_ID)
+              //TmdbMovieAlternateTitles GetMovieAlternateTitles(int MovieID, string Country)
+              //TmdbMovieCast GetMovieCast(int MovieID)
+              //TmdbMovieImages GetMovieImages(int MovieID)
+              //TmdbMovieKeywords GetMovieKeywords(int MovieID)
+              //TmdbMovieReleases GetMovieReleases(int MovieID)
+              //TmdbMovieTrailers GetMovieTrailers(int MovieID)
+              //TmdbSimilarMovies GetSimilarMovies(int MovieID, int page)
+              //TmdbTranslations GetMovieTranslations(int MovieID)
+
+              // Social Movie Info
+              //TmdbNowPlaying GetNowPlayingMovies(int page)
+              //TmdbPopular GetPopularMovies(int page)
+              //TmdbTopRated GetTopRatedMovies(int page)
+              //TmdbUpcoming GetUpcomingMovies(int page)
+              
               List<DBPersonInfo> personlist = tmdbapi.getPersonsByName(f.Name, false, "en");
               if (personlist.Count == 0)
               {

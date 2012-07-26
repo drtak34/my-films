@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WatTmdb.V3
+﻿namespace Grabber.TMDBv3
 {
-    public class Translation
+  using System.Collections.Generic;
+
+  public class Translation
     {
         public string iso_639_1 { get; set; }
         public string name { get; set; }

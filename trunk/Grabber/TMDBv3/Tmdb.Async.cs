@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RestSharp;
-using System.Net;
-
-namespace WatTmdb.V3
+﻿namespace Grabber.TMDBv3
 {
-    public partial class Tmdb
+  using System;
+  using System.Linq;
+
+  using RestSharp;
+
+  public partial class Tmdb
     {
         private void ProcessAsyncRequest<T>(RestRequest request, Action<TmdbAsyncResult<T>> callback)
             where T : new()
         {
             var client = new RestClient(BASE_URL);
             client.AddHandler("application/json", new WatJsonDeserializer());
-            if (Timeout.HasValue)
-                client.Timeout = Timeout.Value;
+            if (this.Timeout.HasValue)
+                client.Timeout = this.Timeout.Value;
 
 #if !WINDOWS_PHONE
-            if (Proxy != null)
-                client.Proxy = Proxy;
+            if (this.Proxy != null)
+                client.Proxy = this.Proxy;
 #endif
 
-            Error = null;
+            this.Error = null;
 
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("api_key", ApiKey);
+            request.AddParameter("api_key", this.ApiKey);
 
             var asyncHandle = client.ExecuteAsync<T>(request, resp =>
                 {
@@ -35,20 +33,20 @@ namespace WatTmdb.V3
                         UserState = request.UserState
                     };
 
-                    ResponseContent = resp.Content;
-                    ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+                    this.ResponseContent = resp.Content;
+                    this.ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
                     if (resp.ResponseStatus != ResponseStatus.Completed)
                     {
                         if (resp.Content.Contains("status_message"))
-                            result.Error = jsonDeserializer.Deserialize<TmdbError>(resp);
+                            result.Error = this.jsonDeserializer.Deserialize<TmdbError>(resp);
                         else if (resp.ErrorException != null)
                             throw resp.ErrorException;
                         else
                             result.Error = new TmdbError { status_message = resp.Content };
                     }
 
-                    Error = result.Error;
+                    this.Error = result.Error;
 
                     callback(result);
                 });
@@ -57,28 +55,28 @@ namespace WatTmdb.V3
         private void ProcessAsyncRequestETag(RestRequest request, Action<TmdbAsyncETagResult> callback)
         {
             var client = new RestClient(BASE_URL);
-            if (Timeout.HasValue)
-                client.Timeout = Timeout.Value;
+            if (this.Timeout.HasValue)
+                client.Timeout = this.Timeout.Value;
 
 #if !WINDOWS_PHONE
-            if (Proxy!=null)
-                client.Proxy = Proxy;
+            if (this.Proxy!=null)
+                client.Proxy = this.Proxy;
 #endif
 
-            Error = null;
+            this.Error = null;
 
             request.Method = Method.HEAD;
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("api_key", ApiKey);
+            request.AddParameter("api_key", this.ApiKey);
 
             var asyncHandle = client.ExecuteAsync(request, resp =>
                 {
-                    ResponseContent = resp.Content;
-                    ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+                    this.ResponseContent = resp.Content;
+                    this.ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
                     var result = new TmdbAsyncETagResult
                     {
-                        ETag = ResponseETag,
+                        ETag = this.ResponseETag,
                         UserState = request.UserState
                     };
 
@@ -98,12 +96,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetConfiguration(object UserState, Action<TmdbAsyncResult<TmdbConfiguration>> callback)
         {
-            ProcessAsyncRequest<TmdbConfiguration>(BuildGetConfigurationRequest(UserState), callback);
+            this.ProcessAsyncRequest<TmdbConfiguration>(BuildGetConfigurationRequest(UserState), callback);
         }
 
         public void GetConfigurationETag(object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetConfigurationRequest(UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetConfigurationRequest(UserState), callback);
         }
         #endregion
 
@@ -133,7 +131,7 @@ namespace WatTmdb.V3
                 return;
             }
 
-            ProcessAsyncRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year, UserState), callback);
         }
 
         /// <summary>
@@ -146,7 +144,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void SearchMovie(string query, int page, object UserState, Action<TmdbAsyncResult<TmdbMovieSearch>> callback)
         {
-            SearchMovie(query, page, Language, null, null, UserState, callback);
+            this.SearchMovie(query, page, this.Language, null, null, UserState, callback);
         }
 
         /// <summary>
@@ -171,7 +169,7 @@ namespace WatTmdb.V3
                 return;
             }
 
-            ProcessAsyncRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -184,7 +182,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void SearchPerson(string query, int page, object UserState, Action<TmdbAsyncResult<TmdbPersonSearch>> callback)
         {
-            SearchPerson(query, page, Language, UserState, callback);
+            this.SearchPerson(query, page, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -208,7 +206,7 @@ namespace WatTmdb.V3
                 return;
             }
 
-            ProcessAsyncRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page, UserState), callback);
+            this.ProcessAsyncRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page, UserState), callback);
         }
         #endregion
 
@@ -224,12 +222,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetCollectionInfo(int CollectionID, string language, object UserState, Action<TmdbAsyncResult<TmdbCollection>> callback)
         {
-            ProcessAsyncRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
         }
 
         public void GetCollectionInfoETag(int CollectionID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
         }
 
         /// <summary>
@@ -241,12 +239,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetCollectionInfo(int CollectionID, object UserState, Action<TmdbAsyncResult<TmdbCollection>> callback)
         {
-            GetCollectionInfo(CollectionID, Language, UserState, callback);
+            this.GetCollectionInfo(CollectionID, this.Language, UserState, callback);
         }
 
         public void GetCollectionInfoETag(int CollectionID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetCollectionInfoETag(CollectionID, Language, UserState, callback);
+            this.GetCollectionInfoETag(CollectionID, this.Language, UserState, callback);
         }
         #endregion
 
@@ -262,12 +260,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieInfo(int MovieID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
-            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
         }
 
         public void GetMovieInfoETag(int MovieID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
         }
 
         /// <summary>
@@ -279,12 +277,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieInfo(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
-            GetMovieInfo(MovieID, Language, UserState, callback);
+            this.GetMovieInfo(MovieID, this.Language, UserState, callback);
         }
 
         public void GetMovieInfoETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetMovieInfoETag(MovieID, Language, UserState, callback);
+            this.GetMovieInfoETag(MovieID, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -306,7 +304,7 @@ namespace WatTmdb.V3
                 return;
             }
 
-            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, UserState), callback);
         }
 
         /// <summary>
@@ -319,12 +317,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieAlternateTitles(int MovieID, string Country, object UserState, Action<TmdbAsyncResult<TmdbMovieAlternateTitles>> callback)
         {
-            ProcessAsyncRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
         }
 
         public void GetMovieAlternateTitlesETag(int MovieID, string Country, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
         }
 
         /// <summary>
@@ -336,12 +334,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieCast(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieCast>> callback)
         {
-            ProcessAsyncRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieCastETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieCastRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieCastRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -354,12 +352,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieImages(int MovieID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieImages>> callback)
         {
-            ProcessAsyncRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
         }
 
         public void GetMovieImagesETag(int MovieID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
         }
 
         /// <summary>
@@ -371,12 +369,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieImages(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieImages>> callback)
         {
-            GetMovieImages(MovieID, Language, UserState, callback);
+            this.GetMovieImages(MovieID, this.Language, UserState, callback);
         }
 
         public void GetMovieImagesETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetMovieImagesETag(MovieID, Language, UserState, callback);
+            this.GetMovieImagesETag(MovieID, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -388,12 +386,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieKeywords(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieKeywords>> callback)
         {
-            ProcessAsyncRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieKeywordsETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -405,12 +403,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieReleases(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieReleases>> callback)
         {
-            ProcessAsyncRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieReleasesETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -423,12 +421,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieTrailers(int MovieID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieTrailers>> callback)
         {
-            ProcessAsyncRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
         }
 
         public void GetMovieTrailersETag(int MovieID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
         }
 
         /// <summary>
@@ -440,12 +438,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieTrailers(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieTrailers>> callback)
         {
-            GetMovieTrailers(MovieID, Language, UserState, callback);
+            this.GetMovieTrailers(MovieID, this.Language, UserState, callback);
         }
 
         public void GetMovieTrailersETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetMovieTrailersETag(MovieID, Language, UserState, callback);
+            this.GetMovieTrailersETag(MovieID, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -458,12 +456,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetMovieTranslations(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbTranslations>> callback)
         {
-            ProcessAsyncRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieTranslationsETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -477,7 +475,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetSimilarMovies(int MovieID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbSimilarMovies>> callback)
         {
-            ProcessAsyncRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -490,7 +488,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetSimilarMovies(int MovieID, int page, object UserState, Action<TmdbAsyncResult<TmdbSimilarMovies>> callback)
         {
-            GetSimilarMovies(MovieID, page, Language, UserState, callback);
+            this.GetSimilarMovies(MovieID, page, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -503,7 +501,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetUpcomingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbUpcoming>> callback)
         {
-            ProcessAsyncRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -515,7 +513,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetUpcomingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbUpcoming>> callback)
         {
-            GetUpcomingMovies(page, Language, UserState, callback);
+            this.GetUpcomingMovies(page, this.Language, UserState, callback);
         }
 
         #endregion
@@ -531,12 +529,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetPersonInfo(int PersonID, object UserState, Action<TmdbAsyncResult<TmdbPerson>> callback)
         {
-            ProcessAsyncRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID, UserState), callback);
         }
 
         public void GetPersonInfoETag(int PersonID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetPersonInfoRequest(PersonID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetPersonInfoRequest(PersonID, UserState), callback);
         }
 
         /// <summary>
@@ -549,12 +547,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetPersonCredits(int PersonID, string language, object UserState, Action<TmdbAsyncResult<TmdbPersonCredits>> callback)
         {
-            ProcessAsyncRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
         }
 
         public void GetPersonCreditsETag(int PersonID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
         }
 
         /// <summary>
@@ -566,12 +564,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetPersonCredits(int PersonID, object UserState, Action<TmdbAsyncResult<TmdbPersonCredits>> callback)
         {
-            GetPersonCredits(PersonID, Language, UserState, callback);
+            this.GetPersonCredits(PersonID, this.Language, UserState, callback);
         }
 
         public void GetPersonCreditsETag(int PersonID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetPersonCreditsETag(PersonID, Language, UserState, callback);
+            this.GetPersonCreditsETag(PersonID, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -583,12 +581,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetPersonImages(int PersonID, object UserState, Action<TmdbAsyncResult<TmdbPersonImages>> callback)
         {
-            ProcessAsyncRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID, UserState), callback);
         }
 
         public void GetPersonImagesETag(int PersonID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetPersonImagesRequest(PersonID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetPersonImagesRequest(PersonID, UserState), callback);
         }
         #endregion
 
@@ -616,7 +614,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetNowPlayingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
         {
-            ProcessAsyncRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -628,7 +626,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetNowPlayingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
         {
-            GetNowPlayingMovies(page, Language, UserState, callback);
+            this.GetNowPlayingMovies(page, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -641,7 +639,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetPopularMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
         {
-            ProcessAsyncRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -653,7 +651,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetPopularMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
         {
-            GetPopularMovies(page, Language, UserState, callback);
+            this.GetPopularMovies(page, this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -666,7 +664,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetTopRatedMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
         {
-            ProcessAsyncRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -678,7 +676,7 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetTopRatedMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
         {
-            GetTopRatedMovies(page, Language, UserState, callback);
+            this.GetTopRatedMovies(page, this.Language, UserState, callback);
         }
         #endregion
 
@@ -693,12 +691,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetCompanyInfo(int CompanyID, object UserState, Action<TmdbAsyncResult<TmdbCompany>> callback)
         {
-            ProcessAsyncRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
+            this.ProcessAsyncRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
         }
 
         public void GetCompanyInfoETag(int CompanyID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
         }
 
         /// <summary>
@@ -712,12 +710,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetCompanyMovies(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbCompanyMovies>> callback)
         {
-            ProcessAsyncRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
         }
 
         public void GetCompanyMoviesETag(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -730,12 +728,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetCompanyMovies(int CompanyID, int page, object UserState, Action<TmdbAsyncResult<TmdbCompanyMovies>> callback)
         {
-            GetCompanyMovies(CompanyID, page, Language, UserState, callback);
+            this.GetCompanyMovies(CompanyID, page, this.Language, UserState, callback);
         }
 
         public void GetCompanyMoviesETag(int CompanyID, int page, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetCompanyMoviesETag(CompanyID, page, Language, UserState, callback);
+            this.GetCompanyMoviesETag(CompanyID, page, this.Language, UserState, callback);
         }
         #endregion
 
@@ -750,12 +748,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetGenreList(string language, object UserState, Action<TmdbAsyncResult<TmdbGenre>> callback)
         {
-            ProcessAsyncRequest<TmdbGenre>(BuildGetGenreListRequest(language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbGenre>(BuildGetGenreListRequest(language, UserState), callback);
         }
 
         public void GetGenreListETag(string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetGenreListRequest(language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetGenreListRequest(language, UserState), callback);
         }
 
         /// <summary>
@@ -766,12 +764,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetGenreList(object UserState, Action<TmdbAsyncResult<TmdbGenre>> callback)
         {
-            GetGenreList(Language, UserState, callback);
+            this.GetGenreList(this.Language, UserState, callback);
         }
 
         public void GetGenreListETag(object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetGenreListETag(Language, UserState, callback);
+            this.GetGenreListETag(this.Language, UserState, callback);
         }
 
         /// <summary>
@@ -785,12 +783,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetGenreMovies(int GenreID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbGenreMovies>> callback)
         {
-            ProcessAsyncRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
+            this.ProcessAsyncRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
         }
 
         public void GetGenreMoviesETag(int GenreID, int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            ProcessAsyncRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
+            this.ProcessAsyncRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -803,12 +801,12 @@ namespace WatTmdb.V3
         /// <param name="callback"></param>
         public void GetGenreMovies(int GenreID, int page, object UserState, Action<TmdbAsyncResult<TmdbGenreMovies>> callback)
         {
-            GetGenreMovies(GenreID, page, Language, UserState, callback);
+            this.GetGenreMovies(GenreID, page, this.Language, UserState, callback);
         }
 
         public void GetGenreMoviesETag(int GenreID, int page, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            GetGenreMoviesETag(GenreID, page, Language, UserState, callback);
+            this.GetGenreMoviesETag(GenreID, page, this.Language, UserState, callback);
         }
         #endregion
     }
