@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RestSharp.Deserializers;
-using System.Net;
-using RestSharp;
-
-namespace WatTmdb.V3
+﻿namespace Grabber.TMDBv3
 {
-    public partial class Tmdb
+  using System;
+  using System.Collections.Generic;
+
+  using RestSharp.Deserializers;
+
+  using System.Net;
+
+  using RestSharp;
+
+  public partial class Tmdb
     {
         private const string BASE_URL = "http://api.themoviedb.org/3";
 
@@ -37,10 +38,10 @@ namespace WatTmdb.V3
         {
             get
             {
-                if (ResponseHeaders == null || ResponseHeaders.ContainsKey("ETag") == false)
+                if (this.ResponseHeaders == null || this.ResponseHeaders.ContainsKey("ETag") == false)
                     return null;
 
-                return Convert.ToString(ResponseHeaders["ETag"]).Trim('"');
+                return Convert.ToString(this.ResponseHeaders["ETag"]).Trim('"');
             }
         }
 
@@ -57,18 +58,18 @@ namespace WatTmdb.V3
 
         public Tmdb(string apiKey)
         {
-            Error = null;
-            ApiKey = apiKey;
-            Language = null;
-            Timeout = null;
+            this.Error = null;
+            this.ApiKey = apiKey;
+            this.Language = null;
+            this.Timeout = null;
         }
 
         public Tmdb(string apiKey, string language)
         {
-            Error = null;
-            ApiKey = apiKey;
-            Language = language;
-            Timeout = null;
+            this.Error = null;
+            this.ApiKey = apiKey;
+            this.Language = language;
+            this.Timeout = null;
         }
 
 

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WatTmdb.V3
+﻿namespace Grabber.TMDBv3
 {
-    public class TmdbPerson
+  public class TmdbPerson
     {
         public bool adult { get; set; }
         //public List<object> also_known_as { get; set; }
