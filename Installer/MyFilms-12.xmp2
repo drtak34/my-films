@@ -116,6 +116,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
               <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\RestSharp.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{fa34abcd-02c2-4113-a0ee-b74fbb82726c}-RestSharp.dll</ZipFileName>
+              <DestinationFilename>%Base%\RestSharp.dll</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3963,17 +3970,17 @@ Please refer to the Wiki online documentation.</Value>
         <CompatibleVersion>
           <Items>
             <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
+              <MinRequiredVersion>1.2.100.0</MinRequiredVersion>
+              <DesignedForVersion>1.2.100.0</DesignedForVersion>
             </CompatibleVersionItem>
           </Items>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -4144,6 +4151,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
         <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\RestSharp.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{fa34abcd-02c2-4113-a0ee-b74fbb82726c}-RestSharp.dll</ZipFileName>
+        <DestinationFilename>%Base%\RestSharp.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
