@@ -78,9 +78,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Databases.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=103.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -95,6 +103,12 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
@@ -139,6 +153,40 @@
     <Compile Include="TheMovieDbAPI\TmdbPersonSearchResults.cs" />
     <Compile Include="TheMovieDbAPI\TmdbStudio.cs" />
     <Compile Include="ThumbCreator.cs" />
+    <Compile Include="TMDBv3\Tmdb.Async.cs" />
+    <Compile Include="TMDBv3\Tmdb.cs" />
+    <Compile Include="TMDBv3\Tmdb.Sync.cs" />
+    <Compile Include="TMDBv3\TmdbAsyncResult.cs" />
+    <Compile Include="TMDBv3\TmdbAuthSession.cs" />
+    <Compile Include="TMDBv3\TmdbAuthToken.cs" />
+    <Compile Include="TMDBv3\TmdbCollection.cs" />
+    <Compile Include="TMDBv3\TmdbCompany.cs" />
+    <Compile Include="TMDBv3\TmdbCompanyMovies.cs" />
+    <Compile Include="TMDBv3\TmdbCompanySearch.cs" />
+    <Compile Include="TMDBv3\TmdbConfiguration.cs" />
+    <Compile Include="TMDBv3\TmdbError.cs" />
+    <Compile Include="TMDBv3\TmdbGenre.cs" />
+    <Compile Include="TMDBv3\TmdbGenreMovies.cs" />
+    <Compile Include="TMDBv3\TmdbMovie.cs" />
+    <Compile Include="TMDBv3\TmdbMovieAlternateTitles.cs" />
+    <Compile Include="TMDBv3\TmdbMovieCast.cs" />
+    <Compile Include="TMDBv3\TmdbMovieImages.cs" />
+    <Compile Include="TMDBv3\TmdbMovieKeywords.cs" />
+    <Compile Include="TMDBv3\TmdbMovieReleases.cs" />
+    <Compile Include="TMDBv3\TmdbMovieSearch.cs" />
+    <Compile Include="TMDBv3\TmdbMovieTrailers.cs" />
+    <Compile Include="TMDBv3\TmdbNowPlaying.cs" />
+    <Compile Include="TMDBv3\TmdbPerson.cs" />
+    <Compile Include="TMDBv3\TmdbPersonCredits.cs" />
+    <Compile Include="TMDBv3\TmdbPersonImages.cs" />
+    <Compile Include="TMDBv3\TmdbPersonSearch.cs" />
+    <Compile Include="TMDBv3\TmdbPopular.cs" />
+    <Compile Include="TMDBv3\TmdbSimilarMovies.cs" />
+    <Compile Include="TMDBv3\TmdbTopRated.cs" />
+    <Compile Include="TMDBv3\TmdbTranslations.cs" />
+    <Compile Include="TMDBv3\TmdbUpcoming.cs" />
+    <Compile Include="TMDBv3\Utility.cs" />
+    <Compile Include="TMDBv3\WatJsonDeserializer.cs" />
     <Compile Include="WebGrabber.cs" />
   </ItemGroup>
   <ItemGroup>
