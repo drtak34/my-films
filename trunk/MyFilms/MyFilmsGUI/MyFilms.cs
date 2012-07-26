@@ -4093,7 +4093,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Change_Layout_Action(0); // always use list view // Change_Layout_Action(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
 
-      BtnSrtBy.Label = GUILocalizeStrings.Get(103); // sort: name
+      BtnSrtBy.Label = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103); // sort: name
       //BtnSrtBy.IsAscending = true;
       BtnSrtBy.IsEnabled = false;
 
@@ -4491,7 +4491,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //string tmpStrSorta = conf.StrSorta;
         //string tmpStrSortSens = conf.StrSortSens;
         // set the default after user selection - specials will be configured below ...
-        string tmpCurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + BaseMesFilms.Translate_Column(choiceSort[dlg.SelectedLabel]);
+        string tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(choiceSort[dlg.SelectedLabel]);
         string tmpStrSorta = choiceSort[dlg.SelectedLabel];
         string tmpStrSortSens = " ASC";
 
@@ -4502,22 +4502,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
             //conf.StrSorta = conf.StrSTitle;
             //conf.StrSortSens = " ASC";
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(103);
+            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103); // "Sort: " + ""Name"
             tmpStrSorta = conf.StrSTitle;
             tmpStrSortSens = " ASC";
             break;
           case "Year":
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(366);
+            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(366);
             tmpStrSorta = "Year";
             tmpStrSortSens = " DESC";
             break;
           case "Date":
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(621);
+            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(621);
             tmpStrSorta = "Date"; // tmpStrSorta = "DateAdded";
             tmpStrSortSens = " DESC";
             break;
           case "Rating":
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(367);
+            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(367);
             tmpStrSorta = "Rating";
             tmpStrSortSens = " DESC";
             break;
@@ -5444,7 +5444,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //DateTime now = DateTime.Now;
 
       BtnSrtBy.IsEnabled = true;
-      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? GUILocalizeStrings.Get(1079910) : GUILocalizeStrings.Get(103); // sort: count / sort: name
+      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (WStrSortSens == " ASC");
       conf.ViewContext = (isperson) ? ViewContext.Person : ViewContext.Group;
 
@@ -7242,35 +7242,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //choiceLayoutMenu.Add(GUIFacadeControl.Layout.CoverFlow);
 
         case 0:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101)); // "Layout: " + "List"
           facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List;
           break;
         case 1:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(529));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(529));
           if (this.facadeFilms.AlbumListLayout != null)
             facadeFilms.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
           else
             facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List; // use list view, if skin does not support big icon list
           break;
         case 2:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(100));
           facadeFilms.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
           break;
         case 3:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(417));
           facadeFilms.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
           break;
         case 4:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(733));
           facadeFilms.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
           break;
         case 5:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(791));
           facadeFilms.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
           break;
 
         default:
-          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+          GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101));
           facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List;
           break;
       }
@@ -14842,14 +14842,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  case 0:
       //    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
       //    this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.List;
-      //    break;
-      //  case 2:
-      //    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
-      //    this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
-      //    break;
-      //  case 3:
-      //    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
-      //    this.facadeFilms.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
       //    break;
       
       //List = 0,

@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Language name="Czech" characters="255">
   <Section name="unmapped">
-    <String id="100">Změnit pohled: Ikony</String>
-    <String id="101">Změnit pohled: Seznam</String>
-    <String id="103">Řadit podle: Jména</String>
-    <String id="104">Řadit podle: Datum přidání</String>
+    <String id="95">Změnit pohled: </String>
+    <String id="96">Řadit podle: </String>
+    <String id="97">View by: </String>
+    <String id="100">Ikony</String>
+    <String id="101">Seznam</String>
+    <String id="103">Jména</String>
+    <String id="104">Datum přidání</String>
     <String id="127">Objekty</String>
     <String id="135">Žánry</String>
     <String id="137">Vyhledávat</String>
@@ -25,19 +28,19 @@
     <String id="342">Filmy</String>
     <String id="344">Herci</String>
     <String id="345">Rok</String>
-    <String id="366">Řadit podle: Rok</String>
-    <String id="367">Řadit podle: Hodnocení</String>
+    <String id="366">Rok</String>
+    <String id="367">Hodnocení</String>
     <String id="369">Titul</String>
-    <String id="417">Změnit pohled: Velké ikony</String>
+    <String id="417">Velké ikony</String>
     <String id="432">Odstranit film z databáze</String>
     <String id="433">Jste si jisti, že chcete odstranit?</String>
     <String id="457">Změnit zobrazení</String>
     <String id="496">Volby</String>
     <String id="529">Layout: Big Icon List</String>
-    <String id="621">Řadit podle: Datum</String>
+    <String id="621">Datum</String>
     <String id="712">Zpátky</String>
-    <String id="733">Změnit pohled: Filmový pás</String>
-    <String id="791">Změnit pohled: 3D Filmový pás</String>
+    <String id="733">Filmový pás</String>
+    <String id="791">3D Filmový pás</String>
     <String id="863">Soubor</String>
     <String id="875">Aktuální program</String>
     <String id="900">Pokračovat v přehrávání v místě přerušení?</String>
@@ -138,7 +141,6 @@
     <String id="1079890">Filmové klipy pro vybrané osoby (IMDB)</String>
     <String id="1079891">Fotografie pro vybrané osoby (IMDB)</String>
     <String id="1079892">Aktualizace ...</String>
-    <String id="1079893">Řadit podle:</String>
     <String id="1079894">Označit za shlédnuté</String>
     <String id="1079895">Označit za neshlédnuté</String>
     <String id="1079896">Osoby</String>
@@ -155,7 +157,7 @@
     <String id="1079907">Persons</String>
     <String id="1079908">Group</String>
     <String id="1079909">Select Role</String>
-    <String id="1079910">Sort by: Count</String>
+    <String id="1079910">Count</String>
     <String id="10798500">Play Film (external player)</String>
     <String id="10798608">Search all persons by role</String>
     <String id="10798609">Poslední hledání ...</String>

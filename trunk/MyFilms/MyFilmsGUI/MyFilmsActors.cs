@@ -442,44 +442,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (wLayOut)
             {
                 case 1:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(100));
                     facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
                     break;
                 case 2:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(417));
                     facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
 
                     break;
                 case 3:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(733));
                     facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                     break;
                 default:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101));
                     facadeView.View = GUIFacadeControl.ViewMode.List;
                     break;
             }
 #else
-            switch (wLayOut)
+          switch (wLayOut)
             {
                 case 1:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(100));
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
                     break;
                 case 2:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(417));
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
                     break;
                 case 3:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(733));
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
                     break;
                 case 4:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(791));
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
                     break;
                 default:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101));
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                     break;
             }
