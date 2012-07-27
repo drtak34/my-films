@@ -700,7 +700,7 @@
       <type>label</type>
       <id>0</id>
 			<posX>45</posX>
-			<posY>520</posY>
+			<posY>490</posY>
 			<font>font16</font>
 			<width>310</width>
 			<shadowAngle>45</shadowAngle>
@@ -715,7 +715,7 @@
       <type>label</type>
 			<id>1</id>
 			<posX>65</posX>
-			<posY>580</posY>
+			<posY>550</posY>
 			<font>font12</font>
 			<width>300</width>
 			<textcolor>bba9d0f7</textcolor>
@@ -730,7 +730,7 @@
       <type>fadelabel</type>
       <id>0</id>
 			<posX>65</posX>
-			<posY>640</posY>
+			<posY>610</posY>
 			<width>250</width>
       <label>#myfilms.person.dateofbirth.value</label>
 			<font>font12</font>

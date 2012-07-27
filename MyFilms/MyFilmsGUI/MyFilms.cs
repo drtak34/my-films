@@ -5943,12 +5943,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region counts for person lists
         if (rtemp != null && conf.StrPersons.Length > 0)
         {
+          Thread.Sleep(50);
           watch.Reset(); watch.Start();
           int[] facadeCounts = new int[facadeFilms.Count];
           string label2NamePrefix = BaseMesFilms.Translate_Column(wStrSort);
           try
           {
             for (int j = 0; j < facadeFilms.Count; j++) facadeCounts[j] = 0;
+
             for (int j = 0; j < rtemp.Length; j++)
             {
               if (StopLoadingViewDetails) break; // stop download if we have exited window
@@ -5959,7 +5961,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   facadeCounts[i]++;
                   facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
-                  if (StopLoadingViewDetails) break; // stop download if we have exited window
                 }
               }
             }
@@ -5977,8 +5978,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region load actor details for person lists
         Thread.Sleep(25);
         watch.Reset(); watch.Start();
-        // ToDo: conditional image download -> if(MyFilms.conf.UseThumbsForPersons && System.IO.Directory.Exists(MyFilms.conf.StrPathArtist)
-        if (isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
+        if (MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
         {
           string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
           grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
@@ -6037,8 +6037,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (StopLoadingViewDetails) break; // stop download if we have exited window
                 continue;
               }
-              
-              // update person detail infos or load new ones ...
+
+              // region update person detail infos or load new ones ...
               if ((person == null || person.DateOfBirth.Length < 1 || !File.Exists(filename)) && facadeFilms[i] != null)
               {
                 if (person == null) person = new IMDBActor();
@@ -6161,7 +6161,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       if (person.Biography.StartsWith("From Wikipedia, the free encyclopedia."))
                       {
-                        person.Biography.Replace("From Wikipedia, the free encyclopedia.", "").Trim(new char[] { ' ', '\r', '\n' });
+                        person.Biography = person.Biography.Replace("From Wikipedia, the free encyclopedia.", "").Trim(new char[] { ' ', '\r', '\n' });
                       }
                     }
 
@@ -6180,6 +6180,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (StopLoadingViewDetails) break; // stop download if we have exited window
                 #endregion
 
+                #region load missing images ...
                 if (person.ThumbnailUrl.Contains("http:") && !File.Exists(filename))
                 {
                     #region Thumb download deactivated, as downloading not yet working !!!
@@ -6205,6 +6206,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   item.Label = personname;
                   // continue; // proceed with next item - no downloads ...
                 }
+                #endregion
+
+                // create small thumbs and assign to facade icons ...
+                string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
+                item.IconImage = strActiveFacadeImages[1];
+                item.IconImageBig = strActiveFacadeImages[0];
+                item.ThumbnailImage = strActiveFacadeImages[0];
+
                 item.MusicTag = person;
                 item.Label3 = ""; // item.Label3 = "Update finished.";
                 item.Label = personname;
@@ -6290,7 +6299,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB name     - old : '" + imdbPerson.Name + "', new: '" + tmdbPerson.name + "'");
       if (!string.IsNullOrEmpty(tmdbPerson.biography))
       {
-        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB bio      - old : '" + imdbPerson.Biography + "', new: '" + tmdbPerson.biography + "'");
+        // LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB bio      - old : '" + imdbPerson.Biography + "', new: '" + tmdbPerson.biography + "'");
         imdbPerson.Biography = tmdbPerson.biography;
       }
 
