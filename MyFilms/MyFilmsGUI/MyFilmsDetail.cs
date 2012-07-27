@@ -6523,11 +6523,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               
             MyFilms.currentMovie.Reset();
 
-            ////Clear person properties
-            //clearGUIProperty("person.name.value", log);
-            //clearGUIProperty("person.birthdate.value", log);
-            //clearGUIProperty("person.birthplace.value", log);
-            //clearGUIProperty("person.biography.value", log);
+            //Clear person properties
+            clearGUIProperty("person.name.value", log);
+            clearGUIProperty("person.dateofbirth.value", log);
+            clearGUIProperty("person.placeofbirth.value", log);
+            clearGUIProperty("person.dateofdeath.value", log);
+            clearGUIProperty("person.placeofdeath.value", log);
+            clearGUIProperty("person.biography.value", log);
+            clearGUIProperty("person.movies.value", log);
+            clearGUIProperty("person.lastupdate.value", log);
 
             //Clear userdefined properties
             clearGUIProperty("db.calc.format.value", log);
@@ -7265,32 +7269,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
           }
-          if (person != null && person.Biography.Length > 0)
-            setGUIProperty("db.description.value", person.Biography);
-          else if (person != null && person.MiniBiography.Length > 0)
-            setGUIProperty("db.description.value", person.MiniBiography);
-          else
-            clearGUIProperty("db.description.value");
-          if (person != null && person.Name.Length > 0)
-          {
-            setGUIProperty("user.mastertitle.value", person.Name);
-            setGUIProperty("user.secondarytitle.value", person.Name);
-          }
-          else
-          {
-            clearGUIProperty("user.mastertitle.value");
-            clearGUIProperty("user.secondarytitle.value");
-          }
+          string value = "";
 
-          if (person != null && person.DateOfBirth.Length > 0)
-            setGUIProperty("db.year.value", person.DateOfBirth);
-          else
-            clearGUIProperty("db.year.value");
+          value = (person != null && person.Name.Length > 0) ? person.Name : "";
+          setGUIProperty("person.name.value", value);
+          setGUIProperty("user.mastertitle.value", value);
+          setGUIProperty("user.secondarytitle.value", value);
 
-          if (person != null && person.PlaceOfBirth.Length > 0)
-            setGUIProperty("db.category.value", person.PlaceOfBirth);
-          else
-            clearGUIProperty("db.category.value");
+          value = (person != null && person.Biography.Length > 0) ? person.Biography : "";
+          setGUIProperty("person.biography.value", value);
+          setGUIProperty("db.description.value", value);
+
+          value = (person != null && person.DateOfBirth.Length > 0) ? person.DateOfBirth : "";
+          setGUIProperty("person.dateofbirth.value", value);
+          setGUIProperty("db.year.value", value);
+
+          value = (person != null && person.PlaceOfBirth.Length > 0) ? person.PlaceOfBirth : "";
+          setGUIProperty("person.placeofbirth.value", value);
+          setGUIProperty("db.category.value", value);
+
+#if MP13
+          value = (person != null && person.DateOfDeath.Length > 0) ? person.DateOfDeath : "";
+          setGUIProperty("person.dateofdeath.value", value);
+
+          value = (person != null && person.PlaceOfDeath.Length > 0) ? person.PlaceOfDeath : "";
+          setGUIProperty("person.placeofdeath.value", value);
+
+          value = (person != null && person.LastUpdate.Length > 0) ? person.LastUpdate : "";
+          setGUIProperty("person.lastupdate.value", value);
+
+          setGUIProperty("person.movies.value", value);
+#endif
+
           stopwatch.Stop();
           LogMyFilms.Debug("Load_Detailed_PersonInfo() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
         }
