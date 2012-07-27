@@ -6157,6 +6157,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 #endif
                   if (actorId > 0)
                   {
+                    if (!string.IsNullOrEmpty(person.Biography)) // clean up before saving ...
+                    {
+                      if (person.Biography.StartsWith("From Wikipedia, the free encyclopedia."))
+                      {
+                        person.Biography.Replace("From Wikipedia, the free encyclopedia.", "").Trim(new char[] { ' ', '\r', '\n' });
+                      }
+                    }
+
                     VideoDatabase.SetActorInfo(actorId, person);
                     //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
                     item.Label = personname;
@@ -6285,15 +6293,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB bio      - old : '" + imdbPerson.Biography + "', new: '" + tmdbPerson.biography + "'");
         imdbPerson.Biography = tmdbPerson.biography;
       }
-
-      if (!string.IsNullOrEmpty(imdbPerson.Biography)) // clean up
-      {
-        if (imdbPerson.Biography.StartsWith("From Wikipedia, the free encyclopedia."))
-        {
-          imdbPerson.Biography.Replace("From Wikipedia, the free encyclopedia.", "").Trim(new char[] { ' ', '\r', '\n' });
-        }
-      }
-
 
       if (!string.IsNullOrEmpty(tmdbPerson.birthday))
       {
@@ -15136,9 +15135,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         BtnSrtBy.IsAscending = obj.SortButtonASC;
         BtnSrtBy.Label = obj.SortButtonLabel;
 
-        Prev_ItemID = -1;
-        Prev_Label = string.Empty;
-
         facadeFilms.SelectedListItemIndex = obj.Position;
         // GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, obj.Position);
         GUIPropertyManager.SetProperty("#currentmodule", obj.Title);
@@ -15161,7 +15157,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
             {
-              Fanartstatus(true); 
+              Fanartstatus(true);
+              Prev_ItemID = -1;
+              Prev_Label = string.Empty;
               ShowPanel();
               if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
               stopwatch.Stop(); 

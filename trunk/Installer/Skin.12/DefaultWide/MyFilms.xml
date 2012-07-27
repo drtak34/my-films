@@ -512,7 +512,7 @@
 			<shadowDistance>2</shadowDistance>
 			<shadowColor>ff083556</shadowColor>
 			<label>#selecteditem #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
-			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow+!Control.isvisible(38)</visible>
 			<animation effect="slide" time="450" end="0,-10" condition="Player.hasmedia">conditional</animation>
         </control>
 		<control>
@@ -693,6 +693,71 @@
 
     <import>MyFilms.ListView.Cover.xml</import>
 
+
+    <!-- PERSON INFO - will only show up in respective views  -->
+    <control>
+      <description>Current person name</description>
+      <type>label</type>
+      <id>0</id>
+			<posX>45</posX>
+			<posY>520</posY>
+			<font>font16</font>
+			<width>310</width>
+			<shadowAngle>45</shadowAngle>
+			<shadowDistance>2</shadowDistance>
+			<shadowColor>ff083556</shadowColor>
+      <label>#myfilms.person.name.value</label>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow+Control.isvisible(38)</visible>
+			<animation effect="slide" time="450" end="0,-10" condition="Player.hasmedia">conditional</animation>
+    </control>
+    <control>
+      <description>Place of Birth</description>
+      <type>label</type>
+			<id>1</id>
+			<posX>65</posX>
+			<posY>580</posY>
+			<font>font12</font>
+			<width>300</width>
+			<textcolor>bba9d0f7</textcolor>
+      <label>#myfilms.person.placeofbirth.value</label>
+			<visible>!player.hasmedia+!facadeview.filmstrip+!facadeview.coverflow</visible>
+    </control>
+
+
+
+    <control>
+      <description>Date of Birth</description>
+      <type>fadelabel</type>
+      <id>0</id>
+			<posX>65</posX>
+			<posY>640</posY>
+			<width>250</width>
+      <label>#myfilms.person.dateofbirth.value</label>
+			<font>font12</font>
+			<textcolor>bba9d0f7</textcolor>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
+    </control>
+    <control>
+      <description>Bography</description>
+      <type>textboxscrollup</type>
+      <id>0</id>
+			<posX>422</posX>
+			<posY>520</posY>
+			<width>800</width>
+			<height>110</height>
+			<colordiffuse>ffffffff</colordiffuse>
+			<dimColor>10ffffff</dimColor>
+			<font>font12</font>
+			<textcolor>FFFFFFFF</textcolor>
+      <label>#myfilms.person.biography.value</label>
+			<seperator>: : :</seperator>
+			<lineSpacing>.9</lineSpacing>
+			<shadowColor>-</shadowColor>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
 
 		<!-- Filmstrip/Coverflow -->
 		<control>
