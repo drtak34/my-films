@@ -39,7 +39,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Xml.Serialization;
 
   using Grabber;
-  using Grabber.TheMovieDbAPI;
 
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
@@ -63,6 +62,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
   // using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
+  using TmdbPerson = Grabber.TheMovieDbAPI.TmdbPerson;
+  using TMDB = Grabber.TMDBv3;
 
   /// <summary>
     /// Summary description for GUIMyFilms.
@@ -3620,7 +3621,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               {
                 LogMyFilms.Debug("Load_Lstdetail() - Sleep 500 ms to let animations go ...");
-                Thread.Sleep(500); // wait, so animations don't stutter
+                if (conf.ViewContext == ViewContext.Person)
+                  Thread.Sleep(1000); // for persons, wait longer, as the request takes longer ...wait, so animations don't stutter
+                else
+                {
+                  Thread.Sleep(500); // wait, so animations don't stutter
+                }
                 try
                 {
                   var wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
@@ -3647,7 +3653,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 return 0;
               }, 0, 0, null);
-            }) { Name = "MyFilmsSetFanartOnPageLoadWorker", IsBackground = true }.Start();
+            }) { Name = "MyFilmsSetFanartOnPageLoadWorker", IsBackground = true, Priority = ThreadPriority.BelowNormal}.Start();
             #endregion
 
             // Load_Rating(0); // old method - nor more used
@@ -3665,7 +3671,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // MyFilmsDetail.Init_Detailed_DB(false);
                 // MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
                 string personname = (conf.BoolReverseNames && currentItem.Label != EmptyFacadeValue) ? ReReverseName(currentItem.Label) : currentItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
-                MyFilmsDetail.Load_Detailed_PersonInfo(personname, true); // MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, true);
+                MyFilmsDetail.Load_Detailed_PersonInfo(personname, currentItem); 
                 break;
               case ViewContext.Group:
                 MyFilmsDetail.clearGUIProperty("user.source.isonline");
@@ -4410,6 +4416,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (viewRow.Label == viewlabel) return viewRow;
       }
+      LogMyFilms.Debug("GetCustomViewFromViewLabel() - no customvie found for viewlabel '" + viewlabel + "' - returning 'null'");
       return null;
     }
 
@@ -5952,6 +5959,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   facadeCounts[i]++;
                   facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
+                  if (StopLoadingViewDetails) break; // stop download if we have exited window
                 }
               }
             }
@@ -5965,12 +5973,343 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("GetCounts() - Threaded facade details loader exit after '" + i + "' items (" + (watch.ElapsedMilliseconds) + " ms)");
         }
         #endregion
+
+        #region load actor details for person lists
+        Thread.Sleep(25);
+        watch.Reset(); watch.Start();
+        // ToDo: conditional image download -> if(MyFilms.conf.UseThumbsForPersons && System.IO.Directory.Exists(MyFilms.conf.StrPathArtist)
+        if (isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
+        {
+          string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+          grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
+          TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+          TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
+          IMDB _imdb = new IMDB();
+
+          for (i = 0; i < facadeFilms.Count; i++)
+          {
+            if (StopLoadingViewDetails) break; // stop download if we have exited window
+            try
+            {
+              GUIListItem item = facadeFilms[i];
+              IMDBActor person = null;
+
+              string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
+              string filename = MyFilms.conf.StrPathArtist + "\\" + personname + ".jpg";  // string filename = Path.Combine(MyFilms.conf.StrPathArtist, personname); //File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
+              bool VDBexists = false;
+
+              item.Label = personname + " (updating...)"; 
+
+              #region get person info from VDB
+              item.Label3 = "Loading details from VDB ..."; 
+              ArrayList actorList = new ArrayList();
+              VideoDatabase.GetActorByName(personname, actorList);
+              LogMyFilms.Debug("GetImages() - found '" + actorList.Count + "' results for '" + personname + "'");
+              if (actorList.Count > 0 && actorList.Count < 5)
+              {
+                LogMyFilms.Debug("IMDB first search result: '" + actorList[0] + "'"); 
+                string[] strActor = actorList[0].ToString().Split(new char[] { '|' });
+                // int actorID = (strActor[0].Length > 0 && strActor.Count() > 1) ? Convert.ToInt32(strActor[0]) : 0; // string actorname = strActor[1];
+                int actorID = 0;
+                int.TryParse(strActor[0], out actorID);
+                if (actorID > 0)
+                {
+                  person = VideoDatabase.GetActorInfo(actorID);
+                }
+                if (person != null)
+                {
+                  item.Label3 = "ID = " + actorID + ", URL = " + person.ThumbnailUrl;
+                  VDBexists = true;
+                }
+                else
+                {
+                  item.Label3 = "ID = " + actorID;
+                }
+              }
+              #endregion
+
+              if (person != null && File.Exists(filename))
+              {
+                LogMyFilms.Debug("Skip update for '" + personname + "' - VDB entry and image already present !");
+                item.MusicTag = person;
+                item.Label3 = "";
+                item.Label = personname;
+                if (StopLoadingViewDetails) break; // stop download if we have exited window
+                continue;
+              }
+              
+              // update person detail infos or load new ones ...
+              if ((person == null || person.DateOfBirth.Length < 1 || !File.Exists(filename)) && facadeFilms[i] != null)
+              {
+                if (person == null) person = new IMDBActor();
+
+                #region IMDB internet search
+                item.Label3 = "Searching IMDB ...";
+                _imdb.FindActor(personname);
+
+                if (_imdb.Count > 0)
+                {
+                  if (_imdb[0].URL.Length != 0)
+                  {
+                    item.Label3 = "Loading IMDB details ...";
+#if MP13
+                    _imdb.GetActorDetails(_imdb[0], out imdbActor);
+#else
+                    _imdb.GetActorDetails(_imdb[0], false, out person);
+#endif
+                  }
+                }
+                if (StopLoadingViewDetails) break; // stop download if we have exited window
+                #endregion
+
+                #region TMDB V3 API description
+                // Search
+                //TmdbMovieSearch SearchMovie(string query, int page)
+                //TmdbPersonSearch SearchPerson(string query, int page)
+                //TmdbCompanySearch SearchCompany(string query, int page);             
+
+                // Person Info
+                //TmdbPerson GetPersonInfo(int PersonID)
+                //TmdbPersonCredits GetPersonCredits(int PersonID)
+                //TmdbPersonImages GetPersonImages(int PersonID)
+                //Movie Info
+                //TmdbMovie GetMovieInfo(int MovieID)
+                //TmdbMovie GetMovieByIMDB(string IMDB_ID)
+                //TmdbMovieAlternateTitles GetMovieAlternateTitles(int MovieID, string Country)
+                //TmdbMovieCast GetMovieCast(int MovieID)
+                //TmdbMovieImages GetMovieImages(int MovieID)
+                //TmdbMovieKeywords GetMovieKeywords(int MovieID)
+                //TmdbMovieReleases GetMovieReleases(int MovieID)
+                //TmdbMovieTrailers GetMovieTrailers(int MovieID)
+                //TmdbSimilarMovies GetSimilarMovies(int MovieID, int page)
+                //TmdbTranslations GetMovieTranslations(int MovieID)
+
+                // Social Movie Info
+                //TmdbNowPlaying GetNowPlayingMovies(int page)
+                //TmdbPopular GetPopularMovies(int page)
+                //TmdbTopRated GetTopRatedMovies(int page)
+                //TmdbUpcoming GetUpcomingMovies(int page)
+                #endregion
+
+                #region TMDB v2 loading ...
+                //List<grabber.DBPersonInfo> personlist = tmdbapi.getPersonsByName(personname, false, language);
+                //if (personlist.Count > 0)
+                //{
+                //  grabber.DBPersonInfo f = personlist[0];
+
+                //  if (f != null && !File.Exists(filename))
+                //  {
+                //    if (f.Images.Count > 0)
+                //    {
+                //      //grabber.DBPersonInfo persondetails = new DBPersonInfo();
+                //      //persondetails = tmdbapi.getPersonsById(f.Id, string.Empty);
+                //      //LogMyFilms.Info("Person Artwork - " + f.Images.Count + " Images found for '" + f.Name + "'");
+                //      item.Label3 = "Loading TMDBv2 image ...";
+                //      string filename1person = Grabber.GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, f.Images[0], f.Name, false, true, out filename);
+                //      LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
+                //    }
+                //  }
+                //}
+                #endregion
+
+                #region experimental TMDB v3 code...
+                try
+                {
+                  item.Label3 = "Searching TMDB ...";
+                  TMDB.TmdbPersonSearch tmdbPerson = api.SearchPerson(personname, 1);
+                  List<TMDB.PersonResult> persons = tmdbPerson.results;
+
+                  if (persons != null && persons.Count > 0)
+                  {
+                    TMDB.PersonResult pinfo = persons[0];
+                    TMDB.TmdbPerson singleperson = api.GetPersonInfo(pinfo.id);
+                    // TMDB.TmdbPersonImages images = api.GetPersonImages(pinfo.id);
+                    // TMDB.TmdbPersonCredits personFilmList = api.GetPersonCredits(pinfo.id);
+                    SetActorDetailsFromTMDB(singleperson, tmdbConf, ref person);
+                    if (!string.IsNullOrEmpty(singleperson.profile_path) && !File.Exists(filename))
+                    {
+                      item.Label3 = "Loading TMDB image ...";
+                      string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, personname, false, true, out filename);
+                      LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personname + "', path = '" + filename1person + "', filename = '" + filename + "'");
+                      item.IconImage = filename;
+                      item.IconImageBig = filename;item.ThumbnailImage = filename;
+                      item.Label3 = "TMDB ID = " + singleperson.id + ", URL = " + singleperson.profile_path;
+                    }
+                  }
+                }
+                catch (Exception tex)
+                {
+                  LogMyFilms.DebugException("GetImages() - error in TMDB grabbing item '" + i + "': " + tex.Message, tex);
+                }
+                if (StopLoadingViewDetails) break; // stop download if we have exited window
+                #endregion
+
+                #region Add actor to database to get infos in person facades later...
+
+                item.Label3 = "Save detail info to VDB ...";
+
+                try
+                {
+#if MP12
+                  int actorId = VideoDatabase.AddActor(person.Name);
+#else
+                        int actorId = VideoDatabase.AddActor(null, imdbActor.Name);
+#endif
+                  if (actorId > 0)
+                  {
+                    VideoDatabase.SetActorInfo(actorId, person);
+                    //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+                    item.Label = personname;
+                    item.Label3 = (VDBexists) ? ("Updated ID" + actorId + ", URL = " + person.ThumbnailUrl) : ("Added ID" + actorId + ", URL = " + person.ThumbnailUrl);
+                    // continue; // proceed with next item - no downloads ...
+                  }
+                }
+                catch (Exception ex)
+                {
+                  item.Label = personname;
+                  LogMyFilms.Debug("Error adding person to VDB: " + ex.Message, ex.StackTrace);
+                }
+                if (StopLoadingViewDetails) break; // stop download if we have exited window
+                #endregion
+
+                if (person.ThumbnailUrl.Contains("http:") && !File.Exists(filename))
+                {
+                    #region Thumb download deactivated, as downloading not yet working !!!
+                    //if (imdbActor.ThumbnailUrl != string.Empty)
+                    //{
+                    //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                    //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                    //  Utils.FileDelete(largeCoverArt);
+                    //  Utils.FileDelete(coverArt);
+                    //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+                    //}
+                    #endregion
+                  item.Label3 = "Loading missing image ...";
+                  LogMyFilms.Debug(" Image found for person '" + personname + "', URL = '" + person.ThumbnailUrl + "'");
+                  string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, personname, false, true, out filename);
+                  LogMyFilms.Debug("Person Image (IMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personname + "', path = '" + filename1person + "', filename = '" + filename + "'");
+                  item.IconImage = filename;
+                  item.IconImageBig = filename;
+                  item.ThumbnailImage = filename;
+                  // item.NotifyPropertyChanged("ThumbnailImage");
+
+                  item.Label3 = "ID = " + person.id + ", URL = " + person.ThumbnailUrl;
+                  item.Label = personname;
+                  // continue; // proceed with next item - no downloads ...
+                }
+                item.MusicTag = person;
+                item.Label3 = ""; // item.Label3 = "Update finished.";
+                item.Label = personname;
+
+                #region old stuff deactivated 
+                //string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
+                ////string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+                ////if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+                ////{
+                ////  item.ThumbnailImage = texture;
+                ////  item.IconImage = texture;
+                ////  item.IconImageBig = texture;
+                ////}
+
+                //item.IconImage = strActiveFacadeImages[1];
+                //item.IconImageBig = strActiveFacadeImages[0];
+                //item.ThumbnailImage = strActiveFacadeImages[0];
+
+                //// if selected force an update of thumbnail
+                ////GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+                ////if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+                #endregion
+              }
+
+              #region thumb downloads (no active)
+              // ToDo: Add downloader to SetViewThumbs - or here ...
+
+              //string remoteThumb = item.ImageRemotePath;
+              //if (string.IsNullOrEmpty(remoteThumb)) continue;
+
+              //string localThumb = item.Image;
+              //if (string.IsNullOrEmpty(localThumb)) continue;
+
+              //if (Helper.DownloadFile(remoteThumb, localThumb))
+              //{
+              //  // notify that thumbnail image has been downloaded
+              //  item.ThumbnailImage = localThumb;
+              //  item.NotifyPropertyChanged("ThumbnailImage");
+              //}
+              #endregion
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
+              LogMyFilms.DebugException("GetImages() - error setting facadelist item '" + i + "': " + ex.Message, ex);
+            }
+          }
+        }
+
+        watch.Stop();
+        LogMyFilms.Debug("GetImages() - Threaded person details loader finished after '" + i + "' items (" + (watch.ElapsedMilliseconds) + " ms)");
+        #endregion
       })
       {
         IsBackground = true,
         Name = "MyFilms Image Detector and Downloader",
-        Priority = ThreadPriority.Normal
+        Priority = ThreadPriority.BelowNormal
       }.Start();
+    }
+
+    private void SetActorDetailsFromTMDB(TMDB.TmdbPerson tmdbPerson, TMDB.TmdbConfiguration conf, ref IMDBActor imdbPerson)
+    {
+      if (tmdbPerson == null)
+      {
+        LogMyFilms.Debug("SetActorDetailsFromTMDB() - TMDB person is 'null' - return");
+        return;
+      }
+      if (imdbPerson == null)
+      {
+        LogMyFilms.Debug("SetActorDetailsFromTMDB() - IMDB person is 'null' - return");
+        return;
+      }
+      string tmdbProfileSize = "original";
+      foreach (string profileSize in conf.images.profile_sizes)
+      {
+        if (profileSize == "h632") tmdbProfileSize = profileSize;
+        // LogMyFilms.Debug("SetActorDetailsFromTMDB() - available TMDB profile size: '" + profileSize + "'");
+      }
+      
+      // imdbPerson.IMDBActorID = 
+      // imdbPerson.Name = tmdbPerson.name;
+      // imdbPerson.MiniBiography = tmdbPerson.biography;
+      // LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB name     - old : '" + imdbPerson.Name + "', new: '" + tmdbPerson.name + "'");
+      if (!string.IsNullOrEmpty(tmdbPerson.biography))
+      {
+        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB bio      - old : '" + imdbPerson.Biography + "', new: '" + tmdbPerson.biography + "'");
+        imdbPerson.Biography = tmdbPerson.biography;
+      }
+
+      if (!string.IsNullOrEmpty(imdbPerson.Biography)) // clean up
+      {
+        if (imdbPerson.Biography.StartsWith("From Wikipedia, the free encyclopedia."))
+        {
+          imdbPerson.Biography.Replace("From Wikipedia, the free encyclopedia.", "").Trim(new char[] { ' ', '\r', '\n' });
+        }
+      }
+
+
+      if (!string.IsNullOrEmpty(tmdbPerson.birthday))
+      {
+        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB birthday - old : '" + imdbPerson.DateOfBirth + "', new: '" + tmdbPerson.birthday + "'");
+        imdbPerson.DateOfBirth = tmdbPerson.birthday + ((!string.IsNullOrEmpty(tmdbPerson.deathday))? " (" + tmdbPerson.deathday + ")" : "");
+      }
+      if (!string.IsNullOrEmpty(tmdbPerson.place_of_birth))
+      {
+        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB b-place  - old : '" + imdbPerson.PlaceOfBirth + "', new: '" + tmdbPerson.place_of_birth + "'");
+        imdbPerson.PlaceOfBirth = tmdbPerson.place_of_birth;
+      }
+      if (!string.IsNullOrEmpty(tmdbPerson.profile_path))
+      {
+        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB thumb    - old : '" + imdbPerson.ThumbnailUrl + "', new: '" + conf.images.base_url + tmdbProfileSize + tmdbPerson.profile_path + "'");
+        imdbPerson.ThumbnailUrl = conf.images.base_url + tmdbProfileSize + tmdbPerson.profile_path;
+      }
     }
 
     private void GetImagesOld(List<GUIListItem> itemsWithThumbs, string wStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir, bool countItems)
@@ -7286,6 +7625,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.CurrentView = selectedView;
       conf.StrSelect = ""; // reset view filter
       conf.StrViewSelect = "";
+      conf.StrPersons = ""; // reset person filter
       conf.IndexedChars = 0;
       conf.Boolindexed = false;
       conf.BoolSkipViewState = false;
@@ -9489,13 +9829,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.BoolSkipViewState = false;
               conf.StrPersons = r[conf.StrIndex][persontype].ToString();
               //conf.StrFilmSelect = conf.StrTitle1 + " not like ''";
-              conf.StrSelect = conf.StrTitle1 + " like '*" + conf.StrTIndex + "'"; // set view filter to current movie name - use "*" at the beginning to include movies with hierarchies !
+              conf.StrSelect = conf.StrTitle1 + " like '*" + StringExtensions.EscapeLikeValue(conf.StrTIndex) + "'"; // set view filter to current movie name - use "*" at the beginning to include movies with hierarchies !
               //conf.StrSelect = "";
 
               conf.WStrSort = persontype;
               conf.WStrSortSens = " ASC";
               SetLabelView(persontype.ToLower());
               conf.ViewContext = ViewContext.Person;
+              conf.CurrentView = "MoviePersons";
               //getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
               //getSelectFromDivxThreaded();
 

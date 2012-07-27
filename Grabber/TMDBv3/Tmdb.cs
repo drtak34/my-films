@@ -3,6 +3,8 @@
   using System;
   using System.Collections.Generic;
 
+  using Grabber.TMDBv3.Utility;
+
   using RestSharp.Deserializers;
 
   using System.Net;
