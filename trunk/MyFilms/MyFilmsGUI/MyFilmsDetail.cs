@@ -364,7 +364,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             try
             {
-              //// experimental TMDB v3 code...
+              #region experimental TMDB v3 code...
               //Grabber.TMDBv3.Tmdb api = new Grabber.TMDBv3.Tmdb("apikey", "de"); // language is optional, default is "en"
               //TmdbConfiguration tmdbConf = api.GetConfiguration();
               //TmdbPersonSearch person = api.SearchPerson("name", 1);
@@ -399,8 +399,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //TmdbPopular GetPopularMovies(int page)
               //TmdbTopRated GetTopRatedMovies(int page)
               //TmdbUpcoming GetUpcomingMovies(int page)
-              
-              List<DBPersonInfo> personlist = tmdbapi.getPersonsByName(f.Name, false, "en");
+              #endregion
+
+              string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+              List<DBPersonInfo> personlist = tmdbapi.getPersonsByName(f.Name, false, language);
               if (personlist.Count == 0)
               {
                 LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found on TMDB, remaining items: '" + PersonstoDownloadQueue.Count + "'");
@@ -6521,6 +6523,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               
             MyFilms.currentMovie.Reset();
 
+            ////Clear person properties
+            //clearGUIProperty("person.name.value", log);
+            //clearGUIProperty("person.birthdate.value", log);
+            //clearGUIProperty("person.birthplace.value", log);
+            //clearGUIProperty("person.biography.value", log);
+
             //Clear userdefined properties
             clearGUIProperty("db.calc.format.value", log);
             clearGUIProperty("db.calc.aspectratio.value", log);
@@ -7216,78 +7224,76 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Load detailed infos for persons: export fields to skin as '#myfilms.<ant db column name> 
         //-------------------------------------------------------------------------------------------
-        public static void Load_Detailed_PersonInfo(string artistname, bool wrep)
+        public static void Load_Detailed_PersonInfo(string personname, GUIListItem item)
         {
-          Stopwatch stopwatch = new Stopwatch(); stopwatch.Reset();
-          stopwatch.Start();  
-          //clearGUIProperty("db.description.value");
-          LogMyFilms.Debug("Load_Detailed_PersonInfo for '" + artistname + "'");
-          ArrayList actorList = new ArrayList();
+          Stopwatch stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
+          LogMyFilms.Debug("Load_Detailed_PersonInfo for '" + personname + "'");
+          IMDBActor person = null;
 
-          VideoDatabase.GetActorByName(artistname, actorList);
-          //MyFilmsDetail.GetActorByName(artistname, actorList);
-          if (actorList.Count < 1 || actorList.Count > 5) // Do not proceed, of none or too many results !
+          if (null != item && item.MusicTag != null)
           {
-              return;
+            LogMyFilms.Debug("Load_Detailed_PersonInfo() - got cached person info from facade object (" + stopwatch.ElapsedMilliseconds + " ms)"); 
+            person = (IMDBActor)item.MusicTag;
           }
-          int actorID;
-          string actorname = "";
-          // Define splitter for string
-          char[] splitter = { '|' };
-          // Iterate through list
-          int i = 0;
-          foreach (string act in actorList)
+          else
           {
-            string[] strActor = act.Split(splitter);
-            actorID = Convert.ToInt32(strActor[0]);
-            actorname = strActor[1];
-            if ((actorID.ToString().Length > 0) && i == 0)
+            ArrayList actorList = new ArrayList();
+            VideoDatabase.GetActorByName(personname, actorList);
+            LogMyFilms.Debug("Load_Detailed_PersonInfo() - got '" + actorList.Count + "' results (" + stopwatch.ElapsedMilliseconds + " ms)");
+            if (actorList.Count > 0 && actorList.Count < 3) // Do not proceed, of none or too many results !
             {
-              i = 1;
-              LogMyFilms.Debug("load details for actor: '" + actorID.ToString() + "'");
-              try
-              {
-                IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
-                if (actor.Biography.Length > 0) 
-                  setGUIProperty("db.description.value", actor.Biography);
-                else if (actor.MiniBiography.Length > 0) 
-                  setGUIProperty("db.description.value", actor.MiniBiography);
-                else
-                  setGUIProperty("db.description.value", "");
-                if (actor.Name.Length > 0)
-                {
-                  setGUIProperty("user.mastertitle.value", actor.Name);
-                  setGUIProperty("user.secondarytitle.value", actor.Name);
-                }
-                else
-                {
-                  setGUIProperty("user.mastertitle.value", "");
-                  setGUIProperty("user.secondarytitle.value", "");
-                }
+              string[] strActor = actorList[0].ToString().Split(new char[] { '|' });
+              int actorID = (strActor[0].Length > 0) ? Convert.ToInt32(strActor[0]) : 0;
+              // string actorname = strActor[1];
 
-                if (actor.PlaceOfBirth.Length > 0) 
-                  setGUIProperty("db.category.value", actor.PlaceOfBirth);
-                else
-                  setGUIProperty("db.category.value", "");
-                if (actor.DateOfBirth.Length > 0) 
-                  setGUIProperty("db.year.value", actor.DateOfBirth);
-                else
-                  setGUIProperty("db.year.value", "");
-              }
-              catch (Exception ex)
+              if (actorID > 0)
               {
-                LogMyFilms.Debug("Load_Detailed_PersonInfo() - Exception while loading person details: " + ex.Message);
-              }
-              finally
-              {
-                // cleanup here ...
+                LogMyFilms.Debug("load details for actor ID: '" + actorID.ToString() + "'");
+                try
+                {
+                  person = VideoDatabase.GetActorInfo(actorID);
+                }
+                catch (Exception ex)
+                {
+                  person = null;
+                  LogMyFilms.Debug("Load_Detailed_PersonInfo() - Exception while loading person details: " + ex.Message);
+                }
+                finally
+                {
+                  // cleanup here ...
+                }
               }
             }
           }
+          if (person != null && person.Biography.Length > 0)
+            setGUIProperty("db.description.value", person.Biography);
+          else if (person != null && person.MiniBiography.Length > 0)
+            setGUIProperty("db.description.value", person.MiniBiography);
+          else
+            clearGUIProperty("db.description.value");
+          if (person != null && person.Name.Length > 0)
+          {
+            setGUIProperty("user.mastertitle.value", person.Name);
+            setGUIProperty("user.secondarytitle.value", person.Name);
+          }
+          else
+          {
+            clearGUIProperty("user.mastertitle.value");
+            clearGUIProperty("user.secondarytitle.value");
+          }
+
+          if (person != null && person.DateOfBirth.Length > 0)
+            setGUIProperty("db.year.value", person.DateOfBirth);
+          else
+            clearGUIProperty("db.year.value");
+
+          if (person != null && person.PlaceOfBirth.Length > 0)
+            setGUIProperty("db.category.value", person.PlaceOfBirth);
+          else
+            clearGUIProperty("db.category.value");
           stopwatch.Stop();
           LogMyFilms.Debug("Load_Detailed_PersonInfo() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
         }
-
         #endregion
 
         private void InitTrailerwatcher(string directorypath)
@@ -10578,7 +10584,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               foreach (object t in w_tableau)
               {
                 string personsname = t.ToString();
-                if (!(System.IO.File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
+                if (!(File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
                 {
                   if (downloadPersonImage(personsname))
                     LogMyFilms.Debug("Person '" + personsname + "' added to downloadQueue !");

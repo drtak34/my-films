@@ -1,4 +1,4 @@
-﻿namespace Grabber.TMDBv3
+﻿namespace Grabber.TMDBv3.Utility
 {
   using System;
   using System.Text.RegularExpressions;
