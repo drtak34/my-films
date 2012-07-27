@@ -6523,16 +6523,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               
             MyFilms.currentMovie.Reset();
 
-            //Clear person properties
-            clearGUIProperty("person.name.value", log);
-            clearGUIProperty("person.dateofbirth.value", log);
-            clearGUIProperty("person.placeofbirth.value", log);
-            clearGUIProperty("person.dateofdeath.value", log);
-            clearGUIProperty("person.placeofdeath.value", log);
-            clearGUIProperty("person.biography.value", log);
-            clearGUIProperty("person.movies.value", log);
-            clearGUIProperty("person.lastupdate.value", log);
-
             //Clear userdefined properties
             clearGUIProperty("db.calc.format.value", log);
             clearGUIProperty("db.calc.aspectratio.value", log);
@@ -6578,6 +6568,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.watched.global", log);
             clearGUIProperty("user.source.isonline", log);
             clearGUIProperty("user.sourcetrailer.isonline", log);
+
+            //Clear person properties
+            clearGUIProperty("person.name.value", log);
+            clearGUIProperty("person.dateofbirth.value", log);
+            clearGUIProperty("person.placeofbirth.value", log);
+            clearGUIProperty("person.biography.value", log);
+            //clearGUIProperty("person.dateofdeath.value", log);
+            //clearGUIProperty("person.placeofdeath.value", log);
+            //clearGUIProperty("person.movies.value", log);
+            //clearGUIProperty("person.lastupdate.value", log);
         }
 
         //-------------------------------------------------------------------------------------------
@@ -6596,6 +6596,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Init_Detailed_DB(false);
               return;
             }
+            #region always clear person properties in film details ...
+            clearGUIProperty("person.name.value");
+            clearGUIProperty("person.dateofbirth.value");
+            clearGUIProperty("person.placeofbirth.value");
+            clearGUIProperty("person.biography.value");
+            //clearGUIProperty("person.dateofdeath.value");
+            //clearGUIProperty("person.placeofdeath.value");
+            //clearGUIProperty("person.movies.value");
+            //clearGUIProperty("person.lastupdate.value");
+            #endregion
+
             using (AntMovieCatalog ds = new AntMovieCatalog())
             {
               foreach (DataColumn dc in ds.Movie.Columns)
@@ -7273,20 +7284,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           value = (person != null && person.Name.Length > 0) ? person.Name : "";
           setGUIProperty("person.name.value", value);
-          setGUIProperty("user.mastertitle.value", value);
-          setGUIProperty("user.secondarytitle.value", value);
+          //setGUIProperty("user.mastertitle.value", value);
+          //setGUIProperty("user.secondarytitle.value", value);
 
           value = (person != null && person.Biography.Length > 0) ? person.Biography : "";
           setGUIProperty("person.biography.value", value);
-          setGUIProperty("db.description.value", value);
+          //setGUIProperty("db.description.value", value);
 
           value = (person != null && person.DateOfBirth.Length > 0) ? person.DateOfBirth : "";
           setGUIProperty("person.dateofbirth.value", value);
-          setGUIProperty("db.year.value", value);
+          //setGUIProperty("db.year.value", value);
 
           value = (person != null && person.PlaceOfBirth.Length > 0) ? person.PlaceOfBirth : "";
           setGUIProperty("person.placeofbirth.value", value);
-          setGUIProperty("db.category.value", value);
+          //setGUIProperty("db.category.value", value);
 
 #if MP13
           value = (person != null && person.DateOfDeath.Length > 0) ? person.DateOfDeath : "";
