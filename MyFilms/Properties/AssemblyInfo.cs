@@ -35,17 +35,8 @@ using MediaPortal.Common.Utils;
 //[assembly: AssemblyFileVersion("5.0.2.1372")]
 //[assembly: NeutralResourcesLanguageAttribute("")]
 
-#if MP12
-[assembly: CompatibleVersion("1.1.6.27644", "1.1.6.27644")]
+[assembly: CompatibleVersion("1.2.100.0", "1.1.6.27644")]
 [assembly: UsesSubsystem("MP.SkinEngine")]
 [assembly: UsesSubsystem("MP.Config")]
-[assembly: UsesSubsystem("MP.Players")]
+[assembly: UsesSubsystem("MP.Players.Video")]
 [assembly: UsesSubsystem("MP.DB")]
-#endif
-#if MP13
-[assembly: CompatibleVersion("1.2.100.0", "1.2.100.0")]
-[assembly: UsesSubsystem("MP.SkinEngine")]
-[assembly: UsesSubsystem("MP.Config")]
-[assembly: UsesSubsystem("MP.Players")]
-[assembly: UsesSubsystem("MP.DB")]
-#endif

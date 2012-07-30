@@ -3876,7 +3876,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>MyFilms 6 beta for MP13a requires Mediaportal 1.3.</Message>
+        <Message>MyFilms 6 beta requires Mediaportal 1.2 or higher.</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
       <DependencyItem>

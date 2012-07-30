@@ -6039,7 +6039,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
 
               // region update person detail infos or load new ones ...
-              if ((person == null || person.DateOfBirth.Length < 1 || !File.Exists(filename)) && facadeFilms[i] != null)
+              if ((person == null || person.DateOfBirth.Length < 1 || person.DateOfBirth.ToLower().StartsWith("unknown") || !File.Exists(filename)) && facadeFilms[i] != null)
               {
                 if (person == null) person = new IMDBActor();
 
@@ -6052,14 +6052,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (_imdb[0].URL.Length != 0)
                   {
                     item.Label3 = "Loading IMDB details ...";
-#if MP13
-                    _imdb.GetActorDetails(_imdb[0], out imdbActor);
-#else
-                    _imdb.GetActorDetails(_imdb[0], false, out person);
-#endif
+//#if MP1X
+//                    _imdb.GetActorDetails(_imdb[0], out person);
+//#else
+//                    _imdb.GetActorDetails(_imdb[0], false, out person);
+//#endif
+                    GUIUtils.GetActorDetails(_imdb, _imdb[0], false, out person);
+                    LogMyFilms.Debug("Value foud - birthday = " + person.DateOfBirth ?? "");
+                    LogMyFilms.Debug("Value foud - birthplace = " + person.PlaceOfBirth ?? "");
                   }
                 }
                 if (StopLoadingViewDetails) break; // stop download if we have exited window
+
                 #endregion
 
                 #region TMDB V3 API description
@@ -6150,18 +6154,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 try
                 {
-#if MP12
-                  int actorId = VideoDatabase.AddActor(person.Name);
-#else
-                        int actorId = VideoDatabase.AddActor(null, imdbActor.Name);
-#endif
+//#if MP1X
+//                  int actorId = VideoDatabase.AddActor(person.Name);
+//#else
+//                  int actorId = VideoDatabase.AddActor(null, person.Name);
+//#endif
+                  int actorId = GUIUtils.AddActor(null, person.Name); 
                   if (actorId > 0)
                   {
                     if (!string.IsNullOrEmpty(person.Biography)) // clean up before saving ...
                     {
                       if (person.Biography.StartsWith("From Wikipedia, the free encyclopedia."))
                       {
-                        person.Biography = person.Biography.Replace("From Wikipedia, the free encyclopedia.", "").Trim(new char[] { ' ', '\r', '\n' });
+                        person.Biography = person.Biography.Replace("From Wikipedia, the free encyclopedia", "").TrimStart(new char[] {'.'}).Trim(new char[] { ' ', '\r', '\n' });
                       }
                     }
 
@@ -9933,11 +9938,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //_imdb.GetActorDetails(_imdb[index], director, out imdbActor);
 
                 //LogMyFilms.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent);
-#if MP12
-                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
-#else
-                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
-#endif
+//#if MP1X
+//                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
+//#else
+//                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
+//#endif
+                int actorId = GUIUtils.AddActor(null, imdbActor.Name);
                 if (actorId > 0)
                 {
                   MediaPortal.Video.Database.VideoDatabase.SetActorInfo(actorId, imdbActor);
@@ -9955,11 +9961,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               else
               {
-#if MP12
-                int actorId = VideoDatabase.AddActor(actor);
-#else
-                int actorId = VideoDatabase.AddActor(null, actor);
-#endif
+//#if MP1X
+//                int actorId = VideoDatabase.AddActor(actor);
+//#else
+//                int actorId = VideoDatabase.AddActor(null, actor);
+//#endif
+                int actorId = GUIUtils.AddActor(null, actor);
                 imdbActor.Name = actor;
                 IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
                 //imdbActorMovie.MovieTitle = _movieDetails.Title;
@@ -10763,11 +10770,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       imdb.FindActor(PersonName);
       for (int i = 0; i < imdb.Count; ++i)
       {
-#if MP12
-        imdb.GetActorDetails(imdb[i], false, out imdbActor);
-#else
-        imdb.GetActorDetails(imdb[i], out imdbActor);
-#endif
+//#if MP1X
+//        imdb.GetActorDetails(imdb[i], false, out imdbActor);
+//#else
+//        imdb.GetActorDetails(imdb[i], out imdbActor);
+//#endif
+        GUIUtils.GetActorDetails(imdb, imdb[i], false, out imdbActor);
         if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
         {
           break;
@@ -10795,11 +10803,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Log.Debug("IMDBFetcher single actor fetch: url=null or empty for actor {0}", PersonName);
       }
       // Add actor to datbbase to get infos in person facades later...
-#if MP12
-      int actorId = VideoDatabase.AddActor(imdbActor.Name);
-#else
-      int actorId = VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
-#endif
+//#if MP1X
+//      int actorId = VideoDatabase.AddActor(imdbActor.Name);
+//#else
+//      int actorId = VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
+//#endif
+      int actorId = GUIUtils.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
       if (actorId > 0)
       {
         VideoDatabase.SetActorInfo(actorId, imdbActor);

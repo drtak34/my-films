@@ -116,13 +116,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
               <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Base.12\RestSharp.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{fa34abcd-02c2-4113-a0ee-b74fbb82726c}-RestSharp.dll</ZipFileName>
-              <DestinationFilename>%Base%\RestSharp.dll</DestinationFilename>
-            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3883,7 +3876,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>27644</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>MyFilms requires Mediaportal 1.2.</Message>
+        <Message>MyFilms 6 beta requires Mediaportal 1.2 or higher.</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
       <DependencyItem>
@@ -3970,16 +3963,16 @@ Please refer to the Wiki online documentation.</Value>
         <CompatibleVersion>
           <Items>
             <CompatibleVersionItem>
-              <MinRequiredVersion>1.2.100.0</MinRequiredVersion>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
               <DesignedForVersion>1.2.100.0</DesignedForVersion>
             </CompatibleVersionItem>
           </Items>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.Players" />
-            <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
@@ -3997,7 +3990,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2294</Revision>
+      <Revision>2330</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -4009,7 +4002,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-07-08T19:45:51.1370769+02:00</ReleaseDate>
+    <ReleaseDate>2012-07-30T04:57:10.9616391+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -4151,13 +4144,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
         <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Base.12\RestSharp.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{fa34abcd-02c2-4113-a0ee-b74fbb82726c}-RestSharp.dll</ZipFileName>
-        <DestinationFilename>%Base%\RestSharp.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
