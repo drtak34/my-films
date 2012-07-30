@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class MovieResult
+namespace WatTmdb.V3
+{
+    public class MovieResult
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }

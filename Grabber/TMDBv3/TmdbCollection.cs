@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class CollectionPart
+namespace WatTmdb.V3
+{
+    public class CollectionPart
     {
         public string title { get; set; }
         public int id { get; set; }

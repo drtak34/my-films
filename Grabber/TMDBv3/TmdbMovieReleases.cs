@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class ReleaseCountry
+namespace WatTmdb.V3
+{
+    public class ReleaseCountry
     {
         public string iso_3166_1 { get; set; }
         public string certification { get; set; }

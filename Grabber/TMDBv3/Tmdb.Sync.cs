@@ -1,11 +1,14 @@
-﻿namespace Grabber.TMDBv3
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using RestSharp;
+using System.Net;
+using WatTmdb;
+
+namespace WatTmdb.V3
 {
-  using System;
-  using System.Linq;
-
-  using RestSharp;
-
-  public partial class Tmdb
+    public partial class Tmdb
     {
         private T ProcessRequest<T>(RestRequest request)
             where T : new()
@@ -13,34 +16,34 @@
             var client = new RestClient(BASE_URL);
             client.AddHandler("application/json", new WatJsonDeserializer());
 
-            if (this.Timeout.HasValue)
-                client.Timeout = this.Timeout.Value;
+            if (Timeout.HasValue)
+                client.Timeout = Timeout.Value;
 
 #if !WINDOWS_PHONE
-            if (this.Proxy != null)
-                client.Proxy = this.Proxy;
+            if (Proxy != null)
+                client.Proxy = Proxy;
 #endif
 
-            this.Error = null;
+            Error = null;
 
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("api_key", this.ApiKey);
+            request.AddParameter("api_key", ApiKey);
 
             var resp = client.Execute<T>(request);
 
-            this.ResponseContent = resp.Content;
-            this.ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+            ResponseContent = resp.Content;
+            ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
             if (resp.ResponseStatus == ResponseStatus.Completed)
                 return resp.Data;
             else
             {
                 if (resp.Content.Contains("status_message"))
-                    this.Error = this.jsonDeserializer.Deserialize<TmdbError>(resp);
+                    Error = jsonDeserializer.Deserialize<TmdbError>(resp);
                 else if (resp.ErrorException != null)
                     throw resp.ErrorException;
                 else
-                    this.Error = new TmdbError { status_message = resp.ErrorMessage };
+                    Error = new TmdbError { status_message = resp.ErrorMessage };
             }
 
             return default(T);
@@ -49,22 +52,22 @@
         private string ProcessRequestETag(RestRequest request)
         {
             var client = new RestClient(BASE_URL);
-            if (this.Timeout.HasValue)
-                client.Timeout = this.Timeout.Value;
+            if (Timeout.HasValue)
+                client.Timeout = Timeout.Value;
 
 #if !WINDOWS_PHONE
-            if (this.Proxy != null)
-                client.Proxy = this.Proxy;
+            if (Proxy != null)
+                client.Proxy = Proxy;
 #endif
-            this.Error = null;
+            Error = null;
 
             request.Method = Method.HEAD;
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("api_key", this.ApiKey);
+            request.AddParameter("api_key", ApiKey);
 
             var resp = client.Execute(request);
-            this.ResponseContent = resp.Content;
-            this.ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+            ResponseContent = resp.Content;
+            ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
             if (resp.ResponseStatus != ResponseStatus.Completed && resp.ErrorException != null)
                 throw resp.ErrorException;
@@ -81,12 +84,12 @@
         /// <returns></returns>
         public TmdbConfiguration GetConfiguration()
         {
-            return this.ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest(null));
+            return ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest());
         }
 
         public string GetConfigurationETag()
         {
-            return this.ProcessRequestETag(BuildGetConfigurationRequest(null));
+            return ProcessRequestETag(BuildGetConfigurationRequest());
         }
 
         #endregion
@@ -217,6 +220,39 @@
         public string GetCollectionInfoETag(int CollectionID)
         {
             return this.GetCollectionInfoETag(CollectionID, this.Language);
+        }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <param name="language">optional - ISO 639-1 language code</param>
+        /// <returns></returns>
+        public TmdbCollectionImages GetCollectionImages(int CollectionID, string language)
+        {
+            return ProcessRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language));
+        }
+
+        public string GetCollectionImagesETag(int CollectionID, string language)
+        {
+            return ProcessRequestETag(BuildGetCollectionImagesRequest(CollectionID, language));
+        }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <returns></returns>
+        public TmdbCollectionImages GetCollectionImages(int CollectionID)
+        {
+            return GetCollectionImages(CollectionID, Language);
+        }
+
+        public string GetCollectionImagesETag(int CollectionID)
+        {
+            return GetCollectionImagesETag(CollectionID, Language);
         }
         #endregion
 
@@ -392,12 +428,12 @@
         /// <returns></returns>
         public TmdbMovieTrailers GetMovieTrailers(int MovieID)
         {
-            return this.GetMovieTrailers(MovieID, this.Language);
+            return GetMovieTrailers(MovieID, Language);
         }
 
         public string GetMovieTrailersETag(int MovieID)
         {
-            return this.GetMovieTrailersETag(MovieID, this.Language);
+            return GetMovieTrailersETag(MovieID, Language);
         }
 
         /// <summary>
@@ -517,10 +553,10 @@
         /// (http://help.themoviedb.org/kb/api/latest-movie)
         /// </summary>
         /// <returns></returns>
-        //public TmdbLatestMovie GetLatestMovie()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public TmdbLatestMovie GetLatestMovie()
+        {
+            return ProcessRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest(null));
+        }
 
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
@@ -531,7 +567,7 @@
         /// <returns></returns>
         public TmdbNowPlaying GetNowPlayingMovies(int page, string language)
         {
-          return this.ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, null));
+            return ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -542,7 +578,7 @@
         /// <returns></returns>
         public TmdbNowPlaying GetNowPlayingMovies(int page)
         {
-            return this.GetNowPlayingMovies(page, this.Language);
+            return GetNowPlayingMovies(page, Language);
         }
 
         /// <summary>
@@ -565,7 +601,7 @@
         /// <returns></returns>
         public TmdbPopular GetPopularMovies(int page)
         {
-            return this.GetPopularMovies(page, this.Language);
+            return GetPopularMovies(page, Language);
         }
 
         /// <summary>
@@ -588,7 +624,7 @@
         /// <returns></returns>
         public TmdbTopRated GetTopRatedMovies(int page)
         {
-            return this.GetTopRatedMovies(page, this.Language);
+            return GetTopRatedMovies(page, Language);
         }
 
         /// <summary>
@@ -611,7 +647,7 @@
         /// <returns></returns>
         public TmdbUpcoming GetUpcomingMovies(int page)
         {
-            return this.GetUpcomingMovies(page, this.Language);
+            return GetUpcomingMovies(page, Language);
         }
         #endregion
 
@@ -660,12 +696,12 @@
         /// <returns></returns>
         public TmdbCompanyMovies GetCompanyMovies(int CompanyID, int page)
         {
-            return this.GetCompanyMovies(CompanyID, page, this.Language);
+            return GetCompanyMovies(CompanyID, page, Language);
         }
 
         public string GetCompanyMoviesETag(int CompanyID, int page)
         {
-            return this.GetCompanyMoviesETag(CompanyID, page, this.Language);
+            return GetCompanyMoviesETag(CompanyID, page, Language);
         }
         #endregion
 
@@ -694,12 +730,12 @@
         /// <returns></returns>
         public TmdbGenre GetGenreList()
         {
-            return this.GetGenreList(this.Language);
+            return GetGenreList(Language);
         }
 
         public string GetGenreListETag()
         {
-            return this.GetGenreListETag(this.Language);
+            return GetGenreListETag(Language);
         }
 
         /// <summary>
@@ -729,12 +765,12 @@
         /// <returns></returns>
         public TmdbGenreMovies GetGenreMovies(int GenreID, int page)
         {
-            return this.GetGenreMovies(GenreID, page, this.Language);
+            return GetGenreMovies(GenreID, page, Language);
         }
 
         public string GetGenreMoviesETag(int GenreID, int page)
         {
-            return this.GetGenreMoviesETag(GenreID, page, this.Language);
+            return GetGenreMoviesETag(GenreID, page, Language);
         }
         #endregion
     }

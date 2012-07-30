@@ -1,29 +1,31 @@
-﻿namespace Grabber.TMDBv3
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using RestSharp;
+using System.Net;
+
+namespace WatTmdb.V3
 {
-  using System;
-  using System.Linq;
-
-  using RestSharp;
-
-  public partial class Tmdb
+    public partial class Tmdb
     {
         private void ProcessAsyncRequest<T>(RestRequest request, Action<TmdbAsyncResult<T>> callback)
             where T : new()
         {
             var client = new RestClient(BASE_URL);
             client.AddHandler("application/json", new WatJsonDeserializer());
-            if (this.Timeout.HasValue)
-                client.Timeout = this.Timeout.Value;
+            if (Timeout.HasValue)
+                client.Timeout = Timeout.Value;
 
 #if !WINDOWS_PHONE
-            if (this.Proxy != null)
-                client.Proxy = this.Proxy;
+            if (Proxy != null)
+                client.Proxy = Proxy;
 #endif
 
-            this.Error = null;
+            Error = null;
 
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("api_key", this.ApiKey);
+            request.AddParameter("api_key", ApiKey);
 
             var asyncHandle = client.ExecuteAsync<T>(request, resp =>
                 {
@@ -33,20 +35,20 @@
                         UserState = request.UserState
                     };
 
-                    this.ResponseContent = resp.Content;
-                    this.ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+                    ResponseContent = resp.Content;
+                    ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
                     if (resp.ResponseStatus != ResponseStatus.Completed)
                     {
                         if (resp.Content.Contains("status_message"))
-                            result.Error = this.jsonDeserializer.Deserialize<TmdbError>(resp);
+                            result.Error = jsonDeserializer.Deserialize<TmdbError>(resp);
                         else if (resp.ErrorException != null)
                             throw resp.ErrorException;
                         else
                             result.Error = new TmdbError { status_message = resp.Content };
                     }
 
-                    this.Error = result.Error;
+                    Error = result.Error;
 
                     callback(result);
                 });
@@ -55,28 +57,28 @@
         private void ProcessAsyncRequestETag(RestRequest request, Action<TmdbAsyncETagResult> callback)
         {
             var client = new RestClient(BASE_URL);
-            if (this.Timeout.HasValue)
-                client.Timeout = this.Timeout.Value;
+            if (Timeout.HasValue)
+                client.Timeout = Timeout.Value;
 
 #if !WINDOWS_PHONE
-            if (this.Proxy!=null)
-                client.Proxy = this.Proxy;
+            if (Proxy!=null)
+                client.Proxy = Proxy;
 #endif
 
-            this.Error = null;
+            Error = null;
 
             request.Method = Method.HEAD;
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("api_key", this.ApiKey);
+            request.AddParameter("api_key", ApiKey);
 
             var asyncHandle = client.ExecuteAsync(request, resp =>
                 {
-                    this.ResponseContent = resp.Content;
-                    this.ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+                    ResponseContent = resp.Content;
+                    ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
                     var result = new TmdbAsyncETagResult
                     {
-                        ETag = this.ResponseETag,
+                        ETag = ResponseETag,
                         UserState = request.UserState
                     };
 
@@ -96,12 +98,12 @@
         /// <param name="callback"></param>
         public void GetConfiguration(object UserState, Action<TmdbAsyncResult<TmdbConfiguration>> callback)
         {
-            this.ProcessAsyncRequest<TmdbConfiguration>(BuildGetConfigurationRequest(UserState), callback);
+            ProcessAsyncRequest<TmdbConfiguration>(BuildGetConfigurationRequest(UserState), callback);
         }
 
         public void GetConfigurationETag(object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetConfigurationRequest(UserState), callback);
+            ProcessAsyncRequestETag(BuildGetConfigurationRequest(UserState), callback);
         }
         #endregion
 
@@ -131,7 +133,7 @@
                 return;
             }
 
-            this.ProcessAsyncRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year, UserState), callback);
         }
 
         /// <summary>
@@ -144,7 +146,7 @@
         /// <param name="callback"></param>
         public void SearchMovie(string query, int page, object UserState, Action<TmdbAsyncResult<TmdbMovieSearch>> callback)
         {
-            this.SearchMovie(query, page, this.Language, null, null, UserState, callback);
+            SearchMovie(query, page, Language, null, null, UserState, callback);
         }
 
         /// <summary>
@@ -169,7 +171,7 @@
                 return;
             }
 
-            this.ProcessAsyncRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -182,7 +184,7 @@
         /// <param name="callback"></param>
         public void SearchPerson(string query, int page, object UserState, Action<TmdbAsyncResult<TmdbPersonSearch>> callback)
         {
-            this.SearchPerson(query, page, this.Language, UserState, callback);
+            SearchPerson(query, page, Language, UserState, callback);
         }
 
         /// <summary>
@@ -206,7 +208,7 @@
                 return;
             }
 
-            this.ProcessAsyncRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page, UserState), callback);
+            ProcessAsyncRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page, UserState), callback);
         }
         #endregion
 
@@ -222,12 +224,12 @@
         /// <param name="callback"></param>
         public void GetCollectionInfo(int CollectionID, string language, object UserState, Action<TmdbAsyncResult<TmdbCollection>> callback)
         {
-            this.ProcessAsyncRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
+            ProcessAsyncRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
         }
 
         public void GetCollectionInfoETag(int CollectionID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetCollectionInfoRequest(CollectionID, language, UserState), callback);
         }
 
         /// <summary>
@@ -239,12 +241,47 @@
         /// <param name="callback"></param>
         public void GetCollectionInfo(int CollectionID, object UserState, Action<TmdbAsyncResult<TmdbCollection>> callback)
         {
-            this.GetCollectionInfo(CollectionID, this.Language, UserState, callback);
+            GetCollectionInfo(CollectionID, Language, UserState, callback);
         }
 
         public void GetCollectionInfoETag(int CollectionID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetCollectionInfoETag(CollectionID, this.Language, UserState, callback);
+            GetCollectionInfoETag(CollectionID, Language, UserState, callback);
+        }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <param name="language">optional - ISO 639-1 language code</param>
+        /// <param name="UserState">User object to include in callback</param>
+        /// <param name="callback"></param>
+        public void GetCollectionImages(int CollectionID, string language, object UserState, Action<TmdbAsyncResult<TmdbCollectionImages>> callback)
+        {
+            ProcessAsyncRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language, UserState), callback);
+        }
+
+        public void GetCollectionImagesETag(int CollectionID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetCollectionImagesRequest(CollectionID, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <param name="UserState">User object to include in callback</param>
+        /// <param name="callback"></param>
+        public void GetCollectionImages(int CollectionID, object UserState, Action<TmdbAsyncResult<TmdbCollectionImages>> callback)
+        {
+            GetCollectionImages(CollectionID, Language, UserState, callback);
+        }
+
+        public void GetCollectionImagesETag(int CollectionID, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetCollectionImagesETag(CollectionID, Language, UserState, callback);
         }
         #endregion
 
@@ -260,12 +297,12 @@
         /// <param name="callback"></param>
         public void GetMovieInfo(int MovieID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
+            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
         }
 
         public void GetMovieInfoETag(int MovieID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieInfoRequest(MovieID, language, UserState), callback);
         }
 
         /// <summary>
@@ -277,12 +314,12 @@
         /// <param name="callback"></param>
         public void GetMovieInfo(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
-            this.GetMovieInfo(MovieID, this.Language, UserState, callback);
+            GetMovieInfo(MovieID, Language, UserState, callback);
         }
 
         public void GetMovieInfoETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetMovieInfoETag(MovieID, this.Language, UserState, callback);
+            GetMovieInfoETag(MovieID, Language, UserState, callback);
         }
 
         /// <summary>
@@ -304,7 +341,7 @@
                 return;
             }
 
-            this.ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, UserState), callback);
+            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, UserState), callback);
         }
 
         /// <summary>
@@ -317,12 +354,12 @@
         /// <param name="callback"></param>
         public void GetMovieAlternateTitles(int MovieID, string Country, object UserState, Action<TmdbAsyncResult<TmdbMovieAlternateTitles>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
         }
 
         public void GetMovieAlternateTitlesETag(int MovieID, string Country, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country, UserState), callback);
         }
 
         /// <summary>
@@ -334,12 +371,12 @@
         /// <param name="callback"></param>
         public void GetMovieCast(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieCast>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieCastETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieCastRequest(MovieID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieCastRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -352,12 +389,12 @@
         /// <param name="callback"></param>
         public void GetMovieImages(int MovieID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieImages>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
         }
 
         public void GetMovieImagesETag(int MovieID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieImagesRequest(MovieID, language, UserState), callback);
         }
 
         /// <summary>
@@ -369,12 +406,12 @@
         /// <param name="callback"></param>
         public void GetMovieImages(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieImages>> callback)
         {
-            this.GetMovieImages(MovieID, this.Language, UserState, callback);
+            GetMovieImages(MovieID, Language, UserState, callback);
         }
 
         public void GetMovieImagesETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetMovieImagesETag(MovieID, this.Language, UserState, callback);
+            GetMovieImagesETag(MovieID, Language, UserState, callback);
         }
 
         /// <summary>
@@ -386,12 +423,12 @@
         /// <param name="callback"></param>
         public void GetMovieKeywords(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieKeywords>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieKeywordsETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieKeywordsRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -403,12 +440,12 @@
         /// <param name="callback"></param>
         public void GetMovieReleases(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieReleases>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieReleasesETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieReleasesRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -421,12 +458,12 @@
         /// <param name="callback"></param>
         public void GetMovieTrailers(int MovieID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieTrailers>> callback)
         {
-            this.ProcessAsyncRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
+            ProcessAsyncRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
         }
 
         public void GetMovieTrailersETag(int MovieID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieTrailersRequest(MovieID, language, UserState), callback);
         }
 
         /// <summary>
@@ -438,12 +475,12 @@
         /// <param name="callback"></param>
         public void GetMovieTrailers(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbMovieTrailers>> callback)
         {
-            this.GetMovieTrailers(MovieID, this.Language, UserState, callback);
+            GetMovieTrailers(MovieID, Language, UserState, callback);
         }
 
         public void GetMovieTrailersETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetMovieTrailersETag(MovieID, this.Language, UserState, callback);
+            GetMovieTrailersETag(MovieID, Language, UserState, callback);
         }
 
         /// <summary>
@@ -456,12 +493,12 @@
         /// <param name="callback"></param>
         public void GetMovieTranslations(int MovieID, object UserState, Action<TmdbAsyncResult<TmdbTranslations>> callback)
         {
-            this.ProcessAsyncRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
+            ProcessAsyncRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
         }
 
         public void GetMovieTranslationsETag(int MovieID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetMovieTranslationsRequest(MovieID, UserState), callback);
         }
 
         /// <summary>
@@ -475,7 +512,7 @@
         /// <param name="callback"></param>
         public void GetSimilarMovies(int MovieID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbSimilarMovies>> callback)
         {
-            this.ProcessAsyncRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -488,7 +525,7 @@
         /// <param name="callback"></param>
         public void GetSimilarMovies(int MovieID, int page, object UserState, Action<TmdbAsyncResult<TmdbSimilarMovies>> callback)
         {
-            this.GetSimilarMovies(MovieID, page, this.Language, UserState, callback);
+            GetSimilarMovies(MovieID, page, Language, UserState, callback);
         }
 
         /// <summary>
@@ -501,7 +538,7 @@
         /// <param name="callback"></param>
         public void GetUpcomingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbUpcoming>> callback)
         {
-            this.ProcessAsyncRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -513,7 +550,7 @@
         /// <param name="callback"></param>
         public void GetUpcomingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbUpcoming>> callback)
         {
-            this.GetUpcomingMovies(page, this.Language, UserState, callback);
+            GetUpcomingMovies(page, Language, UserState, callback);
         }
 
         #endregion
@@ -529,12 +566,12 @@
         /// <param name="callback"></param>
         public void GetPersonInfo(int PersonID, object UserState, Action<TmdbAsyncResult<TmdbPerson>> callback)
         {
-            this.ProcessAsyncRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID, UserState), callback);
+            ProcessAsyncRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID, UserState), callback);
         }
 
         public void GetPersonInfoETag(int PersonID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetPersonInfoRequest(PersonID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetPersonInfoRequest(PersonID, UserState), callback);
         }
 
         /// <summary>
@@ -547,12 +584,12 @@
         /// <param name="callback"></param>
         public void GetPersonCredits(int PersonID, string language, object UserState, Action<TmdbAsyncResult<TmdbPersonCredits>> callback)
         {
-            this.ProcessAsyncRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
+            ProcessAsyncRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
         }
 
         public void GetPersonCreditsETag(int PersonID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetPersonCreditsRequest(PersonID, language, UserState), callback);
         }
 
         /// <summary>
@@ -564,12 +601,12 @@
         /// <param name="callback"></param>
         public void GetPersonCredits(int PersonID, object UserState, Action<TmdbAsyncResult<TmdbPersonCredits>> callback)
         {
-            this.GetPersonCredits(PersonID, this.Language, UserState, callback);
+            GetPersonCredits(PersonID, Language, UserState, callback);
         }
 
         public void GetPersonCreditsETag(int PersonID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetPersonCreditsETag(PersonID, this.Language, UserState, callback);
+            GetPersonCreditsETag(PersonID, Language, UserState, callback);
         }
 
         /// <summary>
@@ -581,12 +618,12 @@
         /// <param name="callback"></param>
         public void GetPersonImages(int PersonID, object UserState, Action<TmdbAsyncResult<TmdbPersonImages>> callback)
         {
-            this.ProcessAsyncRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID, UserState), callback);
+            ProcessAsyncRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID, UserState), callback);
         }
 
         public void GetPersonImagesETag(int PersonID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetPersonImagesRequest(PersonID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetPersonImagesRequest(PersonID, UserState), callback);
         }
         #endregion
 
@@ -599,10 +636,10 @@
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
         /// <returns></returns>
-        //public void GetLatestMovie(object UserState, Action<TmdbAsyncResult<TmdbLatestMovie>> callback)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void GetLatestMovie(object UserState, Action<TmdbAsyncResult<TmdbLatestMovie>> callback)
+        {
+            ProcessAsyncRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest(UserState), callback);
+        }
 
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
@@ -614,7 +651,7 @@
         /// <param name="callback"></param>
         public void GetNowPlayingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
         {
-            this.ProcessAsyncRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -626,7 +663,7 @@
         /// <param name="callback"></param>
         public void GetNowPlayingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
         {
-            this.GetNowPlayingMovies(page, this.Language, UserState, callback);
+            GetNowPlayingMovies(page, Language, UserState, callback);
         }
 
         /// <summary>
@@ -639,7 +676,7 @@
         /// <param name="callback"></param>
         public void GetPopularMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
         {
-            this.ProcessAsyncRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -651,7 +688,7 @@
         /// <param name="callback"></param>
         public void GetPopularMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
         {
-            this.GetPopularMovies(page, this.Language, UserState, callback);
+            GetPopularMovies(page, Language, UserState, callback);
         }
 
         /// <summary>
@@ -664,7 +701,7 @@
         /// <param name="callback"></param>
         public void GetTopRatedMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
         {
-            this.ProcessAsyncRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -676,7 +713,7 @@
         /// <param name="callback"></param>
         public void GetTopRatedMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
         {
-            this.GetTopRatedMovies(page, this.Language, UserState, callback);
+            GetTopRatedMovies(page, Language, UserState, callback);
         }
         #endregion
 
@@ -691,12 +728,12 @@
         /// <param name="callback"></param>
         public void GetCompanyInfo(int CompanyID, object UserState, Action<TmdbAsyncResult<TmdbCompany>> callback)
         {
-            this.ProcessAsyncRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
+            ProcessAsyncRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
         }
 
         public void GetCompanyInfoETag(int CompanyID, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetCompanyInfoRequest(CompanyID, UserState), callback);
         }
 
         /// <summary>
@@ -710,12 +747,12 @@
         /// <param name="callback"></param>
         public void GetCompanyMovies(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbCompanyMovies>> callback)
         {
-            this.ProcessAsyncRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
         }
 
         public void GetCompanyMoviesETag(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -728,12 +765,12 @@
         /// <param name="callback"></param>
         public void GetCompanyMovies(int CompanyID, int page, object UserState, Action<TmdbAsyncResult<TmdbCompanyMovies>> callback)
         {
-            this.GetCompanyMovies(CompanyID, page, this.Language, UserState, callback);
+            GetCompanyMovies(CompanyID, page, Language, UserState, callback);
         }
 
         public void GetCompanyMoviesETag(int CompanyID, int page, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetCompanyMoviesETag(CompanyID, page, this.Language, UserState, callback);
+            GetCompanyMoviesETag(CompanyID, page, Language, UserState, callback);
         }
         #endregion
 
@@ -748,12 +785,12 @@
         /// <param name="callback"></param>
         public void GetGenreList(string language, object UserState, Action<TmdbAsyncResult<TmdbGenre>> callback)
         {
-            this.ProcessAsyncRequest<TmdbGenre>(BuildGetGenreListRequest(language, UserState), callback);
+            ProcessAsyncRequest<TmdbGenre>(BuildGetGenreListRequest(language, UserState), callback);
         }
 
         public void GetGenreListETag(string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetGenreListRequest(language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetGenreListRequest(language, UserState), callback);
         }
 
         /// <summary>
@@ -764,12 +801,12 @@
         /// <param name="callback"></param>
         public void GetGenreList(object UserState, Action<TmdbAsyncResult<TmdbGenre>> callback)
         {
-            this.GetGenreList(this.Language, UserState, callback);
+            GetGenreList(Language, UserState, callback);
         }
 
         public void GetGenreListETag(object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetGenreListETag(this.Language, UserState, callback);
+            GetGenreListETag(Language, UserState, callback);
         }
 
         /// <summary>
@@ -783,12 +820,12 @@
         /// <param name="callback"></param>
         public void GetGenreMovies(int GenreID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbGenreMovies>> callback)
         {
-            this.ProcessAsyncRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
+            ProcessAsyncRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
         }
 
         public void GetGenreMoviesETag(int GenreID, int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.ProcessAsyncRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
+            ProcessAsyncRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -801,12 +838,12 @@
         /// <param name="callback"></param>
         public void GetGenreMovies(int GenreID, int page, object UserState, Action<TmdbAsyncResult<TmdbGenreMovies>> callback)
         {
-            this.GetGenreMovies(GenreID, page, this.Language, UserState, callback);
+            GetGenreMovies(GenreID, page, Language, UserState, callback);
         }
 
         public void GetGenreMoviesETag(int GenreID, int page, object UserState, Action<TmdbAsyncETagResult> callback)
         {
-            this.GetGenreMoviesETag(GenreID, page, this.Language, UserState, callback);
+            GetGenreMoviesETag(GenreID, page, Language, UserState, callback);
         }
         #endregion
     }

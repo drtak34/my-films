@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class CompanyMovie
+namespace WatTmdb.V3
+{
+    public class CompanyMovie
     {
         public string backdrop_path { get; set; }
         public int id { get; set; }
