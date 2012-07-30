@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class ImageConfiguration
+namespace WatTmdb.V3
+{
+    public class ImageConfiguration
     {
         public string base_url { get; set; }
         public List<string> poster_sizes { get; set; }

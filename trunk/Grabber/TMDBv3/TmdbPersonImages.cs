@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class PersonImageProfile
+namespace WatTmdb.V3
+{
+    public class PersonImageProfile
     {
         public string file_path { get; set; }
         public int width { get; set; }

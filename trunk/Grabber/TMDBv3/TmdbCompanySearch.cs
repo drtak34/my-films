@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class CompanyResult
+namespace WatTmdb.V3
+{
+    public class CompanyResult
     {
         public int id { get; set; }
         public string logo_path { get; set; }

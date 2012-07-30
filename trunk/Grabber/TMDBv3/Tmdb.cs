@@ -1,17 +1,14 @@
-﻿namespace Grabber.TMDBv3
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using RestSharp.Deserializers;
+using System.Net;
+using RestSharp;
+
+namespace WatTmdb.V3
 {
-  using System;
-  using System.Collections.Generic;
-
-  using Grabber.TMDBv3.Utility;
-
-  using RestSharp.Deserializers;
-
-  using System.Net;
-
-  using RestSharp;
-
-  public partial class Tmdb
+    public partial class Tmdb
     {
         private const string BASE_URL = "http://api.themoviedb.org/3";
 
@@ -40,10 +37,10 @@
         {
             get
             {
-                if (this.ResponseHeaders == null || this.ResponseHeaders.ContainsKey("ETag") == false)
+                if (ResponseHeaders == null || ResponseHeaders.ContainsKey("ETag") == false)
                     return null;
 
-                return Convert.ToString(this.ResponseHeaders["ETag"]).Trim('"');
+                return Convert.ToString(ResponseHeaders["ETag"]).Trim('"');
             }
         }
 
@@ -60,18 +57,18 @@
 
         public Tmdb(string apiKey)
         {
-            this.Error = null;
-            this.ApiKey = apiKey;
-            this.Language = null;
-            this.Timeout = null;
+            Error = null;
+            ApiKey = apiKey;
+            Language = null;
+            Timeout = null;
         }
 
         public Tmdb(string apiKey, string language)
         {
-            this.Error = null;
-            this.ApiKey = apiKey;
-            this.Language = language;
-            this.Timeout = null;
+            Error = null;
+            ApiKey = apiKey;
+            Language = language;
+            Timeout = null;
         }
 
 
@@ -144,6 +141,18 @@
             if (userState != null)
                 request.UserState = userState;
             
+            return request;
+        }
+
+        private static RestRequest BuildGetCollectionImagesRequest(int CollectionID, string language, object userState)
+        {
+            var request = new RestRequest("collection/{id}/images", Method.GET);
+            if (string.IsNullOrEmpty(language) == false)
+                request.AddParameter("language", language);
+            request.AddUrlSegment("id", CollectionID.ToString());
+            if (userState != null)
+                request.UserState = userState;
+
             return request;
         }
         #endregion
@@ -299,9 +308,18 @@
 
 
         #region Miscellaneous Movie
+        private static RestRequest BuildGetLatestMovieRequest(object userState)
+        {
+            var request = new RestRequest("movie/latest", Method.GET);
+            if (userState != null)
+                request.UserState = userState;
+
+            return request;
+        }
+
         private static RestRequest BuildGetNowPlayingMoviesRequest(int page, string language, object userState)
         {
-            var request = new RestRequest("movie/now-playing", Method.GET);
+            var request = new RestRequest("movie/now_playing", Method.GET);
             if (string.IsNullOrEmpty(language) == false)
                 request.AddParameter("language", language);
             request.AddParameter("page", page);
@@ -325,7 +343,7 @@
 
         private static RestRequest BuildGetTopRatedMoviesRequest(int page, string language, object userState)
         {
-            var request = new RestRequest("movie/top-rated", Method.GET);
+            var request = new RestRequest("movie/top_rated", Method.GET);
             if (string.IsNullOrEmpty(language) == false)
                 request.AddParameter("language", language);
             request.AddParameter("page", page);

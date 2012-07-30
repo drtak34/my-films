@@ -1,8 +1,12 @@
-﻿namespace Grabber.TMDBv3
-{
-  using RestSharp.Deserializers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using RestSharp.Deserializers;
 
-  public class WatJsonDeserializer : IDeserializer
+namespace WatTmdb.V3
+{
+    public class WatJsonDeserializer : IDeserializer
     {
         #region IDeserializer Members
 

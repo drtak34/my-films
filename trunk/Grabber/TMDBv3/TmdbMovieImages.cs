@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class Backdrop
+namespace WatTmdb.V3
+{
+    public class Backdrop
     {
         public string file_path { get; set; }
         public int width { get; set; }

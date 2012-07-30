@@ -1,8 +1,11 @@
-﻿namespace Grabber.TMDBv3
-{
-  using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-  public class PersonResult
+namespace WatTmdb.V3
+{
+    public class PersonResult
     {
         public bool adult { get; set; }
         public int id { get; set; }
