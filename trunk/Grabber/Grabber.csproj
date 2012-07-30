@@ -167,6 +167,7 @@
     <Compile Include="TMDBv3\TmdbError.cs" />
     <Compile Include="TMDBv3\TmdbGenre.cs" />
     <Compile Include="TMDBv3\TmdbGenreMovies.cs" />
+    <Compile Include="TMDBv3\TmdbLatestMovie.cs" />
     <Compile Include="TMDBv3\TmdbMovie.cs" />
     <Compile Include="TMDBv3\TmdbMovieAlternateTitles.cs" />
     <Compile Include="TMDBv3\TmdbMovieCast.cs" />

@@ -84,12 +84,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbConfiguration GetConfiguration()
         {
-            return ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest());
+            return ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest(null));
         }
 
         public string GetConfigurationETag()
         {
-            return ProcessRequestETag(BuildGetConfigurationRequest());
+            return ProcessRequestETag(BuildGetConfigurationRequest(null));
         }
 
         #endregion
@@ -231,12 +231,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCollectionImages GetCollectionImages(int CollectionID, string language)
         {
-            return ProcessRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language));
+            return ProcessRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language, null));
         }
 
         public string GetCollectionImagesETag(int CollectionID, string language)
         {
-            return ProcessRequestETag(BuildGetCollectionImagesRequest(CollectionID, language));
+            return ProcessRequestETag(BuildGetCollectionImagesRequest(CollectionID, language, null));
         }
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbNowPlaying GetNowPlayingMovies(int page, string language)
         {
-            return ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language));
+            return ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, null));
         }
 
         /// <summary>

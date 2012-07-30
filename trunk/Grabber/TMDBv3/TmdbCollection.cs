@@ -22,4 +22,12 @@ namespace WatTmdb.V3
         public string backdrop_path { get; set; }
         public List<CollectionPart> parts { get; set; }
     }
+
+    public class TmdbCollectionImages
+    {
+      public int id { get; set; }
+      public List<Backdrop> backdrops { get; set; }
+      public List<Poster> posters { get; set; }
+    }
+
 }
