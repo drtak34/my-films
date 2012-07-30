@@ -8,7 +8,9 @@ using RestSharp;
 
 namespace WatTmdb.V3
 {
-    public partial class Tmdb
+  using Grabber.TMDBv3.Utility;
+
+  public partial class Tmdb
     {
         private const string BASE_URL = "http://api.themoviedb.org/3";
 
