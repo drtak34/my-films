@@ -438,28 +438,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         private void Change_LayOut(int wLayOut)
         {
-#if MP11
-            switch (wLayOut)
-            {
-                case 1:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(100));
-                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
-                    break;
-                case 2:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(417));
-                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
-
-                    break;
-                case 3:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(733));
-                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
-                    break;
-                default:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(95) + GUILocalizeStrings.Get(101));
-                    facadeView.View = GUIFacadeControl.ViewMode.List;
-                    break;
-            }
-#else
           switch (wLayOut)
             {
                 case 1:
@@ -483,8 +461,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                     break;
             }
-
-#endif
         }
 
         private void item_OnItemSelected(GUIListItem item, GUIControl parent)

@@ -172,33 +172,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                     shouldContinue = false;
                     switch (currentView)
-#if MP11
-                    {
-                        case View.List:
-                            currentView = View.Icons;
-                            if (facadeView.ThumbnailView == null)
-                                shouldContinue = true;
-                            else
-                                facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
-                            break;
-
-                        case View.Icons:
-                            currentView = View.LargeIcons;
-                            if (facadeView.ThumbnailView == null)
-                                shouldContinue = true;
-                            else
-                                facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
-                            break;
-
-                        case View.LargeIcons:
-                            currentView = View.List;
-                            if (facadeView.ListView == null)
-                                shouldContinue = true;
-                            else
-                                facadeView.View = GUIFacadeControl.ViewMode.List;
-                            break;
-                    }
-#else
                     {
                         case View.List:
                             currentView = View.Icons;
@@ -224,9 +197,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                             break;
                     }
-
-
-#endif
                 } while (shouldContinue);
                 
                 SelectCurrentItem();
@@ -460,19 +430,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         void SwitchView()
         {
             switch (currentView)
-#if MP11
-            {
-                case View.List:
-                    facadeView.View = GUIFacadeControl.ViewMode.List;
-                    break;
-                case View.Icons:
-                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
-                    break;
-                case View.LargeIcons:
-                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
-                    break;
-            }
-#else
             {
                 case View.List:
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
@@ -484,8 +441,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
                     break;
             }
-#endif
-
             UpdateButtonStates(); // Ensure "View: xxxx" button label is updated to suit
         }
 
