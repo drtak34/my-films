@@ -69,6 +69,7 @@ namespace MyFilmsPlugin.MyFilms
         static string GrabberScripts = string.Empty;
         static string apppath = string.Empty;
         static string skinPath = string.Empty;
+
         #endregion
 
         #region Vars
@@ -150,6 +151,11 @@ namespace MyFilmsPlugin.MyFilms
 
         public static string UserAgent
         { get { return _userAgent; } }
+
+        public static int WebRequestCacheMinutes
+        { get { return 180; } }
+
+
         #endregion
 
         #region Public Methods

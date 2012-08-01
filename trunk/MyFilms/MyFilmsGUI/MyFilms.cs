@@ -57,13 +57,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using NLog;
   using NLog.Config;
   using NLog.Targets;
+
+  using WatTmdb.V3;
+
   using Action = MediaPortal.GUI.Library.Action;
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
   // using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
   using TmdbPerson = Grabber.TheMovieDbAPI.TmdbPerson;
-  using TMDB = Grabber.TMDBv3;
+  using TMDB = WatTmdb.V3;
 
   /// <summary>
     /// Summary description for GUIMyFilms.
@@ -110,6 +113,91 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     }
     #endregion
+
+    #region TMDB online movie variables
+
+    DateTime LastRequestLatestMovies = new DateTime();
+    IEnumerable<MovieResult> LatestMovies
+    {
+      get
+      {
+        if (this._LatestMovies == null || LastRequestLatestMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        {
+          // _LatestMovies = GetLatestMovies(true);
+          LastRequestLatestMovies = DateTime.UtcNow;
+          // PreviousSelectedIndex = 0;
+        }
+        return _LatestMovies;
+      }
+    }
+    private IEnumerable<MovieResult> _LatestMovies = null;
+
+    DateTime LastRequestPopularMovies = new DateTime();
+    IEnumerable<PopularMovie> PopularMovies
+    {
+      get
+      {
+        if (this._PopularMovies == null || LastRequestPopularMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        {
+          _PopularMovies = GetPopularMovies(true);
+          LastRequestPopularMovies = DateTime.UtcNow;
+          // PreviousSelectedIndex = 0;
+        }
+        return _PopularMovies;
+      }
+    }
+    private IEnumerable<PopularMovie> _PopularMovies = null;
+
+    DateTime LastRequestNowPlayingMovies = new DateTime();
+    IEnumerable<NowPlaying> NowPlayingMovies
+    {
+      get
+      {
+        if (this._NowPlayingMovies == null || LastRequestNowPlayingMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        {
+          // _NowPlayingMovies = GetNowPlayingMovies(true);
+          LastRequestNowPlayingMovies = DateTime.UtcNow;
+          // PreviousSelectedIndex = 0;
+        }
+        return _NowPlayingMovies;
+      }
+    }
+    private IEnumerable<NowPlaying> _NowPlayingMovies = null;
+
+    DateTime LastRequestTopRatedMovies = new DateTime();
+    IEnumerable<TopRated> TopRatedMovies
+    {
+      get
+      {
+        if (this._TopRatedMovies == null || LastRequestTopRatedMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        {
+          // _TopRatedMovies = GetTopRatedMovies(true);
+          LastRequestTopRatedMovies = DateTime.UtcNow;
+          // PreviousSelectedIndex = 0;
+        }
+        return _TopRatedMovies;
+      }
+    }
+    private IEnumerable<TopRated> _TopRatedMovies = null;
+
+    DateTime LastRequestUpcomingMovies = new DateTime();
+    IEnumerable<UpcomingResult> UpcomingMovies
+    {
+      get
+      {
+        if (this._UpcomingMovies == null || LastRequestUpcomingMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        {
+          // _UpcomingMovies = GetUpcomingMovies(true);
+          LastRequestUpcomingMovies = DateTime.UtcNow;
+          // PreviousSelectedIndex = 0;
+        }
+        return _UpcomingMovies;
+      }
+    }
+    private IEnumerable<UpcomingResult> _UpcomingMovies = null;
+
+    #endregion
+
 
     #region MapSettings class
     [Serializable]
@@ -2129,6 +2217,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       conf.MenuSelectedID = -1;
                       GetSelectFromMenuView(true);
                     }
+                    else if (this.facadeFilms.SelectedListItem.DVDLabel == "onlineinfo")
+                    {
+                      GetSelectFromOnlineMenuView();
+                    }
+                    else if (this.facadeFilms.SelectedListItem.DVDLabel == "TMDBaction")
+                    {
+                      GetSelectFromTMDB(facadeFilms.SelectedListItem.Label);
+                    }
                     else
                     {
                       conf.MenuSelectedID = this.facadeFilms.SelectedListItemIndex; // remember last menu position ...
@@ -2257,6 +2353,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       return base.OnMessage(message);
     }
+    #endregion
+
+
+    #region TMDB methods
+    private static IEnumerable<PopularMovie> GetPopularMovies(bool all)
+    {
+      //string response = Transmit(TraktURIs.TrendingMovies, GetUserAuthentication());
+      //return response.FromJSONArray<TraktTrendingMovie>();
+
+      List<PopularMovie> movies = new List<PopularMovie>();
+      string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+      LogMyFilms.Debug("GetPopularMovies - detected language = '" + language + "', all = '" + all + "'");
+      Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+      TmdbConfiguration tmdbConf = api.GetConfiguration();
+
+      watch.Reset(); watch.Start();
+      TmdbPopular popular;
+      int ipage = 1;
+      while(true)
+      {
+        popular = api.GetPopularMovies(ipage, language);
+        LogMyFilms.Debug("GetPopularMovies() - Loaded Page: " + ipage + " (of " + popular.total_pages + "), Total Results = '" + popular.total_results + "', (" + (watch.ElapsedMilliseconds) + " ms)");
+        foreach (PopularMovie movie in popular.results)
+        {
+          movies.Add(movie);
+        }
+        ipage++;
+        if (ipage > popular.total_pages || !all) break;
+      }
+      watch.Stop();
+      LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
+      return movies.AsEnumerable();
+    }
+
+    
     #endregion
 
     private void Change_Layout()
@@ -2913,8 +3044,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Label2 ...
           if (!MyFilms.conf.OnlyTitleList)
           {
-            string sortItem =  (conf.BoolCollection) ? conf.StrSortaInHierarchies : conf.StrSorta;
-            switch (sortItem)
+            switch (sortfield)
             {
               case "TranslatedTitle":
               case "OriginalTitle":
@@ -2937,12 +3067,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.Label2 = sr["Rating"].ToString();
                 break;
               default:
-                if (sortItem == conf.StrSTitle)
-                  item.Label2 = sr["Year"].ToString();
-                else
-                {
-                  string label2 = sr[sortItem].ToString(); // string label2 = sr[conf.WStrSort].ToString();
-                  if (IsSplittableField(sortItem))
+                string label2 = sr[sortfield].ToString(); // string label2 = sr[conf.WStrSort].ToString();
+                if (IsSplittableField(sortfield))
                   {
                     string wzone = string.Empty;
                     ArrayList wtab = Search_String(label2, false);
@@ -2951,7 +3077,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   if (label2.Length > 34) label2 = label2.Substring(0, 30) + " ...";
                   item.Label2 = label2;
-                }
                 break;
             }
           }
@@ -3078,6 +3203,206 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       conf.ViewContext = (conf.BoolCollection) ? ViewContext.MovieCollection : ViewContext.Movie;
       LogMyFilms.Debug("GetFilmList finished!");
+
+      //sortascending = conf.StrSortSens;
+      //sortfield = conf.StrSorta;
+      if (MyFilmsDetail.ExtendedStartmode("GetFilmlist() - Online info on person film list") && facadeFilms.Count < 200 && IsPersonsField(conf.WStrSort)) // only in "related display"
+      {
+        IComparer myComparer = new AlphanumComparatorFast();
+        string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+        grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
+        TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+        TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
+        TmdbPersonSearch personSearch = api.SearchPerson(conf.Wselectedlabel, 1);
+        LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personSearch.results.Count + "' results found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
+        if (personSearch.results.Count > 0)
+        {
+          TmdbPersonCredits personCredits = api.GetPersonCredits(personSearch.results[0].id);
+          LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personCredits.cast.Count + "' cast movies found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
+          LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personCredits.crew.Count + "' crew movies found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
+          foreach (CastCredit personMovie in personCredits.cast)
+          {
+            bool toBeAddedToList = true;
+            int iInsertAt = int.MaxValue;
+            for (int i = 0; i < facadeFilms.Count; i++)
+            {
+              if (facadeFilms[i].Label == personMovie.title) 
+                toBeAddedToList = false;
+              else
+              {
+                try
+                {
+                  if (sortfield == "Year" && personMovie.release_date.Length > 3)
+                  {
+                    if (sortascending == " ASC")
+                    {
+                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) > Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) < 0) iInsertAt = i;
+                    }
+                    else
+                    {
+                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) < Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) > 0) iInsertAt = i;
+                    }
+                  }
+                }
+                catch (Exception ex) { LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
+                }
+              }
+            }
+            LogMyFilms.Debug("GetFilmList() - OnlineInfo - add = '" + toBeAddedToList + "' for '" + personMovie.title + "' (" + personMovie.release_date + ") to facade at position '" + ((iInsertAt != int.MaxValue) ? iInsertAt.ToString() : "end") + "'");
+            if (!toBeAddedToList) continue;
+
+            #region add item
+            item = new GUIListItem();
+            item.Label = personMovie.title; //reset to current single folder as > 1 entries
+            item.IsFolder = true;
+            item.ThumbnailImage = conf.DefaultCover;
+            item.IconImage = conf.DefaultCover;
+            #region Label2 ...
+            if (!MyFilms.conf.OnlyTitleList)
+            {
+              switch (sortfield)
+              {
+                case "TranslatedTitle":
+                case "OriginalTitle":
+                case "FormattedTitle":
+                case "Year":
+                  item.Label2 = (personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : personMovie.release_date;
+                  break;
+                case "Date":
+                case "DateAdded":
+                  break;
+                case "Rating":
+                  break;
+                default:
+                  break;
+              }
+            }
+            #endregion
+            #region Label3 ...
+
+            item.Label3 = personMovie.character + " (cast)";
+            #endregion
+            #region Watched Status
+            item.IsPlayed = false;
+            #endregion
+
+            #region Availability Status
+            item.IsRemote = true;
+            // load special icons to indicate watched/available flags in listcontrol
+            if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
+            #endregion
+            
+            #region Cover Picture
+            currentImage = string.Empty;
+            currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
+            item.ThumbnailImage = currentImage;
+            item.IconImageBig = currentImage;
+            item.IconImage = currentImage;
+            item.TVTag = personMovie;
+            #endregion
+
+            facadeDownloadItems.Add(item);
+            item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+            if (iInsertAt == int.MaxValue) 
+              facadeFilms.Add(item);
+            else
+              facadeFilms.Insert(0, item);
+            #endregion
+          }
+          foreach (CrewCredit personMovie in personCredits.crew)
+          {
+            bool toBeAddedToList = true;
+            int iInsertAt = int.MaxValue;
+            for (int i = 0; i < facadeFilms.Count; i++)
+            {
+              if (facadeFilms[i].Label == personMovie.title)
+                toBeAddedToList = false;
+              else
+              {
+                try
+                {
+                  if (sortfield == "Year" && personMovie.release_date.Length > 3)
+                  {
+                    if (sortascending == " ASC")
+                    {
+                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) > Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) < 0) iInsertAt = i;
+                    }
+                    else
+                    {
+                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) < Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) > 0) iInsertAt = i;
+                    }
+                  }
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
+                }
+              }
+            }
+            LogMyFilms.Debug("GetFilmList() - OnlineInfo - add = '" + toBeAddedToList + "' for '" + personMovie.title + "' (" + personMovie.release_date + ") to facade at position '" + ((iInsertAt != int.MaxValue) ? iInsertAt.ToString() : "end") + "'");
+            if (!toBeAddedToList) continue;
+
+            #region add item
+            item = new GUIListItem();
+            item.Label = personMovie.title; //reset to current single folder as > 1 entries
+            item.IsFolder = true;
+            item.ThumbnailImage = conf.DefaultCover;
+            item.IconImage = conf.DefaultCover;
+            #region Label2 ...
+            if (!MyFilms.conf.OnlyTitleList)
+            {
+              switch (sortfield)
+              {
+                case "TranslatedTitle":
+                case "OriginalTitle":
+                case "FormattedTitle":
+                case "Year":
+                  item.Label2 = (personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : personMovie.release_date;
+                  break;
+                case "Date":
+                case "DateAdded":
+                  break;
+                case "Rating":
+                  break;
+                default:
+                  break;
+              }
+            }
+            #endregion
+            #region Label3 ...
+
+            item.Label3 = personMovie.job + " (" + personMovie.department + ")";
+            #endregion
+            #region Watched Status
+            item.IsPlayed = false;
+            #endregion
+
+            #region Availability Status
+            item.IsRemote = true;
+            // load special icons to indicate watched/available flags in listcontrol
+            if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
+            #endregion
+
+            #region Cover Picture
+            currentImage = string.Empty;
+            currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
+            item.ThumbnailImage = currentImage;
+            item.IconImageBig = currentImage;
+            item.IconImage = currentImage;
+            item.TVTag = personMovie;
+            #endregion
+
+            facadeDownloadItems.Add(item);
+            item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+            facadeFilms.Insert(0, item);
+            #endregion
+          }
+        }
+      }
       GetImagesFilmList(facadeDownloadItems);
       #endregion
       return !(this.facadeFilms.Count == 1 && item.IsFolder); //ret false if single folder found
@@ -3111,7 +3436,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               items.SafeDispose();
               break;
             }
-
+            if (item.TVTag != null) continue; // skip for online videos
             string strThumb; // cached cover
             string strThumbSmall; // cached cover for Icons - small resolution
 
@@ -4001,7 +4326,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
       }
-
       conf.StrSelect = ""; // reset movie context filter for person views
       conf.StrPersons = ""; // reset person list filter
       viewcover.Filename = "";
@@ -4084,6 +4408,85 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       return occurences;
     }
+
+    //--------------------------------------------------------------------------------------------
+    //  Load Online Info Menu into facade list ...
+    //--------------------------------------------------------------------------------------------
+    private void GetSelectFromOnlineMenuView()
+    {
+      LogMyFilms.Debug("GetSelectFromOnlineMenuView() - launched ...");
+
+      Change_Layout_Action(0); // always use list view // Change_Layout_Action(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
+
+      BtnSrtBy.Label = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103); // sort: name
+      //BtnSrtBy.IsAscending = true;
+      BtnSrtBy.IsEnabled = false;
+
+      // SetDummyControlsForFacade(ViewContext.Menu); // reset all covers ...
+      GUIControl.ShowControl(GetID, 34); // hide film controls ...
+      SetLabelView("menu");
+      SetLabelSelect("root");
+
+      conf.ViewContext = ViewContext.Menu;
+
+      if (conf.StrFanart && conf.StrFanartDfltImage)
+      {
+        if (backdrop.Filename == "") backdrop.Filename = conf.DefaultFanartImage;
+        Fanartstatus(true);
+      }
+
+      ClearFacade(); // facadeFilms.Clear();
+      GUIListItem item = null;
+
+      // Latest Movies -  retrieve the newest movie that was added to TMDbitem = new GUIListItem();
+      item = new GUIListItem();
+      item.Label = "Latest Movies";
+      item.DVDLabel = "TMDBaction";
+      item.IsFolder = true;
+      item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+      if (facadeFilms != null) facadeFilms.Add(item);
+
+      // Popular Movies - retrieve the daily movie popularity list
+      item = new GUIListItem();
+      item.Label = "Popular Movies";
+      item.DVDLabel = "TMDBaction";
+      item.IsFolder = true;
+      item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+      if (facadeFilms != null) facadeFilms.Add(item);
+
+      //Now Playing Movies -  retrieve the movies currently in theatres
+      item = new GUIListItem();
+      item.Label = "Now Playing Movies";
+      item.DVDLabel = "TMDBaction";
+      item.IsFolder = true;
+      item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+      if (facadeFilms != null) facadeFilms.Add(item);
+
+      //Top Rated Movies -  retrieve the top rated movies that have over 10 votes on TMDb
+      item = new GUIListItem();
+      item.Label = "Top rated movies";
+      item.DVDLabel = "TMDBaction";
+      item.IsFolder = true;
+      item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+      if (facadeFilms != null) facadeFilms.Add(item);
+
+      //Upcoming Movies - retrieve the movies arriving to theatres within the next few weeks
+      item = new GUIListItem();
+      item.Label = "Upcoming Movies";
+      item.DVDLabel = "TMDBaction";
+      item.IsFolder = true;
+      item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+      if (facadeFilms != null) facadeFilms.Add(item);
+
+      if (facadeFilms == null) return;
+
+      MyFilmsDetail.setGUIProperty("nbobjects.value", facadeFilms.Count.ToString());
+      GUIPropertyManager.SetProperty("#itemcount", facadeFilms.Count.ToString());
+      // GUIPropertyManager.SetProperty("#itemtype", "Views"); // disabled, as we otherwise have to set it in all facade listings ...
+      // GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view") + "/" + GUIPropertyManager.GetProperty("#myfilms.select")); // will be set in SetLabel
+      LogMyFilms.Debug("GetSelectFromOnlineMenuView() - end facade load ...");
+    }
+
 
     //--------------------------------------------------------------------------------------------
     //  Load Views for Video from facade list ...
@@ -4210,6 +4613,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.IsFolder = true;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         if (facadeFilms != null) facadeFilms.Add(item);
+
+        if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
+        {
+          item = new GUIListItem();
+          item.Label = "*** Online Informationen ***"; // online info
+          item.DVDLabel = "onlineinfo";
+          item.IsFolder = true;
+          item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+          if (facadeFilms != null) facadeFilms.Add(item);
+        }
       }
       else
       {
@@ -4273,7 +4686,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region count items
             bool success = false;
             GUIListItem countitem = this.facadeFilms[i];
-            if (countitem.Label == GUILocalizeStrings.Get(10798765)) continue; // skip the menu only entry "showall"
+            if (countitem.Label == GUILocalizeStrings.Get(10798765) || countitem.Label == "*** Online Informationen ***") continue; // skip the menu only entry "showall" and "onlineinfo"
             if (!conf.OnlyTitleList && string.IsNullOrEmpty(countitem.Label2)) // first try to get info for custom views ...
             {
               #region get counts for menu item
@@ -5395,6 +5808,752 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+
+    /// <summary>Loads online movie lists from TMDB and links them to local DB entries</summary>
+    /// <param name="TMDBfunction">Select online movie list from TMDB to be loaded - e.g. latest movies, person movies, etc.</param>
+    /// 
+    private void GetSelectFromTMDB(string TMDBfunction)
+    {
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      LogMyFilms.Debug("(GetSelectFromTMDB) - CallerFeature           : '" + TMDBfunction ?? "" + "'");
+      LogMyFilms.Debug("(GetSelectFromTMDB) - GlobalFilterString      : '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetSelectFromTMDB) - conf.StrDfltSelect      : '" + conf.StrDfltSelect + "'");
+
+      #region Setup variables and configure sorting and buttons
+      Prev_ItemID = -1;
+      Prev_Label = string.Empty;
+
+      MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the start ....
+      GUIPropertyManager.SetProperty("#itemcount", "0");
+
+      BtnSrtBy.IsEnabled = true;
+      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
+      BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (conf.WStrSortSens == " ASC");
+
+      conf.Boolselect = true;
+      conf.Wselectedlabel = "";
+      conf.StrTxtSelect = TMDBfunction;
+      GUIControl.ClearControl(GetID, facadeFilms.GetID);
+      // ClearFacade(); // facadeFilms.Clear();
+      Change_Layout_Action(MyFilms.conf.WStrLayOut);
+      #endregion
+
+      #region get movie lists from TMDB ...
+      switch (TMDBfunction)
+      {
+        case "Latest Movies":
+          #region TmdbPopular GetLatestMovies(int page)
+          watch.Reset(); watch.Start();
+
+          GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
+          {
+            return LatestMovies;
+          },
+          delegate(bool success, object result)
+          {
+            if (!success) DoBack();
+            else
+            {
+              IEnumerable<PopularMovie> movies = result as IEnumerable<PopularMovie>;
+              // clear facade
+              GUIControl.ClearControl(GetID, facadeFilms.GetID);
+
+              if (movies.Count() == 0)
+              {
+                GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoLatestMovies");
+                DoBack(); return;
+              }
+
+              // Add each movie mark remote if not in collection            
+              #region Populate the facade ...
+
+              int itemId = 0;
+              GUIListItem item = null;
+              OnlineMovie ovMovie = null;
+              foreach (PopularMovie movie in movies)
+              {
+                item = new GUIListItem();
+                ovMovie = new OnlineMovie();
+                ovMovie.PopMovie = movie;
+                // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
+                item.ItemId = Int32.MaxValue - itemId;
+                item.TVTag = ovMovie;
+                item.Label = (movie.title.Length > 0) ? movie.title : movie.original_title;
+                item.Label2 = movie.vote_average + " (" + movie.vote_count + ")";
+                item.Label3 = movie.release_date;
+                item.Path = "";
+                item.IsRemote = true;
+                item.IsFolder = true;
+                item.IconImage = conf.DefaultCover;
+                item.IconImageBig = conf.DefaultCover;
+                item.ThumbnailImage = conf.DefaultCover;
+                // Utils.SetDefaultIcons(item);
+                //item.Item = movie.Images;
+                //item.IsPlayed = movie.Watched;
+                item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                this.facadeFilms.Add(item);
+                itemId++;
+
+                // add image for download
+                // movieImages.Add(movie);
+              }
+              #endregion
+              
+              MyFilmsDetail.setGUIProperty("nbobjects.value", this.facadeFilms.Count.ToString());
+              GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString());
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
+
+              // Download movie images Async and set to facade
+              // GetImages(movieImages);
+              GetImagesForTMDB();
+            }
+          }, "GettingLatestMovies", true); // false = no timeout !
+
+          watch.Stop();
+          LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
+          break;
+          #endregion
+          break;
+        case "Popular Movies":
+          #region TmdbPopular GetPopularMovies(int page)
+          watch.Reset(); watch.Start();
+
+          GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
+          {
+            return PopularMovies;
+          },
+          delegate(bool success, object result)
+          {
+            if (!success) DoBack();
+            else
+            {
+              IEnumerable<PopularMovie> movies = result as IEnumerable<PopularMovie>;
+              // clear facade
+              GUIControl.ClearControl(GetID, facadeFilms.GetID);
+
+              if (movies.Count() == 0)
+              {
+                GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoPopularMovies");
+                DoBack(); return;
+              }
+
+              // Add each movie mark remote if not in collection            
+              #region Populate the facade ...
+
+              int itemId = 0;
+              GUIListItem item = null;
+              OnlineMovie ovMovie = null;
+              foreach (PopularMovie movie in movies)
+              {
+                item = new GUIListItem();
+                ovMovie = new OnlineMovie();
+                ovMovie.PopMovie = movie;
+                // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
+                item.ItemId = Int32.MaxValue - itemId;
+                item.TVTag = ovMovie;
+                item.Label = (movie.title.Length > 0) ? movie.title : movie.original_title;
+                item.Label2 = movie.vote_average + " (" + movie.vote_count + ")";
+                item.Label3 = movie.release_date;
+                item.Path = "";
+                item.IsRemote = true;
+                item.IsFolder = true;
+                item.IconImage = conf.DefaultCover;
+                item.IconImageBig = conf.DefaultCover;
+                item.ThumbnailImage = conf.DefaultCover;
+                // Utils.SetDefaultIcons(item);
+                //item.Item = movie.Images;
+                //item.IsPlayed = movie.Watched;
+                item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                this.facadeFilms.Add(item);
+                itemId++;
+
+                // add image for download
+                // movieImages.Add(movie);
+              }
+              #endregion
+              
+              MyFilmsDetail.setGUIProperty("nbobjects.value", this.facadeFilms.Count.ToString());
+              GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString());
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
+
+              // Download movie images Async and set to facade
+              // GetImages(movieImages);
+              GetImagesForTMDB();
+            }
+          }, "GettingPopularMovies", true); // false = no timeout !
+
+          watch.Stop();
+          LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
+          break;
+          #endregion
+        case "Now Playing Movies":
+          #region TmdbNowPlaying GetNowPlayingMovies(int page)
+          watch.Reset(); watch.Start();
+
+          GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
+          {
+            return NowPlayingMovies;
+          },
+          delegate(bool success, object result)
+          {
+            if (!success) DoBack();
+            else
+            {
+              IEnumerable<PopularMovie> movies = result as IEnumerable<PopularMovie>;
+              // clear facade
+              GUIControl.ClearControl(GetID, facadeFilms.GetID);
+
+              if (movies.Count() == 0)
+              {
+                GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoNowPlayingMovies");
+                DoBack(); return;
+              }
+
+              // Add each movie mark remote if not in collection            
+              #region Populate the facade ...
+
+              int itemId = 0;
+              GUIListItem item = null;
+              OnlineMovie ovMovie = null;
+              foreach (PopularMovie movie in movies)
+              {
+                item = new GUIListItem();
+                ovMovie = new OnlineMovie();
+                ovMovie.PopMovie = movie;
+                // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
+                item.ItemId = Int32.MaxValue - itemId;
+                item.TVTag = ovMovie;
+                item.Label = (movie.title.Length > 0) ? movie.title : movie.original_title;
+                item.Label2 = movie.vote_average + " (" + movie.vote_count + ")";
+                item.Label3 = movie.release_date;
+                item.Path = "";
+                item.IsRemote = true;
+                item.IsFolder = true;
+                item.IconImage = conf.DefaultCover;
+                item.IconImageBig = conf.DefaultCover;
+                item.ThumbnailImage = conf.DefaultCover;
+                // Utils.SetDefaultIcons(item);
+                //item.Item = movie.Images;
+                //item.IsPlayed = movie.Watched;
+                item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                this.facadeFilms.Add(item);
+                itemId++;
+
+                // add image for download
+                // movieImages.Add(movie);
+              }
+              #endregion
+
+              MyFilmsDetail.setGUIProperty("nbobjects.value", this.facadeFilms.Count.ToString());
+              GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString());
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
+
+              // Download movie images Async and set to facade
+              // GetImages(movieImages);
+              GetImagesForTMDB();
+            }
+          }, "GettingNowPlayingMovies", true); // false = no timeout !
+
+          watch.Stop();
+          LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
+          break;
+          #endregion
+        case "Top rated movies":
+          #region TmdbTopRated GetTopRatedMovies(int page)
+          watch.Reset(); watch.Start();
+
+          GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
+          {
+            return TopRatedMovies;
+          },
+          delegate(bool success, object result)
+          {
+            if (!success) DoBack();
+            else
+            {
+              IEnumerable<PopularMovie> movies = result as IEnumerable<PopularMovie>;
+              // clear facade
+              GUIControl.ClearControl(GetID, facadeFilms.GetID);
+
+              if (movies.Count() == 0)
+              {
+                GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoTopRatedMovies");
+                DoBack(); return;
+              }
+
+              // Add each movie mark remote if not in collection            
+              #region Populate the facade ...
+
+              int itemId = 0;
+              GUIListItem item = null;
+              OnlineMovie ovMovie = null;
+              foreach (PopularMovie movie in movies)
+              {
+                item = new GUIListItem();
+                ovMovie = new OnlineMovie();
+                ovMovie.PopMovie = movie;
+                // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
+                item.ItemId = Int32.MaxValue - itemId;
+                item.TVTag = ovMovie;
+                item.Label = (movie.title.Length > 0) ? movie.title : movie.original_title;
+                item.Label2 = movie.vote_average + " (" + movie.vote_count + ")";
+                item.Label3 = movie.release_date;
+                item.Path = "";
+                item.IsRemote = true;
+                item.IsFolder = true;
+                item.IconImage = conf.DefaultCover;
+                item.IconImageBig = conf.DefaultCover;
+                item.ThumbnailImage = conf.DefaultCover;
+                // Utils.SetDefaultIcons(item);
+                //item.Item = movie.Images;
+                //item.IsPlayed = movie.Watched;
+                item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                this.facadeFilms.Add(item);
+                itemId++;
+
+                // add image for download
+                // movieImages.Add(movie);
+              }
+              #endregion
+
+              MyFilmsDetail.setGUIProperty("nbobjects.value", this.facadeFilms.Count.ToString());
+              GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString());
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
+
+              // Download movie images Async and set to facade
+              // GetImages(movieImages);
+              GetImagesForTMDB();
+            }
+          }, "GettingTopRatedMovies", true); // false = no timeout !
+
+          watch.Stop();
+          LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
+          break;
+          #endregion
+        case "Upcoming Movies":
+          #region TmdbUpcoming GetUpcomingMovies(int page)
+          watch.Reset(); watch.Start();
+
+          GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
+          {
+            return UpcomingMovies;
+          },
+          delegate(bool success, object result)
+          {
+            if (!success) DoBack();
+            else
+            {
+              IEnumerable<PopularMovie> movies = result as IEnumerable<PopularMovie>;
+              // clear facade
+              GUIControl.ClearControl(GetID, facadeFilms.GetID);
+
+              if (movies.Count() == 0)
+              {
+                GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoUpcomingMovies");
+                DoBack(); return;
+              }
+
+              // Add each movie mark remote if not in collection            
+              #region Populate the facade ...
+
+              int itemId = 0;
+              GUIListItem item = null;
+              OnlineMovie ovMovie = null;
+              foreach (PopularMovie movie in movies)
+              {
+                item = new GUIListItem();
+                ovMovie = new OnlineMovie();
+                ovMovie.PopMovie = movie;
+                // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
+                item.ItemId = Int32.MaxValue - itemId;
+                item.TVTag = ovMovie;
+                item.Label = (movie.title.Length > 0) ? movie.title : movie.original_title;
+                item.Label2 = movie.vote_average + " (" + movie.vote_count + ")";
+                item.Label3 = movie.release_date;
+                item.Path = "";
+                item.IsRemote = true;
+                item.IsFolder = true;
+                item.IconImage = conf.DefaultCover;
+                item.IconImageBig = conf.DefaultCover;
+                item.ThumbnailImage = conf.DefaultCover;
+                // Utils.SetDefaultIcons(item);
+                //item.Item = movie.Images;
+                //item.IsPlayed = movie.Watched;
+                item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                this.facadeFilms.Add(item);
+                itemId++;
+
+                // add image for download
+                // movieImages.Add(movie);
+              }
+              #endregion
+
+              MyFilmsDetail.setGUIProperty("nbobjects.value", this.facadeFilms.Count.ToString());
+              GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString());
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
+
+              // Download movie images Async and set to facade
+              // GetImages(movieImages);
+              GetImagesForTMDB();
+            }
+          }, "GettingUpcomingMovies", true); // false = no timeout !
+
+          watch.Stop();
+          LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
+          break;
+          #endregion
+
+        default:
+          return;
+      }
+      
+      #endregion
+    }
+
+    private void GetImagesForTMDB()
+    {
+      StopLoadingViewDetails = false;
+
+      new Thread(delegate()
+      {
+        #region images
+        Thread.Sleep(25);
+        Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
+        int i;
+        DataRow[] rtemp = null;
+        rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrDfltSelect, "", conf.WStrSort, conf.WStrSortSens);
+        // DataRow[] rtemp = r;
+        List<GUIListItem> itemlist = new List<GUIListItem>();
+
+        for (i = 0; i < facadeFilms.Count; i++)
+        {
+          if (StopLoadingViewDetails) break; // stop download if we have exited window
+          try
+          {
+            GUIListItem item = facadeFilms[i];
+            itemlist.Add(item);
+
+            #region check if local available ...
+            int iMoviesLocally = 0;
+            //if (rtemp != null)
+            //{
+            //  int count = rtemp.Count(x => x[wStrSort].ToString().Contains(item.Label));
+            //  // int count = rtemp.Count(x => x[wStrSort].ToString().IndexOf(item.Label, StringComparison.OrdinalIgnoreCase) > 0);
+            //  if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(wStrSort) + " (" + count + ")"; // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
+
+            //  //foreach (string role in PersonTypes)
+            //  //{
+            //  // if (rtemp != null && (conf.StrPersons.Length > 0 || countItems)) {}
+            //  //  count = rtemp.Count(x => x[role].ToString().Contains(item.Label));
+            //  //  // LogMyFilms.Debug("role: '" + role + "', count: '" + count + "'");
+            //  //  if (count > 0) item.Label2 = (string.IsNullOrEmpty(item.Label2)) ? BaseMesFilms.Translate_Column(role) + " (" + count + ")" : item.Label2 + ", " + BaseMesFilms.Translate_Column(role) + " (" + count + ")";
+            //  //}
+            //}
+            OnlineMovie movie = item.TVTag as OnlineMovie;
+            var year = DateTime.Parse(movie.PopMovie.release_date).Year;
+            // iMoviesLocally = rtemp.Select("Year like '" + year + "' AND TranslatedTitle like '*" + item.Label + "*'", conf.StrSorta + conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count();
+            iMoviesLocally = rtemp.Count(x => x["Year"].ToString().Contains(year.ToString()) && x["TranslatedTitle"].ToString().Contains(movie.PopMovie.title));
+            LogMyFilms.Debug("CountLocalItems - found '" + iMoviesLocally + "' items for (" + year.ToString() + ") '" + movie.PopMovie.title + "' !");
+            item.IsRemote = (iMoviesLocally == 0);
+            // newLabel = "* " + BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
+
+            #endregion
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
+          }
+        }
+        watch.Stop();
+        LogMyFilms.Debug("GetImages() - Threaded facade images loader finished after '" + i + "' items (" + (watch.ElapsedMilliseconds) + " ms)");
+        #endregion
+
+        #region counts for person lists
+        if (rtemp != null && conf.StrPersons.Length > 0)
+        {
+          Thread.Sleep(50);
+          watch.Reset(); watch.Start();
+          int[] facadeCounts = new int[facadeFilms.Count];
+          try
+          {
+            for (int j = 0; j < facadeFilms.Count; j++) facadeCounts[j] = 0;
+
+            for (int j = 0; j < rtemp.Length; j++)
+            {
+              if (StopLoadingViewDetails) break; // stop download if we have exited window
+              string title = rtemp[j][conf.StrTitle1].ToString();
+              for (i = 0; i < facadeFilms.Count; i++)
+              {
+                OnlineMovie movie = facadeFilms[i].TVTag as OnlineMovie;
+                if (title.Contains(movie.PopMovie.title)) // if (value.IndexOf(facadeLabels[i], StringComparison.OrdinalIgnoreCase) > 0)
+                {
+                  facadeCounts[i]++;
+                  facadeFilms[i].Label3 = " (" + facadeCounts[i] + ")";
+                }
+              }
+            }
+            // for (int j = 0; j < facadeFilms.Count; j++) facadeFilms[j].Label2 = label2NamePrefix + " (" + facadeCounts[j] + ")";
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Warn("GetCounts() - error setting facadelist item '" + i + "': " + ex.Message);
+          }
+          watch.Stop();
+          LogMyFilms.Debug("GetCounts() - Threaded facade details loader exit after '" + i + "' items (" + (watch.ElapsedMilliseconds) + " ms)");
+        }
+        #endregion
+
+        #region get thumbs for TMDB Items
+        for (i = 0; i < facadeFilms.Count; i++)
+        {
+          try
+          {
+            if (facadeFilms[i] != null)
+            {
+              GUIListItem item = facadeFilms[i];
+              OnlineMovie movie = facadeFilms[i].TVTag as OnlineMovie;
+              if (!string.IsNullOrEmpty(movie.PopMovie.poster_path))
+              {
+                  //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+                  //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+                  //{
+                  //  item.ThumbnailImage = texture;
+                  //  item.IconImage = texture;
+                  //  item.IconImageBig = texture;
+                  //}
+
+                  //item.IconImage = strActiveFacadeImages[1];
+                  //item.IconImageBig = strActiveFacadeImages[0];
+                  //item.ThumbnailImage = strActiveFacadeImages[0];
+
+                  // if selected force an update of thumbnail
+                  //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+                  //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+              }
+            }
+            //string remoteThumb = item.ImageRemotePath;
+            //if (string.IsNullOrEmpty(remoteThumb)) continue;
+
+            //string localThumb = item.Image;
+            //if (string.IsNullOrEmpty(localThumb)) continue;
+
+            //if (Helper.DownloadFile(remoteThumb, localThumb))
+            //{
+            //  // notify that thumbnail image has been downloaded
+            //  item.ThumbnailImage = localThumb;
+            //  item.NotifyPropertyChanged("ThumbnailImage");
+            //}
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Warn("GetImagesTMDB() - error setting facadelist item '" + i + "': " + ex.Message);
+          }
+        }
+        GetImagesforTMDBFilmList(itemlist);
+
+        #endregion
+      })
+      {
+        IsBackground = true,
+        Name = "MyFilms Image Detector and Downloader",
+        Priority = ThreadPriority.BelowNormal
+      }.Start();
+    }
+
+    private void GetImagesforTMDBFilmList(List<GUIListItem> itemsWithThumbs)
+    {
+      StopLoadingFilmlistDetails = false;
+      string CoverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
+      string wStrSort = "TMDB";
+
+      // if there is a Default.jpg in the view subfolder
+      // string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
+      bool isperson = false;
+      string strThumbDirectory = (isperson) ? MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons\" : MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\" + wStrSort.ToLower() + @"\";
+      if (!Directory.Exists(strThumbDirectory)) Directory.CreateDirectory(strThumbDirectory);
+
+      // split the downloads in X+ groups and do multithreaded downloading
+      int groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // Guzzi: Set group to x to only allow x thread(s)
+      int groups = (int)Math.Ceiling((double)itemsWithThumbs.Count / groupSize);
+
+      for (int i = 0; i < groups; i++)
+      {
+        var groupList = new List<GUIListItem>();
+        for (int j = groupSize * i; j < groupSize * i + (groupSize * (i + 1) > itemsWithThumbs.Count ? itemsWithThumbs.Count - groupSize * i : groupSize); j++)
+        {
+          groupList.Add(itemsWithThumbs[j]);
+        }
+
+        new Thread(delegate(object o)
+        {
+          string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+          grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
+          TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+          TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
+          foreach (string posterSize in tmdbConf.images.poster_sizes)
+          {
+            LogMyFilms.Debug("Available TMDB Poster Size: '" + posterSize + "'");
+          }
+          var items = (List<GUIListItem>)o;
+          foreach (GUIListItem item in items)
+          {
+            // stop download if we have exited window
+            if (StopLoadingFilmlistDetails)
+            {
+              items.SafeDispose();
+              break;
+            }
+            LogMyFilms.Debug("GetImagesTMDB() - loading TMDB Details for '" + item.Label + "'"); 
+            OnlineMovie movie = item.TVTag as OnlineMovie;
+            if (movie == null)
+            {
+              LogMyFilms.Error("GetImagesTMDB() - OnlineMovie object is 'null' for movie '" + item.Label + "'");
+              continue;
+            }
+            movie.MovieImages = api.GetMovieImages(movie.PopMovie.id, language);
+            if (movie.MovieImages.posters.Count == 0)
+            {
+              movie.MovieImages = api.GetMovieImages(movie.PopMovie.id);
+              LogMyFilms.Debug("GetImagesTMDB() - no german posters found - used default and found '" + movie.MovieImages.posters.Count + "'"); 
+            }
+            movie.Trailers = api.GetMovieTrailers(movie.PopMovie.id);
+            // movie.AlternateTitles = api.GetMovieAlternateTitles(movie.PopMovie.id);
+            movie.MovieCast = api.GetMovieCast(movie.PopMovie.id);
+
+            #region Poster
+            // stop download if we have exited window
+            if (StopLoadingFilmlistDetails) break;
+
+            LogMyFilms.Debug("GetImagesTMDB() - loading TMDB Details for '" + item.Label + "'");
+            string remoteThumb = (movie.MovieImages.posters.Count > 0) ? tmdbConf.images.base_url + "w500" + movie.MovieImages.posters[0].file_path : "";
+            LogMyFilms.Debug("GetImagesTMDB() - remoteThumb = '" + remoteThumb + "'");
+            string localThumb = Path.Combine(strThumbDirectory, item.Label + ".jpg");
+            LogMyFilms.Debug("GetImagesTMDB() - localThumb = '" + localThumb + "'");
+  
+
+            if (!string.IsNullOrEmpty(remoteThumb) && !string.IsNullOrEmpty(localThumb))
+            {
+                if (Grabber.GrabUtil.DownloadImage(remoteThumb, localThumb))
+                {
+                    //// notify that image has been downloaded
+                    //item.NotifyPropertyChanged("PosterImageFilename");
+                    item.IconImage = localThumb;
+                    item.IconImageBig = localThumb;
+                    item.ThumbnailImage = localThumb;
+                }
+            }
+            #endregion
+
+            #region Fanart
+            // stop download if we have exited window
+            if (StopLoadingFilmlistDetails) break;
+            //if (!TraktSettings.DownloadFanart) continue;
+
+            //string remoteFanart = item.Fanart;
+            //string localFanart = item.FanartImageFilename;
+
+            //if (!string.IsNullOrEmpty(remoteFanart) && !string.IsNullOrEmpty(localFanart))
+            //{
+            //    if (GUIImageHandler.DownloadImage(remoteFanart, localFanart))
+            //    {
+            //        // notify that image has been downloaded
+            //        item.NotifyPropertyChanged("FanartImageFilename");
+            //    }
+            //}
+            #endregion
+
+            // string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, false, null, conf.DefaultCover, false);
+            //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+            //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+            //{
+            //  item.ThumbnailImage = texture;
+            //  item.IconImage = texture;
+            //  item.IconImageBig = texture;
+            //}
+
+            //item.IconImage = strActiveFacadeImages[1];
+            //item.IconImageBig = strActiveFacadeImages[0];
+            //item.ThumbnailImage = strActiveFacadeImages[0];
+
+            // if selected force an update of thumbnail
+            //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+            //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+            
+            
+            string strThumb; // cached cover
+            string strThumbSmall; // cached cover for Icons - small resolution
+
+            #region group-collection image handling (disabled)
+            ////if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
+            //if (item.IsFolder) // special handling for groups (movie collections - NOT views!)
+            //{
+            //  string strThumbGroup = GetGroupImage(item); // thumbnail for Groups/collections
+            //  item.IconImage = strThumbGroup;
+            //  item.IconImageBig = strThumbGroup;
+            //  item.ThumbnailImage = strThumbGroup;
+            //}
+            #endregion
+
+            item.MusicTag = item.ThumbnailImage; // keep Original one in music tag for big list thumb ...
+            //// strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
+            //strThumb = MediaPortal.Util.Utils.GetCoverArtName(CoverThumbDir, item.DVDLabel); // item.DVDLabel is sTitle
+            //strThumbSmall = strThumb.Substring(0, strThumb.LastIndexOf(".")) + "_s" + Path.GetExtension(strThumb);
+
+            //if (!string.IsNullOrEmpty(item.ThumbnailImage) && item.ThumbnailImage != conf.DefaultCover && !File.Exists(strThumb))
+            //{
+            //  Picture.CreateThumbnail(item.ThumbnailImage, strThumbSmall, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+            //  Picture.CreateThumbnail(item.ThumbnailImage, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+            //  LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel + "'");
+            //}
+            //if (File.Exists(strThumb))
+            //{
+            //  item.IconImage = strThumbSmall;
+            //  item.IconImageBig = strThumb;
+            //  item.ThumbnailImage = strThumb;
+            //}
+            //else
+            //{
+            //  if (conf.DefaultCover.Length > 0)
+            //  {
+            //    item.IconImage = conf.DefaultCover;
+            //    item.IconImageBig = conf.DefaultCover;
+            //    item.ThumbnailImage = conf.DefaultCover;
+            //  }
+            //}
+
+            #region thumb downloads (no active)
+            // ToDo: Add downloader to SetViewThumbs - or here ...
+
+            //string remoteThumb = item.ImageRemotePath;
+            //if (string.IsNullOrEmpty(remoteThumb)) continue;
+
+            //string localThumb = item.Image;
+            //if (string.IsNullOrEmpty(localThumb)) continue;
+
+            //if (Helper.DownloadFile(remoteThumb, localThumb))
+            //{
+            //  // notify that thumbnail image has been downloaded
+            //  item.ThumbnailImage = localThumb;
+            //  item.NotifyPropertyChanged("ThumbnailImage");
+            //}
+            #endregion
+
+            // Thread.Sleep(10);
+          }
+        })
+        {
+          IsBackground = true,
+          Priority = ThreadPriority.BelowNormal,
+          Name = "MyFilms FilmList Image Detector " + i
+        }.Start(groupList);
+      }
+    }
+
     /// <summary>Selects records for display grouping them as required</summary>
     /// <param name="WstrSelect">Select this kind of records</param>
     /// <param name="WStrSort">Sort based on this</param>
@@ -6136,7 +7295,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, personname, false, true, out filename);
                       LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personname + "', path = '" + filename1person + "', filename = '" + filename + "'");
                       item.IconImage = filename;
-                      item.IconImageBig = filename;item.ThumbnailImage = filename;
+                      item.IconImageBig = filename;
+                      item.ThumbnailImage = filename;
                       item.Label3 = "TMDB ID = " + singleperson.id + ", URL = " + singleperson.profile_path;
                     }
                   }
@@ -15327,5 +16487,81 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   //  #endregion
   //}
+
+
+  public class GUIMovieListItem : GUIListItem
+  {
+    public GUIMovieListItem(string strLabel) : base(strLabel) { }
+
+    public object Item
+    {
+      get { return _Item; }
+      set
+      {
+        _Item = value;
+        INotifyPropertyChanged notifier = value as INotifyPropertyChanged;
+        if (notifier != null) notifier.PropertyChanged += (s, e) =>
+        {
+          //if (s is TraktMovie.MovieImages && e.PropertyName == "PosterImageFilename")
+          //  SetImageToGui((s as TraktMovie.MovieImages).PosterImageFilename);
+          //if (s is TraktMovie.MovieImages && e.PropertyName == "FanartImageFilename")
+          //  UpdateCurrentSelection();
+        };
+      }
+    } protected object _Item;
+
+    /// <summary>
+    /// Loads an Image from memory into a facade item
+    /// </summary>
+    /// <param name="imageFilePath">Filename of image</param>
+    protected void SetImageToGui(string imageFilePath)
+    {
+      if (string.IsNullOrEmpty(imageFilePath)) return;
+
+      // determine the overlay to add to poster
+      // [...]
+      // get a reference to a MediaPortal Texture Identifier
+      //string suffix = mainOverlay.ToString().Replace(", ", string.Empty) + Enum.GetName(typeof(RatingOverlayImage), ratingOverlay);
+      //string texture = GUIImageHandler.GetTextureIdentFromFile(imageFilePath, suffix);
+
+      // build memory image
+      //Image memoryImage = null;
+      //if (mainOverlay != MainOverlayImage.None || ratingOverlay != RatingOverlayImage.None)
+      //{
+      //  memoryImage = GUIImageHandler.DrawOverlayOnPoster(imageFilePath, mainOverlay, ratingOverlay);
+      //  if (memoryImage == null) return;
+
+      //  // load texture into facade item
+      //  if (GUITextureManager.LoadFromMemory(memoryImage, texture, 0, 0, 0) > 0)
+      //  {
+      //    ThumbnailImage = texture;
+      //    IconImage = texture;
+      //    IconImageBig = texture;
+      //  }
+      //}
+      //else
+      //{
+      //  ThumbnailImage = imageFilePath;
+      //  IconImage = imageFilePath;
+      //  IconImageBig = imageFilePath;
+      //}
+
+      // if selected and is current window force an update of thumbnail
+      UpdateCurrentSelection();
+    }
+
+    protected void UpdateCurrentSelection()
+    {
+      var window = GUIWindowManager.GetWindow(GUIWindowManager.ActiveWindow);
+      if (window != null)
+      {
+        GUIListItem selectedItem = GUIControl.GetSelectedListItem(MyFilms.ID_MyFilms, 50);
+        if (selectedItem == this)
+        {
+          GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, ItemId, 0, null));
+        }
+      }
+    }
+  }
 
 }
