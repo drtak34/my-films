@@ -828,12 +828,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active) groupcover.Active = true;
       #endregion
 
-      bool IsDefaultConfig = false; 
+      bool IsDefaultConfig = false;
+      string PreviousConfig = "";
       
       if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos && PreviousWindowId != ID_BrowseTheWeb)
       {
         #region Load or change MyFilms Config
 
+        PreviousConfig = Configuration.CurrentConfig;
         IsDefaultConfig = Configuration.Current_Config(true); // also sets "Configuration.CurrentConfig" - "true" brings up config menu, if nothing is set ...
 
         if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
@@ -880,10 +882,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         InitFSwatcher(); // load DB watcher for multiseat
         #endregion
 
-        if (MyFilms.conf.StrFanart) Fanartstatus(true);
-        else Fanartstatus(false);
+        Fanartstatus(MyFilms.conf.StrFanart);
         if (!InitialStart && IsDefaultConfig) InitMainScreen(false); // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
-
+        if (Configuration.CurrentConfig != PreviousConfig) InitialStart = true; // if a default config is set, otherwise the DB gets not proerly initialized
       }
       base.OnPageLoad(); // let animations run  
 
