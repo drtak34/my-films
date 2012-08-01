@@ -4510,7 +4510,7 @@ namespace Grabber_Interface
               string strTemp = Environment.GetEnvironmentVariable("TEMP") + @"\MFgrabpreview.jpg";
               try { System.IO.File.Delete(strTemp); }
               catch (Exception) { }
-              GrabUtil.DownLoadImage(find, strTemp);
+              GrabUtil.DownloadImage(find, strTemp);
               FileInfo f = new FileInfo(strTemp);
               labelImageSize.Text = this.ByteString(f.Length);
               pictureBoxPreviewCover.ImageLocation = strTemp;
