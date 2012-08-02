@@ -130,14 +130,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         return (int)mi.Invoke(null, new[] { role, name });
       }
-      throw new Exception("Error invoking VideoDatabase method 'AddActor'");
+      else
+        throw new Exception("Error invoking VideoDatabase method 'AddActor'");
     }
 
     public static void AddActorToMovie(object iMovieId, object iActorId, object role)
     {
       // VideoDatabase.AddActorToMovie(iidmovie, iiActor, "actor");
       // public static void AddActorToMovie(int lMovieId, int lActorId, string role)
-      var mi = typeof(VideoDatabase).GetMethod("AddActor");
+      var mi = typeof(VideoDatabase).GetMethod("AddActorToMovie");
       var iParams = mi.GetParameters();
       if (iParams.Length == 2)
       {
@@ -147,7 +148,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         mi.Invoke(null, new[] { iMovieId, iActorId, role });
       }
-      throw new Exception("Error invoking VideoDatabase method 'AddActorToMovie'");
+      else
+        throw new Exception("Error invoking VideoDatabase method 'AddActorToMovie'");
     }
 
     #endregion
