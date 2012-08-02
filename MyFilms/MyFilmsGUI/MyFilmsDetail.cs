@@ -1010,6 +1010,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // Updates ...
                 choiceViewMenu.Add("updatesmenu");
 
+                // Add Submenu for useritemx mapping
+                dlgmenu.Add(string.Format(GUILocalizeStrings.Get(10798771)));  // Global Mappings ...
+                choiceViewMenu.Add("globalmappings");
+                
                 if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsCoverManager.xml"))
                 {
                   dlgmenu.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
@@ -1277,6 +1281,111 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                 break;
 
+              case "globalmappings": // map useritems from GUI
+                #region globalmappings
+                GUIDialogMenu dlg3 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                if (dlg3 == null) return;
+                dlg3.Reset();
+                dlg3.SetHeading(GUILocalizeStrings.Get(10798771)); // Display options ...
+                List<string> choiceGlobalMappings = new List<string>();
+
+                #region populate menu
+                dlg3.Add(GUILocalizeStrings.Get(10798820) + " 1 (" + MyFilms.conf.StritemDetails1 + "-" + MyFilms.conf.StrlabelDetails1 + ")"); // Details Display Item ....
+                choiceGlobalMappings.Add("useritemdetails1");
+                dlg3.Add(GUILocalizeStrings.Get(10798820) + " 2 (" + MyFilms.conf.StritemDetails2 + "-" + MyFilms.conf.StrlabelDetails2 + ")");
+                choiceGlobalMappings.Add("useritemdetails2");
+                dlg3.Add(GUILocalizeStrings.Get(10798820) + " 3 (" + MyFilms.conf.StritemDetails3 + "-" + MyFilms.conf.StrlabelDetails3 + ")");
+                choiceGlobalMappings.Add("useritemdetails3");
+                dlg3.Add(GUILocalizeStrings.Get(10798820) + " 4 (" + MyFilms.conf.StritemDetails4 + "-" + MyFilms.conf.StrlabelDetails4 + ")");
+                choiceGlobalMappings.Add("useritemdetails4");
+                dlg3.Add(GUILocalizeStrings.Get(10798820) + " 5 (" + MyFilms.conf.StritemDetails5 + "-" + MyFilms.conf.StrlabelDetails5 + ")");
+                choiceGlobalMappings.Add("useritemdetails5");
+                dlg3.Add(GUILocalizeStrings.Get(10798820) + " 6 (" + MyFilms.conf.StritemDetails6 + "-" + MyFilms.conf.StrlabelDetails6 + ")");
+                choiceGlobalMappings.Add("useritemdetails6");
+
+                // master-, secondary-  and sorttitle
+                //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+                dlg3.Add(
+                  GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" +
+                  BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+                choiceGlobalMappings.Add("mastertitle");
+                dlg3.Add(
+                  GUILocalizeStrings.Get(10798791) + " (" + MyFilms.conf.StrTitle2 + "-" +
+                  BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2) + ")"); // secondary title
+                choiceGlobalMappings.Add("secondarytitle");
+                dlg3.Add(
+                  GUILocalizeStrings.Get(10798792) + " (" + MyFilms.conf.StrSTitle + "-" +
+                  BaseMesFilms.Translate_Column(MyFilms.conf.StrSTitle) + ")"); // sort title
+                choiceGlobalMappings.Add("sorttitle");
+                #endregion
+
+                dlg3.DoModal(GetID);
+                if (dlg3.SelectedLabel == -1)
+                {
+                  Change_Menu("mainmenu");
+                  return;
+                }
+                int selection = dlg3.SelectedLabel;
+                string strUserItemSelection = choiceGlobalMappings[dlg3.SelectedLabel];
+                dlg3.Reset();
+                choiceGlobalMappings.Clear();
+
+                dlg3.SetHeading(GUILocalizeStrings.Get(10798772)); // Choose field ...
+                #region populate menu with choices
+                switch (strUserItemSelection)
+                {
+                  case "mastertitle":
+                  case "sorttitle":
+                    break;
+                  case "secondarytitle":
+                    dlg3.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
+                    choiceGlobalMappings.Add("(none)");
+                    break;
+                  default:
+                    dlg3.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
+                    choiceGlobalMappings.Add("");
+                    break;
+                }
+                if (selection > 4) // title fields
+                {
+                  ArrayList DisplayItems = MyFilms.GetDisplayItems("titles");
+                  foreach (string[] displayItem in DisplayItems)
+                  {
+                    dlg3.Add(displayItem[0] + "-" + displayItem[1]);
+                    choiceGlobalMappings.Add(displayItem[0]);
+                  }
+                }
+                else // display item fields
+                {
+                  ArrayList DisplayItems = MyFilms.GetDisplayItems("viewitems");
+                  foreach (string[] displayItem in DisplayItems)
+                  {
+                    dlg3.Add(displayItem[0] + "-" + displayItem[1]);
+                    choiceGlobalMappings.Add(displayItem[0]);
+                  }
+                }
+                #endregion
+
+                dlg3.DoModal(GetID);
+                if (dlg3.SelectedLabel == -1)
+                {
+                  Change_Menu("mainmenu");
+                  return;
+                }
+                
+                string selectionLabel = choiceGlobalMappings[dlg3.SelectedLabel];
+                dlg3.Reset();
+                choiceGlobalMappings.Clear();
+                LogMyFilms.Debug("Display Options - new field: '" + selectionLabel + "', new Label: '" + BaseMesFilms.Translate_Column(selectionLabel) + "'.");
+                MyFilms.UpdateUseritemWithValue(strUserItemSelection, selectionLabel);
+                MyFilms.UpdateUserItems(); // save to currentconfig - save time for WinDeInit
+                //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeFilms.SelectedListItem.ItemId, facadeFilms.SelectedListItem.Label);
+                //Load_Config(Configuration.CurrentConfig, true);
+                MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
+                afficher_detail(true);
+                return;
+                #endregion
+              
               case "fanartcovermenu":
                 if (dlgmenu == null) return;
                 dlgmenu.Reset();
@@ -1284,14 +1393,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
 
                 int iCovercount = 0;
-                bool success =
-                  int.TryParse(
-                    ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true), out iCovercount);
+                bool success = int.TryParse(ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true), out iCovercount);
                 if (iCovercount > 1)
                 {
-                  dlgmenu.Add(
-                    GUILocalizeStrings.Get(10798762) + " " +
-                    ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true)); // Change Cover
+                  dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " " + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true)); // Change Cover
                   choiceViewMenu.Add("changecover");
                 }
 

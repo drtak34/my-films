@@ -580,6 +580,13 @@
           this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.Tab_OldStuff = new System.Windows.Forms.TabPage();
+          this.groupBox8 = new System.Windows.Forms.GroupBox();
+          this.label25 = new System.Windows.Forms.Label();
+          this.label7 = new System.Windows.Forms.Label();
+          this.label3 = new System.Windows.Forms.Label();
+          this.LayOutViewFilms = new System.Windows.Forms.ComboBox();
+          this.SortSensViewFilms = new System.Windows.Forms.ComboBox();
+          this.SortViewFilms = new System.Windows.Forms.ComboBox();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
@@ -603,13 +610,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.groupBox8 = new System.Windows.Forms.GroupBox();
-          this.label25 = new System.Windows.Forms.Label();
-          this.label7 = new System.Windows.Forms.Label();
-          this.label3 = new System.Windows.Forms.Label();
-          this.LayOutViewFilms = new System.Windows.Forms.ComboBox();
-          this.SortSensViewFilms = new System.Windows.Forms.ComboBox();
-          this.SortViewFilms = new System.Windows.Forms.ComboBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -699,10 +699,10 @@
           ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).BeginInit();
           this.Tab_OldStuff.SuspendLayout();
+          this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          this.groupBox8.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2619,6 +2619,7 @@
           this.AntItemDetails6.Location = new System.Drawing.Point(45, 176);
           this.AntItemDetails6.Name = "AntItemDetails6";
           this.AntItemDetails6.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails6.Sorted = true;
           this.AntItemDetails6.TabIndex = 18;
           // 
           // label_UserItemDetails6
@@ -2734,6 +2735,7 @@
           this.AntItemDetails5.Location = new System.Drawing.Point(45, 149);
           this.AntItemDetails5.Name = "AntItemDetails5";
           this.AntItemDetails5.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails5.Sorted = true;
           this.AntItemDetails5.TabIndex = 4;
           // 
           // AntItemDetails4
@@ -2742,6 +2744,7 @@
           this.AntItemDetails4.Location = new System.Drawing.Point(45, 122);
           this.AntItemDetails4.Name = "AntItemDetails4";
           this.AntItemDetails4.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails4.Sorted = true;
           this.AntItemDetails4.TabIndex = 3;
           // 
           // AntItemDetails3
@@ -2750,6 +2753,7 @@
           this.AntItemDetails3.Location = new System.Drawing.Point(45, 95);
           this.AntItemDetails3.Name = "AntItemDetails3";
           this.AntItemDetails3.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails3.Sorted = true;
           this.AntItemDetails3.TabIndex = 2;
           // 
           // AntItemDetails2
@@ -2758,6 +2762,7 @@
           this.AntItemDetails2.Location = new System.Drawing.Point(45, 68);
           this.AntItemDetails2.Name = "AntItemDetails2";
           this.AntItemDetails2.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails2.Sorted = true;
           this.AntItemDetails2.TabIndex = 1;
           // 
           // AntItemDetails1
@@ -2766,6 +2771,7 @@
           this.AntItemDetails1.Location = new System.Drawing.Point(45, 39);
           this.AntItemDetails1.Name = "AntItemDetails1";
           this.AntItemDetails1.Size = new System.Drawing.Size(101, 21);
+          this.AntItemDetails1.Sorted = true;
           this.AntItemDetails1.TabIndex = 0;
           // 
           // groupBox_UserItemsMain
@@ -6055,6 +6061,82 @@
           this.Tab_OldStuff.Text = "Old Stuff";
           this.Tab_OldStuff.UseVisualStyleBackColor = true;
           // 
+          // groupBox8
+          // 
+          this.groupBox8.Controls.Add(this.label25);
+          this.groupBox8.Controls.Add(this.label7);
+          this.groupBox8.Controls.Add(this.label3);
+          this.groupBox8.Controls.Add(this.LayOutViewFilms);
+          this.groupBox8.Controls.Add(this.SortSensViewFilms);
+          this.groupBox8.Controls.Add(this.SortViewFilms);
+          this.groupBox8.Location = new System.Drawing.Point(228, 144);
+          this.groupBox8.Name = "groupBox8";
+          this.groupBox8.Size = new System.Drawing.Size(291, 66);
+          this.groupBox8.TabIndex = 92;
+          this.groupBox8.TabStop = false;
+          this.groupBox8.Text = "Sort and Layouts for Films (Custom View)";
+          // 
+          // label25
+          // 
+          this.label25.AutoSize = true;
+          this.label25.Location = new System.Drawing.Point(202, 18);
+          this.label25.Name = "label25";
+          this.label25.Size = new System.Drawing.Size(39, 13);
+          this.label25.TabIndex = 5;
+          this.label25.Text = "Layout";
+          // 
+          // label7
+          // 
+          this.label7.AutoSize = true;
+          this.label7.Location = new System.Drawing.Point(125, 18);
+          this.label7.Name = "label7";
+          this.label7.Size = new System.Drawing.Size(26, 13);
+          this.label7.TabIndex = 4;
+          this.label7.Text = "Sort";
+          // 
+          // label3
+          // 
+          this.label3.AutoSize = true;
+          this.label3.Location = new System.Drawing.Point(16, 18);
+          this.label3.Name = "label3";
+          this.label3.Size = new System.Drawing.Size(51, 13);
+          this.label3.TabIndex = 3;
+          this.label3.Text = "Sort Field";
+          // 
+          // LayOutViewFilms
+          // 
+          this.LayOutViewFilms.FormattingEnabled = true;
+          this.LayOutViewFilms.Items.AddRange(new object[] {
+            "List",
+            "Big Icon List",
+            "Small Icons",
+            "Large Icons",
+            "Filmstrip",
+            "Cover Flow"});
+          this.LayOutViewFilms.Location = new System.Drawing.Point(192, 35);
+          this.LayOutViewFilms.Name = "LayOutViewFilms";
+          this.LayOutViewFilms.Size = new System.Drawing.Size(90, 21);
+          this.LayOutViewFilms.TabIndex = 2;
+          // 
+          // SortSensViewFilms
+          // 
+          this.SortSensViewFilms.FormattingEnabled = true;
+          this.SortSensViewFilms.Items.AddRange(new object[] {
+            "ASC",
+            "DESC"});
+          this.SortSensViewFilms.Location = new System.Drawing.Point(120, 35);
+          this.SortSensViewFilms.Name = "SortSensViewFilms";
+          this.SortSensViewFilms.Size = new System.Drawing.Size(59, 21);
+          this.SortSensViewFilms.TabIndex = 1;
+          // 
+          // SortViewFilms
+          // 
+          this.SortViewFilms.FormattingEnabled = true;
+          this.SortViewFilms.Location = new System.Drawing.Point(10, 35);
+          this.SortViewFilms.Name = "SortViewFilms";
+          this.SortViewFilms.Size = new System.Drawing.Size(104, 21);
+          this.SortViewFilms.TabIndex = 0;
+          // 
           // textBoxNBconfigs
           // 
           this.textBoxNBconfigs.Enabled = false;
@@ -6244,82 +6326,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // groupBox8
-          // 
-          this.groupBox8.Controls.Add(this.label25);
-          this.groupBox8.Controls.Add(this.label7);
-          this.groupBox8.Controls.Add(this.label3);
-          this.groupBox8.Controls.Add(this.LayOutViewFilms);
-          this.groupBox8.Controls.Add(this.SortSensViewFilms);
-          this.groupBox8.Controls.Add(this.SortViewFilms);
-          this.groupBox8.Location = new System.Drawing.Point(228, 144);
-          this.groupBox8.Name = "groupBox8";
-          this.groupBox8.Size = new System.Drawing.Size(291, 66);
-          this.groupBox8.TabIndex = 92;
-          this.groupBox8.TabStop = false;
-          this.groupBox8.Text = "Sort and Layouts for Films (Custom View)";
-          // 
-          // label25
-          // 
-          this.label25.AutoSize = true;
-          this.label25.Location = new System.Drawing.Point(202, 18);
-          this.label25.Name = "label25";
-          this.label25.Size = new System.Drawing.Size(39, 13);
-          this.label25.TabIndex = 5;
-          this.label25.Text = "Layout";
-          // 
-          // label7
-          // 
-          this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(125, 18);
-          this.label7.Name = "label7";
-          this.label7.Size = new System.Drawing.Size(26, 13);
-          this.label7.TabIndex = 4;
-          this.label7.Text = "Sort";
-          // 
-          // label3
-          // 
-          this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(16, 18);
-          this.label3.Name = "label3";
-          this.label3.Size = new System.Drawing.Size(51, 13);
-          this.label3.TabIndex = 3;
-          this.label3.Text = "Sort Field";
-          // 
-          // LayOutViewFilms
-          // 
-          this.LayOutViewFilms.FormattingEnabled = true;
-          this.LayOutViewFilms.Items.AddRange(new object[] {
-            "List",
-            "Big Icon List",
-            "Small Icons",
-            "Large Icons",
-            "Filmstrip",
-            "Cover Flow"});
-          this.LayOutViewFilms.Location = new System.Drawing.Point(192, 35);
-          this.LayOutViewFilms.Name = "LayOutViewFilms";
-          this.LayOutViewFilms.Size = new System.Drawing.Size(90, 21);
-          this.LayOutViewFilms.TabIndex = 2;
-          // 
-          // SortSensViewFilms
-          // 
-          this.SortSensViewFilms.FormattingEnabled = true;
-          this.SortSensViewFilms.Items.AddRange(new object[] {
-            "ASC",
-            "DESC"});
-          this.SortSensViewFilms.Location = new System.Drawing.Point(120, 35);
-          this.SortSensViewFilms.Name = "SortSensViewFilms";
-          this.SortSensViewFilms.Size = new System.Drawing.Size(59, 21);
-          this.SortSensViewFilms.TabIndex = 1;
-          // 
-          // SortViewFilms
-          // 
-          this.SortViewFilms.FormattingEnabled = true;
-          this.SortViewFilms.Location = new System.Drawing.Point(10, 35);
-          this.SortViewFilms.Name = "SortViewFilms";
-          this.SortViewFilms.Size = new System.Drawing.Size(104, 21);
-          this.SortViewFilms.TabIndex = 0;
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6467,11 +6473,11 @@
           ((System.ComponentModel.ISupportInitialize)(this.customFieldBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.propertiesBindingSource)).EndInit();
           this.Tab_OldStuff.ResumeLayout(false);
+          this.groupBox8.ResumeLayout(false);
+          this.groupBox8.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          this.groupBox8.ResumeLayout(false);
-          this.groupBox8.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
