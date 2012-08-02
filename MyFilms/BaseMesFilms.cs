@@ -1596,7 +1596,11 @@ namespace MyFilmsPlugin.MyFilms
 
         public static void LoadMyFilms(string StrFileXml)
         {
-          if (!File.Exists(StrFileXml)) throw new Exception(string.Format("The file {0} does not exist !", StrFileXml));
+          if (!File.Exists(StrFileXml))
+          {
+            LogMyFilms.Error(string.Format("LoadMyFilms() - the DB file {0} does not exist !", StrFileXml));
+            throw new Exception(string.Format("The DB file {0} does not exist !", StrFileXml));
+          }
           Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
           bool success = LoadMyFilmsFromDisk(StrFileXml);
           watchReadMovies.Stop();
