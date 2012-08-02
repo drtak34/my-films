@@ -466,6 +466,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static GUIListItem itemToPublish = null;
 
     public static Configuration conf;
+    //// keeps track of last loaded config to make sure that on page load the DB is reloaded, if it was changed by e.g. the default config
+    //private static Configuration confPrevious = null;
+
+    private string PreviousConfig = ""; // keeps last loaded config for checks in OnPageLoad()
+
     public static Logos confLogos;
 
     public static DataRow[] r; // will hold current recordset to traverse
@@ -829,7 +834,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       bool IsDefaultConfig = false;
-      string PreviousConfig = "";
       
       if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos && PreviousWindowId != ID_BrowseTheWeb)
       {
@@ -907,6 +911,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
             if (InitialStart && GetID == ID_MyFilms)
             {
+              #region Show loading in progress dialog
               if (dlgPrgrs != null)
               {
                 dlgPrgrs.Reset();
@@ -920,6 +925,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgPrgrs.ShouldRenderLayer();
                 dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
               }
+              #endregion
             }
 
             if (InitialStart) 
@@ -927,8 +933,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.StrSelect = "";
               conf.StrFilmSelect = "";
               conf.StrViewSelect = "";
-              r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // if (InitialStart) BaseMesFilms.LoadMyFilms(conf.StrFileXml);
+              // loaded already in FinChargeInit() with reload = true if InitialStart !
+              // r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // if (InitialStart) BaseMesFilms.LoadMyFilms(conf.StrFileXml);
             }
+
+            Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), ((loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)) || conf.IsDbReloadRequired )); // || InitialStart)); // reloadFromDisk is true, if the loaded config and it's used DB file is physically a different one than the previous one
+            // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), ((loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)))); // || InitialStart)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
+            // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart || requireFullReload), requireFullReload || Configuration.Current_Config()); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
+
+            // GUIWaitCursor.Hide();
+            //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+            //GUIControl.ShowControl(GetID, 34);
+
             if (GetID == ID_MyFilms)
             {
               if (dlgPrgrs != null)
@@ -937,13 +953,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgPrgrs.Close();
               }
             }
-            
-            Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), ((loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)))); // || InitialStart)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
-            // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart || requireFullReload), requireFullReload || Configuration.Current_Config()); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
-
-            // GUIWaitCursor.Hide();
-            //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
-            //GUIControl.ShowControl(GetID, 34);
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -3204,17 +3213,58 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       conf.ViewContext = (conf.BoolCollection) ? ViewContext.MovieCollection : ViewContext.Movie;
       LogMyFilms.Debug("GetFilmList finished!");
+      
+      // GetOnlineMoviesFromTMDBforFilmList(); // add Online Movies from TMDB
+      GetImagesFilmList(facadeDownloadItems);
+      #endregion
+      return !(this.facadeFilms.Count == 1 && item.IsFolder); //ret false if single folder found
+    }
 
-      //sortascending = conf.StrSortSens;
-      //sortfield = conf.StrSorta;
+    private void GetOnlineMoviesFromTMDBforFilmList()
+    {
+      #region add online movies from TMDB
       if (MyFilmsDetail.ExtendedStartmode("GetFilmlist() - Online info on person film list") && facadeFilms.Count < 200 && IsPersonsField(conf.WStrSort)) // only in "related display"
       {
+        var facadeDownloadItems = new List<GUIListItem>();
+        bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
+        string currentImage = "";
+        //sortascending = conf.StrSortSens;
+        //sortfield = conf.StrSorta;
+        string sortascending;
+        string sortfield;
+        if (conf.BoolCollection && Helper.FieldIsSet(conf.StrSortaInHierarchies)) // only use Collection sort, if there is a value - otherwise use default
+        {
+          LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:    '" + conf.StrSortaInHierarchies + "'");
+          LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
+          sortascending = conf.StrSortSensInHierarchies;
+          sortfield = conf.StrSortaInHierarchies;
+        }
+        else
+        {
+          LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:                  '" + conf.StrSorta + "'");
+          LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:               '" + conf.StrSortSens + "'");
+          sortascending = conf.StrSortSens;
+          sortfield = conf.StrSorta;
+          // special handling for Box Sets ! -> use mastertitle for sorting to get proper grouping of the collections/groups/box-sets
+          if (conf.StrViewSelect.Contains(@"*\*"))
+          {
+            sortfield = conf.StrTitle1;
+            LogMyFilms.Debug("(GetFilmList) - special case: set sort field to master title for box set ! -> sortfield = '" + sortfield + "'");
+          }
+        }
+        if (string.IsNullOrEmpty(sortfield))
+        {
+          sortfield = MyFilms.conf.StrTitle1;
+          LogMyFilms.Error("(GetFilmList) - sort field not properly set - resetting to mastertitle to avoid sort exception !");
+        }
+
         IComparer myComparer = new AlphanumComparatorFast();
         string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
         grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
         TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
         TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
         TmdbPersonSearch personSearch = api.SearchPerson(conf.Wselectedlabel, 1);
+        GUIListItem item = null;
         LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personSearch.results.Count + "' results found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
         if (personSearch.results.Count > 0)
         {
@@ -3227,7 +3277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int iInsertAt = int.MaxValue;
             for (int i = 0; i < facadeFilms.Count; i++)
             {
-              if (facadeFilms[i].Label == personMovie.title) 
+              if (facadeFilms[i].Label == personMovie.title)
                 toBeAddedToList = false;
               else
               {
@@ -3247,7 +3297,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                   }
                 }
-                catch (Exception ex) { LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
                 }
               }
             }
@@ -3269,7 +3321,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "OriginalTitle":
                 case "FormattedTitle":
                 case "Year":
-                  item.Label2 = (personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : personMovie.release_date;
+                  item.Label2 = (personMovie != null && personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : (personMovie.release_date ?? "");
                   break;
                 case "Date":
                 case "DateAdded":
@@ -3282,7 +3334,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             #endregion
             #region Label3 ...
-
             item.Label3 = personMovie.character + " (cast)";
             #endregion
             #region Watched Status
@@ -3294,7 +3345,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // load special icons to indicate watched/available flags in listcontrol
             if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
             #endregion
-            
+
             #region Cover Picture
             currentImage = string.Empty;
             currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
@@ -3306,7 +3357,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             facadeDownloadItems.Add(item);
             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-            if (iInsertAt == int.MaxValue) 
+            if (iInsertAt == int.MaxValue)
               facadeFilms.Add(item);
             else
               facadeFilms.Insert(0, item);
@@ -3362,7 +3413,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "OriginalTitle":
                 case "FormattedTitle":
                 case "Year":
-                  item.Label2 = (personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : personMovie.release_date;
+                  item.Label2 = (personMovie != null && personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : (personMovie.release_date ?? "");
                   break;
                 case "Date":
                 case "DateAdded":
@@ -3375,7 +3426,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             #endregion
             #region Label3 ...
-
             item.Label3 = personMovie.job + " (" + personMovie.department + ")";
             #endregion
             #region Watched Status
@@ -3403,10 +3453,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #endregion
           }
         }
+        GetImagesFilmList(facadeDownloadItems);
       }
-      GetImagesFilmList(facadeDownloadItems);
       #endregion
-      return !(this.facadeFilms.Count == 1 && item.IsFolder); //ret false if single folder found
     }
 
     private void GetImagesFilmList(List<GUIListItem> itemsWithThumbs)
@@ -3418,6 +3467,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // Guzzi: Set group to x to only allow x thread(s)
       int groups = (int)Math.Ceiling((double)itemsWithThumbs.Count / groupSize);
 
+      
       for (int i = 0; i < groups; i++)
       {
         var groupList = new List<GUIListItem>();
@@ -8378,16 +8428,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
       Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
+      string oldXmlDB = (conf != null) ? conf.StrFileXml : "";
       conf = new Configuration(CurrentConfig, true, create_temp, loadParams);
+      conf.IsDbReloadRequired = (oldXmlDB != conf.StrFileXml); // set reload flag, if the underlying DB has changed (it might not, if user switches config using the same DB)
       watch.Stop();
       LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (watch.ElapsedMilliseconds) + " ms)");
 
-      if ((conf.Boolreturn) && (conf.Wselectedlabel == string.Empty))
+      if (conf.Boolreturn && conf.Wselectedlabel == string.Empty)
       {
         conf.Boolselect = true;
         conf.Boolreturn = false;
       }
-      if (conf.StrLogos)
+      if (conf.StrLogos) 
         confLogos = new Logos();
       MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
       if (conf.StrEnhancedWatchedStatusHandling)
@@ -8483,7 +8535,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           currentFanartList.Clear(); // as items do change, reset fanart list ...
           conf.DbSelection = new string[] { conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false.ToString(), false.ToString() }; 
           BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-          r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
+          // r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
+        }
+        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
+        if (reload)
+        {
           #region inform Trakt ro start a sync ...
           {
             if (conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 && conf.StrFileType != Configuration.CatalogType.AntMovieCatalog4Xtended)
@@ -8497,7 +8553,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           #endregion
         }
-        // r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
       }
       #endregion
 
@@ -9999,13 +10054,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ClearFacade(); // facadeFilms.Clear();        facadeFilms.ListLayout.Clear();
         InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
         InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+
+        Load_Config(newConfig, true, null);
+        
         new Thread(delegate()
         {
           {
             //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
             GUIWaitCursor.Init(); GUIWaitCursor.Show();
 
-            Load_Config(newConfig, true, null);
             if (InitialStart)
             {
               Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...

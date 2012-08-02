@@ -1394,6 +1394,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strFileType; }
           set { strFileType = value; }
         }
+        private bool isDbReloadRequired = false;
+        public bool IsDbReloadRequired
+        {
+          get { return isDbReloadRequired; }
+          set { isDbReloadRequired = value; }
+        }
         private bool readOnly = true;
         public bool ReadOnly
         {
