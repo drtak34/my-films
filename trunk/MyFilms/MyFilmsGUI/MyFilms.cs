@@ -9398,15 +9398,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 1 (" + MyFilms.conf.StritemDetails1 + "-" + MyFilms.conf.StrlabelDetails1 + ")"); // Details Display Item ....
           choiceGlobalMappings.Add("useritemdetails1");
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 2 (" + MyFilms.conf.StritemDetails2 + "-" + MyFilms.conf.StrlabelDetails2 + ")");
-          choiceGlobalMappings.Add("useritemdetails1");
+          choiceGlobalMappings.Add("useritemdetails2");
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 3 (" + MyFilms.conf.StritemDetails3 + "-" + MyFilms.conf.StrlabelDetails3 + ")");
-          choiceGlobalMappings.Add("useritemdetails1");
+          choiceGlobalMappings.Add("useritemdetails3");
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 4 (" + MyFilms.conf.StritemDetails4 + "-" + MyFilms.conf.StrlabelDetails4 + ")");
-          choiceGlobalMappings.Add("useritemdetails1");
+          choiceGlobalMappings.Add("useritemdetails4");
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 5 (" + MyFilms.conf.StritemDetails5 + "-" + MyFilms.conf.StrlabelDetails5 + ")");
-          choiceGlobalMappings.Add("useritemdetails1");
+          choiceGlobalMappings.Add("useritemdetails5");
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 6 (" + MyFilms.conf.StritemDetails6 + "-" + MyFilms.conf.StrlabelDetails6 + ")");
-          choiceGlobalMappings.Add("useritemdetails1");
+          choiceGlobalMappings.Add("useritemdetails6");
 
           // master-, secondary-  and sorttitle
           //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
@@ -9473,78 +9473,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg3.Reset();
           choiceGlobalMappings.Clear();
           LogMyFilms.Debug("Display Options - new field: '" + wproperty + "', new Label: '" + BaseMesFilms.Translate_Column(wproperty) + "'.");
-          switch (strUserItemSelection)
-          {
-            case "useritem1":
-              MyFilms.conf.Stritem1 = wproperty;
-              MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
-              break;
-            case "useritem2":
-              MyFilms.conf.Stritem2 = wproperty;
-              MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
-              break;
-            case "useritem3":
-              MyFilms.conf.Stritem3 = wproperty;
-              MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
-              break;
-            case "useritem4":
-              MyFilms.conf.Stritem4 = wproperty;
-              MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
-              break;
-            case "useritem5":
-              MyFilms.conf.Stritem5 = wproperty;
-              MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
-              break;
-            case "useritemdetails1":
-              MyFilms.conf.StritemDetails1 = wproperty;
-              MyFilms.conf.StrlabelDetails1 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails1 + "', Label: '" + conf.StrlabelDetails1 + "'.");
-              break;
-            case "useritemdetails2":
-              MyFilms.conf.StritemDetails2 = wproperty;
-              MyFilms.conf.StrlabelDetails2 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails2 + "', Label: '" + conf.StrlabelDetails2 + "'.");
-              break;
-            case "useritemdetails3":
-              MyFilms.conf.StritemDetails3 = wproperty;
-              MyFilms.conf.StrlabelDetails3 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails3 + "', Label: '" + conf.StrlabelDetails3 + "'.");
-              break;
-            case "useritemdetails4":
-              MyFilms.conf.StritemDetails4 = wproperty;
-              MyFilms.conf.StrlabelDetails4 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails4 + "', Label: '" + conf.StrlabelDetails4 + "'.");
-              break;
-            case "useritemdetails5":
-              MyFilms.conf.StritemDetails5 = wproperty;
-              MyFilms.conf.StrlabelDetails5 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails5 + "', Label: '" + conf.StrlabelDetails5 + "'.");
-              break;
-            case "useritemdetails6":
-              MyFilms.conf.StritemDetails6 = wproperty;
-              MyFilms.conf.StrlabelDetails6 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails6 + "', Label: '" + conf.StrlabelDetails6 + "'.");
-              break;
-            case "mastertitle":
-              MyFilms.conf.StrTitle1 = wproperty;
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrTitle1 + "'."); 
-              break;
-            case "secondarytitle":
-              MyFilms.conf.StrTitle2 = wproperty;
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrTitle2 + "'."); 
-              break;
-            case "sorttitle":
-              MyFilms.conf.StrSTitle = wproperty;
-              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrSTitle + "'."); 
-              break;
-            default:
-              break;
-          }
+          UpdateUseritemWithValue(strUserItemSelection, wproperty);
           UpdateUserItems(); // save to currentconfig - save time for WinDeInit
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeFilms.SelectedListItem.ItemId, facadeFilms.SelectedListItem.Label);
           //Load_Config(Configuration.CurrentConfig, true);
@@ -14247,10 +14176,87 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "SearchHistory", conf.StrSearchHistory);
     }
 
+
+    internal static void UpdateUseritemWithValue(string strUserItemSelection, string wproperty)
+    {
+      switch (strUserItemSelection)
+      {
+        case "useritem1":
+          MyFilms.conf.Stritem1 = wproperty;
+          MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
+          break;
+        case "useritem2":
+          MyFilms.conf.Stritem2 = wproperty;
+          MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
+          break;
+        case "useritem3":
+          MyFilms.conf.Stritem3 = wproperty;
+          MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
+          break;
+        case "useritem4":
+          MyFilms.conf.Stritem4 = wproperty;
+          MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
+          break;
+        case "useritem5":
+          MyFilms.conf.Stritem5 = wproperty;
+          MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
+          break;
+        case "useritemdetails1":
+          MyFilms.conf.StritemDetails1 = wproperty;
+          MyFilms.conf.StrlabelDetails1 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails1 + "', Label: '" + conf.StrlabelDetails1 + "'.");
+          break;
+        case "useritemdetails2":
+          MyFilms.conf.StritemDetails2 = wproperty;
+          MyFilms.conf.StrlabelDetails2 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails2 + "', Label: '" + conf.StrlabelDetails2 + "'.");
+          break;
+        case "useritemdetails3":
+          MyFilms.conf.StritemDetails3 = wproperty;
+          MyFilms.conf.StrlabelDetails3 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails3 + "', Label: '" + conf.StrlabelDetails3 + "'.");
+          break;
+        case "useritemdetails4":
+          MyFilms.conf.StritemDetails4 = wproperty;
+          MyFilms.conf.StrlabelDetails4 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails4 + "', Label: '" + conf.StrlabelDetails4 + "'.");
+          break;
+        case "useritemdetails5":
+          MyFilms.conf.StritemDetails5 = wproperty;
+          MyFilms.conf.StrlabelDetails5 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails5 + "', Label: '" + conf.StrlabelDetails5 + "'.");
+          break;
+        case "useritemdetails6":
+          MyFilms.conf.StritemDetails6 = wproperty;
+          MyFilms.conf.StrlabelDetails6 = BaseMesFilms.Translate_Column(wproperty);
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails6 + "', Label: '" + conf.StrlabelDetails6 + "'.");
+          break;
+        case "mastertitle":
+          MyFilms.conf.StrTitle1 = wproperty;
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrTitle1 + "'.");
+          break;
+        case "secondarytitle":
+          MyFilms.conf.StrTitle2 = wproperty;
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrTitle2 + "'.");
+          break;
+        case "sorttitle":
+          MyFilms.conf.StrSTitle = wproperty;
+          LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrSTitle + "'.");
+          break;
+        default:
+          break;
+      }
+    }
+
     //*****************************************************************************************
     //*  Update userdefined mappings
     //*****************************************************************************************
-    private void UpdateUserItems()
+    internal static void UpdateUserItems()
     {
       using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)) // Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)
         
