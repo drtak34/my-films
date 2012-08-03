@@ -7437,7 +7437,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   item.ThumbnailImage = filename;
                   // item.NotifyPropertyChanged("ThumbnailImage");
 
-                  item.Label3 = "ID = " + person.id + ", URL = " + person.ThumbnailUrl;
+                  item.Label3 = "URL = " + person.ThumbnailUrl;
                   item.Label = personname;
                   // continue; // proceed with next item - no downloads ...
                 }
