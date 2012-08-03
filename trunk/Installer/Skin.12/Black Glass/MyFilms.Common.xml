@@ -33,6 +33,40 @@
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
 
+    <!-- WOL Powermanager Status display -->
+    <control>
+      <description>WOL Powermanager server 1 name and state</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>897</posX>
+      <posY>23</posY>
+      <font>font10</font>
+      <textcolor>aaffffff</textcolor>
+      <width>750</width>
+      <label>#WOLPowerManager.Servername0: #WOLPowerManager.Serverstate0</label>
+      <visible>plugin.isenabled(WOL-PowerManager)</visible>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>WOL Powermanager server 2 name and state</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>897</posX>
+      <posY>43</posY>
+      <font>font10</font>
+      <textcolor>aaffffff</textcolor>
+      <width>750</width>
+      <label>#WOLPowerManager.Servername1: #WOLPowerManager.Serverstate1</label>
+      <visible>plugin.isenabled(WOL-PowerManager)</visible>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+
     <!-- Global Overlay Filter Info -->
 
     <control>
