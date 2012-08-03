@@ -4061,7 +4061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Movie display ...
           {
             LogMyFilms.Debug("Load_Lstdetail() - Item is Film List Item - contains hierarchy = '" + currentItem.IsFolder + "'");
-            if (currentItem.IsFolder)
+            if (currentItem.IsFolder) // if it is a group/box-set, clear all properties
             {
               // GUIControl.ShowControl(GetID, 34);
               MyFilmsDetail.Init_Detailed_DB(false);
@@ -4079,6 +4079,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MyFilmsDetail.setGUIProperty("user.mastertitle.groupcount", groupcount, true);
               }
             }
+            else
+              MyFilmsDetail.clearGUIProperty("user.mastertitle.groupcount");
             #endregion
 
             string currentFilmCover = "";
@@ -5865,6 +5867,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// 
     private void GetSelectFromTMDB(string TMDBfunction)
     {
+      conf.WStrSort = conf.StrTitle1; // needed for forwardnavigation to local movies
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
       LogMyFilms.Debug("(GetSelectFromTMDB) - CallerFeature           : '" + TMDBfunction ?? "" + "'");
       LogMyFilms.Debug("(GetSelectFromTMDB) - GlobalFilterString      : '" + GlobalFilterString + "'");
@@ -6272,6 +6275,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       new Thread(delegate()
       {
+        string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+        LogMyFilms.Debug("GetImagesForTMDB - detected language = '" + language + "'");
+        Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+        TmdbConfiguration tmdbConf = api.GetConfiguration();
+
         #region images
         Thread.Sleep(25);
         Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
@@ -6313,6 +6321,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.IsRemote = (iMoviesLocally == 0);
             // newLabel = "* " + BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
 
+            #endregion
+
+            #region load trailer info from TMDB
+            TmdbMovieTrailers MovieTrailers = api.GetMovieTrailers(movie.PopMovie.id, language);
+            LogMyFilms.Debug("GetTrailers - total Results: '" + MovieTrailers.youtube.Count + "' YouTube Trailers found");
+            for (int j = 0; j < MovieTrailers.youtube.Count; j++)
+            {
+              LogMyFilms.Debug("GetTrailers - Trailer '" + j + "', name = '" + MovieTrailers.youtube[j].name + "', size = '" + MovieTrailers.youtube[j].size + "', source = '" + MovieTrailers.youtube[j].source + "'");
+              if (j == 0) item.Path = MovieTrailers.youtube[j].source;
+            }
+            LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
             #endregion
           }
           catch (Exception ex)
