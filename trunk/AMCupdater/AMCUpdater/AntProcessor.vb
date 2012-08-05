@@ -1469,8 +1469,8 @@ Public Class AntProcessor
                             End If
                             .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
                             If FieldName = "Picture" Then
-                                .PictureBoxOld.ImageLocation = Path.Combine(ImagePath, ValueOld)
-                                .PictureBoxNew.ImageLocation = Path.Combine(ImagePathTemp, ValueNew)
+                                .PictureBoxOld.ImageLocation = If((Path.Combine(ImagePath, ValueOld)), "")
+                                .PictureBoxNew.ImageLocation = If((Path.Combine(ImagePathTemp, ValueNew)), "")
                             End If
                         Catch ex As Exception
                             MsgBox("Exception adding data ('" + FieldName + "') to Movie Update Dialog: " + ex.Message, MsgBoxStyle.OkOnly)
