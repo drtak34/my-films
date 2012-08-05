@@ -537,7 +537,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override string GetModuleName()
         {
-          return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDetail); // return localized string for Module ID
+          return (GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDetail) + "/" + GUILocalizeStrings.Get(10798751)); // return localized string for Module ID -> MyFilms/Details/Overview
+
         }
 
         public override bool Init()
@@ -818,7 +819,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798757));
                         break;
                       default:
-                        GUIPropertyManager.SetProperty("#currentmodule", basename);
+                        GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798751)); // GUIPropertyManager.SetProperty("#currentmodule", basename);
                         break;
                     }
                     LogMyFilms.Debug("MSG_Setfocus: focused control = '" + dControl + "', set currentmodule to '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
@@ -901,7 +902,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         return true;
                       case (int)Controls.CTRL_BtnActorThumbs: // Show Actor Details Screen
                         GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
-                        // Hier Aktivitäten wie z.b. ListControl für Actors?
                         //GUIWindowManager.ShowPreviousWindow();
                         //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                         return true;
