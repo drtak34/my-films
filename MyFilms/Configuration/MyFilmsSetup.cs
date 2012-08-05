@@ -1364,20 +1364,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel2", BaseMesFilms.Translate_Column(AntItem2.Text.Trim()));
             AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem3", "Director");
             AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel3", BaseMesFilms.Translate_Column(AntItem3.Text.Trim()));
-            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem4", "Certification");
+            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem4", "Languages");
             AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", BaseMesFilms.Translate_Column(AntItem4.Text.Trim()));
-            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", "Languages");
+            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", "Certification");
             AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", BaseMesFilms.Translate_Column(AntItem5.Text.Trim()));
 
             AntItemDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails1", "Category");
             AntLabelDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails1", BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim()));
             AntItemDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails2", "Country");
             AntLabelDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim()));
-            AntItemDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", "Year");
+            AntItemDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", "Director");
             AntLabelDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim()));
-            AntItemDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", "Director");
+            AntItemDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", "Producer");
             AntLabelDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim()));
-            AntItemDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", "Producer");
+            AntItemDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", "Writer");
             AntLabelDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim()));
             AntItemDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails6", "Certification");
             AntLabelDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails6", BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim()));
@@ -2247,29 +2247,29 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               SearchFileName.Checked = true;
 
               //Presets for useritems for main screen:
-              AntItem1.Text = "Country";
+              AntItem1.Text = "Category";
               AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
-              AntItem2.Text = "Certification";
+              AntItem2.Text = "Country";
               AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
-              AntItem3.Text = "Category";
+              AntItem3.Text = "Director";
               AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
-              AntItem4.Text = "Writer";
+              AntItem4.Text = "Languages";
               AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
-              AntItem5.Text = "Producer";
+              AntItem5.Text = "Certification";
               AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
               //Presets for useritems for details screen:
-              AntItemDetails1.Text = "Country";
+              AntItemDetails1.Text = "Category";
               AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
-              AntItemDetails2.Text = "Certification";
+              AntItemDetails2.Text = "Country";
               AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
-              AntItemDetails3.Text = "Category";
+              AntItemDetails3.Text = "Director";
               AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
-              AntItemDetails4.Text = "Writer";
+              AntItemDetails4.Text = "Producer";
               AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
-              AntItemDetails5.Text = "Producer";
+              AntItemDetails5.Text = "Writer";
               AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
-              AntItemDetails6.Text = "Date";
+              AntItemDetails6.Text = "Certification";
               AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
             }
             Tab_ExternalCatalogs.Enabled = true;
@@ -4822,9 +4822,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           MyFilmsInputBox input = new MyFilmsInputBox();
           input.Text = "MyFilms - Setup Wizard";
-          input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
-          input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
-          input.Country = "USA";
+          input.CatalogTypeSelectedIndex = 10; // preset to ANT MC  version 4.x
+          input.CatalogType = "Ant Movie Catalog Xtended (V4.1)"; // preset to Ant Movie Catalog Xtended (V4.1) // input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2) 
+          input.Country = "SampleMovies"; // preset to sample movies for skinners
           input.ShowDialog();
           string newConfig_Name = input.ConfigName;
           string newCatalogType = input.CatalogType;
@@ -4851,7 +4851,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Ask user to select existing or create new catalog...
           bool useExistingCatalog = true;
 
-          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) // Configuration.CatalogType.AntMovieCatalog3
           {
             if (MyFilms_PluginMode != "normal" || MyFilms_PluginMode == "normal") // added to only allow new catalogs in test mode // edit: reenabled for normal mode
             {
@@ -4923,7 +4923,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Set values and Presets ...
           AntStorage.Text = "Source";
           cbPictureHandling.Text = "Relative Path"; // set option for picture path handling (grabber)
-          AntStorageTrailer.Text = "Borrower";
+          
+          switch (newCatalogSelectedIndex)
+          {
+            case 0:
+              AntStorageTrailer.Text = "Borrower";
+              break;
+            default:
+              AntStorageTrailer.Text = "SourceTrailer";
+              break;
+          }
+
           if (MessageBox.Show("Do you want to use Original Title as Master Title ? \n(If you select no, Translated Title will be used)", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
           {
             AntTitle1.Text = "OriginalTitle";
@@ -4946,7 +4956,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           cbPictureHandling.Text = "Relative Path";
 
-          // Preset separators:
+          #region preset separators
           ListSeparator1.Text = ",";
           ListSeparator2.Text = ";";
           ListSeparator3.Text = "|";
@@ -4957,6 +4967,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           RoleSeparator3.Text = " as ";
           RoleSeparator4.Text = string.Empty;
           RoleSeparator5.Text = string.Empty;
+          #endregion
 
           chkFanart.Checked = true;
           chkFanartDefaultViews.Checked = false;
@@ -5010,72 +5021,124 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           chkDfltViews.Checked = true; // Use default cover for missing thumbs
           chkShowIndexedImgInIndViews.Checked = true; // activate indexed Images for in
           chkDfltViewsAll.Checked = true; // Use group view thumbs for all group views
-          // Logos
+
+          #region Logos
           chkLogos.Checked = true;
           comboBoxLogoSpacing.Text = "2";
           comboBoxLogoPresets.Text = "Use Logos of currently selected skin";
+          #endregion
+
           //GrabberConfig
           //txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml";
           chkGrabber_ChooseScript.Checked = true; //Don't use default script (ask)
 
           CheckWatchedPlayerStopped.Checked = true; // set watched status handling
 
-          AntItem1.Text = "Category";
-          AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
-          AntItem2.Text = "Country";
-          AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
-          AntItem3.Text = "Director";
-          AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
-          AntItem4.Text = "Certification";
-          AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
-          AntItem5.Text = "Languages";
-          AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+          #region set user items for main and details
+          switch (newCatalogSelectedIndex) // if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) 
+          {
+            case 0: // AMC3
+              AntItem1.Text = "Category";
+              AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+              AntItem2.Text = "Country";
+              AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+              AntItem3.Text = "Director";
+              AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+              AntItem4.Text = "Languages";
+              AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+              AntItem5.Text = "Date";
+              AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
-          AntItemDetails1.Text = "Category";
-          AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
-          AntItemDetails2.Text = "Country";
-          AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
-          AntItemDetails3.Text = "Year";
-          AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
-          AntItemDetails4.Text = "Director";
-          AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
-          AntItemDetails5.Text = "Producer";
-          AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
-          AntItemDetails6.Text = "Certification";
-          AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
+              AntItemDetails1.Text = "Category";
+              AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+              AntItemDetails2.Text = "Country";
+              AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+              AntItemDetails3.Text = "Director";
+              AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+              AntItemDetails4.Text = "Producer";
+              AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+              AntItemDetails5.Text = "Languages";
+              AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+              AntItemDetails6.Text = "Date";
+              AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
+              break;
+            default:
+              AntItem1.Text = "Category";
+              AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+              AntItem2.Text = "Country";
+              AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+              AntItem3.Text = "Director";
+              AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+              AntItem4.Text = "Languages";
+              AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+              AntItem5.Text = "Certification";
+              AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
-          // add default Views
+              AntItemDetails1.Text = "Category";
+              AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+              AntItemDetails2.Text = "Country";
+              AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+              AntItemDetails3.Text = "Director";
+              AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+              AntItemDetails4.Text = "Producer";
+              AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+              AntItemDetails5.Text = "Writer";
+              AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+              AntItemDetails6.Text = "Certification";
+              AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
+              break;
+          }
+          #endregion
+
+          #region add default Views
           MyCustomViews.View.Clear();
           AddDefaultViews();
+          #endregion
 
-          cbWatched.Text = "Checked";
+          #region Set watched field
+          switch (newCatalogSelectedIndex)
+          {
+            case 0:
+              cbWatched.Text = "Checked";
+              break;
+            case 10:
+              cbWatched.Text = "Watched";
+              break;
+            default:
+              cbWatched.Text = "Checked";
+              break;
+          }
+          #endregion
 
           // chkSuppress.Checked = false;
 
-          // Now ask user for his movie directory...
-          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)
+          #region Now ask user for his movie directory...
+          switch (newCatalogSelectedIndex)
           {
-            MessageBox.Show("Now choose the folder containing your movies.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            case 0:
+            case 10:
+              MessageBox.Show("Now choose the folder containing your movies.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            string samplemovies = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\SampleMovies";
-            if (System.IO.Directory.Exists(samplemovies))
-              folderBrowserDialog1.SelectedPath = samplemovies;
+              string samplemovies = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\SampleMovies";
+              if (System.IO.Directory.Exists(samplemovies))
+                folderBrowserDialog1.SelectedPath = samplemovies;
 
-            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-              if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
-                  this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+              if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+              {
+                if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
+                    this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
 
-              if (PathStorage.Text.Length == 0)
-                PathStorage.Text = folderBrowserDialog1.SelectedPath;
-              else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
-            }
-            //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (PathStorage.Text.Length == 0)
+                  PathStorage.Text = folderBrowserDialog1.SelectedPath;
+                else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
+              }
+              //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              break;
+            default:
+              PathStorage.Text = "";
+              break;
           }
-          else
-          {
-            PathStorage.Text = "";
-          }
+          #endregion
 
           // Create country specific settings
           cbGrabberOverrideLanguage.Text = newCountry;
@@ -5090,6 +5153,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           switch (newCountry)
           {
             #region set country specific settings
+            case "SampleMovies": // to allow skinnders use IMDB-Full and get all properties loaded !
+              txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Full.xml";
+              cbGrabberOverrideGetRoles.Text = "true";
+              cbGrabberOverridePersonLimit.Text = "10";
+              cbGrabberOverrideTitleLimit.Text = "0";
+              ItemSearchGrabberScriptsFilter.Text = "en, all";
+              break;
             case "Austria":
             case "Germany":
               txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.DE-OFDB.xml";
@@ -5167,7 +5237,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             #endregion
           }
 
-          //AMCupdater
+          #region AMCUpdater settings
           chkAMCUpd.Checked = true; // Use AMCupdater
           AMCMovieScanPath.Text = PathStorage.Text;
           AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
@@ -5185,9 +5255,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //btnCreateAMCDefaultConfig.Enabled = true;
           //btnCreateAMCDesktopIcon.Enabled = true;
           //AMCMovieScanPath.Enabled = true;
+          #endregion
 
-
-          // Create config file for AMCupdater
+          #region Create config file for AMCupdater
           string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
           if (System.IO.File.Exists(wfiledefault + ".xml"))
           {
@@ -5202,10 +5272,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Save_XML_AMCconfig(Config_Name.Text); // save new config
             Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
           }
+          #endregion
 
-          // Create Desktop Icon for AMCupdater with config created...
+          #region Create Desktop Icon for AMCupdater with config created...
           if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) // only for AMC configs
             CreateAMCDesktopIcon();
+          #endregion
 
           // Change Config to selected catalog type
           CatalogType.SelectedIndex = newCatalogSelectedIndex;

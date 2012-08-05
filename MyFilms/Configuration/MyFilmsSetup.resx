@@ -545,14 +545,17 @@ would result in getting all movies displayed as "watched". So you might have to 
 that it will not get populated accidentially (e.g. AMCupdater Medialabel) or set Value for unwatched to the Value you set to the field by default.
 
 If you are using "Enhanced Watched Status Handling" and use AMC, you should select another field than "Checked", as AMC handles Checked field 
-as "boolean" - while Enhanced Watched Status handling required a text field. (When saving in AMC you would loose enhanced infos).
+as "boolean" - while Enhanced Watched Status handling required a text field (When saving in AMC3 you would loose enhanced infos).
+A good recommendation is "Borrower" (AMC3) or the new extended "Watched" field in AMC4 when using Enhanced/Multi-user Watched Status Handling.
 
 If you use a field that is already populated, it might initially show your movies as "watched" - e.g. when using "MediaLabel" and having imported
 movies with AMCupdater's default settings, MediaLabel will be populated with "AMCU".</value>
   </data>
   <data name="chkEnhancedWatchedStatusHandling.ToolTip" xml:space="preserve">
     <value>Select this option if you want to update the watched status field with "enhanced watched status info".
-It requires the field to be able to store text info (e.g. borrowers field).
+
+It requires the field to be able to store text info (e.g. Borrower in AMC3 or the new extended Watched field in AMC4).
+
 Make sure, you don't share the field with other functions.
 If checked, watched status will be stored with extended info:
 - Watched count "global", representing the "total played"
@@ -566,7 +569,8 @@ It will NOT change, if user manually sets a movie to watched or unwatched.</valu
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value>This option allows AMC users to update field info for storing your "watched status".
 
-You can choose a field to be used for "watched status" - a good recommendation is "checked".
+You can choose a field to be used for "watched status" - a good recommendation is "Checked" or the new extended "Watched" field in AMC4 
+when using Enhanced/Multi-user Watched Status Handling.
 You can choose to update this field when starting a movie or when playback is finished.
 You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
 However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
@@ -1237,7 +1241,9 @@ This will give you a quick way to test MyFilms right away.
 You still can tweak all settings later to your personal preferences.
 
 Note:
-If you want to test or do skinning, but don't have a working catalog, you can select the "SampleMovies.xml" catalog.</value>
+If you want to test or do skinning, but don't have a working catalog, you can select the "SampleMovies.xml" catalog.
+In that case, it is also recommended to select "SampleMovies" in Country dopdown, 
+this will preset the IMDB-Full grabber for you and make sure, your DB will be populated also with extended frields.</value>
   </data>
   <data name="btnServerSync.ToolTip" xml:space="preserve">
     <value>Central Configuration - Network Setup:
