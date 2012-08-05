@@ -2316,7 +2316,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               #endregion
               break;
             case (int)Controls.CTRL_BtnSearch: // Search dialog search
-              conf.Boolselect = false;
+              // conf.Boolselect = false; // removed, as it was breaking the back navigation stack !!!
               Change_Search_Options();
               GUIControl.UnfocusControl(GetID, (int)Controls.CTRL_BtnSearch);
               GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
@@ -5253,10 +5253,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case "title":
             if (control_searchText(keyboard.Text))
             {
+              SaveListState(false);
               conf.ViewContext = ViewContext.Movie;
               conf.StrSelect = conf.StrTitle1 + " like '*" + keyboard.Text + "*'";
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]"; // selection ...
+              conf.StrTxtSelect = GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]"; // selection ...
               conf.StrTitleSelect = "";
+              SetLabelView("search"); // show "search"
               GetFilmList();
             }
             else return; // false;
@@ -5264,11 +5266,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case "actors":
             if (control_searchText(keyboard.Text))
             {
+              SaveListState(false);
+              conf.StrTitleSelect = "";
+              conf.StrViewSelect = "";
+
+              filmcover.Filename = "";
+              viewcover.Filename = "";
+              personcover.Filename = "";
+              groupcover.Filename = "";
+              
               conf.ViewContext = ViewContext.Person;
-              conf.WStrSort = "ACTORS";
+              conf.WStrSort = "Actors";
               conf.Wselectedlabel = "";
               conf.WStrSortSens = " ASC";
               conf.StrPersons = keyboard.Text;
+              conf.StrTxtSelect = GUILocalizeStrings.Get(344) + " [*" + keyboard.Text + @"*]"; // selection ...
+              conf.StrTitleSelect = "";
+              SetLabelSelect(conf.StrTxtSelect ?? "");
+              SetLabelView("search"); // show "search"
               getSelectFromDivx("Actors like '*" + keyboard.Text + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
             }
             else return; // false;
@@ -13517,40 +13532,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
 
       #region function selection (actor, director, producer)
+
+      string[] roles = { "Producer", "Director", "Writer", "Actors", "Persons" };
       dlg.Reset();
       choiceSearch.Clear();
       dlg.SetHeading(GUILocalizeStrings.Get(10798611) + wperson);
 
       LogMyFilms.Debug("Adding search results for roles to menu ...");
-      DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      if (wr.Length > 0)
+      DataRow[] wr;
+      int personCount;
+      foreach (string role in roles)
       {
-        dlg.Add(GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
-        choiceSearch.Add("Producer");
-      }
-      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      if (wr.Length > 0)
-      {
-        dlg.Add(GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
-        choiceSearch.Add("Director");
-      }
-      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      if (wr.Length > 0)
-      {
-        dlg.Add(GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
-        choiceSearch.Add("Writer");
-      }
-      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      if (wr.Length > 0)
-      {
-        dlg.Add(GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
-        choiceSearch.Add("Actors");
-      }
-      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Persons like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      if (wr.Length > 0)
-      {
-        dlg.Add(GUILocalizeStrings.Get(10798951) + "  (" + wr.Length + ")");
-        choiceSearch.Add("Persons");
+        wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, role + " like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+        if (wr.Length > 0)
+        {
+          personCount = CountPersonsFound(wr, role, wperson);
+          dlg.Add(BaseMesFilms.Translate_Column(role) + " - " + personCount + " in " + wr.Length + " movie(s)");
+          choiceSearch.Add(role);
+        }
       }
       if (choiceSearch.Count == 0)
       {
@@ -13563,42 +13562,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       dlg.DoModal(GetID);
+
       if (dlg.SelectedLabel == -1) return;
-      //conf.StrSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'";
-      //switch (choiceSearch[dlg.SelectedLabel])
-      //{
-      //  case "Actors":
-      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]"; // "Selection"
-      //    break;
-      //  case "Producer":
-      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
-      //    break;
-      //  case "Director":
-      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
-      //    break;
-      //  case "Writer":
-      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798684) + " [*" + wperson + @"*]";
-      //    break;
-      //  case "Persons":
-      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
-      //    break;
-      //  default:
-      //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
-      //    break;
-      //}
+
       SaveListState(false);
+      
+      //conf.StrSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'";
       conf.StrTitleSelect = "";
       conf.StrViewSelect = "";
+      conf.StrFilmSelect = "";
       conf.ViewContext = ViewContext.Person;
       conf.WStrSort = choiceSearch[dlg.SelectedLabel];
       conf.Wselectedlabel = "";
       conf.WStrSortSens = " ASC";
       conf.StrPersons = wperson;
-      getSelectFromDivx(choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
+      conf.StrTxtSelect = BaseMesFilms.Translate_Column(choiceSearch[dlg.SelectedLabel]) + " [*" + wperson + @"*]";
       SetLabelView("search"); // show "search"
+      getSelectFromDivx(choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
     }
 
-    private int CountPersonsFound(string WStrSort, string newStar)
+    private int CountPersonsFound(DataRow[] wr, string WStrSort, string searchexpression)
     {
       int wi;
       int count = 0;
@@ -13610,7 +13593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool showEmptyValues = MyFilms.conf.BoolShowEmptyValuesInViews;
 
       watch.Reset(); watch.Start();
-      foreach (DataRow row in r)
+      foreach (DataRow row in wr)
       {
         champselect = row[WStrSort].ToString().Trim();
         if (issplitfield && !dontsplitvalues)
@@ -13636,8 +13619,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      watch.Stop();
       LogMyFilms.Debug("CountViewItems - Finished Count ('" + count + "') (" + (watch.ElapsedMilliseconds) + " ms)  - Read View Names for '" + WStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "')");
+      count = set.Count(t => t.IndexOf(searchexpression, StringComparison.OrdinalIgnoreCase) >= 0); // count = set.Count(t => t.ToUpperInvariant().Contains(searchexpression.ToUpperInvariant()));
+      watch.Stop();
+      LogMyFilms.Debug("CountViewItems - '" + count + "' Items found for SearchExpression '" + searchexpression + "' (" + (watch.ElapsedMilliseconds) + " ms)");
       return count;
     }
 
@@ -13947,9 +13932,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceSearch.Clear();
             for (int i = 0; i < w_tableau.Count; i++)
             {
-              dlg.Add(
-                string.Format(
-                  GUILocalizeStrings.Get(10798619), w_count[i], BaseMesFilms.Translate_Column(w_tableau[i].ToString())));
+              dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), w_count[i], BaseMesFilms.Translate_Column(w_tableau[i].ToString())));
               choiceSearch.Add(w_tableau[i].ToString());
             }
             dlg.DoModal(GetID);
@@ -13957,17 +13940,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             wproperty = choiceSearch[dlg.SelectedLabel];
             if (control_searchText(keyboard.Text))
             {
+              SaveListState(false);
               if (ds.Movie.Columns[wproperty].DataType.Name == "string")
               {
                 conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
-                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) +
-                                    " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
+                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
               }
               else
               {
                 conf.StrSelect = wproperty + " = '" + keyboard.Text + "'";
-                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) +
-                                    " [" + keyboard.Text + @"]";
+                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [" + keyboard.Text + @"]";
               }
               conf.StrTitleSelect = string.Empty;
               // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
@@ -13986,10 +13968,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'");
             if (control_searchText(keyboard.Text))
             {
-              DataRow[] wdr = BaseMesFilms.ReadDataMovies(
-                GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-              LogMyFilms.Debug(
-                "(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
+              DataRow[] wdr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+              LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
               LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
               LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
               LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
@@ -14068,7 +14048,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   break;
               }
 
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // Zebons Version
+              conf.StrTxtSelect = dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // Zebons Version
               //conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]"; // Guzzi Version
               conf.StrTitleSelect = "";
               // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
