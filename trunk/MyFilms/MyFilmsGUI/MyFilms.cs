@@ -10536,8 +10536,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       dlg.DoModal(GetID);
 
-      if (dlg.SelectedLabel == -1)
-        return;
+      if (dlg.SelectedLabel == -1) return;
       GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
 
       #region Context actions
@@ -10601,6 +10600,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "showindexedvalues":
           {
+            #region show indexed values
             GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
             List<string> choiceViewMenu = new List<string>();
 
@@ -10672,6 +10672,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             LogMyFilms.Debug("Context_Menu_Movie() : Option 'show indexed values' changed to '" + MyFilms.conf.IndexedChars + "'");
             Refreshfacade();
+            #endregion
             break;
           }
 
@@ -10706,14 +10707,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "menuadd":
           {
             MFview.ViewRow newRow = MyFilms.conf.CustomViews.View.NewViewRow();
-
-            if (conf.ViewContext != ViewContext.Menu)
-            {
-              dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
-              upd_choice[ichoice] = "menuadd";
-              ichoice++;
-            }
-
             newRow.ViewEnabled = true;
             //newRow.ShowEmpty = conf.BoolShowEmptyValuesInViews;
             switch (conf.ViewContext)

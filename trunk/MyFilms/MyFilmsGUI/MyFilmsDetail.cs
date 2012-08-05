@@ -969,10 +969,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string title = string.Empty; // variable for searchtitle creation
             string mediapath = string.Empty; // variable for searchpath creation (for nfo/xml/xbmc reader)
             Searchtitles sTitles; // variable to get all searchtitles 
+            MFMovie movie = new MFMovie(); // movie object for rating and trakt calls
+
             switch (choiceView)
             {
               case "mainmenu":
 
+                #region show root menu
                 if (dlgmenu == null) return;
                 dlgmenu.Reset();
                 dlgmenu.SetHeading(GUILocalizeStrings.Get(10798701)); // update menu
@@ -1000,6 +1003,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 dlgmenu.Add(GUILocalizeStrings.Get(931)); //rating
                 choiceViewMenu.Add("rating");
+
+                if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) // user rating only for AMC4+
+                {
+                  dlgmenu.Add(GUILocalizeStrings.Get(10798944)); // User Rating
+                  choiceViewMenu.Add("userrating");
+                }
 
                 if (MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual)
                 {
@@ -1048,14 +1057,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   break;
                 }
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                #endregion
                 break;
 
               case "playtrailer":
+
+                #region play trailer
                 // first check, if trailer files are available, offer options
                 //if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
-                if (
-                  !string.IsNullOrEmpty(
-                    MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+                if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
                 {
                   trailerPlayed = true;
                   Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
@@ -1083,11 +1093,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
                   }
                 }
+                #endregion
                 break;
 
               case "playtraileronlinevideos":
               case "playtraileronlinevideosappleitunes":
               case "playtraileronlinevideosimdbtrailer":
+
+                #region play trailer from specific site
                 string site = string.Empty;
                 string titleextension = string.Empty;
                 string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
@@ -1150,10 +1163,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
                 }
+                #endregion
                 break;
 
               case "togglewatchedstatus":
 
+                #region toggle watched status
                 if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                 {
                   if (MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0)
@@ -1182,39 +1197,75 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                 }
                 afficher_detail(true);
+                #endregion
                 break;
 
               case "rating":
-                MyFilmsDialogSetRating dlgRating =
-                  (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
-                if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
                 {
-                  dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
-                  if (dlgRating.Rating > 10) dlgRating.Rating = 10;
-                }
-                else dlgRating.Rating = 0;
+                  #region DB rating
+                  MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
+                  if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
+                  {
+                    dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
+                    if (dlgRating.Rating > 10) dlgRating.Rating = 10;
+                  }
+                  else dlgRating.Rating = 0;
 
-                dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
-                dlgRating.DoModal(GetID);
-                // if (dlgRating.SelectedLabel == -1 || dlgmenu.SelectedLabel != 2)  // If "ESC" or not returning from "ok"
-                if (dlgRating.Result == MyFilmsDialogSetRating.ResultCode.Cancel) // If "ESC" or not returning from "ok"
+                  dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
+                  dlgRating.DoModal(GetID);
+                  // if (dlgRating.SelectedLabel == -1 || dlgmenu.SelectedLabel != 2)  // If "ESC" or not returning from "ok"
+                  if (dlgRating.Result == MyFilmsDialogSetRating.ResultCode.Cancel) // If "ESC" or not returning from "ok"
+                  {
+                    Change_Menu("mainmenu");
+                    return;
+                  }
+                  MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating;
+
+                  Update_XML_database();
+                  afficher_detail(true);
+
+                  // tell any listeners that user rated the movie
+                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
+                  string value = dlgRating.Rating.ToString();
+                  if (RateItem != null) RateItem(movie, value);
+                  #endregion
+                }
+                break;
+
+              case "userrating":
                 {
-                  Change_Menu("mainmenu");
-                  return;
+                  #region User rating
+                  MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
+                  if (MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"].ToString().Length > 0)
+                  {
+                    dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"];
+                    if (dlgRating.Rating > 10) dlgRating.Rating = 10;
+                  }
+                  else dlgRating.Rating = 0;
+
+                  dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
+                  dlgRating.DoModal(GetID);
+                  // if (dlgRating.SelectedLabel == -1 || dlgmenu.SelectedLabel != 2)  // If "ESC" or not returning from "ok"
+                  if (dlgRating.Result == MyFilmsDialogSetRating.ResultCode.Cancel) // If "ESC" or not returning from "ok"
+                  {
+                    Change_Menu("mainmenu");
+                    return;
+                  }
+                  MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating;
+
+                  Update_XML_database();
+                  afficher_detail(true);
+
+                  // tell any listeners that user rated the movie
+                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
+                  string value = dlgRating.Rating.ToString();
+                  if (RateItem != null) RateItem(movie, value);
+                  #endregion
                 }
-                MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating;
-
-                Update_XML_database();
-                afficher_detail(true);
-
-                // tell any listeners that user rated the movie
-                MFMovie movie = new MFMovie();
-                movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
-                string value = dlgRating.Rating.ToString();
-                if (RateItem != null) RateItem(movie, value);
                 break;
 
               case "updatesmenu":
+                #region updates menu
                 if (dlgmenu == null) return;
                 dlgmenu.Reset();
                 choiceViewMenu.Clear();
@@ -1279,6 +1330,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   return;
                 }
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                #endregion
                 break;
 
               case "globalmappings": // map useritems from GUI
@@ -1387,6 +1439,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #endregion
               
               case "fanartcovermenu":
+                #region fanart and cover menu (currently not used)
                 if (dlgmenu == null) return;
                 dlgmenu.Reset();
                 choiceViewMenu.Clear();
@@ -1458,9 +1511,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   return;
                 }
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                #endregion
                 break;
 
               case "trakt":
+                #region trakt main menu
                 if (dlgmenu == null) return;
                 dlgmenu.Reset();
                 choiceViewMenu.Clear();
@@ -1509,6 +1564,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   return;
                 }
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel]);
+                #endregion
                 break;
 
               case "trakt-Main":
@@ -1598,6 +1654,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "trailermenu":
+                #region trailer menu
                 if (dlgmenu == null) return;
                 dlgmenu.Reset();
                 choiceViewMenu.Clear();
@@ -1606,20 +1663,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
                 {
                   string trailercount = "";
-                  if (
-                    string.IsNullOrEmpty(
-                      MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim())) trailercount = "0";
+                  if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim())) 
+                    trailercount = "0";
                   else
                   {
-                    string[] split1 =
-                      MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(
-                        new Char[] { ';' });
+                    string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
                     trailercount = split1.Count().ToString();
                   }
                   if (trailercount != "0")
                   {
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");
-                      //play trailer (<number trailers present>)
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")"); //play trailer (<number trailers present>)
                     choiceViewMenu.Add("playtrailer");
                   }
                 }
@@ -1655,20 +1708,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   return;
                 }
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                #endregion
                 break;
 
               case "subtitles":
-                if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() != null)
+                if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() != null) // ShowSubtitleMenu(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                 {
-                  // ShowSubtitleMenu(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
-                  if (Helper.IsSubCentralAvailableAndEnabled)
-                  {
-                    GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.SubCentral);
-                  }
-                }
+                  if (Helper.IsSubCentralAvailableAndEnabled) GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.SubCentral);
+                } 
                 break;
 
               case "fileselect":
+                #region file selection (source)
                 string wfile = string.Empty;
                 string wdirectory = string.Empty;
                 if (System.IO.File.Exists(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Check if Sourcefile exists
@@ -1690,6 +1741,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Update_XML_database();
                   afficher_detail(true);
                 }
+                #endregion
                 break;
 
               case "item1":
@@ -1785,6 +1837,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               case "delete":
                 {
+                  #region delete item
                   if (dlgmenu == null) return;
                   dlgmenu.Reset();
                   choiceViewMenu.Clear();
@@ -1806,10 +1859,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return;
                   }
                   Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                  #endregion
                   break;
                 }
 
               case "removefromdb":
+                #region remove from DB
                 dlgYesNo.Reset();
                 dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079831)); //Remove movie from catalog
                 dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433)); //confirm suppression
@@ -1831,8 +1886,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Change_Menu("delete");
                   return;
                 }
+                #endregion
                 break;
+
               case "deletefromdisk":
+                #region delete item from disk
                 dlgYesNo.Reset();
                 dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079832)); //Delete movie file(s) from disk
                 dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927)); // warning
@@ -1855,8 +1913,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Change_Menu("delete");
                   return;
                 }
+                #endregion
                 break;
+
               case "deletefromdbanddisk":
+                #region delete item from DB and disk
                 dlgYesNo.Reset();
                 dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079833)); //Delete from catalog and disk
                 dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927)); // warning
@@ -1877,6 +1938,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Change_Menu("delete");
                   return;
                 }
+                #endregion
                 break;
 
               case "updproperty":
@@ -1983,6 +2045,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
 
               case "updremovealldetails":
+                #region reset movie details
                 ArrayList deleteItems = MyFilms.GetDisplayItems("deletedetails");
                 foreach (string[] displayItem in deleteItems)
                 {
@@ -2014,9 +2077,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                   }
                 }
-
                 Update_XML_database();
                 afficher_detail(true);
+                #endregion
                 break;
               
               case "updmediainfos":
@@ -2166,7 +2229,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
                 case "grabber":
-                    bool wChooseScript = MyFilms.conf.StrGrabber_ChooseScript;
+                #region grabber
+                bool wChooseScript = MyFilms.conf.StrGrabber_ChooseScript;
                     if (!System.IO.File.Exists(MyFilms.conf.StrGrabber_cnf) && !MyFilms.conf.StrGrabber_ChooseScript)
                     {
                         dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
@@ -2190,6 +2254,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.All, false, sTitles);
                     // afficher_detail(true); // -> will be executes by OnDetailsUpdated message handler later ...
                     setProcessAnimationStatus(false, m_SearchAnimation); // make sure it's switched off
+                #endregion
                     break;
 
                 case "ant-nfo-reader":
@@ -2316,6 +2381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "fanartmanager":
+                    #region fanart manager
                     LogMyFilms.Info("Fanart Manager : Not yet implemented - using old submenu instead!");
                     if (dlgmenu == null) return;
                     dlgmenu.Reset();
@@ -2353,6 +2419,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       return;
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    #endregion
                     break;
 
                 case "loadcover":
