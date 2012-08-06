@@ -10597,27 +10597,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       public static void AddPersonsToDownloadQueue() // add persons of current movie to download queue
       {
-        new System.Threading.Thread(delegate()
+        new Thread(delegate()
         {
           {
-            if (MyFilms.conf.UseThumbsForPersons && System.IO.Directory.Exists(MyFilms.conf.StrPathArtist))
+            try
             {
-              string persons = MyFilms.r[MyFilms.conf.StrIndex]["Persons"].ToString();
-              ArrayList w_tableau = new ArrayList();
-              w_tableau = MyFilms.Search_String(persons);
-              foreach (object t in w_tableau)
+              if (MyFilms.conf.UseThumbsForPersons && Directory.Exists(MyFilms.conf.StrPathArtist) && MyFilms.r != null && MyFilms.r.Length > MyFilms.conf.StrIndex)
               {
-                string personsname = t.ToString();
-                if (!(File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
+                string persons = MyFilms.r[MyFilms.conf.StrIndex]["Persons"].ToString();
+                ArrayList w_tableau = new ArrayList();
+                w_tableau = MyFilms.Search_String(persons);
+                foreach (object t in w_tableau)
                 {
-                  if (downloadPersonImage(personsname))
-                    LogMyFilms.Debug("Person '" + personsname + "' added to downloadQueue !");
-                  else
-                    LogMyFilms.Debug("Person '" + personsname + "' already in downloadQueue !");
+                  string personsname = t.ToString();
+                  if (!(File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
+                  {
+                    if (downloadPersonImage(personsname))
+                      LogMyFilms.Debug("Person '" + personsname + "' added to downloadQueue !");
+                    else
+                      LogMyFilms.Debug("Person '" + personsname + "' already in downloadQueue !");
+                  }
+                  else LogMyFilms.Debug("Person '" + personsname + "' NOT added to downloadQueue - image already exists !");
                 }
-                else LogMyFilms.Debug("Person '" + personsname + "' NOT added to downloadQueue - image already exists !");
+                // if (PersonstoDownloadQueue.Count > 0 && !downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // already doine in submethod !
               }
-              // if (PersonstoDownloadQueue.Count > 0 && !downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // already doine in submethod !
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Error("AddPersonsToDownloadQueue() - Error adding persons to download queue: " + ex.Message);
             }
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
