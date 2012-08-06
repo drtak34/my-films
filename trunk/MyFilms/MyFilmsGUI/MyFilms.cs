@@ -7189,11 +7189,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           Thread.Sleep(50);
           watch.Reset(); watch.Start();
+          bool isReversed = conf.BoolReverseNames;
+          string[] FacadeLabel = new string[facadeFilms.Count];
           int[] facadeCounts = new int[facadeFilms.Count];
           string label2NamePrefix = BaseMesFilms.Translate_Column(wStrSort);
           try
           {
-            for (int j = 0; j < facadeFilms.Count; j++) facadeCounts[j] = 0;
+            for (int j = 0; j < facadeFilms.Count; j++)
+            {
+              facadeCounts[j] = 0;
+              FacadeLabel[j] = (isReversed) ? ReReverseName(facadeFilms[j].Label) : facadeFilms[j].Label;
+            }
 
             for (int j = 0; j < rtemp.Length; j++)
             {
@@ -7201,7 +7207,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string value = rtemp[j][wStrSort].ToString();
               for (i = 0; i < facadeFilms.Count; i++)
               {
-                if (value.Contains(facadeFilms[i].Label)) // if (value.IndexOf(facadeLabels[i], StringComparison.OrdinalIgnoreCase) > 0)
+                if (value.Contains(FacadeLabel[i])) // if (value.IndexOf(facadeLabels[i], StringComparison.OrdinalIgnoreCase) > 0)
                 {
                   facadeCounts[i]++;
                   facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
@@ -7238,11 +7244,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIListItem item = facadeFilms[i];
               IMDBActor person = null;
 
+              string personFacadeName = item.Label.Replace(EmptyFacadeValue, "");
               string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
               string filename = MyFilms.conf.StrPathArtist + "\\" + personname + ".jpg";  // string filename = Path.Combine(MyFilms.conf.StrPathArtist, personname); //File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
               bool VDBexists = false;
 
-              item.Label = personname + " (updating...)"; 
+              item.Label = personFacadeName + " (updating...)"; 
 
               #region get person info from VDB
               item.Label3 = "Loading details from VDB ..."; 
@@ -7277,7 +7284,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("Skip update for '" + personname + "' - VDB entry and image already present !");
                 item.MusicTag = person;
                 item.Label3 = "";
-                item.Label = personname;
+                item.Label = personFacadeName;
                 if (StopLoadingViewDetails) break; // stop download if we have exited window
                 continue;
               }
@@ -7417,14 +7424,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     VideoDatabase.SetActorInfo(actorId, person);
                     //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-                    item.Label = personname;
+                    item.Label = personFacadeName;
                     item.Label3 = (VDBexists) ? ("Updated ID" + actorId + ", URL = " + person.ThumbnailUrl) : ("Added ID" + actorId + ", URL = " + person.ThumbnailUrl);
                     // continue; // proceed with next item - no downloads ...
                   }
                 }
                 catch (Exception ex)
                 {
-                  item.Label = personname;
+                  item.Label = personFacadeName;
                   LogMyFilms.Debug("Error adding person to VDB: " + ex.Message, ex.StackTrace);
                 }
                 if (StopLoadingViewDetails) break; // stop download if we have exited window
@@ -7453,7 +7460,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   // item.NotifyPropertyChanged("ThumbnailImage");
 
                   item.Label3 = "URL = " + person.ThumbnailUrl;
-                  item.Label = personname;
+                  item.Label = personFacadeName;
                   // continue; // proceed with next item - no downloads ...
                 }
                 #endregion
@@ -7466,7 +7473,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 item.MusicTag = person;
                 item.Label3 = ""; // item.Label3 = "Update finished.";
-                item.Label = personname;
+                item.Label = personFacadeName;
 
                 #region old stuff deactivated 
                 //string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
