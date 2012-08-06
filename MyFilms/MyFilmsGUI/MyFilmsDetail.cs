@@ -6524,7 +6524,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("db.calc.aspectratio.value", log);
             clearGUIProperty("db.calc.imageformat.value", log);
 
-            for (int j = 1; j < 6; j++)
+            for (int j = 1; j < 7; j++)
             {
               clearGUIProperty("db.actors.actor" + j + ".name", log);
               clearGUIProperty("db.actors.actor" + j + ".role", log);
@@ -7195,7 +7195,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private static void Load_Detailed_DB_PushActorsToSkin(string personscontent)
         {
-          for (int j = 1; j < 6; j++)
+          for (int j = 1; j < 7; j++)
           {
             clearGUIProperty("db.actors.actor" + j + ".name");
             clearGUIProperty("db.actors.actor" + j + ".role");
@@ -7209,7 +7209,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             string actorname = t.Name;
             string actorrole = t.Job;
-            if (i < 6)
+            if (i < 7)
             {
               if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
               {
