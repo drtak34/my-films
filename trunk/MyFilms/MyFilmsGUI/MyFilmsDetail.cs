@@ -75,6 +75,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         enum Controls : int
         {
             //CTRL_TxtSelect = 12,
+            CTRL_PersonFacade = 50,
             CTRL_BtnPlay = 10000,
             CTRL_BtnPlay1Description = 10001,
             CTRL_BtnPlay2Comment = 10002,
@@ -107,6 +108,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_GuiWaitCursor = 2080,
             CTRL_ActorMultiThumb = 3333,
         }
+
+        [SkinControlAttribute((int)Controls.CTRL_PersonFacade)] // to allow facade view in virtual actor/cast/crew screen
+        protected GUIFacadeControl facadePersons;
+
         [SkinControlAttribute((int)Controls.CTRL_BtnMaj)]
         protected GUIButtonControl BtnMaj;
         [SkinControlAttribute((int)Controls.CTRL_BtnFirst)]
@@ -6371,6 +6376,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnPrior);
                     GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
                   }
+
+                  this.Load_Detailed_DB_PushPersonsToPersonFacade(MyFilms.conf.StrIndex);
+          
+
                 #endregion
                 }
                 catch (Exception ex)
@@ -7229,6 +7238,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 i = i + 1;
               }
             }
+          }
+        }
+
+        private void Load_Detailed_DB_PushPersonsToPersonFacade(int index)
+        {
+          if (facadePersons == null || index > MyFilms.r.Length - 1) return;
+
+          string personscontent = MyFilms.r[index]["Actors"].ToString();
+          facadePersons.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+          GUIControl.ClearControl(GetID, facadePersons.GetID);
+
+          string personartworkpath = MyFilms.conf.StrPathArtist;
+          List<DBPersonInfo> w_tableau = new List<DBPersonInfo>();
+          w_tableau = MyFilms.Search_String_Persons(personscontent, false);
+          foreach (DBPersonInfo t in w_tableau)
+          {
+            string actorname = t.Name;
+            string actorrole = t.Job;
+            var item = new GUIListItem();
+            item.Label = t.Name;
+            item.Label = t.Job;
+            if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+            {
+              if (System.IO.File.Exists(personartworkpath + "\\" + actorname + ".jpg"))
+              {
+                item.IconImage = personartworkpath + "\\" + actorname + ".jpg";
+                item.IconImageBig = personartworkpath + "\\" + actorname + ".jpg";
+                item.ThumbnailImage = personartworkpath + "\\" + actorname + ".jpg";
+              }
+            }
+            facadePersons.Add(item);
           }
         }
 
