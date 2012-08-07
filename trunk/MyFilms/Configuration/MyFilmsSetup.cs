@@ -4824,7 +4824,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           input.Text = "MyFilms - Setup Wizard";
           input.CatalogTypeSelectedIndex = 10; // preset to ANT MC  version 4.x
           input.CatalogType = "Ant Movie Catalog Xtended (V4.1)"; // preset to Ant Movie Catalog Xtended (V4.1) // input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2) 
-          input.Country = "SampleMovies"; // preset to sample movies for skinners
+          input.Country = "USA (Full Detail Grabbing)"; // preset for sample movies for skinners
           input.ShowDialog();
           string newConfig_Name = input.ConfigName;
           string newCatalogType = input.CatalogType;
@@ -5153,6 +5153,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           switch (newCountry)
           {
             #region set country specific settings
+            case "USA (Full Detail Grabbing)":
             case "SampleMovies": // to allow skinnders use IMDB-Full and get all properties loaded !
               txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Full.xml";
               cbGrabberOverrideGetRoles.Text = "true";

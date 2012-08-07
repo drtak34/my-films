@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+          this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyFilmsInputBox));
           this.label1 = new System.Windows.Forms.Label();
           this.textBoxNewName = new System.Windows.Forms.TextBox();
@@ -39,6 +40,7 @@
           this.label4 = new System.Windows.Forms.Label();
           this.cbCountry = new System.Windows.Forms.ComboBox();
           this.lblCountry = new System.Windows.Forms.Label();
+          this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.SuspendLayout();
           // 
@@ -57,6 +59,8 @@
           this.textBoxNewName.Name = "textBoxNewName";
           this.textBoxNewName.Size = new System.Drawing.Size(227, 20);
           this.textBoxNewName.TabIndex = 1;
+          this.toolTip1.SetToolTip(this.textBoxNewName, "The config name must be unique - so make sure, \r\nyou don\'t use a name that alread" +
+                  "y exists.");
           this.textBoxNewName.TextChanged += new System.EventHandler(this.textBoxNewName_TextChanged);
           this.textBoxNewName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxNewName_KeyUp);
           // 
@@ -108,6 +112,9 @@
           this.cbCatalogType.Name = "cbCatalogType";
           this.cbCatalogType.Size = new System.Drawing.Size(227, 21);
           this.cbCatalogType.TabIndex = 5;
+          this.toolTip1.SetToolTip(this.cbCatalogType, "Select the catalog type for this config.\r\nAMC 4.x is the \"most advacned\" and enab" +
+                  "led all features in MyFilms.\r\nChoose the catalog type based on your personal use" +
+                  " case.");
           // 
           // label3
           // 
@@ -177,11 +184,13 @@
             "Turkey",
             "UK",
             "Uruguay",
-            "USA"});
+            "USA",
+            "USA (Full Detail Grabbing)"});
           this.cbCountry.Location = new System.Drawing.Point(112, 172);
           this.cbCountry.Name = "cbCountry";
           this.cbCountry.Size = new System.Drawing.Size(227, 21);
           this.cbCountry.TabIndex = 8;
+          this.toolTip1.SetToolTip(this.cbCountry, resources.GetString("cbCountry.ToolTip"));
           // 
           // lblCountry
           // 
@@ -229,5 +238,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbCountry;
         private System.Windows.Forms.Label lblCountry;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
