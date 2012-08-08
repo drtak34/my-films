@@ -4,12 +4,20 @@ using MpeCore.Classes;
 using MpeCore;
 using System.IO;
 using System.Windows.Forms;
+using MediaPortal.Common.Utils;
 
 public class Script
 {
   public static void Main(PackageClass packageClass, ActionItem actionItem)
   {
+    System.Version MpSkinVersion = MediaPortal.Common.Utils.CompatibilityManager.SkinVersion;
+    System.Version NewVersion = new System.Version(1, 3, 0, 0);
     if (MpeCore.Classes.VersionProvider.MediaPortalVersion.MinimumMPVersionRequired.ToString() == "1.2.100.0")
+    {
+      
+    }
+
+    if (MpSkinVersion.CompareTo(NewVersion) >= 0)
     {
       if (!packageClass.Silent)
       {
