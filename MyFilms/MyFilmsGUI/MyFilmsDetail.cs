@@ -1044,6 +1044,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
                   choiceViewMenu.Add("trakt");
+
+                  if (MyFilmsDetail.ExtendedStartmode("Detail ontext menu - new Trakt internal menu"))
+                  {
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
+                    choiceViewMenu.Add("traktinternal");
+                  }
                 }
                 else LogMyFilms.Debug("trakt not found or wrong version - disabling context entry");
 
@@ -1516,6 +1522,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   return;
                 }
                 Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                #endregion
+                break;
+
+
+                dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
+                choiceViewMenu.Add("traktinternal");
+
+              case "traktinternal":
+                #region trakt internal menu - inclusing context and noncontext items
+                TraktInternalMenu(MyFilms.currentMovie);
                 #endregion
                 break;
 
@@ -2625,6 +2641,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
           //TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
           //TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
+        }
+
+        private void TraktInternalMenu(MFMovie movie)
+        {
+          LogMyFilms.Debug("TraktInternalMenu(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "'");
+          try
+          {
+            TraktPlugin.GUI.GUICommon.ShowTraktExtMovieMenu(movie.Title, movie.Year.ToString(), movie.IMDBNumber, movie.Fanart, true);
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("TraktInternalMenu(): Error - Exception '" + ex.Message + "'");
+          }
         }
 
         private void TraktRate(MFMovie movie)
