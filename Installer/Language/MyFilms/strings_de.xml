@@ -52,6 +52,7 @@
     <String id="931">Wertung</String>
     <String id="936">Fortsetzen bei:</String>
     <String id="985">Lade Filmdetails</String>
+    <String id="1011">Biografie</String>
     <String id="1951">Festplatte</String>
     <String id="2084">Startpunkt</String>
     <String id="2085">Endpunkt</String>
@@ -397,5 +398,9 @@
     <String id="10799223">Mittel</String>
     <String id="10799224">Niedrig</String>
     <String id="10799230">noch zu laden: {0}</String>
+    <String id="10799301">Name</String>
+    <String id="10799302">Geboren</String>
+    <String id="10799303">Geburtsort</String>
+    <String id="10799304">Biografie</String>
   </Section>
 </Language>
