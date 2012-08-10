@@ -52,6 +52,7 @@
     <String id="931">Calificación</String>
     <String id="936">Reanudar desde:</String>
     <String id="985">Descargando detalles de la película</String>
+    <String id="1011">Biography</String>
     <String id="1951">Disco duro</String>
     <String id="2084">comienzo</String>
     <String id="2085">final</String>
@@ -397,5 +398,9 @@
     <String id="10799223">Medium</String>
     <String id="10799224">Low</String>
     <String id="10799230">to download: {0}</String>
+    <String id="10799301">Name</String>
+    <String id="10799302">Born</String>
+    <String id="10799303">Place</String>
+    <String id="10799304">Biography</String>
   </Section>
 </Language>

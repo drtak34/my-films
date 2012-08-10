@@ -970,7 +970,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
             {
-              GUIPropertyManager.SetProperty("#currentmodule", this.GetModuleName()); 
+              GUIPropertyManager.SetProperty("#currentmodule", this.GetModuleName());  // reload current modulename, as otherwise it is reset to base one...
               OnPageload_Step_2();
             }
             return 0;
@@ -15720,6 +15720,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
       MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
       MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
+
+      MyFilmsDetail.setGUIProperty("person.name.label", GUILocalizeStrings.Get(10799301));
+      MyFilmsDetail.setGUIProperty("person.dateofbirth.label", GUILocalizeStrings.Get(10799302));
+      MyFilmsDetail.setGUIProperty("person.placeofbirth.label", GUILocalizeStrings.Get(10799303));
+      MyFilmsDetail.setGUIProperty("person.biography.label", GUILocalizeStrings.Get(10799304));
 
       MyFilmsDetail.clearGUIProperty("user.rating.value");
       MyFilmsDetail.clearGUIProperty("user.watched.value");
