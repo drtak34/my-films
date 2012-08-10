@@ -877,7 +877,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", AntLabelDetails2.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", AntItemDetails3.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", AntLabelDetails3.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItem4Details", AntItemDetails4.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", AntItemDetails4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", AntLabelDetails4.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", AntItemDetails5.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", AntLabelDetails5.Text);

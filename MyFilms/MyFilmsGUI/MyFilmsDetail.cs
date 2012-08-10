@@ -604,11 +604,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\")); //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
             afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
-            int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
-
 
             //if (ImgFanartDir != null) ImgFanartDir.TexturePath = "";
             //if (ImgFanart != null) ImgFanart.SetFileName(MyFilms.conf.DefaultFanartImage);
+
+            base.OnPageLoad(); // let animations run and make sure visibility on secondary title can be set!
+
             afficher_detail(true);
 
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
@@ -623,7 +624,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (MyFilms.conf.AutoRegisterTrailer) AutoRegisterTrailer("");
             LogMyFilms.Debug("OnPageLoad() finished.");
-            base.OnPageLoad(); // let animations run!
         }
 
 
@@ -1525,13 +1525,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #endregion
                 break;
 
-
-                dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
-                choiceViewMenu.Add("traktinternal");
-
               case "traktinternal":
                 #region trakt internal menu - inclusing context and noncontext items
-                TraktInternalMenu(MyFilms.currentMovie);
+                if (!TraktInternalMenu(MyFilms.currentMovie))
+                {
+                  Change_Menu("mainmenu");
+                  return;
+                }
                 #endregion
                 break;
 
@@ -2643,17 +2643,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
         }
 
-        private void TraktInternalMenu(MFMovie movie)
+        private bool TraktInternalMenu(MFMovie movie)
         {
+          bool success = false;
           LogMyFilms.Debug("TraktInternalMenu(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "'");
           try
           {
-            TraktPlugin.GUI.GUICommon.ShowTraktExtMovieMenu(movie.Title, movie.Year.ToString(), movie.IMDBNumber, movie.Fanart, true);
+            // ToDo: Activate the internal menu, once trakt >1.8.1 is out
+            // success = TraktPlugin.GUI.GUICommon.ShowTraktExtMovieMenu(movie.Title, movie.Year.ToString(), movie.IMDBNumber, movie.Fanart, true);
           }
           catch (Exception ex)
           {
             LogMyFilms.Error("TraktInternalMenu(): Error - Exception '" + ex.Message + "'");
           }
+          return success;
         }
 
         private void TraktRate(MFMovie movie)
@@ -6244,6 +6247,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (MyFilms.conf.StrIndex > MyFilms.r.Length - 1)
                 MyFilms.conf.StrIndex = MyFilms.r.Length - 1;
+
             if (MyFilms.conf.StrIndex == -1)
             {
                 MediaPortal.GUI.Library.Action actionType = new MediaPortal.GUI.Library.Action();
@@ -6256,20 +6260,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
                 MyFilms.conf.StrTIndex = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Substring(TitlePos);
                 MyFilms.currentMovie.Title = MyFilms.conf.StrTIndex;
-                GUIControl.ShowControl(GetID, (int)Controls.CTRL_Title);
             }
-            else
-                GUIControl.HideControl(GetID, (int)Controls.CTRL_Title);
-            if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
-            {
-                if ((MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() == MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString()) || (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString().Length == 0))
-                    GUIControl.HideControl(GetID, (int)Controls.CTRL_OTitle);
-                else
-                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_OTitle);
-            }
-            else
-                GUIControl.HideControl(GetID, (int)Controls.CTRL_OTitle);
-
 
             int year = 1900;
             Int32.TryParse(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), out year);
@@ -6405,10 +6396,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnPrior);
                     GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
                   }
-
-                  this.Load_Detailed_DB_PushPersonsToPersonFacade(MyFilms.conf.StrIndex);
-          
-
+                  Load_Detailed_DB_PushPersonsToPersonFacade(MyFilms.conf.StrIndex);
                 #endregion
                 }
                 catch (Exception ex)
@@ -6420,6 +6408,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 {
                   // Do this after thread finished ...
+                  if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Length > 0)
+                  {
+                    //int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
+                    //MyFilms.conf.StrTIndex = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Substring(TitlePos);
+                    MyFilms.currentMovie.Title = MyFilms.conf.StrTIndex;
+                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_Title);
+                  }
+                  else
+                    GUIControl.HideControl(GetID, (int)Controls.CTRL_Title);
+                  if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
+                  {
+                    if ((MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() == MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString()) || (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString().Length == 0))
+                      GUIControl.HideControl(GetID, (int)Controls.CTRL_OTitle);
+                    else
+                      GUIControl.ShowControl(GetID, (int)Controls.CTRL_OTitle);
+                  }
+                  else
+                    GUIControl.HideControl(GetID, (int)Controls.CTRL_OTitle);
                 }
                 return 0;
               }, 0, 0, null);
