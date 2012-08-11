@@ -16347,6 +16347,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //currentFanartList.Clear();
         var obj = NavigationStack.Pop() as MyFilmsPlugin.Utils.NavigationObject;
         mapSettings.ViewAs = (int)obj.CurrentView;
+        menucover.Filename = obj.CoverStatus.MenuCover;
+        filmcover.Filename = obj.CoverStatus.FilmCover;
+        viewcover.Filename = obj.CoverStatus.ViewCover;
+        personcover.Filename = obj.CoverStatus.PersonCover;
+        groupcover.Filename = obj.CoverStatus.GroupCover;
+        // obj.SetCoverStatus(ref menucover, ref filmcover, ref viewcover, ref personcover, ref groupcover);
         conf.DbSelection = new string[] { obj.DbDfltSelect, obj.DbSelect, obj.DbField, obj.DbSort, obj.DbShowAll.ToString(), obj.DbExtraSort.ToString() };
         // Change_Layout_Action((int)obj.CurrentView); // switch here already the layout to BEFORE facade is populated !
         ShowPanel(); 
@@ -16462,7 +16468,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             facadeFilms.SelectedListItemIndex,
             (Layout)mapSettings.ViewAs,
             conf,
-            BtnSrtBy));
+            BtnSrtBy,
+            new CoverState( menucover.Filename, filmcover.Filename, viewcover.Filename, personcover.Filename, groupcover.Filename )
+            ));
       }
       if (clear)
       {
