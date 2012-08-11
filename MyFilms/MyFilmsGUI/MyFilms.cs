@@ -7247,7 +7247,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region load actor details for person lists
         Thread.Sleep(25);
         watch.Reset(); watch.Start();
-        if (MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
+        if (Win32API.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
         {
           string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
           grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
