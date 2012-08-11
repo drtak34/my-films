@@ -9343,6 +9343,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("alwaysdefaultview");
 
+          dlg1.Add(string.Format(GUILocalizeStrings.Get(1079841), conf.StrViewDfltItem)); // change default view
+          choiceViewGlobalOptions.Add("changedefaultview");
+
           //if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
           //if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
           //choiceViewGlobalOptions.Add("alwayslistforgroups");
@@ -10018,6 +10021,55 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  this.Change_Menu_Action("globaloptions");
         //  break;
 
+        case "changedefaultview":
+          GUIDialogMenu dlgdef = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlgdef == null) return;
+          dlgdef.Reset();
+
+          dlgdef.SetHeading(string.Format(GUILocalizeStrings.Get(1079841), conf.StrViewDfltItem)); // change default view (current default vew)
+          List<string> choiceViewDefaultItems = new List<string>();
+          if (conf.StrViewDfltItem == GUILocalizeStrings.Get(1079819))
+            dlgdef.Add(GUILocalizeStrings.Get(1079819) + " (*)"); // menu
+          else
+            dlgdef.Add(GUILocalizeStrings.Get(1079819)); // menu
+          choiceViewDefaultItems.Add(GUILocalizeStrings.Get(1079819));
+          foreach (MFview.ViewRow customView in conf.CustomViews.View)
+          {
+            if (conf.StrViewDfltItem == customView.Label)
+              dlgdef.Add(customView.Label + " (*)");
+            else
+              dlgdef.Add(customView.Label);
+            choiceViewDefaultItems.Add(customView.Label);
+
+          }
+          dlgdef.DoModal(GetID);
+          if (dlgdef.SelectedLabel == -1) return;
+
+          if (choiceViewDefaultItems[dlgdef.SelectedLabel] == GUILocalizeStrings.Get(1079819)) // Views Menu
+            {
+              conf.StrViewDfltItem = choiceViewDefaultItems[dlgdef.SelectedLabel];
+              conf.StrViewDfltText = "";
+            }
+            else
+            foreach (MFview.ViewRow viewRow in conf.CustomViews.View)
+            {
+              if (choiceViewDefaultItems[dlgdef.SelectedLabel] == viewRow.Label)
+              {
+              conf.StrViewDfltItem = choiceViewDefaultItems[dlgdef.SelectedLabel];
+              conf.StrViewDfltText = (viewRow.Value.Length > 0) ? viewRow.Value : "";
+              }
+            }  
+
+          using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          {
+            xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "ViewDfltItem", MyFilms.conf.StrViewDfltItem);
+            xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "ViewDfltText", MyFilms.conf.StrViewDfltText);
+          }
+          // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+          LogMyFilms.Info("Update Option 'change default view' changed to " + MyFilms.conf.StrViewDfltItem);
+          Change_Menu_Action("globaloptions");
+          break;
+        
         case "woluserdialog":
           MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);

@@ -102,6 +102,7 @@
     <String id="1079838">Enter new box set name ...</String>
     <String id="1079839">Reverse person names ({0})</String>
     <String id="1079840">Choose user profile ('{0}')</String>
+    <String id="1079841">Change default view ('{0}')</String>
     <String id="1079843">Userdefined DB Update (AMCupdater)</String>
     <String id="1079844">Show indexed values ({0})</String>
     <String id="1079845">Don't split values ({0})</String>
