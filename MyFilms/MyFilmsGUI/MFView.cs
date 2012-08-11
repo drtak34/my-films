@@ -278,6 +278,31 @@ namespace MyFilmsPlugin.MyFilmsGUI
     }
     #endregion
   }
+
+  public class CoverState
+  {
+    public CoverState(){}
+
+    public CoverState(string menucover, string filmcover, string viewcover, string personcover, string groupcover)
+    {
+      MenuCover = menucover;
+      FilmCover = filmcover;
+      ViewCover = viewcover;
+      PersonCover = personcover;
+      GroupCover = groupcover;
+    }
+
+    #region public vars
+
+    public string MenuCover { get; set; }
+    public string FilmCover { get; set; }
+    public string ViewCover { get; set; }
+    public string PersonCover { get; set; }
+    public string GroupCover { get; set; }
+
+    #endregion
+  }
+
   
   public class ViewState
   {

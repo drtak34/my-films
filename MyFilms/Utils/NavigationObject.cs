@@ -20,6 +20,9 @@ namespace MyFilmsPlugin.Utils
     public string ItemType { get; set; }
     public string NbObjects { get; set; }
 
+    // images
+    public CoverState CoverStatus { get; set; }
+
     public bool SortButtonEnabled { get; set; }
     public bool SortButtonASC { get; set; }
     public string SortButtonLabel { get; set; }
@@ -42,7 +45,7 @@ namespace MyFilmsPlugin.Utils
 
     public MyFilms.Layout CurrentView { get; set; }
 
-    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton)
+    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, CoverState coverstate)
     {
       Items = new List<GUIListItem>();
       GetItems(control, title, itemtype, pos, curview);
@@ -65,6 +68,7 @@ namespace MyFilmsPlugin.Utils
       SortButtonEnabled = srtButton.IsEnabled;
       SortButtonASC = srtButton.IsAscending;
       SortButtonLabel = srtButton.Label;
+      CoverStatus = coverstate;
     }
 
     public void GetItems(GUIListControl control, string title, string itemtype, int pos, MyFilms.Layout curview)
@@ -74,6 +78,14 @@ namespace MyFilmsPlugin.Utils
       CurrentView = curview;
       ItemType = itemtype;
       Items = control.ListItems.GetRange(0, control.ListItems.Count);
+    }
+
+    public void SetItems(GUIFacadeControl control)
+    {
+      foreach (GUIListItem item in Items)
+      {
+        control.Add(item);
+      }
     }
 
     public void GetViewStatus(Configuration conf)
@@ -112,13 +124,6 @@ namespace MyFilmsPlugin.Utils
       //ViewStatus.TitleItem = (this.facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedItem.ToString() : this.facadeFilms.SelectedListItem.Label) : string.Empty; //may need to check if there is no item selected and so save ""
     }
 
-    public void SetItems(GUIFacadeControl control)
-    {
-      foreach (GUIListItem item in Items)
-      {
-        control.Add(item);
-      }
-    }
     public void SetViewStatus(Configuration conf)
     {
       conf.Boolselect = ViewStatus.Boolselect;
@@ -160,5 +165,15 @@ namespace MyFilmsPlugin.Utils
       //IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
       //TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
     }
+
+    public void SetCoverStatus(ref string menucover, ref string filmcover, ref string viewcover, ref string personcover, ref string groupcover)
+    {
+      menucover = CoverStatus.MenuCover;
+      filmcover = CoverStatus.FilmCover;
+      viewcover = CoverStatus.ViewCover;
+      personcover = CoverStatus.PersonCover;
+      groupcover = CoverStatus.GroupCover;
+    }
+  
   }
 }
