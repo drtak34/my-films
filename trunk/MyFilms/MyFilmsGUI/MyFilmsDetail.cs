@@ -10672,6 +10672,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       public static void AddPersonsToDownloadQueue() // add persons of current movie to download queue
       {
+        if (!Win32API.IsConnectedToInternet()) return;
         new Thread(delegate()
         {
           {
