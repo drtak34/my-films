@@ -605,59 +605,59 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>category</description>
+			<description>User Item 1 Value</description>
 			<id>1</id>
 			<posX>65</posX>
 			<posY>490</posY>
 			<width>250</width>
-			<label>#myfilms.db.category.value</label>
+			<label>#myfilms.user.item1.value</label>
 			<font>font12</font>
 			<textcolor>bba9d0f7</textcolor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item Label 1</description>
+			<description>User Item Label 2</description>
 			<id>1</id>
 			<posX>45</posX>
 			<posY>515</posY>
 			<width>90</width>
-			<label>#myfilms.user.item1.label: </label>
+			<label>#myfilms.user.item2.label: </label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>string.equals(#myfilms.user.item1.value)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 1</description>
+			<description>User Item 2</description>
 			<id>1</id>
 			<posX>140</posX>
 			<posY>515</posY>
 			<width>165</width>
-			<label>#myfilms.user.item1.value</label>
+			<label>#myfilms.user.item2.value</label>
 			<font>font11</font>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 2 Label</description>
+			<description>User Item 3 Label</description>
 			<id>1</id>
 			<posX>325</posX>
 			<posY>515</posY>
 			<width>90</width>
-			<label>#myfilms.user.item2.label: </label>
+			<label>#myfilms.user.item3.label: </label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 2</description>
+			<description>User Item 3</description>
 			<id>1</id>
 			<posX>410</posX>
 			<posY>515</posY>
 			<width>280</width>
-			<label>#myfilms.user.item2.value</label>
+			<label>#myfilms.user.item3.value</label>
 			<font>font11</font>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
