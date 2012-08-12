@@ -4679,7 +4679,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.DVDLabel = "showall";
         item.IsFolder = true;
 
-        item.ThumbnailImage = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages), "ShowAll.jpg");
+        item.ThumbnailImage = GetImageforMenu(item);
         item.IconImage = item.ThumbnailImage;
         item.IconImageBig = item.ThumbnailImage;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
@@ -4693,7 +4693,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.Label = "*** Online Informationen ***"; // online info
           item.DVDLabel = "onlineinfo";
           item.IsFolder = true;
-          item.ThumbnailImage = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages), "OnlineInfo.jpg");
+          item.ThumbnailImage = GetImageforMenu(item);
           item.IconImage = item.ThumbnailImage;
           item.IconImageBig = item.ThumbnailImage;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
@@ -4866,8 +4866,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Check, if default group cover is present
             if (MyFilms.conf.StrViewsDflt)
             {
-              string strMenuImage = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
-              strMenuImage = strMenuImage + GetFieldFromViewLabel(item.DVDLabel).ToLower() + "\\" + "Default.jpg";
+              string strMenuImage;
+              // special handling for funxtion entries
+              if (item.DVDLabel == "showall")
+              {
+                strMenuImage = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages), "ShowAll.jpg");
+              }
+              else if (item.DVDLabel == "onlineinfo")
+              {
+                strMenuImage = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages), "OnlineInfo.jpg");
+              }
+              else
+              {
+                strMenuImage = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : conf.StrPathViews + "\\";
+                strMenuImage = strMenuImage + GetFieldFromViewLabel(item.DVDLabel).ToLower() + "\\" + "Default.jpg";
+              }
               if (!System.IO.File.Exists(strMenuImage))
               {
                 if (IsPersonField(GetFieldFromViewLabel(item.DVDLabel)))
@@ -4893,9 +4906,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      catch (Exception)
+      catch (Exception ex)
       {
-
+        LogMyFilms.Debug("GetImageforMenu() - Error: " + ex.Message);
       }
       return menuimage;
     }
