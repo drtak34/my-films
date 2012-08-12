@@ -7353,7 +7353,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           string value = "";
 
-          value = (person != null && person.Name.Length > 0) ? person.Name : "";
+          value = (person != null && person.Name.Length > 0) ? person.Name : personname;
           setGUIProperty("person.name.value", value);
           //setGUIProperty("user.mastertitle.value", value);
           //setGUIProperty("user.secondarytitle.value", value);
