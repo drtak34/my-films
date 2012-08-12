@@ -4673,23 +4673,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           #endregion
         }
-
+        #region add showall entry
         item = new GUIListItem();
         item.Label = GUILocalizeStrings.Get(10798765); // *** show all ***
         item.DVDLabel = "showall";
         item.IsFolder = true;
+
+        item.ThumbnailImage = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages), "ShowAll.jpg");
+        item.IconImage = item.ThumbnailImage;
+        item.IconImageBig = item.ThumbnailImage;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         if (facadeFilms != null) facadeFilms.Add(item);
+        #endregion
 
+        #region add online info entry
         if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
         {
           item = new GUIListItem();
           item.Label = "*** Online Informationen ***"; // online info
           item.DVDLabel = "onlineinfo";
           item.IsFolder = true;
+          item.ThumbnailImage = Path.Combine(MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages), "OnlineInfo.jpg");
+          item.IconImage = item.ThumbnailImage;
+          item.IconImageBig = item.ThumbnailImage;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
           if (facadeFilms != null) facadeFilms.Add(item);
         }
+        #endregion
       }
       else
       {
