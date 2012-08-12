@@ -46,7 +46,7 @@
 			<label></label>
 			<posX>-50</posX>
 			<posY>-50</posY>
-      <visible>false</visible>
+      <visible>true</visible>
 			<!-- to make a control visible only when you are in a VIEW do this: <visible>control.isvisible(34)</visible> -->
 			<!-- to make a control invisible when you are in a VIEW do this: <visible>!control.isvisible(34)</visible> -->
 			<!-- Note: Dummy control 34 is maintained for backwards compatibility, but skins may use more specific View controls  -->
@@ -525,7 +525,7 @@
 			<font>font10</font>
 			<align>left</align>
 			<textcolor>ffffcc00</textcolor>
-			<visible>!string.equals(#myfilms.db.rating.value,0)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+			<visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -556,7 +556,7 @@
 			<orientation>horizontal</orientation>
 			<percentage>#myfilms.db.rating.value</percentage>
 			<imagesToDraw>10</imagesToDraw>
-			<visible>!string.equals(#myfilms.db.rating.value,0)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+			<visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -795,7 +795,7 @@
 			<align>left</align>
 			<imagesToDraw>10</imagesToDraw>
 			<percentage>#myfilms.db.rating.value</percentage>
-			<visible>!string.equals(#myfilms.db.rating.value,0)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+			<visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -822,7 +822,7 @@
 			<align>right</align>
 			<font>font10</font>
 			<textcolor>60ffffff</textcolor>
-			<label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit - ',''))#(iif(neq(#myfilms.db.rating.value,'0'),'#myfilms.db.rating.value',''))</label>
+			<label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit - ',''))#(iif(neq(#myfilms.db.rating.value,''),'#myfilms.db.rating.value',''))</label>
 			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control> 
@@ -866,7 +866,7 @@
 		<width>20</width>
 		<height>20</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+		<visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
 		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>
@@ -880,7 +880,7 @@
 		<height>20</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>ffffcc00</colordiffuse>
-		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+		<visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
 		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>

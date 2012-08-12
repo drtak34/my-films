@@ -1029,8 +1029,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
 
       loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
-      LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
-
 
       if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
       {
@@ -1042,6 +1040,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  AsynLoadMovieList();
         //}
         // ********************************
+
+        int itemIndex = facadeFilms.SelectedListItemIndex;
+        // LogMyFilms.Debug("MyFilms.OnPageLoad() - itemindex = '" + itemIndex + "', facadeCount = '" + facadeFilms.Count + "'");
+        if (itemIndex > -1) GUIControl.SelectItemControl(GetID, facadeFilms.GetID, itemIndex);
+        else if (facadeFilms.Count > 0) GUIControl.SelectItemControl(GetID, facadeFilms.GetID, 0);
+
+        LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
       }
     }
 
@@ -2975,12 +2980,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string sFullTitle;
       string sPrevTitle = "";
       string SelItem = gSelItem.ToString();
-      int iSelItem = -2;
+      int iSelItem = (typeof(T) == typeof(int)) ? (Int32.Parse(SelItem)) : -2;
+      LogMyFilms.Debug("(GetFilmList) - SelItem/iSelItem:               '" + SelItem + "'/'" + iSelItem + "'");
       bool tmpwatched = false;
       string currentImage = "";
 
       var facadeDownloadItems = new List<GUIListItem>();
-      if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
       // setlabels
       // MyFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
@@ -3168,7 +3173,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
           facadeFilms.Add(item);
 
-          if (iSelItem == -2) //set selected item = passed in string?
+          if (iSelItem == -2) // selected item is passed as string in "SelItem"
           {
             if (sTitle == SelItem) wfacadewiew = facadeFilms.Count - 1; //test if this item is one to select
           }
@@ -3212,8 +3217,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString(CultureInfo.InvariantCulture));
       // GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view") + "/" + GUIPropertyManager.GetProperty("#myfilms.select")); 
-      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)wfacadewiew);
       if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+      //if (wfacadewiew == -1 && facadeFilms.Count > 0)
+      //  GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, 0);
+      //else
+      //  GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)wfacadewiew);
+      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)wfacadewiew);
 
       if (this.facadeFilms.Count == 1 && item.IsFolder)
       {
@@ -8703,6 +8712,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.ViewContext = ViewContext.Movie;
               SetLabelView("all");
               GetFilmList(conf.StrIndex);
+              // if (conf.StrIndex == -1 && facadeFilms.Count > 0) GUIControl.SelectItemControl(GetID, facadeFilms.GetID, 0); // make sure, selecteditem is initialized !
             }
             else // called with userdefined views - so launch them ...
             {
@@ -8812,9 +8822,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //else
       //  SetLabelSelect(conf.StrTxtSelect);
 
-      if (conf.LastID == ID_MyFilmsDetail) GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
-      else if (conf.LastID == ID_MyFilmsActors) GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
-      else GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+      if (conf.LastID == ID_MyFilmsDetail) 
+        GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
+      else if (conf.LastID == ID_MyFilmsActors) 
+        GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
+      else
+      {
+        GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+        // if (facadeFilms.SelectedListItemIndex < 0 && facadeFilms.Count > 0) GUIControl.SelectItemControl(GetID, facadeFilms.GetID, 0); // make sure, selecteditem is initialized !
+        //int itemIndex = facadeFilms.SelectedListItemIndex;
+        //if (itemIndex > -1)
+        //  GUIControl.SelectItemControl(GetID, facadeFilms.GetID, itemIndex);
+        //else if (facadeFilms.Count > 0)
+        //  GUIControl.SelectItemControl(GetID, facadeFilms.GetID, 0);
+      }
     }
 
     private void ResetGlobalFilters()
