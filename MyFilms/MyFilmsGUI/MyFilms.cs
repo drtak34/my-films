@@ -2663,11 +2663,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       LogMyFilms.Debug(caller + string.Format("() - StrSorta                       : '{0}'", conf.StrSorta));
       LogMyFilms.Debug(caller + string.Format("() - StrSortSens                    : '{0}'", conf.StrSortSens));
-      LogMyFilms.Debug(caller + string.Format("() - CurrentSortMethod              : '{0}'", conf.CurrentSortMethod));
 
       LogMyFilms.Debug(caller + string.Format("() - StrSortaInHierarchies          : '{0}'", conf.StrSortaInHierarchies));
       LogMyFilms.Debug(caller + string.Format("() - StrSortSensInHierarchies       : '{0}'", conf.StrSortSensInHierarchies));
-      LogMyFilms.Debug(caller + string.Format("() - CurrentSortMethodInHierarchies : '{0}'", conf.CurrentSortMethodInHierarchies));
 
       LogMyFilms.Debug(caller + string.Format("() - StrLayOut (Layout)             : '{0}'", conf.StrLayOut));
       LogMyFilms.Debug(caller + string.Format("() - WStrLayOut               : '{0}'", conf.WStrLayOut));
@@ -2903,20 +2901,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region Set sort buttons (movie vs. collection) and set Layout
 
       BtnSrtBy.IsEnabled = true;
-      if (conf.BoolCollection)
-      {
-        BtnSrtBy.Label = conf.CurrentSortMethodInHierarchies;
-        BtnSrtBy.IsAscending = (conf.StrSortSensInHierarchies == " ASC");
-        //BtnSrtBy.Disabled = true;
-        Change_Layout_Action(conf.StrLayOutInHierarchies);
-      }
-      else
-      {
-        BtnSrtBy.Label = conf.CurrentSortMethod;
-        BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
-        //BtnSrtBy.Disabled = false;
-        Change_Layout_Action(conf.StrLayOut);
-      }
+      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies)) : (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSorta));
+      BtnSrtBy.IsAscending = (conf.BoolCollection) ? (conf.StrSortSensInHierarchies == " ASC") : (conf.StrSortSens == " ASC");
+      // BtnSrtBy.Disabled = (conf.BoolCollection) ? true : false;
+
+      Change_Layout_Action((conf.BoolCollection) ? conf.StrLayOutInHierarchies : conf.StrLayOut);
       #endregion
 
       conf.DbSelection = new string[] { conf.StrGlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false.ToString(), true.ToString() };
@@ -5007,53 +4996,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // new sort was selected ...
         conf.StrIndex = 0; // reset facadeposition to first line, as after sort position isn't valid anymore ...
-        //string tmpCurrentSortMethod = conf.CurrentSortMethod;
-        //string tmpStrSorta = conf.StrSorta;
-        //string tmpStrSortSens = conf.StrSortSens;
-        // set the default after user selection - specials will be configured below ...
-        string tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(choiceSort[dlg.SelectedLabel]);
-        string tmpStrSorta = choiceSort[dlg.SelectedLabel];
-        string tmpStrSortSens = " ASC";
+        string tmpStrSorta;
+        string tmpStrSortSens;
 
         // set special handling for certain fields ...
         switch (choiceSort[dlg.SelectedLabel])
         {
           case "Title":
-            //conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
             //conf.StrSorta = conf.StrSTitle;
             //conf.StrSortSens = " ASC";
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103); // "Sort: " + ""Name"
             tmpStrSorta = conf.StrSTitle;
             tmpStrSortSens = " ASC";
             break;
           case "Year":
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(366);
             tmpStrSorta = "Year";
             tmpStrSortSens = " DESC";
             break;
           case "Date":
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(621);
             tmpStrSorta = "Date"; // tmpStrSorta = "DateAdded";
             tmpStrSortSens = " DESC";
             break;
           case "Rating":
-            tmpCurrentSortMethod = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(367);
             tmpStrSorta = "Rating";
             tmpStrSortSens = " DESC";
             break;
           default:
+            tmpStrSorta = choiceSort[dlg.SelectedLabel];
+            tmpStrSortSens = " ASC";
             break;
         }
         dlg.DeInit();
         if (conf.BoolCollection)
         {
-          conf.CurrentSortMethodInHierarchies = tmpCurrentSortMethod;
           conf.StrSortaInHierarchies = tmpStrSorta;
           conf.StrSortSensInHierarchies = tmpStrSortSens;
         }
         else
         {
-          conf.CurrentSortMethod = tmpCurrentSortMethod;
           conf.StrSorta = tmpStrSorta;
           conf.StrSortSens = tmpStrSortSens;
         }
@@ -8650,7 +8629,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       #region Configure Default Button Labels ...
-      BtnSrtBy.Label = (conf.BoolCollection) ? conf.CurrentSortMethodInHierarchies : conf.CurrentSortMethod;
+      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies)) : (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSorta));
       // BtnToggleGlobalWatched.Label = (MyFilms.conf.GlobalUnwatchedOnly) ? string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628)) : string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
       #endregion
 

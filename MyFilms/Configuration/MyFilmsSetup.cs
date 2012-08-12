@@ -460,6 +460,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void Save_Config()
         {
+            #region sanity checks
             if (Config_Name.Text.Length == 0)
             {
                 MessageBox.Show("The Configuration's Name is Mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -661,6 +662,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbSuppress.Focus();
               MessageBox.Show("You have enabled the automatic deletion after a movie is watched - select the proper action !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
             }
+            #endregion
 
             Selected_Enreg_TextChanged();
             if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
@@ -706,75 +708,43 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             if (AntTitle2.Text.Length == 0) AntTitle2.Text = "(none)";
 
-            string wDfltSortMethod = string.Empty;
             string wDfltSort = string.Empty;
             switch (Sort.Text.ToLower())
             {
-                //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
-                //    Sort.Items.Add(AntSTitle.Text);
-                //else
-                //    Sort.Items.Add(AntTitle1);
-                
                 case "(none)":
                     break;
                 case "title":
-                    wDfltSortMethod = GUILocalizeStrings.Get(103);
                     if (AntSTitle.Text != "(none)" && AntSTitle.Text.Length > 0)
                         wDfltSort = AntSTitle.Text;
                     else
                         wDfltSort = AntTitle1.Text;
                     break;
-                case "year":
-                    wDfltSortMethod = GUILocalizeStrings.Get(366);
-                    wDfltSort = "Year";
-                    break;
-                case "date":
                 case "dateadded":
-                    wDfltSortMethod = GUILocalizeStrings.Get(621);
                     wDfltSort = "Date";
                     break;
-                case "rating":
-                    wDfltSortMethod = GUILocalizeStrings.Get(367);
-                    wDfltSort = "Rating";
-                    break;
                 default:
-                    wDfltSortMethod = BaseMesFilms.Translate_Column(Sort.Text);  
                     wDfltSort = Sort.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
                     break;
                                        
             }
 
-            string wDfltSortMethodInHierarchies = string.Empty;
             string wDfltSortInHierarchies = string.Empty;
             switch (SortInHierarchies.Text.ToLower())
             {
               case "(none)":
                 break;
               case "title":
-                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(103);
                 if (AntSTitle.Text != "(none)" && AntSTitle.Text.Length > 0)
                   wDfltSortInHierarchies = AntSTitle.Text;
                 else
                   wDfltSortInHierarchies = AntTitle1.Text;
                 break;
-              case "year":
-                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(366);
-                wDfltSortInHierarchies = "Year";
-                break;
-              case "date":
               case "dateadded":
-                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(621);
                 wDfltSortInHierarchies = "Date";
                 break;
-              case "rating":
-                wDfltSortMethodInHierarchies = GUILocalizeStrings.Get(367);
-                wDfltSortInHierarchies = "Rating";
-                break;
               default:
-                wDfltSortMethodInHierarchies = BaseMesFilms.Translate_Column(SortInHierarchies.Text);
                 wDfltSortInHierarchies = SortInHierarchies.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
                 break;
-
             }
 
             if (System.IO.File.Exists(XmlConfig.EntireFilenameConfig("MyFilms"))) System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilms"), XmlConfig.EntireFilenameConfig("MyFilms") + ".bak", true); // backup the XML Config before writing
@@ -828,7 +798,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
               RemoveView(i);  // cleanup config file by removing unused view entries
             }
-            
+
+            #region old hardcoded views (disabled)
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewItem1", AntViewItem1.Text);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewText1", AntViewText1.Text);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewValue1", AntViewValue1.Text);
@@ -859,6 +830,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewIndex5", AntViewIndex5.Text);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewSortOrder5", AntViewSortOrder5.Text);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntViewFilter5", AntViewFilter5.Text);
+            #endregion
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntItem1", AntItem1.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", AntLabel1.Text);
@@ -911,16 +883,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Selection", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSort", wDfltSort);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", SortSens.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltSortMethod", wDfltSortMethod);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", wDfltSortInHierarchies); // InHierarchies
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", SortSensInHierarchies.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltSortMethodInHierarchies", wDfltSortMethodInHierarchies);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSort", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortSens", "");
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CurrentSortMethod", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortInHierarchies", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortSensInHierarchies", "");
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CurrentSortMethodInHierarchies", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
@@ -1086,6 +1054,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdItem2");
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdText2");
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntUpdDflT2");
+
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "CurrentSortMethod");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "CurrentSortMethodInHierarchies");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethodInHierarchies");
+          XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethod");
         }
     
         private int GetLayoutFromName(string layoutname)
