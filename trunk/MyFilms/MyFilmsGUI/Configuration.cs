@@ -480,18 +480,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 #region Sort Settings
                 StrSorta = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
-                CurrentSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
                 StrSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
                 StrSortaInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortInHierarchies", string.Empty);
-                CurrentSortMethodInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethodInHierarchies", string.Empty);
                 StrSortSensInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSensInHierarchies", string.Empty);
                 string wDfltSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
                 string wDfltSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
-                string wDfltSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
 
                 string wDfltSortInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
                 string wDfltSortSensInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
-                string wDfltSortMethodInHierarchies = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
                 #endregion
 
                 #region experimental Viewmanager settings
@@ -500,20 +496,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 ////ViewManager.CurrentSettings.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
                 //CurrentView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
-                //CurrentView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
                 //CurrentView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
 
                 //CurrentView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortInHierarchies", string.Empty);
-                //CurrentView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethodInHierarchies", string.Empty);
                 //CurrentView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSensInHierarchies", string.Empty);
 
                 //StartView.FilmsSortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
-                //StartView.FilmsSortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
                 //StartView.FilmsSortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
 
                 //StartView.HierarchySortItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
                 //StartView.HierarchySortItemFriendlyName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
-                //StartView.HierarchySortDirection = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethodInHierarchies", string.Empty);
 
                 //string startview = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentView", string.Empty);
                 //if (!string.IsNullOrEmpty(startview)) StartView.LoadFromString(startview);
@@ -657,13 +649,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     StrSorta = wDfltSort;
                     StrSortSens = wDfltSortSens;
-                    CurrentSortMethod = wDfltSortMethod;
                   }
                   if (Helper.FieldIsSet(wDfltSortInHierarchies)) // hierarchies sort settings
                   {
                     StrSortaInHierarchies = wDfltSortInHierarchies;
                     StrSortSensInHierarchies = wDfltSortSensInHierarchies;
-                    CurrentSortMethodInHierarchies = wDfltSortMethodInHierarchies;
                   }
                 }
                 XmlConfig.Dispose();
@@ -671,9 +661,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             } // End reading config
 
             #region check and correct settings
-            if (string.IsNullOrEmpty(CurrentSortMethod)) CurrentSortMethod = GUILocalizeStrings.Get(103);
-            if (string.IsNullOrEmpty(CurrentSortMethodInHierarchies)) CurrentSortMethodInHierarchies = CurrentSortMethod;
-          
             // if (string.IsNullOrEmpty(StrSelect)) StrSelect = StrTitle1 + " not like ''";
 
             if (string.IsNullOrEmpty(StrSorta)) StrSorta = StrSTitle;
@@ -1478,18 +1465,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return wselectedlabel; }
             set { wselectedlabel = value; }
         }
-        private string currentSortMethod = string.Empty;
-        public string CurrentSortMethod
-        {
-          get { return currentSortMethod; }
-          set { currentSortMethod = value; }
-        }
-        private string currentSortMethodInHierarchies = string.Empty; //InHierarchies
-        public string CurrentSortMethodInHierarchies
-        {
-          get { return currentSortMethodInHierarchies; }
-          set { currentSortMethodInHierarchies = value; }
-        }
         private string strTIndex = string.Empty;
         public string StrTIndex
         {
@@ -1950,11 +1925,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
 
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MyFilms.conf.CurrentSortMethod);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MyFilms.conf.StrSortSens);
             
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortInHierarchies", MyFilms.conf.StrSortaInHierarchies); //InHierarchies
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethodInHierarchies", MyFilms.conf.CurrentSortMethodInHierarchies);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSensInHierarchies", MyFilms.conf.StrSortSensInHierarchies);
 
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext));
