@@ -46,6 +46,7 @@
 			<label></label>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>true</visible>
 			<!-- to make a control visible only when you are in a VIEW do this: <visible>control.isvisible(34)</visible> -->
 			<!-- to make a control invisible when you are in a VIEW do this: <visible>!control.isvisible(34)</visible> -->
 			<!-- Note: Dummy control 34 is maintained for backwards compatibility, but skins may use more specific View controls  -->
@@ -57,6 +58,7 @@
 			<label></label>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only when FANART is found: <visible>control.isvisible(35)</visible> -->
 			<!-- to make a control Invisible only when FANART is found: <visible>!control.isvisible(35)</visible> -->
        	</control>
@@ -66,6 +68,7 @@
 			<id>36</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in Film Lists do this: <visible>control.isvisible(36)</visible> -->
 			<!-- to make a control Invisible in Film Lists (Movies) do this: <visible>!control.isvisible(36)</visible> -->
 		</control>
@@ -75,6 +78,7 @@
 			<id>37</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in non person VIEWS: <visible>control.isvisible(37)</visible> -->
 			<!-- to make a control Invisible in non person VIEWS: <visible>!control.isvisible(37)</visible> -->
 		</control>
@@ -84,6 +88,7 @@
 			<id>38</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in PERSONS VIEWS (Actors, Writer, etc.): <visible>control.isvisible(38)</visible> -->
 			<!-- to make a control Invisible in PERSONS VIEWS (Actors, Writer, etc.): <visible>!control.isvisible(38)</visible> -->
 		</control>
@@ -93,6 +98,7 @@
 			<id>39</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in GROUP HIERARCHY: <visible>control.isvisible(39)</visible> -->
 			<!-- to make a control Invisible in GROUP HIERARCHY: <visible>!control.isvisible(39)</visible> -->
 		</control>
@@ -102,6 +108,7 @@
 			<id>40</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in VIEWS MENU: <visible>control.isvisible(40)</visible> -->
 			<!-- to make a control Invisible in VIEWS MENU: <visible>!control.isvisible(40)</visible> -->
 		</control>
@@ -111,6 +118,7 @@
 			<id>41</id>
 			<posX>-50</posX>
 			<posY>-50</posY>
+      <visible>false</visible>
 			<!-- to make a control Visible only in Index View level: <visible>control.isvisible(41)</visible> -->
 			<!-- to make a control Invisible in Index View level: <visible>!control.isvisible(41)</visible> -->
 		</control>
@@ -496,7 +504,7 @@
 			<font>font10</font>
 			<align>left</align>
 			<textcolor>ffffcc00</textcolor>
-			<visible>string.equals(#myfilms.db.rating.value)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
+			<visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -527,7 +535,7 @@
 			<orientation>horizontal</orientation>
 			<percentage>#myfilms.db.rating.value</percentage>
 			<imagesToDraw>10</imagesToDraw>
-			<visible>string.equals(#myfilms.db.rating.value)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
+			<visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -605,59 +613,59 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 1 Value</description>
+			<description>category</description>
 			<id>1</id>
 			<posX>65</posX>
 			<posY>490</posY>
 			<width>250</width>
-			<label>#myfilms.user.item1.value</label>
+			<label>#myfilms.db.category.value</label>
 			<font>font12</font>
 			<textcolor>bba9d0f7</textcolor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item Label 2</description>
+			<description>User Item Label 1</description>
 			<id>1</id>
 			<posX>45</posX>
 			<posY>515</posY>
 			<width>90</width>
-			<label>#myfilms.user.item2.label: </label>
+			<label>#myfilms.user.item1.label: </label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>string.equals(#myfilms.user.item1.value)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 2</description>
+			<description>User Item 1</description>
 			<id>1</id>
 			<posX>140</posX>
 			<posY>515</posY>
 			<width>165</width>
-			<label>#myfilms.user.item2.value</label>
+			<label>#myfilms.user.item1.value</label>
 			<font>font11</font>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 3 Label</description>
+			<description>User Item 2 Label</description>
 			<id>1</id>
 			<posX>325</posX>
 			<posY>515</posY>
 			<width>90</width>
-			<label>#myfilms.user.item3.label: </label>
+			<label>#myfilms.user.item2.label: </label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 3</description>
+			<description>User Item 2</description>
 			<id>1</id>
 			<posX>410</posX>
 			<posY>515</posY>
 			<width>280</width>
-			<label>#myfilms.user.item3.value</label>
+			<label>#myfilms.user.item2.value</label>
 			<font>font11</font>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
@@ -884,7 +892,7 @@
 		<align>left</align>
 		<imagesToDraw>10</imagesToDraw>
 		<percentage>#myfilms.db.rating.value</percentage>
-		<visible>string.equals(#myfilms.db.rating.value)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+		<visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
 		<animation effect="fade" time="250">visiblechange</animation>
 	</control>
 	<control>
@@ -943,7 +951,7 @@
 		<height>15</height>
 		<align>left</align>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 	</control>
@@ -957,7 +965,7 @@
 		<height>15</height>
 		<align>left</align>
 		<texture>MyFilms\overlaywatched.png</texture>
-		<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 	</control>
@@ -973,7 +981,7 @@
 		<width>15</width>
 		<height>15</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>
@@ -986,7 +994,7 @@
 		<width>15</width>
 		<height>15</height>
 		<texture>MyFilms\overlaywatched.png</texture>
-		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 	</control>

@@ -7,7 +7,7 @@
     <entry name="Spacing">2</entry>
   </section>
   <section name="ID2001">
-    <entry name="ID2001_0">Framerate;contains;23;or;Framerate;contains;24;BluRay.png</entry>
+    <entry name="ID2001_0">Source;contains;bluray;or;Source;contains;bdmv;BluRay.png</entry>
     <entry name="ID2001_1">VideoFormat;contains;divx;or;VideoFormat;contains;div3;DIVX.png</entry>
     <entry name="ID2001_2">VideoFormat;contains;xvid;;;;;XVID.png</entry>
     <entry name="ID2001_3">VideoFormat;contains;dvd;;;;;DVD.png</entry>
