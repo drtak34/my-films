@@ -383,8 +383,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
     //protected GUIFadeLabel TxtSelect;
 
+    [SkinControlAttribute((int)Controls.CTRL_BtnLayout)]
+    protected GUIButtonControl BtnLayout; // ToDo: can be replaceed by "GUIMenuButton" when dropping MP1.2 compatibility - requires skin change too
+
     [SkinControlAttribute((int)Controls.CTRL_BtnSortBy)]
     protected GUISortButtonControl BtnSrtBy;
+
+    [SkinControlAttribute((int)Controls.CTRL_BtnViewAs)]
+    protected GUIButtonControl BtnViewAs; // ToDo: can be replaceed by "GUIMenuButton" when dropping MP1.2 compatibility - requires skin change too
 
     [SkinControlAttribute((int)Controls.CTRL_BtnGlobalOverlayFilter)]
     protected GUIButtonControl BtnGlobalOverlayFilter;
@@ -4331,7 +4337,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return;
       dlg.Reset();
-      dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View (films) ...
+      dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
       #region old hardcoded entries - disabled
       //dlg.Add(GUILocalizeStrings.Get(342));//videos
       //choiceView.Add("All");
@@ -4371,6 +4377,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         dlg.Add(GUILocalizeStrings.Get(10798765)); // *** show all ***
         choiceView.Add("showall");
+
+        // add menu as option
+        dlg.Add(GUILocalizeStrings.Get(924)); // menu
+        choiceView.Add("Menu");
 
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
@@ -14503,6 +14513,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("db.rating", log);
       MyFilmsDetail.clearGUIProperty("view", log); // Try to properly clean main view when entering
       MyFilmsDetail.clearGUIProperty("select", log);
+      GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnViewAs, GUILocalizeStrings.Get(97) + "Home"); // "View by: " + <view>
       LogMyFilms.Debug("(InitMainScreen) - Initialize all properties - Finished !");
     }
 
@@ -15616,12 +15627,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("view", newViewLabel);
       MyFilms.conf.StrTxtView = newViewLabel;
       GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view") + ((txtSelect.Length > 0) ? "/" : "") + txtSelect); // GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view"));
+      GUIControl.SetControlLabel(MyFilms.ID_MyFilms, (int)Controls.CTRL_BtnViewAs, GUILocalizeStrings.Get(97) + newViewLabel); // "View by: " + <view>
       LogMyFilms.Debug("SetLabelView has been called with '" + viewLabel + "' -> set view to '" + newViewLabel + "'");
       LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
     }
 
     //*****************************************************************************************
-    //*  set the #myfilms.view label
+    //*  set the #myfilms.select label
     //*****************************************************************************************
     private void SetLabelSelect(string selectLabel)
     {
