@@ -39,7 +39,7 @@ namespace MPLanguageTool
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(39, 31);
+      this.label1.Location = new System.Drawing.Point(43, 55);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(58, 13);
       this.label1.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace MPLanguageTool
       // 
       this.cbCulture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbCulture.FormattingEnabled = true;
-      this.cbCulture.Location = new System.Drawing.Point(103, 28);
+      this.cbCulture.Location = new System.Drawing.Point(107, 52);
       this.cbCulture.Name = "cbCulture";
       this.cbCulture.Size = new System.Drawing.Size(171, 21);
       this.cbCulture.TabIndex = 1;
@@ -59,7 +59,7 @@ namespace MPLanguageTool
       // 
       this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.btnCancel.Location = new System.Drawing.Point(283, 110);
+      this.btnCancel.Location = new System.Drawing.Point(46, 97);
       this.btnCancel.Name = "btnCancel";
       this.btnCancel.Size = new System.Drawing.Size(75, 23);
       this.btnCancel.TabIndex = 3;
@@ -69,7 +69,7 @@ namespace MPLanguageTool
       // 
       // btnOK
       // 
-      this.btnOK.Location = new System.Drawing.Point(24, 110);
+      this.btnOK.Location = new System.Drawing.Point(273, 97);
       this.btnOK.Name = "btnOK";
       this.btnOK.Size = new System.Drawing.Size(75, 23);
       this.btnOK.TabIndex = 2;
@@ -80,7 +80,7 @@ namespace MPLanguageTool
       // label2
       // 
       this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(39, 75);
+      this.label2.Location = new System.Drawing.Point(43, 20);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(54, 13);
       this.label2.TabIndex = 4;
@@ -89,7 +89,7 @@ namespace MPLanguageTool
       // lblLangFileName
       // 
       this.lblLangFileName.AutoSize = true;
-      this.lblLangFileName.Location = new System.Drawing.Point(104, 75);
+      this.lblLangFileName.Location = new System.Drawing.Point(108, 20);
       this.lblLangFileName.Name = "lblLangFileName";
       this.lblLangFileName.Size = new System.Drawing.Size(0, 13);
       this.lblLangFileName.TabIndex = 5;
@@ -99,7 +99,7 @@ namespace MPLanguageTool
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnCancel;
-      this.ClientSize = new System.Drawing.Size(389, 155);
+      this.ClientSize = new System.Drawing.Size(389, 132);
       this.Controls.Add(this.lblLangFileName);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.btnCancel);
