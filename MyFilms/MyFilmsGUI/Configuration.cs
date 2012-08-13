@@ -1558,12 +1558,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return lastID; }
             set { lastID = value; }
         }
-        private decimal w_rating = decimal.Zero;
-        public decimal W_rating
-        {
-            get { return w_rating; }
-            set { w_rating = value; }
-        }
+        //private decimal w_rating = decimal.Zero;
+        //public decimal W_rating
+        //{
+        //    get { return w_rating; }
+        //    set { w_rating = value; }
+        //}
         private int strIndex = int.MinValue;
         public int StrIndex
         {
