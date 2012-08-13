@@ -1262,7 +1262,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Change_Menu("mainmenu");
                     return;
                   }
+                  if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                  {
+                    SetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName, dlgRating.Rating.ToString());
+                  }
                   MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating;
+
 
                   Update_XML_database();
                   afficher_detail(true);
@@ -6861,7 +6866,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   #endregion
 
-                  #region set userdefined watched field
+                  #region set userdefined watched and rating field
                   if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
                   {
                     if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
@@ -6891,7 +6896,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         setGUIProperty("user.watched.value", "true");
                       else
                         setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
-                      clearGUIProperty("user.rating.value");
+
+                      wstring = "0";
+                      if ((wrep) && (MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0))
+                      {
+                        float fRating = 0;
+                        bool success = float.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out fRating);
+                        if (!success) fRating = 0;
+                        wstring = fRating.ToString();
+                      }
+                      setGUIProperty("user.rating.value", wstring);
                     }
                   }
                   #endregion
@@ -6902,6 +6916,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     case "translatedtitle":
                     case "originaltitle":
                     case "formattedtitle":
+                      #region set titles
                       if (wrep)
                         if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                           if (MyFilms.r[ItemId][dc.ColumnName].ToString().Contains(MyFilms.conf.TitleDelim))
@@ -6941,6 +6956,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           clearGUIProperty("user.secondarytitle.value");
                           clearGUIProperty("user.secondarytitle.groupname");
                         }
+                      #endregion
                       break;
 
                     case "length":
@@ -6963,7 +6979,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (MyFilms.r[ItemId]["Actors"].ToString().Length > 0)
                         {
                           wstring = MyFilms.r[ItemId]["Actors"].ToString().Replace('|', '\n');
-                          wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
+                          wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
                         }
                       setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                       Load_Detailed_DB_PushActorsToSkin(wstring);
@@ -6974,9 +6990,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                         {
                           wstring = System.Web.HttpUtility.HtmlEncode(MyFilms.r[ItemId][dc.ColumnName].ToString().Replace('’', '\''));
-                          wstring = wstring.ToString().Replace('|', '\n');
-                          wstring = wstring.ToString().Replace('…', '.');
-                          wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
+                          wstring = wstring.Replace('|', '\n').Replace('…', '.');
+                          wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
                         }
                       setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                       break;
@@ -7009,22 +7024,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       break;
                     case "rating":
+                    case "ratinguser":
                       wstring = "0";
                       if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                         wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                      //try { MyFilms.conf.W_rating = (decimal)MyFilms.r[ItemId][dc.ColumnName]; }
+                      //catch { MyFilms.conf.W_rating = 0; }
                       try
                       {
-                        MyFilms.conf.W_rating = (decimal)MyFilms.r[ItemId][dc.ColumnName];
+                        wstring = ((decimal)MyFilms.r[ItemId][dc.ColumnName]).ToString();
                       }
                       catch
                       {
-                        MyFilms.conf.W_rating = 0;
+                        wstring = "0";
                       }
                       setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                       break;
+
+                    // fields to skip (do not publish)
                     case "contents_id":
                     case "dateadded":
                     case "picture":
+                    case "watched":
                       break;
                     case "fanart":
                       if ((MyFilms.currentMovie.Fanart.Length == 0) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
@@ -7037,10 +7058,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         MyFilms.currentMovie.IMDBNumber = "";
                       break;
                     case "tmdb_id":
-                    case "watched":
                       break;
-
                     case "isonline":
+                      #region set online status
                       // old method
                       //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                       //{
@@ -7097,8 +7117,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       else
                         setGUIProperty("user.source.isonline", "");
+                      #endregion
                       break;
                     case "isonlinetrailer":
+                      #region set trailer online status
                       //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                       //{
                       //  if (MyFilms.InitialIsOnlineScan)
@@ -7152,8 +7174,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       else
                         setGUIProperty("user.sourcetrailer.isonline", "");
+                      #endregion
                       break;
                     case "resolution":
+                      #region set calculated aspectratio and image format
                       decimal aspectratio = 0;
                       string ar = "";
                       if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
@@ -7190,6 +7214,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                       setGUIProperty("db.calc.aspectratio.value", wstring);
                       setGUIProperty("db.calc.imageformat.value", ar);
+                      #endregion
                       break;
                     case "year":
                       if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
