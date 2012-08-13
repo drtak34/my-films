@@ -1340,6 +1340,52 @@
             		<visible>no</visible>
 			<keepaspectratio>yes</keepaspectratio>
 		</control>
+
+<!-- User Rating  -->
+
+<!--
+    <control>
+      <description>UserRatingValue</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>725</posX>
+      <posY>699</posY>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
+      <font>font9</font>
+      <align>right</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!string.equals(#myfilms.user.rating.value,-1)+!control.isvisible(34)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!string.equals(#myfilms.user.rating.value,-1)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+-->
+    <control>
+      <description>Rating Stars</description>
+      <type>imagelist</type>
+      <id>0</id>
+			<posX>270</posX>
+			<posY>578</posY>
+			<height>8</height>
+			<textureWidth>8</textureWidth>
+			<textureHeight>8</textureHeight>
+      <subitems>
+				<subitem>greystar.png</subitem>
+				<subitem>stargood.png</subitem>
+      </subitems>
+      <orientation>horizontal</orientation>
+      <align>right</align>
+      <imagesToDraw>10</imagesToDraw>
+      <percentage>#myfilms.user.rating.value</percentage>
+      <visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+
+
 	  <import>MyFilmsLatestMedia.xml</import>
     </controls>
 </window>
