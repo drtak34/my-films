@@ -111,6 +111,10 @@
     <String id="1079848">Creating new Fanart from movie</String>
     <String id="1079849">Create fanart from movie as single images (local)</String>
     <String id="1079850">Aktualizácia on-line dostupnosť</String>
+    <String id="1079851">Create single mosaic fanart from movie</String>
+    <String id="1079852">Create 'snapshot' fanart from current playback position</String>
+    <String id="1079853">Create both single mosaic and multiple fanart from movie</String>
+    <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Zastaviť update DB filmu (aktívne)</String>
     <String id="1079856">Globálna aktualizácia bola zrušená!</String>
     <String id="1079857">Stiahnuť TMDB dáta (online)</String>
@@ -177,14 +181,14 @@
     <String id="10798616">Hľadať na všetky vlastnosti</String>
     <String id="10798617">Hľadať vlastnosti </String>
     <String id="10798618">Globálne úsilie o hľadanie reťazec "{0} '</String>
-    <String id="10798619">=> {0} záznam(y) pre výraz {1}</String>
+    <String id="10798619">=&gt; {0} záznam(y) pre výraz {1}</String>
     <String id="10798620">Informácie o osobe</String>
     <String id="10798621">Vyhľadávanie Náhodné filmy</String>
     <String id="10798622">Všetko</String>
     <String id="10798623">(bez info)</String>
     <String id="10798624">Filmy informačný systém</String>
     <String id="10798625">Žiadny výsledok pre túto hodnotu!</String>
-    <String id="10798626">=> '{1}' ({0})</String>
+    <String id="10798626">=&gt; '{1}' ({0})</String>
     <String id="10798627">Jediné slovo</String>
     <String id="10798628">zapnuté</String>
     <String id="10798629">vypnuté</String>
@@ -273,7 +277,7 @@
     <String id="10798715">Nahrať osobné údaje (všetky osoby)</String>
     <String id="10798716">IMDB Trailer (OnlineVideos)</String>
     <String id="10798717">Neúplných dát filmu</String>
-    <String id="10798718">=> {0} Film (y) chýba '{1}'</String>
+    <String id="10798718">=&gt; {0} Film (y) chýba '{1}'</String>
     <String id="10798719">Nahrať info pre filmy (. NFO súbor, miestne, doplnenie chýbajúcich informácií)</String>
     <String id="10798720">Nahrať info pre filmy (. NFO súbor, miestne, nahradiť všetky informácie)</String>
     <String id="10798721">Nahrať info pre filmy z Ant súboru (miestne)</String>
@@ -304,6 +308,7 @@
     <String id="10798746">nie je nakonfigurovaný pre wakeonlan!</String>
     <String id="10798747">Automatické spustenie NAS nie je možné ...</String>
     <String id="10798748">Globálna Aktualizácia skončená!</String>
+    <String id="10798749">MyFilms: Download to movie directory</String>
     <String id="10798751">Prehľad</String>
     <String id="10798752">Popis</String>
     <String id="10798753">Komentáre</String>

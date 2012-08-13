@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Language name="French" characters="255">
   <Section name="unmapped">
     <String id="95">Affichage: </String>
@@ -103,19 +103,12 @@
     <String id="1079839">Reverse names ({0})</String>
     <String id="1079840">Changer d'utilisateur ('{0}')</String>
     <String id="1079841">Change default view ('{0}')</String>
-    <String id="1079846">Accompli ...</String>
-    <String id="1079847">Créateur de Fanart</String>
-    <String id="1079848">Créer un fanart à partir du film</String>
-    <String id="1079834">If you confirm, you media files will physically be deleted !</String>
-    <String id="1079835">Are you sure you want to delete movie ?</String>
-    <String id="1079839">Reverse names ({0})</String>
-    <String id="1079840">Choose user profile ('{0}')</String>
     <String id="1079843">Userdefined DB Update (AMCupdater)</String>
     <String id="1079844">Show indexed values ({0})</String>
     <String id="1079845">Don't split values ({0})</String>
-    <String id="1079846">Done ...</String>
-    <String id="1079847">MyFilms Fanart Creator</String>
-    <String id="1079848">Creating new Fanart from movie</String>
+    <String id="1079846">Accompli ...</String>
+    <String id="1079847">Créateur de Fanart</String>
+    <String id="1079848">Créer un fanart à partir du film</String>
     <String id="1079849">Create fanart from movie as single images (local)</String>
     <String id="1079850">Update online availability</String>
     <String id="1079851">Create single fanart from movie as mosaic image (local)</String>
@@ -295,9 +288,9 @@
     <String id="10798726">Recherche des Bandes Annonces - tous les films (local)</String>
     <String id="10798727">Montrer le status du serveur Nas</String>
     <String id="10798728">Créer la vignette du film</String>
+    <String id="10798729">Create Cover from film as mosaic</String>
     <String id="10798730">Charger les infos du film (.nfo file, local)</String>
     <String id="10798731">Infos sur la personne (IMDB)</String>
-    <String id="10798731">Person info (IMDB)</String>
     <String id="10798732">Choisir les propriétés pour la mise à jour ...</String>
     <String id="10798733">Remplacer la vignette existante par celle-ci?</String>
     <String id="10798734">Mettre à jour toutes les propriétés</String>
@@ -309,13 +302,10 @@
     <String id="10798740">*** Lancer toutes les Bandes Annonces ***</String>
     <String id="10798741">(active)</String>
     <String id="10798742">(offline) - débuter?</String>
-    <String id="10798743">démarré(ées) avec succès!
-</String>
+    <String id="10798743">démarré(ées) avec succès!</String>
     <String id="10798744">Impossible de démarrer!</String>
     <String id="10798745">Lancement Impossible - Controler la config!</String>
-    <String id="10798746">
-n'est pas configuré pour le Wake on LAN!
-</String>
+    <String id="10798746">n'est pas configuré pour le Wake on LAN!</String>
     <String id="10798747">Lancement automatique du Nas impossible...</String>
     <String id="10798748">Mise à jour globale terminée</String>
     <String id="10798749">MyFilms: Download to movie directory</String>

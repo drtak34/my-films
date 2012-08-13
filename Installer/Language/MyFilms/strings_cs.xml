@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Language name="Czech" characters="255">
+<Language name="Czech" characters="512">
   <Section name="unmapped">
     <String id="95">Změnit pohled: </String>
     <String id="96">Řadit podle: </String>
@@ -106,7 +106,15 @@
     <String id="1079843">Userdefined DB Update (AMCupdater)</String>
     <String id="1079844">Show indexed values ({0})</String>
     <String id="1079845">Don't split values ({0})</String>
+    <String id="1079846">Done ...</String>
+    <String id="1079847">MyFilms Fanart Creator</String>
+    <String id="1079848">Creating new Fanart from movie</String>
+    <String id="1079849">Create multiple fanart from movie</String>
     <String id="1079850">Aktualizace on-line dostupnost</String>
+    <String id="1079851">Create single mosaic fanart from movie</String>
+    <String id="1079852">Create 'snapshot' fanart from current playback position</String>
+    <String id="1079853">Create both single mosaic and multiple fanart from movie</String>
+    <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Zastavit update DB filmu (aktivní)</String>
     <String id="1079856">Globální aktualizace byla zrušena!</String>
     <String id="1079857">Stáhnout TMDB data (online)</String>
@@ -173,14 +181,14 @@
     <String id="10798616">Hledat na všechny vlastnosti</String>
     <String id="10798617">Hledat vlastnosti </String>
     <String id="10798618">Globální úsilí o hledání řetězec "{0} '</String>
-    <String id="10798619">=> {0} záznam (y) pro výraz {1}</String>
+    <String id="10798619">=&gt; {0} záznam (y) pro výraz {1}</String>
     <String id="10798620">Informace o osobě</String>
     <String id="10798621">Vyhledávání Náhodné filmy</String>
     <String id="10798622">Vše</String>
     <String id="10798623">(bez info)</String>
     <String id="10798624">Filmy informační systém</String>
     <String id="10798625">Žádný výsledek pro tuto hodnotu!</String>
-    <String id="10798626">=> '{1}' ({0})</String>
+    <String id="10798626">=&gt; '{1}' ({0})</String>
     <String id="10798627">Jediné slovo</String>
     <String id="10798628">zapnuto</String>
     <String id="10798629">vypnuto</String>
@@ -269,7 +277,7 @@
     <String id="10798715">Nahrát osobní údaje (všechny osoby)</String>
     <String id="10798716">IMDB Trailer (OnlineVideos)</String>
     <String id="10798717">Neúplných dat filmu</String>
-    <String id="10798718">=> {0} Film(y) chybí '{1}'</String>
+    <String id="10798718">=&gt; {0} Film(y) chybí '{1}'</String>
     <String id="10798719">Nahrát info pro filmy (.NFO soubor, místní, doplnění chybějících informací)</String>
     <String id="10798720">Nahrát info pro filmy (.NFO soubor, místní, nahradit všechny informace)</String>
     <String id="10798721">Nahrát info pro filmy z Ant souboru (místní)</String>
@@ -300,6 +308,7 @@
     <String id="10798746">není nakonfigurován pro wakeonlan!</String>
     <String id="10798747">Automatické spuštění NAS není možné ...</String>
     <String id="10798748">Globální Aktualizace skončena!</String>
+    <String id="10798749">MyFilms: Download to movie directory</String>
     <String id="10798751">Přehled</String>
     <String id="10798752">Popis</String>
     <String id="10798753">Komentáře</String>
