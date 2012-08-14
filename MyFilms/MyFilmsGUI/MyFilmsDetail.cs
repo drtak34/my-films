@@ -1235,10 +1235,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Update_XML_database();
                   afficher_detail(true);
 
-                  // tell any listeners that user rated the movie
-                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
-                  string value = dlgRating.Rating.ToString();
-                  if (RateItem != null) RateItem(movie, value);
+                  //// tell any listeners that user rated the movie
+                  //movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
+                  //string value = dlgRating.Rating.ToString();
+                  //if (RateItem != null) RateItem(movie, value);
                   #endregion
                 }
                 break;
