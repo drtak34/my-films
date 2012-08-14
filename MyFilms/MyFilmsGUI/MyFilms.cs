@@ -2906,9 +2906,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region Set sort buttons (movie vs. collection) and set Layout
 
       BtnSrtBy.IsEnabled = true;
-      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies)) : (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSorta));
+      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSorta)));
       BtnSrtBy.IsAscending = (conf.BoolCollection) ? (conf.StrSortSensInHierarchies == " ASC") : (conf.StrSortSens == " ASC");
-      // BtnSrtBy.Disabled = (conf.BoolCollection) ? true : false;
+      // BtnSrtBy.Disabled = conf.BoolCollection;
 
       Change_Layout_Action((conf.BoolCollection) ? conf.StrLayOutInHierarchies : conf.StrLayOut);
       #endregion
@@ -4971,7 +4971,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Reset();
         dlg.SetHeading(conf.BoolCollection ? GUILocalizeStrings.Get(1079905) : GUILocalizeStrings.Get(1079902));
         var choiceSort = new List<string>();
-        dlg.Add(GUILocalizeStrings.Get(103));//Title
+        dlg.Add(GUILocalizeStrings.Get(103));// Name (=Title)
         choiceSort.Add("Title");
         dlg.Add(GUILocalizeStrings.Get(366));//Year
         choiceSort.Add("Year");
@@ -8638,7 +8638,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       #region Configure Default Button Labels ...
-      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies)) : (GUILocalizeStrings.Get(96) + BaseMesFilms.Translate_Column(conf.StrSorta));
+      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSorta)));
       // BtnToggleGlobalWatched.Label = (MyFilms.conf.GlobalUnwatchedOnly) ? string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628)) : string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
       #endregion
 
