@@ -4493,7 +4493,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Change_Layout_Action(0); // always use list view // Change_Layout_Action(MyFilms.conf.WStrLayOut);  // we share the layout with Views ...
 
-      BtnSrtBy.Label = GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103); // sort: name
+      BtnSrtBy.Label = GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(103); // sort: name
       //BtnSrtBy.IsAscending = true;
       BtnSrtBy.IsEnabled = false;
 
@@ -4939,6 +4939,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.Boolselect) // view sort (grouping) // No change of normal filmlist sort method and no searchs in grouped views (views, e.g. country, year, etc.) - change count sorting instead ...
       {
         #region sorting by counts
+        //       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
+
+        var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        if (dlg == null) return;
+        dlg.Reset();
+        dlg.SetHeading(GUILocalizeStrings.Get(98)); // "Sort By ..."
+        var choiceSort = new List<string>();
+        dlg.Add(GUILocalizeStrings.Get(103)); // Name
+        choiceSort.Add("Name");
+        dlg.Add(GUILocalizeStrings.Get(1079910)); // Count
+        choiceSort.Add("Count");
+        dlg.SelectedLabel = (conf.BoolSortCountinViews) ? 1 : 0; // set position to active sort type
+        dlg.DoModal(GetID);
+        if (dlg.SelectedLabel == -1) return;
+
+        // new sort was selected ...
+        conf.StrIndex = 0; // reset facadeposition to first line, as after sort position isn't valid anymore ...
+
+        bool boolSortCountInViews = conf.BoolSortCountinViews;
+        switch (choiceSort[dlg.SelectedLabel])
+        {
+          case "Name":
+            boolSortCountInViews = false;
+            break;
+          case "Count":
+            boolSortCountInViews = true;
+            break;
+          default:
+            boolSortCountInViews = false;
+            break;
+        }
+        dlg.DeInit();
+        if (conf.BoolSortCountinViews == boolSortCountInViews) return;
+        
         conf.BoolSortCountinViews = !conf.BoolSortCountinViews;
         new Thread(delegate()
         {
@@ -5938,7 +5972,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIPropertyManager.SetProperty("#itemcount", "0");
 
       BtnSrtBy.IsEnabled = true;
-      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
+      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (conf.WStrSortSens == " ASC");
 
       conf.Boolselect = true;
@@ -6736,7 +6770,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //DateTime now = DateTime.Now;
 
       BtnSrtBy.IsEnabled = true;
-      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
+      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
       BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (WStrSortSens == " ASC");
       conf.ViewContext = (isperson) ? ViewContext.Person : ViewContext.Group;
 
