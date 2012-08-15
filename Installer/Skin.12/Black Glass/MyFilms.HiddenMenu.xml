@@ -197,6 +197,18 @@
           <onup>10013</onup>
           <ondown>2</ondown>
         </control>
+<!--
+        <control>
+          <description>WOL-Manager</description>
+          <type>button</type>
+          <id>10015</id>
+          <hyperlink>17986</hyperlink>
+          <label>WOL-Manager</label>
+          <onright>50</onright>
+          <onup>10014</onup>
+          <ondown>2</ondown>
+        </control>
+-->
         <control>
           <description>MPEIUPDATE:ceddd4d1-4cac-4846-9af5-f4daee1bbddc</description>
           <type>button</type>

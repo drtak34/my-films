@@ -399,7 +399,7 @@
       <posX>725</posX>
       <posY>679</posY>
       <width>279</width>
-      <label>#myfilms.user.watched.name: #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
+      <label>#myfilms.user.watched.name #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
       <font>font9</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
