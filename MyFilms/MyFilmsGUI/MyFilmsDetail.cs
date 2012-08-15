@@ -6897,13 +6897,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       else
                         setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
 
-                      wstring = "0";
+                      wstring = "";
                       if ((wrep) && (MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0))
                       {
                         float fRating = 0;
-                        bool success = float.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out fRating);
-                        if (!success) fRating = 0;
-                        wstring = fRating.ToString();
+                        if (float.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out fRating))
+                          wstring = fRating.ToString();
                       }
                       setGUIProperty("user.rating.value", wstring);
                     }
@@ -7025,7 +7024,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       break;
                     case "rating":
                     case "ratinguser":
-                      wstring = "0";
+                      wstring = "";
                       if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                         wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
                       //try { MyFilms.conf.W_rating = (decimal)MyFilms.r[ItemId][dc.ColumnName]; }
@@ -7036,7 +7035,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       catch
                       {
-                        wstring = "0";
+                        wstring = "";
                       }
                       setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                       break;

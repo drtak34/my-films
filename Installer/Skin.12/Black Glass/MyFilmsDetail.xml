@@ -2404,7 +2404,7 @@
       <font>font9</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
-      <visible>!string.equals(#myfilms.user.rating.value,-1)+!control.isvisible(34)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+string.equals(#myfilms.user.watched.name)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -2428,7 +2428,7 @@
       <align>right</align>
       <imagesToDraw>10</imagesToDraw>
       <percentage>#myfilms.user.rating.value</percentage>
-      <visible>!string.equals(#myfilms.user.rating.value,)+!string.equals(#myfilms.user.rating.value,-1)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!string.equals(#myfilms.user.rating.value,)+string.equals(#myfilms.user.watched.name)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>

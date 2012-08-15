@@ -64,7 +64,7 @@
       <align>right</align>
       <font>font10</font>
       <textcolor>60ffffff</textcolor>
-      <label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))#(iif(neq(#myfilms.db.rating.value,'0'),' - #myfilms.db.rating.value',''))</label>
+      <label>#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))#(iif(neq(#myfilms.db.rating.value,''),' - #myfilms.db.rating.value',''))</label>
       <visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]+[control.hasfocus(50)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
