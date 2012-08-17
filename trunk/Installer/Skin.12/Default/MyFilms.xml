@@ -46,7 +46,7 @@
 			<label></label>
 			<posX>-50</posX>
 			<posY>-50</posY>
-      <visible>true</visible>
+      <visible>false</visible>
 			<!-- to make a control visible only when you are in a VIEW do this: <visible>control.isvisible(34)</visible> -->
 			<!-- to make a control invisible when you are in a VIEW do this: <visible>!control.isvisible(34)</visible> -->
 			<!-- Note: Dummy control 34 is maintained for backwards compatibility, but skins may use more specific View controls  -->

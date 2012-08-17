@@ -72,7 +72,7 @@
       <id>34</id>
       <posX>0</posX>
       <posY>0</posY>
-      <visible>true</visible>
+      <visible>false</visible>
       <focusable>no</focusable>
     </control>
     <control>

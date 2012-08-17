@@ -1327,9 +1327,9 @@ Partial Class Form1
         Me.lblManualParametersOperator2.AutoSize = True
         Me.lblManualParametersOperator2.Location = New System.Drawing.Point(219, 58)
         Me.lblManualParametersOperator2.Name = "lblManualParametersOperator2"
-        Me.lblManualParametersOperator2.Size = New System.Drawing.Size(54, 13)
+        Me.lblManualParametersOperator2.Size = New System.Drawing.Size(48, 13)
         Me.lblManualParametersOperator2.TabIndex = 47
-        Me.lblManualParametersOperator2.Text = "Operator :"
+        Me.lblManualParametersOperator2.Text = "Operator"
         Me.lblManualParametersOperator2.Visible = False
         '
         'txtManualParameterValue2
@@ -1357,9 +1357,9 @@ Partial Class Form1
         Me.lblManualParametersField2.AutoSize = True
         Me.lblManualParametersField2.Location = New System.Drawing.Point(68, 58)
         Me.lblManualParametersField2.Name = "lblManualParametersField2"
-        Me.lblManualParametersField2.Size = New System.Drawing.Size(54, 13)
+        Me.lblManualParametersField2.Size = New System.Drawing.Size(47, 13)
         Me.lblManualParametersField2.TabIndex = 46
-        Me.lblManualParametersField2.Text = "Ant Field :"
+        Me.lblManualParametersField2.Text = "DB Field"
         Me.lblManualParametersField2.Visible = False
         '
         'cbManualParameterFieldList2
@@ -1407,9 +1407,9 @@ Partial Class Form1
         Me.Label19.AutoSize = True
         Me.Label19.Location = New System.Drawing.Point(219, 16)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(54, 13)
+        Me.Label19.Size = New System.Drawing.Size(48, 13)
         Me.Label19.TabIndex = 9
-        Me.Label19.Text = "Operator :"
+        Me.Label19.Text = "Operator"
         '
         'txtManualParameterValue1
         '
@@ -1434,9 +1434,9 @@ Partial Class Form1
         Me.Label18.AutoSize = True
         Me.Label18.Location = New System.Drawing.Point(68, 16)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(54, 13)
+        Me.Label18.Size = New System.Drawing.Size(47, 13)
         Me.Label18.TabIndex = 6
-        Me.Label18.Text = "Ant Field :"
+        Me.Label18.Text = "DB Field"
         '
         'cbManualParameterFieldList1
         '
@@ -1509,9 +1509,9 @@ Partial Class Form1
         Me.lblManualSelectFieldDestination.AutoSize = True
         Me.lblManualSelectFieldDestination.Location = New System.Drawing.Point(222, 71)
         Me.lblManualSelectFieldDestination.Name = "lblManualSelectFieldDestination"
-        Me.lblManualSelectFieldDestination.Size = New System.Drawing.Size(104, 13)
+        Me.lblManualSelectFieldDestination.Size = New System.Drawing.Size(103, 13)
         Me.lblManualSelectFieldDestination.TabIndex = 15
-        Me.lblManualSelectFieldDestination.Text = "Ant Field Destination"
+        Me.lblManualSelectFieldDestination.Text = "DB Field Destination"
         Me.lblManualSelectFieldDestination.Visible = False
         '
         'cbManualSelectFieldDestination
@@ -1599,7 +1599,7 @@ Partial Class Form1
         Me.lblManualSelectField.Name = "lblManualSelectField"
         Me.lblManualSelectField.Size = New System.Drawing.Size(48, 13)
         Me.lblManualSelectField.TabIndex = 4
-        Me.lblManualSelectField.Text = "Ant Field"
+        Me.lblManualSelectField.Text = "DB Field"
         Me.lblManualSelectField.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.lblManualSelectField.Visible = False
         '
@@ -1693,9 +1693,9 @@ Partial Class Form1
         Me.Label20.AutoSize = True
         Me.Label20.Location = New System.Drawing.Point(6, 16)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(168, 13)
+        Me.Label20.Size = New System.Drawing.Size(174, 13)
         Me.Label20.TabIndex = 38
-        Me.Label20.Text = "Path to AMC Database File (.xml) :"
+        Me.Label20.Text = "Path to Movie Database File (.xml) :"
         '
         'Label40
         '
