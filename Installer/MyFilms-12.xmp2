@@ -157,13 +157,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Default\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{95b72b78-073a-4f21-b1a4-1defa1148eaa}-MyFilmsActorsInfo.xml</ZipFileName>
-              <DestinationFilename>%Skin%\Default\MyFilmsActorsInfo.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Default\MyFilmsCoverManager.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{85c66b8d-1877-4904-9bb1-599791451399}-MyFilmsCoverManager.xml</ZipFileName>
               <DestinationFilename>%Skin%\Default\MyFilmsCoverManager.xml</DestinationFilename>
@@ -489,13 +482,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Skin.12\DefaultWide\MyFilms.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{74483fdf-5d66-4952-a2d7-5845bf7d0e45}-MyFilms.xml</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\MyFilms.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{fbe746bf-6fdb-42d6-8c6c-dd27d6214032}-MyFilmsActorsInfo.xml</ZipFileName>
-              <DestinationFilename>%Skin%\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -2714,13 +2700,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Default\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{da105bcb-cdf2-4342-813b-b01b82b768c1}-MyFilmsActorsInfo.xml</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\MyFilmsActorsInfo.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Default\MyFilmsCoverManager.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{c3254d4d-cf96-421c-a3a1-ed671da8f3f3}-MyFilmsCoverManager.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Default\MyFilmsCoverManager.xml</DestinationFilename>
@@ -3053,13 +3032,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <LocalFileName>Skin.12\DefaultWide\MyFilms.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{9dff2bc5-6a13-4948-812a-54b1250bafc3}-MyFilms.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\MyFilms.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{df81e6bf-acc7-4d9b-93d1-8141356b86c7}-MyFilmsActorsInfo.xml</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -3687,13 +3659,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{24ce6d40-51a5-415e-b5c4-91dcac9545f8}-Thumbs.db</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Trailer.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{09f382dd-6396-4067-9b9e-87c3f5122db0}-Trailer.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Trailer.png</DestinationFilename>
@@ -3813,13 +3778,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Rating\Thumbs.db</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{9997b615-c8c6-461a-85b5-2ae249bf7d4f}-Thumbs.db</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Rating\Thumbs.db</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Rating\traktLoginFieldFocus.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{e07c9c30-4d79-48e3-bddd-8ede3cfca859}-traktLoginFieldFocus.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Rating\traktLoginFieldFocus.png</DestinationFilename>
@@ -3865,13 +3823,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Certification\6.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{bc7a763b-33c3-453f-b6c6-7e80f30e9534}-6.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Certification\6.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Certification\Thumbs.db</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ad71ab00-784f-4e36-a40c-a958a710265f}-Thumbs.db</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Certification\Thumbs.db</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -4909,7 +4860,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2381</Revision>
+      <Revision>2385</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -4921,7 +4872,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-08-14T04:17:49.5933924+02:00</ReleaseDate>
+    <ReleaseDate>2012-08-16T05:03:12.4663656+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -5091,13 +5042,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\Default\MyFilms.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{da95c920-d7f0-4376-afdc-5011fc1cdc76}-MyFilms.xml</ZipFileName>
         <DestinationFilename>%Skin%\Default\MyFilms.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Default\MyFilmsActorsInfo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{95b72b78-073a-4f21-b1a4-1defa1148eaa}-MyFilmsActorsInfo.xml</ZipFileName>
-        <DestinationFilename>%Skin%\Default\MyFilmsActorsInfo.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -5427,13 +5371,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\DefaultWide\MyFilms.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{74483fdf-5d66-4952-a2d7-5845bf7d0e45}-MyFilms.xml</ZipFileName>
         <DestinationFilename>%Skin%\DefaultWide\MyFilms.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{fbe746bf-6fdb-42d6-8c6c-dd27d6214032}-MyFilmsActorsInfo.xml</ZipFileName>
-        <DestinationFilename>%Skin%\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -7755,13 +7692,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{24ce6d40-51a5-415e-b5c4-91dcac9545f8}-Thumbs.db</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Trailer.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{09f382dd-6396-4067-9b9e-87c3f5122db0}-Trailer.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Trailer.png</DestinationFilename>
@@ -7881,13 +7811,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Rating\Thumbs.db</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9997b615-c8c6-461a-85b5-2ae249bf7d4f}-Thumbs.db</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Rating\Thumbs.db</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Rating\traktLoginFieldFocus.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{e07c9c30-4d79-48e3-bddd-8ede3cfca859}-traktLoginFieldFocus.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Rating\traktLoginFieldFocus.png</DestinationFilename>
@@ -7933,13 +7856,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Certification\6.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{bc7a763b-33c3-453f-b6c6-7e80f30e9534}-6.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Certification\6.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Certification\Thumbs.db</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ad71ab00-784f-4e36-a40c-a958a710265f}-Thumbs.db</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Certification\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />

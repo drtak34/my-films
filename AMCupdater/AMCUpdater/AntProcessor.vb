@@ -706,6 +706,10 @@ Public Class AntProcessor
             TextReader.Close()
         End If
 
+        'If Not (xmlFile Is Nothing) Then
+        '    xmlFile.Close()
+        'End If
+
     End Sub
 
     Public Sub ManualRunOperation()
@@ -889,24 +893,26 @@ Public Class AntProcessor
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Record Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
                     Case "Delete Value"
-                        If Not CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
-                            CurrentNode.Attributes.Remove(CurrentNode.Attributes.GetNamedItem(_ManualFieldName))
+                        If Not GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                            RemoveValue(CurrentNode, _ManualFieldName)
                             'LogEvent("Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
+                        'If Not CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    CurrentNode.Attributes.Remove(CurrentNode.Attributes.GetNamedItem(_ManualFieldName))
+                        '    'LogEvent("Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'End If
                     Case "Copy Value"
                         Try
-
-                            If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldName).Value)) Then
-                                If CurrentNode.Attributes(_ManualFieldNameDestination) Is Nothing Then
-                                    newAttr = XmlDoc.CreateAttribute(_ManualFieldNameDestination)
-                                    newAttr.Value = CurrentNode.Attributes(_ManualFieldName).Value
-                                    CurrentNode.Attributes.Append(newAttr)
+                            ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldName))) Then
+                                If GetValue(CurrentNode, _ManualFieldNameDestination) Is Nothing Then
+                                    SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                                ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldNameDestination).Value)) Then
-                                    CurrentNode.Attributes(_ManualFieldNameDestination).Value = CurrentNode.Attributes(_ManualFieldName).Value
+                                ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldNameDestination))) Then
+                                    SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                 Else
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
@@ -914,6 +920,23 @@ Public Class AntProcessor
                             Else
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - destination should not be overwritten with empty data: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             End If
+                            'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            'ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldName).Value)) Then
+                            '    If CurrentNode.Attributes(_ManualFieldNameDestination) Is Nothing Then
+                            '        newAttr = XmlDoc.CreateAttribute(_ManualFieldNameDestination)
+                            '        newAttr.Value = CurrentNode.Attributes(_ManualFieldName).Value
+                            '        CurrentNode.Attributes.Append(newAttr)
+                            '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            '    ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldNameDestination).Value)) Then
+                            '        CurrentNode.Attributes(_ManualFieldNameDestination).Value = CurrentNode.Attributes(_ManualFieldName).Value
+                            '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            '    Else
+                            '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            '    End If
+                            'Else
+                            '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - destination should not be overwritten with empty data: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            'End If
                         Catch ex As Exception
 
                         End Try
@@ -3476,9 +3499,11 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"MediaLabel", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"MediaType", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Source", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"SourceTrailer", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Borrower", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"OriginalTitle", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"TranslatedTitle", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"FormattedTitle", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Director", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Producer", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Country", "String"})
@@ -3572,6 +3597,110 @@ Public Class AntProcessor
             End If
         End If
         Return Nothing
+    End Function
+
+    Private Shared Sub RemoveValue(ByRef CurrentNode As Xml.XmlNode, ByVal currentAttribute As String)
+        If (IsExtendedField(currentAttribute)) Then
+            Const SubElementName As String = "CustomFields"
+            If Not CurrentNode.Item(SubElementName).Attributes(currentAttribute) Is Nothing Then
+                CurrentNode.Item(SubElementName).Attributes.Remove(CurrentNode.Item(SubElementName).Attributes.GetNamedItem(currentAttribute))
+            End If
+        Else
+            If Not CurrentNode.Attributes(currentAttribute) Is Nothing Then
+                CurrentNode.Attributes.Remove(CurrentNode.Attributes.GetNamedItem(currentAttribute))
+            End If
+        End If
+    End Sub
+
+    Private Shared Sub SetValue(ByRef CurrentNode As Xml.XmlNode, ByVal currentAttribute As String, ByVal value As String)
+        If (IsExtendedField(currentAttribute)) Then
+            CreateOrUpdateCustomFieldsAttribute(CurrentNode, currentAttribute, value)
+        Else
+            CreateOrUpdateAttribute(CurrentNode, currentAttribute, value)
+        End If
+    End Sub
+
+    Private Shared Sub CreateOrUpdateAttribute(ByRef CurrentNode As Xml.XmlElement, ByVal currentAttribute As String, ByVal currentValue As String)
+        Dim _XMLDoc As New Xml.XmlDocument
+        'Dim _XMLElement As Xml.XmlElement
+        'CurrentSettings.Only_Add_Missing_Data
+
+        Dim attr As Xml.XmlAttribute
+        'If currentValue <> "" Then
+        '    CleanValueForInnerXML(currentValue)
+        'End If
+        'If currentValue <> "" Or (currentValue = "" And CurrentSettings.Only_Update_With_Nonempty_Data = False) Then
+        'End If
+        If CurrentNode.Attributes(currentAttribute) Is Nothing Then
+            attr = _XMLDoc.CreateAttribute(currentAttribute)
+            attr.Value = currentValue
+            CurrentNode.Attributes.Append(attr)
+        Else
+            CurrentNode.Attributes(currentAttribute).Value = currentValue
+        End If
+    End Sub
+
+    Private Sub CreateOrUpdateElement(ByRef CurrentNode As Xml.XmlElement, ByVal currentAttribute As String, ByVal currentValue As String)
+        Dim _XMLDoc As New Xml.XmlDocument
+        'Dim _XMLElement As Xml.XmlElement
+        ' First create new AMC4 objects - does NOT (yet) reset currentValue
+        CreateOrUpdateCustomFieldsAttribute(CurrentNode, currentAttribute, currentValue)
+
+        Dim element As Xml.XmlElement
+        'If currentValue <> "" Then
+        '    CleanValueForInnerXML(currentValue)
+        'End If
+        'If currentValue <> "" Or (currentValue = "" And CurrentSettings.Only_Update_With_Nonempty_Data = False) Then
+        'End If
+        If CurrentNode.Item(currentAttribute) Is Nothing Then
+            element = _XMLDoc.CreateElement(currentAttribute)
+            element.InnerText = currentValue
+            CurrentNode.AppendChild(element)
+        Else
+            CurrentNode.Item(currentAttribute).InnerText = currentValue
+        End If
+    End Sub
+
+    Private Shared Sub CreateOrUpdateCustomFieldsAttribute(ByRef CurrentNode As Xml.XmlElement, ByVal currentAttribute As String, ByVal currentValue As String)
+        Const SubElementName As String = "CustomFields"
+        Dim _XMLDoc As New Xml.XmlDocument
+        'Dim _XMLElement As Xml.XmlElement
+
+        'now check and update or create Attributes in the CustomFields Element
+        Dim attr As Xml.XmlAttribute
+        'If currentValue <> "" Then
+        '    CleanValueForInnerXML(currentValue)
+        'End If
+        'If currentValue <> "" Or (currentValue = "" And CurrentSettings.Only_Update_With_Nonempty_Data = False) Then
+        'End If
+        If CurrentNode.Item(SubElementName) Is Nothing Then
+            Dim element As Xml.XmlElement
+            element = _XMLDoc.CreateElement(SubElementName)
+            element.InnerText = ""
+            CurrentNode.AppendChild(element)
+        End If
+
+        If CurrentNode.Item(SubElementName).Attributes(currentAttribute) Is Nothing Then
+            attr = _XMLDoc.CreateAttribute(currentAttribute)
+            attr.Value = currentValue
+            CurrentNode.Item(SubElementName).Attributes.Append(attr)
+        Else
+            CurrentNode.Item(SubElementName).Attributes(currentAttribute).Value = currentValue
+        End If
+    End Sub
+
+    Private Shared Function IsExtendedField(ByVal fieldname) As Boolean
+        If fieldname = "SourceTrailer" Then
+            Return False
+        End If
+        Select Case fieldname
+            Case "Number", "Date", "Rating", "Year", "Length", "VideoBitrate", "AudioBitrate", "Disks", "Checked", "MediaLabel", "MediaType", "Source", "Borrower", "OriginalTitle", "TranslatedTitle", "FormattedTitle", "Director", "Producer", "Country", "Category", "Actors", "URL", "Description", "Comments", "VideoFormat", "AudioFormat", "Resolution", "Framerate", "Languages", "Subtitles", "Size", "Picture"
+                Return False
+                Exit Select
+            Case Else
+                Return True
+                Exit Select
+        End Select
     End Function
 
     Private Sub EventNeu(ByVal EineVariable As String)
