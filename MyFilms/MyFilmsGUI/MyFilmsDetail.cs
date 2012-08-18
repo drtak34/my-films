@@ -1251,9 +1251,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     decimal wRating = 0;
                     if (Decimal.TryParse(GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName), out wRating)) 
-                      dlgRating = wRating;
+                      dlgRating.Rating = wRating;
                     else
-                      dlgRating = 0;
+                      dlgRating.Rating = 0;
                   }
                   else
                   {
