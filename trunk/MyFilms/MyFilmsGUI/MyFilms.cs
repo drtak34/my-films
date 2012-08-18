@@ -15813,6 +15813,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
         MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
+        MyFilmsDetail.setGUIProperty("config.version", MyFilmsSettings.Version.ToString());
+        MyFilmsDetail.setGUIProperty("config.mpversion", MyFilmsSettings.MPVersion.ToString());
+
         LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
         DebugPropertyLogging = (xmlreader.GetValueAsString("MyFilms", "PropertyLogging", "false").ToLower() == "true");
         LogMyFilms.Info("Property Logging: '" + DebugPropertyLogging + "'");
