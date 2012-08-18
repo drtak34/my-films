@@ -1009,7 +1009,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(931)); //rating
                 choiceViewMenu.Add("rating");
 
-                if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) // user rating only for AMC4+
+                if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended || MyFilms.conf.StrEnhancedWatchedStatusHandling) // user rating only for AMC4+ or when using enhanced watched handling
                 {
                   dlgmenu.Add(GUILocalizeStrings.Get(10798944)); // User Rating
                   choiceViewMenu.Add("userrating");
@@ -1247,12 +1247,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   #region User rating
                   MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
-                  if (MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"].ToString().Length > 0)
+                  if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                   {
-                    dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"];
-                    if (dlgRating.Rating > 10) dlgRating.Rating = 10;
+                    decimal wRating = 0;
+                    if (Decimal.TryParse(GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName), out wRating)) 
+                      dlgRating = wRating;
+                    else
+                      dlgRating = 0;
                   }
-                  else dlgRating.Rating = 0;
+                  else
+                  {
+                    if (MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"].ToString().Length > 0)
+                    {
+                      dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"];
+                      if (dlgRating.Rating > 10) dlgRating.Rating = 10;
+                    }
+                    else dlgRating.Rating = 0;
+                  }
 
                   dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                   dlgRating.DoModal(GetID);
@@ -1266,8 +1277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     SetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName, dlgRating.Rating.ToString());
                   }
-                  MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating;
-
+                  MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating; // always set db value, so in enhanced wat hed mode it represents the lst chaned value ...
 
                   Update_XML_database();
                   afficher_detail(true);
