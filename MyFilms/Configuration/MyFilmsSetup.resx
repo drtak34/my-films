@@ -560,6 +560,9 @@ Make sure, you don't share the field with other functions.
 If checked, watched status will be stored with extended info:
 - Watched count "global", representing the "total played"
 - Watched count in user context (if a user context is set)
+- Watched date (date movie was watched last time)
+- User Rating (if the user has either set it manually or by Trakt rating dialog after movie is watched)
+
 Watched count in user context requires a user profile name to choose.
 To be updated each time a movie is launched.
 Note:
