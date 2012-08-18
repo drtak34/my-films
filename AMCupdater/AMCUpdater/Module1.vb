@@ -870,11 +870,11 @@ Module Module1
                         'Current System Date
                         'No Date
                         Case "File Created Date"
-                            ReturnValue = String.Format("{0:yyyy-MM-dd}", f.CreationTime.Date) '0:yyyy/MM/dd
+                            ReturnValue = f.CreationTime.Date 'String.Format("{0:yyyy-MM-dd}", f.CreationTime.Date) '0:yyyy/MM/dd
                         Case "File Modified Date"
-                            ReturnValue = String.Format("{0:yyyy-MM-dd}", f.LastWriteTime.Date)
+                            ReturnValue = f.LastWriteTime.Date 'String.Format("{0:yyyy-MM-dd}", f.LastWriteTime.Date)
                         Case "Current System Date"
-                            ReturnValue = String.Format("{0:yyyy-MM-dd}", My.Computer.Clock.LocalTime.Date)
+                            ReturnValue = My.Computer.Clock.LocalTime.Date 'String.Format("{0:yyyy-MM-dd}", My.Computer.Clock.LocalTime.Date)
                         Case "No Date"
                             ReturnValue = String.Empty
                         Case Else

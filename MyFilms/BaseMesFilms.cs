@@ -741,17 +741,25 @@ namespace MyFilmsPlugin.MyFilms
             foreach (AntMovieCatalog.MovieRow movieRow in data.Movie)
             {
               movieRow.BeginEdit();
-              // Convert(Date,'System.DateTime')
+              //// Convert(Date,'System.DateTime')
               DateTime added;
-              int iAge = 9999; // set default to 9999 for those, where we do not have date(added) in DB ...
-              // CultureInfo ci = CultureInfo.CurrentCulture;
+              //int iAge = 9999; // set default to 9999 for those, where we do not have date(added) in DB ...
+              //// CultureInfo ci = CultureInfo.CurrentCulture;
+              //if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
+              //{
+              //  // movieRow.DateAdded = Convert.ToDateTime(movieRow.Date); // is same as: movieRow.DateAdded = DateTime.Parse(movieRow.Date, CultureInfo.CurrentCulture);
+              //  movieRow.DateAdded = added;
+              //  iAge = (int)now.Subtract(added).TotalDays; // iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
+              //}
+              //movieRow.AgeAdded = iAge; // sets integer value
+              //movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
               if (!movieRow.IsDateNull() && DateTime.TryParse(movieRow.Date, out added)) // CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
-              {
-                movieRow.DateAdded = added;
-                iAge = (int)now.Subtract(added).TotalDays; // iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
-              }
-              movieRow.AgeAdded = iAge; // sets integer value
-              movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge);
+                movieRow.DateAdded = Convert.ToDateTime(movieRow.Date); // is same as: movieRow.DateAdded = DateTime.Parse(movieRow.Date, CultureInfo.CurrentCulture);
+              else
+                movieRow.DateAdded = DateTime.MinValue;
+              // movieRow.DateAdded = Convert.ToDateTime(movieRow.Date); // is same as: movieRow.DateAdded = DateTime.Parse(movieRow.Date, CultureInfo.CurrentCulture);
+              movieRow.AgeAdded = (int)now.Subtract(movieRow.DateAdded).TotalDays; // sets integer value
+              movieRow.RecentlyAdded = MyFilms.GetDayRange(movieRow.AgeAdded);
               string index = movieRow[MyFilms.conf.StrTitle1].ToString();
               movieRow.IndexedTitle = (index.Length > 0) ? index.Substring(0, 1).ToUpper() : "";
               movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
@@ -1517,6 +1525,14 @@ namespace MyFilmsPlugin.MyFilms
           _dataLock.EnterReadLock();
           try
           {
+            // DB field replacements for sorting - currently only used for "Date" - in the future might be used for "DateFile" and "DateWatched" too ...
+            switch (StrSort)
+            {
+              case "Date":
+                StrSort = "DateAdded";
+                LogMyFilms.Debug("ReadDataMovies() - Sort field replacement: Date -> DateAdded");
+                break;
+            }
             movies = data.Movie.Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             if (movies.Length == 0 && all)
             {
@@ -1538,19 +1554,6 @@ namespace MyFilmsPlugin.MyFilms
                 watch.Reset(); watch.Start();
                 switch (fieldType)
                 {
-                  case MyFilms.FieldType.Decimal:
-                    if (StrSortSens == " ASC")
-                    {
-                      IComparer myComparer = new MyFilms.myRatingComparer();
-                      Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
-                    }
-                    else
-                    {
-                      IComparer myComparer = new MyFilms.myRatingComparer();
-                      Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
-                      //r.Reverse();
-                    }
-                    break;
                   case MyFilms.FieldType.AlphaNumeric:
                     if (StrSortSens == " ASC")
                     {
@@ -1564,6 +1567,7 @@ namespace MyFilmsPlugin.MyFilms
                       //r.Reverse();
                     }
                     break;
+                  #region Date and Decimal types are never used, as we do additional sorting for alphanumeric (string) values only !
                   case MyFilms.FieldType.Date:
                     if (StrSortSens == " ASC")
                     {
@@ -1578,8 +1582,26 @@ namespace MyFilmsPlugin.MyFilms
                       //Array.Sort<DataRow>(r, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
                     }
                     break;
+                  case MyFilms.FieldType.Decimal:
+                    if (StrSortSens == " ASC")
+                    {
+                      IComparer myComparer = new MyFilms.myRatingComparer();
+                      Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(a[StrSort], b[StrSort]));
+                    }
+                    else
+                    {
+                      IComparer myComparer = new MyFilms.myRatingComparer();
+                      Array.Sort<DataRow>(movies, (a, b) => myComparer.Compare(b[StrSort], a[StrSort]));
+                      //r.Reverse();
+                    }
+                    break;
+                  #endregion
                 }
                 LogMyFilms.Debug("ReadDataMovies() - additional sorting finished (" + (watchReadMoviesSort.ElapsedMilliseconds) + " ms)");
+              }
+              else
+              {
+                LogMyFilms.Debug("ReadDataMovies() - additional sorting skipped - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + StrSortSens + "', sortascending = '" + StrSort + "'");
               }
             }
             #endregion
