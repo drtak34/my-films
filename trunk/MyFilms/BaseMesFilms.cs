@@ -1107,6 +1107,8 @@ namespace MyFilmsPlugin.MyFilms
                 string StrFileType = xmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
                 bool AllowTraktSync = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
                 bool AllowRecentlyAddedAPI = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+                string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "Global");
+
                 string catalogname = Enum.GetName(typeof(MyFilmsGUI.Configuration.CatalogType), Int32.Parse(StrFileType));
 
                 if (AllowTraktSync || AllowRecentlyAddedAPI)
@@ -1175,7 +1177,7 @@ namespace MyFilmsPlugin.MyFilms
                     {
                       try
                       {
-                        MFMovie movie = new MFMovie { Config = config }; // MF config context
+                        MFMovie movie = new MFMovie { Config = config, Username = StrUserProfileName }; // MF config context
                         GetMovieDetails(sr, tmpconf, (!traktOnly && tmpconf.AllowRecentlyAddedAPI), ref movie);
                         moviesGlobal.Add(movie);
                         moviecount += 1;
@@ -1280,18 +1282,13 @@ namespace MyFilmsPlugin.MyFilms
             string tmprating = GetUserRating(row[tmpconf.StrWatchedField].ToString(), tmpconf.StrUserProfileName);
             if (tmprating != "-1")
             {
-              float frating;
-              bool success = float.TryParse(tmprating, out frating);
-              if (success) 
-                rating = frating;
-              else 
+              if (!(float.TryParse(tmprating, out rating))) 
                 rating = 0;
             }
           }
           else
           {
-            bool success = float.TryParse(row["RatingUser"].ToString(), out rating);
-            if (!success) rating = 0;
+            if (!(float.TryParse(row["RatingUser"].ToString(), out rating))) rating = 0;
           }
           movie.RatingUser = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
           #endregion

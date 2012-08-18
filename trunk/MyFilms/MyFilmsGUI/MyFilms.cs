@@ -763,6 +763,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Initialize Backgroundworker
       InitializeBackgroundWorker();
       InitFolders();
+
+      //// launch TMDB data loader in background ...
+      //new System.Threading.Thread(delegate()
+      //{
+      //  {
+      //    try
+      //    {
+      //      IEnumerable<PopularMovie> movies = PopularMovies;
+      //    }
+      //    catch (Exception)
+      //    {
+      //    }
+      //  }
+      //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+      //  {
+      //    {
+      //      // this after thread finished ...
+      //    }
+      //    return 0;
+      //  }, 0, 0, null);
+      //}) { Name = "MyFilmsTmdbDataLoader", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start();
+
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
@@ -1146,6 +1168,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
 
+      MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the next start to fix "visibility animations" ....
+      
       // save current GUIlist in navigation cache
       SaveListState(false);
       
@@ -2396,7 +2420,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       //string response = Transmit(TraktURIs.TrendingMovies, GetUserAuthentication());
       //return response.FromJSONArray<TraktTrendingMovie>();
-
+      const int maxresults = 100;
       List<PopularMovie> movies = new List<PopularMovie>();
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
       LogMyFilms.Debug("GetPopularMovies - detected language = '" + language + "', all = '" + all + "'");
@@ -2415,7 +2439,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           movies.Add(movie);
         }
         ipage++;
-        if (ipage > popular.total_pages || !all) break;
+        if (ipage > popular.total_pages || !all || popular.total_results > maxresults) break;
       }
       watch.Stop();
       LogMyFilms.Debug("'loaded all movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
@@ -8570,6 +8594,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
         MyFilmsDetail.clearGUIProperty("config.configfilter");
+
+      // check, if Traktuser has to be "switched"
+      if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+      {
+        if (conf.StrUserProfileName == Helper.GetTraktUser())
+        {
+          LogMyFilms.Debug("Load_Config(): Current MyFilms user '" + conf.StrUserProfileName + "' is already the active Trakt user - no switch!");
+        }
+        else if (Helper.GetTraktUserList().Contains(conf.StrUserProfileName))
+        {
+          if (Helper.ChangeTraktUser(conf.StrUserProfileName))
+            LogMyFilms.Debug("Load_Config(): Successfully switched Trakt to user '" + conf.StrUserProfileName + "'");
+          else
+            LogMyFilms.Error("Load_Config(): An error occurred changing current Trakt user login credentials!");
+        }
+        else
+        {
+          LogMyFilms.Debug("Load_Config(): Current MyFilms user '" + conf.StrUserProfileName + "' is not a trakt user - cannot switch!");
+        }
+      }
     }
 
     private void Refreshfacade()
