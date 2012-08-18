@@ -4,8 +4,8 @@
     <DBName>MyMovies-IT</DBName>
     <URLPrefix>http://www.mymovies.it/</URLPrefix>
     <Language>it</Language>
-    <Type>details|poster</Type>
-    <Version>0.2</Version>
+    <Type>details|cover</Type>
+    <Version>0.3</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
