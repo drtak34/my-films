@@ -124,6 +124,7 @@ Public Class AntProcessor
     Public ReadOnly Property GetAntFieldNames() As DataTable
         Get
             Dim dt As DataTable = ds.Tables("tblAntFields")
+            dt.DefaultView.Sort = "FieldName"
             Return dt
         End Get
     End Property
@@ -798,7 +799,7 @@ Public Class AntProcessor
         Public Sub RunUpdate()
 
             Dim CurrentNode As Xml.XmlNode
-            Dim newAttr As Xml.XmlAttribute
+            'Dim newAttr As Xml.XmlAttribute
             Dim MovieRootNode As Xml.XmlNode = XmlDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents")
             Dim ProcessCounter As Integer = 0
             Dim DoScan As Boolean = True
@@ -819,19 +820,28 @@ Public Class AntProcessor
                     'Update NFO File
 
                     Case "Update Value"
-                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
-                            newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
-                            newAttr.Value = _ManualFieldValue
-                            CurrentNode.Attributes.Append(newAttr)
+                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (and added) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            CurrentNode.Attributes(_ManualFieldName).Value = _ManualFieldValue
+                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
+                        'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                        '    newAttr.Value = _ManualFieldValue
+                        '    CurrentNode.Attributes.Append(newAttr)
+                        '    'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (and added) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'Else
+                        '    CurrentNode.Attributes(_ManualFieldName).Value = _ManualFieldValue
+                        '    'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'End If
                     Case "Update Value - Replace String"
-                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
                             ' Do nothing, as old value to be replaced is not contained !
                             'newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
                             'newAttr.Value = ""
@@ -839,53 +849,99 @@ Public Class AntProcessor
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            If CurrentNode.Attributes(_ManualFieldName).Value.Contains(_ManualFieldOldValue) = True Then
-                                CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value.Replace(_ManualFieldOldValue, _ManualFieldValue)
+                            If GetValue(CurrentNode, _ManualFieldName).Contains(_ManualFieldOldValue) = True Then
+                                SetValue(CurrentNode, _ManualFieldName, GetValue(CurrentNode, _ManualFieldName).Replace(_ManualFieldOldValue, _ManualFieldValue))
                                 'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Replaced String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             Else
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value not updated (Replace String not found): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             End If
                         End If
+                        'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    ' Do nothing, as old value to be replaced is not contained !
+                        '    'newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                        '    'newAttr.Value = ""
+                        '    'CurrentNode.Attributes.Append(newAttr)
+                        '    'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'Else
+                        '    If CurrentNode.Attributes(_ManualFieldName).Value.Contains(_ManualFieldOldValue) = True Then
+                        '        CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value.Replace(_ManualFieldOldValue, _ManualFieldValue)
+                        '        'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Replaced String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    Else
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value not updated (Replace String not found): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    End If
+                        'End If
                     Case "Update Value - Add String"
-                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
-                            newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
-                            newAttr.Value = _ManualFieldValue
-                            CurrentNode.Attributes.Append(newAttr)
+                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value & _ManualFieldValue
+                            SetValue(CurrentNode, _ManualFieldName, GetValue(CurrentNode, _ManualFieldName) & _ManualFieldValue)
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
-
+                        'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                        '    newAttr.Value = _ManualFieldValue
+                        '    CurrentNode.Attributes.Append(newAttr)
+                        '    'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'Else
+                        '    CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value & _ManualFieldValue
+                        '    'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'End If
                     Case "Update Value - Insert String"
-                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
-                            newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
-                            newAttr.Value = _ManualFieldValue
-                            CurrentNode.Attributes.Append(newAttr)
+                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            CurrentNode.Attributes(_ManualFieldName).Value = _ManualFieldValue & CurrentNode.Attributes(_ManualFieldName).Value
+                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue & GetValue(CurrentNode, _ManualFieldName))
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Inserted String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
+                        'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                        '    newAttr.Value = _ManualFieldValue
+                        '    CurrentNode.Attributes.Append(newAttr)
+                        '    'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'Else
+                        '    CurrentNode.Attributes(_ManualFieldName).Value = _ManualFieldValue & CurrentNode.Attributes(_ManualFieldName).Value
+                        '    'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Inserted String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'End If
                     Case "Update Value - Remove String"
-                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
                             ' Do nothing
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Removed - (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            If CurrentNode.Attributes(_ManualFieldName).Value.Contains(_ManualFieldValue) = True Then
-                                CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value.Replace(_ManualFieldValue, "")
+                            If GetValue(CurrentNode, _ManualFieldName).Contains(_ManualFieldValue) = True Then
+                                SetValue(CurrentNode, _ManualFieldName, GetValue(CurrentNode, _ManualFieldName).Replace(_ManualFieldValue, ""))
                                 'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Removed String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             Else
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (Remove String not found): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             End If
                         End If
+                        'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    ' Do nothing
+                        '    'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Removed - (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'Else
+                        '    If CurrentNode.Attributes(_ManualFieldName).Value.Contains(_ManualFieldValue) = True Then
+                        '        CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value.Replace(_ManualFieldValue, "")
+                        '        'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Removed String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    Else
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (Remove String not found): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    End If
+                        'End If
                     Case "Delete Record"
                         If Not CurrentNode Is Nothing Then
                             MovieRootNode.RemoveChild(CurrentNode)
@@ -904,42 +960,38 @@ Public Class AntProcessor
                         '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         'End If
                     Case "Copy Value"
-                        Try
-                            If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
-                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldName))) Then
-                                If GetValue(CurrentNode, _ManualFieldNameDestination) Is Nothing Then
-                                    SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
-                                    bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                                ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldNameDestination))) Then
-                                    SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
-                                    bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                                Else
-                                    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                                End If
+                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldName))) Then
+                            If GetValue(CurrentNode, _ManualFieldNameDestination) Is Nothing Then
+                                SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldNameDestination))) Then
+                                SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             Else
-                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - destination should not be overwritten with empty data: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             End If
-                            'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
-                            '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            'ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldName).Value)) Then
-                            '    If CurrentNode.Attributes(_ManualFieldNameDestination) Is Nothing Then
-                            '        newAttr = XmlDoc.CreateAttribute(_ManualFieldNameDestination)
-                            '        newAttr.Value = CurrentNode.Attributes(_ManualFieldName).Value
-                            '        CurrentNode.Attributes.Append(newAttr)
-                            '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            '    ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldNameDestination).Value)) Then
-                            '        CurrentNode.Attributes(_ManualFieldNameDestination).Value = CurrentNode.Attributes(_ManualFieldName).Value
-                            '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            '    Else
-                            '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            '    End If
-                            'Else
-                            '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - destination should not be overwritten with empty data: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            'End If
-                        Catch ex As Exception
-
-                        End Try
+                        Else
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - destination should not be overwritten with empty data: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
+                        'If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldName).Value)) Then
+                        '    If CurrentNode.Attributes(_ManualFieldNameDestination) Is Nothing Then
+                        '        newAttr = XmlDoc.CreateAttribute(_ManualFieldNameDestination)
+                        '        newAttr.Value = CurrentNode.Attributes(_ManualFieldName).Value
+                        '        CurrentNode.Attributes.Append(newAttr)
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(CurrentNode.Attributes(_ManualFieldNameDestination).Value)) Then
+                        '        CurrentNode.Attributes(_ManualFieldNameDestination).Value = CurrentNode.Attributes(_ManualFieldName).Value
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    Else
+                        '        bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        '    End If
+                        'Else
+                        '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - destination should not be overwritten with empty data: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        'End If
                     Case "Update Record"
                         Dim FileToScan As String = String.Empty
                         Dim AllFilesPath As String = String.Empty
@@ -3499,7 +3551,6 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"MediaLabel", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"MediaType", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Source", "String"})
-            ds.Tables("tblAntFields").Rows.Add(New Object() {"SourceTrailer", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Borrower", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"OriginalTitle", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"TranslatedTitle", "String"})
@@ -3523,11 +3574,34 @@ Public Class AntProcessor
             'ds.Tables("tblAntFields").Rows.Add(New Object() {"Languages", "String"}) ' for internet languages
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Certification", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Writer", "String"})
-            ds.Tables("tblAntFields").Rows.Add(New Object() {"Tagline", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"TagLine", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"IMDB_Id", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"TMDB_Id", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"IMDB_Rank", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Studio", "String"})
+
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"SourceTrailer", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Edition", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Fanart", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"RatingUser", "Int"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"CategoryTrakt", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"AudioChannelCount", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"CustomField1", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"CustomField2", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"CustomField3", "String"})
+
+            'Currently unused or intentionally disabled fields
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Persons", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Watched", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"WatchedDate", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Favorite", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Tags", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Aspectratio", "String"}) ' doesn't need to be YET as it is not a true db field at present (calc field)
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"IsOnline", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"IsOnlineTrailer", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"RecentlyAdded", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"IndexedTitle", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"AgeAdded", "String"})
         End If
 
     End Sub

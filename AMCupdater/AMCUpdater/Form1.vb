@@ -214,22 +214,30 @@ Public Class Form1
             btnShowHideLog.Text = "Show Log >>"
         End If
 
-        cbManualSelectField.DataSource = New DataView(AntProcessor.GetAntFieldNames())
+        Dim dvSelectField As DataView = New DataView(AntProcessor.GetAntFieldNames())
+        dvSelectField.Sort = "FieldName ASC"
+        cbManualSelectField.DataSource = dvSelectField
         cbManualSelectField.DisplayMember = "FieldName"
         cbManualSelectField.ValueMember = "FieldName"
         cbManualSelectField.SelectedIndex = -1
 
-        cbManualSelectFieldDestination.DataSource = New DataView(AntProcessor.GetAntFieldNames())
+        Dim dvSelectFieldDestination As DataView = New DataView(AntProcessor.GetAntFieldNames())
+        dvSelectFieldDestination.Sort = "FieldName ASC"
+        cbManualSelectFieldDestination.DataSource = dvSelectFieldDestination
         cbManualSelectFieldDestination.DisplayMember = "FieldName"
         cbManualSelectFieldDestination.ValueMember = "FieldName"
         cbManualSelectFieldDestination.SelectedIndex = -1
 
-        cbManualParameterFieldList1.DataSource = New DataView(AntProcessor.GetAntFieldNames())
+        Dim dvParameterFieldList1 As DataView = New DataView(AntProcessor.GetAntFieldNames())
+        dvParameterFieldList1.Sort = "FieldName ASC"
+        cbManualParameterFieldList1.DataSource = dvParameterFieldList1
         cbManualParameterFieldList1.DisplayMember = "FieldName"
         cbManualParameterFieldList1.ValueMember = "FieldName"
         cbManualParameterFieldList1.SelectedIndex = -1
 
-        cbManualParameterFieldList2.DataSource = New DataView(AntProcessor.GetAntFieldNames())
+        Dim dvParameterFieldList2 As DataView = New DataView(AntProcessor.GetAntFieldNames())
+        dvParameterFieldList2.Sort = "FieldName ASC"
+        cbManualParameterFieldList2.DataSource = dvParameterFieldList2
         cbManualParameterFieldList2.DisplayMember = "FieldName"
         cbManualParameterFieldList2.ValueMember = "FieldName"
         cbManualParameterFieldList2.SelectedIndex = -1

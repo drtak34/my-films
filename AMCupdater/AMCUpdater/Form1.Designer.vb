@@ -1369,7 +1369,7 @@ Partial Class Form1
         Me.cbManualParameterFieldList2.Location = New System.Drawing.Point(68, 74)
         Me.cbManualParameterFieldList2.Name = "cbManualParameterFieldList2"
         Me.cbManualParameterFieldList2.Size = New System.Drawing.Size(132, 21)
-        Me.cbManualParameterFieldList2.Sorted = True
+        Me.cbManualParameterFieldList2.Sorted = False
         Me.cbManualParameterFieldList2.TabIndex = 4
         Me.cbManualParameterFieldList2.Visible = False
         '
@@ -1445,7 +1445,7 @@ Partial Class Form1
         Me.cbManualParameterFieldList1.Location = New System.Drawing.Point(68, 32)
         Me.cbManualParameterFieldList1.Name = "cbManualParameterFieldList1"
         Me.cbManualParameterFieldList1.Size = New System.Drawing.Size(132, 21)
-        Me.cbManualParameterFieldList1.Sorted = True
+        Me.cbManualParameterFieldList1.Sorted = False
         Me.cbManualParameterFieldList1.TabIndex = 0
         '
         'GroupBox10
@@ -1521,7 +1521,7 @@ Partial Class Form1
         Me.cbManualSelectFieldDestination.Location = New System.Drawing.Point(342, 69)
         Me.cbManualSelectFieldDestination.Name = "cbManualSelectFieldDestination"
         Me.cbManualSelectFieldDestination.Size = New System.Drawing.Size(206, 21)
-        Me.cbManualSelectFieldDestination.Sorted = True
+        Me.cbManualSelectFieldDestination.Sorted = False
         Me.cbManualSelectFieldDestination.TabIndex = 14
         Me.ToolTip1.SetToolTip(Me.cbManualSelectFieldDestination, "Destination field for ""Copy Value"" operation")
         Me.cbManualSelectFieldDestination.Visible = False
@@ -1610,7 +1610,7 @@ Partial Class Form1
         Me.cbManualSelectField.Location = New System.Drawing.Point(342, 19)
         Me.cbManualSelectField.Name = "cbManualSelectField"
         Me.cbManualSelectField.Size = New System.Drawing.Size(206, 21)
-        Me.cbManualSelectField.Sorted = True
+        Me.cbManualSelectField.Sorted = False
         Me.cbManualSelectField.TabIndex = 1
         Me.cbManualSelectField.Visible = False
         '
