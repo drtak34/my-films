@@ -12,7 +12,7 @@
       <width>1280</width>
       <height>720</height>
       <texture>background.png</texture>
-    </control>
+    </control>    
     <import>common.time.xml</import>        
     <control>
         <description>fanart</description>
@@ -66,7 +66,7 @@
         <colordiffuse>80ffffff</colordiffuse>                                               
     </control>
     <control>
-	<description>My Films logo</description>
+	<description>My Films logo (NOT USE)</description>
 	<type>image</type>
 	<id>1</id>
 	<posX>10</posX>
@@ -83,8 +83,8 @@
 	<posX>30</posX>
 	<posY>10</posY>
         <width>750</width>
-	<label>#header.label</label>
-	<font>font14</font>
+	<label>#currentmodule</label>
+	<font>font13</font>
 	<align>left</align>
 	<textcolor>ivory</textcolor>			
     </control>
@@ -115,29 +115,30 @@
 	<type>label</type>
 	<label>Current Default</label>
 	<id>0</id>
-	<posX>350</posX>
+	<posX>235</posX>
 	<posY>100</posY>
 	<width>180</width>
 	<font>font10</font>
 	<textcolor>ff6FAFE1</textcolor>			
     </control>
     <control>
-	<description>current active main cover</description>
+	<description>Current Main Cover</description>
 	<id>0</id>
 	<type>image</type>
-	<posX>355</posX>
-	<posY>135</posY>
-	<width>130</width>
-	<height>170</height>			
+	<posX>60</posX>
+	<posY>100</posY>
+	<width>160</width>
+	<height>240</height>			
         <texture mask="videothumbmask.png">#myfilms.picture</texture>									
     </control>
     <control>
+        <description>Frame for Current Main Cover</description>
         <type>image</type>
         <id>1</id>
-        <posX>355</posX>
-        <posY>135</posY>
-        <width>130</width>
-        <height>170</height>
+        <posX>60</posX>
+        <posY>100</posY>
+        <width>160</width>
+        <height>240</height>
         <texture>Videothumbframe.png</texture>                        
     </control>
     <!-- VIEW SELECT COVER -->
@@ -145,30 +146,30 @@
         <description>Missing Cover Image</description>
         <id>0</id>
         <type>image</type>
-        <posX>1100</posX>
+        <posX>1080</posX>
         <posY>100</posY>
-        <width>140</width>
-        <height>205</height>
-        <texture mask="videothumbmask.png">missing_Coverart_video.png</texture>                        
+        <width>160</width>
+        <height>240</height>
+        <texture mask="videothumbmask.png">myfilms_nocover.png</texture>                        
     </control>
     <control>
 	<description>VIEW SELECT COVER</description>
 	<id>4560</id>
 	<type>image</type>
-	<posX>1100</posX>
+	<posX>1080</posX>
 	<posY>100</posY>
-	<width>140</width>
-	<height>205</height>			
+	<width>160</width>
+	<height>240</height>			
         <texture mask="videothumbmask.png">#myfilms.cover.selectedpreview</texture>								
     </control>
     <control>
         <description>Frame Image</description>
         <type>image</type>
         <id>0</id>
-        <posX>1100</posX>
+        <posX>1080</posX>
         <posY>100</posY>
-        <width>140</width>
-        <height>205</height>
+        <width>160</width>
+        <height>240</height>
         <texture>Videothumbframe.png</texture>                        	
     </control>                    		 
     <control>
@@ -176,9 +177,9 @@
 	<type>fadelabel</type>
 	<label>#myfilms.cover.selectedcovername</label>
 	<id>0</id>
-	<posX>1080</posX>
-	<posY>245</posY>
-	<width>500</width>
+	<posX>1060</posX>
+	<posY>270</posY>
+	<width>530</width>
 	<font>font12</font>
 	<textcolor>ff6FAFE1</textcolor>
 	<align>right</align>			
@@ -188,9 +189,9 @@
 	<type>fadelabel</type>
 	<label>#myfilms.cover.selectedcoverresolutionclass [#myfilms.cover.selectedcoverresolution] #myfilms.cover.selectedcoversize</label>
 	<id>0</id>
-	<posX>1080</posX>
-	<posY>275</posY>
-	<width>500</width>
+	<posX>1060</posX>
+	<posY>300</posY>
+	<width>530</width>
         <font>font13</font> 
 	<align>right</align>			
         <textcolor>ivory</textcolor>			
@@ -211,7 +212,7 @@
 	        <description>Thumbnail Panel</description>
 	        <type>thumbnailpanel</type>
 	        <posX>80</posX>
-		<posY>370</posY>
+		<posY>390</posY>
 		<width>1173</width>
 		<height>360</height>
 		<onleft>2</onleft>
