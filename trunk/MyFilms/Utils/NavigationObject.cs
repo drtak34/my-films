@@ -33,7 +33,9 @@ namespace MyFilmsPlugin.Utils
     public string DbSort { get; set; }
     public bool DbShowAll { get; set; }
     public bool DbExtraSort { get; set; }
-    
+
+    public DateTime LastDbUpdate { get; set; }
+
     public NavigationObject()
     {
       Items = new List<GUIListItem>();
@@ -45,7 +47,7 @@ namespace MyFilmsPlugin.Utils
 
     public MyFilms.Layout CurrentView { get; set; }
 
-    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, CoverState coverstate)
+    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, CoverState coverstate, DateTime lastDBupdate)
     {
       Items = new List<GUIListItem>();
       GetItems(control, title, itemtype, pos, curview);
@@ -69,6 +71,7 @@ namespace MyFilmsPlugin.Utils
       SortButtonASC = srtButton.IsAscending;
       SortButtonLabel = srtButton.Label;
       CoverStatus = coverstate;
+      LastDbUpdate = lastDBupdate;
     }
 
     public void GetItems(GUIListControl control, string title, string itemtype, int pos, MyFilms.Layout curview)

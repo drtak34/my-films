@@ -627,9 +627,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         #region Assembly methods
         public static bool IsAssemblyAvailable(string name, Version ver, bool onlymatchingversion) {
             bool result = false;
-
-            LogMyFilms.Debug(string.Format("Checking whether assembly {0} is available and loaded...", name));
-
+            // LogMyFilms.Debug(string.Format("Checking whether assembly {0} is available and loaded...", name));
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly a in assemblies)
                 try
@@ -673,7 +671,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0), false) && IsPluginEnabled("SubCentral");
-            LogMyFilms.Debug("Helper() - SubCentral available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - SubCentral available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -683,7 +681,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("BluRayPlayerLauncher", new Version(0, 1, 1, 1), false) && IsPluginEnabled("Blu-Ray Player Launcher");
-            LogMyFilms.Debug("Helper() - BluRayPlayerLauncher available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - BluRayPlayerLauncher available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -693,7 +691,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 5, 1), false) && IsPluginEnabled("Trakt");
-            LogMyFilms.Debug("Helper() - TraktPlugin available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - TraktPlugin available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -703,7 +701,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 2, 1, 1), true) && IsPluginEnabled("Trakt");
-            LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -713,7 +711,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 3, 0, 1), true) && IsPluginEnabled("Trakt");
-            LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -723,7 +721,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 3, 1, 1), true) && IsPluginEnabled("Trakt");
-            LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -749,7 +747,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("BDHandler", new Version(0, 9, 7, 29), false) && IsPluginEnabled("Blu-ray Handler");
-            LogMyFilms.Debug("Helper() - BDHandler available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - BDHandler available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -759,7 +757,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(0, 27, 0, 0), true) && IsPluginEnabled("OnlineVideos");
-            LogMyFilms.Debug("Helper() - OnlineVideos available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - OnlineVideos available and enabled = '" + status + "'");
             return status;
           }
         }
@@ -769,7 +767,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           get
           {
             bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(1, 2, 0, 0), true) && IsPluginEnabled("OnlineVideos");
-            LogMyFilms.Debug("Helper() - OnlineVideos 1.2 available and enabled = '" + status + "'");
+            // LogMyFilms.Debug("Helper() - OnlineVideos 1.2 available and enabled = '" + status + "'");
             return status;
           }
         }

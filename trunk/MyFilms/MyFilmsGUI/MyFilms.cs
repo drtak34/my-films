@@ -565,6 +565,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static List<string> SearchHistory = new List<string>();
     LoadParameterInfo loadParamInfo;
 
+    // last update to catalog - used to know, if the backnavigation needs to reload the facade -  LoadFacade();
+    public static DateTime LastDbUpdate { get; set; }
+
+
     #endregion
 
     #region Enums
@@ -3622,7 +3626,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private string GetGroupImage(GUIListItem item)
     {
-      LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "'");
+      // LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "'");
       string strThumbGroup = ""; // thumbnail for Groups/collections
       if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg")) // check for longnames for nested groups
       {
@@ -3650,7 +3654,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg";
         // if (strThumbGroup == "") strThumbGroup = MyFilms.conf.DefaultCover; // ToDo: Add default cover for hierarchies / box sets
       }
-      LogMyFilms.Debug("GetGroupImage() - returning image = '" + strThumbGroup + "'");
+      LogMyFilms.Debug("GetGroupImage() - returning image = '" + strThumbGroup + "' for item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "'");
       return strThumbGroup;
     }
     
@@ -3886,6 +3890,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
+      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":-1")) return false;
       if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
       return true; // count > 0 -> return true
     }
@@ -4139,8 +4144,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               string currentGroupCover = GetGroupImage(currentItem); // HierarchyImage for selected item
               if (currentGroupCover.Length > 0) currentFilmCover = currentGroupCover;
+              LogMyFilms.Debug("Load_Lstdetail() - currentFilmCover (GroupImage) = '" + currentFilmCover + "'");
             }
-            LogMyFilms.Debug("Load_Lstdetail() - currentFilmCover = '" + currentFilmCover + "'");
             filmcover.Filename = currentFilmCover;
             MyFilmsDetail.setGUIProperty("picture", currentFilmCover, true);
             if (currentItem.IsFolder && conf.ViewContext == ViewContext.Movie)
@@ -4273,7 +4278,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      if (conf.Boolselect) 
+      if (conf.Boolselect)
         getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
       else 
         GetFilmList();
@@ -15677,8 +15682,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       string newViewLabel = viewLabel; // use the parameter as default ...
       string txtSelect = GUIPropertyManager.GetProperty("#myfilms.select");
-      LogMyFilms.Debug("SetLabelView() - called with parameter '" + viewLabel + "', txtSelect = '" + txtSelect + "'");
-      LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
+      // LogMyFilms.Debug("SetLabelView() - called with parameter '" + viewLabel + "', txtSelect = '" + txtSelect + "'");
+      // LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
       if (viewLabel == GUILocalizeStrings.Get(342) || string.IsNullOrEmpty(viewLabel)) // case "films" or empty should show "all" = "filmes"
         viewLabel = "all";
       switch (viewLabel.ToLower())
@@ -15707,7 +15712,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view") + ((txtSelect.Length > 0) ? "/" : "") + txtSelect); // GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view"));
       GUIControl.SetControlLabel(MyFilms.ID_MyFilms, (int)Controls.CTRL_BtnViewAs, GUILocalizeStrings.Get(97) + newViewLabel); // "View by: " + <view>
       LogMyFilms.Debug("SetLabelView has been called with '" + viewLabel + "' -> set view to '" + newViewLabel + "'");
-      LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
+      // LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
     }
 
     //*****************************************************************************************
@@ -15717,8 +15722,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       string initialSelectLabel = selectLabel;
       if (selectLabel == null) selectLabel = "";
-      LogMyFilms.Debug("SetLabelSelect() - called with parameter  '" + selectLabel + "', conf.StrTxtSelect = '" + conf.StrTxtSelect + "'");
-      LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
+      // LogMyFilms.Debug("SetLabelSelect() - called with parameter  '" + selectLabel + "', conf.StrTxtSelect = '" + conf.StrTxtSelect + "'");
+      // LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
 
       if (selectLabel == GUILocalizeStrings.Get(10798632) || selectLabel == GUILocalizeStrings.Get(10798622)) // 10798622 all films // 10798632 (global filter active) 
         selectLabel = ""; // will reassign proper value
@@ -15748,8 +15753,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
       GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms) + "/" + GUIPropertyManager.GetProperty("#myfilms.view") + ((conf.StrTxtSelect.Length > 0) ? "/" : "") + conf.StrTxtSelect);
-      LogMyFilms.Debug("SetLabelSelect has been called with '" + initialSelectLabel + "', processed as '" + selectLabel + "' -> set select to '" + conf.StrTxtSelect + "'");
-      LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
+      // LogMyFilms.Debug("SetLabelSelect has been called with '" + initialSelectLabel + "', processed as '" + selectLabel + "' -> set select to '" + conf.StrTxtSelect + "'");
+      // LogMyFilms.Debug("Status: #currentmodule = '" + GUIPropertyManager.GetProperty("#currentmodule") + "'");
     }
 
     /// <summary>
@@ -16514,24 +16519,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Fanartstatus(false);
         //currentFanartList.Clear();
         var obj = NavigationStack.Pop() as MyFilmsPlugin.Utils.NavigationObject;
+        
+        #region restore state properties
         mapSettings.ViewAs = (int)obj.CurrentView;
+        // obj.SetCoverStatus(ref menucover, ref filmcover, ref viewcover, ref personcover, ref groupcover);
         menucover.Filename = obj.CoverStatus.MenuCover;
         filmcover.Filename = obj.CoverStatus.FilmCover;
         viewcover.Filename = obj.CoverStatus.ViewCover;
         personcover.Filename = obj.CoverStatus.PersonCover;
         groupcover.Filename = obj.CoverStatus.GroupCover;
-        // obj.SetCoverStatus(ref menucover, ref filmcover, ref viewcover, ref personcover, ref groupcover);
         conf.DbSelection = new string[] { obj.DbDfltSelect, obj.DbSelect, obj.DbField, obj.DbSort, obj.DbShowAll.ToString(), obj.DbExtraSort.ToString() };
         // Change_Layout_Action((int)obj.CurrentView); // switch here already the layout to BEFORE facade is populated !
-        ShowPanel(); 
-        obj.SetItems(facadeFilms);
-        obj.SetViewStatus(conf);
+        ShowPanel();  // switches to proper layout
+        obj.SetItems(facadeFilms); // populate facade with former content
+        obj.SetViewStatus(conf); // sets the context environment
 
         BtnSrtBy.IsEnabled = obj.SortButtonEnabled;
         BtnSrtBy.IsAscending = obj.SortButtonASC;
         BtnSrtBy.Label = obj.SortButtonLabel;
 
         facadeFilms.SelectedListItemIndex = obj.Position;
+        Prev_ItemID = (facadeFilms == null || facadeFilms.SelectedListItemIndex == -1) ? -1 : facadeFilms.SelectedListItem.ItemId;
+        Prev_Label = (facadeFilms == null || facadeFilms.SelectedListItemIndex == -1) ? string.Empty : facadeFilms.SelectedListItem.Label;
+        LogMyFilms.Debug("DoBack() - restore facade position - SelectedListItemIndex = '" + obj.Position + "', Prev_ItemID = '" + Prev_ItemID + "', Prev_Label = '" + Prev_Label + "'"); 
+        //Prev_ItemID = -1;
+        //Prev_Label = string.Empty;
+
         // GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, obj.Position);
         GUIPropertyManager.SetProperty("#currentmodule", obj.Title);
         GUIPropertyManager.SetProperty("#itemtype", obj.ItemType);
@@ -16540,31 +16553,75 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         SetLabelView(conf.StrTxtView);
         SetLabelSelect(conf.StrTxtSelect);
-        // ShowPanel();
+        #endregion
 
         #region reload dataset threaded
-        new Thread(delegate()
+        if (obj.LastDbUpdate < MyFilms.LastDbUpdate && conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll) // check if a full reload of the facade is required, e.g. due to watched status changes
         {
-          {
-            if (Helper.FieldIsSet(obj.DbField))
-              r = BaseMesFilms.ReadDataMovies(obj.DbDfltSelect, obj.DbSelect, obj.DbField, obj.DbSort, obj.DbShowAll, obj.DbExtraSort); 
-            // r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
-          }
-          GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+          #region restore facade by reloading facade
+          LogMyFilms.Debug("DoBack() - DB was updated ! - cached date: '" + obj.LastDbUpdate.ToLongTimeString() + "', last update: '" + MyFilms.LastDbUpdate.ToLongTimeString() + "'"); 
+          new Thread(delegate()
           {
             {
-              Fanartstatus(true);
-              Prev_ItemID = -1;
-              Prev_Label = string.Empty;
-              ShowPanel();
-              if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-              stopwatch.Stop(); 
-              LogMyFilms.Debug("DoBack() - finished reloading dataset (" + (stopwatch.ElapsedMilliseconds) + " ms)");
-              if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) GetCountsForMenuView();
+              //Loadfacade();
+              //this.Refreshfacade();
+              if (conf.Boolselect) // Groupviews / Persons
+              {
+                // Change_Layout_Action(MyFilms.conf.WStrLayOut);
+                // SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+                getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, false, Prev_Label); // preserve index from last time
+              }
+              else
+              {
+                // Change_Layout_Action(MyFilms.conf.StrLayOut);
+                // SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+                // conf.ViewContext = ViewContext.Movie;
+                GetFilmList(Prev_Label);
+              }
             }
-            return 0;
-          }, 0, 0, null);
-        }) { Name = "DoBackReloadDataset", IsBackground = true }.Start();
+            GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+            {
+              {
+                Fanartstatus(true);
+                //Prev_ItemID = -1;
+                //Prev_Label = string.Empty;
+                //ShowPanel();
+                if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+                stopwatch.Stop();
+                LogMyFilms.Debug("DoBack() - finished reloading dataset (" + (stopwatch.ElapsedMilliseconds) + " ms)");
+              }
+              return 0;
+            }, 0, 0, null);
+          }) { Name = "DoBackReloadDataset", IsBackground = true }.Start();
+          #endregion
+        }
+        else
+        {
+          #region restore facade from navigation cache
+          new Thread(delegate()
+          {
+            {
+              if (Helper.FieldIsSet(obj.DbField))
+                r = BaseMesFilms.ReadDataMovies(obj.DbDfltSelect, obj.DbSelect, obj.DbField, obj.DbSort, obj.DbShowAll, obj.DbExtraSort);
+              // r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
+            }
+            GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+            {
+              {
+                Fanartstatus(true);
+                Prev_ItemID = -1;
+                Prev_Label = string.Empty;
+                ShowPanel();
+                if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // make sure, the details publisher is called !
+                stopwatch.Stop();
+                LogMyFilms.Debug("DoBack() - finished reloading dataset (" + (stopwatch.ElapsedMilliseconds) + " ms)");
+                if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) GetCountsForMenuView();
+              }
+              return 0;
+            }, 0, 0, null);
+          }) { Name = "DoBackReloadDataset", IsBackground = true }.Start();
+          #endregion
+        }
         #endregion
 
       }
@@ -16637,7 +16694,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             (Layout)mapSettings.ViewAs,
             conf,
             BtnSrtBy,
-            new CoverState( menucover.Filename, filmcover.Filename, viewcover.Filename, personcover.Filename, groupcover.Filename )
+            new CoverState( menucover.Filename, filmcover.Filename, viewcover.Filename, personcover.Filename, groupcover.Filename ),
+            MyFilms.LastDbUpdate
             ));
       }
       if (clear)
