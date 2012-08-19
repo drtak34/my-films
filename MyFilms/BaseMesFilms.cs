@@ -661,6 +661,7 @@ namespace MyFilmsPlugin.MyFilms
             }
           }
           watch.Stop();
+          MyFilms.LastDbUpdate = DateTime.Now; 
           LogMyFilms.Debug("SaveMyFilmsToDisk() - Finished Saving ... (" + (watch.ElapsedMilliseconds) + " ms)");
           return success;
         }
@@ -961,7 +962,9 @@ namespace MyFilmsPlugin.MyFilms
             //LogMyFilms.Debug("ReadDataMovies() - JoinTables (" + (watchReadMovies.ElapsedMilliseconds) + " ms) - Records: '" + moviesEnhanced.Length + "'");
             //return moviesEnhanced;
             #endregion
-          
+
+            MyFilms.LastDbUpdate = DateTime.Now;
+
           }
           catch (Exception e)
           {
