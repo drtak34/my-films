@@ -27,6 +27,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.IO;
   using System.Reflection;
   using System.Runtime.InteropServices;
+  using System.Windows.Forms;
+
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 
   public class ImageFast
@@ -114,5 +116,76 @@ namespace MyFilmsPlugin.MyFilms.Utils
             bmp.Save(path);
             return bmp;
         }
+
+        /// <summary>
+        /// Wandelt einen String in ein Bitmap (Image) um.
+        /// </summary>
+        /// <param name="Text">Beliebiger Text (auch mehrzeilig mit \n)</param>
+        /// <param name="Schrift">Font als Objekt</param>
+        /// <param name="ForeColor">Schriftfarbe</param>
+        /// <param name="BackColor">Hintergrundfarbe</param>
+        /// <returns></returns>
+        public static Image Text2Bitmap(string Text, Font Schrift, Color ForeColor, Color BackColor)
+        {
+          int intWidth, intHeight;
+
+          TextSize(Text, Schrift, out intWidth, out intHeight);
+
+          SolidBrush objBrushForeColor = new SolidBrush(ForeColor);
+          SolidBrush objBrushBackColor = new SolidBrush(BackColor);
+
+          Point objPoint = new Point(0, 0);
+
+          Bitmap objBitmap = new Bitmap(intWidth, intHeight);
+          Graphics objGraphics = System.Drawing.Graphics.FromImage(objBitmap);
+
+          objGraphics.FillRectangle(objBrushBackColor, 0, 0, intWidth, intHeight);
+          objGraphics.DrawString(Text, Schrift, objBrushForeColor, objPoint);
+
+          return objBitmap;
+        }
+
+        /// <summary>
+        /// Übergibt die Größe eines Textes in Pixel
+        /// </summary>
+        /// <param name="Text">Text dessen Größe ermittelt werden soll (auch mehrzeilig mit \n)</param>
+        /// <param name="Schrift">Font als Objet</param>
+        /// <param name="Width">Ausgabe : Breite in Pixel</param>
+        /// <param name="Height">Ausgabe : Höhe in Pixel</param>
+        public static void TextSize(string Text, Font Schrift, out int Width, out int Height)
+        {
+          System.Drawing.Size objSize = TextRenderer.MeasureText(Text, Schrift);
+          Width = objSize.Width;
+          Height = objSize.Height;
+        }
+
+        // OPTIONALE ÜBERLADUNGEN:
+
+        /// <summary>
+        /// Wandelt einen String in ein Bitmap (Image) um.
+        /// </summary>
+        /// <param name="Text">Beliebiger Text (auch mehrzeilig mit \n)</param>
+        /// <param name="FontName">Name des Font z.B. Arial</param>
+        /// <param name="FontSize">Fontgröße</param>
+        /// <param name="ForeColor">Schriftfarbe</param>
+        /// <param name="BackColor">Hintergrundfarbe</param>
+        /// <returns></returns>
+        public static Image Text2Bitmap(string Text, string FontName, float FontSize, Color ForeColor, Color BackColor)
+        {
+          return Text2Bitmap(Text, new Font(FontName, FontSize), ForeColor, BackColor);
+        }
+
+        /// <summary>
+        /// Wandelt einen String in ein Bitmap (Image) um. Schriftfarbe ist schwarz, Hintergrund ist weiss
+        /// </summary>
+        /// <param name="Text">Beliebiger Text (auch mehrzeilig mit \n)</param>
+        /// <param name="FontName">Name des Font z.B. Arial</param>
+        /// <param name="FontSize">Fontgröße</param>
+        /// <returns></returns>
+        public static Image Text2Bitmap(string Text, string FontName, float FontSize)
+        {
+          return Text2Bitmap(Text, new Font(FontName, FontSize), Color.Black, Color.White);
+        }
+
     }
 }
