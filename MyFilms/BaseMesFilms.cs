@@ -1480,7 +1480,7 @@ namespace MyFilmsPlugin.MyFilms
               #endregion
 
               #region save changes via memory update to disk
-              int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+              int maxretries = 10; // max retries 10 * 3000 = 30 seconds
               int i = 0;
               bool success = false; // result of update operation
 
@@ -1666,7 +1666,7 @@ namespace MyFilmsPlugin.MyFilms
                 }
                 i += 1;
                 LogMyFilms.Info("UpdateMovies() - Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
               }
               if (!success) LogMyFilms.Error("UpdateMovies() - Error writing Movie Database after '" + maxretries + "' retries !");
               #endregion
