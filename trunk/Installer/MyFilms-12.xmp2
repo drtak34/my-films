@@ -1760,6 +1760,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{8e624613-638b-449b-9a2e-ac3aa3cef5aa}-unknown.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\unknown.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{991a6325-0c54-440b-bf88-91f111daaac6}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -5512,10 +5519,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.Players.Video" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.Players.Video" />
+            <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -5532,7 +5539,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2385</Revision>
+      <Revision>2406</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -5544,7 +5551,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-08-16T05:03:12.4663656+02:00</ReleaseDate>
+    <ReleaseDate>2012-08-21T04:46:12.7498851+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -7310,6 +7317,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\unknown.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{8e624613-638b-449b-9a2e-ac3aa3cef5aa}-unknown.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\unknown.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{991a6325-0c54-440b-bf88-91f111daaac6}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
