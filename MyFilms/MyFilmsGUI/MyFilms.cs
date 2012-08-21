@@ -14769,7 +14769,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  return; // ignore the file changed event
 
         bool success = false; // result of try open for read
-        int maxretries = 10; // max retries 10 * 2000 = 20 seconds
+        int maxretries = 10; // max retries 10 * 3000 = 30 seconds
         int i = 0;
 
         while (!success && i < maxretries)
@@ -14777,9 +14777,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           success = !Helper.IsFileUsedbyAnotherProcess(conf.StrFileXml);
           i += 1;
           if (!success) LogMyFilms.Debug("FSwatcherChanged() - Attempt '" + i + "'to open Movie Database in read mode unsuccessful, waiting for next retry");
-          Thread.Sleep(2000);
+          Thread.Sleep(3000);
         }
-
 
         if (success)
         {
