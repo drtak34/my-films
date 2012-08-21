@@ -6907,10 +6907,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       else
                         setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
 
-                      wstring = "";
+                      wstring = "-1";
                       if ((wrep) && (MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0))
                       {
-                        float fRating = 0;
+                        float fRating = -1;
                         if (float.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out fRating))
                           wstring = fRating.ToString();
                       }
