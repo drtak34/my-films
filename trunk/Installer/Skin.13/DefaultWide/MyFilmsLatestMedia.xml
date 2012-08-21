@@ -15,7 +15,7 @@
 		  <type>image</type>
 		  <id>0</id>
 		  <posX>370</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>1220</width>
 		  <height>150</height>
 		  <texture>list_sub_focus.png</texture>
@@ -27,7 +27,7 @@
 		  <type>label</type>
 		  <id>0</id>
 		  <posX>340</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>800</width>
 		  <label>#(L(4558)):</label>
 		  <align>left</align>
@@ -40,7 +40,7 @@
 		  <type>label</type>
 		  <id>0</id>
 		  <posX>340</posX>
-		  <posY>610</posY>
+		  <posY>600</posY>
 		  <width>900</width>
 		  <label>#latestMediaHandler.myfilms.latest1.dateAdded: #latestMediaHandler.myfilms.latest1.title (#latestMediaHandler.myfilms.latest1.year) - #latestMediaHandler.myfilms.latest1.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest1.genre</label>
 		  <align>left</align>
@@ -53,7 +53,7 @@
 		  <type>label</type>
 		  <id>0</id>
 		  <posX>340</posX>
-		  <posY>637</posY>
+		  <posY>627</posY>
 		  <width>900</width>
 		  <label>#latestMediaHandler.myfilms.latest2.dateAdded: #latestMediaHandler.myfilms.latest2.title (#latestMediaHandler.myfilms.latest2.year) - #latestMediaHandler.myfilms.latest2.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest2.genre</label>
 		  <align>left</align>
@@ -66,7 +66,7 @@
 		  <type>label</type>
 		  <id>0</id>
 		  <posX>340</posX>
-		  <posY>664</posY>
+		  <posY>654</posY>
 		  <width>900</width>
 		  <label>#latestMediaHandler.myfilms.latest3.dateAdded: #latestMediaHandler.myfilms.latest3.title (#latestMediaHandler.myfilms.latest3.year) - #latestMediaHandler.myfilms.latest3.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest3.genre</label>
 		  <align>left</align>
@@ -79,10 +79,10 @@
 		  <type>image</type>
 		  <id>0</id>
 		  <posX>50</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
-		  <texture mask="videothumbmask.png">myfilms_latest_nocover.png</texture>
+		  <texture mask="videothumbmask.png">MyFilms\myfilms_latest_nocover.png</texture>
 		  <shouldCache>true</shouldCache>
 		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest1.title)+!Player.hasmedia</visible>		  
 		</control>
@@ -91,7 +91,7 @@
 		  <type>image</type>
 		  <id>1</id>
 		  <posX>50</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
 		  <texture mask="videothumbmask.png">#latestMediaHandler.myfilms.latest1.poster</texture>
@@ -103,7 +103,7 @@
 		  <type>image</type>
 		  <id>0</id>
 		  <posX>50</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>
 		  <texture>Videothumbframe.png</texture>
@@ -116,7 +116,7 @@
 		  <type>image</type>
 		  <id>1</id>
 		  <posX>142</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
 		  <texture mask="videothumbmask.png">myfilms_latest_nocover.png</texture>		  
@@ -127,7 +127,7 @@
 		  <type>image</type>
 		  <id>1</id>
 		  <posX>142</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
 		  <texture mask="videothumbmask.png">#latestMediaHandler.myfilms.latest2.poster</texture>		  
@@ -138,7 +138,7 @@
 		  <type>image</type>
 		  <id>0</id>
 		  <posX>142</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>
 		  <texture>Videothumbframe.png</texture>
@@ -151,7 +151,7 @@
 		  <type>image</type>
 		  <id>1</id>
 		  <posX>234</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
 		  <texture mask="videothumbmask.png">myfilms_latest_nocover.png</texture>
@@ -163,7 +163,7 @@
 		  <type>image</type>
 		  <id>1</id>
 		  <posX>234</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
 		  <texture mask="videothumbmask.png">#latestMediaHandler.myfilms.latest3.poster</texture>
@@ -175,7 +175,7 @@
 		  <type>image</type>
 		  <id>0</id>
 		  <posX>234</posX>
-		  <posY>580</posY>
+		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>
 		  <texture>Videothumbframe.png</texture>

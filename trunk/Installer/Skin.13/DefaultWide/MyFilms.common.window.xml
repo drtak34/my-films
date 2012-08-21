@@ -48,18 +48,5 @@
       <label>#myfilms.config.currentconfig</label>
       <visible>!Control.HasFocus(10099)</visible>
     </control>
-    <control>
-      <description>Update Status Info</description>
-      <type>fadelabel</type>      
-      <id>1</id>
-      <posX>30</posX>
-      <posY>65</posY> 
-      <width>250</width>
-      <font>font10</font>
-      <align>left</align>
-      <textcolor>ffffcc00</textcolor>      
-      <label>#myfilms.statusmessage</label>
-      <visible>!Control.HasFocus(10099)</visible>
-    </control>        
   </controls>
 </window>
