@@ -1214,19 +1214,19 @@ namespace MyFilmsPlugin.MyFilms
           #endregion
 
           #region user rating
-          rating = 0;
+          rating = -1; // -1 means there is no user rating done yet - we keep "0" for valid user rating !
           if (tmpconf.StrEnhancedWatchedStatusHandling) // get usercontext ratings, if enabled
           {
             string tmprating = GetUserRating(row[tmpconf.StrWatchedField].ToString(), tmpconf.StrUserProfileName);
-            if (tmprating != "-1")
+            if (tmprating.Length > 0)
             {
               if (!(float.TryParse(tmprating, out rating))) 
-                rating = 0;
+                rating = -1;
             }
           }
           else
           {
-            if (!(float.TryParse(row["RatingUser"].ToString(), out rating))) rating = 0;
+            if (!(float.TryParse(row["RatingUser"].ToString(), out rating))) rating = -1;
           }
           movie.RatingUser = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
           #endregion
@@ -1586,8 +1586,7 @@ namespace MyFilmsPlugin.MyFilms
 
                           #region imdb number
                           string oldIMDB = (sr.IsIMDB_IdNull()) ? "" : sr.IMDB_Id;
-                          if (!string.IsNullOrEmpty(movie.IMDBNumber))
-                            sr.IMDB_Id = movie.IMDBNumber;
+                          sr.IMDB_Id = (!string.IsNullOrEmpty(movie.IMDBNumber)) ? movie.IMDBNumber : oldIMDB;
                           if (sr.IMDB_Id != oldIMDB)
                             LogMyFilms.Debug("UpdateMovies() - Updating 'IMDB_Id' from '" + oldIMDB + "' to '" + sr.IMDB_Id + "'");
                           #endregion
@@ -1646,6 +1645,7 @@ namespace MyFilmsPlugin.MyFilms
                     catch (Exception ex)
                     {
                       LogMyFilms.Debug("UpdateMovies() - failed saving data to disk - Catalog = '" + Catalog + "' - reason: " + ex.Message);
+                      LogMyFilms.Debug("UpdateMovies() - Stacktrace: " + ex.StackTrace);
                       success = false;
                     }
                     finally
@@ -2668,8 +2668,6 @@ namespace MyFilmsPlugin.MyFilms
     internal string NewEnhancedWatchValue(string EnhancedWatchedValue, string UserProfileName, bool watched, int count, float rating)
     {
       string newEnhancedWatchedValue = "";
-      if (_mIWatchedCount > -1)
-        count = _mIWatchedCount;
       if (!watched)
         count = 0;
 
