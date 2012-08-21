@@ -10004,8 +10004,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
           bool doExtendedSearch = false;
-          GUIDialogYesNo dlgYesNo =
-            (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+          GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
           dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798940)); // Trailer
           dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798803)); // Include extended directories ?
           dlgYesNo.DoModal(GetID);
@@ -10033,8 +10032,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //dlgPrgrs.SetLine(1, "Register Trailers ...");
             dlgPrgrs.Percentage = 0;
           }
-          new System.Threading.Thread(
-            delegate()
+          new Thread(delegate()
               {
                 // MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                 for (int i = 0; i < w_index_count; i++)
@@ -10042,19 +10040,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   try
                   {
                     string title = wr[i][MyFilms.conf.StrTitle1].ToString();
-                    LogMyFilms.Debug(
-                      "(GlobalSearchTrailerLocal) - Number: '" + i + "' - Index to search: '" + w_index[i] +
-                      "'");
+                    LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number: '" + i + "' - Index to search: '" + w_index[i] + "'");
                     if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Register trailer for '" + title + "'");
                     if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / w_index_count;
+                    // MyFilmsDetail.setGUIProperty("statusmessage", "Register trailer for '" + title + "'");
+
                     //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
                     MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), doExtendedSearch);
                   }
                   catch (Exception ex)
                   {
-                    LogMyFilms.Debug(
-                      "(GlobalSearchTrailerLocal) - index: '" + i + "', Exception: '" + ex.Message + "', Stacktrace: '" +
-                      ex.StackTrace + "'");
+                    LogMyFilms.Debug("(GlobalSearchTrailerLocal) - index: '" + i + "', Exception: '" + ex.Message + "', Stacktrace: '" + ex.StackTrace + "'");
                   }
                 }
                 // MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
@@ -10068,10 +10064,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   (p1, p2, data) =>
                     {
                       // this will be executed after background thread finished
-                      this.Refreshfacade();
-                        // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                      Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                      MyFilmsDetail.clearGUIProperty("statusmessage");
+                      // MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(10798624), "Trailer Search finished");
                       ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695));
-                        //Traiersearch finished!
                       return 0;
                     },
                   0,
@@ -15097,7 +15093,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!bgUpdateFanart.IsBusy)
       {
         bgUpdateFanart.RunWorkerAsync(MyFilms.r);
-        LogMyFilms.Info(": Downloading backdrop fanart in batch mode");
+        LogMyFilms.Info("Downloading backdrop fanart in batch mode");
       }
     }
 
@@ -15129,6 +15125,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
         if (fanartTitle.Length > 0)
         {
+          MyFilmsDetail.setGUIProperty("statusmessage", "Updating Fanart for '" + fanartTitle + "'");
           List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, fanartTitle, wyear, wdirector, wimdbid, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1, personartworkpath);
         }
       }
@@ -15137,6 +15134,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     static void bgUpdateFanart_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
       LogMyFilms.Info("Backdrop Fanart download finished");
+      MyFilmsDetail.clearGUIProperty("statusmessage");
+      MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(10798757), "Fanart Updates finished");
     }
 
     //*****************************************************************************************
@@ -15516,6 +15515,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Load_Config(Configuration.CurrentConfig, true);
         InitialIsOnlineScan = true; // let MF know, the status has been retrieved !
         MyFilmsDetail.clearGUIProperty("statusmessage");
+        MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(10798948), "Online Check finished");
         // Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
         Refreshfacade(); // Fin_Charge_Init(false, true); //need to reload the facade, but NOT default select, as it otherwise will reset global filters the user might have set...
       }
