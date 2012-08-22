@@ -6897,6 +6897,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
                       setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
                       string rating = GetUserRating(ItemId, MyFilms.conf.StrUserProfileName);
+                      if (rating == "-1") rating = "";
                       setGUIProperty("user.rating.value", rating);
                     }
                     else
@@ -6906,12 +6907,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       else
                         setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
 
-                      wstring = "-1";
+                      wstring = "";
                       if ((wrep) && (MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0))
                       {
                         float fRating = -1;
                         if (float.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out fRating))
                           wstring = fRating.ToString();
+                        if (wstring == "-1") wstring = "";
                       }
                       setGUIProperty("user.rating.value", wstring);
                     }
