@@ -334,7 +334,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           downloadingWorker.DoWork += new DoWorkEventHandler(downloadingWorker_DoWork);
           downloadingWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(downloadingWorker_RunWorkerCompleted);
           setDownloadStatus();
-
         }
 
         void downloadingWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1151,7 +1150,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", GUILocalizeStrings.Get(10798749) + " (" + title + ")"); // download to movie directory
 
-                  InitTrailerwatcher(path); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
+                  InitTrailerwatcher(); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
 
                   if (Helper.IsOnlineVideosAvailableAndEnabledV12) InitOVEventHandler();
                   else LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos - you need OV V1.2+ installed and enabled !");
@@ -7422,14 +7421,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         #endregion
 
-        private void InitTrailerwatcher(string directorypath)
+        private void InitTrailerwatcher()
         {
+          string directorypath = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+          if (directorypath.Contains(";")) directorypath = directorypath.Substring(0, directorypath.IndexOf(";"));
+          if (directorypath.Contains("\\")) directorypath = directorypath.Substring(0, directorypath.LastIndexOf("\\"));
+
           if (!System.IO.Directory.Exists(directorypath))
           {
             LogMyFilms.Warn("InitTrailerwatcher() - Trailerwatcher cannot initialize - path does not exist: '" + directorypath + "'");
             return;
           }
-          if (Trailerwatcher.EnableRaisingEvents && Trailerwatcher.Path == directorypath && directorypath != "")
+          if (Trailerwatcher.EnableRaisingEvents && Trailerwatcher.Path == directorypath)
             return; // return, if it's already enabled and file name has not changed
           else
           {
@@ -7463,6 +7466,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("InitTrailerwatcher() - Trailerwatcher started watching - directory: '" + directorypath + "'");
         }
 
+        private void DeInitTrailerwatcher()
+        {
+          Trailerwatcher.EnableRaisingEvents = false;
+          Trailerwatcher.Changed -= new FileSystemEventHandler(TrailerwatcherChanged);
+          Trailerwatcher.Error -= new ErrorEventHandler(TrailerwatcherError);
+          Trailerwatcher.Created -= new FileSystemEventHandler(TrailerwatcherCreated);
+          Trailerwatcher.Deleted -= new FileSystemEventHandler(TrailerwatcherDeleted);
+          Trailerwatcher.Renamed -= new RenamedEventHandler(TrailerwatcherRenamed);
+          LogMyFilms.Debug("DeInitTrailerwatcher() - disabled trailer watcher");
+        }
+
         private void TrailerwatcherChanged(object source, FileSystemEventArgs e)
         {
           LogMyFilms.Debug("TrailerwatcherChanged() - New Trailerwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
@@ -7475,7 +7489,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!objFileInfo.Exists) return; // ignore the file changed event
           
           // Trailerwatcher.EnableRaisingEvents = false;
-          this.InitTrailerwatcher(""); // reset trailer watcher
+          DeInitTrailerwatcher(); // reset trailer watcher
           AutoRegisterTrailer(e.FullPath);
 
           //// this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
@@ -7512,7 +7526,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             try
             {
-              InitTrailerwatcher(""); // This will throw an error at the watcher.NotifyFilter line if it can't get the path.
+              InitTrailerwatcher(); // This will throw an error at the watcher.NotifyFilter line if it can't get the path.
               LogMyFilms.Debug("WatcherError() - Trailerwatcher restarted after error !");
             }
             catch
@@ -10013,7 +10027,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
         }
 
-        internal static string GetMyFilmsDefaultLogo()
+        private static string GetMyFilmsDefaultLogo()
         {
             // first check subfolder of current skin (allows skinners to use custom icons)
             string image = string.Format(@"{0}\Media\MyFilms\MyFilms.png", GUIGraphicsContext.Skin);
@@ -10771,19 +10785,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       #region GUI Events
-      private void InitOVEventHandler()
+
+
+      public class OnlineVideosListener
       {
-        // Subscribe to Events
+        public void Subscribe(GUIOnlineVideos OV)
+        {
           try
           {
-            GUIOnlineVideos OV = (GUIOnlineVideos)GUIWindowManager.GetWindow(MyFilms.ID_OnlineVideos);
             OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
-            LogMyFilms.Debug("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
+            LogMyFilms.Debug("OnlineVideosListener - Subscribed 'VideoDownloaded' event from OnlineVideos ...");
           }
           catch (Exception ex)
           {
-            LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos: " + ex.Message);
+            LogMyFilms.Error("OnlineVideosListener - Error subscribing to 'VideoDownloaded' event from OnlineVideos: " + ex.Message);
           }
+        }
+
+        private void OnVideoDownloaded(string file, string site, string categoryRecursiveName, string videoTitle)
+        {
+          LogMyFilms.Debug("OnlineVideosListener OnVideoDownloaded() - file = '" + file + "', site = '" + site + "', categoryrecursivename = '" + categoryRecursiveName + "', videoTitle = '" + videoTitle + "'");
+        }
+      }
+
+
+      private void InitOVEventHandler()
+      {
+        // Subscribe to Event
+        try
+        {
+          GUIOnlineVideos OV = (GUIOnlineVideos)GUIWindowManager.GetWindow(MyFilms.ID_OnlineVideos);
+          OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
+          LogMyFilms.Debug("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos: " + ex.Message);
+        }
       }
       
       private void OnVideoDownloaded(string file, string site, string categoryRecursiveName, string videoTitle)
