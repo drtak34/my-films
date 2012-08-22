@@ -15069,8 +15069,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (GetID == ID_MyFilms)
       {
-        if (!string.IsNullOrEmpty(Configuration.CurrentConfig))
-          Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
+        if (Configuration.CurrentConfig != "")
+        {
+          if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
+            Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
+          else
+            Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
+        }
 
         Load_Config(Configuration.CurrentConfig, true, null);
         Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
