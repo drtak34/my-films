@@ -10913,6 +10913,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             newRow.LayoutView = conf.WStrLayOut.ToString();
             LogMyFilms.Debug("Context_Menu_Movie() - Update Custom View - DB Field '" + newRow.DBfield + "', Label '" + newRow.Label + "', Value '" + newRow.Value + "'");
             SaveCustomViews();
+            NavigationStack.Clear();
             break;
           }
 
@@ -10990,6 +10991,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Context_Menu_Movie() - Add View with DB Field '" + newRow.DBfield + "', Label '" + newRow.Label + "', Value '" + newRow.Value + "'");
               SaveCustomViews();
               GetSelectFromMenuView(conf.BoolMenuShowAll);
+              NavigationStack.Clear();
             }
             break;
           }
@@ -11006,6 +11008,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             SaveCustomViews();
             GetSelectFromMenuView(conf.BoolMenuShowAll);
+            NavigationStack.Clear();
             break;
           }
 
@@ -11038,6 +11041,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             SaveCustomViews();
             GetSelectFromMenuView(conf.BoolMenuShowAll);
+            NavigationStack.Clear();
             break;
           }
 
@@ -11053,6 +11057,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             SaveCustomViews();
             GetSelectFromMenuView(conf.BoolMenuShowAll);
+            NavigationStack.Clear();
             break;
           }
 
@@ -11078,6 +11083,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SaveCustomViews();
             conf.MenuSelectedID--;
             GetSelectFromMenuView(conf.BoolMenuShowAll);
+            NavigationStack.Clear();
             break;
           }
 
@@ -11103,6 +11109,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SaveCustomViews();
             conf.MenuSelectedID++;
             GetSelectFromMenuView(conf.BoolMenuShowAll);
+            NavigationStack.Clear();
             break;
           }
 
@@ -11122,6 +11129,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   viewRow.Label = keyboard.Text;
                   SaveCustomViews();
                   GetSelectFromMenuView(conf.BoolMenuShowAll);
+                  NavigationStack.Clear();
                 }
                 break;
               }
@@ -11145,6 +11153,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   viewRow.Value = keyboard.Text;
                   SaveCustomViews();
                   GetSelectFromMenuView(conf.BoolMenuShowAll);
+                  NavigationStack.Clear();
                 }
                 break;
               }
@@ -11172,6 +11181,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   viewRow.Filter = keyboard.Text;
                   SaveCustomViews();
                   GetSelectFromMenuView(conf.BoolMenuShowAll);
+                  NavigationStack.Clear();
                 }
                 break;
               }
