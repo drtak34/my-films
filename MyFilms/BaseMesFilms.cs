@@ -805,6 +805,20 @@ namespace MyFilmsPlugin.MyFilms
               movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
               // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
 
+              //if (!movieRow.IsResolutionNull() && movieRow.Resolution.Contains("x"))
+              //{
+              //  try
+              //  {
+              //    string[] arSplit = movieRow.Resolution.Split(new string[] {"x"}, StringSplitOptions.RemoveEmptyEntries);
+              //    movieRow.Aspectratio = Math.Round(decimal.Divide(Convert.ToInt32(arSplit[0]), Convert.ToInt32(arSplit[1])), 2).ToString();
+              //    //decimal aspectratio = Math.Round(decimal.Divide(Convert.ToInt32(arSplit[0]), Convert.ToInt32(arSplit[1])), 2);
+              //    //if (aspectratio < (decimal)(1.4)) movieRow.Aspectratio = "4:3"; //1,33 -> 4:3
+              //    //else if (aspectratio < (decimal)(1.9)) movieRow.Aspectratio = "16:9"; //1,78 -> 16:9 / widescreen //1,85 -> widescreen
+              //    //else if (aspectratio >= (decimal)(1.9)) movieRow.Aspectratio = "cinemascope"; //2,35+ -> cinemascope
+              //  }
+              //  catch { LogMyFilms.Debug("Error calculating aspectratio for movie # '" + movieRow.Number + "'"); }
+              //}
+
               // Copy CustomFields data ....
               AntMovieCatalog.CustomFieldsRow customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
               foreach (DataColumn dc in commonColumns)

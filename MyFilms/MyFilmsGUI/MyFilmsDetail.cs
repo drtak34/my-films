@@ -7188,7 +7188,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       break;
                     case "resolution":
                       #region set calculated aspectratio and image format
-                      decimal aspectratio = 0;
                       string ar = "";
                       if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                         try
@@ -7196,18 +7195,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
                           //LogMyFilms.Debug("Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
                           setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                          //LogMyFilms.Debug("(Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                          decimal w_hsize;
-                          decimal w_vsize;
-                          string[] arSplit;
-                          string[] Sep = new string[] { "x" };
-                          arSplit = MyFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
-                          w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
-                          w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
-                          // To Check if/why exception eccurs
-                          //LogMyFilms.Debug("hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
-                          aspectratio = (w_hsize / w_vsize);
-                          aspectratio = Math.Round(aspectratio, 2);
+                          string[] arSplit = wstring.Split(new string[] { "x" }, StringSplitOptions.RemoveEmptyEntries);
+                          decimal aspectratio = Math.Round(decimal.Divide(Convert.ToInt32(arSplit[0]), Convert.ToInt32(arSplit[1])), 2);
                           //Formats:
                           //1,33 -> 4:3
                           //1,78 -> 16:9 / widescreen
@@ -7218,10 +7207,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
                           wstring = aspectratio.ToString();
                         }
-                        catch
-                        {
-                          LogMyFilms.Info("Error calculating aspectratio !");
-                        }
+                        catch { LogMyFilms.Info("Error calculating aspectratio !"); }
                       setGUIProperty("db.calc.aspectratio.value", wstring);
                       setGUIProperty("db.calc.imageformat.value", ar);
                       #endregion
