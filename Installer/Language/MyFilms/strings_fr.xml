@@ -357,6 +357,9 @@
     <String id="10798803">Extended search (directories) ?</String>
     <String id="10798810">Delete movie cover from DB</String>
     <String id="10798820">Details Display Item</String>
+    <String id="10798930">Multi User State</String>
+    <String id="10798931">Last Seen</String>
+    <String id="10798932">Alternate Titles</String>
     <String id="10798940">Bande Annonce</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>
