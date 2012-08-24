@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<profile>
+  <section name="ID0000">
+    <entry name="LogosPath">C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\Thumbs\MyFilms_Logos</entry>
+  </section>
+  <section name="ID2001">
+    <entry name="ID2001_0">Framerate;contains;23;or;Framerate;contains;24;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\Thumbs\Logos\BluRay.png</entry>
+    <entry name="ID2001_1">VideoFormat;contains;divx;or;VideoFormat;contains;div3;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\DIVX.png</entry>
+    <entry name="ID2001_2">VideoFormat;contains;xvid;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\XVID.png</entry>
+    <entry name="ID2001_3">VideoFormat;contains;dvd;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\DVD.png</entry>
+    <entry name="ID2001_4">VideoFormat;contains;h264;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\H264.png</entry>
+    <entry name="ID2001_5">VideoFormat;contains;mpeg-2;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MPEG-2.png</entry>
+    <entry name="ID2001_6">Resolution;contains;1080;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\FULLHD1080.png</entry>
+    <entry name="ID2001_7">Resolution;contains;720;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\HD720.png</entry>
+    <entry name="ID2001_8">Resolution;contains;540;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\HD540.png</entry>
+    <entry name="ID2001_9">VideoBitrate;greater;1500;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\HD.png</entry>
+    <entry name="ID2001_10">AudioFormat;contains;dolby digital;or;AudioFormat;contains;ac3;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\AC3.png</entry>
+    <entry name="ID2001_11">AudioFormat;contains;a_mpeg;or;AudioFormat;contains;mpa1l3;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MPA1L3.png</entry>
+    <entry name="ID2001_12">AudioFormat;contains;a_aac/mpeg2;or;AudioFormat;audioformat;mpa1l2;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MP3surround.png</entry>
+    <entry name="ID2001_13">AudioFormat;contains;mp3;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MP3.png</entry>
+    <entry name="ID2001_14">AudioFormat;contains;layer 3;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MP3.png</entry>
+    <entry name="ID2001_15">AudioFormat;contains;layer 2;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MP2.png</entry>
+    <entry name="ID2001_16">AudioFormat;contains;mppeg1;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\MP3.png</entry>
+    <entry name="ID2001_17">AudioFormat;contains;6 channels;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Dolby51.png</entry>
+    <entry name="ID2001_18">AudioBitrate;contains;375;or;AudioBitrate;contains;438;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Dolby51.png</entry>
+    <entry name="ID2001_19">AudioBitrate;contains;188;or;AudioBitrate;contains;156;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\DolbyStereo.png</entry>
+    <entry name="ID2001_20">Subtitles;filled;;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Subtitles.png</entry>
+    <entry name="ID2001_21">AudioChannelCount;contains;1;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\mono.png</entry>
+    <entry name="ID2001_22">AudioChannelCount;contains;2;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\stereo.png</entry>
+    <entry name="ID2001_23">AudioChannelCount;contains;6;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\5.1.png</entry>
+    <entry name="ID2001_24">AudioChannelCount;contains;7;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\6.1.png</entry>
+    <entry name="ID2001_25">AudioChannelCount;contains;8;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\7.1.png</entry> 
+    <entry name="ID2001_26">Languages;greater;1;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\multilanguage.png</entry>
+  </section>
+  <section name="ID2002">
+    <entry name="ID2002_0">Category;contains;drama;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Drama.png</entry>
+    <entry name="ID2002_1">Category;contains;komödie;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Comedy_2.png</entry>
+    <entry name="ID2002_2">Category;contains;action;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Action.png</entry>
+    <entry name="ID2002_3">Category;contains;thriller;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Thriller.png</entry>
+    <entry name="ID2002_4">Category;contains;science-fiction;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Scifi.png</entry>
+    <entry name="ID2002_5">Category;contains;abenteuer;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Adventure_2.png</entry>
+    <entry name="ID2002_6">Category;contains;animation;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Anim.png</entry>
+    <entry name="ID2002_7">Category;contains;dokumentation;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Discovery.png</entry>
+    <entry name="ID2002_8">Category;contains;familie;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\abc_Family.png</entry>
+    <entry name="ID2002_9">Category;contains;soap;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Soap.png</entry>
+    <entry name="ID2002_10">Category;contains;liebe;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Soap.png</entry>
+    <entry name="ID2002_11">Category;contains;romantik;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Soap.png</entry>
+    <entry name="ID2002_12">Category;contains;krimi;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Soap_2.png</entry>
+    <entry name="ID2002_13">Category;contains;serie;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\Mini-Series.png</entry>
+  </section>
+  <section name="ID2003">
+    <entry name="ID2003_0">Languages;contains;german;or;Languages;contains;deutsch;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\CountryRoundGlass\Germany.png</entry>
+    <entry name="ID2003_1">Languages;contains;english;or;Languages;contains;englisch;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\CountryRoundGlass\United States.png</entry>
+    <entry name="ID2003_2">Languages;contains;french;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\CountryRoundGlass\France.png</entry>
+    <entry name="ID2003_3">Languages;contains;italian;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\CountryRoundGlass\Italy.png</entry>
+    <entry name="ID2003_4">Languages;contains;spanish;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\CountryRoundGlass\Spain.png</entry>
+    <entry name="ID2003_5">Languages;contains;chinese;;;;;C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\thumbs\Logos\CountryRoundGlass\China.png</entry>
+  </section>
+</profile>

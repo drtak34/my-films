@@ -1,0 +1,65 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+XionControls
+</name>
+</assembly>
+<members>
+<member name="P:XionControls.XionPanel.Movable">
+	<summary>
+ Détermine si le panel peut etre bougé
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:XionControls.XionPanel.TitleBackColor">
+	<summary>
+ Détermine la couleur de fonds du titre
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:XionControls.XionPanel.Title">
+	<summary>
+ Détermine le titre du panel
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:XionControls.XionPanel.Sizable">
+	<summary>
+ Détermine si l'utilisateur peut changer la taille du panel
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:XionControls.XionPanel.Orientation">
+	<summary>
+ Détermine l'orientation du panel Vertical ou Horizontal
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:XionControls.XionPanel.State">
+	<summary>
+ Etat du panel
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:XionControls.XionPanel.TitleFont">
+	<summary>
+ Détermine la police du Titre
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:XionControls.XionPanel">
+	<summary>
+ Panel rétractable
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

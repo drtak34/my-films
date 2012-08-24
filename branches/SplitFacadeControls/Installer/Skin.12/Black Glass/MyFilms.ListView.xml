@@ -1,0 +1,576 @@
+<window>
+  <controls>
+
+    <!-- LIST and BIG ICON LIST VIEW -->
+
+    <!-- PERSON INFO - will only show up in respective views  -->
+    <control>
+      <description>Current person name</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>455</posY>
+      <width>750</width>
+      <font>font22</font>
+      <label>#(iif(neq(#myfilms.person.name.value,''),#myfilms.person.name.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(38)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Place of Birth</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>497</posY>
+      <width>750</width>
+      <label>#myfilms.person.placeofbirth.value</label>
+      <textcolor>90FFFFFF</textcolor>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Date of Birth</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>529</posY>
+      <width>750</width>
+      <label>#myfilms.person.dateofbirth.value</label>
+      <textcolor>90FFFFFF</textcolor>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Bography</description>
+      <type>textboxscrollup</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>565</posY>
+      <width>800</width>
+      <height>128</height>
+      <font>font12</font>
+      <textcolor>FFFFFFFF</textcolor>
+      <label>#myfilms.person.biography.value</label>
+      <visible>!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <seperator>: : :</seperator>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+
+    <!-- MOVIE INFO - will only show up in respective views  -->
+    <control>
+      <description>Current program title</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>485</posY>
+      <width>750</width>
+      <font>font22</font>
+      <label>#(iif(neq(#myfilms.user.mastertitle.value,''),#myfilms.user.mastertitle.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+!Control.isvisible(38)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Category value</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>527</posY>
+      <width>750</width>
+      <label>#myfilms.db.category.value</label>
+      <textcolor>90FFFFFF</textcolor>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Runtime value</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>559</posY>
+      <width>750</width>
+      <label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value - ',''))#(iif(neq(#myfilms.db.length.value,''),'#myfilms.db.length.value #myfilms.db.length.unit',''))</label>
+      <textcolor>90FFFFFF</textcolor>
+      <visible>!string.equals(#myfilms.user.mastertitle,)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>RatingValue</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>305</posX>
+      <posY>452</posY>
+      <label>#(iif(neq(#myfilms.db.rating.value,''),'(#myfilms.db.rating.value)',''))</label>
+      <font>font10</font>
+      <align>right</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!control.isvisible(34)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Rating Stars</description>
+      <type>imagelist</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>452</posY>
+      <width>150</width>
+      <height>40</height>
+      <textureWidth>20</textureWidth>
+      <textureHeight>20</textureHeight>
+      <subitems>
+        <subitem>MyFilms\UserRatingStarOff.png</subitem>
+        <subitem>MyFilms\UserRatingStarOn.png</subitem>
+      </subitems>
+      <orientation>horizontal</orientation>
+      <align>left</align>
+      <imagesToDraw>10</imagesToDraw>
+      <percentage>#myfilms.db.rating.value</percentage>
+      <visible>!string.equals(#myfilms.db.rating.value,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Description value</description>
+      <type>textboxscrollup</type>
+      <id>1025</id>
+      <posX>30</posX>
+      <posY>593</posY>
+      <width>800</width>
+      <height>75</height>
+      <font>font12</font>
+      <textcolor>FFFFFFFF</textcolor>
+      <label>#myfilms.db.description.value</label>
+      <visible>!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <seperator>: : :</seperator>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+
+
+    <!-- Additional Display for Info if Fanart available and Movie available -->
+
+    <control>
+      <description>Movie available Info Label</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>757</posX>
+      <!-- <posX>730</posX> -->
+      <posY>677</posY>
+      <width>80</width>
+      <label>Film:</label>
+      <font>font10</font>
+      <textcolor>6FFFFFFF</textcolor>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.source.isonline)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Movie unavailable Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <!-- <posX>785</posX> -->
+      <posX>808</posX>
+      <posY>676</posY>
+      <width>20</width>
+      <height>20</height>
+      <texture>tv_is_unavailable.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.source.isonline,unavailable)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Movie available Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>808</posX>
+      <posY>676</posY>
+      <width>20</width>
+      <height>20</height>
+      <texture>tv_is_available.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.source.isonline,available)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Movie offline Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>808</posX>
+      <posY>676</posY>
+      <width>20</width>
+      <height>20</height>
+      <texture>tv_is_timeshifting.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.source.isonline,offline)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Movie unknown Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>808</posX>
+      <posY>676</posY>
+      <width>20</width>
+      <height>20</height>
+      <texture>MyFilms\tv_is_unknown.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.source.isonline,unknown)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+
+    <!-- Trailer Available Info -->
+
+    <control>
+      <description>Trailer available Info Label</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>757</posX>
+      <!-- <posX>730</posX> -->
+      <posY>698</posY>
+      <width>80</width>
+      <label>Trailer:</label>
+      <font>font10</font>
+      <textcolor>6FFFFFFF</textcolor>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.isonline)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Trailer Count</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>737</posX>
+      <posY>698</posY>
+      <width>80</width>
+      <label>#myfilms.user.sourcetrailer.count</label>
+      <font>font10</font>
+      <textcolor>6FFFFFFF</textcolor>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Trailer available Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <!-- <posX>785</posX> -->
+      <posX>808</posX>
+      <posY>697</posY>
+      <width>20</width>
+      <height>20</height>
+      <!-- <texture>MyFilms\status_led_green.png</texture> -->
+      <texture>tv_is_unavailable.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Trailer unavailable Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>808</posX>
+      <posY>697</posY>
+      <width>20</width>
+      <height>20</height>
+      <!-- <texture>MyFilms\status_led_red.png</texture> -->
+      <texture>tv_is_available.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.isonline,available)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Trailer offline Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>808</posX>
+      <posY>697</posY>
+      <width>20</width>
+      <height>20</height>
+      <!-- <texture>MyFilms\status_led_yellow.png</texture> -->
+      <texture>tv_is_timeshifting.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Trailer unknown Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>808</posX>
+      <posY>697</posY>
+      <width>20</width>
+      <height>20</height>
+      <!-- <texture>MyFilms\status_led_grey.png</texture> -->
+      <texture>MyFilms\tv_is_unknown.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.contains(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+<!-- Watched -->
+
+    <control>
+      <description>Watched Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>733</posX>
+      <posY>680</posY>
+      <width>13</width>
+      <height>13</height>
+      <texture>MyFilms\overlaywatched.png</texture>
+      <colordiffuse>eea9d0f7</colordiffuse>
+      <visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.contains(#myfilms.user.watched.value)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Un-Watched Icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>733</posX>
+      <posY>680</posY>
+      <width>13</width>
+      <height>13</height>
+      <texture>MyFilms\overlayunwatched.png</texture>
+      <colordiffuse>7fffffff</colordiffuse>
+      <visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+!control.isvisible(40)+[facadeview.list|facadeview.album]+control.hasfocus(50)+!string.contains(#myfilms.user.watched.value)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>User Watched Count</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>725</posX>
+      <posY>679</posY>
+      <width>279</width>
+      <label>#myfilms.user.watched.name #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
+      <font>font9</font>
+      <align>right</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+
+<!-- User Rating  -->
+
+<!--
+    <control>
+      <description>UserRatingValue</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>725</posX>
+      <posY>699</posY>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
+      <font>font9</font>
+      <align>right</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+-->
+    <control>
+      <description>Rating Stars</description>
+      <type>imagelist</type>
+      <id>0</id>
+      <posX>717</posX>
+      <posY>702</posY>
+      <width>50</width>
+      <height>12</height>
+      <textureWidth>10</textureWidth>
+      <textureHeight>10</textureHeight>
+      <subitems>
+        <subitem>MyFilms\UserRatingStarOff.png</subitem>
+        <subitem>MyFilms\UserRatingStarOn.png</subitem>
+      </subitems>
+      <orientation>horizontal</orientation>
+      <align>right</align>
+      <imagesToDraw>10</imagesToDraw>
+      <percentage>#myfilms.user.rating.value</percentage>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+
+<!-- LOGOS -->
+
+    <control>
+      <type>image</type>
+      <description>Dummy Thumb Logos ID 2001</description>
+      <id>2001</id>
+      <visible>no</visible>
+    </control>
+    <control>
+      <type>image</type>
+      <description>Dummy Thumb Logos ID 2002</description>
+      <id>2002</id>
+      <visible>no</visible>
+    </control>
+    <control>
+      <type>image</type>
+      <description>Dummy Thumb Logos ID 2003</description>
+      <id>2003</id>
+      <visible>no</visible>
+    </control>
+    <!--
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2001</description>
+			<id>2001</id>
+			<posX>30</posX>
+			<posY>675</posY>
+			<width>750</width>
+			<height>34</height>
+			<texture>#myfilms.logos_id2001</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<visible>!player.hasmedia+control.hasfocus(50)+[facadeview.list|facadeview.album]</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2002</description>
+			<id>2002</id>
+			<posX>30</posX>
+			<posY>675</posY>
+			<width>750</width>
+			<height>34</height>
+			<texture>#myfilms.logos_id2002</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<visible>!player.hasmedia+control.hasfocus(50)+[facadeview.list|facadeview.album]</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<animation effect="fade" time="250">visiblechange</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2003</description>
+			<id>2003</id>
+			<posX>30</posX>
+			<posY>675</posY>
+			<width>750</width>
+			<height>34</height>
+			<texture>#myfilms.logos_id2003</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<visible>!player.hasmedia+control.hasfocus(50)+[facadeview.list|facadeview.album]</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<animation effect="fade" time="250">visiblechange</animation>
+		</control>
+-->
+    <control>
+      <type>image</type>
+      <description>thumb Logos ID 2012 (Combined ID2001 and ID2002)</description>
+      <id>2012</id>
+      <posX>30</posX>
+      <posY>675</posY>
+      <width>750</width>
+      <height>34</height>
+      <texture>#myfilms.logos_id2012</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <visible>!player.hasmedia+control.hasfocus(50)+[facadeview.list|facadeview.album]</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+<!-- ADIITIONAL CERTIFICATION AND STUDIO LOGOS -->
+
+<!--
+    <control>
+      <type>image</type>
+      <description>Certification Logo</description>
+      <id>1</id>
+      <posX>330</posX>
+      <posY>175</posY>
+      <width>50</width>
+      <height>34</height>
+      <texture>MyFilms\Certification\#myfilms.db.certification.value.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <visible>!player.hasmedia+control.hasfocus(50)+[facadeview.list|facadeview.album]</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <description>Studio Logo</description>
+      <id>1</id>
+      <posX>330</posX>
+      <posY>275</posY>
+      <width>200</width>
+      <height>50</height>
+      <texture>MyFilms\Studios\#myfilms.db.studio.value.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <visible>!player.hasmedia+control.hasfocus(50)+[facadeview.list|facadeview.album]</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+-->
+
+  </controls>
+</window>
