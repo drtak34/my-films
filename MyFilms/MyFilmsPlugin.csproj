@@ -210,6 +210,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MFview.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\MultiUserData.cs" />
     <Compile Include="DataBase\OnlineMovie.cs" />
     <Compile Include="DataBase\OnlinePerson.cs" />
     <Compile Include="MyFilmsGUI\Configuration.cs" />

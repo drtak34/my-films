@@ -349,6 +349,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const string ImdbBaseUrl = "http://www.imdb.com/";
     public const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
 
+    internal const string DefaultUsername = "Global";
+
     enum Controls : int
     {
       CTRL_BtnLayout = 2,
@@ -10348,7 +10350,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (s.Contains(":"))
           {
             string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
-            if (!choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != "Global")
+            if (!choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.DefaultUsername)
             {
               dlg.Add(userprofilename);
               choiceGlobalUserProfileName.Add(userprofilename);

@@ -1278,6 +1278,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating; // always set db value, so in enhanced wat hed mode it represents the lst chaned value ...
 
+                  if (MyFilms.conf.StrUserProfileName.Length > 0)
+                  {
+                    if (dlgRating.Rating > 5)
+                      MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = Helper.Add(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
+                    else
+                      MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = Helper.Remove(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
+                  }
+
                   Update_XML_database();
                   afficher_detail(true);
 
@@ -3142,9 +3150,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static void AddWatchedCount(int Index, string userprofilename)
         {
-          if (userprofilename != "Global") // avoid to add twice, if user selected "Global" as profile name
+          if (userprofilename != MyFilms.DefaultUsername) // avoid to add twice, if user selected "Global" as profile name
             AddWatchedByOne(Index, userprofilename);
-          AddWatchedByOne(Index, "Global"); // Global watched count will always be set
+          AddWatchedByOne(Index, MyFilms.DefaultUsername); // Global watched count will always be set
           // ToDo: Could also populate "watched history" here (future version)
 
           // tell any listeners that user watched the movie
@@ -6895,7 +6903,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       setGUIProperty("user.watched.count", count.ToString());
                       setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
-                      setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
+                      setGUIProperty("user.watched.global", GetWatchedCount(ItemId, MyFilms.DefaultUsername).ToString());
                       string rating = GetUserRating(ItemId, MyFilms.conf.StrUserProfileName);
                       if (rating == "-1") rating = "";
                       setGUIProperty("user.rating.value", rating);

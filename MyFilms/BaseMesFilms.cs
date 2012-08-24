@@ -805,6 +805,16 @@ namespace MyFilmsPlugin.MyFilms
               movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
               // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
 
+              //if (!movieRow.IsRatingUserNull())
+              //{
+              //  //if (movieRow.RatingUser > 5)
+              //  //  // add user to movieRow.Favorite
+              //  //else
+              //  //  // remove user from movieRow.Favorite
+              //}
+              //else
+              //  movieRow.Favorite = null;
+
               //if (!movieRow.IsResolutionNull() && movieRow.Resolution.Contains("x"))
               //{
               //  try
@@ -1059,7 +1069,7 @@ namespace MyFilmsPlugin.MyFilms
                 string StrFileType = xmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
                 bool AllowTraktSync = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
                 bool AllowRecentlyAddedAPI = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-                string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "Global");
+                string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", MyFilms.DefaultUsername);
 
                 string catalogname = Enum.GetName(typeof(MyFilmsGUI.Configuration.CatalogType), Int32.Parse(StrFileType));
 
@@ -2340,6 +2350,9 @@ namespace MyFilmsPlugin.MyFilms
               case "AgeAdded":
               case "ageadded":
                 return GUILocalizeStrings.Get(10798956);
+              case "Favorite":
+              case "favorite":
+                return GUILocalizeStrings.Get(10798957);
               default:
                 {
                   string translation = string.Empty;
@@ -2699,7 +2712,7 @@ namespace MyFilmsPlugin.MyFilms
             string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
 
 
-            if (tempuser == "Global" && int.Parse(tempcount) < count) // Update Count Value for Global count, if it is lower than user count
+            if (tempuser == MyFilms.DefaultUsername && int.Parse(tempcount) < count) // Update Count Value for Global count, if it is lower than user count
             {
               sNew = tempuser + ":" + count + ":" + rating + ":" + tempdatewatched;
             }
@@ -2722,34 +2735,6 @@ namespace MyFilmsPlugin.MyFilms
           newEnhancedWatchedValue = EnhancedWatchedValue + "|" + UserProfileName + ":" + count + ":" + rating + ":";
       }
       return newEnhancedWatchedValue;
-    }
-
-    internal string Remove(string input, string toRemove)
-    {
-      string output = "";
-      string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      List<string> itemList = split.Distinct().ToList();
-      if (itemList.Contains(toRemove)) itemList.Remove(toRemove);
-      foreach (string s in itemList)
-      {
-        if (output.Length > 0) output += ", ";
-        output += s;
-      }
-      return output;
-    }
-
-    internal string Add(string input, string toAdd)
-    {
-      string output = "";
-      string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      List<string> itemList = split.Distinct().ToList();
-      if (!itemList.Contains(toAdd)) itemList.Add(toAdd);
-      foreach (string s in itemList)
-      {
-        if (output.Length > 0) output += ", ";
-        output += s;
-      }
-      return output;
     }
 
     internal string GetStringValue(List<string> input)
