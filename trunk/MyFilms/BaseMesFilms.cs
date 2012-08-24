@@ -621,6 +621,9 @@ namespace MyFilmsPlugin.MyFilms
           CustomFieldList.Add(new string[] { "IsOnlineTrailer", "IsOnlineTrailer", "ftString" });
           CustomFieldList.Add(new string[] { "LastPosition", "LastPosition", "ftString" });
           CustomFieldList.Add(new string[] { "AudioChannelCount", "AudioChannelCount", "ftString" });
+          CustomFieldList.Add(new string[] { "AlternateTitles", "AlternateTitles", "ftString" });
+          CustomFieldList.Add(new string[] { "DateWatched", "DateWatched", "ftDate" });
+          CustomFieldList.Add(new string[] { "MultiUserState", "MultiUserState", "ftString" });
           CustomFieldList.Add(new string[] { "CustomField1", "CustomField1", "ftString" });
           CustomFieldList.Add(new string[] { "CustomField2", "CustomField2", "ftString" });
           CustomFieldList.Add(new string[] { "CustomField3", "CustomField3", "ftString" });
@@ -2353,6 +2356,15 @@ namespace MyFilmsPlugin.MyFilms
               case "Favorite":
               case "favorite":
                 return GUILocalizeStrings.Get(10798957);
+              case "AlternateTitles":
+              case "alternatetitles":
+                return GUILocalizeStrings.Get(10798932);
+              case "MultiUserState":
+              case "multiusersdate":
+                return GUILocalizeStrings.Get(10798930);
+              case "DateWatched": // last seen
+              case "datewatched":
+                return GUILocalizeStrings.Get(10798931);
               default:
                 {
                   string translation = string.Empty;

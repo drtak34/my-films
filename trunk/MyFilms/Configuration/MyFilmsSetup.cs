@@ -180,14 +180,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             #region add dropdown content for AMC3
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && 
-                   dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart")
+              if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" &&
+                   dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "MultiUserState")
                   && (CatalogType.SelectedIndex != 0 ||
                   (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
                    dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
                    dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
-                   dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" && 
-                   dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3"))
+                   dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" &&
+                   dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched"))
                 )
               {
                 if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
@@ -227,26 +227,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItemDetails5.Items.Add(dc.ColumnName);
                   AntItemDetails6.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
+                if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" && dc.ColumnName != "AlternateTitles" && 
                     dc.ColumnName != "Comments" && dc.ColumnName != "Description" &&
-                    dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" && 
-                    dc.ColumnName != "URL" && dc.ColumnName != "RecentlyAdded")
+                    dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" &&
+                    dc.ColumnName != "URL" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "DateWatched")
                 {
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "Description" && dc.ColumnName != "Comments") //  && dc.ColumnName != "Number" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
+                if (dc.ColumnName != "Description" && dc.ColumnName != "Comments") //  && dc.ColumnName != "Number" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"  && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched"
                 {
                   AntViewItem.Items.Add(dc.ColumnName);
                 }
                 if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
-                    dc.ColumnName != "Length" && dc.ColumnName != "Rating" && 
-                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                    dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched")
                 {
                   AntIdentItem.Items.Add(dc.ColumnName);
                 }
-                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched")
                 {
                   cbfdupdate.Items.Add(dc.ColumnName);
                   cbWatched.Items.Add(dc.ColumnName);

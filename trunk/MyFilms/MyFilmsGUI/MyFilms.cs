@@ -2562,7 +2562,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else 
         return reversedName;
     }
-    
+
     public static ArrayList GetDisplayItems(string displayoption)
     {
       ArrayList ItemsToDisplay = new ArrayList();
@@ -2572,13 +2572,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (
               (dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" &&
-               dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition")
+               dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != "MultiUserState")
               &&
               ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode("Restrict DB field Selection for AMC3")) ||
               (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
-               dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
-               dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
-               dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" && dc.ColumnName != "Fanart"))
+               dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" &&
+               dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" &&
+               dc.ColumnName != "Favorite" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched"))
             )
           {
             switch (displayoption)
@@ -2587,14 +2587,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (//dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && 
                     dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
                     dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
-                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart"
+                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
                   )
                   ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
                 break;
               case "view":
                 if (
                   //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart"
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
                   )
                   ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
                 break;
@@ -2607,7 +2607,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
                 break;
               case "titles":
-                if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
+                if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle") //  && dc.ColumnName != "AlternateTitles"
                   ItemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
                 break;
               case "viewitems":
@@ -5579,13 +5579,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (string.Compare(fieldname, "Date", true) == 0) return true;
       if (string.Compare(fieldname, "DateAdded", true) == 0) return true;
-      if (string.Compare(fieldname, "WatchedDate", true) == 0) return true;
+      if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
       return false;
     }
 
     private static bool IsDateTimeField(string fieldname)
     {
       if (string.Compare(fieldname, "DateAdded", true) == 0) return true;
+      if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
       return false;
     }
 
