@@ -168,13 +168,6 @@
 	<texture>stargood.png</texture>
 	<visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
     </control>
-    <!-- <control>
-	<type>label</type>
-	<description>Rating Global Filter Value</description>
-	<id>1</id>
-	<label>#myfilms.globalfilter.minratingvalue</label>
-	<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
-    </control> -->
     </control>
     <!-- END GLOBAL FILTER SECTION -->
 
@@ -188,7 +181,7 @@
       <width>30</width>
       <height>30</height>
       <texture>MyFilms\download.png</texture>
-	  <visible>string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+	  <visible>!Control.HasFocus(10099)+string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -205,6 +198,7 @@
       <font>font10</font>
       <textcolor>90ffffff</textcolor>
       <label>#myfilms.statusmessage</label>
+      <visible>!Control.HasFocus(10099)</visible>
       <!-- e.g. "Global update active" message -->
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -220,7 +214,7 @@
       <height>25</height>
 	  <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\Persons.png</texture>
-      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -236,7 +230,7 @@
       <font>font10</font>
       <textcolor>90ffffff</textcolor>
       <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
-      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -252,7 +246,7 @@
       <width>50</width>
       <height>50</height>
       <texture>hover_onlinevideos.png</texture>
-      <visible>!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -267,7 +261,7 @@
       <font>font10</font>
       <label>#OnlineVideos.currentDownloads</label>
 	  <textcolor>ff6FAFE1</textcolor>
-      <visible>!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -406,7 +400,7 @@
 	<posX>55</posX>
 	<posY>600</posY>
 	<width>240</width>
-	<height>30</height>
+	<height>36</height>
 	<onup>10004</onup>
 	<ondown>10001</ondown>
 	<onleft>107</onleft>
@@ -428,7 +422,7 @@
 	<posX>55</posX>
 	<posY>620</posY>
 	<width>240</width>
-	<height>30</height>
+	<height>36</height>
 	<onup>10000</onup>
 	<ondown>10002</ondown>
 	<onleft>107</onleft>
@@ -450,7 +444,7 @@
 	<posX>55</posX>
 	<posY>640</posY>
 	<width>240</width>
-	<height>30</height>
+	<height>36</height>
 	<id>10002</id>
 	<onup>10001</onup>
 	<ondown>10003</ondown>
@@ -473,7 +467,7 @@
 	<posX>55</posX>
 	<posY>660</posY>
 	<width>240</width>
-	<height>30</height>
+	<height>36</height>
 	<id>10003</id>
 	<onup>10002</onup>
 	<ondown>10004</ondown>
@@ -496,7 +490,7 @@
 	<posX>55</posX>
 	<posY>680</posY>
 	<width>240</width>
-	<height>30</height>
+	<height>36</height>
 	<id>10004</id>
 	<onup>10003</onup>
 	<ondown>10000</ondown>
@@ -541,7 +535,7 @@
 	<textcolor>ff6FAFE1</textcolor>
 	<width>730</width>
 	<font>font17</font>
-	<label>#myfilms.user.mastertitle.value</label>
+	<label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
 	<visible>!Control.HasFocus(10099)</visible>		
     </control>	
     <!-- Watched/Unwatched Icon -->
@@ -554,7 +548,7 @@
 	<width>16</width>
 	<height>16</height>
 	<texture>MyFilms\overlayunwatched.png</texture>
-	<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!player.hasmedia</visible>
+	<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
 	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -567,7 +561,7 @@
 	<width>16</width>
 	<height>16</height>
 	<texture>MyFilms\overlaywatched.png</texture>
-	<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!player.hasmedia</visible>
+	<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
 	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -597,38 +591,84 @@
 	<id>1</id>
 	<posX>740</posX>
 	<posY>125</posY>
-	<label>(#myfilms.db.rating.value#(iif(neq(#myfilms.user.rating.value,''),' | #myfilms.user.rating.value','')))</label>
-	<textcolor>ffffcc00</textcolor>
+	<label>(#myfilms.db.rating.value/10)</label>
 	<font>font10</font>
 	<align>left</align>
+	<textcolor>ffffcc00</textcolor>
 	<visible>!Control.HasFocus(10099)</visible>		
     </control>
-	<!-- Wulti-User Watched Count -->
+
+	<!-- USER INFO -->
     <control>
-	<description>User: Watched Count/Global User Count User Rating</description>
-	<type>fadelabel</type>
-	<id>1</id>
-	<posX>840</posX>
+	<description>User Info Label group</description>
+	<type>group</type>
+	<posX>950</posX>
 	<posY>125</posY>
-	<width>280</width>
-	<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
-	<font>font10</font>
-	<align>left</align>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.count,0)</visible>
+	<textcolor>ff6FAFE1</textcolor>
+	<width>160</width>
+	<height>25</height>
+	<layout>StackLayout(5,Vertical,true)</layout>
+	<dimColor>ffffffff</dimColor>
+	<visible>!Control.HasFocus(10099)</visible>		
+    <control>
+		<description>User Rating Label</description>
+		<type>label</type>
+		<id>1</id>
+		<label>#myfilms.db.ratinguser.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font10</font>
+		<width>160</width>
+		<height>25</height>
+		<align>right</align>
+		<visible>string.equals(#myfilms.user.rating.value)</visible>		
     </control>
     <control>
-	<description>User: Watched Count/Global User Count User Rating</description>
-	<type>fadelabel</type>
-	<id>1</id>
-	<posX>840</posX>
-	<posY>125</posY>
-	<width>280</width>
-	<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
-	<font>font10</font>
-	<align>left</align>
-	<textcolor>ccffcc00</textcolor>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+!string.equals(#myfilms.user.watched.count,0)</visible>
+		<description>User Name Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>950</posX>
+		<label>#(L(497)):</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font10</font>
+		<align>right</align>
+		<width>160</width>
+		<height>25</height>
+		<align>right</align>
+		<visible>string.equals(#myfilms.user.watched.name)</visible>		
     </control>
+    </control>	
+    <control>
+	<description>User Info Values group</description>
+	<type>group</type>
+		<posX>960</posX>
+		<posY>125</posY>
+		<layout>StackLayout(5,Vertical,true)</layout>
+		<dimColor>ffffffff</dimColor>
+	<visible>!Control.HasFocus(10099)</visible>
+	<control>
+		<description>User Rating Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<label>#myfilms.user.rating.value/10</label>
+		<width>300</width>
+		<height>25</height>
+		<font>font10</font>
+		<textcolor>ivory</textcolor>
+		<align>left</align>
+		<visible>string.equals(#myfilms.user.rating.value)</visible>		
+	</control>
+    <control>
+		<description>User Name</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<label>#myfilms.user.watched.name</label>
+		<width>300</width>
+		<height>25</height>
+		<font>font10</font>
+		<textcolor>ivory</textcolor>
+		<align>left</align>
+    </control>	
+    </control>	
     <control>
 	<description>Year - Length Value</description>
 	<type>label</type>
@@ -646,16 +686,16 @@
 	<description>Secondary Title</description>
 	<type>fadelabel</type>
 	<id>1</id>
-	<posX>720</posX>
+	<posX>750</posX>
 	<posY>150</posY>
 	<label>#myfilms.user.secondarytitle.value</label>
-	<width>510</width>
+	<width>480</width>
 	<font>font13</font>
 	<textcolor>ff6FAFE1</textcolor>
 	<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.secondarytitle.value,#myfilms.user.mastertitle.value)</visible>		
     </control>
- 
-	<!-- Overview -->
+
+	<!-- OVERVIEW -->
     <control>
 	<description>Details User Item 1 Label</description>
 	<type>label</type>
@@ -1136,7 +1176,7 @@
         <texture>MyFilms\Videothumbframe.png</texture>
         <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>	
     </control>	
-    <!-- Detailmenu for technical details -->
+	<!-- Technical Details Virtual View -->
     <control>
 	<type>label</type>
 	<id>1</id>
@@ -1578,8 +1618,8 @@
 	<id>0</id>
 	<posX>55</posX>
 	<posY>90</posY>
-	<width>330</width>
-	<height>500</height>
+	<width>340</width>
+	<height>510</height>
 	<texture>MyFilms\Videothumbframe.png</texture>
 	<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
 	<animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
@@ -1729,10 +1769,27 @@
 	<width>1220</width>
 	<align>center</align>
 	<font>font16</font>
-        <textcolor>ff6FAFE1</textcolor>
+	<textcolor>ff6FAFE1</textcolor>
 	<label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
 	<visible>Control.HasFocus(10099)</visible>
+	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control> 
+    <!-- <control>
+	<type>label</type>
+	<description>Year Category and Runtime (FullColor Fanart View)</description>
+	<id>1</id>
+	<posX>30</posX>
+	<posY>703</posY>
+	<width>1220</width>
+	<align>center</align>
+	<font>font11</font>
+	<textcolor>ivory</textcolor>
+	<label>#myfilms.db.year.value - #myfilms.db.category.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
+	<visible>Control.HasFocus(10099)</visible>
+	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+    </control>  -->
     <control>
 	<type>image</type>
 	<description>UnWatched Icon (FullColor Fanart View)</description>
@@ -1835,11 +1892,11 @@
 	<description>Year and Runtime (Filmstrip/Coverflow)</description>
 	<id>1</id>
 	<posX>1250</posX>
-	<posY>680</posY>
+	<posY>685</posY>
 	<width>220</width>
 	<align>right</align>
-	<font>font12</font>
-	<textcolor>ivory</textcolor>
+	<font>font11</font>
+	<textcolor>ff6FAFE1</textcolor>
 	<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value',''))#(iif(neq(#myfilms.db.length.value,''),' - #myfilms.db.length.value #myfilms.db.length.unit',''))</label>
 	<visible>Control.HasFocus(10099)</visible>	
     </control> 
@@ -1851,7 +1908,7 @@
 	<type>fadelabel</type>
 	<id>1</id>
 	<posX>367</posX>
-	<posY>662</posY>
+	<posY>667</posY>
 	<width>80</width>
 	<label>Film:</label>
 	<font>font10</font>
@@ -1864,7 +1921,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>665</posY>
+	<posY>670</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_red.png</texture>
@@ -1878,7 +1935,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>665</posY>
+	<posY>670</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_green.png</texture>
@@ -1892,7 +1949,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>665</posY>
+	<posY>670</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_yellow.png</texture>
@@ -1906,7 +1963,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>665</posY>
+	<posY>670</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_grey.png</texture>
@@ -1921,7 +1978,7 @@
 	<type>fadelabel</type>
 	<id>1</id>
 	<posX>367</posX>
-	<posY>686</posY>
+	<posY>690</posY>
 	<width>80</width>
 	<label>Trailer:</label>
 	<font>font10</font>
@@ -1936,7 +1993,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>690</posY>
+	<posY>694</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_red.png</texture>
@@ -1952,7 +2009,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>690</posY>
+	<posY>694</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_green.png</texture>
@@ -1968,7 +2025,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>690</posY>
+	<posY>694</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_yellow.png</texture>
@@ -1984,7 +2041,7 @@
 	<type>image</type>
 	<id>0</id>
 	<posX>372</posX>
-	<posY>690</posY>
+	<posY>694</posY>
 	<width>20</width>
 	<height>20</height>
 	<texture>MyFilms\led_grey.png</texture>
@@ -1995,7 +2052,7 @@
 	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
-	<!--  User Status Info -->
+	<!--  User Status Info
     <control>
 	<description>User available Info Label</description>
 	<type>fadelabel</type>
@@ -2050,7 +2107,7 @@
 	<centered>yes</centered>
 	<colordiffuse>c0ffffff</colordiffuse>
 	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,local)+!player.hasmedia</visible>
-    </control>
+    </control> -->
     <control>
 	<type>animation</type>
 	<description>Waiting During Search</description>

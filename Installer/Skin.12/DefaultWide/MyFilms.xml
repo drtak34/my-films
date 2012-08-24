@@ -562,12 +562,12 @@
         <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>	
     </control>
     <control>
-	  <description>Rating | User Rating (Single User)</description>
+	  <description>Rating (User Rating only in Details screen)</description>
 	  <type>label</type>
 	  <id>1</id>
 	  <posX>290</posX>
 	  <posY>557</posY>
-	  <label>(#myfilms.db.rating.value#(iif(neq(#myfilms.user.rating.value,''),' | #myfilms.user.rating.value','')))</label>
+	  <label>(#myfilms.db.rating.value/10)</label>
 	  <font>font10</font>
 	  <align>left</align>
 	  <textcolor>ffffcc00</textcolor>
@@ -575,7 +575,7 @@
 	  <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
 	  <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>	
     </control>
-    <control>
+    <!-- <control>
 	  <description>Multi-user: Username: Rating | User Rating, Watched Count/Global User Count</description>
       <type>fadelabel</type>
       <id>1</id>
@@ -589,7 +589,8 @@
       <visible>string.equals(#myfilms.user.watched.name)+!facadeview.filmstrip+!facadeview.coverflow</visible>
 	  <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
 	  <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>	
-    </control>
+    </control> -->
+
     <control>
         <description>Group Label</description>
 	<type>label</type>
@@ -1094,7 +1095,36 @@
 	<colordiffuse>ffffffff</colordiffuse>
 	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
     </control>
-	<!--  User Status Info -->
+    <control>
+		<description>User Name Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>780</posX>
+		<posY>680</posY>
+		<label>#(L(497)):</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font10</font>
+		<align>right</align>
+		<width>160</width>
+		<height>25</height>
+		<align>right</align>
+		<visible>control.isvisible(36)+string.equals(#myfilms.user.watched.name)</visible>		
+    </control>
+    <control>
+		<description>User Name</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<label>#myfilms.user.watched.name</label>
+		<posX>790</posX>
+		<posY>680</posY>
+		<width>300</width>
+		<height>25</height>
+		<font>font10</font>
+		<textcolor>ivory</textcolor>
+		<align>left</align>
+		<visible>control.isvisible(36)</visible>		
+    </control>	
+	<!--  User Status Info
     <control>
 	<description>User available Info Label</description>
 	<type>fadelabel</type>
@@ -1149,7 +1179,7 @@
 	<centered>yes</centered>
 	<colordiffuse>c0ffffff</colordiffuse>
 	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,local)+!player.hasmedia</visible>
-    </control>
+    </control> -->
 
     <!-- Facade Layouts (keep after cover/view image controls for correct display of images) -->
     <control>
@@ -1266,7 +1296,6 @@
 		<spinPosY>675</spinPosY>
 		<spinWidth>35</spinWidth>
 		<spinHeight>40</spinHeight>
-			
 	</control>
         <control>
           	<description>Filmstrip view</description>
