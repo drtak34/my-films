@@ -886,10 +886,23 @@ Module Module1
                     ReturnValue = ""
                 End Try
             Case "aspectratio"
+                'PixelAspectRatio/String;;;N NT;;;Pixel Aspect ratio
+                'PixelAspectRatio_Original/String;;;N NT;;;Original (in the raw stream) Pixel Aspect ratio
+                ' decimal ar -> 'DisplayAspectRatio;;;N YF;;;Display Aspect ratio
+                ' string, e.g. "16:9" -> ""'DisplayAspectRatio/String;;;Y NT;;;Display Aspect ratio
+                'DisplayAspectRatio_Original/String;;;Y NT;;;Original (in the raw stream) Display Aspect ratio
+
                 Try
                     MI = New MediaInfo
                     MI.Open(FilePath)
-                    TempString = MI.Get_(StreamKind.Visual, 0, "AspectRatio")
+                    TempString = MI.Get_(StreamKind.Visual, 0, "DisplayAspectRatio") ' & " (" & MI.Get_(StreamKind.Visual, 0, "DisplayAspectRatio/String") & ")"
+                    'Dim aspectratio As Decimal
+                    'Decimal.TryParse(TempString, aspectratio)
+                    'TempString = Math.Round(aspectratio, 2).ToString()
+                    ' if (aspectratio < (decimal)(1.4)) movieRow.Aspectratio = "4:3"; //1,33 -> 4:3
+                    ' else if (aspectratio < (decimal)(1.9)) movieRow.Aspectratio = "16:9"; //1,78 -> 16:9 / widescreen //1,85 -> widescreen
+                    ' else if (aspectratio >= (decimal)(1.9)) movieRow.Aspectratio = "cinemascope"; //2,35+ -> cinemascope
+
                     MI.Close()
                     ReturnValue = TempString
                 Catch ex As Exception

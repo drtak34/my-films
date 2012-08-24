@@ -1480,6 +1480,12 @@ Public Class AntRecord
                 CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
             End If
 
+            CurrentAttribute = "Aspectratio"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                TempValue = GetFileData(_FilePath, "Aspectratio")
+                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+            End If
+
             CurrentAttribute = "Framerate"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetFileData(_FilePath, "Framerate")

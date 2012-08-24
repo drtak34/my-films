@@ -135,6 +135,12 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>446, 6</value>
   </metadata>
+  <metadata name="MovieBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1241, 34</value>
+  </metadata>
+  <metadata name="PersonBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1406, 34</value>
+  </metadata>
   <data name="Label88.Text" xml:space="preserve">
     <value>Use "Import Movies" to scan your movie directories, retrieve mediainfo and internet data, add the movies to your catalog and optional remove movies you don't have anymore from catalog.
 Depending on your settings, this can be done with or without user interaction (e.g. userdialog if movie can't be identified automatically) and you can decide, if a non identified movie should be added without internet data.</value>
@@ -767,12 +773,6 @@ i.e. 'covers\' will create / use a subfolder called 'covers'.
 You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
 i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
   </data>
-  <metadata name="EditorSearchExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="EditorReplacementString.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="GroupBox28.ToolTip" xml:space="preserve">
     <value>You can define search expressions with replacement expressions to identify "Edition" from (media) name.
 Both normal and ReGex search expressions are allowed.
@@ -781,6 +781,18 @@ If multipe rules apply, the Replacement expression will be returned as comma sep
 You can enable on Database Tab to add Edition to end of title.
 By that you can differentiate different editions of a movie.</value>
   </data>
+  <metadata name="EditorSearchExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="EditorReplacementString.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="EditorSearchExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="EditorReplacementString.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="txtOverridePath.ToolTip" xml:space="preserve">
     <value>Override path when writing to XML file:
 Use this field to change the path to your files.
@@ -791,6 +803,17 @@ Note : Can only be used when scanning a single folder structure.</value>
   </data>
   <data name="Label46.Text" xml:space="preserve">
     <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
+</value>
+  </data>
+  <data name="GroupBox26.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+
 </value>
   </data>
   <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
@@ -807,17 +830,6 @@ Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
   </data>
-  <data name="GroupBox26.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-
-</value>
-  </data>
   <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
     <value>AMCUpdater can be instructed to ignore selected files.
 These files will never be scanned or imported by AMCUpdater.
@@ -831,6 +843,9 @@ These files will be scanned to determine what languages are included, if possibl
 This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
 </value>
   </data>
+  <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>934, 34</value>
+  </metadata>
   <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>934, 34</value>
   </metadata>
@@ -959,6 +974,21 @@ Other grabber scripts require matching by name and year, that might not always a
   </data>
   <metadata name="PersonBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1085, 34</value>
+  </metadata>
+  <metadata name="PersonBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1085, 34</value>
+  </metadata>
+  <metadata name="IsActor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsProducer.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsDirector.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsWriter.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="IsActor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1093,11 +1123,23 @@ Other grabber scripts require matching by name and year, that might not always a
   <metadata name="UserBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>372, 71</value>
   </metadata>
+  <metadata name="UserBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>372, 71</value>
+  </metadata>
+  <metadata name="AntMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>357, 33</value>
+  </metadata>
   <metadata name="AntMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>357, 33</value>
   </metadata>
   <metadata name="CustomFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>189, 71</value>
+  </metadata>
+  <metadata name="CustomFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>189, 71</value>
+  </metadata>
+  <metadata name="PropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 71</value>
   </metadata>
   <metadata name="PropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 71</value>
@@ -1288,6 +1330,9 @@ Other grabber scripts require matching by name and year, that might not always a
   </metadata>
   <metadata name="epOptions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>267, 32</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 5</value>
   </metadata>
   <metadata name="ImageListViewPersons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>619, 34</value>
