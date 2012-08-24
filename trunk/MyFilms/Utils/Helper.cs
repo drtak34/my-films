@@ -582,11 +582,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns></returns>
         public static bool IsFullscreenVideo {
             get {
-                bool isFullscreen = false;
-                if (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO)
-                    isFullscreen = true;
-
-                return isFullscreen;
+              bool isFullscreen = GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO;
+              return isFullscreen;
             }
         }
 
@@ -623,8 +620,47 @@ namespace MyFilmsPlugin.MyFilms.Utils
           if (string.IsNullOrEmpty(toCheck) || string.IsNullOrEmpty(source))
             return true;
           return source.IndexOf(toCheck, comp) >= 0;
-        } 
+        }
 
+        /// <summary>
+        /// removes a string from a string containing separated items
+        /// </summary>
+        /// <param name="input">Input string</param>
+        /// <param name="toRemove">string to be removed</param>
+        /// <returns>Returns string cleaned by the removed string</returns>
+        public static string Remove(string input, string toRemove)
+        {
+          string output = "";
+          string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+          List<string> itemList = split.Distinct().ToList();
+          if (itemList.Contains(toRemove)) itemList.Remove(toRemove);
+          foreach (string s in itemList)
+          {
+            if (output.Length > 0) output += ", ";
+            output += s;
+          }
+          return output;
+        }
+
+        /// <summary>
+        /// adds a string to a string containing separated items
+        /// </summary>
+        /// <param name="input">Input string</param>
+        /// <param name="toAdd">string to be added</param>
+        /// <returns>Returns string with added new value</returns>
+        public static string Add(string input, string toAdd)
+        {
+          string output = "";
+          string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+          List<string> itemList = split.Distinct().ToList();
+          if (!itemList.Contains(toAdd)) itemList.Add(toAdd);
+          foreach (string s in itemList)
+          {
+            if (output.Length > 0) output += ", ";
+            output += s;
+          }
+          return output;
+        }
         #endregion
 
         #region Assembly methods

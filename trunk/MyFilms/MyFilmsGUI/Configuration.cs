@@ -268,7 +268,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", string.Empty);
 
                 StrEnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "EnhancedWatchedStatusHandling", false);
-                StrUserProfileName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UserProfileName", "Global");
+                StrUserProfileName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UserProfileName", MyFilms.DefaultUsername);
 
                 StrECoptionStoreTaglineInDescription = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionStoreTaglineInDescription", false);
                 #region Common EC options
