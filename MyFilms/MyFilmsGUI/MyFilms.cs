@@ -15907,6 +15907,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
       MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
       MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
+      MyFilmsDetail.setGUIProperty("user.rating.label", GUILocalizeStrings.Get(10798944));
 
       MyFilmsDetail.setGUIProperty("person.name.label", GUILocalizeStrings.Get(10799301));
       MyFilmsDetail.setGUIProperty("person.dateofbirth.label", GUILocalizeStrings.Get(10799302));
