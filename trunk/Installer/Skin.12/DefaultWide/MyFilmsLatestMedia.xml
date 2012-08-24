@@ -119,7 +119,7 @@
 		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
-		  <texture mask="videothumbmask.png">myfilms_latest_nocover.png</texture>		  
+		  <texture mask="videothumbmask.png">MyFilms\myfilms_latest_nocover.png</texture>		  
 		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)+!Player.hasmedia</visible>		  
 		</control>
 		<control Style="BasicHomeFade">
@@ -154,7 +154,7 @@
 		  <posY>570</posY>
 		  <width>80</width>
 		  <height>116</height>		  
-		  <texture mask="videothumbmask.png">myfilms_latest_nocover.png</texture>
+		  <texture mask="videothumbmask.png">MyFilms\myfilms_latest_nocover.png</texture>
 		  <shouldCache>true</shouldCache>
 		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)+!Player.hasmedia</visible>		  
 		</control>

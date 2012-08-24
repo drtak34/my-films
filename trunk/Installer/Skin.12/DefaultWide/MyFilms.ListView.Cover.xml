@@ -11,8 +11,6 @@
       <width>275</width>
       <height>412</height>
       <texture mask="videothumbmask.png">#myfilms.menuimage</texture>      
-	  <keepaspectratio>yes</keepaspectratio>
-	  <centered>yes</centered>
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -26,8 +24,8 @@
       <id>0</id>      
       <posX>62</posX>
       <posY>98</posY>
-      <width>270</width>
-      <height>408</height>
+      <width>275</width>
+      <height>412</height>
       <texture>MyFilms\Videothumbframe.png</texture>      
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -42,8 +40,8 @@
       <id>0</id>      
       <posX>62</posX>
       <posY>98</posY>
-      <width>270</width>
-      <height>408</height>
+      <width>275</width>
+      <height>412</height>
       <texture>MyFilms\Videothumbframe.png</texture>    
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>      
       <animation effect="fade" time="250">WindowClose</animation>
@@ -86,8 +84,8 @@
       <id>0</id>      
       <posX>62</posX>
       <posY>98</posY>
-      <width>270</width>
-      <height>408</height>
+      <width>275</width>
+      <height>412</height>
       <texture>MyFilms\Videothumbframe.png</texture>     
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[control.isvisible(36)|control.isvisible(39)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -107,8 +105,6 @@
       <width>275</width>
       <height>412</height>
       <texture mask="videothumbmask.png">#myfilms.viewcoverimage</texture>
-	  <keepaspectratio>yes</keepaspectratio>
-	  <centered>yes</centered>
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(37)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
@@ -127,8 +123,6 @@
       <width>275</width>
       <height>412</height>
       <texture mask="videothumbmask.png">#myfilms.personcoverimage</texture>      
-	  <keepaspectratio>yes</keepaspectratio>
-	  <centered>yes</centered>
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(38)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
@@ -144,8 +138,8 @@
       <id>0</id>      
       <posX>62</posX>
       <posY>98</posY>
-      <width>270</width>
-      <height>408</height>
+      <width>275</width>
+      <height>412</height>
       <texture>MyFilms\Videothumbframe.png</texture>
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+!control.isvisible(40)+[Control.isvisible(37)|Control.isvisible(38)|string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -192,8 +186,8 @@
       <id>0</id>      
       <posX>62</posX>
       <posY>98</posY>
-      <width>270</width>
-      <height>408</height>          
+      <width>275</width>
+      <height>412</height>
       <texture>MyFilms\Videothumbframe.png</texture>
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(39)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
