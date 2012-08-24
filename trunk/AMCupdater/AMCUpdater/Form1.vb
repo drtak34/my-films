@@ -907,6 +907,7 @@ Public Class Form1
             Try
                 txtSampleVideoCodec.Text = GetFileData(txtSampleFile.Text, "VideoFormat")
                 txtSampleVideoBitrate.Text = GetFileData(txtSampleFile.Text, "VideoBitrate")
+                txtSampleAspectRatio.Text = GetFileData(txtSampleFile.Text, "Aspectratio")
                 txtSampleVideoFramerate.Text = GetFileData(txtSampleFile.Text, "Framerate")
                 txtSampleVideoResolution.Text = GetFileData(txtSampleFile.Text, "Resolution")
                 txtSampleAudioBitrate.Text = GetFileData(txtSampleFile.Text, "AudioBitrate")

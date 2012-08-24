@@ -7192,11 +7192,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                         try
                         {
+                          decimal aspectratio;
                           wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                          //LogMyFilms.Debug("Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
                           setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                          string[] arSplit = wstring.Split(new string[] { "x" }, StringSplitOptions.RemoveEmptyEntries);
-                          decimal aspectratio = Math.Round(decimal.Divide(Convert.ToInt32(arSplit[0]), Convert.ToInt32(arSplit[1])), 2);
+                          if (!Decimal.TryParse(MyFilms.r[ItemId]["Aspectratio"].ToString(), out aspectratio)) // if no media info data available, calculate data from video resolution - might not be exact DAR (display aspect ratio)
+                          {
+                            string[] arSplit = wstring.Split(new string[] { "x" }, StringSplitOptions.RemoveEmptyEntries);
+                            aspectratio = Math.Round(decimal.Divide(Convert.ToInt32(arSplit[0]), Convert.ToInt32(arSplit[1])), 2);
+                          }
                           //Formats:
                           //1,33 -> 4:3
                           //1,78 -> 16:9 / widescreen
