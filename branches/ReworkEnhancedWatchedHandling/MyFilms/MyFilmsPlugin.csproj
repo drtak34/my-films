@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{20BCDBE0-0812-4235-9330-40B8E570DAE1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyFilmsPlugin</RootNamespace>
+    <AssemblyName>MyFilms</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Resources\MyFilmsIcon.ico</ApplicationIcon>
+    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MP12</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Optimize>false</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>
+    </DocumentationFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;MP12</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Utils, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\Common.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Core, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Databases, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\Databases.dll</HintPath>
+    </Reference>
+    <Reference Include="Dialogs, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="OnlineVideos, Version=1.3.0.2261, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\OnlineVideos.dll</HintPath>
+    </Reference>
+    <Reference Include="OnlineVideos.MediaPortal1, Version=1.2.0.2012, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\OnlineVideos.MediaPortal1.dll</HintPath>
+    </Reference>
+    <Reference Include="RemotePlugins, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\RemotePlugins.dll</HintPath>
+    </Reference>
+    <Reference Include="SubCentral, Version=1.0.0.203, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\SubCentral.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\TaskScheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="TraktPlugin, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\TraktPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowPlugins, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\WindowPlugins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\CentralConfigSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\CentralConfigSetup.Designer.cs">
+      <DependentUpon>CentralConfigSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\MFview.cs">
+      <DependentUpon>MFview.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Configuration\FilterEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\FilterEditor.Designer.cs">
+      <DependentUpon>FilterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\AntMovieCatalog.cs">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BaseMesFilms.cs" />
+    <Compile Include="CatalogConverter\DvdProfiler.cs" />
+    <Compile Include="CatalogConverter\EaxMovieCatalog3.cs" />
+    <Compile Include="CatalogConverter\MovingPicturesXML.cs" />
+    <Compile Include="CatalogConverter\MyMovies-4.cs" />
+    <Compile Include="CatalogConverter\PersonalVideoDatabase.cs" />
+    <Compile Include="CatalogConverter\XbmcDb.cs" />
+    <Compile Include="Configuration\HyperLinkParamGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\HyperLinkParamGenerator.Designer.cs">
+      <DependentUpon>HyperLinkParamGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\MyFilmsInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\MyFilmsInputBox.Designer.cs">
+      <DependentUpon>MyFilmsInputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\MyFilmsSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\MyFilmsSetup.designer.cs">
+      <DependentUpon>MyFilmsSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\AntMovieCatalog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\MFview.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MFview.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\OnlineMovie.cs" />
+    <Compile Include="DataBase\OnlinePerson.cs" />
+    <Compile Include="MyFilmsGUI\Configuration.cs" />
+    <Compile Include="MyFilmsGUI\GUIBackgroundTask.cs" />
+    <Compile Include="MyFilmsGUI\MFView.cs" />
+    <Compile Include="MyFilmsGUI\GUIConnector.cs" />
+    <Compile Include="MyFilmsGUI\GUIDialogMultiSelect.cs" />
+    <Compile Include="MyFilmsGUI\GUIUtils.cs" />
+    <Compile Include="MyFilmsGUI\LoadParameterInfo.cs" />
+    <Compile Include="MyFilmsGUI\MyFilms.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsActors.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsActorsInfo.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsCoverManager.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsDetail.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsDialogSetRating.cs" />
+    <Compile Include="MyFilmsGUI\MyFilmsThumbs.cs" />
+    <Compile Include="MyFilmsSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="Utils\Cornerstone.MP\AsyncImageResource.cs" />
+    <Compile Include="Utils\Cornerstone.MP\Extensions\GUIFacadeControlExtensions.cs" />
+    <Compile Include="Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />
+    <Compile Include="Utils\Cornerstone.MP\ImageSwapper.cs" />
+    <Compile Include="Utils\CryptageTexte.cs" />
+    <Compile Include="Utils\CString.cs" />
+    <Compile Include="CatalogConverter\EaxMovieCatalog.cs" />
+    <Compile Include="Utils\FastImage.cs" />
+    <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Utils\imageAllocator.cs" />
+    <Compile Include="Utils\LocalizeStrings.cs" />
+    <Compile Include="CatalogConverter\MovieCollector.cs" />
+    <Compile Include="CatalogConverter\MyMovies.cs" />
+    <Compile Include="Utils\Logos.cs" />
+    <Compile Include="Utils\NavigationObject.cs" />
+    <Compile Include="Utils\OVplayer.cs" />
+    <Compile Include="Utils\PerfWatch.cs" />
+    <Compile Include="Utils\StringEnum.cs" />
+    <Compile Include="Utils\Translations.cs" />
+    <Compile Include="Utils\XmlSettings.cs" />
+    <Compile Include="Utils\Utility.cs" />
+    <Compile Include="Utils\WakeOnLanManager.cs" />
+    <Compile Include="CatalogConverter\XbmcNfo.cs" />
+    <Compile Include="Utils\XmlConfig.cs" />
+    <Compile Include="CatalogConverter\XMM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataBase\AntMovieCatalog.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>AntMovieCatalog.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataBase\AntMovieCatalog.xss">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="DataBase\MFview.xsc">
+      <DependentUpon>MFview.xsd</DependentUpon>
+    </None>
+    <None Include="DataBase\MFview.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MFview.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataBase\MFview.xss">
+      <DependentUpon>MFview.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\film-reel-128x128.png" />
+    <EmbeddedResource Include="Resources\film-reel-128x128-faded.png" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grabber\Grabber.csproj">
+      <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
+      <Name>Grabber</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\logo_mesfilms-faded.png" />
+    <EmbeddedResource Include="Resources\logo_mesfilms.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AMCUpdater.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AMCUpdaterSmall.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataBase\AntMovieCatalog.xsc">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\arrow-down.png" />
+    <None Include="Resources\arrow-up.png" />
+    <Content Include="Resources\MyFilmsIcon.ico" />
+    <EmbeddedResource Include="Configuration\CentralConfigSetup.resx">
+      <DependentUpon>CentralConfigSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\FilterEditor.resx">
+      <DependentUpon>FilterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\HyperLinkParamGenerator.resx">
+      <DependentUpon>HyperLinkParamGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\MyFilmsInputBox.resx">
+      <DependentUpon>MyFilmsInputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\MyFilmsSetup.resx">
+      <DependentUpon>MyFilmsSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\trakt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>if exist $(ProjectDir)PostBuild.bat call $(ProjectDir)PostBuild.bat $(ProjectDir) $(ConfigurationName)</PostBuildEvent>
+    <PreBuildEvent>subwcrev "$(SolutionDir)\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

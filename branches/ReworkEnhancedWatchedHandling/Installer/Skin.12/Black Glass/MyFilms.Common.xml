@@ -1,0 +1,180 @@
+<window>
+  <controls>
+
+<!--
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>27</posY>
+      <label>#(iif(and(neq(L(102012), #currentmodule), neq(L(102002), #currentmodule), neq(L(100100), #currentmodule), neq(L(102015), #currentmodule)), #currentmodule, ' '))</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+-->
+
+
+    <!-- COMMON DATA DISPLAY -->
+    <control>
+      <description>Selection display</description>
+      <type>fadelabel</type>
+      <id>12</id>
+      <posX>32</posX>
+      <posY>51</posY>
+      <font>font12</font>
+      <textcolor>aaffffff</textcolor>
+      <width>750</width>
+      <label>#myfilms.view - #myfilms.select</label>
+      <wrapString> : : : </wrapString>
+      <visible>string.contains(#myfilms.view)|string.contains(#myfilms.select)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+
+    <!-- WOL Powermanager Status display -->
+    <control>
+      <description>WOL Powermanager server 1 name and state</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>897</posX>
+      <posY>23</posY>
+      <font>font10</font>
+      <textcolor>aaffffff</textcolor>
+      <width>750</width>
+      <label>#WOLPowerManager.Servername0: #WOLPowerManager.Serverstate0</label>
+      <visible>plugin.isenabled(WOL-PowerManager)</visible>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>WOL Powermanager server 2 name and state</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>897</posX>
+      <posY>43</posY>
+      <font>font10</font>
+      <textcolor>aaffffff</textcolor>
+      <width>750</width>
+      <label>#WOLPowerManager.Servername1: #WOLPowerManager.Serverstate1</label>
+      <visible>plugin.isenabled(WOL-PowerManager)</visible>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+
+    <!-- Global Overlay Filter Info -->
+
+    <control>
+      <description>Filters group</description>
+      <type>group</type>
+      <posX>1095</posX>
+      <posY>21</posY>
+      <layout>StackLayout(5,Horizontal,true)</layout>
+      <dimColor>ffffffff</dimColor>
+      <control>
+        <type>image</type>
+        <description>UnWatched Global Filter Icon</description>
+        <id>0</id>
+        <width>16</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\overlayunwatched.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="250">WindowOpen</animation>
+      </control>
+      <control>
+        <type>image</type>
+        <description>Media Available Global Filter Icon</description>
+        <id>0</id>
+        <width>16</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\online.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.isonline,True)</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="250">WindowOpen</animation>
+      </control>
+      <control>
+        <type>image</type>
+        <description>Trailer Global Filter Icon</description>
+        <id>0</id>
+        <width>16</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\filmstrip.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.trailersonly,True)</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="250">WindowOpen</animation>
+      </control>
+      <control>
+        <type>image</type>
+        <description>Rating Global Filter Icon</description>
+        <id>0</id>
+        <width>18</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\UserRatingStarOn.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="250">WindowOpen</animation>
+      </control>
+      <!-- <control>
+			<type>label</type>
+			<description>Rating Global Filter Value</description>
+			<id>0</id>
+			<label>#myfilms.globalfilter.minratingvalue</label>
+			<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control> -->
+    </control>
+
+
+    <control>
+      <description>Background Status Messages</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>340</posX>
+      <posY>1</posY>
+      <width>600</width>
+      <font>font10</font>
+      <textcolor>60ffffff</textcolor>
+      <label>#myfilms.statusmessage</label>
+      <!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+
+    <!-- OV download indicator -->
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>856</posX>
+      <posY>696</posY>
+      <width>18</width>
+      <height>18</height>
+      <texture>isupdate.png</texture>
+      <visible>plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
+    </control>
+
+    <control>
+      <description>number of current downloads</description>
+      <type>label</type>
+      <id>47016</id>
+      <posX>881</posX>
+      <posY>695</posY>
+      <label>#OnlineVideos.currentDownloads #(L(921))</label>
+      <font>font10</font>
+      <textcolor>7fffffff</textcolor>
+      <visible>plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+    </control>
+  </controls>
+</window>
