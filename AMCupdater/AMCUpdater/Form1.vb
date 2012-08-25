@@ -3076,6 +3076,17 @@ Public Class Form1
 
     Private Sub btnManualExcludedMoviesFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualExcludedMoviesFileShow.Click
         Dim t As String = txtManualExcludedMoviesPath.Text
+        If Not Directory.Exists(Path.GetDirectoryName(txtManualExcludedMoviesPath.Text)) Then
+            Directory.CreateDirectory(Path.GetDirectoryName(txtManualExcludedMoviesPath.Text).ToString())
+        End If
+        If Not File.Exists(txtManualExcludedMoviesPath.Text) Then
+            Dim sr As StreamWriter = File.CreateText(txtManualExcludedMoviesPath.Text)
+            'sr.WriteLine("This is my file.")
+            sr.Close()
+            'Dim xmlFile As New FileStream(txtManualExcludedMoviesPath.Text, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)
+            'xmlFile.SetLength(0)
+            'xmlFile.Close()
+        End If
         Try
             Process.Start(t)
         Catch ex As Exception
