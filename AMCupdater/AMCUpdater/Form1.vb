@@ -2437,11 +2437,9 @@ Public Class Form1
         'Console.WriteLine(dgExcludedFileStrings.Rows.Count)
         Dim dgRow As System.Windows.Forms.DataGridViewRow
         Dim ExcludedFileString As String = String.Empty
-        For Each dgRow In dgExcludedFileStrings.Rows.AsQueryable()
-            If dgRow.Cells(0).Value IsNot Nothing Then
-                If dgRow.Cells(0).Value.ToString.Length > 0 Then
-                    ExcludedFileString += dgRow.Cells(0).Value.ToString & "|"
-                End If
+        For Each dgRow In dgExcludedFileStrings.Rows.Cast(Of DataGridViewRow)()
+            If (dgRow.Cells(0).Value IsNot Nothing) AndAlso dgRow.Cells(0).Value.ToString.Length > 0 Then
+                ExcludedFileString += dgRow.Cells(0).Value.ToString & "|"
             End If
         Next
         If ExcludedFileString.Length > 0 Then
@@ -2451,11 +2449,9 @@ Public Class Form1
         'CurrentSettings.Excluded_Files_Table = dgExcludedFileStrings.DataSource
 
         Dim ExcludedFolderString As String = String.Empty
-        For Each dgRow In dgExcludedFolderStrings.Rows.AsQueryable()
-            If dgRow.Cells(0).Value IsNot Nothing Then
-                If dgRow.Cells(0).Value.ToString.Length > 0 Then
-                    ExcludedFolderString += dgRow.Cells(0).Value.ToString & "|"
-                End If
+        For Each dgRow In dgExcludedFolderStrings.Rows.Cast(Of DataGridViewRow)()
+            If (dgRow.Cells(0).Value IsNot Nothing) AndAlso dgRow.Cells(0).Value.ToString.Length > 0 Then
+                ExcludedFolderString += dgRow.Cells(0).Value.ToString & "|"
             End If
         Next
         If ExcludedFolderString.Length > 0 Then
@@ -2464,11 +2460,9 @@ Public Class Form1
         CurrentSettings.Excluded_Folder_Strings = ExcludedFolderString
 
         Dim FilterString As String = String.Empty
-        For Each dgRow In dgFilterStrings.Rows.AsQueryable()
-            If dgRow.Cells(0).Value IsNot Nothing Then
-                If dgRow.Cells(0).Value.ToString.Length > 0 Then
-                    FilterString += dgRow.Cells(0).Value.ToString & "|"
-                End If
+        For Each dgRow In dgFilterStrings.Rows.Cast(Of DataGridViewRow)()
+            If (dgRow.Cells(0).Value IsNot Nothing) AndAlso dgRow.Cells(0).Value.ToString.Length > 0 Then
+                FilterString += dgRow.Cells(0).Value.ToString & "|"
             End If
         Next
         If FilterString.Length > 0 Then
@@ -2477,7 +2471,7 @@ Public Class Form1
         CurrentSettings.Filter_Strings = FilterString
 
         Dim EditionString As String = String.Empty
-        For Each dgRow In dgEditionStrings.Rows.AsQueryable()
+        For Each dgRow In dgEditionStrings.Rows.Cast(Of DataGridViewRow)()
             If dgRow.Cells(0).Value IsNot Nothing And dgRow.Cells(1).Value IsNot Nothing Then
                 If dgRow.Cells(0).Value.ToString.Length > 0 And dgRow.Cells(1).Value.ToString.Length > 0 Then
                     EditionString += dgRow.Cells(0).Value.ToString & "|" & dgRow.Cells(1).Value.ToString & ";"
