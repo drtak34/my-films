@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System;
   using System.Collections.Generic;
   using System.IO;
+  using System.Linq;
   using System.Text;
   using System.Xml;
   using System.Globalization;
@@ -159,24 +160,18 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     XmlNodeList LinksKist = nodeDVD.SelectNodes("Discs/Disc");
 
                     string Source = String.Empty;
-                    foreach (XmlNode nodeFile in LinksKist)
+                    foreach (XmlNode nodeFile in LinksKist.Cast<XmlNode>().Where(nodeFile => nodeFile.SelectSingleNodeFast("LocationSideA").InnerText.Length > 0))
                     {
-                        if (nodeFile.SelectSingleNodeFast("LocationSideA").InnerText.Length > 0)
-                        {
-                            if (Source.Length > 0) Source += ";";
-                            Source += nodeFile.SelectSingleNodeFast("LocationSideA").InnerText;
-                        }
+                      if (Source.Length > 0) Source += ";";
+                      Source += nodeFile.SelectSingleNodeFast("LocationSideA").InnerText;
                     }
 
                     XmlNodeList trailerList = nodeDVD.SelectNodes("LocalTrailer/URL");
                     string SourceTrailer = String.Empty;
-                    foreach (XmlNode nodeTrailer in trailerList)
+                    foreach (XmlNode nodeTrailer in trailerList.Cast<XmlNode>().Where(nodeTrailer => !string.IsNullOrEmpty(nodeTrailer.InnerText)))
                     {
-                      if (!string.IsNullOrEmpty(nodeTrailer.InnerText))
-                      {
-                        if (SourceTrailer.Length > 0) SourceTrailer += "; ";
-                        SourceTrailer += nodeTrailer.InnerText;
-                      }
+                      if (SourceTrailer.Length > 0) SourceTrailer += "; ";
+                      SourceTrailer += nodeTrailer.InnerText;
                     }
 
                     XmlNode nodeDuration = nodeDVD.SelectSingleNodeFast("RunningTime");
@@ -269,26 +264,20 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                     string languages = string.Empty;
                     XmlNodeList LanguagesList = nodeDVD.SelectNodes("AudioTracks/AudioTrack");
-                    foreach (XmlNode nodeLanguage in LanguagesList)
+                    foreach (XmlNode nodeLanguage in LanguagesList.Cast<XmlNode>().Where(nodeLanguage => nodeLanguage.Attributes["Language"] != null && nodeLanguage.Attributes["Language"].Value != null))
                     {
-                      if (nodeLanguage.Attributes["Language"] != null && nodeLanguage.Attributes["Language"].Value != null)
-                      {
-                        if (languages.Length > 0) languages += ", ";
-                        languages += nodeLanguage.Attributes["Language"].Value;
-                        if (nodeLanguage.Attributes["Type"].Value != null)
-                          languages += " (" + nodeLanguage.Attributes["Type"].Value + ")";
-                      }
+                      if (languages.Length > 0) languages += ", ";
+                      languages += nodeLanguage.Attributes["Language"].Value;
+                      if (nodeLanguage.Attributes["Type"].Value != null)
+                        languages += " (" + nodeLanguage.Attributes["Type"].Value + ")";
                     }
 
                     string subtitles = String.Empty;
                     XmlNodeList subtitleList = nodeDVD.SelectNodes("Subtitles/Subtitle");
-                    foreach (XmlNode nodeSubtitle in subtitleList)
+                    foreach (XmlNode nodeSubtitle in subtitleList.Cast<XmlNode>().Where(nodeSubtitle => nodeSubtitle.Attributes["Language"] != null && nodeSubtitle.Attributes["Language"].Value != null))
                     {
-                      if (nodeSubtitle.Attributes["Language"] != null && nodeSubtitle.Attributes["Language"].Value != null)
-                      {
-                        if (subtitles.Length > 0) subtitles += ", ";
-                        subtitles += nodeSubtitle.Attributes["Language"].Value;
-                      }
+                      if (subtitles.Length > 0) subtitles += ", ";
+                      subtitles += nodeSubtitle.Attributes["Language"].Value;
                     }
                   
                     string Image = String.Empty;

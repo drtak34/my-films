@@ -28,6 +28,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Collections.Generic;
   using System.Data;
   using System.Drawing;
+  using System.Linq;
 
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
@@ -219,59 +220,58 @@ namespace MyFilmsPlugin.MyFilms.Utils
         static string get_Logos(DataRow r, ref List<string> listelogos, ArrayList RulesLogos)
         {
             string fileLogoName = string.Empty;
-            foreach (string wline in RulesLogos)
+            foreach (string[] wtab in from string wline in RulesLogos select wline.Split(new Char[] { ';' }))
             {
-                string[] wtab = wline.Split(new Char[] { ';' });
-                // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
-                if (!System.IO.File.Exists(wtab[7]) && System.IO.File.Exists(LogosPath + wtab[7]))  // Check, if logofile is present in logo directory of current skin
+              // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
+              if (!System.IO.File.Exists(wtab[7]) && System.IO.File.Exists(LogosPath + wtab[7]))  // Check, if logofile is present in logo directory of current skin
+              {
+                wtab[7] = LogosPath + wtab[7];
+              }
+              else
+                if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
                 {
-                    wtab[7] = LogosPath + wtab[7];
+                  string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
+                  //string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath + @"\", System.IO.Path.GetFileNameWithoutExtension(wtab[7]), System.IO.SearchOption.AllDirectories);
+                  if (filePathsLogoSearch.Length > 0)
+                    try
+                    {
+                      wtab[7] = filePathsLogoSearch[0];
+                    }
+                    catch {}
                 }
-                else
-                  if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
-                  {
-                    string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
-                    //string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath + @"\", System.IO.Path.GetFileNameWithoutExtension(wtab[7]), System.IO.SearchOption.AllDirectories);
-                    if (filePathsLogoSearch.Length > 0)
-                      try
-                      {
-                        wtab[7] = filePathsLogoSearch[0];
-                      }
-                      catch {}
-                  }
 
-                if (System.IO.File.Exists(wtab[7]) && System.IO.Path.GetDirectoryName(wtab[7]).Length > 0)
+              if (System.IO.File.Exists(wtab[7]) && System.IO.Path.GetDirectoryName(wtab[7]).Length > 0)
+              {
+                bool cond1 = get_record_rule(r, wtab[0], wtab[1], wtab[2]);
+                bool cond2 = get_record_rule(r, wtab[4], wtab[5], wtab[6]);
+                if ((wtab[3].Length == 0) && (cond1))
                 {
-                    bool cond1 = get_record_rule(r, wtab[0], wtab[1], wtab[2]);
-                    bool cond2 = get_record_rule(r, wtab[4], wtab[5], wtab[6]);
-                    if ((wtab[3].Length == 0) && (cond1))
-                    {
-                        if (!(listelogos.Contains(wtab[7])))
-                        {
-                            listelogos.Add(wtab[7]);
-                            fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
-                        }
-                        continue;
-                    }
-                    if ((wtab[3] == "or") && ((cond1) || (cond2)))
-                    {
-                        if (!(listelogos.Contains(wtab[7])))
-                        {
-                            listelogos.Add(wtab[7]);
-                            fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
-                        }
-                        continue;
-                    }
-                    if ((wtab[3] == "and") && ((cond1) && (cond2)))
-                    {
-                        if (!(listelogos.Contains(wtab[7])))
-                        {
-                            listelogos.Add(wtab[7]);
-                            fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
-                        }
-                        continue;
-                    }
+                  if (!(listelogos.Contains(wtab[7])))
+                  {
+                    listelogos.Add(wtab[7]);
+                    fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
+                  }
+                  continue;
                 }
+                if ((wtab[3] == "or") && ((cond1) || (cond2)))
+                {
+                  if (!(listelogos.Contains(wtab[7])))
+                  {
+                    listelogos.Add(wtab[7]);
+                    fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
+                  }
+                  continue;
+                }
+                if ((wtab[3] == "and") && ((cond1) && (cond2)))
+                {
+                  if (!(listelogos.Contains(wtab[7])))
+                  {
+                    listelogos.Add(wtab[7]);
+                    fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
+                  }
+                  continue;
+                }
+              }
             }
             return fileLogoName;
         }

@@ -9,6 +9,7 @@ using System.Threading;
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System.Collections;
+  using System.Linq;
   using System.Reflection;
 
   using MediaPortal.Video.Database;
@@ -239,16 +240,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (linesArray.Length > 3) dlgYesNo.SetLine(4, linesArray[3]);
         dlgYesNo.SetDefaultToYes(defaultYes);
 
-        foreach (GUIControl item in dlgYesNo.GetControlList())
+        foreach (GUIButtonControl btn in dlgYesNo.GetControlList().OfType<GUIButtonControl>())
         {
-          if (item is GUIButtonControl)
-          {
-            GUIButtonControl btn = (GUIButtonControl)item;
-            if (btn.GetID == 11 && !string.IsNullOrEmpty(yesLabel)) // Yes button
-              btn.Label = yesLabel;
-            else if (btn.GetID == 10 && !string.IsNullOrEmpty(noLabel)) // No button
-              btn.Label = noLabel;
-          }
+          if (btn.GetID == 11 && !string.IsNullOrEmpty(yesLabel)) // Yes button
+            btn.Label = yesLabel;
+          else if (btn.GetID == 10 && !string.IsNullOrEmpty(noLabel)) // No button
+            btn.Label = noLabel;
         }
         dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
         return dlgYesNo.IsConfirmed;
@@ -387,17 +384,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         pDlgNotify.SetText(text);
         if (timeout >= 0) pDlgNotify.TimeOut = timeout;
 
-        foreach (GUIControl item in pDlgNotify.GetControlList())
+        foreach (GUIButtonControl btn in pDlgNotify.GetControlList().OfType<GUIButtonControl>().Where(btn => btn.GetID == 4 && !string.IsNullOrEmpty(buttonText) && !string.IsNullOrEmpty(btn.Label)))
         {
-          if (item is GUIButtonControl)
-          {
-            GUIButtonControl btn = (GUIButtonControl)item;
-            if (btn.GetID == 4 && !string.IsNullOrEmpty(buttonText) && !string.IsNullOrEmpty(btn.Label))
-            {
-              // Only if ID is 4 and we have our custom text and if button already has label (in case the skin "hides" the button by emtying the label)
-              btn.Label = buttonText;
-            }
-          }
+          // Only if ID is 4 and we have our custom text and if button already has label (in case the skin "hides" the button by emtying the label)
+          btn.Label = buttonText;
         }
 
         pDlgNotify.DoModal(GUIWindowManager.ActiveWindow);

@@ -28,6 +28,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
   using System.ComponentModel;
   using System.Globalization;
   using System.IO;
+  using System.Linq;
   using System.Reflection;
   using System.Text;
   using System.Text.RegularExpressions;
@@ -127,14 +128,10 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         /// </summary>
         /// <param name="directory"></param>
         /// <returns></returns>
-        public static List<FileInfo> GetVideoFilesRecursive(DirectoryInfo directory) {
-            IEnumerable<FileInfo> fileList = GetFilesRecursive(directory);
-            List<FileInfo> videoFileList = new List<FileInfo>();
-            foreach (FileInfo file in fileList) {
-                if (Utility.IsVideoFile(file))
-                    videoFileList.Add(file);
-            }
-            return videoFileList;
+        public static List<FileInfo> GetVideoFilesRecursive(DirectoryInfo directory) 
+        {
+          IEnumerable<FileInfo> fileList = GetFilesRecursive(directory);
+          return fileList.Where(Utility.IsVideoFile).ToList();
         }
         
         /// <summary>
@@ -142,17 +139,13 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         /// </summary>
         /// <param name="subject">the string to process</param>
         /// <returns>the processed string</returns>
-        public static string CreateFilename(string subject) {
+        public static string CreateFilename(string subject)
+        {
             if (String.IsNullOrEmpty(subject))
                 return string.Empty;
-
             string rtFilename = subject;
-
             char[] invalidFileChars = System.IO.Path.GetInvalidFileNameChars();
-            foreach (char invalidFileChar in invalidFileChars)
-                rtFilename = rtFilename.Replace(invalidFileChar, '_');
-
-            return rtFilename;
+            return invalidFileChars.Aggregate(rtFilename, (current, invalidFileChar) => current.Replace(invalidFileChar, '_'));
         }
 
         /// <summary>
@@ -335,10 +328,9 @@ namespace MyFilmsPlugin.MyFilms.Utils {
           {
             string[] split = checkExpression.Split(new string[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
             bool matches = true;
-            foreach (string s in split)
+            foreach (string s in split.Where(s => !input.ToLower().Contains(s.ToLower())))
             {
-              if (!input.ToLower().Contains(s.ToLower())) 
-                matches = false;
+              matches = false;
             }
             return matches;
           }
@@ -417,12 +409,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
                 return true;
 
             // Ignore specific names
-            foreach (string folderName in folders) {
-                if (name.Equals(folderName, StringComparison.OrdinalIgnoreCase))
-                    return true;
-            }
-
-            return false;
+            return folders.Any(folderName => name.Equals(folderName, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
@@ -480,44 +467,38 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static VideoDiscType GetVideoDiscType(string path) {
-            foreach (VideoDiscType format in EnumToList<VideoDiscType>()) {
-                if (format != VideoDiscType.UnknownFormat) {
-                    if (path.EndsWith(GetEnumValueDescription(format),StringComparison.OrdinalIgnoreCase))
-                        return format;
-                }
-            }
-            return VideoDiscType.UnknownFormat;
+        public static VideoDiscType GetVideoDiscType(string path)
+        {
+          foreach (VideoDiscType format in EnumToList<VideoDiscType>().Where(format => format != VideoDiscType.UnknownFormat).Where(format => path.EndsWith(GetEnumValueDescription(format),StringComparison.OrdinalIgnoreCase)))
+          {
+            return format;
+          }
+          return VideoDiscType.UnknownFormat;
         }
 
-        /// <summary>
+    /// <summary>
         /// Check if the path specified is a video disc standard
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static bool IsVideoDiscPath(string path) {
-            foreach(VideoDiscType format in EnumToList<VideoDiscType>()) {
-                if (format != VideoDiscType.UnknownFormat)
-                    if (path.EndsWith(GetEnumValueDescription(format), StringComparison.OrdinalIgnoreCase))
-                        return true;
-            }
-            return false;
+        public static bool IsVideoDiscPath(string path)
+        {
+          return EnumToList<VideoDiscType>().Where(format => format != VideoDiscType.UnknownFormat).Any(format => path.EndsWith(GetEnumValueDescription(format), StringComparison.OrdinalIgnoreCase));
         }
 
-        /// <summary>
+    /// <summary>
         /// Returns the full path to the video disc or null if it doesn't find one.
         /// </summary>
         /// <param name="drive"></param>
         /// <returns></returns>
         public static string GetVideoDiscPath(string drive) {
            FileInfo discPath;
-           foreach (VideoDiscType format in EnumToList<VideoDiscType>()) {
-               if (format != VideoDiscType.UnknownFormat) {
-                   discPath = new FileInfo(drive + GetEnumValueDescription(format));
-                   discPath.Refresh();
-                   if (discPath.Exists)
-                       return discPath.FullName;
-               }
+           foreach (VideoDiscType format in EnumToList<VideoDiscType>().Where(format => format != VideoDiscType.UnknownFormat))
+           {
+             discPath = new FileInfo(drive + GetEnumValueDescription(format));
+             discPath.Refresh();
+             if (discPath.Exists)
+               return discPath.FullName;
            }
            return null;
         }
@@ -612,15 +593,12 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         /// </remarks>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static bool IsMediaPortalVideoFile(FileInfo file) {
-            foreach (string ext in MediaPortal.Util.Utils.VideoExtensions) {
-                if (file.Extension.Equals(ext, StringComparison.OrdinalIgnoreCase))
-                    return true;
-            }
-            return false;
+        public static bool IsMediaPortalVideoFile(FileInfo file)
+        {
+          return MediaPortal.Util.Utils.VideoExtensions.Cast<string>().Any(ext => file.Extension.Equals(ext, StringComparison.OrdinalIgnoreCase));
         }
 
-        #endregion
+    #endregion
 
         //#region DirectShowLib
 
@@ -880,23 +858,20 @@ namespace MyFilmsPlugin.MyFilms.Utils {
       string NewText;
       const string RegexCleanFilters = @"\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$|\s\d{4}\.";
 
-      foreach (string regexFilter in RegexCleanFilters.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
+      foreach (string regexFilter in RegexCleanFilters.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries).Where(regexFilter => regexFilter.Length > 0))
       {
-          if (regexFilter.Length > 0)
-          {
-            if (regexFilter.Length == 1) //'Probably not a regex, due to complexity of any single character, just do a replace.
-              NewText = strText.Replace(regexFilter, " ");
-            else
-            {
-              //'This should work for any multi-character string:
-              RegCheck = new Regex(regexFilter);
-              NewText = RegCheck.Replace(strText, " ");
-            }
-            if (NewText.Trim().Length > 0) //'Check to ensure last operation didn't wipe the string out!
-              strText = NewText;
-            else //'If NewText is blank, then exit here with the previous value of strText
-              continue;
-          }
+        if (regexFilter.Length == 1) //'Probably not a regex, due to complexity of any single character, just do a replace.
+          NewText = strText.Replace(regexFilter, " ");
+        else
+        {
+          //'This should work for any multi-character string:
+          RegCheck = new Regex(regexFilter);
+          NewText = RegCheck.Replace(strText, " ");
+        }
+        if (NewText.Trim().Length > 0) //'Check to ensure last operation didn't wipe the string out!
+          strText = NewText;
+        else //'If NewText is blank, then exit here with the previous value of strText
+          continue;
       }
 
       //'Tidy up the beginning and end of the string:

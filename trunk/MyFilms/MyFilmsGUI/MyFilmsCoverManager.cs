@@ -86,7 +86,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ClearMovieCover
         }
 
-        enum menuFilterAction
+        enum MenuFilterAction
         {
             all,
             high,
@@ -94,7 +94,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             low
         }
 
-        public enum View
+        protected enum View
         {
             List = 0,
             Icons = 1,
@@ -615,35 +615,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             GUIListItem pItem = new GUIListItem(GUILocalizeStrings.Get(10799221)); // All
             dlg.Add(pItem);
-            pItem.ItemId = (int)menuFilterAction.all;
+            pItem.ItemId = (int)MenuFilterAction.all;
 
             pItem = new GUIListItem(GUILocalizeStrings.Get(10799222)); // High
             dlg.Add(pItem);
-            pItem.ItemId = (int)menuFilterAction.high;
+            pItem.ItemId = (int)MenuFilterAction.high;
 
             pItem = new GUIListItem(GUILocalizeStrings.Get(10799223)); // Medium
             dlg.Add(pItem);
-            pItem.ItemId = (int)menuFilterAction.medium;
+            pItem.ItemId = (int)MenuFilterAction.medium;
 
             pItem = new GUIListItem(GUILocalizeStrings.Get(10799224)); // Low
             dlg.Add(pItem);
-            pItem.ItemId = (int)menuFilterAction.low;
+            pItem.ItemId = (int)MenuFilterAction.low;
 
             dlg.DoModal(GUIWindowManager.ActiveWindow);
             if (dlg.SelectedId >= 0)
             {
                 switch (dlg.SelectedId)
                 {
-                  case (int)menuFilterAction.all:
+                  case (int)MenuFilterAction.all:
                       DisplayFilter = "All";
                       break;
-                  case (int)menuFilterAction.high:
+                  case (int)MenuFilterAction.high:
                       DisplayFilter = "High";
                       break;
-                  case (int)menuFilterAction.medium:
+                  case (int)MenuFilterAction.medium:
                       DisplayFilter = "Medium";
                       break;
-                  case (int)menuFilterAction.low:
+                  case (int)MenuFilterAction.low:
                       DisplayFilter = "Low";
                       break;
                   default:
@@ -983,7 +983,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 GUIListItem item = null;
                 GUIWaitCursor.Init(); GUIWaitCursor.Show(); // show waitcorsor while covers are searched on local drive...
-                List<MFCover> covers = GetLocalCover(MyFilms.r, MyFilms.conf.StrIndex, ArtworkFileName);
+                IEnumerable<MFCover> covers = GetLocalCover(MyFilms.r, MyFilms.conf.StrIndex, ArtworkFileName);
                 GUIWaitCursor.Hide();
 
                 int i = 0;
@@ -1100,7 +1100,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Get local Cover Image
         //-------------------------------------------------------------------------------------------        
-        public static List<MFCover> GetLocalCover(DataRow[] r1, int Index, string currentPictureFilename)
+        public static IEnumerable<MFCover> GetLocalCover(DataRow[] r1, int Index, string currentPictureFilename)
         {
           List<MFCover> result = new List<MFCover>();
           string directoryname = "";

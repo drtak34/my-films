@@ -11,7 +11,9 @@ using MediaPortal.Localisation;
 
 namespace MyFilmsPlugin.MyFilms.Utils
 {
-    public static class Translation
+  using System.Linq;
+
+  public static class Translation
     {
         #region Private variables
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
@@ -118,17 +120,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
                 return LoadTranslations("en");
             }
-            foreach (XmlNode stringEntry in doc.DocumentElement.ChildNodes)
+            foreach (XmlNode stringEntry in doc.DocumentElement.ChildNodes.Cast<XmlNode>().Where(stringEntry => stringEntry.NodeType == XmlNodeType.Element))
             {
-                if (stringEntry.NodeType == XmlNodeType.Element)
-                    try
-                    {
-                        TranslatedStrings.Add(stringEntry.Attributes.GetNamedItem("Field").Value, stringEntry.InnerText);
-                    }
-                    catch (Exception ex)
-                    {
-                      LogMyFilms.Error("Error in Translation Engine", ex.Message);
-                    }
+              try
+              {
+                TranslatedStrings.Add(stringEntry.Attributes.GetNamedItem("Field").Value, stringEntry.InnerText);
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Error("Error in Translation Engine", ex.Message);
+              }
             }
 
             Type TransType = typeof(Translation);
@@ -148,7 +149,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           return !Strings.ContainsKey(name) ? name : Strings[name];
         }
 
-      public static string GetByName(string name, params object[] args)
+        public static string GetByName(string name, params object[] args)
         {
             return String.Format(GetByName(name), args);
         }
@@ -160,12 +161,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns>translated input string</returns>
         public static string ParseString(string input)
         {
-            MatchCollection matches = translateExpr.Matches(input);
-            foreach (Match match in matches)
-            {
-                input = input.Replace(match.Value, GetByName(match.Groups[1].Value));
-            }
-            return input;
+          MatchCollection matches = translateExpr.Matches(input);
+          return matches.Cast<Match>().Aggregate(input, (current, match) => current.Replace(match.Value, GetByName(match.Groups[1].Value)));
         }
 
         #endregion

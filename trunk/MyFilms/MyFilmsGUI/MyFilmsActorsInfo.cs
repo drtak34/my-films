@@ -31,6 +31,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System;
   using System.Collections.Generic;
   using System.IO;
+  using System.Linq;
 
   using MediaPortal.Dialogs;
   using MediaPortal.GUI.Library;
@@ -371,10 +372,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             SlideShow.Reset();
 
-            foreach (string url in list)
+            foreach (string fname in this.list.Select(url => Path.GetFileName(url)))
             {
-                string fname = Path.GetFileName(url);
-                SlideShow.Add(fname);
+              SlideShow.Add(fname);
             }
 
             if (SlideShow.Count > 0)

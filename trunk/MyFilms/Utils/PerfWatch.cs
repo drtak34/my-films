@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.Utils
   using System;
   using System.Collections.Generic;
   using System.Diagnostics;
+  using System.Linq;
 
   static public class PerfWatcher
     {
@@ -156,8 +157,7 @@ namespace MyFilmsPlugin.Utils
         {
             get
             {
-                foreach (KeyValuePair<string, Watch> kv in _watches)
-                    yield return kv.Value;
+              return _watches.Select(kv => kv.Value);
             }
         }
 

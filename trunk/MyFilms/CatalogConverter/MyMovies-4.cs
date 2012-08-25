@@ -135,24 +135,18 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     IEnumerable<XElement> LinksKist = nodeDVD.Elements("Discs/Disc");
 
                     string Source = String.Empty;
-                    foreach (XElement nodeFile in LinksKist)
+                    foreach (XElement nodeFile in LinksKist.Where(nodeFile => nodeFile.Element("LocationSideA").Value.Length > 0))
                     {
-                      if (nodeFile.Element("LocationSideA").Value.Length > 0)
-                        {
-                            if (Source.Length > 0) Source += ";";
-                            Source += nodeFile.Element("LocationSideA").Value;
-                        }
+                      if (Source.Length > 0) Source += ";";
+                      Source += nodeFile.Element("LocationSideA").Value;
                     }
 
                     IEnumerable<XElement> trailerList = nodeDVD.Elements("LocalTrailer/URL");
                     string SourceTrailer = String.Empty;
-                    foreach (XElement nodeTrailer in trailerList)
+                    foreach (XElement nodeTrailer in trailerList.Where(nodeTrailer => !string.IsNullOrEmpty(nodeTrailer.Value)))
                     {
-                      if (!string.IsNullOrEmpty(nodeTrailer.Value))
-                      {
-                        if (SourceTrailer.Length > 0) SourceTrailer += "; ";
-                        SourceTrailer += nodeTrailer.Value;
-                      }
+                      if (SourceTrailer.Length > 0) SourceTrailer += "; ";
+                      SourceTrailer += nodeTrailer.Value;
                     }
 
                     XElement nodeDuration = nodeDVD.Element("RunningTime");

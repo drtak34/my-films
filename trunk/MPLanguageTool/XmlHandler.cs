@@ -271,7 +271,7 @@ namespace MPLanguageTool
     }
 
     // Get list of sections
-    public static List<string> ListSections(string strSection, string attribute)
+    public static IEnumerable<string> ListSections(string strSection, string attribute)
     {
       string xml = BuildFileName(null, true);
       XmlDocument doc = new XmlDocument();

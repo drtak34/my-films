@@ -130,12 +130,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
           for (int i = 0; i < valueWithoutWildcards.Length; i++)
           {
             char c = valueWithoutWildcards[i];
-            if (c == '*' || c == '%' || c == '[' || c == ']')
-              sb.Append("[").Append(c).Append("]");
-            else if (c == '\'')
-              sb.Append("''");
-            else
-              sb.Append(c);
+            switch (c)
+            {
+              case ']':
+              case '[':
+              case '%':
+              case '*':
+                sb.Append("[").Append(c).Append("]");
+                break;
+              case '\'':
+                sb.Append("''");
+                break;
+              default:
+                sb.Append(c);
+                break;
+            }
           }
           return sb.ToString();
         }
@@ -178,12 +187,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
           StringBuilder buffer = new StringBuilder(xml.Length);
 
-          foreach (char c in xml)
+          foreach (char c in xml.Where(c => IsLegalXmlChar(c)))
           {
-            if (IsLegalXmlChar(c))
-            {
-              buffer.Append(c);
-            }
+            buffer.Append(c);
           }
 
           return buffer.ToString();
@@ -422,13 +428,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns></returns>
         public static string cleanLocalPath(string path)
         {
-          foreach (char c in System.IO.Path.GetInvalidFileNameChars())
-          {
-            path = path.Replace(c, invalidCharReplacement);
-          }
+          path = Path.GetInvalidFileNameChars().Aggregate(path, (current, c) => current.Replace(c, invalidCharReplacement));
           // Also remove trailing dots and spaces            
           return path.TrimEnd(new char[] { '.' }).Trim();
-        } const char invalidCharReplacement = '_';
+        }
+
+      const char invalidCharReplacement = '_';
 
         /// <summary>
         /// checks for MyFilms fields being set or none/empty
@@ -437,13 +442,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns></returns>
         public static bool FieldIsSet(string value)
         {
-          if (!string.IsNullOrEmpty(value) && value != "(none)") 
-            return true;
-          else 
-            return false;
+          return !string.IsNullOrEmpty(value) && value != "(none)";
         }
 
-        /// <summary>
+      /// <summary>
         /// Removes 'the' and other common words from the beginning of a series
         /// </summary>
         /// <param name="sName"></param>
@@ -547,11 +549,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public static List<string> RemoveDuplicates(List<string> inputList) {
             Dictionary<string, int> uniqueStore = new Dictionary<string, int>();
             List<string> finalList = new List<string>();
-            foreach (string currValue in inputList) {
-                if (!uniqueStore.ContainsKey(currValue)) {
-                    uniqueStore.Add(currValue, 0);
-                    finalList.Add(currValue);
-                }
+            foreach (string currValue in inputList.Where(currValue => !uniqueStore.ContainsKey(currValue)))
+            {
+              uniqueStore.Add(currValue, 0);
+              finalList.Add(currValue);
             }
             return finalList;
         }
@@ -813,23 +814,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         public static string GetTraktUser()
         {
-          if (Helper.IsTraktAvailableAndEnabled)
-            return TraktSettings.Username;
-          return string.Empty;
+          return Helper.IsTraktAvailableAndEnabled ? TraktSettings.Username : string.Empty;
         }
 
-        public static List<string> GetTraktUserList() // only available with Trakt 1.3.1+
+      public static List<string> GetTraktUserList() // only available with Trakt 1.3.1+
         {
           // List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = new List<TraktAuthentication>();
           List<string> userlist = new List<string>();
           if (Helper.IsTraktAvailableAndEnabled)
           {
-            if (TraktSettings.UserLogins.Count > 0)
-              foreach (var user in TraktSettings.UserLogins)
-              {
-                userlist.Add(user.Username);
-              }
-              return userlist;
+            if (TraktSettings.UserLogins.Count > 0) userlist.AddRange(TraktSettings.UserLogins.Select(user => user.Username));
+            return userlist;
           }
           return null;
         }
@@ -838,16 +833,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           if (TraktSettings.UserLogins.Count == 0) return false;
 
-          foreach (var userlogin in TraktSettings.UserLogins)
+          foreach (var userlogin in TraktSettings.UserLogins.Where(userlogin => userlogin.Username == newUserName))
           {
-            if (userlogin.Username == newUserName)
-            {
-              TraktSettings.AccountStatus = ConnectionState.Pending;
-              TraktSettings.Username = userlogin.Username;
-              TraktSettings.Password = userlogin.Password;
-              if (TraktSettings.AccountStatus == ConnectionState.Connected)
+            TraktSettings.AccountStatus = ConnectionState.Pending;
+            TraktSettings.Username = userlogin.Username;
+            TraktSettings.Password = userlogin.Password;
+            if (TraktSettings.AccountStatus == ConnectionState.Connected)
               return true;
-            }
           }
           return false;
         }

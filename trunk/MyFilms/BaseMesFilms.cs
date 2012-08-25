@@ -623,8 +623,7 @@ namespace MyFilmsPlugin.MyFilms
           {
             if (!cFields.Contains(stringse[0]))
             {
-              AntMovieCatalog.CustomFieldRow cfr;
-              cfr = data.CustomField.NewCustomFieldRow();
+              AntMovieCatalog.CustomFieldRow cfr = data.CustomField.NewCustomFieldRow();
               cfr.SetParentRow(data.CustomFieldsProperties[0]);
               cfr.Tag = stringse[0];
               cfr.Name = (!string.IsNullOrEmpty(Translate_Column(stringse[0]))) ? Translate_Column(stringse[0]) : stringse[1];
@@ -1063,7 +1062,7 @@ namespace MyFilmsPlugin.MyFilms
                 string StrFileType = xmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
                 bool AllowTraktSync = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
                 bool AllowRecentlyAddedAPI = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-                string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", MyFilms.DefaultUsername);
+                string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", MyFilms.GlobalUsername);
 
                 string catalogname = Enum.GetName(typeof(MyFilmsGUI.Configuration.CatalogType), Int32.Parse(StrFileType));
 
@@ -1206,45 +1205,36 @@ namespace MyFilmsPlugin.MyFilms
           movie.Edition = row["Edition"].ToString();
           #endregion
 
-          #region watched status
-          bool played = false;
-          if (tmpconf.StrEnhancedWatchedStatusHandling)
-          {
-            if (MyFilms.EnhancedWatched(row[tmpconf.StrWatchedField].ToString(), tmpconf.StrUserProfileName) == true)
-              played = true;
-          }
-          else
-          {
-            if (tmpconf.GlobalUnwatchedOnlyValue != null && tmpconf.StrWatchedField.Length > 0)
-              if (row[tmpconf.StrWatchedField].ToString().ToLower() != tmpconf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
-                played = true;
-          }
-          movie.Watched = played;
-          movie.WatchedCount = -1; // check against it, if value returns...
-          #endregion
-
-          #region site rating
+          #region internet site rating
           float rating = 0;
           if (!(float.TryParse(row["Rating"].ToString(), out rating))) rating = 0;
           movie.Rating = rating;
           #endregion
 
-          #region user rating
-          rating = -1; // -1 means there is no user rating done yet - we keep "0" for valid user rating !
-          if (tmpconf.StrEnhancedWatchedStatusHandling) // get usercontext ratings, if enabled
+          MultiUserData states = new MultiUserData(row[tmpconf.StrMultiUserStateField].ToString());
+          UserState user = states.GetUserState(tmpconf.StrUserProfileName);
+
+          #region watched status & user rating
+          if (tmpconf.StrEnhancedWatchedStatusHandling)
           {
-            string tmprating = GetUserRating(row[tmpconf.StrWatchedField].ToString(), tmpconf.StrUserProfileName);
-            if (tmprating.Length > 0)
-            {
-              if (!(float.TryParse(tmprating, out rating))) 
-                rating = -1;
-            }
+            // if (MyFilms.EnhancedWatched(row[tmpconf.StrMultiUserStateField].ToString(), tmpconf.StrUserProfileName) == true) played = true;
+            movie.Watched = user.Watched;
+            movie.WatchedCount = user.WatchedCount;
+            movie.RatingUser = (float)user.UserRating;
           }
           else
           {
-            if (!(float.TryParse(row["RatingUser"].ToString(), out rating))) rating = -1;
+            bool played = false;
+            if (tmpconf.GlobalUnwatchedOnlyValue != null && tmpconf.StrWatchedField.Length > 0)
+              if (row[tmpconf.StrWatchedField].ToString().ToLower() != tmpconf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                played = true;
+            movie.Watched = played;
+            movie.WatchedCount = -1; // check against it, if value returns...
+
+            rating = 0;
+            if (!(float.TryParse(row["RatingUser"].ToString(), out rating))) rating = (float)decimal.MinValue;
+            movie.RatingUser = rating;
           }
-          movie.RatingUser = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
           #endregion
 
           #region mediapath
@@ -1378,19 +1368,9 @@ namespace MyFilmsPlugin.MyFilms
           if (EnhancedWatchedValue.Contains(userprofilename))
           {
             string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
+            foreach (string temprating in from s in split where s.Contains(":") let tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username") let temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating") where tempuser == userprofilename select temprating)
             {
-              if (s.Contains(":"))
-              {
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                //string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                //string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-                if (tempuser == userprofilename)
-                {
-                  return temprating;
-                }
-              }
+              return temprating;
             }
           }
           return "-1";
@@ -1575,26 +1555,20 @@ namespace MyFilmsPlugin.MyFilms
                           if (!EnhancedWatchedStatusHandling)
                           {
                             // watched
-                            if (movie.Watched)
-                              sr[WatchedField] = "true";
-                            else
-                              sr[WatchedField] = GlobalUnwatchedOnlyValue;
+                            sr[WatchedField] = movie.Watched ? "true" : GlobalUnwatchedOnlyValue;
                             // user rating
                             if (movie.RatingUser > 0) sr.RatingUser = (decimal)movie.RatingUser;
                           }
                           else
                           {
                             string oldEnhancedWatchedValue = sr[WatchedField].ToString();
-                            string newEnhancedWatchedValue = "";
-
                             // watched
-                            if (!string.IsNullOrEmpty(movie.Username))
-                              newEnhancedWatchedValue = movie.NewEnhancedWatchValue(oldEnhancedWatchedValue, movie.Username, movie.Watched, movie.WatchedCount, movie.RatingUser);
-                            else
-                              newEnhancedWatchedValue = movie.NewEnhancedWatchValue(oldEnhancedWatchedValue, UserProfileName, movie.Watched, movie.WatchedCount, movie.RatingUser);
+                            string newEnhancedWatchedValue = !string.IsNullOrEmpty(movie.Username)
+                                                        ? movie.NewEnhancedWatchValue(oldEnhancedWatchedValue, movie.Username, movie.Watched, movie.WatchedCount, movie.RatingUser)
+                                                        : movie.NewEnhancedWatchValue(oldEnhancedWatchedValue, UserProfileName, movie.Watched, movie.WatchedCount, movie.RatingUser);
                             sr[WatchedField] = newEnhancedWatchedValue;
                             // "commmon" user rating
-                            if (movie.RatingUser > 0) sr.RatingUser = (decimal)movie.RatingUser;
+                            if (movie.RatingUser > -1) sr.RatingUser = (decimal)movie.RatingUser;
                           }
                           if (sr[WatchedField].ToString().ToLower() != oldWatchedString.ToLower())
                             LogMyFilms.Debug("UpdateMovies() - Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField] + "', WatchedCount = '" + movie.WatchedCount + "', (user)Rating = '" + movie.RatingUser + "', (site)Rating = '" + movie.Rating + "'");
@@ -1826,8 +1800,8 @@ namespace MyFilmsPlugin.MyFilms
             LogMyFilms.Error(string.Format("LoadMyFilms() - the DB file {0} does not exist !", StrFileXml));
             throw new Exception(string.Format("The DB file {0} does not exist !", StrFileXml));
           }
-          Stopwatch watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
-          bool success = LoadMyFilmsFromDisk(StrFileXml);
+          var watchReadMovies = new Stopwatch(); watchReadMovies.Reset(); watchReadMovies.Start();
+          var success = LoadMyFilmsFromDisk(StrFileXml);
           watchReadMovies.Stop();
           LogMyFilms.Debug("LoadMyFilms() - Finished ... (success = '" + success + "') (" + (watchReadMovies.ElapsedMilliseconds) + " ms)");
         }
@@ -1839,14 +1813,13 @@ namespace MyFilmsPlugin.MyFilms
 
         public static bool SaveMyFilms(string catalogfile, int timeout)
         {
-          bool success = false;
-
           if (data == null) return false;
           if (timeout == 0) timeout = 10000; // default is 10 secs
           LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'"); 
           if (_dataLock.TryEnterWriteLock(timeout))
           {
             LogMyFilms.Debug("TryEnterWriteLock successful! - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'");
+            bool success = false;
             try
             {
               success = SaveMyFilmsToDisk(catalogfile);
@@ -1949,7 +1922,7 @@ namespace MyFilmsPlugin.MyFilms
         /// use GetConfigViewLists() to get valid values for config and view
         /// returns 'null' if no values can be evaluated - user should still be able to manually set a value for startparam
         /// </summary>        
-        public static List<string> GetViewListValues(string config, string view)
+        public static IEnumerable<string> GetViewListValues(string config, string view)
         {
           List<string> values = new List<string>();
           ArrayList movies = new ArrayList();
@@ -2137,8 +2110,7 @@ namespace MyFilmsPlugin.MyFilms
           List<MFMovie> movielistwithartwork = new List<MFMovie>();
           foreach (MFMovie movie in movielist)
           {
-            MFMovie tmpmovie = new MFMovie();
-            tmpmovie = movie;
+            MFMovie tmpmovie = movie;
             GetMovieArtworkDetails(ref tmpmovie);
             movielistwithartwork.Add(tmpmovie);
           }
@@ -2359,9 +2331,9 @@ namespace MyFilmsPlugin.MyFilms
                   string translation = string.Empty;
                   if (data != null)
                   {
-                    foreach (AntMovieCatalog.CustomFieldRow customFieldRow in data.CustomField)
+                    foreach (AntMovieCatalog.CustomFieldRow customFieldRow in Enumerable.Where(data.CustomField, customFieldRow => customFieldRow.Tag.ToLower() == Column.ToLower()))
                     {
-                      if (customFieldRow.Tag.ToLower() == Column.ToLower()) translation = (!customFieldRow.IsNameNull()) ? customFieldRow.Name : customFieldRow.Tag;
+                      translation = (!customFieldRow.IsNameNull()) ? customFieldRow.Name : customFieldRow.Tag;
                     }
                   }
                   return translation;
@@ -2566,7 +2538,7 @@ namespace MyFilmsPlugin.MyFilms
             string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
 
 
-            if (tempuser == MyFilms.DefaultUsername && int.Parse(tempcount) < count) // Update Count Value for Global count, if it is lower than user count
+            if (tempuser == MyFilms.GlobalUsername && int.Parse(tempcount) < count) // Update Count Value for Global count, if it is lower than user count
             {
               sNew = tempuser + ":" + count + ":" + rating + ":" + tempdatewatched;
             }

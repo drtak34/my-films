@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System;
   using System.Collections.Generic;
   using System.IO;
+  using System.Linq;
   using System.Text;
   using System.Web;
   using System.Xml;
@@ -83,50 +84,49 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             destXml.WriteStartElement("Contents");
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(source);
-                XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/Collection/DVD");
-                foreach (XmlNode nodeDVD in dvdList)
+                var dvdList = doc.DocumentElement.SelectNodes("/Collection/DVD");
+                foreach (XmlNode nodeDvd in dvdList)
                 {
                     destXml.WriteStartElement("Movie");
-                    XmlNode nodeID = nodeDVD.SelectSingleNodeFast("ID");
-                    XmlNode nodeMediaType = nodeDVD.SelectSingleNodeFast("MediaTypes/DVD");
+                    XmlNode nodeID = nodeDvd.SelectSingleNodeFast("ID");
+                    XmlNode nodeMediaType = nodeDvd.SelectSingleNodeFast("MediaTypes/DVD");
                     XmlNode nodeNumber = null;
                     try
                     {
-                        nodeNumber = nodeDVD.SelectSingleNodeFast("CollectionNumber");
+                        nodeNumber = nodeDvd.SelectSingleNodeFast("CollectionNumber");
                     }
                     catch
                     {
                     }
-                    XmlNode nodeTitle = nodeDVD.SelectSingleNodeFast("Title");
-                    XmlNode nodeOTitle = nodeDVD.SelectSingleNodeFast("OriginalTitle");
-                    XmlNode nodeSTitle = nodeDVD.SelectSingleNodeFast("SortTitle");
+                    XmlNode nodeTitle = nodeDvd.SelectSingleNodeFast("Title");
+                    XmlNode nodeOTitle = nodeDvd.SelectSingleNodeFast("OriginalTitle");
+                    XmlNode nodeSTitle = nodeDvd.SelectSingleNodeFast("SortTitle");
 
                     string mediatype = String.Empty;
-                    XmlNode mediaTypes = nodeDVD.SelectSingleNodeFast("MediaTypes");
+                    XmlNode mediaTypes = nodeDvd.SelectSingleNodeFast("MediaTypes");
                     foreach (XmlElement type in mediaTypes)
                     {
-                      if (type.InnerText != null)
+                      if (type.InnerText != null && type.InnerText == "true")
                       {
-                        
-                        if (type.InnerText == "true")
+                        if (mediatype.Length > 0)
                         {
-                            if (mediatype.Length > 0) mediatype += ", ";
-                            mediatype += type.Name.ToString();
+                          mediatype += ", ";
                         }
+                        mediatype += type.Name;
                       }
                     }
 
                     string medialabel = String.Empty;
-                    XmlNode nodeMediaLabel = nodeDVD.SelectSingleNodeFast("UPC");
+                    XmlNode nodeMediaLabel = nodeDvd.SelectSingleNodeFast("UPC");
                     if (nodeMediaLabel != null && nodeMediaLabel.InnerText.Length > 0) medialabel = nodeMediaLabel.InnerText;
 
-                    XmlNode nodeNotes = nodeDVD.SelectSingleNodeFast("Notes"); 
-                    XmlNode nodeYear = nodeDVD.SelectSingleNodeFast("ProductionYear");
-                    XmlNode nodeDuration = nodeDVD.SelectSingleNodeFast("RunningTime");
+                    XmlNode nodeNotes = nodeDvd.SelectSingleNodeFast("Notes"); 
+                    XmlNode nodeYear = nodeDvd.SelectSingleNodeFast("ProductionYear");
+                    XmlNode nodeDuration = nodeDvd.SelectSingleNodeFast("RunningTime");
                     string Overview = string.Empty;
-                    XmlNode nodeOverview = nodeDVD.SelectSingleNodeFast("Overview");
+                    XmlNode nodeOverview = nodeDvd.SelectSingleNodeFast("Overview");
                     if (nodeOverview != null && nodeOverview.InnerText.Length > 0)
                     {
                       //Encoding encoding = Encoding.GetEncoding("windows-1252");
@@ -155,11 +155,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                     if (nodeMediaType != null)
                     {
-                        XmlNode nodeCountryOfOrigin = nodeDVD.SelectSingleNodeFast("CountryOfOrigin");
+                        XmlNode nodeCountryOfOrigin = nodeDvd.SelectSingleNodeFast("CountryOfOrigin");
                         Country = nodeCountryOfOrigin.InnerText;
                     }
                     string genre = String.Empty;
-                    XmlNodeList genreList = nodeDVD.SelectNodes("Genres/Genre");
+                    XmlNodeList genreList = nodeDvd.SelectNodes("Genres/Genre");
                     foreach (XmlNode nodeGenre in genreList)
                     {
                             if (genre.Length > 0) genre += ", ";
@@ -168,7 +168,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                     const string Tagline = "(no Tagline supported by this catalog)";
                   
-                    XmlNodeList TagList = nodeDVD.SelectNodes("Tags/Tag");
+                    XmlNodeList TagList = nodeDvd.SelectNodes("Tags/Tag");
                     TagFullName = string.Empty;
                     
                     foreach (XmlNode nodeTag in TagList)
@@ -190,7 +190,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
 
                     string languages = string.Empty;
-                    XmlNodeList LanguagesList = nodeDVD.SelectNodes("Audio/AudioTrack");
+                    XmlNodeList LanguagesList = nodeDvd.SelectNodes("Audio/AudioTrack");
                     foreach (XmlNode nodeLanguage in LanguagesList)
                     {
                       if (nodeLanguage.SelectSingleNodeFast("AudioContent") != null && nodeLanguage.SelectSingleNodeFast("AudioContent").InnerText != null)
@@ -201,7 +201,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
 
                     string subtitles = String.Empty;
-                    XmlNodeList subtitleList = nodeDVD.SelectNodes("Subtitles/Subtitle");
+                    XmlNodeList subtitleList = nodeDvd.SelectNodes("Subtitles/Subtitle");
                     foreach (XmlNode nodeSubtitle in subtitleList)
                     {
                       if (subtitles.Length > 0) subtitles += ", ";
@@ -209,7 +209,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
 
                     string cast = String.Empty;
-                    XmlNodeList actorsList = nodeDVD.SelectNodes("Actors/Actor");
+                    XmlNodeList actorsList = nodeDvd.SelectNodes("Actors/Actor");
                     foreach (XmlNode nodeActor in actorsList)
                     {
                         string firstname = String.Empty;
@@ -238,7 +238,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     string Director = String.Empty;
                     string Producer = String.Empty;
                     string Writer = String.Empty;
-                    XmlNodeList creditsList = nodeDVD.SelectNodes("Credits/Credit");
+                    XmlNodeList creditsList = nodeDvd.SelectNodes("Credits/Credit");
                     foreach (XmlNode nodeCredit in creditsList)
                     {
                         string firstname = String.Empty;
@@ -294,7 +294,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     string Image = folderimage + @"\" + nodeID.InnerText.Trim() + "f.jpg";
                     if (nodeMediaType != null)
                     {
-                        XmlNode nodeRating = nodeDVD.SelectSingleNodeFast("Review");
+                        XmlNode nodeRating = nodeDvd.SelectSingleNodeFast("Review");
                         if (nodeRating.Attributes["Film"] != null && nodeRating.Attributes["Film"].Value != null) 
                             Rating = nodeRating.Attributes["Film"].Value + ".0";
                         else
@@ -302,7 +302,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
                     else
                     {
-                        XmlNode nodeRating = nodeDVD.SelectSingleNodeFast("Review/ReviewFilm");
+                        XmlNode nodeRating = nodeDvd.SelectSingleNodeFast("Review/ReviewFilm");
                         if (nodeRating != null && nodeRating.InnerText != null)
                             Rating = nodeRating.InnerText + ".0";
                         else
@@ -310,12 +310,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
 
                     string Certification = string.Empty;                      
-                    XmlNode nodeCertification = nodeDVD.SelectSingleNodeFast("Rating");
+                    XmlNode nodeCertification = nodeDvd.SelectSingleNodeFast("Rating");
                     if (nodeCertification != null && nodeCertification.InnerText != null)
                       Certification = nodeCertification.InnerText;
 
                     string borrower = String.Empty;
-                    XmlNodeList borrowerList = nodeDVD.SelectNodes("LoanInfo/User");
+                    XmlNodeList borrowerList = nodeDvd.SelectNodes("LoanInfo/User");
                     foreach (XmlNode nodeBorrower in borrowerList)
                     {
                       string firstname = String.Empty;
@@ -342,10 +342,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     else
                         WriteAntAtribute(destXml, "STitle", nodeTitle.InnerText);
                     bool boolWatched = false;
-                    XmlNodeList eventList = nodeDVD.SelectNodes("Events/Event/EventType");
-                    foreach (XmlNode eventType in eventList)
+                    XmlNodeList eventList = nodeDvd.SelectNodes("Events/Event/EventType");
+                    foreach (XmlNode eventType in eventList.Cast<XmlNode>().Where(eventType => eventType.InnerText == "Watched"))
                     {
-                      if (eventType.InnerText == "Watched") boolWatched = true;
+                      boolWatched = true;
                     }
                     WriteAntAtribute(destXml, "EventType", boolWatched.ToString());
                     //if (nodeDVD.SelectSingleNodeFast("EventType") != null && nodeDVD.SelectSingleNodeFast("EventType").InnerText.Length > 0)
@@ -365,7 +365,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     WriteAntAtribute(destXml, "Credits1", Producer);
                     //WriteAntAtribute(destXml, "Credits2", Writer);
                     WriteAntAtribute(destXml, "Actors", cast);
-                    XmlNode nodeDate = nodeDVD.SelectSingleNodeFast("PurchaseInfo/PurchaseDate");
+                    XmlNode nodeDate = nodeDvd.SelectSingleNodeFast("PurchaseInfo/PurchaseDate");
                     try
                     {
                         DateTime dt = new DateTime();

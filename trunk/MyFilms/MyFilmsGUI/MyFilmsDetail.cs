@@ -947,15 +947,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string StrUpdDflT2 = null;
             int ItemID;
 
-            // Read Info from MyFilms Configfile
-            //XmlConfig XmlConfig = new XmlConfig();
-            //StrUpdItem1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdItem1", "");
-            //StrUpdText1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdText1", "");
-            //StrUpdDflT1 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdDflT1", "");
-            //StrUpdItem2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdItem2", "");
-            //StrUpdText2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdText2", "");
-            //StrUpdDflT2 = XmlConfig.ReadXmlConfig("MyFilms", global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, "AntUpdDflT2", "");
-
             AntMovieCatalog ds = new AntMovieCatalog();
             ItemID = (int)MyFilms.r[MyFilms.conf.StrIndex]["Number"]; //set unique id num (ant allows it to be non-unique but that is a bad idea)
             //May wish to completely re-load the dataset before updating any fields if used in multi-user system, but would req concurrency locks etc so...
@@ -1182,30 +1173,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #region toggle watched status
                 if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                 {
-                  if (MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0)
-                  {
-                    // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
-                    MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, false);
-                  }
-                  else
-                  {
-                    // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
-                    MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, true);
-                  }
+                  MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) <= 0);
                 }
                 else
                 {
-                  if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() !=
-                      MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
-                  {
-                    // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
-                    MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, false);
-                  }
-                  else
-                  {
-                    // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
-                    MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, true);
-                  }
+                  MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() == MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower());
                 }
                 afficher_detail(true);
                 #endregion
@@ -1249,18 +1221,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
                   if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                   {
-                    decimal wRating = 0;
-                    dlgRating.Rating = Decimal.TryParse(GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName), out wRating) ? wRating : 0;
+                    decimal wRating = GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName);
+                    dlgRating.Rating = (wRating != decimal.MinValue) ?  wRating : 5;
                   }
                   else
                   {
                     if (MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"].ToString().Length > 0)
                     {
                       dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"];
-                      if (dlgRating.Rating > 10) dlgRating.Rating = 10;
                     }
-                    else dlgRating.Rating = 0;
+                    else dlgRating.Rating = 5;
                   }
+                  if (dlgRating.Rating > 10) dlgRating.Rating = 10;
 
                   dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                   dlgRating.DoModal(GetID);
@@ -1336,14 +1308,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if (Helper.FieldIsSet(StrUpdItem1))
                   {
-                    if (StrUpdText1.Length > 0) dlgmenu.Add(StrUpdText1); //Specific Item1 label to update
-                    else dlgmenu.Add(StrUpdItem1); //Specific Item1 to update
+                    dlgmenu.Add(StrUpdText1.Length > 0 ? StrUpdText1 : StrUpdItem1);
                     choiceViewMenu.Add("item1");
                   }
                   if (Helper.FieldIsSet(StrUpdItem2))
                   {
-                    if (StrUpdText2.Length > 0) dlgmenu.Add(StrUpdText2); //Specific Item2 label to update
-                    else dlgmenu.Add(StrUpdItem2); //Specific Item2 to update
+                    dlgmenu.Add(StrUpdText2.Length > 0 ? StrUpdText2 : StrUpdItem2);
                     choiceViewMenu.Add("item2");
                   }
                 }
@@ -2085,34 +2055,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "updremovealldetails":
                 #region reset movie details
                 ArrayList deleteItems = MyFilms.GetDisplayItems("deletedetails");
-                foreach (string[] displayItem in deleteItems)
+                foreach (string wproperty in deleteItems.Cast<string[]>().Select(displayItem => displayItem[0]).Where(wproperty => !string.IsNullOrEmpty(wproperty) && MyFilms.r[MyFilms.conf.StrIndex][wproperty] != DBNull.Value))
                 {
-                  string wproperty = displayItem[0];
-                  if (!string.IsNullOrEmpty(wproperty) && MyFilms.r[MyFilms.conf.StrIndex][wproperty] != DBNull.Value) // only reset fields existing in DB
+                  try
                   {
-                    try
+                    switch (ds.Movie.Columns[wproperty].DataType.Name)
                     {
-                      switch (ds.Movie.Columns[wproperty].DataType.Name)
-                      {
-                        case "DateTime":
-                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = DateTime.Now;
-                          break;
-                        case "Decimal":
-                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = 0;
-                          break;
-                        case "Int32":
-                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = 0;
-                          break;
-                        default:
-                          MyFilms.r[MyFilms.conf.StrIndex][wproperty] = "";
-                          break;
-                      }
-                      LogMyFilms.Debug("Delete value for property '" + wproperty + "'");
+                      case "DateTime":
+                        MyFilms.r[MyFilms.conf.StrIndex][wproperty] = DateTime.Now;
+                        break;
+                      case "Decimal":
+                        MyFilms.r[MyFilms.conf.StrIndex][wproperty] = 0;
+                        break;
+                      case "Int32":
+                        MyFilms.r[MyFilms.conf.StrIndex][wproperty] = 0;
+                        break;
+                      default:
+                        MyFilms.r[MyFilms.conf.StrIndex][wproperty] = "";
+                        break;
                     }
-                    catch (Exception ex)
-                    {
-                      LogMyFilms.Debug("Error deleting value for property '" + wproperty + "', exception: ", ex.Message);
-                    }
+                    LogMyFilms.Debug("Delete value for property '" + wproperty + "'");
+                  }
+                  catch (Exception ex)
+                  {
+                    LogMyFilms.Debug("Error deleting value for property '" + wproperty + "', exception: ", ex.Message);
                   }
                 }
                 Update_XML_database();
@@ -2584,7 +2550,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
                   // Thread.Sleep(50);
-                  bool success = false;
+                  bool success;
                   switch (FanartType)
                   {
                       
@@ -2835,20 +2801,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int IMovieIndex = 0;
 
             Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
-            foreach (object t in newItems)
+            foreach (object t in from object t in newItems where File.Exists(t.ToString()) select t)
             {
-              // for each entry test if it's a file, a directory or a dvd copy
-              // no action for files on amovible media or image files
-              if (System.IO.File.Exists(t.ToString()))
-                try
-                {
-                  System.IO.File.Delete(t.ToString());
-                  LogMyFilms.Info("file deleted : " + t.ToString());
-                }
-                catch
-                {
-                  LogMyFilms.Info("unable to delete file : " + t.ToString());
-                }
+              try
+              {
+                File.Delete(t.ToString());
+                LogMyFilms.Info("file deleted : " + t);
+              }
+              catch
+              {
+                LogMyFilms.Info("unable to delete file : " + t);
+              }
             }
           }
           if ((MyFilms.conf.StrSuppressType == "1") || (MyFilms.conf.StrSuppressType == "2"))
@@ -2879,21 +2842,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int IMovieIndex = 0;
 
             Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
-            foreach (object t in newItems)
+            foreach (object t in from object t in newItems where System.IO.File.Exists(t.ToString()) select t)
             {
               // for each entry test if it's a file, a directory or a dvd copy
-              // no action for files on amovible media or image files
-              if (System.IO.File.Exists(t.ToString()))
-                try
-                {
-                  System.IO.File.Delete(t.ToString());
-                  LogMyFilms.Info("file deleted : " + t.ToString());
-                }
-                catch (Exception ex)
-                {
-                  LogMyFilms.Info("unable to delete file : " + t.ToString());
-                  LogMyFilms.InfoException("Manual_Delete() - delete file exception: ", ex);
-                }
+              // no action for files on removible media or image files
+              try
+              {
+                File.Delete(t.ToString());
+                LogMyFilms.Info("file deleted : " + t.ToString());
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Info("unable to delete file : " + t.ToString());
+                LogMyFilms.InfoException("Manual_Delete() - delete file exception: ", ex);
+              }
             }
           }
           if (removefromDB)
@@ -2911,19 +2873,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
         public static void Watched_Toggle(int Index, bool watched)
         {
-          if (watched)
+          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
           {
-            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
-              SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, 1); //set watchedcount for enhanced watched count handling to 1
-            else
-              MyFilms.r[Index][MyFilms.conf.StrWatchedField] = "true";
+            MultiUserData multistate = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+            multistate.SetWatched(MyFilms.conf.StrUserProfileName, watched);
+            MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = multistate.ResultValueString();
+            MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+            MyFilms.r[Index]["RatingUser"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+            MyFilms.r[Index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+            // SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, watched ? 1 : 0); //set watchedcount for enhanced watched count handling to 1
           }
           else
           {
-            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
-              SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, 0); //set watchedcount for enhanced watched count handling to 0
-            else
-              MyFilms.r[Index][MyFilms.conf.StrWatchedField] = MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+            MyFilms.r[Index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
           }
           LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField + "' to '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
 
@@ -2944,41 +2906,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void SetWatchedCount(int Index, string userprofilename, int count)
         {
-          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
-          string newEnhancedWatchedValue = string.Empty;
-
-          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
-          {
-            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
-            {
-              if (s.Contains(":"))
-              {
-                string sNew = s;
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-
-                if (tempuser == userprofilename) // Update Count Value
-                {
-                  sNew = tempuser + ":" + count + ":" + temprating + ":" + tempdatewatched;
-                }
-                if (string.IsNullOrEmpty(newEnhancedWatchedValue))
-                  newEnhancedWatchedValue = sNew;
-                else
-                  newEnhancedWatchedValue += "|" + sNew;
-              }
-            }
-          }
-          else
-          {
-            if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
-              newEnhancedWatchedValue = userprofilename + ":" + count + ":" + "-1:";
-            else
-              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + count + ":" + "-1:";
-          }
-          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
+          MultiUserData multistate = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+          multistate.SetWatchedCount(MyFilms.conf.StrUserProfileName, count);
+          MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = multistate.ResultValueString();
+          MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["RatingUser"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
         }
 
         public static string EnhancedWatchedValue(string s, string type)
@@ -3009,31 +2942,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static int GetWatchedCount(int Index, string userprofilename)
         {
-          int count = 0;
-          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
-
-          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
-          {
-            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
-            {
-              if (s.Contains(":"))
-              {
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-
-                if (tempuser == userprofilename)
-                {
-                  bool success = int.TryParse(tempcount, out count);
-                  if (!success) count = 0;
-                  return count;
-                }
-              }
-            }
-          }
-          return count;
+          return new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString()).GetUserState(userprofilename).WatchedCount;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -3041,59 +2950,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static DateTime GetWatchedDate(int Index, string userprofilename)
         {
-          DateTime datewatched = DateTime.MinValue;
-          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
-
-          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
-          {
-            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
-            {
-              if (s.Contains(":"))
-              {
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-
-                if (tempuser == userprofilename)
-                {
-                  bool success = DateTime.TryParse(tempcount, out datewatched);
-                  if (!success) datewatched = DateTime.MinValue;
-                  return datewatched;
-                }
-              }
-            }
-          }
-          return datewatched;
+          return new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString()).GetUserState(userprofilename).WatchedDate;
         }
 
         //-------------------------------------------------------------------------------------------
         //  Get enhanced user rating
         //-------------------------------------------------------------------------------------------        
-        private static string GetUserRating(int Index, string userprofilename)
+        private static decimal GetUserRating(int Index, string userprofilename)
         {
-          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
-
-          if (EnhancedWatchedValue.Contains(userprofilename))
-          {
-            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
-            {
-              if (s.Contains(":"))
-              {
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-                if (tempuser == userprofilename)
-                {
-                  return temprating;
-                }
-              }
-            }
-          }
-          return "-1";
+          return new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString()).GetUserState(userprofilename).UserRating;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -3101,41 +2966,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void SetUserRating(int Index, string userprofilename, string rating)
         {
-          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
-          string newEnhancedWatchedValue = string.Empty;
-
-          if (EnhancedWatchedValue.Contains(userprofilename))
-          {
-            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
-            {
-              if (s.Contains(":"))
-              {
-                string sNew = s;
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-
-                if (tempuser == userprofilename) // Update Count Value
-                {
-                  sNew = tempuser + ":" + tempcount + ":" + rating + ":" + tempdatewatched;
-                }
-                if (string.IsNullOrEmpty(newEnhancedWatchedValue))
-                  newEnhancedWatchedValue = sNew;
-                else
-                  newEnhancedWatchedValue += "|" + sNew;
-              }
-            }
-          }
-          else
-          {
-            if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
-              newEnhancedWatchedValue = userprofilename + ":" + "0" + ":" + rating + ":";
-            else
-              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + "0" + ":" + rating + ":";
-          }
-          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
+          MultiUserData multistate = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+          multistate.SetRating(MyFilms.conf.StrUserProfileName, decimal.Parse(rating));
+          MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = multistate.ResultValueString();
+          MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["RatingUser"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
         }
 
         //-------------------------------------------------------------------------------------------
@@ -3143,60 +2979,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static void AddWatchedCount(int Index, string userprofilename)
         {
-          if (userprofilename != MyFilms.DefaultUsername) // avoid to add twice, if user selected "Global" as profile name
-            AddWatchedByOne(Index, userprofilename);
-          AddWatchedByOne(Index, MyFilms.DefaultUsername); // Global watched count will always be set
-          // ToDo: Could also populate "watched history" here (future version)
+          //if (userprofilename != MyFilms.GlobalUsername) // avoid to add twice, if user selected "Global" as profile name
+          //  AddWatchedByOne(Index, userprofilename);
+          //AddWatchedByOne(Index, MyFilms.GlobalUsername); // Global watched count will always be set
+          //// ToDo: Could also populate "watched history" here (future version)
+          MultiUserData multistate = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+          multistate.AddWatchedCountByOne(MyFilms.conf.StrUserProfileName);
+          MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = multistate.ResultValueString();
+          MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["RatingUser"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
 
           // tell any listeners that user watched the movie
           MFMovie movie = new MFMovie();
           movie = GetMovieFromRecord(MyFilms.r[Index]);
           if (WatchedItem != null)
-            WatchedItem(movie, true, GetWatchedCount(Index, userprofilename) + 1);
-        }
-
-        //-------------------------------------------------------------------------------------------
-        //  Add watch count by one
-        //-------------------------------------------------------------------------------------------        
-        private static void AddWatchedByOne(int Index, string userprofilename)
-        {
-          int count = GetWatchedCount(Index, userprofilename);
-          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
-          string newEnhancedWatchedValue = string.Empty;
-          CultureInfo InvC = CultureInfo.InvariantCulture;
-          string datenow = DateTime.Now.ToString("d", InvC); // short date as invariant culture
-
-          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value and add/update datewatched
-          {
-            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split)
-            {
-              if (s.Contains(":"))
-              {
-                string sNew = s;
-                string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-                string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-                string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-                string tempdatewatched = MyFilmsDetail.EnhancedWatchedValue(s, "datewatched");
-                if (tempuser == userprofilename)
-                {
-                  sNew = tempuser + ":" + (count + 1) + ":" + temprating + ":" + datenow;
-                }
-                if (string.IsNullOrEmpty(newEnhancedWatchedValue))
-                  newEnhancedWatchedValue = sNew;
-                else
-                  newEnhancedWatchedValue += "|" + sNew;
-              }
-            }
-          }
-          else
-          {
-            if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
-              newEnhancedWatchedValue = userprofilename + ":" + (count + 1) + ":" + "-1:" + DateTime.Now.Date.ToShortDateString();
-            else
-              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + (count + 1) + ":" + "-1:" + datenow;
-          }
-          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
+            WatchedItem(movie, true, multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedCount);
         }
 
         //-------------------------------------------------------------------------------------------
@@ -3230,7 +3028,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  }
           //}
 
-          new System.Threading.Thread(delegate()
+          new Thread(delegate()
           {
             bool successwrite = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000);
 
@@ -3488,22 +3286,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               add = true;
           else
           {
-            foreach (string supportedfunction in supportedfunctions)
+            foreach (string supportedfunction in supportedfunctions.Where(supportedfunction => supportedfunction.Trim().ToLower() == grabtype.ToString().ToLower() || (supportedfunction.Trim().ToLower() == "details" && grabtype.ToString().ToLower() == "all")))
             {
-              if (supportedfunction.Trim().ToLower() == grabtype.ToString().ToLower() || (supportedfunction.Trim().ToLower() == "details" && grabtype.ToString().ToLower() == "all"))
+              if (showallLanguages)
+                add = true;
+              else
               {
-                if (showallLanguages)
-                  add = true;
-                else
+                foreach (string allowedlanguage in from allowedlanguage in allowedlanguages from supportedlanguage in supportedlanguages where supportedlanguage.Trim().ToLower() == allowedlanguage.Trim().ToLower() select allowedlanguage)
                 {
-                  foreach (string allowedlanguage in allowedlanguages)
-                  {
-                    foreach (string supportedlanguage in supportedlanguages)
-                    {
-                      if (supportedlanguage.Trim().ToLower() == allowedlanguage.Trim().ToLower())
-                        add = true;
-                    }
-                  }
+                  add = true;
                 }
               }
             }
@@ -3520,7 +3311,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("(grabb_Internet_Informations) with grabtype = '" + grabtype + "', title = '" + FullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
           if (choosescript)
           {
-            if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts)))
+            if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts)))
             {
               GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
               dlgOk.SetHeading(GUILocalizeStrings.Get(645)); // menu
@@ -3531,9 +3322,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
             }
 
-            if (!System.IO.Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"))
+            if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"))
             {
-              try { System.IO.Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"); }
+              try { Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\user"); }
               catch (Exception ex) { LogMyFilms.Debug("Error creating user script directory: '" + ex.Message + "'"); }
             }
 
@@ -3687,13 +3478,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           choiceViewMenu.Add(wurl.Title);
                         }
                         string[] split = MovieName.Trim().Split(new Char[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries);
-                        foreach (string s in split)
+                        foreach (string s in split.Where(s => s.Length > 2))
                         {
-                          if (s.Length > 2)
-                          {
-                            dlg.Add(GUILocalizeStrings.Get(137) + " '" + s + "'"); // add words from title as search items
-                            choiceViewMenu.Add(s);
-                          }
+                          dlg.Add(GUILocalizeStrings.Get(137) + " '" + s + "'"); // add words from title as search items
+                          choiceViewMenu.Add(s);
                         }
                         if (grabtype != GrabType.Person)
                         {
@@ -3927,8 +3715,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                           try
                           {
-                            strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
-                            if (strOldValue == null) strOldValue = "";
+                            strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString() ?? "";
                             strNewValue = Result[i];
                             if (i == 2) strNewValue = Result[12];
                             if (strNewValue == null) strNewValue = "";
@@ -3990,8 +3777,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           {
                             try
                             {
-                              strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
-                              if (strOldValue == null) strOldValue = "";
+                              strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString() ?? "";
                               strNewValue = Result[i];
                               if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) strNewValue = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathShort];
                               if (strNewValue == null) strNewValue = "";
@@ -4029,10 +3815,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           }
 
                           dlgMultiSelect.DoModal(GetID);
-                          for (int ii = 0; ii < dlgMultiSelect.ListItems.Count; ii++)
-                          {
-                            if (dlgMultiSelect.ListItems[ii].Selected) updateItems.Add(dlgMultiSelect.ListItems[ii].TVTag.ToString());
-                          }
+                          updateItems.AddRange(from t in dlgMultiSelect.ListItems where t.Selected select t.TVTag.ToString());
                           LogMyFilms.Debug("GrabberUpdate - '" + updateItems.Count + "' updateItems selected !");
                           if (dlgMultiSelect.DialogModalResult == ModalResult.Cancel) return; // user cancelled
                           if (dlgMultiSelect.DialogModalResult == ModalResult.OK && updateItems.Count == 0) return; // Nothing was selected
@@ -4248,8 +4031,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       try
                       {
-                        strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
-                        if (strOldValue == null) strOldValue = "";
+                        strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString() ?? "";
                         strNewValue = Result[i].ToString();
                         if (i == 2) strNewValue = Result[12];
                         if (strNewValue == null) strNewValue = "";
@@ -4326,7 +4108,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     catch {}
                   }
-                  string temp = "";
+                  string temp;
                   if (IsUpdateRequired("Country", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Country"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Country], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
                     person.PlaceOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Country];
                   if (IsUpdateRequired("Category", strChoice, MyFilms.r[MyFilms.conf.StrIndex]["Category"].ToString(), Result[(int)Grabber_URLClass.Grabber_Output.Category], grabtype, onlyselected, onlymissing, onlynonempty, updateItems)) 
@@ -5125,21 +4907,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                   //dlgs.Add(wtitle); //Otitle
                                   dlgs.Add(savetitle); //Otitle = savetitle
                                   dlgs.Add(wttitle); //Ttitle
-                                  foreach (object t in wotitle_tableau)
+                                  foreach (object t in from object t in wotitle_tableau where t.ToString().Length > 1 select t)
                                   {
-                                      if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                                    dlgs.Add(t.ToString());
                                   }
-                                  foreach (object t in wttitle_tableau)
+                                  foreach (object t in from object t in wttitle_tableau where t.ToString().Length > 1 select t)
                                   {
-                                      if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                                    dlgs.Add(t.ToString());
                                   }
-                                  foreach (object t in wotitle_sub_tableau)
+                                  foreach (object t in from object t in wotitle_sub_tableau where t.ToString().Length > 1 select t)
                                   {
-                                      if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                                    dlgs.Add(t.ToString());
                                   }
-                                  foreach (object t in wttitle_sub_tableau)
+                                  foreach (object t in from object t in wttitle_sub_tableau where t.ToString().Length > 1 select t)
                                   {
-                                      if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                                    dlgs.Add(t.ToString());
                                   }
                                   //Now all titles and Substrings listed in dialog !
                                   //dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
@@ -5309,10 +5091,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (!currentPicture.StartsWith(currentStorePath)) 
             return "";
-          if (currentStorePath.EndsWith("\\"))
-            startPattern = "";
-          else 
-            startPattern = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
+          startPattern = currentStorePath.EndsWith("\\")
+                           ? ""
+                           : currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
           string searchPattern = currentPicture.Substring(currentStorePath.Length);
 
           int patternLength2 = 999;
@@ -5347,10 +5128,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (onlyReturnCount)
             return filesfoundcounter.ToString();
 
-          foreach (string n in filesfound)
+          foreach (string n in filesfound.Where(n => !string.IsNullOrEmpty(n)))
           {
-            if (!string.IsNullOrEmpty(n))
-              LogMyFilms.Debug("(Sorted coverfiles) ******* : '" + n + "'");
+            LogMyFilms.Debug("(Sorted coverfiles) ******* : '" + n + "'");
           }
 
           Array.Sort(filesfoundsize);
@@ -5726,12 +5506,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   const int MinChars = 2;
                   bool Filter = true;
 
-                  GUIDialogMenu dlg =
-                    (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                  GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                   if (dlg == null) return;
                   dlg.Reset();
-                  if (loadFanart) dlg.SetHeading(GUILocalizeStrings.Get(1079862)); // Load fanart (online)
-                  else dlg.SetHeading(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
+                  dlg.SetHeading(loadFanart ? GUILocalizeStrings.Get(1079862) : GUILocalizeStrings.Get(1079900));  // Load fanart (online)  // Download person images (selected film)
                   dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
                   foreach (DBMovieInfo t in listemovies)
                   {
@@ -5770,21 +5548,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //dlgs.Add(wtitle); //Otitle
                     dlgSearchFilm.Add(savetitle); //Otitle = savetitle
                     dlgSearchFilm.Add(wttitle); //Ttitle
-                    foreach (object t in wotitle_tableau)
+                    foreach (object t in from object t in wotitle_tableau where t.ToString().Length > 1 select t)
                     {
-                      if (t.ToString().Length > 1) dlgSearchFilm.Add(t.ToString());
+                      dlgSearchFilm.Add(t.ToString());
                     }
-                    foreach (object t in wttitle_tableau)
+                    foreach (object t in from object t in wttitle_tableau where t.ToString().Length > 1 select t)
                     {
-                      if (t.ToString().Length > 1) dlgSearchFilm.Add(t.ToString());
+                      dlgSearchFilm.Add(t.ToString());
                     }
-                    foreach (object t in wotitle_sub_tableau)
+                    foreach (object t in from object t in wotitle_sub_tableau where t.ToString().Length > 1 select t)
                     {
-                      if (t.ToString().Length > 1) dlgSearchFilm.Add(t.ToString());
+                      dlgSearchFilm.Add(t.ToString());
                     }
-                    foreach (object t in wttitle_sub_tableau)
+                    foreach (object t in from object t in wttitle_sub_tableau where t.ToString().Length > 1 select t)
                     {
-                      if (t.ToString().Length > 1) dlgSearchFilm.Add(t.ToString());
+                      dlgSearchFilm.Add(t.ToString());
                     }
                     //Now all titles and Substrings listed in dialog !
                     //dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
@@ -6370,10 +6148,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
                     {
                       int at = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().IndexOf(";", 0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length);
-                      if (at == -1)
-                        file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length).Trim().ToString(), MyFilms.conf.StrDirStor);
-                      else
-                        file = SearchMovie(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, at).Trim().ToString(), MyFilms.conf.StrDirStor);
+                      file = SearchMovie(at == -1 
+                        ? MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length).Trim()
+                        : MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Substring(0, at).Trim(), MyFilms.conf.StrDirStor);
                     }
                     else
                       file = "false";
@@ -6871,46 +6648,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   #endregion
 
                   #region set userdefined watched and rating field
-                  if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
+                  if (wrep && MyFilms.conf.StrWatchedField.ToLower() == dc.ColumnName.ToLower())
                   {
                     if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                     {
-                      int count = GetWatchedCount(ItemId, MyFilms.conf.StrUserProfileName);
-                      if (count > 0)
-                      {
-                        setGUIProperty("user.watched.value", "true");
-                        DateTime watcheddate = GetWatchedDate(ItemId, MyFilms.conf.StrUserProfileName);
-                        string strWatchedDate = (watcheddate > DateTime.MinValue) ? watcheddate.ToShortDateString() : "";
-                        setGUIProperty("user.watched.date", strWatchedDate);
-                      }
-                      else
-                      {
-                        setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
-                        setGUIProperty("user.watched.date", "");
-                      }
-                      setGUIProperty("user.watched.count", count.ToString());
-                      setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
-                      setGUIProperty("user.watched.global", GetWatchedCount(ItemId, MyFilms.DefaultUsername).ToString());
-                      string rating = GetUserRating(ItemId, MyFilms.conf.StrUserProfileName);
-                      if (rating == "-1") rating = "";
-                      setGUIProperty("user.rating.value", rating);
+                      MultiUserData states = new MultiUserData(MyFilms.r[ItemId][MyFilms.conf.StrMultiUserStateField].ToString());
+                      UserState user = states.GetUserState(MyFilms.conf.StrUserProfileName);
+                      setGUIProperty("user.watched.value", user.WatchedCount > 0 ? "true" : "");
+                      setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > DateTime.MinValue) ? user.WatchedDate.ToShortDateString() : "");
+                      setGUIProperty("user.watched.count", user.WatchedCount.ToString());
+                      setGUIProperty("user.watched.name", user.UserName);
+                      setGUIProperty("user.watched.global", states.GetUserState(MyFilms.GlobalUsername).WatchedCount.ToString());
+                      setGUIProperty("user.rating.value", (user.UserRating > MultiUserData.NoRating) ? Math.Round(user.UserRating, 1).ToString() : "");
                     }
                     else
                     {
-                      if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
-                        setGUIProperty("user.watched.value", "true");
-                      else
-                        setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
-
-                      wstring = "";
-                      if ((wrep) && (MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0))
+                      setGUIProperty("user.watched.value", MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() ? "true" : "");
+                      decimal UserRating = MultiUserData.NoRating;
+                      if (wrep && MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0)
                       {
-                        float fRating = -1;
-                        if (float.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out fRating))
-                          wstring = fRating.ToString();
-                        if (wstring == "-1") wstring = "";
+                        if (!(decimal.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out UserRating))) UserRating = MultiUserData.NoRating;
                       }
-                      setGUIProperty("user.rating.value", wstring);
+                      setGUIProperty("user.rating.value", (UserRating > MultiUserData.NoRating) ? Math.Round(UserRating, 1).ToString() : "");
                     }
                   }
                   #endregion
@@ -7082,19 +6841,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                           if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                           {
-                            if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
-                              setGUIProperty("user.source.isonline", "available");
-                            else if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "False")
+                            switch (MyFilms.r[ItemId][dc.ColumnName].ToString())
                             {
-                              if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
-                              {
-                                if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
-                                  setGUIProperty("user.source.isonline", "offline");
+                              case "True":
+                                setGUIProperty("user.source.isonline", "available");
+                                break;
+                              case "False":
+                                if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // if there is source field set
+                                {
+                                  setGUIProperty("user.source.isonline", MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0
+                                                                           ? "offline"
+                                                                           : "unavailable");
+                                }
                                 else
                                   setGUIProperty("user.source.isonline", "unavailable");
-                              }
-                              else
-                                setGUIProperty("user.source.isonline", "unavailable");
+                                break;
                             }
                           }
                           else
@@ -7106,10 +6867,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           {
                             if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
                             {
-                              if (MyFilms.conf.ScanMediaOnStart) // if availability scanner is supposed to autostart
-                                setGUIProperty("user.source.isonline", "unknown"); // set to unknown - will be replaced by real status after scan has finished...
-                              else
-                                setGUIProperty("user.source.isonline", "available"); // set online as default, even if it's possibly not available ...
+                              setGUIProperty("user.source.isonline", MyFilms.conf.ScanMediaOnStart ? "unknown" : "available");
                             }
                             else
                               setGUIProperty("user.source.isonline", "unavailable");
@@ -7145,10 +6903,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             {
                               if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
                               {
-                                if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
-                                  setGUIProperty("user.sourcetrailer.isonline", "offline");
-                                else
-                                  setGUIProperty("user.sourcetrailer.isonline", "unavailable");
+                                setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0
+                                    ? "offline"
+                                    : "unavailable");
                               }
                               else
                                 setGUIProperty("user.sourcetrailer.isonline", "unavailable");
@@ -7163,10 +6920,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           {
                             if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
                             {
-                              if (MyFilms.conf.ScanMediaOnStart)
-                                setGUIProperty("user.sourcetrailer.isonline", "unknown");
-                              else
-                                setGUIProperty("user.sourcetrailer.isonline", "available"); // set online as default
+                              setGUIProperty("user.sourcetrailer.isonline", MyFilms.conf.ScanMediaOnStart 
+                                ? "unknown" 
+                                : "available");
                             }
                             else
                               setGUIProperty("user.sourcetrailer.isonline", "unavailable");
@@ -7600,8 +7356,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 (UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) ||
                 (UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
             {
-              if (WakeOnLanManager.Ping(UNCpath, wTimeout)) isActive = true;
-              else isActive = false;
+              isActive = WakeOnLanManager.Ping(UNCpath, wTimeout);
 
               if (!isActive) // Only if NAS server is not yet already rzunning !
               {
@@ -7777,19 +7532,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
               {
                 string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string s in split)
+                foreach (string s in split.Where(s => filestorage.ToLower().Contains(s.ToLower())))
                 {
-                  if (filestorage.ToLower().Contains(s.ToLower())) // if extension is defined to use external player
+                  try
                   {
-                    try
-                    {
-                      LaunchExternalPlayer(filestorage);
-                      return;
-                    }
-                    catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
+                    LaunchExternalPlayer(filestorage);
+                    return;
                   }
+                  catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
                 }
               }
+
               #endregion
             }
             else if (Helper.IsBluRayPlayerLauncherAvailableAndEnabled)
@@ -7873,9 +7626,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               string movieFileName = (string)t;
               Int64 wsize = 0;
-              if (System.IO.File.Exists(movieFileName))
-                wsize = new System.IO.FileInfo(movieFileName).Length;
-              else wsize = 0;
+              wsize = File.Exists(movieFileName) ? new FileInfo(movieFileName).Length : 0;
               string wsizeformatted = string.Format("{0} MB", wsize / 1048576);
               if (movieFileName.Contains("\\"))
                 dlgmenu.Add(movieFileName.Substring(movieFileName.LastIndexOf("\\") + 1) + " (" + wsizeformatted + ")"); // add moviename to menu
@@ -8126,25 +7877,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // search other parts belonging to the same movie
             DirectoryInfo dirsInf = new DirectoryInfo(fileName.Substring(0, fileName.LastIndexOf("\\")));
             FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
-            foreach (FileSystemInfo sfi in sfiles)
+            foreach (string wfile in sfiles.Select(sfi => dirsInf.FullName + "\\" + sfi.Name))
             {
-                string wfile = dirsInf.FullName + "\\" + sfi.Name;
-                if (newItems.Contains(wfile))
-                    continue;
-                if ((MediaPortal.Util.Utils.ShouldStack(fileName, wfile)) && (MediaPortal.Util.Utils.IsVideo(wfile)))
+              if (newItems.Contains(wfile))
+                continue;
+              if ((MediaPortal.Util.Utils.ShouldStack(fileName, wfile)) && (MediaPortal.Util.Utils.IsVideo(wfile)))
+              {
+                if (delete)
                 {
-                    if (delete)
-                    {
-                        delete_movie(wfile, ref newItems);
-                        continue;
-                    }
-                    else
-                    {
-                        IdMovie = -1;
-                        add_update_movie(wfile, select_item, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
-                        continue;
-                    }
+                  delete_movie(wfile, ref newItems);
+                  continue;
                 }
+                else
+                {
+                  IdMovie = -1;
+                  add_update_movie(wfile, select_item, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                  continue;
+                }
+              }
             }
         }
 
@@ -8727,10 +8477,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             IMDBMovie movieDetails = new IMDBMovie();
             if (idMovie <= 0)
             {
-                if (MyFilms.r[select_item]["Subtitles"].ToString().Length > 0)
-                    idMovie = VideoDatabase.AddMovie(filename, true);
-                else
-                    idMovie = VideoDatabase.AddMovie(filename, false);
+                idMovie = VideoDatabase.AddMovie(filename, MyFilms.r[select_item]["Subtitles"].ToString().Length > 0);
                 string wdescription = System.Web.HttpUtility.HtmlEncode(MyFilms.r[select_item]["Description"].ToString().Replace('’', '\''));
                 wdescription = wdescription.Replace('|', '\n');
                 movieDetails.PlotOutline = movieDetails.Plot = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wdescription));
@@ -8804,10 +8551,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strPath);
                     MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strFileName);
                     pathId = VideoDatabase.GetPath(strPath);
-                    if (pathId == -1)
-                        pathId = VideoDatabase.AddPath(strPath);
-                    else
-                        pathId = VideoDatabase.GetPath(strPath);
+                    pathId = pathId == -1 ? VideoDatabase.AddPath(strPath) : VideoDatabase.GetPath(strPath);
                     VideoDatabase.AddFile(idMovie, pathId, strFileName);
 
                 }
@@ -8906,11 +8650,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Regex DVDRegexp = new Regex("video_ts");
             foreach (string wfile in split1)
             {
-                if (wfile.IndexOf("/") == -1)
-                    fileName = wfile.Trim();
-                else
-                    fileName = wfile.Substring(0, wfile.IndexOf("/")).Trim();
-                if (fileName.Length > 0)
+              fileName = wfile.IndexOf("/") == -1 ? wfile.Trim() : wfile.Substring(0, wfile.IndexOf("/")).Trim();
+              if (fileName.Length > 0)
                 {
                     // first verify if file exists and if it's a video file
                     if ((System.IO.File.Exists(fileName)) && (MediaPortal.Util.Utils.IsVideo(fileName)) && (!VirtualDirectory.IsImageFile(System.IO.Path.GetExtension(fileName))))
@@ -8991,7 +8732,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     foreach (string wfile2 in split3)
                     {
                         string wfile3 = string.Empty;
-                        if (!System.IO.File.Exists(wfile2.Trim()) && !System.IO.Directory.Exists(wfile2.Trim()))
+                        if (!File.Exists(wfile2.Trim()) && !Directory.Exists(wfile2.Trim()))
                         {
                             wfile3 = SearchMovie(wfile2.Trim(), strDir);
                             if (wfile3 == "false")
@@ -8999,7 +8740,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                         else
                             wfile3 = wfile2.Trim();
-                        if ((System.IO.File.Exists(wfile3)) && (MediaPortal.Util.Utils.IsVideo(wfile3)))
+                        if (File.Exists(wfile3) && MediaPortal.Util.Utils.IsVideo(wfile3))
                         {
                             if (delete)
                             {
@@ -9015,7 +8756,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 continue;
                             }
                         }
-                        if (System.IO.File.Exists(wfile3 + @"\VIDEO_TS\VIDEO_TS.IFO"))
+                        if (File.Exists(wfile3 + @"\VIDEO_TS\VIDEO_TS.IFO"))
                         {
                             if (delete)
                             {
@@ -9032,7 +8773,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             }
                         }
 
-                        if (System.IO.File.Exists(wfile3 + @"\BDMV\index.bdmv")) // check for bluray in iso ...
+                        if (File.Exists(wfile3 + @"\BDMV\index.bdmv")) // check for bluray in iso ...
                         {
                           if (delete)
                           {
@@ -9049,30 +8790,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           }
                         }
 
-                        if (System.IO.Directory.Exists(wfile3))
+                        if (Directory.Exists(wfile3))
                         {
                             // it's a Directory so all files included are added to playlist
                             DirectoryInfo dirsInf = new DirectoryInfo(wfile3);
                             //On retourne une liste d'informations sur les fichiers contenus dans le répertoire
                             FileSystemInfo[] filesInf = dirsInf.GetFileSystemInfos();
-                            foreach (FileSystemInfo fi in filesInf)
+                            foreach (FileSystemInfo fi in filesInf.Where(fi => MediaPortal.Util.Utils.IsVideo(fi.FullName)))
                             {
-                                if (MediaPortal.Util.Utils.IsVideo(fi.FullName))
-                                {
-                                    if (delete)
-                                    {
-                                        delete_movie(fi.FullName, ref newItems);
-                                        Search_parts(fi.FullName, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        IdMovie = -1;
-                                        add_update_movie(fi.FullName, select_item, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
-                                        Search_parts(fi.FullName, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
-                                        continue;
-                                    }
-                                }
+                              if (delete)
+                              {
+                                delete_movie(fi.FullName, ref newItems);
+                                Search_parts(fi.FullName, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                                continue;
+                              }
+                              else
+                              {
+                                IdMovie = -1;
+                                add_update_movie(fi.FullName, select_item, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                                Search_parts(fi.FullName, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                                continue;
+                              }
                             }
                         }
                     }
@@ -9095,20 +8833,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if (result[0].ToString().ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches == false)
                   {
-                    LogMyFilms.Debug("only one match found - return result: '" + result[0].ToString() + "'");
+                    LogMyFilms.Debug("only one match found - return result: '" + result[0] + "'");
                     return result[0].ToString();
                   }
                   else
                   {
-                    LogMyFilms.Debug("only one match found - but no exact match: '" + result[0].ToString() + "'");
+                    LogMyFilms.Debug("only one match found - but no exact match: '" + result[0] + "'");
                   }
                 }
                 string wfile = null;
                 result.Sort();
-                ArrayList wresult = new ArrayList();
+                var wresult = new List<string>();
                 foreach (String s in result)
                 {
-                  LogMyFilms.Debug("Search_FileName - Searchresult: '" + s.ToString() + "'");
+                  LogMyFilms.Debug("Search_FileName - Searchresult: '" + s + "'");
                   if (string.IsNullOrEmpty(wfile))
                   {
                     wresult.Add(s);
@@ -9121,20 +8859,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                 }
                 LogMyFilms.Debug("Search_FileName - Total Searchresults: '" + wresult.Count + "'");
-                if (wresult.Count == 1 && (wresult[0].ToString().ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches == false))
-                    return wresult[0].ToString();
+                if (wresult.Count == 1 && (wresult[0].ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches == false))
+                    return wresult[0];
                 else
                 {
                   string singlefilefound = string.Empty;
                   int count = 0;
-                  foreach (string searchresult in wresult)
+                  foreach (string searchresult in wresult.Cast<string>().Where(searchresult => searchresult == filename || searchresult.ToLower().Contains(@"\" + filename.ToLower() + @".") || searchresult.ToLower().Contains(@"\" + filename.ToLower() + @"\")))
                   {
-                    if (searchresult == filename || searchresult.ToLower().Contains(@"\" + filename.ToLower() + @".") || searchresult.ToLower().Contains(@"\" + filename.ToLower() + @"\"))
-                    {
-                      LogMyFilms.Debug("full match found via file/directory compare -> '" + searchresult + "'");
-                      count = count + 1;
-                      singlefilefound = searchresult;
-                    }
+                    LogMyFilms.Debug("full match found via file/directory compare -> '" + searchresult + "'");
+                    count = count + 1;
+                    singlefilefound = searchresult;
                   }
                   if (count == 1)
                   {
@@ -9155,12 +8890,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (dlg.SelectedLabel == -1)
                         return "";
-                    return wresult[dlg.SelectedLabel].ToString();
+                    return wresult[dlg.SelectedLabel];
                 }
             }
             else // No Movie File Found
             {
-                LogMyFilms.Info("File not found for movie '" + filename.ToString() + "'; string search '" + wsearchfile.ToString() + "'");
+                LogMyFilms.Info("File not found for movie '" + filename + "'; string search '" + wsearchfile + "'");
                 return string.Empty;
             }
         }
@@ -9178,24 +8913,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string file = fileName;
             if (!recur)
             {
-                file = MediaPortal.Util.Utils.FilterFileName(fileName.ToLower());
-                string[] drives = Environment.GetLogicalDrives();
-                foreach (string drive in drives)
-                {
-                    if (MediaPortal.Util.Utils.getDriveType(drive) == 5) //cd or dvd drive
-                    {
-                        string driverLetter = String.Format(@"{0}:\", drive.Substring(0, 1));
-                        if (searchrep.Length > 0)
-                            searchrep = searchrep + ";" + driverLetter;
-                        else
-                            searchrep = driverLetter;
-                    }
-                }
-                file = Replace_String(file);
-                wsearchfile = file;
+              file = MediaPortal.Util.Utils.FilterFileName(fileName.ToLower());
+              string[] drives = Environment.GetLogicalDrives();
+              searchrep = (from drive in drives where MediaPortal.Util.Utils.getDriveType(drive) == 5 select String.Format(@"{0}:\", drive.Substring(0, 1))).Aggregate(searchrep, (current, driverLetter) => current.Length > 0 ? current + ";" + driverLetter : driverLetter);
+              file = Replace_String(file);
+              wsearchfile = file;
             }
             string[] SearchDir = oRegex.Split(searchrep);
-            oRegex = new System.Text.RegularExpressions.Regex(file);
+            oRegex = new Regex(file);
             string wpath;
             foreach (string path in SearchDir)
             {
@@ -9203,7 +8928,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     wpath = path + "\\";
                 else
                     wpath = path;
-                if (System.IO.Directory.Exists(wpath))
+                if (Directory.Exists(wpath))
                 {
                     DirectoryInfo dirsInf = new DirectoryInfo(wpath);
                     //On retourne une liste d'informations sur les fichiers contenus dans le répertoire
@@ -9211,23 +8936,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     //Si le nom d'un fichier correspond avec le nom du fichier recherché 
                     //on place son path dans la variable globale result.
-                    foreach (FileSystemInfo fi in filesInf)
+                    foreach (FileSystemInfo fi in from fi in filesInf let oMatches = oRegex.Matches(fi.Name.ToLower()) from Match oMatch in oMatches select fi)
                     {
-                        System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(fi.Name.ToLower());
-                        foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
-                        {
-                            if (MediaPortal.Util.Utils.IsVideo(fi.Name) || VirtualDirectory.IsImageFile(System.IO.Path.GetExtension(fi.Name)))
-                                result.Add(wpath + fi.Name);
-                            else
-                            {
-                                if (fi.Attributes.ToString() == "Directory")
-                                    if (System.IO.File.Exists(wpath.Trim() + fi.Name.Trim() + "\\VIDEO_TS\\VIDEO_TS.IFO"))
-                                        result.Add(wpath.Trim() + fi.Name.Trim() + "\\VIDEO_TS\\VIDEO_TS.IFO");
-                                    else
-                                        if (MediaPortal.Util.Utils.IsVideo(fi.Name))
-                                            result.Add(wpath.Trim() + fi.Name.Trim());
-                            }
-                        }
+                      if (MediaPortal.Util.Utils.IsVideo(fi.Name) || VirtualDirectory.IsImageFile(System.IO.Path.GetExtension(fi.Name)))
+                        result.Add(wpath + fi.Name);
+                      else
+                      {
+                        if (fi.Attributes.ToString() == "Directory")
+                          if (File.Exists(wpath.Trim() + fi.Name.Trim() + "\\VIDEO_TS\\VIDEO_TS.IFO"))
+                            result.Add(wpath.Trim() + fi.Name.Trim() + "\\VIDEO_TS\\VIDEO_TS.IFO");
+                          else
+                            if (MediaPortal.Util.Utils.IsVideo(fi.Name))
+                              result.Add(wpath.Trim() + fi.Name.Trim());
+                      }
                     }
                     //Si le parametre SearchSubDirs vaut true on réalise une 
                     //recherche récursive sur tous les sous-répertoires
@@ -9273,59 +8994,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIUtils.AddActorToMovie(iidmovie, iiActor, "actor");
 
                 VideoDatabase.AddActorInfoMovie(iiActor, actorMovie);
-                if (wzone == null)
-                    wzone = champselect;
-                else
-                    wzone = wzone + "\n" + champselect;
+                wzone = wzone == null ? champselect : wzone + "\n" + champselect;
             }
         }
 
         static public string SearchMovie(string filename, string StrDirStor)
         {
             //check if divx is on Disk
-            if (System.IO.File.Exists(filename) || System.IO.Directory.Exists(filename))
-            {
-                return filename;
-            }
-            else
-            {
-                string searchrep = StrDirStor;
-                DriveInfo[] allDrives = DriveInfo.GetDrives();
+          if (File.Exists(filename) || Directory.Exists(filename))
+          {
+            return filename;
+          }
+          else
+          {
+            string searchrep = StrDirStor;
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
 
-                foreach (DriveInfo d in allDrives)
-                {
-                    if ((d.DriveType.ToString() == "CDRom") && d.IsReady)
-                    {
-                        if (searchrep.Length > 0)
-                            searchrep = searchrep + ";" + d.Name;
-                        else
-                            searchrep = d.Name;
-                    }
-                }
-                string file = filename.Substring(filename.LastIndexOf(@"\") + 1);
-                System.Text.RegularExpressions.Regex oRegex;
-                oRegex = new System.Text.RegularExpressions.Regex(";");
-                string[] SearchDir = oRegex.Split(searchrep);
-                string wpath;
-                foreach (string path in SearchDir)
-                {
-                    if (!(path.LastIndexOf(@"\") == path.Length - 1))
-                        wpath = path + "\\";
-                    else
-                        wpath = path;
-                    if (System.IO.File.Exists(wpath + file) || System.IO.Directory.Exists(wpath + file))
-                        return (wpath + file);
-                    if ((MyFilms.conf.SearchSubDirs == false) || (!System.IO.Directory.Exists(wpath))) continue;
-                    foreach (string sFolderSub in Directory.GetDirectories(wpath, "*", SearchOption.AllDirectories))
-                    {
-                        if ((System.IO.File.Exists(sFolderSub + "\\" + file)) || (System.IO.Directory.Exists(sFolderSub + "\\" + file)))
-                        {
-                            return (sFolderSub + "\\" + file);
-                        }
-                    }
-                }
-                return "false";
+            searchrep = allDrives.Where(d => (d.DriveType.ToString() == "CDRom") && d.IsReady).Aggregate(
+              searchrep, (current, d) => current.Length > 0 ? current + ";" + d.Name : d.Name);
+            string file = filename.Substring(filename.LastIndexOf(@"\") + 1);
+            Regex oRegex;
+            oRegex = new Regex(";");
+            string[] SearchDir = oRegex.Split(searchrep);
+            string wpath;
+            foreach (string path in SearchDir)
+            {
+              wpath = path.LastIndexOf(@"\") != path.Length - 1 ? path + "\\" : path;
+              if (File.Exists(wpath + file) || Directory.Exists(wpath + file)) return (wpath + file);
+              if (MyFilms.conf.SearchSubDirs == false || !Directory.Exists(wpath)) continue;
+              foreach (string sFolderSub in Directory.GetDirectories(wpath, "*", SearchOption.AllDirectories).Where(sFolderSub => (File.Exists(sFolderSub + "\\" + file)) || (Directory.Exists(sFolderSub + "\\" + file))))
+              {
+                return (sFolderSub + "\\" + file);
+              }
             }
+            return "false";
+          }
         }
 
         static public bool CheckMovie(int idMovie)
@@ -9359,7 +9062,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 //#endif
                         GUIUtils.GetFilesForMovie(idMovie, ref movies); // using reflection to get VideoDatabase.GetFiles()
                       
-                        if (System.IO.File.Exists(/*movieDetails.Path+movieDetails.File*/(string)movies[0]))
+                        if (File.Exists(/*movieDetails.Path+movieDetails.File*/(string)movies[0]))
                         {
                             cdlabel = MediaPortal.Util.Utils.GetDriveSerial(movieDetails.Path);
                             VideoDatabase.UpdateCDLabel(movieDetails, cdlabel);
@@ -9386,10 +9089,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         static public void PlayMovieFromPlayList(bool NoResumeMovie, int iMovieIndex)
         {
             string filename;
-            if (iMovieIndex == -1)
-                filename = playlistPlayer.GetNext();
-            else
-                filename = playlistPlayer.Get(iMovieIndex);
+            filename = iMovieIndex == -1 ? playlistPlayer.GetNext() : playlistPlayer.Get(iMovieIndex);
             IMDBMovie movieDetails = new IMDBMovie();
             VideoDatabase.GetMovieInfo(filename, ref movieDetails);
             int idFile = VideoDatabase.GetFileId(filename);
@@ -9441,10 +9141,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             trailerPlayed = true;
             string filename;
-            if (iMovieIndex == -1)
-                filename = playlistPlayer.GetNext();
-            else
-                filename = playlistPlayer.Get(iMovieIndex);
+            filename = iMovieIndex == -1 ? playlistPlayer.GetNext() : playlistPlayer.Get(iMovieIndex);
             IMDBMovie movieDetails = new IMDBMovie();
             VideoDatabase.GetMovieInfo(filename, ref movieDetails);
             int idFile = VideoDatabase.GetFileId(filename);
@@ -9707,22 +9404,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!string.IsNullOrEmpty(directoryname))
             {
               files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files)
+              foreach (string filefound in files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl")) && MediaPortal.Util.Utils.IsVideo(filefound)))
               {
-                if ((filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl")) && MediaPortal.Util.Utils.IsVideo(filefound))
-                {
-                  wsize = new System.IO.FileInfo(filefound).Length;
-                  result.Add(filefound);
-                  resultsize.Add(wsize);
-                  filesfound[filesfoundcounter] = filefound;
-                  filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                  filesfoundcounter = filesfoundcounter + 1;
-                  LogMyFilms.Debug("(TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
-                }
+                wsize = new System.IO.FileInfo(filefound).Length;
+                result.Add(filefound);
+                resultsize.Add(wsize);
+                filesfound[filesfoundcounter] = filefound;
+                filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                filesfoundcounter = filesfoundcounter + 1;
+                LogMyFilms.Debug("(TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
               }
             }
-            
-            //Search Filenames with "title" in Trailer Searchpath
+
+          //Search Filenames with "title" in Trailer Searchpath
             if (ExtendedSearch && !string.IsNullOrEmpty(MyFilms.conf.StrDirStorTrailer))
             {
                 LogMyFilms.Debug("SearchTrailerLocal - starting ExtendedSearch in Searchdirectory: '" + MyFilms.conf.StrDirStorTrailer.ToString() + "'");
@@ -9767,18 +9461,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       LogMyFilms.Debug("(TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
                       files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-                      foreach (string filefound in files)
+                      foreach (string filefound in files.Where(filefound => MediaPortal.Util.Utils.IsVideo(filefound)))
                       {
-                        if (MediaPortal.Util.Utils.IsVideo(filefound))
-                        {
-                          wsize = new System.IO.FileInfo(filefound).Length;
-                          result.Add(filefound);
-                          resultsize.Add(wsize);
-                          filesfound[filesfoundcounter] = filefound;
-                          filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                          filesfoundcounter = filesfoundcounter + 1;
-                          LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
-                        }
+                        wsize = new System.IO.FileInfo(filefound).Length;
+                        result.Add(filefound);
+                        resultsize.Add(wsize);
+                        filesfound[filesfoundcounter] = filefound;
+                        filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                        filesfoundcounter = filesfoundcounter + 1;
+                        LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
                       }
                     }
                     else
@@ -9808,9 +9499,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             var sort = from fn in filesfound
                        orderby new FileInfo(fn).Length descending
                        select fn;
-            foreach (string n in filesfound)
+            foreach (string n in filesfound.Where(n => !string.IsNullOrEmpty(n)))
             {
-              if (!string.IsNullOrEmpty(n)) LogMyFilms.Debug("(Sorted Trailerfiles) ******* : '" + n + "'");
+              LogMyFilms.Debug("(Sorted Trailerfiles) ******* : '" + n + "'");
             }  
 
             Array.Sort(filesfoundsize);
@@ -10385,19 +10076,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return checkHasSubtitlesFromSubCentral(filenames, useMediaInfo, textCount);
         }
 
-        if (textCount > 0)
-          return true;
-        return false;
+        return textCount > 0;
       }
 
       private bool checkHasSubtitlesFromSubCentral(List<string> files, bool useMediaInfo, int textCount)
       {
         LogMyFilms.Debug(string.Format("Using SubCentral for checkHasSubtitles(), useMediaInfo = {0}, textCount = {1}", useMediaInfo.ToString(), textCount.ToString()));
-        List<FileInfo> fiFiles = new List<FileInfo>();
-        foreach (string file in files)
-        {
-          fiFiles.Add(new FileInfo(file));
-        }
+        List<FileInfo> fiFiles = files.Select(file => new FileInfo(file)).ToList();
         bool result = SubCentral.Utils.SubCentralUtils.MediaHasSubtitles(fiFiles, false, textCount, !useMediaInfo);
         LogMyFilms.Debug(string.Format("SubCentral returned {0}", result));
         return result;
@@ -10425,11 +10110,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (string.IsNullOrEmpty(file)) return false;
         FileInfo fi = new FileInfo(file);
-        if (fi != null)
-        {
-          return isWritable(fi);
-        }
-        return false;
+        return fi != null && this.isWritable(fi);
       }
 
       private void GUIWindowManager_OnNewMessage(GUIMessage message)
@@ -10717,9 +10398,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string persons = MyFilms.r[MyFilms.conf.StrIndex]["Persons"].ToString();
                 ArrayList w_tableau = new ArrayList();
                 w_tableau = MyFilms.Search_String(persons);
-                foreach (object t in w_tableau)
+                foreach (string personsname in from object t in w_tableau select t.ToString())
                 {
-                  string personsname = t.ToString();
                   if (!(File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
                   {
                     if (downloadPersonImage(personsname))
@@ -10755,9 +10435,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         person.Name = personname;
         lock (PersonstoDownloadQueue)
         {
-          foreach (DBPersonInfo personInfo in PersonstoDownloadQueue)
+          if (PersonstoDownloadQueue.Any(personInfo => personInfo.Name == personname))
           {
-            if (personInfo.Name == personname) return false;
+            return false;
           }
           if (!PersonstoDownloadQueue.Contains(person))
           {
