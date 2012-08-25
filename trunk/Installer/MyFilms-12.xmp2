@@ -819,6 +819,300 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{8ee640a9-a443-468a-848e-1f74037b02dc}-collection.png</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\collection.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Action And Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{637c0f68-590a-4230-8019-2900d2737c0f}-Action And Adventure.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Action And Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Children.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7a72a10b-2dc9-4d9b-9806-397aebfef42e}-Children.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Children.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Film Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c8fe6bdd-1cb5-4c83-99b1-0ad4bcbd9bc3}-Film Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Film Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Film-Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0718e5b6-27c0-4ed3-af8b-e6769ae82d82}-Film-Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Film-Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Neo-noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{90511b44-b61d-4064-8f9a-c30aa4850a2e}-Neo-noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Neo-noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\News.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{95f47276-ce42-492a-bc8c-565816ad8874}-News.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\News.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{72ed67da-866d-4ea3-932a-168585e5abed}-Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Reality-TV.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{66ff99c7-0040-4e1e-b679-2c8052bc1872}-Reality-TV.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Reality-TV.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Reality.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a3ecff71-c7fc-4766-8cba-4e429914d06b}-Reality.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Reality.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Sci-Fi.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d57b71b0-877c-4c81-abeb-f951161b0363}-Sci-Fi.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Sci-Fi.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Science Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{23f84187-274a-4c20-abc7-3a4197994d27}-Science Fiction.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Science Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Science-Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d43b1983-8092-4070-8d74-3b342dd84629}-Science-Fiction.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Science-Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Soap.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b2b96bb3-7b55-4bab-ab7e-fcf7269c0ff8}-Soap.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Soap.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Sports Film.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c0ac85e8-47b4-4e30-a2c4-c62d4e3de5c4}-Sports Film.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Sports Film.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Suspense.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0c2691ae-79bf-489c-8b5e-7d9c16ecc797}-Suspense.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Suspense.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Syfy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{624d0dfb-af36-4fb6-a548-2113fc229546}-Syfy.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Syfy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Talk-Show.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{44340b0c-7941-4b06-b1ca-0255002806f3}-Talk-Show.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Talk-Show.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\template.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{118ea85c-3ebd-4514-bd1d-86df2c51fb8b}-template.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\template.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilms.common.window.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4a630ed8-11f7-4f05-897d-6174f63aa57c}-MyFilms.common.window.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MyFilms.common.window.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\download.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{59f47003-f606-46f7-bfda-c154f68a9b83}-download.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\download.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Index.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ccc2e4c8-1c33-4d5c-aadf-0ce3b3d3599d}-Index.jpg</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Index.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{963037d1-c22c-4d36-aea1-6e272503e83b}-myfilms_latest_nocover.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{478fcc4e-aac6-4269-a8d9-b834c50ab6fe}-Persons.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Videothumbframe.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{87ad66e6-7b2e-4412-9972-add23a612659}-Videothumbframe.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Videothumbframe.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Action And Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{06a222b4-9e30-4b4f-adce-b7fbe3c13b44}-Action And Adventure.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Action And Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Children.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0f3629af-0a79-40d6-ad0c-577653505bfc}-Children.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Children.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Film Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{994d5f52-3c44-4e44-826e-9f5060d3608c}-Film Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Film Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Film-Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{48877574-e2bb-4d59-b7c1-f89c295bb422}-Film-Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Film-Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Neo-noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3803c7d0-d28f-4e38-82c3-fd6917c9cc6f}-Neo-noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Neo-noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\News.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a2a17698-ce33-4f06-a59c-a78f94d04d42}-News.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\News.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c46d415d-0a1b-4893-9dbf-298c3e1cb1f6}-Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Reality-TV.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f9fb094a-3860-45f6-a62e-cb8f01ca4b6f}-Reality-TV.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Reality-TV.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Reality.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f1a050db-d432-4db2-8506-5ba05ea1de70}-Reality.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Reality.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Sci-Fi.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1e17c25f-7ff8-47d4-9efc-2217ae722192}-Sci-Fi.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Sci-Fi.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Science Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1ae72af3-85b8-43fc-a166-f9a1fe8f1931}-Science Fiction.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Science Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Science-Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{00d50ce9-18f1-430e-891d-3aa35ab596ad}-Science-Fiction.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Science-Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Soap.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{76062adf-a785-494f-9101-b08b15f799cb}-Soap.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Soap.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Sports Film.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4001343d-99d7-4c7d-a60d-c85eda36c495}-Sports Film.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Sports Film.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Suspense.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1a668dc9-fb9d-49a2-a910-80628f88d60b}-Suspense.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Suspense.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Syfy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{69db0b57-038d-42f0-b6c2-0f70c2ca358a}-Syfy.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Syfy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Talk-Show.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{799674e0-e969-4d1d-83fe-0fe6859bc63d}-Talk-Show.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Talk-Show.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\template.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{93cf9236-e2f6-4ac9-b08d-c352be160719}-template.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\template.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2504,6 +2798,69 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{c885bdd5-bf2b-4c3c-bbc3-0b8e5e28dcc3}-Wrestling.jpg</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Wrestling.jpg</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Eastern.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{37336f34-8e58-4879-8575-cf5eadf58b4b}-Eastern.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Eastern.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Film noir.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e816309b-5411-4581-bfe5-ec3324aad7cd}-Film noir.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Film noir.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Genre.psd</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{755566fe-319c-4541-971a-c49f808d2b89}-Genre.psd</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Genre.psd</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Holiday.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9a97e963-844b-4944-95f5-1c7f0ea7afd4}-Holiday.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Holiday.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Indie.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{aa5ca5fd-732d-4d21-92ec-b6655dc1103c}-Indie.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Indie.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Neo-noir.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9e253103-1885-4c97-b0ab-f04aeae1b075}-Neo-noir.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Neo-noir.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Science Fiction.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3b23986a-edc7-4604-83ac-c00c4385e1c4}-Science Fiction.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Science Fiction.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Sports Film.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c6bd2e23-7ad7-4f51-942e-b827fbf702a5}-Sports Film.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Sports Film.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\ViewImages\category\Suspense.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0f8a2260-c86a-4209-8ff7-96d3df099842}-Suspense.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Suspense.jpg</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2661,9 +3018,17 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
         <ParentGroup />
         <DisplayName>AddOns</DisplayName>
         <DefaulChecked>false</DefaulChecked>
-        <Description>AddOns: Updated DLLs for Plugins not yet publically available (Currently none)</Description>
+        <Description>AddOns: Updated DLLs for Plugins not yet publically available - MP translator for MyFilms</Description>
         <Files>
-          <Items />
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\MPLanguageTool.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8a4831c5-d449-4d35-abce-5cc190cf1bbc}-MPLanguageTool.exe</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Tools\MPLanguageTool.exe</DestinationFilename>
+            </FileItem>
+          </Items>
         </Files>
       </GroupItem>
       <GroupItem Name="AMCinstaller">
@@ -2830,13 +3195,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.13\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0fa82247-f1d3-4dc2-8081-e114dc739a02}-MyFilmsActorsInfo.xml</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.13\DefaultWide\MyFilmsCoverManager.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{7ec4508f-c8ac-483b-98e0-c452c31536b4}-MyFilmsCoverManager.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsCoverManager.xml</DestinationFilename>
@@ -2882,13 +3240,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <LocalFileName>Skin.13\DefaultWide\MyFilms.ListView.Cover.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{eefb9ce9-beaf-4fcc-a6d3-708bd4a1989a}-MyFilms.ListView.Cover.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilms.ListView.Cover.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.13\DefaultWide\Media\myfilms_latest_nocover.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{07cbbb8c-c6fd-4b8e-91c1-914d08e17e40}-myfilms_latest_nocover.png</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\myfilms_latest_nocover.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -3358,6 +3709,34 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\Western.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{6e40c948-b9ea-4b2d-b5a7-a90ddee708bc}-Western.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\Western.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\download.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{95d2478f-9e6e-4552-9d27-b60bb125ebcd}-download.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\download.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\Index.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{78409e08-9d80-49de-9d60-a747861e6fb1}-Index.jpg</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\Index.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c7fca3dd-e3e9-42b8-8f9e-1e9d5f8bccaf}-myfilms_latest_nocover.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{748b5a91-95c6-4298-9078-6b1725f7396f}-Persons.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -4587,6 +4966,300 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <ZipFileName>Installer{CopyFile}\{5f187a95-189f-4a2f-a633-85490d28b60c}-WolPowerManager_ButtonRed.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\WOLPowerManager\WolPowerManager_ButtonRed.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Action And Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6b3e5f6a-c597-4823-95e4-898b57fc3fce}-Action And Adventure.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Action And Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Children.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5ea42b45-dfbf-4560-9d77-4e3c3c11b031}-Children.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Children.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Film Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a59b7040-5daa-473f-99de-d7df78cc6122}-Film Noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Film Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Film-Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{36555c7f-bc88-4e37-952e-092c288e0c7d}-Film-Noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Film-Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Neo-noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ef317de1-d235-42fc-a05c-3befa38a33c3}-Neo-noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Neo-noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\News.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a0709dca-f448-4e7b-94f3-58e56eefbf49}-News.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\News.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{dcf9003a-a0ac-4caf-b2f8-0a0af2bd7177}-Noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Reality-TV.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{dfd3f578-2200-4e02-b898-3732222cf131}-Reality-TV.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Reality-TV.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Reality.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{91fca4e3-06d4-4d7c-adda-361c17d4b0f3}-Reality.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Reality.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Sci-Fi.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c30747cc-33ab-4400-8c7f-2d90da610617}-Sci-Fi.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Sci-Fi.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Science Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e881e1a9-a32b-4ed0-8fe7-50158cfee2bb}-Science Fiction.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Science Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Science-Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{11fdf41b-7200-410d-aea8-d4842f5aae46}-Science-Fiction.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Science-Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Soap.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9bb4d8d6-746f-47c4-b9eb-702e71cb6f56}-Soap.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Soap.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Sports Film.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6f4e7abb-c3a1-4d44-b25b-22863b8eeb3c}-Sports Film.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Sports Film.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Suspense.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7c2af50b-d052-4936-a406-280d90b5bef9}-Suspense.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Suspense.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Syfy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8abc657d-5f7b-4cc3-9ed9-1a08d71ccec1}-Syfy.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Syfy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Talk-Show.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{852fb04a-e722-4ed0-a14b-b99a70b7d44c}-Talk-Show.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\Talk-Show.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\template.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f25b08c4-f2f7-4e84-9271-0a59412dd9a4}-template.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\Logos\MyFilms\template.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilms.common.window.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3e570ce2-e744-48b9-80d9-87585c993a36}-MyFilms.common.window.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\MyFilms.common.window.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\download.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4c930ed4-ccf4-480c-8ca8-b14b9b986b4c}-download.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\MyFilms\download.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Index.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9bd1333e-cdb6-484b-a3ef-33138cec4775}-Index.jpg</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\MyFilms\Index.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a441c311-c1c4-4a54-a4df-b28e2eee9431}-myfilms_latest_nocover.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e9d626a7-2df2-4b00-8eb2-bb3f7f075f31}-Persons.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Videothumbframe.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{843ed7f7-bb6f-45c8-9f16-40bdbeb8c9a0}-Videothumbframe.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\MyFilms\Videothumbframe.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Action And Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{38cf4ae6-edda-4a67-a8c1-efdeb5d6904c}-Action And Adventure.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Action And Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Children.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f5dd27a4-11b5-4990-ad17-d12c9a325061}-Children.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Children.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Film Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1b31932e-90a5-4662-b2dd-022343c48dea}-Film Noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Film Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Film-Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ec86ed80-ff38-4ad1-a197-0d432bd06a6a}-Film-Noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Film-Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Neo-noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ff9ed7a6-ffc3-4932-a3d4-08a930694511}-Neo-noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Neo-noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\News.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9f3f6138-61b9-419e-935e-8b77ee7c99e0}-News.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\News.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5d241f93-a1f8-40c3-a37c-54b5d268dc46}-Noir.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Reality-TV.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{93d383a4-83ba-45af-87e6-66d1a998437c}-Reality-TV.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Reality-TV.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Reality.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9488f4d0-a8a7-421b-9dcf-d79a2881d8a1}-Reality.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Reality.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Sci-Fi.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6fd686ec-7b21-4a49-9096-451c0a932abf}-Sci-Fi.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Sci-Fi.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Science Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{002c8618-1b67-4b7e-ba1a-1662d6601476}-Science Fiction.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Science Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Science-Fiction.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f121586b-e9d6-4271-b5d0-912a722f1ad5}-Science-Fiction.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Science-Fiction.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Soap.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{326bfc74-a9a7-432e-9d02-a99208f4f257}-Soap.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Soap.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Sports Film.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2d69a2a6-9666-4096-8345-0de4cd762dac}-Sports Film.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Sports Film.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Suspense.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d9e06f7d-95f0-4be6-ad5b-d42534404b39}-Suspense.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Suspense.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Syfy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{47fb0de1-7899-4a6f-8741-08afe96d3e88}-Syfy.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Syfy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Talk-Show.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0a3ec513-cf9a-4119-9f04-96647718e429}-Talk-Show.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\Talk-Show.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\template.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7aab7794-c04b-423a-9b4e-32ac9f0e1f3a}-template.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\template.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -5520,8 +6193,8 @@ Please refer to the Wiki online documentation.</Value>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players.Video" />
+            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
@@ -5539,7 +6212,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2406</Revision>
+      <Revision>2436</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -5551,7 +6224,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-08-21T04:46:12.7498851+02:00</ReleaseDate>
+    <ReleaseDate>2012-08-25T09:17:46.3598841+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -6386,6 +7059,300 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\collection.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{8ee640a9-a443-468a-848e-1f74037b02dc}-collection.png</ZipFileName>
         <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\collection.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Action And Adventure.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{637c0f68-590a-4230-8019-2900d2737c0f}-Action And Adventure.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Action And Adventure.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Children.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7a72a10b-2dc9-4d9b-9806-397aebfef42e}-Children.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Children.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Film Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c8fe6bdd-1cb5-4c83-99b1-0ad4bcbd9bc3}-Film Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Film Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Film-Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0718e5b6-27c0-4ed3-af8b-e6769ae82d82}-Film-Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Film-Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Neo-noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{90511b44-b61d-4064-8f9a-c30aa4850a2e}-Neo-noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Neo-noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\News.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{95f47276-ce42-492a-bc8c-565816ad8874}-News.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\News.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{72ed67da-866d-4ea3-932a-168585e5abed}-Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Reality-TV.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{66ff99c7-0040-4e1e-b679-2c8052bc1872}-Reality-TV.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Reality-TV.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Reality.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a3ecff71-c7fc-4766-8cba-4e429914d06b}-Reality.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Reality.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Sci-Fi.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d57b71b0-877c-4c81-abeb-f951161b0363}-Sci-Fi.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Sci-Fi.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Science Fiction.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{23f84187-274a-4c20-abc7-3a4197994d27}-Science Fiction.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Science Fiction.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Science-Fiction.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d43b1983-8092-4070-8d74-3b342dd84629}-Science-Fiction.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Science-Fiction.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Soap.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b2b96bb3-7b55-4bab-ab7e-fcf7269c0ff8}-Soap.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Soap.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Sports Film.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c0ac85e8-47b4-4e30-a2c4-c62d4e3de5c4}-Sports Film.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Sports Film.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Suspense.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0c2691ae-79bf-489c-8b5e-7d9c16ecc797}-Suspense.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Suspense.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Syfy.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{624d0dfb-af36-4fb6-a548-2113fc229546}-Syfy.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Syfy.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Talk-Show.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{44340b0c-7941-4b06-b1ca-0255002806f3}-Talk-Show.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Talk-Show.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\template.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{118ea85c-3ebd-4514-bd1d-86df2c51fb8b}-template.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\template.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\MyFilms.common.window.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4a630ed8-11f7-4f05-897d-6174f63aa57c}-MyFilms.common.window.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MyFilms.common.window.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\download.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{59f47003-f606-46f7-bfda-c154f68a9b83}-download.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\download.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Index.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ccc2e4c8-1c33-4d5c-aadf-0ce3b3d3599d}-Index.jpg</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Index.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{963037d1-c22c-4d36-aea1-6e272503e83b}-myfilms_latest_nocover.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{478fcc4e-aac6-4269-a8d9-b834c50ab6fe}-Persons.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Videothumbframe.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{87ad66e6-7b2e-4412-9972-add23a612659}-Videothumbframe.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Videothumbframe.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Action And Adventure.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{06a222b4-9e30-4b4f-adce-b7fbe3c13b44}-Action And Adventure.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Action And Adventure.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Children.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0f3629af-0a79-40d6-ad0c-577653505bfc}-Children.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Children.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Film Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{994d5f52-3c44-4e44-826e-9f5060d3608c}-Film Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Film Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Film-Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{48877574-e2bb-4d59-b7c1-f89c295bb422}-Film-Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Film-Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Neo-noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{3803c7d0-d28f-4e38-82c3-fd6917c9cc6f}-Neo-noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Neo-noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\News.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a2a17698-ce33-4f06-a59c-a78f94d04d42}-News.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\News.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c46d415d-0a1b-4893-9dbf-298c3e1cb1f6}-Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Reality-TV.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f9fb094a-3860-45f6-a62e-cb8f01ca4b6f}-Reality-TV.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Reality-TV.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Reality.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f1a050db-d432-4db2-8506-5ba05ea1de70}-Reality.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Reality.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Sci-Fi.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1e17c25f-7ff8-47d4-9efc-2217ae722192}-Sci-Fi.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Sci-Fi.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Science Fiction.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1ae72af3-85b8-43fc-a166-f9a1fe8f1931}-Science Fiction.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Science Fiction.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Science-Fiction.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{00d50ce9-18f1-430e-891d-3aa35ab596ad}-Science-Fiction.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Science-Fiction.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Soap.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{76062adf-a785-494f-9101-b08b15f799cb}-Soap.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Soap.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Sports Film.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4001343d-99d7-4c7d-a60d-c85eda36c495}-Sports Film.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Sports Film.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Suspense.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1a668dc9-fb9d-49a2-a910-80628f88d60b}-Suspense.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Suspense.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Syfy.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{69db0b57-038d-42f0-b6c2-0f70c2ca358a}-Syfy.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Syfy.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Talk-Show.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{799674e0-e969-4d1d-83fe-0fe6859bc63d}-Talk-Show.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Talk-Show.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\template.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{93cf9236-e2f6-4ac9-b08d-c352be160719}-template.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\template.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -8035,6 +9002,69 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Eastern.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{37336f34-8e58-4879-8575-cf5eadf58b4b}-Eastern.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Eastern.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Film noir.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e816309b-5411-4581-bfe5-ec3324aad7cd}-Film noir.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Film noir.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Genre.psd</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{755566fe-319c-4541-971a-c49f808d2b89}-Genre.psd</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Genre.psd</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Holiday.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9a97e963-844b-4944-95f5-1c7f0ea7afd4}-Holiday.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Holiday.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Indie.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{aa5ca5fd-732d-4d21-92ec-b6655dc1103c}-Indie.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Indie.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Neo-noir.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9e253103-1885-4c97-b0ab-f04aeae1b075}-Neo-noir.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Neo-noir.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Science Fiction.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{3b23986a-edc7-4604-83ac-c00c4385e1c4}-Science Fiction.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Science Fiction.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Sports Film.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c6bd2e23-7ad7-4f51-942e-b827fbf702a5}-Sports Film.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Sports Film.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\ViewImages\category\Suspense.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0f8a2260-c86a-4209-8ff7-96d3df099842}-Suspense.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\ViewImages\category\Suspense.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\MyFilms\Catalog\SampleMovies.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{e6538f16-0876-4e58-8f22-b6adcce864ea}-SampleMovies.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Catalog\SampleMovies.xml</DestinationFilename>
@@ -8172,6 +9202,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{9a08bd0d-8941-432c-822e-91c17f61c115}-Titanic.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\Titanic (1997)\Titanic.wmv</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\MPLanguageTool.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8a4831c5-d449-4d35-abce-5cc190cf1bbc}-MPLanguageTool.exe</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Tools\MPLanguageTool.exe</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -8224,13 +9261,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.13\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0fa82247-f1d3-4dc2-8081-e114dc739a02}-MyFilmsActorsInfo.xml</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin.13\DefaultWide\MyFilmsCoverManager.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7ec4508f-c8ac-483b-98e0-c452c31536b4}-MyFilmsCoverManager.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsCoverManager.xml</DestinationFilename>
@@ -8276,13 +9306,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.13\DefaultWide\MyFilms.ListView.Cover.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{eefb9ce9-beaf-4fcc-a6d3-708bd4a1989a}-MyFilms.ListView.Cover.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilms.ListView.Cover.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.13\DefaultWide\Media\myfilms_latest_nocover.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{07cbbb8c-c6fd-4b8e-91c1-914d08e17e40}-myfilms_latest_nocover.png</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\myfilms_latest_nocover.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -8752,6 +9775,34 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\Western.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{6e40c948-b9ea-4b2d-b5a7-a90ddee708bc}-Western.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\Western.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\download.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{95d2478f-9e6e-4552-9d27-b60bb125ebcd}-download.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\download.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\Index.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{78409e08-9d80-49de-9d60-a747861e6fb1}-Index.jpg</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\Index.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c7fca3dd-e3e9-42b8-8f9e-1e9d5f8bccaf}-myfilms_latest_nocover.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\myfilms_latest_nocover.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{748b5a91-95c6-4298-9078-6b1725f7396f}-Persons.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
