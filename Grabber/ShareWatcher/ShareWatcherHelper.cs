@@ -51,7 +51,8 @@ namespace ShareWatcherHelper
     private ArrayList m_Events = null;
 
     private Timer m_Timer = null;
-    private int m_TimerInterval = 2000; // milliseconds
+
+    private const int m_TimerInterval = 2000; // milliseconds
 
     public static event MediaFoundEventDelegate MediaFound;
     public delegate void MediaFoundEventDelegate(List<string> mediafiles, bool removeorphaned);
@@ -88,14 +89,7 @@ namespace ShareWatcherHelper
 
     public void SetMonitoring(bool status)
     {
-      if (status)
-      {
-        this.bMonitoring = true;
-      }
-      else
-      {
-        this.bMonitoring = false;
-      }
+      this.bMonitoring = status;
     }
 
     public void ChangeMonitoring(bool status)
@@ -177,7 +171,7 @@ namespace ShareWatcherHelper
           this.m_Watchers.Add(watcherDirectory);
 
           // Start Timer for processing events
-          this.m_Timer = new Timer(this.m_TimerInterval);
+          this.m_Timer = new Timer(m_TimerInterval);
           this.m_Timer.Elapsed += new ElapsedEventHandler(this.ProcessEvents);
           this.m_Timer.AutoReset = true;
           this.m_Timer.Enabled = watcherFile.EnableRaisingEvents;
@@ -327,7 +321,6 @@ namespace ShareWatcherHelper
       catch (IOException)
       {
         // The file is not closed yet. Ignore the event, it will be processed by the Change event
-        return;
       }
 
       //MyFilmsDB.AddSong(strFileName);

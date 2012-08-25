@@ -100,7 +100,6 @@ namespace MyFilmsPlugin.Configuration
       catch (Exception)
       {
         MessageBox.Show("Cannot write to Server directory - Missing access rights? - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        return;
       }
     }
 
@@ -146,7 +145,6 @@ namespace MyFilmsPlugin.Configuration
       catch (Exception)
       {
         MessageBox.Show("Cannot copy to local directory - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        return;
       }
     }
 

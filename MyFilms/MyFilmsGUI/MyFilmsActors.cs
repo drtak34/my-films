@@ -332,10 +332,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             {
                                 MyFilms.conf.Wselectedlabel = facadeView.SelectedListItem.Label;
                                 Change_LayOut(MyFilms.conf.StrLayOut);
-                                if (facadeView.SelectedListItem.IsFolder)
-                                    MyFilms.conf.Boolreturn = false;
-                                else
-                                    MyFilms.conf.Boolreturn = true;
+                                MyFilms.conf.Boolreturn = !facadeView.SelectedListItem.IsFolder;
                                 //do
                                 //{
                                 //    if (MyFilms.conf.StrTitleSelect != "") MyFilms.conf.StrTitleSelect += MyFilms.conf.TitleDelim;

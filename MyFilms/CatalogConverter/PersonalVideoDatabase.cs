@@ -150,10 +150,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                   
                     destXml.WriteStartElement("Movie");
                     string wID = nodeDVD.SelectSingleNodeFast("num").InnerText;
-                    if (!string.IsNullOrEmpty(wID))
-                        WriteAntAtribute(destXml, "num", wID);
-                    else
-                        WriteAntAtribute(destXml, "num", "9999");
+                    WriteAntAtribute(destXml, "num", !string.IsNullOrEmpty(wID) ? wID : "9999");
                     if (nodeDVD.SelectSingleNodeFast("origtitle") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNodeFast("origtitle").InnerText))
                       WriteAntAtribute(destXml, "origtitle", nodeDVD.SelectSingleNodeFast("origtitle").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("title") != null && nodeDVD.SelectSingleNodeFast("title").InnerText.Length > 0)

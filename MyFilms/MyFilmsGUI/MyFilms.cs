@@ -496,7 +496,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
     private bool Context_Menu = false;
     //private string currentConfig;
-    private string strPluginName = "MyFilms";
+    private const string strPluginName = "MyFilms";
 
     private System.Threading.Timer _fanartTimer = null;
 
@@ -3812,7 +3812,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (!string.IsNullOrEmpty(fanartDirectory) && Directory.Exists(fanartDirectory))
       {
-        string searchname = "*.jpg";
+        const string searchname = "*.jpg";
         string[] files = Directory.GetFiles(fanartDirectory, searchname, SearchOption.TopDirectoryOnly);
         if (files.Length > 0)
           foreach (string file in files)
@@ -6035,7 +6035,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // clear facade
               GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
-              if (movies.Count() == 0)
+              if (!movies.Any())
               {
                 GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoLatestMovies");
                 DoBack(); return;
@@ -6108,7 +6108,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // clear facade
               GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
-              if (movies.Count() == 0)
+              if (!movies.Any())
               {
                 GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoPopularMovies");
                 DoBack(); return;
@@ -6181,7 +6181,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // clear facade
               GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
-              if (movies.Count() == 0)
+              if (!movies.Any())
               {
                 GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoNowPlayingMovies");
                 DoBack(); return;
@@ -6254,7 +6254,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // clear facade
               GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
-              if (movies.Count() == 0)
+              if (!movies.Any())
               {
                 GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoTopRatedMovies");
                 DoBack(); return;
@@ -6327,7 +6327,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // clear facade
               GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
-              if (movies.Count() == 0)
+              if (!movies.Any())
               {
                 GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "NoUpcomingMovies");
                 DoBack(); return;
@@ -6561,7 +6561,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       StopLoadingFilmlistDetails = false;
       string CoverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
-      string wStrSort = "TMDB";
+      const string wStrSort = "TMDB";
 
       // if there is a Default.jpg in the view subfolder
       // string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
@@ -9680,8 +9680,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
             //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
-            string url = "http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films";
-            string zoom = "150";
+            const string url = "http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films";
+            const string zoom = "150";
 
             //Load Webbrowserplugin with the URL
             LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
@@ -11419,7 +11419,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //Load Webbrowserplugin with the URL
             //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
             string url = ImdbBaseUrl + string.Empty;
-            string zoom = "100";
+            const string zoom = "100";
             //value = value.Replace("%link%", url);
             //value = value.Replace("%zoom%", zoom);
             LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
@@ -11780,7 +11780,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
       //string url = ImdbBaseUrl + "";
       string url = string.Empty;
-      string zoom = "150";
+      const string zoom = "150";
 
       //First search corresponding URL for the movie/person ...
       switch (type)
@@ -13132,7 +13132,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // first select the area where to make random search on - "all", "category", "year", "country"
       AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      List<string> choiceSearch = new List<string>();
       ArrayList w_tableau = new ArrayList();
       ArrayList wsub_tableau = new ArrayList();
       bool GetItems = false;
@@ -14782,7 +14782,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  return; // ignore the file changed event
 
         bool success = false; // result of try open for read
-        int maxretries = 10; // max retries 10 * 3000 = 30 seconds
+        const int maxretries = 10; // max retries 10 * 3000 = 30 seconds
         int i = 0;
 
         while (!success && i < maxretries)
@@ -14885,7 +14885,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           Thread.Sleep(250);
 
-          int maxretries = 10; // max retries 10 * 500 = 5 seconds
+          const int maxretries = 10; // max retries 10 * 500 = 5 seconds
           int i = 0;
           bool success = false; // result of update operation
 

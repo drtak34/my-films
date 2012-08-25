@@ -40,11 +40,7 @@ namespace MPLanguageTool
 
     public string GetTranslation()
     {
-      if (edValue.Text == "")
-      {
-        return null;
-      }
-      return edValue.Text;
+      return this.edValue.Text == "" ? null : this.edValue.Text;
     }
 
     private void btnOK_Click(object sender, EventArgs e)

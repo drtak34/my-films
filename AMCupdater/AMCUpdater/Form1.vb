@@ -980,7 +980,7 @@ Public Class Form1
         Dim currentPath As String
         currentPath = txtParserFilePath.Text
         If currentPath.Contains(";") = True Then
-            currentPath.Substring(currentPath.IndexOf(";") + 1)
+            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
         End If
         Try
             With OpenFileDialog1
@@ -1017,7 +1017,7 @@ Public Class Form1
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
         If currentPath.Contains(";") = True Then
-            currentPath.Substring(currentPath.IndexOf(";") + 1)
+            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
         End If
         Try
             With OpenFileDialog1
@@ -1182,7 +1182,7 @@ Public Class Form1
         Dim currentPath As String
         currentPath = txtManualInternetParserPath.Text
         If currentPath.Contains(";") = True Then
-            currentPath.Substring(currentPath.IndexOf(";") + 1)
+            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
         End If
         Try
             With OpenFileDialog1
@@ -2437,7 +2437,7 @@ Public Class Form1
         'Console.WriteLine(dgExcludedFileStrings.Rows.Count)
         Dim dgRow As System.Windows.Forms.DataGridViewRow
         Dim ExcludedFileString As String = String.Empty
-        For Each dgRow In dgExcludedFileStrings.Rows
+        For Each dgRow In dgExcludedFileStrings.Rows.AsQueryable()
             If dgRow.Cells(0).Value IsNot Nothing Then
                 If dgRow.Cells(0).Value.ToString.Length > 0 Then
                     ExcludedFileString += dgRow.Cells(0).Value.ToString & "|"
@@ -2451,7 +2451,7 @@ Public Class Form1
         'CurrentSettings.Excluded_Files_Table = dgExcludedFileStrings.DataSource
 
         Dim ExcludedFolderString As String = String.Empty
-        For Each dgRow In dgExcludedFolderStrings.Rows
+        For Each dgRow In dgExcludedFolderStrings.Rows.AsQueryable()
             If dgRow.Cells(0).Value IsNot Nothing Then
                 If dgRow.Cells(0).Value.ToString.Length > 0 Then
                     ExcludedFolderString += dgRow.Cells(0).Value.ToString & "|"
@@ -2464,7 +2464,7 @@ Public Class Form1
         CurrentSettings.Excluded_Folder_Strings = ExcludedFolderString
 
         Dim FilterString As String = String.Empty
-        For Each dgRow In dgFilterStrings.Rows
+        For Each dgRow In dgFilterStrings.Rows.AsQueryable()
             If dgRow.Cells(0).Value IsNot Nothing Then
                 If dgRow.Cells(0).Value.ToString.Length > 0 Then
                     FilterString += dgRow.Cells(0).Value.ToString & "|"
@@ -2477,7 +2477,7 @@ Public Class Form1
         CurrentSettings.Filter_Strings = FilterString
 
         Dim EditionString As String = String.Empty
-        For Each dgRow In dgEditionStrings.Rows
+        For Each dgRow In dgEditionStrings.Rows.AsQueryable()
             If dgRow.Cells(0).Value IsNot Nothing And dgRow.Cells(1).Value IsNot Nothing Then
                 If dgRow.Cells(0).Value.ToString.Length > 0 And dgRow.Cells(1).Value.ToString.Length > 0 Then
                     EditionString += dgRow.Cells(0).Value.ToString & "|" & dgRow.Cells(1).Value.ToString & ";"
@@ -2713,7 +2713,7 @@ Public Class Form1
         Dim currentPath As String
         currentPath = txtFanartFolder.Text
         If currentPath.Contains(";") = True Then
-            currentPath.Substring(currentPath.IndexOf(";") + 1)
+            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
         End If
         Try
             With FolderBrowserDialog1
@@ -2737,7 +2737,7 @@ Public Class Form1
         Dim currentPath As String
         currentPath = txtPersonArtworkFolder.Text
         If currentPath.Contains(";") = True Then
-            currentPath.Substring(currentPath.IndexOf(";") + 1)
+            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
         End If
         Try
             With FolderBrowserDialog1
@@ -2768,18 +2768,18 @@ Public Class Form1
     Private Sub VidéoBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VidéoBindingNavigatorSaveItem.Click
 
         BindingNavigatorPositionItem.Focus()
-        Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
+        Dim destXml As New System.Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
         destXml.WriteStartDocument(False)
-        destXml.Formatting = Xml.Formatting.Indented
+        destXml.Formatting = System.Xml.Formatting.Indented
         myMovieCatalog.WriteXml(destXml)
         destXml.Close()
     End Sub
 
     Private Sub SpeichernToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SpeichernToolStripButton.Click
         BindingNavigatorPositionItem.Focus()
-        Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
+        Dim destXml As New System.Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
         destXml.WriteStartDocument(False)
-        destXml.Formatting = Xml.Formatting.Indented
+        destXml.Formatting = System.Xml.Formatting.Indented
         myMovieCatalog.WriteXml(destXml)
         destXml.Close()
     End Sub

@@ -188,7 +188,7 @@ class XmlConf
     /// </summary>
     public ListNode find(List<ListNode> list, string name)
     {
-		ListNode _l = list.Find(delegate(ListNode l) { return l._Tag.Equals(name); });
+		ListNode _l = list.Find(l => l._Tag.Equals(name));
 		if(_l != null)
 			return _l;
 		_l = new ListNode(name, "", "", "", "", "", "", "", "");

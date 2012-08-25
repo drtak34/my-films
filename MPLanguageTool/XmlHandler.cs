@@ -116,11 +116,7 @@ namespace MPLanguageTool
       string xml = BuildFileName(languageID, true);
       if (!File.Exists(xml))
       {
-        if (languageID == null)
-        {
-          return null;
-        }
-        return new DataTable();
+        return languageID == null ? null : new DataTable();
       }
 
       DataTable translations = new DataTable();
@@ -319,11 +315,7 @@ namespace MPLanguageTool
         XmlDocument doc = new XmlDocument();
         doc.Load(xml);
         XmlElement root = doc.DocumentElement;
-        if (root == null)
-        {
-          return false;
-        }
-        return true;
+        return root != null;
       }
       catch (Exception)
       {

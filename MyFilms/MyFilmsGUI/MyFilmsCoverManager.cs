@@ -214,16 +214,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected bool AllowView(View view)
         {
-            if (view == View.List)
+            switch (view)
+            {
+              case View.List:
+              case View.AlbumView:
+              case View.PlayList:
                 return false;
-
-            if (view == View.AlbumView)
-                return false;
-
-            if (view == View.PlayList)
-                return false;
-            
-            return true;
+              default:
+                return true;
+            }
         }
 
         private void UpdateLayoutButton()
@@ -296,10 +295,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 if (m_Facade.Count > m_PreviousSelectedItem)
                 {
-                    if (m_PreviousSelectedItem <= 0)
-                        m_Facade.SelectedListItemIndex = 0;
-                    else
-                        m_Facade.SelectedListItemIndex = m_PreviousSelectedItem;                    
+                    m_Facade.SelectedListItemIndex = m_PreviousSelectedItem <= 0 ? 0 : m_PreviousSelectedItem;                    
 
                     // Work around for Filmstrip not allowing to programmatically select item
                     if (m_Facade.CurrentLayout == GUIFacadeControl.Layout.Filmstrip)
@@ -1044,10 +1040,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         void setDefaultCover(MFCover cover)
         {
-          if (!File.Exists(cover.FullPath))
-            NewArtworkFileName = "";
-          else
-            NewArtworkFileName = cover.FullPath;
+          NewArtworkFileName = !File.Exists(cover.FullPath) ? "" : cover.FullPath;
           MyFilmsDetail.setGUIProperty("picture", NewArtworkFileName);
           return;
 
@@ -1231,69 +1224,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      private string fullPath;
-      public string FullPath
-      {
-        get { return fullPath; }
-        set { fullPath = value; }
-      }
+      public string FullPath { get; set; }
 
-      private string fileName;
-      public string FileName
-      {
-        get { return fileName; }
-        set { fileName = value; }
-      }
+      public string FileName { get; set; }
 
-      private long imageSize;
-      public long ImageSize
-      {
-        get { return imageSize; }
-        set { imageSize = value; }
-      }
+      public long ImageSize { get; set; }
 
-      private string imageSizeFriendly;
-      public string ImageSizeFriendly
-      {
-        get { return imageSizeFriendly; }
-        set { imageSizeFriendly = value; }
-      }
+      public string ImageSizeFriendly { get; set; }
 
-      private int imageWith;
-      public int ImageWith
-      {
-        get { return imageWith; }
-        set { imageWith = value; }
-      }
+      public int ImageWith { get; set; }
 
-      private int imageHeight;
-      public int ImageHeight
-      {
-        get { return imageHeight; }
-        set { imageHeight = value; }
-      }
+      public int ImageHeight { get; set; }
 
-      private string imageResolution;
-      public string ImageResolution
-      {
-        get { return imageResolution; }
-        set { imageResolution = value; }
-      }
+      public string ImageResolution { get; set; }
 
-      private string imageResolutionClass;
-      public string ImageResolutionClass
-      {
-        get { return imageResolutionClass; }
-        set { imageResolutionClass = value; }
-      }
+      public string ImageResolutionClass { get; set; }
 
-      private bool chosen;
-      public bool Chosen
-      {
-        get { return chosen; }
-        set { chosen = value; }
-      }
-
+      public bool Chosen { get; set; }
     }
 
 }

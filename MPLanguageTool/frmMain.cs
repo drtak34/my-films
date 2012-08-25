@@ -217,12 +217,7 @@ namespace MPLanguageTool
       string tmpFileName = XmlHandler.BuildFileName(null, false);
 
       folderBrowserDialog1.Description = "Please select a path where [" + tmpFileName + "] can be found:";
-      if (LangType == StringsType.MyFilms)
-        folderBrowserDialog1.SelectedPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Team MediaPortal\MediaPortal\language\MyFilms");
-      else
-      {
-        folderBrowserDialog1.SelectedPath = Application.StartupPath;
-      }
+      folderBrowserDialog1.SelectedPath = LangType == StringsType.MyFilms ? System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Team MediaPortal\MediaPortal\language\MyFilms") : Application.StartupPath;
       // Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
       folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
 

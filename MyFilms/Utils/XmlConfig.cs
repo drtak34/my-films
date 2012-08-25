@@ -128,14 +128,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           string value = string.Empty;
             // Change true by "yes" and false by "no" for xml MediaPortal compatibility 
-            if (Value)
-            {
-                value = "yes";
-            }
-            else
-            {
-                value = "no";
-            }
+            value = Value ? "yes" : "no";
 
             WriteXmlConfig(FileName, Section, Entry, value, immediateWrite);
         }
@@ -254,26 +247,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
             // Change true by "yes" and false by "no" for xml MediaPortal compatibility 
             string value = Value.ToString();
-            if (Value)
-            {
-                value = "yes";
-            }
-            else
-            {
-                value = "no";
-            }
+            value = Value ? "yes" : "no";
 
             string result = ReadXmlConfig(FileName, Section, Entry, value);
 
             // Change "yes" by true and "no" by false for xml MediaPortal compatibility 
-            if (result == "yes")
-            {
-                Value = true;
-            }
-            else
-            {
-                Value = false;
-            }
+            Value = result == "yes";
 
             return Value;
         }

@@ -322,20 +322,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeOTitle != null && !string.IsNullOrEmpty(nodeOTitle.InnerText))
                       otitle = nodeOTitle.InnerText;
 
-
-                    if (!string.IsNullOrEmpty(otitle))
-                      WriteAntAtribute(destXml, "Title", otitle);
-                    else
-                      WriteAntAtribute(destXml, "Title", title);
-                    if (!string.IsNullOrEmpty(title))
-                      WriteAntAtribute(destXml, "TTitle", title);
-                    else
-                      WriteAntAtribute(destXml, "TTitle", otitle);
+                    WriteAntAtribute(destXml, "Title", !string.IsNullOrEmpty(otitle) ? otitle : title);
+                    WriteAntAtribute(destXml, "TTitle", !string.IsNullOrEmpty(title) ? title : otitle);
 
                     if (nodeSTitle != null && nodeSTitle.InnerText.Length > 0)
                       WriteAntAtribute(destXml, "STitle", title);
                     else
-                        WriteAntAtribute(destXml, "STitle", title);
+                      WriteAntAtribute(destXml, "STitle", title);
                     XmlNode nodeDate = nodeDVD.SelectSingleNodeFast("Added");
 
                     string strDateAdded = string.Empty;

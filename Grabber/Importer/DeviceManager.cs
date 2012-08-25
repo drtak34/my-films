@@ -215,10 +215,8 @@ namespace Importer
                     foreach (string currDrive in watchedDrives) {
                         try {
                             // check if the drive is available
-                            bool isAvailable;
                             DriveInfo driveInfo = GetDriveInfo(currDrive);
-                            if (driveInfo == null) isAvailable = false;
-                            else isAvailable = driveInfo.IsReady;
+                            bool isAvailable = driveInfo != null && driveInfo.IsReady;
 
                             // if the previous drive state is not stored, store it and continue
                             if (!driveStates.ContainsKey(currDrive)) {
@@ -284,14 +282,12 @@ namespace Importer
         #region Public Static Methods
 
         // Grab the drive letter from a FileSystemInfo object.
-        public static string GetDriveLetter(FileSystemInfo fsInfo) {
-            if (fsInfo != null)
-                return GetDriveLetter(fsInfo.FullName);
-            else
-                return null;
+        public static string GetDriveLetter(FileSystemInfo fsInfo)
+        {
+          return fsInfo != null ? GetDriveLetter(fsInfo.FullName) : null;
         }
 
-        // Grab drive letter from string
+    // Grab drive letter from string
         public static string GetDriveLetter(string path) {
             // if the path is UNC return null
             if (path != null && PathIsUnc(path))
@@ -317,13 +313,13 @@ namespace Importer
         /// <summary>
         /// Gets a value indicating whether volume is a drive on a network
         /// </summary>
-        /// <param name="paht"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
         public static bool PathIsOnNetwork(string path) {
             if (PathIsUnc(path)) return true;
             try
             {
-                DriveInfo info = new DriveInfo(path);
+                var info = new DriveInfo(path);
                 if (info.DriveType == DriveType.Network)
                     return true;
             }
@@ -348,7 +344,7 @@ namespace Importer
         /// Gets the DriveInfo object for the given path 
         /// When the object was created before it will be returned from cache.
         /// </summary>
-        /// <param name="driveletter">ex. E:\ </param>
+        /// <param name="path">ex. E:\ </param>
         /// <returns></returns>
         public static DriveInfo GetDriveInfo(string path) {
             if (!PathIsUnc(path)) {
@@ -387,7 +383,7 @@ namespace Importer
         /// Gets a value indicating if the FileSystemInfo object is currently available
         /// </summary>
         /// <param name="fsInfo"></param>
-        /// <param name="serial">if a serial is specified the return value is more reliable.</param>
+        /// <param name="recordedSerial">if a serial is specified the return value is more reliable.</param>
         /// <returns></returns>
         public static bool IsAvailable(FileSystemInfo fsInfo, string recordedSerial) {
             // Get Drive Information
@@ -448,10 +444,7 @@ namespace Importer
                 return true;
 
             DriveInfo driveInfo = GetDriveInfo(path);
-            if (driveInfo != null)
-                return driveInfo.IsRemovable();
-            else
-                return true;
+            return driveInfo == null || driveInfo.IsRemovable();
         }
 
         public static bool IsOpticalDrive(string path) {

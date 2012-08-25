@@ -258,7 +258,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected void LoadThumbs(string MovieThumbPath)
         {
             MovieThumbPath = MovieThumbPath + "\\extrathumbs\\";
-            string defaultthumb = "\\\\xvs-gmi-fs\\media-server\\AMC-Appl\\AMC-DefaultCover\\videonotavailable.jpg";
+            const string defaultthumb = "\\\\xvs-gmi-fs\\media-server\\AMC-Appl\\AMC-DefaultCover\\videonotavailable.jpg";
             LogMyFilms.Debug("MyFilms (LoadThumbs) : Set default Thumb: '" + defaultthumb + "'");
             
             //string strDir = MyFilms.conf.StrDirStorActorThumbs;

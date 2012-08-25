@@ -44,20 +44,12 @@ namespace MPLanguageTool
 
     public string GetTranslation()
     {
-      if (String.IsNullOrEmpty(edValue.Text))
-      {
-        return null;
-      }
-      return edValue.Text;
+      return String.IsNullOrEmpty(this.edValue.Text) ? null : this.edValue.Text;
     }
 
     public string GetPrefixTranslation()
     {
-      if (String.IsNullOrEmpty(edValue.Text))
-      {
-        return null;
-      }
-      return textBox1.Text;
+      return String.IsNullOrEmpty(this.edValue.Text) ? null : this.textBox1.Text;
     }
 
     private void btnOK_Click(object sender, EventArgs e)

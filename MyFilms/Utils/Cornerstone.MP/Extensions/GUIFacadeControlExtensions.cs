@@ -175,13 +175,9 @@
 
             if (!propertyCache.TryGetValue(key, out property))
             {
-                property = type.GetProperty(newName);
-                if (property == null)
-                {
-                    property = type.GetProperty(oldName);
-                }
+                property = type.GetProperty(newName) ?? type.GetProperty(oldName);
 
-                propertyCache[key] = property;
+              propertyCache[key] = property;
             }
 
             return property;

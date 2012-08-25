@@ -421,14 +421,7 @@ namespace Cornerstone.Tools {
 
             // Step 5
 
-            if (Row_i == Col_j)
-            {
-              cost = 0;
-            }
-            else
-            {
-              cost = 1;
-            }
+            cost = Row_i == Col_j ? 0 : 1;
 
             // Step 6
 

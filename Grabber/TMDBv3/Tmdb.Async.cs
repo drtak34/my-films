@@ -327,8 +327,9 @@ namespace WatTmdb.V3
         /// (http://help.themoviedb.org/kb/api/movie-info)
         /// </summary>
         /// <param name="IMDB_ID">IMDB movie id</param>
+        /// <param name="userState"></param>
         /// <param name="callback"></param>
-        public void GetMovieByIMDB(string IMDB_ID, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
+        public void GetMovieByIMDB(string IMDB_ID, object userState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
             if (string.IsNullOrEmpty(IMDB_ID))
             {
@@ -336,12 +337,12 @@ namespace WatTmdb.V3
                 {
                     Data = null,
                     Error = new TmdbError { status_message = "Search cannot be empty" },
-                    UserState = UserState
+                    UserState = userState
                 });
                 return;
             }
 
-            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, UserState), callback);
+            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, userState), callback);
         }
 
         /// <summary>

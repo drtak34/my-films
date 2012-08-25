@@ -84,7 +84,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/movieinfo/movielist/movie");
                 foreach (XmlNode nodeDVD in dvdList)
                 {
-                    string Tagline = "(no Tagline supported)";
+                    const string Tagline = "(no Tagline supported)";
 
                     XmlNode nodeID = nodeDVD.SelectSingleNodeFast("id");
                     XmlNode nodeMediaType = nodeDVD.SelectSingleNodeFast("format/displayname");
@@ -279,10 +279,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         if (wmedialabel.Length > 0)
                             WriteAntAtribute(destXml, "Storage", wmedialabel);
                         if (nodeViewed.Attributes != null)
-                            if (nodeViewed.Attributes["boolvalue"].Value == "1")
-                                WriteAntAtribute(destXml, "Viewed", "true");
-                            else
-                                WriteAntAtribute(destXml, "Viewed", "false");
+                            WriteAntAtribute(destXml, "Viewed", nodeViewed.Attributes["boolvalue"].Value == "1" ? "true" : "false");
                         else
                             WriteAntAtribute(destXml, "Viewed", "false");
                         XmlNode nodeDate = nodeDVD.SelectSingleNodeFast("lastmodified/date");
