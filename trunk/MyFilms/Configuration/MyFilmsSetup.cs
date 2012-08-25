@@ -695,8 +695,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           LogMyFilms.Debug("MyFilmsSetup: Automatically deleted tmp catalog (Save action): '" + destFile + "'");
         }
 
-      //Verify_Config(); // Also (re) imports the external catalog data
-      if (Verify_Config() == false) // check if config successful and if config should be saved
+      if (Verify_Config() == false) // check if config successful and if config should be saved - Also (re) imports the external catalog data
         return;
 
       if (AntTitle2.Text.Length == 0) AntTitle2.Text = "(none)";
