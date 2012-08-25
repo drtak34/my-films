@@ -33,6 +33,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections;
   using System.Collections.Generic;
   using System.Data;
+  using System.Linq;
 
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
@@ -527,16 +528,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Define splitter for string
                 char[] splitter = { '|' };
                 // Iterate through list
-                foreach (string act in actorList)
+                foreach (string[] strActor in from string act in actorList select act.Split(splitter))
                 {
-                    // Split id from actor name (two substrings, [0] is id and [1] is name)
-                    string[] strActor = act.Split(splitter);
-                    // From here we have all what we want, now we can populate datatable, gridview, listview....)
-                    // actorID originally is integer in the databse (it can be string in results but if we want get details from
-                    // IMDBActor  GetActorInfo(int idActor) we need integer)
-                    actorID = Convert.ToInt32(strActor[0]);
-                    string actorname = strActor[1];
-                    LogMyFilms.Debug("MyFilms (ActorDetails - Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+                  // From here we have all what we want, now we can populate datatable, gridview, listview....)
+                  // actorID originally is integer in the databse (it can be string in results but if we want get details from
+                  // IMDBActor  GetActorInfo(int idActor) we need integer)
+                  actorID = Convert.ToInt32(strActor[0]);
+                  string actorname = strActor[1];
+                  LogMyFilms.Debug("MyFilms (ActorDetails - Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
                 }
                 
                 MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);

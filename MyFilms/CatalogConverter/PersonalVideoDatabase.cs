@@ -158,21 +158,18 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNodeFast("aka") != null && nodeDVD.SelectSingleNodeFast("aka").InnerText.Length > 0)
                       WriteAntAtribute(destXml, "aka", nodeDVD.SelectSingleNodeFast("aka").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("viewed") != null)
-                      if (nodeDVD.SelectSingleNodeFast("viewed").InnerText == "-1")
-                        WriteAntAtribute(destXml, "viewed", "true");
-                        else
-                        WriteAntAtribute(destXml, "viewed", "false");
+                      WriteAntAtribute(destXml, "viewed", nodeDVD.SelectSingleNodeFast("viewed").InnerText == "-1" ? "true" : "false");
                     DateTime dt = new DateTime();
                     if (nodeDVD.SelectSingleNodeFast("dateadded") != null)
                         try
                         {
-                          dt = DateTime.Parse(nodeDVD.SelectSingleNodeFast("dateadded").InnerText.ToString());
+                          dt = DateTime.Parse(nodeDVD.SelectSingleNodeFast("dateadded").InnerText);
                         }
                         catch
                         {
                             try
                             {
-                              dt = DateTime.Parse(nodeDVD.SelectSingleNodeFast("dateadded").InnerText.ToString(), ci);
+                              dt = DateTime.Parse(nodeDVD.SelectSingleNodeFast("dateadded").InnerText, ci);
                             }
                             catch
                             {
@@ -181,10 +178,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         }
                     WriteAntAtribute(destXml, "dateadded", dt.ToShortDateString());
                     if (nodeDVD.SelectSingleNodeFast("country") != null)
-                      if (nodeDVD.SelectSingleNodeFast("country").InnerText.StartsWith("|"))
-                        WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNodeFast("country").InnerText.Substring(1));
-                        else
-                        WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNodeFast("country").InnerText);
+                      WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNodeFast("country").InnerText.StartsWith("|")
+                          ? nodeDVD.SelectSingleNodeFast("country").InnerText.Substring(1)
+                          : nodeDVD.SelectSingleNodeFast("country").InnerText);
                     string wRating = "0";
                     if (nodeDVD.SelectSingleNodeFast("imdbrating") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNodeFast("imdbrating").InnerText) && nodeDVD.SelectSingleNodeFast("imdbrating").InnerText != "0")
                       wRating = nodeDVD.SelectSingleNodeFast("imdbrating").InnerText;
@@ -206,10 +202,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNodeFast("length") != null)
                       WriteAntAtribute(destXml, "length", nodeDVD.SelectSingleNodeFast("length").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("genre") != null)
-                      if (nodeDVD.SelectSingleNodeFast("genre").InnerText.StartsWith("|"))
-                        WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNodeFast("genre").InnerText.Substring(1).Replace("|", ""));
-                        else
-                        WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNodeFast("genre").InnerText.Replace("|", ","));
+                      WriteAntAtribute(destXml, "genre", nodeDVD.SelectSingleNodeFast("genre").InnerText.StartsWith("|")
+                          ? nodeDVD.SelectSingleNodeFast("genre").InnerText.Substring(1).Replace("|", "")
+                          : nodeDVD.SelectSingleNodeFast("genre").InnerText.Replace("|", ","));
                     if (nodeDVD.SelectSingleNodeFast("director") != null)
                       WriteAntAtribute(destXml, "director", nodeDVD.SelectSingleNodeFast("director").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("producer") != null)
@@ -229,10 +224,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNodeFast("url") != null)
                       WriteAntAtribute(destXml, "url", nodeDVD.SelectSingleNodeFast("url").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("langs") != null)
-                      if (nodeDVD.SelectSingleNodeFast("langs").InnerText.StartsWith("|"))
-                        WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNodeFast("langs").InnerText.Substring(1));
-                        else
-                        WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNodeFast("langs").InnerText);
+                      WriteAntAtribute(destXml, "langs", nodeDVD.SelectSingleNodeFast("langs").InnerText.StartsWith("|")
+                          ? nodeDVD.SelectSingleNodeFast("langs").InnerText.Substring(1)
+                          : nodeDVD.SelectSingleNodeFast("langs").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("subs") != null)
                       WriteAntAtribute(destXml, "subs", nodeDVD.SelectSingleNodeFast("subs").InnerText);
                     if (nodeDVD.SelectSingleNodeFast("videocodec") != null)

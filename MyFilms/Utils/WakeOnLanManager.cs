@@ -27,6 +27,7 @@
 namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
+  using System.Linq;
   using System.Net;
   using System.Net.Sockets;
   using System.Net.NetworkInformation;
@@ -248,16 +249,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         return false;
       }
 
-      bool valid = false;
-      for (int i = 0; i < hwAddress.Length; i++)
-      {
-          if (hwAddress[i] != 0x00)
-          {
-              valid = true;
-              break;
-          }
-      }
-      return valid;
+      return hwAddress.Any(t => t != 0x00);
     }
 
     /// <summary>

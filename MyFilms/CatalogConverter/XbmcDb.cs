@@ -109,11 +109,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     ID = ID.Substring(2);
                     ID = ID.TrimStart('0');
                   }
-                  if (ID.Length > 0)
-                    WriteAntAtribute(destXml, "id", ID);
-                  else
-                    WriteAntAtribute(destXml, "id", "9999");
-
+                  WriteAntAtribute(destXml, "id", ID.Length > 0 ? ID : "9999");
 
                   //string Checked, 
                   XmlNode nodeChecked = nodeDVD.SelectSingleNodeFast("lastplayed");
@@ -154,10 +150,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                   XmlNode nodeSource = nodeDVD.SelectSingleNodeFast("filenameandpath");
                   if (nodeSource != null && nodeSource.InnerText.Length > 0)
                     strSource += nodeSource.InnerText;
-                  if (strSource.StartsWith("stack://")) 
-                    strSource = strSource.Substring(9).Replace(" , ", "'; ");
-                  else
-                    strSource = strSource.Replace("/", @"\");
+                  strSource = strSource.StartsWith("stack://") ? strSource.Substring(9).Replace(" , ", "'; ") : strSource.Replace("/", @"\");
                   WriteAntAtribute(destXml, "filenameandpath", strSource);
 
 

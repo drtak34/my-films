@@ -122,7 +122,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region Virtual methods
-        public virtual void Close()
+
+        protected virtual void Close()
         {
             if (m_bRunning == false) return;
             m_bRunning = false;

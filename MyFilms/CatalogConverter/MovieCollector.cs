@@ -25,6 +25,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 {
   using System;
   using System.Collections.Generic;
+  using System.Linq;
   using System.Text;
   using System.Xml;
   using System.Globalization;
@@ -104,13 +105,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     XmlNode nodeYear = nodeDVD.SelectSingleNodeFast("releasedate/year/displayname");
                     XmlNodeList LinksKist = nodeDVD.SelectNodes("links/link");
                     string url = String.Empty;
-                    foreach (XmlNode nodeFile in LinksKist)
+                    foreach (XmlNode nodeFile in LinksKist.Cast<XmlNode>().Where(nodeFile => nodeFile.SelectSingleNodeFast("urltype").InnerText == "Movie"))
                     {
-                        if (nodeFile.SelectSingleNodeFast("urltype").InnerText == "Movie")
-                        {
-                            if (url.Length > 0) url += ";";
-                            url += nodeFile.SelectSingleNodeFast("url").InnerText;
-                        }
+                      if (url.Length > 0) url += ";";
+                      url += nodeFile.SelectSingleNodeFast("url").InnerText;
                     }
                     XmlNode nodeBorrower = nodeDVD.SelectSingleNodeFast("loan/loanedto/displayname");
                     XmlNode nodeDuration = nodeDVD.SelectSingleNodeFast("runtime");

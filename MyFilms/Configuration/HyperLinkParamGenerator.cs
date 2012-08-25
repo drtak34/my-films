@@ -52,16 +52,10 @@ namespace MyFilmsPlugin.Configuration
       cbEditorViews.Text = "";
       cbEditorViewValues.Text = "";
 
-      foreach (BaseMesFilms.MFConfig config in MyFilmsEditor)
+      foreach (KeyValuePair<string, string> view in from BaseMesFilms.MFConfig config in MyFilmsEditor where config.Name == this.cbEditorConfigs.Text from view in config.ViewList select view)
       {
-        if (config.Name == cbEditorConfigs.Text)
-        {
-          foreach (KeyValuePair<string, string> view in config.ViewList)
-          {
-            // key = viewname, value = translated viewname
-            cbEditorViews.Items.Add(view.Value);
-          }
-        }
+        // key = viewname, value = translated viewname
+        this.cbEditorViews.Items.Add(view.Value);
       }
 
     }
@@ -73,24 +67,14 @@ namespace MyFilmsPlugin.Configuration
       cbEditorViewValues.Items.Clear();
       cbEditorViewValues.Text = "";
       ArrayList MyFilmsEditor = BaseMesFilms.GetConfigViewLists();
-      foreach (BaseMesFilms.MFConfig config in MyFilmsEditor)
+      foreach (KeyValuePair<string, string> view in from BaseMesFilms.MFConfig config in MyFilmsEditor where config.Name == this.cbEditorConfigs.Text from view in config.ViewList where view.Value == this.cbEditorViews.Text select view)
       {
-        if (config.Name == cbEditorConfigs.Text)
-        {
-          foreach (KeyValuePair<string, string> view in config.ViewList)
-          {
-            // key = viewname, value = translated viewname
-            if (view.Value == cbEditorViews.Text)
-            {
-              viewCallName = view.Key;
-            }
-          }
-        }
+        viewCallName = view.Key;
       }
 
       if (!string.IsNullOrEmpty(cbEditorConfigs.Text) && !string.IsNullOrEmpty(viewCallName))
       {
-        List<string> ViewValues = BaseMesFilms.GetViewListValues(cbEditorConfigs.Text, viewCallName);
+        IEnumerable<string> ViewValues = BaseMesFilms.GetViewListValues(cbEditorConfigs.Text, viewCallName);
         if (ViewValues != null)
           foreach (string value in ViewValues)
           {
@@ -111,16 +95,9 @@ namespace MyFilmsPlugin.Configuration
       {
         string viewCallName = "";
         if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
-        foreach (BaseMesFilms.MFConfig config in myFilmsEditor)
+        foreach (KeyValuePair<string, string> view in from BaseMesFilms.MFConfig config in myFilmsEditor where config.Name == this.cbEditorConfigs.Text from view in config.ViewList where view.Value == this.cbEditorViews.Text select view)
         {
-          if (config.Name == cbEditorConfigs.Text)
-          {
-            foreach (KeyValuePair<string, string> view in config.ViewList)
-            {
-              if (view.Value == cbEditorViews.Text)
-                viewCallName = view.Key;
-            }
-          }
+          viewCallName = view.Key;
         }
         startParamOutput += "view:" + viewCallName;
       }

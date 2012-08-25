@@ -27,6 +27,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections.Generic;
   using System.Data;
   using System.Globalization;
+  using System.Linq;
 
   using MediaPortal.Configuration;
 
@@ -292,11 +293,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrSupPlayer = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressPlayed", false);
         StrSuppressType = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressType", string.Empty);
         StrWatchedField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
+        StrMultiUserStateField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "MultiUserStateField", "MultiUserState");
         StrSuppressField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressField", string.Empty);
         StrSuppressValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressValue", string.Empty);
 
         StrEnhancedWatchedStatusHandling = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "EnhancedWatchedStatusHandling", false);
-        StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.DefaultUsername);
+        StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.GlobalUsername);
 
         StrECoptionStoreTaglineInDescription = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ECoptionStoreTaglineInDescription", false);
         #region Common EC options
@@ -611,10 +613,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         StrSearchHistory = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SearchHistory", string.Empty);
         MyFilms.SearchHistory.Clear();
-        foreach (string s in StrSearchHistory.Split('|'))
+        foreach (string s in this.StrSearchHistory.Split('|').Where(s => !string.IsNullOrEmpty(s.Trim())))
         {
-          if (!string.IsNullOrEmpty(s.Trim()))
-            MyFilms.SearchHistory.Add(s);
+          MyFilms.SearchHistory.Add(s);
         }
 
         int j = 0;
@@ -896,6 +897,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string StrSuppressField { get; set; }
     public string StrSuppressValue { get; set; }
     public string StrWatchedField { get; set; }
+    public string StrMultiUserStateField { get; set; }
     public string StrPlayedGlobalFilterString { get; set; }
     public string StrPlayedViewSelect { get; set; }
     public string StrPlayedDfltSelect { get; set; }
@@ -938,7 +940,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext));
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "View", MyFilms.conf.StrTxtView);
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MyFilms.conf.StrTxtSelect);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
+        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? (selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
 
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MyFilms.conf.Boolselect);

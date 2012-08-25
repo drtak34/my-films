@@ -344,7 +344,7 @@ namespace MPLanguageTool
           break;
       }
 
-      List<string> Sections = XmlHandler.ListSections(strSection, strAttrib);
+      IEnumerable<string> Sections = XmlHandler.ListSections(strSection, strAttrib);
       foreach (string str in Sections)
       {
         cbSections.Items.Add(str);
