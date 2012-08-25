@@ -23,33 +23,13 @@ namespace MyFilmsPlugin.MyFilmsGUI
     }
     private MyFilms.ViewContext currentContext = MyFilms.ViewContext.Menu;
 
-    public int ID // to access  a state via "PrevID"
-    {
-      get { return _ID; }
-      set { _ID = value; }
-    }
-    private int _ID;
+    public int ID { get; set; }
 
-    public int PrevID // to access  a state via "PrevID"
-    {
-      get { return prevID; }
-      set { prevID = value; }
-    }
-    private int prevID;
+    public int PrevID { get; set; }  // to access  a state via "PrevID"
 
-    public View StartSettings
-    {
-      get { return startSettings; }
-      set { startSettings = value; }
-    }
-    private View startSettings;
+    public View StartSettings { get; set; }
 
-    public View CurrentSettings
-    {
-      get { return currentSettings; }
-      set { currentSettings = value; }
-    }
-    private View currentSettings;
+    public View CurrentSettings { get; set; }
   }
 
   public class View
@@ -306,260 +286,120 @@ namespace MyFilmsPlugin.MyFilmsGUI
   
   public class ViewState
   {
-    public ViewState() { }
+    public ViewState()
+    {
+      StrSelect = string.Empty;
+      StrPersons = string.Empty;
+      StrTitleSelect = string.Empty;
+      StrFilmSelect = string.Empty;
+      ViewContext = MyFilms.ViewContext.Menu;
+      CurrentView = string.Empty;
+      StrTxtView = string.Empty;
+      StrTxtSelect = string.Empty;
+      WStrSort = string.Empty;
+      TitleItem = string.Empty;
+      IndexItem = 0;
+      LastID = 0;
+      StrLayOutInHierarchies = 0;
+      WStrLayOut = 0;
+      StrLayOut = 0;
+      Wstar = string.Empty;
+      WStrSortSensCount = string.Empty;
+      Wselectedlabel = string.Empty;
+      IndexedChars = 0;
+      BoolSkipViewState = false;
+    }
 
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
     #region public vars
-
-    private string strSelect = string.Empty;
-    public string StrSelect
-    {
-      get { return strSelect; }
-      set { strSelect = value; }
-    }
-
-    private string strPersons = string.Empty;
-    public string StrPersons
-    {
-      get { return strPersons; }
-      set { strPersons = value; }
-    }
-
-    private string strTitleSelect = string.Empty;
-    public string StrTitleSelect
-    {
-      get { return strTitleSelect; }
-      set { strTitleSelect = value; }
-    }
-
-    private string strFilmSelect = string.Empty;
-    public string StrFilmSelect
-    {
-      get { return strFilmSelect; }
-      set { strFilmSelect = value; }
-    }
-
-    private MyFilms.ViewContext viewContext = MyFilms.ViewContext.Menu;
-    public MyFilms.ViewContext ViewContext
-    {
-      get { return viewContext; }
-      set { viewContext = value; }
-    }
-
-    private string currentView = string.Empty;
-    public string CurrentView
-    {
-      get { return currentView; }
-      set { currentView = value; }
-    }
-
-    private string strTxtView = string.Empty;
-    public string StrTxtView
-    {
-      get { return strTxtView; }
-      set { strTxtView = value; }
-    }
-
-    private string strTxtSelect = string.Empty;
-    public string StrTxtSelect
-    {
-      get { return strTxtSelect; }
-      set { strTxtSelect = value; }
-    }
-
-    private bool boolselect;
-    public bool Boolselect
-    {
-      get { return boolselect; }
-      set { boolselect = value; }
-    }
-
-    private bool boolreturn;
-    public bool Boolreturn
-    {
-      get { return boolreturn; }
-      set { boolreturn = value; }
-    }
-
-    private bool boolindexed;
-    public bool Boolindexed
-    {
-      get { return boolindexed; }
-      set { boolindexed = value; }
-    }
-
-    private bool boolindexedreturn;
-    public bool Boolindexedreturn
-    {
-      get { return boolindexedreturn; }
-      set { boolindexedreturn = value; }
-    }
-
-    private int indexedChars = 0;
-    public int IndexedChars
-    {
-      get { return indexedChars; }
-      set { indexedChars = value; }
-    }
-
-    private bool boolReverseNames;
-    public bool BoolReverseNames
-    {
-      get { return boolReverseNames; }
-      set { boolReverseNames = value; }
-    }
-
-    private bool boolShowEmptyValuesInViews;
-    public bool BoolShowEmptyValuesInViews
-    {
-      get { return boolShowEmptyValuesInViews; }
-      set { boolShowEmptyValuesInViews = value; }
-    }
-
-    private bool boolSkipViewState = false;
-    public bool BoolSkipViewState
-    {
-      get { return boolSkipViewState; }
-      set { boolSkipViewState = value; }
-    }
-
-    private string wselectedlabel = string.Empty;
-    public string Wselectedlabel
-    {
-      get { return wselectedlabel; }
-      set { wselectedlabel = value; }
-    }
-
-    private string wStrSort = string.Empty;
-    public string WStrSort
-    {
-      get { return wStrSort; }
-      set { wStrSort = value; }
-    }
-
-    private string wStrSortSensCount = string.Empty;
-    public string WStrSortSensCount
-    {
-      get { return wStrSortSensCount; }
-      set { wStrSortSensCount = value; }
-    }
-
-    private bool boolSortCountinViews;
-    public bool BoolSortCountinViews
-    {
-      get { return boolSortCountinViews; }
-      set { boolSortCountinViews = value; }
-    }
-
-    private string wstar = string.Empty;
-    public string Wstar
-    {
-      get { return wstar; }
-      set { wstar = value; }
-    }
-
-    private int strLayOut = 0;
-    public int StrLayOut
-    {
-      get { return strLayOut; }
-      set { strLayOut = value; }
-    }
-
-    private int wStrLayOut = 0;
-    public int WStrLayOut
-    {
-      get { return wStrLayOut; }
-      set { wStrLayOut = value; }
-    }
-
-    private int strLayOutInHierarchies = 0;
-    public int StrLayOutInHierarchies
-    {
-      get { return this.strLayOutInHierarchies; }
-      set { this.strLayOutInHierarchies = value; }
-    }
-
-    private int lastID = 0;
-    public int LastID
-    {
-      get { return lastID; }
-      set { lastID = value; }
-    }
-
-    private int indexItem = 0;
-    public int IndexItem
-    {
-      get { return indexItem; }
-      set { indexItem = value; }
-    }
-
-    private string titleItem = string.Empty;
-    public string TitleItem
-    {
-      get { return titleItem; }
-      set { titleItem = value; }
-    }
+    public string StrSelect { get; set; }
+    public string StrPersons { get; set; }
+    public string StrTitleSelect { get; set; }
+    public string StrFilmSelect { get; set; }
+    public MyFilms.ViewContext ViewContext { get; set; }
+    public string CurrentView { get; set; }
+    public string StrTxtView { get; set; }
+    public string StrTxtSelect { get; set; }
+    public bool Boolselect { get; set; }
+    public bool Boolreturn { get; set; }
+    public bool Boolindexed { get; set; }
+    public bool Boolindexedreturn { get; set; }
+    public int IndexedChars { get; set; }
+    public bool BoolReverseNames { get; set; }
+    public bool BoolShowEmptyValuesInViews { get; set; }
+    public bool BoolSkipViewState { get; set; }
+    public string Wselectedlabel { get; set; }
+    public string WStrSort { get; set; }
+    public string WStrSortSensCount { get; set; }
+    public bool BoolSortCountinViews { get; set; }
+    public string Wstar { get; set; }
+    public int StrLayOut { get; set; }
+    public int WStrLayOut { get; set; }
+    public int StrLayOutInHierarchies { get; set; }
+    public int LastID { get; set; }
+    public int IndexItem { get; set; }
+    public string TitleItem { get; set; }
     // CurrentView", MyFilms.conf.CurrentView.SaveToString());
     #endregion
 
     public void InitDefaults()
     {
-      strSelect = string.Empty;
-      strPersons = string.Empty;
-      strTitleSelect = string.Empty;
-      strFilmSelect = string.Empty;
-      viewContext = MyFilms.ViewContext.Menu;
-      strTxtView = string.Empty;
-      strTxtSelect = string.Empty;
-      boolselect = false;
-      boolreturn = false;
-      boolindexed = false;
-      boolindexedreturn = false;
-      indexedChars = 0;
-      boolReverseNames = false;
-      boolShowEmptyValuesInViews = false;
-      wselectedlabel = string.Empty;
-      wStrSort = string.Empty;
-      wStrSortSensCount = string.Empty;
-      boolSortCountinViews = false;
-      wstar = string.Empty;
-      strLayOut = 0;
-      wStrLayOut = 0;
-      strLayOutInHierarchies = 0;
-      lastID = 0;
-      indexItem = 0;
-      titleItem = string.Empty;
+      this.StrSelect = string.Empty;
+      this.StrPersons = string.Empty;
+      this.StrTitleSelect = string.Empty;
+      this.StrFilmSelect = string.Empty;
+      this.ViewContext = MyFilms.ViewContext.Menu;
+      this.StrTxtView = string.Empty;
+      this.StrTxtSelect = string.Empty;
+      this.Boolselect = false;
+      this.Boolreturn = false;
+      this.Boolindexed = false;
+      this.Boolindexedreturn = false;
+      this.IndexedChars = 0;
+      this.BoolReverseNames = false;
+      this.BoolShowEmptyValuesInViews = false;
+      this.Wselectedlabel = string.Empty;
+      this.WStrSort = string.Empty;
+      this.WStrSortSensCount = string.Empty;
+      this.BoolSortCountinViews = false;
+      this.Wstar = string.Empty;
+      this.StrLayOut = 0;
+      this.WStrLayOut = 0;
+      this.StrLayOutInHierarchies = 0;
+      this.LastID = 0;
+      this.IndexItem = 0;
+      this.TitleItem = string.Empty;
     }
 
     public string SaveToString()
     {
       string savestring =
-        strSelect + "|" +
-        strPersons + "|" +
-        strTitleSelect + "|" +
-        strFilmSelect + "|" +
-        Enum.GetName(typeof(MyFilms.Layout), viewContext) + "|" +
-        strTxtView + "|" +
-        strTxtSelect + "|" +
-        boolselect.ToString() + "|" +
-        boolreturn.ToString() + "|" +
-        boolindexed.ToString() + "|" +
-        boolindexedreturn.ToString() + "|" +
-        indexedChars.ToString() + "|" +
-        boolReverseNames.ToString() + "|" +
-        boolShowEmptyValuesInViews.ToString() + "|" +
-        wselectedlabel + "|" +
-        wStrSort + "|" +
-        wStrSortSensCount + "|" +
-        boolSortCountinViews.ToString() + "|" +
-        wstar + "|" +
-        strLayOut.ToString() + "|" +
-        wStrLayOut.ToString() + "|" +
-        strLayOutInHierarchies.ToString() + "|" +
-        lastID.ToString() + "|" +
-        indexItem.ToString() + "|" +
-        titleItem;
+        this.StrSelect + "|" +
+        this.StrPersons + "|" +
+        this.StrTitleSelect + "|" +
+        this.StrFilmSelect + "|" +
+        Enum.GetName(typeof(MyFilms.Layout), this.ViewContext) + "|" +
+        this.StrTxtView + "|" +
+        this.StrTxtSelect + "|" +
+        this.Boolselect.ToString() + "|" +
+        this.Boolreturn.ToString() + "|" +
+        this.Boolindexed.ToString() + "|" +
+        this.Boolindexedreturn.ToString() + "|" +
+        this.IndexedChars.ToString() + "|" +
+        this.BoolReverseNames.ToString() + "|" +
+        this.BoolShowEmptyValuesInViews.ToString() + "|" +
+        this.Wselectedlabel + "|" +
+        this.WStrSort + "|" +
+        this.WStrSortSensCount + "|" +
+        this.BoolSortCountinViews.ToString() + "|" +
+        this.Wstar + "|" +
+        this.StrLayOut.ToString() + "|" +
+        this.WStrLayOut.ToString() + "|" +
+        this.StrLayOutInHierarchies.ToString() + "|" +
+        this.LastID.ToString() + "|" +
+        this.IndexItem.ToString() + "|" +
+        this.TitleItem;
       LogMyFilms.Debug("SaveToString() - output = '" + savestring + "'");
       return savestring;
     }
@@ -574,31 +414,31 @@ namespace MyFilmsPlugin.MyFilmsGUI
         LogMyFilms.Debug("LoadFromString() - Parsed Value [" + i + "] = '" + s + "'");
         i++;
       }
-      strSelect = split[0];
-      strPersons = split[1];
-      strTitleSelect = split[2];
-      strFilmSelect = split[3];
-      viewContext = (MyFilms.ViewContext)Enum.Parse(typeof(MyFilms.ViewContext), split[4], true); // MyFilms.ViewContext.Menu;
-      strTxtView = split[5];
-      strTxtSelect = split[6];
-      boolselect = bool.Parse(split[7]);
-      boolreturn = bool.Parse(split[8]);
-      boolindexed = bool.Parse(split[9]);
-      boolindexedreturn = bool.Parse(split[10]);
-      indexedChars = int.Parse(split[11]);
-      boolReverseNames = bool.Parse(split[12]);
-      boolShowEmptyValuesInViews = bool.Parse(split[13]);
-      wselectedlabel = split[14];
-      wStrSort = split[15];
-      wStrSortSensCount = split[16];
-      boolSortCountinViews = bool.Parse(split[17]);
-      wstar = split[18];
-      strLayOut = int.Parse(split[19]);
-      wStrLayOut = int.Parse(split[20]);
-      strLayOutInHierarchies = int.Parse(split[21]);
-      lastID = int.Parse(split[22]);
-      indexItem = int.Parse(split[23]);
-      titleItem = split[24];
+      this.StrSelect = split[0];
+      this.StrPersons = split[1];
+      this.StrTitleSelect = split[2];
+      this.StrFilmSelect = split[3];
+      this.ViewContext = (MyFilms.ViewContext)Enum.Parse(typeof(MyFilms.ViewContext), split[4], true); // MyFilms.ViewContext.Menu;
+      this.StrTxtView = split[5];
+      this.StrTxtSelect = split[6];
+      this.Boolselect = bool.Parse(split[7]);
+      this.Boolreturn = bool.Parse(split[8]);
+      this.Boolindexed = bool.Parse(split[9]);
+      this.Boolindexedreturn = bool.Parse(split[10]);
+      this.IndexedChars = int.Parse(split[11]);
+      this.BoolReverseNames = bool.Parse(split[12]);
+      this.BoolShowEmptyValuesInViews = bool.Parse(split[13]);
+      this.Wselectedlabel = split[14];
+      this.WStrSort = split[15];
+      this.WStrSortSensCount = split[16];
+      this.BoolSortCountinViews = bool.Parse(split[17]);
+      this.Wstar = split[18];
+      this.StrLayOut = int.Parse(split[19]);
+      this.WStrLayOut = int.Parse(split[20]);
+      this.StrLayOutInHierarchies = int.Parse(split[21]);
+      this.LastID = int.Parse(split[22]);
+      this.IndexItem = int.Parse(split[23]);
+      this.TitleItem = split[24];
     }
   }
 

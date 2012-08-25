@@ -361,6 +361,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <summary>Replace text of equel length to new text with the new text</summary>
         /// <param name="replaceText">String to replace</param>
         /// <param name="index">Position in string to replace at</param>
+        /// <param name="source">string to replace at</param>
         /// <returns>New string with replacements</returns>
         public static string PosReplace(string replaceText, string source, int index)
         {
@@ -394,9 +395,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         #region Conversion functions
         /// <summary>Convert String to ProperCase</summary>
-		/// <param name="source">String to be converted to ProperCase</param>
-		/// <returns>The ProperCase String</returns>
-		public string ProperCase(){return ProperCase (myString);}
+		    /// <param name="source">String to be converted to ProperCase</param>
+		    /// <returns>The ProperCase String</returns>
+		    public string ProperCase()
+        {
+          return ProperCase(myString);
+        }
+
         public static string ProperCase(string source)
         {
             char[] sFindArray = { ' ', '\t', '\n', '.' };
@@ -419,42 +424,39 @@ namespace MyFilmsPlugin.MyFilms.Utils
 		/// <summary>Recursion Reverse function to Reverse a given String</summary>
 		/// <param name="source">String to be Reversed</param>
 		/// <returns>The Reversed string</returns>
-        public string Reverse() { return Reverse(myString); }
+        public string Reverse()
+		    {
+		      return Reverse(myString);
+		    }
+
         public static string Reverse(string source)
-		{
-            if (source == null) throw new ArgumentNullException("source");
+        {
+          if (source == null) throw new ArgumentNullException("source");
 
-            if (source.Length == 1)
-			{
-				return source;
-			}
-			else
-			{
-				return Reverse( source.Substring(1) ) + source.Substring(0,1);
-			}
-		}
-
+          if (source.Length == 1)
+          {
+            return source;
+          }
+          else
+          {
+            return Reverse(source.Substring(1)) + source.Substring(0, 1);
+          }
+        }
 
         /// <summary>Converts any multiple adjacent spaces to a single space</summary>
         /// <returns>The trimmed string</returns>
         public string TrimToSingleSpace() { return TrimToSingleSpace(myString); }
-		public static string TrimToSingleSpace(string source)
-		{
-			int intPos;
+        public static string TrimToSingleSpace(string source)
+        {
+          int intPos;
 
-            if (source == null) throw new ArgumentNullException("source");
+          if (source == null) throw new ArgumentNullException("source");
 
-            intPos = source.IndexOf("  ");
-            if (intPos == -1)
-			{
-				return source;
-			}
-			else
-			{
-				return TrimToSingleSpace(source.Substring(0,intPos) + source.Substring(intPos+1));
-			}
+          intPos = source.IndexOf("  ");
+          return intPos == -1 ? source : TrimToSingleSpace(source.Substring(0, intPos) + source.Substring(intPos + 1));
         }
-        #endregion
+
+    #endregion
 
 
         #region Non_String_functions

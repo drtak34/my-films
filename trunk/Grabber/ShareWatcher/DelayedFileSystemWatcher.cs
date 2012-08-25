@@ -44,13 +44,9 @@ namespace ShareWatcherHelper
   {
     private readonly FileSystemEventArgs _args;
 
-    /// <summary>
-    /// Only delayed events that are unique will be fired.
-    /// </summary>
-    private bool _delayed = false;
-
     public DelayedEvent(FileSystemEventArgs args)
     {
+      Delayed = false;
       this._args = args;
     }
 
@@ -59,11 +55,7 @@ namespace ShareWatcherHelper
       get { return this._args; }
     }
 
-    public bool Delayed
-    {
-      get { return this._delayed; }
-      set { this._delayed = value; }
-    }
+    public bool Delayed { get; set; }
 
     public virtual bool IsDuplicate(object obj)
     {

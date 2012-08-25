@@ -420,20 +420,14 @@ namespace Importer
 
             int.TryParse(epComp[0], out seasonIndex);
             int.TryParse(epComp[1], out episodeIndex);
-            
-            return;
         }
 
         public static bool IsNullOrWhiteSpace(string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                return true;
-            }
-            return string.IsNullOrEmpty(value.Trim());
+          return string.IsNullOrEmpty(value) || string.IsNullOrEmpty(value.Trim());
         }
 
-        #endregion
+      #endregion
 
     }
 }

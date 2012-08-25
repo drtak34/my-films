@@ -41,11 +41,7 @@ namespace MPLanguageTool
       string xml = BuildFileName(languageID);
       if (!File.Exists(xml))
       {
-        if (languageID == null)
-        {
-          return null;
-        }
-        return new NameValueCollection();
+        return languageID == null ? null : new NameValueCollection();
       }
       NameValueCollection translations = new NameValueCollection();
       XmlDocument doc = new XmlDocument();

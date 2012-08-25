@@ -180,10 +180,7 @@
             TextReader r = new StringReader(xml);
             search = (TmdbMovieSearchResults)s.Deserialize(r);
 
-            if (search.Movies.Length == 1)
-                return search.Movies[0];
-            else
-                return null;
+            return search.Movies.Length == 1 ? search.Movies[0] : null;
         }
 
         #region GetMovieInfoAsyncMethods
@@ -397,10 +394,7 @@
             TextReader r = new StringReader(xml);
             search = (TmdbPersonSearchResults)s.Deserialize(r);
 
-            if (search.People.Length == 1)
-                return search.People[0];
-            else
-                return null;
+            return search.People.Length == 1 ? search.People[0] : null;
         }
 
         #region GetPersonInfoAsyncMethods

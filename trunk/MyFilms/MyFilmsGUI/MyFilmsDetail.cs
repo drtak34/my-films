@@ -991,16 +991,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                   {
-                    if (GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0) // show only the required option
-                      dlgmenu.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
-                    else dlgmenu.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                    dlgmenu.Add(
+                      GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0
+                        ? GUILocalizeStrings.Get(1079895)
+                        : GUILocalizeStrings.Get(1079894));
                   }
                   else
                   {
-                    if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() !=
-                        MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // show only the required option
-                      dlgmenu.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
-                    else dlgmenu.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                    dlgmenu.Add(
+                      MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()
+                        ? GUILocalizeStrings.Get(1079895)
+                        : GUILocalizeStrings.Get(1079894));
                   }
                   choiceViewMenu.Add("togglewatchedstatus");
                 }
@@ -1249,10 +1250,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                   {
                     decimal wRating = 0;
-                    if (Decimal.TryParse(GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName), out wRating)) 
-                      dlgRating.Rating = wRating;
-                    else
-                      dlgRating.Rating = 0;
+                    dlgRating.Rating = Decimal.TryParse(GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName), out wRating) ? wRating : 0;
                   }
                   else
                   {
@@ -1773,11 +1771,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 keyboard.Reset();
                 keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
                 keyboard.DoModal(GetID);
-                if (keyboard.IsConfirmed)
-                {
-                  wfile = keyboard.Text.ToString();
-                }
-                else wfile = string.Empty;
+                wfile = keyboard.IsConfirmed ? keyboard.Text : string.Empty;
                 if (wfile != string.Empty)
                 {
                   MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage] = wfile;
@@ -1789,8 +1783,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               case "item1":
                 #region item1
-                if (StrUpdDflT1.Length > 0) keyboard.Text = StrUpdDflT1;
-                else keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1].ToString();
+
+                keyboard.Text = !string.IsNullOrEmpty(StrUpdDflT1)
+                                  ? StrUpdDflT1
+                                  : MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1].ToString();
                 keyboard.DoModal(GetID);
                 if (keyboard.IsConfirmed)
                 {
@@ -1823,7 +1819,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       break;
                     default:
-                      MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1] = keyboard.Text.ToString();
+                      MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1] = keyboard.Text;
                       break;
                   }
 
@@ -1835,8 +1831,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               case "item2":
                 #region item2
-                if (StrUpdDflT1.Length > 0) keyboard.Text = StrUpdDflT2;
-                else keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2].ToString();
+                keyboard.Text = !string.IsNullOrEmpty(StrUpdDflT2) ? StrUpdDflT2 : MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2].ToString();
                 keyboard.DoModal(GetID);
                 if (keyboard.IsConfirmed)
                 {
@@ -1869,7 +1864,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                       break;
                     default:
-                      MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2] = keyboard.Text.ToString();
+                      MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2] = keyboard.Text;
                       break;
                   }
                   Update_XML_database();
@@ -2730,9 +2725,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           MFMovie movie = new MFMovie();
           movie.Config = Configuration.CurrentConfig;
-          if (!string.IsNullOrEmpty(sr["Number"].ToString()))
-            movie.ID = Int32.Parse(sr["Number"].ToString());
-          else movie.ID = 0;
+          movie.ID = !string.IsNullOrEmpty(sr["Number"].ToString()) ? Int32.Parse(sr["Number"].ToString()) : 0;
 
           movie.Title = sr["OriginalTitle"].ToString();
 
@@ -3263,10 +3256,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static bool GlobalLockIsActive(string config)
         {
           string DB = "";
-          if (string.IsNullOrEmpty(config)) 
-            DB = MyFilms.conf.StrFileXml;
-          else 
-            DB = config;
+          DB = string.IsNullOrEmpty(config) ? MyFilms.conf.StrFileXml : config;
           if (string.IsNullOrEmpty(DB))
           {
             DB = "";
@@ -3583,10 +3573,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 switch (grabtype)
                 {
                   case GrabType.MultiCovers:
-                    if (script.Type.ToLower().Contains("multicovers"))
-                      displayNamePost = " - (Multi Cover)";
-                    else
-                      displayNamePost = " - (Single Cover)";
+                    displayNamePost = script.Type.ToLower().Contains("multicovers") ? " - (Multi Cover)" : " - (Single Cover)";
                     break;
                   default:
                     break;
@@ -3878,7 +3865,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   bool onlynonempty = false;
                   List<string> choiceViewMenu = new List<string>();
                   List<string> updateItems = new List<string>(); // store properties to update for later use ...
-                  int iPropertyLengthLimit = 33;
+                  const int iPropertyLengthLimit = 33;
                   string[] PropertyList = new string[] {
                         "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director",
                         "Producer", "Year", "Country", "Category", "URL", "ImageURL", "Writer", "Comments", "Languages",
@@ -5104,7 +5091,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                               ArrayList wttitle_tableau = new ArrayList();
                               ArrayList wotitle_sub_tableau = new ArrayList();
                               ArrayList wttitle_sub_tableau = new ArrayList();
-                              int MinChars = 2;
+                              const int MinChars = 2;
                               bool Filter = true;
 
                               GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -5288,7 +5275,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Change local Cover Image
         //-------------------------------------------------------------------------------------------        
-        public static string ChangeLocalCover(DataRow[] r1, int Index, bool interactive, bool onlyReturnCount)
+        private static string ChangeLocalCover(DataRow[] r1, int Index, bool interactive, bool onlyReturnCount)
         {
           result = new ArrayList();
           ArrayList resultsize = new ArrayList();
@@ -5736,7 +5723,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   ArrayList wttitle_tableau = new ArrayList();
                   ArrayList wotitle_sub_tableau = new ArrayList();
                   ArrayList wttitle_sub_tableau = new ArrayList();
-                  int MinChars = 2;
+                  const int MinChars = 2;
                   bool Filter = true;
 
                   GUIDialogMenu dlg =
@@ -6121,7 +6108,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                       searchname = searchname + ".*.jpg";
                       string[] files = Directory.GetFiles(tmpconf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
-                      if (files.Count() > 0)
+                      if (files.Any())
                       {
                         wfanart[0] = files[0];
                         wfanart[1] = "file";
@@ -6136,7 +6123,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                       searchname = searchname + "*.jpg";
                       string[] files = Directory.GetFiles(tmpconf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
-                      if (files.Count() > 0)
+                      if (files.Any())
                       {
                         wfanart[0] = files[0];
                         wfanart[1] = "file";
@@ -6154,7 +6141,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       searchname = "*" + Regex.Replace(searchname, "[\n\r\t]", "-") + "_fanart*.jpg";
                       string[] files = Directory.GetFiles(tmpconf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
                       LogMyFilms.Debug("Search_Fanart - XMM - search for '" + searchname + "'");
-                      if (files.Count() > 0)
+                      if (files.Any())
                       {
                         wfanart[0] = files[0];
                         wfanart[1] = "file";
@@ -6173,7 +6160,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                       searchname = "{" + searchname + "}" + "*.jpg";
                       string[] files = Directory.GetFiles(tmpconf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
-                      if (files.Count() > 0)
+                      if (files.Any())
                       {
                         wfanart[0] = files[0];
                         wfanart[1] = "file";

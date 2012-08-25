@@ -451,7 +451,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public static string GetSortByName(string sName)
         {
           string SortBy = sName;
-          string SortByStrings = "SortByStrings";
+          const string SortByStrings = "SortByStrings";
 
           // loop through and try to remove a preposition            
           string[] prepositions = SortByStrings.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
@@ -861,10 +861,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             {
               if (TraktSettings.Username == username)
               {
-                if (TraktSettings.AccountStatus == ConnectionState.Connected)
-                  status = "online";
-                else
-                  status = "offline";
+                status = TraktSettings.AccountStatus == ConnectionState.Connected ? "online" : "offline";
               }
             }
             catch (Exception ex)

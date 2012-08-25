@@ -166,7 +166,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             genre += nodeGenre.InnerText;
                     }
 
-                    string Tagline = "(no Tagline supported by this catalog)";
+                    const string Tagline = "(no Tagline supported by this catalog)";
                   
                     XmlNodeList TagList = nodeDVD.SelectNodes("Tags/Tag");
                     TagFullName = string.Empty;
@@ -231,10 +231,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             if (nodeRole != null && nodeRole.InnerText != null) role = nodeRole.InnerText;
                         }
                         string line;
-                        if (role.Length == 0)
-                            line = String.Format("{0} {1}", firstname, lastname);
-                        else
-                            line = String.Format("{0} {1} ({2})", firstname, lastname, role);
+                        line = role.Length == 0 ? String.Format("{0} {1}", firstname, lastname) : String.Format("{0} {1} ({2})", firstname, lastname, role);
                         if (cast.Length > 0) cast += ", ";
                         cast += line;
                     }

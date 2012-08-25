@@ -52,6 +52,7 @@ namespace MyFilmsPlugin.Utils
         /// If the sFileName was already in memory, it will not be reloaded (basically it caches)
         /// </summary>
         /// <param name="sFileName">The sFileName of the image to load, fails silently if it cannot be loaded</param>
+        /// <param name="size">size of image</param>
         /// <returns>memory identifier</returns>
         public static string buildMemoryImageFromFile(string sFileName, System.Drawing.Size size)
         {
@@ -109,7 +110,7 @@ namespace MyFilmsPlugin.Utils
 
         public static string ExtractFullName(string identifier)
         {
-            String RegExp = @"\[MyFilms:(.*)\]";
+            const string RegExp = @"\[MyFilms:(.*)\]";
             Regex Engine = new Regex(RegExp, RegexOptions.IgnoreCase);
             Match match = Engine.Match(identifier);
             if (match.Success)
@@ -151,8 +152,7 @@ namespace MyFilmsPlugin.Utils
         public static String GetOtherImage(Image i, string sFileName, System.Drawing.Size size, bool bPersistent)
         {
             String sTextureName;
-            if (i != null) sTextureName = buildMemoryImage(i, sFileName, size, true);
-            else sTextureName = buildMemoryImageFromFile(sFileName, size);
+            sTextureName = i != null ? buildMemoryImage(i, sFileName, size, true) : buildMemoryImageFromFile(sFileName, size);
             if (bPersistent)
             {
                 if (!s_OtherPersistentImageList.Contains(sTextureName))

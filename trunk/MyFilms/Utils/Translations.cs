@@ -145,13 +145,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         public static string GetByName(string name)
         {
-            if (!Strings.ContainsKey(name))
-                return name;
-
-            return Strings[name];
+          return !Strings.ContainsKey(name) ? name : Strings[name];
         }
 
-        public static string GetByName(string name, params object[] args)
+      public static string GetByName(string name, params object[] args)
         {
             return String.Format(GetByName(name), args);
         }

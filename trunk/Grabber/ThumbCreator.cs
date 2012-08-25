@@ -20,7 +20,9 @@ namespace Grabber
   public class ThumbCreator
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
-    private static string ExtractApp = "mtn.exe";
+
+    private const string ExtractApp = "mtn.exe";
+
     private static string ExtractorPath = Config.GetFile(Config.Dir.Base, "MovieThumbnailer", ExtractApp);
     private static int PreviewColumns = 2;
     private static int PreviewRows = 3;
@@ -52,10 +54,7 @@ namespace Grabber
       ArtworkWidth = 0;
       LimitScanArea = "";
       BlacklistingIsEnabled = true;
-      if (SaveIndividualShots) 
-        IndividualShots = "-I "; // set param for individual shots ...
-      else
-        IndividualShots = "";
+      IndividualShots = SaveIndividualShots ? "-I " : "";
 
       if (ImageType == "Cover")
       {

@@ -76,18 +76,9 @@ namespace MyFilmsPlugin.MyFilms
 
         public class MFConfig
         {
-          public string Name
-          {
-            get { return name; }
-            set { name = value; }
-          } private string name;
+          public string Name { get; set; }
 
-          public List<KeyValuePair<string, string>> ViewList
-          {
-            get { return viewList; }
-            set { viewList = value; }
-          }
-          private List<KeyValuePair<string, string>> viewList;
+          public List<KeyValuePair<string, string>> ViewList { get; set; }
         }
 
         public enum MostRecentType
@@ -649,7 +640,7 @@ namespace MyFilmsPlugin.MyFilms
         {
           watch.Reset(); watch.Start();
           bool success = false; // result of write operation
-          int maxretries = 5; // max retries 10 * 1000 = 10 seconds
+          const int maxretries = 5; // max retries 10 * 1000 = 10 seconds
           int i = 0;
 
           while (!success && i < maxretries)
@@ -719,8 +710,8 @@ namespace MyFilmsPlugin.MyFilms
           {
             #region load catalog from file into dataset
             watch.Reset(); watch.Start();
-            int _numberOfTries = 20;
-            int _timeIntervalBetweenTries = 500;
+            const int _numberOfTries = 20;
+            const int _timeIntervalBetweenTries = 500;
             var tries = 0;
             while (true)
             {
@@ -1143,7 +1134,7 @@ namespace MyFilmsPlugin.MyFilms
                       try
                       {
                         MFMovie movie = new MFMovie { Config = config, Username = StrUserProfileName }; // MF config context
-                        GetMovieDetails(sr, tmpconf, (!traktOnly && tmpconf.AllowRecentlyAddedAPI), ref movie);
+                        GetMovieDetails(sr, tmpconf, (!traktOnly && tmpconf.AllowRecentlyAddedApi), ref movie);
                         moviesGlobal.Add(movie);
                         moviecount += 1;
                       }
@@ -1173,9 +1164,7 @@ namespace MyFilmsPlugin.MyFilms
           movie.ReadOnly = tmpconf.ReadOnly; // is true for readonly catalog types
 
           #region Number
-          if (!string.IsNullOrEmpty(row["Number"].ToString()))
-            movie.ID = Int32.Parse(row["Number"].ToString());
-          else movie.ID = 0;
+          movie.ID = !string.IsNullOrEmpty(row["Number"].ToString()) ? Int32.Parse(row["Number"].ToString()) : 0;
           #endregion
 
           #region year
@@ -1507,7 +1496,7 @@ namespace MyFilmsPlugin.MyFilms
               #endregion
 
               #region save changes via memory update to disk
-              int maxretries = 10; // max retries 10 * 3000 = 30 seconds
+              const int maxretries = 10; // max retries 10 * 3000 = 30 seconds
               int i = 0;
               bool success = false; // result of update operation
 
@@ -2387,309 +2376,162 @@ namespace MyFilmsPlugin.MyFilms
   /// </summary>  
   public class MFMovie
   {
-    public MFMovie() { }
+    public MFMovie()
+    {
+      //MovieRow = null;
+      //AllowLatestMediaAPI = false;
+      //AllowTrakt = false;
+      Category = string.Empty;
+      Year = 1900;
+      TMDBNumber = string.Empty;
+      IMDBNumber = string.Empty;
+      Path = string.Empty;
+      Trailer = string.Empty;
+      File = string.Empty;
+      Edition = string.Empty;
+      GroupName = string.Empty;
+      FormattedTitle = string.Empty;
+      TranslatedTitle = string.Empty;
+      Title = string.Empty;
+      WatchedCount = -1;
+      CategoryTrakt = new List<string>();
+      Length = 0;
+      DateTime = System.DateTime.Today;
+      DateAdded = string.Empty;
+      Picture = string.Empty;
+      Fanart = string.Empty;
+      Config = string.Empty;
+      Username = string.Empty;
+      ReadOnly = false;
+      ID = -1;
+    }
 
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
 
-    #region private vars
-    private int _mID = -1;
-    private string _mStrTitle = string.Empty;
-    private string _mStrTranslatedTitle = string.Empty;
-    private string _mStrFormattedTitle = string.Empty;
-    private string _mStrGroupName = string.Empty;
-    private List<string> _mStrCategoryTrakt = new List<string>();
-    private string _mStrEdition = string.Empty;
-    private string _mStrFile = string.Empty;
-    private string _mStrTrailer = string.Empty;
-    private string _mStrPath = string.Empty;
-    private string _mStrIMDBNumber = string.Empty;
-    private string _mStrTMDBNumber = string.Empty;
-    private int _mIYear = 1900;
-    private string _mStrCategory = string.Empty;
-    private int _mILength = 0;
-    private float _mFRating;
-    private float _mFRatingUser;
-    private bool _mIWatched;
-    private int _mIWatchedCount = -1;
-    private DateTime _mDateTime = System.DateTime.Today;
-    private string _mDateAdded = string.Empty;
-    private string _mPicture = string.Empty;
-    private string _mFanart = string.Empty;
-    private string _mConfig = string.Empty;
-    private string _mUsername = string.Empty;
-    private bool _mReadOnly = false;
-    //private bool _mAllowTrakt = false;
-    //private bool _mAllowLatestMediaAPI = false;
-    // private DataRow _MovieRow = null;
-    #endregion
-
     #region public vars
-    public int ID
-    {
-      get { return _mID; }
-      set { _mID = value; }
-    }
+
+    public int ID { get; set; }
 
     public bool IsEmpty
     {
       get
       {
-        if ((_mStrTitle != string.Empty) && (_mStrTitle != Strings.Unknown))
-        {
-          return false;
-        }
-        return true;
+        return (this.Title == string.Empty) || (this.Title == Strings.Unknown);
       }
     }
 
-    public bool Watched
-    {
-      get { return _mIWatched; }
-      set { _mIWatched = value; }
-    }
-
-    public int WatchedCount
-    {
-      get { return _mIWatchedCount; }
-      set { _mIWatchedCount = value; }
-    }
-
-    public string Title
-    {
-      get { return _mStrTitle; }
-      set { _mStrTitle = value; }
-    }
-
-    public string TranslatedTitle
-    {
-      get { return _mStrTranslatedTitle; }
-      set { _mStrTranslatedTitle = value; }
-    }
-
-    public string FormattedTitle
-    {
-      get { return _mStrFormattedTitle; }
-      set { _mStrFormattedTitle = value; }
-    }
-
-    public string GroupName
-    {
-      get { return _mStrGroupName; }
-      set { _mStrGroupName = value; }
-    }
-
-    public string Edition
-    {
-      get { return _mStrEdition; }
-      set { _mStrEdition = value; }
-    }
-
-    public string File
-    {
-      get { return _mStrFile; }
-      set { _mStrFile = value; }
-    }
-
-    public string Trailer
-    {
-      get { return _mStrTrailer; }
-      set { _mStrTrailer = value; }
-    }
-
-    public string Path
-    {
-      get { return _mStrPath; }
-      set { _mStrPath = value; }
-    }
-
-    public string IMDBNumber
-    {
-      get { return _mStrIMDBNumber; }
-      set { _mStrIMDBNumber = value; }
-    }
-
-    public string TMDBNumber
-    {
-      get { return _mStrTMDBNumber; }
-      set { _mStrTMDBNumber = value; }
-    }
-
-    public int Year
-    {
-      get { return _mIYear; }
-      set { _mIYear = value; }
-    }
-
-    public string Category
-    {
-      get { return _mStrCategory; }
-      set { _mStrCategory = value; }
-    }
-
+    public bool Watched { get; set; }
+    public int WatchedCount { get; set; }
+    public string Title { get; set; }
+    public string TranslatedTitle { get; set; }
+    public string FormattedTitle { get; set; }
+    public string GroupName { get; set; }
+    public string Edition { get; set; }
+    public string File { get; set; }
+    public string Trailer { get; set; }
+    public string Path { get; set; }
+    public string IMDBNumber { get; set; }
+    public string TMDBNumber { get; set; }
+    public int Year { get; set; }
+    public string Category { get; set; }
     /// <summary>
     /// entries for watchlist, recommendations and user lists.
     /// </summary>
-    public List<string> CategoryTrakt
-    {
-      get { return _mStrCategoryTrakt; }
-      set { _mStrCategoryTrakt = value; }
-    }
-
+    public List<string> CategoryTrakt { get; set; }
     /// <summary>
     /// Runtime in minutes.
     /// </summary>
-    public int Length
-    {
-      get { return _mILength; }
-      set { _mILength = value; }
-    }
+    public int Length { get; set; }
+    public float Rating { get; set; }
+    public float RatingUser { get; set; }
+    public DateTime DateTime { get; set; }
+    public string DateAdded { get; set; }
+    public string Picture { get; set; }
+    public string Fanart { get; set; }
+    public string Config { get; set; }
+    public string Username { get; set; }
+    public bool ReadOnly { get; set; }
 
-    public float Rating
-    {
-      get { return _mFRating; }
-      set { _mFRating = value; }
-    }
+    //public bool AllowTrakt { get; set; }
+    //public bool AllowLatestMediaAPI { get; set; }
+    //public DataRow MovieRow { get; set; }
 
-    public float RatingUser
-    {
-      get { return _mFRatingUser; }
-      set { _mFRatingUser = value; }
-    }
-
-    public DateTime DateTime
-    {
-      get { return _mDateTime; }
-      set { _mDateTime = value; }
-    }
-
-    public string DateAdded
-    {
-      get { return _mDateAdded; }
-      set { _mDateAdded = value; }
-    }
-
-    public string Picture
-    {
-      get { return _mPicture; }
-      set { _mPicture = value; }
-    }
-
-    public string Fanart
-    {
-      get { return _mFanart; }
-      set { _mFanart = value; }
-    }
-
-    public string Config
-    {
-      get { return _mConfig; }
-      set { _mConfig = value; }
-    }
-
-    public string Username
-    {
-      get { return _mUsername; }
-      set { _mUsername = value; }
-    }
-
-    public bool ReadOnly
-    {
-      get { return _mReadOnly; }
-      set { _mReadOnly = value; }
-    }
-
-    //public bool AllowTrakt
-    //{
-    //  get { return _mAllowTrakt; }
-    //  set { _mAllowTrakt = value; }
-    //}
-
-    //public bool AllowLatestMediaAPI
-    //{
-    //  get { return _mAllowLatestMediaAPI; }
-    //  set { _mAllowLatestMediaAPI = value; }
-    //}
-    //public DataRow MovieRow
-    //{
-    //  get { return _MovieRow; }
-    //  set { _MovieRow = value; }
-    //}
     #endregion
 
     public void Reset()
     {
-      _mStrTitle = string.Empty;
-      _mStrTranslatedTitle = string.Empty;
-      _mStrFormattedTitle = string.Empty;
-      _mStrGroupName = string.Empty;
-      _mStrCategoryTrakt.Clear();
-      _mStrEdition = string.Empty;
-      _mStrIMDBNumber = string.Empty;
-      _mStrTMDBNumber = string.Empty;
-      _mIYear = 1900;
-      _mStrCategory = string.Empty;
-      _mILength = 0;
-      _mFRating = 0.0f;
-      _mFRatingUser = 0.0f;
-      _mIWatched = false;
-      _mIWatchedCount = -1;
-      _mDateTime = DateTime.Today;
-      _mDateAdded = string.Empty;
-      _mStrFile = string.Empty;
-      _mStrTrailer = string.Empty;
-      _mStrPath = string.Empty;
-      _mPicture = string.Empty;
-      _mFanart = string.Empty;
-      _mConfig = string.Empty;
-      _mUsername = string.Empty;
-      _mReadOnly = false;
-      //_mAllowTrakt = false;
-      //_mAllowLatestMediaAPI = false;
-      // _MovieRow = null;
+      this.Title = string.Empty;
+      this.TranslatedTitle = string.Empty;
+      this.FormattedTitle = string.Empty;
+      this.GroupName = string.Empty;
+      this.CategoryTrakt.Clear();
+      this.Edition = string.Empty;
+      this.IMDBNumber = string.Empty;
+      this.TMDBNumber = string.Empty;
+      this.Year = 1900;
+      this.Category = string.Empty;
+      this.Length = 0;
+      this.Rating = 0.0f;
+      this.RatingUser = 0.0f;
+      this.Watched = false;
+      this.WatchedCount = -1;
+      this.DateTime = DateTime.Today;
+      this.DateAdded = string.Empty;
+      this.File = string.Empty;
+      this.Trailer = string.Empty;
+      this.Path = string.Empty;
+      this.Picture = string.Empty;
+      this.Fanart = string.Empty;
+      this.Config = string.Empty;
+      this.Username = string.Empty;
+      this.ReadOnly = false;
+      //this.AllowTrakt = false;
+      //this.AllowLatestMediaAPI = false;
+      //this.MovieRow = null;
     }
 
     private MFMovie GetCurrentMovie()
     {
       var movie = new MFMovie
         {
-          ID = this._mID,
-          Title = this._mStrTitle,
-          TranslatedTitle = this._mStrTranslatedTitle,
-          FormattedTitle = this._mStrFormattedTitle,
-          GroupName = this._mStrGroupName,
-          CategoryTrakt = this._mStrCategoryTrakt,
-          Edition = this._mStrEdition,
-          IMDBNumber = this._mStrIMDBNumber,
-          TMDBNumber = this._mStrTMDBNumber,
-          Year = this._mIYear,
-          Category = this._mStrCategory,
-          Length = this._mILength,
-          Rating = this._mFRating,
-          RatingUser = this._mFRatingUser,
-          Watched = this._mIWatched,
-          WatchedCount = this._mIWatchedCount,
-          DateTime = this._mDateTime,
-          DateAdded = this._mDateAdded,
-          File = this._mStrFile,
-          Trailer = this._mStrTrailer,
-          Path = this._mStrPath,
-          Picture = this._mPicture,
-          Fanart = this._mFanart,
-          Config = this._mConfig,
-          Username = this._mUsername,
-          ReadOnly = this._mReadOnly
+          ID = this.ID,
+          Title = this.Title,
+          TranslatedTitle = this.TranslatedTitle,
+          FormattedTitle = this.FormattedTitle,
+          GroupName = this.GroupName,
+          CategoryTrakt = this.CategoryTrakt,
+          Edition = this.Edition,
+          IMDBNumber = this.IMDBNumber,
+          TMDBNumber = this.TMDBNumber,
+          Year = this.Year,
+          Category = this.Category,
+          Length = this.Length,
+          Rating = this.Rating,
+          RatingUser = this.RatingUser,
+          Watched = this.Watched,
+          WatchedCount = this.WatchedCount,
+          DateTime = this.DateTime,
+          DateAdded = this.DateAdded,
+          File = this.File,
+          Trailer = this.Trailer,
+          Path = this.Path,
+          Picture = this.Picture,
+          Fanart = this.Fanart,
+          Config = this.Config,
+          Username = this.Username,
+          ReadOnly = this.ReadOnly
         };
       return movie;
     }
 
     public void AddCategoryTrakt(string toAdd)
     {
-      _mStrCategoryTrakt.Add(toAdd);
+      this.CategoryTrakt.Add(toAdd);
     }
 
     public void RemoveCategoryTrakt(string toRemove)
     {
-      _mStrCategoryTrakt.Remove(toRemove);
+      this.CategoryTrakt.Remove(toRemove);
     }
 
     public void Commit()
@@ -2766,7 +2608,7 @@ namespace MyFilmsPlugin.MyFilms
 
   public static class DBNullableExtensions
   {
-    public static object ToDBValue<T>(this Nullable<T> value) where T : struct
+    public static object ToDBValue<T>(this T? value) where T : struct
     {
       return value.HasValue ? (object)value.Value : DBNull.Value;
     }

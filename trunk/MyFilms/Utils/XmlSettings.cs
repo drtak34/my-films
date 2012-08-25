@@ -170,10 +170,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         float test = 123.456f;
         string tmp = test.ToString();
         bool useCommas = (tmp.IndexOf(",") >= 0);
-        if (useCommas == false)
-          strValue = strValue.Replace(',', '.');
-        else
-          strValue = strValue.Replace('.', ',');
+        strValue = useCommas == false ? strValue.Replace(',', '.') : strValue.Replace('.', ',');
 
         float fRet = (float)System.Double.Parse(strValue, NumberFormatInfo.InvariantInfo);
         return fRet;

@@ -7,6 +7,7 @@ namespace MyFilmsPlugin.DataBase
 {
   class MultiUserData
   {
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
     // public AntMovieCatalog.MovieRow AntMovie { get; set; }
     private string Value { get; set; }

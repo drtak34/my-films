@@ -1155,7 +1155,7 @@ Public Class AntRecord
     End Function
 
     Function CloseEnough(ByVal searchtitle As String, ByVal movietitle As String) As Boolean
-        Dim AutoApprovalTreshold As Integer = 2
+        Const AutoApprovalTreshold As Integer = 2
         Dim distance As Integer
         distance = AdvancedStringComparer.Levenshtein(searchtitle, movietitle)
         If (distance <= AutoApprovalTreshold = True) Then
@@ -2055,7 +2055,7 @@ Public Class AntRecord
     End Sub
     Private Sub CreateOrUpdateCustomFieldsAttribute(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
         ' First check, if the CustomFields element exists or create it
-        Dim SubElementName As String = "CustomFields"
+        Const SubElementName As String = "CustomFields"
         Dim element As Xml.XmlElement
         If _XMLElement.Item(SubElementName) Is Nothing Then
             element = _XMLDoc.CreateElement(SubElementName)

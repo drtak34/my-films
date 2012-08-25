@@ -37,46 +37,33 @@ namespace ShareWatcherHelper
 
     #region Variables
 
-    private EventType m_Type;
-    private string m_strFilename;
-    private string m_strOldFilename;
-
     #endregion
 
     #region Constructors/Destructors
 
     public ShareWatcherEvent(EventType type, string strFilename)
     {
-      this.m_Type = type;
-      this.m_strFilename = strFilename;
-      this.m_strOldFilename = null;
+      this.Type = type;
+      this.FileName = strFilename;
+      this.OldFileName = null;
     }
 
     public ShareWatcherEvent(EventType type, string strFilename, string strOldFilename)
     {
-      this.m_Type = type;
-      this.m_strFilename = strFilename;
-      this.m_strOldFilename = strOldFilename;
+      this.Type = type;
+      this.FileName = strFilename;
+      this.OldFileName = strOldFilename;
     }
 
     #endregion
 
     #region Properties
 
-    public EventType Type
-    {
-      get { return this.m_Type; }
-    }
+    public EventType Type { get; private set; }
 
-    public string FileName
-    {
-      get { return this.m_strFilename; }
-    }
+    public string FileName { get; private set; }
 
-    public string OldFileName
-    {
-      get { return this.m_strOldFilename; }
-    }
+    public string OldFileName { get; private set; }
 
     #endregion
   }

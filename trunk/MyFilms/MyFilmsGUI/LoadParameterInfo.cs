@@ -67,10 +67,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               paramsFromGuiProps.Add("movie:" + GUIPropertyManager.GetProperty("#myfilms.startparams.movieid"));
               GUIPropertyManager.SetProperty("#myfilms.startparams.movieid", string.Empty);
             }
-            if (paramsFromGuiProps.Count > 0) 
-              return string.Join("|", paramsFromGuiProps.ToArray());
-            else 
-              return null;
+            return paramsFromGuiProps.Count > 0 ? string.Join("|", paramsFromGuiProps.ToArray()) : null;
         }
 
     }

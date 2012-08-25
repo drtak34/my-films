@@ -217,9 +217,7 @@ namespace grabber
                 return results;
             List<DBMovieInfo> results2 = new List<DBMovieInfo>();
             results2 = getMoviesByTitle(ttitle, year, director, imdbid, choose, language);
-            if (results2.Count == 1)
-                return results2;
-            return results;
+            return results2.Count == 1 ? results2 : results;
         }
 
         public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, string imdbid, bool choose, string language)
@@ -294,10 +292,7 @@ namespace grabber
                     }
                 }
             }
-            if (resultsdet.Count > 0)
-                return resultsdet;
-            else
-                return results;
+            return resultsdet.Count > 0 ? resultsdet : results;
         }
 
         public List<DBPersonInfo> getPersonsByName(string name, bool choose, string language)
@@ -356,10 +351,7 @@ namespace grabber
               }
             }
           }
-          if (resultsdet.Count > 0)
-            return resultsdet;
-          else
-            return results;
+          return resultsdet.Count > 0 ? resultsdet : results;
         }
 
         public DBPersonInfo getPersonsById(string id, string language)
@@ -397,10 +389,7 @@ namespace grabber
             grabber.TimeoutIncrement = 1000;
             grabber.Encoding = Encoding.UTF8;
 
-            if (grabber.GetResponse())
-                return grabber.GetXML();
-            else
-                return null;
+            return grabber.GetResponse() ? grabber.GetXML() : null;
         }
         private DBMovieInfo getMovieInformation(XmlNode movieNode)
         {

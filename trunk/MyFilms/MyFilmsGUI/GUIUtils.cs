@@ -54,23 +54,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       imdbActor = new IMDBActor();
       MethodInfo mi = imdb.GetType().GetMethod("GetActorDetails");
       var iParams = mi.GetParameters();
-      if (iParams.Length == 2)
+      switch (iParams.Length)
       {
-        //var paramTypes = new Type[] { typeof(IMDB.IMDBUrl), typeof(IMDBActor).MakeByRefType() }; // var paramTypes = new Type[] { typeof(IMDB.IMDBUrl) Type.GetType("MediaPortal.Video.Database.IMDB.IMDBUrl"), Type.GetType("MediaPortal.Video.Database.IMDBActor&") };
-        //MethodInfo mi = imdb.GetType().GetMethod("GetActorDetails", paramTypes);
-        object[] arrParms = new object[] { imdbActorUrl, imdbActor };
-        bool returnValue = (bool)mi.Invoke(imdb, arrParms); // return (bool)mi.Invoke(imdb, new[] { imdbActorUrl, imdbActor });
-        imdbActor = (IMDBActor)arrParms[1];
-        return returnValue;
-      }
-      else if (iParams.Length == 3)
-      {
-        //var paramTypes = new Type[] { typeof(IMDB.IMDBUrl), typeof(bool), typeof(IMDBActor).MakeByRefType() }; //var paramTypes = new Type[] { Type.GetType("MediaPortal.Video.Database.IMDB.IMDBUrl"), typeof(bool), Type.GetType("MediaPortal.Video.Database.IMDBActor&") };
-        //MethodInfo mi = imdb.GetType().GetMethod("GetActorDetails", paramTypes);
-        object[] arrParms = new object[] { imdbActorUrl, director, imdbActor };
-        bool returnValue = (bool)mi.Invoke(imdb, arrParms);
-        imdbActor = (IMDBActor)arrParms[2];
-        return returnValue;
+        case 2:
+          {
+            //var paramTypes = new Type[] { typeof(IMDB.IMDBUrl), typeof(IMDBActor).MakeByRefType() }; // var paramTypes = new Type[] { typeof(IMDB.IMDBUrl) Type.GetType("MediaPortal.Video.Database.IMDB.IMDBUrl"), Type.GetType("MediaPortal.Video.Database.IMDBActor&") };
+            //MethodInfo mi = imdb.GetType().GetMethod("GetActorDetails", paramTypes);
+            object[] arrParms = new object[] { imdbActorUrl, imdbActor };
+            bool returnValue = (bool)mi.Invoke(imdb, arrParms); // return (bool)mi.Invoke(imdb, new[] { imdbActorUrl, imdbActor });
+            imdbActor = (IMDBActor)arrParms[1];
+            return returnValue;
+          }
+        case 3:
+          {
+            //var paramTypes = new Type[] { typeof(IMDB.IMDBUrl), typeof(bool), typeof(IMDBActor).MakeByRefType() }; //var paramTypes = new Type[] { Type.GetType("MediaPortal.Video.Database.IMDB.IMDBUrl"), typeof(bool), Type.GetType("MediaPortal.Video.Database.IMDBActor&") };
+            //MethodInfo mi = imdb.GetType().GetMethod("GetActorDetails", paramTypes);
+            object[] arrParms = new object[] { imdbActorUrl, director, imdbActor };
+            bool returnValue = (bool)mi.Invoke(imdb, arrParms);
+            imdbActor = (IMDBActor)arrParms[2];
+            return returnValue;
+          }
       }
       throw new Exception("Error invoking VideoDatabase method 'GetActorDetails'");
     }
@@ -98,17 +101,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool success = false;
       foreach (MethodInfo info in methods)
       {
-        if (info.Name == "GetFiles") // MP1.2
+        switch (info.Name)
         {
-          MethodInfo mi = typeof(VideoDatabase).GetMethod("GetFiles", paramTypes);
-          mi.Invoke(null, arrParms);
-          success = true;
-        }
-        else if (info.Name == "GetFilesForMovie") // MP1.3
-        {
-          MethodInfo mi = typeof(VideoDatabase).GetMethod("GetFilesForMovie", paramTypes);
-          mi.Invoke(null, arrParms);
-          success = true;
+          case "GetFiles":
+            {
+              MethodInfo mi = typeof(VideoDatabase).GetMethod("GetFiles", paramTypes);
+              mi.Invoke(null, arrParms);
+              success = true;
+            }
+            break;
+          case "GetFilesForMovie":
+            {
+              MethodInfo mi = typeof(VideoDatabase).GetMethod("GetFilesForMovie", paramTypes);
+              mi.Invoke(null, arrParms);
+              success = true;
+            }
+            break;
         }
       }
       if (!success)
@@ -122,16 +130,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // int iiActor = VideoDatabase.AddActor(string.Empty, "");
       var mi = typeof(VideoDatabase).GetMethod("AddActor");
       var iParams = mi.GetParameters();
-      if (iParams.Length == 1)
+      switch (iParams.Length)
       {
-        return (int)mi.Invoke(null, new[] { name });
+        case 1:
+          return (int)mi.Invoke(null, new[] { name });
+        case 2:
+          return (int)mi.Invoke(null, new[] { role, name });
+        default:
+          throw new Exception("Error invoking VideoDatabase method 'AddActor'");
       }
-      else if (iParams.Length == 2)
-      {
-        return (int)mi.Invoke(null, new[] { role, name });
-      }
-      else
-        throw new Exception("Error invoking VideoDatabase method 'AddActor'");
     }
 
     public static void AddActorToMovie(object iMovieId, object iActorId, object role)
@@ -140,16 +147,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // public static void AddActorToMovie(int lMovieId, int lActorId, string role)
       var mi = typeof(VideoDatabase).GetMethod("AddActorToMovie");
       var iParams = mi.GetParameters();
-      if (iParams.Length == 2)
+      switch (iParams.Length)
       {
-        mi.Invoke(null, new[] { iMovieId, iActorId });
+        case 2:
+          mi.Invoke(null, new[] { iMovieId, iActorId });
+          break;
+        case 3:
+          mi.Invoke(null, new[] { iMovieId, iActorId, role });
+          break;
+        default:
+          throw new Exception("Error invoking VideoDatabase method 'AddActorToMovie'");
       }
-      else if (iParams.Length == 3)
-      {
-        mi.Invoke(null, new[] { iMovieId, iActorId, role });
-      }
-      else
-        throw new Exception("Error invoking VideoDatabase method 'AddActorToMovie'");
     }
 
     #endregion
@@ -287,11 +295,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (!propertyCache.TryGetValue(key, out property))
       {
-        property = type.GetProperty(newName);
-        if (property == null)
-        {
-          property = type.GetProperty(oldName);
-        }
+        property = type.GetProperty(newName) ?? type.GetProperty(oldName);
 
         propertyCache[key] = property;
       }

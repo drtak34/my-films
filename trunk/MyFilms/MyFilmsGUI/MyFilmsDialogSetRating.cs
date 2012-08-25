@@ -62,8 +62,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIImageList imgStar = null;
 
     decimal rating = 1;
-    string fileName;
-    ResultCode resultCode;
 
     public MyFilmsDialogSetRating()
     {
@@ -101,7 +99,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (control == btnOk)
       {
         PageDestroy();
-        resultCode = ResultCode.Close;
+        this.Result = ResultCode.Close;
         return;
       }
       if (control == btnMin)
@@ -126,14 +124,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
           {
-            resultCode = ResultCode.Close;
+            this.Result = ResultCode.Close;
             base.OnMessage(message);
             UpdateRating();
           }
           return true;
         case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
           {
-            resultCode = ResultCode.Cancel;
+            this.Result = ResultCode.Cancel;
             base.OnMessage(message);
           }
           return true;
@@ -152,10 +150,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public void SetHeading(int iString)
     {
-      if (iString == 0) 
-        SetHeading(string.Empty);
-      else 
-        SetHeading(GUILocalizeStrings.Get(iString));
+      SetHeading(iString == 0 ? string.Empty : GUILocalizeStrings.Get(iString));
     }
 
     public void SetTitle(string title)
@@ -176,16 +171,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       get { return rating; }
       set { rating = value; }
     }
-    public string FileName
-    {
-      get { return fileName; }
-      set { fileName = value; }
-    }
 
-    public ResultCode Result
-    {
-      get { return resultCode; }
-    }
+    public string FileName { get; set; }
 
+    public ResultCode Result { get; private set; }
   }
 }

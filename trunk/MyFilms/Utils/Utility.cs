@@ -88,11 +88,11 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         /// <summary>
         /// Get all files from directory and it's subdirectories.
         /// </summary>
-        /// <param name="inputDir"></param>
+        /// <param name="directory"></param>
         /// <returns></returns>
-        public static List<FileInfo> GetFilesRecursive(DirectoryInfo directory) {
-            List<FileInfo> fileList = new List<FileInfo>();
-            DirectoryInfo[] subdirectories = new DirectoryInfo[] { };
+        public static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo directory) {
+            var fileList = new List<FileInfo>();
+            var subdirectories = new DirectoryInfo[] { };
 
             try {
                 fileList.AddRange(directory.GetFiles("*"));
@@ -128,7 +128,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         /// <param name="directory"></param>
         /// <returns></returns>
         public static List<FileInfo> GetVideoFilesRecursive(DirectoryInfo directory) {
-            List<FileInfo> fileList = GetFilesRecursive(directory);
+            IEnumerable<FileInfo> fileList = GetFilesRecursive(directory);
             List<FileInfo> videoFileList = new List<FileInfo>();
             foreach (FileInfo file in fileList) {
                 if (Utility.IsVideoFile(file))
@@ -183,11 +183,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
                 Regex expr = new Regex(rxFileStackMarkers, RegexOptions.IgnoreCase);
                 Match match = expr.Match(fileName);
                 // if we have a match on this expression we will remove the complete match.
-                if (match.Success)
-                    fileName = expr.Replace(fileName, "");
-                // no match means we just remove one character
-                else
-                    fileName = fileName.Substring(0, (fileName.Length - 1));
+                fileName = match.Success ? expr.Replace(fileName, "") : fileName.Substring(0, (fileName.Length - 1));
             }
 
             // Return the cleaned filename
@@ -443,7 +439,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
             // Check files that pass the MediaPortal Video Extension list
             if (IsMediaPortalVideoFile(fileInfo)) {
                 string ext = fileInfo.Extension.ToLower();
-                string name = fileInfo.Name.ToLower(); ;
+                string name = fileInfo.Name.ToLower();
 
                 // DVD: Non-Standalone content is invalid
                 if (ext == ".vob" && Regex.Match(name, @"(video_ts|vts_).+", RegexOptions.IgnoreCase).Success)
@@ -830,8 +826,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
       //'This trims the filename and leaves DVDs\ShawshankRedemption, the"
       FileName = FileName.Replace(FileNameEnd, "");
 
-      if (FileName.Contains(@"\")) TempString = FileName.Substring(FileName.LastIndexOf(@"\"));
-      else TempString = FileName;
+      TempString = FileName.Contains(@"\") ? FileName.Substring(FileName.LastIndexOf(@"\")) : FileName;
 
       if (TempString.ToLower() == "video_ts")
       {
@@ -839,8 +834,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         //'Check that there isn't a trailing backslash (probably is)
         if (TempString.EndsWith(@"\")) TempString = TempString.Substring(0, (TempString.Length) - 1);
         //'Check to see if we've still got a nested path.  Take the next level up if so.
-        if (TempString.Contains(@"\")) ReturnValue = TempString.Substring(TempString.LastIndexOf(@"\"));
-        else ReturnValue = TempString;
+        ReturnValue = TempString.Contains(@"\") ? TempString.Substring(TempString.LastIndexOf(@"\")) : TempString;
       }
         else
         ReturnValue = TempString;
@@ -863,10 +857,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
       //'This trims the filename and leaves BRs\IRON MAN"
       FileName = FileName.Replace(FileNameEnd, "");
 
-      if (FileName.Contains(@"\"))
-        TempString = FileName.Substring(FileName.LastIndexOf(@"\"));
-      else 
-        TempString = FileName;
+      TempString = FileName.Contains(@"\") ? FileName.Substring(FileName.LastIndexOf(@"\")) : FileName;
 
       if (TempString.ToLower() == "bdmv")
       {
@@ -874,8 +865,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
         //'Check that there isn't a trailing backslash (probably is)
         if (TempString.EndsWith(@"\")) TempString = TempString.Substring(0, (TempString.Length) - 1);
         //'Check to see if we've still got a nested path.  Take the next level up if so.
-        if (TempString.Contains(@"\")) ReturnValue = TempString.Substring(TempString.LastIndexOf(@"\"));
-        else ReturnValue = TempString;
+        ReturnValue = TempString.Contains(@"\") ? TempString.Substring(TempString.LastIndexOf(@"\")) : TempString;
       }
         else 
         ReturnValue = TempString;
@@ -888,7 +878,7 @@ namespace MyFilmsPlugin.MyFilms.Utils {
     {
       Regex RegCheck;
       string NewText;
-      string RegexCleanFilters = @"\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$|\s\d{4}\.";
+      const string RegexCleanFilters = @"\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$|\s\d{4}\.";
 
       foreach (string regexFilter in RegexCleanFilters.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
       {

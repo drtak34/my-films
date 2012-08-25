@@ -29,7 +29,7 @@ using Microsoft.Win32;
 
 namespace MyFilmsPlugin.MyFilms
 {
-    sealed class MyFilmsSettings
+    static class MyFilmsSettings
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         //public const bool newAPI = true;
@@ -73,30 +73,27 @@ namespace MyFilmsPlugin.MyFilms
         #endregion
 
         #region Vars
-        static Assembly _entryAssembly = null;
-        static bool _isConfig;
-        static Version _version = null;
-        static Version _mpVersion = null;
-        static DateTime _buildDate;
-        static DateTime _mpBuildDate;
-        static string _userAgent = null;
-        #endregion
+
+      #endregion
 
         #region Constructors
-        private MyFilmsSettings() {}
 
-        static MyFilmsSettings()
+    static MyFilmsSettings()
         {
+          UserAgent = null;
+          MPVersion = null;
+          Version = null;
+          EntryAssembly = null;
           try
           {
             apppath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            _entryAssembly = Assembly.GetEntryAssembly();
-            _isConfig = !System.IO.Path.GetFileNameWithoutExtension(EntryAssembly.Location).Equals("mediaportal", StringComparison.InvariantCultureIgnoreCase);
-            _version = Assembly.GetCallingAssembly().GetName().Version;
-            _mpVersion = Assembly.GetEntryAssembly().GetName().Version;
-            _buildDate = getLinkerTimeStamp(Assembly.GetAssembly(typeof(MyFilmsSettings)).Location);
-            _mpBuildDate = getLinkerTimeStamp(System.IO.Path.Combine(MyFilmsSettings.GetPath(Path.app), "MediaPortal.exe"));
-            _userAgent = string.Format("MyFilms{0}/{1}", isConfig ? "Config" : string.Empty, Version);
+            EntryAssembly = Assembly.GetEntryAssembly();
+            isConfig = !System.IO.Path.GetFileNameWithoutExtension(EntryAssembly.Location).Equals("mediaportal", StringComparison.InvariantCultureIgnoreCase);
+            Version = Assembly.GetCallingAssembly().GetName().Version;
+            MPVersion = Assembly.GetEntryAssembly().GetName().Version;
+            BuildDate = getLinkerTimeStamp(Assembly.GetAssembly(typeof(MyFilmsSettings)).Location);
+            MPBuildDate = getLinkerTimeStamp(System.IO.Path.Combine(MyFilmsSettings.GetPath(Path.app), "MediaPortal.exe"));
+            UserAgent = string.Format("MyFilms{0}/{1}", isConfig ? "Config" : string.Empty, Version);
           }
           catch (Exception)
           {
@@ -122,37 +119,31 @@ namespace MyFilmsPlugin.MyFilms
       #endregion
 
         #region Properties
-        /// <summary>
-        /// Gets the Assembly that loaded the Plugin (usually Mediaportal.exe or Configuration.exe)
-        /// </summary>
-        public static Assembly EntryAssembly
-        { get { return _entryAssembly; } }
 
-        /// <summary>
-        /// Gets a bool indicating wether or not the plugin has been loaded inside the configuration (checks EntryAssembly)
-        /// </summary>
-        public static bool isConfig
-        { get { return _isConfig; } }
+      /// <summary>
+      /// Gets the Assembly that loaded the Plugin (usually Mediaportal.exe or Configuration.exe)
+      /// </summary>
+      public static Assembly EntryAssembly { get; private set; }
 
-        /// <summary>
-        /// Gets a the Version of the Plugin
-        /// </summary>
-        public static Version Version
-        { get { return _version; } }
+      /// <summary>
+      /// Gets a bool indicating wether or not the plugin has been loaded inside the configuration (checks EntryAssembly)
+      /// </summary>
+      public static bool isConfig { get; private set; }
 
-        public static Version MPVersion 
-        { get { return _mpVersion; } }
+      /// <summary>
+      /// Gets a the Version of the Plugin
+      /// </summary>
+      public static Version Version { get; private set; }
 
-        public static DateTime BuildDate
-        { get { return _buildDate; } }
+      public static Version MPVersion { get; private set; }
 
-        public static DateTime MPBuildDate
-        { get { return _mpBuildDate; } }
+      public static DateTime BuildDate { get; private set; }
 
-        public static string UserAgent
-        { get { return _userAgent; } }
+      public static DateTime MPBuildDate { get; private set; }
 
-        public static int WebRequestCacheMinutes
+      public static string UserAgent { get; private set; }
+
+      public static int WebRequestCacheMinutes
         { get { return 180; } }
 
 

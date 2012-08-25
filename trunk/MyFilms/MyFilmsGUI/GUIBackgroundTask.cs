@@ -19,8 +19,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get
             {
-                if (instance == null) instance = new GUIBackgroundTask();
-                return instance;
+              return instance ?? (instance = new GUIBackgroundTask());
             }
         }
 
@@ -174,10 +173,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                     if (!abortedByUser)
                     {
-                        if (_CurrentTaskSuccess.HasValue)
-                            GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), string.Format("{0} {1}", "Error", _CurrentTaskDescription));
-                        else
-                            GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), string.Format("{0} {1}", "Timeout", _CurrentTaskDescription));
+                      GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), _CurrentTaskSuccess.HasValue ? string.Format("{0} {1}", "Error", this._CurrentTaskDescription) : string.Format("{0} {1}", "Timeout", this._CurrentTaskDescription));
                     }
                 }
             }

@@ -18,8 +18,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get
             {
-                if (instance == null) instance = new GUIConnector();
-                return instance;
+              return instance ?? (instance = new GUIConnector());
             }
         }
         #endregion
@@ -154,10 +153,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                     if (!abortedByUser)
                     {
-                        if (_CurrentTaskSuccess.HasValue)
-                          MyFilms.ShowNotifyDialog("MyFilms", string.Format("{0} {1}", "Error", _CurrentTaskDescription));
-                        else
-                          MyFilms.ShowNotifyDialog("MyFilms", string.Format("{0} {1}", "Timeout", _CurrentTaskDescription));
+                      MyFilms.ShowNotifyDialog(
+                        "MyFilms",
+                        _CurrentTaskSuccess.HasValue
+                          ? string.Format("{0} {1}", "Error", _CurrentTaskDescription)
+                          : string.Format("{0} {1}", "Timeout", this._CurrentTaskDescription));
                     }
                 }
             }

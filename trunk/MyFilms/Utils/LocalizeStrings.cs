@@ -65,7 +65,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Public method to load the text from a strings/xml file into memory
     /// </summary>
-    /// <param name="strFileName">Contains the filename+path for the string.xml file</param>
+    /// <param name="language">language for which the file should be loaded</param>
     /// <returns>
     /// true when text is loaded
     /// false when it was unable to load the text
@@ -255,10 +255,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
       }
 
-      if (_cultures.ContainsKey(language))
-        return _cultures[language];
-
-      return null;
+      return _cultures.ContainsKey(language) ? _cultures[language] : null;
     }
     #endregion
   }

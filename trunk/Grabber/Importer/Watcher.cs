@@ -187,11 +187,7 @@ namespace Importer
        
         public bool IsLocked()
         {
-            if (fileInfo != null) 
-            {
-                return IsLocked(fileInfo);
-            }
-            return false;
+          return fileInfo != null && this.IsLocked(fileInfo);
         }
     };
 
@@ -226,22 +222,22 @@ namespace Importer
                 string sRoot = System.IO.Path.GetPathRoot(folder);
                 try
                 {
-                    DriveInfo info = new DriveInfo(sRoot);
-                    
-                    if (info.DriveType == DriveType.CDRom) {
-                        // do nothing as filesystemwatchers do nothing for cd or dvd drives
-                      LogMyFilms.Info(string.Format("File Watcher: Skipping CD/DVD drive: {0}", sRoot));
-                    }
-                    else if (info.DriveType==DriveType.Network) {
-                        //string sUNCPath=MPR.GetUniversalName(folder);
+                  DriveInfo info = new DriveInfo(sRoot);
 
+                  switch (info.DriveType)
+                  {
+                    case DriveType.CDRom:
+                      LogMyFilms.Info(string.Format("File Watcher: Skipping CD/DVD drive: {0}", sRoot));
+                      break;
+                    case DriveType.Network:
                       LogMyFilms.Info(string.Format("File Watcher: Adding watcher on folder: {0}", folder));
-                        m_ScannedFolders.Add(folder);
-                    }
-                    else {
+                      m_ScannedFolders.Add(folder);
+                      break;
+                    default:
                       LogMyFilms.Info(string.Format("File Watcher: Adding watcher on folder: {0}", folder));
-                        m_WatchedFolders.Add(folder);
-                    }
+                      m_WatchedFolders.Add(folder);
+                      break;
+                  }
                 }
                 catch (System.ArgumentException)
                 {

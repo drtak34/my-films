@@ -95,7 +95,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 foreach (XmlNode nodeDVD in dvdList)
                 {
                     string Tags = string.Empty;
-                    string Tagline = "(no Tagline supported by this catalog)";
+                    const string Tagline = "(no Tagline supported by this catalog)";
                     string Certification = string.Empty;
                     CultureInfo ci = new CultureInfo("en-us");
                     XmlNodeList DiscsList = nodeDVD.SelectNodes("Disc");
@@ -159,10 +159,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "FormattedTitle", nodeDVD.Attributes["FormattedTitle"].Value);
                     //WriteAntAtribute(destXml, "Notes/File", File);
                     if (nodeDVD.Attributes["User1Seen"] != null)
-                        if (nodeDVD.Attributes["User1Seen"].Value.ToUpper() == "YES")
-                            WriteAntAtribute(destXml, "Checked", "true");
-                        else
-                            WriteAntAtribute(destXml, "Checked", "false");
+                        WriteAntAtribute(destXml, "Checked", nodeDVD.Attributes["User1Seen"].Value.ToUpper() == "YES" ? "true" : "false");
                     DateTime dt = new DateTime();
                     if (nodeDVD.Attributes["ModifiedDate"] != null)
                         try
@@ -182,10 +179,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         }
                     WriteAntAtribute(destXml, "Date", dt.ToShortDateString());
                     if (nodeDVD.Attributes["Country"] != null)
-                        if (nodeDVD.Attributes["Country"].Value.StartsWith("|"))
-                            WriteAntAtribute(destXml, "Country", nodeDVD.Attributes["Country"].Value.Substring(1));
-                        else
-                            WriteAntAtribute(destXml, "Country", nodeDVD.Attributes["Country"].Value);
+                      WriteAntAtribute(destXml, "Country", nodeDVD.Attributes["Country"].Value.StartsWith("|") ? nodeDVD.Attributes["Country"].Value.Substring(1) : nodeDVD.Attributes["Country"].Value);
                     string wRating = "0";
                     if (nodeDVD.Attributes["Rating"] != null)
                         wRating = nodeDVD.Attributes["Rating"].Value;
@@ -203,11 +197,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.Attributes["RunningTime"] != null)
                         WriteAntAtribute(destXml, "Length", nodeDVD.Attributes["RunningTime"].Value);
                     if (nodeDVD.Attributes["Genre"] != null)
-                        if (nodeDVD.Attributes["Genre"].Value.StartsWith("|"))
-                            WriteAntAtribute(destXml, "Category", nodeDVD.Attributes["Genre"].Value.Substring(1).Replace("|", ""));
-                        else
-                            WriteAntAtribute(destXml, "Category", nodeDVD.Attributes["Genre"].Value.Replace("|", ","));
-                    if (nodeDVD.Attributes["Director"] != null)
+                        WriteAntAtribute(destXml, "Category", nodeDVD.Attributes["Genre"].Value.StartsWith("|") ? nodeDVD.Attributes["Genre"].Value.Substring(1).Replace("|", "") : nodeDVD.Attributes["Genre"].Value.Replace("|", ","));
+                  if (nodeDVD.Attributes["Director"] != null)
                         WriteAntAtribute(destXml, "Director", nodeDVD.Attributes["Director"].Value);
                     if (nodeDVD.Attributes["Producer"] != null)
                         WriteAntAtribute(destXml, "Producer", nodeDVD.Attributes["Producer"].Value);
@@ -285,11 +276,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     WriteAntAtribute(destXml, "Comments", CommentsMerged);
 
                     if (nodeDVD.Attributes["Language"] != null)
-                        if (nodeDVD.Attributes["Language"].Value.StartsWith("|"))
-                            WriteAntAtribute(destXml, "Languages", nodeDVD.Attributes["Language"].Value.Substring(1));
-                        else
-                            WriteAntAtribute(destXml, "Languages", nodeDVD.Attributes["Language"].Value);
-                    if (nodeDVD.Attributes["Subtitles"] != null)
+                        WriteAntAtribute(destXml, "Languages", nodeDVD.Attributes["Language"].Value.StartsWith("|") ? nodeDVD.Attributes["Language"].Value.Substring(1) : nodeDVD.Attributes["Language"].Value);
+                  if (nodeDVD.Attributes["Subtitles"] != null)
                         WriteAntAtribute(destXml, "Subtitles", nodeDVD.Attributes["Subtitles"].Value);
                     WriteAntAtribute(destXml, "Source", wfile);
                     if (wVideoCodec.Length > 0)
