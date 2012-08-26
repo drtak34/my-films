@@ -3333,12 +3333,6 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnDisks;
             
-            private global::System.Data.DataColumn columnPicture;
-            
-            private global::System.Data.DataColumn columnMovie_Id;
-            
-            private global::System.Data.DataColumn columnContents_Id;
-            
             private global::System.Data.DataColumn columnFanart;
             
             private global::System.Data.DataColumn columnCertification;
@@ -3365,27 +3359,35 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIMDB_Rank;
             
+            private global::System.Data.DataColumn columnAspectratio;
+            
+            private global::System.Data.DataColumn columnAudioChannelCount;
+            
+            private global::System.Data.DataColumn columnCategoryTrakt;
+            
+            private global::System.Data.DataColumn columnAlternateTitles;
+            
+            private global::System.Data.DataColumn columnVirtualPathTitle;
+            
             private global::System.Data.DataColumn columnIsOnline;
             
             private global::System.Data.DataColumn columnIsOnlineTrailer;
             
-            private global::System.Data.DataColumn columnAspectratio;
-            
-            private global::System.Data.DataColumn columnCategoryTrakt;
-            
             private global::System.Data.DataColumn columnLastPosition;
             
-            private global::System.Data.DataColumn columnAudioChannelCount;
+            private global::System.Data.DataColumn columnPicture;
+            
+            private global::System.Data.DataColumn columnMovie_Id;
+            
+            private global::System.Data.DataColumn columnContents_Id;
+            
+            private global::System.Data.DataColumn columnMultiUserState;
             
             private global::System.Data.DataColumn columnCustomField1;
             
             private global::System.Data.DataColumn columnCustomField2;
             
             private global::System.Data.DataColumn columnCustomField3;
-            
-            private global::System.Data.DataColumn columnAlternateTitles;
-            
-            private global::System.Data.DataColumn columnMultiUserState;
             
             private global::System.Data.DataColumn columnPersons;
             
@@ -3679,27 +3681,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PictureColumn {
-                get {
-                    return this.columnPicture;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Movie_IdColumn {
-                get {
-                    return this.columnMovie_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Contents_IdColumn {
-                get {
-                    return this.columnContents_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn FanartColumn {
                 get {
                     return this.columnFanart;
@@ -3791,6 +3772,41 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AspectratioColumn {
+                get {
+                    return this.columnAspectratio;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AudioChannelCountColumn {
+                get {
+                    return this.columnAudioChannelCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CategoryTraktColumn {
+                get {
+                    return this.columnCategoryTrakt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AlternateTitlesColumn {
+                get {
+                    return this.columnAlternateTitles;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VirtualPathTitleColumn {
+                get {
+                    return this.columnVirtualPathTitle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn IsOnlineColumn {
                 get {
                     return this.columnIsOnline;
@@ -3805,20 +3821,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn AspectratioColumn {
-                get {
-                    return this.columnAspectratio;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CategoryTraktColumn {
-                get {
-                    return this.columnCategoryTrakt;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn LastPositionColumn {
                 get {
                     return this.columnLastPosition;
@@ -3826,9 +3828,30 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn AudioChannelCountColumn {
+            public global::System.Data.DataColumn PictureColumn {
                 get {
-                    return this.columnAudioChannelCount;
+                    return this.columnPicture;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Movie_IdColumn {
+                get {
+                    return this.columnMovie_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Contents_IdColumn {
+                get {
+                    return this.columnContents_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MultiUserStateColumn {
+                get {
+                    return this.columnMultiUserState;
                 }
             }
             
@@ -3850,20 +3873,6 @@ namespace MyFilmsPlugin.DataBase {
             public global::System.Data.DataColumn CustomField3Column {
                 get {
                     return this.columnCustomField3;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn AlternateTitlesColumn {
-                get {
-                    return this.columnAlternateTitles;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MultiUserStateColumn {
-                get {
-                    return this.columnMultiUserState;
                 }
             }
             
@@ -3941,8 +3950,6 @@ namespace MyFilmsPlugin.DataBase {
                         string RecentlyAdded, 
                         int AgeAdded, 
                         string Disks, 
-                        string Picture, 
-                        ContentsRow parentContentsRowByContents_Movie, 
                         string Fanart, 
                         string Certification, 
                         string Writer, 
@@ -3956,17 +3963,20 @@ namespace MyFilmsPlugin.DataBase {
                         string Tags, 
                         string Studio, 
                         string IMDB_Rank, 
+                        string Aspectratio, 
+                        string AudioChannelCount, 
+                        string CategoryTrakt, 
+                        string AlternateTitles, 
+                        string VirtualPathTitle, 
                         string IsOnline, 
                         string IsOnlineTrailer, 
-                        string Aspectratio, 
-                        string CategoryTrakt, 
                         string LastPosition, 
-                        string AudioChannelCount, 
+                        string Picture, 
+                        ContentsRow parentContentsRowByContents_Movie, 
+                        string MultiUserState, 
                         string CustomField1, 
                         string CustomField2, 
                         string CustomField3, 
-                        string AlternateTitles, 
-                        string MultiUserState, 
                         string Persons) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -4007,9 +4017,6 @@ namespace MyFilmsPlugin.DataBase {
                         RecentlyAdded,
                         AgeAdded,
                         Disks,
-                        Picture,
-                        null,
-                        null,
                         Fanart,
                         Certification,
                         Writer,
@@ -4023,20 +4030,24 @@ namespace MyFilmsPlugin.DataBase {
                         Tags,
                         Studio,
                         IMDB_Rank,
+                        Aspectratio,
+                        AudioChannelCount,
+                        CategoryTrakt,
+                        AlternateTitles,
+                        VirtualPathTitle,
                         IsOnline,
                         IsOnlineTrailer,
-                        Aspectratio,
-                        CategoryTrakt,
                         LastPosition,
-                        AudioChannelCount,
+                        Picture,
+                        null,
+                        null,
+                        MultiUserState,
                         CustomField1,
                         CustomField2,
                         CustomField3,
-                        AlternateTitles,
-                        MultiUserState,
                         Persons};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[39] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[60] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4094,9 +4105,6 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnRecentlyAdded = base.Columns["RecentlyAdded"];
                 this.columnAgeAdded = base.Columns["AgeAdded"];
                 this.columnDisks = base.Columns["Disks"];
-                this.columnPicture = base.Columns["Picture"];
-                this.columnMovie_Id = base.Columns["Movie_Id"];
-                this.columnContents_Id = base.Columns["Contents_Id"];
                 this.columnFanart = base.Columns["Fanart"];
                 this.columnCertification = base.Columns["Certification"];
                 this.columnWriter = base.Columns["Writer"];
@@ -4110,17 +4118,21 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnTags = base.Columns["Tags"];
                 this.columnStudio = base.Columns["Studio"];
                 this.columnIMDB_Rank = base.Columns["IMDB_Rank"];
+                this.columnAspectratio = base.Columns["Aspectratio"];
+                this.columnAudioChannelCount = base.Columns["AudioChannelCount"];
+                this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
+                this.columnAlternateTitles = base.Columns["AlternateTitles"];
+                this.columnVirtualPathTitle = base.Columns["VirtualPathTitle"];
                 this.columnIsOnline = base.Columns["IsOnline"];
                 this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
-                this.columnAspectratio = base.Columns["Aspectratio"];
-                this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
                 this.columnLastPosition = base.Columns["LastPosition"];
-                this.columnAudioChannelCount = base.Columns["AudioChannelCount"];
+                this.columnPicture = base.Columns["Picture"];
+                this.columnMovie_Id = base.Columns["Movie_Id"];
+                this.columnContents_Id = base.Columns["Contents_Id"];
+                this.columnMultiUserState = base.Columns["MultiUserState"];
                 this.columnCustomField1 = base.Columns["CustomField1"];
                 this.columnCustomField2 = base.Columns["CustomField2"];
                 this.columnCustomField3 = base.Columns["CustomField3"];
-                this.columnAlternateTitles = base.Columns["AlternateTitles"];
-                this.columnMultiUserState = base.Columns["MultiUserState"];
                 this.columnPersons = base.Columns["Persons"];
             }
             
@@ -4200,12 +4212,6 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnAgeAdded);
                 this.columnDisks = new global::System.Data.DataColumn("Disks", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnDisks);
-                this.columnPicture = new global::System.Data.DataColumn("Picture", typeof(string), null, global::System.Data.MappingType.Attribute);
-                base.Columns.Add(this.columnPicture);
-                this.columnMovie_Id = new global::System.Data.DataColumn("Movie_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-                base.Columns.Add(this.columnMovie_Id);
-                this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-                base.Columns.Add(this.columnContents_Id);
                 this.columnFanart = new global::System.Data.DataColumn("Fanart", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFanart);
                 this.columnCertification = new global::System.Data.DataColumn("Certification", typeof(string), null, global::System.Data.MappingType.Element);
@@ -4232,28 +4238,36 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnStudio);
                 this.columnIMDB_Rank = new global::System.Data.DataColumn("IMDB_Rank", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIMDB_Rank);
+                this.columnAspectratio = new global::System.Data.DataColumn("Aspectratio", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAspectratio);
+                this.columnAudioChannelCount = new global::System.Data.DataColumn("AudioChannelCount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAudioChannelCount);
+                this.columnCategoryTrakt = new global::System.Data.DataColumn("CategoryTrakt", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCategoryTrakt);
+                this.columnAlternateTitles = new global::System.Data.DataColumn("AlternateTitles", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAlternateTitles);
+                this.columnVirtualPathTitle = new global::System.Data.DataColumn("VirtualPathTitle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVirtualPathTitle);
                 this.columnIsOnline = new global::System.Data.DataColumn("IsOnline", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsOnline);
                 this.columnIsOnlineTrailer = new global::System.Data.DataColumn("IsOnlineTrailer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsOnlineTrailer);
-                this.columnAspectratio = new global::System.Data.DataColumn("Aspectratio", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAspectratio);
-                this.columnCategoryTrakt = new global::System.Data.DataColumn("CategoryTrakt", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCategoryTrakt);
                 this.columnLastPosition = new global::System.Data.DataColumn("LastPosition", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLastPosition);
-                this.columnAudioChannelCount = new global::System.Data.DataColumn("AudioChannelCount", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAudioChannelCount);
+                this.columnPicture = new global::System.Data.DataColumn("Picture", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnPicture);
+                this.columnMovie_Id = new global::System.Data.DataColumn("Movie_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnMovie_Id);
+                this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnContents_Id);
+                this.columnMultiUserState = new global::System.Data.DataColumn("MultiUserState", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMultiUserState);
                 this.columnCustomField1 = new global::System.Data.DataColumn("CustomField1", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomField1);
                 this.columnCustomField2 = new global::System.Data.DataColumn("CustomField2", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomField2);
                 this.columnCustomField3 = new global::System.Data.DataColumn("CustomField3", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomField3);
-                this.columnAlternateTitles = new global::System.Data.DataColumn("AlternateTitles", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAlternateTitles);
-                this.columnMultiUserState = new global::System.Data.DataColumn("MultiUserState", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMultiUserState);
                 this.columnPersons = new global::System.Data.DataColumn("Persons", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPersons);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -4781,7 +4795,7 @@ namespace MyFilmsPlugin.DataBase {
                         MultiUserState,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[38];
+                    columnValuesArray[26] = parentMovieRowByMovie_CustomFields[59];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -7420,46 +7434,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Picture {
-                get {
-                    try {
-                        return ((string)(this[this.tableMovie.PictureColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Picture in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.PictureColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int Movie_Id {
-                get {
-                    return ((int)(this[this.tableMovie.Movie_IdColumn]));
-                }
-                set {
-                    this[this.tableMovie.Movie_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int Contents_Id {
-                get {
-                    try {
-                        return ((int)(this[this.tableMovie.Contents_IdColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Contents_Id in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.Contents_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Fanart {
                 get {
                     try {
@@ -7655,6 +7629,81 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Aspectratio {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.AspectratioColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Aspectratio in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.AspectratioColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string AudioChannelCount {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.AudioChannelCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AudioChannelCount in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.AudioChannelCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CategoryTrakt {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.CategoryTraktColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte CategoryTrakt in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.CategoryTraktColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string AlternateTitles {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.AlternateTitlesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AlternateTitles in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.AlternateTitlesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string VirtualPathTitle {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.VirtualPathTitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte VirtualPathTitle in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.VirtualPathTitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string IsOnline {
                 get {
                     try {
@@ -7685,36 +7734,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Aspectratio {
-                get {
-                    try {
-                        return ((string)(this[this.tableMovie.AspectratioColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Aspectratio in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.AspectratioColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string CategoryTrakt {
-                get {
-                    try {
-                        return ((string)(this[this.tableMovie.CategoryTraktColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte CategoryTrakt in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.CategoryTraktColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string LastPosition {
                 get {
                     try {
@@ -7730,17 +7749,57 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string AudioChannelCount {
+            public string Picture {
                 get {
                     try {
-                        return ((string)(this[this.tableMovie.AudioChannelCountColumn]));
+                        return ((string)(this[this.tableMovie.PictureColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AudioChannelCount in Tabelle Movie ist DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Picture in Tabelle Movie ist DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMovie.AudioChannelCountColumn] = value;
+                    this[this.tableMovie.PictureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Movie_Id {
+                get {
+                    return ((int)(this[this.tableMovie.Movie_IdColumn]));
+                }
+                set {
+                    this[this.tableMovie.Movie_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Contents_Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableMovie.Contents_IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Contents_Id in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.Contents_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string MultiUserState {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.MultiUserStateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte MultiUserState in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.MultiUserStateColumn] = value;
                 }
             }
             
@@ -7786,36 +7845,6 @@ namespace MyFilmsPlugin.DataBase {
                 }
                 set {
                     this[this.tableMovie.CustomField3Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string AlternateTitles {
-                get {
-                    try {
-                        return ((string)(this[this.tableMovie.AlternateTitlesColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AlternateTitles in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.AlternateTitlesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string MultiUserState {
-                get {
-                    try {
-                        return ((string)(this[this.tableMovie.MultiUserStateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte MultiUserState in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.MultiUserStateColumn] = value;
                 }
             }
             
@@ -8215,26 +8244,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPictureNull() {
-                return this.IsNull(this.tableMovie.PictureColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPictureNull() {
-                this[this.tableMovie.PictureColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsContents_IdNull() {
-                return this.IsNull(this.tableMovie.Contents_IdColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetContents_IdNull() {
-                this[this.tableMovie.Contents_IdColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsFanartNull() {
                 return this.IsNull(this.tableMovie.FanartColumn);
             }
@@ -8365,6 +8374,56 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAspectratioNull() {
+                return this.IsNull(this.tableMovie.AspectratioColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAspectratioNull() {
+                this[this.tableMovie.AspectratioColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAudioChannelCountNull() {
+                return this.IsNull(this.tableMovie.AudioChannelCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAudioChannelCountNull() {
+                this[this.tableMovie.AudioChannelCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCategoryTraktNull() {
+                return this.IsNull(this.tableMovie.CategoryTraktColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCategoryTraktNull() {
+                this[this.tableMovie.CategoryTraktColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAlternateTitlesNull() {
+                return this.IsNull(this.tableMovie.AlternateTitlesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAlternateTitlesNull() {
+                this[this.tableMovie.AlternateTitlesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVirtualPathTitleNull() {
+                return this.IsNull(this.tableMovie.VirtualPathTitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVirtualPathTitleNull() {
+                this[this.tableMovie.VirtualPathTitleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsIsOnlineNull() {
                 return this.IsNull(this.tableMovie.IsOnlineColumn);
             }
@@ -8385,26 +8444,6 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsAspectratioNull() {
-                return this.IsNull(this.tableMovie.AspectratioColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetAspectratioNull() {
-                this[this.tableMovie.AspectratioColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCategoryTraktNull() {
-                return this.IsNull(this.tableMovie.CategoryTraktColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCategoryTraktNull() {
-                this[this.tableMovie.CategoryTraktColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsLastPositionNull() {
                 return this.IsNull(this.tableMovie.LastPositionColumn);
             }
@@ -8415,13 +8454,33 @@ namespace MyFilmsPlugin.DataBase {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsAudioChannelCountNull() {
-                return this.IsNull(this.tableMovie.AudioChannelCountColumn);
+            public bool IsPictureNull() {
+                return this.IsNull(this.tableMovie.PictureColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetAudioChannelCountNull() {
-                this[this.tableMovie.AudioChannelCountColumn] = global::System.Convert.DBNull;
+            public void SetPictureNull() {
+                this[this.tableMovie.PictureColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsContents_IdNull() {
+                return this.IsNull(this.tableMovie.Contents_IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetContents_IdNull() {
+                this[this.tableMovie.Contents_IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMultiUserStateNull() {
+                return this.IsNull(this.tableMovie.MultiUserStateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMultiUserStateNull() {
+                this[this.tableMovie.MultiUserStateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8452,26 +8511,6 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetCustomField3Null() {
                 this[this.tableMovie.CustomField3Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsAlternateTitlesNull() {
-                return this.IsNull(this.tableMovie.AlternateTitlesColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetAlternateTitlesNull() {
-                this[this.tableMovie.AlternateTitlesColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMultiUserStateNull() {
-                return this.IsNull(this.tableMovie.MultiUserStateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMultiUserStateNull() {
-                this[this.tableMovie.MultiUserStateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

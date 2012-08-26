@@ -19,7 +19,7 @@ namespace MyFilmsPlugin.DataBase
     public MultiUserData(string value)
     {
       this.MultiUserStatusValue = value;
-      LogMyFilms.Debug("MultiUserData() - loaded with value = '" + value + "'");
+      if (!string.IsNullOrEmpty(value)) LogMyFilms.Debug("MultiUserData() - loaded with value = '" + value + "'");
       LoadUserStates();
     }
 

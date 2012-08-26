@@ -209,6 +209,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           newRow.Value = "*";
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\TitlesIndex.jpg";
           CustomViews.View.Rows.Add(newRow);
+          //Box Sets view (mastertitle)
+          newRow = CustomViews.View.NewViewRow();
+          newRow.DBfield = StrTitle1;
+          newRow.Label = "Box Sets";
+          newRow.Value = "*";
+          newRow.Filter = @"(" + StrTitle1 + @" like '*\*') ";
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Films.jpg";
+          CustomViews.View.Rows.Add(newRow);
+          //Actors
+          newRow = CustomViews.View.NewViewRow();
+          newRow.DBfield = "Actors";
+          newRow.Index = 1;
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\PersonsIndex.jpg";
+          CustomViews.View.Rows.Add(newRow);
+          //Producer
+          newRow = CustomViews.View.NewViewRow();
+          newRow.DBfield = "Producer";
+          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons.jpg";
+          CustomViews.View.Rows.Add(newRow);
           iCustomViews = 5; // to load "old Custom Views"
         }
         #endregion
@@ -549,6 +570,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Boolindexedreturn = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Boolindexedreturn", false);
         IndexedChars = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "IndexedChars", 0);
         BoolReverseNames = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ReversePersonNames", false);
+        BoolVirtualPathBrowsing = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "VirtualPathBrowsing", false);
         WStrSort = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WStrSort", string.Empty);
         Wselectedlabel = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WSelectedLabel", string.Empty);
         Wstar = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Wstar", string.Empty);
@@ -743,6 +765,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public int IndexedChars { get; set; }
     public bool Boolindexedreturn { get; set; }
     public bool BoolCollection { get; set; }
+    public bool BoolVirtualPathBrowsing { get; set; }
     public bool AlwaysDefaultView { get; set; }
     public bool GlobalAvailableOnly { get; set; }
     public bool GlobalUnwatchedOnly { get; set; }
@@ -949,7 +972,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexedreturn", MyFilms.conf.Boolindexedreturn);
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexedChars", MyFilms.conf.IndexedChars);
         // XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ReversePersonNames", MyFilms.conf.BoolReverseNames); // removed, to make it NonPersistant
-
+        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "VirtualPathBrowsing", MyFilms.conf.BoolVirtualPathBrowsing);
 
         XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MyFilms.conf.Wselectedlabel);
 

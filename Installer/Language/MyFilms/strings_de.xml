@@ -126,6 +126,7 @@
     <String id="1079862">Lade Fanart (online)</String>
     <String id="1079863">Umschalten 'Manuelle Wahl Grabberskript' ({0})</String>
     <String id="1079864">Umschalten 'Automatisch bestes Suchergebnis' ({0})</String>
+    <String id="1079865">Umschalten 'Virtuelle Pfade' ({0})</String>
     <String id="1079866">Suche Filme nach beteiligten Personen</String>
     <String id="1079867">Auswahl der Person</String>
     <String id="1079868">Schauspieler</String>
@@ -216,7 +217,7 @@
     <String id="10798653">Medientyp</String>
     <String id="10798654">Quellpfad Film</String>
     <String id="10798655">Datum</String>
-    <String id="10798656">Quellpfad Trailer</String>
+    <String id="10798656">Verliehen</String>
     <String id="10798657">Bewertung</String>
     <String id="10798658">Filmname (Originaltitel)</String>
     <String id="10798659">Filmname (Deutscher Titel)</String>
@@ -360,7 +361,8 @@
     <String id="10798930">Mehrbenutzer Status</String>
     <String id="10798931">Zuletzt gesehen</String>
     <String id="10798932">Alternative Filmtitel</String>
-    <String id="10798940">Trailer</String>
+    <String id="10798933">Filmname (Virtueller Verzeichnispfad)</String>
+    <String id="10798940">Quellpfad Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Schlagwörter</String>
     <String id="10798943">Seitenverhältnis</String>

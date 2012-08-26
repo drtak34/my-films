@@ -126,6 +126,7 @@
     <String id="1079862">Háttérkép letöltése (kijelölt film)</String>
     <String id="1079863">Letöltő script kiválasztása: ({0})</String>
     <String id="1079864">Automatikus kiválasztás: ({0})</String>
+    <String id="1079865">Virtual Path Browing ({0})</String>
     <String id="1079866">Hasonló film keresése személy alapján</String>
     <String id="1079867">Válassz személyt</String>
     <String id="1079868">Színész</String>
@@ -360,6 +361,7 @@
     <String id="10798930">Multi User State</String>
     <String id="10798931">Last Seen</String>
     <String id="10798932">Alternate Titles</String>
+    <String id="10798933">Virtual Path Title</String>
     <String id="10798940">Előzetes</String>
     <String id="10798941">Címkesor</String>
     <String id="10798942">Címkék</String>
