@@ -549,8 +549,6 @@
 	<height>16</height>
 	<texture>MyFilms\overlayunwatched.png</texture>
 	<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
-	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
     <control>
 	<type>image</type>
@@ -562,8 +560,6 @@
 	<height>16</height>
 	<texture>MyFilms\overlaywatched.png</texture>
 	<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
-	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
     <control>
 	<type>imagelist</type>
@@ -583,7 +579,6 @@
 	<percentage>#myfilms.db.rating.value</percentage>
 	<imagesToDraw>10</imagesToDraw>
 	<visible>!Control.HasFocus(10099)</visible>
-	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
     </control>
 	<control>
 	<description>Rating Value</description>
@@ -600,6 +595,72 @@
 
 	<!-- USER INFO -->
     <control>
+		<description>User Rating Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>950</posX>
+		<posY>127</posY>
+		<label>#myfilms.user.rating.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font10</font>
+		<width>160</width>
+		<align>right</align>
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)</visible>		
+    </control>
+    <control>
+		<description>User Name Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>950</posX>
+		<posY>127</posY>
+		<label>#(L(497)):</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font10</font>
+		<align>right</align>
+		<width>160</width>
+		<align>right</align>
+		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>		
+    </control>
+	<control>
+		<description>User Rating Value (single user)</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>960</posX>
+		<posY>127</posY>
+		<label>#myfilms.user.rating.value/10</label>
+		<width>300</width>
+		<font>font10</font>
+		<textcolor>ivory</textcolor>
+		<align>left</align>
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+!string.equals(#myfilms.user.watched.name)</visible>		
+	</control>
+	<control>
+		<description>User Rating Value (multi-user - with user name)</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>960</posX>
+		<posY>127</posY>
+		<label>#myfilms.user.rating.value/10 (#myfilms.user.watched.name)</label>
+		<width>300</width>
+		<font>font10</font>
+		<textcolor>ivory</textcolor>
+		<align>left</align>
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>		
+	</control>
+	<control>
+		<description>User name (no User rating)</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>960</posX>
+		<posY>127</posY>
+		<label>#myfilms.user.watched.name</label>
+		<width>300</width>
+		<font>font10</font>
+		<textcolor>ivory</textcolor>
+		<align>left</align>
+		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>		
+	</control>
+    <!-- <control>
 	<description>User Info Label group</description>
 	<type>group</type>
 	<posX>950</posX>
@@ -668,7 +729,7 @@
 		<textcolor>ivory</textcolor>
 		<align>left</align>
     </control>	
-    </control>	
+    </control>	 -->
     <control>
 	<description>Year - Length Value</description>
 	<type>label</type>
@@ -680,7 +741,6 @@
 	<align>left</align>
 	<textcolor>ivory</textcolor>
 	<visible>!Control.HasFocus(10099)</visible>
-	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
     </control>	
     <control>
 	<description>Secondary Title</description>
@@ -1772,8 +1832,6 @@
 	<textcolor>ff6FAFE1</textcolor>
 	<label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
 	<visible>Control.HasFocus(10099)</visible>
-	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control> 
     <!-- <control>
 	<type>label</type>
