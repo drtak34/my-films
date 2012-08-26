@@ -956,151 +956,12 @@
 	<visible>!string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>	
     </control>
 
-    <!-- Additional Display for Info Movie available -->
-    <control>
-	<description>Movie available Info Label</description>
-	<type>fadelabel</type>
-	<id>1</id>
-	<posX>530</posX>
-	<posY>680</posY>
-	<width>80</width>
-	<label>#(L(1091)):</label>
-	<font>font10</font>
-	<align>right</align>
-	<textcolor>ff6FAFE1</textcolor>
-	<visible>string.equals(#myfilms.user.source.isonline)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow</visible>
-    </control>
-    <control>
-        <description>Movie unavailable Icon</description>
-	<type>image</type>
-	<id>1</id>
-	<posX>546</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_red.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>c0ffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,unavailable)</visible>
-    </control>
-    <control>
-	<description>Movie available Icon</description>
-	<type>image</type>
-	<id>1</id>
-	<posX>546</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_green.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>ffffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,available)</visible>
-    </control>
-    <control>
-	<description>Movie offline Icon</description>
-	<type>image</type>
-	<id>0</id>
-	<posX>546</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_yellow.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>ffffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,offline)</visible>
-    </control>
-    <control>
-	<description>Movie unknown Icon</description>
-	<type>image</type>
-	<id>0</id>
-	<posX>546</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_grey.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>ffffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,unknown)</visible>
-    </control>
-    <!-- Trailer Available Info -->
-    <control>
-	<description>Trailer available Info Label</description>
-	<type>fadelabel</type>
-	<id>1</id>
-	<posX>670</posX>
-	<posY>680</posY>
-	<width>90</width>
-	<label>#(L(5906)):</label>
-	<font>font10</font>
-	<align>right</align>
-	<textcolor>ff6FAFE1</textcolor>
-	<visible>string.equals(#myfilms.user.sourcetrailer.isonline)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow</visible>
-    </control>
-    <control>
-	<description>Trailer unavailable Icon</description>
-	<type>image</type>
-	<id>1</id>
-	<posX>680</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_red.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>c0ffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)</visible>
-    </control>
-    <control>
-	<description>Trailer available Icon</description>
-	<type>image</type>
-	<id>1</id>
-	<posX>680</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_green.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>ffffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,available)</visible>
-    </control>
-    <control>
-	<description>Trailer offline Icon</description>
-	<type>image</type>
-	<id>0</id>
-	<posX>680</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_yellow.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>ffffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,offline)</visible>
-    </control>
-    <control>
-	<description>Trailer unknown Icon</description>
-	<type>image</type>
-	<id>0</id>
-	<posX>680</posX>
-	<posY>685</posY>
-	<width>21</width>
-	<height>21</height>
-	<texture>MyFilms\led_unknown.png</texture>
-	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<colordiffuse>ffffffff</colordiffuse>
-	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
-    </control>
-    <control>
+	<!-- User Display Item 4 -->
+	<control>
 		<description>User Item 4 Label</description>
 		<type>fadelabel</type>
 		<id>1</id>
-		<posX>820</posX>
+		<posX>580</posX>
 		<posY>680</posY>
 		<label>#myfilms.user.item4.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
@@ -1115,14 +976,155 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<label>#myfilms.user.item4.value</label>
-		<posX>830</posX>
+		<posX>590</posX>
 		<posY>680</posY>
-		<width>300</width>
+		<width>230</width>
 		<font>font10</font>
 		<textcolor>ivory</textcolor>
 		<align>left</align>
 		<visible>control.isvisible(36)</visible>		
     </control>	
+
+    <!-- Additional Display for Info Movie available -->
+    <control>
+	<description>Movie available Info Label</description>
+	<type>fadelabel</type>
+	<id>1</id>
+	<posX>870</posX>
+	<posY>680</posY>
+	<width>80</width>
+	<label>#(L(1091)):</label>
+	<font>font10</font>
+	<align>right</align>
+	<textcolor>ff6FAFE1</textcolor>
+	<visible>string.equals(#myfilms.user.source.isonline)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+    </control>
+    <control>
+        <description>Movie unavailable Icon</description>
+	<type>image</type>
+	<id>1</id>
+	<posX>886</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_red.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>c0ffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,unavailable)</visible>
+    </control>
+    <control>
+	<description>Movie available Icon</description>
+	<type>image</type>
+	<id>1</id>
+	<posX>886</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_green.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>ffffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,available)</visible>
+    </control>
+    <control>
+	<description>Movie offline Icon</description>
+	<type>image</type>
+	<id>0</id>
+	<posX>886</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_yellow.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>ffffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,offline)</visible>
+    </control>
+    <control>
+	<description>Movie unknown Icon</description>
+	<type>image</type>
+	<id>0</id>
+	<posX>846</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_grey.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>ffffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.isonline,unknown)</visible>
+    </control>
+    <!-- Trailer Available Info -->
+    <control>
+	<description>Trailer available Info Label</description>
+	<type>fadelabel</type>
+	<id>1</id>
+	<posX>990</posX>
+	<posY>680</posY>
+	<width>90</width>
+	<label>#(L(5906)):</label>
+	<font>font10</font>
+	<align>right</align>
+	<textcolor>ff6FAFE1</textcolor>
+	<visible>string.equals(#myfilms.user.sourcetrailer.isonline)+!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+    </control>
+    <control>
+	<description>Trailer unavailable Icon</description>
+	<type>image</type>
+	<id>1</id>
+	<posX>1000</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_red.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>c0ffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)</visible>
+    </control>
+    <control>
+	<description>Trailer available Icon</description>
+	<type>image</type>
+	<id>1</id>
+	<posX>1000</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_green.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>ffffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,available)</visible>
+    </control>
+    <control>
+	<description>Trailer offline Icon</description>
+	<type>image</type>
+	<id>0</id>
+	<posX>1000</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_yellow.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>ffffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,offline)</visible>
+    </control>
+    <control>
+	<description>Trailer unknown Icon</description>
+	<type>image</type>
+	<id>0</id>
+	<posX>1000</posX>
+	<posY>685</posY>
+	<width>21</width>
+	<height>21</height>
+	<texture>MyFilms\led_unknown.png</texture>
+	<keepaspectratio>yes</keepaspectratio>
+	<centered>yes</centered>
+	<colordiffuse>ffffffff</colordiffuse>
+	<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
+    </control>
 	<!--  User Status Info
     <control>
 	<description>User available Info Label</description>
