@@ -320,6 +320,7 @@
           this.label24 = new System.Windows.Forms.Label();
           this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.chkVirtualPathBrowsing = new System.Windows.Forms.CheckBox();
           this.chkReversePersonNames = new System.Windows.Forms.CheckBox();
           this.chkShowEmpty = new System.Windows.Forms.CheckBox();
           this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
@@ -3142,6 +3143,7 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.chkVirtualPathBrowsing);
           this.groupBox_DefaultView.Controls.Add(this.chkReversePersonNames);
           this.groupBox_DefaultView.Controls.Add(this.chkShowEmpty);
           this.groupBox_DefaultView.Controls.Add(this.chkOnlyTitle);
@@ -3160,6 +3162,19 @@
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Start Settings ...";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
+          // 
+          // chkVirtualPathBrowsing
+          // 
+          this.chkVirtualPathBrowsing.AutoSize = true;
+          this.chkVirtualPathBrowsing.Location = new System.Drawing.Point(158, 298);
+          this.chkVirtualPathBrowsing.Name = "chkVirtualPathBrowsing";
+          this.chkVirtualPathBrowsing.Size = new System.Drawing.Size(91, 17);
+          this.chkVirtualPathBrowsing.TabIndex = 89;
+          this.chkVirtualPathBrowsing.Text = "Virtual Pathes";
+          this.ToolTip1.SetToolTip(this.chkVirtualPathBrowsing, "If enabled, your mediapathes will be used for browsing film lists.\r\nThis allows n" +
+                  "avigtion similar to browse the filesystem, though it is still based \r\non DB cont" +
+                  "ent  (media path).");
+          this.chkVirtualPathBrowsing.UseVisualStyleBackColor = true;
           // 
           // chkReversePersonNames
           // 
@@ -6981,5 +6996,6 @@
         private ComboBox LayOutViewFilms;
         private ComboBox SortSensViewFilms;
         private ComboBox SortViewFilms;
+        private CheckBox chkVirtualPathBrowsing;
     }
 }

@@ -126,6 +126,7 @@
     <String id="1079862">Stáhnout fanart (vybraný film)</String>
     <String id="1079863">Ruční výběr Grabber script ({0})</String>
     <String id="1079864">Automatický co nejlépe odpovídaly ({0})</String>
+    <String id="1079865">Virtual Path Browing ({0})</String>
     <String id="1079866">Hledat příbuzné filmy osob</String>
     <String id="1079867">Vybrané osoby</String>
     <String id="1079868">Herec</String>
@@ -360,6 +361,7 @@
     <String id="10798930">Multi User State</String>
     <String id="10798931">Last Seen</String>
     <String id="10798932">Alternate Titles</String>
+    <String id="10798933">Virtual Path Title</String>
     <String id="10798940">Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>

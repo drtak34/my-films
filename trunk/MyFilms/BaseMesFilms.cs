@@ -587,9 +587,9 @@ namespace MyFilmsPlugin.MyFilms
           foreach (AntMovieCatalog.CustomFieldRow fieldRow in cfrCollection) 
             cFields.Add(fieldRow.Tag);
 
-          List<string[]> CustomFieldList = new List<string[]>(); // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
+          var CustomFieldList = new List<string[]>(); // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
           // <CustomField Tag="Edition" Name="Edition" Type="ftString" GUIProperties="rx6:ry51:rw526:rh25:aw1:ah0:lw94" />
-          //CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
+          // CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
           CustomFieldList.Add(new string[] { "Edition", "Edition", "ftString" });
           CustomFieldList.Add(new string[] { "Studio", "Studio", "ftString" });
           CustomFieldList.Add(new string[] { "Fanart", "Fanart", "ftString" });
@@ -600,8 +600,6 @@ namespace MyFilmsPlugin.MyFilms
           CustomFieldList.Add(new string[] { "Aspectratio", "Aspectratio", "ftString" });
           CustomFieldList.Add(new string[] { "CategoryTrakt", "CategoryTrakt", "ftString" });
           CustomFieldList.Add(new string[] { "Watched", "Watched", "ftString" });
-          //CustomFieldList.Add(new string[] { "RecentlyAdded", "RecentlyAdded", "ftString" });
-          //CustomFieldList.Add(new string[] { "AgeAdded", "AgeAdded" ,"ftString"});
           CustomFieldList.Add(new string[] { "Favorite", "Favorite", "ftString" });
           CustomFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftReal" }); // Decimal in MyFilms ...
           CustomFieldList.Add(new string[] { "IMDB_Id", "IMDB_Id", "ftString" });
@@ -797,7 +795,17 @@ namespace MyFilmsPlugin.MyFilms
               movieRow.IndexedTitle = (index.Length > 0) ? index.Substring(0, 1).ToUpper() : "";
               movieRow.Persons = (movieRow.Actors ?? " ") + ", " + (movieRow.Producer ?? " ") + ", " + (movieRow.Director ?? " ") + ", " + (movieRow.Writer ?? " "); // Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
               // if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
-
+              if (!movieRow.IsSourceNull() && movieRow.Source.Length > 0)
+              {
+                string path = movieRow.Source;
+                if (path.StartsWith(@"\\")) path = path.Substring(2); // cut the first char on network drives
+                int pos = path.IndexOf(";", System.StringComparison.Ordinal);
+                if (pos > 0) path = path.Substring(0, pos).Trim();
+                //pos = path.LastIndexOf(@"\", System.StringComparison.Ordinal);
+                //if (pos > 4) path = path.Substring(0, pos + 1);
+                movieRow.VirtualPathTitle = path.ToLower(); // + @"\" + movieRow.FormattedTitle;
+              }
+              
               //if (!movieRow.IsRatingUserNull())
               //{
               //  //if (movieRow.RatingUser > 5)
@@ -838,7 +846,7 @@ namespace MyFilmsPlugin.MyFilms
             LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) + " ms)");
             #endregion
 
-            #region Other join table tests
+            #region Other join table tests (disabled)
             //watch.Reset(); watch.Start();
             //var commonColumnsX = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer());
             // var onlyCustomFieldColumns = data.CustomFields.Columns.OfType<DataColumn>().Except(data.Movie.Columns.OfType<DataColumn>(), new DataColumnComparer());
@@ -870,7 +878,7 @@ namespace MyFilmsPlugin.MyFilms
             //LogMyFilms.Debug("LoadMyFilmsFromDisk() - Copy joined data to new datatable version 2 done ... (" + (watch.ElapsedMilliseconds) + " ms)");
             #endregion
 
-            #region create new enhanced movie rowcollection by joining movie and customfields rows
+            #region create new enhanced movie rowcollection by joining movie and customfields rows (disabled - too slow!)
             //watch.Reset(); watch.Start();
             //tableMoviesExtended = SQLOps.Join(data.Movie, data.CustomFields, data.Movie.Movie_IdColumn, data.CustomFields.Movie_IdColumn); // Medium - 2 secs
             //int rows = tableMoviesExtended.Rows.Count;
@@ -886,7 +894,7 @@ namespace MyFilmsPlugin.MyFilms
             //LogMyFilms.Debug("LoadMyFilmsFromDisk() - GetEnhancedMovies() - creating '" + irows + "' rows by joining movie and customfields done ... (" + (watch.ElapsedMilliseconds) + " ms)");
             #endregion
 
-            #region create new joined movieextended datatable
+            #region create new joined movieextended datatable (disabled)
             //// create extended movie table ...
             //watch.Reset(); watch.Start();
             //using (tableMoviesExtended = data.Movie.Clone()) //using (DataTable targetTable = data.Tables["MovieEnhanced"])
@@ -993,7 +1001,7 @@ namespace MyFilmsPlugin.MyFilms
             //LogMyFilms.Debug("initData() - CopyColumns done ... (" + (initDataWatch.ElapsedMilliseconds) + " ms)");
             #endregion
 
-            #region testing joins and views - experimental ...
+            #region testing joins and views - experimental ... (disabled)
             //// create extended movie table ...
             //DataTable targetTable = data.Movie.Clone();
             //var dt2Columns = data.CustomFields.Columns.OfType<DataColumn>().Select(dc =>
@@ -1378,31 +1386,29 @@ namespace MyFilmsPlugin.MyFilms
 
         private static ArrayList Base_Search_String(string champselect, string[] listSeparator, string[] roleSeparator)
         {
-          Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
-          System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
-          foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
+          var oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
+          MatchCollection oMatches = oRegex.Matches(champselect);
+          foreach (Match oMatch in oMatches)
           {
-            Regex oRegexReplace = new Regex("[,;]");
+            var oRegexReplace = new Regex("[,;]");
             champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty));
           }
-          ArrayList wtab = new ArrayList();
+          var wtab = new ArrayList();
 
-          int wi = 0;
-          string[] Sep = listSeparator;
-          string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
-          string wzone = string.Empty;
-          int wzoneIndexPosition = 0;
+          int wi;
+          string[] sep = listSeparator;
+          string[] arSplit = champselect.Split(sep, StringSplitOptions.RemoveEmptyEntries);
           for (wi = 0; wi < arSplit.Length; wi++)
           {
             if (arSplit[wi].Length > 0)
             {
               // wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim()); // Replaced for performancereasons - HTML cleanup was not necessary !
-              wzone = arSplit[wi].Replace("  ", " ").Trim();
+              string wzone = arSplit[wi].Replace("  ", " ").Trim();
               for (int i = 0; i <= 4; i++)
               {
                 if (roleSeparator[i].Length > 0)
                 {
-                  wzoneIndexPosition = wzone.IndexOf(roleSeparator[i]);
+                  int wzoneIndexPosition = wzone.IndexOf(roleSeparator[i]);
                   if (wzoneIndexPosition == wzone.Length - 1)
                   {
                     wzone = string.Empty;
@@ -1727,7 +1733,7 @@ namespace MyFilmsPlugin.MyFilms
 
               if (!string.IsNullOrEmpty(StrSort) && columnType == typeof(string)) // don't apply special sorting on "native" types - only on string types !
               {
-                LogMyFilms.Debug("ReadDataMovies() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + StrSortSens + "', sortascending = '" + StrSort + "'");
+                LogMyFilms.Debug("ReadDataMovies() - sorting fieldtype = '" + fieldType + "', vartype = '" + strColumnType + "', sortfield = '" + StrSort + "', sortascending = '" + StrSortSens + "'");
                 watch.Reset(); watch.Start();
                 switch (fieldType)
                 {
@@ -2326,6 +2332,9 @@ namespace MyFilmsPlugin.MyFilms
               case "DateWatched": // last seen
               case "datewatched":
                 return GUILocalizeStrings.Get(10798931);
+              case "VirtualPathTitle": // virtual path = directory path plus movie title
+              case "virtualpathtitle":
+                return GUILocalizeStrings.Get(10798933);
               default:
                 {
                   string translation = string.Empty;

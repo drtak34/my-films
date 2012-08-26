@@ -119,6 +119,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
         this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
         this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
+        this.chkVirtualPathBrowsing.Visible = false; // disable global option to use virtual path browsing
         // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
         //CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
         //CatalogType.Items.Remove("Ant Movie Catalog Xtended (V4.1)");
@@ -181,13 +182,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       foreach (DataColumn dc in ds.Movie.Columns)
       {
         if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" &&
-             dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "MultiUserState")
+             dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "MultiUserState" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "VirtualPathTitle")
             && (CatalogType.SelectedIndex != 0 ||
             (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
              dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
              dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
              dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" &&
-             dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched"))
+             dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3" && dc.ColumnName != "DateWatched"))
           )
         {
           if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
@@ -205,7 +206,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //  SortInHierarchies.Items.Add(dc.ColumnName);
           //}
 
-          if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle")
+          if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle") // ToDo: Add "VirtualPathTitle" to selection
           {
             //AntTitle1.Items.Add(dc.ColumnName); // Fields already added in Controls definition
             AntTitle2.Items.Add(dc.ColumnName);
@@ -871,6 +872,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", chkScanMediaOnStart.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", chkShowEmpty.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ReversePersonNames", chkReversePersonNames.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "VirtualPathBrowsing", chkVirtualPathBrowsing.Checked);
 
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", cbAllowTraktSync.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AllowRecentAddedAPI", cbAllowRecentAddedAPI.Checked);
@@ -1343,6 +1345,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "OnlyTitleList", false);
       chkShowEmpty.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ShowEmpty", false);
       chkReversePersonNames.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ReversePersonNames", false);
+      chkVirtualPathBrowsing.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "VirtualPathBrowsing", false);
 
       tbExternalPlayerPath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerPath", "");
       tbExternalPlayerStartParams.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ExternalPlayerStartParams", "");
@@ -1949,36 +1952,37 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AntMovieCatalog.CustomFieldsPropertiesRow[] cfpCollection = mydivx.Catalog[0].GetCustomFieldsPropertiesRows();
       if (cfpCollection.Length == 0) return false;
 
-      var CustomFieldList = new List<string[]>(); // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
+      var customFieldList = new List<string[]>(); // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
       // <CustomField Tag="Edition" Name="Edition" Type="ftString" GUIProperties="rx6:ry51:rw526:rh25:aw1:ah0:lw94" />
-      //CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
-      CustomFieldList.Add(new string[] { "Edition", "Edition", "ftString" });
-      CustomFieldList.Add(new string[] { "Studio", "Studio", "ftString" });
-      CustomFieldList.Add(new string[] { "Fanart", "Fanart", "ftString" });
-      CustomFieldList.Add(new string[] { "Certification", "Certification", "ftString" });
-      CustomFieldList.Add(new string[] { "Writer", "Writer", "ftString" });
-      CustomFieldList.Add(new string[] { "TagLine", "TagLine", "ftString" });
-      CustomFieldList.Add(new string[] { "Tags", "Tags", "ftString" });
-      CustomFieldList.Add(new string[] { "Aspectratio", "Aspectratio", "ftString" });
-      CustomFieldList.Add(new string[] { "CategoryTrakt", "CategoryTrakt", "ftString" });
-      CustomFieldList.Add(new string[] { "Watched", "Watched", "ftString" });
-      //CustomFieldList.Add(new string[] { "RecentlyAdded", "RecentlyAdded", "ftString" });
-      //CustomFieldList.Add(new string[] { "AgeAdded", "AgeAdded" ,"ftString"});
-      CustomFieldList.Add(new string[] { "Favorite", "Favorite", "ftString" });
-      CustomFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftString" });
-      CustomFieldList.Add(new string[] { "IMDB_Id", "IMDB_Id", "ftString" });
-      CustomFieldList.Add(new string[] { "TMDB_Id", "TMDB_Id", "ftString" });
-      CustomFieldList.Add(new string[] { "IMDB_Rank", "IMDB_Rank", "ftString" });
-      CustomFieldList.Add(new string[] { "SourceTrailer", "SourceTrailer", "ftString" });
-      CustomFieldList.Add(new string[] { "IsOnline", "IsOnline", "ftString" });
-      CustomFieldList.Add(new string[] { "IsOnlineTrailer", "IsOnlineTrailer", "ftString" });
-      CustomFieldList.Add(new string[] { "LastPosition", "LastPosition", "ftString" });
-      CustomFieldList.Add(new string[] { "AudioChannelCount", "AudioChannelCount", "ftString" });
-      CustomFieldList.Add(new string[] { "CustomField1", "CustomField1", "ftString" });
-      CustomFieldList.Add(new string[] { "CustomField2", "CustomField2", "ftString" });
-      CustomFieldList.Add(new string[] { "CustomField3", "CustomField3", "ftString" });
+      // CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
+      customFieldList.Add(new string[] { "Edition", "Edition", "ftString" });
+      customFieldList.Add(new string[] { "Studio", "Studio", "ftString" });
+      customFieldList.Add(new string[] { "Fanart", "Fanart", "ftString" });
+      customFieldList.Add(new string[] { "Certification", "Certification", "ftString" });
+      customFieldList.Add(new string[] { "Writer", "Writer", "ftString" });
+      customFieldList.Add(new string[] { "TagLine", "TagLine", "ftString" });
+      customFieldList.Add(new string[] { "Tags", "Tags", "ftString" });
+      customFieldList.Add(new string[] { "Aspectratio", "Aspectratio", "ftString" });
+      customFieldList.Add(new string[] { "CategoryTrakt", "CategoryTrakt", "ftString" });
+      customFieldList.Add(new string[] { "Watched", "Watched", "ftString" });
+      customFieldList.Add(new string[] { "Favorite", "Favorite", "ftString" });
+      customFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftString" });
+      customFieldList.Add(new string[] { "IMDB_Id", "IMDB_Id", "ftString" });
+      customFieldList.Add(new string[] { "TMDB_Id", "TMDB_Id", "ftString" });
+      customFieldList.Add(new string[] { "IMDB_Rank", "IMDB_Rank", "ftString" });
+      customFieldList.Add(new string[] { "SourceTrailer", "SourceTrailer", "ftString" });
+      customFieldList.Add(new string[] { "IsOnline", "IsOnline", "ftString" });
+      customFieldList.Add(new string[] { "IsOnlineTrailer", "IsOnlineTrailer", "ftString" });
+      customFieldList.Add(new string[] { "LastPosition", "LastPosition", "ftString" });
+      customFieldList.Add(new string[] { "AudioChannelCount", "AudioChannelCount", "ftString" });
+      customFieldList.Add(new string[] { "AlternateTitles", "AlternateTitles", "ftString" });
+      customFieldList.Add(new string[] { "DateWatched", "DateWatched", "ftDate" });
+      customFieldList.Add(new string[] { "MultiUserState", "MultiUserState", "ftString" });
+      customFieldList.Add(new string[] { "CustomField1", "CustomField1", "ftString" });
+      customFieldList.Add(new string[] { "CustomField2", "CustomField2", "ftString" });
+      customFieldList.Add(new string[] { "CustomField3", "CustomField3", "ftString" });
 
-      var customFieldTagList = CustomFieldList.Select(stringse => stringse[0]).ToList();
+      var customFieldTagList = customFieldList.Select(stringse => stringse[0]).ToList();
       var cFields = new ArrayList();
       AntMovieCatalog.CustomFieldRow[] cfrCollection = mydivx.CustomFieldsProperties[0].GetCustomFieldRows();
 

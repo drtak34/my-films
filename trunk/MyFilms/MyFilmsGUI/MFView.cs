@@ -327,6 +327,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
     public bool Boolindexedreturn { get; set; }
     public int IndexedChars { get; set; }
     public bool BoolReverseNames { get; set; }
+    public bool BoolVirtualPathBrowsing { get; set; }
     public bool BoolShowEmptyValuesInViews { get; set; }
     public bool BoolSkipViewState { get; set; }
     public string Wselectedlabel { get; set; }
@@ -358,6 +359,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
       this.Boolindexedreturn = false;
       this.IndexedChars = 0;
       this.BoolReverseNames = false;
+      this.BoolVirtualPathBrowsing = false;
       this.BoolShowEmptyValuesInViews = false;
       this.Wselectedlabel = string.Empty;
       this.WStrSort = string.Empty;
@@ -399,7 +401,8 @@ namespace MyFilmsPlugin.MyFilmsGUI
         this.StrLayOutInHierarchies.ToString() + "|" +
         this.LastID.ToString() + "|" +
         this.IndexItem.ToString() + "|" +
-        this.TitleItem;
+        this.TitleItem + "|" +
+        this.BoolVirtualPathBrowsing.ToString() ;
       LogMyFilms.Debug("SaveToString() - output = '" + savestring + "'");
       return savestring;
     }
@@ -439,6 +442,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
       this.LastID = int.Parse(split[22]);
       this.IndexItem = int.Parse(split[23]);
       this.TitleItem = split[24];
+      this.BoolVirtualPathBrowsing = bool.Parse(split[25]);
     }
   }
 

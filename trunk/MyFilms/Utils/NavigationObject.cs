@@ -99,6 +99,7 @@ namespace MyFilmsPlugin.Utils
       ViewStatus.Boolindexedreturn = conf.Boolindexedreturn;
       ViewStatus.IndexedChars = conf.IndexedChars;
       ViewStatus.BoolReverseNames = conf.BoolReverseNames;
+      ViewStatus.BoolVirtualPathBrowsing = conf.BoolVirtualPathBrowsing;
       ViewStatus.BoolShowEmptyValuesInViews = conf.BoolShowEmptyValuesInViews;
       ViewStatus.BoolSkipViewState = conf.BoolSkipViewState;
 

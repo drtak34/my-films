@@ -6044,9 +6044,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Length > 0)
             {
-                int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
-                MyFilms.conf.StrTIndex = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Substring(TitlePos);
-                MyFilms.currentMovie.Title = MyFilms.conf.StrTIndex;
+              // int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
+              // MyFilms.conf.StrTIndex = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Substring(TitlePos);
+              string fullTitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+              int TitlePos = fullTitle.LastIndexOf(MyFilms.conf.TitleDelim, StringComparison.OrdinalIgnoreCase);
+              MyFilms.conf.StrTIndex = ((fullTitle.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) > 0)
+                                          ? fullTitle.Substring(fullTitle.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1)
+                                          : fullTitle);
+              // ((masterTitle.LastIndexOf(conf.TitleDelim, System.StringComparison.Ordinal) > 0) ? masterTitle.Substring(masterTitle.LastIndexOf(conf.TitleDelim, System.StringComparison.Ordinal) + 1) : masterTitle)
+              MyFilms.currentMovie.Title = MyFilms.conf.StrTIndex;
             }
 
             int year = 1900;
