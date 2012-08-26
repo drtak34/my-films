@@ -842,7 +842,9 @@ If you choose a new path it will be added to your existing path(s).</value>
   </data>
   <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
     <value>Choose the DB fireld where MyFilms should store the info about the source path of trailers.
-"Borrower" is a good recommendation, as it's not commonly used. However make sure, you do not use this field for other purposes (e.g. seen status)
+For AMC3.x users, "Borrower" is a good recommendation, as it's not commonly used. 
+AMC4.x users should use the "SourceTrailer" field that was introduced for this purpose (and keeps Borrower free).
+However make sure, you do not use this field for other purposes (e.g. seen status)
 If you use external ANT movie catalog to edit this field manually, you can add more than one movie by separating them with semicolon.
 e.g.: "\\server\path\trailer1.flv;C:\Movies\trailer2.flv"
 When using the trailer search &amp; register, MyFilms will automatically populate this DB field for you.</value>
