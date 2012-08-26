@@ -9410,7 +9410,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!string.IsNullOrEmpty(directoryname))
             {
               files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl")) && MediaPortal.Util.Utils.IsVideo(filefound)))
+              foreach (string filefound in files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl") || filefound.ToLower().Contains("clip")) && MediaPortal.Util.Utils.IsVideo(filefound)))
               {
                 wsize = new System.IO.FileInfo(filefound).Length;
                 result.Add(filefound);

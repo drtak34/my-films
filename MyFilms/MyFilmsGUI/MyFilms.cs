@@ -10841,8 +10841,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
 
+        #region Menu - all operations
+
         case "menusavecurrentsettingstoview":
           {
+            #region Menu - save settings
             MFview.ViewRow newRow = GetCustomViewFromViewLabel(conf.CurrentView);
             newRow.SortDirectionView = (conf.BoolSortCountinViews) ? conf.WStrSortSensCount : conf.WStrSortSens;
             newRow.SortFieldViewType = (conf.BoolSortCountinViews) ? "Count" : "Name";
@@ -10852,10 +10855,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SaveCustomViews();
             NavigationStack.Clear();
             break;
+            #endregion
           }
 
         case "menuadd":
           {
+            #region Menu - add item
             MFview.ViewRow newRow = MyFilms.conf.CustomViews.View.NewViewRow();
             newRow.ViewEnabled = true;
             //newRow.ShowEmpty = conf.BoolShowEmptyValuesInViews;
@@ -10931,10 +10936,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               NavigationStack.Clear();
             }
             break;
+            #endregion
           }
 
         case "menudisable":
           {
+            #region Menu - disable item
             foreach (MFview.ViewRow viewRow in Enumerable.Where(MyFilms.conf.CustomViews.View, viewRow => this.facadeFilms.SelectedListItem.Label == viewRow.Label))
             {
               viewRow.ViewEnabled = false;
@@ -10944,10 +10951,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
+            #endregion
           }
 
         case "menuenable":
           {
+            #region Menu - enable item
             GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
 
             if (dlgmenu == null) return;
@@ -10974,10 +10983,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
+            #endregion
           }
 
         case "menudelete":
           {
+            #region Menu - delete item
             foreach (MFview.ViewRow viewRow in Enumerable.Where(MyFilms.conf.CustomViews.View, viewRow => this.facadeFilms.SelectedListItem.Label == viewRow.Label))
             {
               MyFilms.conf.CustomViews.View.RemoveViewRow(viewRow);
@@ -10987,10 +10998,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
+            #endregion
           }
 
         case "menumoveup":
           {
+            #region Menu - movie item up
             int rowIndex = -1;
             foreach (MFview.ViewRow viewRow in Enumerable.Where(MyFilms.conf.CustomViews.View, viewRow => this.facadeFilms.SelectedListItem.Label == viewRow.Label))
             {
@@ -11010,10 +11023,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
+            #endregion
           }
 
         case "menumovedown":
           {
+            #region Menu - movie item down
             int rowIndex = -1;
             foreach (MFview.ViewRow viewRow in Enumerable.Where(MyFilms.conf.CustomViews.View, viewRow => this.facadeFilms.SelectedListItem.Label == viewRow.Label))
             {
@@ -11033,10 +11048,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
+            #endregion
           }
 
         case "menurename":
           {
+            #region Menu - rename tem
             foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
             {
               if (facadeFilms.SelectedListItem.Label == viewRow.Label)
@@ -11057,10 +11074,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
             break;
+            #endregion
           }
 
         case "menusetvalue":
           {
+            #region Menu - set value
             foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
             {
               if (facadeFilms.SelectedListItem.Label == viewRow.Label)
@@ -11081,10 +11100,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
             break;
+            #endregion
           }
 
         case "menusetfilter":
           {
+            #region Menu - set filter
             foreach (MFview.ViewRow viewRow in MyFilms.conf.CustomViews.View)
             {
               if (facadeFilms.SelectedListItem.Label == viewRow.Label)
@@ -11109,7 +11130,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
             break;
+            #endregion
           }
+        #endregion
 
         case "analogyperson":
           {
@@ -11633,7 +11656,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg1 == null) return;
           dlg1.Reset();
           dlg1.SetHeading(GUILocalizeStrings.Get(10798689)); // Global Options ...
-          System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
+          List<string> choiceViewGlobalOptions = new List<string>();
 
           // Change global Unwatchedfilteroption
           // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSupPlayer))// Make it conditoional, so only displayed, if options enabled in setup !
