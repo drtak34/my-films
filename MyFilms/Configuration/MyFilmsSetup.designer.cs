@@ -2544,9 +2544,9 @@
           this.chkEnhancedWatchedStatusHandling.AutoSize = true;
           this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 115);
           this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
-          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(182, 17);
+          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(211, 17);
           this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
-          this.chkEnhancedWatchedStatusHandling.Text = "Multi-User Watch Status/Ratings";
+          this.chkEnhancedWatchedStatusHandling.Text = "Multi User Status (watched, user rating)";
           this.ToolTip1.SetToolTip(this.chkEnhancedWatchedStatusHandling, resources.GetString("chkEnhancedWatchedStatusHandling.ToolTip"));
           this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
           this.chkEnhancedWatchedStatusHandling.CheckedChanged += new System.EventHandler(this.chkEnhancedWatchedStatusHandling_CheckedChanged);
