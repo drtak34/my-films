@@ -3018,7 +3018,9 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
         <ParentGroup />
         <DisplayName>AddOns</DisplayName>
         <DefaulChecked>false</DefaulChecked>
-        <Description>AddOns: Updated DLLs for Plugins not yet publically available - MP translator for MyFilms</Description>
+        <Description>AddOns: Updated DLLs for Plugins or Tools not yet publically available  only for testing !:
+- MP translator for MyFilms
+- Trakt with updated user rating support and support for categoriy sync</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
@@ -3027,6 +3029,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Base.12\MPLanguageTool.exe</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{8a4831c5-d449-4d35-abce-5cc190cf1bbc}-MPLanguageTool.exe</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Tools\MPLanguageTool.exe</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>plugins.12\Windows\TraktPlugin.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{752a42c1-cb9c-4626-bb74-774f42131d55}-TraktPlugin.dll</ZipFileName>
+              <DestinationFilename>%Plugins%\windows\TraktPlugin.dll</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -6199,6 +6208,19 @@ Please refer to the Wiki online documentation.</Value>
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
+      <PluginDependencyItem AssemblyName="TraktPlugin.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items />
+        </SubSystemsUsed>
+      </PluginDependencyItem>
     </Items>
   </PluginDependencies>
   <GeneralInfo>
@@ -9208,6 +9230,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Base.12\MPLanguageTool.exe</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{8a4831c5-d449-4d35-abce-5cc190cf1bbc}-MPLanguageTool.exe</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Tools\MPLanguageTool.exe</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>plugins.12\Windows\TraktPlugin.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{752a42c1-cb9c-4626-bb74-774f42131d55}-TraktPlugin.dll</ZipFileName>
+        <DestinationFilename>%Plugins%\windows\TraktPlugin.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
