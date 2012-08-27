@@ -10876,6 +10876,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case ViewContext.MenuAll:
                 newRow.Label = facadeFilms.SelectedListItem.Label + " *";
                 newRow.ImagePath = facadeFilms.SelectedListItem.ThumbnailImage;
+                if (!System.IO.File.Exists(newRow.ImagePath)) newRow.ImagePath = conf.DefaultCoverViews;
                 newRow.DBfield = facadeFilms.SelectedListItem.DVDLabel;
                 newRow.SortDirectionView = " ASC";
                 newRow.SortFieldViewType = "Name";
@@ -10901,32 +10902,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     newRow.Value = conf.Wselectedlabel;
                     newRow.Filter = conf.StrSelect;
                     if (IsPersonField(newRow.DBfield))
-                      newRow.ImagePath = (!string.IsNullOrEmpty(personcover.Filename)) ? personcover.Filename : "";
+                      newRow.ImagePath = (!string.IsNullOrEmpty(personcover.Filename)) ? personcover.Filename : conf.DefaultCoverArtist;
                     else
-                      newRow.ImagePath = (!string.IsNullOrEmpty(viewcover.Filename)) ? viewcover.Filename : "";
-                    //newRow.ImagePath = (!string.IsNullOrEmpty(filmcover.Filename)) ? filmcover.Filename : "";
+                      newRow.ImagePath = (!string.IsNullOrEmpty(viewcover.Filename)) ? viewcover.Filename : conf.DefaultCoverViews;
                     break;
                   case ViewContext.MovieCollection:
                     //newRow.Value = Prev_Label;
                     newRow.Value = conf.Wselectedlabel;
                     newRow.Filter = conf.StrSelect;
-                    newRow.ImagePath = (!string.IsNullOrEmpty(groupcover.Filename)) ? groupcover.Filename : (!string.IsNullOrEmpty(filmcover.Filename)) ? filmcover.Filename : "";
+                    newRow.ImagePath = (!string.IsNullOrEmpty(groupcover.Filename)) ? groupcover.Filename : (!string.IsNullOrEmpty(filmcover.Filename)) ? filmcover.Filename : conf.DefaultCover;
                     break;
                   case ViewContext.Group:
                     newRow.Value = "";
                     newRow.Filter = conf.StrViewSelect;
-                    // newRow.ImagePath = (!string.IsNullOrEmpty(viewcover.Filename)) ? viewcover.Filename : filmcover.Filename;
+                    newRow.ImagePath = conf.DefaultCoverViews;
                     break;
                   case ViewContext.Person:
                     newRow.Value = "";
                     newRow.Filter = conf.StrViewSelect;
-                    // newRow.ImagePath = (!string.IsNullOrEmpty(personcover.Filename)) ? personcover.Filename : filmcover.Filename;
+                    newRow.ImagePath = conf.DefaultCoverArtist;
                     break;
                 }
                 break;
               default:
                 return;
             }
+
             if (newRow.DBfield.Length == 0 || newRow.Label.Length == 0) return;
             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
             if (null == keyboard) return;
