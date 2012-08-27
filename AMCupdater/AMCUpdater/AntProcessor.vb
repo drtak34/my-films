@@ -3586,17 +3586,19 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"RatingUser", "Int"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"CategoryTrakt", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"AudioChannelCount", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Aspectratio", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Watched", "String"})
+
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"WatchedDate", "Date"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Favorite", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Tags", "String"})
+
             ds.Tables("tblAntFields").Rows.Add(New Object() {"CustomField1", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"CustomField2", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"CustomField3", "String"})
 
             'Currently unused or intentionally disabled fields
             'ds.Tables("tblAntFields").Rows.Add(New Object() {"Persons", "String"})
-            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Watched", "String"})
-            'ds.Tables("tblAntFields").Rows.Add(New Object() {"WatchedDate", "String"})
-            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Favorite", "String"})
-            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Tags", "String"})
-            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Aspectratio", "String"}) ' doesn't need to be YET as it is not a true db field at present (calc field)
             'ds.Tables("tblAntFields").Rows.Add(New Object() {"IsOnline", "String"})
             'ds.Tables("tblAntFields").Rows.Add(New Object() {"IsOnlineTrailer", "String"})
             'ds.Tables("tblAntFields").Rows.Add(New Object() {"RecentlyAdded", "String"})
@@ -3695,7 +3697,7 @@ Public Class AntProcessor
     End Sub
 
     Private Shared Sub CreateOrUpdateAttribute(ByRef CurrentNode As Xml.XmlElement, ByVal currentAttribute As String, ByVal currentValue As String)
-        Dim _XMLDoc As New Xml.XmlDocument
+        'Dim _XMLDoc As New Xml.XmlDocument
         'Dim _XMLElement As Xml.XmlElement
         'CurrentSettings.Only_Add_Missing_Data
 
@@ -3706,7 +3708,7 @@ Public Class AntProcessor
         'If currentValue <> "" Or (currentValue = "" And CurrentSettings.Only_Update_With_Nonempty_Data = False) Then
         'End If
         If CurrentNode.Attributes(currentAttribute) Is Nothing Then
-            attr = _XMLDoc.CreateAttribute(currentAttribute)
+            attr = XMLDoc.CreateAttribute(currentAttribute)
             attr.Value = currentValue
             CurrentNode.Attributes.Append(attr)
         Else
@@ -3715,7 +3717,7 @@ Public Class AntProcessor
     End Sub
 
     Private Sub CreateOrUpdateElement(ByRef CurrentNode As Xml.XmlElement, ByVal currentAttribute As String, ByVal currentValue As String)
-        Dim _XMLDoc As New Xml.XmlDocument
+        'Dim _XMLDoc As New Xml.XmlDocument
         'Dim _XMLElement As Xml.XmlElement
         ' First create new AMC4 objects - does NOT (yet) reset currentValue
         CreateOrUpdateCustomFieldsAttribute(CurrentNode, currentAttribute, currentValue)
@@ -3727,7 +3729,7 @@ Public Class AntProcessor
         'If currentValue <> "" Or (currentValue = "" And CurrentSettings.Only_Update_With_Nonempty_Data = False) Then
         'End If
         If CurrentNode.Item(currentAttribute) Is Nothing Then
-            element = _XMLDoc.CreateElement(currentAttribute)
+            element = XMLDoc.CreateElement(currentAttribute)
             element.InnerText = currentValue
             CurrentNode.AppendChild(element)
         Else
@@ -3737,7 +3739,7 @@ Public Class AntProcessor
 
     Private Shared Sub CreateOrUpdateCustomFieldsAttribute(ByRef CurrentNode As Xml.XmlElement, ByVal currentAttribute As String, ByVal currentValue As String)
         Const SubElementName As String = "CustomFields"
-        Dim _XMLDoc As New Xml.XmlDocument
+        'Dim _XMLDoc As New Xml.XmlDocument
         'Dim _XMLElement As Xml.XmlElement
 
         'now check and update or create Attributes in the CustomFields Element
@@ -3749,13 +3751,13 @@ Public Class AntProcessor
         'End If
         If CurrentNode.Item(SubElementName) Is Nothing Then
             Dim element As Xml.XmlElement
-            element = _XMLDoc.CreateElement(SubElementName)
+            element = XMLDoc.CreateElement(SubElementName)
             element.InnerText = ""
             CurrentNode.AppendChild(element)
         End If
 
         If CurrentNode.Item(SubElementName).Attributes(currentAttribute) Is Nothing Then
-            attr = _XMLDoc.CreateAttribute(currentAttribute)
+            attr = XMLDoc.CreateAttribute(currentAttribute)
             attr.Value = currentValue
             CurrentNode.Item(SubElementName).Attributes.Append(attr)
         Else
