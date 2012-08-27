@@ -3707,25 +3707,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("GetRandomFanartForGroups started ...");
 
       fanartItems.Clear();
+      Type columnType = GetColumnType(conf.WStrSort);
       string s = "";
-      string StrSelect = string.Empty;
+      string strSelect = string.Empty;
       if (conf.Boolselect)
       {
         string sLabel = this.facadeFilms.SelectedListItem.Label;
-        if (sLabel == "")
-          StrSelect = conf.WStrSort + " is NULL";
+        bool labelNotEmpty = sLabel.Length > 0;
+
+        if (columnType != typeof(string))
+          strSelect = (labelNotEmpty) ? conf.WStrSort + " = '" + sLabel + "'" : conf.WStrSort + " is NULL";
+        else if (conf.WStrSort == "Date")
+          strSelect = (labelNotEmpty) ? "DateAdded" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+        else if (IsDateField(conf.WStrSort))
+          strSelect = (labelNotEmpty) ? conf.WStrSort + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+        else if (IsAlphaNumericalField(conf.WStrSort))
+          strSelect = (labelNotEmpty) ? conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else
         {
-          if (IsDateField(conf.WStrSort))
-            StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-          else if (IsAlphaNumericalField(conf.WStrSort))
-            StrSelect = conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'";
+          if (conf.BoolDontSplitValuesInViews)
+            strSelect = (labelNotEmpty) ? conf.WStrSort + " like '" + StringExtensions.EscapeLikeValue(sLabel) + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
           else
-            StrSelect = conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(sLabel) + "*'";
+            strSelect = (labelNotEmpty) ? conf.WStrSort + " like '*" + StringExtensions.EscapeLikeValue(sLabel) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         }
       }
 
-      if (StrSelect != "") s = StrSelect + " And ";
+      if (strSelect != "") s = strSelect + " And ";
       if (conf.StrTitleSelect != "")
         s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1, StringExtensions.EscapeLikeValue(conf.StrTitleSelect), conf.TitleDelim);
       else

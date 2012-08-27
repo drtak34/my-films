@@ -633,18 +633,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       }
       if ((chkEnhancedWatchedStatusHandling.Checked) && (UserProfileName.Text.Length == 0))
       {
-        MessageBox.Show("'Active User Profile Name' must be filled when activating 'Enhanced Watched Status Handling' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        MessageBox.Show("'Active User Profile Name' must be filled (e.g. for using user rating and Trakt syncing)' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         General.SelectedIndex = 4;
         UserProfileName.Focus();
         return;
       }
-      if ((chkEnhancedWatchedStatusHandling.Checked) && (cbWatched.Text.ToLower() == "checked"))
-      {
-        MessageBox.Show("You have enabled 'Enhanced Watched Status Handling' and use 'Checked' field for watched status !\n This is NOT compatible with AMC and it is recommended to use a field that can store text like e.g. 'MediaLabel' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        General.SelectedIndex = 4;
-        cbWatched.Focus();
-        // return;
-      }
+      //if ((chkEnhancedWatchedStatusHandling.Checked) && (cbWatched.Text.ToLower() == "checked"))
+      //{
+      //  MessageBox.Show("You have enabled 'Enhanced Watched Status Handling' and use 'Checked' field for watched status !\n This is NOT compatible with AMC and it is recommended to use a field that can store text like e.g. 'MediaLabel' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      //  General.SelectedIndex = 4;
+      //  cbWatched.Focus();
+      //  // return;
+      //}
       if (chkGlobalAvailableOnly.Checked && !chkScanMediaOnStart.Checked)
       {
         MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -865,8 +865,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalAvailableOnly", chkGlobalAvailableOnly.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
-
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", chkEnhancedWatchedStatusHandling.Checked);
+      // XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", chkEnhancedWatchedStatusHandling.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", UserProfileName.Text);
 
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", chkScanMediaOnStart.Checked);
@@ -1020,6 +1019,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "CurrentSortMethodInHierarchies");
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethodInHierarchies");
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethod");
+
+      XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling");
     }
 
     private int GetLayoutFromName(string layoutname)
@@ -1162,6 +1163,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       Refresh_Tabs(true); // enable Tabs
       Refresh_Items(false);
       CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
+
+      // chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
+      chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
+      chkEnhancedWatchedStatusHandling.Enabled = false; // ToDo: we don't support AMC3 anymore and "autoswitch" this setting - an be completely removed in future version
+      UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", MyFilms.GlobalUsername);
+      
       MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
       AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
       MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntPicture", "");
@@ -1335,9 +1342,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkGlobalAvailableOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalAvailableOnly", false);
       chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnly", false);
       textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnlyValue", "false");
-
-      chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
-      UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", MyFilms.GlobalUsername);
 
       chkScanMediaOnStart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", false);
       cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AllowTraktSync", false);
@@ -1752,7 +1756,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       cbAllowTraktSync.Checked = false;
       cbAllowRecentAddedAPI.Checked = false;
       textBoxGlobalUnwatchedOnlyValue.Text = "false";
-      chkEnhancedWatchedStatusHandling.Checked = false;
+      // chkEnhancedWatchedStatusHandling.Checked = false;
       UserProfileName.Text = string.Empty;
       chkOnlyTitle.Checked = false;
       txtGrabber.ResetText();
@@ -1947,45 +1951,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       return true; // save config in calling routine
     }
 
-    private bool IsAMC4AndHasInvalidCustomFields(AntMovieCatalog mydivx)
+    private bool IsAMC4AndHasInvalidCustomFields(AntMovieCatalog myCatalog)
     {
-      AntMovieCatalog.CustomFieldsPropertiesRow[] cfpCollection = mydivx.Catalog[0].GetCustomFieldsPropertiesRows();
+      AntMovieCatalog.CustomFieldsPropertiesRow[] cfpCollection = myCatalog.Catalog[0].GetCustomFieldsPropertiesRows();
       if (cfpCollection.Length == 0) return false;
-
-      var customFieldList = new List<string[]>(); // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
-      // <CustomField Tag="Edition" Name="Edition" Type="ftString" GUIProperties="rx6:ry51:rw526:rh25:aw1:ah0:lw94" />
-      // CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
-      customFieldList.Add(new string[] { "Edition", "Edition", "ftString" });
-      customFieldList.Add(new string[] { "Studio", "Studio", "ftString" });
-      customFieldList.Add(new string[] { "Fanart", "Fanart", "ftString" });
-      customFieldList.Add(new string[] { "Certification", "Certification", "ftString" });
-      customFieldList.Add(new string[] { "Writer", "Writer", "ftString" });
-      customFieldList.Add(new string[] { "TagLine", "TagLine", "ftString" });
-      customFieldList.Add(new string[] { "Tags", "Tags", "ftString" });
-      customFieldList.Add(new string[] { "Aspectratio", "Aspectratio", "ftString" });
-      customFieldList.Add(new string[] { "CategoryTrakt", "CategoryTrakt", "ftString" });
-      customFieldList.Add(new string[] { "Watched", "Watched", "ftString" });
-      customFieldList.Add(new string[] { "Favorite", "Favorite", "ftString" });
-      customFieldList.Add(new string[] { "RatingUser", "RatingUser", "ftString" });
-      customFieldList.Add(new string[] { "IMDB_Id", "IMDB_Id", "ftString" });
-      customFieldList.Add(new string[] { "TMDB_Id", "TMDB_Id", "ftString" });
-      customFieldList.Add(new string[] { "IMDB_Rank", "IMDB_Rank", "ftString" });
-      customFieldList.Add(new string[] { "SourceTrailer", "SourceTrailer", "ftString" });
-      customFieldList.Add(new string[] { "IsOnline", "IsOnline", "ftString" });
-      customFieldList.Add(new string[] { "IsOnlineTrailer", "IsOnlineTrailer", "ftString" });
-      customFieldList.Add(new string[] { "LastPosition", "LastPosition", "ftString" });
-      customFieldList.Add(new string[] { "AudioChannelCount", "AudioChannelCount", "ftString" });
-      customFieldList.Add(new string[] { "AlternateTitles", "AlternateTitles", "ftString" });
-      customFieldList.Add(new string[] { "DateWatched", "DateWatched", "ftDate" });
-      customFieldList.Add(new string[] { "MultiUserState", "MultiUserState", "ftString" });
-      customFieldList.Add(new string[] { "CustomField1", "CustomField1", "ftString" });
-      customFieldList.Add(new string[] { "CustomField2", "CustomField2", "ftString" });
-      customFieldList.Add(new string[] { "CustomField3", "CustomField3", "ftString" });
-
-      var customFieldTagList = customFieldList.Select(stringse => stringse[0]).ToList();
+      var customFieldTagList = BaseMesFilms.CustomFieldDefinitions.Select(stringse => stringse[0]).ToList();
       var cFields = new ArrayList();
-      AntMovieCatalog.CustomFieldRow[] cfrCollection = mydivx.CustomFieldsProperties[0].GetCustomFieldRows();
-
+      AntMovieCatalog.CustomFieldRow[] cfrCollection = myCatalog.CustomFieldsProperties[0].GetCustomFieldRows();
       return cfrCollection.Any(fieldRow => !customFieldTagList.Contains(fieldRow.Tag));
     }
 
@@ -2184,7 +2156,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         groupBoxExtendedFieldHandling.Enabled = true;
       }
       groupBox_DVDprofiler.Enabled = false; // deaktivates DVDprofiler options as default...
-
       switch (CatalogType.SelectedIndex)
       #region catalog specific settings
       //0	Ant Movie Catalog (V3.5.1.2)
@@ -5415,7 +5386,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     {
       if (chkEnhancedWatchedStatusHandling.Checked)
       {
-        textBoxGlobalUnwatchedOnlyValue.Enabled = false;
+        textBoxGlobalUnwatchedOnlyValue.Enabled = true;
         UserProfileName.Enabled = true;
       }
       else
