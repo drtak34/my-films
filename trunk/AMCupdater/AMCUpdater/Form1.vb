@@ -282,6 +282,7 @@ Public Class Form1
         MediaData.Add("source", "source")
         MediaData.Add("subtitles", "subtitles")
         MediaData.Add("languages", "languages")
+        MediaData.Add("aspectratio", "aspectratio")
         MediaData.Add("audiochannelcount", "audiochannelcount")
 
         InternetData = New Hashtable

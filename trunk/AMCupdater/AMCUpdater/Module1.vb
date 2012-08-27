@@ -893,12 +893,15 @@ Module Module1
                 'DisplayAspectRatio_Original/String;;;Y NT;;;Original (in the raw stream) Display Aspect ratio
 
                 Try
+                    Dim style As NumberStyles
+                    style = NumberStyles.AllowDecimalPoint 'Or NumberStyles.Float
                     MI = New MediaInfo
                     MI.Open(FilePath)
                     TempString = MI.Get_(StreamKind.Visual, 0, "DisplayAspectRatio") ' & " (" & MI.Get_(StreamKind.Visual, 0, "DisplayAspectRatio/String") & ")"
-                    'Dim aspectratio As Decimal
-                    'Decimal.TryParse(TempString, aspectratio)
-                    'TempString = Math.Round(aspectratio, 2).ToString()
+                    Dim aspectratio As Decimal
+                    If Decimal.TryParse(TempString, style, CultureInfo.InvariantCulture, aspectratio) Then
+                        TempString = Decimal.Round(aspectratio, 2).ToString()
+                    End If
                     ' if (aspectratio < (decimal)(1.4)) movieRow.Aspectratio = "4:3"; //1,33 -> 4:3
                     ' else if (aspectratio < (decimal)(1.9)) movieRow.Aspectratio = "16:9"; //1,78 -> 16:9 / widescreen //1,85 -> widescreen
                     ' else if (aspectratio >= (decimal)(1.9)) movieRow.Aspectratio = "cinemascope"; //2,35+ -> cinemascope
@@ -1469,6 +1472,7 @@ Module Module1
             MediaData.Add("length")
             MediaData.Add("videobitrate")
             MediaData.Add("audiobitrate")
+            MediaData.Add("aspectratio")
             MediaData.Add("audiochannelcount")
             MediaData.Add("disks")
             MediaData.Add("videoformat")
