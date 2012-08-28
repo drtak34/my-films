@@ -2061,6 +2061,27 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{991a6325-0c54-440b-bf88-91f111daaac6}-Thumbs.db</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Cinemascope.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4b2a9f0e-abea-4056-9b38-db7505295e57}-Cinemascope.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Cinemascope.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Standard.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{fb676c37-5f86-4dac-9f0a-d87559ed4a3d}-Standard.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Standard.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Widescreen.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{386ccc6c-0bd2-4eff-9958-fa0fb2d9d6da}-Widescreen.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Widescreen.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2465,6 +2486,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Thumbs\MyFilms\DefaultImages\Year.jpg</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{7bbc0261-51a4-4b80-8426-973c55ef830b}-Year.jpg</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\Year.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0d93be67-da02-4892-a9c1-172481f24f64}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\Thumbs.db</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -3746,6 +3774,13 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{748b5a91-95c6-4298-9078-6b1725f7396f}-Persons.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{888457f0-5def-49bd-96a6-a99461c24b00}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -6202,8 +6237,8 @@ Please refer to the Wiki online documentation.</Value>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
@@ -6234,7 +6269,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2436</Revision>
+      <Revision>2452</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -6246,7 +6281,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-08-25T09:17:46.3598841+02:00</ReleaseDate>
+    <ReleaseDate>2012-08-28T02:09:01.1987414+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -8316,6 +8351,27 @@ Please report bugs in MyFilms forum.</VersionDescription>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Cinemascope.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4b2a9f0e-abea-4056-9b38-db7505295e57}-Cinemascope.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Cinemascope.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Standard.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{fb676c37-5f86-4dac-9f0a-d87559ed4a3d}-Standard.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Standard.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Widescreen.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{386ccc6c-0bd2-4eff-9958-fa0fb2d9d6da}-Widescreen.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Widescreen.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\Cinefacts-Kino.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{5d820eec-3b57-4871-8264-9d0c1181086a}-Cinefacts-Kino.xml</ZipFileName>
@@ -8698,6 +8754,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Thumbs\MyFilms\DefaultImages\Year.jpg</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7bbc0261-51a4-4b80-8426-973c55ef830b}-Year.jpg</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\Year.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0d93be67-da02-4892-a9c1-172481f24f64}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -9832,6 +9895,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.13\DefaultWide\Media\MyFilms\Persons.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{748b5a91-95c6-4298-9078-6b1725f7396f}-Persons.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\MyFilms\Persons.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{888457f0-5def-49bd-96a6-a99461c24b00}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
