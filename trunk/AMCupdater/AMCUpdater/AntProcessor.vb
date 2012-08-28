@@ -72,6 +72,33 @@ Public Class AntProcessor
             Return FileCount
         End Get
     End Property
+    Public ReadOnly Property CountMediaFilesFound() As Integer
+        Get
+            Dim FileCount As Integer = 0
+            If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then
+                FileCount += ds.Tables("tblFoundMediaFiles").Rows.Count
+            End If
+            Return FileCount
+        End Get
+    End Property
+    Public ReadOnly Property CountNonMediaFilesFound() As Integer
+        Get
+            Dim FileCount As Integer = 0
+            If ds.Tables("tblFoundNonMediaFiles") IsNot Nothing Then
+                FileCount += ds.Tables("tblFoundNonMediaFiles").Rows.Count
+            End If
+            Return FileCount
+        End Get
+    End Property
+    Public ReadOnly Property CountTrailerFilesFound() As Integer
+        Get
+            Dim FileCount As Integer = 0
+            If ds.Tables("tblFoundTrailerFiles") IsNot Nothing Then
+                FileCount += ds.Tables("tblFoundTrailerFiles").Rows.Count
+            End If
+            Return FileCount
+        End Get
+    End Property
     Public ReadOnly Property CountOrphanFiles() As Integer
         Get
             _CountOrphanFiles = 0
@@ -2019,6 +2046,10 @@ Public Class AntProcessor
         Next
         LogEvent("---------------------------------------------------------------------------------------------------", EventLogLevel.Informational)
         LogEvent("Processing Movie Folder - Done - " & CountFilesFound.ToString & " files found.", EventLogLevel.ImportantEvent)
+        LogEvent("---------------------------------------------------------------------------------------------------", EventLogLevel.Informational)
+        LogEvent(" Results: " & CountMediaFilesFound.ToString & " media files found.", EventLogLevel.ImportantEvent)
+        LogEvent(" Results: " & CountNonMediaFilesFound.ToString & " non media files found.", EventLogLevel.ImportantEvent)
+        LogEvent(" Results: " & CountTrailerFilesFound.ToString & " trailer files found.", EventLogLevel.ImportantEvent)
         LogEvent("===================================================================================================", EventLogLevel.Informational)
     End Sub
 
@@ -2740,6 +2771,10 @@ Public Class AntProcessor
             dvMultiPartProcessedFiles.Sort = "FileName"
 
             Dim AllFilesPath As String = String.Empty
+
+
+            ' *************** Process orphaned movies ***************
+
             If ds.Tables("tblOrphanedMediaFiles") IsNot Nothing Then
                 For Each row In ds.Tables("tblOrphanedMediaFiles").Rows
                     If bgwFolderScanUpdate.CancellationPending = True Then
@@ -2799,6 +2834,7 @@ Public Class AntProcessor
                             End If
                         End If
 
+                        ' search and load internet data, mediainfo, etc.
                         Dim Ant As New AntRecord()
                         With Ant
                             .FileName = FileName
@@ -2900,6 +2936,7 @@ Public Class AntProcessor
             End If
 
 
+            ' *************** Process orphaned non media files (ISO, etc.) ***************
 
             If ds.Tables("tblOrphanedNonMediaFiles") IsNot Nothing Then
                 For Each row In ds.Tables("tblOrphanedNonMediaFiles").Rows
@@ -3052,6 +3089,157 @@ Public Class AntProcessor
                     End If
                 Next row
             End If
+
+
+
+            ' *************** Process orphaned trailers ***************
+
+            ' we do 3 things here:
+            ' 1. try to register the trailer with an existing movie
+            ' 2. if it cannot be matched, show dialog to let user choose the correct movie or btter search name (interactive mode only)
+            ' 3. if trailer cannot be registered to a movie, anew movie record will be created, trailer registered and internet data loaded (same as movie import)
+
+
+            'If ds.Tables("tblOrphanedTrailerMediaFiles") IsNot Nothing Then
+            '    For Each row In ds.Tables("tblOrphanedTrailerMediaFiles").Rows
+            '        If bgwFolderScanUpdate.CancellationPending = True Then
+            '            Exit Function
+            '        End If
+            '        If dvMultiPartProcessedFiles.Find(row("FileName")) = -1 Then
+            '            FileName = row("FileName")
+            '            FilePath = row("PhysicalPath") & FileName
+            '            ShortName = CutText.Replace(row("FileName"), "")
+            '            AllFilesPath = ""
+            '            ReplacementPath = ""
+            '            ' search if it's a part of a multipart movie. In that case Replacement contains all movie files and AllFilesPath complete path for all movies
+            '            If (dvMultiPartFiles.Find(row("FileName")) <> -1) Then
+            '                For Each row2 As DataRow In ds.Tables("tblMultiPartFiles").Rows
+            '                    If (row2("ShortName") = ShortName) Then
+            '                        ds.Tables("tblMultiPartProcessedFiles").Rows.Add(row2("FileName"))
+            '                        Dim wpath As String = String.Empty
+            '                        If row("VirtualPath") = "" Then
+            '                            wpath = row2("PhysicalPath") & row2("FileName")
+            '                        Else
+            '                            wpath = row2("VirtualPath") & row2("FileName")
+            '                        End If
+            '                        If ReplacementPath.Length = 0 Then
+            '                            ReplacementPath = wpath
+            '                        Else
+            '                            ReplacementPath = ReplacementPath + ";" + wpath
+            '                        End If
+            '                        If AllFilesPath.Length = 0 Then
+            '                            AllFilesPath = FilePath
+            '                        Else
+            '                            AllFilesPath = AllFilesPath + ";" + FilePath
+            '                        End If
+            '                    End If
+            '                Next
+            '            Else
+            '                If (objSettings.Store_Short_Names_Only = True) Then
+            '                    ReplacementPath = FileName
+            '                    If ReplacementPath.Contains("\") Then
+            '                        ReplacementPath = ReplacementPath.Substring(ReplacementPath.LastIndexOf("\") + 1)
+            '                    End If
+            '                Else
+            '                    If row("VirtualPath") = "" Then
+            '                        ReplacementPath = FilePath
+            '                    Else
+            '                        ReplacementPath = row("VirtualPath") & FileName
+            '                    End If
+            '                End If
+            '            End If
+
+            '            Dim Ant As New AntRecord()
+            '            With Ant
+            '                .FileName = FileName
+            '                .FilePath = FilePath
+            '                .AllFilesPath = AllFilesPath
+            '                .MediaLabel = objSettings.Ant_Media_Label
+            '                .MediaType = objSettings.Ant_Media_Type
+            '                .SourceField = objSettings.Ant_Database_Source_Field
+            '                .OverridePath = ReplacementPath
+            '                .MovieNumber = NewAntID
+            '                .XMLDoc = xmldoc
+            '                .ParserPath = objSettings.Internet_Parser_Path
+            '                .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
+            '                .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
+            '                .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
+            '                .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
+            '                .InteractiveMode = InteractiveMode
+            '                .ExcludeFile = objSettings.Excluded_Movies_File
+            '                '.ImagePath = objSettings.XML_File.Substring(0, objSettings.XML_File.LastIndexOf("\"))
+            '                .ImagePath = ImagePath
+            '                .InternetLookupAlwaysPrompt = objSettings.Internet_Lookup_Always_Prompt
+            '                .DateHandling = objSettings.Date_Handling
+            '                .Read_DVD_Label = objSettings.Read_DVD_Label
+            '                .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
+            '                .XMLFilePath = objSettings.XML_File
+            '                .MovieTitleHandling = objSettings.Movie_Title_Handling
+            '                .GroupName = row("GroupName").ToString
+            '            End With
+            '            If (row("Moved")) Then
+            '                ' filename exist but with wrong path (maybe moved. Entry don't be created but updated  
+            '                Ant.UpdateElement()
+            '                Ant.ProhibitInternetLookup = True
+            '                Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+            '                Ant.SaveProgress()
+            '                If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
+            '                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
+            '                Else
+            '                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Updated - " & ReplacementPath)
+            '                End If
+            '            Else
+            '                'Try
+            '                Ant.CreateElement()
+            '                Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+            '                Ant.SaveProgress()
+            '                'Catch ex As Exception
+            '                'LogEvent("ErrorEvent : " & ex.Message.ToString, EventLogLevel.ErrorEvent)
+            '                'End Try
+
+
+            '                If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
+            '                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
+            '                    'LogEvent("ErrorEvent : " & blah.LastOutputMessage, EventLogLevel.ErrorEvent)
+            '                Else
+            '                    'Check to see whether to save record:
+            '                    If CurrentSettings.Import_File_On_Internet_Lookup_Failure = True Then
+            '                        'Doesn't matter if the Internet loookup worked; just load the entry:
+            '                        MovieRootNode.AppendChild(Ant.XMLElement)
+            '                        _CountRecordsAdded += 1
+            '                        If ReplacementPath.IndexOf(";") >= 0 Then
+            '                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Imported - " & ReplacementPath)
+            '                        Else
+            '                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Imported - " & ReplacementPath)
+            '                        End If
+            '                        NewAntID += 1
+            '                    Else
+            '                        'First check if the Internet Lookup works:
+            '                        If Ant.InternetLookupOK = True Then
+            '                            MovieRootNode.AppendChild(Ant.XMLElement)
+            '                            _CountRecordsAdded += 1
+            '                            If ReplacementPath.IndexOf(";") >= 0 Then
+            '                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Imported - " & ReplacementPath)
+            '                            Else
+            '                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Imported - " & ReplacementPath)
+            '                            End If
+            '                            NewAntID += 1
+            '                        Else
+            '                            'Mark as Ignored - do not import.
+            '                            If ReplacementPath.IndexOf(";") >= 0 Then
+            '                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Ignored - **********  " & ReplacementPath & "  *****")
+            '                            Else
+            '                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Ignored - **********  " & ReplacementPath & "  *****")
+            '                            End If
+            '                        End If
+            '                    End If
+            '                End If
+            '            End If
+            '        End If
+            '    Next row
+            'End If
+
+
         End Function
     End Class
 
