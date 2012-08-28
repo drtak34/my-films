@@ -900,7 +900,7 @@ Module Module1
                     TempString = MI.Get_(StreamKind.Visual, 0, "DisplayAspectRatio") ' & " (" & MI.Get_(StreamKind.Visual, 0, "DisplayAspectRatio/String") & ")"
                     Dim aspectratio As Decimal
                     If Decimal.TryParse(TempString, style, CultureInfo.InvariantCulture, aspectratio) Then
-                        TempString = Decimal.Round(aspectratio, 2).ToString()
+                        TempString = Decimal.Round(aspectratio, 2).ToString(CultureInfo.InvariantCulture)
                     End If
                     ' if (aspectratio < (decimal)(1.4)) movieRow.Aspectratio = "4:3"; //1,33 -> 4:3
                     ' else if (aspectratio < (decimal)(1.9)) movieRow.Aspectratio = "16:9"; //1,78 -> 16:9 / widescreen //1,85 -> widescreen
