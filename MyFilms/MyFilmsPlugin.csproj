@@ -213,6 +213,7 @@
     <Compile Include="DataBase\MultiUserData.cs" />
     <Compile Include="DataBase\OnlineMovie.cs" />
     <Compile Include="DataBase\OnlinePerson.cs" />
+    <Compile Include="MFMovie.cs" />
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\GUIBackgroundTask.cs" />
     <Compile Include="MyFilmsGUI\MFView.cs" />

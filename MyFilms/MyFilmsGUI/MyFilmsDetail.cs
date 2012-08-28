@@ -2876,11 +2876,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
           {
-            MultiUserData multistate = new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString());
-            multistate.SetWatched(MyFilms.conf.StrUserProfileName, watched);
-            MyFilms.r[Index]["MultiUserState"] = multistate.ResultValueString();
-            MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-            MyFilms.r[Index]["RatingUser"] = (multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull : multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+            MultiUserData userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+            userData.SetWatched(MyFilms.conf.StrUserProfileName, watched);
+            MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+            MyFilms.r[Index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+            MyFilms.r[Index]["RatingUser"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
             MyFilms.r[Index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
             // SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, watched ? 1 : 0); //set watchedcount for enhanced watched count handling to 1
           }
@@ -2906,12 +2906,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void SetWatchedCount(int Index, string userprofilename, int count)
         {
-          MultiUserData multistate = new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString());
-          multistate.SetWatchedCount(MyFilms.conf.StrUserProfileName, count);
-          MyFilms.r[Index]["MultiUserState"] = multistate.ResultValueString();
-          MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-          MyFilms.r[Index]["RatingUser"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+          MultiUserData userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+          userData.SetWatchedCount(MyFilms.conf.StrUserProfileName, count);
+          MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+          MyFilms.r[Index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
         }
 
         public static string EnhancedWatchedValue(string s, string type)
@@ -2942,7 +2942,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static int GetWatchedCount(int Index, string userprofilename)
         {
-          return new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString()).GetUserState(userprofilename).WatchedCount;
+          return new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString()).GetUserState(userprofilename).WatchedCount;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2950,7 +2950,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static DateTime GetWatchedDate(int Index, string userprofilename)
         {
-          return new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString()).GetUserState(userprofilename).WatchedDate;
+          return new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString()).GetUserState(userprofilename).WatchedDate;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2958,7 +2958,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         private static decimal GetUserRating(int Index, string userprofilename)
         {
-          return new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString()).GetUserState(userprofilename).UserRating;
+          return new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString()).GetUserState(userprofilename).UserRating;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2966,12 +2966,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void SetUserRating(int Index, string userprofilename, string rating)
         {
-          MultiUserData multistate = new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString());
-          multistate.SetRating(MyFilms.conf.StrUserProfileName, decimal.Parse(rating));
-          MyFilms.r[Index]["MultiUserState"] = multistate.ResultValueString();
-          MyFilms.r[Index]["DateWatched"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-          MyFilms.r[Index]["RatingUser"] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+          var userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+          userData.SetRating(MyFilms.conf.StrUserProfileName, decimal.Parse(rating));
+          MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+          MyFilms.r[Index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2983,17 +2983,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  AddWatchedByOne(Index, userprofilename);
           //AddWatchedByOne(Index, MyFilms.GlobalUsername); // Global watched count will always be set
           //// ToDo: Could also populate "watched history" here (future version)
-          MultiUserData multistate = new MultiUserData(MyFilms.r[Index]["MultiUserState"].ToString());
-          multistate.AddWatchedCountByOne(MyFilms.conf.StrUserProfileName);
-          MyFilms.r[Index]["MultiUserState"] = multistate.ResultValueString();
-          MyFilms.r[Index]["DateWatched"] = (multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate == DateTime.MinValue) ? Convert.DBNull : multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-          MyFilms.r[Index]["RatingUser"] = (multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull :  multistate.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = multistate.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+          var userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+          userData.AddWatchedCountByOne(MyFilms.conf.StrUserProfileName);
+          MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+          MyFilms.r[Index]["DateWatched"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate == DateTime.MinValue) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["RatingUser"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull :  userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
 
           // tell any listeners that user watched the movie
           var movie = GetMovieFromRecord(MyFilms.r[Index]);
           if (WatchedItem != null)
-            WatchedItem(movie, true, multistate.GetUserState(MyFilms.conf.StrUserProfileName).WatchedCount);
+            WatchedItem(movie, true, userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedCount);
         }
 
         //-------------------------------------------------------------------------------------------
@@ -6657,24 +6657,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                     {
-                      MultiUserData states = new MultiUserData(MyFilms.r[ItemId]["MultiUserState"].ToString());
-                      UserState user = states.GetUserState(MyFilms.conf.StrUserProfileName);
+                      var userData = new MultiUserData(MyFilms.r[ItemId][MyFilms.conf.StrMultiUserStateField].ToString());
+                      UserState user = userData.GetUserState(MyFilms.conf.StrUserProfileName);
                       setGUIProperty("user.watched.value", user.WatchedCount > 0 ? "true" : "");
                       setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > DateTime.MinValue) ? user.WatchedDate.ToShortDateString() : "");
                       setGUIProperty("user.watched.count", user.WatchedCount.ToString());
                       setGUIProperty("user.watched.name", user.UserName);
-                      setGUIProperty("user.watched.global", states.GetUserState(MyFilms.GlobalUsername).WatchedCount.ToString());
+                      setGUIProperty("user.watched.global", userData.GetGlobalState().WatchedCount.ToString());
                       setGUIProperty("user.rating.value", (user.UserRating > MultiUserData.NoRating) ? Math.Round(user.UserRating, 1).ToString() : "");
                     }
                     else
                     {
                       setGUIProperty("user.watched.value", MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() ? "true" : "");
-                      decimal UserRating = MultiUserData.NoRating;
+                      decimal userRating = MultiUserData.NoRating;
                       if (wrep && MyFilms.r[ItemId]["RatingUser"].ToString().Length > 0)
                       {
-                        if (!(decimal.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out UserRating))) UserRating = MultiUserData.NoRating;
+                        if (!(decimal.TryParse(MyFilms.r[ItemId]["RatingUser"].ToString(), out userRating))) userRating = MultiUserData.NoRating;
                       }
-                      setGUIProperty("user.rating.value", (UserRating > MultiUserData.NoRating) ? Math.Round(UserRating, 1).ToString() : "");
+                      setGUIProperty("user.rating.value", (userRating > MultiUserData.NoRating) ? Math.Round(userRating, 1).ToString() : "");
                     }
                   }
                   #endregion
