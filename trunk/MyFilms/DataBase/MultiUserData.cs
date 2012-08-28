@@ -35,9 +35,25 @@ namespace MyFilmsPlugin.DataBase
       return userstate;
     }
 
+    public UserState GetGlobalState()
+    {
+      // return this.MultiUserStatus.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
+      var global = new UserState(MyFilms.GlobalUsername)
+        { WatchedCount = 0, UserRating = NoRating, WatchedDate = DateTime.MinValue };
+
+      foreach (UserState userState in MultiUserStatus.FindAll(x => x.UserName != MyFilms.GlobalUsername))
+      {
+        global.WatchedCount += userState.WatchedCount;
+        if (userState.WatchedDate > global.WatchedDate) global.WatchedDate = userState.WatchedDate;
+        if (userState.UserRating > global.UserRating) global.UserRating = userState.UserRating;
+      }
+      global.Watched = global.WatchedCount > 0;
+      return global;
+    }
+
     public void SetWatched(string username, bool watched)
     {
-      UserState userstate = GetUserState(username);
+      var userstate = GetUserState(username);
       if (watched)
       {
         userstate.WatchedCount = 1;
@@ -54,7 +70,7 @@ namespace MyFilmsPlugin.DataBase
 
     public void SetWatchedCount(string username, int watchedcount)
     {
-      UserState userstate = GetUserState(username);
+      var userstate = GetUserState(username);
       userstate.WatchedCount = watchedcount;
       userstate.Watched = (watchedcount > 0);
       userstate.WatchedDate = (watchedcount > 0) ? DateTime.Now : DateTime.MinValue;
@@ -62,32 +78,26 @@ namespace MyFilmsPlugin.DataBase
 
     public void SetRating(string username, decimal rating)
     {
-      UserState userstate = GetUserState(username);
+      var userstate = GetUserState(username);
       userstate.UserRating = (rating < 0) ? NoRating : rating;
     }
 
     public void AddWatchedCountByOne(string username)
     {
-      UserState userstate = GetUserState(username);
+      var userstate = GetUserState(username);
       userstate.WatchedCount = userstate.WatchedCount + 1;
       userstate.WatchedDate = DateTime.Now;
       userstate.Watched = true;
     }
 
-    public UserState GetGlobalState()
-    {
-      return this.MultiUserStatus.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
-    }
-
     public string ResultValueString()
     {
-      UpdateGlobalState(); // make sure, global values are properly updated
       CultureInfo invC = CultureInfo.InvariantCulture;
       string resultValueString = string.Empty;
-      foreach (UserState state in MultiUserStatus)
+      foreach (var state in MultiUserStatus)
       {
         // LogMyFilms.Debug("LoadUserStates() - return state for user '" + state.UserName + "', rating = '" + state.UserRating + "', count = '" + state.WatchedCount + "', watched = '" + state.Watched + "', watcheddate = '" + state.WatchedDate + "'");
-        string sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
+        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
         // LogMyFilms.Debug("LoadUserStates() - resulting user string: '" + sNew + "'");
         if (string.IsNullOrEmpty(resultValueString)) resultValueString = sNew;
         else resultValueString += "|" + sNew;
@@ -104,26 +114,6 @@ namespace MyFilmsPlugin.DataBase
       Datewatched
     }
     
-    private void UpdateGlobalState()
-    {
-      UserState global;
-      if (MultiUserStatus.Count(userState => userState.UserName == MyFilms.GlobalUsername) == 0)
-      {
-        global = new UserState(MyFilms.GlobalUsername);
-        MultiUserStatus.Add(global);
-      }
-      global = MultiUserStatus.First(userState => userState.UserName == MyFilms.GlobalUsername);
-      global.WatchedCount = 0;
-
-      foreach (UserState userState in MultiUserStatus.FindAll(x => x.UserName != MyFilms.GlobalUsername))
-      {
-        global.WatchedCount = global.WatchedCount + userState.WatchedCount;
-        if (userState.WatchedDate > global.WatchedDate) global.WatchedDate = userState.WatchedDate;
-        if (userState.UserRating > global.UserRating) global.UserRating = userState.UserRating;
-      }
-      global.Watched = global.WatchedCount > 0;
-    }
-    
     private void LoadUserStates()
     {
       if (MultiUserStatus == null) MultiUserStatus = new List<UserState>();
@@ -133,7 +123,7 @@ namespace MyFilmsPlugin.DataBase
       {
         if (s.Contains(":"))
         {
-          UserState userstate = new UserState((string)EnhancedWatchedValue(s, Type.Username));
+          var userstate = new UserState((string)EnhancedWatchedValue(s, Type.Username));
           userstate.UserRating = (decimal)EnhancedWatchedValue(s, Type.Rating);
           userstate.WatchedCount = (int)EnhancedWatchedValue(s, Type.Count);
           userstate.Watched = (userstate.WatchedCount > 0);
@@ -145,7 +135,7 @@ namespace MyFilmsPlugin.DataBase
       if (MultiUserStatus.Count == 0) MultiUserStatus.Add(new UserState(MyFilms.GlobalUsername));
     }
 
-    private object EnhancedWatchedValue(string s, Type type)
+    private static object EnhancedWatchedValue(string s, Type type)
     {
       // "Global:0:-1|MikePlanet:0:-1" or "Global:0:-1|MikePlanet:0:-1:2011-12-24"
       object value = "";

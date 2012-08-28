@@ -661,7 +661,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       Selected_Enreg_TextChanged();
       if (View_Dflt_Item.Text.Length == 0) View_Dflt_Item.Text = "(none)";
 
-      // Delete temporary catalog file
+      #region Delete temporary catalog file
       string destFile = string.Empty;
       switch (CatalogType.SelectedIndex)
       {
@@ -695,6 +695,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           catch (Exception) { }
           LogMyFilms.Debug("MyFilmsSetup: Automatically deleted tmp catalog (Save action): '" + destFile + "'");
         }
+      #endregion
 
       if (Verify_Config() == false) // check if config successful and if config should be saved - Also (re) imports the external catalog data
         return;
@@ -749,8 +750,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "") == Config_Name.Text)
           XmlConfig.RemoveEntry("MyFilms", "MyFilms", "Default_Config");
       }
-      if (Config_Menu.Checked)
-        XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
+      if (Config_Menu.Checked) XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
 
       XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", Config_Menu.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Logos", chkLogos.Checked);
@@ -865,7 +865,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalAvailableOnly", chkGlobalAvailableOnly.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
-      // XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", chkEnhancedWatchedStatusHandling.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", chkEnhancedWatchedStatusHandling.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", UserProfileName.Text);
 
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckMediaOnStart", chkScanMediaOnStart.Checked);
@@ -1020,7 +1020,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethodInHierarchies");
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethod");
 
-      XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling");
+      // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling"); // ToDo: can be removed in later release, when we don't support nonEnhanced/AMC3 anymore
     }
 
     private int GetLayoutFromName(string layoutname)
@@ -1164,7 +1164,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       Refresh_Items(false);
       CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
 
-      // chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
+      chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
       chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
       chkEnhancedWatchedStatusHandling.Enabled = false; // ToDo: we don't support AMC3 anymore and "autoswitch" this setting - an be completely removed in future version
       UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", MyFilms.GlobalUsername);

@@ -350,6 +350,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
 
     internal const string GlobalUsername = "Global";
+    internal const string DefaultUsername = "FilmsUser";
 
     enum Controls : int
     {
@@ -10291,7 +10292,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (strUserProfileNameSelection)
       {
         case "": // new value
-          VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+          var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
           if (null == keyboard) return;
           keyboard.Reset();
           keyboard.Text = ""; // Default string is empty
