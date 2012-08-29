@@ -3866,8 +3866,15 @@ Public Class AntProcessor
     Private Shared Sub RemoveValue(ByRef CurrentNode As Xml.XmlNode, ByVal currentAttribute As String)
         If (IsExtendedField(currentAttribute)) Then
             Const SubElementName As String = "CustomFields"
+
+            ' remove CustomFields Attribute
             If Not CurrentNode.Item(SubElementName).Attributes(currentAttribute) Is Nothing Then
                 CurrentNode.Item(SubElementName).Attributes.Remove(CurrentNode.Item(SubElementName).Attributes.GetNamedItem(currentAttribute))
+            End If
+
+            ' also remove Element, in case there is any left
+            If Not CurrentNode.Item(currentAttribute) Is Nothing Then
+                CurrentNode.RemoveChild(CurrentNode.Item(currentAttribute))
             End If
         Else
             If Not CurrentNode.Attributes(currentAttribute) Is Nothing Then
