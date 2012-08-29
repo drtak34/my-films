@@ -49,8 +49,6 @@ namespace MyFilmsPlugin.MyFilms
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
-    private static readonly IEnumerable<DataColumn> CommonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
-
 
     internal static Queue<MFMovie> MovieUpdateQueue = new Queue<MFMovie>();
 
@@ -235,11 +233,12 @@ namespace MyFilmsPlugin.MyFilms
     {
       var saveDataWatch = new Stopwatch();
       saveDataWatch.Reset(); saveDataWatch.Start();
+      IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
       foreach (var movieRow in data.Movie)
       {
         movieRow.BeginEdit();
         var customFields = movieRow.GetCustomFieldsRows()[0];
-        foreach (DataColumn dc in CommonColumns)
+        foreach (DataColumn dc in commonColumns)
         {
           // object temp;
           // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
@@ -457,6 +456,7 @@ namespace MyFilmsPlugin.MyFilms
         CreateMissingCustomFieldsEntries();
 
         #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
+        IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
         var now = DateTime.Now;
         Watch.Reset(); Watch.Start();
         //data.Movie.BeginLoadData();
@@ -510,7 +510,7 @@ namespace MyFilmsPlugin.MyFilms
 
           #region Copy CustomFields data ....
           var customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-          foreach (DataColumn dc in CommonColumns)
+          foreach (DataColumn dc in commonColumns)
           {
             // movieRow[dc.ColumnName] = customFields[dc.ColumnName];
             object temp;
@@ -628,6 +628,7 @@ namespace MyFilmsPlugin.MyFilms
                 string sqlExpression = (!string.IsNullOrEmpty(expression)) ? expression : tmpconf.StrDfltSelect + tmpconf.StrTitle1 + " not like ''";
                 string sqlSort = (!string.IsNullOrEmpty(sort)) ? sort : "OriginalTitle" + " " + "ASC";
                 DataRow[] results = dataExport.Tables["Movie"].Select(sqlExpression, sqlSort);
+                IEnumerable<DataColumn> commonColumns = dataExport.Movie.Columns.OfType<DataColumn>().Intersect(dataExport.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
 
                 foreach (AntMovieCatalog.MovieRow sr in results)
                 {
@@ -636,7 +637,7 @@ namespace MyFilmsPlugin.MyFilms
                   if (sr.GetCustomFieldsRows().Length > 0)
                   {
                     customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-                    foreach (DataColumn dc in CommonColumns)
+                    foreach (DataColumn dc in commonColumns)
                     {
                       if (dc.ColumnName != "Movie_Id") sr[dc.ColumnName] = customFields[dc.ColumnName];
                     }
@@ -945,6 +946,7 @@ namespace MyFilmsPlugin.MyFilms
         using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
         {
           #region variables
+          IEnumerable<DataColumn> commonColumns = dataImport.Movie.Columns.OfType<DataColumn>().Intersect(dataImport.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
           string Catalog = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
           string CatalogTmp = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
           string FileType = xmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
@@ -1031,7 +1033,7 @@ namespace MyFilmsPlugin.MyFilms
                       if (sr.GetCustomFieldsRows().Length > 0)
                       {
                         customFields = sr.GetCustomFieldsRows()[0];
-                        foreach (var dc in CommonColumns)
+                        foreach (var dc in commonColumns)
                         {
                           object temp;
                           if (DBNull.Value != (temp = customFields[dc.ColumnName]))
@@ -1139,7 +1141,7 @@ namespace MyFilmsPlugin.MyFilms
                       #endregion
 
                       #region copy data to customfields ...
-                      foreach (var dc in CommonColumns)
+                      foreach (var dc in commonColumns)
                       {
                         customFields[dc.ColumnName] = sr[dc.ColumnName];
                       }
@@ -1163,7 +1165,7 @@ namespace MyFilmsPlugin.MyFilms
                     if (sr.GetCustomFieldsRows().Length > 0)
                     {
                       customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-                      foreach (var dc in CommonColumns)
+                      foreach (var dc in commonColumns)
                       {
                         object temp;
                         if (DBNull.Value != (temp = customFields[dc.ColumnName]))
@@ -1194,7 +1196,7 @@ namespace MyFilmsPlugin.MyFilms
                     #endregion
 
                     #region copy data to customfields ...
-                    foreach (var dc in CommonColumns)
+                    foreach (var dc in commonColumns)
                     {
                       customFields[dc.ColumnName] = sr[dc.ColumnName];
                     }
