@@ -73,7 +73,7 @@ namespace MyFilmsPlugin.DataBase
       var userstate = GetUserState(username);
       userstate.WatchedCount = watchedcount;
       userstate.Watched = (watchedcount > 0);
-      userstate.WatchedDate = (watchedcount > 0) ? DateTime.Now : DateTime.MinValue;
+      userstate.WatchedDate = (watchedcount > 0) ? DateTime.Today : DateTime.MinValue;
     }
 
     public void SetRating(string username, decimal rating)
@@ -85,7 +85,7 @@ namespace MyFilmsPlugin.DataBase
     public void AddWatchedCountByOne(string username)
     {
       var userstate = GetUserState(username);
-      userstate.WatchedCount = userstate.WatchedCount + 1;
+      userstate.WatchedCount += 1;
       userstate.WatchedDate = DateTime.Now;
       userstate.Watched = true;
     }
@@ -97,7 +97,7 @@ namespace MyFilmsPlugin.DataBase
       foreach (var state in MultiUserStatus)
       {
         // LogMyFilms.Debug("LoadUserStates() - return state for user '" + state.UserName + "', rating = '" + state.UserRating + "', count = '" + state.WatchedCount + "', watched = '" + state.Watched + "', watcheddate = '" + state.WatchedDate + "'");
-        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
+        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToShortDateString();  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
         // LogMyFilms.Debug("LoadUserStates() - resulting user string: '" + sNew + "'");
         if (string.IsNullOrEmpty(resultValueString)) resultValueString = sNew;
         else resultValueString += "|" + sNew;

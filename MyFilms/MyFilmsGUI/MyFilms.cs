@@ -2836,6 +2836,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " = '" + sLabel + "'" : conf.WStrSort + " is NULL";
         else if (conf.WStrSort == "Date")
           conf.StrSelect = (LabelNotEmpty) ? "DateAdded" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
+        else if (conf.WStrSort == "DateWatched")
+          conf.StrSelect = (LabelNotEmpty) ? "DateWatched" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else if (IsDateField(conf.WStrSort))
           conf.StrSelect = (LabelNotEmpty) ? conf.WStrSort + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else if (IsAlphaNumericalField(conf.WStrSort))
@@ -3168,22 +3170,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #endregion
 
             #region Watched Status
-
             if (conf.StrEnhancedWatchedStatusHandling)
             {
-              //bool tmpwatched = false;
-              //if (!sr[conf.StrMultiUserStateField].ToString().StartsWith("Global:"))
-              //{
-              //  if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
-              //    if (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) && sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() && sr[conf.StrWatchedField].ToString().Length > 0) // changed to take setup config into consideration
-              //      tmpwatched = true;
-              //  sr[conf.StrWatchedField] = (tmpwatched) ? "Global:1:-1:" : "Global:0:-1:";
-              //}
-              //if (!sr[conf.StrWatchedField].ToString().Contains(conf.StrUserProfileName + ":"))
-              //{
-              //    sr[conf.StrWatchedField] = (tmpwatched) ? sr[conf.StrWatchedField] + "|" + conf.StrUserProfileName + ":1:-1:" : sr[conf.StrWatchedField] + "|" + conf.StrUserProfileName + ":0:-1:";
-              //}
-              if (EnhancedWatched(sr[conf.StrMultiUserStateField].ToString(), conf.StrUserProfileName)) item.IsPlayed = true;
+              if (!sr[conf.StrMultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
+              {
+                #region migrate status from configured (enhanced)watched field to new MultiUserStatus
+                MultiUserData userData;
+                if (sr[MyFilms.conf.StrWatchedField].ToString().Contains(":"))
+                {
+                  // old field was already multiuserdata - migrate it!
+                  userData = new MultiUserData(sr[conf.StrWatchedField].ToString());
+                  sr[MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+                }
+                else
+                {
+                  // old field was standard watched data - create MUS and add watched for current user
+                  bool tmpwatched = (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) &&
+                                sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() &&
+                                sr[conf.StrWatchedField].ToString().Length > 0);
+                  userData = new MultiUserData("");
+                  userData.SetWatched(MyFilms.conf.StrUserProfileName, tmpwatched);
+                }
+                sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+                sr["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+                sr["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+                #endregion
+              }
+              item.IsPlayed = (EnhancedWatched(sr[conf.StrMultiUserStateField].ToString(), conf.StrUserProfileName));
             }
             else
             {
@@ -5594,6 +5607,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (string.Compare(fieldname, "DateAdded", true) == 0) return true;
       if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
+      if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
       return false;
     }
 
@@ -6812,7 +6826,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           // champselect = string.Format("{0:yyyy/MM/dd}", row["DateAdded"]);
           DateTime tmpdate;
-          champselect = (DateTime.TryParse(row[WStrSort].ToString(), out tmpdate)) ? string.Format("{0:yyyy/MM/dd}", tmpdate) : "";
+          champselect = (DateTime.TryParse(row[WStrSort].ToString(), out tmpdate)) ? string.Format("{0:yyyy/MM/dd}", tmpdate.ToShortDateString()) : ""; // .ToString("o", CultureInfo.InvariantCulture)
           //try { champselect = string.Format("{0:dd/MM/yyyy}", DateTime.Parse(row[WStrSort].ToString()).ToShortDateString()); }
           //catch (Exception) { champselect = ""; }
         }
