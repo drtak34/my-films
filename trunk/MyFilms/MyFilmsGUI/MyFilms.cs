@@ -10294,7 +10294,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
-      foreach (string userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[conf.StrMultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
+      foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[conf.StrMultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
       {
         dlg.Add(userprofilename);
         choiceGlobalUserProfileName.Add(userprofilename);
@@ -10330,6 +10330,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
       }
+
+      #region switch user data to dedicated fields (WatchedDate, RatingUser, userdefined 'Watched' field)
+      LogMyFilms.Debug("Change_UserProfileName() - Switch user data to dedicated fields (WatchedDate, RatingUser, userdefined 'Watched' field)");
+      Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
+      foreach (AntMovieCatalog.MovieRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
+      {
+        #region sync MUS state with direct DB fields for user rating, watched and Favorite
+        if (conf.StrEnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
+        {
+          var states = new MultiUserData(sr.MultiUserState);
+          var user = states.GetUserState(conf.StrUserProfileName);
+          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue ? System.Convert.DBNull : user.WatchedDate;
+          sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
+          if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
+          if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
+          {
+            sr.Favorite = sr.RatingUser > 5 ? Helper.Add(sr.Favorite, conf.StrUserProfileName) : Helper.Remove(sr.Favorite, conf.StrUserProfileName);
+          }
+        }
+        #endregion
+      }
+      watch.Stop();
+      LogMyFilms.Debug("Change_UserProfileName() - finished updating DB fields... (" + (watch.ElapsedMilliseconds) + " ms)");
+      #endregion
     }
 
     private string Change_MovieGroupName(string movieTitle)
