@@ -631,9 +631,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns>Returns string cleaned by the removed string</returns>
         public static string Remove(string input, string toRemove)
         {
-          string output = "";
-          string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-          List<string> itemList = split.Distinct().ToList();
+          string output = string.Empty;
+          var split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+          var itemList = split.Distinct().ToList();
           if (itemList.Contains(toRemove)) itemList.Remove(toRemove);
           foreach (string s in itemList)
           {
@@ -651,9 +651,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// <returns>Returns string with added new value</returns>
         public static string Add(string input, string toAdd)
         {
-          string output = "";
-          string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-          List<string> itemList = split.Distinct().ToList();
+          string output = string.Empty;
+          var split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+          var itemList = split.Distinct().ToList();
           if (!itemList.Contains(toAdd)) itemList.Add(toAdd);
           foreach (string s in itemList)
           {

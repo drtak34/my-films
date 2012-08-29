@@ -6253,6 +6253,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         tbExternalPlayerPath.Text = openFileDialog1.FileName;
     }
 
+    private void button1_Click(object sender, EventArgs e)
+    {
+
+    }
+
   }
 
   public static class BindingSourceExtension

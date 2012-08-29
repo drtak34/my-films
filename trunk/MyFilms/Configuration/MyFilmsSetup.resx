@@ -506,6 +506,12 @@ You will have the option in the GUI to switch to "unwatched movies only" - based
 Note: If physical removal is selected, your movie files will be deleted
 from disk after you watched it - handle with care !</value>
   </data>
+  <data name="btnMUSdeleteUserData.ToolTip" xml:space="preserve">
+    <value>"Delete User Data" allows you to remove the MUS (Multi User Status) data for a specific user.
+This is useful, if you added a user once but don't use it anymore - you want to keep all MUL data, except for that user.
+Warning: all user data will be removed from your DB and cannot be restored, including user rating, watched dates, 
+watched counts and watched state.</value>
+  </data>
   <data name="btnWatchedImport.ToolTip" xml:space="preserve">
     <value>You can import a formerly created backupfile of your watched status.
 Important:
