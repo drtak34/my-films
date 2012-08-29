@@ -1102,7 +1102,7 @@ namespace MyFilmsPlugin.MyFilms
                         if (movie.Username == UserProfileName)
                         {
                           // LogMyFilms.Debug("UpdateMovies() - Trakt updates are for current MyFilms user '" + movie.Username + "' - also updating DB fields directly");
-                          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue ? System.Convert.DBNull : user.WatchedDate;
+                          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue.Date ? System.Convert.DBNull : user.WatchedDate;
                           sr["RatingUser"] = user.UserRating == MultiUserData.NoRating ? System.Convert.DBNull : user.UserRating;
                           if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
                           if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
@@ -1197,7 +1197,7 @@ namespace MyFilmsPlugin.MyFilms
                     {
                       var states = new MultiUserData(sr.MultiUserState);
                       var user = states.GetUserState(UserProfileName);
-                      sr["DateWatched"] = user.WatchedDate == DateTime.MinValue ? System.Convert.DBNull : user.WatchedDate;
+                      sr["DateWatched"] = user.WatchedDate == DateTime.MinValue.Date ? System.Convert.DBNull : user.WatchedDate;
                       sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
                       if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
                       if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)

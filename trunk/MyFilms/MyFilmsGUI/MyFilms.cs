@@ -10341,7 +10341,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           var states = new MultiUserData(sr.MultiUserState);
           var user = states.GetUserState(conf.StrUserProfileName);
-          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue ? System.Convert.DBNull : user.WatchedDate;
+          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue.Date ? System.Convert.DBNull : user.WatchedDate;
           sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
           if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
@@ -16443,7 +16443,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         mapSettings.ViewAs = (int)obj.CurrentView;
         // obj.SetCoverStatus(ref menucover, ref filmcover, ref viewcover, ref personcover, ref groupcover);
         menucover.Filename = obj.CoverStatus.MenuCover;
-        filmcover.Filename = obj.CoverStatus.FilmCover;
+        // filmcover.Filename = obj.CoverStatus.FilmCover; // do not reset filmcover, as this "breaks" animations 
         viewcover.Filename = obj.CoverStatus.ViewCover;
         personcover.Filename = obj.CoverStatus.PersonCover;
         groupcover.Filename = obj.CoverStatus.GroupCover;

@@ -2986,7 +2986,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
           userData.AddWatchedCountByOne(MyFilms.conf.StrUserProfileName);
           MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
-          MyFilms.r[Index]["DateWatched"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate == DateTime.MinValue) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+          MyFilms.r[Index]["DateWatched"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate == DateTime.MinValue.Date) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
           MyFilms.r[Index]["RatingUser"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull :  userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
           MyFilms.r[Index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
 
@@ -6717,7 +6717,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       var userData = new MultiUserData(MyFilms.r[ItemId][MyFilms.conf.StrMultiUserStateField].ToString());
                       UserState user = userData.GetUserState(MyFilms.conf.StrUserProfileName);
                       setGUIProperty("user.watched.value", user.WatchedCount > 0 ? "true" : "");
-                      setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > DateTime.MinValue) ? user.WatchedDate.ToShortDateString() : "");
+                      setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > DateTime.MinValue.Date) ? user.WatchedDate.ToShortDateString() : "");
                       setGUIProperty("user.watched.count", user.WatchedCount.ToString());
                       setGUIProperty("user.watched.name", user.UserName);
                       setGUIProperty("user.watched.global", userData.GetGlobalState().WatchedCount.ToString());
