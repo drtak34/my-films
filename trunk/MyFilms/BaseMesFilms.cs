@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms
   using System;
   using System.Collections;
   using System.Collections.Generic;
+  using System.ComponentModel;
   using System.Data;
   using System.Data.DataSetExtensions;
   using System.Diagnostics;
@@ -47,10 +48,22 @@ namespace MyFilmsPlugin.MyFilms
 
   public class BaseMesFilms
   {
+    public BaseMesFilms()
+    {
+      //if (this.updateWorker == null)
+      //{
+      //  this.updateWorker = new BackgroundWorker { WorkerSupportsCancellation = true, WorkerReportsProgress = false };
+      //  this.updateWorker.DoWork += new DoWorkEventHandler(updateWorker_DoWork);
+      //  // this.updateWorker.ProgressChanged += new ProgressChangedEventHandler(updateWorker_ProgressChanged);
+      //  this.updateWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(updateWorker_RunWorkerCompleted);
+      //}
+    }
+    
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
 
     internal static Queue<MFMovie> MovieUpdateQueue = new Queue<MFMovie>();
+    private BackgroundWorker updateWorker = null;
 
     // Create a new TimerCallback delegate instance that 
     // references the static TraktUpdateHandler method. TraktUpdateHandler 
@@ -189,7 +202,6 @@ namespace MyFilmsPlugin.MyFilms
 
       #endregion
     }
-
 
     //private class ObjectArrayComparer : IEqualityComparer<object[]>
     //{
@@ -930,7 +942,7 @@ namespace MyFilmsPlugin.MyFilms
       }
       return wtab;
     }
-
+    
     /// <summary>
     /// Updates a list of movies for a given config
     /// </summary>
