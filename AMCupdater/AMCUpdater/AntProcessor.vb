@@ -3954,16 +3954,11 @@ Public Class AntProcessor
     End Sub
 
     Private Shared Function IsExtendedField(ByVal fieldname) As Boolean
-        If fieldname = "SourceTrailer" Then
-            Return False
-        End If
         Select Case fieldname
             Case "Number", "Date", "Rating", "Year", "Length", "VideoBitrate", "AudioBitrate", "Disks", "Checked", "MediaLabel", "MediaType", "Source", "Borrower", "OriginalTitle", "TranslatedTitle", "FormattedTitle", "Director", "Producer", "Country", "Category", "Actors", "URL", "Description", "Comments", "VideoFormat", "AudioFormat", "Resolution", "Framerate", "Languages", "Subtitles", "Size", "Picture"
                 Return False
-                Exit Select
             Case Else
                 Return True
-                Exit Select
         End Select
     End Function
 
