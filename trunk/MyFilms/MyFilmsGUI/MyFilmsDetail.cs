@@ -6389,7 +6389,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             clearGUIProperty("user.source.value", log);
+            clearGUIProperty("user.source.filepath", log);
+            clearGUIProperty("user.source.filename", log);
+            clearGUIProperty("user.source.shortname", log);
             clearGUIProperty("user.sourcetrailer.value", log);
+            clearGUIProperty("user.sourcetrailer.filepath", log);
+            clearGUIProperty("user.sourcetrailer.filename", log);
+            clearGUIProperty("user.sourcetrailer.shortname", log);
             clearGUIProperty("user.sourcetrailer.count", log);
             clearGUIProperty("user.rating.value", log);
             clearGUIProperty("user.watched.value", log);
@@ -6635,20 +6641,71 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
                     MyFilms.currentMovie.File = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                    if (!string.IsNullOrEmpty(MyFilms.r[ItemId][dc.ColumnName].ToString().Trim()))
+                    {
+                      string[] split = MyFilms.r[ItemId][dc.ColumnName].ToString().Trim().Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                      if (split.Any() && split[0].LastIndexOf("\\", System.StringComparison.Ordinal) > 0)
+                      {
+                        string name = split[0].Substring(split[0].LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+                        string path = split[0].Substring(0, split[0].LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+                        string longname = (path.IndexOf("\\", System.StringComparison.Ordinal) > 0) ? path.Substring(path.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + "\\" + name : split[0];
+                        setGUIProperty("user.source.filepath", path);
+                        setGUIProperty("user.source.filename", name);
+                        setGUIProperty("user.source.shortname", longname);
+                      }
+                      else
+                      {
+                        setGUIProperty("user.source.filepath", "");
+                        setGUIProperty("user.source.filename", "");
+                        setGUIProperty("user.source.shortname", "");
+                      }
+                    }
+                  }
+                  else
+                  {
+                    setGUIProperty("user.source.filepath", "");
+                    setGUIProperty("user.source.filename", "");
+                    setGUIProperty("user.source.shortname", "");
                   }
 
                   if (wrep && MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower()))
                   {
                     setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
                     MyFilms.currentMovie.Trailer = MyFilms.r[ItemId][dc.ColumnName].ToString();
-                    // add number of trailers : #myfilms.user.sourcetrailer.count
                     if (!string.IsNullOrEmpty(MyFilms.r[ItemId][dc.ColumnName].ToString().Trim()))
                     {
-                      string[] split1 = MyFilms.r[ItemId][dc.ColumnName].ToString().Trim().Split(new Char[] { ';' });
-                      setGUIProperty("user.sourcetrailer.count", split1.Count().ToString());
+                      string[] split = MyFilms.r[ItemId][dc.ColumnName].ToString().Trim().Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                      setGUIProperty("user.sourcetrailer.count", split.Count().ToString());
+                      if (split.Any() && split[0].LastIndexOf("\\", System.StringComparison.Ordinal) > 0)
+                      {
+                        string name = split[0].Substring(split[0].LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+                        string path = split[0].Substring(0, split[0].LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+                        string longname = (path.IndexOf("\\", System.StringComparison.Ordinal) > 0) ? path.Substring(path.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + "\\" + name : split[0];
+                        setGUIProperty("user.sourcetrailer.filepath", path);
+                        setGUIProperty("user.sourcetrailer.filename", name);
+                        setGUIProperty("user.sourcetrailer.shortname", longname);
+                      }
+                      else
+                      {
+                        setGUIProperty("user.sourcetrailer.filepath", "");
+                        setGUIProperty("user.sourcetrailer.filename", "");
+                        setGUIProperty("user.sourcetrailer.shortname", "");
+                      }
                     }
                     else
+                    {
                       setGUIProperty("user.sourcetrailer.count", "");
+                      setGUIProperty("user.sourcetrailer.filepath", "");
+                      setGUIProperty("user.sourcetrailer.filename", "");
+                      setGUIProperty("user.sourcetrailer.shortname", "");
+                    }
+                  }
+                  else
+                  {
+                    setGUIProperty("user.sourcetrailer.count", "");
+                    setGUIProperty("user.sourcetrailer.filepath", "");
+                    setGUIProperty("user.sourcetrailer.filename", "");
+                    setGUIProperty("user.sourcetrailer.shortname", "");
                   }
                   #endregion
 
@@ -6830,16 +6887,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       break;
                     case "isonline":
                       #region set online status
-                      // old method
-                      //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                      //{
-                      //  if (MyFilms.InitialIsOnlineScan)
-                      //    setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                      //  else
-                      //    setGUIProperty("user.source.isonline", "");
-                      //}
-
-                      // new method
                       if (wrep)
                       {
                         if (MyFilms.InitialIsOnlineScan) // if availability scanner did run - either by autostart or manually
@@ -6889,13 +6936,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       break;
                     case "isonlinetrailer":
                       #region set trailer online status
-                      //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                      //{
-                      //  if (MyFilms.InitialIsOnlineScan)
-                      //    setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                      //  else
-                      //    setGUIProperty("user.sourcetrailer.isonline", "");
-                      //}
                       if (wrep)
                       {
                         if (MyFilms.InitialIsOnlineScan)
@@ -6942,6 +6982,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         setGUIProperty("user.sourcetrailer.isonline", "");
                       #endregion
                       break;
+
                     case "resolution":
                       #region set calculated aspectratio and image format
                       string ar = "";
