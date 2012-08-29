@@ -14,6 +14,7 @@ namespace MyFilmsPlugin.DataBase
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
 
     public const decimal NoRating = -1;
+
     public string MultiUserStatusValue { get; set; }
     public List<UserState> MultiUserStatus { get; set; }
     public MultiUserData(string value)
@@ -39,7 +40,7 @@ namespace MyFilmsPlugin.DataBase
     {
       // return this.MultiUserStatus.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
       var global = new UserState(MyFilms.GlobalUsername)
-        { WatchedCount = 0, UserRating = NoRating, WatchedDate = DateTime.MinValue };
+        { WatchedCount = 0, UserRating = NoRating, WatchedDate = DateTime.MinValue.Date };
 
       foreach (UserState userState in MultiUserStatus.FindAll(x => x.UserName != MyFilms.GlobalUsername))
       {
@@ -64,7 +65,7 @@ namespace MyFilmsPlugin.DataBase
       {
         userstate.WatchedCount = 0;
         userstate.Watched = false;
-        userstate.WatchedDate = DateTime.MinValue;
+        userstate.WatchedDate = DateTime.MinValue.Date;
       }
     }
 
@@ -73,7 +74,7 @@ namespace MyFilmsPlugin.DataBase
       var userstate = GetUserState(username);
       userstate.WatchedCount = watchedcount;
       userstate.Watched = (watchedcount > 0);
-      userstate.WatchedDate = (watchedcount > 0) ? DateTime.Today : DateTime.MinValue;
+      userstate.WatchedDate = (watchedcount > 0) ? DateTime.Today : DateTime.MinValue.Date;
     }
 
     public void SetRating(string username, decimal rating)
@@ -155,7 +156,7 @@ namespace MyFilmsPlugin.DataBase
           break;
         case Type.Datewatched:
           DateTime datewatched;
-          value = (split.Length > 3 && DateTime.TryParse(split[3], out datewatched)) ? datewatched : DateTime.MinValue;
+          value = (split.Length > 3 && DateTime.TryParse(split[3], out datewatched)) ? datewatched : DateTime.MinValue.Date;
           break;
       }
       return value;
@@ -198,7 +199,7 @@ namespace MyFilmsPlugin.DataBase
       this.UserRating = MultiUserData.NoRating;
       this.Watched = false;
       this.WatchedCount = 0;
-      this.WatchedDate = DateTime.MinValue;
+      this.WatchedDate = DateTime.MinValue.Date;
     }
 
     public string UserName { get; private set; }
