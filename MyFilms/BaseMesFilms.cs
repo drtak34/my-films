@@ -49,6 +49,8 @@ namespace MyFilmsPlugin.MyFilms
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
+    private static readonly IEnumerable<DataColumn> CommonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
+
 
     internal static Queue<MFMovie> MovieUpdateQueue = new Queue<MFMovie>();
 
@@ -233,27 +235,23 @@ namespace MyFilmsPlugin.MyFilms
     {
       var saveDataWatch = new Stopwatch();
       saveDataWatch.Reset(); saveDataWatch.Start();
-      IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).ToList();
       foreach (var movieRow in data.Movie)
       {
         movieRow.BeginEdit();
         var customFields = movieRow.GetCustomFieldsRows()[0];
-        foreach (DataColumn dc in commonColumns)
+        foreach (DataColumn dc in CommonColumns)
         {
-          // if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName]))  movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
-          if (dc.ColumnName != "Movie_Id")
-          {
-            customFields[dc.ColumnName] = movieRow[dc.ColumnName];
-            //object temp;
-            //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
-            //{
-            //  customFields[dc.ColumnName] = temp;
-            //  if (cleanfileonexit)
-            //  {
-            //    movieRow[dc.ColumnName] = System.Convert.DBNull;
-            //  }
-            //}
-          }
+          // object temp;
+          // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
+          customFields[dc.ColumnName] = movieRow[dc.ColumnName];
+          //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
+          //{
+          //  customFields[dc.ColumnName] = temp;
+          //  if (cleanfileonexit)
+          //  {
+          //    movieRow[dc.ColumnName] = System.Convert.DBNull;
+          //  }
+          //}
         }
       }
       data.Movie.AcceptChanges();
@@ -461,7 +459,6 @@ namespace MyFilmsPlugin.MyFilms
         #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
         var now = DateTime.Now;
         Watch.Reset(); Watch.Start();
-        IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).ToList();
         //data.Movie.BeginLoadData();
         //data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
         foreach (var movieRow in data.Movie)
@@ -513,11 +510,13 @@ namespace MyFilmsPlugin.MyFilms
 
           #region Copy CustomFields data ....
           var customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-          foreach (DataColumn dc in commonColumns)
+          foreach (DataColumn dc in CommonColumns)
           {
-            //object temp;
-            //if (dc.ColumnName != "Movie_Id" && DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp;
-            if (dc.ColumnName != "Movie_Id") movieRow[dc.ColumnName] = customFields[dc.ColumnName];
+            // movieRow[dc.ColumnName] = customFields[dc.ColumnName];
+            object temp;
+            // only copy CustomFields, if not nothing, as user might have initial values in Elements!
+            if (DBNull.Value != (temp = customFields[dc.ColumnName])) 
+              movieRow[dc.ColumnName] = temp; 
           }
           #endregion
         }
@@ -629,8 +628,6 @@ namespace MyFilmsPlugin.MyFilms
                 string sqlExpression = (!string.IsNullOrEmpty(expression)) ? expression : tmpconf.StrDfltSelect + tmpconf.StrTitle1 + " not like ''";
                 string sqlSort = (!string.IsNullOrEmpty(sort)) ? sort : "OriginalTitle" + " " + "ASC";
                 DataRow[] results = dataExport.Tables["Movie"].Select(sqlExpression, sqlSort);
-                IEnumerable<DataColumn> commonColumns = dataExport.Movie.Columns.OfType<DataColumn>().Intersect(dataExport.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).ToList();
-                // if (results.Length == 0) continue;
 
                 foreach (AntMovieCatalog.MovieRow sr in results)
                 {
@@ -639,7 +636,7 @@ namespace MyFilmsPlugin.MyFilms
                   if (sr.GetCustomFieldsRows().Length > 0)
                   {
                     customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-                    foreach (DataColumn dc in commonColumns)
+                    foreach (DataColumn dc in CommonColumns)
                     {
                       if (dc.ColumnName != "Movie_Id") sr[dc.ColumnName] = customFields[dc.ColumnName];
                     }
@@ -948,7 +945,6 @@ namespace MyFilmsPlugin.MyFilms
         using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
         {
           #region variables
-          IEnumerable<DataColumn> commonColumns = dataImport.Movie.Columns.OfType<DataColumn>().Intersect(dataImport.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).ToList();
           string Catalog = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
           string CatalogTmp = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
           string FileType = xmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
@@ -995,7 +991,6 @@ namespace MyFilmsPlugin.MyFilms
 
           while (!success && i < maxretries)
           {
-            // first check, if there is a global manual lock
             if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
             {
               MyFilmsDetail.SetGlobalLock(true, Catalog);
@@ -1022,10 +1017,9 @@ namespace MyFilmsPlugin.MyFilms
                   saveDataWatch.Reset(); saveDataWatch.Start();
                   foreach (var movie in movielist)
                   {
-                    LogMyFilms.Debug("UpdateMovies() : Update requested for ID = '" + movie.ID + "', Movie = '" + movie.Title + "' (" + movie.Year + "), IMDB = '" + movie.IMDBNumber + "', Watched = '" + movie.Watched + "', Rating = '" + movie.Rating + "', RatingUser = '" + movie.RatingUser + "', CategoryTrakt = '" + movie.GetStringValue(movie.CategoryTrakt) + "'");
-
                     #region update all movie records in memory
-                    DataRow[] results = dataImport.Movie.Select(StrDfltSelect + "Number" + " = " + "'" + movie.ID + "'", "OriginalTitle" + " " + "ASC"); // if (results.Length != 1) continue;
+                    string movieinfo = " - MovieID = '" + movie.ID + "', Movie = '" + movie.Title + "' (" + movie.Year + "), IMDB = '" + movie.IMDBNumber + "', Watched = '" + movie.Watched + "', Rating = '" + movie.Rating + "', RatingUser = '" + movie.RatingUser + "', CategoryTrakt = '" + movie.GetStringValue(movie.CategoryTrakt) + "'";
+                    DataRow[] results = dataImport.Movie.Select(StrDfltSelect + "Number" + " = " + "'" + movie.ID + "'", "OriginalTitle" + " " + "ASC");
                     // AntMovieCatalog.MovieRow[] results = dataImport.Movie.Where(m => m.Number == _mID).ToList();
 
                     if (results.Length != 1) LogMyFilms.Warn("UpdateMovies() - Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
@@ -1036,10 +1030,12 @@ namespace MyFilmsPlugin.MyFilms
                       AntMovieCatalog.CustomFieldsRow customFields = null;
                       if (sr.GetCustomFieldsRows().Length > 0)
                       {
-                        customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-                        foreach (DataColumn dc in commonColumns)
+                        customFields = sr.GetCustomFieldsRows()[0];
+                        foreach (var dc in CommonColumns)
                         {
-                          if (dc.ColumnName != "Movie_Id") sr[dc.ColumnName] = customFields[dc.ColumnName];
+                          object temp;
+                          if (DBNull.Value != (temp = customFields[dc.ColumnName]))
+                            sr[dc.ColumnName] = temp;
                         }
                       }
                       else
@@ -1053,13 +1049,9 @@ namespace MyFilmsPlugin.MyFilms
                       #region CategoryTrakt
                       if (sr.IsCategoryTraktNull() || sr.CategoryTrakt != movie.GetStringValue(movie.CategoryTrakt))
                       {
-                        LogMyFilms.Debug("UpdateMovies() - Updating Field 'CategoryTrakt' from '" + (sr.IsCategoryTraktNull() ? "" : sr.CategoryTrakt) + "' to '" + movie.GetStringValue(movie.CategoryTrakt) + "'");
+                        LogMyFilms.Debug("UpdateMovies() - Updating Field 'CategoryTrakt' from '" + (sr.IsCategoryTraktNull() ? "" : sr.CategoryTrakt) + "' to '" + movie.GetStringValue(movie.CategoryTrakt) + "'" + movieinfo);
                         sr.CategoryTrakt = movie.GetStringValue(movie.CategoryTrakt);
                       }
-                      #endregion
-
-                      #region site rating (disabled)
-                      // if (movie.Rating > 0) sr.Rating = (decimal)movie.Rating; // disabled, as we now use UserRating only
                       #endregion
 
                       #region watched status and user rating
@@ -1071,27 +1063,20 @@ namespace MyFilmsPlugin.MyFilms
                         string oldEnhancedWatchedValue = states.ResultValueString();
                         if (user.Watched != movie.Watched)
                         {
-                          LogMyFilms.Debug("UpdateMovies() - Updating 'Watched' from '" + user.Watched + "' to '" + movie.Watched + "'");
+                          LogMyFilms.Debug("UpdateMovies() - Updating 'Watched' from '" + user.Watched + "' to '" + movie.Watched + "'" + movieinfo);
                           user.Watched = movie.Watched;
                           states.SetWatched(movie.Username, movie.Watched);
                         }
                         if (user.WatchedCount != movie.WatchedCount)
                         {
-                          LogMyFilms.Debug("UpdateMovies() - Updating 'WatchedCount' from '" + user.WatchedCount + "' to '" + movie.WatchedCount + "'");
+                          LogMyFilms.Debug("UpdateMovies() - Updating 'WatchedCount' from '" + user.WatchedCount + "' to '" + movie.WatchedCount + "'" + movieinfo);
                           user.WatchedCount = movie.WatchedCount;
                           states.SetWatchedCount(movie.Username, movie.WatchedCount);
                         }
 
-                        #region WatchedDate
-                        if (user.WatchedDate == DateTime.MinValue)
-                          sr.SetDateWatchedNull();
-                        else
-                          sr.DateWatched = user.WatchedDate;
-                        #endregion
-
                         if (user.UserRating != Convert.ToDecimal(movie.RatingUser))
                         {
-                          LogMyFilms.Debug("UpdateMovies() - Updating 'UserRating' from '" + user.UserRating.ToString() + "' to '" + Convert.ToDecimal(movie.RatingUser).ToString() + "'");
+                          LogMyFilms.Debug("UpdateMovies() - Updating 'UserRating' from '" + user.UserRating.ToString() + "' to '" + Convert.ToDecimal(movie.RatingUser).ToString() + "'" + movieinfo);
                           states.SetRating(movie.Username, Convert.ToDecimal(movie.RatingUser));
                         }
                         string newEnhancedWatchedValue = states.ResultValueString();
@@ -1100,28 +1085,25 @@ namespace MyFilmsPlugin.MyFilms
                         #endregion
 
                         #region  if updates are for current active user, update direct DB fields also!
-                        // if (movie.Username == MyFilms.GlobalUsername) { } // currently not used - might be handy when in Non MUS mode ?
                         if (movie.Username == UserProfileName)
                         {
                           // LogMyFilms.Debug("UpdateMovies() - Trakt updates are for current MyFilms user '" + movie.Username + "' - also updating DB fields directly");
-                          // user rating
-                          sr.RatingUser = Convert.ToDecimal(movie.RatingUser);
-                          // update Favorite field
-                          if (UserProfileName.Length > 0 && movie.RatingUser > -1)
+                          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue ? System.Convert.DBNull : user.WatchedDate;
+                          sr["RatingUser"] = user.UserRating == MultiUserData.NoRating ? System.Convert.DBNull : user.UserRating;
+                          if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
+                          if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
                           {
-                            if ((sr.IsRatingUserNull() ? -1 : sr.RatingUser) > 5)
+                            if (sr.RatingUser > 5)
                             {
-                              LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "').");
-                              sr.Favorite = Helper.Add((sr.IsFavoriteNull()) ? "" : sr.Favorite, UserProfileName);
+                              LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
+                              sr.Favorite = Helper.Add(sr.Favorite, UserProfileName);
                             }
                             else
                             {
-                              LogMyFilms.Debug("UpdateMovies() - Remove user '" + UserProfileName + "' from 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "').");
-                              sr.Favorite = Helper.Remove((sr.IsFavoriteNull()) ? "" : sr.Favorite, UserProfileName);
+                              LogMyFilms.Debug("UpdateMovies() - Remove user '" + UserProfileName + "' from 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
+                              sr.Favorite = Helper.Remove(sr.Favorite, UserProfileName);
                             }
                           }
-                          // watched
-                          sr[WatchedField] = movie.Watched ? "true" : GlobalUnwatchedOnlyValue;
                         }
                         else
                         {
@@ -1157,17 +1139,9 @@ namespace MyFilmsPlugin.MyFilms
                       #endregion
 
                       #region copy data to customfields ...
-                      foreach (DataColumn dc in commonColumns)
+                      foreach (var dc in CommonColumns)
                       {
-                        if (dc.ColumnName != "Movie_Id")
-                        {
-                          customFields[dc.ColumnName] = sr[dc.ColumnName];
-                          // object temp;
-                          //if (DBNull.Value != (temp = sr[dc.ColumnName]))
-                          //{
-                          //  customFields[dc.ColumnName] = temp;
-                          //}
-                        }
+                        customFields[dc.ColumnName] = sr[dc.ColumnName];
                       }
                       #endregion
                     }
@@ -1189,16 +1163,14 @@ namespace MyFilmsPlugin.MyFilms
                     if (sr.GetCustomFieldsRows().Length > 0)
                     {
                       customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-
-                      foreach (DataColumn dc in commonColumns)
+                      foreach (var dc in CommonColumns)
                       {
-                        if (dc.ColumnName != "Movie_Id")
-                        {
-                          sr[dc.ColumnName] = customFields[dc.ColumnName];
-                        }
+                        object temp;
+                        if (DBNull.Value != (temp = customFields[dc.ColumnName]))
+                          sr[dc.ColumnName] = temp;
                       }
                     }
-                    else // create CustomFields Element, if not existing ...
+                    else
                     {
                       customFields = dataImport.CustomFields.NewCustomFieldsRow();
                       customFields.SetParentRow(sr);
@@ -1206,65 +1178,25 @@ namespace MyFilmsPlugin.MyFilms
                     }
                     #endregion
 
-                    #region CategoryTrakt
-                    #endregion
-
                     #region sync MUS state with direct DB fields for user rating, watched and Favorite
-                    if (EnhancedWatchedStatusHandling && !sr.IsMultiUserStateNull())
+                    if (EnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
                     {
                       var states = new MultiUserData(sr.MultiUserState);
                       var user = states.GetUserState(UserProfileName);
-
-                      #region watched date
-                      if (user.WatchedDate == DateTime.MinValue)
-                        sr.SetDateWatchedNull();
-                      else
-                        sr.DateWatched = user.WatchedDate;
-                      #endregion
-
-                      #region user rating
-                      if (user.UserRating == -1)
-                        sr.SetRatingUserNull();
-                      else
-                        sr.RatingUser = user.UserRating;
-                      #endregion
-                      #region update Favorite field
-                      if (UserProfileName.Length > 0 && !sr.IsRatingUserNull())
+                      sr["DateWatched"] = user.WatchedDate == DateTime.MinValue ? System.Convert.DBNull : user.WatchedDate;
+                      sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
+                      if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
+                      if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
                       {
-                        if (sr.RatingUser > 5)
-                        {
-                          // LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "').");
-                          sr.Favorite = Helper.Add((sr.IsFavoriteNull()) ? "" : sr.Favorite, UserProfileName);
-                        }
-                        else if (sr.RatingUser > -1)
-                        {
-                          // LogMyFilms.Debug("UpdateMovies() - Remove user '" + UserProfileName + "' from 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "').");
-                          sr.Favorite = Helper.Remove((sr.IsFavoriteNull()) ? "" : sr.Favorite, UserProfileName);
-                        }
-                        else
-                        {
-                          // do nothing, no valid userrating
-                        }
+                        sr.Favorite = sr.RatingUser > 5 ? Helper.Add(sr.Favorite, UserProfileName) : Helper.Remove(sr.Favorite, UserProfileName);
                       }
-                      #endregion
-                      #region watched
-                      if (WatchedField.Length > 0)
-                        sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
-                      #endregion
                     }
                     #endregion
 
                     #region copy data to customfields ...
-                    foreach (DataColumn dc in commonColumns)
+                    foreach (var dc in CommonColumns)
                     {
-                      // object temp;
-                      if (dc.ColumnName != "Movie_Id")
-                      {
-                        customFields[dc.ColumnName] = sr[dc.ColumnName];
-                        // if (DBNull.Value != (temp = sr[dc.ColumnName])) customFields[dc.ColumnName] = temp;
-                        // remove Elements for CustomValues from XML file to reduce size
-                        // sr[dc.ColumnName] = System.Convert.DBNull;
-                      }
+                      customFields[dc.ColumnName] = sr[dc.ColumnName];
                     }
                     #endregion
                   }
@@ -1314,8 +1246,7 @@ namespace MyFilmsPlugin.MyFilms
                 }
                 catch (Exception ex)
                 {
-                  LogMyFilms.Debug("UpdateMovies() - failed saving data to disk - Catalog = '" + Catalog + "' - reason: " + ex.Message);
-                  LogMyFilms.Debug("UpdateMovies() - Stacktrace: " + ex.StackTrace);
+                  LogMyFilms.Debug("UpdateMovies() - failed saving data to disk - Catalog = '" + Catalog + "' - reason: " + ex.Message + ex.StackTrace);
                   success = false;
                 }
                 finally

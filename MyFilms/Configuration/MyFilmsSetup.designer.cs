@@ -611,6 +611,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.btnMUSdeleteUserData = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -2431,6 +2432,7 @@
           // 
           // groupBox2
           // 
+          this.groupBox2.Controls.Add(this.btnMUSdeleteUserData);
           this.groupBox2.Controls.Add(this.btnWatchedImport);
           this.groupBox2.Controls.Add(this.btnWatchedExport);
           this.groupBox2.Controls.Add(this.lblUnwatchedItemsValue);
@@ -2475,7 +2477,7 @@
           // lblUnwatchedItemsValue
           // 
           this.lblUnwatchedItemsValue.AutoSize = true;
-          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(165, 70);
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(165, 62);
           this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
           this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(165, 13);
           this.lblUnwatchedItemsValue.TabIndex = 84;
@@ -2483,7 +2485,7 @@
           // 
           // textBoxGlobalUnwatchedOnlyValue
           // 
-          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(168, 88);
+          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(168, 80);
           this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
           this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(162, 20);
           this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 83;
@@ -2492,7 +2494,7 @@
           // CheckWatchedPlayerStopped
           // 
           this.CheckWatchedPlayerStopped.AutoSize = true;
-          this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 42);
+          this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 37);
           this.CheckWatchedPlayerStopped.Name = "CheckWatchedPlayerStopped";
           this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(238, 17);
           this.CheckWatchedPlayerStopped.TabIndex = 75;
@@ -2505,7 +2507,7 @@
           // Label_UserProfileName
           // 
           this.Label_UserProfileName.AutoSize = true;
-          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 137);
+          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 145);
           this.Label_UserProfileName.Name = "Label_UserProfileName";
           this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
           this.Label_UserProfileName.TabIndex = 72;
@@ -2514,7 +2516,7 @@
           // UserProfileName
           // 
           this.UserProfileName.Enabled = false;
-          this.UserProfileName.Location = new System.Drawing.Point(168, 134);
+          this.UserProfileName.Location = new System.Drawing.Point(168, 142);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);
           this.UserProfileName.TabIndex = 71;
@@ -2523,7 +2525,7 @@
           // label19
           // 
           this.label19.AutoSize = true;
-          this.label19.Location = new System.Drawing.Point(8, 70);
+          this.label19.Location = new System.Drawing.Point(8, 62);
           this.label19.Name = "label19";
           this.label19.Size = new System.Drawing.Size(150, 13);
           this.label19.TabIndex = 74;
@@ -2532,7 +2534,7 @@
           // cbWatched
           // 
           this.cbWatched.FormattingEnabled = true;
-          this.cbWatched.Location = new System.Drawing.Point(10, 87);
+          this.cbWatched.Location = new System.Drawing.Point(10, 79);
           this.cbWatched.Name = "cbWatched";
           this.cbWatched.Size = new System.Drawing.Size(123, 21);
           this.cbWatched.Sorted = true;
@@ -2542,7 +2544,7 @@
           // chkEnhancedWatchedStatusHandling
           // 
           this.chkEnhancedWatchedStatusHandling.AutoSize = true;
-          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 115);
+          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 117);
           this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
           this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(211, 17);
           this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
@@ -2554,7 +2556,7 @@
           // CheckWatched
           // 
           this.CheckWatched.AutoSize = true;
-          this.CheckWatched.Location = new System.Drawing.Point(10, 19);
+          this.CheckWatched.Location = new System.Drawing.Point(10, 17);
           this.CheckWatched.Name = "CheckWatched";
           this.CheckWatched.Size = new System.Drawing.Size(178, 17);
           this.CheckWatched.TabIndex = 69;
@@ -6341,6 +6343,18 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // btnMUSdeleteUserData
+          // 
+          this.btnMUSdeleteUserData.Location = new System.Drawing.Point(226, 114);
+          this.btnMUSdeleteUserData.Name = "btnMUSdeleteUserData";
+          this.btnMUSdeleteUserData.Size = new System.Drawing.Size(104, 21);
+          this.btnMUSdeleteUserData.TabIndex = 87;
+          this.btnMUSdeleteUserData.Text = "Delete User Data";
+          this.ToolTip1.SetToolTip(this.btnMUSdeleteUserData, resources.GetString("btnMUSdeleteUserData.ToolTip"));
+          this.btnMUSdeleteUserData.UseVisualStyleBackColor = true;
+          this.btnMUSdeleteUserData.Visible = false;
+          this.btnMUSdeleteUserData.Click += new System.EventHandler(this.button1_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6997,5 +7011,6 @@
         private ComboBox SortSensViewFilms;
         private ComboBox SortViewFilms;
         private CheckBox chkVirtualPathBrowsing;
+        private Button btnMUSdeleteUserData;
     }
 }
