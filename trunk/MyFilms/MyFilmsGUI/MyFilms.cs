@@ -10341,7 +10341,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           var states = new MultiUserData(sr.MultiUserState);
           var user = states.GetUserState(conf.StrUserProfileName);
-          sr["DateWatched"] = user.WatchedDate == DateTime.MinValue.Date ? System.Convert.DBNull : user.WatchedDate;
+          sr["DateWatched"] = user.WatchedDate == MultiUserData.NoWatchedDate ? System.Convert.DBNull : user.WatchedDate;
           sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
           if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
