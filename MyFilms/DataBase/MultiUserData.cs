@@ -14,6 +14,7 @@ namespace MyFilmsPlugin.DataBase
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
 
     public const decimal NoRating = -1;
+    public static readonly DateTime NoWatchedDate = DateTime.MinValue;
 
     public string MultiUserStatusValue { get; set; }
     public List<UserState> MultiUserStatus { get; set; }
@@ -40,7 +41,7 @@ namespace MyFilmsPlugin.DataBase
     {
       // return this.MultiUserStatus.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
       var global = new UserState(MyFilms.GlobalUsername)
-        { WatchedCount = 0, UserRating = NoRating, WatchedDate = DateTime.MinValue.Date };
+        { WatchedCount = 0, UserRating = NoRating, WatchedDate = NoWatchedDate };
 
       foreach (UserState userState in MultiUserStatus.FindAll(x => x.UserName != MyFilms.GlobalUsername))
       {
@@ -65,7 +66,7 @@ namespace MyFilmsPlugin.DataBase
       {
         userstate.WatchedCount = 0;
         userstate.Watched = false;
-        userstate.WatchedDate = DateTime.MinValue.Date;
+        userstate.WatchedDate = NoWatchedDate;
       }
     }
 
@@ -74,7 +75,7 @@ namespace MyFilmsPlugin.DataBase
       var userstate = GetUserState(username);
       userstate.WatchedCount = watchedcount;
       userstate.Watched = (watchedcount > 0);
-      userstate.WatchedDate = (watchedcount > 0) ? DateTime.Today : DateTime.MinValue.Date;
+      userstate.WatchedDate = (watchedcount > 0) ? DateTime.Today : NoWatchedDate;
     }
 
     public void SetRating(string username, decimal rating)
@@ -93,15 +94,13 @@ namespace MyFilmsPlugin.DataBase
 
     public string ResultValueString()
     {
-      CultureInfo invC = CultureInfo.InvariantCulture;
       string resultValueString = string.Empty;
       foreach (var state in MultiUserStatus)
       {
         // LogMyFilms.Debug("LoadUserStates() - return state for user '" + state.UserName + "', rating = '" + state.UserRating + "', count = '" + state.WatchedCount + "', watched = '" + state.Watched + "', watcheddate = '" + state.WatchedDate + "'");
-        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToShortDateString();  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
-        // LogMyFilms.Debug("LoadUserStates() - resulting user string: '" + sNew + "'");
-        if (string.IsNullOrEmpty(resultValueString)) resultValueString = sNew;
-        else resultValueString += "|" + sNew;
+        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
+        if (resultValueString.Length > 0) resultValueString += "|";
+        resultValueString += sNew;
       }
       // if (MultiUserStatusValue != resultValueString) LogMyFilms.Debug("ResultValueString() - modified MUS value = '" + resultValueString + "'");
       return resultValueString;
@@ -156,7 +155,7 @@ namespace MyFilmsPlugin.DataBase
           break;
         case Type.Datewatched:
           DateTime datewatched;
-          value = (split.Length > 3 && DateTime.TryParse(split[3], out datewatched)) ? datewatched : DateTime.MinValue.Date;
+          value = (split.Length > 3 && DateTime.TryParse(split[3], out datewatched)) ? datewatched : NoWatchedDate;
           break;
       }
       return value;
@@ -199,7 +198,7 @@ namespace MyFilmsPlugin.DataBase
       this.UserRating = MultiUserData.NoRating;
       this.Watched = false;
       this.WatchedCount = 0;
-      this.WatchedDate = DateTime.MinValue.Date;
+      this.WatchedDate = MultiUserData.NoWatchedDate;
     }
 
     public string UserName { get; private set; }
