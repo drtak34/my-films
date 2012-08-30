@@ -52,8 +52,6 @@
 	<fadetime>1000</fadetime>
 	<loop>yes</loop>
 	<keepaspectratio>yes</keepaspectratio>
-	<centered>yes</centered>
-	<zoom>yes</zoom>
 	<randomize>true</randomize>
         <animation effect="fade" time="300">visible</animation>
         <animation effect="fade" time="300">hidden</animation>
@@ -282,9 +280,11 @@
 	<width>275</width>
 	<height>500</height>
 	<dimColor>00ffffff</dimColor>
-        <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>	
+	<visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>	
+	<animation effect="slide" time="70" start="-300,0" reversible="false">visible</animation>
+	<animation effect="slide" time="70" end="-300,0" reversible="false">hidden</animation>
 	<control>
-            <description>Menu Background</description>
+		<description>Menu Background</description>
 	    <type>image</type>
 	    <id>0</id>	    
 	    <id>0</id>
@@ -295,18 +295,14 @@
 	    <texture>Backslide.png</texture>
 	    <colordiffuse>ffffffff</colordiffuse>
 	    <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
-	    <animation effect="slide" time="70" start="-300,0" reversible="false">visible</animation>
-            <animation effect="slide" time="70" end="-300,0" reversible="false">hidden</animation>
 	</control>	
 	<control>
 	    <type>group</type>
 	    <description>Menu Buttons group element</description>
 	    <posX>71</posX>
 	    <posY>121</posY>								
-	    <layout>StackLayout</layout>
+	    <layout>StackLayout(0,Vertical,True)</layout>
 	    <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
-	    <animation effect="slide" time="70" start="-300,0" reversible="false">visible</animation>
-            <animation effect="slide" time="70" end="-300,0" reversible="false">hidden</animation>
 	    <control>
                 <description>Back</description>
 	        <type>button</type>					
@@ -392,7 +388,8 @@
 	    </control>
 	</control>		 
     </control>	
-    <!-- Virtual Views Menu -->
+
+	<!-- VIRTUAL VIEWS MENU -->
     <control>
 	<description>Play Button and Overview</description>
 	<type>button</type>
@@ -430,7 +427,6 @@
 	<label>#myfilms.menu.description</label>
 	<font>font10</font>
 	<align>left</align>
-	<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 	<textXOff>25</textXOff>
 	<textureFocus>MyFilms\ledon.png</textureFocus>
 	<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -453,7 +449,6 @@
 	<label>#myfilms.menu.comments</label>
 	<font>font10</font>
 	<align>left</align>
-	<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 	<textXOff>25</textXOff>
 	<textureFocus>MyFilms\ledon.png</textureFocus>
 	<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -476,7 +471,6 @@
 	<label>#myfilms.menu.actors</label>
 	<font>font10</font>
 	<align>left</align>
-	<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 	<textXOff>25</textXOff>
 	<textureFocus>MyFilms\ledon.png</textureFocus>
 	<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -499,7 +493,6 @@
 	<label>#myfilms.menu.techinfos</label>
 	<font>font10</font>
 	<align>left</align>
-	<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 	<textXOff>25</textXOff>
 	<textureFocus>MyFilms\ledon.png</textureFocus>
 	<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -998,7 +991,7 @@
 	<lineSpacing>.9</lineSpacing>		
 	<visible>Control.HasFocus(10002)</visible>
     </control>	
-    <!-- Detailmenu for Persons -->
+	<!-- Actors/Persons Virttual View -->
     <control>
 	<description>Actors Label</description>
 	<type>fadelabel</type>
@@ -1012,7 +1005,7 @@
 	<visible>Control.HasFocus(10003)</visible>
     </control>
 	<control Style="NoShadow">
-	<description>Actors value (no actor images)</description>
+	<description>Actors value (actor images available)</description>
 	<type>textboxscrollup</type>
 	<id>1</id>
 	<posX>520</posX>
@@ -1027,7 +1020,7 @@
 	<visible>Control.HasFocus(10003)+string.equals(#myfilms.db.actors.actor1.image,)</visible>
     </control>
 	<control Style="NoShadow">
-	<description>Actors value (actor images available)</description>
+	<description>Actors value (no actor images available)</description>
 	<type>textboxscrollup</type>
 	<id>1</id>
 	<posX>520</posX>
@@ -1235,7 +1228,8 @@
         <height>150</height>            	
         <texture>MyFilms\Videothumbframe.png</texture>
         <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>	
-    </control>	
+    </control>
+
 	<!-- Technical Details Virtual View -->
     <control>
 	<type>label</type>
@@ -1737,7 +1731,7 @@
 	<width>70</width>
 	<height>115</height>
 	<texture mask="videothumbmask.png">#myfilms.groupcoverimage</texture>	
-	<visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>        
+	<visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)]</visible>        
 	<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
 	<animation effect="fade" start="0" end="100" time="250">Visible</animation>
     </control>
@@ -1766,7 +1760,6 @@
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
  
-      
     <!-- Common Elements for Bottom -->
     <control>
 	<description>Video/Audio Format</description>
@@ -1822,7 +1815,7 @@
     <!-- FULL FANART VIEW START -->
     <control>
 	<type>label</type>
-	<description>Title (FullColor Fanart View)</description>
+	<description>Title (Full Fanart View)</description>
 	<id>1</id>
 	<posX>30</posX>
 	<posY>655</posY>
@@ -1833,21 +1826,6 @@
 	<label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
 	<visible>Control.HasFocus(10099)</visible>
     </control> 
-    <!-- <control>
-	<type>label</type>
-	<description>Year Category and Runtime (FullColor Fanart View)</description>
-	<id>1</id>
-	<posX>30</posX>
-	<posY>703</posY>
-	<width>1220</width>
-	<align>center</align>
-	<font>font11</font>
-	<textcolor>ivory</textcolor>
-	<label>#myfilms.db.year.value - #myfilms.db.category.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
-	<visible>Control.HasFocus(10099)</visible>
-	<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-	<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-    </control>  -->
     <control>
 	<type>image</type>
 	<description>UnWatched Icon (FullColor Fanart View)</description>
@@ -1947,14 +1925,14 @@
     </control>
     <control>
 	<type>label</type>
-	<description>Year and Runtime (Filmstrip/Coverflow)</description>
+	<description>Year and Runtime (Full Fanart)</description>
 	<id>1</id>
 	<posX>1250</posX>
 	<posY>685</posY>
 	<width>220</width>
 	<align>right</align>
 	<font>font11</font>
-	<textcolor>ff6FAFE1</textcolor>
+	<textcolor>ivory</textcolor>
 	<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value',''))#(iif(neq(#myfilms.db.length.value,''),' - #myfilms.db.length.value #myfilms.db.length.unit',''))</label>
 	<visible>Control.HasFocus(10099)</visible>	
     </control> 

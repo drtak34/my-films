@@ -23,15 +23,11 @@
             <posY>145</posY>
             <label>934</label>
             <font>font13</font>
-			<shadowAngle>45</shadowAngle>
-			<shadowDistance>2</shadowDistance>
-			<shadowColor>ff083556</shadowColor>
             <textcolor>ffffffff</textcolor>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
         </control>
-<!--
-        <control>
+		<!-- <control>
             <description>Rating label</description>
             <type>label</type>
             <id>3</id>
@@ -42,8 +38,7 @@
             <textcolor>ffffffff</textcolor>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
-        </control>
--->
+		</control> -->
         <control>
             <description>Rating value</description>
             <type>label</type>
@@ -51,9 +46,8 @@
             <posX>290</posX>
             <posY>200</posY>
             <label>#myfilms.rating</label>
-            <font>font16</font>
-            <colordiffuse>ffffffff</colordiffuse>
-            <textcolor>ffff8000</textcolor>
+            <font>font18</font>            
+            <textcolor>ff6FAFE1</textcolor>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
         </control>
@@ -67,6 +61,7 @@
             <height>29</height>
             <textureFocus>arrow_round_right_focus.png</textureFocus>
             <textureNoFocus>arrow_round_right_nofocus.png</textureNoFocus>
+            <label />
             <onleft>11</onleft>
             <onright>12</onright>
             <onup>12</onup>
@@ -84,6 +79,7 @@
             <height>29</height>
             <textureFocus>arrow_round_left_focus.png</textureFocus>
             <textureNoFocus>arrow_round_left_nofocus.png</textureNoFocus>
+            <label />
             <onleft>12</onleft>
             <onright>10</onright>
             <onup>12</onup>
@@ -120,7 +116,7 @@
             <textureWidth>22</textureWidth>
             <textureHeight>22</textureHeight>
             <subitems>
-                <subitem>starbad.png</subitem>
+				<subitem>greystar.png</subitem>
                 <subitem>stargood.png</subitem>
             </subitems>
             <orientation>horizontal</orientation>

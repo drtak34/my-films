@@ -74,7 +74,7 @@
 		  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>
 		  <textcolor>ivory</textcolor>
 		</control>
-                <control Style="BasicHomeFade">
+		<control Style="BasicHomeFade">
 		  <description>Missing Cover1</description>
 		  <type>image</type>
 		  <id>0</id>

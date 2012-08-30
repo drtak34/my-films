@@ -164,7 +164,7 @@
         <posY>100</posY>
         <width>160</width>
         <height>240</height>
-        <texture mask="videothumbmask.png">myfilms_nocover.png</texture>                        
+        <texture mask="videothumbmask.png">MyFilms\myfilms_nocover.png</texture>                        
     </control>
     <control>
 	<description>VIEW SELECT COVER</description>

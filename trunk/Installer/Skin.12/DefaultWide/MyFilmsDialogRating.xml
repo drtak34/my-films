@@ -27,7 +27,7 @@
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
         </control>
-        <!--control>
+		<!-- <control>
             <description>Rating label</description>
             <type>label</type>
             <id>3</id>
@@ -38,7 +38,7 @@
             <textcolor>ffffffff</textcolor>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
-        </control>-->
+		</control> -->
         <control>
             <description>Rating value</description>
             <type>label</type>
