@@ -1038,7 +1038,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   if (MyFilmsDetail.ExtendedStartmode("Detail ontext menu - new Trakt internal menu"))
                   {
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798775) + " (test internal menu)"); // Trakt ...
                     choiceViewMenu.Add("traktinternal");
                   }
                 }
