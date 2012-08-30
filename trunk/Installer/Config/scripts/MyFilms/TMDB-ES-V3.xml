@@ -6,7 +6,7 @@
     <Language>es</Language>
     <Type>details|cover</Type>
     <Version>2.0</Version>
-    <Encoding />
+    <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
     <UserAgent />
