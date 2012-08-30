@@ -132,7 +132,6 @@ namespace MyFilmsPlugin.DataBase
           MultiUserStatus.Add(userstate);
         }
       }
-      if (MultiUserStatus.Count == 0) MultiUserStatus.Add(new UserState(MyFilms.GlobalUsername));
     }
 
     private static object EnhancedWatchedValue(string s, Type type)

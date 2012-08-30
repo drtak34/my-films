@@ -50,28 +50,24 @@ namespace MyFilmsPlugin.MyFilms
   {
     public BaseMesFilms()
     {
-      //if (this.updateWorker == null)
-      //{
-      //  this.updateWorker = new BackgroundWorker { WorkerSupportsCancellation = true, WorkerReportsProgress = false };
-      //  this.updateWorker.DoWork += new DoWorkEventHandler(updateWorker_DoWork);
-      //  // this.updateWorker.ProgressChanged += new ProgressChangedEventHandler(updateWorker_ProgressChanged);
-      //  this.updateWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(updateWorker_RunWorkerCompleted);
-      //}
     }
     
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
 
     internal static Queue<MFMovie> MovieUpdateQueue = new Queue<MFMovie>();
-    private BackgroundWorker updateWorker = null;
+    internal static BackgroundWorker UpdateWorker = null;
+    internal static AutoResetEvent UpdateWorkerDoneEvent = new AutoResetEvent(false);
+
+    internal const int TrakthandlerTimeout = 20000;
 
     // Create a new TimerCallback delegate instance that 
     // references the static TraktUpdateHandler method. TraktUpdateHandler 
     // will be called when the timer expires.
-    private static TimerCallback traktUpdateQueueHandler = new TimerCallback(TraktUpdateHandler);
+    private static TimerCallback traktUpdateQueueHandler = new TimerCallback(StartTraktUpdateHandler);
 
     // Create a Timer that that is inactive unless set by "Change() method initially
-    public static readonly Timer traktQueueTimer = new Timer(traktUpdateQueueHandler, null, Timeout.Infinite, Timeout.Infinite); // define timer without actions // new Timer(traktUpdateQueueHandler, "a state string", Timeout.Infinite, Timeout.Infinite); // define timer without actions
+    public static readonly Timer TraktQueueTimer = new Timer(traktUpdateQueueHandler, null, Timeout.Infinite, Timeout.Infinite); // define timer without actions // new Timer(traktUpdateQueueHandler, "a state string", Timeout.Infinite, Timeout.Infinite); // define timer without actions
 
     // private static Dictionary<string, AntMovieCatalog> dataAllCatalogs = new Dictionary<string, AntMovieCatalog>(); // all data from all configs in a dictionary
 
@@ -142,9 +138,28 @@ namespace MyFilmsPlugin.MyFilms
 
     #region private static methods ...
 
-    // The method that is executed when the update queue timer expires.
-    private static void TraktUpdateHandler(object state) // state is null, as we didn't hand over any ...
+    private static void StartTraktUpdateHandler(object state)
     {
+      // nothing to update, abort
+      if (MovieUpdateQueue.Count == 0) return;
+
+
+      if (UpdateWorker != null && UpdateWorker.IsBusy)
+      {
+        TraktQueueTimer.Change(BaseMesFilms.TrakthandlerTimeout, Timeout.Infinite); // retry in 20 seconds
+        return;
+      }
+      UpdateWorker = new BackgroundWorker { WorkerSupportsCancellation = true, WorkerReportsProgress = false };
+      UpdateWorker.DoWork += new DoWorkEventHandler(UpdateWorkerDoWork);
+      // updateWorker.ProgressChanged += new ProgressChangedEventHandler(updateWorker_ProgressChanged);
+      UpdateWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(UpdateWorker_RunWorkerCompleted);
+      UpdateWorker.RunWorkerAsync();
+    }
+
+    private static void UpdateWorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs) // The method that is executed when the update queue timer expires. // state is null, as we didn't hand over any ...
+    {
+      Thread.CurrentThread.Name = "DB Update Worker";
+
       LogMyFilms.Debug("TraktUpdateHandler() - has been called - processing queue with '" + MovieUpdateQueue.Count + "' items.");
       var movielist = new List<MFMovie>();
       var configs = new List<string>();
@@ -159,11 +174,19 @@ namespace MyFilmsPlugin.MyFilms
         }
         while (MovieUpdateQueue.Count > 0);
       }
-      traktQueueTimer.Change(Timeout.Infinite, Timeout.Infinite);
+      TraktQueueTimer.Change(Timeout.Infinite, Timeout.Infinite);
       foreach (string config in configs) // call updates per config
       {
         UpdateMovies(config, movielist.Where(x => x.Config == config).ToList());
       }
+      UpdateWorkerDoneEvent.Set(); // send notification, that worker has completed!
+    }
+
+    private static void UpdateWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      if (string.IsNullOrEmpty(Thread.CurrentThread.Name))
+        Thread.CurrentThread.Name = "DB Update Worker";
+      LogMyFilms.Info("TraktUpdateHandler finished.");
     }
 
     private static Dictionary<string, ReaderWriterLockSlim> GetLockerList()
@@ -1110,12 +1133,12 @@ namespace MyFilmsPlugin.MyFilms
                             if (sr.RatingUser > 5)
                             {
                               LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              sr.Favorite = Helper.Add(sr.Favorite, UserProfileName);
+                              sr.Favorite =  Helper.Add(sr["Favorite"].ToString(), UserProfileName);
                             }
                             else
                             {
                               LogMyFilms.Debug("UpdateMovies() - Remove user '" + UserProfileName + "' from 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              sr.Favorite = Helper.Remove(sr.Favorite, UserProfileName);
+                              if (!sr.IsFavoriteNull()) sr.Favorite = Helper.Remove(sr.Favorite, UserProfileName);
                             }
                           }
                         }
@@ -1202,7 +1225,14 @@ namespace MyFilmsPlugin.MyFilms
                       if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
                       if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
                       {
-                        sr.Favorite = sr.RatingUser > 5 ? Helper.Add(sr.Favorite, UserProfileName) : Helper.Remove(sr.Favorite, UserProfileName);
+                        if (sr.RatingUser > 5)
+                        {
+                          sr.Favorite = Helper.Add(sr["Favorite"].ToString(), UserProfileName);
+                        }
+                        else
+                        {
+                          if (!sr.IsFavoriteNull()) sr.Favorite = Helper.Remove(sr.Favorite, UserProfileName);
+                        }
                       }
                     }
                     #endregion

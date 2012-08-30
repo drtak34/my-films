@@ -798,12 +798,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public override void DeInit()
     {
-      base.DeInit();
       LogMyFilms.Debug("MyFilms.DeInit() - Saving Config changes ...");
       XmlSettings.SaveCache();
       BaseMesFilms.CancelMyFilms();
       CleanOrphanedDBlocks(); // clean orphaned files for all configs if any leftovers
+
+      if (BaseMesFilms.UpdateWorker != null && BaseMesFilms.UpdateWorker.IsBusy)
+      {
+        LogMyFilms.Info("MyFilms.DeInit() - DB updates still active ! - waiting for background worker to complete ...");
+        BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(60000);
+        LogMyFilms.Info("MyFilms.DeInit() - DB updates in background worker thread finished");
+        BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
+      }
       LogMyFilms.Debug("MyFilms.DeInit() - Shutdown completed...");
+      base.DeInit();
     }
 
     //protected override string SerializeName
@@ -14853,6 +14861,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             break;
           case Microsoft.Win32.PowerModes.Suspend:
+            if (BaseMesFilms.UpdateWorker != null && BaseMesFilms.UpdateWorker.IsBusy)
+            {
+              LogMyFilms.Info("PowerModeChanged() - DB updates still active ! - waiting for background worker to complete ...");
+              BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(60000);
+              LogMyFilms.Info("PowerModeChanged() - DB updates in background worker thread finished");
+              BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
+            }
             LogMyFilms.Debug("PowerModeChanged() - MyFilms is entering standby");
             break;
           default:

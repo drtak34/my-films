@@ -163,11 +163,13 @@ namespace MyFilmsPlugin.MyFilms
     {
       lock (BaseMesFilms.MovieUpdateQueue)
       {
-        const int trakthandlerTimeout = 20000;
         MFMovie movie = this.GetCurrentMovie();
-        BaseMesFilms.MovieUpdateQueue.Enqueue(movie);
-        BaseMesFilms.traktQueueTimer.Change(trakthandlerTimeout, Timeout.Infinite);
-        //LogMyFilms.Debug("Commit() - #" + BaseMesFilms.MovieUpdateQueue.Count + ", conf '" + movie.Config + "', user '" + movie.Username + "', title '" + movie.Title + "' (" + movie.ID + ", " + movie.Year + ", " + movie.IMDBNumber + "), rating/userrating '" + movie.Rating + "/" + movie.RatingUser + "', Wacthed '" + movie.Watched + "' (" + movie.WatchedCount + ")'");
+        lock (BaseMesFilms.MovieUpdateQueue)
+        {
+          BaseMesFilms.MovieUpdateQueue.Enqueue(movie);
+        }
+        BaseMesFilms.TraktQueueTimer.Change(BaseMesFilms.TrakthandlerTimeout, Timeout.Infinite);
+        // LogMyFilms.Debug("Commit() - #" + BaseMesFilms.MovieUpdateQueue.Count + ", conf '" + movie.Config + "', user '" + movie.Username + "', title '" + movie.Title + "' (" + movie.ID + ", " + movie.Year + ", " + movie.IMDBNumber + "), rating/userrating '" + movie.Rating + "/" + movie.RatingUser + "', Wacthed '" + movie.Watched + "' (" + movie.WatchedCount + ")'");
       }
     }
 
