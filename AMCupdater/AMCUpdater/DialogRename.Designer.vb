@@ -81,7 +81,7 @@ Partial Class DialogRename
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)
         Me.Cancel_Button.TabIndex = 1
-        Me.Cancel_Button.Text = "Abbrechen"
+        Me.Cancel_Button.Text = "Cancel"
         '
         'TextBoxDirectoryNameCurrent
         '
