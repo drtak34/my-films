@@ -319,8 +319,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
                             }
                             else
                             {
-                              if (r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0)
-                                return true;
+                              // if (r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0) return true;
+                              IComparer myComparer = new MyFilms.AlphanumComparatorFast();
+                              if (myComparer.Compare(r[field].ToString().ToLower(), value.ToLower()) > 0) return true;
                             }
                             break;
                     }
@@ -340,8 +341,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
                         }
                         else
                         {
-                          if (!(r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0))
-                            return true;
+                          // if (!(r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0)) return true;
+                          IComparer myComparer = new MyFilms.AlphanumComparatorFast();
+                          if (myComparer.Compare(r[field].ToString().ToLower(), value.ToLower()) < 0) return true;
                         }
                         break;
                     }
