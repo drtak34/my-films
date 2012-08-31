@@ -120,13 +120,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (string.IsNullOrEmpty(password)) return string.Empty;
 
             byte[] buffer = Encoding.Default.GetBytes(password);
-            SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
+            var cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
             return BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
         }
 
         public static string EscapeLikeValue(string valueWithoutWildcards)
         {
-          StringBuilder sb = new StringBuilder();
+          var sb = new StringBuilder();
           for (int i = 0; i < valueWithoutWildcards.Length; i++)
           {
             char c = valueWithoutWildcards[i];

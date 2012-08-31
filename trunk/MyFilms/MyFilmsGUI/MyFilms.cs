@@ -2535,7 +2535,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.GlobalUnwatchedOnly)
       {
         //GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName.Replace("", StringExtensions.EscapeLikeValue("*")) + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
         MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
       }
       else
@@ -8925,7 +8925,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
       {
-        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND "; MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
+        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName.Replace("", StringExtensions.EscapeLikeValue("*")) + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND "; MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
       }
       else
       {
@@ -9415,11 +9415,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region Submenu Globaloptions
           LogMyFilms.Debug("Building (sub)menu globaloptions");
 
-          GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          var dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg1 == null) return;
           dlg1.Reset();
           dlg1.SetHeading(GUILocalizeStrings.Get(10798689)); // Global Options ...
-          List<string> choiceViewGlobalOptions = new List<string>();
+          var choiceViewGlobalOptions = new List<string>();
 
           // Choose UserProfileName
           if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
@@ -9444,6 +9444,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           dlg1.Add(string.Format(GUILocalizeStrings.Get(1079841), conf.StrViewDfltItem)); // change default view
           choiceViewGlobalOptions.Add("changedefaultview");
+
+          if (MyFilmsDetail.ExtendedStartmode("Global Settings for default config and always default config"))
+          {
+            if (MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798628)));
+            if (!MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798629)));
+            choiceViewGlobalOptions.Add("alwaysdefaultconfig");
+
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079842), conf.StrViewDfltItem)); // change default start config
+            choiceViewGlobalOptions.Add("changedefaultconfig");
+          }
 
           //if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
           //if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
@@ -9470,7 +9480,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg2 == null) return;
           dlg2.Reset();
           dlg2.SetHeading(GUILocalizeStrings.Get(10798690)); // Global Updates ...
-          List<string> choiceViewGlobalUpdates = new System.Collections.Generic.List<string>();
+          List<string> choiceViewGlobalUpdates = new List<string>();
 
           dlg2.Add(GUILocalizeStrings.Get(1079850)); // Update Online status - to check availability if media files
           choiceViewGlobalUpdates.Add("isonlinecheck");
@@ -9702,7 +9712,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
           if (conf.GlobalUnwatchedOnly)
           {
-            GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND " : GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+            GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName.Replace("", StringExtensions.EscapeLikeValue("*")) + ":0*" + "' AND " : GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
             MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
           }
           else
@@ -10085,7 +10095,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           this.Change_Menu_Action("globaloptions");
           break;
+
+        //case "alwayslistforgroups":
+        //  MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
+        //  XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
+        //  LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
+        //  this.Change_Menu_Action("globaloptions");
+        //  break;
+
         case "alwaysdefaultview":
+          #region alwaysdefaultview
           MyFilms.conf.AlwaysDefaultView = !MyFilms.conf.AlwaysDefaultView;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MyFilms.conf.AlwaysDefaultView);
           using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
@@ -10095,15 +10114,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
           this.Change_Menu_Action("globaloptions");
+          #endregion
           break;
-        //case "alwayslistforgroups":
-        //  MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
-        //  XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
-        //  LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
-        //  this.Change_Menu_Action("globaloptions");
-        //  break;
-
         case "changedefaultview":
+          #region change default view
           GUIDialogMenu dlgdef = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlgdef == null) return;
           dlgdef.Reset();
@@ -10128,16 +10142,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlgdef.SelectedLabel == -1) return;
 
           if (choiceViewDefaultItems[dlgdef.SelectedLabel] == GUILocalizeStrings.Get(1079819)) // Views Menu
-            {
-              conf.StrViewDfltItem = choiceViewDefaultItems[dlgdef.SelectedLabel];
-              conf.StrViewDfltText = "";
-            }
-            else
+          {
+            conf.StrViewDfltItem = choiceViewDefaultItems[dlgdef.SelectedLabel];
+            conf.StrViewDfltText = "";
+          }
+          else
             foreach (MFview.ViewRow viewRow in Enumerable.Where(conf.CustomViews.View, viewRow => choiceViewDefaultItems[dlgdef.SelectedLabel] == viewRow.Label))
             {
               conf.StrViewDfltItem = choiceViewDefaultItems[dlgdef.SelectedLabel];
               conf.StrViewDfltText = (viewRow.Value.Length > 0) ? viewRow.Value : "";
-            }  
+            }
 
           using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
           {
@@ -10147,8 +10161,73 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'change default view' changed to " + MyFilms.conf.StrViewDfltItem);
           Change_Menu_Action("globaloptions");
+          #endregion
           break;
-        
+
+        case "alwaysdefaultconfig":
+          MyFilms.conf.AlwaysShowConfigMenu = !MyFilms.conf.AlwaysShowConfigMenu;
+          // AlwaysShowConfigMenu = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false);
+          // XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", MyFilms.conf.AlwaysShowConfigMenu);
+          using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          {
+            xmlSettings.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", MyFilms.conf.AlwaysShowConfigMenu);
+          }
+          // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+          LogMyFilms.Info("Update Option 'use always default config...' changed to " + MyFilms.conf.AlwaysShowConfigMenu.ToString());
+          this.Change_Menu_Action("globaloptions");
+          break;
+
+        case "changedefaultconfig":
+          string currentDefaultConfig = "";
+          using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            currentDefaultConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
+          }
+          var dlgcfg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlgcfg == null) return;
+          dlgcfg.Reset();
+          dlgcfg.SetHeading(string.Format(GUILocalizeStrings.Get(1079842), currentDefaultConfig)); // change default config (current default config)
+
+          using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            int mesFilmsNbConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+            for (int i = 0; i < (int)mesFilmsNbConfig; i++)
+            {
+              dlgcfg.Add(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+              if (dlgcfg.SelectedLabelText == currentDefaultConfig) dlgcfg.SelectedLabel = i;
+            }
+
+            dlgcfg.DoModal(GetID);
+            if (dlgcfg.SelectedLabel == -1) return;
+            if (dlgcfg.SelectedLabelText.Length > 0)
+            {
+              string catalog = xmlConfig.ReadXmlConfig("MyFilms", dlgcfg.SelectedLabelText, "AntCatalog", string.Empty);
+              if (!File.Exists(catalog))
+              {
+                var dlgOk = (MediaPortal.Dialogs.GUIDialogOK) MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOk.SetHeading(10798624);
+                dlgOk.SetLine(1, "Cannot set this Configuration:");
+                dlgOk.SetLine(2, "'" + dlgcfg.SelectedLabelText + "'");
+                dlgOk.SetLine(3, "Verify your settings !");
+                dlgOk.DoModal(MediaPortal.GUI.Library.GUIWindowManager.ActiveWindow);
+                return;
+              }
+              else
+              {
+                currentDefaultConfig = dlgcfg.SelectedLabelText;
+              }
+            }
+          }
+
+          using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          {
+            xmlSettings.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", currentDefaultConfig);
+          }
+          // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+          LogMyFilms.Info("Update Option 'change default config' changed to " + currentDefaultConfig);
+          Change_Menu_Action("globaloptions");
+          break;
+
         case "woluserdialog":
           MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
@@ -10264,7 +10343,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg == null) return;
       dlg.Reset();
       dlg.SetHeading(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)); // Choose User Profile Name ... GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)
-      System.Collections.Generic.List<string> choiceGlobalUserProfileName = new System.Collections.Generic.List<string>();
+      List<string> choiceGlobalUserProfileName = new List<string>();
 
       //// Add Configured UserProfileName from Setup  
       //if (conf.StrUserProfileName.Length > 0)
@@ -10304,8 +10383,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
       foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[conf.StrMultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
       {
-        dlg.Add(userprofilename);
-        choiceGlobalUserProfileName.Add(userprofilename);
+        if (userprofilename == "")
+        {
+          dlg.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
+          choiceGlobalUserProfileName.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
+        }
+        else
+        {
+          dlg.Add(userprofilename);
+          choiceGlobalUserProfileName.Add(userprofilename);
+        }
       }
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
@@ -10325,7 +10412,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           break;
         default:
-          conf.StrUserProfileName = strUserProfileNameSelection;
+          conf.StrUserProfileName = (strUserProfileNameSelection != ("<" + GUILocalizeStrings.Get(10798774) + ">")) ? strUserProfileNameSelection : "";
           // check, if Traktuser has to be "switched"
           if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
           {
@@ -16721,7 +16808,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       set
       {
         _Item = value;
-        INotifyPropertyChanged notifier = value as INotifyPropertyChanged;
+        var notifier = value as INotifyPropertyChanged;
         if (notifier != null) notifier.PropertyChanged += (s, e) =>
         {
           //if (s is TraktMovie.MovieImages && e.PropertyName == "PosterImageFilename")
