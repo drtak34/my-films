@@ -15861,6 +15861,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("details.downloads.count");
       MyFilmsDetail.clearGUIProperty("details.downloads.name");
       // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
+
+      // init Details GUIproperties
+      MyFilmsDetail.setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
+      MyFilmsDetail.setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
+      MyFilmsDetail.setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
+      MyFilmsDetail.setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
+      MyFilmsDetail.setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
+      MyFilmsDetail.setGUIProperty("menu.extradetails", GUILocalizeStrings.Get(10798756));
+      MyFilmsDetail.setGUIProperty("menu.fanart", GUILocalizeStrings.Get(10798757));
+
     }
 
     private void Clear_Logos()

@@ -520,15 +520,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (PersonstoDownloadQueue.Count > 0)
             {
               DBPersonInfo f = PersonstoDownloadQueue.Peek();
-              MyFilmsDetail.setGUIProperty("details.downloads.status", string.Format(GUILocalizeStrings.Get(10799230), PersonstoDownloadQueue.Count.ToString()));
-              MyFilmsDetail.setGUIProperty("details.downloads.count", PersonstoDownloadQueue.Count.ToString());
-              MyFilmsDetail.setGUIProperty("details.downloads.name", f.Name ?? "");
+              setGUIProperty("details.downloads.status", string.Format(GUILocalizeStrings.Get(10799230), PersonstoDownloadQueue.Count.ToString()));
+              setGUIProperty("details.downloads.count", PersonstoDownloadQueue.Count.ToString());
+              setGUIProperty("details.downloads.name", f.Name ?? "");
             }
             else
             {
-              MyFilmsDetail.clearGUIProperty("details.downloads.status");
-              MyFilmsDetail.clearGUIProperty("details.downloads.count");
-              MyFilmsDetail.clearGUIProperty("details.downloads.name");
+              clearGUIProperty("details.downloads.status");
+              clearGUIProperty("details.downloads.count");
+              clearGUIProperty("details.downloads.name");
             }
           }
         }
@@ -542,7 +542,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public override string GetModuleName()
         {
           return (GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDetail) + "/" + GUILocalizeStrings.Get(10798751)); // return localized string for Module ID -> MyFilms/Details/Overview
-
         }
 
         public override bool Init()
@@ -567,7 +566,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
               // Subscribe to GUI Events
               MyFilmsDetail.DetailsUpdated += new MyFilmsDetail.DetailsUpdatedEventDelegate(OnDetailsUpdated);
-
               PlayBackEvents_Subscribed = true;
             }
 
@@ -578,16 +576,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else if (ImgDetFilm2 != null)
                 if (ImgDetFilm2.IsVisible)
                   ImgDetFilm2.Refresh();
-
-            //base.OnMessage(messageType); // Guzzi: Removing does not work properly...
-
-            setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
-            setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
-            setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
-            setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
-            setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
-            setGUIProperty("menu.extradetails", GUILocalizeStrings.Get(10798756));
-            setGUIProperty("menu.fanart", GUILocalizeStrings.Get(10798757));
 
             BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
             BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
@@ -625,7 +613,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("OnPageLoad() finished.");
         }
 
-
         private void AutoRegisterTrailer(string newTrailerFile)
         {
           LogMyFilms.Debug("AutoRegisterTrailer() - called - enabled = '" + MyFilms.conf.AutoRegisterTrailer + "', newTrailerFile: '" + newTrailerFile + "'");
@@ -653,7 +640,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              new System.Threading.Thread(delegate()
+              new Thread(delegate()
               {
                 {
                   //GUIWaitCursor.Init(); GUIWaitCursor.Show();
@@ -6000,10 +5987,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
-        // selects records and sets StrIndex based on ItemId (leaves unchanged if ItemId=-1). 
+        
         private void afficher_init(int ItemId)
         {
-            StrMax = MyFilms.r.Length;
+          StrMax = MyFilms.r.Length; // selects records and sets StrIndex based on ItemId (leaves unchanged if ItemId=-1)
         }
 
         private void OnDetailsUpdated(bool searchPicture)
@@ -10433,12 +10420,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       public static void AddPersonsToDownloadQueue() // add persons of current movie to download queue
       {
-        if (!Win32API.IsConnectedToInternet()) return;
         new Thread(delegate()
         {
           {
             try
             {
+              if (!Win32API.IsConnectedToInternet()) return;
+
               if (MyFilms.conf.UseThumbsForPersons && Directory.Exists(MyFilms.conf.StrPathArtist) && MyFilms.r != null && MyFilms.r.Length > MyFilms.conf.StrIndex)
               {
                 string persons = MyFilms.r[MyFilms.conf.StrIndex]["Persons"].ToString();
