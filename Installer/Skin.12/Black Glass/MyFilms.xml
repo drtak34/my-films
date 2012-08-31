@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <window>
   <id>7986</id>
   <defaultcontrol>50</defaultcontrol>
@@ -5,7 +6,8 @@
   <!--	<define>#header.label:#myfilms.config.pluginname (#myfilms.config.currentconfig)</define> -->
   <define>#header.label:#myfilms.config.currentconfig</define>
   <define>#header.background:hover_Films.png</define>
-  <animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
+  <animation effect="fade" time="150" start="100" end="70">WindowClose</animation>
+
   <controls>
 
     <!-- MYFILMS SKININTERFACE VERSION -->
@@ -32,10 +34,7 @@
       <height>720</height>
       <texture>bg.jpg</texture>
       <shouldCache>true</shouldCache>
-      <animation effect="fade" time="200">WindowOpen</animation>
-      <animation effect="fade" time="450">WindowClose</animation>
-      <!-- Avoid default artwork flash when first entering plugin -->
-      <!-- <visible>!string.equals(#myfilms.user.mastertitle,)</visible>-->
+      <animation effect="fade" time="150" start="100" end="60">WindowClose</animation>
     </control>
 
     <import>MyFilms.Fanart.xml</import>
