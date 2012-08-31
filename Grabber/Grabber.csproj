@@ -78,6 +78,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Databases.dll</HintPath>
     </Reference>
+    <Reference Include="GoogleTranslateAPI, Version=0.3.0.100, Culture=neutral, PublicKeyToken=37a8e65b17fcdcbb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\GoogleTranslateAPI.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Newtonsoft.Json.dll</HintPath>
@@ -188,6 +192,7 @@
     <Compile Include="TMDBv3\TmdbUpcoming.cs" />
     <Compile Include="TMDBv3\Utility.cs" />
     <Compile Include="TMDBv3\WatJsonDeserializer.cs" />
+    <Compile Include="TranslateProvider\TranslateProvider.cs" />
     <Compile Include="WebGrabber.cs" />
   </ItemGroup>
   <ItemGroup>

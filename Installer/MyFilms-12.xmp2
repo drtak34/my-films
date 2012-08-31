@@ -137,6 +137,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{4fd26348-ade3-4b2c-874e-488495589c13}-strings_sk.xml</ZipFileName>
               <DestinationFilename>%Language%\MyFilms\strings_sk.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\GoogleTranslateAPI.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{61acc0c2-d32f-41cb-83a8-c01fabf70a35}-GoogleTranslateAPI.dll</ZipFileName>
+              <DestinationFilename>%Base%\GoogleTranslateAPI.dll</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6263,6 +6270,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Language\MyFilms\strings_sk.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{4fd26348-ade3-4b2c-874e-488495589c13}-strings_sk.xml</ZipFileName>
         <DestinationFilename>%Language%\MyFilms\strings_sk.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\GoogleTranslateAPI.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{61acc0c2-d32f-41cb-83a8-c01fabf70a35}-GoogleTranslateAPI.dll</ZipFileName>
+        <DestinationFilename>%Base%\GoogleTranslateAPI.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
