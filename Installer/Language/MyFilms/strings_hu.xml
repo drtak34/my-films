@@ -104,6 +104,7 @@
     <String id="1079839">Reverse names ({0})</String>
     <String id="1079840">Felhasználóváltás: ('{0}')</String>
     <String id="1079841">Change default view ('{0}')</String>
+    <String id="1079842">Change default config ('{0}')</String>
     <String id="1079843">Userdefined DB Update (AMCupdater)</String>
     <String id="1079844">Show indexed values ({0})</String>
     <String id="1079845">Don't split values ({0})</String>
@@ -171,6 +172,7 @@
     <String id="1079908">Group</String>
     <String id="1079909">Select Role</String>
     <String id="1079910">Count</String>
+    <String id="1079920">Always use Default Start Config ({0})</String>
     <String id="10798500">Play Film (external player)</String>
     <String id="10798608">Search all persons by role</String>
     <String id="10798609">Utoljára keresett ...</String>
