@@ -98,7 +98,7 @@ namespace MyFilmsPlugin.DataBase
       foreach (var state in MultiUserStatus)
       {
         // LogMyFilms.Debug("LoadUserStates() - return state for user '" + state.UserName + "', rating = '" + state.UserRating + "', count = '" + state.WatchedCount + "', watched = '" + state.Watched + "', watcheddate = '" + state.WatchedDate + "'");
-        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
+        var sNew = ((!string.IsNullOrEmpty(state.UserName)) ? state.UserName : "*") + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
         if (resultValueString.Length > 0) resultValueString += "|";
         resultValueString += sNew;
       }
@@ -136,13 +136,13 @@ namespace MyFilmsPlugin.DataBase
 
     private static object EnhancedWatchedValue(string s, Type type)
     {
-      // "Global:0:-1|MikePlanet:0:-1" or "Global:0:-1|MikePlanet:0:-1:2011-12-24"
+      // "*:0:-1|MikePlanet:0:-1" or "Global:0:-1|MikePlanet:0:-1:2011-12-24" "Global:0:-1|MikePlanet:0:-1" or "Global:0:-1|MikePlanet:0:-1:2011-12-24"
       object value = "";
       string[] split = s.Split(new Char[] { ':' });
       switch (type)
       {
         case Type.Username:
-          value = (split.Length > 0) ? split[0] : "";
+          value = (split.Length > 0 && split.ToString() != "*") ? split[0] : ""; // "*" == default user
           break;
         case Type.Count:
           int count = 0;

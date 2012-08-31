@@ -319,7 +319,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrSuppressValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressValue", string.Empty);
 
         StrEnhancedWatchedStatusHandling = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "EnhancedWatchedStatusHandling", false);
-        StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.DefaultUsername);
+        StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", ""); // MyFilms.DefaultUsername
 
         StrECoptionStoreTaglineInDescription = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ECoptionStoreTaglineInDescription", false);
         #region Common EC options
@@ -1067,8 +1067,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception ex)
           {
-            LogMyFilms.Debug(
-              "MF: Error resetting config, as not yet loaded into memory - exception: " + ex.ToString());
+            LogMyFilms.Debug("MF: Error resetting config, as not yet loaded into memory - exception: " + ex);
           }
           return string.Empty;
         }
@@ -1102,20 +1101,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static bool Current_Config(bool showmenu) // returns true, if a default config is set (requires full reload on entering plugin)
     {
       CurrentConfig = null;
-      bool defaultconfig = false;
+      bool isDefaultConfig = false;
 
-      using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
-        NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
-        PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal");
+        NbConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
+        PluginMode = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal");
         // Reads Plugin start mode and sets to normal if not present
         LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
         if (NbConfig == 0)
         {
-          MediaPortal.Dialogs.GUIDialogOK dlgOk =
-            (MediaPortal.Dialogs.GUIDialogOK)
-            MediaPortal.GUI.Library.GUIWindowManager.GetWindow(
-              (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+          MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
           dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
           dlgOk.SetLine(1, "No Configuration defined");
           dlgOk.SetLine(2, "Please enter setup first");
@@ -1126,17 +1122,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         bool boolchoice = true;
         if (CurrentConfig == null)
-          CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty).Length > 0 ? XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty) : string.Empty;
+          CurrentConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty).Length > 0 ? xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty) : string.Empty;
 
-        if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) &&
-            (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0))
+        if (!(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) &&
+            (xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0))
         {
-          CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
-          defaultconfig = true;
+          CurrentConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
+          isDefaultConfig = true;
         }
         if (showmenu)
         {
-          if (CurrentConfig == string.Empty || (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
+          if (CurrentConfig == string.Empty || (xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
           {
             boolchoice = false;
             CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
@@ -1147,7 +1143,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
         }
       }
-      return defaultconfig;
+      return isDefaultConfig;
     }
 
   }
