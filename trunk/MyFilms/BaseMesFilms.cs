@@ -602,7 +602,7 @@ namespace MyFilmsPlugin.MyFilms
             string StrFileType = xmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
             bool AllowTraktSync = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
             bool AllowRecentlyAddedAPI = xmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-            string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", MyFilms.DefaultUsername);
+            string StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", ""); // MyFilms.DefaultUsername
 
             string catalogname = Enum.GetName(typeof(MyFilmsGUI.Configuration.CatalogType), Int32.Parse(StrFileType));
 

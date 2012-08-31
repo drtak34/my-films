@@ -1166,8 +1166,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
       chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
       chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
-      chkEnhancedWatchedStatusHandling.Enabled = false; // ToDo: we don't support AMC3 anymore and "autoswitch" this setting - an be completely removed in future version
-      UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", MyFilms.GlobalUsername);
+      chkEnhancedWatchedStatusHandling.Enabled = false; // ToDo: we don't support AMC3 anymore and "autoswitch" this setting - can be completely removed in future version
+      UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", ""); // MyFilms.DefaultUsername
       
       MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
       AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
