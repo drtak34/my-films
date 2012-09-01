@@ -1806,6 +1806,23 @@ Module Module1
         Return ReturnValue
     End Function
 
+    Public Function GetFormat(ByVal aspectratio As Decimal) As String
+        'Formats:
+        '1,33 -> 4:3
+        '1,78 -> 16:9 / widescreen
+        '1,85 -> widescreen
+        '2,35+ -> cinemascope
+        Dim ar As String = ""
+        If (aspectratio < CType(1.4, Decimal)) Then
+            ar = "4:3"
+        ElseIf (aspectratio < CType(1.9, Decimal)) Then
+            ar = "16:9"
+        ElseIf (aspectratio >= CType(1.9, Decimal)) Then
+            ar = "cinemascope"
+        End If
+        Return ar
+    End Function
+
     Public Function ByteString(ByVal bytes As Long) As String
         Dim s As Double = bytes
         Dim format As String() = New String() {"{0} bytes", "{0} KB", "{0} MB", "{0} GB", "{0} TB", "{0} PB", _

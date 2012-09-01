@@ -1,4 +1,5 @@
 Imports System.Windows.Forms
+Imports System.Globalization
 Imports Grabber
 Imports Cornerstone.Tools
 Imports System.Xml
@@ -1481,8 +1482,26 @@ Public Class AntRecord
             End If
 
             CurrentAttribute = "Aspectratio"
-            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                TempValue = GetFileData(_FilePath, "Aspectratio")
+            If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                If (_FilePath.Length > 0) Then
+                    TempValue = GetFileData(_FilePath, "Aspectratio")
+                Else
+                    If _XMLElement.Attributes("Resolution") IsNot Nothing AndAlso _XMLElement.Attributes("Resolution").Value.ToString.Length > 0 Then
+                        Dim aspectratio As Decimal
+                        Dim Resolution As String = _XMLElement.Attributes("Resolution").Value.ToString
+                        Try
+                            If Not Decimal.TryParse(Resolution, aspectratio) Then
+                                Dim arSplit() As String = Resolution.Split(New String() {"x"}, StringSplitOptions.RemoveEmptyEntries)
+                                aspectratio = Math.Round(Decimal.Divide(Convert.ToInt32(arSplit(0)), Convert.ToInt32(arSplit(1))), 2)
+                            End If
+                            TempValue = aspectratio.ToString(CultureInfo.InvariantCulture)
+                        Catch ex As Exception
+                            TempValue = ""
+                        End Try
+                    Else
+                        TempValue = ""
+                    End If
+                End If
                 CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
             End If
 
