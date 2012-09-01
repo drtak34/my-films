@@ -1165,8 +1165,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
 
       chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
-      chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
-      chkEnhancedWatchedStatusHandling.Enabled = false; // ToDo: we don't support AMC3 anymore and "autoswitch" this setting - can be completely removed in future version
       UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", ""); // MyFilms.DefaultUsername
       
       MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
@@ -2094,6 +2092,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
     {
+      chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
+      groupBoxMultiUserState.Enabled = (CatalogType.SelectedIndex != 0);
+
       AddRemoveExtendedfields(CatalogType.SelectedIndex > 0);
       if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
       {
@@ -5380,20 +5381,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     private void linkLabelTrakt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       Process.Start("http://trakt.tv/");
-    }
-
-    private void chkEnhancedWatchedStatusHandling_CheckedChanged(object sender, EventArgs e)
-    {
-      if (chkEnhancedWatchedStatusHandling.Checked)
-      {
-        textBoxGlobalUnwatchedOnlyValue.Enabled = true;
-        UserProfileName.Enabled = true;
-      }
-      else
-      {
-        textBoxGlobalUnwatchedOnlyValue.Enabled = true;
-        UserProfileName.Enabled = false;
-      }
     }
 
     private void btnWatchedExport_Click(object sender, EventArgs e)

@@ -259,12 +259,12 @@
           this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
           this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
           this.CheckWatchedPlayerStopped = new System.Windows.Forms.CheckBox();
-          this.Label_UserProfileName = new System.Windows.Forms.Label();
-          this.UserProfileName = new System.Windows.Forms.TextBox();
           this.label19 = new System.Windows.Forms.Label();
           this.cbWatched = new System.Windows.Forms.ComboBox();
-          this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
+          this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
+          this.btnMUSdeleteUserData = new System.Windows.Forms.Button();
+          this.UserProfileName = new System.Windows.Forms.TextBox();
           this.Tab_Display = new System.Windows.Forms.TabPage();
           this.groupBox_UserItemsDetails = new System.Windows.Forms.GroupBox();
           this.AntLabelDetails6 = new System.Windows.Forms.TextBox();
@@ -502,6 +502,8 @@
           this.textBoxUpdateGrabberScripts = new System.Windows.Forms.TextBox();
           this.progressBarUpdateGrabberScripts = new System.Windows.Forms.ProgressBar();
           this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
+          this.groupBoxMultiUserState = new System.Windows.Forms.GroupBox();
+          this.Label_UserProfileName = new System.Windows.Forms.Label();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -611,7 +613,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.btnMUSdeleteUserData = new System.Windows.Forms.Button();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -685,6 +686,7 @@
           this.groupBox_GrabberOptions.SuspendLayout();
           this.groupBox6.SuspendLayout();
           this.groupBox_UpdateGrabberScripts.SuspendLayout();
+          this.groupBoxMultiUserState.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_Network.SuspendLayout();
@@ -2319,7 +2321,7 @@
           this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
           this.groupBoxDeletionOptions.Location = new System.Drawing.Point(354, 14);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 178);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 189);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
           this.groupBoxDeletionOptions.Text = "Update and Deletion Options ...";
@@ -2348,7 +2350,7 @@
           this.gpspfield.Controls.Add(this.cbfdupdate);
           this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(20, 74);
+          this.gpspfield.Location = new System.Drawing.Point(20, 78);
           this.gpspfield.Name = "gpspfield";
           this.gpspfield.Size = new System.Drawing.Size(335, 93);
           this.gpspfield.TabIndex = 18;
@@ -2432,21 +2434,17 @@
           // 
           // groupBox2
           // 
-          this.groupBox2.Controls.Add(this.btnMUSdeleteUserData);
           this.groupBox2.Controls.Add(this.btnWatchedImport);
           this.groupBox2.Controls.Add(this.btnWatchedExport);
           this.groupBox2.Controls.Add(this.lblUnwatchedItemsValue);
           this.groupBox2.Controls.Add(this.textBoxGlobalUnwatchedOnlyValue);
           this.groupBox2.Controls.Add(this.CheckWatchedPlayerStopped);
-          this.groupBox2.Controls.Add(this.Label_UserProfileName);
-          this.groupBox2.Controls.Add(this.UserProfileName);
           this.groupBox2.Controls.Add(this.label19);
           this.groupBox2.Controls.Add(this.cbWatched);
-          this.groupBox2.Controls.Add(this.chkEnhancedWatchedStatusHandling);
           this.groupBox2.Controls.Add(this.CheckWatched);
           this.groupBox2.Location = new System.Drawing.Point(6, 14);
           this.groupBox2.Name = "groupBox2";
-          this.groupBox2.Size = new System.Drawing.Size(338, 178);
+          this.groupBox2.Size = new System.Drawing.Size(338, 110);
           this.groupBox2.TabIndex = 72;
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Watched-Status Handling";
@@ -2504,24 +2502,6 @@
           this.CheckWatchedPlayerStopped.UseVisualStyleBackColor = true;
           this.CheckWatchedPlayerStopped.CheckedChanged += new System.EventHandler(this.CheckWatchedPlayerStopped_CheckedChanged);
           // 
-          // Label_UserProfileName
-          // 
-          this.Label_UserProfileName.AutoSize = true;
-          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 145);
-          this.Label_UserProfileName.Name = "Label_UserProfileName";
-          this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
-          this.Label_UserProfileName.TabIndex = 72;
-          this.Label_UserProfileName.Text = "Active User Profile Name";
-          // 
-          // UserProfileName
-          // 
-          this.UserProfileName.Enabled = false;
-          this.UserProfileName.Location = new System.Drawing.Point(168, 142);
-          this.UserProfileName.Name = "UserProfileName";
-          this.UserProfileName.Size = new System.Drawing.Size(162, 20);
-          this.UserProfileName.TabIndex = 71;
-          this.ToolTip1.SetToolTip(this.UserProfileName, resources.GetString("UserProfileName.ToolTip"));
-          // 
           // label19
           // 
           this.label19.AutoSize = true;
@@ -2541,18 +2521,6 @@
           this.cbWatched.TabIndex = 73;
           this.ToolTip1.SetToolTip(this.cbWatched, resources.GetString("cbWatched.ToolTip"));
           // 
-          // chkEnhancedWatchedStatusHandling
-          // 
-          this.chkEnhancedWatchedStatusHandling.AutoSize = true;
-          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 117);
-          this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
-          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(211, 17);
-          this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
-          this.chkEnhancedWatchedStatusHandling.Text = "Multi User Status (watched, user rating)";
-          this.ToolTip1.SetToolTip(this.chkEnhancedWatchedStatusHandling, resources.GetString("chkEnhancedWatchedStatusHandling.ToolTip"));
-          this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
-          this.chkEnhancedWatchedStatusHandling.CheckedChanged += new System.EventHandler(this.chkEnhancedWatchedStatusHandling_CheckedChanged);
-          // 
           // CheckWatched
           // 
           this.CheckWatched.AutoSize = true;
@@ -2565,6 +2533,37 @@
                   "movie is started");
           this.CheckWatched.UseVisualStyleBackColor = true;
           this.CheckWatched.CheckedChanged += new System.EventHandler(this.CheckWatched_CheckedChanged);
+          // 
+          // chkEnhancedWatchedStatusHandling
+          // 
+          this.chkEnhancedWatchedStatusHandling.AutoSize = true;
+          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(11, 17);
+          this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
+          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(112, 17);
+          this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
+          this.chkEnhancedWatchedStatusHandling.Text = "MUS autoenabled";
+          this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
+          // 
+          // btnMUSdeleteUserData
+          // 
+          this.btnMUSdeleteUserData.Location = new System.Drawing.Point(226, 11);
+          this.btnMUSdeleteUserData.Name = "btnMUSdeleteUserData";
+          this.btnMUSdeleteUserData.Size = new System.Drawing.Size(104, 21);
+          this.btnMUSdeleteUserData.TabIndex = 87;
+          this.btnMUSdeleteUserData.Text = "Delete User Data";
+          this.ToolTip1.SetToolTip(this.btnMUSdeleteUserData, resources.GetString("btnMUSdeleteUserData.ToolTip"));
+          this.btnMUSdeleteUserData.UseVisualStyleBackColor = true;
+          this.btnMUSdeleteUserData.Visible = false;
+          this.btnMUSdeleteUserData.Click += new System.EventHandler(this.button1_Click);
+          // 
+          // UserProfileName
+          // 
+          this.UserProfileName.Enabled = false;
+          this.UserProfileName.Location = new System.Drawing.Point(168, 34);
+          this.UserProfileName.Name = "UserProfileName";
+          this.UserProfileName.Size = new System.Drawing.Size(162, 20);
+          this.UserProfileName.TabIndex = 71;
+          this.ToolTip1.SetToolTip(this.UserProfileName, resources.GetString("UserProfileName.ToolTip"));
           // 
           // Tab_Display
           // 
@@ -5283,6 +5282,29 @@
           this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
           this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
           // 
+          // groupBoxMultiUserState
+          // 
+          this.groupBoxMultiUserState.Controls.Add(this.btnMUSdeleteUserData);
+          this.groupBoxMultiUserState.Controls.Add(this.UserProfileName);
+          this.groupBoxMultiUserState.Controls.Add(this.Label_UserProfileName);
+          this.groupBoxMultiUserState.Controls.Add(this.chkEnhancedWatchedStatusHandling);
+          this.groupBoxMultiUserState.Location = new System.Drawing.Point(7, 131);
+          this.groupBoxMultiUserState.Name = "groupBoxMultiUserState";
+          this.groupBoxMultiUserState.Size = new System.Drawing.Size(338, 72);
+          this.groupBoxMultiUserState.TabIndex = 74;
+          this.groupBoxMultiUserState.TabStop = false;
+          this.groupBoxMultiUserState.Text = "Multi User States (MUS)";
+          this.ToolTip1.SetToolTip(this.groupBoxMultiUserState, resources.GetString("groupBoxMultiUserState.ToolTip"));
+          // 
+          // Label_UserProfileName
+          // 
+          this.Label_UserProfileName.AutoSize = true;
+          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 37);
+          this.Label_UserProfileName.Name = "Label_UserProfileName";
+          this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
+          this.Label_UserProfileName.TabIndex = 72;
+          this.Label_UserProfileName.Text = "Active User Profile Name";
+          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -5726,6 +5748,7 @@
           // 
           // Tab_Update
           // 
+          this.Tab_Update.Controls.Add(this.groupBoxMultiUserState);
           this.Tab_Update.Controls.Add(this.groupBox_GrabberOptions);
           this.Tab_Update.Controls.Add(this.groupBox2);
           this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
@@ -6343,18 +6366,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // btnMUSdeleteUserData
-          // 
-          this.btnMUSdeleteUserData.Location = new System.Drawing.Point(226, 114);
-          this.btnMUSdeleteUserData.Name = "btnMUSdeleteUserData";
-          this.btnMUSdeleteUserData.Size = new System.Drawing.Size(104, 21);
-          this.btnMUSdeleteUserData.TabIndex = 87;
-          this.btnMUSdeleteUserData.Text = "Delete User Data";
-          this.ToolTip1.SetToolTip(this.btnMUSdeleteUserData, resources.GetString("btnMUSdeleteUserData.ToolTip"));
-          this.btnMUSdeleteUserData.UseVisualStyleBackColor = true;
-          this.btnMUSdeleteUserData.Visible = false;
-          this.btnMUSdeleteUserData.Click += new System.EventHandler(this.button1_Click);
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6483,6 +6494,8 @@
           this.groupBox6.PerformLayout();
           this.groupBox_UpdateGrabberScripts.ResumeLayout(false);
           this.groupBox_UpdateGrabberScripts.PerformLayout();
+          this.groupBoxMultiUserState.ResumeLayout(false);
+          this.groupBoxMultiUserState.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -7012,5 +7025,6 @@
         private ComboBox SortViewFilms;
         private CheckBox chkVirtualPathBrowsing;
         private Button btnMUSdeleteUserData;
+        private GroupBox groupBoxMultiUserState;
     }
 }

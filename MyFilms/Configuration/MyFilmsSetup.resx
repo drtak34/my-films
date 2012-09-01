@@ -506,11 +506,15 @@ You will have the option in the GUI to switch to "unwatched movies only" - based
 Note: If physical removal is selected, your movie files will be deleted
 from disk after you watched it - handle with care !</value>
   </data>
-  <data name="btnMUSdeleteUserData.ToolTip" xml:space="preserve">
-    <value>"Delete User Data" allows you to remove the MUS (Multi User Status) data for a specific user.
-This is useful, if you added a user once but don't use it anymore - you want to keep all MUL data, except for that user.
-Warning: all user data will be removed from your DB and cannot be restored, including user rating, watched dates, 
-watched counts and watched state.</value>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>This option allows AMC users to update field info for storing your "watched status" - AMC4.x users even have to possibility to keep record
+of watched info and user rating for multiple users - either local ones or Trakt users, the latter allowing syncing with Trakt website (see MUS).
+
+You can choose a field to be used for "watched status" - a good recommendation is "Checked" or the new extended "Watched" field in AMC4.
+You can choose to update this field when starting a movie or when playback is finished.
+You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="btnWatchedImport.ToolTip" xml:space="preserve">
     <value>You can import a formerly created backupfile of your watched status.
@@ -536,13 +540,6 @@ The field used for watched / unwatched status can be configured in the Update Ta
 
 However, you can define a value other than that, if you require it.</value>
   </data>
-  <data name="UserProfileName.ToolTip" xml:space="preserve">
-    <value>You can set a "User Profile Name" that will be used for watched status handling.
-This is useful, if you want the watched status kept separately for different users.
-If you checked "Enhanced Watched Status handling" you can select the user 
-in the hidden menu ("Options" - "Global Settings ...") in MyFilms GUI.
-The user "global" is always existing and is counting global watched status.</value>
-  </data>
   <data name="cbWatched.ToolTip" xml:space="preserve">
     <value>Choose the DB field you want to use for the Watched Status Handling.
 By Default, "Checked" field is used.
@@ -560,48 +557,18 @@ A good recommendation is "Borrower" (AMC3) or the new extended "Watched" field i
 If you use a field that is already populated, it might initially show your movies as "watched" - e.g. when using "MediaLabel" and having imported
 movies with AMCupdater's default settings, MediaLabel will be populated with "AMCU".</value>
   </data>
-  <data name="chkEnhancedWatchedStatusHandling.ToolTip" xml:space="preserve">
-    <value>MUS (Multi User Status) option is automatically set, depending on your selected catalog type.
-It will be enabled, when using AMC4.x catalog type and disabled when using AMC3.x catalog type.
-
-Note:
-Support for MUS (formerly EWS - EnhancedWatchedHandling) has been discontinued for AMC3.x catalog types!
-
-If enabled, watched status will be stored with extended info:
-- Watched count "global", representing the "total played"
-- Watched count in user context (if a user context is set)
-- Watched date (date movie was watched last time)
-- User Rating (if the user has either set it manually or by Trakt rating dialog after movie is watched)
-
-Watched count in user context requires a user profile name to choose.
-It is updated each time a movie is launched together with 'date watched'.
-Note:
-The "global count" will inclease each time any user is watching a film thus representing "total plays".</value>
+  <data name="btnMUSdeleteUserData.ToolTip" xml:space="preserve">
+    <value>"Delete User Data" allows you to remove the MUS (Multi User Status) data for a specific user.
+This is useful, if you added a user once but don't use it anymore - you want to keep all MUL data, except for that user.
+Warning: all user data will be removed from your DB and cannot be restored, including user rating, watched dates, 
+watched counts and watched state.</value>
   </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>This option allows AMC users to update field info for storing your "watched status" - AMC4.x users even have to possibility to keep record
-of watched info and user rating for multiple users - either local ones otr Trakt users, the latter allowing syncing with Trakt website.
-
-You can choose a field to be used for "watched status" - a good recommendation is "Checked" or the new extended "Watched" field in AMC4.
-You can choose to update this field when starting a movie or when playback is finished.
-You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
-However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field
-
-MUS (Multi User Status) option is automatically set, depending on your selected catalog type.
-It will be enabled, when using AMC4.x catalog type and disabled when using AMC3.x catalog type.
-
-Note:
-Support for MUS (formerly EWS - EnhancedWatchedHandling) has been discontinued for AMC3.x catalog types!
-
-If enabled, watched status will be stored with extended info:
-- Watched count "global", representing the "total played"
-- Watched count in user context (if a user context is set)
-- Watched date (date movie was watched last time)
-- User Rating (if the user has either set it manually or by Trakt rating dialog after movie is watched)
-
-Watched count in user context requires a user profile name to choose.
-It is updated each time a movie is launched together with 'date watched'.</value>
+  <data name="UserProfileName.ToolTip" xml:space="preserve">
+    <value>You can set a "User Profile Name" that will be used for watched status handling.
+This is useful, if you want the watched status kept separately for different users.
+If you checked "Enhanced Watched Status handling" you can select the user 
+in the hidden menu ("Options" - "Global Settings ...") in MyFilms GUI.
+The user "global" is always existing and is counting global watched status.</value>
   </data>
   <data name="groupBox_UserItemsDetails.ToolTip" xml:space="preserve">
     <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
@@ -1300,6 +1267,31 @@ and update existing grabber scripts, if there is an update with higher version n
 If an existing grabber script will be updated, a backup file will be created in a sub directory "backup" with the 
 extension of the update date and time (useful, if you had customized the default grabber script(s)).
 If you are sure you don't need the backup files, you can delete them via "delete script backups".</value>
+  </data>
+  <data name="groupBoxMultiUserState.ToolTip" xml:space="preserve">
+    <value>MUS (Multi User States) option is automatically set, depending on your selected catalog type.
+It will be enabled, when using AMC4.x catalog type and disabled when using AMC3.x catalog type.
+
+Note:
+Support for MUS (formerly EWS - EnhancedWatchedHandling) has been discontinued for AMC3.x catalog types!
+
+If enabled, watched status will be stored with extended info:
+- Watched count in user context (if a user context is set)
+- Watched date (date movie was watched last time)
+- User Rating (if the user has either set it manually or by Trakt rating dialog after movie is watched)
+
+Watched count in user context requires a user profile name to choose.
+By default, the username is "empty" and this "user" will have the default states for wathced, user arting, etc.
+
+It is updated each time a movie is launched together with 'date watched'.
+
+Note:
+"Gobal" values will be available to skin representing aggregated values, like 
+- total watched count of all users
+- last watched date of all users
+- best rating of all users
+
+The "global count" will inclease each time any user is watching a film thus representing "total plays".</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
