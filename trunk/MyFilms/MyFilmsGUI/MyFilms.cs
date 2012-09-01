@@ -1183,11 +1183,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
 
-      MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the next start to fix "visibility animations" ....
-      
       // save current GUIlist in navigation cache
       SaveListState(false);
-      
+
+      MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the next start to fix "visibility animations" ....
+
       if (Configuration.CurrentConfig != "")
       {
         if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
