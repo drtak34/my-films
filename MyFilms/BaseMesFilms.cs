@@ -768,8 +768,33 @@ namespace MyFilmsPlugin.MyFilms
       #region watched status & user rating
       if (tmpconf.StrEnhancedWatchedStatusHandling)
       {
-        var userData = new MultiUserData(row[tmpconf.StrMultiUserStateField].ToString());
-        UserState user = userData.GetUserState(tmpconf.StrUserProfileName);
+        MultiUserData multiUserData;
+        if (row[tmpconf.StrMultiUserStateField] == System.Convert.DBNull) // not yet migrated - do it now
+        {
+          #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStatus
+          if (row[tmpconf.StrWatchedField].ToString().Contains(":"))
+          {
+            #region old field was already multiuserdata - use it!
+            multiUserData = new MultiUserData(row[tmpconf.StrWatchedField].ToString());
+            #endregion
+          }
+          else
+          {
+            #region old field was standard watched data - create MUS, add watched for current user and use it
+            bool tmpwatched = (!string.IsNullOrEmpty(tmpconf.GlobalUnwatchedOnlyValue) &&
+                          row[tmpconf.StrWatchedField].ToString().ToLower() != tmpconf.GlobalUnwatchedOnlyValue.ToLower() &&
+                          row[tmpconf.StrWatchedField].ToString().Length > 0);
+            multiUserData = new MultiUserData("");
+            multiUserData.SetWatched(tmpconf.StrUserProfileName, tmpwatched);
+            #endregion
+          }
+          #endregion
+        }
+        else // use existiung MUS data
+        {
+          multiUserData = new MultiUserData(row[tmpconf.StrMultiUserStateField].ToString());
+        }
+        UserState user = multiUserData.GetUserState(tmpconf.StrUserProfileName);
         movie.Watched = user.Watched;
         movie.WatchedCount = user.WatchedCount;
         movie.RatingUser = (float)user.UserRating;
@@ -1095,28 +1120,60 @@ namespace MyFilmsPlugin.MyFilms
                       if (EnhancedWatchedStatusHandling)
                       {
                         #region update multi user status for current trakt user (should be same as myfilms user, but not necessarily)
-                        var states = new MultiUserData((sr.IsMultiUserStateNull()) ? "" : sr.MultiUserState);
-                        var user = states.GetUserState(movie.Username);
-                        string oldEnhancedWatchedValue = states.ResultValueString();
+                        MultiUserData multiUserData;
+                        if (sr.IsMultiUserStateNull() || sr.MultiUserState.Length == 0) // not yet migrated - do it now
+                        {
+                          #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStatus
+                          if (sr[WatchedField].ToString().Contains(":"))
+                          {
+                            #region old field was already multiuserdata - migrate it!
+                            multiUserData = new MultiUserData(sr[WatchedField].ToString());
+                            sr[WatchedField] = multiUserData.GetUserState(UserProfileName).Watched ? "true" : GlobalUnwatchedOnlyValue.ToLower();
+                            #endregion
+                          }
+                          else
+                          {
+                            #region old field was standard watched data - create MUS and add watched for current user
+                            bool tmpwatched = (!string.IsNullOrEmpty(GlobalUnwatchedOnlyValue) &&
+                                          sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower() &&
+                                          sr[WatchedField].ToString().Length > 0);
+                            multiUserData = new MultiUserData("");
+                            multiUserData.SetWatched(UserProfileName, tmpwatched);
+                            #endregion
+                          }
+                          sr.MultiUserState = multiUserData.ResultValueString();
+                          sr["DateWatched"] = multiUserData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+                          sr["RatingUser"] = multiUserData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : multiUserData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+                          #endregion
+                        }
+                        else
+                        {
+                          // use existiung MUS data
+                          multiUserData = new MultiUserData(sr.MultiUserState);
+                        }
+                        
+                        // now update Trakt update requests to MUS data
+                        var user = multiUserData.GetUserState(movie.Username);
+                        string oldEnhancedWatchedValue = multiUserData.ResultValueString();
                         if (user.Watched != movie.Watched)
                         {
                           LogMyFilms.Debug("UpdateMovies() - Updating 'Watched' from '" + user.Watched + "' to '" + movie.Watched + "'" + movieinfo);
                           user.Watched = movie.Watched;
-                          states.SetWatched(movie.Username, movie.Watched);
+                          multiUserData.SetWatched(movie.Username, movie.Watched);
                         }
                         if (user.WatchedCount != movie.WatchedCount)
                         {
                           LogMyFilms.Debug("UpdateMovies() - Updating 'WatchedCount' from '" + user.WatchedCount + "' to '" + movie.WatchedCount + "'" + movieinfo);
                           user.WatchedCount = movie.WatchedCount;
-                          states.SetWatchedCount(movie.Username, movie.WatchedCount);
+                          multiUserData.SetWatchedCount(movie.Username, movie.WatchedCount);
                         }
 
                         if (user.UserRating != Convert.ToDecimal(movie.RatingUser))
                         {
                           LogMyFilms.Debug("UpdateMovies() - Updating 'UserRating' from '" + user.UserRating.ToString() + "' to '" + Convert.ToDecimal(movie.RatingUser).ToString() + "'" + movieinfo);
-                          states.SetRating(movie.Username, Convert.ToDecimal(movie.RatingUser));
+                          multiUserData.SetRating(movie.Username, Convert.ToDecimal(movie.RatingUser));
                         }
-                        string newEnhancedWatchedValue = states.ResultValueString();
+                        string newEnhancedWatchedValue = multiUserData.ResultValueString();
                         sr.MultiUserState = newEnhancedWatchedValue;
                         if (oldEnhancedWatchedValue != newEnhancedWatchedValue) LogMyFilms.Debug("UpdateMovies() - Updating 'MultiUserState' from '" + oldEnhancedWatchedValue + "' to '" + newEnhancedWatchedValue + "', WatchedCount = '" + movie.WatchedCount + "', (user)Rating = '" + movie.RatingUser + "', (site)Rating = '" + movie.Rating + "', User = '" + movie.Username + "'");
                         #endregion
@@ -1215,7 +1272,7 @@ namespace MyFilmsPlugin.MyFilms
                     }
                     #endregion
 
-                    #region sync MUS state with direct DB fields for user rating, watched and Favorite
+                    #region sync MUS state with direct DB fields for user rating, watched and Favorite (only when MUS already migrated and DB field exists)
                     if (EnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
                     {
                       var states = new MultiUserData(sr.MultiUserState);
