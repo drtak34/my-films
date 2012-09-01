@@ -4274,7 +4274,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!currentItem.IsFolder)
             {
               // GUIControl.HideControl(GetID, 34);
-              MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true); // load details, if it is not a hierarchyentry (folder)
+              MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId); // load details, if it is not a hierarchyentry (folder)
             }
           }
           #endregion
