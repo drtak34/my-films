@@ -11870,18 +11870,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case "movie":
           {
-            IMDB _imdb = new IMDB();
-            IMDB.IMDBUrl wurl;
-
-            _imdb.Find(searchexpression);
-            IMDBMovie imdbMovie = new IMDBMovie();
-
-            for (int i = 0; i < _imdb.Count; i++)
-              LogMyFilms.Debug("movie imdb internet search - found: '" + _imdb[i].Title + "', URL = '" + _imdb[i].URL + "'");
-
-            if (_imdb.Count > 0)
+            var imdb = new IMDB();
+            imdb.Find(searchexpression);
+            foreach (IMDB.IMDBUrl t in imdb) LogMyFilms.Debug("movie imdb internet search - found: '" + t.Title + "', URL = '" + t.URL + "'");
+            if (imdb.Count > 0)
             {
-              wurl = (IMDB.IMDBUrl)_imdb[0];
+              var wurl = imdb[0];
               if (wurl.URL.Length != 0)
               {
                 url = wurl.URL + extension; // Assign proper Webpage for infos
@@ -11892,22 +11886,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         case "person":
           {
-            var _imdb = new IMDB();
-            IMDB.IMDBUrl wurl;
-            _imdb.FindActor(searchexpression);
-            var imdbActor = new IMDBActor();
-
-            if (_imdb.Count > 0)
+            var imdb = new IMDB();
+            imdb.FindActor(searchexpression);
+            if (imdb.Count > 0)
             {
-              //int index = IMDBFetcher.FuzzyMatch(actor);
-              //int index;
-              //for (index = 0; index < _imdb.Count; ++index)
-              //{
-              //    wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[index];
-              //    if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
-              //    _imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
-              //}
-              wurl = (IMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+              IMDB.IMDBUrl wurl = imdb[0];
               if (wurl.URL.Length != 0)
               {
                 url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
@@ -11949,8 +11932,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg == null) return "";
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079909)); // select role
-      ArrayList w_tableau = new ArrayList();
-      List<string> choiceSearch = new List<string>();
+      var w_tableau = new ArrayList();
+      var choiceSearch = new List<string>();
 
       foreach (string personfield in PersonTypes.Where(personfield => MyFilms.r[Index][personfield].ToString().Length > 0))
       {
@@ -11986,14 +11969,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
       string[] roles = { "Actors", "Producer", "Director", "Writer" }; // , "Persons"
 
-      new System.Threading.Thread(delegate()
+      new Thread(delegate()
       {
         {
           if (dlg == null) return;
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
-          ArrayList w_tableau = new ArrayList();
-          List<string> choiceSearch = new List<string>();
+          var w_tableau = new ArrayList();
+          var choiceSearch = new List<string>();
 
           foreach (string role in roles.Where(role => MyFilms.r[Index][role].ToString().Length > 0))
           {
@@ -12050,7 +12033,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               // First check if actor exists... - this only works with MePo V1.1.5+
               LogMyFilms.Debug("Check, if Person is found in IMDB-DB (using MP actors DB)");
-              ArrayList actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
+              var actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
               try
               {
                 MyFilmsDetail.GetActorByName(wperson, actorList);
@@ -12177,7 +12160,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void PersonInfo(string PersonName)
     {
-      IMDBActor imdbActor = new IMDBActor();
+      var imdbActor = new IMDBActor();
       GetAndStorePersonInfo(PersonName, ref imdbActor);
       if (string.IsNullOrEmpty(imdbActor.Name))
       {
@@ -12189,16 +12172,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlgOk.DoModal(GetID);
         return;
       }
-
-      //if (actor != null)
-      //  OnVideoArtistInfoGuzzi(actor);
       OnVideoArtistInfoGuzzi(imdbActor);
     }
 
     private void OnVideoArtistInfoGuzzi(IMDBActor actor)
     {
       // MediaPortal.GUI.Video.GUIVideoArtistInfo infoDlg = (MediaPortal.GUI.Video.GUIVideoArtistInfo)GUIWindowManager.GetWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
-      MyFilmsActorInfo infoDlg = (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
+      var infoDlg = (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
       LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): Creating (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo)");
       if (infoDlg == null)
       {
@@ -12216,18 +12196,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void GetAndStorePersonInfo(string PersonName, ref IMDBActor imdbActor)
     {
-      IMDB imdb = new IMDB();
-      IMDBFetcher imdbfetcher = new IMDBFetcher(null);
+      var imdb = new IMDB();
+      var imdbfetcher = new IMDBFetcher(null);
       bool fetchActors = imdbfetcher.FetchActors();
       imdb.FindActor(PersonName);
-      for (int i = 0; i < imdb.Count; ++i)
+      foreach (var t in imdb)
       {
-//#if MP1X
-//        imdb.GetActorDetails(imdb[i], false, out imdbActor);
-//#else
-//        imdb.GetActorDetails(imdb[i], out imdbActor);
-//#endif
-        GUIUtils.GetActorDetails(imdb, imdb[i], false, out imdbActor);
+        //#if MP1X
+        //        imdb.GetActorDetails(imdb[i], false, out imdbActor);
+        //#else
+        //        imdb.GetActorDetails(imdb[i], out imdbActor);
+        //#endif
+        GUIUtils.GetActorDetails(imdb, t, false, out imdbActor);
         if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
         {
           break;
@@ -12272,7 +12252,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private IMDBActor grabb_Person_Details(string name)
     {
-      IMDBActor person = new IMDBActor();
+      var person = new IMDBActor();
       MyFilmsDetail.grabb_Internet_Informations_Search(name, GetID, conf.StrGrabber_cnf, "", MyFilmsDetail.GrabType.Person, null);
       return person;
     }
@@ -12721,7 +12701,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       var choiceSearch = new List<string>();
       var wTableau = new ArrayList();
-      var wsub_tableau = new ArrayList();
+      var wsubTableau = new ArrayList();
       if (dlg == null) return;
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798621)); // menu for random search
@@ -12763,8 +12743,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
-            foreach (object t in wsub_tableau)
+            wsubTableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
+            foreach (object t in wsubTableau)
             {
               if (wTableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
               {
@@ -12845,7 +12825,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          MFMovie movie = new MFMovie();
+          var movie = new MFMovie();
           movie.Config = Configuration.CurrentConfig; // MF config context
           movie.ID = !string.IsNullOrEmpty(sr["Number"].ToString()) ? Int32.Parse(sr["Number"].ToString()) : 0;
           movie.Year = Int32.Parse(sr["Year"].ToString());
@@ -13058,7 +13038,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  // Do something here
       //}
 
-      ArrayList trailer = new ArrayList();
+      var trailer = new ArrayList();
       trailer.Add(currentTrailerMoviesList[RandomNumber].File);
       currentTrailerPlayingItem = currentTrailerMoviesList[RandomNumber];
       trailerscrobbleactive = true;
@@ -13076,8 +13056,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //// Exit fullscreen Video so we can see main facade again			
       //if (GUIGraphicsContext.IsFullScreenVideo) {
       //  GUIGraphicsContext.IsFullScreenVideo = false;
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      List<string> choiceSearch = new List<string>();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var choiceSearch = new List<string>();
 
       while (dlg.SelectedLabel != -1)
       {
@@ -13125,7 +13105,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // MyFilmsDetail.Launch_Movie_Trailer(1, GetID, m_SearchAnimation);
             //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[currentNumber]), GetID, null);    
             //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
             dlgYesNo.SetHeading("Wollen Sie den Hauptfilm sehen?");
             dlgYesNo.SetLine(1, MyFilms.r[Convert.ToInt32(currentTrailerMoviesList[currentNumber].ID)]["Originaltitle"].ToString());
             dlgYesNo.SetLine(2, "Current ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
@@ -13153,7 +13133,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case "RepeatSearch":
             PlayRandomTrailer(false);
             //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[currentNumber]), GetID, null);
-            GUIDialogYesNo dlg1YesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            var dlg1YesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
             dlg1YesNo.SetHeading("Wollen Sie den Hauptfilm sehen?");
             dlg1YesNo.SetLine(1, GUILocalizeStrings.Get(219));
             dlg1YesNo.SetLine(2, "Zufällige Film ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
@@ -13182,11 +13162,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void SearchMoviesbyRandomWithTrailerOriginalVersion(bool returnToContextmenu)
     {
       // first select the area where to make random search on - "all", "category", "year", "country"
-      AntMovieCatalog ds = new AntMovieCatalog();
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      List<string> choiceSearch = new List<string>();
-      ArrayList w_tableau = new ArrayList();
-      ArrayList wsub_tableau = new ArrayList();
+      var ds = new AntMovieCatalog();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var choiceSearch = new List<string>();
+      var wTableau = new ArrayList();
+      var wsub_tableau = new ArrayList();
       bool GetItems = false;
       bool GetSubItems = true;
       if (dlg == null) return;
@@ -13222,13 +13202,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //    break;
 
         default:
-          ArrayList w_count = new ArrayList();
+          var w_count = new ArrayList();
           if (dlg == null) return;
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
           string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
           DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-          w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
+          wTableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
           w_count.Add(0);
           foreach (DataRow wsr in wr)
           {
@@ -13251,12 +13231,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     LogMyFilms.Debug("SubItemGrabber: Output: " + t);
                     {
-                      if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
+                      if (wTableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
                       {
                         //if (!w_index.Contains(
-                        for (int i = 0; i < w_tableau.Count; i++)
+                        for (int i = 0; i < wTableau.Count; i++)
                         {
-                          if (w_tableau[i].ToString() == t.ToString())
+                          if (wTableau[i].ToString() == t.ToString())
                           {
                             w_count[i] = (int)w_count[i] + 1;
                             //LogMyFilms.Debug("SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
@@ -13268,7 +13248,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         // add to w_tableau and move 1 to w_count
                       {
                         LogMyFilms.Debug("SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
-                        w_tableau.Add(t.ToString());
+                        wTableau.Add(t.ToString());
                         w_count.Add(1);
                       }
                     }
@@ -13277,11 +13257,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 if (GetItems)
                 {
-                  if (w_tableau.Contains(wsr[dc.ColumnName])) // search position in w_tableau for adding +1 to w_count
+                  if (wTableau.Contains(wsr[dc.ColumnName])) // search position in w_tableau for adding +1 to w_count
                   {
-                    for (int i = 0; i < w_tableau.Count; i++)
+                    for (int i = 0; i < wTableau.Count; i++)
                     {
-                      if (w_tableau[i].ToString() == wsr[dc.ColumnName].ToString())
+                      if (wTableau[i].ToString() == wsr[dc.ColumnName].ToString())
                       {
                         w_count[i] = (int)w_count[i] + 1;
                         //LogMyFilms.Debug("(Guzzi) Class already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
@@ -13293,14 +13273,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // add to w_tableau and move 1 to w_count
                   {
                     //LogMyFilms.Debug("AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
-                    w_tableau.Add(wsr[dc.ColumnName].ToString());
+                    wTableau.Add(wsr[dc.ColumnName].ToString());
                     w_count.Add(1);
                   }
                 }
               }
             }
           }
-          if (w_tableau.Count == 0)
+          if (wTableau.Count == 0)
           {
             LogMyFilms.Debug("PropertyClassCount is 0");
             break;
@@ -13315,10 +13295,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), wproperty)); // menu
             choiceSearch.Clear();
             //w_tableau = Array.Sort(w_tableau);
-            for (int i = 0; i < w_tableau.Count; i++)
+            for (int i = 0; i < wTableau.Count; i++)
             {
-              dlg.Add(string.Format(GUILocalizeStrings.Get(10798626), w_count[i], w_tableau[i]));
-              choiceSearch.Add(w_tableau[i].ToString());
+              dlg.Add(string.Format(GUILocalizeStrings.Get(10798626), w_count[i], wTableau[i]));
+              choiceSearch.Add(wTableau[i].ToString());
             }
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
@@ -13351,7 +13331,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           // we have: wproperty = selected category (randomall for all) and wproperty2 = value to search after
 
-          ArrayList w_index = new ArrayList();
+          var w_index = new ArrayList();
           int w_index_count = 0;
           string t_number_id = string.Empty;
           //Now build a list of valid movies in w_index with Number registered
@@ -13565,11 +13545,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void SearchMoviesbyAreas(bool returnToContextmenu)
     {
       // first select the area where to make random search on - "all", "category", "year", "country"
-      AntMovieCatalog ds = new AntMovieCatalog();
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      List<string> choiceSearch = new List<string>();
-      ArrayList w_tableau = new ArrayList();
-      ArrayList wsub_tableau = new ArrayList();
+      var ds = new AntMovieCatalog();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var choiceSearch = new List<string>();
+      var w_tableau = new ArrayList();
+      var wsub_tableau = new ArrayList();
       bool GetItems = false;
       bool GetSubItems = true;
       if (dlg == null) return;
@@ -13605,7 +13585,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         default:
-          ArrayList w_count = new ArrayList();
+          var w_count = new ArrayList();
           if (dlg == null) return;
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
@@ -13747,10 +13727,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("SearchMoviesbyPersons() - started");
       string wperson = "";
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-      List<string> choiceSearch = new List<string>();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+      var choiceSearch = new List<string>();
 
       if (null == keyboard) return; //if (null == keyboard) return true;
       keyboard.Reset();
@@ -13876,13 +13856,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("SearchMoviesbyProperties() - started");
       // first select the property to be searching on
-      AntMovieCatalog ds = new AntMovieCatalog();
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-      List<string> choiceSearch = new List<string>();
-      ArrayList w_tableau = new ArrayList();
-      //ArrayList w_tablabel = new ArrayList();
+      var ds = new AntMovieCatalog();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+      var choiceSearch = new List<string>();
+      var w_tableau = new ArrayList();
       string searchstring = string.Empty;
       string wproperty = "all";
       bool continueSearch = false;
@@ -14326,7 +14305,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("SearchIncompleteMovies() - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
       if (w_tableau.Count == 0) // no results found
       {
-        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
         dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
         dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625)); // no result found for searched items
         dlgOk.DoModal(GetID);
@@ -14336,16 +14315,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798717))); // incomplete movie data
       choiceSearch.Clear();
-      string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Edition", "Description", "Comments", "Certification", "TagLine", "Actors", "Director", "Producer", "Writer", "Year", "Date", "Category", "Country", "Studio", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "AudioChannelCount", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "IMDB_Id", "IMDB_Rank", "TMDB_Id", "Picture", "Fanart" };
+      var propertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Edition", "Description", "Comments", "Certification", "TagLine", "Actors", "Director", "Producer", "Writer", "Year", "Date", "Category", "Country", "Studio", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "AudioChannelCount", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "IMDB_Id", "IMDB_Rank", "TMDB_Id", "Picture", "Fanart" };
       for (int ii = 0; ii < 31; ii++)
       {
         //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: Property is '" + PropertyList[ii] + "' - '" + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + "' (" + PropertyListLabel[ii] + ")");
         for (int i = 0; i < w_tableau.Count; i++)
         {
           //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
-          if (w_tableau[i].ToString().ToLower().Equals(PropertyList[ii].ToLower()))
+          if (w_tableau[i].ToString().ToLower().Equals(propertyList[ii].ToLower()))
           {
-            dlg.Add(string.Format(GUILocalizeStrings.Get(10798718), w_count[i], BaseMesFilms.Translate_Column(PropertyList[ii])));
+            dlg.Add(string.Format(GUILocalizeStrings.Get(10798718), w_count[i], BaseMesFilms.Translate_Column(propertyList[ii])));
             choiceSearch.Add(w_tableau[i].ToString());
           }
         }
@@ -14395,8 +14374,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       conf.StrSearchHistory = his;
       
-      XmlConfig XmlConfig = new XmlConfig();
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "SearchHistory", conf.StrSearchHistory);
+      var xmlConfig = new XmlConfig();
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "SearchHistory", conf.StrSearchHistory);
     }
 
 
@@ -14520,7 +14499,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     private void SaveCustomViews()
     {
-      using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)) // Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)
+      using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)) // Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true)
       {
         int iViewsCount = MyFilms.conf.CustomViews.View.Count;
         LogMyFilms.Debug("SaveCustomViews() - Current Total Views: '" + iViewsCount + "'");
@@ -14541,36 +14520,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
     }
 
-    private void RemoveView(XmlSettings XmlConfig, int index)
+    private void RemoveView(XmlSettings xmlConfig, int index)
     {
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewItem{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewEnabled{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewImagePath{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewText{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewItem{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewEnabled{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewImagePath{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewText{0}", index));
       // XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLabel2{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index));
       //XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index));
+      xmlConfig.RemoveEntry("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index));
     }
 
-    private void SaveView(XmlSettings XmlConfig, int index, MFview.ViewRow viewRow)
+    private void SaveView(XmlSettings xmlConfig, int index, MFview.ViewRow viewRow)
     {
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewText{0}", index), viewRow.Label);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewEnabled{0}", index), viewRow.ViewEnabled);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewImagePath{0}", index), viewRow.ImagePath);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewItem{0}", index), viewRow.DBfield);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewText{0}", index), viewRow.Label);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewEnabled{0}", index), viewRow.ViewEnabled);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewImagePath{0}", index), viewRow.ImagePath);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewItem{0}", index), viewRow.DBfield);
       // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLabel2{0}", index), viewRow.Label2);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index), viewRow.Value);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index), viewRow.Filter);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index), viewRow.Index);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewValue{0}", index), viewRow.Value);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewFilter{0}", index), viewRow.Filter);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewIndex{0}", index), viewRow.Index);
       //XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewShowEmpty{0}", index), viewRow.ShowEmpty);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
-      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
+      xmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, string.Format("AntViewLayoutView{0}", index), this.GetLayoutFromName(viewRow.LayoutView));
     }
 
     private int GetLayoutFromName(string layoutname)
@@ -14889,7 +14868,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             catch
             {
-              System.Threading.Thread.Sleep(5000); // Sleep for a bit; otherwise, it takes a bit of processor time
+              Thread.Sleep(5000); // Sleep for a bit; otherwise, it takes a bit of processor time
             }
          }
       }
@@ -15033,7 +15012,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("AsynUpdateDatabase() - AMCUpdater cannot be started in batch mode - either already running or cancellation pending");
     }
 
-    void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+    void bgUpdateDB_DoWork(object sender, DoWorkEventArgs e)
     {
       // BackgroundWorker worker = sender as BackgroundWorker;
       // MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
@@ -15045,15 +15024,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //static public void RunAMCupdater(string exeName, string argsLine)
       if (exeName.Length > 0)
       {
-          using (Process p = new Process())
+          using (var p = new Process())
           {
-              ProcessStartInfo psi = new ProcessStartInfo();
-              psi.FileName = exeName;
-              psi.UseShellExecute = true;
-              psi.WindowStyle = ProcessWindowStyle.Minimized;
-              psi.Arguments = argsLine;
-              psi.ErrorDialog = false;
-              if (OSInfo.OSInfo.VistaOrLater())
+            var psi = new ProcessStartInfo();
+            psi.FileName = exeName;
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Minimized;
+            psi.Arguments = argsLine;
+            psi.ErrorDialog = false;
+            if (OSInfo.OSInfo.VistaOrLater())
               {
                   psi.Verb = "runas";
               }
@@ -15158,25 +15137,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         wyear = 0;
         wimdbid = MyFilmsDetail.GetIMDB_Id(movieRecord);
         fanartTitle = MyFilmsDetail.GetFanartTitle(movieRecord, out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-
-        //if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
-        //  wtitle = t["OriginalTitle"].ToString();
-        //if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-        //  wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-        //string wttitle = string.Empty;
-        //if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
-        //  wttitle = t["TranslatedTitle"].ToString();
-        //if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-        //  wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-        if (fanartTitle.Length > 0)
+        if (fanartTitle.Length <= 0)
         {
-          MyFilmsDetail.setGUIProperty("statusmessage", "Updating Fanart for '" + fanartTitle + "'");
-          List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, fanartTitle, wyear, wdirector, wimdbid, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1, personartworkpath);
+          continue;
         }
+        MyFilmsDetail.setGUIProperty("statusmessage", "Updating Fanart for '" + fanartTitle + "'");
+        var listemovies = Grab.GetFanart(wtitle, fanartTitle, wyear, wdirector, wimdbid, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1, personartworkpath);
       }
     }
 
-    static void bgUpdateFanart_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+    static void bgUpdateFanart_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       LogMyFilms.Info("Backdrop Fanart download finished");
       MyFilmsDetail.clearGUIProperty("statusmessage");
@@ -15221,7 +15191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void AddActor(string name)
     {
-      AntMovieCatalog ds = new AntMovieCatalog();
+      var ds = new AntMovieCatalog();
 
       //List<AntMovieCatalog.PersonRow> persons = new List<AntMovieCatalog.PersonRow>();
       //persons = (from AntMovieCatalog.PersonRow person in ds.Person select person).ToList();
@@ -15257,15 +15227,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       // BackgroundWorker worker = sender as BackgroundWorker;
       string searchrep = MyFilms.conf.StrDirStor;
-      DriveInfo[] allDrives = DriveInfo.GetDrives();
+      var allDrives = DriveInfo.GetDrives();
 
       searchrep = allDrives.Where(d => (d.DriveType.ToString() == "CDRom") && d.IsReady).Aggregate(searchrep, (current, d) => current.Length > 0 ? current + ";" + d.Name : d.Name);
-      Regex oRegex = new Regex(";");
+      var oRegex = new Regex(";");
       string[] searchDir = oRegex.Split(searchrep);
       foreach (string path in searchDir)
       {
         MyFilms.conf.MovieList.Add(Directory.GetFiles(path));
-        if ((MyFilms.conf.SearchSubDirs == false) || (!Directory.Exists(path))) continue;
+        if (MyFilms.conf.SearchSubDirs == false || !Directory.Exists(path)) continue;
         foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
         {
           MyFilms.conf.MovieList.Add(Directory.GetFiles(sFolderSub));
@@ -15325,8 +15295,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     static void bgIsOnlineCheck_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
       // BackgroundWorker worker = sender as BackgroundWorker;
-      DateTime startTime = DateTime.Now;
-      Regex oRegex = new Regex(";"); 
+      var startTime = DateTime.Now;
+      var oRegex = new Regex(";"); 
       LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
 
       // Check Config
@@ -15341,7 +15311,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Debug("bgIsOnlineCheck_DoWork: Now checking Searchpathes, adding CDrom(s) and build MovieList ...");
         string searchrep = conf.StrDirStor; // Searchpath for movies 
-        DriveInfo[] allDrives = DriveInfo.GetDrives(); // get local drives to find CDrom(s)
+        var allDrives = DriveInfo.GetDrives(); // get local drives to find CDrom(s)
         foreach (DriveInfo d in allDrives.Where(d => (d.DriveType.ToString() == "CDRom") && d.IsReady))
         {
           if (searchrep.Length > 0) searchrep = searchrep + ";" + d.Name;
@@ -15351,10 +15321,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         
         try
         {
-          string[] SearchDir = oRegex.Split(searchrep);
-          foreach (string path in SearchDir)
+          string[] searchDir = oRegex.Split(searchrep);
+          foreach (string path in searchDir)
           {
-            if (System.IO.Directory.Exists(path))
+            if (Directory.Exists(path))
             {
               MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - GetDir: '" + path + "'");
               conf.MovieList.Add(System.IO.Directory.GetFiles(path));
@@ -15362,7 +15332,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
               {
                 MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - GetDir: '" + sFolderSub + "'");
-                conf.MovieList.Add(System.IO.Directory.GetFiles(sFolderSub));
+                conf.MovieList.Add(Directory.GetFiles(sFolderSub));
               }
             }
             else
@@ -15379,17 +15349,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (trailerSearch) // if search by filename is activated in setup ...
       {
         LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Searchpathes for Trailers and build TrailerList ...");
-        string searchrepTrailer = conf.StrDirStorTrailer; // Searchpath for trailer 
-        string[] SearchDirTrailer = oRegex.Split(searchrepTrailer);
-        foreach (string path in SearchDirTrailer)
+        var searchrepTrailer = conf.StrDirStorTrailer; // Searchpath for trailer 
+        var searchDirTrailer = oRegex.Split(searchrepTrailer);
+        foreach (string path in searchDirTrailer)
         {
           if (Directory.Exists(path))
           {
-            MyFilms.conf.TrailerList.Add(System.IO.Directory.GetFiles(path));
+            MyFilms.conf.TrailerList.Add(Directory.GetFiles(path));
             if (MyFilms.conf.SearchSubDirsTrailer == false) continue;
             foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
             {
-              conf.TrailerList.Add(System.IO.Directory.GetFiles(sFolderSub));
+              conf.TrailerList.Add(Directory.GetFiles(sFolderSub));
             }
           }
           else
@@ -15402,8 +15372,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       LogMyFilms.Info("bgIsOnlineCheck_DoWork: Read MyFilms Database ...");
       DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens, true);
-      string TotalRecords = wr.Count().ToString();
-      LogMyFilms.Debug("bgIsOnlineCheck_DoWork: DB-Records found: '" + TotalRecords + "'");
+      string totalRecords = wr.Count().ToString();
+      LogMyFilms.Debug("bgIsOnlineCheck_DoWork: DB-Records found: '" + totalRecords + "'");
 
       // Now scan for availability
       int counter = 0;
@@ -15450,12 +15420,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!isonline && filmSearch) // if movie not found via source and search is enabled...
           {
               string movieName = t[MyFilms.conf.ItemSearchFile].ToString();
-              movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim().ToLower();
-              string[] result = conf.MovieList.Find(files => files.Count(n => n.ToLower().Contains(@"\" + movieName + @".") || n.ToLower().Contains(@"\" + movieName + @"\")) >
-                0);
+              movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1).Trim().ToLower();
+              string[] result = conf.MovieList.Find(files => files.Count(n => n.ToLower().Contains(@"\" + movieName + @".") || n.ToLower().Contains(@"\" + movieName + @"\")) > 0);
               if (result != null)
               {
-                foreach (string file in result.Where(file => !string.IsNullOrEmpty(file.Trim())).Where(file => MediaPortal.Util.Utils.IsVideo(file)))
+                foreach (string file in result.Where(file => !string.IsNullOrEmpty(file.Trim())).Where(Utils.IsVideo))
                 {
                   isonline = true;
                   LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SEARCH check   file FOUND      for title '" + t[conf.StrTitle1] + "' - file found: '" + file + "'");
@@ -15481,7 +15450,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //}
           }
           t["IsOnline"] = isonline.ToString();
-          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - (" + counter + " of " + TotalRecords + ") - Film: '" + t[conf.StrTitle1] + "'", false);
+          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - (" + counter + " of " + totalRecords + ") - Film: '" + t[conf.StrTitle1] + "'", false);
         }
 
         // Check Trailer availability
@@ -15502,7 +15471,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string[] Mediafiles = oRegex.Split(fileName);
             foreach (string mediafile in Mediafiles)
             {
-              if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
+              if (mediafile.Length > 0 && File.Exists(mediafile))
               {
                 LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer (" + counter + ") media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
               }
@@ -15518,7 +15487,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Currently no autosearch implemented
           }
           t["IsOnlineTrailer"] = isonline.ToString();
-          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner (" + counter + " of " + TotalRecords + " - film): '" + t[conf.StrTitle1] + "'", false);
+          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner (" + counter + " of " + totalRecords + " - film): '" + t[conf.StrTitle1] + "'", false);
         }
       }
       DateTime stopTime = DateTime.Now;
@@ -15527,7 +15496,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.Update_XML_database();
     }
 
-    void bgIsOnlineCheck_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+    void bgIsOnlineCheck_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       LogMyFilms.Info("Check IsOnline in batch mode finished. (GetID = '" + GetID + "')");
       //if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
@@ -15672,16 +15641,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.GetActorByName(wperson, actorList);
         if (actorList.Count != 0)
         {
-          int actorID = 0;
+          int actorId = 0;
           string actorname = string.Empty;
           char[] splitter = { '|' };
           foreach (string[] strActor in from string act in actorList select act.Split(splitter))
           {
             // Split id from actor name (two substrings, [0] is id and [1] is name)
-            actorID = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
+            actorId = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
             actorname = strActor[1];
           }
-          MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+          MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorId);
         }
       }
     }
@@ -15818,7 +15787,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Get current Log Level from MediaPortal 
       NLog.LogLevel logLevel;
-      MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml"));
+      var xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml"));
 
       //string myThreadPriority = xmlreader.GetValue("general", "ThreadPriority");
 
@@ -15856,9 +15825,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             logLevel = LogLevel.Debug;
 #endif
 
-      LoggingRule rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MyFilms*" to log file
+      var rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MyFilms*" to log file
       config.LoggingRules.Add(rule);
-      LoggingRule rule2 = new LoggingRule("Grabber*", logLevel, fileTarget); // add Grabber classes to logging
+      var rule2 = new LoggingRule("Grabber*", logLevel, fileTarget); // add Grabber classes to logging
       config.LoggingRules.Add(rule2);
 
       LogManager.Configuration = config;
@@ -15876,7 +15845,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     
     private static void InitGUIPropertyLabels()
     {
-      using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (var xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
         MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
@@ -15889,7 +15858,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       EmptyFacadeValue = "(<" + GUILocalizeStrings.Get(10798774) + ">)";
-      using (AntMovieCatalog ds = new AntMovieCatalog())
+      using (var ds = new AntMovieCatalog())
       {
         foreach (DataColumn dc in ds.Movie.Columns)
         {
@@ -16158,7 +16127,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return (int)GUIGraphicsContext.form.Invoke(d, heading, items);
       }
 
-      GUIDialogMenu dlgMenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlgMenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlgMenu == null) return -1;
 
       dlgMenu.Reset();
@@ -16205,7 +16174,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
 
-      GUIDialogNotify pDlgNotify = (GUIDialogNotify)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
+      var pDlgNotify = (GUIDialogNotify)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
       if (pDlgNotify == null) return;
 
       // if image is empty, attempt to load the default
@@ -16235,7 +16204,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
 
-      GUIDialogOK pDlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var pDlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
       if (pDlgOk == null) return;
 
       pDlgOk.SetHeading(heading);
@@ -16301,11 +16270,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       VersionMinor = 0;
       VersionBuild = 0;
       VersionRevision = 0;
-      string _name = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
-      XmlDocument doc = new XmlDocument();
+      string name = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
+      var doc = new XmlDocument();
       try
       {
-        string file = Config.GetFile(Config.Dir.Skin, _name, @"MyFilms.xml");
+        string file = Config.GetFile(Config.Dir.Skin, name, @"MyFilms.xml");
         doc.PreserveWhitespace = true;
         doc.Load(file);
         XmlElement root = doc.DocumentElement;
@@ -16402,7 +16371,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       LogMyFilms.Debug("SaveLastView() called with '" + viewname + "', current ViewHistory stack count is: '" + ViewHistory.Count + "'");
       // Configuration conf = new Configuration();
-      ViewState state = new ViewState();
+      var state = new ViewState();
 
       state.Boolselect = conf.Boolselect;
       state.Boolreturn = conf.Boolreturn;
@@ -16454,7 +16423,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private bool RestoreLastView(string viewname)
     {
       LogMyFilms.Debug("RestoreLastView() called with '" + viewname + "', current ViewHistory stack count is: '" + ViewHistory.Count + "'"); 
-      ViewState state = new ViewState();
+      var state = new ViewState();
       if (!string.IsNullOrEmpty(viewname))
       {
         if (ViewStateCache.TryGetValue(viewname, out state))
@@ -16709,7 +16678,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void SaveListState(bool clear)
     {
-      Stopwatch stopwatch = new Stopwatch();
+      var stopwatch = new Stopwatch();
       stopwatch.Reset();
       stopwatch.Start();
       if (facadeFilms.ListLayout.ListItems.Count > 0)

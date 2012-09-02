@@ -25,8 +25,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
   using System.Collections.Generic;
-  using System.Data;
-  using System.Globalization;
   using System.Linq;
 
   using MediaPortal.Configuration;
@@ -36,7 +34,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
-  using MyFilmsPlugin.MyFilmsGUI;
 
   public class Configuration
   {
@@ -1020,11 +1017,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (configname.Length == 0)
         return "";
 
-      using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
-        string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
+        string Dwp = xmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
         if (Dwp.Length == 0) return configname;
-        MediaPortal.Dialogs.VirtualKeyboard keyboard = (MediaPortal.Dialogs.VirtualKeyboard)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+        var keyboard = (MediaPortal.Dialogs.VirtualKeyboard)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
         if (null == keyboard) return string.Empty;
         keyboard.Reset();
         keyboard.Text = string.Empty;
@@ -1032,7 +1029,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         keyboard.DoModal(GetID);
         if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
         {
-          Crypto crypto = new Crypto();
+          var crypto = new Crypto();
           if (crypto.Decrypter(Dwp) == keyboard.Text) return configname;
         }
         return string.Empty;
@@ -1043,7 +1040,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     public static string Choice_Config(int GetID)
     {
-      MediaPortal.Dialogs.GUIDialogMenu dlg = (MediaPortal.Dialogs.GUIDialogMenu)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlg = (MediaPortal.Dialogs.GUIDialogMenu)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null)
       {
 
@@ -1052,11 +1049,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(6022)); // Choose MyFilms DB Config
-      using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         //XmlConfig XmlConfig = new XmlConfig();
-        int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
-        for (int i = 0; i < (int)MesFilms_nb_config; i++) dlg.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+        int mesFilmsNbConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+        for (int i = 0; i < mesFilmsNbConfig; i++) dlg.Add(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
 
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1)
@@ -1073,13 +1070,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         if (dlg.SelectedLabelText.Length > 0)
         {
-          string Catalog = XmlConfig.ReadXmlConfig("MyFilms", dlg.SelectedLabelText, "AntCatalog", string.Empty);
-          if (!System.IO.File.Exists(Catalog))
+          string catalog = xmlConfig.ReadXmlConfig("MyFilms", dlg.SelectedLabelText, "AntCatalog", string.Empty);
+          if (!System.IO.File.Exists(catalog))
           {
-            MediaPortal.Dialogs.GUIDialogOK dlgOk =
-              (MediaPortal.Dialogs.GUIDialogOK)
-              MediaPortal.GUI.Library.GUIWindowManager.GetWindow(
-                (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+            var dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
             dlgOk.SetHeading(10798624);
             dlgOk.SetLine(1, "Cannot load Configuration:");
             dlgOk.SetLine(2, "'" + dlg.SelectedLabelText + "'");
@@ -1111,7 +1105,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
         if (NbConfig == 0)
         {
-          MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+          var dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
           dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
           dlgOk.SetLine(1, "No Configuration defined");
           dlgOk.SetLine(2, "Please enter setup first");
