@@ -266,18 +266,26 @@ namespace MyFilmsPlugin.MyFilms
 
     private static void CopyExtendedFieldsToCustomFields(bool cleanfileonexit)
     {
-      var saveDataWatch = new Stopwatch();
-      saveDataWatch.Reset(); saveDataWatch.Start();
+      var saveDataWatch = new Stopwatch(); saveDataWatch.Reset(); saveDataWatch.Start();
       IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
       foreach (var movieRow in data.Movie)
       {
         movieRow.BeginEdit();
-        var customFields = movieRow.GetCustomFieldsRows()[0];
+        AntMovieCatalog.CustomFieldsRow customFields = null;
+        if (movieRow.GetCustomFieldsRows().Length == 0) // create CustomFields Element, if not existing ...
+        {
+          customFields = data.CustomFields.NewCustomFieldsRow();
+          customFields.SetParentRow(movieRow);
+          data.CustomFields.AddCustomFieldsRow(customFields);
+          // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
+        }
+        customFields = movieRow.GetCustomFieldsRows()[0];
         foreach (DataColumn dc in commonColumns)
         {
+          customFields[dc.ColumnName] = movieRow[dc.ColumnName];
           // object temp;
           // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
-          customFields[dc.ColumnName] = movieRow[dc.ColumnName];
+
           //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
           //{
           //  customFields[dc.ColumnName] = temp;
@@ -488,7 +496,7 @@ namespace MyFilmsPlugin.MyFilms
 
         CreateOrUpdateCatalogProperties();
 
-        CreateMissingCustomFieldsEntries();
+        // CreateMissingCustomFieldsEntries(); // we don't need them when reading - only when writing back to disk!
 
         #region calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ...
         IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
@@ -544,14 +552,17 @@ namespace MyFilmsPlugin.MyFilms
           #endregion
 
           #region Copy CustomFields data ....
-          var customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-          foreach (DataColumn dc in commonColumns)
+          if (movieRow.GetCustomFieldsRows().Length > 0) // customfields are present - use it! (we only create them on saving)
           {
-            // movieRow[dc.ColumnName] = customFields[dc.ColumnName];
-            object temp;
-            // only copy CustomFields, if not nothing, as user might have initial values in Elements!
-            if (DBNull.Value != (temp = customFields[dc.ColumnName])) 
-              movieRow[dc.ColumnName] = temp; 
+            var customFields = movieRow.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
+            foreach (DataColumn dc in commonColumns)
+            {
+              movieRow[dc.ColumnName] = customFields[dc.ColumnName];
+              //object temp;
+              //// only copy CustomFields, if not nothing, as user might have initial values in Elements!
+              //if (DBNull.Value != (temp = customFields[dc.ColumnName]))
+              //  movieRow[dc.ColumnName] = temp;
+            }
           }
           #endregion
         }
@@ -674,14 +685,8 @@ namespace MyFilmsPlugin.MyFilms
                     customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
                     foreach (DataColumn dc in commonColumns)
                     {
-                      if (dc.ColumnName != "Movie_Id") sr[dc.ColumnName] = customFields[dc.ColumnName];
+                      sr[dc.ColumnName] = customFields[dc.ColumnName];
                     }
-                  }
-                  else // create CustomFields Element, if not existing ...
-                  {
-                    customFields = dataExport.CustomFields.NewCustomFieldsRow();
-                    customFields.SetParentRow(sr);
-                    dataExport.CustomFields.AddCustomFieldsRow(customFields);
                   }
                   #endregion
 
@@ -1090,21 +1095,22 @@ namespace MyFilmsPlugin.MyFilms
                     {
                       #region Copy CustomFields data ....
                       AntMovieCatalog.CustomFieldsRow customFields = null;
-                      if (sr.GetCustomFieldsRows().Length > 0)
-                      {
-                        customFields = sr.GetCustomFieldsRows()[0];
-                        foreach (var dc in commonColumns)
-                        {
-                          object temp;
-                          if (DBNull.Value != (temp = customFields[dc.ColumnName]))
-                            sr[dc.ColumnName] = temp;
-                        }
-                      }
-                      else
+                      if (sr.GetCustomFieldsRows().Length == 0)
                       {
                         customFields = dataImport.CustomFields.NewCustomFieldsRow();
                         customFields.SetParentRow(sr);
                         dataImport.CustomFields.AddCustomFieldsRow(customFields);
+                      }
+                      else
+                      {
+                        customFields = sr.GetCustomFieldsRows()[0];
+                        foreach (var dc in commonColumns)
+                        {
+                          //object temp;
+                          //if (DBNull.Value != (temp = customFields[dc.ColumnName]))
+                          //  sr[dc.ColumnName] = temp;
+                          sr[dc.ColumnName] = customFields[dc.ColumnName];
+                        }
                       }
                       #endregion
 
@@ -1254,21 +1260,19 @@ namespace MyFilmsPlugin.MyFilms
                   {
                     #region Copy CustomFields data ....
                     AntMovieCatalog.CustomFieldsRow customFields = null;
-                    if (sr.GetCustomFieldsRows().Length > 0)
-                    {
-                      customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
-                      foreach (var dc in commonColumns)
-                      {
-                        object temp;
-                        if (DBNull.Value != (temp = customFields[dc.ColumnName]))
-                          sr[dc.ColumnName] = temp;
-                      }
-                    }
-                    else
+                    if (sr.GetCustomFieldsRows().Length == 0)
                     {
                       customFields = dataImport.CustomFields.NewCustomFieldsRow();
                       customFields.SetParentRow(sr);
                       dataImport.CustomFields.AddCustomFieldsRow(customFields);
+                    }
+                    customFields = sr.GetCustomFieldsRows()[0]; // Relations["Movie_CustomFields"]
+                    foreach (var dc in commonColumns)
+                    {
+                      //object temp;
+                      //if (DBNull.Value != (temp = customFields[dc.ColumnName]))
+                      //  sr[dc.ColumnName] = temp;
+                      sr[dc.ColumnName] = customFields[dc.ColumnName];
                     }
                     #endregion
 
@@ -1301,6 +1305,7 @@ namespace MyFilmsPlugin.MyFilms
                     }
                     #endregion
                   }
+
                   saveDataWatch.Stop();
                   LogMyFilms.Debug("UpdateMovies() - finished consistency check ... (" + (saveDataWatch.ElapsedMilliseconds) + " ms)");
                   #endregion
