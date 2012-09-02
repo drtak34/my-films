@@ -5129,6 +5129,48 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <ZipFileName>Installer{CopyFile}\{acc455e0-292a-4d10-8e8b-147b9c6dc3ae}-Videothumbframe.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\MyFilms\Videothumbframe.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_blue.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5afa7a48-90ce-4f93-a5e7-ce51a64245fc}-led_small_blue.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_blue.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_green.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0587ff4e-8e6d-43cb-b8dd-6836430060e0}-led_small_green.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_green.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_grey.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b67a247f-1b75-45bb-a790-498bf968209b}-led_small_grey.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_grey.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_red.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{947f2b31-3d02-46a2-a5e2-02dcbca8fb88}-led_small_red.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_red.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_yellow.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a7a200a2-1f96-44ad-b94d-f23956c1c386}-led_small_yellow.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_yellow.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2f1c691d-9e05-494e-8be7-885cc7d721c9}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6095,7 +6137,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2472</Revision>
+      <Revision>2483</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -6107,7 +6149,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-08-31T01:05:42.7959787+02:00</ReleaseDate>
+    <ReleaseDate>2012-09-01T18:36:55.8683676+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -10043,6 +10085,48 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\Black Glass\Media\WOLPowerManager\WolPowerManager_ButtonRed.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{5f187a95-189f-4a2f-a633-85490d28b60c}-WolPowerManager_ButtonRed.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\WOLPowerManager\WolPowerManager_ButtonRed.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_blue.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5afa7a48-90ce-4f93-a5e7-ce51a64245fc}-led_small_blue.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_blue.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_green.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0587ff4e-8e6d-43cb-b8dd-6836430060e0}-led_small_green.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_green.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_grey.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b67a247f-1b75-45bb-a790-498bf968209b}-led_small_grey.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_grey.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_red.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{947f2b31-3d02-46a2-a5e2-02dcbca8fb88}-led_small_red.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_red.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\led_small_yellow.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a7a200a2-1f96-44ad-b94d-f23956c1c386}-led_small_yellow.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\led_small_yellow.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2f1c691d-9e05-494e-8be7-885cc7d721c9}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />

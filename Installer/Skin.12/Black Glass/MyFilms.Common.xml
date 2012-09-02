@@ -14,8 +14,75 @@
       <align>left</align>
       <textcolor>White</textcolor>
     </control>
--->
 
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>27</posY>
+      <label>#myfilms.user.source.filepath</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>47</posY>
+      <label>#myfilms.user.source.filename</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>67</posY>
+      <label>#myfilms.user.source.shortname</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>87</posY>
+      <label>#myfilms.user.sourcetrailer.filepath</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>107</posY>
+      <label>#myfilms.user.sourcetrailer.filename</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+    <control>
+      <description>CurrentModule display for testing</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>60</posX>
+      <posY>127</posY>
+      <label>#myfilms.user.sourcetrailer.shortname</label>
+      <font>font16</font>
+      <align>left</align>
+      <textcolor>White</textcolor>
+    </control>
+-->
 
     <!-- COMMON DATA DISPLAY -->
     <control>
