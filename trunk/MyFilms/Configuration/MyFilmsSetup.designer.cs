@@ -262,7 +262,6 @@
           this.label19 = new System.Windows.Forms.Label();
           this.cbWatched = new System.Windows.Forms.ComboBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
-          this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.btnMUSdeleteUserData = new System.Windows.Forms.Button();
           this.UserProfileName = new System.Windows.Forms.TextBox();
           this.Tab_Display = new System.Windows.Forms.TabPage();
@@ -504,6 +503,7 @@
           this.buttonUpdateGrabberScripts = new System.Windows.Forms.Button();
           this.groupBoxMultiUserState = new System.Windows.Forms.GroupBox();
           this.Label_UserProfileName = new System.Windows.Forms.Label();
+          this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -2534,16 +2534,6 @@
           this.CheckWatched.UseVisualStyleBackColor = true;
           this.CheckWatched.CheckedChanged += new System.EventHandler(this.CheckWatched_CheckedChanged);
           // 
-          // chkEnhancedWatchedStatusHandling
-          // 
-          this.chkEnhancedWatchedStatusHandling.AutoSize = true;
-          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(11, 17);
-          this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
-          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(112, 17);
-          this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
-          this.chkEnhancedWatchedStatusHandling.Text = "MUS autoenabled";
-          this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
-          // 
           // btnMUSdeleteUserData
           // 
           this.btnMUSdeleteUserData.Location = new System.Drawing.Point(226, 11);
@@ -2558,7 +2548,6 @@
           // 
           // UserProfileName
           // 
-          this.UserProfileName.Enabled = false;
           this.UserProfileName.Location = new System.Drawing.Point(168, 34);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);
@@ -5304,6 +5293,17 @@
           this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
           this.Label_UserProfileName.TabIndex = 72;
           this.Label_UserProfileName.Text = "Active User Profile Name";
+          // 
+          // chkEnhancedWatchedStatusHandling
+          // 
+          this.chkEnhancedWatchedStatusHandling.AutoSize = true;
+          this.chkEnhancedWatchedStatusHandling.Enabled = false;
+          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(11, 17);
+          this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
+          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(112, 17);
+          this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
+          this.chkEnhancedWatchedStatusHandling.Text = "MUS autoenabled";
+          this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
           // 
           // label11
           // 
