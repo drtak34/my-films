@@ -56,21 +56,35 @@
 		<keepaspectratio>no</keepaspectratio>
 		<randomize>true</randomize>
 	</control>
-	<control>
+    <control>
 		<description>Overlay for FanArt</description>
 		<id>0</id>
 		<type>image</type>
-		<posx>0</posx>
-		<posy>0</posy>
+		<posX>-170</posX>
+		<posY>0</posY>
+		<width>1194</width>
+		<height>576</height>
+		<texture>myfilms\backgroundthumbsview.png</texture>
+		<colordiffuse>cc808080</colordiffuse>
+		<visible>Control.isvisible(35)</visible>
+		<animation effect="fade" time="70">visible</animation>
+		<animation effect="fade" time="70" delay="300">hidden</animation>
+    </control>
+	<control>
+		<description>Overlay to darken FanArt</description>
+		<id>0</id>
+		<type>image</type>
+		<posX>0</posX>
+		<posY>0</posY>
 		<width>720</width>
 		<height>576</height>
-		<texture>backgroundtop.png</texture>
-		<colordiffuse>cc808080</colordiffuse>
+		<texture>black.png</texture>
+		<colordiffuse>90ffffff</colordiffuse>
 		<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 	</control>
-	<control>
+	<!-- <control>
 		<description>Top Gradient Overlay for Fanart View</description>
 		<type>image</type>
 		<id>0</id>
@@ -92,9 +106,10 @@
 		<width>1024</width>
 		<height>100</height>
 		<texture>MyFilms\gradient.png</texture>
+		<colordiffuse>90ffffff</colordiffuse>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-	</control>
+	</control> --> 
    
     <!-- Windows Info --> 			
 	<control>
@@ -187,8 +202,6 @@
       <texture>MyFilms\download.png</texture>
 	  <visible>!Control.HasFocus(10099)+string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -204,8 +217,6 @@
       <label>#myfilms.statusmessage</label>
       <visible>!Control.HasFocus(10099)</visible>
       <!-- "Global update active" message -->
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -219,8 +230,6 @@
 	  <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\Persons.png</texture>
       <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -235,8 +244,6 @@
       <textcolor>90ffffff</textcolor>
       <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
       <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
@@ -251,8 +258,6 @@
       <height>40</height>
       <texture>hover_onlinevideos.png</texture>
       <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -266,8 +271,6 @@
       <label>#OnlineVideos.currentDownloads</label>
 	  <textcolor>ff6FAFE1</textcolor>
       <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
@@ -422,7 +425,7 @@
 		<onright>10099</onright>
 		<label>#myfilms.menu.overview</label>
 		<font>font11</font>
-		<textcolorNoFocus>99ffffff</textcolorNoFocus>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
 		<textXOff>25</textXOff>
 		<textureFocus>MyFilms\ledon.png</textureFocus>
 		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -445,7 +448,7 @@
 		<label>#myfilms.menu.description</label>
 		<font>font11</font>
 		<align>left</align>
-		<textcolorNoFocus>99ffffff</textcolorNoFocus>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
 		<textXOff>25</textXOff>
 		<textureFocus>MyFilms\ledon.png</textureFocus>
 		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -468,7 +471,7 @@
 		<label>#myfilms.menu.comments</label>
 		<font>font11</font>
 		<align>left</align>
-		<textcolorNoFocus>99ffffff</textcolorNoFocus>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
 		<textXOff>25</textXOff>
 		<textureFocus>MyFilms\ledon.png</textureFocus>
 		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -491,7 +494,7 @@
 		<label>#myfilms.menu.actors</label>
 		<font>font11</font>
 		<align>left</align>
-		<textcolorNoFocus>99ffffff</textcolorNoFocus>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
 		<textXOff>25</textXOff>
 		<textureFocus>MyFilms\ledon.png</textureFocus>
 		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -514,7 +517,7 @@
 		<label>#myfilms.menu.techinfos</label>
 		<font>font11</font>
 		<align>left</align>
-		<textcolorNoFocus>99ffffff</textcolorNoFocus>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
 		<textXOff>25</textXOff>
 		<textureFocus>MyFilms\ledon.png</textureFocus>
 		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
@@ -608,7 +611,7 @@
 		<font>font10</font>
 		<align>left</align>
 		<textcolor>ffffcc00</textcolor>
-		<visible>!Control.HasFocus(10099)</visible>		
+		<visible>string.equals(#myfilms.db.rating.value)+!Control.HasFocus(10099)</visible>		
     </control>
 
 	<!-- User Rating/user name -->
@@ -618,14 +621,12 @@
 		<id>1</id>
 		<posX>530</posX>
 		<posY>100</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' (#myfilms.user.watched.name)',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' #myfilms.user.watched.name',' (User)'))</label>
 		<width>160</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>
 		<align>left</align>
 		<visible>!Control.HasFocus(10099)+[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]</visible>		
-		<animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
-		<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>	
 	</control>
     <!-- <control>
 		<description>User Rating Label</description>
@@ -1194,8 +1195,6 @@
       <label>#myfilms.db.actors.actor5.name</label>
       <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
     </control>
     <control>
       <description>Actors 5 image</description>
@@ -1273,7 +1272,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>215</posY>
+		<posY>210</posY>
 		<label>#myfilms.db.resolution.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1284,7 +1283,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>214</posY>
+		<posY>209</posY>
 		<label>#myfilms.db.resolution.value</label>
 		<width>100</width>
 		<textcolor>ivory</textcolor>
@@ -1295,30 +1294,42 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>640</posX>
-		<posY>215</posY>
-		<label>#myfilms.db.calc.aspectratio.label:</label>
+		<posY>210</posY>
+		<label>#myfilms.db.aspectratio.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
 		<width>125</width>
 		<align>right</align>
-		<visible>string.equals(#myfilms.db.calc.aspectratio.value)+Control.HasFocus(10004)</visible>
+		<visible>Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>650</posX>
-		<posY>214</posY>
-		<label>#myfilms.db.calc.aspectratio.value</label>
+		<posY>209</posY>
+		<label>#myfilms.db.aspectratio.value</label>
 		<width>60</width>
 		<textcolor>ivory</textcolor>
 		<font>font13</font>
 		<visible>Control.HasFocus(10004)</visible>
 	</control>
 	<control>
+		<description>Calculated aspect ratio for AMC3</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>209</posY>
+		<label>#myfilms.db.calc.aspectratio.value</label>
+		<width>60</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)+!string.equals(#myfilms.db.aspectratio.value)</visible>
+	</control>
+	<control>
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>240</posY>
+		<posY>232</posY>
 		<label>174</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<label>#myfilms.db.framerate.label:</label>
@@ -1330,7 +1341,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>239</posY>
+		<posY>231</posY>
 		<textcolor>ivory</textcolor>
 		<label>#myfilms.db.framerate.value fps</label>
 		<width>120</width>
@@ -1341,7 +1352,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>265</posY>
+		<posY>254</posY>
 		<label>#myfilms.db.calc.imageformat.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1352,7 +1363,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>264</posY>
+		<posY>253</posY>
 		<label>#myfilms.db.calc.imageformat.value</label>
 		<width>235</width>
 		<textcolor>ivory</textcolor>
@@ -1363,7 +1374,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>290</posY>
+		<posY>276</posY>
 		<label>#myfilms.db.audioformat.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1374,7 +1385,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>289</posY>
+		<posY>275</posY>
 		<label>#myfilms.db.audioformat.value</label>
 		<width>235</width>
         <textcolor>ivory</textcolor>
@@ -1385,7 +1396,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>315</posY>
+		<posY>298</posY>
 		<label>#myfilms.db.audiobitrate.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1396,7 +1407,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>314</posY>
+		<posY>297</posY>
 		<label>#myfilms.db.audiobitrate.value kbit/sec.</label>
 		<width>235</width>
         <textcolor>ivory</textcolor>
@@ -1407,7 +1418,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>340</posY>
+		<posY>320</posY>
 		<label>#myfilms.db.number.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1418,7 +1429,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>339</posY>
+		<posY>319</posY>
 		<label>No. #myfilms.db.number.value</label>
 		<width>100</width>
 		<textcolor>ivory</textcolor>
@@ -1429,7 +1440,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>640</posX>
-		<posY>340</posY>
+		<posY>320</posY>
 		<label>#myfilms.db.checked.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1441,7 +1452,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>650</posX>
-		<posY>339</posY>
+		<posY>319</posY>
 		<label>#myfilms.db.checked.value</label>
 		<width>60</width>
 		<textcolor>ivory</textcolor>
@@ -1452,7 +1463,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>365</posY>
+		<posY>342</posY>
 		<label>#myfilms.db.date.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1463,7 +1474,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>364</posY>
+		<posY>341</posY>
 		<label>#myfilms.db.date.value</label>
 		<width>235</width>
 		<textcolor>ivory</textcolor>
@@ -1474,19 +1485,19 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>640</posX>
-		<posY>365</posY>
+		<posY>342</posY>
 		<label>#myfilms.db.borrower.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
 		<width>125</width>
 		<align>right</align>
-		<visible>string.equals(#myfilms.db.borrower.value)+Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.db.borrower.value)+!string.equals(#myfilms.db.borrower.value,#myfilms.user.sourcetrailer.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>650</posX>
-		<posY>364</posY>
+		<posY>341</posY>
 		<label>#myfilms.db.borrower.value</label>
 		<width>55</width>
 		<textcolor>ivory</textcolor>
@@ -1497,7 +1508,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>390</posY>
+		<posY>364</posY>
 		<label>#myfilms.db.mediatype.label: </label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1508,7 +1519,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>389</posY>
+		<posY>363</posY>
 		<label>#myfilms.db.mediatype.value</label>
 		<width>100</width>
 		<textcolor>ivory</textcolor>
@@ -1519,7 +1530,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>640</posX>
-		<posY>390</posY>
+		<posY>364</posY>
 		<label>#myfilms.db.medialabel.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1531,7 +1542,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>650</posX>
-		<posY>389</posY>
+		<posY>363</posY>
 		<label>#myfilms.db.medialabel.value</label>
 		<width>55</width>
 		<textcolor>ivory</textcolor>
@@ -1542,7 +1553,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>415</posY>
+		<posY>386</posY>
 		<label>#myfilms.db.size.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1553,7 +1564,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>414</posY>
+		<posY>385</posY>
 		<label>#myfilms.db.size.value MB</label>
 		<width>100</width>
 		<textcolor>ivory</textcolor>
@@ -1564,7 +1575,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>640</posX>
-		<posY>415</posY>
+		<posY>386</posY>
 		<label>#myfilms.db.disks.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1576,7 +1587,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>650</posX>
-		<posY>414</posY>
+		<posY>385</posY>
 		<label>#myfilms.db.disks.value</label>
 		<width>125</width>
 		<textcolor>ivory</textcolor>
@@ -1587,7 +1598,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>440</posY>
+		<posY>408</posY>
 		<label>#myfilms.db.url.label:</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
@@ -1598,7 +1609,7 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>439</posY>
+		<posY>407</posY>
 		<width>260</width>
 		<textcolor>ivory</textcolor>
 		<label>#myfilms.db.url.value</label>
@@ -1609,8 +1620,8 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>460</posY>
-		<label>#myfilms.user.source.label:</label>
+		<posY>430</posY>
+		<label>#myfilms.user.source.label (#myfilms.db.disks.value):</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
 		<width>125</width>
@@ -1620,8 +1631,19 @@
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>459</posY>
-		<label>#myfilms.user.source.value</label>
+		<posY>429</posY>
+		<label>#myfilms.user.source.filepath</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>451</posY>
+		<label>#myfilms.user.source.filename</label>
 		<width>260</width>
 		<textcolor>ivory</textcolor>
 		<font>font12</font>
@@ -1631,19 +1653,30 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>310</posX>
-		<posY>480</posY>
+		<posY>474</posY>
 		<label>#myfilms.user.sourcetrailer.label (#myfilms.user.sourcetrailer.count):</label>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font12</font>
 		<width>125</width>
 		<visible>string.equals(#myfilms.user.sourcetrailer.value)+Control.HasFocus(10004)</visible>
 	</control>
+	<!-- <control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>473</posY>
+		<label>#myfilms.user.sourcetrailer.filepath</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control> -->
 	<control>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>435</posX>
-		<posY>479</posY>
-		<label>#myfilms.user.sourcetrailer.value</label>
+		<posY>473</posY>
+		<label>#myfilms.user.sourcetrailer.shortname</label>
 		<width>260</width>
 		<textcolor>ivory</textcolor>
 		<font>font12</font>
@@ -1872,7 +1905,7 @@
 		<animation effect="fade" time="250">visiblechange</animation>
 	</control>
     <control>
-		<description>RatingValue(Full Fanart)</description>
+		<description>Rating Value(Full Fanart)</description>
 		<type>label</type>
 		<id>1</id>
 		<posX>450</posX>

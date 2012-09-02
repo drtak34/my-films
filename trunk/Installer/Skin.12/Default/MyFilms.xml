@@ -159,8 +159,22 @@
 		<animation effect="fade" time="250" delay="250">hidden</animation>
 		<!-- Do not modify the visibility for this component. It is handled by the plug-in. -->
 	</control>
-	<control>
+    <control>
 		<description>Overlay for FanArt</description>
+		<id>0</id>
+		<type>image</type>
+		<posX>-170</posX>
+		<posY>0</posY>
+		<width>1194</width>
+		<height>576</height>
+		<texture>myfilms\backgroundthumbsview.png</texture>
+		<colordiffuse>cc808080</colordiffuse>
+		<visible>Control.isvisible(35)</visible>
+		<animation effect="fade" time="70">visible</animation>
+		<animation effect="fade" time="70" delay="300">hidden</animation>
+    </control>
+	<control>
+		<description>Overlay to darken FanArt</description>
 		<id>0</id>
 		<type>image</type>
 		<posx>0</posx>
@@ -168,7 +182,7 @@
 		<width>720</width>
 		<height>576</height>
 		<texture>black.png</texture>
-		<colordiffuse>80ffffff</colordiffuse>
+		<colordiffuse>90ffffff</colordiffuse>
 		<visible>Control.isvisible(35)+!facadeview.filmstrip+!facadeview.coverflow</visible>
 		<animation effect="fade" time="250" delay="250">hidden</animation>
 	</control>
@@ -187,7 +201,7 @@
 		<visible>Control.isvisible(40)</visible>
 		<animation effect="fade" time="70">visible</animation>
 		<animation effect="fade" time="70" delay="300">hidden</animation>
-	</control> -->
+	</control>
 	<control>
 		<description>Top Gradient Overlay for Filmstrip/Coverflow</description>
 		<type>image</type>
@@ -213,7 +227,7 @@
 		<colordiffuse>ccffffff</colordiffuse>
 		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-	</control>
+	</control> -->
 
     <!-- Window Info -->            
 	<!-- <control>
@@ -598,12 +612,12 @@
 		<id>1</id>
 		<posX>180</posX>
 		<posY>452</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' (#myfilms.user.watched.name)',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' #myfilms.user.watched.name',' (User)'))</label>
 		<width>110</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>
 		<align>left</align>
-		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
+		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]+[control.isvisible(36)|control.isvisible(39)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
 	</control>
 	<control>
 		<type>label</type>
@@ -1363,7 +1377,7 @@
 									<width>150</width>
 									<label>#myfilms.db.actors.label:</label>
 									<font>font14</font>
-									<textcolor>FFFFFFFF</textcolor>
+									<textcolor>ff6FAFE1</textcolor>
 								</control>
 								<control>
 									<description>actors</description>
@@ -1377,7 +1391,7 @@
 									<lineSpacing>2.5</lineSpacing>
 									<align>left</align>
 									<seperator>: : :</seperator>
-									<textcolor>bbFFFFFF</textcolor>
+									<textcolor>ivory</textcolor>
 									<visible>!string.equals(#runtime,0)+!string.equals(#year,1900)</visible>
 									<shadowAngle>-</shadowAngle>
 									<shadowDistance>-</shadowDistance>
@@ -1392,7 +1406,7 @@
 									<width>170</width>
 									<label>#myfilms.db.description.label:</label>
 									<font>font14</font>
-									<textcolor>FFFFFFFF</textcolor>
+									<textcolor>ff6FAFE1</textcolor>
 								</control>
 								<control>
 									<description>Description</description>
@@ -1404,7 +1418,7 @@
 									<label>#myfilms.db.description.value</label>
 									<font>font10</font>
 									<lineSpacing>2.5</lineSpacing>
-									<textcolor>bbFFFFFF</textcolor>
+									<textcolor>ivory</textcolor>
 									<seperator>: : :</seperator>
 									<shadowAngle>-</shadowAngle>
 									<shadowDistance>-</shadowDistance>
