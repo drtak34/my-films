@@ -40,6 +40,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MediaPortal.Ripper;
 
+  using OnlineVideos;
   using OnlineVideos.MediaPortal1;
 
   using grabber;
@@ -64,6 +65,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = Grabber.MediaInfo;
+  using Utils = MediaPortal.Util.Utils;
 
   /// <summary>
   /// Summary description for GUIMesFilms.
@@ -322,6 +324,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static Queue<DBPersonInfo> PersonstoDownloadQueue = new Queue<DBPersonInfo>();
     // private object locker = new object();
+
+
+    internal static List<string> theOnlineVideosViews = new List<string>();
+    internal static List<KeyValuePair<string, string>> onlineVideosViews = new List<KeyValuePair<string, string>>();
 
     public MyFilmsDetail()
     {
@@ -934,24 +940,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string StrUpdDflT2 = null;
       int ItemID;
 
-      AntMovieCatalog ds = new AntMovieCatalog();
+      var ds = new AntMovieCatalog();
       ItemID = (int)MyFilms.r[MyFilms.conf.StrIndex]["Number"]; //set unique id num (ant allows it to be non-unique but that is a bad idea)
       //May wish to completely re-load the dataset before updating any fields if used in multi-user system, but would req concurrency locks etc so...
 
-      GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
 
-      GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      List<string> choiceViewMenu = new List<string>();
+      var dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var choiceViewMenu = new List<string>();
 
-      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+      var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       if (null == keyboard) return;
       keyboard.Reset();
 
       string title = string.Empty; // variable for searchtitle creation
       string mediapath = string.Empty; // variable for searchpath creation (for nfo/xml/xbmc reader)
       Searchtitles sTitles; // variable to get all searchtitles 
-      MFMovie movie = new MFMovie(); // movie object for rating and trakt calls
+      var movie = new MFMovie(); // movie object for rating and trakt calls
 
       switch (choiceView)
       {
@@ -969,17 +975,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
             {
-              dlgmenu.Add(
-                GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0
-                  ? GUILocalizeStrings.Get(1079895)
-                  : GUILocalizeStrings.Get(1079894));
+              dlgmenu.Add(GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0 ? GUILocalizeStrings.Get(1079895) : GUILocalizeStrings.Get(1079894));
             }
             else
             {
-              dlgmenu.Add(
-                MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()
-                  ? GUILocalizeStrings.Get(1079895)
-                  : GUILocalizeStrings.Get(1079894));
+              dlgmenu.Add(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() ? GUILocalizeStrings.Get(1079895) : GUILocalizeStrings.Get(1079894));
             }
             choiceViewMenu.Add("togglewatchedstatus");
           }
@@ -1049,6 +1049,120 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
           break;
 
+        case "trailermenu":
+          #region trailer menu
+          if (dlgmenu == null) return;
+          dlgmenu.Reset();
+          choiceViewMenu.Clear();
+
+          #region  local trailer ...
+          dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704));
+
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
+          {
+            string trailercount = "";
+            if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+              trailercount = "0";
+            else
+            {
+              string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
+              trailercount = split1.Count().ToString();
+            }
+            if (trailercount != "0")
+            {
+              dlgmenu.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")"); //play trailer (<number trailers present>)
+              choiceViewMenu.Add("playtrailer");
+            }
+          }
+          #endregion
+
+          dlgmenu.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
+          choiceViewMenu.Add("playtraileronlinevideos");
+
+          dlgmenu.Add(GUILocalizeStrings.Get(10798712)); //search apple itunes trailer with onlinevideos
+          choiceViewMenu.Add("playtraileronlinevideosappleitunes");
+
+          dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
+          choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
+
+          if (ExtendedStartmode("Details context: FilmStarts.de und alll OnlineVideoSites menu ..."))
+          {
+            dlgmenu.Add("FilmStarts.de (OnlineVideos)");
+            choiceViewMenu.Add("playtraileronlinevideosfilmstarts");
+
+            dlgmenu.Add("OnlineVideos ...");
+            choiceViewMenu.Add("playtraileronlinevideosall");
+          }
+
+          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
+          {
+            dlgmenu.Add(GUILocalizeStrings.Get(10798723)); //Search local Trailer and Update DB (local)
+            choiceViewMenu.Add("trailer-register");
+
+            dlgmenu.Add(GUILocalizeStrings.Get(10798725)); //delete Trailer entries from DB record
+            choiceViewMenu.Add("trailer-delete");
+
+            if (ExtendedStartmode("Details context: Trailer Download"))
+            {
+              dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
+              choiceViewMenu.Add("trailer-imdb");
+            }
+          }
+
+          dlgmenu.DoModal(GetID);
+          if (dlgmenu.SelectedLabel == -1)
+          {
+            Change_Menu("mainmenu");
+            return;
+          }
+          Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+          #endregion
+          break;
+
+        case "playtraileronlinevideos":
+          LaunchOnlineVideos("YouTube");
+          break;
+        case "playtraileronlinevideosappleitunes":
+          LaunchOnlineVideos("iTunes Movie Trailers");
+          break;
+        case "playtraileronlinevideosimdbtrailer":
+          LaunchOnlineVideos("IMDb Movie Trailers");
+          break;
+        case "playtraileronlinevideosfilmstarts":
+          LaunchOnlineVideos("FilmStarts.de Trailer");
+          break;
+
+        case "playtraileronlinevideosall":
+          #region show all OnlineVideos sites
+          if (dlgmenu == null) return;
+          dlgmenu.Reset();
+          choiceViewMenu.Clear();
+
+          dlgmenu.SetHeading("OnlineVideos ...");
+
+          try
+          {
+            this.LoadOnlineVideosViews();
+            foreach (string theOnlineVideosView in theOnlineVideosViews)
+            {
+              dlgmenu.Add(theOnlineVideosView);
+              choiceViewMenu.Add(theOnlineVideosView);
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Warn("Error when trying to load OnlineVideos site list - Exceptoion: " + ex.Message);
+          }
+          dlgmenu.DoModal(GetID);
+          if (dlgmenu.SelectedLabel == -1)
+          {
+            Change_Menu("mainmenu");
+            return;
+          }
+          LaunchOnlineVideos(choiceViewMenu[dlgmenu.SelectedLabel]);
+          #endregion
+          break;
+
         case "playtrailer":
 
           #region play trailer
@@ -1063,7 +1177,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // Can add autosearch&register logic here before try starting trailers
 
-            GUIDialogYesNo dlgYesNotrailersearch = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            var dlgYesNotrailersearch = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
             dlgYesNotrailersearch.SetHeading(GUILocalizeStrings.Get(10798704)); //trailer
             dlgYesNotrailersearch.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle].ToString()); //video title
             dlgYesNotrailersearch.SetLine(2, GUILocalizeStrings.Get(10798737)); //no video found locally
@@ -1081,76 +1195,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               trailerPlayed = true;
               Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
             }
-          }
-          #endregion
-          break;
-
-        case "playtraileronlinevideos":
-        case "playtraileronlinevideosappleitunes":
-        case "playtraileronlinevideosimdbtrailer":
-
-          #region play trailer from specific site
-          string site = string.Empty;
-          string titleextension = string.Empty;
-          string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-          if (path.Contains(";")) path = path.Substring(0, path.IndexOf(";"));
-          if (path.Contains("\\")) path = path.Substring(0, path.LastIndexOf("\\"));
-
-          switch (choiceView)
-          {
-            case "playtraileronlinevideos":
-              site = "YouTube";
-              titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer" + ((MyFilms.conf.GrabberOverrideLanguage.Length > 0) ? (" " + MyFilms.conf.GrabberOverrideLanguage) : "");
-              break;
-            case "playtraileronlinevideosappleitunes":
-              site = "iTunes Movie Trailers";
-              break;
-            case "playtraileronlinevideosimdbtrailer":
-              site = "IMDb Movie Trailers";
-              break;
-            default:
-              return;
-          }
-
-          // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... 
-          // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
-          //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
-          if (Helper.IsOnlineVideosAvailableAndEnabled)
-          {
-            title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
-
-            string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked" + "|downloaddir:" + path + "|downloadmenuentry:" + GUILocalizeStrings.Get(10798749) + " (" + title + ")";
-            //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", path);
-            //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", GUILocalizeStrings.Get(10798749) + " (" + title + ")"); // download to movie directory
-
-            InitTrailerwatcher(); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
-
-            if (Helper.IsOnlineVideosAvailableAndEnabledV12) InitOVEventHandler();
-            else LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos - you need OV V1.2+ installed and enabled !");
-
-            LogMyFilms.Debug("Starting OnlineVideos with '" + OVstartparams + "'");
-            // should this be set here to make original movie doesn't get set to watched??
-            // trailerPlayed = true;
-
-            GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, OVstartparams); // GUIWindowManager.ActivateWindow((int)MyFilms.ID_OnlineVideos, OVstartparams);
-
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
-            GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", "");
-          }
-          else
-          {
-            ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
           }
           #endregion
           break;
@@ -1650,64 +1694,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
           }
-          break;
-
-        case "trailermenu":
-          #region trailer menu
-          if (dlgmenu == null) return;
-          dlgmenu.Reset();
-          choiceViewMenu.Clear();
-          dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
-
-          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
-          {
-            string trailercount = "";
-            if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
-              trailercount = "0";
-            else
-            {
-              string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
-              trailercount = split1.Count().ToString();
-            }
-            if (trailercount != "0")
-            {
-              dlgmenu.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")"); //play trailer (<number trailers present>)
-              choiceViewMenu.Add("playtrailer");
-            }
-          }
-          dlgmenu.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
-          choiceViewMenu.Add("playtraileronlinevideos");
-
-          dlgmenu.Add(GUILocalizeStrings.Get(10798712)); //search apple itunes trailer with onlinevideos
-          choiceViewMenu.Add("playtraileronlinevideosappleitunes");
-
-          dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
-          choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
-
-
-          if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
-          {
-            dlgmenu.Add(GUILocalizeStrings.Get(10798723)); //Search local Trailer and Update DB (local)
-            choiceViewMenu.Add("trailer-register");
-
-            dlgmenu.Add(GUILocalizeStrings.Get(10798725)); //delete Trailer entries from DB record
-            choiceViewMenu.Add("trailer-delete");
-
-            if (ExtendedStartmode("Details context: Trailer Download"))
-            {
-              dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
-              choiceViewMenu.Add("trailer-imdb");
-            }
-          }
-
-          dlgmenu.DoModal(GetID);
-          if (dlgmenu.SelectedLabel == -1)
-          {
-            Change_Menu("mainmenu");
-            return;
-          }
-          Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
-          #endregion
           break;
 
         case "subtitles":
@@ -2441,6 +2427,92 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ShowMessageDialog("Info", "", "Action not yet implemented");
           return;
       }
+    }
+
+    private void LaunchOnlineVideos(string site)
+    {
+      string titleextension = string.Empty;
+      string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+      if (path.Contains(";")) path = path.Substring(0, path.IndexOf(";", System.StringComparison.Ordinal));
+      if (path.Contains("\\")) path = path.Substring(0, path.LastIndexOf("\\", System.StringComparison.Ordinal));
+
+      path = Path.Combine(path, "Trailer");
+      if (!Directory.Exists(path))
+        try
+        {
+          Directory.CreateDirectory(path);
+        }
+        catch (Exception) {}
+
+      switch (site)
+      {
+        case "YouTube":
+          titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer" + ((MyFilms.conf.GrabberOverrideLanguage.Length > 0) ? (" " + MyFilms.conf.GrabberOverrideLanguage) : "");
+          break;
+        case "iTunes Movie Trailers":
+        case "IMDb Movie Trailers":
+          break;
+        default:
+          break;
+      }
+
+      // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>     downloaddir:<path>|downloadfilename:<filename>|downloadmenuentry:<menu text>
+      if (Helper.IsOnlineVideosAvailableAndEnabled)
+      {
+        string title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
+
+        string oVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked" +
+                               "|downloaddir:" + path + "|downloadmenuentry:" + GUILocalizeStrings.Get(10798749) + " (" + title + ")"; // MyFilms: Download to movie directory
+
+        InitTrailerwatcher(); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
+        if (Helper.IsOnlineVideosAvailableAndEnabledV12) InitOVEventHandler();
+        else LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos - you need OV V1.2+ installed and enabled !");
+
+        LogMyFilms.Debug("Starting OnlineVideos with '" + oVstartparams + "'");
+        // trailerPlayed = true; // should this be set here to make original movie doesn't get set to watched??
+
+        GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, oVstartparams);
+      }
+      else
+      {
+        ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
+      }
+    }
+
+    private void LoadOnlineVideosViews()
+    {
+      onlineVideosViews = GetOnlineVideosViews();
+      theOnlineVideosViews.Clear();
+
+      foreach (KeyValuePair<string, string> ovv in onlineVideosViews)
+      {
+        theOnlineVideosViews.Add(ovv.Value);
+      }
+    }
+    
+    private List<KeyValuePair<string, string>> GetOnlineVideosViews()
+    {
+      // check if we have already got them
+      if (onlineVideosViews.Count == 0)
+      {
+        // set path of config file, so we load user settings
+        OnlineVideoSettings.Instance.ConfigDir = Config.GetDirectoryInfo(Config.Dir.Config).ToString();
+
+        // load list of sites
+        OnlineVideoSettings onlineVideos = OnlineVideos.OnlineVideoSettings.Instance;
+        onlineVideos.LoadSites();
+
+        foreach (SiteSettings site in onlineVideos.SiteSettingsList)
+        {
+          // just get a list of enabled sites
+          if (site.IsEnabled)
+          {
+            var view = new KeyValuePair<string, string>(site.Name, site.Name);
+            onlineVideosViews.Add(view);
+          }
+        }
+      }
+      return onlineVideosViews;
     }
 
     private void Menu_LoadTMDBposter()
@@ -7661,7 +7733,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (Helper.IsOnlineVideosAvailableAndEnabled)
           {
             string title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
-            string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked" + "|downloaddir:" + path + "|downloadmenuentry:" + GUILocalizeStrings.Get(10798749) + " (" + title + ")";
+            string oVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked" + "|downloaddir:" + path + "|downloadmenuentry:" + GUILocalizeStrings.Get(10798749) + " (" + title + ")";
             //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
             GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
             GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -7670,11 +7742,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", path);
             //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
             GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", GUILocalizeStrings.Get(10798749) + " (" + title + ")"); // download to movie directory
-            LogMyFilms.Debug("Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+            LogMyFilms.Debug("Starting OnlineVideos with '" + oVstartparams.ToString() + "'");
             // should this be set here to make original movie doesn't get set to watched??
             // trailerPlayed = true;
 
-            GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, OVstartparams);
+            GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, oVstartparams);
 
             GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
             GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
