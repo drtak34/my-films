@@ -6375,6 +6375,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       clearGUIProperty("user.source.filepath", log);
       clearGUIProperty("user.source.filename", log);
       clearGUIProperty("user.source.shortname", log);
+      clearGUIProperty("user.source.count", log);
       clearGUIProperty("user.sourcetrailer.value", log);
       clearGUIProperty("user.sourcetrailer.filepath", log);
       clearGUIProperty("user.sourcetrailer.filename", log);
@@ -6575,18 +6576,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string name = "";
               string path = "";
               string longname = "";
+              string count = "";
               setGUIProperty("user.source.value", sourceFull);
               MyFilms.currentMovie.File = sourceFull;
               if (!string.IsNullOrEmpty(sourceFull.Trim()))
               {
-                if (sourceFull.Contains(";")) sourceFull = sourceFull.Substring(0, sourceFull.IndexOf(";", System.StringComparison.Ordinal));
-                if (sourceFull.LastIndexOf("\\", System.StringComparison.Ordinal) > 0)
+                string[] split = sourceFull.Trim().Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                count = split.Count().ToString();
+                foreach (string s in split.Select(x => x.Trim()).Where(x => x.LastIndexOf("\\", StringComparison.Ordinal) > 0))
                 {
-                  name = sourceFull.Substring(sourceFull.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
-                  path = sourceFull.Substring(0, sourceFull.LastIndexOf("\\", System.StringComparison.Ordinal));
-                  longname = (path.LastIndexOf("\\", System.StringComparison.Ordinal) > 0) ? path.Substring(path.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + "\\" + name : sourceFull;
+                  if (name.Length > 0) name += "; ";
+                  name += s.Substring(s.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+                  if (path.Length > 0) path += "; ";
+                  path += s.Substring(0, s.LastIndexOf("\\", System.StringComparison.Ordinal));
+                  if (longname.Length > 0) longname += "; ";
+                  string temppath = s.Substring(0, s.LastIndexOf("\\", System.StringComparison.Ordinal));
+                  longname += (temppath.LastIndexOf("\\", System.StringComparison.Ordinal) > 0) ? temppath.Substring(temppath.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + "\\" + name : s;
                 }
               }
+              setGUIProperty("user.source.count", count);
               setGUIProperty("user.source.filepath", path);
               setGUIProperty("user.source.filename", name);
               setGUIProperty("user.source.shortname", longname);
@@ -6598,22 +6606,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string name = "";
               string path = "";
               string longname = "";
-              string trailercount = "";
+              string count = "";
               setGUIProperty("user.sourcetrailer.value", sourceFull);
               MyFilms.currentMovie.Trailer = sourceFull;
               if (!string.IsNullOrEmpty(sourceFull.Trim()))
               {
                 string[] split = sourceFull.Trim().Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                trailercount = split.Count().ToString();
-                if (sourceFull.Contains(";")) sourceFull = sourceFull.Substring(0, sourceFull.IndexOf(";", System.StringComparison.Ordinal));
-                if (sourceFull.LastIndexOf("\\", System.StringComparison.Ordinal) > 0)
+                count = split.Count().ToString();
+                foreach (string s in split.Select(x => x.Trim()).Where(x => x.LastIndexOf("\\", StringComparison.Ordinal) > 0))
                 {
-                  name = sourceFull.Substring(sourceFull.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
-                  path = sourceFull.Substring(0, sourceFull.LastIndexOf("\\", System.StringComparison.Ordinal));
-                  longname = (path.LastIndexOf("\\", System.StringComparison.Ordinal) > 0) ? path.Substring(path.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + "\\" + name : split[0];
+                  if (name.Length > 0) name += "; ";
+                  name += s.Substring(s.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
+                  if (path.Length > 0) path += "; ";
+                  path += s.Substring(0, s.LastIndexOf("\\", System.StringComparison.Ordinal));
+                  if (longname.Length > 0) longname += "; ";
+                  string temppath = s.Substring(0, s.LastIndexOf("\\", System.StringComparison.Ordinal));
+                  longname += (temppath.LastIndexOf("\\", System.StringComparison.Ordinal) > 0) ? temppath.Substring(temppath.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + "\\" + name : s;
                 }
               }
-              setGUIProperty("user.sourcetrailer.count", trailercount);
+              setGUIProperty("user.sourcetrailer.count", count);
               setGUIProperty("user.sourcetrailer.filepath", path);
               setGUIProperty("user.sourcetrailer.filename", name);
               setGUIProperty("user.sourcetrailer.shortname", longname);
