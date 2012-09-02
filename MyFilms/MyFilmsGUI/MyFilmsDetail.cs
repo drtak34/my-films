@@ -6063,7 +6063,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
         file = string.Empty;
-      if (!System.IO.File.Exists(file) || string.IsNullOrEmpty(file))
+      if (!File.Exists(file) || string.IsNullOrEmpty(file))
         file = MyFilms.conf.DefaultCover;
       //Should not Disable because of SpeedThumbs - Not working here .....
       setGUIProperty("picture", file);
@@ -6638,6 +6638,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "originaltitle":
               case "formattedtitle":
                 #region titles
+                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                 if (MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0)
                   if (MyFilms.r[itemId][dc.ColumnName].ToString().Contains(MyFilms.conf.TitleDelim))
                   {
@@ -6649,11 +6650,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     wstring = MyFilms.r[itemId][dc.ColumnName].ToString();
                     wstring2 = "";
                   }
-                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
 
                 if (MyFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower()))
                 {
-                  // MyFilms.currentMovie.Title = wstring; // already set in afficher_detail()
                   setGUIProperty("user.mastertitle.value", wstring);
                   setGUIProperty("user.mastertitle.groupname", wstring2);
                 }
@@ -6661,11 +6660,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   setGUIProperty("user.secondarytitle.value", wstring);
                   setGUIProperty("user.secondarytitle.groupname", wstring2);
-                }
-                else
-                {
-                  clearGUIProperty("user.secondarytitle.value");
-                  clearGUIProperty("user.secondarytitle.groupname");
                 }
                 #endregion
                 break;
