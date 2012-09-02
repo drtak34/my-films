@@ -1573,7 +1573,7 @@
       <id>1</id>
       <posX>720</posX>
       <posY>574</posY>
-      <label>#myfilms.user.sourcetrailer.filename</label>
+      <label>#myfilms.user.sourcetrailer.shortname</label>
       <width>520</width>
       <textcolor>ivory</textcolor>
       <font>font12</font>
