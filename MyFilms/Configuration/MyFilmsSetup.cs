@@ -108,7 +108,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
         this.tabPageSave = General.TabPages[11];
         this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
-        // this.chkEnhancedWatchedStatusHandling.Visible = false; // Disable Watched options for Userprofiles
         // this.Label_UserProfileName.Visible = false;
         // this.UserProfileName.Visible = false;
         this.cbTrailerAutoregister.Visible = false;
@@ -631,13 +630,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         MesFilmsFanart.Focus();
         return;
       }
-      if ((chkEnhancedWatchedStatusHandling.Checked) && (UserProfileName.Text.Length == 0))
-      {
-        MessageBox.Show("'Active User Profile Name' must be filled (e.g. for using user rating and Trakt syncing)' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        General.SelectedIndex = 4;
-        UserProfileName.Focus();
-        return;
-      }
+      //if ((chkEnhancedWatchedStatusHandling.Checked) && (UserProfileName.Text.Length == 0))
+      //{
+      //  MessageBox.Show("'Active User Profile Name' must be filled (e.g. for using user rating and Trakt syncing)' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+      //  General.SelectedIndex = 4;
+      //  UserProfileName.Focus();
+      //  return;
+      //}
       //if ((chkEnhancedWatchedStatusHandling.Checked) && (cbWatched.Text.ToLower() == "checked"))
       //{
       //  MessageBox.Show("You have enabled 'Enhanced Watched Status Handling' and use 'Checked' field for watched status !\n This is NOT compatible with AMC and it is recommended to use a field that can store text like e.g. 'MediaLabel' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -2092,9 +2091,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
     {
-      chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
-      groupBoxMultiUserState.Enabled = (CatalogType.SelectedIndex != 0);
-
       AddRemoveExtendedfields(CatalogType.SelectedIndex > 0);
       if (!IsAMCcatalogType(CatalogType.SelectedIndex)) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
       {
@@ -2340,6 +2336,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           break;
       }
       #endregion
+
+      chkEnhancedWatchedStatusHandling.Checked = (CatalogType.SelectedIndex != 0); // autoset this by catalog type
+      groupBoxMultiUserState.Enabled = (CatalogType.SelectedIndex != 0);
     }
 
     private void AddDefaultViews()
@@ -6244,7 +6243,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     {
 
     }
-
   }
 
   public static class BindingSourceExtension
