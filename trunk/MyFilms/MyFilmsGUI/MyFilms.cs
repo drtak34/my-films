@@ -15953,7 +15953,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          MyFilmsDetail.setGUIProperty("logos_id2001", Logos.Build_Logos(row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, GetID));
+          MyFilmsDetail.setGUIProperty("logos_id2001", Logos.BuildLogos(row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, GetID));
         }
         catch (Exception e)
         {
@@ -15966,7 +15966,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          MyFilmsDetail.setGUIProperty("logos_id2002", Logos.Build_Logos(row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, GetID));
+          MyFilmsDetail.setGUIProperty("logos_id2002", Logos.BuildLogos(row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, GetID));
         }
         catch (Exception e)
         {
@@ -15979,7 +15979,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          MyFilmsDetail.setGUIProperty("logos_id2003", Logos.Build_Logos(row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, GetID));
+          MyFilmsDetail.setGUIProperty("logos_id2003", Logos.BuildLogos(row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, GetID));
         }
         catch (Exception e)
         {
@@ -15992,7 +15992,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          MyFilmsDetail.setGUIProperty("logos_id2012", Logos.Build_Logos(row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, GetID));
+          MyFilmsDetail.setGUIProperty("logos_id2012", Logos.BuildLogos(row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, GetID));
         }
         catch (Exception e)
         {
