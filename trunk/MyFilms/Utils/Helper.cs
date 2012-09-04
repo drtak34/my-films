@@ -847,21 +847,26 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public static string GetUserOnlineStatus(string username)
         {
           string status = "local";
-          if (IsTraktAvailableAndEnabled)
+          if (username == "" || username == "*")
           {
-            try
-            {
-              if (TraktSettings.Username == username)
-              {
-                status = TraktSettings.AccountStatus == ConnectionState.Connected ? "online" : "offline";
-              }
-            }
-            catch (Exception ex)
-            {
-              LogMyFilms.Warn("GetUserOnlineStatus(): problem getting Trakt user status : " + ex.Message);
-              status = "local";
-            }
+            status = "local";
           }
+          else 
+            if (IsTraktAvailableAndEnabled)
+              {
+                try
+                {
+                  if (TraktSettings.Username == username)
+                  {
+                    status = TraktSettings.AccountStatus == ConnectionState.Connected ? "online" : "offline";
+                  }
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Warn("GetUserOnlineStatus(): problem getting Trakt user status : " + ex.Message);
+                  status = "local";
+                }
+              }
           LogMyFilms.Debug("GetUserOnlineStatus(): connection status for '" + username + "' is set to '" + status + "'");
           return status;
         }
