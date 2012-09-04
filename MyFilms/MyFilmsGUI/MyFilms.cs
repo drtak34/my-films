@@ -1061,9 +1061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      if (conf.StrEnhancedWatchedStatusHandling && !string.IsNullOrEmpty(conf.StrUserProfileName))
-        if (Helper.IsTraktAvailableAndEnabled) 
-          MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
 
       loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
 
@@ -8611,6 +8609,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("Load_Config(): Current MyFilms user '" + conf.StrUserProfileName + "' is not a trakt user - cannot switch!");
         }
       }
+      // set user online status
+      MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
     }
 
     private void Refreshfacade()
@@ -9661,6 +9661,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //Load_Config(Configuration.CurrentConfig, true);
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
           return;
           #endregion
 
