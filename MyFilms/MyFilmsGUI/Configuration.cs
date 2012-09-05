@@ -315,8 +315,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrSuppressField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressField", string.Empty);
         StrSuppressValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressValue", string.Empty);
 
-        StrEnhancedWatchedStatusHandling = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "EnhancedWatchedStatusHandling", false);
-        StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", ""); // MyFilms.DefaultUsername
+        EnhancedWatchedStatusHandling = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "EnhancedWatchedStatusHandling", false);
+        if (StrFileType == CatalogType.AntMovieCatalog4Xtended) EnhancedWatchedStatusHandling = true; // always force MUS/EWS on AMC4 Catalog types
+        StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.DefaultUsername); // MyFilms.DefaultUsername
 
         StrECoptionStoreTaglineInDescription = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ECoptionStoreTaglineInDescription", false);
         #region Common EC options
@@ -774,7 +775,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool StrLogos { get; set; }
     public bool StrSuppress { get; set; }
     public bool StrSuppressManual { get; set; }
-    public bool StrEnhancedWatchedStatusHandling { get; set; }
+    public bool EnhancedWatchedStatusHandling { get; set; }
     public string StrUserProfileName { get; set; }
     public bool StrECoptionStoreTaglineInDescription { get; set; }
     public bool StrSupPlayer { get; set; }

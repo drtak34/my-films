@@ -771,7 +771,7 @@ namespace MyFilmsPlugin.MyFilms
       #endregion
 
       #region watched status & user rating
-      if (tmpconf.StrEnhancedWatchedStatusHandling)
+      if (tmpconf.EnhancedWatchedStatusHandling)
       {
         MultiUserData multiUserData;
         if (row[tmpconf.StrMultiUserStateField] == System.Convert.DBNull) // not yet migrated - do it now

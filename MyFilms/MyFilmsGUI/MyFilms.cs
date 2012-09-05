@@ -350,7 +350,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
 
     internal const string GlobalUsername = "Global";
-    internal const string DefaultUsername = "FilmsUser";
+    internal const string DefaultUsername = "Default";
 
     enum Controls : int
     {
@@ -2533,7 +2533,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.GlobalUnwatchedOnly)
       {
         //GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName.Replace("", StringExtensions.EscapeLikeValue("*")) + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+        GlobalFilterStringUnwatched = CreateGlobalUnwatchedFilter();
         MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
       }
       else
@@ -3176,7 +3176,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #endregion
 
             #region Watched Status
-            if (conf.StrEnhancedWatchedStatusHandling)
+            if (conf.EnhancedWatchedStatusHandling)
             {
               if (!sr[conf.StrMultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
               {
@@ -8576,7 +8576,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.StrLogos) 
         confLogos = new Logos();
       MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
-      if (conf.StrEnhancedWatchedStatusHandling)
+      if (conf.EnhancedWatchedStatusHandling)
       {
         MyFilmsDetail.setGUIProperty("user.watched.name", conf.StrUserProfileName);
       }
@@ -8925,7 +8925,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
       {
-        GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName.Replace("", StringExtensions.EscapeLikeValue("*")) + ":0*" + "' AND " : conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND "; MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
+        GlobalFilterStringUnwatched = CreateGlobalUnwatchedFilter();
       }
       else
       {
@@ -9422,7 +9422,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var choiceViewGlobalOptions = new List<string>();
 
           // Choose UserProfileName
-          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+          if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
             dlg1.Add(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName));
             choiceViewGlobalOptions.Add("userprofilename");
@@ -9713,7 +9713,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
           if (conf.GlobalUnwatchedOnly)
           {
-            GlobalFilterStringUnwatched = (MyFilms.conf.StrEnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + conf.StrUserProfileName.Replace("", StringExtensions.EscapeLikeValue("*")) + ":0*" + "' AND " : GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+            GlobalFilterStringUnwatched = CreateGlobalUnwatchedFilter();
             MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
           }
           else
@@ -10249,6 +10249,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    private string CreateGlobalUnwatchedFilter()
+    {
+      string username = conf.StrUserProfileName;
+      string filter = (MyFilms.conf.EnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + StringExtensions.EscapeLikeValue(username) + ":0*" + "' AND " : this.GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+      LogMyFilms.Debug("CreateGlobalUnwatchedFilter() - filter = '" + filter + "'"); 
+      return filter;
+    }
+    
     private bool ChooseNewConfig()
     {
       // bool success = false;
@@ -10433,7 +10441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (AntMovieCatalog.MovieRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
       {
         #region sync MUS state with direct DB fields for user rating, watched and Favorite
-        if (conf.StrEnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
+        if (conf.EnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
         {
           var states = new MultiUserData(sr.MultiUserState);
           var user = states.GetUserState(conf.StrUserProfileName);
