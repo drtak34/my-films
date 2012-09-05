@@ -4749,13 +4749,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       View_Dflt_Item.Text = GUILocalizeStrings.Get(1079819);
 
 
-      string FanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\Fanart";
-      if (!Directory.Exists(FanartDirectory))
+      string fanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\Fanart";
+      if (!Directory.Exists(fanartDirectory))
       {
-        try { Directory.CreateDirectory(FanartDirectory); }
+        try { Directory.CreateDirectory(fanartDirectory); }
         catch { }
       }
-      MesFilmsFanart.Text = FanartDirectory;
+      MesFilmsFanart.Text = fanartDirectory;
 
       string artistImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\PersonImages";
       if (!Directory.Exists(artistImagesDirectory))
@@ -5007,7 +5007,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AMCMovieScanPath.Text = PathStorage.Text;
       AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
       chkAMC_Purge_Missing_Files.Checked = false;
-      txtPicturePrefix.Text = Config_Name.Text + "_"; // Use configname as default prefix
+      txtPicturePrefix.Text = ""; // "Config_Name.Text + "_"; // Use configname as default prefix
       txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
       // Make controls visible:
       //txtAMCUpd_cnf.Enabled = true;
