@@ -405,7 +405,7 @@
       <width>11</width>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\led_small_green.png</texture>
-      <visible>string.equals(#myfilms.user.watched.onlinestatus,online)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.onlinestatus,online)+string.equals(#myfilms.user.watched.name)</visible>
       <colordiffuse>7fffffff</colordiffuse>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -420,7 +420,7 @@
       <width>11</width>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\led_small_red.png</texture>
-      <visible>string.equals(#myfilms.user.watched.onlinestatus,offline)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.onlinestatus,offline)+string.equals(#myfilms.user.watched.name)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -434,7 +434,7 @@
       <width>11</width>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\led_small_grey.png</texture>
-      <visible>string.equals(#myfilms.user.watched.onlinestatus,local)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.onlinestatus,local)+string.equals(#myfilms.user.watched.name)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
