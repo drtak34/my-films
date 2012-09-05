@@ -973,7 +973,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
           {
-            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+            if (MyFilms.conf.EnhancedWatchedStatusHandling)
             {
               dlgmenu.Add(GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0 ? GUILocalizeStrings.Get(1079895) : GUILocalizeStrings.Get(1079894));
             }
@@ -987,7 +987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.Add(GUILocalizeStrings.Get(931)); //rating
           choiceViewMenu.Add("rating");
 
-          if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended || MyFilms.conf.StrEnhancedWatchedStatusHandling) // user rating only for AMC4+ or when using enhanced watched handling
+          if (MyFilms.conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended || MyFilms.conf.EnhancedWatchedStatusHandling) // user rating only for AMC4+ or when using enhanced watched handling
           {
             dlgmenu.Add(GUILocalizeStrings.Get(10798944)); // User Rating
             choiceViewMenu.Add("userrating");
@@ -1202,7 +1202,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "togglewatchedstatus":
 
           #region toggle watched status
-          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+          if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
             MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) <= 0);
           }
@@ -1250,7 +1250,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             #region User rating
             MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
-            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+            if (MyFilms.conf.EnhancedWatchedStatusHandling)
             {
               decimal wRating = GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName);
               dlgRating.Rating = (wRating != decimal.MinValue) ? wRating : 5;
@@ -1274,7 +1274,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Change_Menu("mainmenu");
               return;
             }
-            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+            if (MyFilms.conf.EnhancedWatchedStatusHandling)
             {
               SetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName, dlgRating.Rating.ToString());
             }
@@ -2760,7 +2760,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       movie.Year = year;
 
       bool played = false;
-      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+      if (MyFilms.conf.EnhancedWatchedStatusHandling)
       {
         if (GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0)
           played = true;
@@ -2933,7 +2933,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
     public static void Watched_Toggle(int Index, bool watched)
     {
-      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+      if (MyFilms.conf.EnhancedWatchedStatusHandling)
       {
         MultiUserData userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
         userData.SetWatched(MyFilms.conf.StrUserProfileName, watched);
@@ -6617,14 +6617,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region set userdefined watched and rating field
             if (MyFilms.conf.StrWatchedField.ToLower() == dc.ColumnName.ToLower())
             {
-              if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+              if (MyFilms.conf.EnhancedWatchedStatusHandling)
               {
                 var userData = new MultiUserData(MyFilms.r[itemId][MyFilms.conf.StrMultiUserStateField].ToString());
                 UserState user = userData.GetUserState(MyFilms.conf.StrUserProfileName);
                 setGUIProperty("user.watched.value", user.WatchedCount > 0 ? "true" : "");
                 setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > MultiUserData.NoWatchedDate) ? user.WatchedDate.ToShortDateString() : "");
                 setGUIProperty("user.watched.count", user.WatchedCount.ToString());
-                setGUIProperty("user.watched.name", user.UserName);
+                setGUIProperty("user.watched.name", (user.UserName != MyFilms.DefaultUsername) ? user.UserName : "");
                 setGUIProperty("user.watched.global", userData.GetGlobalState().WatchedCount.ToString());
                 setGUIProperty("user.rating.value", (user.UserRating > MultiUserData.NoRating) ? Math.Round(user.UserRating, 1).ToString() : "");
               }
@@ -8278,7 +8278,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (MyFilms.conf.CheckWatched)
         {
-          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+          if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
             // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
             AddWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
@@ -8296,7 +8296,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         if (ended && MyFilms.conf.CheckWatchedPlayerStopped)
         {
-          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+          if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
             // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
             AddWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
@@ -8309,7 +8309,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         if (stopped && MyFilms.conf.CheckWatchedPlayerStopped && playTimePercentage >= 80)
         {
-          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+          if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
             // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
             AddWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
