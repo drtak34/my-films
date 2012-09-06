@@ -1431,7 +1431,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choiceGlobalMappings.Add("");
               break;
           }
-          if (selection > 4) // title fields
+          if (selection > 5) // title fields
           {
             ArrayList DisplayItems = MyFilms.GetDisplayItems("titles");
             foreach (string[] displayItem in DisplayItems)
