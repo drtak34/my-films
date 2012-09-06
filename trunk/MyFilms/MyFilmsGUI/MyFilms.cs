@@ -3045,10 +3045,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region filter list by Wselectedlabel, if user is coming from group view
         if (conf.Boolreturn) //in case of selection by view verify if value correspond excatly to the searched string
         {
-          ArrayList w_tableau = Search_String(sr[conf.WStrSort].ToString());
-          for (int wi = 0; wi < w_tableau.Count; wi++)
+          ArrayList wTableau = Search_String(sr[conf.WStrSort].ToString());
+          for (int wi = 0; wi < wTableau.Count; wi++)
           {
-            string s = w_tableau[wi].ToString();
+            string s = wTableau[wi].ToString();
             if (isdate)
             {
               if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(s).ToShortDateString()) ==
@@ -3196,6 +3196,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 sr[conf.StrWatchedField].ToString().Length > 0);
                   userData = new MultiUserData("");
                   userData.SetWatched(MyFilms.conf.StrUserProfileName, tmpwatched);
+                  if (sr["RatingUser"] != Convert.DBNull) 
+                    userData.SetRating(MyFilms.conf.StrUserProfileName, (decimal)sr["RatingUser"]);
                 }
                 sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
                 sr["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
@@ -9651,7 +9653,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region choose global user profile name
           Change_UserProfileName();
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
-          using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
           {
             xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
           }
@@ -10348,18 +10350,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Change_UserProfileName()
     {
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return;
       dlg.Reset();
       dlg.SetHeading(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)); // Choose User Profile Name ... GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)
-      List<string> choiceGlobalUserProfileName = new List<string>();
-
-      //// Add Configured UserProfileName from Setup  
-      //if (conf.StrUserProfileName.Length > 0)
-      //{
-      //  dlg4.Add(conf.StrUserProfileName); // current Value
-      //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
-      //}
+      var choiceGlobalUserProfileName = new List<string>();
+      string oldUserProfileName = conf.StrUserProfileName;
 
       dlg.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // Add User ...
       choiceGlobalUserProfileName.Add("");
@@ -10437,21 +10433,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region switch user data to dedicated fields (WatchedDate, RatingUser, userdefined 'Watched' field)
       LogMyFilms.Debug("Change_UserProfileName() - Switch user data to dedicated fields (WatchedDate, RatingUser, userdefined 'Watched' field)");
-      Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
+      var watch = new Stopwatch(); watch.Reset(); watch.Start();
       foreach (AntMovieCatalog.MovieRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
       {
         #region sync MUS state with direct DB fields for user rating, watched and Favorite
-        if (conf.EnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
+        if (conf.EnhancedWatchedStatusHandling)
         {
-          var states = new MultiUserData(sr.MultiUserState);
-          var user = states.GetUserState(conf.StrUserProfileName);
+          MultiUserData userData;
+          if (sr["MultiUserState"] != System.Convert.DBNull) userData = new MultiUserData(sr.MultiUserState);
+          else
+          {
+            #region if the former user was the default user, migrate it to MUS!
+            if (oldUserProfileName == DefaultUsername)
+            {
+              #region migrate status from configured (enhanced)watched field to new MultiUserStatus
+              if (sr[MyFilms.conf.StrWatchedField].ToString().Contains(":"))
+              {
+                // old field was already multiuserdata - migrate it!
+                userData = new MultiUserData(sr[conf.StrWatchedField].ToString());
+                sr[MyFilms.conf.StrWatchedField] = userData.GetUserState(DefaultUsername).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+              }
+              else
+              {
+                // old field was standard watched data - create MUS and add watched for current user
+                bool tmpwatched = (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) &&
+                              sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() &&
+                              sr[conf.StrWatchedField].ToString().Length > 0);
+                userData = new MultiUserData(string.Empty);
+                userData.SetWatched(DefaultUsername, tmpwatched);
+                if (sr["RatingUser"] != Convert.DBNull)
+                  userData.SetRating(DefaultUsername, (decimal)sr["RatingUser"]);
+              }
+              sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+              sr["DateWatched"] = userData.GetUserState(DefaultUsername).WatchedDate;
+              sr["RatingUser"] = userData.GetUserState(DefaultUsername).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(DefaultUsername).UserRating;
+              #endregion
+            }
+            #endregion
+            else
+            {
+              userData = new MultiUserData(string.Empty);
+            }
+          }
+
+          var user = userData.GetUserState(conf.StrUserProfileName);
           sr["DateWatched"] = user.WatchedDate == MultiUserData.NoWatchedDate ? System.Convert.DBNull : user.WatchedDate;
           sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
           if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
           {
-            sr.Favorite = sr.RatingUser > 5 ? Helper.Add(sr.Favorite, conf.StrUserProfileName) : Helper.Remove(sr.Favorite, conf.StrUserProfileName);
+            sr.Favorite = sr.RatingUser > 5
+                            ? Helper.Add(sr.Favorite, conf.StrUserProfileName)
+                            : Helper.Remove(sr.Favorite, conf.StrUserProfileName);
           }
+          sr["MultiUserState"] = userData.MultiUserStatusValue;
         }
         #endregion
       }
