@@ -3777,7 +3777,7 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Aspectratio", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Watched", "String"})
 
-            ds.Tables("tblAntFields").Rows.Add(New Object() {"WatchedDate", "Date"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"DateWatched", "Date"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Favorite", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Tags", "String"})
 
