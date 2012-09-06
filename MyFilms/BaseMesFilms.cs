@@ -624,6 +624,7 @@ namespace MyFilmsPlugin.MyFilms
             if (File.Exists(StrFileXml) && (AllowTraktSync || (!traktOnly && AllowRecentlyAddedAPI)))
             {
               var tmpconf = new MyFilmsGUI.Configuration(config, false, true, null);
+              if (StrFileType != "0") tmpconf.EnhancedWatchedStatusHandling = true;
               //if (!_lockDict.ContainsKey(tmpconf.StrFileXml))_lockDict.Add(tmpconf.StrFileXml, new ReaderWriterLockSlim());
               //_lockDict["string"].EnterWriteLock();
               _dataLock.EnterReadLock();
@@ -1145,6 +1146,8 @@ namespace MyFilmsPlugin.MyFilms
                                           sr[WatchedField].ToString().Length > 0);
                             multiUserData = new MultiUserData("");
                             multiUserData.SetWatched(UserProfileName, tmpwatched);
+                            if (sr["RatingUser"] != Convert.DBNull)
+                              multiUserData.SetRating(UserProfileName, (decimal)sr["RatingUser"]);
                             #endregion
                           }
                           sr.MultiUserState = multiUserData.ResultValueString();
