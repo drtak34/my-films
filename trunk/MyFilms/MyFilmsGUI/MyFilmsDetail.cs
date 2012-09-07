@@ -1162,7 +1162,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "playtrailer":
-
           #region play trailer
           // first check, if trailer files are available, offer options
           //if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
@@ -1198,7 +1197,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "togglewatchedstatus":
-
           #region toggle watched status
           if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
@@ -1281,9 +1279,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (MyFilms.conf.StrUserProfileName.Length > 0)
             {
               if (dlgRating.Rating > 5)
-                MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = Helper.Add(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
+                MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = MultiUserData.Add(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
               else
-                MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = Helper.Remove(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
+                MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = MultiUserData.Remove(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
             }
 
             Update_XML_database();

@@ -162,12 +162,13 @@ namespace MyFilmsPlugin.DataBase
       return value;
     }
 
-    public string Remove(string input, string toRemove)
+    internal static string Remove(string input, string toRemove)
     {
       string output = "";
       string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      List<string> itemList = split.Distinct().ToList();
+      List<string> itemList = split.Select(x => x.Trim()).Distinct().ToList();
       if (itemList.Contains(toRemove)) itemList.Remove(toRemove);
+      itemList.Sort();
       foreach (string s in itemList)
       {
         if (output.Length > 0) output += ", ";
@@ -176,12 +177,13 @@ namespace MyFilmsPlugin.DataBase
       return output;
     }
 
-    public string Add(string input, string toAdd)
+    internal static string Add(string input, string toAdd)
     {
       string output = "";
       string[] split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      List<string> itemList = split.Distinct().ToList();
+      List<string> itemList = split.Select(x => x.Trim()).Distinct().ToList();
       if (!itemList.Contains(toAdd)) itemList.Add(toAdd);
+      itemList.Sort();
       foreach (string s in itemList)
       {
         if (output.Length > 0) output += ", ";

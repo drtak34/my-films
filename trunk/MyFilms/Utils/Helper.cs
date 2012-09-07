@@ -640,7 +640,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       string output = string.Empty;
       var split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      var itemList = split.Distinct().ToList();
+      var itemList = split.Select(x => x.Trim()).Distinct().ToList();
       if (itemList.Contains(toRemove)) itemList.Remove(toRemove);
       foreach (string s in itemList)
       {
@@ -660,7 +660,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       string output = string.Empty;
       var split = input.Split(new Char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      var itemList = split.Distinct().ToList();
+      var itemList = split.Select(x => x.Trim()).Distinct().ToList();
       if (!itemList.Contains(toAdd)) itemList.Add(toAdd);
       foreach (string s in itemList)
       {
