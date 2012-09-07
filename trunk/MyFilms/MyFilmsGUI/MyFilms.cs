@@ -14846,6 +14846,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
+          // save current position of the facade
+          if (facadeFilms != null)
+          {
+            conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+            conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+          }
           // alternatively RefreshFacade() to be called to also update facade (only when main window is active)
           Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
         }
@@ -15556,8 +15562,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
 
         // save current position of the facade
-        conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
-        conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+        if (facadeFilms != null)
+        {
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+        }
         Refreshfacade(); // Fin_Charge_Init(false, true); //need to reload the facade, but NOT default select, as it otherwise will reset global filters the user might have set...
       }
       if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
