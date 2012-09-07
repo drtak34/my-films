@@ -1199,12 +1199,12 @@ namespace MyFilmsPlugin.MyFilms
                             if (sr.RatingUser > 5)
                             {
                               LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              sr.Favorite = Helper.Add(sr["Favorite"].ToString(), UserProfileName);
+                              sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
                             }
                             else
                             {
                               LogMyFilms.Debug("UpdateMovies() - Remove user '" + UserProfileName + "' from 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              if (!sr.IsFavoriteNull()) sr.Favorite = Helper.Remove(sr.Favorite, UserProfileName);
+                              if (!sr.IsFavoriteNull()) sr.Favorite = MultiUserData.Remove(sr.Favorite, UserProfileName);
                             }
                           }
                         }
@@ -1291,11 +1291,11 @@ namespace MyFilmsPlugin.MyFilms
                       {
                         if (sr.RatingUser > 5)
                         {
-                          sr.Favorite = Helper.Add(sr["Favorite"].ToString(), UserProfileName);
+                          sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
                         }
                         else
                         {
-                          if (!sr.IsFavoriteNull()) sr.Favorite = Helper.Remove(sr.Favorite, UserProfileName);
+                          if (!sr.IsFavoriteNull()) sr.Favorite = MultiUserData.Remove(sr.Favorite, UserProfileName);
                         }
                       }
                     }

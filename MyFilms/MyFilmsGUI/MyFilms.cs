@@ -10486,8 +10486,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
           {
             sr.Favorite = sr.RatingUser > 5
-                            ? Helper.Add(sr.Favorite, conf.StrUserProfileName)
-                            : Helper.Remove(sr.Favorite, conf.StrUserProfileName);
+                            ? MultiUserData.Add(sr.Favorite, conf.StrUserProfileName)
+                            : MultiUserData.Remove(sr.Favorite, conf.StrUserProfileName);
           }
           sr["MultiUserState"] = userData.MultiUserStatusValue;
         }
