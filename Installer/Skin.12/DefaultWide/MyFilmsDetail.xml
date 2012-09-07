@@ -580,12 +580,12 @@
       <id>1</id>
       <posX>830</posX>
       <posY>125</posY>
-	  <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' #myfilms.user.watched.name',' (User)'))</label>
+	  <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.name.value,''),' #myfilms.user.name.value',' (User)'))</label>
       <textcolor>ff6FAFE1</textcolor>
       <font>font10</font>
       <width>460</width>
 	  <align>left</align>
-	  <visible>!Control.HasFocus(10099)+[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]</visible>		
+	  <visible>!Control.HasFocus(10099)+[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.name.value)]</visible>		
     </control>
     <!-- <control>
       <description>User Name Label</description>
@@ -599,7 +599,7 @@
       <align>right</align>
       <width>160</width>
       <align>right</align>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)</visible>
     </control>
     <control>
       <description>User Rating Value (single user)</description>
@@ -612,7 +612,7 @@
       <font>font10</font>
       <textcolor>ivory</textcolor>
       <align>left</align>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+!string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+!string.equals(#myfilms.user.name.value)</visible>
     </control>
     <control>
       <description>User Rating Value (multi-user - with user name)</description>
@@ -621,12 +621,12 @@
       <posX>960</posX>
       <posY>127</posY>
       <label>#myfilms.user.rating.value/10
-      (#myfilms.user.watched.name)</label>
+      (#myfilms.user.name.value)</label>
       <width>300</width>
       <font>font10</font>
       <textcolor>ivory</textcolor>
       <align>left</align>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)</visible>
     </control>
     <control>
       <description>User name (no User rating)</description>
@@ -634,12 +634,12 @@
       <id>1</id>
       <posX>960</posX>
       <posY>127</posY>
-      <label>#myfilms.user.watched.name</label>
+      <label>#myfilms.user.name.value</label>
       <width>300</width>
       <font>font10</font>
       <textcolor>ivory</textcolor>
       <align>left</align>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)</visible>
     </control>   -->
     <control>
       <description>Year - Length Value</description>
@@ -2022,11 +2022,11 @@
         <posX>367</posX>
         <posY>634</posY>
         <width>100</width>
-        <label>#myfilms.user.watched.name:</label>
+        <label>#myfilms.user.name.value:</label>
         <font>font10</font>
         <align>right</align>
         <textcolor>ff6FAFE1</textcolor>
-        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+!player.hasmedia</visible>
+        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+!player.hasmedia</visible>
     </control>
     <control>
         <description>Trakt User Offline Icon</description>
@@ -2040,7 +2040,7 @@
         <keepaspectratio>yes</keepaspectratio>
         <centered>yes</centered>
         <colordiffuse>c0ffffff</colordiffuse>
-        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,offline)+!player.hasmedia</visible>
+        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.onlinestatus,offline)+!player.hasmedia</visible>
     </control>
     <control>
         <description>Trakt User Online Icon</description>
@@ -2054,7 +2054,7 @@
         <keepaspectratio>yes</keepaspectratio>
         <centered>yes</centered>
         <colordiffuse>c0ffffff</colordiffuse>
-        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,online)+!player.hasmedia</visible>
+        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.onlinestatus,online)+!player.hasmedia</visible>
     </control>
     <control>
         <description>Local User Icon</description>
@@ -2068,7 +2068,7 @@
         <keepaspectratio>yes</keepaspectratio>
         <centered>yes</centered>
         <colordiffuse>c0ffffff</colordiffuse>
-        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,local)+!player.hasmedia</visible>
+        <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.onlinestatus,local)+!player.hasmedia</visible>
     </control> -->
     <control>
       <type>animation</type>

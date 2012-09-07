@@ -405,7 +405,7 @@
       <width>11</width>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\led_small_green.png</texture>
-      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.onlinestatus,online)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.onlinestatus,online)+string.equals(#myfilms.user.name.value)</visible>
       <colordiffuse>7fffffff</colordiffuse>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -420,7 +420,7 @@
       <width>11</width>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\led_small_red.png</texture>
-      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.onlinestatus,offline)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.onlinestatus,offline)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -434,7 +434,7 @@
       <width>11</width>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\led_small_grey.png</texture>
-      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.onlinestatus,local)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.onlinestatus,local)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -447,11 +447,11 @@
       <posX>715</posX>
       <posY>679</posY>
       <width>279</width>
-      <label>#myfilms.user.watched.name #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
+      <label>#myfilms.user.name.value #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
       <font>font9</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
-      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -465,11 +465,11 @@
       <posX>725</posX>
       <posY>679</posY>
       <width>279</width>
-      <label>#myfilms.user.watched.name</label>
+      <label>#myfilms.user.name.value</label>
       <font>font9</font>
       <align>right</align>
       <textcolor>6fff0000</textcolor>
-      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -481,11 +481,11 @@
       <posX>625</posX>
       <posY>679</posY>
       <width>279</width>
-      <label>#myfilms.user.watched.name</label>
+      <label>#myfilms.user.name.value</label>
       <font>font9</font>
       <align>right</align>
       <textcolor>6f00ff00</textcolor>
-      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -506,7 +506,7 @@
       <font>font9</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
-      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -530,7 +530,7 @@
       <align>right</align>
       <imagesToDraw>10</imagesToDraw>
       <percentage>#myfilms.user.rating.value</percentage>
-      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>

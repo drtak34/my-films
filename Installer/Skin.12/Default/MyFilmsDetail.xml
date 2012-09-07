@@ -621,12 +621,12 @@
 		<id>1</id>
 		<posX>530</posX>
 		<posY>100</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' #myfilms.user.watched.name',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.name.value,''),' #myfilms.user.name.value',' (User)'))</label>
 		<width>160</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>
 		<align>left</align>
-		<visible>!Control.HasFocus(10099)+[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]</visible>		
+		<visible>!Control.HasFocus(10099)+[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.name.value)]</visible>		
 	</control>
     <!-- <control>
 		<description>User Rating Label</description>
@@ -653,7 +653,7 @@
 		<align>right</align>
 		<width>160</width>
 		<align>right</align>
-		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>		
+		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)</visible>		
     </control>
 	<control>
 		<description>User Rating Value (single user)</description>
@@ -666,7 +666,7 @@
 		<font>font10</font>
 		<textcolor>ivory</textcolor>
 		<align>left</align>
-		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+!string.equals(#myfilms.user.watched.name)</visible>		
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+!string.equals(#myfilms.user.name.value)</visible>		
 	</control>
 	<control>
 		<description>User Rating Value (multi-user - with user name)</description>
@@ -674,12 +674,12 @@
 		<id>1</id>
 		<posX>660</posX>
 		<posY>127</posY>
-		<label>#myfilms.user.rating.value/10 (#myfilms.user.watched.name)</label>
+		<label>#myfilms.user.rating.value/10 (#myfilms.user.name.value)</label>
 		<width>300</width>
 		<font>font10</font>
 		<textcolor>ivory</textcolor>
 		<align>left</align>
-		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>		
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)</visible>		
 	</control>
 	<control>
 		<description>User name (no User rating)</description>
@@ -687,12 +687,12 @@
 		<id>1</id>
 		<posX>660</posX>
 		<posY>127</posY>
-		<label>#myfilms.user.watched.name</label>
+		<label>#myfilms.user.name.value</label>
 		<width>300</width>
 		<font>font10</font>
 		<textcolor>ivory</textcolor>
 		<align>left</align>
-		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.watched.name)</visible>		
+		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)</visible>		
 	</control> -->
 	<control>
 		<description>Year - Duration Value</description>
@@ -1923,7 +1923,7 @@
 		<id>1</id>
 		<posX>520</posX>
 		<posY>505</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' (#myfilms.user.watched.name)',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.name.value,''),' (#myfilms.user.name.value)',' (User)'))</label>
 		<width>160</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>

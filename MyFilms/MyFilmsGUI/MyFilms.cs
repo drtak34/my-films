@@ -1061,7 +1061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
 
       loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
 
@@ -8583,7 +8583,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
       if (conf.EnhancedWatchedStatusHandling)
       {
-        MyFilmsDetail.setGUIProperty("user.watched.name", conf.StrUserProfileName);
+        MyFilmsDetail.setGUIProperty("user.name.value", conf.StrUserProfileName);
       }
 
       if (conf.StrDfltSelect.Length > 0)
@@ -8615,7 +8615,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       // set user online status
-      MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
     }
 
     private void Refreshfacade()
@@ -9666,7 +9666,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //Load_Config(Configuration.CurrentConfig, true);
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          MyFilmsDetail.setGUIProperty("user.watched.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+          MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
           return;
           #endregion
 
@@ -15943,12 +15943,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("person.placeofbirth.label", GUILocalizeStrings.Get(10799303));
       MyFilmsDetail.setGUIProperty("person.biography.label", GUILocalizeStrings.Get(10799304));
 
+      MyFilmsDetail.setGUIProperty("user.name.label", GUILocalizeStrings.Get(10799310));
+
       MyFilmsDetail.clearGUIProperty("user.rating.value");
       MyFilmsDetail.clearGUIProperty("user.watched.value");
       MyFilmsDetail.clearGUIProperty("user.watched.count");
       MyFilmsDetail.clearGUIProperty("user.watched.date");
-      MyFilmsDetail.clearGUIProperty("user.watched.name");
-      MyFilmsDetail.clearGUIProperty("user.watched.onlinestatus");
+      MyFilmsDetail.clearGUIProperty("user.name.value");
+      MyFilmsDetail.clearGUIProperty("user.onlinestatus");
       MyFilmsDetail.clearGUIProperty("user.watched.global");
 
       MyFilmsDetail.clearGUIProperty("user.source.isonline");

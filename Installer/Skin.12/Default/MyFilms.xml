@@ -612,12 +612,12 @@
 		<id>1</id>
 		<posX>180</posX>
 		<posY>452</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' #myfilms.user.watched.name',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.name.value,''),' #myfilms.user.name.value',' (User)'))</label>
 		<width>110</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>
 		<align>left</align>
-		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]+[control.isvisible(36)|control.isvisible(39)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
+		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.name.value)]+[control.isvisible(36)|control.isvisible(39)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
 	</control>
 	<control>
 		<type>label</type>
@@ -957,12 +957,12 @@
 		<id>1</id>
 		<posX>520</posX>
 		<posY>505</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.watched.name,''),' (#myfilms.user.watched.name)',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.name.value,''),' (#myfilms.user.name.value)',' (User)'))</label>
 		<width>160</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>
 		<align>left</align>
-		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.watched.name)]+!control.isvisible(34)+!Control.isvisible(40)+[facadeview.filmstrip|facadeview.coverflow]+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.name.value)]+!control.isvisible(34)+!Control.isvisible(40)+[facadeview.filmstrip|facadeview.coverflow]+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
 	</control> -->
 	<control>
 		<type>label</type>
