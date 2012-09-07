@@ -37,6 +37,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   public class Logos
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
     #region conteneurs
     public static ArrayList ID2001Logos = new ArrayList();
     public static ArrayList ID2002Logos = new ArrayList();

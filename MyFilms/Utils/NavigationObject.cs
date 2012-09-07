@@ -24,7 +24,7 @@ namespace MyFilmsPlugin.Utils
     public CoverState CoverStatus { get; set; }
 
     public bool SortButtonEnabled { get; set; }
-    public bool SortButtonASC { get; set; }
+    public bool SortButtonAsc { get; set; }
     public string SortButtonLabel { get; set; }
 
     public string DbDfltSelect { get; set; }
@@ -68,7 +68,7 @@ namespace MyFilmsPlugin.Utils
       CurrentView = curview;
 
       SortButtonEnabled = srtButton.IsEnabled;
-      SortButtonASC = srtButton.IsAscending;
+      this.SortButtonAsc = srtButton.IsAscending;
       SortButtonLabel = srtButton.Label;
       CoverStatus = coverstate;
       LastDbUpdate = lastDBupdate;
@@ -160,7 +160,8 @@ namespace MyFilmsPlugin.Utils
 
       conf.CurrentView = ViewStatus.CurrentView;
 
-      try { conf.StrIndex = ViewStatus.IndexItem; } catch { conf.StrIndex = -1; }
+      try { conf.StrIndex = ViewStatus.IndexItem; }
+      catch { conf.StrIndex = -1; }
       conf.StrTIndex = ViewStatus.TitleItem;
 
       //int IndexItem = ViewStatus.IndexItem;
@@ -178,6 +179,6 @@ namespace MyFilmsPlugin.Utils
       personcover = CoverStatus.PersonCover;
       groupcover = CoverStatus.GroupCover;
     }
-  
+
   }
 }

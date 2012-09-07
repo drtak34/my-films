@@ -96,7 +96,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // bool success = (bool)miCusNm.Invoke(oClsX, arrParms);
 
       Type[] paramTypes = new Type[] { typeof(int), typeof(ArrayList).MakeByRefType() }; // Type[] paramTypes = new Type[] { typeof(int), Type.GetType("System.ArrayList&") };
-      
+
       // Get methods.
       MethodInfo[] methods = typeof(VideoDatabase).GetMethods();
       bool success = false;
