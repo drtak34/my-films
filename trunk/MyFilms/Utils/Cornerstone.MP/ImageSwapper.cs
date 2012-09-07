@@ -60,11 +60,13 @@
                         return;
 
                     // if we have a second backdrop image object, alternate between the two
-                    if (_guiImageTwo != null && imagesNeedSwapping)
-                    {
-                      _imageResource.Property = _imageResource.Property.Equals(_propertyOne) ? _propertyTwo : _propertyOne;
+                    if (_guiImageTwo != null && imagesNeedSwapping) {
+                        if (_imageResource.Property.Equals(_propertyOne))
+                            _imageResource.Property = _propertyTwo;
+                        else
+                            _imageResource.Property = _propertyOne;
 
-                      imagesNeedSwapping = false;
+                        imagesNeedSwapping = false;
                     }
 
                   // update resource with new file

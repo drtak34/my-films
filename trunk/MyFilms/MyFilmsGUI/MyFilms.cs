@@ -3333,6 +3333,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return !(this.facadeFilms.Count == 1 && item.IsFolder); //ret false if single folder found
     }
 
+    public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
+    {
+      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
+      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":-1")) return false;
+      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
+      return true; // count > 0 -> return true
+    }
+
     private void GetOnlineMoviesFromTMDBforFilmList()
     {
       #region add online movies from TMDB
@@ -3841,13 +3849,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return false;
       }
       currentFanartList.Clear(); // clear list from former content
-      foreach (var wfanart in from GUIListItem randomFanartItem in fanartItems let wfanart = new string[2] select MyFilmsDetail.Search_Fanart(randomFanartItem.Label, true, "file", false, string.Empty, string.Empty) into wfanart where wfanart[0] != " " && wfanart[0] != MyFilms.conf.DefaultFanartImage && !currentFanartList.Contains(wfanart[0]) select wfanart)
+      foreach (string[] wfanart in fanartItems.Cast<GUIListItem>().Select(randomFanartItem => MyFilmsDetail.Search_Fanart(randomFanartItem.Label, true, "file", false, string.Empty, string.Empty)).Where(wfanart => wfanart[0] != " " && wfanart[0] != MyFilms.conf.DefaultFanartImage && !currentFanartList.Contains(wfanart[0])))
       {
         currentFanartList.Add(wfanart[0]);
         // LogMyFilms.Debug("GetRandomFanartForGroups() - added fanart #" + currentFanartList.Count + " : '" + wfanart[0] + "'");
         i += 1;
         if (i >= limit && limit != 0)
+        {
           return true;
+        }
       }
       fanartItems.SafeDispose();
       return currentFanartList.Count > 0;
@@ -3922,7 +3932,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //Choose Random Fanart from Resultlist
                 var rnd = new System.Random();
                 randomFanartIndex = rnd.Next(currentFanartList.Count);
-                if (!(currentFanartList.Count > randomFanartIndex))
+                if (currentFanartList.Count <= randomFanartIndex)
                 {
                   LogMyFilms.Debug("GetNewRandomFanart() - error, invalid index !  - Available: '" + currentFanartList.Count + "', selected ID: '" + randomFanartIndex + "' - returning empty fanart !");
                   return " ";
@@ -3952,14 +3962,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return newFanart;
     }
 
-    public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
-    {
-      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
-      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":-1")) return false;
-      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
-      return true; // count > 0 -> return true
-    }
-
     //----------------------------------------------------------------------------------------
     //    Display rating (Hide/show Star Images)
     //    altered to add half stars
@@ -3980,7 +3982,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.HideControl(GetID, 24 + i);
       }
     }
-
 
     static readonly Regex groupCountMatches = new Regex(@"\([0-9]*\)", RegexOptions.Compiled);
 

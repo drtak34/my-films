@@ -169,18 +169,22 @@
 
         public static PropertyInfo GetPropertyInfo<T>(string newName, string oldName)
         {
-            PropertyInfo property = null;
-            Type type = typeof(T);
-            string key = type.FullName + "|" + newName;
+          PropertyInfo property = null;
+          Type type = typeof(T);
+          string key = type.FullName + "|" + newName;
 
-            if (!propertyCache.TryGetValue(key, out property))
+          if (!propertyCache.TryGetValue(key, out property))
+          {
+            property = type.GetProperty(newName);
+            if (property == null)
             {
-                property = type.GetProperty(newName) ?? type.GetProperty(oldName);
-
-              propertyCache[key] = property;
+              property = type.GetProperty(oldName);
             }
 
-            return property;
+            propertyCache[key] = property;
+          }
+
+          return property;
         }
 
         public static GUIListControl ListLayout(this GUIFacadeControl self)
