@@ -41,7 +41,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
   /// </summary>
   public class GUILocalizeStrings
   {
-    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
+
     #region Variables
     static LocalisationProvider _stringProvider;
     static Dictionary<string, string> _cultures;
@@ -100,7 +101,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       //catch (Exception)
       //{ Lang = CultureInfo.CurrentUICulture.Name; }
       //LogMyFilms.Info("Using language " + Lang);
-      
+
       if (_stringProvider == null)
         Load(null);
 
@@ -251,7 +252,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         foreach (CultureInfo t in cultureList)
         {
-            _cultures.Add(t.EnglishName, t.Name);
+          _cultures.Add(t.EnglishName, t.Name);
         }
       }
 

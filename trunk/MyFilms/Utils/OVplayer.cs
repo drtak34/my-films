@@ -18,8 +18,6 @@ using System.Threading;
 //using TraktPlugin.TraktAPI;
 //using TraktPlugin.TraktAPI.DataStructures;
 
-
-
 namespace MyFilmsPlugin.Utils
 {
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
@@ -56,7 +54,7 @@ namespace MyFilmsPlugin.Utils
 
       LogMyFilms.Info("Preparing graph for playback of '{0}'", stream);
 
-      PlayerFactory factory = new PlayerFactory(PlayerType.Internal, stream);
+      var factory = new PlayerFactory(PlayerType.Internal, stream);
       bool? prepareResult = ((OnlineVideosPlayer)factory.PreparedPlayer).PrepareGraph();
 
       if (prepareResult != true)

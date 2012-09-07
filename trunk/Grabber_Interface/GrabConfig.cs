@@ -89,7 +89,7 @@ namespace Grabber_Interface
     private string TimeBodyLinkPersonImages = string.Empty;
     private string TimeBodyLinkMultiFanart = string.Empty;
     private string TimeBodyLinkTrailer = string.Empty;
-    
+
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
     private XmlConf xmlConf;
@@ -118,7 +118,7 @@ namespace Grabber_Interface
 
       System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
       this.Version_Label.Text = "V" + asm.GetName().Version.ToString();
-      
+
       // Test if input arguments were supplied:
       if (args.Length > 0)
       {
@@ -332,7 +332,7 @@ namespace Grabber_Interface
             Grabber_URLClass.IMDBUrl singleUrl = (Grabber_URLClass.IMDBUrl)listUrl[i];
             Image image = GrabUtil.GetImageFromUrl(singleUrl.Thumb); // Image image = Image.FromFile(wurl.Thumb); // Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
             dataGridViewSearchResults.Rows.Add(new object[] { (i + 1).ToString(), image, singleUrl.Title, singleUrl.Year, singleUrl.Options, singleUrl.ID, singleUrl.URL, singleUrl.Director, singleUrl.Akas });
-            
+
             //row.Cells[0].Value = i;
             //row.Cells[1].Value = image;
             //row.Cells[2].Value = singleUrl.Title;
@@ -355,7 +355,7 @@ namespace Grabber_Interface
             //dataGridViewSearchResults.Rows[i].Cells[7].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
             //dataGridViewSearchResults.Rows[i].Cells[8].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Akas;
           }
-          
+
           if (dataGridViewSearchResults.Rows.Count > 0)
           {
             // dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -398,7 +398,7 @@ namespace Grabber_Interface
           BodyStripped = Body.Substring(iStart, iEnd - iStart);
           textBody.Text = BodyStripped; // initial view is stripped, as it's more interesting for script programmer ...
         }
-      // CountSearchMatches(starttext, endtext);
+        // CountSearchMatches(starttext, endtext);
       }
     }
 
@@ -447,7 +447,7 @@ namespace Grabber_Interface
         strGrabActorRegex = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsRegExp)._Value;
         this.chkGrabActorRoles.Checked = strGrabActorRoles == "true";
       }
-      catch 
+      catch
       {
         chkGrabActorRoles.Checked = false;
         chkGrabActorRoles.Enabled = false;
@@ -456,26 +456,26 @@ namespace Grabber_Interface
       else chkGrabActorRoles.Enabled = true;
 
       try { cbMaxProducers.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
-      catch { cbMaxProducers.Text = string.Empty;}
+      catch { cbMaxProducers.Text = string.Empty; }
       this.cbMaxProducers.Enabled = !string.IsNullOrEmpty(this.cbMaxProducers.Text);
 
       try { cbMaxDirectors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value; }
-      catch {cbMaxDirectors.Text = string.Empty;}
+      catch { cbMaxDirectors.Text = string.Empty; }
       this.cbMaxDirectors.Enabled = !string.IsNullOrEmpty(this.cbMaxDirectors.Text);
 
       try { cbMaxWriters.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
-      catch {cbMaxWriters.Text = string.Empty;}
+      catch { cbMaxWriters.Text = string.Empty; }
       this.cbMaxWriters.Enabled = !string.IsNullOrEmpty(this.cbMaxWriters.Text);
 
       try { cbTtitlePreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
       catch { cbTtitlePreferredLanguage.Text = string.Empty; }
       //if (string.IsNullOrEmpty(cbTtitlePreferredLanguage.Text)) cbTtitlePreferredLanguage.Enabled = false;
       //else cbTtitlePreferredLanguage.Enabled = true;
-      
+
       try { cbTtitleMaxTitles.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value; }
-      catch {cbTtitleMaxTitles.Text = string.Empty;}
+      catch { cbTtitleMaxTitles.Text = string.Empty; }
       this.cbTtitleMaxTitles.Enabled = !string.IsNullOrEmpty(this.cbTtitleMaxTitles.Text);
-      
+
       try { cbCertificationPreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
       catch { cbCertificationPreferredLanguage.Text = string.Empty; }
       //if (string.IsNullOrEmpty(cbCertificationPreferredLanguage.Text)) cbCertificationPreferredLanguage.Enabled = false;
@@ -494,7 +494,7 @@ namespace Grabber_Interface
           cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
       }
       this.cbTtitlePreferredLanguage.Enabled = this.cbTtitlePreferredLanguage.Items.Count > 0;
-      
+
       cbCertificationPreferredLanguage.Items.Clear();
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
       catch { strTemp = string.Empty; }
@@ -507,42 +507,42 @@ namespace Grabber_Interface
       }
       this.cbCertificationPreferredLanguage.Enabled = this.cbCertificationPreferredLanguage.Items.Count > 0;
 
-        // Read Mapping Infos
-        List<string> fields = Grabber.Grabber_URLClass.FieldList();
+      // Read Mapping Infos
+      List<string> fields = Grabber.Grabber_URLClass.FieldList();
 
-        for (int i = 0; i < 40; i++)
+      for (int i = 0; i < 40; i++)
+      {
+        try
         {
-          try
-          {
-            string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty, val6 = string.Empty, val7 = string.Empty;
-            val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
-            if (string.IsNullOrEmpty(val1)) val1 = fields[i]; // if missing field in script, replace DB-field name with "right one"
-            val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
-            val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
-            val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
-            val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
-            val6 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param6;
-            val7 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param7;
+          string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty, val6 = string.Empty, val7 = string.Empty;
+          val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
+          if (string.IsNullOrEmpty(val1)) val1 = fields[i]; // if missing field in script, replace DB-field name with "right one"
+          val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
+          val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
+          val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
+          val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
+          val6 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param6;
+          val7 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param7;
 
-            dataGridViewMapping.Rows[i].Cells[1].Value = val1;
-            dataGridViewMapping.Rows[i].Cells[2].Value = val2;
-            dataGridViewMapping.Rows[i].Cells[3].Value = Convert.ToBoolean(val3);
-            dataGridViewMapping.Rows[i].Cells[4].Value = Convert.ToBoolean(val4);
-            dataGridViewMapping.Rows[i].Cells[5].Value = Convert.ToBoolean(val5);
-            dataGridViewMapping.Rows[i].Cells[6].Value = Convert.ToBoolean(val6);
-            dataGridViewMapping.Rows[i].Cells[7].Value = Convert.ToBoolean(val7);
-          }
-          catch (Exception)
-          {
-            dataGridViewMapping.Rows[i].Cells[1].Value = fields[i];
-            dataGridViewMapping.Rows[i].Cells[2].Value = "";
-            dataGridViewMapping.Rows[i].Cells[3].Value = false;
-            dataGridViewMapping.Rows[i].Cells[4].Value = false;
-            dataGridViewMapping.Rows[i].Cells[5].Value = false;
-            dataGridViewMapping.Rows[i].Cells[6].Value = false;
-            dataGridViewMapping.Rows[i].Cells[7].Value = false;
-          }
+          dataGridViewMapping.Rows[i].Cells[1].Value = val1;
+          dataGridViewMapping.Rows[i].Cells[2].Value = val2;
+          dataGridViewMapping.Rows[i].Cells[3].Value = Convert.ToBoolean(val3);
+          dataGridViewMapping.Rows[i].Cells[4].Value = Convert.ToBoolean(val4);
+          dataGridViewMapping.Rows[i].Cells[5].Value = Convert.ToBoolean(val5);
+          dataGridViewMapping.Rows[i].Cells[6].Value = Convert.ToBoolean(val6);
+          dataGridViewMapping.Rows[i].Cells[7].Value = Convert.ToBoolean(val7);
         }
+        catch (Exception)
+        {
+          dataGridViewMapping.Rows[i].Cells[1].Value = fields[i];
+          dataGridViewMapping.Rows[i].Cells[2].Value = "";
+          dataGridViewMapping.Rows[i].Cells[3].Value = false;
+          dataGridViewMapping.Rows[i].Cells[4].Value = false;
+          dataGridViewMapping.Rows[i].Cells[5].Value = false;
+          dataGridViewMapping.Rows[i].Cells[6].Value = false;
+          dataGridViewMapping.Rows[i].Cells[7].Value = false;
+        }
+      }
     }
 
     public void SaveXml(string File)
@@ -570,7 +570,7 @@ namespace Grabber_Interface
       {
         this.xmlConf.find(this.xmlConf.listGen, TagName.FileBasedReader)._Value = this.cbFileBasedReader.Checked ? "true" : "false";
       }
-      catch (Exception) {}
+      catch (Exception) { }
 
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1 = textRedir.Text;
@@ -734,7 +734,7 @@ namespace Grabber_Interface
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
       int pageNumber = -1;
-      if (!string.IsNullOrEmpty(textPage.Text)) 
+      if (!string.IsNullOrEmpty(textPage.Text))
         pageNumber = Convert.ToInt16(textPage.Text);
       try
       {
@@ -745,7 +745,7 @@ namespace Grabber_Interface
         DialogResult dlgResult = DialogResult.None;
         button_Preview.Enabled = true;
         dlgResult = MessageBox.Show("Grabber ERROR - check your definitions! \n\nException Message: " + ex.Message + "\nStacktrace: " + ex.StackTrace, "Error", MessageBoxButtons.OK);
-        if (dlgResult == DialogResult.OK) {}
+        if (dlgResult == DialogResult.OK) { }
       }
 
       for (int i = 0; i < listUrl.Count; i++)
@@ -1023,7 +1023,7 @@ namespace Grabber_Interface
         int iEnd = 0;
         int iLength = 0;
 
-        if (manualselect) 
+        if (manualselect)
           iStart = GLiSearchMatches;
 
 
@@ -1031,7 +1031,7 @@ namespace Grabber_Interface
         {
           iStart = GrabUtil.FindPosition(textBody.Text, starttext, iStart, ref iLength, true, true);
           if (iStart <= 0) { iStart = 0; labelSearchPosition.Text = ""; }
-          else { labelSearchPosition.Text = iStart.ToString(); } 
+          else { labelSearchPosition.Text = iStart.ToString(); }
         }
         if (endtext.Length > 0)
         {
@@ -1321,7 +1321,7 @@ namespace Grabber_Interface
         strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Page)._Value;
         try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric2)._Value; }
         catch (Exception) { strEncoding = ""; }
-        
+
         strActivePage = this.LoadPage(strPage);
         if (strStart.Length > 0)
         {
@@ -1744,7 +1744,7 @@ namespace Grabber_Interface
         lblResult.Text = strActivePage.Length.ToString();
       return strActivePage;
     }
-    
+
     private void textBodyDetail_NewSelection(string starttext, string endtext, int bodystart, string param1)
     {
 
@@ -2004,7 +2004,7 @@ namespace Grabber_Interface
             strActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
             this.chkActorRoles.Checked = strActorRoles == "true";
           }
-          catch {chkActorRoles.Checked = false;}
+          catch { chkActorRoles.Checked = false; }
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsIndex)._Value;
           break;
         case 10: // Country
@@ -2517,7 +2517,7 @@ namespace Grabber_Interface
 
       if (lblComplement.Visible == true)
       {
-        chkActorRoles.Visible = true; 
+        chkActorRoles.Visible = true;
         chkActorRoles.Enabled = true;
       }
 
@@ -2726,7 +2726,7 @@ namespace Grabber_Interface
         case 47:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartCollectionImageURL)._Value = TextKeyStartD.Text;
           break;
-        
+
         default:
           TextKeyStartD.Text = "";
           break;
@@ -2973,9 +2973,9 @@ namespace Grabber_Interface
       if (rowSelected >= 0 && this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "+++")
         button_GoDetailPage.Text = "Display Next Page";
       else if (rowSelected >= 0 && this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "---")
-          button_GoDetailPage.Text = "Display Previous Page";
-        else
-          button_GoDetailPage.Text = "Use with Detail Page";
+        button_GoDetailPage.Text = "Display Previous Page";
+      else
+        button_GoDetailPage.Text = "Use with Detail Page";
       this.button_GoDetailPage.Enabled = rowSelected >= 0;
       //this.dataGridViewSearchResults.Rows[rowSelected].Selected = false;
       //this.dataGridViewSearchResults.Rows[rowSelected - 1].Selected = true;
@@ -3033,7 +3033,7 @@ namespace Grabber_Interface
         MessageBox.Show("No Config loaded !", "Error");
         return;
       }
-      
+
       Stopwatch watch = new Stopwatch();
       string totalruntime = string.Empty;
       watch.Reset();
@@ -3067,7 +3067,7 @@ namespace Grabber_Interface
       {
         textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
         mapped = i > 39 ? " (mapped)" : "";
- 
+
         switch (i)
         {
           case 0:
@@ -3076,7 +3076,7 @@ namespace Grabber_Interface
           case 40:
             textPreview.SelectedText += Environment.NewLine;
             textPreview.SelectedText += Environment.NewLine;
-            textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline); 
+            textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
             textPreview.SelectedText += "MAPPED OUTPUT FIELDS:" + Environment.NewLine;
             textPreview.SelectedText += Environment.NewLine;
             textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
@@ -3108,7 +3108,7 @@ namespace Grabber_Interface
               }
               try
               {
-                pictureBoxPreviewCollection.ImageLocation =  Path.Combine(Path.GetDirectoryName(Result[i]), "Collection_" + Path.GetFileName(Result[i])) ;
+                pictureBoxPreviewCollection.ImageLocation = Path.Combine(Path.GetDirectoryName(Result[i]), "Collection_" + Path.GetFileName(Result[i]));
                 //FileInfo f = new FileInfo(Result[i]);
                 //labelImageSize.Text = this.ByteString(f.Length);
               }
@@ -4449,28 +4449,28 @@ namespace Grabber_Interface
           }
           catch { }
         }
+        try
+        {
+          // Create new FileInfo object and get the Length.
+          FileInfo f = new FileInfo(find);
+          labelImageSize.Text = this.ByteString(f.Length);
+        }
+        catch
+        {
           try
           {
-            // Create new FileInfo object and get the Length.
-            FileInfo f = new FileInfo(find);
-            labelImageSize.Text = this.ByteString(f.Length);
-          }
-          catch
-          {
-            try
-            {
-              string strTemp = Environment.GetEnvironmentVariable("TEMP") + @"\MFgrabpreview.jpg";
-              try { System.IO.File.Delete(strTemp); }
-              catch (Exception) { }
-              GrabUtil.DownloadImage(find, strTemp);
-              FileInfo f = new FileInfo(strTemp);
-              labelImageSize.Text = this.ByteString(f.Length);
-              pictureBoxPreviewCover.ImageLocation = strTemp;
-              //try { System.IO.File.Delete(strTemp); }
-              //catch (Exception) { }
-            }
+            string strTemp = Environment.GetEnvironmentVariable("TEMP") + @"\MFgrabpreview.jpg";
+            try { System.IO.File.Delete(strTemp); }
             catch (Exception) { }
+            GrabUtil.DownloadImage(find, strTemp);
+            FileInfo f = new FileInfo(strTemp);
+            labelImageSize.Text = this.ByteString(f.Length);
+            pictureBoxPreviewCover.ImageLocation = strTemp;
+            //try { System.IO.File.Delete(strTemp); }
+            //catch (Exception) { }
           }
+          catch (Exception) { }
+        }
       }
 
     }
@@ -4668,7 +4668,7 @@ namespace Grabber_Interface
       //string value = TagName.KeyCreditsMaxItems;
       //if (xmlConf.listDetail != null && TagName.KeyCreditsMaxItems != null && cbMaxActors.Text != null && cbMaxActors != null)
       if (cbMaxActors.SelectedIndex != -1)
-          xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = cbMaxActors.Text;
+        xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = cbMaxActors.Text;
     }
 
     private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -4684,30 +4684,30 @@ namespace Grabber_Interface
 
     private void cbMaxDirectors_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbMaxDirectors.SelectedIndex != -1) 
+      if (cbMaxDirectors.SelectedIndex != -1)
         xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value = cbMaxDirectors.Text;
     }
 
     private void cbMaxWriters_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbMaxWriters.SelectedIndex != -1) 
+      if (cbMaxWriters.SelectedIndex != -1)
         xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value = cbMaxWriters.Text;
     }
 
     private void cbTtitlePreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
-        xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value = cbTtitlePreferredLanguage.Text;
+      xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value = cbTtitlePreferredLanguage.Text;
     }
 
     private void cbTtitleMaxTitles_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbTtitleMaxTitles.SelectedIndex != -1) 
+      if (cbTtitleMaxTitles.SelectedIndex != -1)
         xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value = cbTtitleMaxTitles.Text;
     }
 
     private void cbCertificationPreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbCertificationPreferredLanguage.SelectedIndex != -1) 
+      if (cbCertificationPreferredLanguage.SelectedIndex != -1)
         xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value = cbCertificationPreferredLanguage.Text;
     }
 
@@ -4724,7 +4724,7 @@ namespace Grabber_Interface
       foreach (string field in Fields)
       {
         if (!string.IsNullOrEmpty(field) && !field.Contains("URL") && !field.Contains("All "))
-        Column2.Items.Add(field);
+          Column2.Items.Add(field);
       }
       for (int i = 0; i < 40; i++)
       {
@@ -4848,7 +4848,7 @@ namespace Grabber_Interface
           }
         }
       }
-      catch (Exception) {}
+      catch (Exception) { }
     }
 
     private void textBody_CursorChanged(object sender, EventArgs e)

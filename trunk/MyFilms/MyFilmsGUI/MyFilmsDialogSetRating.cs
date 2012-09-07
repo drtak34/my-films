@@ -37,6 +37,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   /// </summary>
   public class MyFilmsDialogSetRating : MediaPortal.Dialogs.GUIDialogWindow
   {
+    public decimal Rating { get; set; }
+    public string FileName { get; set; }
+    public ResultCode Result { get; private set; }
+    
     public enum ResultCode
     {
       Close,
@@ -46,25 +50,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     };
 
     [SkinControl(2)]
-    //protected GUILabelControl lblHeading = null;
-    protected GUIFadeLabel lblHeading = null;
+    protected GUIFadeLabel LblHeading = null;
     [SkinControlAttribute(4)]
-    protected GUILabelControl lblName = null;
+    protected GUILabelControl LblName = null;
     [SkinControlAttribute(5)]
-    protected GUILabelControl lblRating = null;
+    protected GUILabelControl LblRating = null;
     [SkinControlAttribute(10)]
-    protected GUIButtonControl btnPlus = null;
+    protected GUIButtonControl BtnPlus = null;
     [SkinControlAttribute(11)]
-    protected GUIButtonControl btnMin = null;
+    protected GUIButtonControl BtnMin = null;
     [SkinControlAttribute(12)]
-    protected GUIButtonControl btnOk = null;
+    protected GUIButtonControl BtnOk = null;
     [SkinControlAttribute(100)]
-    protected GUIImageList imgStar = null;
-
-    decimal rating = 1;
+    protected GUIImageList ImgStar = null;
 
     public MyFilmsDialogSetRating()
     {
+      Rating = 1;
       GetID = MyFilms.ID_MyFilmsDialogRating;
     }
 
@@ -96,23 +98,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
     {
       base.OnClicked(controlId, control, actionType);
-      if (control == btnOk)
+      if (control == this.BtnOk)
       {
         PageDestroy();
         this.Result = ResultCode.Close;
         return;
       }
-      if (control == btnMin)
+      if (control == this.BtnMin)
       {
-        if (rating >= (decimal)0.1) 
-            rating = rating - (decimal)0.1;
+        if (this.Rating >= (decimal)0.1)
+          this.Rating = this.Rating - (decimal)0.1;
         UpdateRating();
         return;
       }
-      if (control == btnPlus)
+      if (control == this.BtnPlus)
       {
-        if (rating < 10)
-            rating = rating + (decimal)0.1;
+        if (this.Rating < 10)
+          this.Rating = this.Rating + (decimal)0.1;
         UpdateRating();
         return;
       }
@@ -139,13 +141,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       return base.OnMessage(message);
     }
+
     public void SetHeading(string strLine)
     {
       LoadSkin();
       AllocResources();
       InitControls();
-        
-      lblHeading.Label = strLine;
+
+      this.LblHeading.Label = strLine;
     }
 
     public void SetHeading(int iString)
@@ -163,17 +166,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void UpdateRating()
     {
-        MyFilmsDetail.setGUIProperty("rating", Rating.ToString());
+      MyFilmsDetail.setGUIProperty("rating", Rating.ToString());
     }
-
-    public decimal Rating
-    {
-      get { return rating; }
-      set { rating = value; }
-    }
-
-    public string FileName { get; set; }
-
-    public ResultCode Result { get; private set; }
   }
 }

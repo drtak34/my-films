@@ -85,7 +85,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   public class XmlSettings : IDisposable
   {
     public XmlSettings(string fileName)
-      : this(fileName, true) {}
+      : this(fileName, true) { }
 
     public XmlSettings(string fileName, bool isCached)
     {
@@ -217,7 +217,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       SetValueAsBool(section, entry, bValue);
     }
-    
+
     public void SetValueAsBool(string section, string entry, bool bValue)
     {
       SetValue(section, entry, bValue ? "yes" : "no");
@@ -253,7 +253,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-    public void Clear() {}
+    public void Clear() { }
 
     public static void SaveCache()
     {
@@ -268,7 +268,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     #region Fields
 
     private bool _isCached;
-    private static Dictionary<string, ISettingsProvider>  xmlCache = new Dictionary<string, ISettingsProvider>();
+    private static Dictionary<string, ISettingsProvider> xmlCache = new Dictionary<string, ISettingsProvider>();
     private string xmlFileName;
     private ISettingsProvider xmlDoc;
 

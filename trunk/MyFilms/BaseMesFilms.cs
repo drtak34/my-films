@@ -51,7 +51,7 @@ namespace MyFilmsPlugin.MyFilms
     public BaseMesFilms()
     {
     }
-    
+
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
 
@@ -251,7 +251,7 @@ namespace MyFilmsPlugin.MyFilms
 
     private static void CreateEmptyDataFile(string datafile)
     {
-      XmlTextWriter destXml = new XmlTextWriter(datafile, System.Text.Encoding.Default);
+      var destXml = new XmlTextWriter(datafile, System.Text.Encoding.Default);
       destXml.Formatting = Formatting.Indented;
       destXml.WriteStartDocument();
       destXml.WriteStartElement("MyFilmsData");
@@ -996,7 +996,7 @@ namespace MyFilmsPlugin.MyFilms
       }
       return wtab;
     }
-    
+
     /// <summary>
     /// Updates a list of movies for a given config
     /// </summary>
@@ -1160,7 +1160,7 @@ namespace MyFilmsPlugin.MyFilms
                           // use existiung MUS data
                           multiUserData = new MultiUserData(sr.MultiUserState);
                         }
-                        
+
                         // now update Trakt update requests to MUS data
                         var user = multiUserData.GetUserState(movie.Username);
                         string oldEnhancedWatchedValue = multiUserData.ResultValueString();
@@ -1199,7 +1199,7 @@ namespace MyFilmsPlugin.MyFilms
                             if (sr.RatingUser > 5)
                             {
                               LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              sr.Favorite =  Helper.Add(sr["Favorite"].ToString(), UserProfileName);
+                              sr.Favorite = Helper.Add(sr["Favorite"].ToString(), UserProfileName);
                             }
                             else
                             {

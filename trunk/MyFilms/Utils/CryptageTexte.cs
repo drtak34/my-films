@@ -29,92 +29,87 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Security.Cryptography;
 
   public class Crypto
-	{
-		byte[] Clef = {0xAD, 0x24, 0xFE, 0x58, 0xC5, 0x81, 0x37, 0xB4, 0xF9, 0x97, 0x23, 0xD2, 0x13, 0x86, 0xBB, 0xA7};
-		byte[] Vect = {0x81, 0xFD, 0xC3, 0xBB, 0x0A, 0xE6, 0xFE, 0xB8, 0xD9, 0xC0, 0x0C, 0x92, 0x73, 0xD4, 0x1A, 0xF2};
-		
-		RijndaelManaged rj = new RijndaelManaged();
+  {
+    readonly byte[] clef = { 0xAD, 0x24, 0xFE, 0x58, 0xC5, 0x81, 0x37, 0xB4, 0xF9, 0x97, 0x23, 0xD2, 0x13, 0x86, 0xBB, 0xA7 };
+    readonly byte[] vect = { 0x81, 0xFD, 0xC3, 0xBB, 0x0A, 0xE6, 0xFE, 0xB8, 0xD9, 0xC0, 0x0C, 0x92, 0x73, 0xD4, 0x1A, 0xF2 };
 
-		public Crypto()
-		{
-			// Constructeur : Code exécuté à chaque création d'un objet CryptageTexte.Crypto() : aucun !
-			// Ce constructeur est nécessaire, même "vide".
-		}
+    readonly RijndaelManaged rj = new RijndaelManaged();
 
-		
-		// ************************ CRYPTER(Textebrut)*******************************
-		/// <summary>
-		/// Fonction de cryptage : elle necessite en argument une chaîne de caractères,
-		/// et renvoie une chaîne de caractères cryptée (cipher-text).
-		/// <param name=" TexteBrut"></param>
-		/// <returns name="string CypherTexte"></returns>
+    public Crypto()
+    {
+    }
+
+    // ************************ CRYPTER(Textebrut)*******************************
+    /// <summary>
+    /// Fonction de cryptage : elle necessite en argument une chaîne de caractères,
+    /// et renvoie une chaîne de caractères cryptée (cipher-text).
+    /// <param name=" TexteBrut"></param>
+    /// <returns name="string CypherTexte"></returns>
     /// </summary>
     // ***************************************************************************
 
-		public string Crypter(string TexteBrut)
-		{
+    public string Crypter(string TexteBrut)
+    {
       if (TexteBrut.Length == 0)
         return string.Empty;
-			MemoryStream CypherTexteMem = new MemoryStream();
-			
-			CryptoStream CStream = new CryptoStream(CypherTexteMem, 
-			rj.CreateEncryptor(Clef, Vect),	CryptoStreamMode.Write);
-			
-			byte[] TextebrutByte = new UnicodeEncoding().GetBytes(TexteBrut);
-            
-			CStream.Write(TextebrutByte, 0, TextebrutByte.Length);
- 			CStream.Close();
-			
-			byte[] CypherTexteByte = CypherTexteMem.ToArray();
-			
-			CypherTexteMem.Close();
-			string CypherTexte = new UnicodeEncoding().GetString(CypherTexteByte);
-			
-			return CypherTexte;
-		}
+      var cypherTexteMem = new MemoryStream();
+
+      var cStream = new CryptoStream(cypherTexteMem,
+      rj.CreateEncryptor(this.clef, this.vect), CryptoStreamMode.Write);
+
+      byte[] textebrutByte = new UnicodeEncoding().GetBytes(TexteBrut);
+
+      cStream.Write(textebrutByte, 0, textebrutByte.Length);
+      cStream.Close();
+
+      byte[] cypherTexteByte = cypherTexteMem.ToArray();
+
+      cypherTexteMem.Close();
+      string CypherTexte = new UnicodeEncoding().GetString(cypherTexteByte);
+
+      return CypherTexte;
+    }
 
 
-		// ************************ DECRYPTER(Textebrut)*****************************
-		/// <summary>
-		/// Fonction de décryptage : elle necessite en argument une chaîne de 
-		/// caractères cryptés (cipher-text) et renvoie une chaîne de caractères.
-		/// <param name="CypherTexte"></param>
-		/// <returns name="Textebrut"></returns>
+    // ************************ DECRYPTER(Textebrut)*****************************
+    /// <summary>
+    /// Fonction de décryptage : elle necessite en argument une chaîne de 
+    /// caractères cryptés (cipher-text) et renvoie une chaîne de caractères.
+    /// <param name="CypherTexte"></param>
+    /// <returns name="Textebrut"></returns>
     /// </summary>
     // ***************************************************************************
 
-		public string Decrypter(string CypherTexte)
-		{
+    public string Decrypter(string CypherTexte)
+    {
       if (CypherTexte.Length == 0)
-        return string.Empty;	
-			MemoryStream CypherTexteMem = new MemoryStream(new UnicodeEncoding().GetBytes(CypherTexte));
-			
-			CryptoStream CStream = new CryptoStream(CypherTexteMem, rj.CreateDecryptor(Clef, Vect),CryptoStreamMode.Read);
-			
-			MemoryStream TextebrutMem = new MemoryStream();
-			
-			do
-			{
-				byte[] buf = new byte[100];
-				
-				Int32 BytesLus = CStream.Read(buf,0,100);
-				
-				if (0 == BytesLus)
-					break;
-				
-				TextebrutMem.Write(buf,0,BytesLus);
+        return string.Empty;
+      var cypherTexteMem = new MemoryStream(new UnicodeEncoding().GetBytes(CypherTexte));
+      var cStream = new CryptoStream(cypherTexteMem, rj.CreateDecryptor(this.clef, this.vect), CryptoStreamMode.Read);
+      var textebrutMem = new MemoryStream();
 
-			}while(true);
-			
-			CStream.Close();
-			CypherTexteMem.Close();
-			
-			byte[] TextebrutByte = TextebrutMem.ToArray();
-			
-			TextebrutMem.Close();
-			
-			string Textebrut = new UnicodeEncoding().GetString(TextebrutByte);
-			return Textebrut;
-		}
-	}
+      do
+      {
+        var buf = new byte[100];
+
+        Int32 bytesLus = cStream.Read(buf, 0, 100);
+
+        if (0 == bytesLus)
+          break;
+
+        textebrutMem.Write(buf, 0, bytesLus);
+
+      } while (true);
+
+      cStream.Close();
+      cypherTexteMem.Close();
+
+      byte[] textebrutByte = textebrutMem.ToArray();
+
+      textebrutMem.Close();
+
+      string Textebrut = new UnicodeEncoding().GetString(textebrutByte);
+      return Textebrut;
+    }
+  }
 }

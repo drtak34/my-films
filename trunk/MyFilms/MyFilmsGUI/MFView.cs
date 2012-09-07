@@ -15,201 +15,94 @@ namespace MyFilmsPlugin.MyFilmsGUI
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
-    public MFView() { }
-    public MyFilms.ViewContext CurrentContext // "Boolselect" - or Films, Views, Persons, Herarchies ... GetSelectFromDivX or GetFilmList ...
+    public MFView()
     {
-      get { return currentContext; }
-      set { currentContext = value; }
+      CurrentContext = MyFilms.ViewContext.Menu;
     }
-    private MyFilms.ViewContext currentContext = MyFilms.ViewContext.Menu;
 
+    public MyFilms.ViewContext CurrentContext { get; set; }  // "Boolselect" - or Films, Views, Persons, Herarchies ... GetSelectFromDivX or GetFilmList ...
     public int ID { get; set; }
-
     public int PrevID { get; set; }  // to access  a state via "PrevID"
-
     public View StartSettings { get; set; }
-
     public View CurrentSettings { get; set; }
   }
 
   public class View
   {
-    public View() { }
-   
+    public View()
+    {
+      FilmsSortDirection = string.Empty;
+      FilmsSortItemFriendlyName = string.Empty;
+      FilmsSortItem = string.Empty;
+      FilmsLayout = 0;
+      HierarchySortDirection = string.Empty;
+      HierarchySortItemFriendlyName = string.Empty;
+      HierarchySortItem = string.Empty;
+      HierarchyLayout = 0;
+      PersonsSortDirection = string.Empty;
+      PersonsSortItemFriendlyName = string.Empty;
+      PersonsSortType = MyFilms.ViewSortType.Name;
+      PersonsLayout = 0;
+      ViewFilter = string.Empty;
+      ViewSortDirection = string.Empty;
+      ViewSortType = MyFilms.ViewSortType.Name;
+      ViewLayout = 0;
+      ViewDBItemValue = string.Empty;
+      ViewDBItem = string.Empty;
+      ViewDisplayName = string.Empty;
+      ViewContext = MyFilms.ViewContext.Menu;
+      ID = -1;
+    }
+
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
     #region public vars
-    public int ID
-    {
-      get { return _ID; }
-      set { _ID = value; }
-    }
-    private int _ID = -1;
 
-    public MyFilms.ViewContext ViewContext
-    {
-      get { return viewContext; }
-      set { viewContext = value; }
-    }
-    private MyFilms.ViewContext viewContext = MyFilms.ViewContext.Menu;
-
-    public string ViewDisplayName
-    {
-      get { return viewDisplayName; }
-      set { viewDisplayName = value; }
-    }
-    private string viewDisplayName = string.Empty;
-
-    public string ViewDBItem
-    {
-      get { return viewDBItem; }
-      set { viewDBItem = value; }
-    }
-    private string viewDBItem = string.Empty;
-
-    public string ViewDBItemValue
-    {
-      get { return viewDBItemValue; }
-      set { viewDBItemValue = value; }
-    }
-    private string viewDBItemValue = string.Empty;
-
-    public MyFilms.Layout ViewLayout
-    {
-      get { return viewLayout; }
-      set { viewLayout = value; }
-    }
-    private MyFilms.Layout viewLayout = 0;
-
-    public MyFilms.ViewSortType ViewSortType // Name or Occurencies
-    {
-      get { return viewSortType; }
-      set { viewSortType = value; }
-    }
-    private MyFilms.ViewSortType viewSortType = MyFilms.ViewSortType.Name;
-
-    public string ViewSortDirection
-    {
-      get { return viewSortDirection; }
-      set { viewSortDirection = value; }
-    }
-    private string viewSortDirection = string.Empty;
-
-    public string ViewFilter  // to e.g. apply userdefined or global filters on view !
-    {
-      get { return viewFilter; }
-      set { viewFilter = value; }
-    }
-    private string viewFilter = string.Empty;
-
-    public MyFilms.Layout PersonsLayout
-    {
-      get { return personsLayout; }
-      set { personsLayout = value; }
-    }
-    private MyFilms.Layout personsLayout = 0;
-
-    public MyFilms.ViewSortType PersonsSortType // Name or Occurencies
-    {
-      get { return personsSortType; }
-      set { personsSortType = value; }
-    }
-    private MyFilms.ViewSortType personsSortType = MyFilms.ViewSortType.Name;
-
-    public string PersonsSortItemFriendlyName
-    {
-      get { return personsSortItemFriendlyName; }
-      set { personsSortItemFriendlyName = value; }
-    }
-    private string personsSortItemFriendlyName = string.Empty;
-
-    public string PersonsSortDirection
-    {
-      get { return personsSortDirection; }
-      set { personsSortDirection = value; }
-    }
-    private string personsSortDirection = string.Empty;
-
-    public MyFilms.Layout HierarchyLayout
-    {
-      get { return hierarchyLayout; }
-      set { hierarchyLayout = value; }
-    }
-    private MyFilms.Layout hierarchyLayout = 0;
-
-    public string HierarchySortItem
-    {
-      get { return hierarchySortItem; }
-      set { hierarchySortItem = value; }
-    }
-    private string hierarchySortItem = string.Empty;
-
-    public string HierarchySortItemFriendlyName
-    {
-      get { return hierarchySortItemFriendlyName; }
-      set { hierarchySortItemFriendlyName = value; }
-    }
-    private string hierarchySortItemFriendlyName = string.Empty;
-
-    public string HierarchySortDirection
-    {
-      get { return hierarchySortDirection; }
-      set { hierarchySortDirection = value; }
-    }
-    private string hierarchySortDirection = string.Empty;
-
-    public MyFilms.Layout FilmsLayout
-    {
-      get { return filmsLayout; }
-      set { filmsLayout = value; }
-    }
-    private MyFilms.Layout filmsLayout = 0;
-
-    public string FilmsSortItem
-    {
-      get { return filmsSortItem; }
-      set { filmsSortItem = value; }
-    }
-    private string filmsSortItem = string.Empty;
-
-    public string FilmsSortItemFriendlyName
-    {
-      get { return filmsSortItemFriendlyName; }
-      set { filmsSortItemFriendlyName = value; }
-    }
-    private string filmsSortItemFriendlyName = string.Empty;
-
-    public string FilmsSortDirection
-    {
-      get { return filmsSortDirection; }
-      set { filmsSortDirection = value; }
-    }
-    private string filmsSortDirection = string.Empty;
-
+    public int ID { get; set; }
+    public MyFilms.ViewContext ViewContext { get; set; }
+    public string ViewDisplayName { get; set; }
+    public string ViewDBItem { get; set; }
+    public string ViewDBItemValue { get; set; }
+    public MyFilms.Layout ViewLayout { get; set; }
+    public MyFilms.ViewSortType ViewSortType { get; set; }
+    public string ViewSortDirection { get; set; }
+    public string ViewFilter { get; set; }
+    public MyFilms.Layout PersonsLayout { get; set; }
+    public MyFilms.ViewSortType PersonsSortType { get; set; }
+    public string PersonsSortItemFriendlyName { get; set; }
+    public string PersonsSortDirection { get; set; }
+    public MyFilms.Layout HierarchyLayout { get; set; }
+    public string HierarchySortItem { get; set; }
+    public string HierarchySortItemFriendlyName { get; set; }
+    public string HierarchySortDirection { get; set; }
+    public MyFilms.Layout FilmsLayout { get; set; }
+    public string FilmsSortItem { get; set; }
+    public string FilmsSortItemFriendlyName { get; set; }
+    public string FilmsSortDirection { get; set; }
 
     public void InitDefaults()
     {
-      _ID = -1;
-      viewContext = MyFilms.ViewContext.Menu;
-      viewDisplayName = "Films";
-      viewDBItem = "OriginalTitle";
-      viewDBItemValue = "";
-      viewLayout = MyFilms.Layout.List;
-      viewSortType = MyFilms.ViewSortType.Name;
-      viewSortDirection = " ASC";
-      viewFilter = string.Empty;
-      personsLayout = MyFilms.Layout.List;
-      personsSortType = MyFilms.ViewSortType.Name;
-      personsSortItemFriendlyName = string.Empty;
-      personsSortDirection = " ASC";
-      hierarchyLayout = MyFilms.Layout.List;
-      hierarchySortItem = "OriginalTitle";
-      hierarchySortItemFriendlyName = string.Empty;
-      hierarchySortDirection = " ASC";
-      filmsLayout = MyFilms.Layout.List;
-      filmsSortItem = "SortTitle";
-      filmsSortItemFriendlyName = string.Empty;
-      filmsSortDirection = " ASC";
+      this.ID = -1;
+      this.ViewContext = MyFilms.ViewContext.Menu;
+      this.ViewDisplayName = "Films";
+      this.ViewDBItem = "OriginalTitle";
+      this.ViewDBItemValue = "";
+      this.ViewLayout = MyFilms.Layout.List;
+      this.ViewSortType = MyFilms.ViewSortType.Name;
+      this.ViewSortDirection = " ASC";
+      this.ViewFilter = string.Empty;
+      this.PersonsLayout = MyFilms.Layout.List;
+      this.PersonsSortType = MyFilms.ViewSortType.Name;
+      this.PersonsSortItemFriendlyName = string.Empty;
+      this.PersonsSortDirection = " ASC";
+      this.HierarchyLayout = MyFilms.Layout.List;
+      this.HierarchySortItem = "OriginalTitle";
+      this.HierarchySortItemFriendlyName = string.Empty;
+      this.HierarchySortDirection = " ASC";
+      this.FilmsLayout = MyFilms.Layout.List;
+      this.FilmsSortItem = "SortTitle";
+      this.FilmsSortItemFriendlyName = string.Empty;
+      this.FilmsSortDirection = " ASC";
     }
 
     public string SaveToString()
@@ -256,6 +149,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
       FilmsSortItemFriendlyName = split[18];
       FilmsSortDirection = split[19];
     }
+
     #endregion
   }
 

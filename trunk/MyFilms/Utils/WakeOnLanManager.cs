@@ -50,11 +50,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
     [StructLayout(LayoutKind.Sequential)]
     private struct MIB_IPNETROW
     {
-      [MarshalAs(UnmanagedType.U4)] public int dwIndex;
-      [MarshalAs(UnmanagedType.U4)] public int dwPhysAddrLen;
-      [MarshalAs(UnmanagedType.ByValArray, SizeConst = PHYSADDR_MAXLEN)] public byte[] bPhysAddr;
-      [MarshalAs(UnmanagedType.U4)] public int dwAddr;
-      [MarshalAs(UnmanagedType.U4)] public int dwType;
+      [MarshalAs(UnmanagedType.U4)]
+      public int dwIndex;
+      [MarshalAs(UnmanagedType.U4)]
+      public int dwPhysAddrLen;
+      [MarshalAs(UnmanagedType.ByValArray, SizeConst = PHYSADDR_MAXLEN)]
+      public byte[] bPhysAddr;
+      [MarshalAs(UnmanagedType.U4)]
+      public int dwAddr;
+      [MarshalAs(UnmanagedType.U4)]
+      public int dwType;
     }
 
     #endregion
@@ -100,14 +105,14 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
 
         int entries = Marshal.ReadInt32(buffer);
-        IntPtr currentBuffer = new IntPtr(buffer.ToInt64() + sizeof (int));
+        IntPtr currentBuffer = new IntPtr(buffer.ToInt64() + sizeof(int));
         table = new MIB_IPNETROW[entries];
 
         for (int i = 0; i < entries; i++)
         {
           table[i] = (MIB_IPNETROW)Marshal.PtrToStructure(
-                                     new IntPtr(currentBuffer.ToInt64() + (i * Marshal.SizeOf(typeof (MIB_IPNETROW)))),
-                                     typeof (MIB_IPNETROW)
+                                     new IntPtr(currentBuffer.ToInt64() + (i * Marshal.SizeOf(typeof(MIB_IPNETROW)))),
+                                     typeof(MIB_IPNETROW)
                                      );
         }
       }
@@ -308,8 +313,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
       LogMyFilms.Debug("MyFilms.WakeOnLanManager: address: '" + address + "'");
       byte[] addrn = new byte[6];
       string[] addr = address.Split(':');
-      if (addr.Length != 6) 
-          addr = address.Split('-');
+      if (addr.Length != 6)
+        addr = address.Split('-');
       if (addr.Length != 6)
       {
         throw new ArgumentOutOfRangeException("address", address, "not a valid hardware ethernet addresss");
@@ -331,4 +336,4 @@ namespace MyFilmsPlugin.MyFilms.Utils
   }
 }
 
-#endregion
+    #endregion

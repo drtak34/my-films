@@ -8,194 +8,194 @@ using MediaPortal.Configuration;
 
 class XmlConf
 {
-    
-    //Lists that contain all nodes
-    public List<ListNode> listGen = new List<ListNode>();
-    public List<ListNode> listSearch = new List<ListNode>();
-    public List<ListNode> listDetail = new List<ListNode>();
-    public List<ListNode> listMapping = new List<ListNode>();
 
-    //Contructeur
-    public XmlConf(string configFile)
+  //Lists that contain all nodes
+  public List<ListNode> listGen = new List<ListNode>();
+  public List<ListNode> listSearch = new List<ListNode>();
+  public List<ListNode> listDetail = new List<ListNode>();
+  public List<ListNode> listMapping = new List<ListNode>();
+
+  //Contructeur
+  public XmlConf(string configFile)
+  {
+    if (File.Exists(configFile))
+      init(configFile);
+    else
+      initNew(configFile);
+  }
+
+  public void initNew(string configFile)
+  {
+    //Assembly _ass = Assembly.GetExecutingAssembly();
+    //Stream _stream = _ass.GetManifestResourceStream(_ass.GetName().Name + ".MyFilmsSample.xml");
+
+    string MyFilmsSampleGrabber = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsSampleGrabber.xml";
+
+    var _xDoc = new XmlDocument();
+    var _str = new StreamReader(MyFilmsSampleGrabber, System.Text.Encoding.UTF8);
+    //StreamReader _str = new StreamReader(_stream, System.Text.Encoding.UTF8);
+    string _xmlStrings = string.Empty;
+
+    while (_str.Peek() > 0)
     {
-        if (File.Exists(configFile))
-            init(configFile);
-        else
-            initNew(configFile);
+      _xmlStrings += _str.ReadLine();
     }
 
-    public void initNew(string configFile)
+    File.WriteAllText(configFile, _xmlStrings, Encoding.UTF8);
+    init(configFile);
+  }
+
+  public void init(string configFile)
+  {
+    //Loading conf file
+    var doc = new XmlDocument();
+    doc.Load(configFile);
+
+    XmlNode n = doc.ChildNodes[1].FirstChild;
+    XmlNodeList l = n.ChildNodes;
+
+    for (int i = 0; i < l.Count; i++)
     {
-        //Assembly _ass = Assembly.GetExecutingAssembly();
-        //Stream _stream = _ass.GetManifestResourceStream(_ass.GetName().Name + ".MyFilmsSample.xml");
-
-        string MyFilmsSampleGrabber = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsSampleGrabber.xml";
-
-        XmlDocument _xDoc = new XmlDocument();
-        StreamReader _str = new StreamReader(MyFilmsSampleGrabber, System.Text.Encoding.UTF8);
-        //StreamReader _str = new StreamReader(_stream, System.Text.Encoding.UTF8);
-        string _xmlStrings = string.Empty;
-
-        while (_str.Peek() > 0)
-        {
-            _xmlStrings += _str.ReadLine();
-        }
-
-        File.WriteAllText(configFile, _xmlStrings, Encoding.UTF8);
-        init(configFile);
+      if (l.Item(i).ParentNode.Name == "Section"
+          && !l.Item(i).Name.Equals("URLSearch") && !l.Item(i).Name.Equals("Details") && !l.Item(i).Name.Equals("Mapping"))
+        setList(1, l.Item(i));
     }
 
-    public void init(string configFile)
+    l = n.SelectNodes("URLSearch/*");
+
+    for (int i = 0; i < l.Count; i++)
     {
-        //Loading conf file
-        XmlDocument doc = new XmlDocument();
-        doc.Load(configFile);
-        
-        XmlNode n = doc.ChildNodes[1].FirstChild;
-        XmlNodeList l = n.ChildNodes;
-        
-        for (int i = 0; i<l.Count; i++)
-        {
-            if (l.Item(i).ParentNode.Name == "Section"
-                && !l.Item(i).Name.Equals("URLSearch") && !l.Item(i).Name.Equals("Details") && !l.Item(i).Name.Equals("Mapping"))
-                setList(1, l.Item(i));
-        }
-
-        l = n.SelectNodes("URLSearch/*");
-
-        for (int i = 0; i < l.Count; i++)
-        {
-            if (l.Item(i).ParentNode.Name == "URLSearch")
-                setList(2, l.Item(i));
-        }
-
-        l = n.SelectNodes("Details/*");
-
-        for (int i = 0; i < l.Count; i++)
-        {
-          if (l.Item(i).ParentNode.Name == "Details")
-            setList(3, l.Item(i));
-        }
-
-        l = n.SelectNodes("Mapping/*");
-
-        for (int i = 0; i < l.Count; i++)
-        {
-          if (l.Item(i).ParentNode.Name == "Mapping")
-            setList(4, l.Item(i));
-        }
-
+      if (l.Item(i).ParentNode.Name == "URLSearch")
+        setList(2, l.Item(i));
     }
 
-    /// <summary>
-    /// Adds a new element in the specified list.
-    /// Parameter List : 1 for listGen, 2 for listSearch, 3 for listDetail
-    /// </summary>
-    public void setList(int list, XmlNode node)
+    l = n.SelectNodes("Details/*");
+
+    for (int i = 0; i < l.Count; i++)
     {
-        XmlNode att1 = null;
-        XmlNode att2 = null;
-        XmlNode att3 = null;
-        XmlNode att4 = null;
-        XmlNode att5 = null;
-        XmlNode att6 = null;
-        XmlNode att7 = null;
-
-        for (int i = 0; i < node.Attributes.Count; i++)
-        {
-          switch (i)
-          {
-            case 0:
-              att1 = node.Attributes.Item(i);
-              break;
-            case 1:
-              att2 = node.Attributes.Item(i);
-              break;
-            case 2:
-              att3 = node.Attributes.Item(i);
-              break;
-            case 3:
-              att4 = node.Attributes.Item(i);
-              break;
-            case 4:
-              att5 = node.Attributes.Item(i);
-              break;
-            case 5:
-              att6 = node.Attributes.Item(i);
-              break;
-            case 6:
-              att7 = node.Attributes.Item(i);
-              break;
-          }
-          //if (i == 0)
-          //      att1 = node.Attributes.Item(i);
-          //  else
-          //      att2 = node.Attributes.Item(i);
-        }
-        switch (list)
-        {
-            case 1:
-                listGen.Add(new ListNode(node.Name,
-                    XmlConvert.DecodeName(node.InnerText), 
-                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)), 
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)), 
-                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)), 
-                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)), 
-                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
-                    (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
-                    (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
-
-                break;
-            case 2:
-                listSearch.Add(new ListNode(node.Name,
-                    XmlConvert.DecodeName(node.InnerText),
-                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
-                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
-                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
-                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
-                    (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
-                    (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
-                break;
-            case 3:
-                listDetail.Add(new ListNode(node.Name,
-                    XmlConvert.DecodeName(node.InnerText),
-                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
-                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
-                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
-                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
-                    (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
-                    (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
-                break;
-            case 4:
-                listMapping.Add(new ListNode(node.Name,
-                    XmlConvert.DecodeName(node.InnerText),
-                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
-                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
-                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
-                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
-                    (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
-                    (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
-                break;
-        }
+      if (l.Item(i).ParentNode.Name == "Details")
+        setList(3, l.Item(i));
     }
 
-    /// <summary>
-    /// Recherche un élément dans la liste et le retourne
-    /// Paramètre list : 1 pour listGen, 2 pour listSearch, 3 pour listDetail
-    /// </summary>
-    public ListNode find(List<ListNode> list, string name)
+    l = n.SelectNodes("Mapping/*");
+
+    for (int i = 0; i < l.Count; i++)
     {
-		ListNode _l = list.Find(l => l._Tag.Equals(name));
-		if(_l != null)
-			return _l;
-		_l = new ListNode(name, "", "", "", "", "", "", "", "");
-		list.Add(_l);
-		return _l;
+      if (l.Item(i).ParentNode.Name == "Mapping")
+        setList(4, l.Item(i));
     }
-              
+
+  }
+
+  /// <summary>
+  /// Adds a new element in the specified list.
+  /// Parameter List : 1 for listGen, 2 for listSearch, 3 for listDetail
+  /// </summary>
+  public void setList(int list, XmlNode node)
+  {
+    XmlNode att1 = null;
+    XmlNode att2 = null;
+    XmlNode att3 = null;
+    XmlNode att4 = null;
+    XmlNode att5 = null;
+    XmlNode att6 = null;
+    XmlNode att7 = null;
+
+    for (int i = 0; i < node.Attributes.Count; i++)
+    {
+      switch (i)
+      {
+        case 0:
+          att1 = node.Attributes.Item(i);
+          break;
+        case 1:
+          att2 = node.Attributes.Item(i);
+          break;
+        case 2:
+          att3 = node.Attributes.Item(i);
+          break;
+        case 3:
+          att4 = node.Attributes.Item(i);
+          break;
+        case 4:
+          att5 = node.Attributes.Item(i);
+          break;
+        case 5:
+          att6 = node.Attributes.Item(i);
+          break;
+        case 6:
+          att7 = node.Attributes.Item(i);
+          break;
+      }
+      //if (i == 0)
+      //      att1 = node.Attributes.Item(i);
+      //  else
+      //      att2 = node.Attributes.Item(i);
+    }
+    switch (list)
+    {
+      case 1:
+        listGen.Add(new ListNode(node.Name,
+            XmlConvert.DecodeName(node.InnerText),
+            (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
+            (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+            (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+            (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+            (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
+            (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
+            (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
+
+        break;
+      case 2:
+        listSearch.Add(new ListNode(node.Name,
+            XmlConvert.DecodeName(node.InnerText),
+            (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
+            (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+            (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+            (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+            (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
+            (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
+            (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
+        break;
+      case 3:
+        listDetail.Add(new ListNode(node.Name,
+            XmlConvert.DecodeName(node.InnerText),
+            (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
+            (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+            (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+            (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+            (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
+            (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
+            (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
+        break;
+      case 4:
+        listMapping.Add(new ListNode(node.Name,
+            XmlConvert.DecodeName(node.InnerText),
+            (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
+            (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+            (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+            (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+            (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText)),
+            (att6 == null ? null : XmlConvert.DecodeName(att6.InnerText)),
+            (att7 == null ? null : XmlConvert.DecodeName(att7.InnerText))));
+        break;
+    }
+  }
+
+  /// <summary>
+  /// Recherche un élément dans la liste et le retourne
+  /// Paramètre list : 1 pour listGen, 2 pour listSearch, 3 pour listDetail
+  /// </summary>
+  public ListNode find(List<ListNode> list, string name)
+  {
+    ListNode _l = list.Find(l => l._Tag.Equals(name));
+    if (_l != null)
+      return _l;
+    _l = new ListNode(name, "", "", "", "", "", "", "", "");
+    list.Add(_l);
+    return _l;
+  }
+
 }
 
 
@@ -203,100 +203,100 @@ class XmlConf
  * Représente un noeud du fichier de conf
  * Contient le nom du tag, sa valeur, et 2 attributs.
  * 
- */ 
+ */
 class ListNode
 {
-    private string tag = string.Empty;
-    private string value = string.Empty;
-    private string param1 = string.Empty;
-    private string param2 = string.Empty;
-    private string param3 = string.Empty;
-    private string param4 = string.Empty;
-    private string param5 = string.Empty;
-    private string param6 = string.Empty;
-    private string param7 = string.Empty;
+  private string tag = string.Empty;
+  private string value = string.Empty;
+  private string param1 = string.Empty;
+  private string param2 = string.Empty;
+  private string param3 = string.Empty;
+  private string param4 = string.Empty;
+  private string param5 = string.Empty;
+  private string param6 = string.Empty;
+  private string param7 = string.Empty;
 
-    public ListNode(string tag, string value, string param1, string param2, string param3, string param4, string param5, string param6, string param7)
-    {
-        this.tag = tag;
-        this.value = value;
-        if (param1 == null)
-            param1 = "";
-        this.param1 = param1;
-        if (param2 == null)
-          param2 = "";
-        this.param2 = param2;
+  public ListNode(string tag, string value, string param1, string param2, string param3, string param4, string param5, string param6, string param7)
+  {
+    this.tag = tag;
+    this.value = value;
+    if (param1 == null)
+      param1 = "";
+    this.param1 = param1;
+    if (param2 == null)
+      param2 = "";
+    this.param2 = param2;
 
-        if (param3 == null)
-          param3 = "";
-        this.param3 = param3;
-        if (param4 == null)
-          param4 = "";
-        this.param4 = param4;
-        if (param5 == null)
-          param5 = "";
-        this.param5 = param5;
-        if (param6 == null)
-          param6 = "";
-        this.param6 = param6;
-        if (param7 == null)
-          param7 = "";
-        this.param7 = param7;
-    }
+    if (param3 == null)
+      param3 = "";
+    this.param3 = param3;
+    if (param4 == null)
+      param4 = "";
+    this.param4 = param4;
+    if (param5 == null)
+      param5 = "";
+    this.param5 = param5;
+    if (param6 == null)
+      param6 = "";
+    this.param6 = param6;
+    if (param7 == null)
+      param7 = "";
+    this.param7 = param7;
+  }
 
-    public string _Tag
-    {
-        get { return tag; }
-        set { tag = value; }
-    }
+  public string _Tag
+  {
+    get { return tag; }
+    set { tag = value; }
+  }
 
-    public string _Value
-    {
-        get { return this.value; }
-        set { this.value = value; }
-    }
+  public string _Value
+  {
+    get { return this.value; }
+    set { this.value = value; }
+  }
 
-    public string _Param1
-    {
-        get { return param1; }
-        set { param1 = value; }
-    }
+  public string _Param1
+  {
+    get { return param1; }
+    set { param1 = value; }
+  }
 
-    public string _Param2
-    {
-      get { return param2; }
-      set { param2 = value; }
-    }
+  public string _Param2
+  {
+    get { return param2; }
+    set { param2 = value; }
+  }
 
-    public string _Param3
-    {
-      get { return param3; }
-      set { param3 = value; }
-    }
+  public string _Param3
+  {
+    get { return param3; }
+    set { param3 = value; }
+  }
 
-    public string _Param4
-    {
-      get { return param4; }
-      set { param4 = value; }
-    }
+  public string _Param4
+  {
+    get { return param4; }
+    set { param4 = value; }
+  }
 
-    public string _Param5
-    {
-      get { return param5; }
-      set { param5 = value; }
-    }
-    
-    public string _Param6
-    {
-      get { return param6; }
-      set { param6 = value; }
-    }
+  public string _Param5
+  {
+    get { return param5; }
+    set { param5 = value; }
+  }
 
-    public string _Param7
-    {
-      get { return param7; }
-      set { param7 = value; }
-    }
+  public string _Param6
+  {
+    get { return param6; }
+    set { param6 = value; }
+  }
+
+  public string _Param7
+  {
+    get { return param7; }
+    set { param7 = value; }
+  }
 }
 
 
@@ -383,7 +383,7 @@ public class TagName
   public static string KeyLinkSynIndex = "KeyLinkSynIndex";
   public static string KeyLinkSynPage = "KeyLinkSynPage";
   public static string KeyEncodingLinkSyn = "KeyEncodingLinkSyn"; // Added Encoding as override options for webpages not properly posting page encoding
-  
+
   public static string KeyStartSyn = "KeyStartSyn";             // Synopsis / Description
   public static string KeyEndSyn = "KeyEndSyn";
   public static string KeySynIndex = "KeySynIndex";
@@ -430,7 +430,7 @@ public class TagName
   public static string KeyLinkPersonsIndex = "KeyLinkPersonsIndex";
   public static string KeyLinkPersonsPage = "KeyLinkPersonsPage";
   public static string KeyEncodingLinkPersons = "KeyEncodingLinkPersons"; // Added Encoding as override options for webpages not properly posting page encoding
-  
+
   public static string KeyStartLinkTitles = "KeyStartLinkTitles";
   public static string KeyEndLinkTitles = "KeyEndLinkTitles";
   public static string KeyLinkTitlesIndex = "KeyLinkTitlesIndex";
@@ -549,7 +549,7 @@ public class TagName
   public static string KeyGeneric3Language = "KeyGeneric3Language";
   public static string KeyGeneric3Page = "KeyGeneric3Page";
 
-// new added for extended scraping 2011-10-04
+  // new added for extended scraping 2011-10-04
   //URL Redirection Multi Posters
   //URL Redirection Photos
   //URL Redirection PersonImages

@@ -321,10 +321,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #endregion
     public static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the  downloading from a queue for e.g. actor images
 
-
     static Queue<DBPersonInfo> PersonstoDownloadQueue = new Queue<DBPersonInfo>();
     // private object locker = new object();
-
 
     internal static List<string> theOnlineVideosViews = new List<string>();
     internal static List<KeyValuePair<string, string>> onlineVideosViews = new List<KeyValuePair<string, string>>();
@@ -2442,7 +2440,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           Directory.CreateDirectory(path);
         }
-        catch (Exception) {}
+        catch (Exception) { }
 
       switch (site)
       {
@@ -2489,7 +2487,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         theOnlineVideosViews.Add(ovv.Value);
       }
     }
-    
+
     private List<KeyValuePair<string, string>> GetOnlineVideosViews()
     {
       // check if we have already got them
@@ -5883,7 +5881,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         //LogMyFilms.Debug("(SearchFanart) - safename(file) = '" + wfile + "'");
         //LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + title + "}.jpg") + "'");
-        if ((main || (searched == "file")) && File.Exists(safeName + "\\{" + title + "}.jpg")) 
+        if ((main || (searched == "file")) && File.Exists(safeName + "\\{" + title + "}.jpg"))
         {
           wfanart[0] = safeName + "\\{" + title + "}.jpg";
           wfanart[1] = "file";
