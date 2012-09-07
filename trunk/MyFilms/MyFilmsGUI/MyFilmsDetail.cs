@@ -6451,7 +6451,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       clearGUIProperty("user.watched.value", log);
       clearGUIProperty("user.watched.count", log);
       clearGUIProperty("user.watched.date", log);
-      clearGUIProperty("user.watched.name", log);
+      clearGUIProperty("user.name.value", log);
       clearGUIProperty("user.watched.global", log);
       clearGUIProperty("user.source.isonline", log);
       clearGUIProperty("user.sourcetrailer.isonline", log);
@@ -6618,7 +6618,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 setGUIProperty("user.watched.value", user.WatchedCount > 0 ? "true" : "");
                 setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > MultiUserData.NoWatchedDate) ? user.WatchedDate.ToShortDateString() : "");
                 setGUIProperty("user.watched.count", user.WatchedCount.ToString());
-                setGUIProperty("user.watched.name", (user.UserName != MyFilms.DefaultUsername) ? user.UserName : "");
+                setGUIProperty("user.name.value", (user.UserName != MyFilms.DefaultUsername) ? user.UserName : "");
                 setGUIProperty("user.watched.global", userData.GetGlobalState().WatchedCount.ToString());
                 setGUIProperty("user.rating.value", (user.UserRating > MultiUserData.NoRating) ? Math.Round(user.UserRating, 1).ToString() : "");
               }

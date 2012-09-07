@@ -2346,11 +2346,11 @@
       <posX>1251</posX>
       <posY>627</posY>
       <width>280</width>
-      <label>#myfilms.user.watched.name #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
+      <label>#myfilms.user.name.value #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
       <font>font10</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="500">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -2371,7 +2371,7 @@
       <font>font9</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value,)+!control.isvisible(34)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="500">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
@@ -2395,7 +2395,7 @@
       <align>right</align>
       <imagesToDraw>10</imagesToDraw>
       <percentage>#myfilms.user.rating.value</percentage>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value,)+string.equals(#myfilms.user.watched.name)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.rating.value,)+string.equals(#myfilms.user.name.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="500">visiblechange</animation>

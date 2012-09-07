@@ -568,11 +568,11 @@
 	  <posX>290</posX>
 	  <posY>587</posY>
 	  <width>430</width>
-      <label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
+      <label>#myfilms.user.name.value: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
       <font>font10</font>
       <align>left</align>
       <textcolor>ffffcc00</textcolor>
-      <visible>string.equals(#myfilms.user.watched.name)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+      <visible>string.equals(#myfilms.user.name.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
 	  <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
 	  <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>	
     </control>
@@ -1088,11 +1088,11 @@
 	<posX>810</posX>
 	<posY>680</posY>
 	<width>100</width>
-	<label>#myfilms.user.watched.name:</label>
+	<label>#myfilms.user.name.value:</label>
 	<font>font10</font>
 	<align>right</align>
 	<textcolor>ff6FAFE1</textcolor>
-	<visible>string.equals(#myfilms.user.watched.name)+!Control.HasFocus(10099)+!player.hasmedia</visible>
+	<visible>string.equals(#myfilms.user.name.value)+!Control.HasFocus(10099)+!player.hasmedia</visible>
     </control>
     <control>
 	<description>Trakt User Offline Icon</description>
@@ -1106,7 +1106,7 @@
 	<keepaspectratio>yes</keepaspectratio>
 	<centered>yes</centered>
 	<colordiffuse>c0ffffff</colordiffuse>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,offline)+!player.hasmedia</visible>
+	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.onlinestatus,offline)+!player.hasmedia</visible>
     </control>
     <control>
 	<description>Trakt User Online Icon</description>
@@ -1120,7 +1120,7 @@
 	<keepaspectratio>yes</keepaspectratio>
 	<centered>yes</centered>
 	<colordiffuse>c0ffffff</colordiffuse>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,online)+!player.hasmedia</visible>
+	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.onlinestatus,online)+!player.hasmedia</visible>
     </control>
     <control>
 	<description>Local User Icon</description>
@@ -1134,7 +1134,7 @@
 	<keepaspectratio>yes</keepaspectratio>
 	<centered>yes</centered>
 	<colordiffuse>c0ffffff</colordiffuse>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)+string.equals(#myfilms.user.watched.onlinestatus,local)+!player.hasmedia</visible>
+	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.onlinestatus,local)+!player.hasmedia</visible>
     </control>
 
     <!-- Facade Layouts (keep after cover/view image controls for correct display of images) -->
