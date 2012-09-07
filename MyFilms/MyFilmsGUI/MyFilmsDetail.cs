@@ -5815,35 +5815,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //                          title = Translated Title if any or Original Title
     //                          main = true for main screen and false for detailed
     //                          searched = dir for Directory searched (detail screen and control multiImage)or file 
-    //                          rep = true if the selected Item is a grouped Item (country, genre, year...) on main screen
+    //                          isGroupView = true if the selected Item is a grouped Item (country, genre, year...) on main screen
     //                          filecover = name of the file cover for using 'Default Cover for missing Fanart'
     //      value returned string[2]
     //                          [0] = file or directory found (if not " ")
     //                          [1] = file or dir
     //-------------------------------------------------------------------------------------------
 
-    public static string[] Search_Fanart(string title, bool main, string searched, bool rep, string filecover, string group)
+    public static string[] Search_Fanart(string title, bool main, string searched, bool isGroupView, string filecover, string group)
     {
-      return Search_Fanart(title, main, searched, rep, filecover, group, MyFilms.conf);
+      return Search_Fanart(title, main, searched, isGroupView, filecover, group, MyFilms.conf);
     }
-    public static string[] Search_Fanart(string title, bool main, string searched, bool rep, string filecover, string group, Configuration tmpconf)
+    public static string[] Search_Fanart(string title, bool main, string searched, bool isGroupView, string filecover, string group, Configuration tmpconf)
     //                     Search_Fanart(wlabel, true, "file", false, facadeFilms.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
     {
       //if (MyFilms.conf == tmpconf) LogMyFilms.Debug("Search_Fanart(): Using '" + title + "'");
-      var wfanart = new string[2];
+      string[] wfanart = new string[2];
       wfanart[0] = " ";
       wfanart[1] = " ";
       if (tmpconf.StrFanart)
       {
         if (title.Contains(tmpconf.TitleDelim))
-          title = title.Substring(title.LastIndexOf(tmpconf.TitleDelim, System.StringComparison.Ordinal) + 1); // Removed "trim", as there is no matching in details, if spacees are removed! old: title = title.Substring(title.LastIndexOf(tmpconf.TitleDelim) + 1).Trim();
+          title = title.Substring(title.LastIndexOf(tmpconf.TitleDelim, System.StringComparison.Ordinal) + 1);
         title = Grabber.GrabUtil.CreateFilename(title.ToLower()).Replace(' ', '.');
 
         if (!tmpconf.StrFanart)
           return wfanart;
 
         string safeName = string.Empty;
-        if (rep) // is group view 
+        if (isGroupView)
         {
           if ((group == "country" || group == "year" || group == "category") && tmpconf.StrFanartDefaultViews) // Default views and fanart for group view enabled?
           {
@@ -5877,13 +5877,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception e)
         {
-          LogMyFilms.Error("Title too long to create fanart path/filename from it - not loading fanart! - Exception: " + e.ToString());
+          LogMyFilms.Error("Title too long to create fanart path/filename from it - not loading fanart! - Exception: " + e.Message);
           return wfanart;
         }
 
         //LogMyFilms.Debug("(SearchFanart) - safename(file) = '" + wfile + "'");
         //LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + title + "}.jpg") + "'");
-        if ((!main && (searched != "file")) || !File.Exists(safeName + "\\{" + title + "}.jpg"))
+        if ((main || (searched == "file")) && File.Exists(safeName + "\\{" + title + "}.jpg")) 
         {
           wfanart[0] = safeName + "\\{" + title + "}.jpg";
           wfanart[1] = "file";
@@ -5892,7 +5892,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (Directory.Exists(safeName))
         {
-          if ((main) || (searched == "file"))
+          if (main || searched == "file")
           {
             if (Directory.GetFiles(safeName).Length > 0)
             {
@@ -6007,7 +6007,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           default:
             break;
         }
-        if ((tmpconf.StrFanartDflt) && !(rep) && System.IO.File.Exists(filecover))
+        if ((tmpconf.StrFanartDflt) && !(isGroupView) && System.IO.File.Exists(filecover))
         {
           wfanart[0] = filecover;
           wfanart[1] = "file";
@@ -6140,8 +6140,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //Should not Disable because of SpeedThumbs - Not working here .....
       setGUIProperty("picture", file);
       MyFilms.currentMovie.Picture = file;
-      // ToDo: Add for ImageSwapper Coverart (coverImage)
-      ////cover.Filename = file;
       //if (ImgDetFilm != null)
       //  ImgDetFilm.FileName = file;
 
