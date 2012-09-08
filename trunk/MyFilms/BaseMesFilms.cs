@@ -1969,8 +1969,8 @@ namespace MyFilmsPlugin.MyFilms
         case "Watched":
         case "watched":
           return GUILocalizeStrings.Get(10798685);
-        case "WatchedDate":
-        case "watcheddate":
+        case "DateWatched": // last seen
+        case "datewatched":
           return GUILocalizeStrings.Get(10798686);
         case "IMDB_Id":
         case "imdb_id":
@@ -2038,9 +2038,6 @@ namespace MyFilmsPlugin.MyFilms
         case "MultiUserState":
         case "multiusersdate":
           return GUILocalizeStrings.Get(10798930);
-        case "DateWatched": // last seen
-        case "datewatched":
-          return GUILocalizeStrings.Get(10798931);
         case "VirtualPathTitle": // virtual path = directory path plus movie title
         case "virtualpathtitle":
           return GUILocalizeStrings.Get(10798933);
