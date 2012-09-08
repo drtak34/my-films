@@ -10501,7 +10501,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
           {
-            sr.Favorite = sr.RatingUser > 5
+            sr.Favorite = sr.RatingUser > MultiUserData.FavoriteRating
                             ? MultiUserData.Add(sr.Favorite, conf.StrUserProfileName)
                             : MultiUserData.Remove(sr.Favorite, conf.StrUserProfileName);
           }

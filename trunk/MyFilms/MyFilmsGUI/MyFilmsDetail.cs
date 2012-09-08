@@ -1278,7 +1278,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (MyFilms.conf.StrUserProfileName.Length > 0)
             {
-              if (dlgRating.Rating > 5)
+              if (dlgRating.Rating > MultiUserData.FavoriteRating)
                 MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = MultiUserData.Add(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
               else
                 MyFilms.r[MyFilms.conf.StrIndex]["Favorite"] = MultiUserData.Remove(MyFilms.r[MyFilms.conf.StrIndex]["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
