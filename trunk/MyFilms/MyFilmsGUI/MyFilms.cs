@@ -3179,7 +3179,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (!sr[conf.StrMultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
               {
-                #region migrate status from configured (enhanced)watched field to new MultiUserStatus
+                #region migrate status from configured (enhanced)watched field to new MultiUserStates
                 MultiUserData userData;
                 if (sr[MyFilms.conf.StrWatchedField].ToString().Contains(":"))
                 {
@@ -9433,6 +9433,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalOptions.Add("userprofilename");
           }
 
+          // Delete UserProfileName
+          if (MyFilmsDetail.ExtendedStartmode("Global Settings - delete user profile"))
+          {
+            if (MyFilms.conf.EnhancedWatchedStatusHandling)
+            {
+              dlg1.Add(GUILocalizeStrings.Get(1079818));
+              choiceViewGlobalOptions.Add("userprofilenamedelete");
+            }
+          }
+
           // Choose grabber script for that session
           if (MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));
           if (!MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));
@@ -9653,7 +9663,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
 
         case "userprofilename":
-          #region choose global user profile name
+          #region choose user profile name
           Change_UserProfileName();
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
           using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
@@ -9668,6 +9678,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
           return;
+          #endregion
+
+        case "userprofilenamedelete":
+          #region delete user profile name
+          if (Delete_UserProfileName()) return;
+          break;
           #endregion
 
         case "globalwikihelp":
@@ -10449,7 +10465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region if the former user was the default user, migrate it to MUS!
             if (oldUserProfileName == DefaultUsername)
             {
-              #region migrate status from configured (enhanced)watched field to new MultiUserStatus
+              #region migrate status from configured (enhanced)watched field to new MultiUserStates
               if (sr[MyFilms.conf.StrWatchedField].ToString().Contains(":"))
               {
                 // old field was already multiuserdata - migrate it!
@@ -10489,13 +10505,94 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             ? MultiUserData.Add(sr.Favorite, conf.StrUserProfileName)
                             : MultiUserData.Remove(sr.Favorite, conf.StrUserProfileName);
           }
-          sr["MultiUserState"] = userData.MultiUserStatusValue;
+          sr["MultiUserState"] = userData.MultiUserStatesValue;
         }
         #endregion
       }
       watch.Stop();
       LogMyFilms.Debug("Change_UserProfileName() - finished updating DB fields... (" + (watch.ElapsedMilliseconds) + " ms)");
       #endregion
+    }
+
+    private bool Delete_UserProfileName()
+    {
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlg == null) return false;
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(1079818)); // Delete User Profile Name
+      var choiceGlobalUserProfileName = new List<string>();
+
+      // add Trakt user, if there is any configured:
+      if (Helper.IsTraktAvailableAndEnabled)
+      {
+        if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+        {
+          List<string> userlist = Helper.GetTraktUserList();
+
+          // Show List of users to login as
+          foreach (var userlogin in userlist)
+          {
+            if (userlogin != conf.StrUserProfileName)
+            {
+              dlg.Add(userlogin + " (Trakt)");
+              choiceGlobalUserProfileName.Add(userlogin);
+            }
+          }
+        }
+        else
+        {
+          string currentTraktuser = Helper.GetTraktUser();
+          if (!string.IsNullOrEmpty(currentTraktuser) && currentTraktuser != conf.StrUserProfileName)
+          {
+            dlg.Add(currentTraktuser + " (Trakt)");
+            choiceGlobalUserProfileName.Add(currentTraktuser);
+          }
+        }
+      }
+
+      // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
+      foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[conf.StrMultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
+      {
+        if (userprofilename != conf.StrUserProfileName)
+        {
+          if (userprofilename == "")
+          {
+            dlg.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
+            choiceGlobalUserProfileName.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
+          }
+          else
+          {
+            dlg.Add(userprofilename);
+            choiceGlobalUserProfileName.Add(userprofilename);
+          }
+        }
+      }
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1)
+        return false;
+      string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg.SelectedLabel];
+
+      #region delete all userdata for that selected user profile name
+      LogMyFilms.Debug("Delete_UserProfileName() - Delete username '" + strUserProfileNameSelection + "' from DB");
+      var watch = new Stopwatch(); watch.Reset(); watch.Start();
+      foreach (AntMovieCatalog.MovieRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
+      {
+        if (conf.EnhancedWatchedStatusHandling)
+        {
+          MultiUserData userData;
+          if (sr["MultiUserState"] != System.Convert.DBNull)
+          {
+            userData = new MultiUserData(sr.MultiUserState);
+            userData.DeleteUser(strUserProfileNameSelection);
+            sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+          }
+        }
+      }
+      watch.Stop();
+      LogMyFilms.Debug("Delete_UserProfileName() - finished updating DB fields... (" + (watch.ElapsedMilliseconds) + " ms)");
+      #endregion
+
+      return true;
     }
 
     private string Change_MovieGroupName(string movieTitle)

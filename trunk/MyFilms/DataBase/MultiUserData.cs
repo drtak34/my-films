@@ -16,11 +16,12 @@ namespace MyFilmsPlugin.DataBase
     public const decimal NoRating = -1;
     public static readonly DateTime NoWatchedDate = DateTime.MinValue;
 
-    public string MultiUserStatusValue { get; set; }
-    public List<UserState> MultiUserStatus { get; set; }
+    public string MultiUserStatesValue { get; set; }
+    public List<UserState> MultiUserStates { get; set; }
+    
     public MultiUserData(string value)
     {
-      this.MultiUserStatusValue = value;
+      this.MultiUserStatesValue = value;
       // if (!string.IsNullOrEmpty(value)) LogMyFilms.Debug("MultiUserData() - loaded with value = '" + value + "'");
       LoadUserStates();
     }
@@ -28,22 +29,22 @@ namespace MyFilmsPlugin.DataBase
     public UserState GetUserState(string username)
     {
       UserState userstate;
-      if (MultiUserStatus.Count(userState => userState.UserName == username) == 0)
+      if (this.MultiUserStates.Count(userState => userState.UserName == username) == 0)
       {
         userstate = new UserState(username);
-        MultiUserStatus.Add(userstate);
+        this.MultiUserStates.Add(userstate);
       }
-      userstate = MultiUserStatus.First(userState => userState.UserName == username);
+      userstate = this.MultiUserStates.First(userState => userState.UserName == username);
       return userstate;
     }
 
     public UserState GetGlobalState()
     {
-      // return this.MultiUserStatus.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
+      // return this.MultiUserStates.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
       var global = new UserState(MyFilms.GlobalUsername)
         { WatchedCount = 0, UserRating = NoRating, WatchedDate = NoWatchedDate };
 
-      foreach (UserState userState in MultiUserStatus.FindAll(x => x.UserName != MyFilms.GlobalUsername))
+      foreach (UserState userState in this.MultiUserStates.FindAll(x => x.UserName != MyFilms.GlobalUsername))
       {
         global.WatchedCount += userState.WatchedCount;
         if (userState.WatchedDate > global.WatchedDate) global.WatchedDate = userState.WatchedDate;
@@ -95,7 +96,7 @@ namespace MyFilmsPlugin.DataBase
     public string ResultValueString()
     {
       string resultValueString = string.Empty;
-      foreach (var state in MultiUserStatus)
+      foreach (var state in this.MultiUserStates.AsQueryable().OrderBy(x => x.UserName))
       {
         // LogMyFilms.Debug("LoadUserStates() - return state for user '" + state.UserName + "', rating = '" + state.UserRating + "', count = '" + state.WatchedCount + "', watched = '" + state.Watched + "', watcheddate = '" + state.WatchedDate + "'");
         // var sNew = ((!string.IsNullOrEmpty(state.UserName)) ? state.UserName : "*") + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
@@ -103,8 +104,16 @@ namespace MyFilmsPlugin.DataBase
         if (resultValueString.Length > 0) resultValueString += "|";
         resultValueString += sNew;
       }
-      // if (MultiUserStatusValue != resultValueString) LogMyFilms.Debug("ResultValueString() - modified MUS value = '" + resultValueString + "'");
+      // if (MultiUserStatesValue != resultValueString) LogMyFilms.Debug("ResultValueString() - modified MUS value = '" + resultValueString + "'");
       return resultValueString;
+    }
+
+    public void DeleteUser(string username)
+    {
+      foreach (var userState in this.MultiUserStates.Where(userState => userState.UserName == username))
+      {
+        this.MultiUserStates.Remove(userState);
+      }
     }
 
     private enum Type
@@ -117,9 +126,9 @@ namespace MyFilmsPlugin.DataBase
     
     private void LoadUserStates()
     {
-      if (MultiUserStatus == null) MultiUserStatus = new List<UserState>();
-      MultiUserStatus.Clear();
-      string[] split = MultiUserStatusValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+      if (this.MultiUserStates == null) this.MultiUserStates = new List<UserState>();
+      this.MultiUserStates.Clear();
+      string[] split = this.MultiUserStatesValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
       foreach (string s in split)
       {
         if (s.Contains(":"))
@@ -130,7 +139,7 @@ namespace MyFilmsPlugin.DataBase
           userstate.Watched = (userstate.WatchedCount > 0);
           userstate.WatchedDate = (DateTime)(EnhancedWatchedValue(s, Type.Datewatched));
           // LogMyFilms.Debug("LoadUserStates() - loading state for user '" + userstate.UserName + "', rating = '" + userstate.UserRating + "', count = '" + userstate.WatchedCount + "', watched = '" + userstate.Watched + "', watcheddate = '" + userstate.WatchedDate + "'");
-          MultiUserStatus.Add(userstate);
+          this.MultiUserStates.Add(userstate);
         }
       }
     }

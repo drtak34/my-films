@@ -777,7 +777,7 @@ namespace MyFilmsPlugin.MyFilms
         MultiUserData multiUserData;
         if (row[tmpconf.StrMultiUserStateField] == System.Convert.DBNull) // not yet migrated - do it now
         {
-          #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStatus
+          #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStates
           if (row[tmpconf.StrWatchedField].ToString().Contains(":"))
           {
             #region old field was already multiuserdata - use it!
@@ -1130,7 +1130,7 @@ namespace MyFilmsPlugin.MyFilms
                         MultiUserData multiUserData;
                         if (sr.IsMultiUserStateNull() || sr.MultiUserState.Length == 0) // not yet migrated - do it now
                         {
-                          #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStatus
+                          #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStates
                           if (sr[WatchedField].ToString().Contains(":"))
                           {
                             #region old field was already multiuserdata - migrate it!
