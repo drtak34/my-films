@@ -249,7 +249,7 @@
     <String id="10798683">Altersfreigabe</String>
     <String id="10798684">Drehbuchautor</String>
     <String id="10798685">Gesehen</String>
-    <String id="10798686">Zuletzt gesehen Datum</String>
+    <String id="10798686">Zuletzt gesehen</String>
     <String id="10798687">IMDB Id</String>
     <String id="10798688">TMDB Id</String>
     <String id="10798689">Globale Einstellungen ...</String>
@@ -361,7 +361,6 @@
     <String id="10798810">Lösche Cover aus der Datenbank</String>
     <String id="10798820">Anzeige Feld (Details)</String>
     <String id="10798930">Mehrbenutzer Status</String>
-    <String id="10798931">Zuletzt gesehen</String>
     <String id="10798932">Alternative Filmtitel</String>
     <String id="10798933">Filmname (Virtueller Verzeichnispfad)</String>
     <String id="10798940">Quellpfad Trailer</String>
