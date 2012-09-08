@@ -1196,7 +1196,7 @@ namespace MyFilmsPlugin.MyFilms
                           if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
                           if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
                           {
-                            if (sr.RatingUser > 5)
+                            if (sr.RatingUser > MultiUserData.FavoriteRating)
                             {
                               LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
                               sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
@@ -1289,7 +1289,7 @@ namespace MyFilmsPlugin.MyFilms
                       if (WatchedField.Length > 0) sr[WatchedField] = user.Watched ? "true" : GlobalUnwatchedOnlyValue;
                       if (UserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
                       {
-                        if (sr.RatingUser > 5)
+                        if (sr.RatingUser > MultiUserData.FavoriteRating)
                         {
                           sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
                         }
