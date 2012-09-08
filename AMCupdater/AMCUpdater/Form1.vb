@@ -2580,6 +2580,7 @@ Public Class Form1
 
             Dim DBFields() As String
             DBFields = CurrentSettings.Database_Fields_To_Import.Split(";")
+            Array.Sort(DBFields)
             Dim FieldName As String
             Dim FieldSelected As Boolean
             Dim FieldFanart As Boolean = False
