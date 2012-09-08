@@ -1441,7 +1441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ArrayList DisplayItems = MyFilms.GetDisplayItems("viewitems");
             foreach (string[] displayItem in DisplayItems)
             {
-              dlg3.Add(displayItem[0] + "-" + displayItem[1]);
+              dlg3.Add(displayItem[1] + " (" + displayItem[0] + ")");
               choiceGlobalMappings.Add(displayItem[0]);
             }
           }
