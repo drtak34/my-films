@@ -10558,13 +10558,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (userprofilename == "")
           {
             dlg.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
-            choiceGlobalUserProfileName.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
           }
           else
           {
             dlg.Add(userprofilename);
-            choiceGlobalUserProfileName.Add(userprofilename);
           }
+          choiceGlobalUserProfileName.Add(userprofilename);
         }
       }
       dlg.DoModal(GetID);
