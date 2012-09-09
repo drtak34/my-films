@@ -568,7 +568,7 @@
 	  <posX>290</posX>
 	  <posY>587</posY>
 	  <width>430</width>
-      <label>#myfilms.user.name.value: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
+      <label>#myfilms.user.name.value: #myfilms.user.watchedcount.value/#myfilms.user.watchedcountglobal.value</label>
       <font>font10</font>
       <align>left</align>
       <textcolor>ffffcc00</textcolor>
