@@ -111,10 +111,7 @@ namespace MyFilmsPlugin.DataBase
 
     public void DeleteUser(string username)
     {
-      foreach (var userState in this.MultiUserStates.Where(userState => userState.UserName == username))
-      {
-        this.MultiUserStates.Remove(userState);
-      }
+      this.MultiUserStates.RemoveAll(x => x.UserName == username);
     }
 
     private enum Type
