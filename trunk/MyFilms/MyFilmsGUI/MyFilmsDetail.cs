@@ -6449,10 +6449,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       clearGUIProperty("user.sourcetrailer.count", log);
       clearGUIProperty("user.rating.value", log);
       clearGUIProperty("user.watched.value", log);
-      clearGUIProperty("user.watched.count", log);
-      clearGUIProperty("user.watched.date", log);
+      clearGUIProperty("user.watchedcount.value", log);
+      clearGUIProperty("user.watcheddate.value", log);
       clearGUIProperty("user.name.value", log);
-      clearGUIProperty("user.watched.global", log);
+      clearGUIProperty("user.watchedcountglobal.value", log);
       clearGUIProperty("user.source.isonline", log);
       clearGUIProperty("user.sourcetrailer.isonline", log);
 
@@ -6616,10 +6616,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 var userData = new MultiUserData(MyFilms.r[itemId][MyFilms.conf.StrMultiUserStateField].ToString());
                 UserState user = userData.GetUserState(MyFilms.conf.StrUserProfileName);
                 setGUIProperty("user.watched.value", user.WatchedCount > 0 ? "true" : "");
-                setGUIProperty("user.watched.date", (user.WatchedCount > 0 && user.WatchedDate > MultiUserData.NoWatchedDate) ? user.WatchedDate.ToShortDateString() : "");
-                setGUIProperty("user.watched.count", user.WatchedCount.ToString());
+                setGUIProperty("user.watcheddate.value", (user.WatchedCount > 0 && user.WatchedDate > MultiUserData.NoWatchedDate) ? user.WatchedDate.ToShortDateString() : "");
+                setGUIProperty("user.watchedcount.value", user.WatchedCount.ToString());
                 setGUIProperty("user.name.value", (user.UserName != MyFilms.DefaultUsername) ? user.UserName : "");
-                setGUIProperty("user.watched.global", userData.GetGlobalState().WatchedCount.ToString());
+                setGUIProperty("user.watchedcountglobal.value", userData.GetGlobalState().WatchedCount.ToString());
                 setGUIProperty("user.rating.value", (user.UserRating > MultiUserData.NoRating) ? Math.Round(user.UserRating, 1).ToString() : "");
               }
               else

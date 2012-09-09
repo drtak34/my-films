@@ -16031,23 +16031,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("user.source.label", GUILocalizeStrings.Get(10798648));
       MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
       MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
-      MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
+
+      MyFilmsDetail.setGUIProperty("user.name.label", GUILocalizeStrings.Get(10799310));
       MyFilmsDetail.setGUIProperty("user.rating.label", GUILocalizeStrings.Get(10798944));
+      MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
+      MyFilmsDetail.setGUIProperty("user.watchedcount.label", GUILocalizeStrings.Get(1079910));
+      MyFilmsDetail.setGUIProperty("user.watcheddate.label", GUILocalizeStrings.Get(10798686));
 
       MyFilmsDetail.setGUIProperty("person.name.label", GUILocalizeStrings.Get(10799301));
       MyFilmsDetail.setGUIProperty("person.dateofbirth.label", GUILocalizeStrings.Get(10799302));
       MyFilmsDetail.setGUIProperty("person.placeofbirth.label", GUILocalizeStrings.Get(10799303));
       MyFilmsDetail.setGUIProperty("person.biography.label", GUILocalizeStrings.Get(10799304));
 
-      MyFilmsDetail.setGUIProperty("user.name.label", GUILocalizeStrings.Get(10799310));
-
-      MyFilmsDetail.clearGUIProperty("user.rating.value");
-      MyFilmsDetail.clearGUIProperty("user.watched.value");
-      MyFilmsDetail.clearGUIProperty("user.watched.count");
-      MyFilmsDetail.clearGUIProperty("user.watched.date");
       MyFilmsDetail.clearGUIProperty("user.name.value");
       MyFilmsDetail.clearGUIProperty("user.onlinestatus");
-      MyFilmsDetail.clearGUIProperty("user.watched.global");
+      MyFilmsDetail.clearGUIProperty("user.rating.value");
+      MyFilmsDetail.clearGUIProperty("user.watched.value");
+      MyFilmsDetail.clearGUIProperty("user.watchedcount.value");
+      MyFilmsDetail.clearGUIProperty("user.watchedcountglobal.value");
+      MyFilmsDetail.clearGUIProperty("user.watcheddate.value");
 
       MyFilmsDetail.clearGUIProperty("user.source.isonline");
       MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");

@@ -593,10 +593,10 @@
 	<posX>840</posX>
 	<posY>125</posY>
 	<width>280</width>
-	<label>#myfilms.user.name.value: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
+	<label>#myfilms.user.name.value: #myfilms.user.watchedcount.value/#myfilms.user.watchedcountglobal.value</label>
 	<font>font10</font>
 	<align>left</align>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.watched.count,0)</visible>
+	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+string.equals(#myfilms.user.watchedcount.value,0)</visible>
     </control>
     <control>
 	<description>User: Watched Count/Global User Count User Rating</description>
@@ -605,11 +605,11 @@
 	<posX>840</posX>
 	<posY>125</posY>
 	<width>280</width>
-	<label>#myfilms.user.name.value: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
+	<label>#myfilms.user.name.value: #myfilms.user.watchedcount.value/#myfilms.user.watchedcountglobal.value</label>
 	<font>font10</font>
 	<align>left</align>
 	<textcolor>ccffcc00</textcolor>
-	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+!string.equals(#myfilms.user.watched.count,0)</visible>
+	<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.name.value)+!string.equals(#myfilms.user.watchedcount.value,0)</visible>
     </control>
     <control>
 	<description>Year - Length Value</description>
