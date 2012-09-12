@@ -25,8 +25,8 @@
 		<height>576</height>
 		<texture>background.png</texture>
 	</control>
-    <import>MyFilms.common.window.xml</import>
 	<!-- <import>common.time.xml</import> -->
+    <import>MyFilms.common.window.xml</import>
 
 	<!-- Added Date/Time for 1.2.x to match textcolors for 1.3.0 and style on Details Screen -->
 	<control>
@@ -34,7 +34,7 @@
 		<type>label</type>
 		<id>1</id>
 		<posX>690</posX>
-		<posY>10</posY>
+		<posY>12</posY>
 		<label>#date | #time</label>
 		<align>right</align>
 		<font>font11</font>
@@ -241,7 +241,7 @@
 		<texture>hover_Films.png</texture>
 		<keepaspectratio>yes</keepaspectratio>
 	</control> -->
-
+	
     <!-- GLOBAL FILTER SECTION -->
 	<control>
 		<description>Global Filter Icons group</description>
@@ -607,18 +607,30 @@
 		<animation effect="fade" time="250">visiblechange</animation>
 	</control>
 	<control>
-		<description>User Rating (multi-user user name)</description>
+		<description>User Rating</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>240</posX>
+		<posY>432</posY>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)',''))</label>
+		<font>font10</font>
+		<textcolor>ff6FAFE1</textcolor>
+		<align>left</align>
+		<visible>string.equals(#myfilms.user.rating.value)+[control.isvisible(36)|control.isvisible(39)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
+	</control>
+	<!-- <control>
+		<description>Multi-user user name (no User rating)</description>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>180</posX>
 		<posY>452</posY>
-		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)','User: '))#(iif(neq(#myfilms.user.name.value,''),' #myfilms.user.name.value',' (User)'))</label>
+		<label>#(iif(neq(#myfilms.user.name.value,'*'),'#(L(497)): #myfilms.user.name.value',''))</label>
 		<width>110</width>
 		<font>font10</font>
 		<textcolor>ff6FAFE1</textcolor>
 		<align>left</align>
-		<visible>[string.equals(#myfilms.user.rating.value)|string.equals(#myfilms.user.name.value)]+[control.isvisible(36)|control.isvisible(39)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
-	</control>
+		<visible>!string.equals(#myfilms.user.rating.value)+string.equals(#myfilms.user.name.value)]+[control.isvisible(36)|control.isvisible(39)]+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>		
+	</control> -->
 	<control>
 		<type>label</type>
 		<description>Year - Length (runtime)</description>
