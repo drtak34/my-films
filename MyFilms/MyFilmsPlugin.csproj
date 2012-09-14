@@ -227,7 +227,6 @@
     <Compile Include="MyFilmsGUI\MyFilmsCoverManager.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsDetail.cs" />
     <Compile Include="MyFilmsGUI\MyFilmsDialogSetRating.cs" />
-    <Compile Include="MyFilmsGUI\MyFilmsThumbs.cs" />
     <Compile Include="MyFilmsSettings.cs">
       <SubType>Code</SubType>
     </Compile>

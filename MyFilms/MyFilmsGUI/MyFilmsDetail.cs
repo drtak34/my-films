@@ -77,7 +77,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     enum Controls : int
     {
       //CTRL_TxtSelect = 12,
+      CTRL_DummyMovieThumbsAvailable = 45,
       CTRL_PersonFacade = 50,
+      CTRL_MovieThumbsFacade = 51,
       CTRL_BtnPlay = 10000,
       CTRL_BtnPlay1Description = 10001,
       CTRL_BtnPlay2Comment = 10002,
@@ -85,6 +87,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_BtnPlay4TecDetails = 10004,
       CTRL_BtnPlay5ExtraDetails = 10005,
       CTRL_ViewFanart = 10099,
+      CTRL_ViewMovieThumbs = 10100,
       CTRL_BtnReturn = 102,
       CTRL_BtnNext = 103,
       CTRL_BtnPrior = 104,
@@ -93,13 +96,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_BtnMaj = 107,
       CTRL_BtnActors = 108,
       CTRL_BtnPlayTrailer = 109,
-      CTRL_BtnActorThumbs = 110,
-      CTRL_BtnMovieThumbs = 111,
-      CTRL_BtnMovieInfos = 112,
       CTRL_Fanart = 1000,
       CTRL_FanartDir = 1001,
-      //CTRL_MovieThumbs = 1002,
-      //CTRL_MovieThumbsDir = 1002,
+      CTRL_MovieThumbsDir = 1002,
       CTRL_logos_id2001 = 2001,
       CTRL_logos_id2002 = 2002,
       CTRL_logos_id2003 = 2003,
@@ -107,12 +106,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_Title = 2025,
       CTRL_OTitle = 2026,
       CTRL_ImgDD = 2072,
-      CTRL_GuiWaitCursor = 2080,
-      CTRL_ActorMultiThumb = 3333,
+      CTRL_GuiWaitCursor = 2080
     }
 
     [SkinControlAttribute((int)Controls.CTRL_PersonFacade)] // to allow facade view in virtual actor/cast/crew screen
     protected GUIFacadeControl facadePersons;
+
+    [SkinControlAttribute((int)Controls.CTRL_MovieThumbsFacade)]
+    protected GUIFacadeControl facadeMovieThumbs;
+    [SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
+    protected GUIMultiImage ImgMovieThumbsDir;
+    [SkinControlAttribute((int)Controls.CTRL_DummyMovieThumbsAvailable)]
+    protected GUILabelControl dummyFacadeMovieThumbsAvailable = null;
 
     [SkinControlAttribute((int)Controls.CTRL_BtnMaj)]
     protected GUIButtonControl BtnMaj;
@@ -140,9 +145,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIImage ImgFanart;
     [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
     protected GUIMultiImage ImgFanartDir;
-
-    [SkinControlAttribute((int)Controls.CTRL_ActorMultiThumb)]
-    protected GUIMultiImage ActorMultiThumb = null;
 
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     static string wzone = null;
@@ -511,13 +513,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (ImgDetFilm2.IsVisible)
             ImgDetFilm2.Refresh();
 
+      if (facadeMovieThumbs != null)
+      {
+        facadeMovieThumbs.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+        // facadeMovieThumbs.Clear();
+        GUIControl.ClearControl(GetID, facadeMovieThumbs.GetID);
+        GUIControl.HideControl(GetID, (int)Controls.CTRL_MovieThumbsFacade);
+      }
+      // if (ImgMovieThumbsDir != null && ImgMovieThumbsDir.Visible) ImgMovieThumbsDir.Visible = false;
+
       BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
       BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
 
       wGetID = GetID;
       GUIControl.ShowControl(GetID, 35);
-      // ToDo: Should be unhidden, if ActorThumbs are implemented
-      GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
 
       m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
       if (MyFilms.conf.StrTxtSelect.Length == 0)
@@ -667,6 +676,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.StrIndex == 0) return;
           MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
           //GUITextureManager.CleanupThumbs();
+          //if (ImgMovieThumbsDir != null) ImgMovieThumbsDir.PreAllocResources();
           afficher_detail(true);
           if (MyFilms.conf.PersonsEnableDownloads) AddPersonsToDownloadQueue(); // add persons of current movie to download queue
           return;
@@ -676,6 +686,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.StrIndex == StrMax - 1) return;
           MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
           //GUITextureManager.CleanupThumbs();
+          // if (ImgMovieThumbsDir != null) ImgMovieThumbsDir.PreAllocResources();
           afficher_detail(true);
           if (MyFilms.conf.PersonsEnableDownloads) AddPersonsToDownloadQueue(); // add persons of current movie to download queue
           return;
@@ -743,6 +754,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             case (int)Controls.CTRL_ViewFanart:
               GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798757));
               break;
+            case (int)Controls.CTRL_ViewMovieThumbs:
+              GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798758));
+              break;
             default:
               GUIPropertyManager.SetProperty("#currentmodule", basename + "/" + GUILocalizeStrings.Get(10798751)); // GUIPropertyManager.SetProperty("#currentmodule", basename);
               break;
@@ -773,6 +787,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
               return true;
             case (int)Controls.CTRL_ViewFanart: // On Button goto MyFilmsThumbs // Changed to also launch player due to Ember Media Manager discontinued...
+            case (int)Controls.CTRL_ViewMovieThumbs:
               //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
               Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
               return true;
@@ -792,6 +807,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return true;
               MyFilms.conf.StrIndex = MyFilms.conf.StrIndex + 1;
               GUITextureManager.CleanupThumbs();
+              // if (ImgMovieThumbsDir != null) ImgMovieThumbsDir.PreAllocResources();
               afficher_detail(true);
               return true;
             case (int)Controls.CTRL_BtnPrior: // Display Prior Film (If first do nothing)
@@ -799,6 +815,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return true;
               MyFilms.conf.StrIndex = MyFilms.conf.StrIndex - 1;
               GUITextureManager.CleanupThumbs();
+              // if (ImgMovieThumbsDir != null) ImgMovieThumbsDir.PreAllocResources();
               afficher_detail(true);
               return true;
             case (int)Controls.CTRL_BtnLast: // Display Next Film (If last do nothing)
@@ -819,16 +836,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Change_Menu("mainmenu");  // was: Update_XML_Items();
               // GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
               return true;
-            case (int)Controls.CTRL_BtnMovieThumbs:
-              GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsThumbs);
-              return true;
             case (int)Controls.CTRL_BtnActors:
               GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
-              return true;
-            case (int)Controls.CTRL_BtnActorThumbs: // Show Actor Details Screen
-              GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
-              //GUIWindowManager.ShowPreviousWindow();
-              //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
               return true;
 
             default:
@@ -5736,6 +5745,79 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
 
 
+    private static bool MovieThumbsExist(int index)
+    {
+      string movieThumbsDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\MovieThumbs";
+      string title = GetSearchTitles(MyFilms.r[index], "").FanartTitle;
+      if (MyFilms.conf.StrFanart)
+      {
+        if (title.Contains(MyFilms.conf.TitleDelim)) title = title.Substring(title.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1);
+        title = Grabber.GrabUtil.CreateFilename(title.ToLower()).Replace(' ', '.');
+        string safeName = movieThumbsDirectory + "\\{" + title + "}"; // string safeName = MyFilms.conf.StrPathFanart + "\\{" + title + "}";
+
+        if (!Directory.Exists(safeName)) return false;
+        return Directory.GetFiles(safeName, @"*[single]*", SearchOption.TopDirectoryOnly).Length > 0;
+      }
+      return false;
+    }
+    
+    private static List<string> SearchMovieThumbs(int index, bool createmissingmoviethumbs) // searches moviethumbs for the current active movie in dataset
+    {
+      LogMyFilms.Debug("SearchMovieThumbs() - search or create movie thumbs started ...");
+      Stopwatch stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
+      Searchtitles stitles = GetSearchTitles(MyFilms.r[index], "");
+      string title = stitles.FanartTitle;
+
+      string movieThumbsDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\MovieThumbs";
+      List<string> moviethumbs = new List<string>();
+
+      if (MyFilms.conf.StrFanart)
+      {
+        if (title.Contains(MyFilms.conf.TitleDelim)) title = title.Substring(title.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1);
+        title = Grabber.GrabUtil.CreateFilename(title.ToLower()).Replace(' ', '.');
+
+        string safeName = movieThumbsDirectory + "\\{" + title + "}"; // string safeName = MyFilms.conf.StrPathFanart + "\\{" + title + "}";
+
+        try //Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
+        {
+          var wfile = new FileInfo(safeName + "\\{" + title + "}.jpg");
+        }
+        catch (Exception e)
+        {
+          LogMyFilms.Error("Title too long to create moviethumb path/filename from it - not loading moviethumbs! - Exception: " + e.Message);
+          return moviethumbs;
+        }
+
+        if (!Directory.Exists(safeName))
+        {
+          // GUIControl.HideControl(GUIWindowManager.ActiveWindow, (int)Controls.CTRL_MovieThumbsDir);
+          try { Directory.CreateDirectory(safeName); }
+          catch { }
+        }
+        
+        if (createmissingmoviethumbs && Directory.GetFiles(safeName, @"*[single]*", SearchOption.TopDirectoryOnly).Length == 0)
+        {
+          string movieFile = GetMediaPathOfFirstFile(MyFilms.r, index);
+          if (!string.IsNullOrEmpty(stitles.FanartTitle) && MyFilms.conf.StrFanart && !string.IsNullOrEmpty(movieFile))
+          {
+            try
+            {
+              bool success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), movieThumbsDirectory, GrabUtil.Artwork_Fanart_Type.MultipleSingleImagesAsMovieThumbs, movieFile, "localfanart", 0);
+            }
+            catch (Exception)
+            {
+            }
+          }
+        }
+        var validfiles = Directory.GetFiles(safeName, @"*[single]*", SearchOption.TopDirectoryOnly);
+        moviethumbs.AddRange(validfiles);
+      }
+      stopwatch.Stop();
+      LogMyFilms.Debug("SearchMovieThumbs() - found '" + moviethumbs.Count + "' moviethumbs for '" + title + "' (" + stopwatch.ElapsedMilliseconds + " ms).");
+      return moviethumbs;
+    }
+
+
     //-------------------------------------------------------------------------------------------
     //  Search Fanart Thumbs 
     //                          title = Translated Title if any or Original Title
@@ -6161,6 +6243,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             Load_Detailed_DB_PushPersonsToPersonFacade(MyFilms.conf.StrIndex);
             #endregion
+
+            Load_Detailed_DB_PushMovieThumbsToMovieThumbsFacade(MyFilms.conf.StrIndex, true);
+
           }
           catch (Exception ex)
           {
@@ -6965,9 +7050,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIControl.ClearControl(GetID, facadePersons.GetID);
 
       string personartworkpath = MyFilms.conf.StrPathArtist;
-      var w_tableau = new List<DBPersonInfo>();
-      w_tableau = MyFilms.Search_String_Persons(personscontent, false);
-      foreach (DBPersonInfo t in w_tableau)
+      List<DBPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
+      foreach (DBPersonInfo t in wTableau)
       {
         string actorname = t.Name;
         string actorrole = t.Job;
@@ -6984,6 +7068,64 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
         facadePersons.Add(item);
+      }
+    }
+
+    private void Load_Detailed_DB_PushMovieThumbsToMovieThumbsFacade(int index, bool createmissingmoviethumbs)
+    {
+      if (index > MyFilms.r.Length - 1 || (facadeMovieThumbs == null && ImgMovieThumbsDir == null)) return;
+
+      if (facadeMovieThumbs != null) 
+        GUIControl.ClearControl(GetID, facadeMovieThumbs.GetID);
+
+      if (ImgMovieThumbsDir != null)
+      {
+        if (!MovieThumbsExist(index))
+        {
+          SetMovieThumbDummyControl(false);
+        }
+      }
+
+      List<string> movieThumbs = SearchMovieThumbs(index, createmissingmoviethumbs);
+
+      if (facadeMovieThumbs != null)
+      {
+        foreach (string movieThumb in movieThumbs)
+        {
+          var item = new GUIListItem { IconImageBig = movieThumb };
+          facadeMovieThumbs.Add(item);
+        }
+      }
+
+      if (ImgMovieThumbsDir != null)
+      {
+        if (movieThumbs.Count > 0)
+        {
+          ImgMovieThumbsDir.TexturePath = (movieThumbs[0].LastIndexOf("\\", System.StringComparison.Ordinal) > 0) ? movieThumbs[0].Substring(0, movieThumbs[0].LastIndexOf("\\", System.StringComparison.Ordinal)) : movieThumbs[0];
+          ImgMovieThumbsDir.PreAllocResources();
+          ImgMovieThumbsDir.AllocResources();
+          SetMovieThumbDummyControl(true);
+        }
+        else
+        {
+          SetMovieThumbDummyControl(false);
+          // ImgMovieThumbsDir.PreAllocResources();
+        }
+      }
+    }
+
+    private void SetMovieThumbDummyControl(bool visible)
+    {
+      if (dummyFacadeMovieThumbsAvailable != null)
+      {
+        if (visible)
+        {
+          if (!dummyFacadeMovieThumbsAvailable.Visible) dummyFacadeMovieThumbsAvailable.Visible = true;
+        }
+        else
+        {
+          if (dummyFacadeMovieThumbsAvailable.Visible) dummyFacadeMovieThumbsAvailable.Visible = false;
+        }
       }
     }
 

@@ -327,32 +327,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //private BaseMesFilms films;
 
     #region Descriptif zones Ecran
+    internal const int ID_MyFilms = 7986;
+    internal const int ID_MyFilmsDetail = 7987;
+    internal const int ID_MyFilmsDialogRating = 7988;
+    internal const int ID_MyFilmsActors = 7989;
+    // internal const int ID_MyFilmsThumbs = 7990;
+    internal const int ID_MyFilmsActorsInfo = 7991;
+    internal const int ID_MyFilmsCoverManager = 7992;
+    internal const int ID_MyFilmsDialogMultiSelect = 7993;
+    internal const int ID_MyFilmsFanartManager = 7994;
 
-    public const int ID_MyFilms = 7986;
-    public const int ID_MyFilmsDetail = 7987;
-    public const int ID_MyFilmsDialogRating = 7988;
-    public const int ID_MyFilmsActors = 7989;
-    public const int ID_MyFilmsThumbs = 7990;
-    public const int ID_MyFilmsActorsInfo = 7991;
-    public const int ID_MyFilmsCoverManager = 7992;
-    public const int ID_MyFilmsDialogMultiSelect = 7993;
-    public const int ID_MyFilmsFanartManager = 7994;
+    internal const int ID_BrowseTheWeb = 54537689;
+    internal const int ID_OnlineVideos = 4755;
+    internal const int ID_SubCentral = 84623;
+    internal const int ID_BluRayPlayerLauncher = 8080;
 
-    public const int ID_BrowseTheWeb = 54537689;
-    public const int ID_OnlineVideos = 4755;
-    public const int ID_SubCentral = 84623;
-    public const int ID_BluRayPlayerLauncher = 8080;
+    internal const int cacheThumbWith = 400;
+    internal const int cacheThumbHeight = 600;
 
-    public const int cacheThumbWith = 400;
-    public const int cacheThumbHeight = 600;
-
-    public const string ImdbBaseUrl = "http://www.imdb.com/";
-    public const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
+    internal const string ImdbBaseUrl = "http://www.imdb.com/";
+    internal const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
 
     internal const string GlobalUsername = "Global";
     internal const string DefaultUsername = "Default";
 
-    enum Controls : int
+    internal enum Controls : int
     {
       CTRL_BtnLayout = 2,
       CTRL_BtnSortBy = 3,
@@ -14742,6 +14741,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views");
       if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons");
       if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Logos")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Logos");
+
+      if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\MovieThumbs")) Directory.CreateDirectory(MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\MovieThumbs");
     }
 
     private void InitializeBackgroundWorker()
