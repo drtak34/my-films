@@ -140,10 +140,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIImage ImgFanart;
     [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
     protected GUIMultiImage ImgFanartDir;
-    //[SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
-    //protected GUIImage ImgMovieThumbs = null;
-    //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
-    //protected GUIMultiImage ImgMovieThumbsDir = null;
 
     [SkinControlAttribute((int)Controls.CTRL_ActorMultiThumb)]
     protected GUIMultiImage ActorMultiThumb = null;
@@ -151,14 +147,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     static string wzone = null;
     int StrMax = 0;
-
-    public SQLiteClient m_db;
-    public class IMDBActorMovie
-    {
-      public string MovieTitle;
-      public string Role;
-      public int Year;
-    };
 
     public class Searchtitles
     {
@@ -179,76 +167,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static PlayListPlayer playlistPlayer;
     static VirtualDirectory m_directory = new VirtualDirectory();
-    BackgroundWorker bgPicture = new System.ComponentModel.BackgroundWorker();
+    BackgroundWorker bgPicture = new BackgroundWorker();
 
     static System.Windows.Forms.OpenFileDialog openFileDialog1 = new OpenFileDialog();
-    static VirtualDirectory virtualDirectory = new VirtualDirectory();
     static bool m_askBeforePlayingDVDImage = false;
     public static ArrayList result;
     public static string wsearchfile;
     public static int wGetID;
-    //public static bool isTrailer = false;
     public static bool trailerPlayed = false;
-    // public static bool trailerScrobblingMode = false;
     private bool PlayBackEvents_Subscribed = false;
     private bool doUpdateDetailsViewByFinishEvent = false;
 
     #region Enums
-    private enum Grabber_DB_Field
-    {
-      //case "Number":
-      //case "Checked":
-      //case "MediaLabel":
-      //case "MediaType":
-      //case "Source":
-      //case "Date":
-      //case "Borrower":
-      //case "Rating":
-      //case "OriginalTitle":
-      //case "TranslatedTitle":
-      //case "FormattedTitle":
-      //case "Director":
-      //case "Producer":
-      //case "Country":
-      //case "Category":
-      //case "Year":
-      //case "Length":
-      //case "Actors":
-      //case "URL":
-      //case "Description":
-      //case "Comments":
-      //case "VideoFormat":
-      //case "VideoBitrate":
-      //case "AudioFormat":
-      //case "AudioBitrate":
-      //case "Resolution":
-      //case "Framerate":
-      //case "Languages":
-      //case "Subtitles":
-      //case "DateAdded":
-      //case "Size":
-      //case "Disks":
-      //case "Picture":
-      //case "Certification":
-      //case "Writer":
-      //case "Watched":
-      //case "WatchedDate":
-      //case "IMDB_Id":
-      //case "TMDB_Id":
-      //case "SourceTrailer":
-      //case "TagLine":
-      //case "Tags":
-      //case "Aspectratio":
-      //case "RatingUser":
-      //case "Fanart":
-      //case "Studio":
-      //case "IMDB_Rank":
-      //case "IsOnline":
-      //case "Edition":
-      //case "IsOnlineTrailer":
-    }
-
-    private enum TraktGUIWindows
+    private enum TraktGuiWindows
     {
       Main = 87258,
       Calendar = 87259,
@@ -455,17 +386,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB unsuccessful - try IMDB ...");
             bDownloadSuccess = true;
-            IMDB _imdb = new IMDB();
-            _imdb.FindActor(f.Name);
+            IMDB imdb = new IMDB();
+            imdb.FindActor(f.Name);
 
-            if (_imdb.Count == 0)
+            if (imdb.Count == 0)
             {
               LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found on IMDB, remaining items: '" + PersonstoDownloadQueue.Count + "'");
               bDownloadSuccess = false;
             }
             else
             {
-              if (_imdb[0].URL.Length != 0)
+              if (imdb[0].URL.Length != 0)
               {
                 IMDBActor imdbActor = new IMDBActor();
                 //#if MP1X
@@ -473,7 +404,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //#else
                 //                    _imdb.GetActorDetails(_imdb[0], false, out imdbActor);
                 //#endif
-                GUIUtils.GetActorDetails(_imdb, _imdb[0], false, out imdbActor);
+                GUIUtils.GetActorDetails(imdb, imdb[0], false, out imdbActor);
                 if (imdbActor.ThumbnailUrl.Length > 0)
                 {
                   LogMyFilms.Debug("downloadingWorker_DoWork() - IMDB Image found for person '" + f.Name + "', URL = '" + imdbActor.ThumbnailUrl + "' - remaining items: '" + PersonstoDownloadQueue.Count + "'");
@@ -593,13 +524,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         clearGUIProperty("select"); //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
       else
         setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\")); //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
-      afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
 
       //if (ImgFanartDir != null) ImgFanartDir.TexturePath = "";
       //if (ImgFanart != null) ImgFanart.SetFileName(MyFilms.conf.DefaultFanartImage);
 
       base.OnPageLoad(); // let animations run and make sure visibility on secondary title can be set!
 
+      StrMax = MyFilms.r.Length; // selects records and sets StrIndex based on ItemId (leaves unchanged if ItemId=-1)
       afficher_detail(true);
 
       MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
@@ -1606,27 +1537,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "trakt-Main":
-          GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Main, "");
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Main, "");
           break;
 
         case "trakt-Calendar":
-          GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Calendar, "");
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Calendar, "");
           break;
 
         case "trakt-Friends":
-          GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Friends, "");
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Friends, "");
           break;
 
         case "trakt-RecommendationsMovies":
-          GUIWindowManager.ActivateWindow((int)TraktGUIWindows.RecommendationsMovies, "");
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.RecommendationsMovies, "");
           break;
 
         case "trakt-TrendingMovies":
-          GUIWindowManager.ActivateWindow((int)TraktGUIWindows.TrendingMovies, "");
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.TrendingMovies, "");
           break;
 
         case "trakt-WatchedListMovies":
-          GUIWindowManager.ActivateWindow((int)TraktGUIWindows.WatchedListMovies, "");
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.WatchedListMovies, "");
           break;
 
         case "trakt-AddToWatchedListMovies":
@@ -1643,7 +1574,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "trakt-Lists":
           if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
           {
-            GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Lists, "");
+            GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Lists, "");
           }
           else
           {
@@ -6050,12 +5981,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-
-    private void afficher_init(int ItemId)
-    {
-      StrMax = MyFilms.r.Length; // selects records and sets StrIndex based on ItemId (leaves unchanged if ItemId=-1)
-    }
-
     private void OnDetailsUpdated(bool searchPicture)
     {
       LogMyFilms.Debug("OnDetailsUpdated(): Received DetailUpdated event in context '" + GetID + "', doUpdateDetailsViewByFinishEvent '" + doUpdateDetailsViewByFinishEvent + "'");
@@ -6096,7 +6021,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
         // MyFilms.conf.StrTIndex = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Substring(TitlePos);
         string fullTitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-        int TitlePos = fullTitle.LastIndexOf(MyFilms.conf.TitleDelim, StringComparison.OrdinalIgnoreCase);
         MyFilms.conf.StrTIndex = ((fullTitle.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) > 0)
                                     ? fullTitle.Substring(fullTitle.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1)
                                     : fullTitle);
