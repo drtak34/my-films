@@ -2086,6 +2086,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Play groups as playlist (ToDo)
           if (this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder)
           {
+            conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+            conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
             MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
           }
           base.OnAction(action);
@@ -2103,6 +2105,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if ((action.m_key.KeyChar == 112) && this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
             {
+              conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+              conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
               MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
             }
             if ((action.m_key.KeyChar == 120) && Context_Menu)
@@ -10920,6 +10924,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (updChoice[dlg.SelectedLabel])
       {
         case "playmovie":
+          conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+          conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
           MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, false);
           break;
 
