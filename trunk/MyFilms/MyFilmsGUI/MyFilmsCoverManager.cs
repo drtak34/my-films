@@ -459,7 +459,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           case (int)MenuAction.LoadFromTmdb:
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), false, GetID, sTitles.OriginalTitle);
+            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.CreateFromMovie:
@@ -585,7 +585,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           case (int)MenuAction.LoadFromTmdb:
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.year.ToString(), false, GetID, sTitles.OriginalTitle);
+            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.CreateFromMovie:
