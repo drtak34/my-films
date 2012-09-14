@@ -10654,8 +10654,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079904)); // Context options ...
-      string[] upd_choice = new string[20];
-      int ichoice = 0;
+      List<string> updChoice = new List<string>();
       MyFilmsDetail.Searchtitles sTitles;
 
 
@@ -10665,36 +10664,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (conf.ViewContext == ViewContext.Menu)
         {
           dlg.Add(GUILocalizeStrings.Get(1079827)); // Disable Menu Entry
-          upd_choice[ichoice] = "menudisable";
-          ichoice++;
+          updChoice.Add("menudisable");
 
           if (MyFilms.conf.CustomViews.View.Any(viewRow => !viewRow.ViewEnabled))
           {
             dlg.Add(GUILocalizeStrings.Get(1079828)); // Enable Menu Entry
-            upd_choice[ichoice] = "menuenable";
-            ichoice++;
+            updChoice.Add("menuenable");
           }
 
           dlg.Add(GUILocalizeStrings.Get(1079820)); // Delete Menu Entry
-          upd_choice[ichoice] = "menudelete";
-          ichoice++;
+          updChoice.Add("menudelete");
           dlg.Add(GUILocalizeStrings.Get(1079821)); // Move Menu Entry Up
-          upd_choice[ichoice] = "menumoveup";
-          ichoice++;
+          updChoice.Add("menumoveup");
           dlg.Add(GUILocalizeStrings.Get(1079822)); // Move Menu Entry Down
-          upd_choice[ichoice] = "menumovedown";
-          ichoice++;
+          updChoice.Add("menumovedown");
           dlg.Add(GUILocalizeStrings.Get(1079824)); // Rename Menu Entry
-          upd_choice[ichoice] = "menurename";
-          ichoice++;
+          updChoice.Add("menurename");
           if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
           {
             dlg.Add(GUILocalizeStrings.Get(1079825)); // Set Film Filter Value
-            upd_choice[ichoice] = "menusetvalue";
-            ichoice++;
+            updChoice.Add("menusetvalue");
             dlg.Add(GUILocalizeStrings.Get(1079826)); // Set View Filter Expression
-            upd_choice[ichoice] = "menusetfilter";
-            ichoice++;
+            updChoice.Add("menusetfilter");
           }
         }
       }
@@ -10705,18 +10696,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
         if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "showemptyvaluesinviewscontext";
-        ichoice++;
+        updChoice.Add("showemptyvaluesinviewscontext");
 
         if (MyFilms.conf.IndexedChars > 0) dlg.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798628) + "/" + MyFilms.conf.IndexedChars)); // Show only indexed items in view
         if (MyFilms.conf.IndexedChars == 0) dlg.Add(string.Format(GUILocalizeStrings.Get(1079844), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "showindexedvalues";
-        ichoice++;
+        updChoice.Add("showindexedvalues");
 
         if (MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798628))); // Don't split values
         if (!MyFilms.conf.BoolDontSplitValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079845), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "dontsplitvaluesinviews";
-        ichoice++;
+        updChoice.Add("dontsplitvaluesinviews");
       }
       #endregion
 
@@ -10724,28 +10712,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
       {
         dlg.Add(GUILocalizeStrings.Get(1079866));//Search related movies by persons
-        upd_choice[ichoice] = "analogyperson";
-        ichoice++;
+        updChoice.Add("analogyperson");
 
         dlg.Add(GUILocalizeStrings.Get(10798614));//Search related movies by property
-        upd_choice[ichoice] = "analogyproperty";
-        ichoice++;
+        updChoice.Add("analogyproperty");
 
         dlg.Add(GUILocalizeStrings.Get(1079879));//Search Infos to related persons (load persons in facadeview) - only available in filmlist
-        upd_choice[ichoice] = "moviepersonlist";
-        ichoice++;
+        updChoice.Add("moviepersonlist");
 
         if (this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
         {
           dlg.Add(GUILocalizeStrings.Get(10798709));//play movie 
-          upd_choice[ichoice] = "playmovie";
-          ichoice++;
+          updChoice.Add("playmovie");
 
           if (MyFilms.conf.ExternalPlayerPath.Length > 0 && System.IO.File.Exists(MyFilms.conf.ExternalPlayerPath))
           {
             dlg.Add(GUILocalizeStrings.Get(10798500));//play movie  (external player)
-            upd_choice[ichoice] = "playmovieexternal";
-            ichoice++;
+            updChoice.Add("playmovieexternal");
           }
         }
 
@@ -10761,8 +10744,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (trailercount != "0")
             {
               dlg.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
-              upd_choice[ichoice] = "playtrailer";
-              ichoice++;
+              updChoice.Add("playtrailer");
             }
           }
 
@@ -10770,8 +10752,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilmsDetail.ExtendedStartmode("Context: random trailer scrobbling in views context"))
           {
             dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
-            upd_choice[ichoice] = "playrandomtrailers";
-            ichoice++;
+            updChoice.Add("playrandomtrailers");
           }
         }
 
@@ -10779,8 +10760,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           // set unwatched // set watched
           dlg.Add(facadeFilms.SelectedListItem.IsPlayed ? GUILocalizeStrings.Get(1079895) : GUILocalizeStrings.Get(1079894));
-          upd_choice[ichoice] = "togglewatchedstatus";
-          ichoice++;
+          updChoice.Add("togglewatchedstatus");
         }
 
         // Enable/disable global overlay filter could be added here for faster access ?
@@ -10790,25 +10770,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //ichoice++;
 
         dlg.Add(GUILocalizeStrings.Get(1079889));
-        upd_choice[ichoice] = "movieimdbinternet";
-        ichoice++;
+        updChoice.Add("movieimdbinternet");
 
         dlg.Add(GUILocalizeStrings.Get(1079888));
-        upd_choice[ichoice] = "movieimdbbilder";
-        ichoice++;
+        updChoice.Add("movieimdbbilder");
 
         if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Trailer and Pictures")) // check if specialmode is configured for disabled features
         {
           dlg.Add(GUILocalizeStrings.Get(1079887));
-          upd_choice[ichoice] = "movieimdbtrailer";
-          ichoice++;
+          updChoice.Add("movieimdbtrailer");
         }
 
         if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Update for all persons of movie")) // check if specialmode is configured for disabled features
         {
           dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
-          upd_choice[ichoice] = "updatepersonmovie";
-          ichoice++;
+          updChoice.Add("updatepersonmovie");
         }
       }
       #endregion
@@ -10819,44 +10795,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
         {
           dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
-          upd_choice[ichoice] = "artistdetail";
-          ichoice++;
+          updChoice.Add("artistdetail");
         }
 
         dlg.Add(GUILocalizeStrings.Get(1079886)); //Show IMDB internetinfos http://www.imdb.com/name/nm0000288/
-        upd_choice[ichoice] = "artistimdbinternet";
-        ichoice++;
+        updChoice.Add("artistimdbinternet");
 
         dlg.Add(GUILocalizeStrings.Get(1079885)); //Show IMDB internetinfos http://www.imdb.com/name/nm0000288/filmoyear
-        upd_choice[ichoice] = "artistimdbfilmlist";
-        ichoice++;
+        updChoice.Add("artistimdbfilmlist");
 
         dlg.Add(GUILocalizeStrings.Get(1079891)); //Show IMDB pictures http://www.imdb.com/name/nm0000288/mediaindex
-        upd_choice[ichoice] = "artistimdbbilder";
-        ichoice++;
+        updChoice.Add("artistimdbbilder");
 
         dlg.Add(GUILocalizeStrings.Get(1079890)); //Show IMDB clips http://www.imdb.com/name/nm0000288/videogallery
-        upd_choice[ichoice] = "artistimdbclips";
-        ichoice++;
+        updChoice.Add("artistimdbclips");
 
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: IMDB all sort of details and updates (several entries)"))
         {
           dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
-          upd_choice[ichoice] = "updateperson";
-          ichoice++;
+          updChoice.Add("updateperson");
 
           if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
           {
             dlg.Add(GUILocalizeStrings.Get(1079899)); //Update Internet Person Details
-            upd_choice[ichoice] = "grabber-person";
-            ichoice++;
+            updChoice.Add("grabber-person");
           }
         }
 
         if (MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798628))); // Reverse names
         if (!MyFilms.conf.BoolReverseNames) dlg.Add(string.Format(GUILocalizeStrings.Get(1079839), GUILocalizeStrings.Get(10798629)));
-        upd_choice[ichoice] = "reversenames";
-        ichoice++;
+        updChoice.Add("reversenames");
       }
       #endregion
 
@@ -10867,8 +10835,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628))); // virtual path browsing
           if (!MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));
-          upd_choice[ichoice] = "virtualpathbrowsing";
-          ichoice++;
+          updChoice.Add("virtualpathbrowsing");
         }
       }
       #endregion
@@ -10879,46 +10846,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual)
         {
           dlg.Add(GUILocalizeStrings.Get(1079830));
-          upd_choice[ichoice] = "suppress";
-          ichoice++;
+          updChoice.Add("suppress");
         }
 
         if (conf.UseThumbsForPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
         {
           dlg.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
-          upd_choice[ichoice] = "personimages";
-          ichoice++;
+          updChoice.Add("personimages");
 
           if (MyFilmsDetail.ExtendedStartmode("Dadeo test for loading person images with backgroundworker queue"))
           {
             dlg.Add(GUILocalizeStrings.Get(1079900) + " (test Dadeo)"); // Download person images (selected film)
-            upd_choice[ichoice] = "personimagestest";
-            ichoice++;
+            updChoice.Add("personimagestest");
           }
         }
 
         if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsCoverManager.xml"))
         {
           dlg.Add(GUILocalizeStrings.Get(10798763)); // Cover Manager ...
-          upd_choice[ichoice] = "covermanager";
-          ichoice++;
+          updChoice.Add("covermanager");
         }
 
         if (MyFilms.conf.StrFanart)
         {
           dlg.Add(GUILocalizeStrings.Get(1079862));
-          upd_choice[ichoice] = "fanart";
-          ichoice++;
+          updChoice.Add("fanart");
           dlg.Add(GUILocalizeStrings.Get(1079874));
-          upd_choice[ichoice] = "deletefanart";
-          ichoice++;
+          updChoice.Add("deletefanart");
         }
 
         if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
         {
           dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-          upd_choice[ichoice] = "grabber";
-          ichoice++;
+          updChoice.Add("grabber");
         }
 
         //    dlg.Add(GUILocalizeStrings.Get(1079892)); // Update ...
@@ -10929,14 +10889,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.r[this.facadeFilms.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString().IndexOf(MyFilms.conf.TitleDelim) > 0)
           {
             dlg.Add(GUILocalizeStrings.Get(1079837)); // Remove from box set
-            upd_choice[ichoice] = "removefromcollection";
-            ichoice++;
+            updChoice.Add("removefromcollection");
           }
           else
           {
             dlg.Add(GUILocalizeStrings.Get(1079836)); // Add to box set ...
-            upd_choice[ichoice] = "addtocollection";
-            ichoice++;
+            updChoice.Add("addtocollection");
           }
         }
       }
@@ -10945,26 +10903,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (conf.ViewContext != ViewContext.Menu)
       {
         dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
-        upd_choice[ichoice] = "menuadd";
-        ichoice++;
+        updChoice.Add("menuadd");
 
         if (null != GetCustomViewFromViewLabel(conf.CurrentView))
         {
           dlg.Add(GUILocalizeStrings.Get(1079829)); // Save current custom view settings
-          upd_choice[ichoice] = "menusavecurrentsettingstoview";
-          ichoice++;
+          updChoice.Add("menusavecurrentsettingstoview");
         }
       }
 
-      ichoice++;
-
       dlg.DoModal(GetID);
-
       if (dlg.SelectedLabel == -1) return;
       GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
 
       #region Context actions
-      switch (upd_choice[dlg.SelectedLabel])
+      switch (updChoice[dlg.SelectedLabel])
       {
         case "playmovie":
           MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, false);
@@ -11823,7 +11776,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
               }
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, false);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, false);
             }
           }
           break;
@@ -11844,7 +11797,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               personartworkpath = MyFilms.conf.StrPathArtist;
               LogMyFilms.Debug("Download PersonArtwork to path: '" + personartworkpath + "'");
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
             }
           }
           break;
@@ -11896,32 +11849,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "updatemenu":
           GUIDialogMenu dlgupdate = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          updChoice.Clear();
           if (dlgupdate == null) return;
           Context_Menu = true;
           dlgupdate.Reset();
           dlgupdate.SetHeading(GUILocalizeStrings.Get(1079892)); // Update ...
 
-
           if ((MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual) && this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
           {
             dlg.Add(GUILocalizeStrings.Get(1079830));
-            upd_choice[ichoice] = "suppress";
-            ichoice++;
+            updChoice.Add("suppress");
           }
           if ((this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder) && (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended))
           {
             dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-            upd_choice[ichoice] = "grabber";
-            ichoice++;
+            updChoice.Add("grabber");
           }
           if (MyFilms.conf.StrFanart && this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
           {
             dlg.Add(GUILocalizeStrings.Get(1079862));
-            upd_choice[ichoice] = "fanart";
-            ichoice++;
+            updChoice.Add("fanart");
             dlg.Add(GUILocalizeStrings.Get(1079874));
-            upd_choice[ichoice] = "deletefanart";
-            ichoice++;
+            updChoice.Add("deletefanart");
           }
 
           dlg.DoModal(GetID);

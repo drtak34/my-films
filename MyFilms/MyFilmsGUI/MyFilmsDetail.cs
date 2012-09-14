@@ -174,7 +174,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       public string MovieFileTitle;
 
       public string Director;
-      public int year;
+      public int Year;
     } ;
 
     static PlayListPlayer playlistPlayer;
@@ -182,7 +182,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     BackgroundWorker bgPicture = new System.ComponentModel.BackgroundWorker();
 
     static System.Windows.Forms.OpenFileDialog openFileDialog1 = new OpenFileDialog();
-    static string _virtualStartDirectory = String.Empty;
     static VirtualDirectory virtualDirectory = new VirtualDirectory();
     static bool m_askBeforePlayingDVDImage = false;
     public static ArrayList result;
@@ -2519,7 +2518,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       if (MyFilms.conf.StrFanart)
       {
-        Download_TMDB_Posters(stitles.OriginalTitle, stitles.TranslatedTitle, stitles.Director, stitles.year.ToString(), true, GetID, stitles.OriginalTitle);
+        Download_TMDB_Posters(stitles.OriginalTitle, stitles.TranslatedTitle, stitles.Director, stitles.Year.ToString(), true, GetID, stitles.OriginalTitle);
       }
     }
 
@@ -2560,7 +2559,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // Remove_Backdrops_Fanart(fanartTitle, false); // old: // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
             // Thread.Sleep(50);
-            bool success = GrabUtil.GetFanartFromMovie(sTitles.FanartTitle, sTitles.year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Snapshotimage, file, "localfanart", currentposition);
+            bool success = GrabUtil.GetFanartFromMovie(sTitles.FanartTitle, sTitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Snapshotimage, file, "localfanart", currentposition);
           }
           if (dlgPrgrs != null)
             dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); Thread.Sleep(50); dlgPrgrs.Close(); // Done ...
@@ -2611,13 +2610,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
 
                 case GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages:
-                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages, movieFile, "localfanart", 0);
+                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages, movieFile, "localfanart", 0);
                   break;
                 case GrabUtil.Artwork_Fanart_Type.Multiimage:
-                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Multiimage, movieFile, "localfanart", 0);
+                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Multiimage, movieFile, "localfanart", 0);
                   break;
                 case GrabUtil.Artwork_Fanart_Type.MultipleSingleImages:
-                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultipleSingleImages, movieFile, "localfanart", 0);
+                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultipleSingleImages, movieFile, "localfanart", 0);
                   break;
               }
             }
@@ -2645,14 +2644,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
       if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
       {
-        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.year.ToString() + "'");
+        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.Year.ToString() + "'");
         if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
         {
           personartworkpath = MyFilms.conf.StrPathArtist;
           LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
         }
         doUpdateDetailsViewByFinishEvent = true;
-        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, loadPersonImages);
+        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, loadPersonImages);
       }
     }
 
@@ -2664,11 +2663,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
       if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
       {
-        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.year.ToString() + "'");
+        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.Year.ToString() + "'");
         personartworkpath = MyFilms.conf.StrPathArtist;
         LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
         doUpdateDetailsViewByFinishEvent = true;
-        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
+        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
       }
     }
 
@@ -2927,28 +2926,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  Set an entry from the database to watched/unwatched
     //-------------------------------------------------------------------------------------------        
     // public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
-    public static void Watched_Toggle(int Index, bool watched)
+    public static void Watched_Toggle(int index, bool watched)
     {
       if (MyFilms.conf.EnhancedWatchedStatusHandling)
       {
-        MultiUserData userData = new MultiUserData(MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField].ToString());
+        MultiUserData userData = new MultiUserData(MyFilms.r[index][MyFilms.conf.StrMultiUserStateField].ToString());
         userData.SetWatched(MyFilms.conf.StrUserProfileName, watched);
-        MyFilms.r[Index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
-        MyFilms.r[Index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-        MyFilms.r[Index]["RatingUser"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-        MyFilms.r[Index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+        MyFilms.r[index][MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+        MyFilms.r[index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+        MyFilms.r[index]["RatingUser"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+        MyFilms.r[index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
         // SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, watched ? 1 : 0); //set watchedcount for enhanced watched count handling to 1
       }
       else
       {
-        MyFilms.r[Index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+        MyFilms.r[index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
       }
-      LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField + "' to '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+      LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField + "' to '" + MyFilms.r[index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[index][MyFilms.conf.StrTitle1]);
 
       Update_XML_database();
 
       // tell any listeners that user rated the movie
-      var movie = GetMovieFromRecord(MyFilms.r[Index]);
+      var movie = GetMovieFromRecord(MyFilms.r[index]);
       int count = 0;
       if (watched)
         count = 1;
@@ -5239,7 +5238,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       stitles.OriginalTitle = "";
       stitles.TranslatedTitle = "";
       stitles.FormattedTitle = "";
-      stitles.year = 0;
+      stitles.Year = 0;
       stitles.Director = "";
 
       if (movieRecord["OriginalTitle"] != null && movieRecord["OriginalTitle"].ToString().Length > 0)
@@ -5273,11 +5272,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          stitles.year = System.Convert.ToInt16(movieRecord["Year"]);
+          stitles.Year = System.Convert.ToInt16(movieRecord["Year"]);
         }
         catch
         {
-          stitles.year = 0;
+          stitles.Year = 0;
         }
         try
         {
@@ -5360,7 +5359,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       if (MyFilms.conf == tmpconf) // only log if internal operation
-        LogMyFilms.Debug("GetSearchTitles: returning Titles: '" + stitles.FanartTitle + "' - mastertitle (" + tmpconf.StrTitle1 + ") =  '" + stitles.MasterTitle + "' - originaltitle: '" + stitles.OriginalTitle + "' - translatedtitle: '" + stitles.TranslatedTitle + "' - formattedtitle: '" + stitles.FormattedTitle + "' - director: '" + stitles.Director + "' - year: '" + stitles.year.ToString() + "'");
+        LogMyFilms.Debug("GetSearchTitles: returning Titles: '" + stitles.FanartTitle + "' - mastertitle (" + tmpconf.StrTitle1 + ") =  '" + stitles.MasterTitle + "' - originaltitle: '" + stitles.OriginalTitle + "' - translatedtitle: '" + stitles.TranslatedTitle + "' - formattedtitle: '" + stitles.FormattedTitle + "' - director: '" + stitles.Director + "' - year: '" + stitles.Year.ToString() + "'");
       return stitles;
     }
 
