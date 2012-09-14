@@ -963,7 +963,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
             //GUIWaitCursor.Init(); GUIWaitCursor.Show();
             GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
-            if (InitialStart && GetID == ID_MyFilms)
+            if (InitialStart && GetID == ID_MyFilms && conf.StrFileXml.StartsWith(@"\\"))
             {
               #region Show loading in progress dialog
               if (dlgPrgrs != null)
