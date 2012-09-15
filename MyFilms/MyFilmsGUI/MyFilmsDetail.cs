@@ -6632,6 +6632,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               else
               {
+                setGUIProperty("user.name.value", "");
                 setGUIProperty("user.watched.value", MyFilms.r[itemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() ? "true" : "");
                 decimal userRating = MultiUserData.NoRating;
                 if (MyFilms.r[itemId]["RatingUser"].ToString().Length > 0)
