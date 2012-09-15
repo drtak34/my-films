@@ -692,7 +692,7 @@ Module Module1
                 Try
                     MI = New MediaInfo
                     MI.Open(FilePath)
-                    ReturnValue = MI.Get_(StreamKind.General, 0, "Audio_Codec_List")
+                    ReturnValue = MI.Get_(StreamKind.General, 0, "Audio_Codec_List").Replace(" / ", ", ")
                     MI.Close()
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
@@ -720,7 +720,7 @@ Module Module1
                                 If ReturnValue = "" Then
                                     ReturnValue = TempString
                                 Else
-                                    ReturnValue += " / " & TempString
+                                    ReturnValue += ", " & TempString
                                 End If
                             End If
                             If ReturnValue = "" Then
@@ -778,7 +778,7 @@ Module Module1
                 Try
                     MI = New MediaInfo
                     MI.Open(FilePath)
-                    ReturnValue = MI.Get_(StreamKind.General, 0, "Text_Codec_List")
+                    ReturnValue = MI.Get_(StreamKind.General, 0, "Text_Codec_List").Replace(" / ", ", ")
                     MI.Close()
                 Catch ex As Exception
                     'Console.WriteLine(ex.Message)
@@ -799,7 +799,7 @@ Module Module1
                                 If ReturnValue = "" Then
                                     ReturnValue = TempString
                                 Else
-                                    ReturnValue += " / " & TempString
+                                    ReturnValue += ", " & TempString
                                 End If
                                 'Check for a subtitle description:
                                 TempString = MI.Get_(StreamKind.Text, i, "Title")
