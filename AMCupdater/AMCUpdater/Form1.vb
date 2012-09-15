@@ -1017,12 +1017,13 @@ Public Class Form1
     Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
-        If currentPath.Contains(";") = True Then
-            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
-        End If
         Try
             With OpenFileDialog1
-                .InitialDirectory = My.Application.Info.DirectoryPath
+                If Not String.IsNullOrEmpty(currentPath) Then
+                    .InitialDirectory = Path.GetDirectoryName(currentPath)
+                Else
+                    .InitialDirectory = My.Application.Info.DirectoryPath
+                End If
                 .FileName = "AMCUpdater_Excluded_Files.txt"
                 .CheckFileExists = False
                 .CheckPathExists = True
