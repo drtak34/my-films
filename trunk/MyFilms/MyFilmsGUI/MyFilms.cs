@@ -7989,7 +7989,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return thumbimages;
             }
             // if there is an image defined in Custom View
-            if (currentCustomView != null)
+            if (currentCustomView != null && !string.IsNullOrEmpty(currentCustomView.ImagePath))
             {
               thumbimages[0] = currentCustomView.ImagePath;
               thumbimages[1] = currentCustomView.ImagePath;
