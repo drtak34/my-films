@@ -31,6 +31,7 @@ Public Class AntRecord
     Private _MovieTitleHandling As String = String.Empty
     Private _LastOutputMessage As String = String.Empty
     Private _Read_DVD_Label As Boolean = False
+    Private _Use_InternetData_For_Languages As Boolean = False
     Private _Dont_Ask_Interactive As Boolean = False
     Private _XMLFilePath As String = String.Empty
     Private _XMLTempFilePath As String = String.Empty
@@ -352,6 +353,14 @@ Public Class AntRecord
         End Get
         Set(ByVal value As Boolean)
             _Read_DVD_Label = value
+        End Set
+    End Property
+    Public Property Use_InternetData_For_Languages() As Boolean
+        Get
+            Return _Use_InternetData_For_Languages
+        End Get
+        Set(ByVal value As Boolean)
+            _Use_InternetData_For_Languages = value
         End Set
     End Property
     Public Property Dont_Ask_Interactive() As Boolean
@@ -1412,8 +1421,10 @@ Public Class AntRecord
 
             CurrentAttribute = "Languages"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                TempValue = GetFileData(_FilePath, "audiostreamlanguagelist")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
+                If Not _Use_InternetData_For_Languages = True Then
+                    TempValue = GetFileData(_FilePath, "audiostreamlanguagelist")
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
+                End If
             End If
 
             CurrentAttribute = "Resolution"
@@ -1591,6 +1602,15 @@ Public Class AntRecord
             Else 'Load all the Internet data...
 
                 title = _InternetData(Grabber_Output.OriginalTitle)
+
+                ' Guzzi: Update Languages, if it shouold get internet data
+                CurrentAttribute = "Languages"
+                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                    If _Use_InternetData_For_Languages = True Then
+                        TempValue = _InternetData(Grabber_Output.Language)
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
+                    End If
+                End If
 
                 CurrentAttribute = "Year"
                 If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
@@ -1812,13 +1832,6 @@ Public Class AntRecord
                     End If
                 End If
 
-
-                ' Guzzi: Added Languages, Writer, Certification, Tagline
-                CurrentAttribute = "Languages"
-                If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                    TempValue = _InternetData(Grabber_Output.Language)
-                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
-                End If
 
                 CurrentAttribute = "Certification"
                 If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
