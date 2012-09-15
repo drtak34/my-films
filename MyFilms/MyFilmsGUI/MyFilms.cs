@@ -8803,7 +8803,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Change_Layout_Action(MyFilms.conf.StrLayOut);
             if (!Helper.FieldIsSet(conf.StrViewDfltItem) || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
             {
-              conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
+              conf.StrSelect = conf.StrTitle1 + " not like ''";
+              conf.StrTxtSelect = "";
+              conf.StrTitleSelect = "";
               conf.Boolselect = false;
               conf.Boolindexed = false;
               conf.Boolindexedreturn = false;
