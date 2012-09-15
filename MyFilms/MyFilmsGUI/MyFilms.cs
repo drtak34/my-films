@@ -970,28 +970,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         new Thread(delegate()
         {
           {
-            #region load Fin_Charge_Init with progress dialog
+            #region load Fin_Charge_Init with waiting symbol or progress dialog
             //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
-            //GUIWaitCursor.Init(); GUIWaitCursor.Show();
-            GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
-            if (InitialStart && GetID == ID_MyFilms && conf.StrFileXml.StartsWith(@"\\"))
-            {
-              #region Show loading in progress dialog
-              if (dlgPrgrs != null)
-              {
-                dlgPrgrs.Reset();
-                dlgPrgrs.DisplayProgressBar = false;
-                dlgPrgrs.ShowWaitCursor = true;
-                dlgPrgrs.DisableCancel(true);
-                dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Loading ..."));
-                // dlgPrgrs.SetLine(1, "Loading DB ...");
-                // dlgPrgrs.Percentage = 0;
-                dlgPrgrs.NeedRefresh();
-                dlgPrgrs.ShouldRenderLayer();
-                dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
-              }
-              #endregion
-            }
+            GUIWaitCursor.Init(); GUIWaitCursor.Show();
+            //GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+            //if (InitialStart && GetID == ID_MyFilms && conf.StrFileXml.StartsWith(@"\\"))
+            //{
+            //  #region Show loading in progress dialog
+            //  if (dlgPrgrs != null)
+            //  {
+            //    dlgPrgrs.Reset();
+            //    dlgPrgrs.DisplayProgressBar = false;
+            //    dlgPrgrs.ShowWaitCursor = true;
+            //    dlgPrgrs.DisableCancel(true);
+            //    dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Loading ..."));
+            //    // dlgPrgrs.SetLine(1, "Loading DB ...");
+            //    // dlgPrgrs.Percentage = 0;
+            //    dlgPrgrs.NeedRefresh();
+            //    dlgPrgrs.ShouldRenderLayer();
+            //    dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+            //  }
+            //  #endregion
+            //}
 
             if (InitialStart)
             {
@@ -1006,18 +1006,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), ((loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)))); // || InitialStart)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
             // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart || requireFullReload), requireFullReload || Configuration.Current_Config()); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
 
-            // GUIWaitCursor.Hide();
+            GUIWaitCursor.Hide();
             //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
             //GUIControl.ShowControl(GetID, 34);
 
-            if (GetID == ID_MyFilms)
-            {
-              if (dlgPrgrs != null)
-              {
-                dlgPrgrs.ShowWaitCursor = false;
-                dlgPrgrs.Close();
-              }
-            }
+            //if (GetID == ID_MyFilms)
+            //{
+            //  if (dlgPrgrs != null)
+            //  {
+            //    dlgPrgrs.ShowWaitCursor = false;
+            //    dlgPrgrs.Close();
+            //  }
+            //}
             #endregion
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
