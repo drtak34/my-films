@@ -7130,8 +7130,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // if there is a Default.jpg in the view subfolder
             string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
             string strImageInViewsDefaultFolder = strPathViewsRoot + WStrSort.ToLower() + ".jpg";
-            string DefaultViewImage = (System.IO.File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
-            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView), DefaultViewImage, conf.BoolReverseNames);
+            string defaultViewImage = (System.IO.File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
+            string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeFilms[conf.StrIndex].Label, strThumbDirectory, isperson, GetCustomViewFromViewLabel(conf.CurrentView), defaultViewImage, conf.BoolReverseNames);
             // string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
             this.facadeFilms[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0];
             this.facadeFilms[conf.StrIndex].IconImage = strActiveFacadeImages[1];
