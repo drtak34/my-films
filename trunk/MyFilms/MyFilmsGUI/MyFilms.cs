@@ -8586,7 +8586,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
       if (conf.EnhancedWatchedStatusHandling)
       {
-        MyFilmsDetail.setGUIProperty("user.name.value", conf.StrUserProfileName);
+        MyFilmsDetail.setGUIProperty("user.name.value", (conf.StrUserProfileName != MyFilms.DefaultUsername) ? conf.StrUserProfileName : "");
+      }
+      else
+      {
+        MyFilmsDetail.setGUIProperty("user.name.value", "");
       }
 
       if (conf.StrDfltSelect.Length > 0)
