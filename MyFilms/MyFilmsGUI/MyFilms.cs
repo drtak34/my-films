@@ -888,7 +888,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       bool IsDefaultConfig = false;
 
-      if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos && PreviousWindowId != ID_BrowseTheWeb)
+      if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos 
+        && PreviousWindowId != ID_BrowseTheWeb && PreviousWindowId != (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO) // Fullscreen is ID 2005
       {
         #region Load or change MyFilms Config
 
@@ -942,10 +943,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Fanartstatus(MyFilms.conf.StrFanart);
         if (!InitialStart && IsDefaultConfig) InitMainScreen(false); // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
         if (Configuration.CurrentConfig != PreviousConfig) InitialStart = true; // if a default config is set, otherwise the DB gets not proerly initialized
+        if (conf.AlwaysDefaultView) 
+        {
+          NavigationStack.Clear(); // if returning from foreign window make sure, default is loaded instead of cached state
+          conf.StrSelect = ""; // reset movie context filter for person views
+          conf.StrPersons = ""; // reset person list filter
+          viewcover.Filename = "";
+          personcover.Filename = "";
+          groupcover.Filename = "";
+        }
       }
       base.OnPageLoad(); // let animations run
 
-      if (NavigationStack.Count > 0 && !conf.AlwaysDefaultView && !InitialStart)
+      if (InitialStart) NavigationStack.Clear();
+
+      if (NavigationStack.Count > 0)
       {
         DoBack();
         GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
@@ -954,7 +966,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        NavigationStack.Clear();
         // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) || IsDefaultConfig)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
         new Thread(delegate()
         {
@@ -15194,15 +15205,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (GetID == ID_MyFilms)
       {
-        if (Configuration.CurrentConfig != "")
-        {
-          if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
-            Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
-          else
-            Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
-        }
+        //if (Configuration.CurrentConfig != "")
+        //{
+        //  if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
+        //    Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
+        //  else
+        //    Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
+        //}
 
-        Load_Config(Configuration.CurrentConfig, true, null);
+        // Load_Config(Configuration.CurrentConfig, true, null);
         Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
       }
 

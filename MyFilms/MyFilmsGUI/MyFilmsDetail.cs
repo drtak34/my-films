@@ -8391,7 +8391,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  ImgDetFilm2.Refresh();
 
           Update_XML_database();
-          afficher_detail(true);
+          if (GetID == MyFilms.ID_MyFilmsDetail)  // only update GUI, when currently active
+            afficher_detail(true);
           //GUIWindowManager.Process(); // Enabling creates lock in handler !!!
         }
         if (ended || (stopped && playTimePercentage >= 80))
