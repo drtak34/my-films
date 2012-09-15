@@ -1893,7 +1893,7 @@ Public Class AntRecord
                 fanartTitle = GetFanartTitle(_XMLElement, title, ttitle, ftitle, year, director)
 
                 If fanartTitle.Length > 0 And Not String.IsNullOrEmpty(CurrentSettings.Movie_Fanart_Path) Then
-                    If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
+                    If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False And Not CurrentSettings.Use_Folder_Dot_Jpg = True Then
                         Dim fanart As List(Of Grabber.DBMovieInfo)
                         Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                         fanart = Gb.GetFanart(title, ttitle, year, director, _InternetSearchHintIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
@@ -1943,7 +1943,7 @@ Public Class AntRecord
                             TempValue = NewFanartThumbName
                             CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                         End If
-                    ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                    ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True And CurrentSettings.Prohibit_Internet_Lookup = False Then ' works only, when internet lookup is allowed, as otherwise no nfo file reader datra returns
                         'If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
                         Dim FanartFileExists As Boolean = False
                         Dim NewFanartThumbName As String = _FilePath
@@ -1969,6 +1969,8 @@ Public Class AntRecord
                         If FanartFileExists = True Then
                             TempValue = NewFanartThumbName
                             CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                            'Copy fanart to fanartfolder:
+                            GrabUtil.CopyFanartToFanartFolder(NewFanartThumbName, CurrentSettings.Movie_Fanart_Path, fanartTitle)
                         End If
                     End If
 

@@ -912,22 +912,29 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     public static bool IsFileUsedbyAnotherProcess(string filename)
     {
-      try
+      if (string.IsNullOrEmpty(filename))
       {
-        // File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read); // this could also be used ?
-        using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+        return true;
+      }
+      else
+      {
+        try
         {
-          if (fs.CanRead)
+          // File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read); // this could also be used ?
+          using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
           {
-            fs.Close();
-            return false;
+            if (fs.CanRead)
+            {
+              fs.Close();
+              return false;
+            }
           }
         }
-      }
-      catch (System.IO.IOException)
-      {
-        // LogMyFilms.DebugException("IsFileUsedbyAnotherProcess() - cannot open file: '" + exp.Message + "'", exp);
-        return true;
+        catch (System.IO.IOException)
+        {
+          // LogMyFilms.DebugException("IsFileUsedbyAnotherProcess() - cannot open file: '" + exp.Message + "'", exp);
+          return true;
+        }
       }
       return true;
     }
