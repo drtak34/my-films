@@ -93,7 +93,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsPlaybackActive = false;
       StrArtist = false;
       BoolMenuShowAll = false;
-      StrPlayedMovie = null;
       IsDbReloadRequired = false;
       BoolSortCountinViews = false;
       BoolDontSplitValuesInViews = false;
@@ -878,7 +877,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public int LastID { get; set; }
     public int StrIndex { get; set; }
     public int StrPlayedIndex { get; set; }
-    public MFMovie StrPlayedMovie { get; set; }
     public bool StrFanart { get; set; }
     public bool StrFanartDefaultViews { get; set; }
     public bool StrFanartDefaultViewsUseRandom { get; set; }

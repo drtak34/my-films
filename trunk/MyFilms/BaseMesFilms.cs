@@ -714,7 +714,7 @@ namespace MyFilmsPlugin.MyFilms
       return moviesGlobal;
     }
 
-    private static void GetMovieDetails(DataRow row, MyFilmsGUI.Configuration tmpconf, bool getDataRowDetailsForArtwork, ref MFMovie movie)
+    internal static void GetMovieDetails(DataRow row, MyFilmsGUI.Configuration tmpconf, bool getDataRowDetailsForArtwork, ref MFMovie movie)
     {
       //-----------------------------------------------------------------------------------------------------------------------
       //    Load Movie Details Info

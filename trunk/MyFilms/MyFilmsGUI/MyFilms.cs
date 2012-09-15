@@ -5054,9 +5054,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         new Thread(delegate()
         {
           {
-            MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
+            MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
             getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, string.Empty); // getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
-            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+            MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -5945,9 +5945,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new Thread(delegate()
       {
         {
-          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
           getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
-          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+          MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -8641,9 +8641,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new Thread(delegate()
       {
         {
-          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
           Fin_Charge_Init(false, false);
-          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+          MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
@@ -8658,9 +8658,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Worker_Refreshfacade()
     {
-      MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
       Fin_Charge_Init(false, false);
-      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+      MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
     }
 
     private void Loadfacade()
@@ -8668,9 +8668,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       new Thread(delegate()
       {
         {
-          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
           Fin_Charge_Init(false, true);
-          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+          MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
         {
@@ -8684,9 +8684,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Worker_Loadfacade()
     {
-      MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
       Fin_Charge_Init(false, true);
-      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+      MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
     }
 
     //--------------------------------------------------------------------------------------------
@@ -9719,9 +9719,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-            MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+            MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
             GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false);
-            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+            MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
           }
@@ -11623,9 +11623,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-            MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+            MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
             GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
-            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+            MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
           }
@@ -12019,9 +12019,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
         GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-        MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+        MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
         GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
-        MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+        MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
         GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
         GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
       }
