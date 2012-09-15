@@ -281,7 +281,7 @@ Public Class Form1
         MediaData.Add("size", "size")
         MediaData.Add("source", "source")
         MediaData.Add("subtitles", "subtitles")
-        MediaData.Add("languages", "languages")
+        'MediaData.Add("languages", "languages") ' disabled here, as we now prefer loading internet info to that field
         MediaData.Add("aspectratio", "aspectratio")
         MediaData.Add("audiochannelcount", "audiochannelcount")
 
@@ -299,10 +299,10 @@ Public Class Form1
         InternetData.Add("description", "description")
         InternetData.Add("comments", "comments")
         InternetData.Add("picture", "picture")
+        InternetData.Add("languages", "languages") ' could also retrieve mediainfo - but we add it here
         ' Guzzi added: Extended fields
         InternetData.Add("writer", "writer")
         InternetData.Add("certification", "certification")
-        ' InternetData.Add("languages", "languages") ' deactivated, as it also can be retrieved via mediainfo - we have a bit inconsitency here ...
         InternetData.Add("tagline", "tagline")
         InternetData.Add("imdb_id", "imdb_id")
         InternetData.Add("tmdb_id", "tmdb_id")
@@ -2382,6 +2382,7 @@ Public Class Form1
         CurrentSettings.Group_Name_Identifier = txtGroupNameIdentifier.Text
         CurrentSettings.Series_Name_Identifier = txtSeriesNameIdentifier.Text
 
+        CurrentSettings.Use_InternetData_For_Languages = chkUseInternetDataForLanguagesField.Checked
 
 
 
@@ -2553,6 +2554,8 @@ Public Class Form1
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files
             chkManualUpdateRecordsOnlyMissingData.Checked = CurrentSettings.Only_Add_Missing_Data
             chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked = CurrentSettings.Only_Update_With_Nonempty_Data
+
+            chkUseInternetDataForLanguagesField.Checked = CurrentSettings.Use_InternetData_For_Languages
 
             txtManualExcludedMoviesPath.Text = CurrentSettings.Manual_Excluded_Movies_File
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path

@@ -164,6 +164,7 @@ Partial Class Form1
         Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox
         Me.txtMediaLabel = New System.Windows.Forms.TextBox
         Me.GroupBox_OtherFieldHandling = New System.Windows.Forms.GroupBox
+        Me.chkUseInternetDataForLanguagesField = New System.Windows.Forms.CheckBox
         Me.Label12 = New System.Windows.Forms.Label
         Me.txtMediaType = New System.Windows.Forms.TextBox
         Me.lblCheckFieldHandling = New System.Windows.Forms.Label
@@ -2017,6 +2018,7 @@ Partial Class Form1
         'GroupBox_OtherFieldHandling
         '
         Me.GroupBox_OtherFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_OtherFieldHandling.Controls.Add(Me.chkUseInternetDataForLanguagesField)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label12)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.txtMediaType)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.lblCheckFieldHandling)
@@ -2030,20 +2032,35 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.TabStop = False
         Me.GroupBox_OtherFieldHandling.Text = "Other Field Handling Options ..."
         '
+        'chkUseInternetDataForLanguagesField
+        '
+        Me.chkUseInternetDataForLanguagesField.AutoSize = True
+        Me.chkUseInternetDataForLanguagesField.Location = New System.Drawing.Point(21, 64)
+        Me.chkUseInternetDataForLanguagesField.Name = "chkUseInternetDataForLanguagesField"
+        Me.chkUseInternetDataForLanguagesField.Size = New System.Drawing.Size(119, 30)
+        Me.chkUseInternetDataForLanguagesField.TabIndex = 68
+        Me.chkUseInternetDataForLanguagesField.Text = "Use Internet Data " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for Languages Field"
+        Me.ToolTip1.SetToolTip(Me.chkUseInternetDataForLanguagesField, "If checked, the internet data from the grabber will be used to populate the ""Lang" & _
+                "uages"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If unchecked, mediainfo audio stream languages list will be used." & _
+                "")
+        Me.chkUseInternetDataForLanguagesField.UseVisualStyleBackColor = True
+        '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(18, 74)
+        Me.Label12.Location = New System.Drawing.Point(170, 74)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(102, 13)
+        Me.Label12.Size = New System.Drawing.Size(63, 13)
         Me.Label12.TabIndex = 67
-        Me.Label12.Text = "Media Type (Preset)"
+        Me.Label12.Text = "Media Type"
+        Me.ToolTip1.SetToolTip(Me.Label12, "You can enter a value that will be imported " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "into the ""MediaType"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This a" & _
+                "cts as a ""preset"".")
         '
         'txtMediaType
         '
-        Me.txtMediaType.Location = New System.Drawing.Point(164, 71)
+        Me.txtMediaType.Location = New System.Drawing.Point(248, 71)
         Me.txtMediaType.Name = "txtMediaType"
-        Me.txtMediaType.Size = New System.Drawing.Size(174, 20)
+        Me.txtMediaType.Size = New System.Drawing.Size(90, 20)
         Me.txtMediaType.TabIndex = 64
         Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
                 "")
@@ -6421,4 +6438,5 @@ Partial Class Form1
     Friend WithEvents TextBox37 As System.Windows.Forms.TextBox
     Friend WithEvents txtSampleAspectRatio As System.Windows.Forms.TextBox
     Friend WithEvents Label107 As System.Windows.Forms.Label
+    Friend WithEvents chkUseInternetDataForLanguagesField As System.Windows.Forms.CheckBox
 End Class

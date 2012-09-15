@@ -120,6 +120,7 @@ Namespace My
                 LogEvent(" - Purge Missing Movies From Database : " & CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - PurgeMissing Always: " + CurrentSettings.Purge_Missing_Files_When_Source_Unavailable.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Check for folders containing DVD copies : " + CurrentSettings.Scan_For_DVD_Folders.ToString, EventLogLevel.ImportantEvent)
+                LogEvent(" - Use Internet Data for Languages field : " + CurrentSettings.Use_InternetData_For_Languages.ToString, EventLogLevel.ImportantEvent)
 
                 For Each s As String In My.Application.CommandLineArgs
                     Console.WriteLine(s)

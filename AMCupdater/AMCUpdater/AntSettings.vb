@@ -372,6 +372,19 @@ Public Class AntSettings
             SetAttribute("Internet_Lookup_Always_Prompt", value)
         End Set
     End Property
+    Public Property Use_InternetData_For_Languages() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Use_InternetData_For_Languages").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Use_InternetData_For_Languages", value)
+        End Set
+    End Property
     Public Property Read_DVD_Label() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Read_DVD_Label").ToLower
@@ -810,6 +823,7 @@ Public Class AntSettings
         dt.Rows.Add("Auto_Approve_Limits", "")
         dt.Rows.Add("Group_Name_Identifier", "")
         dt.Rows.Add("Series_Name_Identifier", "")
+        dt.Rows.Add("Use_InternetData_For_Languages", "False")
 
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False

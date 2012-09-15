@@ -1143,6 +1143,7 @@ Public Class AntProcessor
                                 .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
                                 .OnlyUpdateNonEmptyData = CurrentSettings.Only_Update_With_Nonempty_Data
                                 .Dont_Ask_Interactive = CurrentSettings.Manual_Dont_Ask_Interactive ' added for silent updates without asking user to choose movie on failed auto matches
+                                .Use_InternetData_For_Languages = CurrentSettings.Use_InternetData_For_Languages
 
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()
@@ -2858,6 +2859,7 @@ Public Class AntProcessor
                             .InternetLookupAlwaysPrompt = objSettings.Internet_Lookup_Always_Prompt
                             .DateHandling = objSettings.Date_Handling
                             .Read_DVD_Label = objSettings.Read_DVD_Label
+                            .Use_InternetData_For_Languages = objSettings.Use_InternetData_For_Languages
                             .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
                             .XMLFilePath = objSettings.XML_File
                             .MovieTitleHandling = objSettings.Movie_Title_Handling
@@ -3759,7 +3761,6 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Subtitles", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Size", "Int"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Picture", "String"})
-            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Languages", "String"}) ' for internet languages
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Certification", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Writer", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"TagLine", "String"})
