@@ -249,7 +249,7 @@ namespace Cornerstone.Tools
       if (String.IsNullOrEmpty(data))
         return null;
 
-      XmlDocument xml = new XmlDocument();
+      var xml = new XmlDocument();
 
       // attempts to convert data into an XmlDocument
       try
@@ -274,7 +274,6 @@ namespace Cornerstone.Tools
 
       // return the node list
       return xmlRoot.ChildNodes;
-
     }
 
     #endregion

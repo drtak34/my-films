@@ -253,7 +253,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #endregion
     public static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the  downloading from a queue for e.g. actor images
 
-    static Queue<DBPersonInfo> PersonstoDownloadQueue = new Queue<DBPersonInfo>();
+    static Queue<DbPersonInfo> PersonstoDownloadQueue = new Queue<DbPersonInfo>();
     // private object locker = new object();
 
     internal static List<string> theOnlineVideosViews = new List<string>();
@@ -294,7 +294,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
         }
 
-        DBPersonInfo f;
+        DbPersonInfo f;
         setDownloadStatus();
         lock (PersonstoDownloadQueue)
         {
@@ -342,7 +342,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
 
           string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
-          List<DBPersonInfo> personlist = tmdbapi.getPersonsByName(f.Name, false, language);
+          List<DbPersonInfo> personlist = tmdbapi.GetPersonsByName(f.Name, false, language);
           if (personlist.Count == 0)
           {
             LogMyFilms.Debug("downloadingWorker_DoWork() - Person '" + f.Name + "' not found on TMDB, remaining items: '" + PersonstoDownloadQueue.Count + "'");
@@ -455,7 +455,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (PersonstoDownloadQueue.Count > 0)
         {
-          DBPersonInfo f = PersonstoDownloadQueue.Peek();
+          DbPersonInfo f = PersonstoDownloadQueue.Peek();
           setGUIProperty("details.downloads.status", string.Format(GUILocalizeStrings.Get(10799230), PersonstoDownloadQueue.Count.ToString()));
           setGUIProperty("details.downloads.count", PersonstoDownloadQueue.Count.ToString());
           setGUIProperty("details.downloads.name", f.Name ?? "");
@@ -2233,15 +2233,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "createfanart": // create fanart from local media
-          Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages);
+          Menu_CreateFanart(GrabUtil.ArtworkFanartType.MultiImageWithMultipleSingleImages);
           break;
 
         case "createfanartsingleimages": // create single images fanart from local media
-          Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type.MultipleSingleImages);
+          Menu_CreateFanart(GrabUtil.ArtworkFanartType.MultipleSingleImages);
           break;
 
         case "createfanartmultiimage": // create single fanart from local media on pause position
-          Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type.Multiimage);
+          Menu_CreateFanart(GrabUtil.ArtworkFanartType.Multiimage);
           break;
 
         case "createfanartonposition": // create single fanart from local media on pause position
@@ -2499,7 +2499,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // Remove_Backdrops_Fanart(fanartTitle, false); // old: // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
             // Thread.Sleep(50);
-            bool success = GrabUtil.GetFanartFromMovie(sTitles.FanartTitle, sTitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Snapshotimage, file, "localfanart", currentposition);
+            bool success = GrabUtil.GetFanartFromMovie(sTitles.FanartTitle, sTitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.ArtworkFanartType.Snapshotimage, file, "localfanart", currentposition);
           }
           if (dlgPrgrs != null)
             dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); Thread.Sleep(50); dlgPrgrs.Close(); // Done ...
@@ -2520,7 +2520,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private void Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type FanartType)
+    private void Menu_CreateFanart(GrabUtil.ArtworkFanartType FanartType)
     {
       {
         GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
@@ -2549,14 +2549,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               switch (FanartType)
               {
 
-                case GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages:
-                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages, movieFile, "localfanart", 0);
+                case GrabUtil.ArtworkFanartType.MultiImageWithMultipleSingleImages:
+                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.ArtworkFanartType.MultiImageWithMultipleSingleImages, movieFile, "localfanart", 0);
                   break;
-                case GrabUtil.Artwork_Fanart_Type.Multiimage:
-                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Multiimage, movieFile, "localfanart", 0);
+                case GrabUtil.ArtworkFanartType.Multiimage:
+                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.ArtworkFanartType.Multiimage, movieFile, "localfanart", 0);
                   break;
-                case GrabUtil.Artwork_Fanart_Type.MultipleSingleImages:
-                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultipleSingleImages, movieFile, "localfanart", 0);
+                case GrabUtil.ArtworkFanartType.MultipleSingleImages:
+                  success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.ArtworkFanartType.MultipleSingleImages, movieFile, "localfanart", 0);
                   break;
               }
             }
@@ -4553,7 +4553,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgPrgrs.Percentage = 10;
 
         Grabber_URLClass Grab = new Grabber_URLClass();
-        List<DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
+        List<DbMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
       }
       catch (Exception ex)
       {
@@ -4849,7 +4849,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             GUIWaitCursor.Init(); GUIWaitCursor.Show();
-            List<grabber.DBMovieInfo> listemovies = Grab.GetTMDBinfos(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix, true, choose, MyFilms.conf.StrTitle1, language);
+            List<grabber.DbMovieInfo> listemovies = Grab.GetTMDBinfos(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix, true, choose, MyFilms.conf.StrTitle1, language);
             GUIWaitCursor.Hide();
             LogMyFilms.Debug("(TMDB-Infos) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "', '" + language + "'");
             int listCount = listemovies.Count;
@@ -4878,7 +4878,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlg.Reset();
                 dlg.SetHeading(GUILocalizeStrings.Get(1079857)); // Load TMDB data (online)
                 dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
-                foreach (DBMovieInfo t in listemovies)
+                foreach (DbMovieInfo t in listemovies)
                 {
                   dlg.Add(t.Name + "  (" + t.Year + ") - Posters: " + t.Posters.Count + " - Id" + t.Identifier);
                   LogMyFilms.Debug("TMDB listemovies: " + t.Name + "  (" + t.Year + ") - Posters: " + t.Posters.Count + " - TMDB-Id: " + t.Identifier);
@@ -5461,7 +5461,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           GUIWaitCursor.Init();
           GUIWaitCursor.Show();
-          List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(
+          List<grabber.DbMovieInfo> listemovies = Grab.GetFanart(
             wtitle,
             savetitle,
             wyear,
@@ -5488,7 +5488,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (listemovies[0].Persons.Count > 0)
               {
                 LogMyFilms.Debug("PersonArtwork: " + listemovies[0].Persons.Count.ToString() + " Personas checked for " + wttitle);
-                foreach (DBPersonInfo person in listemovies[0].Persons)
+                foreach (DbPersonInfo person in listemovies[0].Persons)
                 {
                   LogMyFilms.Debug("PersonArtwork: " + person.Images.Count.ToString() + " images found for " + person.Name);
                 }
@@ -5508,7 +5508,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg.Reset();
               dlg.SetHeading(loadFanart ? GUILocalizeStrings.Get(1079862) : GUILocalizeStrings.Get(1079900));  // Load fanart (online)  // Download person images (selected film)
               dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
-              foreach (DBMovieInfo t in listemovies)
+              foreach (DbMovieInfo t in listemovies)
               {
                 string dialoginfoline = "";
                 dialoginfoline = t.Name + "  (" + t.Year + ")";
@@ -5690,13 +5690,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading person images for '" + wttitle + "'");
                       if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "");
 
-                      foreach (grabber.DBPersonInfo person in listemovies[0].Persons)
+                      foreach (grabber.DbPersonInfo person in listemovies[0].Persons)
                       {
                         bool firstpersonimage = true;
                         bool onlysinglepersonimage = true;
-                        var persondetails = new DBPersonInfo();
+                        var persondetails = new DbPersonInfo();
                         var TheMoviedb = new TheMoviedb();
-                        persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
+                        persondetails = TheMoviedb.GetPersonsById(person.Id, string.Empty);
                         LogMyFilms.Debug("Person Artwork: found '" + persondetails.Images.Count + "' TMDB images for '" + persondetails.Name + "' in movie '" + savetitle + "'");
                         if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + persondetails.Name + "'");
                         if (dlgPrgrs != null) dlgPrgrs.Percentage = 0;
@@ -5806,7 +5806,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             try
             {
-              bool success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), movieThumbsDirectory, GrabUtil.Artwork_Fanart_Type.MultipleSingleImagesAsMovieThumbs, movieFile, "localfanart", 0);
+              bool success = GrabUtil.GetFanartFromMovie(stitles.FanartTitle, stitles.Year.ToString(), movieThumbsDirectory, GrabUtil.ArtworkFanartType.MultipleSingleImagesAsMovieThumbs, movieFile, "localfanart", 0);
             }
             catch (Exception)
             {
@@ -7016,10 +7016,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         clearGUIProperty("db.actors.actor" + j + ".image");
       }
 
-      List<DBPersonInfo> w_tableau = new List<DBPersonInfo>();
+      List<DbPersonInfo> w_tableau = new List<DbPersonInfo>();
       w_tableau = MyFilms.Search_String_Persons(personscontent, false);
       int i = 1;
-      foreach (DBPersonInfo t in w_tableau)
+      foreach (DbPersonInfo t in w_tableau)
       {
         string actorname = t.Name;
         string actorrole = t.Job;
@@ -7055,8 +7055,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIControl.ClearControl(GetID, facadePersons.GetID);
 
       string personartworkpath = MyFilms.conf.StrPathArtist;
-      List<DBPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
-      foreach (DBPersonInfo t in wTableau)
+      List<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
+      foreach (DbPersonInfo t in wTableau)
       {
         string actorname = t.Name;
         string actorrole = t.Job;
@@ -10595,7 +10595,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       bool added = false;
       // we need to get it, let's queue them up and download in the background
-      var person = new DBPersonInfo();
+      var person = new DbPersonInfo();
       person.Name = personname;
       lock (PersonstoDownloadQueue)
       {
