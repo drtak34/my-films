@@ -15,40 +15,40 @@ Public Class AntProcessor
 
     Public Shared XMLDoc As Xml.XmlDocument = New Xml.XmlDocument
 
-    Private Shared _CountXMLRecords As Integer
-    Private Shared _CountOrphanFiles As Integer = 0
-    Private Shared _CountOrphanRecords As Integer = 0
-    Private Shared _CountRecordsAdded As Integer = 0
-    Private Shared _CountRecordsDeleted As Integer = 0
-    Private Shared _CountMultiPartFiles As Integer = 0
-    Private Shared _CountMultiPartFilesMerged As Integer = 0
+    Private Shared _countXmlRecords As Integer
+    Private Shared _countOrphanFiles As Integer = 0
+    Private Shared _countOrphanRecords As Integer = 0
+    Private Shared _countRecordsAdded As Integer = 0
+    Private Shared _countRecordsDeleted As Integer = 0
+    Private Shared _countMultiPartFiles As Integer = 0
+    Private Shared _countMultiPartFilesMerged As Integer = 0
 
-    Private Shared _IsMultiFolderScan As Boolean
-    Private Shared _InteractiveMode As Boolean = True
+    Private Shared _isMultiFolderScan As Boolean
+    Private Shared _interactiveMode As Boolean = True
 
-    Private Shared _ManualFieldName As String
-    Private Shared _ManualFieldNameDestination As String
-    Private Shared _ManualFieldValue As String
-    Private Shared _ManualFieldOldValue As String
-    Private Shared _ManualOperation As String
-    Private Shared _ManualParameterField1 As String
-    Private Shared _ManualParameterOperator1 As String
-    Private Shared _ManualParameterValue1 As String
-    Private Shared _ManualParameterField2 As String
-    Private Shared _ManualParameterOperator2 As String
-    Private Shared _ManualParameterValue2 As String
-    Private Shared _ManualParameterAndOr As String
-    Private Shared _ManualParameterMatchAll As Boolean
-    Private Shared _ManualXMLPath As String = String.Empty
-    Private Shared _ManualParserPath As String = String.Empty
-    Private Shared _ManualExcludedMoviesPath As String = String.Empty
-    Private Shared _ManualInternetLookupAlwaysPrompt As Boolean = False
-    Private Shared _ManualMissingFanartDownload As Boolean = True
-    Private Shared _ManualMissingTrailer As Boolean = True
-    Private Shared _ManualNfoFileHandling As String
-    Private Shared _ManualNfoFileOnlyUpdateMissing As Boolean
-    Private Shared _TempXMLBackupFile As String
-    Private Shared _OperationCancelled As Boolean = False
+    Private Shared _manualFieldName As String
+    Private Shared _manualFieldNameDestination As String
+    Private Shared _manualFieldValue As String
+    Private Shared _manualFieldOldValue As String
+    Private Shared _manualOperation As String
+    Private Shared _manualParameterField1 As String
+    Private Shared _manualParameterOperator1 As String
+    Private Shared _manualParameterValue1 As String
+    Private Shared _manualParameterField2 As String
+    Private Shared _manualParameterOperator2 As String
+    Private Shared _manualParameterValue2 As String
+    Private Shared _manualParameterAndOr As String
+    Private Shared _manualParameterMatchAll As Boolean
+    Private Shared _manualXmlPath As String = String.Empty
+    Private Shared _manualParserPath As String = String.Empty
+    Private Shared _manualExcludedMoviesPath As String = String.Empty
+    Private Shared _manualInternetLookupAlwaysPrompt As Boolean = False
+    Private Shared _manualMissingFanartDownload As Boolean = True
+    Private Shared _manualMissingTrailer As Boolean = True
+    Private Shared _manualNfoFileHandling As String
+    Private Shared _manualNfoFileOnlyUpdateMissing As Boolean
+    Private Shared _tempXMLBackupFile As String
+    Private Shared _operationCancelled As Boolean = False
 
     Public ReadOnly Property CountXMLRecords() As Integer
         Get
@@ -1137,7 +1137,7 @@ Public Class AntProcessor
                                 .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
                                 .OnlyUpdateNonEmptyData = CurrentSettings.Only_Update_With_Nonempty_Data
                                 .Dont_Ask_Interactive = CurrentSettings.Manual_Dont_Ask_Interactive ' added for silent updates without asking user to choose movie on failed auto matches
-                                .ProcessFile(AntRecord.Process_Mode_Names.Update)
+                                .ProcessFile(AntRecord.ProcessModeNames.Update)
                                 .SaveProgress()
                             End With
 
@@ -1529,13 +1529,13 @@ Public Class AntProcessor
 
                 'Dim t As Thread
                 't = New Thread(AddressOf Ant.ProcessFile)
-                't.Start(AntRecord.Process_Mode_Names.Update)
+                't.Start(AntRecord.ProcessModeNames.Update)
                 't.Join()
                 ''If t.Join(500) Then
                 ''    MsgBox("error in thread execution")
                 ''End If
 
-                .ProcessFile(AntRecord.Process_Mode_Names.Update)
+                .ProcessFile(AntRecord.ProcessModeNames.Update)
 
                 Dim UpdateMovieDialog As New frmMovieUpdate()
                 With UpdateMovieDialog
@@ -2872,7 +2872,7 @@ Public Class AntProcessor
                             Ant.UpdateElement()
 
                             Ant.ProhibitInternetLookup = Not CurrentSettings.Rescan_Moved_Files ' Ant.ProhibitInternetLookup = True
-                            Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+                            Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
                             If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
@@ -2882,7 +2882,7 @@ Public Class AntProcessor
                         Else
                             'need to create a new entry:
                             Ant.CreateElement() ' find movie and add it
-                            Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+                            Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
 
                             If Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
@@ -3025,7 +3025,7 @@ Public Class AntProcessor
                             ' filename exist but with wrong path (maybe moved. Entry don't be created but updated  
                             Ant.UpdateElement()
                             Ant.ProhibitInternetLookup = True
-                            Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+                            Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
                             If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
@@ -3035,7 +3035,7 @@ Public Class AntProcessor
                         Else
                             'Try
                             Ant.CreateElement()
-                            Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+                            Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
                             'Catch ex As Exception
                             'LogEvent("ErrorEvent : " & ex.Message.ToString, EventLogLevel.ErrorEvent)
@@ -3174,7 +3174,7 @@ Public Class AntProcessor
             '                ' filename exist but with wrong path (maybe moved. Entry don't be created but updated  
             '                Ant.UpdateElement()
             '                Ant.ProhibitInternetLookup = True
-            '                Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+            '                Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
             '                Ant.SaveProgress()
             '                If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
             '                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
@@ -3184,7 +3184,7 @@ Public Class AntProcessor
             '            Else
             '                'Try
             '                Ant.CreateElement()
-            '                Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
+            '                Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
             '                Ant.SaveProgress()
             '                'Catch ex As Exception
             '                'LogEvent("ErrorEvent : " & ex.Message.ToString, EventLogLevel.ErrorEvent)

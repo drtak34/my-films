@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-// using System.Linq;
+using System.Configuration;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Linq;
 using System.Text;
+//using Microsoft.WindowsAPICodePack.Shell;
+using MediaPortal.Configuration;
+using MediaPortal.Services;
+using MediaPortal.Util;
 
 namespace Grabber
 {
-  using System.Configuration;
-  using System.Drawing;
-  using System.Globalization;
-  using System.IO;
-  using System.Runtime.CompilerServices;
-  using System.Threading;
-
-  using MediaPortal.Configuration;
-  using MediaPortal.Services;
-  using MediaPortal.Util;
-  //using Microsoft.WindowsAPICodePack.Shell;
-
   public class ThumbCreator
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
@@ -47,28 +45,28 @@ namespace Grabber
     //}
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType, bool SaveIndividualShots, bool KeepMainImage, int SnapshotPosition)
+    public static bool CreateVideoThumbForAmCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int columns, int rows, string imageType, bool saveIndividualShots, bool keepmainimage, int snapshotPosition)
     {
-      PreviewColumns = Columns;
-      PreviewRows = Rows;
+      PreviewColumns = columns;
+      PreviewRows = rows;
       ArtworkWidth = 0;
       LimitScanArea = "";
       BlacklistingIsEnabled = true;
-      IndividualShots = SaveIndividualShots ? "-I " : "";
+      IndividualShots = saveIndividualShots ? "-I " : "";
 
-      if (ImageType == "Cover")
+      if (imageType == "Cover")
       {
         ArtworkWidth = 400;
         ArtworkHeight = 600;
         BlacklistingIsEnabled = false;
       }
-      if (ImageType == "Fanart")
+      if (imageType == "Fanart")
       {
         ArtworkWidth = 1920;
         ArtworkHeight = 1080;
         BlacklistingIsEnabled = false;
       }
-      if (KeepMainImage)
+      if (keepmainimage)
       {
         keepMainImage = true;
       }
@@ -96,7 +94,7 @@ namespace Grabber
         LogMyFilms.Warn("VideoThumbCreator: No {0} found to generate thumbnails of your video!", ExtractApp);
         return false;
       }
-      IVideoThumbBlacklist blacklist = GlobalServiceProvider.Get<IVideoThumbBlacklist>();
+      var blacklist = GlobalServiceProvider.Get<IVideoThumbBlacklist>();
       if (BlacklistingIsEnabled && blacklist != null && blacklist.Contains(aVideoPath))
       {
         LogMyFilms.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", aVideoPath);
@@ -133,12 +131,12 @@ namespace Grabber
         preGapSec = 420;
         postGapSec = 600;
       }
-      if (SnapshotPosition > 0) // this is for single picture snapshots as fanart !
+      if (snapshotPosition > 0) // this is for single picture snapshots as fanart !
       {
-        if (SnapshotPosition > 2)
-          preGapSec = SnapshotPosition - 2;
+        if (snapshotPosition > 2)
+          preGapSec = snapshotPosition - 2;
         else
-          preGapSec = SnapshotPosition;
+          preGapSec = snapshotPosition;
         postGapSec = 0;
         PreviewColumns = 1;
         PreviewRows = 1;
@@ -146,7 +144,7 @@ namespace Grabber
       }
 
       bool Success = false;
-      string ExtractorArgs = string.Format(" -D 6 -B {0} {9}-E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
+      string extractorArgs = string.Format(" -D 6 -B {0} {9}-E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
                                            preGapSec,
                                            postGapSec,
                                            PreviewColumns,
@@ -157,7 +155,7 @@ namespace Grabber
                                            aVideoPath,
                                            IndividualShots,
                                            LimitScanArea);
-      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} {9}-E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
+      string extractorFallbackArgs = string.Format(" -D 8 -B {0} {9}-E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
                                            0,
                                            0,
                                            PreviewColumns,
@@ -169,31 +167,31 @@ namespace Grabber
                                            IndividualShots,
                                            LimitScanArea);
       // Honour we are using a unix app
-      ExtractorArgs = ExtractorArgs.Replace('\\', '/');
+      extractorArgs = extractorArgs.Replace('\\', '/');
       try
       {
         // Use this for the working dir to be on the safe side
-        string TempPath = Path.GetTempPath();
-        string OutputThumbtmp = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(aThumbPath), System.IO.Path.GetFileName(string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg")));
-        string OutputDirectory = System.IO.Path.GetDirectoryName(aThumbPath);
-        string searchmask = System.IO.Path.GetFileNameWithoutExtension(aVideoPath) + "_";
+        string tempPath = Path.GetTempPath();
+        string outputThumbtmp = Path.Combine(Path.GetDirectoryName(aThumbPath), Path.GetFileName(string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg")));
+        string outputDirectory = Path.GetDirectoryName(aThumbPath);
+        string searchmask = Path.GetFileNameWithoutExtension(aVideoPath) + "_";
         // string OutputThumbtmp = string.Format("{0}_s{1}", Path.ChangeExtension(aThumbPath, null), Path.GetExtension(aThumbPath));
-        string OutputThumb = aThumbPath;
-        string OutputName = System.IO.Path.GetFileNameWithoutExtension(aThumbPath);
+        string outputThumb = aThumbPath;
+        string outputName = Path.GetFileNameWithoutExtension(aThumbPath);
 
-        if (!File.Exists(OutputThumb)) // No thumb in share although it should be there
+        if (!File.Exists(outputThumb)) // No thumb in share although it should be there
         {
-          LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", OutputThumb, ExtractorArgs);
-          Success = Utils.StartProcess(ExtractorPath, ExtractorArgs, TempPath, 15000, true, GetMtnConditions());
+          LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", outputThumb, extractorArgs);
+          Success = Utils.StartProcess(ExtractorPath, extractorArgs, tempPath, 15000, true, GetMtnConditions());
           if (!Success)
           {
             // Maybe the pre-gap was too large or not enough sharp & light scenes could be caught
             Thread.Sleep(100);
-            LogMyFilms.Debug("First try failed - trying fallback with arguments: {0}", ExtractorFallbackArgs);
-            Success = Utils.StartProcess(ExtractorPath, ExtractorFallbackArgs, TempPath, 30000, true, GetMtnConditions());
+            LogMyFilms.Debug("First try failed - trying fallback with arguments: {0}", extractorFallbackArgs);
+            Success = Utils.StartProcess(ExtractorPath, extractorFallbackArgs, tempPath, 30000, true, GetMtnConditions());
             if (!Success)
             {
-              LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, ExtractorFallbackArgs);
+              LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, extractorFallbackArgs);
               //try
               //{
               //  using (ShellObject Item = ShellObject.FromParsingName(recFileName))
@@ -220,47 +218,47 @@ namespace Grabber
           try
           {
             // remove the _s which mtn appends to its files
-            if (ArtworkWidth > 0 && keepMainImage && SnapshotPosition == 0)
+            if (ArtworkWidth > 0 && keepMainImage && snapshotPosition == 0)
             {
-              if (File.Exists(OutputThumbtmp))
+              if (File.Exists(outputThumbtmp))
               {
-                Picture.CreateThumbnail(OutputThumbtmp, OutputThumb, ArtworkWidth, ArtworkHeight, 0, false); // Create a smaller Thumb for proper dimensions //Picture.CreateThumbnail(OutputThumbtmp, OutputThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
-                File.Delete(OutputThumbtmp);
+                Picture.CreateThumbnail(outputThumbtmp, outputThumb, ArtworkWidth, ArtworkHeight, 0, false); // Create a smaller Thumb for proper dimensions //Picture.CreateThumbnail(OutputThumbtmp, OutputThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
+                File.Delete(outputThumbtmp);
                 Thread.Sleep(50);
               }
             }
             else
             {
-              File.Move(OutputThumbtmp, OutputThumb);
+              File.Move(outputThumbtmp, outputThumb);
             }
 
             // rename the singleimages to destination names
-            string[] files = System.IO.Directory.GetFiles(OutputDirectory, searchmask + "*.*", SearchOption.TopDirectoryOnly);
+            string[] files = Directory.GetFiles(outputDirectory, searchmask + "*.*", SearchOption.TopDirectoryOnly);
             foreach (string file in files)
             {
-              string filenew = file.Replace(searchmask, OutputName);
+              string filenew = file.Replace(searchmask, outputName);
               File.Move(file, filenew);
             }
             if (!keepMainImage)
             {
-              File.Delete(OutputThumb);
+              File.Delete(outputThumb);
               Thread.Sleep(50);
             }
           }
           catch (FileNotFoundException)
           {
-            LogMyFilms.Debug("VideoThumbCreator: {0} did not extract a thumbnail to: {1}", ExtractApp, OutputThumbtmp);
+            LogMyFilms.Debug("VideoThumbCreator: {0} did not extract a thumbnail to: {1}", ExtractApp, outputThumbtmp);
           }
           catch (Exception)
           {
             try
             {
               // Clean up
-              File.Delete(OutputThumbtmp);
+              File.Delete(outputThumbtmp);
               Thread.Sleep(50);
               if (!keepMainImage)
               {
-                File.Delete(OutputThumb);
+                File.Delete(outputThumb);
                 Thread.Sleep(50);
               }
             }
@@ -289,17 +287,17 @@ namespace Grabber
       }
     }
 
-    public static bool CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits, int Columns, int Rows, bool doShareThumb, string ImageType)
+    public static bool CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits, int columns, int rows, bool doShareThumb, string imageType)
     {
 
-      PreviewColumns = Columns;
-      PreviewRows = Rows;
+      PreviewColumns = columns;
+      PreviewRows = rows;
       LeaveShareThumb = doShareThumb;
-      if (ImageType == "Cover")
+      if (imageType == "Cover")
       {
         // ToDo: Set Resolution Params to Coverimagesize
       }
-      if (ImageType == "Fanart")
+      if (imageType == "Fanart")
       {
         // ToDo: Set Resolution Params to FullHD
       }
@@ -328,7 +326,7 @@ namespace Grabber
         return false;
       }
 
-      IVideoThumbBlacklist blacklist = GlobalServiceProvider.Get<IVideoThumbBlacklist>();
+      var blacklist = GlobalServiceProvider.Get<IVideoThumbBlacklist>();
       if (blacklist != null && blacklist.Contains(aVideoPath))
       {
         LogMyFilms.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", aVideoPath);
@@ -364,34 +362,33 @@ namespace Grabber
         preGapSec = 420;
         postGapSec = 600;
       }
-      bool Success = false;
-      string ExtractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"",
+      bool success = false;
+      string extractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"",
                                            preGapSec, postGapSec, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), aVideoPath);
-      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), aVideoPath);
+      string extractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), aVideoPath);
       // Honour we are using a unix app
-      ExtractorArgs = ExtractorArgs.Replace('\\', '/');
+      extractorArgs = extractorArgs.Replace('\\', '/');
       try
       {
         // Use this for the working dir to be on the safe side
-        string TempPath = Path.GetTempPath();
+        string tempPath = Path.GetTempPath();
         string t = string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg");
-        string VideoFilename = t.Substring(t.LastIndexOf("\\"));
-        string OutputThumb = aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1) + VideoFilename;
-        string ShareThumb = OutputThumb.Replace("_s.jpg", ".jpg");
+        string videoFilename = t.Substring(t.LastIndexOf("\\"));
+        string outputThumb = aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1) + videoFilename;
+        string shareThumb = outputThumb.Replace("_s.jpg", ".jpg");
 
-        if ((LeaveShareThumb && !File.Exists(ShareThumb)) // No thumb in share although it should be there
+        if ((LeaveShareThumb && !File.Exists(shareThumb)) // No thumb in share although it should be there
             || (!LeaveShareThumb && !File.Exists(aThumbPath))) // No thumb cached and no chance to find it in share
         {
           //LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", ShareThumb, ExtractorArgs);
-          Success = Utils.StartProcess(ExtractorPath, ExtractorArgs, TempPath, 15000, true, GetMtnConditions());
-          if (!Success)
+          success = Utils.StartProcess(ExtractorPath, extractorArgs, tempPath, 15000, true, GetMtnConditions());
+          if (!success)
           {
             // Maybe the pre-gap was too large or not enough sharp & light scenes could be caught
             Thread.Sleep(100);
-            Success = Utils.StartProcess(ExtractorPath, ExtractorFallbackArgs, TempPath, 30000, true, GetMtnConditions());
-            if (!Success)
-              LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp,
-                       ExtractorFallbackArgs);
+            success = Utils.StartProcess(ExtractorPath, extractorFallbackArgs, tempPath, 30000, true, GetMtnConditions());
+            if (!success)
+              LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, extractorFallbackArgs);
           }
           // give the system a few IO cycles
           Thread.Sleep(100);
@@ -400,18 +397,18 @@ namespace Grabber
           try
           {
             // remove the _s which mdn appends to its files
-            File.Move(OutputThumb, ShareThumb);
+            File.Move(outputThumb, shareThumb);
           }
           catch (FileNotFoundException)
           {
-            LogMyFilms.Debug("VideoThumbCreator: {0} did not extract a thumbnail to: {1}", ExtractApp, OutputThumb);
+            LogMyFilms.Debug("VideoThumbCreator: {0} did not extract a thumbnail to: {1}", ExtractApp, outputThumb);
           }
           catch (Exception)
           {
             try
             {
               // Clean up
-              File.Delete(OutputThumb);
+              File.Delete(outputThumb);
               Thread.Sleep(50);
             }
             catch (Exception) { }
@@ -420,23 +417,23 @@ namespace Grabber
         else
         {
           // We have a thumbnail in share but the cache was wiped out - make sure it is recreated
-          if (LeaveShareThumb && File.Exists(ShareThumb) && !File.Exists(aThumbPath))
-            Success = true;
+          if (LeaveShareThumb && File.Exists(shareThumb) && !File.Exists(aThumbPath))
+            success = true;
         }
 
         Thread.Sleep(30);
 
-        if (aCacheThumb && Success)
+        if (aCacheThumb && success)
         {
-          if (Picture.CreateThumbnail(ShareThumb, aThumbPath, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, false))
-            Picture.CreateThumbnail(ShareThumb, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
+          if (Picture.CreateThumbnail(shareThumb, aThumbPath, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, false))
+            Picture.CreateThumbnail(shareThumb, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
         }
 
         if (!LeaveShareThumb)
         {
           try
           {
-            File.Delete(ShareThumb);
+            File.Delete(shareThumb);
             Thread.Sleep(30);
           }
           catch (Exception) { }
@@ -467,7 +464,7 @@ namespace Grabber
         //System.Diagnostics.FileVersionInfo newVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(ExtractorPath);
         //return newVersion.FileVersion;
         // mtn.exe has no version info, so let's use "time modified" instead
-        FileInfo fi = new FileInfo(ExtractorPath);
+        var fi = new FileInfo(ExtractorPath);
         return fi.LastWriteTimeUtc.ToString("s"); // use culture invariant format
       }
       catch (Exception ex)
@@ -484,7 +481,7 @@ namespace Grabber
 
     private static Utils.ProcessFailedConditions GetMtnConditions()
     {
-      Utils.ProcessFailedConditions mtnStat = new Utils.ProcessFailedConditions();
+      var mtnStat = new Utils.ProcessFailedConditions();
       // The input file is shorter than pre- and post-recording time
       mtnStat.AddCriticalOutString("net duration after -B & -E is negative");
       mtnStat.AddCriticalOutString("all rows're skipped?");

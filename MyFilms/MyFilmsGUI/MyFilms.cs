@@ -5697,12 +5697,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return wtab;
     }
 
-    public static List<grabber.DBPersonInfo> Search_String_Persons(string champselect, bool reverseNames)
+    public static List<grabber.DbPersonInfo> Search_String_Persons(string champselect, bool reverseNames)
     {
 
       MatchCollection oMatches = oRegex.Matches(champselect);
       champselect = oMatches.Cast<Match>().Aggregate(champselect, (current, oMatch) => current.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty)));
-      List<grabber.DBPersonInfo> wtab = new List<grabber.DBPersonInfo>();
+      List<grabber.DbPersonInfo> wtab = new List<grabber.DbPersonInfo>();
 
       int wi;
       string[] Sep = conf.ListSeparator;
@@ -5744,7 +5744,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (wzone.Length > 0)
           {
-            grabber.DBPersonInfo person = new grabber.DBPersonInfo();
+            grabber.DbPersonInfo person = new grabber.DbPersonInfo();
             person.Name = wzone;
             person.Job = wzoneRole;
             wtab.Add(person);
@@ -16530,8 +16530,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       state.StrLayOutInHierarchies = conf.StrLayOutInHierarchies;
       state.LastID = conf.LastID;
 
-      state.IndexItem = (this.facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedListItemIndex : 0) : -1; //may need to check if there is no item selected and so save -1
-      state.TitleItem = (this.facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedItem.ToString() : this.facadeFilms.SelectedListItem.Label) : string.Empty; //may need to check if there is no item selected and so save ""
+      state.IndexItem = (facadeFilms != null && facadeFilms.SelectedItem > -1) 
+        ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedListItemIndex : 0) 
+        : -1; //may need to check if there is no item selected and so save -1
+      state.TitleItem = (facadeFilms != null && facadeFilms.SelectedItem > -1) 
+        ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedItem.ToString() : this.facadeFilms.SelectedListItem.Label) 
+        : string.Empty; //may need to check if there is no item selected and so save ""
       if (!string.IsNullOrEmpty(viewname))
       {
         if (ViewStateCache.ContainsKey(viewname)) ViewStateCache.Remove(viewname);
