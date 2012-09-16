@@ -773,11 +773,11 @@
 		<id>1</id>
 		<posX>680</posX>
 		<posY>380</posY>
-		<label>#(iif(neq(#myfilms.user.watched.date,''),'#myfilms.user.watched.date ',''))</label>
+		<label>#(iif(neq(#myfilms.user.watcheddate.value,''),'#myfilms.user.watcheddate.value ',''))</label>
 		<width>235</width>
 		<textcolor>ivory</textcolor>
 		<font>font11</font>
-		<visible>string.equals(#myfilms.user.watched.count)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
 		<description>Watched Count Label </description>
@@ -785,11 +785,11 @@
 		<id>1</id>
 		<posX>830</posX>
 		<posY>380</posY>
-		<label>Count:</label>
+		<label>#myfilms.user.watchedcount.label:</label>
 		<width>236</width>
 		<textcolor>ff6FAFE1</textcolor>
 		<font>font11</font>
-		<visible>string.equals(#myfilms.user.watched.count)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
 		<description>Watched Count</description>
@@ -797,11 +797,11 @@
 		<id>1</id>
 		<posX>920</posX>
 		<posY>380</posY>
-		<label>#(iif(neq(#myfilms.user.watched.count,'0'),'#myfilms.user.watched.count(#myfilms.user.watched.global)',''))</label>
+		<label>#(iif(neq(#myfilms.user.watchedcount.value,'0'),'#myfilms.user.watchedcount.value(#myfilms.user.watchedcountglobal.value)',''))</label>
 		<width>236</width>
 		<textcolor>ivory</textcolor>
 		<font>font11</font>
-		<visible>string.equals(#myfilms.user.watched.count)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+		<visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
     <control>
       <description>Actors Label</description>
