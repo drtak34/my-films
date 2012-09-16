@@ -1572,8 +1572,17 @@ Public Class AntProcessor
                             End If
                             .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
                             If FieldName = "Picture" Then
-                                .PictureBoxOld.ImageLocation = If((Path.Combine(ImagePath, ValueOld)), "")
-                                .PictureBoxNew.ImageLocation = If((Path.Combine(ImagePathTemp, ValueNew)), "")
+                                Dim OldImage As String = ValueOld
+                                If ValueOld.Contains("\") Then
+                                    OldImage = ValueOld.Substring(ValueOld.LastIndexOf("\") + 1)
+                                End If
+                                Dim NewImage As String = ValueNew
+                                If ValueNew.Contains("\") Then
+                                    NewImage = ValueNew.Substring(ValueNew.LastIndexOf("\") + 1)
+                                End If
+
+                                .PictureBoxOld.ImageLocation = If((Path.Combine(ImagePath, OldImage)), "")
+                                .PictureBoxNew.ImageLocation = If((Path.Combine(ImagePathTemp, NewImage)), "")
                             End If
                         Catch ex As Exception
                             MsgBox("Exception adding data ('" + FieldName + "') to Movie Update Dialog: " + ex.Message, MsgBoxStyle.OkOnly)
@@ -1589,9 +1598,13 @@ Public Class AntProcessor
                                 If .DgvUpdateMovie(0, i).Value = True Then
                                     itemValue = .DgvUpdateMovie(3, i).Value
                                     If itemName = "Picture" Then
-                                        File.Copy(Path.Combine(ImagePathTemp, itemValue), Path.Combine(ImagePath, itemValue), True)
+                                        Dim TmpImage As String = itemValue
+                                        If itemValue.Contains("\") Then
+                                            TmpImage = itemValue.Substring(itemValue.LastIndexOf("\") + 1)
+                                        End If
+                                        File.Copy(Path.Combine(ImagePathTemp, TmpImage), Path.Combine(ImagePath, TmpImage), True)
                                         Thread.Sleep(20)
-                                        File.Delete(Path.Combine(ImagePathTemp, itemValue))
+                                        File.Delete(Path.Combine(ImagePathTemp, TmpImage))
                                     End If
                                 Else
                                     itemValue = .DgvUpdateMovie(2, i).Value
