@@ -18,6 +18,7 @@ using System.Reflection;
 namespace Grabber_Interface
 {
   using System.Diagnostics;
+  using System.Linq;
 
   using MediaPortal.Configuration;
   using MediaPortal.Util;
@@ -1196,7 +1197,7 @@ namespace Grabber_Interface
           URLBodyLinkDetailsPath = TextURLDetail.Text;
           if (TextURLDetail.Text.ToLower().StartsWith("http"))
           {
-            BodyLinkDetailsPath = TextURLDetail.Text;
+            BodyLinkDetailsPath = "<url>" + TextURLDetail.Text + "</url>";
           }
           else
           {
@@ -1206,26 +1207,46 @@ namespace Grabber_Interface
               string MovieDirectory = Path.GetDirectoryName(strURL);
               string MovieFilename = Path.GetFileNameWithoutExtension(strURL);
               // Set DetailsPath
-              BodyLinkDetailsPath = "<url>" + strURL + "</url>";
               BodyLinkDetailsPath += Environment.NewLine;
               BodyLinkDetailsPath += "<directory>" + MovieDirectory + "</directory>";
               BodyLinkDetailsPath += Environment.NewLine;
               BodyLinkDetailsPath += "<filename>" + MovieFilename + "</filename>";
               if (MovieDirectory != null)
               {
-                string[] files = Directory.GetFiles(MovieDirectory, "*.jpg", SearchOption.AllDirectories);
-                if (files.Length > 0)
+                string[] files = Directory.GetFiles(MovieDirectory, "*", SearchOption.AllDirectories);
+
+                //foreach (string extension in files.Select(file => Path.GetExtension(file)).Distinct().ToList())
+                //{
+                //  BodyLinkDetailsPath += Environment.NewLine;
+                //  BodyLinkDetailsPath += "<" + extension + "-files>";
+                //  foreach (string file in files.Where(file => file.EndsWith("." + extension)).ToList())
+                //  {
+                //    BodyLinkDetailsPath += Environment.NewLine;
+                //    BodyLinkDetailsPath += "<" + extension + ">" + file + "</" + extension + ">";
+                //  }
+                //  BodyLinkDetailsPath += Environment.NewLine;
+                //  BodyLinkDetailsPath += "</" + extension + "-files>";
+                //}
+
+                BodyLinkDetailsPath += Environment.NewLine;
+                BodyLinkDetailsPath += "<jpg-files>";
+                foreach (string file in files.Where(file => file.EndsWith(".jpg")).ToList())
                 {
                   BodyLinkDetailsPath += Environment.NewLine;
-                  BodyLinkDetailsPath += "<jpg-files>";
-                  foreach (string file in files)
-                  {
-                    BodyLinkDetailsPath += Environment.NewLine;
-                    BodyLinkDetailsPath += "<jpg>" + file + "</jpg>";
-                  }
-                  BodyLinkDetailsPath += Environment.NewLine;
-                  BodyLinkDetailsPath += "</jpg-files>";
+                  BodyLinkDetailsPath += "<jpg>" + file + "</jpg>";
                 }
+                BodyLinkDetailsPath += Environment.NewLine;
+                BodyLinkDetailsPath += "</jpg-files>";
+
+                BodyLinkDetailsPath += Environment.NewLine;
+                BodyLinkDetailsPath += "<other-files>";
+                foreach (string file in files.Where(file => !file.EndsWith(".jpg")).ToList())
+                {
+                  BodyLinkDetailsPath += Environment.NewLine;
+                  BodyLinkDetailsPath += "<other>" + file + "</other>";
+                }
+                BodyLinkDetailsPath += Environment.NewLine;
+                BodyLinkDetailsPath += "</other-files>";
               }
             }
           }
