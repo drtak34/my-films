@@ -385,6 +385,32 @@ Public Class AntSettings
             SetAttribute("Use_InternetData_For_Languages", value)
         End Set
     End Property
+    Public Property Use_Grabber_For_Fanart() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Use_Grabber_For_Fanart").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Use_Grabber_For_Fanart", value)
+        End Set
+    End Property
+    Public Property Load_Person_Images_With_Fanart() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Load_Person_Images_With_Fanart").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Load_Person_Images_With_Fanart", value)
+        End Set
+    End Property
     Public Property Read_DVD_Label() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Read_DVD_Label").ToLower
@@ -824,6 +850,8 @@ Public Class AntSettings
         dt.Rows.Add("Group_Name_Identifier", "")
         dt.Rows.Add("Series_Name_Identifier", "")
         dt.Rows.Add("Use_InternetData_For_Languages", "False")
+        dt.Rows.Add("Use_Grabber_For_Fanart", "False")
+        dt.Rows.Add("Load_Person_Images_With_Fanart", "False")
 
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False

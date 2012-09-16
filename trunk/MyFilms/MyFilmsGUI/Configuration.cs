@@ -97,7 +97,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BoolSortCountinViews = false;
       BoolDontSplitValuesInViews = false;
       BoolSkipViewState = false;
-      MenuSelectedID = -1;
+      this.MenuSelectedId = -1;
 
       #region Load Config Parameters in MyFilms.xml file (section currentConfig)
 
@@ -753,7 +753,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string[] DbSelection { get; set; }
     public bool AlwaysShowConfigMenu { get; set; }
     public MyFilms.ViewContext ViewContext { get; set; }
-    public int MenuSelectedID { get; set; }
+    public int MenuSelectedId { get; set; }
     public bool BoolMenuShowAll { get; set; }
     public bool Boolselect { get; set; }
     public bool Boolreturn { get; set; }
@@ -938,50 +938,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static void SaveConfiguration(string currentConfig, int selectedItem, string selectedItemLabel)
     {
       LogMyFilms.Debug("MFC: Configuration saving started for '" + currentConfig + "'");
-      using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         #region save xml data
         //XmlConfig XmlConfig = new XmlConfig();
-        XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrPersons", MyFilms.conf.StrPersons);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrViewSelect", MyFilms.conf.StrViewSelect); // Custom View filter
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
+        xmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrPersons", MyFilms.conf.StrPersons);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrViewSelect", MyFilms.conf.StrViewSelect); // Custom View filter
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MyFilms.conf.StrSortSens);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MyFilms.conf.StrSortSens);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortInHierarchies", MyFilms.conf.StrSortaInHierarchies); //InHierarchies
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSensInHierarchies", MyFilms.conf.StrSortSensInHierarchies);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortInHierarchies", MyFilms.conf.StrSortaInHierarchies); //InHierarchies
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSensInHierarchies", MyFilms.conf.StrSortSensInHierarchies);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext));
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "View", MyFilms.conf.StrTxtView);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MyFilms.conf.StrTxtSelect);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? (selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ViewContext", Enum.GetName(typeof(MyFilms.ViewContext), MyFilms.conf.ViewContext));
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "View", MyFilms.conf.StrTxtView);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MyFilms.conf.StrTxtSelect);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? (selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MyFilms.conf.Boolselect);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolreturn", MyFilms.conf.Boolreturn);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexed", MyFilms.conf.Boolindexed);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexedreturn", MyFilms.conf.Boolindexedreturn);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexedChars", MyFilms.conf.IndexedChars);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MyFilms.conf.Boolselect);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolreturn", MyFilms.conf.Boolreturn);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexed", MyFilms.conf.Boolindexed);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolindexedreturn", MyFilms.conf.Boolindexedreturn);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexedChars", MyFilms.conf.IndexedChars);
         // XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ReversePersonNames", MyFilms.conf.BoolReverseNames); // removed, to make it NonPersistant
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "VirtualPathBrowsing", MyFilms.conf.BoolVirtualPathBrowsing);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "VirtualPathBrowsing", MyFilms.conf.BoolVirtualPathBrowsing);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MyFilms.conf.Wselectedlabel);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MyFilms.conf.Wselectedlabel);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MyFilms.conf.WStrSort);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MyFilms.conf.WStrSort);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LayOut", MyFilms.conf.StrLayOut);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LayOutInHierarchies", MyFilms.conf.StrLayOutInHierarchies);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.WStrLayOut);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LayOut", MyFilms.conf.StrLayOut);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LayOutInHierarchies", MyFilms.conf.StrLayOutInHierarchies);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.WStrLayOut);
 
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
-        XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
 
         //foreach (KeyValuePair<string, ViewState> viewState in MyFilms.ViewStateCache)
         //{
@@ -999,7 +999,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (MyFilms.conf.StrFileType)
         {
           case CatalogType.DVDProfiler:
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
+            xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
             break;
         }
         #endregion
@@ -1011,7 +1011,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     //  Control Acces to asked configuration
     //--------------------------------------------------------------------------------------------
-    public static string Control_Access_Config(string configname, int GetID)
+    public static string ControlAccessConfig(string configname, int GetID)
     {
       if (configname.Length == 0)
         return "";
@@ -1037,7 +1037,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     //  Choice Configuration
     //--------------------------------------------------------------------------------------------
-    public static string Choice_Config(int GetID)
+    public static string ChoiceConfig(int GetID)
     {
       var dlg = (MediaPortal.Dialogs.GUIDialogMenu)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null)
@@ -1128,12 +1128,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (CurrentConfig == string.Empty || (xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
           {
             boolchoice = false;
-            CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
+            CurrentConfig = Configuration.ChoiceConfig(MyFilms.ID_MyFilms);
             // "" => user esc's dialog on plugin startup so exit plugin unchanged
           }
-          CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MyFilms.ID_MyFilms);
+          CurrentConfig = Configuration.ControlAccessConfig(CurrentConfig, MyFilms.ID_MyFilms);
           if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
-            CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
+            CurrentConfig = Configuration.ChoiceConfig(MyFilms.ID_MyFilms);
         }
       }
       return isDefaultConfig;

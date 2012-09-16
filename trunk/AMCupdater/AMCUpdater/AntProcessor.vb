@@ -1111,8 +1111,6 @@ Public Class AntProcessor
                                 'If CurrentNode.Attributes("MovieNumber") Then
                                 .ExcludeFile = CurrentSettings.Manual_Excluded_Movies_File
                                 .InternetLookupAlwaysPrompt = CurrentSettings.Manual_Internet_Lookup_Always_Prompt
-                                .DateHandling = CurrentSettings.Date_Handling
-                                .MovieTitleHandling = CurrentSettings.Movie_Title_Handling
                                 .MasterTitle = CurrentSettings.Master_Title
                                 .InteractiveMode = True
                                 Dim ImagePath As String = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
@@ -1136,15 +1134,9 @@ Public Class AntProcessor
                                 .InternetSearchHintYear = wYear
                                 .InternetSearchHintIMDB_Id = wIMDB_Id
                                 .ParserPath = CurrentSettings.Manual_Internet_Parser_Path
-                                .GrabberOverrideLanguage = CurrentSettings.Grabber_Override_Language
-                                .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
-                                .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
-                                .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
                                 .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
                                 .OnlyUpdateNonEmptyData = CurrentSettings.Only_Update_With_Nonempty_Data
                                 .Dont_Ask_Interactive = CurrentSettings.Manual_Dont_Ask_Interactive ' added for silent updates without asking user to choose movie on failed auto matches
-                                .Use_InternetData_For_Languages = CurrentSettings.Use_InternetData_For_Languages
-
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()
                             End With
@@ -1162,6 +1154,11 @@ Public Class AntProcessor
                         End If
                     Case "Download Fanart"
                         If Not CurrentNode Is Nothing Then
+
+                            If CurrentSettings.Use_Grabber_For_Fanart = True Then
+                                'Todo: Add logic
+                            End If
+
                             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                             Dim fanart As List(Of Grabber.DBMovieInfo)
 
@@ -1500,8 +1497,6 @@ Public Class AntProcessor
                 'If CurrentNode.Attributes("MovieNumber") Then
                 .ExcludeFile = CurrentSettings.Manual_Excluded_Movies_File
                 .InternetLookupAlwaysPrompt = True
-                .DateHandling = CurrentSettings.Date_Handling
-                .MovieTitleHandling = CurrentSettings.Movie_Title_Handling
                 .MasterTitle = CurrentSettings.Master_Title
                 .InteractiveMode = True
                 Dim ImagePath As String = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
@@ -1528,10 +1523,6 @@ Public Class AntProcessor
                 .InternetSearchHintYear = wYear
                 .InternetSearchHintIMDB_Id = wIMDB_Id
                 .ParserPath = CurrentSettings.Manual_Internet_Parser_Path
-                .GrabberOverrideLanguage = CurrentSettings.Grabber_Override_Language
-                .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
-                .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
-                .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
                 .OnlyAddMissingData = False ' added for "add missing data" mode"
                 .OnlyUpdateNonEmptyData = False
                 .Dont_Ask_Interactive = False ' added for silent updates without asking user to choose movie on failed auto matches
@@ -2861,21 +2852,14 @@ Public Class AntProcessor
                             .MovieNumber = NewAntID
                             .XMLDoc = xmldoc
                             .ParserPath = objSettings.Internet_Parser_Path
-                            .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
-                            .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
-                            .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
-                            .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
                             .InteractiveMode = InteractiveMode
                             .ExcludeFile = objSettings.Excluded_Movies_File
                             '.ImagePath = objSettings.XML_File.Substring(0, objSettings.XML_File.LastIndexOf("\"))
                             .ImagePath = ImagePath
                             .InternetLookupAlwaysPrompt = objSettings.Internet_Lookup_Always_Prompt
-                            .DateHandling = objSettings.Date_Handling
                             .Read_DVD_Label = objSettings.Read_DVD_Label
-                            .Use_InternetData_For_Languages = objSettings.Use_InternetData_For_Languages
                             .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
                             .XMLFilePath = objSettings.XML_File
-                            .MovieTitleHandling = objSettings.Movie_Title_Handling
                             .GroupName = row("GroupName").ToString
                             .OnlyAddMissingData = False ' always add all selected data for new records
                             .OnlyUpdateNonEmptyData = False
@@ -3027,20 +3011,14 @@ Public Class AntProcessor
                             .MovieNumber = NewAntID
                             .XMLDoc = xmldoc
                             .ParserPath = objSettings.Internet_Parser_Path
-                            .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
-                            .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
-                            .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
-                            .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
                             .InteractiveMode = InteractiveMode
                             .ExcludeFile = objSettings.Excluded_Movies_File
                             '.ImagePath = objSettings.XML_File.Substring(0, objSettings.XML_File.LastIndexOf("\"))
                             .ImagePath = ImagePath
                             .InternetLookupAlwaysPrompt = objSettings.Internet_Lookup_Always_Prompt
-                            .DateHandling = objSettings.Date_Handling
                             .Read_DVD_Label = objSettings.Read_DVD_Label
                             .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
                             .XMLFilePath = objSettings.XML_File
-                            .MovieTitleHandling = objSettings.Movie_Title_Handling
                             .GroupName = row("GroupName").ToString
                         End With
                         If (row("Moved")) Then

@@ -902,7 +902,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           string currentconfig = (!string.IsNullOrEmpty(Configuration.CurrentConfig)) ? Configuration.CurrentConfig : "";
           LogMyFilms.Debug("Load_Config() - LoadParams - try override current config '" + currentconfig + "' with LoadParameter config: '" + loadParamInfo.Config + "'");
-          string newConfig = Configuration.Control_Access_Config(loadParamInfo.Config, GetID);
+          string newConfig = Configuration.ControlAccessConfig(loadParamInfo.Config, GetID);
           if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
           {
             if (Configuration.CurrentConfig != newConfig)
@@ -1967,7 +1967,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
                 return;
               }
-              conf.MenuSelectedID = -2; // -2 means coming from MenuAll
+              conf.MenuSelectedId = -2; // -2 means coming from MenuAll
               GetSelectFromMenuView(false); // Call simple Menu ...
               #endregion
               break;
@@ -2301,7 +2301,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     switch (this.facadeFilms.SelectedListItem.DVDLabel)
                     {
                       case "showall":
-                        conf.MenuSelectedID = -1;
+                        conf.MenuSelectedId = -1;
                         this.GetSelectFromMenuView(true);
                         break;
                       case "onlineinfo":
@@ -2311,7 +2311,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         this.GetSelectFromTMDB(this.facadeFilms.SelectedListItem.Label);
                         break;
                       default:
-                        conf.MenuSelectedID = this.facadeFilms.SelectedListItemIndex; // remember last menu position ...
+                        conf.MenuSelectedId = this.facadeFilms.SelectedListItemIndex; // remember last menu position ...
                         this.StopLoadingMenuDetails = true;
                         this.Change_View_Action(this.facadeFilms.SelectedListItem.DVDLabel);
                         break;
@@ -4821,11 +4821,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       if (facadeFilms == null) return;
-      if (conf.MenuSelectedID == -2)
-        conf.MenuSelectedID = facadeFilms.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
-      else if ((conf.MenuSelectedID > facadeFilms.Count - 1) || (conf.MenuSelectedID < 0)) //check index within bounds
-        conf.MenuSelectedID = 0;
-      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedID);
+      if (conf.MenuSelectedId == -2)
+        conf.MenuSelectedId = facadeFilms.Count - 1; // if -2 means coming from details menu -> set to "show all"/last position
+      else if ((conf.MenuSelectedId > facadeFilms.Count - 1) || (conf.MenuSelectedId < 0)) //check index within bounds
+        conf.MenuSelectedId = 0;
+      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)conf.MenuSelectedId);
 
       MyFilmsDetail.setGUIProperty("nbobjects.value", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString());
       GUIPropertyManager.SetProperty("#itemcount", (!showall ? facadeFilms.Count : facadeFilms.Count - 1).ToString());
@@ -10304,8 +10304,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIControl.ShowControl(GetID, 34); // hide elements in skin
       currentFanartList.Clear();
       Fanartstatus(false); // disable Fanart
-      string newConfig = Configuration.Choice_Config(GetID);
-      newConfig = Configuration.Control_Access_Config(newConfig, GetID);
+      string newConfig = Configuration.ChoiceConfig(GetID);
+      newConfig = Configuration.ControlAccessConfig(newConfig, GetID);
       if (string.IsNullOrEmpty(newConfig)) // if user escapes dialog or bad value leave system unchanged
       {
         GUIControl.HideControl(GetID, 34); // show elements in skin
@@ -10670,7 +10670,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return;
       Context_Menu = true;
-      if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) conf.MenuSelectedID = facadeFilms.SelectedListItemIndex; // remember current facade position for Menu refresh
+      if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) conf.MenuSelectedId = facadeFilms.SelectedListItemIndex; // remember current facade position for Menu refresh
 
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079904)); // Context options ...
@@ -11278,7 +11278,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilms.conf.CustomViews.View.Rows.InsertAt(newRow, rowIndex - 1);
             }
             SaveCustomViews();
-            conf.MenuSelectedID--;
+            conf.MenuSelectedId--;
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
@@ -11303,7 +11303,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilms.conf.CustomViews.View.Rows.InsertAt(newRow, rowIndex + 1);
             }
             SaveCustomViews();
-            conf.MenuSelectedID++;
+            conf.MenuSelectedId++;
             GetSelectFromMenuView(conf.BoolMenuShowAll);
             NavigationStack.Clear();
             break;
