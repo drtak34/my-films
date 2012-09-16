@@ -60,29 +60,20 @@ namespace MyFilmsPlugin.MyFilms
     internal static AutoResetEvent UpdateWorkerDoneEvent = new AutoResetEvent(false);
 
     internal const int TrakthandlerTimeout = 20000;
-
-    // Create a new TimerCallback delegate instance that 
-    // references the static TraktUpdateHandler method. TraktUpdateHandler 
-    // will be called when the timer expires.
     private static TimerCallback traktUpdateQueueHandler = new TimerCallback(StartTraktUpdateHandler);
-
-    // Create a Timer that that is inactive unless set by "Change() method initially
-    public static readonly Timer TraktQueueTimer = new Timer(traktUpdateQueueHandler, null, Timeout.Infinite, Timeout.Infinite); // define timer without actions // new Timer(traktUpdateQueueHandler, "a state string", Timeout.Infinite, Timeout.Infinite); // define timer without actions
+    public static readonly Timer TraktQueueTimer = new Timer(traktUpdateQueueHandler, null, Timeout.Infinite, Timeout.Infinite); // Create a Timer that that is inactive unless set by "Change() method initially // define timer without actions // new Timer(traktUpdateQueueHandler, "a state string", Timeout.Infinite, Timeout.Infinite); // define timer without actions
 
     // private static Dictionary<string, AntMovieCatalog> dataAllCatalogs = new Dictionary<string, AntMovieCatalog>(); // all data from all configs in a dictionary
-
     // private static XmlDataDocument xmlDoc; // XML Doc file for hierarchical access like XPath
-
     // private static Dictionary<string, ReaderWriterLockSlim> _lockDict = new Dictionary<string, ReaderWriterLockSlim>();
-    public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(); // private static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
     // private static readonly object _locker = new object();
+    // private static Dictionary<string, string> dataPath;
 
-    //private static Dictionary<string, string> dataPath;
-    private static DataRow[] movies; // selected movies with filters
-    // private static DataTable tableMoviesExtended; // all extended Movie DataTable as join with customfields ...
+    private static readonly ReaderWriterLockSlim DataLock = new ReaderWriterLockSlim(); // private static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
     private static readonly Stopwatch Watch = new Stopwatch();
+    private static DataRow[] movies; // selected movies with filters
 
-    // list of Custom fields, that will be added to existing catalogs, if missing
+    #region list of Custom fields, that will be added to existing catalogs, if missing
     internal static List<string[]> CustomFieldDefinitions = new List<string[]>
             {
               // Tag, Name, Type - // ftString, ftInteger, ftReal, ftBoolean, ftDate, ftList, ftText, ftUrl
@@ -115,11 +106,11 @@ namespace MyFilmsPlugin.MyFilms
               new string[] { "CustomField2", "CustomField2", "ftString" },
               new string[] { "CustomField3", "CustomField3", "ftString" }
             };
+    #endregion
 
-    public class MFConfig
+    public class MfConfig
     {
       public string Name { get; set; }
-
       public List<KeyValuePair<string, string>> ViewList { get; set; }
     }
 
@@ -143,7 +134,6 @@ namespace MyFilmsPlugin.MyFilms
       // nothing to update, abort
       if (MovieUpdateQueue.Count == 0) return;
 
-
       if (UpdateWorker != null && UpdateWorker.IsBusy)
       {
         TraktQueueTimer.Change(BaseMesFilms.TrakthandlerTimeout, Timeout.Infinite); // retry in 20 seconds
@@ -152,7 +142,7 @@ namespace MyFilmsPlugin.MyFilms
       UpdateWorker = new BackgroundWorker { WorkerSupportsCancellation = true, WorkerReportsProgress = false };
       UpdateWorker.DoWork += new DoWorkEventHandler(UpdateWorkerDoWork);
       // updateWorker.ProgressChanged += new ProgressChangedEventHandler(updateWorker_ProgressChanged);
-      UpdateWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(UpdateWorker_RunWorkerCompleted);
+      UpdateWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(UpdateWorkerRunWorkerCompleted);
       UpdateWorker.RunWorkerAsync();
     }
 
@@ -182,7 +172,7 @@ namespace MyFilmsPlugin.MyFilms
       UpdateWorkerDoneEvent.Set(); // send notification, that worker has completed!
     }
 
-    private static void UpdateWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    private static void UpdateWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       if (string.IsNullOrEmpty(Thread.CurrentThread.Name))
         Thread.CurrentThread.Name = "DB Update Worker";
@@ -283,6 +273,7 @@ namespace MyFilmsPlugin.MyFilms
         foreach (DataColumn dc in commonColumns)
         {
           customFields[dc.ColumnName] = movieRow[dc.ColumnName];
+          #region disabled conditional updates
           // object temp;
           // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
 
@@ -294,6 +285,7 @@ namespace MyFilmsPlugin.MyFilms
           //    movieRow[dc.ColumnName] = System.Convert.DBNull;
           //  }
           //}
+          #endregion
         }
       }
       data.Movie.AcceptChanges();
@@ -434,10 +426,10 @@ namespace MyFilmsPlugin.MyFilms
     private static bool LoadMyFilmsFromDisk(string catalogfile)
     {
       bool success;
-      LogMyFilms.Debug("LoadMyFilmsFromDisk() - Current Readlocks: '" + _dataLock.CurrentReadCount + "'");
+      LogMyFilms.Debug("LoadMyFilmsFromDisk() - Current Readlocks: '" + DataLock.CurrentReadCount + "'");
       // if (_dataLock.CurrentReadCount > 0) return false;// might be opened by API as well, so count can be 2+
 
-      _dataLock.EnterWriteLock();
+      DataLock.EnterWriteLock();
       try
       {
         #region load catalog from file into dataset
@@ -587,7 +579,7 @@ namespace MyFilmsPlugin.MyFilms
       }
       finally
       {
-        _dataLock.ExitWriteLock();
+        DataLock.ExitWriteLock();
       }
 
       return success;
@@ -627,7 +619,7 @@ namespace MyFilmsPlugin.MyFilms
               if (StrFileType != "0") tmpconf.EnhancedWatchedStatusHandling = true;
               //if (!_lockDict.ContainsKey(tmpconf.StrFileXml))_lockDict.Add(tmpconf.StrFileXml, new ReaderWriterLockSlim());
               //_lockDict["string"].EnterWriteLock();
-              _dataLock.EnterReadLock();
+              DataLock.EnterReadLock();
               try
               {
                 // dataExport.ReadXml(tmpconf.StrFileXml);
@@ -667,7 +659,7 @@ namespace MyFilmsPlugin.MyFilms
               }
               finally
               {
-                _dataLock.ExitReadLock();
+                DataLock.ExitReadLock();
               }
 
               try
@@ -716,10 +708,6 @@ namespace MyFilmsPlugin.MyFilms
 
     internal static void GetMovieDetails(DataRow row, MyFilmsGUI.Configuration tmpconf, bool getDataRowDetailsForArtwork, ref MFMovie movie)
     {
-      //-----------------------------------------------------------------------------------------------------------------------
-      //    Load Movie Details Info
-      //-----------------------------------------------------------------------------------------------------------------------
-
       movie.ReadOnly = tmpconf.ReadOnly; // is true for readonly catalog types
 
       #region Number
@@ -905,17 +893,14 @@ namespace MyFilmsPlugin.MyFilms
 
     private static void GetMovieArtworkDetails(ref MFMovie movie) // DataRow row, 
     {
-      //-----------------------------------------------------------------------------------------------------------------------
-      //    Load Artwork Info
-      //-----------------------------------------------------------------------------------------------------------------------
       var tempconf = new MyFilmsGUI.Configuration(movie.Config, false, true, null);
-
       try
       {
+        #region Cover
         string pictureFile;
         if (movie.Picture.Length > 0)
         {
-          if ((movie.Picture.IndexOf(":\\") == -1) && (movie.Picture.Substring(0, 2) != "\\\\"))
+          if ((movie.Picture.IndexOf(":\\", System.StringComparison.Ordinal) == -1) && (movie.Picture.Substring(0, 2) != "\\\\"))
             pictureFile = tempconf.StrPathImg + "\\" + movie.Picture;
           else
             pictureFile = movie.Picture;
@@ -925,8 +910,10 @@ namespace MyFilmsPlugin.MyFilms
         if (string.IsNullOrEmpty(pictureFile) || !File.Exists(pictureFile))
           pictureFile = tempconf.DefaultCover;
         movie.Picture = pictureFile;
+        #endregion
 
-        string fanartTitle = "";
+        #region Fanart
+        string fanartTitle;
         if (tempconf.StrTitle1 == "FormattedTitle") // special setting for formatted title - we don't want to use it, as it is usually too long and causes problems with path length
         {
           if (!string.IsNullOrEmpty(movie.TranslatedTitle))
@@ -947,6 +934,7 @@ namespace MyFilmsPlugin.MyFilms
           else fanartTitle = "";
         }
         movie.Fanart = MyFilmsDetail.Search_Fanart(fanartTitle, false, "file", false, pictureFile, string.Empty, tempconf)[0];
+        #endregion
       }
       catch (Exception ex)
       {
@@ -954,7 +942,7 @@ namespace MyFilmsPlugin.MyFilms
       }
     }
 
-    private static ArrayList Base_Search_String(string champselect, string[] listSeparator, string[] roleSeparator)
+    private static ArrayList BaseSearchString(string champselect, string[] listSeparator, string[] roleSeparator)
     {
       var oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
       var oMatches = oRegex.Matches(champselect);
@@ -1062,7 +1050,7 @@ namespace MyFilmsPlugin.MyFilms
             if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
             {
               MyFilmsDetail.SetGlobalLock(true, Catalog);
-              if (_dataLock.TryEnterWriteLock(10000))
+              if (DataLock.TryEnterWriteLock(10000))
               {
                 try
                 {
@@ -1362,7 +1350,7 @@ namespace MyFilmsPlugin.MyFilms
                 {
                   dataImport.Clear();
                   MyFilmsDetail.SetGlobalLock(false, Catalog);
-                  _dataLock.ExitWriteLock();
+                  DataLock.ExitWriteLock();
                 }
               }
               else
@@ -1418,7 +1406,7 @@ namespace MyFilmsPlugin.MyFilms
 
       if (data == null) InitData();
 
-      _dataLock.EnterReadLock();
+      DataLock.EnterReadLock();
       try
       {
         // DB field replacements for sorting - currently only used for "Date" - in the future might be used for "DateFile" and "DateWatched" too ...
@@ -1504,7 +1492,7 @@ namespace MyFilmsPlugin.MyFilms
       }
       finally
       {
-        _dataLock.ExitReadLock();
+        DataLock.ExitReadLock();
       }
       watchReadMovies.Stop();
 
@@ -1534,10 +1522,10 @@ namespace MyFilmsPlugin.MyFilms
     {
       if (data == null) return false;
       if (timeout == 0) timeout = 10000; // default is 10 secs
-      LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'");
-      if (_dataLock.TryEnterWriteLock(timeout))
+      LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + DataLock.CurrentReadCount + "', RecursiveReadCount = '" + DataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + DataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + DataLock.RecursiveWriteCount + "'");
+      if (DataLock.TryEnterWriteLock(timeout))
       {
-        LogMyFilms.Debug("TryEnterWriteLock successful! - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'");
+        LogMyFilms.Debug("TryEnterWriteLock successful! - CurrentReadCount = '" + DataLock.CurrentReadCount + "', RecursiveReadCount = '" + DataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + DataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + DataLock.RecursiveWriteCount + "'");
         bool success;
         try
         {
@@ -1551,7 +1539,7 @@ namespace MyFilmsPlugin.MyFilms
         }
         finally
         {
-          _dataLock.ExitWriteLock();
+          DataLock.ExitWriteLock();
         }
 
         return success;
@@ -1585,15 +1573,15 @@ namespace MyFilmsPlugin.MyFilms
 
       using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
-        int MesFilms_nb_config = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+        int mesFilmsNbConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
         var configs = new ArrayList();
-        for (int i = 0; i < MesFilms_nb_config; i++) configs.Add(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+        for (int i = 0; i < mesFilmsNbConfig; i++) configs.Add(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
 
         foreach (string config in configs)
         {
           var viewList = new List<KeyValuePair<string, string>>();
           viewList.Clear();
-          var configViewList = new MFConfig();
+          var configViewList = new MfConfig();
 
           string catalog = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
           //bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
@@ -1648,18 +1636,18 @@ namespace MyFilmsPlugin.MyFilms
 
       using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
-        string Catalog = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+        string catalog = xmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
         string[] listSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         string[] roleSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         //bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
         //bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
-        string StrDfltSelect = xmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
-        string StrSelect = xmlConfig.ReadXmlConfig("MyFilms", config, "StrSelect", string.Empty);
-        string StrTitle1 = xmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
+        string strDfltSelect = xmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+        string strSelect = xmlConfig.ReadXmlConfig("MyFilms", config, "StrSelect", string.Empty);
+        string strTitle1 = xmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
 
 
-        if (string.IsNullOrEmpty(StrSelect))
-          StrSelect = StrTitle1 + " not like ''";
+        if (string.IsNullOrEmpty(strSelect))
+          strSelect = strTitle1 + " not like ''";
 
         int j = 0;
         for (int i = 1; i <= 5; i++)
@@ -1680,17 +1668,17 @@ namespace MyFilmsPlugin.MyFilms
           }
         }
 
-        if (File.Exists(Catalog))
+        if (File.Exists(catalog))
         {
           string champselect = "";
           string wchampselect = "";
           var wTableau = new ArrayList();
           int wnbEnr = 0;
 
-          _dataLock.EnterReadLock();
+          DataLock.EnterReadLock();
           try
           {
-            dataExport.ReadXml(Catalog);
+            dataExport.ReadXml(catalog);
           }
           catch (Exception e)
           {
@@ -1699,9 +1687,9 @@ namespace MyFilmsPlugin.MyFilms
           }
           finally
           {
-            _dataLock.ExitReadLock();
+            DataLock.ExitReadLock();
           }
-          DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect + StrSelect, view + " ASC");
+          DataRow[] results = dataExport.Tables["Movie"].Select(strDfltSelect + strSelect, view + " ASC");
           if (results.Length == 0) return null;
 
           foreach (DataRow enr in results)
@@ -1711,7 +1699,7 @@ namespace MyFilmsPlugin.MyFilms
               bool isdate = (view == "Date" || view == "DateAdded");
               champselect = (isdate) ? string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]) : enr[view].ToString().Trim();
 
-              ArrayList wtab = Base_Search_String(champselect, listSeparator, roleSeparator);
+              ArrayList wtab = BaseSearchString(champselect, listSeparator, roleSeparator);
               for (int wi = 0; wi < wtab.Count; wi++)
               {
                 wTableau.Add(wtab[wi].ToString().Trim());
@@ -1791,14 +1779,11 @@ namespace MyFilmsPlugin.MyFilms
       //string date = dateCompare.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
 
       // get all movies
-      // ArrayList allmovies = GetMoviesGlobal("", "", false);
       List<MFMovie> movielist = (from MFMovie movie in GetMoviesGlobal("", "", false) select movie).ToList();
 
       switch (type)
       {
         case MostRecentType.Added:
-          // string sqlExpression = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
-
           // only within the specified timeframe:
           if (unwatchedOnly)
             movielist = movielist.Where(m => m.Watched == false).ToList();
@@ -2060,7 +2045,7 @@ namespace MyFilmsPlugin.MyFilms
 
   public static class DBNullableExtensions
   {
-    public static object ToDBValue<T>(this T? value) where T : struct
+    public static object ToDbValue<T>(this T? value) where T : struct
     {
       return value.HasValue ? (object)value.Value : DBNull.Value;
     }

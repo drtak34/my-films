@@ -56,8 +56,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   public partial class MyFilmsSetup : Form
   {
     //private WshShellClass WshShell; // Added for creating Desktop icon via wsh
-    //fmu   private MediaPortal.Profile.Settings MyFilms_xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
-    //fmu   private MediaPortal.Profile.Settings MyFilms_xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
     XmlConfig XmlConfig = new XmlConfig();  // XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")); // XmlConfig XmlConfig = new XmlConfig();
     //XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")); //Guzzi
 
@@ -958,10 +956,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "DVDPTagField");
       }
 
-      string w_Config_Name = Config_Name.Text;
+      string wConfigName = Config_Name.Text;
       Config_Name.Items.Remove(Config_Name.Text);
-      Config_Name.Items.Add(w_Config_Name);
-      Config_Name.Text = w_Config_Name;
+      Config_Name.Items.Add(wConfigName);
+      Config_Name.Text = wConfigName;
       XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
       if (chkLogos.Checked) // Save Logoconfig ...
       {

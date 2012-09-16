@@ -2383,8 +2383,8 @@ Public Class Form1
         CurrentSettings.Series_Name_Identifier = txtSeriesNameIdentifier.Text
 
         CurrentSettings.Use_InternetData_For_Languages = chkUseInternetDataForLanguagesField.Checked
-
-
+        CurrentSettings.Use_Grabber_For_Fanart = chkUseGrabberForFanart.Checked
+        CurrentSettings.Load_Person_Images_With_Fanart = chkLoadPersonImagesWithFanart.Checked
 
         Select Case cbPictureHandling.SelectedItem
             Case "Relative Path"
@@ -2556,6 +2556,8 @@ Public Class Form1
             chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked = CurrentSettings.Only_Update_With_Nonempty_Data
 
             chkUseInternetDataForLanguagesField.Checked = CurrentSettings.Use_InternetData_For_Languages
+            chkUseGrabberForFanart.Checked = CurrentSettings.Use_Grabber_For_Fanart
+            chkLoadPersonImagesWithFanart.Checked = CurrentSettings.Load_Person_Images_With_Fanart
 
             txtManualExcludedMoviesPath.Text = CurrentSettings.Manual_Excluded_Movies_File
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path

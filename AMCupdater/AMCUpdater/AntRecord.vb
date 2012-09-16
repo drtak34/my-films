@@ -25,16 +25,11 @@ Public Class AntRecord
     Private _InteractiveMode As Boolean
     Private _ExcludeFile As String = String.Empty
     Private _ImagePath As String = String.Empty
-    Private _IsBatchMode As Boolean
     Private _InternetLookupAlwaysPrompt As Boolean
-    Private _DateHandling As String = String.Empty
-    Private _MovieTitleHandling As String = String.Empty
     Private _LastOutputMessage As String = String.Empty
     Private _Read_DVD_Label As Boolean = False
-    Private _Use_InternetData_For_Languages As Boolean = False
     Private _Dont_Ask_Interactive As Boolean = False
     Private _XMLFilePath As String = String.Empty
-    Private _XMLTempFilePath As String = String.Empty
     Private _InternetSearchHint As String = String.Empty
     Private _InternetSearchHintYear As String = String.Empty
     Private _InternetSearchHintIMDB_Id As String = String.Empty
@@ -331,36 +326,12 @@ Public Class AntRecord
             _ImagePath = value
         End Set
     End Property
-    Public Property DateHandling() As String
-        Get
-            Return _DateHandling
-        End Get
-        Set(ByVal value As String)
-            _DateHandling = value
-        End Set
-    End Property
-    Public Property MovieTitleHandling() As String
-        Get
-            Return _MovieTitleHandling
-        End Get
-        Set(ByVal value As String)
-            _MovieTitleHandling = value
-        End Set
-    End Property
     Public Property Read_DVD_Label() As Boolean
         Get
             Return _Read_DVD_Label
         End Get
         Set(ByVal value As Boolean)
             _Read_DVD_Label = value
-        End Set
-    End Property
-    Public Property Use_InternetData_For_Languages() As Boolean
-        Get
-            Return _Use_InternetData_For_Languages
-        End Get
-        Set(ByVal value As Boolean)
-            _Use_InternetData_For_Languages = value
         End Set
     End Property
     Public Property Dont_Ask_Interactive() As Boolean
@@ -1197,6 +1168,7 @@ Public Class AntRecord
 
             Dim title As String = ""
             Dim ttitle As String = ""
+            Dim ftitle As String = ""
             Dim director As String = ""
             Dim year As Int16 = 0
             Dim imdb_id As String = ""
@@ -1314,7 +1286,7 @@ Public Class AntRecord
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 TempValue = GetTitleFromFilePath(_FilePath)
                 If _InternetLookupOK = True Then
-                    If _MovieTitleHandling.Contains("Internet Lookup") = True Then
+                    If CurrentSettings.Movie_Title_Handling.Contains("Internet Lookup") = True Then
                         TempValue = _InternetData(Grabber_Output.OriginalTitle)
                         title = TempValue
                     End If
@@ -1421,7 +1393,7 @@ Public Class AntRecord
 
             CurrentAttribute = "Languages"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                If Not _Use_InternetData_For_Languages = True Then
+                If Not CurrentSettings.Use_InternetData_For_Languages = True Then
                     TempValue = GetFileData(_FilePath, "audiostreamlanguagelist")
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
@@ -1606,7 +1578,7 @@ Public Class AntRecord
                 ' Guzzi: Update Languages, if it shouold get internet data
                 CurrentAttribute = "Languages"
                 If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                    If _Use_InternetData_For_Languages = True Then
+                    If CurrentSettings.Use_InternetData_For_Languages = True Then
                         TempValue = _InternetData(Grabber_Output.Language)
                         CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                     End If
@@ -1887,96 +1859,101 @@ Public Class AntRecord
             'get fanart
             CurrentAttribute = "Fanart"
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then ' Old: If _DatabaseFields(CurrentAttribute.ToLower) = True Then
-
-                Dim fanartTitle As String = ""
-                Dim ftitle As String = ""
+                Dim fanartTitle As String
                 fanartTitle = GetFanartTitle(_XMLElement, title, ttitle, ftitle, year, director)
-
                 If fanartTitle.Length > 0 And Not String.IsNullOrEmpty(CurrentSettings.Movie_Fanart_Path) Then
-                    If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False And Not CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                        Dim fanart As List(Of Grabber.DBMovieInfo)
-                        Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                        fanart = Gb.GetFanart(title, ttitle, year, director, _InternetSearchHintIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
-                        If fanart.Count = 1 Then
-                            If fanart(0).Backdrops.Count > 0 Then
-                                TempValue = fanart(0).Backdrops(0).ToString
-                                If String.IsNullOrEmpty(TempValue) = False Then
-                                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                    Dim DoFallback As Boolean = True
+
+                    If CurrentSettings.Use_Grabber_For_Fanart = False Then
+                        'use fanart TMDB loader
+                        If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
+                            Dim fanart As List(Of Grabber.DBMovieInfo)
+                            Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
+                            fanart = Gb.GetFanart(title, ttitle, year, director, _InternetSearchHintIMDB_Id, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
+                            ' if there is exact = one match ... get backdrops
+                            If fanart.Count = 1 Then
+                                If fanart(0).Backdrops.Count > 0 Then
+                                    TempValue = fanart(0).Backdrops(0).ToString
+                                    If String.IsNullOrEmpty(TempValue) = False Then
+                                        CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                                    End If
+                                    DoFallback = False
+                                End If
+                                ' get person images, if enabled ...
+                                If CurrentSettings.Load_Person_Images_With_Fanart = True And CurrentSettings.Movie_PersonArtwork_Path.Length > 0 And Directory.Exists(CurrentSettings.Movie_PersonArtwork_Path) Then
+                                    Dim filenameperson As String = String.Empty
+                                    Dim listepersons As List(Of Grabber.DBPersonInfo) = fanart(0).Persons
+                                    For Each person As Grabber.DBPersonInfo In listepersons
+                                        Dim TheMoviedb As New Grabber.TheMoviedb()
+                                        Dim persondetails As Grabber.DBPersonInfo = TheMoviedb.getPersonsById(person.Id, String.Empty)
+                                        If persondetails.Images.Count > 0 Then
+                                            For Each image As String In persondetails.Images
+                                                If System.IO.File.Exists(System.IO.Path.Combine(CurrentSettings.Movie_PersonArtwork_Path, persondetails.Name + ".jpg")) Then
+                                                    Exit For
+                                                End If
+                                                Grabber.GrabUtil.DownloadPersonArtwork(CurrentSettings.Movie_PersonArtwork_Path, image, persondetails.Name, True, True, filenameperson)
+                                            Next
+                                        End If
+                                    Next
                                 End If
                             End If
-                            If CurrentSettings.Movie_PersonArtwork_Path.Length > 0 And System.IO.Directory.Exists(CurrentSettings.Movie_PersonArtwork_Path) Then
-                                Dim filenameperson As String = String.Empty
-                                Dim listepersons As List(Of Grabber.DBPersonInfo) = fanart(0).Persons
-                                For Each person As Grabber.DBPersonInfo In listepersons
-                                    Dim TheMoviedb As New Grabber.TheMoviedb()
-                                    Dim persondetails As Grabber.DBPersonInfo = TheMoviedb.getPersonsById(person.Id, String.Empty)
-                                    If persondetails.Images.Count > 0 Then
-                                        For Each image As String In persondetails.Images
-                                            If System.IO.File.Exists(System.IO.Path.Combine(CurrentSettings.Movie_PersonArtwork_Path, persondetails.Name + ".jpg")) Then
-                                                Exit For
-                                            End If
-                                            Grabber.GrabUtil.DownloadPersonArtwork(CurrentSettings.Movie_PersonArtwork_Path, image, persondetails.Name, True, True, filenameperson)
-                                        Next
-                                    End If
+                        End If
+                    Else
+                        'use script based fanart retrieval
+                        If Not _InternetData Is Nothing AndAlso _InternetData(Grabber_Output.Fanart).Length > 0 AndAlso System.IO.File.Exists(_InternetData(Grabber_Output.Fanart)) Then
+                            Dim NewFanartThumbName As String = _InternetData(Grabber_Output.Fanart)
+                            GrabUtil.CopyFanartToFanartFolder(NewFanartThumbName, CurrentSettings.Movie_Fanart_Path, fanartTitle, True)
+
+                            DoFallback = False
+                            TempValue = NewFanartThumbName
+                            CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+
+                            If _InternetData(Grabber_Output.MultiFanart).Length > 0 Then
+                                Dim Fanarts As List(Of String) = _InternetData(Grabber_Output.MultiFanart).Split(",").ToList()
+                                For Each validfanart As String In From fanart In Fanarts Where fanart.Trim().Length > 0 Select fanart.Trim()
+                                    GrabUtil.CopyFanartToFanartFolder(validfanart, CurrentSettings.Movie_Fanart_Path, fanartTitle, False)
                                 Next
                             End If
                         End If
-                    ElseIf CurrentSettings.Create_Cover_From_Movie Then ' create missing fanart by thumbnailer
-                        Dim FanartFileExists As Boolean = False
-                        Dim NewFanartThumbName As String = _FilePath
-                        NewFanartThumbName = System.IO.Path.GetDirectoryName(NewFanartThumbName) + "\" + System.IO.Path.GetFileNameWithoutExtension(NewFanartThumbName) + "-fanart.jpg" ' Now set to filename-fanart.jpg to get "better matching" if existing...
-                        Dim Filename As String = _FilePath
-                        Try
-                            If Not File.Exists(NewFanartThumbName) Then
-                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(fanartTitle, year, CurrentSettings.Movie_Fanart_Path, True, Filename, NewFanartThumbName, 0)
-                            End If
-                        Catch ex As Exception
-                        End Try
-                        Try
-                            If File.Exists(NewFanartThumbName) Then ' recheck, if file is existing now after trying to create thumb from movie
-                                FanartFileExists = True
-                            End If
-                        Catch ex As Exception
-                        End Try
-
-                        If FanartFileExists = True Then
-                            TempValue = NewFanartThumbName
-                            CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
-                        End If
-                    ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True And CurrentSettings.Prohibit_Internet_Lookup = False Then ' works only, when internet lookup is allowed, as otherwise no nfo file reader datra returns
-                        'If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                        Dim FanartFileExists As Boolean = False
-                        Dim NewFanartThumbName As String = _FilePath
-
-                        TempValue = _InternetData(Grabber_Output.Fanart)
-
-                        If TempValue.Length > 0 Then
-                            NewFanartThumbName = _InternetData(Grabber_Output.Fanart)
-                        Else
-                            If NewFanartThumbName.Contains("\") = True Then
-                                NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
-                            End If
-                            NewFanartThumbName += "\fanart.jpg"
-                        End If
-
-                        Try
-                            If File.Exists(NewFanartThumbName) Then
-                                FanartFileExists = True
-                            End If
-                        Catch ex As Exception
-                        End Try
-
-                        If FanartFileExists = True Then
-                            TempValue = NewFanartThumbName
-                            CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
-                            'Copy fanart to fanartfolder:
-                            GrabUtil.CopyFanartToFanartFolder(NewFanartThumbName, CurrentSettings.Movie_Fanart_Path, fanartTitle)
-                        End If
                     End If
 
+                    If DoFallback = True Then
+                        If CurrentSettings.Create_Cover_From_Movie Then ' create missing fanart by thumbnailer
+                            Dim FanartFileExists As Boolean = False
+                            ' Now set to filename-fanart.jpg to get "better matching" if existing...
+                            Dim NewFanartThumbName As String = Path.GetDirectoryName(_FilePath) + "\" + Path.GetFileNameWithoutExtension(_FilePath) + "-fanart.jpg"
+                            Try
+                                If Not File.Exists(NewFanartThumbName) Then
+                                    FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(fanartTitle, year, CurrentSettings.Movie_Fanart_Path, True, _FilePath, NewFanartThumbName, 0)
+                                End If
+                            Catch ex As Exception
+                            End Try
+                            Try
+                                If File.Exists(NewFanartThumbName) Then ' recheck, if file is existing now after trying to create thumb from movie
+                                    FanartFileExists = True
+                                End If
+                            Catch ex As Exception
+                            End Try
+
+                            If FanartFileExists = True Then
+                                TempValue = NewFanartThumbName
+                                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                            End If
+                        ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                            ' Now set to fanart.jpg
+                            If _FilePath.Contains("\") = True Then
+                                Dim NewFanartThumbName As String = _FilePath.Substring(0, _FilePath.LastIndexOf("\")) & "\fanart.jpg"
+                                If File.Exists(NewFanartThumbName) Then
+                                    TempValue = NewFanartThumbName
+                                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                                    GrabUtil.CopyFanartToFanartFolder(NewFanartThumbName, CurrentSettings.Movie_Fanart_Path, fanartTitle, True)
+                                End If
+                            End If
+                        End If
+
+                    End If
                 End If
             End If
-
         Catch ex As Exception
             _LastOutputMessage = "ErrorEvent : ErrorEvent importing " & _FileName.ToString & " : " & ex.Message.ToString & ", " & ex.StackTrace.ToString
         End Try
