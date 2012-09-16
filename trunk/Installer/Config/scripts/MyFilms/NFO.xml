@@ -5,7 +5,7 @@
     <URLPrefix />
     <Language>all</Language>
     <Type>details|cover|fanart</Type>
-    <Version>0.9</Version>
+    <Version>0.9.1</Version>
     <Encoding>UTF-8</Encoding>
     <FileBasedReader>true</FileBasedReader>
     <SearchCleanup />
@@ -246,13 +246,13 @@
       <KeyEndLinkMultiFanart />
       <KeyLinkMultiFanartIndex />
       <KeyLinkMultiFanartPage />
-      <KeyStartMultiFanart Param1="_x0023_REGEX_x0023_" Param2="">_x003C_fanart</KeyStartMultiFanart>
-      <KeyEndMultiFanart>_x003C__x002F_fana</KeyEndMultiFanart>
+      <KeyStartMultiFanart Param1="_x0023_REGEX_x0023_" Param2="">_x003C_jpg-files_x003E_</KeyStartMultiFanart>
+      <KeyEndMultiFanart>_x003C__x002F_jpg-files_x003E_</KeyEndMultiFanart>
       <KeyMultiFanartIndex />
-      <KeyMultiFanartRegExp>preview._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_th</KeyMultiFanartRegExp>
+      <KeyMultiFanartRegExp>jpg_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_jp</KeyMultiFanartRegExp>
       <KeyMultiFanartMaxItems />
-      <KeyMultiFanartLanguage />
-      <KeyMultiFanartPage />
+      <KeyMultiFanartLanguage>extra</KeyMultiFanartLanguage>
+      <KeyMultiFanartPage>DetailsPath</KeyMultiFanartPage>
       <KeyStartLinkTrailer Param1="" Param2="" />
       <KeyEndLinkTrailer />
       <KeyLinkTrailerIndex />
