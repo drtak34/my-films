@@ -613,9 +613,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // downloadingWorker = null;
         downloadingWorker.ProgressChanged -= new ProgressChangedEventHandler(downloadingWorker_ProgressChanged);
       }
-      if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
-        global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
-      using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
+      if (Configuration.CurrentConfig != "")
+        Configuration.SaveConfiguration(Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
+      using (var xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
       {
         string currentmoduleid = "7986";
         bool currentmodulefullscreen = (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_TVFULLSCREEN || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_MUSIC || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT);
@@ -7279,7 +7279,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
 
       Thread.Sleep(250);
-      FileInfo objFileInfo = new FileInfo(e.FullPath);
+      var objFileInfo = new FileInfo(e.FullPath);
       if (!objFileInfo.Exists) return; // ignore the file changed event
 
       // Trailerwatcher.EnableRaisingEvents = false;
@@ -7325,17 +7325,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch
         {
-          System.Threading.Thread.Sleep(5000); // Sleep for a bit; otherwise, it takes a bit of processor time
+          Thread.Sleep(5000); // Sleep for a bit; otherwise, it takes a bit of processor time
         }
       }
     }
 
     #region  Lecture du film demandé
-
-    public static void PlayMovie(string config, MFMovie movie)
-    {
-
-    }
 
     public static void PlayMovie(string config, int movieid)
     //-------------------------------------------------------------------------------------------
@@ -7495,23 +7490,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (g_Player.Playing) g_Player.Stop();
 
       // search all files
-      ArrayList newItems = new ArrayList();
-      bool NoResumeMovie = true;
-      int IMovieIndex = 0;
+      var newItems = new ArrayList();
+      bool noResumeMovie = true;
+      int movieIndex = 0;
 
       //Guzzi: Added BoolType for Trailerlaunch
-      Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false, filestorage);
+      Search_All_Files(select_item, false, ref noResumeMovie, ref newItems, ref movieIndex, false, filestorage);
       //Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex);
       if (newItems.Count > 20) // Maximum 20 entries (limitation for MP dialogFileStacking)
       {
-        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
         dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
         dlgOk.SetLine(1, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString()); //video title
         dlgOk.SetLine(2, "maximum 20 entries for the playlist");
         dlgOk.DoModal(GetID);
-        LogMyFilms.Info(
-          "Too many entries found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] +
-          "', number of entries found = " + newItems.Count);
+        LogMyFilms.Info("Too many entries found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count);
         return;
       }
       SetProcessAnimationStatus(false, m_SearchAnimation);
@@ -7519,16 +7512,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region optional part selection dialog
       if (newItems.Count > 1)
       {
-        if (NoResumeMovie)
+        if (noResumeMovie)
         {
-          GUIDialogFileStacking dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
+          var dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
           if (null != dlg)
           {
             dlg.SetNumberOfFiles(newItems.Count);
             dlg.DoModal(GUIWindowManager.ActiveWindow);
             int selectedFileIndex = dlg.SelectedFile;
             if (selectedFileIndex < 1) return;
-            IMovieIndex = selectedFileIndex++;
+            movieIndex = selectedFileIndex++;
           }
         }
       }
@@ -7553,8 +7546,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           foreach (object t in newItems)
           {
-            string movieFileName = (string)t;
-            PlayListItem newitem = new PlayListItem();
+            var movieFileName = (string)t;
+            var newitem = new PlayListItem();
             newitem.FileName = movieFileName;
             newitem.Type = PlayListItem.PlayListItemType.Video;
             playlist.Add(newitem);
@@ -7564,7 +7557,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Set Playbackhandler to active
           MyFilms.conf.MyFilmsPlaybackActive = true;
           // play movie...
-          PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
+          PlayMovieFromPlayList(noResumeMovie, movieIndex - 1);
           #endregion
         }
         else if (MyFilms.conf.ExternalPlayerPath.Length > 0)
@@ -7608,7 +7601,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //if (first)
         //// ask for mounting file first time
         //{
-        GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+        var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
         dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986)); //my films
         dlgYesNo.SetLine(1, GUILocalizeStrings.Get(219)); //no disc
         if (Helper.FieldIsSet(MyFilms.conf.StrIdentItem))
@@ -7623,13 +7616,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //}
         else
         {
-          GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+          var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
           dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
           dlgOk.SetLine(1, GUILocalizeStrings.Get(1036)); //no video found
           dlgOk.SetLine(2, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString());
           dlgOk.DoModal(GetID);
           LogMyFilms.Info("File not found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle]);
-          return;
         }
       }
     }
@@ -7642,23 +7634,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Run externaly Program before Playing if defined in setup
       SetProcessAnimationStatus(true, m_SearchAnimation);
       LogMyFilms.Debug("(Play Movie Trailer) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
-      if (Helper.FieldIsSet(MyFilms.conf.CmdPar))
-        RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
-      if (g_Player.Playing)
-        g_Player.Stop();
+
+      if (Helper.FieldIsSet(MyFilms.conf.CmdPar)) RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
+
+      if (g_Player.Playing) g_Player.Stop();
       // search all files
-      ArrayList newItems = new ArrayList();
-      bool NoResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
-      int IMovieIndex = 0;
+      var newItems = new ArrayList();
+      bool noResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
+      int movieIndex = 0;
 
       LogMyFilms.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + select_item + "' (Selected_Item");
       //Change back, if method in original properly adapted with bool Trailer
-      Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, true);
+      Search_All_Files(select_item, false, ref noResumeMovie, ref newItems, ref movieIndex, true);
       LogMyFilms.Debug("MyFilmsDetails (Launch_Movie_Trailer): newItems.Count: '" + newItems.Count + "'");
       if (newItems.Count > 20)
       // Maximum 20 entries (limitation for MP dialogFileStacking)
       {
-        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
         dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
         dlgOk.SetLine(1, MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString());//video title
         dlgOk.SetLine(2, "maximum 20 entries for the playlist");
@@ -7669,19 +7661,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       SetProcessAnimationStatus(false, m_SearchAnimation);
       if (newItems.Count > 1)
       {
-        GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        var dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
         dlgmenu.Reset();
         dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
         dlgmenu.Add(GUILocalizeStrings.Get(10798740)); // play all trailers 
 
         foreach (object t in newItems)
         {
-          string movieFileName = (string)t;
-          Int64 wsize = 0;
-          wsize = File.Exists(movieFileName) ? new FileInfo(movieFileName).Length : 0;
+          var movieFileName = (string)t;
+          long wsize = File.Exists(movieFileName) ? new FileInfo(movieFileName).Length : 0;
           string wsizeformatted = string.Format("{0} MB", wsize / 1048576);
           if (movieFileName.Contains("\\"))
-            dlgmenu.Add(movieFileName.Substring(movieFileName.LastIndexOf("\\") + 1) + " (" + wsizeformatted + ")"); // add moviename to menu
+            dlgmenu.Add(movieFileName.Substring(movieFileName.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + " (" + wsizeformatted + ")"); // add moviename to menu
           else
             dlgmenu.Add(movieFileName + " (" + wsizeformatted + ")"); // add moviename to menu
         }
@@ -7690,7 +7681,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (dlgmenu.SelectedLabel == -1) return;
         //if (dlgmenu.SelectedLabel > 0) // 0 = Play all trailers - so >0 -> a specific choice has been taken ...
         //IMovieIndex = dlgmenu.SelectedId; // is "1" - as "0" is used for play all movies ...
-        IMovieIndex = dlgmenu.SelectedLabel;
+        movieIndex = dlgmenu.SelectedLabel;
 
         //GUIDialogFileStacking dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
         //if (null != dlg)
@@ -7709,10 +7700,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
         playlist.Clear();
 
-        if (IMovieIndex > 0)
+        if (movieIndex > 0)
         {
-          string movieFileName = (string)newItems[IMovieIndex - 1]; // as in menu there is "all-option" as first index 0 ...
-          PlayListItem newitem = new PlayListItem();
+          var movieFileName = (string)newItems[movieIndex - 1]; // as in menu there is "all-option" as first index 0 ...
+          var newitem = new PlayListItem();
           newitem.FileName = movieFileName;
           LogMyFilms.Info("Play specific movie trailer: '" + movieFileName + "'");
           newitem.Type = PlayListItem.PlayListItemType.Video;
@@ -7722,8 +7713,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           foreach (object t in newItems)
           {
-            string movieFileName = (string)t;
-            PlayListItem newitem = new PlayListItem();
+            var movieFileName = (string)t;
+            var newitem = new PlayListItem();
             newitem.FileName = movieFileName;
             LogMyFilms.Info("Add trailer to playlist: '" + movieFileName + "'");
             newitem.Type = PlayListItem.PlayListItemType.Video;
@@ -7735,12 +7726,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // play movie...
         //PlayMovieFromPlayListTrailer(NoResumeMovie, IMovieIndex - 1);
-        PlayMovieFromPlayListTrailer(NoResumeMovie, 0);
+        PlayMovieFromPlayListTrailer(noResumeMovie, 0);
       }
       else
       {
         LogMyFilms.Info("File not found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] + "'");
-        GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+        var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
         dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986) + " " + MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString());//my films & Titel
         dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798737));//no video found locally
         dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798738)); // Try Youtube?
@@ -7750,9 +7741,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
 
 
-          GUIDialogMenu dlgmenu =
-            (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-          System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
+          var dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          var choiceViewMenu = new List<string>();
           dlgmenu.Reset();
           choiceViewMenu.Clear();
           dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
@@ -7773,9 +7763,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string titleextension = string.Empty;
           string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
           if (path.Contains(";"))
-            path = path.Substring(0, path.IndexOf(";"));
+            path = path.Substring(0, path.IndexOf(";", System.StringComparison.Ordinal));
           if (path.Contains("\\"))
-            path = path.Substring(0, path.LastIndexOf("\\"));
+            path = path.Substring(0, path.LastIndexOf("\\", System.StringComparison.Ordinal));
 
           switch (choiceViewMenu[dlgmenu.SelectedLabel].ToLower())
           {
@@ -7847,7 +7837,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //LogMyFilms.Debug("(Play Movie Trailer) select_item = '" + select_item + "' - GetID = '" + GetID + "'");
       if (g_Player.Playing)
         g_Player.Stop();
-      bool NoResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
+      const bool noResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
 
       if (newItems.Count > 20)
       // Maximum 20 entries (limitation for MP dialogFileStacking)
@@ -7865,14 +7855,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         foreach (object t in newItems)
         {
-          string movieFileName = (string)t;
-          PlayListItem newitem = new PlayListItem();
+          var movieFileName = (string)t;
+          var newitem = new PlayListItem();
           newitem.FileName = movieFileName;
           LogMyFilms.Info("Add trailer to playlist: '" + movieFileName + "'");
           newitem.Type = PlayListItem.PlayListItemType.Video;
           playlist.Add(newitem);
         }
-        PlayMovieFromPlayListTrailer(NoResumeMovie, 0);
+        PlayMovieFromPlayListTrailer(noResumeMovie, 0);
       }
     }
 
@@ -7887,8 +7877,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (g_Player.Playing)
         g_Player.Stop();
       // search all files
-      ArrayList newItems = new ArrayList();
-      bool NoResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
+      var newItems = new ArrayList();
+      const bool noResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
       int IMovieIndex = 0;
       LogMyFilms.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + select_item + "' (Selected_Item");
       if (newItems.Count > 0)
@@ -7900,8 +7890,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (IMovieIndex > 0)
         {
-          string movieFileName = (string)newItems[IMovieIndex - 1]; // as in menu there is "all-option" as first index 0 ...
-          PlayListItem newitem = new PlayListItem();
+          var movieFileName = (string)newItems[IMovieIndex - 1]; // as in menu there is "all-option" as first index 0 ...
+          var newitem = new PlayListItem();
           newitem.FileName = movieFileName;
           LogMyFilms.Info("Play specific movie trailer: '" + movieFileName + "'");
           newitem.Type = PlayListItem.PlayListItemType.Video;
@@ -7911,15 +7901,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           foreach (object t in newItems)
           {
-            string movieFileName = (string)t;
-            PlayListItem newitem = new PlayListItem();
+            var movieFileName = (string)t;
+            var newitem = new PlayListItem();
             newitem.FileName = movieFileName;
             LogMyFilms.Info("Add trailer to playlist: '" + movieFileName + "'");
             newitem.Type = PlayListItem.PlayListItemType.Video;
             playlist.Add(newitem);
           }
         }
-        PlayMovieFromPlayListTrailer(NoResumeMovie, 0);
+        PlayMovieFromPlayListTrailer(noResumeMovie, 0);
       }
     }
 
@@ -7955,30 +7945,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       VideoDatabase.DeleteMovie(fileName); // Remove file from videodatabase, if any.
       newItems.Add(fileName);
     }
-    protected static void add_update_movie(string fileName, int select_item, ref bool NoResumeMovie, ref ArrayList newItems, ref int IdMovie, ref int IMovieIndex, ref int timeMovieStopped)
+    protected static void add_update_movie(string fileName, int selectItem, ref bool noResumeMovie, ref ArrayList newItems, ref int idMovie, ref int movieIndex, ref int timeMovieStopped)
     {
       // if filename already in arraylist, return
       if (newItems.Contains(fileName))
         return;
       // search infos in the Video Database
-      IMDBMovie movieDetails = new IMDBMovie();
+      var movieDetails = new IMDBMovie();
       VideoDatabase.GetMovieInfo(fileName, ref movieDetails);
-      if (IdMovie == -1)
-        IdMovie = VideoDatabase.GetMovieId(fileName);
-      int IdFile = VideoDatabase.GetFileId(fileName);
-      byte[] resumeData = null;
-      if ((IdMovie >= 0) && (IdFile >= 0))
+      if (idMovie == -1)
+        idMovie = VideoDatabase.GetMovieId(fileName);
+      int idFile = VideoDatabase.GetFileId(fileName);
+      if (idMovie >= 0 && idFile >= 0)
       {
         //  movie database find=> ask for resume movie if any 
-        timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(IdFile, out resumeData);
+        byte[] resumeData;
+        timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
         if (timeMovieStopped > 0)
         {
-          string title = System.IO.Path.GetFileName(fileName);
+          string title = Path.GetFileName(fileName);
           if (movieDetails.Title != String.Empty) title = movieDetails.Title;
 
-          if (NoResumeMovie)
+          if (noResumeMovie)
           {
-            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
             if (null == dlgYesNo) return;
             dlgYesNo.SetHeading(GUILocalizeStrings.Get(900)); //resume movie?
             dlgYesNo.SetLine(1, title);
@@ -7988,19 +7978,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
             if (!dlgYesNo.IsConfirmed)
             {
-              VideoDatabase.DeleteMovieStopTime(IdFile);
+              VideoDatabase.DeleteMovieStopTime(idFile);
               timeMovieStopped = 0;
             }
             else
             {
-              IMovieIndex = newItems.Count + 1;
-              NoResumeMovie = false;
+              movieIndex = newItems.Count + 1;
+              noResumeMovie = false;
             }
           }
         }
       }
       // update the MP Video Database for OSD view during playing
-      UpdateDatabase(fileName, select_item, -1);
+      UpdateDatabase(fileName, selectItem, -1);
       newItems.Add(fileName);
     }
 
@@ -8507,16 +8497,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (!loader.Load(playlist, filename))
       {
-        LogMyFilms.Info("Playlist not found for movie : '" + filename.ToString() + "'");
+        LogMyFilms.Info("Playlist not found for movie : '" + filename + "'");
         return "";
       }
       filename = "";
       foreach (PlayListItem playListItem in playlist)
       {
         if (filename.Length == 0)
-          filename = playListItem.FileName.ToString();
+          filename = playListItem.FileName;
         else
-          filename = filename + ";" + playListItem.FileName.ToString();
+          filename = filename + ";" + playListItem.FileName;
       }
       return filename;
     }
@@ -8531,7 +8521,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         wdescription = wdescription.Replace('|', '\n');
         movieDetails.PlotOutline = movieDetails.Plot = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wdescription));
 
-        movieDetails.Title = MyFilms.r[selectItem][MyFilms.conf.StrTitle1].ToString();
+        var title = MyFilms.r[selectItem][MyFilms.conf.StrTitle1].ToString();
+        movieDetails.Title = (title.LastIndexOf("\\", StringComparison.Ordinal) > 0) ? title.Substring(title.LastIndexOf("\\", StringComparison.Ordinal) + 1) : title;
 
         try
         { movieDetails.RunTime = Int32.Parse(MyFilms.r[selectItem]["Length"].ToString()); }
@@ -8546,9 +8537,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         catch
         { movieDetails.Year = 0; }
 
-
-        // Modified to match changes by Deda in MyVideos (New Thumbformat)
-        // Cover save new method
         string titleExt = movieDetails.Title + "{" + idMovie + "}";
 
         //string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
@@ -9092,7 +9080,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (movieDetails.CDLabel.StartsWith("nolabel"))
           {
-            ArrayList movies = new ArrayList();
+            var movies = new ArrayList();
             //#if MP1X
             //                        VideoDatabase.GetFiles(idMovie, ref movies);
             //#else
