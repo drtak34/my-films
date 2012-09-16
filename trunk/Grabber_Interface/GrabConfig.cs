@@ -1194,7 +1194,41 @@ namespace Grabber_Interface
         if (TextURLDetail.Text.Length > 0)
         {
           URLBodyLinkDetailsPath = TextURLDetail.Text;
-          BodyLinkDetailsPath = TextURLDetail.Text;
+          if (TextURLDetail.Text.ToLower().StartsWith("http"))
+          {
+            BodyLinkDetailsPath = TextURLDetail.Text;
+          }
+          else
+          {
+            string strURL = TextURLDetail.Text;
+            if (File.Exists(strURL))
+            {
+              string MovieDirectory = Path.GetDirectoryName(strURL);
+              string MovieFilename = Path.GetFileNameWithoutExtension(strURL);
+              // Set DetailsPath
+              BodyLinkDetailsPath = "<url>" + strURL + "</url>";
+              BodyLinkDetailsPath += Environment.NewLine;
+              BodyLinkDetailsPath += "<directory>" + MovieDirectory + "</directory>";
+              BodyLinkDetailsPath += Environment.NewLine;
+              BodyLinkDetailsPath += "<filename>" + MovieFilename + "</filename>";
+              if (MovieDirectory != null)
+              {
+                string[] files = Directory.GetFiles(MovieDirectory, "*.jpg", SearchOption.AllDirectories);
+                if (files.Length > 0)
+                {
+                  BodyLinkDetailsPath += Environment.NewLine;
+                  BodyLinkDetailsPath += "<jpg-files>";
+                  foreach (string file in files)
+                  {
+                    BodyLinkDetailsPath += Environment.NewLine;
+                    BodyLinkDetailsPath += "<jpg>" + file + "</jpg>";
+                  }
+                  BodyLinkDetailsPath += Environment.NewLine;
+                  BodyLinkDetailsPath += "</jpg-files>";
+                }
+              }
+            }
+          }
         }
         else
           BodyLinkDetailsPath = "";
