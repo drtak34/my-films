@@ -2971,6 +2971,11 @@ Public Class Form1
 
     Private Sub TextBox2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox2.TextChanged
         '        TextBox2.Text = 1
+        If TextBox2.Text.Length = 0 Then
+            BindingNavigatorUpdate.Enabled = False
+        Else
+            BindingNavigatorUpdate.Enabled = True
+        End If
     End Sub
 
     Private Sub SaveConfigFileToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveConfigFileToolStripMenuItem.Click
