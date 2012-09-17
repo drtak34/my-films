@@ -6505,10 +6505,10 @@ Please refer to the Wiki online documentation.</Value>
         <Type>Extension</Type>
         <Id>269bd257-7ce5-450a-b786-1c2834c81849</Id>
         <MinVersion>
-          <Major>0</Major>
-          <Minor>29</Minor>
+          <Major>1</Major>
+          <Minor>2</Minor>
           <Build>0</Build>
-          <Revision>1</Revision>
+          <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
           <Major>9</Major>
@@ -6517,7 +6517,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v0.29 (0.29.1) or higher must be installed.</Message>
+        <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v1.2 (1.2.0.0.0) or higher must be installed.</Message>
         <Name>OnlineVideos</Name>
       </DependencyItem>
       <DependencyItem>
@@ -6530,7 +6530,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>1</Major>
+          <Major>9</Major>
           <Minor>9</Minor>
           <Build>9</Build>
           <Revision>99999</Revision>
@@ -6544,18 +6544,19 @@ Please refer to the Wiki online documentation.</Value>
         <Id>a9c3845a-8718-4712-85cc-26f56520bb9a</Id>
         <MinVersion>
           <Major>1</Major>
-          <Minor>0</Minor>
-          <Build>5</Build>
-          <Revision>1</Revision>
+          <Minor>5</Minor>
+          <Build>1</Build>
+          <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>1</Major>
+          <Major>2</Major>
           <Minor>9</Minor>
           <Build>9</Build>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.0.5.1 or above.</Message>
+        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.5.1.0 or above.
+V2.x is recommended to use latest features.</Message>
         <Name>Trakt for MediaPortal</Name>
       </DependencyItem>
     </Items>
@@ -6573,10 +6574,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -6606,7 +6607,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2531</Revision>
+      <Revision>2542</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -6618,7 +6619,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-09-15T21:50:15.1550755+02:00</ReleaseDate>
+    <ReleaseDate>2012-09-17T04:50:03.9314556+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
