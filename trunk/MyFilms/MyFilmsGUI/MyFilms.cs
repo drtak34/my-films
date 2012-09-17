@@ -1071,9 +1071,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      if (Helper.IsTraktAvailableAndEnabled)
+        MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      else
+        MyFilmsDetail.setGUIProperty("user.onlinestatus", "local");
 
-      loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
+        loadParamInfo = null; // all done, so "null" it to allow "normal browsing" from now on ...
 
       if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
       {
@@ -8606,7 +8609,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (conf.StrDfltSelect.Length > 0)
       {
-        string userfilter = conf.StrDfltSelect.Substring(0, conf.StrDfltSelect.LastIndexOf("AND")).Trim();
+        string userfilter = conf.StrDfltSelect.Substring(0, conf.StrDfltSelect.LastIndexOf("AND", StringComparison.Ordinal)).Trim();
         MyFilmsDetail.setGUIProperty("config.configfilter", userfilter);
         LogMyFilms.Debug("userfilter from setup: StrDfltSelect = '" + userfilter + "'");
       }
@@ -8614,7 +8617,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("config.configfilter");
 
       // check, if Traktuser has to be "switched"
-      if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+      if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
       {
         if (conf.StrUserProfileName == Helper.GetTraktUser())
         {
@@ -8633,7 +8636,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       // set user online status
-      MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      if (Helper.IsTraktAvailableAndEnabled)
+      {
+        MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.GetUserOnlineStatus(conf.StrUserProfileName));
+      }
+      else
+      {
+        MyFilmsDetail.setGUIProperty("user.onlinestatus", "local");
+      }
     }
 
     private void Refreshfacade()
@@ -10402,9 +10412,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // add Trakt user, if there is any configured:
       if (Helper.IsTraktAvailableAndEnabled)
       {
-        if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+        if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
         {
-          List<string> userlist = Helper.GetTraktUserList();
+          var userlist = Helper.GetTraktUserList();
 
           // Show List of users to login as
           foreach (var userlogin in userlist)
@@ -10458,7 +10468,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         default:
           conf.StrUserProfileName = (strUserProfileNameSelection != ("<" + GUILocalizeStrings.Get(10798774) + ">")) ? strUserProfileNameSelection : "";
           // check, if Traktuser has to be "switched"
-          if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+          if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
           {
             if (conf.StrUserProfileName != Helper.GetTraktUser())
             {
@@ -10545,7 +10555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // add Trakt user, if there is any configured:
       if (Helper.IsTraktAvailableAndEnabled)
       {
-        if (Helper.IsTraktAvailableAndEnabledAndVersion1311)
+        if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
         {
           List<string> userlist = Helper.GetTraktUserList();
 
