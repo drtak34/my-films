@@ -1198,6 +1198,15 @@ namespace Grabber_Interface
           if (TextURLDetail.Text.ToLower().StartsWith("http"))
           {
             BodyLinkDetailsPath = "<url>" + TextURLDetail.Text + "</url>";
+            if (TextURLDetail.Text.LastIndexOf("/", System.StringComparison.Ordinal) > 0)
+            {
+              BodyLinkDetailsPath += Environment.NewLine;
+              BodyLinkDetailsPath += "<baseurl>" + TextURLDetail.Text.Substring(0, TextURLDetail.Text.LastIndexOf("/", System.StringComparison.Ordinal)) + "</baseurl>";
+              BodyLinkDetailsPath += Environment.NewLine;
+              BodyLinkDetailsPath += "<pageurl>" + TextURLDetail.Text.Substring(TextURLDetail.Text.LastIndexOf("/", System.StringComparison.Ordinal) + 1) + "</pageurl>";
+              BodyLinkDetailsPath += Environment.NewLine;
+              BodyLinkDetailsPath += "<replacement>" + TextURLDetail.Text.Substring(0, TextURLDetail.Text.LastIndexOf("/", System.StringComparison.Ordinal)) + "%replacement%" + TextURLDetail.Text.Substring(TextURLDetail.Text.LastIndexOf("/", System.StringComparison.Ordinal) + 1) + "</replacement>";
+            }
           }
           else
           {
