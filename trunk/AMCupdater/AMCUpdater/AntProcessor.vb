@@ -1400,10 +1400,20 @@ Public Class AntProcessor
         Public XmlDoc As XmlDocument
 
         Public Sub RunUpdate()
+            ' Check, if it is a valid movie number
+            Dim IsValidNumber As Boolean
+            Dim Number As Integer
+            IsValidNumber = Integer.TryParse(Form1.TextBox2.Text, Number)
+            If IsValidNumber = False Then
+                Return
+            End If
 
             Dim CurrentNode As Xml.XmlNode
-
             CurrentNode = XmlDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & Form1.TextBox2.Text & "']")
+            If CurrentNode Is Nothing Then
+                Return
+            End If
+
             ' Save current / old state to be able to revert ...
             Dim CurrentNodeOriginalValue As Xml.XmlNode = CurrentNode.CloneNode(True)
 
