@@ -1576,7 +1576,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+            ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
           }
           break;
 
@@ -1587,7 +1587,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+            ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
           }
           break;
 
@@ -1598,7 +1598,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+            ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
           }
           break;
 
@@ -1621,7 +1621,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "trakt-RelatedMovies":
-          if (Helper.IsTraktAvailableAndEnabledAndVersion1301)
+          if (Helper.IsTraktAvailableAndEnabled)
           {
             TraktRelatedMovies(MyFilms.currentMovie);
           }
@@ -2400,7 +2400,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                "|downloaddir:" + path + "|downloadmenuentry:" + GUILocalizeStrings.Get(10798749) + " (" + title + ")"; // MyFilms: Download to movie directory
 
         InitTrailerwatcher(); // enable Trailerwatcher for the movie path, in case the user is downloading a trailer there ...
-        if (Helper.IsOnlineVideosAvailableAndEnabledV12) InitOVEventHandler();
+        if (Helper.IsOnlineVideosAvailableAndEnabled) InitOVEventHandler();
         else LogMyFilms.Error("Error subscribing to 'VideoDownloaded' event from OnlineVideos - you need OV V1.2+ installed and enabled !");
 
         LogMyFilms.Debug("Starting OnlineVideos with '" + oVstartparams + "'");
@@ -7535,7 +7535,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("Launch_Movie() - SingleItem found ('" + newItems[0] + "'), filestorage = '" + filestorage + "'");
         if (newItems[0].ToString().ToLower().EndsWith("bdmv")) isBRcontent = true;
 
-        if ((!isBRcontent || Helper.IsBDHandlerAvailableAndEnabled) && !bForceExternalPlayback)
+        if ((!isBRcontent || Helper.IsBdHandlerAvailableAndEnabled) && !bForceExternalPlayback)
         {
           #region internal playback
           LogMyFilms.Info("Launch_Movie() - start internal playback");

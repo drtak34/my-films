@@ -672,7 +672,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
     #endregion
 
     #region Assembly methods
-    public static bool IsAssemblyAvailable(string name, Version ver, bool onlymatchingversion)
+
+    private static bool IsAssemblyAvailable(string name, Version ver, bool onlymatchingversion)
     {
       bool result = false;
       // LogMyFilms.Debug(string.Format("Checking whether assembly {0} is available and loaded...", name));
@@ -711,7 +712,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return result;
     }
 
-    public static bool IsPluginEnabled(string name)
+    private static bool IsPluginEnabled(string name)
     {
       using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
       {
@@ -719,7 +720,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-    public static bool IsSubCentralAvailableAndEnabled
+    internal static bool IsSubCentralAvailableAndEnabled
     {
       get
       {
@@ -729,7 +730,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-    public static bool IsBluRayPlayerLauncherAvailableAndEnabled
+    internal static bool IsBluRayPlayerLauncherAvailableAndEnabled
     {
       get
       {
@@ -739,55 +740,35 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-    public static bool IsTraktAvailableAndEnabled
+    internal static bool IsTraktAvailableAndEnabled
     {
       get
       {
-        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 5, 1), false) && IsPluginEnabled("Trakt");
+        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 5, 1, 0), false) && IsPluginEnabled("Trakt");
         // LogMyFilms.Debug("Helper() - TraktPlugin available and enabled = '" + status + "'");
         return status;
       }
     }
 
-    public static bool IsTraktAvailableAndEnabledAndNewVersion
+    internal static bool IsTraktAvailableAndEnabledAndNewVersion
     {
       get
       {
-        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 2, 1, 1), true) && IsPluginEnabled("Trakt");
+        bool status = IsAssemblyAvailable("TraktPlugin", new Version(2, 0, 0, 0), true) && IsPluginEnabled("Trakt");
         // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
         return status;
       }
     }
 
-    public static bool IsTraktAvailableAndEnabledAndVersion1301
-    {
-      get
-      {
-        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 3, 0, 1), true) && IsPluginEnabled("Trakt");
-        // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
-        return status;
-      }
-    }
-
-    public static bool IsTraktAvailableAndEnabledAndVersion1311
-    {
-      get
-      {
-        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 3, 1, 1), true) && IsPluginEnabled("Trakt");
-        // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
-        return status;
-      }
-    }
-
-    public static bool IsBrowseTheWebAvailableAndEnabled
+    internal static bool IsBrowseTheWebAvailableAndEnabled
     {
       get
       {
         bool status = false;
-        bool BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
-        bool BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-        LogMyFilms.Debug("MyFilms.Init() - BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "', BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "'");
-        if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+        bool browseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
+        bool browseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
+        LogMyFilms.Debug("MyFilms.Init() - BrowseTheWebRightVersion = '" + browseTheWebRightVersion + "', BrowseTheWebRightVersion = '" + browseTheWebRightVersion + "'");
+        if (browseTheWebRightPlugin && browseTheWebRightVersion)
           status = true;
         LogMyFilms.Debug("Helper() - BrowseTheWeb available and enabled = '" + status + "'");
         return status;
@@ -795,7 +776,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-    public static bool IsBDHandlerAvailableAndEnabled
+    internal static bool IsBdHandlerAvailableAndEnabled
     {
       get
       {
@@ -805,36 +786,29 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-    public static bool IsOnlineVideosAvailableAndEnabled
+    internal static bool IsOnlineVideosAvailableAndEnabled
     {
       get
       {
-        bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(0, 27, 0, 0), true) && IsPluginEnabled("OnlineVideos");
+        bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(1, 2, 0, 0), true) && IsPluginEnabled("OnlineVideos");
         // LogMyFilms.Debug("Helper() - OnlineVideos available and enabled = '" + status + "'");
         return status;
       }
     }
 
-    public static bool IsOnlineVideosAvailableAndEnabledV12
+    internal static string GetTraktUser()
     {
-      get
-      {
-        bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(1, 2, 0, 0), true) && IsPluginEnabled("OnlineVideos");
-        // LogMyFilms.Debug("Helper() - OnlineVideos 1.2 available and enabled = '" + status + "'");
-        return status;
-      }
+      if (IsTraktAvailableAndEnabled) 
+        return TraktSettings.Username;
+      else
+        return string.Empty;
     }
 
-    public static string GetTraktUser()
-    {
-      return Helper.IsTraktAvailableAndEnabled ? TraktSettings.Username : string.Empty;
-    }
-
-    public static List<string> GetTraktUserList() // only available with Trakt 1.3.1+
+    internal static List<string> GetTraktUserList() // only available with Trakt 1.3.1+
     {
       // List<global::TraktPlugin.TraktAPI.DataStructures.TraktAuthentication> userlist = new List<TraktAuthentication>();
-      List<string> userlist = new List<string>();
-      if (Helper.IsTraktAvailableAndEnabled)
+      var userlist = new List<string>();
+      if (IsTraktAvailableAndEnabled)
       {
         if (TraktSettings.UserLogins.Count > 0) userlist.AddRange(TraktSettings.UserLogins.Select(user => user.Username));
         return userlist;
@@ -842,7 +816,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return null;
     }
 
-    public static bool ChangeTraktUser(string newUserName)
+    internal static bool ChangeTraktUser(string newUserName)
     {
       if (TraktSettings.UserLogins.Count == 0) return false;
 
@@ -857,10 +831,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return false;
     }
 
-    public static string GetUserOnlineStatus(string username)
+    internal static string GetUserOnlineStatus(string username)
     {
       string status = "local";
-      if (username == "" || username == "*")
+      if (username == "" || username == "Default")
       {
         status = "local";
       }
