@@ -761,7 +761,7 @@
 		<width>120</width>
 		<label>#myfilms.user.item5.value</label>
 		<font>font10</font>
-		<textcolor>ff6FAFE1</textcolor>
+        <textcolor>ivory</textcolor> 
 		<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item5.value)</visible>
 	</control>
 	<control>

@@ -650,7 +650,7 @@
       <id>2012</id>
       <posX>485</posX>
       <posY>635</posY>
-      <width>380</width>
+      <width>760</width>
       <height>35</height>
       <texture>#myfilms.logos_id2012</texture>
       <keepaspectratio>yes</keepaspectratio>
@@ -873,40 +873,40 @@
       <colordiffuse>ffffffff</colordiffuse>
       <visible>!string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
     </control>
-    <!-- User Display Item 4 -->
-    <control>
-      <description>User Item 4 Label</description>
+    <!-- User Display Item 5 -->
+    <!-- <control>
+      <description>User Item 5 Label</description>
       <type>fadelabel</type>
       <id>1</id>
       <posX>580</posX>
       <posY>680</posY>
-      <label>#myfilms.user.item4.label:</label>
+      <label>#myfilms.user.item5.label:</label>
       <textcolor>ff6FAFE1</textcolor>
       <font>font10</font>
       <align>right</align>
       <width>160</width>
       <align>right</align>
-      <visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item4.value)</visible>
-    </control>
+      <visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item5.value)</visible>
+    </control> -->
     <control>
-      <description>User Item 4 Value</description>
+      <description>User Item 5 Value preset to Certification</description>
       <type>fadelabel</type>
       <id>1</id>
-      <label>#myfilms.user.item4.value</label>
-      <posX>590</posX>
+      <label>#myfilms.user.item5.value</label>
+      <posX>488</posX>
       <posY>680</posY>
-      <width>230</width>
+      <width>310</width>
       <font>font10</font>
       <textcolor>ivory</textcolor>
       <align>left</align>
-      <visible>string.equals(#myfilms.user.item4.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+      <visible>string.equals(#myfilms.user.item5.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
     </control>
     <!-- Additional Display for Info Movie available -->
     <control>
       <description>Movie available Info Label</description>
       <type>fadelabel</type>
       <id>1</id>
-      <posX>870</posX>
+      <posX>880</posX>
       <posY>680</posY>
       <width>80</width>
       <label>#(L(1091)):</label>
@@ -919,7 +919,7 @@
       <description>Movie unavailable Icon</description>
       <type>image</type>
       <id>1</id>
-      <posX>886</posX>
+      <posX>890</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -933,7 +933,7 @@
       <description>Movie available Icon</description>
       <type>image</type>
       <id>1</id>
-      <posX>886</posX>
+      <posX>890</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -947,7 +947,7 @@
       <description>Movie offline Icon</description>
       <type>image</type>
       <id>0</id>
-      <posX>886</posX>
+      <posX>890</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -961,7 +961,7 @@
       <description>Movie unknown Icon</description>
       <type>image</type>
       <id>0</id>
-      <posX>846</posX>
+      <posX>890</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -976,7 +976,7 @@
       <description>Trailer available Info Label</description>
       <type>fadelabel</type>
       <id>1</id>
-      <posX>990</posX>
+      <posX>1000</posX>
       <posY>680</posY>
       <width>90</width>
       <label>#(L(5906)):</label>
@@ -989,7 +989,7 @@
       <description>Trailer unavailable Icon</description>
       <type>image</type>
       <id>1</id>
-      <posX>1000</posX>
+      <posX>1010</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -1003,7 +1003,7 @@
       <description>Trailer available Icon</description>
       <type>image</type>
       <id>1</id>
-      <posX>1000</posX>
+      <posX>1010</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -1017,7 +1017,7 @@
       <description>Trailer offline Icon</description>
       <type>image</type>
       <id>0</id>
-      <posX>1000</posX>
+      <posX>1010</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
@@ -1031,7 +1031,7 @@
       <description>Trailer unknown Icon</description>
       <type>image</type>
       <id>0</id>
-      <posX>1000</posX>
+      <posX>1010</posX>
       <posY>685</posY>
       <width>21</width>
       <height>21</height>
