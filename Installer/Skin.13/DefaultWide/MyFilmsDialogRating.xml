@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <window>
     <id>7988</id>
     <defaultcontrol>10</defaultcontrol>
@@ -27,7 +27,7 @@
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
         </control>
-        <!--control>
+        <!-- <control>
             <description>Rating label</description>
             <type>label</type>
             <id>3</id>
@@ -38,7 +38,7 @@
             <textcolor>ffffffff</textcolor>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
-        </control>-->
+        </control> -->
         <control>
             <description>Rating value</description>
             <type>label</type>
@@ -116,8 +116,8 @@
             <textureWidth>22</textureWidth>
             <textureHeight>22</textureHeight>
             <subitems>
-		      <subitem>greystar.png</subitem>
-		      <subitem>stargood.png</subitem>
+                      <subitem>greystar.png</subitem>
+                      <subitem>stargood.png</subitem>
             </subitems>
             <orientation>horizontal</orientation>
             <percentage>#myfilms.rating</percentage>
