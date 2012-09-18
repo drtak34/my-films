@@ -83,7 +83,7 @@
       <animation effect="fade" time="70">visible</animation>
       <animation effect="fade" time="70" delay="300">hidden</animation>
     </control>
-    <!-- <control>
+    <control>
       <description>Bottom Gradient Overlay for Fanart View</description>
       <id>0</id>
       <type>image</type>
@@ -92,10 +92,11 @@
       <width>1680</width>
       <height>150</height>
       <texture>MyFilms\gradient.png</texture>
-	  <colordiffuse>90ffffff</colordiffuse>
+	  <colordiffuse>ccffffff</colordiffuse>
+      <visible>Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-    </control> -->
+    </control>
     <!-- Windows Info -->
     <control>
       <description>Date Time</description>
@@ -1688,7 +1689,7 @@
       <id>1</id>
       <posX>520</posX>
       <posY>667</posY>
-	  <label>#myfilms.db.mediatype.value | #myfilms.db.calc.format.value | #myfilms.db.resolution.value@#myfilms.db.framerate.value fps | #myfilms.db.size.value MB in #myfilms.db.disks.value File(s)</label>
+	  <label>#(iif(neq(#myfilms.db.mediatype.value,''),'#myfilms.db.mediatype.value | ',''))#(iif(neq(#myfilms.db.calc.format.value,''),'#myfilms.db.calc.format.value | ',''))#(iif(neq(#myfilms.db.resolution.value,''),'#myfilms.db.resolution.value',''))#(iif(neq(#myfilms.db.framerate.value,''),'@#myfilms.db.framerate.value fps  | ',' | '))#(iif(neq(#myfilms.db.size.value,''),'#myfilms.db.size.value MB | ',''))#(iif(neq(#myfilms.db.disks.value,''),'#myfilms.db.disks.value file(s)',''))</label>
       <font>font10</font>
       <width>690</width>
       <textcolor>ff6FAFE1</textcolor>
@@ -1700,7 +1701,7 @@
       <id>1</id>
       <posX>520</posX>
       <posY>690</posY>
-	  <label>#myfilms.db.number.label: #myfilms.db.number.value | #myfilms.db.date.label: #myfilms.db.date.value | #myfilms.db.languages.label: #myfilms.db.languages.value | #myfilms.db.subtitles.label: #myfilms.db.subtitles.value</label>
+	  <label>#(iif(neq(#myfilms.db.number.value,''),'#myfilms.db.number.label: #myfilms.db.number.value | ',''))#(iif(neq(#myfilms.db.date.value,''),'#myfilms.db.dateadded.label: #myfilms.db.date.value | ',''))#(iif(neq(#myfilms.db.languages.value,''),'#myfilms.db.languages.label: #myfilms.db.languages.value | ',''))#(iif(neq(#myfilms.db.subtitles.value,''),'#myfilms.db.subtitles.label: #myfilms.db.subtitles.value',''))</label>
       <font>font10</font>
       <textcolor>ff6FAFE1</textcolor>
       <width>690</width>
@@ -1710,10 +1711,10 @@
       <type>image</type>
       <description>thumb Logos ID 2012</description>
       <id>2012</id>
-      <posX>520</posX>
-      <posY>625</posY>
-      <width>730</width>
-      <height>40</height>
+      <posX>518</posX>
+      <posY>630</posY>
+      <width>740</width>
+      <height>35</height>
       <texture>#myfilms.logos_id2012</texture>
       <keepaspectratio>yes</keepaspectratio>
       <spaceBetweenItems>4</spaceBetweenItems>
@@ -1726,7 +1727,7 @@
       <posX>355</posX>
       <posY>635</posY>
       <width>30</width>
-      <height>30</height>
+      <height>35</height>
       <texture>#myfilms.logos_id2003</texture>
       <keepaspectratio>yes</keepaspectratio>
       <spaceBetweenItems>2</spaceBetweenItems>
