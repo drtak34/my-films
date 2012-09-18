@@ -36,16 +36,16 @@
       <visible>string.equals(#selectedindex)+string.equals(#itemcount)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
-      <description>Config Name and Filter</description>
+      <description>Config and User Name</description>
       <type>fadelabel</type>      
       <id>1</id>
       <posX>30</posX>
       <posY>40</posY> 
-      <width>300</width>
+      <width>330</width>
       <font>font10</font>
       <align>left</align>
       <textcolor>ff6FAFE1</textcolor>      
-      <label>#myfilms.config.currentconfig</label>
+      <label>#myfilms.config.currentconfig#(iif(neq(#myfilms.user.name.value,''),': #myfilms.user.name.value',''))#(iif(eq(#myfilms.user.onlinestatus,'online'),' (Trakt)',''))</label>
       <visible>!Control.HasFocus(10099)</visible>
     </control>
   </controls>
