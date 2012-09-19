@@ -537,8 +537,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private const int RandomFanartDelay = 15000;
 
     // Version for Skin Interface
-    private const int SkinInterfaceVersionMajor = 1;
-    private const int SkinInterfaceVersionMinor = 0;
+    internal const int SkinInterfaceVersionMajor = 1;
+
+    internal const int SkinInterfaceVersionMinor = 0;
 
     public static bool DebugPropertyLogging { get; set; }
 
@@ -1100,36 +1101,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void SyncConfigFromRemoteServer()
     {
-      if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilmsServer.xml"))
+      if (!File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilmsServer.xml"))
       {
         LogMyFilms.Warn("SyncConfigFromRemoteServer() - local file MyFilmsServer.xml not found - cannot read sync settings - exit sync.");
         return;
       }
-      XmlConfig MyFilmsServer = new XmlConfig();
-      string MyFilmsCentralConfigDir = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
-      bool SyncFromServerOnStartup = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
-      LogMyFilms.Info("SyncConfigFromRemoteServer() - SyncOnStartup = '" + SyncFromServerOnStartup + "'");
-      if (SyncFromServerOnStartup && System.IO.File.Exists(MyFilmsCentralConfigDir + @"\MyFilms.xml"))
+      var myFilmsServer = new XmlConfig();
+      string myFilmsCentralConfigDir = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
+      bool syncFromServerOnStartup = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+      LogMyFilms.Info("SyncConfigFromRemoteServer() - SyncOnStartup = '" + syncFromServerOnStartup + "'");
+      if (syncFromServerOnStartup && System.IO.File.Exists(myFilmsCentralConfigDir + @"\MyFilms.xml"))
       {
-        LogMyFilms.Info("SyncConfigFromRemoteServer() - Server Sync is enabled - remote directory: '" + MyFilmsCentralConfigDir + "'");
-        string serverConfigFile = MyFilmsCentralConfigDir + @"\MyFilms.xml";
+        LogMyFilms.Info("SyncConfigFromRemoteServer() - Server Sync is enabled - remote directory: '" + myFilmsCentralConfigDir + "'");
+        string serverConfigFile = myFilmsCentralConfigDir + @"\MyFilms.xml";
         string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
-        if (!System.IO.Directory.Exists(MyFilmsCentralConfigDir))
+        if (!Directory.Exists(myFilmsCentralConfigDir))
         {
           LogMyFilms.Error("SyncConfigFromRemoteServer() - remote directory is not accessible !");
         }
-        else if (!System.IO.File.Exists(serverConfigFile))
+        else if (!File.Exists(serverConfigFile))
         {
           LogMyFilms.Error("SyncConfigFromRemoteServer() - remote config file note found !");
         }
         else
         {
-          if (System.IO.File.Exists(localConfigFile))
+          if (File.Exists(localConfigFile))
           {
             try
             {
               string backupfile = localConfigFile.Replace(".xml", " - " + DateTime.Now.ToString("u").Replace(":", "-") + ".xml").Replace("/", "-");
-              System.IO.File.Copy(localConfigFile, backupfile, true);
+              File.Copy(localConfigFile, backupfile, true);
             }
             catch (Exception)
             {
@@ -1138,7 +1139,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           try
           {
-            System.IO.File.Copy(serverConfigFile, localConfigFile, true);
+            File.Copy(serverConfigFile, localConfigFile, true);
             LogMyFilms.Info("SyncConfigFromRemoteServer() - Successfully copied remote config to local config");
           }
           catch (Exception)
@@ -1153,25 +1154,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private void CleanOrphanedDBlocks()
+    private static void CleanOrphanedDBlocks()
     {
-      using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
-        int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
-        ArrayList configs = new ArrayList();
-        for (int i = 0; i < MesFilms_nb_config; i++)
-          configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
-        XmlSettings xmlSettings = XmlConfig;
-        foreach (string StrFileXml in from string config in configs where xmlSettings != null select xmlSettings.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty))
+        int mesFilmsNbConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+        var configs = new List<string>();
+        for (var i = 0; i < mesFilmsNbConfig; i++)
+          configs.Add(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+        XmlSettings xmlSettings = xmlConfig;
+        foreach (string strFileXml in from string config in configs where xmlSettings != null select xmlSettings.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty))
         {
-          MyFilmsDetail.SetGlobalLock(false, StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
+          MyFilmsDetail.SetGlobalLock(false, strFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
         }
       }
     }
 
-    protected override void OnPageDestroy(int new_windowId)
+    protected override void OnPageDestroy(int newWindowId)
     {
-      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + newWindowId.ToString() + ") started.");
 
       // stop any background tasks
       StopLoadingViewDetails = true;
@@ -1219,9 +1220,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
 
       GUITextureManager.CleanupThumbs();
-      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
+      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + newWindowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
-      base.OnPageDestroy(new_windowId);
+      base.OnPageDestroy(newWindowId);
     }
 
     protected override void OnShowContextMenu()
@@ -15752,7 +15753,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void ShowMessageDialog(string headline, string line1, string line2, string line3)
     {
-      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
       if (dlgOK != null)
       {
         dlgOK.SetHeading(headline);
@@ -15771,7 +15772,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (wperson.Length > 0)
       {
         // First check if actror exists...
-        ArrayList actorList = new ArrayList();
+        var actorList = new ArrayList();
         // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
         MyFilmsDetail.GetActorByName(wperson, actorList);
         if (actorList.Count != 0)
@@ -15891,7 +15892,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       try
       {
-        FileInfo logFile = new FileInfo(Config.GetFile(Config.Dir.Log, LogFileName));
+        var logFile = new FileInfo(Config.GetFile(Config.Dir.Log, LogFileName));
         if (logFile.Exists)
         {
           if (File.Exists(Config.GetFile(Config.Dir.Log, OldLogFileName)))
@@ -15903,7 +15904,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       catch (Exception) { }
 
-      FileTarget fileTarget = new FileTarget();
+      var fileTarget = new FileTarget();
       // Filter logFilter = new Filter(); // use to only log MyFilms messages ...
       fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
       fileTarget.Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss,fff} " +  // "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " + 
