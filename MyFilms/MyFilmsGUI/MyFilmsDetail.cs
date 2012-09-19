@@ -6795,7 +6795,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   wstring = MyFilms.r[itemId][dc.ColumnName].ToString();
                   if (wstrformat.Length > 1)
-                    wstrformat = wstrformat + ",A:" + MyFilms.r[itemId]["AudioFormat"].ToString();
+                    wstrformat = wstrformat + ", A:" + MyFilms.r[itemId]["AudioFormat"].ToString();
                   else
                     wstrformat = "A:" + MyFilms.r[itemId]["AudioFormat"].ToString();
                 }

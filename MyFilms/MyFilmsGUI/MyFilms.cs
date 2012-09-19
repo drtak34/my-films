@@ -3216,7 +3216,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (sr["RatingUser"] != Convert.DBNull)
                     userData.SetRating(MyFilms.conf.StrUserProfileName, (decimal)sr["RatingUser"]);
                 }
-                sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+                sr[conf.StrMultiUserStateField] = userData.ResultValueString();
                 sr["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
                 sr["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
                 #endregion
