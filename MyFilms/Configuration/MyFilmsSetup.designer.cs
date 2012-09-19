@@ -122,17 +122,8 @@
           this.Config_Menu = new System.Windows.Forms.CheckBox();
           this.label_VersionNumber = new System.Windows.Forms.Label();
           this.ButCopy = new System.Windows.Forms.Button();
-          this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.groupBoxExternal = new System.Windows.Forms.GroupBox();
-          this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
           this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
-          this.groupBoxTrakt = new System.Windows.Forms.GroupBox();
-          this.linkLabelUsingTraktInMyFilmsWiki = new System.Windows.Forms.LinkLabel();
-          this.linkLabelTraktWiki = new System.Windows.Forms.LinkLabel();
-          this.labelTraktDescription = new System.Windows.Forms.Label();
           this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
-          this.pictureBox1 = new System.Windows.Forms.PictureBox();
-          this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -264,7 +255,6 @@
           this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.btnMUSdeleteUserData = new System.Windows.Forms.Button();
           this.UserProfileName = new System.Windows.Forms.TextBox();
-          this.Tab_Display = new System.Windows.Forms.TabPage();
           this.groupBox_UserItemsDetails = new System.Windows.Forms.GroupBox();
           this.AntLabelDetails6 = new System.Windows.Forms.TextBox();
           this.AntItemDetails6 = new System.Windows.Forms.ComboBox();
@@ -304,7 +294,6 @@
           this.AntItem1 = new System.Windows.Forms.ComboBox();
           this.labelMainLabel = new System.Windows.Forms.Label();
           this.AntLabel1 = new System.Windows.Forms.TextBox();
-          this.Tab_Views = new System.Windows.Forms.TabPage();
           this.groupBox_Separators = new System.Windows.Forms.GroupBox();
           this.RoleSeparator5 = new System.Windows.Forms.ComboBox();
           this.RoleSeparator4 = new System.Windows.Forms.ComboBox();
@@ -378,7 +367,6 @@
           this.AntViewFilterEditButton = new System.Windows.Forms.Button();
           this.AntViewValue = new System.Windows.Forms.TextBox();
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
-          this.Tab_Trailer = new System.Windows.Forms.TabPage();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
           this.cbTrailerAutoregister = new System.Windows.Forms.CheckBox();
           this.labelTrailers = new System.Windows.Forms.Label();
@@ -389,7 +377,6 @@
           this.label34 = new System.Windows.Forms.Label();
           this.AntStorageTrailer = new System.Windows.Forms.ComboBox();
           this.label35 = new System.Windows.Forms.Label();
-          this.Tab_General = new System.Windows.Forms.TabPage();
           this.groupBox_AntSelectedEnreg = new System.Windows.Forms.GroupBox();
           this.groupBox3 = new System.Windows.Forms.GroupBox();
           this.btnCustomConfigFilter = new System.Windows.Forms.Button();
@@ -408,33 +395,22 @@
           this.label38 = new System.Windows.Forms.Label();
           this.CmdPar = new System.Windows.Forms.ComboBox();
           this.CmdExe = new System.Windows.Forms.TextBox();
-          this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
-          this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
           this.tbExternalPlayerStartParams = new System.Windows.Forms.TextBox();
-          this.butExternalPlayer = new System.Windows.Forms.Button();
           this.tbExternalPlayerPath = new System.Windows.Forms.TextBox();
           this.tbExternalPlayerExtensions = new System.Windows.Forms.TextBox();
           this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
-          this.label23 = new System.Windows.Forms.Label();
-          this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
           this.SearchOnlyExactMatches = new System.Windows.Forms.CheckBox();
-          this.label5 = new System.Windows.Forms.Label();
           this.PathStorage = new System.Windows.Forms.TextBox();
           this.SearchSubDirs = new System.Windows.Forms.CheckBox();
-          this.butPath = new System.Windows.Forms.Button();
           this.SearchFileName = new System.Windows.Forms.CheckBox();
           this.ItemSearchFileName = new System.Windows.Forms.ComboBox();
-          this.AntIdentLabel = new System.Windows.Forms.TextBox();
-          this.label6 = new System.Windows.Forms.Label();
           this.AntStorage = new System.Windows.Forms.ComboBox();
-          this.label4 = new System.Windows.Forms.Label();
           this.AntIdentItem = new System.Windows.Forms.ComboBox();
           this.groupBox_Security = new System.Windows.Forms.GroupBox();
           this.label16 = new System.Windows.Forms.Label();
           this.label15 = new System.Windows.Forms.Label();
           this.Rpt_Dwp = new System.Windows.Forms.TextBox();
           this.Dwp = new System.Windows.Forms.TextBox();
-          this.label13 = new System.Windows.Forms.Label();
           this.CatalogType = new System.Windows.Forms.ComboBox();
           this.groupBox_TitleOrder = new System.Windows.Forms.GroupBox();
           this.label20 = new System.Windows.Forms.Label();
@@ -445,9 +421,7 @@
           this.label8 = new System.Windows.Forms.Label();
           this.AntTitle2 = new System.Windows.Forms.ComboBox();
           this.AntTitle1 = new System.Windows.Forms.ComboBox();
-          this.ButCat = new System.Windows.Forms.Button();
           this.MesFilmsCat = new System.Windows.Forms.TextBox();
-          this.label1 = new System.Windows.Forms.Label();
           this.butNew = new System.Windows.Forms.Button();
           this.groupBoxExtendedFieldHandling = new System.Windows.Forms.GroupBox();
           this.ECMergeDestinationFieldWriter = new System.Windows.Forms.ComboBox();
@@ -504,6 +478,32 @@
           this.groupBoxMultiUserState = new System.Windows.Forms.GroupBox();
           this.Label_UserProfileName = new System.Windows.Forms.Label();
           this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
+          this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.groupBoxExternal = new System.Windows.Forms.GroupBox();
+          this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
+          this.groupBoxTrakt = new System.Windows.Forms.GroupBox();
+          this.linkLabelUsingTraktInMyFilmsWiki = new System.Windows.Forms.LinkLabel();
+          this.linkLabelTraktWiki = new System.Windows.Forms.LinkLabel();
+          this.labelTraktDescription = new System.Windows.Forms.Label();
+          this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
+          this.Tab_Display = new System.Windows.Forms.TabPage();
+          this.Tab_Views = new System.Windows.Forms.TabPage();
+          this.Tab_Trailer = new System.Windows.Forms.TabPage();
+          this.Tab_General = new System.Windows.Forms.TabPage();
+          this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
+          this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
+          this.butExternalPlayer = new System.Windows.Forms.Button();
+          this.label23 = new System.Windows.Forms.Label();
+          this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
+          this.label5 = new System.Windows.Forms.Label();
+          this.butPath = new System.Windows.Forms.Button();
+          this.AntIdentLabel = new System.Windows.Forms.TextBox();
+          this.label6 = new System.Windows.Forms.Label();
+          this.label4 = new System.Windows.Forms.Label();
+          this.label13 = new System.Windows.Forms.Label();
+          this.ButCat = new System.Windows.Forms.Button();
+          this.label1 = new System.Windows.Forms.Label();
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
           this.label11 = new System.Windows.Forms.Label();
@@ -546,6 +546,7 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
+          this.Tab_About = new System.Windows.Forms.TabPage();
           this.Tab_Other = new System.Windows.Forms.TabPage();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
           this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -613,6 +614,10 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.label28 = new System.Windows.Forms.Label();
+          this.groupBoxSupportedCatalogs = new System.Windows.Forms.GroupBox();
+          this.label41 = new System.Windows.Forms.Label();
+          this.groupBoxAbout = new System.Windows.Forms.GroupBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -630,10 +635,6 @@
           label69 = new System.Windows.Forms.Label();
           label66 = new System.Windows.Forms.Label();
           label65 = new System.Windows.Forms.Label();
-          this.Tab_Trakt.SuspendLayout();
-          this.groupBoxExternal.SuspendLayout();
-          this.groupBoxTrakt.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
           this.Fanart.SuspendLayout();
@@ -651,10 +652,8 @@
           this.groupBoxDeletionOptions.SuspendLayout();
           this.gpspfield.SuspendLayout();
           this.groupBox2.SuspendLayout();
-          this.Tab_Display.SuspendLayout();
           this.groupBox_UserItemsDetails.SuspendLayout();
           this.groupBox_UserItemsMain.SuspendLayout();
-          this.Tab_Views.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
           this.groupBox7.SuspendLayout();
@@ -669,14 +668,10 @@
           this.groupBoxSortAndLayoutForView.SuspendLayout();
           this.groupBox5.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).BeginInit();
-          this.Tab_Trailer.SuspendLayout();
           this.groupBox24.SuspendLayout();
-          this.Tab_General.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox_PreLaunchingCommand.SuspendLayout();
-          this.groupBox_PlayMovieInfos.SuspendLayout();
-          this.groupBoxMoviePathInfos.SuspendLayout();
           this.groupBox_Security.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
           this.groupBoxExtendedFieldHandling.SuspendLayout();
@@ -687,6 +682,16 @@
           this.groupBox6.SuspendLayout();
           this.groupBox_UpdateGrabberScripts.SuspendLayout();
           this.groupBoxMultiUserState.SuspendLayout();
+          this.Tab_Trakt.SuspendLayout();
+          this.groupBoxExternal.SuspendLayout();
+          this.groupBoxTrakt.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+          this.Tab_Display.SuspendLayout();
+          this.Tab_Views.SuspendLayout();
+          this.Tab_Trailer.SuspendLayout();
+          this.Tab_General.SuspendLayout();
+          this.groupBox_PlayMovieInfos.SuspendLayout();
+          this.groupBoxMoviePathInfos.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBoxAMCsettings.SuspendLayout();
           this.Tab_Network.SuspendLayout();
@@ -695,6 +700,7 @@
           this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
+          this.Tab_About.SuspendLayout();
           this.Tab_Other.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
@@ -707,6 +713,8 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          this.groupBoxSupportedCatalogs.SuspendLayout();
+          this.groupBoxAbout.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -968,41 +976,6 @@
           this.ButCopy.UseVisualStyleBackColor = true;
           this.ButCopy.Click += new System.EventHandler(this.ButCopy_Click);
           // 
-          // Tab_Trakt
-          // 
-          this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
-          this.Tab_Trakt.Controls.Add(this.groupBoxTrakt);
-          this.Tab_Trakt.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Trakt.Name = "Tab_Trakt";
-          this.Tab_Trakt.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Trakt.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Trakt.TabIndex = 10;
-          this.Tab_Trakt.Text = "Trakt & Latest Media";
-          this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
-          this.Tab_Trakt.UseVisualStyleBackColor = true;
-          this.Tab_Trakt.Visible = false;
-          // 
-          // groupBoxExternal
-          // 
-          this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
-          this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
-          this.groupBoxExternal.Location = new System.Drawing.Point(19, 244);
-          this.groupBoxExternal.Name = "groupBoxExternal";
-          this.groupBoxExternal.Size = new System.Drawing.Size(698, 89);
-          this.groupBoxExternal.TabIndex = 93;
-          this.groupBoxExternal.TabStop = false;
-          this.groupBoxExternal.Text = "Recentrly Added Media ...";
-          // 
-          // labelRecentlyAddedAPI
-          // 
-          this.labelRecentlyAddedAPI.AutoSize = true;
-          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(21, 47);
-          this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
-          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(279, 26);
-          this.labelRecentlyAddedAPI.TabIndex = 5;
-          this.labelRecentlyAddedAPI.Text = "You can enable or disable per config, if you want to \r\ninclude the catalog conten" +
-              "t to the recently added media...";
-          // 
           // cbAllowRecentAddedAPI
           // 
           this.cbAllowRecentAddedAPI.AutoSize = true;
@@ -1016,52 +989,6 @@
                   "is for multiple configs.");
           this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
-          // groupBoxTrakt
-          // 
-          this.groupBoxTrakt.Controls.Add(this.linkLabelUsingTraktInMyFilmsWiki);
-          this.groupBoxTrakt.Controls.Add(this.linkLabelTraktWiki);
-          this.groupBoxTrakt.Controls.Add(this.labelTraktDescription);
-          this.groupBoxTrakt.Controls.Add(this.cbAllowTraktSync);
-          this.groupBoxTrakt.Controls.Add(this.pictureBox1);
-          this.groupBoxTrakt.Controls.Add(this.linkLabelTrakt);
-          this.groupBoxTrakt.Location = new System.Drawing.Point(19, 15);
-          this.groupBoxTrakt.Name = "groupBoxTrakt";
-          this.groupBoxTrakt.Size = new System.Drawing.Size(698, 223);
-          this.groupBoxTrakt.TabIndex = 5;
-          this.groupBoxTrakt.TabStop = false;
-          this.groupBoxTrakt.Text = "Trakt ...";
-          // 
-          // linkLabelUsingTraktInMyFilmsWiki
-          // 
-          this.linkLabelUsingTraktInMyFilmsWiki.AutoSize = true;
-          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 133);
-          this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
-          this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
-          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
-          this.linkLabelUsingTraktInMyFilmsWiki.TabStop = true;
-          this.linkLabelUsingTraktInMyFilmsWiki.Text = "Using Trakt in MyFilms";
-          this.linkLabelUsingTraktInMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsingTraktInMyFilmsWiki_LinkClicked);
-          // 
-          // linkLabelTraktWiki
-          // 
-          this.linkLabelTraktWiki.AutoSize = true;
-          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 169);
-          this.linkLabelTraktWiki.Name = "linkLabelTraktWiki";
-          this.linkLabelTraktWiki.Size = new System.Drawing.Size(56, 13);
-          this.linkLabelTraktWiki.TabIndex = 4;
-          this.linkLabelTraktWiki.TabStop = true;
-          this.linkLabelTraktWiki.Text = "Trakt Wiki";
-          this.linkLabelTraktWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTraktWiki_LinkClicked);
-          // 
-          // labelTraktDescription
-          // 
-          this.labelTraktDescription.AutoSize = true;
-          this.labelTraktDescription.Location = new System.Drawing.Point(21, 54);
-          this.labelTraktDescription.Name = "labelTraktDescription";
-          this.labelTraktDescription.Size = new System.Drawing.Size(407, 156);
-          this.labelTraktDescription.TabIndex = 2;
-          this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
-          // 
           // cbAllowTraktSync
           // 
           this.cbAllowTraktSync.AutoSize = true;
@@ -1072,26 +999,6 @@
           this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation for this config";
           this.ToolTip1.SetToolTip(this.cbAllowTraktSync, resources.GetString("cbAllowTraktSync.ToolTip"));
           this.cbAllowTraktSync.UseVisualStyleBackColor = true;
-          // 
-          // pictureBox1
-          // 
-          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
-          this.pictureBox1.Location = new System.Drawing.Point(521, 17);
-          this.pictureBox1.Name = "pictureBox1";
-          this.pictureBox1.Size = new System.Drawing.Size(52, 50);
-          this.pictureBox1.TabIndex = 3;
-          this.pictureBox1.TabStop = false;
-          // 
-          // linkLabelTrakt
-          // 
-          this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(518, 98);
-          this.linkLabelTrakt.Name = "linkLabelTrakt";
-          this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
-          this.linkLabelTrakt.TabIndex = 1;
-          this.linkLabelTrakt.TabStop = true;
-          this.linkLabelTrakt.Text = "Trakt Website";
-          this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
           // 
           // groupBox9
           // 
@@ -2554,19 +2461,6 @@
           this.UserProfileName.TabIndex = 71;
           this.ToolTip1.SetToolTip(this.UserProfileName, resources.GetString("UserProfileName.ToolTip"));
           // 
-          // Tab_Display
-          // 
-          this.Tab_Display.AutoScroll = true;
-          this.Tab_Display.Controls.Add(this.groupBox_UserItemsDetails);
-          this.Tab_Display.Controls.Add(this.groupBox_UserItemsMain);
-          this.Tab_Display.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Display.Name = "Tab_Display";
-          this.Tab_Display.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Display.TabIndex = 9;
-          this.Tab_Display.Text = "Display";
-          this.ToolTip1.SetToolTip(this.Tab_Display, "Setup for user defined display items");
-          this.Tab_Display.UseVisualStyleBackColor = true;
-          // 
           // groupBox_UserItemsDetails
           // 
           this.groupBox_UserItemsDetails.Controls.Add(this.AntLabelDetails6);
@@ -2935,20 +2829,6 @@
           this.AntLabel1.Name = "AntLabel1";
           this.AntLabel1.Size = new System.Drawing.Size(105, 20);
           this.AntLabel1.TabIndex = 26;
-          // 
-          // Tab_Views
-          // 
-          this.Tab_Views.Controls.Add(this.groupBox_Separators);
-          this.Tab_Views.Controls.Add(this.groupBox_DefaultView);
-          this.Tab_Views.Controls.Add(this.groupBoxView);
-          this.Tab_Views.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Views.Name = "Tab_Views";
-          this.Tab_Views.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Views.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Views.TabIndex = 1;
-          this.Tab_Views.Text = "Views";
-          this.ToolTip1.SetToolTip(this.Tab_Views, "Setup for userdefined views and filters");
-          this.Tab_Views.UseVisualStyleBackColor = true;
           // 
           // groupBox_Separators
           // 
@@ -3820,18 +3700,6 @@
           this.ToolTip1.SetToolTip(this.AntViewIndex, "You can view normally (\"0\") or indexed. Indexed means there will be a grouping by" +
                   " the first x characters (1 or 2).");
           // 
-          // Tab_Trailer
-          // 
-          this.Tab_Trailer.Controls.Add(this.groupBox24);
-          this.Tab_Trailer.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Trailer.Name = "Tab_Trailer";
-          this.Tab_Trailer.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Trailer.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Trailer.TabIndex = 7;
-          this.Tab_Trailer.Text = "Trailer";
-          this.ToolTip1.SetToolTip(this.Tab_Trailer, "Setup for trailer options like search paths and options for behaviour in GUI");
-          this.Tab_Trailer.UseVisualStyleBackColor = true;
-          // 
           // groupBox24
           // 
           this.groupBox24.Controls.Add(this.cbTrailerAutoregister);
@@ -3940,28 +3808,6 @@
           this.label35.Size = new System.Drawing.Size(147, 13);
           this.label35.TabIndex = 69;
           this.label35.Text = "DB Item for storing Trailer Info";
-          // 
-          // Tab_General
-          // 
-          this.Tab_General.Controls.Add(this.groupBox_AntSelectedEnreg);
-          this.Tab_General.Controls.Add(this.groupBox_PreLaunchingCommand);
-          this.Tab_General.Controls.Add(this.lblYellowShowRequiredItems);
-          this.Tab_General.Controls.Add(this.groupBox_PlayMovieInfos);
-          this.Tab_General.Controls.Add(this.groupBox_Security);
-          this.Tab_General.Controls.Add(this.label13);
-          this.Tab_General.Controls.Add(this.CatalogType);
-          this.Tab_General.Controls.Add(this.groupBox_TitleOrder);
-          this.Tab_General.Controls.Add(this.ButCat);
-          this.Tab_General.Controls.Add(this.MesFilmsCat);
-          this.Tab_General.Controls.Add(this.label1);
-          this.Tab_General.Location = new System.Drawing.Point(4, 22);
-          this.Tab_General.Name = "Tab_General";
-          this.Tab_General.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_General.Size = new System.Drawing.Size(747, 354);
-          this.Tab_General.TabIndex = 0;
-          this.Tab_General.Text = "General";
-          this.ToolTip1.SetToolTip(this.Tab_General, "Basic configuration like selecting movie catalog, titles to display, etc.");
-          this.Tab_General.UseVisualStyleBackColor = true;
           // 
           // groupBox_AntSelectedEnreg
           // 
@@ -4173,39 +4019,6 @@
           this.ToolTip1.SetToolTip(this.CmdExe, "Enter the commandline to an application you want to launch before the movie is st" +
                   "arted in internal player");
           // 
-          // lblYellowShowRequiredItems
-          // 
-          this.lblYellowShowRequiredItems.AutoSize = true;
-          this.lblYellowShowRequiredItems.BackColor = System.Drawing.SystemColors.Info;
-          this.lblYellowShowRequiredItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 323);
-          this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
-          this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(245, 15);
-          this.lblYellowShowRequiredItems.TabIndex = 76;
-          this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory for the plugin to work !";
-          this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-          // 
-          // groupBox_PlayMovieInfos
-          // 
-          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerStartParams);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.butExternalPlayer);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerPath);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerExtensions);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.chkScanMediaOnStart);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.label23);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.groupBoxMoviePathInfos);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentLabel);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.label6);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.AntStorage);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.label4);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentItem);
-          this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 151);
-          this.groupBox_PlayMovieInfos.Name = "groupBox_PlayMovieInfos";
-          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(438, 197);
-          this.groupBox_PlayMovieInfos.TabIndex = 74;
-          this.groupBox_PlayMovieInfos.TabStop = false;
-          this.groupBox_PlayMovieInfos.Text = "Movie Playback Path Configuration";
-          // 
           // tbExternalPlayerStartParams
           // 
           this.tbExternalPlayerStartParams.Location = new System.Drawing.Point(302, 169);
@@ -4215,16 +4028,6 @@
           this.ToolTip1.SetToolTip(this.tbExternalPlayerStartParams, "External Player start parameters.\r\n\r\nSupported placeholders:\r\n- %filename%\r\n- %fp" +
                   "s%\r\n- %root%\r\n- %drive%\r\n\r\nE.g. use %filename% as placeholder for the media file" +
                   " to be played.");
-          // 
-          // butExternalPlayer
-          // 
-          this.butExternalPlayer.Location = new System.Drawing.Point(267, 169);
-          this.butExternalPlayer.Name = "butExternalPlayer";
-          this.butExternalPlayer.Size = new System.Drawing.Size(29, 20);
-          this.butExternalPlayer.TabIndex = 71;
-          this.butExternalPlayer.Text = "...";
-          this.butExternalPlayer.UseVisualStyleBackColor = true;
-          this.butExternalPlayer.Click += new System.EventHandler(this.butExternalPlayer_Click);
           // 
           // tbExternalPlayerPath
           // 
@@ -4255,31 +4058,6 @@
           this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
           this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
           // 
-          // label23
-          // 
-          this.label23.AutoSize = true;
-          this.label23.Location = new System.Drawing.Point(12, 172);
-          this.label23.Name = "label23";
-          this.label23.Size = new System.Drawing.Size(77, 13);
-          this.label23.TabIndex = 84;
-          this.label23.Text = "External Player";
-          // 
-          // groupBoxMoviePathInfos
-          // 
-          this.groupBoxMoviePathInfos.Controls.Add(this.SearchOnlyExactMatches);
-          this.groupBoxMoviePathInfos.Controls.Add(this.label5);
-          this.groupBoxMoviePathInfos.Controls.Add(this.PathStorage);
-          this.groupBoxMoviePathInfos.Controls.Add(this.SearchSubDirs);
-          this.groupBoxMoviePathInfos.Controls.Add(this.butPath);
-          this.groupBoxMoviePathInfos.Controls.Add(this.SearchFileName);
-          this.groupBoxMoviePathInfos.Controls.Add(this.ItemSearchFileName);
-          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 41);
-          this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
-          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(420, 92);
-          this.groupBoxMoviePathInfos.TabIndex = 71;
-          this.groupBoxMoviePathInfos.TabStop = false;
-          this.groupBoxMoviePathInfos.Text = "Playback Search Configuration";
-          // 
           // SearchOnlyExactMatches
           // 
           this.SearchOnlyExactMatches.AutoSize = true;
@@ -4290,15 +4068,6 @@
           this.SearchOnlyExactMatches.Text = "Only exact \r\nMatches";
           this.ToolTip1.SetToolTip(this.SearchOnlyExactMatches, resources.GetString("SearchOnlyExactMatches.ToolTip"));
           this.SearchOnlyExactMatches.UseVisualStyleBackColor = true;
-          // 
-          // label5
-          // 
-          this.label5.AutoSize = true;
-          this.label5.Location = new System.Drawing.Point(6, 17);
-          this.label5.Name = "label5";
-          this.label5.Size = new System.Drawing.Size(145, 13);
-          this.label5.TabIndex = 60;
-          this.label5.Text = "Paths for Movies File Search ";
           // 
           // PathStorage
           // 
@@ -4319,16 +4088,6 @@
           this.ToolTip1.SetToolTip(this.SearchSubDirs, "Select this option if you want the search for the movie files \r\nto include sub-fo" +
                   "lders of the defined path.\r\n");
           this.SearchSubDirs.UseVisualStyleBackColor = true;
-          // 
-          // butPath
-          // 
-          this.butPath.Location = new System.Drawing.Point(384, 14);
-          this.butPath.Name = "butPath";
-          this.butPath.Size = new System.Drawing.Size(29, 20);
-          this.butPath.TabIndex = 55;
-          this.butPath.Text = "...";
-          this.butPath.UseVisualStyleBackColor = true;
-          this.butPath.Click += new System.EventHandler(this.butPath_Click);
           // 
           // SearchFileName
           // 
@@ -4356,22 +4115,6 @@
           this.ItemSearchFileName.TabIndex = 67;
           this.ToolTip1.SetToolTip(this.ItemSearchFileName, resources.GetString("ItemSearchFileName.ToolTip"));
           // 
-          // AntIdentLabel
-          // 
-          this.AntIdentLabel.Location = new System.Drawing.Point(302, 140);
-          this.AntIdentLabel.Name = "AntIdentLabel";
-          this.AntIdentLabel.Size = new System.Drawing.Size(124, 20);
-          this.AntIdentLabel.TabIndex = 57;
-          // 
-          // label6
-          // 
-          this.label6.AutoSize = true;
-          this.label6.Location = new System.Drawing.Point(11, 18);
-          this.label6.Name = "label6";
-          this.label6.Size = new System.Drawing.Size(152, 13);
-          this.label6.TabIndex = 59;
-          this.label6.Text = "DB Field for Movie Source Info";
-          // 
           // AntStorage
           // 
           this.AntStorage.BackColor = System.Drawing.SystemColors.Info;
@@ -4382,15 +4125,6 @@
           this.AntStorage.Sorted = true;
           this.AntStorage.TabIndex = 53;
           this.ToolTip1.SetToolTip(this.AntStorage, resources.GetString("AntStorage.ToolTip"));
-          // 
-          // label4
-          // 
-          this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(12, 144);
-          this.label4.Name = "label4";
-          this.label4.Size = new System.Drawing.Size(132, 13);
-          this.label4.TabIndex = 58;
-          this.label4.Text = "Offline Media Identification";
           // 
           // AntIdentItem
           // 
@@ -4452,15 +4186,6 @@
                   " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
                   "ond field.\r\n");
           this.Dwp.UseSystemPasswordChar = true;
-          // 
-          // label13
-          // 
-          this.label13.AutoSize = true;
-          this.label13.Location = new System.Drawing.Point(457, 17);
-          this.label13.Name = "label13";
-          this.label13.Size = new System.Drawing.Size(70, 13);
-          this.label13.TabIndex = 63;
-          this.label13.Text = "Catalog Type";
           // 
           // CatalogType
           // 
@@ -4586,16 +4311,6 @@
           this.AntTitle1.TabIndex = 10;
           this.ToolTip1.SetToolTip(this.AntTitle1, resources.GetString("AntTitle1.ToolTip"));
           // 
-          // ButCat
-          // 
-          this.ButCat.Location = new System.Drawing.Point(397, 15);
-          this.ButCat.Name = "ButCat";
-          this.ButCat.Size = new System.Drawing.Size(29, 20);
-          this.ButCat.TabIndex = 49;
-          this.ButCat.Text = "...";
-          this.ButCat.UseVisualStyleBackColor = true;
-          this.ButCat.Click += new System.EventHandler(this.ButCat_Click);
-          // 
           // MesFilmsCat
           // 
           this.MesFilmsCat.BackColor = System.Drawing.SystemColors.Info;
@@ -4607,15 +4322,6 @@
                   "se button to find the file");
           this.MesFilmsCat.TextChanged += new System.EventHandler(this.MesFilmsCat_TextChanged);
           this.MesFilmsCat.Leave += new System.EventHandler(this.MesFilmsCat_Leave);
-          // 
-          // label1
-          // 
-          this.label1.AutoSize = true;
-          this.label1.Location = new System.Drawing.Point(17, 18);
-          this.label1.Name = "label1";
-          this.label1.Size = new System.Drawing.Size(93, 13);
-          this.label1.TabIndex = 47;
-          this.label1.Text = "Catalog File (XML)";
           // 
           // butNew
           // 
@@ -5305,6 +5011,308 @@
           this.chkEnhancedWatchedStatusHandling.Text = "MUS autoenabled";
           this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
           // 
+          // Tab_Trakt
+          // 
+          this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
+          this.Tab_Trakt.Controls.Add(this.groupBoxTrakt);
+          this.Tab_Trakt.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Trakt.Name = "Tab_Trakt";
+          this.Tab_Trakt.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Trakt.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Trakt.TabIndex = 10;
+          this.Tab_Trakt.Text = "Trakt & Latest Media";
+          this.Tab_Trakt.ToolTipText = "Setup for Trakt user settings";
+          this.Tab_Trakt.UseVisualStyleBackColor = true;
+          this.Tab_Trakt.Visible = false;
+          // 
+          // groupBoxExternal
+          // 
+          this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
+          this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
+          this.groupBoxExternal.Location = new System.Drawing.Point(19, 244);
+          this.groupBoxExternal.Name = "groupBoxExternal";
+          this.groupBoxExternal.Size = new System.Drawing.Size(698, 89);
+          this.groupBoxExternal.TabIndex = 93;
+          this.groupBoxExternal.TabStop = false;
+          this.groupBoxExternal.Text = "Recentrly Added Media ...";
+          // 
+          // labelRecentlyAddedAPI
+          // 
+          this.labelRecentlyAddedAPI.AutoSize = true;
+          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(21, 47);
+          this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
+          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(279, 26);
+          this.labelRecentlyAddedAPI.TabIndex = 5;
+          this.labelRecentlyAddedAPI.Text = "You can enable or disable per config, if you want to \r\ninclude the catalog conten" +
+              "t to the recently added media...";
+          // 
+          // groupBoxTrakt
+          // 
+          this.groupBoxTrakt.Controls.Add(this.linkLabelUsingTraktInMyFilmsWiki);
+          this.groupBoxTrakt.Controls.Add(this.linkLabelTraktWiki);
+          this.groupBoxTrakt.Controls.Add(this.labelTraktDescription);
+          this.groupBoxTrakt.Controls.Add(this.cbAllowTraktSync);
+          this.groupBoxTrakt.Controls.Add(this.pictureBox1);
+          this.groupBoxTrakt.Controls.Add(this.linkLabelTrakt);
+          this.groupBoxTrakt.Location = new System.Drawing.Point(19, 15);
+          this.groupBoxTrakt.Name = "groupBoxTrakt";
+          this.groupBoxTrakt.Size = new System.Drawing.Size(698, 223);
+          this.groupBoxTrakt.TabIndex = 5;
+          this.groupBoxTrakt.TabStop = false;
+          this.groupBoxTrakt.Text = "Trakt ...";
+          // 
+          // linkLabelUsingTraktInMyFilmsWiki
+          // 
+          this.linkLabelUsingTraktInMyFilmsWiki.AutoSize = true;
+          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 133);
+          this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
+          this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
+          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
+          this.linkLabelUsingTraktInMyFilmsWiki.TabStop = true;
+          this.linkLabelUsingTraktInMyFilmsWiki.Text = "Using Trakt in MyFilms";
+          this.linkLabelUsingTraktInMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsingTraktInMyFilmsWiki_LinkClicked);
+          // 
+          // linkLabelTraktWiki
+          // 
+          this.linkLabelTraktWiki.AutoSize = true;
+          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 169);
+          this.linkLabelTraktWiki.Name = "linkLabelTraktWiki";
+          this.linkLabelTraktWiki.Size = new System.Drawing.Size(56, 13);
+          this.linkLabelTraktWiki.TabIndex = 4;
+          this.linkLabelTraktWiki.TabStop = true;
+          this.linkLabelTraktWiki.Text = "Trakt Wiki";
+          this.linkLabelTraktWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTraktWiki_LinkClicked);
+          // 
+          // labelTraktDescription
+          // 
+          this.labelTraktDescription.AutoSize = true;
+          this.labelTraktDescription.Location = new System.Drawing.Point(21, 54);
+          this.labelTraktDescription.Name = "labelTraktDescription";
+          this.labelTraktDescription.Size = new System.Drawing.Size(407, 156);
+          this.labelTraktDescription.TabIndex = 2;
+          this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
+          // 
+          // pictureBox1
+          // 
+          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
+          this.pictureBox1.Location = new System.Drawing.Point(521, 17);
+          this.pictureBox1.Name = "pictureBox1";
+          this.pictureBox1.Size = new System.Drawing.Size(52, 50);
+          this.pictureBox1.TabIndex = 3;
+          this.pictureBox1.TabStop = false;
+          // 
+          // linkLabelTrakt
+          // 
+          this.linkLabelTrakt.AutoSize = true;
+          this.linkLabelTrakt.Location = new System.Drawing.Point(518, 98);
+          this.linkLabelTrakt.Name = "linkLabelTrakt";
+          this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
+          this.linkLabelTrakt.TabIndex = 1;
+          this.linkLabelTrakt.TabStop = true;
+          this.linkLabelTrakt.Text = "Trakt Website";
+          this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
+          // 
+          // Tab_Display
+          // 
+          this.Tab_Display.AutoScroll = true;
+          this.Tab_Display.Controls.Add(this.groupBox_UserItemsDetails);
+          this.Tab_Display.Controls.Add(this.groupBox_UserItemsMain);
+          this.Tab_Display.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Display.Name = "Tab_Display";
+          this.Tab_Display.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Display.TabIndex = 9;
+          this.Tab_Display.Text = "Display";
+          this.Tab_Display.ToolTipText = "Setup for user defined display items";
+          this.Tab_Display.UseVisualStyleBackColor = true;
+          // 
+          // Tab_Views
+          // 
+          this.Tab_Views.Controls.Add(this.groupBox_Separators);
+          this.Tab_Views.Controls.Add(this.groupBox_DefaultView);
+          this.Tab_Views.Controls.Add(this.groupBoxView);
+          this.Tab_Views.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Views.Name = "Tab_Views";
+          this.Tab_Views.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Views.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Views.TabIndex = 1;
+          this.Tab_Views.Text = "Views";
+          this.Tab_Views.ToolTipText = "Setup for userdefined views and filters";
+          this.Tab_Views.UseVisualStyleBackColor = true;
+          // 
+          // Tab_Trailer
+          // 
+          this.Tab_Trailer.Controls.Add(this.groupBox24);
+          this.Tab_Trailer.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Trailer.Name = "Tab_Trailer";
+          this.Tab_Trailer.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Trailer.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Trailer.TabIndex = 7;
+          this.Tab_Trailer.Text = "Trailer";
+          this.Tab_Trailer.ToolTipText = "Setup for trailer options like search paths and options for behaviour in GUI";
+          this.Tab_Trailer.UseVisualStyleBackColor = true;
+          // 
+          // Tab_General
+          // 
+          this.Tab_General.Controls.Add(this.groupBox_AntSelectedEnreg);
+          this.Tab_General.Controls.Add(this.groupBox_PreLaunchingCommand);
+          this.Tab_General.Controls.Add(this.lblYellowShowRequiredItems);
+          this.Tab_General.Controls.Add(this.groupBox_PlayMovieInfos);
+          this.Tab_General.Controls.Add(this.groupBox_Security);
+          this.Tab_General.Controls.Add(this.label13);
+          this.Tab_General.Controls.Add(this.CatalogType);
+          this.Tab_General.Controls.Add(this.groupBox_TitleOrder);
+          this.Tab_General.Controls.Add(this.ButCat);
+          this.Tab_General.Controls.Add(this.MesFilmsCat);
+          this.Tab_General.Controls.Add(this.label1);
+          this.Tab_General.Location = new System.Drawing.Point(4, 22);
+          this.Tab_General.Name = "Tab_General";
+          this.Tab_General.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_General.Size = new System.Drawing.Size(747, 354);
+          this.Tab_General.TabIndex = 0;
+          this.Tab_General.Text = "General";
+          this.Tab_General.ToolTipText = "Basic configuration like selecting movie catalog, titles to display, etc.";
+          this.Tab_General.UseVisualStyleBackColor = true;
+          // 
+          // lblYellowShowRequiredItems
+          // 
+          this.lblYellowShowRequiredItems.AutoSize = true;
+          this.lblYellowShowRequiredItems.BackColor = System.Drawing.SystemColors.Info;
+          this.lblYellowShowRequiredItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 323);
+          this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
+          this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(245, 15);
+          this.lblYellowShowRequiredItems.TabIndex = 76;
+          this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory for the plugin to work !";
+          this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+          // 
+          // groupBox_PlayMovieInfos
+          // 
+          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerStartParams);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.butExternalPlayer);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerPath);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.tbExternalPlayerExtensions);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.chkScanMediaOnStart);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.label23);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.groupBoxMoviePathInfos);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentLabel);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.label6);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.AntStorage);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.label4);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentItem);
+          this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 151);
+          this.groupBox_PlayMovieInfos.Name = "groupBox_PlayMovieInfos";
+          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(438, 197);
+          this.groupBox_PlayMovieInfos.TabIndex = 74;
+          this.groupBox_PlayMovieInfos.TabStop = false;
+          this.groupBox_PlayMovieInfos.Text = "Movie Playback Path Configuration";
+          // 
+          // butExternalPlayer
+          // 
+          this.butExternalPlayer.Location = new System.Drawing.Point(267, 169);
+          this.butExternalPlayer.Name = "butExternalPlayer";
+          this.butExternalPlayer.Size = new System.Drawing.Size(29, 20);
+          this.butExternalPlayer.TabIndex = 71;
+          this.butExternalPlayer.Text = "...";
+          this.butExternalPlayer.UseVisualStyleBackColor = true;
+          this.butExternalPlayer.Click += new System.EventHandler(this.butExternalPlayer_Click);
+          // 
+          // label23
+          // 
+          this.label23.AutoSize = true;
+          this.label23.Location = new System.Drawing.Point(12, 172);
+          this.label23.Name = "label23";
+          this.label23.Size = new System.Drawing.Size(77, 13);
+          this.label23.TabIndex = 84;
+          this.label23.Text = "External Player";
+          // 
+          // groupBoxMoviePathInfos
+          // 
+          this.groupBoxMoviePathInfos.Controls.Add(this.SearchOnlyExactMatches);
+          this.groupBoxMoviePathInfos.Controls.Add(this.label5);
+          this.groupBoxMoviePathInfos.Controls.Add(this.PathStorage);
+          this.groupBoxMoviePathInfos.Controls.Add(this.SearchSubDirs);
+          this.groupBoxMoviePathInfos.Controls.Add(this.butPath);
+          this.groupBoxMoviePathInfos.Controls.Add(this.SearchFileName);
+          this.groupBoxMoviePathInfos.Controls.Add(this.ItemSearchFileName);
+          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 41);
+          this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
+          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(420, 92);
+          this.groupBoxMoviePathInfos.TabIndex = 71;
+          this.groupBoxMoviePathInfos.TabStop = false;
+          this.groupBoxMoviePathInfos.Text = "Playback Search Configuration";
+          // 
+          // label5
+          // 
+          this.label5.AutoSize = true;
+          this.label5.Location = new System.Drawing.Point(6, 17);
+          this.label5.Name = "label5";
+          this.label5.Size = new System.Drawing.Size(145, 13);
+          this.label5.TabIndex = 60;
+          this.label5.Text = "Paths for Movies File Search ";
+          // 
+          // butPath
+          // 
+          this.butPath.Location = new System.Drawing.Point(384, 14);
+          this.butPath.Name = "butPath";
+          this.butPath.Size = new System.Drawing.Size(29, 20);
+          this.butPath.TabIndex = 55;
+          this.butPath.Text = "...";
+          this.butPath.UseVisualStyleBackColor = true;
+          this.butPath.Click += new System.EventHandler(this.butPath_Click);
+          // 
+          // AntIdentLabel
+          // 
+          this.AntIdentLabel.Location = new System.Drawing.Point(302, 140);
+          this.AntIdentLabel.Name = "AntIdentLabel";
+          this.AntIdentLabel.Size = new System.Drawing.Size(124, 20);
+          this.AntIdentLabel.TabIndex = 57;
+          // 
+          // label6
+          // 
+          this.label6.AutoSize = true;
+          this.label6.Location = new System.Drawing.Point(11, 18);
+          this.label6.Name = "label6";
+          this.label6.Size = new System.Drawing.Size(152, 13);
+          this.label6.TabIndex = 59;
+          this.label6.Text = "DB Field for Movie Source Info";
+          // 
+          // label4
+          // 
+          this.label4.AutoSize = true;
+          this.label4.Location = new System.Drawing.Point(12, 144);
+          this.label4.Name = "label4";
+          this.label4.Size = new System.Drawing.Size(132, 13);
+          this.label4.TabIndex = 58;
+          this.label4.Text = "Offline Media Identification";
+          // 
+          // label13
+          // 
+          this.label13.AutoSize = true;
+          this.label13.Location = new System.Drawing.Point(457, 17);
+          this.label13.Name = "label13";
+          this.label13.Size = new System.Drawing.Size(70, 13);
+          this.label13.TabIndex = 63;
+          this.label13.Text = "Catalog Type";
+          // 
+          // ButCat
+          // 
+          this.ButCat.Location = new System.Drawing.Point(397, 15);
+          this.ButCat.Name = "ButCat";
+          this.ButCat.Size = new System.Drawing.Size(29, 20);
+          this.ButCat.TabIndex = 49;
+          this.ButCat.Text = "...";
+          this.ButCat.UseVisualStyleBackColor = true;
+          this.ButCat.Click += new System.EventHandler(this.ButCat_Click);
+          // 
+          // label1
+          // 
+          this.label1.AutoSize = true;
+          this.label1.Location = new System.Drawing.Point(17, 18);
+          this.label1.Name = "label1";
+          this.label1.Size = new System.Drawing.Size(93, 13);
+          this.label1.TabIndex = 47;
+          this.label1.Text = "Catalog File (XML)";
+          // 
           // label11
           // 
           this.label11.AutoSize = true;
@@ -5774,14 +5782,28 @@
           this.General.Controls.Add(this.Tab_Network);
           this.General.Controls.Add(this.Tab_ExternalCatalogs);
           this.General.Controls.Add(this.Tab_Trakt);
+          this.General.Controls.Add(this.Tab_About);
           this.General.Controls.Add(this.Tab_Other);
           this.General.Controls.Add(this.Tab_OldStuff);
           this.General.Location = new System.Drawing.Point(12, 78);
           this.General.Name = "General";
           this.General.SelectedIndex = 0;
+          this.General.ShowToolTips = true;
           this.General.Size = new System.Drawing.Size(755, 380);
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
+          // 
+          // Tab_About
+          // 
+          this.Tab_About.Controls.Add(this.groupBoxSupportedCatalogs);
+          this.Tab_About.Controls.Add(this.groupBoxAbout);
+          this.Tab_About.Location = new System.Drawing.Point(4, 22);
+          this.Tab_About.Name = "Tab_About";
+          this.Tab_About.Size = new System.Drawing.Size(747, 354);
+          this.Tab_About.TabIndex = 13;
+          this.Tab_About.Text = "About";
+          this.Tab_About.ToolTipText = "About Info for MyFilms";
+          this.Tab_About.UseVisualStyleBackColor = true;
           // 
           // Tab_Other
           // 
@@ -5805,6 +5827,7 @@
           this.Tab_Other.Size = new System.Drawing.Size(747, 354);
           this.Tab_Other.TabIndex = 11;
           this.Tab_Other.Text = "Other";
+          this.Tab_Other.ToolTipText = "Other NonPublic Content";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
           // personDataGridView
@@ -6099,6 +6122,7 @@
           this.Tab_OldStuff.Size = new System.Drawing.Size(747, 354);
           this.Tab_OldStuff.TabIndex = 12;
           this.Tab_OldStuff.Text = "Old Stuff";
+          this.Tab_OldStuff.ToolTipText = "Temorary placed elements";
           this.Tab_OldStuff.UseVisualStyleBackColor = true;
           // 
           // groupBox8
@@ -6366,6 +6390,45 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // label28
+          // 
+          this.label28.AutoSize = true;
+          this.label28.Location = new System.Drawing.Point(27, 25);
+          this.label28.Name = "label28";
+          this.label28.Size = new System.Drawing.Size(561, 117);
+          this.label28.TabIndex = 0;
+          this.label28.Text = resources.GetString("label28.Text");
+          // 
+          // groupBoxSupportedCatalogs
+          // 
+          this.groupBoxSupportedCatalogs.Controls.Add(this.label41);
+          this.groupBoxSupportedCatalogs.Location = new System.Drawing.Point(30, 183);
+          this.groupBoxSupportedCatalogs.Name = "groupBoxSupportedCatalogs";
+          this.groupBoxSupportedCatalogs.Size = new System.Drawing.Size(682, 156);
+          this.groupBoxSupportedCatalogs.TabIndex = 2;
+          this.groupBoxSupportedCatalogs.TabStop = false;
+          this.groupBoxSupportedCatalogs.Text = "Credits ...";
+          // 
+          // label41
+          // 
+          this.label41.AutoSize = true;
+          this.label41.Location = new System.Drawing.Point(27, 18);
+          this.label41.Name = "label41";
+          this.label41.Size = new System.Drawing.Size(650, 130);
+          this.label41.TabIndex = 5;
+          this.label41.Text = resources.GetString("label41.Text");
+          this.label41.Click += new System.EventHandler(this.label41_Click);
+          // 
+          // groupBoxAbout
+          // 
+          this.groupBoxAbout.Controls.Add(this.label28);
+          this.groupBoxAbout.Location = new System.Drawing.Point(30, 13);
+          this.groupBoxAbout.Name = "groupBoxAbout";
+          this.groupBoxAbout.Size = new System.Drawing.Size(682, 165);
+          this.groupBoxAbout.TabIndex = 0;
+          this.groupBoxAbout.TabStop = false;
+          this.groupBoxAbout.Text = "About MyFilms ...";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6399,12 +6462,6 @@
           this.Text = "MyFilms Setup";
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
-          this.Tab_Trakt.ResumeLayout(false);
-          this.groupBoxExternal.ResumeLayout(false);
-          this.groupBoxExternal.PerformLayout();
-          this.groupBoxTrakt.ResumeLayout(false);
-          this.groupBoxTrakt.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
           this.groupBox25.ResumeLayout(false);
@@ -6435,12 +6492,10 @@
           this.gpspfield.PerformLayout();
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
-          this.Tab_Display.ResumeLayout(false);
           this.groupBox_UserItemsDetails.ResumeLayout(false);
           this.groupBox_UserItemsDetails.PerformLayout();
           this.groupBox_UserItemsMain.ResumeLayout(false);
           this.groupBox_UserItemsMain.PerformLayout();
-          this.Tab_Views.ResumeLayout(false);
           this.groupBox_Separators.ResumeLayout(false);
           this.groupBox_Separators.PerformLayout();
           this.groupBox_DefaultView.ResumeLayout(false);
@@ -6463,21 +6518,14 @@
           this.groupBox5.ResumeLayout(false);
           this.groupBox5.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).EndInit();
-          this.Tab_Trailer.ResumeLayout(false);
           this.groupBox24.ResumeLayout(false);
           this.groupBox24.PerformLayout();
-          this.Tab_General.ResumeLayout(false);
-          this.Tab_General.PerformLayout();
           this.groupBox_AntSelectedEnreg.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.PerformLayout();
           this.groupBox3.ResumeLayout(false);
           this.groupBox3.PerformLayout();
           this.groupBox_PreLaunchingCommand.ResumeLayout(false);
           this.groupBox_PreLaunchingCommand.PerformLayout();
-          this.groupBox_PlayMovieInfos.ResumeLayout(false);
-          this.groupBox_PlayMovieInfos.PerformLayout();
-          this.groupBoxMoviePathInfos.ResumeLayout(false);
-          this.groupBoxMoviePathInfos.PerformLayout();
           this.groupBox_Security.ResumeLayout(false);
           this.groupBox_Security.PerformLayout();
           this.groupBox_TitleOrder.ResumeLayout(false);
@@ -6496,6 +6544,21 @@
           this.groupBox_UpdateGrabberScripts.PerformLayout();
           this.groupBoxMultiUserState.ResumeLayout(false);
           this.groupBoxMultiUserState.PerformLayout();
+          this.Tab_Trakt.ResumeLayout(false);
+          this.groupBoxExternal.ResumeLayout(false);
+          this.groupBoxExternal.PerformLayout();
+          this.groupBoxTrakt.ResumeLayout(false);
+          this.groupBoxTrakt.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+          this.Tab_Display.ResumeLayout(false);
+          this.Tab_Views.ResumeLayout(false);
+          this.Tab_Trailer.ResumeLayout(false);
+          this.Tab_General.ResumeLayout(false);
+          this.Tab_General.PerformLayout();
+          this.groupBox_PlayMovieInfos.ResumeLayout(false);
+          this.groupBox_PlayMovieInfos.PerformLayout();
+          this.groupBoxMoviePathInfos.ResumeLayout(false);
+          this.groupBoxMoviePathInfos.PerformLayout();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxAMCsettings.ResumeLayout(false);
           this.groupBoxAMCsettings.PerformLayout();
@@ -6506,6 +6569,7 @@
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
+          this.Tab_About.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).EndInit();
@@ -6520,6 +6584,10 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          this.groupBoxSupportedCatalogs.ResumeLayout(false);
+          this.groupBoxSupportedCatalogs.PerformLayout();
+          this.groupBoxAbout.ResumeLayout(false);
+          this.groupBoxAbout.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -7026,5 +7094,10 @@
         private CheckBox chkVirtualPathBrowsing;
         private Button btnMUSdeleteUserData;
         private GroupBox groupBoxMultiUserState;
+        private TabPage Tab_About;
+        private GroupBox groupBoxSupportedCatalogs;
+        private Label label41;
+        private GroupBox groupBoxAbout;
+        private Label label28;
     }
 }
