@@ -102,10 +102,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
       {
         //hide a tab by removing it from the TabPages collection
-        this.tabPageSave = General.TabPages[12]; // Disable other stuff tab, only temp tab for development
-        this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
+        this.tabPageSave = General.TabPages[13];
+        this.General.TabPages.Remove(tabPageSave); // Disable "Old Stuff" Tab, as it has stuff not for public
+        this.tabPageSave = General.TabPages[12];
+        this.General.TabPages.Remove(tabPageSave); // Disable "Other" Tab, as it has stuff not for public
         this.tabPageSave = General.TabPages[11];
-        this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
+        this.General.TabPages.Remove(tabPageSave); // Disable "About" Tab
         // this.Label_UserProfileName.Visible = false;
         // this.UserProfileName.Visible = false;
         this.cbTrailerAutoregister.Visible = false;
@@ -134,6 +136,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       //    this.General.TabPages.Insert(loc, this.tabPageSave);
       //  }
       //}
+
+      //// load about labels
+      //LogMyFilms.Info("MyFilms.Init() started on '" + System.Environment.MachineName + "'.");
+      //LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version + "', BuildDate: '" + MyFilmsSettings.BuildDate + "'");
+      //LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion + "',    BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
+      //LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + MyFilms.SkinInterfaceVersionMajor + "." + MyFilms.SkinInterfaceVersionMinor + "'");
 
       LogMyFilms.Info("MyFilms Setup: Started with version '" + label_VersionNumber.Text + "'");
 
@@ -6238,6 +6246,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     }
 
     private void button1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label41_Click(object sender, EventArgs e)
     {
 
     }
