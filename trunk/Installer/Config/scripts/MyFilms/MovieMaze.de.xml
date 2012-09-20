@@ -5,12 +5,13 @@
     <URLPrefix>http://www.moviemaze.de</URLPrefix>
     <Language>de</Language>
     <Type>cover</Type>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="" />
       <KeyEndThumb />
@@ -61,28 +62,28 @@
       <KeyEndImg>_x0022_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
-      <KeyStartLinkImg Param1="_x0023_REVERSE_x0023__x0023_REGEX_x0023__x0023_MULTI_x0023__x002F__x005C_d_x005C_d_x002F__x007C__x002F_1_x002F__x003B__x002F_media_x007C_http:_x002F__x002F_www.moviemaze.de_x002F_media" Param2="_x002F_1_x002F_">_x0023_REGEX_x0023__x0022__x003E__x003C_img_x0020_src_x003D__x0022__x002F_filme_x002F_</KeyStartLinkImg>
-      <KeyEndLinkImg>href_x003D__x0022_</KeyEndLinkImg>
+      <KeyStartLinkImg Param1="_x0023_REGEX_x0023__x0025_replacement_x0025_" Param2="_x002F_1_x002F_">_x003C_replacement_x003E_</KeyStartLinkImg>
+      <KeyEndLinkImg>_x003C__x002F_replacement_x003E_</KeyEndLinkImg>
       <KeyLinkImgIndex />
-      <KeyLinkImgPage />
+      <KeyLinkImgPage>DetailsPath</KeyLinkImgPage>
       <KeyEncodingLinkImg />
-      <KeyStartRate Param1="" Param2="" />
-      <KeyEndRate />
+      <KeyStartRate Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x0023_REGEX_x0023__x003C_h3_x003E_Durchschnittliche_x0020_Redaktionswertung_x003C__x002F_h3_x003E_._x002A__x003F_alt_x003D__x0022_</KeyStartRate>
+      <KeyEndRate>_x0022_</KeyEndRate>
       <KeyRateIndex />
-      <KeyRatePage />
+      <KeyRatePage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyRatePage>
       <KeyStartRate2 Param1="" Param2="" />
       <KeyEndRate2 />
       <KeyRate2Index />
       <KeyRate2Page />
-      <BaseRating />
+      <BaseRating>_x0031_00</BaseRating>
       <KeyStartSyn Param1="" Param2="">_x0022__x003E__x003C_h3_x003E_Inhalt_x003C__x002F_h3_x003E_</KeyStartSyn>
       <KeyEndSyn>_x003C__x002F_div_x003E_</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeySynPage>
-      <KeyStartRealise Param1="" Param2="" />
-      <KeyEndRealise />
+      <KeyStartRealise Param1="" Param2="">Regie:</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_tr_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
-      <KeyRealisePage />
+      <KeyRealisePage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyRealisePage>
       <KeyRealiseRegExp />
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="" Param2="" />
@@ -91,43 +92,43 @@
       <KeyProductPage />
       <KeyProductRegExp />
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="" Param2="" />
-      <KeyEndWriter />
+      <KeyStartWriter Param1="" Param2="">Drehbuch:</KeyStartWriter>
+      <KeyEndWriter>_x003C__x002F_tr_x003E_</KeyEndWriter>
       <KeyWriterIndex />
-      <KeyWriterPage />
+      <KeyWriterPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyWriterPage>
       <KeyWriterRegExp />
       <KeyWriterMaxItems />
-      <KeyStartCredits Param1="" Param2="" />
-      <KeyEndCredits />
-      <KeyCreditsRegExp />
+      <KeyStartCredits Param1="_x0023_REGEX_x0023_" Param2="">Darsteller:</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_tr_x003E_</KeyEndCredits>
+      <KeyCreditsRegExp>actors_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F__x005C__x0028__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x005C__x0029_</KeyCreditsRegExp>
       <KeyCreditsIndex />
-      <KeyCreditsPage />
+      <KeyCreditsPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyCreditsPage>
       <KeyCreditsMaxItems />
-      <KeyCreditsGrabActorRoles>false</KeyCreditsGrabActorRoles>
-      <KeyStartCountry Param1="" Param2="" />
-      <KeyEndCountry />
+      <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
+      <KeyStartCountry Param1="" Param2="">Land:</KeyStartCountry>
+      <KeyEndCountry>_x003C__x002F_tr_x003E_</KeyEndCountry>
       <KeyCountryRegExp />
       <KeyCountryIndex />
-      <KeyCountryPage />
-      <KeyStartGenre Param1="" Param2="" />
-      <KeyEndGenre />
+      <KeyCountryPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyCountryPage>
+      <KeyStartGenre Param1="" Param2="">Genre:</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_tr_x003E_</KeyEndGenre>
       <KeyGenreRegExp />
       <KeyGenreIndex />
-      <KeyGenrePage />
-      <KeyStartYear Param1="" Param2="">Movieyear_x003D_</KeyStartYear>
-      <KeyEndYear>_x0026_</KeyEndYear>
+      <KeyGenrePage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyGenrePage>
+      <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_d_x005C_d_x005C_._x007C__x005C_D" Param2="">_x0023_REGEX_x0023_Premiere:</KeyStartYear>
+      <KeyEndYear>_x0028_</KeyEndYear>
       <KeyYearIndex />
-      <KeyYearPage />
+      <KeyYearPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyYearPage>
       <KeyStartLinkPersons Param1="" Param2="" />
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
       <KeyEncodingLinkPersons />
-      <KeyStartComment Param1="" Param2="" />
-      <KeyEndComment />
+      <KeyStartComment Param1="" Param2="">_x003D__x0022_summary_x0022__x003E_</KeyStartComment>
+      <KeyEndComment>_x003E__x003C__x002F_div_x003E__x003C_br_x002F__x003E_</KeyEndComment>
       <KeyCommentRegExp />
       <KeyCommentIndex />
-      <KeyCommentPage />
+      <KeyCommentPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyCommentPage>
       <KeyStartLanguage Param1="" Param2="" />
       <KeyEndLanguage />
       <KeyLanguageIndex />
@@ -136,11 +137,11 @@
       <KeyEndTagline />
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="" Param2="" />
-      <KeyEndCertification />
+      <KeyStartCertification Param1="_x0023_REGEX_x0023_ab" Param2="">FSK:</KeyStartCertification>
+      <KeyEndCertification>_x003C__x002F_nobr_x003E_</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
-      <KeyCertificationPage />
+      <KeyCertificationPage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyCertificationPage>
       <KeyCertificationLanguage />
       <KeyCertificationLanguageAll />
       <KeyStartLinkTitles Param1="" Param2="" />
