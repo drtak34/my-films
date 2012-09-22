@@ -1255,28 +1255,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       NAS_MAC_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "NAS-MAC-3", string.Empty);
 
       AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem1", "Category");
-      AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", BaseMesFilms.Translate_Column(AntItem1.Text.Trim()));
+      AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel1", BaseMesFilms.TranslateColumn(AntItem1.Text.Trim()));
       AntItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem2", "Country");
-      AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel2", BaseMesFilms.Translate_Column(AntItem2.Text.Trim()));
+      AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel2", BaseMesFilms.TranslateColumn(AntItem2.Text.Trim()));
       AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem3", "Director");
-      AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel3", BaseMesFilms.Translate_Column(AntItem3.Text.Trim()));
+      AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel3", BaseMesFilms.TranslateColumn(AntItem3.Text.Trim()));
       AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem4", "Languages");
-      AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", BaseMesFilms.Translate_Column(AntItem4.Text.Trim()));
+      AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel4", BaseMesFilms.TranslateColumn(AntItem4.Text.Trim()));
       AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItem5", "Certification");
-      AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", BaseMesFilms.Translate_Column(AntItem5.Text.Trim()));
+      AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabel5", BaseMesFilms.TranslateColumn(AntItem5.Text.Trim()));
 
       AntItemDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails1", "Category");
-      AntLabelDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails1", BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim()));
+      AntLabelDetails1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails1", BaseMesFilms.TranslateColumn(AntItemDetails1.Text.Trim()));
       AntItemDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails2", "Country");
-      AntLabelDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim()));
+      AntLabelDetails2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails2", BaseMesFilms.TranslateColumn(AntItemDetails2.Text.Trim()));
       AntItemDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails3", "Director");
-      AntLabelDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim()));
+      AntLabelDetails3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails3", BaseMesFilms.TranslateColumn(AntItemDetails3.Text.Trim()));
       AntItemDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails4", "Producer");
-      AntLabelDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim()));
+      AntLabelDetails4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails4", BaseMesFilms.TranslateColumn(AntItemDetails4.Text.Trim()));
       AntItemDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails5", "Writer");
-      AntLabelDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim()));
+      AntLabelDetails5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails5", BaseMesFilms.TranslateColumn(AntItemDetails5.Text.Trim()));
       AntItemDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntItemDetails6", "Certification");
-      AntLabelDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails6", BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim()));
+      AntLabelDetails6.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntLabelDetails6", BaseMesFilms.TranslateColumn(AntItemDetails6.Text.Trim()));
 
       ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator1", ",");
       ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ListSeparator2", ";");
@@ -2130,29 +2130,29 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           //Presets for useritems for main screen:
           AntItem1.Text = "Category";
-          AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+          AntLabel1.Text = BaseMesFilms.TranslateColumn(AntItem1.Text.Trim());
           AntItem2.Text = "Country";
-          AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+          AntLabel2.Text = BaseMesFilms.TranslateColumn(AntItem2.Text.Trim());
           AntItem3.Text = "Director";
-          AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+          AntLabel3.Text = BaseMesFilms.TranslateColumn(AntItem3.Text.Trim());
           AntItem4.Text = "Languages";
-          AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+          AntLabel4.Text = BaseMesFilms.TranslateColumn(AntItem4.Text.Trim());
           AntItem5.Text = "Certification";
-          AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+          AntLabel5.Text = BaseMesFilms.TranslateColumn(AntItem5.Text.Trim());
 
           //Presets for useritems for details screen:
           AntItemDetails1.Text = "Category";
-          AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+          AntLabelDetails1.Text = BaseMesFilms.TranslateColumn(AntItemDetails1.Text.Trim());
           AntItemDetails2.Text = "Country";
-          AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+          AntLabelDetails2.Text = BaseMesFilms.TranslateColumn(AntItemDetails2.Text.Trim());
           AntItemDetails3.Text = "Director";
-          AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+          AntLabelDetails3.Text = BaseMesFilms.TranslateColumn(AntItemDetails3.Text.Trim());
           AntItemDetails4.Text = "Producer";
-          AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+          AntLabelDetails4.Text = BaseMesFilms.TranslateColumn(AntItemDetails4.Text.Trim());
           AntItemDetails5.Text = "Writer";
-          AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+          AntLabelDetails5.Text = BaseMesFilms.TranslateColumn(AntItemDetails5.Text.Trim());
           AntItemDetails6.Text = "Certification";
-          AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
+          AntLabelDetails6.Text = BaseMesFilms.TranslateColumn(AntItemDetails6.Text.Trim());
         }
         Tab_ExternalCatalogs.Enabled = true;
         txtPicturePrefix.Text = "";
@@ -2362,31 +2362,31 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Year";
       newRow.SortDirectionView = " DESC";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Year.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //Category
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Category";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Category.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //Country
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Country";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Country.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //RecentlyAdded
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "RecentlyAdded";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\RecentlyAdded.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //Indexed title view
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = AntTitle1.Text;
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.Index = 1;
       newRow.Value = "*";
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\TitlesIndex.jpg";
@@ -2403,13 +2403,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Actors";
       newRow.Index = 1;
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\PersonsIndex.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //Producer
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Producer";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons.jpg";
       MyCustomViews.View.Rows.Add(newRow);
     }
@@ -2428,19 +2428,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Year";
       newRow.SortDirectionView = " DESC";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Year.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //Category
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Category";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Category.jpg";
       MyCustomViews.View.Rows.Add(newRow);
       //Country
       newRow = MyCustomViews.View.NewViewRow();
       newRow.DBfield = "Country";
-      newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+      newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
       newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Country.jpg";
       MyCustomViews.View.Rows.Add(newRow);
     }
@@ -4809,53 +4809,53 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       {
         case 0: // AMC3
           AntItem1.Text = "Category";
-          AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+          AntLabel1.Text = BaseMesFilms.TranslateColumn(AntItem1.Text.Trim());
           AntItem2.Text = "Country";
-          AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+          AntLabel2.Text = BaseMesFilms.TranslateColumn(AntItem2.Text.Trim());
           AntItem3.Text = "Director";
-          AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+          AntLabel3.Text = BaseMesFilms.TranslateColumn(AntItem3.Text.Trim());
           AntItem4.Text = "Languages";
-          AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+          AntLabel4.Text = BaseMesFilms.TranslateColumn(AntItem4.Text.Trim());
           AntItem5.Text = "Date";
-          AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+          AntLabel5.Text = BaseMesFilms.TranslateColumn(AntItem5.Text.Trim());
 
           AntItemDetails1.Text = "Category";
-          AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+          AntLabelDetails1.Text = BaseMesFilms.TranslateColumn(AntItemDetails1.Text.Trim());
           AntItemDetails2.Text = "Country";
-          AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+          AntLabelDetails2.Text = BaseMesFilms.TranslateColumn(AntItemDetails2.Text.Trim());
           AntItemDetails3.Text = "Director";
-          AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+          AntLabelDetails3.Text = BaseMesFilms.TranslateColumn(AntItemDetails3.Text.Trim());
           AntItemDetails4.Text = "Producer";
-          AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+          AntLabelDetails4.Text = BaseMesFilms.TranslateColumn(AntItemDetails4.Text.Trim());
           AntItemDetails5.Text = "Languages";
-          AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+          AntLabelDetails5.Text = BaseMesFilms.TranslateColumn(AntItemDetails5.Text.Trim());
           AntItemDetails6.Text = "Date";
-          AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
+          AntLabelDetails6.Text = BaseMesFilms.TranslateColumn(AntItemDetails6.Text.Trim());
           break;
         default:
           AntItem1.Text = "Category";
-          AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+          AntLabel1.Text = BaseMesFilms.TranslateColumn(AntItem1.Text.Trim());
           AntItem2.Text = "Country";
-          AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+          AntLabel2.Text = BaseMesFilms.TranslateColumn(AntItem2.Text.Trim());
           AntItem3.Text = "Director";
-          AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+          AntLabel3.Text = BaseMesFilms.TranslateColumn(AntItem3.Text.Trim());
           AntItem4.Text = "Languages";
-          AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+          AntLabel4.Text = BaseMesFilms.TranslateColumn(AntItem4.Text.Trim());
           AntItem5.Text = "Certification";
-          AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+          AntLabel5.Text = BaseMesFilms.TranslateColumn(AntItem5.Text.Trim());
 
           AntItemDetails1.Text = "Category";
-          AntLabelDetails1.Text = BaseMesFilms.Translate_Column(AntItemDetails1.Text.Trim());
+          AntLabelDetails1.Text = BaseMesFilms.TranslateColumn(AntItemDetails1.Text.Trim());
           AntItemDetails2.Text = "Country";
-          AntLabelDetails2.Text = BaseMesFilms.Translate_Column(AntItemDetails2.Text.Trim());
+          AntLabelDetails2.Text = BaseMesFilms.TranslateColumn(AntItemDetails2.Text.Trim());
           AntItemDetails3.Text = "Director";
-          AntLabelDetails3.Text = BaseMesFilms.Translate_Column(AntItemDetails3.Text.Trim());
+          AntLabelDetails3.Text = BaseMesFilms.TranslateColumn(AntItemDetails3.Text.Trim());
           AntItemDetails4.Text = "Producer";
-          AntLabelDetails4.Text = BaseMesFilms.Translate_Column(AntItemDetails4.Text.Trim());
+          AntLabelDetails4.Text = BaseMesFilms.TranslateColumn(AntItemDetails4.Text.Trim());
           AntItemDetails5.Text = "Writer";
-          AntLabelDetails5.Text = BaseMesFilms.Translate_Column(AntItemDetails5.Text.Trim());
+          AntLabelDetails5.Text = BaseMesFilms.TranslateColumn(AntItemDetails5.Text.Trim());
           AntItemDetails6.Text = "Certification";
-          AntLabelDetails6.Text = BaseMesFilms.Translate_Column(AntItemDetails6.Text.Trim());
+          AntLabelDetails6.Text = BaseMesFilms.TranslateColumn(AntItemDetails6.Text.Trim());
           break;
       }
       #endregion

@@ -1327,15 +1327,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
           dlg3.Add(
             GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" +
-            BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+            BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle1) + ")"); // mastertitle
           choiceGlobalMappings.Add("mastertitle");
           dlg3.Add(
             GUILocalizeStrings.Get(10798791) + " (" + MyFilms.conf.StrTitle2 + "-" +
-            BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2) + ")"); // secondary title
+            BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle2) + ")"); // secondary title
           choiceGlobalMappings.Add("secondarytitle");
           dlg3.Add(
             GUILocalizeStrings.Get(10798792) + " (" + MyFilms.conf.StrSTitle + "-" +
-            BaseMesFilms.Translate_Column(MyFilms.conf.StrSTitle) + ")"); // sort title
+            BaseMesFilms.TranslateColumn(MyFilms.conf.StrSTitle) + ")"); // sort title
           choiceGlobalMappings.Add("sorttitle");
           #endregion
 
@@ -1396,7 +1396,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string selectionLabel = choiceGlobalMappings[dlg3.SelectedLabel];
           dlg3.Reset();
           choiceGlobalMappings.Clear();
-          LogMyFilms.Debug("Display Options - new field: '" + selectionLabel + "', new Label: '" + BaseMesFilms.Translate_Column(selectionLabel) + "'.");
+          LogMyFilms.Debug("Display Options - new field: '" + selectionLabel + "', new Label: '" + BaseMesFilms.TranslateColumn(selectionLabel) + "'.");
           MyFilms.UpdateUseritemWithValue(strUserItemSelection, selectionLabel);
           MyFilms.UpdateUserItems(); // save to currentconfig - save time for WinDeInit
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeFilms.SelectedListItem.ItemId, facadeFilms.SelectedListItem.Label);
@@ -1866,25 +1866,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Reset();
             dlgmenu.SetHeading(GUILocalizeStrings.Get(10798643)); // menu
 
-            dlgmenu.Add(" " + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1));
+            dlgmenu.Add(" " + BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle1));
             choiceUpd.Add(MyFilms.conf.StrTitle1);
 
             if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
             {
-              dlgmenu.Add(" " + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2));
+              dlgmenu.Add(" " + BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle2));
               choiceUpd.Add(MyFilms.conf.StrTitle2);
             }
 
             if (Helper.FieldIsSet(MyFilms.conf.StrStorage)) // Source field / media file name
             {
-              dlgmenu.Add(" " + BaseMesFilms.Translate_Column(MyFilms.conf.StrStorage));
+              dlgmenu.Add(" " + BaseMesFilms.TranslateColumn(MyFilms.conf.StrStorage));
               choiceUpd.Add(MyFilms.conf.StrStorage);
             }
 
             string[] defaultupdateitems = new string[] { "Category", "Year", "Date", "Country", "Rating" };
             foreach (string wupd in defaultupdateitems)
             {
-              dlgmenu.Add(" " + BaseMesFilms.Translate_Column(wupd));
+              dlgmenu.Add(" " + BaseMesFilms.TranslateColumn(wupd));
               choiceUpd.Add(wupd.Trim());
             }
 
@@ -3729,7 +3729,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
                           wProperty != "Trailer") //  && wProperty != "Runtime" && wProperty != "Collection"
                         {
-                          dlgSelect.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
+                          dlgSelect.Add(BaseMesFilms.TranslateColumn(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'");
                           choiceViewMenu.Add(wProperty);
                           LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                         }
@@ -3795,7 +3795,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             pItem.TVTag = wProperty;
                             if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) pItem.IconImage = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
                             pItem.Selected = false;
-                            pItem.Label = BaseMesFilms.Translate_Column(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'";
+                            pItem.Label = BaseMesFilms.TranslateColumn(wProperty) + ": '" + Helper.LimitString(strOldValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "' -> '" + Helper.LimitString(strNewValue.Replace(Environment.NewLine, " # "), iPropertyLengthLimit) + "'";
                             dlgMultiSelect.Add(pItem);
                             LogMyFilms.Debug("GrabberUpdate - Add (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                           }
@@ -4042,7 +4042,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
                       wProperty != "Trailer" && wProperty != "Runtime" && wProperty != "Collection" && wProperty != "CollectionImageURL")
                     {
-                      dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
+                      dlgmenu.Add(BaseMesFilms.TranslateColumn(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
                       choiceViewMenu.Add(wProperty);
                       LogMyFilms.Debug("GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                     }

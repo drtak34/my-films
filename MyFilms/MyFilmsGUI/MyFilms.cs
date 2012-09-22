@@ -2609,14 +2609,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
                     dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
                   )
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
                 break;
               case "view":
                 if (
                   //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
                   )
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
                 break;
               case "deletedetails":
                 if (
@@ -2624,15 +2624,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dc.ColumnName != MyFilms.conf.StrTitle1 && // dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
                     dc.ColumnName != "Number"
                   )
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
                 break;
               case "titles":
                 if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle") // || dc.ColumnName == "VirtualPathTitle" || dc.ColumnName == "AlternateTitles"
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
                 break;
               case "viewitems":
                 if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart") // added "DatedAdded" to remove filter
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.Translate_Column(dc.ColumnName) });
+                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
                 break;
 
               default:
@@ -2967,7 +2967,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region Set sort buttons (movie vs. collection) and set Layout
 
       BtnSrtBy.IsEnabled = !isvirtualpathview;
-      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSorta)));
+      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSorta)));
       BtnSrtBy.IsAscending = (conf.BoolCollection) ? (conf.StrSortSensInHierarchies == " ASC") : (conf.StrSortSens == " ASC");
       // BtnSrtBy.Disabled = conf.BoolCollection;
 
@@ -7338,7 +7338,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           bool isReversed = conf.BoolReverseNames;
           string[] FacadeLabel = new string[facadeFilms.Count];
           int[] facadeCounts = new int[facadeFilms.Count];
-          string label2NamePrefix = BaseMesFilms.Translate_Column(wStrSort);
+          string label2NamePrefix = BaseMesFilms.TranslateColumn(wStrSort);
           try
           {
             for (int j = 0; j < facadeFilms.Count; j++)
@@ -8770,7 +8770,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
 
       #region Configure Default Button Labels ...
-      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.Translate_Column(conf.StrSorta)));
+      BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSorta)));
       // BtnToggleGlobalWatched.Label = (MyFilms.conf.GlobalUnwatchedOnly) ? string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628)) : string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
       #endregion
 
@@ -9646,15 +9646,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
           dlg3.Add(
             GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" +
-            BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+            BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle1) + ")"); // mastertitle
           choiceGlobalMappings.Add("mastertitle");
           dlg3.Add(
             GUILocalizeStrings.Get(10798791) + " (" + MyFilms.conf.StrTitle2 + "-" +
-            BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2) + ")"); // secondary title
+            BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle2) + ")"); // secondary title
           choiceGlobalMappings.Add("secondarytitle");
           dlg3.Add(
             GUILocalizeStrings.Get(10798792) + " (" + MyFilms.conf.StrSTitle + "-" +
-            BaseMesFilms.Translate_Column(MyFilms.conf.StrSTitle) + ")"); // sort title
+            BaseMesFilms.TranslateColumn(MyFilms.conf.StrSTitle) + ")"); // sort title
           choiceGlobalMappings.Add("sorttitle");
 
           dlg3.DoModal(GetID);
@@ -9706,7 +9706,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string wproperty = choiceGlobalMappings[dlg3.SelectedLabel];
           dlg3.Reset();
           choiceGlobalMappings.Clear();
-          LogMyFilms.Debug("Display Options - new field: '" + wproperty + "', new Label: '" + BaseMesFilms.Translate_Column(wproperty) + "'.");
+          LogMyFilms.Debug("Display Options - new field: '" + wproperty + "', new Label: '" + BaseMesFilms.TranslateColumn(wproperty) + "'.");
           UpdateUseritemWithValue(strUserItemSelection, wproperty);
           UpdateUserItems(); // save to currentconfig - save time for WinDeInit
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeFilms.SelectedListItem.ItemId, facadeFilms.SelectedListItem.Label);
@@ -11174,7 +11174,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case ViewContext.MovieCollection:
               case ViewContext.Group:
               case ViewContext.Person:
-                newRow.Label = BaseMesFilms.Translate_Column(conf.WStrSort) + " - " + conf.StrTxtSelect + " *";
+                newRow.Label = BaseMesFilms.TranslateColumn(conf.WStrSort) + " - " + conf.StrTxtSelect + " *";
                 newRow.DBfield = conf.WStrSort;
                 newRow.SortDirectionView = (conf.BoolSortCountinViews) ? conf.WStrSortSensCount : conf.WStrSortSens;
                 newRow.SortFieldViewType = (conf.BoolSortCountinViews) ? "Count" : "Name";
@@ -12085,7 +12085,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index][personfield].ToString())));
         w_tableau = new ArrayList(w_tableau.ToArray().Distinct().ToList()); // make list unique/distinct
 
-        dlg.Add(BaseMesFilms.Translate_Column(personfield) + " (" + w_tableau.Count + ")");
+        dlg.Add(BaseMesFilms.TranslateColumn(personfield) + " (" + w_tableau.Count + ")");
         choiceSearch.Add(personfield);
       }
       if (choiceSearch.Count == 0)
@@ -12128,7 +12128,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index][role].ToString())));
             foreach (object t in w_tableau)
             {
-              dlg.Add(BaseMesFilms.Translate_Column(role) + " : " + t);
+              dlg.Add(BaseMesFilms.TranslateColumn(role) + " : " + t);
               choiceSearch.Add(t.ToString());
             }
           }
@@ -12668,19 +12668,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // Choose property for search
 
-      dlg.Add(BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1));
+      dlg.Add(BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle1));
       choiceSearch.Add(MyFilms.conf.StrTitle1);
 
       if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
       {
-        dlg.Add(BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2));
+        dlg.Add(BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle2));
         choiceSearch.Add(MyFilms.conf.StrTitle2);
       }
 
       string[] defaultupdateitems = { "Category", "Year", "Date", "Country", "Rating" };
       foreach (string wupd in defaultupdateitems)
       {
-        dlg.Add(BaseMesFilms.Translate_Column(wupd));
+        dlg.Add(BaseMesFilms.TranslateColumn(wupd));
         choiceSearch.Add(wupd);
       }
 
@@ -12826,9 +12826,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrSelect = this.Equalexpression(wproperty, choiceSearch[dlg.SelectedLabel]);
         }
       if (choiceSearch.Count == 0)
-        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " (none)";
+        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " (none)";
       else
-        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
+        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
       conf.StrTitleSelect = string.Empty;
       #endregion
       SetLabelView("search"); // show "search"
@@ -12961,7 +12961,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GetFilmList(); // load facade with selected group of movies
 
       LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
-      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + wproperty2 + @"*]";
+      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + wproperty2 + @"*]";
       conf.StrTitleSelect = string.Empty;
 
       // we have now: wproperty = selected category (randomall for all) and wproperty2 = value to search after
@@ -13471,7 +13471,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
           LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
-          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + wproperty2 + @"*]";
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + wproperty2 + @"*]";
           conf.StrTitleSelect = string.Empty;
 
           // we have: wproperty = selected category (randomall for all) and wproperty2 = value to search after
@@ -13855,7 +13855,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
           LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
-          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + wproperty2 + @"*]"; // selection ...
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + wproperty2 + @"*]"; // selection ...
 
           conf.StrTitleSelect = string.Empty;
 
@@ -13903,7 +13903,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (wr.Length > 0)
         {
           int personCount = CountPersonsFound(wr, role, wperson);
-          dlg.Add(BaseMesFilms.Translate_Column(role) + " - " + personCount + " in " + wr.Length + " movie(s)");
+          dlg.Add(BaseMesFilms.TranslateColumn(role) + " - " + personCount + " in " + wr.Length + " movie(s)");
           choiceSearch.Add(role);
         }
       }
@@ -14024,12 +14024,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Add(GUILocalizeStrings.Get(10798616)); // search on all fields
         choiceSearch.Add("all");
 
-        dlg.Add(BaseMesFilms.Translate_Column(conf.StrTitle1));
+        dlg.Add(BaseMesFilms.TranslateColumn(conf.StrTitle1));
         choiceSearch.Add(conf.StrTitle1);
 
         if (Helper.FieldIsSet(conf.StrTitle2))
         {
-          dlg.Add(BaseMesFilms.Translate_Column(conf.StrTitle2));
+          dlg.Add(BaseMesFilms.TranslateColumn(conf.StrTitle2));
           choiceSearch.Add(conf.StrTitle2);
         }
 
@@ -14179,7 +14179,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   dlg.Add(string.Format(
                       GUILocalizeStrings.Get(10798619),
                       wCount[i],
-                      BaseMesFilms.Translate_Column(property)
+                      BaseMesFilms.TranslateColumn(property)
                       ));
                   choiceSearch.Add(wTableau[i]);
                 }
@@ -14195,7 +14195,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               SaveListState(false);
 
               conf.StrSelect = Equalexpression(wproperty, keyboard.Text);
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + keyboard.Text + @"*]";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + keyboard.Text + @"*]";
               conf.StrTitleSelect = string.Empty;
               SetLabelView("search"); // show "search"
               GetFilmList();
@@ -14247,7 +14247,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceSearch.Clear();
             for (int i = 0; i < wTableau.Count; i++)
             {
-              dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), wCount[i], BaseMesFilms.Translate_Column(wTableau[i].ToString())));
+              dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), wCount[i], BaseMesFilms.TranslateColumn(wTableau[i].ToString())));
               choiceSearch.Add(wTableau[i].ToString());
             }
             dlg.DoModal(GetID);
@@ -14259,12 +14259,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (ds.Movie.Columns[wproperty].DataType.Name == "string")
               {
                 conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
-                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
+                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
               }
               else
               {
                 conf.StrSelect = wproperty + " = '" + keyboard.Text + "'";
-                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [" + keyboard.Text + @"]";
+                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [" + keyboard.Text + @"]";
               }
               conf.StrTitleSelect = string.Empty;
               // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
@@ -14407,7 +14407,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
           if (wTableau[i].Equals(property))
           {
-            dlg.Add(string.Format(GUILocalizeStrings.Get(10798718), wCount[i], BaseMesFilms.Translate_Column(property)));
+            dlg.Add(string.Format(GUILocalizeStrings.Get(10798718), wCount[i], BaseMesFilms.TranslateColumn(property)));
             choiceSearch.Add(wTableau[i]);
           }
         }
@@ -14426,7 +14426,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       conf.StrSelect = "(" + wproperty + " is NULL OR " + wproperty + " like '')";
       // conf.StrTxtSelect = "Selection " + wproperty + " [*empty*]";
-      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*empty*]";
+      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*empty*]";
       conf.StrTitleSelect = string.Empty;
       SetLabelView("search"); // show "search"
       GetFilmList();
@@ -14467,57 +14467,57 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case "useritem1":
           MyFilms.conf.Stritem1 = wproperty;
-          MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.Strlabel1 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
           break;
         case "useritem2":
           MyFilms.conf.Stritem2 = wproperty;
-          MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.Strlabel2 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
           break;
         case "useritem3":
           MyFilms.conf.Stritem3 = wproperty;
-          MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.Strlabel3 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
           break;
         case "useritem4":
           MyFilms.conf.Stritem4 = wproperty;
-          MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.Strlabel4 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
           break;
         case "useritem5":
           MyFilms.conf.Stritem5 = wproperty;
-          MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.Strlabel5 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
           break;
         case "useritemdetails1":
           MyFilms.conf.StritemDetails1 = wproperty;
-          MyFilms.conf.StrlabelDetails1 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.StrlabelDetails1 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails1 + "', Label: '" + conf.StrlabelDetails1 + "'.");
           break;
         case "useritemdetails2":
           MyFilms.conf.StritemDetails2 = wproperty;
-          MyFilms.conf.StrlabelDetails2 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.StrlabelDetails2 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails2 + "', Label: '" + conf.StrlabelDetails2 + "'.");
           break;
         case "useritemdetails3":
           MyFilms.conf.StritemDetails3 = wproperty;
-          MyFilms.conf.StrlabelDetails3 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.StrlabelDetails3 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails3 + "', Label: '" + conf.StrlabelDetails3 + "'.");
           break;
         case "useritemdetails4":
           MyFilms.conf.StritemDetails4 = wproperty;
-          MyFilms.conf.StrlabelDetails4 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.StrlabelDetails4 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails4 + "', Label: '" + conf.StrlabelDetails4 + "'.");
           break;
         case "useritemdetails5":
           MyFilms.conf.StritemDetails5 = wproperty;
-          MyFilms.conf.StrlabelDetails5 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.StrlabelDetails5 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails5 + "', Label: '" + conf.StrlabelDetails5 + "'.");
           break;
         case "useritemdetails6":
           MyFilms.conf.StritemDetails6 = wproperty;
-          MyFilms.conf.StrlabelDetails6 = BaseMesFilms.Translate_Column(wproperty);
+          MyFilms.conf.StrlabelDetails6 = BaseMesFilms.TranslateColumn(wproperty);
           LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StritemDetails6 + "', Label: '" + conf.StrlabelDetails6 + "'.");
           break;
         case "mastertitle":
@@ -15792,8 +15792,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         default:
-          if (BaseMesFilms.Translate_Column(viewLabel) != "")
-            newViewLabel = BaseMesFilms.Translate_Column(viewLabel);
+          if (BaseMesFilms.TranslateColumn(viewLabel) != "")
+            newViewLabel = BaseMesFilms.TranslateColumn(viewLabel);
           break;
       }
       MyFilmsDetail.setGUIProperty("view", newViewLabel);
@@ -15958,7 +15958,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         foreach (DataColumn dc in ds.Movie.Columns)
         {
-          MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
+          MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.TranslateColumn(dc.ColumnName));
         }
       }
 
