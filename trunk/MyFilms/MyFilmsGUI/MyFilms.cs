@@ -3238,7 +3238,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
               if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue) &&
                   (MyFilms.conf.StrSupPlayer)) item.IsPlayed = true;
-
             #endregion
 
             #region Availability Status
