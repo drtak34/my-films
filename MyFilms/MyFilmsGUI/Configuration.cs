@@ -290,9 +290,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Strlabel4 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabel4", string.Empty);
         Strlabel5 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabel5", string.Empty);
 
-        StritemDetails1 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails1", "Country");
-        StritemDetails2 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails2", "Year");
-        StritemDetails3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails3", "Category");
+        StritemDetails1 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails1", "Category");
+        StritemDetails2 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails2", "Country");
+        StritemDetails3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails3", "Director");
         StritemDetails4 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails4", "Producer");
         StritemDetails5 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails5", "Languages");
         StritemDetails6 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails6", "Date");
