@@ -399,7 +399,6 @@
 			<type>image</type>
 			<id>0</id>
 			<description>Menu Background</description>
-			<id>0</id>
 		    <posX>30</posX>
 			<posY>70</posY>
 			<width>220</width>
@@ -696,7 +695,7 @@
 		<type>fadelabel</type>
 		<description>User Item 2 Value - preset to Country</description>
 		<id>1</id>
-		<posX>110</posX>
+		<posX>120</posX>
 		<posY>509</posY>
 		<width>190</width>
 		<label>#myfilms.user.item2.value</label>
@@ -718,9 +717,9 @@
 	</control>
 	<control>
 		<type>fadelabel</type>
-		<description>User Item 4 Value - preset to Director</description>
+		<description>User Item 3 Value - preset to Director</description>
 		<id>1</id>
-		<posX>110</posX>
+		<posX>120</posX>
 		<posY>526</posY>
 		<width>190</width>
 		<label>#myfilms.user.item3.value</label>
@@ -730,7 +729,7 @@
 	</control>
 	<control>
 		<type>fadelabel</type>
-		<description>User Item 4 Label - preset to Languages</description>
+		<description>User Item 4 Label - preset to Certification</description>
 		<id>1</id>
 		<posX>30</posX>
 		<posY>543</posY>
@@ -742,9 +741,9 @@
 	</control>
 	<control>
 		<type>fadelabel</type>
-		<description>User Item 4 Value - preset to Languages</description>
+		<description>User Item 4 Value - preset to Certification</description>
 		<id>1</id>
-		<posX>110</posX>
+		<posX>120</posX>
 		<posY>543</posY>
 		<width>190</width>
 		<label>#myfilms.user.item4.value</label>
@@ -754,7 +753,7 @@
 	</control>
 	<control>
 		<type>fadelabel</type>
-		<description>User Item 5 Value - preset to Certification</description>
+		<description>User Item 5 Value - preset to Languages</description>
 		<id>1</id>
 		<posX>325</posX>
 		<posY>543</posY>
@@ -1450,8 +1449,8 @@
 			<id>2080</id>
 			<posX>330</posX>
 			<posY>328</posY>
-			<width>64</width>
-			<height>64</height>
+			<width>32</width>
+			<height>32</height>
 			<textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
 			<Duration>0:0:01.5</Duration>
 			<visible>no</visible>
