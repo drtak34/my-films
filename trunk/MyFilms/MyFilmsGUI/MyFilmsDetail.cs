@@ -2903,29 +2903,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilms.r[index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
     }
 
-    public static string EnhancedWatchedValue(string s, string type)
-    {
-      // "Global:0:-1|MikePlanet:0:-1" or "Global:0:-1|MikePlanet:0:-1:2011-12-24"
-      string value = "";
-      string[] split = s.Split(new Char[] { ':' });
-      switch (type)
-      {
-        case "username":
-          value = (split.Length > 0) ? split[0] : "";
-          break;
-        case "count":
-          value = (split.Length > 1) ? split[1] : "0";
-          break;
-        case "rating":
-          value = (split.Length > 2) ? split[2] : "-1";
-          break;
-        case "datewatched":
-          value = (split.Length > 3) ? split[3] : "";
-          break;
-      }
-      return value;
-    }
-
     //-------------------------------------------------------------------------------------------
     //  Get enhanced watch count
     //-------------------------------------------------------------------------------------------        
@@ -3087,7 +3064,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        if (System.IO.File.Exists(strLockFileName))
+        if (File.Exists(strLockFileName))
         {
           try
           {
@@ -3117,9 +3094,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static string LockFilename(string config)
     {
       string lockfilename = "";
-      string path = System.IO.Path.GetDirectoryName(config);
-      string filename = System.IO.Path.GetFileNameWithoutExtension(config);
-      string machineName = System.Environment.MachineName;
+      string path = Path.GetDirectoryName(config);
+      string filename = Path.GetFileNameWithoutExtension(config);
+      string machineName = Environment.MachineName;
       lockfilename = path + @"\" + filename + "_" + machineName + ".lck";
       // LogMyFilms.Debug("LockFilename() - created lock file name is: '" + lockfilename + "'");
       return lockfilename;
@@ -3128,15 +3105,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static bool AddMovieToCollection(string newGroupName)
     {
       string oldtitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-      string newtitle = "";
-      if (oldtitle.IndexOf(MyFilms.conf.TitleDelim) > 0) // already has a groupname
+      if (oldtitle.IndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) > 0) // already has a groupname
       {
         LogMyFilms.Debug("AddMovieToCollection() - cannot add movie to collection '" + newGroupName + "' - already part of collection - oldtitle = '" + oldtitle + "'");
         return false;
       }
       else
       {
-        newtitle = newGroupName + MyFilms.conf.TitleDelim + oldtitle;
+        string newtitle = newGroupName + MyFilms.conf.TitleDelim + oldtitle;
         LogMyFilms.Debug("AddMovieToCollection() - changing title from '" + oldtitle + "' to '" + newtitle + "'");
         MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1] = newtitle;
         Update_XML_database();
@@ -3147,10 +3123,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static bool RemoveMovieFromCollection()
     {
       string oldtitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-      string newtitle = "";
-      if (oldtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+      if (oldtitle.IndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) > 0)
       {
-        newtitle = oldtitle.Substring(oldtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
+        string newtitle = oldtitle.Substring(oldtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
         LogMyFilms.Debug("RemoveMovieFromCollection() - changing title from '" + oldtitle + "' to '" + newtitle + "'");
         MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1] = newtitle;
         Update_XML_database();
@@ -3177,24 +3152,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else if (Helper.FieldIsSet(MyFilms.conf.StrTitle1) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle1].ToString())) // Master Title
       {
         title = r1[index][MyFilms.conf.StrTitle1].ToString();
-        LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (master)title = '" + title.ToString() + "'");
+        LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (master)title = '" + title + "'");
       }
       else if (Helper.FieldIsSet(MyFilms.conf.StrTitle2) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle2].ToString())) // Secondary title
       {
         title = r1[index][MyFilms.conf.StrTitle2].ToString();
-        LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (secondary)title = '" + title.ToString() + "'");
+        LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (secondary)title = '" + title + "'");
       }
       else if (Helper.FieldIsSet(MyFilms.conf.StrStorage) && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
       {
         title = r1[index][MyFilms.conf.StrStorage].ToString();
-        if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-        if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-        if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-        LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (media source)name = '" + title.ToString() + "'");
+        if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";", StringComparison.Ordinal));
+        if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\", StringComparison.Ordinal) + 1);
+        if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf(".", StringComparison.Ordinal));
+        LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (media source)name = '" + title + "'");
       }
 
-      if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
+      if (title.IndexOf(MyFilms.conf.TitleDelim, StringComparison.Ordinal) > 0)
+        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim, StringComparison.Ordinal) + 1);
       LogMyFilms.Debug("GetSearchTitle() - returning (search)title = '" + title + "'");
       return title;
     }
@@ -3210,7 +3185,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           mediapath = r1[index][MyFilms.conf.StrStorage].ToString();
           if (mediapath.Contains(";"))
-            mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+            mediapath = mediapath.Substring(0, mediapath.IndexOf(";", System.StringComparison.Ordinal));
         }
         catch
         {
@@ -3224,7 +3199,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if ((MyFilms.conf.SearchFile == "True") || (MyFilms.conf.SearchFile == "yes"))
         {
           string movieName = r1[index][MyFilms.conf.ItemSearchFile].ToString();
-          movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+          movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1).Trim();
           if (MyFilms.conf.ItemSearchFile.Length > 0)
           {
             mediapath = SearchFileName(movieName, MyFilms.conf.StrDirStor).Trim();
@@ -3291,14 +3266,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  Grab URL Internet Movie Informations and update the XML database and refresh screen
     //  -> Selection of grabber script
     //-------------------------------------------------------------------------------------------        
-    public static void grabb_Internet_Informations(string FullMovieName, int GetID, bool choosescript, string wscript, string FullMoviePath, GrabType grabtype, bool showAll, Searchtitles sTitles)
+    public static void grabb_Internet_Informations(string fullMovieName, int GetID, bool choosescript, string wscript, string fullMoviePath, GrabType grabtype, bool showAll, Searchtitles sTitles)
     {
-      LogMyFilms.Debug("(grabb_Internet_Informations) with grabtype = '" + grabtype + "', title = '" + FullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
+      LogMyFilms.Debug("(grabb_Internet_Informations) with grabtype = '" + grabtype + "', title = '" + fullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
       if (choosescript)
       {
         if (!Directory.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts)))
         {
-          GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+          var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
           dlgOk.SetHeading(GUILocalizeStrings.Get(645)); // menu
           dlgOk.SetLine(1, string.Format(GUILocalizeStrings.Get(1079876), MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts)));
           dlgOk.SetLine(2, GUILocalizeStrings.Get(1079877));
@@ -3314,20 +3289,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         // Grabber Directory filled, search for XML scripts files
-        GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
         dlg.Reset();
         dlg.SetHeading(GUILocalizeStrings.Get(10798706)); // "Choose internet grabber script"
         if (dlg == null) return;
-        ArrayList scriptfile = new ArrayList();
+        var scriptfile = new ArrayList();
 
         if (MyFilms.conf.StrGrabber_cnf.Length > 0 && (grabtype == GrabType.Details || grabtype == GrabType.All))
         {
           try
           {
-            GrabberScript defaultScript = new GrabberScript(MyFilms.conf.StrGrabber_cnf);
+            var defaultScript = new GrabberScript(MyFilms.conf.StrGrabber_cnf);
             defaultScript.Load(MyFilms.conf.StrGrabber_cnf);
             scriptfile.Add(MyFilms.conf.StrGrabber_cnf);
-            dlg.Add(MyFilms.conf.StrGrabber_cnf.Substring(MyFilms.conf.StrGrabber_cnf.LastIndexOf("\\") + 1) + " (default)");
+            dlg.Add(MyFilms.conf.StrGrabber_cnf.Substring(MyFilms.conf.StrGrabber_cnf.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + " (default)");
             dlg.SelectedLabel = 0;
           }
           catch (Exception)
@@ -3335,14 +3310,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Error("The default script is not compatible with current MyFilms version - please change your settings !");
           }
         }
-        DirectoryInfo dirsInf = new DirectoryInfo(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
+        var dirsInf = new DirectoryInfo(MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts));
         FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
 
         foreach (FileSystemInfo sfi in sfiles)
         {
           if ((sfi.Extension.ToLower() == ".xml") && (sfi.FullName != MyFilms.conf.StrGrabber_cnf))
           {
-            GrabberScript script = new GrabberScript(sfi.FullName);
+            var script = new GrabberScript(sfi.FullName);
             script.Load(sfi.FullName);
             string displayName = "";
             string displayNamePost = "";
@@ -3379,33 +3354,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           if (dlg.SelectedLabelText == GUILocalizeStrings.Get(10798765))
           {
-            grabb_Internet_Informations(FullMovieName, GetID, true, wscript, FullMoviePath, grabtype, true, sTitles);
+            grabb_Internet_Informations(fullMovieName, GetID, true, wscript, fullMoviePath, grabtype, true, sTitles);
             return;
           }
           if (dlg.SelectedLabel > -1)
             wscript = scriptfile[dlg.SelectedLabel].ToString();
         }
       }
-      grabb_Internet_Informations_Search(FullMovieName, GetID, wscript, FullMoviePath, grabtype, sTitles);
+      grabb_Internet_Informations_Search(fullMovieName, GetID, wscript, fullMoviePath, grabtype, sTitles);
     }
 
     //-------------------------------------------------------------------------------------------
     //  Grab URL Internet Movie Informations and update the XML database and refresh screen
     //  -> Search and select matching movie
     //-------------------------------------------------------------------------------------------        
-    public static void grabb_Internet_Informations_Search(string FullMovieName, int GetID, string wscript, string FullMoviePath, GrabType grabtype, Searchtitles sTitles)
+    public static void grabb_Internet_Informations_Search(string fullMovieName, int GetID, string wscript, string fullMoviePath, GrabType grabtype, Searchtitles sTitles)
     {
       if (string.IsNullOrEmpty(wscript)) return;
-      LogMyFilms.Debug("grabb_Internet_Informations_Search() with title = '" + FullMovieName + "', grabberfile = '" + wscript + "'");
-      string movieName = FullMovieName;
+      LogMyFilms.Debug("grabb_Internet_Informations_Search() with title = '" + fullMovieName + "', grabberfile = '" + wscript + "'");
+      string movieName = fullMovieName;
       string movieHierarchy = string.Empty;
-      string moviePath = FullMoviePath;
+      string moviePath = fullMoviePath;
       if (MyFilms.conf.TitleDelim.Length > 0)
       {
-        movieName = FullMovieName.Substring(FullMovieName.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1).Trim();
-        movieHierarchy = FullMovieName.Substring(0, FullMovieName.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1).Trim();
+        movieName = fullMovieName.Substring(fullMovieName.LastIndexOf(MyFilms.conf.TitleDelim, StringComparison.Ordinal) + 1).Trim();
+        movieHierarchy = fullMovieName.Substring(0, fullMovieName.LastIndexOf(MyFilms.conf.TitleDelim, StringComparison.Ordinal) + 1).Trim();
       }
-      var Grab = new Grabber.Grabber_URLClass();
+      var grab = new Grabber.Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
       var listUrl = new ArrayList();
 
@@ -3415,7 +3390,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             // listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath); // MoviePath only when nfo reader used !!!
-            listUrl = Grab.ReturnURL(movieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
+            listUrl = grab.ReturnURL(movieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
           }
           catch (Exception ex)
           {
@@ -4540,8 +4515,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (dlgPrgrs != null)
           dlgPrgrs.Percentage = 10;
 
-        Grabber_URLClass Grab = new Grabber_URLClass();
-        List<DbMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
+        var grab = new Grabber_URLClass();
+        List<DbMovieInfo> listemovies = grab.GetFanart(title, ttitle, year, director, imdbid, MyFilms.conf.StrPathFanart, true, false, StrTitle1, string.Empty);
       }
       catch (Exception ex)
       {
@@ -4827,7 +4802,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Directory.CreateDirectory(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix);
         }
         catch (Exception) { }
-      Grabber_URLClass Grab = new Grabber_URLClass();
+      var grab = new Grabber_URLClass();
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
       int wyear = 0;
       try { wyear = Convert.ToInt32(year); }
@@ -4837,7 +4812,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             GUIWaitCursor.Init(); GUIWaitCursor.Show();
-            List<grabber.DbMovieInfo> listemovies = Grab.GetTMDBinfos(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix, true, choose, MyFilms.conf.StrTitle1, language);
+            List<DbMovieInfo> listemovies = grab.GetTMDBinfos(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix, true, choose, MyFilms.conf.StrTitle1, language);
             GUIWaitCursor.Hide();
             LogMyFilms.Debug("(TMDB-Infos) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "', '" + language + "'");
             int listCount = listemovies.Count;
