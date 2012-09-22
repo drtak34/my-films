@@ -547,6 +547,10 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_About = new System.Windows.Forms.TabPage();
+          this.groupBoxSupportedCatalogs = new System.Windows.Forms.GroupBox();
+          this.label41 = new System.Windows.Forms.Label();
+          this.groupBoxAbout = new System.Windows.Forms.GroupBox();
+          this.label28 = new System.Windows.Forms.Label();
           this.Tab_Other = new System.Windows.Forms.TabPage();
           this.personDataGridView = new System.Windows.Forms.DataGridView();
           this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -614,10 +618,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.label28 = new System.Windows.Forms.Label();
-          this.groupBoxSupportedCatalogs = new System.Windows.Forms.GroupBox();
-          this.label41 = new System.Windows.Forms.Label();
-          this.groupBoxAbout = new System.Windows.Forms.GroupBox();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -701,6 +701,8 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_About.SuspendLayout();
+          this.groupBoxSupportedCatalogs.SuspendLayout();
+          this.groupBoxAbout.SuspendLayout();
           this.Tab_Other.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
@@ -713,8 +715,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          this.groupBoxSupportedCatalogs.SuspendLayout();
-          this.groupBoxAbout.SuspendLayout();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -5805,6 +5805,45 @@
           this.Tab_About.ToolTipText = "About Info for MyFilms";
           this.Tab_About.UseVisualStyleBackColor = true;
           // 
+          // groupBoxSupportedCatalogs
+          // 
+          this.groupBoxSupportedCatalogs.Controls.Add(this.label41);
+          this.groupBoxSupportedCatalogs.Location = new System.Drawing.Point(30, 183);
+          this.groupBoxSupportedCatalogs.Name = "groupBoxSupportedCatalogs";
+          this.groupBoxSupportedCatalogs.Size = new System.Drawing.Size(682, 156);
+          this.groupBoxSupportedCatalogs.TabIndex = 2;
+          this.groupBoxSupportedCatalogs.TabStop = false;
+          this.groupBoxSupportedCatalogs.Text = "Credits ...";
+          // 
+          // label41
+          // 
+          this.label41.AutoSize = true;
+          this.label41.Location = new System.Drawing.Point(27, 18);
+          this.label41.Name = "label41";
+          this.label41.Size = new System.Drawing.Size(529, 130);
+          this.label41.TabIndex = 5;
+          this.label41.Text = resources.GetString("label41.Text");
+          this.label41.Click += new System.EventHandler(this.label41_Click);
+          // 
+          // groupBoxAbout
+          // 
+          this.groupBoxAbout.Controls.Add(this.label28);
+          this.groupBoxAbout.Location = new System.Drawing.Point(30, 13);
+          this.groupBoxAbout.Name = "groupBoxAbout";
+          this.groupBoxAbout.Size = new System.Drawing.Size(682, 165);
+          this.groupBoxAbout.TabIndex = 0;
+          this.groupBoxAbout.TabStop = false;
+          this.groupBoxAbout.Text = "About MyFilms ...";
+          // 
+          // label28
+          // 
+          this.label28.AutoSize = true;
+          this.label28.Location = new System.Drawing.Point(27, 25);
+          this.label28.Name = "label28";
+          this.label28.Size = new System.Drawing.Size(584, 117);
+          this.label28.TabIndex = 0;
+          this.label28.Text = resources.GetString("label28.Text");
+          // 
           // Tab_Other
           // 
           this.Tab_Other.AutoScroll = true;
@@ -6390,45 +6429,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // label28
-          // 
-          this.label28.AutoSize = true;
-          this.label28.Location = new System.Drawing.Point(27, 25);
-          this.label28.Name = "label28";
-          this.label28.Size = new System.Drawing.Size(561, 117);
-          this.label28.TabIndex = 0;
-          this.label28.Text = resources.GetString("label28.Text");
-          // 
-          // groupBoxSupportedCatalogs
-          // 
-          this.groupBoxSupportedCatalogs.Controls.Add(this.label41);
-          this.groupBoxSupportedCatalogs.Location = new System.Drawing.Point(30, 183);
-          this.groupBoxSupportedCatalogs.Name = "groupBoxSupportedCatalogs";
-          this.groupBoxSupportedCatalogs.Size = new System.Drawing.Size(682, 156);
-          this.groupBoxSupportedCatalogs.TabIndex = 2;
-          this.groupBoxSupportedCatalogs.TabStop = false;
-          this.groupBoxSupportedCatalogs.Text = "Credits ...";
-          // 
-          // label41
-          // 
-          this.label41.AutoSize = true;
-          this.label41.Location = new System.Drawing.Point(27, 18);
-          this.label41.Name = "label41";
-          this.label41.Size = new System.Drawing.Size(650, 130);
-          this.label41.TabIndex = 5;
-          this.label41.Text = resources.GetString("label41.Text");
-          this.label41.Click += new System.EventHandler(this.label41_Click);
-          // 
-          // groupBoxAbout
-          // 
-          this.groupBoxAbout.Controls.Add(this.label28);
-          this.groupBoxAbout.Location = new System.Drawing.Point(30, 13);
-          this.groupBoxAbout.Name = "groupBoxAbout";
-          this.groupBoxAbout.Size = new System.Drawing.Size(682, 165);
-          this.groupBoxAbout.TabIndex = 0;
-          this.groupBoxAbout.TabStop = false;
-          this.groupBoxAbout.Text = "About MyFilms ...";
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6570,6 +6570,10 @@
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
           this.Tab_About.ResumeLayout(false);
+          this.groupBoxSupportedCatalogs.ResumeLayout(false);
+          this.groupBoxSupportedCatalogs.PerformLayout();
+          this.groupBoxAbout.ResumeLayout(false);
+          this.groupBoxAbout.PerformLayout();
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.personDataGridView)).EndInit();
@@ -6584,10 +6588,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          this.groupBoxSupportedCatalogs.ResumeLayout(false);
-          this.groupBoxSupportedCatalogs.PerformLayout();
-          this.groupBoxAbout.ResumeLayout(false);
-          this.groupBoxAbout.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
