@@ -2026,9 +2026,11 @@ namespace MyFilmsPlugin.MyFilms
         case "VirtualPathTitle": // virtual path = directory path plus movie title
         case "virtualpathtitle":
           return GUILocalizeStrings.Get(10798933);
+
         default:
           {
-            string translation = "*** DB field translation missing ***";
+            // translation for "Views"
+            string translation = ""; // string translation = "*** DB field translation missing ***";
             if (data != null)
             {
               foreach (AntMovieCatalog.CustomFieldRow customFieldRow in Enumerable.Where(data.CustomField, customFieldRow => customFieldRow.Tag.ToLower() == column.ToLower()))
