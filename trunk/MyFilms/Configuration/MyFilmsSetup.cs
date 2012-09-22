@@ -4839,10 +4839,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntLabel2.Text = BaseMesFilms.TranslateColumn(AntItem2.Text.Trim());
           AntItem3.Text = "Director";
           AntLabel3.Text = BaseMesFilms.TranslateColumn(AntItem3.Text.Trim());
-          AntItem4.Text = "Languages";
-          AntLabel4.Text = BaseMesFilms.TranslateColumn(AntItem4.Text.Trim());
-          AntItem5.Text = "Certification";
-          AntLabel5.Text = BaseMesFilms.TranslateColumn(AntItem5.Text.Trim());
+          AntItem4.Text = "Certification";
+          AntLabel4.Text = BaseMesFilms.TranslateColumn(AntItem5.Text.Trim());
+          AntItem5.Text = "Languages";
+          AntLabel5.Text = BaseMesFilms.TranslateColumn(AntItem4.Text.Trim());
 
           AntItemDetails1.Text = "Category";
           AntLabelDetails1.Text = BaseMesFilms.TranslateColumn(AntItemDetails1.Text.Trim());
