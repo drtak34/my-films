@@ -59,6 +59,8 @@ namespace MyFilmsPlugin.MyFilms
     internal static BackgroundWorker UpdateWorker = null;
     internal static AutoResetEvent UpdateWorkerDoneEvent = new AutoResetEvent(false);
 
+    internal const string MultiUserStateField = "MultiUserState";
+
     internal const int TrakthandlerTimeout = 20000;
     private static TimerCallback traktUpdateQueueHandler = new TimerCallback(StartTraktUpdateHandler);
     public static readonly Timer TraktQueueTimer = new Timer(traktUpdateQueueHandler, null, Timeout.Infinite, Timeout.Infinite); // Create a Timer that that is inactive unless set by "Change() method initially // define timer without actions // new Timer(traktUpdateQueueHandler, "a state string", Timeout.Infinite, Timeout.Infinite); // define timer without actions
@@ -763,7 +765,7 @@ namespace MyFilmsPlugin.MyFilms
       if (tmpconf.EnhancedWatchedStatusHandling)
       {
         MultiUserData multiUserData;
-        if (row[tmpconf.StrMultiUserStateField] == System.Convert.DBNull) // not yet migrated - do it now
+        if (row[MultiUserStateField] == System.Convert.DBNull) // not yet migrated - do it now
         {
           #region migration code for watched state - migrate status from configured (enhanced or standard)watched field to new MultiUserStates
           if (row[tmpconf.StrWatchedField].ToString().Contains(":"))
@@ -786,7 +788,7 @@ namespace MyFilmsPlugin.MyFilms
         }
         else // use existiung MUS data
         {
-          multiUserData = new MultiUserData(row[tmpconf.StrMultiUserStateField].ToString());
+          multiUserData = new MultiUserData(row[MultiUserStateField].ToString());
         }
         UserState user = multiUserData.GetUserState(tmpconf.StrUserProfileName);
         movie.Watched = user.Watched;
@@ -1268,7 +1270,7 @@ namespace MyFilmsPlugin.MyFilms
                     #endregion
 
                     #region sync MUS state with direct DB fields for user rating, watched and Favorite (only when MUS already migrated and DB field exists)
-                    if (EnhancedWatchedStatusHandling && sr["MultiUserState"] != System.Convert.DBNull)
+                    if (EnhancedWatchedStatusHandling && sr[MultiUserStateField] != System.Convert.DBNull)
                     {
                       var states = new MultiUserData(sr.MultiUserState);
                       var user = states.GetUserState(UserProfileName);

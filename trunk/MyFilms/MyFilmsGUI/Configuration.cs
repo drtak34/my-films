@@ -25,6 +25,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
   using System.Collections.Generic;
+  using System.Data;
   using System.Linq;
 
   using MediaPortal.Configuration;
@@ -78,16 +79,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       WStrSortSensCount = string.Empty;
       WStrSortSens = string.Empty;
       TitleDelim = string.Empty;
-      StrPlayedIndex = int.MinValue;
-      StrPlayedViewSelect = string.Empty;
+      StrPlayedRow = null;
       StrSuppressPlayed = string.Empty;
-      StrPlayedGlobalFilterString = string.Empty;
-      StrPlayedDfltSelect = string.Empty;
-      StrPlayedSelect = string.Empty;
-      StrPlayedSort = string.Empty;
       MovieList = new List<string[]>();
       TrailerList = new List<string[]>();
-      StrPlayedSens = string.Empty;
       IsNetworkAvailable = true;
       IsResumeFromStandby = false;
       MyFilmsPlaybackActive = false;
@@ -97,7 +92,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BoolSortCountinViews = false;
       BoolDontSplitValuesInViews = false;
       BoolSkipViewState = false;
-      this.MenuSelectedId = -1;
+      MenuSelectedId = -1;
 
       #region Load Config Parameters in MyFilms.xml file (section currentConfig)
 
@@ -310,7 +305,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrSupPlayer = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressPlayed", false);
         StrSuppressType = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressType", string.Empty);
         StrWatchedField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
-        StrMultiUserStateField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "MultiUserStateField", "MultiUserState");
         StrSuppressField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressField", string.Empty);
         StrSuppressValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressValue", string.Empty);
 
@@ -876,7 +870,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public int StrLayOutInHierarchies { get; set; }
     public int LastID { get; set; }
     public int StrIndex { get; set; }
-    public int StrPlayedIndex { get; set; }
+    public DataRow StrPlayedRow { get; set; }
     public bool StrFanart { get; set; }
     public bool StrFanartDefaultViews { get; set; }
     public bool StrFanartDefaultViewsUseRandom { get; set; }
@@ -916,13 +910,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string StrSuppressField { get; set; }
     public string StrSuppressValue { get; set; }
     public string StrWatchedField { get; set; }
-    public string StrMultiUserStateField { get; set; }
-    public string StrPlayedGlobalFilterString { get; set; }
-    public string StrPlayedViewSelect { get; set; }
-    public string StrPlayedDfltSelect { get; set; }
-    public string StrPlayedSelect { get; set; }
-    public string StrPlayedSort { get; set; }
-    public string StrPlayedSens { get; set; }
     public List<string[]> MovieList { get; set; }
     public List<string[]> TrailerList { get; set; }
     public bool MyFilmsPlaybackActive { get; set; }
