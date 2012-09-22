@@ -176,31 +176,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = "Year";
           newRow.SortDirectionView = " DESC";
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Year.jpg";
           CustomViews.View.Rows.Add(newRow);
           //Category
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = "Category";
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Category.jpg";
           CustomViews.View.Rows.Add(newRow);
           //Country
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = "Country";
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Country.jpg";
           CustomViews.View.Rows.Add(newRow);
           //RecentlyAdded
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = "RecentlyAdded";
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\RecentlyAdded.jpg";
           CustomViews.View.Rows.Add(newRow);
           //Indexed title view
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = StrTitle1;
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.Index = 1;
           newRow.Value = "*";
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\TitlesIndex.jpg";
@@ -217,13 +217,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = "Actors";
           newRow.Index = 1;
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\PersonsIndex.jpg";
           CustomViews.View.Rows.Add(newRow);
           //Producer
           newRow = CustomViews.View.NewViewRow();
           newRow.DBfield = "Producer";
-          newRow.Label = BaseMesFilms.Translate_Column(newRow.DBfield);
+          newRow.Label = BaseMesFilms.TranslateColumn(newRow.DBfield);
           newRow.ImagePath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Persons.jpg";
           CustomViews.View.Rows.Add(newRow);
           iCustomViews = 5; // to load "old Custom Views"
@@ -296,12 +296,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StritemDetails4 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails4", "Producer");
         StritemDetails5 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails5", "Languages");
         StritemDetails6 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItemDetails6", "Date");
-        StrlabelDetails1 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails1", BaseMesFilms.Translate_Column(StritemDetails1));
-        StrlabelDetails2 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails2", BaseMesFilms.Translate_Column(StritemDetails2));
-        StrlabelDetails3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails3", BaseMesFilms.Translate_Column(StritemDetails3));
-        StrlabelDetails4 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails4", BaseMesFilms.Translate_Column(StritemDetails4));
-        StrlabelDetails5 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails5", BaseMesFilms.Translate_Column(StritemDetails5));
-        StrlabelDetails6 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails6", BaseMesFilms.Translate_Column(StritemDetails6));
+        StrlabelDetails1 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails1", BaseMesFilms.TranslateColumn(StritemDetails1));
+        StrlabelDetails2 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails2", BaseMesFilms.TranslateColumn(StritemDetails2));
+        StrlabelDetails3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails3", BaseMesFilms.TranslateColumn(StritemDetails3));
+        StrlabelDetails4 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails4", BaseMesFilms.TranslateColumn(StritemDetails4));
+        StrlabelDetails5 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails5", BaseMesFilms.TranslateColumn(StritemDetails5));
+        StrlabelDetails6 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails6", BaseMesFilms.TranslateColumn(StritemDetails6));
 
         StrIdentLabel = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntIdentLabel", string.Empty);
         StrLogos = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Logos", false);

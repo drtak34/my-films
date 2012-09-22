@@ -333,7 +333,7 @@ namespace MyFilmsPlugin.MyFilms
           AntMovieCatalog.CustomFieldRow cfr = data.CustomField.NewCustomFieldRow();
           cfr.SetParentRow(data.CustomFieldsProperties[0]);
           cfr.Tag = customFieldDefinition[0];
-          cfr.Name = (!string.IsNullOrEmpty(Translate_Column(customFieldDefinition[0]))) ? Translate_Column(customFieldDefinition[0]) : customFieldDefinition[1];
+          cfr.Name = (!string.IsNullOrEmpty(TranslateColumn(customFieldDefinition[0]))) ? TranslateColumn(customFieldDefinition[0]) : customFieldDefinition[1];
           cfr.Type = customFieldDefinition[2];
           data.CustomField.AddCustomFieldRow(cfr);
         }
@@ -1839,12 +1839,10 @@ namespace MyFilmsPlugin.MyFilms
     }
     #endregion
 
-    public static string Translate_Column(string Column)
+    internal static string TranslateColumn(string column)
     {
-      // Check for empty string.
-      if (string.IsNullOrEmpty(Column)) return string.Empty;
-
-      switch (Column)
+      if (string.IsNullOrEmpty(column)) return string.Empty;
+      switch (column)
       {
         case "Number":
         case "number":
@@ -2028,10 +2026,10 @@ namespace MyFilmsPlugin.MyFilms
           return GUILocalizeStrings.Get(10798933);
         default:
           {
-            string translation = string.Empty;
+            string translation = "*** DB field translation missing ***";
             if (data != null)
             {
-              foreach (AntMovieCatalog.CustomFieldRow customFieldRow in Enumerable.Where(data.CustomField, customFieldRow => customFieldRow.Tag.ToLower() == Column.ToLower()))
+              foreach (AntMovieCatalog.CustomFieldRow customFieldRow in Enumerable.Where(data.CustomField, customFieldRow => customFieldRow.Tag.ToLower() == column.ToLower()))
               {
                 translation = (!customFieldRow.IsNameNull()) ? customFieldRow.Name : customFieldRow.Tag;
               }
