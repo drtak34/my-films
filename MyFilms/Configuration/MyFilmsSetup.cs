@@ -1419,90 +1419,132 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void AddRemoveExtendedfields(bool isXtended)
     {
-      AntMovieCatalog ds = new AntMovieCatalog();
+      var ds = new AntMovieCatalog();
       foreach (DataColumn dc in ds.Movie.Columns)
       {
         if (IsExtendedField(dc.ColumnName))
         {
+          string tmpValue;
           if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
               dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
               dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
           {
+            tmpValue = AntStorage.Text;
             if (AntStorage.Items.Contains(dc.ColumnName)) AntStorage.Items.Remove(dc.ColumnName);
             if (isXtended) AntStorage.Items.Add(dc.ColumnName);
+            AntStorage.Text = tmpValue;
+            tmpValue = AntStorageTrailer.Text;
             if (AntStorageTrailer.Items.Contains(dc.ColumnName)) AntStorageTrailer.Items.Remove(dc.ColumnName);
             if (isXtended) AntStorageTrailer.Items.Add(dc.ColumnName);
+            AntStorageTrailer.Text = tmpValue;
           }
 
           if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
           {
+            tmpValue = AntFilterItem1.Text;
             if (AntFilterItem1.Items.Contains(dc.ColumnName)) AntFilterItem1.Items.Remove(dc.ColumnName);
             if (isXtended) AntFilterItem1.Items.Add(dc.ColumnName);
+            AntFilterItem1.Text = tmpValue;
+            tmpValue = AntFilterItem2.Text;
             if (AntFilterItem2.Items.Contains(dc.ColumnName)) AntFilterItem2.Items.Remove(dc.ColumnName);
             if (isXtended) AntFilterItem2.Items.Add(dc.ColumnName);
+            AntFilterItem2.Text = tmpValue;
+            tmpValue = AntItem1.Text;
             if (AntItem1.Items.Contains(dc.ColumnName)) AntItem1.Items.Remove(dc.ColumnName);
             if (isXtended) AntItem1.Items.Add(dc.ColumnName);
+            AntItem1.Text = tmpValue;
+            tmpValue = AntItem2.Text;
             if (AntItem2.Items.Contains(dc.ColumnName)) AntItem2.Items.Remove(dc.ColumnName);
             if (isXtended) AntItem2.Items.Add(dc.ColumnName);
+            AntItem2.Text = tmpValue;
+            tmpValue = AntItem3.Text;
             if (AntItem3.Items.Contains(dc.ColumnName)) AntItem3.Items.Remove(dc.ColumnName);
             if (isXtended) AntItem3.Items.Add(dc.ColumnName);
+            AntItem3.Text = tmpValue;
+            tmpValue = AntItem4.Text;
             if (AntItem4.Items.Contains(dc.ColumnName)) AntItem4.Items.Remove(dc.ColumnName);
             if (isXtended) AntItem4.Items.Add(dc.ColumnName);
+            AntItem4.Text = tmpValue;
+            tmpValue = AntItem5.Text;
             if (AntItem5.Items.Contains(dc.ColumnName)) AntItem5.Items.Remove(dc.ColumnName);
             if (isXtended) AntItem5.Items.Add(dc.ColumnName);
+            AntItem5.Text = tmpValue;
+            tmpValue = AntItemDetails1.Text;
             if (AntItemDetails1.Items.Contains(dc.ColumnName)) AntItemDetails1.Items.Remove(dc.ColumnName);
             if (isXtended) AntItemDetails1.Items.Add(dc.ColumnName);
+            AntItemDetails1.Text = tmpValue;
+            tmpValue = AntItemDetails2.Text;
             if (AntItemDetails2.Items.Contains(dc.ColumnName)) AntItemDetails2.Items.Remove(dc.ColumnName);
             if (isXtended) AntItemDetails2.Items.Add(dc.ColumnName);
+            AntItemDetails2.Text = tmpValue;
+            tmpValue = AntItemDetails3.Text;
             if (AntItemDetails3.Items.Contains(dc.ColumnName)) AntItemDetails3.Items.Remove(dc.ColumnName);
             if (isXtended) AntItemDetails3.Items.Add(dc.ColumnName);
+            AntItemDetails3.Text = tmpValue;
+            tmpValue = AntItemDetails4.Text;
             if (AntItemDetails4.Items.Contains(dc.ColumnName)) AntItemDetails4.Items.Remove(dc.ColumnName);
             if (isXtended) AntItemDetails4.Items.Add(dc.ColumnName);
+            AntItemDetails4.Text = tmpValue;
+            tmpValue = AntItemDetails5.Text;
             if (AntItemDetails5.Items.Contains(dc.ColumnName)) AntItemDetails5.Items.Remove(dc.ColumnName);
             if (isXtended) AntItemDetails5.Items.Add(dc.ColumnName);
+            AntItemDetails5.Text = tmpValue;
+            tmpValue = AntItemDetails6.Text;
             if (AntItemDetails6.Items.Contains(dc.ColumnName)) AntItemDetails6.Items.Remove(dc.ColumnName);
             if (isXtended) AntItemDetails6.Items.Add(dc.ColumnName);
+            AntItemDetails6.Text = tmpValue;
           }
           if (dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "IndexedTitle" &&
               dc.ColumnName != "Comments" && dc.ColumnName != "Description" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Rating" &&
-              dc.ColumnName != "URL" && dc.ColumnName != "RecentlyAdded")
+              dc.ColumnName != "URL" && dc.ColumnName != "AgeAdded"  && dc.ColumnName != "RecentlyAdded")
           {
+            tmpValue = SField1.Text;
             if (SField1.Items.Contains(dc.ColumnName)) SField1.Items.Remove(dc.ColumnName);
             if (isXtended) SField1.Items.Add(dc.ColumnName);
+            SField1.Text = tmpValue;
+
+            tmpValue = SField2.Text;
             if (SField2.Items.Contains(dc.ColumnName)) SField2.Items.Remove(dc.ColumnName);
             if (isXtended) SField2.Items.Add(dc.ColumnName);
+            SField2.Text = tmpValue;
           }
+
           if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
               dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Number")
           {
+            tmpValue = AntViewItem.Text;
             if (AntViewItem.Items.Contains(dc.ColumnName)) AntViewItem.Items.Remove(dc.ColumnName);
             if (isXtended) AntViewItem.Items.Add(dc.ColumnName);
+            AntViewItem.Text = tmpValue;
           }
-          if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-              dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
-              dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-          {
-            if (SField1.Items.Contains(dc.ColumnName)) SField1.Items.Remove(dc.ColumnName);
-            if (isXtended) SField1.Items.Add(dc.ColumnName);
-            if (SField2.Items.Contains(dc.ColumnName)) SField2.Items.Remove(dc.ColumnName);
-            if (isXtended) SField2.Items.Add(dc.ColumnName);
-          }
+
           if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
               dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
               dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
               dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
           {
+            tmpValue = AntIdentItem.Text;
             if (AntIdentItem.Items.Contains(dc.ColumnName)) AntIdentItem.Items.Remove(dc.ColumnName);
-            AntIdentItem.Items.Add(dc.ColumnName);
+            if (isXtended) AntIdentItem.Items.Add(dc.ColumnName);
+            AntIdentItem.Text = tmpValue;
           }
+
           if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
           {
+            tmpValue = cbfdupdate.Text;
             if (cbfdupdate.Items.Contains(dc.ColumnName)) cbfdupdate.Items.Remove(dc.ColumnName);
             if (isXtended) cbfdupdate.Items.Add(dc.ColumnName);
+            cbfdupdate.Text = tmpValue;
+
+            tmpValue = cbWatched.Text;
             if (cbWatched.Items.Contains(dc.ColumnName)) cbWatched.Items.Remove(dc.ColumnName);
             if (isXtended) cbWatched.Items.Add(dc.ColumnName);
+            cbWatched.Text = tmpValue;
+
+            tmpValue = CmdPar.Text;
             if (CmdPar.Items.Contains(dc.ColumnName)) CmdPar.Items.Remove(dc.ColumnName);
             if (isXtended) CmdPar.Items.Add(dc.ColumnName);
+            CmdPar.Text = tmpValue;
           }
         }
       }
