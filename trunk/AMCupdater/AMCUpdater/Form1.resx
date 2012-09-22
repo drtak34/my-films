@@ -135,55 +135,6 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>446, 6</value>
   </metadata>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 5</value>
-  </metadata>
-  <data name="chkLoadPersonImagesWithFanart.ToolTip" xml:space="preserve">
-    <value>AMC Updater can also load personimages, when retrieving fanart for a movie to display person thums in GUI.
-As prerequisites a person artwork folder has to be defined.
-However, the loading time incleases substantially - uncheck this option, if you need faster grabbing of fanarts.</value>
-  </data>
-  <data name="chkUseGrabberForFanart.ToolTip" xml:space="preserve">
-    <value>By default, AMCU uses the internal fanart grabber for grabbing fanarts from TMDB.
-When checked, the script definitions are used to load fanart instead.
-This allows to get fanart from other sources, e.g. from other websites (if the script supports it) 
-or from movie directory, when using nfo grabber script.
-Two definitions are used:
-For single fanarts, use the fanart definition at cover image; for multiple fanarts, use the definition of "MultiFanart" in the script.</value>
-  </data>
-  <data name="txtPictureFilenameSuffix.ToolTip" xml:space="preserve">
-    <value>Allows to add an ending to the picture filename.
-THis is e.g. useful, if you import several editions of the same movie 
-to make sure to not overwrite existing images - in that case you could add the year as suffix.
-Supported placeholder:
-%year%
-%number%
-If using placeholders, the suffix will only be added, if placeholder value is not empty.</value>
-  </data>
-  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
-    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
-You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
-You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
-If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
-
-"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
-Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
-THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
-  </data>
-  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
-    <value>Alter this field to change the location and name of downloaded cover art.
-By default the images are stored in the same folder as your Ant database file.
-If you enter a relative folder path, this will be used as a subfolder
-i.e. 'covers\' will create / use a subfolder called 'covers'.
-You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
-i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
-  </data>
-  <metadata name="MovieBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1241, 34</value>
-  </metadata>
-  <metadata name="PersonBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1406, 34</value>
-  </metadata>
   <data name="Label88.Text" xml:space="preserve">
     <value>Use "Import Movies" to scan your movie directories, retrieve mediainfo and internet data, add the movies to your catalog and optional remove movies you don't have anymore from catalog.
 Depending on your settings, this can be done with or without user interaction (e.g. userdialog if movie can't be identified automatically) and you can decide, if a non identified movie should be added without internet data.</value>
@@ -728,6 +679,19 @@ if you have e.g. imdb links stored in URL field and try updaating with IMDB grab
 due to usage if IMDB id.
 Other grabber scripts require matching by name and year, that might not always allow auto matches.</value>
   </data>
+  <data name="chkLoadPersonImagesWithFanart.ToolTip" xml:space="preserve">
+    <value>AMC Updater can also load personimages, when retrieving fanart for a movie to display person thums in GUI.
+As prerequisites a person artwork folder has to be defined.
+However, the loading time incleases substantially - uncheck this option, if you need faster grabbing of fanarts.</value>
+  </data>
+  <data name="chkUseGrabberForFanart.ToolTip" xml:space="preserve">
+    <value>By default, AMCU uses the internal fanart grabber for grabbing fanarts from TMDB.
+When checked, the script definitions are used to load fanart instead.
+This allows to get fanart from other sources, e.g. from other websites (if the script supports it) 
+or from movie directory, when using nfo grabber script.
+Two definitions are used:
+For single fanarts, use the fanart definition at cover image; for multiple fanarts, use the definition of "MultiFanart" in the script.</value>
+  </data>
   <data name="cbEditionNameAppliesTo.ToolTip" xml:space="preserve">
     <value>You can add "Edition Name(s)" to the end of the title.
 AMCUpdater tries to get those Edition Names (like "Directors Cut, Unrated, Extended Edition)
@@ -789,6 +753,39 @@ Will attempt to read UNC server name.
 
 If not found then the value entered for 'Media Label' will be used (if any).</value>
   </data>
+  <data name="txtPictureFilenameSuffix.ToolTip" xml:space="preserve">
+    <value>Allows to add an ending to the picture filename.
+THis is e.g. useful, if you import several editions of the same movie 
+to make sure to not overwrite existing images - in that case you could add the year as suffix.
+Supported placeholder:
+%year%
+%number%
+If using placeholders, the suffix will only be added, if placeholder value is not empty.</value>
+  </data>
+  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
+    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
+You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
+You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
+If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
+
+"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
+Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
+THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
+  </data>
+  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
+    <value>Alter this field to change the location and name of downloaded cover art.
+By default the images are stored in the same folder as your Ant database file.
+If you enter a relative folder path, this will be used as a subfolder
+i.e. 'covers\' will create / use a subfolder called 'covers'.
+You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
+i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
+  </data>
+  <metadata name="EditorSearchExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="EditorReplacementString.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="GroupBox28.ToolTip" xml:space="preserve">
     <value>You can define search expressions with replacement expressions to identify "Edition" from (media) name.
 Both normal and ReGex search expressions are allowed.
@@ -797,18 +794,6 @@ If multipe rules apply, the Replacement expression will be returned as comma sep
 You can enable on Database Tab to add Edition to end of title.
 By that you can differentiate different editions of a movie.</value>
   </data>
-  <metadata name="EditorSearchExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="EditorReplacementString.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="EditorSearchExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="EditorReplacementString.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="txtOverridePath.ToolTip" xml:space="preserve">
     <value>Override path when writing to XML file:
 Use this field to change the path to your files.
@@ -819,17 +804,6 @@ Note : Can only be used when scanning a single folder structure.</value>
   </data>
   <data name="Label46.Text" xml:space="preserve">
     <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
-</value>
-  </data>
-  <data name="GroupBox26.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-
 </value>
   </data>
   <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
@@ -846,6 +820,17 @@ Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
   </data>
+  <data name="GroupBox26.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+
+</value>
+  </data>
   <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
     <value>AMCUpdater can be instructed to ignore selected files.
 These files will never be scanned or imported by AMCUpdater.
@@ -859,9 +844,6 @@ These files will be scanned to determine what languages are included, if possibl
 This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
 </value>
   </data>
-  <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>934, 34</value>
-  </metadata>
   <metadata name="MovieBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>934, 34</value>
   </metadata>
@@ -990,21 +972,6 @@ Other grabber scripts require matching by name and year, that might not always a
   </data>
   <metadata name="PersonBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1085, 34</value>
-  </metadata>
-  <metadata name="PersonBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1085, 34</value>
-  </metadata>
-  <metadata name="IsActor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IsProducer.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IsDirector.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IsWriter.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
   </metadata>
   <metadata name="IsActor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1139,23 +1106,11 @@ Other grabber scripts require matching by name and year, that might not always a
   <metadata name="UserBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>372, 71</value>
   </metadata>
-  <metadata name="UserBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>372, 71</value>
-  </metadata>
-  <metadata name="AntMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>357, 33</value>
-  </metadata>
   <metadata name="AntMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>357, 33</value>
   </metadata>
   <metadata name="CustomFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>189, 71</value>
-  </metadata>
-  <metadata name="CustomFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>189, 71</value>
-  </metadata>
-  <metadata name="PropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 71</value>
   </metadata>
   <metadata name="PropertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 71</value>
