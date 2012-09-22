@@ -341,6 +341,7 @@
       <visible>!Control.HasFocus(50)</visible>
       <control>
         <type>image</type>        
+        <id>0</id>
         <description>Menu Background</description>        
         <posX>26</posX>
         <posY>78</posY>
@@ -581,7 +582,7 @@
       <type>fadelabel</type>
       <description>User Item 2 Value - preset to Country</description>
       <id>1</id>
-      <posX>150</posX>
+      <posX>180</posX>
       <posY>653</posY>
       <width>275</width>
       <label>#myfilms.user.item2.value</label>
@@ -605,7 +606,7 @@
       <type>fadelabel</type>
       <description>User Item 3 Value - preset to Director</description>
       <id>1</id>
-      <posX>150</posX>
+      <posX>180</posX>
       <posY>680</posY>
       <width>275</width>
       <label>#myfilms.user.item3.value</label>
@@ -613,6 +614,20 @@
       <textcolor>ivory</textcolor>
       <visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
     </control>
+    <control>
+      <description>User Item 4 Value</description>
+      <type>fadelabel</type>
+      <id>1</id>
+      <label>#myfilms.user.item5.value</label>
+      <posX>488</posX>
+      <posY>680</posY>
+      <width>200</width>
+      <font>font11</font>
+      <textcolor>ivory</textcolor>
+      <align>left</align>
+      <visible>string.equals(#myfilms.user.item5.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+    </control>
+
     <control>
       <type>textboxscrollup</type>
       <description>Plot/Description</description>
@@ -856,20 +871,6 @@
       <spaceBetweenItems>3</spaceBetweenItems>
       <colordiffuse>ffffffff</colordiffuse>
       <visible>!string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
-    </control>
-    <!-- User Display Item 5 -->    
-    <control>
-      <description>User Item 5 Value</description>
-      <type>fadelabel</type>
-      <id>1</id>
-      <label>#myfilms.user.item5.value</label>
-      <posX>488</posX>
-      <posY>680</posY>
-      <width>200</width>
-      <font>font11</font>
-      <textcolor>ivory</textcolor>
-      <align>left</align>
-      <visible>string.equals(#myfilms.user.item5.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
     </control>
     <!-- Additional Display for Info Movie available -->
     <control>
