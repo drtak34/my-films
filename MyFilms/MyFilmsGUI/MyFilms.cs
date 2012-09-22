@@ -2477,8 +2477,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Change_Layout()
     {
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      List<GUIFacadeControl.Layout> choiceLayoutMenu = new List<GUIFacadeControl.Layout>();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var choiceLayoutMenu = new List<GUIFacadeControl.Layout>();
 
       if (dlg == null) return;
       dlg.Reset();
@@ -2592,7 +2592,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (
               (dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" &&
-               dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != "MultiUserState" && dc.ColumnName != "VirtualPathTitle")
+               dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != BaseMesFilms.MultiUserStateField && dc.ColumnName != "VirtualPathTitle")
               &&
               ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode("Restrict DB field Selection for AMC3")) ||
               (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
@@ -3195,7 +3195,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Watched Status
             if (conf.EnhancedWatchedStatusHandling)
             {
-              if (!sr[conf.StrMultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
+              if (!sr[BaseMesFilms.MultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
               {
                 #region migrate status from configured (enhanced)watched field to new MultiUserStates
                 MultiUserData userData;
@@ -3216,12 +3216,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (sr["RatingUser"] != Convert.DBNull)
                     userData.SetRating(MyFilms.conf.StrUserProfileName, (decimal)sr["RatingUser"]);
                 }
-                sr[conf.StrMultiUserStateField] = userData.ResultValueString();
+                sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
                 sr["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
                 sr["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
                 #endregion
               }
-              item.IsPlayed = (EnhancedWatched(sr[conf.StrMultiUserStateField].ToString(), conf.StrUserProfileName));
+              item.IsPlayed = (EnhancedWatched(sr[BaseMesFilms.MultiUserStateField].ToString(), conf.StrUserProfileName));
             }
             else
             {
@@ -10327,7 +10327,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private string CreateGlobalUnwatchedFilter()
     {
       string username = conf.StrUserProfileName;
-      string filter = (MyFilms.conf.EnhancedWatchedStatusHandling) ? conf.StrMultiUserStateField + " like '*" + StringExtensions.EscapeLikeValue(username) + ":0*" + "' AND " : this.GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+      string filter = (MyFilms.conf.EnhancedWatchedStatusHandling) ? BaseMesFilms.MultiUserStateField + " like '*" + StringExtensions.EscapeLikeValue(username) + ":0*" + "' AND " : this.GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
       LogMyFilms.Debug("CreateGlobalUnwatchedFilter() - filter = '" + filter + "'");
       return filter;
     }
@@ -10459,7 +10459,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
-      foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[conf.StrMultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
+      foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[BaseMesFilms.MultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
       {
         if (userprofilename == "")
         {
@@ -10513,7 +10513,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (conf.EnhancedWatchedStatusHandling)
         {
           MultiUserData userData;
-          if (sr["MultiUserState"] != System.Convert.DBNull) userData = new MultiUserData(sr.MultiUserState);
+          if (sr[BaseMesFilms.MultiUserStateField] != System.Convert.DBNull) userData = new MultiUserData(sr.MultiUserState);
           else
           {
             #region if the former user was the default user, migrate it to MUS!
@@ -10537,7 +10537,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (sr["RatingUser"] != Convert.DBNull)
                   userData.SetRating(DefaultUsername, (decimal)sr["RatingUser"]);
               }
-              sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+              sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
               sr["DateWatched"] = userData.GetUserState(DefaultUsername).WatchedDate;
               sr["RatingUser"] = userData.GetUserState(DefaultUsername).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(DefaultUsername).UserRating;
               #endregion
@@ -10559,7 +10559,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             ? MultiUserData.Add(sr.Favorite, conf.StrUserProfileName)
                             : MultiUserData.Remove(sr.Favorite, conf.StrUserProfileName);
           }
-          sr["MultiUserState"] = userData.MultiUserStatesValue;
+          sr[BaseMesFilms.MultiUserStateField] = userData.MultiUserStatesValue;
         }
         #endregion
       }
@@ -10605,7 +10605,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
-      foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[conf.StrMultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
+      foreach (var userprofilename in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens).Select(sr => sr[BaseMesFilms.MultiUserStateField].ToString().Trim()).Select(strEnhancedWatchedValue => strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(split1 => split1.Where(s => s.Contains(":")).Select(s => s.Substring(0, s.IndexOf(":"))).Where(userprofilename => !choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != MyFilms.GlobalUsername)))
       {
         if (userprofilename != conf.StrUserProfileName)
         {
@@ -10632,12 +10632,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (conf.EnhancedWatchedStatusHandling)
         {
-          MultiUserData userData;
-          if (sr["MultiUserState"] != System.Convert.DBNull)
+          if (sr[BaseMesFilms.MultiUserStateField] != System.Convert.DBNull)
           {
-            userData = new MultiUserData(sr.MultiUserState);
+            var userData = new MultiUserData(sr.MultiUserState);
             userData.DeleteUser(strUserProfileNameSelection);
-            sr[MyFilms.conf.StrMultiUserStateField] = userData.ResultValueString();
+            sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
           }
         }
       }
@@ -10650,8 +10649,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private string Change_MovieGroupName(string movieTitle)
     {
-      List<string> choiceMovieGroupNames = new List<string>();
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var choiceMovieGroupNames = new List<string>();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return "";
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079836) + " - " + movieTitle); // Add to box set ...
@@ -10660,10 +10659,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (DataRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens)) // Add already existing Movie Group Names - example of string value: "24\Season 1"
       {
         string sFullTitle = sr[conf.StrTitle1].ToString();
-        int DelimCnt = NewString.PosCount(conf.TitleDelim, sFullTitle, false);
-        if (DelimCnt > 0)
+        int delimCnt = NewString.PosCount(conf.TitleDelim, sFullTitle, false);
+        if (delimCnt > 0)
         {
-          for (int i = 1; i < DelimCnt + 1; i++)
+          for (int i = 1; i < delimCnt + 1; i++)
           {
             string strMovieGroupName = NewString.NPosLeft(conf.TitleDelim, sFullTitle, i, false, false);
             if (!choiceMovieGroupNames.Contains(strMovieGroupName))
@@ -10681,7 +10680,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg.SelectedLabel == -1) return "";
       if (dlg.SelectedLabel == 0) // new value
       {
-        VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+        var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
         if (null == keyboard) return "";
         keyboard.Reset();
         keyboard.Text = ""; // Default string is empty
@@ -11725,7 +11724,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgYesNo.DoModal(GetID);
                 if (dlgYesNo.IsConfirmed)
                 {
-                  MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)this.facadeFilms.SelectedListItem.ItemId, true, false);
+                  MyFilmsDetail.ManualDelete(MyFilms.r[facadeFilms.SelectedListItem.ItemId], true, false);
                   // Fin_Charge_Init(true, true);
                   Loadfacade(); //Fin_Charge_Init(false, true);
                 }
@@ -11738,7 +11737,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgYesNo.DoModal(GetID);
                 if (dlgYesNo.IsConfirmed)
                 {
-                  MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)this.facadeFilms.SelectedListItem.ItemId, false, true);
+                  MyFilmsDetail.ManualDelete(MyFilms.r[facadeFilms.SelectedListItem.ItemId], false, true);
                   // Fin_Charge_Init(true, true);
                   Loadfacade(); //Fin_Charge_Init(false, true);
                 }
@@ -11752,7 +11751,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (dlgYesNo.IsConfirmed)
                 {
                   // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeFilms.SelectedListItem.ItemId);
-                  MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)this.facadeFilms.SelectedListItem.ItemId, true, true);
+                  MyFilmsDetail.ManualDelete(MyFilms.r[facadeFilms.SelectedListItem.ItemId], true, true);
                   // Fin_Charge_Init(true, true);
                   Loadfacade(); //Fin_Charge_Init(false, true);
                 }
