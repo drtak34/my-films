@@ -300,7 +300,7 @@
 			<width>240</width>
 			<height>360</height>
 			<texture>Backslide.png</texture>
-			<colordiffuse>ivory</colordiffuse>
+			<colordiffuse>ffffffff</colordiffuse>
 			<visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
 			<animation effect="slide" time="250" start="-400,0">visible</animation>
 			<animation effect="slide" time="250" end="-400,0">hidden</animation>
