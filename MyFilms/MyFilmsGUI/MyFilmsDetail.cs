@@ -912,7 +912,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (MyFilms.conf.EnhancedWatchedStatusHandling)
             {
-              dlgmenu.Add(GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0 ? GUILocalizeStrings.Get(1079895) : GUILocalizeStrings.Get(1079894));
+              int watchedCount = new MultiUserData(MyFilms.r[MyFilms.conf.StrIndex][BaseMesFilms.MultiUserStateField].ToString()).GetUserState(MyFilms.conf.StrUserProfileName).WatchedCount;
+              dlgmenu.Add(watchedCount > 0 ? GUILocalizeStrings.Get(1079895) : GUILocalizeStrings.Get(1079894));
             }
             else
             {
@@ -1139,11 +1140,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region toggle watched status
           if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
-            MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) <= 0);
+            int watchedCount = new MultiUserData(MyFilms.r[MyFilms.conf.StrIndex][BaseMesFilms.MultiUserStateField].ToString()).GetUserState(MyFilms.conf.StrUserProfileName).WatchedCount;
+            Watched_Toggle(MyFilms.r[MyFilms.conf.StrIndex], watchedCount <= 0);
           }
           else
           {
-            MyFilmsDetail.Watched_Toggle(MyFilms.conf.StrIndex, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() == MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower());
+            Watched_Toggle(MyFilms.r[MyFilms.conf.StrIndex], MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() == MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower());
           }
           afficher_detail(true);
           #endregion
@@ -1184,10 +1186,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "userrating":
           {
             #region User rating
-            MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
+            var dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
             if (MyFilms.conf.EnhancedWatchedStatusHandling)
             {
-              decimal wRating = GetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName);
+              decimal wRating = new MultiUserData(MyFilms.r[MyFilms.conf.StrIndex][BaseMesFilms.MultiUserStateField].ToString()).GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
               dlgRating.Rating = (wRating != decimal.MinValue) ? wRating : 5;
             }
             else
@@ -1211,9 +1213,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             if (MyFilms.conf.EnhancedWatchedStatusHandling)
             {
-              SetUserRating(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName, dlgRating.Rating.ToString());
+              var userData = new MultiUserData(MyFilms.r[MyFilms.conf.StrIndex][BaseMesFilms.MultiUserStateField].ToString());
+              userData.SetRating(MyFilms.conf.StrUserProfileName, dlgRating.Rating);
+              MyFilms.r[MyFilms.conf.StrIndex][BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
+              SyncMusToExtendedFields(MyFilms.r[MyFilms.conf.StrIndex], userData, MyFilms.conf.StrUserProfileName);
             }
-            MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating; // always set db value, so in enhanced wat hed mode it represents the lst chaned value ...
+            else
+            {
+              MyFilms.r[MyFilms.conf.StrIndex]["RatingUser"] = dlgRating.Rating; // always set db value, so in enhanced wat hed mode it represents the lst chaned value ...
+            }
 
             if (MyFilms.conf.StrUserProfileName.Length > 0)
             {
@@ -2861,83 +2869,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  Set an entry from the database to watched/unwatched
     //-------------------------------------------------------------------------------------------        
     // public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
-    public static void Watched_Toggle(int index, bool watched)
+    public static void Watched_Toggle(DataRow row, bool watched)
     {
       if (MyFilms.conf.EnhancedWatchedStatusHandling)
       {
-        var userData = new MultiUserData(MyFilms.r[index][BaseMesFilms.MultiUserStateField].ToString());
+        var userData = new MultiUserData(row[BaseMesFilms.MultiUserStateField].ToString());
         userData.SetWatched(MyFilms.conf.StrUserProfileName, watched);
-        MyFilms.r[index][BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-        MyFilms.r[index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-        MyFilms.r[index]["RatingUser"] = (userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == -1) ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-        MyFilms.r[index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
-        // SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, watched ? 1 : 0); //set watchedcount for enhanced watched count handling to 1
+        row[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
+        SyncMusToExtendedFields(row, userData, MyFilms.conf.StrUserProfileName);
       }
       else
       {
-        MyFilms.r[index][MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+        row[MyFilms.conf.StrWatchedField] = watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
       }
-      LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField + "' to '" + MyFilms.r[index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[index][MyFilms.conf.StrTitle1]);
+      LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField + "' to '" + row[MyFilms.conf.StrWatchedField] + "' for movie: " + row[MyFilms.conf.StrTitle1]);
 
       Update_XML_database();
 
       // tell any listeners that user rated the movie
-      var movie = GetMovieFromRecord(MyFilms.r[index]);
-      int count = 0;
-      if (watched)
-        count = 1;
+      var movie = GetMovieFromRecord(row);
       if (WatchedItem != null)
-        WatchedItem(movie, watched, count);
-    }
-
-    //-------------------------------------------------------------------------------------------
-    //  Set enhanced watch count
-    //-------------------------------------------------------------------------------------------        
-    public static void SetWatchedCount(int index, string userprofilename, int count)
-    {
-      var userData = new MultiUserData(MyFilms.r[index][BaseMesFilms.MultiUserStateField].ToString());
-      userData.SetWatchedCount(MyFilms.conf.StrUserProfileName, count);
-      MyFilms.r[index][BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-      MyFilms.r[index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-      MyFilms.r[index]["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-      MyFilms.r[index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
-    }
-
-    //-------------------------------------------------------------------------------------------
-    //  Get enhanced watch count
-    //-------------------------------------------------------------------------------------------        
-    private static int GetWatchedCount(int index, string userprofilename)
-    {
-      return new MultiUserData(MyFilms.r[index][BaseMesFilms.MultiUserStateField].ToString()).GetUserState(userprofilename).WatchedCount;
-    }
-
-    //-------------------------------------------------------------------------------------------
-    //  Get enhanced watch date
-    //-------------------------------------------------------------------------------------------        
-    private static DateTime GetWatchedDate(int index, string userprofilename)
-    {
-      return new MultiUserData(MyFilms.r[index][BaseMesFilms.MultiUserStateField].ToString()).GetUserState(userprofilename).WatchedDate;
-    }
-
-    //-------------------------------------------------------------------------------------------
-    //  Get enhanced user rating
-    //-------------------------------------------------------------------------------------------        
-    private static decimal GetUserRating(int index, string userprofilename)
-    {
-      return new MultiUserData(MyFilms.r[index][BaseMesFilms.MultiUserStateField].ToString()).GetUserState(userprofilename).UserRating;
-    }
-
-    //-------------------------------------------------------------------------------------------
-    //  Set enhanced user rating
-    //-------------------------------------------------------------------------------------------        
-    public static void SetUserRating(int index, string userprofilename, string rating)
-    {
-      var userData = new MultiUserData(MyFilms.r[index][BaseMesFilms.MultiUserStateField].ToString());
-      userData.SetRating(MyFilms.conf.StrUserProfileName, decimal.Parse(rating));
-      MyFilms.r[index][BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-      MyFilms.r[index]["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-      MyFilms.r[index]["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-      MyFilms.r[index][MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+        WatchedItem(movie, watched, ((watched) ? 1 : 0));
     }
 
     //-------------------------------------------------------------------------------------------
@@ -2949,14 +2901,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var userData = new MultiUserData(row[BaseMesFilms.MultiUserStateField].ToString());
       userData.AddWatchedCountByOne(userprofilename);
       row[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-      row["DateWatched"] = (userData.GetUserState(userprofilename).WatchedDate == MultiUserData.NoWatchedDate) ? Convert.DBNull : userData.GetUserState(userprofilename).WatchedDate;
-      row["RatingUser"] = (userData.GetUserState(userprofilename).UserRating == -1) ? Convert.DBNull : userData.GetUserState(userprofilename).UserRating;
-      row[MyFilms.conf.StrWatchedField] = userData.GetUserState(userprofilename).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+      SyncMusToExtendedFields(row, userData, userprofilename);
 
       // tell any listeners that user watched the movie
       var movie = GetMovieFromRecord(row);
       if (WatchedItem != null && MyFilms.conf.AllowTraktSync)
         WatchedItem(movie, true, userData.GetUserState(userprofilename).WatchedCount);
+    }
+
+    private static void SyncMusToExtendedFields(DataRow row, MultiUserData userData, string userprofilename)
+    {
+      row["DateWatched"] = (userData.GetUserState(userprofilename).WatchedDate == MultiUserData.NoWatchedDate || userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched == false) ? Convert.DBNull : userData.GetUserState(userprofilename).WatchedDate;
+      row["RatingUser"] = (userData.GetUserState(userprofilename).UserRating == -1) ? Convert.DBNull : userData.GetUserState(userprofilename).UserRating;
+      row[MyFilms.conf.StrWatchedField] = userData.GetUserState(userprofilename).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
     }
 
     //-------------------------------------------------------------------------------------------
