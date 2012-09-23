@@ -10537,8 +10537,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   userData.SetRating(DefaultUsername, (decimal)sr["RatingUser"]);
               }
               sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-              sr["DateWatched"] = userData.GetUserState(DefaultUsername).WatchedDate;
-              sr["RatingUser"] = userData.GetUserState(DefaultUsername).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(DefaultUsername).UserRating;
+              sr["DateWatched"] = (userData.GetUserState(DefaultUsername).WatchedDate == MultiUserData.NoWatchedDate || userData.GetUserState(DefaultUsername).Watched == false) ? Convert.DBNull : userData.GetUserState(DefaultUsername).WatchedDate;
+              sr["RatingUser"] = (userData.GetUserState(DefaultUsername).UserRating == MultiUserData.NoRating) ? Convert.DBNull : userData.GetUserState(DefaultUsername).UserRating;
               #endregion
             }
             #endregion
@@ -10549,7 +10549,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           var user = userData.GetUserState(conf.StrUserProfileName);
-          sr["DateWatched"] = user.WatchedDate == MultiUserData.NoWatchedDate ? System.Convert.DBNull : user.WatchedDate;
+          sr["DateWatched"] = (user.WatchedDate == MultiUserData.NoWatchedDate || user.Watched == false) ? System.Convert.DBNull : user.WatchedDate;
           sr["RatingUser"] = user.UserRating == -1 ? System.Convert.DBNull : user.UserRating;
           if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
@@ -11890,12 +11890,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (this.facadeFilms.SelectedListItem.IsPlayed)
           {
             this.facadeFilms.SelectedListItem.IsPlayed = false;
-            MyFilmsDetail.Watched_Toggle((int)this.facadeFilms.SelectedListItem.ItemId, false);
+            MyFilmsDetail.Watched_Toggle(r[facadeFilms.SelectedListItem.ItemId], false);
           }
           else
           {
             this.facadeFilms.SelectedListItem.IsPlayed = true;
-            MyFilmsDetail.Watched_Toggle((int)this.facadeFilms.SelectedListItem.ItemId, true);
+            MyFilmsDetail.Watched_Toggle(r[facadeFilms.SelectedListItem.ItemId], true);
           }
           //Fin_Charge_Init(true, true);
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
