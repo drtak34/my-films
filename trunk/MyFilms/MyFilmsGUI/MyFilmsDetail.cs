@@ -7019,21 +7019,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       string personartworkpath = MyFilms.conf.StrPathArtist;
       List<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
-      foreach (DbPersonInfo t in wTableau)
+      foreach (DbPersonInfo actor in wTableau)
       {
-        string actorname = t.Name;
-        string actorrole = t.Job;
         var item = new GUIListItem();
-        item.Label = t.Name;
-        item.Label = t.Job;
+        item.Label = actor.Name;
+        item.Label2 = actor.Job;
         if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
         {
-          if (File.Exists(personartworkpath + "\\" + actorname + ".jpg"))
+          if (File.Exists(personartworkpath + "\\" + actor.Name + ".jpg"))
           {
-            item.IconImage = personartworkpath + "\\" + actorname + ".jpg";
-            item.IconImageBig = personartworkpath + "\\" + actorname + ".jpg";
-            item.ThumbnailImage = personartworkpath + "\\" + actorname + ".jpg";
+            item.ThumbnailImage = personartworkpath + "\\" + actor.Name + ".jpg";
           }
+          else
+          {
+            item.ThumbnailImage = MyFilms.conf.DefaultCoverArtist;
+          }
+          item.IconImage = item.ThumbnailImage;
+          item.IconImageBig = item.ThumbnailImage;
         }
         facadePersons.Add(item);
       }
