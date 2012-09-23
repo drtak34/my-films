@@ -1189,12 +1189,16 @@ namespace MyFilmsPlugin.MyFilms
                             if (sr.RatingUser > MultiUserData.FavoriteRating)
                             {
                               LogMyFilms.Debug("UpdateMovies() - Adding user '" + UserProfileName + "' to 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
+                              string newValue = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
+                              sr["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
+                              // sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
                             }
                             else
                             {
                               LogMyFilms.Debug("UpdateMovies() - Remove user '" + UserProfileName + "' from 'Favorite' field (rating = '" + (sr.IsRatingUserNull() ? "null" : sr.RatingUser.ToString()) + "')." + movieinfo);
-                              if (!sr.IsFavoriteNull()) sr.Favorite = MultiUserData.Remove(sr.Favorite, UserProfileName);
+                              string newValue = MultiUserData.Remove(sr["Favorite"].ToString(), UserProfileName);
+                              sr["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
+                              // if (!sr.IsFavoriteNull()) sr.Favorite = MultiUserData.Remove(sr.Favorite, UserProfileName);
                             }
                           }
                         }
@@ -1281,11 +1285,15 @@ namespace MyFilmsPlugin.MyFilms
                       {
                         if (sr.RatingUser > MultiUserData.FavoriteRating)
                         {
-                          sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
+                          string newValue = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
+                          sr["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
+                          // sr.Favorite = MultiUserData.Add(sr["Favorite"].ToString(), UserProfileName);
                         }
                         else
                         {
-                          if (!sr.IsFavoriteNull()) sr.Favorite = MultiUserData.Remove(sr.Favorite, UserProfileName);
+                          string newValue = MultiUserData.Remove(sr["Favorite"].ToString(), UserProfileName);
+                          sr["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
+                          // if (!sr.IsFavoriteNull()) sr.Favorite = MultiUserData.Remove(sr.Favorite, UserProfileName);
                         }
                       }
                     }
