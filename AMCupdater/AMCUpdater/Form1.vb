@@ -281,7 +281,7 @@ Public Class Form1
         MediaData.Add("size", "size")
         MediaData.Add("source", "source")
         MediaData.Add("subtitles", "subtitles")
-        'MediaData.Add("languages", "languages") ' disabled here, as we now prefer loading internet info to that field
+        MediaData.Add("languages", "languages") ' also enabled here, as we also can load mediainfo data in that field ...
         MediaData.Add("aspectratio", "aspectratio")
         MediaData.Add("audiochannelcount", "audiochannelcount")
 
@@ -2052,7 +2052,13 @@ Public Class Form1
 
             If FieldChecked = "True" Then
                 If InternetData.ContainsValue(FieldName.ToLower) Then
-                    InternetLookupNeeded = True
+                    If FieldName = "Languages" Then
+                        If chkUseInternetDataForLanguagesField.Checked = True Then
+                            InternetLookupNeeded = True
+                        End If
+                    Else
+                        InternetLookupNeeded = True
+                    End If
                 End If
             End If
 

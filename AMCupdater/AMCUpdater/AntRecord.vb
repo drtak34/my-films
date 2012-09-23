@@ -37,6 +37,7 @@ Public Class AntRecord
     Private _masterTitle As String = String.Empty
     Private _onlyAddMissing As Boolean = False
     Private _onlyUpdateNonEmptyData As Boolean = False
+    Private _useInternetDataForLanguages As Boolean = False
     Private _databaseFields As New Hashtable
     'Private _processMode As ProcessModeNames
 
@@ -403,6 +404,14 @@ Public Class AntRecord
         End Get
         Set(ByVal value As Boolean)
             _onlyUpdateNonEmptyData = value
+        End Set
+    End Property
+    Public Property UseInternetDataForLanguages() As Boolean
+        Get
+            Return _useInternetDataForLanguages
+        End Get
+        Set(ByVal value As Boolean)
+            _useInternetDataForLanguages = value
         End Set
     End Property
 
@@ -1390,7 +1399,7 @@ Public Class AntRecord
 
             CurrentAttribute = "Languages"
             If (_filePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
-                If Not CurrentSettings.Use_InternetData_For_Languages = True Then
+                If Not _useInternetDataForLanguages = True Then
                     TempValue = GetFileData(_filePath, "audiostreamlanguagelist")
                     CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
