@@ -3161,6 +3161,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
               case "Date":
               case "DateAdded":
+              case "DateWatched":
                 try
                 {
                   item.Label2 = DateTime.Parse(sr["Date"].ToString()).ToShortDateString(); //item.Label2 = ((DateTime)sr["DateAdded"]).ToShortDateString();
@@ -3168,6 +3169,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 catch { }
                 break;
               case "Rating":
+              case "RatingUser":
                 item.Label2 = sr["Rating"].ToString();
                 break;
               default:
