@@ -2860,6 +2860,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else if (conf.WStrSort == "Date")
           conf.StrSelect = (labelNotEmpty) ? "DateAdded" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else if (conf.WStrSort == "DateWatched")
+          // conf.StrSelect = (labelNotEmpty) ? "DateWatched" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
           conf.StrSelect = (labelNotEmpty) ? "DateWatched" + " = '" + DateTime.Parse(sLabel).ToShortDateString() + "'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
         else if (IsDateField(conf.WStrSort))
           conf.StrSelect = (labelNotEmpty) ? conf.WStrSort + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'" : "(" + conf.WStrSort + " is NULL OR " + conf.WStrSort + " like '')";
@@ -10554,9 +10555,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (conf.StrWatchedField.Length > 0) sr[conf.StrWatchedField] = user.Watched ? "true" : conf.GlobalUnwatchedOnlyValue;
           if (conf.StrUserProfileName.Length > 0 && sr["RatingUser"] != System.Convert.DBNull && sr.RatingUser != MultiUserData.NoRating)
           {
-            sr.Favorite = sr.RatingUser > MultiUserData.FavoriteRating
-                            ? MultiUserData.Add(sr.Favorite, conf.StrUserProfileName)
-                            : MultiUserData.Remove(sr.Favorite, conf.StrUserProfileName);
+            string newValue = (sr.RatingUser > MultiUserData.FavoriteRating) ? MultiUserData.Add(sr["Favorite"].ToString(), conf.StrUserProfileName) : MultiUserData.Remove(sr["Favorite"].ToString(), conf.StrUserProfileName);
+            sr["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
           }
           sr[BaseMesFilms.MultiUserStateField] = userData.MultiUserStatesValue;
         }

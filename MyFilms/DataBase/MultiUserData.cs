@@ -61,7 +61,7 @@ namespace MyFilmsPlugin.DataBase
       {
         userstate.WatchedCount = 1;
         userstate.Watched = true;
-        userstate.WatchedDate = DateTime.Now;
+        userstate.WatchedDate = DateTime.Today; // DateTime.Parse(DateTime.Now.ToShortDateString()); // make sure, only the date will be used with time to 00:00
       }
       else
       {
@@ -89,7 +89,7 @@ namespace MyFilmsPlugin.DataBase
     {
       var userstate = GetUserState(username);
       userstate.WatchedCount += 1;
-      userstate.WatchedDate = DateTime.Now;
+      userstate.WatchedDate = DateTime.Today; // DateTime.Parse(DateTime.Now.ToShortDateString());
       userstate.Watched = true;
     }
 

@@ -2914,6 +2914,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       row["DateWatched"] = (userData.GetUserState(userprofilename).WatchedDate == MultiUserData.NoWatchedDate || userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched == false) ? Convert.DBNull : userData.GetUserState(userprofilename).WatchedDate;
       row["RatingUser"] = (userData.GetUserState(userprofilename).UserRating == -1) ? Convert.DBNull : userData.GetUserState(userprofilename).UserRating;
       row[MyFilms.conf.StrWatchedField] = userData.GetUserState(userprofilename).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+      //if (MyFilms.conf.StrUserProfileName.Length > 0 && row["RatingUser"] != System.Convert.DBNull && row["RatingUser"] != MultiUserData.NoRating)
+      //{
+      //  string newValue = (row["RatingUser"] > MultiUserData.FavoriteRating) ? MultiUserData.Add(row["Favorite"].ToString(), MyFilms.conf.StrUserProfileName) : MultiUserData.Remove(row["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
+      //  row["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
+      //}
     }
 
     //-------------------------------------------------------------------------------------------
