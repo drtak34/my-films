@@ -41,7 +41,6 @@ namespace MyFilmsPlugin.DataBase
 
     public UserState GetGlobalState()
     {
-      // return this.MultiUserStates.FirstOrDefault(userState => userState.UserName == MyFilms.GlobalUsername);
       var global = new UserState(MyFilms.GlobalUsername)
         { WatchedCount = 0, UserRating = NoRating, WatchedDate = NoWatchedDate };
 
@@ -97,11 +96,11 @@ namespace MyFilmsPlugin.DataBase
     public string ResultValueString()
     {
       string resultValueString = string.Empty;
-      foreach (var state in this.MultiUserStates.AsQueryable().OrderBy(x => x.UserName))
+      foreach (UserState state in this.MultiUserStates.AsQueryable().OrderBy(x => x.UserName))
       {
         // LogMyFilms.Debug("LoadUserStates() - return state for user '" + state.UserName + "', rating = '" + state.UserRating + "', count = '" + state.WatchedCount + "', watched = '" + state.Watched + "', watcheddate = '" + state.WatchedDate + "'");
         // var sNew = ((!string.IsNullOrEmpty(state.UserName)) ? state.UserName : "*") + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
-        var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
+        string sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + ((state.WatchedDate > DateTime.Parse("01/01/1900")) ? state.WatchedDate.ToShortDateString() : "");  // short date as invariant culture // var sNew = state.UserName + ":" + state.WatchedCount + ":" + state.UserRating.ToString(CultureInfo.InvariantCulture) + ":" + state.WatchedDate.ToString("d", invC);  // short date as invariant culture
         if (resultValueString.Length > 0) resultValueString += "|";
         resultValueString += sNew;
       }

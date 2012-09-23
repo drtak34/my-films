@@ -1536,6 +1536,7 @@ Public Class AntProcessor
                 .OnlyAddMissingData = False ' added for "add missing data" mode"
                 .OnlyUpdateNonEmptyData = False
                 .Dont_Ask_Interactive = False ' added for silent updates without asking user to choose movie on failed auto matches
+                .UseInternetDataForLanguages = CurrentSettings.Use_InternetData_For_Languages
 
                 'Dim t As Thread
                 't = New Thread(AddressOf Ant.ProcessFile)
