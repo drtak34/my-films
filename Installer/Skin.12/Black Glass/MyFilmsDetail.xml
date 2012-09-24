@@ -444,7 +444,7 @@
       <onup>10002</onup>
       <ondown>10004</ondown>
       <onleft>107</onleft>
-      <onright>10099</onright>
+      <onright>50</onright>
       <label>#myfilms.menu.actors</label>
       <font>font10</font>
       <align>left</align>
@@ -2648,6 +2648,7 @@
     </control>
 
 
+    <!-- Movie Thumbnails -->
     <control>
       <description>Movie Thumbs - composite control consisting of a list control and a thumbnail panel</description>
       <type>facadeview</type>
@@ -2713,6 +2714,45 @@
         <animation effect="fade" time="200">WindowOpen</animation>
       </control>
     </control>
+    <control>
+      <description>MultiImage Movie Thumbs</description>
+      <type>multiimage</type>
+      <id>1002</id>
+      <posX>30</posX>
+      <posY>81</posY>
+      <width>265</width>
+      <height>170</height>
+      <imagepath></imagepath>
+      <timeperimage>2000</timeperimage>
+      <fadetime>1000</fadetime>
+      <loop>yes</loop>
+      <align>center</align>
+      <valign>center</valign>
+      <randomize>true</randomize>
+      <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
+    </control>
+    <control>
+      <description>Movie Thumbs Glass Overlay</description>
+      <type>image</type>
+      <id>1</id>
+      <posX>29</posX>
+      <posY>80</posY>
+      <width>267</width>
+      <height>172</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">DVDCase_coverflow.png</texture>
+      <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
+    </control>
+
+
+    <!-- Person Details  -->
 
 <!--
       <control>
@@ -2777,11 +2817,47 @@
           <type>listcontrol</type>
           <id>50</id>
           <description>listcontrol</description>
-          <onleft>10002</onleft>
+          <onleft>10003</onleft>
           <onright>10099</onright>
           <posX>847</posX>
           <width>433</width>
           <height>590</height>
+          <animation effect="slide" tween="circle" easing="out" time="200" start="400,0">visible</animation>
+        </control>
+        <control>
+          <description>album view listcontrol - used as extended list mode</description>
+          <type>listcontrol</type>
+          <subtype>album</subtype>
+          <id>50</id>
+          <onleft>10003</onleft>
+          <onright>10099</onright>
+          <posX>847</posX>
+          <width>433</width>
+          <height>590</height>
+          <onleft>4</onleft>
+          <onright>50</onright>
+          <textureHeight>77</textureHeight>
+          <textureFocus>bg_facade_line_focus.png</textureFocus>
+          <textureNoFocus>bg_facade_line_nofocus.png</textureNoFocus>
+
+          <textXOff>10</textXOff>
+          <textYOff>5</textYOff>
+          <textXOff2>425</textXOff2>
+          <textYOff2>40</textYOff2>
+          <textXOff3>83</textXOff3>
+          <textYOff3>40</textYOff3>
+
+          <font>font16</font>
+          <font2>font14</font2>
+          <font3>font12</font3>
+
+
+          <itemHeight>58</itemHeight>
+          <itemWidth>39</itemWidth>
+          <IconXOff>10</IconXOff>
+          <IconYOff>10</IconYOff>
+          <keepaspectratio>yes</keepaspectratio>
+
           <animation effect="slide" tween="circle" easing="out" time="200" start="400,0">visible</animation>
         </control>
         <control>
@@ -2815,15 +2891,14 @@
           <folderSuffix />
           <spinCanFocus>no</spinCanFocus>
           <showScrollbar>no</showScrollbar>
-          <thumbs mask="DVDCase_coverflow.png" flipY="true" />
-          <imageFolder>DVDCase_coverflow.png</imageFolder>
-          <imageFolderFocus>DVDCase_coverflow.png</imageFolderFocus>
+          <thumbs flipY="true" mask="DVDCase_coverflow_mask.png"/>
+
           <thumbAnimation effect="slide" end="0,-22" time="200">focus</thumbAnimation>
           <thumbAnimation effect="zoom" start="100,100" end="120,120" time="200">focus</thumbAnimation>
-          <scrollOffset>3</scrollOffset>
+
+          <scrollOffset>0</scrollOffset>
           <showScrollbar>no</showScrollbar>
           <playedColor>ffffffff</playedColor>
-          <visible>false</visible>
           <visible>[Control.HasFocus(10003)|Control.HasFocus(50)]+!Control.HasFocus(10099)+!Control.HasFocus(10100)</visible>
           <visible>!Control.HasFocus(10000)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!Control.HasFocus(10100)</visible>
           <animation effect="slide" tween="circle" easing="out" time="200" start="900,0">visible</animation>
@@ -2832,44 +2907,91 @@
           <animation effect="fade" time="200">WindowOpen</animation>
         </control>
       </control>
--->
 
     <control>
-      <description>MultiImage Movie Thumbs</description>
-      <type>multiimage</type>
-      <id>1002</id>
-      <posX>30</posX>
-      <posY>81</posY>
-      <width>265</width>
-      <height>170</height>
-      <imagepath></imagepath>
-      <timeperimage>2000</timeperimage>
-      <fadetime>1000</fadetime>
-      <loop>yes</loop>
-      <align>center</align>
-      <valign>center</valign>
-      <randomize>true</randomize>
-      <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
+      <description>Person Name</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>520</posX>
+      <posY>170</posY>
+      <label>#selecteditem</label>
+      <textcolor>90ffffff</textcolor>
+      <font>font14</font>
+      <width>200</width>
+      <visible>Control.HasFocus(50)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">WindowClose</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
     </control>
     <control>
-      <description>Movie Thumbs Glass Overlay</description>
-      <type>image</type>
+      <description>Person Role</description>
+      <type>fadelabel</type>
       <id>1</id>
-      <posX>29</posX>
-      <posY>80</posY>
-      <width>267</width>
-      <height>172</height>
-      <texture flipY="true" diffuse="Thumb_Mask.png">DVDCase_coverflow.png</texture>
-      <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
+      <posX>730</posX>
+      <posY>170</posY>
+      <label>#selecteditem2</label>
+      <width>535</width>
+      <textcolor>ffffffff</textcolor>
+      <font>font14</font>
+      <visible>Control.HasFocus(50)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
     </control>
+
+    <control>
+      <description>Person Description</description>
+      <type>textboxscrollup</type>
+      <id>0</id>
+      <posX>520</posX>
+      <posY>200</posY>
+      <width>740</width>
+      <height>209</height>
+      <textcolor>FFFFFFFF</textcolor>
+      <label>#selecteditem (#selecteditem2)</label>
+      <seperator>: : :</seperator>
+      <font>font14</font>
+      <visible>Control.HasFocus(50)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+
+
+    <control>
+      <type>image</type>
+      <description>Big Person Image</description>
+      <id>0</id>
+      <posX>64</posX>
+      <posY>81</posY>
+      <width>380</width>
+      <height>538</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#selectedthumb</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <zoom>yes</zoom>
+      <visible>Control.HasFocus(50)+!player.hasmedia</visible>
+      <animation effect="fade" time="500">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>Big person image Glass Overlay</description>
+      <type>image</type>
+      <id>1</id>
+      <posX>15</posX>
+      <posY>72</posY>
+      <width>437</width>
+      <height>556</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
+      <visible>Control.HasFocus(50)+!player.hasmedia</visible>
+      <animation effect="fade" time="500">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(50)">conditional</animation>
+    </control>
+-->
 
   </controls>
 </window>
