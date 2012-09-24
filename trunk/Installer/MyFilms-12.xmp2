@@ -3782,6 +3782,62 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <ZipFileName>Installer{CopyFile}\{888457f0-5def-49bd-96a6-a99461c24b00}-Thumbs.db</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilms.common.window.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7f18540f-e900-4e83-8f2e-68e9a3515654}-MyFilms.common.window.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.common.window.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilms.ListView.Cover.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5ea37fe3-050b-4ba1-9948-f762bfa24639}-MyFilms.ListView.Cover.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.ListView.Cover.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilms.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c7797da5-3769-4545-905e-2ae4bfeba227}-MyFilms.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilmsCoverManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7810ff66-045a-4fe5-abed-9e3f2a610396}-MyFilmsCoverManager.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsCoverManager.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilmsDetail.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6b1814e9-498b-47c7-a639-781cf90703fc}-MyFilmsDetail.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsDetail.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilmsDialogMultiSelect.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f90eeba7-b202-4c10-bfdc-513e8a4f02a5}-MyFilmsDialogMultiSelect.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsDialogMultiSelect.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilmsDialogRating.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{bddbc803-67a0-4ef2-bdcb-1bb16550a8cf}-MyFilmsDialogRating.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsDialogRating.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilmsLatestMedia.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{16c418ff-6200-44f1-ad84-0c7d730b3802}-MyFilmsLatestMedia.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsLatestMedia.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6574,10 +6630,10 @@ V2.x is recommended to use latest features.</Message>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -6607,7 +6663,7 @@ V2.x is recommended to use latest features.</Message>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2542</Revision>
+      <Revision>2568</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -6619,7 +6675,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2012-09-17T04:50:03.9314556+02:00</ReleaseDate>
+    <ReleaseDate>2012-09-23T07:11:38.7687928+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -10240,6 +10296,62 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{888457f0-5def-49bd-96a6-a99461c24b00}-Thumbs.db</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\Thumbs.db</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilms.common.window.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7f18540f-e900-4e83-8f2e-68e9a3515654}-MyFilms.common.window.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.common.window.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilms.ListView.Cover.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5ea37fe3-050b-4ba1-9948-f762bfa24639}-MyFilms.ListView.Cover.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.ListView.Cover.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilms.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c7797da5-3769-4545-905e-2ae4bfeba227}-MyFilms.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilmsCoverManager.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7810ff66-045a-4fe5-abed-9e3f2a610396}-MyFilmsCoverManager.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsCoverManager.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilmsDetail.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6b1814e9-498b-47c7-a639-781cf90703fc}-MyFilmsDetail.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsDetail.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilmsDialogMultiSelect.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f90eeba7-b202-4c10-bfdc-513e8a4f02a5}-MyFilmsDialogMultiSelect.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsDialogMultiSelect.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilmsDialogRating.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{bddbc803-67a0-4ef2-bdcb-1bb16550a8cf}-MyFilmsDialogRating.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsDialogRating.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilmsLatestMedia.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{16c418ff-6200-44f1-ad84-0c7d730b3802}-MyFilmsLatestMedia.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsLatestMedia.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
