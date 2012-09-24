@@ -729,7 +729,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public override bool Init() //This Method is only loaded ONCE when starting Mediaportal !
     {
-      bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Info("MyFilms.Init() started on '" + System.Environment.MachineName + "'.");
@@ -792,6 +791,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  }, 0, 0, null);
       //}) { Name = "MyFilmsTmdbDataLoader", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start();
 
+      bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
@@ -3161,15 +3161,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
               case "Date":
               case "DateAdded":
-              case "DateWatched":
                 try
                 {
                   item.Label2 = DateTime.Parse(sr["Date"].ToString()).ToShortDateString(); //item.Label2 = ((DateTime)sr["DateAdded"]).ToShortDateString();
                 }
                 catch { }
                 break;
+              case "DateWatched":
+                try
+                {
+                  item.Label2 = DateTime.Parse(sr["DateWatched"].ToString()).ToShortDateString(); //item.Label2 = ((DateTime)sr["DateAdded"]).ToShortDateString();
+                }
+                catch { }
+                break;
               case "Rating":
-              case "RatingUser":
                 item.Label2 = sr["Rating"].ToString();
                 break;
               default:
