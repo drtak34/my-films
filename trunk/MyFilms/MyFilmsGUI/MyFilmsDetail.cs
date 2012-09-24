@@ -285,7 +285,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void downloadingWorker_DoWork(object sender, DoWorkEventArgs e)
     {
-      grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
+      TheMoviedb tmdbapi = new TheMoviedb();
       do
       {
         if (downloadingWorker.CancellationPending)
@@ -483,9 +483,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public override bool Init()
     {
       LogMyFilms.Debug("MyFilmsDetail.Init() started.");
-      LogMyFilms.Debug("MyFilmsDetail.Init() ended.");
+
       GUIWindowManager.Receivers += new SendMessageHandler(GUIWindowManager_OnNewMessage);
-      return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
+
+      //g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
+      //g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
+      //g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
+      g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+      g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+      g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+
+      bool success = Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
+      LogMyFilms.Debug("MyFilmsDetail.Init() ended.");
+      return success;
     }
 
     protected override void OnPageLoad()
@@ -494,12 +504,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (!PlayBackEvents_Subscribed)
       {
-        //g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
-        //g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
-        //g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
-        g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-        g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-        g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+        ////g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
+        ////g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
+        ////g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
+        //g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+        //g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+        //g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
         // Subscribe to GUI Events
         MyFilmsDetail.DetailsUpdated += new MyFilmsDetail.DetailsUpdatedEventDelegate(OnDetailsUpdated);
         PlayBackEvents_Subscribed = true;
@@ -6976,7 +6986,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (facadePersons == null || index > MyFilms.r.Length - 1) return;
 
       string personscontent = MyFilms.r[index]["Actors"].ToString();
-      facadePersons.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+      facadePersons.CurrentLayout = GUIFacadeControl.Layout.AlbumView;
       GUIControl.ClearControl(GetID, facadePersons.GetID);
 
       string personartworkpath = MyFilms.conf.StrPathArtist;
@@ -6986,6 +6996,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         var item = new GUIListItem();
         item.Label = actor.Name;
         item.Label2 = actor.Job;
+        item.Label3 = actor.Name + " (" + actor.Job + ")";
         if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
         {
           if (File.Exists(personartworkpath + "\\" + actor.Name + ".jpg"))
@@ -7923,7 +7934,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       bool playbackeventIsOfConcern = false;
       if (string.IsNullOrEmpty(filename)) return false;
-      if ((MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive)))
+      if (MyFilms.conf != null && MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive))
         playbackeventIsOfConcern = true;
       return playbackeventIsOfConcern;
     }
@@ -7932,7 +7943,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       bool playbackeventIsOfConcern = false;
       if (string.IsNullOrEmpty(filename)) return false;
-      if (MyFilms.currentTrailerPlayingItem != null && type == g_Player.MediaType.Video && MyFilms.currentTrailerPlayingItem.Trailer.Contains(filename)) // if (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.Trailer.Contains(filename)) // 
+      if (MyFilms.conf != null && MyFilms.currentTrailerPlayingItem != null && type == g_Player.MediaType.Video && MyFilms.currentTrailerPlayingItem.Trailer.Contains(filename)) // if (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.Trailer.Contains(filename)) // 
         playbackeventIsOfConcern = true;
       return playbackeventIsOfConcern;
     }
