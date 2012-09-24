@@ -16663,6 +16663,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         SetLabelView(conf.StrTxtView);
         SetLabelSelect(conf.StrTxtSelect);
+
+        if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll || conf.Boolselect)
+          GUIControl.ShowControl(GetID, 34);
+        else
+          GUIControl.HideControl(GetID, 34);
         #endregion
 
         #region reload dataset threaded
