@@ -3203,32 +3203,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Watched Status
             if (conf.EnhancedWatchedStatusHandling)
             {
-              if (!sr[BaseMesFilms.MultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
-              {
-                #region migrate status from configured (enhanced)watched field to new MultiUserStates
-                MultiUserData userData;
-                if (sr[MyFilms.conf.StrWatchedField].ToString().Contains(":"))
-                {
-                  // old field was already multiuserdata - migrate it!
-                  userData = new MultiUserData(sr[conf.StrWatchedField].ToString());
-                  sr[MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
-                }
-                else
-                {
-                  // old field was standard watched data - create MUS and add watched for current user
-                  bool tmpwatched = (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) &&
-                                sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() &&
-                                sr[conf.StrWatchedField].ToString().Length > 0);
-                  userData = new MultiUserData("");
-                  userData.SetWatched(MyFilms.conf.StrUserProfileName, tmpwatched);
-                  if (sr["RatingUser"] != Convert.DBNull)
-                    userData.SetRating(MyFilms.conf.StrUserProfileName, (decimal)sr["RatingUser"]);
-                }
-                sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-                sr["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
-                sr["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
-                #endregion
-              }
+              //if (!sr[BaseMesFilms.MultiUserStateField].ToString().Contains(":")) // not yet migrated/created!
+              //{
+              //  #region migrate status from configured (enhanced)watched field to new MultiUserStates
+              //  MultiUserData userData;
+              //  if (sr[MyFilms.conf.StrWatchedField].ToString().Contains(":"))
+              //  {
+              //    // old field was already multiuserdata - migrate it!
+              //    userData = new MultiUserData(sr[conf.StrWatchedField].ToString());
+              //    sr[MyFilms.conf.StrWatchedField] = userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+              //  }
+              //  else
+              //  {
+              //    // old field was standard watched data - create MUS and add watched for current user
+              //    bool tmpwatched = (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) &&
+              //                  sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() &&
+              //                  sr[conf.StrWatchedField].ToString().Length > 0);
+              //    userData = new MultiUserData("");
+              //    userData.SetWatched(MyFilms.conf.StrUserProfileName, tmpwatched);
+              //    if (sr["RatingUser"] != Convert.DBNull)
+              //      userData.SetRating(MyFilms.conf.StrUserProfileName, (decimal)sr["RatingUser"]);
+              //  }
+              //  sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
+              //  sr["DateWatched"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).WatchedDate;
+              //  sr["RatingUser"] = userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(MyFilms.conf.StrUserProfileName).UserRating;
+              //  #endregion
+              //}
               item.IsPlayed = (EnhancedWatched(sr[BaseMesFilms.MultiUserStateField].ToString(), conf.StrUserProfileName));
             }
             else
@@ -3361,7 +3361,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":-1")) return false;
-      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
+      // if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
       return true; // count > 0 -> return true
     }
 
@@ -8774,6 +8774,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
         }
       }
+
+      #region (re)load Dataset and check if migration for MUS is required ...
+      if (conf.EnhancedWatchedStatusHandling && r.Length > 0)
+      {
+        if (!r[0][BaseMesFilms.MultiUserStateField].ToString().Contains(":")) // check, if the first record contains MUS data - if not, call the migration method !
+        {
+          MigrateToMus();
+          r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // reload the dataset to reflect updated MUS data
+        }
+      }
+      #endregion
       #endregion
 
       #region Configure Default Button Labels ...
@@ -8975,6 +8986,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  GUIControl.SelectItemControl(GetID, facadeFilms.GetID, 0);
           break;
       }
+    }
+
+    private void MigrateToMus()
+    {
+      LogMyFilms.Debug("MigrateToMus() - starting migration to MUS data");
+      DataRow[] allmovies = BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens); // load all records into datraset
+      foreach (DataRow sr in allmovies.Where(sr => conf.EnhancedWatchedStatusHandling).Where(sr => !sr[BaseMesFilms.MultiUserStateField].ToString().Contains(":")))
+      {
+        MultiUserData userData;
+        bool addwatcheddate = false;
+        if (sr[conf.StrWatchedField].ToString().Contains(":")) // old field was already multiuserdata - migrate it!
+        {
+          userData = new MultiUserData(sr[conf.StrWatchedField].ToString());
+          sr[conf.StrWatchedField] = userData.GetUserState(conf.StrUserProfileName).Watched ? "true" : conf.GlobalUnwatchedOnlyValue.ToLower();
+          addwatcheddate = true;
+        }
+        else // old field was standard watched data - create MUS and add watched for current user
+        {
+          bool tmpwatched = (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) &&
+                             sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() &&
+                             sr[conf.StrWatchedField].ToString().Length > 0);
+          userData = new MultiUserData("");
+          userData.SetWatched(conf.StrUserProfileName, tmpwatched);
+          if (sr["RatingUser"] != Convert.DBNull)
+            userData.SetRating(conf.StrUserProfileName, (decimal)sr["RatingUser"]);
+        }
+        sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
+        sr["DateWatched"] = (addwatcheddate) ? userData.GetUserState(conf.StrUserProfileName).WatchedDate : Convert.DBNull;
+        sr["RatingUser"] = userData.GetUserState(conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(conf.StrUserProfileName).UserRating;
+      }
+      LogMyFilms.Debug("MigrateToMus() - finished migration to MUS data for '" + allmovies.Length.ToString() + "' DB entries");
+      MyFilmsDetail.Update_XML_database();
+      LogMyFilms.Debug("MigrateToMus() - finished saving DB with updated MUS data");
     }
 
     private void ResetGlobalFilters()
