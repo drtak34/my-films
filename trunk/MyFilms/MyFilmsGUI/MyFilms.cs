@@ -887,15 +887,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active) groupcover.Active = true;
       #endregion
 
-      bool IsDefaultConfig = false;
-
       if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos 
         && PreviousWindowId != ID_BrowseTheWeb && PreviousWindowId != (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO) // Fullscreen is ID 2005
       {
         #region Load or change MyFilms Config
 
         PreviousConfig = Configuration.CurrentConfig;
-        IsDefaultConfig = Configuration.Current_Config(true); // also sets "Configuration.CurrentConfig" - "true" brings up config menu, if nothing is set ...
+        bool IsDefaultConfig = Configuration.Current_Config(true);
 
         if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
         {
@@ -972,8 +970,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           {
             #region load Fin_Charge_Init with waiting symbol or progress dialog
-            //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
-            GUIWaitCursor.Init(); GUIWaitCursor.Show();
+            MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+            // GUIWaitCursor.Init(); GUIWaitCursor.Show();
             //GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
             //if (InitialStart && GetID == ID_MyFilms && conf.StrFileXml.StartsWith(@"\\"))
             //{
@@ -1007,8 +1005,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart), ((loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)))); // || InitialStart)); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
             // Fin_Charge_Init((conf.AlwaysDefaultView || InitialStart || requireFullReload), requireFullReload || Configuration.Current_Config()); // reloadFromDisk is true, if a config is set in MF setup (not default view!) or loadparams are set
 
-            GUIWaitCursor.Hide();
-            //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+            // GUIWaitCursor.Hide();
+            MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
             //GUIControl.ShowControl(GetID, 34);
 
             //if (GetID == ID_MyFilms)
@@ -2334,9 +2332,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                       new Thread(delegate()
                         {
-                          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+                          MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show(); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
                           getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, facadeFilms.SelectedListItem.Label, true, ""); // conf.StrSelect = conf.WStrSort + " like '*" + conf.Wstar + "*'"; // only for actors ! - so do it later in method ...
-                          GUIWaitCursor.Hide();
+                          MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);  // GUIWaitCursor.Hide();
                           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
                         }) { Name = "GetSelectFromDivx", IsBackground = true }.Start();
                       #endregion
@@ -10416,8 +10414,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         new Thread(delegate()
         {
           {
-            //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
-            GUIWaitCursor.Init(); GUIWaitCursor.Show();
+            MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
 
             if (InitialStart)
             {
@@ -10455,8 +10452,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             Fanartstatus(MyFilms.conf.StrFanart);
 
-            GUIWaitCursor.Hide();
-            //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+            MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
             //GUIControl.ShowControl(GetID, 34);
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
@@ -12156,11 +12152,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  search related movies by persons                                                     *
     //*****************************************************************************************
-    private void SearchRelatedMoviesbyPersons(int Index, bool returnToContextmenu)
+    private void SearchRelatedMoviesbyPersons(int index, bool returnToContextmenu)
     {
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
       string[] roles = { "Actors", "Producer", "Director", "Writer" }; // , "Persons"
 
       new Thread(delegate()
@@ -12169,13 +12165,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg == null) return;
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
-          var w_tableau = new ArrayList();
           var choiceSearch = new List<string>();
 
-          foreach (string role in roles.Where(role => MyFilms.r[Index][role].ToString().Length > 0))
+          foreach (string role in roles.Where(role => MyFilms.r[index][role].ToString().Length > 0))
           {
-            w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index][role].ToString())));
-            foreach (object t in w_tableau)
+            ArrayList wTableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[index][role].ToString())));
+            foreach (object t in wTableau)
             {
               dlg.Add(BaseMesFilms.TranslateColumn(role) + " : " + t);
               choiceSearch.Add(t.ToString());
@@ -12281,7 +12276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  choiceSearch.Add("Persons");
           //}
 
-          GUIWaitCursor.Hide();
+          // GUIWaitCursor.Hide();
           dlgPrgrs.Percentage = 100;
           dlgPrgrs.ShowWaitCursor = false;
           dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846));
