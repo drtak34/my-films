@@ -5386,9 +5386,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string wftitle, string director, string imdbid, string year, bool choose, int wGetID, string savetitle, string personartworkpath, bool loadFanart, bool loadPersonImages)
     {
-      new System.Threading.Thread(delegate()
+      new Thread(delegate()
       {
-        Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+        var grab = new Grabber_URLClass();
         int wyear = 0;
         try { wyear = Convert.ToInt32(year); }
         catch { }
@@ -5396,7 +5396,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           GUIWaitCursor.Init();
           GUIWaitCursor.Show();
-          List<grabber.DbMovieInfo> listemovies = Grab.GetFanart(
+          List<DbMovieInfo> listemovies = grab.GetFanart(
             wtitle,
             savetitle,
             wyear,
@@ -5445,8 +5445,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
               foreach (DbMovieInfo t in listemovies)
               {
-                string dialoginfoline = "";
-                dialoginfoline = t.Name + "  (" + t.Year + ")";
+                string dialoginfoline = t.Name + "  (" + t.Year + ")";
                 if (loadFanart) dialoginfoline += " - Fanarts: " + t.Backdrops.Count;
                 if (loadPersonImages) dialoginfoline += " - Persons: " + t.Persons.Count.ToString();
                 dlg.Add(dialoginfoline);
@@ -5630,8 +5629,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         bool firstpersonimage = true;
                         bool onlysinglepersonimage = true;
                         var persondetails = new DbPersonInfo();
-                        var TheMoviedb = new TheMoviedb();
-                        persondetails = TheMoviedb.GetPersonsById(person.Id, string.Empty);
+                        var theMoviedb = new TheMoviedb();
+                        persondetails = theMoviedb.GetPersonsById(person.Id, string.Empty);
                         LogMyFilms.Debug("Person Artwork: found '" + persondetails.Images.Count + "' TMDB images for '" + persondetails.Name + "' in movie '" + savetitle + "'");
                         if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + persondetails.Name + "'");
                         if (dlgPrgrs != null) dlgPrgrs.Percentage = 0;
@@ -5703,12 +5702,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static List<string> SearchMovieThumbs(int index, bool createmissingmoviethumbs) // searches moviethumbs for the current active movie in dataset
     {
       LogMyFilms.Debug("SearchMovieThumbs() - search or create movie thumbs started ...");
-      Stopwatch stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
+      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
       Searchtitles stitles = GetSearchTitles(MyFilms.r[index], "");
       string title = stitles.FanartTitle;
 
       string movieThumbsDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\MovieThumbs";
-      List<string> moviethumbs = new List<string>();
+      var moviethumbs = new List<string>();
 
       if (MyFilms.conf.StrFanart)
       {
@@ -5777,7 +5776,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //                     Search_Fanart(wlabel, true, "file", false, facadeFilms.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
     {
       //if (MyFilms.conf == tmpconf) LogMyFilms.Debug("Search_Fanart(): Using '" + title + "'");
-      string[] wfanart = new string[2];
+      var wfanart = new string[2];
       wfanart[0] = " ";
       wfanart[1] = " ";
       if (tmpconf.StrFanart)
@@ -5830,7 +5829,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         //LogMyFilms.Debug("(SearchFanart) - safename(file) = '" + wfile + "'");
         //LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + title + "}.jpg") + "'");
-        if ((main || (searched == "file")) && File.Exists(safeName + "\\{" + title + "}.jpg"))
+        if ((main || searched == "file") && File.Exists(safeName + "\\{" + title + "}.jpg"))
         {
           wfanart[0] = safeName + "\\{" + title + "}.jpg";
           wfanart[1] = "file";
@@ -6058,8 +6057,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
       {
         string cleanString = MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString();
-        var CutText = new Regex("" + @"tt\d{7}" + "");
-        var m = CutText.Match(cleanString);
+        var cutText = new Regex("" + @"tt\d{7}" + "");
+        var m = cutText.Match(cleanString);
         if (m.Success)
           IMDB = m.Value;
       }
@@ -6951,10 +6950,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         clearGUIProperty("db.actors.actor" + j + ".image");
       }
 
-      List<DbPersonInfo> w_tableau = new List<DbPersonInfo>();
-      w_tableau = MyFilms.Search_String_Persons(personscontent, false);
+      List<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
       int i = 1;
-      foreach (DbPersonInfo t in w_tableau)
+      foreach (DbPersonInfo t in wTableau)
       {
         string actorname = t.Name;
         string actorrole = t.Job;
@@ -6963,7 +6961,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
           {
             string personartworkpath = MyFilms.conf.StrPathArtist;
-            if (System.IO.File.Exists(personartworkpath + "\\" + actorname + ".jpg"))
+            if (File.Exists(personartworkpath + "\\" + actorname + ".jpg"))
             {
               setGUIProperty("db.actors.actor" + i + ".name", actorname);
               setGUIProperty("db.actors.actor" + i + ".role", actorrole);
@@ -7088,21 +7086,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        ArrayList actorList = new ArrayList();
+        var actorList = new ArrayList();
         VideoDatabase.GetActorByName(personname, actorList);
         LogMyFilms.Debug("Load_Detailed_PersonInfo() - got '" + actorList.Count + "' results (" + stopwatch.ElapsedMilliseconds + " ms)");
         if (actorList.Count > 0 && actorList.Count < 3) // Do not proceed, of none or too many results !
         {
           string[] strActor = actorList[0].ToString().Split(new char[] { '|' });
-          int actorID = (strActor[0].Length > 0) ? Convert.ToInt32(strActor[0]) : 0;
+          int actorId = (strActor[0].Length > 0) ? Convert.ToInt32(strActor[0]) : 0;
           // string actorname = strActor[1];
 
-          if (actorID > 0)
+          if (actorId > 0)
           {
-            LogMyFilms.Debug("load details for actor ID: '" + actorID.ToString() + "'");
+            LogMyFilms.Debug("load details for actor ID: '" + actorId.ToString() + "'");
             try
             {
-              person = VideoDatabase.GetActorInfo(actorID);
+              person = VideoDatabase.GetActorInfo(actorId);
             }
             catch (Exception ex)
             {
@@ -7116,7 +7114,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      string value = "";
+      string value;
 
       value = (person != null && person.Name.Length > 0) ? person.Name : personname;
       setGUIProperty("person.name.value", value);
@@ -7159,7 +7157,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (directorypath.Contains(";")) directorypath = directorypath.Substring(0, directorypath.IndexOf(";"));
       if (directorypath.Contains("\\")) directorypath = directorypath.Substring(0, directorypath.LastIndexOf("\\"));
 
-      if (!System.IO.Directory.Exists(directorypath))
+      if (!Directory.Exists(directorypath))
       {
         LogMyFilms.Warn("InitTrailerwatcher() - Trailerwatcher cannot initialize - path does not exist: '" + directorypath + "'");
         return;
@@ -7750,7 +7748,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
 
-            GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
             if (dlgOK != null)
             {
               dlgOK.SetHeading("MyFilms");
@@ -8043,7 +8041,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (MyFilms.conf.StrPlayedRow == null) return;
       // if (MyFilms.conf.StrPlayedIndex == -1) return;
       if (type != g_Player.MediaType.Video || filename.EndsWith("&txe=.wmv")) return;
-      if (handleTrailer()) return;
+      if (HandleTrailer()) return;
 
       //if (isTrailer)
       //{
@@ -8574,7 +8572,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string[] split1 = fileName.Split(new Char[] { ';' });
       var movies = new ArrayList();
       var movieDetails = new IMDBMovie();
-      var DVDRegexp = new Regex("video_ts");
+      var dvdRegexp = new Regex("video_ts");
       foreach (string wfile in split1)
       {
         fileName = wfile.IndexOf("/") == -1 ? wfile.Trim() : wfile.Substring(0, wfile.IndexOf("/")).Trim();
@@ -8848,10 +8846,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       string[] searchDir = oRegex.Split(searchrep);
       oRegex = new Regex(file);
-      string wpath;
       foreach (string path in searchDir)
       {
-        if (path.LastIndexOf(@"\", System.StringComparison.Ordinal) != path.Length - 1)
+        string wpath;
+        if (path.LastIndexOf(@"\", StringComparison.Ordinal) != path.Length - 1)
           wpath = path + "\\";
         else
           wpath = path;
@@ -8943,7 +8941,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string[] searchDir = oRegex.Split(searchrep);
         foreach (string path in searchDir)
         {
-          string wpath = path.LastIndexOf(@"\", System.StringComparison.Ordinal) != path.Length - 1 ? path + "\\" : path;
+          string wpath = path.LastIndexOf(@"\", StringComparison.Ordinal) != path.Length - 1 ? path + "\\" : path;
           if (File.Exists(wpath + file) || Directory.Exists(wpath + file)) return (wpath + file);
           if (MyFilms.conf.SearchSubDirs == false || !Directory.Exists(wpath)) continue;
           foreach (string sFolderSub in Directory.GetDirectories(wpath, "*", SearchOption.AllDirectories).Where(sFolderSub => (File.Exists(sFolderSub + "\\" + file)) || (Directory.Exists(sFolderSub + "\\" + file))))
@@ -9157,7 +9155,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             mSearchAnimation.Dispose();
         }
         mSearchAnimation.Visible = enable;
-
       }
       catch (Exception ex)
       {
@@ -9488,11 +9485,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower())) &&
                 (MediaPortal.Util.Utils.IsVideo(filefound)))
             {
-              wsize = new System.IO.FileInfo(filefound).Length;
+              wsize = new FileInfo(filefound).Length;
               result.Add(filefound);
               resultsize.Add(wsize);
               filesfound[filesfoundcounter] = filefound;
-              filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+              filesfoundsize[filesfoundcounter] = new FileInfo(filefound).Length;
               filesfoundcounter = filesfoundcounter + 1;
               LogMyFilms.Debug("(TrailersearchLocal) - Matching Singlefiles found in TrailerRootDIR: Size '" + wsize + "' - Name '" + filefound + "'");
             }
@@ -9510,9 +9507,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               LogMyFilms.Debug("(TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
               files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files.Where(filefound => MediaPortal.Util.Utils.IsVideo(filefound)))
+              foreach (string filefound in files.Where(MediaPortal.Util.Utils.IsVideo))
               {
-                wsize = new System.IO.FileInfo(filefound).Length;
+                wsize = new FileInfo(filefound).Length;
                 result.Add(filefound);
                 resultsize.Add(wsize);
                 filesfound[filesfoundcounter] = filefound;
@@ -9531,11 +9528,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // if (((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
                 if (Utility.ContainsAll(filefound, titlename, ":") || Utility.ContainsAll(filefound, titlename2, ":") && MediaPortal.Util.Utils.IsVideo(filefound))
                 {
-                  wsize = new System.IO.FileInfo(filefound).Length;
+                  wsize = new FileInfo(filefound).Length;
                   result.Add(filefound);
                   resultsize.Add(wsize);
                   filesfound[filesfoundcounter] = filefound;
-                  filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                  filesfoundsize[filesfoundcounter] = new FileInfo(filefound).Length;
                   filesfoundcounter = filesfoundcounter + 1;
                   LogMyFilms.Debug("(TrailersearchLocal) - Matching Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
                 }
@@ -9757,7 +9754,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       // first check subfolder of current skin (allows skinners to use custom icons)
       string image = string.Format(@"{0}\Media\MyFilms\MyFilms.png", GUIGraphicsContext.Skin);
-      if (!System.IO.File.Exists(image))
+      if (!File.Exists(image))
       {
         // use png in thumbs folder
         image = string.Format(@"{0}\MyFilms\DefaultImages\MyFilms.png", Config.GetFolder(Config.Dir.Thumbs));
@@ -9825,19 +9822,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       strActorName = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(strActorName);
 
-      IMDB actornames = new IMDB();
+      var actornames = new IMDB();
       actornames.FindActor(strActorName);
 
-      SQLiteClient m_db = new SQLiteClient(Config.GetFile(Config.Dir.Database, @"VideoDatabaseV5.db3"));
+      var mDb = new SQLiteClient(Config.GetFile(Config.Dir.Database, @"VideoDatabaseV5.db3"));
 
-      if (m_db == null)
+      if (mDb == null)
       {
         return;
       }
       try
       {
         actors.Clear();
-        SQLiteResultSet results = m_db.Execute("select * from Actors where strActor like '%" + strActorName + "%'");
+        SQLiteResultSet results = mDb.Execute("select * from Actors where strActor like '%" + strActorName + "%'");
         if (results.Rows.Count == 0)
         {
           return;
@@ -9857,7 +9854,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static bool ExtendedStartmode(string disabledfeature)
     {
-      if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.PluginMode != "normal")
+      if (Configuration.PluginMode != "normal")
         return true;
       else
         LogMyFilms.Debug("Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
@@ -9953,7 +9950,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private static bool handleTrailer()
+    private static bool HandleTrailer()
     {
       if (trailerPlayed)
       {
@@ -9975,8 +9972,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       foreach (string file in files)
       {
-        int fileID = VideoDatabase.GetFileId(file);
-        int tempDuration = VideoDatabase.GetMovieDuration(fileID);
+        int fileId = VideoDatabase.GetFileId(file);
+        int tempDuration = VideoDatabase.GetMovieDuration(fileId);
 
         if (tempDuration > 0)
         {
@@ -9984,10 +9981,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          MediaInfoWrapper mInfo = new MediaInfoWrapper(file);
+          var mInfo = new MediaInfoWrapper(file);
 
-          if (fileID > -1)
-            VideoDatabase.SetMovieDuration(fileID, mInfo.VideoDuration / 1000);
+          if (fileId > -1)
+            VideoDatabase.SetMovieDuration(fileId, mInfo.VideoDuration / 1000);
           totalMovieDuration += mInfo.VideoDuration / 1000;
         }
       }
@@ -10001,7 +9998,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public bool ReadMediaInfo(string file, ref MediaInfo mediainfo)
     {
-      Grabber.MediaInfo MI = Grabber.MediaInfo.GetInstance();
+      var MI = MediaInfo.GetInstance();
 
       // MediaInfo Object could not be created
       if (null == MI) return false;
