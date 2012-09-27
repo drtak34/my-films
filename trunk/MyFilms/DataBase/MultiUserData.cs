@@ -54,21 +54,21 @@ namespace MyFilmsPlugin.DataBase
       return global;
     }
 
+    public void SetWatchedWithoutDate(string username, bool watched)
+    {
+      var userstate = GetUserState(username);
+
+      userstate.WatchedCount = (watched) ? 1 : 0;
+      userstate.Watched = watched;
+      userstate.WatchedDate = NoWatchedDate;
+    }
+    
     public void SetWatched(string username, bool watched)
     {
       var userstate = GetUserState(username);
-      if (watched)
-      {
-        userstate.WatchedCount = 1;
-        userstate.Watched = true;
-        userstate.WatchedDate = DateTime.Today; // DateTime.Parse(DateTime.Now.ToShortDateString()); // make sure, only the date will be used with time to 00:00
-      }
-      else
-      {
-        userstate.WatchedCount = 0;
-        userstate.Watched = false;
-        userstate.WatchedDate = NoWatchedDate;
-      }
+      userstate.WatchedCount = (watched) ? 1 : 0;
+      userstate.Watched = watched;
+      userstate.WatchedDate = (watched) ? DateTime.Today : NoWatchedDate; // DateTime.Parse(DateTime.Now.ToShortDateString()); // make sure, only the date will be used with time to 00:00
     }
 
     public void SetWatchedCount(string username, int watchedcount)
