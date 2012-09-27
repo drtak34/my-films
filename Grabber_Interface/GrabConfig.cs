@@ -3113,7 +3113,7 @@ namespace Grabber_Interface
 
       try // http://akas.imdb.com/title/tt0133093/
       {
-        Result = Grab.GetDetail(TextURLDetail.Text, Environment.GetEnvironmentVariable("TEMP"), textConfig.Text + ".tmp", true);
+        Result = Grab.GetDetail(TextURLDetail.Text, Environment.GetEnvironmentVariable("TEMP"), textConfig.Text + ".tmp", true, string.Empty, string.Empty, string.Empty, string.Empty, null);
       }
       catch (Exception ex)
       {
