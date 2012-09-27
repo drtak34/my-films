@@ -447,7 +447,7 @@
       <posX>715</posX>
       <posY>679</posY>
       <width>279</width>
-      <label>#myfilms.user.name.value #myfilms.user.watchedcount.value(#myfilms.user.watchedcountglobal.value)</label>
+      <label>#myfilms.user.name.value #myfilms.user.watchedcount.value(#myfilms.user.watchedcountglobal.value) #myfilms.user.watcheddate.value</label>
       <font>font9</font>
       <align>right</align>
       <textcolor>6fffffff</textcolor>
@@ -456,6 +456,25 @@
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
+
+<!--
+    <control>
+      <description>User DateWatched (Last Seen)</description>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>565</posX>
+      <posY>679</posY>
+      <width>279</width>
+      <label>#myfilms.user.watcheddate.value</label>
+      <font>font9</font>
+      <align>left</align>
+      <textcolor>6fffffff</textcolor>
+      <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.equals(#myfilms.user.name.value)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+-->
 
 <!--
     <control>
