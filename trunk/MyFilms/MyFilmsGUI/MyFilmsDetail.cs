@@ -3548,7 +3548,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             try
             {
               // Result = Grab.GetDetail(url, downLoadPath, wscript);
-              Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
+              Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles, null);
             }
             catch (Exception ex) { LogMyFilms.ErrorException("grabb_Internet_Details_Information() - exception = '" + ex.Message + "'", ex); }
 
