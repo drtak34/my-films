@@ -9020,12 +9020,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                              sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() &&
                              sr[conf.StrWatchedField].ToString().Length > 0);
           userData = new MultiUserData("");
-          userData.SetWatched(conf.StrUserProfileName, tmpwatched);
+          userData.SetWatchedWithoutDate(conf.StrUserProfileName, tmpwatched);
           if (sr["RatingUser"] != Convert.DBNull)
             userData.SetRating(conf.StrUserProfileName, (decimal)sr["RatingUser"]);
         }
         sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
-        sr["DateWatched"] = (setwatcheddate) ? userData.GetUserState(conf.StrUserProfileName).WatchedDate : Convert.DBNull;
+        sr["DateWatched"] = (setwatcheddate && userData.GetUserState(conf.StrUserProfileName).WatchedDate != MultiUserData.NoWatchedDate) ? userData.GetUserState(conf.StrUserProfileName).WatchedDate : Convert.DBNull;
         sr["RatingUser"] = userData.GetUserState(conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(conf.StrUserProfileName).UserRating;
       }
       LogMyFilms.Debug("MigrateToMus() - finished migration to MUS data for '" + allmovies.Length.ToString() + "' DB entries");
