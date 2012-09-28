@@ -4914,7 +4914,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           cbWatched.Text = "Checked";
           break;
         case 10:
-          cbWatched.Text = "Watched";
+          cbWatched.Text = "Checked"; // cbWatched.Text = "Watched"; cahnged bck to "Checked" to better support upgrade scenarios
           break;
         default:
           cbWatched.Text = "Checked";
