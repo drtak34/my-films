@@ -212,7 +212,7 @@
     <Value>(Series)</Value>
   </Values>
   <Values Option="Use_InternetData_For_Languages">
-    <Value>False</Value>
+    <Value>True</Value>
   </Values>
   <Values Option="Use_Grabber_For_Fanart">
     <Value>False</Value>
