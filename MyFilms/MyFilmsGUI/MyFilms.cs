@@ -8774,10 +8774,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       #region (re)load Dataset and check if migration for MUS is required ...
-      if (conf.EnhancedWatchedStatusHandling && r.Length > 0)
+      if (conf.EnhancedWatchedStatusHandling && conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended && r.Length > 0)
       {
         if (!r[0][BaseMesFilms.MultiUserStateField].ToString().Contains(":")) // check, if the first record contains MUS data - if not, call the migration method !
         {
+          // DataRow[] allmovies = BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens); // load all records into datraset
           MigrateToMus();
           r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // reload the dataset to reflect updated MUS data
         }
@@ -8986,7 +8987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private void MigrateToMus()
+    private static void MigrateToMus()
     {
       LogMyFilms.Debug("MigrateToMus() - starting migration to MUS data");
 
@@ -9006,6 +9007,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       DataRow[] allmovies = BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens); // load all records into datraset
       foreach (DataRow sr in allmovies.Where(sr => conf.EnhancedWatchedStatusHandling).Where(sr => !sr[BaseMesFilms.MultiUserStateField].ToString().Contains(":")))
       {
+        #region migrate records
         MultiUserData userData;
         bool setwatcheddate = false;
         if (sr[conf.StrWatchedField].ToString().Contains(":")) // old field was already multiuserdata - migrate it!
@@ -9027,6 +9029,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
         sr["DateWatched"] = (setwatcheddate && userData.GetUserState(conf.StrUserProfileName).WatchedDate != MultiUserData.NoWatchedDate) ? userData.GetUserState(conf.StrUserProfileName).WatchedDate : Convert.DBNull;
         sr["RatingUser"] = userData.GetUserState(conf.StrUserProfileName).UserRating == MultiUserData.NoRating ? Convert.DBNull : userData.GetUserState(conf.StrUserProfileName).UserRating;
+        #endregion
       }
       LogMyFilms.Debug("MigrateToMus() - finished migration to MUS data for '" + allmovies.Length.ToString() + "' DB entries");
       MyFilmsDetail.Update_XML_database();
