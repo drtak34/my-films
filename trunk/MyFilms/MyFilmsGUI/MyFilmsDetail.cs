@@ -1807,10 +1807,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlgYesNo.IsConfirmed)
           {
             // MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
-            ManualDelete(MyFilms.r[(int)MyFilms.conf.StrIndex], true, false);
+            ManualDelete(MyFilms.r[MyFilms.conf.StrIndex], true, false);
             // Update_XML_database();
             MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
             afficher_detail(true);
+            return;
           }
           if (dlgYesNo.SelectedLabel == -1)
           {
@@ -1834,6 +1835,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ManualDelete(MyFilms.r[MyFilms.conf.StrIndex], false, true);
             MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
             afficher_detail(true);
+            return;
           }
           if (dlgYesNo.SelectedLabel == -1)
           {
@@ -1857,7 +1859,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ManualDelete(MyFilms.r[MyFilms.conf.StrIndex], true, true);
             MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
             afficher_detail(true);
-            break;
+            return;
           }
           if (dlgYesNo.SelectedLabel == -1)
           {
@@ -2869,6 +2871,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (removefromDb)
       {
         string wdelTitle = row[MyFilms.conf.StrTitle1].ToString();
+        //AntMovieCatalog.MovieRow RowToDelete = row;
+        //foreach (AntMovieCatalog.CustomFieldsRow customFieldsRow in RowToDelete.GetCustomFieldsRows())
+        //{
+        //  customFieldsRow.Delete();
+        //}
         row.Delete();
         LogMyFilms.Info("Database movie deleted : " + wdelTitle);
         Update_XML_database();
@@ -2962,6 +2969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  }
       //}
 
+      
       new Thread(delegate()
       {
         bool successwrite = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000);
