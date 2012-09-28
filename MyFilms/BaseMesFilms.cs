@@ -262,32 +262,35 @@ namespace MyFilmsPlugin.MyFilms
       IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
       foreach (var movieRow in data.Movie)
       {
-        movieRow.BeginEdit();
-        AntMovieCatalog.CustomFieldsRow customFields = null;
-        if (movieRow.GetCustomFieldsRows().Length == 0) // create CustomFields Element, if not existing ...
+        if (movieRow.RowState != DataRowState.Deleted) // only, if this row wasn't deleted previously ...
         {
-          customFields = data.CustomFields.NewCustomFieldsRow();
-          customFields.SetParentRow(movieRow);
-          data.CustomFields.AddCustomFieldsRow(customFields);
-          // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
-        }
-        customFields = movieRow.GetCustomFieldsRows()[0];
-        foreach (DataColumn dc in commonColumns)
-        {
-          customFields[dc.ColumnName] = movieRow[dc.ColumnName];
-          #region disabled conditional updates
-          // object temp;
-          // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
+          movieRow.BeginEdit();
+          AntMovieCatalog.CustomFieldsRow customFields = null;
+          if (movieRow.GetCustomFieldsRows().Length == 0) // create CustomFields Element, if not existing ...
+          {
+            customFields = data.CustomFields.NewCustomFieldsRow();
+            customFields.SetParentRow(movieRow);
+            data.CustomFields.AddCustomFieldsRow(customFields);
+            // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
+          }
+          customFields = movieRow.GetCustomFieldsRows()[0];
+          foreach (DataColumn dc in commonColumns)
+          {
+            customFields[dc.ColumnName] = movieRow[dc.ColumnName];
+            #region disabled conditional updates
+            // object temp;
+            // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
 
-          //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
-          //{
-          //  customFields[dc.ColumnName] = temp;
-          //  if (cleanfileonexit)
-          //  {
-          //    movieRow[dc.ColumnName] = System.Convert.DBNull;
-          //  }
-          //}
-          #endregion
+            //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
+            //{
+            //  customFields[dc.ColumnName] = temp;
+            //  if (cleanfileonexit)
+            //  {
+            //    movieRow[dc.ColumnName] = System.Convert.DBNull;
+            //  }
+            //}
+            #endregion
+          }
         }
       }
       data.Movie.AcceptChanges();
@@ -1033,7 +1036,7 @@ namespace MyFilmsPlugin.MyFilms
           }
           LogMyFilms.Debug("TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
 
-          if (!System.IO.File.Exists(Catalog)) return;
+          if (!File.Exists(Catalog)) return;
 
           if (!TraktEnabled)
           {
