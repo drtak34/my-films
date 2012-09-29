@@ -618,14 +618,14 @@
       <description>User Item 4 Value</description>
       <type>fadelabel</type>
       <id>1</id>
-      <label>#myfilms.user.item5.value</label>
+      <label>#myfilms.user.item4.value</label>
       <posX>488</posX>
       <posY>680</posY>
       <width>200</width>
       <font>font11</font>
       <textcolor>ivory</textcolor>
       <align>left</align>
-      <visible>string.equals(#myfilms.user.item5.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+      <visible>string.equals(#myfilms.user.item4.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
     </control>
 
     <control>
@@ -635,10 +635,10 @@
       <posX>488</posX>
       <posY>518</posY>
       <width>760</width>
-      <height>115</height>
+      <height>110</height>
       <font>font11</font>
       <textcolor>ivory</textcolor>
-      <label>#myfilms.db.description.value</label>
+	  <label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
       <seperator>: : :</seperator>
       <lineSpacing>.9</lineSpacing>
       <visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
@@ -1237,8 +1237,8 @@
                                                         <type>textboxscrollup</type>
                                                         <posX>20</posX>
                                                         <posY>37</posY>
-                                                        <width>200</width>
-                                                        <height>35</height>
+                                                        <width>190</width>
+                                                        <height>32</height>
                                                         <label>#myfilms.db.actors.value</label>
                                                         <font>font9</font>
                                                         <lineSpacing>2.1</lineSpacing>
@@ -1263,9 +1263,9 @@
                                                         <type>textboxscrollup</type>
                                                         <posX>20</posX>
                                                         <posY>140</posY>
-                                                        <width>200</width>
-                                                        <height>70</height>
-                                                        <label>#myfilms.db.description.value</label>
+                                                        <width>190</width>
+                                                        <height>75</height>
+														<label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
                                                         <font>font9</font>
                                                         <lineSpacing>2.1</lineSpacing>
                                                         <textcolor>ivory</textcolor>
