@@ -9,4 +9,6 @@ Although there are many options, most have been preset for you. You only need to
 
 Please refer to our extensive My Films Wiki to learn all about the new features, advantages and ways to customize My Films to your preferences. A link to the Wiki appears on the bottom in My Films Setup and is visible on every page.
 
+If you are updating your Ant Movie Catalog to the new version 4.x, please check the upgrade instructions in the My Films wiki how to migrate your watched status.
+
 Enjoy!
