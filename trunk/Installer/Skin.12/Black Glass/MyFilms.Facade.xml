@@ -107,6 +107,8 @@
           <remoteColor>ffF87B72</remoteColor>
           <!-- file not present color -->
 
+          <downloadColor>ff80ff80</downloadColor>
+
           <posX>847</posX>
           <width>433</width>
           <height>590</height>
