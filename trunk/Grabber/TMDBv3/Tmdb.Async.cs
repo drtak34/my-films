@@ -27,8 +27,10 @@ namespace WatTmdb.V3
             request.AddHeader("Accept", "application/json");
             request.AddParameter("api_key", ApiKey);
 
+            ++AsyncCount;
             var asyncHandle = client.ExecuteAsync<T>(request, resp =>
                 {
+                    --AsyncCount;
                     var result = new TmdbAsyncResult<T>
                     {
                         Data = resp.Data,
@@ -327,9 +329,8 @@ namespace WatTmdb.V3
         /// (http://help.themoviedb.org/kb/api/movie-info)
         /// </summary>
         /// <param name="IMDB_ID">IMDB movie id</param>
-        /// <param name="userState"></param>
         /// <param name="callback"></param>
-        public void GetMovieByIMDB(string IMDB_ID, object userState, Action<TmdbAsyncResult<TmdbMovie>> callback)
+        public void GetMovieByIMDB(string IMDB_ID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
             if (string.IsNullOrEmpty(IMDB_ID))
             {
@@ -337,12 +338,17 @@ namespace WatTmdb.V3
                 {
                     Data = null,
                     Error = new TmdbError { status_message = "Search cannot be empty" },
-                    UserState = userState
+                    UserState = UserState
                 });
                 return;
             }
 
-            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, userState), callback);
+            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, language, UserState), callback);
+        }
+
+        public void GetMovieByIMDB(string IMDB_ID, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
+        {
+            GetMovieByIMDB(IMDB_ID, Language, UserState, callback);
         }
 
         /// <summary>
@@ -511,9 +517,9 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetSimilarMovies(int MovieID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbSimilarMovies>> callback)
+        public void GetSimilarMovies(int MovieID, int page, string language, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
-            ProcessAsyncRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language, UserState), callback);
+          ProcessAsyncRequest<MovieSearchResults>(BuildGetSimilarMoviesRequest(MovieID, page, language, UserState), callback);
         }
 
         /// <summary>
@@ -524,7 +530,7 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetSimilarMovies(int MovieID, int page, object UserState, Action<TmdbAsyncResult<TmdbSimilarMovies>> callback)
+        public void GetSimilarMovies(int MovieID, int page, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
             GetSimilarMovies(MovieID, page, Language, UserState, callback);
         }
@@ -537,9 +543,9 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetUpcomingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbUpcoming>> callback)
+        public void GetUpcomingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
-            ProcessAsyncRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language, UserState), callback);
+          ProcessAsyncRequest<MovieSearchResults>(BuildGetUpcomingMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -549,7 +555,7 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetUpcomingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbUpcoming>> callback)
+        public void GetUpcomingMovies(int page, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
             GetUpcomingMovies(page, Language, UserState, callback);
         }
@@ -642,6 +648,11 @@ namespace WatTmdb.V3
             ProcessAsyncRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest(UserState), callback);
         }
 
+        public void GetLatestMovieETag(object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetLatestMovieRequest(UserState), callback);
+        }
+
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/now-playing-movies)
@@ -650,9 +661,14 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetNowPlayingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
+        public void GetNowPlayingMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieSearchResult>> callback)
         {
-            ProcessAsyncRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
+          ProcessAsyncRequest<TmdbMovieSearchResult>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
+        }
+
+        public void GetNowPlayingMoviesETag(int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -662,11 +678,16 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetNowPlayingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
+        public void GetNowPlayingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbMovieSearchResult>> callback)
         {
             GetNowPlayingMovies(page, Language, UserState, callback);
         }
 
+        public void GetNowPlayingMoviesETag(int page, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetNowPlayingMoviesETag(page, Language, UserState, callback);
+        }
+
         /// <summary>
         /// Get the daily popularity list of movies.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/popular-movie-list)
@@ -675,9 +696,14 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetPopularMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
+        public void GetPopularMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieSearchResult>> callback)
         {
-            ProcessAsyncRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
+          ProcessAsyncRequest<TmdbMovieSearchResult>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
+        }
+
+        public void GetPopularMoviesETag(int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetPopularMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -687,11 +713,16 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetPopularMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
+        public void GetPopularMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbMovieSearchResult>> callback)
         {
             GetPopularMovies(page, Language, UserState, callback);
         }
 
+        public void GetPopularMoviesETag(int page, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetPopularMoviesETag(page, Language, UserState, callback);
+        }
+
         /// <summary>
         /// Get list of movies that have over 10 votes on TMDB.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/top-rated-movies)
@@ -700,9 +731,14 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetTopRatedMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
+        public void GetTopRatedMovies(int page, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieSearchResult>> callback)
         {
-            ProcessAsyncRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
+          ProcessAsyncRequest<TmdbMovieSearchResult>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
+        }
+
+        public void GetTopRatedMoviesETag(int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
         }
 
         /// <summary>
@@ -712,9 +748,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetTopRatedMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
+        public void GetTopRatedMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbMovieSearchResult>> callback)
         {
             GetTopRatedMovies(page, Language, UserState, callback);
+        }
+
+        public void GetTopRatedMoviesETag(int page, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetTopRatedMoviesETag(page, Language, UserState, callback);
         }
         #endregion
 
@@ -746,9 +787,9 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetCompanyMovies(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbCompanyMovies>> callback)
+        public void GetCompanyMovies(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
-            ProcessAsyncRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
+          ProcessAsyncRequest<MovieSearchResults>(BuildGetCompanyMoviesRequest(CompanyID, page, language, UserState), callback);
         }
 
         public void GetCompanyMoviesETag(int CompanyID, int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
@@ -764,7 +805,7 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetCompanyMovies(int CompanyID, int page, object UserState, Action<TmdbAsyncResult<TmdbCompanyMovies>> callback)
+        public void GetCompanyMovies(int CompanyID, int page, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
             GetCompanyMovies(CompanyID, page, Language, UserState, callback);
         }
@@ -819,9 +860,9 @@ namespace WatTmdb.V3
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetGenreMovies(int GenreID, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbGenreMovies>> callback)
+        public void GetGenreMovies(int GenreID, int page, string language, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
-            ProcessAsyncRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
+          ProcessAsyncRequest<MovieSearchResults>(BuildGetGenreMoviesRequest(GenreID, page, language, UserState), callback);
         }
 
         public void GetGenreMoviesETag(int GenreID, int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
@@ -837,7 +878,7 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
-        public void GetGenreMovies(int GenreID, int page, object UserState, Action<TmdbAsyncResult<TmdbGenreMovies>> callback)
+        public void GetGenreMovies(int GenreID, int page, object UserState, Action<TmdbAsyncResult<MovieSearchResults>> callback)
         {
             GetGenreMovies(GenreID, page, Language, UserState, callback);
         }

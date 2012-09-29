@@ -157,6 +157,10 @@
     <Compile Include="TheMovieDbAPI\TmdbPersonSearchResults.cs" />
     <Compile Include="TheMovieDbAPI\TmdbStudio.cs" />
     <Compile Include="ThumbCreator.cs" />
+    <Compile Include="TMDBv3\TmdbMovieSearchResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TMDBv3\MovieSearchResults.cs" />
     <Compile Include="TMDBv3\Tmdb.Async.cs" />
     <Compile Include="TMDBv3\Tmdb.cs" />
     <Compile Include="TMDBv3\Tmdb.Sync.cs" />
@@ -164,13 +168,12 @@
     <Compile Include="TMDBv3\TmdbAuthSession.cs" />
     <Compile Include="TMDBv3\TmdbAuthToken.cs" />
     <Compile Include="TMDBv3\TmdbCollection.cs" />
+    <Compile Include="TMDBv3\TmdbCollectionImages.cs" />
     <Compile Include="TMDBv3\TmdbCompany.cs" />
-    <Compile Include="TMDBv3\TmdbCompanyMovies.cs" />
     <Compile Include="TMDBv3\TmdbCompanySearch.cs" />
     <Compile Include="TMDBv3\TmdbConfiguration.cs" />
     <Compile Include="TMDBv3\TmdbError.cs" />
     <Compile Include="TMDBv3\TmdbGenre.cs" />
-    <Compile Include="TMDBv3\TmdbGenreMovies.cs" />
     <Compile Include="TMDBv3\TmdbLatestMovie.cs" />
     <Compile Include="TMDBv3\TmdbMovie.cs" />
     <Compile Include="TMDBv3\TmdbMovieAlternateTitles.cs" />
@@ -180,16 +183,12 @@
     <Compile Include="TMDBv3\TmdbMovieReleases.cs" />
     <Compile Include="TMDBv3\TmdbMovieSearch.cs" />
     <Compile Include="TMDBv3\TmdbMovieTrailers.cs" />
-    <Compile Include="TMDBv3\TmdbNowPlaying.cs" />
     <Compile Include="TMDBv3\TmdbPerson.cs" />
     <Compile Include="TMDBv3\TmdbPersonCredits.cs" />
     <Compile Include="TMDBv3\TmdbPersonImages.cs" />
     <Compile Include="TMDBv3\TmdbPersonSearch.cs" />
-    <Compile Include="TMDBv3\TmdbPopular.cs" />
-    <Compile Include="TMDBv3\TmdbSimilarMovies.cs" />
-    <Compile Include="TMDBv3\TmdbTopRated.cs" />
+    <Compile Include="TMDBv3\TmdbSearchResultBase.cs" />
     <Compile Include="TMDBv3\TmdbTranslations.cs" />
-    <Compile Include="TMDBv3\TmdbUpcoming.cs" />
     <Compile Include="TMDBv3\Utility.cs" />
     <Compile Include="TMDBv3\WatJsonDeserializer.cs" />
     <Compile Include="TranslateProvider\TranslateProvider.cs" />

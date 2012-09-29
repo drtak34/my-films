@@ -12,6 +12,11 @@ namespace WatTmdb.V3
         public string release_date { get; set; }
         public string poster_path { get; set; }
         public string backdrop_path { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 
     public class TmdbCollection
@@ -21,13 +26,10 @@ namespace WatTmdb.V3
         public string poster_path { get; set; }
         public string backdrop_path { get; set; }
         public List<CollectionPart> parts { get; set; }
-    }
 
-    public class TmdbCollectionImages
-    {
-      public int id { get; set; }
-      public List<Backdrop> backdrops { get; set; }
-      public List<Poster> posters { get; set; }
+        public override string ToString()
+        {
+            return name;
+        }
     }
-
 }
