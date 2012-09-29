@@ -824,7 +824,7 @@
       <posX>680</posX>
       <posY>418</posY>
       <width>560</width>
-      <height>90</height>
+      <height>85</height>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.value</label>
       <font>font11</font>
@@ -839,9 +839,9 @@
       <posX>520</posX>
       <posY>513</posY>
       <width>740</width>
-      <height>115</height>
+      <height>110</height>
       <textcolor>ivory</textcolor>
-      <label>#myfilms.db.description.value</label>
+	  <label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
       <seperator>: : :</seperator>
       <font>font11</font>
       <lineSpacing>.9</lineSpacing>
@@ -869,7 +869,7 @@
       <width>740</width>
       <height>410</height>
       <textcolor>ivory</textcolor>
-      <label>#myfilms.db.description.value</label>
+	  <label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
       <seperator>: : :</seperator>
       <font>font11</font>
       <lineSpacing>.9</lineSpacing>
@@ -1692,7 +1692,7 @@
       <posY>667</posY>
       <label>#(iif(neq(#myfilms.db.mediatype.value,''),'#myfilms.db.mediatype.value | ',''))#(iif(neq(#myfilms.db.calc.format.value,''),'#myfilms.db.calc.format.value | ',''))#(iif(neq(#myfilms.db.resolution.value,''),'#myfilms.db.resolution.value',''))#(iif(neq(#myfilms.db.framerate.value,''),'@#myfilms.db.framerate.value fps  | ',' | '))#(iif(neq(#myfilms.db.size.value,''),'#myfilms.db.size.value MB | ',''))#(iif(neq(#myfilms.db.disks.value,''),'#myfilms.db.disks.value file(s)',''))</label>
       <font>font10</font>
-      <width>690</width>
+      <width>740</width>
       <textcolor>ff6FAFE1</textcolor>
       <visible>!Control.HasFocus(10099)</visible>
     </control>
@@ -1705,7 +1705,7 @@
       <label>#(iif(neq(#myfilms.db.number.value,''),'#myfilms.db.number.label: #myfilms.db.number.value | ',''))#(iif(neq(#myfilms.db.date.value,''),'#myfilms.db.dateadded.label: #myfilms.db.date.value | ',''))#(iif(neq(#myfilms.db.languages.value,''),'#myfilms.db.languages.label: #myfilms.db.languages.value | ',''))#(iif(neq(#myfilms.db.subtitles.value,''),'#myfilms.db.subtitles.label: #myfilms.db.subtitles.value',''))</label>
       <font>font10</font>
       <textcolor>ff6FAFE1</textcolor>
-      <width>690</width>
+      <width>740</width>
       <visible>!Control.HasFocus(10099)</visible>
     </control>
     <control>

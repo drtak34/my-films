@@ -549,7 +549,7 @@
                 <description>User Rating</description>
                 <type>fadelabel</type>
                 <id>1</id>
-                <posX>240</posX>
+                <posX>250</posX>
                 <posY>432</posY>
                 <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)',''))</label>
                 <font>font10</font>
@@ -635,12 +635,12 @@
                 <type>fadelabel</type>
                 <description>User Item 2 Value - preset to Country</description>
                 <id>1</id>
-                <posX>120</posX>
+                <posX>130</posX>
                 <posY>509</posY>
                 <width>190</width>
                 <label>#myfilms.user.item2.value</label>
-                <font>font11</font>
-        <textcolor>ivory</textcolor> 
+                <font>font10</font>
+				<textcolor>ivory</textcolor> 
                 <visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
         </control>
         <control>
@@ -659,11 +659,11 @@
                 <type>fadelabel</type>
 				<description>User Item 3 Value - preset to Director</description>
                 <id>1</id>
-                <posX>120</posX>
+                <posX>130</posX>
                 <posY>526</posY>
                 <width>190</width>
                 <label>#myfilms.user.item3.value</label>
-                <font>font11</font>
+                <font>font10</font>
                 <textcolor>ivory</textcolor> 
                 <visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item3.value)+!player.hasmedia</visible>
         </control>
@@ -673,7 +673,7 @@
                 <id>1</id>
                 <posX>30</posX>
                 <posY>543</posY>
-                <width>90</width>
+                <width>100</width>
                 <label>#myfilms.user.item4.label: </label>
                 <font>font10</font>
                 <textcolor>ff6FAFE1</textcolor>
@@ -683,11 +683,11 @@
                 <type>fadelabel</type>
                 <description>User Item 4 Value - preset to Certification</description>
                 <id>1</id>
-                <posX>120</posX>
+                <posX>130</posX>
                 <posY>543</posY>
                 <width>190</width>
                 <label>#myfilms.user.item4.value</label>
-                <font>font11</font>
+                <font>font10</font>
                 <textcolor>ivory</textcolor> 
                 <visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item4.value)+!player.hasmedia</visible>
         </control>
@@ -710,12 +710,12 @@
                 <posX>325</posX>
                 <posY>400</posY>
                 <width>370</width>
-                <height>110</height>
+                <height>120</height>
                 <colordiffuse>ffffffff</colordiffuse>
                 <dimColor>10ffffff</dimColor>
                 <font>font12</font>
                 <textcolor>FFFFFFFF</textcolor>
-                <label>#myfilms.db.description.value</label>
+			    <label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
                 <seperator>: : :</seperator>
                 <lineSpacing>.9</lineSpacing>
                 <shadowColor>-</shadowColor>

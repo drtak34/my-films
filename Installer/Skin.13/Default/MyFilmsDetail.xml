@@ -600,7 +600,7 @@
                 <description>User Rating</description>
                 <type>fadelabel</type>
                 <id>1</id>
-                <posX>520</posX>
+                <posX>530</posX>
                 <posY>100</posY>
                 <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)',''))</label>
                 <width>160</width>
@@ -819,7 +819,7 @@
                 <description>Watched Count Label </description>
                 <type>fadelabel</type>
                 <id>1</id>
-                <posX>585</posX>
+                <posX>600</posX>
                 <posY>297</posY>
                 <label>#myfilms.user.watchedcount.label:</label>
                 <width>236</width>
@@ -832,7 +832,7 @@
                 <description>Watched Count</description>
                 <type>fadelabel</type>
                 <id>1</id>
-                <posX>590</posX>
+                <posX>615</posX>
                 <posY>297</posY>
                 <label>#(iif(neq(#myfilms.user.watchedcount.value,'0'),'#myfilms.user.watchedcount.value(#myfilms.user.watchedcountglobal.value)',''))</label>
                 <width>236</width>
@@ -848,7 +848,7 @@
                 <posY>320</posY>
                 <label>#myfilms.db.actors.label:</label>
                 <textcolor>ff6FAFE1</textcolor>
-                <font>font12</font>
+                <font>font11</font>
                 <width>160</width>
                 <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
         </control>
@@ -859,7 +859,7 @@
                 <posX>435</posX>
                 <posY>322</posY>
                 <width>260</width>
-                <height>92</height>
+                <height>76</height>
                 <textcolor>ivory</textcolor>
                 <label>#myfilms.db.actors.value</label>
                 <font>font12</font>
@@ -877,9 +877,9 @@
                 <width>400</width>
                 <height>123</height>
                 <textcolor>ivory</textcolor>
-                <label>#myfilms.db.description.value</label>
+				<label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
                 <seperator>: : :</seperator>
-                <font>font13</font>
+                <font>font12</font>
                 <lineSpacing>.8</lineSpacing>
                 <shadowColor>-</shadowColor>
                 <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
@@ -905,9 +905,9 @@
                 <posX>310</posX>
                 <posY>192</posY>
                 <width>400</width>
-                <height>330</height>
+                <height>335</height>
                 <textcolor>ivory</textcolor>
-                <label>#myfilms.db.description.value</label>
+			    <label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
                 <seperator>: : :</seperator>
                 <font>font13</font>
                 <lineSpacing>.9</lineSpacing>
@@ -935,7 +935,7 @@
                 <posX>310</posX>
                 <posY>192</posY>
                 <width>400</width>
-                <height>330</height>
+                <height>335</height>
                 <textcolor>ivory</textcolor>
                 <label>#myfilms.db.comments.value</label>
                 <seperator>: : :</seperator>
@@ -965,7 +965,7 @@
                 <posX>310</posX>
                 <posY>192</posY>
                 <width>400</width>
-                <height>330</height>
+                <height>335</height>
                 <textcolor>ivory</textcolor>
                 <label>#myfilms.db.actors.value</label>
                 <seperator>: : :</seperator>
@@ -981,11 +981,11 @@
                 <posX>310</posX>
                 <posY>190</posY>
                 <width>400</width>
-                <height>135</height>
+                <height>125</height>
                 <textcolor>ivory</textcolor>
                 <label>#myfilms.db.actors.value</label>
                 <seperator>: : :</seperator>
-                <font>font12</font>
+                <font>font13</font>
                 <lineSpacing>.9</lineSpacing>
                 <shadowColor>-</shadowColor>
                 <visible>Control.HasFocus(10003)+!string.equals(#myfilms.db.actors.actor1.image,)</visible>
