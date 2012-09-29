@@ -11,13 +11,13 @@ namespace WatTmdb.V3
         public int id { get; set; }
         public string name { get; set; }
         public string profile_path { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
-    public class TmdbPersonSearch
-    {
-        public int page { get; set; }
-        public List<PersonResult> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbPersonSearch : TmdbSearchResultBase<PersonResult>
+    { }
 }

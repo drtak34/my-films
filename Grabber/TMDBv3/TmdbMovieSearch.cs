@@ -17,13 +17,13 @@ namespace WatTmdb.V3
         public string title { get; set; }
         public double vote_average { get; set; }
         public int vote_count { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 
-    public class TmdbMovieSearch
-    {
-        public int page { get; set; }
-        public List<MovieResult> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbMovieSearch : TmdbSearchResultBase<MovieResult>
+    { }
 }

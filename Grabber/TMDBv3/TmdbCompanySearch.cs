@@ -10,13 +10,13 @@ namespace WatTmdb.V3
         public int id { get; set; }
         public string logo_path { get; set; }
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
-    public class TmdbCompanySearch
-    {
-        public int page { get; set; }
-        public List<CompanyResult> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbCompanySearch : TmdbSearchResultBase<CompanyResult>
+    { }
 }

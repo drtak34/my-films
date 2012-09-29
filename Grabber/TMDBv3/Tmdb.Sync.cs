@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using RestSharp;
 using System.Net;
-using WatTmdb;
 
 namespace WatTmdb.V3
 {
@@ -35,7 +34,12 @@ namespace WatTmdb.V3
             ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
             if (resp.ResponseStatus == ResponseStatus.Completed)
+            {
+                if (resp.Content.Contains("status_message"))
+                    Error = jsonDeserializer.Deserialize<TmdbError>(resp);
+
                 return resp.Data;
+            }
             else
             {
                 if (resp.Content.Contains("status_message"))
@@ -84,12 +88,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbConfiguration GetConfiguration()
         {
-            return ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest(null));
+            return ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest());
         }
 
         public string GetConfigurationETag()
         {
-            return ProcessRequestETag(BuildGetConfigurationRequest(null));
+            return ProcessRequestETag(BuildGetConfigurationRequest());
         }
 
         #endregion
@@ -122,12 +126,20 @@ namespace WatTmdb.V3
         /// <param name="includeAdult">optional - include adult items in your search, (Default=false)</param>
         /// <param name="year">optional - to get a closer result</param>
         /// <returns></returns>
-        public TmdbMovieSearch SearchMovie(string query, int page, string language, bool? includeAdult, int? year)
+        public TmdbMovieSearch SearchMovie(string query, int page, string language, int? year)
+        {
+          return SearchMovie(query, page, language, null, year);
+        }
+        public TmdbMovieSearch SearchMovie(string query, int page, string language)
+        {
+          return SearchMovie(query, page, language, null, null);
+        }
+        public TmdbMovieSearch SearchMovie(string query, int page, string language, bool? includeAdult                                                                                                             , int? year                                                                                                                               )
         {
             if (string.IsNullOrEmpty(query))
                 throw new ArgumentException("Search must be supplied");
 
-            return this.ProcessRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year, null));
+            return ProcessRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year));
         }
 
         /// <summary>
@@ -139,7 +151,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieSearch SearchMovie(string query, int page)
         {
-            return this.SearchMovie(query, page, this.Language, null, null);
+            return SearchMovie(query, page, Language);
         }
 
         /// <summary>
@@ -155,7 +167,7 @@ namespace WatTmdb.V3
             if (string.IsNullOrEmpty(query))
                 throw new ArgumentException("Search must be supplied");
 
-            return this.ProcessRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language, null));
+            return ProcessRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language));
         }
 
         /// <summary>
@@ -167,7 +179,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPersonSearch SearchPerson(string query, int page)
         {
-            return this.SearchPerson(query, page, this.Language);
+            return SearchPerson(query, page, Language);
         }
 
         /// <summary>
@@ -182,7 +194,7 @@ namespace WatTmdb.V3
             if (string.IsNullOrEmpty(query))
                 throw new ArgumentException("Search must be supplied");
 
-            return this.ProcessRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page, null));
+            return ProcessRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page));
         }
 
         #endregion
@@ -198,12 +210,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCollection GetCollectionInfo(int CollectionID, string language)
         {
-            return this.ProcessRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language, null));
+            return ProcessRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language));
         }
 
         public string GetCollectionInfoETag(int CollectionID, string language)
         {
-            return this.ProcessRequestETag(BuildGetCollectionInfoRequest(CollectionID, language, null));
+            return ProcessRequestETag(BuildGetCollectionInfoRequest(CollectionID, language));
         }
 
         /// <summary>
@@ -214,12 +226,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCollection GetCollectionInfo(int CollectionID)
         {
-            return this.GetCollectionInfo(CollectionID, this.Language);
+            return GetCollectionInfo(CollectionID, Language);
         }
 
         public string GetCollectionInfoETag(int CollectionID)
         {
-            return this.GetCollectionInfoETag(CollectionID, this.Language);
+            return GetCollectionInfoETag(CollectionID, Language);
         }
 
         /// <summary>
@@ -231,12 +243,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCollectionImages GetCollectionImages(int CollectionID, string language)
         {
-            return ProcessRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language, null));
+            return ProcessRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language));
         }
 
         public string GetCollectionImagesETag(int CollectionID, string language)
         {
-            return ProcessRequestETag(BuildGetCollectionImagesRequest(CollectionID, language, null));
+            return ProcessRequestETag(BuildGetCollectionImagesRequest(CollectionID, language));
         }
 
         /// <summary>
@@ -267,12 +279,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovie GetMovieInfo(int MovieID, string language)
         {
-            return this.ProcessRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language, null));
+            return ProcessRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language));
         }
 
         public string GetMovieInfoETag(int MovieID, string language)
         {
-            return this.ProcessRequestETag(BuildGetMovieInfoRequest(MovieID, language, null));
+            return ProcessRequestETag(BuildGetMovieInfoRequest(MovieID, language));
         }
 
         /// <summary>
@@ -283,12 +295,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovie GetMovieInfo(int MovieID)
         {
-            return this.GetMovieInfo(MovieID, this.Language);
+            return GetMovieInfo(MovieID, Language);
         }
 
         public string GetMovieInfoETag(int MovieID)
         {
-            return this.GetMovieInfoETag(MovieID, this.Language);
+            return GetMovieInfoETag(MovieID, Language);
         }
 
         /// <summary>
@@ -297,12 +309,17 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="IMDB_ID">IMDB movie id</param>
         /// <returns></returns>
-        public TmdbMovie GetMovieByIMDB(string IMDB_ID)
+        public TmdbMovie GetMovieByIMDB(string IMDB_ID, string language)
         {
             if (string.IsNullOrEmpty(IMDB_ID))
                 throw new ArgumentException("IMDB_ID must be supplied");
 
-            return this.ProcessRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, null));
+            return ProcessRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, language));
+        }
+
+        public TmdbMovie GetMovieByIMDB(string IMDB_ID)
+        {
+            return GetMovieByIMDB(IMDB_ID, Language);
         }
 
         /// <summary>
@@ -314,12 +331,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieAlternateTitles GetMovieAlternateTitles(int MovieID, string Country)
         {
-            return this.ProcessRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country, null));
+            return ProcessRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country));
         }
 
         public string GetMovieAlternateTitlesETag(int MovieID, string Country)
         {
-            return this.ProcessRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country, null));
+            return ProcessRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country));
         }
 
         /// <summary>
@@ -330,12 +347,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieCast GetMovieCast(int MovieID)
         {
-            return this.ProcessRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID, null));
+            return ProcessRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID));
         }
 
         public string GetMovieCastETag(int MovieID)
         {
-          return this.ProcessRequestETag(BuildGetMovieCastRequest(MovieID, null));
+            return ProcessRequestETag(BuildGetMovieCastRequest(MovieID));
         }
 
         /// <summary>
@@ -347,12 +364,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieImages GetMovieImages(int MovieID, string language)
         {
-          return this.ProcessRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language, null));
+            return ProcessRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language));
         }
 
         public string GetMovieImagesETag(int MovieID, string language)
         {
-          return this.ProcessRequestETag(BuildGetMovieImagesRequest(MovieID, language, null));
+            return ProcessRequestETag(BuildGetMovieImagesRequest(MovieID, language));
         }
 
         /// <summary>
@@ -363,12 +380,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieImages GetMovieImages(int MovieID)
         {
-            return this.GetMovieImages(MovieID, this.Language);
+          return GetMovieImages(MovieID, Language);
         }
 
         public string GetMovieImagesETag(int MovieID)
         {
-            return this.GetMovieImagesETag(MovieID, this.Language);
+          return GetMovieImagesETag(MovieID, Language);
         }
 
         /// <summary>
@@ -379,12 +396,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieKeywords GetMovieKeywords(int MovieID)
         {
-          return this.ProcessRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID, null));
+            return ProcessRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID));
         }
 
         public string GetMovieKeywordsETag(int MovieID)
         {
-          return this.ProcessRequestETag(BuildGetMovieKeywordsRequest(MovieID, null));
+            return ProcessRequestETag(BuildGetMovieKeywordsRequest(MovieID));
         }
 
         /// <summary>
@@ -395,12 +412,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieReleases GetMovieReleases(int MovieID)
         {
-          return this.ProcessRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID, null));
+            return ProcessRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID));
         }
 
         public string GetMovieReleasesETag(int MovieID)
         {
-          return this.ProcessRequestETag(BuildGetMovieReleasesRequest(MovieID, null));
+            return ProcessRequestETag(BuildGetMovieReleasesRequest(MovieID));
         }
 
         /// <summary>
@@ -412,12 +429,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieTrailers GetMovieTrailers(int MovieID, string language)
         {
-          return this.ProcessRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language, null));
+            return ProcessRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language));
         }
 
         public string GetMovieTrailersETag(int MovieID, string language)
         {
-          return this.ProcessRequestETag(BuildGetMovieTrailersRequest(MovieID, language, null));
+            return ProcessRequestETag(BuildGetMovieTrailersRequest(MovieID, language));
         }
 
         /// <summary>
@@ -444,9 +461,9 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbSimilarMovies GetSimilarMovies(int MovieID, int page, string language)
+        public MovieSearchResults GetSimilarMovies(int MovieID, int page, string language)
         {
-          return this.ProcessRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetSimilarMoviesRequest(MovieID, page, language));
         }
 
         /// <summary>
@@ -456,9 +473,9 @@ namespace WatTmdb.V3
         /// <param name="MovieID">TMDB movie id</param>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbSimilarMovies GetSimilarMovies(int MovieID, int page)
+        public MovieSearchResults GetSimilarMovies(int MovieID, int page)
         {
-            return this.GetSimilarMovies(MovieID, page, this.Language);
+            return GetSimilarMovies(MovieID, page, Language);
         }
 
         /// <summary>
@@ -469,12 +486,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbTranslations GetMovieTranslations(int MovieID)
         {
-          return this.ProcessRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID, null));
+            return ProcessRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID));
         }
 
         public string GetMovieTranslationsETag(int MovieID)
         {
-          return this.ProcessRequestETag(BuildGetMovieTranslationsRequest(MovieID, null));
+            return ProcessRequestETag(BuildGetMovieTranslationsRequest(MovieID));
         }
         #endregion
 
@@ -488,12 +505,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPerson GetPersonInfo(int PersonID)
         {
-          return this.ProcessRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID, null));
+            return ProcessRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID));
         }
 
         public string GetPersonInfoETag(int PersonID)
         {
-          return this.ProcessRequestETag(BuildGetPersonInfoRequest(PersonID, null));
+            return ProcessRequestETag(BuildGetPersonInfoRequest(PersonID));
         }
 
         /// <summary>
@@ -505,12 +522,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPersonCredits GetPersonCredits(int PersonID, string language)
         {
-          return this.ProcessRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language, null));
+            return ProcessRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language));
         }
 
         public string GetPersonCreditsETag(int PersonID, string language)
         {
-          return this.ProcessRequestETag(BuildGetPersonCreditsRequest(PersonID, language, null));
+            return ProcessRequestETag(BuildGetPersonCreditsRequest(PersonID, language));
         }
 
         /// <summary>
@@ -521,12 +538,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPersonCredits GetPersonCredits(int PersonID)
         {
-            return this.GetPersonCredits(PersonID, this.Language);
+            return GetPersonCredits(PersonID, Language);
         }
 
         public string GetPersonCreditsETag(int PersonID)
         {
-            return this.GetPersonCreditsETag(PersonID, this.Language);
+            return GetPersonCreditsETag(PersonID, Language);
         }
 
         /// <summary>
@@ -537,12 +554,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPersonImages GetPersonImages(int PersonID)
         {
-            return this.ProcessRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID, null));
+            return ProcessRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID));
         }
 
         public string GetPersonImagesETag(int PersonID)
         {
-            return this.ProcessRequestETag(BuildGetPersonImagesRequest(PersonID, null));
+            return ProcessRequestETag(BuildGetPersonImagesRequest(PersonID));
         }
         #endregion
 
@@ -555,7 +572,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbLatestMovie GetLatestMovie()
         {
-            return ProcessRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest(null));
+            return ProcessRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest());
+        }
+
+        public string GetLatestMovieETag()
+        {
+            return ProcessRequestETag(BuildGetLatestMovieRequest());
         }
 
         /// <summary>
@@ -565,9 +587,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbNowPlaying GetNowPlayingMovies(int page, string language)
+        public MovieSearchResults GetNowPlayingMovies(int page, string language)
         {
-            return ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetNowPlayingMoviesRequest(page, language));
+        }
+
+        public string GetNowPlayingMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetNowPlayingMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -576,11 +603,16 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbNowPlaying GetNowPlayingMovies(int page)
+        public MovieSearchResults GetNowPlayingMovies(int page)
         {
             return GetNowPlayingMovies(page, Language);
         }
 
+        public string GetNowPlayingMoviesETag(int page)
+        {
+            return GetNowPlayingMoviesETag(page, Language);
+        }
+
         /// <summary>
         /// Get the daily popularity list of movies.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/popular-movie-list)
@@ -588,9 +620,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbPopular GetPopularMovies(int page, string language)
+        public MovieSearchResults GetPopularMovies(int page, string language)
         {
-          return this.ProcessRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetPopularMoviesRequest(page, language));
+        }
+
+        public string GetPopularMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetPopularMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -599,11 +636,16 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbPopular GetPopularMovies(int page)
+        public MovieSearchResults GetPopularMovies(int page)
         {
             return GetPopularMovies(page, Language);
         }
 
+        public string GetPopularMoviesETag(int page)
+        {
+            return GetPopularMoviesETag(page, Language);
+        }
+
         /// <summary>
         /// Get list of movies that have over 10 votes on TMDB.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/top-rated-movies)
@@ -611,9 +653,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbTopRated GetTopRatedMovies(int page, string language)
+        public MovieSearchResults GetTopRatedMovies(int page, string language)
         {
-          return this.ProcessRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetTopRatedMoviesRequest(page, language));
+        }
+
+        public string GetTopRatedMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetTopRatedMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -622,11 +669,16 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbTopRated GetTopRatedMovies(int page)
+        public MovieSearchResults GetTopRatedMovies(int page)
         {
             return GetTopRatedMovies(page, Language);
         }
 
+        public string GetTopRatedMoviesETag(int page)
+        {
+            return GetTopRatedMoviesETag(page, Language);
+        }
+
         /// <summary>
         /// Get list of movies that are arriving to theatres in the next few weeks.
         /// (http://help.themoviedb.org/kb/api/upcoming-movies)
@@ -634,9 +686,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbUpcoming GetUpcomingMovies(int page, string language)
+        public MovieSearchResults GetUpcomingMovies(int page, string language)
         {
-          return this.ProcessRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetUpcomingMoviesRequest(page, language));
+        }
+
+        public string GetUpcomingMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetUpcomingMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -645,9 +702,14 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbUpcoming GetUpcomingMovies(int page)
+        public MovieSearchResults GetUpcomingMovies(int page)
         {
             return GetUpcomingMovies(page, Language);
+        }
+
+        public string GetUpcomingMoviesETag(int page)
+        {
+            return GetUpcomingMoviesETag(page, Language);
         }
         #endregion
 
@@ -661,12 +723,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCompany GetCompanyInfo(int CompanyID)
         {
-          return this.ProcessRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID, null));
+            return ProcessRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID));
         }
 
         public string GetCompanyInfoETag(int CompanyID)
         {
-          return this.ProcessRequestETag(BuildGetCompanyInfoRequest(CompanyID, null));
+            return ProcessRequestETag(BuildGetCompanyInfoRequest(CompanyID));
         }
 
         /// <summary>
@@ -677,14 +739,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbCompanyMovies GetCompanyMovies(int CompanyID, int page, string language)
+        public MovieSearchResults GetCompanyMovies(int CompanyID, int page, string language)
         {
-          return this.ProcessRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetCompanyMoviesRequest(CompanyID, page, language));
         }
 
         public string GetCompanyMoviesETag(int CompanyID, int page, string language)
         {
-          return this.ProcessRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language, null));
+            return ProcessRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language));
         }
 
         /// <summary>
@@ -694,7 +756,7 @@ namespace WatTmdb.V3
         /// <param name="CompanyID">Company ID</param>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbCompanyMovies GetCompanyMovies(int CompanyID, int page)
+        public MovieSearchResults GetCompanyMovies(int CompanyID, int page)
         {
             return GetCompanyMovies(CompanyID, page, Language);
         }
@@ -715,12 +777,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbGenre GetGenreList(string language)
         {
-          return this.ProcessRequest<TmdbGenre>(BuildGetGenreListRequest(language, null));
+            return ProcessRequest<TmdbGenre>(BuildGetGenreListRequest(language));
         }
 
         public string GetGenreListETag(string language)
         {
-          return this.ProcessRequestETag(BuildGetGenreListRequest(language, null));
+            return ProcessRequestETag(BuildGetGenreListRequest(language));
         }
 
         /// <summary>
@@ -746,14 +808,14 @@ namespace WatTmdb.V3
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
         /// <returns></returns>
-        public TmdbGenreMovies GetGenreMovies(int GenreID, int page, string language)
+        public MovieSearchResults GetGenreMovies(int GenreID, int page, string language)
         {
-          return this.ProcessRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language, null));
+          return ProcessRequest<MovieSearchResults>(BuildGetGenreMoviesRequest(GenreID, page, language));
         }
 
         public string GetGenreMoviesETag(int GenreID, int page, string language)
         {
-          return this.ProcessRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language, null));
+            return ProcessRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language));
         }
 
         /// <summary>
@@ -763,7 +825,7 @@ namespace WatTmdb.V3
         /// <param name="GenreID">TMDB Genre ID</param>
         /// <param name="page">Result page to retrieve (1 based)</param>
         /// <returns></returns>
-        public TmdbGenreMovies GetGenreMovies(int GenreID, int page)
+        public MovieSearchResults GetGenreMovies(int GenreID, int page)
         {
             return GetGenreMovies(GenreID, page, Language);
         }
