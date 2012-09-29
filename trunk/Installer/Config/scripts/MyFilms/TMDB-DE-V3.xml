@@ -5,7 +5,7 @@
     <URLPrefix>http://api.themoviedb.org/3/movie/</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>2.1</Version>
+    <Version>2.2</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -268,18 +268,18 @@
       <KeyMultiFanartMaxItems />
       <KeyMultiFanartLanguage />
       <KeyMultiFanartPage />
-      <KeyStartLinkTrailer Param1="" Param2="" />
-      <KeyEndLinkTrailer />
+      <KeyStartLinkTrailer Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_api.themoviedb.org_x002F_3_x002F_movie_x002F__x007C__x002F_trailers_x003F_api_key_x003D_5b8fecd0c39786077bc5af07e56fee5e">_x0022__x002C__x0022_id_x0022_:</KeyStartLinkTrailer>
+      <KeyEndLinkTrailer>_x002C_</KeyEndLinkTrailer>
       <KeyLinkTrailerIndex />
       <KeyLinkTrailerPage />
       <KeyEncodingLinkTrailer />
-      <KeyStartTrailer Param1="" Param2="" />
-      <KeyEndTrailer />
+      <KeyStartTrailer Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_www.youtube.com_x002F_watch_x003F_v_x003D__x007C_">_x0023_REGEX_x0023_youtube._x002A__x003F_source_x0022_:_x0022_</KeyStartTrailer>
+      <KeyEndTrailer>_x0022_</KeyEndTrailer>
       <KeyTrailerIndex />
-      <KeyTrailerRegExp />
+      <KeyTrailerRegExp>name_x0022_:_x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_character_x0022_:_x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_order</KeyTrailerRegExp>
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
-      <KeyTrailerPage />
+      <KeyTrailerPage>URL_x0020_Redirection_x0020_Trailer</KeyTrailerPage>
       <KeyStartCollection Param1="" Param2="">_x002C__x0022_name_x0022_:_x0022_</KeyStartCollection>
       <KeyEndCollection>_x0022_</KeyEndCollection>
       <KeyCollectionIndex />
