@@ -11,7 +11,7 @@ namespace MyFilmsPlugin.DataBase
   public class OnlineMovie
   {
     public AntMovieCatalog.MovieRow AntMovie  { get; set; }
-    public PopularMovie PopMovie { get; set; }
+    public TmdbMovieSearchResult MovieSearchResult { get; set; }
     public TmdbMovie Movie { get; set; }
     public TmdbMovieTrailers Trailers { get; set; }
     public TmdbMovieAlternateTitles AlternateTitles { get; set; }

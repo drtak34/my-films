@@ -43,6 +43,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using OnlineVideos;
   using OnlineVideos.MediaPortal1;
 
+  using WatTmdb.V3;
+
   using grabber;
   using Grabber;
   using Grabber.TMDBv3;
@@ -5603,8 +5605,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
                     {
-                      filename1 = Grabber.GrabUtil.DownloadBacdropArt(
-                        MyFilms.conf.StrPathFanart, backdrop, savetitle, true, first, out filename);
+                      filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, savetitle, true, first, out filename);
                       if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + System.IO.Path.GetFileName(filename) + "'");
                       if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / listemovies[dlg.SelectedLabel - 1].Backdrops.Count;
                       LogMyFilms.Debug("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + savetitle);
@@ -6339,6 +6340,170 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
         clearGUIProperty("logos_id2012");
+    }
+
+    internal static void Load_Detailed_TMDB(GUIListItem item)
+    {
+      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
+      string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+      LogMyFilms.Debug("GetImagesForTMDB - detected language = '" + language + "'");
+      var api = new Tmdb(MyFilms.TmdbApiKey, language); // language is optional, default is "en"
+      // TmdbConfiguration tmdbConf = api.GetConfiguration();
+      string wstring = "";
+      var movie = item.TVTag as OnlineMovie;
+
+      if (movie == null)
+      {
+        LogMyFilms.Warn("Load_Detailed_TMDB() - Failed loading details ... now clearing properties ...");
+        Init_Detailed_DB(false);
+        return;
+      }
+
+      #region always clear person properties in film details ...
+      clearGUIProperty("person.name.value");
+      clearGUIProperty("person.dateofbirth.value");
+      clearGUIProperty("person.placeofbirth.value");
+      clearGUIProperty("person.biography.value");
+      //clearGUIProperty("person.dateofdeath.value");
+      //clearGUIProperty("person.placeofdeath.value");
+      //clearGUIProperty("person.movies.value");
+      //clearGUIProperty("person.lastupdate.value");
+      #endregion
+
+      movie.Movie = api.GetMovieInfo(movie.MovieSearchResult.id, language);
+      if (string.IsNullOrEmpty(movie.Movie.overview))
+        movie.Movie = api.GetMovieInfo(movie.MovieSearchResult.id, null);
+      movie.MovieCast = api.GetMovieCast(movie.MovieSearchResult.id);
+
+      setGUIProperty("user.mastertitle.value", movie.Movie.title);
+      setGUIProperty("user.secondarytitle.value", movie.Movie.original_title);
+      setGUIProperty("db.description.value", movie.Movie.overview);
+      setGUIProperty("db.year.value", movie.Movie.release_date);
+      setGUIProperty("db.length.value", movie.Movie.runtime.ToString());
+      setGUIProperty("user.source.isonline", "available");
+      int trailers = 0;
+      try
+      {
+        trailers = movie.Trailers.youtube.Count;
+      }
+      catch (Exception) {}
+      setGUIProperty("user.sourcetrailer.isonline", (trailers > 0) ? "available" : "unavailable");
+
+      wstring = "";
+      foreach (MovieGenre genre in movie.Movie.genres)
+      {
+        if (wstring.Length > 0) wstring += ", ";
+        wstring += genre.name;
+      }
+      SetTmdbProperties("Category", wstring);
+
+      wstring = "";
+      foreach (ProductionCountry country in movie.Movie.production_countries)
+      {
+        if (wstring.Length > 0) wstring += ", ";
+        wstring += country.name;
+      }
+      SetTmdbProperties("Country", wstring);
+
+      wstring = "";
+      foreach (Cast cast in movie.MovieCast.cast)
+      {
+        if (wstring.Length > 0) wstring += ", ";
+        wstring += cast.name + " (" + cast.character + ")";
+      }
+      SetTmdbProperties("Actors", wstring);
+
+      string producer = "";
+      string director = "";
+      string writer = "";
+      foreach (Crew crew in movie.MovieCast.crew)
+      {
+        switch (crew.department)
+        {
+          case "Production":
+            if (producer.Length > 0) producer += ", ";
+            producer += crew.name + " (" + crew.job + ")";
+            break;
+          case "Directing":
+            if (director.Length > 0) director += ", ";
+            director += crew.name + " (" + crew.job + ")";
+            break;
+          case "Writing":
+            if (writer.Length > 0) writer += ", ";
+            writer += crew.name + " (" + crew.job + ")";
+            break;
+          case "Sound":
+          case "Camera":
+            break;
+        }
+      }
+      SetTmdbProperties("Director", director);
+      SetTmdbProperties("Producer", producer);
+      SetTmdbProperties("Writer", writer);
+
+      wstring = "";
+      foreach (Cast cast in movie.MovieCast.cast)
+      {
+        if (wstring.Length > 0) wstring += ", ";
+        wstring += cast.name + " (" + cast.character + ")";
+      }
+      SetTmdbProperties("Actors", wstring);
+
+      SetTmdbProperties("Rating", Math.Round(movie.Movie.vote_average, 1).ToString());
+
+      stopwatch.Stop();
+      LogMyFilms.Debug("Load_Detailed_TMDB() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
+    }
+
+    private static void SetTmdbProperties(string dbfield, string value)
+    {
+      setGUIProperty("db." + dbfield.ToLower() + ".value", value);
+      
+      if (MyFilms.conf.Stritem1.ToLower() == (dbfield.ToLower()))
+      {
+        setGUIProperty("user.item1.label", MyFilms.conf.Strlabel1);
+        if (MyFilms.conf.Stritem1.ToLower() == "date")
+          setGUIProperty("user.item1.field", "w" + MyFilms.conf.Stritem1.ToLower());
+        else
+          setGUIProperty("user.item1.field", MyFilms.conf.Stritem1.ToLower());
+        setGUIProperty("user.item1.value", value);
+      }
+      if (MyFilms.conf.Stritem2.ToLower() == (dbfield.ToLower()))
+      {
+        setGUIProperty("user.item2.label", MyFilms.conf.Strlabel2);
+        if (MyFilms.conf.Stritem2.ToLower() == "date")
+          setGUIProperty("user.item2.field", "w" + MyFilms.conf.Stritem2.ToLower());
+        else
+          setGUIProperty("user.item2.field", MyFilms.conf.Stritem2.ToLower());
+        setGUIProperty("user.item2.value", value);
+      }
+      if (MyFilms.conf.Stritem3.ToLower() == (dbfield.ToLower()))
+      {
+        setGUIProperty("user.item3.label", MyFilms.conf.Strlabel3);
+        if (MyFilms.conf.Stritem3.ToLower() == "date")
+          setGUIProperty("user.item3.field", "w" + MyFilms.conf.Stritem3.ToLower());
+        else
+          setGUIProperty("user.item3.field", MyFilms.conf.Stritem3.ToLower());
+        setGUIProperty("user.item3.value", value);
+      }
+      if (MyFilms.conf.Stritem4.ToLower() == (dbfield.ToLower()))
+      {
+        setGUIProperty("user.item4.label", MyFilms.conf.Strlabel4);
+        if (MyFilms.conf.Stritem4.ToLower() == "date")
+          setGUIProperty("user.item4.field", "w" + MyFilms.conf.Stritem4.ToLower());
+        else
+          setGUIProperty("user.item4.field", MyFilms.conf.Stritem4.ToLower());
+        setGUIProperty("user.item4.value", value);
+      }
+      if (MyFilms.conf.Stritem5.ToLower() == (dbfield.ToLower()))
+      {
+        setGUIProperty("user.item5.label", MyFilms.conf.Strlabel5);
+        if (MyFilms.conf.Stritem5.ToLower() == "date")
+          setGUIProperty("user.item5.field", "w" + MyFilms.conf.Stritem5.ToLower());
+        else
+          setGUIProperty("user.item5.field", MyFilms.conf.Stritem5.ToLower());
+        setGUIProperty("user.item5.value", value);
+      }
     }
 
     //-------------------------------------------------------------------------------------------

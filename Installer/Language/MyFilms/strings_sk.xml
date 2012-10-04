@@ -363,6 +363,11 @@
     <String id="10798803">Extended search (directories) ?</String>
     <String id="10798810">Delete movie cover from DB</String>
     <String id="10798820">Details Display Item</String>
+    <String id="10798825">Online Information</String>
+    <String id="10798826">Popular Movies</String>
+    <String id="10798827">Now Playing</String>
+    <String id="10798828">Top Rated</String>
+    <String id="10798829">Upcoming Movies</String>
     <String id="10798930">Multi User State</String>
     <String id="10798932">Alternate Titles</String>
     <String id="10798933">Virtual Path Title</String>
