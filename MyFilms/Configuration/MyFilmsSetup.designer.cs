@@ -235,15 +235,15 @@
           this.btnCreateAMCDesktopIcon = new System.Windows.Forms.Button();
           this.chkAMCUpd = new System.Windows.Forms.CheckBox();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
-          this.cbSuppress = new System.Windows.Forms.ComboBox();
+          this.cbSuppressAutomaticAction = new System.Windows.Forms.ComboBox();
           this.gpspfield = new System.Windows.Forms.GroupBox();
           this.label61 = new System.Windows.Forms.Label();
-          this.chksupplaystop = new System.Windows.Forms.CheckBox();
-          this.txtfdupdate = new System.Windows.Forms.TextBox();
-          this.cbfdupdate = new System.Windows.Forms.ComboBox();
+          this.chkSuppressPlayStopUpdateField = new System.Windows.Forms.CheckBox();
+          this.txtSuppressPlayStopValueToUpdate = new System.Windows.Forms.TextBox();
+          this.cbSuppressPlayStopFieldToUpdate = new System.Windows.Forms.ComboBox();
           this.lblUpdateValue = new System.Windows.Forms.Label();
           this.chkSuppressManual = new System.Windows.Forms.CheckBox();
-          this.chkSuppress = new System.Windows.Forms.CheckBox();
+          this.chkSuppressAutomatic = new System.Windows.Forms.CheckBox();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.btnWatchedImport = new System.Windows.Forms.Button();
           this.btnWatchedExport = new System.Windows.Forms.Button();
@@ -2222,10 +2222,10 @@
           // 
           // groupBoxDeletionOptions
           // 
-          this.groupBoxDeletionOptions.Controls.Add(this.cbSuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.cbSuppressAutomaticAction);
           this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
           this.groupBoxDeletionOptions.Controls.Add(this.chkSuppressManual);
-          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppressAutomatic);
           this.groupBoxDeletionOptions.Location = new System.Drawing.Point(354, 14);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
           this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 189);
@@ -2234,27 +2234,27 @@
           this.groupBoxDeletionOptions.Text = "Update and Deletion Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
-          // cbSuppress
+          // cbSuppressAutomaticAction
           // 
-          this.cbSuppress.Enabled = false;
-          this.cbSuppress.FormattingEnabled = true;
-          this.cbSuppress.Items.AddRange(new object[] {
+          this.cbSuppressAutomaticAction.Enabled = false;
+          this.cbSuppressAutomaticAction.FormattingEnabled = true;
+          this.cbSuppressAutomaticAction.Items.AddRange(new object[] {
             "Delete DB Entry only",
             "Delete both DB entry and Movie file",
             "Update DB - Keep movie file",
             "Update DB entry - Delete Movie File"});
-          this.cbSuppress.Location = new System.Drawing.Point(174, 40);
-          this.cbSuppress.Name = "cbSuppress";
-          this.cbSuppress.Size = new System.Drawing.Size(181, 21);
-          this.cbSuppress.TabIndex = 20;
-          this.cbSuppress.SelectedIndexChanged += new System.EventHandler(this.cbSuppress_SelectedIndexChanged);
+          this.cbSuppressAutomaticAction.Location = new System.Drawing.Point(174, 40);
+          this.cbSuppressAutomaticAction.Name = "cbSuppressAutomaticAction";
+          this.cbSuppressAutomaticAction.Size = new System.Drawing.Size(181, 21);
+          this.cbSuppressAutomaticAction.TabIndex = 20;
+          this.cbSuppressAutomaticAction.SelectedIndexChanged += new System.EventHandler(this.cbSuppress_SelectedIndexChanged);
           // 
           // gpspfield
           // 
           this.gpspfield.Controls.Add(this.label61);
-          this.gpspfield.Controls.Add(this.chksupplaystop);
-          this.gpspfield.Controls.Add(this.txtfdupdate);
-          this.gpspfield.Controls.Add(this.cbfdupdate);
+          this.gpspfield.Controls.Add(this.chkSuppressPlayStopUpdateField);
+          this.gpspfield.Controls.Add(this.txtSuppressPlayStopValueToUpdate);
+          this.gpspfield.Controls.Add(this.cbSuppressPlayStopFieldToUpdate);
           this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Enabled = false;
           this.gpspfield.Location = new System.Drawing.Point(20, 78);
@@ -2274,35 +2274,35 @@
           this.label61.TabIndex = 21;
           this.label61.Text = "Update Value";
           // 
-          // chksupplaystop
+          // chkSuppressPlayStopUpdateField
           // 
-          this.chksupplaystop.AutoSize = true;
-          this.chksupplaystop.Enabled = false;
-          this.chksupplaystop.Location = new System.Drawing.Point(13, 22);
-          this.chksupplaystop.Name = "chksupplaystop";
-          this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
-          this.chksupplaystop.TabIndex = 19;
-          this.chksupplaystop.Text = "Update Field when player finishes";
-          this.ToolTip1.SetToolTip(this.chksupplaystop, "You can update a DB field with a specified value after a movie is watched.");
-          this.chksupplaystop.UseVisualStyleBackColor = true;
-          this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
+          this.chkSuppressPlayStopUpdateField.AutoSize = true;
+          this.chkSuppressPlayStopUpdateField.Enabled = false;
+          this.chkSuppressPlayStopUpdateField.Location = new System.Drawing.Point(13, 22);
+          this.chkSuppressPlayStopUpdateField.Name = "chkSuppressPlayStopUpdateField";
+          this.chkSuppressPlayStopUpdateField.Size = new System.Drawing.Size(184, 17);
+          this.chkSuppressPlayStopUpdateField.TabIndex = 19;
+          this.chkSuppressPlayStopUpdateField.Text = "Update Field when player finishes";
+          this.ToolTip1.SetToolTip(this.chkSuppressPlayStopUpdateField, "You can update a DB field with a specified value after a movie is watched.");
+          this.chkSuppressPlayStopUpdateField.UseVisualStyleBackColor = true;
+          this.chkSuppressPlayStopUpdateField.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
           // 
-          // txtfdupdate
+          // txtSuppressPlayStopValueToUpdate
           // 
-          this.txtfdupdate.Location = new System.Drawing.Point(142, 60);
-          this.txtfdupdate.Name = "txtfdupdate";
-          this.txtfdupdate.Size = new System.Drawing.Size(115, 20);
-          this.txtfdupdate.TabIndex = 16;
+          this.txtSuppressPlayStopValueToUpdate.Location = new System.Drawing.Point(142, 60);
+          this.txtSuppressPlayStopValueToUpdate.Name = "txtSuppressPlayStopValueToUpdate";
+          this.txtSuppressPlayStopValueToUpdate.Size = new System.Drawing.Size(115, 20);
+          this.txtSuppressPlayStopValueToUpdate.TabIndex = 16;
           // 
-          // cbfdupdate
+          // cbSuppressPlayStopFieldToUpdate
           // 
-          this.cbfdupdate.FormattingEnabled = true;
-          this.cbfdupdate.Location = new System.Drawing.Point(13, 60);
-          this.cbfdupdate.Name = "cbfdupdate";
-          this.cbfdupdate.Size = new System.Drawing.Size(123, 21);
-          this.cbfdupdate.Sorted = true;
-          this.cbfdupdate.TabIndex = 15;
-          this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
+          this.cbSuppressPlayStopFieldToUpdate.FormattingEnabled = true;
+          this.cbSuppressPlayStopFieldToUpdate.Location = new System.Drawing.Point(13, 60);
+          this.cbSuppressPlayStopFieldToUpdate.Name = "cbSuppressPlayStopFieldToUpdate";
+          this.cbSuppressPlayStopFieldToUpdate.Size = new System.Drawing.Size(123, 21);
+          this.cbSuppressPlayStopFieldToUpdate.Sorted = true;
+          this.cbSuppressPlayStopFieldToUpdate.TabIndex = 15;
+          this.cbSuppressPlayStopFieldToUpdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
           // lblUpdateValue
           // 
@@ -2327,17 +2327,17 @@
           this.chkSuppressManual.UseVisualStyleBackColor = true;
           this.chkSuppressManual.CheckedChanged += new System.EventHandler(this.chkSuppressManual_CheckedChanged);
           // 
-          // chkSuppress
+          // chkSuppressAutomatic
           // 
-          this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(20, 42);
-          this.chkSuppress.Name = "chkSuppress";
-          this.chkSuppress.Size = new System.Drawing.Size(148, 17);
-          this.chkSuppress.TabIndex = 0;
-          this.chkSuppress.Text = "Enable automatic deletion";
-          this.ToolTip1.SetToolTip(this.chkSuppress, resources.GetString("chkSuppress.ToolTip"));
-          this.chkSuppress.UseVisualStyleBackColor = true;
-          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
+          this.chkSuppressAutomatic.AutoSize = true;
+          this.chkSuppressAutomatic.Location = new System.Drawing.Point(20, 42);
+          this.chkSuppressAutomatic.Name = "chkSuppressAutomatic";
+          this.chkSuppressAutomatic.Size = new System.Drawing.Size(148, 17);
+          this.chkSuppressAutomatic.TabIndex = 0;
+          this.chkSuppressAutomatic.Text = "Enable automatic deletion";
+          this.ToolTip1.SetToolTip(this.chkSuppressAutomatic, resources.GetString("chkSuppressAutomatic.ToolTip"));
+          this.chkSuppressAutomatic.UseVisualStyleBackColor = true;
+          this.chkSuppressAutomatic.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
           // 
           // groupBox2
           // 
@@ -6739,12 +6739,12 @@
         private CheckBox chkEnhancedWatchedStatusHandling;
         private CheckBox CheckWatched;
         private GroupBox groupBoxDeletionOptions;
-        private CheckBox chkSuppress;
+        private CheckBox chkSuppressAutomatic;
         private GroupBox gpspfield;
-        private CheckBox chksupplaystop;
-        private TextBox txtfdupdate;
+        private CheckBox chkSuppressPlayStopUpdateField;
+        private TextBox txtSuppressPlayStopValueToUpdate;
         private Label lblUpdateValue;
-        private ComboBox cbfdupdate;
+        private ComboBox cbSuppressPlayStopFieldToUpdate;
         private TabPage Tab_Display;
         private TabPage Tab_Views;
         private GroupBox groupBox_DefaultView;
@@ -7028,7 +7028,7 @@
         private TextBox AntLabel1;
         private TextBox View_Dflt_Text;
         private CheckBox chkShowEmpty;
-        private ComboBox cbSuppress;
+        private ComboBox cbSuppressAutomaticAction;
         private PictureBox AntViewsImage;
         private Button buttonResetImage;
         private Label labelViewLabel;

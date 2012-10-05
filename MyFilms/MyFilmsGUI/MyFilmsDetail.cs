@@ -527,10 +527,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (facadeMovieThumbs != null && facadeMovieThumbs.ThumbnailLayout != null)
       {
-        facadeMovieThumbs.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
-        // facadeMovieThumbs.Clear();
-        GUIControl.ClearControl(GetID, facadeMovieThumbs.GetID);
-        GUIControl.HideControl(GetID, (int)Controls.CTRL_MovieThumbsFacade);
+        try
+        {
+          facadeMovieThumbs.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+          // facadeMovieThumbs.Clear();
+          GUIControl.ClearControl(GetID, facadeMovieThumbs.GetID);
+          GUIControl.HideControl(GetID, (int)Controls.CTRL_MovieThumbsFacade);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug("OnPageLoad() - skin facade control for movie thumbs not initialized");
+        }
       }
       // if (ImgMovieThumbsDir != null && ImgMovieThumbsDir.Visible) ImgMovieThumbsDir.Visible = false;
 
@@ -943,7 +950,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Add("userrating");
           }
 
-          if (MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual)
+          if (MyFilms.conf.StrSuppressAutomatic || MyFilms.conf.StrSuppressManual)
           {
             dlgmenu.Add(GUILocalizeStrings.Get(1079830)); // Delete movie ...
             choiceViewMenu.Add("delete");
@@ -2721,8 +2728,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
       //    if (sr[MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
       //      played = true;
-      //  //if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-      //  //  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+      //  //if (MyFilms.conf.StrSuppressAutomatic && MyFilms.conf.StrSuppressField.Length > 0)
+      //  //  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSuppressPlayStopUpdateUserField))
       //  //    played = true;
       //}
       //movie.Watched = played;
@@ -2806,7 +2813,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static void SuppressEntry(DataRow row)
     {
 
-      if (MyFilms.conf.StrSuppressType == "2" || MyFilms.conf.StrSuppressType == "4")
+      if (MyFilms.conf.StrSuppressAutomaticActionType == "2" || MyFilms.conf.StrSuppressAutomaticActionType == "4")
       {
         var newItems = new ArrayList();
         bool noResumeMovie = true;
@@ -2826,19 +2833,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      if (MyFilms.conf.StrSuppressType == "1" || MyFilms.conf.StrSuppressType == "2")
+      if (MyFilms.conf.StrSuppressAutomaticActionType == "1" || MyFilms.conf.StrSuppressAutomaticActionType == "2")
       {
         string wdelTitle = row[MyFilms.conf.StrTitle1].ToString();
         row.Delete();
-
+        MyFilms.conf.StrIndex = -1;
         LogMyFilms.Info("Database movie deleted : " + wdelTitle);
       }
-      else
-      {
-        row[MyFilms.conf.StrSuppressField] = MyFilms.conf.StrSuppressValue;
-        LogMyFilms.Info("Database movie updated for deletion : " + row[MyFilms.conf.StrTitle1]);
-      }
-      Update_XML_database();
+      // Update_XML_database(); // already done on calling method ...
     }
 
     //-------------------------------------------------------------------------------------------
@@ -8216,12 +8218,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (type != g_Player.MediaType.Video || filename.EndsWith("&txe=.wmv")) return;
       if (HandleTrailer()) return;
 
-      //if (isTrailer)
-      //{
-      //  LogMyFilms.Debug("Skipping UpdateOnEnd - reason: isTrailer");
-      //  isTrailer = false;
-      //  return;
-      //}
       try
       {
         string otitle = MyFilms.conf.StrPlayedRow["OriginalTitle"].ToString();
@@ -8408,34 +8404,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
         }
 
-        if (MyFilms.conf.CheckWatched)
+        if (MyFilms.conf.CheckWatched || (MyFilms.conf.CheckWatchedPlayerStopped && (ended || (stopped && playTimePercentage >= 80))))
         {
+          #region update watched status
           if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
-            // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
-            AddWatchedCount(MyFilms.conf.StrPlayedRow, MyFilms.conf.StrUserProfileName);
-          }
-          else
-          {
-            MyFilms.conf.StrPlayedRow[MyFilms.conf.StrWatchedField] = "True";
-          }
-          LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie start'");
-        }
-        
-        if (ended)
-        {
-          if (MyFilms.conf.StrSupPlayer)
-          {
-            // SuppressEntry(MyFilms.conf.StrPlayedRows, MyFilms.conf.StrPlayedIndex);
-            SuppressEntry(MyFilms.conf.StrPlayedRow);
-          }
-        }
-        
-        if (ended && MyFilms.conf.CheckWatchedPlayerStopped)
-        {
-          if (MyFilms.conf.EnhancedWatchedStatusHandling)
-          {
-            // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
             AddWatchedCount(MyFilms.conf.StrPlayedRow, MyFilms.conf.StrUserProfileName);
           }
           else
@@ -8443,34 +8416,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilms.conf.StrPlayedRow[MyFilms.conf.StrWatchedField] = "True";
           }
           LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
-        }
-        
-        if (stopped && MyFilms.conf.CheckWatchedPlayerStopped && playTimePercentage >= 80)
-        {
-          if (MyFilms.conf.EnhancedWatchedStatusHandling)
-          {
-            // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
-            AddWatchedCount(MyFilms.conf.StrPlayedRow, MyFilms.conf.StrUserProfileName);
-          }
-          else
-          {
-            MyFilms.conf.StrPlayedRow[MyFilms.conf.StrWatchedField] = "True";
-          }
-          LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
+          #endregion
         }
 
-        if ((MyFilms.conf.CheckWatched) || (MyFilms.conf.CheckWatchedPlayerStopped) || (MyFilms.conf.StrSupPlayer))
-        {
-          Update_XML_database();
-          if (GetID == MyFilms.ID_MyFilmsDetail)  // only update GUI, when currently active
-            afficher_detail(true);
-          //GUIWindowManager.Process(); // Enabling creates lock in handler !!!
-        }
-
-        MFMovie movie = GetMovieFromRecord(MyFilms.conf.StrPlayedRow);
+        #region tell any listeners that movie is watched
+        MFMovie movie = GetMovieFromRecord(MyFilms.conf.StrPlayedRow); // create movie before DB record is deleted ...
         if (ended || (stopped && playTimePercentage >= 80))
         {
-          // tell any listeners that movie is watched
           if (MovieWatched != null && MyFilms.conf.AllowTraktSync)
           {
             MovieWatched(movie);
@@ -8479,12 +8431,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          // tell any listeners that movie is watched
           if (MovieStopped != null && MyFilms.conf.AllowTraktSync)
           {
             MovieStopped(movie);
             LogMyFilms.Debug("UpdateOnPlayEnd(): Fired 'MovieStopped' event with movie = '" + movie.Title + "'");
           }
+        }
+        #endregion
+
+        if (ended)
+        {
+          #region do automatic updates & deletions & update on userdefined field with userdefined value
+          if (MyFilms.conf.StrSuppressPlayStopUpdateUserField)
+          {
+            MyFilms.conf.StrPlayedRow[MyFilms.conf.StrSuppressField] = MyFilms.conf.StrSuppressValue;
+            LogMyFilms.Info("Database movie updated for playbackstopped : " + MyFilms.conf.StrPlayedRow[MyFilms.conf.StrTitle1]);
+          }
+          if (MyFilms.conf.StrSuppressAutomatic)
+          {
+            SuppressEntry(MyFilms.conf.StrPlayedRow);
+          }
+          #endregion
+        }
+
+        if (MyFilms.conf.CheckWatched || MyFilms.conf.CheckWatchedPlayerStopped || MyFilms.conf.StrSuppressPlayStopUpdateUserField || MyFilms.conf.StrSuppressAutomatic)
+        {
+          Update_XML_database();
+          if (GetID == MyFilms.ID_MyFilmsDetail)  // only update GUI, when currently active
+            afficher_detail(true);
+          //GUIWindowManager.Process(); // Enabling creates lock in handler !!!
         }
 
         MyFilms.conf.StrPlayedRow = null;
