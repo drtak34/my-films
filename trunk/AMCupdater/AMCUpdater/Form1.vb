@@ -1021,10 +1021,11 @@ Public Class Form1
             With OpenFileDialog1
                 If Not String.IsNullOrEmpty(currentPath) Then
                     .InitialDirectory = Path.GetDirectoryName(currentPath)
+                    .FileName = currentPath
                 Else
                     .InitialDirectory = My.Application.Info.DirectoryPath
+                    .FileName = "AMCUpdater_Excluded_Files.txt"
                 End If
-                .FileName = "AMCUpdater_Excluded_Files.txt"
                 .CheckFileExists = False
                 .CheckPathExists = True
                 .DefaultExt = "txt"
