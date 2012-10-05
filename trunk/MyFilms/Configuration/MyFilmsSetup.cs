@@ -254,7 +254,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched")
           {
-            cbfdupdate.Items.Add(dc.ColumnName);
+            cbSuppressPlayStopFieldToUpdate.Items.Add(dc.ColumnName);
             cbWatched.Items.Add(dc.ColumnName);
             CmdPar.Items.Add(dc.ColumnName);
           }
@@ -617,17 +617,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
         }
       }
-      if ((chksupplaystop.Checked) && (!chkSuppress.Checked))
+      if (chkSuppressPlayStopUpdateField.Checked && !chkSuppressAutomatic.Checked)
       {
         MessageBox.Show("Suppress action must be enabled for that choice !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        chksupplaystop.Focus();
+        chkSuppressPlayStopUpdateField.Focus();
         return;
       }
-      if (chkSuppress.Checked)
-        if ((cbSuppress.SelectedIndex == 2 || cbSuppress.SelectedIndex == 3) && (cbfdupdate.Text.Length == 0 || txtfdupdate.Text.Length == 0))
+      if (chkSuppressAutomatic.Checked)
+        if ((cbSuppressAutomaticAction.SelectedIndex == 2 || cbSuppressAutomaticAction.SelectedIndex == 3) && (cbSuppressPlayStopFieldToUpdate.Text.Length == 0 || txtSuppressPlayStopValueToUpdate.Text.Length == 0))
         {
           MessageBox.Show("For updating entry, field and value are mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-          cbfdupdate.Focus();
+          cbSuppressPlayStopFieldToUpdate.Focus();
           return;
         }
       if ((chkFanart.Checked) && (MesFilmsFanart.Text.Length == 0))
@@ -655,10 +655,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
 
-      if (chkSuppress.Checked && cbSuppress.SelectedIndex == -1)
+      if (chkSuppressAutomatic.Checked && cbSuppressAutomaticAction.SelectedIndex == -1)
       {
         General.SelectedIndex = 4;
-        cbSuppress.Focus();
+        cbSuppressAutomaticAction.Focus();
         MessageBox.Show("You have enabled the automatic deletion after a movie is watched - select the proper action !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
       }
       #endregion
@@ -916,13 +916,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewsDfltAll", chkDfltViewsAll.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "ViewsShowIndexedImages", chkShowIndexedImgInIndViews.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LastID", "7986");
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Suppress", chkSuppress.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Suppress", chkSuppressAutomatic.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressManual", chkSuppressManual.Checked);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressPlayed", chksupplaystop.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressPlayed", chkSuppressPlayStopUpdateField.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "WatchedField", cbWatched.Text);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressField", cbfdupdate.Text);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", txtfdupdate.Text);
-      switch (cbSuppress.SelectedIndex)
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressField", cbSuppressPlayStopFieldToUpdate.Text);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", txtSuppressPlayStopValueToUpdate.Text);
+      switch (cbSuppressAutomaticAction.SelectedIndex)
       {
         case 0:
           XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1"); // delete DB entry only
@@ -1303,27 +1303,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", false);
       chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", false);
       txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", string.Empty);
-      chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Suppress", false);
+      chkSuppressAutomatic.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Suppress", false);
       chkSuppressManual.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressManual", false);
-      chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressPlayed", false);
+      chkSuppressPlayStopUpdateField.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressPlayed", false);
       cbWatched.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WatchedField", "Checked");
-      cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressField", string.Empty);
-      txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", string.Empty);
+      cbSuppressPlayStopFieldToUpdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressField", string.Empty);
+      txtSuppressPlayStopValueToUpdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressValue", string.Empty);
       chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", true);
       string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SuppressType", "1");
       switch (wsuppressType)
       {
         case "1":
-          cbSuppress.SelectedIndex = 0;
+          cbSuppressAutomaticAction.SelectedIndex = 0;
           break;
         case "2":
-          cbSuppress.SelectedIndex = 1;
+          cbSuppressAutomaticAction.SelectedIndex = 1;
           break;
         case "3":
-          cbSuppress.SelectedIndex = 2;
+          cbSuppressAutomaticAction.SelectedIndex = 2;
           break;
         default:
-          cbSuppress.SelectedIndex = 3;
+          cbSuppressAutomaticAction.SelectedIndex = 3;
           break;
       }
       Dwp.Text = crypto.Decrypter(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Dwp", string.Empty));
@@ -1531,10 +1531,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
           {
-            tmpValue = cbfdupdate.Text;
-            if (cbfdupdate.Items.Contains(dc.ColumnName)) cbfdupdate.Items.Remove(dc.ColumnName);
-            if (isXtended) cbfdupdate.Items.Add(dc.ColumnName);
-            cbfdupdate.Text = tmpValue;
+            tmpValue = cbSuppressPlayStopFieldToUpdate.Text;
+            if (cbSuppressPlayStopFieldToUpdate.Items.Contains(dc.ColumnName)) cbSuppressPlayStopFieldToUpdate.Items.Remove(dc.ColumnName);
+            if (isXtended) cbSuppressPlayStopFieldToUpdate.Items.Add(dc.ColumnName);
+            cbSuppressPlayStopFieldToUpdate.Text = tmpValue;
 
             tmpValue = cbWatched.Text;
             if (cbWatched.Items.Contains(dc.ColumnName)) cbWatched.Items.Remove(dc.ColumnName);
@@ -1757,13 +1757,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       ItemSearchGrabberScriptsFilter.ResetText();
       cbPictureHandling.ResetText();
       SearchFileName.Checked = false;
-      chkSuppress.Checked = false;
+      chkSuppressAutomatic.Checked = false;
       chkSuppressManual.Checked = false;
-      chksupplaystop.Checked = false;
-      cbfdupdate.ResetText();
+      chkSuppressPlayStopUpdateField.Checked = false;
+      cbSuppressPlayStopFieldToUpdate.ResetText();
       cbWatched.ResetText();
-      txtfdupdate.ResetText();
-      cbSuppress.ResetText();
+      txtSuppressPlayStopValueToUpdate.ResetText();
+      cbSuppressAutomaticAction.ResetText();
       SearchSubDirs.Checked = false;
       SearchOnlyExactMatches.Checked = false;
       SearchSubDirsTrailer.Checked = false;
@@ -3531,30 +3531,30 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     {
       if (chkSuppressManual.Checked) chkSuppressManual.Checked = false;
 
-      if (chkSuppress.Checked)
+      if (chkSuppressAutomatic.Checked)
       {
-        cbSuppress.Enabled = true;
+        cbSuppressAutomaticAction.Enabled = true;
         gpspfield.Enabled = true;
-        chksupplaystop.Enabled = true;
+        chkSuppressPlayStopUpdateField.Enabled = true;
       }
       else
       {
-        cbSuppress.Enabled = false;
-        chksupplaystop.Checked = false;
+        cbSuppressAutomaticAction.Enabled = false;
+        chkSuppressPlayStopUpdateField.Checked = false;
         gpspfield.Enabled = false;
-        chksupplaystop.Enabled = false;
+        chkSuppressPlayStopUpdateField.Enabled = false;
       }
 
     }
 
     private void chkSuppressManual_CheckedChanged(object sender, EventArgs e)
     {
-      if (chkSuppress.Checked) chkSuppress.Checked = false;
+      if (chkSuppressAutomatic.Checked) chkSuppressAutomatic.Checked = false;
     }
 
     private void cbSuppress_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if ((cbSuppress.SelectedIndex == 2) || (cbSuppress.SelectedIndex == 3))
+      if ((cbSuppressAutomaticAction.SelectedIndex == 2) || (cbSuppressAutomaticAction.SelectedIndex == 3))
         gpspfield.Enabled = true;
       else
         gpspfield.Enabled = false;
@@ -3562,20 +3562,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void cbfdupdate_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbfdupdate.SelectedItem.ToString() == "Checked" && !(load))
+      if (cbSuppressPlayStopFieldToUpdate.SelectedItem.ToString() == "Checked" && !(load))
       {
         General.SelectTab(4);
-        cbfdupdate.Focus();
+        cbSuppressPlayStopFieldToUpdate.Focus();
         MessageBox.Show("Be carefull, if you use the field 'Checked' for deleted movies, you cann't get any difference between deleted and launching movies !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
     }
 
     private void chksupplaystop_CheckedChanged(object sender, EventArgs e)
     {
-      if (chksupplaystop.Checked && !(load))
+      if (chkSuppressPlayStopUpdateField.Checked && !(load))
       {
         General.SelectTab(4);
-        chksupplaystop.Focus();
+        chkSuppressPlayStopUpdateField.Focus();
         MessageBox.Show("Be carefull, that deletion action'll be done each time ended watching movie !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
     }

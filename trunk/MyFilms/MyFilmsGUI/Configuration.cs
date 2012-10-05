@@ -300,10 +300,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         StrIdentLabel = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntIdentLabel", string.Empty);
         StrLogos = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Logos", false);
-        StrSuppress = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Suppress", false);
+        StrSuppressAutomatic = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Suppress", false);
         StrSuppressManual = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressManual", false);
-        StrSupPlayer = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressPlayed", false);
-        StrSuppressType = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressType", string.Empty);
+        StrSuppressPlayStopUpdateUserField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressPlayed", false);
+        StrSuppressAutomaticActionType = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressType", string.Empty);
         StrWatchedField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
         StrSuppressField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressField", string.Empty);
         StrSuppressValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressValue", string.Empty);
@@ -766,12 +766,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool AllowRecentlyAddedApi { get; set; }
     public bool OnlyTitleList { get; set; }
     public bool StrLogos { get; set; }
-    public bool StrSuppress { get; set; }
+    public bool StrSuppressAutomatic { get; set; }
     public bool StrSuppressManual { get; set; }
     public bool EnhancedWatchedStatusHandling { get; set; }
     public string StrUserProfileName { get; set; }
     public bool StrECoptionStoreTaglineInDescription { get; set; }
-    public bool StrSupPlayer { get; set; }
+    public bool StrSuppressPlayStopUpdateUserField { get; set; }
     public string StrSelect { get; set; }
     public string StrDirStor { get; set; }
     public string StrDirStorTrailer { get; set; }
@@ -906,7 +906,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool StrAMCUpd { get; set; }
     public string StrAMCUpd_cnf { get; set; }
     public string StrSuppressPlayed { get; set; }
-    public string StrSuppressType { get; set; }
+    public string StrSuppressAutomaticActionType { get; set; }
     public string StrSuppressField { get; set; }
     public string StrSuppressValue { get; set; }
     public string StrWatchedField { get; set; }

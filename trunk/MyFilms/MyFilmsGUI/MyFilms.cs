@@ -726,7 +726,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CleanOrphanedDBlocks();
 
       // Fanart Timer
-      _fanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
+      _fanartTimer = new Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
 
       // Set Variable for FirstTimeView Setup
       InitialStart = true;
@@ -3422,9 +3422,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
                   item.IsPlayed = true;
             }
-            if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+            if (MyFilms.conf.StrSuppressAutomatic && MyFilms.conf.StrSuppressField.Length > 0)
               if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue) &&
-                  (MyFilms.conf.StrSupPlayer)) item.IsPlayed = true;
+                  (MyFilms.conf.StrSuppressPlayStopUpdateUserField)) item.IsPlayed = true;
             #endregion
 
             #region Availability Status
@@ -5465,7 +5465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var choiceViewGlobalOptions = new List<string>();
 
       // Change global Unwatchedfilteroption
-      // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSupPlayer))// Make it conditoional, so only displayed, if options enabled in setup !
+      // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSuppressPlayStopUpdateUserField))// Make it conditoional, so only displayed, if options enabled in setup !
       if (MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
       if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
       choiceViewGlobalOptions.Add("globalunwatchedfilter");
@@ -10873,7 +10873,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region Moviecontext
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
       {
-        if (MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual)
+        if (MyFilms.conf.StrSuppressAutomatic || MyFilms.conf.StrSuppressManual)
         {
           dlg.Add(GUILocalizeStrings.Get(1079830));
           updChoice.Add("suppress");
@@ -11924,7 +11924,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgupdate.Reset();
           dlgupdate.SetHeading(GUILocalizeStrings.Get(1079892)); // Update ...
 
-          if ((MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual) && this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
+          if ((MyFilms.conf.StrSuppressAutomatic || MyFilms.conf.StrSuppressManual) && this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
           {
             dlg.Add(GUILocalizeStrings.Get(1079830));
             updChoice.Add("suppress");
@@ -11959,7 +11959,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           List<string> choiceViewGlobalOptions = new List<string>();
 
           // Change global Unwatchedfilteroption
-          // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSupPlayer))// Make it conditoional, so only displayed, if options enabled in setup !
+          // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSuppressPlayStopUpdateUserField))// Make it conditoional, so only displayed, if options enabled in setup !
           if (MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
           if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("globalunwatchedfilter");
