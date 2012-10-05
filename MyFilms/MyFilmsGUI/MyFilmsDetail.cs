@@ -2617,18 +2617,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Menu_LoadPersonImages()
     {
-      Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-      string personartworkpath = string.Empty;
-      Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-      string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
-      if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
-      {
-        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.Year.ToString() + "'");
-        personartworkpath = MyFilms.conf.StrPathArtist;
-        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
-        doUpdateDetailsViewByFinishEvent = true;
-        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
-      }
+      AddPersonsToDownloadQueue();
+
+      #region old method via fanart loader framework (disabled)
+      //Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+      //string personartworkpath = string.Empty;
+      //Searchtitles sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
+      //string imdbid = GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
+      //if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
+      //{
+      //  LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - director: '" + sTitles.Director + "' - year: '" + sTitles.Year.ToString() + "'");
+      //  personartworkpath = MyFilms.conf.StrPathArtist;
+      //  LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
+      //  doUpdateDetailsViewByFinishEvent = true;
+      //  Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
+      //}
+      #endregion
     }
 
     private void TraktShout(MFMovie movie)

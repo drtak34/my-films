@@ -10884,10 +10884,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
           updChoice.Add("personimages");
 
-          if (MyFilmsDetail.ExtendedStartmode("Dadeo test for loading person images with backgroundworker queue"))
+          if (MyFilmsDetail.ExtendedStartmode("old person images loader"))
           {
-            dlg.Add(GUILocalizeStrings.Get(1079900) + " (test Dadeo)"); // Download person images (selected film)
-            updChoice.Add("personimagestest");
+            dlg.Add(GUILocalizeStrings.Get(1079900) + " (based on film search)"); // Download person images (selected film)
+            updChoice.Add("personimagesold");
           }
         }
 
@@ -11850,7 +11850,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
 
-        case "personimages":
+        case "personimagesold": // old version based on fanart loader framework - moved to test mode
           conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
           conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
           if (!MyFilmsDetail.IsInternetConnectionAvailable())
@@ -11871,7 +11871,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
 
-        case "personimagestest":
+        case "personimages":
           conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
           conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
           MyFilmsDetail.AddPersonsToDownloadQueue();
