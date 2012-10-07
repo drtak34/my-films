@@ -18,7 +18,6 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Resources\MyFilmsIcon.ico</ApplicationIcon>
-    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -236,6 +235,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="DataBase\Trailer.cs" />
     <Compile Include="Utils\Cornerstone.MP\AsyncImageResource.cs" />
     <Compile Include="Utils\Cornerstone.MP\Extensions\GUIFacadeControlExtensions.cs" />
     <Compile Include="Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />

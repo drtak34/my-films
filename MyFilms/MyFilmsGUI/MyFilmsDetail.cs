@@ -253,19 +253,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
 
     #endregion
-    public static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the  downloading from a queue for e.g. actor images
+    
+    internal static BackgroundWorker downloadingWorker = new BackgroundWorker(); // to do the  downloading from a queue for e.g. actor images
 
     static Queue<DbPersonInfo> PersonstoDownloadQueue = new Queue<DbPersonInfo>();
-    // private object locker = new object();
 
     internal static List<string> theOnlineVideosViews = new List<string>();
     internal static List<KeyValuePair<string, string>> onlineVideosViews = new List<KeyValuePair<string, string>>();
 
     public MyFilmsDetail()
     {
-      //
-      // TODO: Add constructor logic here
-      //
       // lets set up the downloader            
       downloadingWorker.WorkerSupportsCancellation = true;
       downloadingWorker.WorkerReportsProgress = true;
@@ -287,7 +284,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void downloadingWorker_DoWork(object sender, DoWorkEventArgs e)
     {
-      TheMoviedb tmdbapi = new TheMoviedb();
+      var tmdbapi = new TheMoviedb();
       do
       {
         if (downloadingWorker.CancellationPending)
@@ -306,6 +303,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         try
         {
+          #region download person image
+
           #region experimental TMDB v3 code...
           //Grabber.TMDBv3.Tmdb api = new Grabber.TMDBv3.Tmdb("apikey", "de"); // language is optional, default is "en"
           //TmdbConfiguration tmdbConf = api.GetConfiguration();
@@ -386,11 +385,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (!bDownloadSuccess) // try IMDB, if TMDB was not successful !
+          if (!bDownloadSuccess)
           {
+            #region try IMDB, if TMDB was not successful !
             // LogMyFilms.Debug("downloadingWorker_DoWork() - TMDB unsuccessful - try IMDB ...");
             bDownloadSuccess = true;
-            IMDB imdb = new IMDB();
+            var imdb = new IMDB();
             imdb.FindActor(f.Name);
 
             if (imdb.Count == 0)
@@ -402,7 +402,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               if (imdb[0].URL.Length != 0)
               {
-                IMDBActor imdbActor = new IMDBActor();
+                var imdbActor = new IMDBActor();
                 //#if MP1X
                 //                    _imdb.GetActorDetails(_imdb[0], out imdbActor);
                 //#else
@@ -428,6 +428,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 bDownloadSuccess = false;
               }
             }
+            #endregion
+
             if (downloadingWorker.CancellationPending)
             {
               LogMyFilms.Debug("cancel person image download - last person: " + f.Name);
@@ -441,6 +443,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           LogMyFilms.Debug("Result of image download for '" + f.Name + "': success = '" + bDownloadSuccess + "'");
           if (bDownloadSuccess) downloadingWorker.ReportProgress(0, f.Name);
+          #endregion
         }
         catch (Exception ex)
         {
@@ -709,9 +712,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           afficher_detail(true);
           if (MyFilms.conf.PersonsEnableDownloads) AddPersonsToDownloadQueue(); // add persons of current movie to download queue
           return;
-
-        default:
-          break;
         #endregion
       }
       base.OnAction(actionType);
@@ -858,9 +858,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             case (int)Controls.CTRL_BtnActors:
               GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
               return true;
-
-            default:
-              break;
             #endregion
           }
           base.OnMessage(messageType);
@@ -2384,7 +2381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private void LaunchOnlineVideos(string site)
+    internal void LaunchOnlineVideos(string site)
     {
       string titleextension = string.Empty;
       string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
@@ -2404,10 +2401,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "YouTube":
           titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer" + ((MyFilms.conf.GrabberOverrideLanguage.Length > 0) ? (" " + MyFilms.conf.GrabberOverrideLanguage) : "");
           break;
+        case "YouTubeMore":
+          titleextension = " trailer";
+          break;
         case "iTunes Movie Trailers":
         case "IMDb Movie Trailers":
-          break;
-        default:
           break;
       }
 
@@ -2457,14 +2455,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         OnlineVideoSettings onlineVideos = OnlineVideos.OnlineVideoSettings.Instance;
         onlineVideos.LoadSites();
 
-        foreach (SiteSettings site in onlineVideos.SiteSettingsList)
+        foreach (var view in from site in onlineVideos.SiteSettingsList where site.IsEnabled select new KeyValuePair<string, string>(site.Name, site.Name))
         {
-          // just get a list of enabled sites
-          if (site.IsEnabled)
-          {
-            var view = new KeyValuePair<string, string>(site.Name, site.Name);
-            onlineVideosViews.Add(view);
-          }
+          onlineVideosViews.Add(view);
         }
       }
       return onlineVideosViews;
@@ -3216,8 +3209,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case GrabType.Photos:
         case GrabType.Trailers:
           break;
-        default:
-          break;
       }
 
       // check, if it meets filter criteria
@@ -3313,8 +3304,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               case GrabType.MultiCovers:
                 displayNamePost = script.Type.ToLower().Contains("multicovers") ? " - (Multi Cover)" : " - (Single Cover)";
-                break;
-              default:
                 break;
             }
             if (ShouldGrabberBeAdded(script, grabtype, showAll))
@@ -4453,8 +4442,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             catch (Exception ex) { LogMyFilms.Debug("Error deleting tmp file: '" + tmpPictureCollection + "' - Exception: " + ex); }
           }
           #endregion
-          break;
-        default:
           break;
       }
       // update catalog entry in memory
@@ -5965,8 +5952,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case Configuration.CatalogType.XBMCnfoReader: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
             break;
 
-          default:
-            break;
         }
         if ((tmpconf.StrFanartDflt) && !(isGroupView) && System.IO.File.Exists(filecover))
         {
@@ -6948,10 +6933,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
               case "imdb_id":
                 #region imdb_id
-                if (MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0)
-                  MyFilms.currentMovie.IMDBNumber = MyFilms.r[itemId][dc.ColumnName].ToString();
-                else
-                  MyFilms.currentMovie.IMDBNumber = "";
+                MyFilms.currentMovie.IMDBNumber = MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "";
                 break;
                 #endregion
               case "tmdb_id":
@@ -7091,10 +7073,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #endregion
 
               default:
-                if (MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0)
-                  setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[itemId][dc.ColumnName].ToString());
-                else
-                  setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
+                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "");
                 break;
 
             }
@@ -7210,10 +7189,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (facadeMovieThumbs != null && facadeMovieThumbs.ThumbnailLayout != null)
       {
-        foreach (string movieThumb in movieThumbs)
+        foreach (var item in movieThumbs.Select(movieThumb => new GUIListItem { IconImageBig = movieThumb }))
         {
-          var item = new GUIListItem { IconImageBig = movieThumb };
-          facadeMovieThumbs.Add(item);
+          this.facadeMovieThumbs.Add(item);
         }
       }
 
@@ -9088,12 +9066,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         DriveInfo[] allDrives = DriveInfo.GetDrives();
 
         searchrep = allDrives.Where(d => (d.DriveType.ToString() == "CDRom") && d.IsReady).Aggregate(searchrep, (current, d) => current.Length > 0 ? current + ";" + d.Name : d.Name);
-        string file = filename.Substring(filename.LastIndexOf(@"\", System.StringComparison.Ordinal) + 1);
+        string file = filename.Substring(filename.LastIndexOf(@"\", StringComparison.Ordinal) + 1);
         var oRegex = new Regex(";");
         string[] searchDir = oRegex.Split(searchrep);
-        foreach (string path in searchDir)
+        foreach (string wpath in searchDir.Select(path => path.LastIndexOf(@"\", StringComparison.Ordinal) != path.Length - 1 ? path + "\\" : path))
         {
-          string wpath = path.LastIndexOf(@"\", StringComparison.Ordinal) != path.Length - 1 ? path + "\\" : path;
           if (File.Exists(wpath + file) || Directory.Exists(wpath + file)) return (wpath + file);
           if (MyFilms.conf.SearchSubDirs == false || !Directory.Exists(wpath)) continue;
           foreach (string sFolderSub in Directory.GetDirectories(wpath, "*", SearchOption.AllDirectories).Where(sFolderSub => (File.Exists(sFolderSub + "\\" + file)) || (Directory.Exists(sFolderSub + "\\" + file))))
@@ -9426,6 +9403,255 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
 
     //-------------------------------------------------------------------------------------------
+    //  Search and Download Trailerfiles via TMDB (mostly YouTube)
+    //-------------------------------------------------------------------------------------------        
+    internal static void SearchAndDownloadTrailerOnlineTMDB(DataRow[] r1, int index, bool loadAllTrailers, bool interactive, string overridestoragepath)
+    {
+      if (!Helper.IsOnlineVideosAvailableAndEnabled)
+      {
+        if (interactive) ShowNotificationDialog("Info", "OnlineVideos is not available!");
+        return;
+      }
+      
+      //LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - mastertitle      : '" + MyFilms.r[index][MyFilms.conf.StrTitle1] + "'");
+      //if (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - secondary title  : '" + MyFilms.r[index][MyFilms.conf.StrTitle2] + "'");
+      //LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
+
+      string titlename = MyFilms.r[index][MyFilms.conf.StrTitle1].ToString();
+      if (titlename.Contains("\\")) titlename = titlename.Substring(titlename.LastIndexOf("\\") + 1);
+      string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? MyFilms.r[index][MyFilms.conf.StrTitle2].ToString() : "";
+
+      string path;
+      #region Retrieve original directory of mediafiles
+      try
+      {
+        path = MyFilms.r[index][MyFilms.conf.StrStorage].ToString();
+        if (path.Contains(";")) path = path.Substring(0, path.IndexOf(";", StringComparison.Ordinal));
+        //path = Path.GetDirectoryName(path);
+        //if (path == null || !Directory.Exists(path))
+        //{
+        //  LogMyFilms.Warn("(SearchtrailerLocal) directory of movie '" + titlename + "' doesn't exist anymore - check your DB");
+        //  return;
+        //}
+        if (path.Contains("\\")) path = path.Substring(0, path.LastIndexOf("\\", StringComparison.Ordinal));
+        
+        // LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) get media directory name: '" + path + "'");
+      }
+      catch (Exception)
+      {
+        LogMyFilms.Debug("(SearchtrailerLocal) error with directory of movie '" + titlename + "' - check your DB");
+        return;
+      }
+      #endregion
+
+      string imdb = "";
+      #region get imdb number sor better search match
+      if (!string.IsNullOrEmpty(MyFilms.r[index]["IMDB_Id"].ToString()))
+        imdb = MyFilms.r[index]["IMDB_Id"].ToString();
+      else if (!string.IsNullOrEmpty(MyFilms.r[index]["URL"].ToString()))
+      {
+        string urLstring = MyFilms.r[index]["URL"].ToString();
+        var cutText = new Regex("" + @"tt\d{7}" + "");
+        var m = cutText.Match(urLstring);
+        if (m.Success) imdb = m.Value;
+      }
+      #endregion
+
+      int year;
+
+      #region get local language
+      string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+      // LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB - detected language = '" + language + "'");
+      #endregion
+
+      LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - movie '" + titlename + "', media directory '" + path + "', language '" + language + "'");
+      
+      var api = new Tmdb(MyFilms.TmdbApiKey, language);
+      // var tmdbConf = api.GetConfiguration();
+
+      int selectedMovieId = 0;
+
+      #region search matching TMDB movie id
+      if (imdb.Contains("tt"))
+      {
+        TmdbMovie movie = api.GetMovieByIMDB(imdb);
+        if (movie.id > 0)
+        {
+          selectedMovieId = movie.id;
+        }
+      }
+
+      if (selectedMovieId == 0) // no movie found by imdb search
+      {
+        TmdbMovieSearch moviesfound;
+        if (int.TryParse(r1[index]["Year"].ToString(), out year))
+        {
+          moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null, year);
+          if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null);
+        }
+        else
+        {
+          moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null);
+        }
+
+        if (moviesfound.results.Count == 1)
+        {
+          selectedMovieId = moviesfound.results[0].id;
+        }
+        else
+        {
+          LogMyFilms.Debug("GetImagesForFilmList() - Movie Search Results: '" + moviesfound.total_results.ToString() + "' for movie '" + r1[index][MyFilms.conf.StrTitle1] + "'");
+          if (!interactive) return;
+          else
+          {
+            var choiceMovies = new List<MovieResult>();
+            var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            if (dlg == null) return;
+            dlg.Reset();
+            dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
+
+            foreach (MovieResult movieResult in moviesfound.results)
+            {
+              dlg.Add(movieResult.title + " (" + movieResult.release_date + ")");
+              choiceMovies.Add(movieResult);
+            }
+            dlg.DoModal(GUIWindowManager.ActiveWindow);
+            if (dlg.SelectedLabel == -1) return;
+            selectedMovieId = choiceMovies[dlg.SelectedLabel].id;
+          }
+        }
+      }
+      #endregion
+
+      if (selectedMovieId == 0)
+      {
+        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB - no movie found - no trailers added to DL queue - returning"); 
+        return;
+      }
+
+      #region search trailers for movie
+      var trailersfound = new List<Youtube>();
+
+      TmdbMovieTrailers trailers = api.GetMovieTrailers(selectedMovieId, language); // trailers in local language
+      if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
+      trailers = api.GetMovieTrailers(selectedMovieId, null); // all trailers
+      if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
+
+      if (trailersfound.Count == 0)
+      {
+        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - no trailers found - returning");
+        if (interactive) ShowNotificationDialog("Info", "OnlineVideos is not available!");
+      }
+      else
+      {
+        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - '" + trailersfound.Count + "' trailers found");
+        var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        if (dlg == null) return;
+        Youtube selectedTrailer = null;
+        string selectedTrailerUrl = "";
+        if (interactive)
+        {
+          #region build menu with available trailers
+          var choiceView = new List<Youtube>();
+          dlg.Reset();
+          dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
+
+          dlg.Add("<load all>");
+          choiceView.Add(new Youtube());
+
+          foreach (Youtube trailer in trailersfound)
+          {
+            dlg.Add(trailer.name + " (" + trailer.size + ")");
+            choiceView.Add(trailer);
+          }
+
+          //dlg.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
+          //choiceView.Add("youtube");
+
+          dlg.DoModal(GUIWindowManager.ActiveWindow);
+          if (dlg.SelectedLabel == -1) return;
+          if (dlg.SelectedLabel >  0)
+          {
+            selectedTrailer = choiceView[dlg.SelectedLabel];
+            LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - selectedTrailer = '" + selectedTrailer.name + " (" + selectedTrailer.size + ")'");
+          }
+          #endregion
+        }
+
+        #region select trailer format and quality in OV player factory
+        if (selectedTrailer != null)
+        {
+          Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + selectedTrailer.source);
+          var choiceView = new List<string>();
+          dlg.Reset();
+          dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
+          foreach (KeyValuePair<string, string> availableTrailerFile in availableTrailerFiles)
+          {
+            dlg.Add(availableTrailerFile.Key);
+            choiceView.Add(availableTrailerFile.Value); // this is the download URL
+          }
+          dlg.DoModal(GUIWindowManager.ActiveWindow);
+          if (dlg.SelectedLabel == -1) return;
+          selectedTrailerUrl = choiceView[dlg.SelectedLabel];
+        }
+        #endregion
+
+        #region download trailer
+
+        if (selectedTrailerUrl.Length > 0 && selectedTrailer != null)
+        {
+          var trailer = new Trailer();
+          trailer.MovieTitle = titlename;
+          trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + selectedTrailer.source;
+          trailer.SourceUrl = selectedTrailerUrl;
+          trailer.Quality = dlg.SelectedLabelText;
+          trailer.Trailername = selectedTrailer.name;
+          string extension = (trailer.SourceUrl.Contains(".")) ? trailer.SourceUrl.Substring(trailer.SourceUrl.LastIndexOf(".")) : ".err";
+          trailer.DestinationFile = Path.Combine(Path.Combine(path, "Trailer"), (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + selectedTrailer.name + " (" + dlg.SelectedLabelText.Replace(" ", "") + ")" + extension)));
+          trailer.WebSite = "YouTube";
+          MyFilms.AddTrailerToDownloadQueue(trailer);
+          LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - start loading single trailer '" + selectedTrailer.name + "' (filename length '" + trailer.DestinationFile.Length + "') from URL: '" + selectedTrailerUrl + "'");
+          if (interactive) ShowNotificationDialog("MyFilms Info", "Starting trailer download!");
+        }
+        else
+        {
+          for (int i = 0; i < trailersfound.Count; i++)
+          {
+            if (i < 2 || loadAllTrailers)
+            {
+              Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + trailersfound[i].source);
+              string url = availableTrailerFiles.Values.Last();
+              string quality = availableTrailerFiles.Keys.Last();
+              var trailer = new Trailer();
+              trailer.MovieTitle = titlename;
+              trailer.Trailername = trailersfound[i].name;
+              trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
+              trailer.SourceUrl = url;
+              trailer.Quality = null;
+              string extension = (trailer.SourceUrl.Contains(".")) ? trailer.SourceUrl.Substring(trailer.SourceUrl.LastIndexOf(".")) : ".err";
+              if (overridestoragepath != null)
+              {
+                string newpath = Path.Combine(overridestoragepath + @"MyFilms\", path.Substring(path.LastIndexOf("\\") + 1));
+                newpath = Path.Combine(newpath, "Trailer");
+                trailer.DestinationFile = Path.Combine(newpath, (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension)));
+              }
+              else
+              {
+                trailer.DestinationFile = Path.Combine(Path.Combine(path, "Trailer"), (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension)));
+              }
+              trailer.WebSite = "YouTube";
+              LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "' (filename length '" + trailer.DestinationFile.Length + "')");
+              MyFilms.AddTrailerToDownloadQueue(trailer);
+            }
+          }
+        }
+        #endregion
+
+      }
+      #endregion
+    }
+
+    //-------------------------------------------------------------------------------------------
     //  Search All Trailerfiles locally
     //-------------------------------------------------------------------------------------------        
     public static void SearchTrailerLocal(DataRow[] r1, int index, bool extendedSearch)
@@ -9471,11 +9697,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!string.IsNullOrEmpty(directoryname))
       {
         string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-        foreach (string item in files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl") || filefound.ToLower().Contains("clip")) && Utils.IsVideo(filefound)))
-        {
-          trailerFiles.Add(item);
-        }
+        trailerFiles.AddRange(files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl") || filefound.ToLower().Contains("clip")) && Utils.IsVideo(filefound)));
       }
+
       #endregion
 
       #region extended search - Search Filenames with "title" in extended Trailer Searchpathes
@@ -9489,14 +9713,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region First search rootdirectory for matching files
           LogMyFilms.Debug("(TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "', search title1: '" + titlename.ToLower() + "', search title2: '" + titlename2.ToLower() + "'");
           string[] files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
-          foreach (string item in files.Where(MediaPortal.Util.Utils.IsVideo))
-          {
-            if ((!string.IsNullOrEmpty(titlename) && item.ToLower().Contains(titlename.ToLower())) ||
-                (!string.IsNullOrEmpty(titlename2) && item.ToLower().Contains(titlename2.ToLower())))
-            {
-              trailerFiles.Add(item);
-            }
-          }
+          trailerFiles.AddRange(files.Where(MediaPortal.Util.Utils.IsVideo).Where(item => (!string.IsNullOrEmpty(titlename) && item.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && item.ToLower().Contains(titlename2.ToLower()))));
+
           #endregion
 
           #region Now search for subdirectories matching the movie and add the content of them as result
@@ -9510,23 +9728,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               #region check for directories with matching title name
               LogMyFilms.Debug("(TrailersearchLocal) - Matching Directory found : '" + subdirectory + "'");
               files = Directory.GetFiles(subdirectory, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files.Where(MediaPortal.Util.Utils.IsVideo))
-              {
-                trailerFiles.Add(filefound);
-              }
+              trailerFiles.AddRange(files.Where(MediaPortal.Util.Utils.IsVideo));
               #endregion
             }
             else
             {
               #region check for matching files inside subdirs
               files = Directory.GetFiles(subdirectory, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files.Where(Utils.IsVideo))
-              {
-                if (Utility.ContainsAll(filefound, titlename, ":") || Utility.ContainsAll(filefound, titlename2, ":"))
-                {
-                  trailerFiles.Add(filefound);
-                }
-              }
+              trailerFiles.AddRange(files.Where(Utils.IsVideo).Where(filefound => Utility.ContainsAll(filefound, titlename, ":") || Utility.ContainsAll(filefound, titlename2, ":")));
               #endregion
             }
             #endregion
@@ -10357,12 +10566,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case (int)AutoPlay.MediaSubType.HDDVD:
               case (int)AutoPlay.MediaSubType.UNKNOWN:
                 break;
-              default:
-                break;
             }
           }
-          break;
-        default:
           break;
       }
     }

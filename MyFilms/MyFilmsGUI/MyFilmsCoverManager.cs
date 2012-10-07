@@ -1184,7 +1184,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       try
       {
-        System.IO.File.Delete(FullPath);
+        File.Delete(FullPath);
         LogMyFilms.Debug("Artwork Deleted: " + FullPath);
       }
       catch (Exception ex)

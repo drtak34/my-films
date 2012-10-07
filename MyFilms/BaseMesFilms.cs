@@ -33,7 +33,9 @@ namespace MyFilmsPlugin.MyFilms
   using System.Globalization;
   using System.IO;
   using System.Linq;
+  using System.Net;
   using System.Reflection;
+  using System.Runtime.Serialization.Formatters.Binary;
   using System.Text.RegularExpressions;
   using System.Threading;
   using System.Xml;
@@ -58,6 +60,9 @@ namespace MyFilmsPlugin.MyFilms
     internal static Queue<MFMovie> MovieUpdateQueue = new Queue<MFMovie>();
     internal static BackgroundWorker UpdateWorker = null;
     internal static AutoResetEvent UpdateWorkerDoneEvent = new AutoResetEvent(false);
+
+    //private const int MaxWebDownloads = 4;
+    //internal static WebClient[] WebClients = new WebClient[MaxWebDownloads];
 
     internal const string MultiUserStateField = "MultiUserState";
 
@@ -260,37 +265,34 @@ namespace MyFilmsPlugin.MyFilms
     {
       var saveDataWatch = new Stopwatch(); saveDataWatch.Reset(); saveDataWatch.Start();
       IEnumerable<DataColumn> commonColumns = data.Movie.Columns.OfType<DataColumn>().Intersect(data.CustomFields.Columns.OfType<DataColumn>(), new DataColumnComparer()).Where(x => x.ColumnName != "Movie_Id").ToList();
-      foreach (var movieRow in data.Movie)
+      foreach (var movieRow in Enumerable.Where(data.Movie, movieRow => movieRow.RowState != DataRowState.Deleted))
       {
-        if (movieRow.RowState != DataRowState.Deleted) // only, if this row wasn't deleted previously ...
+        movieRow.BeginEdit();
+        AntMovieCatalog.CustomFieldsRow customFields = null;
+        if (movieRow.GetCustomFieldsRows().Length == 0) // create CustomFields Element, if not existing ...
         {
-          movieRow.BeginEdit();
-          AntMovieCatalog.CustomFieldsRow customFields = null;
-          if (movieRow.GetCustomFieldsRows().Length == 0) // create CustomFields Element, if not existing ...
-          {
-            customFields = data.CustomFields.NewCustomFieldsRow();
-            customFields.SetParentRow(movieRow);
-            data.CustomFields.AddCustomFieldsRow(customFields);
-            // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
-          }
-          customFields = movieRow.GetCustomFieldsRows()[0];
-          foreach (DataColumn dc in commonColumns)
-          {
-            customFields[dc.ColumnName] = movieRow[dc.ColumnName];
-            #region disabled conditional updates
-            // object temp;
-            // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
+          customFields = data.CustomFields.NewCustomFieldsRow();
+          customFields.SetParentRow(movieRow);
+          data.CustomFields.AddCustomFieldsRow(customFields);
+          // LogMyFilms.Debug("LoadMyFilmsFromDisk() - created new CustomFieldsRow for movie ID '" + movieRow.Number + "', Title = '" + movieRow.OriginalTitle + "'");
+        }
+        customFields = movieRow.GetCustomFieldsRows()[0];
+        foreach (DataColumn dc in commonColumns)
+        {
+          customFields[dc.ColumnName] = movieRow[dc.ColumnName];
+          #region disabled conditional updates
+          // object temp;
+          // if (DBNull.Value != (temp = customFields[dc.ColumnName])) movieRow[dc.ColumnName] = temp; // diabled the copy from customfields to MyFilms rows - this is only when saving and we do not modify customfields in plugin !
 
-            //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
-            //{
-            //  customFields[dc.ColumnName] = temp;
-            //  if (cleanfileonexit)
-            //  {
-            //    movieRow[dc.ColumnName] = System.Convert.DBNull;
-            //  }
-            //}
-            #endregion
-          }
+          //if (DBNull.Value != (temp = movieRow[dc.ColumnName]))
+          //{
+          //  customFields[dc.ColumnName] = temp;
+          //  if (cleanfileonexit)
+          //  {
+          //    movieRow[dc.ColumnName] = System.Convert.DBNull;
+          //  }
+          //}
+          #endregion
         }
       }
       data.Movie.AcceptChanges();
@@ -1561,11 +1563,92 @@ namespace MyFilmsPlugin.MyFilms
       return false;
     }
 
-    public static void CancelMyFilms()
+    internal static void CancelMyFilms()
     {
+      #region stop trailer thread downloader
+      MyFilms.bgDownloadTrailer.CancelAsync();
+      for (int f = 0; f < MyFilms.maxThreads; f++) MyFilms.threadArray[f].CancelAsync();
+      #endregion
+
+      #region wait for background threads to finish before shutting down ...
+      if (MyFilms.bgDownloadTrailer != null && MyFilms.bgDownloadTrailer.IsBusy)
+      {
+        LogMyFilms.Info("CancelMyFilms() - Trailer Download still active ! - waiting 120 sec. for background worker to complete ...");
+        MyFilms.bgDownloadTrailerDoneEvent.WaitOne(120000);
+        LogMyFilms.Info("CancelMyFilms() - Trailer Download in background worker thread finished");
+      }
+
+      for (int f = 0; f < MyFilms.maxThreads; f++)
+      {
+        if (MyFilms.threadArray[f] != null && MyFilms.threadArray[f].IsBusy)
+        {
+          LogMyFilms.Info("CancelMyFilms() - Trailer Download thread '" + f + "' still active ! - waiting 120 sec. for background worker to complete ...");
+          MyFilms.threadDoneEventArray[f].WaitOne(120000);
+          LogMyFilms.Info("CancelMyFilms() - Trailer Download in background worker thread '" + f + "' finished");
+        }
+      }
+
+      if (BaseMesFilms.UpdateWorker != null && BaseMesFilms.UpdateWorker.IsBusy)
+      {
+        LogMyFilms.Info("CancelMyFilms() - DB updates still active ! - waiting for background worker to complete ...");
+        BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(60000);
+        LogMyFilms.Info("CancelMyFilms() - DB updates in background worker thread finished");
+        BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
+      }
+      #endregion
+      
       LogMyFilms.Debug("CancelMyFilms() - disposing data ...");
-      if (data != null)
-        data.Clear();
+      if (data != null) data.Clear();
+    }
+
+    public static void SaveQueueToDisk(string name, Queue<Trailer> q)
+    {
+      try
+      {
+        string file = Path.Combine(Config.GetFolder(Config.Dir.Config), ("MyFilms_Queue_" + name + ".dat"));
+        if (q == null || q.Count == 0)
+        {
+          LogMyFilms.Error("SaveQueueToDisk() - nothing to save for queue '" + name + "' - deleteing file '" + file + "'");
+          if (File.Exists(file)) File.Delete(file);
+          return;
+        }
+        var fs = new FileStream(file, FileMode.Create, FileAccess.Write); // FileMode.OpenOrCreate, FileAccess.Write, FileShare.None
+        var bf = new BinaryFormatter();
+        bf.Serialize(fs, q);
+        fs.Close();
+        LogMyFilms.Info("SaveQueueToDisk() - saved queue '" + name + "' with '" + q.Count + "' elements to '" + file + "'");
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("SaveQueueToDisk() - error saving queue '" + name + "' to disk: " + ex.Message + ex.StackTrace);
+      }
+    }
+
+    public static Queue<Trailer> LoadQueueFromDisk(string name)
+    {
+      var queue = new Queue<Trailer>();
+      try
+      {
+        string file = Path.Combine(Config.GetFolder(Config.Dir.Config), ("MyFilms_Queue_" + name + ".dat"));
+        if (!File.Exists(file))
+        {
+          LogMyFilms.Debug("LoadQueueFromDisk() - nothing to load for queue '" + name + "' - file does not exist: '" + file + "'");
+        }
+        else
+        {
+          var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+          var bf = new BinaryFormatter();
+          queue = (Queue<Trailer>)bf.Deserialize(fs);
+          fs.Close();
+          LogMyFilms.Debug("LoadQueueFromDisk() - loaded queue '" + name + "' with '" + queue.Count + "' elements from '" + file + "'");
+        }
+        return queue;
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("LoadQueueFromDisk() - error loading queue '" + name + "' from disk: " + ex.Message + ex.StackTrace);
+      }
+      return queue;
     }
 
     public static void GetMovies(ref ArrayList movies)

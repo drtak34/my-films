@@ -93,6 +93,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BoolDontSplitValuesInViews = false;
       BoolSkipViewState = false;
       MenuSelectedId = -1;
+      BoolEnableOnlineServices = false;
 
       #region Load Config Parameters in MyFilms.xml file (section currentConfig)
 
@@ -919,6 +920,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool IsNetworkAvailable { get; set; }
     #endregion
 
+    public bool BoolEnableOnlineServices { get; set; }
 
     #endregion
 

@@ -30,6 +30,39 @@ namespace MyFilmsPlugin.Utils
 
     #region Static Methods
 
+    public static Dictionary<string, string> GetYoutubeDownloadUrls(string stream)
+    {
+      var downloadUrls = new Dictionary<string, string>();
+      if (string.IsNullOrEmpty(stream)) return downloadUrls;
+
+      // use onlinevideo youtube siteutils to get
+      // playback option urls as myfilms only gives us the html page
+      if (stream.Contains("youtube.com"))
+      {
+        // get playback url from streamURL
+        LogMyFilms.Info("Getting playback options from page '{0}'", stream);
+
+        try
+        {
+          var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+          downloadUrls = ovHosterProxy.GetDownloadUrls(stream);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug("playback option exception: '{0}' - '{1}'", ex.Message, ex.StackTrace);
+          return downloadUrls;
+        }
+
+        LogMyFilms.Info("Found playback options: '{0}'", downloadUrls.Count);
+        foreach (KeyValuePair<string, string> downloadUrl in downloadUrls)
+        {
+          // LogMyFilms.Info("playback option: '{0}' - '{1}'", downloadUrl.Key, downloadUrl.Value);
+          LogMyFilms.Info("playback option: '{0}'", downloadUrl.Key);
+        }
+      }
+      return downloadUrls;
+    }
+    
     public static bool Play(string stream)
     {
       if (string.IsNullOrEmpty(stream)) return false;
@@ -38,11 +71,20 @@ namespace MyFilmsPlugin.Utils
       // playback urls as myfilms only gives us the html page
       if (stream.Contains("youtube.com"))
       {
-        // get playback url from stream
+        // get playback url from streamURL
         LogMyFilms.Info("Getting playback url from page '{0}'", stream);
 
-        var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
-        stream = ovHosterProxy.GetVideoUrls(stream);
+        try
+        {
+          var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+          stream = ovHosterProxy.GetVideoUrls(stream);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug("playback url exception: '{0}'", ex.Message);
+          // LogMyFilms.Debug("playback option exception: " + ex.StackTrace);
+          return false;
+        }
 
         if (string.IsNullOrEmpty(stream))
         {
@@ -118,10 +160,16 @@ namespace MyFilmsPlugin.Utils
   {
     public OnlineVideosHosterProxy() { }
 
+    public Dictionary<string, string> GetDownloadUrls(string url)
+    {
+      return HosterFactory.GetHoster("Youtube").getPlaybackOptions(url);
+    }
+
     public string GetVideoUrls(string url)
     {
       return HosterFactory.GetHoster("Youtube").getVideoUrls(url);
     }
+
   }
 
 }

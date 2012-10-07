@@ -171,13 +171,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
           XmlNodeList TagList = nodeDvd.SelectNodes("Tags/Tag");
           TagFullName = string.Empty;
 
-          foreach (XmlNode nodeTag in TagList)
+          foreach (XmlNode nodeTag in TagList.Cast<XmlNode>().Where(nodeTag => nodeTag.Attributes["FullName"] != null && nodeTag.Attributes["FullName"].Value != null))
           {
-            if (nodeTag.Attributes["FullName"] != null && nodeTag.Attributes["FullName"].Value != null)
-            {
-              if (TagFullName.Length > 0) TagFullName += ", ";
-              TagFullName += nodeTag.Attributes["FullName"].Value;
-            }
+            if (this.TagFullName.Length > 0) this.TagFullName += ", ";
+            this.TagFullName += nodeTag.Attributes["FullName"].Value;
           }
 
           if (TagField.Length > 0)
@@ -191,13 +188,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
           string languages = string.Empty;
           XmlNodeList LanguagesList = nodeDvd.SelectNodes("Audio/AudioTrack");
-          foreach (XmlNode nodeLanguage in LanguagesList)
+          foreach (XmlNode nodeLanguage in LanguagesList.Cast<XmlNode>().Where(nodeLanguage => nodeLanguage.SelectSingleNodeFast("AudioContent") != null && nodeLanguage.SelectSingleNodeFast("AudioContent").InnerText != null))
           {
-            if (nodeLanguage.SelectSingleNodeFast("AudioContent") != null && nodeLanguage.SelectSingleNodeFast("AudioContent").InnerText != null)
-            {
-              if (languages.Length > 0) languages += ", ";
-              languages += nodeLanguage.SelectSingleNodeFast("AudioContent").InnerText;
-            }
+            if (languages.Length > 0) languages += ", ";
+            languages += nodeLanguage.SelectSingleNodeFast("AudioContent").InnerText;
           }
 
           string subtitles = String.Empty;
