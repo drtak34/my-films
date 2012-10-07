@@ -687,8 +687,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         case 11: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
           destFile = MesFilmsCat.Text;
           break;
-        default:
-          break;
       }
       if (destFile.Length > 0)
         if (System.IO.File.Exists(destFile))
@@ -2939,8 +2937,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           break;
         case "lower":
           WSelect = SField.Text + " lower than '*" + SValue.Text + "*'";
-          break;
-        default:
           break;
       }
       //if (WSelect.Length > 0)
@@ -5297,8 +5293,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           break;
         case 11: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
           destFile = MesFilmsCat.Text;
-          break;
-        default:
           break;
       }
       if (destFile.Length > 0)

@@ -98,7 +98,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       float wfont = 0;
       for (wi = 0; wi < arSplit.Length; wi++)
       {
-        wfont = (340) / arSplit[wi].Length * 3 / 2;
+        wfont = 340 / arSplit[wi].Length * 3 / 2;
         if (Equals(xfont, 0) || wfont < xfont)
           xfont = wfont;
       }
