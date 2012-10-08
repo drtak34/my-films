@@ -11107,6 +11107,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "downloadtrailertmdb":
+          if (!Helper.IsOnlineVideosAvailableAndEnabled)
+          {
+            MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
+            return;
+          }
           conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
           conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
           MyFilmsDetail.SearchAndDownloadTrailerOnlineTMDB(r, MyFilms.conf.StrIndex, false, true, null);
@@ -11114,6 +11119,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "downloadtrailertmdball":
           {
+            if (!Helper.IsOnlineVideosAvailableAndEnabled)
+            {
+              MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
+              return;
+            }
+
             #region add trailers for selected films to trailer download queue
             StopAddingTrailers = false;
             new Thread(delegate()
@@ -11133,7 +11144,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     catch (Exception ie)
                     {
-                      LogMyFilms.Warn("AddTrailersToDownloadQueue() - Error adding trailers to download queue: " + ie.Message);
+                      LogMyFilms.Warn("Error adding trailers to download queue: " + ie.Message);
+                      LogMyFilms.Warn("Stacktrace: " + ie.StackTrace);
                       MyFilmsDetail.setGUIProperty("statusmessage", "", false);
                     }
                   }
@@ -11141,7 +11153,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 catch (Exception ex)
                 {
-                  LogMyFilms.Error("AddTrailersToDownloadQueue() - Error adding trailers to download queue: " + ex.StackTrace);
+                  LogMyFilms.Error("Error adding trailers to download queue: " + ex.StackTrace);
                   MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
                 }
               }
@@ -15142,7 +15154,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             while (!success && i < maxretries)
             {
               // first check, if the network is ready and DB is accessible
-              if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && System.IO.File.Exists(conf.StrFileXml))
+              if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && File.Exists(conf.StrFileXml))
               {
                 LogMyFilms.Debug("PowerModeChanged() - MyFilms is reloading movie data to memory cache.");
                 FSwatcher.EnableRaisingEvents = false;
@@ -15158,13 +15170,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   this.Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
                 }
+                BaseMesFilms.RestartBackgroundWorker();
                 success = true;
               }
               else
               {
                 i += 1;
                 LogMyFilms.Info("PowerModeChanged() - Network not yet ready or file not accessible on try '" + i + " of " + maxretries + "' to reload - waiting for next retry");
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
               }
             }
             try
@@ -15185,6 +15198,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Info("PowerModeChanged() - DB updates in background worker thread finished");
             BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
           }
+          BaseMesFilms.StopBackgroundWorker();
           LogMyFilms.Debug("PowerModeChanged() - MyFilms is entering standby");
           break;
         default:
@@ -15836,30 +15850,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         lock (TrailertoDownloadQueue)
         {
           f = TrailertoDownloadQueue.Dequeue();
-          LogMyFilms.Debug("bgDownloadTrailer_DoWork() - start loading trailer for movie '" + f.MovieTitle + "', remaining trailers in queue: '" + TrailertoDownloadQueue.Count + "'");
+          LogMyFilms.Debug("bgDownloadTrailer_DoWork() - start loading trailer '" + f.Trailername + "' for movie '" + f.MovieTitle + "', remaining trailers in queue: '" + TrailertoDownloadQueue.Count + "'");
         }
 
         try
         {
           #region recheck download URL
-          string downloadUrl = f.SourceUrl;
-          if (f.Quality == null)
+          if (f.SourceUrl == null)
           {
             Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            downloadUrl = availableTrailerFiles.Values.Last();
-          }
-          else
-          {
-            //Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            //if (!availableTrailerFiles.TryGetValue(f.Quality, out downloadUrl)) downloadUrl = availableTrailerFiles.Values.Last();
+            f.SourceUrl = availableTrailerFiles.Values.Last();
+            f.Quality = availableTrailerFiles.Keys.Last();
+            
           }
           #endregion
 
           #region download trailer
-          MyFilmsDetail.setGUIProperty("statusmessage", "Downloading  trailer '" + f.Trailername + "' for '" + f.MovieTitle + "'");
-          bool bDownloadSuccess = Grabber.Updater.DownloadFile(downloadUrl, f.DestinationFile);
-          LogMyFilms.Debug("Result of trailer download for '" + f.MovieTitle + "': success = '" + bDownloadSuccess + "', trailer = '" + f.DestinationFile + "'");
-          MyFilmsDetail.setGUIProperty("statusmessage", "");
+          string extension = (f.SourceUrl.Contains(".")) ? f.SourceUrl.Substring(f.SourceUrl.LastIndexOf(".")) : ".err";
+          string destinationfile = Path.Combine(f.DestinationDirectory, (MediaPortal.Util.Utils.FilterFileName(f.MovieTitle + " (trailer) " + f.Trailername + " (" + f.Quality.Replace(" ", "") + ")" + extension)));
+          if (!File.Exists(destinationfile))
+          {
+            MyFilmsDetail.setGUIProperty("statusmessage", "Downloading  trailer '" + f.Trailername + "' for '" + f.MovieTitle + "'");
+            bool bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
+            if (!bDownloadSuccess) // refresh urls for download - might have timed out ....
+            {
+              LogMyFilms.Debug("bgDownloadTrailer_DoWork() - no success - retry with refreshed web link !");
+              Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
+              string newUrl;
+              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Values.Last();
+              bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
+            }
+            LogMyFilms.Debug("bgDownloadTrailer_DoWork() - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
+            MyFilmsDetail.setGUIProperty("statusmessage", "");
+          }
+          else
+          {
+            LogMyFilms.Debug("bgDownloadTrailer_DoWork() - file already exists - skip! for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
+            Thread.Sleep(3000);
+          }
           #endregion
         }
         catch (Exception ex)
@@ -15911,28 +15939,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         try
         {
           #region recheck download URL
-          string downloadUrl = f.SourceUrl;
-          if (f.Quality == null)
+          if (f.SourceUrl == null)
           {
             Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            downloadUrl = availableTrailerFiles.Values.Last();
-          }
-          else
-          {
-            //Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            //if (!availableTrailerFiles.TryGetValue(f.Quality, out downloadUrl)) downloadUrl = availableTrailerFiles.Values.Last();
+            f.SourceUrl = availableTrailerFiles.Values.Last();
+            f.Quality = availableTrailerFiles.Keys.Last();
           }
           #endregion
 
           #region download trailer
-          bool bDownloadSuccess = Grabber.Updater.DownloadFile(downloadUrl, f.DestinationFile);
-          LogMyFilms.Debug("Download Thread '" + threadId + "' - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + f.DestinationFile + "'");
+          string extension = (f.SourceUrl.Contains(".")) ? f.SourceUrl.Substring(f.SourceUrl.LastIndexOf(".")) : ".err";
+          string destinationfile = Path.Combine(f.DestinationDirectory, (MediaPortal.Util.Utils.FilterFileName(f.MovieTitle + " (trailer) " + f.Trailername + " (" + f.Quality.Replace(" ", "") + ")" + extension)));
+          if (!File.Exists(destinationfile))
+          {
+            bool bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
+            if (!bDownloadSuccess) // refresh urls for download - might have timed out ....
+            {
+              LogMyFilms.Debug("Download Thread '" + threadId + "' - no success - retry with refreshed web link !");
+              Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
+              string newUrl;
+              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Values.Last();
+              bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
+            }
+            LogMyFilms.Debug("Download Thread '" + threadId + "' - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
+          }
+          else
+          {
+            LogMyFilms.Debug("Download Thread '" + threadId + "' - file already exists - skip! for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
+            Thread.Sleep(3000);
+          }
           #endregion
         }
-        catch (Exception ex)
-        {
-          LogMyFilms.DebugException("Error loading trailer: '" + ex.Message + "'", ex);
-        }
+        catch (Exception ex) { LogMyFilms.DebugException("Error loading trailer: '" + ex.Message + "'", ex); }
       }
       while (TrailertoDownloadQueue.Count > 0 && !threadArray[threadId].CancellationPending);
       threadDoneEventArray[threadId].Set();
@@ -17122,15 +17160,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // we need to get it, let's queue them up and download in the background
       lock (TrailertoDownloadQueue)
       {
-        if (TrailertoDownloadQueue.Any(trl => trl.SourceUrl == trailer.SourceUrl && trl.DestinationFile == trailer.DestinationFile))
+        if (TrailertoDownloadQueue.Any(trl => trl.OriginalUrl == trailer.OriginalUrl && trl.DestinationDirectory == trailer.DestinationDirectory))
         {
-          LogMyFilms.Debug("AddTrailerToDownloadQueue() - items = '" + TrailertoDownloadQueue.Count + "' - not added trailer for movie (dupe) '" + trailer.MovieTitle + "', DestinationPath = '" + trailer.DestinationFile + "'");
+          LogMyFilms.Debug("AddTrailerToDownloadQueue() - items = '" + TrailertoDownloadQueue.Count + "' - not added trailer for movie (dupe) '" + trailer.MovieTitle + "', DestinationDir = '" + trailer.DestinationDirectory + "'");
           return false;
         }
         if (!TrailertoDownloadQueue.Contains(trailer))
         {
           TrailertoDownloadQueue.Enqueue(trailer);
-          LogMyFilms.Debug("AddTrailerToDownloadQueue() - items = '" + TrailertoDownloadQueue.Count + "' - added trailer for movie '" + trailer.MovieTitle + "', DestinationPath = '" + trailer.DestinationFile + "'"); // , sourceUrl = '" + trailer.SourceUrl + "'
+          LogMyFilms.Debug("AddTrailerToDownloadQueue() - items = '" + TrailertoDownloadQueue.Count + "' - added trailer for movie '" + trailer.MovieTitle + "', DestinationDir = '" + trailer.DestinationDirectory + "'"); // , sourceUrl = '" + trailer.SourceUrl + "'
           added = true;
         }
       }

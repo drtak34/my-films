@@ -1565,6 +1565,14 @@ namespace MyFilmsPlugin.MyFilms
 
     internal static void CancelMyFilms()
     {
+      StopBackgroundWorker();
+      
+      LogMyFilms.Debug("CancelMyFilms() - disposing data ...");
+      if (data != null) data.Clear();
+    }
+
+    internal static void StopBackgroundWorker()
+    {
       #region stop trailer thread downloader
       MyFilms.bgDownloadTrailer.CancelAsync();
       for (int f = 0; f < MyFilms.maxThreads; f++) MyFilms.threadArray[f].CancelAsync();
@@ -1573,32 +1581,41 @@ namespace MyFilmsPlugin.MyFilms
       #region wait for background threads to finish before shutting down ...
       if (MyFilms.bgDownloadTrailer != null && MyFilms.bgDownloadTrailer.IsBusy)
       {
-        LogMyFilms.Info("CancelMyFilms() - Trailer Download still active ! - waiting 120 sec. for background worker to complete ...");
+        LogMyFilms.Info("StopBackgroundWorker() - Trailer Download still active ! - waiting 120 sec. for background worker to complete ...");
         MyFilms.bgDownloadTrailerDoneEvent.WaitOne(120000);
-        LogMyFilms.Info("CancelMyFilms() - Trailer Download in background worker thread finished");
+        LogMyFilms.Info("StopBackgroundWorker() - Trailer Download in background worker thread finished");
       }
 
       for (int f = 0; f < MyFilms.maxThreads; f++)
       {
         if (MyFilms.threadArray[f] != null && MyFilms.threadArray[f].IsBusy)
         {
-          LogMyFilms.Info("CancelMyFilms() - Trailer Download thread '" + f + "' still active ! - waiting 120 sec. for background worker to complete ...");
+          LogMyFilms.Info("StopBackgroundWorker() - Trailer Download thread '" + f + "' still active ! - waiting 120 sec. for background worker to complete ...");
           MyFilms.threadDoneEventArray[f].WaitOne(120000);
-          LogMyFilms.Info("CancelMyFilms() - Trailer Download in background worker thread '" + f + "' finished");
+          LogMyFilms.Info("StopBackgroundWorker() - Trailer Download in background worker thread '" + f + "' finished");
         }
       }
 
-      if (BaseMesFilms.UpdateWorker != null && BaseMesFilms.UpdateWorker.IsBusy)
+      if (UpdateWorker != null && UpdateWorker.IsBusy)
       {
-        LogMyFilms.Info("CancelMyFilms() - DB updates still active ! - waiting for background worker to complete ...");
-        BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(60000);
-        LogMyFilms.Info("CancelMyFilms() - DB updates in background worker thread finished");
-        BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
+        LogMyFilms.Info("StopBackgroundWorker() - DB updates still active ! - waiting for background worker to complete ...");
+        UpdateWorkerDoneEvent.WaitOne(60000);
+        LogMyFilms.Info("StopBackgroundWorker() - DB updates in background worker thread finished");
+        UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
       }
       #endregion
-      
-      LogMyFilms.Debug("CancelMyFilms() - disposing data ...");
-      if (data != null) data.Clear();
+    }
+    
+    internal static void RestartBackgroundWorker()
+    {
+      for (int f = 0; f < MyFilms.maxThreads; f++)
+      {
+        if (MyFilms.threadArray[f] != null && !MyFilms.threadArray[f].IsBusy)
+        {
+          MyFilms.threadArray[f].RunWorkerAsync(f);
+          LogMyFilms.Info("RestartBackgroundWorker() - restarted trailer background worker thread '" + f + "'");
+        }
+      }
     }
 
     public static void SaveQueueToDisk(string name, Queue<Trailer> q)
