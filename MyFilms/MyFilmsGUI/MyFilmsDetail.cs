@@ -9612,27 +9612,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (i < 2 || loadAllTrailers)
             {
               Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + trailersfound[i].source);
-              string url = availableTrailerFiles.Values.Last();
-              string quality = availableTrailerFiles.Keys.Last();
-              var trailer = new Trailer();
-              trailer.MovieTitle = titlename;
-              trailer.Trailername = trailersfound[i].name;
-              trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
-              trailer.SourceUrl = url;
-              trailer.Quality = quality;
-              if (overridestoragepath != null)
+              if (availableTrailerFiles.Count > 0)
               {
-                string newpath = Path.Combine(overridestoragepath + @"MyFilms\", path.Substring(path.LastIndexOf("\\") + 1));
-                newpath = Path.Combine(newpath, "Trailer");
-                trailer.DestinationDirectory = newpath; 
+                string url = availableTrailerFiles.Values.Last();
+                string quality = availableTrailerFiles.Keys.Last();
+                var trailer = new Trailer();
+                trailer.MovieTitle = titlename;
+                trailer.Trailername = trailersfound[i].name;
+                trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
+                trailer.SourceUrl = url;
+                trailer.Quality = quality;
+                if (overridestoragepath != null)
+                {
+                  string newpath = Path.Combine(overridestoragepath + @"MyFilms\", path.Substring(path.LastIndexOf("\\") + 1));
+                  newpath = Path.Combine(newpath, "Trailer");
+                  trailer.DestinationDirectory = newpath;
+                }
+                else
+                {
+                  trailer.DestinationDirectory = Path.Combine(path, "Trailer");
+                }
+                // filename: (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension))
+                LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "'");
+                MyFilms.AddTrailerToDownloadQueue(trailer);
               }
               else
               {
-                trailer.DestinationDirectory = Path.Combine(path, "Trailer"); 
+                LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - cannot add trailer - no download Url found !");
               }
-              // filename: (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension))
-              LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "'");
-              MyFilms.AddTrailerToDownloadQueue(trailer);
             }
           }
         }
