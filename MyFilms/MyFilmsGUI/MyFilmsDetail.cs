@@ -539,7 +539,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception ex)
         {
-          LogMyFilms.Debug("OnPageLoad() - skin facade control for movie thumbs not initialized");
+          LogMyFilms.Debug("OnPageLoad() - skin facade control for movie thumbs not initialized - exception: " + ex.Message);
         }
       }
       // if (ImgMovieThumbsDir != null && ImgMovieThumbsDir.Visible) ImgMovieThumbsDir.Visible = false;
@@ -9407,12 +9407,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     internal static void SearchAndDownloadTrailerOnlineTMDB(DataRow[] r1, int index, bool loadAllTrailers, bool interactive, string overridestoragepath)
     {
-      if (!Helper.IsOnlineVideosAvailableAndEnabled)
-      {
-        if (interactive) ShowNotificationDialog("Info", "OnlineVideos is not available!");
-        return;
-      }
-      
       //LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - mastertitle      : '" + MyFilms.r[index][MyFilms.conf.StrTitle1] + "'");
       //if (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - secondary title  : '" + MyFilms.r[index][MyFilms.conf.StrTitle2] + "'");
       //LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
@@ -9606,11 +9600,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           trailer.SourceUrl = selectedTrailerUrl;
           trailer.Quality = dlg.SelectedLabelText;
           trailer.Trailername = selectedTrailer.name;
-          string extension = (trailer.SourceUrl.Contains(".")) ? trailer.SourceUrl.Substring(trailer.SourceUrl.LastIndexOf(".")) : ".err";
-          trailer.DestinationFile = Path.Combine(Path.Combine(path, "Trailer"), (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + selectedTrailer.name + " (" + dlg.SelectedLabelText.Replace(" ", "") + ")" + extension)));
-          trailer.WebSite = "YouTube";
+          trailer.DestinationDirectory = Path.Combine(path, "Trailer"); // Path.Combine(Path.Combine(path, "Trailer"), (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + selectedTrailer.name + " (" + dlg.SelectedLabelText.Replace(" ", "") + ")" + extension)));
           MyFilms.AddTrailerToDownloadQueue(trailer);
-          LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - start loading single trailer '" + selectedTrailer.name + "' (filename length '" + trailer.DestinationFile.Length + "') from URL: '" + selectedTrailerUrl + "'");
+          LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - start loading single trailer '" + selectedTrailer.name + "' from URL: '" + selectedTrailerUrl + "'");
           if (interactive) ShowNotificationDialog("MyFilms Info", "Starting trailer download!");
         }
         else
@@ -9627,20 +9619,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               trailer.Trailername = trailersfound[i].name;
               trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
               trailer.SourceUrl = url;
-              trailer.Quality = null;
-              string extension = (trailer.SourceUrl.Contains(".")) ? trailer.SourceUrl.Substring(trailer.SourceUrl.LastIndexOf(".")) : ".err";
+              trailer.Quality = quality;
               if (overridestoragepath != null)
               {
                 string newpath = Path.Combine(overridestoragepath + @"MyFilms\", path.Substring(path.LastIndexOf("\\") + 1));
                 newpath = Path.Combine(newpath, "Trailer");
-                trailer.DestinationFile = Path.Combine(newpath, (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension)));
+                trailer.DestinationDirectory = newpath; 
               }
               else
               {
-                trailer.DestinationFile = Path.Combine(Path.Combine(path, "Trailer"), (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension)));
+                trailer.DestinationDirectory = Path.Combine(path, "Trailer"); 
               }
-              trailer.WebSite = "YouTube";
-              LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "' (filename length '" + trailer.DestinationFile.Length + "')");
+              // filename: (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension))
+              LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "'");
               MyFilms.AddTrailerToDownloadQueue(trailer);
             }
           }

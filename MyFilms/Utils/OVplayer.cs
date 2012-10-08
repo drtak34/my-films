@@ -49,7 +49,8 @@ namespace MyFilmsPlugin.Utils
         }
         catch (Exception ex)
         {
-          LogMyFilms.Debug("playback option exception: '{0}' - '{1}'", ex.Message, ex.StackTrace);
+          // LogMyFilms.Debug("playback option exception: '{0}' - '{1}'", ex.Message, ex.StackTrace);
+          LogMyFilms.Debug("playback option exception: '{0}'", ex.Message);
           return downloadUrls;
         }
 
