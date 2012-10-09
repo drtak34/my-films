@@ -15859,8 +15859,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (f.SourceUrl == null)
           {
             Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            f.SourceUrl = availableTrailerFiles.Values.Last();
-            f.Quality = availableTrailerFiles.Keys.Last();
+            f.SourceUrl = availableTrailerFiles.Last().Value;
+            f.Quality = availableTrailerFiles.Last().Key;
             
           }
           #endregion
@@ -15877,7 +15877,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("bgDownloadTrailer_DoWork() - no success - retry with refreshed web link !");
               Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
               string newUrl;
-              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Values.Last();
+              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Last().Value;
               bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
             }
             LogMyFilms.Debug("bgDownloadTrailer_DoWork() - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
@@ -15892,7 +15892,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception ex)
         {
-          LogMyFilms.DebugException("Error loading trailer: '" + ex.Message + "'", ex);
+          // LogMyFilms.DebugException("Error loading trailer: '" + ex.Message + "'", ex);
+          LogMyFilms.Debug("Error loading trailer: '" + ex.Message);
           MyFilmsDetail.setGUIProperty("statusmessage", "");
         }
       }
@@ -15942,8 +15943,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (f.SourceUrl == null)
           {
             Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            f.SourceUrl = availableTrailerFiles.Values.Last();
-            f.Quality = availableTrailerFiles.Keys.Last();
+            f.SourceUrl = availableTrailerFiles.Last().Value;
+            f.Quality = availableTrailerFiles.Last().Key;
           }
           #endregion
 
@@ -15958,7 +15959,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Download Thread '" + threadId + "' - no success - retry with refreshed web link !");
               Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
               string newUrl;
-              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Values.Last();
+              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Last().Value;
               bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
             }
             LogMyFilms.Debug("Download Thread '" + threadId + "' - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
@@ -15970,7 +15971,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           #endregion
         }
-        catch (Exception ex) { LogMyFilms.DebugException("Error loading trailer: '" + ex.Message + "'", ex); }
+        catch (Exception ex)
+        {
+          // LogMyFilms.DebugException("Error loading trailer: '" + ex.Message + "'", ex);
+          LogMyFilms.Warn("Error loading trailer: " + ex.Message);
+        }
       }
       while (TrailertoDownloadQueue.Count > 0 && !threadArray[threadId].CancellationPending);
       threadDoneEventArray[threadId].Set();

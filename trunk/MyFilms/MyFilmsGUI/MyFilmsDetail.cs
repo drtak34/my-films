@@ -8145,6 +8145,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         int movieDuration = (int)g_Player.Duration;
         VideoDatabase.SetMovieDuration(idFile, movieDuration);
       }
+
+      SetDelayedGuiProperties_NowPlaying(MyFilms.conf.StrPlayedRow);
+
       // Might require delay to wait until OSD is first (auto)updated from MyVideo database - we might want to override this after ...  
       // GUIPropertyManager.SetProperty("#Play.Current.Thumb", clear ? " " : osdImage);
       // Check, if property for OSD should be set (came from myvideo DB in the past) -> #Play.Current.Thumb
@@ -8450,6 +8453,49 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Info("Error during PlayBackEnded - exception: " + ex.Message + ", stacktrace: " + ex.StackTrace);
       }
+    }
+
+    private void SetDelayedGuiProperties_NowPlaying(DataRow rowPlaying)
+    {
+      // start a thread that will set the properties in 2 seconds (otherwise MediaPortal core logic would overwrite them)
+      if (rowPlaying == null) return;
+      new Thread(delegate(object o)
+          {
+            try
+            {
+              var movie = o as DataRow;
+              // string alternativeTitle = video["TranslatedTitle"].ToString();
+
+              #region Cover
+              string pictureFile = string.Empty;
+              if (movie["Picture"].ToString().Length > 0)
+              {
+                if ((movie["Picture"].ToString().IndexOf(":\\", System.StringComparison.Ordinal) == -1) && (movie["Picture"].ToString().Substring(0, 2) != "\\\\"))
+                  pictureFile = MyFilms.conf.StrPathImg + "\\" + movie["Picture"].ToString();
+                else
+                  pictureFile = movie["Picture"].ToString();
+              }
+              if (string.IsNullOrEmpty(pictureFile) || !File.Exists(pictureFile))
+                pictureFile = MyFilms.conf.DefaultCover;
+              #endregion
+
+              Thread.Sleep(2000);
+
+              string titleToShow = movie[MyFilms.conf.StrTitle1].ToString();
+
+              LogMyFilms.Debug("Setting Video Properties for '{0}'", titleToShow);
+
+              //if (!string.IsNullOrEmpty(titleToShow)) GUIPropertyManager.SetProperty("#Play.Current.Title", titleToShow);
+              //if (!string.IsNullOrEmpty(movie["Description"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Plot", movie["Description"].ToString());
+              //if (!string.IsNullOrEmpty(movie["Year"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Year", movie["Year"].ToString());
+
+              if (!string.IsNullOrEmpty(pictureFile)) GUIPropertyManager.SetProperty("#Play.Current.Thumb", pictureFile);
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Warn("Error setting playing video properties: {0}", ex.ToString());
+            }
+          }) { IsBackground = true, Name = "MyFilmsSetNowPlayingProperties" }.Start(rowPlaying);
     }
 
     private void GUIWindowManager_OnNewAction(MediaPortal.GUI.Library.Action action)
@@ -9150,7 +9196,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
         if (timeMovieStopped > 0)
         {
-          string title = System.IO.Path.GetFileName(filename);
+          string title = Path.GetFileName(filename);
           VideoDatabase.GetMovieInfoById(idMovie, ref movieDetails);
           if (movieDetails.Title != String.Empty) title = movieDetails.Title;
 
@@ -9202,7 +9248,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Todo: Avoid Resume of Trailers
         if ((timeMovieStopped > 0) && (noResumeMovie)) //Modded by Guzzi to avoid resuming for Trailers
         {
-          string title = System.IO.Path.GetFileName(filename);
+          string title = Path.GetFileName(filename);
           VideoDatabase.GetMovieInfoById(idMovie, ref movieDetails);
           if (movieDetails.Title != String.Empty) title = movieDetails.Title;
 
@@ -9612,39 +9658,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (i < 2 || loadAllTrailers)
             {
               Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + trailersfound[i].source);
-              if (availableTrailerFiles.Count > 0)
+              string url = null;
+              string quality = null;
+              if (availableTrailerFiles != null && availableTrailerFiles.Count > 0)
               {
-                string url = availableTrailerFiles.Values.Last();
-                string quality = availableTrailerFiles.Keys.Last();
-                var trailer = new Trailer();
-                trailer.MovieTitle = titlename;
-                trailer.Trailername = trailersfound[i].name;
-                trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
-                trailer.SourceUrl = url;
-                trailer.Quality = quality;
-                if (overridestoragepath != null)
-                {
-                  string newpath = Path.Combine(overridestoragepath + @"MyFilms\", path.Substring(path.LastIndexOf("\\") + 1));
-                  newpath = Path.Combine(newpath, "Trailer");
-                  trailer.DestinationDirectory = newpath;
-                }
-                else
-                {
-                  trailer.DestinationDirectory = Path.Combine(path, "Trailer");
-                }
-                // filename: (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension))
-                LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "'");
-                MyFilms.AddTrailerToDownloadQueue(trailer);
+                url = availableTrailerFiles.Last().Value;
+                quality = availableTrailerFiles.Last().Key;
               }
               else
               {
-                LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - cannot add trailer - no download Url found !");
+                LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - no download Url found - adding trailer without DL links for later processing from queue");
               }
+              var trailer = new Trailer();
+              trailer.MovieTitle = titlename;
+              trailer.Trailername = trailersfound[i].name;
+              trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
+              trailer.SourceUrl = url;
+              trailer.Quality = quality;
+              if (overridestoragepath != null)
+              {
+                string newpath = Path.Combine(overridestoragepath + @"MyFilms\", path.Substring(path.LastIndexOf("\\") + 1));
+                newpath = Path.Combine(newpath, "Trailer");
+                trailer.DestinationDirectory = newpath;
+              }
+              else
+              {
+                trailer.DestinationDirectory = Path.Combine(path, "Trailer");
+              }
+              // filename: (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension))
+              LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "'");
+              MyFilms.AddTrailerToDownloadQueue(trailer);
             }
           }
         }
         #endregion
-
       }
       #endregion
     }
