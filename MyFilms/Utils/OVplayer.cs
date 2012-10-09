@@ -54,11 +54,15 @@ namespace MyFilmsPlugin.Utils
           return downloadUrls;
         }
 
-        LogMyFilms.Info("Found playback options: '{0}'", downloadUrls.Count);
-        foreach (KeyValuePair<string, string> downloadUrl in downloadUrls)
+        if (downloadUrls != null)
         {
-          // LogMyFilms.Info("playback option: '{0}' - '{1}'", downloadUrl.Key, downloadUrl.Value);
-          LogMyFilms.Info("playback option: '{0}'", downloadUrl.Key);
+          LogMyFilms.Info("Found playback options: '{0}'", downloadUrls.Count);
+          foreach (KeyValuePair<string, string> downloadUrl in downloadUrls) 
+            LogMyFilms.Info("playback option: '{0}'", downloadUrl.Key); // LogMyFilms.Info("playback option: '{0}' - '{1}'", downloadUrl.Key, downloadUrl.Value);
+        }
+        else
+        {
+          LogMyFilms.Info("No playback options found - request returned 'null'");
         }
       }
       return downloadUrls;
@@ -169,6 +173,12 @@ namespace MyFilmsPlugin.Utils
     public string GetVideoUrls(string url)
     {
       return HosterFactory.GetHoster("Youtube").getVideoUrls(url);
+    }
+
+    // not yet used
+    public List<HosterBase> GetAllHoster()
+    {
+      return HosterFactory.GetAllHosters();
     }
 
   }
