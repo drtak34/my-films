@@ -7072,7 +7072,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use My Films online help and preview IMDB pages, BrowseTheWeb version 0.30 (0.3.0) or higher must be installed.</Message>
+        <Message>To use My Films online help and preview IMDB pages, BrowseTheWeb version 0.30 or higher must be installed.</Message>
         <Name>Browse The Web</Name>
       </DependencyItem>
       <DependencyItem>
@@ -7091,7 +7091,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v1.2 (1.2.0.0.0) or higher must be installed.</Message>
+        <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v1.2 or higher must be installed.</Message>
         <Name>OnlineVideos</Name>
       </DependencyItem>
       <DependencyItem>
@@ -7129,8 +7129,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.5.1.0 or above.
-V2.x is recommended to use latest features.</Message>
+        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.5.1.0 or above. V2.x is recommended to use latest features.</Message>
         <Name>Trakt for MediaPortal</Name>
       </DependencyItem>
     </Items>
