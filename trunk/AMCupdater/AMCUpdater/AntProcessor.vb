@@ -1137,6 +1137,10 @@ Public Class AntProcessor
                                 .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
                                 .OnlyUpdateNonEmptyData = CurrentSettings.Only_Update_With_Nonempty_Data
                                 .Dont_Ask_Interactive = CurrentSettings.Manual_Dont_Ask_Interactive ' added for silent updates without asking user to choose movie on failed auto matches
+                                .GrabberOverrideLanguage = CurrentSettings.Grabber_Override_Language
+                                .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
+                                .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
+                                .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
                                 .ProcessFile(AntRecord.ProcessModeNames.Update)
                                 .SaveProgress()
                             End With
@@ -1537,6 +1541,10 @@ Public Class AntProcessor
                 .OnlyUpdateNonEmptyData = False
                 .Dont_Ask_Interactive = False ' added for silent updates without asking user to choose movie on failed auto matches
                 .UseInternetDataForLanguages = CurrentSettings.Use_InternetData_For_Languages
+                .GrabberOverrideLanguage = CurrentSettings.Grabber_Override_Language
+                .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
+                .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
+                .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
 
                 'Dim t As Thread
                 't = New Thread(AddressOf Ant.ProcessFile)
@@ -2875,6 +2883,10 @@ Public Class AntProcessor
                             .OnlyAddMissingData = False ' always add all selected data for new records
                             .OnlyUpdateNonEmptyData = False
                             .MasterTitle = objSettings.Master_Title
+                            .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
+                            .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
+                            .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
+                            .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
                         End With
 
                         If (row("Moved")) Then
@@ -3031,6 +3043,13 @@ Public Class AntProcessor
                             .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
                             .XMLFilePath = objSettings.XML_File
                             .GroupName = row("GroupName").ToString
+                            .OnlyAddMissingData = False ' always add all selected data for new records
+                            .OnlyUpdateNonEmptyData = False
+                            .MasterTitle = objSettings.Master_Title
+                            .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
+                            .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
+                            .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
+                            .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
                         End With
                         If (row("Moved")) Then
                             ' filename exist but with wrong path (maybe moved. Entry don't be created but updated  
