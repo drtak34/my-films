@@ -502,7 +502,7 @@ Public Class AntRecord
                     End If
 
                     wurl.Clear() ' clear to make sure nothing left from tt request ...
-                    wurl = Gb.ReturnURL(SearchString, _parserPath, wpage, _internetLookupAlwaysPrompt, _filePath)
+                    wurl = Gb.ReturnURL(SearchString, _parserPath, wpage, True, _filePath) 'wurl = Gb.ReturnURL(SearchString, _parserPath, wpage, _internetLookupAlwaysPrompt, _filePath)
                     If (wurl.Count = 1) And _internetLookupAlwaysPrompt = False Then
 
                         '_InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _downloadImage)

@@ -718,7 +718,7 @@ namespace Grabber_Interface
       else
       {
         SaveXml(textConfig.Text + ".tmp");
-        Load_Preview(false);
+        Load_Preview(true); // always ask - gives all matching results! - was false in earlier versions ...
       }
     }
 
@@ -732,14 +732,13 @@ namespace Grabber_Interface
       button_GoDetailPage.Enabled = false;
       button_Preview.Enabled = false;
 
-      Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
-      Grabber_URLClass.IMDBUrl wurl;
+      var Grab = new Grabber_URLClass();
       int pageNumber = -1;
       if (!string.IsNullOrEmpty(textPage.Text))
         pageNumber = Convert.ToInt16(textPage.Text);
       try
       {
-        listUrl = Grab.ReturnURL(TextSearch.Text, textConfig.Text + ".tmp", pageNumber, AlwaysAsk);
+        listUrl = Grab.ReturnURL(TextSearch.Text, textConfig.Text + ".tmp", pageNumber, AlwaysAsk, string.Empty);
       }
       catch (Exception ex)
       {
@@ -763,7 +762,7 @@ namespace Grabber_Interface
         //row.Cells[8].Value = wurl.Akas;
         //i = dataGridViewSearchResults.Rows.Add(row); // add row for config
 
-        wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
+        var wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
         Image image = GrabUtil.GetImageFromUrl(wurl.Thumb); // Image image = Image.FromFile(wurl.Thumb); // Image smallImage = image.GetThumbnailImage(20, 30, null, IntPtr.Zero);
         dataGridViewSearchResults.Rows.Add(new object[] { (i + 1).ToString(), image, wurl.Title, wurl.Year, wurl.Options, wurl.ID, wurl.URL, wurl.Director, wurl.Akas });
 
@@ -3062,7 +3061,7 @@ namespace Grabber_Interface
               this.textPage.Text = Convert.ToString(Convert.ToInt16(this.textPage.Text) + Convert.ToInt16(this.textStepPage.Text));
               Grabber_URLClass.IMDBUrl wurl;
               wurl = (Grabber_URLClass.IMDBUrl)this.listUrl[rowSelected];
-              this.Load_Preview(false);
+              this.Load_Preview(true); // always ask - was false in earlier versions ...
               this.button_GoDetailPage.Enabled = false;
             }
             break;
@@ -3071,8 +3070,8 @@ namespace Grabber_Interface
               this.textPage.Text = Convert.ToString(Convert.ToInt16(this.textPage.Text) - Convert.ToInt16(this.textStepPage.Text));
               Grabber_URLClass.IMDBUrl wurl;
               wurl = (Grabber_URLClass.IMDBUrl)this.listUrl[rowSelected];
-              this.Load_Preview(false);
-              this.button_GoDetailPage.Enabled = false;
+              Load_Preview(true); // always ask - gives all results - was "false" in earlier versions
+              button_GoDetailPage.Enabled = false;
             }
             break;
           default:
