@@ -21,7 +21,7 @@ Public Class frmList
         If txtSearchString.Text <> "" Then
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             wurl.Clear()
-            wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, -1, CurrentSettings.Internet_Lookup_Always_Prompt)
+            wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, -1, True, String.Empty) 'wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, -1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
@@ -59,7 +59,7 @@ Public Class frmList
             lstOptionsExt.Rows.Clear()
             lstOptionsExt.Rows.Add(New Object() {Nothing, "... now searching for results ...", "", "", "", "", "", ""})
             wurl.Clear()
-            wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
+            wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, True, String.Empty) 'wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
@@ -388,7 +388,7 @@ Public Class frmList
             While SearchPage < 25
                 SearchPage += 1
                 pageurl.Clear()
-                pageurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
+                pageurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, True, String.Empty) 'pageurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, SearchPage, CurrentSettings.Internet_Lookup_Always_Prompt)
                 If (pageurl.Count > 0) Then
                     wurl.AddRange(pageurl)
                 ElseIf (SearchPage > 1) Then ' If no results AND page is 2 or bigger, stop loop
