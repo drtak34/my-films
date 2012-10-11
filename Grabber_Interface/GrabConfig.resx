@@ -2494,7 +2494,7 @@ In that case, you can define cleanup commands for the outer results here:
 Supported commands:
 #REGEX# (for cleanup of outer result)
 #REGEX##MULTI# for multiple replacements (see "Replace")
-To use a linebreak, use #LF# - this will internally be cahnged into a linebreak.
+To use a linebreak, use #LF# - this will internally be changed into a linebreak.
 Example:
 #REGEX##MULTI#, |#LF# 
 will replace comma separated results with linebreaked results.</value>
