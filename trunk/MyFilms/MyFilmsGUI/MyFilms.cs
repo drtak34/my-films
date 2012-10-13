@@ -16814,12 +16814,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       state.StrLayOutInHierarchies = conf.StrLayOutInHierarchies;
       state.LastID = conf.LastID;
 
-      state.IndexItem = (facadeFilms != null && facadeFilms.SelectedItem > -1) 
-        ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedListItemIndex : 0) 
-        : -1; //may need to check if there is no item selected and so save -1
-      state.TitleItem = (facadeFilms != null && facadeFilms.SelectedItem > -1) 
-        ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedItem.ToString() : this.facadeFilms.SelectedListItem.Label) 
-        : string.Empty; //may need to check if there is no item selected and so save ""
+      try
+      {
+        state.IndexItem = (facadeFilms != null && facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedListItemIndex : 0) : -1; //may need to check if there is no item selected and so save -1
+        state.TitleItem = (facadeFilms != null && facadeFilms.SelectedItem > -1) ? ((MyFilms.conf.Boolselect) ? this.facadeFilms.SelectedItem.ToString() : this.facadeFilms.SelectedListItem.Label) : string.Empty; //may need to check if there is no item selected and so save ""
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("SaveLastView() - exception on facade values: " + ex.Message);
+        state.IndexItem = -1;
+        state.TitleItem = string.Empty;
+      }
       if (!string.IsNullOrEmpty(viewname))
       {
         if (ViewStateCache.ContainsKey(viewname)) ViewStateCache.Remove(viewname);
