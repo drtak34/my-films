@@ -290,9 +290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         coverArtImage = MyFilms.conf.DefaultCover;
 
-        //if (System.IO.File.Exists(MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\NoPhoto.jpg"))
-        //    item.ThumbnailImage = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\NoPhoto.jpg"; 
-        if (System.IO.File.Exists(MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
+        if (File.Exists(MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
           coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
         LogMyFilms.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");
         if (File.Exists(coverArtImage))
@@ -300,26 +298,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.ThumbnailImage = coverArtImage;
           item.IconImageBig = coverArtImage;
           item.IconImage = coverArtImage;
-          //else if (movie.Actor != string.Empty)
-          //{            
-          //  coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieActors, movie.Actor);
-          //  if (System.IO.File.Exists(coverArtImage))
-          //  {
-          //    listItem.ThumbnailImage = coverArtImage;
-          //    listItem.IconImageBig = coverArtImage;
-          //    listItem.IconImage = coverArtImage;
-          //  }
-          //}
-          //else if (movie.SingleGenre != string.Empty)
-          //{
-          //  coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieGenre, movie.SingleGenre);
-          //  if (System.IO.File.Exists(coverArtImage))
-          //  {
-          //    listItem.ThumbnailImage = coverArtImage;
-          //    listItem.IconImageBig = coverArtImage;
-          //    listItem.IconImage = coverArtImage;
-          //  }
-          //}
         }
         // let's try to assign better covers
         if (!string.IsNullOrEmpty(coverArtImage))
