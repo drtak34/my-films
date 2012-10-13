@@ -11714,27 +11714,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             #region update person info from internet
             //Todo: add calls to update the personinfos from IMDB - use database and grabberclasses from MePo / Deda
-            ArtistIMDBpictures(this.facadeFilms.SelectedListItem.Label); // Call Updategrabber with Textlabel/Actorname
+            ArtistIMDBpictures(facadeFilms.SelectedListItem.Label); // Call Updategrabber with Textlabel/Actorname
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
             dlg.DeInit();
 
 
             //First search corresponding URL for the actor ...
-            // bool director = false; // Actor is director // Currently not used...
             IMDB _imdb = new IMDB();
-            //IMDB.IMDBUrl wurl;
-            //newGrab.FindActor(facadeFilms.SelectedListItem.Label);
             ArrayList actorList = new ArrayList();
-            //if (_imdb.Count > 0)
             {
               string actor = this.facadeFilms.SelectedListItem.Label;
-              //string test = _imdb[0].IMDBURL;
               _imdb.FindActor(actor);
               IMDBActor imdbActor = new IMDBActor();
-              // string ttt = imdbActor.ThumbnailUrl;
               if (_imdb.Count > 0)
               {
-                //int index = IMDBFetcher.FuzzyMatch(actor);
                 int index;
                 int matchingDistance = int.MaxValue;
 
@@ -11760,8 +11753,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 int actorId = GUIUtils.AddActor(null, imdbActor.Name);
                 if (actorId > 0)
                 {
-                  MediaPortal.Video.Database.VideoDatabase.SetActorInfo(actorId, imdbActor);
-                  //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId); // Guzzi: Removed, only updating Actorinfos
+                  VideoDatabase.SetActorInfo(actorId, imdbActor);
 
                   if (imdbActor.ThumbnailUrl != string.Empty)
                   {
@@ -11769,7 +11761,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
                     Utils.FileDelete(largeCoverArt);
                     Utils.FileDelete(coverArt);
-                    MediaPortal.Video.Database.IMDBFetcher.DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+                    IMDBFetcher.DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
                   }
                 }
               }
@@ -11782,13 +11774,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //#endif
                 int actorId = GUIUtils.AddActor(null, actor);
                 imdbActor.Name = actor;
-                IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
-                //imdbActorMovie.MovieTitle = _movieDetails.Title;
-                //imdbActorMovie.Year = _movieDetails.Year;
-                //imdbActorMovie.Role = role;
-                imdbActor.Add(imdbActorMovie);
-                MediaPortal.Video.Database.VideoDatabase.SetActorInfo(actorId, imdbActor);
-                //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+                VideoDatabase.SetActorInfo(actorId, imdbActor);
               }
             }
 
@@ -12186,7 +12172,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case "movie":
           {
-            var imdb = new IMDB();
+            IMDB imdb = new IMDB();
             imdb.Find(searchexpression);
             foreach (IMDB.IMDBUrl t in imdb) LogMyFilms.Debug("movie imdb internet search - found: '" + t.Title + "', URL = '" + t.URL + "'");
             if (imdb.Count > 0)
@@ -12202,7 +12188,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         case "person":
           {
-            var imdb = new IMDB();
+            IMDB imdb = new IMDB();
             imdb.FindActor(searchexpression);
             if (imdb.Count > 0)
             {
@@ -12422,7 +12408,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
           {
             string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(wperson);
-            this.PersonInfo(actorSearchname);
+            PersonInfo(actorSearchname);
             return;
           }
 
@@ -12532,11 +12518,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (!string.IsNullOrEmpty(conf.StrPathArtist))
         {
-          //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-          //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-          //  Utils.FileDelete(largeCoverArt);
-          //  Utils.FileDelete(coverArt);
-          //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
           string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, personName, true, true, out filename1person);
           LogMyFilms.Info("Person Artwork '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personName + "', path = '" + filename1person + "'");
         }
@@ -12559,7 +12540,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (actorId > 0)
       {
         VideoDatabase.SetActorInfo(actorId, imdbActor);
-        //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
       }
 
       //MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);

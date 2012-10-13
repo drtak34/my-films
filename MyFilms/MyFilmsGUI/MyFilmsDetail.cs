@@ -7731,8 +7731,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (g_Player.Playing) g_Player.Stop();
       // search all files
       var newItems = new ArrayList();
-      bool noResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
       int movieIndex = 0;
+      bool noResumeMovie = true;
 
       LogMyFilms.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + selectItem + "' (Selected_Item");
       //Change back, if method in original properly adapted with bool Trailer
@@ -7763,7 +7763,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           long wsize = File.Exists(movieFileName) ? new FileInfo(movieFileName).Length : 0;
           string wsizeformatted = string.Format("{0} MB", wsize / 1048576);
           if (movieFileName.Contains("\\"))
-            dlgmenu.Add(movieFileName.Substring(movieFileName.LastIndexOf("\\", System.StringComparison.Ordinal) + 1) + " (" + wsizeformatted + ")"); // add moviename to menu
+            dlgmenu.Add(movieFileName.Substring(movieFileName.LastIndexOf("\\", StringComparison.Ordinal) + 1) + " (" + wsizeformatted + ")"); // add moviename to menu
           else
             dlgmenu.Add(movieFileName + " (" + wsizeformatted + ")"); // add moviename to menu
         }
@@ -7812,12 +7812,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             playlist.Add(newitem);
           }
         }
-
-        // ask for start movie Index
-
         // play movie...
         //PlayMovieFromPlayListTrailer(NoResumeMovie, IMovieIndex - 1);
-        PlayMovieFromPlayListTrailer(noResumeMovie, 0);
+        PlayMovieFromPlayListTrailer(0); // always start with first trailer ...
       }
       else
       {
@@ -7924,11 +7921,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // Play Movie Trailers for Scrobbling !!!
     //-------------------------------------------------------------------------------------------
     {
-      // setProcessAnimationStatus(true, m_SearchAnimation);
-      //LogMyFilms.Debug("(Play Movie Trailer) select_item = '" + select_item + "' - GetID = '" + GetID + "'");
-      if (g_Player.Playing)
-        g_Player.Stop();
-      const bool noResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
+      if (g_Player.Playing) g_Player.Stop();
 
       if (newItems.Count > 20)
       // Maximum 20 entries (limitation for MP dialogFileStacking)
@@ -7936,7 +7929,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("Too many entries found !', number of entries = " + newItems.Count.ToString());
         return;
       }
-      // setProcessAnimationStatus(false, m_SearchAnimation);
       if (newItems.Count > 0)
       {
         playlistPlayer.Reset();
@@ -7953,62 +7945,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           newitem.Type = PlayListItem.PlayListItemType.Video;
           playlist.Add(newitem);
         }
-        PlayMovieFromPlayListTrailer(noResumeMovie, 0);
+        PlayMovieFromPlayListTrailer(0);
       }
     }
 
-    public static void Launch_Movie_Trailer_Streams(int select_item, int GetID, GUIAnimation m_SearchAnimation)
-    //-------------------------------------------------------------------------------------------
-    // Play Movie Trailer Links (streaming) !!!
-    //-------------------------------------------------------------------------------------------
-    {  // ToDo: Add methods for Streaming - check OV for howto's...
-      LogMyFilms.Debug("(Play Movie Trailer Streams) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
-      if (Helper.FieldIsSet(MyFilms.conf.CmdPar))
-        RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
-      if (g_Player.Playing)
-        g_Player.Stop();
-      // search all files
-      var newItems = new ArrayList();
-      const bool noResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
-      int IMovieIndex = 0;
-      LogMyFilms.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + select_item + "' (Selected_Item");
-      if (newItems.Count > 0)
-      {
-        playlistPlayer.Reset();
-        playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
-        PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
-        playlist.Clear();
-
-        if (IMovieIndex > 0)
-        {
-          var movieFileName = (string)newItems[IMovieIndex - 1]; // as in menu there is "all-option" as first index 0 ...
-          var newitem = new PlayListItem();
-          newitem.FileName = movieFileName;
-          LogMyFilms.Info("Play specific movie trailer: '" + movieFileName + "'");
-          newitem.Type = PlayListItem.PlayListItemType.Video;
-          playlist.Add(newitem);
-        }
-        else // if play all trailers is chosen add all available trailers to playlist
-        {
-          foreach (object t in newItems)
-          {
-            var movieFileName = (string)t;
-            var newitem = new PlayListItem();
-            newitem.FileName = movieFileName;
-            LogMyFilms.Info("Add trailer to playlist: '" + movieFileName + "'");
-            newitem.Type = PlayListItem.PlayListItemType.Video;
-            playlist.Add(newitem);
-          }
-        }
-        PlayMovieFromPlayListTrailer(noResumeMovie, 0);
-      }
-    }
-
-    protected static void Search_parts(string fileName, DataRow row, bool delete, ref bool NoResumeMovie, ref ArrayList newItems, ref int IdMovie, ref int IMovieIndex, ref int timeMovieStopped)
+    protected static void Search_parts(string fileName, DataRow row, bool delete, ref bool noResumeMovie, ref ArrayList newItems, ref int idMovie, ref int movieIndex, ref int timeMovieStopped)
     {
       // if filename already in arraylist, return
       // search other parts belonging to the same movie
-      var dirsInf = new DirectoryInfo(fileName.Substring(0, fileName.LastIndexOf("\\", System.StringComparison.Ordinal)));
+      var dirsInf = new DirectoryInfo(fileName.Substring(0, fileName.LastIndexOf("\\", StringComparison.Ordinal)));
       FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
       foreach (string wfile in sfiles.Select(sfi => dirsInf.FullName + "\\" + sfi.Name))
       {
@@ -8023,8 +7968,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            IdMovie = -1;
-            add_update_movie(wfile, row, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+            idMovie = -1;
+            add_update_movie(wfile, row, ref noResumeMovie, ref newItems, ref idMovie, ref movieIndex, ref timeMovieStopped);
             continue;
           }
         }
@@ -8056,6 +8001,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           string title = Path.GetFileName(fileName);
           if (movieDetails.Title != String.Empty) title = movieDetails.Title;
+          string mfTitle = row[MyFilms.conf.StrTitle1].ToString();
+          if (mfTitle.Contains("\\")) mfTitle = mfTitle.Substring(mfTitle.LastIndexOf("\\") + 1);
+          if (mfTitle != String.Empty) title = mfTitle;
 
           if (noResumeMovie)
           {
@@ -8081,7 +8029,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       // update the MP Video Database for OSD view during playing
-      UpdateDatabase(fileName, row, -1);
+      // UpdateDatabase(fileName, row, -1); // disabled, as we do not want to add/update VDB anymore from MyFilms
       newItems.Add(fileName);
     }
 
@@ -8322,15 +8270,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //watchedMovies.Add(strFilePath);
             }
 
-            else if ((filename.Trim().ToLower().Equals(strFilePath.Trim().ToLower())) && (timeMovieStopped > 0))
+            else if (filename.Trim().ToLower().Equals(strFilePath.Trim().ToLower()) && timeMovieStopped > 0)
             {
               g_Player.Player.GetResumeState(out resumeData);
               LogMyFilms.Info("GUIVideoFiles: {0} idFile={1} timeMovieStopped={2} resumeData={3}", "MyFilms", idFile, timeMovieStopped, resumeData);
               VideoDatabase.SetMovieStopTimeAndResumeData(idFile, timeMovieStopped, resumeData);
               LogMyFilms.Debug("GUIVideoFiles: {0} store resume time", "MyFilms");
 
-              //Set file "watched" only if 80% or higher played time (share view)
-              if (playTimePercentage >= 80)
+              if (playTimePercentage >= 80) //Set file "watched" only if 80% or higher played time (share view)
               {
                 //watchedMovies.Add(strFilePath);
               }
@@ -8365,20 +8312,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 VideoDatabase.DeleteMovieStopTime(idFile);
             }
           }
-          if (ended || (stopped && MyFilms.conf.CheckWatchedPlayerStopped))
-          {
-            // Update db view watched status for played movie
-            var details = new IMDBMovie();
-            VideoDatabase.GetMovieInfo(filename, ref details);
-            //VideoDatabase.GetMovieInfoById(iidMovie, ref details);
-            if (!details.IsEmpty && (playTimePercentage >= 80 || g_Player.IsDVDMenu)) //Flag movie "watched" status only if 80% or higher played time (database view)
-            {
-              details.Watched = 1;
-              //details.Watched++;
-              VideoDatabase.SetWatched(details);
-              //VideoDatabase.SetMovieInfoById(details.ID, ref details);
-            }
-          }
+
+          //if (ended || (stopped && MyFilms.conf.CheckWatchedPlayerStopped))
+          //{
+          //  // Update db view watched status for played movie
+          //  var details = new IMDBMovie();
+          //  VideoDatabase.GetMovieInfo(filename, ref details);
+          //  //VideoDatabase.GetMovieInfoById(iidMovie, ref details);
+          //  if (!details.IsEmpty && (playTimePercentage >= 80 || g_Player.IsDVDMenu)) //Flag movie "watched" status only if 80% or higher played time (database view)
+          //  {
+          //    details.Watched = 1;
+          //    //details.Watched++;
+          //    VideoDatabase.SetWatched(details);
+          //    //VideoDatabase.SetMovieInfoById(details.ID, ref details);
+          //  }
+          //}
           #endregion
         }
 
@@ -8482,12 +8430,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Thread.Sleep(2000);
 
               string titleToShow = movie[MyFilms.conf.StrTitle1].ToString();
+              if (titleToShow.Contains("\\")) titleToShow = titleToShow.Substring(titleToShow.LastIndexOf("\\") + 1); // strip group names ...
 
               LogMyFilms.Debug("Setting Video Properties for '{0}'", titleToShow);
 
-              //if (!string.IsNullOrEmpty(titleToShow)) GUIPropertyManager.SetProperty("#Play.Current.Title", titleToShow);
-              //if (!string.IsNullOrEmpty(movie["Description"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Plot", movie["Description"].ToString());
-              //if (!string.IsNullOrEmpty(movie["Year"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Year", movie["Year"].ToString());
+              if (!string.IsNullOrEmpty(titleToShow)) GUIPropertyManager.SetProperty("#Play.Current.Title", titleToShow);
+              if (!string.IsNullOrEmpty(movie["Description"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Plot", movie["Description"].ToString());
+              if (!string.IsNullOrEmpty(movie["Year"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Year", movie["Year"].ToString());
 
               if (!string.IsNullOrEmpty(pictureFile)) GUIPropertyManager.SetProperty("#Play.Current.Thumb", pictureFile);
             }
@@ -8591,7 +8540,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static int UpdateDatabase(string filename, DataRow row, int idMovie)
     {
       var movieDetails = new IMDBMovie();
-      if (idMovie <= 0)
+      if (idMovie <= 0) // add new VDB movie
       {
         idMovie = VideoDatabase.AddMovie(filename, row["Subtitles"].ToString().Length > 0);
         string wdescription = System.Web.HttpUtility.HtmlEncode(row["Description"].ToString().Replace('’', '\''));
@@ -8625,7 +8574,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           string wImage;
           string dbPicture = row["Picture"].ToString();
-          if (dbPicture.IndexOf(":\\", System.StringComparison.Ordinal) == -1 && (dbPicture.Length < 2 || dbPicture.Substring(0, 2) != "\\\\"))
+          if (dbPicture.IndexOf(":\\", StringComparison.Ordinal) == -1 && (dbPicture.Length < 2 || dbPicture.Substring(0, 2) != "\\\\"))
             wImage = MyFilms.conf.StrPathImg + "\\" + dbPicture;
           else
             wImage = dbPicture;
@@ -8650,7 +8599,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         movieDetails.Cast = wzone;
         VideoDatabase.SetMovieInfoById(idMovie, ref movieDetails);
       }
-      else
+      else // update existing VDB movie
       {
         int pathId, widMovie;
         widMovie = VideoDatabase.GetFile(filename, out pathId, out widMovie, true);
@@ -8664,7 +8613,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           pathId = VideoDatabase.GetPath(strPath);
           pathId = pathId == -1 ? VideoDatabase.AddPath(strPath) : VideoDatabase.GetPath(strPath);
           VideoDatabase.AddFile(idMovie, pathId, strFileName);
-
         }
       }
       return idMovie;
@@ -8723,11 +8671,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.IsNullOrEmpty(fileName) && !trailer)
       {
         // search filename by Title movie
-        if ((MyFilms.conf.SearchFile == "True") || (MyFilms.conf.SearchFile == "yes"))
+        if (MyFilms.conf.SearchFile == "True" || MyFilms.conf.SearchFile == "yes")
         {
           string movieName = row[MyFilms.conf.ItemSearchFile].ToString();
           LogMyFilms.Debug("Search_All_Files: Search = active, movieName = '" + movieName + "'");
-          movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) + 1).Trim();
+          movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim, StringComparison.Ordinal) + 1).Trim();
           LogMyFilms.Debug("Search_All_Files: Search = active, movieName (cleaned) = '" + movieName + "'");
           if (MyFilms.conf.ItemSearchFile.Length > 0)
           {
@@ -8746,9 +8694,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string wisofile = string.Empty;
       // split filename information delimited by semicolumn (multifile detection)
       string[] split1 = fileName.Split(new Char[] { ';' });
-      var movies = new ArrayList();
-      var movieDetails = new IMDBMovie();
-      var dvdRegexp = new Regex("video_ts");
       foreach (string wfile in split1)
       {
         fileName = wfile.IndexOf("/") == -1 ? wfile.Trim() : wfile.Substring(0, wfile.IndexOf("/")).Trim();
@@ -8793,7 +8738,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
             }
             // only one iso file can be mounted
-            if ((!wisomounted) && ((wisofile == wtomount) || (wisofile == string.Empty)))
+            if (!wisomounted && (wisofile == wtomount || wisofile == string.Empty))
             {
               if (MountImageFile(wGetID, wtomount))
               {
@@ -9066,7 +9011,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static void UpdateFieldDb(string champselect, int iidmovie, string field)
     {
       var movieDetails = new IMDBMovie();
-      var actor = new IMDBActor();
 
       if (field == "Genre")
       {
@@ -9099,16 +9043,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    static public string SearchMovie(string filename, string StrDirStor)
+    static public string SearchMovie(string filename, string strDirStor)
     {
-      //check if divx is on Disk
+      //check if media file is on Disk
       if (File.Exists(filename) || Directory.Exists(filename))
       {
         return filename;
       }
       else
       {
-        string searchrep = StrDirStor;
+        string searchrep = strDirStor;
         DriveInfo[] allDrives = DriveInfo.GetDrives();
 
         searchrep = allDrives.Where(d => (d.DriveType.ToString() == "CDRom") && d.IsReady).Aggregate(searchrep, (current, d) => current.Length > 0 ? current + ";" + d.Name : d.Name);
@@ -9128,60 +9072,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    static public bool CheckMovie(int idMovie)
-    {
-      var movieDetails = new IMDBMovie();
-      VideoDatabase.GetMovieInfoById(idMovie, ref movieDetails);
-
-      if (!MediaPortal.Util.Utils.IsDVD(movieDetails.Path)) return true;
-      string cdlabel = MediaPortal.Util.Utils.GetDriveSerial(movieDetails.Path);
-      if (cdlabel.Equals(movieDetails.CDLabel)) return true;
-
-      var dlg = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      if (dlg == null) return true;
-      while (true)
-      {
-        dlg.SetHeading(GUILocalizeStrings.Get(428));
-        dlg.SetLine(1, GUILocalizeStrings.Get(429));
-        dlg.SetLine(2, movieDetails.DVDLabel);
-        dlg.SetLine(3, movieDetails.Title);
-        dlg.DoModal(GUIWindowManager.ActiveWindow);
-        if (dlg.IsConfirmed)
-        {
-          if (movieDetails.CDLabel.StartsWith("nolabel"))
-          {
-            var movies = new ArrayList();
-            //#if MP1X
-            //                        VideoDatabase.GetFiles(idMovie, ref movies);
-            //#else
-            //                        VideoDatabase.GetFilesForMovie(idMovie, ref movies);
-            //#endif
-            GUIUtils.GetFilesForMovie(idMovie, ref movies); // using reflection to get VideoDatabase.GetFiles()
-
-            if (File.Exists(/*movieDetails.Path+movieDetails.File*/(string)movies[0]))
-            {
-              cdlabel = MediaPortal.Util.Utils.GetDriveSerial(movieDetails.Path);
-              VideoDatabase.UpdateCDLabel(movieDetails, cdlabel);
-              movieDetails.CDLabel = cdlabel;
-              return true;
-            }
-          }
-          else
-          {
-            cdlabel = MediaPortal.Util.Utils.GetDriveSerial(movieDetails.Path);
-            if (cdlabel.Equals(movieDetails.CDLabel)) return true;
-          }
-        }
-        else break;
-      }
-      return false;
-    }
-
-    static public void PlayMovieFromPlayList(bool noResumeMovie)
-    {
-      PlayMovieFromPlayList(noResumeMovie, -1);
-    }
-
     static public void PlayMovieFromPlayList(bool noResumeMovie, int iMovieIndex)
     {
       string filename = iMovieIndex == -1 ? playlistPlayer.GetNext() : playlistPlayer.Get(iMovieIndex);
@@ -9191,7 +9081,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int idMovie = VideoDatabase.GetMovieId(filename);
       int timeMovieStopped = 0;
       byte[] resumeData = null;
-      if ((idMovie >= 0) && (idFile >= 0))
+      if (idMovie >= 0 && idFile >= 0)
       {
         timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
         if (timeMovieStopped > 0)
@@ -9232,55 +9122,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    static public void PlayMovieFromPlayListTrailer(bool noResumeMovie, int iMovieIndex)
+    static public void PlayMovieFromPlayListTrailer(int iMovieIndex)
     {
       trailerPlayed = true;
       string filename = iMovieIndex == -1 ? playlistPlayer.GetNext() : playlistPlayer.Get(iMovieIndex);
       var movieDetails = new IMDBMovie();
       VideoDatabase.GetMovieInfo(filename, ref movieDetails);
-      int idFile = VideoDatabase.GetFileId(filename);
-      int idMovie = VideoDatabase.GetMovieId(filename);
-      int timeMovieStopped = 0;
-      byte[] resumeData = null;
-      if ((idMovie >= 0) && (idFile >= 0))
-      {
-        timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
-        //Todo: Avoid Resume of Trailers
-        if ((timeMovieStopped > 0) && (noResumeMovie)) //Modded by Guzzi to avoid resuming for Trailers
-        {
-          string title = Path.GetFileName(filename);
-          VideoDatabase.GetMovieInfoById(idMovie, ref movieDetails);
-          if (movieDetails.Title != String.Empty) title = movieDetails.Title;
-
-          if (noResumeMovie)
-          {
-            var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-            if (null == dlgYesNo) return;
-            dlgYesNo.SetHeading(GUILocalizeStrings.Get(900)); //resume movie?
-            dlgYesNo.SetLine(1, title);
-            dlgYesNo.SetLine(2, GUILocalizeStrings.Get(936) + MediaPortal.Util.Utils.SecondsToHMSString(timeMovieStopped));
-            dlgYesNo.SetDefaultToYes(true);
-            dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
-            if (!dlgYesNo.IsConfirmed)
-              timeMovieStopped = 0;
-          }
-        }
-      }
       if (iMovieIndex == -1)
         playlistPlayer.PlayNext();
       else
         playlistPlayer.Play(iMovieIndex);
-      if (g_Player.Playing && timeMovieStopped > 0)
-      {
-        if (g_Player.IsDVD)
-          g_Player.Player.SetResumeState(resumeData);
-        else
-        {
-          var msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_SEEK_POSITION, 0, 0, 0, 0, 0, null);
-          msg.Param1 = (int)timeMovieStopped;
-          GUIGraphicsContext.SendMessage(msg);
-        }
-      }
     }
 
     static public bool MountImageFile(int windowId, string file)
