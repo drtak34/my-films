@@ -4356,6 +4356,13 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <ZipFileName>Installer{CopyFile}\{eb6f633a-3456-495e-913a-f950105fa9b6}-Western.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\Default\Media\Logos\MyFilms\Western.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\cinemascope.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b47c9784-aa84-4dac-9212-756515ba612e}-cinemascope.png</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\cinemascope.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -11387,6 +11394,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.13\Default\Media\Logos\MyFilms\Western.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{eb6f633a-3456-495e-913a-f950105fa9b6}-Western.png</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.13\Default\Media\Logos\MyFilms\Western.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\Media\Logos\MyFilms\cinemascope.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b47c9784-aa84-4dac-9212-756515ba612e}-cinemascope.png</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\Media\Logos\MyFilms\cinemascope.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />

@@ -220,4 +220,7 @@
   <Values Option="Load_Person_Images_With_Fanart">
     <Value>False</Value>
   </Values>
+  <Values Option="Skip_Excluded_Movie_Files">
+    <Value>False</Value>
+  </Values>
 </NewDataSet>
