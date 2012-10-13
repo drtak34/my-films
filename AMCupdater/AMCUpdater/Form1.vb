@@ -650,15 +650,15 @@ Public Class Form1
         'cbManualParameterFieldList - otherwise use this Ant field as a parameter
         'cbManualParameterOperator - and this is the operation to perform - '=', '!=', 'EXISTS', 'NOT EXISTS', 'LIKE'
         'txtManualParameterValue - and this is the parameter to check for.
-        If txtManualXMLPath.Text = String.Empty Then
+        If txtConfigFilePath.Text = String.Empty Then
             Exit Sub
         End If
 
 
-        Dim f As New IO.FileInfo(txtManualXMLPath.Text)
+        Dim f As New IO.FileInfo(txtConfigFilePath.Text)
         If Not f.Exists Then
             MsgBox("File : " + f.FullName + " doesn't exist !", MsgBoxStyle.Critical)
-            txtManualXMLPath.Focus()
+            txtConfigFilePath.Focus()
             Return
         End If
         If cbManualSelectOperation.SelectedIndex = -1 Then
@@ -765,7 +765,7 @@ Public Class Form1
         'If AntProcessor.ManualOperation = "Scan Media Data" Then
         'AntProcessor.ManualFieldValue = TxtManualPathToMovies.Text
         'End If
-        AntProcessor.ManualXMLPath = txtManualXMLPath.Text
+        AntProcessor.ManualXMLPath = txtConfigFilePath.Text
 
         AntProcessor.ManualTestOperation()
 
@@ -836,6 +836,40 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
     Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectConfigFile.Click
+
+        '' originaol code from filebrowsing in update tab
+        'Try
+        '    With OpenFileDialog1
+        '        .InitialDirectory = Environment.SpecialFolder.Desktop
+        '        .FileName = ""
+        '        .CheckFileExists = True
+        '        .CheckPathExists = True
+        '        .DefaultExt = "xml"
+        '        .DereferenceLinks = True
+        '        .Filter = "XML files (*.xml)|*.xml|All files|*.*"
+        '        .Multiselect = False
+        '        .RestoreDirectory = True
+        '        .ShowHelp = True
+        '        .ShowReadOnly = False
+        '        .ReadOnlyChecked = False
+        '        .Title = "Select a file to open"
+        '        .ValidateNames = True
+        '        If .ShowDialog = Windows.Forms.DialogResult.OK Then
+        '            Try
+        '                txtManualXMLPath.Text = .FileName
+        '            Catch fileException As Exception
+        '                LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
+        '            End Try
+        '        End If
+
+        '    End With
+        'Catch ex As Exception
+        '    LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
+        '    Console.WriteLine(ex.Message)
+        '    MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
+        'End Try
+        'Me.ValidateChildren()
+
         Dim currentDirectory As String
         currentDirectory = txtConfigFilePath.Text
         Try
@@ -857,7 +891,6 @@ Public Class Form1
                 If .ShowDialog = Windows.Forms.DialogResult.OK Then
                     Try
                         txtConfigFilePath.Text = .FileName
-                        txtManualXMLPath.Text = .FileName
                     Catch fileException As Exception
                         LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
                     End Try
@@ -944,39 +977,6 @@ Public Class Form1
 
         End If
     End Sub
-    Private Sub btnManualSelectXMLFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualSelectXMLFile.Click
-        Try
-            With OpenFileDialog1
-                .InitialDirectory = Environment.SpecialFolder.Desktop
-                .FileName = ""
-                .CheckFileExists = True
-                .CheckPathExists = True
-                .DefaultExt = "xml"
-                .DereferenceLinks = True
-                .Filter = "XML files (*.xml)|*.xml|All files|*.*"
-                .Multiselect = False
-                .RestoreDirectory = True
-                .ShowHelp = True
-                .ShowReadOnly = False
-                .ReadOnlyChecked = False
-                .Title = "Select a file to open"
-                .ValidateNames = True
-                If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                    Try
-                        txtManualXMLPath.Text = .FileName
-                    Catch fileException As Exception
-                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
-                    End Try
-                End If
-
-            End With
-        Catch ex As Exception
-            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
-            Console.WriteLine(ex.Message)
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
-        End Try
-        Me.ValidateChildren()
-    End Sub
     Private Sub btnSelectParserFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectParserFile.Click
         Dim currentPath As String
         currentPath = txtParserFilePath.Text
@@ -1015,6 +1015,38 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
     Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
+        '' old code from manual exclusion file
+        'Try
+        '    With OpenFileDialog1
+        '        .InitialDirectory = My.Application.Info.DirectoryPath
+        '        .FileName = "AMCUpdater_Excluded_Files.txt"
+        '        .CheckFileExists = False
+        '        .CheckPathExists = True
+        '        .DefaultExt = "txt"
+        '        .DereferenceLinks = True
+        '        .Filter = "txt files (*.txt)|*.txt|All files|*.*"
+        '        .Multiselect = False
+        '        .RestoreDirectory = True
+        '        .ShowHelp = True
+        '        .ShowReadOnly = False
+        '        .ReadOnlyChecked = False
+        '        .Title = "Select a file for Excluded Movies Files"
+        '        .ValidateNames = True
+        '        If .ShowDialog = Windows.Forms.DialogResult.OK Then
+        '            Try
+        '                txtManualExcludedMoviesPath.Text = .FileName
+        '            Catch fileException As Exception
+        '                LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
+        '            End Try
+        '        End If
+
+        '    End With
+        'Catch ex As Exception
+        '    LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
+        '    MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
+        'End Try
+        'Me.ValidateChildren()
+
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
         Try
@@ -1219,39 +1251,6 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
 
-    Private Sub btnManualSelectExcludedMoviesFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualSelectExcludedMoviesFile.Click
-        Try
-            With OpenFileDialog1
-                .InitialDirectory = My.Application.Info.DirectoryPath
-                .FileName = "AMCUpdater_Excluded_Files.txt"
-                .CheckFileExists = False
-                .CheckPathExists = True
-                .DefaultExt = "txt"
-                .DereferenceLinks = True
-                .Filter = "txt files (*.txt)|*.txt|All files|*.*"
-                .Multiselect = False
-                .RestoreDirectory = True
-                .ShowHelp = True
-                .ShowReadOnly = False
-                .ReadOnlyChecked = False
-                .Title = "Select a file for Excluded Movies Files"
-                .ValidateNames = True
-                If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                    Try
-                        txtManualExcludedMoviesPath.Text = .FileName
-                    Catch fileException As Exception
-                        LogEvent("ErrorEvent : " + fileException.Message, EventLogLevel.ErrorEvent)
-                    End Try
-                End If
-
-            End With
-        Catch ex As Exception
-            LogEvent("ErrorEvent : " + ex.Message, EventLogLevel.ErrorEvent)
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
-        End Try
-        Me.ValidateChildren()
-    End Sub
-
 #End Region
 
 #Region "Validation"
@@ -1311,6 +1310,8 @@ Public Class Form1
 
             grpManualUpdatesParameters.Visible = True
 
+            cbSkipExcludedMovieFiles.Visible = False
+
 
             If cbManualSelectOperation.SelectedItem = "Update Value" Then
                 lblManualEnterNewValue.Visible = True
@@ -1365,6 +1366,7 @@ Public Class Form1
                 lblManualDatabaseFieldsPrompt.Visible = True
                 chkManualUpdateRecordsOnlyMissingData.Visible = True
                 chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = True
+                cbSkipExcludedMovieFiles.Visible = True
             ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
                 chkManualMissingFanartDownload.Visible = True
                 'grpManualInternetLookupSettings.Visible = True
@@ -1552,9 +1554,6 @@ Public Class Form1
     Private Sub txtManualInternetParserPath_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManualInternetParserPath.LostFocus
         Me.ValidateChildren()
     End Sub
-    Private Sub txtManualExcludedMoviesPath_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManualExcludedMoviesPath.LostFocus
-        Me.ValidateChildren()
-    End Sub
     Private Sub cbDatabaseFields_ItemCheck(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckEventArgs) Handles cbDatabaseFields.ItemCheck
         Database_Fields_Validation()
     End Sub
@@ -1662,19 +1661,19 @@ Public Class Form1
         End If
 
     End Sub
-    Private Sub ManualUpdater_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtManualXMLPath.Validating, cbManualParameterOperator1.Validating, cbManualParameterFieldList1.Validating, txtManualNewValue.Validating, txtManualParameterValue1.Validating, cbManualSelectField.Validating, cbManualSelectOperation.Validating, chkManualParametersUpdateAll.Validating
+    Private Sub ManualUpdater_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles cbManualParameterOperator1.Validating, cbManualParameterFieldList1.Validating, txtManualNewValue.Validating, txtManualParameterValue1.Validating, cbManualSelectField.Validating, cbManualSelectOperation.Validating, chkManualParametersUpdateAll.Validating
         Dim IsValid As Boolean = True
         Dim TestState As Boolean = btnManualDoTest.Enabled
         Dim ApplyState As Boolean = btnManualApplyChanges.Enabled
 
         'Check a path has been entered:
-        If txtManualXMLPath.Text = String.Empty Then
-            epManualUpdater.SetError(txtManualXMLPath, "Path to Ant XML database file must be entered")
+        If txtConfigFilePath.Text = String.Empty Then
+            epManualUpdater.SetError(txtConfigFilePath, "Path to Ant XML database file must be entered")
             IsValid = False
         Else
-            epManualUpdater.SetError(txtManualXMLPath, "")
-            If Not File.Exists(txtManualXMLPath.Text) Then
-                epManualUpdater.SetError(txtManualXMLPath, "Path to Ant XML database file is not valid")
+            epManualUpdater.SetError(txtConfigFilePath, "")
+            If Not File.Exists(txtConfigFilePath.Text) Then
+                epManualUpdater.SetError(txtConfigFilePath, "Path to Ant XML database file is not valid")
             End If
         End If
 
@@ -1800,28 +1799,28 @@ Public Class Form1
                 If IsInternetLookupNeeded() = True Then
                     grpManualInternetLookupSettings.Visible = True
                     'Excluded Movie File Path Required:
-                    If txtManualExcludedMoviesPath.Text = String.Empty Then
-                        epManualUpdater.SetError(txtManualExcludedMoviesPath, "Path to excluded movies file must be entered")
+                    If txtExcludeFilePath.Text = String.Empty Then
+                        epManualUpdater.SetError(txtExcludeFilePath, "Path to excluded movies file must be entered")
                         IsValid = False
                     Else
                         'Check it's a valid path:
-                        Dim wpath As String = txtManualExcludedMoviesPath.Text
+                        Dim wpath As String = txtExcludeFilePath.Text
                         If Not wpath.Contains("\") Then
                             'Not a path without a backslash!
-                            epManualUpdater.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
+                            epManualUpdater.SetError(txtExcludeFilePath, "Please enter a valid file path")
                             IsValid = False
                         Else
                             wpath = wpath.Substring(0, wpath.LastIndexOf("\"))
                             If Directory.Exists(wpath) Then
-                                If txtManualExcludedMoviesPath.Text.EndsWith("\") = True Then
-                                    txtManualExcludedMoviesPath.Text += "AMCUpdater_Excluded_Files.txt"
-                                ElseIf txtManualExcludedMoviesPath.Text.EndsWith(".txt") = True Then
+                                If txtExcludeFilePath.Text.EndsWith("\") = True Then
+                                    txtExcludeFilePath.Text += "AMCUpdater_Excluded_Files.txt"
+                                ElseIf txtExcludeFilePath.Text.EndsWith(".txt") = True Then
                                     'Else
                                     'txtManualExcludedMoviesPath.Text += "\AMCUpdater_Excluded_Files.txt"
                                 End If
-                                epInteractive.SetError(txtManualExcludedMoviesPath, "")
+                                epInteractive.SetError(txtExcludeFilePath, "")
                             Else
-                                epInteractive.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
+                                epInteractive.SetError(txtExcludeFilePath, "Please enter a valid file path")
                                 IsValid = False
                             End If
                         End If
@@ -2341,7 +2340,6 @@ Public Class Form1
         CurrentSettings.Date_Handling = cbDateHandling.SelectedItem
         CurrentSettings.Movie_Title_Handling = cbTitleHandling.SelectedItem
         CurrentSettings.Excluded_Movies_File = txtExcludeFilePath.Text
-        CurrentSettings.Manual_Excluded_Movies_File = txtManualExcludedMoviesPath.Text
         CurrentSettings.Execute_Only_For_Orphans = chkExecuteOnlyForOrphans.Checked
         CurrentSettings.Execute_Program = chkExecuteProgram.Checked
         CurrentSettings.Execute_Program_Path = txtExecuteProgramPath.Text
@@ -2380,7 +2378,6 @@ Public Class Form1
 
         CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
-        CurrentSettings.Manual_XML_File = txtManualXMLPath.Text
 
         CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
         CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailIgnoreWhenInteractive.Checked
@@ -2392,6 +2389,8 @@ Public Class Form1
         CurrentSettings.Use_InternetData_For_Languages = chkUseInternetDataForLanguagesField.Checked
         CurrentSettings.Use_Grabber_For_Fanart = chkUseGrabberForFanart.Checked
         CurrentSettings.Load_Person_Images_With_Fanart = chkLoadPersonImagesWithFanart.Checked
+
+        CurrentSettings.Skip_Excluded_Movie_Files = cbSkipExcludedMovieFiles.Checked
 
         Select Case cbPictureHandling.SelectedItem
             Case "Relative Path"
@@ -2547,7 +2546,6 @@ Public Class Form1
             chkCheckDVDFolders.Checked = CurrentSettings.Scan_For_DVD_Folders
             chkShortNames.Checked = CurrentSettings.Store_Short_Names_Only
             txtConfigFilePath.Text = CurrentSettings.XML_File
-            txtManualXMLPath.Text = CurrentSettings.XML_File
             chkReadDVDLabel.Checked = CurrentSettings.Read_DVD_Label
             chkDontAskInteractive.Checked = CurrentSettings.Dont_Ask_Interactive
             chkManualDontAskInteractive.Checked = CurrentSettings.Manual_Dont_Ask_Interactive
@@ -2561,14 +2559,14 @@ Public Class Form1
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files
             chkManualUpdateRecordsOnlyMissingData.Checked = CurrentSettings.Only_Add_Missing_Data
             chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked = CurrentSettings.Only_Update_With_Nonempty_Data
+            cbSkipExcludedMovieFiles.Checked = CurrentSettings.Skip_Excluded_Movie_Files
+
 
             chkUseInternetDataForLanguagesField.Checked = CurrentSettings.Use_InternetData_For_Languages
             chkUseGrabberForFanart.Checked = CurrentSettings.Use_Grabber_For_Fanart
             chkLoadPersonImagesWithFanart.Checked = CurrentSettings.Load_Person_Images_With_Fanart
 
-            txtManualExcludedMoviesPath.Text = CurrentSettings.Manual_Excluded_Movies_File
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path
-            'txtManualXMLPath.Text = CurrentSettings.Manual_XML_File
             If CurrentSettings.Manual_Internet_Lookup_Always_Prompt = "True" Then
                 cbManualInternetLookupBehaviour.SelectedValue = True
             Else
@@ -2768,10 +2766,7 @@ Public Class Form1
     End Sub
 
     Public Sub txtConfigFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConfigFilePath.TextChanged
-
-        txtManualXMLPath.Text = txtConfigFilePath.Text
         CurrentSettings.XML_File = txtConfigFilePath.Text
-
     End Sub
 
     Private Sub VidéoBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VidéoBindingNavigatorSaveItem.Click
@@ -3088,13 +3083,13 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub btnManualExcludedMoviesFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualExcludedMoviesFileShow.Click
-        Dim t As String = txtManualExcludedMoviesPath.Text
-        If Not Directory.Exists(Path.GetDirectoryName(txtManualExcludedMoviesPath.Text)) Then
-            Directory.CreateDirectory(Path.GetDirectoryName(txtManualExcludedMoviesPath.Text).ToString())
+    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileShow.Click
+        Dim t As String = txtExcludeFilePath.Text
+        If Not Directory.Exists(Path.GetDirectoryName(txtExcludeFilePath.Text)) Then
+            Directory.CreateDirectory(Path.GetDirectoryName(txtExcludeFilePath.Text).ToString())
         End If
-        If Not File.Exists(txtManualExcludedMoviesPath.Text) Then
-            Dim sr As StreamWriter = File.CreateText(txtManualExcludedMoviesPath.Text)
+        If Not File.Exists(txtExcludeFilePath.Text) Then
+            Dim sr As StreamWriter = File.CreateText(txtExcludeFilePath.Text)
             'sr.WriteLine("This is my file.")
             sr.Close()
             'Dim xmlFile As New FileStream(txtManualExcludedMoviesPath.Text, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)
@@ -3107,31 +3102,11 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileShow.Click
-        Dim t As String = txtExcludeFilePath.Text
-        Try
-            Process.Start(t)
-        Catch ex As Exception
-        End Try
-    End Sub
-
     Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileDelete.Click
         Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dialogResult = Windows.Forms.DialogResult.OK Then
             Try
                 My.Computer.FileSystem.DeleteFile(txtExcludeFilePath.Text)
-                MsgBox("File deleted !", MsgBoxStyle.Information)
-            Catch deleteException As Exception
-                MsgBox("An ErrorEvent occurred ! - ErrorEvent: " + deleteException.Message, MsgBoxStyle.Exclamation)
-            End Try
-        End If
-    End Sub
-
-    Private Sub btnManualExcludedMoviesFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualExcludedMoviesFileDelete.Click
-        Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dialogResult = Windows.Forms.DialogResult.OK Then
-            Try
-                My.Computer.FileSystem.DeleteFile(txtManualExcludedMoviesPath.Text)
                 MsgBox("File deleted !", MsgBoxStyle.Information)
             Catch deleteException As Exception
                 MsgBox("An ErrorEvent occurred ! - ErrorEvent: " + deleteException.Message, MsgBoxStyle.Exclamation)
@@ -3347,16 +3322,16 @@ Public Class Form1
 
     Private Sub BindingNavigatorUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorUpdate.Click
 
-        Dim f As New IO.FileInfo(txtManualXMLPath.Text)
+        Dim f As New IO.FileInfo(txtConfigFilePath.Text)
         If Not f.Exists Then
             MsgBox("File : " + f.FullName + " doesn't exist !", MsgBoxStyle.Critical)
-            txtManualXMLPath.Focus()
+            txtConfigFilePath.Focus()
             Return
         End If
 
         AntProcessor = New AntProcessor()
         AntProcessor.ManualOperation = "Update"
-        AntProcessor.ManualXMLPath = txtManualXMLPath.Text
+        AntProcessor.ManualXMLPath = txtConfigFilePath.Text
         ApplySettings()
         AntProcessor.ManualUpdateOperation()
 
@@ -3372,10 +3347,10 @@ Public Class Form1
         Dim myProperties As AMCUpdater.AntMovieCatalog.PropertiesDataTable = Nothing
         myMovieCatalog = New AntMovieCatalog()
         Try
-            Directory.SetCurrentDirectory(System.IO.Path.GetDirectoryName(txtConfigFilePath.Text)) ' Set current directory to retrieve images without full pathnames
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(txtConfigFilePath.Text)) ' Set current directory to retrieve images without full pathnames
         Catch ex As Exception
         End Try
-        If (System.IO.File.Exists(txtConfigFilePath.Text)) Then
+        If (File.Exists(txtConfigFilePath.Text)) Then
             LoadMyFilmsFromDisk(txtConfigFilePath.Text)
             myMovieTable = myMovieCatalog.Movie
             MovieBindingSource.DataSource = myMovieTable
@@ -3396,7 +3371,7 @@ Public Class Form1
     Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
         Dim ImageViewer As New frmImageViewer()
         Dim imagefile = Me.PictureBox1.ImageLocation
-        If Not System.IO.File.Exists(imagefile) Then
+        If Not File.Exists(imagefile) Then
             'MsgBox("File '" + imagefile + "' does not exist !", MsgBoxStyle.OkOnly)
             Return
         End If
@@ -3421,7 +3396,7 @@ Public Class Form1
     Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
         Dim ImageViewer As New frmImageViewer()
         Dim imagefile = Me.PictureBox2.ImageLocation
-        If Not System.IO.File.Exists(imagefile) Then
+        If Not File.Exists(imagefile) Then
             'MsgBox("File '" + imagefile + "' does not exist !", MsgBoxStyle.OkOnly)
             Return
         End If
@@ -3442,6 +3417,7 @@ Public Class Form1
         End Try
         ImageViewer.ShowDialog()
     End Sub
+
 End Class
 
 

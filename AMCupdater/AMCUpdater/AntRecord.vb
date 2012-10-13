@@ -731,8 +731,11 @@ Public Class AntRecord
                                         'User cancelled - check for 'Ignore File' flag.
                                         If frmList.chkDontAskAgain.Checked And Not CurrentSettings.Excluded_File_Strings.Contains(FilePath.ToLower) Then
                                             'Add to excluded file list to ignore in future scans:
-                                            My.Computer.FileSystem.WriteAllText(_excludeFile, FilePath.ToLower + vbCrLf, True) ' reenabled, aw below option did not work
-                                            CurrentSettings.Excluded_File_Strings += ("|" + FilePath.ToLower) ' this might not be needed - seems not to work?
+                                            'My.Computer.FileSystem.WriteAllText(_excludeFile, FilePath.ToLower + vbCrLf, True) ' reenabled, as below option did not work
+                                            Dim objWriter As New StreamWriter(_excludeFile, True)
+                                            objWriter.WriteLine(FilePath.ToLower)
+                                            objWriter.Close()
+                                            'CurrentSettings.Excluded_File_Strings += ("|" + FilePath.ToLower) ' this might not be needed - seems not to work?
                                         End If
                                         _internetLookupOk = False
                                         'LogEvent("Failed to load Internet Data for " & FilePath, EventLogLevel.ImportantEvent)
