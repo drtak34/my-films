@@ -33,13 +33,13 @@ Partial Class Form1
         Dim SiteLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -128,15 +128,6 @@ Partial Class Form1
         Me.txtManualNewValue = New System.Windows.Forms.TextBox
         Me.lblManualEnterNewValue = New System.Windows.Forms.Label
         Me.cbManualSelectOperation = New System.Windows.Forms.ComboBox
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox
-        Me.btnManualExcludedMoviesFileDelete = New System.Windows.Forms.Button
-        Me.btnManualExcludedMoviesFileShow = New System.Windows.Forms.Button
-        Me.txtManualXMLPath = New System.Windows.Forms.TextBox
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.Label40 = New System.Windows.Forms.Label
-        Me.txtManualExcludedMoviesPath = New System.Windows.Forms.TextBox
-        Me.btnManualSelectXMLFile = New System.Windows.Forms.Button
-        Me.btnManualSelectExcludedMoviesFile = New System.Windows.Forms.Button
         Me.DatabaseFields = New System.Windows.Forms.TabPage
         Me.GroupBox_FanartHandling = New System.Windows.Forms.GroupBox
         Me.chkLoadPersonImagesWithFanart = New System.Windows.Forms.CheckBox
@@ -552,6 +543,8 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
+        Me.Label20 = New System.Windows.Forms.Label
+        Me.cbSkipExcludedMovieFiles = New System.Windows.Forms.CheckBox
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -567,7 +560,6 @@ Partial Class Form1
         Me.grpManualInternetLookupSettings.SuspendLayout()
         Me.grpManualUpdatesParameters.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
         Me.DatabaseFields.SuspendLayout()
         Me.GroupBox_FanartHandling.SuspendLayout()
         CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1116,12 +1108,12 @@ Partial Class Form1
         '
         'Update_Movies
         '
+        Me.Update_Movies.Controls.Add(Me.Label20)
         Me.Update_Movies.Controls.Add(Me.GroupBox32)
         Me.Update_Movies.Controls.Add(Me.grpManualInternetLookupSettings)
         Me.Update_Movies.Controls.Add(Me.btnShowHideLogTest)
         Me.Update_Movies.Controls.Add(Me.grpManualUpdatesParameters)
         Me.Update_Movies.Controls.Add(Me.GroupBox10)
-        Me.Update_Movies.Controls.Add(Me.GroupBox9)
         Me.Update_Movies.Location = New System.Drawing.Point(4, 22)
         Me.Update_Movies.Name = "Update_Movies"
         Me.Update_Movies.Size = New System.Drawing.Size(600, 580)
@@ -1284,6 +1276,7 @@ Partial Class Form1
         '
         'grpManualUpdatesParameters
         '
+        Me.grpManualUpdatesParameters.Controls.Add(Me.cbSkipExcludedMovieFiles)
         Me.grpManualUpdatesParameters.Controls.Add(Me.cbManualParameterAndOr)
         Me.grpManualUpdatesParameters.Controls.Add(Me.lblManualParametersValue2)
         Me.grpManualUpdatesParameters.Controls.Add(Me.lblManualParametersOperator2)
@@ -1645,94 +1638,6 @@ Partial Class Form1
         Me.cbManualSelectOperation.Name = "cbManualSelectOperation"
         Me.cbManualSelectOperation.Size = New System.Drawing.Size(195, 21)
         Me.cbManualSelectOperation.TabIndex = 0
-        '
-        'GroupBox9
-        '
-        Me.GroupBox9.Controls.Add(Me.btnManualExcludedMoviesFileDelete)
-        Me.GroupBox9.Controls.Add(Me.btnManualExcludedMoviesFileShow)
-        Me.GroupBox9.Controls.Add(Me.txtManualXMLPath)
-        Me.GroupBox9.Controls.Add(Me.Label20)
-        Me.GroupBox9.Controls.Add(Me.Label40)
-        Me.GroupBox9.Controls.Add(Me.txtManualExcludedMoviesPath)
-        Me.GroupBox9.Controls.Add(Me.btnManualSelectXMLFile)
-        Me.GroupBox9.Controls.Add(Me.btnManualSelectExcludedMoviesFile)
-        Me.GroupBox9.Location = New System.Drawing.Point(10, 3)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(573, 108)
-        Me.GroupBox9.TabIndex = 0
-        Me.GroupBox9.TabStop = False
-        Me.GroupBox9.Text = "Folders and Files ..."
-        '
-        'btnManualExcludedMoviesFileDelete
-        '
-        Me.btnManualExcludedMoviesFileDelete.Location = New System.Drawing.Point(342, 74)
-        Me.btnManualExcludedMoviesFileDelete.Name = "btnManualExcludedMoviesFileDelete"
-        Me.btnManualExcludedMoviesFileDelete.Size = New System.Drawing.Size(56, 20)
-        Me.btnManualExcludedMoviesFileDelete.TabIndex = 54
-        Me.btnManualExcludedMoviesFileDelete.Text = "delete"
-        Me.btnManualExcludedMoviesFileDelete.UseVisualStyleBackColor = True
-        '
-        'btnManualExcludedMoviesFileShow
-        '
-        Me.btnManualExcludedMoviesFileShow.Location = New System.Drawing.Point(416, 74)
-        Me.btnManualExcludedMoviesFileShow.Name = "btnManualExcludedMoviesFileShow"
-        Me.btnManualExcludedMoviesFileShow.Size = New System.Drawing.Size(56, 20)
-        Me.btnManualExcludedMoviesFileShow.TabIndex = 53
-        Me.btnManualExcludedMoviesFileShow.Text = "show"
-        Me.btnManualExcludedMoviesFileShow.UseVisualStyleBackColor = True
-        '
-        'txtManualXMLPath
-        '
-        Me.txtManualXMLPath.Enabled = False
-        Me.txtManualXMLPath.Location = New System.Drawing.Point(8, 32)
-        Me.txtManualXMLPath.Name = "txtManualXMLPath"
-        Me.txtManualXMLPath.Size = New System.Drawing.Size(498, 20)
-        Me.txtManualXMLPath.TabIndex = 0
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(6, 16)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(174, 13)
-        Me.Label20.TabIndex = 38
-        Me.Label20.Text = "Path to Movie Database File (.xml) :"
-        '
-        'Label40
-        '
-        Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(6, 58)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(173, 13)
-        Me.Label40.TabIndex = 52
-        Me.Label40.Text = "Path to Excluded Movies File (.txt) :"
-        '
-        'txtManualExcludedMoviesPath
-        '
-        Me.txtManualExcludedMoviesPath.Location = New System.Drawing.Point(8, 74)
-        Me.txtManualExcludedMoviesPath.Name = "txtManualExcludedMoviesPath"
-        Me.txtManualExcludedMoviesPath.Size = New System.Drawing.Size(318, 20)
-        Me.txtManualExcludedMoviesPath.TabIndex = 48
-        '
-        'btnManualSelectXMLFile
-        '
-        Me.btnManualSelectXMLFile.CausesValidation = False
-        Me.btnManualSelectXMLFile.Location = New System.Drawing.Point(512, 32)
-        Me.btnManualSelectXMLFile.Name = "btnManualSelectXMLFile"
-        Me.btnManualSelectXMLFile.Size = New System.Drawing.Size(36, 20)
-        Me.btnManualSelectXMLFile.TabIndex = 1
-        Me.btnManualSelectXMLFile.Text = "..."
-        Me.btnManualSelectXMLFile.UseVisualStyleBackColor = True
-        '
-        'btnManualSelectExcludedMoviesFile
-        '
-        Me.btnManualSelectExcludedMoviesFile.CausesValidation = False
-        Me.btnManualSelectExcludedMoviesFile.Location = New System.Drawing.Point(512, 73)
-        Me.btnManualSelectExcludedMoviesFile.Name = "btnManualSelectExcludedMoviesFile"
-        Me.btnManualSelectExcludedMoviesFile.Size = New System.Drawing.Size(36, 20)
-        Me.btnManualSelectExcludedMoviesFile.TabIndex = 49
-        Me.btnManualSelectExcludedMoviesFile.Text = "..."
-        Me.btnManualSelectExcludedMoviesFile.UseVisualStyleBackColor = True
         '
         'DatabaseFields
         '
@@ -4393,27 +4298,27 @@ Partial Class Form1
         Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
         Me.DataGridViewMovie.Name = "DataGridViewMovie"
         Me.DataGridViewMovie.ReadOnly = True
         Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DataGridViewMovie.RowHeadersVisible = False
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4424,8 +4329,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -4434,8 +4339,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -4458,8 +4363,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -4520,7 +4425,6 @@ Partial Class Form1
         '
         Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.BindingNavigatorAddNewItem.Enabled = False
-        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
         Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
@@ -4537,7 +4441,6 @@ Partial Class Form1
         '
         Me.BindingNavigatorDeleteItem.CheckOnClick = True
         Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
         Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
@@ -4546,7 +4449,6 @@ Partial Class Form1
         'BindingNavigatorMoveFirstItem
         '
         Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
         Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
@@ -4555,7 +4457,6 @@ Partial Class Form1
         'BindingNavigatorMovePreviousItem
         '
         Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
         Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
@@ -4584,7 +4485,6 @@ Partial Class Form1
         'BindingNavigatorMoveNextItem
         '
         Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
         Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
@@ -4593,7 +4493,6 @@ Partial Class Form1
         'BindingNavigatorMoveLastItem
         '
         Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
         Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
@@ -4612,7 +4511,6 @@ Partial Class Form1
         'VidéoBindingNavigatorSaveItem
         '
         Me.VidéoBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.VidéoBindingNavigatorSaveItem.Image = CType(resources.GetObject("VidéoBindingNavigatorSaveItem.Image"), System.Drawing.Image)
         Me.VidéoBindingNavigatorSaveItem.Name = "VidéoBindingNavigatorSaveItem"
         Me.VidéoBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.VidéoBindingNavigatorSaveItem.Text = "Save Datas"
@@ -4625,7 +4523,6 @@ Partial Class Form1
         'BindingNavigatorUpdate
         '
         Me.BindingNavigatorUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.BindingNavigatorUpdate.Image = CType(resources.GetObject("BindingNavigatorUpdate.Image"), System.Drawing.Image)
         Me.BindingNavigatorUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.BindingNavigatorUpdate.Name = "BindingNavigatorUpdate"
         Me.BindingNavigatorUpdate.Size = New System.Drawing.Size(77, 22)
@@ -4705,7 +4602,6 @@ Partial Class Form1
         Me.CheckBox1.Size = New System.Drawing.Size(71, 17)
         Me.CheckBox1.TabIndex = 56
         Me.CheckBox1.Text = "Don't ask"
-        Me.ToolTip1.SetToolTip(Me.CheckBox1, resources.GetString("CheckBox1.ToolTip"))
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'TextBox34
@@ -5168,7 +5064,6 @@ Partial Class Form1
         'BindingNavigatorAddNewItemPerson
         '
         Me.BindingNavigatorAddNewItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItemPerson.Image = CType(resources.GetObject("BindingNavigatorAddNewItemPerson.Image"), System.Drawing.Image)
         Me.BindingNavigatorAddNewItemPerson.Name = "BindingNavigatorAddNewItemPerson"
         Me.BindingNavigatorAddNewItemPerson.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItemPerson.Size = New System.Drawing.Size(23, 24)
@@ -5184,7 +5079,6 @@ Partial Class Form1
         'BindingNavigatorDeleteItemPerson
         '
         Me.BindingNavigatorDeleteItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItemPerson.Image = CType(resources.GetObject("BindingNavigatorDeleteItemPerson.Image"), System.Drawing.Image)
         Me.BindingNavigatorDeleteItemPerson.Name = "BindingNavigatorDeleteItemPerson"
         Me.BindingNavigatorDeleteItemPerson.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorDeleteItemPerson.Size = New System.Drawing.Size(23, 24)
@@ -5193,7 +5087,6 @@ Partial Class Form1
         'BindingNavigatorMoveFirstItem1
         '
         Me.BindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem1.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveFirstItem1.Name = "BindingNavigatorMoveFirstItem1"
         Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveFirstItem1.Size = New System.Drawing.Size(23, 24)
@@ -5202,7 +5095,6 @@ Partial Class Form1
         'BindingNavigatorMovePreviousItem1
         '
         Me.BindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem1.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMovePreviousItem1.Name = "BindingNavigatorMovePreviousItem1"
         Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMovePreviousItem1.Size = New System.Drawing.Size(23, 24)
@@ -5231,7 +5123,6 @@ Partial Class Form1
         'BindingNavigatorMoveNextItem1
         '
         Me.BindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem1.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveNextItem1.Name = "BindingNavigatorMoveNextItem1"
         Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveNextItem1.Size = New System.Drawing.Size(23, 24)
@@ -5240,7 +5131,6 @@ Partial Class Form1
         'BindingNavigatorMoveLastItem1
         '
         Me.BindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem1.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveLastItem1.Name = "BindingNavigatorMoveLastItem1"
         Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveLastItem1.Size = New System.Drawing.Size(23, 24)
@@ -5259,7 +5149,6 @@ Partial Class Form1
         'SpeichernToolStripButton
         '
         Me.SpeichernToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SpeichernToolStripButton.Image = CType(resources.GetObject("SpeichernToolStripButton.Image"), System.Drawing.Image)
         Me.SpeichernToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SpeichernToolStripButton.Name = "SpeichernToolStripButton"
         Me.SpeichernToolStripButton.Size = New System.Drawing.Size(23, 24)
@@ -5273,7 +5162,6 @@ Partial Class Form1
         'ToolStripButtonAddMissingPersons
         '
         Me.ToolStripButtonAddMissingPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButtonAddMissingPersons.Image = CType(resources.GetObject("ToolStripButtonAddMissingPersons.Image"), System.Drawing.Image)
         Me.ToolStripButtonAddMissingPersons.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButtonAddMissingPersons.Name = "ToolStripButtonAddMissingPersons"
         Me.ToolStripButtonAddMissingPersons.Size = New System.Drawing.Size(108, 24)
@@ -5282,7 +5170,6 @@ Partial Class Form1
         'ToolStripButtonGrabPersons
         '
         Me.ToolStripButtonGrabPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButtonGrabPersons.Image = CType(resources.GetObject("ToolStripButtonGrabPersons.Image"), System.Drawing.Image)
         Me.ToolStripButtonGrabPersons.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButtonGrabPersons.Name = "ToolStripButtonGrabPersons"
         Me.ToolStripButtonGrabPersons.Size = New System.Drawing.Size(60, 24)
@@ -5731,26 +5618,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -5807,6 +5694,26 @@ Partial Class Form1
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
         '
+        'Label20
+        '
+        Me.Label20.Location = New System.Drawing.Point(18, 37)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(552, 60)
+        Me.Label20.TabIndex = 106
+        Me.Label20.Text = resources.GetString("Label20.Text")
+        '
+        'cbSkipExcludedMovieFiles
+        '
+        Me.cbSkipExcludedMovieFiles.AutoSize = True
+        Me.cbSkipExcludedMovieFiles.Location = New System.Drawing.Point(341, 102)
+        Me.cbSkipExcludedMovieFiles.Name = "cbSkipExcludedMovieFiles"
+        Me.cbSkipExcludedMovieFiles.Size = New System.Drawing.Size(202, 17)
+        Me.cbSkipExcludedMovieFiles.TabIndex = 49
+        Me.cbSkipExcludedMovieFiles.Text = "Skip Movies in 'Excluded Movies File'"
+        Me.ToolTip1.SetToolTip(Me.cbSkipExcludedMovieFiles, "If checked, files contained in " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'Excluded Movie Files' will be skipped.")
+        Me.cbSkipExcludedMovieFiles.UseVisualStyleBackColor = True
+        Me.cbSkipExcludedMovieFiles.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5816,7 +5723,6 @@ Partial Class Form1
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.mnuFile)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuFile
         Me.Name = "Form1"
         Me.Text = "Ant Movie Catalog Auto-Updater"
@@ -5839,8 +5745,6 @@ Partial Class Form1
         Me.grpManualUpdatesParameters.PerformLayout()
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
         Me.DatabaseFields.ResumeLayout(False)
         Me.DatabaseFields.PerformLayout()
         Me.GroupBox_FanartHandling.ResumeLayout(False)
@@ -5999,10 +5903,6 @@ Partial Class Form1
     Friend WithEvents ToolStripFixedText As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents Update_Movies As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtManualXMLPath As System.Windows.Forms.TextBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents btnManualSelectXMLFile As System.Windows.Forms.Button
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents cbManualSelectOperation As System.Windows.Forms.ComboBox
     Friend WithEvents btnManualApplyChanges As System.Windows.Forms.Button
@@ -6084,9 +5984,6 @@ Partial Class Form1
     Friend WithEvents cbManualParameterAndOr As System.Windows.Forms.ComboBox
     Friend WithEvents grpManualInternetLookupSettings As System.Windows.Forms.GroupBox
     Friend WithEvents Label42 As System.Windows.Forms.Label
-    Friend WithEvents txtManualExcludedMoviesPath As System.Windows.Forms.TextBox
-    Friend WithEvents Label40 As System.Windows.Forms.Label
-    Friend WithEvents btnManualSelectExcludedMoviesFile As System.Windows.Forms.Button
     Friend WithEvents btnManualSelectInternetParserPath As System.Windows.Forms.Button
     Friend WithEvents cbManualInternetLookupBehaviour As System.Windows.Forms.ComboBox
     Friend WithEvents txtManualInternetParserPath As System.Windows.Forms.TextBox
@@ -6267,8 +6164,6 @@ Partial Class Form1
     Friend WithEvents txtParserFilePathDisplay As System.Windows.Forms.TextBox
     Friend WithEvents txtManualInternetParserPathDisplay As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox27 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnManualExcludedMoviesFileShow As System.Windows.Forms.Button
-    Friend WithEvents btnManualExcludedMoviesFileDelete As System.Windows.Forms.Button
     Friend WithEvents chkManualUpdateRecordsOnlyMissingData As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBoxMovieDetails As System.Windows.Forms.GroupBox
     Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -6305,7 +6200,6 @@ Partial Class Form1
     Friend WithEvents btnSelectExcludeFile As System.Windows.Forms.Button
     Friend WithEvents txtConfigFilePath As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents btnSelectConfigFile As System.Windows.Forms.Button
     Friend WithEvents Label88 As System.Windows.Forms.Label
     Friend WithEvents GroupBox26 As System.Windows.Forms.GroupBox
     Friend WithEvents Label87 As System.Windows.Forms.Label
@@ -6467,4 +6361,7 @@ Partial Class Form1
     Friend WithEvents chkUseInternetDataForLanguagesField As System.Windows.Forms.CheckBox
     Friend WithEvents chkUseGrabberForFanart As System.Windows.Forms.CheckBox
     Friend WithEvents chkLoadPersonImagesWithFanart As System.Windows.Forms.CheckBox
+    Friend WithEvents btnSelectConfigFile As System.Windows.Forms.Button
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents cbSkipExcludedMovieFiles As System.Windows.Forms.CheckBox
 End Class

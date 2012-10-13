@@ -458,28 +458,12 @@ Public Class AntSettings
             SetAttribute("Manual_Dont_Ask_Interactive", value)
         End Set
     End Property
-    Public Property Manual_XML_File() As String
-        Get
-            Return ReadAttribute("Manual_XML_File")
-        End Get
-        Set(ByVal value As String)
-            SetAttribute("Manual_XML_File", value)
-        End Set
-    End Property
     Public Property Manual_Internet_Parser_Path() As String
         Get
             Return ReadAttribute("Manual_Internet_Parser_Path")
         End Get
         Set(ByVal value As String)
             SetAttribute("Manual_Internet_Parser_Path", value)
-        End Set
-    End Property
-    Public Property Manual_Excluded_Movies_File() As String
-        Get
-            Return ReadAttribute("Manual_Excluded_Movies_File")
-        End Get
-        Set(ByVal value As String)
-            SetAttribute("Manual_Excluded_Movies_File", value)
         End Set
     End Property
     Public Property Manual_Internet_Lookup_Always_Prompt() As Boolean
@@ -723,6 +707,19 @@ Public Class AntSettings
             SetAttribute("Only_Update_With_Nonempty_Data", value)
         End Set
     End Property
+    Public Property Skip_Excluded_Movie_Files() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Skip_Excluded_Movie_Files").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Skip_Excluded_Movie_Files", value)
+        End Set
+    End Property
     Public Property Auto_Approve_Limits() As String
         Get
             Return ReadAttribute("Auto_Approve_Limits")
@@ -852,7 +849,7 @@ Public Class AntSettings
         dt.Rows.Add("Use_InternetData_For_Languages", "False")
         dt.Rows.Add("Use_Grabber_For_Fanart", "False")
         dt.Rows.Add("Load_Person_Images_With_Fanart", "False")
-
+        dt.Rows.Add("Skip_Excluded_Movie_Files", "False")
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False
         dsDefaultSettings.Tables(0).PrimaryKey = New DataColumn() {dsDefaultSettings.Tables(0).Columns("Option")}

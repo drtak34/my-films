@@ -546,7 +546,6 @@ Public Class AntProcessor
         Dim xmlFile As New FileStream(_ManualXMLPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
         XMLDoc.Load(xmlFile)
 
-
         Dim CurrentMovieNumber As Integer
         Dim movielist As XmlNodeList
         movielist = XMLDoc.DocumentElement.SelectNodes("/AntMovieCatalog/Catalog/Contents/Movie")
@@ -587,8 +586,8 @@ Public Class AntProcessor
                 'End If
 
                 ' skip those:
-                If _ManualOperation = "Download Fanart" Then
-                    If _ManualMissingFanartDownload Then
+                If _manualOperation = "Download Fanart" Then
+                    If _manualMissingFanartDownload Then
                         If Not ManualTestMissingFanart_IsUpdateNeeded(wtitle) Then Continue For
                     End If
                 End If
@@ -613,7 +612,7 @@ Public Class AntProcessor
                     End If
                 End If
 
-                If _ManualParameterMatchAll = True Then
+                If _manualParameterMatchAll = True Then
                     'We're matching all records - proceed with editing
                     ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                     LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
@@ -621,13 +620,13 @@ Public Class AntProcessor
                     'Parameters in use - check first then proceed
                     If CurrentNode IsNot Nothing Then
                         Dim wrecord As Integer
-                        wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
-                        wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
-                        If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
+                        wrecord = ManualControlRecord(_manualParameterField1, _manualParameterOperator1, _manualParameterValue1, CurrentNode)
+                        wrecord = wrecord + ManualControlRecord(_manualParameterField2, _manualParameterOperator2, _manualParameterValue2, CurrentNode)
+                        If (_manualParameterAndOr <> "and" And wrecord > 0) Then
                             ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                             LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
                         Else
-                            If (_ManualParameterAndOr = "and" And wrecord = 2) Then
+                            If (_manualParameterAndOr = "and" And wrecord = 2) Then
                                 ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, wdirector, wyear, wIMDB_Id})
                                 LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
                             End If
@@ -747,11 +746,11 @@ Public Class AntProcessor
         ' backup the xml file before updating 
         If CurrentSettings.Backup_XML_First = True Then
             LogEvent("Backing up xml file.", EventLogLevel.ImportantEvent)
-            Dim NewFileName As String = Replace(CurrentSettings.Manual_XML_File, ".xml", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".xml")
+            Dim NewFileName As String = Replace(CurrentSettings.XML_File, ".xml", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".xml")
             NewFileName = NewFileName.Replace("/", "-")
 
             Try
-                My.Computer.FileSystem.CopyFile(CurrentSettings.Manual_XML_File, NewFileName, True)
+                My.Computer.FileSystem.CopyFile(CurrentSettings.XML_File, NewFileName, True)
                 Dim NewFileNameShort As String = System.IO.Path.GetFileName(NewFileName)
                 LogEvent("Backing up xml file - done. (" & NewFileNameShort & ")", EventLogLevel.ImportantEvent)
             Catch ex As Exception
@@ -784,12 +783,12 @@ Public Class AntProcessor
         ' backup the xml file before updating 
         If CurrentSettings.Backup_XML_First = True Then
             LogEvent("Backing up xml file.", EventLogLevel.ImportantEvent)
-            Dim NewFileName As String = Replace(CurrentSettings.Manual_XML_File, ".xml", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".xml")
+            Dim NewFileName As String = Replace(CurrentSettings.XML_File, ".xml", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".xml")
             NewFileName = NewFileName.Replace("/", "-")
 
             Try
-                My.Computer.FileSystem.CopyFile(CurrentSettings.Manual_XML_File, NewFileName, True)
-                Dim NewFileNameShort As String = System.IO.Path.GetFileName(NewFileName)
+                My.Computer.FileSystem.CopyFile(CurrentSettings.XML_File, NewFileName, True)
+                Dim NewFileNameShort As String = Path.GetFileName(NewFileName)
                 LogEvent("Backing up xml file - done. (" & NewFileNameShort & ")", EventLogLevel.ImportantEvent)
             Catch ex As Exception
                 LogEvent("ErrorEvent : Cannot back up xml file : " & ex.Message, EventLogLevel.ErrorEvent)
@@ -831,13 +830,25 @@ Public Class AntProcessor
             Dim ProcessCounter As Integer = 0
             Dim DoScan As Boolean = True
 
+            ' read 'Excluded Movie File' for media files to skip, if option is set
+            Dim XMLExclTable As New Hashtable ' "always ignore" movies
+            If (File.Exists(CurrentSettings.Excluded_Movies_File)) Then
+                Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
+                Dim i As Integer = 0
+                Do While sr.Peek() >= 0
+                    XMLExclTable.Add(i, sr.ReadLine)
+                    i += 1
+                Loop
+                sr.Close()
+            End If
+
             For Each row As DataRow In ds.Tables("tblNodesToProcess").Rows
                 CurrentNode = XmlDoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents/Movie[@Number='" & row("AntID") & "']")
                 If bgwManualUpdate.CancellationPending = True Then
                     Exit Sub
                 End If
 
-                Select Case _ManualOperation
+                Select Case _manualOperation
                     'Update Value
                     'Delete Value
                     'Copy Value
@@ -847,12 +858,12 @@ Public Class AntProcessor
                     'Update NFO File
 
                     Case "Update Value"
-                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
-                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
+                        If GetValue(CurrentNode, _manualFieldName) Is Nothing Then
+                            SetValue(CurrentNode, _manualFieldName, _manualFieldValue)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (and added) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
+                            SetValue(CurrentNode, _manualFieldName, _manualFieldValue)
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
@@ -868,7 +879,7 @@ Public Class AntProcessor
                         '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         'End If
                     Case "Update Value - Replace String"
-                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                        If GetValue(CurrentNode, _manualFieldName) Is Nothing Then
                             ' Do nothing, as old value to be replaced is not contained !
                             'newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
                             'newAttr.Value = ""
@@ -876,8 +887,8 @@ Public Class AntProcessor
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            If GetValue(CurrentNode, _ManualFieldName).Contains(_ManualFieldOldValue) = True Then
-                                SetValue(CurrentNode, _ManualFieldName, GetValue(CurrentNode, _ManualFieldName).Replace(_ManualFieldOldValue, _ManualFieldValue))
+                            If GetValue(CurrentNode, _manualFieldName).Contains(_manualFieldOldValue) = True Then
+                                SetValue(CurrentNode, _manualFieldName, GetValue(CurrentNode, _manualFieldName).Replace(_manualFieldOldValue, _manualFieldValue))
                                 'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Replaced String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             Else
@@ -901,12 +912,12 @@ Public Class AntProcessor
                         '    End If
                         'End If
                     Case "Update Value - Add String"
-                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
-                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
+                        If GetValue(CurrentNode, _manualFieldName) Is Nothing Then
+                            SetValue(CurrentNode, _manualFieldName, _manualFieldValue)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            SetValue(CurrentNode, _ManualFieldName, GetValue(CurrentNode, _ManualFieldName) & _ManualFieldValue)
+                            SetValue(CurrentNode, _manualFieldName, GetValue(CurrentNode, _manualFieldName) & _manualFieldValue)
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
@@ -922,12 +933,12 @@ Public Class AntProcessor
                         '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         'End If
                     Case "Update Value - Insert String"
-                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
-                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue)
+                        If GetValue(CurrentNode, _manualFieldName) Is Nothing Then
+                            SetValue(CurrentNode, _manualFieldName, _manualFieldValue)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            SetValue(CurrentNode, _ManualFieldName, _ManualFieldValue & GetValue(CurrentNode, _ManualFieldName))
+                            SetValue(CurrentNode, _manualFieldName, _manualFieldValue & GetValue(CurrentNode, _manualFieldName))
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Inserted String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
@@ -943,13 +954,13 @@ Public Class AntProcessor
                         '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Inserted String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         'End If
                     Case "Update Value - Remove String"
-                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                        If GetValue(CurrentNode, _manualFieldName) Is Nothing Then
                             ' Do nothing
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Removed - (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
-                            If GetValue(CurrentNode, _ManualFieldName).Contains(_ManualFieldValue) = True Then
-                                SetValue(CurrentNode, _ManualFieldName, GetValue(CurrentNode, _ManualFieldName).Replace(_ManualFieldValue, ""))
+                            If GetValue(CurrentNode, _manualFieldName).Contains(_manualFieldValue) = True Then
+                                SetValue(CurrentNode, _manualFieldName, GetValue(CurrentNode, _manualFieldName).Replace(_manualFieldValue, ""))
                                 'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Removed String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             Else
@@ -976,8 +987,8 @@ Public Class AntProcessor
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Record Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
                     Case "Delete Value"
-                        If Not GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
-                            RemoveValue(CurrentNode, _ManualFieldName)
+                        If Not GetValue(CurrentNode, _manualFieldName) Is Nothing Then
+                            RemoveValue(CurrentNode, _manualFieldName)
                             'LogEvent("Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
@@ -987,14 +998,14 @@ Public Class AntProcessor
                         '    bgwManualUpdate.ReportProgress(ProcessCounter, "Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         'End If
                     Case "Copy Value"
-                        If GetValue(CurrentNode, _ManualFieldName) Is Nothing Then
+                        If GetValue(CurrentNode, _manualFieldName) Is Nothing Then
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                        ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldName))) Then
-                            If GetValue(CurrentNode, _ManualFieldNameDestination) Is Nothing Then
-                                SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
+                        ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And Not String.IsNullOrEmpty(GetValue(CurrentNode, _manualFieldName))) Then
+                            If GetValue(CurrentNode, _manualFieldNameDestination) Is Nothing Then
+                                SetValue(CurrentNode, _manualFieldNameDestination, GetValue(CurrentNode, _manualFieldName))
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(GetValue(CurrentNode, _ManualFieldNameDestination))) Then
-                                SetValue(CurrentNode, _ManualFieldNameDestination, GetValue(CurrentNode, _ManualFieldName))
+                            ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And String.IsNullOrEmpty(GetValue(CurrentNode, _manualFieldNameDestination))) Then
+                                SetValue(CurrentNode, _manualFieldNameDestination, GetValue(CurrentNode, _manualFieldName))
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             Else
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
@@ -1079,13 +1090,18 @@ Public Class AntProcessor
                             End If
                         End If
 
+                        If (CurrentSettings.Skip_Excluded_Movie_Files And FileToScan.Length > 0 And XMLExclTable.ContainsValue(FileToScan.ToLower) = True) Then ' if in "always ignore" file, skip update
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "File Scanned for Data : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString & " | " & "Skipped due to 'Excluded Movie File'")
+                            DoScan = False
+                        End If
+
                         'If FileToScan.Length > 0 Then
                         If DoScan = True Then
                             Dim Ant As New AntRecord()
                             With Ant
                                 .XMLDoc = XmlDoc
                                 .XMLElement = CurrentNode
-                                .XMLFilePath = CurrentSettings.Manual_XML_File
+                                .XMLFilePath = CurrentSettings.XML_File
                                 .FilePath = FileToScan
                                 .AllFilesPath = AllFilesPath
                                 If AllFilesPath.Length > 0 Then
@@ -1109,13 +1125,12 @@ Public Class AntProcessor
                                     End If
                                 End If
                                 'If CurrentNode.Attributes("MovieNumber") Then
-                                .ExcludeFile = CurrentSettings.Manual_Excluded_Movies_File
+                                .ExcludeFile = CurrentSettings.Excluded_Movies_File
                                 .InternetLookupAlwaysPrompt = CurrentSettings.Manual_Internet_Lookup_Always_Prompt
                                 .MasterTitle = CurrentSettings.Master_Title
                                 .InteractiveMode = True
-                                Dim ImagePath As String = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
+                                Dim ImagePath As String = CurrentSettings.XML_File.Substring(0, CurrentSettings.XML_File.LastIndexOf("\"))
                                 Dim ImagePrefix As String = CurrentSettings.Image_Download_Filename_Prefix.ToString
-
                                 If (CurrentSettings.Use_Folder_Dot_Jpg = False And CurrentSettings.Image_Download_Filename_Prefix.Length > 0) Then
                                     If ImagePrefix.LastIndexOf("\") > -1 Then 'Example : "foldername\" or "foldername\prefix_"
                                         Dim PictureFolder As String = ImagePrefix.Substring(0, ImagePrefix.IndexOf("\"))
@@ -1127,9 +1142,7 @@ Public Class AntProcessor
                                         End If
                                     End If
                                 End If
-
                                 .ImagePath = ImagePath
-
                                 .InternetSearchHint = wDirector
                                 .InternetSearchHintYear = wYear
                                 .InternetSearchHintIMDB_Id = wIMDB_Id
@@ -1164,7 +1177,7 @@ Public Class AntProcessor
                             End If
 
                             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                            Dim fanart As List(Of Grabber.DBMovieInfo)
+                            Dim fanart As List(Of Grabber.DbMovieInfo)
 
                             Dim FileToScan As String = String.Empty
                             Dim AllFilesPath As String = String.Empty
@@ -1228,13 +1241,13 @@ Public Class AntProcessor
                                     Dim filenameperson As String = String.Empty
                                     Dim filename1person As String = String.Empty
                                     Dim filename2person As String = String.Empty
-                                    Dim listepersons As List(Of Grabber.DBPersonInfo) = fanart(0).Persons
-                                    For Each person As Grabber.DBPersonInfo In listepersons
+                                    Dim listepersons As List(Of Grabber.DbPersonInfo) = fanart(0).Persons
+                                    For Each person As Grabber.DbPersonInfo In listepersons
                                         Dim firstpersonimage As Boolean = True
                                         Dim onlysinglepersonimage As Boolean = True
-                                        Dim persondetails As Grabber.DBPersonInfo = New DBPersonInfo()
+                                        Dim persondetails As Grabber.DbPersonInfo = New DbPersonInfo()
                                         Dim TheMoviedb As New Grabber.TheMoviedb()
-                                        persondetails = TheMoviedb.getPersonsById(person.Id, String.Empty)
+                                        persondetails = TheMoviedb.GetPersonsById(person.Id, String.Empty)
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "PersonImages : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString & "Person Artwork - " + persondetails.Images.Count & " Images found for '" + persondetails.Name & "'")
                                         If persondetails.Images.Count > 0 Then
                                             Dim i As Integer = 0
@@ -1305,15 +1318,15 @@ Public Class AntProcessor
 
 
                             Try
-                                If _ManualNfoFileHandling = "MyFilms.nfo" Then
-                                    WriteNfoFile(NfoMyFilmsFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                If _manualNfoFileHandling = "MyFilms.nfo" Then
+                                    WriteNfoFile(NfoMyFilmsFilename, CurrentNode, _manualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMyFilmsFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
-                                ElseIf _ManualNfoFileHandling = "Movie Name" Then
-                                    WriteNfoFile(NfoMovieFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                ElseIf _manualNfoFileHandling = "Movie Name" Then
+                                    WriteNfoFile(NfoMovieFilename, CurrentNode, _manualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMovieFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
-                                ElseIf _ManualNfoFileHandling = "Both" Then
-                                    WriteNfoFile(NfoMyFilmsFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
-                                    WriteNfoFile(NfoMovieFilename, CurrentNode, _ManualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                ElseIf _manualNfoFileHandling = "Both" Then
+                                    WriteNfoFile(NfoMyFilmsFilename, CurrentNode, _manualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
+                                    WriteNfoFile(NfoMovieFilename, CurrentNode, _manualNfoFileOnlyUpdateMissing, CurrentSettings.Master_Title)
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO files '" & NfoMyFilmsFilenameShort & ", " & NfoMovieFilenameShort & "' written for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
                                 End If
                             Catch ex As Exception
@@ -1370,13 +1383,13 @@ Public Class AntProcessor
                             Dim NfoMovieFilenameShort As String = System.IO.Path.GetFileName(NfoMovieFilename)
 
                             Try
-                                If _ManualNfoFileHandling = "MyFilms.nfo" Then
+                                If _manualNfoFileHandling = "MyFilms.nfo" Then
                                     System.IO.File.Delete(NfoMyFilmsFilename)
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMyFilmsFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
-                                ElseIf _ManualNfoFileHandling = "Movie Name" Then
+                                ElseIf _manualNfoFileHandling = "Movie Name" Then
                                     System.IO.File.Delete(NfoMovieFilename)
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO file '" & NfoMovieFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
-                                ElseIf _ManualNfoFileHandling = "Both" Then
+                                ElseIf _manualNfoFileHandling = "Both" Then
                                     System.IO.File.Delete(NfoMyFilmsFilename)
                                     System.IO.File.Delete(NfoMovieFilename)
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "NFO files '" & NfoMyFilmsFilenameShort & ", " & NfoMovieFilenameShort & "' deleted for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
@@ -1485,7 +1498,7 @@ Public Class AntProcessor
             With Ant
                 .XMLDoc = XmlDoc
                 .XMLElement = CurrentNode
-                .XMLFilePath = CurrentSettings.Manual_XML_File
+                .XMLFilePath = CurrentSettings.XML_File
                 .FilePath = FileToScan
                 .AllFilesPath = AllFilesPath
                 If AllFilesPath.Length > 0 Then
@@ -1509,11 +1522,11 @@ Public Class AntProcessor
                     End If
                 End If
                 'If CurrentNode.Attributes("MovieNumber") Then
-                .ExcludeFile = CurrentSettings.Manual_Excluded_Movies_File
+                .ExcludeFile = CurrentSettings.Excluded_Movies_File
                 .InternetLookupAlwaysPrompt = True
                 .MasterTitle = CurrentSettings.Master_Title
                 .InteractiveMode = True
-                Dim ImagePath As String = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
+                Dim ImagePath As String = CurrentSettings.XML_File.Substring(0, CurrentSettings.XML_File.LastIndexOf("\"))
                 Dim ImagePrefix As String = CurrentSettings.Image_Download_Filename_Prefix.ToString
 
                 If (CurrentSettings.Use_Folder_Dot_Jpg = False And CurrentSettings.Image_Download_Filename_Prefix.Length > 0) Then
@@ -1701,7 +1714,7 @@ Public Class AntProcessor
                 LogEvent("Operation Cancelled.", EventLogLevel.ErrorEvent)
                 Form1.ToolStripProgressBar.Value = Form1.ToolStripProgressBar.Maximum
                 Try
-                    My.Computer.FileSystem.CopyFile(_TempXMLBackupFile, CurrentSettings.Manual_XML_File, True)
+                    My.Computer.FileSystem.CopyFile(_tempXMLBackupFile, CurrentSettings.XML_File, True)
                     My.Computer.FileSystem.DeleteFile(_TempXMLBackupFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
                 Catch ex As Exception
 
@@ -1728,7 +1741,7 @@ Public Class AntProcessor
                 LogEvent("Operation Cancelled.", EventLogLevel.ErrorEvent)
                 Form1.ToolStripProgressBar.Value = Form1.ToolStripProgressBar.Maximum
                 Try
-                    My.Computer.FileSystem.CopyFile(_TempXMLBackupFile, CurrentSettings.Manual_XML_File, True)
+                    My.Computer.FileSystem.CopyFile(_tempXMLBackupFile, CurrentSettings.XML_File, True)
                     My.Computer.FileSystem.DeleteFile(_TempXMLBackupFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
                 Catch ex As Exception
 
@@ -1954,13 +1967,14 @@ Public Class AntProcessor
         End If
 
         Dim XMLExclTable As New Hashtable ' "always ignore" movies
-        If (IO.File.Exists(CurrentSettings.Excluded_Movies_File)) Then
+        If (File.Exists(CurrentSettings.Excluded_Movies_File)) Then
             Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
             Dim i As Integer = 0
             Do While sr.Peek() >= 0
                 XMLExclTable.Add(i, sr.ReadLine)
                 i += 1
             Loop
+            sr.Close()
         End If
 
         Dim FoundFileName As String
@@ -2092,13 +2106,14 @@ Public Class AntProcessor
         End If
 
         Dim XMLExclTable As New Hashtable ' "always ignore" movies
-        If (IO.File.Exists(CurrentSettings.Excluded_Movies_File)) Then
+        If (File.Exists(CurrentSettings.Excluded_Movies_File)) Then
             Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
             Dim i As Integer = 0
             Do While sr.Peek() >= 0
                 XMLExclTable.Add(i, sr.ReadLine)
                 i += 1
             Loop
+            sr.Close()
         End If
 
         Dim FoundFileName As String
@@ -2676,8 +2691,8 @@ Public Class AntProcessor
 
         'Take an additional backup regardless and store in the application directory.
         ' _TempXMLBackupFile = My.Application.Info.DirectoryPath & "\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
-        If Not (System.IO.Directory.Exists(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup")) Then
-            System.IO.Directory.CreateDirectory(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup")
+        If Not (Directory.Exists(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup")) Then
+            Directory.CreateDirectory(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup")
         End If
 
         _TempXMLBackupFile = MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\MyFilms\AMCUbackup\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
@@ -2770,14 +2785,25 @@ Public Class AntProcessor
                 End If
             End If
 
+            ' read 'Excluded Movie File' for media files to skip, if option is set
+            Dim XMLExclTable As New Hashtable ' "always ignore" movies
+            If (File.Exists(CurrentSettings.Excluded_Movies_File)) Then
+                Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
+                Dim i As Integer = 0
+                Do While sr.Peek() >= 0
+                    XMLExclTable.Add(i, sr.ReadLine)
+                    i += 1
+                Loop
+                sr.Close()
+            End If
+
             Dim MovieRootNode As Xml.XmlNode
             MovieRootNode = xmldoc.SelectSingleNodeFast("//AntMovieCatalog/Catalog/Contents")
             Dim row As DataRow
 
-            Dim wtime As String
-            wtime = My.Computer.Clock.LocalTime.Year.ToString() + My.Computer.Clock.LocalTime.Month.ToString() + My.Computer.Clock.LocalTime.Day.ToString() + "-" + My.Computer.Clock.LocalTime.Hour.ToString() + My.Computer.Clock.LocalTime.Minute.ToString()
+            Dim wtime As String = My.Computer.Clock.LocalTime.Year.ToString() + My.Computer.Clock.LocalTime.Month.ToString() + My.Computer.Clock.LocalTime.Day.ToString() + "-" + My.Computer.Clock.LocalTime.Hour.ToString() + My.Computer.Clock.LocalTime.Minute.ToString()
 
-            Dim f As New IO.FileInfo(objSettings.Internet_Parser_Path)
+            Dim f As New FileInfo(objSettings.Internet_Parser_Path)
             'If Not (Directory.Exists(f.DirectoryName + "\log")) Then
             '    Directory.CreateDirectory(f.DirectoryName + "\log")
             'End If
@@ -2894,7 +2920,12 @@ Public Class AntProcessor
                             ' filename exist but with wrong path (may be moved. Entry don't be created but updated    
                             Ant.UpdateElement()
 
-                            Ant.ProhibitInternetLookup = Not CurrentSettings.Rescan_Moved_Files ' Ant.ProhibitInternetLookup = True
+                            If (FilePath.Length > 0 And XMLExclTable.ContainsValue(FilePath.ToLower) = True) Then ' if in "always ignore" file, skip update of properties (internet lookup)
+                                Ant.ProhibitInternetLookup = False
+                            Else
+                                Ant.ProhibitInternetLookup = Not CurrentSettings.Rescan_Moved_Files ' Ant.ProhibitInternetLookup = True
+                            End If
+
                             Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
                             If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
@@ -2905,6 +2936,9 @@ Public Class AntProcessor
                         Else
                             'need to create a new entry:
                             Ant.CreateElement() ' find movie and add it
+                            If (FilePath.Length > 0 And XMLExclTable.ContainsValue(FilePath.ToLower) = True) Then ' if in "always ignore" file, skip update of properties (internet lookup)
+                                Ant.ProhibitInternetLookup = False
+                            End If
                             Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
 
@@ -3054,7 +3088,11 @@ Public Class AntProcessor
                         If (row("Moved")) Then
                             ' filename exist but with wrong path (maybe moved. Entry don't be created but updated  
                             Ant.UpdateElement()
-                            Ant.ProhibitInternetLookup = True
+                            If (FilePath.Length > 0 And XMLExclTable.ContainsValue(FilePath.ToLower) = True) Then ' if in "always ignore" file, skip update of properties (internet lookup)
+                                Ant.ProhibitInternetLookup = False
+                            Else
+                                Ant.ProhibitInternetLookup = True
+                            End If
                             Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
                             If Ant.LastOutputMessage.StartsWith("ErrorEvent") = True Then
@@ -3065,6 +3103,9 @@ Public Class AntProcessor
                         Else
                             'Try
                             Ant.CreateElement()
+                            If (FilePath.Length > 0 And XMLExclTable.ContainsValue(FilePath.ToLower) = True) Then ' if in "always ignore" file, skip update of properties (internet lookup)
+                                Ant.ProhibitInternetLookup = False
+                            End If
                             Ant.ProcessFile(AntRecord.ProcessModeNames.Import)
                             Ant.SaveProgress()
                             'Catch ex As Exception
@@ -3454,7 +3495,7 @@ Public Class AntProcessor
     Public Shared Sub SearchFile(ByRef FileToScan As String, ByVal FoldersToScan As String, ByVal Number As String, ByRef wtitle As String)
         'NOTE : cannot call LogEvent from here as this will be running on a separate thread and cannot check the form1.visible property!
         Try
-            If IO.File.Exists(FileToScan) Then
+            If File.Exists(FileToScan) Then
                 Return
             End If
         Catch ex As Exception
@@ -3478,11 +3519,11 @@ Public Class AntProcessor
         Dim myEnumerator As System.Collections.IEnumerator = FolderList.GetEnumerator()
         While myEnumerator.MoveNext()
             For Each folder As String In FolderList
-                If IO.File.Exists(folder + FileToScan) Then
+                If File.Exists(folder + FileToScan) Then
                     FileToScan = folder + FileToScan
                     Return
                 Else
-                    If IO.File.Exists(folder + subfolder + "\" + FileToScan) Then
+                    If File.Exists(folder + subfolder + "\" + FileToScan) Then
                         FileToScan = folder + subfolder + "\" + FileToScan
                         Return
                     End If
@@ -3990,11 +4031,5 @@ Public Class AntProcessor
                 Return True
         End Select
     End Function
-
-    Private Sub EventNeu(ByVal EineVariable As String)
-
-        ' //Hier können nun die Aktionen stehen, die das Event
-        ' //bewirken sollen
-    End Sub
 
 End Class

@@ -565,7 +565,7 @@ Module Module1
         Dim TempString As String = ""
         Dim MI As MediaInfo = New MediaInfo
         Dim i As Integer = 0
-        If Not System.IO.File.Exists(FilePath) Then
+        If Not File.Exists(FilePath) Then
             Return "ErrorEvent : File cannot be found"
             LogEvent("ErrorEvent - Cannot open file for analysis - " & FilePath, EventLogLevel.ErrorEvent)
             Exit Function
@@ -927,17 +927,7 @@ Module Module1
     End Function
 
     Public Function getDirectorySize(ByVal dir As IO.DirectoryInfo) As Long
-        Dim t As Long = 0
-
-        For Each _d As IO.DirectoryInfo In dir.GetDirectories()
-            t += getDirectorySize(_d)
-        Next
-
-        For Each _f As IO.FileInfo In dir.GetFiles()
-            t += CLng(CStr(_f.Length))
-        Next
-
-        Return t
+        Return dir.GetDirectories().Sum(Function(_d) getDirectorySize(_d)) + dir.GetFiles().Sum(Function(_f) CLng(CStr(_f.Length)))
     End Function
 
     Public Function GetHTMLFileData(ByVal FilePath As String, ByVal DataItem As String)
@@ -966,13 +956,13 @@ Module Module1
             HTMLfilename = Directoryname + "\" + "goldesel.to - quality source for more than 10 years.htm"
         End If
 
-        If Not System.IO.File.Exists(HTMLfilename) Then
+        If Not File.Exists(HTMLfilename) Then
             LogEvent("ErrorEvent - Cannot open file for analysis - " & HTMLfilename, EventLogLevel.ErrorEvent)
             Return "ErrorEvent : File " + HTMLfilename + " cannot be found"
             Exit Function
         End If
 
-        Dim f As New IO.FileInfo(HTMLfilename)
+        Dim f As New FileInfo(HTMLfilename)
 
         Select Case DataItem.ToLower
 
