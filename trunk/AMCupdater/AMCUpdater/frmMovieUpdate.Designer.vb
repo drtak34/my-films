@@ -117,7 +117,7 @@ Partial Class frmMovieUpdate
         Me.ButtonOK.Location = New System.Drawing.Point(782, 549)
         Me.ButtonOK.Name = "ButtonOK"
         Me.ButtonOK.Size = New System.Drawing.Size(86, 33)
-        Me.ButtonOK.TabIndex = 1
+        Me.ButtonOK.TabIndex = 3
         Me.ButtonOK.Text = "OK"
         Me.ButtonOK.UseVisualStyleBackColor = True
         '
@@ -158,7 +158,7 @@ Partial Class frmMovieUpdate
         Me.ButtonSelectOnlyMissingData.Location = New System.Drawing.Point(20, 65)
         Me.ButtonSelectOnlyMissingData.Name = "ButtonSelectOnlyMissingData"
         Me.ButtonSelectOnlyMissingData.Size = New System.Drawing.Size(159, 23)
-        Me.ButtonSelectOnlyMissingData.TabIndex = 5
+        Me.ButtonSelectOnlyMissingData.TabIndex = 2
         Me.ButtonSelectOnlyMissingData.Text = "Select only missing data"
         Me.ButtonSelectOnlyMissingData.UseVisualStyleBackColor = True
         '
@@ -167,7 +167,7 @@ Partial Class frmMovieUpdate
         Me.ButtonSelectOnlyNonEmptyData.Location = New System.Drawing.Point(20, 104)
         Me.ButtonSelectOnlyNonEmptyData.Name = "ButtonSelectOnlyNonEmptyData"
         Me.ButtonSelectOnlyNonEmptyData.Size = New System.Drawing.Size(159, 23)
-        Me.ButtonSelectOnlyNonEmptyData.TabIndex = 6
+        Me.ButtonSelectOnlyNonEmptyData.TabIndex = 3
         Me.ButtonSelectOnlyNonEmptyData.Text = "Select only nonempty data"
         Me.ButtonSelectOnlyNonEmptyData.UseVisualStyleBackColor = True
         '
@@ -176,7 +176,7 @@ Partial Class frmMovieUpdate
         Me.ButtonSelectAll.Location = New System.Drawing.Point(20, 23)
         Me.ButtonSelectAll.Name = "ButtonSelectAll"
         Me.ButtonSelectAll.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonSelectAll.TabIndex = 7
+        Me.ButtonSelectAll.TabIndex = 0
         Me.ButtonSelectAll.Text = "Select all"
         Me.ButtonSelectAll.UseVisualStyleBackColor = True
         '
@@ -185,7 +185,7 @@ Partial Class frmMovieUpdate
         Me.ButtonSelectNone.Location = New System.Drawing.Point(104, 23)
         Me.ButtonSelectNone.Name = "ButtonSelectNone"
         Me.ButtonSelectNone.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonSelectNone.TabIndex = 8
+        Me.ButtonSelectNone.TabIndex = 1
         Me.ButtonSelectNone.Text = "Select none"
         Me.ButtonSelectNone.UseVisualStyleBackColor = True
         '
@@ -199,7 +199,7 @@ Partial Class frmMovieUpdate
         Me.GroupBox1.Location = New System.Drawing.Point(544, 450)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(201, 141)
-        Me.GroupBox1.TabIndex = 9
+        Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Field Selection ..."
         '

@@ -723,7 +723,7 @@
           ownerLabel.Location = new System.Drawing.Point(379, 12);
           ownerLabel.Name = "ownerLabel";
           ownerLabel.Size = new System.Drawing.Size(41, 13);
-          ownerLabel.TabIndex = 91;
+          ownerLabel.TabIndex = 2;
           ownerLabel.Text = "Owner:";
           // 
           // mailLabel
@@ -732,7 +732,7 @@
           mailLabel.Location = new System.Drawing.Point(379, 38);
           mailLabel.Name = "mailLabel";
           mailLabel.Size = new System.Drawing.Size(29, 13);
-          mailLabel.TabIndex = 93;
+          mailLabel.TabIndex = 4;
           mailLabel.Text = "Mail:";
           // 
           // siteLabel
@@ -741,7 +741,7 @@
           siteLabel.Location = new System.Drawing.Point(379, 64);
           siteLabel.Name = "siteLabel";
           siteLabel.Size = new System.Drawing.Size(28, 13);
-          siteLabel.TabIndex = 95;
+          siteLabel.TabIndex = 6;
           siteLabel.Text = "Site:";
           // 
           // descriptionLabel
@@ -750,7 +750,7 @@
           descriptionLabel.Location = new System.Drawing.Point(379, 90);
           descriptionLabel.Name = "descriptionLabel";
           descriptionLabel.Size = new System.Drawing.Size(38, 13);
-          descriptionLabel.TabIndex = 97;
+          descriptionLabel.TabIndex = 8;
           descriptionLabel.Text = "Descr.";
           // 
           // indexLabel1
@@ -831,7 +831,7 @@
           label68.Location = new System.Drawing.Point(16, 16);
           label68.Name = "label68";
           label68.Size = new System.Drawing.Size(53, 13);
-          label68.TabIndex = 23;
+          label68.TabIndex = 0;
           label68.Text = "Sort Type";
           this.ToolTip1.SetToolTip(label68, "In Views, you can either sort by Nyme or Count.\r\nBy Name will sort by the DB fiel" +
                   "d selected.");
@@ -842,7 +842,7 @@
           label70.Location = new System.Drawing.Point(202, 16);
           label70.Name = "label70";
           label70.Size = new System.Drawing.Size(39, 13);
-          label70.TabIndex = 27;
+          label70.TabIndex = 3;
           label70.Text = "Layout";
           // 
           // label69
@@ -851,7 +851,7 @@
           label69.Location = new System.Drawing.Point(125, 16);
           label69.Name = "label69";
           label69.Size = new System.Drawing.Size(26, 13);
-          label69.TabIndex = 25;
+          label69.TabIndex = 1;
           label69.Text = "Sort";
           this.ToolTip1.SetToolTip(label69, resources.GetString("label69.ToolTip"));
           // 
@@ -861,7 +861,7 @@
           label66.Location = new System.Drawing.Point(183, 104);
           label66.Name = "label66";
           label66.Size = new System.Drawing.Size(34, 13);
-          label66.TabIndex = 7;
+          label66.TabIndex = 8;
           label66.Text = "Value";
           this.ToolTip1.SetToolTip(label66, resources.GetString("label66.ToolTip"));
           // 
@@ -871,7 +871,7 @@
           label65.Location = new System.Drawing.Point(183, 65);
           label65.Name = "label65";
           label65.Size = new System.Drawing.Size(47, 13);
-          label65.TabIndex = 5;
+          label65.TabIndex = 4;
           label65.Text = "DB Field";
           this.ToolTip1.SetToolTip(label65, "DB Item to view is setting the information that will be shoen, if you select this" +
                   " view.");
@@ -893,7 +893,7 @@
           this.Config_Name.Name = "Config_Name";
           this.Config_Name.Size = new System.Drawing.Size(172, 21);
           this.Config_Name.Sorted = true;
-          this.Config_Name.TabIndex = 1;
+          this.Config_Name.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.Config_Name, resources.GetString("Config_Name.ToolTip"));
           this.Config_Name.SelectedIndexChanged += new System.EventHandler(this.Config_Name_SelectedIndexChanged);
           this.Config_Name.Leave += new System.EventHandler(this.Config_Name_SelectedIndexChanged);
@@ -904,7 +904,7 @@
           this.textBoxPluginName.Location = new System.Drawing.Point(189, 14);
           this.textBoxPluginName.Name = "textBoxPluginName";
           this.textBoxPluginName.Size = new System.Drawing.Size(172, 20);
-          this.textBoxPluginName.TabIndex = 5;
+          this.textBoxPluginName.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.textBoxPluginName, "Name of the plugin displayed in MP.\r\nBy default Films, but you can choose a bette" +
                   "r name");
           // 
@@ -913,7 +913,7 @@
           this.ButQuit.Location = new System.Drawing.Point(679, 466);
           this.ButQuit.Name = "ButQuit";
           this.ButQuit.Size = new System.Drawing.Size(64, 31);
-          this.ButQuit.TabIndex = 40;
+          this.ButQuit.TabIndex = 19;
           this.ButQuit.Text = "Quit";
           this.ToolTip1.SetToolTip(this.ButQuit, "No comments...");
           this.ButQuit.UseVisualStyleBackColor = true;
@@ -924,7 +924,7 @@
           this.ButDelet.Location = new System.Drawing.Point(599, 466);
           this.ButDelet.Name = "ButDelet";
           this.ButDelet.Size = new System.Drawing.Size(64, 31);
-          this.ButDelet.TabIndex = 39;
+          this.ButDelet.TabIndex = 18;
           this.ButDelet.Text = "Delete";
           this.ToolTip1.SetToolTip(this.ButDelet, "Delete all information for that configuration.");
           this.ButDelet.UseVisualStyleBackColor = true;
@@ -936,7 +936,7 @@
           this.Config_Dflt.Location = new System.Drawing.Point(482, 17);
           this.Config_Dflt.Name = "Config_Dflt";
           this.Config_Dflt.Size = new System.Drawing.Size(125, 17);
-          this.Config_Dflt.TabIndex = 73;
+          this.Config_Dflt.TabIndex = 7;
           this.Config_Dflt.Text = "Default Configuration";
           this.ToolTip1.SetToolTip(this.Config_Dflt, resources.GetString("Config_Dflt.ToolTip"));
           this.Config_Dflt.UseVisualStyleBackColor = true;
@@ -947,7 +947,7 @@
           this.Config_Menu.Location = new System.Drawing.Point(482, 45);
           this.Config_Menu.Name = "Config_Menu";
           this.Config_Menu.Size = new System.Drawing.Size(159, 17);
-          this.Config_Menu.TabIndex = 74;
+          this.Config_Menu.TabIndex = 8;
           this.Config_Menu.Text = "Always Display Config Menu";
           this.ToolTip1.SetToolTip(this.Config_Menu, resources.GetString("Config_Menu.ToolTip"));
           this.Config_Menu.UseVisualStyleBackColor = true;
@@ -959,7 +959,7 @@
           this.label_VersionNumber.Location = new System.Drawing.Point(652, 18);
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(89, 13);
-          this.label_VersionNumber.TabIndex = 34;
+          this.label_VersionNumber.TabIndex = 9;
           this.label_VersionNumber.Text = "Version x.x.x.xxxx";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "MyFilms Version Number");
           // 
@@ -968,7 +968,7 @@
           this.ButCopy.Location = new System.Drawing.Point(521, 466);
           this.ButCopy.Name = "ButCopy";
           this.ButCopy.Size = new System.Drawing.Size(64, 31);
-          this.ButCopy.TabIndex = 76;
+          this.ButCopy.TabIndex = 17;
           this.ButCopy.Text = "Copy";
           this.ToolTip1.SetToolTip(this.ButCopy, "Creates a copy of the current selected configuration.\r\nCan be used e.g. if you wa" +
                   "nt to have more than one \r\nconfiguration available with different settings or fi" +
@@ -982,7 +982,7 @@
           this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 21);
           this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
           this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(179, 17);
-          this.cbAllowRecentAddedAPI.TabIndex = 4;
+          this.cbAllowRecentAddedAPI.TabIndex = 0;
           this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added Media\"";
           this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config\'s media will be included when external plugins \r\nlike \"re" +
                   "cently added media handler\" ask for \"recenty added\" movies.\r\n\r\nYou can enable th" +
@@ -1006,7 +1006,7 @@
           this.groupBox9.Location = new System.Drawing.Point(13, 86);
           this.groupBox9.Name = "groupBox9";
           this.groupBox9.Size = new System.Drawing.Size(307, 59);
-          this.groupBox9.TabIndex = 0;
+          this.groupBox9.TabIndex = 1;
           this.groupBox9.TabStop = false;
           this.groupBox9.Text = "Tags ...";
           this.ToolTip1.SetToolTip(this.groupBox9, "To merge the DVD Profiler Tags field data with the My Films category field, enabl" +
@@ -1019,7 +1019,7 @@
           this.chkDVDprofilerMergeWithGenreField.Location = new System.Drawing.Point(23, 24);
           this.chkDVDprofilerMergeWithGenreField.Name = "chkDVDprofilerMergeWithGenreField";
           this.chkDVDprofilerMergeWithGenreField.Size = new System.Drawing.Size(151, 17);
-          this.chkDVDprofilerMergeWithGenreField.TabIndex = 12;
+          this.chkDVDprofilerMergeWithGenreField.TabIndex = 0;
           this.chkDVDprofilerMergeWithGenreField.Text = "Merge With Category Field";
           this.chkDVDprofilerMergeWithGenreField.UseVisualStyleBackColor = true;
           // 
@@ -1050,7 +1050,7 @@
           this.groupBox25.Location = new System.Drawing.Point(22, 50);
           this.groupBox25.Name = "groupBox25";
           this.groupBox25.Size = new System.Drawing.Size(705, 234);
-          this.groupBox25.TabIndex = 73;
+          this.groupBox25.TabIndex = 0;
           this.groupBox25.TabStop = false;
           this.groupBox25.Text = "WakeOnLAN Options to Support NAS Storage";
           this.ToolTip1.SetToolTip(this.groupBox25, "If enabled you can start NAS when launching movies");
@@ -1061,7 +1061,7 @@
           this.label37.Location = new System.Drawing.Point(414, 60);
           this.label37.Name = "label37";
           this.label37.Size = new System.Drawing.Size(165, 13);
-          this.label37.TabIndex = 94;
+          this.label37.TabIndex = 2;
           this.label37.Text = "Timeout for NAS Server WakeUp";
           // 
           // comboWOLtimeout
@@ -1077,14 +1077,14 @@
           this.comboWOLtimeout.Location = new System.Drawing.Point(603, 57);
           this.comboWOLtimeout.Name = "comboWOLtimeout";
           this.comboWOLtimeout.Size = new System.Drawing.Size(81, 21);
-          this.comboWOLtimeout.TabIndex = 96;
+          this.comboWOLtimeout.TabIndex = 3;
           // 
           // buttonSendMagicPacket3
           // 
           this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 200);
           this.buttonSendMagicPacket3.Name = "buttonSendMagicPacket3";
           this.buttonSendMagicPacket3.Size = new System.Drawing.Size(81, 23);
-          this.buttonSendMagicPacket3.TabIndex = 91;
+          this.buttonSendMagicPacket3.TabIndex = 0;
           this.buttonSendMagicPacket3.Text = "Start Server 3";
           this.buttonSendMagicPacket3.UseVisualStyleBackColor = true;
           this.buttonSendMagicPacket3.Click += new System.EventHandler(this.buttonSendMagicPacket3_Click);
@@ -1094,7 +1094,7 @@
           this.buttonSendMagicPacket2.Location = new System.Drawing.Point(603, 174);
           this.buttonSendMagicPacket2.Name = "buttonSendMagicPacket2";
           this.buttonSendMagicPacket2.Size = new System.Drawing.Size(81, 23);
-          this.buttonSendMagicPacket2.TabIndex = 90;
+          this.buttonSendMagicPacket2.TabIndex = 17;
           this.buttonSendMagicPacket2.Text = "Start Server 2";
           this.buttonSendMagicPacket2.UseVisualStyleBackColor = true;
           this.buttonSendMagicPacket2.Click += new System.EventHandler(this.buttonSendMagicPacket2_Click);
@@ -1105,7 +1105,7 @@
           this.label30.Location = new System.Drawing.Point(414, 94);
           this.label30.Name = "label30";
           this.label30.Size = new System.Drawing.Size(272, 13);
-          this.label30.TabIndex = 89;
+          this.label30.TabIndex = 5;
           this.label30.Text = "Auto-MAC-discover only works if NAS Storage is running";
           // 
           // buttonSendMagicPacket1
@@ -1113,7 +1113,7 @@
           this.buttonSendMagicPacket1.Location = new System.Drawing.Point(603, 150);
           this.buttonSendMagicPacket1.Name = "buttonSendMagicPacket1";
           this.buttonSendMagicPacket1.Size = new System.Drawing.Size(81, 23);
-          this.buttonSendMagicPacket1.TabIndex = 88;
+          this.buttonSendMagicPacket1.TabIndex = 12;
           this.buttonSendMagicPacket1.Text = "Start Server 1";
           this.buttonSendMagicPacket1.UseVisualStyleBackColor = true;
           this.buttonSendMagicPacket1.Click += new System.EventHandler(this.buttonSendMagicPacket1_Click);
@@ -1123,7 +1123,7 @@
           this.buttonGetMACadresses.Location = new System.Drawing.Point(417, 110);
           this.buttonGetMACadresses.Name = "buttonGetMACadresses";
           this.buttonGetMACadresses.Size = new System.Drawing.Size(160, 28);
-          this.buttonGetMACadresses.TabIndex = 87;
+          this.buttonGetMACadresses.TabIndex = 6;
           this.buttonGetMACadresses.Text = "Try getting MAC addresses";
           this.buttonGetMACadresses.UseVisualStyleBackColor = true;
           this.buttonGetMACadresses.Click += new System.EventHandler(this.buttonGetMACadresses_Click);
@@ -1134,7 +1134,7 @@
           this.label_NAS_Server_3_MAC.Location = new System.Drawing.Point(292, 205);
           this.label_NAS_Server_3_MAC.Name = "label_NAS_Server_3_MAC";
           this.label_NAS_Server_3_MAC.Size = new System.Drawing.Size(119, 13);
-          this.label_NAS_Server_3_MAC.TabIndex = 86;
+          this.label_NAS_Server_3_MAC.TabIndex = 20;
           this.label_NAS_Server_3_MAC.Text = "Server 3 - MAC address";
           // 
           // NAS_MAC_3
@@ -1143,7 +1143,7 @@
           this.NAS_MAC_3.Location = new System.Drawing.Point(417, 202);
           this.NAS_MAC_3.Name = "NAS_MAC_3";
           this.NAS_MAC_3.Size = new System.Drawing.Size(160, 20);
-          this.NAS_MAC_3.TabIndex = 85;
+          this.NAS_MAC_3.TabIndex = 21;
           // 
           // label_NAS_Server_3_Name
           // 
@@ -1151,7 +1151,7 @@
           this.label_NAS_Server_3_Name.Location = new System.Drawing.Point(24, 205);
           this.label_NAS_Server_3_Name.Name = "label_NAS_Server_3_Name";
           this.label_NAS_Server_3_Name.Size = new System.Drawing.Size(84, 13);
-          this.label_NAS_Server_3_Name.TabIndex = 84;
+          this.label_NAS_Server_3_Name.TabIndex = 18;
           this.label_NAS_Server_3_Name.Text = "Server 3 - Name";
           // 
           // NAS_Name_3
@@ -1160,7 +1160,7 @@
           this.NAS_Name_3.Location = new System.Drawing.Point(114, 202);
           this.NAS_Name_3.Name = "NAS_Name_3";
           this.NAS_Name_3.Size = new System.Drawing.Size(160, 20);
-          this.NAS_Name_3.TabIndex = 83;
+          this.NAS_Name_3.TabIndex = 19;
           this.NAS_Name_3.TextChanged += new System.EventHandler(this.NAS_Name_3_TextChanged);
           // 
           // label_NAS_Server_2_MAC
@@ -1169,7 +1169,7 @@
           this.label_NAS_Server_2_MAC.Location = new System.Drawing.Point(292, 179);
           this.label_NAS_Server_2_MAC.Name = "label_NAS_Server_2_MAC";
           this.label_NAS_Server_2_MAC.Size = new System.Drawing.Size(119, 13);
-          this.label_NAS_Server_2_MAC.TabIndex = 82;
+          this.label_NAS_Server_2_MAC.TabIndex = 15;
           this.label_NAS_Server_2_MAC.Text = "Server 2 - MAC address";
           // 
           // NAS_MAC_2
@@ -1178,7 +1178,7 @@
           this.NAS_MAC_2.Location = new System.Drawing.Point(417, 176);
           this.NAS_MAC_2.Name = "NAS_MAC_2";
           this.NAS_MAC_2.Size = new System.Drawing.Size(160, 20);
-          this.NAS_MAC_2.TabIndex = 81;
+          this.NAS_MAC_2.TabIndex = 16;
           // 
           // label_NAS_Server_2_Name
           // 
@@ -1186,7 +1186,7 @@
           this.label_NAS_Server_2_Name.Location = new System.Drawing.Point(24, 179);
           this.label_NAS_Server_2_Name.Name = "label_NAS_Server_2_Name";
           this.label_NAS_Server_2_Name.Size = new System.Drawing.Size(84, 13);
-          this.label_NAS_Server_2_Name.TabIndex = 80;
+          this.label_NAS_Server_2_Name.TabIndex = 13;
           this.label_NAS_Server_2_Name.Text = "Server 2 - Name";
           // 
           // NAS_Name_2
@@ -1195,7 +1195,7 @@
           this.NAS_Name_2.Location = new System.Drawing.Point(114, 176);
           this.NAS_Name_2.Name = "NAS_Name_2";
           this.NAS_Name_2.Size = new System.Drawing.Size(160, 20);
-          this.NAS_Name_2.TabIndex = 79;
+          this.NAS_Name_2.TabIndex = 14;
           this.NAS_Name_2.TextChanged += new System.EventHandler(this.NAS_Name_2_TextChanged);
           // 
           // label_NAS_Server_1_MAC
@@ -1204,7 +1204,7 @@
           this.label_NAS_Server_1_MAC.Location = new System.Drawing.Point(292, 153);
           this.label_NAS_Server_1_MAC.Name = "label_NAS_Server_1_MAC";
           this.label_NAS_Server_1_MAC.Size = new System.Drawing.Size(119, 13);
-          this.label_NAS_Server_1_MAC.TabIndex = 78;
+          this.label_NAS_Server_1_MAC.TabIndex = 10;
           this.label_NAS_Server_1_MAC.Text = "Server 1 - MAC address";
           // 
           // NAS_MAC_1
@@ -1213,7 +1213,7 @@
           this.NAS_MAC_1.Location = new System.Drawing.Point(417, 150);
           this.NAS_MAC_1.Name = "NAS_MAC_1";
           this.NAS_MAC_1.Size = new System.Drawing.Size(160, 20);
-          this.NAS_MAC_1.TabIndex = 77;
+          this.NAS_MAC_1.TabIndex = 11;
           // 
           // label_NAS_Server_1_Name
           // 
@@ -1221,7 +1221,7 @@
           this.label_NAS_Server_1_Name.Location = new System.Drawing.Point(24, 153);
           this.label_NAS_Server_1_Name.Name = "label_NAS_Server_1_Name";
           this.label_NAS_Server_1_Name.Size = new System.Drawing.Size(84, 13);
-          this.label_NAS_Server_1_Name.TabIndex = 76;
+          this.label_NAS_Server_1_Name.TabIndex = 8;
           this.label_NAS_Server_1_Name.Text = "Server 1 - Name";
           // 
           // check_WOL_Userdialog
@@ -1231,7 +1231,7 @@
           this.check_WOL_Userdialog.Location = new System.Drawing.Point(27, 59);
           this.check_WOL_Userdialog.Name = "check_WOL_Userdialog";
           this.check_WOL_Userdialog.Size = new System.Drawing.Size(346, 17);
-          this.check_WOL_Userdialog.TabIndex = 75;
+          this.check_WOL_Userdialog.TabIndex = 1;
           this.check_WOL_Userdialog.Text = "Enable WakeOnLAN User Dialog (Autoinvoke WOL when disabled)";
           this.ToolTip1.SetToolTip(this.check_WOL_Userdialog, "Enable WakeOnLAN User Dialog when launching a movie");
           this.check_WOL_Userdialog.UseVisualStyleBackColor = true;
@@ -1242,7 +1242,7 @@
           this.check_WOL_enable.Location = new System.Drawing.Point(27, 36);
           this.check_WOL_enable.Name = "check_WOL_enable";
           this.check_WOL_enable.Size = new System.Drawing.Size(126, 17);
-          this.check_WOL_enable.TabIndex = 74;
+          this.check_WOL_enable.TabIndex = 0;
           this.check_WOL_enable.Text = "Enable WakeOnLAN";
           this.ToolTip1.SetToolTip(this.check_WOL_enable, "Select this option if you want MyFilms to automatically \r\nsend WOL magic packets " +
                   "to start NAS server from S3.\r\n");
@@ -1255,7 +1255,7 @@
           this.NAS_Name_1.Location = new System.Drawing.Point(114, 150);
           this.NAS_Name_1.Name = "NAS_Name_1";
           this.NAS_Name_1.Size = new System.Drawing.Size(160, 20);
-          this.NAS_Name_1.TabIndex = 68;
+          this.NAS_Name_1.TabIndex = 9;
           this.NAS_Name_1.TextChanged += new System.EventHandler(this.NAS_1_Name_TextChanged);
           // 
           // label36
@@ -1264,7 +1264,7 @@
           this.label36.Location = new System.Drawing.Point(24, 118);
           this.label36.Name = "label36";
           this.label36.Size = new System.Drawing.Size(235, 13);
-          this.label36.TabIndex = 69;
+          this.label36.TabIndex = 7;
           this.label36.Text = "Supported Servers (make sure, it supports WOL)";
           this.ToolTip1.SetToolTip(this.label36, "MyFilms will autodetect server name from file path, \r\nif UNC notation is used and" +
                   " server is defined here.");
@@ -1281,7 +1281,7 @@
           this.SLogo_Type.Location = new System.Drawing.Point(9, 289);
           this.SLogo_Type.Name = "SLogo_Type";
           this.SLogo_Type.Size = new System.Drawing.Size(102, 21);
-          this.SLogo_Type.TabIndex = 73;
+          this.SLogo_Type.TabIndex = 16;
           this.ToolTip1.SetToolTip(this.SLogo_Type, resources.GetString("SLogo_Type.ToolTip"));
           // 
           // chkLogos
@@ -1290,7 +1290,7 @@
           this.chkLogos.Location = new System.Drawing.Point(9, 10);
           this.chkLogos.Name = "chkLogos";
           this.chkLogos.Size = new System.Drawing.Size(91, 17);
-          this.chkLogos.TabIndex = 74;
+          this.chkLogos.TabIndex = 0;
           this.chkLogos.Text = "Enable Logos";
           this.ToolTip1.SetToolTip(this.chkLogos, resources.GetString("chkLogos.ToolTip"));
           this.chkLogos.UseVisualStyleBackColor = true;
@@ -1318,7 +1318,7 @@
           this.LogoView.MultiSelect = false;
           this.LogoView.Name = "LogoView";
           this.LogoView.Size = new System.Drawing.Size(734, 170);
-          this.LogoView.TabIndex = 90;
+          this.LogoView.TabIndex = 9;
           this.ToolTip1.SetToolTip(this.LogoView, resources.GetString("LogoView.ToolTip"));
           this.LogoView.UseCompatibleStateImageBehavior = false;
           this.LogoView.View = System.Windows.Forms.View.Details;
@@ -1379,7 +1379,7 @@
           this.txtLogosPath.Location = new System.Drawing.Point(220, 33);
           this.txtLogosPath.Name = "txtLogosPath";
           this.txtLogosPath.Size = new System.Drawing.Size(469, 20);
-          this.txtLogosPath.TabIndex = 92;
+          this.txtLogosPath.TabIndex = 7;
           this.ToolTip1.SetToolTip(this.txtLogosPath, resources.GetString("txtLogosPath.ToolTip"));
           this.txtLogosPath.TextChanged += new System.EventHandler(this.txtLogosPath_TextChanged);
           // 
@@ -1412,7 +1412,7 @@
           this.comboBoxLogoSpacing.Location = new System.Drawing.Point(644, 8);
           this.comboBoxLogoSpacing.Name = "comboBoxLogoSpacing";
           this.comboBoxLogoSpacing.Size = new System.Drawing.Size(45, 21);
-          this.comboBoxLogoSpacing.TabIndex = 100;
+          this.comboBoxLogoSpacing.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.comboBoxLogoSpacing, "You can choose the distance between the generated logos in \"pixel\".\r\nDefault is \"" +
                   "1\".");
           // 
@@ -1427,7 +1427,7 @@
           this.comboBoxLogoPresets.Location = new System.Drawing.Point(220, 8);
           this.comboBoxLogoPresets.Name = "comboBoxLogoPresets";
           this.comboBoxLogoPresets.Size = new System.Drawing.Size(211, 21);
-          this.comboBoxLogoPresets.TabIndex = 3;
+          this.comboBoxLogoPresets.TabIndex = 2;
           this.ToolTip1.SetToolTip(this.comboBoxLogoPresets, resources.GetString("comboBoxLogoPresets.ToolTip"));
           this.comboBoxLogoPresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogoPresets_SelectedIndexChanged);
           // 
@@ -1436,7 +1436,7 @@
           this.btnLogoClearCache.Location = new System.Drawing.Point(461, 8);
           this.btnLogoClearCache.Name = "btnLogoClearCache";
           this.btnLogoClearCache.Size = new System.Drawing.Size(116, 21);
-          this.btnLogoClearCache.TabIndex = 102;
+          this.btnLogoClearCache.TabIndex = 3;
           this.btnLogoClearCache.Text = "Clear Logo Cache";
           this.ToolTip1.SetToolTip(this.btnLogoClearCache, "If you have redefined logo parameters like spacing, you should clear the logo cac" +
                   "he,\r\nso the logos will be rebuild with the new parameters");
@@ -1462,7 +1462,7 @@
           this.Fanart.Location = new System.Drawing.Point(6, 230);
           this.Fanart.Name = "Fanart";
           this.Fanart.Size = new System.Drawing.Size(735, 121);
-          this.Fanart.TabIndex = 71;
+          this.Fanart.TabIndex = 3;
           this.Fanart.TabStop = false;
           this.Fanart.Text = "Fanart ...";
           this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
@@ -1472,7 +1472,7 @@
           this.buttonDefaultFanartReset.Location = new System.Drawing.Point(711, 11);
           this.buttonDefaultFanartReset.Name = "buttonDefaultFanartReset";
           this.buttonDefaultFanartReset.Size = new System.Drawing.Size(18, 18);
-          this.buttonDefaultFanartReset.TabIndex = 102;
+          this.buttonDefaultFanartReset.TabIndex = 9;
           this.buttonDefaultFanartReset.Text = "X";
           this.ToolTip1.SetToolTip(this.buttonDefaultFanartReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
           this.buttonDefaultFanartReset.UseVisualStyleBackColor = true;
@@ -1495,7 +1495,7 @@
           this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(37, 36);
           this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
           this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(116, 17);
-          this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
+          this.chkFanartDefaultViewsUseRandom.TabIndex = 1;
           this.chkFanartDefaultViewsUseRandom.Text = "Use random Fanart";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViewsUseRandom, "If selected, MyFilms will show random fanart from the movies contained in the sel" +
                   "ected group.");
@@ -1507,7 +1507,7 @@
           this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 99);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
           this.chkFanartDefaultViews.Size = new System.Drawing.Size(161, 17);
-          this.chkFanartDefaultViews.TabIndex = 80;
+          this.chkFanartDefaultViews.TabIndex = 4;
           this.chkFanartDefaultViews.Text = "Use Fanart for Default Views";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
           this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
@@ -1518,7 +1518,7 @@
           this.chkDfltFanartImageAll.Location = new System.Drawing.Point(229, 99);
           this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
           this.chkDfltFanartImageAll.Size = new System.Drawing.Size(104, 17);
-          this.chkDfltFanartImageAll.TabIndex = 79;
+          this.chkDfltFanartImageAll.TabIndex = 10;
           this.chkDfltFanartImageAll.Text = "Use for all Views";
           this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all group views like persons, date added, etc.");
           this.chkDfltFanartImageAll.UseVisualStyleBackColor = true;
@@ -1529,7 +1529,7 @@
           this.label48.Location = new System.Drawing.Point(622, 11);
           this.label48.Name = "label48";
           this.label48.Size = new System.Drawing.Size(41, 26);
-          this.label48.TabIndex = 78;
+          this.label48.TabIndex = 8;
           this.label48.Text = "Default\r\nFanart";
           // 
           // chkDfltFanartImage
@@ -1538,7 +1538,7 @@
           this.chkDfltFanartImage.Location = new System.Drawing.Point(37, 57);
           this.chkDfltFanartImage.Name = "chkDfltFanartImage";
           this.chkDfltFanartImage.Size = new System.Drawing.Size(199, 17);
-          this.chkDfltFanartImage.TabIndex = 77;
+          this.chkDfltFanartImage.TabIndex = 2;
           this.chkDfltFanartImage.Text = "Use Default Image for missing Fanart";
           this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and group views like year," +
                   " genre, country.");
@@ -1552,7 +1552,7 @@
           this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(452, 101);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(105, 13);
-          this.lblResultingGroupViewsPathFanart.TabIndex = 74;
+          this.lblResultingGroupViewsPathFanart.TabIndex = 12;
           this.lblResultingGroupViewsPathFanart.Text = "<Views Fanart Path>";
           this.ToolTip1.SetToolTip(this.lblResultingGroupViewsPathFanart, "To use Fanart for \"Views\" put fanart in the subfolder for year, category, country" +
                   ", \r\ne.g. <fanartfolder>\\_view\\year\\2010");
@@ -1564,7 +1564,7 @@
           this.label40.Location = new System.Drawing.Point(352, 101);
           this.label40.Name = "label40";
           this.label40.Size = new System.Drawing.Size(93, 13);
-          this.label40.TabIndex = 73;
+          this.label40.TabIndex = 11;
           this.label40.Text = "Views Fanart Path";
           // 
           // chkFanart
@@ -1573,7 +1573,7 @@
           this.chkFanart.Location = new System.Drawing.Point(18, 15);
           this.chkFanart.Name = "chkFanart";
           this.chkFanart.Size = new System.Drawing.Size(92, 17);
-          this.chkFanart.TabIndex = 71;
+          this.chkFanart.TabIndex = 0;
           this.chkFanart.Text = "Enable Fanart";
           this.chkFanart.UseVisualStyleBackColor = true;
           this.chkFanart.CheckedChanged += new System.EventHandler(this.chkFanart_CheckedChanged);
@@ -1584,7 +1584,7 @@
           this.btnFanart.Location = new System.Drawing.Point(569, 15);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
-          this.btnFanart.TabIndex = 70;
+          this.btnFanart.TabIndex = 7;
           this.btnFanart.Text = "...";
           this.btnFanart.UseVisualStyleBackColor = true;
           this.btnFanart.Click += new System.EventHandler(this.btnFanart_Click);
@@ -1595,7 +1595,7 @@
           this.MesFilmsFanart.Location = new System.Drawing.Point(455, 15);
           this.MesFilmsFanart.Name = "MesFilmsFanart";
           this.MesFilmsFanart.Size = new System.Drawing.Size(108, 20);
-          this.MesFilmsFanart.TabIndex = 68;
+          this.MesFilmsFanart.TabIndex = 6;
           // 
           // labelFanart
           // 
@@ -1603,7 +1603,7 @@
           this.labelFanart.Location = new System.Drawing.Point(383, 19);
           this.labelFanart.Name = "labelFanart";
           this.labelFanart.Size = new System.Drawing.Size(62, 13);
-          this.labelFanart.TabIndex = 69;
+          this.labelFanart.TabIndex = 5;
           this.labelFanart.Text = "Fanart Path";
           // 
           // chkDfltFanart
@@ -1613,7 +1613,7 @@
           this.chkDfltFanart.Location = new System.Drawing.Point(37, 78);
           this.chkDfltFanart.Name = "chkDfltFanart";
           this.chkDfltFanart.Size = new System.Drawing.Size(193, 17);
-          this.chkDfltFanart.TabIndex = 67;
+          this.chkDfltFanart.TabIndex = 3;
           this.chkDfltFanart.Text = "Use Movie Cover for missing Fanart";
           this.chkDfltFanart.UseVisualStyleBackColor = true;
           this.chkDfltFanart.CheckedChanged += new System.EventHandler(this.chkDfltFanart_CheckedChanged);
@@ -1634,7 +1634,7 @@
           this.groupBox22.Location = new System.Drawing.Point(6, 78);
           this.groupBox22.Name = "groupBox22";
           this.groupBox22.Size = new System.Drawing.Size(735, 78);
-          this.groupBox22.TabIndex = 75;
+          this.groupBox22.TabIndex = 1;
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Views ...";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
@@ -1645,7 +1645,7 @@
           this.chkShowIndexedImgInIndViews.Location = new System.Drawing.Point(37, 55);
           this.chkShowIndexedImgInIndViews.Name = "chkShowIndexedImgInIndViews";
           this.chkShowIndexedImgInIndViews.Size = new System.Drawing.Size(115, 17);
-          this.chkShowIndexedImgInIndViews.TabIndex = 103;
+          this.chkShowIndexedImgInIndViews.TabIndex = 3;
           this.chkShowIndexedImgInIndViews.Text = "Use Index Thumbs";
           this.ToolTip1.SetToolTip(this.chkShowIndexedImgInIndViews, "If checked, MyFilms will show \"Index Thumbs\" (\"A\", \"B\", etc.) in all indexed view" +
                   "s.\r\nMake sure, your skin does support them.");
@@ -1656,7 +1656,7 @@
           this.buttonDefaultViewImageReset.Location = new System.Drawing.Point(711, 16);
           this.buttonDefaultViewImageReset.Name = "buttonDefaultViewImageReset";
           this.buttonDefaultViewImageReset.Size = new System.Drawing.Size(18, 18);
-          this.buttonDefaultViewImageReset.TabIndex = 102;
+          this.buttonDefaultViewImageReset.TabIndex = 8;
           this.buttonDefaultViewImageReset.Text = "X";
           this.ToolTip1.SetToolTip(this.buttonDefaultViewImageReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
           this.buttonDefaultViewImageReset.UseVisualStyleBackColor = true;
@@ -1680,7 +1680,7 @@
           this.chkDfltViewsAll.Location = new System.Drawing.Point(229, 16);
           this.chkDfltViewsAll.Name = "chkDfltViewsAll";
           this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
-          this.chkDfltViewsAll.TabIndex = 80;
+          this.chkDfltViewsAll.TabIndex = 1;
           this.chkDfltViewsAll.Text = "Use for all Views";
           this.ToolTip1.SetToolTip(this.chkDfltViewsAll, "If unchecked, group thumbs will only be used for genre, year and country.\r\nIf che" +
                   "cked, it will be used for all group views except \r\nthe person views (actor, dire" +
@@ -1693,7 +1693,7 @@
           this.label47.Location = new System.Drawing.Point(622, 16);
           this.label47.Name = "label47";
           this.label47.Size = new System.Drawing.Size(44, 26);
-          this.label47.TabIndex = 79;
+          this.label47.TabIndex = 7;
           this.label47.Text = "Default \r\nImage";
           // 
           // btnResetThumbs
@@ -1701,7 +1701,7 @@
           this.btnResetThumbs.Location = new System.Drawing.Point(473, 39);
           this.btnResetThumbs.Name = "btnResetThumbs";
           this.btnResetThumbs.Size = new System.Drawing.Size(77, 20);
-          this.btnResetThumbs.TabIndex = 76;
+          this.btnResetThumbs.TabIndex = 9;
           this.btnResetThumbs.Text = "Reset Cache";
           this.ToolTip1.SetToolTip(this.btnResetThumbs, resources.GetString("btnResetThumbs.ToolTip"));
           this.btnResetThumbs.UseVisualStyleBackColor = true;
@@ -1713,7 +1713,7 @@
           this.chkViews.Location = new System.Drawing.Point(18, 15);
           this.chkViews.Name = "chkViews";
           this.chkViews.Size = new System.Drawing.Size(142, 17);
-          this.chkViews.TabIndex = 71;
+          this.chkViews.TabIndex = 0;
           this.chkViews.Text = "Enable Images for Views";
           this.chkViews.UseVisualStyleBackColor = true;
           // 
@@ -1722,7 +1722,7 @@
           this.btnViews.Location = new System.Drawing.Point(569, 13);
           this.btnViews.Name = "btnViews";
           this.btnViews.Size = new System.Drawing.Size(32, 20);
-          this.btnViews.TabIndex = 74;
+          this.btnViews.TabIndex = 6;
           this.btnViews.Text = "...";
           this.btnViews.UseVisualStyleBackColor = true;
           this.btnViews.Click += new System.EventHandler(this.btnViews_Click);
@@ -1733,7 +1733,7 @@
           this.chkDfltViews.Location = new System.Drawing.Point(37, 35);
           this.chkDfltViews.Name = "chkDfltViews";
           this.chkDfltViews.Size = new System.Drawing.Size(200, 17);
-          this.chkDfltViews.TabIndex = 75;
+          this.chkDfltViews.TabIndex = 2;
           this.chkDfltViews.Text = "Use default image for missing thumbs";
           this.chkDfltViews.UseVisualStyleBackColor = true;
           // 
@@ -1743,7 +1743,7 @@
           this.label29.Location = new System.Drawing.Point(353, 17);
           this.label29.Name = "label29";
           this.label29.Size = new System.Drawing.Size(97, 13);
-          this.label29.TabIndex = 73;
+          this.label29.TabIndex = 4;
           this.label29.Text = "Views Images Path";
           // 
           // MesFilmsViews
@@ -1751,7 +1751,7 @@
           this.MesFilmsViews.Location = new System.Drawing.Point(455, 13);
           this.MesFilmsViews.Name = "MesFilmsViews";
           this.MesFilmsViews.Size = new System.Drawing.Size(108, 20);
-          this.MesFilmsViews.TabIndex = 72;
+          this.MesFilmsViews.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.MesFilmsViews, resources.GetString("MesFilmsViews.ToolTip"));
           // 
           // groupBox1
@@ -1770,7 +1770,7 @@
           this.groupBox1.Location = new System.Drawing.Point(6, 7);
           this.groupBox1.Name = "groupBox1";
           this.groupBox1.Size = new System.Drawing.Size(735, 67);
-          this.groupBox1.TabIndex = 85;
+          this.groupBox1.TabIndex = 0;
           this.groupBox1.TabStop = false;
           this.groupBox1.Text = "Films ...";
           this.ToolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
@@ -1780,7 +1780,7 @@
           this.btnResetThumbsFilms.Location = new System.Drawing.Point(473, 39);
           this.btnResetThumbsFilms.Name = "btnResetThumbsFilms";
           this.btnResetThumbsFilms.Size = new System.Drawing.Size(77, 20);
-          this.btnResetThumbsFilms.TabIndex = 102;
+          this.btnResetThumbsFilms.TabIndex = 9;
           this.btnResetThumbsFilms.Text = "Reset Cache";
           this.btnResetThumbsFilms.UseVisualStyleBackColor = true;
           this.btnResetThumbsFilms.Click += new System.EventHandler(this.btnResetThumbsFilms_Click);
@@ -1790,7 +1790,7 @@
           this.buttonDefaultCoverReset.Location = new System.Drawing.Point(711, 11);
           this.buttonDefaultCoverReset.Name = "buttonDefaultCoverReset";
           this.buttonDefaultCoverReset.Size = new System.Drawing.Size(18, 18);
-          this.buttonDefaultCoverReset.TabIndex = 101;
+          this.buttonDefaultCoverReset.TabIndex = 8;
           this.buttonDefaultCoverReset.Text = "X";
           this.ToolTip1.SetToolTip(this.buttonDefaultCoverReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
           this.buttonDefaultCoverReset.UseVisualStyleBackColor = true;
@@ -1814,7 +1814,7 @@
           this.lblPicturePrefix.Location = new System.Drawing.Point(15, 16);
           this.lblPicturePrefix.Name = "lblPicturePrefix";
           this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
-          this.lblPicturePrefix.TabIndex = 98;
+          this.lblPicturePrefix.TabIndex = 0;
           this.lblPicturePrefix.Text = "Picture Prefix";
           // 
           // txtPicturePrefix
@@ -1822,7 +1822,7 @@
           this.txtPicturePrefix.Location = new System.Drawing.Point(106, 13);
           this.txtPicturePrefix.Name = "txtPicturePrefix";
           this.txtPicturePrefix.Size = new System.Drawing.Size(122, 20);
-          this.txtPicturePrefix.TabIndex = 97;
+          this.txtPicturePrefix.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.txtPicturePrefix, resources.GetString("txtPicturePrefix.ToolTip"));
           // 
           // lblPictureHandling
@@ -1831,7 +1831,7 @@
           this.lblPictureHandling.Location = new System.Drawing.Point(15, 42);
           this.lblPictureHandling.Name = "lblPictureHandling";
           this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
-          this.lblPictureHandling.TabIndex = 96;
+          this.lblPictureHandling.TabIndex = 2;
           this.lblPictureHandling.Text = "Picture Handling";
           // 
           // cbPictureHandling
@@ -1844,7 +1844,7 @@
           this.cbPictureHandling.Location = new System.Drawing.Point(106, 40);
           this.cbPictureHandling.Name = "cbPictureHandling";
           this.cbPictureHandling.Size = new System.Drawing.Size(122, 21);
-          this.cbPictureHandling.TabIndex = 95;
+          this.cbPictureHandling.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
           this.cbPictureHandling.SelectedIndexChanged += new System.EventHandler(this.cbPictureHandling_SelectedIndexChanged);
           // 
@@ -1854,7 +1854,7 @@
           this.label_DefaulCover.Location = new System.Drawing.Point(622, 11);
           this.label_DefaulCover.Name = "label_DefaulCover";
           this.label_DefaulCover.Size = new System.Drawing.Size(44, 26);
-          this.label_DefaulCover.TabIndex = 88;
+          this.label_DefaulCover.TabIndex = 7;
           this.label_DefaulCover.Text = "Default \r\nCover";
           // 
           // ButImg
@@ -1862,7 +1862,7 @@
           this.ButImg.Location = new System.Drawing.Point(569, 14);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
-          this.ButImg.TabIndex = 87;
+          this.ButImg.TabIndex = 6;
           this.ButImg.Text = "...";
           this.ButImg.UseVisualStyleBackColor = true;
           this.ButImg.Click += new System.EventHandler(this.ButImg_Click);
@@ -1872,7 +1872,7 @@
           this.MesFilmsImg.Location = new System.Drawing.Point(455, 14);
           this.MesFilmsImg.Name = "MesFilmsImg";
           this.MesFilmsImg.Size = new System.Drawing.Size(108, 20);
-          this.MesFilmsImg.TabIndex = 85;
+          this.MesFilmsImg.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.MesFilmsImg, resources.GetString("MesFilmsImg.ToolTip"));
           // 
           // label2
@@ -1881,7 +1881,7 @@
           this.label2.Location = new System.Drawing.Point(352, 18);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
-          this.label2.TabIndex = 86;
+          this.label2.TabIndex = 4;
           this.label2.Text = "Cover Images Path";
           // 
           // groupBox_ArtistImages
@@ -1899,7 +1899,7 @@
           this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 158);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
           this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 69);
-          this.groupBox_ArtistImages.TabIndex = 86;
+          this.groupBox_ArtistImages.TabIndex = 2;
           this.groupBox_ArtistImages.TabStop = false;
           this.groupBox_ArtistImages.Text = "Persons Views ...";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, resources.GetString("groupBox_ArtistImages.ToolTip"));
@@ -1910,7 +1910,7 @@
           this.chkPersonsEnableDownloads.Location = new System.Drawing.Point(229, 10);
           this.chkPersonsEnableDownloads.Name = "chkPersonsEnableDownloads";
           this.chkPersonsEnableDownloads.Size = new System.Drawing.Size(79, 30);
-          this.chkPersonsEnableDownloads.TabIndex = 103;
+          this.chkPersonsEnableDownloads.TabIndex = 1;
           this.chkPersonsEnableDownloads.Text = "Enable \r\nDownloads";
           this.ToolTip1.SetToolTip(this.chkPersonsEnableDownloads, "When enabled, MyFilms will automatically try to download\r\nperson images in Detail" +
                   "s View.");
@@ -1921,7 +1921,7 @@
           this.buttonDefaultPersonImageReset.Location = new System.Drawing.Point(711, 12);
           this.buttonDefaultPersonImageReset.Name = "buttonDefaultPersonImageReset";
           this.buttonDefaultPersonImageReset.Size = new System.Drawing.Size(18, 18);
-          this.buttonDefaultPersonImageReset.TabIndex = 102;
+          this.buttonDefaultPersonImageReset.TabIndex = 7;
           this.buttonDefaultPersonImageReset.Text = "X";
           this.ToolTip1.SetToolTip(this.buttonDefaultPersonImageReset, "Click to reset image.\r\n(Image itself will not be deleted.)");
           this.buttonDefaultPersonImageReset.UseVisualStyleBackColor = true;
@@ -1945,7 +1945,7 @@
           this.chkPersons.Location = new System.Drawing.Point(18, 15);
           this.chkPersons.Name = "chkPersons";
           this.chkPersons.Size = new System.Drawing.Size(152, 17);
-          this.chkPersons.TabIndex = 100;
+          this.chkPersons.TabIndex = 0;
           this.chkPersons.Text = "Enable Images for Persons";
           this.chkPersons.UseVisualStyleBackColor = true;
           // 
@@ -1954,7 +1954,7 @@
           this.btnResetThumbsArtist.Location = new System.Drawing.Point(473, 40);
           this.btnResetThumbsArtist.Name = "btnResetThumbsArtist";
           this.btnResetThumbsArtist.Size = new System.Drawing.Size(77, 20);
-          this.btnResetThumbsArtist.TabIndex = 99;
+          this.btnResetThumbsArtist.TabIndex = 8;
           this.btnResetThumbsArtist.Text = "Reset Cache";
           this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, resources.GetString("btnResetThumbsArtist.ToolTip"));
           this.btnResetThumbsArtist.UseVisualStyleBackColor = true;
@@ -1966,7 +1966,7 @@
           this.chkDfltArtist.Location = new System.Drawing.Point(37, 38);
           this.chkDfltArtist.Name = "chkDfltArtist";
           this.chkDfltArtist.Size = new System.Drawing.Size(200, 17);
-          this.chkDfltArtist.TabIndex = 98;
+          this.chkDfltArtist.TabIndex = 2;
           this.chkDfltArtist.Text = "Use default image for missing thumbs";
           this.chkDfltArtist.UseVisualStyleBackColor = true;
           // 
@@ -1975,7 +1975,7 @@
           this.ButImgArtist.Location = new System.Drawing.Point(569, 13);
           this.ButImgArtist.Name = "ButImgArtist";
           this.ButImgArtist.Size = new System.Drawing.Size(32, 20);
-          this.ButImgArtist.TabIndex = 96;
+          this.ButImgArtist.TabIndex = 5;
           this.ButImgArtist.Text = "...";
           this.ButImgArtist.UseVisualStyleBackColor = true;
           this.ButImgArtist.Click += new System.EventHandler(this.ButImgArtist_Click);
@@ -1985,7 +1985,7 @@
           this.MesFilmsImgArtist.Location = new System.Drawing.Point(455, 13);
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
           this.MesFilmsImgArtist.Size = new System.Drawing.Size(108, 20);
-          this.MesFilmsImgArtist.TabIndex = 95;
+          this.MesFilmsImgArtist.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.MesFilmsImgArtist, resources.GetString("MesFilmsImgArtist.ToolTip"));
           // 
           // label_DefaultArtistImage
@@ -1994,7 +1994,7 @@
           this.label_DefaultArtistImage.Location = new System.Drawing.Point(622, 12);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
           this.label_DefaultArtistImage.Size = new System.Drawing.Size(41, 26);
-          this.label_DefaultArtistImage.TabIndex = 94;
+          this.label_DefaultArtistImage.TabIndex = 6;
           this.label_DefaultArtistImage.Text = "Default\r\nImage";
           // 
           // label_ArtistImagePath
@@ -2003,7 +2003,7 @@
           this.label_ArtistImagePath.Location = new System.Drawing.Point(347, 16);
           this.label_ArtistImagePath.Name = "label_ArtistImagePath";
           this.label_ArtistImagePath.Size = new System.Drawing.Size(102, 13);
-          this.label_ArtistImagePath.TabIndex = 93;
+          this.label_ArtistImagePath.TabIndex = 3;
           this.label_ArtistImagePath.Text = "Person Images Path";
           // 
           // groupBox_AMCupdater
@@ -2016,7 +2016,7 @@
           this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 9);
           this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
           this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 251);
-          this.groupBox_AMCupdater.TabIndex = 2;
+          this.groupBox_AMCupdater.TabIndex = 0;
           this.groupBox_AMCupdater.TabStop = false;
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
           this.ToolTip1.SetToolTip(this.groupBox_AMCupdater, resources.GetString("groupBox_AMCupdater.ToolTip"));
@@ -2029,7 +2029,7 @@
           this.groupBoxAMCUpdaterConfigFile.Location = new System.Drawing.Point(388, 13);
           this.groupBoxAMCUpdaterConfigFile.Name = "groupBoxAMCUpdaterConfigFile";
           this.groupBoxAMCUpdaterConfigFile.Size = new System.Drawing.Size(332, 53);
-          this.groupBoxAMCUpdaterConfigFile.TabIndex = 63;
+          this.groupBoxAMCUpdaterConfigFile.TabIndex = 1;
           this.groupBoxAMCUpdaterConfigFile.TabStop = false;
           this.groupBoxAMCUpdaterConfigFile.Text = "AMCU Config File ...";
           this.ToolTip1.SetToolTip(this.groupBoxAMCUpdaterConfigFile, resources.GetString("groupBoxAMCUpdaterConfigFile.ToolTip"));
@@ -2040,14 +2040,14 @@
           this.txtAMCUpd_cnf_Display.Location = new System.Drawing.Point(17, 19);
           this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
           this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(255, 20);
-          this.txtAMCUpd_cnf_Display.TabIndex = 62;
+          this.txtAMCUpd_cnf_Display.TabIndex = 0;
           // 
           // btnAMCUpd_cnf
           // 
           this.btnAMCUpd_cnf.Location = new System.Drawing.Point(278, 19);
           this.btnAMCUpd_cnf.Name = "btnAMCUpd_cnf";
           this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 20);
-          this.btnAMCUpd_cnf.TabIndex = 58;
+          this.btnAMCUpd_cnf.TabIndex = 1;
           this.btnAMCUpd_cnf.Text = "...";
           this.btnAMCUpd_cnf.UseVisualStyleBackColor = true;
           this.btnAMCUpd_cnf.Click += new System.EventHandler(this.btnAMCUpd_cnf_Click);
@@ -2069,7 +2069,7 @@
           this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 71);
           this.groupBox_AMCupdaterScheduer.Name = "groupBox_AMCupdaterScheduer";
           this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 62);
-          this.groupBox_AMCupdaterScheduer.TabIndex = 62;
+          this.groupBox_AMCupdaterScheduer.TabIndex = 2;
           this.groupBox_AMCupdaterScheduer.TabStop = false;
           this.groupBox_AMCupdaterScheduer.Text = "Scheduler for AMCupdater";
           this.ToolTip1.SetToolTip(this.groupBox_AMCupdaterScheduer, "The scheduled task will use the AMCU Config file you configured \r\nor alternativel" +
@@ -2081,7 +2081,7 @@
           this.scheduleAMCUpdater.Location = new System.Drawing.Point(32, 28);
           this.scheduleAMCUpdater.Name = "scheduleAMCUpdater";
           this.scheduleAMCUpdater.Size = new System.Drawing.Size(71, 17);
-          this.scheduleAMCUpdater.TabIndex = 61;
+          this.scheduleAMCUpdater.TabIndex = 0;
           this.scheduleAMCUpdater.Text = "Schedule";
           this.ToolTip1.SetToolTip(this.scheduleAMCUpdater, resources.GetString("scheduleAMCUpdater.ToolTip"));
           this.scheduleAMCUpdater.UseVisualStyleBackColor = true;
@@ -2092,7 +2092,7 @@
           this.btnParameters.Location = new System.Drawing.Point(167, 23);
           this.btnParameters.Name = "btnParameters";
           this.btnParameters.Size = new System.Drawing.Size(143, 24);
-          this.btnParameters.TabIndex = 60;
+          this.btnParameters.TabIndex = 0;
           this.btnParameters.Text = "Task Parameters";
           this.btnParameters.UseVisualStyleBackColor = true;
           this.btnParameters.Click += new System.EventHandler(this.btnParameters_Click);
@@ -2121,7 +2121,7 @@
           this.label56.Location = new System.Drawing.Point(10, 51);
           this.label56.Name = "label56";
           this.label56.Size = new System.Drawing.Size(112, 13);
-          this.label56.TabIndex = 86;
+          this.label56.TabIndex = 3;
           this.label56.Text = "Title & Search Handling";
           // 
           // AmcTitleSearchHandling
@@ -2137,7 +2137,7 @@
           this.AmcTitleSearchHandling.Location = new System.Drawing.Point(139, 48);
           this.AmcTitleSearchHandling.Name = "AmcTitleSearchHandling";
           this.AmcTitleSearchHandling.Size = new System.Drawing.Size(200, 21);
-          this.AmcTitleSearchHandling.TabIndex = 85;
+          this.AmcTitleSearchHandling.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.AmcTitleSearchHandling, resources.GetString("AmcTitleSearchHandling.ToolTip"));
           // 
           // btnCreateAMCDefaultConfig
@@ -2146,7 +2146,7 @@
           this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 51);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(143, 36);
-          this.btnCreateAMCDefaultConfig.TabIndex = 77;
+          this.btnCreateAMCDefaultConfig.TabIndex = 7;
           this.btnCreateAMCDefaultConfig.Text = "(re)Create AMC Updater \r\nDefault Settings";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDefaultConfig, resources.GetString("btnCreateAMCDefaultConfig.ToolTip"));
           this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
@@ -2158,7 +2158,7 @@
           this.lblAMCMovieScanPath.Location = new System.Drawing.Point(10, 24);
           this.lblAMCMovieScanPath.Name = "lblAMCMovieScanPath";
           this.lblAMCMovieScanPath.Size = new System.Drawing.Size(100, 13);
-          this.lblAMCMovieScanPath.TabIndex = 84;
+          this.lblAMCMovieScanPath.TabIndex = 0;
           this.lblAMCMovieScanPath.Text = "Movie Scan Path(s)";
           // 
           // chkAMC_Purge_Missing_Files
@@ -2170,7 +2170,7 @@
           this.chkAMC_Purge_Missing_Files.Name = "chkAMC_Purge_Missing_Files";
           this.chkAMC_Purge_Missing_Files.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
           this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(135, 17);
-          this.chkAMC_Purge_Missing_Files.TabIndex = 83;
+          this.chkAMC_Purge_Missing_Files.TabIndex = 5;
           this.chkAMC_Purge_Missing_Files.Text = "Purge Orphan Records";
           this.ToolTip1.SetToolTip(this.chkAMC_Purge_Missing_Files, resources.GetString("chkAMC_Purge_Missing_Files.ToolTip"));
           this.chkAMC_Purge_Missing_Files.UseVisualStyleBackColor = true;
@@ -2181,7 +2181,7 @@
           this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(655, 21);
           this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
           this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 20);
-          this.btnAMCMovieScanPathAdd.TabIndex = 82;
+          this.btnAMCMovieScanPathAdd.TabIndex = 2;
           this.btnAMCMovieScanPathAdd.Text = "...";
           this.btnAMCMovieScanPathAdd.UseVisualStyleBackColor = true;
           this.btnAMCMovieScanPathAdd.Click += new System.EventHandler(this.btnAMCMovieScanPathAdd_Click);
@@ -2191,7 +2191,7 @@
           this.AMCMovieScanPath.Location = new System.Drawing.Point(139, 21);
           this.AMCMovieScanPath.Name = "AMCMovieScanPath";
           this.AMCMovieScanPath.Size = new System.Drawing.Size(510, 20);
-          this.AMCMovieScanPath.TabIndex = 81;
+          this.AMCMovieScanPath.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.AMCMovieScanPath, "Enter the path(s) to your media files.\r\nMore than one path, separated by semicolo" +
                   "n, are allowed.");
           // 
@@ -2200,7 +2200,7 @@
           this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 51);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(143, 36);
-          this.btnCreateAMCDesktopIcon.TabIndex = 78;
+          this.btnCreateAMCDesktopIcon.TabIndex = 6;
           this.btnCreateAMCDesktopIcon.Text = "Create Desktop Icon ";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDesktopIcon, "By creating a desktop icon you can launch AMC Updater directly \r\nfrom Windows wit" +
                   "hout first starting MyFilms setup.");
@@ -2229,7 +2229,7 @@
           this.groupBoxDeletionOptions.Location = new System.Drawing.Point(354, 14);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
           this.groupBoxDeletionOptions.Size = new System.Drawing.Size(387, 189);
-          this.groupBoxDeletionOptions.TabIndex = 35;
+          this.groupBoxDeletionOptions.TabIndex = 2;
           this.groupBoxDeletionOptions.TabStop = false;
           this.groupBoxDeletionOptions.Text = "Update and Deletion Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
@@ -2246,7 +2246,7 @@
           this.cbSuppressAutomaticAction.Location = new System.Drawing.Point(174, 40);
           this.cbSuppressAutomaticAction.Name = "cbSuppressAutomaticAction";
           this.cbSuppressAutomaticAction.Size = new System.Drawing.Size(181, 21);
-          this.cbSuppressAutomaticAction.TabIndex = 20;
+          this.cbSuppressAutomaticAction.TabIndex = 2;
           this.cbSuppressAutomaticAction.SelectedIndexChanged += new System.EventHandler(this.cbSuppress_SelectedIndexChanged);
           // 
           // gpspfield
@@ -2260,7 +2260,7 @@
           this.gpspfield.Location = new System.Drawing.Point(20, 78);
           this.gpspfield.Name = "gpspfield";
           this.gpspfield.Size = new System.Drawing.Size(335, 93);
-          this.gpspfield.TabIndex = 18;
+          this.gpspfield.TabIndex = 3;
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
           this.ToolTip1.SetToolTip(this.gpspfield, resources.GetString("gpspfield.ToolTip"));
@@ -2271,7 +2271,7 @@
           this.label61.Location = new System.Drawing.Point(141, 42);
           this.label61.Name = "label61";
           this.label61.Size = new System.Drawing.Size(72, 13);
-          this.label61.TabIndex = 21;
+          this.label61.TabIndex = 3;
           this.label61.Text = "Update Value";
           // 
           // chkSuppressPlayStopUpdateField
@@ -2281,7 +2281,7 @@
           this.chkSuppressPlayStopUpdateField.Location = new System.Drawing.Point(13, 22);
           this.chkSuppressPlayStopUpdateField.Name = "chkSuppressPlayStopUpdateField";
           this.chkSuppressPlayStopUpdateField.Size = new System.Drawing.Size(184, 17);
-          this.chkSuppressPlayStopUpdateField.TabIndex = 19;
+          this.chkSuppressPlayStopUpdateField.TabIndex = 0;
           this.chkSuppressPlayStopUpdateField.Text = "Update Field when player finishes";
           this.ToolTip1.SetToolTip(this.chkSuppressPlayStopUpdateField, "You can update a DB field with a specified value after a movie is watched.");
           this.chkSuppressPlayStopUpdateField.UseVisualStyleBackColor = true;
@@ -2292,7 +2292,7 @@
           this.txtSuppressPlayStopValueToUpdate.Location = new System.Drawing.Point(142, 60);
           this.txtSuppressPlayStopValueToUpdate.Name = "txtSuppressPlayStopValueToUpdate";
           this.txtSuppressPlayStopValueToUpdate.Size = new System.Drawing.Size(115, 20);
-          this.txtSuppressPlayStopValueToUpdate.TabIndex = 16;
+          this.txtSuppressPlayStopValueToUpdate.TabIndex = 4;
           // 
           // cbSuppressPlayStopFieldToUpdate
           // 
@@ -2301,7 +2301,7 @@
           this.cbSuppressPlayStopFieldToUpdate.Name = "cbSuppressPlayStopFieldToUpdate";
           this.cbSuppressPlayStopFieldToUpdate.Size = new System.Drawing.Size(123, 21);
           this.cbSuppressPlayStopFieldToUpdate.Sorted = true;
-          this.cbSuppressPlayStopFieldToUpdate.TabIndex = 15;
+          this.cbSuppressPlayStopFieldToUpdate.TabIndex = 2;
           this.cbSuppressPlayStopFieldToUpdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
           // lblUpdateValue
@@ -2310,7 +2310,7 @@
           this.lblUpdateValue.Location = new System.Drawing.Point(12, 43);
           this.lblUpdateValue.Name = "lblUpdateValue";
           this.lblUpdateValue.Size = new System.Drawing.Size(93, 13);
-          this.lblUpdateValue.TabIndex = 20;
+          this.lblUpdateValue.TabIndex = 1;
           this.lblUpdateValue.Text = "DB Item to update";
           // 
           // chkSuppressManual
@@ -2319,7 +2319,7 @@
           this.chkSuppressManual.Location = new System.Drawing.Point(20, 19);
           this.chkSuppressManual.Name = "chkSuppressManual";
           this.chkSuppressManual.Size = new System.Drawing.Size(136, 17);
-          this.chkSuppressManual.TabIndex = 19;
+          this.chkSuppressManual.TabIndex = 0;
           this.chkSuppressManual.Text = "Enable manual deletion";
           this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
                   "\r\nNote: Enabling allows the user to delete files physically - don\'t enable for c" +
@@ -2333,7 +2333,7 @@
           this.chkSuppressAutomatic.Location = new System.Drawing.Point(20, 42);
           this.chkSuppressAutomatic.Name = "chkSuppressAutomatic";
           this.chkSuppressAutomatic.Size = new System.Drawing.Size(148, 17);
-          this.chkSuppressAutomatic.TabIndex = 0;
+          this.chkSuppressAutomatic.TabIndex = 1;
           this.chkSuppressAutomatic.Text = "Enable automatic deletion";
           this.ToolTip1.SetToolTip(this.chkSuppressAutomatic, resources.GetString("chkSuppressAutomatic.ToolTip"));
           this.chkSuppressAutomatic.UseVisualStyleBackColor = true;
@@ -2352,7 +2352,7 @@
           this.groupBox2.Location = new System.Drawing.Point(6, 14);
           this.groupBox2.Name = "groupBox2";
           this.groupBox2.Size = new System.Drawing.Size(338, 110);
-          this.groupBox2.TabIndex = 72;
+          this.groupBox2.TabIndex = 0;
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Watched-Status Handling";
           this.ToolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
@@ -2362,7 +2362,7 @@
           this.btnWatchedImport.Location = new System.Drawing.Point(255, 33);
           this.btnWatchedImport.Name = "btnWatchedImport";
           this.btnWatchedImport.Size = new System.Drawing.Size(75, 21);
-          this.btnWatchedImport.TabIndex = 86;
+          this.btnWatchedImport.TabIndex = 3;
           this.btnWatchedImport.Text = "import";
           this.ToolTip1.SetToolTip(this.btnWatchedImport, resources.GetString("btnWatchedImport.ToolTip"));
           this.btnWatchedImport.UseVisualStyleBackColor = true;
@@ -2373,7 +2373,7 @@
           this.btnWatchedExport.Location = new System.Drawing.Point(255, 11);
           this.btnWatchedExport.Name = "btnWatchedExport";
           this.btnWatchedExport.Size = new System.Drawing.Size(75, 21);
-          this.btnWatchedExport.TabIndex = 85;
+          this.btnWatchedExport.TabIndex = 1;
           this.btnWatchedExport.Text = "export";
           this.ToolTip1.SetToolTip(this.btnWatchedExport, resources.GetString("btnWatchedExport.ToolTip"));
           this.btnWatchedExport.UseVisualStyleBackColor = true;
@@ -2385,7 +2385,7 @@
           this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(165, 62);
           this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
           this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(165, 13);
-          this.lblUnwatchedItemsValue.TabIndex = 84;
+          this.lblUnwatchedItemsValue.TabIndex = 0;
           this.lblUnwatchedItemsValue.Text = "Value to identify unwatched items";
           // 
           // textBoxGlobalUnwatchedOnlyValue
@@ -2393,7 +2393,7 @@
           this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(168, 80);
           this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
           this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(162, 20);
-          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 83;
+          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.textBoxGlobalUnwatchedOnlyValue, resources.GetString("textBoxGlobalUnwatchedOnlyValue.ToolTip"));
           // 
           // CheckWatchedPlayerStopped
@@ -2402,7 +2402,7 @@
           this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 37);
           this.CheckWatchedPlayerStopped.Name = "CheckWatchedPlayerStopped";
           this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(238, 17);
-          this.CheckWatchedPlayerStopped.TabIndex = 75;
+          this.CheckWatchedPlayerStopped.TabIndex = 2;
           this.CheckWatchedPlayerStopped.Text = "Update when playback is stopped or finished";
           this.ToolTip1.SetToolTip(this.CheckWatchedPlayerStopped, "Watched status (by updating the field configured for Watched) will be set if:\r\n- " +
                   "movie ended\r\n- movie was stopped at a playtime >= 80%");
@@ -2415,7 +2415,7 @@
           this.label19.Location = new System.Drawing.Point(8, 62);
           this.label19.Name = "label19";
           this.label19.Size = new System.Drawing.Size(150, 13);
-          this.label19.TabIndex = 74;
+          this.label19.TabIndex = 4;
           this.label19.Text = "Field used for Watched Status";
           // 
           // cbWatched
@@ -2425,7 +2425,7 @@
           this.cbWatched.Name = "cbWatched";
           this.cbWatched.Size = new System.Drawing.Size(123, 21);
           this.cbWatched.Sorted = true;
-          this.cbWatched.TabIndex = 73;
+          this.cbWatched.TabIndex = 6;
           this.ToolTip1.SetToolTip(this.cbWatched, resources.GetString("cbWatched.ToolTip"));
           // 
           // CheckWatched
@@ -2434,7 +2434,7 @@
           this.CheckWatched.Location = new System.Drawing.Point(10, 17);
           this.CheckWatched.Name = "CheckWatched";
           this.CheckWatched.Size = new System.Drawing.Size(178, 17);
-          this.CheckWatched.TabIndex = 69;
+          this.CheckWatched.TabIndex = 0;
           this.CheckWatched.Text = "Update when movie is launched";
           this.ToolTip1.SetToolTip(this.CheckWatched, "Watched status (by updating the field configured for Watched) will be set if:\r\n- " +
                   "movie is started");
@@ -2446,7 +2446,7 @@
           this.btnMUSdeleteUserData.Location = new System.Drawing.Point(226, 11);
           this.btnMUSdeleteUserData.Name = "btnMUSdeleteUserData";
           this.btnMUSdeleteUserData.Size = new System.Drawing.Size(104, 21);
-          this.btnMUSdeleteUserData.TabIndex = 87;
+          this.btnMUSdeleteUserData.TabIndex = 1;
           this.btnMUSdeleteUserData.Text = "Delete User Data";
           this.ToolTip1.SetToolTip(this.btnMUSdeleteUserData, resources.GetString("btnMUSdeleteUserData.ToolTip"));
           this.btnMUSdeleteUserData.UseVisualStyleBackColor = true;
@@ -2458,7 +2458,7 @@
           this.UserProfileName.Location = new System.Drawing.Point(168, 34);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);
-          this.UserProfileName.TabIndex = 71;
+          this.UserProfileName.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.UserProfileName, resources.GetString("UserProfileName.ToolTip"));
           // 
           // groupBox_UserItemsDetails
@@ -2486,7 +2486,7 @@
           this.groupBox_UserItemsDetails.Location = new System.Drawing.Point(387, 52);
           this.groupBox_UserItemsDetails.Name = "groupBox_UserItemsDetails";
           this.groupBox_UserItemsDetails.Size = new System.Drawing.Size(324, 221);
-          this.groupBox_UserItemsDetails.TabIndex = 131;
+          this.groupBox_UserItemsDetails.TabIndex = 1;
           this.groupBox_UserItemsDetails.TabStop = false;
           this.groupBox_UserItemsDetails.Text = "Custom Display Items for Details Screen";
           this.ToolTip1.SetToolTip(this.groupBox_UserItemsDetails, resources.GetString("groupBox_UserItemsDetails.ToolTip"));
@@ -2522,7 +2522,7 @@
           this.label_DetailsLabel.Location = new System.Drawing.Point(172, 23);
           this.label_DetailsLabel.Name = "label_DetailsLabel";
           this.label_DetailsLabel.Size = new System.Drawing.Size(33, 13);
-          this.label_DetailsLabel.TabIndex = 16;
+          this.label_DetailsLabel.TabIndex = 1;
           this.label_DetailsLabel.Text = "Label";
           // 
           // label_DetailsDBitem
@@ -2531,7 +2531,7 @@
           this.label_DetailsDBitem.Location = new System.Drawing.Point(43, 23);
           this.label_DetailsDBitem.Name = "label_DetailsDBitem";
           this.label_DetailsDBitem.Size = new System.Drawing.Size(94, 13);
-          this.label_DetailsDBitem.TabIndex = 15;
+          this.label_DetailsDBitem.TabIndex = 0;
           this.label_DetailsDBitem.Text = "DB Item to Display";
           // 
           // label_UserItemDetails5
@@ -2549,7 +2549,7 @@
           this.label_UserItemDetails4.Location = new System.Drawing.Point(20, 125);
           this.label_UserItemDetails4.Name = "label_UserItemDetails4";
           this.label_UserItemDetails4.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails4.TabIndex = 13;
+          this.label_UserItemDetails4.TabIndex = 11;
           this.label_UserItemDetails4.Text = "4";
           // 
           // label_UserItemDetails3
@@ -2558,7 +2558,7 @@
           this.label_UserItemDetails3.Location = new System.Drawing.Point(20, 98);
           this.label_UserItemDetails3.Name = "label_UserItemDetails3";
           this.label_UserItemDetails3.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails3.TabIndex = 12;
+          this.label_UserItemDetails3.TabIndex = 8;
           this.label_UserItemDetails3.Text = "3";
           // 
           // label_UserItemDetails2
@@ -2567,7 +2567,7 @@
           this.label_UserItemDetails2.Location = new System.Drawing.Point(20, 71);
           this.label_UserItemDetails2.Name = "label_UserItemDetails2";
           this.label_UserItemDetails2.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails2.TabIndex = 11;
+          this.label_UserItemDetails2.TabIndex = 5;
           this.label_UserItemDetails2.Text = "2";
           // 
           // label_UserItemDetails1
@@ -2576,7 +2576,7 @@
           this.label_UserItemDetails1.Location = new System.Drawing.Point(20, 42);
           this.label_UserItemDetails1.Name = "label_UserItemDetails1";
           this.label_UserItemDetails1.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItemDetails1.TabIndex = 10;
+          this.label_UserItemDetails1.TabIndex = 2;
           this.label_UserItemDetails1.Text = "1";
           // 
           // AntLabelDetails5
@@ -2584,35 +2584,35 @@
           this.AntLabelDetails5.Location = new System.Drawing.Point(165, 149);
           this.AntLabelDetails5.Name = "AntLabelDetails5";
           this.AntLabelDetails5.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails5.TabIndex = 9;
+          this.AntLabelDetails5.TabIndex = 16;
           // 
           // AntLabelDetails4
           // 
           this.AntLabelDetails4.Location = new System.Drawing.Point(165, 122);
           this.AntLabelDetails4.Name = "AntLabelDetails4";
           this.AntLabelDetails4.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails4.TabIndex = 8;
+          this.AntLabelDetails4.TabIndex = 13;
           // 
           // AntLabelDetails3
           // 
           this.AntLabelDetails3.Location = new System.Drawing.Point(165, 95);
           this.AntLabelDetails3.Name = "AntLabelDetails3";
           this.AntLabelDetails3.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails3.TabIndex = 7;
+          this.AntLabelDetails3.TabIndex = 10;
           // 
           // AntLabelDetails2
           // 
           this.AntLabelDetails2.Location = new System.Drawing.Point(165, 68);
           this.AntLabelDetails2.Name = "AntLabelDetails2";
           this.AntLabelDetails2.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails2.TabIndex = 6;
+          this.AntLabelDetails2.TabIndex = 7;
           // 
           // AntLabelDetails1
           // 
           this.AntLabelDetails1.Location = new System.Drawing.Point(165, 39);
           this.AntLabelDetails1.Name = "AntLabelDetails1";
           this.AntLabelDetails1.Size = new System.Drawing.Size(105, 20);
-          this.AntLabelDetails1.TabIndex = 5;
+          this.AntLabelDetails1.TabIndex = 4;
           // 
           // AntItemDetails5
           // 
@@ -2621,7 +2621,7 @@
           this.AntItemDetails5.Name = "AntItemDetails5";
           this.AntItemDetails5.Size = new System.Drawing.Size(101, 21);
           this.AntItemDetails5.Sorted = true;
-          this.AntItemDetails5.TabIndex = 4;
+          this.AntItemDetails5.TabIndex = 15;
           // 
           // AntItemDetails4
           // 
@@ -2630,7 +2630,7 @@
           this.AntItemDetails4.Name = "AntItemDetails4";
           this.AntItemDetails4.Size = new System.Drawing.Size(101, 21);
           this.AntItemDetails4.Sorted = true;
-          this.AntItemDetails4.TabIndex = 3;
+          this.AntItemDetails4.TabIndex = 12;
           // 
           // AntItemDetails3
           // 
@@ -2639,7 +2639,7 @@
           this.AntItemDetails3.Name = "AntItemDetails3";
           this.AntItemDetails3.Size = new System.Drawing.Size(101, 21);
           this.AntItemDetails3.Sorted = true;
-          this.AntItemDetails3.TabIndex = 2;
+          this.AntItemDetails3.TabIndex = 9;
           // 
           // AntItemDetails2
           // 
@@ -2648,7 +2648,7 @@
           this.AntItemDetails2.Name = "AntItemDetails2";
           this.AntItemDetails2.Size = new System.Drawing.Size(101, 21);
           this.AntItemDetails2.Sorted = true;
-          this.AntItemDetails2.TabIndex = 1;
+          this.AntItemDetails2.TabIndex = 6;
           // 
           // AntItemDetails1
           // 
@@ -2657,7 +2657,7 @@
           this.AntItemDetails1.Name = "AntItemDetails1";
           this.AntItemDetails1.Size = new System.Drawing.Size(101, 21);
           this.AntItemDetails1.Sorted = true;
-          this.AntItemDetails1.TabIndex = 0;
+          this.AntItemDetails1.TabIndex = 3;
           // 
           // groupBox_UserItemsMain
           // 
@@ -2681,7 +2681,7 @@
           this.groupBox_UserItemsMain.Location = new System.Drawing.Point(21, 52);
           this.groupBox_UserItemsMain.Name = "groupBox_UserItemsMain";
           this.groupBox_UserItemsMain.Size = new System.Drawing.Size(324, 221);
-          this.groupBox_UserItemsMain.TabIndex = 130;
+          this.groupBox_UserItemsMain.TabIndex = 0;
           this.groupBox_UserItemsMain.TabStop = false;
           this.groupBox_UserItemsMain.Text = "Custom Display Items for Main Screen";
           this.ToolTip1.SetToolTip(this.groupBox_UserItemsMain, resources.GetString("groupBox_UserItemsMain.ToolTip"));
@@ -2692,7 +2692,7 @@
           this.label_UserItem5.Location = new System.Drawing.Point(20, 152);
           this.label_UserItem5.Name = "label_UserItem5";
           this.label_UserItem5.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem5.TabIndex = 40;
+          this.label_UserItem5.TabIndex = 14;
           this.label_UserItem5.Text = "5";
           // 
           // label_UserItem4
@@ -2701,7 +2701,7 @@
           this.label_UserItem4.Location = new System.Drawing.Point(20, 125);
           this.label_UserItem4.Name = "label_UserItem4";
           this.label_UserItem4.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem4.TabIndex = 39;
+          this.label_UserItem4.TabIndex = 11;
           this.label_UserItem4.Text = "4";
           // 
           // label_UserItem3
@@ -2710,7 +2710,7 @@
           this.label_UserItem3.Location = new System.Drawing.Point(20, 98);
           this.label_UserItem3.Name = "label_UserItem3";
           this.label_UserItem3.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem3.TabIndex = 38;
+          this.label_UserItem3.TabIndex = 8;
           this.label_UserItem3.Text = "3";
           // 
           // label_UserItem2
@@ -2719,7 +2719,7 @@
           this.label_UserItem2.Location = new System.Drawing.Point(20, 71);
           this.label_UserItem2.Name = "label_UserItem2";
           this.label_UserItem2.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem2.TabIndex = 37;
+          this.label_UserItem2.TabIndex = 5;
           this.label_UserItem2.Text = "2";
           // 
           // label_UserItem1
@@ -2728,7 +2728,7 @@
           this.label_UserItem1.Location = new System.Drawing.Point(20, 44);
           this.label_UserItem1.Name = "label_UserItem1";
           this.label_UserItem1.Size = new System.Drawing.Size(13, 13);
-          this.label_UserItem1.TabIndex = 36;
+          this.label_UserItem1.TabIndex = 2;
           this.label_UserItem1.Text = "1";
           // 
           // AntLabel5
@@ -2736,14 +2736,14 @@
           this.AntLabel5.Location = new System.Drawing.Point(165, 149);
           this.AntLabel5.Name = "AntLabel5";
           this.AntLabel5.Size = new System.Drawing.Size(105, 20);
-          this.AntLabel5.TabIndex = 35;
+          this.AntLabel5.TabIndex = 0;
           // 
           // AntLabel4
           // 
           this.AntLabel4.Location = new System.Drawing.Point(165, 122);
           this.AntLabel4.Name = "AntLabel4";
           this.AntLabel4.Size = new System.Drawing.Size(105, 20);
-          this.AntLabel4.TabIndex = 34;
+          this.AntLabel4.TabIndex = 13;
           // 
           // AntItem5
           // 
@@ -2752,7 +2752,7 @@
           this.AntItem5.Name = "AntItem5";
           this.AntItem5.Size = new System.Drawing.Size(101, 21);
           this.AntItem5.Sorted = true;
-          this.AntItem5.TabIndex = 33;
+          this.AntItem5.TabIndex = 15;
           // 
           // AntItem4
           // 
@@ -2761,14 +2761,14 @@
           this.AntItem4.Name = "AntItem4";
           this.AntItem4.Size = new System.Drawing.Size(101, 21);
           this.AntItem4.Sorted = true;
-          this.AntItem4.TabIndex = 32;
+          this.AntItem4.TabIndex = 12;
           // 
           // AntLabel3
           // 
           this.AntLabel3.Location = new System.Drawing.Point(165, 95);
           this.AntLabel3.Name = "AntLabel3";
           this.AntLabel3.Size = new System.Drawing.Size(105, 20);
-          this.AntLabel3.TabIndex = 30;
+          this.AntLabel3.TabIndex = 10;
           // 
           // AntItem3
           // 
@@ -2777,7 +2777,7 @@
           this.AntItem3.Name = "AntItem3";
           this.AntItem3.Size = new System.Drawing.Size(101, 21);
           this.AntItem3.Sorted = true;
-          this.AntItem3.TabIndex = 29;
+          this.AntItem3.TabIndex = 9;
           // 
           // AntItem2
           // 
@@ -2786,14 +2786,14 @@
           this.AntItem2.Name = "AntItem2";
           this.AntItem2.Size = new System.Drawing.Size(101, 21);
           this.AntItem2.Sorted = true;
-          this.AntItem2.TabIndex = 27;
+          this.AntItem2.TabIndex = 6;
           // 
           // AntLabel2
           // 
           this.AntLabel2.Location = new System.Drawing.Point(165, 68);
           this.AntLabel2.Name = "AntLabel2";
           this.AntLabel2.Size = new System.Drawing.Size(105, 20);
-          this.AntLabel2.TabIndex = 28;
+          this.AntLabel2.TabIndex = 7;
           // 
           // label_MainDBitem
           // 
@@ -2801,7 +2801,7 @@
           this.label_MainDBitem.Location = new System.Drawing.Point(43, 25);
           this.label_MainDBitem.Name = "label_MainDBitem";
           this.label_MainDBitem.Size = new System.Drawing.Size(94, 13);
-          this.label_MainDBitem.TabIndex = 22;
+          this.label_MainDBitem.TabIndex = 0;
           this.label_MainDBitem.Text = "DB Item to Display";
           // 
           // AntItem1
@@ -2812,7 +2812,7 @@
           this.AntItem1.Name = "AntItem1";
           this.AntItem1.Size = new System.Drawing.Size(101, 21);
           this.AntItem1.Sorted = true;
-          this.AntItem1.TabIndex = 25;
+          this.AntItem1.TabIndex = 3;
           // 
           // labelMainLabel
           // 
@@ -2820,7 +2820,7 @@
           this.labelMainLabel.Location = new System.Drawing.Point(172, 25);
           this.labelMainLabel.Name = "labelMainLabel";
           this.labelMainLabel.Size = new System.Drawing.Size(33, 13);
-          this.labelMainLabel.TabIndex = 21;
+          this.labelMainLabel.TabIndex = 1;
           this.labelMainLabel.Text = "Label";
           // 
           // AntLabel1
@@ -2828,7 +2828,7 @@
           this.AntLabel1.Location = new System.Drawing.Point(165, 41);
           this.AntLabel1.Name = "AntLabel1";
           this.AntLabel1.Size = new System.Drawing.Size(105, 20);
-          this.AntLabel1.TabIndex = 26;
+          this.AntLabel1.TabIndex = 4;
           // 
           // groupBox_Separators
           // 
@@ -2847,7 +2847,7 @@
           this.groupBox_Separators.Location = new System.Drawing.Point(6, 273);
           this.groupBox_Separators.Name = "groupBox_Separators";
           this.groupBox_Separators.Size = new System.Drawing.Size(467, 74);
-          this.groupBox_Separators.TabIndex = 128;
+          this.groupBox_Separators.TabIndex = 1;
           this.groupBox_Separators.TabStop = false;
           this.groupBox_Separators.Text = "Separators";
           this.ToolTip1.SetToolTip(this.groupBox_Separators, resources.GetString("groupBox_Separators.ToolTip"));
@@ -2863,7 +2863,7 @@
           this.RoleSeparator5.Location = new System.Drawing.Point(376, 43);
           this.RoleSeparator5.Name = "RoleSeparator5";
           this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator5.TabIndex = 82;
+          this.RoleSeparator5.TabIndex = 11;
           this.RoleSeparator5.Text = "List";
           // 
           // RoleSeparator4
@@ -2877,7 +2877,7 @@
           this.RoleSeparator4.Location = new System.Drawing.Point(327, 43);
           this.RoleSeparator4.Name = "RoleSeparator4";
           this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator4.TabIndex = 81;
+          this.RoleSeparator4.TabIndex = 10;
           this.RoleSeparator4.Text = "List";
           // 
           // ListSeparator5
@@ -2890,7 +2890,7 @@
           this.ListSeparator5.Location = new System.Drawing.Point(376, 16);
           this.ListSeparator5.Name = "ListSeparator5";
           this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator5.TabIndex = 80;
+          this.ListSeparator5.TabIndex = 5;
           this.ListSeparator5.Text = "List";
           // 
           // ListSeparator4
@@ -2903,7 +2903,7 @@
           this.ListSeparator4.Location = new System.Drawing.Point(327, 16);
           this.ListSeparator4.Name = "ListSeparator4";
           this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator4.TabIndex = 79;
+          this.ListSeparator4.TabIndex = 4;
           this.ListSeparator4.Text = "List";
           // 
           // ListSeparator3
@@ -2916,7 +2916,7 @@
           this.ListSeparator3.Location = new System.Drawing.Point(278, 16);
           this.ListSeparator3.Name = "ListSeparator3";
           this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator3.TabIndex = 78;
+          this.ListSeparator3.TabIndex = 3;
           this.ListSeparator3.Text = "List";
           // 
           // ListSeparator2
@@ -2929,7 +2929,7 @@
           this.ListSeparator2.Location = new System.Drawing.Point(229, 16);
           this.ListSeparator2.Name = "ListSeparator2";
           this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator2.TabIndex = 77;
+          this.ListSeparator2.TabIndex = 2;
           this.ListSeparator2.Text = "List";
           // 
           // RoleSeparator2
@@ -2944,7 +2944,7 @@
           this.RoleSeparator2.Name = "RoleSeparator2";
           this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator2.Sorted = true;
-          this.RoleSeparator2.TabIndex = 76;
+          this.RoleSeparator2.TabIndex = 8;
           this.RoleSeparator2.Text = "List";
           // 
           // RoleSeparator3
@@ -2959,7 +2959,7 @@
           this.RoleSeparator3.Name = "RoleSeparator3";
           this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator3.Sorted = true;
-          this.RoleSeparator3.TabIndex = 75;
+          this.RoleSeparator3.TabIndex = 9;
           this.RoleSeparator3.Text = "List";
           // 
           // label22
@@ -2968,7 +2968,7 @@
           this.label22.Location = new System.Drawing.Point(14, 46);
           this.label22.Name = "label22";
           this.label22.Size = new System.Drawing.Size(107, 13);
-          this.label22.TabIndex = 74;
+          this.label22.TabIndex = 6;
           this.label22.Text = "Role Text Separators";
           this.ToolTip1.SetToolTip(this.label22, "Separators to remove \"roles\" from person names for Actors, Producers, etc.");
           // 
@@ -2984,7 +2984,7 @@
           this.RoleSeparator1.Name = "RoleSeparator1";
           this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
           this.RoleSeparator1.Sorted = true;
-          this.RoleSeparator1.TabIndex = 73;
+          this.RoleSeparator1.TabIndex = 7;
           this.RoleSeparator1.Text = "List";
           // 
           // label24
@@ -2993,7 +2993,7 @@
           this.label24.Location = new System.Drawing.Point(14, 19);
           this.label24.Name = "label24";
           this.label24.Size = new System.Drawing.Size(72, 13);
-          this.label24.TabIndex = 71;
+          this.label24.TabIndex = 0;
           this.label24.Text = "List Separator";
           this.ToolTip1.SetToolTip(this.label24, "Separators used for splitting splittable fields, like Genre, Country, Actors, etc" +
                   ".");
@@ -3008,7 +3008,7 @@
           this.ListSeparator1.Location = new System.Drawing.Point(180, 16);
           this.ListSeparator1.Name = "ListSeparator1";
           this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator1.TabIndex = 70;
+          this.ListSeparator1.TabIndex = 1;
           this.ListSeparator1.Text = "List";
           // 
           // groupBox_DefaultView
@@ -3028,7 +3028,7 @@
           this.groupBox_DefaultView.Location = new System.Drawing.Point(480, 5);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
           this.groupBox_DefaultView.Size = new System.Drawing.Size(258, 342);
-          this.groupBox_DefaultView.TabIndex = 26;
+          this.groupBox_DefaultView.TabIndex = 2;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Start Settings ...";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
@@ -3039,7 +3039,7 @@
           this.chkVirtualPathBrowsing.Location = new System.Drawing.Point(158, 298);
           this.chkVirtualPathBrowsing.Name = "chkVirtualPathBrowsing";
           this.chkVirtualPathBrowsing.Size = new System.Drawing.Size(91, 17);
-          this.chkVirtualPathBrowsing.TabIndex = 89;
+          this.chkVirtualPathBrowsing.TabIndex = 0;
           this.chkVirtualPathBrowsing.Text = "Virtual Pathes";
           this.ToolTip1.SetToolTip(this.chkVirtualPathBrowsing, "If enabled, your mediapathes will be used for browsing film lists.\r\nThis allows n" +
                   "avigtion similar to browse the filesystem, though it is still based \r\non DB cont" +
@@ -3052,7 +3052,7 @@
           this.chkReversePersonNames.Location = new System.Drawing.Point(67, 319);
           this.chkReversePersonNames.Name = "chkReversePersonNames";
           this.chkReversePersonNames.Size = new System.Drawing.Size(138, 17);
-          this.chkReversePersonNames.TabIndex = 88;
+          this.chkReversePersonNames.TabIndex = 11;
           this.chkReversePersonNames.Text = "Reverse Person Names";
           this.ToolTip1.SetToolTip(this.chkReversePersonNames, resources.GetString("chkReversePersonNames.ToolTip"));
           this.chkReversePersonNames.UseVisualStyleBackColor = true;
@@ -3063,7 +3063,7 @@
           this.chkShowEmpty.Location = new System.Drawing.Point(67, 298);
           this.chkShowEmpty.Name = "chkShowEmpty";
           this.chkShowEmpty.Size = new System.Drawing.Size(85, 17);
-          this.chkShowEmpty.TabIndex = 87;
+          this.chkShowEmpty.TabIndex = 10;
           this.chkShowEmpty.Text = "Show Empty";
           this.ToolTip1.SetToolTip(this.chkShowEmpty, resources.GetString("chkShowEmpty.ToolTip"));
           this.chkShowEmpty.UseVisualStyleBackColor = true;
@@ -3074,7 +3074,7 @@
           this.chkOnlyTitle.Location = new System.Drawing.Point(67, 229);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(167, 17);
-          this.chkOnlyTitle.TabIndex = 86;
+          this.chkOnlyTitle.TabIndex = 7;
           this.chkOnlyTitle.Text = "Only Movie Title in List Layout";
           this.ToolTip1.SetToolTip(this.chkOnlyTitle, "Depending on the skin, there is normally displayed additional information like \"y" +
                   "ear\"\r\nor \"counts\".\r\nBy enabling that option, only the title itself will be displ" +
@@ -3091,7 +3091,7 @@
           this.groupBox7.Location = new System.Drawing.Point(6, 72);
           this.groupBox7.Name = "groupBox7";
           this.groupBox7.Size = new System.Drawing.Size(246, 73);
-          this.groupBox7.TabIndex = 85;
+          this.groupBox7.TabIndex = 5;
           this.groupBox7.TabStop = false;
           this.groupBox7.Text = "Movies Sort and Layout ...";
           // 
@@ -3101,7 +3101,7 @@
           this.Sort.Location = new System.Drawing.Point(61, 19);
           this.Sort.Name = "Sort";
           this.Sort.Size = new System.Drawing.Size(104, 21);
-          this.Sort.TabIndex = 76;
+          this.Sort.TabIndex = 1;
           // 
           // label32
           // 
@@ -3109,7 +3109,7 @@
           this.label32.Location = new System.Drawing.Point(6, 22);
           this.label32.Name = "label32";
           this.label32.Size = new System.Drawing.Size(51, 13);
-          this.label32.TabIndex = 77;
+          this.label32.TabIndex = 0;
           this.label32.Text = "Sort Field";
           // 
           // SortSens
@@ -3121,7 +3121,7 @@
           this.SortSens.Location = new System.Drawing.Point(171, 19);
           this.SortSens.Name = "SortSens";
           this.SortSens.Size = new System.Drawing.Size(55, 21);
-          this.SortSens.TabIndex = 78;
+          this.SortSens.TabIndex = 2;
           this.SortSens.Text = "ASC";
           // 
           // LayOut
@@ -3137,7 +3137,7 @@
           this.LayOut.Location = new System.Drawing.Point(61, 46);
           this.LayOut.Name = "LayOut";
           this.LayOut.Size = new System.Drawing.Size(104, 21);
-          this.LayOut.TabIndex = 66;
+          this.LayOut.TabIndex = 4;
           this.LayOut.Text = "List";
           // 
           // label14
@@ -3146,7 +3146,7 @@
           this.label14.Location = new System.Drawing.Point(6, 49);
           this.label14.Name = "label14";
           this.label14.Size = new System.Drawing.Size(39, 13);
-          this.label14.TabIndex = 67;
+          this.label14.TabIndex = 3;
           this.label14.Text = "Layout";
           // 
           // groupBox4
@@ -3159,7 +3159,7 @@
           this.groupBox4.Location = new System.Drawing.Point(6, 151);
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.Size = new System.Drawing.Size(246, 71);
-          this.groupBox4.TabIndex = 43;
+          this.groupBox4.TabIndex = 6;
           this.groupBox4.TabStop = false;
           this.groupBox4.Text = "Movie Group (Hierarchy) Sort and Layout ...";
           this.ToolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
@@ -3170,7 +3170,7 @@
           this.label26.Location = new System.Drawing.Point(6, 48);
           this.label26.Name = "label26";
           this.label26.Size = new System.Drawing.Size(39, 13);
-          this.label26.TabIndex = 30;
+          this.label26.TabIndex = 3;
           this.label26.Text = "Layout";
           // 
           // LayoutInHierarchies
@@ -3186,7 +3186,7 @@
           this.LayoutInHierarchies.Location = new System.Drawing.Point(61, 45);
           this.LayoutInHierarchies.Name = "LayoutInHierarchies";
           this.LayoutInHierarchies.Size = new System.Drawing.Size(104, 21);
-          this.LayoutInHierarchies.TabIndex = 29;
+          this.LayoutInHierarchies.TabIndex = 4;
           this.LayoutInHierarchies.Text = "List";
           // 
           // label62
@@ -3195,7 +3195,7 @@
           this.label62.Location = new System.Drawing.Point(6, 22);
           this.label62.Name = "label62";
           this.label62.Size = new System.Drawing.Size(51, 13);
-          this.label62.TabIndex = 2;
+          this.label62.TabIndex = 0;
           this.label62.Text = "Sort Field";
           this.ToolTip1.SetToolTip(this.label62, "Select an optional field to be used for hierarchy sort order.");
           // 
@@ -3208,7 +3208,7 @@
           this.SortSensInHierarchies.Location = new System.Drawing.Point(171, 19);
           this.SortSensInHierarchies.Name = "SortSensInHierarchies";
           this.SortSensInHierarchies.Size = new System.Drawing.Size(55, 21);
-          this.SortSensInHierarchies.TabIndex = 1;
+          this.SortSensInHierarchies.TabIndex = 2;
           this.SortSensInHierarchies.Text = "ASC";
           this.ToolTip1.SetToolTip(this.SortSensInHierarchies, "Select, if hierarchy sort order should be ascending or descending.");
           // 
@@ -3219,7 +3219,7 @@
           this.SortInHierarchies.Name = "SortInHierarchies";
           this.SortInHierarchies.Size = new System.Drawing.Size(104, 21);
           this.SortInHierarchies.Sorted = true;
-          this.SortInHierarchies.TabIndex = 0;
+          this.SortInHierarchies.TabIndex = 1;
           // 
           // label10
           // 
@@ -3227,7 +3227,7 @@
           this.label10.Location = new System.Drawing.Point(12, 21);
           this.label10.Name = "label10";
           this.label10.Size = new System.Drawing.Size(30, 13);
-          this.label10.TabIndex = 84;
+          this.label10.TabIndex = 0;
           this.label10.Text = "View";
           // 
           // chkGlobalAvailableOnly
@@ -3236,7 +3236,7 @@
           this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(67, 275);
           this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
           this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
-          this.chkGlobalAvailableOnly.TabIndex = 82;
+          this.chkGlobalAvailableOnly.TabIndex = 9;
           this.chkGlobalAvailableOnly.Text = "Show only available movies";
           this.ToolTip1.SetToolTip(this.chkGlobalAvailableOnly, resources.GetString("chkGlobalAvailableOnly.ToolTip"));
           this.chkGlobalAvailableOnly.UseVisualStyleBackColor = true;
@@ -3248,7 +3248,7 @@
           this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(67, 252);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
-          this.chkGlobalUnwatchedOnly.TabIndex = 80;
+          this.chkGlobalUnwatchedOnly.TabIndex = 8;
           this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies";
           this.ToolTip1.SetToolTip(this.chkGlobalUnwatchedOnly, resources.GetString("chkGlobalUnwatchedOnly.ToolTip"));
           this.chkGlobalUnwatchedOnly.UseVisualStyleBackColor = true;
@@ -3259,7 +3259,7 @@
           this.AlwaysDefaultView.Location = new System.Drawing.Point(67, 50);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
           this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
-          this.AlwaysDefaultView.TabIndex = 75;
+          this.AlwaysDefaultView.TabIndex = 4;
           this.AlwaysDefaultView.Text = "Display always this View";
           this.ToolTip1.SetToolTip(this.AlwaysDefaultView, "Enabling a DefaultView will disable \'remember last item/view\'\r\nTHis results in al" +
                   "ways the selected view will be displayed, \r\nwhen starting the MyFilms plugin wit" +
@@ -3272,7 +3272,7 @@
           this.View_Dflt_Item.Location = new System.Drawing.Point(67, 18);
           this.View_Dflt_Item.Name = "View_Dflt_Item";
           this.View_Dflt_Item.Size = new System.Drawing.Size(104, 21);
-          this.View_Dflt_Item.TabIndex = 16;
+          this.View_Dflt_Item.TabIndex = 1;
           this.View_Dflt_Item.SelectedIndexChanged += new System.EventHandler(this.View_Dflt_Item_SelectedIndexChanged);
           // 
           // View_Dflt_Text
@@ -3281,7 +3281,7 @@
           this.View_Dflt_Text.Location = new System.Drawing.Point(177, 18);
           this.View_Dflt_Text.Name = "View_Dflt_Text";
           this.View_Dflt_Text.Size = new System.Drawing.Size(55, 20);
-          this.View_Dflt_Text.TabIndex = 17;
+          this.View_Dflt_Text.TabIndex = 2;
           // 
           // groupBoxView
           // 
@@ -3301,7 +3301,7 @@
           this.groupBoxView.Location = new System.Drawing.Point(6, 5);
           this.groupBoxView.Name = "groupBoxView";
           this.groupBoxView.Size = new System.Drawing.Size(467, 266);
-          this.groupBoxView.TabIndex = 127;
+          this.groupBoxView.TabIndex = 0;
           this.groupBoxView.TabStop = false;
           this.groupBoxView.Text = "Custom View Editor ...";
           this.ToolTip1.SetToolTip(this.groupBoxView, resources.GetString("groupBoxView.ToolTip"));
@@ -3314,7 +3314,7 @@
           this.labelViewLabel.Location = new System.Drawing.Point(179, 48);
           this.labelViewLabel.Name = "labelViewLabel";
           this.labelViewLabel.Size = new System.Drawing.Size(99, 13);
-          this.labelViewLabel.TabIndex = 90;
+          this.labelViewLabel.TabIndex = 2;
           this.labelViewLabel.Text = "Custom View Name";
           // 
           // viewBindingSource
@@ -3332,7 +3332,7 @@
           this.buttonResetImage.Location = new System.Drawing.Point(371, 45);
           this.buttonResetImage.Name = "buttonResetImage";
           this.buttonResetImage.Size = new System.Drawing.Size(18, 18);
-          this.buttonResetImage.TabIndex = 89;
+          this.buttonResetImage.TabIndex = 3;
           this.buttonResetImage.Text = "X";
           this.ToolTip1.SetToolTip(this.buttonResetImage, "Click to reset image.\r\n(Image itself will not be deleted.)");
           this.buttonResetImage.UseVisualStyleBackColor = true;
@@ -3357,7 +3357,7 @@
           this.lblAntViewIndex.Location = new System.Drawing.Point(291, 65);
           this.lblAntViewIndex.Name = "lblAntViewIndex";
           this.lblAntViewIndex.Size = new System.Drawing.Size(33, 13);
-          this.lblAntViewIndex.TabIndex = 43;
+          this.lblAntViewIndex.TabIndex = 5;
           this.lblAntViewIndex.Text = "Index";
           this.ToolTip1.SetToolTip(this.lblAntViewIndex, "You can define number of chars to be viewd as indexed group\r\nfor this Item, e.g.\r" +
                   "\n\"1\" results in getting a view of first letter.");
@@ -3396,7 +3396,7 @@
           this.bindingNavigatorViews.PositionItem = this.toolStripTextBox1;
           this.bindingNavigatorViews.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
           this.bindingNavigatorViews.Size = new System.Drawing.Size(461, 23);
-          this.bindingNavigatorViews.TabIndex = 38;
+          this.bindingNavigatorViews.TabIndex = 0;
           this.bindingNavigatorViews.Text = "bindingNavigatorViews";
           // 
           // toolStripLabel1
@@ -3556,7 +3556,7 @@
           this.dgViewsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
           this.dgViewsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
           this.dgViewsList.Size = new System.Drawing.Size(158, 216);
-          this.dgViewsList.TabIndex = 42;
+          this.dgViewsList.TabIndex = 1;
           this.dgViewsList.Leave += new System.EventHandler(this.dgViewsList_Leave);
           // 
           // labelDataGridViewTextBoxColumn
@@ -3585,7 +3585,7 @@
           this.groupBoxSortAndLayoutForView.Location = new System.Drawing.Point(170, 196);
           this.groupBoxSortAndLayoutForView.Name = "groupBoxSortAndLayoutForView";
           this.groupBoxSortAndLayoutForView.Size = new System.Drawing.Size(291, 64);
-          this.groupBoxSortAndLayoutForView.TabIndex = 41;
+          this.groupBoxSortAndLayoutForView.TabIndex = 11;
           this.groupBoxSortAndLayoutForView.TabStop = false;
           this.groupBoxSortAndLayoutForView.Text = "Sort and Layouts for View";
           // 
@@ -3600,7 +3600,7 @@
           this.AntViewSortType.Name = "AntViewSortType";
           this.AntViewSortType.Size = new System.Drawing.Size(104, 21);
           this.AntViewSortType.Sorted = true;
-          this.AntViewSortType.TabIndex = 40;
+          this.AntViewSortType.TabIndex = 4;
           // 
           // AntViewLayoutView
           // 
@@ -3616,7 +3616,7 @@
           this.AntViewLayoutView.Location = new System.Drawing.Point(192, 34);
           this.AntViewLayoutView.Name = "AntViewLayoutView";
           this.AntViewLayoutView.Size = new System.Drawing.Size(90, 21);
-          this.AntViewLayoutView.TabIndex = 22;
+          this.AntViewLayoutView.TabIndex = 0;
           // 
           // AntViewSortOrder
           // 
@@ -3628,7 +3628,7 @@
           this.AntViewSortOrder.Location = new System.Drawing.Point(120, 34);
           this.AntViewSortOrder.Name = "AntViewSortOrder";
           this.AntViewSortOrder.Size = new System.Drawing.Size(59, 21);
-          this.AntViewSortOrder.TabIndex = 20;
+          this.AntViewSortOrder.TabIndex = 5;
           // 
           // AntViewItem
           // 
@@ -3652,7 +3652,7 @@
           this.groupBox5.Location = new System.Drawing.Point(170, 145);
           this.groupBox5.Name = "groupBox5";
           this.groupBox5.Size = new System.Drawing.Size(291, 46);
-          this.groupBox5.TabIndex = 42;
+          this.groupBox5.TabIndex = 10;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Filter Expression ...";
           this.ToolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
@@ -3663,7 +3663,7 @@
           this.AntViewFilter.Location = new System.Drawing.Point(10, 16);
           this.AntViewFilter.Name = "AntViewFilter";
           this.AntViewFilter.Size = new System.Drawing.Size(243, 20);
-          this.AntViewFilter.TabIndex = 10;
+          this.AntViewFilter.TabIndex = 0;
           this.AntViewFilter.TextChanged += new System.EventHandler(this.AntViewFilter_TextChanged);
           // 
           // AntViewFilterEditButton
@@ -3671,7 +3671,7 @@
           this.AntViewFilterEditButton.Location = new System.Drawing.Point(259, 16);
           this.AntViewFilterEditButton.Name = "AntViewFilterEditButton";
           this.AntViewFilterEditButton.Size = new System.Drawing.Size(23, 20);
-          this.AntViewFilterEditButton.TabIndex = 39;
+          this.AntViewFilterEditButton.TabIndex = 1;
           this.AntViewFilterEditButton.Text = "...";
           this.AntViewFilterEditButton.UseVisualStyleBackColor = true;
           this.AntViewFilterEditButton.Click += new System.EventHandler(this.AntViewFilterEditButton_Click);
@@ -3682,7 +3682,7 @@
           this.AntViewValue.Location = new System.Drawing.Point(180, 120);
           this.AntViewValue.Name = "AntViewValue";
           this.AntViewValue.Size = new System.Drawing.Size(149, 20);
-          this.AntViewValue.TabIndex = 8;
+          this.AntViewValue.TabIndex = 9;
           this.AntViewValue.TextChanged += new System.EventHandler(this.AntViewValue_TextChanged);
           // 
           // AntViewIndex
@@ -3696,7 +3696,7 @@
             0});
           this.AntViewIndex.Name = "AntViewIndex";
           this.AntViewIndex.Size = new System.Drawing.Size(39, 20);
-          this.AntViewIndex.TabIndex = 35;
+          this.AntViewIndex.TabIndex = 7;
           this.ToolTip1.SetToolTip(this.AntViewIndex, "You can view normally (\"0\") or indexed. Indexed means there will be a grouping by" +
                   " the first x characters (1 or 2).");
           // 
@@ -3714,7 +3714,7 @@
           this.groupBox24.Location = new System.Drawing.Point(23, 37);
           this.groupBox24.Name = "groupBox24";
           this.groupBox24.Size = new System.Drawing.Size(681, 266);
-          this.groupBox24.TabIndex = 73;
+          this.groupBox24.TabIndex = 0;
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
@@ -3725,7 +3725,7 @@
           this.cbTrailerAutoregister.Location = new System.Drawing.Point(27, 155);
           this.cbTrailerAutoregister.Name = "cbTrailerAutoregister";
           this.cbTrailerAutoregister.Size = new System.Drawing.Size(114, 17);
-          this.cbTrailerAutoregister.TabIndex = 75;
+          this.cbTrailerAutoregister.TabIndex = 8;
           this.cbTrailerAutoregister.Text = "Autoregister Trailer";
           this.ToolTip1.SetToolTip(this.cbTrailerAutoregister, resources.GetString("cbTrailerAutoregister.ToolTip"));
           this.cbTrailerAutoregister.UseVisualStyleBackColor = true;
@@ -3736,7 +3736,7 @@
           this.labelTrailers.Location = new System.Drawing.Point(24, 27);
           this.labelTrailers.Name = "labelTrailers";
           this.labelTrailers.Size = new System.Drawing.Size(379, 13);
-          this.labelTrailers.TabIndex = 74;
+          this.labelTrailers.TabIndex = 0;
           this.labelTrailers.Text = "To enable Trailer support, you must select a DB Item/field for storing Trailer in" +
               "fo";
           // 
@@ -3746,7 +3746,7 @@
           this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 132);
           this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
           this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
-          this.SearchSubDirsTrailer.TabIndex = 74;
+          this.SearchSubDirsTrailer.TabIndex = 6;
           this.SearchSubDirsTrailer.Text = "Search in Sub Folders";
           this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, "Select this option if you want the search for the trailer files\r\nto include sub-f" +
                   "olders of the defined path.\r\n");
@@ -3758,7 +3758,7 @@
           this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 224);
           this.ShowTrailerWhenStartingMovie.Name = "ShowTrailerWhenStartingMovie";
           this.ShowTrailerWhenStartingMovie.Size = new System.Drawing.Size(228, 17);
-          this.ShowTrailerWhenStartingMovie.TabIndex = 73;
+          this.ShowTrailerWhenStartingMovie.TabIndex = 0;
           this.ShowTrailerWhenStartingMovie.Text = "Show Trailer as Movie Intro (Cinema mode)";
           this.ToolTip1.SetToolTip(this.ShowTrailerWhenStartingMovie, "-- Coming in future version --\r\nIf checked, a trailer from same category as movie" +
                   " \r\nwill be played before starting the movie itself.");
@@ -3769,7 +3769,7 @@
           this.btnTrailer.Location = new System.Drawing.Point(634, 92);
           this.btnTrailer.Name = "btnTrailer";
           this.btnTrailer.Size = new System.Drawing.Size(32, 20);
-          this.btnTrailer.TabIndex = 70;
+          this.btnTrailer.TabIndex = 5;
           this.btnTrailer.Text = "...";
           this.btnTrailer.UseVisualStyleBackColor = true;
           this.btnTrailer.Click += new System.EventHandler(this.btnTrailer_Click);
@@ -3779,7 +3779,7 @@
           this.PathStorageTrailer.Location = new System.Drawing.Point(190, 92);
           this.PathStorageTrailer.Name = "PathStorageTrailer";
           this.PathStorageTrailer.Size = new System.Drawing.Size(428, 20);
-          this.PathStorageTrailer.TabIndex = 68;
+          this.PathStorageTrailer.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.PathStorageTrailer, resources.GetString("PathStorageTrailer.ToolTip"));
           // 
           // label34
@@ -3788,7 +3788,7 @@
           this.label34.Location = new System.Drawing.Point(24, 95);
           this.label34.Name = "label34";
           this.label34.Size = new System.Drawing.Size(142, 13);
-          this.label34.TabIndex = 69;
+          this.label34.TabIndex = 3;
           this.label34.Text = "Extended Trailer Searchpath";
           // 
           // AntStorageTrailer
@@ -3797,7 +3797,7 @@
           this.AntStorageTrailer.Name = "AntStorageTrailer";
           this.AntStorageTrailer.Size = new System.Drawing.Size(185, 21);
           this.AntStorageTrailer.Sorted = true;
-          this.AntStorageTrailer.TabIndex = 68;
+          this.AntStorageTrailer.TabIndex = 2;
           this.ToolTip1.SetToolTip(this.AntStorageTrailer, resources.GetString("AntStorageTrailer.ToolTip"));
           // 
           // label35
@@ -3806,7 +3806,7 @@
           this.label35.Location = new System.Drawing.Point(24, 55);
           this.label35.Name = "label35";
           this.label35.Size = new System.Drawing.Size(147, 13);
-          this.label35.TabIndex = 69;
+          this.label35.TabIndex = 1;
           this.label35.Text = "DB Item for storing Trailer Info";
           // 
           // groupBox_AntSelectedEnreg
@@ -3836,7 +3836,7 @@
           this.groupBox3.Location = new System.Drawing.Point(0, 0);
           this.groupBox3.Name = "groupBox3";
           this.groupBox3.Size = new System.Drawing.Size(286, 101);
-          this.groupBox3.TabIndex = 77;
+          this.groupBox3.TabIndex = 0;
           this.groupBox3.TabStop = false;
           this.groupBox3.Text = "Custom Config Filter";
           this.ToolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
@@ -3846,7 +3846,7 @@
           this.btnCustomConfigFilter.Location = new System.Drawing.Point(9, 19);
           this.btnCustomConfigFilter.Name = "btnCustomConfigFilter";
           this.btnCustomConfigFilter.Size = new System.Drawing.Size(42, 23);
-          this.btnCustomConfigFilter.TabIndex = 31;
+          this.btnCustomConfigFilter.TabIndex = 0;
           this.btnCustomConfigFilter.Text = "Edit";
           this.btnCustomConfigFilter.UseVisualStyleBackColor = true;
           this.btnCustomConfigFilter.Click += new System.EventHandler(this.btnCustomConfigFilter_Click);
@@ -3862,7 +3862,7 @@
           this.textBoxStrDfltSelect.ReadOnly = true;
           this.textBoxStrDfltSelect.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
           this.textBoxStrDfltSelect.Size = new System.Drawing.Size(216, 74);
-          this.textBoxStrDfltSelect.TabIndex = 28;
+          this.textBoxStrDfltSelect.TabIndex = 1;
           this.textBoxStrDfltSelect.TabStop = false;
           // 
           // AntFreetextFilterItem
@@ -3871,7 +3871,7 @@
           this.AntFreetextFilterItem.Location = new System.Drawing.Point(4, 76);
           this.AntFreetextFilterItem.Name = "AntFreetextFilterItem";
           this.AntFreetextFilterItem.Size = new System.Drawing.Size(50, 13);
-          this.AntFreetextFilterItem.TabIndex = 30;
+          this.AntFreetextFilterItem.TabIndex = 7;
           this.AntFreetextFilterItem.Text = "FreeFilter";
           // 
           // AntFilterFreeText
@@ -3879,7 +3879,7 @@
           this.AntFilterFreeText.Location = new System.Drawing.Point(55, 73);
           this.AntFilterFreeText.Name = "AntFilterFreeText";
           this.AntFilterFreeText.Size = new System.Drawing.Size(220, 20);
-          this.AntFilterFreeText.TabIndex = 29;
+          this.AntFilterFreeText.TabIndex = 8;
           this.ToolTip1.SetToolTip(this.AntFilterFreeText, "This field allows you to define freetext conditions for your DB restrictions.\r\nIt" +
                   " could be used e.g. to restrict the config to certain actors:\r\n(Actors like \'*Wi" +
                   "llis*\' OR Actors like \'*Celentano*\')");
@@ -3895,7 +3895,7 @@
           this.AntFilterComb.Location = new System.Drawing.Point(6, 34);
           this.AntFilterComb.Name = "AntFilterComb";
           this.AntFilterComb.Size = new System.Drawing.Size(43, 21);
-          this.AntFilterComb.TabIndex = 18;
+          this.AntFilterComb.TabIndex = 3;
           // 
           // AntFilterSign2
           // 
@@ -3914,7 +3914,7 @@
           this.AntFilterSign2.Location = new System.Drawing.Point(122, 46);
           this.AntFilterSign2.Name = "AntFilterSign2";
           this.AntFilterSign2.Size = new System.Drawing.Size(60, 21);
-          this.AntFilterSign2.TabIndex = 23;
+          this.AntFilterSign2.TabIndex = 5;
           // 
           // AntFilterSign1
           // 
@@ -3933,7 +3933,7 @@
           this.AntFilterSign1.Location = new System.Drawing.Point(122, 19);
           this.AntFilterSign1.Name = "AntFilterSign1";
           this.AntFilterSign1.Size = new System.Drawing.Size(60, 21);
-          this.AntFilterSign1.TabIndex = 20;
+          this.AntFilterSign1.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.AntFilterSign1, resources.GetString("AntFilterSign1.ToolTip"));
           // 
           // AntFilterItem2
@@ -3943,14 +3943,14 @@
           this.AntFilterItem2.Name = "AntFilterItem2";
           this.AntFilterItem2.Size = new System.Drawing.Size(61, 21);
           this.AntFilterItem2.Sorted = true;
-          this.AntFilterItem2.TabIndex = 22;
+          this.AntFilterItem2.TabIndex = 4;
           // 
           // AntFilterText2
           // 
           this.AntFilterText2.Location = new System.Drawing.Point(188, 46);
           this.AntFilterText2.Name = "AntFilterText2";
           this.AntFilterText2.Size = new System.Drawing.Size(87, 20);
-          this.AntFilterText2.TabIndex = 24;
+          this.AntFilterText2.TabIndex = 6;
           // 
           // AntFilterItem1
           // 
@@ -3966,7 +3966,7 @@
           this.AntFilterText1.Location = new System.Drawing.Point(188, 19);
           this.AntFilterText1.Name = "AntFilterText1";
           this.AntFilterText1.Size = new System.Drawing.Size(87, 20);
-          this.AntFilterText1.TabIndex = 21;
+          this.AntFilterText1.TabIndex = 2;
           // 
           // groupBox_PreLaunchingCommand
           // 
@@ -3977,7 +3977,7 @@
           this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(451, 234);
           this.groupBox_PreLaunchingCommand.Name = "groupBox_PreLaunchingCommand";
           this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(286, 76);
-          this.groupBox_PreLaunchingCommand.TabIndex = 78;
+          this.groupBox_PreLaunchingCommand.TabIndex = 8;
           this.groupBox_PreLaunchingCommand.TabStop = false;
           this.groupBox_PreLaunchingCommand.Text = "Pre-Launching Command";
           this.ToolTip1.SetToolTip(this.groupBox_PreLaunchingCommand, resources.GetString("groupBox_PreLaunchingCommand.ToolTip"));
@@ -3988,7 +3988,7 @@
           this.label39.Location = new System.Drawing.Point(12, 51);
           this.label39.Name = "label39";
           this.label39.Size = new System.Drawing.Size(55, 13);
-          this.label39.TabIndex = 39;
+          this.label39.TabIndex = 2;
           this.label39.Text = "Parameter";
           // 
           // label38
@@ -3997,7 +3997,7 @@
           this.label38.Location = new System.Drawing.Point(12, 22);
           this.label38.Name = "label38";
           this.label38.Size = new System.Drawing.Size(77, 13);
-          this.label38.TabIndex = 38;
+          this.label38.TabIndex = 0;
           this.label38.Text = "Command Line";
           // 
           // CmdPar
@@ -4006,7 +4006,7 @@
           this.CmdPar.Location = new System.Drawing.Point(93, 48);
           this.CmdPar.Name = "CmdPar";
           this.CmdPar.Size = new System.Drawing.Size(140, 21);
-          this.CmdPar.TabIndex = 37;
+          this.CmdPar.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.CmdPar, "The value of the  chosen DB-field will be used as commandline option for the appl" +
                   "ication laiunched");
           // 
@@ -4015,7 +4015,7 @@
           this.CmdExe.Location = new System.Drawing.Point(93, 19);
           this.CmdExe.Name = "CmdExe";
           this.CmdExe.Size = new System.Drawing.Size(140, 20);
-          this.CmdExe.TabIndex = 36;
+          this.CmdExe.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.CmdExe, "Enter the commandline to an application you want to launch before the movie is st" +
                   "arted in internal player");
           // 
@@ -4024,7 +4024,7 @@
           this.tbExternalPlayerStartParams.Location = new System.Drawing.Point(302, 169);
           this.tbExternalPlayerStartParams.Name = "tbExternalPlayerStartParams";
           this.tbExternalPlayerStartParams.Size = new System.Drawing.Size(65, 20);
-          this.tbExternalPlayerStartParams.TabIndex = 86;
+          this.tbExternalPlayerStartParams.TabIndex = 6;
           this.ToolTip1.SetToolTip(this.tbExternalPlayerStartParams, "External Player start parameters.\r\n\r\nSupported placeholders:\r\n- %filename%\r\n- %fp" +
                   "s%\r\n- %root%\r\n- %drive%\r\n\r\nE.g. use %filename% as placeholder for the media file" +
                   " to be played.");
@@ -4034,7 +4034,7 @@
           this.tbExternalPlayerPath.Location = new System.Drawing.Point(172, 169);
           this.tbExternalPlayerPath.Name = "tbExternalPlayerPath";
           this.tbExternalPlayerPath.Size = new System.Drawing.Size(89, 20);
-          this.tbExternalPlayerPath.TabIndex = 85;
+          this.tbExternalPlayerPath.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.tbExternalPlayerPath, "Path to external player.\r\nLeave empty, if you prefer using internal Player.\r\nIf y" +
                   "ou have a valid player defined, MyFilms will offer you \r\na playback option in th" +
                   "e context menu.");
@@ -4044,7 +4044,7 @@
           this.tbExternalPlayerExtensions.Location = new System.Drawing.Point(373, 169);
           this.tbExternalPlayerExtensions.Name = "tbExternalPlayerExtensions";
           this.tbExternalPlayerExtensions.Size = new System.Drawing.Size(53, 20);
-          this.tbExternalPlayerExtensions.TabIndex = 70;
+          this.tbExternalPlayerExtensions.TabIndex = 7;
           this.ToolTip1.SetToolTip(this.tbExternalPlayerExtensions, resources.GetString("tbExternalPlayerExtensions.ToolTip"));
           // 
           // chkScanMediaOnStart
@@ -4053,7 +4053,7 @@
           this.chkScanMediaOnStart.Location = new System.Drawing.Point(302, 20);
           this.chkScanMediaOnStart.Name = "chkScanMediaOnStart";
           this.chkScanMediaOnStart.Size = new System.Drawing.Size(120, 17);
-          this.chkScanMediaOnStart.TabIndex = 83;
+          this.chkScanMediaOnStart.TabIndex = 10;
           this.chkScanMediaOnStart.Text = "Scan media on start";
           this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
           this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
@@ -4064,7 +4064,7 @@
           this.SearchOnlyExactMatches.Location = new System.Drawing.Point(296, 40);
           this.SearchOnlyExactMatches.Name = "SearchOnlyExactMatches";
           this.SearchOnlyExactMatches.Size = new System.Drawing.Size(79, 30);
-          this.SearchOnlyExactMatches.TabIndex = 69;
+          this.SearchOnlyExactMatches.TabIndex = 5;
           this.SearchOnlyExactMatches.Text = "Only exact \r\nMatches";
           this.ToolTip1.SetToolTip(this.SearchOnlyExactMatches, resources.GetString("SearchOnlyExactMatches.ToolTip"));
           this.SearchOnlyExactMatches.UseVisualStyleBackColor = true;
@@ -4074,7 +4074,7 @@
           this.PathStorage.Location = new System.Drawing.Point(166, 14);
           this.PathStorage.Name = "PathStorage";
           this.PathStorage.Size = new System.Drawing.Size(209, 20);
-          this.PathStorage.TabIndex = 54;
+          this.PathStorage.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.PathStorage, resources.GetString("PathStorage.ToolTip"));
           // 
           // SearchSubDirs
@@ -4083,7 +4083,7 @@
           this.SearchSubDirs.Location = new System.Drawing.Point(21, 68);
           this.SearchSubDirs.Name = "SearchSubDirs";
           this.SearchSubDirs.Size = new System.Drawing.Size(130, 17);
-          this.SearchSubDirs.TabIndex = 68;
+          this.SearchSubDirs.TabIndex = 6;
           this.SearchSubDirs.Text = "Search in Sub Folders";
           this.ToolTip1.SetToolTip(this.SearchSubDirs, "Select this option if you want the search for the movie files \r\nto include sub-fo" +
                   "lders of the defined path.\r\n");
@@ -4095,7 +4095,7 @@
           this.SearchFileName.Location = new System.Drawing.Point(9, 45);
           this.SearchFileName.Name = "SearchFileName";
           this.SearchFileName.Size = new System.Drawing.Size(144, 17);
-          this.SearchFileName.TabIndex = 66;
+          this.SearchFileName.TabIndex = 3;
           this.SearchFileName.Text = "Search by Movie\'s Name";
           this.ToolTip1.SetToolTip(this.SearchFileName, "Select this option if you want to search the file in cases it\'s not found \r\nwith " +
                   "the \'Item for Storage Info\' field. \r\nThe movie name will be used for file search" +
@@ -4112,7 +4112,7 @@
           this.ItemSearchFileName.Location = new System.Drawing.Point(166, 43);
           this.ItemSearchFileName.Name = "ItemSearchFileName";
           this.ItemSearchFileName.Size = new System.Drawing.Size(124, 21);
-          this.ItemSearchFileName.TabIndex = 67;
+          this.ItemSearchFileName.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.ItemSearchFileName, resources.GetString("ItemSearchFileName.ToolTip"));
           // 
           // AntStorage
@@ -4123,7 +4123,7 @@
           this.AntStorage.Name = "AntStorage";
           this.AntStorage.Size = new System.Drawing.Size(124, 21);
           this.AntStorage.Sorted = true;
-          this.AntStorage.TabIndex = 53;
+          this.AntStorage.TabIndex = 9;
           this.ToolTip1.SetToolTip(this.AntStorage, resources.GetString("AntStorage.ToolTip"));
           // 
           // AntIdentItem
@@ -4132,7 +4132,7 @@
           this.AntIdentItem.Location = new System.Drawing.Point(172, 140);
           this.AntIdentItem.Name = "AntIdentItem";
           this.AntIdentItem.Size = new System.Drawing.Size(124, 21);
-          this.AntIdentItem.TabIndex = 56;
+          this.AntIdentItem.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.AntIdentItem, resources.GetString("AntIdentItem.ToolTip"));
           // 
           // groupBox_Security
@@ -4144,7 +4144,7 @@
           this.groupBox_Security.Location = new System.Drawing.Point(451, 151);
           this.groupBox_Security.Name = "groupBox_Security";
           this.groupBox_Security.Size = new System.Drawing.Size(286, 77);
-          this.groupBox_Security.TabIndex = 75;
+          this.groupBox_Security.TabIndex = 7;
           this.groupBox_Security.TabStop = false;
           this.groupBox_Security.Text = "Security - Password to protect the config / DB";
           this.ToolTip1.SetToolTip(this.groupBox_Security, resources.GetString("groupBox_Security.ToolTip"));
@@ -4155,7 +4155,7 @@
           this.label16.Location = new System.Drawing.Point(12, 50);
           this.label16.Name = "label16";
           this.label16.Size = new System.Drawing.Size(42, 13);
-          this.label16.TabIndex = 72;
+          this.label16.TabIndex = 2;
           this.label16.Text = "Repeat";
           // 
           // label15
@@ -4164,7 +4164,7 @@
           this.label15.Location = new System.Drawing.Point(12, 24);
           this.label15.Name = "label15";
           this.label15.Size = new System.Drawing.Size(53, 13);
-          this.label15.TabIndex = 71;
+          this.label15.TabIndex = 0;
           this.label15.Text = "Password";
           // 
           // Rpt_Dwp
@@ -4172,7 +4172,7 @@
           this.Rpt_Dwp.Location = new System.Drawing.Point(93, 47);
           this.Rpt_Dwp.Name = "Rpt_Dwp";
           this.Rpt_Dwp.Size = new System.Drawing.Size(140, 20);
-          this.Rpt_Dwp.TabIndex = 70;
+          this.Rpt_Dwp.TabIndex = 3;
           this.Rpt_Dwp.UseSystemPasswordChar = true;
           // 
           // Dwp
@@ -4181,7 +4181,7 @@
           this.Dwp.Name = "Dwp";
           this.Dwp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
           this.Dwp.Size = new System.Drawing.Size(140, 20);
-          this.Dwp.TabIndex = 69;
+          this.Dwp.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.Dwp, "Enter a password here if you wish to restrict access (from children, for example)" +
                   " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
                   "ond field.\r\n");
@@ -4207,7 +4207,7 @@
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
           this.CatalogType.Size = new System.Drawing.Size(194, 21);
-          this.CatalogType.TabIndex = 62;
+          this.CatalogType.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.CatalogType, resources.GetString("CatalogType.ToolTip"));
           this.CatalogType.SelectedIndexChanged += new System.EventHandler(this.CatalogType_SelectedIndexChanged);
           // 
@@ -4225,7 +4225,7 @@
           this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 44);
           this.groupBox_TitleOrder.Name = "groupBox_TitleOrder";
           this.groupBox_TitleOrder.Size = new System.Drawing.Size(438, 101);
-          this.groupBox_TitleOrder.TabIndex = 61;
+          this.groupBox_TitleOrder.TabIndex = 5;
           this.groupBox_TitleOrder.TabStop = false;
           this.groupBox_TitleOrder.Text = "Title Order";
           this.ToolTip1.SetToolTip(this.groupBox_TitleOrder, resources.GetString("groupBox_TitleOrder.ToolTip"));
@@ -4236,7 +4236,7 @@
           this.label20.Location = new System.Drawing.Point(24, 73);
           this.label20.Name = "label20";
           this.label20.Size = new System.Drawing.Size(46, 13);
-          this.label20.TabIndex = 71;
+          this.label20.TabIndex = 4;
           this.label20.Text = "SortTitle";
           // 
           // AntSTitle
@@ -4245,7 +4245,7 @@
           this.AntSTitle.Location = new System.Drawing.Point(172, 70);
           this.AntSTitle.Name = "AntSTitle";
           this.AntSTitle.Size = new System.Drawing.Size(124, 21);
-          this.AntSTitle.TabIndex = 70;
+          this.AntSTitle.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.AntSTitle, "Select the ANT database field that you want to be used in the ‘Sort by name’ fiel" +
                   "d in the MediaPortal menu.");
           // 
@@ -4255,7 +4255,7 @@
           this.label17.Location = new System.Drawing.Point(309, 13);
           this.label17.Name = "label17";
           this.label17.Size = new System.Drawing.Size(84, 26);
-          this.label17.TabIndex = 66;
+          this.label17.TabIndex = 6;
           this.label17.Text = "Group Hierarchy\r\nSeparator";
           this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
           this.ToolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
@@ -4266,7 +4266,7 @@
           this.TitleDelim.MaxLength = 1;
           this.TitleDelim.Name = "TitleDelim";
           this.TitleDelim.Size = new System.Drawing.Size(20, 20);
-          this.TitleDelim.TabIndex = 20;
+          this.TitleDelim.TabIndex = 7;
           this.ToolTip1.SetToolTip(this.TitleDelim, resources.GetString("TitleDelim.ToolTip"));
           // 
           // label9
@@ -4275,7 +4275,7 @@
           this.label9.Location = new System.Drawing.Point(24, 47);
           this.label9.Name = "label9";
           this.label9.Size = new System.Drawing.Size(78, 13);
-          this.label9.TabIndex = 18;
+          this.label9.TabIndex = 2;
           this.label9.Text = "SecondaryTitle";
           // 
           // label8
@@ -4284,7 +4284,7 @@
           this.label8.Location = new System.Drawing.Point(24, 22);
           this.label8.Name = "label8";
           this.label8.Size = new System.Drawing.Size(62, 13);
-          this.label8.TabIndex = 17;
+          this.label8.TabIndex = 0;
           this.label8.Text = "Master Title";
           // 
           // AntTitle2
@@ -4293,7 +4293,7 @@
           this.AntTitle2.Location = new System.Drawing.Point(172, 43);
           this.AntTitle2.Name = "AntTitle2";
           this.AntTitle2.Size = new System.Drawing.Size(124, 21);
-          this.AntTitle2.TabIndex = 11;
+          this.AntTitle2.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.AntTitle2, "Select the ANT database field that you want to be displayed as the ‘Alternate Tit" +
                   "le’.");
           // 
@@ -4308,7 +4308,7 @@
           this.AntTitle1.Location = new System.Drawing.Point(172, 16);
           this.AntTitle1.Name = "AntTitle1";
           this.AntTitle1.Size = new System.Drawing.Size(124, 21);
-          this.AntTitle1.TabIndex = 10;
+          this.AntTitle1.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.AntTitle1, resources.GetString("AntTitle1.ToolTip"));
           // 
           // MesFilmsCat
@@ -4317,7 +4317,7 @@
           this.MesFilmsCat.Location = new System.Drawing.Point(116, 15);
           this.MesFilmsCat.Name = "MesFilmsCat";
           this.MesFilmsCat.Size = new System.Drawing.Size(272, 20);
-          this.MesFilmsCat.TabIndex = 48;
+          this.MesFilmsCat.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.MesFilmsCat, "Enter the full path and name of your AMC xml database file.\r\nYou can use the brow" +
                   "se button to find the file");
           this.MesFilmsCat.TextChanged += new System.EventHandler(this.MesFilmsCat_TextChanged);
@@ -4328,7 +4328,7 @@
           this.butNew.Location = new System.Drawing.Point(367, 466);
           this.butNew.Name = "butNew";
           this.butNew.Size = new System.Drawing.Size(64, 31);
-          this.butNew.TabIndex = 79;
+          this.butNew.TabIndex = 15;
           this.butNew.Text = " New ...";
           this.ToolTip1.SetToolTip(this.butNew, "To create a new MyFilms configuration.");
           this.butNew.UseVisualStyleBackColor = true;
@@ -4349,7 +4349,7 @@
           this.groupBoxExtendedFieldHandling.Location = new System.Drawing.Point(19, 17);
           this.groupBoxExtendedFieldHandling.Name = "groupBoxExtendedFieldHandling";
           this.groupBoxExtendedFieldHandling.Size = new System.Drawing.Size(355, 197);
-          this.groupBoxExtendedFieldHandling.TabIndex = 30;
+          this.groupBoxExtendedFieldHandling.TabIndex = 0;
           this.groupBoxExtendedFieldHandling.TabStop = false;
           this.groupBoxExtendedFieldHandling.Text = "External Catalog Import Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxExtendedFieldHandling, resources.GetString("groupBoxExtendedFieldHandling.ToolTip"));
@@ -4364,7 +4364,7 @@
           this.ECMergeDestinationFieldWriter.Location = new System.Drawing.Point(192, 138);
           this.ECMergeDestinationFieldWriter.Name = "ECMergeDestinationFieldWriter";
           this.ECMergeDestinationFieldWriter.Size = new System.Drawing.Size(134, 21);
-          this.ECMergeDestinationFieldWriter.TabIndex = 7;
+          this.ECMergeDestinationFieldWriter.TabIndex = 9;
           this.ECMergeDestinationFieldWriter.Visible = false;
           // 
           // ECMergeDestinationFieldCertification
@@ -4376,7 +4376,7 @@
           this.ECMergeDestinationFieldCertification.Location = new System.Drawing.Point(192, 108);
           this.ECMergeDestinationFieldCertification.Name = "ECMergeDestinationFieldCertification";
           this.ECMergeDestinationFieldCertification.Size = new System.Drawing.Size(134, 21);
-          this.ECMergeDestinationFieldCertification.TabIndex = 6;
+          this.ECMergeDestinationFieldCertification.TabIndex = 7;
           // 
           // ECMergeDestinationFieldTags
           // 
@@ -4395,7 +4395,7 @@
           this.chkAddWriter.Location = new System.Drawing.Point(39, 140);
           this.chkAddWriter.Name = "chkAddWriter";
           this.chkAddWriter.Size = new System.Drawing.Size(88, 17);
-          this.chkAddWriter.TabIndex = 0;
+          this.chkAddWriter.TabIndex = 8;
           this.chkAddWriter.Text = "Add Writer ...";
           this.chkAddWriter.UseVisualStyleBackColor = true;
           this.chkAddWriter.Visible = false;
@@ -4409,7 +4409,7 @@
           this.ECMergeDestinationFieldTagline.Location = new System.Drawing.Point(192, 49);
           this.ECMergeDestinationFieldTagline.Name = "ECMergeDestinationFieldTagline";
           this.ECMergeDestinationFieldTagline.Size = new System.Drawing.Size(134, 21);
-          this.ECMergeDestinationFieldTagline.TabIndex = 1;
+          this.ECMergeDestinationFieldTagline.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.ECMergeDestinationFieldTagline, "Choose a MyFilms field, where you want to add data from \r\nexternal catalog fields" +
                   ".");
           // 
@@ -4419,7 +4419,7 @@
           this.chkAddTagline.Location = new System.Drawing.Point(39, 51);
           this.chkAddTagline.Name = "chkAddTagline";
           this.chkAddTagline.Size = new System.Drawing.Size(95, 17);
-          this.chkAddTagline.TabIndex = 0;
+          this.chkAddTagline.TabIndex = 2;
           this.chkAddTagline.Text = "Add Tagline ...";
           this.chkAddTagline.UseVisualStyleBackColor = true;
           // 
@@ -4429,7 +4429,7 @@
           this.chkAddCertification.Location = new System.Drawing.Point(39, 110);
           this.chkAddCertification.Name = "chkAddCertification";
           this.chkAddCertification.Size = new System.Drawing.Size(115, 17);
-          this.chkAddCertification.TabIndex = 0;
+          this.chkAddCertification.TabIndex = 6;
           this.chkAddCertification.Text = "Add Certification ...";
           this.chkAddCertification.UseVisualStyleBackColor = true;
           // 
@@ -4439,7 +4439,7 @@
           this.label54.Location = new System.Drawing.Point(194, 21);
           this.label54.Name = "label54";
           this.label54.Size = new System.Drawing.Size(125, 13);
-          this.label54.TabIndex = 3;
+          this.label54.TabIndex = 1;
           this.label54.Text = "MyFilms Destination Field";
           // 
           // chkAddTags
@@ -4458,7 +4458,7 @@
           this.label53.Location = new System.Drawing.Point(16, 21);
           this.label53.Name = "label53";
           this.label53.Size = new System.Drawing.Size(146, 13);
-          this.label53.TabIndex = 2;
+          this.label53.TabIndex = 0;
           this.label53.Text = "External Catalog Source Field";
           // 
           // btnLaunchAMCglobal
@@ -4468,7 +4468,7 @@
           this.btnLaunchAMCglobal.Location = new System.Drawing.Point(103, 466);
           this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
           this.btnLaunchAMCglobal.Size = new System.Drawing.Size(72, 31);
-          this.btnLaunchAMCglobal.TabIndex = 77;
+          this.btnLaunchAMCglobal.TabIndex = 13;
           this.btnLaunchAMCglobal.Text = "Import ";
           this.btnLaunchAMCglobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
           this.ToolTip1.SetToolTip(this.btnLaunchAMCglobal, resources.GetString("btnLaunchAMCglobal.ToolTip"));
@@ -4496,7 +4496,7 @@
           this.groupBox_DVDprofiler.Location = new System.Drawing.Point(392, 17);
           this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
           this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 197);
-          this.groupBox_DVDprofiler.TabIndex = 28;
+          this.groupBox_DVDprofiler.TabIndex = 1;
           this.groupBox_DVDprofiler.TabStop = false;
           this.groupBox_DVDprofiler.Text = "DVDProfiler";
           this.ToolTip1.SetToolTip(this.groupBox_DVDprofiler, "Those setting are kept to keep backward compatibility to older MyFilms versions.\r" +
@@ -4508,7 +4508,7 @@
           this.groupBox13.Location = new System.Drawing.Point(13, 19);
           this.groupBox13.Name = "groupBox13";
           this.groupBox13.Size = new System.Drawing.Size(307, 49);
-          this.groupBox13.TabIndex = 2;
+          this.groupBox13.TabIndex = 0;
           this.groupBox13.TabStop = false;
           this.groupBox13.Text = "Map Notes field to Source";
           // 
@@ -4527,7 +4527,7 @@
           this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(29, 302);
           this.buttonDeleteTmpCatalog.Name = "buttonDeleteTmpCatalog";
           this.buttonDeleteTmpCatalog.Size = new System.Drawing.Size(152, 27);
-          this.buttonDeleteTmpCatalog.TabIndex = 8;
+          this.buttonDeleteTmpCatalog.TabIndex = 4;
           this.buttonDeleteTmpCatalog.Text = "Delete tmp Catalog";
           this.ToolTip1.SetToolTip(this.buttonDeleteTmpCatalog, resources.GetString("buttonDeleteTmpCatalog.ToolTip"));
           this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
@@ -4538,7 +4538,7 @@
           this.buttonOpenTmpFileAMC.Location = new System.Drawing.Point(29, 236);
           this.buttonOpenTmpFileAMC.Name = "buttonOpenTmpFileAMC";
           this.buttonOpenTmpFileAMC.Size = new System.Drawing.Size(152, 27);
-          this.buttonOpenTmpFileAMC.TabIndex = 32;
+          this.buttonOpenTmpFileAMC.TabIndex = 2;
           this.buttonOpenTmpFileAMC.Text = "Open tmp Catalog in AMC";
           this.ToolTip1.SetToolTip(this.buttonOpenTmpFileAMC, resources.GetString("buttonOpenTmpFileAMC.ToolTip"));
           this.buttonOpenTmpFileAMC.UseVisualStyleBackColor = true;
@@ -4557,7 +4557,7 @@
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
           this.AMCConfigView.Size = new System.Drawing.Size(317, 86);
-          this.AMCConfigView.TabIndex = 89;
+          this.AMCConfigView.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
           this.AMCConfigView.View = System.Windows.Forms.View.Details;
@@ -4577,7 +4577,7 @@
           this.btnHyperLinkParamGen.Location = new System.Drawing.Point(668, 40);
           this.btnHyperLinkParamGen.Name = "btnHyperLinkParamGen";
           this.btnHyperLinkParamGen.Size = new System.Drawing.Size(75, 23);
-          this.btnHyperLinkParamGen.TabIndex = 82;
+          this.btnHyperLinkParamGen.TabIndex = 10;
           this.btnHyperLinkParamGen.Text = "StartParams";
           this.ToolTip1.SetToolTip(this.btnHyperLinkParamGen, resources.GetString("btnHyperLinkParamGen.ToolTip"));
           this.btnHyperLinkParamGen.UseVisualStyleBackColor = true;
@@ -4600,7 +4600,7 @@
           this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 211);
           this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
           this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 133);
-          this.groupBox_GrabberOptions.TabIndex = 73;
+          this.groupBox_GrabberOptions.TabIndex = 3;
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "MyFilms Internal Internet Grabbing";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
@@ -4611,7 +4611,7 @@
           this.lblFilterGrabberScripts.Location = new System.Drawing.Point(16, 51);
           this.lblFilterGrabberScripts.Name = "lblFilterGrabberScripts";
           this.lblFilterGrabberScripts.Size = new System.Drawing.Size(105, 13);
-          this.lblFilterGrabberScripts.TabIndex = 68;
+          this.lblFilterGrabberScripts.TabIndex = 4;
           this.lblFilterGrabberScripts.Text = "Filter Grabber Scripts";
           // 
           // ItemSearchGrabberScriptsFilter
@@ -4619,7 +4619,7 @@
           this.ItemSearchGrabberScriptsFilter.Location = new System.Drawing.Point(145, 48);
           this.ItemSearchGrabberScriptsFilter.Name = "ItemSearchGrabberScriptsFilter";
           this.ItemSearchGrabberScriptsFilter.Size = new System.Drawing.Size(138, 20);
-          this.ItemSearchGrabberScriptsFilter.TabIndex = 72;
+          this.ItemSearchGrabberScriptsFilter.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.ItemSearchGrabberScriptsFilter, resources.GetString("ItemSearchGrabberScriptsFilter.ToolTip"));
           // 
           // txtGrabberDisplay
@@ -4628,7 +4628,7 @@
           this.txtGrabberDisplay.Name = "txtGrabberDisplay";
           this.txtGrabberDisplay.ReadOnly = true;
           this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
-          this.txtGrabberDisplay.TabIndex = 67;
+          this.txtGrabberDisplay.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.txtGrabberDisplay, resources.GetString("txtGrabberDisplay.ToolTip"));
           // 
           // chkGrabber_Always
@@ -4637,7 +4637,7 @@
           this.chkGrabber_Always.Location = new System.Drawing.Point(19, 74);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
-          this.chkGrabber_Always.TabIndex = 56;
+          this.chkGrabber_Always.TabIndex = 6;
           this.chkGrabber_Always.Text = "try to find best match automatically";
           this.ToolTip1.SetToolTip(this.chkGrabber_Always, resources.GetString("chkGrabber_Always.ToolTip"));
           this.chkGrabber_Always.UseVisualStyleBackColor = true;
@@ -4647,7 +4647,7 @@
           this.btnEditScript.Location = new System.Drawing.Point(289, 22);
           this.btnEditScript.Name = "btnEditScript";
           this.btnEditScript.Size = new System.Drawing.Size(95, 20);
-          this.btnEditScript.TabIndex = 66;
+          this.btnEditScript.TabIndex = 3;
           this.btnEditScript.Text = "Grabber Options";
           this.ToolTip1.SetToolTip(this.btnEditScript, resources.GetString("btnEditScript.ToolTip"));
           this.btnEditScript.UseVisualStyleBackColor = true;
@@ -4666,7 +4666,7 @@
           this.groupBox6.Location = new System.Drawing.Point(398, 15);
           this.groupBox6.Name = "groupBox6";
           this.groupBox6.Size = new System.Drawing.Size(330, 112);
-          this.groupBox6.TabIndex = 65;
+          this.groupBox6.TabIndex = 10;
           this.groupBox6.TabStop = false;
           this.groupBox6.Text = "MyFilms Grabber Override Options ...";
           this.ToolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
@@ -4680,7 +4680,7 @@
           this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 21);
           this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
           this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverrideGetRoles.TabIndex = 71;
+          this.cbGrabberOverrideGetRoles.TabIndex = 3;
           this.ToolTip1.SetToolTip(this.cbGrabberOverrideGetRoles, "If checked, add Roles to actor infos.\r\nDepends on the grabber script supporting t" +
                   "hat option.");
           // 
@@ -4690,7 +4690,7 @@
           this.label55.Location = new System.Drawing.Point(191, 27);
           this.label55.Name = "label55";
           this.label55.Size = new System.Drawing.Size(82, 13);
-          this.label55.TabIndex = 70;
+          this.label55.TabIndex = 2;
           this.label55.Text = "Get Actor Roles";
           // 
           // label51
@@ -4699,7 +4699,7 @@
           this.label51.Location = new System.Drawing.Point(191, 79);
           this.label51.Name = "label51";
           this.label51.Size = new System.Drawing.Size(66, 13);
-          this.label51.TabIndex = 68;
+          this.label51.TabIndex = 6;
           this.label51.Text = "Limit # Titles";
           // 
           // cbGrabberOverrideTitleLimit
@@ -4719,7 +4719,7 @@
           this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 76);
           this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
           this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverrideTitleLimit.TabIndex = 67;
+          this.cbGrabberOverrideTitleLimit.TabIndex = 7;
           this.ToolTip1.SetToolTip(this.cbGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed.\r\nYou may also set a preferred lan" +
                   "guage/country \r\nfor grabbing in the override options.");
           // 
@@ -4729,7 +4729,7 @@
           this.label50.Location = new System.Drawing.Point(12, 28);
           this.label50.Name = "label50";
           this.label50.Size = new System.Drawing.Size(161, 13);
-          this.label50.TabIndex = 66;
+          this.label50.TabIndex = 0;
           this.label50.Text = "Preferred Languages / Countries";
           // 
           // label49
@@ -4738,7 +4738,7 @@
           this.label49.Location = new System.Drawing.Point(191, 52);
           this.label49.Name = "label49";
           this.label49.Size = new System.Drawing.Size(79, 13);
-          this.label49.TabIndex = 65;
+          this.label49.TabIndex = 4;
           this.label49.Text = "Limit # Persons";
           // 
           // cbGrabberOverridePersonLimit
@@ -4757,7 +4757,7 @@
           this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 48);
           this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
           this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverridePersonLimit.TabIndex = 63;
+          this.cbGrabberOverridePersonLimit.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.cbGrabberOverridePersonLimit, "Limits the number of person names grabbed.\r\nThis settings applies to all fields t" +
                   "hat grab person names, \r\nlike actors, producers, writers, directors.");
           // 
@@ -4815,7 +4815,7 @@
           this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
           this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
           this.cbGrabberOverrideLanguage.Sorted = true;
-          this.cbGrabberOverrideLanguage.TabIndex = 64;
+          this.cbGrabberOverrideLanguage.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.cbGrabberOverrideLanguage, resources.GetString("cbGrabberOverrideLanguage.ToolTip"));
           // 
           // lblSearchGrabberName
@@ -4824,7 +4824,7 @@
           this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 105);
           this.lblSearchGrabberName.Name = "lblSearchGrabberName";
           this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
-          this.lblSearchGrabberName.TabIndex = 62;
+          this.lblSearchGrabberName.TabIndex = 8;
           this.lblSearchGrabberName.Text = "Title for Internet Updates";
           // 
           // chkGrabber_ChooseScript
@@ -4833,7 +4833,7 @@
           this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(226, 74);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
           this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
-          this.chkGrabber_ChooseScript.TabIndex = 60;
+          this.chkGrabber_ChooseScript.TabIndex = 7;
           this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
           this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
           this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
@@ -4848,7 +4848,7 @@
           this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 102);
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
-          this.ItemSearchGrabberName.TabIndex = 61;
+          this.ItemSearchGrabberName.TabIndex = 9;
           this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, "The title that you want to use for internet data searches.\r\nMyFilms will offer yo" +
                   "u the other titles for a \"re\"search too.");
           // 
@@ -4857,7 +4857,7 @@
           this.btnGrabber.Location = new System.Drawing.Point(251, 22);
           this.btnGrabber.Name = "btnGrabber";
           this.btnGrabber.Size = new System.Drawing.Size(32, 20);
-          this.btnGrabber.TabIndex = 55;
+          this.btnGrabber.TabIndex = 2;
           this.btnGrabber.Text = "...";
           this.ToolTip1.SetToolTip(this.btnGrabber, "Browse and choose the script you want MyFilms \r\nto use as default.");
           this.btnGrabber.UseVisualStyleBackColor = true;
@@ -4879,7 +4879,7 @@
           this.label27.Location = new System.Drawing.Point(16, 25);
           this.label27.Name = "label27";
           this.label27.Size = new System.Drawing.Size(112, 13);
-          this.label27.TabIndex = 53;
+          this.label27.TabIndex = 0;
           this.label27.Text = "Default Grabber Script";
           // 
           // btnFirstTimeSetup
@@ -4887,7 +4887,7 @@
           this.btnFirstTimeSetup.Location = new System.Drawing.Point(198, 466);
           this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
           this.btnFirstTimeSetup.Size = new System.Drawing.Size(114, 31);
-          this.btnFirstTimeSetup.TabIndex = 77;
+          this.btnFirstTimeSetup.TabIndex = 14;
           this.btnFirstTimeSetup.Text = " Setup Wizard ...";
           this.ToolTip1.SetToolTip(this.btnFirstTimeSetup, resources.GetString("btnFirstTimeSetup.ToolTip"));
           this.btnFirstTimeSetup.UseVisualStyleBackColor = true;
@@ -4900,7 +4900,7 @@
           this.buttonWikiHelp.Location = new System.Drawing.Point(22, 466);
           this.buttonWikiHelp.Name = "buttonWikiHelp";
           this.buttonWikiHelp.Size = new System.Drawing.Size(64, 31);
-          this.buttonWikiHelp.TabIndex = 83;
+          this.buttonWikiHelp.TabIndex = 12;
           this.buttonWikiHelp.Text = "Wiki Help";
           this.ToolTip1.SetToolTip(this.buttonWikiHelp, "Opens the MyFilms Wiki in your browser...");
           this.buttonWikiHelp.UseVisualStyleBackColor = true;
@@ -4911,7 +4911,7 @@
           this.btnServerSync.Location = new System.Drawing.Point(376, 12);
           this.btnServerSync.Name = "btnServerSync";
           this.btnServerSync.Size = new System.Drawing.Size(84, 23);
-          this.btnServerSync.TabIndex = 84;
+          this.btnServerSync.TabIndex = 4;
           this.btnServerSync.Text = "Central Config";
           this.ToolTip1.SetToolTip(this.btnServerSync, resources.GetString("btnServerSync.ToolTip"));
           this.btnServerSync.UseVisualStyleBackColor = true;
@@ -4927,7 +4927,7 @@
           this.groupBox_UpdateGrabberScripts.Location = new System.Drawing.Point(6, 263);
           this.groupBox_UpdateGrabberScripts.Name = "groupBox_UpdateGrabberScripts";
           this.groupBox_UpdateGrabberScripts.Size = new System.Drawing.Size(735, 85);
-          this.groupBox_UpdateGrabberScripts.TabIndex = 3;
+          this.groupBox_UpdateGrabberScripts.TabIndex = 1;
           this.groupBox_UpdateGrabberScripts.TabStop = false;
           this.groupBox_UpdateGrabberScripts.Text = "Update Grabber Scripts ...";
           this.ToolTip1.SetToolTip(this.groupBox_UpdateGrabberScripts, resources.GetString("groupBox_UpdateGrabberScripts.ToolTip"));
@@ -4937,7 +4937,7 @@
           this.button_DeleteBackupScripts.Location = new System.Drawing.Point(555, 13);
           this.button_DeleteBackupScripts.Name = "button_DeleteBackupScripts";
           this.button_DeleteBackupScripts.Size = new System.Drawing.Size(144, 25);
-          this.button_DeleteBackupScripts.TabIndex = 128;
+          this.button_DeleteBackupScripts.TabIndex = 2;
           this.button_DeleteBackupScripts.Text = "Delete Script Backups";
           this.button_DeleteBackupScripts.UseVisualStyleBackColor = true;
           this.button_DeleteBackupScripts.Click += new System.EventHandler(this.button_DeleteBackupScripts_Click);
@@ -4948,7 +4948,7 @@
           this.label_UpdateGrabberScriptsInstructions.Location = new System.Drawing.Point(21, 32);
           this.label_UpdateGrabberScriptsInstructions.Name = "label_UpdateGrabberScriptsInstructions";
           this.label_UpdateGrabberScriptsInstructions.Size = new System.Drawing.Size(267, 26);
-          this.label_UpdateGrabberScriptsInstructions.TabIndex = 127;
+          this.label_UpdateGrabberScriptsInstructions.TabIndex = 0;
           this.label_UpdateGrabberScriptsInstructions.Text = "Update will download missing grabber scripts \r\nor update existing ones, if newer " +
               "versions are available.";
           // 
@@ -4958,21 +4958,21 @@
           this.textBoxUpdateGrabberScripts.Location = new System.Drawing.Point(399, 42);
           this.textBoxUpdateGrabberScripts.Name = "textBoxUpdateGrabberScripts";
           this.textBoxUpdateGrabberScripts.Size = new System.Drawing.Size(300, 20);
-          this.textBoxUpdateGrabberScripts.TabIndex = 126;
+          this.textBoxUpdateGrabberScripts.TabIndex = 3;
           // 
           // progressBarUpdateGrabberScripts
           // 
           this.progressBarUpdateGrabberScripts.Location = new System.Drawing.Point(399, 66);
           this.progressBarUpdateGrabberScripts.Name = "progressBarUpdateGrabberScripts";
           this.progressBarUpdateGrabberScripts.Size = new System.Drawing.Size(300, 13);
-          this.progressBarUpdateGrabberScripts.TabIndex = 125;
+          this.progressBarUpdateGrabberScripts.TabIndex = 4;
           // 
           // buttonUpdateGrabberScripts
           // 
           this.buttonUpdateGrabberScripts.Location = new System.Drawing.Point(399, 13);
           this.buttonUpdateGrabberScripts.Name = "buttonUpdateGrabberScripts";
           this.buttonUpdateGrabberScripts.Size = new System.Drawing.Size(143, 25);
-          this.buttonUpdateGrabberScripts.TabIndex = 124;
+          this.buttonUpdateGrabberScripts.TabIndex = 1;
           this.buttonUpdateGrabberScripts.Text = "Update Grabber Scripts";
           this.buttonUpdateGrabberScripts.UseVisualStyleBackColor = true;
           this.buttonUpdateGrabberScripts.Click += new System.EventHandler(this.buttonUpdateGrabberScripts_Click);
@@ -4986,7 +4986,7 @@
           this.groupBoxMultiUserState.Location = new System.Drawing.Point(7, 131);
           this.groupBoxMultiUserState.Name = "groupBoxMultiUserState";
           this.groupBoxMultiUserState.Size = new System.Drawing.Size(338, 72);
-          this.groupBoxMultiUserState.TabIndex = 74;
+          this.groupBoxMultiUserState.TabIndex = 1;
           this.groupBoxMultiUserState.TabStop = false;
           this.groupBoxMultiUserState.Text = "Multi User States (MUS)";
           this.ToolTip1.SetToolTip(this.groupBoxMultiUserState, resources.GetString("groupBoxMultiUserState.ToolTip"));
@@ -4997,7 +4997,7 @@
           this.Label_UserProfileName.Location = new System.Drawing.Point(28, 37);
           this.Label_UserProfileName.Name = "Label_UserProfileName";
           this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
-          this.Label_UserProfileName.TabIndex = 72;
+          this.Label_UserProfileName.TabIndex = 2;
           this.Label_UserProfileName.Text = "Active User Profile Name";
           // 
           // chkEnhancedWatchedStatusHandling
@@ -5007,7 +5007,7 @@
           this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(11, 17);
           this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
           this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(112, 17);
-          this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
+          this.chkEnhancedWatchedStatusHandling.TabIndex = 0;
           this.chkEnhancedWatchedStatusHandling.Text = "MUS autoenabled";
           this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
           // 
@@ -5032,7 +5032,7 @@
           this.groupBoxExternal.Location = new System.Drawing.Point(19, 244);
           this.groupBoxExternal.Name = "groupBoxExternal";
           this.groupBoxExternal.Size = new System.Drawing.Size(698, 89);
-          this.groupBoxExternal.TabIndex = 93;
+          this.groupBoxExternal.TabIndex = 1;
           this.groupBoxExternal.TabStop = false;
           this.groupBoxExternal.Text = "Recentrly Added Media ...";
           // 
@@ -5042,7 +5042,7 @@
           this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(21, 47);
           this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
           this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(279, 26);
-          this.labelRecentlyAddedAPI.TabIndex = 5;
+          this.labelRecentlyAddedAPI.TabIndex = 1;
           this.labelRecentlyAddedAPI.Text = "You can enable or disable per config, if you want to \r\ninclude the catalog conten" +
               "t to the recently added media...";
           // 
@@ -5057,7 +5057,7 @@
           this.groupBoxTrakt.Location = new System.Drawing.Point(19, 15);
           this.groupBoxTrakt.Name = "groupBoxTrakt";
           this.groupBoxTrakt.Size = new System.Drawing.Size(698, 223);
-          this.groupBoxTrakt.TabIndex = 5;
+          this.groupBoxTrakt.TabIndex = 0;
           this.groupBoxTrakt.TabStop = false;
           this.groupBoxTrakt.Text = "Trakt ...";
           // 
@@ -5067,7 +5067,7 @@
           this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 133);
           this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
           this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
-          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
+          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 3;
           this.linkLabelUsingTraktInMyFilmsWiki.TabStop = true;
           this.linkLabelUsingTraktInMyFilmsWiki.Text = "Using Trakt in MyFilms";
           this.linkLabelUsingTraktInMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsingTraktInMyFilmsWiki_LinkClicked);
@@ -5089,7 +5089,7 @@
           this.labelTraktDescription.Location = new System.Drawing.Point(21, 54);
           this.labelTraktDescription.Name = "labelTraktDescription";
           this.labelTraktDescription.Size = new System.Drawing.Size(407, 156);
-          this.labelTraktDescription.TabIndex = 2;
+          this.labelTraktDescription.TabIndex = 1;
           this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
           // 
           // pictureBox1
@@ -5107,7 +5107,7 @@
           this.linkLabelTrakt.Location = new System.Drawing.Point(518, 98);
           this.linkLabelTrakt.Name = "linkLabelTrakt";
           this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
-          this.linkLabelTrakt.TabIndex = 1;
+          this.linkLabelTrakt.TabIndex = 2;
           this.linkLabelTrakt.TabStop = true;
           this.linkLabelTrakt.Text = "Trakt Website";
           this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
@@ -5181,7 +5181,7 @@
           this.lblYellowShowRequiredItems.Location = new System.Drawing.Point(466, 323);
           this.lblYellowShowRequiredItems.Name = "lblYellowShowRequiredItems";
           this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(245, 15);
-          this.lblYellowShowRequiredItems.TabIndex = 76;
+          this.lblYellowShowRequiredItems.TabIndex = 9;
           this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory for the plugin to work !";
           this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
           // 
@@ -5202,7 +5202,7 @@
           this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 151);
           this.groupBox_PlayMovieInfos.Name = "groupBox_PlayMovieInfos";
           this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(438, 197);
-          this.groupBox_PlayMovieInfos.TabIndex = 74;
+          this.groupBox_PlayMovieInfos.TabIndex = 6;
           this.groupBox_PlayMovieInfos.TabStop = false;
           this.groupBox_PlayMovieInfos.Text = "Movie Playback Path Configuration";
           // 
@@ -5211,7 +5211,7 @@
           this.butExternalPlayer.Location = new System.Drawing.Point(267, 169);
           this.butExternalPlayer.Name = "butExternalPlayer";
           this.butExternalPlayer.Size = new System.Drawing.Size(29, 20);
-          this.butExternalPlayer.TabIndex = 71;
+          this.butExternalPlayer.TabIndex = 5;
           this.butExternalPlayer.Text = "...";
           this.butExternalPlayer.UseVisualStyleBackColor = true;
           this.butExternalPlayer.Click += new System.EventHandler(this.butExternalPlayer_Click);
@@ -5222,7 +5222,7 @@
           this.label23.Location = new System.Drawing.Point(12, 172);
           this.label23.Name = "label23";
           this.label23.Size = new System.Drawing.Size(77, 13);
-          this.label23.TabIndex = 84;
+          this.label23.TabIndex = 3;
           this.label23.Text = "External Player";
           // 
           // groupBoxMoviePathInfos
@@ -5237,7 +5237,7 @@
           this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 41);
           this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
           this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(420, 92);
-          this.groupBoxMoviePathInfos.TabIndex = 71;
+          this.groupBoxMoviePathInfos.TabIndex = 11;
           this.groupBoxMoviePathInfos.TabStop = false;
           this.groupBoxMoviePathInfos.Text = "Playback Search Configuration";
           // 
@@ -5247,7 +5247,7 @@
           this.label5.Location = new System.Drawing.Point(6, 17);
           this.label5.Name = "label5";
           this.label5.Size = new System.Drawing.Size(145, 13);
-          this.label5.TabIndex = 60;
+          this.label5.TabIndex = 0;
           this.label5.Text = "Paths for Movies File Search ";
           // 
           // butPath
@@ -5255,7 +5255,7 @@
           this.butPath.Location = new System.Drawing.Point(384, 14);
           this.butPath.Name = "butPath";
           this.butPath.Size = new System.Drawing.Size(29, 20);
-          this.butPath.TabIndex = 55;
+          this.butPath.TabIndex = 2;
           this.butPath.Text = "...";
           this.butPath.UseVisualStyleBackColor = true;
           this.butPath.Click += new System.EventHandler(this.butPath_Click);
@@ -5265,7 +5265,7 @@
           this.AntIdentLabel.Location = new System.Drawing.Point(302, 140);
           this.AntIdentLabel.Name = "AntIdentLabel";
           this.AntIdentLabel.Size = new System.Drawing.Size(124, 20);
-          this.AntIdentLabel.TabIndex = 57;
+          this.AntIdentLabel.TabIndex = 2;
           // 
           // label6
           // 
@@ -5273,7 +5273,7 @@
           this.label6.Location = new System.Drawing.Point(11, 18);
           this.label6.Name = "label6";
           this.label6.Size = new System.Drawing.Size(152, 13);
-          this.label6.TabIndex = 59;
+          this.label6.TabIndex = 8;
           this.label6.Text = "DB Field for Movie Source Info";
           // 
           // label4
@@ -5282,7 +5282,7 @@
           this.label4.Location = new System.Drawing.Point(12, 144);
           this.label4.Name = "label4";
           this.label4.Size = new System.Drawing.Size(132, 13);
-          this.label4.TabIndex = 58;
+          this.label4.TabIndex = 0;
           this.label4.Text = "Offline Media Identification";
           // 
           // label13
@@ -5291,7 +5291,7 @@
           this.label13.Location = new System.Drawing.Point(457, 17);
           this.label13.Name = "label13";
           this.label13.Size = new System.Drawing.Size(70, 13);
-          this.label13.TabIndex = 63;
+          this.label13.TabIndex = 3;
           this.label13.Text = "Catalog Type";
           // 
           // ButCat
@@ -5299,7 +5299,7 @@
           this.ButCat.Location = new System.Drawing.Point(397, 15);
           this.ButCat.Name = "ButCat";
           this.ButCat.Size = new System.Drawing.Size(29, 20);
-          this.ButCat.TabIndex = 49;
+          this.ButCat.TabIndex = 2;
           this.ButCat.Text = "...";
           this.ButCat.UseVisualStyleBackColor = true;
           this.ButCat.Click += new System.EventHandler(this.ButCat_Click);
@@ -5310,7 +5310,7 @@
           this.label1.Location = new System.Drawing.Point(17, 18);
           this.label1.Name = "label1";
           this.label1.Size = new System.Drawing.Size(93, 13);
-          this.label1.TabIndex = 47;
+          this.label1.TabIndex = 0;
           this.label1.Text = "Catalog File (XML)";
           // 
           // label11
@@ -5319,7 +5319,7 @@
           this.label11.Location = new System.Drawing.Point(80, 17);
           this.label11.Name = "label11";
           this.label11.Size = new System.Drawing.Size(97, 13);
-          this.label11.TabIndex = 36;
+          this.label11.TabIndex = 0;
           this.label11.Text = "Menu Plugin Name";
           // 
           // label12
@@ -5328,7 +5328,7 @@
           this.label12.Location = new System.Drawing.Point(80, 45);
           this.label12.Name = "label12";
           this.label12.Size = new System.Drawing.Size(100, 13);
-          this.label12.TabIndex = 38;
+          this.label12.TabIndex = 2;
           this.label12.Text = "Configuration Name";
           // 
           // ButSave
@@ -5336,7 +5336,7 @@
           this.ButSave.Location = new System.Drawing.Point(442, 466);
           this.ButSave.Name = "ButSave";
           this.ButSave.Size = new System.Drawing.Size(64, 31);
-          this.ButSave.TabIndex = 47;
+          this.ButSave.TabIndex = 16;
           this.ButSave.Text = "Save";
           this.ButSave.UseVisualStyleBackColor = true;
           this.ButSave.Click += new System.EventHandler(this.ButSave_Click);
@@ -5414,7 +5414,7 @@
           this.groupBoxAMCsettings.Location = new System.Drawing.Point(392, 236);
           this.groupBoxAMCsettings.Name = "groupBoxAMCsettings";
           this.groupBoxAMCsettings.Size = new System.Drawing.Size(335, 93);
-          this.groupBoxAMCsettings.TabIndex = 36;
+          this.groupBoxAMCsettings.TabIndex = 5;
           this.groupBoxAMCsettings.TabStop = false;
           this.groupBoxAMCsettings.Text = "Ant Movie Catalog (AMC)";
           // 
@@ -5423,7 +5423,7 @@
           this.AMCexePath.Location = new System.Drawing.Point(14, 52);
           this.AMCexePath.Name = "AMCexePath";
           this.AMCexePath.Size = new System.Drawing.Size(261, 20);
-          this.AMCexePath.TabIndex = 34;
+          this.AMCexePath.TabIndex = 1;
           // 
           // lblAMCpath
           // 
@@ -5431,7 +5431,7 @@
           this.lblAMCpath.Location = new System.Drawing.Point(11, 33);
           this.lblAMCpath.Name = "lblAMCpath";
           this.lblAMCpath.Size = new System.Drawing.Size(213, 13);
-          this.lblAMCpath.TabIndex = 33;
+          this.lblAMCpath.TabIndex = 0;
           this.lblAMCpath.Text = "Path to AMC Ant Movie Catalog Executable";
           // 
           // buttonAMCpathSearch
@@ -5439,7 +5439,7 @@
           this.buttonAMCpathSearch.Location = new System.Drawing.Point(281, 52);
           this.buttonAMCpathSearch.Name = "buttonAMCpathSearch";
           this.buttonAMCpathSearch.Size = new System.Drawing.Size(36, 20);
-          this.buttonAMCpathSearch.TabIndex = 35;
+          this.buttonAMCpathSearch.TabIndex = 2;
           this.buttonAMCpathSearch.Text = "...";
           this.buttonAMCpathSearch.UseVisualStyleBackColor = true;
           this.buttonAMCpathSearch.Click += new System.EventHandler(this.buttonAMCpathSearch_Click);
@@ -5449,7 +5449,7 @@
           this.buttonOpenTmpFile.Location = new System.Drawing.Point(29, 269);
           this.buttonOpenTmpFile.Name = "buttonOpenTmpFile";
           this.buttonOpenTmpFile.Size = new System.Drawing.Size(152, 27);
-          this.buttonOpenTmpFile.TabIndex = 31;
+          this.buttonOpenTmpFile.TabIndex = 3;
           this.buttonOpenTmpFile.Text = "Open tmp Catalog in Editor";
           this.buttonOpenTmpFile.UseVisualStyleBackColor = true;
           this.buttonOpenTmpFile.Click += new System.EventHandler(this.buttonOpenTmpFile_Click);
@@ -5510,7 +5510,7 @@
           this.btnUpdate.Location = new System.Drawing.Point(583, 331);
           this.btnUpdate.Name = "btnUpdate";
           this.btnUpdate.Size = new System.Drawing.Size(144, 21);
-          this.btnUpdate.TabIndex = 103;
+          this.btnUpdate.TabIndex = 26;
           this.btnUpdate.Text = "Update Logo Rule";
           this.btnUpdate.UseVisualStyleBackColor = true;
           this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -5521,7 +5521,7 @@
           this.lblLogoPresets.Location = new System.Drawing.Point(108, 11);
           this.lblLogoPresets.Name = "lblLogoPresets";
           this.lblLogoPresets.Size = new System.Drawing.Size(42, 13);
-          this.lblLogoPresets.TabIndex = 4;
+          this.lblLogoPresets.TabIndex = 1;
           this.lblLogoPresets.Text = "Presets";
           // 
           // lbl_LogoSpacing
@@ -5530,7 +5530,7 @@
           this.lbl_LogoSpacing.Location = new System.Drawing.Point(592, 11);
           this.lbl_LogoSpacing.Name = "lbl_LogoSpacing";
           this.lbl_LogoSpacing.Size = new System.Drawing.Size(46, 13);
-          this.lbl_LogoSpacing.TabIndex = 101;
+          this.lbl_LogoSpacing.TabIndex = 4;
           this.lbl_LogoSpacing.Text = "Spacing";
           // 
           // lblSetupLogoRules
@@ -5539,7 +5539,7 @@
           this.lblSetupLogoRules.Location = new System.Drawing.Point(6, 253);
           this.lblSetupLogoRules.Name = "lblSetupLogoRules";
           this.lblSetupLogoRules.Size = new System.Drawing.Size(333, 13);
-          this.lblSetupLogoRules.TabIndex = 98;
+          this.lblSetupLogoRules.TabIndex = 11;
           this.lblSetupLogoRules.Text = "Set conditional Logo rules, select Logo Image and add rule to ruleset:";
           // 
           // lblInfoLogosForAll
@@ -5551,7 +5551,7 @@
           this.lblInfoLogosForAll.Location = new System.Drawing.Point(6, 334);
           this.lblInfoLogosForAll.Name = "lblInfoLogosForAll";
           this.lblInfoLogosForAll.Size = new System.Drawing.Size(297, 13);
-          this.lblInfoLogosForAll.TabIndex = 96;
+          this.lblInfoLogosForAll.TabIndex = 21;
           this.lblInfoLogosForAll.Text = "(The Logo Configuration is used for all MyFilms configurations)";
           // 
           // lblSelectLogoFile
@@ -5560,7 +5560,7 @@
           this.lblSelectLogoFile.Location = new System.Drawing.Point(486, 253);
           this.lblSelectLogoFile.Name = "lblSelectLogoFile";
           this.lblSelectLogoFile.Size = new System.Drawing.Size(100, 13);
-          this.lblSelectLogoFile.TabIndex = 95;
+          this.lblSelectLogoFile.TabIndex = 12;
           this.lblSelectLogoFile.Text = "Click to select Logo";
           // 
           // btnLogosPath
@@ -5569,7 +5569,7 @@
           this.btnLogosPath.Location = new System.Drawing.Point(695, 33);
           this.btnLogosPath.Name = "btnLogosPath";
           this.btnLogosPath.Size = new System.Drawing.Size(32, 20);
-          this.btnLogosPath.TabIndex = 94;
+          this.btnLogosPath.TabIndex = 8;
           this.btnLogosPath.Text = "...";
           this.btnLogosPath.UseVisualStyleBackColor = true;
           this.btnLogosPath.Click += new System.EventHandler(this.btnLogosPath_Click);
@@ -5580,7 +5580,7 @@
           this.SFilePicture.Location = new System.Drawing.Point(7, 230);
           this.SFilePicture.Name = "SFilePicture";
           this.SFilePicture.Size = new System.Drawing.Size(734, 20);
-          this.SFilePicture.TabIndex = 91;
+          this.SFilePicture.TabIndex = 10;
           // 
           // lblLogosPath
           // 
@@ -5588,7 +5588,7 @@
           this.lblLogosPath.Location = new System.Drawing.Point(108, 36);
           this.lblLogosPath.Name = "lblLogosPath";
           this.lblLogosPath.Size = new System.Drawing.Size(106, 13);
-          this.lblLogosPath.TabIndex = 93;
+          this.lblLogosPath.TabIndex = 6;
           this.lblLogosPath.Text = "Searchpath to Logos";
           // 
           // btnDown
@@ -5597,7 +5597,7 @@
           this.btnDown.Location = new System.Drawing.Point(583, 303);
           this.btnDown.Name = "btnDown";
           this.btnDown.Size = new System.Drawing.Size(64, 21);
-          this.btnDown.TabIndex = 89;
+          this.btnDown.TabIndex = 24;
           this.btnDown.Text = "Down";
           this.btnDown.UseVisualStyleBackColor = true;
           this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
@@ -5608,7 +5608,7 @@
           this.btnUp.Location = new System.Drawing.Point(583, 276);
           this.btnUp.Name = "btnUp";
           this.btnUp.Size = new System.Drawing.Size(64, 21);
-          this.btnUp.TabIndex = 88;
+          this.btnUp.TabIndex = 22;
           this.btnUp.Text = "Up";
           this.btnUp.UseVisualStyleBackColor = true;
           this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
@@ -5619,7 +5619,7 @@
           this.btnDel.Location = new System.Drawing.Point(663, 303);
           this.btnDel.Name = "btnDel";
           this.btnDel.Size = new System.Drawing.Size(64, 21);
-          this.btnDel.TabIndex = 87;
+          this.btnDel.TabIndex = 25;
           this.btnDel.Text = "Delete";
           this.btnDel.UseVisualStyleBackColor = true;
           this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
@@ -5630,7 +5630,7 @@
           this.btnAdd.Location = new System.Drawing.Point(663, 276);
           this.btnAdd.Name = "btnAdd";
           this.btnAdd.Size = new System.Drawing.Size(64, 21);
-          this.btnAdd.TabIndex = 86;
+          this.btnAdd.TabIndex = 23;
           this.btnAdd.Text = "Add";
           this.btnAdd.UseVisualStyleBackColor = true;
           this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -5646,7 +5646,7 @@
           this.SAnd_Or.Location = new System.Drawing.Point(117, 289);
           this.SAnd_Or.Name = "SAnd_Or";
           this.SAnd_Or.Size = new System.Drawing.Size(54, 21);
-          this.SAnd_Or.TabIndex = 82;
+          this.SAnd_Or.TabIndex = 17;
           // 
           // SValue2
           // 
@@ -5655,7 +5655,7 @@
           this.SValue2.Location = new System.Drawing.Point(371, 303);
           this.SValue2.Name = "SValue2";
           this.SValue2.Size = new System.Drawing.Size(110, 21);
-          this.SValue2.TabIndex = 81;
+          this.SValue2.TabIndex = 20;
           // 
           // SOp2
           // 
@@ -5673,7 +5673,7 @@
           this.SOp2.Location = new System.Drawing.Point(291, 303);
           this.SOp2.Name = "SOp2";
           this.SOp2.Size = new System.Drawing.Size(74, 21);
-          this.SOp2.TabIndex = 80;
+          this.SOp2.TabIndex = 19;
           this.SOp2.SelectedIndexChanged += new System.EventHandler(this.SOp2_SelectedIndexChanged);
           // 
           // SField2
@@ -5684,7 +5684,7 @@
           this.SField2.Name = "SField2";
           this.SField2.Size = new System.Drawing.Size(110, 21);
           this.SField2.Sorted = true;
-          this.SField2.TabIndex = 79;
+          this.SField2.TabIndex = 18;
           this.SField2.SelectedIndexChanged += new System.EventHandler(this.SField2_SelectedIndexChanged);
           // 
           // SValue1
@@ -5694,7 +5694,7 @@
           this.SValue1.Location = new System.Drawing.Point(371, 276);
           this.SValue1.Name = "SValue1";
           this.SValue1.Size = new System.Drawing.Size(110, 21);
-          this.SValue1.TabIndex = 78;
+          this.SValue1.TabIndex = 15;
           // 
           // SOp1
           // 
@@ -5712,7 +5712,7 @@
           this.SOp1.Location = new System.Drawing.Point(291, 276);
           this.SOp1.Name = "SOp1";
           this.SOp1.Size = new System.Drawing.Size(74, 21);
-          this.SOp1.TabIndex = 77;
+          this.SOp1.TabIndex = 14;
           this.SOp1.SelectedIndexChanged += new System.EventHandler(this.SOp1_SelectedIndexChanged);
           // 
           // SField1
@@ -5723,7 +5723,7 @@
           this.SField1.Name = "SField1";
           this.SField1.Size = new System.Drawing.Size(110, 21);
           this.SField1.Sorted = true;
-          this.SField1.TabIndex = 76;
+          this.SField1.TabIndex = 13;
           this.SField1.SelectedIndexChanged += new System.EventHandler(this.SField1_SelectedIndexChanged);
           // 
           // Tab_Artwork
@@ -5790,7 +5790,7 @@
           this.General.SelectedIndex = 0;
           this.General.ShowToolTips = true;
           this.General.Size = new System.Drawing.Size(755, 380);
-          this.General.TabIndex = 46;
+          this.General.TabIndex = 11;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
           // 
           // Tab_About
@@ -5811,7 +5811,7 @@
           this.groupBoxSupportedCatalogs.Location = new System.Drawing.Point(30, 183);
           this.groupBoxSupportedCatalogs.Name = "groupBoxSupportedCatalogs";
           this.groupBoxSupportedCatalogs.Size = new System.Drawing.Size(682, 156);
-          this.groupBoxSupportedCatalogs.TabIndex = 2;
+          this.groupBoxSupportedCatalogs.TabIndex = 1;
           this.groupBoxSupportedCatalogs.TabStop = false;
           this.groupBoxSupportedCatalogs.Text = "Credits ...";
           // 
@@ -5821,7 +5821,7 @@
           this.label41.Location = new System.Drawing.Point(27, 18);
           this.label41.Name = "label41";
           this.label41.Size = new System.Drawing.Size(529, 130);
-          this.label41.TabIndex = 5;
+          this.label41.TabIndex = 0;
           this.label41.Text = resources.GetString("label41.Text");
           this.label41.Click += new System.EventHandler(this.label41_Click);
           // 
@@ -5896,7 +5896,7 @@
           this.personDataGridView.RowHeadersVisible = false;
           this.personDataGridView.RowTemplate.Height = 18;
           this.personDataGridView.Size = new System.Drawing.Size(735, 115);
-          this.personDataGridView.TabIndex = 119;
+          this.personDataGridView.TabIndex = 12;
           // 
           // dataGridViewTextBoxColumn9
           // 
@@ -6033,7 +6033,7 @@
           this.customFieldDataGridView.RowHeadersVisible = false;
           this.customFieldDataGridView.RowTemplate.Height = 18;
           this.customFieldDataGridView.Size = new System.Drawing.Size(735, 112);
-          this.customFieldDataGridView.TabIndex = 119;
+          this.customFieldDataGridView.TabIndex = 11;
           // 
           // dataGridViewTextBoxColumn1
           // 
@@ -6102,7 +6102,7 @@
           this.ownerTextBox.Location = new System.Drawing.Point(426, 9);
           this.ownerTextBox.Name = "ownerTextBox";
           this.ownerTextBox.Size = new System.Drawing.Size(134, 20);
-          this.ownerTextBox.TabIndex = 92;
+          this.ownerTextBox.TabIndex = 3;
           // 
           // propertiesBindingSource
           // 
@@ -6115,7 +6115,7 @@
           this.mailTextBox.Location = new System.Drawing.Point(426, 35);
           this.mailTextBox.Name = "mailTextBox";
           this.mailTextBox.Size = new System.Drawing.Size(134, 20);
-          this.mailTextBox.TabIndex = 94;
+          this.mailTextBox.TabIndex = 5;
           // 
           // siteTextBox
           // 
@@ -6123,7 +6123,7 @@
           this.siteTextBox.Location = new System.Drawing.Point(426, 61);
           this.siteTextBox.Name = "siteTextBox";
           this.siteTextBox.Size = new System.Drawing.Size(134, 20);
-          this.siteTextBox.TabIndex = 96;
+          this.siteTextBox.TabIndex = 7;
           // 
           // descriptionTextBox
           // 
@@ -6131,14 +6131,14 @@
           this.descriptionTextBox.Location = new System.Drawing.Point(426, 87);
           this.descriptionTextBox.Name = "descriptionTextBox";
           this.descriptionTextBox.Size = new System.Drawing.Size(134, 20);
-          this.descriptionTextBox.TabIndex = 98;
+          this.descriptionTextBox.TabIndex = 9;
           // 
           // btnGrabberInterface
           // 
           this.btnGrabberInterface.Location = new System.Drawing.Point(607, 40);
           this.btnGrabberInterface.Name = "btnGrabberInterface";
           this.btnGrabberInterface.Size = new System.Drawing.Size(134, 27);
-          this.btnGrabberInterface.TabIndex = 91;
+          this.btnGrabberInterface.TabIndex = 10;
           this.btnGrabberInterface.Text = "Grabber Interface";
           this.btnGrabberInterface.UseVisualStyleBackColor = true;
           this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
@@ -6149,7 +6149,7 @@
           this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(6, 7);
           this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
           this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
-          this.lblAMCupdaterConfigPreview.TabIndex = 90;
+          this.lblAMCupdaterConfigPreview.TabIndex = 0;
           this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
           // 
           // Tab_OldStuff
@@ -6175,7 +6175,7 @@
           this.groupBox8.Location = new System.Drawing.Point(228, 144);
           this.groupBox8.Name = "groupBox8";
           this.groupBox8.Size = new System.Drawing.Size(291, 66);
-          this.groupBox8.TabIndex = 92;
+          this.groupBox8.TabIndex = 0;
           this.groupBox8.TabStop = false;
           this.groupBox8.Text = "Sort and Layouts for Films (Custom View)";
           // 
@@ -6185,7 +6185,7 @@
           this.label25.Location = new System.Drawing.Point(202, 18);
           this.label25.Name = "label25";
           this.label25.Size = new System.Drawing.Size(39, 13);
-          this.label25.TabIndex = 5;
+          this.label25.TabIndex = 2;
           this.label25.Text = "Layout";
           // 
           // label7
@@ -6194,7 +6194,7 @@
           this.label7.Location = new System.Drawing.Point(125, 18);
           this.label7.Name = "label7";
           this.label7.Size = new System.Drawing.Size(26, 13);
-          this.label7.TabIndex = 4;
+          this.label7.TabIndex = 1;
           this.label7.Text = "Sort";
           // 
           // label3
@@ -6203,7 +6203,7 @@
           this.label3.Location = new System.Drawing.Point(16, 18);
           this.label3.Name = "label3";
           this.label3.Size = new System.Drawing.Size(51, 13);
-          this.label3.TabIndex = 3;
+          this.label3.TabIndex = 0;
           this.label3.Text = "Sort Field";
           // 
           // LayOutViewFilms
@@ -6219,7 +6219,7 @@
           this.LayOutViewFilms.Location = new System.Drawing.Point(192, 35);
           this.LayOutViewFilms.Name = "LayOutViewFilms";
           this.LayOutViewFilms.Size = new System.Drawing.Size(90, 21);
-          this.LayOutViewFilms.TabIndex = 2;
+          this.LayOutViewFilms.TabIndex = 5;
           // 
           // SortSensViewFilms
           // 
@@ -6230,7 +6230,7 @@
           this.SortSensViewFilms.Location = new System.Drawing.Point(120, 35);
           this.SortSensViewFilms.Name = "SortSensViewFilms";
           this.SortSensViewFilms.Size = new System.Drawing.Size(59, 21);
-          this.SortSensViewFilms.TabIndex = 1;
+          this.SortSensViewFilms.TabIndex = 4;
           // 
           // SortViewFilms
           // 
@@ -6238,7 +6238,7 @@
           this.SortViewFilms.Location = new System.Drawing.Point(10, 35);
           this.SortViewFilms.Name = "SortViewFilms";
           this.SortViewFilms.Size = new System.Drawing.Size(104, 21);
-          this.SortViewFilms.TabIndex = 0;
+          this.SortViewFilms.TabIndex = 3;
           // 
           // textBoxNBconfigs
           // 
@@ -6246,7 +6246,7 @@
           this.textBoxNBconfigs.Location = new System.Drawing.Point(421, 42);
           this.textBoxNBconfigs.Name = "textBoxNBconfigs";
           this.textBoxNBconfigs.Size = new System.Drawing.Size(28, 20);
-          this.textBoxNBconfigs.TabIndex = 80;
+          this.textBoxNBconfigs.TabIndex = 6;
           this.textBoxNBconfigs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
           // 
           // lblNbConfig
@@ -6256,7 +6256,7 @@
           this.lblNbConfig.Location = new System.Drawing.Point(373, 45);
           this.lblNbConfig.Name = "lblNbConfig";
           this.lblNbConfig.Size = new System.Drawing.Size(42, 13);
-          this.lblNbConfig.TabIndex = 81;
+          this.lblNbConfig.TabIndex = 5;
           this.lblNbConfig.Text = "Configs";
           // 
           // pictureBoxMyFilms
