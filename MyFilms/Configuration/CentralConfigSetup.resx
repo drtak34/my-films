@@ -120,16 +120,16 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="cbSyncFromServerOnStartup.ToolTip" xml:space="preserve">
+    <value>When enabled, MyFilms will copy the central config file into local MP data directory before starting up internal services.
+Note: Enabling this will overwrite your local MyFilms.xml each time you start Mediaportal !</value>
+  </data>
   <data name="groupBoxCentralConfig.ToolTip" xml:space="preserve">
     <value>For users with central storage, these options allow to configure "auto updates" of the MyFilms config 
 from a central storage location.
 Note: MyFilms stores some machine specific information in the MyFilms.xml config file - if you update that file 
 from a central location, those settings will also be overwritten with the ones from central storage.
 THe settings of this section are stored in MyFilmsServer.xml file in Mediaportal data directory.</value>
-  </data>
-  <data name="cbSyncFromServerOnStartup.ToolTip" xml:space="preserve">
-    <value>When enabled, MyFilms will copy the central config file into local MP data directory before starting up internal services.
-Note: Enabling this will overwrite your local MyFilms.xml each time you start Mediaportal !</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>You can select a remote directory and enable MyFilms to load the config (MyFilms.xml) from there during MP startup.

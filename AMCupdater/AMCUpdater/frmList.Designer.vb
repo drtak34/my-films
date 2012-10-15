@@ -77,7 +77,7 @@ Partial Class frmList
         Me.btnCancel.Location = New System.Drawing.Point(617, 364)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
-        Me.btnCancel.TabIndex = 50
+        Me.btnCancel.TabIndex = 25
         Me.btnCancel.Text = "Ignore"
         Me.ToolTipImportDialog.SetToolTip(Me.btnCancel, """Ignore"" does skip the current movie - thus not importing it." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Movie will be foun" & _
                 "d again on a new scan next time.")
@@ -90,7 +90,7 @@ Partial Class frmList
         Me.btnOK.Location = New System.Drawing.Point(751, 364)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(93, 23)
-        Me.btnOK.TabIndex = 70
+        Me.btnOK.TabIndex = 0
         Me.btnOK.Text = "OK"
         Me.ToolTipImportDialog.SetToolTip(Me.btnOK, "Choose the selected data for the current movie.")
         Me.btnOK.UseVisualStyleBackColor = True
@@ -100,7 +100,7 @@ Partial Class frmList
         Me.txtSearchString.Location = New System.Drawing.Point(96, 32)
         Me.txtSearchString.Name = "txtSearchString"
         Me.txtSearchString.Size = New System.Drawing.Size(316, 20)
-        Me.txtSearchString.TabIndex = 0
+        Me.txtSearchString.TabIndex = 6
         '
         'btnSearchAgain
         '
@@ -108,7 +108,7 @@ Partial Class frmList
         Me.btnSearchAgain.Location = New System.Drawing.Point(26, 364)
         Me.btnSearchAgain.Name = "btnSearchAgain"
         Me.btnSearchAgain.Size = New System.Drawing.Size(94, 23)
-        Me.btnSearchAgain.TabIndex = 40
+        Me.btnSearchAgain.TabIndex = 19
         Me.btnSearchAgain.Text = "Search Again"
         Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAgain, "Perform new search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will only be available, if settings have been changed," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like" & _
                 " grabber script or search title." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note: By default, only the first page results " & _
@@ -129,7 +129,7 @@ Partial Class frmList
         Me.btnSelectParserFile.Location = New System.Drawing.Point(255, 59)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(31, 20)
-        Me.btnSelectParserFile.TabIndex = 20
+        Me.btnSelectParserFile.TabIndex = 14
         Me.btnSelectParserFile.Text = "..."
         Me.btnSelectParserFile.UseVisualStyleBackColor = True
         '
@@ -139,7 +139,7 @@ Partial Class frmList
         Me.btnDontAskAgain.Location = New System.Drawing.Point(511, 364)
         Me.btnDontAskAgain.Name = "btnDontAskAgain"
         Me.btnDontAskAgain.Size = New System.Drawing.Size(94, 23)
-        Me.btnDontAskAgain.TabIndex = 60
+        Me.btnDontAskAgain.TabIndex = 24
         Me.btnDontAskAgain.Text = "Always Ignore"
         Me.ToolTipImportDialog.SetToolTip(Me.btnDontAskAgain, resources.GetString("btnDontAskAgain.ToolTip"))
         Me.btnDontAskAgain.UseVisualStyleBackColor = True
@@ -151,7 +151,7 @@ Partial Class frmList
         Me.chkDontAskAgain.Location = New System.Drawing.Point(191, 369)
         Me.chkDontAskAgain.Name = "chkDontAskAgain"
         Me.chkDontAskAgain.Size = New System.Drawing.Size(15, 14)
-        Me.chkDontAskAgain.TabIndex = 49
+        Me.chkDontAskAgain.TabIndex = 21
         Me.chkDontAskAgain.TabStop = False
         Me.chkDontAskAgain.UseVisualStyleBackColor = True
         Me.chkDontAskAgain.Visible = False
@@ -161,7 +161,7 @@ Partial Class frmList
         Me.ButtonGrabberOptions.Location = New System.Drawing.Point(311, 59)
         Me.ButtonGrabberOptions.Name = "ButtonGrabberOptions"
         Me.ButtonGrabberOptions.Size = New System.Drawing.Size(101, 20)
-        Me.ButtonGrabberOptions.TabIndex = 71
+        Me.ButtonGrabberOptions.TabIndex = 15
         Me.ButtonGrabberOptions.Text = "Grabber Options"
         Me.ToolTipImportDialog.SetToolTip(Me.ButtonGrabberOptions, "This starts the ""Grabber Interface"" " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and allows you to either change user settin" & _
                 "gs " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or modify the grabber script.")
@@ -173,7 +173,7 @@ Partial Class frmList
         Me.txtSearchintYear.Location = New System.Drawing.Point(638, 32)
         Me.txtSearchintYear.Name = "txtSearchintYear"
         Me.txtSearchintYear.Size = New System.Drawing.Size(44, 20)
-        Me.txtSearchintYear.TabIndex = 72
+        Me.txtSearchintYear.TabIndex = 8
         Me.txtSearchintYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtSearchhintIMDB_Id
@@ -181,7 +181,7 @@ Partial Class frmList
         Me.txtSearchhintIMDB_Id.Location = New System.Drawing.Point(766, 32)
         Me.txtSearchhintIMDB_Id.Name = "txtSearchhintIMDB_Id"
         Me.txtSearchhintIMDB_Id.Size = New System.Drawing.Size(78, 20)
-        Me.txtSearchhintIMDB_Id.TabIndex = 73
+        Me.txtSearchhintIMDB_Id.TabIndex = 10
         '
         'Label1
         '
@@ -189,7 +189,7 @@ Partial Class frmList
         Me.Label1.Location = New System.Drawing.Point(571, 29)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(61, 26)
-        Me.Label1.TabIndex = 74
+        Me.Label1.TabIndex = 7
         Me.Label1.Text = "Searchhint " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Year"
         Me.ToolTipImportDialog.SetToolTip(Me.Label1, "If a year can be retrieved from the directory " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or file name, the result is shown" & _
                 " here.")
@@ -200,7 +200,7 @@ Partial Class frmList
         Me.Label2.Location = New System.Drawing.Point(703, 29)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 26)
-        Me.Label2.TabIndex = 75
+        Me.Label2.TabIndex = 9
         Me.Label2.Text = "Searchhint " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "IMDB_Id"
         Me.ToolTipImportDialog.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
@@ -210,7 +210,7 @@ Partial Class frmList
         Me.btnCancelFromDialog.Location = New System.Drawing.Point(244, 364)
         Me.btnCancelFromDialog.Name = "btnCancelFromDialog"
         Me.btnCancelFromDialog.Size = New System.Drawing.Size(97, 23)
-        Me.btnCancelFromDialog.TabIndex = 76
+        Me.btnCancelFromDialog.TabIndex = 22
         Me.btnCancelFromDialog.Text = "Cancel Grabbing"
         Me.ToolTipImportDialog.SetToolTip(Me.btnCancelFromDialog, "Cancel current import.")
         Me.btnCancelFromDialog.UseVisualStyleBackColor = True
@@ -221,14 +221,14 @@ Partial Class frmList
         Me.txtTmpParserFilePathShort.Location = New System.Drawing.Point(96, 59)
         Me.txtTmpParserFilePathShort.Name = "txtTmpParserFilePathShort"
         Me.txtTmpParserFilePathShort.Size = New System.Drawing.Size(137, 20)
-        Me.txtTmpParserFilePathShort.TabIndex = 77
+        Me.txtTmpParserFilePathShort.TabIndex = 13
         '
         'btnSearchAgainWithIMDB_Id
         '
         Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(706, 59)
         Me.btnSearchAgainWithIMDB_Id.Name = "btnSearchAgainWithIMDB_Id"
         Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(138, 20)
-        Me.btnSearchAgainWithIMDB_Id.TabIndex = 78
+        Me.btnSearchAgainWithIMDB_Id.TabIndex = 17
         Me.btnSearchAgainWithIMDB_Id.Text = "Search IMDB"
         Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAgainWithIMDB_Id, "Performs a search based on IMDB id entered above.")
         Me.btnSearchAgainWithIMDB_Id.UseVisualStyleBackColor = True
@@ -239,7 +239,7 @@ Partial Class frmList
         Me.Label3.Location = New System.Drawing.Point(15, 62)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(75, 13)
-        Me.Label3.TabIndex = 79
+        Me.Label3.TabIndex = 2
         Me.Label3.Text = "Grabber Script"
         Me.ToolTipImportDialog.SetToolTip(Me.Label3, "You can change the grabber script used for retrieving internet data." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Useful, if " & _
                 "the default script does not find a result - so you can try " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "other internet site" & _
@@ -251,7 +251,7 @@ Partial Class frmList
         Me.Label4.Location = New System.Drawing.Point(15, 35)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(64, 13)
-        Me.Label4.TabIndex = 80
+        Me.Label4.TabIndex = 1
         Me.Label4.Text = "Search Title"
         Me.ToolTipImportDialog.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
@@ -263,7 +263,7 @@ Partial Class frmList
         Me.txtSource.Location = New System.Drawing.Point(96, 6)
         Me.txtSource.Name = "txtSource"
         Me.txtSource.Size = New System.Drawing.Size(748, 20)
-        Me.txtSource.TabIndex = 81
+        Me.txtSource.TabIndex = 3
         '
         'LabelSourcePath
         '
@@ -271,7 +271,7 @@ Partial Class frmList
         Me.LabelSourcePath.Location = New System.Drawing.Point(15, 9)
         Me.LabelSourcePath.Name = "LabelSourcePath"
         Me.LabelSourcePath.Size = New System.Drawing.Size(73, 13)
-        Me.LabelSourcePath.TabIndex = 82
+        Me.LabelSourcePath.TabIndex = 0
         Me.LabelSourcePath.Text = "Media Source"
         Me.ToolTipImportDialog.SetToolTip(Me.LabelSourcePath, resources.GetString("LabelSourcePath.ToolTip"))
         '
@@ -317,7 +317,7 @@ Partial Class frmList
         Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.lstOptionsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.lstOptionsExt.Size = New System.Drawing.Size(828, 266)
-        Me.lstOptionsExt.TabIndex = 83
+        Me.lstOptionsExt.TabIndex = 18
         '
         'Thumb
         '
@@ -403,7 +403,7 @@ Partial Class frmList
         Me.btnSearchGoogle.Location = New System.Drawing.Point(574, 59)
         Me.btnSearchGoogle.Name = "btnSearchGoogle"
         Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
-        Me.btnSearchGoogle.TabIndex = 84
+        Me.btnSearchGoogle.TabIndex = 16
         Me.btnSearchGoogle.Text = "Search Internet"
         Me.ToolTipImportDialog.SetToolTip(Me.btnSearchGoogle, "Launches the web browser with search title as destination for a common lookup.")
         Me.btnSearchGoogle.UseVisualStyleBackColor = True
@@ -422,7 +422,7 @@ Partial Class frmList
         Me.btnRenameAndCancel.Location = New System.Drawing.Point(374, 364)
         Me.btnRenameAndCancel.Name = "btnRenameAndCancel"
         Me.btnRenameAndCancel.Size = New System.Drawing.Size(106, 23)
-        Me.btnRenameAndCancel.TabIndex = 85
+        Me.btnRenameAndCancel.TabIndex = 23
         Me.btnRenameAndCancel.Text = "rename and ignore"
         Me.ToolTipImportDialog.SetToolTip(Me.btnRenameAndCancel, resources.GetString("btnRenameAndCancel.ToolTip"))
         Me.btnRenameAndCancel.UseVisualStyleBackColor = True
@@ -433,7 +433,7 @@ Partial Class frmList
         Me.btnSearchAllPages.Location = New System.Drawing.Point(126, 364)
         Me.btnSearchAllPages.Name = "btnSearchAllPages"
         Me.btnSearchAllPages.Size = New System.Drawing.Size(22, 23)
-        Me.btnSearchAllPages.TabIndex = 89
+        Me.btnSearchAllPages.TabIndex = 20
         Me.btnSearchAllPages.Text = ">"
         Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAllPages, "For grabbers supporting multiple pages, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "you can show search results of all page" & _
                 "s." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "When using simple search expressions, this can result " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "in many resu" & _
@@ -445,7 +445,7 @@ Partial Class frmList
         Me.txtSourceFull.Location = New System.Drawing.Point(501, 6)
         Me.txtSourceFull.Name = "txtSourceFull"
         Me.txtSourceFull.Size = New System.Drawing.Size(44, 20)
-        Me.txtSourceFull.TabIndex = 86
+        Me.txtSourceFull.TabIndex = 5
         Me.txtSourceFull.Visible = False
         '
         'txtSourceFullAllPath
@@ -453,7 +453,7 @@ Partial Class frmList
         Me.txtSourceFullAllPath.Location = New System.Drawing.Point(374, 6)
         Me.txtSourceFullAllPath.Name = "txtSourceFullAllPath"
         Me.txtSourceFullAllPath.Size = New System.Drawing.Size(38, 20)
-        Me.txtSourceFullAllPath.TabIndex = 87
+        Me.txtSourceFullAllPath.TabIndex = 4
         Me.txtSourceFullAllPath.Visible = False
         '
         'pbCoverPreview

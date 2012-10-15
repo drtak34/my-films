@@ -33,13 +33,13 @@ Partial Class Form1
         Dim SiteLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -634,7 +634,7 @@ Partial Class Form1
         OwnerLabel.Location = New System.Drawing.Point(8, 13)
         OwnerLabel.Name = "OwnerLabel"
         OwnerLabel.Size = New System.Drawing.Size(41, 13)
-        OwnerLabel.TabIndex = 5
+        OwnerLabel.TabIndex = 0
         OwnerLabel.Text = "Owner:"
         '
         'MailLabel
@@ -643,7 +643,7 @@ Partial Class Form1
         MailLabel.Location = New System.Drawing.Point(8, 39)
         MailLabel.Name = "MailLabel"
         MailLabel.Size = New System.Drawing.Size(29, 13)
-        MailLabel.TabIndex = 7
+        MailLabel.TabIndex = 4
         MailLabel.Text = "Mail:"
         '
         'SiteLabel
@@ -652,7 +652,7 @@ Partial Class Form1
         SiteLabel.Location = New System.Drawing.Point(303, 13)
         SiteLabel.Name = "SiteLabel"
         SiteLabel.Size = New System.Drawing.Size(28, 13)
-        SiteLabel.TabIndex = 9
+        SiteLabel.TabIndex = 2
         SiteLabel.Text = "Site:"
         '
         'DescriptionLabel
@@ -661,7 +661,7 @@ Partial Class Form1
         DescriptionLabel.Location = New System.Drawing.Point(303, 39)
         DescriptionLabel.Name = "DescriptionLabel"
         DescriptionLabel.Size = New System.Drawing.Size(63, 13)
-        DescriptionLabel.TabIndex = 11
+        DescriptionLabel.TabIndex = 6
         DescriptionLabel.Text = "Description:"
         '
         'FolderBrowserDialog1
@@ -713,7 +713,7 @@ Partial Class Form1
         Me.btnOpenLog.Location = New System.Drawing.Point(410, 549)
         Me.btnOpenLog.Name = "btnOpenLog"
         Me.btnOpenLog.Size = New System.Drawing.Size(75, 23)
-        Me.btnOpenLog.TabIndex = 108
+        Me.btnOpenLog.TabIndex = 8
         Me.btnOpenLog.Text = "Open Log"
         Me.btnOpenLog.UseVisualStyleBackColor = True
         '
@@ -723,7 +723,7 @@ Partial Class Form1
         Me.Label_VersionNumber.Location = New System.Drawing.Point(23, 14)
         Me.Label_VersionNumber.Name = "Label_VersionNumber"
         Me.Label_VersionNumber.Size = New System.Drawing.Size(71, 13)
-        Me.Label_VersionNumber.TabIndex = 55
+        Me.Label_VersionNumber.TabIndex = 0
         Me.Label_VersionNumber.Text = "V0.0.0.00000"
         Me.Label_VersionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -733,7 +733,7 @@ Partial Class Form1
         Me.LinkLabelMyFilmsWiki.Location = New System.Drawing.Point(111, 14)
         Me.LinkLabelMyFilmsWiki.Name = "LinkLabelMyFilmsWiki"
         Me.LinkLabelMyFilmsWiki.Size = New System.Drawing.Size(68, 13)
-        Me.LinkLabelMyFilmsWiki.TabIndex = 107
+        Me.LinkLabelMyFilmsWiki.TabIndex = 1
         Me.LinkLabelMyFilmsWiki.TabStop = True
         Me.LinkLabelMyFilmsWiki.Text = "MyFilms Wiki"
         '
@@ -742,7 +742,7 @@ Partial Class Form1
         Me.Label88.Location = New System.Drawing.Point(19, 56)
         Me.Label88.Name = "Label88"
         Me.Label88.Size = New System.Drawing.Size(552, 60)
-        Me.Label88.TabIndex = 105
+        Me.Label88.TabIndex = 2
         Me.Label88.Text = resources.GetString("Label88.Text")
         '
         'GroupBox27
@@ -755,7 +755,7 @@ Partial Class Form1
         Me.GroupBox27.Location = New System.Drawing.Point(11, 239)
         Me.GroupBox27.Name = "GroupBox27"
         Me.GroupBox27.Size = New System.Drawing.Size(572, 83)
-        Me.GroupBox27.TabIndex = 63
+        Me.GroupBox27.TabIndex = 4
         Me.GroupBox27.TabStop = False
         Me.GroupBox27.Text = "Importer Options ..."
         '
@@ -765,7 +765,7 @@ Partial Class Form1
         Me.chkDontAskInteractive.Location = New System.Drawing.Point(364, 12)
         Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
         Me.chkDontAskInteractive.Size = New System.Drawing.Size(129, 17)
-        Me.chkDontAskInteractive.TabIndex = 59
+        Me.chkDontAskInteractive.TabIndex = 2
         Me.chkDontAskInteractive.Text = "Don't ask, if no match"
         Me.ToolTip1.SetToolTip(Me.chkDontAskInteractive, resources.GetString("chkDontAskInteractive.ToolTip"))
         Me.chkDontAskInteractive.UseVisualStyleBackColor = True
@@ -776,7 +776,7 @@ Partial Class Form1
         Me.Label24.Location = New System.Drawing.Point(12, 28)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(85, 26)
-        Me.Label24.TabIndex = 51
+        Me.Label24.TabIndex = 0
         Me.Label24.Text = "Internet Lookup " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Behaviour"
         '
         'chkImportOnInternetFailIgnoreWhenInteractive
@@ -785,7 +785,7 @@ Partial Class Form1
         Me.chkImportOnInternetFailIgnoreWhenInteractive.Location = New System.Drawing.Point(364, 58)
         Me.chkImportOnInternetFailIgnoreWhenInteractive.Name = "chkImportOnInternetFailIgnoreWhenInteractive"
         Me.chkImportOnInternetFailIgnoreWhenInteractive.Size = New System.Drawing.Size(196, 17)
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.TabIndex = 61
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.TabIndex = 4
         Me.chkImportOnInternetFailIgnoreWhenInteractive.Text = "Don't Import File in Interactive Mode"
         Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFailIgnoreWhenInteractive, "If you want AMCupdater to import files in background mode (MyFIlms global update)" & _
                 ", " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "but do NOT want AMCupdater to import files for AMCupdater interactive GUI mo" & _
@@ -799,7 +799,7 @@ Partial Class Form1
         Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(103, 33)
         Me.cbInternetLookupBehaviour.Name = "cbInternetLookupBehaviour"
         Me.cbInternetLookupBehaviour.Size = New System.Drawing.Size(198, 21)
-        Me.cbInternetLookupBehaviour.TabIndex = 9
+        Me.cbInternetLookupBehaviour.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.cbInternetLookupBehaviour, resources.GetString("cbInternetLookupBehaviour.ToolTip"))
         '
         'chkImportOnInternetFail
@@ -808,7 +808,7 @@ Partial Class Form1
         Me.chkImportOnInternetFail.Location = New System.Drawing.Point(364, 35)
         Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
         Me.chkImportOnInternetFail.Size = New System.Drawing.Size(184, 17)
-        Me.chkImportOnInternetFail.TabIndex = 0
+        Me.chkImportOnInternetFail.TabIndex = 3
         Me.chkImportOnInternetFail.Text = "Import File if Internet Lookup Fails"
         Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, resources.GetString("chkImportOnInternetFail.ToolTip"))
         Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
@@ -825,7 +825,7 @@ Partial Class Form1
         Me.GroupBox23.Location = New System.Drawing.Point(11, 337)
         Me.GroupBox23.Name = "GroupBox23"
         Me.GroupBox23.Size = New System.Drawing.Size(572, 79)
-        Me.GroupBox23.TabIndex = 104
+        Me.GroupBox23.TabIndex = 5
         Me.GroupBox23.TabStop = False
         Me.GroupBox23.Text = "Internet Grabber Options ..."
         '
@@ -835,7 +835,7 @@ Partial Class Form1
         Me.txtParserFilePathDisplay.Location = New System.Drawing.Point(103, 17)
         Me.txtParserFilePathDisplay.Name = "txtParserFilePathDisplay"
         Me.txtParserFilePathDisplay.Size = New System.Drawing.Size(135, 20)
-        Me.txtParserFilePathDisplay.TabIndex = 62
+        Me.txtParserFilePathDisplay.TabIndex = 1
         '
         'cbTitleHandling
         '
@@ -846,7 +846,7 @@ Partial Class Form1
         Me.cbTitleHandling.Location = New System.Drawing.Point(103, 43)
         Me.cbTitleHandling.Name = "cbTitleHandling"
         Me.cbTitleHandling.Size = New System.Drawing.Size(198, 21)
-        Me.cbTitleHandling.TabIndex = 40
+        Me.cbTitleHandling.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.cbTitleHandling, resources.GetString("cbTitleHandling.ToolTip"))
         '
         'Label43
@@ -855,7 +855,7 @@ Partial Class Form1
         Me.Label43.Location = New System.Drawing.Point(11, 41)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(86, 26)
-        Me.Label43.TabIndex = 39
+        Me.Label43.TabIndex = 4
         Me.Label43.Text = "Title and " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Search Handling"
         '
         'Button1
@@ -863,7 +863,7 @@ Partial Class Form1
         Me.Button1.Location = New System.Drawing.Point(364, 17)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(116, 20)
-        Me.Button1.TabIndex = 51
+        Me.Button1.TabIndex = 3
         Me.Button1.Text = "Grabber Options"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -873,7 +873,7 @@ Partial Class Form1
         Me.btnSelectParserFile.Location = New System.Drawing.Point(269, 17)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(32, 20)
-        Me.btnSelectParserFile.TabIndex = 5
+        Me.btnSelectParserFile.TabIndex = 2
         Me.btnSelectParserFile.Text = "..."
         Me.btnSelectParserFile.UseVisualStyleBackColor = True
         '
@@ -883,7 +883,7 @@ Partial Class Form1
         Me.Label23.Location = New System.Drawing.Point(11, 20)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(73, 13)
-        Me.Label23.TabIndex = 42
+        Me.Label23.TabIndex = 0
         Me.Label23.Text = "Grabber script"
         '
         'txtParserFilePath
@@ -906,7 +906,7 @@ Partial Class Form1
         Me.GroupBox17.Location = New System.Drawing.Point(11, 156)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(572, 67)
-        Me.GroupBox17.TabIndex = 103
+        Me.GroupBox17.TabIndex = 3
         Me.GroupBox17.TabStop = False
         Me.GroupBox17.Text = "Options for File Handling ..."
         '
@@ -916,7 +916,7 @@ Partial Class Form1
         Me.chkPurgeMissingAlways.Location = New System.Drawing.Point(180, 42)
         Me.chkPurgeMissingAlways.Name = "chkPurgeMissingAlways"
         Me.chkPurgeMissingAlways.Size = New System.Drawing.Size(220, 17)
-        Me.chkPurgeMissingAlways.TabIndex = 9
+        Me.chkPurgeMissingAlways.TabIndex = 4
         Me.chkPurgeMissingAlways.Text = "Purge Orphans when Source unavailable"
         Me.ToolTip1.SetToolTip(Me.chkPurgeMissingAlways, resources.GetString("chkPurgeMissingAlways.ToolTip"))
         Me.chkPurgeMissingAlways.UseVisualStyleBackColor = True
@@ -927,7 +927,7 @@ Partial Class Form1
         Me.chkRescanMovedFiles.Location = New System.Drawing.Point(406, 42)
         Me.chkRescanMovedFiles.Name = "chkRescanMovedFiles"
         Me.chkRescanMovedFiles.Size = New System.Drawing.Size(128, 17)
-        Me.chkRescanMovedFiles.TabIndex = 8
+        Me.chkRescanMovedFiles.TabIndex = 5
         Me.chkRescanMovedFiles.Text = "Re-Scan Moved Files"
         Me.ToolTip1.SetToolTip(Me.chkRescanMovedFiles, "Forces a refresh of file-based and online data for a file when it is found to hav" & _
                 "e moved.")
@@ -939,7 +939,7 @@ Partial Class Form1
         Me.chkProhibitInternetLookup.Location = New System.Drawing.Point(406, 19)
         Me.chkProhibitInternetLookup.Name = "chkProhibitInternetLookup"
         Me.chkProhibitInternetLookup.Size = New System.Drawing.Size(139, 17)
-        Me.chkProhibitInternetLookup.TabIndex = 4
+        Me.chkProhibitInternetLookup.TabIndex = 2
         Me.chkProhibitInternetLookup.Text = "Prohibit Internet Lookup"
         Me.ToolTip1.SetToolTip(Me.chkProhibitInternetLookup, "Global override option to disable all Internet-based functionality.")
         Me.chkProhibitInternetLookup.UseVisualStyleBackColor = True
@@ -950,7 +950,7 @@ Partial Class Form1
         Me.chkPurgeMissing.Location = New System.Drawing.Point(180, 19)
         Me.chkPurgeMissing.Name = "chkPurgeMissing"
         Me.chkPurgeMissing.Size = New System.Drawing.Size(135, 17)
-        Me.chkPurgeMissing.TabIndex = 5
+        Me.chkPurgeMissing.TabIndex = 1
         Me.chkPurgeMissing.Text = "Purge Orphan Records"
         Me.ToolTip1.SetToolTip(Me.chkPurgeMissing, resources.GetString("chkPurgeMissing.ToolTip"))
         Me.chkPurgeMissing.UseVisualStyleBackColor = True
@@ -961,7 +961,7 @@ Partial Class Form1
         Me.chkOverwriteXML.Location = New System.Drawing.Point(12, 19)
         Me.chkOverwriteXML.Name = "chkOverwriteXML"
         Me.chkOverwriteXML.Size = New System.Drawing.Size(115, 17)
-        Me.chkOverwriteXML.TabIndex = 6
+        Me.chkOverwriteXML.TabIndex = 0
         Me.chkOverwriteXML.Text = "Overwrite XML File"
         Me.ToolTip1.SetToolTip(Me.chkOverwriteXML, "Directly over-write the given Ant Movie Catalog database file.")
         Me.chkOverwriteXML.UseVisualStyleBackColor = True
@@ -975,7 +975,7 @@ Partial Class Form1
         Me.chkBackupXMLFirst.Location = New System.Drawing.Point(12, 42)
         Me.chkBackupXMLFirst.Name = "chkBackupXMLFirst"
         Me.chkBackupXMLFirst.Size = New System.Drawing.Size(107, 17)
-        Me.chkBackupXMLFirst.TabIndex = 7
+        Me.chkBackupXMLFirst.TabIndex = 3
         Me.chkBackupXMLFirst.Text = "Backup XML File"
         Me.ToolTip1.SetToolTip(Me.chkBackupXMLFirst, "Back up the Ant Movie Catalog database file before modifying it.")
         Me.chkBackupXMLFirst.UseVisualStyleBackColor = True
@@ -986,7 +986,7 @@ Partial Class Form1
         Me.ToolStripProgressMessage.Location = New System.Drawing.Point(16, 553)
         Me.ToolStripProgressMessage.Name = "ToolStripProgressMessage"
         Me.ToolStripProgressMessage.Size = New System.Drawing.Size(35, 13)
-        Me.ToolStripProgressMessage.TabIndex = 55
+        Me.ToolStripProgressMessage.TabIndex = 7
         Me.ToolStripProgressMessage.Text = "status"
         Me.ToolStripProgressMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -996,7 +996,7 @@ Partial Class Form1
         Me.btnShowHideLog.Location = New System.Drawing.Point(491, 549)
         Me.btnShowHideLog.Name = "btnShowHideLog"
         Me.btnShowHideLog.Size = New System.Drawing.Size(92, 22)
-        Me.btnShowHideLog.TabIndex = 100
+        Me.btnShowHideLog.TabIndex = 9
         Me.btnShowHideLog.Text = "Show Log >>"
         Me.btnShowHideLog.UseVisualStyleBackColor = True
         '
@@ -1013,7 +1013,7 @@ Partial Class Form1
         Me.GroupBox8.Location = New System.Drawing.Point(11, 438)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Size = New System.Drawing.Size(572, 105)
-        Me.GroupBox8.TabIndex = 2
+        Me.GroupBox8.TabIndex = 6
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Begin Import ..."
         '
@@ -1023,7 +1023,7 @@ Partial Class Form1
         Me.BtnImportWatcher.Location = New System.Drawing.Point(500, 32)
         Me.BtnImportWatcher.Name = "BtnImportWatcher"
         Me.BtnImportWatcher.Size = New System.Drawing.Size(60, 57)
-        Me.BtnImportWatcher.TabIndex = 67
+        Me.BtnImportWatcher.TabIndex = 7
         Me.BtnImportWatcher.Text = "Start Import Watcher"
         Me.BtnImportWatcher.UseVisualStyleBackColor = True
         '
@@ -1033,7 +1033,7 @@ Partial Class Form1
         Me.Label16.Location = New System.Drawing.Point(286, 16)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(178, 13)
-        Me.Label16.TabIndex = 66
+        Me.Label16.TabIndex = 2
         Me.Label16.Text = "Or...  Run process steps individually:"
         '
         'btnParseXML
@@ -1041,7 +1041,7 @@ Partial Class Form1
         Me.btnParseXML.Location = New System.Drawing.Point(261, 36)
         Me.btnParseXML.Name = "btnParseXML"
         Me.btnParseXML.Size = New System.Drawing.Size(106, 23)
-        Me.btnParseXML.TabIndex = 2
+        Me.btnParseXML.TabIndex = 3
         Me.btnParseXML.Text = "1 - Scan Movie DB"
         Me.btnParseXML.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnParseXML.UseVisualStyleBackColor = True
@@ -1052,7 +1052,7 @@ Partial Class Form1
         Me.btnFindOrphans.Location = New System.Drawing.Point(261, 66)
         Me.btnFindOrphans.Name = "btnFindOrphans"
         Me.btnFindOrphans.Size = New System.Drawing.Size(106, 23)
-        Me.btnFindOrphans.TabIndex = 4
+        Me.btnFindOrphans.TabIndex = 5
         Me.btnFindOrphans.Text = "3 - Find Orphans"
         Me.btnFindOrphans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnFindOrphans.UseVisualStyleBackColor = True
@@ -1078,7 +1078,7 @@ Partial Class Form1
         Me.btnUpdateXML.Location = New System.Drawing.Point(373, 66)
         Me.btnUpdateXML.Name = "btnUpdateXML"
         Me.btnUpdateXML.Size = New System.Drawing.Size(117, 23)
-        Me.btnUpdateXML.TabIndex = 5
+        Me.btnUpdateXML.TabIndex = 6
         Me.btnUpdateXML.Text = "4 - Update Movie DB"
         Me.btnUpdateXML.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUpdateXML.UseVisualStyleBackColor = True
@@ -1089,7 +1089,7 @@ Partial Class Form1
         Me.btnProcessMovieList.Location = New System.Drawing.Point(373, 36)
         Me.btnProcessMovieList.Name = "btnProcessMovieList"
         Me.btnProcessMovieList.Size = New System.Drawing.Size(117, 23)
-        Me.btnProcessMovieList.TabIndex = 3
+        Me.btnProcessMovieList.TabIndex = 4
         Me.btnProcessMovieList.Text = "2 - Scan Movie Files"
         Me.btnProcessMovieList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnProcessMovieList.UseVisualStyleBackColor = True
@@ -1126,7 +1126,7 @@ Partial Class Form1
         Me.Label20.Location = New System.Drawing.Point(18, 37)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(552, 60)
-        Me.Label20.TabIndex = 106
+        Me.Label20.TabIndex = 0
         Me.Label20.Text = resources.GetString("Label20.Text")
         '
         'GroupBox32
@@ -1137,7 +1137,7 @@ Partial Class Form1
         Me.GroupBox32.Location = New System.Drawing.Point(10, 484)
         Me.GroupBox32.Name = "GroupBox32"
         Me.GroupBox32.Size = New System.Drawing.Size(398, 87)
-        Me.GroupBox32.TabIndex = 103
+        Me.GroupBox32.TabIndex = 4
         Me.GroupBox32.TabStop = False
         Me.GroupBox32.Text = "Begin Update ..."
         '
@@ -1149,7 +1149,7 @@ Partial Class Form1
         Me.btnManualCancel.Location = New System.Drawing.Point(263, 21)
         Me.btnManualCancel.Name = "btnManualCancel"
         Me.btnManualCancel.Size = New System.Drawing.Size(110, 57)
-        Me.btnManualCancel.TabIndex = 102
+        Me.btnManualCancel.TabIndex = 2
         Me.btnManualCancel.Text = "Cancel"
         Me.btnManualCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnManualCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
@@ -1162,7 +1162,7 @@ Partial Class Form1
         Me.btnManualDoTest.Location = New System.Drawing.Point(8, 21)
         Me.btnManualDoTest.Name = "btnManualDoTest"
         Me.btnManualDoTest.Size = New System.Drawing.Size(110, 57)
-        Me.btnManualDoTest.TabIndex = 50
+        Me.btnManualDoTest.TabIndex = 0
         Me.btnManualDoTest.Text = "Test " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Params"
         Me.btnManualDoTest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnManualDoTest.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
@@ -1176,7 +1176,7 @@ Partial Class Form1
         Me.btnManualApplyChanges.Location = New System.Drawing.Point(124, 21)
         Me.btnManualApplyChanges.Name = "btnManualApplyChanges"
         Me.btnManualApplyChanges.Size = New System.Drawing.Size(110, 57)
-        Me.btnManualApplyChanges.TabIndex = 55
+        Me.btnManualApplyChanges.TabIndex = 1
         Me.btnManualApplyChanges.Text = "Apply Changes"
         Me.btnManualApplyChanges.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnManualApplyChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
@@ -1195,7 +1195,7 @@ Partial Class Form1
         Me.grpManualInternetLookupSettings.Location = New System.Drawing.Point(10, 371)
         Me.grpManualInternetLookupSettings.Name = "grpManualInternetLookupSettings"
         Me.grpManualInternetLookupSettings.Size = New System.Drawing.Size(573, 107)
-        Me.grpManualInternetLookupSettings.TabIndex = 101
+        Me.grpManualInternetLookupSettings.TabIndex = 3
         Me.grpManualInternetLookupSettings.TabStop = False
         Me.grpManualInternetLookupSettings.Text = "Internet Grabber Options ..."
         '
@@ -1205,7 +1205,7 @@ Partial Class Form1
         Me.chkManualDontAskInteractive.Location = New System.Drawing.Point(341, 58)
         Me.chkManualDontAskInteractive.Name = "chkManualDontAskInteractive"
         Me.chkManualDontAskInteractive.Size = New System.Drawing.Size(192, 30)
-        Me.chkManualDontAskInteractive.TabIndex = 56
+        Me.chkManualDontAskInteractive.TabIndex = 6
         Me.chkManualDontAskInteractive.Text = "Don't ask, if no match" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(no data update, if auto match fails)"
         Me.ToolTip1.SetToolTip(Me.chkManualDontAskInteractive, resources.GetString("chkManualDontAskInteractive.ToolTip"))
         Me.chkManualDontAskInteractive.UseVisualStyleBackColor = True
@@ -1216,14 +1216,14 @@ Partial Class Form1
         Me.txtManualInternetParserPathDisplay.Location = New System.Drawing.Point(99, 35)
         Me.txtManualInternetParserPathDisplay.Name = "txtManualInternetParserPathDisplay"
         Me.txtManualInternetParserPathDisplay.Size = New System.Drawing.Size(174, 20)
-        Me.txtManualInternetParserPathDisplay.TabIndex = 55
+        Me.txtManualInternetParserPathDisplay.TabIndex = 1
         '
         'Button2
         '
         Me.Button2.Location = New System.Drawing.Point(342, 34)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(94, 21)
-        Me.Button2.TabIndex = 54
+        Me.Button2.TabIndex = 3
         Me.Button2.Text = "Grabber Options"
         Me.Button2.UseVisualStyleBackColor = True
         '
@@ -1233,7 +1233,7 @@ Partial Class Form1
         Me.Label42.Location = New System.Drawing.Point(8, 60)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(85, 26)
-        Me.Label42.TabIndex = 53
+        Me.Label42.TabIndex = 4
         Me.Label42.Text = "Internet Lookup " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Behaviour"
         '
         'btnManualSelectInternetParserPath
@@ -1242,7 +1242,7 @@ Partial Class Form1
         Me.btnManualSelectInternetParserPath.Location = New System.Drawing.Point(290, 35)
         Me.btnManualSelectInternetParserPath.Name = "btnManualSelectInternetParserPath"
         Me.btnManualSelectInternetParserPath.Size = New System.Drawing.Size(36, 20)
-        Me.btnManualSelectInternetParserPath.TabIndex = 47
+        Me.btnManualSelectInternetParserPath.TabIndex = 2
         Me.btnManualSelectInternetParserPath.Text = "..."
         Me.btnManualSelectInternetParserPath.UseVisualStyleBackColor = True
         '
@@ -1253,7 +1253,7 @@ Partial Class Form1
         Me.cbManualInternetLookupBehaviour.Location = New System.Drawing.Point(99, 63)
         Me.cbManualInternetLookupBehaviour.Name = "cbManualInternetLookupBehaviour"
         Me.cbManualInternetLookupBehaviour.Size = New System.Drawing.Size(227, 21)
-        Me.cbManualInternetLookupBehaviour.TabIndex = 50
+        Me.cbManualInternetLookupBehaviour.TabIndex = 5
         '
         'txtManualInternetParserPath
         '
@@ -1269,7 +1269,7 @@ Partial Class Form1
         Me.Label41.Location = New System.Drawing.Point(8, 38)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(75, 13)
-        Me.Label41.TabIndex = 51
+        Me.Label41.TabIndex = 0
         Me.Label41.Text = "Grabber Script"
         '
         'btnShowHideLogTest
@@ -1278,7 +1278,7 @@ Partial Class Form1
         Me.btnShowHideLogTest.Location = New System.Drawing.Point(489, 547)
         Me.btnShowHideLogTest.Name = "btnShowHideLogTest"
         Me.btnShowHideLogTest.Size = New System.Drawing.Size(94, 22)
-        Me.btnShowHideLogTest.TabIndex = 100
+        Me.btnShowHideLogTest.TabIndex = 5
         Me.btnShowHideLogTest.Text = "Show Log >>"
         Me.btnShowHideLogTest.UseVisualStyleBackColor = True
         '
@@ -1314,7 +1314,7 @@ Partial Class Form1
         Me.cbSkipExcludedMovieFiles.Location = New System.Drawing.Point(341, 102)
         Me.cbSkipExcludedMovieFiles.Name = "cbSkipExcludedMovieFiles"
         Me.cbSkipExcludedMovieFiles.Size = New System.Drawing.Size(202, 17)
-        Me.cbSkipExcludedMovieFiles.TabIndex = 49
+        Me.cbSkipExcludedMovieFiles.TabIndex = 15
         Me.cbSkipExcludedMovieFiles.Text = "Skip Movies in 'Excluded Movies File'"
         Me.ToolTip1.SetToolTip(Me.cbSkipExcludedMovieFiles, "If checked, files contained in " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'Excluded Movie Files' will be skipped.")
         Me.cbSkipExcludedMovieFiles.UseVisualStyleBackColor = True
@@ -1328,7 +1328,7 @@ Partial Class Form1
         Me.cbManualParameterAndOr.Location = New System.Drawing.Point(6, 49)
         Me.cbManualParameterAndOr.Name = "cbManualParameterAndOr"
         Me.cbManualParameterAndOr.Size = New System.Drawing.Size(53, 21)
-        Me.cbManualParameterAndOr.TabIndex = 3
+        Me.cbManualParameterAndOr.TabIndex = 6
         '
         'lblManualParametersValue2
         '
@@ -1336,7 +1336,7 @@ Partial Class Form1
         Me.lblManualParametersValue2.Location = New System.Drawing.Point(339, 57)
         Me.lblManualParametersValue2.Name = "lblManualParametersValue2"
         Me.lblManualParametersValue2.Size = New System.Drawing.Size(34, 13)
-        Me.lblManualParametersValue2.TabIndex = 48
+        Me.lblManualParametersValue2.TabIndex = 11
         Me.lblManualParametersValue2.Text = "Value"
         Me.lblManualParametersValue2.Visible = False
         '
@@ -1346,7 +1346,7 @@ Partial Class Form1
         Me.lblManualParametersOperator2.Location = New System.Drawing.Point(219, 58)
         Me.lblManualParametersOperator2.Name = "lblManualParametersOperator2"
         Me.lblManualParametersOperator2.Size = New System.Drawing.Size(48, 13)
-        Me.lblManualParametersOperator2.TabIndex = 47
+        Me.lblManualParametersOperator2.TabIndex = 9
         Me.lblManualParametersOperator2.Text = "Operator"
         Me.lblManualParametersOperator2.Visible = False
         '
@@ -1355,7 +1355,7 @@ Partial Class Form1
         Me.txtManualParameterValue2.Location = New System.Drawing.Point(341, 75)
         Me.txtManualParameterValue2.Name = "txtManualParameterValue2"
         Me.txtManualParameterValue2.Size = New System.Drawing.Size(207, 20)
-        Me.txtManualParameterValue2.TabIndex = 6
+        Me.txtManualParameterValue2.TabIndex = 12
         Me.txtManualParameterValue2.Visible = False
         Me.txtManualParameterValue2.WordWrap = False
         '
@@ -1367,7 +1367,7 @@ Partial Class Form1
         Me.cbManualParameterOperator2.Location = New System.Drawing.Point(215, 74)
         Me.cbManualParameterOperator2.Name = "cbManualParameterOperator2"
         Me.cbManualParameterOperator2.Size = New System.Drawing.Size(111, 21)
-        Me.cbManualParameterOperator2.TabIndex = 5
+        Me.cbManualParameterOperator2.TabIndex = 10
         Me.cbManualParameterOperator2.Visible = False
         '
         'lblManualParametersField2
@@ -1376,7 +1376,7 @@ Partial Class Form1
         Me.lblManualParametersField2.Location = New System.Drawing.Point(68, 58)
         Me.lblManualParametersField2.Name = "lblManualParametersField2"
         Me.lblManualParametersField2.Size = New System.Drawing.Size(47, 13)
-        Me.lblManualParametersField2.TabIndex = 46
+        Me.lblManualParametersField2.TabIndex = 7
         Me.lblManualParametersField2.Text = "DB Field"
         Me.lblManualParametersField2.Visible = False
         '
@@ -1387,7 +1387,7 @@ Partial Class Form1
         Me.cbManualParameterFieldList2.Location = New System.Drawing.Point(68, 74)
         Me.cbManualParameterFieldList2.Name = "cbManualParameterFieldList2"
         Me.cbManualParameterFieldList2.Size = New System.Drawing.Size(132, 21)
-        Me.cbManualParameterFieldList2.TabIndex = 4
+        Me.cbManualParameterFieldList2.TabIndex = 8
         Me.cbManualParameterFieldList2.Visible = False
         '
         'Label21
@@ -1405,7 +1405,7 @@ Partial Class Form1
         Me.chkManualParametersUpdateAll.Location = New System.Drawing.Point(49, 101)
         Me.chkManualParametersUpdateAll.Name = "chkManualParametersUpdateAll"
         Me.chkManualParametersUpdateAll.Size = New System.Drawing.Size(115, 17)
-        Me.chkManualParametersUpdateAll.TabIndex = 7
+        Me.chkManualParametersUpdateAll.TabIndex = 14
         Me.chkManualParametersUpdateAll.Text = "Update all records."
         Me.chkManualParametersUpdateAll.UseVisualStyleBackColor = True
         '
@@ -1415,7 +1415,7 @@ Partial Class Form1
         Me.lblManualParametersValue1.Location = New System.Drawing.Point(339, 15)
         Me.lblManualParametersValue1.Name = "lblManualParametersValue1"
         Me.lblManualParametersValue1.Size = New System.Drawing.Size(34, 13)
-        Me.lblManualParametersValue1.TabIndex = 10
+        Me.lblManualParametersValue1.TabIndex = 4
         Me.lblManualParametersValue1.Text = "Value"
         Me.lblManualParametersValue1.Visible = False
         '
@@ -1425,7 +1425,7 @@ Partial Class Form1
         Me.Label19.Location = New System.Drawing.Point(219, 16)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(48, 13)
-        Me.Label19.TabIndex = 9
+        Me.Label19.TabIndex = 2
         Me.Label19.Text = "Operator"
         '
         'txtManualParameterValue1
@@ -1433,7 +1433,7 @@ Partial Class Form1
         Me.txtManualParameterValue1.Location = New System.Drawing.Point(341, 32)
         Me.txtManualParameterValue1.Name = "txtManualParameterValue1"
         Me.txtManualParameterValue1.Size = New System.Drawing.Size(207, 20)
-        Me.txtManualParameterValue1.TabIndex = 2
+        Me.txtManualParameterValue1.TabIndex = 5
         Me.txtManualParameterValue1.Visible = False
         '
         'cbManualParameterOperator1
@@ -1444,7 +1444,7 @@ Partial Class Form1
         Me.cbManualParameterOperator1.Location = New System.Drawing.Point(215, 32)
         Me.cbManualParameterOperator1.Name = "cbManualParameterOperator1"
         Me.cbManualParameterOperator1.Size = New System.Drawing.Size(111, 21)
-        Me.cbManualParameterOperator1.TabIndex = 1
+        Me.cbManualParameterOperator1.TabIndex = 3
         '
         'Label18
         '
@@ -1452,7 +1452,7 @@ Partial Class Form1
         Me.Label18.Location = New System.Drawing.Point(68, 16)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(47, 13)
-        Me.Label18.TabIndex = 6
+        Me.Label18.TabIndex = 0
         Me.Label18.Text = "DB Field"
         '
         'cbManualParameterFieldList1
@@ -1462,7 +1462,7 @@ Partial Class Form1
         Me.cbManualParameterFieldList1.Location = New System.Drawing.Point(68, 32)
         Me.cbManualParameterFieldList1.Name = "cbManualParameterFieldList1"
         Me.cbManualParameterFieldList1.Size = New System.Drawing.Size(132, 21)
-        Me.cbManualParameterFieldList1.TabIndex = 0
+        Me.cbManualParameterFieldList1.TabIndex = 1
         '
         'GroupBox10
         '
@@ -1495,7 +1495,7 @@ Partial Class Form1
         Me.chkManualNfoFilesOnlyAddMissing.Location = New System.Drawing.Point(49, 80)
         Me.chkManualNfoFilesOnlyAddMissing.Name = "chkManualNfoFilesOnlyAddMissing"
         Me.chkManualNfoFilesOnlyAddMissing.Size = New System.Drawing.Size(127, 17)
-        Me.chkManualNfoFilesOnlyAddMissing.TabIndex = 50
+        Me.chkManualNfoFilesOnlyAddMissing.TabIndex = 7
         Me.chkManualNfoFilesOnlyAddMissing.Text = "Don't overrite existing"
         Me.chkManualNfoFilesOnlyAddMissing.UseVisualStyleBackColor = True
         Me.chkManualNfoFilesOnlyAddMissing.Visible = False
@@ -1507,7 +1507,7 @@ Partial Class Form1
         Me.cbManualNfoFileHandling.Location = New System.Drawing.Point(342, 19)
         Me.cbManualNfoFileHandling.Name = "cbManualNfoFileHandling"
         Me.cbManualNfoFileHandling.Size = New System.Drawing.Size(206, 21)
-        Me.cbManualNfoFileHandling.TabIndex = 49
+        Me.cbManualNfoFileHandling.TabIndex = 3
         Me.cbManualNfoFileHandling.Visible = False
         '
         'lblManualNfoFileHandling
@@ -1516,7 +1516,7 @@ Partial Class Form1
         Me.lblManualNfoFileHandling.Location = New System.Drawing.Point(234, 24)
         Me.lblManualNfoFileHandling.Name = "lblManualNfoFileHandling"
         Me.lblManualNfoFileHandling.Size = New System.Drawing.Size(88, 13)
-        Me.lblManualNfoFileHandling.TabIndex = 16
+        Me.lblManualNfoFileHandling.TabIndex = 1
         Me.lblManualNfoFileHandling.Text = "NFO file handling"
         Me.lblManualNfoFileHandling.Visible = False
         '
@@ -1537,7 +1537,7 @@ Partial Class Form1
         Me.cbManualSelectFieldDestination.Location = New System.Drawing.Point(342, 69)
         Me.cbManualSelectFieldDestination.Name = "cbManualSelectFieldDestination"
         Me.cbManualSelectFieldDestination.Size = New System.Drawing.Size(206, 21)
-        Me.cbManualSelectFieldDestination.TabIndex = 14
+        Me.cbManualSelectFieldDestination.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.cbManualSelectFieldDestination, "Destination field for ""Copy Value"" operation")
         Me.cbManualSelectFieldDestination.Visible = False
         '
@@ -1547,7 +1547,7 @@ Partial Class Form1
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Location = New System.Drawing.Point(49, 90)
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Name = "chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData"
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Size = New System.Drawing.Size(181, 17)
-        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.TabIndex = 13
+        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.TabIndex = 8
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Text = "Only update with non-empty data"
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.UseVisualStyleBackColor = True
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = False
@@ -1558,7 +1558,7 @@ Partial Class Form1
         Me.chkManualUpdateRecordsOnlyMissingData.Location = New System.Drawing.Point(49, 73)
         Me.chkManualUpdateRecordsOnlyMissingData.Name = "chkManualUpdateRecordsOnlyMissingData"
         Me.chkManualUpdateRecordsOnlyMissingData.Size = New System.Drawing.Size(129, 17)
-        Me.chkManualUpdateRecordsOnlyMissingData.TabIndex = 12
+        Me.chkManualUpdateRecordsOnlyMissingData.TabIndex = 6
         Me.chkManualUpdateRecordsOnlyMissingData.Text = "Only add missing data"
         Me.ToolTip1.SetToolTip(Me.chkManualUpdateRecordsOnlyMissingData, "If checked, instead of owerwriting all fields selected on ""Database Fields"" tab w" & _
                 "ith the new grabbed data," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "only fields that are empty are filled with data.")
@@ -1570,7 +1570,7 @@ Partial Class Form1
         Me.txtManualOldValue.Location = New System.Drawing.Point(342, 53)
         Me.txtManualOldValue.Name = "txtManualOldValue"
         Me.txtManualOldValue.Size = New System.Drawing.Size(206, 20)
-        Me.txtManualOldValue.TabIndex = 11
+        Me.txtManualOldValue.TabIndex = 14
         Me.txtManualOldValue.Visible = False
         '
         'lblManualEnterOldValue
@@ -1579,7 +1579,7 @@ Partial Class Form1
         Me.lblManualEnterOldValue.Location = New System.Drawing.Point(251, 56)
         Me.lblManualEnterOldValue.Name = "lblManualEnterOldValue"
         Me.lblManualEnterOldValue.Size = New System.Drawing.Size(53, 13)
-        Me.lblManualEnterOldValue.TabIndex = 10
+        Me.lblManualEnterOldValue.TabIndex = 13
         Me.lblManualEnterOldValue.Text = "Old Value"
         Me.lblManualEnterOldValue.Visible = False
         '
@@ -1591,7 +1591,7 @@ Partial Class Form1
         Me.chkManualMissingFanartDownload.Location = New System.Drawing.Point(279, 23)
         Me.chkManualMissingFanartDownload.Name = "chkManualMissingFanartDownload"
         Me.chkManualMissingFanartDownload.Size = New System.Drawing.Size(218, 17)
-        Me.chkManualMissingFanartDownload.TabIndex = 8
+        Me.chkManualMissingFanartDownload.TabIndex = 2
         Me.chkManualMissingFanartDownload.Text = "Download only for Movies missing Fanart"
         Me.chkManualMissingFanartDownload.UseVisualStyleBackColor = True
         Me.chkManualMissingFanartDownload.Visible = False
@@ -1602,7 +1602,7 @@ Partial Class Form1
         Me.lblManualDatabaseFieldsPrompt.Location = New System.Drawing.Point(5, 44)
         Me.lblManualDatabaseFieldsPrompt.Name = "lblManualDatabaseFieldsPrompt"
         Me.lblManualDatabaseFieldsPrompt.Size = New System.Drawing.Size(205, 26)
-        Me.lblManualDatabaseFieldsPrompt.TabIndex = 5
+        Me.lblManualDatabaseFieldsPrompt.TabIndex = 4
         Me.lblManualDatabaseFieldsPrompt.Text = "Note : Ensure the fields you want updated" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "are selected on the Database Fields ta" & _
             "b." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.lblManualDatabaseFieldsPrompt.Visible = False
@@ -1690,7 +1690,7 @@ Partial Class Form1
         Me.GroupBox_FanartHandling.Location = New System.Drawing.Point(239, 515)
         Me.GroupBox_FanartHandling.Name = "GroupBox_FanartHandling"
         Me.GroupBox_FanartHandling.Size = New System.Drawing.Size(353, 62)
-        Me.GroupBox_FanartHandling.TabIndex = 57
+        Me.GroupBox_FanartHandling.TabIndex = 8
         Me.GroupBox_FanartHandling.TabStop = False
         Me.GroupBox_FanartHandling.Text = "Fanart Handling ..."
         '
@@ -1700,7 +1700,7 @@ Partial Class Form1
         Me.chkLoadPersonImagesWithFanart.Location = New System.Drawing.Point(21, 37)
         Me.chkLoadPersonImagesWithFanart.Name = "chkLoadPersonImagesWithFanart"
         Me.chkLoadPersonImagesWithFanart.Size = New System.Drawing.Size(123, 17)
-        Me.chkLoadPersonImagesWithFanart.TabIndex = 72
+        Me.chkLoadPersonImagesWithFanart.TabIndex = 1
         Me.chkLoadPersonImagesWithFanart.Text = "Load Person Images"
         Me.ToolTip1.SetToolTip(Me.chkLoadPersonImagesWithFanart, resources.GetString("chkLoadPersonImagesWithFanart.ToolTip"))
         Me.chkLoadPersonImagesWithFanart.UseVisualStyleBackColor = True
@@ -1711,7 +1711,7 @@ Partial Class Form1
         Me.chkUseGrabberForFanart.Location = New System.Drawing.Point(21, 17)
         Me.chkUseGrabberForFanart.Name = "chkUseGrabberForFanart"
         Me.chkUseGrabberForFanart.Size = New System.Drawing.Size(121, 17)
-        Me.chkUseGrabberForFanart.TabIndex = 72
+        Me.chkUseGrabberForFanart.TabIndex = 0
         Me.chkUseGrabberForFanart.Text = "Use script for Fanart"
         Me.ToolTip1.SetToolTip(Me.chkUseGrabberForFanart, resources.GetString("chkUseGrabberForFanart.ToolTip"))
         Me.chkUseGrabberForFanart.UseVisualStyleBackColor = True
@@ -1723,7 +1723,7 @@ Partial Class Form1
         Me.cbFanartLimitResolutionMin.Location = New System.Drawing.Point(164, 34)
         Me.cbFanartLimitResolutionMin.Name = "cbFanartLimitResolutionMin"
         Me.cbFanartLimitResolutionMin.Size = New System.Drawing.Size(78, 21)
-        Me.cbFanartLimitResolutionMin.TabIndex = 53
+        Me.cbFanartLimitResolutionMin.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMin, "Sets minimum resolution for fanart to be allowed to download.")
         '
         'lblFanartLimits
@@ -1732,7 +1732,7 @@ Partial Class Form1
         Me.lblFanartLimits.Location = New System.Drawing.Point(166, 13)
         Me.lblFanartLimits.Name = "lblFanartLimits"
         Me.lblFanartLimits.Size = New System.Drawing.Size(66, 13)
-        Me.lblFanartLimits.TabIndex = 52
+        Me.lblFanartLimits.TabIndex = 2
         Me.lblFanartLimits.Text = "Fanart Limits"
         '
         'cbFanartLimitResolutionMax
@@ -1742,7 +1742,7 @@ Partial Class Form1
         Me.cbFanartLimitResolutionMax.Location = New System.Drawing.Point(248, 34)
         Me.cbFanartLimitResolutionMax.Name = "cbFanartLimitResolutionMax"
         Me.cbFanartLimitResolutionMax.Size = New System.Drawing.Size(90, 21)
-        Me.cbFanartLimitResolutionMax.TabIndex = 50
+        Me.cbFanartLimitResolutionMax.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMax, "Sets maximum resolution for fanart to be allowed to download.")
         '
         'cbNumFanartLimitNumber
@@ -1750,7 +1750,7 @@ Partial Class Form1
         Me.cbNumFanartLimitNumber.Location = New System.Drawing.Point(248, 11)
         Me.cbNumFanartLimitNumber.Name = "cbNumFanartLimitNumber"
         Me.cbNumFanartLimitNumber.Size = New System.Drawing.Size(44, 20)
-        Me.cbNumFanartLimitNumber.TabIndex = 51
+        Me.cbNumFanartLimitNumber.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.cbNumFanartLimitNumber, "Limits the number of downloaded fanarts." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """0"" = all available.")
         '
         'GroupBox_TitleHandling
@@ -1770,7 +1770,7 @@ Partial Class Form1
         Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 148)
         Me.GroupBox_TitleHandling.Name = "GroupBox_TitleHandling"
         Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 136)
-        Me.GroupBox_TitleHandling.TabIndex = 54
+        Me.GroupBox_TitleHandling.TabIndex = 4
         Me.GroupBox_TitleHandling.TabStop = False
         Me.GroupBox_TitleHandling.Text = "Title Handling ..."
         '
@@ -1780,7 +1780,7 @@ Partial Class Form1
         Me.Label101.Location = New System.Drawing.Point(170, 38)
         Me.Label101.Name = "Label101"
         Me.Label101.Size = New System.Drawing.Size(36, 13)
-        Me.Label101.TabIndex = 71
+        Me.Label101.TabIndex = 3
         Me.Label101.Text = "Series"
         '
         'cbEditionNameAppliesTo
@@ -1790,7 +1790,7 @@ Partial Class Form1
         Me.cbEditionNameAppliesTo.Location = New System.Drawing.Point(164, 84)
         Me.cbEditionNameAppliesTo.Name = "cbEditionNameAppliesTo"
         Me.cbEditionNameAppliesTo.Size = New System.Drawing.Size(174, 21)
-        Me.cbEditionNameAppliesTo.TabIndex = 55
+        Me.cbEditionNameAppliesTo.TabIndex = 8
         Me.ToolTip1.SetToolTip(Me.cbEditionNameAppliesTo, resources.GetString("cbEditionNameAppliesTo.ToolTip"))
         '
         'txtSeriesNameIdentifier
@@ -1798,7 +1798,7 @@ Partial Class Form1
         Me.txtSeriesNameIdentifier.Location = New System.Drawing.Point(229, 35)
         Me.txtSeriesNameIdentifier.Name = "txtSeriesNameIdentifier"
         Me.txtSeriesNameIdentifier.Size = New System.Drawing.Size(109, 20)
-        Me.txtSeriesNameIdentifier.TabIndex = 70
+        Me.txtSeriesNameIdentifier.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.txtSeriesNameIdentifier, resources.GetString("txtSeriesNameIdentifier.ToolTip"))
         '
         'Label106
@@ -1807,7 +1807,7 @@ Partial Class Form1
         Me.Label106.Location = New System.Drawing.Point(18, 87)
         Me.Label106.Name = "Label106"
         Me.Label106.Size = New System.Drawing.Size(127, 13)
-        Me.Label106.TabIndex = 54
+        Me.Label106.TabIndex = 7
         Me.Label106.Text = "Add Edition Name(s) to ..."
         '
         'Label89
@@ -1816,7 +1816,7 @@ Partial Class Form1
         Me.Label89.Location = New System.Drawing.Point(170, 14)
         Me.Label89.Name = "Label89"
         Me.Label89.Size = New System.Drawing.Size(36, 13)
-        Me.Label89.TabIndex = 53
+        Me.Label89.TabIndex = 1
         Me.Label89.Text = "Group"
         '
         'txtGroupNameIdentifier
@@ -1824,7 +1824,7 @@ Partial Class Form1
         Me.txtGroupNameIdentifier.Location = New System.Drawing.Point(229, 11)
         Me.txtGroupNameIdentifier.Name = "txtGroupNameIdentifier"
         Me.txtGroupNameIdentifier.Size = New System.Drawing.Size(109, 20)
-        Me.txtGroupNameIdentifier.TabIndex = 52
+        Me.txtGroupNameIdentifier.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.txtGroupNameIdentifier, resources.GetString("txtGroupNameIdentifier.ToolTip"))
         '
         'cbGroupNameAppliesTo
@@ -1836,7 +1836,7 @@ Partial Class Form1
         Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(164, 59)
         Me.cbGroupNameAppliesTo.Name = "cbGroupNameAppliesTo"
         Me.cbGroupNameAppliesTo.Size = New System.Drawing.Size(174, 21)
-        Me.cbGroupNameAppliesTo.TabIndex = 44
+        Me.cbGroupNameAppliesTo.TabIndex = 6
         '
         'chkFolderNameIsGroupName
         '
@@ -1844,7 +1844,7 @@ Partial Class Form1
         Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(21, 17)
         Me.chkFolderNameIsGroupName.Name = "chkFolderNameIsGroupName"
         Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(112, 30)
-        Me.chkFolderNameIsGroupName.TabIndex = 42
+        Me.chkFolderNameIsGroupName.TabIndex = 0
         Me.chkFolderNameIsGroupName.Text = "Folder Name " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "as Group Identifier"
         Me.ToolTip1.SetToolTip(Me.chkFolderNameIsGroupName, resources.GetString("chkFolderNameIsGroupName.ToolTip"))
         Me.chkFolderNameIsGroupName.UseVisualStyleBackColor = True
@@ -1855,7 +1855,7 @@ Partial Class Form1
         Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(18, 62)
         Me.lblGroupNameAppliesTo.Name = "lblGroupNameAppliesTo"
         Me.lblGroupNameAppliesTo.Size = New System.Drawing.Size(113, 13)
-        Me.lblGroupNameAppliesTo.TabIndex = 43
+        Me.lblGroupNameAppliesTo.TabIndex = 5
         Me.lblGroupNameAppliesTo.Text = "Add Group Name to ..."
         '
         'cbMasterTitle
@@ -1867,7 +1867,7 @@ Partial Class Form1
         Me.cbMasterTitle.Location = New System.Drawing.Point(164, 109)
         Me.cbMasterTitle.Name = "cbMasterTitle"
         Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
-        Me.cbMasterTitle.TabIndex = 51
+        Me.cbMasterTitle.TabIndex = 10
         Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for internet data search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "It is used for both inte" & _
                 "rnet data (e.g. update records) and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "fanart search and creation.")
         '
@@ -1877,7 +1877,7 @@ Partial Class Form1
         Me.lblMasterTitle.Location = New System.Drawing.Point(18, 112)
         Me.lblMasterTitle.Name = "lblMasterTitle"
         Me.lblMasterTitle.Size = New System.Drawing.Size(62, 13)
-        Me.lblMasterTitle.TabIndex = 50
+        Me.lblMasterTitle.TabIndex = 9
         Me.lblMasterTitle.Text = "Master Title"
         '
         'GroupBox_StorageFieldHandling
@@ -1889,7 +1889,7 @@ Partial Class Form1
         Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 102)
         Me.GroupBox_StorageFieldHandling.Name = "GroupBox_StorageFieldHandling"
         Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 43)
-        Me.GroupBox_StorageFieldHandling.TabIndex = 56
+        Me.GroupBox_StorageFieldHandling.TabIndex = 3
         Me.GroupBox_StorageFieldHandling.TabStop = False
         Me.GroupBox_StorageFieldHandling.Text = "Storage Field Handling ..."
         '
@@ -1899,7 +1899,7 @@ Partial Class Form1
         Me.chkShortNames.Location = New System.Drawing.Point(21, 17)
         Me.chkShortNames.Name = "chkShortNames"
         Me.chkShortNames.Size = New System.Drawing.Size(78, 17)
-        Me.chkShortNames.TabIndex = 69
+        Me.chkShortNames.TabIndex = 0
         Me.chkShortNames.Text = "Name Only"
         Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
                 "les in your setup.")
@@ -1911,7 +1911,7 @@ Partial Class Form1
         Me.Label26.Location = New System.Drawing.Point(158, 12)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(65, 26)
-        Me.Label26.TabIndex = 25
+        Me.Label26.TabIndex = 1
         Me.Label26.Text = "Item for File " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Info Storage"
         '
         'txtDefaultSourceField
@@ -1919,7 +1919,7 @@ Partial Class Form1
         Me.txtDefaultSourceField.Location = New System.Drawing.Point(229, 14)
         Me.txtDefaultSourceField.Name = "txtDefaultSourceField"
         Me.txtDefaultSourceField.Size = New System.Drawing.Size(109, 20)
-        Me.txtDefaultSourceField.TabIndex = 12
+        Me.txtDefaultSourceField.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
                 "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
                 "d to!")
@@ -1933,7 +1933,7 @@ Partial Class Form1
         Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 287)
         Me.GroupBox_MediaLabelFieldHandling.Name = "GroupBox_MediaLabelFieldHandling"
         Me.GroupBox_MediaLabelFieldHandling.Size = New System.Drawing.Size(353, 59)
-        Me.GroupBox_MediaLabelFieldHandling.TabIndex = 55
+        Me.GroupBox_MediaLabelFieldHandling.TabIndex = 5
         Me.GroupBox_MediaLabelFieldHandling.TabStop = False
         Me.GroupBox_MediaLabelFieldHandling.Text = "Media Label Field Handling ..."
         '
@@ -1943,7 +1943,7 @@ Partial Class Form1
         Me.Label13.Location = New System.Drawing.Point(18, 16)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(65, 13)
-        Me.Label13.TabIndex = 68
+        Me.Label13.TabIndex = 0
         Me.Label13.Text = "Media Label"
         '
         'chkReadDVDLabel
@@ -1952,7 +1952,7 @@ Partial Class Form1
         Me.chkReadDVDLabel.Location = New System.Drawing.Point(21, 37)
         Me.chkReadDVDLabel.Name = "chkReadDVDLabel"
         Me.chkReadDVDLabel.Size = New System.Drawing.Size(327, 17)
-        Me.chkReadDVDLabel.TabIndex = 66
+        Me.chkReadDVDLabel.TabIndex = 2
         Me.chkReadDVDLabel.Text = "Try to read DVD Disk Label, Volume Name or UNC server name"
         Me.ToolTip1.SetToolTip(Me.chkReadDVDLabel, resources.GetString("chkReadDVDLabel.ToolTip"))
         Me.chkReadDVDLabel.UseVisualStyleBackColor = True
@@ -1962,7 +1962,7 @@ Partial Class Form1
         Me.txtMediaLabel.Location = New System.Drawing.Point(164, 13)
         Me.txtMediaLabel.Name = "txtMediaLabel"
         Me.txtMediaLabel.Size = New System.Drawing.Size(174, 20)
-        Me.txtMediaLabel.TabIndex = 65
+        Me.txtMediaLabel.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
                 ".")
         '
@@ -1979,7 +1979,7 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 349)
         Me.GroupBox_OtherFieldHandling.Name = "GroupBox_OtherFieldHandling"
         Me.GroupBox_OtherFieldHandling.Size = New System.Drawing.Size(353, 93)
-        Me.GroupBox_OtherFieldHandling.TabIndex = 52
+        Me.GroupBox_OtherFieldHandling.TabIndex = 6
         Me.GroupBox_OtherFieldHandling.TabStop = False
         Me.GroupBox_OtherFieldHandling.Text = "Other Field Handling Options ..."
         '
@@ -1989,7 +1989,7 @@ Partial Class Form1
         Me.chkUseInternetDataForLanguagesField.Location = New System.Drawing.Point(21, 58)
         Me.chkUseInternetDataForLanguagesField.Name = "chkUseInternetDataForLanguagesField"
         Me.chkUseInternetDataForLanguagesField.Size = New System.Drawing.Size(119, 30)
-        Me.chkUseInternetDataForLanguagesField.TabIndex = 68
+        Me.chkUseInternetDataForLanguagesField.TabIndex = 4
         Me.chkUseInternetDataForLanguagesField.Text = "Use Internet Data " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for Languages Field"
         Me.ToolTip1.SetToolTip(Me.chkUseInternetDataForLanguagesField, "If checked, the internet data from the grabber will be used to populate the ""Lang" & _
                 "uages"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If unchecked, mediainfo audio stream languages list will be used." & _
@@ -2002,7 +2002,7 @@ Partial Class Form1
         Me.Label12.Location = New System.Drawing.Point(170, 68)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(63, 13)
-        Me.Label12.TabIndex = 67
+        Me.Label12.TabIndex = 5
         Me.Label12.Text = "Media Type"
         Me.ToolTip1.SetToolTip(Me.Label12, "You can enter a value that will be imported " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "into the ""MediaType"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This a" & _
                 "cts as a ""preset"".")
@@ -2012,7 +2012,7 @@ Partial Class Form1
         Me.txtMediaType.Location = New System.Drawing.Point(248, 65)
         Me.txtMediaType.Name = "txtMediaType"
         Me.txtMediaType.Size = New System.Drawing.Size(90, 20)
-        Me.txtMediaType.TabIndex = 64
+        Me.txtMediaType.TabIndex = 6
         Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
                 "")
         '
@@ -2022,7 +2022,7 @@ Partial Class Form1
         Me.lblCheckFieldHandling.Location = New System.Drawing.Point(18, 42)
         Me.lblCheckFieldHandling.Name = "lblCheckFieldHandling"
         Me.lblCheckFieldHandling.Size = New System.Drawing.Size(120, 13)
-        Me.lblCheckFieldHandling.TabIndex = 40
+        Me.lblCheckFieldHandling.TabIndex = 2
         Me.lblCheckFieldHandling.Text = "Checked Field Handling"
         '
         'Label30
@@ -2031,7 +2031,7 @@ Partial Class Form1
         Me.Label30.Location = New System.Drawing.Point(18, 17)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(100, 13)
-        Me.Label30.TabIndex = 35
+        Me.Label30.TabIndex = 0
         Me.Label30.Text = "Date Field Handling"
         '
         'cbDateHandling
@@ -2043,7 +2043,7 @@ Partial Class Form1
         Me.cbDateHandling.Location = New System.Drawing.Point(164, 14)
         Me.cbDateHandling.Name = "cbDateHandling"
         Me.cbDateHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbDateHandling.TabIndex = 36
+        Me.cbDateHandling.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.cbDateHandling, "When using ""file creation date"", the result is depending on your setting " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for ""T" & _
                 "itle Search Handling"" - it will be the file date or " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the directory date, depend" & _
                 "ing on your choice.")
@@ -2057,7 +2057,7 @@ Partial Class Form1
         Me.cbCheckHandling.Location = New System.Drawing.Point(164, 39)
         Me.cbCheckHandling.Name = "cbCheckHandling"
         Me.cbCheckHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbCheckHandling.TabIndex = 41
+        Me.cbCheckHandling.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.cbCheckHandling, "The Ant Movie Catalog database includes a boolean 'Checked' field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you select" & _
                 " this option in the Database Fields list you can choose " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "whether to set it to '" & _
                 "True' or 'False'.")
@@ -2073,7 +2073,7 @@ Partial Class Form1
         Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 445)
         Me.GroupBox_PictureHandling.Name = "GroupBox_PictureHandling"
         Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 67)
-        Me.GroupBox_PictureHandling.TabIndex = 53
+        Me.GroupBox_PictureHandling.TabIndex = 7
         Me.GroupBox_PictureHandling.TabStop = False
         Me.GroupBox_PictureHandling.Text = "Cover Handling ..."
         '
@@ -2082,7 +2082,7 @@ Partial Class Form1
         Me.txtPictureFilenameSuffix.Location = New System.Drawing.Point(248, 40)
         Me.txtPictureFilenameSuffix.Name = "txtPictureFilenameSuffix"
         Me.txtPictureFilenameSuffix.Size = New System.Drawing.Size(90, 20)
-        Me.txtPictureFilenameSuffix.TabIndex = 50
+        Me.txtPictureFilenameSuffix.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.txtPictureFilenameSuffix, resources.GetString("txtPictureFilenameSuffix.ToolTip"))
         '
         'lblPicturePrefix
@@ -2091,7 +2091,7 @@ Partial Class Form1
         Me.lblPicturePrefix.Location = New System.Drawing.Point(18, 42)
         Me.lblPicturePrefix.Name = "lblPicturePrefix"
         Me.lblPicturePrefix.Size = New System.Drawing.Size(133, 13)
-        Me.lblPicturePrefix.TabIndex = 49
+        Me.lblPicturePrefix.TabIndex = 2
         Me.lblPicturePrefix.Text = "Prefix/Suffix to Covername"
         '
         'lblPictureHandling
@@ -2100,7 +2100,7 @@ Partial Class Form1
         Me.lblPictureHandling.Location = New System.Drawing.Point(18, 17)
         Me.lblPictureHandling.Name = "lblPictureHandling"
         Me.lblPictureHandling.Size = New System.Drawing.Size(85, 13)
-        Me.lblPictureHandling.TabIndex = 45
+        Me.lblPictureHandling.TabIndex = 0
         Me.lblPictureHandling.Text = "Picture Handling"
         '
         'cbPictureHandling
@@ -2112,7 +2112,7 @@ Partial Class Form1
         Me.cbPictureHandling.Location = New System.Drawing.Point(164, 13)
         Me.cbPictureHandling.Name = "cbPictureHandling"
         Me.cbPictureHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbPictureHandling.TabIndex = 46
+        Me.cbPictureHandling.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"))
         '
         'txtPictureFilenamePrefix
@@ -2120,7 +2120,7 @@ Partial Class Form1
         Me.txtPictureFilenamePrefix.Location = New System.Drawing.Point(164, 40)
         Me.txtPictureFilenamePrefix.Name = "txtPictureFilenamePrefix"
         Me.txtPictureFilenamePrefix.Size = New System.Drawing.Size(78, 20)
-        Me.txtPictureFilenamePrefix.TabIndex = 48
+        Me.txtPictureFilenamePrefix.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.txtPictureFilenamePrefix, resources.GetString("txtPictureFilenamePrefix.ToolTip"))
         '
         'lblInternetLookupRequired
@@ -2131,7 +2131,7 @@ Partial Class Form1
         Me.lblInternetLookupRequired.Location = New System.Drawing.Point(8, 557)
         Me.lblInternetLookupRequired.Name = "lblInternetLookupRequired"
         Me.lblInternetLookupRequired.Size = New System.Drawing.Size(227, 13)
-        Me.lblInternetLookupRequired.TabIndex = 39
+        Me.lblInternetLookupRequired.TabIndex = 9
         Me.lblInternetLookupRequired.Text = "-- Internet lookup required with these settings --"
         Me.lblInternetLookupRequired.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -2150,7 +2150,7 @@ Partial Class Form1
         Me.GroupBox16.Location = New System.Drawing.Point(239, 7)
         Me.GroupBox16.Name = "GroupBox16"
         Me.GroupBox16.Size = New System.Drawing.Size(353, 93)
-        Me.GroupBox16.TabIndex = 9
+        Me.GroupBox16.TabIndex = 2
         Me.GroupBox16.TabStop = False
         Me.GroupBox16.Text = "Quick Select ..."
         '
@@ -2160,7 +2160,7 @@ Partial Class Form1
         Me.Label33.Location = New System.Drawing.Point(245, 16)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(93, 13)
-        Me.Label33.TabIndex = 4
+        Me.Label33.TabIndex = 6
         Me.Label33.Text = "Only Internet Data"
         '
         'Label32
@@ -2169,7 +2169,7 @@ Partial Class Form1
         Me.Label32.Location = New System.Drawing.Point(138, 16)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(86, 13)
-        Me.Label32.TabIndex = 4
+        Me.Label32.TabIndex = 3
         Me.Label32.Text = "Only Media Data"
         '
         'Label31
@@ -2178,7 +2178,7 @@ Partial Class Form1
         Me.Label31.Location = New System.Drawing.Point(44, 16)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(45, 13)
-        Me.Label31.TabIndex = 4
+        Me.Label31.TabIndex = 0
         Me.Label31.Text = "All items"
         '
         'btnDBFieldsSelectNoMedia
@@ -2186,7 +2186,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectNoMedia.Location = New System.Drawing.Point(141, 61)
         Me.btnDBFieldsSelectNoMedia.Name = "btnDBFieldsSelectNoMedia"
         Me.btnDBFieldsSelectNoMedia.Size = New System.Drawing.Size(89, 23)
-        Me.btnDBFieldsSelectNoMedia.TabIndex = 20
+        Me.btnDBFieldsSelectNoMedia.TabIndex = 5
         Me.btnDBFieldsSelectNoMedia.Text = "Select None"
         Me.btnDBFieldsSelectNoMedia.UseVisualStyleBackColor = True
         '
@@ -2195,7 +2195,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectNoInternet.Location = New System.Drawing.Point(248, 61)
         Me.btnDBFieldsSelectNoInternet.Name = "btnDBFieldsSelectNoInternet"
         Me.btnDBFieldsSelectNoInternet.Size = New System.Drawing.Size(90, 23)
-        Me.btnDBFieldsSelectNoInternet.TabIndex = 30
+        Me.btnDBFieldsSelectNoInternet.TabIndex = 8
         Me.btnDBFieldsSelectNoInternet.Text = "Select None"
         Me.btnDBFieldsSelectNoInternet.UseVisualStyleBackColor = True
         '
@@ -2204,7 +2204,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectNone.Location = New System.Drawing.Point(21, 61)
         Me.btnDBFieldsSelectNone.Name = "btnDBFieldsSelectNone"
         Me.btnDBFieldsSelectNone.Size = New System.Drawing.Size(89, 23)
-        Me.btnDBFieldsSelectNone.TabIndex = 11
+        Me.btnDBFieldsSelectNone.TabIndex = 2
         Me.btnDBFieldsSelectNone.Text = "Select None"
         Me.btnDBFieldsSelectNone.UseVisualStyleBackColor = True
         '
@@ -2213,7 +2213,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectAllMedia.Location = New System.Drawing.Point(141, 32)
         Me.btnDBFieldsSelectAllMedia.Name = "btnDBFieldsSelectAllMedia"
         Me.btnDBFieldsSelectAllMedia.Size = New System.Drawing.Size(89, 23)
-        Me.btnDBFieldsSelectAllMedia.TabIndex = 15
+        Me.btnDBFieldsSelectAllMedia.TabIndex = 4
         Me.btnDBFieldsSelectAllMedia.Text = "Select All"
         Me.btnDBFieldsSelectAllMedia.UseVisualStyleBackColor = True
         '
@@ -2222,7 +2222,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectAllInternet.Location = New System.Drawing.Point(248, 32)
         Me.btnDBFieldsSelectAllInternet.Name = "btnDBFieldsSelectAllInternet"
         Me.btnDBFieldsSelectAllInternet.Size = New System.Drawing.Size(90, 23)
-        Me.btnDBFieldsSelectAllInternet.TabIndex = 25
+        Me.btnDBFieldsSelectAllInternet.TabIndex = 7
         Me.btnDBFieldsSelectAllInternet.Text = "Select All"
         Me.btnDBFieldsSelectAllInternet.UseVisualStyleBackColor = True
         '
@@ -2231,7 +2231,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectAll.Location = New System.Drawing.Point(21, 32)
         Me.btnDBFieldsSelectAll.Name = "btnDBFieldsSelectAll"
         Me.btnDBFieldsSelectAll.Size = New System.Drawing.Size(89, 23)
-        Me.btnDBFieldsSelectAll.TabIndex = 10
+        Me.btnDBFieldsSelectAll.TabIndex = 1
         Me.btnDBFieldsSelectAll.Text = "Select All"
         Me.btnDBFieldsSelectAll.UseVisualStyleBackColor = True
         '
@@ -2247,7 +2247,7 @@ Partial Class Form1
         Me.cbDatabaseFields.MultiColumn = True
         Me.cbDatabaseFields.Name = "cbDatabaseFields"
         Me.cbDatabaseFields.Size = New System.Drawing.Size(218, 529)
-        Me.cbDatabaseFields.TabIndex = 8
+        Me.cbDatabaseFields.TabIndex = 1
         '
         'Label34
         '
@@ -2255,7 +2255,7 @@ Partial Class Form1
         Me.Label34.Location = New System.Drawing.Point(8, 7)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(225, 13)
-        Me.Label34.TabIndex = 7
+        Me.Label34.TabIndex = 0
         Me.Label34.Text = "Select database fields to be imported/updated"
         '
         'ScanFilters
@@ -2282,7 +2282,7 @@ Partial Class Form1
         Me.GroupBox28.Location = New System.Drawing.Point(8, 375)
         Me.GroupBox28.Name = "GroupBox28"
         Me.GroupBox28.Size = New System.Drawing.Size(584, 87)
-        Me.GroupBox28.TabIndex = 108
+        Me.GroupBox28.TabIndex = 4
         Me.GroupBox28.TabStop = False
         Me.GroupBox28.Text = "Edition Detection ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox28, resources.GetString("GroupBox28.ToolTip"))
@@ -2304,7 +2304,7 @@ Partial Class Form1
         Me.dgEditionStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgEditionStrings.RowTemplate.Height = 18
         Me.dgEditionStrings.Size = New System.Drawing.Size(546, 62)
-        Me.dgEditionStrings.TabIndex = 52
+        Me.dgEditionStrings.TabIndex = 0
         '
         'EditorSearchExpression
         '
@@ -2331,7 +2331,7 @@ Partial Class Form1
         Me.GroupBox24.Location = New System.Drawing.Point(8, 13)
         Me.GroupBox24.Name = "GroupBox24"
         Me.GroupBox24.Size = New System.Drawing.Size(584, 88)
-        Me.GroupBox24.TabIndex = 107
+        Me.GroupBox24.TabIndex = 0
         Me.GroupBox24.TabStop = False
         Me.GroupBox24.Text = "Movie Scan Folder(s) ..."
         '
@@ -2342,7 +2342,7 @@ Partial Class Form1
         Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
         Me.txtOverridePath.Name = "txtOverridePath"
         Me.txtOverridePath.Size = New System.Drawing.Size(410, 20)
-        Me.txtOverridePath.TabIndex = 40
+        Me.txtOverridePath.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.txtOverridePath, resources.GetString("txtOverridePath.ToolTip"))
         '
         'lblOverridePath
@@ -2351,7 +2351,7 @@ Partial Class Form1
         Me.lblOverridePath.Location = New System.Drawing.Point(11, 63)
         Me.lblOverridePath.Name = "lblOverridePath"
         Me.lblOverridePath.Size = New System.Drawing.Size(71, 13)
-        Me.lblOverridePath.TabIndex = 41
+        Me.lblOverridePath.TabIndex = 4
         Me.lblOverridePath.Text = "Override path"
         '
         'btnSelectMovieFolder
@@ -2361,7 +2361,7 @@ Partial Class Form1
         Me.btnSelectMovieFolder.Location = New System.Drawing.Point(528, 34)
         Me.btnSelectMovieFolder.Name = "btnSelectMovieFolder"
         Me.btnSelectMovieFolder.Size = New System.Drawing.Size(32, 20)
-        Me.btnSelectMovieFolder.TabIndex = 1
+        Me.btnSelectMovieFolder.TabIndex = 3
         Me.btnSelectMovieFolder.Text = "..."
         Me.btnSelectMovieFolder.UseVisualStyleBackColor = True
         '
@@ -2371,7 +2371,7 @@ Partial Class Form1
         Me.Label1.Location = New System.Drawing.Point(11, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(130, 13)
-        Me.Label1.TabIndex = 28
+        Me.Label1.TabIndex = 0
         Me.Label1.Text = "Path to Movies Folder(s)  :"
         '
         'txtMovieFolder
@@ -2381,7 +2381,7 @@ Partial Class Form1
         Me.txtMovieFolder.Location = New System.Drawing.Point(12, 34)
         Me.txtMovieFolder.Name = "txtMovieFolder"
         Me.txtMovieFolder.Size = New System.Drawing.Size(501, 20)
-        Me.txtMovieFolder.TabIndex = 0
+        Me.txtMovieFolder.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.txtMovieFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
                 "e folders with semi-colons.")
         '
@@ -2393,7 +2393,7 @@ Partial Class Form1
         Me.Label17.Location = New System.Drawing.Point(311, 19)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(202, 12)
-        Me.Label17.TabIndex = 39
+        Me.Label17.TabIndex = 1
         Me.Label17.Text = "Note : Separate movie folders with semi-colons."
         '
         'GroupBox6
@@ -2405,7 +2405,7 @@ Partial Class Form1
         Me.GroupBox6.Location = New System.Drawing.Point(8, 162)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(584, 63)
-        Me.GroupBox6.TabIndex = 58
+        Me.GroupBox6.TabIndex = 2
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Multi Part Files Detection  ..."
         '
@@ -2415,7 +2415,7 @@ Partial Class Form1
         Me.Label25.Location = New System.Drawing.Point(20, 16)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(210, 13)
-        Me.Label25.TabIndex = 57
+        Me.Label25.TabIndex = 0
         Me.Label25.Text = "RegEx Expression to detect multi-part files :"
         '
         'txtRegExSearchMultiPart
@@ -2425,7 +2425,7 @@ Partial Class Form1
         Me.txtRegExSearchMultiPart.Location = New System.Drawing.Point(14, 32)
         Me.txtRegExSearchMultiPart.Name = "txtRegExSearchMultiPart"
         Me.txtRegExSearchMultiPart.Size = New System.Drawing.Size(546, 20)
-        Me.txtRegExSearchMultiPart.TabIndex = 56
+        Me.txtRegExSearchMultiPart.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtRegExSearchMultiPart, "AMCUpdater uses this Regular Expression to detect multi-part movies." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example: 'm" & _
                 "oviename - CD1.avi;'moviename - CD2.avi '")
         '
@@ -2434,7 +2434,7 @@ Partial Class Form1
         Me.Label46.Location = New System.Drawing.Point(8, 115)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(584, 44)
-        Me.Label46.TabIndex = 55
+        Me.Label46.TabIndex = 1
         Me.Label46.Text = resources.GetString("Label46.Text")
         '
         'GroupBox20
@@ -2447,7 +2447,7 @@ Partial Class Form1
         Me.GroupBox20.Location = New System.Drawing.Point(8, 231)
         Me.GroupBox20.Name = "GroupBox20"
         Me.GroupBox20.Size = New System.Drawing.Size(584, 138)
-        Me.GroupBox20.TabIndex = 54
+        Me.GroupBox20.TabIndex = 3
         Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Strip Characters From Title ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox20, "You can define expressions to clean up the (media) names to get a clean title for" & _
@@ -2459,7 +2459,7 @@ Partial Class Form1
         Me.Label83.Location = New System.Drawing.Point(20, 19)
         Me.Label83.Name = "Label83"
         Me.Label83.Size = New System.Drawing.Size(233, 13)
-        Me.Label83.TabIndex = 52
+        Me.Label83.TabIndex = 0
         Me.Label83.Text = "Cleanup TITLEs based on keyword and RegEx:"
         '
         'dgFilterStrings
@@ -2479,7 +2479,7 @@ Partial Class Form1
         Me.dgFilterStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgFilterStrings.RowTemplate.Height = 18
         Me.dgFilterStrings.Size = New System.Drawing.Size(546, 95)
-        Me.dgFilterStrings.TabIndex = 51
+        Me.dgFilterStrings.TabIndex = 1
         '
         'GroupBox19
         '
@@ -2492,7 +2492,7 @@ Partial Class Form1
         Me.GroupBox19.Location = New System.Drawing.Point(8, 468)
         Me.GroupBox19.Name = "GroupBox19"
         Me.GroupBox19.Size = New System.Drawing.Size(584, 106)
-        Me.GroupBox19.TabIndex = 53
+        Me.GroupBox19.TabIndex = 5
         Me.GroupBox19.TabStop = False
         Me.GroupBox19.Text = "File and Folder Exclusions ..."
         '
@@ -2509,7 +2509,7 @@ Partial Class Form1
         Me.dgExcludedFolderStrings.RowHeadersWidth = 25
         Me.dgExcludedFolderStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgExcludedFolderStrings.Size = New System.Drawing.Size(259, 62)
-        Me.dgExcludedFolderStrings.TabIndex = 48
+        Me.dgExcludedFolderStrings.TabIndex = 1
         '
         'Label44
         '
@@ -2517,7 +2517,7 @@ Partial Class Form1
         Me.Label44.Location = New System.Drawing.Point(20, 18)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(194, 13)
-        Me.Label44.TabIndex = 46
+        Me.Label44.TabIndex = 0
         Me.Label44.Text = "Exclude FOLDERs based on keywords:"
         '
         'Label45
@@ -2526,7 +2526,7 @@ Partial Class Form1
         Me.Label45.Location = New System.Drawing.Point(307, 18)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(173, 13)
-        Me.Label45.TabIndex = 47
+        Me.Label45.TabIndex = 2
         Me.Label45.Text = "Exclude FILEs based on keywords:"
         '
         'dgExcludedFileStrings
@@ -2542,7 +2542,7 @@ Partial Class Form1
         Me.dgExcludedFileStrings.RowHeadersWidth = 25
         Me.dgExcludedFileStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgExcludedFileStrings.Size = New System.Drawing.Size(261, 62)
-        Me.dgExcludedFileStrings.TabIndex = 49
+        Me.dgExcludedFileStrings.TabIndex = 3
         '
         'Options
         '
@@ -2575,7 +2575,7 @@ Partial Class Form1
         Me.GroupBox26.Location = New System.Drawing.Point(13, 368)
         Me.GroupBox26.Name = "GroupBox26"
         Me.GroupBox26.Size = New System.Drawing.Size(575, 86)
-        Me.GroupBox26.TabIndex = 109
+        Me.GroupBox26.TabIndex = 3
         Me.GroupBox26.TabStop = False
         Me.GroupBox26.Text = "Internet Grabber - Override Options ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox26, resources.GetString("GroupBox26.ToolTip"))
@@ -2587,7 +2587,7 @@ Partial Class Form1
         Me.Label87.Location = New System.Drawing.Point(339, 62)
         Me.Label87.Name = "Label87"
         Me.Label87.Size = New System.Drawing.Size(66, 13)
-        Me.Label87.TabIndex = 7
+        Me.Label87.TabIndex = 6
         Me.Label87.Text = "Limit # Titles"
         '
         'Label86
@@ -2597,7 +2597,7 @@ Partial Class Form1
         Me.Label86.Location = New System.Drawing.Point(339, 38)
         Me.Label86.Name = "Label86"
         Me.Label86.Size = New System.Drawing.Size(79, 13)
-        Me.Label86.TabIndex = 6
+        Me.Label86.TabIndex = 4
         Me.Label86.Text = "Limit # Persons"
         '
         'Label85
@@ -2607,7 +2607,7 @@ Partial Class Form1
         Me.Label85.Location = New System.Drawing.Point(339, 14)
         Me.Label85.Name = "Label85"
         Me.Label85.Size = New System.Drawing.Size(82, 13)
-        Me.Label85.TabIndex = 5
+        Me.Label85.TabIndex = 2
         Me.Label85.Text = "Get Actor Roles"
         '
         'Label84
@@ -2616,7 +2616,7 @@ Partial Class Form1
         Me.Label84.Location = New System.Drawing.Point(12, 27)
         Me.Label84.Name = "Label84"
         Me.Label84.Size = New System.Drawing.Size(68, 39)
-        Me.Label84.TabIndex = 4
+        Me.Label84.TabIndex = 0
         Me.Label84.Text = "Preferred " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Languages /" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Countries"
         '
         'chkGrabberOverrideTitleLimit
@@ -2627,7 +2627,7 @@ Partial Class Form1
         Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(436, 59)
         Me.chkGrabberOverrideTitleLimit.Name = "chkGrabberOverrideTitleLimit"
         Me.chkGrabberOverrideTitleLimit.Size = New System.Drawing.Size(69, 21)
-        Me.chkGrabberOverrideTitleLimit.TabIndex = 3
+        Me.chkGrabberOverrideTitleLimit.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You may also set a preferred lan" & _
                 "guage/country " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for grabbing in the override options.")
         '
@@ -2639,7 +2639,7 @@ Partial Class Form1
         Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(436, 35)
         Me.chkGrabberOverridePersonLimit.Name = "chkGrabberOverridePersonLimit"
         Me.chkGrabberOverridePersonLimit.Size = New System.Drawing.Size(69, 21)
-        Me.chkGrabberOverridePersonLimit.TabIndex = 2
+        Me.chkGrabberOverridePersonLimit.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverridePersonLimit, "Limits the number of person names grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This settings applies to all fields t" & _
                 "hat grab person names, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like actors, producers, writers, directors.")
         '
@@ -2651,7 +2651,7 @@ Partial Class Form1
         Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(436, 11)
         Me.chkGrabberOverrideGetRoles.Name = "chkGrabberOverrideGetRoles"
         Me.chkGrabberOverrideGetRoles.Size = New System.Drawing.Size(69, 21)
-        Me.chkGrabberOverrideGetRoles.TabIndex = 1
+        Me.chkGrabberOverrideGetRoles.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideGetRoles, "If checked, add Roles to actor infos." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Depends on the grabber script supporting t" & _
                 "hat option.")
         '
@@ -2662,7 +2662,7 @@ Partial Class Form1
         Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(112, 35)
         Me.chkGrabberOverrideLanguage.Name = "chkGrabberOverrideLanguage"
         Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(196, 21)
-        Me.chkGrabberOverrideLanguage.TabIndex = 0
+        Me.chkGrabberOverrideLanguage.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideLanguage, resources.GetString("chkGrabberOverrideLanguage.ToolTip"))
         '
         'GroupBox11
@@ -2680,7 +2680,7 @@ Partial Class Form1
         Me.GroupBox11.Location = New System.Drawing.Point(13, 6)
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.Size = New System.Drawing.Size(575, 102)
-        Me.GroupBox11.TabIndex = 108
+        Me.GroupBox11.TabIndex = 0
         Me.GroupBox11.TabStop = False
         Me.GroupBox11.Text = "AMC Folders and Files ..."
         '
@@ -2690,7 +2690,7 @@ Partial Class Form1
         Me.btnExcludeFileDelete.Location = New System.Drawing.Point(339, 72)
         Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
         Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
-        Me.btnExcludeFileDelete.TabIndex = 65
+        Me.btnExcludeFileDelete.TabIndex = 5
         Me.btnExcludeFileDelete.Text = "delete"
         Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
         '
@@ -2700,7 +2700,7 @@ Partial Class Form1
         Me.btnExcludeFileShow.Location = New System.Drawing.Point(415, 72)
         Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
         Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
-        Me.btnExcludeFileShow.TabIndex = 64
+        Me.btnExcludeFileShow.TabIndex = 6
         Me.btnExcludeFileShow.Text = "show"
         Me.btnExcludeFileShow.UseVisualStyleBackColor = True
         '
@@ -2711,7 +2711,7 @@ Partial Class Form1
         Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
         Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
         Me.txtExcludeFilePath.Size = New System.Drawing.Size(296, 20)
-        Me.txtExcludeFilePath.TabIndex = 60
+        Me.txtExcludeFilePath.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.txtExcludeFilePath, resources.GetString("txtExcludeFilePath.ToolTip"))
         '
         'Label22
@@ -2720,7 +2720,7 @@ Partial Class Form1
         Me.Label22.Location = New System.Drawing.Point(12, 56)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(173, 13)
-        Me.Label22.TabIndex = 63
+        Me.Label22.TabIndex = 3
         Me.Label22.Text = "Path to Excluded Movies File (.txt) :"
         '
         'btnSelectExcludeFile
@@ -2730,7 +2730,7 @@ Partial Class Form1
         Me.btnSelectExcludeFile.Location = New System.Drawing.Point(521, 72)
         Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
         Me.btnSelectExcludeFile.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectExcludeFile.TabIndex = 61
+        Me.btnSelectExcludeFile.TabIndex = 7
         Me.btnSelectExcludeFile.Text = "..."
         Me.btnSelectExcludeFile.UseVisualStyleBackColor = True
         '
@@ -2741,7 +2741,7 @@ Partial Class Form1
         Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
         Me.txtConfigFilePath.Name = "txtConfigFilePath"
         Me.txtConfigFilePath.Size = New System.Drawing.Size(501, 20)
-        Me.txtConfigFilePath.TabIndex = 58
+        Me.txtConfigFilePath.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
                 "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
                 "le will be created for you.")
@@ -2752,7 +2752,7 @@ Partial Class Form1
         Me.Label2.Location = New System.Drawing.Point(12, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(168, 13)
-        Me.Label2.TabIndex = 62
+        Me.Label2.TabIndex = 0
         Me.Label2.Text = "Path to AMC Database File (.xml) :"
         '
         'btnSelectConfigFile
@@ -2762,7 +2762,7 @@ Partial Class Form1
         Me.btnSelectConfigFile.Location = New System.Drawing.Point(521, 32)
         Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
         Me.btnSelectConfigFile.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectConfigFile.TabIndex = 59
+        Me.btnSelectConfigFile.TabIndex = 2
         Me.btnSelectConfigFile.Text = "..."
         Me.btnSelectConfigFile.UseVisualStyleBackColor = True
         '
@@ -2781,7 +2781,7 @@ Partial Class Form1
         Me.GroupBox4.Location = New System.Drawing.Point(13, 224)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(575, 138)
-        Me.GroupBox4.TabIndex = 106
+        Me.GroupBox4.TabIndex = 2
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "File Type Identification ..."
         '
@@ -2793,7 +2793,7 @@ Partial Class Form1
         Me.chkParseTrailers.Location = New System.Drawing.Point(377, 112)
         Me.chkParseTrailers.Name = "chkParseTrailers"
         Me.chkParseTrailers.Size = New System.Drawing.Size(134, 17)
-        Me.chkParseTrailers.TabIndex = 31
+        Me.chkParseTrailers.TabIndex = 7
         Me.chkParseTrailers.Text = "Check for Trailers (wip)"
         Me.chkParseTrailers.UseVisualStyleBackColor = True
         Me.chkParseTrailers.Visible = False
@@ -2807,7 +2807,7 @@ Partial Class Form1
         Me.GroupBox25.Location = New System.Drawing.Point(367, 16)
         Me.GroupBox25.Name = "GroupBox25"
         Me.GroupBox25.Size = New System.Drawing.Size(187, 91)
-        Me.GroupBox25.TabIndex = 31
+        Me.GroupBox25.TabIndex = 6
         Me.GroupBox25.TabStop = False
         Me.GroupBox25.Text = "Media Scan Options ..."
         '
@@ -2817,7 +2817,7 @@ Partial Class Form1
         Me.chkCheckDVDFolders.Location = New System.Drawing.Point(10, 23)
         Me.chkCheckDVDFolders.Name = "chkCheckDVDFolders"
         Me.chkCheckDVDFolders.Size = New System.Drawing.Size(158, 17)
-        Me.chkCheckDVDFolders.TabIndex = 10
+        Me.chkCheckDVDFolders.TabIndex = 0
         Me.chkCheckDVDFolders.Text = "Check for DVD / BR folders"
         Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The system looks for a VIDEO_TS.IFO f" & _
                 "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
@@ -2829,7 +2829,7 @@ Partial Class Form1
         Me.chkParseSubtitleFiles.Location = New System.Drawing.Point(10, 46)
         Me.chkParseSubtitleFiles.Name = "chkParseSubtitleFiles"
         Me.chkParseSubtitleFiles.Size = New System.Drawing.Size(145, 17)
-        Me.chkParseSubtitleFiles.TabIndex = 30
+        Me.chkParseSubtitleFiles.TabIndex = 1
         Me.chkParseSubtitleFiles.Text = "Try to Parse Subtitle Files"
         Me.ToolTip1.SetToolTip(Me.chkParseSubtitleFiles, resources.GetString("chkParseSubtitleFiles.ToolTip"))
         Me.chkParseSubtitleFiles.UseVisualStyleBackColor = True
@@ -2841,7 +2841,7 @@ Partial Class Form1
         Me.chkParsePlaylistFiles.Location = New System.Drawing.Point(10, 69)
         Me.chkParsePlaylistFiles.Name = "chkParsePlaylistFiles"
         Me.chkParsePlaylistFiles.Size = New System.Drawing.Size(156, 17)
-        Me.chkParsePlaylistFiles.TabIndex = 11
+        Me.chkParsePlaylistFiles.TabIndex = 2
         Me.chkParsePlaylistFiles.Text = "Check for Playlist Files (wip)"
         Me.chkParsePlaylistFiles.UseVisualStyleBackColor = True
         '
@@ -2852,7 +2852,7 @@ Partial Class Form1
         Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(12, 110)
         Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
         Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(296, 20)
-        Me.txtTrailerIentificationStrings.TabIndex = 29
+        Me.txtTrailerIentificationStrings.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.txtTrailerIentificationStrings, "if a file contains one of these strings, it will be identified as trailer instead" & _
                 " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
         '
@@ -2862,7 +2862,7 @@ Partial Class Form1
         Me.Label79.Location = New System.Drawing.Point(9, 94)
         Me.Label79.Name = "Label79"
         Me.Label79.Size = New System.Drawing.Size(183, 13)
-        Me.Label79.TabIndex = 28
+        Me.Label79.TabIndex = 4
         Me.Label79.Text = "Accepted Trailer Identification Strings"
         '
         'txtDefaultFileTypesNonMedia
@@ -2872,7 +2872,7 @@ Partial Class Form1
         Me.txtDefaultFileTypesNonMedia.Location = New System.Drawing.Point(12, 71)
         Me.txtDefaultFileTypesNonMedia.Name = "txtDefaultFileTypesNonMedia"
         Me.txtDefaultFileTypesNonMedia.Size = New System.Drawing.Size(296, 20)
-        Me.txtDefaultFileTypesNonMedia.TabIndex = 9
+        Me.txtDefaultFileTypesNonMedia.TabIndex = 3
         '
         'Label14
         '
@@ -2880,7 +2880,7 @@ Partial Class Form1
         Me.Label14.Location = New System.Drawing.Point(9, 55)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(285, 13)
-        Me.Label14.TabIndex = 26
+        Me.Label14.TabIndex = 2
         Me.Label14.Text = "Accepted non-Mediainfo Files (import without media details)"
         '
         'txtDefaultFileTypes
@@ -2890,7 +2890,7 @@ Partial Class Form1
         Me.txtDefaultFileTypes.Location = New System.Drawing.Point(12, 32)
         Me.txtDefaultFileTypes.Name = "txtDefaultFileTypes"
         Me.txtDefaultFileTypes.Size = New System.Drawing.Size(296, 20)
-        Me.txtDefaultFileTypes.TabIndex = 8
+        Me.txtDefaultFileTypes.TabIndex = 1
         '
         'Label15
         '
@@ -2898,7 +2898,7 @@ Partial Class Form1
         Me.Label15.Location = New System.Drawing.Point(9, 16)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(274, 13)
-        Me.Label15.TabIndex = 25
+        Me.Label15.TabIndex = 0
         Me.Label15.Text = "Accepted Mediainfo Files. Separate List with semi-colons"
         Me.ToolTip1.SetToolTip(Me.Label15, "Accepted Media Files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate List with semi-colons, e.g. wmv,avi,mpg")
         '
@@ -2915,7 +2915,7 @@ Partial Class Form1
         Me.GroupBox7.Location = New System.Drawing.Point(13, 111)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(575, 107)
-        Me.GroupBox7.TabIndex = 103
+        Me.GroupBox7.TabIndex = 1
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Artwork Folders ..."
         '
@@ -2925,7 +2925,7 @@ Partial Class Form1
         Me.btnSelectPersonArtworkFolder.Location = New System.Drawing.Point(521, 74)
         Me.btnSelectPersonArtworkFolder.Name = "btnSelectPersonArtworkFolder"
         Me.btnSelectPersonArtworkFolder.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectPersonArtworkFolder.TabIndex = 53
+        Me.btnSelectPersonArtworkFolder.TabIndex = 5
         Me.btnSelectPersonArtworkFolder.Text = "..."
         Me.btnSelectPersonArtworkFolder.UseVisualStyleBackColor = True
         '
@@ -2935,7 +2935,7 @@ Partial Class Form1
         Me.Label28.Location = New System.Drawing.Point(10, 58)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(117, 13)
-        Me.Label28.TabIndex = 52
+        Me.Label28.TabIndex = 3
         Me.Label28.Text = "Path to Person Images:"
         '
         'txtPersonArtworkFolder
@@ -2945,7 +2945,7 @@ Partial Class Form1
         Me.txtPersonArtworkFolder.Location = New System.Drawing.Point(10, 74)
         Me.txtPersonArtworkFolder.Name = "txtPersonArtworkFolder"
         Me.txtPersonArtworkFolder.Size = New System.Drawing.Size(503, 20)
-        Me.txtPersonArtworkFolder.TabIndex = 51
+        Me.txtPersonArtworkFolder.TabIndex = 4
         '
         'btnSelectFanartFolder
         '
@@ -2954,7 +2954,7 @@ Partial Class Form1
         Me.btnSelectFanartFolder.Location = New System.Drawing.Point(521, 33)
         Me.btnSelectFanartFolder.Name = "btnSelectFanartFolder"
         Me.btnSelectFanartFolder.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectFanartFolder.TabIndex = 50
+        Me.btnSelectFanartFolder.TabIndex = 2
         Me.btnSelectFanartFolder.Text = "..."
         Me.btnSelectFanartFolder.UseVisualStyleBackColor = True
         '
@@ -2965,7 +2965,7 @@ Partial Class Form1
         Me.txtFanartFolder.Location = New System.Drawing.Point(10, 33)
         Me.txtFanartFolder.Name = "txtFanartFolder"
         Me.txtFanartFolder.Size = New System.Drawing.Size(503, 20)
-        Me.txtFanartFolder.TabIndex = 49
+        Me.txtFanartFolder.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtFanartFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
                 "e folders with semi-colons.")
         '
@@ -2975,7 +2975,7 @@ Partial Class Form1
         Me.Label48.Location = New System.Drawing.Point(10, 16)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(80, 13)
-        Me.Label48.TabIndex = 48
+        Me.Label48.TabIndex = 0
         Me.Label48.Text = "Path to Fanart :"
         '
         'GroupBox13
@@ -3000,7 +3000,7 @@ Partial Class Form1
         Me.cbLogLevel.Location = New System.Drawing.Point(112, 13)
         Me.cbLogLevel.Name = "cbLogLevel"
         Me.cbLogLevel.Size = New System.Drawing.Size(196, 21)
-        Me.cbLogLevel.TabIndex = 20
+        Me.cbLogLevel.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.cbLogLevel, "The logging level option controls what information is saved to the logfile")
         '
         'Label29
@@ -3009,7 +3009,7 @@ Partial Class Form1
         Me.Label29.Location = New System.Drawing.Point(9, 16)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(80, 13)
-        Me.Label29.TabIndex = 34
+        Me.Label29.TabIndex = 0
         Me.Label29.Text = "Logging Level :"
         '
         'GroupBox12
@@ -3034,7 +3034,7 @@ Partial Class Form1
         Me.chkExecuteOnlyForOrphans.Location = New System.Drawing.Point(377, 16)
         Me.chkExecuteOnlyForOrphans.Name = "chkExecuteOnlyForOrphans"
         Me.chkExecuteOnlyForOrphans.Size = New System.Drawing.Size(136, 17)
-        Me.chkExecuteOnlyForOrphans.TabIndex = 19
+        Me.chkExecuteOnlyForOrphans.TabIndex = 4
         Me.chkExecuteOnlyForOrphans.Text = "Only if changes applied"
         Me.chkExecuteOnlyForOrphans.UseVisualStyleBackColor = True
         '
@@ -3044,7 +3044,7 @@ Partial Class Form1
         Me.btnExecuteProgramSelectPath.Location = New System.Drawing.Point(521, 39)
         Me.btnExecuteProgramSelectPath.Name = "btnExecuteProgramSelectPath"
         Me.btnExecuteProgramSelectPath.Size = New System.Drawing.Size(37, 20)
-        Me.btnExecuteProgramSelectPath.TabIndex = 18
+        Me.btnExecuteProgramSelectPath.TabIndex = 3
         Me.btnExecuteProgramSelectPath.Text = "..."
         Me.btnExecuteProgramSelectPath.UseVisualStyleBackColor = True
         '
@@ -3055,7 +3055,7 @@ Partial Class Form1
         Me.txtExecuteProgramPath.Location = New System.Drawing.Point(112, 39)
         Me.txtExecuteProgramPath.Name = "txtExecuteProgramPath"
         Me.txtExecuteProgramPath.Size = New System.Drawing.Size(401, 20)
-        Me.txtExecuteProgramPath.TabIndex = 17
+        Me.txtExecuteProgramPath.TabIndex = 2
         '
         'chkExecuteProgram
         '
@@ -3063,7 +3063,7 @@ Partial Class Form1
         Me.chkExecuteProgram.Location = New System.Drawing.Point(12, 16)
         Me.chkExecuteProgram.Name = "chkExecuteProgram"
         Me.chkExecuteProgram.Size = New System.Drawing.Size(217, 17)
-        Me.chkExecuteProgram.TabIndex = 16
+        Me.chkExecuteProgram.TabIndex = 0
         Me.chkExecuteProgram.Text = "Launch a file after processing completed"
         Me.chkExecuteProgram.UseVisualStyleBackColor = True
         '
@@ -3073,7 +3073,7 @@ Partial Class Form1
         Me.Label27.Location = New System.Drawing.Point(10, 42)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(96, 13)
-        Me.Label27.TabIndex = 31
+        Me.Label27.TabIndex = 1
         Me.Label27.Text = "Path to executable"
         '
         'Mediainfo
@@ -3100,7 +3100,7 @@ Partial Class Form1
         Me.Label47.Location = New System.Drawing.Point(19, 12)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(495, 43)
-        Me.Label47.TabIndex = 16
+        Me.Label47.TabIndex = 0
         Me.Label47.Text = "This page allows you to test that the MediaInfo dll is able to read your movie fi" & _
             "le correctly.  Relevant information from the file will be displayed below if pos" & _
             "sible."
@@ -3114,7 +3114,7 @@ Partial Class Form1
         Me.GroupBox18.Location = New System.Drawing.Point(15, 398)
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.Size = New System.Drawing.Size(522, 99)
-        Me.GroupBox18.TabIndex = 15
+        Me.GroupBox18.TabIndex = 7
         Me.GroupBox18.TabStop = False
         Me.GroupBox18.Text = "Subtitles ..."
         '
@@ -3124,7 +3124,7 @@ Partial Class Form1
         Me.txtSampleTextLanguageList.Name = "txtSampleTextLanguageList"
         Me.txtSampleTextLanguageList.ReadOnly = True
         Me.txtSampleTextLanguageList.Size = New System.Drawing.Size(397, 20)
-        Me.txtSampleTextLanguageList.TabIndex = 17
+        Me.txtSampleTextLanguageList.TabIndex = 3
         Me.txtSampleTextLanguageList.TabStop = False
         '
         'txtSampleTextCodecList
@@ -3133,7 +3133,7 @@ Partial Class Form1
         Me.txtSampleTextCodecList.Name = "txtSampleTextCodecList"
         Me.txtSampleTextCodecList.ReadOnly = True
         Me.txtSampleTextCodecList.Size = New System.Drawing.Size(397, 20)
-        Me.txtSampleTextCodecList.TabIndex = 16
+        Me.txtSampleTextCodecList.TabIndex = 1
         Me.txtSampleTextCodecList.TabStop = False
         '
         'Label39
@@ -3142,7 +3142,7 @@ Partial Class Form1
         Me.Label39.Location = New System.Drawing.Point(18, 22)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(63, 13)
-        Me.Label39.TabIndex = 1
+        Me.Label39.TabIndex = 0
         Me.Label39.Text = "Codec List :"
         '
         'Label38
@@ -3151,7 +3151,7 @@ Partial Class Form1
         Me.Label38.Location = New System.Drawing.Point(15, 48)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(66, 13)
-        Me.Label38.TabIndex = 0
+        Me.Label38.TabIndex = 2
         Me.Label38.Text = "Languages :"
         '
         'GroupBox3
@@ -3163,7 +3163,7 @@ Partial Class Form1
         Me.GroupBox3.Location = New System.Drawing.Point(15, 503)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(522, 58)
-        Me.GroupBox3.TabIndex = 12
+        Me.GroupBox3.TabIndex = 8
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "File ..."
         '
@@ -3173,7 +3173,7 @@ Partial Class Form1
         Me.txtSampleFileLength.Name = "txtSampleFileLength"
         Me.txtSampleFileLength.ReadOnly = True
         Me.txtSampleFileLength.Size = New System.Drawing.Size(157, 20)
-        Me.txtSampleFileLength.TabIndex = 11
+        Me.txtSampleFileLength.TabIndex = 3
         Me.txtSampleFileLength.TabStop = False
         '
         'Label8
@@ -3182,7 +3182,7 @@ Partial Class Form1
         Me.Label8.Location = New System.Drawing.Point(275, 25)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(46, 13)
-        Me.Label8.TabIndex = 5
+        Me.Label8.TabIndex = 2
         Me.Label8.Text = "Length :"
         '
         'txtSampleFileSize
@@ -3191,7 +3191,7 @@ Partial Class Form1
         Me.txtSampleFileSize.Name = "txtSampleFileSize"
         Me.txtSampleFileSize.ReadOnly = True
         Me.txtSampleFileSize.Size = New System.Drawing.Size(139, 20)
-        Me.txtSampleFileSize.TabIndex = 10
+        Me.txtSampleFileSize.TabIndex = 1
         Me.txtSampleFileSize.TabStop = False
         '
         'Label9
@@ -3200,7 +3200,7 @@ Partial Class Form1
         Me.Label9.Location = New System.Drawing.Point(47, 25)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(33, 13)
-        Me.Label9.TabIndex = 3
+        Me.Label9.TabIndex = 0
         Me.Label9.Text = "Size :"
         '
         'GroupBox2
@@ -3220,7 +3220,7 @@ Partial Class Form1
         Me.GroupBox2.Location = New System.Drawing.Point(15, 238)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(522, 154)
-        Me.GroupBox2.TabIndex = 11
+        Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Audio ..."
         '
@@ -3230,7 +3230,7 @@ Partial Class Form1
         Me.Label100.Location = New System.Drawing.Point(275, 22)
         Me.Label100.Name = "Label100"
         Me.Label100.Size = New System.Drawing.Size(54, 13)
-        Me.Label100.TabIndex = 17
+        Me.Label100.TabIndex = 2
         Me.Label100.Text = "Channels:"
         '
         'txtSampleAudioChannelCount
@@ -3239,7 +3239,7 @@ Partial Class Form1
         Me.txtSampleAudioChannelCount.Name = "txtSampleAudioChannelCount"
         Me.txtSampleAudioChannelCount.ReadOnly = True
         Me.txtSampleAudioChannelCount.Size = New System.Drawing.Size(125, 20)
-        Me.txtSampleAudioChannelCount.TabIndex = 16
+        Me.txtSampleAudioChannelCount.TabIndex = 3
         Me.txtSampleAudioChannelCount.TabStop = False
         '
         'Label37
@@ -3248,7 +3248,7 @@ Partial Class Form1
         Me.Label37.Location = New System.Drawing.Point(19, 125)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(66, 13)
-        Me.Label37.TabIndex = 15
+        Me.Label37.TabIndex = 10
         Me.Label37.Text = "Languages :"
         '
         'Label36
@@ -3257,7 +3257,7 @@ Partial Class Form1
         Me.Label36.Location = New System.Drawing.Point(30, 99)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(51, 13)
-        Me.Label36.TabIndex = 14
+        Me.Label36.TabIndex = 8
         Me.Label36.Text = "Streams :"
         '
         'txtSampleAudioLanguageList
@@ -3266,7 +3266,7 @@ Partial Class Form1
         Me.txtSampleAudioLanguageList.Name = "txtSampleAudioLanguageList"
         Me.txtSampleAudioLanguageList.ReadOnly = True
         Me.txtSampleAudioLanguageList.Size = New System.Drawing.Size(397, 20)
-        Me.txtSampleAudioLanguageList.TabIndex = 13
+        Me.txtSampleAudioLanguageList.TabIndex = 11
         Me.txtSampleAudioLanguageList.TabStop = False
         '
         'txtSampleAudioStreamList
@@ -3275,7 +3275,7 @@ Partial Class Form1
         Me.txtSampleAudioStreamList.Name = "txtSampleAudioStreamList"
         Me.txtSampleAudioStreamList.ReadOnly = True
         Me.txtSampleAudioStreamList.Size = New System.Drawing.Size(397, 20)
-        Me.txtSampleAudioStreamList.TabIndex = 12
+        Me.txtSampleAudioStreamList.TabIndex = 9
         Me.txtSampleAudioStreamList.TabStop = False
         '
         'txtSampleAudioStreamCount
@@ -3284,7 +3284,7 @@ Partial Class Form1
         Me.txtSampleAudioStreamCount.Name = "txtSampleAudioStreamCount"
         Me.txtSampleAudioStreamCount.ReadOnly = True
         Me.txtSampleAudioStreamCount.Size = New System.Drawing.Size(125, 20)
-        Me.txtSampleAudioStreamCount.TabIndex = 11
+        Me.txtSampleAudioStreamCount.TabIndex = 7
         Me.txtSampleAudioStreamCount.TabStop = False
         '
         'Label35
@@ -3293,7 +3293,7 @@ Partial Class Form1
         Me.Label35.Location = New System.Drawing.Point(275, 51)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(51, 13)
-        Me.Label35.TabIndex = 10
+        Me.Label35.TabIndex = 6
         Me.Label35.Text = "Streams :"
         '
         'txtSampleAudioBitrate
@@ -3302,7 +3302,7 @@ Partial Class Form1
         Me.txtSampleAudioBitrate.Name = "txtSampleAudioBitrate"
         Me.txtSampleAudioBitrate.ReadOnly = True
         Me.txtSampleAudioBitrate.Size = New System.Drawing.Size(157, 20)
-        Me.txtSampleAudioBitrate.TabIndex = 9
+        Me.txtSampleAudioBitrate.TabIndex = 5
         Me.txtSampleAudioBitrate.TabStop = False
         '
         'Label10
@@ -3311,7 +3311,7 @@ Partial Class Form1
         Me.Label10.Location = New System.Drawing.Point(36, 51)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(43, 13)
-        Me.Label10.TabIndex = 5
+        Me.Label10.TabIndex = 4
         Me.Label10.Text = "Bitrate :"
         '
         'txtSampleAudioCodec
@@ -3320,7 +3320,7 @@ Partial Class Form1
         Me.txtSampleAudioCodec.Name = "txtSampleAudioCodec"
         Me.txtSampleAudioCodec.ReadOnly = True
         Me.txtSampleAudioCodec.Size = New System.Drawing.Size(156, 20)
-        Me.txtSampleAudioCodec.TabIndex = 8
+        Me.txtSampleAudioCodec.TabIndex = 1
         Me.txtSampleAudioCodec.TabStop = False
         '
         'Label11
@@ -3329,7 +3329,7 @@ Partial Class Form1
         Me.Label11.Location = New System.Drawing.Point(37, 22)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(44, 13)
-        Me.Label11.TabIndex = 3
+        Me.Label11.TabIndex = 0
         Me.Label11.Text = "Codec :"
         '
         'btnTestAnalyse
@@ -3337,7 +3337,7 @@ Partial Class Form1
         Me.btnTestAnalyse.Location = New System.Drawing.Point(413, 105)
         Me.btnTestAnalyse.Name = "btnTestAnalyse"
         Me.btnTestAnalyse.Size = New System.Drawing.Size(124, 31)
-        Me.btnTestAnalyse.TabIndex = 3
+        Me.btnTestAnalyse.TabIndex = 4
         Me.btnTestAnalyse.Text = "Analyse"
         Me.btnTestAnalyse.UseVisualStyleBackColor = True
         '
@@ -3356,7 +3356,7 @@ Partial Class Form1
         Me.GroupBox1.Location = New System.Drawing.Point(15, 151)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(522, 81)
-        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Video ..."
         '
@@ -3366,7 +3366,7 @@ Partial Class Form1
         Me.txtSampleAspectRatio.Location = New System.Drawing.Point(400, 48)
         Me.txtSampleAspectRatio.Name = "txtSampleAspectRatio"
         Me.txtSampleAspectRatio.Size = New System.Drawing.Size(84, 20)
-        Me.txtSampleAspectRatio.TabIndex = 11
+        Me.txtSampleAspectRatio.TabIndex = 9
         Me.txtSampleAspectRatio.TabStop = False
         '
         'Label107
@@ -3375,7 +3375,7 @@ Partial Class Form1
         Me.Label107.Location = New System.Drawing.Point(326, 51)
         Me.Label107.Name = "Label107"
         Me.Label107.Size = New System.Drawing.Size(68, 13)
-        Me.Label107.TabIndex = 10
+        Me.Label107.TabIndex = 8
         Me.Label107.Text = "AspectRatio:"
         '
         'txtSampleVideoResolution
@@ -3384,7 +3384,7 @@ Partial Class Form1
         Me.txtSampleVideoResolution.Name = "txtSampleVideoResolution"
         Me.txtSampleVideoResolution.ReadOnly = True
         Me.txtSampleVideoResolution.Size = New System.Drawing.Size(84, 20)
-        Me.txtSampleVideoResolution.TabIndex = 6
+        Me.txtSampleVideoResolution.TabIndex = 3
         Me.txtSampleVideoResolution.TabStop = False
         '
         'Label7
@@ -3393,7 +3393,7 @@ Partial Class Form1
         Me.Label7.Location = New System.Drawing.Point(331, 25)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(63, 13)
-        Me.Label7.TabIndex = 9
+        Me.Label7.TabIndex = 2
         Me.Label7.Text = "Resolution :"
         '
         'txtSampleVideoFramerate
@@ -3411,7 +3411,7 @@ Partial Class Form1
         Me.Label6.Location = New System.Drawing.Point(182, 51)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(65, 13)
-        Me.Label6.TabIndex = 7
+        Me.Label6.TabIndex = 6
         Me.Label6.Text = "FrameRate :"
         '
         'txtSampleVideoBitrate
@@ -3429,7 +3429,7 @@ Partial Class Form1
         Me.Label5.Location = New System.Drawing.Point(37, 51)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 13)
-        Me.Label5.TabIndex = 5
+        Me.Label5.TabIndex = 4
         Me.Label5.Text = "Bitrate :"
         '
         'txtSampleVideoCodec
@@ -3438,7 +3438,7 @@ Partial Class Form1
         Me.txtSampleVideoCodec.Name = "txtSampleVideoCodec"
         Me.txtSampleVideoCodec.ReadOnly = True
         Me.txtSampleVideoCodec.Size = New System.Drawing.Size(233, 20)
-        Me.txtSampleVideoCodec.TabIndex = 4
+        Me.txtSampleVideoCodec.TabIndex = 1
         Me.txtSampleVideoCodec.TabStop = False
         '
         'Label4
@@ -3447,7 +3447,7 @@ Partial Class Form1
         Me.Label4.Location = New System.Drawing.Point(36, 25)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 13)
-        Me.Label4.TabIndex = 3
+        Me.Label4.TabIndex = 0
         Me.Label4.Text = "Codec :"
         '
         'Label3
@@ -3456,7 +3456,7 @@ Partial Class Form1
         Me.Label3.Location = New System.Drawing.Point(20, 55)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(126, 13)
-        Me.Label3.TabIndex = 2
+        Me.Label3.TabIndex = 1
         Me.Label3.Text = "Select sample movie file :"
         '
         'btnGetSampleFile
@@ -3464,7 +3464,7 @@ Partial Class Form1
         Me.btnGetSampleFile.Location = New System.Drawing.Point(499, 70)
         Me.btnGetSampleFile.Name = "btnGetSampleFile"
         Me.btnGetSampleFile.Size = New System.Drawing.Size(38, 20)
-        Me.btnGetSampleFile.TabIndex = 2
+        Me.btnGetSampleFile.TabIndex = 3
         Me.btnGetSampleFile.Text = "..."
         Me.btnGetSampleFile.UseVisualStyleBackColor = True
         '
@@ -3473,7 +3473,7 @@ Partial Class Form1
         Me.txtSampleFile.Location = New System.Drawing.Point(22, 70)
         Me.txtSampleFile.Name = "txtSampleFile"
         Me.txtSampleFile.Size = New System.Drawing.Size(471, 20)
-        Me.txtSampleFile.TabIndex = 1
+        Me.txtSampleFile.TabIndex = 2
         '
         'ViewCollection
         '
@@ -3549,7 +3549,7 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.Location = New System.Drawing.Point(93, 28)
         Me.GroupBoxMovieDetails.Name = "GroupBoxMovieDetails"
         Me.GroupBoxMovieDetails.Size = New System.Drawing.Size(504, 549)
-        Me.GroupBoxMovieDetails.TabIndex = 74
+        Me.GroupBoxMovieDetails.TabIndex = 1
         Me.GroupBoxMovieDetails.TabStop = False
         '
         'TextBox37
@@ -3558,7 +3558,7 @@ Partial Class Form1
         Me.TextBox37.Location = New System.Drawing.Point(257, 20)
         Me.TextBox37.Name = "TextBox37"
         Me.TextBox37.Size = New System.Drawing.Size(63, 20)
-        Me.TextBox37.TabIndex = 78
+        Me.TextBox37.TabIndex = 2
         '
         'MovieBindingSource
         '
@@ -3570,7 +3570,7 @@ Partial Class Form1
         Me.Label103.Location = New System.Drawing.Point(326, 242)
         Me.Label103.Name = "Label103"
         Me.Label103.Size = New System.Drawing.Size(31, 13)
-        Me.Label103.TabIndex = 77
+        Me.Label103.TabIndex = 32
         Me.Label103.Text = "Tags"
         '
         'Label102
@@ -3579,7 +3579,7 @@ Partial Class Form1
         Me.Label102.Location = New System.Drawing.Point(184, 242)
         Me.Label102.Name = "Label102"
         Me.Label102.Size = New System.Drawing.Size(37, 13)
-        Me.Label102.TabIndex = 76
+        Me.Label102.TabIndex = 30
         Me.Label102.Text = "Studio"
         '
         'TextBox33
@@ -3588,7 +3588,7 @@ Partial Class Form1
         Me.TextBox33.Location = New System.Drawing.Point(227, 239)
         Me.TextBox33.Name = "TextBox33"
         Me.TextBox33.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox33.TabIndex = 75
+        Me.TextBox33.TabIndex = 31
         '
         'TextBox32
         '
@@ -3596,7 +3596,7 @@ Partial Class Form1
         Me.TextBox32.Location = New System.Drawing.Point(376, 239)
         Me.TextBox32.Name = "TextBox32"
         Me.TextBox32.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox32.TabIndex = 74
+        Me.TextBox32.TabIndex = 33
         '
         'PictureBox1
         '
@@ -3615,7 +3615,7 @@ Partial Class Form1
         Me.TextBox31.Location = New System.Drawing.Point(227, 213)
         Me.TextBox31.Name = "TextBox31"
         Me.TextBox31.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox31.TabIndex = 73
+        Me.TextBox31.TabIndex = 27
         '
         'TextBox2
         '
@@ -3623,7 +3623,7 @@ Partial Class Form1
         Me.TextBox2.Location = New System.Drawing.Point(202, 20)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox2.TabIndex = 4
+        Me.TextBox2.TabIndex = 1
         '
         'Label82
         '
@@ -3631,7 +3631,7 @@ Partial Class Form1
         Me.Label82.Location = New System.Drawing.Point(184, 216)
         Me.Label82.Name = "Label82"
         Me.Label82.Size = New System.Drawing.Size(42, 13)
-        Me.Label82.TabIndex = 72
+        Me.Label82.TabIndex = 26
         Me.Label82.Text = "Tagline"
         '
         'Label49
@@ -3640,7 +3640,7 @@ Partial Class Form1
         Me.Label49.Location = New System.Drawing.Point(172, 23)
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(24, 13)
-        Me.Label49.TabIndex = 8
+        Me.Label49.TabIndex = 0
         Me.Label49.Text = "Nbr"
         '
         'TextBox30
@@ -3649,7 +3649,7 @@ Partial Class Form1
         Me.TextBox30.Location = New System.Drawing.Point(227, 187)
         Me.TextBox30.Name = "TextBox30"
         Me.TextBox30.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox30.TabIndex = 71
+        Me.TextBox30.TabIndex = 23
         '
         'TextBox5
         '
@@ -3657,7 +3657,7 @@ Partial Class Form1
         Me.TextBox5.Location = New System.Drawing.Point(367, 20)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(35, 20)
-        Me.TextBox5.TabIndex = 9
+        Me.TextBox5.TabIndex = 4
         '
         'Label81
         '
@@ -3665,7 +3665,7 @@ Partial Class Form1
         Me.Label81.Location = New System.Drawing.Point(184, 190)
         Me.Label81.Name = "Label81"
         Me.Label81.Size = New System.Drawing.Size(26, 13)
-        Me.Label81.TabIndex = 70
+        Me.Label81.TabIndex = 22
         Me.Label81.Text = "Cert"
         '
         'Label50
@@ -3674,7 +3674,7 @@ Partial Class Form1
         Me.Label50.Location = New System.Drawing.Point(326, 23)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(38, 13)
-        Me.Label50.TabIndex = 10
+        Me.Label50.TabIndex = 3
         Me.Label50.Text = "Rating"
         '
         'Label80
@@ -3683,7 +3683,7 @@ Partial Class Form1
         Me.Label80.Location = New System.Drawing.Point(329, 216)
         Me.Label80.Name = "Label80"
         Me.Label80.Size = New System.Drawing.Size(35, 13)
-        Me.Label80.TabIndex = 69
+        Me.Label80.TabIndex = 28
         Me.Label80.Text = "Writer"
         '
         'RichTextBox1
@@ -3694,7 +3694,7 @@ Partial Class Form1
         Me.RichTextBox1.Location = New System.Drawing.Point(187, 329)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(310, 93)
-        Me.RichTextBox1.TabIndex = 13
+        Me.RichTextBox1.TabIndex = 36
         Me.RichTextBox1.Text = ""
         '
         'TextBox29
@@ -3703,7 +3703,7 @@ Partial Class Form1
         Me.TextBox29.Location = New System.Drawing.Point(376, 213)
         Me.TextBox29.Name = "TextBox29"
         Me.TextBox29.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox29.TabIndex = 68
+        Me.TextBox29.TabIndex = 29
         '
         'RichTextBox2
         '
@@ -3713,7 +3713,7 @@ Partial Class Form1
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.RichTextBox2.Size = New System.Drawing.Size(310, 56)
-        Me.RichTextBox2.TabIndex = 14
+        Me.RichTextBox2.TabIndex = 37
         Me.RichTextBox2.Text = ""
         '
         'GroupBox14
@@ -3728,7 +3728,7 @@ Partial Class Form1
         Me.GroupBox14.Location = New System.Drawing.Point(172, 43)
         Me.GroupBox14.Name = "GroupBox14"
         Me.GroupBox14.Size = New System.Drawing.Size(236, 86)
-        Me.GroupBox14.TabIndex = 15
+        Me.GroupBox14.TabIndex = 7
         Me.GroupBox14.TabStop = False
         Me.GroupBox14.Text = "Titles"
         Me.ToolTip1.SetToolTip(Me.GroupBox14, "Shows all3 titles and the edition field")
@@ -3739,7 +3739,7 @@ Partial Class Form1
         Me.TextBox36.Location = New System.Drawing.Point(154, 60)
         Me.TextBox36.Name = "TextBox36"
         Me.TextBox36.Size = New System.Drawing.Size(76, 20)
-        Me.TextBox36.TabIndex = 12
+        Me.TextBox36.TabIndex = 6
         '
         'Label53
         '
@@ -3747,7 +3747,7 @@ Partial Class Form1
         Me.Label53.Location = New System.Drawing.Point(6, 63)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(54, 13)
-        Me.Label53.TabIndex = 11
+        Me.Label53.TabIndex = 4
         Me.Label53.Text = "Formatted"
         '
         'Label52
@@ -3756,7 +3756,7 @@ Partial Class Form1
         Me.Label52.Location = New System.Drawing.Point(6, 39)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(57, 13)
-        Me.Label52.TabIndex = 10
+        Me.Label52.TabIndex = 2
         Me.Label52.Text = "Translated"
         '
         'Label51
@@ -3765,7 +3765,7 @@ Partial Class Form1
         Me.Label51.Location = New System.Drawing.Point(7, 15)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(42, 13)
-        Me.Label51.TabIndex = 9
+        Me.Label51.TabIndex = 0
         Me.Label51.Text = "Original"
         '
         'TextBox7
@@ -3775,7 +3775,7 @@ Partial Class Form1
         Me.TextBox7.Location = New System.Drawing.Point(65, 60)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(83, 20)
-        Me.TextBox7.TabIndex = 4
+        Me.TextBox7.TabIndex = 5
         '
         'TextBox6
         '
@@ -3793,7 +3793,7 @@ Partial Class Form1
         Me.TextBox1.Location = New System.Drawing.Point(65, 12)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(165, 20)
-        Me.TextBox1.TabIndex = 2
+        Me.TextBox1.TabIndex = 1
         '
         'Label78
         '
@@ -3802,7 +3802,7 @@ Partial Class Form1
         Me.Label78.Location = New System.Drawing.Point(179, 523)
         Me.Label78.Name = "Label78"
         Me.Label78.Size = New System.Drawing.Size(33, 13)
-        Me.Label78.TabIndex = 64
+        Me.Label78.TabIndex = 42
         Me.Label78.Text = "Disks"
         '
         'RichTextBox3
@@ -3811,7 +3811,7 @@ Partial Class Form1
         Me.RichTextBox3.Location = New System.Drawing.Point(227, 266)
         Me.RichTextBox3.Name = "RichTextBox3"
         Me.RichTextBox3.Size = New System.Drawing.Size(270, 59)
-        Me.RichTextBox3.TabIndex = 16
+        Me.RichTextBox3.TabIndex = 35
         Me.RichTextBox3.Text = ""
         '
         'TextBox28
@@ -3821,7 +3821,7 @@ Partial Class Form1
         Me.TextBox28.Location = New System.Drawing.Point(215, 520)
         Me.TextBox28.Name = "TextBox28"
         Me.TextBox28.Size = New System.Drawing.Size(36, 20)
-        Me.TextBox28.TabIndex = 63
+        Me.TextBox28.TabIndex = 43
         '
         'TextBox3
         '
@@ -3829,7 +3829,7 @@ Partial Class Form1
         Me.TextBox3.Location = New System.Drawing.Point(447, 20)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(50, 20)
-        Me.TextBox3.TabIndex = 17
+        Me.TextBox3.TabIndex = 6
         '
         'Label77
         '
@@ -3838,7 +3838,7 @@ Partial Class Form1
         Me.Label77.Location = New System.Drawing.Point(179, 497)
         Me.Label77.Name = "Label77"
         Me.Label77.Size = New System.Drawing.Size(27, 13)
-        Me.Label77.TabIndex = 62
+        Me.Label77.TabIndex = 38
         Me.Label77.Text = "Size"
         '
         'Label54
@@ -3847,7 +3847,7 @@ Partial Class Form1
         Me.Label54.Location = New System.Drawing.Point(411, 23)
         Me.Label54.Name = "Label54"
         Me.Label54.Size = New System.Drawing.Size(30, 13)
-        Me.Label54.TabIndex = 18
+        Me.Label54.TabIndex = 5
         Me.Label54.Text = "Date"
         '
         'TextBox27
@@ -3857,7 +3857,7 @@ Partial Class Form1
         Me.TextBox27.Location = New System.Drawing.Point(215, 494)
         Me.TextBox27.Name = "TextBox27"
         Me.TextBox27.Size = New System.Drawing.Size(36, 20)
-        Me.TextBox27.TabIndex = 61
+        Me.TextBox27.TabIndex = 39
         '
         'TextBox4
         '
@@ -3865,7 +3865,7 @@ Partial Class Form1
         Me.TextBox4.Location = New System.Drawing.Point(457, 53)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox4.TabIndex = 20
+        Me.TextBox4.TabIndex = 9
         '
         'Label74
         '
@@ -3874,7 +3874,7 @@ Partial Class Form1
         Me.Label74.Location = New System.Drawing.Point(10, 523)
         Me.Label74.Name = "Label74"
         Me.Label74.Size = New System.Drawing.Size(47, 13)
-        Me.Label74.TabIndex = 60
+        Me.Label74.TabIndex = 51
         Me.Label74.Text = "Subtitles"
         Me.Label74.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -3884,7 +3884,7 @@ Partial Class Form1
         Me.Label55.Location = New System.Drawing.Point(413, 56)
         Me.Label55.Name = "Label55"
         Me.Label55.Size = New System.Drawing.Size(29, 13)
-        Me.Label55.TabIndex = 21
+        Me.Label55.TabIndex = 8
         Me.Label55.Text = "Year"
         '
         'TextBox24
@@ -3895,7 +3895,7 @@ Partial Class Form1
         Me.TextBox24.Location = New System.Drawing.Point(70, 520)
         Me.TextBox24.Name = "TextBox24"
         Me.TextBox24.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox24.TabIndex = 59
+        Me.TextBox24.TabIndex = 52
         '
         'TextBox9
         '
@@ -3903,7 +3903,7 @@ Partial Class Form1
         Me.TextBox9.Location = New System.Drawing.Point(457, 79)
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox9.TabIndex = 22
+        Me.TextBox9.TabIndex = 11
         '
         'Label73
         '
@@ -3912,7 +3912,7 @@ Partial Class Form1
         Me.Label73.Location = New System.Drawing.Point(7, 497)
         Me.Label73.Name = "Label73"
         Me.Label73.Size = New System.Drawing.Size(60, 13)
-        Me.Label73.TabIndex = 58
+        Me.Label73.TabIndex = 49
         Me.Label73.Text = "Languages"
         Me.Label73.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -3922,7 +3922,7 @@ Partial Class Form1
         Me.Label57.Location = New System.Drawing.Point(413, 82)
         Me.Label57.Name = "Label57"
         Me.Label57.Size = New System.Drawing.Size(32, 13)
-        Me.Label57.TabIndex = 23
+        Me.Label57.TabIndex = 10
         Me.Label57.Text = "Chkd"
         Me.Label57.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -3934,7 +3934,7 @@ Partial Class Form1
         Me.TextBox23.Location = New System.Drawing.Point(70, 494)
         Me.TextBox23.Name = "TextBox23"
         Me.TextBox23.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox23.TabIndex = 57
+        Me.TextBox23.TabIndex = 50
         '
         'TextBox8
         '
@@ -3942,7 +3942,7 @@ Partial Class Form1
         Me.TextBox8.Location = New System.Drawing.Point(457, 105)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox8.TabIndex = 24
+        Me.TextBox8.TabIndex = 13
         '
         'GroupBox22
         '
@@ -3954,7 +3954,7 @@ Partial Class Form1
         Me.GroupBox22.Location = New System.Drawing.Point(11, 424)
         Me.GroupBox22.Name = "GroupBox22"
         Me.GroupBox22.Size = New System.Drawing.Size(152, 62)
-        Me.GroupBox22.TabIndex = 56
+        Me.GroupBox22.TabIndex = 48
         Me.GroupBox22.TabStop = False
         Me.GroupBox22.Text = "Audio"
         '
@@ -3964,7 +3964,7 @@ Partial Class Form1
         Me.Label75.Location = New System.Drawing.Point(9, 39)
         Me.Label75.Name = "Label75"
         Me.Label75.Size = New System.Drawing.Size(37, 13)
-        Me.Label75.TabIndex = 45
+        Me.Label75.TabIndex = 2
         Me.Label75.Text = "Bitrate"
         Me.Label75.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -3974,7 +3974,7 @@ Partial Class Form1
         Me.Label76.Location = New System.Drawing.Point(6, 16)
         Me.Label76.Name = "Label76"
         Me.Label76.Size = New System.Drawing.Size(39, 13)
-        Me.Label76.TabIndex = 43
+        Me.Label76.TabIndex = 0
         Me.Label76.Text = "Format"
         Me.Label76.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -3985,7 +3985,7 @@ Partial Class Form1
         Me.TextBox25.Location = New System.Drawing.Point(59, 13)
         Me.TextBox25.Name = "TextBox25"
         Me.TextBox25.Size = New System.Drawing.Size(86, 20)
-        Me.TextBox25.TabIndex = 42
+        Me.TextBox25.TabIndex = 1
         '
         'TextBox26
         '
@@ -3994,7 +3994,7 @@ Partial Class Form1
         Me.TextBox26.Location = New System.Drawing.Point(59, 36)
         Me.TextBox26.Name = "TextBox26"
         Me.TextBox26.Size = New System.Drawing.Size(86, 20)
-        Me.TextBox26.TabIndex = 44
+        Me.TextBox26.TabIndex = 3
         '
         'Label56
         '
@@ -4002,7 +4002,7 @@ Partial Class Form1
         Me.Label56.Location = New System.Drawing.Point(411, 108)
         Me.Label56.Name = "Label56"
         Me.Label56.Size = New System.Drawing.Size(40, 13)
-        Me.Label56.TabIndex = 25
+        Me.Label56.TabIndex = 12
         Me.Label56.Text = "Length"
         Me.Label56.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -4020,7 +4020,7 @@ Partial Class Form1
         Me.GroupBox21.Location = New System.Drawing.Point(11, 316)
         Me.GroupBox21.Name = "GroupBox21"
         Me.GroupBox21.Size = New System.Drawing.Size(152, 106)
-        Me.GroupBox21.TabIndex = 55
+        Me.GroupBox21.TabIndex = 47
         Me.GroupBox21.TabStop = False
         Me.GroupBox21.Text = "Video"
         '
@@ -4030,7 +4030,7 @@ Partial Class Form1
         Me.Label72.Location = New System.Drawing.Point(3, 84)
         Me.Label72.Name = "Label72"
         Me.Label72.Size = New System.Drawing.Size(54, 13)
-        Me.Label72.TabIndex = 49
+        Me.Label72.TabIndex = 6
         Me.Label72.Text = "Framerate"
         Me.Label72.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -4041,7 +4041,7 @@ Partial Class Form1
         Me.TextBox22.Location = New System.Drawing.Point(59, 82)
         Me.TextBox22.Name = "TextBox22"
         Me.TextBox22.Size = New System.Drawing.Size(86, 20)
-        Me.TextBox22.TabIndex = 48
+        Me.TextBox22.TabIndex = 7
         '
         'Label71
         '
@@ -4049,7 +4049,7 @@ Partial Class Form1
         Me.Label71.Location = New System.Drawing.Point(1, 62)
         Me.Label71.Name = "Label71"
         Me.Label71.Size = New System.Drawing.Size(57, 13)
-        Me.Label71.TabIndex = 47
+        Me.Label71.TabIndex = 4
         Me.Label71.Text = "Resolution"
         Me.Label71.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -4060,7 +4060,7 @@ Partial Class Form1
         Me.TextBox21.Location = New System.Drawing.Point(59, 59)
         Me.TextBox21.Name = "TextBox21"
         Me.TextBox21.Size = New System.Drawing.Size(86, 20)
-        Me.TextBox21.TabIndex = 46
+        Me.TextBox21.TabIndex = 5
         '
         'Label69
         '
@@ -4068,7 +4068,7 @@ Partial Class Form1
         Me.Label69.Location = New System.Drawing.Point(9, 39)
         Me.Label69.Name = "Label69"
         Me.Label69.Size = New System.Drawing.Size(37, 13)
-        Me.Label69.TabIndex = 45
+        Me.Label69.TabIndex = 2
         Me.Label69.Text = "Bitrate"
         Me.Label69.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -4078,7 +4078,7 @@ Partial Class Form1
         Me.Label70.Location = New System.Drawing.Point(6, 16)
         Me.Label70.Name = "Label70"
         Me.Label70.Size = New System.Drawing.Size(39, 13)
-        Me.Label70.TabIndex = 43
+        Me.Label70.TabIndex = 0
         Me.Label70.Text = "Format"
         Me.Label70.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -4089,7 +4089,7 @@ Partial Class Form1
         Me.TextBox19.Location = New System.Drawing.Point(59, 13)
         Me.TextBox19.Name = "TextBox19"
         Me.TextBox19.Size = New System.Drawing.Size(86, 20)
-        Me.TextBox19.TabIndex = 42
+        Me.TextBox19.TabIndex = 1
         '
         'TextBox20
         '
@@ -4098,7 +4098,7 @@ Partial Class Form1
         Me.TextBox20.Location = New System.Drawing.Point(59, 36)
         Me.TextBox20.Name = "TextBox20"
         Me.TextBox20.Size = New System.Drawing.Size(86, 20)
-        Me.TextBox20.TabIndex = 44
+        Me.TextBox20.TabIndex = 3
         '
         'Label58
         '
@@ -4106,7 +4106,7 @@ Partial Class Form1
         Me.Label58.Location = New System.Drawing.Point(184, 266)
         Me.Label58.Name = "Label58"
         Me.Label58.Size = New System.Drawing.Size(37, 13)
-        Me.Label58.TabIndex = 26
+        Me.Label58.TabIndex = 34
         Me.Label58.Text = "Actors"
         '
         'GroupBox15
@@ -4119,7 +4119,7 @@ Partial Class Form1
         Me.GroupBox15.Location = New System.Drawing.Point(10, 251)
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.Size = New System.Drawing.Size(153, 59)
-        Me.GroupBox15.TabIndex = 54
+        Me.GroupBox15.TabIndex = 46
         Me.GroupBox15.TabStop = False
         Me.GroupBox15.Text = "Media"
         '
@@ -4129,7 +4129,7 @@ Partial Class Form1
         Me.Label68.Location = New System.Drawing.Point(9, 39)
         Me.Label68.Name = "Label68"
         Me.Label68.Size = New System.Drawing.Size(31, 13)
-        Me.Label68.TabIndex = 45
+        Me.Label68.TabIndex = 2
         Me.Label68.Text = "Type"
         '
         'Label67
@@ -4138,7 +4138,7 @@ Partial Class Form1
         Me.Label67.Location = New System.Drawing.Point(9, 15)
         Me.Label67.Name = "Label67"
         Me.Label67.Size = New System.Drawing.Size(33, 13)
-        Me.Label67.TabIndex = 43
+        Me.Label67.TabIndex = 0
         Me.Label67.Text = "Label"
         '
         'TextBox17
@@ -4148,7 +4148,7 @@ Partial Class Form1
         Me.TextBox17.Location = New System.Drawing.Point(53, 12)
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox17.TabIndex = 42
+        Me.TextBox17.TabIndex = 1
         '
         'TextBox18
         '
@@ -4157,7 +4157,7 @@ Partial Class Form1
         Me.TextBox18.Location = New System.Drawing.Point(53, 36)
         Me.TextBox18.Name = "TextBox18"
         Me.TextBox18.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox18.TabIndex = 44
+        Me.TextBox18.TabIndex = 3
         '
         'TextBox10
         '
@@ -4166,7 +4166,7 @@ Partial Class Form1
         Me.TextBox10.Location = New System.Drawing.Point(376, 135)
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox10.TabIndex = 27
+        Me.TextBox10.TabIndex = 17
         '
         'Label66
         '
@@ -4174,7 +4174,7 @@ Partial Class Form1
         Me.Label66.Location = New System.Drawing.Point(326, 190)
         Me.Label66.Name = "Label66"
         Me.Label66.Size = New System.Drawing.Size(49, 13)
-        Me.Label66.TabIndex = 41
+        Me.Label66.TabIndex = 24
         Me.Label66.Text = "Borrower"
         '
         'Label60
@@ -4183,7 +4183,7 @@ Partial Class Form1
         Me.Label60.Location = New System.Drawing.Point(326, 138)
         Me.Label60.Name = "Label60"
         Me.Label60.Size = New System.Drawing.Size(44, 13)
-        Me.Label60.TabIndex = 29
+        Me.Label60.TabIndex = 16
         Me.Label60.Text = "Director"
         '
         'TextBox16
@@ -4193,7 +4193,7 @@ Partial Class Form1
         Me.TextBox16.Location = New System.Drawing.Point(376, 187)
         Me.TextBox16.Name = "TextBox16"
         Me.TextBox16.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox16.TabIndex = 40
+        Me.TextBox16.TabIndex = 25
         '
         'TextBox11
         '
@@ -4202,7 +4202,7 @@ Partial Class Form1
         Me.TextBox11.Location = New System.Drawing.Point(376, 161)
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox11.TabIndex = 30
+        Me.TextBox11.TabIndex = 21
         '
         'Label64
         '
@@ -4211,7 +4211,7 @@ Partial Class Form1
         Me.Label64.Location = New System.Drawing.Point(264, 523)
         Me.Label64.Name = "Label64"
         Me.Label64.Size = New System.Drawing.Size(29, 13)
-        Me.Label64.TabIndex = 39
+        Me.Label64.TabIndex = 44
         Me.Label64.Text = "URL"
         '
         'Label61
@@ -4220,7 +4220,7 @@ Partial Class Form1
         Me.Label61.Location = New System.Drawing.Point(326, 164)
         Me.Label61.Name = "Label61"
         Me.Label61.Size = New System.Drawing.Size(50, 13)
-        Me.Label61.TabIndex = 31
+        Me.Label61.TabIndex = 20
         Me.Label61.Text = "Producer"
         '
         'TextBox14
@@ -4231,7 +4231,7 @@ Partial Class Form1
         Me.TextBox14.Location = New System.Drawing.Point(299, 520)
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.Size = New System.Drawing.Size(198, 20)
-        Me.TextBox14.TabIndex = 38
+        Me.TextBox14.TabIndex = 45
         '
         'TextBox13
         '
@@ -4240,7 +4240,7 @@ Partial Class Form1
         Me.TextBox13.Location = New System.Drawing.Point(227, 161)
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox13.TabIndex = 32
+        Me.TextBox13.TabIndex = 19
         '
         'Label65
         '
@@ -4249,7 +4249,7 @@ Partial Class Form1
         Me.Label65.Location = New System.Drawing.Point(254, 497)
         Me.Label65.Name = "Label65"
         Me.Label65.Size = New System.Drawing.Size(41, 13)
-        Me.Label65.TabIndex = 37
+        Me.Label65.TabIndex = 40
         Me.Label65.Text = "Source"
         '
         'Label63
@@ -4258,7 +4258,7 @@ Partial Class Form1
         Me.Label63.Location = New System.Drawing.Point(172, 164)
         Me.Label63.Name = "Label63"
         Me.Label63.Size = New System.Drawing.Size(43, 13)
-        Me.Label63.TabIndex = 33
+        Me.Label63.TabIndex = 18
         Me.Label63.Text = "Country"
         '
         'TextBox15
@@ -4269,7 +4269,7 @@ Partial Class Form1
         Me.TextBox15.Location = New System.Drawing.Point(299, 494)
         Me.TextBox15.Name = "TextBox15"
         Me.TextBox15.Size = New System.Drawing.Size(198, 20)
-        Me.TextBox15.TabIndex = 36
+        Me.TextBox15.TabIndex = 41
         '
         'TextBox12
         '
@@ -4278,7 +4278,7 @@ Partial Class Form1
         Me.TextBox12.Location = New System.Drawing.Point(227, 135)
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox12.TabIndex = 34
+        Me.TextBox12.TabIndex = 15
         '
         'Label62
         '
@@ -4286,7 +4286,7 @@ Partial Class Form1
         Me.Label62.Location = New System.Drawing.Point(172, 138)
         Me.Label62.Name = "Label62"
         Me.Label62.Size = New System.Drawing.Size(49, 13)
-        Me.Label62.TabIndex = 35
+        Me.Label62.TabIndex = 14
         Me.Label62.Text = "Category"
         '
         'XionPanel1
@@ -4304,7 +4304,7 @@ Partial Class Form1
         Me.XionPanel1.Sizable = True
         Me.XionPanel1.Size = New System.Drawing.Size(84, 546)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
-        Me.XionPanel1.TabIndex = 67
+        Me.XionPanel1.TabIndex = 0
         Me.XionPanel1.Text = "Movie List"
         Me.XionPanel1.Title = "Movie List"
         Me.XionPanel1.TitleBackColor = System.Drawing.SystemColors.GradientActiveCaption
@@ -4318,39 +4318,39 @@ Partial Class Form1
         Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle18
         Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
         Me.DataGridViewMovie.Name = "DataGridViewMovie"
         Me.DataGridViewMovie.ReadOnly = True
         Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.DataGridViewMovie.RowHeadersVisible = False
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridViewMovie.RowTemplate.Height = 16
         Me.DataGridViewMovie.Size = New System.Drawing.Size(80, 520)
-        Me.DataGridViewMovie.TabIndex = 1
+        Me.DataGridViewMovie.TabIndex = 0
         '
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle15
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -4359,8 +4359,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle16
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -4383,8 +4383,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -4438,7 +4438,7 @@ Partial Class Form1
         Me.MovieBindingNavigator.Name = "MovieBindingNavigator"
         Me.MovieBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
         Me.MovieBindingNavigator.Size = New System.Drawing.Size(594, 25)
-        Me.MovieBindingNavigator.TabIndex = 3
+        Me.MovieBindingNavigator.TabIndex = 0
         Me.MovieBindingNavigator.Text = "BindingNavigator1"
         '
         'BindingNavigatorAddNewItem
@@ -4601,7 +4601,7 @@ Partial Class Form1
         Me.GroupBoxPersonInfo.Location = New System.Drawing.Point(206, 31)
         Me.GroupBoxPersonInfo.Name = "GroupBoxPersonInfo"
         Me.GroupBoxPersonInfo.Size = New System.Drawing.Size(394, 546)
-        Me.GroupBoxPersonInfo.TabIndex = 9
+        Me.GroupBoxPersonInfo.TabIndex = 2
         Me.GroupBoxPersonInfo.TabStop = False
         Me.GroupBoxPersonInfo.Text = "Person Info ..."
         '
@@ -4618,7 +4618,7 @@ Partial Class Form1
         Me.GroupBox5.Location = New System.Drawing.Point(9, 462)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(379, 79)
-        Me.GroupBox5.TabIndex = 102
+        Me.GroupBox5.TabIndex = 0
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Internet Grabber Options ..."
         '
@@ -4628,7 +4628,7 @@ Partial Class Form1
         Me.CheckBox1.Location = New System.Drawing.Point(268, 49)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(71, 17)
-        Me.CheckBox1.TabIndex = 56
+        Me.CheckBox1.TabIndex = 6
         Me.CheckBox1.Text = "Don't ask"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
@@ -4638,14 +4638,14 @@ Partial Class Form1
         Me.TextBox34.Location = New System.Drawing.Point(97, 19)
         Me.TextBox34.Name = "TextBox34"
         Me.TextBox34.Size = New System.Drawing.Size(111, 20)
-        Me.TextBox34.TabIndex = 55
+        Me.TextBox34.TabIndex = 1
         '
         'Button3
         '
         Me.Button3.Location = New System.Drawing.Point(268, 18)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(94, 21)
-        Me.Button3.TabIndex = 54
+        Me.Button3.TabIndex = 3
         Me.Button3.Text = "Grabber Options"
         Me.Button3.UseVisualStyleBackColor = True
         '
@@ -4655,7 +4655,7 @@ Partial Class Form1
         Me.Label104.Location = New System.Drawing.Point(6, 44)
         Me.Label104.Name = "Label104"
         Me.Label104.Size = New System.Drawing.Size(85, 26)
-        Me.Label104.TabIndex = 53
+        Me.Label104.TabIndex = 4
         Me.Label104.Text = "Internet Lookup " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Behaviour"
         '
         'Button4
@@ -4664,7 +4664,7 @@ Partial Class Form1
         Me.Button4.Location = New System.Drawing.Point(217, 19)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(36, 20)
-        Me.Button4.TabIndex = 47
+        Me.Button4.TabIndex = 2
         Me.Button4.Text = "..."
         Me.Button4.UseVisualStyleBackColor = True
         '
@@ -4675,7 +4675,7 @@ Partial Class Form1
         Me.ComboBox1.Location = New System.Drawing.Point(97, 47)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(156, 21)
-        Me.ComboBox1.TabIndex = 50
+        Me.ComboBox1.TabIndex = 5
         '
         'TextBox35
         '
@@ -4691,7 +4691,7 @@ Partial Class Form1
         Me.Label105.Location = New System.Drawing.Point(6, 22)
         Me.Label105.Name = "Label105"
         Me.Label105.Size = New System.Drawing.Size(75, 13)
-        Me.Label105.TabIndex = 51
+        Me.Label105.TabIndex = 0
         Me.Label105.Text = "Grabber Script"
         '
         'CheckBoxWriter
@@ -4701,7 +4701,7 @@ Partial Class Form1
         Me.CheckBoxWriter.Location = New System.Drawing.Point(248, 218)
         Me.CheckBoxWriter.Name = "CheckBoxWriter"
         Me.CheckBoxWriter.Size = New System.Drawing.Size(54, 17)
-        Me.CheckBoxWriter.TabIndex = 29
+        Me.CheckBoxWriter.TabIndex = 12
         Me.CheckBoxWriter.Text = "Writer"
         Me.CheckBoxWriter.UseVisualStyleBackColor = True
         '
@@ -4716,7 +4716,7 @@ Partial Class Form1
         Me.CheckBoxDirector.Location = New System.Drawing.Point(248, 195)
         Me.CheckBoxDirector.Name = "CheckBoxDirector"
         Me.CheckBoxDirector.Size = New System.Drawing.Size(63, 17)
-        Me.CheckBoxDirector.TabIndex = 28
+        Me.CheckBoxDirector.TabIndex = 11
         Me.CheckBoxDirector.Text = "Director"
         Me.CheckBoxDirector.UseVisualStyleBackColor = True
         '
@@ -4727,7 +4727,7 @@ Partial Class Form1
         Me.CheckBoxProducer.Location = New System.Drawing.Point(248, 172)
         Me.CheckBoxProducer.Name = "CheckBoxProducer"
         Me.CheckBoxProducer.Size = New System.Drawing.Size(69, 17)
-        Me.CheckBoxProducer.TabIndex = 27
+        Me.CheckBoxProducer.TabIndex = 9
         Me.CheckBoxProducer.Text = "Producer"
         Me.CheckBoxProducer.UseVisualStyleBackColor = True
         '
@@ -4738,7 +4738,7 @@ Partial Class Form1
         Me.CheckBoxActor.Location = New System.Drawing.Point(248, 149)
         Me.CheckBoxActor.Name = "CheckBoxActor"
         Me.CheckBoxActor.Size = New System.Drawing.Size(51, 17)
-        Me.CheckBoxActor.TabIndex = 26
+        Me.CheckBoxActor.TabIndex = 8
         Me.CheckBoxActor.Text = "Actor"
         Me.CheckBoxActor.UseVisualStyleBackColor = True
         '
@@ -4748,7 +4748,7 @@ Partial Class Form1
         Me.Label99.Location = New System.Drawing.Point(6, 387)
         Me.Label99.Name = "Label99"
         Me.Label99.Size = New System.Drawing.Size(29, 13)
-        Me.Label99.TabIndex = 25
+        Me.Label99.TabIndex = 17
         Me.Label99.Text = "URL"
         '
         'Label98
@@ -4757,7 +4757,7 @@ Partial Class Form1
         Me.Label98.Location = New System.Drawing.Point(68, 414)
         Me.Label98.Name = "Label98"
         Me.Label98.Size = New System.Drawing.Size(49, 13)
-        Me.Label98.TabIndex = 24
+        Me.Label98.TabIndex = 19
         Me.Label98.Text = "IMDB_Id"
         '
         'Label97
@@ -4766,7 +4766,7 @@ Partial Class Form1
         Me.Label97.Location = New System.Drawing.Point(229, 413)
         Me.Label97.Name = "Label97"
         Me.Label97.Size = New System.Drawing.Size(53, 13)
-        Me.Label97.TabIndex = 23
+        Me.Label97.TabIndex = 21
         Me.Label97.Text = "TMDB_Id"
         '
         'Label96
@@ -4775,7 +4775,7 @@ Partial Class Form1
         Me.Label96.Location = New System.Drawing.Point(6, 439)
         Me.Label96.Name = "Label96"
         Me.Label96.Size = New System.Drawing.Size(40, 13)
-        Me.Label96.TabIndex = 22
+        Me.Label96.TabIndex = 23
         Me.Label96.Text = "Photos"
         '
         'ViewPersons_Photos
@@ -4784,7 +4784,7 @@ Partial Class Form1
         Me.ViewPersons_Photos.Location = New System.Drawing.Point(66, 436)
         Me.ViewPersons_Photos.Name = "ViewPersons_Photos"
         Me.ViewPersons_Photos.Size = New System.Drawing.Size(322, 20)
-        Me.ViewPersons_Photos.TabIndex = 21
+        Me.ViewPersons_Photos.TabIndex = 24
         '
         'ViewPersons_URL
         '
@@ -4792,7 +4792,7 @@ Partial Class Form1
         Me.ViewPersons_URL.Location = New System.Drawing.Point(66, 384)
         Me.ViewPersons_URL.Name = "ViewPersons_URL"
         Me.ViewPersons_URL.Size = New System.Drawing.Size(322, 20)
-        Me.ViewPersons_URL.TabIndex = 20
+        Me.ViewPersons_URL.TabIndex = 18
         '
         'ViewPersons_TMDB_Id
         '
@@ -4800,7 +4800,7 @@ Partial Class Form1
         Me.ViewPersons_TMDB_Id.Location = New System.Drawing.Point(288, 411)
         Me.ViewPersons_TMDB_Id.Name = "ViewPersons_TMDB_Id"
         Me.ViewPersons_TMDB_Id.Size = New System.Drawing.Size(100, 20)
-        Me.ViewPersons_TMDB_Id.TabIndex = 19
+        Me.ViewPersons_TMDB_Id.TabIndex = 22
         '
         'ViewPersons_IMDB_Id
         '
@@ -4808,7 +4808,7 @@ Partial Class Form1
         Me.ViewPersons_IMDB_Id.Location = New System.Drawing.Point(123, 410)
         Me.ViewPersons_IMDB_Id.Name = "ViewPersons_IMDB_Id"
         Me.ViewPersons_IMDB_Id.Size = New System.Drawing.Size(100, 20)
-        Me.ViewPersons_IMDB_Id.TabIndex = 18
+        Me.ViewPersons_IMDB_Id.TabIndex = 20
         '
         'Label95
         '
@@ -4816,7 +4816,7 @@ Partial Class Form1
         Me.Label95.Location = New System.Drawing.Point(6, 245)
         Me.Label95.Name = "Label95"
         Me.Label95.Size = New System.Drawing.Size(54, 26)
-        Me.Label95.TabIndex = 14
+        Me.Label95.TabIndex = 13
         Me.Label95.Text = "Mini " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Biography"
         '
         'Label94
@@ -4825,7 +4825,7 @@ Partial Class Form1
         Me.Label94.Location = New System.Drawing.Point(184, 126)
         Me.Label94.Name = "Label94"
         Me.Label94.Size = New System.Drawing.Size(58, 13)
-        Me.Label94.TabIndex = 13
+        Me.Label94.TabIndex = 6
         Me.Label94.Text = "Birth Place"
         '
         'Label93
@@ -4834,7 +4834,7 @@ Partial Class Form1
         Me.Label93.Location = New System.Drawing.Point(184, 100)
         Me.Label93.Name = "Label93"
         Me.Label93.Size = New System.Drawing.Size(54, 13)
-        Me.Label93.TabIndex = 12
+        Me.Label93.TabIndex = 4
         Me.Label93.Text = "Birth Date"
         '
         'ViewPersons_Birthplace
@@ -4843,7 +4843,7 @@ Partial Class Form1
         Me.ViewPersons_Birthplace.Location = New System.Drawing.Point(248, 123)
         Me.ViewPersons_Birthplace.Name = "ViewPersons_Birthplace"
         Me.ViewPersons_Birthplace.Size = New System.Drawing.Size(138, 20)
-        Me.ViewPersons_Birthplace.TabIndex = 11
+        Me.ViewPersons_Birthplace.TabIndex = 7
         '
         'ViewPersons_Birthday
         '
@@ -4851,7 +4851,7 @@ Partial Class Form1
         Me.ViewPersons_Birthday.Location = New System.Drawing.Point(248, 97)
         Me.ViewPersons_Birthday.Name = "ViewPersons_Birthday"
         Me.ViewPersons_Birthday.Size = New System.Drawing.Size(100, 20)
-        Me.ViewPersons_Birthday.TabIndex = 10
+        Me.ViewPersons_Birthday.TabIndex = 5
         '
         'ViewPersons_MiniBio
         '
@@ -4859,7 +4859,7 @@ Partial Class Form1
         Me.ViewPersons_MiniBio.Location = New System.Drawing.Point(66, 245)
         Me.ViewPersons_MiniBio.Name = "ViewPersons_MiniBio"
         Me.ViewPersons_MiniBio.Size = New System.Drawing.Size(320, 44)
-        Me.ViewPersons_MiniBio.TabIndex = 9
+        Me.ViewPersons_MiniBio.TabIndex = 14
         Me.ViewPersons_MiniBio.Text = ""
         '
         'ViewPersons_Name
@@ -4868,7 +4868,7 @@ Partial Class Form1
         Me.ViewPersons_Name.Location = New System.Drawing.Point(248, 24)
         Me.ViewPersons_Name.Name = "ViewPersons_Name"
         Me.ViewPersons_Name.Size = New System.Drawing.Size(138, 20)
-        Me.ViewPersons_Name.TabIndex = 3
+        Me.ViewPersons_Name.TabIndex = 1
         '
         'ViewPersons_Biography
         '
@@ -4876,7 +4876,7 @@ Partial Class Form1
         Me.ViewPersons_Biography.Location = New System.Drawing.Point(66, 298)
         Me.ViewPersons_Biography.Name = "ViewPersons_Biography"
         Me.ViewPersons_Biography.Size = New System.Drawing.Size(320, 80)
-        Me.ViewPersons_Biography.TabIndex = 6
+        Me.ViewPersons_Biography.TabIndex = 16
         Me.ViewPersons_Biography.Text = ""
         '
         'PictureBox2
@@ -4895,7 +4895,7 @@ Partial Class Form1
         Me.Label91.Location = New System.Drawing.Point(6, 298)
         Me.Label91.Name = "Label91"
         Me.Label91.Size = New System.Drawing.Size(54, 13)
-        Me.Label91.TabIndex = 5
+        Me.Label91.TabIndex = 15
         Me.Label91.Text = "Biography"
         '
         'Label92
@@ -4904,7 +4904,7 @@ Partial Class Form1
         Me.Label92.Location = New System.Drawing.Point(184, 62)
         Me.Label92.Name = "Label92"
         Me.Label92.Size = New System.Drawing.Size(52, 26)
-        Me.Label92.TabIndex = 8
+        Me.Label92.TabIndex = 2
         Me.Label92.Text = "Alternate " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name"
         '
         'Label90
@@ -4913,7 +4913,7 @@ Partial Class Form1
         Me.Label90.Location = New System.Drawing.Point(184, 27)
         Me.Label90.Name = "Label90"
         Me.Label90.Size = New System.Drawing.Size(35, 13)
-        Me.Label90.TabIndex = 4
+        Me.Label90.TabIndex = 0
         Me.Label90.Text = "Name"
         '
         'ViewPersons_OtherName
@@ -4922,7 +4922,7 @@ Partial Class Form1
         Me.ViewPersons_OtherName.Location = New System.Drawing.Point(248, 66)
         Me.ViewPersons_OtherName.Name = "ViewPersons_OtherName"
         Me.ViewPersons_OtherName.Size = New System.Drawing.Size(138, 20)
-        Me.ViewPersons_OtherName.TabIndex = 7
+        Me.ViewPersons_OtherName.TabIndex = 3
         '
         'XionPanelPerson
         '
@@ -4935,7 +4935,7 @@ Partial Class Form1
         Me.XionPanelPerson.Sizable = True
         Me.XionPanelPerson.Size = New System.Drawing.Size(197, 546)
         Me.XionPanelPerson.State = XionControls.XionPanel.PanelState.Expand
-        Me.XionPanelPerson.TabIndex = 2
+        Me.XionPanelPerson.TabIndex = 1
         Me.XionPanelPerson.Text = "Person List"
         Me.XionPanelPerson.Title = "Person List"
         Me.XionPanelPerson.TitleBackColor = System.Drawing.SystemColors.Control
@@ -5257,7 +5257,7 @@ Partial Class Form1
         Me.UserDataGridView.Name = "UserDataGridView"
         Me.UserDataGridView.RowTemplate.Height = 18
         Me.UserDataGridView.Size = New System.Drawing.Size(581, 145)
-        Me.UserDataGridView.TabIndex = 12
+        Me.UserDataGridView.TabIndex = 8
         '
         'DataGridViewTextBoxColumn14
         '
@@ -5309,7 +5309,7 @@ Partial Class Form1
         Me.CustomFieldDataGridView.Name = "CustomFieldDataGridView"
         Me.CustomFieldDataGridView.RowTemplate.Height = 18
         Me.CustomFieldDataGridView.Size = New System.Drawing.Size(581, 306)
-        Me.CustomFieldDataGridView.TabIndex = 12
+        Me.CustomFieldDataGridView.TabIndex = 9
         '
         'DataGridViewTextBoxColumn6
         '
@@ -5378,7 +5378,7 @@ Partial Class Form1
         Me.OwnerTextBox.Location = New System.Drawing.Point(77, 10)
         Me.OwnerTextBox.Name = "OwnerTextBox"
         Me.OwnerTextBox.Size = New System.Drawing.Size(220, 20)
-        Me.OwnerTextBox.TabIndex = 6
+        Me.OwnerTextBox.TabIndex = 1
         '
         'PropertiesBindingSource
         '
@@ -5391,7 +5391,7 @@ Partial Class Form1
         Me.MailTextBox.Location = New System.Drawing.Point(77, 36)
         Me.MailTextBox.Name = "MailTextBox"
         Me.MailTextBox.Size = New System.Drawing.Size(220, 20)
-        Me.MailTextBox.TabIndex = 8
+        Me.MailTextBox.TabIndex = 5
         '
         'SiteTextBox
         '
@@ -5399,7 +5399,7 @@ Partial Class Form1
         Me.SiteTextBox.Location = New System.Drawing.Point(372, 10)
         Me.SiteTextBox.Name = "SiteTextBox"
         Me.SiteTextBox.Size = New System.Drawing.Size(220, 20)
-        Me.SiteTextBox.TabIndex = 10
+        Me.SiteTextBox.TabIndex = 3
         '
         'DescriptionTextBox
         '
@@ -5407,7 +5407,7 @@ Partial Class Form1
         Me.DescriptionTextBox.Location = New System.Drawing.Point(372, 36)
         Me.DescriptionTextBox.Name = "DescriptionTextBox"
         Me.DescriptionTextBox.Size = New System.Drawing.Size(220, 20)
-        Me.DescriptionTextBox.TabIndex = 12
+        Me.DescriptionTextBox.TabIndex = 7
         '
         'mnuFile
         '
@@ -5604,7 +5604,7 @@ Partial Class Form1
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(608, 22)
         Me.StatusStrip1.SizingGrip = False
-        Me.StatusStrip1.TabIndex = 54
+        Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripFixedText
@@ -5655,26 +5655,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle20
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle21
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing

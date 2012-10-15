@@ -62,7 +62,7 @@ Partial Class DialogRename
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(146, 29)
-        Me.TableLayoutPanel1.TabIndex = 0
+        Me.TableLayoutPanel1.TabIndex = 11
         '
         'OK_Button
         '
@@ -96,7 +96,7 @@ Partial Class DialogRename
         Me.TextBoxDirectoryNameNew.Location = New System.Drawing.Point(95, 45)
         Me.TextBoxDirectoryNameNew.Name = "TextBoxDirectoryNameNew"
         Me.TextBoxDirectoryNameNew.Size = New System.Drawing.Size(307, 20)
-        Me.TextBoxDirectoryNameNew.TabIndex = 2
+        Me.TextBoxDirectoryNameNew.TabIndex = 3
         '
         'LabelDirectoryCurrent
         '
@@ -104,7 +104,7 @@ Partial Class DialogRename
         Me.LabelDirectoryCurrent.Location = New System.Drawing.Point(6, 22)
         Me.LabelDirectoryCurrent.Name = "LabelDirectoryCurrent"
         Me.LabelDirectoryCurrent.Size = New System.Drawing.Size(86, 13)
-        Me.LabelDirectoryCurrent.TabIndex = 3
+        Me.LabelDirectoryCurrent.TabIndex = 0
         Me.LabelDirectoryCurrent.Text = "Current Directory"
         '
         'LabelFileNameCurrent
@@ -113,7 +113,7 @@ Partial Class DialogRename
         Me.LabelFileNameCurrent.Location = New System.Drawing.Point(6, 22)
         Me.LabelFileNameCurrent.Name = "LabelFileNameCurrent"
         Me.LabelFileNameCurrent.Size = New System.Drawing.Size(86, 13)
-        Me.LabelFileNameCurrent.TabIndex = 4
+        Me.LabelFileNameCurrent.TabIndex = 0
         Me.LabelFileNameCurrent.Text = "Current Filename"
         '
         'LabelHeadlineInfo
@@ -123,7 +123,7 @@ Partial Class DialogRename
         Me.LabelHeadlineInfo.Location = New System.Drawing.Point(106, 8)
         Me.LabelHeadlineInfo.Name = "LabelHeadlineInfo"
         Me.LabelHeadlineInfo.Size = New System.Drawing.Size(248, 26)
-        Me.LabelHeadlineInfo.TabIndex = 5
+        Me.LabelHeadlineInfo.TabIndex = 1
         Me.LabelHeadlineInfo.Text = "Your source media will be modified !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Do NOT use this for multi Part Files (not s" & _
             "upported)."
         '
@@ -136,7 +136,7 @@ Partial Class DialogRename
         Me.GroupBoxRenameDirectory.Location = New System.Drawing.Point(12, 37)
         Me.GroupBoxRenameDirectory.Name = "GroupBoxRenameDirectory"
         Me.GroupBoxRenameDirectory.Size = New System.Drawing.Size(414, 79)
-        Me.GroupBoxRenameDirectory.TabIndex = 6
+        Me.GroupBoxRenameDirectory.TabIndex = 2
         Me.GroupBoxRenameDirectory.TabStop = False
         Me.GroupBoxRenameDirectory.Text = "Rename Directory"
         '
@@ -146,7 +146,7 @@ Partial Class DialogRename
         Me.LabelDirectoryNew.Location = New System.Drawing.Point(6, 48)
         Me.LabelDirectoryNew.Name = "LabelDirectoryNew"
         Me.LabelDirectoryNew.Size = New System.Drawing.Size(74, 13)
-        Me.LabelDirectoryNew.TabIndex = 8
+        Me.LabelDirectoryNew.TabIndex = 2
         Me.LabelDirectoryNew.Text = "New Directory"
         '
         'GroupBoxRenameFile
@@ -158,7 +158,7 @@ Partial Class DialogRename
         Me.GroupBoxRenameFile.Location = New System.Drawing.Point(12, 129)
         Me.GroupBoxRenameFile.Name = "GroupBoxRenameFile"
         Me.GroupBoxRenameFile.Size = New System.Drawing.Size(414, 79)
-        Me.GroupBoxRenameFile.TabIndex = 7
+        Me.GroupBoxRenameFile.TabIndex = 3
         Me.GroupBoxRenameFile.TabStop = False
         Me.GroupBoxRenameFile.Text = "Rename File"
         '
@@ -167,7 +167,7 @@ Partial Class DialogRename
         Me.TextBoxFileNameNew.Location = New System.Drawing.Point(95, 45)
         Me.TextBoxFileNameNew.Name = "TextBoxFileNameNew"
         Me.TextBoxFileNameNew.Size = New System.Drawing.Size(307, 20)
-        Me.TextBoxFileNameNew.TabIndex = 11
+        Me.TextBoxFileNameNew.TabIndex = 3
         '
         'TextBoxFileNameCurrent
         '
@@ -175,7 +175,7 @@ Partial Class DialogRename
         Me.TextBoxFileNameCurrent.Location = New System.Drawing.Point(95, 19)
         Me.TextBoxFileNameCurrent.Name = "TextBoxFileNameCurrent"
         Me.TextBoxFileNameCurrent.Size = New System.Drawing.Size(307, 20)
-        Me.TextBoxFileNameCurrent.TabIndex = 10
+        Me.TextBoxFileNameCurrent.TabIndex = 1
         '
         'LabelFileNameNew
         '
@@ -183,7 +183,7 @@ Partial Class DialogRename
         Me.LabelFileNameNew.Location = New System.Drawing.Point(6, 48)
         Me.LabelFileNameNew.Name = "LabelFileNameNew"
         Me.LabelFileNameNew.Size = New System.Drawing.Size(74, 13)
-        Me.LabelFileNameNew.TabIndex = 9
+        Me.LabelFileNameNew.TabIndex = 2
         Me.LabelFileNameNew.Text = "New Filename"
         '
         'LabelHeadline
@@ -193,7 +193,7 @@ Partial Class DialogRename
         Me.LabelHeadline.Location = New System.Drawing.Point(12, 9)
         Me.LabelHeadline.Name = "LabelHeadline"
         Me.LabelHeadline.Size = New System.Drawing.Size(74, 13)
-        Me.LabelHeadline.TabIndex = 8
+        Me.LabelHeadline.TabIndex = 0
         Me.LabelHeadline.Text = "! Attention !"
         '
         'TextBoxResultingPath
@@ -202,7 +202,7 @@ Partial Class DialogRename
         Me.TextBoxResultingPath.Location = New System.Drawing.Point(58, 222)
         Me.TextBoxResultingPath.Name = "TextBoxResultingPath"
         Me.TextBoxResultingPath.Size = New System.Drawing.Size(520, 20)
-        Me.TextBoxResultingPath.TabIndex = 9
+        Me.TextBoxResultingPath.TabIndex = 5
         '
         'LabelResult
         '
@@ -210,7 +210,7 @@ Partial Class DialogRename
         Me.LabelResult.Location = New System.Drawing.Point(15, 225)
         Me.LabelResult.Name = "LabelResult"
         Me.LabelResult.Size = New System.Drawing.Size(37, 13)
-        Me.LabelResult.TabIndex = 10
+        Me.LabelResult.TabIndex = 4
         Me.LabelResult.Text = "Result"
         '
         'TextBoxStartPathCurrent
@@ -218,7 +218,7 @@ Partial Class DialogRename
         Me.TextBoxStartPathCurrent.Location = New System.Drawing.Point(478, 32)
         Me.TextBoxStartPathCurrent.Name = "TextBoxStartPathCurrent"
         Me.TextBoxStartPathCurrent.Size = New System.Drawing.Size(100, 20)
-        Me.TextBoxStartPathCurrent.TabIndex = 11
+        Me.TextBoxStartPathCurrent.TabIndex = 9
         Me.TextBoxStartPathCurrent.Visible = False
         '
         'LabelResultShort
@@ -227,7 +227,7 @@ Partial Class DialogRename
         Me.LabelResultShort.Location = New System.Drawing.Point(15, 259)
         Me.LabelResultShort.Name = "LabelResultShort"
         Me.LabelResultShort.Size = New System.Drawing.Size(32, 13)
-        Me.LabelResultShort.TabIndex = 12
+        Me.LabelResultShort.TabIndex = 6
         Me.LabelResultShort.Text = "Short"
         '
         'TextBoxResultingPathShort
@@ -236,7 +236,7 @@ Partial Class DialogRename
         Me.TextBoxResultingPathShort.Location = New System.Drawing.Point(58, 256)
         Me.TextBoxResultingPathShort.Name = "TextBoxResultingPathShort"
         Me.TextBoxResultingPathShort.Size = New System.Drawing.Size(520, 20)
-        Me.TextBoxResultingPathShort.TabIndex = 13
+        Me.TextBoxResultingPathShort.TabIndex = 7
         '
         'LabelWarningMultiPartFiles
         '
@@ -244,7 +244,7 @@ Partial Class DialogRename
         Me.LabelWarningMultiPartFiles.Location = New System.Drawing.Point(435, 151)
         Me.LabelWarningMultiPartFiles.Name = "LabelWarningMultiPartFiles"
         Me.LabelWarningMultiPartFiles.Size = New System.Drawing.Size(149, 39)
-        Me.LabelWarningMultiPartFiles.TabIndex = 14
+        Me.LabelWarningMultiPartFiles.TabIndex = 10
         Me.LabelWarningMultiPartFiles.Text = "Movie has more than one file !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Filename renaming " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "has been disabled."
         '
         'TextBoxAllPathWithMultiFiles
@@ -252,7 +252,7 @@ Partial Class DialogRename
         Me.TextBoxAllPathWithMultiFiles.Location = New System.Drawing.Point(478, 6)
         Me.TextBoxAllPathWithMultiFiles.Name = "TextBoxAllPathWithMultiFiles"
         Me.TextBoxAllPathWithMultiFiles.Size = New System.Drawing.Size(100, 20)
-        Me.TextBoxAllPathWithMultiFiles.TabIndex = 15
+        Me.TextBoxAllPathWithMultiFiles.TabIndex = 8
         Me.TextBoxAllPathWithMultiFiles.Visible = False
         '
         'DialogRename
