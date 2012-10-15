@@ -4951,12 +4951,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       // Create country specific settings
       cbGrabberOverrideLanguage.Text = newCountry;
 
-      // set defaults first:
+      #region set grabber defaults
       txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml";
       cbGrabberOverrideGetRoles.Text = "true";
       cbGrabberOverridePersonLimit.Text = "10";
       cbGrabberOverrideTitleLimit.Text = "0";
       ItemSearchGrabberScriptsFilter.Text = "";
+      #endregion
 
       switch (newCountry)
       {
@@ -5051,7 +5052,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AMCMovieScanPath.Text = PathStorage.Text;
       AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
       chkAMC_Purge_Missing_Files.Checked = false;
-      txtPicturePrefix.Text = ""; // "Config_Name.Text + "_"; // Use configname as default prefix
+      txtPicturePrefix.Text = @"pictures\"; // txtPicturePrefix.Text = ""; // "Config_Name.Text + "_"; // Use configname as default prefix
       txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
       // Make controls visible:
       //txtAMCUpd_cnf.Enabled = true;
