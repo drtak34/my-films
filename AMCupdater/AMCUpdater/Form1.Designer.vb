@@ -81,6 +81,7 @@ Partial Class Form1
         Me.btnProcessMovieList = New System.Windows.Forms.Button
         Me.btnJustDoIt = New System.Windows.Forms.Button
         Me.Update_Movies = New System.Windows.Forms.TabPage
+        Me.Label20 = New System.Windows.Forms.Label
         Me.GroupBox32 = New System.Windows.Forms.GroupBox
         Me.btnManualCancel = New System.Windows.Forms.Button
         Me.btnManualDoTest = New System.Windows.Forms.Button
@@ -96,6 +97,7 @@ Partial Class Form1
         Me.Label41 = New System.Windows.Forms.Label
         Me.btnShowHideLogTest = New System.Windows.Forms.Button
         Me.grpManualUpdatesParameters = New System.Windows.Forms.GroupBox
+        Me.cbSkipExcludedMovieFiles = New System.Windows.Forms.CheckBox
         Me.cbManualParameterAndOr = New System.Windows.Forms.ComboBox
         Me.lblManualParametersValue2 = New System.Windows.Forms.Label
         Me.lblManualParametersOperator2 = New System.Windows.Forms.Label
@@ -543,8 +545,6 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.cbSkipExcludedMovieFiles = New System.Windows.Forms.CheckBox
         OwnerLabel = New System.Windows.Forms.Label
         MailLabel = New System.Windows.Forms.Label
         SiteLabel = New System.Windows.Forms.Label
@@ -1121,6 +1121,14 @@ Partial Class Form1
         Me.Update_Movies.Text = "Update Movies"
         Me.Update_Movies.UseVisualStyleBackColor = True
         '
+        'Label20
+        '
+        Me.Label20.Location = New System.Drawing.Point(18, 37)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(552, 60)
+        Me.Label20.TabIndex = 106
+        Me.Label20.Text = resources.GetString("Label20.Text")
+        '
         'GroupBox32
         '
         Me.GroupBox32.Controls.Add(Me.btnManualCancel)
@@ -1299,6 +1307,18 @@ Partial Class Form1
         Me.grpManualUpdatesParameters.TabStop = False
         Me.grpManualUpdatesParameters.Text = "Parameters ..."
         Me.grpManualUpdatesParameters.Visible = False
+        '
+        'cbSkipExcludedMovieFiles
+        '
+        Me.cbSkipExcludedMovieFiles.AutoSize = True
+        Me.cbSkipExcludedMovieFiles.Location = New System.Drawing.Point(341, 102)
+        Me.cbSkipExcludedMovieFiles.Name = "cbSkipExcludedMovieFiles"
+        Me.cbSkipExcludedMovieFiles.Size = New System.Drawing.Size(202, 17)
+        Me.cbSkipExcludedMovieFiles.TabIndex = 49
+        Me.cbSkipExcludedMovieFiles.Text = "Skip Movies in 'Excluded Movies File'"
+        Me.ToolTip1.SetToolTip(Me.cbSkipExcludedMovieFiles, "If checked, files contained in " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'Excluded Movie Files' will be skipped.")
+        Me.cbSkipExcludedMovieFiles.UseVisualStyleBackColor = True
+        Me.cbSkipExcludedMovieFiles.Visible = False
         '
         'cbManualParameterAndOr
         '
@@ -4425,6 +4445,7 @@ Partial Class Form1
         '
         Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.BindingNavigatorAddNewItem.Enabled = False
+        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
         Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
@@ -4441,6 +4462,7 @@ Partial Class Form1
         '
         Me.BindingNavigatorDeleteItem.CheckOnClick = True
         Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
         Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
@@ -4449,6 +4471,7 @@ Partial Class Form1
         'BindingNavigatorMoveFirstItem
         '
         Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
         Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
@@ -4457,6 +4480,7 @@ Partial Class Form1
         'BindingNavigatorMovePreviousItem
         '
         Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
         Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
@@ -4485,6 +4509,7 @@ Partial Class Form1
         'BindingNavigatorMoveNextItem
         '
         Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
         Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
@@ -4493,6 +4518,7 @@ Partial Class Form1
         'BindingNavigatorMoveLastItem
         '
         Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
         Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
@@ -4511,6 +4537,7 @@ Partial Class Form1
         'VidéoBindingNavigatorSaveItem
         '
         Me.VidéoBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.VidéoBindingNavigatorSaveItem.Image = CType(resources.GetObject("VidéoBindingNavigatorSaveItem.Image"), System.Drawing.Image)
         Me.VidéoBindingNavigatorSaveItem.Name = "VidéoBindingNavigatorSaveItem"
         Me.VidéoBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.VidéoBindingNavigatorSaveItem.Text = "Save Datas"
@@ -4523,6 +4550,7 @@ Partial Class Form1
         'BindingNavigatorUpdate
         '
         Me.BindingNavigatorUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.BindingNavigatorUpdate.Image = CType(resources.GetObject("BindingNavigatorUpdate.Image"), System.Drawing.Image)
         Me.BindingNavigatorUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.BindingNavigatorUpdate.Name = "BindingNavigatorUpdate"
         Me.BindingNavigatorUpdate.Size = New System.Drawing.Size(77, 22)
@@ -5064,6 +5092,7 @@ Partial Class Form1
         'BindingNavigatorAddNewItemPerson
         '
         Me.BindingNavigatorAddNewItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItemPerson.Image = CType(resources.GetObject("BindingNavigatorAddNewItemPerson.Image"), System.Drawing.Image)
         Me.BindingNavigatorAddNewItemPerson.Name = "BindingNavigatorAddNewItemPerson"
         Me.BindingNavigatorAddNewItemPerson.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItemPerson.Size = New System.Drawing.Size(23, 24)
@@ -5079,6 +5108,7 @@ Partial Class Form1
         'BindingNavigatorDeleteItemPerson
         '
         Me.BindingNavigatorDeleteItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorDeleteItemPerson.Image = CType(resources.GetObject("BindingNavigatorDeleteItemPerson.Image"), System.Drawing.Image)
         Me.BindingNavigatorDeleteItemPerson.Name = "BindingNavigatorDeleteItemPerson"
         Me.BindingNavigatorDeleteItemPerson.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorDeleteItemPerson.Size = New System.Drawing.Size(23, 24)
@@ -5087,6 +5117,7 @@ Partial Class Form1
         'BindingNavigatorMoveFirstItem1
         '
         Me.BindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem1.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveFirstItem1.Name = "BindingNavigatorMoveFirstItem1"
         Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveFirstItem1.Size = New System.Drawing.Size(23, 24)
@@ -5095,6 +5126,7 @@ Partial Class Form1
         'BindingNavigatorMovePreviousItem1
         '
         Me.BindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem1.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMovePreviousItem1.Name = "BindingNavigatorMovePreviousItem1"
         Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMovePreviousItem1.Size = New System.Drawing.Size(23, 24)
@@ -5123,6 +5155,7 @@ Partial Class Form1
         'BindingNavigatorMoveNextItem1
         '
         Me.BindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem1.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveNextItem1.Name = "BindingNavigatorMoveNextItem1"
         Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveNextItem1.Size = New System.Drawing.Size(23, 24)
@@ -5131,6 +5164,7 @@ Partial Class Form1
         'BindingNavigatorMoveLastItem1
         '
         Me.BindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem1.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem1.Image"), System.Drawing.Image)
         Me.BindingNavigatorMoveLastItem1.Name = "BindingNavigatorMoveLastItem1"
         Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveLastItem1.Size = New System.Drawing.Size(23, 24)
@@ -5149,6 +5183,7 @@ Partial Class Form1
         'SpeichernToolStripButton
         '
         Me.SpeichernToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.SpeichernToolStripButton.Image = CType(resources.GetObject("SpeichernToolStripButton.Image"), System.Drawing.Image)
         Me.SpeichernToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SpeichernToolStripButton.Name = "SpeichernToolStripButton"
         Me.SpeichernToolStripButton.Size = New System.Drawing.Size(23, 24)
@@ -5162,6 +5197,7 @@ Partial Class Form1
         'ToolStripButtonAddMissingPersons
         '
         Me.ToolStripButtonAddMissingPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButtonAddMissingPersons.Image = CType(resources.GetObject("ToolStripButtonAddMissingPersons.Image"), System.Drawing.Image)
         Me.ToolStripButtonAddMissingPersons.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButtonAddMissingPersons.Name = "ToolStripButtonAddMissingPersons"
         Me.ToolStripButtonAddMissingPersons.Size = New System.Drawing.Size(108, 24)
@@ -5170,6 +5206,7 @@ Partial Class Form1
         'ToolStripButtonGrabPersons
         '
         Me.ToolStripButtonGrabPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButtonGrabPersons.Image = CType(resources.GetObject("ToolStripButtonGrabPersons.Image"), System.Drawing.Image)
         Me.ToolStripButtonGrabPersons.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButtonGrabPersons.Name = "ToolStripButtonGrabPersons"
         Me.ToolStripButtonGrabPersons.Size = New System.Drawing.Size(60, 24)
@@ -5694,26 +5731,6 @@ Partial Class Form1
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
         '
-        'Label20
-        '
-        Me.Label20.Location = New System.Drawing.Point(18, 37)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(552, 60)
-        Me.Label20.TabIndex = 106
-        Me.Label20.Text = resources.GetString("Label20.Text")
-        '
-        'cbSkipExcludedMovieFiles
-        '
-        Me.cbSkipExcludedMovieFiles.AutoSize = True
-        Me.cbSkipExcludedMovieFiles.Location = New System.Drawing.Point(341, 102)
-        Me.cbSkipExcludedMovieFiles.Name = "cbSkipExcludedMovieFiles"
-        Me.cbSkipExcludedMovieFiles.Size = New System.Drawing.Size(202, 17)
-        Me.cbSkipExcludedMovieFiles.TabIndex = 49
-        Me.cbSkipExcludedMovieFiles.Text = "Skip Movies in 'Excluded Movies File'"
-        Me.ToolTip1.SetToolTip(Me.cbSkipExcludedMovieFiles, "If checked, files contained in " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'Excluded Movie Files' will be skipped.")
-        Me.cbSkipExcludedMovieFiles.UseVisualStyleBackColor = True
-        Me.cbSkipExcludedMovieFiles.Visible = False
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5723,6 +5740,7 @@ Partial Class Form1
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.mnuFile)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuFile
         Me.Name = "Form1"
         Me.Text = "Ant Movie Catalog Auto-Updater"
