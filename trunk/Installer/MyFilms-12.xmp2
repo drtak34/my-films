@@ -2906,12 +2906,12 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{e6538f16-0876-4e58-8f22-b6adcce864ea}-SampleMovies.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Catalog\SampleMovies.xml</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\MyFilms\Catalog\Star Trek.jpg</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{fab26bf6-1200-4a3b-95e1-be4a631499e6}-Star Trek.jpg</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Catalog\Star Trek.jpg</DestinationFilename>
+              <DestinationFilename>%Config%\MyFilms\Catalog\pictures\Star Trek.jpg</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -3038,6 +3038,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Config\MyFilms\SampleMovies\Titanic (1997)\Titanic.wmv</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{9a08bd0d-8941-432c-822e-91c17f61c115}-Titanic.wmv</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\SampleMovies\Titanic (1997)\Titanic.wmv</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\Catalog\Harry Potter.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{934bcaa8-6f9b-4285-99f0-f75cce135dae}-Harry Potter.jpg</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Catalog\pictures\Harry Potter.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilms\Catalog\Harry Potter.Harry Potter and the Deathly Hallows.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{50c4747e-f469-4f46-ad7f-8003dc3ddf32}-Harry Potter.Harry Potter and the Deathly Hallows.jpg</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Catalog\pictures\Harry Potter.Harry Potter and the Deathly Hallows.jpg</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -10079,12 +10093,12 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{e6538f16-0876-4e58-8f22-b6adcce864ea}-SampleMovies.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Catalog\SampleMovies.xml</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\MyFilms\Catalog\Star Trek.jpg</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{fab26bf6-1200-4a3b-95e1-be4a631499e6}-Star Trek.jpg</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Catalog\Star Trek.jpg</DestinationFilename>
+        <DestinationFilename>%Config%\MyFilms\Catalog\pictures\Star Trek.jpg</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -10211,6 +10225,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\MyFilms\SampleMovies\Titanic (1997)\Titanic.wmv</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{9a08bd0d-8941-432c-822e-91c17f61c115}-Titanic.wmv</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\SampleMovies\Titanic (1997)\Titanic.wmv</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\Catalog\Harry Potter.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{934bcaa8-6f9b-4285-99f0-f75cce135dae}-Harry Potter.jpg</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Catalog\pictures\Harry Potter.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilms\Catalog\Harry Potter.Harry Potter and the Deathly Hallows.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{50c4747e-f469-4f46-ad7f-8003dc3ddf32}-Harry Potter.Harry Potter and the Deathly Hallows.jpg</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Catalog\pictures\Harry Potter.Harry Potter and the Deathly Hallows.jpg</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
