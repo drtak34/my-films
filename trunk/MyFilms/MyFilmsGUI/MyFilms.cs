@@ -6739,6 +6739,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     item.Path = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source; // http://www.youtube.com/watch?v=KwPTIEWTYEI
                     item.IsDownloading = true;
+                    //if (MyFilms.conf.BoolEnableOnlineServices)
+                    //{
+                    //  string year = "";
+                    //  DateTime releasedate;
+                    //  if (DateTime.TryParse(movie.Movie.release_date, out releasedate))
+                    //    year = releasedate.Year.ToString();
+                    //  MyFilmsDetail.AddAllTrailersToQueue(movie.Trailers.youtube, MyFilms.conf.StrStorageTrailer, movie.Movie.title, year, true);
+                    //}
                   }
                 }
                 #endregion
