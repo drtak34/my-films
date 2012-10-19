@@ -625,9 +625,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    protected override void OnPageDestroy(int new_windowId)
+    protected override void OnPageDestroy(int newWindowId)
     {
-      LogMyFilms.Debug("MyFilmsDetail.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+      LogMyFilms.Debug("MyFilmsDetail.OnPageDestroy(" + newWindowId.ToString() + ") started.");
       if (MyFilms.conf.PersonsEnableDownloads)
       {
         if (downloadingWorker.IsBusy) downloadingWorker.CancelAsync();
@@ -650,8 +650,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("SaveLastActiveModule - module {0}", currentmoduleid);
         LogMyFilms.Debug("SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
       }
-      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
-      base.OnPageDestroy(new_windowId);
+      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + newWindowId.ToString() + ") completed.");
+      base.OnPageDestroy(newWindowId);
     }
 
     #region Action
@@ -9545,6 +9545,46 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
       }
       #endregion
+    }
+
+    internal static void AddAllTrailersToQueue(List<Youtube> trailersfound, string trailerpath, string titlename, string year, bool loadAllTrailers)
+    {
+      for (int i = 0; i < trailersfound.Count; i++)
+      {
+        if (i < 2 || loadAllTrailers)
+        {
+          Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + trailersfound[i].source);
+          string url = null;
+          string quality = null;
+          if (availableTrailerFiles != null && availableTrailerFiles.Count > 0)
+          {
+            url = availableTrailerFiles.Last().Value;
+            quality = availableTrailerFiles.Last().Key;
+          }
+          else
+          {
+            LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - no download Url found - adding trailer without DL links for later processing from queue");
+          }
+          var trailer = new Trailer();
+          trailer.MovieTitle = titlename;
+          trailer.Trailername = trailersfound[i].name;
+          trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + trailersfound[i].source;
+          trailer.SourceUrl = url;
+          trailer.Quality = quality;
+          if (trailerpath != null && Directory.Exists(trailerpath))
+          {
+            string newpath = Path.Combine(Path.Combine(trailerpath, @"MyFilmsOnline\"), titlename + " (" + year + ")");
+            trailer.DestinationDirectory = MediaPortal.Util.Utils.FilterFileName(newpath);
+          }
+          else
+          {
+            return;
+          }
+          // filename: (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + trailersfound[i].name + " (" + quality.Replace(" ", "") + ")" + extension))
+          LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - add trailer '#" + i + "'");
+          MyFilms.AddTrailerToDownloadQueue(trailer);
+        }
+      }
     }
 
     //-------------------------------------------------------------------------------------------
